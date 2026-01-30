@@ -1,0 +1,8 @@
+div{
+    width: 100px;
+    height: 100px;
+    background: rgb(231, 172, 8);
+    margin: 20px;
+}
+
+/*RGB red-green-blue 256 combinaciones posibles por cada color A alpha siginifica trnasparencia y maneja la opacidad*/
