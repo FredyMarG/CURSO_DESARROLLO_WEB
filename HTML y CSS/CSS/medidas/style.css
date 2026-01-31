@@ -26,3 +26,5 @@ p{
 }
 
 /* em y rem depender del font size del padre */
+/* 1em = 16px (por defecto) */
+/* 1rem = 16px (por defecto)  dependiendo lo que quieras hacer revisa en que caso usas cada uno*/
