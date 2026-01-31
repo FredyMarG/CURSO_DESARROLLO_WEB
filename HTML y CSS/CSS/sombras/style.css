@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+}
+
+.box{
+    width: 280px;
+    background: #e2e2e2;
+    margin: auto;
+    margin-top: 30px;
+    box-shadow: 0px 0px 40px 0px #0007;
+    /*primer parametro horizontal, segundo vertical, tercer radio de desenfoque, cuarto tamaño de sombra y el ultimo es el color*/
+    font-family: sans-serif;
+    color: #444;
+    box-sizing: border-box;
+    padding: 20px;
+    padding-top: 10px;
+    text-align: center;
+}
+h2{
+    font-size: 18px;
+    margin-top: 5px;
+    color: #999;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 100;
+    text-shadow:0px 0px 1px #f92;
+}
+p{
+    text-align: justify;
+    list-style: none; 
+    line-height: 1.4;
+    font-size: 13px;
+    text-shadow: 0 0 5px #f82;
+    /*funciona igual que el box shadow pero no tiene desenfoque*/
+}
+img{
+    width: 160px;
+    border-radius: 100%;
+    margin: auto;
+    filter: drop-shadow(0px 0px 5px #0007);
+}
