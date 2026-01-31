@@ -1,0 +1,28 @@
+div{
+    background: #ededed;
+    padding: 20px;
+    font-family: sans-serif;
+    border-left: 2px solid #999;
+    height: 50vh;
+    margin-top: 10vh;
+}
+
+h1{
+    margin: 0;
+    font-size: 23px;
+}
+
+span{
+    color: #999;
+    font-size: 16px;
+    font-weight: 100;
+    font-size: 1em;
+}
+
+p{
+    color: #555;
+    font-size: 1em;
+    line-height: 1ch;
+}
+
+/* em y rem depender del font size del padre */
