@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Area - formulario de contacto</title>
+    <title>Text Area y labels - formulario de contacto</title>
     <style>
         body{
             margin: 0;
@@ -30,20 +30,20 @@
             box-sizing: border-box;
             padding: 8px 6px;
             border:none;
-            border: 1px solid #666;
+            border: 1px solid #4f9;
             box-shadow: 0 0 15px #0003;
             background: transparent;
             border-radius: 4px;
-            color:#eee;
+            color:#4f9;
         }
 
         textarea{
             min-width: 100%;
-            min-height: 100px;
             max-height: 200px;
             /* con resize none el tamaño no se puede cambiar */
             resize: vertical;
             font-family: sans-serif;
+            min-height: 103px;
         }
 
         h2{
@@ -55,19 +55,39 @@
             font-size: 22px;
             padding: 10px;
         }
+
+        label{
+            line-height: 2;
+            font-size: 0.9em;
+        }
+
+        .checkbox{
+            width: auto;
+            height: 10px;
+        }
     </style>
 </head>
 <body>
     <form action="">
         <h2>Formulario de contacto</h2>
         <div class="form_input">
-            <input type="text" placeholder="Nombre completo">
+            <label for="nombre">Nombre completo</label>
+            <input id="nombre" type="text" placeholder="Jhon Doe">
         </div>
         <div class="form_input">
-            <input type="email" placeholder="correo">
+            <label for="correo">Correo electrónico</label>
+            <input type="email" id="correo" placeholder="ejemplo@dominio.com">
         </div>
         <div class="form_input">
-            <textarea placeholder="Deja un mensaje"></textarea></div>
+            <label for="mensaje">mensaje</label>
+            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
+            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
+        </div>
+        <div class="form_input">
+            <label for="tyc">Acepto los términos y condiciones</label>
+            <input type="checkbox" id="tyc" class="checkbox">
+        </div>
+        
     </form>
 </body>
 </html>
