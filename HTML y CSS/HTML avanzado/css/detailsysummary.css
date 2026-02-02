@@ -6,12 +6,15 @@ body{
 details{
     background: transparent;
     border: 1px solid #ddd;
+    padding: 9px;
+    font-size: 0.7em;
+    color: #ccc;
 }
 
 summary{
     background: transparent;
-    border-bottom: 1px solid #ddd;
-    padding: 9px;
+    font-size: 1em;
+    color:#eee;
 }
 
 ul{
