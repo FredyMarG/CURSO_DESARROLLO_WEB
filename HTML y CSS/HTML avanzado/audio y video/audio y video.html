@@ -7,7 +7,9 @@
     <title>Audio y video</title>
 </head>
 <body>
-    <video autoplay muted controls src="video.mp4" width="90%">Tu navegador no soporta videos</video>
+    <video autoplay loop muted controls src="video.mp4" width="90%">
+        <track src="captions.vtt" default kind="captions" srclang="es" label="Español">
+        Tu navegador no soporta videos</video>
 
     <audio controls autoplay src="MyOnlyOne.mp3"></audio>
 </body>
