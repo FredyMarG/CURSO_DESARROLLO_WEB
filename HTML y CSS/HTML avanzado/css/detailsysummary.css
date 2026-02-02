@@ -1,0 +1,19 @@
+body{
+    background: #333;
+    color: #ddd;
+    font-family: sans-serif;
+}
+details{
+    background: transparent;
+    border: 1px solid #ddd;
+}
+
+summary{
+    background: transparent;
+    border-bottom: 1px solid #ddd;
+    padding: 9px;
+}
+
+ul{
+    font-weight: 100;
+}
