@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Area - formulario de contacto</title>
+    <style>
+        body{
+            margin: 0;
+            font-family: sans-serif;
+            color: #eee;
+            background: #222;
+        }
+
+        form{
+            background: transparent;
+            padding: 20px 0;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 0 55px #fff2;          margin-top: 50px;
+            border-radius: 8px;
+        }
+
+        .form_input {
+            padding: 6px 20px;
+        }
+
+        input, textarea{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 8px 6px;
+            border:none;
+            border: 1px solid #666;
+            box-shadow: 0 0 15px #0003;
+            background: transparent;
+            border-radius: 4px;
+            color:#eee;
+        }
+
+        textarea{
+            min-width: 100%;
+            min-height: 100px;
+            max-height: 200px;
+            /* con resize none el tamaño no se puede cambiar */
+            resize: vertical;
+            font-family: sans-serif;
+        }
+
+        h2{
+            text-align: center;
+            margin: 0;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 100;
+            font-size: 22px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <h2>Formulario de contacto</h2>
+        <div class="form_input">
+            <input type="text" placeholder="Nombre completo">
+        </div>
+        <div class="form_input">
+            <input type="email" placeholder="correo">
+        </div>
+        <div class="form_input">
+            <textarea placeholder="Deja un mensaje"></textarea></div>
+    </form>
+</body>
+</html>
