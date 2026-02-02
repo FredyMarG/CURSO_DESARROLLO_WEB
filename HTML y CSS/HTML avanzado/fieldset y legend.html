@@ -3,124 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select y Datalist</title>
-    <style>
-        body{
-            margin: 0;
-            font-family: sans-serif;
-            color: #eee;
-            background: #222;
-        }
-
-        form{
-            background: transparent;
-            padding: 20px 0;
-            max-width: 500px;
-            margin: 0 auto;
-            box-shadow: 0 0 55px #fff2;          margin-top: 50px;
-            border-radius: 8px;
-        }
-
-        .form_input {
-            padding: 6px 20px;
-        }
-
-        input, textarea, select{
-            width: 100%;
-            box-sizing: border-box;
-            padding: 8px 6px;
-            border:none;
-            border: 1px solid #666;
-            box-shadow: 0 0 15px #0003;
-            background: transparent;
-            border-radius: 4px;
-            color:#DDD;
-        }
-
-        option{
-            background: #222;
-        }
-
-        textarea{
-            min-width: 100%;
-            max-height: 200px;
-            /* con resize none el tamaño no se puede cambiar */
-            resize: vertical;
-            font-family: sans-serif;
-            min-height: 103px;
-        }
-
-        h2{
-            text-align: center;
-            margin: 0;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-weight: 100;
-            font-size: 22px;
-            padding: 10px;
-        }
-
-        label{
-            line-height: 2;
-            font-size: 0.9em;
-        }
-
-        .checkbox{
-            width: auto;
-            height: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/fieldset-legend.css">
+    <title>Fielset y legend</title>
 </head>
 <body>
     <form action="">
-
-        <h2>Formulario de contacto</h2>
-
-        <div class="form_input">
-            <label for="nombre">Nombre completo</label>
-            <input id="nombre" type="text" placeholder="Jhon Doe">
-        </div>
-
-        <div class="form_input">
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" placeholder="ejemplo@dominio.com">
-        </div>
-
-        <!-- select y option lista desplegable con opciones predefinidas -->
+        <fieldset>
+            <legend>Información basica</legend>
+            <input type="text" placeholder="Nombre">
+            <input type="text" placeholder="Apellido">
+            <input type="number" placeholder="Edad">
+        </fieldset>
         
-        <div class="form_input">
-            <Label for="user">Tipo de usuario</Label>
-            <select id="user" name="type-of-user">
-                <option value="user1">Seguidor</option>
-                <option value="user2">Empresa</option>
-                <option value="user3">Otros</option>
-            </select>
-        </div>
-
-        <!-- datalist -->
-
-        <div class="form_input">
-            <Label>Referente</Label>
-            <input list="referente" name="referente">
-            <datalist id="referente" name="type-of-user">
-                <option value="Fredy">Persona normal</option>
-                <option value="Una Empresa">Compañia</option>
-                <option value="Amigo">Conocido</option>
-            </datalist>
-        </div>
-
-        <!--text area-->
-
-        <div class="form_input">
-            <label for="mensaje">mensaje</label>
-            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
-            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
-        </div>
-        <div class="form_input">
-            <label for="tyc">Acepto los términos y condiciones</label>
-            <input type="checkbox" id="tyc" class="checkbox">
-        </div>
-        
+        <fieldset>
+            <legend>Información de contacto</legend>
+            <input type="email" placeholder="Correo electrónico">
+            <input type="number" placeholder="Telefono">
+        </fieldset>
     </form>
 </body>
 </html>
