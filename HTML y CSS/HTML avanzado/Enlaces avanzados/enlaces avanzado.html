@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/formulario.css">
+    <title>Enlaces avanzado</title>
+</head>
+<body>
+    <form action="">
+
+        <h2>Formulario de contacto</h2>
+
+        <fieldset>
+            <legend>Información básica</legend>
+            <!-- simple inputs-->
+            <div class="form_input">
+                <label for="nombre">Nombre completo</label>
+            <input id="nombre" type="text" placeholder="Jhon Doe">
+            </div>
+
+            <div class="form_input">
+                <label for="correo">Correo electrónico</label>
+                <input type="email" id="correo" placeholder="ejemplo@dominio.com">
+            </div>
+
+            <div class="form_input">
+                <label for="asunto">Asunto</label>
+                <input id="asunto" type="text" placeholder="Asunto del mensaje">
+            </div>
+
+        </fieldset>
+
+
+        
+        <!-- select y option lista desplegable con opciones predefinidas -->
+        
+        <div class="form_input">
+            <Label for="user">Tipo de usuario</Label>
+            <select id="user" name="type-of-user">
+                <option value="user1">Seguidor</option>
+                <option value="user2">Empresa</option>
+                <option value="user3">Otros</option>
+            </select>
+        </div>
+
+        <!-- datalist -->
+
+        <div class="form_input">
+            <Label>Referente</Label>
+            <input list="referente" name="referente">
+            <datalist id="referente" name="type-of-user">
+                <option value="Fredy">Persona normal</option>
+                <option value="Una Empresa">Compañia</option>
+                <option value="Amigo">Conocido</option>
+            </datalist>
+        </div>
+
+        <!--text area-->
+
+        <div class="form_input">
+            <label for="mensaje">mensaje</label>
+            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
+            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
+        </div>
+        <div class="form_input">
+            <label for="tyc">Acepto los <a href="terms.html">términos y condiciones</a></label>
+            <input type="checkbox" id="tyc" class="checkbox">
+        </div>
+        
+    </form>
+</body>
+</html>

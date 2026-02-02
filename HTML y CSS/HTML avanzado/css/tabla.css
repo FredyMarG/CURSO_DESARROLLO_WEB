@@ -1,0 +1,26 @@
+td, th{
+    text-align: center;
+    padding: 6px;
+    font-family: sans-serif;
+    border: none;
+    border-bottom: 1px solid #0004;
+}
+
+td{
+    color: #666;
+}
+
+table{
+    width: 100%;
+    border-spacing: 10px;
+    box-shadow: 0 0 25px #0002;
+    min-width: 400px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.ht{
+    border: none;
+    padding: 12px;
+    font-size: 1.2em;
+}
