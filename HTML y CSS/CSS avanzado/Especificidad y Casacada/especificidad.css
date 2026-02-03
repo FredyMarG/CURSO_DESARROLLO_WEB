@@ -7,6 +7,8 @@
     color: blueviolet;
 }
 
+/* IMPORTANT ES EL ATRIBUTO QUE PRIMA SOBRE CUALQUIER ELEMENTO CLASE O ID */
+
 h1{
-    color: brown;
+    color: brown !important;
 }
