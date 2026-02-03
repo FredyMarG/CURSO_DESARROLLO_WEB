@@ -1,0 +1,16 @@
+body{
+    color: blue;
+}
+
+div{
+    font-family: sans-serif;
+    color:red
+}
+
+h1{
+    /*INHERIT SIGINIFICA QUE ME VCA A HEREDAR LA PROPIEDAD DEL ELEMENTO PADRE MAS GRANDE*/
+
+    /*INITIAL ME PONE EL VALOR POR DEFECTO DE LA PROPIEDAD (DEL NAVEGADOR)*/
+    color:initial;
+}
+

@@ -1,0 +1,12 @@
+/* EN CSS ES MAS ESPECIFICO (PRIMORDIAL) EL ID, LUEGO LA CLASE Y POR ULTIMO EL TAG O LA ETIQUETA */
+#titulo{
+    color: aqua;
+}
+
+.titulo{
+    color: blueviolet;
+}
+
+h1{
+    color: brown;
+}
