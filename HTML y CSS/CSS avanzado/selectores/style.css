@@ -1,0 +1,44 @@
+/* SELECTOR DE ETIQUETA */
+li{
+    color: grey;
+}
+
+/* SELECTOR DE CLASE */
+.ingrediente-faltante{
+    color: red;
+}
+
+.ingrediente-secreto{
+    color: blue;
+}
+
+/* SELECTOR DE ATRIBUTO */
+/*si pongo el signo del dolar y despues el tipo de archivo en el source, aplicara el estilo a todos los elementos que terminen con esta extencion ej. src$="jpg" (termina con)*/
+
+/*src^=".." aca especificamos con que empieza el link del item que queremos modificar (empieza con)*/
+img[src="../../HTML avanzado/Lazy load/img/img1.jpg"]{
+    width: 300px;
+}
+
+/* SELECTOR POR HIJO DIRECTO */
+
+li > em{
+    color:red;
+}
+
+/* SELECTOR DE HERMANO ADYACENTE */
+/*me toma el elemnto que esta despues de otro indicado SOLO EL PRIMER ELEMENTO*/
+h1 + p{
+    color:blue
+}
+
+h1 + p + p{
+    color:green;
+}
+
+/* SELECTOR DE HERMANOS GENERALES */
+/*me toma el elemnto que esta despues de otro indicado TODOS LOS QUE ESTAN DEPUES DEL ELEMENTO INDICADO*/
+
+h1 ~ p{
+    font-family: sans-serif;
+}
