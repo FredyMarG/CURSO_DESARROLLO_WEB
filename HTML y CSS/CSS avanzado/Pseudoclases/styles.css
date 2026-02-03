@@ -1,3 +1,8 @@
+/* VARIABLE GLOBAL,SELECCIONA AL ELEMENTO RAIZ */
+:root{
+    color: #0f0;
+}
+
 h1{
     color: #48e;
     margin: 30px;
@@ -30,4 +35,75 @@ li:last-child{
 /* Con nth puedo seleccionar que elemento quiero modificar */
 li:nth-child(2){
     color: #0f0;
+}
+
+/* MODIFICA UN ELEMENTO SI Y UN ELEMENTO NO */
+/*li:nth-child(2n){
+    color: #48e;
+}*/
+
+/* MODIFICA UN ELEMENTO SI Y DOS ELEMENTOS NO */
+li:nth-child(3n){
+    color: rgb(9, 137, 56);
+}
+
+/* SOLO TIENE EN CUENTA LOS ITEMS DEL MISMO ELEMENTO EN ESTE CASO SOLO LOS LI  */
+li:nth-of-type(4){
+    color: #f00;
+}
+
+/* MODIFICAMOS LOS ELEMENTOS DE LA LISTA QUE NO TENGAN LA CLASE ELEM-4 */
+li:not(.elem-4){
+    color: rgb(129, 19, 225);
+}
+
+/* ESTO DARA EL ESTILO SI EL ELEMENTO ESTA VACIO SINO ESTA VACIO LO DEA NORMAL*/
+div:empty {
+    background: #0f0;
+    padding: 30px;
+}
+
+input[type="checkbox"]{
+    margin: 50px;
+}
+
+/* VERIFICA SI EL CHECKBOX ESTA CHEQUEADO */
+input[type="checkbox"]:checked{
+    margin: 0;
+}
+
+/* ENLACE NO VISITADO */
+a:link{
+    color: red;
+}
+
+/* ENLACE VISITADO */
+a:visited{
+    color: green;
+}
+
+/* SI LA INFORMACION DEL INPUT NO ES VALIDA */
+input:invalid{
+    color: red;
+}
+
+/* SI LA INFORMACION DEL INPUT ES VALIDA */
+input:invalid{
+    color: green;
+}
+
+section :is(.el1,  .el2, .el3){
+    color: darkred;
+}
+
+/* HAS APLICA CAMBIOS SI EL ELEMENTO MENCIONADO EXISTE  */
+section:has(.el1){
+    background: #ef4c88;
+    color: white;
+}
+
+/* MODIFICANDO UN UL QUE TIENE DESPUES A UN DIV */
+/* ul + div de esta forma modificamos el div */
+ul:has(+div){
+    background: #ee5f42;
 }
