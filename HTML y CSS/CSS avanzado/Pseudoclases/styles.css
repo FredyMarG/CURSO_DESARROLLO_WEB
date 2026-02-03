@@ -1,0 +1,33 @@
+h1{
+    color: #48e;
+    margin: 30px;
+    font-family: sans-serif;
+}
+
+h1:hover{
+    color: rgb(0, 0, 0);
+    background: #ccc;
+}
+
+/* ACTIVE FUNCIONA AL HACER CLICK SOBRE EL H1 */
+h1:active{
+    background: #999;
+    color: #fff;
+}
+
+/* SELECCIONANDO EL PRIMER LI */
+li:first-child{
+    color: #48e;
+}
+
+/* SELECCIONANDO EL ULTIMO LI */
+li:last-child{
+    color: #f00;
+}
+
+/* SELECCIONANDO AL SEGUNDO LI */
+
+/* Con nth puedo seleccionar que elemento quiero modificar */
+li:nth-child(2){
+    color: #0f0;
+}
