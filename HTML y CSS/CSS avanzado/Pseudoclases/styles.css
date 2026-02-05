@@ -54,7 +54,7 @@ li:nth-of-type(4){
 
 /* MODIFICAMOS LOS ELEMENTOS DE LA LISTA QUE NO TENGAN LA CLASE ELEM-4 */
 li:not(.elem-4){
-    color: rgb(129, 19, 225);
+    color: rgb(0, 5, 77);
 }
 
 /* ESTO DARA EL ESTILO SI EL ELEMENTO ESTA VACIO SINO ESTA VACIO LO DEA NORMAL*/
@@ -88,22 +88,41 @@ input:invalid{
 }
 
 /* SI LA INFORMACION DEL INPUT ES VALIDA */
-input:invalid{
+input:valid{
     color: green;
 }
 
+/* MODIFICANDO LOS ELEMENTOS QUE DENTRO DEL SECTION CON ESA CLASE */
 section :is(.el1,  .el2, .el3){
     color: darkred;
 }
 
 /* HAS APLICA CAMBIOS SI EL ELEMENTO MENCIONADO EXISTE  */
 section:has(.el1){
-    background: #ef4c88;
+    background: #6f6f6f;
     color: white;
 }
 
 /* MODIFICANDO UN UL QUE TIENE DESPUES A UN DIV */
 /* ul + div de esta forma modificamos el div */
 ul:has(+div){
-    background: #ee5f42;
+    background: #929292;
+    color: aqua;
+}
+
+div{
+    padding: 20px;
+}
+
+label{
+    font-weight: bold;
+}
+
+/* SI EL INPUT ES INVALIDO O VALIDO LE DAREMOS COLOR AL LABEL, EL INPUT DEBE ESTAR DENTRO DEL LABEL DE LO CONTRARIO NO FUNCIONA */
+label:has(input:valid){
+    color: green;
+}
+
+label:has(input:invalid){
+    color: red;
 }
