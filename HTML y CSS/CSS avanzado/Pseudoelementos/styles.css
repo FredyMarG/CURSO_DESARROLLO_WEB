@@ -1,0 +1,40 @@
+div{
+    padding: 20px;
+}
+
+h1::first-letter{
+    color: red;
+    font-size: 3em;
+    letter-spacing: -8px;
+}
+
+div::first-line{
+    color: red;
+    font-weight: bold;
+}
+
+/* AL SELECCIONAR O MARCAR UN TEXTO CAMBIAMOS EL COLOR */
+
+div::selection{
+    background: #04e9e6;
+    color:white;
+}
+
+input::placeholder{
+    color: blanchedalmond;
+}
+
+/* MODIFICANDO EL MARCADOR DE LOS LI */
+li::marker{
+    color: darkgoldenrod;
+}
+
+li::before{
+    content: "Antes";
+    color: red;
+}
+
+li::after{
+    content: "Despues";
+    color: blue;
+}
