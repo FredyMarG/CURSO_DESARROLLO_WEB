@@ -1,0 +1,28 @@
+/* POR DEFECTO LA POSICION ES STATIC */
+body{
+    margin: 0;
+    background-color: #ededed;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    background: orange;
+    color: #fff;
+    /* CON RELATIVE PODEMOS DESPLAZAR EL ELEMENTO SIN MODIFICAR EL LUGAR QUE SE LE DA AL ELEMENTO*/
+    position: relative;
+}
+
+.box-blue{
+    background-color: blue;
+    top: 70px;
+    left: 20px;
+    /* CON Z INDEX PUEDO MOVER EL ELEMENTO ENTRE CAPAS, A MAYOR Z INDEX MAS ADELANTE ESTARA*/
+    z-index: 10;
+}
+
+.box-red{
+    top: 150px;
+    left: 40px;
+    background: red;
+    z-index: 30;
+}

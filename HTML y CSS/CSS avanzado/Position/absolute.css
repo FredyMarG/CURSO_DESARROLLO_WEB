@@ -1,0 +1,33 @@
+/* POR DEFECTO LA POSICION ES STATIC */
+body{
+    margin: 0;
+    background: #DDD;
+    font-family: sans-serif;
+}
+.contenedor{
+    border: 2px solid black;
+    margin: 30px 50PX;
+    background: white;
+    /*con este position relative estamos convirtiendo la el contenedor como punto de referencia para el absolute*/
+    position: relative;
+}
+.box{
+    width: 100px;
+    height: 100px;
+    background: #db7;
+    color: #fff;
+    text-align: center;
+}
+
+.box-blue{
+    background-color: #37d;
+    /* CON ABSOLUTE LE QUITAMOS LUGAR AL ELEMENTO, POR LO QUE PARECE QUE SE SOBREPUSIERA Y TOMA COMO PUNTO DE REFERENCIA LA ETIQUETA HTML POR LO QUE YA NO FORMA PARTE DEL FLUJO DE LA PAGINA*/
+    position: absolute;
+    top: 40px;
+    z-index: 20;
+}
+
+.box-red{
+    background: #E53;
+    position: relative;
+}
