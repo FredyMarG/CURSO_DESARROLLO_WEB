@@ -1,0 +1,70 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+div{
+    padding: 20px;
+    background: #999;
+}
+
+/* CON DISPLAY BLOCK OCUPAMOS TODO EL ANCHO DISPONIBLE DE LA LINEA Y LOS ELEMENTOS INLINE NO ACEPTAN MARGIN NI PADDING*/
+p{
+    background: red;
+    color: #fff;
+    display: block;
+    border: solid 1px #000;
+    margin: 20px;
+    padding: 20px;
+}
+
+/* CON EL DISPLAY INLINE EL MARGIN Y EL PADDINGS OLO FUNCIONA DE FORMA HORIZONTAL */
+p{
+    background: #000;
+    color: #fff;
+    display: inline;
+    margin: 5px;
+}
+
+.nav{
+    background: #48e;
+}
+
+.nav__list{
+    margin: 0;
+    text-align: center;
+}
+
+/* CON INLINE BLOCK LE DECIMOS QUE EL ITEM TIENE LAS MISMAS CARACTERISTICAS QUE UN BLOQUE PERO QUE NO SE UBICAN UNO DEBAJO DE OTRO */
+.nav__item{
+    display: inline-block;
+}
+
+.nav__link{
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px;
+    background: #48e;
+}
+
+.nav__link:hover{
+    background: #59e;
+}
+
+.link--button{
+    border: 1px solid #fff;
+    background: #fff;
+    padding:4px 12px;
+    color: #48e;
+    border-radius: 3px;
+    margin-left: 60px;
+    /*con display none el elemento ya no ocupa espacio en la pagina como si no estuviera y no se representa en la pagina
+    display: "none";
+    */
+}
+
+.link--button:hover{
+    background: transparent;
+    color: #fff;
+}

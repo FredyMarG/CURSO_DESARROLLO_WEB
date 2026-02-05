@@ -1,0 +1,23 @@
+.lista{
+    border: 2px solid black;
+}
+
+.lista--vieja{
+    opacity: 0.3;
+    background: #eddd;
+}
+/* UTILIZAMOS 2 GUIONES BAJOS PARA IDENTIFICAR DE DONDE ES EL ELEMENTO */
+.lista__item{
+    color: grey;
+    margin:10px 0 ;
+    list-style: square;
+}
+
+/* UTILIZAMOS GUIONES PARA IDENTIFICAR LA MODIFICACION DEL ITEM */
+.item--danino{
+    color: red;
+}
+
+.item--importante{
+    color: blue;
+}
