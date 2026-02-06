@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    background: #f00;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.box:hover{
+    background: #a22;
+    color:#fff;
+}
