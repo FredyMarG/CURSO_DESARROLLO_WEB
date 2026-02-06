@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #bbb;
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    border: 1px solid #0006;
+    /* Define como se comportan los espacios en blanco y los saltos de linea*/
+    /* 
+    nowrap: Quita los saltos de linea
+    pre : pone los saltos de linea donde yo los haga, aparece tal cual se escribio el html
+    pre-wrap: me ubica las palabras que no me caben debajo si detecta que no cabe en el box
+    */
+    /* white-space:nowrap ; */
+    /* Me muestra los puntos suspnesivos al terminar la linea  */
+    text-overflow: ellipsis;
+    /* Me recorta las oraciones o las palabras sea a donde sea que corten para no salir del box */
+    word-break:break-all ;
+    overflow: hidden;
+}
