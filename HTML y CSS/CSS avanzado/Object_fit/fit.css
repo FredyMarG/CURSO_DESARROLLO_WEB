@@ -1,0 +1,26 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+img{
+    width: 400px;
+    height: 200px;
+    /*  
+    contain:hace que la imagen entre por lo menos una vez bien
+    cover: se adapta a todo el espacio
+    none: mantiene la resolucion original de la imagen
+
+    */
+    object-fit: contain;
+
+    /*
+    Top: me muestra la parte de arriba de la imagen
+    center: me muestra la mitad de la imagen
+    bottom: me muestra el final de la imagen
+    */
+    /* object-position:top; */
+    border: 2px solid #000;
+    margin-top: 50px;
+    margin-left: 50px;
+}
