@@ -1,0 +1,45 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background: #ccc;
+}
+
+.box{
+    width: 150px;
+    background: red;
+    margin: auto;
+    margin-top: 50px;
+    border: 5px solid black;
+    padding: 10px;
+    /* El outline mo ocupa espacio solo aspecto visual */
+    /* outline-width: 10px;
+    outline-color: blue;
+    outline-style: solid; */
+    /* offset me define cuanto se va a separar del borde */
+    /* outline-offset: 10px; */
+
+}
+
+.box:hover{
+    /* Tambien lo puedo hacer en una sola linea pero el offset si es aparte*/
+    outline: 10px solid #000;
+}
+
+input{
+    margin: 50px;
+    border: none;
+    border-top: 3px solid #000;
+    outline: 3px solid blue;
+    outline-offset: 5px;
+    padding: 6px;
+    transition: outline 1s, outline-offset 1s;
+}
+
+input:focus{
+    border-color: blue;
+    color: blue;
+}
+
+input:focus-visible{
+    outline:none;    
+}
