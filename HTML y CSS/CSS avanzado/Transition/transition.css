@@ -1,19 +1,31 @@
 *{
     margin: 0;
     font-family: sans-serif;
+    height: 100vh;
 }
 
 .box{
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     background: #f00;
-    margin: auto;
     margin-top: 50px;
-    font-size: 20px;
-    text-align: center;
+    /* propiedad que voy a modificar */
+    transition-property:left ;
+    /* tiempo que va a durar la transicion */
+    transition-duration:1s ;
+    /* Cuanto se va a demorar en empezar la trasicion 
+    transition-delay: 4s;*/
+
+    /* Me define que tipo de animacion quiero */
+    /*PUEDES USAR CUBIC BEZIER*/
+    transition-timing-function: cubic-bezier(.63,.11,.25,.89);
+
+    /*Podemos poner todas las propiedades de una vez, primero la propiedad a modifcar, tiempo de animacion, efecto de animacion, y si tiene el ultimo es el delay*/
+    transition: left 1s cubic-bezier(.63,.11,.25,.89) 2s;
+    position: relative;
+    left: 0;
 }
 
-.box:hover{
-    background: #a22;
-    color:#fff;
+body:hover .box{
+    left: 400px;
 }
