@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background: #ccc;
+}
+
+.box{
+    width: 220px;
+    height: 220px;
+    background: #fff;
+    position: relative;
+    left: 0;
+    border: 2px solid #0009;
+    margin: auto;
+    margin-top: 50px;
+    /* 
+    Me permite controlar el contenido que sale del contenedor 
+    por defecto es visible, pero puedo usar hidden que me oculta lo que haya por fuera del elemento, pero si es texto no me sirve, scroll me crea una barra para scrollear, o el auto que permite que el contenido se ajuste y con clip la informacion se corta donde haya quedado el texto
+    */
+
+    /* Tambien puedo overflow-y o -x para controlar el movimieto horizontal o vertical */
+    overflow: auto;
+}
