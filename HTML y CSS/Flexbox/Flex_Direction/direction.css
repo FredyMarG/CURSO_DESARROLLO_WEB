@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.flexbox{
+    /* Los elementos se alinean uno al lado del otro y se ajustan */
+    display: flex;
+
+    flex-direction: row;/* Por defecto es row, pero row reverse, me ubica los items de derecha a izquierda, por defecto es de izquierda a derecha */
+
+    /* Con colum los elementos se posicionan de arriba hacia abajo y van a mantener su width y si no lo tiene ocupara toda la pagina y colum-reverse de abajo hacia arriba*/
+
+    direction: rtl;
+    /* rtl : rigth to left
+       ltr: left to right me define la direccion hacia la que va el texto */
+}
+
+.flex-item{
+    height: 75px;
+    width: 150px;
+    background-color: #911;
+    text-align: center;
+    margin: 10px;
+    color: #fff;
+    font-size: 40px;
+}
+
+.flex-item:first-child{
+    background-color: #f77;
+}
+
+.flex-item:last-child{
+    background-color: #000;
+}

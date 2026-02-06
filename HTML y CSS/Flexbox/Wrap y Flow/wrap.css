@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.flexbox{
+    /* Los elementos se alinean uno al lado del otro y se ajustan */
+    display: flex;
+    flex-wrap: wrap; /*  Me permite bajar los elementos cuando ya no caben en la pagina, sin encogerlos */
+}
+
+.flex-item{
+    height: 75px;
+    width: 150px;
+    background-color: #911;
+    text-align: center;
+    margin: 10px;
+    color: #fff;
+    font-size: 40px;
+}
+
+.flex-item:first-child{
+    background-color: #f77;
+}
+
+.flex-item:last-child{
+    background-color: #000;
+}
