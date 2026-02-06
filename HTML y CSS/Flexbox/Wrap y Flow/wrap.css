@@ -6,7 +6,12 @@
 .flexbox{
     /* Los elementos se alinean uno al lado del otro y se ajustan */
     display: flex;
+    height: 100vh;
     flex-wrap: wrap; /*  Me permite bajar los elementos cuando ya no caben en la pagina, sin encogerlos */
+
+    flex-flow: row wrap; /* Es lo mismo que decirle que va a ser row con wrap */
+
+    /* Tambiewn puedes usar wrap reverse que me hace wrap pero al reves */
 }
 
 .flex-item{
