@@ -7,14 +7,16 @@
     <title>Modal</title>
 </head>
 <body>
-    <div class="modal">
+    <dialog open>
         <div class="modal__content">
             <h2 class="moda_title">VENTANA MODAL</h2>
             <P class="modal_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim maiores porro nisi molestiae, eaque eveniet obcaecati dicta, quidem reprehenderit totam, nihil vitae et officia corporis unde nam delectus culpa rem.
             Numquam illum tempora magnam inventore at consequuntur aperiam cumque error, eos possimus maiores. Eveniet a rerum repudiandae quae ipsum molestiae minima doloribus, suscipit repellendus earum. Molestias excepturi recusandae optio nihil!</P>
-            <span class="modal__close-button">X</span>
+            <form method="dialog">
+                <button class="modal__close-button">X</button>
+            </form>
         </div>
-    </div>
+    </dialog>
     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Soluta dignissimos suscipit inventore eius nemo totam corporis voluptates ullam, iste ex assumenda, fugit, tempore provident unde neque. Rerum doloremque tenetur ea.
     Exercitationem alias sapiente vel ducimus aspernatur provident voluptatum quas rem enim dicta. Natus nam, officia at perspiciatis odio in vel recusandae ea quae reiciendis ipsa atque culpa tempora. Mollitia, nemo.
     Recusandae, ab praesentium necessitatibus est magni porro velit illo ullam enim, libero aliquam veritatis architecto at in aspernatur, tenetur soluta! Dicta consequuntur deserunt excepturi quo numquam tempore itaque molestias! Non?
@@ -22,10 +24,5 @@
     Placeat tenetur, deserunt laborum nulla labore tempore amet et, autem, consequatur quos in incidunt dolore. Eos, nesciunt! Nemo impedit corrupti, corporis eaque dolores, placeat error obcaecati incidunt, aliquam mollitia rem.
     Totam dolore neque, obcaecati quia incidunt aliquam assumenda voluptate eveniet placeat culpa cum eius. Magnam distinctio corporis quisquam. At minus culpa et fugit sapiente deleniti beatae velit expedita aliquam suscipit.
     Cupiditate ipsa, obcaecati assumenda placeat debitis ut architecto repellat ea consequuntur! Sequi perspiciatis, quam placeat vitae itaque nulla, excepturi accusamus dolores magni obcaecati, est iusto vel vero eveniet dolore. Odio.
-    <script>
-        document.querySelector(".modal__close-button").addEventListener("click",()=>{
-            document.querySelector(".modal").style.display = "none"
-        } )
-    </script>
 </body>
 </html>

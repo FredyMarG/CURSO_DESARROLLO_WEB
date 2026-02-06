@@ -3,11 +3,10 @@
     font-family: sans-serif;
 }
 
-.modal{
-    position: absolute;
+dialog{
     background: #0009;
-    width: 100vw;
     height: 100vh;
+    box-sizing: border-box;
 }
 
 .modal__content{
@@ -17,6 +16,7 @@
     margin: auto;
     margin-top: 50px;
     position: relative;
+
 }
 
 .modal__title{

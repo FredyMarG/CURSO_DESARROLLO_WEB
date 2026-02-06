@@ -1,0 +1,14 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+/* Con sticky haremos que se quede pegado el item hasta que alcance el alto o bajo que le indiquemos */
+.box-sticky{
+    height: 60px;
+    width: 200px;
+    background: #f00;
+    position: sticky;
+    top: 20px;
+    z-index: 40;
+    box-sizing: border-box;
+}
