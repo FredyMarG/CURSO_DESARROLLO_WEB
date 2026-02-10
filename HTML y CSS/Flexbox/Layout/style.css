@@ -11,7 +11,7 @@ body{
 /* HEADER SECTION */
 
 .header{
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
     background-image:url("img/img.jpg") ;
     display: flex;
@@ -20,7 +20,7 @@ body{
 }
 
 .header__overlay{
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background-color: #f809;
     position: absolute;
@@ -57,28 +57,79 @@ h1{
 .nav{
     background: white;
     display: flex;
-    justify-content: space-evenly;
-    padding-right: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 6px 20px;
+    position: sticky;
+    top: 0;
+    margin-bottom: 10px;
+    box-shadow: 0 0px 25px #0006;
 }
 
 .nav__ul{
-margin: 0;
-display: flex;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 6px;
+    justify-content: center;
+    padding: 0;
 }
 
 .nav__item{
     list-style: none;
 }
 
+.nav__ul-container{
+    flex-grow: 4;
+    text-align: center;
+}
+
+.nav__logo-container{
+    flex-grow: 1;
+    text-align: center;
+}
+
 .nav__link{
     color: #f80;
     text-decoration: none;
     display: inline-block;
-    padding: 10px;
+    padding: 8px 10px;
     margin: 6px;
+    border-radius: 0;
+    transition: background-color 0.24s, border-radius 0.2s, outline 0.2s outline-offset 0.2s;
+    margin: 2px;
+    outline: 0;
+    outline-offset: 0;
 }
 
+.nav__link:hover{
+    background-color: #f803;
+    border-radius: 20px;
+    outline:2px solid #f806;
+    outline-offset: -7px;
+}
+
+.link--login{
+    background-color: #f80;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 24px;
+    margin-left: 6px;
+}
+
+.link--login:hover{
+    background-color: #d60;
+    outline: none;
+}
 .nav__logo{
     width: 100px;
     padding: 10px;
+}
+
+main{
+    max-width: 1000px;
+    margin: auto;
+    font-size: 20px;
+    text-wrap: pretty;
+    color: white;
 }
