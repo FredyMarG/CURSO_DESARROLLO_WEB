@@ -5,6 +5,7 @@ body{
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
+    background-color: #ededed;
 }
 
 div, body, header, nav, ul, footer{
@@ -32,6 +33,7 @@ header {
 .main-navbar ul{
     display: flex; 
     padding: 0;
+    justify-content: center;
 }
 
 .main-navbar li {
@@ -59,15 +61,18 @@ a:hover{
     flex-grow: 1;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 10px;
 }
 
 aside, main{
     padding: 10px 20px;
     flex-basis: 0;
+    background-color: #fff;
 }
 
 main{
     min-width: 300px;
+    flex-grow: 2;
 }
 
 .main-wrapper aside{
@@ -114,7 +119,7 @@ footer{
     }
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 480px){
     .main-wrapper{
         flex-direction: column;
     }
