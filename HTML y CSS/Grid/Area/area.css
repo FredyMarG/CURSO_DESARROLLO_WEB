@@ -5,6 +5,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: start;
+    background-color: #48e2;
 }
 
 body, div{
@@ -15,11 +16,12 @@ header, nav, main, aside, footer{
     box-sizing: border-box;
     padding: 20px;
     border: 2px solid #444;
+    background-color: #fff;
 }
 
 .grid{
     flex-grow: 1;
-    max-width: 1400px;
+    max-width: 1460px;
     display: grid;
     grid-template-columns:repeat(minmax(200px, 1fr) minmax(300px, 3fr) minmax(200px, 1fr));
     grid-template-rows: 1fr;
@@ -67,4 +69,36 @@ nav, aside{
     position: sticky;
     top: 0;
     height: 100vh;
+}
+
+@media screen and (max-width:800px) {
+    .grid{
+        grid-template-columns: minmax(200px, 1fr) minmax(300px, 3fr);
+    }
+
+    nav, aside{
+        height: auto;
+        position: static;
+    }
+
+    aside{
+        display: none;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .grid{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "nav"
+        "main"
+        "aside";
+    }
+    nav, aside{
+        height: auto;
+        position: static;
+    }
+    aside{
+        display: none;
+    }
 }
