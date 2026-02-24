@@ -7,6 +7,7 @@
 body{
     background-color: #e2eaff;
     color: #101632dd;
+    scroll-behavior: smooth;
 }
 
 body, div, ul , li, nav, header, footer, a, li, label{
@@ -23,6 +24,10 @@ body, div, ul , li, nav, header, footer, a, li, label{
     align-items: center;
     container-type: inline-size;
     container-name: header;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    font-size: 20px;
 }
 
 .header__open-nav-button{
@@ -104,3 +109,304 @@ body, div, ul , li, nav, header, footer, a, li, label{
 }
 
 /*=========================  HEADER ENDS  =========================*/
+
+/*=========================  PROFILE SECTION  =========================*/
+.profile{
+    container-type: inline-size;
+    container-name:profile ;
+}
+
+.profile__wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    background-color: #fff;
+    max-width: 1400px;
+}
+
+.profile__data-container{
+    max-width: 600px;
+    padding: 12px;
+}
+
+.profile__img-container{
+    max-height: 500px;
+    overflow: hidden;
+}
+
+.profile__img{
+    max-width: 100%;
+    width: 720px;
+}
+
+h1{
+    color: #26a;
+}
+
+.profile__skills-container h2{
+    color: #26a;
+}
+
+.profile__skill{
+    list-style: none;
+    display: flex;
+    margin: 10px;
+    max-width: 600px;
+    margin-left: 0;
+    align-items: center;
+}
+
+.load-bar{
+    border: 2px solid #48e;
+    border-radius: 6px;
+    color: #fff;
+    padding: 2px;
+    font-size: 12px;
+    width: 80%;
+    margin: 4px;
+    margin-left: 0;
+}
+
+.load-bar__bar{
+    background-color: #48e;
+    border-radius:  3px ;
+    padding: 4px 6px;
+}
+
+.bar--80{
+    width: 80%;
+}.bar--90{
+    width: 90%;
+}
+.bar--70{
+    width: 70%;
+}
+.bar--60{
+    width: 60%;
+}
+
+/*=========================  PROFILE QUERIES  =========================*/
+@container profile (min-width:720px){
+    .profile__wrapper{
+        flex-direction: row;
+        padding: 20px;
+        background-color: transparent;
+        height: 90vh;
+        margin: auto;
+    }
+
+    .profile__data-container{        
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        border-radius: 0px 25px 25px 0;
+        box-shadow: 0 0 9px #0002;
+    }
+
+    h1{
+        margin-top: 0;
+        font-size: 4rem;
+        text-wrap: balance;
+    }
+
+    .profile__skills-container > h2{
+        margin-top: 0;
+    }
+
+    .profile__data{
+        max-width: 620px;
+    }
+
+    .profile__img-container{
+        max-height: initial;
+        border-radius: 25px 0 0 25px;
+    }
+
+    .profile__img{
+        height: 100%;
+        object-fit: cover;
+        width: 400px;
+    }
+}
+
+/*=========================  PROFILE ENDS  =========================*/
+
+/*=========================  PORTFOLIO SECTION  =========================*/
+.portfolio{
+    background-color: #18233f;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    container-type: inline-size;
+    container-name: portfolio;
+    justify-content: space-evenly;
+}
+
+.portfolio_title{
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.portfolio__project-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    max-width: 1300px;
+    margin: auto;
+    width: 100%;
+    gap: 12px;
+    padding: 12px;
+    min-height: 90vh;
+}
+
+.portfolio__project{
+    background-image:linear-gradient(#0006, #0006), url("img/fondo.jpg");
+    background-position: center;
+    background-size: cover;
+    display: grid;
+    place-content: center;
+    border-radius: 12px;
+}
+
+.portfolio__project:hover{
+    opacity: 0.74;
+    outline: 2px solid #fff6;
+}
+
+.portfolio__project-name{
+    font-size: 1rem;
+}
+
+/*=========================  PORTFOLIO QUERIES  =========================*/
+@container portfolio (min-width: 56.25rem){
+
+    .portfolio__project-container{
+        grid-template-columns: repeat(auto-fill, minmax(420px,1fr));
+    }
+
+    .portfolio__project:first-child{
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .portfolio__project:nth-child(6){
+        grid-column: span 2;
+    }
+}
+
+@container portfolio (min-width: 81.25rem){
+    .portfolio__project-container{
+        grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    }
+
+    .portfolio__project:first-child{
+        grid-column: span 2;
+        grid-row: span 2;
+    }
+
+    .portfolio__project:nth-child(6){
+        grid-column: span 4;
+    }
+}
+/*=========================  PORTFOLIO ENDS  =========================*/
+
+/*=========================  CONTACT SECTION  =========================*/
+.form{
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    container-type: inline-size;
+    container-name: form;
+}
+
+.form__form{
+    padding: 12px;
+    max-width: 600px;
+    width: 100%;
+    display: grid;
+    margin-bottom: 30px;
+}
+
+.form__input-container :is(input, textarea ){
+    width: 100%;
+    padding: 9px;
+    font-size: 16px;
+    margin: 4px;
+    border: none;
+    box-shadow: 2px 2px 4px #0003;
+    background-color: #fffd;
+}
+
+.form__input-container textarea{
+    resize: none;
+    min-height: 120px;
+    font-family: inherit;
+}
+
+.form__input-container input[type="submit"]{
+    padding: 12px;
+    background-color: #48e;
+    color: #fff;
+}
+
+.form__title{
+    font-size: 2.4rem;
+}
+
+/*=========================  FORM QUERIES  =========================*/
+@container form (min-width: 56.25rem){
+    .form__form{
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+        "name lastname"
+        "email email"
+        "message message"
+        "button button"
+        ;
+        gap: 12px;
+        background-image: radial-gradient(#18233f06,#18233f33);
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 40px #0006;
+    }
+
+    .form__input-container:first-child{
+        grid-area: name;
+    }
+
+    .form__input-container:nth-child(2){
+        grid-area: lastname;
+    }
+    .form__input-container:nth-child(3){
+        grid-area: email;
+    }
+
+    .form__input-container:nth-child(4) {
+        grid-area: message;
+    }
+
+    .form__input-container:nth-child(5){
+        grid-area: button;
+    }
+
+    .form__input-container :is(input, textarea){
+        box-shadow: none;
+        border-radius: 4px;
+    }
+}
+
+/*=========================  CONTACT ENDS  =========================*/
+
+/*=========================  FOOTER SECTION  =========================*/
+footer{
+    padding: 60px;
+    text-align: center;
+    background-color: #18233f;
+    color: #fffd;
+    font-size: 22px;
+}
