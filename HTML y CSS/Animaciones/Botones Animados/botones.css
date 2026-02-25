@@ -1,0 +1,204 @@
+body{
+    margin: 0;
+    background-color: #222;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btn{
+    padding: 10px 40px;
+    background-color: transparent;
+    color: #fff;
+    border-radius: 6px;
+    letter-spacing: 3px;
+    position: relative;
+}
+
+/*=========================  BOTON ANIMADO  =========================*/
+
+.btn-1{
+    border: 1px solid #48e;
+    overflow: hidden;
+}
+
+.btn-1::before{
+    content: '';
+    background-color: #48e;
+    display: block;
+    height: 200%;
+    width: 140%;
+    position: absolute;
+    z-index: -1;
+    transition:top .6s, left .6s;
+    border-radius: 50%;
+    top: 100%;
+    left: 30%;
+}
+
+.btn-1:hover::before{
+    top: -35%;
+    left: -20%;
+}
+
+/*=========================  BOTON NEON  =========================*/
+.button-container:has(.btn-2){
+    filter: drop-shadow(0px 0px 20px #48e)
+        drop-shadow(0px 0px 4px #48e);
+}
+
+.btn-2{
+    border: 1px solid #fff3;
+    color: #fff3;
+}
+
+.btn-2:hover{
+    animation: parpadear 1s infinite alternate backwards;
+}
+
+.btn-2::before{
+    content: '';
+    background-color: #48e;
+    display: block;
+    width: 20%;
+    height: 1px;
+    position: absolute;
+    z-index: -1;
+    left:0;
+    right: 0;
+    margin: auto;
+    opacity: 0;
+    top: -16px;
+    transition: top .6s, opacity .6s, width .2s;
+    animation: parpadear-linea 1s infinite alternate backwards;
+}
+
+.btn-2:hover::before{
+    opacity: 1;
+    top: -5px;
+    width: 80%;
+}
+
+.btn-2::after{
+    content: '';
+    background-color: #48e;
+    display: block;
+    width: 10%;
+    height: 1px;
+    position: absolute;
+    z-index: -1;
+    left:0;
+    right: 0;
+    margin: auto;
+    opacity: 0;
+    top: -19px;
+    transition: top .6s, opacity .6s width .2s;
+    animation: parpadear-linea 1s infinite alternate-reverse backwards;
+}
+
+.btn-2:hover::after{
+    opacity: 1;
+    top: -9px;
+    width: 50%;
+}
+
+@keyframes parpadear {
+    0%{
+        color: #fff3;
+        border: 1px solid #fff3;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    25%{
+        border-color: #48e;
+        color: #48e;
+        box-shadow: 0 0 6px #48e3, 0px 0px 16px #48e5;
+        text-shadow: 0px 0px 9px #48ee, 0px 0px 3px rgba(159, 197, 255, 0.454);
+    }
+
+    30%{
+        color: #fff3;
+        border: 1px solid #fff3;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    35%{
+        color: #48e;
+        text-shadow: 0px 0px 9px #48ee, 0px 0px 3px rgba(159, 197, 255, 0.454);
+    }
+
+    46%{
+        color: #fff3;
+        border: 1px solid #fff3;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    60%{
+        border-color: #48e;
+        box-shadow: 0 0 6px #48e3, 0px 0px 16px #48e5;
+    }
+
+    72%{
+        color: #fff3;
+        border: 1px solid #fff3;
+        text-shadow: none;
+        box-shadow: none;
+    }
+
+    100%{
+        color: #48e;
+        text-shadow: 0px 0px 9px #48ee, 0px 0px 3px rgba(159, 197, 255, 0.454);
+    }
+
+}
+
+@keyframes parpadear-linea {
+    0%{
+        background-color: #48e;
+        box-shadow: 0 0 6px #48e4, 0px 0px 16px #48e5;
+    }
+
+    25%{
+        border-color: #fff3;
+        box-shadow: none;
+    }
+
+    30%{
+        background-color: #48e;
+        box-shadow: 0 0 6px #48e4, 0px 0px 16px #48e5;
+    }
+
+    35%{
+        border-color: #fff3;
+        box-shadow: none;
+    }
+
+    46%{
+        background-color: #48e;
+        box-shadow: 0px 0px 6px #48e4, 0px 0px 16px #48e5;
+    }
+
+    60%{
+        border-color: #fff3;
+        box-shadow: none;
+    }
+
+    72%{
+        background-color: #48e;
+        box-shadow: 0 0 6px #48e4, 0px 0px 16px #48e5;
+    }
+
+    100%{
+        border-color: #fff3;
+        box-shadow: none;
+    }
+
+}

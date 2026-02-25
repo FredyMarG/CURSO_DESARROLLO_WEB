@@ -1,6 +1,8 @@
-Perfecto. Voy a explicarte **item por item**, profundizando en qué hace cada propiedad, cada animación y cada concepto del temario, con nivel técnico progresivo (junior → senior).
+Perfecto. Voy a explicarte **item por item**, profundizando en qué hace
+cada propiedad, cada animación y cada concepto del temario, con nivel
+técnico progresivo (junior → senior).
 
----
+------------------------------------------------------------------------
 
 # 1️⃣ Transiciones (Repaso Profundo)
 
@@ -8,90 +10,55 @@ Perfecto. Voy a explicarte **item por item**, profundizando en qué hace cada pr
 
 Una transición le dice al navegador:
 
-> “Cuando esta propiedad cambie de valor, no la cambies instantáneamente. Interpólala en el tiempo.”
+> "Cuando esta propiedad cambie de valor, no la cambies
+> instantáneamente. Interpólala en el tiempo."
 
 El navegador calcula los valores intermedios automáticamente.
 
----
+------------------------------------------------------------------------
 
 ## 🔹 transition: propiedad duración timing delay;
 
 Ejemplo:
 
-```css
+``` css
 transition: background-color 0.3s ease 0.1s;
 ```
 
-### ¿Qué hace cada parte?
-
-### 1. `background-color`
+### 1. Propiedad
 
 Es la propiedad que será animada.
 
-El navegador:
+### 2. duration
 
-* Detecta el valor inicial.
-* Detecta el valor final.
-* Calcula colores intermedios.
+Tiempo total de interpolación.
 
----
+### 3. timing-function
 
-### 2. `0.3s` (duration)
+Curva de velocidad (Bézier cúbica).
 
-Es el tiempo total que tardará en completarse la interpolación.
+### 4. delay
 
-Si duración = 0:
+Tiempo antes de comenzar.
 
-* No hay animación.
-* El cambio es instantáneo.
-
----
-
-### 3. `ease` (timing-function)
-
-Define la curva de velocidad.
-
-Internamente usa una función Bézier cúbica.
-
-Ejemplo:
-
-* `linear`: velocidad constante
-* `ease-in`: empieza lento, acelera
-* `ease-out`: empieza rápido, desacelera
-* `ease-in-out`: suave inicio y final
-
-Senior insight:
-La curva afecta la percepción psicológica del movimiento.
-
----
-
-### 4. `delay`
-
-Tiempo antes de que empiece la transición.
-
-Sirve para:
-
-* Animaciones escalonadas
-* Coreografías UI
-
----
+------------------------------------------------------------------------
 
 ## 🔹 ¿Por qué NO animar width o height?
 
 Porque causan:
 
-* Reflow (recalculo de layout)
-* Repaint
-* Impacto en performance
+-   Reflow
+-   Repaint
+-   Impacto en performance
 
 Mientras que:
 
-* `transform`
-* `opacity`
+-   `transform`
+-   `opacity`
 
 Se ejecutan en la GPU → más eficientes.
 
----
+------------------------------------------------------------------------
 
 # 2️⃣ Animaciones (@keyframes)
 
@@ -99,352 +66,200 @@ Se ejecutan en la GPU → más eficientes.
 
 Define una línea de tiempo.
 
-Ejemplo:
-
-```css
+``` css
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 ```
 
-Internamente:
+------------------------------------------------------------------------
 
-* 0% = estado inicial
-* 100% = estado final
-* El navegador interpola los valores intermedios
+## 🔹 animation (orden lógico real)
 
----
+``` css
+animation: name duration timing-function delay iteration-count direction fill-mode;
+```
 
-## 🔹 animation: propiedades explicadas
+Ejemplo completo:
 
-```css
+``` css
 animation: fadeIn 1s ease-in-out 0s 1 normal forwards;
 ```
 
-### fadeIn
+------------------------------------------------------------------------
 
-Nombre del keyframe a ejecutar.
+### 🔹 animation-name
 
----
+Nombre del keyframe.
 
-### 1s
+### 🔹 animation-duration
 
 Duración total del ciclo.
 
----
-
-### ease-in-out
+### 🔹 animation-timing-function
 
 Curva de aceleración.
 
----
+### 🔹 animation-delay
 
-### 0s
+Tiempo antes de iniciar.
 
-Delay.
-
----
-
-### 1
+### 🔹 animation-iteration-count
 
 Cantidad de repeticiones.
 
-Si pones:
-
-```css
+``` css
 animation-iteration-count: infinite;
 ```
 
-Nunca termina.
+------------------------------------------------------------------------
 
----
+# 🔹 animation-direction (NUEVA SECCIÓN INTEGRADA)
 
-### normal / alternate
+Controla la dirección en la que se ejecuta la animación en cada
+iteración.
 
-* `normal`: siempre 0% → 100%
-* `alternate`: 0% → 100% → 0% → 100%
+Sintaxis:
 
-Sirve para efectos flotantes naturales.
+``` css
+animation-direction: normal | reverse | alternate | alternate-reverse;
+```
 
----
+------------------------------------------------------------------------
 
-### forwards
+## 1️⃣ normal (por defecto)
+
+Siempre ejecuta:
+
+0% → 100%\
+0% → 100%
+
+------------------------------------------------------------------------
+
+## 2️⃣ reverse
+
+Siempre ejecuta:
+
+100% → 0%\
+100% → 0%
+
+⚠ La curva de velocidad también se invierte.
+
+------------------------------------------------------------------------
+
+## 3️⃣ alternate
+
+Alterna dirección en cada ciclo:
+
+0% → 100%\
+100% → 0%\
+0% → 100%
+
+Ideal para animaciones infinitas suaves.
+
+------------------------------------------------------------------------
+
+## 4️⃣ alternate-reverse
+
+Empieza en reversa y luego alterna:
+
+100% → 0%\
+0% → 100%
+
+------------------------------------------------------------------------
+
+## 🔹 Insight Senior
+
+`animation-direction` NO modifica los keyframes. Solo altera el orden en
+que se ejecutan.
+
+Permite evitar duplicar animaciones y crear efectos más naturales.
+
+Ejemplo profesional:
+
+``` css
+.card {
+  animation-name: slide;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(300px); }
+}
+```
+
+------------------------------------------------------------------------
+
+### 🔹 animation-fill-mode
 
 Define qué pasa cuando termina:
 
-* `none`: vuelve al estado original
-* `forwards`: se queda en el último frame
-* `backwards`: aplica el primer frame durante delay
+-   `none`
+-   `forwards`
+-   `backwards`
+-   `both`
 
-Senior insight:
-`forwards` es clave en animaciones de entrada.
+Senior insight: `forwards` es clave en animaciones de entrada.
 
----
+------------------------------------------------------------------------
 
 # 3️⃣ Botones Animados
 
----
+transform se ejecuta en GPU. box-shadow simula elevación. Ripple usa DOM
+dinámico.
 
-## 🔹 transform: translateY(-5px);
-
-¿Qué hace?
-
-Mueve el elemento 5px hacia arriba.
-
-Pero:
-
-* No cambia el layout.
-* Solo cambia su capa visual.
-* Se ejecuta en GPU.
-
----
-
-## 🔹 box-shadow animado
-
-Cambia sombra progresivamente.
-
-Simula elevación física (Material Design concept).
-
----
-
-## 🔹 Ripple Effect (JS)
-
-Cuando haces click:
-
-```js
-document.createElement("span")
-```
-
-Se crea dinámicamente un nodo.
-
-El efecto:
-
-* Calcula posición del click.
-* Expande un círculo.
-* Se desvanece.
-
-Esto simula interacción táctil.
-
----
+------------------------------------------------------------------------
 
 # 4️⃣ Typewriter Effect
 
----
+Uso de: \* overflow hidden \* white-space nowrap \* steps() \* blink
 
-## 🔹 overflow: hidden;
-
-Evita que el texto que aún no "aparece" sea visible.
-
----
-
-## 🔹 white-space: nowrap;
-
-Evita saltos de línea.
-Necesario para que el ancho crezca horizontalmente.
-
----
-
-## 🔹 border-right: 2px solid;
-
-Simula cursor.
-
----
-
-## 🔹 width: 0;
-
-Texto inicia invisible (ancho 0).
-
----
-
-## 🔹 steps(40)
-
-En lugar de animación fluida:
-
-Divide el progreso en 40 pasos discretos.
-
-Cada paso revela un carácter.
-
-Si usas `linear` en vez de `steps`, parecería deslizarse, no escribirse.
-
----
-
-## 🔹 blink
-
-```css
-50% { border-color: transparent; }
-```
-
-Hace parpadear el cursor.
-
----
+------------------------------------------------------------------------
 
 # 5️⃣ Intersection Observer
 
----
+Optimizado por el navegador. Separa lógica JS de animación CSS.
 
-## 🔹 ¿Qué hace?
-
-Monitorea cuándo un elemento entra o sale del viewport.
-
-Más eficiente que:
-
-```js
-window.addEventListener("scroll")
-```
-
-Porque:
-
-* No se ejecuta cada pixel de scroll.
-* Es optimizado por el navegador.
-
----
-
-## 🔹 entry.isIntersecting
-
-Devuelve true cuando el elemento está visible según el threshold.
-
----
-
-## 🔹 classList.add("visible")
-
-Activa la transición CSS.
-
-Separación limpia:
-
-* JS detecta
-* CSS anima
-
-Arquitectura correcta.
-
----
+------------------------------------------------------------------------
 
 # 6️⃣ Rango de Animaciones
 
----
+## animation-play-state
 
-## 🔹 animation-play-state
+Permite pausar y reanudar.
 
-Permite:
+## Web Animations API
 
-```css
-animation-play-state: paused;
-```
+Control programático avanzado.
 
-Puedes pausarla y reanudarla dinámicamente.
-
----
-
-## 🔹 Web Animations API
-
-```js
-element.animate([...], { duration: 1000 })
-```
-
-Esto crea una animación programática.
-
-Ventajas:
-
-* Control en tiempo real
-* Puedes:
-
-  * detener
-  * revertir
-  * cambiar velocidad
-
-Senior insight:
-Es más poderosa que CSS puro.
-
----
+------------------------------------------------------------------------
 
 # 7️⃣ Scroll-Timeline
 
----
+Vincula animación al scroll.
 
-## 🔹 animation-timeline: scrollAnim;
-
-Vincula progreso de animación al scroll.
-
-En vez de depender del tiempo:
-Depende del porcentaje de scroll.
-
-Progreso = posición actual / altura scroll total
-
----
+------------------------------------------------------------------------
 
 # 8️⃣ will-change
 
-```css
-will-change: transform;
-```
+Optimiza renderizado. Usar con moderación.
 
-Le dice al navegador:
-
-> "Prepárate, esta propiedad va a cambiar"
-
-Hace:
-
-* Crear capa independiente
-* Optimizar render
-
-Pero si abusas:
-
-* Consume memoria
-
-Senior rule:
-Solo usar justo antes de animar.
-
----
+------------------------------------------------------------------------
 
 # 9️⃣ prefers-reduced-motion
 
-```css
-@media (prefers-reduced-motion: reduce)
-```
+Accesibilidad obligatoria en producción.
 
-Detecta si el usuario activó reducción de movimiento en el sistema operativo.
-
-Importante para:
-
-* Personas con vértigo
-* Epilepsia
-* Trastornos vestibulares
-
-Un senior SIEMPRE lo implementa.
-
----
+------------------------------------------------------------------------
 
 # 🔥 Integración en una WEB Real
 
----
-
-## Nivel Junior:
-
-* Usa hover
-* Usa fadeIn
-* No rompe performance
-
----
-
-## Nivel Mid:
-
-* Usa IntersectionObserver
-* Optimiza GPU
-* Controla delays
-
----
-
-## Nivel Senior:
-
-Piensa en:
-
-* Arquitectura de animaciones
-* Sistema de duraciones
-* Tokens reutilizables
-* UX emocional
-* Accesibilidad
-* Rendimiento en dispositivos lentos
-* Evitar jank (saltos visuales)
-
----
-
+Nivel Junior → Hover + fadeIn\
+Nivel Mid → IntersectionObserver + GPU\
+Nivel Senior → Sistema completo de animaciones + Accesibilidad +
+Performance
