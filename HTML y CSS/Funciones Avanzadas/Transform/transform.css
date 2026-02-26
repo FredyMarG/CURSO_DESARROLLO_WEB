@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #48e;
+}
+
+.box{
+    margin: auto;
+    padding: 100px;
+    border: 4px solid #000;
+    width: fit-content;
+}
+
+.box-inside{
+    padding: 20px 40px;
+    background-color: #ccc;
+    margin-top: 50px;
+}
+
+.skew{
+    transform: skew(20deg);
+}
+
+.scale{
+    transform: scale(2);
+}
+
+.rotate{
+    transform: rotate(20deg);
+}
