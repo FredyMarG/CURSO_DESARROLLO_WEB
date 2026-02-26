@@ -1,3 +1,7 @@
+:root{
+    --color-principal:#48e;
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -7,7 +11,6 @@
 
 
 .box{
-    --color-principal:#48e;
     display: grid;  
     place-content: center;
     color: #fff;
@@ -19,14 +22,30 @@
 }
 
 .box:first-child{
-    background-color:var(--color-principal);
+    background-color: var(--color-principal);
 }
 
 .box:nth-child(2){
+    color: var(--color-principal);
+    border: 6px solid var(--color-principal);
+}
+
+.box p{
     color: var(--color-principal);
 }
 
 h1{
     font-size: 2.4em;
     margin-bottom: 0;
+}
+
+body > p{
+    color: var(--color-principal);
+    font-size: 40px;
+}
+
+@property --color-principal{
+    syntax: "<color>";
+    inherits: false;
+    initial-value: #48e;
 }
