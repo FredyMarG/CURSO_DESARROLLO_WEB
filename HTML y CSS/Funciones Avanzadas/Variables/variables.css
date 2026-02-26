@@ -1,0 +1,32 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+
+.box{
+    --color-principal:#48e;
+    display: grid;  
+    place-content: center;
+    color: #fff;
+    margin: 120px auto;
+    font-size: 30px;
+    padding: 0 40px;
+    font-size: clamp(2.4rem, 2.2vw, 4rem);
+    border: 6px solid #000;
+}
+
+.box:first-child{
+    background-color:var(--color-principal);
+}
+
+.box:nth-child(2){
+    color: var(--color-principal);
+}
+
+h1{
+    font-size: 2.4em;
+    margin-bottom: 0;
+}
