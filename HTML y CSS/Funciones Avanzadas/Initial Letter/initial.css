@@ -10,7 +10,7 @@ body{
 .box{
     font-size: 20px;
     padding: 0 40px;
-    border: 2px solid #f44;
+    border: 2px solid #43e;
     margin-bottom: 30px;
 }
 
@@ -18,5 +18,5 @@ p::first-letter{
     padding: 10px;
     padding-bottom: 0;
     initial-letter: 3 2;
-    color: #f44;
+    color: #43e;
 }

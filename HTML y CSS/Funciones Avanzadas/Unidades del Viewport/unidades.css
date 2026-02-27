@@ -1,0 +1,23 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.box{
+    margin: 30px auto;
+    width: 90dvw;
+    font-size: 20px;
+    padding: 0 40px;
+    margin-bottom: 50px;
+}
+
+p::first-letter{
+    padding: 10px;
+    padding-bottom: 0;
+    initial-letter: 3 2;
+    color: #43e;
+}
