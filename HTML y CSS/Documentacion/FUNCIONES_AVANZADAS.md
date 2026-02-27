@@ -1,161 +1,147 @@
-# FUNCIONES AVANZADAS
+# FUNCIONES AVANZADAS - GUÍA PROFESIONAL COMPLETA
 
-Guía técnica detallada de funciones y conceptos modernos de CSS.
+Guía técnica avanzada y ampliada de funciones modernas de CSS, incluyendo fundamentos internos, rendimiento, casos reales, errores comunes y buenas prácticas.
 
-------------------------------------------------------------------------
+---
 
 # 1. FILTER
 
-## Concepto
+## Concepto Técnico
+`filter` aplica efectos gráficos en la etapa de post-renderizado. El navegador primero pinta el elemento y luego aplica el efecto como una capa adicional.
 
-`filter` aplica efectos gráficos post-procesados al elemento completo.
+- No altera el layout.
+- Se ejecuta en la fase de composición.
+- Puede usar aceleración por GPU.
 
 ## Sintaxis
 
-``` css
-element {
-  filter: función(valor);
+```css
+selector {
+  filter: <filter-function>+;
 }
 ```
 
-## Funciones
+Se pueden encadenar múltiples funciones:
 
-### blur()
-
-``` css
-filter: blur(10px);
+```css
+filter: blur(5px) brightness(120%) contrast(110%);
 ```
 
-Aplica desenfoque gaussiano.
+## Funciones Disponibles
+
+### blur(radius)
+Desenfoque gaussiano. Alto costo si se anima con valores grandes.
 
 ### brightness()
-
-``` css
-filter: brightness(1.5);
-```
-
-Multiplica valores RGB.
+Multiplica la luminosidad.
 
 ### contrast()
-
-``` css
-filter: contrast(150%);
-```
+Aumenta o reduce diferencia entre claros y oscuros.
 
 ### grayscale()
-
-``` css
-filter: grayscale(100%);
-```
+Convierte a escala de grises.
 
 ### sepia()
-
-``` css
-filter: sepia(100%);
-```
+Simula tono fotográfico antiguo.
 
 ### invert()
-
-``` css
-filter: invert(100%);
-```
+Invierte colores. Útil en dark mode.
 
 ### saturate()
-
-``` css
-filter: saturate(200%);
-```
+Controla intensidad de color.
 
 ### hue-rotate()
-
-``` css
-filter: hue-rotate(90deg);
-```
+Rota el matiz en el círculo cromático.
 
 ### drop-shadow()
+Sombra que respeta transparencia real (diferente a box-shadow).
 
-``` css
-filter: drop-shadow(5px 5px 10px black);
-```
+## Performance
+- `blur()` es el más costoso.
+- Evitar múltiples filtros animados.
+- Preferir transform + opacity cuando sea posible.
 
-------------------------------------------------------------------------
+---
 
 # 2. BACKDROP-FILTER
 
-Aplica filtros al contenido detrás del elemento.
+Aplica efectos al contenido detrás del elemento.
 
-``` css
+Requiere fondo con transparencia:
+
+```css
 .card {
   backdrop-filter: blur(15px);
   background: rgba(255,255,255,0.2);
 }
 ```
 
-------------------------------------------------------------------------
+## Casos reales
+- Glassmorphism
+- Modales
+- Navbar flotante
+
+---
 
 # 3. TRANSFORM
 
-Modifica visualmente sin alterar layout.
+No modifica el flujo del documento.
+Más eficiente que usar top/left.
 
-## translate()
+## Funciones
 
-``` css
-transform: translate(50px, 20px);
-```
+### translate()
+Movimiento en eje X, Y o Z.
 
-## scale()
+### scale()
+Escala proporcional.
 
-``` css
-transform: scale(1.2);
-```
+### rotate()
+Rota en grados.
 
-## rotate()
-
-``` css
-transform: rotate(45deg);
-```
-
-## skew()
-
-``` css
-transform: skew(10deg, 5deg);
-```
+### skew()
+Deforma en ángulo.
 
 ## transform-origin
+Define punto pivote.
 
-``` css
-transform-origin: top left;
+## 3D Avanzado
+
+```css
+transform-style: preserve-3d;
+perspective: 1000px;
 ```
 
-------------------------------------------------------------------------
+---
 
 # 4. MIN(), MAX(), CLAMP()
 
 ## min()
-
-``` css
-width: min(600px, 90%);
-```
+Toma el valor menor.
 
 ## max()
-
-``` css
-width: max(300px, 50%);
-```
+Toma el mayor.
 
 ## clamp()
+Sintaxis:
 
-``` css
-font-size: clamp(1rem, 2vw, 2rem);
+```css
+font-size: clamp(min, ideal, max);
 ```
 
-------------------------------------------------------------------------
+Ideal para tipografía fluida:
+
+```css
+font-size: clamp(1rem, 1.5vw + 1rem, 2rem);
+```
+
+---
 
 # 5. VARIABLES CSS
 
 ## Definición
 
-``` css
+```css
 :root {
   --primary-color: #3498db;
 }
@@ -163,134 +149,180 @@ font-size: clamp(1rem, 2vw, 2rem);
 
 ## Uso
 
-``` css
+```css
 color: var(--primary-color);
 ```
 
-## Fallback
+## Scope dinámico
+Las variables pueden redefinirse por componente.
 
-``` css
-color: var(--color, blue);
-```
+## Casos profesionales
+- Theming
+- Dark mode
+- Sistemas de diseño
 
-------------------------------------------------------------------------
+---
 
 # 6. CALC()
 
-``` css
+Permite operaciones matemáticas.
+
+```css
 width: calc(100% - 80px);
 ```
 
-Permite operaciones matemáticas con unidades compatibles.
+Reglas:
+- Espacios obligatorios entre operadores.
+- Unidades compatibles.
 
-------------------------------------------------------------------------
+---
 
 # 7. PROPIEDADES DE SCROLL
 
 ## scroll-behavior
 
-``` css
-html {
-  scroll-behavior: smooth;
-}
+```css
+html { scroll-behavior: smooth; }
 ```
 
 ## scroll-snap-type
-
-``` css
-.container {
-  scroll-snap-type: y mandatory;
-}
-```
+Define eje y comportamiento.
 
 ## scroll-snap-align
-
-``` css
-.section {
-  scroll-snap-align: start;
-}
-```
+Define alineación del hijo.
 
 ## scroll-margin
-
-``` css
-section {
-  scroll-margin-top: 80px;
-}
-```
+Espacio externo del snap.
 
 ## scroll-padding
+Espacio interno del contenedor.
 
-``` css
-.container {
-  scroll-padding-top: 80px;
-}
+## scrollbar-width (Firefox)
+
+```css
+scrollbar-width: thin;
 ```
 
-------------------------------------------------------------------------
+Valores:
+- auto
+- thin
+- none
+
+## Webkit Scrollbar
+
+```css
+::-webkit-scrollbar {}
+::-webkit-scrollbar-thumb {}
+::-webkit-scrollbar-track {}
+```
+
+## scroll-timeline (experimental)
+Permite animaciones basadas en scroll.
+
+---
 
 # 8. INITIAL-LETTER
 
-``` css
+Permite drop cap editorial real.
+
+```css
 p::first-letter {
-  initial-letter: 3;
+  initial-letter: 3 2;
 }
 ```
 
-------------------------------------------------------------------------
+---
 
 # 9. UNIDADES VIEWPORT MODERNAS
 
-## lvh
+Problema: 100vh falla en móviles.
 
-Altura máxima del viewport.
+## lvh
+Largest viewport height.
 
 ## svh
-
-Altura mínima del viewport.
+Smallest viewport height.
 
 ## dvh
+Dynamic viewport height.
 
-``` css
+```css
 height: 100dvh;
 ```
 
-------------------------------------------------------------------------
+---
 
 # 10. MIN-CONTENT, MAX-CONTENT Y FIT-CONTENT
 
 ## min-content
-
-``` css
-width: min-content;
-```
+Tamaño mínimo posible.
 
 ## max-content
-
-``` css
-width: max-content;
-```
+Tamaño máximo sin romper línea.
 
 ## fit-content()
+Limita crecimiento máximo.
 
-``` css
-width: fit-content(300px);
-```
-
-------------------------------------------------------------------------
+---
 
 # 11. COLOR-MIX()
 
-``` css
-background: color-mix(in srgb, red 50%, blue 50%);
+Permite mezclar colores.
+
+```css
+background: color-mix(in lch, red 40%, blue);
 ```
 
-Permite mezclar colores en distintos espacios de color como srgb, lab y
-lch.
+Espacios recomendados:
+- srgb
+- lab
+- lch
 
-------------------------------------------------------------------------
+---
 
-# CONCLUSIÓN
+# RUTA DE APRENDIZAJE INTEGRADA (POST HTML + CSS 24H)
 
-Estas funciones permiten crear interfaces modernas, responsivas y
-optimizadas en rendimiento utilizando CSS avanzado.
+## ETAPA 1 - JavaScript Fundamentos
+- Variables y tipos
+- Condicionales
+- Bucles
+- Funciones
+- Arrays y objetos
+- 30 ejercicios de lógica
+- Proyecto: Calculadora avanzada
+
+## ETAPA 2 - DOM e Interactividad
+- querySelector
+- addEventListener
+- LocalStorage
+- JSON
+- Proyecto: Reloj mejorado
+- Proyecto: To-Do List PRO
+
+## ETAPA 3 - JavaScript Intermedio
+- Fetch API
+- Promesas
+- Async/Await
+- try/catch
+- Proyecto: App con API real
+
+## ETAPA 4 - Profesionalización
+- Git y GitHub
+- Deploy
+- Proyecto integrador final
+
+## ETAPA 5 - Nivel Empleo
+- Node.js
+- Express
+- Bases de datos
+- React
+- Proyecto Full Stack con CRUD y autenticación
+
+---
+
+# CONCLUSIÓN PROFESIONAL
+
+Este documento integra fundamentos técnicos avanzados de CSS moderno junto con una ruta estructurada de aprendizaje frontend y full stack.
+
+Dominar estos conceptos permite construir interfaces modernas, optimizadas y escalables siguiendo estándares actuales de desarrollo web.
+

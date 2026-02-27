@@ -1,0 +1,22 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.box{
+    font-size: 20px;
+    padding: 0 40px;
+    border: 2px solid #f44;
+    margin-bottom: 30px;
+}
+
+p::first-letter{
+    padding: 10px;
+    padding-bottom: 0;
+    initial-letter: 3 2;
+    color: #f44;
+}
