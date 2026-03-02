@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú lateral</title>
+</head>
+<body>
+    <aside class="sidebar">
+        <form class="sidebar-form">
+            <input type="checkbox" id="open-menu">
+            <label class="material-symbols-outlined" for="open-menu">close</label>
+            <label class="material-symbols-outlined open-button" for="open-menu">arrow_forward_ios</label>
+        </form>
+        <picture class="sidebar-picture">
+            <!--imagen persona 128 x128-->
+            <source srcset="https://picsum.photos/200/100" media="(max-width:57.5rem)">
+            <img src="https://picsum.photos/400/200" alt="">
+        </picture>
+        <nav class="sidebar-nav">
+            <ul>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">Notifications</span>
+                    <a href="#">Notifications</a>
+                </li>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">mail</span>
+                    <a href="#">Messages</a>
+                </li>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">Shopping_cart</span>
+                    <a href="#">Cart</a>
+                </li>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">account_balance</span>
+                    <a href="#">Balance</a>
+                </li>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">Settings</span>
+                    <a href="#">Settings</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="sidebar-profile">
+            <ul>
+                <li class="sidebar-item item-profile">
+                    <img src="https://picsum.photos/128" alt="">
+                    <span class="profile-option">PROFILE</span>
+                </li>
+                <li class="sidebar-item">
+                    <span class="material-symbols-outlined">logout</span>
+                    <a href="#">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+</body>
+</html>
