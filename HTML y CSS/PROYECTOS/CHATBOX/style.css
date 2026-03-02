@@ -11,6 +11,7 @@ body{
     --darkcolor: #f62;
     background-color: var(--bg-color);
 }
+
 .chat{
     max-width: clamp(300px, 70%, 900pc);
     background-color: var(--cb-color);
