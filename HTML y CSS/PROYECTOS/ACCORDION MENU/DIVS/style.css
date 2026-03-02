@@ -121,5 +121,6 @@ input[type="checkbox"]{
 @media screen and (min-width:600px) {
     .faq{
         max-width: clamp(300px, 70%,700px);
+        margin: 40px auto;
     }
 }
