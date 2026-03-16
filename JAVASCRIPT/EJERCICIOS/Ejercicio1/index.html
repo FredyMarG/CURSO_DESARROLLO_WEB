@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ejercicio 1</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 1</h1>
+        <p >3 chicos de 23 años perfectamente normales entran a una heladeria a comprar un helado pero hay un problema: los precios no
+        estan al lado de cada estante con su respectivo helado.
+        Ellos quieren comprar el helado mas caro que puedan con la plata que tienen, así que... veamos como podemos ayudarlos.</p>
+        <p>Los precios de helados son los siguientes:</p>
+        <ul>
+            <li>Palito de helado de crema: $1 USD</li>
+            <li>Palito de helado de agua: $0.6 USD</li>
+            <li>Bombón helado marca heladix: $1.6 USD</li>
+            <li>Bombón helado marca heladovich: 1.7 USD</li>
+            <li>Bombón helado marca helardo: $1.8 USD</li>
+            <li>Potecito de helado con confites: $2.9 USD</li>
+            <li>Pote de 1/4 KG: $2.9 USD</li>
+        </ul>
+
+        <ol type="A">
+            <li>Pedirles que ingresen el monto que tienen y mostrarles el helado mas caro que pueden comprar.</li>
+            <li>Si hay 2 o mas con el mismo precio, mostrar ámbos.</li>
+            <li>Cofla quiere saber cuanto es el vuelto</li>
+        </ol>
+        <label for="mostrar" onclick="solucion()">Solucion</label>
+    </div>
+    
+    <input type="checkbox" id="mostrar">
+    <div class="sol">
+        <h2>Resultados</h2>
+        <ul>
+            <li id="roberto">Roberto tiene 3 USD</li>
+            <li id="pedro">Roberto tiene 3 USD</li>
+            <li id="cofla">Roberto tiene 3 USD</li>
+        </ul>
+        <div class="result">
+            <p id="roberto_helado">Comprate el x helado</p>
+            <p id="pedro_helado">Comprate el x helado</p>
+            <p id="cofla_helado">Comprate el x helado</p>
+        </div>
+    </div>
+    <script src="ejercicio1.js"></script>
+</body>
+</html>
