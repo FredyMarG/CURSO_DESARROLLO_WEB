@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ejercicio 3</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 3</h1>
+        <p>Cofla vuelve de la comisaría exausto y por lo cansado que estaba se fue a dormir...Al otro día comienzan las clases del ciclo básico de la universidad (porque cofla quiere ser programador y se incribió en la facultad de ingeniería para estudiar desarrollo de software).
+        Se rompió el sistema de registro de asistencias y durante los próximos 30 días no se podrán hacer registros de datos de
+        ningun tipo, por ende las clases no podrán comenzar hasta que esto este solucionado.</p>
+        <ol type="A">
+            <li>Crear mini-sistema que nos permita registrar los alumnos que estan presentes (P) y ausentes (A) en clase.</li>
+            <li>Pasados los 30 días mostrar la situación final de todos los alumnos (Nro total de presentes y ausentes).</li>
+            <li>Se puede tener un maximo de 10% de ausencias por semestre, si se tienen mas aclarar que está reprobado.</li>
+        </ol>
+
+        <label id="sol" onclick="validarCliente()">Solucion</label>
+    </div>
+
+    <div class="sol" id="main-sol">
+        <h2>Resultados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4" id="cantidad" class="titlet">
+                        El total de alumnos es 3
+                    </th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Alumno</th>
+                    <th>Presencia</th>
+                    <th>Ausencia</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                
+            </tbody>
+        </table>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ejercicio 2</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 2</h1>
+        <p>Un joven muy afortunado logró ganar el primer premio de la lotería... exacto, estamos hablando del pobre al que cofla le
+        dió una mano, este pobre decide hacer una fiesta para festejar que salió de la pobreza, este milllonario compró una máquina que deja pasar solamente a los mayores de edad, entre otras cosas...</p>
+        <ol type="A">
+            <li>Dejar pasar solo a los mayores de edad</li>
+            <li>La primer persona que entre despues de las 2 AM, no paga.</li>
+        </ol>
+
+        <label id="sol" onclick="validarCliente()">Solucion</label>
+    </div>
+
+    <input type="checkbox" id="mostrar">
+    <div class="sol" id="main-sol">
+        <h2>Resultados</h2>
+        <ul>
+            <li id="edad"></li>
+            <li id="hora"></li>
+        </ul>
+        <div class="result">
+            <p id="msg">Comprate el x helado</p>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
