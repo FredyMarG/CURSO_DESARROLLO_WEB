@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 5</h1>
+        <p>Cofla entró a una tienda que vende celulares porque le pareció bastante bueno comprarse un nuevo celular.
+        De todos los modelos que hay disponibles en esa tienda, a Cofla le llamaron la atención 3 telefonos especificamente,
+        El problema es que ningun vendedor sabe nada al respecto entonces no pueden recomendarle absolutaente nada... pero claro:
+        el antes de comprar esos celulares quiere ver las cualidades y comportamientos de cada uno para poder comprarlos, ahí
+        entramos nosotros.</p>
+        <ol type="A">
+            <li>Crear un sistema para mostrarle a cofla las particularidades de los 3 celulares.</li>
+            <li>Cada celular debe tener color, peso, resolución de pantalla, resolución de camara y memoria ram</li>
+            <li>Cada celular debe poder prender, reiniciar, apagar, tomar fotos y grabar</li>
+        </ol>
+    </div>
+
+    <div class="ask">
+        <button class="btn" onclick="mostrar()">Solución</button>
+    </div>
+
+    <div class="sol" id="main-sol">
+        <h2>Resultado</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="title" colspan="6">CARACTERISTICAS</th>
+                </tr>
+                <tr>
+                    <th># Celular</th>
+                    <th>Color</th>
+                    <th>Peso</th>
+                    <th>Resolución de Pantalla</th>
+                    <th>Resolución de Cámara</th>
+                    <th>Memoria Ram</th>
+                </tr>
+            </thead>
+            <tbody class="mobile" id="mobile">
+                
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="title" colspan="6">FUNCIONES</th>
+                </tr>
+                <tr>
+                    <th># Celular</th>
+                    <th colspan="3">Botón Encendido/Apagado</th>
+                    <th colspan="2">Cámara Foto/Video</th>
+                </tr>
+            </thead>
+            <tbody class="mobile" id="func">
+                <tr>
+                    <td>1</td>
+                    <td>encender</td>
+                    <td>reiniciar</td>
+                    <td>apagar</td>
+                    <td>Foto</td>
+                    <td>video</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
