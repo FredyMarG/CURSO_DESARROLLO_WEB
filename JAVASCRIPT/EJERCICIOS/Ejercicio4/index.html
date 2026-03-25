@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 4</h1>
+        <p>Cofla feliz por haber empezado las clases volvió a su casa y ya tiene tarea básica de cálculo; tiene que hacer un par de
+        ejercicios de matemática que incluyen suma, resta, división y multiplicación, realizar esto con una calculadora puede ser
+        mucho mas efectivo.</p>
+        <ol type="A">
+            <li>Crear calculadora que nos simplifique el trabajo</li>
+        </ol>
+    </div>
+    <div class="ask">
+        <span>Solución</span>
+        <ol type="1">
+            <li>Suma</li>
+            <li>Resta</li>
+            <li>Multiplicación</li>
+            <li>División</li>
+        </ol>
+        <label for="operacion">¿Que operacion desea realizar?</label>
+        <input type="number" id="operacion" min="1" max="4">
+        <button id="calcular" onclick="calculo()">Calcular</button>
+    </div>
+    <div class="sol" id="main-sol">
+        <h2>Resultado</h2>
+        <p class="result" id="respuesta">
+            
+        </p>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,82 +1,157 @@
-body {
-    width: 100%;
+* {
     box-sizing: border-box;
-    font-family: sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f8f8f8;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
+body {
+    background: linear-gradient(135deg, #f4f4f4, #e9ecf3);
+    min-height: 100vh;
+}
+
+/* CONTENEDOR PRINCIPAL */
 .enunciado {
-    width: 90%;
-    margin: 0 auto;
+    width: 85%;
+    max-width: 900px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+/* TITULO */
 h1 {
-    margin: 10px auto;
     text-align: center;
     font-style: italic;
+    margin-bottom: 10px;
+    color: #333;
 }
 
+/* TEXTO */
+.enunciado p {
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+/* LISTAS */
+ul,
+ol {
+    margin: 15px 20px;
+}
+
+ul{
+    list-style: none;
+}
+
+li {
+    margin: 5px 0;
+}
+
+/* BOTÓN (LABEL) */
+label {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+
+    padding: 12px;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, rgb(0, 120, 225), rgb(70, 163, 244));
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+/* HOVER BOTÓN */
+label:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 120, 225, 0.3);
+}
+
+/* CLICK */
+label:active {
+    transform: scale(0.97);
+}
+
+/* OCULTAR CHECKBOX */
 input {
     display: none;
 }
 
-label {
-    font-size: 30px;
-    font-weight: bolder;
-    cursor: pointer;
-}
-
+/* RESULTADO (TARJETA) */
 .sol {
-    background-color: #f4f4f4;
-    width: 60%;
-    padding: 10px 0px;
-    margin: 10px auto;
-    border-radius: 10px;
+    width: 85%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 16px;
+    background: white;
     display: none;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: aparecer 0.5s ease;
 }
 
+/* ANIMACIÓN */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TITULO RESULTADO */
 .sol h2 {
-    margin: 5px auto;
     text-align: center;
-    font-weight: bolder;
     color: rgb(0, 120, 225);
-    font-size: 30px;
+    margin-bottom: 15px;
 }
 
+/* BLOQUE PERSONAS */
 .sol>ul {
-    margin: 20px;
-    padding: 5px 10px;
-    background-color: #fbfbfb;
+    margin: 15px 0;
+    padding: 10px;
+
+    background: #f8fbff;
     border-radius: 10px;
     border: 1px solid rgb(9, 139, 253);
-    ;
 }
 
 .sol>ul li {
     text-align: center;
-    list-style-type: none;
-    margin: 5px auto;
     font-weight: bold;
     color: rgb(9, 139, 253);
 }
 
-.sol div {
-    margin: 20px;
-    padding: 5px 10px;
+/* BLOQUE RESULTADO */
+.sol .result {
+    margin-top: 15px;
+    padding: 10px;
+
     border-radius: 10px;
     border: 1px solid rgb(70, 163, 244);
-    background-color: #fbfbfb;
+    background: #f8fbff;
 }
 
-.sol div>p {
-    margin: 5px auto;
+.sol .result p {
+    text-align: center;
     font-weight: bold;
     color: rgb(70, 163, 244);
 }
 
+/* MOSTRAR AL ACTIVAR */
 input:checked+.sol {
     display: block;
 }

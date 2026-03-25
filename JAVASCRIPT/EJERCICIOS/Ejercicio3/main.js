@@ -29,12 +29,12 @@ function result() {
     }
 
     for (alumno in alumnosTotales) {
-        if (30 - alumnosTotales[alumno][1] > 18) {
+        if (30 - alumnosTotales[alumno][1] >= 18) {
             data.innerHTML += `<tr style="color: red;">
             <td>${+alumno + 1}</td>
             <td>${alumnosTotales[alumno][0]/**nombre */}</td>
             <td>${alumnosTotales[alumno][1]/**cantidad de asistencias */}</td>
-            <td>${30 - alumnosTotales[alumno][1] + "REPROBADO"/**cantidad de fallas */}</td>
+            <td>${30 - alumnosTotales[alumno][1] + " REPROBADO"/**cantidad de fallas */}</td>
         </tr>`;
         } else {
             data.innerHTML += `<tr>
