@@ -13,8 +13,8 @@ body {
 
 /* 🔹 CONTENEDOR PRINCIPAL */
 .enunciado {
-    width: 85%;
-    max-width: 900px;
+    width: 90%;
+    max-width: 1200px;
     margin: 30px auto;
     background: #ffffff;
     padding: 25px;
@@ -85,7 +85,7 @@ li {
 /* 🔹 RESULTADO */
 .sol {
     width: 90%;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 30px auto;
     padding: 25px;
     border-radius: 18px;
@@ -141,6 +141,11 @@ thead th {
 }
 
 /* 🔹 FILAS */
+
+tbody td::first-letter{
+    text-transform: uppercase;
+}
+
 tbody tr {
     transition: 0.2s;
 }

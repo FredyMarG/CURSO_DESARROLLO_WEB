@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6</title>
+</head>
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 6</h1>
+        <p>Cofla ya tiene su nuevo celular y ahora está mirando las aplicaciones del Play Store ya que quiere jugar juegos que sean
+        muy populares, que tengan buena puntuación y que pesen poco, pero las 7 apps que llamaron su atención son un tanto similares
+        y sabe que si se descarga todas, probablemente juegue con todas, pero él se va a descargar solo 2 para tener perdidas
+        innecesarias de tiempo jugando juegos con su celular, pero el problema viene cuando no puede decidirse cual de todas estas
+        aplicaciones es la que va a descargar.</p>
+        <ol type="A">
+            <li>Crear un sistema que ayude a decidir cuál app descargar</li>
+            <li>La información de los instaladores debe contener la cantidad de descargas, la puntuación y el peso</li>
+            <li>Las apps se deben poder instalar, abrir, cerrar y desinstalar</li>
+        </ol>
+    </div>
+
+    <div class="ask">
+        <button class="btn" onclick="mostrar()">Solución</button>
+    </div>
+
+    <div class="sol" id="main-sol">
+        <h2>Resultado</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="title" colspan="7">DETALLES DE LA APLICACIÓN MOVIL</th>
+                </tr>
+                <tr>
+                    <th>Descargas</th>
+                    <th>Puntuación</th>
+                    <th>Peso</th>
+                    <th colspan="4">Acciones</th>
+                </tr>
+            </thead>
+            <tbody class="mobile" id="mobile">
+                
+            </tbody>
+        </table>
+
+        
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
