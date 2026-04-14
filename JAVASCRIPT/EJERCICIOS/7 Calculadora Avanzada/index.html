@@ -8,43 +8,35 @@
 </head>
 <body>
     <div class="enunciado">
-        <h1 class="title">Ejercicio 6</h1>
-        <p>Cofla ya tiene su nuevo celular y ahora está mirando las aplicaciones del Play Store ya que quiere jugar juegos que sean
-        muy populares, que tengan buena puntuación y que pesen poco, pero las 7 apps que llamaron su atención son un tanto similares
-        y sabe que si se descarga todas, probablemente juegue con todas, pero él se va a descargar solo 2 para tener perdidas
-        innecesarias de tiempo jugando juegos con su celular, pero el problema viene cuando no puede decidirse cual de todas estas
-        aplicaciones es la que va a descargar.</p>
+        <h1 class="title">Ejercicio 7</h1>
+        <p>Cofla ya está terminando el primer semestre del primer ciclo, la tarea que debe realizar es mucho mas avanzada de la que tenía antes, además de suma, resta, multiplicación y división
+        ahora también necesitará calcular potencias, raices cuadradas y cúbicas</p>
         <ol type="A">
-            <li>Crear un sistema que ayude a decidir cuál app descargar</li>
-            <li>La información de los instaladores debe contener la cantidad de descargas, la puntuación y el peso</li>
-            <li>Las apps se deben poder instalar, abrir, cerrar y desinstalar</li>
+            <li>Perfeccionar calculadora para poder implementar las nuevas funciones</li>
         </ol>
     </div>
 
     <div class="ask">
-        <button class="btn" onclick="mostrar()">Solución</button>
+        <span>Solución</span>
+        <ol type="1">
+            <li>Suma</li>
+            <li>Resta</li>
+            <li>Multiplicación</li>
+            <li>División</li>
+            <li>Potencia</li>
+            <li>Raíz Cuadrada</li>
+            <li>Raíz Cúbica</li>
+        </ol>
+        <label for="operacion">¿Que operacion desea realizar?</label>
+        <input type="number" id="operacion" min="1" max="4">
+        <button id="calcular" onclick="calculo()">Calcular</button>
     </div>
 
     <div class="sol" id="main-sol">
         <h2>Resultado</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th class="title" colspan="7">DETALLES DE LA APLICACIÓN MOVIL</th>
-                </tr>
-                <tr>
-                    <th>Descargas</th>
-                    <th>Puntuación</th>
-                    <th>Peso</th>
-                    <th colspan="4">Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="mobile" id="mobile">
-                
-            </tbody>
-        </table>
-
-        
+        <p class="result" id="respuesta">
+            
+        </p>
     </div>
     <script src="main.js"></script>
 </body>

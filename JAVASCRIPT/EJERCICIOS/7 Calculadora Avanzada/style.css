@@ -1,4 +1,3 @@
-/* RESET */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,183 +6,122 @@
 }
 
 body {
-    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
+    background: linear-gradient(135deg, #f4f4f4, #e9ecf3);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* 🔹 CONTENEDOR PRINCIPAL */
-.enunciado {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: 0.3s;
-}
-
-.enunciado:hover {
-    transform: translateY(-3px);
-}
-
-/* 🔹 TITULO */
-.title {
+/* TITULO */
+h1 {
+    margin: 20px 0;
     text-align: center;
-    margin-bottom: 15px;
-    color: #1e3a8a;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-style: italic;
+    color: #333;
 }
 
-/* 🔹 TEXTO */
+/* TARJETAS */
+.enunciado, .ask, .sol {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 15px auto;
+    width: 80%;
+    max-width: 800px;
+
+    /* Sombra suave */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover bonito */
+.enunciado:hover, .ask:hover, .sol:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+}
+
+/* TEXTO */
 .enunciado p {
-    margin: 10px 0;
-    line-height: 1.7;
+    margin-top: 10px;
+    line-height: 1.6;
     color: #555;
 }
 
-/* 🔹 LISTA */
-ol {
-    margin: 15px 25px;
-}
-
-li {
-    margin: 8px 0;
-    color: #444;
-}
-
-/* 🔹 BOTÓN CONTENEDOR */
 .ask {
-    text-align: center;
-    margin-top: 20px;
+    font-size: 18px;
 }
 
-/* 🔥 BOTÓN PRO */
-.btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
-}
-
-.btn:active {
-    transform: scale(0.95);
-}
-
-/* 🔹 RESULTADO */
-.sol {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 18px;
-    background: #fff;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    display: none;
-    animation: aparecer 0.5s ease;
-}
-
-/* 🔹 TITULO RESULTADO */
-.sol h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #1e40af;
-}
-
-/* 🔥 TABLA PRO */
-/* 🔥 TABLA PRO */
-table {
+/* INPUT */
+.ask input {
+    margin-top: 10px;
+    padding: 10px;
     width: 100%;
-    border-collapse: separate; /* 👈 CLAVE */
-    border-spacing: 0;         /* evita espacios raros */
-    border-radius: 12px;
-    overflow: hidden;
-
-    /* 🔵 BORDE GENERAL */
-    border: 1px solid #2563eb;
-    margin: 20px 0;
-}
-
-/* 🔹 ENCABEZADO GENERAL */
-thead {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: #eee;
-}
-
-/* 🔥 TITULO "CARACTERISTICAS" */
-thead .title {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
     font-size: 16px;
-    letter-spacing: 1px;
-    color: #fff;
-    padding: 14px;
-    text-align: center;
-    background: linear-gradient(135deg, #1d4ed8, #2563eb);
-}
-
-/* 🔹 ENCABEZADOS */
-thead th {
-    padding: 12px;
-    text-align: center;
-    font-size: 14px;
-    border-bottom: 1px solid #2563eb; /* línea azul */
-}
-
-/* 🔹 FILAS */
-
-tbody td::first-letter{
-    text-transform: uppercase;
-}
-
-tbody tr {
     transition: 0.2s;
 }
 
-/* 🔥 SEPARADOR ENTRE FILAS */
-tbody td {
+.ask button {
+    margin-top: 15px;
     padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(135deg, #ff2fd2, #ff6ec7);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* HOVER */
+.ask button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(255, 47, 210, 0.3);
+}
+
+/* CLICK */
+.ask button:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 10px rgba(255, 47, 210, 0.2);
+}
+
+.ask input:focus {
+    border-color: #ff2fd2;
+    box-shadow: 0 0 5px rgba(255, 47, 210, 0.3);
+}
+
+/* RESULTADO */
+.sol {
     text-align: center;
-    font-size: 14px;
-
-    /* 🔵 LÍNEA INFERIOR */
-    border-bottom: 1px solid #2563eb;
+    display: none;
 }
 
-/* 🔹 FILAS PARES */
-tbody tr:nth-child(even) {
-    background: #f4f7ff;
+.sol h2 {
+    color: rgb(255, 47, 210);
+    margin-bottom: 10px;
 }
 
-/* 🔹 HOVER */
-tbody tr:hover {
-    background: #eaf1ff;
-    transform: scale(1.01);
+.result {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
 }
 
-/* 🔹 ÚLTIMA FILA SIN BORDE */
-tbody tr:last-child td {
-    border-bottom: none;
+/* LISTAS */
+ol {
+    margin-left: 20px;
+    margin-top: 10px;
 }
 
-/* ANIMACIÓN */
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+li {
+    margin: 5px 0;
 }
