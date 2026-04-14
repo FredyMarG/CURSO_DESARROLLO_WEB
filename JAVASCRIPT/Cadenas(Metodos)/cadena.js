@@ -62,3 +62,15 @@ console.log(resultado);
 resultado = cadena.trimEnd();//elimina los espacios en blanco al final de la cadena
 console.log(resultado)
 
+cadena = "cadena de prueba";
+resultado = cadena.replace("prueba", "ejemplo");//reemplaza el valor dado por el nuevo valor dado
+console.log(resultado); 
+
+resultado = cadena.replaceAll("a", "4");//reemplaza todas las apariciones del valor dado por el nuevo valor dado
+console.log(resultado); 
+
+resultado = cadena.slice(0, 6);//devuelve una parte de la cadena entre los indices dados, similar a substring pero con la diferencia de que acepta indices negativos para contar desde el final de la cadena
+console.log(resultado);
+
+resultado = cadena.valueOf();//devuelve el valor primitivo de la cadena
+console.log(resultado);
