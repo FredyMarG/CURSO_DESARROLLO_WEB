@@ -1,0 +1,189 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
+    min-height: 100vh;
+}
+
+/* 🔹 CONTENEDOR PRINCIPAL */
+.enunciado {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.enunciado:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 TITULO */
+.title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #1e3a8a;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 🔹 TEXTO */
+.enunciado p {
+    margin: 10px 0;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* 🔹 LISTA */
+ol {
+    margin: 15px 25px;
+}
+
+li {
+    margin: 8px 0;
+    color: #444;
+}
+
+/* 🔹 BOTÓN CONTENEDOR */
+.ask {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 🔥 BOTÓN PRO */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* 🔹 RESULTADO */
+.sol {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    display: none;
+    animation: aparecer 0.5s ease;
+}
+
+/* 🔹 TITULO RESULTADO */
+.sol h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+/* 🔥 TABLA PRO */
+/* 🔥 TABLA PRO */
+table {
+    width: 100%;
+    border-collapse: separate; /* 👈 CLAVE */
+    border-spacing: 0;         /* evita espacios raros */
+    border-radius: 12px;
+    overflow: hidden;
+
+    /* 🔵 BORDE GENERAL */
+    border: 1px solid #2563eb;
+    margin: 20px 0;
+}
+
+/* 🔹 ENCABEZADO GENERAL */
+thead {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #eee;
+}
+
+/* 🔥 TITULO "CARACTERISTICAS" */
+thead .title {
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: #fff;
+    padding: 14px;
+    text-align: center;
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+}
+
+/* 🔹 ENCABEZADOS */
+thead th {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+    border-bottom: 1px solid #2563eb; /* línea azul */
+}
+
+/* 🔹 FILAS */
+
+tbody td::first-letter{
+    text-transform: uppercase;
+}
+
+tbody tr {
+    transition: 0.2s;
+}
+
+/* 🔥 SEPARADOR ENTRE FILAS */
+tbody td {
+    padding: 12px;
+    text-align: center;
+    font-size: 14px;
+
+    /* 🔵 LÍNEA INFERIOR */
+    border-bottom: 1px solid #2563eb;
+}
+
+/* 🔹 FILAS PARES */
+tbody tr:nth-child(even) {
+    background: #f4f7ff;
+}
+
+/* 🔹 HOVER */
+tbody tr:hover {
+    background: #eaf1ff;
+    transform: scale(1.01);
+}
+
+/* 🔹 ÚLTIMA FILA SIN BORDE */
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ANIMACIÓN */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
