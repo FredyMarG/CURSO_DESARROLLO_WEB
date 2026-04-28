@@ -1,0 +1,339 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
+    min-height: 100vh;
+}
+
+/* 🔹 CONTENEDOR PRINCIPAL */
+.enunciado {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.enunciado:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 TITULO */
+.title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #1e3a8a;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 🔹 TEXTO */
+.enunciado p {
+    margin: 10px 0;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* 🔹 LISTA */
+ol {
+    margin: 15px 25px;
+}
+
+li {
+    margin: 8px 0;
+    color: #444;
+}
+
+ul > li {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+/* 🔹 BOTÓN CONTENEDOR */
+.ask {
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: 0.3s;
+}
+
+.ask:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔥 BOTÓN PRO */
+.btn {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* 🔹 RESULTADO */
+.sol {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    display: none;
+    animation: aparecer 0.5s ease;
+}
+
+/* 🔹 TITULO RESULTADO */
+.sol h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+.sol > div {
+    margin-top: 15px;
+}
+
+/* 🔹 FORMULARIO */
+form {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 🔹 LABELS */
+form label {
+    font-weight: 600;
+    color: #1e3a8a;
+    font-size: 18px;
+}
+
+/* 🔹 INPUT Y SELECT */
+form input,
+form select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    outline: none;
+    font-size: 15px;
+    transition: 0.3s;
+    background: #f9fafb;
+}
+
+/* 🔥 EFECTO FOCUS PRO */
+form input:focus,
+form select:focus {
+    border-color: #2563eb;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    outline: none;
+}
+
+/* 🔹 PLACEHOLDER */
+form input::placeholder {
+    color: #9ca3af;
+}
+
+/* 🔹 SELECT PERSONALIZADO */
+form select {
+    cursor: pointer;
+}
+
+/* 🔹 BOTÓN DEL FORM (usa tu estilo .btn) */
+form button {
+    align-self: center;
+    margin-top: 10px;
+}
+
+/* 🔥 EFECTO HOVER EN CAMPOS */
+form input:hover,
+form select:hover {
+    border-color: #93c5fd;
+}
+
+/* =========================
+✅ ÉXITO
+========================= */
+.resultado.success {
+    margin-top: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border-left: 5px solid #16a34a;
+    color: #065f46;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 6px 15px rgba(22, 163, 74, 0.15);
+    animation: aparecer 0.4s ease;
+}
+
+.resultado.success b {
+    color: #15803d;
+}
+
+
+/* =========================
+⚠️ WARNING
+========================= */
+.resultado.warning {
+    margin-top: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fffbeb, #fef3c7);
+    border-left: 5px solid #f59e0b;
+    color: #92400e;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 6px 15px rgba(245, 158, 11, 0.15);
+    animation: aparecer 0.4s ease;
+}
+
+.resultado.warning b {
+    color: #b45309;
+}
+
+
+/* =========================
+❌ ERROR
+========================= */
+.resultado.error {
+    margin-top: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    border-left: 5px solid #dc2626;
+    color: #7f1d1d;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 6px 15px rgba(220, 38, 38, 0.15);
+    animation: aparecer 0.4s ease;
+}
+
+.resultado.error b {
+    color: #b91c1c;
+}
+
+
+/* =========================
+🔵 INFO
+========================= */
+.resultado.info {
+    margin-top: 15px;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    border-left: 5px solid #2563eb;
+    color: #1e3a8a;
+    font-size: 16px;
+    line-height: 1.6;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.15);
+    animation: aparecer 0.4s ease;
+}
+
+.resultado.info b {
+    color: #1d4ed8;
+}
+
+
+/* 🔹 BLOQUES BEFORE Y AFTER */
+.before,
+.after {
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: #f9fafb;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    transition: 0.3s;
+}
+
+/* 🔥 EFECTO HOVER */
+.before:hover,
+.after:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 BEFORE (estado anterior) */
+.before {
+    border-left: 5px solid #94a3b8;
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    color: #374151;
+}
+
+/* 🔹 AFTER (estado actualizado) */
+.after {
+    border-left: 5px solid #22c55e;
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+}
+
+/* 🔹 TITULOS INTERNOS (si usas <p>) */
+.before p,
+.after p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 🔹 LISTAS */
+.before ul,
+.after ul {
+    padding-left: 20px;
+}
+
+.before li,
+.after li {
+    margin: 6px 0;
+    color: #374151;
+    font-size: 14px;
+}
+
+/* 🔥 ALUMNO NUEVO DESTACADO */
+.after li[style]{
+    color: #15803d !important;
+    font-weight: bold;
+}
+
+/* 🔁 ALUMNO EXISTENTE DESTACADO*/
+.before li[style]{
+    color: #c2410c !important;
+    font-weight: bold;
+}
+
+/* ANIMACIÓN */
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 10</title>
+</head>
+
+<body>
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 10</h1>
+        <p>
+            Cofla ya vió las 12 materias y se decidió en cual se va a inscribir así
+            que en tres días lo hará, el problema es que se rompió el sistema de
+            inscripciones.
+        </p>
+        <ol type="A">
+            <li>
+                Crear una función para preguntarle al alumno en que materia se quiere
+                inscribir.
+            </li>
+            <li>
+                Si ya hay 20 alumnos anotados en la materia negarle la inscripción.
+            </li>
+            <li>
+                Si hay menos de 20 alumnos inscribir al alumno y añadirlo a la lista de
+                alumnos.
+            </li>
+        </ol>
+    </div>
+
+    <div class="ask">
+        <form action="" id="inscripcion-form">
+            <label for="nombre">Nombre del alumno:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" />
+
+            <label for="materia">Materia que desea inscribir:</label>
+            <select id="materia" name="materia">
+                <option selected disabled>Seleccione una opción</option>
+                <option value="matematicas">Matemáticas</option>
+                <option value="fisica">Física</option>
+                <option value="quimica">Química</option>
+                <option value="programacion">Programación</option>
+                <option value="bases_datos">Bases de Datos</option>
+                <option value="logica">Lógica</option>
+                <option value="estadistica">Estadística</option>
+                <option value="algebra">Álgebra</option>
+                <option value="calculo">Cálculo</option>
+                <option value="inteligencia_artificial">
+                    Inteligencia Artificial
+                </option>
+                <option value="redes">Redes</option>
+                <option value="sistemas_operativos">Sistemas Operativos</option>
+            </select>
+
+            <button type="submit" class="btn" id="inscribir-btn">Inscribirse</button>
+        </form>
+    </div>
+
+    <div class="sol" id="main-sol">
+        <h2>Resultado</h2>
+        <div id="resultado"></div>
+        <div class="before" id="before"></div>
+        <div class="after" id="after"></div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
