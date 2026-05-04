@@ -1,149 +1,142 @@
-// 🔹 Traemos los elementos del DOM (inputs, contenedores, etc)
-let nombre = document.getElementById("nombre"), // input donde el usuario escribe su nombre
-    mat = document.getElementById("materia"), // select donde elige la materia
-    sol = document.getElementById("main-sol"), // contenedor principal del resultado
-    resultado = document.getElementById("resultado"), // donde mostramos mensajes (éxito/error)
-    form = document.getElementById("inscripcion-form"), // formulario completo
-    before = document.getElementById("before"), // donde mostramos la lista antes
-    after = document.getElementById("after") // donde mostramos la lista después
+const result = document.getElementById("resultado");
 
-
-// 🔥 IMPORTANTE: el objeto está fuera de la función para que NO se reinicie cada vez
+//Materias es un objeto que contiene cada materia como clave y un objeto con asistencias, promedio y trabajos como valor
 const materias = {
-    matematicas: ['Carlos', 'Juan', 'Pedro', 'Maria', 'Luisa', 'Andres', 'Sofia', 'Diego', 'Camila'],
-    fisica: ['Laura', 'Pedro', 'Andres', 'Juan', 'Valentina', 'Sofia', 'Mateo', 'Camila', 'Daniel'],
-    quimica: ['Andres', 'Maria', 'Juan', 'Santiago', 'Camila', 'Valentina', 'Diego', 'Luisa', 'Mateo'],
-    programacion: ['Diego', 'Carlos', 'Juan', 'Sofia', 'Mateo', 'Andres', 'Camila', 'Pedro', 'Valentina'],
-    bases_datos: ['Sofia', 'Maria', 'Pedro', 'Juan', 'Luisa', 'Daniel', 'Andres', 'Mateo', 'Camila'],
-    logica: ['Mateo', 'Juan', 'Pedro', 'Sofia', 'Camila', 'Andres', 'Valentina', 'Maria', 'Daniel'],
-    estadistica: ['Valentina', 'Santiago', 'Juan', 'Pedro', 'Camila', 'Sofia', 'Mateo', 'Luisa', 'Andres'],
-    algebra: ['Daniel', 'Juan', 'Maria', 'Pedro', 'Sofia', 'Camila', 'Andres', 'Mateo', 'Luisa'],
-    calculo: ['Santiago', 'Pedro', 'Juan', 'Valentina', 'Camila', 'Sofia', 'Mateo', 'Andres', 'Maria'],
-    inteligencia_artificial: ['Camila', 'Juan', 'Pedro', 'Sofia', 'Mateo', 'Andres', 'Valentina', 'Maria', 'Diego'],
-    redes: ['Juan', 'Pedro', 'Andres', 'Sofia', 'Camila', 'Mateo', 'Valentina', 'Daniel', 'Luisa'],
-    sistemas_operativos: ['Pedro', 'Juan', 'Maria', 'Sofia', 'Camila', 'Mateo', 'Andres', 'Valentina', 'Diego']
+    fisica: {asistencias: 0, promedio: 0, trabajos: 0},
+    matematica: {asistencias: 0, promedio: 0, trabajos: 0},
+    logica: {asistencias: 0, promedio: 0, trabajos: 0},
+    quimica: {asistencias: 0, promedio: 0, trabajos: 0},
+    calculo: {asistencias: 0, promedio: 0, trabajos: 0},
+    programacion: {asistencias: 0, promedio: 0, trabajos: 0},
+    biologia: {asistencias: 0, promedio: 0, trabajos: 0},
+    bd: {asistencias: 0, promedio: 0, trabajos: 0},
+    algebra: {asistencias: 0, promedio: 0, trabajos: 0}
+};
+
+
+
+// 🔥 consola dinámica
+// Esta función se encarga de renderizar el estado actual de las materias en la consola, mostrando claramente qué requisitos se cumplen y cuáles no a partir de los datos proporcionados en el HTML.
+function renderConsola() {
+    // Limpiar consola para evitar saturación de mensajes
+    console.clear();
+
+    // El objecto "materias" se recorre con Object.entries para obtener el nombre de cada materia y sus datos asociados (asistencias, promedio, trabajos).
+    Object.entries(materias).forEach(([nombre, data]) => {
+
+        // Se utiliza console.group para agrupar los mensajes relacionados con cada materia bajo un título que es el nombre de la materia. Esto mejora la legibilidad y organización de la información en la consola.
+        console.group(`📘 ${nombre}`);
+
+        // Para cada criterio (asistencias, promedio, trabajos), se evalúa si cumple con el requisito mínimo. Se muestra un mensaje con un ícono de check (✔) si se cumple o una cruz (✘) si no se cumple. Además, se aplica un estilo de color verde para los criterios cumplidos y rojo para los que no se cumplen, utilizando CSS en la consola.
+        console.log(
+
+            // El mensaje se construye utilizando un operador ternario para decidir qué texto mostrar y qué color aplicar según si el criterio se cumple o no.
+            data.asistencias >= 90 ? "%c✅ Asistencia OK" : "%c❌ Asistencia baja",`color:${data.asistencias >= 90 ? "green" : "red"}; margin-left: 20px; font-weight: bold;`
+        );
+
+        // Se repite el mismo patrón para el promedio y los trabajos, evaluando cada uno contra su respectivo umbral (promedio >= 7 y trabajos >= 3) y aplicando estilos similares para indicar visualmente el estado de cada criterio.
+        console.log(
+
+            // Para el promedio, se verifica si es mayor o igual a 7 para determinar si está aprobado o no, mostrando el mensaje correspondiente con el estilo adecuado.
+            data.promedio >= 7 ? "%c✅ Promedio OK" : "%c❌ Promedio bajo",
+            `color:${data.promedio >= 7 ? "green" : "red"}; margin-left: 20px; font-weight: bold;`
+        );
+
+        console.log(
+
+            // Para los trabajos, se verifica si se han entregado al menos 3 de los 4 trabajos requeridos, mostrando el mensaje correspondiente con el estilo adecuado.
+            data.trabajos >= 3 ? "%c✅ Trabajos OK" : "%c❌ Trabajos incompletos",
+            `color:${data.trabajos >= 3 ? "green" : "red"}; margin-left: 20px; font-weight: bold;`
+        );
+
+        // Finalmente, se cierra el grupo de mensajes para esa materia con console.groupEnd, lo que ayuda a mantener la consola organizada y fácil de leer.
+        console.groupEnd();
+    });
+    // Al finalizar el recorrido de todas las materias, se muestra una tabla resumen con el estado actual de todas las materias utilizando console.table, lo que proporciona una vista estructurada y clara de los datos ingresados.
+    console.table(materias);
 }
 
+// 🔄 UI dinámica
 
-// 🔹 Función principal que se ejecuta al enviar el formulario
-function solucion(e) {
-    e.preventDefault() // evita que el form recargue la página
+// Se recorre el objeto "materias" utilizando Object.entries para obtener el nombre de cada materia y sus datos asociados.
+Object.entries(materias).forEach(([nombre, data]) => {
 
-    // 🔹 mostramos el contenedor de resultados (por si estaba oculto)
-    sol.style.display = "block"
+    // Se crea un elemento div para representar la fila de cada materia, y se le asigna la clase "fila" para aplicar estilos específicos a esta sección de la interfaz.
+    const fila = document.createElement("div");
 
-    // 🔹 obtenemos los valores actuales del input y select
-    let alumno = nombre.value.trim() // trim elimina espacios vacíos al inicio y final
-    let materia = mat.value // obtenemos la materia seleccionada
+    // Se asigna la clase "fila" al div creado, lo que permite aplicar estilos CSS definidos para esta clase, como diseño, colores y espaciado, asegurando que cada fila de materia tenga una apariencia consistente y organizada en la interfaz de usuario.
+    fila.classList.add("fila");
 
-    // 🔹 VALIDACIÓN: si algún campo está vacío, mostramos mensaje y detenemos ejecución
-    if (alumno === "" || materia === "") {
-        resultado.innerHTML = "🚨 Por favor, completa todos los campos."
-        before.innerHTML = ""
-        after.innerHTML = ""
-        before.style.display = "none"
-        after.style.display = "none"
-        resultado.className = "resultado error"
-        return // corta la ejecución
+    // El contenido HTML de cada fila se construye utilizando una plantilla literal, que incluye el nombre de la materia, tres campos de entrada para las asistencias, el promedio y los trabajos, y un span para mostrar el estado (aprobado o reprobado). Cada campo de entrada tiene atributos específicos para limitar los valores que el usuario puede ingresar, como el tipo de dato, el paso, el rango mínimo y máximo, y un placeholder para guiar al usuario sobre qué información debe ingresar.
+    fila.innerHTML = `
+        <span class="main-span">📘<span class="nombre">${nombre}</span></span>
+        <input type="number" step="0.01" min="0" max="100" placeholder="Asistencia (0% - 100%)">
+        <input type="number" step="0.01" min="0" max="10" placeholder="Promedio (0 - 10)">
+        <input type="number" step="1" min="0" max="4" placeholder="Trabajos (0 - 4)">
+        <span class="estado"></span>
+    `;
+
+    // Se seleccionan los elementos de entrada y el span de estado dentro de la fila utilizando querySelectorAll y querySelector, respectivamente. Esto permite acceder a estos elementos para agregarles funcionalidad y actualizar su contenido dinámicamente en función de los datos ingresados por el usuario.
+    const inputs = fila.querySelectorAll("input");
+    const estado = fila.querySelector(".estado");
+
+    // 🔥 validadores
+
+    // La función limitarDecimales se encarga de limitar el número de decimales de un valor numérico a un máximo especificado (por defecto, 2 decimales). Esto es útil para asegurar que los valores ingresados por el usuario se mantengan dentro de un formato adecuado y no tengan más decimales de los necesarios, lo que puede mejorar la legibilidad y evitar errores en los cálculos posteriores.
+    function limitarDecimales(valor, maxDecimales = 2) {
+        return Number(parseFloat(valor || 0).toFixed(maxDecimales));
     }
 
-    // 🔹 obtenemos el array de alumnos de la materia seleccionada
-    let alumnos = materias[materia]
-
-    // 🔥 BEFORE (ANTES DE INSCRIBIR)
-    before.innerHTML = `
-        <p>📘 Antes (${alumnos.length} alumnos):</p>
-        <ul>
-            ${
-                alumnos.map(a => `<li>👤 ${a}</li>`).join("")
-                // alumnos.map recorre el array y transforma cada alumno en un <li>
-                // join("") une todos los elementos en un solo string para renderizar HTML correctamente
-            }
-        </ul>
-    `
-
-    // 🔹 VALIDAR CUPO: si hay 20 alumnos o más, no se puede inscribir
-    if (alumnos.length >= 20) {
-        resultado.innerHTML = `❌ Lo siento <b>${alumno}</b>, cupo lleno en <b>${materia}</b>`
-        before.innerHTML = `
-            <p>📘 Antes (${alumnos.length} alumnos):</p>
-            <ul>
-                ${
-                    alumnos.map(a => `<li>👤 ${a}</li>`).join("")
-                    // alumnos.map recorre el array y transforma cada alumno en un <li>
-                    // join("") une todos los elementos en un solo string para renderizar HTML correctamente
-                }
-            </ul>
-        `
-        after.innerHTML = ""
-        after.style.display = "none"
-        resultado.className = "resultado error"
-            // 🔹 limpiamos el formulario
-        setTimeout(() => {
-            form.reset() // limpia los campos del formulario
-        }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
-        return
+    // La función soloEnteros se encarga de convertir un valor a un número entero, eliminando cualquier parte decimal. Esto es útil para campos donde solo se permiten números enteros, como la cantidad de trabajos entregados, asegurando que el usuario no pueda ingresar valores decimales en ese campo específico.
+    function soloEnteros(valor) {
+        return Math.floor(Number(valor || 0));
     }
 
-    // 🔹 VALIDAR DUPLICADOS: evita que el mismo alumno se inscriba dos veces
-    if (alumnos.includes(alumno)) { //alumnos.includes verifica si el alumno ya está en el array de la materia
-        resultado.innerHTML = `⚠️ <b>${alumno.replace(/\b\w/g, l => l.toUpperCase())}</b> ya está inscrito en <b>${materia.replace(/\b\w/g, l => l.toUpperCase())}</b>`
-            before.innerHTML = `
-            <p>📘 ${alumnos.length} alumnos:</p>
-            <ul>
-                ${
-                    alumnos.map(a => `<li ${a === alumno ? 'style="color:#2563eb;font-weight:bold; font-size-16px;"' : ''}>👤 ${a.replace(/\b\w/g, l => l.toUpperCase())}</li>`).join("")
-                    // alumnos.map recorre el array y transforma cada alumno en un <li>
-                    // join("") une todos los elementos en un solo string para renderizar HTML correctamente
-                }
-            </ul>
-        `
-        resultado.className = "resultado warning"
-        after.innerHTML = ""
-        after.style.display = "none"
-        // 🔹 limpiamos el formulario
-        setTimeout(() => {
-            form.reset() // limpia los campos del formulario
-        }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
-        return
+    // La función actualizar se encarga de leer los valores ingresados por el usuario en los campos de entrada, aplicar las validaciones correspondientes (limitar decimales para asistencias y promedio, y convertir a enteros para trabajos)
+    function actualizar() {
+
+        // Se obtienen los valores de asistencias, promedio y trabajos desde los campos de entrada, aplicando las funciones de validación para asegurar que los datos sean correctos y estén en el formato adecuado antes de ser utilizados para actualizar el estado de la materia.
+        let asistencias = limitarDecimales(inputs[0].value, 2);
+        let promedio = limitarDecimales(inputs[1].value, 2);
+        let trabajos = soloEnteros(inputs[2].value);
+
+        // 💥 forzar visualmente el valor corregido
+        // Después de aplicar las validaciones, se actualizan los valores en los campos de entrada para reflejar cualquier corrección realizada por las funciones de validación. Esto proporciona una retroalimentación visual inmediata al usuario sobre los valores que ha ingresado y cómo han sido ajustados para cumplir con los requisitos establecidos.
+        inputs[0].value = asistencias;
+        inputs[1].value = promedio;
+        inputs[2].value = trabajos;
+
+        // guardar
+        // Los valores validados se asignan al objeto "data" correspondiente a la materia actual, actualizando así el estado de la materia con los datos ingresados por el usuario. Esto permite que la función renderConsola pueda acceder a estos datos actualizados para mostrar el estado correcto de cada materia en la consola.
+        data.asistencias = asistencias;
+        data.promedio = promedio;
+        data.trabajos = trabajos;
+
+        // estado UI
+        // Se evalúan los criterios de aprobación para la materia (asistencias >= 90%, promedio >= 7, trabajos >= 3) y se actualiza el contenido del span de estado para mostrar si la materia está aprobada o reprobada. Además, se aplican clases CSS a la fila y al estado para cambiar su apariencia visual según si se cumplen o no los requisitos, proporcionando una indicación clara y visual del estado de cada materia en la interfaz de usuario.
+        if (asistencias >= 90 && promedio >= 7 && trabajos >= 3) {
+            estado.textContent = "✅ Aprobado";
+            estado.className = "estado aprobado";
+            fila.className = "fila aprobado";
+        } else {
+            estado.textContent = "❌ Reprobado";
+            estado.className = "estado reprobado";
+            fila.className = "fila reprobado";
+        }
+
+        // Finalmente, se llama a la función renderConsola para actualizar la consola con el estado actual de todas las materias cada vez que se realiza un cambio en los campos de entrada, asegurando que la información mostrada en la consola esté siempre sincronizada con los datos ingresados por el usuario.
+        renderConsola();
     }
 
+    // ✅ listeners
+    // Se agrega un event listener de tipo "input" a cada campo de entrada para que la función actualizar se ejecute cada vez que el usuario realice un cambio en cualquiera de los campos. Esto permite que la interfaz de usuario y la consola se actualicen dinámicamente en tiempo real a medida que el usuario ingresa o modifica los datos, proporcionando una experiencia interactiva y responsiva.
+    inputs.forEach(inp => {
+        inp.addEventListener("input", actualizar);
+    });
 
-    // 🔥 INSCRIPCIÓN: agregamos el alumno al array
-    alumnos.push(alumno)
-    // push agrega el nuevo alumno al final del array
+    // Se llama a la función actualizar inicialmente para establecer el estado inicial de la materia en la interfaz de usuario y en la consola, asegurando que todo esté sincronizado desde el principio incluso antes de que el usuario realice cualquier cambio.
+    actualizar();
 
-    // 🔥 AFTER (DESPUÉS DE INSCRIBIR)
-    after.innerHTML = `
-        <p>📘 Después (${alumnos.length} alumnos):</p>
-        <ul>
-            ${
-                alumnos.map(a => 
-                    `<li ${a === alumno ? 'style="color:green;font-weight:bold; font-size:16px;"' : ''}>
-                        👤 ${a.replace(/\b\w/g, l => l.toUpperCase())}
-                    </li>`
-                ).join("")
-                // map recorre todos los alumnos
-                // si el alumno actual es el recién agregado → lo resalta en verde
-                // join("") convierte el array en HTML válido
-            }
-        </ul>
-    `
-
-    // 🔹 MENSAJE FINAL
-    resultado.className = "resultado success"
-    resultado.innerHTML = `✅ <b>${alumno.replace(/\b\w/g, l => l.toUpperCase())}</b> fue inscrito en <b>${materia.replace(/\b\w/g, l => l.toUpperCase())}</b>`
-    after.style.display = "block"
-    before.style.display = "block"
-    
-    // 🔹 limpiamos el formulario
-    setTimeout(() => {
-        form.reset() // limpia los campos del formulario
-    }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
-}
-
-
-// 🔥 EVENTO PRINCIPAL
-form.addEventListener("submit", solucion)
-// escuchamos el evento submit del formulario
-// cuando el usuario da click o presiona enter → se ejecuta solucion()
+    // Finalmente, se agrega la fila creada para la materia al contenedor de resultados en la interfaz de usuario, lo que permite que cada materia tenga su propia sección visual donde el usuario puede ingresar los datos y ver el estado correspondiente.
+    result.appendChild(fila);
+});

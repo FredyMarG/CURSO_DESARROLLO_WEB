@@ -12,60 +12,44 @@
     <div class="enunciado">
         <h1 class="title">Ejercicio 10</h1>
         <p>
-            Cofla ya vió las 12 materias y se decidió en cual se va a inscribir así
-            que en tres días lo hará, el problema es que se rompió el sistema de
-            inscripciones.
+            Terminó el primer semestre y cofla no sabe si aprobará o no las materias, para lograrlo necesitará:
+            <ul>
+                <li>Contar con al menos el 90% de asistencia.</li>
+                <li>Obtener un promedio de al menos 7 / 10 en cada materia.</li>
+                <li>Entregar al menos el 75% de los trabajos prácticos.</li>
+            </ul>
         </p>
         <ol type="A">
             <li>
-                Crear una función para preguntarle al alumno en que materia se quiere
-                inscribir.
+                Solicitar los datos y decirle si aprueba o no.
             </li>
             <li>
-                Si ya hay 20 alumnos anotados en la materia negarle la inscripción.
-            </li>
-            <li>
-                Si hay menos de 20 alumnos inscribir al alumno y añadirlo a la lista de
-                alumnos.
+                Mostrar todo esto con colores representativos en consola (ej: Reprobado en rojo)
             </li>
         </ol>
     </div>
 
     <div class="ask">
-        <form action="" id="inscripcion-form">
-            <label for="nombre">Nombre del alumno:</label>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" />
-
-            <label for="materia">Materia que desea inscribir:</label>
-            <select id="materia" name="materia">
-                <option selected disabled>Seleccione una opción</option>
-                <option value="matematicas">Matemáticas</option>
-                <option value="fisica">Física</option>
-                <option value="quimica">Química</option>
-                <option value="programacion">Programación</option>
-                <option value="bases_datos">Bases de Datos</option>
-                <option value="logica">Lógica</option>
-                <option value="estadistica">Estadística</option>
-                <option value="algebra">Álgebra</option>
-                <option value="calculo">Cálculo</option>
-                <option value="inteligencia_artificial">
-                    Inteligencia Artificial
-                </option>
-                <option value="redes">Redes</option>
-                <option value="sistemas_operativos">Sistemas Operativos</option>
-            </select>
-
-            <button type="submit" class="btn" id="inscribir-btn">Inscribirse</button>
-        </form>
+        <h2>Promedio Materias</h2>
+        <p>
+            Para cada materia, ingresa el porcentaje de asistencias, el promedio y la cantidad de trabajos prácticos entregados siendo un total de 4 por materia.
+        </p>
+        <span style="font-style: italic ; font-size: medium;">Revisa la consola (Ctrl + Shift + I)</span>
     </div>
 
-    <div class="sol" id="main-sol">
+    <div class="sol" style="display: block;" id="main-sol">
         <h2>Resultado</h2>
-        <div id="resultado"></div>
-        <div class="before" id="before"></div>
-        <div class="after" id="after"></div>
+        <div class="label">
+            <span>Materia</span>
+            <span>Asistencia (0% - 100%)</span>
+            <span>Promedio (0 - 10)</span>
+            <span>Trabajos Prácticos (0 - 4)</span>
+            <span>Estado</span>
+        </div>
+        <div id="resultado" class="resultado"></div>
     </div>
     <script src="main.js"></script>
+
 </body>
 
 </html>
