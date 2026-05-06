@@ -1,0 +1,252 @@
+/* RESET */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
+    min-height: 100vh;
+}
+
+/* 🔹 CONTENEDOR PRINCIPAL */
+.enunciado {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.enunciado:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 TITULO */
+.title {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #1e3a8a;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* 🔹 TEXTO */
+.enunciado p {
+    margin: 10px 0;
+    line-height: 1.7;
+    color: #555;
+}
+
+/* 🔹 LISTA */
+ul {
+    list-style-type: none;
+    padding-left: 40px;
+}
+
+ul>li {
+    position: relative;
+    padding-left: 20px;
+    margin: 8px 0;
+    color: #444;
+    line-height: 1.6;
+}
+
+ul>li::before {
+    content: '●';
+    color: #2563eb;
+    font-size: 18px;
+    position: absolute;
+    left: 0;
+    top: -3px;
+}
+
+ol {
+    list-style-type: none;
+    counter-reset: item;
+    padding-left: 0;
+    margin: 15px 0;
+}
+
+ol>li {
+    counter-increment: item;
+    position: relative;
+    padding-left: 20px;
+    margin: 8px 0;
+    color: #444;
+    line-height: 1.6;
+}
+
+ol>li::before {
+    content: counter(item) '.';
+    color: #2563eb;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+li {
+    margin: 8px 0;
+    color: #444;
+}
+
+/* 🔹 BOTÓN CONTENEDOR */
+.ask {
+    text-align: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.ask h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.ask p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.ask span {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.ask:hover {
+    transform: translateY(-3px);
+}
+
+/* 🔹 RESULTADO */
+.sol {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 TITULO RESULTADO */
+.sol h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e40af;
+}
+
+.sol > div {
+    margin-top: 20px;
+}
+
+/* 📦 SEMANA */
+details.week {
+    background: #f4f6f8;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+details.week:hover {
+    transform: scale(1.01);
+}
+
+/* 🔽 TITULO SEMANA */
+summary {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: #4a90e2; /* azul suave */
+}
+
+/* 📅 CONTENEDOR */
+.dias {
+    margin-top: 10px;
+}
+
+/* 📌 TARJETA DÍA */
+.dia {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 10px 0;
+    transition: all 0.25s ease;
+
+    /* animación suave */
+    opacity: 0;
+    transform: translateY(10px);
+    animation: aparecer 0.4s forwards;
+}
+
+/* ✨ HOVER */
+.dia:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+/* 📝 TEXTO */
+.dia h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.dia small {
+    color: #777;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.dia p {
+    margin: 2px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ========================= */
+/* 🎯 COLORES PASTEL */
+/* ========================= */
+
+/* 🟢 suave */
+.green {
+    border-left: 6px solid #a8e6cf;
+    background: #f0fff7;
+}
+
+/* 🟠 suave */
+.orange {
+    border-left: 6px solid #ffd3b6;
+    background: #fff7f2;
+}
+
+/* 🔴 suave */
+.red {
+    border-left: 6px solid #ffaaa5;
+    background: #fff2f2;
+}
+
+/* ========================= */
+/* ✨ ANIMACIÓN */
+/* ========================= */
+
+@keyframes aparecer {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
