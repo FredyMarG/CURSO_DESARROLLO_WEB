@@ -28,7 +28,7 @@ for (let i = 0; i < 14; i++) {
             <details class="week">
                 <summary>Semana ${numeroSemana}</summary>
                 <div class="dias"></div>
-            </details>
+            </details>  
         `;
     }
 
