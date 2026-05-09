@@ -134,12 +134,15 @@ Incluye:
 ## 1️⃣2️⃣ Propiedades de Parents (Padres)
 
 * parentElement
+* parentNode
 * Relación padre e hijo
 
 ---
 
 ## 1️⃣3️⃣ Propiedades de Siblings (Hermanos)
 
+* nextSibling
+* previousSibling
 * nextElementSibling
 * previousElementSibling
 
@@ -2833,26 +2836,310 @@ div.children
 
 ---
 
-# 👨 PARENTS
+# 👨 PARENTS (PADRES)
 
-# parentElement
+## 🧠 ¿Qué son?
 
-## 🧠 Obtiene el padre
+Los parents son:
 
-```js
-hijo.parentElement
+```txt
+👨 Elementos superiores
+```
+
+Es decir:
+
+> El elemento que contiene a otro elemento.
+
+---
+
+# 📊 REPRESENTACIÓN VISUAL
+
+```txt
+📦 div
+└── 🔘 button
 ```
 
 ---
 
-# 👨‍👩‍👧 SIBLINGS
+# 🧠 RELACIÓN
+
+| Elemento | Rol      |
+| -------- | -------- |
+| div      | 👨 Padre |
+| button   | 👶 Hijo  |
+
+---
+
+# parentElement
+
+## 🧠 ¿Qué hace?
+
+Obtiene el elemento padre HTML.
+
+---
+
+# ✅ EJEMPLO
+
+```js
+const boton = document.querySelector("button")
+
+console.log(boton.parentElement)
+```
+
+---
+
+# 📊 RESULTADO
+
+```txt
+📦 div
+```
+
+---
+
+# ⚠️ IMPORTANTE
+
+parentElement:
+
+✅ Devuelve elementos HTML
+❌ Ignora otros nodos
+
+---
+
+# parentNode
+
+## 🧠 ¿Qué hace?
+
+Obtiene el nodo padre.
+
+---
+
+# 🧠 DIFERENCIA IMPORTANTE
+
+Mientras:
+
+```txt
+parentElement
+```
+
+solo obtiene:
+
+```txt
+🧱 Elementos HTML
+```
+
+parentNode puede obtener:
+
+```txt
+📄 document
+📝 textos
+💬 comentarios
+🧱 HTML
+```
+
+---
+
+# ✅ EJEMPLO
+
+```js
+console.log(boton.parentNode)
+```
+
+---
+
+# 📊 DIFERENCIA VISUAL
+
+| Propiedad     | Devuelve       |
+| ------------- | -------------- |
+| parentElement | Solo HTML      |
+| parentNode    | Cualquier nodo |
+
+---
+
+# 🚀 ¿CUÁL SE USA MÁS?
+
+✅ parentElement
+
+Porque normalmente trabajamos con HTML.
+
+---
+
+# 👨‍👩‍👧 SIBLINGS (HERMANOS)
+
+## 🧠 ¿Qué son?
+
+Los siblings son:
+
+```txt
+👨‍👩‍👧 Elementos al mismo nivel
+```
+
+Es decir:
+
+> Elementos que tienen el mismo padre.
+
+---
+
+# 📊 REPRESENTACIÓN VISUAL
+
+```txt
+📦 div
+├── 📄 p
+├── 🔘 button
+└── 🖼️ img
+```
+
+Todos son hermanos.
+
+---
+
+# nextSibling
+
+## 🧠 ¿Qué hace?
+
+Obtiene el siguiente nodo hermano.
+
+---
+
+# ⚠️ IMPORTANTE
+
+Puede devolver:
+
+```txt
+📝 textos
+💬 comentarios
+🧱 HTML
+```
+
+---
+
+# ✅ EJEMPLO
+
+```js
+console.log(parrafo.nextSibling)
+```
+
+---
+
+# 📊 POSIBLE RESULTADO
+
+```txt
+📝 #text
+```
+
+---
+
+# 😱 ¿POR QUÉ?
+
+Porque los espacios y saltos de línea:
+
+```txt
+TAMBIÉN SON NODOS
+```
+
+---
+
+# previousSibling
+
+## 🧠 ¿Qué hace?
+
+Obtiene el nodo hermano anterior.
+
+---
+
+# ✅ EJEMPLO
+
+```js
+console.log(button.previousSibling)
+```
+
+---
+
+# ⚠️ IMPORTANTE
+
+También puede devolver:
+
+```txt
+📝 texto
+💬 comentario
+```
+
+---
 
 # nextElementSibling
 
-## 🧠 Obtiene el hermano siguiente
+## 🧠 ¿Qué hace?
+
+Obtiene el siguiente elemento HTML hermano.
+
+---
+
+# ✅ EJEMPLO
 
 ```js
-elemento.nextElementSibling
+console.log(parrafo.nextElementSibling)
+```
+
+---
+
+# 📊 RESULTADO
+
+```txt
+🔘 button
+```
+
+---
+
+# previousElementSibling
+
+## 🧠 ¿Qué hace?
+
+Obtiene el elemento HTML hermano anterior.
+
+---
+
+# ✅ EJEMPLO
+
+```js
+console.log(button.previousElementSibling)
+```
+
+---
+
+# 📊 RESULTADO
+
+```txt
+📄 p
+```
+
+---
+
+# 📊 DIFERENCIA CLAVE
+
+| Propiedad              | Devuelve       |
+| ---------------------- | -------------- |
+| nextSibling            | Cualquier nodo |
+| previousSibling        | Cualquier nodo |
+| nextElementSibling     | Solo HTML      |
+| previousElementSibling | Solo HTML      |
+
+---
+
+# 🚀 ¿CUÁL DEBERÍAS USAR?
+
+✅ nextElementSibling
+✅ previousElementSibling
+
+Porque normalmente queremos:
+
+```txt
+Elementos HTML reales
+```
+
+Y NO:
+
+```txt
+📝 Saltos de línea
+💬 Comentarios
 ```
 
 ---
