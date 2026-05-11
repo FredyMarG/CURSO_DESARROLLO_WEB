@@ -22,7 +22,6 @@
    * scrollX
    * scrollY
 6. Métodos de scroll
-
    * scroll()
    * scrollTo()
    * scrollBy()
@@ -31,19 +30,11 @@
  9. Optimización de rendimiento (PRO)
  10. Intersection Observer API
  11. Accesibilidad y Movimiento Reducido
- 12. Resize y Move
-
-   * resizeTo()
-   * resizeBy()
-   * moveTo()
-   * moveBy()
-   * minimize()
- 13. Casos reales
- 14. Errores comunes
- 15. Buenas prácticas PRO
- 16. Debugging
- 17. Mini proyecto práctico
- 18. Resumen final
+ 12. Errores comunes
+ 13. Debugging
+ 14. Mini proyecto práctico
+ 15. Resumen final
+ 16. Conclusión
 
 ---
 
@@ -647,186 +638,6 @@ window.scrollTo({
     behavior: prefersReducedMotion.matches ? "auto" : "smooth"
 });
 ```
-
----
-
-# 🪟 RESIZE Y MOVE
-
----
-
-# 📐 `resizeTo()`
-
-Redimensiona la ventana a un tamaño exacto.
-
----
-
-# ✅ Ejemplo
-
-```js
-window.resizeTo(800, 600)
-```
-
----
-
-# 📌 Parámetros
-
-| Parámetro | Significado |
-| --------- | ----------- |
-| 800       | ancho       |
-| 600       | alto        |
-
----
-
-# ⚠️ IMPORTANTE
-
-Solo funciona en ventanas abiertas con `window.open()`.
-
----
-
-# 📐 `resizeBy()`
-
-Cambia el tamaño relativo a la ventana actual.
-
----
-
-# ✅ Ejemplo
-
-```js
-window.resizeBy(100, 50)
-```
-
----
-
-# 🧠 VISUAL
-
-```txt
-Ventana actual: 1000x600
-            ↓
-window.resizeBy(100, 50)
-            ↓
-Nueva ventana: 1100x650
-```
-
----
-
-# 📍 `moveTo()`
-
-Mueve la ventana a una posición absoluta.
-
----
-
-# ✅ Ejemplo
-
-```js
-window.moveTo(100, 200)
-```
-
----
-
-# 📌 Parámetros
-
-| Parámetro | Significado |
-| --------- | ----------- |
-| 100       | píxeles x   |
-| 200       | píxeles y   |
-
----
-
-# 🧠 VISUAL
-
-```txt
-(0,0) ┌─ PANTALLA ─────┐
-      │                │
-      │ (100,200)      │
-      │ ┌─ VENTANA ─┐  │
-      │ │           │  │
-      │ │           │  │
-      │ └───────────┘  │
-      └────────────────┘
-```
-
----
-
-# 📍 `moveBy()`
-
-Mueve la ventana relativo a la posición actual.
-
----
-
-# ✅ Ejemplo
-
-```js
-window.moveBy(50, 30)
-```
-
----
-
-# 🧠 VISUAL
-
-```txt
-Posición actual: (100, 200)
-          ↓
-window.moveBy(50, 30)
-          ↓
-Nueva posición: (150, 230)
-```
-
----
-
-# 🪟 `minimize()`
-
-Minimiza la ventana.
-
----
-
-# ✅ Ejemplo
-
-```js
-window.minimize()
-```
-
----
-
-# ⚠️ NOTA
-
-No funciona en todos los navegadores.
-
----
-
-# 🚀 CASOS REALES
-
----
-
-# ✅ Botón “Ir arriba”
-
-```js
-window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-})
-```
-
----
-
-# ✅ Detectar móvil
-
-```js
-if(screen.width <= 768){
-    console.log("Móvil")
-}
-```
-
----
-
-# ✅ Mostrar scroll tiempo real
-
-```js
-window.addEventListener("scroll", () => {
-    console.log(`Scroll: ${scrollY}`)
-})
-```
-
----
 
 # ❌ ERRORES COMUNES
 
