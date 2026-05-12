@@ -1,3 +1,7 @@
+/**
+ * MANEJO DEL OBJETO GLOBAL 'WINDOW'
+ * Contiene métodos para controlar la ventana del navegador y la interacción con el usuario.
+ */
 // METODOS DE APERTURA Y CIERRE
 let url = "https://youtube.com"
 

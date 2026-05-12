@@ -1,9 +1,9 @@
-/* SELECTOR DE ETIQUETA */
+/* SELECTOR DE ETIQUETA: Afecta a todos los elementos <li> de la página */
 li{
     color: grey;
 }
 
-/* SELECTOR DE CLASE */
+/* SELECTORES DE CLASE: Aplican estilos solo a elementos que tengan estas clases en su HTML */
 .ingrediente-faltante{
     color: red;
 }
@@ -12,15 +12,16 @@ li{
     color: blue;
 }
 
-/* SELECTOR DE ATRIBUTO */
+/* SELECTORES DE ATRIBUTO: Permiten apuntar a elementos por sus propiedades (como src, href, etc.) */
 /*si pongo el signo del dolar y despues el tipo de archivo en el source, aplicara el estilo a todos los elementos que terminen con esta extencion ej. src$="jpg" (termina con)*/
 
 /*src^=".." aca especificamos con que empieza el link del item que queremos modificar (empieza con)*/
+/* Selecciona una imagen específica por su ruta exacta para controlar su ancho */
 img[src="../../HTML avanzado/Lazy load/img/img1.jpg"]{
     width: 300px;
 }
 
-/* SELECTOR POR HIJO DIRECTO */
+/* SELECTOR POR HIJO DIRECTO (>): Afecta solo a las etiquetas <em> que son hijas inmediatas de un <li> */
 
 li > em{
     color:red;

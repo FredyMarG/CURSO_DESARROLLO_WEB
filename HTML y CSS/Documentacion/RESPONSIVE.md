@@ -1,8 +1,3 @@
-A continuación tienes una versión mucho más completa de tu guía, con todos los apartados reforzados y varios subtemas añadidos
-
-***
-
-```markdown
 # 📱 Diseño Responsive — Guía Completa y Profesional (Versión Súper Extendida)
 
 Autor: Fredy Leonardo Martinez Galeano
@@ -558,6 +553,47 @@ Una estrategia **profesional** de diseño responsive suele seguir estas recomend
 - Respetar preferencias del usuario: `prefers-reduced-motion`, `prefers-color-scheme`, etc. 
 - Incluir estilos de impresión básicos mediante `@media print` para documentos que se esperan imprimir (facturas, reportes, artículos). 
 - Mantener el CSS organizado: agrupar por componentes, usar comentarios para secciones de breakpoints y reutilizar variables (custom properties) para colores, espacios, tipografía. 
+
+---
+
+# 📐 Funciones de Comparación (Modern CSS)
+
+Permiten crear diseños ultra-flexibles con menos código y menos media queries.
+
+### 🔹 clamp()
+Define un valor mínimo, uno ideal y uno máximo. 
+`font-size: clamp(1rem, 5vw, 2.5rem);`
+*   Nunca será menor a 1rem.
+*   Escalará con el 5% del ancho de pantalla.
+*   Nunca superará los 2.5rem.
+
+### 🔹 min() y max()
+*   `width: min(90%, 600px);` -> Elige el valor más pequeño. Crea un contenedor que ocupa el 90% pero se detiene en 600px.
+*   `width: max(20vw, 200px);` -> Elige el valor más grande. Útil para asegurar que un elemento siempre tenga un tamaño mínimo tocable.
+
+---
+
+# 💻 Responsive Design Mode (DevTools)
+
+Para probar tus diseños, usa el **Device Toolbar** (`CTRL + SHIFT + M`):
+
+1.  **Throttling:** Simula conexiones 3G o 4G lentas para ver cómo cargan tus imágenes pesadas en móviles.
+2.  **Media Query Inspector:** Haz clic en las barras de colores que aparecen arriba para saltar directamente a los breakpoints definidos en tu CSS.
+3.  **DPR (Device Pixel Ratio):** Simula pantallas Retina o de alta densidad para verificar la nitidez de tus imágenes con `srcset`.
+
+---
+
+# 🧱 Propiedades Lógicas (Logical Properties)
+
+Indispensables para el responsive moderno y la internacionalización. En lugar de direcciones físicas (left/right), usamos el flujo del contenido.
+
+| Tradicional | Lógica |
+| :--- | :--- |
+| `margin-left` / `margin-right` | `margin-inline-start` / `end` |
+| `padding-top` / `padding-bottom` | `padding-block-start` / `end` |
+| `width` / `height` | `inline-size` / `block-size` |
+
+Esto asegura que si el sitio se traduce a un idioma que se lee de derecha a izquierda (como el árabe), los márgenes se inviertan automáticamente.
 
 ---
 

@@ -46,6 +46,12 @@
 
 15. Buscar archivos y funciones
 
+16. Breakpoints Avanzados
+    * Conditional Breakpoints
+    * Logpoints
+
+17. Watch, Call Stack y Scope
+
 16. Local Storage y recursos del navegador
 
 17. Casos prácticos reales
@@ -53,6 +59,8 @@
 18. Errores comunes
 
 19. Buenas prácticas
+
+20. Local Overrides (Persistencia real)
 
 20. Flujo profesional de debugging
 
@@ -536,6 +544,47 @@ document.querySelectorAll("button").forEach(btn => {
     btn.style.border = "5px solid red"
 })
 ```
+
+---
+
+# 🛑 BREAKPOINTS AVANZADOS
+
+No todos los breakpoints son simples clics.
+
+### 🔸 Conditional Breakpoints
+Click derecho en el número de línea -> **Add conditional breakpoint**.
+Solo pausa la ejecución si se cumple una condición (ej: `usuario.id === 5`). Evita pausar en cada iteración de un bucle.
+
+### 🔸 Logpoints
+Click derecho -> **Add logpoint**.
+Escribe un mensaje en la consola (`console.log`) sin detener la ejecución del código. Es ideal para depurar en sitios de producción donde no quieres interrumpir la experiencia.
+
+---
+
+# 🕵️ WATCH, CALL STACK Y SCOPE
+
+Ubicados en el panel derecho durante una pausa:
+
+### 👁️ Watch
+Permite "vigilar" variables o expresiones específicas. Si el valor cambia mientras avanzas línea por línea, lo verás reflejado inmediatamente.
+
+### 📜 Call Stack (Pila de llamadas)
+Es el historial de funciones. Te dice qué función llamó a la que estás ejecutando ahora. Es vital para entender cómo llegaste a un error.
+
+### 🔍 Scope (Ámbito)
+Muestra todas las variables disponibles en el momento actual (Locales, Globales, Closure).
+
+---
+
+# 💾 LOCAL OVERRIDES
+
+¿Quieres que tus cambios en Sources se mantengan incluso al recargar la página?
+
+1. Ve a la pestaña **Overrides** (dentro de Sources).
+2. Selecciona una carpeta en tu PC.
+3. Dale permiso al navegador.
+
+Ahora, cualquier cambio que guardes en el editor de DevTools se escribirá en tu disco duro y se cargará automáticamente al refrescar. **Es el flujo de trabajo profesional definitivo.**
 
 ---
 

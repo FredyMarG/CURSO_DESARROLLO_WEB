@@ -1,14 +1,20 @@
-/* POR DEFECTO LA POSICION ES STATIC */
+/* Reset de márgenes y estilo de fuente para el cuerpo del documento */
 body{
     margin: 0;
     background: #DDD;
     font-family: sans-serif;
 }
+
+/* Contenedor principal: Actúa como marco de referencia para elementos con posición absoluta */
 .contenedor{
     border: 2px solid black;
     margin: 30px 50PX;
     background: white;
-    /*con este position relative estamos convirtiendo la el contenedor como punto de referencia para el absolute*/
+    /* 
+       CONTEXTO DE APILAMIENTO: 
+       Al poner position: relative, este div se convierte en el punto (0,0) 
+       para cualquier elemento hijo que tenga position: absolute.
+    */
     position: relative;
 }
 .box{
@@ -19,14 +25,19 @@ body{
     text-align: center;
 }
 
+/* Caja azul: Posicionada de forma absoluta */
 .box-blue{
     background-color: #37d;
-    /* CON ABSOLUTE LE QUITAMOS LUGAR AL ELEMENTO, POR LO QUE PARECE QUE SE SOBREPUSIERA Y TOMA COMO PUNTO DE REFERENCIA LA ETIQUETA HTML POR LO QUE YA NO FORMA PARTE DEL FLUJO DE LA PAGINA*/
+    /* 
+       Saca el elemento del flujo documental. No ocupa espacio para sus hermanos.
+       Se posiciona 40px desde el borde superior del '.contenedor' más cercano.
+    */
     position: absolute;
     top: 40px;
-    z-index: 20;
+    z-index: 20; /* Determina el orden en el eje Z (profundidad) */
 }
 
+/* Caja roja: Posición relativa */
 .box-red{
     background: #E53;
     position: relative;

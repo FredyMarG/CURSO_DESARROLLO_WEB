@@ -1,3 +1,8 @@
+/**
+ * GUÍA TÉCNICA DE MÉTODOS DE LA CONSOLA (DEBUGGING)
+ * Este archivo contiene ejemplos de cómo utilizar las herramientas de inspección del navegador.
+ */
+
 // FUNCION DE ASERCIÓN SI LA CONDICIÓN ES FALSA, SE MUESTRA UN MENSAJE DE ERROR EN LA CONSOLA DE LO CONTRARIO NO SE MUESTRA NADA EN LA CONSOLA
 console.assert(5 < 4) // Aserción fallida, se muestra un mensaje de error en la consola
 console.assert(5 > 4) // Aserción exitosa, no se muestra ningún mensaje en la consola
