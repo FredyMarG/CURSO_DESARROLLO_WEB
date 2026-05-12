@@ -1,7 +1,9 @@
 /**
-    DEFINICIÓN DE FUNCIONES BÁSICAS
-    Un bloque de código reutilizable que realiza una acción.
+ * DEFINICIÓN DE FUNCIONES BÁSICAS
+ * Un bloque de código reutilizable que realiza una acción.
  */
+
+/** Solicita entrada al usuario y muestra una respuesta condicional */
 function saludar() {
     respuesta = prompt("¡Hola Fredy! ¿Como fue tu dia?")
     if (respuesta == "bien") {
@@ -10,39 +12,47 @@ function saludar() {
         alert("Una pena")
     }
 }
-// Invocación de la función saludar.
 saludar()
 
 /**
-    VALORES DE RETORNO (RETURN)
-    Especifica qué dato devuelve la función al ser ejecutada.
+ * VALORES DE RETORNO (RETURN)
+ * Especifica qué dato devuelve la función al ser ejecutada y finaliza su ejecución.
  */
 
-// con return le asignamos un valor de retorno a la funcion y la finaliza
+/** 
+ * Muestra una alerta y retorna un string con formato HTML 
+ * @returns {string} Frase de saludo
+ */
 function sal() {
     alert("hola");
     return "La funcion te saludo <br>"
 }
-// Invocación de la función sal y almacenamiento de su retorno.
 let saludo = sal()
 document.write(saludo)
 
 /**
-    USO DE PARÁMETROS
-    Variables que recibe la función para trabajar con datos externos.
+ * USO DE PARÁMETROS
+ * Variables locales que la función utiliza para procesar datos dinámicos.
  */
 
+/**
+ * Suma dos valores numéricos
+ * @param {number} num1 Primer sumando
+ * @param {number} num2 Segundo sumando
+ * @returns {number} Resultado de la suma
+ */
 function suma(num1,num2) {
     let res = num1 + num2
     return res
 }
-/**
- * Los parámetros (num1, num2) actúan como variables locales dentro de la función.
- * Al invocar suma(20, 25), los valores 20 y 25 se conocen como argumentos.
- */
+
 let resultado = suma(20,25)
 document.write(resultado + "<br>")
 
+/**
+ * Escribe un saludo personalizado en el documento
+ * @param {string} nombre Nombre de la persona a saludar
+ */
 function saludos(nombre){
     let frase = `!Hola ${nombre}¡ ¿Como estas? <br>`
     document.write(frase)
@@ -52,10 +62,12 @@ saludos("petrosky")
 /**
  * ÁMBITO (SCOPE) Y FUNCIONES EXPRESADAS
  */
-// NOTA: La variable 'nombre' aquí no está definida en el ámbito global, lo que causaría un error.
-// La función 'sayHi' debería usar su propio parámetro 'nombre' o una variable definida en su scope.
+
+/** 
+ * Función anónima asignada a una constante (Function Expression)
+ * @param {string} nombre 
+ */
 const sayHi = function(nombre){
-    // Se utiliza el parámetro 'nombre' de la función para construir la frase.
     let fraseLocal = `!Hola ${nombre}¡ ¿Como estas? <br>`;
     document.write(fraseLocal);
 }

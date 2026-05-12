@@ -1,128 +1,190 @@
-/* VARIABLE GLOBAL,SELECCIONA AL ELEMENTO RAIZ */
+/* 
+   GUÍA DE PSEUDOCLASES
+   Uso de estados (:hover, :active) y selectores estructurales (:nth-child, :has).
+*/
+
+/*
+   PSEUDOCLASE :root
+   Representa el elemento raíz del documento (generalmente <html>).
+   Es útil para declarar variables CSS (Custom Properties) globales.
+*/
 :root{
-    color: #0f0;
+    color: #0f0; /* Establece el color de texto verde para el elemento raíz */
 }
 
 h1{
-    color: #48e;
-    margin: 30px;
-    font-family: sans-serif;
+    color: #48e; /* Color de texto azul */
+    margin: 30px; /* Margen de 30px en todos los lados */
+    font-family: sans-serif; /* Fuente genérica sin serifa */
 }
 
+/*
+   PSEUDOCLASE :hover
+   Aplica estilos cuando el puntero del ratón está sobre el elemento.
+*/
 h1:hover{
-    color: rgb(0, 0, 0);
-    background: #ccc;
+    color: rgb(0, 0, 0); /* Cambia el color de texto a negro */
+    background: #ccc; /* Cambia el fondo a gris claro */
 }
 
-/* ACTIVE FUNCIONA AL HACER CLICK SOBRE EL H1 */
+/*
+   PSEUDOCLASE :active
+   Aplica estilos mientras el elemento está siendo activado por el usuario (ej. click mantenido).
+*/
 h1:active{
-    background: #999;
-    color: #fff;
+    background: #999; /* Cambia el fondo a gris */
+    color: #fff; /* Cambia el color de texto a blanco */
 }
 
-/* SELECCIONANDO EL PRIMER LI */
+/*
+   PSEUDOCLASE :first-child
+   Selecciona el primer elemento hijo de su padre.
+*/
 li:first-child{
-    color: #48e;
+    color: #48e; /* Color de texto azul */
 }
 
-/* SELECCIONANDO EL ULTIMO LI */
+/*
+   PSEUDOCLASE :last-child
+   Selecciona el último elemento hijo de su padre.
+*/
 li:last-child{
-    color: #f00;
+    color: #f00; /* Color de texto rojo */
 }
 
-/* SELECCIONANDO AL SEGUNDO LI */
-
-/* Con nth puedo seleccionar que elemento quiero modificar */
+/*
+   PSEUDOCLASE :nth-child(n)
+   Selecciona elementos basándose en su posición dentro de un grupo de hermanos.
+   'n' puede ser un número, una palabra clave (even/odd) o una fórmula (an+b).
+*/
 li:nth-child(2){
-    color: #0f0;
+    color: #0f0; /* Color de texto verde para el segundo 'li' */
 }
 
-/* MODIFICA UN ELEMENTO SI Y UN ELEMENTO NO */
-/*li:nth-child(2n){
-    color: #48e;
-}*/
-
-/* MODIFICA UN ELEMENTO SI Y DOS ELEMENTOS NO */
+/*
+   PSEUDOCLASE :nth-child(3n)
+   Selecciona cada tercer 'li' (3ro, 6to, 9no, etc.).
+*/
 li:nth-child(3n){
-    color: rgb(9, 137, 56);
+    color: rgb(9, 137, 56); /* Color de texto verde oscuro */
 }
 
-/* SOLO TIENE EN CUENTA LOS ITEMS DEL MISMO ELEMENTO EN ESTE CASO SOLO LOS LI  */
+/*
+   PSEUDOCLASE :nth-of-type(n)
+   Selecciona elementos basándose en su posición dentro de un grupo de hermanos del mismo tipo de etiqueta.
+   A diferencia de :nth-child, ignora otros tipos de elementos hermanos.
+*/
 li:nth-of-type(4){
-    color: #f00;
+    color: #f00; /* Color de texto rojo para el cuarto 'li' de su tipo */
 }
 
-/* MODIFICAMOS LOS ELEMENTOS DE LA LISTA QUE NO TENGAN LA CLASE ELEM-4 */
+/*
+   PSEUDOCLASE :not(selector)
+   Selecciona elementos que NO coinciden con el selector especificado.
+*/
 li:not(.elem-4){
-    color: rgb(0, 5, 77);
+    color: rgb(0, 5, 77); /* Color de texto azul muy oscuro para 'li' que no tienen la clase 'elem-4' */
 }
 
-/* ESTO DARA EL ESTILO SI EL ELEMENTO ESTA VACIO SINO ESTA VACIO LO DEA NORMAL*/
+/*
+   PSEUDOCLASE :empty
+   Selecciona elementos que no tienen hijos (ni elementos ni nodos de texto, incluyendo espacios en blanco).
+*/
 div:empty {
-    background: #0f0;
-    padding: 30px;
+    background: #0f0; /* Fondo verde */
+    padding: 30px; /* Relleno de 30px */
 }
 
 input[type="checkbox"]{
-    margin: 50px;
+    margin: 50px; /* Margen de 50px para checkboxes */
 }
 
-/* VERIFICA SI EL CHECKBOX ESTA CHEQUEADO */
+/*
+   PSEUDOCLASE :checked
+   Selecciona elementos de entrada (radio, checkbox) que están marcados/seleccionados.
+*/
 input[type="checkbox"]:checked{
-    margin: 0;
+    margin: 0; /* Elimina el margen si el checkbox está marcado */
 }
 
-/* ENLACE NO VISITADO */
+/*
+   PSEUDOCLASE :link
+   Selecciona enlaces que aún no han sido visitados por el usuario.
+*/
 a:link{
-    color: red;
+    color: red; /* Color de texto rojo para enlaces no visitados */
 }
 
-/* ENLACE VISITADO */
+/*
+   PSEUDOCLASE :visited
+   Selecciona enlaces que ya han sido visitados por el usuario.
+*/
 a:visited{
-    color: green;
+    color: green; /* Color de texto verde para enlaces visitados */
 }
 
-/* SI LA INFORMACION DEL INPUT NO ES VALIDA */
+/*
+   PSEUDOCLASE :invalid
+   Selecciona elementos de formulario cuyo contenido no cumple con las restricciones de validación.
+*/
 input:invalid{
-    color: red;
+    color: red; /* Color de texto rojo para inputs inválidos */
 }
 
-/* SI LA INFORMACION DEL INPUT ES VALIDA */
+/*
+   PSEUDOCLASE :valid
+   Selecciona elementos de formulario cuyo contenido cumple con las restricciones de validación.
+*/
 input:valid{
-    color: green;
+    color: green; /* Color de texto verde para inputs válidos */
 }
 
-/* MODIFICANDO LOS ELEMENTOS QUE DENTRO DEL SECTION CON ESA CLASE */
+/*
+   PSEUDOCLASE :is(selector1, selector2, ...)
+   Permite agrupar selectores, aplicando estilos si el elemento coincide con CUALQUIERA de ellos.
+   Mejora la legibilidad y reduce la repetición.
+*/
 section :is(.el1,  .el2, .el3){
-    color: darkred;
+    color: darkred; /* Color de texto rojo oscuro para elementos con clases .el1, .el2 o .el3 dentro de una sección */
 }
 
-/* HAS APLICA CAMBIOS SI EL ELEMENTO MENCIONADO EXISTE  */
+/*
+   PSEUDOCLASE :has(selector) (Relational Pseudo-class)
+   Selecciona un elemento si contiene (o "tiene") un elemento que coincide con el selector dado.
+   Es una pseudoclase muy potente que permite seleccionar "hacia arriba" en el árbol DOM.
+*/
 section:has(.el1){
-    background: #6f6f6f;
-    color: white;
+    background: #6f6f6f; /* Fondo gris oscuro */
+    color: white; /* Color de texto blanco */
 }
 
-/* MODIFICANDO UN UL QUE TIENE DESPUES A UN DIV */
-/* ul + div de esta forma modificamos el div */
+/*
+   PSEUDOCLASE :has(+ selector)
+   Selecciona un elemento si es seguido inmediatamente por un hermano que coincide con el selector.
+   Aquí, selecciona un 'ul' si tiene un 'div' como hermano adyacente.
+*/
 ul:has(+div){
-    background: #929292;
-    color: aqua;
+    background: #929292; /* Fondo gris */
+    color: aqua; /* Color de texto aguamarina */
 }
 
 div{
-    padding: 20px;
+    padding: 20px; /* Relleno de 20px para todos los divs */
 }
 
 label{
-    font-weight: bold;
+    font-weight: bold; /* Texto en negrita para las etiquetas */
 }
 
-/* SI EL INPUT ES INVALIDO O VALIDO LE DAREMOS COLOR AL LABEL, EL INPUT DEBE ESTAR DENTRO DEL LABEL DE LO CONTRARIO NO FUNCIONA */
+/*
+   PSEUDOCLASE :has(input:valid)
+   Selecciona un 'label' si contiene un 'input' que es válido.
+   Esto permite estilizar el 'label' basándose en el estado de validación de su 'input' hijo.
+*/
 label:has(input:valid){
-    color: green;
+    color: green; /* Color de texto verde para el label si el input es válido */
 }
 
 label:has(input:invalid){
-    color: red;
+    color: red; /* Color de texto rojo para el label si el input es inválido */
 }

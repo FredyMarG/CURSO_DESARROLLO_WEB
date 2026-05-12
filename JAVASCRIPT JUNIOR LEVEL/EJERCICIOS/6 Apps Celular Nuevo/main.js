@@ -1,37 +1,49 @@
+/**
+ * EJERCICIO: simulación de una "tienda de apps" con clase App.
+ * Cada app puede instalarse, abrirse, cerrarse y desinstalarse; se listan en una tabla.
+ */
+
 let mobile = document.getElementById("mobile"),
     sol = document.getElementById("main-sol")
+/** Representa una aplicación móvil con estado de instalación y ejecución */
 class App {
     constructor(descargas, puntuacion, peso) {
+        /** Número de descargas, estrellas y peso; banderas de estado de la app */
         this.descargas = descargas;
         this.puntuacion = puntuacion;
         this.peso = peso;
         this.iniciada = false;
         this.instalada = false;
     }
+    /** Marca la app como instalada si aún no lo estaba */
     instalar(){
         if (this.instalada === false) {
             this.instalada = true;
             return "App Instalada Correctamente";
         }
     }
+    /** Quita la instalación si la app estaba instalada */
     desinstalar(){
         if (this.instalada === true) {
             this.instalada = false;
             return "App Desinstalada Correctamente";
         }
     }
+    /** Inicia la app solo si está instalada y no estaba en ejecución */
     abrir(){
         if (this.iniciada === false && this.instalada === true) {
             this.iniciada = true;
             return "App Iniciada";
         }   
     }
+    /** Cierra la app si estaba abierta e instalada */
     cerrar(){
         if (this.iniciada === true && this.instalada === true) {
             this.iniciada = false;
             return "App Cerrada";
         }
     }
+    /** Devuelve un resumen HTML con descargas, puntuación y peso */
     appInfo(){
         return `
         Descargas: <b>${this.descargas}</b><br>
@@ -41,6 +53,9 @@ class App {
     }
 }
 
+/**
+ * Crea varias instancias de App, las recorre y escribe filas en la tabla del DOM.
+ */
 function mostrar(){
     let app = [
         new App("1.000", "5 estrellas", "900mb"),

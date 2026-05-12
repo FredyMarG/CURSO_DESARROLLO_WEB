@@ -1,9 +1,15 @@
+/**
+ * EJERCICIO: modelado de celulares normales y de gama alta (herencia).
+ * Se listan en tablas HTML y se prueban métodos como encendido, fotos y video.
+ */
+
 let mobiles = document.getElementById("mobile"),
     func = document.getElementById("func"),
     altag = document.getElementById("altag"),
     sol = document.getElementById("main-sol")
     
     class Celular{
+        /** Guarda las características físicas y de hardware del teléfono */
         constructor(color,peso, tamaño, rdc,ram){
             this.color = color,
             this.peso = peso,
@@ -13,6 +19,7 @@ let mobiles = document.getElementById("mobile"),
             this.encendido = false
         }
 
+    /** Alterna encendido/apagado y devuelve un mensaje descriptivo */
         presionarBotonEncendido(){
             let estado;
             if (this.encendido === false) {
@@ -25,6 +32,7 @@ let mobiles = document.getElementById("mobile"),
             return estado;
         }
 
+        /** Solicita reinicio si el equipo está encendido (ojo: usa asignación = en la condición) */
         reiniciar(){
             if (this.encendido = true) {                
                 return "Reiniciando el Celular"
@@ -33,13 +41,16 @@ let mobiles = document.getElementById("mobile"),
             }
         }
         
+        /** Mensaje simulado de captura de foto con la resolución configurada */
         tomarFoto(){
             return `Foto tomada en una resolución de ${this.resolucionDeCamara}`;
         }
 
+        /** Mensaje simulado de grabación de video */
         grabarVideo(){
             return `Grabando video en ${this.resolucionDeCamara}`;
         }
+        /** Resumen HTML con color, peso, tamaño, cámara y RAM */
         mobileInfo(){
             return `
             Color: <b>${this.color}</b><br>
@@ -51,6 +62,7 @@ let mobiles = document.getElementById("mobile"),
         }
     }
 
+    /** Extiende Celular con cámara extra y funciones premium */
     class CelularAltaGama extends Celular{
         constructor(color,peso,tamaño,rdc,ram,rdce){
             super(color,peso,tamaño,rdc,ram);
@@ -79,6 +91,9 @@ celag = [
     new CelularAltaGama("Azul", "136g", "5.5'", "16G", "8K","Full HD")
 ]
 
+/**
+ * Rellena las tablas del DOM con datos de celulares básicos y de gama alta.
+ */
 function mostrar(){
     for (let i = 0; i < celular.length; i++) {
         mobiles.innerHTML += `<tr>

@@ -1,3 +1,8 @@
+/**
+ * RESIZE Y MOVE
+ * Cambia tamaño y posición de la ventana del navegador (solo tiene efecto fiable en ventanas abiertas por script).
+ */
+
 // 📚 Resize
 
 // Cambio RELATIVO: Suma o resta los píxeles indicados al tamaño actual de la ventana (Ej: actual 500 + 100 = 600).

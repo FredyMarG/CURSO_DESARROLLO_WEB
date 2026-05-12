@@ -7,16 +7,18 @@
 </head>
 <body>
     <form action="">
+        <!-- Campos de entrada de datos con validaciones básicas y placeholders -->
         <input type="text" name="nombre" id="nombre" required placeholder="Username">
         <input type="color" name="color" id="color">
         <input type="email" name="email" id="email">
         <input type="password" name="contraseña" id="contraseña">
         <input type="checkbox" name="aceptar" id="aceptar">
+        <!-- Agrupación de radios: Mismo 'name' permite selección única -->
         <input type="radio" name="genero" id="masculino" value="masculino">
         <input type="radio" name="genero" id="femenino" value="femenino">
         <input type="file" name="archivo" id="archivo">
         <input type="date" name="fecha" id="fecha">
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Enviar"> <!-- Gatillo para enviar el formulario -->
     </form>
 </body>
 </html>

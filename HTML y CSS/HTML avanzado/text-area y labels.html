@@ -9,6 +9,7 @@
 <body>
     <form action="">
         <h2>Formulario de contacto</h2>
+        <!-- Agrupación de input y label para accesibilidad (uso de atributo 'for' vinculado al 'id') -->
         <div class="form_input">
             <label for="nombre">Nombre completo</label>
             <input id="nombre" type="text" placeholder="Jhon Doe">
@@ -19,7 +20,7 @@
         </div>
         <div class="form_input">
             <label for="mensaje">mensaje</label>
-            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
+            <!-- <textarea>: Entrada de texto multilínea. 'rows' define la altura inicial en líneas -->
             <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
         </div>
         <div class="form_input">

@@ -8,15 +8,15 @@
 </head>
 <body>
     <table>
-        <thead>
+        <thead> <!-- Encabezado semántico de la tabla -->
             <tr>
                 <th>Produto</th>
                 <th>Costo</th>
                 <th>Unidades</th>
             </tr>
         </thead>
-        <tbody>
-            <!-- tr de define las filas y td las columnas de esa fila-->
+        <tbody> <!-- Cuerpo de la tabla: Contenedor de los datos principales -->
+            <!-- <tr> define una fila; <td> define una celda de datos -->
             <tr>
                 <td>Banano</td>
                 <td>$3</td>
@@ -34,9 +34,10 @@
             </tr>
         </tbody>
             
-        <tfoot>
+        <tfoot> <!-- Pie de tabla: Generalmente usado para totales o resúmenes -->
             <tr>
                 <th class="ht">Total</th>
+                <!-- 'colspan="2"': Expande la celda para ocupar el espacio de dos columnas -->
                 <td class="ht" colspan="2">$10</td>
             </tr>
         </tfoot>

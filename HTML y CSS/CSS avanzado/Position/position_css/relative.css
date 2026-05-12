@@ -1,28 +1,42 @@
-/* POR DEFECTO LA POSICION ES STATIC */
+/*
+   POSITION: STATIC (Valor por defecto)
+   - Los elementos se renderizan en el orden normal del documento.
+   - Las propiedades 'top', 'bottom', 'left', 'right' y 'z-index' no tienen efecto.
+*/
 body{
-    margin: 0;
-    background-color: #ededed;
+    margin: 0; /* Elimina el margen predeterminado del navegador */
+    background-color: #ededed; /* Color de fondo gris claro */
 }
 .box{
-    width: 100px;
-    height: 100px;
-    background: orange;
-    color: #fff;
-    /* CON RELATIVE PODEMOS DESPLAZAR EL ELEMENTO SIN MODIFICAR EL LUGAR QUE SE LE DA AL ELEMENTO*/
+    width: 100px; /* Ancho fijo de la caja */
+    height: 100px; /* Altura fija de la caja */
+    background: orange; /* Color de fondo naranja */
+    color: #fff; /* Color de texto blanco */
+    /*
+       POSITION: RELATIVE
+       - El elemento permanece en el flujo normal del documento.
+       - 'top', 'left', 'right', 'bottom' lo desplazan desde su posición original,
+         pero su espacio original sigue reservado en el layout.
+    */
     position: relative;
 }
 
 .box-blue{
-    background-color: blue;
-    top: 70px;
-    left: 20px;
-    /* CON Z INDEX PUEDO MOVER EL ELEMENTO ENTRE CAPAS, A MAYOR Z INDEX MAS ADELANTE ESTARA*/
-    z-index: 10;
+    background-color: blue; /* Color de fondo azul */
+    top: 70px; /* Desplaza la caja 70px hacia abajo desde su posición original */
+    left: 20px; /* Desplaza la caja 20px hacia la derecha desde su posición original */
+    /*
+       Z-INDEX
+       - Controla el orden de apilamiento de los elementos posicionados.
+       - Un valor más alto significa que el elemento se muestra más "arriba" (más cerca del usuario).
+       - Solo funciona en elementos con 'position' diferente de 'static'.
+    */
+    z-index: 10; /* Coloca esta caja en una capa de apilamiento */
 }
 
 .box-red{
-    top: 150px;
-    left: 40px;
-    background: red;
-    z-index: 30;
+    top: 150px; /* Desplaza la caja 150px hacia abajo */
+    left: 40px; /* Desplaza la caja 40px hacia la derecha */
+    background: red; /* Color de fondo rojo */
+    z-index: 30; /* Coloca esta caja en una capa de apilamiento superior a la azul */
 }

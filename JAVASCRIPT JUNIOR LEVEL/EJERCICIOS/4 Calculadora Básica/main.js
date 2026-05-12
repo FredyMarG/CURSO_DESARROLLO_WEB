@@ -1,22 +1,33 @@
+/**
+ * EJERCICIO: calculadora básica con funciones flecha y menú por prompt.
+ */
+
 let respuesta = document.getElementById("respuesta"),
     calc = document.getElementById("calcular"),
     sol = document.getElementById("main-sol"),
     num1,
     num2
 
+/** Suma dos valores enteros leídos como texto */
     const sumar = (num1,num2)=>{
         return parseInt(num1) + parseInt(num2)
     }
+/** Resta dos valores enteros */
     const restar = (num1,num2)=>{
         return parseInt(num1) - parseInt(num2)
     }
+/** Multiplica dos valores enteros */
     const multiplicar = (num1,num2)=>{
         return parseInt(num1) * parseInt(num2)
     }
+/** Divide dos valores enteros (el divisor cero se valida en calculo) */
     const dividir = (num1,num2)=>{
         return parseInt(num1) / parseInt(num2)
     }
 
+/**
+ * Lee la operación elegida en el select, pide números por prompt y muestra el resultado.
+ */
 function calculo() {
     let operacion = document.getElementById("operacion")
     operacion = operacion.value

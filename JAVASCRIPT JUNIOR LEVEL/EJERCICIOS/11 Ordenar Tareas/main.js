@@ -1,3 +1,7 @@
+/**
+ * EJERCICIO: planificador de tareas en consola y en el DOM (dos semanas).
+ */
+
 let tareas = document.getElementById("container-work");
 
 let tp = "1 hora y 40 minutos de hacer trabajos practicos";

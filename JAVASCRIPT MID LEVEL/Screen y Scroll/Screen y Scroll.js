@@ -1,3 +1,8 @@
+/**
+ * SCREEN Y SCROLL (ventana y desplazamiento)
+ * Coordenadas de la ventana respecto al monitor y posición del scroll del documento.
+ */
+
 // 📚 Screen 
 
 // Accede al objeto global 'screen' para obtener las especificaciones del hardware de visualización (resolución total, área disponible y profundidad de color).

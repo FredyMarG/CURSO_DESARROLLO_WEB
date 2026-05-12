@@ -1,45 +1,71 @@
-/* SELECTOR DE ETIQUETA: Afecta a todos los elementos <li> de la página */
+/* 
+   GUÍA DE SELECTORES CSS
+   Demostración de selectores básicos, de atributo y relacionales.
+*/
+
+/*
+   SELECTOR DE ETIQUETA
+   Afecta a todos los elementos que coinciden con el nombre de la etiqueta HTML.
+*/
 li{
-    color: grey;
+    color: grey; /* Color de texto gris para todos los ítems de lista */
 }
 
-/* SELECTORES DE CLASE: Aplican estilos solo a elementos que tengan estas clases en su HTML */
+/*
+   SELECTOR DE CLASE
+   Aplica estilos a todos los elementos que tienen la clase especificada.
+*/
 .ingrediente-faltante{
-    color: red;
+    color: red; /* Color de texto rojo para elementos con la clase 'ingrediente-faltante' */
 }
 
 .ingrediente-secreto{
-    color: blue;
+    color: blue; /* Color de texto azul para elementos con la clase 'ingrediente-secreto' */
 }
 
-/* SELECTORES DE ATRIBUTO: Permiten apuntar a elementos por sus propiedades (como src, href, etc.) */
-/*si pongo el signo del dolar y despues el tipo de archivo en el source, aplicara el estilo a todos los elementos que terminen con esta extencion ej. src$="jpg" (termina con)*/
-
-/*src^=".." aca especificamos con que empieza el link del item que queremos modificar (empieza con)*/
-/* Selecciona una imagen específica por su ruta exacta para controlar su ancho */
+/*
+   SELECTOR DE ATRIBUTO
+   Selecciona elementos basándose en la presencia o el valor de un atributo HTML.
+   - `[attr]`       : Elementos con el atributo `attr`.
+   - `[attr="val"]` : Elementos con el atributo `attr` cuyo valor es exactamente `val`.
+   - `[attr^="val"]`: Elementos con el atributo `attr` cuyo valor COMIENZA con `val`.
+   - `[attr$="val"]`: Elementos con el atributo `attr` cuyo valor TERMINA con `val`.
+   - `[attr*="val"]`: Elementos con el atributo `attr` cuyo valor CONTIENE `val`.
+*/
+/* Selecciona una imagen específica por su ruta exacta para controlar su ancho.
+   Esto es útil para aplicar estilos a un recurso muy específico. */
 img[src="../../HTML avanzado/Lazy load/img/img1.jpg"]{
-    width: 300px;
+    width: 300px; /* Establece un ancho fijo de 300px para esa imagen */
 }
 
-/* SELECTOR POR HIJO DIRECTO (>): Afecta solo a las etiquetas <em> que son hijas inmediatas de un <li> */
-
+/*
+   SELECTOR DE HIJO DIRECTO (>)
+   Selecciona un elemento si es un hijo directo de otro elemento.
+   Afecta solo a las etiquetas <em> que son hijas inmediatas de un <li>.
+*/
 li > em{
-    color:red;
+    color:red; /* Color de texto rojo para 'em' que son hijos directos de 'li' */
 }
 
-/* SELECTOR DE HERMANO ADYACENTE */
-/*me toma el elemnto que esta despues de otro indicado SOLO EL PRIMER ELEMENTO*/
+/*
+   SELECTOR DE HERMANO ADYACENTE (+)
+   Selecciona un elemento que es el hermano inmediatamente siguiente de otro elemento.
+   Solo afecta al PRIMER elemento que cumple la condición.
+*/
 h1 + p{
-    color:blue
+    color:blue /* Color de texto azul para el párrafo que sigue inmediatamente a un h1 */
 }
 
 h1 + p + p{
-    color:green;
+    /* Selecciona el segundo párrafo que sigue a un h1 (el hermano adyacente del primer p) */
+    color:green; /* Color de texto verde */
 }
 
-/* SELECTOR DE HERMANOS GENERALES */
-/*me toma el elemnto que esta despues de otro indicado TODOS LOS QUE ESTAN DEPUES DEL ELEMENTO INDICADO*/
-
+/*
+   SELECTOR DE HERMANOS GENERALES (~)
+   Selecciona todos los elementos que son hermanos de un elemento,
+   y que aparecen DESPUÉS de él en el código HTML.
+*/
 h1 ~ p{
-    font-family: sans-serif;
+    font-family: sans-serif; /* Establece una fuente genérica sin serifa para todos los párrafos hermanos de un h1 */
 }

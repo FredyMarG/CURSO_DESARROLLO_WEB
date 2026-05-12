@@ -1,6 +1,13 @@
+/**
+ * EJERCICIO: registro de asistencia por 30 días y tabla de resultados.
+ */
+
 let sol = document.getElementById("sol"),
     main_sol = document.getElementById("main_sol")
 
+/**
+ * Pide cantidad de alumnos, simula 30 días de asistencia y pinta aprobados/reprobados.
+ */
 function result() {
     let cantidad = parseInt(prompt("¿Cuantos alumnos son?")),
         alumnosTotales = [],
@@ -15,6 +22,7 @@ function result() {
         alumnosTotales[i] = [prompt("Nombre del alumno " + (i + 1)), 0];
     }
 
+    /** Registra una 'P' de presente y suma al contador del alumno en la posición `p` */
     const asistencia = (nombre, p) => {
         let presencia = prompt(`Asistencia del alumno ${nombre}`); //Almacena si es presente o ausente dependiendo el nombre del alumno
         if (presencia == "p" || presencia == "P") {
