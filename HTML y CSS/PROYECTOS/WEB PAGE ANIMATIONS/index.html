@@ -1,6 +1,17 @@
 <!DOCTYPE html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html
+     Título: Portfolio
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
 <html lang="en">
 <head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fonts.css">
@@ -8,13 +19,19 @@
     <title>Portfolio</title>
 </head>
 <body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
     <header class="header">
+<!-- Cabecera de página o bloque (header): logo, título o accesos -->
+
         <input type="checkbox" class="header__checkbox" id="open-menu">
         <label for="open-menu" class="header__open-nav-button" role="button">=</label>
         <div class="header__logo-container">
             <img class="header__logo" src="img/logo.png" alt="">
         </div>
         <nav class="header__nav">
+<!-- Menú o enlaces de navegación (nav) -->
+
         <ul class="header__nav-list">
             <li class="header__nav-item"><a href="#profile">About</a></li>
             <li class="header__nav-item"><a href="#portfolio">Portfolio</a></li>
@@ -23,6 +40,8 @@
     </nav>
     </header>
     <main class="profile" id="profile">
+<!-- Contenido principal del documento (main) -->
+
         <div class="profile__wrapper">
             <div class="profile__img-container">
                 <img src="img/profile.jpg" class="profile__img" alt="">
@@ -73,6 +92,8 @@
         </div>
     </main>
     <section class="portfolio" id="portfolio">
+<!-- Sección temática de contenido (section) -->
+
         <h2 class="portfolio_title">PORTFOLIO SECTION</h2>
         <div class="portfolio__project-container">
             <div class="portfolio__project">
@@ -98,6 +119,8 @@
     <section class="form" id="contact">
         <h2 class="form__title">CONTACT</h2>
         <form class="form__form">
+<!-- Formulario de envío de datos (form) -->
+
             <div class="form__input-container">
                 <label>Nombre<input type="text" placeholder="Jhon"></label>
             </div>
@@ -116,8 +139,11 @@
         </form>
     </section>
     <footer>
+<!-- Pie de página o de sección (footer) -->
+
         <strong>Fredy Martinez</strong> - Copyright
     </footer>
 
 </body>
+<!-- Cierre del documento HTML -->
 </html>

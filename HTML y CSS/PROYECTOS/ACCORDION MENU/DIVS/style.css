@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/ACCORDION MENU/DIVS/style.css
+ * Carpeta del tema: «DIVS». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -101,6 +109,8 @@ input[type="checkbox"]{
     background-color: #4b7;
 }
 
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from{
         opacity: 0;
@@ -118,6 +128,8 @@ input[type="checkbox"]{
     }
 }
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (min-width:600px) {
     .faq{
         max-width: clamp(300px, 70%,700px);

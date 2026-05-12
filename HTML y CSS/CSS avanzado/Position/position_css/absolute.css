@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/absolute.css
+ * Carpeta del tema: «position_css». Hoja: «absolute».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 /* Reset de márgenes y estilo de fuente para el cuerpo del documento */
 body{
     margin: 0;

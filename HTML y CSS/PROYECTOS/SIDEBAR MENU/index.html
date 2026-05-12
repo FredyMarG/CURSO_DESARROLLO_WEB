@@ -1,6 +1,17 @@
 <!DOCTYPE html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: HTML y CSS/PROYECTOS/SIDEBAR MENU/index.html
+     Título: Menú lateral
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
 <html lang="en">
 <head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -8,8 +19,14 @@
     <title>Menú lateral</title>
 </head>
 <body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
     <aside class="sidebar">
+<!-- Contenido complementario (aside), barras laterales o notas -->
+
         <form class="sidebar-form">
+<!-- Formulario de envío de datos (form) -->
+
             <input type="checkbox" id="open-menu">
             <label class="material-symbols-outlined" for="open-menu">close</label>
             <label class="material-symbols-outlined open-button" for="open-menu">arrow_forward_ios</label>
@@ -20,6 +37,8 @@
             <img src="https://picsum.photos/400/200" alt="">
         </picture>
         <nav class="sidebar-nav">
+<!-- Menú o enlaces de navegación (nav) -->
+
             <ul>
                 <li class="sidebar-item">
                     <span class="material-symbols-outlined">Notifications</span>
@@ -57,4 +76,5 @@
         </div>
     </aside>
 </body>
+<!-- Cierre del documento HTML -->
 </html>

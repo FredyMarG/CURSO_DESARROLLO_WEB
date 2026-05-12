@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/ACCORDION MENU/SUMMARY-DETAILS/style.css
+ * Carpeta del tema: «SUMMARY-DETAILS». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -83,6 +91,8 @@ details:nth-child(3) b{
     background-color: #4b7;
 }
 
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from{
         opacity: 0;
@@ -100,6 +110,8 @@ details:nth-child(3) b{
     }
 }
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (min-width:600px) {
     .faq{
         max-width: clamp(300px, 70%,700px);

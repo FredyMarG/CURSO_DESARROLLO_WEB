@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/style.css
+ * Carpeta del tema: «1 Comprar Computador». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 /* 
    ESTILOS: SISTEMA DE COMPRA
    Diseño de interfaz para validación de presupuesto y estados de éxito/error.
@@ -218,6 +226,8 @@ button:hover {
    KEYFRAMES
 ========================= */
 
+
+/* --- Animación (@keyframes mostrarMensaje) --- */
 @keyframes mostrarMensaje {
 
     0%{
@@ -236,6 +246,8 @@ button:hover {
 
 }
 
+
+/* --- Animación (@keyframes ocultarMensaje) --- */
 @keyframes ocultarMensaje {
 
     0%{

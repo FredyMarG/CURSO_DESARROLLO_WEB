@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Basico/Fondo y gradiente/style.css
+ * Carpeta del tema: «Fondo y gradiente». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body{
     background: red;
     margin: 0;

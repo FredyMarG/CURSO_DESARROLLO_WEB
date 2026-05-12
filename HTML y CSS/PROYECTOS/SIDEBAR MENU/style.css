@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/SIDEBAR MENU/style.css
+ * Carpeta del tema: «SIDEBAR MENU». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     box-sizing: border-box;
     font-family: sans-serif;

@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/style.css
+ * Carpeta del tema: «WEB PAGE ANIMATIONS». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -84,6 +92,8 @@ body, div, ul , li, nav, header, footer, a, li, label{
 
 /*=========================  HEADER QUERIES  =========================*/
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (min-width: 600px){
 
     .header{
@@ -432,6 +442,8 @@ footer{
 /*=========================  ANIMACIONES  =========================*/
 
 /*=========================  HEADER ANIMATIONS  =========================*/
+
+/* --- Animación (@keyframes header-movement) --- */
 @keyframes header-movement {
     from{
         padding: 20px 0;
@@ -444,6 +456,8 @@ footer{
     }
 }
 
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from{
         opacity: 0;

@@ -1,8 +1,18 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Responsive Design/Feature Queries/features.css
+ * Carpeta del tema: «Feature Queries». Hoja: «features».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body {
     margin: 0;
     font-family: sans-serif;
 }
 
+
+/* --- Capacidades del navegador (@supports) --- */
 @supports (display: grid){
     body{
         display: grid;
@@ -10,6 +20,8 @@ body {
     }
 }
 
+
+/* --- Capacidades del navegador (@supports) --- */
 @supports not (display: grid){
     body{
         display: flex;

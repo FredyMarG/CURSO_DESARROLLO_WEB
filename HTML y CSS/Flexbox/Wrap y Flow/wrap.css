@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Flexbox/Wrap y Flow/wrap.css
+ * Carpeta del tema: «Wrap y Flow». Hoja: «wrap».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     margin: 0;
     font-family: sans-serif;
