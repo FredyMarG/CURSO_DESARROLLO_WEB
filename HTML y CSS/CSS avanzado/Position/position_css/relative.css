@@ -1,4 +1,12 @@
 /*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/relative.css
+ * Carpeta del tema: «position_css». Hoja: «relative».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
+/*
    POSITION: STATIC (Valor por defecto)
    - Los elementos se renderizan en el orden normal del documento.
    - Las propiedades 'top', 'bottom', 'left', 'right' y 'z-index' no tienen efecto.

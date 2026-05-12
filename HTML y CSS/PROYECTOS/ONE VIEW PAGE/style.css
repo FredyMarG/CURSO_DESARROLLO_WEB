@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/ONE VIEW PAGE/style.css
+ * Carpeta del tema: «ONE VIEW PAGE». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -58,6 +66,8 @@ img{
     animation-timeline: scroll();
 }
 
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     0%{
         opacity: 0;
@@ -74,6 +84,8 @@ img{
     }
 }
 
+
+/* --- Animación (@keyframes aparecer-texto) --- */
 @keyframes aparecer-texto {
     0%{
         opacity: 0;
@@ -88,6 +100,8 @@ img{
     }
 }
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (max-width: 900px) {
     .text-container{
         justify-content: space-evenly;

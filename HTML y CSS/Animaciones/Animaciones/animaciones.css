@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Animaciones/Animaciones/animaciones.css
+ * Carpeta del tema: «Animaciones». Hoja: «animaciones».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body{
     margin: 0;
     font-family: sans-serif;
@@ -34,6 +42,8 @@ div{
     animation-play-state: paused;
 }
 
+
+/* --- Animación (@keyframes llenar-barra) --- */
 @keyframes llenar-barra {
     from{
         width: 0%;

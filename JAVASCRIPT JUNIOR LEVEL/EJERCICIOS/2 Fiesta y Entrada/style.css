@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/2 Fiesta y Entrada/style.css
+ * Carpeta del tema: «2 Fiesta y Entrada». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -100,6 +108,8 @@ input {
 }
 
 /* ANIMACIÓN */
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from {
         opacity: 0;

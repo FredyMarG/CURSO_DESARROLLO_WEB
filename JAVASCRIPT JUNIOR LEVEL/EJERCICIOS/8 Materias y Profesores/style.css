@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/8 Materias y Profesores/style.css
+ * Carpeta del tema: «8 Materias y Profesores». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 /* RESET */
 * {
     box-sizing: border-box;
@@ -215,6 +223,8 @@ tbody tr:last-child td {
    KEYFRAMES
    Define los estados clave de una animación CSS.
 */
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from { /* Estado inicial de la animación */
         opacity: 0; /* Completamente transparente */

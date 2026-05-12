@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Timeline-Performance/style.css
+ * Carpeta del tema: «Timeline-Performance». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body{
     color: #222;
     font-family: sans-serif;

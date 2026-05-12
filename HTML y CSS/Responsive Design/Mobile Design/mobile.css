@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Responsive Design/Mobile Design/mobile.css
+ * Carpeta del tema: «Mobile Design». Hoja: «mobile».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body{
     margin: 0;
     font-family: sans-serif;
@@ -119,6 +127,8 @@ footer{
     text-align: center;
 }
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (min-width: 480px){
     .main-wrapper{
         flex-direction: row;
@@ -126,6 +136,8 @@ footer{
     
 }
 
+
+/* --- Consultas de medio (@media) --- */
 @media screen and (min-width: 800px){
     aside:last-child{
         display: block;

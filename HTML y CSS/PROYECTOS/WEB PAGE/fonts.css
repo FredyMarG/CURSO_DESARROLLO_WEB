@@ -1,15 +1,29 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/PROYECTOS/WEB PAGE/fonts.css
+ * Carpeta del tema: «WEB PAGE». Hoja: «fonts».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
+
+/* --- Fuente web (@font-face) --- */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-Regular.ttf")format("truetype");
     font-weight: 400;
 }
 
+
+/* --- Fuente web (@font-face) --- */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-ExtraBold.ttf")format("truetype");
     font-weight: 700;
 }
 
+
+/* --- Fuente web (@font-face) --- */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-ExtraLight.ttf")format("truetype");

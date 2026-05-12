@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Avanzado/Emmet/emmet.css
+ * Carpeta del tema: «Emmet». Hoja: «emmet».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 header{
     margin: 10px 10px; /*m10-10*/
     background-color:#e3e;

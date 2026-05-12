@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/5 Celular Nuevo/style.css
+ * Carpeta del tema: «5 Celular Nuevo». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 /* RESET */
 * {
     box-sizing: border-box;
@@ -177,6 +185,8 @@ tbody tr:last-child td {
 }
 
 /* ANIMACIÓN */
+
+/* --- Animación (@keyframes aparecer) --- */
 @keyframes aparecer {
     from {
         opacity: 0;

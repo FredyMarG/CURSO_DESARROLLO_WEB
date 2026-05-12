@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/sol.css
+ * Carpeta del tema: «12 La LLave Correcta». Hoja: «sol».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body {
     overflow-x: hidden;
 }

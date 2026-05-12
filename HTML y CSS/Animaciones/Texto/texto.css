@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Animaciones/Texto/texto.css
+ * Carpeta del tema: «Texto». Hoja: «texto».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 body{
     margin: 0;
     font-family: sans-serif;
@@ -39,6 +47,8 @@ body{
     animation: titilar .36s infinite alternate;
 }
 
+
+/* --- Animación (@keyframes grow) --- */
 @keyframes grow {
     from   {
         width: 0%;
@@ -48,6 +58,8 @@ body{
     }
 }
 
+
+/* --- Animación (@keyframes titilar) --- */
 @keyframes titilar {
     from{
         opacity: 0;

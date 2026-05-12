@@ -1,3 +1,11 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Avanzado/Especificidad y Casacada/especificidad.css
+ * Carpeta del tema: «Especificidad y Casacada». Hoja: «especificidad».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
 /* EN CSS ES MAS ESPECIFICO (PRIMORDIAL) EL ID, LUEGO LA CLASE Y POR ULTIMO EL TAG O LA ETIQUETA */
 #titulo{
     color: aqua;
