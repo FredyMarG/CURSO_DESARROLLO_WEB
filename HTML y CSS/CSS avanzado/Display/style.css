@@ -1,14 +1,15 @@
+/* Configuración general de la página para eliminar márgenes por defecto */
 body{
     margin: 0;
     font-family: sans-serif;
 }
 
+/* Estilo base para los contenedores genéricos (div) */
 div{
     padding: 20px;
     background: #999;
 }
-
-/* CON DISPLAY BLOCK OCUPAMOS TODO EL ANCHO DISPONIBLE DE LA LINEA Y LOS ELEMENTOS INLINE NO ACEPTAN MARGIN NI PADDING*/
+/* Párrafos: Se usa display: block para que ocupen todo el ancho y permitan márgenes/rellenos verticales */
 p{
     background: red;
     color: #fff;
@@ -18,7 +19,7 @@ p{
     padding: 20px;
 }
 
-/* CON EL DISPLAY INLINE EL MARGIN Y EL PADDINGS OLO FUNCIONA DE FORMA HORIZONTAL */
+/* Redefinición de P: Ejemplo de display: inline donde los elementos fluyen horizontalmente y el padding vertical no afecta el flujo */
 p{
     background: #000;
     color: #fff;
@@ -26,10 +27,12 @@ p{
     margin: 5px;
 }
 
+/* Barra de navegación */
 .nav{
     background: #48e;
 }
 
+/* Lista de navegación: Centra los elementos de la lista */
 .nav__list{
     margin: 0;
     text-align: center;
@@ -40,6 +43,7 @@ p{
     display: inline-block;
 }
 
+/* Enlaces del menú: Se usa inline-block para que acepten padding y se mantengan en línea */
 .nav__link{
     color: #fff;
     text-decoration: none;
@@ -52,6 +56,7 @@ p{
     background: #59e;
 }
 
+/* Botón especial dentro del menú con bordes redondeados y margen a la izquierda */
 .link--button{
     border: 1px solid #fff;
     background: #fff;
@@ -59,9 +64,9 @@ p{
     color: #48e;
     border-radius: 3px;
     margin-left: 60px;
-    /*con display none el elemento ya no ocupa espacio en la pagina como si no estuviera y no se representa en la pagina
-    display: "none";
-    */
+    /* Ejemplo de cómo ocultar un elemento completamente, eliminándolo del flujo documental.
+       Si se aplica, el elemento no ocupa espacio y no es visible. */
+    /* display: none; */
 }
 
 .link--button:hover{

@@ -1,3 +1,7 @@
+/**
+ * SISTEMA DINÁMICO DE CALIFICACIONES
+ * Calcula el estado de aprobación de materias basándose en asistencia, promedio y trabajos entregados.
+ */
 const result = document.getElementById("resultado");
 
 //Materias es un objeto que contiene cada materia como clave y un objeto con asistencias, promedio y trabajos como valor
@@ -124,7 +128,9 @@ Object.entries(materias).forEach(([nombre, data]) => {
             fila.className = "fila reprobado";
         }
 
-        // Finalmente, se llama a la función renderConsola para actualizar la consola con el estado actual de todas las materias cada vez que se realiza un cambio en los campos de entrada, asegurando que la información mostrada en la consola esté siempre sincronizada con los datos ingresados por el usuario.
+        // NOTA DE EFICIENCIA: Llamar a `renderConsola()` en cada evento 'input' puede ser ineficiente
+        // en aplicaciones con muchos campos o lógica compleja, ya que limpia y vuelve a renderizar
+        // toda la consola repetidamente. En un entorno de producción, se podría optimizar.
         renderConsola();
     }
 

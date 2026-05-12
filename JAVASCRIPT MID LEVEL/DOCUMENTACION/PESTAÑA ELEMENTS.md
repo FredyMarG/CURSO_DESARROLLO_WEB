@@ -50,6 +50,10 @@
    * Breakpoints de eventos
    * Encontrar bugs
 
+10. DOM Breakpoints
+
+11. Accessibility (Accesibilidad)
+
 10. Properties
 
     * Explorar propiedades del nodo
@@ -867,6 +871,54 @@ Ejemplo visual:
 │ └───────────┘ │
 └───────────────┘
 ```
+
+---
+
+# 📐 PESTAÑA LAYOUT
+
+Si usas **CSS Grid** o **Flexbox**, esta pestaña es indispensable.
+
+✅ **Grid Overlays:** Activa guías visuales para ver números de líneas, nombres de áreas y espacios (gutters).
+✅ **Flexbox Editor:** Junto a `display: flex` en la pestaña Styles, aparece un icono que abre un editor visual para cambiar `justify-content` o `align-items` con un clic.
+
+---
+
+# 🧮 PESTAÑA COMPUTED
+
+A veces el CSS es confuso por la herencia. 
+
+**Computed** te muestra el valor FINAL que el navegador está aplicando. Por ejemplo, si pusiste `font-size: 2rem`, aquí verás cuántos `px` exactos son. También te indica de qué archivo y línea proviene cada estilo aplicado.
+
+---
+
+# 🛑 DOM BREAKPOINTS
+
+Puedes pausar el JavaScript automáticamente cuando el HTML cambia. Click derecho sobre un elemento -> **Break on**:
+
+1. **Subtree modifications:** Si se añaden o quitan elementos hijos.
+2. **Attribute modifications:** Si cambia una clase, un ID o un `style` inline.
+3. **Node removal:** Si el elemento es borrado del documento.
+
+---
+
+# ♿ ACCESSIBILITY (ACCESIBILIDAD)
+
+Ubicada junto a Styles. Permite auditar la inclusión de tu sitio:
+
+✅ **Contrast Ratio:** Te avisa si el color del texto es legible sobre el fondo.
+✅ **Accessibility Tree:** Muestra cómo los lectores de pantalla (para personas con discapacidad visual) interpretan tu página.
+✅ **Aria Attributes:** Revisa si tus etiquetas de accesibilidad son válidas.
+
+---
+
+# 🎞️ ANIMATION INSPECTOR
+
+Si tienes animaciones CSS o transiciones, puedes abrir este panel (en los tres puntos de DevTools -> More tools -> Animations). 
+
+Permite:
+*   Ralentizar las animaciones al 10% o 25%.
+*   Ver una línea de tiempo (timeline) de cada propiedad animada.
+*   Modificar las curvas de *Bezier* visualmente.
 
 ---
 
