@@ -1,3 +1,9 @@
+/**
+ * BUCLE for Y VARIANTES
+ * for clásico, continue, for...in, for...of y etiquetas (labels).
+ */
+
+/* --- Bucle for básico: cuenta de 0 a 5 --- */
 for (let i = 0; i < 6; i++) {
     console.log(i + "<br>");
     
@@ -5,7 +11,7 @@ for (let i = 0; i < 6; i++) {
 
 for(let i = 0; i < 20; i++){
     if (i == 12) {
-        //con continue me estoy saltando el numero 12, si con break lo termino con continue me lo salto
+/* --- continue: salta a la siguiente iteración sin ejecutar el resto del cuerpo --- */
         continue
     }
     console.log(i + "<br>");
@@ -14,15 +20,14 @@ for(let i = 0; i < 20; i++){
 
 let animales = ["gato", "perro", "tiranosaurio rex"]
 animales.edad = 20
-//en el in me muestra las propiedades en of no
+/* --- for...in: itera sobre nombres de propiedades (índices en arrays, claves en objetos) --- */
 for(animal in animales){
-    //in me devuelce la posicion de cada uno de los elementos
+    /* in devuelve la clave; animales[clave] accede al valor en esa posición --- */
     document.write(animales[animal] + "<br>");
-    //como in me devuelve la posicion del array, tengo que animal en la posicion 0 es gato por lo que animales[animal] me devolvera el item asumiendo que animal es igual a tener 0 animales[0]=gato
+    /* Explicación: con arrays, 'animal' es el índice (0,1,2...); animales[animal] es el elemento --- */
 }
 
-document.write("<br>");
-
+/* --- for...of: itera directamente sobre los valores del iterable --- */
 for(animal of animales){
     document.write(animal + "<br>");
 }
@@ -32,6 +37,7 @@ document.write("<br>");
 array1 = ["maria", "josefa", "roberta"]
 array2 = ["pedro", "marcelo", array1, "josefina"]
 
+/* --- Etiqueta (label) + continue: salta al siguiente ciclo del bucle externo nombrado --- */
 forRancio: //este es el label
 for (let array in array2){
     if (array == 2) {

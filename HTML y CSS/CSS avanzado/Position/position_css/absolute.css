@@ -1,6 +1,7 @@
 /* Reset de márgenes y estilo de fuente para el cuerpo del documento */
 body{
     margin: 0;
+    /* Color de fondo general para la página */
     background: #DDD;
     font-family: sans-serif;
 }
@@ -8,18 +9,22 @@ body{
 /* Contenedor principal: Actúa como marco de referencia para elementos con posición absoluta */
 .contenedor{
     border: 2px solid black;
+    /* Márgenes superior/inferior de 30px y laterales de 50px */
     margin: 30px 50PX;
     background: white;
     /* 
-       CONTEXTO DE APILAMIENTO: 
-       Al poner position: relative, este div se convierte en el punto (0,0) 
-       para cualquier elemento hijo que tenga position: absolute.
+       EL ANCLA (Reference Frame):
+       Al declarar relative aquí, establecemos un sistema de coordenadas interno.
+       Cualquier hijo con 'absolute' medirá sus distancias (top/left/etc) 
+       desde los bordes internos de este contenedor.
     */
     position: relative;
 }
 .box{
+    /* Ancho y alto fijos para las cajas */
     width: 100px;
     height: 100px;
+    /* Color de fondo para las cajas */
     background: #db7;
     color: #fff;
     text-align: center;
@@ -29,8 +34,11 @@ body{
 .box-blue{
     background-color: #37d;
     /* 
-       Saca el elemento del flujo documental. No ocupa espacio para sus hermanos.
-       Se posiciona 40px desde el borde superior del '.contenedor' más cercano.
+       POSITION: ABSOLUTE
+       - Saca el elemento del flujo normal del documento. No ocupa espacio y no afecta a los hermanos.
+       - Se posiciona en relación con el ancestro posicionado más cercano (en este caso, '.contenedor').
+       - Si no hay ancestro posicionado, se posiciona respecto al 'body' (viewport).
+       - 'top', 'left', 'right', 'bottom' definen su desplazamiento.
     */
     position: absolute;
     top: 40px;
@@ -39,6 +47,12 @@ body{
 
 /* Caja roja: Posición relativa */
 .box-red{
+    /* Color de fondo para la caja roja */
     background: #E53;
+    /* 
+       POSITION: RELATIVE
+       - El elemento permanece en el flujo normal del documento.
+       - 'top', 'left', 'right', 'bottom' lo desplazan desde su posición original, pero su espacio original sigue reservado.
+    */
     position: relative;
 }

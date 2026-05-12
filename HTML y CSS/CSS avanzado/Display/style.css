@@ -1,49 +1,47 @@
-/* Configuración general de la página para eliminar márgenes por defecto */
+/* 
+   GUÍA DE PROPIEDAD DISPLAY
+   Diferencias entre block, inline, inline-block y none.
+*/
+
 body{
     margin: 0;
     font-family: sans-serif;
 }
 
-/* Estilo base para los contenedores genéricos (div) */
 div{
     padding: 20px;
     background: #999;
 }
-/* Párrafos: Se usa display: block para que ocupen todo el ancho y permitan márgenes/rellenos verticales */
+
 p{
     background: red;
     color: #fff;
-    display: block;
+    display: block; /* Ocupa todo el ancho disponible */
     border: solid 1px #000;
     margin: 20px;
     padding: 20px;
 }
 
-/* Redefinición de P: Ejemplo de display: inline donde los elementos fluyen horizontalmente y el padding vertical no afecta el flujo */
 p{
     background: #000;
     color: #fff;
-    display: inline;
+    display: inline; /* Fluye horizontalmente; ignora dimensiones verticales en el flujo */
     margin: 5px;
 }
 
-/* Barra de navegación */
 .nav{
     background: #48e;
 }
 
-/* Lista de navegación: Centra los elementos de la lista */
 .nav__list{
     margin: 0;
     text-align: center;
 }
 
-/* CON INLINE BLOCK LE DECIMOS QUE EL ITEM TIENE LAS MISMAS CARACTERISTICAS QUE UN BLOQUE PERO QUE NO SE UBICAN UNO DEBAJO DE OTRO */
 .nav__item{
-    display: inline-block;
+    display: inline-block; /* En línea pero permite padding/margin vertical y dimensiones */
 }
 
-/* Enlaces del menú: Se usa inline-block para que acepten padding y se mantengan en línea */
 .nav__link{
     color: #fff;
     text-decoration: none;
@@ -53,10 +51,9 @@ p{
 }
 
 .nav__link:hover{
-    background: #59e;
+    background: #59e; /* Cambia el color de fondo al pasar el ratón por encima */
 }
 
-/* Botón especial dentro del menú con bordes redondeados y margen a la izquierda */
 .link--button{
     border: 1px solid #fff;
     background: #fff;
@@ -64,9 +61,7 @@ p{
     color: #48e;
     border-radius: 3px;
     margin-left: 60px;
-    /* Ejemplo de cómo ocultar un elemento completamente, eliminándolo del flujo documental.
-       Si se aplica, el elemento no ocupa espacio y no es visible. */
-    /* display: none; */
+    /* display: none; -> Elimina el elemento del flujo y del renderizado */
 }
 
 .link--button:hover{

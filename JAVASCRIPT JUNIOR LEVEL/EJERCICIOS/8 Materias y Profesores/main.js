@@ -1,21 +1,18 @@
-// Referencias a los contenedores HTML donde se inyectará la información
+/** Referencias a los elementos del DOM donde se inyectará la información generada */
 let info = document.getElementById("tabla-contenido"),
     infoalumno = document.getElementById("info-alumno"),
     complete = document.getElementById("info-complete"),
     sol = document.getElementById("main-sol")
 
 /**
- * Contiene toda la lógica principal para la gestión y visualización de materias y alumnos.
- */
-
-/**
  * Función envolvente que inicializa la lógica del ejercicio.
- * Encapsula el estado de las materias para evitar contaminar el scope global
- * mientras se ejecuta la visualización de datos.
- *
- * NOTA: Esta función se ejecuta inmediatamente (IIFE) para aislar su scope.
+ * Implementa un sistema de gestión escolar:
+ * 1. Define la base de datos de materias/profesores/alumnos.
+ * 2. Procesa la información para generar visualizaciones en HTML.
+ * 3. Gestiona la lógica de búsqueda de alumnos únicos y su carga académica.
  */
 (function solucion(){
+    /** @type {Object.<string, string[]>} Base de datos simulada. Estructura: materia: [Profesor, ...Alumnos] */
     const materias = {
         matematicas: ['Carlos', 'Juan', 'Pedro', 'Maria', 'Luisa', 'Andres', 'Sofia', 'Diego', 'Camila'],
         fisica: ['Laura', 'Pedro', 'Andres', 'Juan', 'Valentina', 'Sofia', 'Mateo', 'Camila', 'Daniel'],
@@ -34,8 +31,8 @@ let info = document.getElementById("tabla-contenido"),
 /**
  * Obtiene la información de una materia específica, incluyendo el profesor y los alumnos.
  * @param {string} materia - El nombre de la materia a buscar.
- * @returns {Array|boolean} Un array con la lista de participantes y el nombre de la materia si se encuentra, de lo contrario, `false`.
- * NOTA: Retornar `false` puede ser menos idiomático que `null` o `undefined` en JavaScript para indicar "no encontrado".
+ * @returns {[string[], string]|boolean} Un array con la lista de participantes y el nombre si existe, de lo contrario false.
+ * @note Retornar `false` es funcional pero menos común que `null` para valores no encontrados en JS moderno.
  */
 const obtenerInformacion = (materia) => {
     if (materias[materia] !== undefined) {
@@ -45,31 +42,28 @@ const obtenerInformacion = (materia) => {
     }
 }
 
-// Array con los nombres de todas las materias disponibles.
-// Se utiliza para iterar sobre las materias y mostrar su información.
+/** @type {string[]} Lista de nombres de las materias extraídas del objeto de datos */
 const mat = Object.keys(materias);
-
-// La variable 'info' ya está declarada globalmente, pero se usa aquí.
-// Considerar pasarla como argumento a 'solucion' o declararla dentro si no se usa fuera.
 
 /**
  * Muestra la información detallada de cada materia (profesor y alumnos) en una tabla HTML.
  */
 const mostrarInformacion = () => {
-    
+        let htmlBuffer = "";
         for (let i = 0; i < mat.length; i++) {
-            let informacion = obtenerInformacion(mat[i]); // Obtiene la información de la materia, profesor y alumnos
+            let informacion = obtenerInformacion(mat[i]);
             if (informacion !== false) {
                 let profesor = informacion[0][0]; // El primer elemento del array es el profesor.
                 let alumnos = informacion[0].slice(1); // El resto del array son los alumnos.
-                info.innerHTML += `<tr>
+                htmlBuffer += `<tr>
                                     <td><b>${mat[i]}</b></td>
                                     <td>${profesor}</td>
                                     <td>${alumnos.join(', ')}</td>
-                                </tr>`
+                                </tr>`;
         }
     }
-    
+    // Una sola inserción al DOM es mucho más eficiente que múltiples +=
+    info.innerHTML = htmlBuffer;
 }
 mostrarInformacion()
 
@@ -124,7 +118,7 @@ const mostrarTodosLosAlumnos = () => {
     const alumnos = obtenerTodosLosAlumnos();
     let html = "";
     alumnos.forEach(alumno => {
-        let clases = clasesAlumno(alumno);//me trae un array con las clases del alumno, cada clase es un objeto con el nombre del alumno, la materia y el profesor
+        let clases = clasesAlumno(alumno);
         html += `
             <tr>
                 <td><b>${alumno}</b></td>
@@ -139,10 +133,8 @@ mostrarTodosLosAlumnos()
 /**
  * Muestra una tabla completa con cada alumno, las materias a las que asiste y el profesor de cada materia.
  * Agrupa las materias por alumno, mostrando el nombre del alumno una sola vez si asiste a múltiples clases.
- */
-/**
- * Genera una tabla comparativa utilizando el atributo 'rowspan'.
- * Optimiza la visualización al agrupar visualmente todas las materias que cursa un mismo estudiante.
+ * 
+ * @note Utiliza el atributo 'rowspan' para mejorar la jerarquía visual agrupando celdas del mismo alumno.
  */
 const mostrarTabla = () => {
     let html = "";

@@ -1,9 +1,18 @@
 body{
-    color: #222;
-    font-family: sans-serif;
+    color: #222; /* Color de texto gris oscuro */
+    font-family: sans-serif; /* Fuente genérica sin serifa */
 }
 
-.contenedor{
-    padding: 30px;
-    background: red;
+.contenedor1{
+    padding: 30px; /* Relleno interno de 30px */
+    background: red; /* Color de fondo rojo */
+    /* Margen superior para separar del borde de la página o de otros elementos */
+    margin-top: 20px; 
+}
+
+.contenedor2{
+    padding: 30px; /* Relleno interno de 30px */
+    background:blue; /* Color de fondo azul */
+    /* Margen superior para separar del contenedor1 */
+    margin-top: 20px; 
 }

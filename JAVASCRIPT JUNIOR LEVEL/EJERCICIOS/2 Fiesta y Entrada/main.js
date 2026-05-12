@@ -1,3 +1,7 @@
+/**
+ * EJERCICIO: validación de edad y horario para entrar a una fiesta.
+ */
+
 let anos = document.getElementById("edad"),
     msg = document.getElementById("msg"),
     hora = document.getElementById("hora"),
@@ -5,6 +9,9 @@ let anos = document.getElementById("edad"),
     mainSol = document.getElementById("main-sol");
     free = false
     
+/**
+ * Pregunta edad y hora; aplica reglas de entrada y marca el primer ingreso gratis tras las 02:00.
+ */
     const validarCliente = () => {
         let edad = parseInt(prompt("¿Cuál es tu edad?"));
         anos.innerHTML = `Tienes ${edad} años`;

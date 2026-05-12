@@ -32,36 +32,40 @@ body {
     text-align: center;
     margin-bottom: 15px;
     color: #1e3a8a;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: bold; /* Texto en negrita */
+    letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 /* 🔹 TEXTO */
 .enunciado p {
-    margin: 10px 0;
-    line-height: 1.7;
-    color: #555;
+    margin: 10px 0; /* Margen superior/inferior de 10px */
+    line-height: 1.7; /* Altura de línea para mejor legibilidad */
+    color: #555; /* Color de texto gris oscuro */
 }
 
 /* 🔹 LISTA */
 ol {
-    margin: 15px 25px;
+    margin: 15px 25px; /* Margen para listas ordenadas */
 }
 
 li {
-    margin: 8px 0;
-    color: #444;
+    margin: 8px 0; /* Margen superior/inferior para ítems de lista */
+    color: #444; /* Color de texto gris */
 }
 
 ul > li {
-    list-style-type: square;
-    margin-left: 20px;
+    /*
+       SELECTOR DE HIJO DIRECTO (>)
+       Aplica estilos solo a los 'li' que son hijos directos de un 'ul'.
+    */
+    list-style-type: square; /* Cambia el estilo del marcador de lista a un cuadrado */
+    margin-left: 20px; /* Sangría a la izquierda para los ítems de lista */
 }
 
 /* 🔹 BOTÓN CONTENEDOR */
 .ask {
-    text-align: center;
-    margin-top: 20px;
+    text-align: center; /* Centra el contenido horizontalmente */
+    margin-top: 20px; /* Margen superior */
 }
 
 /* 🔥 BOTÓN PRO */
@@ -69,18 +73,22 @@ ul > li {
     padding: 12px 25px;
     border: none;
     border-radius: 12px;
+    /* Fondo degradado para el botón */
     background: linear-gradient(135deg, #2563eb, #3b82f6);
     color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s; /* Transición suave para efectos interactivos */
+    /* Sombra para el botón */
     box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
 }
 
 .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4);
+    /* Levanta el botón ligeramente al pasar el ratón */
+    transform: translateY(-2px); 
+    /* Aumenta la sombra al pasar el ratón */
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); 
 }
 
 .btn:active {
@@ -90,14 +98,16 @@ ul > li {
 /* 🔹 RESULTADO */
 .sol {
     width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 18px;
-    background: #fff;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    display: none;
-    animation: aparecer 0.5s ease;
+    max-width: 1200px; /* Ancho máximo */
+    margin: 30px auto; /* Centrado horizontalmente con margen superior/inferior */
+    padding: 25px; /* Relleno interno */
+    border-radius: 18px; /* Bordes redondeados */
+    background: #fff; /* Fondo blanco */
+    /* Sombra más pronunciada para la sección de resultados */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1); 
+    display: none; /* Oculta la sección por defecto */
+    /* Aplica una animación de aparición */
+    animation: aparecer 0.5s ease; 
 }
 
 /* 🔹 TITULO RESULTADO */
@@ -110,39 +120,50 @@ ul > li {
 /* 🔥 TABLA PRO */
 /* 🔥 TABLA PRO */
 table {
-    width: 100%;
-    border-collapse: separate; /* 👈 CLAVE */
-    border-spacing: 0;         /* evita espacios raros */
-    border-radius: 12px;
-    overflow: hidden;
+    width: 100%; /* La tabla ocupa todo el ancho disponible */
+    /*
+       BORDER-COLLAPSE: SEPARATE
+       Permite usar 'border-spacing' y 'border-radius' en la tabla.
+       Si fuera 'collapse', los bordes de las celdas se fusionarían.
+    */
+    border-collapse: separate; 
+    border-spacing: 0; /* Elimina el espacio entre celdas */
+    border-radius: 12px; /* Bordes redondeados para la tabla */
+    overflow: hidden; /* Asegura que los bordes redondeados se apliquen correctamente al contenido */
 
     /* 🔵 BORDE GENERAL */
     border: 1px solid #2563eb;
-    margin: 20px 0;
+    margin: 20px 0; /* Margen superior/inferior para la tabla */
 }
 
 /* 🔹 ENCABEZADO GENERAL */
 thead {
+    /* Fondo degradado para el encabezado de la tabla */
     background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: #eee;
+    color: #eee; /* Color de texto claro */
 }
 
 /* 🔥 TITULO "CARACTERISTICAS" */
 thead .title {
-    font-size: 16px;
-    letter-spacing: 1px;
-    color: #fff;
-    padding: 14px;
-    text-align: center;
+    font-size: 16px; /* Tamaño de fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    color: #fff; /* Color de texto blanco */
+    padding: 14px; /* Relleno interno */
+    text-align: center; /* Centrado de texto */
+    /* Fondo degradado para el título específico del encabezado */
     background: linear-gradient(135deg, #1d4ed8, #2563eb);
 }
 
 /* 🔹 ENCABEZADOS */
 thead th {
-    padding: 12px;
-    text-align: center;
-    font-size: 14px;
-    border-bottom: 1px solid #2563eb; /* línea azul */
+    padding: 12px; /* Relleno interno */
+    text-align: center; /* Centrado de texto */
+    font-size: 14px; /* Tamaño de fuente */
+    /*
+       BORDER-BOTTOM
+       Crea una línea azul en la parte inferior de cada celda de encabezado.
+    */
+    border-bottom: 1px solid #2563eb; 
 }
 
 /* 🔹 FILAS */
@@ -152,28 +173,36 @@ tbody td::first-letter{
 }
 
 tbody tr {
-    transition: 0.2s;
+    transition: 0.2s; /* Transición suave para efectos de hover */
 }
 
 /* 🔥 SEPARADOR ENTRE FILAS */
 tbody td {
-    padding: 12px;
-    text-align: center;
-    font-size: 14px;
+    padding: 12px; /* Relleno interno */
+    text-align: center; /* Centrado de texto */
+    font-size: 14px; /* Tamaño de fuente */
 
     /* 🔵 LÍNEA INFERIOR */
-    border-bottom: 1px solid #2563eb;
+    /*
+       BORDER-BOTTOM
+       Crea una línea azul en la parte inferior de cada celda de datos.
+    */
+    border-bottom: 1px solid #2563eb; 
 }
 
 /* 🔹 FILAS PARES */
 tbody tr:nth-child(even) {
-    background: #f4f7ff;
+    /*
+       PSEUDOCLASE :nth-child(even)
+       Selecciona todas las filas pares (2da, 4ta, etc.) dentro del tbody.
+    */
+    background: #f4f7ff; /* Fondo ligeramente azulado para filas pares */
 }
 
 /* 🔹 HOVER */
 tbody tr:hover {
-    background: #eaf1ff;
-    transform: scale(1.01);
+    background: #eaf1ff; /* Cambia el fondo al pasar el ratón */
+    transform: scale(1.01); /* Escala ligeramente la fila al pasar el ratón */
 }
 
 /* 🔹 ÚLTIMA FILA SIN BORDE */
@@ -182,13 +211,17 @@ tbody tr:last-child td {
 }
 
 /* ANIMACIÓN */
+/*
+   KEYFRAMES
+   Define los estados clave de una animación CSS.
+*/
 @keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
+    from { /* Estado inicial de la animación */
+        opacity: 0; /* Completamente transparente */
+        transform: translateY(15px); /* Desplazado 15px hacia abajo */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to { /* Estado final de la animación */
+        opacity: 1; /* Completamente opaco */
+        transform: translateY(0); /* Vuelve a su posición original */
     }
 }

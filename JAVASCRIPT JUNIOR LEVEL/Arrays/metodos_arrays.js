@@ -1,3 +1,8 @@
+/**
+ * MÉTODOS DE ARRAY EN JAVASCRIPT
+ * Transformadores (mutan el array), accesores (devuelven copias o valores) y de repetición.
+ */
+
 //************** METODOS TRANSFORMADORES DE ARRAYS************//
 let nombres = ["Juan", "María", "Pedro", "Ana"];
 let resultado;

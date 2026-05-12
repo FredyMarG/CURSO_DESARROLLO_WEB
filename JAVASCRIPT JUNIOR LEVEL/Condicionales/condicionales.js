@@ -1,3 +1,8 @@
+/**
+ * CONDICIONALES (if / else)
+ * Ramifica la ejecución según una comparación de cadenas.
+ */
+
 let nombre = "Fredy"
 
 if (nombre == "Dani") {

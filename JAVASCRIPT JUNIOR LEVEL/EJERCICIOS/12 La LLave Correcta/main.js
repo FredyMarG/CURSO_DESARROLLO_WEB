@@ -1,16 +1,13 @@
-// Selecciona el contenedor principal en el DOM donde se agregará cada llave.
-// Se asume que existe un elemento con la clase "flex-container" en el HTML.
+/** Lógica para la generación dinámica y selección de llaves en el DOM */
 const contenedor = document.querySelector(".flex-container"),
       boton = document.querySelector(".send-button")
 let botonAntiguo = boton.value
 boton.value = botonAntiguo.toUpperCase()
 
-// Contador auxiliar para saber cuántas llaves se han creado.
-// En este código no se usa para mostrarlo, pero permite llevar el control interno.
 let contador = 0
 
 /**
- * Crea los elementos HTML de una llave y devuelve sus bloques como un arreglo.
+ * Genera la estructura HTML de una llave.
  *
  * @param {string} nombre - Nombre visible de la llave.
  * @param {string} modelo - Identificador del modelo de llave.
@@ -39,6 +36,10 @@ function crearLLave(nombre, modelo, precio) {
     return [img, nombre, modelo, precio]
 }
 
+/**
+ * Escribe el identificador numérico de la llave seleccionada en el campo oculto del formulario.
+ * @param {number} number - Valor del modelo (aleatorio) asociado a la tarjeta clicada.
+ */
 const changeHidden = (number)=>{
     document.querySelector(".key-data").value = number
 }

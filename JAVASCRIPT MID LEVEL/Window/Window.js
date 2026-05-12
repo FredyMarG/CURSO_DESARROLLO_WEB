@@ -5,17 +5,14 @@
 // METODOS DE APERTURA Y CIERRE
 let url = "https://youtube.com"
 
-// 📚 Carga un recurso en un nuevo contexto de navegación (pestaña o ventana) o uno existente
-let ventana = window.open(url)
+/** Abre un nuevo contexto de navegación (pestaña/ventana) */
+const ventana = window.open(url)
 
-// 📚 Cierra la ventana referenciada (normalmente solo permitido para ventanas abiertas vía script)
+/** Intenta cerrar la ventana referenciada (solo permitido si fue abierta por script) */
 ventana.close()
 
-// 📚 Propiedad de solo lectura que devuelve 'true' si la ventana referenciada está cerrada
 console.log(ventana.closed);
-
-// 📚 Detiene la carga del documento actual (equivalente al botón 'Detener' o 'X' del navegador)
-window.stop()
+window.stop() // Detiene la carga de red del documento
 
 // METODOS DE INTERACCION CON EL USUARIO
 

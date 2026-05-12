@@ -1,17 +1,23 @@
+/**
+ * BUCLES Y CONTROL DE FLUJO
+ * while, do...while y uso de break para salir antes de tiempo.
+ */
+
 let numero = 0
 
 if (numero < 10) {
+/* --- Condición simple con if --- */
     console.log("Es menor que 10");    
 }
 
-//while pregunta y ejecuta hasta que la condicion sea falsa
+/* --- while: evalúa la condición al inicio de cada iteración --- */
 while(numero < 6){
     numero++
     console.log(numero);
 }
 
 numero = 0
-//do while ejecuta la condicion al menos una vez y luego pregunta, y ejecuta hasta que la condicion sea falsa
+/* --- do...while: ejecuta al menos una vez y luego evalúa la condición --- */
 do{
     console.log(numero);
     numero++
@@ -23,7 +29,7 @@ while (numero < 1000){
     numero++
     console.log(numero);
     if (numero == 10) {
-        //con break rompemos el ciclo, en este caso cuando numero es igual a 10 termina el while
+        /* break: interrumpe el bucle por completo --- */
         break
     }
 }

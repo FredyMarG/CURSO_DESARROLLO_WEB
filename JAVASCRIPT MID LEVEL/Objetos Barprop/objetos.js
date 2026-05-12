@@ -1,23 +1,19 @@
-// 📚 Objetos BarProp (Propiedades de la ventana)
-// Nota: Estos objetos tienen una propiedad llamada '.visible' que devuelve un booleano.
+/**
+ * OBJETOS BARPROP
+ * Propiedades del objeto 'window' que indican la visibilidad de elementos de la UI del navegador.
+ * Nota: Retornan un objeto con la propiedad booleana '.visible'.
+ */
 
-// Representa la barra de direcciones del navegador (donde escribes la URL).
-// Permite saber si el usuario puede ver la dirección actual.
+// Barra de direcciones
 window.locationbar;
 
-// Representa la barra de menús superior (Archivo, Editar, Ver, etc.).
-// En navegadores modernos suele estar oculta por defecto o integrada.
+// Barra de menús (Archivo, Editar, etc.)
 window.menubar;
 
-// Representa la barra personal o de marcadores/favoritos del usuario.
+// Barra de marcadores/favoritos
 window.personalbar;
 
-// Representa las barras de desplazamiento (vertical y horizontal). 
-// Es muy útil para saber si el navegador está mostrando scrollbars en la ventana.
+// Barras de desplazamiento (Scrollbars)
 window.scrollbars;
-
-// Representa la barra de estado, que normalmente aparece abajo al cargar un sitio o pasar el mouse sobre un link.
 window.statusbar;
-
-// Representa la barra de herramientas principal (botones de atrás, adelante, recargar).
 window.toolbar;

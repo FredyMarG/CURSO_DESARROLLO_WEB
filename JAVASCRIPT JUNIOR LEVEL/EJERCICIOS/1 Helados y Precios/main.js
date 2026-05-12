@@ -1,3 +1,8 @@
+/**
+ * EJERCICIO: precios de helados según el dinero de tres personas.
+ * Pide montos, convierte a número y escribe en el DOM qué helado puede comprar cada uno.
+ */
+
 let roberto = document.getElementById("roberto"),
     pedro = document.getElementById("pedro"),
     cofla = document.getElementById("cofla"),
@@ -5,6 +10,10 @@ let roberto = document.getElementById("roberto"),
     pedro_helado = document.getElementById("pedro_helado"),
     cofla_helado = document.getElementById("cofla_helado")
 
+/**
+ * Calcula y muestra qué helado puede comprar cada persona según su dinero.
+ * Usa rangos de precios fijos y actualiza los elementos del HTML con innerHTML.
+ */
 function solucion(){
     let dineroRoberto = prompt("Cuanto dinero tiene Roberto?")
     let dineroPedro = prompt("Cuanto dinero tiene Pedro?")

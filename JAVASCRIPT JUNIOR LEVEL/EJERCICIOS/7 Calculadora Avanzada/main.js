@@ -1,33 +1,46 @@
+/**
+ * EJERCICIO: calculadora orientada a objetos (clase Calculadora).
+ */
+
 let respuesta = document.getElementById("respuesta"),
     calc = document.getElementById("calcular"),
     sol = document.getElementById("main-sol"),
     num1,
     num2;
 
+/** Agrupa operaciones aritméticas básicas y dos raíces */
 class Calculadora{
+    /** Constructor vacío: reserva el tipo para instanciar métodos */
     constructor(){
     }
+    /** Suma dos operandos como enteros */
     sumar(num1,num2){
         return parseInt(num1) + parseInt(num2)
     }
+    /** Resta dos operandos como enteros */
     restar(num1,num2){
         return parseInt(num1) - parseInt(num2)
     }
+    /** Multiplica dos operandos como enteros */
     multiplicar(num1,num2){
         return parseInt(num1) * parseInt(num2)
     }
+    /** Divide dos operandos como enteros */
     dividir(num1,num2){
         return parseInt(num1) / parseInt(num2)
     }
 
+    /** Potencia entera: base elevada al exponente */
     potencia(num,exp){
         return parseInt(Math.pow(num,exp))
     }
 
+    /** Raíz cuadrada entera (truncada con parseInt) */
     raizCuadrada(num){
         return parseInt(Math.sqrt(num))
     }
 
+    /** Raíz cúbica entera (truncada con parseInt) */
     raizCubica(num){
         return parseInt(Math.cbrt(num))
     }
@@ -35,6 +48,9 @@ class Calculadora{
 
 const calculadora = new Calculadora();
 
+/**
+ * Igual que la calculadora básica pero delegando en la instancia `calculadora`.
+ */
 function calculo() {
     let operacion = document.getElementById("operacion")
     operacion = operacion.value
