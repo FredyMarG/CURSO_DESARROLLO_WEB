@@ -1,23 +1,33 @@
-// Seleccionamos el primer elemento del documento que tenga la clase CSS "button"
+/**
+ * GESTIÓN DE MANEJADORES DE EVENTOS (EVENT HANDLERS)
+ * Demostración de asignación dinámica y limpieza de memoria mediante remoción de listeners.
+ */
+
+/** @type {HTMLButtonElement} - Referencia al nodo del botón principal */
 const button = document.querySelector(".button");
 
-// Registramos un "escuchador de eventos" para el evento de clic. 
-// Cuando se haga clic, se ejecutará la función 'saludar'.
+/**
+ * Registro de un Event Listener utilizando una función nominada.
+ * El uso de funciones nominadas es obligatorio si se planea usar removeEventListener posteriormente.
+ */
 button.addEventListener("click", saludar);
 
 /**
- * Muestra una alerta de saludo al usuario.
- * Inmediatamente después, utiliza removeEventListener para eliminar este manejador específico.
- * Esto garantiza que la alerta solo aparezca en el primer clic.
+ * Callback para el evento click.
+ * Implementa un patrón de ejecución única (Self-removing listener).
+ * @function saludar
  */
 function saludar() {
     alert("Hola!");
+    // Remoción del listener para liberar recursos y evitar ejecuciones redundantes.
     button.removeEventListener("click", saludar);
 }
 
-// Agregamos un segundo manejador de eventos al mismo botón usando una función de flecha (arrow function).
-// A diferencia de 'saludar', este evento no se elimina y se ejecutará en cada clic.
+/**
+ * Registro concurrente de un segundo manejador.
+ * Las funciones anónimas (Arrow functions) son útiles para lógica rápida pero difíciles de remover.
+ */
 button.addEventListener("click", (e)=>{
-    // 'e' representa el objeto del evento. 'e.target' devuelve el elemento HTML que originó el evento (el botón).
+    /** @param {Event} e - El objeto de evento generado por el navegador */
     console.log(e.target);
 });

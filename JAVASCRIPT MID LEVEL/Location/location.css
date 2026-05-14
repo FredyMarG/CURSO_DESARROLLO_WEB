@@ -1,0 +1,95 @@
+/**
+ * 🎨 SYSTEM DESIGN - LOCATION INSPECTOR MODULE
+ * 
+ * ARQUITECTURA: Diseño centrado en la legibilidad y la usabilidad.
+ * RENDIMIENTO: Uso de propiedades que no fuerzan el reflow del DOM en animaciones.
+ * ACCESIBILIDAD: Contraste de colores adecuado y feedback visual claro para interacciones.
+ */
+
+/* BASE STYLES: Configuración global para el cuerpo del documento */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Pila de fuentes del sistema para rendimiento */
+    background-color: #f0f2f5; /* Color de fondo suave para un aspecto limpio */
+    display: flex; /* Activa Flexbox para un centrado eficiente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura del viewport */
+    margin: 0; /* Elimina el margen predeterminado del navegador */
+}
+
+/* CONTAINER: Estilos para el contenedor principal de la interfaz */
+.container {
+    background: white; /* Fondo blanco para la tarjeta principal */
+    padding: 2rem; /* Espaciado interno para el contenido */
+    border-radius: 12px; /* Bordes redondeados para una estética moderna */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra sutil para dar profundidad */
+    max-width: 600px; /* Ancho máximo para legibilidad en pantallas grandes */
+    width: 90%; /* Ancho responsivo para pantallas más pequeñas */
+}
+
+/* TYPOGRAPHY: Estilos para los elementos de texto */
+h1 {
+    color: #1a73e8; /* Color primario para el título */
+    margin-bottom: 0.5rem; /* Espacio debajo del título */
+}
+.subtitle {
+    color: #5f6368; /* Color secundario para el subtítulo */
+    margin-bottom: 2rem; /* Espacio generoso debajo del subtítulo */
+}
+
+/* CARD COMPONENT: Estilos para la tarjeta de visualización de datos */
+.card {
+    background: #f8f9fa; /* Fondo ligeramente gris para diferenciar la tarjeta */
+    border-left: 5px solid #1a73e8; /* Borde izquierdo de color primario para énfasis */
+    padding: 1.5rem; /* Relleno interno de la tarjeta */
+    border-radius: 4px; /* Bordes ligeramente redondeados */
+    margin-bottom: 2rem; /* Espacio debajo de la tarjeta */
+}
+
+/* DATA ITEM: Estilos para cada línea de información dentro de la tarjeta */
+.data-item {
+    margin-bottom: 1rem; /* Espacio entre cada elemento de datos */
+    font-size: 0.95rem; /* Tamaño de fuente ligeramente más pequeño */
+    color: #3c4043; /* Color de texto oscuro para legibilidad */
+}
+
+/* DATA ITEM SPAN: Estilos para los valores de los datos (URL, Host, etc.) */
+.data-item span {
+    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para datos técnicos */
+    background: #e8eaed; /* Fondo sutil para resaltar el valor */
+    padding: 2px 6px; /* Relleno ligero alrededor del texto */
+    border-radius: 4px; /* Bordes redondeados para el fondo del valor */
+    word-break: break-all; /* Permite que las palabras largas se rompan para evitar desbordamiento */
+}
+
+/* ACTIONS: Contenedor para los botones de acción */
+.actions {
+    display: flex; /* Usa Flexbox para organizar los botones */
+    gap: 1rem; /* Espacio entre los botones */
+}
+
+/* BUTTON BASE STYLES: Estilos base para todos los botones */
+.btn {
+    padding: 10px 20px; /* Relleno interno para el tamaño del botón */
+    border: none; /* Elimina el borde predeterminado */
+    border-radius: 6px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor para indicar interactividad */
+    font-weight: 600; /* Texto en negrita para énfasis */
+    transition: opacity 0.2s; /* Transición suave para el efecto hover */
+}
+
+.btn:hover {
+    opacity: 0.8; /* Reduce la opacidad en hover para feedback visual */
+}
+
+/* BUTTON VARIANT: Estilos específicos para el botón de recarga */
+.btn-reload {
+    background-color: #34a853; /* Color verde para la acción de recargar */
+    color: white; /* Texto blanco para contraste */
+}
+
+/* BUTTON VARIANT: Estilos específicos para el botón de asignación (navegar) */
+.btn-assign {
+    background-color: #1a73e8; /* Color azul para la acción de navegar */
+    color: white; /* Texto blanco para contraste */
+}

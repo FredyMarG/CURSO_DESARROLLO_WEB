@@ -10,14 +10,34 @@
 
 <html lang="en">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resize y MOve</title>
+    <link rel="stylesheet" href="style.css"> <!-- Vinculación del sistema de diseño profesional -->
+    <title>JS Mid Level - Window Resize & Move Lab</title>
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Main: Contenedor semántico principal para el laboratorio de manipulación de ventana -->
+    <main class="window-lab">
+        <header>
+            <h1>Window Manipulation Lab</h1>
+            <p class="guide-text">Nota: Por seguridad, estos métodos suelen requerir ventanas abiertas vía script.</p>
+        </header>
+
+        <div class="control-panel">
+            <section class="security-note">
+                <h2>📚 Políticas de Navegador</h2>
+                <p>La mayoría de navegadores modernos bloquean <code>resize</code> y <code>move</code> en pestañas principales para proteger la UX del usuario.</p>
+            </section>
+
+            <section class="actions">
+                <h3>Controles de Ventana</h3>
+                <div class="button-group">
+                    <button onclick="probarResize()" class="btn btn-resize">📐 Probar Resize</button>
+                    <button onclick="probarMove()" class="btn btn-move">🚀 Probar Move</button>
+                </div>
+            </section>
+        </div>
+    </main>
 
     <script src="resize y move.js"></script>
 </body>

@@ -1,0 +1,60 @@
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Fuente: Pila moderna para legibilidad universal */
+    background-color: #f8fafc; /* Color de fondo: Blanco grisáceo muy suave para confort visual */
+    color: #1e293b;            /* Color de texto: Gris oscuro (Slate-800) para legibilidad */
+    display: flex;             /* Layout: Activa Flexbox para centrado y control de flujo */
+    justify-content: center;   /* Alineación: Centra el contenido horizontalmente */
+    padding: 2rem;             /* Relleno: Margen interno de seguridad para el contenido */
+    margin: 0;                 /* Margen: Elimina el espaciado predeterminado del navegador */
+}
+
+.container {
+    max-width: 800px;          /* Ancho máximo: Limita la expansión en pantallas ultra-panorámicas */
+    width: 100%;               /* Ancho: Ocupa el 100% del espacio disponible hasta el máximo */
+}
+
+header {
+    text-align: center;        /* Alineación: Centra el texto del encabezado */
+    margin-bottom: 3rem;       /* Margen: Separa el título del grid de tarjetas */
+}
+
+h1 { color: #2563eb; font-size: 2.25rem; margin-bottom: 0.5rem; } /* Estilo del título principal */
+.subtitle { color: #64748b; } /* Estilo del subtítulo en tono grisáceo */
+
+.grid {
+    display: grid;             /* Layout: Activa el sistema de cuadrícula bidimensional */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas: Adaptables según el ancho disponible */
+    gap: 1.5rem;               /* Brecha: Espacio uniforme de 24px entre tarjetas */
+}
+
+.status-card {
+    background: white;         /* Fondo: Superficie limpia para cada ítem de estado */
+    padding: 1.5rem;           /* Relleno: Espacio interno para el contenido de la card */
+    border-radius: 12px;       /* Bordes: Esquinas suavizadas para estética moderna */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Sombra: Aporta elevación sutil */
+    display: flex;             /* Layout: Flexbox interno para organizar el contenido */
+    flex-direction: column;    /* Dirección: Organiza el título y el badge verticalmente */
+    align-items: center;       /* Alineación: Centra los elementos hijos horizontalmente */
+    transition: transform 0.2s; /* Transición: Suaviza la animación del escalado en hover */
+}
+
+.status-card:hover { transform: translateY(-4px); } /* Hover: Efecto de elevación al interactuar */
+
+.status-card h3 {
+    font-size: 1rem;           /* Tamaño: Fuente base para el nombre de la barra */
+    margin-bottom: 1rem;       /* Margen: Separa el título del badge de estado */
+    color: #475569;            /* Color: Tono neutro para el encabezado de la card */
+}
+
+.badge {
+    padding: 0.5rem 1rem;      /* Relleno: Crea la forma de píldora del badge */
+    border-radius: 9999px;     /* Bordes: Máxima curvatura para estilo pill */
+    font-size: 0.875rem;       /* Tamaño: Fuente compacta para etiquetas */
+    font-weight: 600;          /* Grosor: Resalta el estado del componente */
+    text-transform: uppercase; /* Transformación: Todo en mayúsculas para estilo UI */
+}
+
+/* Clases de estado dinámicas */
+.status-visible { background-color: #dcfce7; color: #166534; } /* Estado: Verde para visibilidad activa */
+.status-hidden { background-color: #f1f5f9; color: #64748b; }  /* Estado: Gris para visibilidad oculta */
+.status-hidden::after { content: " (Hidden)"; }                /* Contenido: Sufijo explicativo para el badge oculto */

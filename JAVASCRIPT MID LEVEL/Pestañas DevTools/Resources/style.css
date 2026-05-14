@@ -1,30 +1,43 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Resources/style.css
- * Carpeta del tema: «Resources». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+/**
+ * 🛠️ MODULE: RESOURCES / SOURCES DEVTOOLS LAB
+ * 
+ * ARQUITECTURA: Diseño de entorno oscuro (Terminal UI) para facilitar la lectura de código y depuración.
+ * RENDIMIENTO: Uso de propiedades que aprovechan la aceleración por hardware.
  */
 
-body{
-    color: #222;
-    font-family: sans-serif;
+/* BASE STYLES: Configuración global y tipografía */
+body {
+    color: #222;               /* Slate-900: Color base para texto fuera de la zona de consola */
+    font-family: sans-serif;   /* Tipografía de sistema para carga inmediata sin CLS (Cumulative Layout Shift) */
+    margin: 0;                 /* Elimina los márgenes intrínsecos del User-Agent */
+    padding: 2rem;             /* Relleno perimetral para una mejor jerarquía visual en el viewport */
+    background-color: #f8fafc; /* Fondo neutro ligero para contraste con el contenedor oscuro */
 }
 
-div{
-    background-color: #000;
-    padding: 20px;
+/* CODE CONTAINER: Simulación de editor de código o terminal */
+div {
+    background-color: #000;    /* Fondo negro: maximiza la concentración en los recursos visualizados */
+    padding: 25px;             /* Define el espaciado interno (Box Model) del componente */
+    border-radius: 10px;       /* Curvatura de esquinas para una estética de software moderno */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Profundidad visual mediante sombras de elevación */
 }
 
-h2{
-    color: #fff;
+/* HEADINGS: Títulos de sección internos */
+h2 {
+    color: #fff;               /* Contraste máximo para títulos sobre superficies oscuras */
+    margin-top: 0;             /* Alineación vertical corregida respecto al contenedor padre */
 }
 
-p{
-    color: #ccc;
+/* RESOURCE ITEMS: Representación de archivos o líneas de código */
+p {
+    color: #ccc;               /* Gris suave: legibilidad equilibrada para reducir fatiga visual */
+    padding: 8px;              /* Aumenta el área de selección para interacción táctil y mouse */
+    transition: all 0.2s ease; /* Interpolación suave para cambios de estado (DX) */
 }
 
+/* INTERACTION: Feedback visual para depuración */
 p:hover {
-    background: red;
+    background: #cc0000;       /* Rojo vibrante: resalta la línea seleccionada en el árbol de recursos */
+    color: #fff;               /* Asegura el contraste al cambiar el fondo */
+    cursor: pointer;           /* Indica explícitamente que el nodo es inspeccionable o ejecutable */
 }
-

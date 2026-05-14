@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspector de BarProp</title>
+    <link rel="stylesheet" href="objetos.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Browser UI Inspector</h1>
+            <p class="subtitle">Estado de visibilidad de las interfaces del navegador (BarProp)</p>
+        </header>
+
+        <div class="grid" id="barprop-grid">
+            <!-- Las tarjetas se pueden generar estáticamente o vía JS -->
+            <div class="status-card">
+                <h3>Location Bar</h3>
+                <span id="locationbar-status" class="badge">Cargando...</span>
+            </div>
+            <div class="status-card">
+                <h3>Menu Bar</h3>
+                <span id="menubar-status" class="badge">Cargando...</span>
+            </div>
+            <div class="status-card">
+                <h3>Personal Bar</h3>
+                <span id="personalbar-status" class="badge">Cargando...</span>
+            </div>
+            <div class="status-card">
+                <h3>Scrollbars</h3>
+                <span id="scrollbars-status" class="badge">Cargando...</span>
+            </div>
+            <div class="status-card">
+                <h3>Status Bar</h3>
+                <span id="statusbar-status" class="badge">Cargando...</span>
+            </div>
+        </div>
+    </div>
+    <script src="objetos.js"></script>
+</body>
+</html>

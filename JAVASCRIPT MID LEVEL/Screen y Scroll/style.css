@@ -1,0 +1,95 @@
+/**
+ * 🛠️ MODULE: SCREEN & SCROLL TELEMETRY
+ * 
+ * ARQUITECTURA: Layout basado en Grid para la presentación de métricas.
+ * RENDIMIENTO: Uso de 'contain: layout' para aislar el renderizado del panel de datos.
+ */
+
+/* BASE STYLES: Configuración del entorno global */
+body {
+    color: #f8fafc;            /* Color de texto: Gris muy claro para contraste en fondo oscuro */
+    font-family: 'Inter', system-ui, sans-serif; /* Tipografía: Pila de fuentes modernas y legibles */
+    background-color: #0f172a; /* Color de fondo: Azul marino profundo (Slate-900) */
+    margin: 0;                 /* Margen: Elimina el espacio exterior predeterminado del navegador */
+    padding: 0;                /* Relleno: Elimina el espacio interior predeterminado */
+    line-height: 1.5;          /* Interlineado: Mejora la legibilidad vertical del texto */
+}
+
+/* DASHBOARD: Contenedor principal fijo */
+.dashboard {
+    padding: 2rem;             /* Relleno: Espacio interno de 32px para alejar contenido de los bordes */
+    max-width: 900px;          /* Ancho máximo: Limita el crecimiento horizontal en pantallas grandes */
+    margin: 0 auto;            /* Margen: Centra horizontalmente el contenedor en la pantalla */
+}
+
+header {
+    margin-bottom: 2rem;       /* Margen inferior: Separa el encabezado del panel de monitoreo */
+    border-left: 4px solid #3b82f6; /* Acento visual azul */
+    padding-left: 1rem;        /* Relleno izquierdo: Espacio entre el borde decorativo y el texto */
+}
+
+h1 { margin: 0; font-size: 1.8rem; } /* Elimina margen y establece tamaño de fuente jerárquico */
+.subtitle { color: #94a3b8; font-size: 0.9rem; } /* Color tenue y tamaño reducido para contexto */
+
+/* MONITOR PANEL: Grid de tarjetas de datos */
+.monitor-panel {
+    display: grid;             /* Grid: Activa el sistema de rejilla bidimensional */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas: Layout responsivo sin media queries */
+    gap: 1.5rem;               /* Brecha: Espacio de 24px entre las tarjetas del panel */
+    position: sticky;          /* Posición: Mantiene el elemento fijo al hacer scroll dentro del contenedor */
+    top: 2rem;                 /* Top: Define la distancia desde el borde superior donde se "pega" */
+    z-index: 10;               /* Z-Index: Asegura que el panel quede por encima del contenido al scrollear */
+}
+
+/* STAT CARD: Estilo de contenedor para métricas */
+.stat-card {
+    background: #1e293b;       /* Color de fondo: Gris azulado oscuro (Slate-800) */
+    padding: 1.5rem;           /* Relleno: Espacio interno generoso para los datos */
+    border-radius: 12px;       /* Bordes: Esquinas suavizadas para estética moderna */
+    border: 1px solid #334155; /* Borde: Define los límites con un color sutil */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); /* Sombra: Aporta profundidad y elevación */
+}
+
+.stat-card h2 {
+    font-size: 1.1rem;         /* Tamaño de fuente: Jerarquía clara para títulos de sección */
+    margin-top: 0;             /* Margen: Alineación perfecta con el borde superior de la card */
+    color: #60a5fa;            /* Color: Azul brillante para énfasis técnico */
+}
+
+.data-grid p {
+    font-family: 'Courier New', monospace; /* Fuente: Monoespaciada para datos de telemetría */
+    background: #0f172a;       /* Fondo: Contraste oscuro para cada línea de datos */
+    padding: 8px;              /* Relleno: Área interna para legibilidad del dato */
+    border-radius: 6px;        /* Bordes: Consistencia con el diseño de la card */
+    display: flex;             /* Flex: Alinea el label y el valor en los extremos */
+    justify-content: space-between; /* Justificación: Distribuye espacio entre elementos */
+}
+
+span { color: #fbbf24; }      /* Color: Ámbar para resaltar los valores numéricos dinámicos */
+
+/* ACTIONS: Botonera de control de scroll */
+.button-group {
+    display: flex;             /* Flex: Organiza los botones en una fila horizontal */
+    gap: 10px;                 /* Brecha: Separación de 10px entre botones */
+    margin-top: 1rem;          /* Margen superior: Separa la botonera de los datos */
+}
+
+.btn {
+    flex: 1;                   /* Flex: Permite que los botones crezcan equitativamente */
+    padding: 10px;             /* Relleno: Área de clic cómoda */
+    border: none;              /* Borde: Elimina el estilo predeterminado del navegador */
+    border-radius: 6px;        /* Bordes: Curvatura consistente con la UI */
+    cursor: pointer;           /* Cursor: Cambia a puntero para indicar interactividad */
+    font-weight: 600;          /* Grosor: Resalta el texto de acción */
+}
+
+.btn-primary { background: #3b82f6; color: white; } /* Botón principal: Azul brillante */
+.btn-secondary { background: #475569; color: white; } /* Botón secundario: Gris neutro */
+
+/* SPACER: Fuerza el scroll vertical para pruebas */
+.content-spacer {
+    height: 2000px;            /* Altura: Crea un área extensa para habilitar el desplazamiento vertical */
+    background: linear-gradient(to bottom, transparent, #1e293b); /* Fondo: Degradado decorativo */
+    margin-top: 2rem;          /* Margen: Separación del panel de monitoreo */
+    opacity: 0.3;              /* Opacidad: Reduce la intensidad visual del espaciador */
+}
