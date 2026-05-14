@@ -1,107 +1,92 @@
-/** Lógica para la generación dinámica y selección de llaves en el DOM */
+/** 
+ * Lógica para la generación dinámica, renderizado optimizado y selección de llaves en el DOM.
+ * 
+ * FLUJO:
+ * 1. Selecciona contenedores.
+ * 2. Genera datos aleatorios (modelo y precio).
+ * 3. Crea elementos HTML en memoria usando un Fragmento (Rendimiento).
+ * 4. Inyecta todo al DOM en una sola operación.
+ */
+
 const contenedor = document.querySelector(".flex-container"),
       boton = document.querySelector(".send-button")
 let botonAntiguo = boton.value
 boton.value = botonAntiguo.toUpperCase()
 
-let contador = 0
-
 /**
- * Genera la estructura HTML de una llave.
+ * Genera la estructura de datos visual (HTML) de una llave individual.
  *
- * @param {string} nombre - Nombre visible de la llave.
- * @param {string} modelo - Identificador del modelo de llave.
- * @param {string} precio - Precio de la llave.
+ * @param {string} nombre - Nombre descriptivo de la llave (ej. "Llave 1").
+ * @param {string} modelo - Identificador único o número de serie del modelo.
+ * @param {string} precio - Valor comercial de la llave formateado como string.
  * @returns {string[]} Arreglo con HTML para imagen, nombre, modelo y precio.
  */
 function crearLLave(nombre, modelo, precio) {
-    // Incrementa el contador cada vez que se crea una llave.
-    contador++
-
-    // Se crea una cadena HTML para la imagen de la llave.
-    // El archivo debe existir en la misma carpeta y llamarse "llave.jpg".
+    /**
+     * Se define la imagen. Nota: Se asume que 'llave.jpg' reside en la raíz del proyecto.
+     * @type {string}
+     */
     const img = `<img class="llave-img" src="llave.jpg" alt="Llave">`
 
-    // Se crea una cadena HTML para el nombre de la llave.
+    /** @type {string} Título de la tarjeta */
     nombre = `<h2>${nombre}</h2>`
 
-    // Se crea una cadena HTML para el modelo.
-    // Se usa el atributo id con el valor del modelo para poder identificarlo en el DOM.
+    /** 
+     * Encabezado de nivel 3 para el modelo. 
+     * Se asigna el ID dinámicamente para que sea fácilmente identificable.
+     * @type {string} 
+     */
     modelo = `<h3 id="${modelo}">${modelo}</h3>`
 
-    // Se crea una cadena HTML para el precio, con el valor en negrita.
+    /** @type {string} Párrafo con el precio resaltado */
     precio = `<p>Precio: <b>${precio}</b></p>`
 
-    // Retorna un arreglo con las cuatro piezas de contenido HTML.
     return [img, nombre, modelo, precio]
 }
 
 /**
  * Escribe el identificador numérico de la llave seleccionada en el campo oculto del formulario.
- * @param {number} number - Valor del modelo (aleatorio) asociado a la tarjeta clicada.
+ * @param {string} number - Valor del modelo capturado de la tarjeta seleccionada.
  */
 const changeHidden = (number)=>{
     document.querySelector(".key-data").value = number
 }
 
-// Crea un fragmento de documento para agregar múltiples elementos al DOM de una vez.
-// Esto mejora el rendimiento porque evita reflujo y repintado en cada inserción.
+/** 
+ * OPTIMIZACIÓN: El DocumentFragment actúa como un "piso falso". 
+ * Construimos todo sobre él y luego lo "pegamos" al DOM real de golpe. 
+ */
 let fragment = document.createDocumentFragment()
 
-// Bucle para generar 20 llaves de ejemplo.
 for (let i = 1; i <= 20; i++) {
-    // Genera un número aleatorio para el modelo.
-    // Math.random() devuelve un valor entre 0 y 1, luego se multiplica y se redondea hacia abajo.
+    // Generación de identificador único entre 0 y 9999
     let modeloRandom = Math.floor(Math.random() * 10000)
 
-    // Genera un precio aleatorio entre 30 y 40, con dos decimales.
+    // Generación de precio con rango dinámico y redondeo a 2 decimales
     let precioRandom = (Math.random() * 10 + 30).toFixed(2)
-
-    // Llama a la función crearLLave para obtener el contenido HTML de esa llave.
-    // El nombre se construye con el número de iteración, el modelo con el número aleatorio,
-    // y el precio se formatea como cadena con símbolo de dólar.
+    
     let llave = crearLLave(`Llave ${i}`, `Modelo ${modeloRandom}`, `$${precioRandom}`)
 
-    // Crea un elemento <div> que contendrá la llave completa.
     let div = document.createElement("div")
 
+    // Closure: Cada div recuerda su 'modeloRandom' específico gracias al ámbito del bucle.
     div.addEventListener("click", ()=>{
-        changeHidden(modeloRandom)
+        changeHidden(`Modelo ${modeloRandom}`)
     })
 
     /**
-     * TABINDEX - Atributo de accesibilidad para la navegación por teclado
-     * El tabindex define el orden en el que los elementos pueden recibir el foco
-     * cuando el usuario presiona la tecla TAB. En este caso:
-     * - div.tabIndex = i   →  Asigna un valor positivo (1 al 20)
-     * VALORES DE TABINDEX:
-     * • tabindex="0"       → El elemento puede recibir foco en su orden natural en el HTML
-     * • tabindex="-1"      → El elemento NO recibe foco con TAB (solo accesible por JavaScript)
-     * • tabindex="1..32767"→ Valores positivos definen orden explícito de navegación
-     *                         Un tabindex de 1 recibe foco ANTES que tabindex de 2, etc.
-     * 
-     * EN ESTE CÓDIGO:
-     * Se asigna tabindex = i (donde i va de 1 a 20), lo que significa:
-     * - Primera tarjeta: tabindex="1" (recibe foco primero al presionar TAB)
-     * - Segunda tarjeta: tabindex="2" (recibe foco segundo)
-     * - ... y así sucesivamente hasta la tarjeta 20
-     * 
-     * IMPLICACIÓN:
-     * El usuario puede navegar entre las tarjetas presionando TAB para avanzar
-     * y SHIFT+TAB para retroceder, mejorando la accesibilidad del sitio.
+     * ACCESIBILIDAD (A11y):
+     * ACCESIBILIDAD: El tabIndex hace que el DIV (que no es interactivo por defecto) 
+     * sea detectable por lectores de pantalla y navegable con la tecla TAB.
      */
     div.tabIndex = i
-
-    // Añade clases para estilo y para poder identificar cada item.
     div.classList.add(`item-${i}`,`flex-item`)
 
-    // Combina el HTML que devolvió crearLLave en el interior del div.
+    // Inyección de piezas de la llave.
+    // Nota: innerHTML es rápido aquí, pero en apps con inputs de usuario usaríamos nodos.
     div.innerHTML = llave[0] + llave[1] + llave[2] + llave[3]
 
-    // Agrega el div al fragmento. No se inserta aún en el DOM principal.
     fragment.appendChild(div)
 }
 
-// Una vez que todas las llaves están creadas en el fragmento, se agrega todo de una sola vez al contenedor.
-// Esto inserta las 20 tarjetas en el DOM con una sola operación.
 contenedor.appendChild(fragment)

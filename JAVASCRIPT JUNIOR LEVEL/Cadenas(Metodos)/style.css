@@ -1,0 +1,86 @@
+/**
+ * ESTILOS PROFESIONALES - MÓDULO CADENAS
+ * Diseño minimalista centrado en la legibilidad.
+ */
+
+/* Reset global para consistencia entre navegadores */
+* { 
+    margin: 0;              /* Reinicia márgenes: evita espacios blancos inesperados en los bordes de la pantalla */
+    padding: 0;             /* Reinicia rellenos: asegura que los elementos empiecen sin espacio interno extra */
+    box-sizing: border-box; /* Modelo de caja: garantiza que padding/border no sumen al ancho total definido */
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; /* Pila de fuentes: carga la mejor disponible en el sistema */
+    background-color: #f3f4f6; /* Color de fondo: gris neutro para reducir la fatiga visual */
+    display: flex;             /* Flexbox: convierte el body en un contenedor flexible para posicionamiento fácil */
+    align-items: center;       /* Eje Secundario: centra los elementos verticalmente respecto a la pantalla */
+    justify-content: center;    /* Eje Principal: centra los elementos horizontalmente en la pantalla */
+    min-height: 100vh;         /* Unidades de Viewport: obliga al body a medir al menos el 100% del alto de la ventana */
+    color: #1f2937;            /* Contraste: asegura legibilidad con un gris casi negro sobre fondo claro */
+}
+
+/* Tarjeta principal (Card Design) */
+.card {
+    background: white;         /* Superficie: base blanca pura para resaltar el contenido */
+    padding: 2.5rem;           /* Espaciado: unidades relativas para que el aire interno sea proporcional */
+    border-radius: 1.5rem;     /* Estética: esquinas redondeadas para un look moderno y amigable */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); /* Elevación: da profundidad visual mediante sombras proyectadas */
+    max-width: 450px;          /* Responsividad: evita que la tarjeta se ensanche demasiado en monitores */
+    width: 90%;                /* Fluidez: permite que se adapte al ancho de smartphones */
+    text-align: center;        /* Alineación: centra los textos y el icono internamente */
+}
+
+/* Estilo para el icono decorativo */
+.icon {
+    font-size: 2rem;           /* Dimensión: tamaño de la fuente dentro del icono */
+    background: #dbeafe;       /* Color: fondo pastel para el área del icono */
+    color: #2563eb;            /* Color: azul vibrante para el símbolo principal */
+    width: 70px;               /* Geometría: ancho explícito */
+    height: 70px;              /* Geometría: alto explícito igual al ancho */
+    display: flex;             /* Flex: permite centrar el contenido (letras) del icono */
+    align-items: center;       /* Centrado V: posiciona el glifo en el medio vertical */
+    justify-content: center;   /* Centrado H: posiciona el glifo en el medio horizontal */
+    border-radius: 50%;        /* Forma: radio del 50% para crear un círculo perfecto */
+    margin: 0 auto 1.5rem;     /* Auto-margin: centra el bloque 'div' y separa del h1 */
+    font-weight: bold;         /* Énfasis: hace que las letras del icono resalten */
+}
+
+h1 { 
+    margin-bottom: 1rem;       /* Margen: separación inferior controlada */
+    font-size: 1.5rem;         /* Escala: tamaño de cabecera jerárquico */
+    color: #111827;            /* Color: tono más oscuro que el cuerpo para jerarquía */
+}
+
+p { 
+    color: #6b7280;            /* Color: gris más suave para contenido secundario */
+    line-height: 1.6;          /* Interlineado: mejora la legibilidad al dar aire entre líneas */
+    margin-bottom: 2rem;       /* Margen: espacio antes del footer/status box */
+}
+
+/* Caja informativa de estado */
+.status-box {
+    background: #f9fafb;       /* Fondo: sutilmente diferente a la tarjeta blanca */
+    padding: 1rem;             /* Padding: espacio para que el texto no toque los bordes */
+    border-radius: 0.75rem;    /* Radio: redondeo consistente con el diseño general */
+    border: 1px solid #e5e7eb; /* Estructura: línea fina para definir el área de estado */
+    display: flex;             /* Alineación: alinea el punto y el texto en la misma fila */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    gap: 0.5rem;               /* Espacio entre el punto y el texto */
+    font-size: 0.9rem;         /* Fuente ligeramente más pequeña */
+}
+
+.status-dot { 
+    width: 10px;               /* Dimensión: tamaño pequeño del indicador */
+    height: 10px;              /* Dimensión: alto igual al ancho */
+    background: #10b981;       /* Semántica: color verde que representa "activo" */
+    border-radius: 50%;        /* Forma: círculo */
+    animation: pulse 2s infinite; /* Transición: ejecuta la animación 'pulse' cada 2 segundos */
+}
+
+@keyframes pulse { 
+    0% { opacity: 1; }         /* Inicio: visibilidad completa */
+    50% { opacity: 0.4; }      /* Mitad: visibilidad parcial (desvanecimiento) */
+    100% { opacity: 1; }       /* Fin: regresa a visibilidad completa */
+}

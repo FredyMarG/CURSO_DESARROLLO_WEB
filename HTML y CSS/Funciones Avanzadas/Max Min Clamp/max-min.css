@@ -2,44 +2,77 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Max Min Clamp/max-min.css
  * Carpeta del tema: «Max Min Clamp». Hoja: «max-min».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de las funciones min(), max() y clamp() para un diseño responsivo y adaptable.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Asegura que el padding y bordes se incluyan dentro del ancho/alto definido. */
 }
 
+
+
+/* Estilos globales: configuración base del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    padding: 20px;
+    margin: 0; /* Elimina márgenes externos por defecto. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    padding: 20px; /* Espaciado general para el contenido. */
 }
 
+
+
+/* .box: Contenedor base para las demostraciones de tamaño. */
 .box{
-    background-color: #48e;
-    display: grid;
-    place-content: center;
-    color: #fff;
-    margin: 120px auto;
-    font-size: 30px;
-    padding: 0 40px;
+    background-color: #48e; /* Color azul distintivo. */
+    display: grid; /* Habilita Grid Layout. */
+    place-content: center; /* Centra el contenido tanto horizontal como verticalmente. */
+    color: #fff; /* Texto blanco. */
+    margin: 120px auto; /* Centrado horizontal con margen superior/inferior. */
+    font-size: 30px; /* Tamaño de fuente fijo para el contenido. */
+    padding: 0 40px; /* Espaciado lateral interno. */
 }
 
+
+
+/* Estilos del encabezado h1: ajuste de tamaño y espaciado. */
 h1{
-    font-size: 2.2em;
-    margin-bottom: 0;
+    font-size: 2.2em; /* Tamaño de fuente relativo al padre. */
+    margin-bottom: 0; /* Elimina el margen inferior por defecto. */
 }
 
+
+
+/* 
+ * Función min(valor1, valor2, ...):
+ * El elemento tomará el valor MÁS PEQUEÑO de la lista.
+ * Aquí, el ancho será 600px o el 100% del padre, lo que sea menor.
+ */
 .min{
-    width: min(600px,100%);
+    width: min(600px, 100%); 
 }
 
+
+
+/* 
+ * Función max(valor1, valor2, ...):
+ * El elemento tomará el valor MÁS GRANDE de la lista.
+ * Aquí, el ancho será 600px o el 100% del padre, lo que sea mayor.
+ */
 .max{
-    width: max(600px, 100%);
+    width: max(600px, 100%); 
 }
 
+
+
+/* 
+ * Función clamp(mínimo, preferido, máximo):
+ * El valor preferido (2vw) se aplica, pero nunca será menor que el mínimo (2rem) ni mayor que el máximo (4rem).
+ * Ideal para tipografía responsiva.
+ */
 .clamp{
-    font-size: clamp(2rem, 2vw,4rem);
-    border: 6px solid #000;
+    font-size: clamp(2rem, 2vw, 4rem); 
+    border: 6px solid #000; /* Borde sólido negro para visualizar el elemento. */
 }

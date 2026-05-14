@@ -2,21 +2,40 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Clip Path/clip.css
  * Carpeta del tema: «Clip Path». Hoja: «clip».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de clip-path para crear máscaras y formas personalizadas en elementos.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garantiza que el padding y bordes no alteren el tamaño calculado. */
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    font-family: sans-serif;
-    margin: 0;
+    font-family: sans-serif; /* Tipografía limpia para el cuerpo del documento. */
+    margin: 0; /* Elimina márgenes externos por defecto. */
 }
 
+
+
+/* Estilos del selector img. */
 img{
-    max-width: 100%;
+    max-width: 100%; /* Asegura que la imagen sea responsiva dentro de su contenedor. */
+    /* 
+     * clip-path: define qué región del elemento debe ser visible mediante una máscara.
+     * circle(radio at x y): crea un recorte circular.
+     * - 30%: indica el radio del círculo.
+     * - at 20% 20%: define las coordenadas del centro del círculo.
+     */
     clip-path: circle(30% at 20% 20%);
-    border: 6px solid #f44
+    /* 
+     * Nota técnica: clip-path recorta todo el elemento, incluyendo el borde.
+     * Si el borde queda fuera del área de recorte, no será visible.
+     */
+    border: 6px solid #f44; /* Borde rojo aplicado al elemento original. */
 }

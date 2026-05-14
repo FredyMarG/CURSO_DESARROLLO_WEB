@@ -1,0 +1,36 @@
+/**
+ * ESTILOS LABORATORIO: CONDICIONALES
+ * Diseño enfocado en la toma de decisiones lógicas.
+ */
+
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografías seguras para la web */
+    text-align: center;                 /* Alineación: centra el contenido del contenedor */
+    padding-top: 80px;                  /* Margen interno superior: separa el contenido del borde */
+    background-color: #f0f4f8;          /* Color: azul grisáceo muy pálido, calmante */
+    color: #2d3748;                     /* Color: gris azulado oscuro para el texto */
+    
+    /* Posicionamiento Flex */
+    display: flex;                      /* Flex: permite el centrado total */
+    justify-content: center;            /* Centra en el eje X */
+    align-items: center;                /* Centra en el eje Y */
+    min-height: 100vh;                  /* Alto: ocupa toda la ventana visible */
+    margin: 0;                          /* Reset: limpia márgenes */
+}
+
+.container { 
+    background: white;                  /* Fondo: blanco puro para la tarjeta */
+    padding: 40px;                      /* Espaciado: 40px en todos los lados internos */
+    border-radius: 15px;                /* Radio: curvas suaves y modernas */
+    display: inline-block;              /* Tamaño: auto-ajustable al contenido */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Elevación: sombra ligera para "flotar" el elemento */
+    border: 1px solid #e2e8f0;          /* Línea: borde casi invisible para definición */
+}
+
+/* Estilo de resaltado para instrucciones técnicas */
+code { 
+    color: #e53e3e;                     /* Color: rojo suave para llamar la atención */
+    background: #fff5f5;                /* Fondo: rosado muy claro para contraste de código */
+    padding: 2px 5px;                   /* Padding: pequeño margen para el bloque de código */
+    border-radius: 4px;                 /* Redondeo: consistente con el resto del diseño */
+}

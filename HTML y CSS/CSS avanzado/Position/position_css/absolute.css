@@ -1,66 +1,64 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/absolute.css
- * Carpeta del tema: «position_css». Hoja: «absolute».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Carpeta del tema: «Position». Hoja: «absolute».
+ * Propósito: demostrar el posicionamiento 'absolute' y cómo depende de un ancestro posicionado.
+ * Cómo leerlo: cada bloque describe la relación espacial entre el contenedor y sus elementos hijos.
  */
 
-/* Reset de márgenes y estilo de fuente para el cuerpo del documento */
-body{
-    margin: 0;
-    /* Color de fondo general para la página */
-    background: #DDD;
-    font-family: sans-serif;
+/* Estilos globales y reset. */
+body {
+    margin: 0; /* Limpia márgenes por defecto. */
+    background: #DDD; /* Fondo gris para contraste. */
+    font-family: sans-serif; /* Fuente base. */
+    -webkit-font-smoothing: antialiased; /* Mejora renderizado de fuentes en webkit. */
 }
 
-/* Contenedor principal: Actúa como marco de referencia para elementos con posición absoluta */
-.contenedor{
-    border: 2px solid black;
-    /* Márgenes superior/inferior de 30px y laterales de 50px */
-    margin: 30px 50PX;
-    background: white;
-    /* 
-       EL ANCLA (Reference Frame):
-       Al declarar relative aquí, establecemos un sistema de coordenadas interno.
-       Cualquier hijo con 'absolute' medirá sus distancias (top/left/etc) 
-       desde los bordes internos de este contenedor.
-    */
-    position: relative;
-}
-.box{
-    /* Ancho y alto fijos para las cajas */
-    width: 100px;
-    height: 100px;
-    /* Color de fondo para las cajas */
-    background: #db7;
-    color: #fff;
-    text-align: center;
+/* 
+ * .contenedor: actúa como 'ancla' para elementos hijos con position: absolute 
+ * porque tiene definido 'position: relative'.
+ */
+.contenedor {
+    border: 2px solid black; /* Límite visual. */
+    margin: 30px 50px; /* Margen externo para centrado visual. */
+    background: white; /* Fondo de la sección. */
+    position: relative; /* Crea un contexto de posicionamiento para los hijos. */
 }
 
-/* Caja azul: Posicionada de forma absoluta */
-.box-blue{
-    background-color: #37d;
-    /* 
-       POSITION: ABSOLUTE
-       - Saca el elemento del flujo normal del documento. No ocupa espacio y no afecta a los hermanos.
-       - Se posiciona en relación con el ancestro posicionado más cercano (en este caso, '.contenedor').
-       - Si no hay ancestro posicionado, se posiciona respecto al 'body' (viewport).
-       - 'top', 'left', 'right', 'bottom' definen su desplazamiento.
-    */
-    position: absolute;
-    top: 40px;
-    z-index: 20; /* Determina el orden en el eje Z (profundidad) */
+/* Estilo base para las cajas dentro del contenedor. */
+.box {
+    width: 100px; /* Ancho fijo. */
+    height: 100px; /* Alto fijo. */
+    background: #db7; /* Color arena por defecto. */
+    color: #fff; /* Texto blanco. */
+    text-align: center; /* Centrado horizontal del texto. */
+    line-height: 100px; /* Centrado vertical del texto (igual al height). */
+    transition: transform 0.2s ease-in-out; /* Suaviza la animación del hover. */
 }
 
-/* Caja roja: Posición relativa */
-.box-red{
-    /* Color de fondo para la caja roja */
-    background: #E53;
-    /* 
-       POSITION: RELATIVE
-       - El elemento permanece en el flujo normal del documento.
-       - 'top', 'left', 'right', 'bottom' lo desplazan desde su posición original, pero su espacio original sigue reservado.
-    */
-    position: relative;
+/* 
+ * .box-blue: posicionamiento absoluto. 
+ * Se mueve independientemente del flujo normal del documento dentro de .contenedor.
+ */
+.box-blue {
+    background-color: #37d; /* Azul. */
+    position: absolute; /* Sale del flujo y se posiciona respecto al padre relativo. */
+    top: 40px; /* Distancia desde el borde superior del padre. */
+    z-index: 20; /* Se coloca por encima de elementos con z-index menor. */
+}
+
+/* 
+ * .box-red: posicionamiento relativo. 
+ * Mantiene su lugar en el flujo normal pero permite desplazamientos.
+ */
+.box-red {
+    background: #E53; /* Rojo. */
+    position: relative; /* Permite desplazamiento sin perder su espacio original. */
+    z-index: 10; /* Se coloca por debajo de la caja azul. */
+}
+
+/* Feedback visual al interactuar con las cajas. */
+.box:hover {
+    cursor: pointer; /* Cambia el puntero. */
+    transform: translateY(-5px); /* Pequeño desplazamiento hacia arriba. */
 }

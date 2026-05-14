@@ -1,0 +1,72 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/CSS Avanzado/Position/position.css
+ * Carpeta del tema: «Position». Hoja: «position».
+ * Propósito: demostrar los diferentes esquemas de posicionamiento (relative, absolute, fixed, sticky) y su impacto en el flujo.
+ * Cómo leerlo: cada bloque describe cómo se comporta el elemento respecto a su contenedor o a la ventana del navegador.
+ */
+
+/* Estilos globales y configuración del área de scroll. */
+body {
+    font-family: sans-serif; /* Tipografía base. */
+    height: 2000px; /* Generamos scroll artificial para validar el comportamiento de 'fixed' y 'sticky'. */
+    margin: 0; /* Eliminamos el margen por defecto del viewport. */
+    background-color: #f4f4f4; /* Fondo neutro. */
+}
+
+/* 
+ * position: sticky -> El elemento se comporta como 'relative' hasta que cruza un umbral (top: 0).
+ * En ese momento, se "pega" a la pantalla mientras su contenedor padre esté visible.
+ */
+.header-sticky {
+    position: sticky;
+    top: 0; /* Distancia de activación respecto al borde superior del viewport. */
+    background-color: #333; /* Fondo oscuro tipo barra de navegación. */
+    color: #fff; /* Texto blanco. */
+    padding: 15px; /* Relleno para dar altura. */
+    z-index: 100; /* Prioridad en el eje Z para que nada lo cubra al hacer scroll. */
+}
+
+/* 
+ * position: relative -> Permite usar coordenadas sin sacar al elemento del flujo normal.
+ * Fundamentalmente, sirve como "ancla" o punto de referencia para hijos con 'position: absolute'.
+ */
+.parent-relative {
+    position: relative;
+    width: 300px; /* Dimensiones fijas para el contenedor. */
+    height: 300px;
+    background-color: #ddd; /* Fondo gris claro. */
+    margin: 50px auto; /* Centrado horizontal y separación vertical. */
+    border: 2px solid #999; /* Borde de referencia. */
+}
+
+/* 
+ * position: absolute -> El elemento sale del flujo (no ocupa espacio real).
+ * Se posiciona respecto al ancestro más cercano que tenga un 'position' distinto de 'static'.
+ */
+.child-absolute {
+    position: absolute;
+    bottom: 20px; /* 20px desde la base del padre relativo. */
+    right: 20px; /* 20px desde el borde derecho del padre relativo. */
+    width: 80px; /* Tamaño del elemento flotante. */
+    height: 80px;
+    background-color: #48e; /* Azul distintivo. */
+    color: #fff; /* Texto blanco. */
+    display: flex; /* Flexbox para centrado de contenido interno. */
+    align-items: center;
+    justify-content: center;
+}
+
+/* 
+ * position: fixed -> El elemento sale del flujo y se posiciona respecto a la ventana del navegador.
+ * No se mueve aunque el usuario haga scroll.
+ */
+.btn-fixed {
+    position: fixed;
+    bottom: 30px; /* Anclado a la parte inferior de la pantalla. */
+    left: 30px; /* Anclado a la izquierda. */
+    background-color: #e67e22; /* Color naranja tipo botón de acción. */
+    color: white; /* Texto/Icono blanco. */
+    padding: 15px; /* Espaciado circular. */
+    border-radius: 50%; /* Forma redonda perfecta (tipo FAB - Floating Action Button). */
+}

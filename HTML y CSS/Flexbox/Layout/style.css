@@ -2,142 +2,198 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Layout/style.css
  * Carpeta del tema: «Layout». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar la creación de un layout complejo utilizando Flexbox, posicionamiento avanzado y diseño responsivo.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garantiza que el padding y bordes no alteren el ancho calculado de los elementos. */
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ff8000;
+    margin: 0; /* Elimina los márgenes por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    background-color: #ff8000; /* Fondo naranja corporativo para el documento. */
 }
 
-/* HEADER SECTION */
 
+
+
+
+/* Estilo de estructura para navegación o encabezado/pie. */
 .header{
-    min-height: 100vh;
-    box-sizing: border-box;
-    background-image:url("img/img.jpg") ;
-    display: flex;
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 100vh; /* Asegura que el encabezado ocupe al menos el 100% del alto de la ventana. */
+    box-sizing: border-box; /* Mantiene el modelo de caja consistente. */
+    background-image: url("img/img.jpg"); /* Imagen de fondo para la sección Hero. */
+    display: flex; /* Habilita flexbox para centrar el contenido interno fácilmente. */
+    background-repeat: no-repeat; /* Evita que la imagen se duplique si el contenedor es grande. */
+    background-size: cover; /* Ajusta la imagen para cubrir todo el espacio sin deformarse. */
 }
 
+
+
+/* Estilos del selector .header__overlay. */
 .header__overlay{
-    min-height: 100vh;
-    width: 100%;
-    background-color: #f809;
-    position: absolute;
-    z-index: 1;
+    min-height: 100vh; /* Coincide con el alto del padre. */
+    width: 100%; /* Cubre todo el ancho. */
+    background-color: #f809; /* Filtro de color naranja con transparencia (alfa). */
+    position: absolute; /* Se posiciona sobre la imagen de fondo sin ocupar espacio en el flujo. */
+    z-index: 1; /* Capa base por encima del fondo pero debajo del texto. */
 }
 
+
+
+/* Estilos del selector .header__item-container. */
 .header__item-container{
-    position: relative;
-    z-index: 10;
-    margin: auto;
-    text-align: center;
-    max-width: 900px;
+    position: relative; /* Contexto de posicionamiento para estar sobre el overlay. */
+    z-index: 10; /* Se eleva por encima del overlay para ser legible e interactivo. */
+    margin: auto; /* Aprovecha el display:flex del padre para centrarse perfecta y automáticamente. */
+    text-align: center; /* Alineación central para el texto y la imagen. */
+    max-width: 900px; /* Limita el ancho para mejorar la lectura en pantallas anchas. */
 }
 
+
+
+/* Estilos del selector .header__item-container p. */
 .header__item-container p{
-    text-wrap: pretty;
+    text-wrap: pretty; /* Algoritmo moderno para evitar líneas huérfanas y mejorar el balance del párrafo. */
 }
 
+
+
+/* Estilos del selector .header__img. */
 .header__img{
-    min-width: 250px;
-    max-width: 40%;
-    border-radius: 50%;
-    border: 6px solid #fff;
-    margin: 20px;
+    min-width: 250px; /* Tamaño mínimo para que no desaparezca en móviles. */
+    max-width: 40%; /* Tamaño máximo relativo al contenedor. */
+    border-radius: 50%; /* Crea una forma circular perfecta. */
+    border: 6px solid #fff; /* Marco blanco grueso para resaltar la imagen. */
+    margin: 20px; /* Espaciado exterior. */
 }
 
+
+
+/* Estilos del selector h1. */
 h1{
-    margin: 0;
-    font-size:3.6rem;
-    text-wrap: balance;
+    margin: 0; /* Limpia márgenes por defecto. */
+    font-size: 3.6rem; /* Tamaño de fuente escalable basado en la raíz. */
+    text-wrap: balance; /* Distribuye el texto de forma uniforme en varias líneas. */
 }
 
-/* NAV SECTION */
+
+
+/* Estilo de estructura para navegación o encabezado/pie. */
 .nav{
-    background: white;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 6px 20px;
-    position: sticky;
-    top: 0;
-    margin-bottom: 10px;
-    box-shadow: 0 0px 25px #0006;
+    background: white; /* Fondo blanco sólido para la barra. */
+    display: flex; /* Habilita el flujo flexible para los elementos de navegación. */
+    flex-wrap: wrap; /* Permite que el menú se adapte a varias líneas en pantallas pequeñas. */
+    justify-content: center; /* Centra los elementos de la barra. */
+    padding: 6px 20px; /* Espaciado interno. */
+    position: sticky; /* Fija la barra al hacer scroll. */
+    top: 0; /* Se ancla al borde superior del viewport. */
+    margin-bottom: 10px; /* Espacio inferior respecto al contenido. */
+    box-shadow: 0 0px 25px #0006; /* Sombra sutil para dar profundidad sobre el contenido que pasa por debajo. */
 }
 
+
+
+/* Estilos del selector .nav__ul. */
 .nav__ul{
-    margin: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 6px;
-    justify-content: center;
-    padding: 0;
+    margin: 0; /* Elimina márgenes de lista. */
+    display: flex; /* Los elementos de lista fluyen horizontalmente. */
+    flex-wrap: wrap; /* Adaptabilidad. */
+    margin-top: 6px; /* Ajuste fino de posición superior. */
+    justify-content: center; /* Centrado de los ítems de lista. */
+    padding: 0; /* Elimina el padding de lista por defecto. */
 }
 
+
+
+/* Estilos del selector .nav__item. */
 .nav__item{
-    list-style: none;
+    list-style: none; /* Elimina los viñetas de la lista. */
 }
 
+
+
+/* Estilos del selector .nav__ul-container. */
 .nav__ul-container{
-    flex-grow: 4;
-    text-align: center;
+    flex-grow: 4; /* Ocupa la mayor parte del espacio sobrante en la barra. */
+    text-align: center; /* Alineación del texto. */
 }
 
+
+
+/* Estilos del selector .nav__logo-container. */
 .nav__logo-container{
-    flex-grow: 1;
-    text-align: center;
+    flex-grow: 1; /* Ocupa una parte menor comparado con la lista de enlaces. */
+    text-align: center; /* Centrado del logo. */
 }
 
+
+
+/* Estilos del selector .nav__link. */
 .nav__link{
-    color: #f80;
-    text-decoration: none;
-    display: inline-block;
-    padding: 8px 10px;
-    margin: 6px;
-    border-radius: 0;
-    transition: background-color 0.24s, border-radius 0.2s, outline 0.2s outline-offset 0.2s;
-    margin: 2px;
-    outline: 0;
-    outline-offset: 0;
+    color: #f80; /* Color naranja para los enlaces. */
+    text-decoration: none; /* Elimina el subrayado. */
+    display: inline-block; /* Permite aplicar padding y márgenes correctamente. */
+    padding: 8px 10px; /* Área clickable cómoda. */
+    margin: 2px; /* Separación mínima entre botones. */
+    border-radius: 0; /* Estado inicial de esquinas rectas. */
+    /* Transiciones suaves para múltiples propiedades al interactuar. */
+    transition: background-color 0.24s, border-radius 0.2s, outline 0.2s, outline-offset 0.2s;
+    outline: 0; /* Oculta el outline predeterminado. */
+    outline-offset: 0; /* Reset del offset del contorno. */
 }
 
+
+
+/* Estado o pseudo-clase .nav__link:hover: estilo cuando el usuario interactúa. */
 .nav__link:hover{
-    background-color: #f803;
-    border-radius: 20px;
-    outline:2px solid #f806;
-    outline-offset: -7px;
+    background-color: #f803; /* Fondo naranja muy tenue. */
+    border-radius: 20px; /* Redondea las esquinas dinámicamente. */
+    outline: 2px solid #f806; /* Crea un contorno naranja suave. */
+    outline-offset: -7px; /* Desplaza el contorno hacia adentro del elemento. */
 }
 
+
+
+/* Estilos del selector .link--login. */
 .link--login{
-    background-color: #f80;
-    color: white;
-    border-radius: 20px;
-    padding: 8px 24px;
-    margin-left: 6px;
+    background-color: #f80; /* Fondo naranja sólido para destacar el llamado a la acción. */
+    color: white; /* Texto blanco para contraste. */
+    border-radius: 20px; /* Forma de botón ovalado. */
+    padding: 8px 24px; /* Relleno lateral más amplio. */
+    margin-left: 6px; /* Separación extra respecto a los otros enlaces. */
 }
 
+
+
+/* Estado o pseudo-clase .link--login:hover: estilo cuando el usuario interactúa. */
 .link--login:hover{
-    background-color: #d60;
-    outline: none;
-}
-.nav__logo{
-    width: 100px;
-    padding: 10px;
+    background-color: #d60; /* Oscurece el botón al pasar el mouse. */
+    outline: none; /* Elimina el contorno para un estilo más limpio. */
 }
 
+
+/* Estilos del selector .nav__logo. */
+.nav__logo{
+    width: 100px; /* Tamaño controlado del logo. */
+    padding: 10px; /* Espaciado interno. */
+}
+
+
+
+/* Estilos del selector main. */
 main{
-    max-width: 1000px;
-    margin: auto;
-    font-size: 20px;
-    text-wrap: pretty;
-    color: white;
+    max-width: 1000px; /* Limita el ancho del contenido principal. */
+    margin: auto; /* Centra el bloque de contenido. */
+    font-size: 20px; /* Tamaño de fuente cómodo para lectura. */
+    text-wrap: pretty; /* Mejora la estética de los saltos de línea. */
+    color: white; /* Texto blanco sobre el fondo naranja del body. */
 }

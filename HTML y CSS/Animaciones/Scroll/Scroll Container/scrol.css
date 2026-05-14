@@ -6,65 +6,97 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+    margin: 0; /* Elimina los márgenes del navegador para que el contenedor ocupe todo el ancho visual. */
+    font-family: sans-serif; /* Define una fuente legible sin remates. */
+    background-color: #ccc; /* Fondo grisáceo para resaltar los elementos blancos superiores. */
 }
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Aplica el modelo de caja donde el padding y border no suman al ancho total. */
 }
 
+
+
+/* Estilos del selector div. */
 div{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Refuerza el box-sizing específicamente para los elementos div. */
 }
 
+
+
+/* Estilos del selector .crecedor. */
 .crecedor{
-    height: 200vh;
+    height: 200vh; /* Define una altura del doble de la pantalla para forzar la aparición de la barra de scroll. */
 }
 
+
+
+/* Contenedor principal para estructura y alineación. */
 .container{
-    scroll-timeline: --containerscroll block;
-    overflow-y: scroll;
-    height: 100vh;
+    scroll-timeline: --containerscroll block; /* Crea una línea de tiempo de animación vinculada al progreso del scroll vertical de este elemento. */
+    overflow-y: scroll; /* Habilita el desplazamiento vertical para que funcione el timeline. */
+    height: 100vh; /* Limita la altura a la ventana para que el scroll sea interno al contenedor. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    background-color: #fff;
-    border: 4px solid #48e;
-    padding: 6px;
-    border-radius: 39px;
-    position: fixed;
-    width: 100%;
-    top: 0;
+    background-color: #fff; /* Fondo blanco para la caja contenedora de la barra. */
+    border: 4px solid #48e; /* Borde azul grueso para enmarcar la barra de progreso. */
+    padding: 6px; /* Espaciado interno para que la barra no toque los bordes del marco. */
+    border-radius: 39px; /* Bordes muy redondeados para crear un efecto de "píldora". */
+    position: fixed; /* Mantiene la barra siempre visible en la parte superior aunque el contenido baje. */
+    width: 100%; /* La caja abarca todo el ancho del viewport. */
+    top: 0; /* Ancla la caja al borde superior de la pantalla. */
 }
 
+
+
+/* Estilos del selector .barra. */
 .barra{
-    padding: 40px;
-    background-color: #48e;
-    border-radius: 30px;
-    width: 10%;
-    animation-name:llenar-barra ;
-    animation-fill-mode: both;
-    animation-timing-function: linear;
-    animation-timeline: --containerscroll;
+    padding: 40px; /* Define la altura visual de la barra de progreso. */
+    background-color: #48e; /* Color inicial azul. */
+    border-radius: 30px; /* Redondeo de los extremos de la barra interna. */
+    width: 10%; /* Ancho inicial (se sobreescribirá por la animación de scroll). */
+    animation-name: llenar-barra; /* Referencia a los keyframes definidos abajo. */
+    animation-fill-mode: both; /* Asegura que los estilos se mantengan al inicio y final de la animación. */
+    animation-timing-function: linear; /* La progresión es proporcional al movimiento del dedo/mouse. */
+    animation-timeline: --containerscroll; /* Vincula el progreso de la animación al timeline del scroll definido en .container. */
 }
 
 
+
+
+/* Estado o pseudo-clase .barra:active: estilo cuando el usuario interactúa. */
 .barra:active{
-    animation-play-state: paused;
+    animation-play-state: paused; /* Pausa el progreso si el usuario hace clic sostenido sobre la barra. */
 }
 
 
 
-/* --- Animación (@keyframes llenar-barra) --- */
+
+
+/* Animación llenar-barra: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes llenar-barra {
+
+
+/* Estilos del selector from. */
     from{
-        width: 0%;
+        width: 0%; /* Al inicio del scroll (arriba), la barra está vacía. */
     }
+
+
+/* Estilos del selector to. */
     to{
-        width: 100%;
-        background-color: #f33;
+        width: 100%; /* Al final del scroll (abajo), la barra llega al 100%. */
+        background-color: #f33; /* Cambia a rojo al completar el recorrido. */
     }
 }

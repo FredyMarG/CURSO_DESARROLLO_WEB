@@ -2,51 +2,72 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Sombras/style.css
  * Carpeta del tema: «Sombras». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de sombras en contenedores, textos e imágenes.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: reset de márgenes. */
 body{
-    margin: 0;
+    margin: 0; /* Elimina márgenes para que los elementos se posicionen con precisión. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    width: 280px;
-    background: #e2e2e2;
-    margin: auto;
-    margin-top: 30px;
-    box-shadow: 0px 0px 40px 0px #0007;
-    /*primer parametro horizontal, segundo vertical, tercer radio de desenfoque, cuarto tamaño de sombra y el ultimo es el color*/
-    font-family: sans-serif;
-    color: #444;
-    box-sizing: border-box;
-    padding: 20px;
-    padding-top: 10px;
-    text-align: center;
+    width: 280px; /* Ancho fijo de la tarjeta. */
+    background: #e2e2e2; /* Fondo gris claro. */
+    margin: auto; /* Centrado horizontal automático. */
+    margin-top: 30px; /* Separación superior. */
+    /* 
+     * box-shadow: [X] [Y] [Difuminado] [Propagación] [Color].
+     * Crea una sombra profunda para dar efecto de elevación a la caja.
+     */
+    box-shadow: 0px 0px 40px 0px #0007; 
+    
+    font-family: sans-serif; /* Fuente base limpia. */
+    color: #444; /* Color de texto gris oscuro. */
+    box-sizing: border-box; /* Asegura que el padding no altere los 280px de ancho. */
+    padding: 20px; /* Relleno interno general. */
+    padding-top: 10px; /* Ajuste específico de relleno superior. */
+    text-align: center; /* Centrado del texto. */
 }
 
+
+
+/* Estilos del título: uso de text-shadow para legibilidad y estilo. */
 h2{
-    font-size: 18px;
-    margin-top: 5px;
-    color: #999;
-    font-size: 20px;
-    letter-spacing: 3px;
-    font-weight: 100;
-    text-shadow:0px 0px 1px #f92;
+    margin-top: 5px; /* Pequeño margen superior. */
+    color: #999; /* Color gris suave. */
+    font-size: 20px; /* Tamaño del título. */
+    letter-spacing: 3px; /* Aumenta el aire entre letras. */
+    font-weight: 100; /* Grosor de fuente muy ligero. */
+    text-shadow: 0px 0px 1px #f92; /* Crea un ligero brillo o borde sutil alrededor del texto. */
 }
 
+
+
+/* Estilos del párrafo: enfoque en la lectura fluida. */
 p{
-    text-align: justify;
-    list-style: none; 
-    line-height: 1.4;
-    font-size: 13px;
-    text-shadow: 0 0 5px #f82;
-    /*funciona igual que el box shadow pero no tiene desenfoque*/
+    text-align: justify; /* Distribuye el texto uniformemente. */
+    line-height: 1.4; /* Interlineado para mejorar la lectura. */
+    font-size: 13px; /* Tamaño de fuente de lectura. */
+    text-shadow: 0 0 5px #f82; /* Aplica un resplandor anaranjado al texto. */
+    
 }
 
+
+
+/* Estilos de la imagen: efectos de filtro. */
 img{
-    width: 160px;
-    border-radius: 100%;
-    margin: auto;
-    filter: drop-shadow(0px 0px 5px #0007);
+    width: 160px; /* Ancho de la imagen. */
+    border-radius: 100%; /* Hace la imagen circular. */
+    margin: auto; /* Centrado de bloque. */
+    /* 
+     * filter: drop-shadow -> A diferencia de box-shadow, este proyecta la sombra 
+     * siguiendo la forma real del elemento (en este caso, el círculo).
+     */
+    filter: drop-shadow(0px 0px 5px #0007); 
 }

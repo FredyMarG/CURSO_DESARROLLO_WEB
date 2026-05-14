@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: HTML y CSS/CSS Avanzado/Especificidad y Casacada/index.html
+     Título: Lección de Especificidad y Cascada
+     Propósito: demostrar visualmente qué reglas de CSS tienen prioridad.
+     Relación: enlaza únicamente con especificidad.css.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="especificidad.css">
+    <title>Especificidad y Cascada</title>
+</head>
+<body>
+    <main class="container">
+        <!-- 
+            Este título demuestra la especificidad. 
+            Aunque tiene un estilo en línea (color: blanchedalmond), 
+            el color final será 'brown' debido al !important en el CSS. 
+        -->
+        <h1 id="titulo" class="titulo" style="color: blanchedalmond;">Prueba de Especificidad</h1>
+        
+        <p>En esta lección analizamos cómo el navegador decide qué color aplicar cuando hay conflictos entre un <code>ID</code>, una <code>Clase</code> y el uso de <code>!important</code>.</p>
+    </main>
+</body>
+</html>

@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/CSS Avanzado/Outline/outline.html
-     Título: Outline
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Outline y Border
+     Propósito: demostrar la diferencia visual y de comportamiento entre outline y border.
+     Relación: enlaza con outline.css en la misma carpeta.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
 
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="outline.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outline</title>
+    <link rel="stylesheet" href="outline.css">
+    <title>Lección: Outline</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <div class="box">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo fuga debitis 
-    </div>
+    <main>
+        <h1>Diferencia entre Border y Outline</h1>
+        
+        <!-- Caja estándar con borde para comparación. -->
+        <div class="box">Caja con Borde</div>
 
-    <input type="text">
+        <!-- Caja con el estilo outline-demo para ver el offset. -->
+        <div class="box outline-demo">Caja con Outline Offset</div>
+        
+        <p>Prueba a hacer click en el input para ver el outline de foco personalizado:</p>
+        <input type="text" placeholder="Hazme focus...">
+    </main>
 </body>
 <!-- Cierre del documento HTML -->
 </html>

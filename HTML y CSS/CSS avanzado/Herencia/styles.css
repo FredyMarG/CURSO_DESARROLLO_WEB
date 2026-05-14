@@ -2,23 +2,32 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Herencia/styles.css
  * Carpeta del tema: «Herencia». Hoja: «styles».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el concepto de herencia, donde los hijos adoptan estilos de sus padres.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: el color definido en el body se transmite a sus descendientes por herencia. */
 body{
-    color: blue;
+    color: blue; /* Define un color azul base para todo el texto del documento. */
 }
 
+
+
+/* Estilos del contenedor div: aquí se rompe la herencia del body. */
 div{
-    font-family: sans-serif;
-    color:red
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    color: red; /* Sobrescribe el azul heredado y establece rojo para sus hijos. */
 }
 
+
+
+/* Estilos del encabezado h1: uso de valores de control. */
 h1{
-    /*INHERIT SIGINIFICA QUE ME VCA A HEREDAR LA PROPIEDAD DEL ELEMENTO PADRE MAS GRANDE*/
-
-    /*INITIAL ME PONE EL VALOR POR DEFECTO DE LA PROPIEDAD (DEL NAVEGADOR)*/
-    color:initial;
+    /* 
+     * La palabra clave 'initial' restablece la propiedad a su valor inicial de CSS.
+     * En el caso del color, suele ser negro, ignorando tanto el azul del body como el rojo del div.
+     */
+    color: initial; 
 }
-

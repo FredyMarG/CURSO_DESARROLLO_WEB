@@ -1,0 +1,71 @@
+/**
+ * ESTILOS LABORATORIO: BUCLES (FOR)
+ * Tema visual: Indigo / Violeta (Representa ciclos y continuidad).
+ */
+
+/* Reset global: Estandariza el comportamiento de la caja y márgenes */
+* { 
+    margin: 0;              /* Elimina márgenes del navegador */
+    padding: 0;             /* Elimina rellenos del navegador */
+    box-sizing: border-box; /* El tamaño incluye padding/border para evitar desbordamientos */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Tipografía moderna y clara */
+    background-color: #f5f3ff; /* Color: fondo violeta pálido para el tema de bucles */
+    display: flex;             /* Activa el contenedor flexible */
+    align-items: center;       /* Flex: centra verticalmente en el viewport */
+    justify-content: center;   /* Flex: centra horizontalmente en el viewport */
+    min-height: 100vh;         /* Viewport Height: ocupa el 100% de la altura de la pantalla */
+    color: #4c1d95;            /* Contraste: texto en tono púrpura oscuro para legibilidad */
+}
+
+/* Tarjeta de presentación (Card Design) */
+.card {
+    background: white;         /* Superficie: fondo blanco limpio */
+    padding: 2.5rem;           /* Aire: espacio interno para respirar */
+    border-radius: 1.5rem;     /* Estética: bordes redondeados modernos */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Profundidad: elevación visual */
+    max-width: 400px;          /* Restricción: evita el estiramiento excesivo en desktop */
+    width: 90%;                /* Fluidez: adaptable a tablets y móviles */
+    text-align: center;        /* Alineación: centra el contenido interno */
+    border: 1px solid #ddd6fe; /* Detalle: línea de borde temática */
+}
+
+/* Icono de bucle (↺) */
+.icon {
+    font-size: 2.5rem;         /* Dimensión del glifo */
+    background: #ede9fe;       /* Color: fondo lila pastel */
+    color: #7c3aed;            /* Color: símbolo violeta intenso */
+    width: 70px;               /* Geometría: ancho explícito para círculo */
+    height: 70px;              /* Geometría: alto idéntico para simetría */
+    display: flex;             /* Flex: para centrado del icono interno */
+    align-items: center;       /* Centrado V */
+    justify-content: center;   /* Centrado H */
+    border-radius: 50%;        /* Forma: círculo perfecto */
+    margin: 0 auto 1.5rem;     /* Centrado en el bloque */
+    font-weight: bold;         /* Peso tipográfico */
+}
+
+h1 { margin-bottom: 1rem; font-size: 1.5rem; color: #5b21b6; } /* Título principal */
+
+p { color: #6b7280; line-height: 1.6; margin-bottom: 2rem; } /* Estilo del párrafo descriptivo */
+
+/* Caja de estado del script */
+.status-box {
+    background: #f3f4f6;       /* Fondo grisáceo para la caja de estado */
+    padding: 0.75rem;          /* Relleno para que el texto no toque bordes */
+    border-radius: 0.5rem;     /* Redondeo suave de esquinas */
+    display: flex;             /* Alineación horizontal de punto e info */
+    align-items: center;       /* Centrado vertical de elementos */
+    justify-content: center;   /* Centrado horizontal de elementos */
+    gap: 0.6rem;               /* Separación entre el punto y el texto */
+    font-size: 0.85rem;        /* Fuente reducida para notas técnicas */
+}
+
+.status-dot { 
+    width: 10px;               /* Tamaño del indicador */
+    height: 10px;              /* Tamaño del indicador */
+    background: #8b5cf6;       /* Color violeta para el indicador de bucles */
+    border-radius: 50%;        /* Forma circular */
+}

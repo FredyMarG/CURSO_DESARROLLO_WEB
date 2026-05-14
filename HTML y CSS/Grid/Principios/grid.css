@@ -6,21 +6,30 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina los márgenes predeterminados del navegador. */
+    font-family: sans-serif; /* Define una tipografía limpia y moderna. */
 }
 
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    grid-template-columns: 100px 200px 300px;
-    grid-template-rows: 100px 200px;
+    display: grid; /* Activa el modelo de visualización de rejilla (Grid). */
+    grid-template-columns: 100px 200px 300px; /* Define tres columnas fijas: la primera de 100px, la segunda de 200px y la tercera de 300px. */
+    grid-template-rows: 100px 200px; /* Define dos filas fijas con alturas de 100px y 200px respectivamente. */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    margin: 10px;
-    padding: 10px;
-    font-size: 20px;
-    color: #fff;
+    background-color: #48e; /* Color azul corporativo para identificar los bloques. */
+    margin: 10px; /* Espaciado exterior entre los ítems (en grids avanzados se prefiere 'gap'). */
+    padding: 10px; /* Espacio interno para que el contenido no toque los bordes. */
+    font-size: 20px; /* Tamaño de fuente para el contenido del ítem. */
+    color: #fff; /* Texto blanco para asegurar el contraste. */
 }

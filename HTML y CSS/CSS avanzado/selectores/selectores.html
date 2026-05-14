@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/CSS Avanzado/Selectores/selectores.html
-     Título: Selectores CSS
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección de Selectores CSS Avanzados
+     Propósito: estructura de práctica para aplicar combinadores y selectores de atributo.
+     Relación: enlaza con style.css para demostrar visualmente el flujo de los selectores.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+<!-- Cabecera (head): metadatos y vinculación de estilos -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Selectores CSS</title>
+    <title>Práctica: Selectores y Combinadores</title>
 </head>
 <body>
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
     <h1>Ingredientes</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro eius illum repudiandae debitis provident illo harum eveniet officia quos earum quo, itaque a eos vel non atque est sed aspernatur?</p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum quidem eum esse quae voluptate veritatis laudantium. Aliquid, sunt velit. Assumenda repellat aspernatur eum, quas laudantium dolor aliquid quia voluptates quibusdam?</p>
+    
+    <!-- Párrafos para demostrar combinadores adyacentes (+ y ~). -->
+    <p>Este es el primer párrafo adyacente al h1 (debería verse azul).</p>
+    <p>Este es el segundo párrafo adyacente (debería verse verde).</p>
+    <p>Este párrafo es un hermano general (debería tener fuente sans-serif).</p>
+
+    <!-- Lista para demostrar selectores de clase y combinadores de hijo directo (>). -->
     <ul>
         <li class="ingrediente-faltante">Harina</li>
         <li>Aceite</li>
+        <!-- El em aquí es un hijo directo de li, afectado por li > em. -->
         <li>Leche <em>condensada</em></li>
         <li>Sal</li>
         <li class="ingrediente-secreto">Levadura</li>
     </ul>
-    <h2>Otro titulo</h2>
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae quos repudiandae ullam, magni minima aspernatur asperiores repellendus nostrum ea cupiditate in suscipit porro libero nemo corporis reiciendis eos doloremque eveniet?</p>
 
+    <h2>Referencia Visual</h2>
+    <p>Debajo se encuentra la imagen seleccionada por atributo src.</p>
+
+    <!-- Imagen seleccionada específicamente mediante su atributo src en el CSS. -->
     <img src="../../HTML avanzado/Lazy load/img/img1.jpg" alt="">
+
 </body>
 <!-- Cierre del documento HTML -->
 </html>

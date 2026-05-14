@@ -18,23 +18,37 @@
     <title>Details y Summary</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <!-- <details>: Widget de revelación interactivo. Oculta contenido hasta que el usuario lo despliega -->
+    <!-- 
+        <details>: Crea un widget de revelación interactivo que el usuario puede abrir y cerrar.
+        Atributo opcional: 'open'. Si se añade, el contenido será visible por defecto.
+    -->
     <details>
+        <!-- 
+            <summary>: Define el encabezado visible del widget <details>. 
+            Al hacer clic en él, se alterna la visibilidad del contenido restante.
+        -->
         <summary>¿Que tengo que traer?</summary>
-        <!-- <summary>: El encabezado visible y clickable que controla el estado de <details> -->
+    <!-- Lista de elementos relacionados. -->
         <ul>
+        <!-- Elemento individual dentro de la lista. -->
             <li>Ropa cómoda</li>
+        <!-- Elemento individual dentro de la lista. -->
             <li>Protector solar</li>
+        <!-- Elemento individual dentro de la lista. -->
             <li>Gafas de sol</li>
+        <!-- Elemento individual dentro de la lista. -->
             <li>Agua</li>
         </ul>
         
     </details>
 
+    <!-- Ejemplo adicional de details para preguntas frecuentes (FAQ) -->
     <details>
         <summary>¿Debo ser mayor de edad</summary>
+    <!-- Párrafo de texto. -->
         <p>Sí, debes ser mayor de edad o de lo contrario, estar acompañado de un adulto responsable.</p>
     </details>
 </body>

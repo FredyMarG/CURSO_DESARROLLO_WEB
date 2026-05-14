@@ -2,33 +2,45 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/Css/tabla.css
  * Carpeta del tema: «Css». Hoja: «tabla».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el diseño de tablas modernas con enfoque en legibilidad, espaciado y sombras sutiles.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos compartidos para celdas de datos (td) y celdas de encabezado (th). */
 td, th{
-    text-align: center;
-    padding: 6px;
-    font-family: sans-serif;
-    border: none;
-    border-bottom: 1px solid #0004;
+    text-align: center; /* Alinea el contenido al centro de la celda para una estructura simétrica. */
+    padding: 6px; /* Relleno interno para evitar que el texto toque las líneas de división. */
+    font-family: sans-serif; /* Tipografía limpia sin remates para facilitar la lectura de datos. */
+    border: none; /* Elimina los bordes laterales y superiores predeterminados del navegador. */
+    border-bottom: 1px solid #0004; /* Crea una línea de división horizontal sutil con transparencia (alfa). */
 }
 
+
+
+/* Estilo específico para las celdas de datos. */
 td{
-    color: #666;
+    color: #666; /* Color de texto gris oscuro para diferenciar el contenido del encabezado principal. */
 }
 
+
+
+/* Estilos estructurales del elemento tabla. */
 table{
-    width: 100%;
-    border-spacing: 10px;
-    box-shadow: 0 0 25px #0002;
-    min-width: 400px;
-    margin: auto;
-    margin-top: 30px;
+    width: 100%; /* La tabla ocupa todo el ancho disponible del contenedor padre. */
+    border-spacing: 10px; /* Define la separación física entre los bordes de las celdas adyacentes. */
+    box-shadow: 0 0 25px #0002; /* Sombra perimetral muy tenue para dar un efecto de elevación suave. */
+    min-width: 400px; /* Garantiza un ancho mínimo para asegurar la integridad de los datos en pantallas pequeñas. */
+    margin: auto; /* Centrado horizontal automático dentro del flujo del documento. */
+    margin-top: 30px; /* Separación respecto a elementos superiores. */
 }
 
+
+
+/* .ht: Clase utilitaria para celdas destacadas o encabezados especiales. */
 .ht{
-    border: none;
-    padding: 12px;
-    font-size: 1.2em;
+    border: none; /* Refuerza la ausencia de bordes accidentales. */
+    padding: 12px; /* Aumenta el relleno para dar mayor jerarquía visual y aire al texto. */
+    font-size: 1.2em; /* Incrementa el tamaño de la fuente para resaltar el título o valor clave. */
 }

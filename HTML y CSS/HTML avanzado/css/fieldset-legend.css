@@ -2,48 +2,63 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/Css/fieldset-legend.css
  * Carpeta del tema: «Css». Hoja: «fieldset-legend».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el estilo de agrupamiento semántico usando fieldset y legend en formularios con tema oscuro.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración de la atmósfera visual del documento. */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    color: #eee;
-    min-height: 100vh;
-    background: linear-gradient(to bottom, #333, #000);
+    margin: 0; /* Reset de márgenes externos. */
+    font-family: sans-serif; /* Tipografía base sin remates para mayor legibilidad. */
+    color: #eee; /* Texto en gris casi blanco para alto contraste. */
+    min-height: 100vh; /* Garantiza que el fondo cubra al menos toda la altura de la ventana. */
+    background: linear-gradient(to bottom, #333, #000); /* Fondo degradado sofisticado de gris a negro. */
 }
 
+
+
+/* .form: Contenedor principal del formulario con efecto de elevación. */
 form {
-    background: transparent;
-    padding: 10px 20px;
-    max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0 0 55px #fff2;
-    margin-top: 50px;
-    border-radius: 8px;
-    margin-bottom: 40px;
+    background: transparent; /* Mantiene la transparencia para lucir el degradado del body. */
+    padding: 10px 20px; /* Espaciado interno para respiración del contenido. */
+    max-width: 500px; /* Limita el ancho para mantener una línea de lectura cómoda. */
+    margin: 0 auto; /* Centrado horizontal automático. */
+    box-shadow: 0 0 55px #fff2; /* Sombra perimetral tenue para destacar el formulario. */
+    margin-top: 50px; /* Separación respecto al borde superior. */
+    border-radius: 8px; /* Bordes suavemente redondeados. */
+    margin-bottom: 40px; /* Espacio inferior de seguridad. */
 }
 
+
+
+/* .input: Estilización de los campos de entrada de datos. */
 input {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 6px;
-    border: none;
-    border: 1px solid #666;
-    box-shadow: 0 0 15px #0003;
-    background: transparent;
-    border-radius: 4px;
-    color: #DDD;
-    margin: 6px 0;
+    width: 100%; /* El campo ocupa todo el ancho disponible del contenedor. */
+    box-sizing: border-box; /* Asegura que el padding no expanda el ancho del elemento. */
+    padding: 8px 6px; /* Relleno interno para el texto. */
+    border: none; /* Elimina el borde nativo. */
+    border: 1px solid #666; /* Borde personalizado sutil. */
+    box-shadow: 0 0 15px #0003; /* Sombra interna para dar profundidad. */
+    background: transparent; /* Fondo traslúcido para cohesión visual. */
+    border-radius: 4px; /* Esquinas ligeramente curvas. */
+    color: #DDD; /* Color del texto introducido por el usuario. */
+    margin: 6px 0; /* Separación vertical entre campos. */
 }
 
+
+
+/* .fieldset: Agrupador semántico de elementos relacionados. */
 fieldset {
-    margin: 20px 0;
-    border: 1px solid #ddd6;
-    border-radius: 5px;
+    margin: 20px 0; /* Separación respecto a otros grupos o elementos. */
+    border: 1px solid #ddd6; /* Borde con transparencia para delimitar sin saturar. */
+    border-radius: 5px; /* Sincroniza la estética redondeada del formulario. */
 }
 
+
+
+/* .legend: Título o etiqueta del grupo definido por el fieldset. */
 legend {
-    padding: 0 6px;
+    padding: 0 6px; /* Pequeño respiro lateral para que el texto no toque las líneas del borde. */
 }

@@ -2,19 +2,33 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Srcset y Sizes/src-szs.css
  * Carpeta del tema: «Srcset y Sizes». Hoja: «src-szs».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: asegurar que las imágenes servidas por srcset y sizes sean elásticas y responsivas.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina los márgenes externos por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates para legibilidad. */
 }
 
+
+
+/* Configuración del Box Model: garantiza consistencia en las dimensiones. */
 div, body{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye el padding y bordes dentro del ancho y alto total. */
 }
 
+
+
+/* 
+ * REGLA MAESTRA PARA IMÁGENES RESPONSIVAS:
+ * Permite que las imágenes se adapten al tamaño de su contenedor.
+ */
 img{
-    max-width: 100%;
+    max-width: 100%; /* Impide que la imagen sea más ancha que su contenedor padre. */
+    height: auto;    /* Mantiene la relación de aspecto original para evitar distorsiones. */
+    display: block;  /* Elimina el espacio inferior no deseado de los elementos inline. */
 }

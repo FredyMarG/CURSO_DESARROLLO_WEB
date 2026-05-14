@@ -1,16 +1,41 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Picture,Source,Media/pic.css
- * Carpeta del tema: «Picture,Source,Media». Hoja: «pic».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Carpeta del tema: «Picture, Source y Media». Hoja: «pic».
+ * Propósito: asegurar que las imágenes servidas por el elemento picture sean elásticas y responsivas.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
+/* Reset base y tipografía. */
+body {
+    margin: 0;               /* Elimina los márgenes del viewport. */
+    font-family: sans-serif; /* Fuente base para legibilidad. */
+    background-color: #eee;  /* Fondo neutro para resaltar la imagen. */
+    display: flex;           /* Flexbox para centrar el contenido. */
+    justify-content: center; /* Alineación horizontal central. */
+    align-items: center;     /* Alineación vertical central. */
+    min-height: 100vh;       /* Asegura que el cuerpo ocupe toda la ventana. */
+    padding: 20px;           /* Espaciado de seguridad. */
 }
 
-div , body{
-    box-sizing: border-box;
+/* 
+ * REGLA MAESTRA PARA PICTURE:
+ * Aunque usamos la etiqueta <picture> en HTML, los estilos se aplican al <img> interno, 
+ * ya que es el elemento que el navegador termina renderizando visualmente.
+ */
+picture img {
+    /* 
+     * max-width: 100% -> Impide que la imagen sea más ancha que la pantalla, 
+     * permitiendo que se encoja proporcionalmente. 
+     */
+    max-width: 100%; 
+    /* 
+     * height: auto -> Mantiene la relación de aspecto original para que la imagen 
+     * no se vea estirada o aplastada al redimensionar. 
+     */
+    height: auto;    
+    /* display: block -> Elimina el espacio inferior no deseado de los elementos inline. */
+    display: block;  
+    border: 5px solid #fff;       /* Marco decorativo. */
+    border-radius: 12px;         /* Esquinas suavizadas. */
+    box-shadow: 0 5px 25px #0003; /* Sombra sutil para dar profundidad. */
 }

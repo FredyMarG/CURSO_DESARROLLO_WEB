@@ -1,0 +1,67 @@
+/**
+ * ESTILOS LABORATORIO: MATH
+ * Tema visual: Esmeralda / Verde (Asociado a precisión y lógica).
+ */
+
+/* Reset global: Estandariza el comportamiento de la caja y márgenes */
+* { 
+    margin: 0;              /* Elimina márgenes del navegador */
+    padding: 0;             /* Elimina rellenos del navegador */
+    box-sizing: border-box; /* El tamaño incluye padding/border para evitar desbordamientos */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Tipografía técnica y clara */
+    background-color: #f0fdf4; /* Fondo verde esmeralda muy tenue */
+    display: flex;             /* Habilita Flexbox para centrado total */
+    align-items: center;       /* Centra verticalmente en el eje Y */
+    justify-content: center;   /* Centra horizontalmente en el eje X */
+    min-height: 100vh;         /* Ocupa el 100% de la altura de la ventana */
+    color: #064e3b;            /* Texto en verde oscuro para contraste */
+}
+
+/* Tarjeta de presentación (Glassmorphism sutil) */
+.card {
+    background: white;         /* Base blanca sólida */
+    padding: 2.5rem;           /* Espaciado interno generoso */
+    border-radius: 1.5rem;     /* Esquinas redondeadas modernas */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
+    max-width: 400px;          /* Limita el ancho en pantallas grandes */
+    width: 90%;                /* Fluidez en dispositivos móviles */
+    text-align: center;        /* Alineación central de elementos */
+    border: 1px solid #d1fae5; /* Borde sutil para definición */
+}
+
+/* Icono matemático f(x) */
+.icon {
+    font-size: 1.8rem;         /* Escala del texto del icono */
+    background: #d1fae5;       /* Fondo verde claro */
+    color: #059669;            /* Color del símbolo (esmeralda) */
+    width: 64px;               /* Ancho fijo */
+    height: 64px;              /* Alto fijo para simetría */
+    display: flex;             /* Centra el texto f(x) internamente */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    border-radius: 50%;        /* Forma circular */
+    margin: 0 auto 1.5rem;     /* Centra el bloque y da espacio inferior */
+    font-weight: bold;         /* Resalta el símbolo matemático */
+    font-family: 'Cambria', serif; /* Fuente tipo ecuación */
+}
+
+h1 { margin-bottom: 1rem; font-size: 1.5rem; color: #065f46; }
+
+p { color: #374151; line-height: 1.6; margin-bottom: 2rem; }
+
+/* Caja de estado del script */
+.status-box {
+    background: #ecfdf5;       /* Fondo destacado suave */
+    padding: 0.75rem;          /* Relleno interno */
+    border-radius: 0.5rem;     /* Redondeo de esquinas */
+    display: flex;             /* Alineación horizontal punto/texto */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    gap: 0.6rem;               /* Espaciado entre elementos */
+    font-size: 0.85rem;        /* Tamaño de fuente informativo */
+}
+
+.status-dot { width: 10px; height: 10px; background: #10b981; border-radius: 50%; }

@@ -2,46 +2,77 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Align Self/align.css
  * Carpeta del tema: «Align Self». Hoja: «align».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de align-self para anular la alineación del eje secundario en ítems individuales.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía limpia. */
+    background-color: #ccc; /* Fondo gris para contraste. */
 }
 
+
+
+/* Configuración del Box Model para asegurar que el padding no afecte dimensiones. */
 div ,  body{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye bordes y relleno en el tamaño total. */
 }
 
+
+
+/* 
+ * Contenedor Flexbox: 
+ * Define la alineación global de los ítems en el eje secundario (vertical si la dirección es row).
+ */
 .flexbox{
-    display: flex;
-    flex-flow:row wrap ;
-    border: 2px solid #000;
-    margin: 20px;
-    align-items: center;
-    background-color: #fff;
-    gap: 30px;
+    display: flex; /* Activa el contexto flex. */
+    flex-flow: row wrap; /* Shorthand: dirección fila y permite salto de línea. */
+    border: 2px solid #000; /* Marco visual del contenedor. */
+    margin: 20px; /* Separación externa. */
+    align-items: center; /* Alineación predeterminada: todos los ítems se centran verticalmente. */
+    background-color: #fff; /* Fondo blanco para destacar los ítems. */
+    gap: 30px; /* Espaciado uniforme entre los elementos. */
 }
 
+
+
+/* Estilos de los ítems: definición de tamaño y flexibilidad. */
 .flex-item{
-    background-color: #800;
-    color: #fff;
-    font-size: 40px;
-    text-align: center;
-    flex: 1 1 100px;
+    background-color: #800; /* Color base rojo oscuro. */
+    color: #fff; /* Texto blanco. */
+    font-size: 40px; /* Tamaño de fuente grande. */
+    text-align: center; /* Centrado de texto. */
+    /* 
+     * flex: [grow] [shrink] [basis]. 
+     * Permite que los ítems crezcan, se encojan y tengan un tamaño base de 100px.
+     */
+    flex: 1 1 100px; 
 }
 
+
+
+/* Selector estructural: aplica color diferente a los ítems pares (2, 4, 6...). */
 .flex-item:nth-child(2n){
-    background-color: #f77;
+    background-color: #f77; /* Color coral claro. */
 }
 
+
+
+/* 
+ * align-self: Permite que este ítem específico ignore el 'align-items: center' del padre.
+ * El valor 'stretch' fuerza al elemento a ocupar toda la altura disponible del contenedor.
+ */
 .flex-item:last-child{
-    align-self: stretch;
+    align-self: stretch; 
 }
 
+
+
+/* Aplicación de align-self mediante clase específica para mayor control. */
 .item-5{
     align-self: stretch;
 }

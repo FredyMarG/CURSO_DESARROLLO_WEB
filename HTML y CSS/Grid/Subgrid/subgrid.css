@@ -2,69 +2,101 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Grid/Subgrid/subgrid.css
  * Carpeta del tema: «Subgrid». Hoja: «subgrid».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de Subgrid para heredar las pistas del contenedor padre en elementos anidados.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de tipografía y márgenes. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina los márgenes por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
 }
 
+
+
+/* Configuración del Box Model: garantiza consistencia en las dimensiones. */
 body, div{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye padding y bordes en el cálculo de ancho y alto. */
 }
 
 
+
+
+/* .grid: Contenedor principal que define la rejilla base. */
 .grid{
-    display: grid;
-    grid-template-columns:repeat(4, 1fr);
-    grid-template-rows: repeat(4,1fr);
-    gap: 10px;
-    padding: 10px;
-    justify-items: stretch;
-    justify-content: space-evenly;
-    align-items: stretch;
-    align-content:space-evenly ;
-    border: 2px solid black;
-    margin: 20px;
+    display: grid; /* Activa el modelo de Grid Layout. */
+    grid-template-columns: repeat(4, 1fr); /* Define 4 columnas de igual ancho (1 fracción cada una). */
+    grid-template-rows: repeat(4, 1fr); /* Define 4 filas de igual alto. */
+    gap: 10px; /* Espaciado uniforme entre celdas. */
+    padding: 10px; /* Relleno interno del contenedor. */
+    justify-items: stretch; /* Estira los ítems para ocupar todo el ancho de su celda. */
+    justify-content: space-evenly; /* Distribuye el espacio sobrante equitativamente entre columnas. */
+    align-items: stretch; /* Estira los ítems verticalmente. */
+    align-content: space-evenly; /* Distribuye el espacio sobrante equitativamente entre filas. */
+    border: 2px solid black; /* Marco visual del grid principal. */
+    margin: 20px; /* Separación externa del contenedor. */
 }
 
+
+
+/* 
+ * .grid-item:first-child: Este elemento actúa como el contenedor de Subgrid.
+ */
 .grid-item:first-child{
-    grid-area: 3/1/span 2/span 2;
-    display: grid;
-    grid-template-columns: subgrid;
-    grid-template-rows: subgrid;
-    gap: 10px;
-    padding: 0;
-    background-color: transparent;
+    /* Posicionamiento: inicia en fila 3 / columna 1 y abarca 2 filas / 2 columnas. */
+    grid-area: 3 / 1 / span 2 / span 2; 
+    display: grid; /* Habilita grid interno para sus propios hijos. */
+    /* 
+     * subgrid: Adopta las líneas y pistas definidas en el grid padre (.grid) 
+     * para el área que este elemento ocupa. 
+     */
+    grid-template-columns: subgrid; 
+    grid-template-rows: subgrid; 
+    gap: 10px; /* Mantiene el espaciado consistente con el padre. */
+    padding: 0; /* Elimina el padding para que los subgrid-items toquen las líneas del padre. */
+    background-color: transparent; /* Permite ver el fondo o estructura del subgrid. */
 }
 
+
+
+/* .subgrid-item: Elementos que viven dentro del subgrid y se alinean con el grid padre. */
 .subgrid-item{
-    background-color: #e66;
-    padding: 20px;
-    border-radius: 18px;
-    text-align: center;
+    background-color: #e66; /* Color coral para identificar los elementos anidados. */
+    padding: 20px; /* Espaciado interno. */
+    border-radius: 18px; /* Esquinas redondeadas. */
+    text-align: center; /* Centrado de texto. */
 }
 
+
+
+/* Modificación específica para el primer ítem del subgrid. */
 .subgrid-item:first-child{
-    order: 2;
-    background-color: #4a4;
-    width: 350px;
+    order: 2; /* Cambia el orden visual sin alterar el DOM. */
+    background-color: #4a4; /* Color verde para diferenciarlo. */
+    width: 350px; /* Ancho forzado para observar el comportamiento de desbordamiento en celdas. */
 }
 
+
+
+/* .grid-item: Estilos generales para los elementos del grid principal. */
 .grid-item{
-    background-color: #48e;
-    color: #fff;
-    font-size: 30px;
-    border-radius: 16px;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    background-color: #48e; /* Azul corporativo. */
+    color: #fff; /* Texto blanco. */
+    font-size: 30px; /* Fuente grande para visibilidad. */
+    border-radius: 16px; /* Redondeado de bordes. */
+    max-width: 100%; /* Asegura que el contenido no rompa la celda. */
+    /* Flexbox interno para centrar el contenido de texto. */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px; /* Relleno interior. */
 }
 
+
+
+/* Efecto visual al interactuar con las cajas del grid. */
 .grid-item:hover{
-    opacity: 0.74;
+    opacity: 0.74; /* Reduce la opacidad para dar feedback de hover. */
 }

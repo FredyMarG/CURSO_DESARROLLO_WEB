@@ -1,11 +1,16 @@
 /**
  * RESIZE Y MOVE
- * Cambia tamaño y posición de la ventana del navegador (solo tiene efecto fiable en ventanas abiertas por script).
+ * Manipulación programática de la ventana (Window Object).
+ * ⚠️ SEGURIDAD Y POLÍTICAS DE NAVEGADOR:
+ * - Estos métodos generalmente solo funcionan en ventanas abiertas mediante window.open().
+ * - La mayoría de navegadores modernos bloquean estas acciones en la pestaña principal 
+ *   para prevenir abusos de UX y ataques de Clickjacking.
  */
 
 // 📚 Resize
 
 // Cambio RELATIVO: Suma o resta los píxeles indicados al tamaño actual de la ventana (Ej: actual 500 + 100 = 600).
+// Sintaxis: window.resizeBy(xDelta, yDelta)
 window.resizeBy(100, 100)
 
 // Cambio ABSOLUTO: Establece el tamaño final exacto de la ventana, ignorando sus dimensiones previas.

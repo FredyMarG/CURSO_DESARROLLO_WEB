@@ -2,37 +2,41 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Medidas/style.css
  * Carpeta del tema: «Medidas». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de unidades relativas (em, vh, ch) para un diseño flexible.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+/* Estilos del contenedor div: uso de unidades de viewport. */
 div{
-    background: #ededed;
-    padding: 20px;
-    font-family: sans-serif;
-    border-left: 2px solid #999;
-    height: 50vh;
-    margin-top: 10vh;
+    background: #ededed; /* Fondo gris claro. */
+    padding: 20px; /* Espaciado interno. */
+    font-family: sans-serif; /* Tipografía base. */
+    border-left: 2px solid #999; /* Borde decorativo lateral. */
+    height: 50vh; /* Altura equivalente al 50% del alto de la ventana. */
+    margin-top: 10vh; /* Margen superior basado en el alto de la ventana. */
 }
 
+/* Estilos del encabezado: reset de márgenes. */
 h1{
-    margin: 0;
-    font-size: 23px;
+    margin: 0; /* Elimina márgenes para control total. */
+    font-size: 23px; /* Tamaño fijo en píxeles. */
 }
 
+/* Estilos del span: uso de unidades relativas al padre (em). */
 span{
-    color: #999;
-    font-size: 16px;
-    font-weight: 100;
-    font-size: 1em;
+    color: #999; /* Color gris suave. */
+    font-weight: 100; /* Grosor muy fino. */
+    font-size: 1em; /* Equivale al tamaño de fuente heredado del padre. */
 }
 
+/* Estilos del párrafo: interlineado basado en caracteres. */
 p{
-    color: #555;
-    font-size: 1em;
-    line-height: 1ch;
+    color: #555; /* Color de texto oscuro. */
+    font-size: 1em; /* Tamaño relativo. */
+    /* 
+     * line-height: 1ch -> Ajusta el interlineado basándose 
+     * en el ancho del carácter '0' de la fuente actual. 
+     */
+    line-height: 1ch; 
 }
-
-/* em y rem depender del font size del padre */
-/* 1em = 16px (por defecto) */
-/* 1rem = 16px (por defecto)  dependiendo lo que quieras hacer revisa en que caso usas cada uno*/

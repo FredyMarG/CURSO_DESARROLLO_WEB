@@ -2,144 +2,79 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Mobile Design/mobile.css
  * Carpeta del tema: «Mobile Design». Hoja: «mobile».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: demostrar la metodología Mobile First para una estructura de navegación y contenido.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #ededed;
+/* Reset base para normalizar el comportamiento en móviles. */
+* {
+    box-sizing: border-box;    /* Incluye padding y bordes en el ancho total para un cálculo predecible. */
+    margin: 0;                 /* Elimina los márgenes externos predeterminados del navegador. */
+    padding: 0;                /* Elimina los rellenos internos predeterminados del navegador. */
 }
 
-div, body, header, nav, ul, footer{
-    box-sizing: border-box;
+body {
+    font-family: sans-serif;      /* Establece una tipografía limpia y moderna para todo el documento. */
+    line-height: 1.6;             /* Aumenta el espacio entre líneas para mejorar la legibilidad del texto. */
+    background-color: #f4f4f4;    /* Fondo gris muy claro para un diseño suave y profesional. */
 }
 
-.main-wrapper, header , footer{
-    width: 100%;
+/* Estilos base (Móvil): El diseño fluye en una sola columna por defecto. */
+.header {
+    background-color: #333;       /* Fondo oscuro para el encabezado, proporcionando contraste. */
+    color: #fff;                  /* Color de texto blanco para asegurar la visibilidad. */
+    padding: 1rem;                /* Relleno interno que escala con el tamaño de fuente base. */
+    text-align: center;           /* Centra el texto horizontalmente dentro del encabezado. */
 }
 
-h1, h2, h3{
-    text-wrap: balance;
+.main-navbar ul {
+    list-style: none;             /* Elimina los marcadores de lista predeterminados (viñetas). */
+    display: flex;                /* Convierte la lista en un contenedor flexible. */
+    flex-direction: column;       /* Apila los ítems del menú verticalmente, optimizado para pantallas móviles. */
+    gap: 10px;                    /* Establece un espacio uniforme entre los elementos del menú. */
+    margin-top: 10px;             /* Margen superior para separar el menú de otros elementos del header. */
 }
 
-p{
-    text-wrap: pretty;
+.main-navbar a {
+    color: #fff;                  /* Color de texto blanco para los enlaces. */
+    text-decoration: none;        /* Elimina el subrayado predeterminado de los enlaces. */
+    display: block;               /* Hace que el enlace ocupe todo el ancho disponible, aumentando el área de clic. */
+    padding: 10px;                /* Relleno interno para mejorar la experiencia táctil. */
+    background: #444;             /* Fondo oscuro para los ítems del menú, contrastando con el header. */
 }
 
-/*  HEADER  */
-
-header {
-    background-color: #48e;
+.main-wrapper {
+    padding: 20px;                /* Relleno general para el contenido principal, evitando que toque los bordes. */
+    display: flex;                /* Habilita Flexbox para organizar las secciones internas. */
+    flex-direction: column;       /* Apila las secciones (main y aside) verticalmente en pantallas pequeñas. */
+    gap: 20px;                    /* Espacio uniforme entre las secciones apiladas. */
 }
 
-.main-wrapper{
-    max-width: 1024px;
-    flex-direction: column;
+aside, main {
+    background: #fff;             /* Fondo blanco para las áreas de contenido, mejorando la legibilidad. */
+    padding: 15px;                /* Relleno interno para el texto dentro de las secciones. */
+    border: 1px solid #ddd;       /* Borde sutil para delimitar visualmente las secciones. */
 }
 
-.main-navbar ul{
-    display: flex; 
-    padding: 0;
-    justify-content: center;
+footer {
+    text-align: center;           /* Centra el texto del pie de página. */
+    padding: 20px;                /* Relleno interno para el pie de página. */
+    background: #333;             /* Fondo oscuro, consistente con el encabezado. */
+    color: #fff;                  /* Texto blanco para el pie de página. */
 }
 
-.main-navbar li {
-    list-style: none;
-    margin: 4px;
-}
-
-.main-navbar a{
-    color: white;
-    display: inline-block;
-    padding: 6px 9px;
-}
-
-nav a {
-    text-decoration: none;
-}
-
-a:hover{
-    opacity: 0.7;
-}
-
-/* MAIN SECTION  */
-.main-wrapper{
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-aside, main{
-    padding: 10px 20px;
-    flex-basis: 0;
-    background-color: #fff;
-}
-
-main{
-    min-width: 300px;
-    flex-grow: 2;
-}
-
-.main-wrapper aside{
-    flex-grow: 1;
-}
-
-.secondary-navbar{
-    min-width: 10rem;
-    text-align: center;
-}
-
-.secondary-navbar ul {
-    padding: 0;
-}
-
-.secondary-navbar li {
-    list-style: none;
-}
-
-.secondary-navbar a {
-    color: #48e;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-aside:last-child{
-    min-width: 10rem;
-    display: none;
-}
-
-/* FOOTER */
-footer{
-    margin-top: auto;
-    border: solid 1px red;
-    background-color: #333;
-    color: #fff;
-    padding: 40px;
-    font-weight: bold;
-    text-align: center;
-}
-
-
-/* --- Consultas de medio (@media) --- */
-@media screen and (min-width: 480px){
-    .main-wrapper{
-        flex-direction: row;
+/* Media Query: Mejoras para pantallas medianas/grandes (Tablets y Desktop). */
+@media (min-width: 768px) {
+    .main-navbar ul {
+        flex-direction: row;      /* Cambia la dirección del menú a horizontal para pantallas más anchas. */
+        justify-content: center;  /* Centra los elementos del menú horizontalmente. */
     }
-    
-}
 
-
-/* --- Consultas de medio (@media) --- */
-@media screen and (min-width: 800px){
-    aside:last-child{
-        display: block;
+    .main-wrapper {
+        flex-direction: row;      /* Transforma el layout de apilado a columnas (sidebar y contenido principal). */
+        max-width: 1200px;        /* Limita el ancho máximo del contenido en pantallas grandes. */
+        margin: auto;             /* Centra el contenedor principal en el centro de la pantalla. */
     }
+
+    main { flex: 3; }             /* El contenido principal ocupa 3 partes del espacio flexible. */
+    aside { flex: 1; }            /* Las barras laterales ocupan 1 parte del espacio flexible. */
 }

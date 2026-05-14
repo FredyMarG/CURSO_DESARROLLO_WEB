@@ -2,29 +2,41 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/Css/detailsysummary.css
  * Carpeta del tema: «Css». Hoja: «detailsysummary».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el estilo de los elementos interactivos nativos details y summary en un entorno de tema oscuro.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de la interfaz. */
 body{
-    background: #333;
-    color: #ddd;
-    font-family: sans-serif;
+    background: #333; /* Fondo gris oscuro para un diseño de alto contraste y descanso visual. */
+    color: #ddd; /* Texto en gris claro para asegurar la legibilidad sobre el fondo. */
+    font-family: sans-serif; /* Tipografía moderna y limpia sin remates. */
 }
+
+
+/* .details: Contenedor interactivo que gestiona el estado de visibilidad del contenido secundario. */
 details{
-    background: transparent;
-    border: 1px solid #ddd;
-    padding: 9px;
-    font-size: 0.7em;
-    color: #ccc;
+    background: transparent; /* Permite que el fondo del padre sea visible a través del widget. */
+    border: 1px solid #ddd; /* Borde fino para delimitar el área colapsable. */
+    padding: 9px; /* Relleno interno para alejar el texto de los bordes definidos. */
+    font-size: 0.7em; /* Tamaño de fuente reducido para el contenido que se despliega. */
+    color: #ccc; /* Color de texto atenuado para marcar una jerarquía de información. */
 }
 
+
+
+/* .summary: Cabecera interactiva que actúa como título y control de apertura. */
 summary{
-    background: transparent;
-    font-size: 1em;
-    color:#eee;
+    background: transparent; /* Sin fondo para mantener la estética minimalista. */
+    font-size: 1em; /* Tamaño de fuente completo para destacar el título sobre el contenido interno. */
+    color: #eee; /* Color de texto más brillante para indicar que es un elemento accionable. */
 }
 
+
+
+/* Estilos específicos para listas contenidas dentro del flujo interactivo. */
 ul{
-    font-weight: 100;
+    font-weight: 100; /* Grosor de fuente ultra-ligero para listas de detalles técnicos. */
 }

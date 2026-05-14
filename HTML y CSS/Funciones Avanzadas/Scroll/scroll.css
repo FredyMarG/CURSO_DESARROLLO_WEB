@@ -2,34 +2,63 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Scroll/scroll.css
  * Carpeta del tema: «Scroll». Hoja: «scroll».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el control del comportamiento del scroll y la personalización de las barras de desplazamiento.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja, márgenes y tipografía base. */
 *{
-    box-sizing: border-box;
-    margin: 0;
-    font-family: sans-serif;
+    box-sizing: border-box; /* Incluye el padding y bordes en el cálculo de las dimensiones del elemento. */
+    margin: 0; /* Elimina los márgenes externos predeterminados del navegador. */
+    font-family: sans-serif; /* Establece una fuente limpia y legible para todo el documento. */
 }
 
+
+
+/* Variables CSS y valores de diseño reutilizables. */
 :root{
-    --color-principal: #48e;
-    --alto-del-box: 600px;
+    --color-principal: #48e; /* Azul corporativo para elementos de resalte o scrollbars. */
+    --alto-del-box: 600px; /* Valor de referencia para alturas fijas en la lección. */
 }
 
+
+
+/* .box: Contenedor con scroll interno y personalización visual. */
 .box{
-    font-size: 30px;
-    padding: 0 40px;
-    border: 6px solid #000;
-    width: 50vw;
-    height: 100vh;
+    font-size: 30px; /* Tamaño de fuente para el contenido interno. */
+    padding: 0 40px; /* Espaciado lateral interno. */
+    border: 6px solid #000; /* Marco sólido negro para definir el área de scroll. */
+    width: 50vw; /* El ancho ocupará el 50% de la ventana del navegador. */
+    height: 100vh; /* El alto ocupará el 100% de la ventana del navegador. */
+    /* 
+     * overflow: scroll -> Fuerza la aparición de las barras de desplazamiento, 
+     * permitiendo navegar por el contenido que exceda la altura definida.
+     */
     overflow: scroll;
+    /* 
+     * scroll-behavior: smooth -> Hace que el desplazamiento (por ejemplo, mediante anclas) 
+     * sea fluido y no un salto instantáneo.
+     */
     scroll-behavior: smooth;
-    scrollbar-color: #48e #fff;
+    /* 
+     * scrollbar-color: [color-barra] [color-fondo-barra] -> Personaliza los colores 
+     * de la barra de desplazamiento (Soportado en navegadores modernos).
+     */
+    scrollbar-color: var(--color-principal) #fff;
+    /* 
+     * scrollbar-width: define el grosor de la barra de desplazamiento.
+     */
     scrollbar-width: thin;
 }
 
-.crecer{
-    height: 200vh;
-}
 
+
+/* 
+ * .crecer: Elemento con altura extendida. 
+ * Se utiliza dentro de .box para forzar el desbordamiento y habilitar el scroll.
+ */
+.crecer{
+    height: 200vh; /* Duplica la altura del viewport para generar contenido desplazable. */
+}

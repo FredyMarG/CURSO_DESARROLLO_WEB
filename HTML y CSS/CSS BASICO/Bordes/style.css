@@ -2,31 +2,40 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Bordes/style.css
  * Carpeta del tema: «Bordes». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar la aplicación de bordes, redondeado de esquinas y estilos de línea para elementos de bloque e interacción.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+/* Estilos globales: configuración del fondo del documento. */
 body{
-    background: black;
-}
-div{
-    background: red;
-    width: 150px;
-    margin: auto;
-    text-align: center;
+    background: black; /* Establece un fondo oscuro para resaltar los elementos de la práctica. */
 }
 
+
+/* 
+ * Estilos del contenedor div: 
+ * Se consolidan las propiedades de borde y dimensiones en un solo bloque para optimizar la cascada. 
+ */
 div{
-    border: 3px solid black;
-    border-radius: 4px;
+    background: red; /* Color de fondo para visualizar el área de la caja. */
+    width: 150px; /* Ancho fijo del elemento. */
+    margin: auto; /* Centrado horizontal automático respecto a su contenedor padre (body). */
+    text-align: center; /* Alineación central del texto contenido. */
+    border: 3px solid black; /* Shorthand de borde: define el grosor (3px), el estilo (sólido) y el color. */
+    border-radius: 4px; /* Suavizado de esquinas mediante un radio de curvatura. */
 }
 
+/* 
+ * Estilos del selector input: 
+ * Aplicación de un estilo minimalista (estilo Material) enfocado en el borde inferior. 
+ */
 input{
-    margin: 5px;
-    padding: 5px 9px;
-    border: none;
-    border-bottom: 1px solid greenyellow;
-    background: transparent;
-    color: greenyellow;
-    border-radius: 5px;
+    margin: 5px; /* Separación externa para evitar el amontonamiento de controles. */
+    padding: 5px 9px; /* Shorthand: 5px de espaciado superior/inferior y 9px lateral. */
+    border: none; /* Elimina el borde predeterminado (los 4 lados) aplicado por el navegador. */
+    border-bottom: 1px solid greenyellow; /* Define una línea de entrada de texto solo en la base. */
+    background: transparent; /* Permite que el fondo negro del body se vea a través del campo. */
+    color: greenyellow; /* Color del texto escrito por el usuario, a juego con el borde. */
+    border-radius: 5px; /* Radio de borde que suaviza los límites del elemento, notable durante el enfoque (focus). */
 }

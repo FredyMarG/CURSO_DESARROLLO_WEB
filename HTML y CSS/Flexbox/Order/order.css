@@ -2,47 +2,49 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Order/order.css
  * Carpeta del tema: «Order». Hoja: «order».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: demostrar cómo cambiar el orden visual de los elementos sin alterar el DOM.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+
+.flex-container {
+    display: flex; /* Activa el contexto de flexbox en el contenedor. */
+    gap: 10px; /* Define el espacio de separación entre los elementos hijos. */
+    padding: 20px; /* Agrega un relleno interno para separar los elementos del borde. */
+    background: #eee; /* Establece un color de fondo gris claro para el contenedor. */
 }
 
-div ,  body{
-    box-sizing: border-box;
+.item {
+    padding: 20px; /* Relleno interno para dar tamaño al contenido de cada ítem. */
+    background: #800; /* Color de fondo granate para distinguir los ítems. */
+    color: #fff; /* Color de texto blanco para asegurar legibilidad. */
+    font-size: 25px; /* Tamaño de fuente para que el texto sea prominente. */
+    flex: 1; /* Permite que el ítem crezca equitativamente para llenar el espacio. */
+    text-align: center; /* Centra el texto horizontalmente dentro del ítem. */
 }
 
-.flexbox{
-    display: flex;
-    height: 100px;
-    flex-flow:row wrap ;
-    border: 2px solid #000;
-    margin: 20px;
-    justify-content: space-evenly;
-    align-content: center;
-    background-color: #fff;
-}
-.flex-item{
-    background-color: #800;
-    text-align: center;
-    margin: 10px;
-    color: #fff;
-    font-size: 40px;
-    width: 100px;
-    direction: rtl;
-    order: 3;
+/* 
+ * Propiedad Order:
+ * Todos los ítems flex tienen por defecto order: 0.
+ * Los valores menores (negativos) se posicionan al principio.
+ * Los valores mayores se posicionan al final.
+ */
+
+.first {
+    /* Este elemento aparecerá al final visualmente aunque sea el primero en el HTML. */
+    order: 3; /* Desplaza el elemento a la tercera posición visual. */
+    background-color: #f77; /* Color coral para identificar visualmente el cambio. */
 }
 
-.flex-item:first-child{
-    background-color: #f77;
-    order: 1;
+.middle {
+    /* Este se mantendrá en una posición intermedia. */
+    order: 2; /* Establece la segunda posición visual. */
 }
 
-.flex-item:last-child{
-    background-color: #000;
-    order: 2;
+.last {
+    /* 
+     * Al tener el valor más bajo, este elemento aparecerá primero en pantalla,
+     * rompiendo el flujo secuencial del documento.
+     */
+    order: 1; /* Prioriza el elemento a la primera posición visual. */
+    background-color: #000; /* Fondo negro para resaltar el primer elemento visual. */
 }

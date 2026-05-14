@@ -2,24 +2,39 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Color MIx/color.css
  * Carpeta del tema: «Color MIx». Hoja: «color».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de la función color-mix() para crear variaciones cromáticas dinámicas.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja para un cálculo preciso de dimensiones. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho/alto total del elemento. */
 }
 
+
+
+/* Estilos globales: configuración del canvas del documento. */
 body{
-    font-family: sans-serif;
-    margin: 0;
-    width: 100%;
-    overflow: hidden;
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    margin: 0; /* Elimina márgenes externos del navegador. */
+    width: 100%; /* Asegura que el cuerpo ocupe todo el ancho disponible. */
+    overflow: hidden; /* Oculta barras de desplazamiento para una presentación limpia. */
 }
 
+
+
+/* .box: Contenedor principal para la demostración cromática. */
 .box{
-    font-size: 30px;
-    width: fit-content;
-    padding: 320px;
+    font-size: 30px; /* Tamaño de fuente destacado. */
+    width: fit-content; /* El ancho de la caja se ajusta estrictamente a su contenido interno. */
+    padding: 320px; /* Relleno masivo para crear una superficie de color amplia. */
+    /* 
+     * color-mix(espacio-de-color, color1 %, color2 %):
+     * Mezcla dos colores en el espacio sRGB. 
+     * Aquí se mezcla un azul (#48e) al 60% con negro (#000) al 50%.
+     * Nota: Si la suma supera el 100%, el navegador escala los porcentajes proporcionalmente.
+     */
     background-color: color-mix(in srgb, #48e 60%, #000 50%);
 }

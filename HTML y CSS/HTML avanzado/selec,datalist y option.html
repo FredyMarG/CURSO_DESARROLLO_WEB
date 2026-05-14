@@ -18,26 +18,33 @@
     <title>Select y Datalist</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <form action="">
-<!-- Formulario de envío de datos (form) -->
-
-
+    <!-- 
+        'method="GET"': Los datos se adjuntan a la URL. Útil para búsquedas o filtros, 
+        pero no se debe usar para datos sensibles (contraseñas).
+    -->
+    <!-- Formulario para recoger datos del usuario. -->
+    <form action="#" method="GET">
         <h2>Formulario de contacto</h2>
-
-        <fieldset> <!-- Agrupación lógica de controles de formulario relacionados -->
+        
+        <!-- fieldset se usa para agrupar campos relacionados, como datos personales o de envío. -->
+        <fieldset>
             <legend>Información básica</legend>
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="nombre">Nombre completo</label>
             <input id="nombre" type="text" placeholder="Jhon Doe">
             </div>
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="correo">Correo electrónico</label>
                 <input type="email" id="correo" placeholder="ejemplo@dominio.com">
             </div>
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="asunto">Asunto</label>
                 <input id="asunto" type="text" placeholder="Asunto del mensaje">
@@ -46,22 +53,34 @@
         </fieldset>
 
         <!-- <select>: Menú desplegable. Cada <option> representa una elección estricta -->
-        
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <Label for="user">Tipo de usuario</Label>
             <select id="user" name="type-of-user">
+                <!-- 
+                     OPCIÓN POR DEFECTO: 
+                     'disabled' evita que se envíe como dato válido, 
+                     'selected' la muestra al cargar la página. 
+                -->
+                <option value="" disabled selected>Selecciona una opción</option>
                 <option value="user1">Seguidor</option>
                 <option value="user2">Empresa</option>
                 <option value="user3">Otros</option>
             </select>
         </div>
 
-        <!-- <datalist>: Provee sugerencias de autocompletado a un <input> asociado mediante el atributo 'list' -->
+        <!-- 
+            <datalist>: A diferencia del <select>, permite al usuario escribir su propia respuesta 
+            mientras ofrece sugerencias predefinidas. El 'id' del datalist debe coincidir con el 'list' del input.
+        -->
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <Label>Referente</Label>
+            <!-- El atributo 'list' vincula este input con el 'id' del <datalist> -->
             <input list="referente" name="referente">
             <datalist id="referente" name="type-of-user">
+                <!-- Las opciones aquí actúan como sugerencias, no restringen la entrada -->
                 <option value="Fredy">Persona normal</option>
                 <option value="Una Empresa">Compañia</option>
                 <option value="Amigo">Conocido</option>
@@ -70,11 +89,13 @@
 
         <!--text area-->
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="mensaje">mensaje</label>
             <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
             <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
         </div>
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="tyc">Acepto los términos y condiciones</label>
             <input type="checkbox" id="tyc" class="checkbox">

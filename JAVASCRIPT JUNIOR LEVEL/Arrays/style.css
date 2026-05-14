@@ -1,0 +1,58 @@
+/**
+ * ESTILOS LABORATORIO: ARRAYS
+ * Enfoque en visualización de colecciones de datos.
+ */
+
+* { 
+    margin: 0; padding: 0; box-sizing: border-box; /* Reset básico de layout */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Fuentes del sistema para rendimiento */
+    background-color: #faf5ff; /* Color: fondo púrpura suave para diferenciar el módulo */
+    display: flex;             /* Centrado Flexbox */
+    align-items: center;       /* Centrado Vertical */
+    justify-content: center;    /* Centrado Horizontal */
+    min-height: 100vh;         /* Ocupa el 100% de la altura de pantalla */
+    color: #4c1d95;            /* Color: contraste de texto en gama púrpura */
+}
+
+.card {
+    background: white;         /* Superficie blanca */
+    padding: 3rem;             /* Relleno espacioso */
+    border-radius: 2rem;       /* Radio de borde muy pronunciado */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); /* Sombra envolvente */
+    max-width: 400px;          /* Ancho máximo de la tarjeta */
+    text-align: center;        /* Centrado de texto */
+    border: 2px solid #ddd6fe; /* Estructura: borde púrpura claro para refuerzo visual */
+}
+
+.icon {
+    font-size: 2.5rem;         /* Iconografía grande */
+    background: #ede9fe;       /* Fondo púrpura claro */
+    color: #7c3aed;            /* Color de marca (púrpura intenso) */
+    width: 80px;               /* Ancho fijo */
+    height: 80px;              /* Alto fijo */
+    display: flex;             /* Flex para centrado de icono */
+    align-items: center;       /* Centrado V */
+    justify-content: center;   /* Centrado H */
+    border-radius: 1rem;       /* Bordes redondeados pero no circulares */
+    margin: 0 auto 2rem;       /* Centrado y margen inferior */
+}
+
+.methods-tag {
+    display: flex;             /* Layout: contenedor para las etiquetas de métodos */
+    flex-wrap: wrap;           /* Envuelve: permite que las etiquetas bajen de línea si el ancho es poco */
+    gap: 0.5rem;               /* Separación: espacio uniforme entre etiquetas */
+    justify-content: center;   /* Centrado de los elementos hijos */
+    margin-top: 1.5rem;        /* Espacio superior */
+}
+
+.methods-tag span {
+    background: #f3e8ff;       /* Color: fondo suave para cada etiqueta */
+    padding: 0.2rem 0.6rem;    /* Tamaño: espaciado interno pequeño */
+    border-radius: 0.5rem;     /* Forma: cápsula pequeña */
+    font-size: 0.75rem;        /* Tipografía: tamaño micro para etiquetas técnicas */
+    font-weight: 600;          /* Grosor: semi-bold para que el nombre del método sea legible */
+    color: #6b21a8;            /* Color: texto púrpura oscuro */
+}

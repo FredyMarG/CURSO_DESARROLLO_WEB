@@ -1,0 +1,53 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: HTML y CSS/Flexbox/Flex_Grow_Shrink/flex_logic.css
+ * Carpeta del tema: «Flex Grow y Shrink». Hoja: «flex_logic».
+ * Propósito: explicar la flexibilidad de los ítems: cómo crecen, se encogen y su tamaño base.
+ */
+
+.container {
+    display: flex; /* Activa el modelo de caja flexible para todos los hijos directos. */
+    background: #333; /* Fondo gris oscuro para contrastar con los ítems. */
+    padding: 10px; /* Espaciado interno para alejar los ítems de los bordes del padre. */
+    height: 150px; /* Altura fija que permite observar cómo los ítems se estiran o posicionan. */
+}
+
+.item {
+    background: #48e; /* Color azul base para identificar los elementos. */
+    color: white; /* Texto blanco para asegurar el contraste. */
+    padding: 20px; /* Relleno interno para dar cuerpo a cada caja. */
+    margin: 5px; /* Margen externo para separar los ítems entre sí. */
+    font-family: sans-serif; /* Tipografía moderna y legible. */
+}
+
+/* 
+ * flex-grow: Define la capacidad de un ítem para crecer si hay espacio sobrante.
+ * Si un ítem tiene grow: 2 y otro grow: 1, el primero tomará el doble de espacio extra.
+ */
+.grow-pro {
+    flex-grow: 2; /* Este ítem reclama una proporción mayor del espacio disponible en el eje principal. */
+    background-color: #e67e22; /* Color naranja para resaltar su comportamiento expansivo. */
+}
+
+/* 
+ * flex-shrink: Define la capacidad de un ítem para encogerse si no hay espacio suficiente.
+ * Un valor de 0 evita que el elemento se haga más pequeño que su flex-basis.
+ */
+.no-shrink {
+    flex-shrink: 0; /* Bloquea la compresión; el elemento mantendrá su tamaño aunque desborde al padre. */
+    width: 300px; /* Ancho forzado para demostrar que no se encogerá ante la falta de espacio. */
+    background-color: #27ae60; /* Color verde para identificar el elemento rígido. */
+}
+
+/* 
+ * flex-basis: Define el tamaño inicial de un ítem antes de distribuir el espacio.
+ * Es preferible a 'width' dentro de un contexto flex.
+ */
+.basis-fixed {
+    flex-basis: 200px; /* Establece el tamaño base inicial desde el cual se calculará el grow/shrink. */
+}
+
+/* Shorthand recomendado: flex: [grow] [shrink] [basis] */
+.flex-shortcut {
+    flex: 1 1 150px; /* Propiedad taquigráfica: crece(1), se encoge(1) y tiene base de 150px. */
+}

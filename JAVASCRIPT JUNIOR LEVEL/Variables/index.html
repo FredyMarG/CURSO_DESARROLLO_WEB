@@ -1,25 +1,35 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT JUNIOR LEVEL/Variables/index.html
-     Título: Variables en JS
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+<!DOCTYPE html> <!-- Definición de tipo de documento para HTML5 -->
+
+<!-- 
+    LABORATORIO: VARIABLES Y TIPOS DE DATOS
+    Nivel: Junior Level
+    Propósito: Entorno de ejecución para el motor de JS (V8/SpiderMonkey). 
+    En este módulo se prueban las interacciones síncronas (prompt/alert) y la consola.
 -->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+    <!-- Meta-información técnica -->
+    <meta charset="UTF-8"> <!-- Garantiza el renderizado de caracteres UTF-8 (acentos, ñ) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport: Fundamental para el diseño responsivo en móviles -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Variables en JS</title>
+    <!-- El título es indexado por motores de búsqueda (SEO) -->
+    <title>JS Junior - Variables y Tipos</title>
+    <!-- Vinculación del archivo de estilos externo (Separación de responsabilidades) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Interfaz de usuario simple para visualización -->
+    <div class="container">
+        <h1>Práctica de Variables</h1>
+        <p>La lógica se procesa mediante <b>ventanas emergentes</b> y la <b>consola</b>.</p>
+        <p>Presiona <code>Ctrl + Shift + I</code> para ver los resultados del <code>console.log</code>.</p>
+    </div>
 
+    <!-- 
+        VINCULACIÓN DE LÓGICA:
+        Se carga al final del body para no interrumpir el análisis (parsing) del DOM.
+        'variables.js' maneja la entrada de datos del usuario.
+    -->
     <script src="variables.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

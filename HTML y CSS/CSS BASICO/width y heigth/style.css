@@ -2,24 +2,33 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Width y heigth/style.css
  * Carpeta del tema: «Width y heigth». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el control de dimensiones (ancho y alto) en elementos de bloque y de línea.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+/* Estilos del selector div: definición de dimensiones fijas en un elemento de bloque. */
 div{
-    background: red;
-    width: 200px;
-    height: 200px;
+    background: red; /* Color de fondo para visualizar el área ocupada. */
+    width: 200px; /* Ancho fijo en píxeles. */
+    height: 200px; /* Alto fijo en píxeles. */
 }
+
+
+/* Estilos del selector h1: los encabezados son elementos de bloque por naturaleza. */
 h1{
-    background: blue;
-    height: 300px;
+    background: blue; /* Fondo azul de alto contraste. */
+    height: 300px; /* Se define una altura explícita; el ancho será el 100% del padre al ser elemento de bloque. */
 }
 
+
+/* Estilos del selector input: uso de unidades relativas (porcentaje) para adaptabilidad. */
 input{
-    width: 80%;
+    width: 80%; /* El elemento ocupará el 80% del ancho disponible de su contenedor padre (el form). */
 }
 
+
+/* Estilos del selector form: limitación del ancho del contenedor del formulario. */
 form{
-    width: 400px;
+    width: 400px; /* Establece un ancho de 400px para organizar la estructura de los campos de entrada. */
 }

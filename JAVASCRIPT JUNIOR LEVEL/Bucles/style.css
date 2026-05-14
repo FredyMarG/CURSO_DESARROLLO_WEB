@@ -1,0 +1,71 @@
+/**
+ * ESTILOS LABORATORIO: BUCLES (LOOPS)
+ * Tema visual: Indigo / Violeta (Representa ciclos y continuidad).
+ */
+
+/* Reset global: Estandariza el comportamiento de la caja y márgenes */
+* { 
+    margin: 0;              /* Elimina márgenes por defecto del navegador */
+    padding: 0;             /* Elimina rellenos por defecto del navegador */
+    box-sizing: border-box; /* El tamaño incluye padding/border para evitar desbordamientos de layout */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Tipografía moderna y clara para lectura técnica */
+    background-color: #f5f3ff; /* Color: fondo violeta pálido que identifica el tema de bucles */
+    display: flex;             /* Activa el contenedor flexible para centrado absoluto */
+    align-items: center;       /* Flex: centra verticalmente en el viewport */
+    justify-content: center;   /* Flex: centra horizontalmente en el viewport */
+    min-height: 100vh;         /* Viewport Height: ocupa el 100% de la altura de la pantalla disponible */
+    color: #4c1d95;            /* Contraste: texto en tono púrpura oscuro para legibilidad */
+}
+
+/* Tarjeta de presentación (Card Design) */
+.card {
+    background: white;         /* Superficie: fondo blanco limpio para resaltar el contenido */
+    padding: 2.5rem;           /* Aire: espacio interno generoso para que el contenido "respire" */
+    border-radius: 1.5rem;     /* Estética: bordes redondeados modernos y suaves */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Profundidad: elevación visual mediante sombras */
+    max-width: 400px;          /* Restricción: evita el estiramiento excesivo en pantallas grandes */
+    width: 90%;                /* Fluidez: adaptable dinámicamente a tablets y móviles */
+    text-align: center;        /* Alineación: centra el contenido (texto e iconos) interno */
+    border: 1px solid #ddd6fe; /* Detalle: línea de borde temática para reforzar la identidad visual */
+}
+
+/* Icono de bucle (↺) */
+.icon {
+    font-size: 2.5rem;         /* Dimensión: escala el símbolo de rotación */
+    background: #ede9fe;       /* Color: fondo lila pastel circular */
+    color: #7c3aed;            /* Color: símbolo violeta intenso */
+    width: 70px;               /* Geometría: ancho explícito para asegurar el círculo */
+    height: 70px;              /* Geometría: alto idéntico para mantener la simetría */
+    display: flex;             /* Flex: permite el centrado total del glifo interno */
+    align-items: center;       /* Centrado V del icono */
+    justify-content: center;   /* Centrado H del icono */
+    border-radius: 50%;        /* Forma: convierte el contenedor en un círculo perfecto */
+    margin: 0 auto 1.5rem;     /* Layout: centra el círculo y añade margen inferior */
+    font-weight: bold;         /* Peso tipográfico para resaltar el símbolo */
+}
+
+h1 { margin-bottom: 1rem; font-size: 1.5rem; color: #5b21b6; } /* Estilo del título principal */
+
+p { color: #6b7280; line-height: 1.6; margin-bottom: 2rem; } /* Párrafo con interlineado optimizado */
+
+/* Caja de estado del script */
+.status-box {
+    background: #f3f4f6;       /* Fondo: tono neutro para destacar la información técnica */
+    padding: 0.75rem;          /* Relleno interno de la caja de información */
+    border-radius: 0.5rem;     /* Radio: esquinas suavizadas acordes al diseño */
+    display: flex;             /* Alineación: posiciona el punto y el texto en la misma fila */
+    align-items: center;       /* Centrado V de los elementos internos */
+    justify-content: center;   /* Centrado H de los elementos internos */
+    gap: 0.6rem;               /* Gutter: espacio de separación entre el punto y el texto */
+    font-size: 0.85rem;        /* Escala: fuente reducida para notas de depuración */
+}
+
+.status-dot { 
+    width: 10px;               /* Tamaño del indicador de estado */
+    height: 10px;              /* Tamaño del indicador de estado */
+    background: #8b5cf6;       /* Semántica: color violeta del tema de bucles */
+    border-radius: 50%;        /* Forma: circular */
+}

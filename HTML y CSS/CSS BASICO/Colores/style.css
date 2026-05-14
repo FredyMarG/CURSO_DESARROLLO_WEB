@@ -2,15 +2,15 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Colores/style.css
  * Carpeta del tema: «Colores». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de colores mediante el modelo RGB y dimensiones de bloque.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-div{
-    width: 100px;
-    height: 100px;
-    background: rgb(231, 172, 8);
-    margin: 20px;
-}
 
-/*RGB red-green-blue 256 combinaciones posibles por cada color A alpha siginifica trnasparencia y maneja la opacidad*/
+/* Estilos del selector div: definición de una caja cuadrada de color. */
+div{
+    width: 100px; /* Ancho de la caja en píxeles. */
+    height: 100px; /* Alto de la caja en píxeles. */
+    background: rgb(231, 172, 8); /* Color naranja/ocre usando valores Red, Green, Blue. */
+    margin: 20px; /* Separación externa para evitar que las cajas se toquen. */
+}

@@ -2,137 +2,77 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Holi Grail/holi.css
  * Carpeta del tema: «Holi Grail». Hoja: «holi».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: implementar un layout Holy Grail responsivo utilizando Flexbox bidimensional.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #ededed;
+body {
+    display: flex;          /* Establece el contenedor raíz como flexbox. */
+    flex-direction: column; /* Apila Header, Wrapper y Footer verticalmente. */
+    min-height: 100vh;      /* Ocupa toda la altura de la pantalla (Viewport Height). */
+    margin: 0;              /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía global. */
 }
 
-div, body, header, nav, ul, footer{
-    box-sizing: border-box;
+header, footer {
+    background-color: #2c3e50; /* Color azul medianoche para las franjas superior e inferior. */
+    color: white;              /* Texto en blanco para legibilidad. */
+    padding: 20px;             /* Relleno uniforme. */
+    text-align: center;        /* Centrado de la identidad del sitio. */
 }
 
-.main-wrapper, header , footer{
-    width: 100%;
+/* .main-wrapper: El contenedor flexible que sostiene las columnas centrales. */
+.main-wrapper {
+    display: flex;           /* Activa flexbox para gestionar las columnas centrales. */
+    flex: 1;                 /* Propiedad grow: obliga al centro de la página a expandirse y empujar el footer al fondo. */
+    flex-direction: column;  /* Por defecto (móvil), las columnas se apilan una sobre otra. */
 }
 
-h1, h2, h3{
-    text-wrap: balance;
+/* Estilos de navegación y sidebars. */
+.main-navbar ul {
+    display: flex;           /* Menú horizontal. */
+    justify-content: center; /* Alineación centrada de enlaces. */
+    list-style: none;        /* Quita las viñetas. */
+    gap: 15px;               /* Separación entre opciones de menú. */
+    padding: 10px;           /* Relleno del menú. */
+    background: #ecf0f1;     /* Color de fondo gris nube para la barra. */
 }
 
-p{
-    text-wrap: pretty;
+.secondary-navbar, main, aside {
+    padding: 20px;           /* Espaciado interno consistente para todas las áreas de contenido. */
 }
 
-/*  HEADER  */
-
-header {
-    background-color: #48e;
+main {
+    background-color: #fff;  /* Fondo blanco para el contenido principal (mejor legibilidad). */
 }
 
-.main-navbar ul{
-    display: flex; 
-    padding: 0;
-    justify-content: center;
+.secondary-navbar, aside {
+    background-color: #bdc3c7; /* Fondo gris plata para diferenciar las barras laterales. */
 }
 
-.main-navbar li {
-    list-style: none;
-    margin: 4px;
-}
-
-.main-navbar a{
-    color: white;
-    display: inline-block;
-    padding: 6px 9px;
-}
-
-nav a {
-    text-decoration: none;
-}
-
-a:hover{
-    opacity: 0.7;
-}
-
-/* MAIN SECTION  */
-.main-wrapper{
-    display: flex;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-aside, main{
-    padding: 10px 20px;
-    flex-basis: 0;
-    background-color: #fff;
-}
-
-main{
-    min-width: 300px;
-    flex-grow: 2;
-}
-
-.main-wrapper aside{
-    flex-grow: 1;
-}
-
-.secondary-navbar{
-    min-width: 10rem;
-    text-align: center;
-}
-
-.secondary-navbar ul {
-    padding: 0;
-}
-
-.secondary-navbar li {
-    list-style: none;
-}
-
-.secondary-navbar a {
-    color: #48e;
-    display: inline-block;
-    padding: 5px 10px;
-}
-
-aside:last-child{
-    min-width: 10rem;
-}
-
-/* FOOTER */
-footer{
-    margin-top: auto;
-    border: solid 1px red;
-    background-color: #333;
-    color: #fff;
-    padding: 40px;
-    font-weight: bold;
-    text-align: center;
-}
-
-
-/* --- Consultas de medio (@media) --- */
-@media screen and (max-width: 800px){
-    aside:last-child{
-        display: none;
+/* Adaptación para pantallas de escritorio (Layout Holy Grail Real). */
+@media (min-width: 1024px) {
+    .main-wrapper {
+        flex-direction: row; /* Transforma el apilamiento vertical en 3 columnas horizontales. */
     }
-}
 
+    .secondary-navbar {
+        width: 200px;        /* Define un ancho fijo para la barra de navegación secundaria. */
+        order: -1;           /* Propiedad mágica: mueve este elemento a la izquierda del Main sin tocar el HTML. */
+    }
 
-/* --- Consultas de medio (@media) --- */
-@media screen and (max-width: 480px){
-    .main-wrapper{
-        flex-direction: column;
+    main {
+        flex: 1;             /* El cuerpo central toma todo el ancho dinámico restante. */
+    }
+
+    aside {
+        width: 250px;        /* Define un ancho fijo para el panel lateral derecho. */
+    }
+
+    /* Estilos de navegación horizontal dentro del header para desktop. */
+    .main-navbar {
+        background: transparent; /* Integra el menú visualmente con el header oscuro. */
+    }
+    .main-navbar a {
+        color: white;            /* Ajusta el color del texto para el nuevo fondo. */
     }
 }

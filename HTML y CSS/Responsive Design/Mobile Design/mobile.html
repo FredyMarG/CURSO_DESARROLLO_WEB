@@ -1,33 +1,46 @@
 <!doctype html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/Responsive Design/Mobile Design/mobile.html
-     Título: Mobile First
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Diseño Mobile First
+     Propósito: demostrar la construcción de un layout responsivo priorizando la experiencia móvil.
+     Relación: enlaza con mobile.css para aplicar estilos condicionales según el tamaño de pantalla.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<!-- Definición del idioma del documento para accesibilidad y SEO. -->
+<html lang="es">
 
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+<!-- Cabecera (head): Contiene metadatos e instrucciones para el navegador -->
 
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="mobile.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mobile First</title>
+    <meta charset="UTF-8" /> <!-- Codificación universal de caracteres para evitar problemas con acentos. -->
+    <link rel="stylesheet" href="mobile.css" /> <!-- Vinculación con la hoja de estilos principal. -->
+    <!-- 
+        meta viewport: Esencial para el diseño responsivo. 
+        'width=device-width' ajusta el ancho del viewport al ancho del dispositivo.
+        'initial-scale=1.0' establece el nivel de zoom inicial.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> 
+    <title>Lección: Diseño Mobile First</title> <!-- Título que aparece en la pestaña del navegador. -->
 </head>
 
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- 
+        header: Elemento semántico que representa el contenido introductorio o un grupo de enlaces de navegación.
+        En Mobile First, suele contener el logo y el menú de navegación principal.
+    -->
     <header class="header">
 <!-- Cabecera de página o bloque (header): logo, título o accesos -->
 
+    <!-- nav: Elemento semántico para agrupar enlaces de navegación. -->
         <nav class="main-navbar">
 <!-- Menú o enlaces de navegación (nav) -->
 
+    <!-- ul: Lista desordenada para los ítems del menú. -->
             <ul>
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About us</a></li>
@@ -37,11 +50,17 @@
             </ul>
         </nav>
     </header>
+    <!-- 
+        div.main-wrapper: Contenedor principal para el layout de contenido. 
+        En Mobile First, sus hijos se apilan verticalmente por defecto.
+    -->
     <div class="main-wrapper">
+    <!-- aside: Elemento semántico para contenido relacionado pero secundario. -->
         <aside class="secondary-navbar">
 <!-- Contenido complementario (aside), barras laterales o notas -->
 
             <h2>ELIGE EL CONCEPTO</h2>
+    <!-- nav: Navegación secundaria dentro del aside. -->
             <nav>
                 <ul>
                     <li><a href="#">Concepto 1</a></li>
@@ -52,6 +71,10 @@
                 </ul>
             </nav>
         </aside>
+    <!-- 
+        main: Elemento semántico que representa el contenido principal y dominante del documento.
+        Debe ser único para cada página.
+    -->
         <main>
 <!-- Contenido principal del documento (main) -->
 
@@ -70,6 +93,10 @@
                 quis!
             </p>
         </main>
+    <!-- 
+        aside: Otro elemento semántico para contenido secundario, 
+        que en este caso se apila al final en móvil.
+    -->
         <aside>
             <h2>TItulo</h2>
             <p>
@@ -80,6 +107,10 @@
             </p>
         </aside>
     </div>
+    <!-- 
+        footer: Elemento semántico que representa el pie de página del documento.
+        Contiene información como derechos de autor, enlaces de contacto, etc.
+    -->
     <footer>
 <!-- Pie de página o de sección (footer) -->
 Fredy - copyrigth 2026</footer>

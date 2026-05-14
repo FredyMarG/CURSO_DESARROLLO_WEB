@@ -1,16 +1,73 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT JUNIOR LEVEL/Dom/style.css
- * Carpeta del tema: «Dom». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+/**
+ * ESTILOS LABORATORIO: DOM (DOCUMENT OBJECT MODEL)
+ * Tema visual: Cian / Sky Blue (Representa la estructura y el aire del árbol de documentos).
  */
 
-body{
-    color: #222;
-    font-family: sans-serif;
+/* Reset global: Asegura que el modelo de caja sea predecible en todos los navegadores */
+* {
+    margin: 0;              /* Elimina márgenes externos por defecto */
+    padding: 0;             /* Elimina rellenos internos por defecto */
+    box-sizing: border-box; /* El padding y el borde no aumentan el ancho definido */
 }
 
-.grande {
-    font-size:50px ;
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* Tipografía de alta legibilidad */
+    background-color: #f0f9ff; /* Fondo azul cian muy claro */
+    display: flex;             /* Layout flexible para centrado */
+    align-items: center;       /* Centra verticalmente en el viewport */
+    justify-content: center;   /* Centra horizontalmente en el viewport */
+    min-height: 100vh;         /* Ocupa el total de la altura de la pantalla */
+    color: #0c4a6e;            /* Texto en azul oscuro para contraste */
 }
+
+/* Tarjeta de visualización para el laboratorio del DOM */
+.card {
+    background: white;         /* Superficie de la tarjeta */
+    padding: 2.5rem;           /* Aire interno */
+    border-radius: 1.5rem;     /* Radio de borde moderno */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Profundidad visual */
+    max-width: 450px;          /* Ancho máximo en escritorio */
+    width: 90%;                /* Ancho responsivo en dispositivos móviles */
+    text-align: center;        /* Centrado de contenido interno */
+    border: 1px solid #bae6fd; /* Borde sutil cian */
+}
+
+/* Icono de árbol (🌳) para representar el DOM */
+.icon {
+    font-size: 2.2rem;         /* Escala del glifo */
+    background: #e0f2fe;       /* Fondo azul claro */
+    color: #0284c7;            /* Color del símbolo principal */
+    width: 70px;               /* Ancho del contenedor circular */
+    height: 70px;              /* Alto del contenedor circular */
+    display: flex;             /* Flex para centrado interno */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    border-radius: 50%;        /* Forma de círculo */
+    margin: 0 auto 1.5rem;     /* Centrado en bloque y margen inferior */
+}
+
+h1 { margin-bottom: 1rem; font-size: 1.5rem; color: #0369a1; }
+
+p { color: #64748b; line-height: 1.6; margin-bottom: 2rem; }
+
+/* Caja informativa para guiar al estudiante a la consola */
+.status-box {
+    background: #f8fafc;       /* Fondo de estado neutral */
+    padding: 0.75rem;          /* Relleno interno */
+    border-radius: 0.5rem;     /* Esquinas suavizadas */
+    display: flex;             /* Alineación horizontal */
+    align-items: center;       /* Centrado vertical */
+    justify-content: center;   /* Centrado horizontal */
+    gap: 0.6rem;               /* Espaciado entre indicador y texto */
+    font-size: 0.85rem;        /* Tamaño de fuente descriptivo */
+}
+
+/* Punto de estado con indicador temático */
+.status-dot { 
+    width: 10px; height: 10px; 
+    background: #0ea5e9; 
+    border-radius: 50%;
+}
+
+/* Clase de utilidad mencionada en las guías para manipulación dinámica */
+.grande { font-size: 50px; font-weight: bold; color: #0284c7; }

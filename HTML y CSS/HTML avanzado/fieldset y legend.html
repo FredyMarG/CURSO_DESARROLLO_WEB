@@ -18,14 +18,22 @@
     <title>Fielset y legend</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
+    
+    <!-- 
+        Etiqueta <form>: Define un formulario para recoger datos del usuario. 
+        El atributo 'action' (actualmente vacío) debería apuntar a la URL que procesará los datos.
+    -->
+    <!-- Formulario para recoger datos del usuario. -->
     <form action="">
-<!-- Formulario de envío de datos (form) -->
-
-        <fieldset> <!-- fieldset: Crea una caja que agrupa visual y semánticamente elementos del form -->
+        
+        <!-- <fieldset>: Agrupación lógica de campos. Ayuda a los lectores de pantalla a entender que estos campos están relacionados. -->
+        <fieldset>
+            <!-- <legend>: Actúa como el título del fieldset. Es fundamental para la accesibilidad. -->
             <legend>Información basica</legend>
-            <!-- legend: Proporciona un título o contexto para el fieldset padre -->
+            
+            <!-- Nota: Se recomienda el uso de <label> para cada <input> para mejorar la experiencia de usuario y accesibilidad. -->
             <input type="text" placeholder="Nombre">
             <input type="text" placeholder="Apellido">
             <input type="number" placeholder="Edad">

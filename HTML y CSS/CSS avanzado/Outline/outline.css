@@ -2,52 +2,34 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Outline/outline.css
  * Carpeta del tema: «Outline». Hoja: «outline».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: demostrar la diferencia entre border y outline.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
-    background: #ccc;
+body {
+    font-family: sans-serif; /* Tipografía limpia para el cuerpo del documento. */
+    padding: 50px; /* Espaciado general para alejar el contenido de los bordes. */
+    background-color: #f0f0f0; /* Fondo gris claro para contraste. */
 }
 
-.box{
-    width: 150px;
-    background: red;
-    margin: auto;
-    margin-top: 50px;
-    border: 5px solid black;
-    padding: 10px;
-    /* El outline mo ocupa espacio solo aspecto visual */
-    /* outline-width: 10px;
-    outline-color: blue;
-    outline-style: solid; */
-    /* offset me define cuanto se va a separar del borde */
-    /* outline-offset: 10px; */
-
+/* Caja para demostrar que el outline no desplaza elementos vecinos. */
+.box {
+    width: 200px; /* Ancho fijo de la caja. */
+    height: 100px; /* Alto fijo de la caja. */
+    background-color: #fff; /* Fondo blanco para destacar. */
+    margin-bottom: 40px; /* Separación inferior entre elementos. */
+    display: flex; /* Activa flexbox para centrar el contenido. */
+    align-items: center; /* Alineación vertical central. */
+    justify-content: center; /* Alineación horizontal central. */
+    border: 2px solid #333; /* El borde sí suma al tamaño total en el Box Model estándar. */
 }
 
-.box:hover{
-    /* Tambien lo puedo hacer en una sola linea pero el offset si es aparte*/
-    outline: 10px solid #000;
+/* El outline se dibuja por fuera y no afecta al layout. */
+.outline-demo {
+    outline: 5px solid #48e; /* Contorno azul que no consume espacio físico. */
+    outline-offset: 10px;    /* Separa el contorno del borde por 10px hacia afuera. */
 }
 
-input{
-    margin: 50px;
-    border: none;
-    border-top: 3px solid #000;
-    outline: 3px solid blue;
-    outline-offset: 5px;
-    padding: 6px;
-    transition: outline 1s, outline-offset 1s;
-}
-
-input:focus{
-    border-color: blue;
-    color: blue;
-}
-
-input:focus-visible{
-    outline:none;    
+/* Outline enfocado (accesibilidad). */
+input:focus {
+    outline: 3px dashed #e67e22; /* Sobrescribe el estilo de enfoque por defecto para accesibilidad. */
 }

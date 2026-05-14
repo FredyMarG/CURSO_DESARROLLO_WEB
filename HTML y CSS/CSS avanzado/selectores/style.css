@@ -1,79 +1,63 @@
-/*
- * CURSO_WEB_DOC_CSS v1
+ /* CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Selectores/style.css
  * Carpeta del tema: «Selectores». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de selectores complejos, combinadores y selectores de atributo para el control preciso del DOM.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-/* 
-   GUÍA DE SELECTORES CSS
-   Demostración de selectores básicos, de atributo y relacionales.
-*/
 
-/*
-   SELECTOR DE ETIQUETA
-   Afecta a todos los elementos que coinciden con el nombre de la etiqueta HTML.
-*/
+/* Selector de Tipo (Etiqueta): afecta a todos los elementos <li> del documento. */
 li{
-    color: grey; /* Color de texto gris para todos los ítems de lista */
+    color: grey; /* Establece un color gris base para los ítems de lista. */
 }
 
-/*
-   SELECTOR DE CLASE
-   Aplica estilos a todos los elementos que tienen la clase especificada.
-*/
+/* Selector de Clase: identifica elementos específicos para resaltar un estado o rol. */
 .ingrediente-faltante{
-    color: red; /* Color de texto rojo para elementos con la clase 'ingrediente-faltante' */
+    color: red; /* Color rojo para indicar advertencia o ausencia. */
 }
 
+/* Selector de Clase: se utiliza para destacar un elemento único por su importancia semántica. */
 .ingrediente-secreto{
-    color: blue; /* Color de texto azul para elementos con la clase 'ingrediente-secreto' */
+    color: blue; /* Color azul para diferenciarlo visualmente del resto. */
 }
 
-/*
-   SELECTOR DE ATRIBUTO
-   Selecciona elementos basándose en la presencia o el valor de un atributo HTML.
-   - `[attr]`       : Elementos con el atributo `attr`.
-   - `[attr="val"]` : Elementos con el atributo `attr` cuyo valor es exactamente `val`.
-   - `[attr^="val"]`: Elementos con el atributo `attr` cuyo valor COMIENZA con `val`.
-   - `[attr$="val"]`: Elementos con el atributo `attr` cuyo valor TERMINA con `val`.
-   - `[attr*="val"]`: Elementos con el atributo `attr` cuyo valor CONTIENE `val`.
-*/
-/* Selecciona una imagen específica por su ruta exacta para controlar su ancho.
-   Esto es útil para aplicar estilos a un recurso muy específico. */
+/* 
+ * Selector de Atributo: permite seleccionar elementos basándose en el valor exacto de un atributo.
+ * En este caso, busca una imagen con una ruta de origen (src) específica.
+ */
 img[src="../../HTML avanzado/Lazy load/img/img1.jpg"]{
-    width: 300px; /* Establece un ancho fijo de 300px para esa imagen */
+    width: 300px; /* Define un ancho específico para esta imagen en particular. */
 }
 
-/*
-   SELECTOR DE HIJO DIRECTO (>)
-   Selecciona un elemento si es un hijo directo de otro elemento.
-   Afecta solo a las etiquetas <em> que son hijas inmediatas de un <li>.
-*/
+/* 
+ * Combinador de Hijo Directo (>): 
+ * Selecciona solo los elementos <em> que son hijos inmediatos de un <li>.
+ */
 li > em{
-    color:red; /* Color de texto rojo para 'em' que son hijos directos de 'li' */
+    color: red; /* Enfatiza el texto con color rojo. */
 }
 
-/*
-   SELECTOR DE HERMANO ADYACENTE (+)
-   Selecciona un elemento que es el hermano inmediatamente siguiente de otro elemento.
-   Solo afecta al PRIMER elemento que cumple la condición.
-*/
+/* 
+ * Combinador de Hermano Adyacente (+): 
+ * Selecciona el primer <p> que aparece inmediatamente después de un <h1>.
+ */
 h1 + p{
-    color:blue /* Color de texto azul para el párrafo que sigue inmediatamente a un h1 */
+    color: blue; /* Estiliza el primer párrafo introductorio en azul. */
 }
 
+/* 
+ * Combinador Adyacente Encadenado (+ +): 
+ * Selecciona el párrafo que es el segundo hermano consecutivo que sigue a un h1.
+ */
 h1 + p + p{
-    /* Selecciona el segundo párrafo que sigue a un h1 (el hermano adyacente del primer p) */
-    color:green; /* Color de texto verde */
+    color: green; /* Estiliza el segundo bloque de texto en verde. */
 }
 
-/*
-   SELECTOR DE HERMANOS GENERALES (~)
-   Selecciona todos los elementos que son hermanos de un elemento,
-   y que aparecen DESPUÉS de él en el código HTML.
-*/
+/* 
+ * Combinador de Hermano General (~): 
+ * Selecciona todos los párrafos <p> que aparecen después del <h1> compartiendo el mismo padre.
+ */
 h1 ~ p{
-    font-family: sans-serif; /* Establece una fuente genérica sin serifa para todos los párrafos hermanos de un h1 */
+    font-family: sans-serif; /* Aplica una tipografía moderna a todos los hermanos posteriores. */
 }
+

@@ -1,0 +1,31 @@
+/**
+ * ESTILOS LABORATORIO: OPERADORES
+ * Estética "Clean Tech" para visualización de lógica matemática.
+ */
+
+body { 
+    font-family: 'Segoe UI', sans-serif; /* Pila de fuentes: carga la fuente del sistema para mayor velocidad */
+    text-align: center;                 /* Alineación: centra los textos para un diseño simétrico */
+    padding-top: 100px;                 /* Layout: empuja el contenido hacia abajo para que no choque con la URL */
+    background-color: #f1f3f4;          /* Color: fondo "Material Design" (gris Google) */
+    color: #202124;                     /* Contraste: color de texto de alta legibilidad */
+    
+    /* Centrado con Flexbox */
+    display: flex;                      /* Layout: activa el motor de flexión */
+    justify-content: center;            /* Eje principal: centra horizontalmente */
+    align-items: center;                /* Eje secundario: centra verticalmente */
+    min-height: 100vh;                  /* Viewport: usa el 100% del alto de la ventana */
+    margin: 0;                          /* Reset: elimina el espacio muerto alrededor del body */
+}
+
+.container { 
+    background: white;                  /* Superficie: resalta sobre el gris del fondo */
+    padding: 30px;                      /* Padding: espacio interno generoso */
+    border-radius: 12px;                /* Radio: redondeo sutil de esquinas */
+    display: inline-block;              /* Comportamiento: el ancho se ajusta al texto */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1); /* Sombra: da peso visual y profundidad */
+    border: 1px solid #e0e0e0;          /* Estructura: línea fina para delimitar la caja */
+}
+
+/* Estilo para resaltar comandos de consola en el texto */
+code { background: #eee; padding: 2px 4px; border-radius: 4px; color: #d14; }

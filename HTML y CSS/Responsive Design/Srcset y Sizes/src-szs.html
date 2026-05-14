@@ -1,30 +1,58 @@
-<!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/Responsive Design/Srcset y Sizes/src-szs.html
-     Título: Srcset y Sizes
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Srcset y Sizes
+     Propósito: demostrar cómo los atributos srcset y sizes optimizan la carga de imágenes según el dispositivo y el layout.
+     Relación: enlaza con src-szs.css para control dimensional.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<!-- Definición del idioma del documento para accesibilidad y SEO. -->
+<html lang="es">
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
 
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="src-szs.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Srcset y Sizes</title>
+    <meta charset="UTF-8"> <!-- Codificación universal de caracteres para evitar problemas con acentos. -->
+    <link rel="stylesheet" href="src-szs.css"> <!-- Vinculación con la hoja de estilos principal. -->
+    <!-- 
+        meta viewport: Esencial para el diseño responsivo. 
+        'width=device-width' ajusta el ancho del viewport al ancho del dispositivo.
+        'initial-scale=1.0' establece el nivel de zoom inicial.
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Lección: Srcset y Sizes</title> <!-- Título que aparece en la pestaña del navegador. -->
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <img src="fredy-small.jpg" 
-    srcset=" fredy-small.jpg 400w, fredy-medium.jpg 600w, fredy.jpg 1000w"
-
-    sizes="(max-width: 400px) 300px, (max-width: 600px) 500px , 900px"
-    >
+    <main> <!-- Elemento semántico que representa el contenido principal del documento. -->
+        <h1>Imágenes Responsivas con <code>srcset</code> y <code>sizes</code></h1>
+        <p>Redimensiona la ventana del navegador para ver cómo la imagen se adapta y, potencialmente, cambia de resolución.</p>
+        
+        <!-- 
+            ETIQUETA <img>: Elemento para incrustar imágenes.
+            
+            src: URL de la imagen de respaldo. Es obligatoria y se usa si srcset no es compatible.
+            
+            srcset: Lista de URLs de imágenes y sus descriptores de ancho (w).
+            - "fredy-small.jpg 400w": Indica que fredy-small.jpg tiene un ancho intrínseco de 400 píxeles.
+            - "fredy-medium.jpg 800w": Indica que fredy-medium.jpg tiene un ancho intrínseco de 800 píxeles.
+            - "fredy.jpg 1200w": Indica que fredy.jpg tiene un ancho intrínseco de 1200 píxeles.
+            
+            sizes: Lista de condiciones de medios y el ancho que la imagen ocupará en el layout.
+            - "(max-width: 600px) 100vw": Si el viewport es <= 600px, la imagen ocupará el 100% del ancho del viewport.
+            - "(max-width: 1200px) 50vw": Si el viewport es <= 1200px, la imagen ocupará el 50% del ancho del viewport.
+            - "33vw": Por defecto, en pantallas más grandes, la imagen ocupará el 33% del ancho del viewport.
+            
+            alt: Texto alternativo para accesibilidad y SEO, crucial si la imagen no carga.
+        -->
+        <img
+            src="fredy.jpg"
+            srcset="fredy-small.jpg 400w, fredy-medium.jpg 800w, fredy.jpg 1200w"
+            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            alt="Retrato de Fredy"
+        >
+    </main>
 </body>
 <!-- Cierre del documento HTML -->
-</html>

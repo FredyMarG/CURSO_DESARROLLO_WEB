@@ -1,0 +1,38 @@
+/**
+ * ESTILOS LABORATORIO: POO
+ * Diseño enfocado en la presentación limpia de conceptos de arquitectura.
+ */
+
+/* Reset global para estandarizar el renderizado en todos los navegadores */
+* {
+    margin: 0;              /* Elimina márgenes externos por defecto */
+    padding: 0;             /* Elimina rellenos internos por defecto */
+    box-sizing: border-box; /* El tamaño total del elemento incluye el padding y el borde */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía para legibilidad técnica */
+    line-height: 1.6;        /* Altura de línea para evitar que el texto se sienta apretado */
+    background-color: #f0f2f5; /* Color de fondo gris azulado suave (estilo Facebook antiguo) */
+    color: #1c1e21;          /* Texto principal en gris casi negro */
+    
+    /* Centrado absoluto usando Flexbox */
+    display: flex;           /* Convierte el body en contenedor flexible */
+    flex-direction: column;  /* Alinea los elementos hijos en vertical */
+    align-items: center;     /* Centra los elementos en el eje horizontal */
+    justify-content: center; /* Centra los elementos en el eje vertical */
+    height: 100vh;           /* Fuerza al body a ocupar el 100% de la altura de la pantalla */
+}
+
+h1 {
+    color: #1a73e8;          /* Color azul corporativo para resaltar el título */
+    margin-bottom: 1rem;     /* Espacio inferior para separar del párrafo */
+    font-size: 2.5rem;       /* Tamaño destacado para el encabezado principal */
+}
+
+p {
+    background: white;       /* Fondo blanco para simular una caja de texto */
+    padding: 1rem 2rem;      /* Espacio interno para dar "aire" al mensaje */
+    border-radius: 50px;     /* Bordes redondeados estilo cápsula */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra sutil para dar elevación */
+}

@@ -2,77 +2,112 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Display/style.css
  * Carpeta del tema: «Display». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el comportamiento de las cajas (Box Model) y los tipos de visualización (Display).
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-/* 
-   GUÍA DE PROPIEDAD DISPLAY
-   Diferencias entre block, inline, inline-block y none.
-*/
 
+
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina los márgenes del navegador para que el diseño empiece desde el borde de la pantalla. */
+    font-family: sans-serif; /* Define una tipografía limpia y sin remates para todo el sitio. */
 }
 
+
+
+/* Estilos del selector div. */
 div{
-    padding: 20px;
-    background: #999;
+    padding: 20px; /* Crea un espacio interno de 20px entre el contenido y el borde del div. */
+    background: #999; /* Establece un color de fondo gris neutro. */
 }
 
+
+
+/* 
+ * Primer bloque para el selector 'p'. 
+ * Nota: Algunas propiedades serán sobrescritas por la siguiente regla de 'p' debido a la Cascada.
+ */
 p{
-    background: red;
-    color: #fff;
-    display: block; /* Ocupa todo el ancho disponible */
-    border: solid 1px #000;
-    margin: 20px;
-    padding: 20px;
+    background: red; /* Color de fondo rojo intenso para visibilidad. */
+    color: #fff; /* Texto en blanco para alto contraste. */
+    display: block; /* Hace que el párrafo ocupe todo el ancho disponible y genere un salto de línea. */
+    border: solid 1px #000; /* Define un borde negro sólido de 1px. */
+    margin: 20px; /* Separa el párrafo de otros elementos externos por 20px. */
+    padding: 20px; /* Espacio interno de 20px dentro del borde. */
 }
 
+
+
+/* 
+ * Segundo bloque para el selector 'p'. 
+ * Al estar después en el archivo, tiene prioridad sobre la regla anterior para las mismas propiedades.
+ */
 p{
-    background: #000;
-    color: #fff;
-    display: inline; /* Fluye horizontalmente; ignora dimensiones verticales en el flujo */
-    margin: 5px;
+    background: #000; /* Sobrescribe el fondo rojo a negro. */
+    color: #fff; /* Texto blanco. */
+    display: inline; /* Cambia a inline: el elemento fluye con el texto y pierde dimensiones de bloque (ancho/alto/márgenes verticales). */
+    margin: 5px; /* Aplica margen lateral (el margen vertical suele ignorarse en elementos inline). */
 }
 
+
+
+/* Estilo de estructura para navegación o encabezado/pie. */
 .nav{
-    background: #48e;
+    background: #48e; /* Color azul de fondo para la barra de navegación. */
 }
 
+
+
+/* Estilos del selector .nav__list. */
 .nav__list{
-    margin: 0;
-    text-align: center;
+    margin: 0; /* Remueve los márgenes por defecto de las listas (ul). */
+    text-align: center; /* Alinea los elementos hijos (li) hacia el centro del contenedor. */
 }
 
+
+
+/* Estilos del selector .nav__item. */
 .nav__item{
-    display: inline-block; /* En línea pero permite padding/margin vertical y dimensiones */
+    display: inline-block; /* Permite que los ítems se coloquen uno al lado del otro manteniendo propiedades de bloque como padding y margin. */
 }
 
+
+
+/* Estilos del selector .nav__link. */
 .nav__link{
-    color: #fff;
-    text-decoration: none;
-    display: inline-block;
-    padding: 10px;
-    background: #48e;
+    color: #fff; /* Color de texto blanco. */
+    text-decoration: none; /* Elimina el subrayado por defecto de los enlaces. */
+    display: inline-block; /* Convierte el enlace en una caja para que el padding sea efectivo. */
+    padding: 10px; /* Aumenta el área clickable del enlace. */
+    background: #48e; /* Fondo azul. */
 }
 
+
+
+/* Estado o pseudo-clase .nav__link:hover: estilo cuando el usuario interactúa. */
 .nav__link:hover{
-    background: #59e; /* Cambia el color de fondo al pasar el ratón por encima */
+    background: #59e; /* Cambia a un azul más claro al pasar el cursor para feedback visual. */
 }
 
+
+
+/* Estilos del selector .link--button. */
 .link--button{
-    border: 1px solid #fff;
-    background: #fff;
-    padding:4px 12px;
-    color: #48e;
-    border-radius: 3px;
-    margin-left: 60px;
-    /* display: none; -> Elimina el elemento del flujo y del renderizado */
+    border: 1px solid #fff; /* Crea un borde blanco. */
+    background: #fff; /* Fondo blanco sólido. */
+    padding: 4px 12px; /* Relleno asimétrico para dar forma de botón. */
+    color: #48e; /* Texto azul para contrastar con el fondo blanco. */
+    border-radius: 3px; /* Redondea ligeramente las esquinas. */
+    margin-left: 60px; /* Crea un espacio de separación a la izquierda para destacar este botón. */
 }
 
+
+
+/* Estado o pseudo-clase .link--button:hover: estilo cuando el usuario interactúa. */
 .link--button:hover{
-    background: transparent;
-    color: #fff;
+    background: transparent; /* Hace el fondo invisible al pasar el mouse. */
+    color: #fff; /* Cambia el texto a blanco para que sea visible sobre el fondo del nav. */
 }

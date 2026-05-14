@@ -1,0 +1,31 @@
+/**
+ * ESTILOS LABORATORIO: VARIABLES
+ * Diseño minimalista para pruebas de consola y prompts.
+ */
+
+body { 
+    font-family: 'Segoe UI', sans-serif; /* Tipografía limpia: mejora la lectura en pantalla */
+    text-align: center;                 /* Alineación: centra el texto de todos los hijos directos */
+    padding-top: 100px;                 /* Espaciado: separa el contenido del borde superior del navegador */
+    background-color: #f8f9fa;          /* Color: fondo gris muy claro para evitar el brillo puro del blanco */
+    color: #333;                        /* Color: gris oscuro para un contraste suave y legible */
+
+    /* Centrado de la tarjeta */
+    display: flex;                      /* Layout: activa el contenedor flexible */
+    flex-direction: column;             /* Dirección: alinea los elementos uno debajo del otro */
+    align-items: center;                /* Eje Secundario: centra la tarjeta horizontalmente */
+    min-height: 100vh;                  /* Altura: asegura que el body cubra toda la pantalla */
+    margin: 0;                          /* Reset: quita márgenes por defecto del navegador */
+}
+
+/* Contenedor semántico para centrar el ejercicio visualmente */
+.container { 
+    background: white;                  /* Superficie: base blanca para resaltar del fondo gris */
+    padding: 20px;                      /* Espacio interno: da aire al texto dentro de la caja */
+    border-radius: 10px;                /* Estética: bordes redondeados para un look moderno */
+    display: inline-block;              /* Comportamiento: la caja solo ocupa el ancho de su contenido */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Profundidad: sombra sutil que "eleva" la tarjeta */
+}
+
+/* Resaltado de código */
+code { background: #eee; padding: 2px 4px; border-radius: 4px; }

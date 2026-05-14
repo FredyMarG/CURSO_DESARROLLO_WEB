@@ -2,35 +2,47 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Bloques Flexibles/bloques.css
  * Carpeta del tema: «Bloques Flexibles». Hoja: «bloques».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de bloques flexibles y responsivos que se adaptan dinámicamente al contenedor.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de márgenes y fuente. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0;               /* Elimina el espaciado exterior predeterminado del viewport. */
+    font-family: sans-serif; /* Establece una tipografía moderna y legible para el proyecto. */
 }
 
+
+
+/* Configuración del Box Model: garantiza consistencia en las dimensiones. */
 div, body{
-    box-sizing: border-box;
+    box-sizing: border-box;  /* Asegura que rellenos y bordes no expandan el ancho total definido. */
 }
 
+
+
+/* .flexbox: Contenedor principal que gestiona el flujo de los bloques hijos. */
 .flexbox{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 600px;
-    margin: auto;
+    display: flex;           /* Activa el modelo de caja flexible para los elementos hijos. */
+    flex-wrap: wrap;         /* Permite el desbordamiento controlado hacia nuevas filas (responsividad). */
+    justify-content: center; /* Distribuye el espacio sobrante centrando los ítems en el eje principal. */
+    max-width: 600px;        /* Límite de ancho para evitar que los bloques se estiren demasiado. */
+    margin: auto;            /* Centrado horizontal automático del contenedor respecto al body. */
 }
 
+
+
+/* .bloque: Elementos individuales diseñados para ser elásticos y adaptables. */
 .bloque{
-    display: inline-block;
-    min-width: 200px;
-    background-color: #7bf;
-    margin: auto;
-    width: 100%;
-    flex: 1;
-    font-size: 12px;
-    padding: 10px;
-    margin: 4px;
+    display: inline-block;   /* Comportamiento de bloque en línea como respaldo de flujo. */
+    min-width: 200px;        /* Ancho de seguridad: si no hay 200px libres, el bloque salta de línea. */
+    background-color: #7bf;  /* Color de fondo azul para identificar las áreas del grid. */
+    margin: auto;            /* Centra el ítem si se queda solo en una fila debido al wrap. */
+    width: 100%;             /* Intenta ocupar todo el ancho, ajustable dinámicamente por flex-grow. */
+    flex: 1;                 /* Permite que el bloque se expanda para llenar cualquier espacio disponible. */
+    font-size: 12px;         /* Tamaño de fuente optimizado para el contenido de los bloques. */
+    padding: 10px;           /* Separación interna entre el contenido y el borde de la caja. */
+    margin: 4px;             /* Margen externo uniforme para crear canales de separación. */
 }

@@ -1,32 +1,29 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/sticky.css
- * Carpeta del tema: «position_css». Hoja: «sticky».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Carpeta del tema: «Position». Hoja: «sticky».
+ * Propósito: demostrar el posicionamiento 'sticky', que permite que un elemento se "pegue" al hacer scroll.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+/* Estilos base: limpieza de márgenes y selección de fuente. */
 body{
-    margin: 0; /* Elimina el margen predeterminado del navegador */
-    font-family: sans-serif; /* Establece una fuente genérica sin serifa */
+    margin: 0; /* Elimina márgenes del navegador. */
+    font-family: sans-serif; /* Tipografía base. */
+    height: 2000px; /* Altura necesaria para probar el efecto de scroll. */
 }
-/*
-   POSITION: STICKY
-   - Se comporta como 'relative' hasta que el usuario se desplaza y el elemento
-     alcanza un umbral de desplazamiento (definido por 'top', 'bottom', 'left', 'right').
-   - Una vez que alcanza ese umbral, se comporta como 'fixed' hasta que su contenedor padre
-     sale de la vista.
-   - Requiere un ancestro con scroll y un valor para 'top', 'bottom', 'left' o 'right' para funcionar.
-*/
+
+/* 
+ * .box-sticky: elemento que se mantiene fijo dentro de su contenedor padre 
+ * al alcanzar una posición específica durante el scroll.
+ */
 .box-sticky{
-    height: 60px; /* Altura fija de la caja */
-    width: 200px; /* Ancho fijo de la caja */
-    background: #f00; /* Color de fondo rojo */
-    position: sticky;
-    /* El elemento se pegará a 20px del borde superior del viewport cuando se haga scroll */
-    top: 20px; 
-    /* Asegura que el elemento sticky se muestre por encima de otros contenidos */
-    z-index: 40; 
-    /* Incluye padding y borde en el ancho/alto total del elemento */
-    box-sizing: border-box; 
+    height: 60px; /* Altura del bloque. */
+    width: 200px; /* Ancho del bloque. */
+    background: #f00; /* Color rojo para visibilidad. */
+    position: sticky; /* Tipo de posicionamiento. */
+    top: 20px; /* Se queda a 20px del borde superior de la ventana. */
+    z-index: 40; /* Prioridad de apilamiento. */
+    box-sizing: border-box; /* Incluye bordes y padding en el cálculo del tamaño. */
 }
