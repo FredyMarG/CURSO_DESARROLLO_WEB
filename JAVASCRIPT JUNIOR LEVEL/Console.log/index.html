@@ -1,25 +1,50 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT JUNIOR LEVEL/Console.log/index.html
-     Título: Console.log
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+<!DOCTYPE html> <!-- Define que el documento utiliza el estándar HTML5 moderno -->
+<!-- 
+    ESTRUCTURA TÉCNICA: Pruebas de Consola
+    Este archivo actúa como un contenedor (host) para ejecutar scripts de depuración.
+    Al ser una práctica de consola, el cuerpo (body) permanece vacío visualmente.
 -->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
+    <!-- 
+        METADATOS: Configuraciones que el navegador lee pero el usuario no ve.
+    -->
+    
+    <!-- Codificación universal: Permite mostrar tildes, eñes y caracteres especiales sin errores -->
     <meta charset="UTF-8">
+    
+    <!-- 
+        Diseño Responsivo: Asegura que la página se adapte al ancho de la pantalla 
+        de cualquier dispositivo (móvil, tablet o PC) y mantenga una escala inicial de 1:1.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Console.log</title>
+    
+    <!-- Texto que aparece en la pestaña del navegador -->
+    <title>Herramientas de Consola - JS Junior</title>
+
+    <!-- Vinculación de estilos externos (Modularidad) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <div class="card">
+        <header>
+            <div class="icon">>_</div>
+            <h1>Depuración y Consola</h1>
+        </header>
+        <section class="content">
+            <p>Aprende a inspeccionar variables, rastrear errores y estilizar mensajes directamente en el motor del navegador.</p>
+            <div class="status-box">
+                <span class="status-dot"></span>
+                <span>Abre la <b>Consola (Ctrl + Shift + I)</b> para ver los logs.</span>
+            </div>
+        </section>
+    </div>
 
+    <!-- 
+        INYECCIÓN DE LÓGICA:
+        Colocamos el script al final del body para garantizar que el HTML se procese 
+        completamente antes de ejecutar el JavaScript, evitando bloqueos de carga.
+    -->
     <script src="console.log.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

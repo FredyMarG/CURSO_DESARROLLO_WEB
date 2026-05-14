@@ -6,46 +6,70 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Reset de márgenes externos. */
+    font-family: sans-serif; /* Tipografía base. */
 }
 
+
+
+/* Estilos del selector body, div. */
 body, div{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Normalización del cálculo de dimensiones. */
 }
 
 
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    grid-template-columns:repeat(1, 1fr);
-    grid-template-rows: repeat(3,50px);
-    gap: 10px;
-    padding: 10px;
-    justify-items: stretch;
-    justify-content: space-evenly;
-    align-items: stretch;
-    align-content:space-evenly ;
-    height: 350px;
-    border: 2px solid black;
-    margin: 20px;
+    display: grid; /* Activa Grid. */
+    grid-template-columns: repeat(1, 1fr); /* Una sola columna que ocupa todo el espacio. */
+    grid-template-rows: repeat(3, 50px); /* Tres filas de 50px de altura. */
+    gap: 10px; /* Separación entre elementos. */
+    padding: 10px; /* Relleno del contenedor. */
+    /* justify-items: controla la alineación horizontal de los ítems dentro de sus celdas. */
+    justify-items: stretch; 
+    /* justify-content: controla la distribución de las columnas dentro del contenedor si sobra espacio. */
+    justify-content: space-evenly; 
+    /* align-items: controla la alineación vertical de los ítems dentro de sus celdas. */
+    align-items: stretch; 
+    /* align-content: controla la distribución de las filas dentro del contenedor si sobra espacio. */
+    align-content: space-evenly; 
+    height: 350px; /* Altura fija para notar los efectos de alineación de contenido. */
+    border: 2px solid black; /* Marco de referencia. */
+    margin: 20px; /* Separación externa. */
 }
 
+
+
+/* Estado o pseudo-clase .grid-item:first-child: estilo cuando el usuario interactúa. */
 .grid-item:first-child{
-    background: #e66;
+    background: #e66; /* Color coral para el primer elemento. */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    font-size: 30px;
-    border-radius: 16px;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+    background-color: #48e; /* Fondo azul. */
+    font-size: 30px; /* Texto grande. */
+    border-radius: 16px; /* Bordes suaves. */
+    max-width: 100%; /* Asegura que el ítem no desborde su celda. */
+    /* 
+     * Uso de Flexbox interno:
+     * Centramos el contenido de texto dentro del propio grid-item.
+     */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px; /* Espaciado interno. */
 }
 
+
+/* Estado o pseudo-clase .grid-item:hover: estilo cuando el usuario interactúa. */
 .grid-item:hover{
-    opacity: 0.74;
+    opacity: 0.74; /* Feedback táctil visual. */
 }

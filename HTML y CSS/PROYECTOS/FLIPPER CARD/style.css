@@ -6,6 +6,9 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -13,6 +16,9 @@
     padding: 0;
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
     --bg-color: color-mix(in srgb, #f62 70%, #fff);
     --card-color:#fff;
@@ -23,6 +29,9 @@ body{
     display: flex;
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .card{
     max-width: clamp(160px, 50%, 320px );
     background-color: var(--card-bg-color);
@@ -31,6 +40,9 @@ body{
     border-radius: 20px;
 }
 
+
+
+/* Estilos del selector .card-front, .card-back. */
 .card-front, .card-back{
     backface-visibility: hidden;
     transition: transform 1s;
@@ -40,18 +52,30 @@ body{
     padding-bottom: 6px;
 }
 
+
+
+/* Estado o pseudo-clase .card:hover .card-front: estilo cuando el usuario interactúa. */
 .card:hover .card-front{
     transform: perspective(1100px) rotateY(180deg);
 }
 
+
+
+/* Estado o pseudo-clase .card:hover .card-back: estilo cuando el usuario interactúa. */
 .card:hover .card-back{
     transform: perspective(1100px) rotateY(360deg);
 }
 
+
+
+/* Estilos del selector .card-front. */
 .card-front{
     transform: perspective(1100px) rotateY(0deg);
 }
 
+
+
+/* Estilos del selector .card-back. */
 .card-back{
     position: absolute;
     top: 0;
@@ -62,31 +86,49 @@ body{
     transform: perspective(1100px) rotateY(180deg);
 }
 
+
+
+/* Estilos del selector .card-back > span. */
 .card-back > span{
     font-size: 1.4rem;
     margin: 6px 0;
 }
 
+
+
+/* Estilos del selector .card-worker. */
 .card-worker {
     max-height: 150px;
     overflow: hidden;
     display: block;
 }
 
+
+
+/* Estilos del selector .card-worker img. */
 .card-worker img {
     max-width: 100%;
 }
 
+
+
+/* Estilos del selector .card-data. */
 .card-data{
     padding: 12px;
 }
 
+
+
+/* Estilos del selector .card-data > span. */
 .card-data > span{
     font-size: 1.4rem;
     margin: 6px 0;
     display: block;
 }
 
+
+
+/* Estilos del selector .skill-bar. */
 .skill-bar{
     border: 3px solid var(--bg-color);
     margin: 15px;
@@ -94,32 +136,53 @@ body{
     border-radius: 4px;
 }
 
+
+
+/* Estilos del selector .skill-bar .bar. */
 .skill-bar .bar{
     background-color: var(--bg-color);
     padding: 9px;
     color: var(--card-color);
 }
 
+
+
+/* Estado o pseudo-clase .skill-bar:nth-child(2) .bar: estilo cuando el usuario interactúa. */
 .skill-bar:nth-child(2) .bar{
     width: 95%;
 }
 
+
+
+/* Estado o pseudo-clase .skill-bar:nth-child(3) .bar: estilo cuando el usuario interactúa. */
 .skill-bar:nth-child(3) .bar{
     width: 80%;
 }
 
+
+
+/* Estado o pseudo-clase .skill-bar:nth-child(4) .bar: estilo cuando el usuario interactúa. */
 .skill-bar:nth-child(4) .bar{
     width: 75%;
 }
 
+
+
+/* Estado o pseudo-clase .skill-bar:nth-child(5) .bar: estilo cuando el usuario interactúa. */
 .skill-bar:nth-child(5) .bar{
     width: 60%;
 }
 
+
+
+/* Estado o pseudo-clase .skill-bar:last-child .bar: estilo cuando el usuario interactúa. */
 .skill-bar:last-child .bar{
     width: 50%;
 }
 
+
+
+/* Estado o pseudo-clase .card:nth-child(2) img: estilo cuando el usuario interactúa. */
 .card:nth-child(2) img {
     opacity: .7;
 }

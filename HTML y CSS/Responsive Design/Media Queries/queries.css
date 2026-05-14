@@ -2,31 +2,51 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Media Queries/queries.css
  * Carpeta del tema: «Media Queries». Hoja: «queries».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: demostrar el uso de puntos de quiebre para adaptar el layout de Flexbox.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
+/* Reset base y estilos globales. */
+* {
+    box-sizing: border-box; /* Incluye padding y bordes en el ancho total. */
+    margin: 0;              /* Elimina márgenes iniciales. */
+    padding: 0;             /* Elimina rellenos iniciales. */
 }
 
-.flexbox{
-    display: flex;
+body {
+    font-family: sans-serif; /* Tipografía limpia para legibilidad. */
+    background-color: #f0f0f0; /* Fondo gris claro neutro. */
+    padding: 20px;           /* Espaciado de seguridad lateral. */
 }
 
-.flexitem{
-    background-color: #ccc;
-    padding: 30px;
-    border: 1px solid red;
-    flex-grow: 1;
+/* 
+ * ESTRATEGIA MOBILE FIRST:
+ * Por defecto (sin media queries), el diseño es para pantallas pequeñas. 
+ */
+.flexbox {
+    display: flex;          /* Activa el modelo de caja flexible. */
+    flex-direction: column; /* Apila los elementos verticalmente (ideal para móviles). */
+    gap: 20px;              /* Espacio de separación uniforme entre bloques. */
 }
 
+.flexitem {
+    background-color: #fff; /* Fondo blanco para las tarjetas de contenido. */
+    padding: 20px;          /* Relleno interno para el texto. */
+    border: 1px solid #ddd; /* Borde sutil de definición. */
+    border-radius: 8px;     /* Esquinas suavizadas. */
+    line-height: 1.6;       /* Mejora la lectura del texto de ejemplo. */
+    color: #444;            /* Color de texto gris oscuro. */
+}
 
-/* --- Consultas de medio (@media) --- */
-@media screen and (max-width: 480px) {
-    .flexbox{
-        flex-direction: column;
+/* 
+ * MEDIA QUERY: Breakpoint para Tablets/Desktop (768px o más).
+ * Cuando la pantalla tiene suficiente ancho, el layout cambia a columnas.
+ */
+@media (min-width: 768px) {
+    .flexbox {
+        flex-direction: row; /* Transforma el apilamiento vertical en flujo horizontal. */
+    }
+
+    .flexitem {
+        flex: 1; /* Obliga a los tres bloques a ocupar el mismo ancho equitativamente. */
     }
 }

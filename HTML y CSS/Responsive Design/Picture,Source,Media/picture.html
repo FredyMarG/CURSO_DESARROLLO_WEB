@@ -1,30 +1,47 @@
 <!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/Responsive Design/Picture,Source,Media/picture.html
-     Título: Picture, Source y Media
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Etiqueta Picture y Dirección de Arte
+     Propósito: demostrar cómo servir diferentes versiones de una imagen según formato y ancho de pantalla.
+     Relación: enlaza con pic.css para el control dimensional.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="pic.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picture, Source y Media</title>
+    <title>Lección: Picture y Source</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- 
+        CONTENEDOR <picture>: 
+        Permite al desarrollador declarar múltiples fuentes para una sola imagen. 
+        El navegador lee la lista de arriba hacia abajo y se detiene en la primera que cumple.
+    -->
     <picture>
+        <!-- OPTIMIZACIÓN DE FORMATO: Si el navegador soporta WebP (más ligero), usará esta. -->
         <source type="image/webp" srcset="fredy.webp">
+        
+        <!-- DIRECCIÓN DE ARTE (Móvil): Si la pantalla es <= 400px, carga la versión pequeña. -->
         <source media="(max-width: 400px)" srcset="fredy-small.jpg">
+        
+        <!-- DIRECCIÓN DE ARTE (Tablet): Si la pantalla es <= 600px, carga la versión mediana. -->
         <source media="(max-width: 600px)" srcset="fredy-medium.jpg">
-        <img src="fredy.jpg" alt="">
+
+        <!-- 
+            FALLBACK <img>: 
+            Es obligatorio. Se muestra si ninguna de las condiciones anteriores se cumple 
+            o si el navegador es muy antiguo y no reconoce la etiqueta <picture>.
+        -->
+        <img src="fredy.jpg" alt="Retrato de Fredy optimizado para escritorio">
     </picture>
 </body>
 <!-- Cierre del documento HTML -->

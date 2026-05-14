@@ -2,89 +2,125 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/Css/formulario.css
  * Carpeta del tema: «Css». Hoja: «formulario».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el diseño integral de formularios modernos con validación visual y tema oscuro.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración de la atmósfera visual. */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    color: #eee;
-    background: linear-gradient(to bottom, #333, #000);
+    margin: 0; /* Elimina márgenes externos del navegador. */
+    font-family: sans-serif; /* Tipografía limpia para asegurar la legibilidad de los campos. */
+    color: #eee; /* Texto en gris claro para alto contraste. */
+    background: linear-gradient(to bottom, #333, #000); /* Fondo degradado elegante para profundidad. */
+    min-height: 100vh; /* Asegura que el degradado cubra toda la ventana. */
 }
 
+
+
+/* .form: Contenedor principal centrado y elevado. */
 form {
-    background: transparent;
-    padding: 20px 0;
-    max-width: 500px;
-    margin: 0 auto;
-    box-shadow: 0 0 55px #fff2;
-    margin-top: 50px;
-    border-radius: 8px;
-    margin-bottom: 40px;
+    background: transparent; /* Permite ver el degradado del body. */
+    padding: 20px 0; /* Espaciado superior e inferior para separar el contenido del borde. */
+    max-width: 500px; /* Limita el ancho para evitar líneas de texto demasiado largas. */
+    margin: 0 auto; /* Centrado horizontal automático. */
+    box-shadow: 0 0 55px #fff2; /* Sombra blanca muy tenue para destacar el formulario. */
+    margin-top: 50px; /* Separación respecto a la parte superior de la página. */
+    border-radius: 8px; /* Redondeado de esquinas del contenedor. */
+    margin-bottom: 40px; /* Espacio de seguridad en la base. */
 }
 
+
+
+/* .form_input: Contenedor para agrupar etiqueta y campo. */
 .form_input {
-    padding: 6px 20px;
+    padding: 6px 20px; /* Relleno lateral para alinear el contenido con el centro del formulario. */
 }
 
+
+
+/* Unificación de estilos para controles de entrada de datos. */
 input,textarea,select {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 6px;
-    border: none;
-    border: 1px solid #666;
-    box-shadow: 0 0 15px #0003;
-    background: transparent;
-    border-radius: 4px;
-    color: #DDD;
+    width: 100%; /* Ocupan todo el ancho del contenedor padre. */
+    box-sizing: border-box; /* Incluye padding y bordes en el cálculo del ancho. */
+    padding: 8px 6px; /* Espacio interno para que el texto no se pegue a los bordes. */
+    border: none; /* Elimina el borde predeterminado del navegador. */
+    border: 1px solid #666; /* Borde sutil personalizado. */
+    box-shadow: 0 0 15px #0003; /* Sombra interna para dar un efecto de hundimiento. */
+    background: transparent; /* Fondo traslúcido para integración visual. */
+    border-radius: 4px; /* Suavizado de esquinas en los inputs. */
+    color: #DDD; /* Color de la fuente introducida por el usuario. */
 }
 
+
+
+/* .option: Estilo de las opciones dentro del menú desplegable select. */
 option {
-    background: #222;
+    background: #222; /* Fondo oscuro para que sea legible en sistemas operativos que no heredan el transparent. */
 }
 
+
+
+/* .textarea: Configuración específica para campos de texto multilínea. */
 textarea {
-    min-width: 100%;
-    max-height: 200px;
-    /* con resize none el tamaño no se puede cambiar */
-    resize: vertical;
-    font-family: sans-serif;
-    min-height: 103px;
+    min-width: 100%; /* Mantiene el ancho completo. */
+    max-height: 200px; /* Evita que el usuario expanda el campo excesivamente rompiendo el layout. */
+    resize: vertical; /* Solo permite el redimensionado hacia abajo. */
+    font-family: sans-serif; /* Hereda la tipografía base. */
+    min-height: 103px; /* Altura mínima para asegurar que se vea como un área de texto. */
 }
 
+
+
+/* .h2: Encabezado del formulario. */
 h2 {
-    text-align: center;
-    margin: 0;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    font-weight: 100;
-    font-size: 22px;
-    padding: 10px;
+    text-align: center; /* Centrado del título. */
+    margin: 0; /* Reset de márgenes. */
+    margin-bottom: 10px; /* Separación respecto al primer campo. */
+    text-transform: uppercase; /* Fuerza mayúsculas para jerarquía visual. */
+    font-weight: 100; /* Grosor extra fino para un estilo moderno y elegante. */
+    font-size: 22px; /* Tamaño destacado. */
+    padding: 10px; /* Relleno para dar aire al título. */
 }
 
+
+
+/* .label: Etiquetas descriptivas para accesibilidad y usabilidad. */
 label {
-    line-height: 2;
-    font-size: 0.9em;
+    line-height: 2; /* Aumenta el espacio entre líneas para facilitar la lectura. */
+    font-size: 0.9em; /* Tamaño ligeramente menor que el texto principal. */
 }
 
+
+
+/* .checkbox: Ajuste de dimensiones para el control de selección. */
 .checkbox {
-    width: auto;
-    height: 10px;
+    width: auto; /* Evita que el checkbox intente ocupar el 100% de ancho. */
+    height: 10px; /* Altura controlada para alineación con el texto. */
 }
 
+
+
+/* .fieldset: Agrupación lógica de campos relacionados. */
 fieldset {
-    border-radius: 5px;
-    border: 1px solid #666;
-    padding: 8px 6px 20px 6px;
-    margin: 20px;
+    border-radius: 5px; /* Bordes redondeados consistentes. */
+    border: 1px solid #666; /* Borde sutil para delimitar la sección. */
+    padding: 8px 6px 20px 6px; /* Relleno interno asimétrico para acomodar los campos. */
+    margin: 20px; /* Separación externa respecto a otros elementos del formulario. */
 }
 
+
+
+/* .legend: Título del grupo definido por el fieldset. */
 legend {
-    padding: 0 6px;
-    color: #777;
+    padding: 0 6px; /* Evita que el texto toque el borde del fieldset. */
+    color: #777; /* Color atenuado para no competir con el título principal. */
 }
 
+
+
+/* .a: Estilo para enlaces internos (ej. políticas de privacidad). */
 a{
-    color: #69f;
+    color: #69f; /* Color azul claro para asegurar la visibilidad sobre el fondo oscuro. */
 }

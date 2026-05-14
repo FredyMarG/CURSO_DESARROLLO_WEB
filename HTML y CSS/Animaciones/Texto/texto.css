@@ -6,65 +6,97 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #222;
-    display: flex;
+    margin: 0; /* Elimina los márgenes del navegador para un diseño a pantalla completa. */
+    font-family: sans-serif; /* Define una fuente limpia para el texto. */
+    background-color: #222; /* Fondo oscuro para resaltar el brillo del texto blanco. */
+    display: flex; /* Activa Flexbox para ayudar al centrado del contenido principal. */
 }
 
+
+
+/* Contenedor principal para estructura y alineación. */
 .wrapper{
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: auto;
-    filter: drop-shadow(0px 0px 15px #fff9)
-    drop-shadow(0px 0px 2px #fff9) drop-shadow(0px 0px 12px #fff9) drop-shadow(0px 0px 1px #fff);
+    display: flex; /* Organiza los elementos hijos en un contexto flex. */
+    flex-direction: column; /* Alinea los elementos en vertical. */
+    height: 80vh; /* Define el alto al 80% de la ventana. */
+    justify-content: space-evenly; /* Distribuye el espacio vertical de forma equitativa. */
+    align-items: center; /* Centra el texto horizontalmente. */
+    margin: auto; /* Centra el wrapper dentro del body. */
+    filter: drop-shadow(0px 0px 15px #fff9) 
+    drop-shadow(0px 0px 2px #fff9) drop-shadow(0px 0px 12px #fff9) drop-shadow(0px 0px 1px #fff); /* Encadena sombras para crear un efecto de resplandor neón blanco muy intenso. */
 }
 
+
+
+/* Estilos del selector .texto. */
 .texto{
-    color: #fff;
-    letter-spacing: 3px;
-    animation: grow 1s both steps(7);
-    overflow: hidden;
-    position: relative;
+    color: #fff; /* Color de texto blanco puro. */
+    letter-spacing: 3px; /* Añade espacio entre letras para mejorar la estética del efecto de escritura. */
+    animation: grow 1s both steps(7); /* Anima el ancho del contenedor. 'steps(7)' hace que el texto aparezca letra por letra (asumiendo 7 caracteres). */
+    overflow: hidden; /* Oculta el texto que aún no ha sido "escrito" por la animación de ancho. */
+    position: relative; /* Contexto para posicionar el cursor (::before). */
+    white-space: nowrap; /* Evita que el texto salte de línea mientras se expande el ancho. */
 }
 
+
+
+/* Pseudo-elemento .text::selection: agrega contenido o decoración adicional. */
 .text::selection{
-    background-color: transparent;
+    background-color: transparent; /* Hace que el resaltado al seleccionar texto sea invisible, manteniendo la estética. */
 }
 
+
+
+/* Pseudo-elemento .texto::before: agrega contenido o decoración adicional. */
 .texto::before{
-    content: '';
-    width: 1px;
-    height: 100%;
-    background-color: #fff;
-    position: absolute;
-    right: 0;
-    border-radius: 4px ;
-    animation: titilar .36s infinite alternate;
+    content: ''; /* Necesario para renderizar el pseudo-elemento que actúa como cursor. */
+    width: 2px; /* Define el grosor de la línea del cursor. */
+    height: 100%; /* El cursor mide lo mismo que la altura del texto. */
+    background-color: #fff; /* Color del cursor. */
+    position: absolute; /* Posiciona el cursor respecto al final del texto. */
+    right: 0; /* Lo mantiene pegado al borde derecho del contenedor que crece. */
+    border-radius: 4px; /* Suaviza los extremos de la línea del cursor. */
+    animation: titilar .36s infinite alternate; /* Crea el efecto de parpadeo constante del cursor. */
 }
 
 
-/* --- Animación (@keyframes grow) --- */
+
+
+/* Animación grow: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes grow {
+
+
+/* Estilos del selector from. */
     from   {
-        width: 0%;
+        width: 0%; /* Inicia sin mostrar nada del texto. */
     }
+
+
+/* Estilos del selector to. */
     to{
-        width: 100%;
+        width: 100%; /* Se expande hasta mostrar el texto completo. */
     }
 }
 
 
-/* --- Animación (@keyframes titilar) --- */
+
+
+/* Animación titilar: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes titilar {
+
+
+/* Estilos del selector from. */
     from{
-        opacity: 0;
+        opacity: 0; /* Cursor invisible. */
     }
+
+
+/* Estilos del selector to. */
     to{
-        opacity: 1;
+        opacity: 1; /* Cursor visible. */
     }
 }

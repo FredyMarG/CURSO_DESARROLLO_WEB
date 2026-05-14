@@ -2,38 +2,51 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Fondo y gradiente/style.css
  * Carpeta del tema: «Fondo y gradiente». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el manejo de imágenes de fondo complejas y gradientes CSS.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración inicial del fondo y márgenes. */
 body{
-    background: red;
-    margin: 0;
+    background: red; /* Color de respaldo si la imagen o gradiente fallan. */
+    margin: 0; /* Reset de márgenes para que el contenido toque los bordes. */
 }
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    width: 100%;
-    height: 500px;
-    margin: 20px;
-    margin: 0;
+    width: 100%; /* Abarca todo el ancho disponible. */
+    height: 500px; /* Altura fija para el contenedor de la imagen. */
+    margin: 0; /* Asegura que no haya desplazamientos externos. */
+    /* 
+     * Atributo background shorthand: 
+     * URL de la imagen | Posición (top) / Tamaño (cover) | Comportamiento (fixed) | Color fallback.
+     */
     background: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAC4ARQMBIgACEQEDEQH/xAAaAAABBQEAAAAAAAAAAAAAAAAFAAECAwQG/8QAMhAAAgEDAgMHAgQHAAAAAAAAAQIDAAQREiEFMVETIkFhcYGRFOGiscHRFSMkMlNicv/EABkBAAIDAQAAAAAAAAAAAAAAAAIFAQMEAP/EACMRAAIBAwQBBQAAAAAAAAAAAAABAgMRMRIhQVEyBBMUM1L/2gAMAwEAAhEDEQA/AOLPBhxqWKCEpHcscLI3LHPB8qByWv0d5LZ3LIXicozRnIBHMUcNwttbPM2+kbDqfAfNc4pLsWY5ZjknqaZ1UtSYn9PJuDTwgjFYo4yhBHlVhsY0GXZV9SBWNSI1DMM+XWqJnEkruEVAzEhVzhfIZ3rrxXBOiUnkLy29tb2Ed2LmJ9cjJ2UZy4wOZ8qHyXCtssR9S1ZdZFM0hPlQOYapI2iGE9i7uezZh2mjGpRtnH36VTPHGbp0tSxiL4jaQYJGds1TDNocaidOe9jnijvHRweR4G4EX06P5mSxwfA7756+FBkN3iGfpYbJFhgQAKNzjdj1NNSMj3MUU4QjWoJyMb+NKmd48CHTN+WTnOLufpYkHJnyfYfemhHDxwlSFm/iAlOST3NNXX0SNYLK6s2l+StjA+D1FD5FETFBnHMZ5jPXzrBU8hzS+shI2TVRNO53qBNA2XRQiagTSJqJNCGkImtFs726G4weeiPI2LePrgY+VrNuSAASTsAPGisVxdzR23DzMTDajVGhA7srn52ZgCP9aFt8BpK24bshiziM7aXOoleZG/jSqU6pCEij2RFCqPIUqZK6VhE2pNySM9sxKMgZlDDBwaBvHIZCgBeTVpwNyTmjNqd6wtO814bp8M5fVgjb4qiorpGyi7Ng+aKSFtM0bxsRnDqQce9MkE0u8UbMOoG1F+IXbcRvfq7xUaUrp7qBQfb3x7VJrnskQ6QzMMjPIDP57elVKHZodX8oEnh93/h/Ev71BrC8GP6aU537q6vyoqeIT8g7L5KcD4FXRtc3EHatKTGuchmJIxvsK5xh2dGpU6BFvYTdqpkjOobiNhgn/roPXn4USgs7mKRZ5ZVeVplbOoktpOSOXXHxUkuowpI1v690fr+lVS35aMARAShwyyhj3QB/bjljO+edQoxW5DqTnthBS9bvqwIKtyIIINNQY3cuAo0hRuFA2B8aVX+9fJm+O1sj/9k=") top / cover fixed #6fa;
 }
 
+
+
+/* Caja decorativa con gradiente: uso de conic-gradient para efectos radiales. */
 .gradiente{
-    width: 300px;
+    width: 300px; /* Dimensiones de la caja de gradiente. */
     height: 400px;
-    /*background: radial-gradient( green,black);
-    background: linear-gradient(to right green,black);*/
-    background: conic-gradient(transparent,#000a);
-    margin: 0 auto;
-    border-radius: 7px;
-    margin-top: 20px;
-    border-top: 6px solid #900;
+    background: conic-gradient(transparent, #000a); /* Gradiente cónico con transparencia. */
+    margin: 0 auto; /* Centrado horizontal automático. */
+    border-radius: 7px; /* Bordes suavemente redondeados. */
+    margin-top: 20px; /* Separación superior. */
+    border-top: 6px solid #900; /* Borde superior acentuado. */
 }
 
+
+
+/* Estilos del encabezado principal: centrado y contraste sobre el fondo. */
 H1{
-    margin: 0;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-family: sans-serif;
+    margin: 0; /* Reset de márgenes. */
+    color: white; /* Texto en blanco para legibilidad. */
+    text-align: center; /* Alineación central. */
+    padding: 20px; /* Espaciado interno. */
+    font-family: sans-serif; /* Tipografía limpia. */
 }

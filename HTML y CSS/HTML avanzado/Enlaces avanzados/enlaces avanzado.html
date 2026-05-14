@@ -18,8 +18,10 @@
     <title>Enlaces avanzado</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- Formulario para recoger datos del usuario. -->
     <form action="">
 <!-- Formulario de envío de datos (form) -->
 
@@ -29,16 +31,19 @@
         <fieldset>
             <legend>Información básica</legend>
             <!-- simple inputs-->
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="nombre">Nombre completo</label>
             <input id="nombre" type="text" placeholder="Jhon Doe">
             </div>
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="correo">Correo electrónico</label>
                 <input type="email" id="correo" placeholder="ejemplo@dominio.com">
             </div>
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
             <div class="form_input">
                 <label for="asunto">Asunto</label>
                 <input id="asunto" type="text" placeholder="Asunto del mensaje">
@@ -50,6 +55,7 @@
         
         <!-- select y option lista desplegable con opciones predefinidas -->
         
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <Label for="user">Tipo de usuario</Label>
             <select id="user" name="type-of-user">
@@ -61,6 +67,7 @@
 
         <!-- datalist -->
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <Label>Referente</Label>
             <input list="referente" name="referente">
@@ -73,11 +80,13 @@
 
         <!--text area-->
 
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="mensaje">mensaje</label>
             <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
             <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
         </div>
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="tyc">Acepto los <a href="terms.html">términos y condiciones</a></label>
             <input type="checkbox" id="tyc" class="checkbox">

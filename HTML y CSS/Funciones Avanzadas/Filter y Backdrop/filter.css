@@ -2,44 +2,67 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Filter y Backdrop/filter.css
  * Carpeta del tema: «Filter y Backdrop». Hoja: «filter».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de filtros CSS para la manipulación visual y efectos de post-procesado en elementos.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración del layout para centrar los ejemplos. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    height: 100vh;
-    display: flex;
+    margin: 0; /* Elimina los márgenes por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana. */
+    display: flex; /* Habilita flexbox para organizar las cajas de prueba. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    background-color: #ccc;
-    margin:20px auto;
-    padding: 20px 50px;
+    background-color: #ccc; /* Color de fondo gris base para notar los efectos. */
+    margin: 20px auto; /* Centrado horizontal con margen superior/inferior. */
+    padding: 20px 50px; /* Relleno interno para dar volumen a la caja. */
 }
 
+
+
+/* filter: drop-shadow -> Aplica una sombra proyectada que sigue la silueta del elemento (canal alfa). */
 .drop{
-    filter: drop-shadow(0px 0px 15px #000);
+    filter: drop-shadow(0px 0px 15px #000); /* Sombra negra difuminada de 15px sin desplazamiento. */
 }
 
+
+
+/* filter: blur -> Aplica un desenfoque gaussiano al elemento. */
 .blur{
-    filter: blur(5px);
+    filter: blur(5px); /* Desenfoque de 5 píxeles; a mayor valor, más borroso. */
 }
 
+
+
+/* filter: brightness -> Ajusta la luminosidad del elemento. */
 .brightness{
-    filter: brightness(3);
+    filter: brightness(3); /* Triplica el brillo original (300%). */
 }
 
+
+
+/* filter: contrast -> Ajusta la diferencia entre las áreas oscuras y claras. */
 .contrast{
-    filter: contrast(5);
+    filter: contrast(5); /* Aumenta el contraste 5 veces por encima del valor normal. */
 }
 
+
+
+/* filter: saturate -> Controla la intensidad de los colores. */
 .saturate{
-    filter: saturate(.5);
+    filter: saturate(.5); /* Reduce la saturación al 50% (colores más apagados). */
 }
 
+
+
+/* filter: hue-rotate -> Rota los colores en la rueda cromática. */
 .rotate{
-    filter: hue-rotate(34deg);
+    filter: hue-rotate(34deg); /* Desplaza el tono de los colores 34 grados. */
 }
-

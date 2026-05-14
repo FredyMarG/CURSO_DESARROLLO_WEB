@@ -6,40 +6,55 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-    background-color: #999;
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía limpia. */
+    box-sizing: border-box; /* Normalización del modelo de caja. */
+    background-color: #999; /* Fondo gris neutro. */
 }
 
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
-    grid-auto-rows: 1fr;
-    grid-auto-flow: row;
-    grid-auto-columns: 1fr;
-    margin: auto;
-    gap: 10px;
-    padding: 10px;
+    display: grid; /* Activa Grid. */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Columnas responsivas automáticas. */
+    grid-auto-rows: 1fr; /* Las filas automáticas ocuparán una fracción equitativa del espacio. */
+    grid-auto-flow: row; /* Los elementos fluyen rellenando filas primero. */
+    grid-auto-columns: 1fr; /* Columnas automáticas equitativas. */
+    margin: auto; /* Centrado horizontal. */
+    gap: 10px; /* Separación entre celdas. */
+    padding: 10px; /* Relleno del contenedor. */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    width: 100%;
-    font-size: 30px;
-    border-radius: 16px;
-    color: azure;
-    text-align: center;
+    background-color: #48e; /* Fondo azul. */
+    width: 100%; /* Ancho total de la celda. */
+    font-size: 30px; /* Fuente destacada. */
+    border-radius: 16px; /* Redondeado de bordes. */
+    color: azure; /* Color de texto. */
+    text-align: center; /* Alineación de texto. */
 }
 
+
+
+/* Posicionamiento del primer elemento mediante líneas de grid. */
 .grid-item:first-child{
-    grid-column-start:1;
-    grid-row-start: 1;
-    grid-column-end: 3;
-    grid-row-end: 3;
+    grid-column-start: 1; /* Inicia en la línea de columna 1. */
+    grid-row-start: 1; /* Inicia en la línea de fila 1. */
+    grid-column-end: 3; /* Se extiende hasta la línea de columna 3 (ocupa 2 columnas). */
+    grid-row-end: 3; /* Se extiende hasta la línea de fila 3 (ocupa 2 filas). */
 }
 
+
+
+/* Estado o pseudo-clase .grid-item:hover: estilo cuando el usuario interactúa. */
 .grid-item:hover{
-    opacity: 0.74;
+    opacity: 0.74; /* Feedback visual al pasar el cursor. */
 }

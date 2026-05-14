@@ -6,37 +6,52 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Reset universal de márgenes para asegurar consistencia entre navegadores. */
+    font-family: sans-serif; /* Aplica tipografía estándar a todos los elementos del modal. */
 }
 
+
+
+/* Estilos del selector dialog. */
 dialog{
-    background: #0009;
-    height: 100vh;
-    box-sizing: border-box;
+    background: #0009; /* Fondo negro con 60% de opacidad para oscurecer el fondo detrás del modal. */
+    height: 100vh; /* El diálogo ocupa toda la altura de la ventana visual. */
+    box-sizing: border-box; /* Asegura que el padding no expanda el tamaño total del contenedor. */
 }
 
+
+
+/* Estilos del selector .modal__content. */
 .modal__content{
-    background: white;
-    padding: 30px;
-    width: 80%;
-    margin: auto;
-    margin-top: 50px;
-    position: relative;
+    background: white; /* Color de fondo para el cuerpo del modal. */
+    padding: 30px; /* Espaciado interno generoso para el contenido. */
+    width: 80%; /* Ancho responsivo de la caja del modal. */
+    margin: auto; /* Centra el contenido horizontalmente. */
+    margin-top: 50px; /* Separa el modal del borde superior de la pantalla. */
+    position: relative; /* Contexto de posicionamiento necesario para el botón de cierre absoluto. */
 
 }
 
+
+
+/* Estilos del selector .modal__title. */
 .modal__title{
-    margin-top: 10px;
+    margin-top: 10px; /* Añade una pequeña separación superior al título del modal. */
 }
 
+
+
+/* Estilos del selector .modal__close-button. */
 .modal__close-button{
-    background: #000;
-    color: #fff;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 4px 12px;
-    cursor: pointer;
+    background: #000; /* Fondo negro para el botón de cerrar. */
+    color: #fff; /* Icono o texto de cierre en blanco. */
+    position: absolute; /* Extrae el botón del flujo normal para pegarlo a una esquina. */
+    top: 0; /* Lo alinea con el borde superior de .modal__content. */
+    right: 0; /* Lo alinea con el borde derecho de .modal__content. */
+    padding: 4px 12px; /* Define el tamaño del botón. */
+    cursor: pointer; /* Cambia el cursor a mano para indicar que es interactivo. */
 }

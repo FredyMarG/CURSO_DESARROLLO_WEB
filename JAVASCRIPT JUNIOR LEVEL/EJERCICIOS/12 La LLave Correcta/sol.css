@@ -7,74 +7,90 @@
  */
 
 body {
-    overflow-x: hidden;
+    overflow-x: hidden; /* Evita el scroll horizontal si algún elemento sobresale */
 }
 
 .flex-container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	color: #333;
-	font-family: sans-serif;
+    /* Layout flexible que permite que las tarjetas se ajusten según el ancho de pantalla */
+	display: flex;           /* Activa el modelo Flexbox */
+	flex-wrap: wrap;         /* Permite que los elementos pasen a la siguiente fila si no caben */
+	justify-content: center; /* Centra los elementos horizontalmente en el contenedor */
+	color: #333;             /* Color de texto gris oscuro */
+	font-family: sans-serif; /* Fuente de palo seco para mejor legibilidad */
 }
 
 .flex-item {
-	flex-grow: 1;
-	margin: 20px;
-	max-width: 320px;
-    color: darkgreen;
-    background: rgba(15, 25, 35, 0.35);
-    backdrop-filter: blur(8px);
-	border: 2px solid #333;
-    border-radius: 24px;
-	padding: 2rem 1.5rem;
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3);
-    transition: transform 0,3s ease, box-shadow 0,3s ease, border-color 0,3s ease;
-    text-align: center;
-    position: relative;
-    cursor: pointer
+    /* Glassmorphism: Efecto de cristal translúcido */
+	flex-grow: 1;        /* Permite que los items crezcan para ocupar el espacio disponible */
+	margin: 20px;        /* Espacio exterior entre tarjetas */
+	max-width: 320px;    /* Limita el ancho máximo de cada tarjeta */
+    color: #e0e0e0;      /* Color de texto claro para mejor contraste */
+    background: linear-gradient(135deg, rgba(31, 33, 35, 0.7), rgba(15, 20, 25, 0.5)); /* Gradiente sofisticado con transparencia */
+    /* El desenfoque del fondo da un toque premium */
+    backdrop-filter: blur(15px); /* Desenfoque más intenso para un efecto de cristal más realista */
+    --current-color: #71a154;   /* Variable para sincronizar el color del borde y el resplandor */
+	border: 2px solid var(--current-color); /* Borde vinculado a la variable animada */
+    border-radius: 24px;        /* Esquinas muy redondeadas */
+	padding: 2rem 1.5rem;       /* Relleno interno superior/inferior y lateral */
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3); /* Sombra pesada para dar elevación */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;         /* Centra todo el contenido de la tarjeta */
+    position: relative;         /* Permite posicionar elementos internos de forma absoluta si se requiere */
+    cursor: pointer;            /* Cambia el cursor a puntero */
+    animation: borderCycle 2s infinite step-end; /* Cambio instantáneo cada 0.5s (2s total / 4 colores) */
 }
 
 .flex-item:hover {
-	border-color: #71a154;
-	box-shadow: 0px 0px 30px #317124
+	transform: translateY(-10px); /* Efecto de elevación */
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 40px var(--current-color); /* Sombra de elevación + resplandor sincronizado */
+    border-width: 3px;            /* Engrosa ligeramente el borde */
 }
 .flex-item:focus {
-	border-color: #71a154;
-	box-shadow: 0px 0px 30px #317124
+    outline: none;
+    transform: scale(1.05);
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 30px var(--current-color); 
 }
 
 h2,h3 {
-	margin: 0;
+	margin: 0; /* Elimina los márgenes por defecto de los títulos para controlarlos manualmente */
 }
 
 h3 {
-	color: #000
+	color: #ffffff; /* Blanco puro para el modelo */
 }
 
 p b {
-	color: green
+	color: green /* El precio (etiqueta <b>) se muestra en verde */
 }
 
 .llave-img {
-	width: 300px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+	width: 300px;        /* Ancho fijo para la imagen */
+    border-radius: 10px; /* Esquinas ligeramente redondeadas para la imagen */
+    margin-bottom: 10px; /* Espacio debajo de la imagen */
 }
 
 
 form {
-	width: 100%;
-	text-align: center;
-	padding: 50px;
+	width: 100%;         /* El formulario ocupa todo el ancho inferior */
+	text-align: center;  /* Centra el botón de enviar */
+	padding: 50px;       /* Gran espacio alrededor del formulario */
 }
 
 input[type="submit"]{
-	background: #71a154;
-	color: #fff;
-	border: none;
-	padding: 12px 36px;
-    border-radius: 10px;
-	font-size: 17px;
-	letter-spacing: 1px
+	background: #71a154; /* Fondo verde para el botón */
+	color: #fff;         /* Texto blanco */
+	border: none;        /* Sin bordes */
+	padding: 12px 36px;  /* Botón grande y cómodo para el clic */
+    border-radius: 10px; /* Esquinas redondeadas del botón */
+	font-size: 17px;     /* Letra legible */
+	letter-spacing: 1px  /* Espaciado entre letras para toque moderno */
+}
+
+/* --- Animación de Ciclo de Colores Profesional --- */
+@keyframes borderCycle {
+    0%   { --current-color: #71a154; } /* Verde original */
+    25%  { --current-color: #3b82f6; } /* Azul profesional */
+    50%  { --current-color: #8b5cf6; } /* Púrpura elegante */
+    75%  { --current-color: #ef4444; } /* Rojo suave */
+    100% { --current-color: #71a154; } /* Cierre del ciclo */
 }

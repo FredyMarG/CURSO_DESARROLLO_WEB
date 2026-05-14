@@ -6,26 +6,35 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Limpieza de márgenes iniciales. */
+    font-family: sans-serif; /* Tipografía base sin remates. */
 }
 
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    height: 80vh;
-    grid-template-columns:repeat(3, 200px);
-    grid-template-rows: repeat(3, 200px);
-    grid-auto-rows: 100px;
-    grid-auto-rows: 150px;
-    grid-auto-flow: row;
-    grid-auto-columns: 100px;
+    display: grid; /* Inicia el contexto de Grid. */
+    height: 80vh; /* El contenedor ocupa el 80% de la altura de la ventana. */
+    grid-template-columns: repeat(3, 200px); /* Crea 3 columnas fijas de 200px (Grid Explícito). */
+    grid-template-rows: repeat(3, 200px); /* Crea 3 filas fijas de 200px (Grid Explícito). */
+    /* grid-auto-rows: define la altura de las filas que se crean automáticamente cuando el contenido excede el template. */
+    grid-auto-rows: 150px; /* Las filas del Grid Implícito tendrán 150px de alto (sobrescribe la regla de 100px). */
+    grid-auto-flow: row; /* Determina que los nuevos elementos se añadan creando nuevas filas. */
+    grid-auto-columns: 100px; /* Define el ancho para columnas creadas implícitamente si el flujo fuera 'column'. */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    margin: 10px;
-    padding: 10px;
-    font-size: 30px;
-    color: #fff;
+    background-color: #48e; /* Fondo azul para los ítems. */
+    margin: 10px; /* Margen de separación. */
+    padding: 10px; /* Relleno interno. */
+    font-size: 30px; /* Texto de gran tamaño. */
+    color: #fff; /* Texto blanco. */
 }

@@ -2,30 +2,51 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Unidades del Viewport/unidades.css
  * Carpeta del tema: «Unidades del Viewport». Hoja: «unidades».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de unidades de viewport dinámicas (dvw) y estilos editoriales.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: configuración del modelo de caja. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garantiza que el padding y bordes se incluyan dentro del ancho definido. */
 }
 
+
+
+/* Estilos globales: configuración base de la página. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina márgenes externos por defecto. */
+    font-family: sans-serif; /* Tipografía limpia para el cuerpo del documento. */
 }
 
+
+
+/* .box: Contenedor principal con dimensiones basadas en el viewport. */
 .box{
-    margin: 30px auto;
-    width: 90dvw;
-    font-size: 20px;
-    padding: 0 40px;
-    margin-bottom: 50px;
+    margin: 30px auto; /* Centrado horizontal automático y separación superior. */
+    /* 
+     * width: 90dvw (Dynamic Viewport Width). 
+     * A diferencia de 'vw', 'dvw' se ajusta automáticamente cuando las barras 
+     * de herramientas del navegador móvil aparecen o desaparecen.
+     */
+    width: 90dvw; 
+    font-size: 20px; /* Tamaño de fuente base para el contenido. */
+    padding: 0 40px; /* Relleno lateral para mejorar la lectura. */
+    margin-bottom: 50px; /* Separación extra en la base (sobrescribe el margin-bottom del shorthand superior). */
 }
 
+
+
+/* Pseudo-elemento ::first-letter: estilizado de la letra capitular. */
 p::first-letter{
-    padding: 10px;
-    padding-bottom: 0;
-    initial-letter: 3 2;
-    color: #43e;
+    padding: 10px; /* Espaciado alrededor de la letra inicial. */
+    padding-bottom: 0; /* Ajuste fino de la línea de base. */
+    /* 
+     * initial-letter: [tamaño] [hundimiento].
+     * Crea una letra capitular que ocupa 3 líneas de alto y se hunde 2 líneas en el texto.
+     */
+    initial-letter: 3 2; 
+    color: #43e; /* Color azul para destacar el inicio del párrafo. */
 }

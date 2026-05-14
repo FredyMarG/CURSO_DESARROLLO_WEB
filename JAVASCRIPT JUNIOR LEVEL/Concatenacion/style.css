@@ -1,0 +1,60 @@
+/**
+ * ESTILOS: CONCATENACIÓN
+ * Tema visual: Ámbar / Naranja (Representa flujo y unión).
+ */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+/* Reset global idéntico a los anteriores para consistencia */
+
+body {
+    font-family: 'Segoe UI', sans-serif; /* Tipografía limpia */
+    background-color: #fffbeb; /* Color: fondo ámbar (amarillo/naranja) muy suave */
+    display: flex;             /* Centrado Flexbox */
+    align-items: center;       /* Centrado V */
+    justify-content: center;    /* Centrado H */
+    height: 100vh;             /* Altura completa de la ventana */
+}
+
+.card {
+    background: white;         /* Fondo blanco */
+    padding: 2rem;             /* Espaciado interno */
+    border-radius: 1rem;       /* Radio de borde suave */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+    border-left: 8px solid #f59e0b; /* Énfasis: línea gruesa lateral para resaltar el módulo naranja */
+    width: 350px;              /* Ancho fijo para diseño compacto */
+}
+
+.icon {
+    font-size: 1.5rem;         /* Escala del icono */
+    color: #f59e0b;            /* Color: naranja/ámbar vibrante */
+    margin-bottom: 1rem;       /* Margen inferior */
+    font-family: serif;        /* Tipografía: usa serif para que las comillas " " se vean clásicas */
+}
+
+h1 { 
+    font-size: 1.25rem;        /* Tamaño de cabecera medio */
+    margin-bottom: 0.5rem;     /* Margen inferior */
+    color: #92400e;            /* Color: marrón/ámbar oscuro para contraste */
+}
+
+p { 
+    font-size: 0.9rem;         /* Texto legible pero secundario */
+    color: #b45309;            /* Tono tierra/naranja */
+    line-height: 1.5;          /* Interlineado estándar */
+}
+
+.status-box {
+    margin-top: 1.5rem;        /* Separación superior */
+    display: flex;             /* Alineación horizontal */
+    align-items: center;       /* Centrado V */
+    gap: 0.5rem;               /* Espacio entre punto y texto */
+    font-size: 0.8rem;         /* Fuente pequeña */
+    color: #451a03;            /* Color muy oscuro para lectura */
+}
+
+.status-dot {
+    width: 8px;                /* Dimensión micro */
+    height: 8px;               /* Dimensión micro */
+    background: #f59e0b;       /* Color indicador temático */
+    border-radius: 50%;        /* Forma: círculo */
+}

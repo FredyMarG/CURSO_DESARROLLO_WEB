@@ -11,38 +11,62 @@
 <html lang="en">
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
+    
+    <!-- Caracteres universales (acentos, ñ) -->
     <meta charset="UTF-8">
+    <!-- Adaptabilidad a dispositivos móviles (Responsive Design) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Enlace a estilos externos: separa la estructura de la presentación -->
     <link rel="stylesheet" href="css/formulario.css">
     <title>Text Area y labels - formulario de contacto</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <form action="">
-<!-- Formulario de envío de datos (form) -->
-
+    <!-- 
+        ETIQUETA <form>:
+        - 'action="#"': Indica a dónde se envían los datos (normalmente un script de servidor).
+        - 'method="POST"': Método seguro para enviar datos sensibles o largos, ya que no los muestra en la URL.
+        
+        ACCESIBILIDAD:
+        - El uso de <label for="ID"> es vital. Permite que usuarios con lectores de pantalla sepan 
+          qué deben escribir y amplía el área de clic para usuarios con dificultades motrices.
+    -->
+    <!-- Formulario para recoger datos del usuario. -->
+    <form action="#" method="POST">
         <h2>Formulario de contacto</h2>
-        <!-- Agrupación de input y label para accesibilidad (uso de atributo 'for' vinculado al 'id') -->
+        
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="nombre">Nombre completo</label>
+            <!-- 'placeholder': Proporciona una pista visual, no sustituye a una etiqueta <label>. -->
             <input id="nombre" type="text" placeholder="Jhon Doe">
         </div>
+        
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="correo">Correo electrónico</label>
             <input type="email" id="correo" placeholder="ejemplo@dominio.com">
         </div>
+        
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
             <label for="mensaje">mensaje</label>
             <!-- <textarea>: Entrada de texto multilínea. 'rows' define la altura inicial en líneas -->
             <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
         </div>
+        
+    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
         <div class="form_input">
+            <!-- Labels para Checkboxes: Mejoran la usabilidad al permitir marcar el cuadro haciendo clic en el texto -->
             <label for="tyc">Acepto los términos y condiciones</label>
             <input type="checkbox" id="tyc" class="checkbox">
         </div>
         
+        <!-- Recomendación: Añadir un <button type="submit"> para procesar el formulario -->
+    <!-- Botón interactivo. -->
+        <button type="submit">Enviar mensaje</button>
     </form>
 </body>
 <!-- Cierre del documento HTML -->

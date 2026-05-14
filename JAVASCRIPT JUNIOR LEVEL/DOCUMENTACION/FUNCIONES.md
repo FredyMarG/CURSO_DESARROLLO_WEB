@@ -1,552 +1,93 @@
-# 🧠 Funciones en JavaScript
+# ⚡ GUÍA DE FUNCIONES EN JAVASCRIPT
 
-# 📌 1. ¿Qué es una función?
-
-Una **función** es un bloque de código reutilizable que ejecuta una tarea específica.
-
-👉 A nivel avanzado:
-Una función es un **objeto ejecutable con contexto y scope**.
+Una función es un bloque de código diseñado para realizar una tarea específica. Se define una vez y se puede ejecutar (llamar) muchas veces.
 
 ---
 
-## 🧠 Modelo mental completo
-
-Una función tiene:
-- Código
-- Parámetros
-- Scope (entorno léxico)
-- Contexto (`this`)
-
----
-
-## 📊 Flujo interno del motor JS
-
-Definición → Guardar en memoria (heap)  
-↓  
-Invocación → Crear Execution Context  
-↓  
-Ejecución → Línea a línea  
-↓  
-Return → Devuelve valor  
-
----
-
-# 🔧 2. Definición de función
-
-## 🧩 Sintaxis básica
+# 1️⃣ Declaración de Funciones
+Es la forma clásica. Goza de **Hoisting** (puedes llamarla antes de que aparezca en el código).
 
 ```js
-function saludar() {
-  console.log("Hola");
-}
-````
-
-## ▶️ Llamado
-
-```js
-saludar();
-```
-
----
-
-## 🔎 Paso a paso interno
-
-1. JS guarda la función en memoria
-2. No se ejecuta automáticamente
-3. Se ejecuta al llamarla
-
----
-
-# 🔄 3. Formas de crear funciones
-
----
-
-## 1️⃣ Declaración (Function Declaration)
-
-```js
-function suma(a, b) {
-  return a + b;
-}
-```
-
-### ✅ Características:
-
-* Tiene hoisting
-* Se puede usar antes de declararla
-
----
-
-## 2️⃣ Expresión de función
-
-```js
-const resta = function(a, b) {
-  return a - b;
-};
-```
-
-### ⚠️:
-
-* No tiene hoisting
-
----
-
-## 3️⃣ Arrow Function
-
-```js
-const mult = (a, b) => a * b;
-```
-
----
-
-## ⚡ Forma corta
-
-```js
-const mult = (a, b) => a * b;
-```
-
----
-
-## 🔥 4️⃣ Función como valor
-
-```js
-const fn = suma;
-fn(2, 3);
-```
-
----
-
-## 🔥 5️⃣ Callback
-
-```js
-function ejecutar(fn) {
-  fn();
-}
-
-ejecutar(() => console.log("Hola"));
-```
-
----
-
-# 🔙 4. return
-
----
-
-## 📌 ¿Qué hace?
-
-* Devuelve un valor
-* Termina la ejecución
-
----
-
-## 🔎 Ejemplo paso a paso
-
-```js
-function cuadrado(n) {
-  return n * n;
-}
-
-cuadrado(4);
-```
-
-Flujo:
-n = 4 → return 16
-
----
-
-## ⚠️ Errores comunes
-
-```js
-function test() {
-  return 5;
-  console.log("Nunca se ejecuta");
+function saludar(nombre) {
+    return `Hola ${nombre}`;
 }
 ```
 
 ---
 
-## ❗ Sin return
+# 2️⃣ Expresiones de Función
+La función se guarda en una variable. No tiene hoisting.
 
 ```js
-function test() {}
-
-console.log(test()); // undefined
-```
-
----
-
-## 🔥 Retornar funciones
-
-```js
-function multiplicador(x) {
-  return function(y) {
-    return x * y;
-  };
-}
-```
-
----
-
-# 📥 5. Parámetros
-
----
-
-## 📌 Parámetros vs argumentos
-
-```js
-function saludar(nombre) {}
-
-saludar("Juan");
-```
-
-* nombre → parámetro
-* "Juan" → argumento
-
----
-
-## Tipos de parámetros
-
-### 1. Normales
-
-```js
-function suma(a, b) {}
-```
-
----
-
-### 2. Default
-
-```js
-function suma(a = 0, b = 0) {}
-```
-
----
-
-### 3. Rest (...)
-
-```js
-function sumar(...nums) {
-  return nums.reduce((a, b) => a + b);
-}
-```
-
----
-
-### 4. Destructuración
-
-```js
-function saludar({nombre}) {
-  console.log(nombre);
-}
-```
-
----
-
-# 🌍 6. Scope (Alcance)
-
----
-
-## 📌 Tipos
-
-* Global
-* Local
-* De bloque
-* Léxico
-
----
-
-## 🔎 Ejemplo
-
-```js
-let x = 5;
-
-function test() {
-  let x = 10;
-  console.log(x);
-}
-```
-
----
-
-## 📊 Resolución de variables
-
-JS busca:
-
-1. Scope local
-2. Scope externo
-3. Scope global
-
----
-
-## ⚠️ Shadowing
-
-```js
-let x = 5;
-
-function test() {
-  let x = 10;
-}
-```
-
----
-
-# 🔐 7. Scope léxico y Closures
-
----
-
-## 📌 Clave
-
-Una función recuerda dónde fue creada
-
----
-
-## 🔥 Ejemplo
-
-```js
-function externa() {
-  let x = 10;
-
-  return function() {
-    console.log(x);
-  };
-}
-
-const fn = externa();
-fn(); // 10
-```
-
----
-
-## 📌 Closure
-
-Función que mantiene acceso a variables externas
-
----
-
-## 🔥 Ejemplo real
-
-```js
-function contador() {
-  let count = 0;
-
-  return function() {
-    count++;
-    return count;
-  };
-}
-```
-
----
-
-## 📊 Flujo
-
-contador()
-↓
-crea variable
-↓
-retorna función
-↓
-función recuerda variable
-
----
-
-# 🔧 8. Execution Context
-
----
-
-## 📌 Se crea al llamar función
-
-Contiene:
-
-* Variables
-* Scope chain
-* this
-
----
-
-## 📊 Flujo
-
-Llamada
-↓
-Crear contexto
-↓
-Ejecutar
-↓
-Eliminar
-
----
-
-# 🔄 9. Hoisting
-
----
-
-## 📌 JS mueve declaraciones arriba
-
----
-
-## ✅ Funciona con:
-
-* function ✔
-* var ✔
-* let/const ❌
-
----
-
-## 🔥 Ejemplo
-
-```js
-saludar();
-
-function saludar() {
-  console.log("Hola");
-}
-```
-
----
-
-## ❌ Error
-
-```js
-saludar();
-
-const saludar = function() {};
-```
-
----
-
-# ⚡ 10. Arrow Functions
-
----
-
-## 📌 Características
-
-* Sintaxis corta
-* No tienen `this` propio
-
----
-
-## ❌ Error común
-
-```js
-const obj = {
-  nombre: "Juan",
-  saludar: () => console.log(this.nombre)
+const sumar = function(a, b) {
+    return a + b;
 };
 ```
 
 ---
 
-## ✅ Correcto
+# 3️⃣ Funciones Flecha (Arrow Functions) 🏹
+Introducidas en ES6. Son más cortas y modernas.
 
 ```js
-const obj = {
-  nombre: "Juan",
-  saludar() {
-    console.log(this.nombre);
-  }
-};
+const multiplicar = (a, b) => a * b;
 ```
 
----
-
-# 🔥 11. Callbacks
-
----
-
-## 📌 Definición
-
-Función pasada como argumento
+### 🧠 Reglas de las Arrow Functions:
+1.  Si solo tienen **un parámetro**, puedes quitar los paréntesis: `n => n * 2`.
+2.  Si solo tienen **una línea**, puedes quitar las llaves `{}` y el `return` (el retorno es implícito).
+3.  **Contexto `this`:** No tienen su propio `this`, heredan el del scope padre (vital para el DOM).
 
 ---
 
-## 🧠 Ejemplo real
+# 4️⃣ Parámetros y Retorno
 
+### Parámetros por defecto
+Evitan errores si no se pasa un valor al llamar a la función.
 ```js
-setTimeout(() => {
-  console.log("Hola");
-}, 1000);
+const despedir = (nombre = "Invitado") => `Adiós ${nombre}`;
 ```
 
+### El `return`
+Finaliza la ejecución de la función y devuelve un valor. Si no hay `return`, la función devuelve `undefined`.
+
 ---
 
-# ⏳ 12. Funciones asíncronas
+# 5️⃣ Ámbito de las variables (Scope)
 
----
-
-## 📌 async / await
+*   **Global:** Variable declarada fuera de cualquier función. Accesible en todo el código.
+*   **Local (Función/Bloque):** Variable declarada dentro de una función o bloque `{ }`. Solo existe allí dentro.
 
 ```js
-async function obtenerDatos() {
-  let res = await fetch("url");
-  return res.json();
+let global = "Soy global";
+
+function prueba() {
+    let local = "Soy local";
+    console.log(global); // ✅ Funciona
 }
+
+console.log(local); // ❌ ERROR
 ```
 
 ---
 
-## 📊 Flujo
-
-Llamar → esperar → continuar
-
----
-
-# 🧪 13. Funciones puras vs impuras
+# 📊 Analogía para Niños
+Imagina que una función es una **Máquina de Jugos** 🍹.
+1.  **Parámetros:** Son las frutas que le echas (Input).
+2.  **Código interno:** Son las cuchillas licuando.
+3.  **Return:** Es el vaso de jugo que sale al final (Output).
 
 ---
 
-## ✅ Pura
-
-```js
-function suma(a, b) {
-  return a + b;
-}
-```
+# ⚠️ Errores Comunes
+❌ Intentar usar una variable local fuera de su función.
+❌ Olvidar el `return` cuando necesitas que la función te devuelva un dato para usarlo después.
 
 ---
 
-## ❌ Impura
-
-```js
-let total = 0;
-
-function suma(x) {
-  total += x;
-}
-```
+# ✅ Buenas Prácticas
+✔️ Usa **Arrow Functions** para funciones anónimas y callbacks.
+✔️ Aplica el principio de **Responsabilidad Única**: una función debería hacer solo una cosa.
+✔️ Nombra tus funciones con **verbos** (ej: `calcularPrecio`, `obtenerDatos`).
 
 ---
-
-# 🚀 14. Buenas prácticas PRO
-
-* Funciones pequeñas
-* Una sola responsabilidad
-* Evitar globales
-* Nombres claros
-* Preferir funciones puras
-
----
-
-# 💀 15. ERRORES COMUNES
-
-* No usar return
-* Confundir scope
-* Usar mal arrow functions
-* Abusar de variables globales
-* No entender closures
-
-
-
-# 🎯 CONCLUSIÓN FINAL
-
-Dominar funciones = dominar JavaScript
-
-Incluye:
-
-* Scope
-* Closures
-* Execution context
-* this
-* Async
-* Callbacks
-
-🚀 Nivel profesional completo
-

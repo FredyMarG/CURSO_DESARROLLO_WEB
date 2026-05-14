@@ -2,40 +2,49 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Wrap y Flow/wrap.css
  * Carpeta del tema: «Wrap y Flow». Hoja: «wrap».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de flex-wrap y flex-flow para controlar el flujo de elementos multilínea.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+/* Reset general: normaliza márgenes, tipografía base y modelo de caja. */
 *{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina márgenes externos por defecto en todos los elementos. */
+    font-family: sans-serif; /* Define una tipografía global sin remates para legibilidad. */
+    box-sizing: border-box; /* Garantiza que el padding y bordes no alteren el tamaño calculado. */
 }
 
-.flexbox{
-    /* Los elementos se alinean uno al lado del otro y se ajustan */
-    display: flex;
-    height: 100vh;
-    flex-wrap: wrap; /*  Me permite bajar los elementos cuando ya no caben en la pagina, sin encogerlos */
-
-    flex-flow: row wrap; /* Es lo mismo que decirle que va a ser row con wrap */
-
-    /* Tambiewn puedes usar wrap reverse que me hace wrap pero al reves */
+/* Estilos del selector .flexbox. */
+.flexbox {
+    display: flex; /* Habilita el modelo de diseño flexible. */
+    height: 100vh; /* Establece la altura del contenedor al 100% del viewport. */
+    /* 
+     * flex-wrap: wrap -> Permite que los elementos hijos salten a una nueva línea si no caben.
+     */
+    flex-wrap: wrap; /* Controla el desbordamiento de ítems hacia nuevas filas. */
+    /* 
+     * flex-flow: shorthand que combina flex-direction y flex-wrap.
+     */
+    flex-flow: row wrap; /* Define dirección horizontal y permite el salto de línea. */
 }
 
+/* Estilos del selector .flex-item. */
 .flex-item{
-    height: 75px;
-    width: 150px;
-    background-color: #911;
-    text-align: center;
-    margin: 10px;
-    color: #fff;
-    font-size: 40px;
+    height: 75px; /* Altura fija para cada ítem flexible. */
+    /* 
+     * flex: [grow] [shrink] [basis]
+     */
+    flex: 1 1 150px; /* Permite crecer, encogerse y establece una base de 150px. */
+    background-color: #911; /* Color de fondo granate para los elementos. */
+    text-align: center; /* Centra el texto horizontalmente dentro del ítem. */
+    margin: 10px; /* Espaciado externo para separar los ítems entre sí. */
+    color: #fff; /* Color de texto blanco para asegurar el contraste. */
+    font-size: 40px; /* Tamaño de fuente grande para resaltar el contenido. */
 }
-
+/* Estado o pseudo-clase .flex-item:first-child: estilo cuando el usuario interactúa. */
 .flex-item:first-child{
-    background-color: #f77;
+    background-color: #f77; /* Color coral para identificar visualmente el primer elemento. */
 }
-
+/* Estado o pseudo-clase .flex-item:last-child: estilo cuando el usuario interactúa. */
 .flex-item:last-child{
-    background-color: #000;
+    background-color: #000; /* Color negro para identificar visualmente el último elemento. */
 }

@@ -7,7 +7,9 @@
  */
 
 
-/* --- Fuente web (@font-face) --- */
+
+
+/* Definición de una fuente personalizada. */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-Regular.ttf")format("truetype");
@@ -15,7 +17,9 @@
 }
 
 
-/* --- Fuente web (@font-face) --- */
+
+
+/* Definición de una fuente personalizada. */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-ExtraBold.ttf")format("truetype");
@@ -23,7 +27,9 @@
 }
 
 
-/* --- Fuente web (@font-face) --- */
+
+
+/* Definición de una fuente personalizada. */
 @font-face {
     font-family: "montserrat";
     src: url("fonts/Montserrat-ExtraLight.ttf")format("truetype");

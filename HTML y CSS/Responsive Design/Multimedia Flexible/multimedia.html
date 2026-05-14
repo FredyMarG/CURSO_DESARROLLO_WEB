@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/Responsive Design/Multimedia Flexible/multimedia.html
-     Título: Multimedia Flexible
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Multimedia Flexible (Imágenes y Videos)
+     Propósito: demostrar técnicas para que los recursos multimedia se adapten al ancho del viewport sin desbordar.
+     Relación: enlaza con multimedia.css para aplicar reglas de escalado elástico.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
 
     <meta charset="UTF-8">
     <link rel="stylesheet" href="multimedia.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multimedia Flexible</title>
+    <title>Lección: Multimedia Flexible</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <img src="fredy.jpg" alt="">
+    <!-- 
+        Imagen elástica: 
+        Se verá afectada por la regla max-width: 100% para no salirse de la pantalla. 
+    -->
+    <img src="fredy.jpg" alt="Imagen de ejemplo para escalado">
+
+    <!-- Contenedor principal para limitar el ancho del video. -->
     <div class="container">
+        <!-- 
+            Video elástico: 
+            Atributos controls (interfaz), muted (silencio) y autoplay (inicio automático).
+        -->
         <video src="video.mp4" controls muted autoplay></video>
     </div>
 </body>

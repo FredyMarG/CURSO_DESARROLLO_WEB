@@ -6,193 +6,198 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-/* 
-   GUÍA DE PSEUDOCLASES
-   Uso de estados (:hover, :active) y selectores estructurales (:nth-child, :has).
-*/
 
-/*
-   PSEUDOCLASE :root
-   Representa el elemento raíz del documento (generalmente <html>).
-   Es útil para declarar variables CSS (Custom Properties) globales.
-*/
+
+
+
+
+/* Variables CSS y valores de diseño reutilizables. */
 :root{
-    color: #0f0; /* Establece el color de texto verde para el elemento raíz */
+    color: #0f0; 
 }
 
+
+
+/* Estilos del selector h1. */
 h1{
-    color: #48e; /* Color de texto azul */
-    margin: 30px; /* Margen de 30px en todos los lados */
-    font-family: sans-serif; /* Fuente genérica sin serifa */
+    color: #48e; 
+    margin: 30px; 
+    font-family: sans-serif; 
 }
 
-/*
-   PSEUDOCLASE :hover
-   Aplica estilos cuando el puntero del ratón está sobre el elemento.
-*/
+
+
+
+/* Estado o pseudo-clase h1:hover: estilo cuando el usuario interactúa. */
 h1:hover{
-    color: rgb(0, 0, 0); /* Cambia el color de texto a negro */
-    background: #ccc; /* Cambia el fondo a gris claro */
+    color: rgb(0, 0, 0); 
+    background: #ccc; 
 }
 
-/*
-   PSEUDOCLASE :active
-   Aplica estilos mientras el elemento está siendo activado por el usuario (ej. click mantenido).
-*/
+
+
+
+/* Estado o pseudo-clase h1:active: estilo cuando el usuario interactúa. */
 h1:active{
-    background: #999; /* Cambia el fondo a gris */
-    color: #fff; /* Cambia el color de texto a blanco */
+    background: #999; 
+    color: #fff; 
 }
 
-/*
-   PSEUDOCLASE :first-child
-   Selecciona el primer elemento hijo de su padre.
-*/
+
+
+
+/* Estado o pseudo-clase li:first-child: estilo cuando el usuario interactúa. */
 li:first-child{
-    color: #48e; /* Color de texto azul */
+    color: #48e; 
 }
 
-/*
-   PSEUDOCLASE :last-child
-   Selecciona el último elemento hijo de su padre.
-*/
+
+
+
+/* Estado o pseudo-clase li:last-child: estilo cuando el usuario interactúa. */
 li:last-child{
-    color: #f00; /* Color de texto rojo */
+    color: #f00; 
 }
 
-/*
-   PSEUDOCLASE :nth-child(n)
-   Selecciona elementos basándose en su posición dentro de un grupo de hermanos.
-   'n' puede ser un número, una palabra clave (even/odd) o una fórmula (an+b).
-*/
+
+
+
+/* Estado o pseudo-clase li:nth-child(2): estilo cuando el usuario interactúa. */
 li:nth-child(2){
-    color: #0f0; /* Color de texto verde para el segundo 'li' */
+    color: #0f0; 
 }
 
-/*
-   PSEUDOCLASE :nth-child(3n)
-   Selecciona cada tercer 'li' (3ro, 6to, 9no, etc.).
-*/
+
+
+
+/* Estado o pseudo-clase li:nth-child(3n): estilo cuando el usuario interactúa. */
 li:nth-child(3n){
-    color: rgb(9, 137, 56); /* Color de texto verde oscuro */
+    color: rgb(9, 137, 56); 
 }
 
-/*
-   PSEUDOCLASE :nth-of-type(n)
-   Selecciona elementos basándose en su posición dentro de un grupo de hermanos del mismo tipo de etiqueta.
-   A diferencia de :nth-child, ignora otros tipos de elementos hermanos.
-*/
+
+
+
+/* Estado o pseudo-clase li:nth-of-type(4): estilo cuando el usuario interactúa. */
 li:nth-of-type(4){
-    color: #f00; /* Color de texto rojo para el cuarto 'li' de su tipo */
+    color: #f00; 
 }
 
-/*
-   PSEUDOCLASE :not(selector)
-   Selecciona elementos que NO coinciden con el selector especificado.
-*/
+
+
+
+/* Estado o pseudo-clase li:not(.elem-4): estilo cuando el usuario interactúa. */
 li:not(.elem-4){
-    color: rgb(0, 5, 77); /* Color de texto azul muy oscuro para 'li' que no tienen la clase 'elem-4' */
+    color: rgb(0, 5, 77); 
 }
 
-/*
-   PSEUDOCLASE :empty
-   Selecciona elementos que no tienen hijos (ni elementos ni nodos de texto, incluyendo espacios en blanco).
-*/
+
+
+
+/* Estado o pseudo-clase div:empty: estilo cuando el usuario interactúa. */
 div:empty {
-    background: #0f0; /* Fondo verde */
-    padding: 30px; /* Relleno de 30px */
+    background: #0f0; 
+    padding: 30px; 
 }
 
+
+
+/* Estilos del selector input[type="checkbox"]. */
 input[type="checkbox"]{
-    margin: 50px; /* Margen de 50px para checkboxes */
+    margin: 50px; 
 }
 
-/*
-   PSEUDOCLASE :checked
-   Selecciona elementos de entrada (radio, checkbox) que están marcados/seleccionados.
-*/
+
+
+
+/* Estado o pseudo-clase input[type="checkbox"]:checked: estilo cuando el usuario interactúa. */
 input[type="checkbox"]:checked{
-    margin: 0; /* Elimina el margen si el checkbox está marcado */
+    margin: 0; 
 }
 
-/*
-   PSEUDOCLASE :link
-   Selecciona enlaces que aún no han sido visitados por el usuario.
-*/
+
+
+
+/* Estado o pseudo-clase a:link: estilo cuando el usuario interactúa. */
 a:link{
-    color: red; /* Color de texto rojo para enlaces no visitados */
+    color: red; 
 }
 
-/*
-   PSEUDOCLASE :visited
-   Selecciona enlaces que ya han sido visitados por el usuario.
-*/
+
+
+
+/* Estado o pseudo-clase a:visited: estilo cuando el usuario interactúa. */
 a:visited{
-    color: green; /* Color de texto verde para enlaces visitados */
+    color: green; 
 }
 
-/*
-   PSEUDOCLASE :invalid
-   Selecciona elementos de formulario cuyo contenido no cumple con las restricciones de validación.
-*/
+
+
+
+/* Estado o pseudo-clase input:invalid: estilo cuando el usuario interactúa. */
 input:invalid{
-    color: red; /* Color de texto rojo para inputs inválidos */
+    color: red; 
 }
 
-/*
-   PSEUDOCLASE :valid
-   Selecciona elementos de formulario cuyo contenido cumple con las restricciones de validación.
-*/
+
+
+
+/* Estado o pseudo-clase input:valid: estilo cuando el usuario interactúa. */
 input:valid{
-    color: green; /* Color de texto verde para inputs válidos */
+    color: green; 
 }
 
-/*
-   PSEUDOCLASE :is(selector1, selector2, ...)
-   Permite agrupar selectores, aplicando estilos si el elemento coincide con CUALQUIERA de ellos.
-   Mejora la legibilidad y reduce la repetición.
-*/
+
+
+
+/* Estado o pseudo-clase section :is(.el1,  .el2, .el3): estilo cuando el usuario interactúa. */
 section :is(.el1,  .el2, .el3){
-    color: darkred; /* Color de texto rojo oscuro para elementos con clases .el1, .el2 o .el3 dentro de una sección */
+    color: darkred; 
 }
 
-/*
-   PSEUDOCLASE :has(selector) (Relational Pseudo-class)
-   Selecciona un elemento si contiene (o "tiene") un elemento que coincide con el selector dado.
-   Es una pseudoclase muy potente que permite seleccionar "hacia arriba" en el árbol DOM.
-*/
+
+
+
+/* Estado o pseudo-clase section:has(.el1): estilo cuando el usuario interactúa. */
 section:has(.el1){
-    background: #6f6f6f; /* Fondo gris oscuro */
-    color: white; /* Color de texto blanco */
+    background: #6f6f6f; 
+    color: white; 
 }
 
-/*
-   PSEUDOCLASE :has(+ selector)
-   Selecciona un elemento si es seguido inmediatamente por un hermano que coincide con el selector.
-   Aquí, selecciona un 'ul' si tiene un 'div' como hermano adyacente.
-*/
+
+
+
+/* Estado o pseudo-clase ul:has(+div): estilo cuando el usuario interactúa. */
 ul:has(+div){
-    background: #929292; /* Fondo gris */
-    color: aqua; /* Color de texto aguamarina */
+    background: #929292; 
+    color: aqua; 
 }
 
+
+
+/* Estilos del selector div. */
 div{
-    padding: 20px; /* Relleno de 20px para todos los divs */
+    padding: 20px; 
 }
 
+
+
+/* Estilos del selector label. */
 label{
-    font-weight: bold; /* Texto en negrita para las etiquetas */
+    font-weight: bold; 
 }
 
-/*
-   PSEUDOCLASE :has(input:valid)
-   Selecciona un 'label' si contiene un 'input' que es válido.
-   Esto permite estilizar el 'label' basándose en el estado de validación de su 'input' hijo.
-*/
+
+
+
+/* Estado o pseudo-clase label:has(input:valid): estilo cuando el usuario interactúa. */
 label:has(input:valid){
-    color: green; /* Color de texto verde para el label si el input es válido */
+    color: green; 
 }
 
+
+
+/* Estado o pseudo-clase label:has(input:invalid): estilo cuando el usuario interactúa. */
 label:has(input:invalid){
-    color: red; /* Color de texto rojo para el label si el input es inválido */
+    color: red; 
 }

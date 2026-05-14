@@ -7,31 +7,38 @@
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
-
-<html lang="en">
+<!-- Definición del idioma para accesibilidad y motores de búsqueda. -->
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+<!-- Cabecera (head): Contiene metadatos e instrucciones para el navegador -->
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/tabla.css">
-    <title>Tablas</title>
+    <meta charset="UTF-8"> <!-- Codificación universal para soportar acentos y caracteres especiales. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Control del escalado en dispositivos móviles. -->
+    <link rel="stylesheet" href="css/tabla.css"> <!-- Vinculación con la hoja de estilos externa. -->
+    <title>Lección: Estructura de Tablas Semánticas</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- 
+        ETIQUETA <table>: Define el inicio del modelo de datos tabular. 
+        Se recomienda el uso de thead, tbody y tfoot para mejorar la accesibilidad (lectores de pantalla) 
+        y facilitar estilos CSS avanzados (como encabezados fijos).
+    -->
     <table>
-        <thead> <!-- Encabezado semántico de la tabla -->
+        <thead> <!-- thead: Define el conjunto de filas que actúan como cabecera de las columnas. -->
             <tr>
-                <th>Produto</th>
+                <!-- <th>: Celda de encabezado. Proporciona contexto semántico a los datos de la columna. -->
+                <th>Producto</th>
                 <th>Costo</th>
                 <th>Unidades</th>
             </tr>
         </thead>
-        <tbody> <!-- Cuerpo de la tabla: Contenedor de los datos principales -->
-            <!-- <tr> define una fila; <td> define una celda de datos -->
+        <tbody> <!-- tbody: Encapsula el cuerpo principal de la tabla donde residen los datos. -->
             <tr>
-                <td>Banano</td>
+                <!-- <td>: Celda de datos estándar. Representa una unidad de información dentro de la fila. -->
+                <td>Banano</td> 
                 <td>$3</td>
                 <td>3</td>
             </tr>
@@ -47,10 +54,14 @@
             </tr>
         </tbody>
             
-        <tfoot> <!-- Pie de tabla: Generalmente usado para totales o resúmenes -->
+        <tfoot> <!-- tfoot: Define la fila de resumen o conclusiones (ej. totales), suele ir al final. -->
             <tr>
+                <!-- .ht: Clase definida en tabla.css para dar jerarquía visual al pie. -->
                 <th class="ht">Total</th>
-                <!-- 'colspan="2"': Expande la celda para ocupar el espacio de dos columnas -->
+                <!-- 
+                    'colspan="2"': Atributo de expansión. Indica que esta celda 
+                    debe ocupar el espacio horizontal de dos columnas del grid de la tabla. 
+                -->
                 <td class="ht" colspan="2">$10</td>
             </tr>
         </tfoot>

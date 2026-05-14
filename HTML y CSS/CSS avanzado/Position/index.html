@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: HTML y CSS/CSS Avanzado/Position/index.html
+     Título: Lección: Tipos de Posicionamiento (Absolute, Fixed, Sticky)
+     Propósito: demostrar de forma integral cómo funcionan los esquemas de posición en CSS.
+     Relación: enlaza con position.css y main.js.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="es">
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="position.css">
+    <title>Lección: Posicionamiento CSS</title>
+</head>
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <!-- Ejemplo de Posicionamiento Sticky -->
+    <header class="header-sticky">Navegación STICKY (se queda arriba al hacer scroll)</header>
+
+    <main>
+        <!-- Ejemplo de Posicionamiento Relativo y Absoluto -->
+        <section class="parent-relative">
+            <p>Contenedor RELATIVE (Punto de referencia)</p>
+            <div class="child-absolute">Hijo ABSOLUTE</div>
+        </section>
+
+        <div style="padding: 50px;">
+            <h2>Demostración de Posicionamiento</h2>
+            <p>Baja por la página para observar cómo actúan los elementos pegajosos y fijos.</p>
+            <p>Lorem ipsum dolor sit amet...</p>
+        </div>
+
+        <!-- Ejemplo de Posicionamiento Fixed -->
+        <div class="btn-fixed" title="Botón FIXED">💬</div>
+    </main>
+
+    <!-- Enlace al script de interactividad -->
+    <script src="position_css/main.js"></script>
+</body>
+<!-- Cierre del documento HTML -->
+</html>

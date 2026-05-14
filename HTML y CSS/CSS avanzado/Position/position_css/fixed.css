@@ -1,76 +1,60 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/fixed.css
- * Carpeta del tema: «position_css». Hoja: «fixed».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Carpeta del tema: «Position». Hoja: «fixed».
+ * Propósito: demostrar el posicionamiento 'fixed' para elementos persistentes en pantalla.
+ * Cómo leerlo: se observa cómo la caja se mantiene fija independientemente del scroll de la página.
  */
 
+/* Estilos base del documento. */
 body{
-    margin: 0; /* Elimina el margen predeterminado del navegador */
-    font-family: sans-serif; /* Establece una fuente genérica sin serifa */
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía limpia. */
 }
 
+/* 
+ * .overlay: capa que cubre el contenido. 
+ * Usa un degradado para dar efecto de desvanecimiento sobre el fondo.
+ */
 .overlay{
-    /* Fondo degradado que va de blanco a transparente */
-    background: linear-gradient(to top, #fff,transparent);
-    /*
-       POSITION: ABSOLUTE
-       - Saca el elemento del flujo normal del documento.
-       - Se posiciona en relación con el ancestro posicionado más cercano.
-       - Si no hay ancestro posicionado, se posiciona respecto al 'body' (viewport).
-    */
-    position: absolute;
-    z-index: 20; /* Coloca el overlay en una capa de apilamiento */
-    width: 100%; /* Ocupa el 100% del ancho de su ancestro posicionado */
-    bottom: 0; /* Alinea el overlay con la parte inferior de su ancestro posicionado */
-    height: 100%; /* Ocupa el 100% del alto de su ancestro posicionado */
+    background: linear-gradient(to top, #fff, transparent); /* Degradado de blanco a transparente. */
+    position: absolute; /* Se posiciona respecto al body o ancestro posicionado. */
+    z-index: 20; /* Por debajo de la caja fija pero sobre el contenido. */
+    width: 100%; /* Cubre todo el ancho. */
+    bottom: 0; /* Anclado al fondo. */
+    height: 100%; /* Cubre todo el alto. */
 }
 
+/* Contenedor de contenido central para dar contexto espacial. */
 .contenedor{
-    padding: 150px; /* Relleno interno de 150px */
-    background: #00f; /* Color de fondo azul */
-    /*
-       POSITION: RELATIVE
-       - Establece un contexto de posicionamiento para los hijos con 'absolute'.
-       - El elemento permanece en el flujo normal.
-    */
-    position: relative;
+    padding: 150px; /* Gran relleno para simular volumen. */
+    background: #00f; /* Fondo azul intenso. */
+    position: relative; /* Contexto de posicionamiento. */
 }
 
+/* Tipografía del modal o contenido. */
 h2{
-    font-size: 18px; /* Tamaño de fuente para los títulos h2 */
-    margin: 0; /* Elimina el margen predeterminado de los h2 */
-}
-p{
-    font-size: 14px; /* Tamaño de fuente para los párrafos */
-    margin: 0; /* Elimina el margen predeterminado de los párrafos */
+    font-size: 18px;
+    margin: 0; 
 }
 
+p{
+    font-size: 14px;
+    margin: 0; 
+}
+
+/* 
+ * .box: elemento con posicionamiento fijo. 
+ * No se desplaza al hacer scroll y se ancla al viewport del navegador.
+ */
 .box{
-    height: 60px; /* Altura fija de la caja */
-    width: 200px; /* Ancho fijo de la caja */
-    background: #fff; /* Color de fondo blanco */
-    /*
-       POSITION: FIXED
-       - Saca el elemento del flujo normal del documento.
-       - Se posiciona siempre en relación con el viewport (la ventana del navegador).
-       - Permanece en la misma posición en la pantalla incluso cuando el usuario hace scroll.
-    */
-    position: fixed;
-    right: 0; /* Alinea la caja con el borde derecho del viewport */
-    border: 1px solid black; /* Borde sólido de 1px negro */
-    border-right:0 ; /* Elimina el borde derecho para un efecto visual específico */
-    /*
-       BOX-SHADOW
-       - Añade una sombra al elemento.
-       - Valores: offset-x, offset-y, blur-radius, spread-radius, color.
-    */
-    box-shadow: 0 0 40px #0009 ; /* Sombra difusa alrededor de la caja */
-    /*
-       Z-INDEX
-       - Coloca esta caja en una capa de apilamiento superior a la del overlay.
-       - Asegura que la caja fija se vea por encima de otros elementos.
-    */
-    z-index: 30; 
+    height: 60px; /* Altura restringida. */
+    width: 200px; /* Ancho restringido. */
+    background: #fff; /* Fondo blanco. */
+    position: fixed; /* Se ancla a la ventana del navegador. */
+    right: 0; /* Pegado al borde derecho de la pantalla. */
+    border: 1px solid black; /* Borde de definición. */
+    border-right: 0; /* Oculta el borde derecho para que parezca salir del lateral. */
+    box-shadow: 0 0 40px #0009; /* Sombra profunda para dar efecto de elevación. */
+    z-index: 30; /* El nivel más alto de apilamiento para estar siempre visible. */
 }

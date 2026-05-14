@@ -2,43 +2,67 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Alineacion/alineacion.css
  * Carpeta del tema: «Alineacion». Hoja: «alineacion».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el control de alineación en múltiples líneas usando justify-content y align-content.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset global: normaliza márgenes y tipografía base para consistencia. */
 *{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina espaciado por defecto. */
+    font-family: sans-serif; /* Tipografía sin remates. */
 }
 
+
+
+/* Configuración del Box Model: garantiza que el padding/border no rompa el diseño flex. */
 div ,  body{
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
+
+
+/* 
+ * Contenedor Flexbox: 
+ * Cuando hay varias líneas (flex-wrap), align-content controla la distribución de las líneas entre sí.
+ */
 .flexbox{
-    
-    display: flex;
-    height: 360px;
-    flex-flow:row wrap ;
-    border: 2px solid #000;
-    margin: 20px;
-    justify-content: center;
-    align-content: center;
+    display: flex; /* Activa Flexbox. */
+    height: 360px; /* Altura fija para observar la alineación vertical. */
+    flex-flow: row wrap; /* Permite que los ítems salten a la siguiente línea. */
+    border: 2px solid #000; /* Marco de referencia. */
+    margin: 20px; /* Margen externo. */
+    justify-content: center; /* Alinea los ítems horizontalmente al centro. */
+    /* 
+     * align-content: center -> A diferencia de align-items, esto agrupa todas las líneas 
+     * de ítems en el centro del contenedor cuando hay espacio sobrante.
+     */
+    align-content: center; 
 }
+
+
+/* Estilos de los ítems flexibles. */
 .flex-item{
-    background-color: #800;
-    text-align: center;
-    margin: 10px;
-    color: #fff;
-    font-size: 40px;
-    width: 100px;
-    direction: rtl;
+    background-color: #800; /* Color rojo oscuro. */
+    text-align: center; /* Centrado de texto. */
+    margin: 10px; /* Separación entre cajas. */
+    color: #fff; /* Texto blanco. */
+    font-size: 40px; /* Tamaño de fuente para lectura clara. */
+    width: 100px; /* Ancho fijo para forzar el wrap. */
+    direction: rtl; /* Invierte la dirección del flujo del texto interno. */
 }
 
+
+
+/* Pseudo-clase :first-child: Estilo diferencial para el primer elemento de la lista. */
 .flex-item:first-child{
-    background-color: #f77;
+    background-color: #f77; /* Color coral para identificar el inicio. */
 }
 
+
+
+/* Pseudo-clase :last-child: Estilo diferencial para el último elemento de la lista. */
 .flex-item:last-child{
-    background-color: #000;
+    background-color: #000; /* Color negro para identificar el final. */
 }

@@ -17,15 +17,26 @@
     <title>Enlaces o hipervinculos</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <!-- Enlace estándar: Navega en el contexto actual -->
+    <!-- 
+        NAVEGACIÓN INTERNA/ESTÁNDAR:
+        Se utiliza la etiqueta <a> (Anchor). El atributo 'href' es obligatorio.
+    -->
+    <!-- Párrafo de texto. -->
     <p>Enalce en una misma pestaña</p>
     <a href="https://www.youtube.com">Youtube</a>
 
-    <!-- Atributo target="_blank": Abre el destino en una pestaña o ventana nueva -->
+    <!-- 
+        NAVEGACIÓN EXTERNA:
+        target="_blank": Abre el enlace en una nueva pestaña.
+        SEGURIDAD: Se añade rel="noopener noreferrer" para evitar ataques de acceso al objeto 'window.opener' 
+        de la página de origen y mejorar el rendimiento.
+    -->
+    <!-- Párrafo de texto. -->
     <p>Enlace que se abre en una nueva pestaña</p>
-    <a href="https://www.google.com" target="_blank">Google</a>
+    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Google</a>
 </body>
 <!-- Cierre del documento HTML -->
 </html>

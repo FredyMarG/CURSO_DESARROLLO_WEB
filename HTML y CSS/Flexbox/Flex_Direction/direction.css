@@ -2,42 +2,67 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Flex_Direction/direction.css
  * Carpeta del tema: «Flex_Direction». Hoja: «direction».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el control de la dirección de los elementos flex y el flujo del texto (RTL).
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y tipografía base. */
 *{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina el margen por defecto de todos los elementos. */
+    font-family: sans-serif; /* Establece una tipografía limpia para todo el documento. */
 }
 
+
+
+/* 
+ * Contenedor Flexbox: define el contexto flexible y la dirección de los ítems.
+ */
 .flexbox{
-    /* Los elementos se alinean uno al lado del otro y se ajustan */
-    display: flex;
-
-    flex-direction: row;/* Por defecto es row, pero row reverse, me ubica los items de derecha a izquierda, por defecto es de izquierda a derecha */
-
-    /* Con colum los elementos se posicionan de arriba hacia abajo y van a mantener su width y si no lo tiene ocupara toda la pagina y colum-reverse de abajo hacia arriba*/
-
-    direction: rtl;
-    /* rtl : rigth to left
-       ltr: left to right me define la direccion hacia la que va el texto */
+    display: flex; /* Convierte el contenedor en un contenedor flex. */
+    flex-direction: row; /* Establece el eje principal de izquierda a derecha (por defecto). */
+    /* 
+     * direction: rtl (Right-to-Left) -> Cambia la dirección del texto y el flujo de los elementos.
+     * En un flexbox con flex-direction: row, 'rtl' invierte el orden visual de los ítems.
+     */
+    direction: rtl; /* Establece el flujo de contenido de derecha a izquierda. */
 }
 
+
+
+/* 
+ * Ítems Flex: elementos hijos directos del contenedor flex.
+ * Heredan el flujo de 'direction: rtl' del padre.
+ */
 .flex-item{
-    height: 75px;
-    width: 150px;
-    background-color: #911;
-    text-align: center;
-    margin: 10px;
-    color: #fff;
-    font-size: 40px;
+    height: 75px; /* Altura fija para cada ítem. */
+    width: 150px; /* Ancho fijo para cada ítem. */
+    background-color: #911; /* Color de fondo base para los ítems. */
+    text-align: center; /* Centra el texto dentro de cada ítem. */
+    margin: 10px; /* Margen externo para separar los ítems entre sí. */
+    color: #fff; /* Color de texto blanco. */
+    font-size: 40px; /* Tamaño de fuente grande para visibilidad. */
 }
 
+
+
+/* 
+ * Pseudo-clase :first-child:
+ * Selecciona el primer elemento hijo de su padre. 
+ * Debido a 'direction: rtl', visualmente será el ítem de más a la derecha.
+ */
 .flex-item:first-child{
-    background-color: #f77;
+    background-color: #f77; /* Color de fondo rojo claro para el primer ítem. */
 }
 
+
+
+/* 
+ * Pseudo-clase :last-child:
+ * Selecciona el último elemento hijo de su padre.
+ * Debido a 'direction: rtl', visualmente será el ítem de más a la izquierda.
+ */
 .flex-item:last-child{
-    background-color: #000;
+    background-color: #000; /* Color de fondo negro para el último ítem. */
 }

@@ -6,10 +6,12 @@ let info = document.getElementById("tabla-contenido"),
 
 /**
  * Función envolvente que inicializa la lógica del ejercicio.
- * Implementa un sistema de gestión escolar:
- * 1. Define la base de datos de materias/profesores/alumnos.
- * 2. Procesa la información para generar visualizaciones en HTML.
- * 3. Gestiona la lógica de búsqueda de alumnos únicos y su carga académica.
+ * PATRÓN IIFE (Immediately Invoked Function Expression):
+ * Encapsula el código para evitar conflictos de nombres en el scope global.
+ * 
+ * DISEÑO:
+ * Sigue el principio de separación de responsabilidades:
+ * 1. Datos (objeto materias). 2. Lógica de búsqueda. 3. Renderizado (DOM).
  */
 (function solucion(){
     /** @type {Object.<string, string[]>} Base de datos simulada. Estructura: materia: [Profesor, ...Alumnos] */
@@ -29,17 +31,13 @@ let info = document.getElementById("tabla-contenido"),
     }
 
 /**
- * Obtiene la información de una materia específica, incluyendo el profesor y los alumnos.
- * @param {string} materia - El nombre de la materia a buscar.
- * @returns {[string[], string]|boolean} Un array con la lista de participantes y el nombre si existe, de lo contrario false.
- * @note Retornar `false` es funcional pero menos común que `null` para valores no encontrados en JS moderno.
+ * Helper: Busca una materia por nombre.
+ * @param {string} materia - Identificador (clave) de la materia.
+ * @returns {[string[], string]|boolean} Array de datos o false si falla.
  */
 const obtenerInformacion = (materia) => {
-    if (materias[materia] !== undefined) {
-        return [materias[materia], materia]
-    } else {
-        return false
-    }
+    // Acceso seguro mediante corchetes para claves dinámicas
+    return materias[materia] !== undefined ? [materias[materia], materia] : false;
 }
 
 /** @type {string[]} Lista de nombres de las materias extraídas del objeto de datos */
@@ -47,14 +45,17 @@ const mat = Object.keys(materias);
 
 /**
  * Muestra la información detallada de cada materia (profesor y alumnos) en una tabla HTML.
+ * OPTIMIZACIÓN DE RENDIMIENTO:
+ * Acumular strings en un 'buffer' antes de tocar el DOM es una técnica clave 
+ * para evitar que el navegador recalcule el diseño (Reflow) innecesariamente.
  */
 const mostrarInformacion = () => {
         let htmlBuffer = "";
         for (let i = 0; i < mat.length; i++) {
             let informacion = obtenerInformacion(mat[i]);
             if (informacion !== false) {
-                let profesor = informacion[0][0]; // El primer elemento del array es el profesor.
-                let alumnos = informacion[0].slice(1); // El resto del array son los alumnos.
+                // Destructuring: Forma moderna y legible de extraer datos de un array.
+                const [profesor, ...alumnos] = informacion[0];
                 htmlBuffer += `<tr>
                                     <td><b>${mat[i]}</b></td>
                                     <td>${profesor}</td>
@@ -99,14 +100,17 @@ const clasesAlumno = (alumno) => {
 
 /**
  * Obtiene una lista de todos los alumnos únicos que están registrados en alguna materia.
- * @returns {Array<string>} Un array con los nombres de todos los alumnos sin repeticiones.
+ * @returns {Array<string>} 
+ * LÓGICA:
+ * 1. Object.values(materias): Extrae todos los arreglos de participantes.
+ * 2. flatMap(...): Transforma la matriz de matrices en una lista plana, 
+ *    saltando el primer elemento de cada arreglo (el profesor) con slice(1).
+ * 3. new Set(...): Estructura de datos que garantiza unicidad de valores.
+ * 4. Spread operator [...]: Convierte el Set de vuelta a un Array.
  */
 const obtenerTodosLosAlumnos = () => {
-    // Usamos Object.values para obtener los arreglos de datos directamente.
-    // flatMap recorre cada materia, extrae los alumnos (slice(1)) y los aplana en un solo nivel.
     const listaAplanada = Object.values(materias).flatMap(data => data.slice(1));
-    
-    // Set elimina duplicados de forma eficiente.
+    // Set es ideal aquí: O(n) de complejidad y garantiza que no haya nombres repetidos
     return [...new Set(listaAplanada)];
 }
 
@@ -132,9 +136,10 @@ mostrarTodosLosAlumnos()
 
 /**
  * Muestra una tabla completa con cada alumno, las materias a las que asiste y el profesor de cada materia.
- * Agrupa las materias por alumno, mostrando el nombre del alumno una sola vez si asiste a múltiples clases.
  * 
- * @note Utiliza el atributo 'rowspan' para mejorar la jerarquía visual agrupando celdas del mismo alumno.
+ * ESTRATEGIA DE RENDERIZADO (Rowspan):
+ * Para agrupar visualmente, detectamos si es la primera materia del alumno (i === 0).
+ * Si lo es, insertamos la celda del nombre con el atributo 'rowspan' igual al total de sus clases.
  */
 const mostrarTabla = () => {
     let html = "";
@@ -160,5 +165,6 @@ const mostrarTabla = () => {
 
 mostrarTabla()
 
+/* Visualización final del contenedor de resultados */
 sol.style.display = "block"
 })(); // Cierre de la IIFE

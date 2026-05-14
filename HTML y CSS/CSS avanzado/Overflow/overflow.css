@@ -2,30 +2,36 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Overflow/overflow.css
  * Carpeta del tema: «Overflow». Hoja: «overflow».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar cómo manejar el contenido que excede el tamaño de su contenedor.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos base del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background: #ccc;
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía base. */
+    background: #ccc; /* Fondo gris para resaltar la caja blanca. */
 }
 
-.box{
-    width: 220px;
-    height: 220px;
-    background: #fff;
-    position: relative;
-    left: 0;
-    border: 2px solid #0009;
-    margin: auto;
-    margin-top: 50px;
-    /* 
-    Me permite controlar el contenido que sale del contenedor 
-    por defecto es visible, pero puedo usar hidden que me oculta lo que haya por fuera del elemento, pero si es texto no me sirve, scroll me crea una barra para scrollear, o el auto que permite que el contenido se ajuste y con clip la informacion se corta donde haya quedado el texto
-    */
 
-    /* Tambien puedo overflow-y o -x para controlar el movimieto horizontal o vertical */
+
+/* Caja visual que agrupa contenido con estilo propio. */
+.box{
+    width: 220px; /* Ancho restringido de la caja. */
+    height: 220px; /* Alto restringido de la caja. */
+    background: #fff; /* Fondo blanco para el texto. */
+    position: relative; /* Establece un contexto de posicionamiento. */
+    left: 0; /* Alineación inicial. */
+    border: 2px solid #0009; /* Borde negro con ligera transparencia. */
+    margin: auto; /* Centrado horizontal. */
+    margin-top: 50px; /* Separación superior. */
+    
+
+    /* 
+     * overflow: auto -> Si el contenido es más grande que 220px, 
+     * el navegador añade barras de desplazamiento automáticamente.
+     */
     overflow: auto;
 }

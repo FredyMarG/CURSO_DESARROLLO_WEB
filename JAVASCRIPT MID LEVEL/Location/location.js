@@ -1,18 +1,29 @@
 /**
- * LOCATION (URL actual)
- * Lectura de partes de la URL. assign() carga una nueva página (requiere una URL válida).
+ * OBJETO WINDOW.LOCATION
+ * Representa la ubicación (URL) del objeto al que está vinculado.
+ * Permite interactuar con la dirección del navegador y controlar la navegación.
  */
 
-/** Propiedades y métodos del objeto Location (Control de la URL) */
+/** Propiedades de lectura del objeto Location */
 
-document.write(window.location.href + "<br>")   // URL completa actual
+// .href: Retorna la URL completa (ej: https://localhost:3000/index.html)
+document.write(`<b>URL:</b> ${window.location.href} <br>`);
 
-document.write(window.location.hostname +"<br>"); // Nombre del dominio/host
+// .hostname: Retorna el dominio del servidor (ej: www.google.com)
+document.write(`<b>Host:</b> ${window.location.hostname} <br>`);
 
-document.write(window.location.pathname + "<br>"); // Ruta interna del recurso
+// .pathname: Retorna el path o ruta interna tras el dominio (ej: /user/settings)
+document.write(`<b>Ruta:</b> ${window.location.pathname} <br>`);
 
-document.write(window.location.protocol + "<br>"); // Protocolo (http:, https:)
+// .protocol: Retorna el protocolo de transferencia (http: o https:)
+document.write(`<b>Protocolo:</b> ${window.location.protocol} <br>`);
 
-/* assign(url): navega a la dirección indicada (ejemplo comentado para no redirigir al abrir el archivo)
-   document.write(window.location.assign("https://ejemplo.com"))
-*/
+/** 
+ * Métodos de navegación (Acciones):
+ * 
+ * .assign(url): Navega a la URL indicada (añade entrada al historial).
+ * .replace(url): Reemplaza la URL actual (no permite "atrás").
+ * .reload(): Recarga la página.
+ * 
+ * Ejemplo: window.location.assign("https://github.com");
+ */

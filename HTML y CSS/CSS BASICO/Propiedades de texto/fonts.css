@@ -2,30 +2,31 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Propiedades de texto/fonts.css
  * Carpeta del tema: «Propiedades de texto». Hoja: «fonts».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: declarar y cargar fuentes tipográficas externas mediante @font-face para su uso en el sitio.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
 
-/* --- Fuente web (@font-face) --- */
+/* 
+ * Regla @font-face: permite al navegador descargar una fuente que no está en el sistema del usuario.
+ * Definición para el peso normal (Regular).
+ */
 @font-face {
-    font-family: "monserrat";
-    src: url("fonts/Montserrat-Regular.ttf")format("truetype");
-    font-weight: 400;
+    font-family: "monserrat"; /* Nombre identificador que se utilizará en las propiedades font-family. */
+    src: url("fonts/Montserrat-Regular.ttf") format("truetype"); /* Ruta del recurso y especificación del formato. */
+    font-weight: 400; /* Asocia este archivo específico al peso 'normal'. */
 }
 
-
-/* --- Fuente web (@font-face) --- */
+/* Definición para el peso negrita (ExtraBold). */
 @font-face {
-    font-family: "monserrat";
-    src: url("fonts/Montserrat-ExtraBold.ttf")format("truetype");
-    font-weight: 700;
+    font-family: "monserrat"; /* Se usa el mismo nombre para agrupar diferentes pesos bajo una misma familia tipográfica. */
+    src: url("fonts/Montserrat-ExtraBold.ttf") format("truetype");
+    font-weight: 700; /* Asocia este archivo al peso 'bold' (700). */
 }
 
-
-/* --- Fuente web (@font-face) --- */
+/* Definición para el peso muy ligero (ExtraLight). */
 @font-face {
     font-family: monserrat;
-    src: url("fonts/Montserrat-ExtraLight.ttf")format("truetype");
-    font-weight: 100;
+    src: url("fonts/Montserrat-ExtraLight.ttf") format("truetype");
+    font-weight: 100; /* Asocia este archivo al peso más fino (100). */
 }

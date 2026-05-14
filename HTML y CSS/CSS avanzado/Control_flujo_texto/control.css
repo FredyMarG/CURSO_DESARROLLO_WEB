@@ -6,36 +6,26 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #bbb;
+    margin: 0; /* Elimina los márgenes del navegador para un control total del layout. */
+    font-family: sans-serif; /* Define una fuente limpia y moderna sin remates. */
+    background-color: #bbb; /* Fondo gris neutro para resaltar la caja de contenido. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    width: 200px;
-    height: 200px;
-    margin: auto;
-    margin-top: 50px;
-    background-color: #fff;
-    border: 1px solid #0006;
-
-    /* WHITE-SPACE: Controla el colapso de espacios y saltos de línea manuales */
-    /* 
-       nowrap:   Fuerza al texto a permanecer en una sola línea.
-       pre:      Preserva espacios y saltos de línea tal cual están en el HTML.
-       pre-wrap: Preserva espacios pero permite saltos automáticos para ajustar al contenedor.
-    */
-    /* white-space:nowrap ; */
-
-    /* TEXT-OVERFLOW: Define cómo se indica al usuario que el texto se ha recortado.
-       Nota: Solo funciona si 'overflow' no es 'visible' y 'white-space' es 'nowrap'. */
-    text-overflow: ellipsis;
-
-    /* WORD-BREAK: Gestiona el comportamiento de palabras largas que no caben en una línea.
-       break-all: Fuerza el salto de línea en cualquier carácter para evitar desbordamiento horizontal. */
-    word-break:break-all ;
-
-    /* OVERFLOW: Recorta cualquier contenido que exceda las dimensiones del box de 200x200px. */
-    overflow: hidden;
+    width: 200px; /* Define un ancho fijo para limitar el espacio horizontal del texto. */
+    height: 200px; /* Define un alto fijo, creando un contenedor cuadrado de 200x200px. */
+    margin: auto; /* Centra la caja horizontalmente respecto a su contenedor padre. */
+    margin-top: 50px; /* Crea un espacio de separación superior de 50px. */
+    background-color: #fff; /* Fondo blanco para asegurar la legibilidad del texto. */
+    border: 1px solid #0006; /* Borde delgado y sutil para visualizar los límites de la caja. */
+    text-overflow: ellipsis; /* Renderiza puntos suspensivos (...) cuando el texto es demasiado largo (requiere overflow: hidden). */
+    word-break: break-all; /* Fuerza el salto de línea rompiendo palabras largas si es necesario para evitar el desbordamiento horizontal. */
+    overflow: hidden; /* Oculta cualquier contenido que exceda las dimensiones físicas de la caja. */
 }

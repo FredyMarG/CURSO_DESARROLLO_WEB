@@ -5,35 +5,39 @@
 
 /** 
  * Muestra un mensaje de error si la condición evaluada es falsa.
- * Útil para pruebas unitarias rápidas.
+ * Útil para validaciones rápidas (Sanity Checks) sin detener la ejecución del script.
  */
-console.assert(5 < 4) // Aserción fallida, se muestra un mensaje de error en la consola
-console.assert(5 > 4) // Aserción exitosa, no se muestra ningún mensaje en la consola
+console.assert(5 < 4, "Error: 5 no es menor que 4"); 
+console.assert(5 > 4); // No muestra nada porque es verdadero.
 
 /** Funciones básicas de registro */
-console.clear() // Limpia el historial de la consola
-console.error("Mensaje de error") // Registro con estilo de error (rojo)
-console.info("Mensaje de información") // Registro informativo
-console.log("Mensaje Normal") // Registro estándar
-console.table([{ name: "Alice", age: 30 }, { name: "Bob", age: 25 }]) // Muestra datos estructurados en una tabla
-console.warn("Mensaje de Alerta") // Registro con estilo de advertencia (amarillo)
-console.dir({ name: "Alice", age: 30 }) // Muestra una representación interactiva del objeto (propiedades)
+console.clear(); // Limpia la consola para empezar una sesión de debugging limpia.
+console.error("Acceso denegado"); // Formato visual de error (rojo con icono de error).
+console.info("La API ha respondido correctamente"); // Mensaje informativo (a veces incluye icono 'i').
+console.log("Estado de la variable x:", 10); // El más común para seguimiento general.
+
+/** .table(): Transforma arrays u objetos en tablas visuales legibles. ¡Excelente para JSON! */
+console.table([{ id: 1, name: "Alice" }, { id: 2, name: "Bob" }]); 
+
+console.warn("Esta función será eliminada en la versión 2.0"); // Aviso preventivo (amarillo).
+
+/** .dir(): A diferencia de .log, dir muestra la lista interactiva de todas las propiedades de un objeto JS. */
+console.dir(document.body); 
 
 /** Funciones de conteo */
-console.count() // Incrementa y muestra el contador predeterminado
+console.count("Clic en botón"); // Útil para saber cuántas veces se ejecuta una función o evento.
 console.count() 
-console.countReset() // Reinicia el contador predeterminado
+console.countReset("Clic en botón"); // Reinicia el contador específico.
 console.count() 
 
 /** Funciones de agrupación para organizar logs jerárquicamente */
-console.group("Grupo 1") // Inicia bloque de mensajes agrupados
-console.log("Mensaje dentro del Grupo 1") 
-console.log("Otro mensaje dentro del Grupo 1") 
-console.group("Subgrupo 1.1") // Grupo anidado
-console.log("Mensaje dentro del Subgrupo 1.1") 
-console.log("Otro mensaje dentro del subgrupo 1.1");
-console.groupEnd() // Cierra el subgrupo
-console.groupEnd() // Cierra el grupo principal
+console.group("Proceso de Carga de Datos"); // Agrupa mensajes relacionados.
+    console.log("Conectando a DB...");
+    console.log("Descargando assets...");
+    console.group("Sub-tareas");
+        console.log("Limpiando caché");
+    console.groupEnd(); // Finaliza el subgrupo.
+console.groupEnd(); // Finaliza el grupo principal.
 
 /** Grupo colapsado por defecto para no saturar la vista inicial */
 console.groupCollapsed("Grupo Colapsado") 
@@ -41,6 +45,8 @@ console.log("Contenido oculto hasta expandir")
 console.groupEnd()
 
 /** Herramientas de medición de rendimiento (profiling básico) */
-console.time("Tiempo de ejecución") // Inicia cronómetro con etiqueta
-console.timeLog("Tiempo de ejecución") // Muestra tiempo parcial
-console.timeEnd("Tiempo de ejecución") // Detiene cronómetro y muestra tiempo total
+/** Ideal para comparar qué algoritmo es más rápido (ej: bucle for vs forEach). */
+console.time("Carga de Imágenes"); 
+    // Simulando proceso...
+console.timeLog("Carga de Imágenes"); // Muestra el tiempo transcurrido sin detenerlo.
+console.timeEnd("Carga de Imágenes"); // Detiene el cronómetro y muestra el resultado final en ms.

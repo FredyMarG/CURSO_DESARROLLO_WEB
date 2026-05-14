@@ -2,29 +2,47 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Multimedia Flexible/multimedia.css
  * Carpeta del tema: «Multimedia Flexible». Hoja: «multimedia».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Propósito: aplicar reglas de escalado automático para imágenes y videos.
  */
 
-body{
-    margin: 0;
-    font-family: sans-serif;
+/* Reset base y tipografía. */
+body {
+    margin: 0;               /* Elimina márgenes externos para que el multimedia pueda tocar los bordes. */
+    font-family: sans-serif; /* Fuente limpia para cualquier texto descriptivo. */
+    background-color: #f4f4f4; /* Fondo gris claro para resaltar los elementos. */
+    padding: 20px;           /* Espaciado de seguridad. */
 }
 
-div, body{
-    box-sizing: border-box;
+/* 
+ * REGLA MAESTRA PARA MULTIMEDIA RESPONSIVO:
+ * Se aplica a imágenes y videos para que sean "elásticos".
+ */
+img, video {
+    /* 
+     * max-width: 100% -> El elemento puede ser más pequeño que su tamaño original, 
+     * pero nunca más ancho que su contenedor padre. 
+     */
+    max-width: 100%; 
+    /* 
+     * height: auto -> Obliga al navegador a recalcular el alto automáticamente 
+     * para mantener la proporción (proporcionalidad) y evitar que la imagen se estire. 
+     */
+    height: auto;    
+    /* display: block -> Elimina el espacio fantasma que el navegador reserva debajo para letras descendentes. */
+    display: block;  
 }
 
-img{
-    max-width: 100%;
-    height: auto;
+/* .container: Se utiliza para limitar el ancho máximo de elementos muy grandes (como el video). */
+.container {
+    max-width: 800px;        /* Evita que el video se expanda demasiado en monitores grandes. */
+    margin: 40px auto;       /* Centrado horizontal automático y separación vertical. */
+    border: 5px solid #fff;  /* Marco blanco para dar estética de "reproductor". */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra para dar profundidad. */
+    background-color: #000;  /* Fondo negro por si el video tarda en cargar. */
 }
 
-.container{
-    max-width: 100%;
-    aspect-ratio: 16/9;
-}
-
-video{
-    max-width: 100%;
+/* Estilo extra para la imagen fuera del contenedor. */
+img {
+    margin-bottom: 20px;     /* Separación respecto al contenedor del video. */
+    border-radius: 8px;      /* Suavizado de esquinas para la foto de perfil. */
 }

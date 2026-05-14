@@ -2,30 +2,49 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Container Queries/container.css
  * Carpeta del tema: «Container Queries». Hoja: «container».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de Container Queries para crear componentes que responden al tamaño de su padre.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de la página. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
+    margin: 0;               /* Elimina márgenes externos del navegador. */
+    font-family: sans-serif; /* Tipografía limpia para legibilidad. */
+    box-sizing: border-box;  /* Normalización del modelo de caja. */
 }
 
+
+
+/* Contenedor principal para estructura y alineación. */
 .container{
-    container-type: inline-size;
-    container-name: main;
+    /* 
+     * container-type: inline-size -> Define que este elemento es un contenedor de consulta. 
+     * Permite a los hijos consultar su ancho (eje principal) para aplicar estilos condicionales.
+     */
+    container-type: inline-size; 
+    /* container-name: main -> Asigna un nombre identificador para consultas específicas. */
+    container-name: main; 
 }
 
+
+
+/* Estilo base para los párrafos. */
 p{
-    font-size: 8px;
+    font-size: 8px; /* Tamaño de fuente inicial muy pequeño para notar el cambio de la query. */
 }
 
+
+/* 
+ * Regla @container:
+ * Aplica estilos basándose en el ancho del contenedor identificado como 'main'.
+ * Si '.container' mide 600px o menos, se ejecutan las siguientes reglas.
+ */
 @container main (max-width: 600px ){
     p{
-        font-size: 20px;
-        color: #f00;
-        background-color: #000;
+        font-size: 20px;         /* Aumenta el tamaño de fuente. */
+        color: #f00;             /* Cambia el texto a rojo. */
+        background-color: #000;  /* Fondo negro para alto contraste. */
     }
 }
-

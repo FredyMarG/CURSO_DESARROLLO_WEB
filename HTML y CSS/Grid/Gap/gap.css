@@ -6,35 +6,43 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-    background-color: #999;
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía base. */
+    box-sizing: border-box; /* Modelo de caja universal. */
+    background-color: #999; /* Fondo gris neutro. */
 }
 
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    height: 80vh;
-    grid-template-columns:repeat(3, 1fr);
-    grid-template-rows: repeat(3, 200px);
-    grid-auto-rows: 100px;
-    grid-auto-rows: 150px;
-    grid-auto-flow: row;
-    grid-auto-columns: 100px;
-    border: 3px solid #000;
-    background-color: #fff;
-    gap: 20px;
-    padding: 20px;
-    width: 90vw;
-    margin: auto;
-    margin-top: 30px;
+    display: grid; /* Activa el modo Grid Layout. */
+    height: 80vh; /* Altura basada en el 80% del viewport. */
+    grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas de igual ancho (fracciones). */
+    grid-template-rows: repeat(3, 200px); /* Define 3 filas explícitas de 200px. */
+    grid-auto-rows: 150px; /* Define la altura de filas generadas automáticamente (sobrescribe el valor anterior de 100px). */
+    grid-auto-flow: row; /* Coloca nuevos elementos llenando filas primero. */
+    grid-auto-columns: 100px; /* Ancho por defecto para columnas implícitas. */
+    border: 3px solid #000; /* Borde negro para visualizar el límite del contenedor. */
+    background-color: #fff; /* Fondo blanco para las celdas. */
+    gap: 20px; /* Espaciado uniforme de 20px entre celdas (filas y columnas). */
+    padding: 20px; /* Espacio entre el borde del grid y los items. */
+    width: 90vw; /* El grid ocupa el 90% del ancho de la ventana. */
+    margin: auto; /* Centrado horizontal. */
+    margin-top: 30px; /* Separación superior. */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    margin: 10px;
-    padding: 10px;
-    font-size: 30px;
-    color: #fff;
+    background-color: #48e; /* Fondo azul característico. */
+    margin: 10px; /* Espacio extra fuera del item (se suma al gap). */
+    padding: 10px; /* Espacio interno del item. */
+    font-size: 30px; /* Tamaño del texto/número. */
+    color: #fff; /* Texto blanco. */
 }

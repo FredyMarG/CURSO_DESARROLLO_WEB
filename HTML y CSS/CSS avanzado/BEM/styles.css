@@ -6,26 +6,39 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos del selector .lista. */
 .lista{
-    border: 2px solid black;
+    border: 2px solid black; /* Define el contorno del bloque 'lista'. Sirve para visualizar el contenedor principal. */
 }
 
+
+
+/* Estilos del selector .lista--vieja. */
 .lista--vieja{
-    opacity: 0.3;
-    background: #eddd;
+    opacity: 0.3; /* Modificador: reduce la opacidad al 30% para dar una apariencia visual de elemento antiguo o desactivado. */
+    background: #eddd; /* Aplica un color de fondo crema para diferenciar este estado del bloque base. */
 }
-/* UTILIZAMOS 2 GUIONES BAJOS PARA IDENTIFICAR DE DONDE ES EL ELEMENTO */
+
+
+/* Estilos del selector .lista__item. */
 .lista__item{
-    color: grey;
-    margin:10px 0 ;
-    list-style: square;
+    color: grey; /* Define el color de texto gris para los elementos internos del bloque lista. */
+    margin: 10px 0; /* Añade separación vertical de 10px entre los ítems para mejorar la legibilidad. */
+    list-style: square; /* Cambia el estilo del marcador de la lista (bullet) a un cuadrado sólido. */
 }
 
-/* UTILIZAMOS GUIONES PARA IDENTIFICAR LA MODIFICACION DEL ITEM */
+
+
+/* Estilos del selector .item--danino. */
 .item--danino{
-    color: red;
+    color: red; /* Modificador semántico: cambia el color a rojo para indicar peligro, error o un elemento 'dañino'. */
 }
 
+
+
+/* Estilos del selector .item--importante. */
 .item--importante{
-    color: blue;
+    color: blue; /* Modificador semántico: destaca el elemento usando color azul para resaltar su importancia. */
 }

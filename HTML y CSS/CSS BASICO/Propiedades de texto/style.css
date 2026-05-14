@@ -2,16 +2,18 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Propiedades de texto/style.css
  * Carpeta del tema: «Propiedades de texto». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el control sobre la tipografía, alineación y decoración de párrafos.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+/* Estilos del selector p: personalización de la lectura del párrafo. */
 p{
-    color: red;
-    font-family:monserrat;
-    font-size: 18px;
-    font-weight: 500;
-    font-style: oblique;
-    text-align: justify;
-    text-decoration: none;
+    color: red; /* Color del texto. */
+    font-family: monserrat, sans-serif; /* Familia tipográfica con fallback. */
+    font-size: 18px; /* Tamaño de la fuente. */
+    font-weight: 500; /* Grosor de la fuente (Medium). */
+    font-style: oblique; /* Inclinación del texto. */
+    text-align: justify; /* Alineación del texto para ocupar todo el ancho. */
+    text-decoration: none; /* Elimina cualquier decoración como subrayado. */
 }

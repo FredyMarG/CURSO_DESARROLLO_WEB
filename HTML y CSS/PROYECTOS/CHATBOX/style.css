@@ -6,6 +6,9 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -13,6 +16,9 @@
     padding: 0;
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
     --bg-color: color-mix(in srgb, #f62 70%, #fff);
     --cb-color:#fff;
@@ -20,6 +26,9 @@ body{
     background-color: var(--bg-color);
 }
 
+
+
+/* Estilos del selector .chat. */
 .chat{
     max-width: clamp(300px, 70%, 900pc);
     background-color: var(--cb-color);
@@ -28,29 +37,44 @@ body{
     box-shadow: 2px 2px 6px #0003;
 }
 
+
+
+/* Estilos del selector .chat-user. */
 .chat-user{
     display: flex;
     align-items: center;
     border-bottom: 1px solid  var(--darkcolor);
 }
 
+
+
+/* Estilos del selector .chat-user img. */
 .chat-user img{
     max-width: 2.3rem;
     border-radius: 50%;
     margin: 6px;
 }
 
+
+
+/* Estilos del selector .chat-user span. */
 .chat-user span{
     margin-left: 5px;
     font-size: .9rem;
 }
 
+
+
+/* Estilos del selector .chat-content. */
 .chat-content{
     padding: 12px;
     display: flex;
     flex-direction: column;
 }
 
+
+
+/* Estilos del selector .msg. */
 .msg{
     background-color: var(--bg-color);
     color: #fff;
@@ -64,6 +88,9 @@ body{
     width: fit-content;
 }
 
+
+
+/* Pseudo-elemento .msg::before: agrega contenido o decoración adicional. */
 .msg::before{
     content: '';
     position: absolute;
@@ -76,12 +103,18 @@ body{
     z-index: -1;
 }
 
+
+
+/* Estilos del selector .self. */
 .self{
     background-color: var(--darkcolor);
     margin-left: auto;
     border-radius: 9px 9px 0px 9px;
 }
 
+
+
+/* Pseudo-elemento .self::before: agrega contenido o decoración adicional. */
 .self::before{
     background-color: var(--darkcolor);
     clip-path: polygon(57% 0, 100% 100%, 0% 68%);

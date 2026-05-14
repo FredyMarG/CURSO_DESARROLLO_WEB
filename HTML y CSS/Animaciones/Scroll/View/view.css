@@ -6,41 +6,61 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+    margin: 0; /* Reset de márgenes para asegurar que el diseño ocupe todo el ancho disponible. */
+    font-family: sans-serif; /* Fuente base sin remates para mayor legibilidad. */
+    background-color: #ccc; /* Color de fondo gris para contraste con los elementos principales. */
 }
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* El padding y el borde se incluyen dentro de las dimensiones totales de la caja. */
 }
 
+
+
+/* Estilos del selector .crecedor. */
 .crecedor{
-    height: 100vh;
+    height: 100vh; /* Crea un espaciador de una pantalla completa de alto para obligar al usuario a hacer scroll. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    height: 400px;
-    view-timeline: --cajita block;
-    background-color: #48e;
-    padding: 20px;
-    animation: llenar-barra both;
-    animation-timeline: --cajita;
-    animation-timing-function: linear;
-    animation-range-start: contain 0%;
-    animation-range-end: contain 100%;
+    height: 400px; /* Altura fija para el elemento que se va a animar. */
+    view-timeline: --cajita block; /* Crea un Timeline de Vista. Registra el progreso del elemento al cruzar el viewport en el eje vertical (block). */
+    background-color: #48e; /* Color de fondo azul. */
+    padding: 20px; /* Relleno interno. */
+    animation: llenar-barra both; /* Aplica la animación 'llenar-barra'. 'both' mantiene los estilos del inicio y final. */
+    animation-timeline: --cajita; /* Vincula la animación específicamente a la línea de tiempo de visibilidad '--cajita'. */
+    animation-timing-function: linear; /* La progresión del efecto (opacity) es 1:1 con el movimiento del scroll. */
+    animation-range-start: contain 0%; /* La animación comienza justo cuando el elemento entra completamente (contain) en el visor. */
+    animation-range-end: contain 100%; /* La animación termina justo antes de que el elemento empiece a salir del visor. */
 }
 
 
 
 
-/* --- Animación (@keyframes llenar-barra) --- */
+
+
+/* Animación llenar-barra: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes llenar-barra {
+
+
+/* Estilos del selector from. */
     from{
-        opacity: 0;
+        opacity: 0; /* Al inicio del rango definido, el elemento es totalmente invisible. */
     }
+
+
+/* Estilos del selector to. */
     to{
-        opacity: 1;
+        opacity: 1; /* Al final del rango definido, el elemento alcanza su opacidad total. */
     }
 }

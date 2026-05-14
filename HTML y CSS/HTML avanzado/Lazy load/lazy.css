@@ -2,13 +2,16 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/Lazy load/lazy.css
  * Carpeta del tema: «Lazy load». Hoja: «lazy».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: crear espaciadores de gran tamaño para demostrar la carga perezosa (Lazy Load) de imágenes.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* .p: Espaciador estructural para simular contenido extenso. */
 p{
-    height: 100vh;
-    width: 100vw;
-    font-size: 30px;
-    overflow: hidden;
+    height: 100vh; /* Fuerza al párrafo a ocupar el 100% de la altura de la ventana visual. */
+    width: 100vw; /* Asegura que el ancho cubra toda la pantalla. */
+    font-size: 30px; /* Tamaño de fuente grande para marcar las secciones de scroll. */
+    overflow: hidden; /* Evita que el contenido desborde accidentalmente los límites de la pantalla. */
 }

@@ -2,18 +2,36 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Inicio/style.css
  * Carpeta del tema: «Inicio». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar los selectores básicos (etiqueta, clase e ID) y la jerarquía de colores inicial.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* 
+ * Selector de Tipo (Etiqueta): afecta a todos los elementos <li> de la página.
+ * Representa el nivel más bajo de especificidad (1 punto).
+ */
 li{
-    color: gray;
+    color: gray; /* Establece un color gris neutro para los ítems de la lista. */
 }
 
+
+
+/* 
+ * Selector de Clase (.): permite agrupar y diferenciar elementos específicos.
+ * Tiene una especificidad media (10 puntos), ganando al selector de etiqueta.
+ */
 .ingrediente-faltante{
-    color: red;
+    color: red; /* Resalta en rojo los elementos que faltan. */
 }
 
+
+
+/* 
+ * Selector de Identificador (#): apunta a un único elemento exclusivo.
+ * Es el selector con mayor peso en este archivo (100 puntos de especificidad).
+ */
 #ingrediente-secreto{
-    color: blue;
+    color: blue; /* Aplica color azul al elemento marcado como secreto. */
 }

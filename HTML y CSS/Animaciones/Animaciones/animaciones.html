@@ -12,15 +12,39 @@
 <head>
 <!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
 
+    <!-- Codificación de caracteres para soporte de tildes y símbolos -->
     <meta charset="UTF-8">
+    
+    <!-- 
+        Separación de responsabilidades: 
+        Enlazamos el CSS externo para mantener el HTML limpio. 
+        Las animaciones complejas deben residir siempre en archivos .css para aprovechar el caché del navegador.
+    -->
     <link rel="stylesheet" href="animaciones.css">
+    
+    <!-- Viewport: Esencial para que las animaciones se escalen correctamente en dispositivos móviles -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Animaciones</title>
+    
+    <title>Laboratorio de Animaciones CSS3</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- 
+        Contenedor Escenario (.box): 
+        Define el área de visualización. En animaciones, es común usar contenedores 
+        con 'overflow: hidden' o 'position: relative' como anclas.
+    -->
+    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
     <div class="box">
+        <!-- 
+            Elemento Animado (.barra): 
+            Nota de Ingeniería: Para obtener animaciones fluidas (60fps), se recomienda 
+            animar propiedades que no disparen el "layout" o "paint" del navegador, 
+            principalmente 'transform' (scale, translate, rotate) y 'opacity'.
+        -->
+    <!-- Contenedor con clase(s) barra para estilo o disposición. -->
         <div class="barra"></div>
     </div>
 </body>

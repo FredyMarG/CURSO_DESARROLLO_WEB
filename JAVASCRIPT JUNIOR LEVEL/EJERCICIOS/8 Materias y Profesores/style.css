@@ -8,37 +8,38 @@
 
 /* RESET */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho/alto total del elemento */
+    margin: 0;              /* Elimina los márgenes externos por defecto del navegador */
+    padding: 0;             /* Elimina el relleno interno por defecto del navegador */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Establece la fuente principal del sitio */
 }
 
 body {
+    /* Gradiente de fondo para evitar colores planos y aburridos */
     background: linear-gradient(135deg, #eef2f7, #dfe6f0);
-    min-height: 100vh;
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el 100% de la altura de la pantalla */
 }
 
 /* 🔹 CONTENEDOR PRINCIPAL */
 .enunciado {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    transition: 0.3s;
+    width: 90%;             /* El contenedor ocupa el 90% del ancho disponible en pantallas pequeñas */
+    max-width: 1200px;      /* Limita el ancho máximo en pantallas grandes para que no se estire demasiado */
+    margin: 30px auto;      /* 30px de margen arriba/abajo y centrado horizontalmente (auto) */
+    background: #ffffff;    /* Color de fondo blanco sólido */
+    padding: 25px;          /* Espacio interno entre el borde y el contenido */
+    border-radius: 18px;    /* Redondea las esquinas del contenedor */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Añade una sombra suave para dar profundidad */
+    transition: 0.3s;       /* Define la duración de las transiciones (como al hacer hover) */
 }
 
 .enunciado:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Eleva el contenedor 3px hacia arriba al pasar el mouse */
 }
 
 /* 🔹 TITULO */
 .title {
-    text-align: center;
-    margin-bottom: 15px;
+    text-align: center;      /* Centra el texto horizontalmente */
+    margin-bottom: 15px;     /* Espacio inferior para separar del siguiente elemento */
     color: #1e3a8a;
     font-weight: bold; /* Texto en negrita */
     letter-spacing: 1px; /* Espaciado entre letras */
@@ -57,7 +58,7 @@ ol {
 }
 
 li {
-    margin: 8px 0; /* Margen superior/inferior para ítems de lista */
+    margin: 8px 0; /* Espacio vertical entre los elementos de la lista */
     color: #444; /* Color de texto gris */
 }
 
@@ -73,20 +74,20 @@ ul > li {
 /* 🔹 BOTÓN CONTENEDOR */
 .ask {
     text-align: center; /* Centra el contenido horizontalmente */
-    margin-top: 20px; /* Margen superior */
+    margin-top: 20px;   /* Separa el botón del contenido de arriba */
 }
 
 /* 🔥 BOTÓN PRO */
 .btn {
-    padding: 12px 25px;
-    border: none;
-    border-radius: 12px;
+    padding: 12px 25px;   /* Espacio interno (relleno) del botón */
+    border: none;         /* Elimina el borde por defecto del botón */
+    border-radius: 12px;  /* Redondea las esquinas del botón */
     /* Fondo degradado para el botón */
     background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
+    color: white;         /* Color del texto del botón */
+    font-size: 16px;      /* Tamaño de la letra */
+    font-weight: bold;    /* Texto en negrita */
+    cursor: pointer;      /* Cambia el cursor a "mano" al pasar por encima */
     transition: 0.3s; /* Transición suave para efectos interactivos */
     /* Sombra para el botón */
     box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
@@ -100,12 +101,12 @@ ul > li {
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.95); /* Reduce ligeramente el tamaño al hacer clic para simular presión */
 }
 
 /* 🔹 RESULTADO */
 .sol {
-    width: 90%;
+    width: 90%;              /* Mismo ancho que el enunciado */
     max-width: 1200px; /* Ancho máximo */
     margin: 30px auto; /* Centrado horizontalmente con margen superior/inferior */
     padding: 25px; /* Relleno interno */
@@ -120,8 +121,8 @@ ul > li {
 
 /* 🔹 TITULO RESULTADO */
 .sol h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: center;   /* Centra el título del resultado */
+    margin-bottom: 20px;  /* Espacio inferior */
     color: #1e40af;
 }
 
@@ -164,9 +165,9 @@ thead .title {
 
 /* 🔹 ENCABEZADOS */
 thead th {
-    padding: 12px; /* Relleno interno */
-    text-align: center; /* Centrado de texto */
-    font-size: 14px; /* Tamaño de fuente */
+    padding: 12px;      /* Espacio interno de las celdas del encabezado */
+    text-align: center; /* Centra el contenido */
+    font-size: 14px;    /* Tamaño de letra más pequeño para el header */
     /*
        BORDER-BOTTOM
        Crea una línea azul en la parte inferior de cada celda de encabezado.
@@ -177,18 +178,18 @@ thead th {
 /* 🔹 FILAS */
 
 tbody td::first-letter{
-    text-transform: uppercase;
+    text-transform: uppercase; /* Convierte la primera letra de cada celda a mayúscula */
 }
 
 tbody tr {
-    transition: 0.2s; /* Transición suave para efectos de hover */
+    transition: 0.2s; /* Suaviza el cambio de color al hacer hover */
 }
 
 /* 🔥 SEPARADOR ENTRE FILAS */
 tbody td {
-    padding: 12px; /* Relleno interno */
-    text-align: center; /* Centrado de texto */
-    font-size: 14px; /* Tamaño de fuente */
+    padding: 12px;      /* Espacio interno de las celdas de datos */
+    text-align: center; /* Centra el contenido */
+    font-size: 14px;    /* Tamaño de letra de los datos */
 
     /* 🔵 LÍNEA INFERIOR */
     /*
@@ -215,7 +216,7 @@ tbody tr:hover {
 
 /* 🔹 ÚLTIMA FILA SIN BORDE */
 tbody tr:last-child td {
-    border-bottom: none;
+    border-bottom: none; /* Quita el borde de la última fila para que no choque con el redondeo de la tabla */
 }
 
 /* ANIMACIÓN */

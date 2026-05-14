@@ -2,115 +2,162 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Grid/Area/area.css
  * Carpeta del tema: «Area». Hoja: «area».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el diseño de layouts complejos utilizando áreas nominadas (grid-template-areas) y diseño responsivo.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración del canvas del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    background-color: #48e2;
+    margin: 0; /* Elimina márgenes por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    min-height: 100vh; /* Asegura que el cuerpo ocupe al menos el alto de la ventana. */
+    display: flex; /* Organiza el header, el grid principal y el footer en un flujo flexible. */
+    flex-direction: column; /* Apila los elementos principales verticalmente. */
+    align-items: start; /* Alineación inicial para los elementos del flujo. */
+    background-color: #48e2; /* Fondo azul muy tenue con transparencia. */
 }
 
+
+
+/* Configuración del Box Model: garantiza que el padding no altere las dimensiones calculadas. */
 body, div{
-    box-sizing: border-box;
+    box-sizing: border-box; 
 }
 
+
+
+/* Estilos base para contenedores semánticos: diseño tipo "caja blanca". */
 header, nav, main, aside, footer{
-    box-sizing: border-box;
-    padding: 20px;
-    border: 2px solid #444;
-    background-color: #fff;
+    box-sizing: border-box; /* Normalización de medidas. */
+    padding: 20px; /* Relleno interno uniforme. */
+    border: 2px solid #444; /* Borde oscuro para delimitar las áreas. */
+    background-color: #fff; /* Fondo blanco para el contenido. */
 }
 
+
+
+/* 
+ * .grid: El motor principal del layout.
+ * Utiliza nombres de áreas para posicionar los elementos hijos de forma semántica.
+ */
 .grid{
-    flex-grow: 1;
-    max-width: 1460px;
-    display: grid;
-    grid-template-columns:repeat(minmax(200px, 1fr) minmax(300px, 3fr) minmax(200px, 1fr));
-    grid-template-rows: 1fr;
-    grid-auto-flow: dense;
-    margin: auto;
-    gap: 10px;
-    padding: 10px;
-    min-height: 100vh;
+    flex-grow: 1; /* Permite que el grid se expanda para llenar el espacio entre el header y el footer. */
+    max-width: 1460px; /* Limita el ancho en monitores ultra-wide. */
+    display: grid; /* Habilita Grid Layout. */
+    /* 
+     * grid-template-columns: Define 3 columnas dinámicas.
+     * - nav/aside: Mínimo 200px, máximo 1 fracción del espacio.
+     * - main: Mínimo 300px, máximo 3 fracciones (prioridad de espacio).
+     */
+    grid-template-columns: minmax(200px, 1fr) minmax(300px, 3fr) minmax(200px, 1fr);
+    grid-template-rows: 1fr; /* Una sola fila que se expande. */
+    grid-auto-flow: dense; /* Algoritmo de empaquetado para evitar huecos vacíos. */
+    margin: auto; /* Centrado horizontal del grid. */
+    gap: 10px; /* Espaciado uniforme entre celdas. */
+    padding: 10px; /* Relleno externo de la rejilla. */
+    min-height: 100vh; /* Altura mínima de visualización. */
+    /* Mapeo visual del layout asignando nombres de áreas a las columnas. */
     grid-template-areas:
     "nav main aside";
 }
 
+
+
+/* header: Sección superior que abarca todo el ancho. */
 header{
-    background-color: #48e;
-    border-color: #48e;
-    color: #fff;
-    width: 100%;
-    padding: 30px;
-    text-align: center;
+    background-color: #48e; /* Azul intenso corporativo. */
+    border-color: #48e; /* Sincroniza el borde con el fondo. */
+    color: #fff; /* Texto blanco. */
+    width: 100%; /* Ocupa el 100% del viewport. */
+    padding: 30px; /* Mayor énfasis visual. */
+    text-align: center; /* Centrado de títulos. */
 }
 
+
+
+/* nav: Barra lateral de navegación posicionada mediante grid-area. */
 nav{
-    grid-area: nav;
-    max-width: 300px;
+    grid-area: nav; /* Se vincula al nombre definido en 'grid-template-areas'. */
+    max-width: 300px; /* Restricción de ancho máximo. */
 }
 
+
+
+/* main: Contenedor principal de contenido. */
 main{
-    grid-area: main;
-    min-width: 300px;
+    grid-area: main; /* Ocupa la columna central del grid. */
+    min-width: 300px; /* Garantiza un ancho mínimo de lectura. */
 }
 
+
+
+/* aside: Barra lateral de contenido complementario. */
 aside{
-    grid-area:aside;
+    grid-area: aside; /* Se posiciona en la tercera columna. */
 }
 
+
+
+/* footer: Sección inferior de cierre. */
 footer{
-    background-color: #000;
-    color: #fff;
-    width: 100%;
-    padding: 50px;
-    text-align: center;
+    background-color: #000; /* Fondo negro sólido. */
+    color: #fff; /* Texto blanco. */
+    width: 100%; /* Ocupa el ancho total. */
+    padding: 50px; /* Espacio amplio para información legal o enlaces. */
+    text-align: center; /* Centrado de créditos. */
 }
 
+
+
+/* Comportamiento de barras laterales: permanecen visibles durante el scroll. */
 nav, aside{
-    position: sticky;
-    top: 0;
-    height: 100vh;
+    position: sticky; /* Se fija a la pantalla al hacer scroll. */
+    top: 0; /* Anclaje al borde superior. */
+    height: 100vh; /* Altura de la ventana para un scroll interno independiente si fuera necesario. */
 }
 
 
-/* --- Consultas de medio (@media) --- */
+
+/* Media Query: Diseño para Tablets (máximo 800px). */
 @media screen and (max-width:800px) {
+    /* Reduce a dos columnas: navegación y contenido principal. */
     .grid{
         grid-template-columns: minmax(200px, 1fr) minmax(300px, 3fr);
     }
-
+    
+    /* Desactiva el comportamiento sticky para mejorar el rendimiento en móviles. */
     nav, aside{
         height: auto;
         position: static;
     }
 
+    /* Oculta la barra lateral secundaria para priorizar el contenido principal. */
     aside{
         display: none;
     }
 }
 
 
-/* --- Consultas de medio (@media) --- */
+/* Media Query: Diseño para Smartphones (máximo 580px). */
 @media screen and (max-width:580px) {
+    /* Layout de una sola columna: apilamiento vertical semántico. */
     .grid{
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Una columna que abarca todo el ancho. */
+        /* Reconfiguración de las áreas para lectura vertical. */
         grid-template-areas: 
         "nav"
         "main"
         "aside";
     }
+    
     nav, aside{
         height: auto;
         position: static;
     }
+    
     aside{
-        display: none;
+        display: none; /* Mantiene el aside oculto en móviles muy pequeños. */
     }
 }

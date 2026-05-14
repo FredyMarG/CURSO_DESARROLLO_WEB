@@ -2,47 +2,83 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Pseudoelementos/styles.css
  * Carpeta del tema: «Pseudoelementos». Hoja: «styles».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de pseudo-elementos para estilizar partes específicas de un elemento o insertar contenido virtual.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos base para los contenedores genéricos. */
 div{
-    padding: 20px;
+    padding: 20px; /* Espaciado interno para separar el contenido de los bordes. */
 }
 
+
+/* 
+ * Pseudo-elemento ::first-letter:
+ * Se utiliza para aplicar estilos solo a la primera letra de la primera línea de un bloque.
+ */
 h1::first-letter{
-    color: red;
-    font-size: 3em;
-    letter-spacing: -8px;
+    color: red; /* Destaca la letra capital en rojo. */
+    font-size: 3em; /* Aumenta significativamente el tamaño (efecto de letra capitular). */
+    letter-spacing: -8px; /* Ajusta el espaciado para un efecto visual estilizado. */
 }
 
+
+/* 
+ * Pseudo-elemento ::first-line:
+ * Aplica estilos únicamente a la primera línea de texto de un elemento a nivel de bloque.
+ */
 div::first-line{
-    color: red;
-    font-weight: bold;
+    color: red; /* Cambia el color de la línea inicial. */
+    font-weight: bold; /* Resalta el inicio del párrafo en negrita. */
 }
 
-/* AL SELECCIONAR O MARCAR UN TEXTO CAMBIAMOS EL COLOR */
 
+/* 
+ * Pseudo-elemento ::selection:
+ * Controla la apariencia del texto cuando es seleccionado o resaltado por el usuario con el ratón.
+ */
 div::selection{
-    background: #04e9e6;
-    color:white;
+    background: #04e9e6; /* Color de fondo turquesa al seleccionar. */
+    color: white; /* Color de texto blanco para asegurar el contraste. */
 }
 
+
+/* 
+ * Pseudo-elemento ::placeholder:
+ * Permite dar estilo al texto de sugerencia (placeholder) de los elementos input y textarea.
+ */
 input::placeholder{
-    color: blanchedalmond;
+    color: blanchedalmond; /* Color suave para el texto indicativo del formulario. */
 }
 
-/* MODIFICANDO EL MARCADOR DE LOS LI */
+
+/* 
+ * Pseudo-elemento ::marker:
+ * Se utiliza para estilizar el marcador de los elementos de lista (los puntos, números o iconos).
+ */
 li::marker{
-    color: darkgoldenrod;
+    color: darkgoldenrod; /* Cambia el color del círculo o número de la lista. */
 }
 
+
+/* 
+ * Pseudo-elemento ::before:
+ * Crea un elemento virtual como el primer hijo del elemento seleccionado.
+ * Nota: La propiedad 'content' es obligatoria para que el pseudo-elemento sea visible.
+ */
 li::before{
-    content: "Antes";
-    color: red;
+    content: "Antes "; /* Inserta texto o iconos antes del contenido real. */
+    color: red; /* Color distintivo para el prefijo. */
 }
 
+
+/* 
+ * Pseudo-elemento ::after:
+ * Crea un elemento virtual como el último hijo del elemento seleccionado.
+ */
 li::after{
-    content: "Despues";
-    color: blue;
+    content: " Despues"; /* Inserta texto o iconos después del contenido real. */
+    color: blue; /* Color azul para el sufijo. */
 }

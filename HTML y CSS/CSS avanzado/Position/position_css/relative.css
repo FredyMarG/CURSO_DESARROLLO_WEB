@@ -1,50 +1,41 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Position/position_css/relative.css
- * Carpeta del tema: «position_css». Hoja: «relative».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Carpeta del tema: «Position». Hoja: «relative».
+ * Propósito: demostrar el funcionamiento básico de 'position: relative' y el uso de coordenadas.
+ * Cómo leerlo: cada caja muestra cómo se desplaza respecto a su posición original sin afectar a los demás.
  */
 
-/*
-   POSITION: STATIC (Valor por defecto)
-   - Los elementos se renderizan en el orden normal del documento.
-   - Las propiedades 'top', 'bottom', 'left', 'right' y 'z-index' no tienen efecto.
-*/
+/* Configuración global. */
 body{
-    margin: 0; /* Elimina el margen predeterminado del navegador */
-    background-color: #ededed; /* Color de fondo gris claro */
+    margin: 0; /* Limpieza de márgenes. */
+    background-color: #ededed; /* Fondo gris claro. */
 }
+
+/* 
+ * .box: clase base para cajas posicionadas. 
+ * 'relative' permite usar coordenadas (top, left, etc.) manteniendo el espacio original.
+ */
 .box{
-    width: 100px; /* Ancho fijo de la caja */
-    height: 100px; /* Altura fija de la caja */
-    background: orange; /* Color de fondo naranja */
-    color: #fff; /* Color de texto blanco */
-    /*
-       POSITION: RELATIVE
-       - El elemento permanece en el flujo normal del documento.
-       - 'top', 'left', 'right', 'bottom' lo desplazan desde su posición original,
-         pero su espacio original sigue reservado en el layout.
-    */
-    position: relative;
+    width: 100px; /* Ancho de la caja. */
+    height: 100px; /* Alto de la caja. */
+    background: orange; /* Color naranja base. */
+    color: #fff; /* Texto blanco. */
+    position: relative; /* Habilita el desplazamiento relativo a su posición inicial. */
 }
 
+/* Caja azul desplazada. */
 .box-blue{
-    background-color: blue; /* Color de fondo azul */
-    top: 70px; /* Desplaza la caja 70px hacia abajo desde su posición original */
-    left: 20px; /* Desplaza la caja 20px hacia la derecha desde su posición original */
-    /*
-       Z-INDEX
-       - Controla el orden de apilamiento de los elementos posicionados.
-       - Un valor más alto significa que el elemento se muestra más "arriba" (más cerca del usuario).
-       - Solo funciona en elementos con 'position' diferente de 'static'.
-    */
-    z-index: 10; /* Coloca esta caja en una capa de apilamiento */
+    background-color: blue; /* Cambia a azul. */
+    top: 70px; /* Se desplaza 70px hacia abajo desde su origen. */
+    left: 20px; /* Se desplaza 20px hacia la derecha desde su origen. */
+    z-index: 10; /* Control de apilamiento. */
 }
 
+/* Caja roja desplazada. */
 .box-red{
-    top: 150px; /* Desplaza la caja 150px hacia abajo */
-    left: 40px; /* Desplaza la caja 40px hacia la derecha */
-    background: red; /* Color de fondo rojo */
-    z-index: 30; /* Coloca esta caja en una capa de apilamiento superior a la azul */
+    top: 150px; /* Se desplaza 150px hacia abajo. */
+    left: 40px; /* Se desplaza 40px hacia la derecha. */
+    background: red; /* Color rojo. */
+    z-index: 30; /* Se coloca encima de la caja azul si se solapan. */
 }

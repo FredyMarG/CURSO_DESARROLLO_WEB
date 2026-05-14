@@ -6,37 +6,51 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-    background-color: #999;
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para un control total del layout. */
+    font-family: sans-serif; /* Define una tipografía limpia sin remates. */
+    box-sizing: border-box; /* Asegura que el padding y border no aumenten el tamaño total de los elementos. */
+    background-color: #999; /* Color de fondo gris neutro para el cuerpo. */
 }
 
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
 .grid{
-    display: grid;
-    height: 80vh;
-    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
-    grid-template-rows: repeat(3, 200px);
-    grid-auto-rows: 150px;
-    grid-auto-flow: row;
-    grid-auto-columns: 1fr;
-    margin: auto;
-    margin-top: 30px;
-    gap: 20px;
+    display: grid; /* Activa el contexto de Grid Layout en el contenedor. */
+    height: 80vh; /* Define la altura del grid como el 80% de la altura de la ventana (viewport). */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Layout responsivo: crea columnas de mínimo 250px que se ajustan y expanden automáticamente. */
+    grid-template-rows: repeat(3, 200px); /* Define explícitamente las primeras 3 filas con una altura de 200px cada una. */
+    grid-auto-rows: 150px; /* Define la altura de las filas creadas implícitamente cuando el contenido excede el template. */
+    grid-auto-flow: row; /* Determina que los nuevos elementos se posicionen llenando filas primero. */
+    grid-auto-columns: 1fr; /* Define el ancho por defecto para columnas generadas dinámicamente. */
+    margin: auto; /* Centra el contenedor horizontalmente dentro de su padre. */
+    margin-top: 30px; /* Añade una separación superior de 30px. */
+    gap: 20px; /* Establece un espacio de 20px entre las celdas (filas y columnas). */
 }
 
+
+
+/* Elemento individual dentro de una lista o rejilla. */
 .grid-item{
-    background-color: #48e;
-    padding: 10px;
-    font-size: 30px;
-    color: #fff;
+    background-color: #48e; /* Color de fondo azul vibrante para destacar los items. */
+    padding: 10px; /* Espacio interno entre el borde y el contenido del item. */
+    font-size: 30px; /* Tamaño de fuente grande para mejorar la legibilidad del número/texto. */
+    color: #fff; /* Color de texto blanco para contraste alto sobre el fondo azul. */
 }
 
 
-/* --- Consultas de medio (@media) --- */
+
+
+/* Media query: adapta el diseño a pantallas o condiciones específicas. */
 @media screen and (max-width: 500px) {
+
+
+/* Contenedor de cuadrícula para distribuir elementos en filas y columnas. */
     .grid{
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Cambia a auto-fill para permitir más columnas pequeñas (min 100px) en dispositivos móviles. */
     }
 }

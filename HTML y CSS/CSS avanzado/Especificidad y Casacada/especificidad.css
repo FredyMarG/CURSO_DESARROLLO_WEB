@@ -2,21 +2,66 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Avanzado/Especificidad y Casacada/especificidad.css
  * Carpeta del tema: «Especificidad y Casacada». Hoja: «especificidad».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar la jerarquía de selectores (especificidad) y estilos base independientes.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-/* EN CSS ES MAS ESPECIFICO (PRIMORDIAL) EL ID, LUEGO LA CLASE Y POR ULTIMO EL TAG O LA ETIQUETA */
+
+
+/* --- ESTILOS DE ESTRUCTURA Y RESET (Base para la visualización) --- */
+
+/* Estilos globales del cuerpo del documento. */
+body {
+    margin: 0; /* Reset de márgenes. */
+    font-family: sans-serif; /* Tipografía limpia. */
+    background-color: #f4f4f9; /* Color de fondo gris pálido. */
+    padding: 20px; /* Espaciado interno general. */
+}
+
+/* Contenedor principal centrado para el contenido de la lección. */
+.container {
+    max-width: 800px; /* Límite de ancho para lectura óptima. */
+    margin: 0 auto; /* Centrado horizontal automático. */
+    background-color: #fff; /* Fondo blanco. */
+    padding: 30px; /* Relleno interior. */
+    border-radius: 8px; /* Esquinas suavizadas. */
+    border: 1px solid #ddd; /* Borde sutil de definición. */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Sombra suave para profundidad. */
+}
+
+/* Estilos para etiquetas de código insertadas en párrafos. */
+code {
+    background: #eee; /* Fondo gris claro para destacar. */
+    padding: 2px 4px; /* Pequeño relleno lateral. */
+    border-radius: 4px; /* Bordes ligeramente curvos. */
+}
+
+
+/* --- PRÁCTICA DE ESPECIFICIDAD --- */
+/* 
+ * La especificidad es un peso que se aplica a una declaración CSS determinada.
+ * Se calcula según el tipo de selector:
+ * - Identificadores (#): 100 puntos.
+ * - Clases/Atributos (.): 10 puntos.
+ * - Elementos (etiquetas): 1 punto.
+ */
+
+/* Selector de ID (#titulo). Alta prioridad (100 puntos). */
 #titulo{
-    color: aqua;
+    color: aqua; /* Color cian. Gana a las clases y etiquetas normales. */
 }
 
+/* Selector de Clase (.titulo). Prioridad media (10 puntos). */
 .titulo{
-    color: blueviolet;
+    color: blueviolet; /* Color violeta. Pierde contra el ID. */
 }
 
-/* IMPORTANT ES EL ATRIBUTO QUE PRIMA SOBRE CUALQUIER ELEMENTO CLASE O ID */
-
+/* Selector de Etiqueta (h1). Prioridad baja (1 punto). */
 h1{
-    color: brown !important;
+    /* 
+     * La regla !important es una excepción a la especificidad. 
+     * Se utiliza para forzar un estilo por encima de cualquier otro selector,
+     * incluso de estilos en línea o IDs.
+     */
+    color: brown !important; 
 }

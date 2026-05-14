@@ -2,26 +2,36 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/HTML Avanzado/HTML Semantico/semantico.css
  * Carpeta del tema: «HTML Semantico». Hoja: «semantico».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de etiquetas semánticas y el posicionamiento de elementos estructurales como el footer.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normalización del modelo de caja y espaciado inicial. */
 *{
-    margin: 0;
-    box-sizing: border-box;
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para un control total. */
+    box-sizing: border-box; /* Incluye el padding y el borde en el cálculo del ancho y alto total. */
 }
 
+
+
+/* Estilos globales: configuración del contenedor raíz para el layout. */
 body{
-    position: relative;
-    height: 100vh;
+    position: relative; /* Define un contexto de posicionamiento para que el footer absoluto se ancle aquí. */
+    height: 100vh; /* Fuerza al cuerpo a ocupar el 100% de la altura de la ventana visual. */
+    font-family: sans-serif; /* Tipografía limpia para mejorar la legibilidad del contenido semántico. */
 }
+
+
+/* footer: Pie de página semántico posicionado de forma fija en la base. */
 footer{
-    position: absolute;
-    bottom: 0;
-    padding: 20px;
-    font-size: 14px;
-    background-color: #333;
-    color: #ddd;
-    width: 100%;
-    text-align: center;
+    position: absolute; /* Extrae el elemento del flujo normal para posicionarlo respecto al body. */
+    bottom: 0; /* Lo ancla exactamente en el borde inferior del documento. */
+    padding: 20px; /* Espaciado interno para dar aire al texto legal o créditos. */
+    font-size: 14px; /* Tamaño de fuente reducido para información secundaria. */
+    background-color: #333; /* Color de fondo oscuro para separar visualmente el cierre del sitio. */
+    color: #ddd; /* Texto en gris claro para asegurar el contraste sobre el fondo oscuro. */
+    width: 100%; /* Garantiza que la barra abarque todo el ancho horizontal. */
+    text-align: center; /* Alineación central para una presentación equilibrada. */
 }

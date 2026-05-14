@@ -6,48 +6,71 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+    margin: 0; /* Elimina márgenes por defecto para evitar barras de desplazamiento innecesarias. */
+    font-family: sans-serif; /* Aplica una fuente legible y estándar. */
+    background-color: #ccc; /* Fondo gris neutro para el lienzo de la página. */
 }
 
+
+
+/* Estilos del selector div. */
 div{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garantiza que el padding y bordes no alteren el ancho definido de los divs. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    margin: 20px;
-    background-color: #fff;
-    border: 4px solid #48e;
-    padding: 6px;
-    border-radius: 39px;
-    transition: border .6s steps(6);
+    margin: 20px; /* Separación externa del contenedor principal. */
+    background-color: #fff; /* Fondo blanco para la caja contenedora. */
+    border: 4px solid #48e; /* Borde azul inicial. */
+    padding: 6px; /* Espacio interno para que la barra no toque los bordes. */
+    border-radius: 39px; /* Esquinas redondeadas estilo cápsula. */
+    transition: border .6s steps(6); /* Anima el cambio de color del borde en 6 saltos discretos en lugar de forma fluida. */
 }
 
+
+
+/* Estilos del selector .barra. */
 .barra{
-    padding: 40px;
-    background-color: #48e;
-    border-radius: 30px;
-    width: 10%;
-    transition: width .6s steps(6), background-color .6s steps(6);
+    padding: 40px; /* Define el grosor vertical de la barra interna. */
+    background-color: #48e; /* Color azul de relleno inicial. */
+    border-radius: 30px; /* Bordes internos redondeados. */
+    width: 10%; /* Ancho de inicio de la barra. */
+    transition: width .6s steps(6), background-color .6s steps(6); /* Transición múltiple: cambia ancho y color usando la función steps para un efecto "segmentado". */
 }
 
+
+
+/* Estado o pseudo-clase .barra:hover: estilo cuando el usuario interactúa. */
 .barra:hover{
-    width: 100%;
-    transition-duration: 3s;
-    background-color: #f44;
+    width: 100%; /* Al pasar el cursor, la barra busca ocupar todo el ancho. */
+    transition-duration: 3s; /* Sobrescribe la duración original (.6s) para que el llenado sea mucho más lento (3 segundos). */
+    background-color: #f44; /* Cambia el color a un tono rojizo durante la interacción. */
 }
 
+
+
+/* Estado o pseudo-clase .box:has(.barra:hover): estilo cuando el usuario interactúa. */
 .box:has(.barra:hover){
-    border: 4px solid #f44;
-    transition-duration: 3s;
+    border: 4px solid #f44; /* Selector relacional: cambia el borde del PADRE (.box) cuando el HIJO (.barra) está en hover. */
+    transition-duration: 3s; /* Sincroniza la velocidad del cambio de borde del padre con la velocidad de la barra. */
 }
 
 
-/* --- Consultas de medio (@media) --- */
+
+
+/* Media query: adapta el diseño a pantallas o condiciones específicas. */
 @media (prefers-reduced-motion: reduce){
+
+
+/* Estilos del selector .barra .box. */
     .barra .box{
-        animation: none;
+        animation: none; /* Accesibilidad: Desactiva animaciones automáticas para usuarios con sensibilidad al movimiento. */
     }
 }

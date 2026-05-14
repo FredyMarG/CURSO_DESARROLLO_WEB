@@ -6,6 +6,9 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -13,6 +16,9 @@
     padding: 0;
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
     --bg-color: #ff9464;
     --card-color:#fff;
@@ -21,11 +27,17 @@ body{
     background-color: var(--bg-color);
 }
 
+
+
+/* Sección interactiva de preguntas frecuentes o acordeón. */
 .faq{
     max-width: clamp(300px, 70%, 900px);
     margin: auto;
 }
 
+
+
+/* Estilos del selector details. */
 details{
     background-color: var(--card-color);
     margin: 7px;
@@ -36,19 +48,31 @@ details{
     overflow: hidden;
 }
 
+
+
+/* Estilos del selector details[open]. */
 details[open]{
     max-height: 400px;
 }
 
+
+
+/* Bloque de contenido con información principal. */
 details[open] .content{
     animation: aparecer 1s .3s both;
 }
 
+
+
+/* Estilos del selector summary. */
 summary{
     user-select: none;
     position: relative;
 }
 
+
+
+/* Bloque de contenido con información principal. */
 .content {
     padding:5px 10px;
     margin:10px;
@@ -57,10 +81,16 @@ summary{
     color: var(--text-color);
 }
 
+
+
+/* Pseudo-elemento summary::marker: agrega contenido o decoración adicional. */
 summary::marker{
     content: '';    
 }
 
+
+
+/* Pseudo-elemento summary::before: agrega contenido o decoración adicional. */
 summary::before{
     content: '+';
     color: var(--darkcolor);
@@ -70,6 +100,9 @@ summary::before{
     top: -2px;
 }
 
+
+
+/* Pseudo-elemento details[open] summary::before: agrega contenido o decoración adicional. */
 details[open] summary::before{
     content: '-';
     font-weight: 900;
@@ -77,32 +110,52 @@ details[open] summary::before{
     top: -2px;
 }
 
+
+
+/* Estilos del selector details b. */
 details b {
     background-color: var(--darkcolor);
     color: #fff;
     padding:2px 4px;
 }
 
+
+
+/* Estado o pseudo-clase details:nth-child(2) b: estilo cuando el usuario interactúa. */
 details:nth-child(2) b{
     background-color: #48e;
 }
 
+
+
+/* Estado o pseudo-clase details:nth-child(3) b: estilo cuando el usuario interactúa. */
 details:nth-child(3) b{
     background-color: #4b7;
 }
 
 
-/* --- Animación (@keyframes aparecer) --- */
+
+
+/* Animación aparecer: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes aparecer {
+
+
+/* Estilos del selector from. */
     from{
         opacity: 0;
         translate: 0 -20px;
     }
 
+
+
+/* Estilos del selector 50%. */
     50%{
         border-top:1px solid transparent ;
     }
 
+
+
+/* Estilos del selector to. */
     to{
         opacity: 1;
         translate: 0 0;
@@ -111,8 +164,13 @@ details:nth-child(3) b{
 }
 
 
-/* --- Consultas de medio (@media) --- */
+
+
+/* Media query: adapta el diseño a pantallas o condiciones específicas. */
 @media screen and (min-width:600px) {
+
+
+/* Sección interactiva de preguntas frecuentes o acordeón. */
     .faq{
         max-width: clamp(300px, 70%,700px);
     }

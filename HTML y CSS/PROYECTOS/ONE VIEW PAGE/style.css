@@ -6,6 +6,9 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -13,6 +16,9 @@
     padding: 0;
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
     --bg-color: #ff9464;
     --card-color:#fff;
@@ -22,6 +28,9 @@ body{
     background-size: cover;
 }
 
+
+
+/* Estilos del selector header. */
 header{
     min-height: 200dvh;
     display: flex;
@@ -29,6 +38,9 @@ header{
     mix-blend-mode: difference;
 }
 
+
+
+/* Estilos del selector .text-container. */
 .text-container{
     min-height: 100vh;
     position: fixed;
@@ -45,16 +57,25 @@ header{
     animation-timeline: scroll();
 }
 
+
+
+/* Estilos del selector .left-text. */
 .left-text{
     color:#48e;
     padding-left: 4vw;
     filter: drop-shadow(0px 0px 1px #48e) drop-shadow(0px 0px 9px #48e);
 }
 
+
+
+/* Estilos del selector .right-text. */
 .right-text{
     font-weight: 900;
 }
 
+
+
+/* Estilos del selector img. */
 img{
     mix-blend-mode: screen;
     filter: grayscale();
@@ -67,8 +88,13 @@ img{
 }
 
 
-/* --- Animación (@keyframes aparecer) --- */
+
+
+/* Animación aparecer: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes aparecer {
+
+
+/* Estilos del selector 0%. */
     0%{
         opacity: 0;
         filter: grayscale();
@@ -76,6 +102,9 @@ img{
         scale: .7;
     }
 
+
+
+/* Estilos del selector 100%. */
     100%{
         opacity: 1;
         filter: grayscale();
@@ -85,14 +114,22 @@ img{
 }
 
 
-/* --- Animación (@keyframes aparecer-texto) --- */
+
+
+/* Animación aparecer-texto: define los cambios de estilo que ocurren con el tiempo. */
 @keyframes aparecer-texto {
+
+
+/* Estilos del selector 0%. */
     0%{
         opacity: 0;
         translate: 0 20%;
         scale: 2;
     }
 
+
+
+/* Estilos del selector 100%. */
     100%{
         opacity: 1;
         translate: 0 0;
@@ -101,8 +138,13 @@ img{
 }
 
 
-/* --- Consultas de medio (@media) --- */
+
+
+/* Media query: adapta el diseño a pantallas o condiciones específicas. */
 @media screen and (max-width: 900px) {
+
+
+/* Estilos del selector .text-container. */
     .text-container{
         justify-content: space-evenly;
     }

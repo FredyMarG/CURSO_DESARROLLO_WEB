@@ -6,6 +6,9 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza márgenes y box-sizing. */
 *{
     box-sizing: border-box;
     font-family: sans-serif;
@@ -13,10 +16,16 @@
     padding: 0;
 }
 
+
+
+/* Estilos del selector label, .sidebar-nav. */
 label, .sidebar-nav{
     user-select: none;
 }
 
+
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
 body{
     --bg-color: color-mix(in srgb, #f62 70%, #fff);
     --sidebar-color: #fff;
@@ -25,8 +34,11 @@ body{
     background-color: var(--bg-color);
 }
 
-/*=========================  SIDEBAR STYLES  =========================*/
 
+
+
+
+/* Estilos del selector .sidebar. */
 .sidebar{
     background-color: var(--sidebar-color);
     position: fixed;
@@ -39,11 +51,17 @@ body{
     padding: 30px 0 30px 0;
 }
 
+
+
+/* Estilos del selector .sidebar-nav. */
 .sidebar-nav{
     flex: 1;
     display: flex;
 }
 
+
+
+/* Estilos del selector .sidebar-nav ul. */
 .sidebar-nav ul{
     display: flex;
     flex-direction: column;
@@ -51,6 +69,9 @@ body{
     width: 100%;
 }
 
+
+
+/* Estilos del selector .sidebar-item. */
 .sidebar-item{
     list-style: none;
     display: flex;
@@ -63,22 +84,34 @@ body{
     position: relative;
 }
 
+
+
+/* Estilos del selector .sidebar-item span. */
 .sidebar-item span{
     padding: 12px;
     font-size: 2rem;
 }
 
+
+
+/* Estilos del selector .sidebar-item a. */
 .sidebar-item a{
     color:inherit ;
     text-decoration: none;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar-item:hover: estilo cuando el usuario interactúa. */
 .sidebar-item:hover{
     background-color: var(--bg-color);
     color: var(--sidebar-color);
 }
 
 .sidebar-item::before,
+
+
+/* Pseudo-elemento .sidebar-item::after: agrega contenido o decoración adicional. */
 .sidebar-item::after{
     content: '';
     background-color: var(--bg-color);
@@ -89,12 +122,18 @@ body{
     background-color: transparent;
 }
 
+
+
+/* Pseudo-elemento .sidebar-item:hover::before: agrega contenido o decoración adicional. */
 .sidebar-item:hover::before{
     top: -18px;
     border-bottom-right-radius: 25px;
     box-shadow: 4px 4px 0 4px var(--bg-color);
 }
 
+
+
+/* Pseudo-elemento .sidebar-item:hover::after: agrega contenido o decoración adicional. */
 .sidebar-item:hover::after{
     bottom: -18px;
     border-top-right-radius: 25px;
@@ -102,12 +141,18 @@ body{
     box-shadow: 4px -4px 0 4px var(--bg-color);
 }
 
+
+
+/* Estilos del selector .sidebar-picture. */
 .sidebar-picture{
     margin-left: 1.6rem;
     position: relative;
     z-index: 10;
 }
 
+
+
+/* Estilos del selector .sidebar-picture img. */
 .sidebar-picture img{
     width: clamp(4rem, 75%, 20rem);
     margin: auto;
@@ -115,51 +160,81 @@ body{
     filter: hue-rotate(-22deg);
 }
 
+
+
+/* Estilos del selector .sidebar-profile img. */
 .sidebar-profile img{
     width: 2rem;
     border-radius: 50%;
 }
 
+
+
+/* Estilos del selector .item-profile. */
 .item-profile{
     margin: 12px;
     color: var(--text-color);
     width: fit-content;
 }
 
+
+
+/* Estado o pseudo-clase .item-profile:hover: estilo cuando el usuario interactúa. */
 .item-profile:hover{
     width: fit-content;
     border-radius: 25px ;
     color: var(--sidebar-color);
 }
 
+
+
+/* Estilos del selector .item-profile .profile-option. */
 .item-profile .profile-option{
     font-size: .8rem;
     padding: 0 12px 0 9px;
     color: inherit;
 }
 
+
+
+/* Estado o pseudo-clase .item-profile:hover img: estilo cuando el usuario interactúa. */
 .item-profile:hover img{
     opacity: .7;
 }
 
+
+
+/* Pseudo-elemento .item-profile::before, .item-profile::after: agrega contenido o decoración adicional. */
 .item-profile::before, .item-profile::after{
     display: none;
 }
 
+
+
+/* Estilos del selector input[type="checkbox"]. */
 input[type="checkbox"]{
     display: none;
 }
 
+
+
+/* Estilos del selector .sidebar-form. */
 .sidebar-form{
     position: absolute;
     z-index: 20;
     right: -1rem;
 }
 
+
+
+/* Estilos del selector .sidebar-form .open-button. */
 .sidebar-form .open-button{
     display: none;
 }
 
+
+
+/* Estilos del selector .sidebar label. */
 .sidebar label{
     position: relative;
     color: var(--sidebar-color);
@@ -170,6 +245,9 @@ input[type="checkbox"]{
 }
 
 .sidebar label::before,
+
+
+/* Pseudo-elemento .sidebar label::after: agrega contenido o decoración adicional. */
 .sidebar label::after{
     content: '';
     background-color: transparent;
@@ -178,6 +256,9 @@ input[type="checkbox"]{
     height: 25px;
 }
 
+
+
+/* Pseudo-elemento .sidebar label::before: agrega contenido o decoración adicional. */
 .sidebar label::before{
     top: -25px;
     left: 19px;
@@ -185,6 +266,9 @@ input[type="checkbox"]{
     box-shadow: 4px 4px 0px 4px var(--bg-color);
 }
 
+
+
+/* Pseudo-elemento .sidebar label::after: agrega contenido o decoración adicional. */
 .sidebar label::after{
     bottom: -25px;
     left: 19px;
@@ -192,46 +276,76 @@ input[type="checkbox"]{
     box-shadow: 4px -4px 0px 4px var(--bg-color);
 }
 
+
+
+/* Estado o pseudo-clase input[type="checkbox"]:checked ~ label: estilo cuando el usuario interactúa. */
 input[type="checkbox"]:checked ~ label{
     color: var(--bg-color);
     background-color: var(--sidebar-color);
 }
 
 input[type="checkbox"]:checked ~ label::before,
+
+
+/* Pseudo-elemento input[type="checkbox"]:checked ~ label::after: agrega contenido o decoración adicional. */
 input[type="checkbox"]:checked ~ label::after{
     display: none;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) .sidebar-form label: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) .sidebar-form label{
     display: none;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) .sidebar-form .open-button: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) .sidebar-form .open-button{
     display: block;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked): estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked){
     width: fit-content;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) .sidebar-form: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) .sidebar-form{
     width: fit-content;
     top: 4.8rem;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) .sidebar-picture img: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) .sidebar-picture img {
     max-width: 3.4rem;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) .sidebar-picture: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) .sidebar-picture{
     margin-left: 5px;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) picture: estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) picture{
     margin-left: .75rem ;
     width: fit-content;
 }
 
+
+
+/* Estado o pseudo-clase .sidebar:has(input[type="checkbox"]:checked) :is(.sidebar-item a,.profile-option): estilo cuando el usuario interactúa. */
 .sidebar:has(input[type="checkbox"]:checked) :is(.sidebar-item a,.profile-option){
     display: none;
 }

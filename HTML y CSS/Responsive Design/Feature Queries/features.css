@@ -2,31 +2,42 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Responsive Design/Feature Queries/features.css
  * Carpeta del tema: «Feature Queries». Hoja: «features».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de Feature Queries (@supports) para aplicar estilos condicionales según el soporte del navegador.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de la página. */
 body {
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0;               /* Elimina el espaciado exterior predeterminado del viewport. */
+    font-family: sans-serif; /* Establece una tipografía moderna y legible para el proyecto. */
 }
 
 
-/* --- Capacidades del navegador (@supports) --- */
+/* 
+ * Regla @supports:
+ * Es una "Feature Query" que permite al navegador verificar si soporta una propiedad o valor específico.
+ * Este bloque se ejecuta solo si el navegador reconoce y puede procesar 'display: grid'.
+ */
 @supports (display: grid){
     body{
-        display: grid;
-        grid-template-columns: auto;
+        display: grid;               /* Activa el modelo de Grid Layout para navegadores modernos. */
+        grid-template-columns: auto; /* Define una estructura de columnas de ancho automático. */
     }
 }
 
 
-/* --- Capacidades del navegador (@supports) --- */
+/* 
+ * Regla @supports not:
+ * Se utiliza para proporcionar un "fallback" (respaldo) o estrategia de diseño alternativa 
+ * para navegadores antiguos que NO soportan la característica consultada.
+ */
 @supports not (display: grid){
     body{
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        flex-basis: 0;
+        display: flex;           /* Alternativa funcional usando Flexbox para navegadores antiguos. */
+        flex-direction: column;  /* Apila el contenido verticalmente para mantener la integridad visual. */
+        flex-grow: 1;            /* Permite que el cuerpo se expanda si está dentro de un contenedor flex. */
+        flex-basis: 0;           /* Establece el tamaño base inicial antes de la distribución de espacio sobrante. */
     }
 }

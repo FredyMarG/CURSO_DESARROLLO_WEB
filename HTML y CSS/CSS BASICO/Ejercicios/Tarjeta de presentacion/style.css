@@ -2,57 +2,81 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Ejercicios/Tarjeta de presentacion/style.css
  * Carpeta del tema: «Tarjeta de presentacion». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: ejercicio práctico para aplicar conceptos de Box Model, sombras y jerarquía tipográfica.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración básica de fuente y colores. */
 body{
-    background: #fff;
-    font-family: sans-serif;
-    color: white;
+    background: #fff; /* Fondo blanco para el documento. */
+    font-family: sans-serif; /* Tipografía base. */
+    color: white; /* Color de texto por defecto (para herencia). */
 }
 
+
+
+/* Contenedor de la tarjeta: aplicación de sombras y centrado. */
 .card{
-    background: #6ac;
-    text-align: center;
-    width: 300px;
-    margin: auto;
-    margin-top: 50px;
-    padding: 20px 10px;
-    box-shadow: 0 0 30px #0006;
-    border-radius: 8px;
+    background: #6ac; /* Color azul base de la tarjeta. */
+    text-align: center; /* Centrado de todo el contenido interno. */
+    width: 300px; /* Ancho fijo para la tarjeta. */
+    margin: auto; /* Centrado horizontal automático. */
+    margin-top: 50px; /* Distancia desde la parte superior. */
+    padding: 20px 10px; /* Espaciado interno superior/inferior y lateral. */
+    box-shadow: 0 0 30px #0006; /* Sombra difuminada para efecto de elevación. */
+    border-radius: 8px; /* Bordes redondeados. */
 }
 
+
+
+/* Variación: Tarjeta roja. */
 .red-card{
-    background: #f86;
+    background: #f86; /* Color coral/rojo para diferenciar la tarjeta. */
 }
 
+
+
+/* Variación: Tarjeta verde. */
 .green-card{
-    background: #5b7;
+    background: #5b7; /* Color verde para diferenciar la tarjeta. */
 }
 
+
+
+/* Título de la tarjeta: nombre de la persona. */
 .card_title{
-    font-size: 22px;
-    margin: 0;
+    font-size: 22px; /* Tamaño destacado. */
+    margin: 0; /* Reset de márgenes. */
 }
 
+
+
+/* Subtítulo: profesión o cargo. */
 .card_subtitle{
-    font-size: 13px;
-    font-weight: 100;
-    letter-spacing: 2px;
+    font-size: 13px; /* Tamaño menor que el título. */
+    font-weight: 100; /* Peso de fuente ultra-ligero para elegancia. */
+    letter-spacing: 2px; /* Espaciado entre letras moderno. */
     margin: 0;
-    margin-top: 5px;
+    margin-top: 5px; /* Separación respecto al título. */
 }
 
+
+
+/* Contenido de la tarjeta: descripción detallada. */
 .card_content{
-    font-size: 9px;
-    padding: 10px;
-    padding-bottom: 0;
-    text-align: justify;
+    font-size: 9px; /* Tamaño de texto pequeño para párrafos largos. */
+    padding: 10px; /* Espacio interno. */
+    padding-bottom: 0; /* Elimina espacio inferior innecesario. */
+    text-align: justify; /* Alineación justificada para bloques de texto limpios. */
     margin-bottom: 0;
 }
 
+
+
+/* Imagen de perfil: creación de círculo. */
 .card_img{
-    width: 100px;
-    border-radius: 50%;
+    width: 100px; /* Dimensiones de la imagen. */
+    border-radius: 50%; /* Transforma la imagen cuadrada en un círculo perfecto. */
 }

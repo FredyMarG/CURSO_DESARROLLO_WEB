@@ -2,58 +2,92 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Variables/variables.css
  * Carpeta del tema: «Variables». Hoja: «variables».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de Custom Properties (Variables CSS) y la regla @property para un diseño centralizado y tipado.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* 
+ * Pseudoclase :root: 
+ * Representa la raíz del documento (el elemento <html>). 
+ * Es el lugar estándar para declarar variables globales.
+ */
 :root{
-    --color-principal:#48e;
+    --color-principal: #48e; /* Definición de la variable para el color de marca. */
 }
 
+
+
+/* Reset general: normaliza el modelo de caja, márgenes y tipografía. */
 *{
-    box-sizing: border-box;
-    margin: 0;
-    font-family: sans-serif;
-    padding: 20px;
+    box-sizing: border-box; /* Incluye padding y bordes en el cálculo de dimensiones. */
+    margin: 0; /* Elimina márgenes externos por defecto. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    padding: 20px; /* Aplica un espaciado preventivo (útil para pruebas rápidas). */
 }
 
 
+
+/* .box: Contenedor con Grid Layout y tipografía fluida. */
 .box{
-    display: grid;  
-    place-content: center;
-    color: #fff;
-    margin: 120px auto;
-    font-size: 30px;
-    padding: 0 40px;
+    display: grid; /* Activa el contexto de Grid. */
+    place-content: center; /* Centra el contenido horizontal y verticalmente. */
+    color: #fff; /* Color de texto blanco por defecto. */
+    margin: 120px auto; /* Centrado de bloque con separación vertical. */
+    padding: 0 40px; /* Relleno lateral interno. */
+    /* 
+     * font-size: clamp(). Crea una tipografía responsiva que escala entre 
+     * 2.4rem y 4rem según el ancho de la ventana (2.2vw).
+     */
     font-size: clamp(2.4rem, 2.2vw, 4rem);
-    border: 6px solid #000;
+    border: 6px solid #000; /* Marco sólido negro. */
 }
 
+
+
+/* Uso de la variable para definir el fondo del primer elemento. */
 .box:first-child{
-    background-color: var(--color-principal);
+    background-color: var(--color-principal); /* Recupera el valor guardado en :root. */
 }
 
+
+
+/* Aplicación de la variable en color de texto y bordes para consistencia. */
 .box:nth-child(2){
-    color: var(--color-principal);
-    border: 6px solid var(--color-principal);
+    color: var(--color-principal); 
+    border: 6px solid var(--color-principal); /* Sincroniza el color del borde con el tema. */
 }
 
+
+
+/* Selectores descendentes que heredan la variable de color. */
 .box p{
     color: var(--color-principal);
 }
 
+
+/* Estilos del encabezado. */
 h1{
-    font-size: 2.4em;
-    margin-bottom: 0;
+    font-size: 2.4em; /* Tamaño relativo. */
+    margin-bottom: 0; /* Elimina el espacio inferior. */
 }
 
+
+/* Selector de hijo directo para párrafos en la raíz del body. */
 body > p{
     color: var(--color-principal);
-    font-size: 40px;
+    font-size: 40px; /* Tamaño destacado para párrafos principales. */
 }
 
+
+/* 
+ * Regla @property (CSS Houdini API):
+ * Permite definir variables con tipos de datos específicos, lo que habilita 
+ * animaciones suaves entre colores y validación de valores.
+ */
 @property --color-principal{
-    syntax: "<color>";
-    inherits: false;
-    initial-value: #48e;
+    syntax: "<color>"; /* Indica que el valor debe ser un color válido. */
+    inherits: false; /* Define si el valor se propaga automáticamente a los hijos. */
+    initial-value: #48e; /* Valor de respaldo si no se define nada. */
 }

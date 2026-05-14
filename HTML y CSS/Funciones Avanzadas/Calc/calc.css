@@ -2,32 +2,54 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Calc/calc.css
  * Carpeta del tema: «Calc». Hoja: «calc».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de funciones matemáticas (calc, clamp) y variables CSS para layouts dinámicos.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja, márgenes y tipografía base. */
 *{
-    box-sizing: border-box;
-    margin: 0;
-    font-family: sans-serif;
+    box-sizing: border-box; /* Asegura que el padding y bordes se incluyan dentro del ancho/alto definido. */
+    margin: 0; /* Elimina los márgenes externos predeterminados del navegador. */
+    font-family: sans-serif; /* Establece una fuente limpia y legible para todo el documento. */
 }
 
+
+
+/* Variables CSS y valores de diseño reutilizables. */
 :root{
-    --color-pricipal:#48e;
-    --alto-del-box:200px;
+    --color-pricipal:#48e; /* Definición de color primario (azul) reutilizable. */
+    --alto-del-box:200px; /* Variable para controlar alturas consistentes en el layout. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    font-size: 30px;
-    padding: 0 40px;
-    font-size: clamp(2.4rem, 2.2vw, 4rem);
-    border: 6px solid #000;
+    padding: 0 40px; /* Espaciado interno: 0 arriba/abajo, 40px a los laterales. */
+    /* 
+     * Función clamp(mínimo, preferido, máximo):
+     * Permite que el texto sea fluido y responsivo sin necesidad de múltiples media queries.
+     */
+    font-size: clamp(2.4rem, 2.2vw, 4rem); 
+    border: 6px solid #000; /* Borde sólido negro de gran grosor para marcar la estructura. */
 }
 
+
+
+/* Selección del primer elemento de tipo box. */
 .box:first-child{
-    height: var(--alto-del-box);
+    height: var(--alto-del-box); /* Aplica el valor de 200px definido en la variable del :root. */
 }
 
+
+
+/* Selección del segundo elemento de tipo box para crear un layout complementario. */
 .box:nth-child(2){
-    height: calc(100vh - var(--alto-del-box));
+    /* 
+     * Función calc(): Realiza operaciones matemáticas entre unidades distintas.
+     * Aquí resta la altura del primer box (200px) al total de la pantalla (100vh) para llenar el espacio restante.
+     */
+    height: calc(100vh - var(--alto-del-box)); 
 }

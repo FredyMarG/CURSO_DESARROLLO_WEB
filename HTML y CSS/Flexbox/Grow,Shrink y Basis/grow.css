@@ -2,44 +2,66 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Flexbox/Grow,Shrink y Basis/grow.css
  * Carpeta del tema: «Grow,Shrink y Basis». Hoja: «grow».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: explicar la flexibilidad de los ítems: cómo crecen, se encogen y su tamaño base inicial.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración base de la página. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    background-color: #ccc;
+    margin: 0; /* Elimina los márgenes por defecto del navegador. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    background-color: #ccc; /* Fondo gris para resaltar el contenedor blanco. */
 }
 
+
+
+/* Configuración del Box Model: garantiza que el padding no altere el ancho de los elementos. */
 div ,  body{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye bordes y relleno en el cálculo de dimensiones. */
 }
 
+
+
+/* 
+ * Contenedor Flexbox: 
+ * Define cómo se distribuirán los hijos en el espacio disponible.
+ */
 .flexbox{
-    display: flex;
-    flex-flow:row wrap ;
-    border: 2px solid #000;
-    margin: 20px;
-    align-items: center;
-    background-color: #fff;
-    gap: 10px;
+    display: flex; /* Activa el modelo de caja flexible. */
+    flex-flow: row wrap; /* Shorthand: dirección fila y permite saltos de línea. */
+    border: 2px solid #000; /* Marco visual para delimitar el contenedor. */
+    margin: 20px; /* Separación externa del contenedor. */
+    align-items: center; /* Alinea los ítems verticalmente al centro. */
+    background-color: #fff; /* Fondo blanco para contrastar con los ítems. */
+    gap: 10px; /* Espaciado uniforme entre los elementos hijos. */
 }
 
+
+
+/* Ítems Flex: configuración de su capacidad de adaptación. */
 .flex-item{
-    background-color: #800;
-    text-align: center;
-    margin: 10px;
-    color: #fff;
-    font-size: 40px;
-    width: 100px;
-    direction: rtl;
-    /* flex-grow: 1; */
-    /* flex-shrink: 1; */
-    /* flex-basis: 150px; */
-    flex: 1 1 100px; /* Es la abreviatura de los anteriores */
+    background-color: #800; /* Color rojo oscuro base. */
+    text-align: center; /* Centrado horizontal del texto. */
+    margin: 10px; /* Margen externo para separación individual. */
+    color: #fff; /* Texto blanco. */
+    font-size: 40px; /* Tamaño de fuente para visibilidad. */
+    width: 100px; /* Ancho sugerido (será ignorado por flex-basis si este último existe). */
+    direction: rtl; /* Establece la dirección del flujo de texto de derecha a izquierda. */
+    
+    /* 
+     * Propiedad shorthand flex: [grow] [shrink] [basis].
+     * 1: Crecerá proporcionalmente para llenar el espacio.
+     * 1: Se encogerá si el contenedor es demasiado pequeño.
+     * 100px: Tamaño inicial antes de distribuir el espacio sobrante.
+     */
+    flex: 1 1 100px; 
 }
 
+
+
+/* Selector estructural: aplica un color diferente a los ítems pares para mejorar la distinción visual. */
 .flex-item:nth-child(2n){
-    background-color: #f77;
+    background-color: #f77; /* Color coral claro para ítems en posiciones pares. */
 }

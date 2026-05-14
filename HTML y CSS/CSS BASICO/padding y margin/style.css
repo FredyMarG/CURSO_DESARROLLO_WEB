@@ -2,35 +2,50 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Padding y margin/style.css
  * Carpeta del tema: «Padding y margin». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso del espaciado interno (padding) y externo (margin) en el Box Model.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos del contenedor form: uso de padding con valores múltiples. */
 form{
-    background: red;
-    padding: 10px 50px;
+    background: red; /* Fondo vibrante para visualizar el área del formulario. */
+    padding: 10px 50px; /* Shorthand: 10px arriba/abajo, 50px izquierda/derecha. */
 }
 
+
+
+/* Estilos de los campos de entrada: definición de dimensiones y contraste. */
 .formulario_input{
-    padding: 6px 12px;
-    width: 90%;
-    background: black;
-    color: red;
-    margin: 10px;
+    padding: 6px 12px; /* Relleno interno para alejar el texto de los bordes. */
+    width: 90%; /* Ocupa la mayor parte del ancho del contenedor padre. */
+    background: black; /* Fondo oscuro. */
+    color: red; /* Texto de alto contraste. */
+    margin: 10px; /* Separa los inputs entre sí. */
 }
 
+
+
+/* Estilos del botón de envío: enfoque en la legibilidad y el énfasis. */
 .formulario_submit{
-    letter-spacing: 2px;
-    background: red;
-    color: white;
-    text-transform: uppercase;
-    width: 50%;
+    letter-spacing: 2px; /* Aumenta el espacio entre letras para claridad. */
+    background: red; /* Color de fondo consistente con el tema. */
+    color: white; /* Texto blanco. */
+    text-transform: uppercase; /* Fuerza el uso de mayúsculas para mayor impacto. */
+    width: 50%; /* Define un ancho medio. */
 }
 
+
+
+/* Caja visual que agrupa contenido con estilo propio. */
 .box{
-    background: red;
-    width: 150px;
-    height: 150px;
-    margin: 30px;
-    margin: collapse;
+    background: red; /* Color de la caja. */
+    width: 150px; /* Ancho fijo. */
+    height: 150px; /* Alto fijo. */
+    margin: 30px; /* Margen uniforme por todos los lados. */
+    /* 
+     * Nota: 'collapse' no es un valor de margin, se refiere al concepto 
+     * de colapso de márgenes verticales entre elementos hermanos. 
+     */
 }

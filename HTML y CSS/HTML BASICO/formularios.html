@@ -17,20 +17,45 @@
     <title>Formularios</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
-    <form action="">
-<!-- Formulario de envío de datos (form) -->
+    <!-- Formulario para recoger datos del usuario. -->
+    <form action="#" method="POST">
+        <!-- 
+             Nota sobre Accesibilidad (A11y): 
+             Cada <input> DEBERÍA tener una etiqueta <label for="ID_DEL_INPUT"> 
+             para que sea usable por lectores de pantalla y facilitar el clic.
+        -->
 
-        <!-- Campos de entrada de datos con validaciones básicas y placeholders -->
+        <!-- 
+            Atributos clave en inputs:
+            - 'name': Identificador que recibirá el servidor (backend). Sin esto, el dato no se envía.
+            - 'id': Identificador único para CSS, JS y para vincularlo con etiquetas <label>.
+            - 'required': Validación nativa del navegador para evitar campos vacíos.
+        -->
         <input type="text" name="nombre" id="nombre" required placeholder="Username">
-        <input type="color" name="color" id="color">
+        
+        <!-- Permite al usuario seleccionar un color mediante un selector nativo del sistema -->
+        <input type="color" name="tema_color" id="color">
+        
+        <!-- Validaciones de tipo: El navegador verifica el formato @ sin JS extra -->
         <input type="email" name="email" id="email">
+        
+        <!-- Ofusca los caracteres para seguridad visual al escribir contraseñas -->
         <input type="password" name="contraseña" id="contraseña">
+        
+        <!-- Checkbox: Valor booleano (on/off) -->
         <input type="checkbox" name="aceptar" id="aceptar">
-        <!-- Agrupación de radios: Mismo 'name' permite selección única -->
+        
+        <!-- 
+            Radios: Para opciones excluyentes. 
+            IMPORTANTE: Deben compartir el mismo 'name' para que el navegador sepa que pertenecen al mismo grupo.
+        -->
         <input type="radio" name="genero" id="masculino" value="masculino">
         <input type="radio" name="genero" id="femenino" value="femenino">
+        
+        <!-- Control para subir documentos desde el dispositivo del usuario -->
         <input type="file" name="archivo" id="archivo">
         <input type="date" name="fecha" id="fecha">
         <input type="submit" value="Enviar"> <!-- Gatillo para enviar el formulario -->

@@ -2,29 +2,49 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Initial Letter/initial.css
  * Carpeta del tema: «Initial Letter». Hoja: «initial».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de la propiedad initial-letter para crear letras capitulares modernas.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Reset general: normaliza el modelo de caja. */
 *{
-    box-sizing: border-box;
+    box-sizing: border-box; /* Asegura que el padding y bordes se incluyan dentro del ancho/alto definido. */
 }
 
+
+
+/* Estilos globales: configuración base del documento. */
 body{
-    margin: 0;
-    font-family: sans-serif;
+    margin: 0; /* Elimina márgenes externos por defecto. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
 }
 
+
+
+/* .box: Contenedor para delimitar el área de texto. */
 .box{
-    font-size: 20px;
-    padding: 0 40px;
-    border: 2px solid #43e;
-    margin-bottom: 30px;
+    font-size: 20px; /* Tamaño de fuente base para el párrafo. */
+    padding: 0 40px; /* Espaciado lateral para evitar que el texto toque los bordes. */
+    border: 2px solid #43e; /* Marco azul para visualizar la estructura. */
+    margin-bottom: 30px; /* Separación respecto a elementos siguientes. */
 }
 
+
+
+/* 
+ * Pseudo-elemento ::first-letter:
+ * Selecciona la primera letra del párrafo para aplicar el efecto de letra capitular.
+ */
 p::first-letter{
-    padding: 10px;
-    padding-bottom: 0;
-    initial-letter: 3 2;
-    color: #43e;
+    padding: 10px; /* Espacio alrededor de la letra capitular. */
+    padding-bottom: 0; /* Ajuste fino de la base de la letra. */
+    /* 
+     * initial-letter: [tamaño] [hundimiento].
+     * 3: La letra ocupará una altura equivalente a 3 líneas de texto.
+     * 2: La letra se hundirá 2 líneas dentro del párrafo.
+     */
+    initial-letter: 3 2; 
+    color: #43e; /* Color azul para destacar la letra capitular. */
 }

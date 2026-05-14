@@ -2,64 +2,97 @@
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/Funciones Avanzadas/Transform/transform.css
  * Carpeta del tema: «Transform». Hoja: «transform».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Propósito: demostrar el uso de transformaciones 2D y la propiedad independiente rotate para animaciones.
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
+
+
+/* Estilos globales: configuración del canvas y centrado de elementos. */
 body{
-    margin: 0;
-    font-family: sans-serif;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: #48e;
+    margin: 0; /* Elimina márgenes externos por defecto. */
+    font-family: sans-serif; /* Tipografía limpia sin remates. */
+    height: 100vh; /* Ocupa el 100% de la altura de la ventana. */
+    display: flex; /* Habilita Flexbox para organizar las cajas. */
+    flex-direction: column; /* Alinea los elementos en una columna vertical. */
+    background-color: #48e; /* Fondo azul corporativo. */
 }
 
+
+
+/* .box: Contenedor principal para las pruebas de transformación. */
 .box{
-    margin: auto;
-    padding: 80px;
-    border: 4px solid #000;
-    width: fit-content;
+    margin: auto; /* Centrado automático dentro del contenedor flex. */
+    padding: 80px; /* Amplio espacio interno para notar los movimientos. */
+    border: 4px solid #000; /* Marco negro sólido para definir límites. */
+    width: fit-content; /* Se ajusta estrictamente al ancho de sus hijos. */
 }
 
+
+
+/* .box-inside: Elemento interno que recibirá las transformaciones. */
 .box-inside{
-    padding: 20px 40px;
-    background-color: #ccc;
-    margin-top: 50px;
+    padding: 20px 40px; /* Relleno lateral y vertical. */
+    background-color: #ccc; /* Color gris para contrastar con el fondo. */
+    margin-top: 50px; /* Separación superior respecto a otros elementos. */
 }
 
+
+
+/* .skew: Distorsión angular del elemento en el plano 2D. */
 .skew{
-    transform: skew(20deg);
-    transition: transform 1s;
+    transform: skew(20deg); /* Inclina el elemento 20 grados sobre el eje X. */
+    transition: transform 1s; /* Suaviza el cambio de inclinación durante 1 segundo. */
 }
 
+
+
+/* Al pasar el mouse, aumenta el grado de inclinación. */
 .skew:hover{
-    transform: skew(40deg);
+    transform: skew(40deg); /* Incrementa la distorsión a 40 grados. */
 }
 
+
+
+/* .scale: Modificación del tamaño relativo del elemento. */
 .scale{
-    transform: scale(1);
-    transition: transform 1s;
+    transform: scale(1); /* Tamaño original (escala 1:1). */
+    transition: transform 1s; /* Suaviza la expansión o contracción. */
 }
 
+
+
+/* Al pasar el mouse, el elemento duplica su tamaño. */
 .scale:hover{
-    transform: scale(2);
+    transform: scale(2); /* Escala el elemento al 200%. */
 }
 
+
+
+/* .rotate: Uso de la propiedad moderna e independiente 'rotate'. */
 .rotate{
-    rotate:0deg;
-    transition: rotate 3s;
+    rotate: 0deg; /* Posición angular inicial. */
+    transition: rotate 3s; /* Transición larga para notar el giro completo. */
 }
 
+
+
+/* Al pasar el mouse, realiza un giro de 360 grados. */
 .rotate:hover{
-    rotate: 360deg;
+    rotate: 360deg; /* Completa una vuelta entera. */
 }
 
+
+
+/* .translate: Desplazamiento del elemento respecto a su posición original. */
 .translate{
-    transform: translate(0, 0) ;
-    transition: transform 1s;
+    transform: translate(0, 0); /* Posición inicial sin desplazamiento. */
+    transition: transform 1s; /* Suaviza el movimiento de traslación. */
 }
 
+
+
+/* Al pasar el mouse, desplaza el elemento en ambos ejes. */
 .translate:hover{
-    transform: translate(50px, 50px);
+    transform: translate(50px, 50px); /* Mueve el elemento 50px a la derecha y 50px hacia abajo. */
 }

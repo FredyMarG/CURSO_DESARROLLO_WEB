@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <!-- CURSO_WEB_DOC_HTML v1
      Archivo: HTML y CSS/Responsive Design/Media Queries/mediaq.html
-     Título: Media Queries
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Título: Lección: Media Queries y Puntos de Quiebre
+     Propósito: demostrar la adaptación del layout mediante consultas de medios (breakpoints).
+     Relación: enlaza con queries.css para aplicar estilos responsivos.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
 
 
-<html lang="en">
+<!-- Definición del idioma para accesibilidad. -->
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+<!-- Cabecera (head): Contiene metadatos e instrucciones de renderizado -->
 
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="queries.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Queries</title>
+    <meta charset="UTF-8"> <!-- Codificación universal de caracteres. -->
+    <link rel="stylesheet" href="queries.css"> <!-- Vinculación con la lógica responsiva en CSS. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Instrucción vital para el escalado en móviles. -->
+    <title>Lección: Media Queries</title>
 </head>
 <body>
+    <!-- Aquí comienza el contenido visible de la página. -->
 <!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <!-- 
+        Contenedor Maestro (.flexbox): 
+        Actúa como el canvas donde las Media Queries reorganizarán los elementos hijos.
+    -->
     <div class="flexbox">
+        <!-- 
+            Elementos Flex (.flexitem): 
+            Representan bloques de contenido que cambiarán su tamaño y flujo.
+        -->
         <div class="flexitem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, minus. Harum dolorem vel voluptatum doloremque facere culpa distinctio facilis ratione? Repellat dolore voluptas voluptatibus consequatur, autem vitae dolores quibusdam rem?
         Commodi ab labore non sapiente vel accusantium dolorum soluta exercitationem reiciendis sequi nisi natus veniam sit neque dolore, expedita a architecto alias nam. Ex quos ducimus autem doloremque. Ipsam, dicta!
         Omnis, vitae deserunt perspiciatis delectus, natus aliquid magnam eius ea suscipit architecto totam unde, at eos cumque praesentium iusto facilis sequi rerum temporibus voluptatibus dolor. Ex ducimus enim perspiciatis tempora?
-        Saepe nihil, sed voluptatibus neque facere dolor in architecto sequi quas. Vitae quasi fuga doloremque error, earum pariatur? Quae ut assumenda inventore voluptatem earum corporis maiores mollitia distinctio pariatur molestiae.
-        Mollitia quidem fugiat, sed atque esse consectetur. Facilis pariatur minima, nisi, blanditiis velit distinctio commodi amet quo repellendus placeat similique a possimus repellat id iusto aperiam recusandae odio consequuntur expedita.</div>
+        </div>
+        
         <div class="flexitem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, minus. Harum dolorem vel voluptatum doloremque facere culpa distinctio facilis ratione? Repellat dolore voluptas voluptatibus consequatur, autem vitae dolores quibusdam rem?
         Commodi ab labore non sapiente vel accusantium dolorum soluta exercitationem reiciendis sequi nisi natus veniam sit neque dolore, expedita a architecto alias nam. Ex quos ducimus autem doloremque. Ipsam, dicta!
         Omnis, vitae deserunt perspiciatis delectus, natus aliquid magnam eius ea suscipit architecto totam unde, at eos cumque praesentium iusto facilis sequi rerum temporibus voluptatibus dolor. Ex ducimus enim perspiciatis tempora?
-        Saepe nihil, sed voluptatibus neque facere dolor in architecto sequi quas. Vitae quasi fuga doloremque error, earum pariatur? Quae ut assumenda inventore voluptatem earum corporis maiores mollitia distinctio pariatur molestiae.
-        Mollitia quidem fugiat, sed atque esse consectetur. Facilis pariatur minima, nisi, blanditiis velit distinctio commodi amet quo repellendus placeat similique a possimus repellat id iusto aperiam recusandae odio consequuntur expedita.</div>
+        </div>
+
         <div class="flexitem">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Amet, minus. Harum dolorem vel voluptatum doloremque facere culpa distinctio facilis ratione? Repellat dolore voluptas voluptatibus consequatur, autem vitae dolores quibusdam rem?
         Commodi ab labore non sapiente vel accusantium dolorum soluta exercitationem reiciendis sequi nisi natus veniam sit neque dolore, expedita a architecto alias nam. Ex quos ducimus autem doloremque. Ipsam, dicta!
         Omnis, vitae deserunt perspiciatis delectus, natus aliquid magnam eius ea suscipit architecto totam unde, at eos cumque praesentium iusto facilis sequi rerum temporibus voluptatibus dolor. Ex ducimus enim perspiciatis tempora?
-        Saepe nihil, sed voluptatibus neque facere dolor in architecto sequi quas. Vitae quasi fuga doloremque error, earum pariatur? Quae ut assumenda inventore voluptatem earum corporis maiores mollitia distinctio pariatur molestiae.
-        Mollitia quidem fugiat, sed atque esse consectetur. Facilis pariatur minima, nisi, blanditiis velit distinctio commodi amet quo repellendus placeat similique a possimus repellat id iusto aperiam recusandae odio consequuntur expedita.</div>
+        </div>
     </div>
 </body>
 <!-- Cierre del documento HTML -->
