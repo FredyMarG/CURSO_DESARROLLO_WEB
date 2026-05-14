@@ -1,0 +1,93 @@
+/**
+ * 🏛️ MODULE: WINDOW GLOBAL OBJECT
+ * 
+ * ARQUITECTURA: Diseño modular basado en Grid para la organización de utilidades.
+ * DX (Developer Experience): Feedback visual mediante estados activos y tipografía legible.
+ */
+
+/* BASE STYLES: Configuración del entorno global */
+body {
+    color: #1e293b;            /* Color de texto: Slate-800 para legibilidad óptima */
+    font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Tipografía: Pila nativa moderna */
+    background-color: #f1f5f9; /* Color de fondo: Azul grisáceo muy pálido */
+    margin: 0;                 /* Margen: Reset de seguridad del navegador */
+    padding: 2.5rem;           /* Relleno: Espaciado interno de seguridad */
+    line-height: 1.5;          /* Interlineado: Mejora la legibilidad vertical */
+}
+
+/* DASHBOARD: Contenedor principal centrado */
+.window-dashboard {
+    max-width: 1000px;         /* Ancho máximo: Limita la expansión en pantallas grandes */
+    margin: 0 auto;            /* Margen: Centrado horizontal automático */
+}
+
+header {
+    margin-bottom: 3rem;       /* Margen inferior: Separa el título del área de control */
+    text-align: center;        /* Alineación: Centra el texto del encabezado */
+}
+
+h1 { color: #4f46e5; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.subtitle { color: #64748b; font-size: 1.1rem; }
+
+/* CONTROL GRID: Sistema de rejilla para las tarjetas de funcionalidad */
+.control-grid {
+    display: grid;             /* Layout: Activa el sistema de cuadrícula bidimensional */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas: Responsividad automática */
+    gap: 1.5rem;               /* Brecha: Espacio uniforme de 24px entre tarjetas */
+}
+
+/* CONTROL CARD: Estilo de contenedor para grupos de métodos */
+.control-card {
+    background: white;         /* Fondo: Superficie limpia para cada sección */
+    padding: 2rem;             /* Relleno: Espacio interno generoso para el contenido */
+    border-radius: 16px;       /* Bordes: Esquinas suavizadas para estética moderna */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Sombra: Elevación sutil */
+    border: 1px solid #e2e8f0; /* Borde: Define los límites con un color suave */
+}
+
+.control-card h2 {
+    font-size: 1.25rem;        /* Tamaño: Jerarquía visual para los títulos de sección */
+    margin-top: 0;             /* Margen: Alineación perfecta con el borde de la card */
+    margin-bottom: 1.5rem;     /* Margen inferior: Separa el título de los botones */
+    color: #334155;            /* Color: Tono neutro oscuro */
+}
+
+/* BUTTON SYSTEM: Botones interactivos parametrizados por color */
+.button-group {
+    display: flex;             /* Flexbox: Alinea los botones horizontalmente */
+    flex-wrap: wrap;           /* Envoltura: Permite que los botones bajen si no hay espacio */
+    gap: 0.75rem;              /* Brecha: Espacio de 12px entre botones */
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;    /* Relleno: Área de clic ergonómica */
+    border: none;              /* Borde: Elimina el estilo nativo */
+    border-radius: 8px;        /* Bordes: Curvatura consistente con la UI */
+    cursor: pointer;           /* Cursor: Indica interactividad */
+    font-weight: 600;          /* Grosor: Resalta el texto de acción */
+    font-size: 0.9rem;         /* Tamaño de fuente legible para botones */
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Transición: Suaviza la interacción */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Transformación: Efecto de levitación al interactuar */
+    filter: brightness(110%);    /* Filtro: Aumenta ligeramente el brillo */
+}
+
+.btn:active {
+    transform: scale(0.96);    /* Transformación: Feedback de presión física */
+}
+
+/* VARIANTES DE COLOR */
+.btn-indigo { background: #4f46e5; color: white; }
+.btn-blue { background: #3b82f6; color: white; }
+.btn-red { background: #ef4444; color: white; }
+.btn-slate { background: #475569; color: white; }
+
+/* RESPONSIVIDAD */
+@media (max-width: 640px) {
+    body { padding: 1.5rem; }
+    .control-grid { grid-template-columns: 1fr; }
+    .btn { width: 100%; }
+    .button-group { flex-direction: column; }
+}

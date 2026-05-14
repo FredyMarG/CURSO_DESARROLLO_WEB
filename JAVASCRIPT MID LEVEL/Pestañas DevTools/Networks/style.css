@@ -1,30 +1,43 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Networks/style.css
- * Carpeta del tema: «Networks». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+/**
+ * 🛠️ MODULE: NETWORK DEVTOOLS LAB
+ * 
+ * ARQUITECTURA: Interfaz de alto contraste diseñada para la inspección de logs y tráfico.
+ * DX (Developer Experience): Micro-interacciones optimizadas para identificar entradas de datos.
  */
 
-body{
-    color: #222;
-    font-family: sans-serif;
+/* BASE STYLES: Configuración global del documento */
+body {
+    color: #222;               /* Slate-900: Color base para textos descriptivos externos */
+    font-family: sans-serif;   /* Tipografía estándar para garantizar legibilidad y carga veloz */
+    padding: 2.5rem;           /* Espaciado generoso para separar el contenido de los bordes del navegador */
+    background-color: #f4f4f9; /* Tono neutro de fondo para reducir la fatiga visual */
 }
 
-div{
-    background-color: #000;
-    padding: 20px;
+/* TERMINAL CONTEXT: Contenedor oscuro para visualización de logs de red */
+div {
+    background-color: #000;    /* Fondo negro: simula un entorno de consola o terminal de tráfico */
+    padding: 25px;             /* Define el área de padding interna para separar los logs del borde */
+    border-radius: 10px;       /* Bordes suavizados para una estética de hardware/software moderno */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Profundidad visual para destacar el monitor de red */
 }
 
-h2{
-    color: #fff;
+/* HEADINGS: Títulos dentro del monitor */
+h2 {
+    color: #fff;               /* Máximo contraste para encabezados sobre fondo oscuro */
+    margin-top: 0;             /* Alineación vertical perfecta con el contenedor */
+    font-size: 1.4rem;         /* Escala tipográfica moderada para jerarquía interna */
 }
 
-p{
-    color: #ccc;
+/* LOG ITEMS: Representación de cada petición o recurso */
+p {
+    color: #ccc;               /* Gris suave: legibilidad óptima para datos técnicos secundarios */
+    margin: 10px 0;            /* Espaciado vertical entre peticiones para facilitar el escaneo visual */
+    transition: all 0.2s ease; /* Transición fluida para efectos de interacción */
 }
 
+/* INTERACTION: Feedback visual al inspeccionar una línea */
 p:hover {
-    background: red;
+    background: #cc0000;       /* Rojo: indica selección activa sobre una petición específica */
+    color: #fff;               /* Cambio a blanco puro para asegurar el contraste en hover */
+    cursor: pointer;           /* Indica al usuario que el log es un elemento accionable */
 }
-

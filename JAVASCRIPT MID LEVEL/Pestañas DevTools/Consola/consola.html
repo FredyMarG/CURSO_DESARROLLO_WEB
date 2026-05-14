@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Consola/consola.html
-     Título: Consola
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
 <html lang="en">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Consola</title>
+    <link rel="stylesheet" href="style.css"> <!-- Vinculación de la hoja de estilos externa -->
+    <title>JS Mid Level - Consola Inspector</title>
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Main: Punto de entrada semántico para el contenido principal de la aplicación -->
+    <main class="console-lab">
+        <header class="lab-header">
+            <h1>Laboratorio de Depuración</h1>
+            <p class="instruction-note">Abre las DevTools (F12) para interactuar con este módulo.</p>
+        </header>
+        
+        <!-- Contenedor oscuro optimizado para visualización de logs -->
+        <div class="terminal-container">
+            <section class="log-section">
+                <h2>Registro de Mensajes</h2>
+                
+                <!-- Elementos interactivos para pruebas de hover y selección -->
+                <article class="log-entries">
+                    <p><strong>[INFO]:</strong> Esperando interacción del usuario...</p>
+                    <p><strong>[DEBUG]:</strong> El archivo consola.js ha sido cargado correctamente.</p>
+                    <p><strong>[TASK]:</strong> Revisa la documentación en la pestaña "Console".</p>
+                </article>
+            </section>
+        </div>
+    </main>
 
-    
-    <div>
-        <h2>Titulo</h2>
-        <p>REVISAR LA DOCUMENTACION
-        </p>
-    </div>
-
+    <!-- Script de lógica de consola -->
     <script src="consola.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -1,32 +1,30 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Networks/networks.html
-     Título: Networks
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Networks</title>
+    <title>JS Mid Level - Network Inspector</title>
+    <link rel="stylesheet" href="style.css"> <!-- Vinculación de estilos para el laboratorio -->
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Main: Contenedor raíz para el laboratorio de redes -->
+    <main class="network-lab">
+        <header>
+            <h1>Monitor de Recursos (Network)</h1>
+            <p class="instruction-text">Filtra por 'Fetch/XHR' en las DevTools para ver el tráfico saliente.</p>
+        </header>
 
-    
-    <div>
-        <h2>Titulo</h2>
-        <p>REVISAR LA DOCUMENTACION</p>
-    </div>
+        <!-- Bloque de visualización que emula un panel de control -->
+        <div class="network-container">
+            <section class="request-list">
+                <h2>Últimas Peticiones</h2>
+                <p><strong>GET</strong> /api/v1/user-profile - <span class="status">200 OK</span></p>
+                <p><strong>POST</strong> /auth/login - <span class="status">201 Created</span></p>
+                <p><strong>GET</strong> /assets/config.json - <span class="status error">404 Not Found</span></p>
+            </section>
+        </div>
+    </main>
 
     <script src="networks.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

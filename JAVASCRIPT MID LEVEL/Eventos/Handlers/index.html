@@ -10,21 +10,26 @@
 
 <html lang="en">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Handlers, Listeners y Objeto Evento</title>
+    <title>JS Mid Level - Event Handlers</title>
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Contenedor principal para centrar la interfaz en pantalla -->
+    <main class="main-container">
+        <section class="event-card">
+            <header class="card-header">
+                <h1 class="card-title">Gestión de Eventos</h1>
+                <p class="card-subtitle">Laboratorio de Handlers y Remoción de Listeners</p>
+            </header>
 
-    
-    <div>
-        <h2>titulo</h2>
-        <button class="button">Apretame</button>
-    </div>
+            <div class="card-body">
+                <button class="button">¡Haz clic aquí!</button>
+                <p class="info-text">El primer clic disparará una alerta y se auto-eliminará. Los siguientes clics solo se verán en consola.</p>
+            </div>
+        </section>
+    </main>
 
     <script src="main.js"></script>
 </body>

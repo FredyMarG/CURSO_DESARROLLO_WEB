@@ -1,30 +1,54 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Timeline-Performance/style.css
- * Carpeta del tema: «Timeline-Performance». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+/**
+ * 🛠️ MODULE: PERFORMANCE / TIMELINE LAB
+ * 
+ * ARQUITECTURA: Interfaz optimizada para reducir el ruido visual durante el profiling.
+ * ESTRATEGIA: Uso de transformaciones para evitar el Layout Thrashing innecesario.
  */
 
-body{
-    color: #222;
-    font-family: sans-serif;
+/* BASE STYLES: Configuración global y tipografía */
+body {
+    color: #222;               /* Color de texto: Gris muy oscuro (Slate-900) para legibilidad */
+    font-family: sans-serif;   /* Tipografía: Usa fuentes de sistema para evitar retardos de carga (FOIT) */
+    padding: 2.5rem;           /* Relleno: Área interna de 40px para alejar el contenido de los bordes */
+    background-color: #f1f5f9; /* Fondo: Azul grisáceo pálido para un entorno de trabajo limpio */
+    margin: 0;                 /* Margen: Elimina el espaciado predeterminado del navegador */
 }
 
-div{
-    background-color: #000;
-    padding: 20px;
+/* MONITOR BOX: Contenedor oscuro que emula una consola de procesos */
+div {
+    background-color: #000;    /* Color de fondo: Negro absoluto para simular una pantalla de terminal */
+    padding: 30px;             /* Relleno: Espacio interno de 30px que define el padding en el Box Model */
+    border-radius: 12px;       /* Bordes: Curvatura de esquinas para una estética de hardware moderno */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Sombra: Aporta profundidad y resalta el monitor en el layout */
+    margin-top: 2rem;          /* Margen superior: Distancia vertical respecto a la cabecera */
 }
 
-h2{
-    color: #fff;
+/* HEADINGS: Títulos internos */
+h2 {
+    color: #fff;               /* Color: Blanco puro para máximo contraste sobre fondo negro */
+    margin-top: 0;             /* Margen: Elimina el espacio superior para alineación vertical exacta */
 }
 
-p{
-    color: #ccc;
+/* TEXT ITEMS: Información del estado del sistema */
+p {
+    color: #ccc;               /* Color: Gris claro (Silver) para reducir la fatiga visual en textos técnicos */
+    transition: color 0.2s ease; /* Transición: Suaviza el cambio de color durante la interacción */
 }
 
+/* INTERACTION: Feedback para identificar el nodo activo */
 p:hover {
-    background: red;
+    background: #444;          /* Fondo: Gris carbón para resaltar la línea bajo el cursor */
+    color: #fff;               /* Color: Cambia a blanco para reforzar el resalte visual */
+    cursor: default;           /* Cursor: Mantiene el puntero estándar para no sugerir clic innecesario */
 }
 
+/* STATUS MODIFIERS: Clases dinámicas para el JS */
+.status-ready { color: #4ade80; font-weight: bold; } /* Verde para estado OK */
+.status-busy { color: #f87171; font-weight: bold; }  /* Rojo para indicar bloqueo del Main Thread */
+
+/* BUTTON: Elemento disparador de eventos de Performance */
+.btn {
+    margin: 10px 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}

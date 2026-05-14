@@ -4,19 +4,23 @@
  * Permite interactuar con la dirección del navegador y controlar la navegación.
  */
 
-/** Propiedades de lectura del objeto Location */
+/** 
+ * Actualización dinámica del DOM con propiedades de Location.
+ * Se evita el uso de document.write para no sobrescribir el documento tras la carga.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+    // Selección de elementos
+    const hrefEl = document.getElementById('href');
+    const hostEl = document.getElementById('host');
+    const pathEl = document.getElementById('path');
+    const protocolEl = document.getElementById('protocol');
 
-// .href: Retorna la URL completa (ej: https://localhost:3000/index.html)
-document.write(`<b>URL:</b> ${window.location.href} <br>`);
-
-// .hostname: Retorna el dominio del servidor (ej: www.google.com)
-document.write(`<b>Host:</b> ${window.location.hostname} <br>`);
-
-// .pathname: Retorna el path o ruta interna tras el dominio (ej: /user/settings)
-document.write(`<b>Ruta:</b> ${window.location.pathname} <br>`);
-
-// .protocol: Retorna el protocolo de transferencia (http: o https:)
-document.write(`<b>Protocolo:</b> ${window.location.protocol} <br>`);
+    // Inyección de valores
+    hrefEl.textContent = window.location.href;
+    hostEl.textContent = window.location.hostname;
+    pathEl.textContent = window.location.pathname;
+    protocolEl.textContent = window.location.protocol;
+});
 
 /** 
  * Métodos de navegación (Acciones):
