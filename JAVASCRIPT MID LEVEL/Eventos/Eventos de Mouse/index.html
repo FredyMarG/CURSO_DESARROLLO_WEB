@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Definición del tipo de documento como HTML5 -->
+<html lang="es">
+<head>
+    <!-- Metadatos esenciales para la codificación de caracteres y diseño responsivo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Título de la pestaña del navegador -->
+    <title>Eventos de Mouse</title>
+    
+    <!-- Vinculamos la hoja de estilos externa para aplicar el diseño y las animaciones al botón -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 
+         Contenedor Principal (.contenedor1):
+         Este div funciona como un "wrapper" o tarjeta (card). Su propósito es agrupar 
+         semánticamente los elementos del laboratorio y aplicar el centrado visual 
+         y las sombras definidas en el CSS.
+    -->
+    <div class="contenedor1">
+        <!-- Título del laboratorio: Identifica el propósito de la página para el usuario. -->
+        <h1>Eventos de Mouse</h1>
+        
+        <!-- Párrafo descriptivo: Proporciona las instrucciones necesarias para interactuar con la demo. -->
+        <p>Pasa el cursor, haz clic o usa la rueda sobre el botón para probar los eventos.</p>
+
+        <!-- 
+             Botón Interactivo (#btn):
+             Es el elemento clave (item) del laboratorio. Tiene un ID único para que 
+             JavaScript pueda capturar acciones como clics, movimientos del cursor o desplazamientos.
+        -->
+        <button id="btn">Haz Click Aquí</button>
+    </div>
+
+    <!-- Importamos el archivo de lógica. 
+         El atributo 'defer' asegura que el script se ejecute una vez que el HTML se haya procesado completamente. -->
+    <script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+/*
+ * Archivo: JAVASCRIPT MID LEVEL/Eventos/Eventos de Interfaz/style.css
+ * Propósito: Estilos para el laboratorio de eventos de interfaz (load, scroll, etc.)
+ */
+
+/* Estilos globales: Centrado total y fondo luminoso */
+body { /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para evitar espacios en blanco. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define una pila de fuentes moderna y legible. */
+    background-color: #f0f2f5; /* Establece un color de fondo gris muy claro para una apariencia luminosa. */
+    color: #333; /* Define un color de texto gris oscuro para una excelente legibilidad. */
+    display: flex; /* Habilita Flexbox para el body, permitiendo centrar su contenido. */
+    justify-content: center; /* Centra horizontalmente los elementos hijos del body. */
+    align-items: center; /* Centra verticalmente los elementos hijos del body. */
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% del alto del viewport (ventana). */
+}
+
+/* Contenedor principal con diseño de tarjeta blanca */
+.contenedor1 { /* Selector de la clase .contenedor1, agrupa el contenido en una tarjeta visual. */
+    background-color: #ffffff; /* Fondo blanco puro. */
+    padding: 40px; /* Espaciado interno para dar aire al contenido. */
+    border-radius: 12px; /* Esquinas redondeadas. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad. */
+    text-align: center; /* Centra los elementos internos. */
+    max-width: 500px; /* Limita el ancho máximo. */
+    display: flex; /* Flexbox para organizar los elementos verticalmente. */
+    flex-direction: column; /* Alineación en columna. */
+    align-items: center; /* Centrado horizontal de los items. */
+    gap: 15px; /* Espaciado entre el título, input e imagen. */
+}
+
+/* Estilo informativo para ayudar a visualizar eventos como scroll o resize */
+h1 { /* Selector de la etiqueta h1, aplica estilos al título principal. */
+    margin: 0; /* Elimina márgenes por defecto. */
+    color: #2c3e50; /* Define un color azul grisáceo oscuro para el título, creando una jerarquía visual clara. */
+}
+
+/* Estilo para el input de prueba (clase .prueba) */
+.prueba { /* Selector de la clase .prueba, aplicada al input de texto. */
+    width: 100%; /* Ocupa el ancho disponible del contenedor. */
+    max-width: 300px; /* Limita el ancho para que no sea excesivo. */
+    padding: 12px 15px; /* Espaciado interno para el texto. */
+    border: 2px solid #ccc; /* Borde gris suave inicial. */
+    border-radius: 8px; /* Redondea las esquinas del input. */
+    outline: none; /* Elimina el contorno predeterminado del navegador. */
+    font-size: 1rem; /* Tamaño de fuente estándar. */
+    transition: all 0.3s ease; /* Transición suave para cambios de color y foco. */
+}
+
+/* Resalte visual cuando el usuario interactúa con el input */
+.prueba:focus { /* Estado de foco cuando el usuario hace clic para escribir. */
+    border-color: #4a90e2; /* Cambia el borde a azul. */
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Crea un anillo de luz azul suave. */
+}

@@ -7,54 +7,54 @@
  */
 
 /* Estilos base del documento. */
-body{
-    margin: 0; /* Reset de márgenes. */
-    font-family: sans-serif; /* Tipografía limpia. */
+body{ /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para evitar espacios en blanco. */
+    font-family: sans-serif; /* Define una fuente genérica sin serifa para una tipografía limpia y legible. */
 }
 
 /* 
  * .overlay: capa que cubre el contenido. 
  * Usa un degradado para dar efecto de desvanecimiento sobre el fondo.
  */
-.overlay{
-    background: linear-gradient(to top, #fff, transparent); /* Degradado de blanco a transparente. */
-    position: absolute; /* Se posiciona respecto al body o ancestro posicionado. */
-    z-index: 20; /* Por debajo de la caja fija pero sobre el contenido. */
-    width: 100%; /* Cubre todo el ancho. */
-    bottom: 0; /* Anclado al fondo. */
-    height: 100%; /* Cubre todo el alto. */
+.overlay{ /* Selector de la clase .overlay, crea una capa superpuesta. */
+    background: linear-gradient(to top, #fff, transparent); /* Aplica un degradado lineal de blanco a transparente, creando un efecto de desvanecimiento. */
+    position: absolute; /* Posiciona el elemento de forma absoluta respecto a su ancestro posicionado más cercano (o el body). */
+    z-index: 20; /* Establece el orden de apilamiento, asegurando que esté por debajo de la caja fija pero por encima del contenido. */
+    width: 100%; /* Hace que la capa cubra todo el ancho disponible de su contenedor. */
+    bottom: 0; /* Ancla la capa al borde inferior de su contenedor. */
+    height: 100%; /* Hace que la capa cubra todo el alto disponible de su contenedor. */
 }
 
 /* Contenedor de contenido central para dar contexto espacial. */
-.contenedor{
-    padding: 150px; /* Gran relleno para simular volumen. */
-    background: #00f; /* Fondo azul intenso. */
-    position: relative; /* Contexto de posicionamiento. */
+.contenedor{ /* Selector de la clase .contenedor, define un área de contenido. */
+    padding: 150px; /* Aplica un gran relleno interno para simular volumen y espacio. */
+    background: #00f; /* Establece un fondo azul intenso para el contenedor. */
+    position: relative; /* Establece un contexto de posicionamiento para los elementos hijos posicionados absolutamente. */
 }
 
 /* Tipografía del modal o contenido. */
-h2{
-    font-size: 18px;
-    margin: 0; 
+h2{ /* Selector de la etiqueta h2, aplica estilos a los títulos de segundo nivel. */
+    font-size: 18px; /* Define el tamaño de la fuente en 18 píxeles. */
+    margin: 0; /* Elimina los márgenes predeterminados del encabezado. */
 }
 
-p{
-    font-size: 14px;
-    margin: 0; 
+p{ /* Selector de la etiqueta p, aplica estilos a los párrafos. */
+    font-size: 14px; /* Define el tamaño de la fuente en 14 píxeles. */
+    margin: 0; /* Elimina los márgenes predeterminados del párrafo. */
 }
 
 /* 
  * .box: elemento con posicionamiento fijo. 
  * No se desplaza al hacer scroll y se ancla al viewport del navegador.
  */
-.box{
-    height: 60px; /* Altura restringida. */
-    width: 200px; /* Ancho restringido. */
-    background: #fff; /* Fondo blanco. */
-    position: fixed; /* Se ancla a la ventana del navegador. */
-    right: 0; /* Pegado al borde derecho de la pantalla. */
-    border: 1px solid black; /* Borde de definición. */
-    border-right: 0; /* Oculta el borde derecho para que parezca salir del lateral. */
-    box-shadow: 0 0 40px #0009; /* Sombra profunda para dar efecto de elevación. */
-    z-index: 30; /* El nivel más alto de apilamiento para estar siempre visible. */
+.box{ /* Selector de la clase .box, aplica estilos a un elemento con posicionamiento fijo. */
+    height: 60px; /* Establece una altura fija de 60 píxeles para la caja. */
+    width: 200px; /* Establece un ancho fijo de 200 píxeles para la caja. */
+    background: #fff; /* Define un fondo blanco para la caja. */
+    position: fixed; /* Posiciona el elemento de forma fija respecto al viewport, lo que significa que no se desplaza con el scroll. */
+    right: 0; /* Ancla la caja al borde derecho de la ventana del navegador. */
+    border: 1px solid black; /* Aplica un borde sólido negro de 1 píxel de grosor. */
+    border-right: 0; /* Elimina el borde derecho para crear un efecto visual de que la caja "sale" del lateral. */
+    box-shadow: 0 0 40px #0009; /* Añade una sombra profunda y difuminada para dar un fuerte efecto de elevación. */
+    z-index: 30; /* Establece el orden de apilamiento más alto, asegurando que la caja esté siempre visible por encima de otros elementos. */
 }

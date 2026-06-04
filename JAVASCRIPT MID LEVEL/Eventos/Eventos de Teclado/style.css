@@ -1,0 +1,61 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT MID LEVEL/Eventos/Eventos de Teclado/style.css
+ * Carpeta del tema: «Eventos de Teclado». Hoja: «style».
+ * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
+ * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ */
+
+/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
+body { /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para evitar espacios en blanco. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define una pila de fuentes moderna y legible. */
+    background-color: #f0f2f5; /* Establece un color de fondo gris muy claro para una apariencia luminosa. */
+    color: #333; /* Define un color de texto gris oscuro para una excelente legibilidad. */
+    display: flex; /* Habilita Flexbox para el body, permitiendo centrar su contenido. */
+    justify-content: center; /* Centra horizontalmente los elementos hijos del body. */
+    align-items: center; /* Centra verticalmente los elementos hijos del body. */
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% del alto del viewport (ventana). */
+}
+
+/* Contenedor principal para el input, ahora con un fondo blanco y sombra más sutil. */
+.contenedor1 { /* Selector de la clase .contenedor1, aplica estilos al contenedor principal. */
+    background-color: #ffffff; /* Fondo blanco puro para el contenedor, creando un efecto de tarjeta. */
+    padding: 40px; /* Espaciado interno generoso para que el contenido no se pegue a los bordes. */
+    border-radius: 12px; /* Redondea las esquinas del contenedor para una apariencia suave. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Añade una sombra suave para dar profundidad y elevación. */
+    text-align: center; /* Centra el texto y los elementos en línea dentro del contenedor. */
+}
+
+/* Estilos del input de prueba, adaptados a un tema claro. */
+.input-prueba { /* Selector de la clase .input-prueba, aplica estilos al campo de entrada de texto. */
+    width: 300px; /* Establece un ancho fijo para el campo de entrada. */
+    padding: 15px 20px; /* Define el relleno interno del input para el texto. */
+    border: 2px solid #ccc; /* Establece un borde gris claro de 2px de grosor. */
+    border-radius: 8px; /* Redondea las esquinas del input para una apariencia suave. */
+    outline: none; /* Elimina el contorno predeterminado que aparece al enfocar el input. */
+    font-size: 1.1em; /* Aumenta ligeramente el tamaño de la fuente para una mejor legibilidad. */
+    background-color: #fdfdfd; /* Establece un fondo casi blanco para el input. */
+    color: #333; /* Define un color de texto oscuro para lo que el usuario escribe. */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Añade una sombra interna muy sutil para un efecto de profundidad. */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Aplica una transición suave a los cambios de borde, sombra y fondo. */
+}
+
+/* Estilos del input al pasar el cursor (hover), con colores más suaves */
+.input-prueba:hover { /* Selector de pseudo-clase :hover para el input. */
+    border-color: #88bbee; /* Cambia el color del borde a un azul claro al pasar el cursor. */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Aumenta la sombra de forma sutil para un efecto de elevación. */
+}
+
+/* Estilos del input al estar enfocado (focus), con un borde y sombra de enfoque claros */
+.input-prueba:focus { /* Selector de pseudo-clase :focus para el input. */
+    border-color: #4a90e2; /* Cambia el color del borde a un azul más vibrante para indicar que está activo. */
+    background-color: #ffffff; /* Asegura que el fondo del input sea blanco total al enfocar. */
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3); /* Añade un anillo de enfoque azul claro para accesibilidad y estética. */
+}
+
+/* Estilo para el placeholder del input en un tema claro */
+.input-prueba::placeholder { /* Selector de pseudo-elemento ::placeholder para el texto de marcador de posición. */
+    color: #999; /* Define un color gris medio para el texto del placeholder. */
+    opacity: 0.7; /* Hace el texto del placeholder ligeramente transparente para diferenciarlo del texto real. */
+}

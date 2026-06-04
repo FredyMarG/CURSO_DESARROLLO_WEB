@@ -1,5 +1,4 @@
 /**
- * LABORATORIO: FLUJO DE EVENTOS (EVENT FLOW)
  * 
  * El estándar DOM Level 3 Events define 3 fases en la propagación de un evento:
  * 1. Capture Phase: El evento baja desde la raíz (window) hasta el elemento objetivo.
@@ -27,11 +26,11 @@ contenedor1.addEventListener("click",(e)=>{
      * los hijos o subiendo hacia los padres.
      */
     // e.stopPropagation(); 
-}, true);
+});
 
 contenedor2.addEventListener("click",(e)=>{
     alert("Fase Captura: Contenedor Interno (Azul)");
-}, true);
+});
 
 /**
  * FASE DE OBJETIVO / BURBUJEO (useCapture = false / default)
@@ -40,6 +39,7 @@ contenedor2.addEventListener("click",(e)=>{
  */
 button.addEventListener("click",(e)=>{
     alert("Fase Objetivo/Burbujeo: Di click en el botón");
+    e.stopPropagation(); // Detiene la propagación del evento hacia los padres.
     
     /**
      * SUGERENCIA TÉCNICA: stopPropagation()
@@ -48,11 +48,3 @@ button.addEventListener("click",(e)=>{
      */
     // e.stopPropagation();
 });
-
-/**
- * NOTAS DE MEJORAS:
- * 1. Organización: Se separaron las declaraciones 'const' para mayor claridad.
- * 2. Semántica: Se cambiaron los mensajes de alert para identificar qué fase ocurre.
- * 3. Control de Flujo: Se menciona 'stopPropagation()', vital para evitar 
- *    efectos secundarios en interfaces complejas.
- */

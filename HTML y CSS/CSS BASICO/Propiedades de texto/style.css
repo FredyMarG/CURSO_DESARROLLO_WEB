@@ -8,12 +8,12 @@
 
 
 /* Estilos del selector p: personalización de la lectura del párrafo. */
-p{
-    color: red; /* Color del texto. */
-    font-family: monserrat, sans-serif; /* Familia tipográfica con fallback. */
-    font-size: 18px; /* Tamaño de la fuente. */
-    font-weight: 500; /* Grosor de la fuente (Medium). */
-    font-style: oblique; /* Inclinación del texto. */
-    text-align: justify; /* Alineación del texto para ocupar todo el ancho. */
-    text-decoration: none; /* Elimina cualquier decoración como subrayado. */
+p{ /* Selector de la etiqueta p, aplica estilos a todos los párrafos del documento. */
+    color: red; /* Establece el color del texto del párrafo en rojo. */
+    font-family: monserrat, sans-serif; /* Define la familia tipográfica 'Montserrat' con 'sans-serif' como alternativa. */
+    font-size: 18px; /* Establece el tamaño de la fuente en 18 píxeles. */
+    font-weight: 500; /* Aplica un grosor de fuente medio (semi-bold). */
+    font-style: oblique; /* Inclina el texto ligeramente, dándole un estilo oblicuo. */
+    text-align: justify; /* Alinea el texto de forma justificada, distribuyéndolo uniformemente entre los márgenes. */
+    text-decoration: none; /* Elimina cualquier decoración de texto, como subrayados o tachados. */
 }

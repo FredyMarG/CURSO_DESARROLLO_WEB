@@ -1,0 +1,78 @@
+/*
+ * CURSO_WEB_DOC_CSS v1
+ * Archivo: JAVASCRIPT MID LEVEL/Eventos/Eventos de Mouse/style.css
+ * Propósito: Define la estética de un botón interactivo para pruebas de eventos de mouse.
+ */
+
+/* Estilos globales para un entorno claro y limpio */
+body { /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
+    margin: 0; /* Elimina los márgenes predeterminados del navegador para evitar espacios en blanco. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define una pila de fuentes moderna y legible. */
+    background-color: #f0f2f5; /* Establece un color de fondo gris muy claro para una apariencia luminosa. */
+    color: #333; /* Define un color de texto gris oscuro para una excelente legibilidad. */
+    display: flex; /* Habilita Flexbox para el body, permitiendo centrar su contenido. */
+    justify-content: center; /* Centra horizontalmente los elementos hijos del body. */
+    align-items: center; /* Centra verticalmente los elementos hijos del body. */
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% del alto del viewport (ventana). */
+}
+
+/* Contenedor principal con diseño de tarjeta blanca */
+.contenedor1 { /* Selector de la clase .contenedor1, aplica estilos al contenedor principal. */
+    background-color: #ffffff; /* Fondo blanco puro para el contenedor, creando un efecto de tarjeta. */
+    padding: 40px; /* Espaciado interno generoso para que el contenido no se pegue a los bordes. */
+    border-radius: 12px; /* Redondea las esquinas del contenedor para una apariencia suave. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Añade una sombra suave para dar profundidad y elevación. */
+    text-align: center; /* Centra el texto y los elementos en línea dentro del contenedor. */
+    max-width: 500px; /* Limita el ancho máximo del contenedor para evitar que se estire demasiado en pantallas grandes. */
+    width: 90%; /* Permite que el contenedor ocupe el 90% del ancho disponible, haciéndolo responsive. */
+}
+
+/* Estilos del botón interactivo */
+#btn { /* Selector del ID #btn, aplica estilos específicos al botón. */
+    /* Estructura y Texto */
+    padding: 15px 35px; /* Define el relleno interno del botón: 15px vertical, 35px horizontal. */
+    font-size: 18px; /* Establece el tamaño de la fuente del texto del botón para una buena legibilidad. */
+    font-weight: 600; /* Aplica un grosor de fuente semi-negrita para destacar el texto. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Usa la misma pila de fuentes que el body para consistencia. */
+    
+    /* Estética Visual */
+    color: white; /* Color del texto del botón en blanco para un alto contraste. */
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); /* Aplica un degradado de color de azul a morado como fondo. */
+    border: none; /* Elimina el borde predeterminado que los navegadores aplican a los botones. */
+    border-radius: 12px; /* Redondea las esquinas del botón para una apariencia moderna y suave. */
+    
+    /* Interactividad */
+    cursor: pointer; /* Cambia el cursor a un puntero (mano) cuando el mouse está sobre el botón, indicando que es interactivo. */
+    outline: none; /* Elimina el contorno que aparece por defecto en algunos navegadores al enfocar el botón. */
+    user-select: none; /* Impide que el usuario pueda seleccionar el texto del botón, mejorando la experiencia de clic. */
+    
+    /* Efectos Visuales */
+    box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.3); /* Añade una sombra sutil para dar un efecto de elevación al botón. */
+    
+    /* Transiciones: Suaviza todos los cambios de estado en 0.3 segundos */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Aplica una transición suave a todas las propiedades CSS que cambien, con una duración de 0.3s y una función de temporización personalizada. */
+    
+    /* Posicionamiento */
+    display: block; /* Establece el botón como un elemento de bloque para que ocupe su propia línea y permita el uso de 'margin: auto'. */
+    margin: 30px auto 0; /* Centra el botón horizontalmente ('auto') y le da un margen superior de 30px, sin margen inferior. */
+}
+
+/* Efecto al pasar el cursor (MouseOver / MouseEnter) */
+#btn:hover { /* Selector de pseudo-clase :hover, aplica estilos cuando el cursor está sobre el botón. */
+    transform: translateY(-3px) scale(1.03); /* Mueve el botón 3px hacia arriba y lo escala un 3% para un efecto de "flotar". */
+    box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4); /* Aumenta y difumina la sombra para intensificar el efecto de elevación. */
+    filter: brightness(1.1); /* Aumenta ligeramente el brillo del color del botón para hacerlo más vibrante. */
+}
+
+/* Efecto al hacer clic (MouseDown / Click) */
+#btn:active { /* Selector de pseudo-clase :active, aplica estilos cuando el botón está siendo presionado. */
+    transform: translateY(0) scale(0.97); /* Regresa el botón a su posición original y lo encoge un 3% para simular una pulsación. */
+    box-shadow: 0 5px 10px -2px rgba(99, 102, 241, 0.3); /* Reduce la sombra para dar la impresión de que el botón se "hunde" en la superficie. */
+    filter: brightness(0.9); /* Oscurece ligeramente el botón para un efecto visual de presión. */
+}
+
+/* Estilo para resaltar cuando se usa el menú contextual o clic auxiliar */
+#btn:focus { /* Selector de pseudo-clase :focus, aplica estilos cuando el botón está enfocado (por tabulación o clic). */
+    /* Crea un anillo exterior de color morado translúcido para indicar foco */
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.4); /* Crea un anillo de sombra exterior translúcido para indicar que el botón está enfocado, mejorando la accesibilidad. */
+}

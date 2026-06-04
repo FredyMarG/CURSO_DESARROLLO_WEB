@@ -11,86 +11,90 @@ body {
 }
 
 .flex-container {
+.flex-container { /* Selector de la clase .flex-container, define un contenedor flexible para las tarjetas. */
     /* Layout flexible que permite que las tarjetas se ajusten según el ancho de pantalla */
-	display: flex;           /* Activa el modelo Flexbox */
-	flex-wrap: wrap;         /* Permite que los elementos pasen a la siguiente fila si no caben */
-	justify-content: center; /* Centra los elementos horizontalmente en el contenedor */
-	color: #333;             /* Color de texto gris oscuro */
-	font-family: sans-serif; /* Fuente de palo seco para mejor legibilidad */
+	display: flex;           /* Activa el modelo Flexbox para organizar los elementos hijos. */
+	flex-wrap: wrap;         /* Permite que los elementos hijos se envuelvan a la siguiente línea si no hay espacio suficiente. */
+	justify-content: center; /* Centra los elementos hijos horizontalmente dentro del contenedor. */
+	color: #333;             /* Establece un color de texto gris oscuro por defecto para los elementos dentro del contenedor. */
+	font-family: sans-serif; /* Define una fuente genérica sin serifa para una mejor legibilidad. */
 }
 
 .flex-item {
+.flex-item { /* Selector de la clase .flex-item, aplica estilos a cada tarjeta individual. */
     /* Glassmorphism: Efecto de cristal translúcido */
-	flex-grow: 1;        /* Permite que los items crezcan para ocupar el espacio disponible */
-	margin: 20px;        /* Espacio exterior entre tarjetas */
-	max-width: 320px;    /* Limita el ancho máximo de cada tarjeta */
-    color: #e0e0e0;      /* Color de texto claro para mejor contraste */
-    background: linear-gradient(135deg, rgba(31, 33, 35, 0.7), rgba(15, 20, 25, 0.5)); /* Gradiente sofisticado con transparencia */
+	flex-grow: 1;        /* Permite que la tarjeta crezca para ocupar el espacio disponible dentro del flex-container. */
+	margin: 20px;        /* Establece un margen exterior de 20px alrededor de cada tarjeta. */
+	max-width: 320px;    /* Limita el ancho máximo de cada tarjeta a 320px. */
+    color: #e0e0e0;      /* Define un color de texto claro para un mejor contraste sobre el fondo oscuro. */
+    background: linear-gradient(135deg, rgba(31, 33, 35, 0.7), rgba(15, 20, 25, 0.5)); /* Aplica un degradado de fondo sofisticado con transparencia para el efecto glassmorphism. */
     /* El desenfoque del fondo da un toque premium */
-    backdrop-filter: blur(15px); /* Desenfoque más intenso para un efecto de cristal más realista */
-    --current-color: #71a154;   /* Variable para sincronizar el color del borde y el resplandor */
-	border: 2px solid var(--current-color); /* Borde vinculado a la variable animada */
-    border-radius: 24px;        /* Esquinas muy redondeadas */
-	padding: 2rem 1.5rem;       /* Relleno interno superior/inferior y lateral */
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3); /* Sombra pesada para dar elevación */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: center;         /* Centra todo el contenido de la tarjeta */
-    position: relative;         /* Permite posicionar elementos internos de forma absoluta si se requiere */
-    cursor: pointer;            /* Cambia el cursor a puntero */
-    animation: borderCycle 2s infinite step-end; /* Cambio instantáneo cada 0.5s (2s total / 4 colores) */
+    backdrop-filter: blur(15px); /* Aplica un desenfoque intenso al fondo detrás del elemento, creando un efecto de cristal realista. */
+    --current-color: #71a154;   /* Define una variable CSS personalizada para sincronizar el color del borde y el resplandor. */
+	border: 2px solid var(--current-color); /* Establece un borde de 2px cuyo color está vinculado a la variable animada. */
+    border-radius: 24px;        /* Redondea las esquinas de la tarjeta de forma pronunciada. */
+	padding: 2rem 1.5rem;       /* Aplica un relleno interno de 2rem vertical y 1.5rem horizontal. */
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3); /* Añade una sombra pesada para dar un fuerte efecto de elevación. */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza las transiciones de transformación y sombra. */
+    text-align: center;         /* Centra todo el contenido de texto dentro de la tarjeta. */
+    position: relative;         /* Establece el contexto de posicionamiento para elementos hijos posicionados absolutamente. */
+    cursor: pointer;            /* Cambia el cursor a un puntero (mano) al pasar sobre la tarjeta. */
+    animation: borderCycle 2s infinite step-end; /* Aplica una animación llamada 'borderCycle' que se repite infinitamente con un paso final. */
 }
 
-.flex-item:hover {
-	transform: translateY(-10px); /* Efecto de elevación */
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 40px var(--current-color); /* Sombra de elevación + resplandor sincronizado */
-    border-width: 3px;            /* Engrosa ligeramente el borde */
+.flex-item:hover { /* Selector de pseudo-clase :hover para la tarjeta. */
+	transform: translateY(-10px); /* Mueve la tarjeta 10px hacia arriba para un efecto de elevación. */
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 40px var(--current-color); /* Añade una sombra de elevación y un resplandor cuyo color está sincronizado con la variable animada. */
+    border-width: 3px;            /* Aumenta ligeramente el grosor del borde a 3px al pasar el cursor. */
 }
-.flex-item:focus {
-    outline: none;
-    transform: scale(1.05);
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 30px var(--current-color); 
-}
-
-h2,h3 {
-	margin: 0; /* Elimina los márgenes por defecto de los títulos para controlarlos manualmente */
+.flex-item:focus { /* Selector de pseudo-clase :focus para la tarjeta. */
+    outline: none; /* Elimina el contorno predeterminado que aparece al enfocar la tarjeta. */
+    transform: scale(1.05); /* Escala la tarjeta un 5% al enfocarla. */
+	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 30px var(--current-color); /* Aplica una sombra de elevación y un resplandor sincronizado al enfocar. */
 }
 
-h3 {
-	color: #ffffff; /* Blanco puro para el modelo */
+h2,h3 { /* Selector de las etiquetas h2 y h3, aplica estilos a los títulos de segundo y tercer nivel. */
+	margin: 0; /* Elimina los márgenes por defecto de los títulos para permitir un control manual más preciso. */
 }
 
-p b {
-	color: green /* El precio (etiqueta <b>) se muestra en verde */
+h3 { /* Selector de la etiqueta h3, aplica estilos a los títulos de tercer nivel. */
+	color: #ffffff; /* Establece el color del texto en blanco puro para el modelo. */
 }
 
-.llave-img {
-	width: 300px;        /* Ancho fijo para la imagen */
-    border-radius: 10px; /* Esquinas ligeramente redondeadas para la imagen */
-    margin-bottom: 10px; /* Espacio debajo de la imagen */
+p b { /* Selector de la etiqueta b dentro de un párrafo, aplica estilos al texto en negrita. */
+	color: green /* Establece el color del texto en negrita (usado para el precio) en verde. */
+}
+
+.llave-img { /* Selector de la clase .llave-img, aplica estilos a la imagen de la llave. */
+	width: 300px;        /* Establece un ancho fijo de 300px para la imagen. */
+    border-radius: 10px; /* Redondea ligeramente las esquinas de la imagen. */
+    margin-bottom: 10px; /* Añade un margen inferior de 10px debajo de la imagen. */
 }
 
 
-form {
-	width: 100%;         /* El formulario ocupa todo el ancho inferior */
-	text-align: center;  /* Centra el botón de enviar */
-	padding: 50px;       /* Gran espacio alrededor del formulario */
+form { /* Selector de la etiqueta form, aplica estilos al formulario. */
+	width: 100%;         /* Hace que el formulario ocupe todo el ancho disponible. */
+	text-align: center;  /* Centra el contenido del formulario, incluyendo el botón de enviar. */
+	padding: 50px;       /* Aplica un gran relleno interno de 50px alrededor del formulario. */
 }
 
-input[type="submit"]{
-	background: #71a154; /* Fondo verde para el botón */
-	color: #fff;         /* Texto blanco */
-	border: none;        /* Sin bordes */
-	padding: 12px 36px;  /* Botón grande y cómodo para el clic */
-    border-radius: 10px; /* Esquinas redondeadas del botón */
-	font-size: 17px;     /* Letra legible */
-	letter-spacing: 1px  /* Espaciado entre letras para toque moderno */
+input[type="submit"]{ /* Selector de input con atributo type="submit", aplica estilos al botón de envío. */
+	background: #71a154; /* Establece un fondo verde para el botón. */
+	color: #fff;         /* Define el color del texto en blanco. */
+	border: none;        /* Elimina los bordes predeterminados del botón. */
+	padding: 12px 36px;  /* Aplica un relleno interno de 12px vertical y 36px horizontal para un botón grande y cómodo. */
+    border-radius: 10px; /* Redondea las esquinas del botón. */
+	font-size: 17px;     /* Establece el tamaño de la fuente en 17px para una letra legible. */
+	letter-spacing: 1px  /* Añade un espaciado de 1px entre las letras para un toque moderno. */
 }
 
 /* --- Animación de Ciclo de Colores Profesional --- */
-@keyframes borderCycle {
-    0%   { --current-color: #71a154; } /* Verde original */
-    25%  { --current-color: #3b82f6; } /* Azul profesional */
-    50%  { --current-color: #8b5cf6; } /* Púrpura elegante */
-    75%  { --current-color: #ef4444; } /* Rojo suave */
-    100% { --current-color: #71a154; } /* Cierre del ciclo */
+@keyframes borderCycle { /* Define una animación de fotogramas clave llamada 'borderCycle'. */
+    0%   { --current-color: #71a154; } /* En el 0% de la animación, la variable --current-color es verde. */
+    25%  { --current-color: #3b82f6; } /* En el 25% de la animación, cambia a un azul profesional. */
+    50%  { --current-color: #8b5cf6; } /* En el 50% de la animación, cambia a un púrpura elegante. */
+    75%  { --current-color: #ef4444; } /* En el 75% de la animación, cambia a un rojo suave. */
+    100% { --current-color: #71a154; } /* En el 100% de la animación, vuelve al verde original, cerrando el ciclo. */
+}
+}
 }
