@@ -1,267 +1,251 @@
 /*
- * CURSO_WEB_DOC_CSS v1
+ * LABORATORIO: SISTEMA DE COMPRA DE COMPUTADORES
  * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/style.css
- * Carpeta del tema: «1 Comprar Computador». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
- */
-
-/* 
-   ESTILOS: SISTEMA DE COMPRA
-   Diseño de interfaz para validación de presupuesto y estados de éxito/error.
+ * Propósito: Estilizar la interfaz de validación de resolución y presupuesto,
+ * manejando estados visuales de éxito/error y animaciones de transición.
 */
 
-/* RESET */
+/* 
+   1. RESET & CONFIGURACIÓN BASE
+   Normalizamos el comportamiento de los elementos en todos los navegadores.
+*/
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    box-sizing: border-box; /* El tamaño del elemento incluye el padding y el borde. */
+    margin: 0;              /* Elimina los márgenes externos por defecto. */
+    padding: 0;             /* Elimina el espacio interno por defecto. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente del sistema. */
 }
 
 body {
-    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
-    min-height: 100vh;
+    background: linear-gradient(135deg, #eef2f7 0%, #dfe6f0 100%); /* Fondo degradado suave. */
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana. */
 }
 
-/* 🔹 CONTENEDOR PRINCIPAL */
+/* 
+   2. CONTENEDOR DEL ENUNCIADO (CARD)
+   Presentación visual del ejercicio.
+*/
 .enunciado {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+    width: 90%;                                 /* Ancho relativo al contenedor padre. */
+    max-width: 1200px;                          /* Límite máximo para pantallas grandes. */
+    margin: 30px auto;                          /* Centrado horizontal con margen vertical. */
+    background: #ffffff;                        /* Fondo blanco para la tarjeta. */
+    padding: 25px;                              /* Espaciado interno. */
+    border-radius: 18px;                        /* Esquinas redondeadas. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra para dar profundidad. */
+    transition: transform 0.3s ease;            /* Suaviza la animación del hover. */
 }
 
 .enunciado:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Eleva la tarjeta levemente al pasar el cursor. */
 }
 
-/* 🔹 TITULO */
 .title {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #1e3a8a;
-    font-weight: bold;
-    letter-spacing: 1px;
+    text-align: center;   /* Centra el texto del título. */
+    margin-bottom: 15px;  /* Espacio inferior. */
+    color: #1e3a8a;       /* Azul oscuro. */
+    font-weight: bold;    /* Texto en negrita. */
+    letter-spacing: 1px;  /* Separación entre letras. */
 }
 
-/* 🔹 TEXTO */
 .enunciado p {
-    margin: 10px 0;
-    line-height: 1.7;
-    color: #555;
+    margin: 10px 0;   /* Margen vertical. */
+    line-height: 1.7; /* Altura de línea para legibilidad. */
+    color: #555;      /* Gris intermedio. */
 }
 
-/* 🔹 LISTA */
+/* 
+   3. ESTILIZACIÓN DE LISTAS
+   Personalización de viñetas y numeración con pseudo-elementos.
+*/
 ul {
-    list-style-type: none;
-    padding-left: 40px;
+    list-style-type: none; /* Quita los puntos por defecto. */
+    padding-left: 40px;    /* Espacio para la sangría. */
 }
 
 ul>li {
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+    position: relative; /* Contexto para posicionar la viñeta personalizada. */
+    padding-left: 20px; /* Espacio para que el texto no toque la viñeta. */
+    margin: 8px 0;      /* Margen vertical entre ítems. */
+    color: #444;        /* Color del texto. */
+    line-height: 1.6;   /* Altura de línea. */
 }
 
 ul>li::before {
-    content: '●';
-    color: #2563eb;
-    font-size: 18px;
+    content: '●';    /* Carácter de viñeta. */
+    color: #2563eb;  /* Azul vibrante. */
+    font-size: 18px; /* Tamaño del punto. */
     position: absolute;
-    left: 0;
-    top: -3px;
+    left: 0;         /* Alineación izquierda. */
+    top: -3px;       /* Ajuste de altura. */
 }
 
 ol {
-    list-style-type: none;
-    counter-reset: item;
-    padding-left: 0;
-    margin: 15px 0;
+    list-style-type: none; /* Quita la numeración automática. */
+    counter-reset: item;   /* Inicializa el contador. */
+    padding-left: 0;       /* Sin sangría inicial. */
+    margin: 15px 0;        /* Margen vertical. */
 }
 
 ol>li {
-    counter-increment: item;
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+    counter-increment: item; /* Suma 1 al contador por cada li. */
+    position: relative;      /* Contexto para posicionar el número. */
+    padding-left: 20px;      /* Espacio para el número. */
+    margin: 8px 0;           /* Separación vertical. */
+    color: #444;             /* Color del texto. */
+    line-height: 1.6;        /* Altura de línea. */
 }
 
 ol>li::before {
-    content: counter(item) '.';
-    color: #2563eb;
-    font-weight: bold;
-    font-size: 16px;
+    content: counter(item) '.'; /* Muestra el valor del contador seguido de punto. */
+    color: #2563eb;             /* Color azul. */
+    font-weight: bold;          /* Negrita. */
+    font-size: 16px;            /* Tamaño de fuente. */
     position: absolute;
-    left: 0;
-    top: 0;
+    left: 0;                    /* Pegado al borde izquierdo del li. */
+    top: 0;                     /* Alineación superior. */
 }
 
-li {
-    margin: 8px 0;
-    color: #444;
-}
-
-/* 🔹 BOTÓN CONTENEDOR */
+/* 
+   4. SECCIONES INTERACTIVAS
+*/
 .ask, #solucion {
-    text-align: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+    text-align: center;                         /* Centra el texto y botones internos. */
+    width: 90%;                                 /* Ancho responsivo. */
+    max-width: 1200px;                          /* Máximo permitido. */
+    margin: 30px auto;                          /* Centrado. */
+    background: #ffffff;                        /* Fondo blanco. */
+    padding: 25px;                              /* Relleno interno. */
+    border-radius: 18px;                        /* Esquinas redondeadas. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra. */
+    transition: transform 0.3s ease;            /* Suavizado de hover. */
 }
 
 .ask h2, #solucion h2 {
-    color: #1e3a8a;
-    margin-bottom: 15px;
+    color: #1e3a8a;      /* Color del encabezado. */
+    margin-bottom: 15px; /* Espacio inferior. */
 }
 
 .ask p{
-    color: #555;
-    line-height: 1.7;
-    font-size: 17px;
+    color: #555;       /* Color del texto descriptivo. */
+    line-height: 1.7;  /* Altura de línea. */
+    font-size: 17px;   /* Tamaño de fuente ligeramente mayor al base. */
 }
 
 .ask:hover, #solucion:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px); /* Efecto de elevación. */
 }
 
 .solucion{
-    opacity: 0;
-    visibility: hidden;
+    opacity: 0;          /* Totalmente transparente al inicio. */
+    visibility: hidden;  /* Oculto de la interacción del usuario. */
 }
 
-/* 🔹 ESTILO PARA EL MENSAJE DINÁMICO DE LA SOLUCIÓN */
+/* 
+   5. MENSAJES DE RESPUESTA
+   Estilos dinámicos para mostrar el éxito o error de la compra.
+*/
 .resultado-msg {
-    margin-top: 25px;
-    padding: 20px;
-    border-radius: 15px;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-align: center;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    margin-top: 25px;           /* Separación superior. */
+    padding: 20px;              /* Espacio interno. */
+    border-radius: 15px;        /* Bordes curvos. */
+    color: #ffffff;             /* Color de texto blanco por defecto. */
+    font-weight: 700;           /* Letra en negrita. */
+    font-size: 1.1rem;          /* Tamaño destacado. */
+    text-align: center;         /* Texto centrado. */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  /* Sombra al texto. */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra de la caja. */
+    /* Animación de entrada con curva de velocidad elástica. */
     animation: mostrarMensaje 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Clase extra para disparar la salida desde JavaScript */
 .resultado-msg.fadeOut {
-    animation: ocultarMensaje 0.4s ease-in forwards;
+    animation: ocultarMensaje 0.4s ease-in forwards; /* Animación de salida controlada por JS. */
 }
 
 .success {
-    background: linear-gradient(135deg, #10b981 0%, #f0fff4 100%);
-    color: #064e3b; /* Verde oscuro para máxima legibilidad */
-    text-shadow: none;
+    background: linear-gradient(135deg, #10b981 0%, #f0fff4 100%); /* Degradado verde. */
+    color: #064e3b;   /* Verde oscuro para legibilidad. */
+    text-shadow: none; /* Elimina la sombra para que el texto oscuro sea más legible. */
 }
 
 .error {
-    background: linear-gradient(135deg, #f87171 0%, #fff5f5 100%);
-    color: #7f1d1d; /* Rojo oscuro para máxima legibilidad */
-    text-shadow: none;
+    background: linear-gradient(135deg, #f87171 0%, #fff5f5 100%); /* Degradado rojo. */
+    color: #7f1d1d;   /* Rojo oscuro para legibilidad. */
+    text-shadow: none; /* Elimina la sombra. */
 }
 
+/* 
+   6. BOTONES (CTA)
+*/
 button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 30px 0 30px;
-    padding: 14px 28px;
-    border: 1px solid rgba(37, 99, 235, 0.22);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%);
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    cursor: pointer;
+    display: inline-flex;     /* Permite alinear iconos y texto internamente. */
+    align-items: center;      /* Centrado vertical de contenido. */
+    justify-content: center; /* Centrado horizontal. */
+    margin: 20px 30px 0 30px; /* Separación externa. */
+    padding: 14px 28px;       /* Tamaño del botón. */
+    border: 1px solid rgba(37, 99, 235, 0.22); /* Borde sutil. */
+    border-radius: 16px;      /* Botón muy redondeado. */
+    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Azul degradado. */
+    color: #ffffff;           /* Texto blanco. */
+    font-size: 16px;          /* Tamaño de letra. */
+    font-weight: 700;         /* Negrita. */
+    letter-spacing: 0.6px;    /* Espaciado de letras. */
+    text-transform: uppercase; /* Mayúsculas. */
+    cursor: pointer;          /* Puntero de mano. */
+    /* Múltiples transiciones para un efecto fluido. */
     transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.35s ease, border-color 0.25s ease;
-    box-shadow: 0 14px 28px rgba(31, 79, 181, 0.18);
+    box-shadow: 0 14px 28px rgba(31, 79, 181, 0.18); /* Sombra de elevación. */
 }
 
 button:hover {
-    transform: translateY(-1px);
-    background: linear-gradient(180deg, #1b3ea8 0%, #60a5fa 100%);
-    border-color: rgba(37, 99, 235, 0.45);
-    box-shadow: 0 18px 32px rgba(31, 79, 181, 0.3);
-    color: #fff;
+    transform: translateY(-1px); /* Efecto de presión. */
+    background: linear-gradient(180deg, #1b3ea8 0%, #60a5fa 100%); /* Cambio de brillo. */
+    border-color: rgba(37, 99, 235, 0.45); /* Borde más visible. */
+    box-shadow: 0 18px 32px rgba(31, 79, 181, 0.3); /* Sombra más intensa. */
+    color: #fff; /* Asegura el color blanco. */
 }
 
-/* =========================
-   ANIMACIÓN APARECER
-========================= */
-
+/* 
+   7. CLASES DE CONTROL DE ANIMACIÓN
+   Utilizadas por JavaScript para disparar los efectos visuales.
+*/
 .mostrar{
-
-    visibility: visible;
-    animation: mostrarMensaje 2s ease forwards;
-
+    visibility: visible;                          /* Asegura que el elemento sea visible. */
+    animation: mostrarMensaje 2s ease forwards; /* Ejecuta animación de entrada. */
 }
-
-/* =========================
-   ANIMACIÓN OCULTAR
-========================= */
 
 .ocultar{
-
-    animation: ocultarMensaje 2s ease forwards;
-
+    animation: ocultarMensaje 2s ease forwards; /* Ejecuta animación de salida. */
 }
 
-/* =========================
-   KEYFRAMES
-========================= */
-
-
-/* --- Animación (@keyframes mostrarMensaje) --- */
+/* 
+   8. SISTEMA DE KEYFRAMES
+*/
 @keyframes mostrarMensaje {
-
     0%{
-        opacity: 0;
-        transform: translateY(-30px) scale(0.8);
+        opacity: 0;                              /* Invisible al inicio. */
+        transform: translateY(-30px) scale(0.8); /* Viene desde arriba y pequeño. */
     }
-
-    70%{
-        transform: translateY(5px) scale(1.02);
+    70%{ 
+        transform: translateY(5px) scale(1.02);  /* Rebote (baja de más y crece de más). */
     }
-
     100%{
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        opacity: 1;                              /* Estado final visible. */
+        transform: translateY(0) scale(1);       /* Tamaño y posición normal. */
     }
-
 }
 
-
-/* --- Animación (@keyframes ocultarMensaje) --- */
 @keyframes ocultarMensaje {
-
     0%{
-        opacity: 1;
-        transform: translateY(0) scale(1);
+        opacity: 1;                        /* Visible al inicio. */
+        transform: translateY(0) scale(1); /* Estado normal. */
     }
-
     30%{
-        transform: translateY(5px) scale(1.02);
+        transform: translateY(5px) scale(1.02); /* Pequeño rebote antes de irse. */
     }
-
     100%{
-        opacity: 0;
-        transform: translateY(-30px) scale(0.8);
+        opacity: 0;                              /* Se desvanece. */
+        transform: translateY(-30px) scale(0.8); /* Se encoge y sube. */
     }
-
 }

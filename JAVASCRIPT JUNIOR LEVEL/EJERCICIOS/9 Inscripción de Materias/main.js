@@ -1,14 +1,23 @@
-// 🔹 Traemos los elementos del DOM (inputs, contenedores, etc)
-let nombre = document.getElementById("nombre"), // input donde el usuario escribe su nombre
-    mat = document.getElementById("materia"), // select donde elige la materia
-    sol = document.getElementById("main-sol"), // contenedor principal del resultado
-    resultado = document.getElementById("resultado"), // donde mostramos mensajes (éxito/error)
-    form = document.getElementById("inscripcion-form"), // formulario completo
-    before = document.getElementById("before"), // donde mostramos la lista antes
-    after = document.getElementById("after") // donde mostramos la lista después
+/**
+ * SISTEMA DE INSCRIPCIÓN DE MATERIAS
+ * Este script gestiona la lógica de negocio para inscribir alumnos en diferentes materias,
+ * controlando el cupo máximo, evitando duplicados y actualizando el DOM en tiempo real.
+ */
+
+// 1. REFERENCIAS AL DOM
+// Capturamos los elementos necesarios para interactuar con la interfaz de usuario.
+let nombre = document.getElementById("nombre"),         // Campo de texto para el nombre del alumno.
+    mat = document.getElementById("materia"),           // Menú desplegable para seleccionar la materia.
+    sol = document.getElementById("main-sol"),         // Contenedor que envuelve la sección de resultados.
+    resultado = document.getElementById("resultado"),   // Elemento para mostrar mensajes de estado (éxito/error/aviso).
+    form = document.getElementById("inscripcion-form"), // El formulario que dispara el evento de envío.
+    before = document.getElementById("before"),         // Área para mostrar el estado de la materia ANTES de la acción.
+    after = document.getElementById("after");           // Área para mostrar el estado de la materia DESPUÉS de la acción.
 
 
-// 🔥 IMPORTANTE: el objeto está fuera de la función para que NO se reinicie cada vez
+// 2. BASE DE DATOS (ESTADO)
+// Objeto que almacena las materias y sus listas de alumnos inscritos.
+// Está fuera de la función para que los cambios persistan entre envíos del formulario.
 const materias = {
     matematicas: ['Carlos', 'Juan', 'Pedro', 'Maria', 'Luisa', 'Andres', 'Sofia', 'Diego', 'Camila'],
     fisica: ['Laura', 'Pedro', 'Andres', 'Juan', 'Valentina', 'Sofia', 'Mateo', 'Camila', 'Daniel'],
@@ -25,18 +34,21 @@ const materias = {
 }
 
 
-// 🔹 Función principal que se ejecuta al enviar el formulario
+/**
+ * 3. FUNCIÓN PRINCIPAL: solucion(e)
+ * Maneja el evento de 'submit', procesa los datos y actualiza la visualización.
+ * @param {Event} e - Objeto del evento de envío del formulario.
+ */
 function solucion(e) {
-    e.preventDefault() // evita que el form recargue la página
+    e.preventDefault(); // Detiene la recarga automática de la página para procesar con JS.
 
-    // 🔹 mostramos el contenedor de resultados (por si estaba oculto)
+    // Activamos la visibilidad del contenedor de solución.
     sol.style.display = "block"
 
-    // 🔹 obtenemos los valores actuales del input y select
-    let alumno = nombre.value.trim() // trim elimina espacios vacíos al inicio y final
-    let materia = mat.value // obtenemos la materia seleccionada
+    let alumno = nombre.value.trim(); // Captura el nombre y elimina espacios innecesarios.
+    let materia = mat.value;         // Captura la materia seleccionada.
 
-    // 🔹 VALIDACIÓN: si algún campo está vacío, mostramos mensaje y detenemos ejecución
+    // VALIDACIÓN 1: Campos vacíos.
     if (alumno === "" || materia === "") {
         resultado.innerHTML = "🚨 Por favor, completa todos los campos."
         before.innerHTML = ""
@@ -44,13 +56,12 @@ function solucion(e) {
         before.style.display = "none"
         after.style.display = "none"
         resultado.className = "resultado error"
-        return // corta la ejecución
+        return; // Detiene la ejecución si hay campos vacíos.
     }
 
-    // 🔹 obtenemos el array de alumnos de la materia seleccionada
-    let alumnos = materias[materia]
+    let alumnos = materias[materia]; // Referencia al array específico de la materia elegida.
 
-    // 🔥 BEFORE (ANTES DE INSCRIBIR)
+    // RENDERIZADO DEL ESTADO INICIAL (BEFORE)
     before.innerHTML = `
         <p>📘 Antes (${alumnos.length} alumnos):</p>
         <ul>
@@ -62,7 +73,7 @@ function solucion(e) {
         </ul>
     `
 
-    // 🔹 VALIDAR CUPO: si hay 20 alumnos o más, no se puede inscribir
+    // VALIDACIÓN 2: Límite de cupo (Máximo 20 alumnos).
     if (alumnos.length >= 20) {
         resultado.innerHTML = `❌ Lo siento <b>${alumno}</b>, cupo lleno en <b>${materia}</b>`
         before.innerHTML = `
@@ -78,42 +89,38 @@ function solucion(e) {
         after.innerHTML = ""
         after.style.display = "none"
         resultado.className = "resultado error"
-            // 🔹 limpiamos el formulario
+        
         setTimeout(() => {
-            form.reset() // limpia los campos del formulario
-        }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
+            form.reset(); // Resetea el formulario tras un breve retardo.
+        }, 1000)
         return
     }
 
-    // 🔹 VALIDAR DUPLICADOS: evita que el mismo alumno se inscriba dos veces
-    if (alumnos.includes(alumno)) { //alumnos.includes verifica si el alumno ya está en el array de la materia
+    // VALIDACIÓN 3: Alumno ya inscrito (Evita duplicados).
+    if (alumnos.includes(alumno)) { 
         resultado.innerHTML = `⚠️ <b>${alumno.replace(/\b\w/g, l => l.toUpperCase())}</b> ya está inscrito en <b>${materia.replace(/\b\w/g, l => l.toUpperCase())}</b>`
-            before.innerHTML = `
+        before.innerHTML = `
             <p>📘 ${alumnos.length} alumnos:</p>
             <ul>
                 ${
                     alumnos.map(a => `<li ${a === alumno ? 'style="color:#2563eb;font-weight:bold; font-size-16px;"' : ''}>👤 ${a.replace(/\b\w/g, l => l.toUpperCase())}</li>`).join("")
-                    // alumnos.map recorre el array y transforma cada alumno en un <li>
-                    // join("") une todos los elementos en un solo string para renderizar HTML correctamente
                 }
             </ul>
         `
         resultado.className = "resultado warning"
         after.innerHTML = ""
         after.style.display = "none"
-        // 🔹 limpiamos el formulario
+        
         setTimeout(() => {
-            form.reset() // limpia los campos del formulario
-        }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
+            form.reset();
+        }, 1000)
         return
     }
 
+    // PROCESO DE INSCRIPCIÓN: Agregamos al alumno al array correspondiente.
+    alumnos.push(alumno);
 
-    // 🔥 INSCRIPCIÓN: agregamos el alumno al array
-    alumnos.push(alumno)
-    // push agrega el nuevo alumno al final del array
-
-    // 🔥 AFTER (DESPUÉS DE INSCRIBIR)
+    // RENDERIZADO DEL ESTADO FINAL (AFTER)
     after.innerHTML = `
         <p>📘 Después (${alumnos.length} alumnos):</p>
         <ul>
@@ -123,27 +130,24 @@ function solucion(e) {
                         👤 ${a.replace(/\b\w/g, l => l.toUpperCase())}
                     </li>`
                 ).join("")
-                // map recorre todos los alumnos
-                // si el alumno actual es el recién agregado → lo resalta en verde
-                // join("") convierte el array en HTML válido
             }
         </ul>
     `
 
-    // 🔹 MENSAJE FINAL
+    // ACTUALIZACIÓN VISUAL DE ÉXITO
     resultado.className = "resultado success"
     resultado.innerHTML = `✅ <b>${alumno.replace(/\b\w/g, l => l.toUpperCase())}</b> fue inscrito en <b>${materia.replace(/\b\w/g, l => l.toUpperCase())}</b>`
     after.style.display = "block"
     before.style.display = "block"
     
-    // 🔹 limpiamos el formulario
     setTimeout(() => {
-        form.reset() // limpia los campos del formulario
-    }, 1000) // espera 1 segundo antes de limpiar para que el usuario vea el mensaje
+        form.reset();
+    }, 1000)
 }
 
 
-// 🔥 EVENTO PRINCIPAL
-form.addEventListener("submit", solucion)
-// escuchamos el evento submit del formulario
-// cuando el usuario da click o presiona enter → se ejecuta solucion()
+/**
+ * 4. INICIALIZACIÓN
+ * Agregamos el "escuchador de eventos" al formulario.
+ */
+form.addEventListener("submit", solucion);
