@@ -1,29 +1,61 @@
-# 🌐 GUÍA — EVENTOS EN JAVASCRIPT
+# 🌐 GUÍA — EVENTOS JAVASCRIPT
 
----
-
-# 📚 TEMARIO
+## 📚 TEMARIO
 
 1. ¿Qué son los eventos?
 2. Definición de eventos
-3. Eventos o “Event Handlers”
-4. Escucha de eventos o “Event Listeners”
-5. El objeto `Event`
-6. Flujo de eventos o `event flow`
+3. Event Handlers
+4. Event Listeners
+5. El objeto Event
+6. Event Flow
 7. Event Bubbling vs Event Capturing
-8. `event.stopPropagation()`
-9. Tipos de eventos más usados
+8. event.stopPropagation()
+9. Tipos de eventos
 10. Eventos de teclado
-11. Eventos del mouse
+11. Eventos de mouse
 12. Eventos de formularios
 13. Eventos del navegador
-14. Delegación de eventos
-15. Buenas prácticas
-16. Errores comunes
-17. Debugging de eventos
-18. Optimización
-19. Ejercicios prácticos
-20. Resumen final
+14. Eventos táctiles (Touch Events)
+15. Pointer Events
+16. Drag & Drop
+17. Eventos del portapapeles
+18. Eventos multimedia
+19. Eventos de imágenes
+20. Eventos de animaciones
+21. Eventos de transiciones CSS
+22. Eventos de Storage
+23. Eventos de WebSocket
+24. Delegación de eventos
+25. Buenas prácticas
+26. Errores comunes
+27. Debugging
+28. Optimización
+29. Proyectos prácticos
+30. Resumen final
+
+---
+
+# ESTRUCTURA DE DOCUMENTACIÓN PARA CADA EVENTO
+
+## 📌 Qué es
+
+## 🧠 Cuándo se dispara
+
+## ⚙️ Sintaxis
+
+## 📦 Ejemplo básico
+
+## 🌎 Ejemplo del mundo real
+
+## 🔍 Propiedades relacionadas
+
+## ⚠️ Errores comunes
+
+## 🚀 Buenas prácticas
+
+## 🧪 Ejercicio práctico
+
+## 🏆 Mini proyecto
 
 ---
 
@@ -529,341 +561,196 @@ Puede romper:
 
 ---
 
-# 🎹 EVENTOS DE TECLADO
+# 10. EVENTOS DE TECLADO
 
-| Evento     | Explicación        |
-| ---------- | ------------------ |
-| `keydown`  | Cuando se presiona |
-| `keyup`    | Cuando se suelta   |
-| `keypress` | Obsoleto           |
-
----
-
-# 📦 EJEMPLO
-
-```js
-document.addEventListener("keydown", (event) => {
-    console.log(event.key);
-});
-```
+## 10.1 keydown
+## 10.2 keyup
+## 10.3 keypress (obsoleto)
+## 10.4 event.key
+## 10.5 event.code
+## 10.6 event.repeat
+## 10.7 event.ctrlKey
+## 10.8 event.altKey
+## 10.9 event.shiftKey
+## 10.10 event.metaKey
+## 10.11 Atajos de teclado
+## 10.12 Casos reales
 
 ---
 
-# 🖱️ EVENTOS DEL MOUSE
+# 11. EVENTOS DE MOUSE
 
-| Evento        | Explicación   |
-| ------------- | ------------- |
-| `click`       | Click         |
-| `dblclick`    | Doble click   |
-| `mousemove`   | Movimiento    |
-| `mouseenter`  | Entrada       |
-| `mouseleave`  | Salida        |
-| `contextmenu` | Click derecho |
-
----
-
-# 📦 EJEMPLO
-
-```js
-caja.addEventListener("mousemove", (event) => {
-    console.log(event.clientX, event.clientY);
-});
-```
+## 11.1 click
+## 11.2 dblclick
+## 11.3 mousedown
+## 11.4 mouseup
+## 11.5 mousemove
+## 11.6 mouseenter
+## 11.7 mouseleave
+## 11.8 mouseover
+## 11.9 mouseout
+## 11.10 contextmenu
+## 11.11 wheel
+## 11.12 auxclick
+## 11.13 Propiedades clientX/clientY
+## 11.14 Propiedades offsetX/offsetY
+## 11.15 Casos reales
 
 ---
 
-# 📝 EVENTOS DE FORMULARIOS
+# 12. EVENTOS DE FORMULARIOS
 
-| Evento   | Explicación      |
-| -------- | ---------------- |
-| `submit` | Envío            |
-| `input`  | Cambio inmediato |
-| `change` | Cambio final     |
-| `focus`  | Entrar al input  |
-| `blur`   | Salir del input  |
-
----
-
-# 📦 VALIDAR FORMULARIO
-
-```js
-formulario.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    console.log("Formulario validado");
-});
-```
+## 12.1 submit
+## 12.2 input
+## 12.3 change
+## 12.4 focus
+## 12.5 blur
+## 12.6 reset
+## 12.7 invalid
+## 12.8 select
+## 12.9 focusin
+## 12.10 focusout
 
 ---
 
-# 🌐 EVENTOS DEL NAVEGADOR
+# 13. EVENTOS DEL NAVEGADOR
 
-| Evento    | Explicación        |
-| --------- | ------------------ |
-| `load`    | Página cargada     |
-| `resize`  | Cambio de tamaño   |
-| `scroll`  | Scroll             |
-| `online`  | Internet conectado |
-| `offline` | Sin internet       |
-
----
-
-# 📦 EJEMPLO
-
-```js
-window.addEventListener("resize", () => {
-    console.log(window.innerWidth);
-});
-```
+## 13.1 DOMContentLoaded
+## 13.2 load
+## 13.3 beforeunload
+## 13.4 unload
+## 13.5 resize
+## 13.6 scroll
+## 13.7 online
+## 13.8 offline
+## 13.9 hashchange
+## 13.10 popstate
+## 13.11 error
 
 ---
 
-# 🧠 DELEGACIÓN DE EVENTOS
+# 14. EVENTOS TÁCTILES
 
-Una técnica avanzada.
-
-Consiste en escuchar eventos desde un padre.
-
----
-
-# 🎯 ¿POR QUÉ?
-
-Porque los eventos burbujean.
+## touchstart
+## touchmove
+## touchend
+## touchcancel
 
 ---
 
-# ❌ MAL
+# 15. POINTER EVENTS
 
-Agregar listeners a 100 botones.
-
-```js
-botones.forEach(boton => {
-    boton.addEventListener("click", handler);
-});
-```
-
----
-
-# ✅ BIEN
-
-Escuchar desde el contenedor.
-
-```js
-contenedor.addEventListener("click", (event) => {
-
-    if(event.target.matches("button")){
-        console.log("Botón detectado");
-    }
-
-});
-```
+## pointerdown
+## pointerup
+## pointermove
+## pointerenter
+## pointerleave
+## pointercancel
 
 ---
 
-# 🚀 VENTAJAS
+# 16. DRAG & DROP
 
-✔ Más rendimiento
-
-✔ Menos memoria
-
-✔ Escalable
-
-✔ Ideal para elementos dinámicos
-
----
-
-# ⚠️ ERRORES COMUNES
+## dragstart
+## drag
+## dragenter
+## dragover
+## dragleave
+## drop
+## dragend
 
 ---
 
-## ❌ OLVIDAR EL EVENT
+# 17. EVENTOS DEL PORTAPAPELES
 
-```js
-boton.addEventListener("click", () => {
-    console.log(event);
-});
-```
-
-Debe recibirse como parámetro.
-
-```js
-(event) => {}
-```
+## copy
+## cut
+## paste
 
 ---
 
-## ❌ EJECUTAR LA FUNCIÓN DIRECTAMENTE
+# 18. EVENTOS MULTIMEDIA
 
-```js
-boton.addEventListener("click", saludar());
-```
-
-❌ Incorrecto.
-
----
-
-## ✅ CORRECTO
-
-```js
-boton.addEventListener("click", saludar);
-```
+## play
+## pause
+## ended
+## volumechange
+## seeking
+## seeked
+## timeupdate
+## canplay
 
 ---
 
-## ❌ USAR MUCHOS LISTENERS
+# 19. EVENTOS DE IMÁGENES
 
-Puede afectar rendimiento.
-
-Usa delegación.
-
----
-
-# 🛠️ DEBUGGING DE EVENTOS
+## load
+## error
 
 ---
 
-# 📦 console.log(event)
+# 20. EVENTOS DE ANIMACIONES
 
-```js
-boton.addEventListener("click", (event) => {
-    console.log(event);
-});
-```
-
----
-
-# 📦 breakpoints
-
-Chrome DevTools permite pausar eventos.
-
-```txt
-Sources → Event Listener Breakpoints
-```
+## animationstart
+## animationiteration
+## animationend
+## animationcancel
 
 ---
 
-# 📦 getEventListeners()
+# 21. EVENTOS DE TRANSICIONES CSS
 
-En consola:
-
-```js
-getEventListeners(boton)
-```
-
----
-
-# ⚡ OPTIMIZACIÓN
+## transitionstart
+## transitionrun
+## transitionend
+## transitioncancel
 
 ---
 
-# 🚀 EVITAR EVENTOS PESADOS
+# 22. EVENTOS DE STORAGE
 
-`scroll` y `mousemove` pueden ejecutarse miles de veces.
-
----
-
-# ❌ PROBLEMA
-
-```js
-window.addEventListener("scroll", () => {
-    console.log("scroll");
-});
-```
+## storage
 
 ---
 
-# ✅ SOLUCIÓN
+# 23. EVENTOS DE WEBSOCKET
 
-Throttle o debounce.
-
----
-
-# 🧠 THROTTLE
-
-Limita ejecuciones.
+## open
+## message
+## error
+## close
 
 ---
 
-# 🧠 DEBOUNCE
+# 24. DELEGACIÓN DE EVENTOS
 
-Espera hasta terminar.
-
----
-
-# 📚 EJERCICIOS PRÁCTICOS
-
----
-
-# 🧪 EJERCICIO 1
-
-Crear un botón que cambie de color al hacer click.
+- Concepto
+- Ventajas
+- event.target
+- event.currentTarget
+- matches()
+- closest()
 
 ---
 
-# 🧪 EJERCICIO 2
+# 25. BUENAS PRÁCTICAS
 
-Mostrar coordenadas del mouse en tiempo real.
+# 26. ERRORES COMUNES
 
----
+# 27. DEBUGGING
 
-# 🧪 EJERCICIO 3
+# 28. OPTIMIZACIÓN
 
-Detectar la tecla presionada.
+# 29. PROYECTOS PRÁCTICOS
 
----
-
-# 🧪 EJERCICIO 4
-
-Evitar envío de formulario vacío.
-
----
-
-# 🧪 EJERCICIO 5
-
-Crear delegación de eventos en una lista.
+1. Atajos de teclado
+2. Menú contextual
+3. Sistema Drag & Drop
+4. Reproductor multimedia
+5. Formulario avanzado
 
 ---
 
-# 🏁 RESUMEN FINAL
+# 30. RESUMEN FINAL
 
----
-
-# 📌 IDEAS IMPORTANTES
-
-✔ Los eventos permiten interacción.
-
-✔ `addEventListener()` es la forma moderna.
-
-✔ El objeto `event` contiene información.
-
-✔ Los eventos siguen un flujo.
-
-✔ Bubbling es el comportamiento por defecto.
-
-✔ Capturing ocurre antes.
-
-✔ `stopPropagation()` detiene propagación.
-
-✔ La delegación mejora rendimiento.
-
-✔ Debugging ayuda a detectar problemas.
-
-✔ Optimizar eventos es fundamental.
-
----
-
-# 🎯 CONCLUSIÓN
-
-Dominar eventos en JavaScript significa dominar la interacción del usuario.
-
-Todo sistema interactivo depende de eventos:
-
-* Botones
-* Formularios
-* Menús
-* Juegos
-* Aplicaciones web
-* Dashboards
-* Interfaces modernas
-
-Los eventos son el corazón del frontend.
+Esta es la estructura maestra sobre la que se debe expandir cada evento con explicaciones completas, ejemplos, casos reales, debugging, optimización y ejercicios.

@@ -9,22 +9,22 @@
 
 
 /* Estilos globales: el color definido en el body se transmite a sus descendientes por herencia. */
-body{
-    color: blue; /* Define un color azul base para todo el texto del documento. */
+body{ /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
+    color: blue; /* Define un color azul base para todo el texto del documento, que será heredado por sus descendientes. */
 }
 
 
 
 /* Estilos del contenedor div: aquí se rompe la herencia del body. */
-div{
-    font-family: sans-serif; /* Tipografía limpia sin remates. */
-    color: red; /* Sobrescribe el azul heredado y establece rojo para sus hijos. */
+div{ /* Selector de la etiqueta div, aplica estilos a todos los elementos div. */
+    font-family: sans-serif; /* Define una fuente genérica sin serifa para una tipografía limpia. */
+    color: red; /* Sobrescribe el color azul heredado del body y establece el color rojo para el texto dentro de este div y sus hijos. */
 }
 
 
 
 /* Estilos del encabezado h1: uso de valores de control. */
-h1{
+h1{ /* Selector de la etiqueta h1, aplica estilos a todos los títulos de primer nivel. */
     /* 
      * La palabra clave 'initial' restablece la propiedad a su valor inicial de CSS.
      * En el caso del color, suele ser negro, ignorando tanto el azul del body como el rojo del div.

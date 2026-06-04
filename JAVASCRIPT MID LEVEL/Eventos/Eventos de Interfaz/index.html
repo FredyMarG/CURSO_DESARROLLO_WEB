@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- Definición del tipo de documento como HTML5 para que el navegador interprete los estándares modernos. -->
+<html lang="es">
+<head>
+    <!-- Metadatos esenciales para el soporte de caracteres especiales y el ajuste correcto en dispositivos móviles. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título descriptivo que se visualiza en la pestaña del navegador. -->
+    <title>Laboratorio de Eventos de Interfaz</title>
+    
+    <!-- Vinculación con la hoja de estilos externa para aplicar el diseño visual "claro" y profesional. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- 
+         Contenedor Principal (.contenedor1): 
+         Funciona como el "wrapper" o tarjeta (card) central. Su propósito es agrupar 
+         los elementos del laboratorio y aplicarles el centrado y la estética de tarjeta blanca.
+    -->
+    <div class="contenedor1">
+        <!-- Título Principal (h1): Es el encabezado del laboratorio, estilizado para dar jerarquía visual. -->
+        <h1>Eventos de Interfaz</h1>
+
+        <!-- Párrafo descriptivo: Explica al usuario qué acciones realizar para ver los resultados en la consola. -->
+        <p>Interactúa con el elemento o redimensiona la ventana para observar los eventos.</p>
+
+        <input type="text" class="prueba">
+
+        <img src="https://w.wallhaven.cc/full/9d/wallhaven-9dq59w.jpg" alt="Imagen de ejmplo de eventos de interfaz" class="img-prueba">
+        
+    </div>
+
+    <!-- 
+         Carga del archivo de lógica (script): 
+         El atributo 'defer' asegura que el JavaScript se ejecute una vez que toda la estructura 
+         HTML ha sido cargada y procesada por el navegador. 
+    -->
+    <script src="main.js" defer></script>
+</body>
+</html>

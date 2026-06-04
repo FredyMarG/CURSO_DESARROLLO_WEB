@@ -9,70 +9,70 @@
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
+body{ /* Selector de la etiqueta body, aplica estilos a todo el cuerpo del documento. */
     margin: 0; /* Elimina el margen por defecto del navegador para evitar espacios en blanco indeseados. */
-    font-family: sans-serif; /* Define una fuente sin remates para una apariencia moderna y legible. */
+    font-family: sans-serif; /* Define una fuente genérica sin serifa para una apariencia moderna y legible. */
     background-color: #ccc; /* Establece un color de fondo gris claro para todo el documento. */
 }
 
 
 
 /* Estilos del selector div. */
-div{
-    box-sizing: border-box; /* Incluye el padding y el border en el cálculo del ancho y alto total del elemento. */
+div{ /* Selector de la etiqueta div, aplica estilos a todos los elementos div. */
+    box-sizing: border-box; /* Establece el modelo de caja a 'border-box', lo que significa que el padding y el border se incluyen en el ancho y alto especificados. */
 }
 
 
 
 /* Caja visual que agrupa contenido con estilo propio. */
-.box{
+.box{ /* Selector de la clase .box, aplica estilos a un contenedor con forma de caja. */
     margin: 20px; /* Crea un espacio externo de 20px alrededor de la caja. */
-    background-color: #fff; /* Fondo blanco para contrastar con el gris del cuerpo. */
+    background-color: #fff; /* Establece un fondo blanco para la caja, contrastando con el fondo gris del body. */
     border: 4px solid #48e; /* Define un borde sólido azul de 4px de grosor. */
-    padding: 6px; /* Espacio interno entre el borde y el contenido (la barra). */
-    border-radius: 39px; /* Redondea las esquinas de la caja contenedora. */
+    padding: 6px; /* Aplica un relleno interno de 6px entre el borde y el contenido (la barra). */
+    border-radius: 39px; /* Redondea las esquinas de la caja contenedora para una apariencia suave. */
 }
 
 
 
 /* Estilos del selector .barra. */
-.barra{
-    padding: 40px; /* Determina el grosor visual de la barra mediante relleno. */
-    background-color: #48e; /* Color inicial de la barra (azul). */
-    border-radius: 30px; /* Redondea los extremos de la barra interna. */
-    width: 10%; /* Ancho inicial de la barra antes de que comience la animación. */
-    animation-name: llenar-barra; /* Vincula este elemento con los @keyframes definidos abajo. */
-    animation-duration: 2s; /* Tiempo que tarda en completarse un ciclo de la animación. */
-    animation-delay: 1s; /* Tiempo de espera antes de que la animación inicie por primera vez. */
-    animation-fill-mode: both; /* Aplica los estilos del primer frame antes de empezar y del último al terminar. */
-    animation-timing-function: linear; /* La animación avanza a una velocidad constante sin aceleración. */
-    animation-iteration-count: infinite; /* Hace que la animación se repita indefinidamente. */
-    animation-direction: alternate; /* Al llegar al final, la animación se ejecuta hacia atrás. */
+.barra{ /* Selector de la clase .barra, aplica estilos a la barra de animación. */
+    padding: 40px; /* Define el relleno interno de la barra, que visualmente determina su grosor. */
+    background-color: #48e; /* Establece el color inicial de la barra en azul. */
+    border-radius: 30px; /* Redondea los extremos de la barra interna para una apariencia suave. */
+    width: 10%; /* Define el ancho inicial de la barra en un 10% de su contenedor antes de que comience la animación. */
+    animation-name: llenar-barra; /* Asocia este elemento con la animación definida por los @keyframes 'llenar-barra'. */
+    animation-duration: 2s; /* Establece la duración de un ciclo completo de la animación en 2 segundos. */
+    animation-delay: 1s; /* Define un tiempo de espera de 1 segundo antes de que la animación comience por primera vez. */
+    animation-fill-mode: both; /* Asegura que los estilos del primer fotograma se apliquen antes de que la animación comience y los del último fotograma se mantengan al finalizar. */
+    animation-timing-function: linear; /* Hace que la animación avance a una velocidad constante, sin aceleración ni desaceleración. */
+    animation-iteration-count: infinite; /* Configura la animación para que se repita indefinidamente. */
+    animation-direction: alternate; /* Hace que la animación se ejecute hacia adelante y luego hacia atrás en ciclos alternos. */
 }
 
 
 
 /* Estado o pseudo-clase .barra:hover: estilo cuando el usuario interactúa. */
-.barra:hover{
-    animation-play-state: paused; /* Detiene la animación en su punto actual al pasar el cursor. */
+.barra:hover{ /* Selector de pseudo-clase :hover para la barra. */
+    animation-play-state: paused; /* Detiene la animación en su estado actual cuando el cursor del mouse pasa sobre la barra. */
 }
 
 
 
 
 /* Animación llenar-barra: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes llenar-barra {
+@keyframes llenar-barra { /* Define una animación llamada 'llenar-barra' usando fotogramas clave. */
 
 
 /* Estilos del selector from. */
-    from{
-        width: 0%; /* Punto de partida: la barra no tiene ancho. */
+    from{ /* Define el estado inicial de la animación (0% del tiempo). */
+        width: 0%; /* Establece el ancho de la barra en 0% al inicio de la animación. */
     }
 
 
 /* Estilos del selector to. */
-    to{
-        width: 100%; /* Punto final: la barra ocupa todo el contenedor. */
-        background-color: #f33; /* Cambia el color a rojo durante la transición. */
+    to{ /* Define el estado final de la animación (100% del tiempo). */
+        width: 100%; /* Establece el ancho de la barra en 100% al final de la animación. */
+        background-color: #f33; /* Cambia el color de fondo de la barra a rojo durante la transición. */
     }
 }
