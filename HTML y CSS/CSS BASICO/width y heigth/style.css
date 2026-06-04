@@ -1,34 +1,93 @@
 /*
  * CURSO_WEB_DOC_CSS v1
  * Archivo: HTML y CSS/CSS Basico/Width y heigth/style.css
- * Carpeta del tema: «Width y heigth». Hoja: «style».
- * Propósito: demostrar el control de dimensiones (ancho y alto) en elementos de bloque y de línea.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
+ * Carpeta del tema: «Width y Height». Hoja: «style».
+ * Propósito: Estilizar el formulario de captura de datos, aplicando técnicas de centrado y diseño moderno.
+ * Cómo leerlo: Cada bloque define la estética de los elementos del formulario sin necesidad de clases adicionales.
  */
 
-
-/* Estilos del selector div: definición de dimensiones fijas en un elemento de bloque. */
-div{
-    background: red; /* Color de fondo para visualizar el área ocupada. */
-    width: 200px; /* Ancho fijo en píxeles. */
-    height: 200px; /* Alto fijo en píxeles. */
+/* 
+   RESET: Limpieza de estilos por defecto del navegador para asegurar 
+   consistencia entre diferentes programas (Chrome, Firefox, etc).
+*/
+* {
+    box-sizing: border-box; /* El padding no afecta el ancho total definido. */
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-
-/* Estilos del selector h1: los encabezados son elementos de bloque por naturaleza. */
-h1{
-    background: blue; /* Fondo azul de alto contraste. */
-    height: 300px; /* Se define una altura explícita; el ancho será el 100% del padre al ser elemento de bloque. */
+/* 
+   BODY: Configuramos el contenedor raíz para que el formulario 
+   quede perfectamente centrado en la pantalla.
+*/
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Fondo degradado suave. */
+    display: flex;
+    justify-content: center; /* Centrado horizontal. */
+    align-items: center;     /* Centrado vertical. */
+    min-height: 100vh;       /* Altura total de la ventana. */
 }
 
-
-/* Estilos del selector input: uso de unidades relativas (porcentaje) para adaptabilidad. */
-input{
-    width: 80%; /* El elemento ocupará el 80% del ancho disponible de su contenedor padre (el form). */
+/* 
+   FORM: El contenedor principal del formulario.
+   Aquí aplicamos sombras y bordes redondeados para un look moderno.
+*/
+form {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* Sombra difuminada para dar profundidad. */
+    width: 90%;
+    max-width: 400px; /* Evita que el formulario sea demasiado ancho en pantallas grandes. */
+    display: flex;
+    flex-direction: column; /* Alinea los inputs verticalmente. */
+    gap: 20px; /* Espaciado uniforme entre los elementos internos. */
 }
 
+/* 
+   INPUTS (Email y Password):
+   Estilizados para mejorar la legibilidad y la experiencia de escritura.
+*/
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e1e8ef;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #333;
+    outline: none; /* Quitamos el borde azul por defecto. */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para el foco. */
+}
 
-/* Estilos del selector form: limitación del ancho del contenedor del formulario. */
-form{
-    width: 400px; /* Establece un ancho de 400px para organizar la estructura de los campos de entrada. */
+/* Estado de foco: cuando el usuario hace clic para escribir. */
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #2563eb; /* Color azul corporativo. */
+    box-shadow: 0 0 8px rgba(37, 99, 235, 0.2); /* Brillo sutil exterior. */
+}
+
+/* 
+   INPUT SUBMIT (Botón):
+   Diseñado para resaltar y llamar a la acción del usuario.
+*/
+input[type="submit"] {
+    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Degradado profesional. */
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Efectos visuales al interactuar con el botón. */
+input[type="submit"]:hover {
+    filter: brightness(1.1); /* Brillo ligero al pasar el ratón. */
+    transform: translateY(-2px); /* Pequeño efecto de elevación. */
 }

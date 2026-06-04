@@ -1,0 +1,64 @@
+<!doctype html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html
+     Título: Ejercicio 3
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="es"> <!-- Define el idioma principal del documento como español para accesibilidad y SEO. -->
+
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
+    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres para evitar problemas con tildes y eñes. -->
+    <link rel="stylesheet" href="style.css" /> <!-- Enlaza el archivo CSS externo para aplicar estilos a la página. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura la vista para dispositivos móviles, asegurando responsividad. -->
+    <title>Ejercicio 3</title> <!-- Define el título que aparece en la pestaña del navegador. -->
+</head>
+
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <div class="enunciado"> <!-- Contenedor principal para el enunciado del ejercicio. -->
+        <h1 class="title">Ejercicio 3</h1> <!-- Título principal del ejercicio, con una clase para estilos. -->
+        <p> <!-- Párrafo que describe la situación del ejercicio. -->
+            El imbécil de cofla reprobó 2 materias y ahora tiene que enviar un formulario para
+            registrarse en la materia que debe.
+        </p>
+        <ol type="A"> <!-- Lista ordenada con tipo de numeración alfabética (A, B, C...). -->
+            <li> <!-- Primer elemento de la lista. -->
+                El formulario debe contener nombre completo, mail y materia adeudada.
+            </li>
+            <li> <!-- Segundo elemento de la lista. -->
+                Se debe validar que el mail sea valido, que los nombres sean reales.
+            </li>
+            <li> <!-- Tercer elemento de la lista. -->
+                Se debe enviar al servidor de manera pulida
+            </li>
+        </ol>
+    </div>
+
+    <div class="ask"> <!-- Sección para la pregunta o interacción inicial. -->
+        <form autocomplete="off">
+            <h2>INSCRIPCIÓN DE MATERIAS ADEUDADAS</h2><!-- Subtítulo de la sección. -->
+            <input type="text" id="nombre" placeholder="Nombre Completo" required/>
+            <input type="email" id="mail" placeholder="Email" required/>
+            <input type="text" id="materia" placeholder="Materia Adeudada" required/>
+            <input type="submit" value="📄 Solicitar Mesa" id="enviar" />
+        </form>
+    </div>
+
+    <div id="solucion" class="solucion">
+        <h2 id="sol-res">Respuesta a Solicitud</h2>
+        <p id="respuesta"></p> <!-- Párrafo para mostrar la respuesta o resultado de la interacción. -->
+    </div>
+
+    <script src="main.js"></script> <!-- Enlaza el archivo JavaScript externo para la lógica interactiva. -->
+
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>
