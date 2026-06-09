@@ -1,0 +1,414 @@
+/*
+ * LABORATORIO: VISUALIZACIÓN DINÁMICA DE DATOS
+ * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web copy/style.css
+ * Propósito: Estilizar la interfaz del "Ejercicio 3", manejando la presentación de enunciados, 
+ * formularios y la lógica visual de animaciones para mensajes de respuesta.
+ * Metodología: Diseño moderno basado en tarjetas (cards), tipografía legible y transiciones suaves.
+ */
+
+/* 
+   1. RESET & CONFIGURACIÓN BASE
+   Garantizamos que el modelo de caja y los márgenes sean consistentes en todos los navegadores.
+*/
+* {
+    box-sizing: border-box; /* El tamaño de los elementos incluirá padding y bordes sin aumentar el ancho definido. */
+    margin: 0;              /* Resetea los márgenes exteriores de todos los elementos a cero. */
+    padding: 0;             /* Resetea los espacios interiores de todos los elementos a cero. */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define una fuente legible y moderna para todo el sitio. */
+}
+
+body {
+    background: linear-gradient(135deg, #eef2f7 0%, #dfe6f0 100%); /* Fondo con degradado suave en diagonal. */
+    min-height: 100vh;                                             /* Garantiza que el body ocupe al menos el alto total de la pantalla. */
+    padding: 20px;                                                 /* Añade un margen interno para que el contenido no toque los bordes del navegador. */
+}
+
+/* 
+   2. CONTENEDORES TIPO "CARD"
+   Secciones principales (Enunciado, Pregunta y Solución) diseñadas con bordes redondeados y sombras.
+*/
+.enunciado {
+    width: 90%;                                 /* El contenedor ocupa el 90% del ancho disponible. */
+    max-width: 1200px;                          /* Evita que el contenedor crezca más de 1200px en monitores grandes. */
+    margin: 30px auto;                          /* Separa el elemento 30px verticalmente y lo centra horizontalmente. */
+    background: #ffffff;                        /* Establece el color de fondo de la tarjeta en blanco. */
+    padding: 25px;                              /* Crea un espacio interno de 25px alrededor del contenido. */
+    border-radius: 18px;                        /* Redondea las esquinas del contenedor. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Aplica una sombra sutil para dar un efecto de elevación. */
+    transition: transform 0.3s ease;            /* Suaviza la animación de escalado o movimiento. */
+}
+
+/* Efecto de elevación al pasar el mouse por el enunciado. */
+.enunciado:hover {
+    transform: translateY(-3px);                /* Desplaza el elemento 3px hacia arriba al interactuar. */
+}
+
+.title {
+    text-align: center;                         /* Alinea el texto al centro horizontal. */
+    margin-bottom: 15px;                        /* Espacio inferior para separarlo de otros elementos. */
+    color: #1e3a8a;                             /* Define un color azul marino oscuro. */
+    font-weight: bold;                          /* Hace que el texto se vea más grueso. */
+    letter-spacing: 1px;                        /* Incrementa ligeramente el espacio entre letras. */
+}
+
+.enunciado p {
+    margin: 10px 0;                             /* Margen de 10px arriba y abajo. */
+    line-height: 1.7;                           /* Aumenta el interlineado para facilitar la lectura. */
+    color: #555;                                /* Define un color gris oscuro para el texto. */
+}
+
+/* 
+   3. ESTILIZACIÓN DE LISTAS (UL / OL)
+   Personalización de los marcadores por defecto para que coincidan con la estética del sitio.
+*/
+ul {
+    list-style-type: none;                      /* Elimina los puntos o viñetas estándar. */
+    padding-left: 40px;                         /* Añade un sangrado a la izquierda. */
+}
+
+/* Creación de bullets personalizados mediante pseudo-elementos ::before. */
+ul>li {
+    position: relative;                         /* Crea un contexto de posición para el marcador personalizado. */
+    padding-left: 20px;                         /* Espacio para que el texto no se superponga con el punto. */
+    margin: 8px 0;                              /* Separación vertical entre los elementos de la lista. */
+    color: #444;                                /* Color gris oscuro para el texto. */
+    line-height: 1.6;                           /* Ajusta la altura de línea de cada ítem. */
+}
+
+ul>li::before {
+    content: '●';                               /* Inserta un carácter de círculo como viñeta. */
+    color: #2563eb;                             /* Color azul vibrante para el marcador. */
+    font-size: 18px;                            /* Tamaño del marcador circular. */
+    position: absolute;                         /* Permite mover el marcador independientemente del flujo de texto. */
+    left: 0;                                    /* Lo alinea al extremo izquierdo del padding del elemento li. */
+    top: -3px;                                  /* Ajusta la posición vertical para alinearlo visualmente con el texto. */
+}
+
+/* Listas ordenadas con contadores personalizados. */
+ol {
+    list-style-type: none;                      /* Elimina la numeración automática del navegador (1, 2, 3...). */
+    counter-reset: item;                        /* Inicializa una variable de contador de CSS llamada 'item'. */
+    padding-left: 0;                            /* Quita el sangrado lateral por defecto. */
+    margin: 15px 0;                             /* Espacio vertical arriba y abajo de la lista. */
+}
+
+ol>li {
+    counter-increment: item;                    /* Incrementa el valor del contador 'item' por cada li encontrado. */
+    position: relative;                         /* Contexto para posicionar el número generado. */
+    padding-left: 20px;                         /* Espacio reservado a la izquierda para el número. */
+    margin: 8px 0;                              /* Separación entre elementos. */
+}
+
+ol>li::before {
+    content: counter(item) '.';                  /* Muestra el valor del contador seguido de un punto. */
+    color: #2563eb;                             /* Color azul para el número de la lista. */
+    font-weight: bold;                          /* Aplica negrita al número. */
+    font-size: 16px;                            /* Tamaño de fuente para el indicador numérico. */
+    position: absolute;                         /* Posicionamiento independiente del texto. */
+    left: 0;                                    /* Alinea el número al inicio. */
+}
+
+/* 
+   4. SECCIONES INTERACTIVAS (ASK & SOLUCIÓN)
+   Reutilización de estilos de tarjeta para los bloques de interacción.
+*/
+.ask, #solucion {
+    text-align: center;                         /* Centra el texto y los elementos hijos como inputs o botones. */
+    width: 90%;                                 /* Ancho flexible. */
+    max-width: 1200px;                          /* Límite de ancho máximo. */
+    margin: 30px auto;                          /* Centra el bloque en la página. */
+    background: #ffffff;                        /* Fondo blanco. */
+    padding: 30px;                              /* Relleno interno para dar aire al contenido. */
+    border-radius: 18px;                        /* Esquinas redondeadas. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra para resaltar la sección. */
+    transition: transform 0.3s ease;            /* Transición suave para cambios de transformación. */
+}
+
+.ask h2 {
+    color: #1e3a8a;                             /* Azul oscuro para los títulos de sección. */
+    margin-bottom: 15px;                        /* Margen inferior. */
+}
+
+.ask:hover, #solucion:hover {
+    transform: translateY(-3px);                /* Eleva ligeramente el bloque al pasar el cursor. */
+}
+
+/* 
+   5. COMPONENTES DINÁMICOS Y BOTONES
+   Diseño de los elementos que aparecen tras la interacción con JavaScript.
+*/
+
+/* 
+   7. ESTILOS DEL FORMULARIO DE SOLUCIÓN
+   Configuramos la apariencia de los campos de entrada y el botón de envío.
+*/
+.ask form {
+    display: flex;                              /* Usa Flexbox para la disposición de los inputs. */
+    flex-direction: column;                     /* Alinea los campos uno debajo del otro. */
+    gap: 15px;                                  /* Espacio uniforme entre los campos del formulario. */
+    margin-top: 20px;                           /* Separación superior. */
+    max-width: 450px;                           /* Ancho máximo para que el formulario no sea demasiado largo. */
+    margin-left: auto;                          /* Centrado horizontal automático. */
+    margin-right: auto;                         /* Centrado horizontal automático. */
+}
+
+/* Estilización de los campos de texto y email. */
+.ask input[type="text"],
+.ask input[type="email"] {
+    padding: 12px 15px;                         /* Espacio interno para que el texto no toque los bordes. */
+    border-radius: 10px;                        /* Curvatura de los bordes del input. */
+    border: 2px solid #e2e8f0;                  /* Borde sutil color gris claro. */
+    font-size: 15px;                            /* Tamaño de letra al escribir. */
+    color: #334155;                             /* Color de texto oscuro para legibilidad. */
+    outline: none;                              /* Elimina el resaltado por defecto de los navegadores al enfocar. */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Suaviza el cambio de color de borde y sombra. */
+}
+
+/* Efecto visual cuando el usuario selecciona un campo. */
+.ask input[type="text"]:focus,
+.ask input[type="email"]:focus {
+    border-color: #2563eb;                      /* Cambia el borde a azul al hacer foco. */
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); /* Crea un anillo exterior suave azulado. */
+}
+
+/* Estilo específico para el botón de enviar (input submit). */
+.ask input[type="submit"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); /* Degradado azul vibrante. */
+    color: white;                               /* Texto en color blanco. */
+    padding: 15px;                              /* Relleno interno. */
+    border: none;                               /* Quita el borde por defecto. */
+    border-radius: 14px;                        /* Esquinas redondeadas. */
+    font-weight: 700;                           /* Texto en negrita. */
+    text-transform: uppercase;                  /* Convierte el texto a mayúsculas. */
+    letter-spacing: 1.5px;                      /* Espaciado extra entre letras. */
+    cursor: pointer;                            /* El cursor cambia a mano indicando que es clickeable. */
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); /* Sombra base azulada. */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con efecto de rebote. */
+}
+
+/* Interacción con el botón de envío. */
+.ask input[type="submit"]:hover {
+    filter: brightness(1.1);                    /* Aclara un poco los colores al pasar el mouse. */
+    transform: translateY(-5px) scale(1.02);    /* Lo eleva y lo agranda mínimamente para dar profundidad. */
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4); /* Intensifica la sombra al flotar. */
+}
+
+.ask input[type="submit"]:active {
+    transform: translateY(-2px) scale(0.98);    /* Lo presiona ligeramente al hacer clic real. */
+}
+
+.resultado-msg {
+    margin-top: 25px;                           /* Margen superior. */
+    padding: 20px;                              /* Relleno interior. */
+    border-radius: 15px;                        /* Bordes redondeados. */
+    color: #ffffff;                             /* Color de texto blanco. */
+    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Fondo azul degradado. */
+    font-weight: 700;                           /* Texto en negrita. */
+    font-size: 1.1rem;                          /* Tamaño de letra un poco mayor. */
+    text-align: center;                         /* Centra el mensaje. */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  /* Sombra al texto para mejorar contraste. */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra exterior del mensaje. */
+    animation: mostrarMensaje 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Dispara la animación de entrada. */
+}
+
+.resultado-msg.fadeOut {
+    animation: ocultarMensaje 0.4s ease-in forwards; /* Dispara la animación de salida. */
+}
+
+/* 
+   8. ESTADOS DE RESPUESTA
+*/
+.success {
+    background: linear-gradient(135deg, #10b981 0%, #f0fff4 100%) !important; /* Degradado verde esmeralda. */
+    color: #064e3b !important;                  /* Texto verde muy oscuro para contraste. */
+    text-shadow: none !important;               /* Quita la sombra de texto. */
+}
+
+.success-res{
+    color: #064e3b !important;                  /* Color de texto para el título en caso de éxito. */
+    text-shadow: none !important;               /* Asegura que no tenga sombra. */
+}
+
+.error-res{
+    color: #7f1d1d !important;                  /* Color de texto rojo oscuro para el título en caso de error. */
+    text-shadow: none !important;               /* Asegura que no tenga sombra. */
+}
+
+.error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important; /* Fondo rojo pálido muy elegante */
+    color: #dc2626 !important;                  /* Letra roja vibrante para máxima claridad de error */
+    border: 1px solid #fecaca;                  /* Borde fino que le da estructura a la caja */
+    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.1); /* Sombra suave rojiza para dar profundidad */
+    text-shadow: none !important;               /* Mantenemos el texto nítido sin sombras */
+    font-weight: 600;                           /* Un poco más de grosor para resaltar el aviso */
+}
+
+/* Botón con estilo "Call to Action" (CTA). */
+button {
+    display: inline-flex;                       /* Alineación flexible para el contenido del botón. */
+    align-items: center;                        /* Centra el contenido verticalmente. */
+    justify-content: center;                    /* Centra el contenido horizontalmente. */
+    margin: 20px 30px 0 30px;                   /* Márgenes externos. */
+    padding: 14px 28px;                         /* Espaciado interno. */
+    border: 2px solid #ffffff;                  /* Borde blanco sólido para resaltar el relieve. */
+    border-radius: 16px;                        /* Bordes muy redondeados. */
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); /* Inicialmente oscuro usando el azul del título. */
+    color: #ffffff;                             /* Texto en blanco para contraste sobre fondo oscuro. */
+    font-size: 16px;                            /* Tamaño de fuente estándar. */
+    font-weight: 700;                           /* Texto en negrita. */
+    letter-spacing: 0.6px;                      /* Espaciado entre letras. */
+    text-transform: uppercase;                  /* Todo en mayúsculas. */
+    cursor: pointer;                            /* Icono de mano al pasar el cursor. */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con efecto elástico de rebote. */
+    box-shadow: 0 8px 15px rgba(37, 99, 235, 0.25); /* Sombra suave azulada, ligeramente más pronunciada. */
+}
+
+button:hover {
+    transform: translateY(-6px) scale(1.05);    /* Elevación más pronunciada y zoom sutil. */
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); /* Hover un poco más claro pero manteniendo la gama azul. */
+    box-shadow: 0 15px 30px rgba(37, 99, 235, 0.55); /* Sombra más intensa y brillante. */
+    color: #ffffff;                             /* Mantiene el texto en blanco para legibilidad. */
+}
+
+button:active {
+    transform: translateY(-2px) scale(0.98);    /* Efecto de "presión" al hacer clic. */
+}
+
+
+/* 
+   9. ESTILOS DE LA CUADRÍCULA (GRID) PARA LA SOLUCIÓN
+   Definimos la estructura de tabla moderna para mostrar los datos de los alumnos.
+*/
+.grid-container {
+    display: grid;                              /* Activamos el modo grid para alinear los datos. */
+    grid-template-columns: repeat(4, 1fr);      /* Creamos 4 columnas iguales para Nombre, Email, Materia y Semana. */
+    gap: 2px;                                   /* El espacio entre celdas actúa como línea divisoria. */
+    background-color: #e2e8f0;                  /* Color del "borde" interno del grid. */
+    border: 2px solid #e2e8f0;                  /* Borde exterior del contenedor. */
+    border-radius: 15px;                        /* Redondeado de esquinas para el contenedor. */
+    overflow: hidden;                           /* Asegura que las celdas respeten el redondeado de las esquinas. */
+    margin-top: 30px;                           /* Separación respecto al título superior. */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05); /* Sombra suave para dar profundidad. */
+}
+
+.grid-container > div {
+    background-color: #ffffff;                  /* Fondo blanco para cada celda de datos. */
+    padding: 20px;                              /* Espaciado interno de las celdas. */
+    display: flex;                              /* Centrado flexible del contenido. */
+    align-items: center;                        /* Centrado vertical. */
+    justify-content: center;                    /* Centrado horizontal. */
+    font-size: 15px;                            /* Tamaño de fuente legible. */
+    color: #475569;                             /* Color de texto gris pizarra. */
+}
+
+/* Estilizamos la columna de Nombre para darle jerarquía visual. */
+.nombre {
+    font-weight: 700;                           /* Texto en negrita. */
+    color: #1e3a8a !important;                  /* Azul oscuro para resaltar la identidad del alumno. */
+}
+
+/* Estilizamos el selector de semana dentro del grid. */
+.semana-elegida {
+    width: 100%;                                /* Ocupa todo el espacio de su celda. */
+    padding: 10px;                              /* Relleno interno para facilitar el clic. */
+    border-radius: 8px;                         /* Esquinas suavizadas. */
+    border: 1px solid #cbd5e1;                  /* Borde sutil. */
+    background-color: #f8fafc;                  /* Fondo ligeramente azulado. */
+    cursor: pointer;                            /* Puntero de selección. */
+    outline: none;                              /* Eliminamos el borde de enfoque por defecto. */
+    transition: all 0.3s ease;                  /* Transición suave para la interacción. */
+}
+
+.semana-elegida:focus {
+    border-color: #2563eb;                      /* El borde resalta en azul al seleccionar. */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Anillo de luz alrededor del selector. */
+}
+
+/* Ajustes de responsividad para pantallas pequeñas (móviles). */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;             /* Cambia a una sola columna para que los datos se lean verticalmente. */
+    }
+}
+
+/* 
+   10. BOTÓN GUARDAR (ESTILO PREMIUM)
+   Diseño moderno que utiliza la paleta de azules del sistema con efectos de profundidad.
+*/
+.guardar {
+    display: block;                  /* Lo centramos como bloque */
+    margin: 25px auto;               /* Separación vertical y centrado horizontal */
+    padding: 14px 45px;              /* Relleno generoso para un look robusto */
+    border: none;                    /* Sin bordes toscos */
+    border-radius: 14px;             /* Bordes redondeados consistentes con las tarjetas */
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); /* Degradado profesional */
+    color: #ffffff;                  /* Texto blanco puro */
+    font-size: 14px;                 /* Tamaño de fuente equilibrado */
+    font-weight: 700;                /* Texto en negrita para resaltar la acción */
+    text-transform: uppercase;       /* Mayúsculas para un toque más formal */
+    letter-spacing: 1.5px;           /* Espaciado para mejorar la legibilidad */
+    cursor: pointer;                 /* Cursor interactivo */
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); /* Sombra azulada con profundidad */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con rebote sutil */
+}
+
+.guardar:hover {
+    transform: translateY(-5px);     /* Elevación elegante al pasar el mouse */
+    box-shadow: 0 12px 25px rgba(37, 99, 235, 0.5); /* La sombra crece con la elevación */
+    filter: brightness(1.1);         /* Brillo ligero para indicar interactividad */
+}
+
+.guardar:active {
+    transform: translateY(-2px) scale(0.98); /* Efecto de presión real al hacer clic */
+}
+
+/* 
+   6. SISTEMA DE ANIMACIONES (@keyframes)
+   Controlamos la entrada y salida de elementos para que no aparezcan de golpe.
+*/
+
+/* Clase controlada por JavaScript para mostrar. */
+.mostrar{
+    animation: mostrarMensaje 0.8s ease forwards; /* Llama a la animación de entrada. */
+}
+
+/* Clase controlada por JavaScript para ocultar. */
+.ocultar{
+    animation: ocultarMensaje 0.6s ease forwards; /* Llama a la animación de salida. */
+}
+
+.solucion{
+    opacity: 1;  
+    visibility: hidden;
+}
+
+/* Animación de entrada: Viene de arriba, pequeño y transparente hacia su estado normal. */
+@keyframes mostrarMensaje {
+    0%{
+        opacity: 0;                              /* Invisible al inicio. */
+        transform: translateY(-30px) scale(0.8); /* Posicionado arriba y más pequeño. */
+    }
+    70%{                                         /* Efecto de rebote. */
+        transform: translateY(5px) scale(1.02);  /* Baja un poco más de su lugar y se agranda un poco. */
+    }
+    100%{
+        opacity: 1;                              /* Visible al 100%. */
+        transform: translateY(0) scale(1);       /* Posición y tamaño final estable. */
+        visibility: visible;                     /* Asegura que el elemento sea interactuable. */
+    }
+}
+
+/* Animación de salida: El elemento se encoge y sube mientras desaparece. */
+@keyframes ocultarMensaje {
+    0%{
+        opacity: 1;                              /* Visible al inicio. */
+        transform: translateY(0) scale(1);       /* Estado normal. */
+    }
+    30%{
+        transform: translateY(5px) scale(1.02);  /* Rebote sutil antes de irse. */
+    }
+    100%{
+        opacity: 0;                              /* Se desvanece por completo. */
+        transform: translateY(-30px) scale(0.8); /* Sube y se hace pequeño. */
+    }
+}
