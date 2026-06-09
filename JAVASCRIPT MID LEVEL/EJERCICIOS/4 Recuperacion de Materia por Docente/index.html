@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html
+     Título: Ejercicio 4
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="es"> <!-- Define el idioma principal del documento como español para accesibilidad y SEO. -->
+
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
+    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres para evitar problemas con tildes y eñes. -->
+    <link rel="stylesheet" href="style.css" /> <!-- Enlaza el archivo CSS externo para aplicar estilos a la página. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura la vista para dispositivos móviles, asegurando responsividad. -->
+    <title>Ejercicio 4</title> <!-- Define el título que aparece en la pestaña del navegador. -->
+</head>
+
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <div class="enunciado"> <!-- Contenedor principal para el enunciado del ejercicio. -->
+        <h1 class="title">Ejercicio 4</h1> <!-- Título principal del ejercicio, con una clase para estilos. -->
+        <p> <!-- Párrafo que describe la situación del ejercicio. -->
+            Los datos de cofla y de otros alumnos fueron recibidos y ya están almacenados ahora hay que crear un sistema que muestre esa información y se pueda asignar cuando rinde.
+        </p>
+        <ol type="A"> <!-- Lista ordenada con tipo de numeración alfabética (A, B, C...). -->
+            <li> <!-- Primer elemento de la lista. -->
+                La interfaz debe ser agradable y atractiva.
+            </li>
+            <li> <!-- Segundo elemento de la lista. -->
+                Debe contener todos los datos de manera estructurada.
+            </li>
+            <li> <!-- Tercer elemento de la lista. -->
+                El profesor puede seleccionar en cual de las 2 semanas rinde el usuario.
+            </li>
+            <li>
+                Si el profesor confirma, los datos se deben actualizar y reemplazar el espacio de seleccion de semana por la semana seleccionada.
+            </li>
+        </ol>
+    </div>
+
+    <div class="ask"> <!-- Sección para la pregunta o interacción inicial. -->
+        <p>Realizaremos una tabla con los datos que nos estan pidiendo y la semana que le corresponde a cada alumno.</p>
+        <button class="aceptar" id="aceptar">👀 Solución</button>
+    </div>
+
+    <div id="solucion" class="solucion">
+        <h2 id="sol-res">Materias a Recuperar y Tiempo de Recuperación</h2>
+        <div class="grid-container">
+        
+        </div>
+        <div class="" style="display: none;" id="resultado"></div>
+        <button class="guardar" id="confirmar">✅ Confirmar</button>
+    </div>
+
+    <script src="main.js"></script> <!-- Enlaza el archivo JavaScript externo para la lógica interactiva. -->
+
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>
