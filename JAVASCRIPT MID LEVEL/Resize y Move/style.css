@@ -1,78 +1,122 @@
-/**
- * 🛠️ MODULE: WINDOW MANIPULATION (RESIZE & MOVE)
- * 
- * ARQUITECTURA: Diseño basado en una terminal de control para enfatizar el carácter técnico.
- * DX (Developer Experience): Feedback visual claro mediante estados de botón y contenedores semánticos.
- */
+/* Importación de la fuente moderna 'Outfit' */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
 
-/* BASE STYLES: Configuración global y reset */
+/* Reseteo completo para control total del diseño */
+* {
+    margin: 0; /* Elimina márgenes */
+    padding: 0; /* Elimina rellenos */
+    box-sizing: border-box; /* Incluye bordes en el tamaño final */
+    font-family: 'Outfit', sans-serif; /* Fuente uniforme */
+}
+
+/* Estilo del cuerpo con degradado radial dinámico */
 body {
-    color: #1e293b;            /* Slate-800: Color de texto principal para legibilidad */
-    font-family: 'Segoe UI', system-ui, sans-serif; /* Fuentes de sistema para carga instantánea */
-    background-color: #f8fafc; /* Fondo neutro para reducir la fatiga visual */
-    margin: 0;                 /* Eliminación de márgenes del User-Agent */
-    padding: 2.5rem;           /* Espaciado perimetral para jerarquía visual */
-    line-height: 1.6;          /* Interlineado óptimo para textos informativos */
+    background: #0f172a; /* Azul noche profundo */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0, transparent 50%), /* Brillo azul superior */
+        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0, transparent 50%); /* Brillo verde inferior */
+    min-height: 100vh; /* Altura mínima de la ventana */
+    display: flex; /* Centrado con flexbox */
+    justify-content: center; /* Centro horizontal */
+    align-items: center; /* Centro vertical */
+    color: #f8fafc; /* Texto claro */
 }
 
-/* MAIN CONTAINER: Estructura del laboratorio */
-.window-lab {
-    max-width: 700px;          /* Ancho máximo: Limita la expansión para mejorar la lectura */
-    margin: 0 auto;            /* Margen: Centra horizontalmente el laboratorio en la página */
+/* Contenedor con animación de entrada suave */
+.container {
+    width: 90%; /* Ancho responsivo */
+    max-width: 600px; /* Límite de expansión */
+    animation: fadeIn 0.8s ease-out; /* Animación de aparición */
 }
 
-/* CONTROL PANEL: El "dashboard" oscuro para la experimentación */
-.control-panel {
-    background-color: #000;    /* Color de fondo: Negro puro para emular una terminal de comandos */
-    padding: 30px;             /* Relleno: Espacio interno generoso para los controles */
-    border-radius: 12px;       /* Bordes: Curvatura de 12px para una estética de hardware moderno */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.25); /* Sombra: Proyecta profundidad y destaca el dashboard */
-    color: #fff;               /* Color de texto: Blanco para contraste absoluto sobre el panel */
-    margin-top: 2rem;          /* Margen superior: Distancia respecto a la cabecera */
+/* Encabezado con efecto de texto degradado */
+.glass-header {
+    text-align: center; /* Texto centrado */
+    margin-bottom: 2rem; /* Separación inferior */
 }
 
-/* HEADINGS: Títulos internos */
-h2, h3 {
-    color: #3b82f6;            /* Azul vibrante: identifica títulos de sección técnica */
-    margin-top: 0;             /* Alineación precisa con el contenedor padre */
+.glass-header h1 {
+    font-size: 2.8rem; /* Tamaño prominente */
+    background: linear-gradient(to right, #60a5fa, #34d399); /* Degradado azul-verde */
+    background-clip: text; /* Aplica degradado solo al texto */
+    -webkit-text-fill-color: transparent; /* Hace el texto transparente */
 }
 
-/* SECURITY NOTE: Área de información crítica */
-.security-note {
-    border-bottom: 1px solid #334155; /* Separador sutil entre secciones */
-    padding-bottom: 1.5rem;    /* Espacio antes de la siguiente sección */
-    margin-bottom: 1.5rem;     /* Margen inferior para flujo de lectura */
+/* Tarjeta principal con efecto de cristal (Glassmorphism) */
+.info-card {
+    background: rgba(30, 41, 59, 0.7); /* Fondo traslúcido */
+    backdrop-filter: blur(12px); /* Desenfoque del fondo */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
+    border-radius: 24px; /* Esquinas redondeadas */
+    padding: 2.5rem; /* Espaciado interno */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra elegante */
+    text-align: center; /* Centra contenido */
 }
 
-code {
-    background-color: #1e293b; /* Color de fondo: Slate-800 para bloques de código inline */
-    padding: 2px 6px;          /* Relleno: Pequeño margen interno para el texto del código */
-    border-radius: 4px;        /* Bordes: Esquinas suavizadas para los bloques de código */
-    color: #fbbf24;            /* Color: Ámbar (Amber-400) para resaltar sintaxis técnica */
-    font-family: monospace;    /* Fuente: Familia de paso fijo necesaria para legibilidad de código */
+/* Insignia de estado */
+.status-badge {
+    display: inline-block; /* Comportamiento de bloque en línea */
+    padding: 0.3rem 1rem; /* Relleno */
+    background: rgba(59, 130, 246, 0.2); /* Fondo azul sutil */
+    color: #60a5fa; /* Texto azul brillante */
+    border-radius: 9999px; /* Forma de píldora */
+    font-weight: 600; /* Negrita */
+    margin-bottom: 1rem; /* Margen inferior */
+    text-transform: uppercase; /* Mayúsculas */
+    font-size: 0.75rem; /* Tamaño reducido */
 }
 
-/* ACTIONS & BUTTONS: Interfaz interactiva */
+/* Caja de instrucciones de teclado */
+.instruction-box {
+    background: #1e293b; /* Fondo sólido oscuro */
+    padding: 1rem; /* Espaciado */
+    border-radius: 12px; /* Esquinas suaves */
+    margin: 1.5rem 0; /* Margen vertical */
+    display: flex; /* Flexbox para alineación */
+    justify-content: center; /* Centro horizontal */
+    align-items: center; /* Centro vertical */
+    gap: 12px; /* Espacio entre elementos */
+}
+
+/* Estilo para teclas representadas */
+kbd {
+    background: #334155; /* Fondo de tecla */
+    padding: 0.2rem 0.6rem; /* Relleno */
+    border-radius: 4px; /* Esquina de tecla */
+    border-bottom: 3px solid #0f172a; /* Profundidad visual */
+    color: #34d399; /* Color verde esmeralda */
+    font-family: monospace; /* Fuente de código */
+}
+
+/* Grupo de botones de acción */
 .button-group {
-    display: flex;             /* Activa Flexbox para alineación de botones */
-    gap: 15px;                 /* Espaciado entre elementos de acción */
-    margin-top: 1rem;          /* Margen superior para el grupo de botones */
+    display: flex; /* Flexbox */
+    gap: 1rem; /* Espacio entre botones */
+    justify-content: center; /* Centrado */
 }
 
+/* Estilo base de botones */
 .btn {
-    padding: 10px 20px;        /* Relleno táctil para una buena experiencia de usuario */
-    border: none;              /* Elimina el borde nativo */
-    border-radius: 6px;        /* Bordes redondeados según el sistema de diseño */
-    cursor: pointer;           /* Indica interactividad mediante el cursor */
-    font-weight: 600;          /* Grosor de fuente para jerarquía visual */
-    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Transición suave con curva profesional */
+    padding: 0.8rem 1.5rem; /* Tamaño táctil */
+    border: none; /* Sin bordes nativos */
+    border-radius: 10px; /* Redondeado moderno */
+    font-weight: 600; /* Grosor de fuente */
+    cursor: pointer; /* Mano al pasar */
+    transition: 0.3s all ease; /* Transición suave */
+    color: white; /* Texto blanco */
+    flex: 1; /* Crecen equitativamente */
 }
 
-.btn:active {
-    transform: scale(0.95);    /* Feedback háptico visual de pulsación */
+.btn-primary { background: #3b82f6; } /* Azul principal */
+.btn-secondary { background: #10b981; } /* Verde secundario */
+
+.btn:hover {
+    filter: brightness(1.1); /* Brillo al pasar */
+    transform: translateY(-2px); /* Pequeña elevación */
 }
 
-.btn-resize { background-color: #2563eb; color: #fff; } /* Azul para redimensión */
-.btn-move { background-color: #059669; color: #fff; }   /* Esmeralda para movimiento */
-
-.btn:hover { opacity: 0.9; }   /* Feedback de proximidad */
+/* Animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); } /* Desde abajo e invisible */
+    to { opacity: 1; transform: translateY(0); } /* Posición final visible */
+}

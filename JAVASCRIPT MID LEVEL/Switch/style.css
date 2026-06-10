@@ -1,0 +1,84 @@
+/* Importación de la fuente 'Outfit' desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+/* Reseteo global de estilos para asegurar consistencia entre navegadores */
+* {
+    margin: 0; /* Elimina márgenes externos por defecto */
+    padding: 0; /* Elimina rellenos internos por defecto */
+    box-sizing: border-box; /* Incluye bordes y rellenos en el cálculo del tamaño total del elemento */
+    font-family: 'Outfit', sans-serif; /* Aplica la fuente principal a todo el documento */
+}
+
+/* Estilos para el cuerpo de la página: define el fondo y el centrado */
+body {
+    background: #0f172a; /* Color base oscuro (Navy) */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0, transparent 50%), /* Brillo sutil índigo superior */
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0, transparent 50%); /* Brillo sutil rosa inferior */
+    min-height: 100vh; /* Asegura que cubra el alto total de la ventana */
+    display: flex; /* Activa Flexbox para el posicionamiento */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    color: #f8fafc; /* Texto blanquecino para mejor contraste */
+    overflow: hidden; /* Evita scrolls accidentales en este laboratorio */
+}
+
+/* Contenedor principal con limitación de ancho y animación */
+.container {
+    width: 90%; /* Adaptable en móviles */
+    max-width: 600px; /* Límite para pantallas grandes */
+    animation: fadeIn 0.8s ease-out; /* Ejecuta la animación de entrada */
+}
+
+/* Estilos del encabezado con efecto tipográfico */
+.glass-header {
+    text-align: center; /* Centra los títulos */
+    margin-bottom: 2rem; /* Espacio de separación con la tarjeta */
+}
+
+.glass-header h1 {
+    font-size: 2.5rem; /* Tamaño de fuente destacado */
+    background: linear-gradient(to right, #818cf8, #f472b6); /* Degradado moderno */
+    background-clip: text; /* Recorta el degradado al contorno de las letras */
+    -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el fondo */
+    margin-bottom: 0.5rem; /* Margen inferior */
+}
+
+/* Tarjeta con efecto Glassmorphism (Cristal) */
+.info-card {
+    background: rgba(30, 41, 59, 0.7); /* Fondo oscuro traslúcido */
+    backdrop-filter: blur(10px); /* Difumina el fondo detrás de la tarjeta */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde fino para realismo */
+    border-radius: 24px; /* Esquinas redondeadas */
+    padding: 2.5rem; /* Relleno interno generoso */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra profunda para elevación */
+    text-align: center; /* Centra el contenido interno */
+}
+
+/* Insignia de estado visual */
+.status-badge {
+    display: inline-block; /* Permite aplicar márgenes y rellenos */
+    padding: 0.3rem 0.8rem; /* Relleno de la píldora */
+    background: rgba(34, 197, 94, 0.2); /* Verde traslúcido */
+    color: #4ade80; /* Texto verde brillante */
+    border-radius: 9999px; /* Forma redonda perfecta */
+    font-size: 0.75rem; /* Texto pequeño */
+    font-weight: 600; /* Texto en negrita */
+    margin-bottom: 1.5rem; /* Margen inferior */
+    text-transform: uppercase; /* Mayúsculas para estilo de etiqueta */
+}
+
+/* Estilos para la nota de advertencia técnica */
+.warning-note {
+    font-size: 0.85rem; /* Tamaño reducido */
+    color: #fca5a5; /* Color rojizo suave */
+    margin-top: 1.5rem; /* Separación superior */
+    font-style: italic; /* Texto en cursiva */
+    line-height: 1.4; /* Altura de línea para legibilidad */
+}
+
+/* Definición de la animación de aparición */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); } /* Inicia invisible y desplazado */
+    to { opacity: 1; transform: translateY(0); } /* Termina visible en su sitio */
+}

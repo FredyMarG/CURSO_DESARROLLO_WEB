@@ -1,0 +1,165 @@
+/* Importación de la fuente 'Outfit' desde Google Fonts con diferentes pesos */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+/*
+ * PROYECTO: Laboratorio de JavaScript (Nivel Medio) - Temporizadores
+ * ARCHIVO: style.css
+ * PROPÓSITO: Proporcionar una interfaz visual moderna y atractiva (tipo dashboard)
+ *            para el laboratorio de temporizadores asíncronos.
+ * TEMA VISUAL: Dark mode con efectos glassmorphism y degradados.
+ */
+
+/* Estilos globales y reseteo básico para todos los elementos */
+* {
+    margin: 0; /* Elimina los márgenes predeterminados del navegador */
+    padding: 0; /* Elimina los rellenos predeterminados */
+    box-sizing: border-box; /* Incluye padding y border en el ancho/alto total del elemento */
+    font-family: 'Outfit', sans-serif; /* Aplica la fuente 'Outfit' a todo el documento */
+}
+
+/* Estilos para el cuerpo de la página: define el fondo, el centrado y la tipografía base */
+body {
+    background: #0f172a; /* Color de fondo base (azul muy oscuro) */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0, transparent 50%), /* Degradado radial sutil en la esquina superior izquierda */
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0, transparent 50%); /* Degradado radial sutil en la esquina inferior derecha */
+    min-height: 100vh; /* Asegura que el body ocupe al menos el 100% de la altura de la ventana */
+    display: flex; /* Activa Flexbox para centrar el contenido */
+    justify-content: center; /* Centra horizontalmente el contenedor principal */
+    align-items: center; /* Centra verticalmente el contenedor principal */
+    color: #f8fafc; /* Color de texto blanquecino para legibilidad */
+    line-height: 1.6; /* Altura de línea para mejorar la legibilidad del texto */
+}
+
+/* Contenedor principal que limita el ancho de la interfaz */
+.container {
+    width: 90%; /* Ocupa el 90% del ancho en pantallas pequeñas */
+    max-width: 700px; /* No supera los 700px en pantallas grandes */
+    animation: fadeIn 0.8s ease-out; /* Aplica la animación de entrada definida al final del archivo */
+}
+
+/* Estilos para el encabezado principal con efecto de texto degradado */
+.glass-header {
+    text-align: center; /* Centra el texto del título y subtítulo */
+    margin-bottom: 2rem; /* Espacio de separación con la tarjeta inferior */
+}
+
+.glass-header h1 {
+    font-size: 2.8rem; /* Tamaño de fuente grande para el título */
+    background: linear-gradient(to right, #818cf8, #f472b6); /* Degradado de índigo a rosa */
+    background-clip: text; /* Recorta el fondo para que solo se vea dentro de las letras */
+    -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el degradado de fondo */
+    margin-bottom: 0.5rem; /* Separación con el párrafo inferior */
+}
+
+.glass-header p {
+    font-size: 1.1rem; /* Tamaño de fuente para el subtítulo */
+    color: #cbd5e1; /* Color de texto gris claro */
+}
+
+/* Estilos para la tarjeta de información principal con efecto glassmorphism */
+.info-card {
+    background: rgba(30, 41, 59, 0.7); /* Fondo oscuro con 70% de opacidad */
+    backdrop-filter: blur(10px); /* Aplica un desenfoque al fondo detrás de la tarjeta */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde fino y sutil para definir la forma */
+    border-radius: 24px; /* Esquinas redondeadas y suaves */
+    padding: 2.5rem; /* Espaciado interno generoso */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra profunda para dar elevación */
+    text-align: center; /* Centra todo el contenido interno */
+}
+
+.info-card h2 {
+    font-size: 1.8rem; /* Tamaño de fuente para los subtítulos de la tarjeta */
+    margin-bottom: 1rem; /* Espacio inferior */
+    color: #e2e8f0; /* Color de texto gris muy claro */
+}
+
+.info-card p {
+    color: #a0aec0; /* Color de texto gris medio */
+    margin-bottom: 1.5rem; /* Espacio inferior */
+}
+
+/* Estilos para la insignia de estado (badge) */
+.status-badge {
+    display: inline-block; /* Permite aplicar padding y márgenes, y que ocupe solo el ancho de su contenido */
+    padding: 0.3rem 0.9rem; /* Relleno vertical y horizontal */
+    background: rgba(34, 197, 94, 0.2); /* Fondo verde traslúcido */
+    color: #4ade80; /* Texto verde brillante */
+    border-radius: 9999px; /* Forma de píldora (muy redondeado) */
+    font-size: 0.8rem; /* Tamaño de fuente pequeño */
+    font-weight: 600; /* Texto en negrita */
+    margin-bottom: 1.5rem; /* Espacio inferior */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas */
+    letter-spacing: 0.05em; /* Espaciado ligero entre letras */
+}
+
+/* Estilos para la caja que contiene las instrucciones */
+.instruction-box {
+    background: #1e293b; /* Fondo sólido oscuro */
+    padding: 1rem; /* Espaciado interno */
+    border-radius: 12px; /* Esquinas redondeadas */
+    margin: 1.5rem auto; /* Margen superior e inferior, y centrado horizontalmente */
+    display: flex; /* Alinea los elementos internos (texto y kbd) en fila */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Alinea el contenido verticalmente */
+    gap: 10px; /* Espacio entre los elementos internos */
+    max-width: fit-content; /* El ancho se ajusta al contenido */
+}
+
+/* Estilo para la etiqueta de teclado (kbd): simula una tecla física */
+kbd {
+    background: #334155; /* Fondo grisáceo */
+    padding: 0.2rem 0.6rem; /* Relleno interno */
+    border-radius: 4px; /* Esquinas ligeramente redondeadas */
+    border-bottom: 3px solid #0f172a; /* Efecto de profundidad de la tecla */
+    font-family: monospace; /* Fuente de ancho fijo para símbolos de teclado */
+    color: #f472b6; /* Color rosa para resaltar la tecla */
+    font-size: 0.9rem; /* Tamaño de fuente ligeramente reducido */
+}
+
+/* Contenedor para la visualización de los estados de los temporizadores */
+.timer-display {
+    display: flex; /* Alinea las tarjetas de estado en fila */
+    justify-content: space-around; /* Distribuye las tarjetas con espacio alrededor */
+    gap: 1rem; /* Espacio entre las tarjetas */
+    margin-top: 2rem; /* Margen superior */
+    padding-top: 1.5rem; /* Relleno superior */
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Borde superior sutil para separar secciones */
+}
+
+.timer-status {
+    flex: 1; /* Cada tarjeta ocupa el mismo ancho */
+    background: rgba(51, 65, 85, 0.4); /* Fondo gris azulado semi-transparente */
+    padding: 1.2rem; /* Espaciado interno */
+    border-radius: 12px; /* Esquinas redondeadas */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil */
+}
+
+.timer-status h3 {
+    font-size: 1.3rem; /* Tamaño de fuente para los títulos de los temporizadores */
+    margin-bottom: 0.5rem; /* Espacio inferior */
+    color: #93c5fd; /* Color azul claro */
+}
+
+/* Colores específicos para los diferentes estados del texto */
+.status-text.pending { color: #facc15; } /* Amarillo para estado pendiente o cancelado */
+.status-text.active { color: #34d399; } /* Verde para estado activo */
+.status-text.finished { color: #60a5fa; } /* Azul para estado finalizado */
+
+.warning-note {
+    font-size: 0.85rem; /* Tamaño de fuente para la nota de advertencia */
+    color: #ef4444; /* Color rojo para la advertencia */
+    margin-top: 2rem; /* Margen superior */
+}
+
+/* Definición de la animación de entrada 'fadeIn' */
+@keyframes fadeIn {
+    from { /* Estado inicial de la animación */
+        opacity: 0; /* Completamente transparente */
+        transform: translateY(20px); /* Desplazado 20px hacia abajo */
+    }
+    to { /* Estado final de la animación */
+        opacity: 1; /* Completamente opaco */
+        transform: translateY(0); /* En su posición original */
+    }
+}
