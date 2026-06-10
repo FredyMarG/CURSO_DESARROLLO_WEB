@@ -1,13 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
+    <!-- 
+        PROYECTO: Laboratorio de JavaScript (Nivel Medio)
+        TEMA: Temporizadores Asíncronos (setTimeout, setInterval).
+        OBJETIVO: Demostrar el uso y control de temporizadores en JavaScript.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timers</title>
+    <title>Laboratorio: Temporizadores JS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
+    <main class="container">
+        <header class="glass-header">
+            <h1>⏰ JavaScript Timers</h1>
+            <p>Explorando <code>setTimeout</code> y <code>setInterval</code></p>
+        </header>
+
+        <section class="info-card">
+            <div class="status-badge">Modo Asíncrono Activo</div>
+            <h2>Entorno de Pruebas</h2>
+            <p>El script <code>main.js</code> está ejecutando temporizadores. Para observar su comportamiento y los mensajes:</p>
+            
+            <div class="instruction-box">
+                <span>Abre la</span>
+                <kbd>Consola (F12)</kbd>
+            </div>
+
+            <div class="timer-display">
+                <div class="timer-status" id="setTimeoutStatus">
+                    <h3>setTimeout</h3>
+                    <p>Estado: <span class="status-text pending">Pendiente/Cancelado</span></p>
+                </div>
+                <div class="timer-status" id="setIntervalStatus">
+                    <h3>setInterval</h3>
+                    <p>Estado: <span class="status-text pending">Pendiente/Cancelado</span></p>
+                </div>
+            </div>
+            <p class="warning-note"><strong>Nota:</strong> Los mensajes de <code>document.write</code> sobrescribirán esta página. Revisa la consola para el flujo completo.</p>
+        </section>
+    </main>
+
     <script src="main.js"></script>
 </body>
 </html>

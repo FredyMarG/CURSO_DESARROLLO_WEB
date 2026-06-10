@@ -1,26 +1,55 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Screen y Scroll/scroll.html
-     Título: Screen y Scroll
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
+    <!-- 
+        PROYECTO: Dashboard de Telemetría (Nivel Medio)
+        TEMA: Screen, Window y Scroll.
+        OBJETIVO: Visualizar métricas de pantalla y posición de scroll en tiempo real.
+    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Screen y Scroll</title>
+    <title>Telemetría: Screen & Scroll</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
 
+    <main class="dashboard">
+        <header>
+            <h1>📡 Screen & Scroll Telemetry</h1>
+            <p class="subtitle">Monitoreo de dimensiones y desplazamiento del navegador</p>
+        </header>
+
+        <!-- Panel de Monitoreo: Utiliza el CSS de Grid para mostrar tarjetas -->
+        <section class="monitor-panel">
+            
+            <!-- Tarjeta de Dimensiones de Pantalla -->
+            <div class="stat-card">
+                <h2>Dimensiones de Hardware</h2>
+                <div class="data-grid">
+                    <p>Screen Width: <span id="screenWidth">---</span></p>
+                    <p>Screen Height: <span id="screenHeight">---</span></p>
+                    <p>Available Height: <span id="availHeight">---</span></p>
+                </div>
+            </div>
+
+            <!-- Tarjeta de Métricas de Scroll -->
+            <div class="stat-card">
+                <h2>Métricas de Scroll</h2>
+                <div class="data-grid">
+                    <p>Scroll Top (Y): <span id="scrollY">0px</span></p>
+                    <p>Scroll Left (X): <span id="scrollX">0px</span></p>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-primary" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Subir al Inicio</button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Espaciador decorativo para permitir el desplazamiento vertical -->
+        <div class="content-spacer"></div>
+    </main>
     
     <script src="Screen y Scroll.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>
