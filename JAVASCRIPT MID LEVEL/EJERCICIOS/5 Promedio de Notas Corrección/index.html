@@ -1,0 +1,76 @@
+<!doctype html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html
+     Título: Ejercicio 5
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="es"> <!-- Define el idioma principal del documento como español para accesibilidad y SEO. -->
+
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
+    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres para evitar problemas con tildes y eñes. -->
+    <link rel="stylesheet" href="style.css" /> <!-- Enlaza el archivo CSS externo para aplicar estilos a la página. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura la vista para dispositivos móviles, asegurando responsividad. -->
+    <title>Ejercicio 5</title> <!-- Define el título que aparece en la pestaña del navegador. -->
+</head>
+
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <div class="enunciado"> <!-- Contenedor principal para el enunciado del ejercicio. -->
+        <h1 class="title">Ejercicio 5</h1> <!-- Título principal del ejercicio, con una clase para estilos. -->
+        <p> <!-- Párrafo que describe la situación del ejercicio. -->
+            Las mesas de examen ya finalizaron y el profesor le tomó un último examen espacial a cofla, ya cofla hizo 2 pruebas mas, pero lamentablemente se rompió el sistema de inscripción de notas, por ende habrá que crear una solución a este problema, desarrollando una web que sea capás de simular su funcionamiento
+        </p>
+        <ol type="A"> <!-- Lista ordenada con tipo de numeración alfabética (A, B, C...). -->
+            <li> <!-- Primer elemento de la lista. -->
+                Crear mini interfaz para introducir nota
+            </li>
+            <li> <!-- Segundo elemento de la lista. -->
+                Validar que no haya errores
+            </li>
+            <li> <!-- Tercer elemento de la lista. -->
+                Se debe promediar la nota del profesor, con otras 2 notas de trabajos anteriores
+            </li>
+            <li>
+                Si el promedio es mayor a 7/10-> Aprobó la materia
+            </li>
+        </ol>
+    </div>
+
+    <div class="ask"> <!-- Sección para la pregunta o interacción inicial. -->
+        <p>Realizaremos un formulario donde ingresaremos la nota del alumno y donde se mostrará el resultado</p>
+        <button class="aceptar" id="aceptar">👀 Solución</button>
+    </div>
+
+    <div id="solucion" class="solucion"> <!-- Sección del formulario -->
+        <form class="nota-form">
+            <h2>Introduce la nota del alumno</h2>
+            <input type="number" id="nota" placeholder="Nota del alumno" min="0" max="10" required />
+            <button type="button" id="guardar" class="guardar">Guardar nota</button>
+        </form>
+    </div>
+
+    <div class="modal-bg"> <!-- Modal movido fuera para que sea 100% independiente -->
+        <div class="modal">
+            <button class="modal__close-button">X</button>
+            <h3 class="resultado"></h3>
+            <p class="primera"></p>
+            <p class="segunda"></p>
+            <p class="tercera"></p>
+            <p class="promedio"></p>
+            <p class="mensaje"></p>
+        </div>
+    </div>
+
+    <script src="main.js"></script> <!-- Enlaza el archivo JavaScript externo para la lógica interactiva. -->
+
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>
