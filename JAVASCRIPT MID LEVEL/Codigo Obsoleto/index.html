@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- 
+        PROYECTO: Laboratorio de JavaScript (Nivel Medio)
+        TEMA: Código Obsoleto (Deprecated) y Buenas Prácticas Modernas.
+        OBJETIVO: Demostrar las consecuencias del uso de métodos antiguos de String, XMLHttpRequest, 
+                  y educar en alternativas semánticas con CSS y Fetch API.
+    -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Mid Level - Código Obsoleto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <!-- Encabezado con efecto de texto degradado -->
+        <header class="glass-header">
+            <h1>⚠️ JavaScript Legacy & Deprecated</h1>
+            <p>Laboratorio interactivo de código obsoleto y estándares modernos</p>
+        </header>
+
+        <!-- Tarjeta de Control Principal -->
+        <section class="info-card">
+            <div class="status-badge warning">Legacy Analyzer Activo</div>
+            <h2>1. Métodos Obsoletos de String.prototype</h2>
+            <p>Muchas funciones nativas de String añaden etiquetas HTML directas de los años 90. Escribe un texto y presiona los botones para ver lo que generan en comparación con CSS moderno.</p>
+
+            <!-- Entrada de texto de prueba -->
+            <div class="input-group">
+                <label for="textInput">Texto a Procesar:</label>
+                <input type="text" id="textInput" value="JavaScript Moderno 🚀" placeholder="Escribe algo aquí...">
+            </div>
+
+            <!-- Botonera de métodos obsoletos -->
+            <div class="methods-grid">
+                <button class="btn btn-method" data-method="bold">bold()</button>
+                <button class="btn btn-method" data-method="italics">italics()</button>
+                <button class="btn btn-method" data-method="strike">strike()</button>
+                <button class="btn btn-method" data-method="big">big()</button>
+                <button class="btn btn-method" data-method="small">small()</button>
+                <button class="btn btn-method" data-method="blink">blink()</button>
+                <button class="btn btn-method" data-method="fixed">fixed()</button>
+                <button class="btn btn-method" data-method="sub">sub()</button>
+                <button class="btn btn-method" data-method="sup">sup()</button>
+                <button class="btn btn-method" data-method="fontcolor">fontcolor("red")</button>
+                <button class="btn btn-method" data-method="fontsize">fontsize(7)</button>
+                <button class="btn btn-method" data-method="link">link("URL")</button>
+            </div>
+
+            <!-- Panel de Resultados Comparativos -->
+            <div id="stringResultPanel" class="result-panel hidden">
+                <div class="comparison-grid">
+                    <!-- Columna Legada -->
+                    <div class="result-box legacy">
+                        <h3>Método Deprecado</h3>
+                        <div class="code-output">
+                            <span class="label">HTML Generado por JS:</span>
+                            <code id="legacyHtmlString"></code>
+                        </div>
+                        <div class="preview-output">
+                            <span class="label">Previsualización Visual:</span>
+                            <div id="legacyPreview" class="preview-container"></div>
+                        </div>
+                        <p class="explanation">❌ <strong>Problema:</strong> Mezcla presentación visual en la capa lógica. Viola la separación de responsabilidades y es nocivo para el SEO y accesibilidad.</p>
+                    </div>
+
+                    <!-- Columna Moderna -->
+                    <div class="result-box modern">
+                        <h3>Alternativa Moderna (CSS / HTML Semántico)</h3>
+                        <div class="code-output">
+                            <span class="label">Equivalente Recomendado:</span>
+                            <code id="modernCodeString"></code>
+                        </div>
+                        <div class="preview-output">
+                            <span class="label">Previsualización Visual:</span>
+                            <div id="modernPreview" class="preview-container"></div>
+                        </div>
+                        <p class="explanation">✅ <strong>Solución:</strong> Utiliza hojas de estilo CSS o tags semánticos de HTML5. Mantiene el marcado limpio y accesible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tarjeta de APIs de Red y Flujo -->
+        <section class="info-card mt-2">
+            <h2>2. Redes: XMLHttpRequest vs Fetch API</h2>
+            <p>El antiguo <code>XMLHttpRequest</code> requiere configuraciones complejas basadas en eventos, mientras que <code>fetch()</code> utiliza Promesas de forma nativa.</p>
+
+            <div class="ajax-actions">
+                <button id="btnXhr" class="btn btn-amber">Ejecutar XMLHttpRequest (Legacy)</button>
+                <button id="btnFetch" class="btn btn-emerald">Ejecutar Fetch API (Moderno)</button>
+            </div>
+
+            <!-- Caja de simulación de consola -->
+            <div class="console-box">
+                <div class="console-header">
+                    <span>Simulador de Respuesta de Red</span>
+                    <button id="clearConsole" class="btn-clear">Limpiar</button>
+                </div>
+                <div id="consoleOutput" class="console-body">
+                    <span class="system-msg">> Esperando petición...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Caja informativa sobre el estándar F12 -->
+        <div class="instruction-box">
+            <span>Presiona</span>
+            <kbd>F12</kbd>
+            <span>y abre la pestaña de Consola para ver advertencias nativas de obsolescencia.</span>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
