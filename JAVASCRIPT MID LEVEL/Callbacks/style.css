@@ -1,295 +1,140 @@
-:root {
-    /* Define los colores principales de la temática de callbacks */
-    --primary-color: #7c5cff;
-    --primary-dark: #5f46ff;
-    --accent: #a78bfa;
-    --bg-color: #0f1020;
-    --surface: #171a33;
-    --surface-2: #232858;
-    --text-color: #eef2ff;
-    --muted: #b6b9d7;
-    --white: #ffffff;
-    --shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-    --radius: 18px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+/* Importa la fuente Outfit desde Google Fonts para usarla en toda la página. */
 
-/* Reinicia márgenes y rellenos para que todo se vea uniforme */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* Elimina el margen por defecto de los elementos. */
+    padding: 0; /* Elimina el padding por defecto de los elementos. */
+    box-sizing: border-box; /* Hace que width/height incluyan padding y borde. */
+    font-family: 'Outfit', sans-serif; /* Aplica la fuente principal a todo el documento. */
 }
 
-/* Estilo general del cuerpo */
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #0f1020 0%, #161a36 100%);
-    color: var(--text-color);
-    line-height: 1.6;
+    background: #0f172a; /* Define el color base del fondo. */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0, transparent 50%), /* Brillo superior izquierdo. */
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0, transparent 50%); /* Brillo inferior derecho. */
+    min-height: 100vh; /* Hace que el body ocupe toda la altura de la ventana. */
+    display: flex; /* Activa flexbox para centrar el contenido. */
+    justify-content: center; /* Centra horizontalmente el contenido. */
+    align-items: center; /* Centra verticalmente el contenido. */
+    color: #f8fafc; /* Color de texto claro para contraste. */
 }
 
-/* Centra el contenido con un ancho máximo */
 .container {
-    width: min(1120px, 90%);
-    margin: 0 auto;
+    width: 90%; /* Ocupa el 90% del ancho disponible. */
+    max-width: 650px; /* No permite que el contenedor sea más ancho de 650px. */
+    animation: fadeIn 0.8s ease-out; /* Aplica una animación suave al cargar la página. */
 }
 
-/* Estilos del encabezado */
-.header {
-    background: rgba(15, 16, 32, 0.9);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+.glass-header {
+    text-align: center; /* Centra el contenido del encabezado. */
+    margin-bottom: 2rem; /* Añade espacio debajo del encabezado. */
 }
 
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 0;
+.glass-header h1 {
+    font-size: 2.5rem; /* Tamaño grande para el título principal. */
+    background: linear-gradient(to right, #818cf8, #f472b6); /* Degradado colorido en el texto. */
+    background-clip: text; /* Hace que el degradado se vea dentro del texto. */
+    -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el degradado. */
+    margin-bottom: 0.5rem; /* Separación entre el título y el subtítulo. */
 }
 
-.logo {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 1.3rem;
-    font-weight: 700;
+.info-card {
+    background: rgba(30, 41, 59, 0.7); /* Fondo oscuro semi transparente. */
+    backdrop-filter: blur(10px); /* Aplica desenfoque al fondo detrás de la tarjeta. */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil. */
+    border-radius: 24px; /* Bordes redondeados. */
+    padding: 2.5rem; /* Espacio interno amplio. */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra profunda para dar profundidad. */
+    text-align: center; /* Centra el contenido dentro de la tarjeta. */
 }
 
-.nav-links {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
+.spam-alert {
+    display: flex; /* Organiza el icono y el texto en fila. */
+    align-items: center; /* Alinea verticalmente el contenido. */
+    justify-content: center; /* Centra el contenido horizontalmente. */
+    gap: 0.6rem; /* Añade espacio entre el icono y el texto. */
+    background: rgba(251, 146, 60, 0.12); /* Fondo naranja suave. */
+    border: 1px solid rgba(251, 146, 60, 0.35); /* Borde naranja tenue. */
+    border-radius: 14px; /* Bordes redondeados. */
+    padding: 0.9rem 1rem; /* Espacio interno. */
+    margin: 1rem 0; /* Espacio arriba y abajo del aviso. */
+    color: #fdba74; /* Color del texto del aviso. */
+    font-size: 0.95rem; /* Tamaño del texto. */
 }
 
-.nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-weight: 600;
+.spam-alert p {
+    margin: 0; /* Elimina el margen del párrafo para que se vea limpio. */
 }
 
-/* Estilos de botones */
+.status-badge {
+    display: inline-block; /* Permite aplicar padding y margen como si fuera una caja. */
+    padding: 0.25rem 0.75rem; /* Espacio interno pequeño. */
+    background: rgba(34, 197, 94, 0.2); /* Fondo verde suave. */
+    color: #4ade80; /* Texto verde brillante. */
+    border-radius: 9999px; /* Hace que el badge tenga forma de píldora. */
+    font-size: 0.75rem; /* Texto pequeño. */
+    font-weight: 600; /* Texto medio en negrita. */
+    margin-bottom: 1.5rem; /* Separación inferior. */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas. */
+    letter-spacing: 0.05em; /* Espacio entre letras. */
+}
+
+.demo-panel {
+    display: flex; /* Organiza los elementos en fila. */
+    flex-direction: column; /* Cambia la dirección a columna. */
+    gap: 1rem; /* Añade espacio entre los elementos internos. */
+    margin: 1.5rem 0; /* Margen vertical para separar la sección. */
+}
+
 .btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 0.85rem 1.3rem;
-    border-radius: 999px;
-    font-weight: 700;
-    transition: 0.3s ease;
-    border: none;
-    cursor: pointer;
+    display: inline-block; /* Hace que el botón se comporte como bloque en línea. */
+    padding: 0.9rem 1.4rem; /* Espacio interno del botón. */
+    border: none; /* Quita el borde por defecto. */
+    border-radius: 999px; /* Bordes muy redondeados. */
+    background: linear-gradient(to right, #818cf8, #ec4899); /* Degradado del botón. */
+    color: white; /* Texto blanco. */
+    font-weight: 600; /* Texto semi-bold. */
+    cursor: pointer; /* Cambia el cursor a mano al pasar por encima. */
 }
 
-.btn-primary {
-    background: linear-gradient(90deg, var(--primary-color), var(--accent));
-    color: var(--white);
+.output-box {
+    background: #0f172a; /* Fondo oscuro para el bloque de salida. */
+    border-radius: 16px; /* Bordes redondeados. */
+    padding: 1rem; /* Espacio interno. */
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
+#result {
+    color: #f472b6; /* Color rosado para el mensaje principal. */
+    font-weight: 600; /* Texto en negrita. */
+    margin-bottom: 0.4rem; /* Separación con el siguiente texto. */
 }
 
-.btn-outline {
-    border: 1px solid rgba(167, 139, 250, 0.4);
-    color: var(--text-color);
+#demoNote {
+    color: #cbd5e1; /* Color claro para el texto secundario. */
+    font-size: 0.95rem; /* Tamaño ligeramente menor. */
 }
 
-.btn-secondary {
-    background: rgba(124, 92, 255, 0.12);
-    color: var(--text-color);
+.code-preview {
+    background: #0f172a; /* Fondo oscuro para el bloque de código. */
+    border-radius: 16px; /* Bordes redondeados. */
+    padding: 1rem; /* Espacio interno. */
+    overflow: auto; /* Añade scroll si el contenido es muy ancho. */
+    text-align: left; /* Alinea el código a la izquierda. */
 }
 
-/* Sección principal */
-.hero {
-    padding: 5rem 0;
-    background:
-        radial-gradient(circle at top, rgba(124, 92, 255, 0.18), transparent 20%),
-        linear-gradient(180deg, #111430 0%, #0f1020 100%);
+code {
+    color: #f472b6; /* Color rosado para el texto dentro de code. */
+    font-family: monospace; /* Fuente monoespaciada, típica para código. */
 }
 
-.hero-content {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    align-items: center;
-    gap: 3rem;
-}
-
-.eyebrow {
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    font-size: 0.78rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.hero h1 {
-    font-size: clamp(2.7rem, 4vw, 4rem);
-    line-height: 1;
-    margin-bottom: 1rem;
-}
-
-.hero-text {
-    color: var(--muted);
-    max-width: 58ch;
-    margin-bottom: 1.5rem;
-}
-
-.hero-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.hero-panel {
-    background: var(--surface);
-    padding: 1.5rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-.code-block {
-    background: #0b0d18;
-    border-radius: 12px;
-    padding: 1rem;
-    overflow: auto;
-}
-
-.code-label {
-    display: inline-block;
-    color: var(--accent);
-    font-size: 0.8rem;
-    margin-bottom: 0.6rem;
-}
-
-.code-block code,
-.demo-card code {
-    color: #d8d4ff;
-    font-family: Consolas, monospace;
-}
-
-/* Sección concepto */
-.concept,
-.applications,
-.demo,
-.cta {
-    padding: 5rem 0;
-}
-
-.concept h2,
-.demo h2,
-.applications h2,
-.cta h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-}
-
-.concept-grid,
-.app-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-}
-
-.concept-card,
-.app-card,
-.demo-card {
-    background: var(--surface);
-    padding: 1.8rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-}
-
-.concept-card span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    background: rgba(124, 92, 255, 0.15);
-    color: var(--accent);
-    border-radius: 50%;
-    font-weight: 700;
-}
-
-/* Sección demo */
-.demo-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-}
-
-.demo-text {
-    color: var(--muted);
-    margin-bottom: 1rem;
-}
-
-.result {
-    margin-top: 1rem;
-    font-weight: 700;
-    color: var(--accent);
-}
-
-.demo-note {
-    color: var(--muted);
-    font-size: 0.95rem;
-    margin-top: 0.8rem;
-}
-
-/* CTA final */
-.cta-box {
-    background: linear-gradient(90deg, var(--primary-color), var(--accent));
-    color: var(--white);
-    text-align: center;
-    border-radius: var(--radius);
-    padding: 3rem;
-}
-
-.cta-box p {
-    margin: 0.8rem 0 1.5rem;
-}
-
-/* Pie de página */
-.footer {
-    text-align: center;
-    padding: 1.5rem;
-    color: var(--muted);
-}
-
-/* Diseño responsivo */
-@media (max-width: 900px) {
-    .hero-content,
-    .demo-layout,
-    .concept-grid,
-    .app-grid {
-        grid-template-columns: 1fr;
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Inicia invisible. */
+        transform: translateY(20px); /* Inicia un poco más abajo. */
     }
-
-    .hero {
-        padding: 4rem 0;
-    }
-}
-
-@media (max-width: 650px) {
-    .nav {
-        flex-wrap: wrap;
-        gap: 0.8rem;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .hero-actions {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-        text-align: center;
+    to {
+        opacity: 1; /* Termina visible. */
+        transform: translateY(0); /* Vuelve a su posición original. */
     }
 }
