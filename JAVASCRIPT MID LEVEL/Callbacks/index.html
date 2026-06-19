@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- Define el documento HTML5 -->
+<html lang="es">
+<!-- Indica que el idioma de la página es español -->
+<head>
+    <!-- Define la codificación de caracteres -->
+    <meta charset="UTF-8">
+    <!-- Hace que la página sea responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Vincula la hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Título que aparece en la pestaña del navegador -->
+    <title>Callbacks en JavaScript</title>
+</head>
+<body>
+    <!-- Encabezado principal de la página -->
+    <header class="header">
+        <nav class="nav container">
+            <!-- Logo o marca -->
+            <a href="#home" class="logo">CallbackJS</a>
+            <!-- Menú de navegación -->
+            <ul class="nav-links">
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#concepto">Concepto</a></li>
+                <li><a href="#ejemplo">Ejemplo</a></li>
+                <li><a href="#aplicaciones">Aplicaciones</a></li>
+            </ul>
+            <!-- Botón de acción -->
+            <a href="#ejemplo" class="btn btn-outline">Ver ejemplo</a>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Sección principal / hero -->
+        <section class="hero" id="home">
+            <div class="hero-content container">
+                <div>
+                    <!-- Texto de la portada -->
+                    <p class="eyebrow">Funciones de orden superior</p>
+                    <h1>Los callbacks hacen que JavaScript responda en el momento correcto</h1>
+                    <p class="hero-text">Una callback es una función que se pasa como argumento y se ejecuta cuando termina otra acción.</p>
+                    <div class="hero-actions">
+                        <a href="#ejemplo" class="btn btn-primary">Explorar ejemplo</a>
+                        <a href="#concepto" class="btn btn-secondary">Entender concepto</a>
+                    </div>
+                </div>
+                <!-- Panel visual del ejemplo -->
+                <div class="hero-panel">
+                    <div class="code-block">
+                        <span class="code-label">Ejemplo</span>
+                        <pre><code>function saludar(nombre, callback) {
+    callback(nombre);
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección del concepto -->
+        <section class="concept" id="concepto">
+            <div class="container">
+                <h2>¿Qué es un callback?</h2>
+                <div class="concept-grid">
+                    <article class="concept-card">
+                        <span>1</span>
+                        <h3>Se pasa como argumento</h3>
+                        <p>La función recibe otra función para ejecutarla más tarde.</p>
+                    </article>
+                    <article class="concept-card">
+                        <span>2</span>
+                        <h3>Se ejecuta después</h3>
+                        <p>Permite controlar el orden de las acciones en el programa.</p>
+                    </article>
+                    <article class="concept-card">
+                        <span>3</span>
+                        <h3>Es muy usado</h3>
+                        <p>Se emplea en eventos, peticiones, temporizadores y arreglos.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de ejemplo práctico -->
+        <section class="demo" id="ejemplo">
+            <div class="container demo-layout">
+                <div>
+                    <!-- Título de la sección de ejemplo -->
+                    <h2>Ejemplo práctico</h2>
+                    <!-- Texto explicativo para el usuario -->
+                    <p class="demo-text">Haz clic en el botón para ejecutar una función que recibe otra como callback.</p>
+                    <!-- Botón que dispara la demo -->
+                    <button class="btn btn-primary" id="runCallback">Ejecutar callback</button>
+                    <!-- Resultado visible que actualiza el JavaScript -->
+                    <p class="result" id="result">Esperando acción...</p>
+                    <!-- Texto adicional que muestra el estado del proceso -->
+                    <p class="demo-note" id="demoNote">Estado: la callback aún no se ha ejecutado.</p>
+                </div>
+                <div class="demo-card">
+                    <!-- Subtítulo del bloque de código -->
+                    <h3>Patrón típico</h3>
+                    <!-- Código de ejemplo para explicar el patrón -->
+                    <pre><code>function procesar(datos, callback) {
+    callback(datos);
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de aplicaciones -->
+        <section class="applications" id="aplicaciones">
+            <div class="container">
+                <h2>Aplicaciones comunes</h2>
+                <div class="app-grid">
+                    <article class="app-card">
+                        <h3>Eventos del DOM</h3>
+                        <p>Cuando haces clic, el navegador dispara una función callback.</p>
+                    </article>
+                    <article class="app-card">
+                        <h3>setTimeout</h3>
+                        <p>Ejecuta una acción después de cierto tiempo.</p>
+                    </article>
+                    <article class="app-card">
+                        <h3>.forEach() y .map()</h3>
+                        <p>Procesan cada elemento con una función callback.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección final de cierre -->
+        <section class="cta">
+            <div class="container cta-box">
+                <h2>Comprender callbacks es clave para dominar JavaScript</h2>
+                <p>Son la base para manejar eventos, asincronía y lógica más avanzada.</p>
+                <a href="#home" class="btn btn-primary">Volver arriba</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <p>© 2026 CallbackJS • Aprendiendo JavaScript con callbacks</p>
+    </footer>
+
+    <!-- Script para el comportamiento de la demo -->
+    <script src="main.js"></script>
+</body>
+</html>
