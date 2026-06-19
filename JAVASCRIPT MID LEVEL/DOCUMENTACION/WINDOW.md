@@ -1,9 +1,8 @@
-````md
-# 🌐 GUÍA DEFINITIVA NIVEL DIOS PRO EXTREMO — OBJETO WINDOW EN JAVASCRIPT
+# 🌐 GUÍA OBJETO WINDOW EN JAVASCRIPT
 
 ---
 
-# 📚 TEMARIO
+## 📚 TEMARIO
 
 1. ¿Qué es el objeto `window`?
 2. Relación entre Browser → Window → DOM
@@ -32,7 +31,7 @@
 
 ---
 
-# 🌎 ¿QUÉ ES EL OBJETO `window`?
+## 🌎 ¿QUÉ ES EL OBJETO `window`?
 
 El objeto `window` es el objeto principal del navegador.
 
@@ -42,7 +41,7 @@ TODO en el navegador vive dentro de `window`.
 
 ---
 
-# 🧠 PIÉNSALO ASÍ
+## 🧠 PIÉNSALO ASÍ
 
 ```txt
 NAVEGADOR
@@ -55,11 +54,11 @@ NAVEGADOR
       ├── ALERT
       ├── PROMPT
       └── MUCHAS MÁS...
-````
+```
 
 ---
 
-# 🔥 IMPORTANTE
+## 🔥 IMPORTANTE
 
 Cuando escribes:
 
@@ -77,7 +76,7 @@ El navegador permite omitir `window`.
 
 ---
 
-# 🧩 RELACIÓN ENTRE WINDOW Y DOM
+## 🧩 RELACIÓN ENTRE WINDOW Y DOM
 
 ```txt
 WINDOW
@@ -89,17 +88,17 @@ WINDOW
 
 ---
 
-# 🚪 OPEN(), CLOSE(), CLOSED Y STOP()
+## 🚪 OPEN(), CLOSE(), CLOSED Y STOP()
 
 ---
 
-# 🔓 `window.open()`
+### 🔓 `window.open()`
 
 Abre una nueva ventana o pestaña.
 
 ---
 
-# 📌 Sintaxis
+#### 📌 Sintaxis
 
 ```js
 window.open(url, nombre, configuraciones)
@@ -107,7 +106,7 @@ window.open(url, nombre, configuraciones)
 
 ---
 
-# ✅ Ejemplo básico
+#### ✅ Ejemplo básico
 
 ```js
 window.open("https://google.com")
@@ -115,7 +114,7 @@ window.open("https://google.com")
 
 ---
 
-# 🧠 VISUAL
+#### 🧠 VISUAL
 
 ```txt
 Página actual
@@ -127,7 +126,7 @@ Nueva pestaña
 
 ---
 
-# ✅ Ejemplo PRO
+#### ✅ Ejemplo PRO
 
 ```js
 window.open(
@@ -139,7 +138,7 @@ window.open(
 
 ---
 
-# 🔍 EXPLICACIÓN
+#### 🔍 EXPLICACIÓN
 
 | Parte     | Significado    |
 | --------- | -------------- |
@@ -149,7 +148,7 @@ window.open(
 
 ---
 
-# 🎛️ CONFIGURACIONES COMPLETAS DE `window.open()`
+### 🎛️ CONFIGURACIONES COMPLETAS DE `window.open()`
 
 | Opción     | Valor  | Descripción                  |
 | ---------- | ------ | ---------------------------- |
@@ -166,7 +165,7 @@ window.open(
 
 ---
 
-# ✅ Ejemplo completo
+#### ✅ Ejemplo completo
 
 ```js
 const ventana = window.open(
@@ -178,7 +177,7 @@ const ventana = window.open(
 
 ---
 
-# ⚠️ LIMITACIÓN IMPORTANTE
+### ⚠️ LIMITACIÓN IMPORTANTE
 
 Los navegadores modernos pueden bloquear ventanas emergentes.
 
@@ -192,7 +191,7 @@ button.addEventListener('click', () => {
 
 ---
 
-# 🔄 INTERACTUAR CON LA VENTANA ABIERTA
+### 🔄 INTERACTUAR CON LA VENTANA ABIERTA
 
 ```js
 const ventana = window.open("https://google.com")
@@ -204,13 +203,13 @@ ventana.document.body.innerHTML = "<h1>Hola</h1>"
 
 ---
 
-# ❌ `window.close()`
+### ❌ `window.close()`
 
 Cierra una ventana.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 window.close()
@@ -218,13 +217,13 @@ window.close()
 
 ---
 
-# ⚠️ IMPORTANTE
+#### ⚠️ IMPORTANTE
 
 Solo funciona correctamente si la ventana fue abierta con JavaScript.
 
 ---
 
-# 🧠 Ejemplo real
+#### 🧠 Ejemplo real
 
 ```js
 const ventana = window.open("https://google.com")
@@ -234,13 +233,13 @@ ventana.close()
 
 ---
 
-# 🔍 `window.closed`
+### 🔍 `window.closed`
 
 Propiedad de **sólo lectura** que devuelve un booleano. Es fundamental para evitar errores al intentar manipular una ventana que el usuario ya cerró.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 const ventana = window.open("https://google.com")
@@ -251,7 +250,7 @@ if (ventana) {
 
 ---
 
-# 📌 Resultado
+#### 📌 Resultado
 
 ```txt
 false
@@ -265,7 +264,7 @@ true
 
 ---
 
-# 🛑 `window.stop()`
+### 🛑 `window.stop()`
 
 Detiene la carga de la página.
 
@@ -273,7 +272,7 @@ Es como presionar la ❌ del navegador mientras carga.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 window.stop()
@@ -281,23 +280,23 @@ window.stop()
 
 ---
 
-# 🧠 CASO REAL
+#### 🧠 CASO REAL
 
 Detener imágenes pesadas o scripts lentos.
 
 ---
 
-# 🚨 ALERT(), PROMPT(), CONFIRM() Y PRINT()
+## 🚨 ALERT(), PROMPT(), CONFIRM() Y PRINT()
 
 ---
 
-# 🚨 `alert()`
+### 🚨 `alert()`
 
 Muestra una alerta.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 alert("Hola mundo")
@@ -305,7 +304,7 @@ alert("Hola mundo")
 
 ---
 
-# 🧠 VISUAL
+#### 🧠 VISUAL
 
 ```txt
 ┌─────────────┐
@@ -316,19 +315,19 @@ alert("Hola mundo")
 
 ---
 
-# ⚠️ PROBLEMA
+#### ⚠️ PROBLEMA
 
 Bloquea toda la página hasta cerrarse.
 
 ---
 
-# 🖨️ `print()`
+### 🖨️ `print()`
 
 Abre la ventana de impresión.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 window.print()
@@ -336,19 +335,19 @@ window.print()
 
 ---
 
-# 🧠 CASO REAL
+#### 🧠 CASO REAL
 
 Facturas, certificados y reportes PDF.
 
 ---
 
-# ✍️ `prompt()`
+### ✍️ `prompt()`
 
 Pide información al usuario.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 const nombre = prompt("¿Cómo te llamas?")
@@ -356,7 +355,7 @@ const nombre = prompt("¿Cómo te llamas?")
 
 ---
 
-# 🧠 VISUAL
+#### 🧠 VISUAL
 
 ```txt
 ┌─────────────────────┐
@@ -368,7 +367,7 @@ const nombre = prompt("¿Cómo te llamas?")
 
 ---
 
-# 📌 Resultado
+#### 📌 Resultado
 
 ```js
 console.log(nombre)
@@ -376,13 +375,13 @@ console.log(nombre)
 
 ---
 
-# ⚠️ IMPORTANTE
+#### ⚠️ IMPORTANTE
 
 Todo lo que devuelve es TEXTO.
 
 ---
 
-# ❌ Error común
+#### ❌ Error común
 
 ```js
 const edad = prompt("Edad")
@@ -398,7 +397,7 @@ Resultado:
 
 ---
 
-# ✅ Solución
+#### ✅ Solución
 
 ```js
 const edad = Number(prompt("Edad"))
@@ -408,13 +407,13 @@ console.log(edad + 10)
 
 ---
 
-# ✅ `confirm()`
+### ✅ `confirm()`
 
 Muestra una confirmación.
 
 ---
 
-# ✅ Ejemplo
+#### ✅ Ejemplo
 
 ```js
 const respuesta = confirm("¿Deseas eliminar?")
@@ -422,7 +421,7 @@ const respuesta = confirm("¿Deseas eliminar?")
 
 ---
 
-# 📌 Retorna
+#### 📌 Retorna
 
 | Botón    | Resultado |
 | -------- | --------- |
@@ -431,7 +430,7 @@ const respuesta = confirm("¿Deseas eliminar?")
 
 ---
 
-# 🧠 Ejemplo real
+#### 🧠 Ejemplo real
 
 ```js
 if(confirm("¿Salir?")){
@@ -441,11 +440,11 @@ if(confirm("¿Salir?")){
 
 ---
 
-# 🧠 DIAGRAMAS VISUALES
+## 🧠 DIAGRAMAS VISUALES
 
 ---
 
-# 🌎 ESTRUCTURA GENERAL DEL NAVEGADOR
+### 🌎 ESTRUCTURA GENERAL DEL NAVEGADOR
 
 ```txt
 NAVEGADOR
@@ -461,7 +460,7 @@ NAVEGADOR
 
 ---
 
-# 🪟 APERTURA DE VENTANAS
+### 🪟 APERTURA DE VENTANAS
 
 ```txt
 Página actual
@@ -473,7 +472,7 @@ Nueva pestaña/ventana
 
 ---
 
-# 🧾 INTERACCIÓN CON EL USUARIO
+### 🧾 INTERACCIÓN CON EL USUARIO
 
 ```txt
 USUARIO
@@ -487,11 +486,11 @@ JavaScript procesa información
 
 ---
 
-# 🚀 CASOS PRÁCTICOS
+## 🚀 CASOS PRÁCTICOS
 
 ---
 
-# ✅ Abrir ventana personalizada
+### ✅ Abrir ventana personalizada
 
 ```js
 window.open(
@@ -503,7 +502,7 @@ window.open(
 
 ---
 
-# ✅ Confirmar eliminación
+### ✅ Confirmar eliminación
 
 ```js
 const eliminar = confirm("¿Eliminar producto?")
@@ -515,7 +514,7 @@ if(eliminar){
 
 ---
 
-# ✅ Solicitar edad
+### ✅ Solicitar edad
 
 ```js
 const edad = Number(prompt("¿Edad?"))
@@ -527,7 +526,7 @@ if(edad >= 18){
 
 ---
 
-# ✅ Imprimir página
+### ✅ Imprimir página
 
 ```js
 window.print()
@@ -535,11 +534,11 @@ window.print()
 
 ---
 
-# ❌ ERRORES COMUNES
+## ❌ ERRORES COMUNES
 
 ---
 
-# ❌ Usar `prompt()` como número
+### ❌ Usar `prompt()` como número
 
 ```js
 prompt() // devuelve string
@@ -547,7 +546,7 @@ prompt() // devuelve string
 
 ---
 
-# ❌ Abusar de `alert()`
+### ❌ Abusar de `alert()`
 
 Muchos alerts:
 
@@ -559,7 +558,7 @@ Muchos alerts:
 
 ---
 
-# ❌ Intentar cerrar pestañas normales
+### ❌ Intentar cerrar pestañas normales
 
 ```js
 window.close()
@@ -569,7 +568,7 @@ No siempre funciona.
 
 ---
 
-# ❌ Abrir ventanas sin interacción
+### ❌ Abrir ventanas sin interacción
 
 ```js
 window.open("https://google.com")
@@ -579,11 +578,11 @@ Puede ser bloqueado.
 
 ---
 
-# ✅ BUENAS PRÁCTICAS PRO
+## ✅ BUENAS PRÁCTICAS PRO
 
 ---
 
-# ✅ Usa `confirm()` para acciones peligrosas
+### ✅ Usa `confirm()` para acciones peligrosas
 
 ```js
 if(confirm("¿Eliminar cuenta?")){
@@ -593,7 +592,7 @@ if(confirm("¿Eliminar cuenta?")){
 
 ---
 
-# ✅ Convierte `prompt()` a número si es necesario
+### ✅ Convierte `prompt()` a número si es necesario
 
 ```js
 const numero = Number(prompt("Número"))
@@ -601,7 +600,7 @@ const numero = Number(prompt("Número"))
 
 ---
 
-# ✅ Evita exceso de alertas
+### ✅ Evita exceso de alertas
 
 Mejor usar:
 
@@ -613,7 +612,7 @@ Mejor usar:
 
 ---
 
-# ✅ Usa `window.open()` con tamaños controlados
+### ✅ Usa `window.open()` con tamaños controlados
 
 ```js
 window.open(
@@ -625,11 +624,11 @@ window.open(
 
 ---
 
-# 🧠 DEBUGGING
+## 🧠 DEBUGGING
 
 ---
 
-# ✅ Ver objeto window
+### ✅ Ver objeto window
 
 ```js
 console.log(window)
@@ -637,7 +636,7 @@ console.log(window)
 
 ---
 
-# ✅ Verificar si ventana está cerrada
+### ✅ Verificar si ventana está cerrada
 
 ```js
 console.log(ventana.closed)
@@ -645,7 +644,7 @@ console.log(ventana.closed)
 
 ---
 
-# ✅ Detener carga página
+### ✅ Detener carga página
 
 ```js
 window.stop()
@@ -653,7 +652,7 @@ window.stop()
 
 ---
 
-# ✅ Ver datos ingresados
+### ✅ Ver datos ingresados
 
 ```js
 const dato = prompt("Dato")
@@ -662,11 +661,11 @@ console.log(dato)
 
 ---
 
-# 🚀 MINI PROYECTO PRÁCTICO
+## 🚀 MINI PROYECTO PRÁCTICO
 
 ---
 
-# 🎯 OBJETIVO
+### 🎯 OBJETIVO
 
 Crear una página que:
 
@@ -677,7 +676,7 @@ Crear una página que:
 
 ---
 
-# ✅ Código
+### ✅ Código
 
 ```js
 const nombre = prompt("¿Nombre?")
@@ -705,7 +704,7 @@ if(entrar){
 
 ---
 
-# 🧠 RESUMEN FINAL
+## 🧠 RESUMEN FINAL
 
 | Método/Propiedad | Función          |
 | ---------------- | ---------------- |
@@ -720,7 +719,7 @@ if(entrar){
 
 ---
 
-# 🏆 CONCLUSIÓN
+## 🏆 CONCLUSIÓN
 
 El objeto `window` es el centro del navegador.
 
@@ -734,5 +733,3 @@ Dominarlo te permite:
 
 Es una de las bases MÁS importantes del desarrollo web frontend profesional.
 
-```
-```
