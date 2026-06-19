@@ -1,0 +1,540 @@
+/* Importación de la fuente Outfit de Google Fonts (pesos: light, regular, bold) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+/* Reglas globales y reseteo básico para todos los elementos */
+* {
+    margin: 0; /* Elimina los márgenes predeterminados del navegador */
+    padding: 0; /* Elimina el relleno predeterminado del navegador */
+    box-sizing: border-box; /* El padding y el borde se calculan dentro del ancho y alto total */
+    font-family: 'Outfit', sans-serif; /* Aplica la fuente Outfit por defecto a toda la página */
+}
+
+/* Configuración del contenedor body y efectos de fondo */
+body {
+    background: #0b0f19; /* Establece un color de fondo base negro azulado ultra oscuro */
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0, transparent 45%),   /* Resplandor radial violeta en esquina superior izquierda */
+        radial-gradient(at 100% 0%, rgba(244, 63, 94, 0.12) 0, transparent 40%),   /* Resplandor radial rosa/rojo en esquina superior derecha */
+        radial-gradient(at 50% 100%, rgba(245, 158, 11, 0.1) 0, transparent 45%);   /* Resplandor radial ámbar en el centro inferior */
+    background-attachment: fixed; /* Mantiene fijos los degradados de fondo al hacer scroll */
+    min-height: 100vh; /* Fuerza al body a ocupar el 100% de la altura de la pantalla */
+    display: flex; /* Activa el modelo flexbox para posicionar los elementos internos */
+    justify-content: center; /* Centra el contenido horizontalmente en la pantalla */
+    align-items: center; /* Centra el contenido verticalmente en la pantalla */
+    color: #e2e8f0; /* Establece un tono gris claro y suave para los textos */
+    padding: 2rem 1rem; /* Aplica relleno interno (superior/inferior de 2rem, lateral de 1rem) */
+    overflow-x: hidden; /* Oculta cualquier desbordamiento horizontal para evitar scroll lateral */
+}
+
+/* Contenedor principal del laboratorio */
+.container {
+    width: 100%; /* Ajusta el ancho al 100% del espacio disponible */
+    max-width: 800px; /* Limita la anchura máxima a 800px para una mejor lectura en pantallas grandes */
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; /* Aplica animación de subida y desvanecimiento al cargar la página */
+}
+
+/* Encabezado principal del dashboard */
+.glass-header {
+    text-align: center; /* Alinea los textos en el centro */
+    margin-bottom: 2.5rem; /* Crea un espacio de separación de 2.5rem en la parte inferior */
+}
+
+/* Título principal con efecto de gradiente en texto */
+.glass-header h1 {
+    font-size: 2.6rem; /* Aumenta el tamaño del título principal a 2.6rem */
+    font-weight: 600; /* Define un grosor de fuente semibold */
+    letter-spacing: -0.02em; /* Reduce ligeramente el espacio entre letras para darle estilo compacto */
+    background: linear-gradient(135deg, #fbbf24 10%, #f87171 50%, #c084fc 90%); /* Define degradado lineal de amarillo a rosa y lila */
+    background-clip: text; /* Recorta el fondo degradado para que solo se aplique a las letras */
+    -webkit-text-fill-color: transparent; /* Vuelve transparente el texto nativo para mostrar el gradiente de fondo */
+    margin-bottom: 0.6rem; /* Espaciado inferior de 0.6rem debajo del título */
+    filter: drop-shadow(0 2px 8px rgba(251, 191, 36, 0.15)); /* Agrega una sombra de luz suave en el texto */
+}
+
+/* Subtítulo del encabezado */
+.glass-header p {
+    font-size: 1.1rem; /* Establece la fuente a 1.1rem */
+    color: #94a3b8; /* Aplica un tono gris azulado medio */
+    font-weight: 300; /* Establece un grosor de fuente ligero (light) */
+}
+
+/* Tarjeta contenedora con efecto de cristal (Glassmorphism) */
+.info-card {
+    background: rgba(17, 24, 39, 0.65); /* Fondo oscuro semitransparente con 65% de opacidad */
+    backdrop-filter: blur(16px); /* Desenfoque detrás del elemento para simular vidrio esmerilado */
+    -webkit-backdrop-filter: blur(16px); /* Soporte del efecto de desenfoque para navegadores WebKit (Safari) */
+    border: 1px solid rgba(255, 255, 255, 0.07); /* Borde blanco extremadamente delgado y sutil */
+    border-radius: 24px; /* Redondea las esquinas con un radio de 24px */
+    padding: 2.5rem; /* Espaciado interno generoso de 2.5rem en todos los lados */
+    box-shadow: 
+        0 4px 30px rgba(0, 0, 0, 0.4), /* Sombra exterior suave para darle profundidad */
+        inset 0 1px 1px rgba(255, 255, 255, 0.05); /* Sombra interna blanca para iluminar el borde superior */
+    margin-bottom: 1.5rem; /* Margen inferior para separar tarjetas */
+    position: relative; /* Define contexto de posicionamiento para los elementos hijos */
+    overflow: hidden; /* Oculta cualquier elemento secundario que intente sobresalir de las esquinas */
+}
+
+/* Títulos secundarios en las tarjetas */
+.info-card h2 {
+    font-size: 1.6rem; /* Tamaño de fuente para los subtítulos internos */
+    color: #f8fafc; /* Color de texto blanco brillante */
+    margin-bottom: 0.8rem; /* Espaciado inferior para separar del párrafo */
+    font-weight: 600; /* Grosor de letra semibold */
+}
+
+/* Párrafos descriptivos dentro de las tarjetas */
+.info-card > p {
+    color: #94a3b8; /* Color gris azulado para descripciones secundarias */
+    font-size: 0.95rem; /* Tamaño de fuente ligeramente reducido a 0.95rem */
+    line-height: 1.6; /* Interlineado de 1.6 para mejorar la legibilidad vertical */
+    margin-bottom: 2rem; /* Margen inferior de 2rem para separar del bloque de inputs */
+}
+
+/* Utilidad para añadir margen superior */
+.mt-2 {
+    margin-top: 2rem; /* Margen superior de 2rem */
+}
+
+/* Estilo general para insignias de estado (Badges) */
+.status-badge {
+    display: inline-block; /* Comportamiento en línea pero permitiendo padding y márgenes */
+    padding: 0.35rem 0.9rem; /* Relleno vertical de 0.35rem y horizontal de 0.9rem */
+    border-radius: 9999px; /* Bordes completamente redondeados en forma de píldora */
+    font-size: 0.75rem; /* Tamaño de texto pequeño */
+    font-weight: 600; /* Texto en negrita */
+    text-transform: uppercase; /* Fuerza la conversión del texto a mayúsculas */
+    letter-spacing: 0.05em; /* Añade espaciado de 0.05em entre las letras */
+    margin-bottom: 1.5rem; /* Espacio inferior para separarlo del título principal */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para darle elevación */
+}
+
+/* Variante de insignia de advertencia para elementos heredados */
+.status-badge.warning {
+    background: rgba(245, 158, 11, 0.15); /* Fondo ámbar translúcido con 15% de opacidad */
+    color: #fbbf24; /* Color de texto amarillo/ámbar brillante */
+    border: 1px solid rgba(245, 158, 11, 0.3); /* Borde ámbar sutil con 30% de opacidad */
+}
+
+/* Contenedor de grupos de entrada (labels e inputs) */
+.input-group {
+    display: flex; /* Activa flexbox para alinear elementos verticalmente */
+    flex-direction: column; /* Apila el label encima del input */
+    gap: 0.5rem; /* Brecha de 0.5rem entre el label y el input */
+    margin-bottom: 2rem; /* Margen inferior para separar de la botonera */
+    text-align: left; /* Alineación del texto del label a la izquierda */
+}
+
+/* Etiquetas del formulario */
+.input-group label {
+    font-size: 0.85rem; /* Tamaño de fuente reducido */
+    color: #cbd5e1; /* Color gris claro */
+    font-weight: 600; /* Texto en negrita */
+    text-transform: uppercase; /* Convierte etiquetas a mayúsculas */
+    letter-spacing: 0.05em; /* Espaciado ligero entre caracteres */
+}
+
+/* Inputs de texto estilo dark minimalista */
+.input-group input {
+    background: rgba(15, 23, 42, 0.6); /* Fondo azul muy oscuro con 60% de opacidad */
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Borde sutil semi-transparente */
+    border-radius: 12px; /* Esquinas del campo suavizadas a 12px */
+    padding: 0.9rem 1.2rem; /* Relleno ergonómico interno para fácil interacción */
+    color: #fff; /* Color del texto del usuario en color blanco */
+    font-size: 1rem; /* Tamaño de texto de 1rem */
+    outline: none; /* Elimina la silueta de contorno nativa del navegador */
+    transition: all 0.3s ease; /* Transición suave de 0.3s en todas las propiedades */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra interna para efecto de hundido */
+}
+
+/* Comportamiento del input al enfocarse */
+.input-group input:focus {
+    border-color: #fbbf24; /* El borde cambia a amarillo/ámbar brillante */
+    box-shadow: 
+        inset 0 2px 4px rgba(0, 0, 0, 0.2), /* Mantiene el efecto hundido interno */
+        0 0 15px rgba(251, 191, 36, 0.15); /* Añade un halo resplandeciente amarillo en el exterior */
+}
+
+/* Rejilla adaptiva para la botonera de métodos String */
+.methods-grid {
+    display: grid; /* Activa la maquetación CSS Grid */
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Crea columnas auto-ajustables con un ancho mínimo de 130px */
+    gap: 0.75rem; /* Espaciado uniforme de 0.75rem entre botones */
+    margin-bottom: 2rem; /* Margen inferior para separar del panel de resultados */
+}
+
+/* Estilo general para botones interactivos */
+.btn {
+    padding: 0.7rem 1rem; /* Relleno superior/inferior de 0.7rem y lateral de 1rem */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde muy sutil para delimitar el botón */
+    border-radius: 10px; /* Redondea las esquinas a 10px */
+    background: rgba(30, 41, 59, 0.5); /* Fondo azul slate translúcido con 50% de opacidad */
+    color: #e2e8f0; /* Texto gris claro de buena legibilidad */
+    font-weight: 500; /* Grosor de fuente medio */
+    font-size: 0.85rem; /* Fuente de tamaño compacto */
+    cursor: pointer; /* Cambia el cursor a mano para denotar que es clickeable */
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Suaviza la transición de los hover */
+    outline: none; /* Elimina contorno por defecto del navegador */
+    display: inline-flex; /* Centra el contenido interior (texto e iconos) con Flexbox */
+    align-items: center; /* Alinea verticalmente al centro */
+    justify-content: center; /* Centra horizontalmente */
+}
+
+/* Botones específicos de métodos */
+.btn-method {
+    font-family: monospace; /* Aplica tipografía monoespaciada característica de código */
+}
+
+/* Hover y estado activo para los botones de métodos */
+.btn-method:hover, .btn-method.active {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.15) 0%, rgba(244, 63, 94, 0.15) 100%); /* Degradado sutil amarillo a rosa */
+    border-color: #f87171; /* Borde rosa claro */
+    color: #fff; /* Cambia el texto a blanco puro */
+    box-shadow: 0 4px 15px rgba(244, 63, 94, 0.15); /* Añade un resplandor rosa exterior */
+    transform: translateY(-1px); /* Eleva ligeramente el botón 1px */
+}
+
+/* Comportamiento al presionar el botón */
+.btn-method:active {
+    transform: translateY(1px); /* Simula pulsación física desplazando el botón 1px hacia abajo */
+}
+
+/* Contenedor para acciones de red asíncronas */
+.ajax-actions {
+    display: flex; /* Distribuye los botones en fila horizontal */
+    gap: 1rem; /* Espacio de 1rem entre los botones */
+    margin-bottom: 1.5rem; /* Margen inferior para separar de la terminal */
+}
+
+/* Ajustes de botones dentro de la sección de red */
+.ajax-actions .btn {
+    flex: 1; /* Permite a los botones expandirse para ocupar la misma anchura */
+    font-weight: 600; /* Texto en negrita */
+    font-size: 0.95rem; /* Fuente ampliada a 0.95rem */
+    padding: 0.9rem; /* Incrementa el relleno interno para mayor ergonomía */
+    border: none; /* Elimina los bordes */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Añade sombra pronunciada para efecto flotante */
+}
+
+/* Variante de color ámbar para XMLHttpRequest */
+.btn-amber {
+    background: linear-gradient(135deg, #d97706, #b45309); /* Gradiente de ámbar medio a ámbar oscuro */
+    color: white; /* Texto blanco */
+}
+
+/* Hover de botón ámbar */
+.btn-amber:hover {
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35); /* Incrementa la sombra difuminada ámbar */
+    transform: translateY(-2px); /* Eleva el botón 2px */
+}
+
+/* Variante de color esmeralda para Fetch API */
+.btn-emerald {
+    background: linear-gradient(135deg, #059669, #047857); /* Gradiente de verde esmeralda medio a oscuro */
+    color: white; /* Texto blanco */
+}
+
+/* Hover de botón esmeralda */
+.btn-emerald:hover {
+    box-shadow: 0 6px 18px rgba(5, 150, 105, 0.35); /* Incrementa la sombra difuminada esmeralda */
+    transform: translateY(-2px); /* Eleva el botón 2px */
+}
+
+/* Contenedor del panel comparativo (String) */
+.result-panel {
+    margin-top: 2rem; /* Margen superior de separación */
+    border-top: 1px solid rgba(255, 255, 255, 0.08); /* Línea divisoria superior delgada semi-transparente */
+    padding-top: 2rem; /* Espaciado superior */
+    animation: fadeIn 0.4s ease-out; /* Transición suave de visibilidad al activarse */
+}
+
+/* Cuadrícula de comparación lado a lado */
+.comparison-grid {
+    display: grid; /* Activa el modelo Grid */
+    grid-template-columns: 1fr 1fr; /* Divide el espacio en dos columnas de igual tamaño */
+    gap: 1.5rem; /* Brecha de 1.5rem de espacio entre las dos columnas */
+}
+
+/* Cajas individuales para resultados (Legacy vs Modern) */
+.result-box {
+    padding: 1.5rem; /* Relleno interno de 1.5rem */
+    border-radius: 16px; /* Redondea las esquinas a 16px */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil translúcido */
+    text-align: left; /* Alineación del texto a la izquierda */
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Apila el contenido verticalmente */
+    gap: 1rem; /* Margen interno de 1rem entre los elementos de la caja */
+}
+
+/* Ajustes específicos para el contenedor heredado/obsoleto */
+.result-box.legacy {
+    background: rgba(239, 68, 68, 0.04); /* Fondo teñido de un rojo muy translúcido */
+    border-color: rgba(239, 68, 68, 0.15); /* Borde de color rojo suave */
+}
+
+/* Encabezado del contenedor de código obsoleto */
+.result-box.legacy h3 {
+    color: #f87171; /* Texto rojo brillante */
+    font-size: 1.1rem; /* Tamaño de fuente de 1.1rem */
+    border-bottom: 1px solid rgba(239, 68, 68, 0.1); /* Línea inferior divisoria roja */
+    padding-bottom: 0.5rem; /* Espaciado debajo del título */
+}
+
+/* Ajustes específicos para el contenedor moderno */
+.result-box.modern {
+    background: rgba(16, 185, 129, 0.04); /* Fondo teñido de un verde esmeralda muy translúcido */
+    border-color: rgba(16, 185, 129, 0.15); /* Borde de color verde suave */
+}
+
+/* Encabezado del contenedor moderno */
+.result-box.modern h3 {
+    color: #34d399; /* Texto verde brillante */
+    font-size: 1.1rem; /* Tamaño de fuente de 1.1rem */
+    border-bottom: 1px solid rgba(16, 185, 129, 0.1); /* Línea inferior divisoria verde */
+    padding-bottom: 0.5rem; /* Espaciado debajo del título */
+}
+
+/* Contenedores para fragmentos de código */
+.code-output {
+    background: #090d16; /* Fondo de consola negro ultra oscuro */
+    padding: 0.8rem 1rem; /* Relleno superior/inferior de 0.8rem, lateral de 1rem */
+    border-radius: 8px; /* Redondea las esquinas a 8px */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde muy sutil */
+    overflow-x: auto; /* Permite scroll horizontal si el código es largo */
+}
+
+/* Etiquetas code dentro de la visualización de código */
+.code-output code {
+    font-family: monospace; /* Fuente de ancho fijo (monospace) para código */
+    font-size: 0.85rem; /* Tamaño de letra de 0.85rem */
+    color: #cbd5e1; /* Color gris claro */
+    white-space: pre-wrap; /* Mantiene saltos de línea pero permite envolver si es necesario */
+    word-break: break-all; /* Evita que cadenas largas desborden la caja forzando saltos */
+}
+
+/* Pequeñas etiquetas descriptivas sobre el código/previsualización */
+.label {
+    display: block; /* Ocupa toda la línea */
+    font-size: 0.75rem; /* Tamaño de letra muy compacto */
+    color: #64748b; /* Gris apagado */
+    text-transform: uppercase; /* Convierte a mayúsculas */
+    font-weight: 600; /* Grosor en negrita */
+    margin-bottom: 0.4rem; /* Margen inferior */
+}
+
+/* Contenedor de previsualización visual del DOM */
+.preview-output {
+    min-height: 80px; /* Asegura un alto mínimo para consistencia visual */
+    background: rgba(15, 23, 42, 0.8); /* Fondo azul oscuro semi-sólido */
+    border: 1px solid rgba(255, 255, 255, 0.06); /* Borde delgado y sutil */
+    border-radius: 8px; /* Redondea esquinas a 8px */
+    padding: 1rem; /* Relleno interno */
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Organiza hijos en columna */
+}
+
+/* Caja de previsualización interna */
+.preview-container {
+    flex-grow: 1; /* Se estira para rellenar todo el espacio vertical disponible */
+    display: flex; /* Activa flexbox */
+    align-items: center; /* Alinea el elemento de prueba verticalmente al centro */
+    justify-content: center; /* Alinea el elemento horizontalmente al centro */
+    font-size: 1.1rem; /* Tamaño de letra aumentado para visibilidad */
+    min-height: 50px; /* Altura mínima interna */
+}
+
+/* Animación de parpadeo retro para simular el comportamiento de la etiqueta blink obsoleta */
+blink {
+    animation: legacyBlink 1s step-start infinite; /* Animación discontinua de 1s infinitamente */
+}
+
+/* Fotogramas para el parpadeo heredado (ocultación binaria abrupta) */
+@keyframes legacyBlink {
+    50% { opacity: 0; } /* Al 50% de la animación, el elemento se vuelve invisible */
+}
+
+/* Animación de parpadeo moderno utilizando CSS fluido */
+.modern-blink {
+    animation: modernBlink 1.5s ease-in-out infinite alternate; /* Animación continua de 1.5s con suavizado y rebote infinito */
+}
+
+/* Fotogramas para el parpadeo moderno (transición suave de opacidad y escala) */
+@keyframes modernBlink {
+    0% { opacity: 0.2; transform: scale(0.98); } /* Empieza con opacidad de 20% y ligeramente contraído */
+    100% { opacity: 1; transform: scale(1); } /* Termina con opacidad completa y tamaño normal */
+}
+
+/* Textos explicativos en las tarjetas */
+.explanation {
+    font-size: 0.8rem; /* Tamaño de letra compacto */
+    line-height: 1.5; /* Interlineado cómodo */
+    color: #94a3b8; /* Gris azulado medio */
+}
+
+/* Textos enfatizados dentro de la explicación */
+.explanation strong {
+    color: #e2e8f0; /* Convierte palabras clave en un gris más brillante */
+}
+
+/* Contenedor del simulador de terminal de red */
+.console-box {
+    background: #070a13; /* Fondo negro puro tipo terminal */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde oscuro sutil */
+    border-radius: 12px; /* Redondea las esquinas a 12px */
+    overflow: hidden; /* Evita que los mensajes se desborden de los bordes redondeados */
+    margin-top: 1.5rem; /* Margen superior de separación */
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); /* Sombra interna oscura para sensación de profundidad */
+}
+
+/* Encabezado del simulador de consola */
+.console-header {
+    background: rgba(30, 41, 59, 0.4); /* Fondo gris azulado translúcido */
+    padding: 0.6rem 1rem; /* Relleno interno */
+    display: flex; /* Flexbox */
+    justify-content: space-between; /* Alinea el título a la izquierda y el botón 'Limpiar' a la derecha */
+    align-items: center; /* Alinea verticalmente al centro */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06); /* Divisor inferior sutil */
+    font-size: 0.8rem; /* Tamaño de texto de 0.8rem */
+    color: #64748b; /* Texto gris de terminal */
+    font-weight: 600; /* Texto en negrita */
+}
+
+/* Botón de limpiar la consola */
+.btn-clear {
+    background: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    color: #94a3b8; /* Gris de terminal */
+    cursor: pointer; /* Cursor clickeable */
+    font-size: 0.75rem; /* Texto pequeño */
+    font-weight: 600; /* Texto en negrita */
+    transition: color 0.2s; /* Transición suave de cambio de color */
+}
+
+/* Hover del botón limpiar terminal */
+.btn-clear:hover {
+    color: #f87171; /* Cambia a color rojo suave al posicionar el mouse */
+}
+
+/* Cuerpo del simulador de consola */
+.console-body {
+    padding: 1rem; /* Relleno interno para los logs */
+    height: 180px; /* Altura fija para la pantalla de terminal */
+    overflow-y: auto; /* Activa scrollbar vertical si el contenido supera los 180px */
+    font-family: monospace; /* Tipografía monospace de desarrollador */
+    font-size: 0.85rem; /* Letra pequeña y compacta */
+    text-align: left; /* Alineación del texto a la izquierda */
+    display: flex; /* Activa Flexbox */
+    flex-direction: column; /* Apila los logs de arriba a abajo */
+    gap: 0.5rem; /* Margen de 0.5rem entre cada línea de log */
+    scroll-behavior: smooth; /* Permite desplazamientos suaves cuando hay auto-scroll */
+}
+
+/* Estilización de la barra de desplazamiento (scrollbar) para WebKit */
+.console-body::-webkit-scrollbar {
+    width: 6px; /* Ancho de la barra */
+}
+/* Canal de la barra de desplazamiento */
+.console-body::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.1); /* Canal transparente oscuro */
+}
+/* Deslizador de la barra de desplazamiento */
+.console-body::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1); /* Deslizador blanco translúcido con 10% de opacidad */
+    border-radius: 4px; /* Esquinas redondeadas del deslizador */
+}
+
+/* Mensajes de tipo sistema en consola (gris) */
+.system-msg {
+    color: #64748b;
+}
+
+/* Mensajes de tipo informativo en consola (azul claro) */
+.info-msg {
+    color: #38bdf8;
+}
+
+/* Mensajes de éxito en consola (verde brillante) */
+.success-msg {
+    color: #34d399;
+}
+
+/* Mensajes de advertencia en consola (amarillo) */
+.warn-msg {
+    color: #fbbf24;
+}
+
+/* Mensajes de error en consola (rojo brillante) */
+.error-msg {
+    color: #f87171;
+}
+
+/* Caja de instrucciones al pie de la página */
+.instruction-box {
+    background: rgba(30, 41, 59, 0.4); /* Fondo azul oscuro translúcido */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil */
+    padding: 0.9rem 1.5rem; /* Relleno vertical de 0.9rem y horizontal de 1.5rem */
+    border-radius: 14px; /* Redondea esquinas de la caja de instrucción a 14px */
+    margin-top: 1.5rem; /* Separación superior con las tarjetas */
+    display: inline-flex; /* Centra los elementos (texto y kbd) en fila */
+    align-items: center; /* Alinea verticalmente al centro */
+    justify-content: center; /* Centra horizontalmente */
+    gap: 8px; /* Brecha de 8px entre texto y la etiqueta kbd */
+    width: 100%; /* Ocupa todo el ancho */
+    font-size: 0.9rem; /* Fuente cómoda de 0.9rem */
+    color: #94a3b8; /* Gris azulado medio */
+}
+
+/* Representación física de una tecla (Keyboard Input) */
+kbd {
+    background: #334155; /* Fondo grisáceo */
+    padding: 0.15rem 0.5rem; /* Relleno interno compacto */
+    border-radius: 4px; /* Esquinas ligeramente redondeadas */
+    border-bottom: 3px solid #0f172a; /* Efecto tridimensional de profundidad de la tecla */
+    font-family: monospace; /* Fuente de código */
+    color: #f472b6; /* Color rosa llamativo */
+    font-weight: bold; /* Grosor de fuente en negrita */
+    font-size: 0.85rem; /* Tamaño de letra pequeño */
+}
+
+/* Utilidad helper para ocultar elementos */
+.hidden {
+    display: none !important; /* Fuerza la ocultación absoluta del elemento en el DOM */
+}
+
+/* Animación de entrada inicial: elevación y desvanecimiento */
+@keyframes slideUpFade {
+    from {
+        opacity: 0; /* Inicia completamente transparente */
+        transform: translateY(24px); /* Comienza 24px desplazado hacia abajo */
+    }
+    to {
+        opacity: 1; /* Termina totalmente visible */
+        transform: translateY(0); /* Termina en su posición original sin desplazamiento */
+    }
+}
+
+/* Animación básica de desvanecimiento (Fade In) */
+@keyframes fadeIn {
+    from { opacity: 0; } /* Transición desde opacidad cero */
+    to { opacity: 1; } /* Hasta opacidad uno */
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 640px) {
+    body {
+        padding: 1rem 0.5rem; /* Reduce el relleno lateral en móviles */
+    }
+    .info-card {
+        padding: 1.5rem; /* Reduce el relleno interno de la tarjeta a 1.5rem */
+    }
+    .comparison-grid {
+        grid-template-columns: 1fr; /* Colapsa la comparativa en una sola columna vertical */
+        gap: 1rem; /* Reduce la separación de las cajas de resultados */
+    }
+    .ajax-actions {
+        flex-direction: column; /* Apila los botones de red verticalmente */
+    }
+    .glass-header h1 {
+        font-size: 2rem; /* Reduce el tamaño del título principal a 2rem */
+    }
+}
+
