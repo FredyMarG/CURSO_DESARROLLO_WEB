@@ -126,6 +126,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 modernHtml = `<a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">${text}</a>`; // HTML5 robusto con seguridad rel
                 modernEquivalentCode = `<!-- Enlace con atributos de seguridad modernos -->\n<a href="https://developer.mozilla.org"\n   target="_blank"\n   rel="noopener noreferrer">\n   ${text}\n</a>`;
                 break;
+            case "anchor":
+                legacyHtml = text.anchor("nombre"); // Método obsoleto: Genera <a name="nombre">...</a> para marcadores
+                modernHtml = `<span id="nombre">${text}</span>`; // Alternativa: Usar atributo 'id' en cualquier etiqueta semántica
+                modernEquivalentCode = `<!-- Alternativa moderna: Atributo 'id' en cualquier tag -->\n<span id="nombre">${text}</span>\n\n/* Para crear enlaces de anclaje: */\n<a href="#nombre">Ir al elemento</a>`;
+                break;
             default:
                 legacyHtml = text;
                 modernHtml = text;
