@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+/* Importa la fuente Outfit desde Google Fonts para usarla en toda la página. */
+
+* {
+    margin: 0; /* Elimina el margen por defecto de los elementos. */
+    padding: 0; /* Elimina el padding por defecto de los elementos. */
+    box-sizing: border-box; /* Hace que width/height incluyan padding y borde. */
+    font-family: 'Outfit', sans-serif; /* Aplica la fuente principal a todo el documento. */
+}
+
+body {
+    background: #0b0f19; /* Define el color base del fondo, más oscuro y profundo. */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0, transparent 50%), /* Brillo superior izquierdo (Indigo). */
+        radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.12) 0, transparent 50%), /* Brillo central superior (Violeta). */
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.18) 0, transparent 50%); /* Brillo inferior derecho (Rosa). */
+    min-height: 100vh; /* Hace que el body ocupe toda la altura de la ventana. */
+    display: flex; /* Activa flexbox para centrar el contenido. */
+    justify-content: center; /* Centra horizontalmente el contenido. */
+    align-items: center; /* Centra verticalmente el contenido. */
+    color: #f8fafc; /* Color de texto claro para contraste. */
+    padding: 2rem 0;
+}
+
+.container {
+    width: 95%; /* Ocupa el 95% del ancho disponible en pantallas pequeñas. */
+    max-width: 680px; /* No permite que el contenedor sea más ancho de 680px. */
+    animation: fadeIn 0.8s ease-out; /* Aplica una animación suave al cargar la página. */
+}
+
+.glass-header {
+    text-align: center; /* Centra el contenido del encabezado. */
+    margin-bottom: 2rem; /* Añade espacio debajo del encabezado. */
+}
+
+.glass-header h1 {
+    font-size: 2.6rem; /* Tamaño grande para el título principal. */
+    background: linear-gradient(135deg, #a5b4fc, #f472b6); /* Degradado colorido sutil en el texto. */
+    background-clip: text; /* Hace que el degradado se vea dentro del texto. */
+    -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el degradado. */
+    margin-bottom: 0.5rem; /* Separación entre el título y el subtítulo. */
+    font-weight: 600;
+}
+
+.glass-header p {
+    color: #94a3b8;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.info-card {
+    background: rgba(22, 30, 49, 0.7); /* Fondo oscuro semitransparente. */
+    backdrop-filter: blur(16px); /* Aplica desenfoque al fondo detrás de la tarjeta. */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde sutil. */
+    border-radius: 28px; /* Bordes redondeados y modernos. */
+    padding: 2.5rem; /* Espacio interno amplio. */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); /* Sombra profunda para dar profundidad. */
+}
+
+.info-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.75rem;
+    color: #e2e8f0;
+    font-weight: 600;
+    text-align: left;
+}
+
+.info-card p {
+    color: #cbd5e1;
+    line-height: 1.6;
+    margin-bottom: 1.2rem;
+    text-align: left;
+    font-size: 1.05rem;
+}
+
+.spam-alert {
+    display: flex; /* Organiza el icono y el texto en fila. */
+    align-items: center; /* Alinea verticalmente el contenido. */
+    gap: 0.8rem; /* Añade espacio entre el icono y el texto. */
+    background: rgba(99, 102, 241, 0.08); /* Fondo azul/indigo sutil. */
+    border: 1px solid rgba(99, 102, 241, 0.25); /* Borde azul/indigo tenue. */
+    border-radius: 16px; /* Bordes redondeados. */
+    padding: 1rem 1.2rem; /* Espacio interno. */
+    margin: 1.5rem 0; /* Espacio arriba y abajo del aviso. */
+    color: #a5b4fc; /* Color del texto del aviso. */
+    font-size: 0.95rem; /* Tamaño del texto. */
+    text-align: left;
+}
+
+.spam-alert p {
+    margin: 0; /* Elimina el margen del párrafo. */
+    line-height: 1.5;
+}
+
+.status-badge {
+    display: inline-block; /* Permite aplicar padding y margen como si fuera una caja. */
+    padding: 0.3rem 0.8rem; /* Espacio interno pequeño. */
+    background: rgba(139, 92, 246, 0.2); /* Fondo violeta suave. */
+    color: #c084fc; /* Texto violeta brillante. */
+    border-radius: 9999px; /* Hace que el badge tenga forma de píldora. */
+    font-size: 0.75rem; /* Texto pequeño. */
+    font-weight: 600; /* Texto medio en negrita. */
+    margin-bottom: 1.2rem; /* Separación inferior. */
+    text-transform: uppercase; /* Convierte el texto a mayúsculas. */
+    letter-spacing: 0.08em; /* Espacio entre letras. */
+}
+
+.demo-panel {
+    display: flex; /* Organiza los elementos en columna. */
+    flex-direction: column;
+    gap: 1.2rem; /* Añade espacio entre los elementos internos. */
+    margin: 2rem 0; /* Margen vertical para separar la sección. */
+}
+
+.controls-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.control-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.control-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.form-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: #0f172a; /* Fondo oscuro sólido para los selectores. */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #f8fafc;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+    appearance: none; /* Elimina la flecha por defecto de algunos navegadores */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.form-select:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25);
+}
+
+.btn {
+    width: 100%;
+    padding: 1rem 1.5rem; /* Espacio interno del botón. */
+    border: none; /* Quita el borde por defecto. */
+    border-radius: 14px; /* Bordes redondeados. */
+    background: linear-gradient(135deg, #6366f1, #d946ef); /* Degradado moderno del botón. */
+    color: white; /* Texto blanco. */
+    font-size: 1.05rem;
+    font-weight: 600; /* Texto semi-bold. */
+    cursor: pointer; /* Cambia el cursor a mano al pasar por encima. */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 70, 239, 0.45);
+    background: linear-gradient(135deg, #4f46e5, #c084fc);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+/* Visualizador de la Promesa */
+.promise-visualizer {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 1.2rem;
+    text-align: left;
+}
+
+.visualizer-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+}
+
+.promise-status-row {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.promise-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estados Visuales de la Promesa */
+.state-idle {
+    background: #475569;
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.4);
+}
+
+.state-pending {
+    background: #fbbf24;
+    box-shadow: 0 0 16px #fbbf24;
+    animation: pulseGlow 1.5s infinite alternate;
+}
+
+.state-fulfilled {
+    background: #10b981;
+    box-shadow: 0 0 16px #10b981;
+}
+
+.state-rejected {
+    background: #f43f5e;
+    box-shadow: 0 0 16px #f43f5e;
+}
+
+@keyframes pulseGlow {
+    from {
+        transform: scale(0.9);
+        box-shadow: 0 0 8px #fbbf24;
+        opacity: 0.8;
+    }
+    to {
+        transform: scale(1.15);
+        box-shadow: 0 0 20px #fbbf24;
+        opacity: 1;
+    }
+}
+
+#promiseStateText {
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+}
+
+.state-idle-text { color: #94a3b8; }
+.state-pending-text { color: #fbbf24; }
+.state-fulfilled-text { color: #34d399; }
+.state-rejected-text { color: #f87171; }
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #818cf8, #fbbf24);
+    border-radius: 999px;
+    transition: width 0.1s linear; /* Transición lineal rápida para animaciones suaves */
+}
+
+/* Caja de Resultados */
+.output-box {
+    background: #0f172a; /* Fondo oscuro para el bloque de salida. */
+    border-radius: 16px; /* Bordes redondeados. */
+    padding: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+}
+
+#result {
+    color: #f8fafc;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+#result.fulfilled {
+    color: #34d399;
+}
+
+#result.rejected {
+    color: #f87171;
+}
+
+#result.pending {
+    color: #fbbf24;
+}
+
+#demoNote {
+    color: #64748b; /* Color claro para el texto secundario. */
+    font-size: 0.9rem;
+}
+
+/* Vista Previa del Código */
+.code-preview {
+    background: #070a13; /* Fondo extra oscuro para el código. */
+    border-radius: 18px; /* Bordes redondeados. */
+    padding: 1.2rem; /* Espacio interno. */
+    overflow: auto; /* Scroll si el contenido es ancho. */
+    text-align: left; /* Alinea el código a la izquierda. */
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.code-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.6rem;
+}
+
+pre {
+    margin: 0;
+}
+
+code {
+    color: #cbd5e1;
+    font-family: 'Consolas', 'Courier New', Courier, monospace; /* Fuente monoespaciada para código. */
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 500px) {
+    .controls-row {
+        flex-direction: column;
+    }
+    .info-card {
+        padding: 1.5rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Inicia invisible. */
+        transform: translateY(20px); /* Inicia un poco más abajo. */
+    }
+    to {
+        opacity: 1; /* Termina visible. */
+        transform: translateY(0); /* Vuelve a su posición original. */
+    }
+}
