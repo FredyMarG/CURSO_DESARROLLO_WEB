@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesas en JavaScript</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <header class="glass-header">
+            <h1>🔮 Promesas en JavaScript</h1>
+            <p>Laboratorio interactivo de programación asíncrona</p>
+        </header>
+
+        <section class="info-card">
+            <div class="status-badge">Demo Activa</div>
+            <h2>¿Qué es una Promesa?</h2>
+            <p>Es un objeto que representa la terminación o el fracaso de una operación asíncrona. Puede estar en uno de tres estados: <strong>Pendiente (Pending)</strong>, <strong>Resuelta (Fulfilled)</strong> o <strong>Rechazada (Rejected)</strong>.</p>
+
+            <div class="spam-alert">
+                <span>💡</span>
+                <p>Abre la consola del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para ver la ejecución del encadenamiento de Promesas en segundo plano.</p>
+            </div>
+
+            <div class="demo-panel">
+                <div class="controls-row">
+                    <div class="control-group">
+                        <label for="delaySelect">Retraso (ms)</label>
+                        <select id="delaySelect" class="form-select">
+                            <option value="1000">1000 ms (1s)</option>
+                            <option value="2000" selected>2000 ms (2s)</option>
+                            <option value="3000">3000 ms (3s)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="behaviorSelect">Resultado de Promesa</label>
+                        <select id="behaviorSelect" class="form-select">
+                            <option value="resolve">Resolver (Éxito)</option>
+                            <option value="reject">Rechazar (Error)</option>
+                            <option value="random">Aleatorio</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn" id="runPromiseBtn">Crear Promesa ⚡</button>
+
+                <div class="promise-visualizer">
+                    <div class="visualizer-header">Visualizador de Estado</div>
+                    <div class="promise-status-row">
+                        <div id="promiseIndicator" class="promise-indicator state-idle"></div>
+                        <span id="promiseStateText">Esperando creación...</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div id="progressBar" class="progress-bar"></div>
+                    </div>
+                </div>
+
+                <div class="output-box">
+                    <p id="result">El resultado aparecerá aquí...</p>
+                    <p id="demoNote">Estado: Sin iniciar</p>
+                </div>
+            </div>
+
+            <div class="code-preview">
+                <div class="code-header">Sintaxis de la Promesa simulada:</div>
+                <pre><code id="codeBlock">// Creación de la promesa
+const miPromesa = new Promise((resolve, reject) => {
+    // Estado: PENDING (Pendiente)
+    setTimeout(() => {
+        if (exito) {
+            resolve("¡Operación exitosa!"); // FULFILLED (Resuelta)
+        } else {
+            reject("Hubo un error."); // REJECTED (Rechazada)
+        }
+    }, retraso);
+});</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
