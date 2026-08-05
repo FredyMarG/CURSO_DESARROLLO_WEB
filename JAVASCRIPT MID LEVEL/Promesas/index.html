@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promesas en JavaScript</title>
+    <title>🔮 Laboratorio de Promesas en JavaScript | Guía Interactiva</title>
+    <meta name="description" content="Aprende y visualiza el funcionamiento de las Promesas en JavaScript. Explora estados en tiempo real y el encadenamiento de promesas (Promise Chaining) con una base de datos simulada.">
+    <meta property="og:title" content="Laboratorio de Promesas en JavaScript">
+    <meta property="og:description" content="Simulador interactivo y visual del comportamiento y encadenamiento de promesas en JS.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,59 +16,68 @@
             <p>Laboratorio interactivo de programación asíncrona</p>
         </header>
 
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" id="tabSingle" data-target="single-tab">Promesa Única</button>
+            <button class="tab-btn" id="tabChain" data-target="chain-tab">Encadenamiento</button>
+        </nav>
+
         <section class="info-card">
-            <div class="status-badge">Demo Activa</div>
-            <h2>¿Qué es una Promesa?</h2>
-            <p>Es un objeto que representa la terminación o el fracaso de una operación asíncrona. Puede estar en uno de tres estados: <strong>Pendiente (Pending)</strong>, <strong>Resuelta (Fulfilled)</strong> o <strong>Rechazada (Rejected)</strong>.</p>
+            <div class="status-badge">Laboratorio Activo</div>
 
-            <div class="spam-alert">
-                <span>💡</span>
-                <p>Abre la consola del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para ver la ejecución del encadenamiento de Promesas en segundo plano.</p>
-            </div>
+            <!-- Pestaña 1: Promesa Única -->
+            <div id="single-tab" class="tab-content">
+                <h2>¿Qué es una Promesa?</h2>
+                <p>Es un objeto que representa la terminación o el fracaso de una operación asíncrona. Puede estar en uno de tres estados: <strong>Pendiente (Pending)</strong>, <strong>Resuelta (Fulfilled)</strong> o <strong>Rechazada (Rejected)</strong>.</p>
 
-            <div class="demo-panel">
-                <div class="controls-row">
-                    <div class="control-group">
-                        <label for="delaySelect">Retraso (ms)</label>
-                        <select id="delaySelect" class="form-select">
-                            <option value="1000">1000 ms (1s)</option>
-                            <option value="2000" selected>2000 ms (2s)</option>
-                            <option value="3000">3000 ms (3s)</option>
-                        </select>
+                <div class="spam-alert">
+                    <span>💡</span>
+                    <p>Abre la consola del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para ver la ejecución en segundo plano y el flujo de logs.</p>
+                </div>
+
+                <div class="demo-panel">
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <label for="delaySelect">Retraso (ms)</label>
+                            <select id="delaySelect" class="form-select">
+                                <option value="1000">1000 ms (1s)</option>
+                                <option value="2000" selected>2000 ms (2s)</option>
+                                <option value="3000">3000 ms (3s)</option>
+                            </select>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="behaviorSelect">Resultado de Promesa</label>
+                            <select id="behaviorSelect" class="form-select">
+                                <option value="resolve">Resolver (Éxito)</option>
+                                <option value="reject">Rechazar (Error)</option>
+                                <option value="random">Aleatorio</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="control-group">
-                        <label for="behaviorSelect">Resultado de Promesa</label>
-                        <select id="behaviorSelect" class="form-select">
-                            <option value="resolve">Resolver (Éxito)</option>
-                            <option value="reject">Rechazar (Error)</option>
-                            <option value="random">Aleatorio</option>
-                        </select>
+                    <button class="btn" id="runPromiseBtn">Crear Promesa ⚡</button>
+
+                    <div class="promise-visualizer">
+                        <div class="visualizer-header">Visualizador de Estado</div>
+                        <div class="promise-status-row">
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div>
+                            <span id="promiseStateText" class="state-idle-text">Esperando creación...</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div id="progressBar" class="progress-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <p id="result">El resultado aparecerá aquí...</p>
+                        <p id="demoNote">Estado: Sin iniciar</p>
                     </div>
                 </div>
 
-                <button class="btn" id="runPromiseBtn">Crear Promesa ⚡</button>
-
-                <div class="promise-visualizer">
-                    <div class="visualizer-header">Visualizador de Estado</div>
-                    <div class="promise-status-row">
-                        <div id="promiseIndicator" class="promise-indicator state-idle"></div>
-                        <span id="promiseStateText">Esperando creación...</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div id="progressBar" class="progress-bar"></div>
-                    </div>
-                </div>
-
-                <div class="output-box">
-                    <p id="result">El resultado aparecerá aquí...</p>
-                    <p id="demoNote">Estado: Sin iniciar</p>
-                </div>
-            </div>
-
-            <div class="code-preview">
-                <div class="code-header">Sintaxis de la Promesa simulada:</div>
-                <pre><code id="codeBlock">// Creación de la promesa
+                <div class="code-preview">
+                    <div class="code-header">Sintaxis de la Promesa simulada:</div>
+                    <pre><code id="codeBlock">// Creación de la promesa
 const miPromesa = new Promise((resolve, reject) => {
     // Estado: PENDING (Pendiente)
     setTimeout(() => {
@@ -76,6 +88,110 @@ const miPromesa = new Promise((resolve, reject) => {
         }
     }, retraso);
 });</code></pre>
+                </div>
+            </div>
+
+            <!-- Pestaña 2: Encadenamiento de Promesas -->
+            <div id="chain-tab" class="tab-content hidden">
+                <h2>Encadenamiento de Promesas</h2>
+                <p>Consiste en encadenar múltiples llamadas a funciones asíncronas secuenciales con <code>.then()</code>. El retorno de cada paso sirve de entrada para el siguiente, capturando cualquier error con un único <code>.catch()</code> al final.</p>
+
+                <!-- Base de Datos Simulada en la UI -->
+                <div class="db-section">
+                    <div class="db-title">Base de Datos Simulada (Personas)</div>
+                    <div class="db-container">
+                        <table class="db-table">
+                            <thead>
+                                <tr>
+                                    <th>ID (Índice)</th>
+                                    <th>Nombre</th>
+                                    <th>Instagram</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dbTableBody">
+                                <tr id="db-row-0">
+                                    <td>0</td>
+                                    <td>Fredy</td>
+                                    <td>@fredy</td>
+                                </tr>
+                                <tr id="db-row-1">
+                                    <td>1</td>
+                                    <td>Ana</td>
+                                    <td>@ana</td>
+                                </tr>
+                                <tr id="db-row-2">
+                                    <td>2</td>
+                                    <td>Luis</td>
+                                    <td>@luis</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="demo-panel">
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <label for="chainUserSelect">Seleccionar ID de Consulta</label>
+                            <select id="chainUserSelect" class="form-select">
+                                <option value="0">ID 0: Fredy</option>
+                                <option value="1">ID 1: Ana</option>
+                                <option value="2" selected>ID 2: Luis</option>
+                                <option value="3">ID 3: (Usuario Inexistente - Simula Error)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="btn" id="runChainBtn">Ejecutar Cadena de Promesas ⛓️</button>
+
+                    <!-- Visualizador de Pasos (Timeline) -->
+                    <div class="steps-timeline">
+                        <!-- Paso 1 -->
+                        <div class="timeline-step" id="step1">
+                            <div class="step-indicator-wrapper">
+                                <div class="step-circle state-idle" id="step1Circle">1</div>
+                                <div class="step-line"></div>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-title">Paso 1: obtenerPersona(id)</div>
+                                <div class="step-desc">Busca a la persona en la base de datos simulada.</div>
+                                <div class="step-status-text state-idle-text" id="step1Status">Esperando...</div>
+                            </div>
+                        </div>
+
+                        <!-- Paso 2 -->
+                        <div class="timeline-step" id="step2">
+                            <div class="step-indicator-wrapper">
+                                <div class="step-circle state-idle" id="step2Circle">2</div>
+                            </div>
+                            <div class="step-info">
+                                <div class="step-title">Paso 2: obtenerInstagram(id)</div>
+                                <div class="step-desc">Extrae el Instagram de la persona obtenida.</div>
+                                <div class="step-status-text state-idle-text" id="step2Status">Esperando...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="output-box">
+                        <p id="chainResult">El resultado de la consulta encadenada aparecerá aquí...</p>
+                        <p id="chainDemoNote">Estado de la cadena: Sin iniciar</p>
+                    </div>
+                </div>
+
+                <div class="code-preview">
+                    <div class="code-header">Código del encadenamiento en ejecución:</div>
+                    <pre><code>obtenerPersona(id)
+    .then((persona) => {
+        console.log(persona.nombre);
+        return obtenerInstagram(id); // Retorna otra Promesa
+    })
+    .then((instagram) => {
+        console.log(instagram);
+    })
+    .catch((err) => {
+        console.error(err); // Captura errores del Paso 1 o 2
+    });</code></pre>
+                </div>
             </div>
         </section>
     </main>
