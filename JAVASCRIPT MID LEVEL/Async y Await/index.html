@@ -1,0 +1,200 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador -->
+<html lang="es"> <!-- Abre el documento HTML indicando el idioma español como principal -->
+<head> <!-- Cabecera del documento que contiene metadatos y enlaces a recursos -->
+    <meta charset="UTF-8"> <!-- Define la codificación de caracteres a UTF-8 para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta el tamaño de la ventana de visualización en pantallas móviles para que sea responsivo -->
+    <title>🔮 Laboratorio de Async y Await en JavaScript | Guía Interactiva</title> <!-- Título de la pestaña del navegador -->
+    <meta name="description" content="Aprende y visualiza el funcionamiento de Async y Await en JavaScript. Explora la ejecución asíncrona en tiempo real con este simulador interactivo premium."> <!-- Breve descripción de la página para motores de búsqueda (SEO) -->
+    <meta property="og:title" content="Laboratorio de Async y Await en JavaScript"> <!-- Título de la página para compartir en redes sociales (Open Graph) -->
+    <meta property="og:description" content="Simulador interactivo y visual de funciones async y expresiones await en JS."> <!-- Descripción para redes sociales (Open Graph) -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlaza la hoja de estilos externa style.css para el diseño del laboratorio -->
+</head> <!-- Cierre de la sección de cabecera -->
+<body> <!-- Inicio del cuerpo del documento que contiene todos los elementos visuales de la aplicación -->
+    <main class="container"> <!-- Contenedor principal centrado con estilos de cristal y ancho máximo limitado -->
+        <header class="glass-header"> <!-- Encabezado de la aplicación con efecto de cristal y texto centrado -->
+            <h1>🔮 Async y Await en JavaScript</h1> <!-- Título principal del laboratorio interactivo -->
+            <p>Laboratorio interactivo de programación asíncrona</p> <!-- Subtítulo explicativo del proyecto -->
+        </header> <!-- Cierre del encabezado -->
+
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+            <button class="tab-btn active" id="tabSingle" data-target="single-tab">Función Async</button> <!-- Botón para activar la pestaña de simulación de una sola Función Async -->
+            <button class="tab-btn" id="tabChain" data-target="chain-tab">Secuencia Await</button> <!-- Botón para activar la pestaña de secuencia de llamadas asíncronas encadenadas -->
+        </nav> <!-- Cierre de la barra de navegación de pestañas -->
+
+        <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
+            <div class="status-badge">Laboratorio Activo</div> <!-- Etiqueta superior que indica el estado del laboratorio interactivo -->
+
+            <!-- Pestaña 1: Función Asíncrona (Async) -->
+            <div id="single-tab" class="tab-content"> <!-- Contenedor de la pestaña de simulación de una función async individual -->
+                <h2>¿Qué es una función asíncrona?</h2> <!-- Título explicativo de la pestaña -->
+                <p>La palabra clave <code>async</code> convierte una función en asíncrona, haciendo que retorne automáticamente una Promesa. Dentro de ella, podemos usar <code>await</code> para pausar la ejecución del código de forma lineal hasta que la Promesa se complete.</p> <!-- Párrafo explicativo con etiquetas code destacadas -->
+
+                <div class="spam-alert"> <!-- Cuadro de alerta o sugerencia en color lavanda -->
+                    <span>💡</span> <!-- Icono de bombilla para el consejo visual -->
+                    <p>Abre la consola del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para observar cómo se ejecutan las llamadas asíncronas en segundo plano.</p> <!-- Texto explicativo del atajo para abrir las herramientas de desarrollador -->
+                </div> <!-- Cierre del cuadro de alerta -->
+
+                <div class="demo-panel"> <!-- Panel de demostración interactiva con controles y visualizadores -->
+                    <div class="controls-row"> <!-- Fila contenedora de los selectores de configuración de la simulación -->
+                        <div class="control-group"> <!-- Grupo del selector para el retraso del temporizador -->
+                            <label for="delaySelect">Retraso del Await (ms)</label> <!-- Etiqueta para el selector de retraso -->
+                            <select id="delaySelect" class="form-select"> <!-- Lista desplegable para configurar el tiempo de espera -->
+                                <option value="1000">1000 ms (1s)</option> <!-- Opción para un segundo de espera -->
+                                <option value="2000" selected>2000 ms (2s)</option> <!-- Opción por defecto para dos segundos de espera -->
+                                <option value="3000">3000 ms (3s)</option> <!-- Opción para tres segundos de espera -->
+                            </select> <!-- Cierre del selector de retraso -->
+                        </div> <!-- Cierre del grupo de control -->
+
+                        <div class="control-group"> <!-- Grupo del selector para el comportamiento del resultado de la promesa -->
+                            <label for="behaviorSelect">Comportamiento del Await</label> <!-- Etiqueta para el selector de comportamiento -->
+                            <select id="behaviorSelect" class="form-select"> <!-- Lista desplegable para forzar éxito, fallo o aleatoriedad -->
+                                <option value="resolve">Resolver (Éxito)</option> <!-- Opción para forzar la resolución exitosa -->
+                                <option value="reject">Rechazar (Fallo)</option> <!-- Opción para forzar el rechazo de la promesa -->
+                                <option value="random">Aleatorio</option> <!-- Opción para dejar el resultado al azar -->
+                            </select> <!-- Cierre del selector de comportamiento -->
+                        </div> <!-- Cierre del grupo de control -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="runPromiseBtn">Ejecutar async function ⚡</button> <!-- Botón principal para iniciar la ejecución de la función asíncrona -->
+
+                    <div class="promise-visualizer"> <!-- Visor gráfico del estado interno y progreso de la promesa -->
+                        <div class="visualizer-header">Estado de la Función Asíncrona</div> <!-- Encabezado del visualizador de estados -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el círculo de color y el texto de estado de la promesa -->
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div> <!-- Círculo indicador del estado (idle, pending, fulfilled, rejected) -->
+                            <span id="promiseStateText" class="state-idle-text">Esperando llamada...</span> <!-- Texto descriptivo del estado actual de la promesa -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril gris de fondo para la barra de carga -->
+                            <div id="progressBar" class="progress-bar"></div> <!-- Barra interna de progreso de la animación que se llena dinámicamente -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del visualizador de promesas -->
+
+                    <div class="output-box"> <!-- Caja contenedora de los resultados de retorno de la simulación -->
+                        <p id="result">El resultado del retorno de la función aparecerá aquí...</p> <!-- Texto principal del resultado devuelto o error capturado -->
+                        <p id="demoNote">Estado: Sin iniciar</p> <!-- Nota secundaria del estado temporal de la ejecución -->
+                    </div> <!-- Cierre de la caja de resultados -->
+                </div> <!-- Cierre del panel de demostración -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización estática de código de ejemplo -->
+                    <div class="code-header">Sintaxis de la función asíncrona:</div> <!-- Título del bloque de código -->
+                    <pre><code id="codeBlock">// Función asíncrona declarada con async
+const mostrarData = async () => {
+    try {
+        // await pausa la ejecución hasta resolver la promesa
+        const resultado = await obtenerInformacion(retraso);
+        console.log(resultado); // Operación completada
+    } catch (error) {
+        console.error(error); // Atrapa el rechazo de la promesa
+    }
+};</code></pre> <!-- Bloque preformateado de código en formato de texto -->
+                </div> <!-- Cierre del contenedor de código -->
+            </div> <!-- Cierre de la Pestaña 1 -->
+
+            <!-- Pestaña 2: Secuencialidad con Await -->
+            <div id="chain-tab" class="tab-content hidden"> <!-- Contenedor de la pestaña de simulación de consultas secuenciales múltiples -->
+                <h2>Secuencialidad de Await</h2> <!-- Título descriptivo de la pestaña -->
+                <p>Cuando colocamos múltiples expresiones <code>await</code> consecutivas, JavaScript detiene la ejecución en cada una de ellas de forma secuencial. El siguiente paso no se ejecuta hasta que el paso anterior ha terminado exitosamente.</p> <!-- Explicación del funcionamiento de la secuencialidad con await -->
+
+                <!-- Base de Datos Simulada en la UI -->
+                <div class="db-section"> <!-- Sección para visualizar la base de datos local simulada -->
+                    <div class="db-title">Base de Datos Simulada (Colección de Personas)</div> <!-- Cabecera de la base de datos simulada -->
+                    <div class="db-container"> <!-- Contenedor con borde y fondo oscuro para la tabla -->
+                        <table class="db-table"> <!-- Estructura de la tabla de datos -->
+                            <thead> <!-- Cabecera de las columnas de la tabla -->
+                                <tr> <!-- Fila de la cabecera -->
+                                    <th>ID (Índice)</th> <!-- Columna del identificador numérico de cada registro -->
+                                    <th>Nombre</th> <!-- Columna del nombre del usuario -->
+                                    <th>Instagram</th> <!-- Columna de la red social de cada registro -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera -->
+                            <tbody id="dbTableBody"> <!-- Cuerpo de la tabla que contiene los registros de prueba -->
+                                <tr id="db-row-0"> <!-- Fila del registro con ID 0 -->
+                                    <td>0</td> <!-- Celda de ID 0 -->
+                                    <td>Fredy</td> <!-- Celda del nombre Fredy -->
+                                    <td>@fredy</td> <!-- Celda del Instagram @fredy -->
+                                </tr> <!-- Cierre del registro 0 -->
+                                <tr id="db-row-1"> <!-- Fila del registro con ID 1 -->
+                                    <td>1</td> <!-- Celda de ID 1 -->
+                                    <td>Ana</td> <!-- Celda del nombre Ana -->
+                                    <td>@ana</td> <!-- Celda del Instagram @ana -->
+                                </tr> <!-- Cierre del registro 1 -->
+                                <tr id="db-row-2"> <!-- Fila del registro con ID 2 -->
+                                    <td>2</td> <!-- Celda de ID 2 -->
+                                    <td>Luis</td> <!-- Celda del nombre Luis -->
+                                    <td>@luis</td> <!-- Celda del Instagram @luis -->
+                                </tr> <!-- Cierre del registro 2 -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla -->
+                        </table> <!-- Cierre de la tabla -->
+                    </div> <!-- Cierre del contenedor de la tabla -->
+                </div> <!-- Cierre de la sección de la base de datos -->
+
+                <div class="demo-panel"> <!-- Panel de simulación interactiva de la secuencia de pasos -->
+                    <div class="controls-row"> <!-- Fila de controles para la pestaña de secuencialidad -->
+                        <div class="control-group"> <!-- Grupo del selector de consulta secuencial -->
+                            <label for="chainUserSelect">Seleccionar ID para Consulta Secuencial</label> <!-- Etiqueta explicativa del selector de ID -->
+                            <select id="chainUserSelect" class="form-select"> <!-- Lista desplegable con IDs existentes e inexistentes -->
+                                <option value="0">ID 0: Fredy</option> <!-- Opción para consultar el ID 0 -->
+                                <option value="1">ID 1: Ana</option> <!-- Opción para consultar el ID 1 -->
+                                <option value="2" selected>ID 2: Luis</option> <!-- Opción por defecto para consultar el ID 2 -->
+                                <option value="3">ID 3: (Usuario Inexistente - Simula Error)</option> <!-- Opción que no existe en el array para disparar la captura de excepciones -->
+                            </select> <!-- Cierre del selector -->
+                        </div> <!-- Cierre del grupo de control -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="runChainBtn">Ejecutar consulta con await ⛓️</button> <!-- Botón para iniciar la secuencia de consultas encadenadas -->
+
+                    <!-- Visualizador de Pasos (Timeline) -->
+                    <div class="steps-timeline"> <!-- Contenedor de la línea de tiempo vertical para mostrar la ejecución por fases -->
+                        <!-- Paso 1 -->
+                        <div class="timeline-step" id="step1"> <!-- Componente contenedor del primer paso asíncrono (Búsqueda del objeto) -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo y de la línea del paso 1 -->
+                                <div class="step-circle state-idle" id="step1Circle">1</div> <!-- Círculo con el número 1 indicando el primer paso -->
+                                <div class="step-line"></div> <!-- Línea vertical que conecta el paso 1 con el paso 2 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo del paso 1 -->
+                                <div class="step-title">Paso 1: const persona = await obtenerPersona(id)</div> <!-- Título del paso mostrando el código JS correspondiente -->
+                                <div class="step-desc">El hilo de ejecución se pausa esperando encontrar el objeto Persona.</div> <!-- Explicación del comportamiento del primer await -->
+                                <div class="step-status-text state-idle-text" id="step1Status">Esperando...</div> <!-- Estado en tiempo real del primer paso -->
+                            </div> <!-- Cierre de la información del paso 1 -->
+                        </div> <!-- Cierre del componente paso 1 -->
+
+                        <!-- Paso 2 -->
+                        <div class="timeline-step" id="step2"> <!-- Componente contenedor del segundo paso asíncrono (Obtención de propiedad) -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo del paso 2 (no requiere línea descendente) -->
+                                <div class="step-circle state-idle" id="step2Circle">2</div> <!-- Círculo con el número 2 indicando el segundo paso -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo del paso 2 -->
+                                <div class="step-title">Paso 2: const instagram = await obtenerInstagram(id)</div> <!-- Título del paso mostrando el código JS de consulta de red social -->
+                                <div class="step-desc">El hilo se pausa de nuevo esperando obtener la propiedad de Instagram.</div> <!-- Explicación del comportamiento del segundo await -->
+                                <div class="step-status-text state-idle-text" id="step2Status">Esperando...</div> <!-- Estado en tiempo real del segundo paso -->
+                            </div> <!-- Cierre de la información del paso 2 -->
+                        </div> <!-- Cierre del componente paso 2 -->
+                    </div> <!-- Cierre de la línea de tiempo -->
+
+                    <div class="output-box"> <!-- Caja contenedora de los resultados globales del flujo secuencial -->
+                        <p id="chainResult">El resultado del flujo secuencial aparecerá aquí...</p> <!-- Texto con el perfil final recuperado o error capturado de la secuencia -->
+                        <p id="chainDemoNote">Estado de la secuencia: Sin iniciar</p> <!-- Nota descriptiva de la fase global del flujo -->
+                    </div> <!-- Cierre de la caja de resultados -->
+                </div> <!-- Cierre del panel de demostración secuencial -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización estática de código de secuencia -->
+                    <div class="code-header">Código del flujo secuencial ejecutado:</div> <!-- Cabecera del bloque de código -->
+                    <pre><code>const consultarPerfil = async (id) => {
+    try {
+        const persona = await obtenerPersona(id);
+        console.log(persona.nombre);
+        
+        const instagram = await obtenerInstagram(id); // Espera al paso anterior
+        console.log(instagram);
+    } catch (err) {
+        console.error(err); // Captura el error si cualquiera falla
+    }
+};</code></pre> <!-- Bloque de código preformateado mostrando la estructura secuencial y de control de errores -->
+                </div> <!-- Cierre del contenedor de código -->
+            </div> <!-- Cierre de la Pestaña 2 -->
+        </section> <!-- Cierre de la sección de tarjeta principal -->
+    </main> <!-- Cierre del contenedor principal -->
+
+    <script src="main.js"></script> <!-- Carga el archivo de script principal de JavaScript main.js al final para optimizar la carga y renderizado -->
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->

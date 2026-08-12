@@ -1,0 +1,718 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+/* Importa la fuente tipográfica Outfit desde los servidores de Google Fonts. */
+
+* {
+    margin: 0; /* Restablece el margen por defecto del navegador en todos los elementos a cero. */
+    padding: 0; /* Restablece el relleno (padding) por defecto del navegador en todos los elementos a cero. */
+    box-sizing: border-box; /* Asegura que el padding y los bordes se incluyan dentro del tamaño total de los elementos. */
+    font-family: 'Outfit', sans-serif; /* Establece la fuente principal a Outfit con caída a fuentes sans-serif genéricas. */
+}
+
+body {
+    background: #0b0f19; /* Define el color de fondo base oscuro (azul profundo casi negro). */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0, transparent 50%), /* Pinta un gradiente radial lavanda en la esquina superior izquierda. */
+        radial-gradient(at 50% 0%, rgba(139, 92, 246, 0.12) 0, transparent 50%), /* Pinta un gradiente radial púrpura en el centro superior. */
+        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.18) 0, transparent 50%); /* Pinta un gradiente radial rosa en la esquina inferior derecha. */
+    min-height: 100vh; /* Fuerza al cuerpo a medir al menos el 100% del alto de la ventana del navegador. */
+    display: flex; /* Habilita el contenedor flex para la alineación del contenedor principal. */
+    justify-content: center; /* Alinea los elementos secundarios (flex items) al centro en el eje horizontal. */
+    align-items: center; /* Alinea los elementos secundarios (flex items) al centro en el eje vertical. */
+    color: #f8fafc; /* Define el color del texto por defecto en un tono blanco-grisáceo suave. */
+    padding: 2rem 0; /* Agrega relleno de 2rem arriba y abajo para prevenir colisiones en pantallas de poco alto. */
+}
+
+.container {
+    width: 95%; /* Define que el ancho ocupe el 95% de la pantalla en dispositivos pequeños. */
+    max-width: 680px; /* Limita el ancho máximo del contenedor a 680px para evitar estiramientos excesivos en pantallas grandes. */
+    animation: fadeIn 0.8s ease-out; /* Ejecuta la animación de entrada fadeIn de 0.8s con suavizado de salida. */
+}
+
+.glass-header {
+    text-align: center; /* Centra el texto del título y subtítulo dentro de este contenedor. */
+    margin-bottom: 2rem; /* Genera un margen inferior de 2rem para separar el encabezado de las tarjetas inferiores. */
+}
+
+.glass-header h1 {
+    font-size: 2.6rem; /* Aumenta el tamaño de la letra a 2.6 veces el tamaño por defecto del cuerpo. */
+    background: linear-gradient(135deg, #a5b4fc, #f472b6); /* Define un fondo degradado lineal que va de añil claro a rosa. */
+    background-clip: text; /* Recorta el fondo degradado para que sólo se dibuje dentro de los caracteres del texto. */
+    -webkit-text-fill-color: transparent; /* Hace que el relleno del texto sea transparente para revelar el degradado. */
+    margin-bottom: 0.5rem; /* Establece una separación inferior de 0.5rem con respecto al subtítulo. */
+    font-weight: 600; /* Aplica un grosor de fuente semibold (semi-negrita) para dar impacto visual. */
+}
+
+.glass-header p {
+    color: #94a3b8; /* Establece el color de la descripción en un gris azulado sutil. */
+    font-size: 1.1rem; /* Ajusta el tamaño de la descripción a 1.1rem. */
+    font-weight: 300; /* Establece el grosor de la tipografía en modo ligero (light) para contraste tipográfico. */
+}
+
+.info-card {
+    background: rgba(22, 30, 49, 0.7); /* Define un fondo de color azul marino muy oscuro con una opacidad del 70%. */
+    backdrop-filter: blur(16px); /* Aplica un efecto de desenfoque de cristal (16px) a los elementos detrás de la tarjeta. */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Dibuja un borde muy fino semitransparente para simular relieve tridimensional. */
+    border-radius: 28px; /* Redondea los bordes de la tarjeta con un radio moderno de 28px. */
+    padding: 2.5rem; /* Establece un relleno interno de 2.5rem en todos los lados de la tarjeta. */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); /* Agrega una sombra negra difuminada y profunda debajo para efecto de elevación. */
+}
+
+.info-card h2 {
+    font-size: 1.6rem; /* Define el tamaño del título de la sección en 1.6rem. */
+    margin-bottom: 0.75rem; /* Separa el título del párrafo inferior con un margen de 0.75rem. */
+    color: #e2e8f0; /* Pinta el título en un blanco grisáceo claro para que resalte. */
+    font-weight: 600; /* Establece el grosor del texto del título en semi-negrita. */
+    text-align: left; /* Alinea el texto a la izquierda. */
+}
+
+.info-card p {
+    color: #cbd5e1; /* Establece el color del texto principal del párrafo en un gris intermedio. */
+    line-height: 1.6; /* Configura una separación de línea de 1.6 para mejorar la legibilidad de la lectura. */
+    margin-bottom: 1.2rem; /* Separa los párrafos o elementos inferiores con un margen de 1.2rem. */
+    text-align: left; /* Alinea los textos a la izquierda. */
+    font-size: 1.05rem; /* Establece el tamaño de la tipografía de los párrafos en 1.05rem. */
+}
+
+.spam-alert {
+    display: flex; /* Utiliza el contenedor flexbox para alinear el emoji y el texto en fila. */
+    align-items: center; /* Alinea verticalmente los elementos flexibles hijos al centro. */
+    gap: 0.8rem; /* Agrega una separación de 0.8rem entre el icono emoji y el párrafo de texto. */
+    background: rgba(99, 102, 241, 0.08); /* Establece un color de fondo azul/índigo muy translúcido (8% de opacidad). */
+    border: 1px solid rgba(99, 102, 241, 0.25); /* Agrega un borde azul/índigo sutil al aviso. */
+    border-radius: 16px; /* Redondea las esquinas del cuadro con un radio de 16px. */
+    padding: 1rem 1.2rem; /* Genera relleno interno de 1rem arriba/abajo y 1.2rem en los laterales. */
+    margin: 1.5rem 0; /* Agrega un espacio exterior de 1.5rem arriba y abajo del bloque del aviso. */
+    color: #a5b4fc; /* Aplica un color de texto azul/lavanda claro para resaltar la información. */
+    font-size: 0.95rem; /* Define el tamaño de letra del aviso en 0.95rem. */
+    text-align: left; /* Alinea el texto a la izquierda. */
+}
+
+.spam-alert p {
+    margin: 0; /* Elimina cualquier margen residual por defecto del párrafo del aviso. */
+    line-height: 1.5; /* Establece el espaciado de línea en 1.5 para el texto interno. */
+}
+
+.status-badge {
+    display: inline-block; /* Permite comportarse como un contenedor de bloque pero en línea (respeta márgenes e internos). */
+    padding: 0.3rem 0.8rem; /* Define un relleno interno estrecho de 0.3rem arriba/abajo y 0.8rem a los lados. */
+    background: rgba(139, 92, 246, 0.2); /* Establece un fondo violeta suave y transparente. */
+    color: #c084fc; /* Pinta el texto interno de un violeta claro brillante. */
+    border-radius: 9999px; /* Redondea completamente los bordes extremos del badge en forma de píldora. */
+    font-size: 0.75rem; /* Establece una tipografía compacta de tamaño 0.75rem. */
+    font-weight: 600; /* Aplica grosor semi-negrita para aumentar la jerarquía visual del elemento. */
+    margin-bottom: 1.2rem; /* Añade una separación externa inferior de 1.2rem. */
+    text-transform: uppercase; /* Convierte todo el texto de la etiqueta en letras mayúsculas. */
+    letter-spacing: 0.08em; /* Genera un espaciado horizontal de 0.08em entre cada una de las letras. */
+}
+
+.demo-panel {
+    display: flex; /* Habilita el contenedor flex para acomodar los controles y el visualizador en columna. */
+    flex-direction: column; /* Organiza los elementos flexibles hijos verticalmente en forma de columna. */
+    gap: 1.2rem; /* Deja un espacio vertical uniforme de 1.2rem entre todos los elementos internos. */
+    margin: 2rem 0; /* Deja una separación externa de 2rem arriba y abajo del panel. */
+}
+
+.controls-row {
+    display: flex; /* Habilita flexbox para colocar la fila de controles en paralelo (selectores de lado a lado). */
+    gap: 1rem; /* Deja un espacio de separación horizontal de 1rem entre los selectores. */
+    width: 100%; /* Obliga a la fila de controles a abarcar el 100% de la anchura disponible. */
+}
+
+.control-group {
+    flex: 1; /* Distribuye el espacio de forma equitativa haciendo que cada control ocupe el mismo ancho. */
+    display: flex; /* Define un contenedor flex para el label y el select. */
+    flex-direction: column; /* Organiza la etiqueta label arriba y el selector select abajo. */
+    gap: 0.5rem; /* Establece una separación de 0.5rem entre la etiqueta label y el selector. */
+    text-align: left; /* Alinea los textos a la izquierda. */
+}
+
+.control-group label {
+    font-size: 0.8rem; /* Define el tamaño de letra de la etiqueta de control en 0.8rem. */
+    font-weight: 600; /* Aplica peso tipográfico de tipo semi-negrita a la etiqueta. */
+    color: #94a3b8; /* Establece un tono gris azulado apagado para la etiqueta. */
+    text-transform: uppercase; /* Pone el texto de la etiqueta de control completamente en mayúsculas. */
+    letter-spacing: 0.05em; /* Aumenta ligeramente la separación horizontal de las letras en la etiqueta. */
+}
+
+.form-select {
+    width: 100%; /* Ajusta el selector para que ocupe toda la anchura del grupo de control. */
+    padding: 0.8rem 1rem; /* Establece un relleno interno de 0.8rem arriba/abajo y 1rem a los lados. */
+    background: #0f172a; /* Pinta el fondo del selector en un azul grisáceo muy oscuro y sólido. */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Crea un borde sutil para destacar el input sobre la tarjeta. */
+    border-radius: 12px; /* Redondea los bordes del input selector a 12px. */
+    color: #f8fafc; /* Color del texto de las opciones seleccionadas en un blanco casi puro. */
+    font-size: 0.95rem; /* Ajusta el tamaño del texto del selector a 0.95rem. */
+    cursor: pointer; /* Cambia el puntero del mouse a mano al posicionarse sobre el selector. */
+    transition: all 0.3s ease; /* Transiciona suavemente el borde y el foco durante 0.3 segundos. */
+    outline: none; /* Elimina el borde azul por defecto que aplican los navegadores en el foco. */
+    appearance: none; /* Elimina la flecha predeterminada del selector nativo del sistema operativo. */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); /* Carga una flecha personalizada en SVG pintada de blanco. */
+    background-repeat: no-repeat; /* Evita que el gráfico SVG de la flecha se duplique en mosaico. */
+    background-position: right 10px center; /* Posiciona la flecha SVG a 10px de la derecha y alineada verticalmente al centro. */
+}
+
+.form-select:focus {
+    border-color: #818cf8; /* Cambia el color del borde a un tono lavanda al hacer click/foco. */
+    box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.25); /* Crea un halo azulado translúcido de 3px de grosor alrededor. */
+}
+
+.btn {
+    width: 100%; /* Ajusta el botón para que ocupe todo el ancho disponible del bloque contenedor. */
+    padding: 1rem 1.5rem; /* Define un relleno cómodo de 1rem arriba/abajo y 1.5rem en los lados. */
+    border: none; /* Remueve los bordes por defecto del elemento botón. */
+    border-radius: 14px; /* Redondea los bordes del botón con un radio de 14px. */
+    background: linear-gradient(135deg, #6366f1, #d946ef); /* Define un degradado moderno y vivo de índigo a magenta. */
+    color: white; /* Cambia el color del texto del botón a blanco absoluto. */
+    font-size: 1.05rem; /* Ajusta el tamaño de fuente del botón a 1.05rem para destacarlo. */
+    font-weight: 600; /* Aplica peso tipográfico de tipo semi-negrita para legibilidad del texto en el degradado. */
+    cursor: pointer; /* Transforma el mouse en puntero de mano interactivo al pasar sobre el botón. */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Suaviza todas las animaciones (hover, clic) mediante una curva Bezier. */
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3); /* Agrega una sombra azul difuminada con brillo del 30% de opacidad. */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Eleva sutilmente el botón 2px hacia arriba al pasar el mouse por encima. */
+    box-shadow: 0 8px 25px rgba(217, 70, 239, 0.45); /* Aumenta la intensidad y difusión de la sombra para acentuar el efecto flotante. */
+    background: linear-gradient(135deg, #4f46e5, #c084fc); /* Altera ligeramente el degradado haciéndolo un poco más brillante. */
+}
+
+.btn:active {
+    transform: translateY(1px); /* Devuelve el botón hacia abajo 1px al hacer clic, dando respuesta háptica visual. */
+}
+
+/* Visualizador de la Promesa */
+.promise-visualizer {
+    background: rgba(15, 23, 42, 0.6); /* Establece un fondo azul de opacidad del 60% para destacar la zona. */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Agrega un borde ultrafino blanco translúcido. */
+    border-radius: 16px; /* Redondea los bordes de la caja del visualizador a 16px. */
+    padding: 1.2rem; /* Agrega una holgura interna de 1.2rem alrededor del contenido. */
+    text-align: left; /* Alinea los textos a la izquierda. */
+}
+
+.visualizer-header {
+    font-size: 0.75rem; /* Ajusta el tamaño del título del visualizador a 0.75rem. */
+    font-weight: 600; /* Pone en negrita la cabecera. */
+    color: #64748b; /* Usa un color gris intermedio discreto. */
+    text-transform: uppercase; /* Escribe el texto en mayúsculas. */
+    letter-spacing: 0.08em; /* Genera separación horizontal entre las letras. */
+    margin-bottom: 0.8rem; /* Añade margen inferior para separar el título del indicador de estado. */
+}
+
+.promise-status-row {
+    display: flex; /* Activa flexbox para poner el círculo indicador al lado del texto de estado. */
+    align-items: center; /* Alinea verticalmente al centro el indicador y el texto de estado. */
+    gap: 0.8rem; /* Separa el círculo indicador del texto con un espacio de 0.8rem. */
+    margin-bottom: 0.8rem; /* Añade un espacio inferior para separarlo de la barra de progreso. */
+}
+
+.promise-indicator {
+    width: 16px; /* Configura el ancho del indicador en 16px. */
+    height: 16px; /* Configura el alto del indicador en 16px. */
+    border-radius: 50%; /* Transforma el cuadro en un círculo perfecto aplicando un radio de 50%. */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Anima los cambios de color y brillo con transición elástica de 0.4s. */
+}
+
+/* Estados Visuales de la Promesa */
+.state-idle {
+    background: #475569; /* Color gris para el estado inactivo (idle). */
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.4); /* Aplica un resplandor (glow) apagado de color gris. */
+}
+
+.state-pending {
+    background: #fbbf24; /* Color amarillo cálido para denotar la promesa pendiente (pending). */
+    box-shadow: 0 0 16px #fbbf24; /* Genera un resplandor amarillo brillante. */
+    animation: pulseGlow 1.5s infinite alternate; /* Inicia la animación de pulsación constante pulseGlow. */
+}
+
+.state-fulfilled {
+    background: #10b981; /* Color verde esmeralda para el éxito de la promesa (fulfilled). */
+    box-shadow: 0 0 16px #10b981; /* Genera un resplandor verde esmeralda brillante. */
+}
+
+.state-rejected {
+    background: #f43f5e; /* Color rojo rosáceo para indicar que la promesa falló (rejected). */
+    box-shadow: 0 0 16px #f43f5e; /* Genera un resplandor rojo brillante. */
+}
+
+@keyframes pulseGlow {
+    from {
+        transform: scale(0.9); /* Inicia la escala de la pulsación un poco más reducida (90% del tamaño original). */
+        box-shadow: 0 0 8px #fbbf24; /* Establece un resplandor más pequeño. */
+        opacity: 0.8; /* Establece la opacidad en 80%. */
+    }
+    to {
+        transform: scale(1.15); /* Crece la escala de la pulsación a 115% del tamaño para simular latido. */
+        box-shadow: 0 0 20px #fbbf24; /* Amplía el resplandor a 20px. */
+        opacity: 1; /* Vuelve a tener la opacidad al 100%. */
+    }
+}
+
+#promiseStateText {
+    font-weight: 600; /* Aplica peso de tipografía seminegrita para destacar el estado textual. */
+    font-size: 0.95rem; /* Ajusta el tamaño de fuente en 0.95rem. */
+    letter-spacing: 0.02em; /* Añade un espacio diminuto entre las letras. */
+}
+
+/* Colores de Texto específicos para cada Estado */
+.state-idle-text { color: #94a3b8; } /* Gris apagado para el texto de espera. */
+.state-pending-text { color: #fbbf24; } /* Amarillo brillante para el texto de carga. */
+.state-fulfilled-text { color: #34d399; } /* Verde claro para el texto de éxito. */
+.state-rejected-text { color: #f87171; } /* Rojo claro para el texto de error. */
+
+.progress-bar-container {
+    width: 100%; /* Configura el contenedor de la barra de progreso para abarcar el 100% de la anchura. */
+    height: 6px; /* Establece la altura del carril de la barra en 6px. */
+    background: rgba(255, 255, 255, 0.05); /* Aplica un fondo gris muy tenue para marcar el camino de la barra. */
+    border-radius: 999px; /* Redondea los extremos del carril. */
+    overflow: hidden; /* Corta la barra de progreso interna en las esquinas redondeadas del contenedor. */
+}
+
+.progress-bar {
+    height: 100%; /* Ajusta la barra interna para llenar todo el alto de su contenedor. */
+    width: 0%; /* Inicia el ancho por defecto en 0% antes de comenzar a cargarse. */
+    background: linear-gradient(to right, #818cf8, #fbbf24); /* Diseña un gradiente lateral de azul/lavanda a amarillo. */
+    border-radius: 999px; /* Redondea las esquinas de la barra interna. */
+    transition: width 0.1s linear; /* Controla los incrementos con una transición lineal de 0.1 segundos para animación fluida. */
+}
+
+/* Caja de Resultados */
+.output-box {
+    background: #0f172a; /* Fondo azul marino muy oscuro y sólido para resaltar los resultados. */
+    border-radius: 16px; /* Redondea los bordes de la caja de resultados a 16px. */
+    padding: 1.2rem; /* Deja un relleno interno de 1.2rem. */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Agrega un sutil borde claro para relieve. */
+    text-align: left; /* Alinea los textos resultantes a la izquierda. */
+}
+
+#result {
+    color: #f8fafc; /* Color de texto blanco-grisáceo por defecto. */
+    font-weight: 600; /* Aplica peso de letra seminegrita para el texto de respuesta principal. */
+    margin-bottom: 0.4rem; /* Separa el resultado de la nota secundaria inferior con 0.4rem de espacio. */
+    font-size: 1.1rem; /* Aumenta el tamaño del texto a 1.1rem. */
+    transition: color 0.3s ease; /* Transiciona suavemente el cambio de color (verde o rojo) del resultado. */
+}
+
+#result.fulfilled {
+    color: #34d399; /* Pinta en verde brillante si la promesa fue resuelta con éxito. */
+}
+
+#result.rejected {
+    color: #f87171; /* Pinta en rojo brillante si la promesa fue rechazada. */
+}
+
+#result.pending {
+    color: #fbbf24; /* Pinta en amarillo brillante si la promesa sigue pendiente. */
+}
+
+#demoNote {
+    color: #64748b; /* Color de texto gris azulado apagado para notas secundarias. */
+    font-size: 0.9rem; /* Establece un tamaño menor de 0.9rem. */
+}
+
+/* Vista Previa del Código */
+.code-preview {
+    background: #070a13; /* Fondo extra oscuro que simula el tema oscuro de un editor de código. */
+    border-radius: 18px; /* Redondea las esquinas del bloque de código a 18px. */
+    padding: 1.2rem; /* Deja un espacio interno holgado de 1.2rem. */
+    overflow: auto; /* Muestra scroll lateral si el bloque de código es muy ancho. */
+    text-align: left; /* Alinea el texto del código a la izquierda. */
+    border: 1px solid rgba(255, 255, 255, 0.04); /* Dibuja una fina línea de borde casi invisible. */
+}
+
+.code-header {
+    font-size: 0.75rem; /* Ajusta la cabecera informativa de código en tamaño pequeño de 0.75rem. */
+    font-weight: 600; /* Pone el texto en negrita. */
+    color: #475569; /* Pinta la cabecera en un tono gris pizarra. */
+    text-transform: uppercase; /* Pone todo el texto en mayúsculas. */
+    letter-spacing: 0.08em; /* Añade espaciado horizontal extra entre las letras. */
+    margin-bottom: 0.6rem; /* Separa la cabecera de la caja del código con 0.6rem. */
+}
+
+pre {
+    margin: 0; /* Remueve los márgenes por defecto aplicados en la etiqueta pre. */
+}
+
+code {
+    color: #cbd5e1; /* Pinta el texto del código fuente en gris intermedio suave. */
+    font-family: 'Consolas', 'Courier New', Courier, monospace; /* Aplica fuentes monoespaciadas adecuadas para código. */
+    font-size: 0.9rem; /* Ajusta el tamaño de la tipografía en 0.9rem. */
+    line-height: 1.5; /* Define una altura de línea de 1.5 para óptima lectura del código. */
+}
+
+/* ===================================================================
+   SISTEMA DE PESTAÑAS (TABS)
+   =================================================================== */
+.tabs-nav {
+    display: flex; /* Organiza los botones en una fila utilizando flexbox. */
+    gap: 0.5rem; /* Establece una separación horizontal de 0.5rem entre los botones de pestañas. */
+    background: rgba(15, 23, 42, 0.6); /* Aplica fondo azul oscuro translúcido con opacidad del 60%. */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Agrega un borde ultrafino blanco para relieve. */
+    padding: 0.4rem; /* Deja un relleno interno de 0.4rem para que floten los botones. */
+    border-radius: 18px; /* Redondea los bordes del menú de pestañas a 18px. */
+    margin-bottom: 2rem; /* Separa el menú de pestañas de la tarjeta de contenido con un margen inferior de 2rem. */
+}
+
+.tab-btn {
+    flex: 1; /* Hace que todos los botones ocupen el mismo ancho distribuyendo el espacio. */
+    padding: 0.75rem 1rem; /* Aplica relleno interno vertical de 0.75rem y horizontal de 1rem. */
+    border: none; /* Quita los bordes nativos del botón. */
+    background: transparent; /* Configura el fondo por defecto como transparente. */
+    color: #94a3b8; /* Pinta el texto inactivo en un tono gris azulado apagado. */
+    font-size: 0.95rem; /* Ajusta el tamaño de fuente a 0.95rem. */
+    font-weight: 600; /* Aplica grosor seminegrita para destacar las opciones. */
+    border-radius: 12px; /* Redondea los bordes de los botones a 12px. */
+    cursor: pointer; /* Muestra el icono de mano interactiva al pasar el mouse por encima. */
+    transition: all 0.3s ease; /* Transiciona de forma suave los cambios de color y fondo en 0.3s. */
+}
+
+.tab-btn:hover {
+    color: #f8fafc; /* Vuelve el texto de color blanco casi puro al sobrevolar la pestaña. */
+    background: rgba(255, 255, 255, 0.03); /* Añade un fondo blanco sumamente transparente (3% de opacidad). */
+}
+
+.tab-btn.active {
+    color: #ffffff; /* Pinta el texto de la pestaña seleccionada en blanco absoluto. */
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(217, 70, 239, 0.15)); /* Crea un fondo degradado índigo/rosa translúcido. */
+    border: 1px solid rgba(139, 92, 246, 0.3); /* Pinta una línea de contorno violeta semitransparente. */
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.2); /* Agrega un halo de luz violeta (resplandor) en las esquinas. */
+}
+
+/* Control de Visibilidad de Contenido de Pestañas */
+.tab-content {
+    display: block; /* Muestra la pestaña en bloque para hacerla visible. */
+    animation: fadeIn 0.5s ease-out; /* Ejecuta la animación fadeIn de 0.5s para su aparición suave. */
+}
+
+.tab-content.hidden {
+    display: none; /* Remueve del flujo visible el panel de las pestañas que no estén activas. */
+}
+
+/* ===================================================================
+   VISTA DE BASE DE DATOS MOCK (TABLA)
+   =================================================================== */
+.db-section {
+    margin-bottom: 1.5rem; /* Deja un margen inferior de 1.5rem para separar la tabla de los controles. */
+}
+
+.db-title {
+    font-size: 0.8rem; /* Tamaño de letra reducido a 0.8rem para la etiqueta de la tabla. */
+    font-weight: 600; /* Aplica peso tipográfico seminegrita para destacar la etiqueta. */
+    color: #94a3b8; /* Pinta el texto en gris azulado discreto. */
+    text-transform: uppercase; /* Convierte los caracteres del título de tabla a mayúsculas. */
+    letter-spacing: 0.08em; /* Agrega un ligero espaciado horizontal entre las letras. */
+    margin-bottom: 0.6rem; /* Separa el título del recuadro de la tabla con un margen de 0.6rem. */
+    text-align: left; /* Alinea el texto a la izquierda. */
+}
+
+.db-container {
+    background: #0f172a; /* Fondo azul grisáceo sólido muy oscuro para enmarcar la tabla de base de datos. */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Dibuja una línea de contorno sumamente delgada y translúcida. */
+    border-radius: 16px; /* Redondea los bordes de la caja contenedora de la tabla a 16px. */
+    overflow: hidden; /* Evita que las filas sobresalgan de las esquinas redondeadas del contenedor. */
+}
+
+.db-table {
+    width: 100%; /* Ajusta la tabla para abarcar toda la anchura del bloque contenedor. */
+    border-collapse: collapse; /* Elimina la doble línea de borde entre celdas colindantes. */
+    font-size: 0.9rem; /* Aplica tipografía compacta de 0.9rem de tamaño. */
+    text-align: left; /* Alinea todos los datos hacia el lateral izquierdo. */
+}
+
+.db-table th, .db-table td {
+    padding: 0.75rem 1rem; /* Aplica un relleno de 0.75rem arriba/abajo y 1rem a los laterales de cada celda. */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Dibuja una línea de división horizontal muy fina entre filas. */
+}
+
+.db-table th {
+    background: rgba(255, 255, 255, 0.02); /* Aplica fondo blanquecino al 2% de opacidad para diferenciar la cabecera. */
+    color: #64748b; /* Color de texto gris azulado para los encabezados de columna. */
+    font-weight: 600; /* Pone las cabeceras en negrita. */
+    text-transform: uppercase; /* Convierte los nombres de columnas a mayúsculas. */
+    font-size: 0.75rem; /* Ajusta la cabecera en letra pequeña de 0.75rem. */
+    letter-spacing: 0.05em; /* Aumenta la separación entre los caracteres del texto. */
+}
+
+.db-table td {
+    color: #cbd5e1; /* Color gris claro intermedio para los valores de las celdas. */
+}
+
+.db-table tr {
+    transition: background 0.2s ease; /* Transiciona suavemente el fondo de la fila durante 0.2s al cambiar de selección. */
+}
+
+.db-table tr.selected-row {
+    background: rgba(99, 102, 241, 0.15); /* Pinta el fondo de la fila seleccionada en color índigo translúcido. */
+}
+
+.db-table tr.selected-row td {
+    color: #a5b4fc; /* Modifica el color de texto de la fila seleccionada a lavanda brillante. */
+    font-weight: 600; /* Aplica negrita a los datos de la fila seleccionada para resaltarlos visualmente. */
+}
+
+/* ===================================================================
+   LÍNEA DE TIEMPO DE PASOS (TIMELINE STEPS)
+   =================================================================== */
+.steps-timeline {
+    display: flex; /* Habilita flexbox para organizar los pasos de la línea de tiempo. */
+    flex-direction: column; /* Apila verticalmente los pasos en forma de lista de arriba a abajo. */
+    margin: 1.5rem 0; /* Agrega margen vertical externo de 1.5rem para separarlo de los otros bloques. */
+    position: relative; /* Define posicionamiento relativo para que sirva de ancla al conector absoluto. */
+    padding-left: 0.5rem; /* Agrega holgura lateral izquierda de 0.5rem para balance visual. */
+}
+
+.timeline-step {
+    display: flex; /* Define flexbox para poner el indicador circular al lado de los textos informativos. */
+    gap: 1.2rem; /* Deja un espacio de 1.2rem de separación entre el círculo del paso y el texto descriptivo. */
+    position: relative; /* Posicionamiento relativo requerido para anclar la línea de conexión absoluta vertical. */
+    padding-bottom: 1.8rem; /* Agrega holgura inferior para extender verticalmente el carril de la línea. */
+}
+
+/* Evita que el último paso tenga una línea de conexión vertical excedente hacia abajo */
+.timeline-step:last-child {
+    padding-bottom: 0; /* Remueve la holgura de separación inferior en la última fila. */
+}
+
+.step-indicator-wrapper {
+    position: relative; /* Posicionamiento relativo para la correcta estructuración del conector y el círculo indicador. */
+    display: flex; /* Facilita la alineación y posicionamiento de los componentes hijos. */
+    justify-content: center; /* Centra el indicador horizontalmente en el eje de la columna. */
+    width: 28px; /* Fija la columna del indicador en un ancho fijo de 28px. */
+}
+
+.step-circle {
+    width: 28px; /* Establece el diámetro (ancho) del círculo indicador en 28px. */
+    height: 28px; /* Establece el diámetro (alto) del círculo indicador en 28px. */
+    border-radius: 50%; /* Modifica la geometría a círculo perfecto con radio de 50%. */
+    background: #1e293b; /* Color de fondo gris azulado oscuro por defecto para pasos inactivos. */
+    border: 2px solid #475569; /* Contorno gris pizarra de 2px de grosor. */
+    color: #94a3b8; /* Color gris para el número del paso interno. */
+    display: flex; /* Habilita flexbox para centrar el número. */
+    align-items: center; /* Centra verticalmente el número del paso dentro del círculo. */
+    justify-content: center; /* Centra horizontalmente el número del paso dentro del círculo. */
+    font-size: 0.85rem; /* Ajusta la fuente del número en tamaño compacto de 0.85rem. */
+    font-weight: 600; /* Aplica peso de letra negrita al número. */
+    z-index: 2; /* Forza al círculo a renderizarse por encima de la línea de conexión para taparla. */
+    transition: all 0.3s ease; /* Transiciona suavemente cambios de fondos, bordes y halos de luz en 0.3s. */
+}
+
+/* Conector vertical */
+.step-line {
+    position: absolute; /* Extrae la línea del flujo para extenderla libremente de arriba a abajo. */
+    top: 28px; /* Inicia el conector en la base del círculo (28px de alto). */
+    bottom: 0; /* Extiende el conector hasta el final de la celda vertical del paso actual. */
+    left: 50%; /* Centra el eje del conector exactamente a la mitad. */
+    width: 2px; /* Grosor fino de 2px para la línea. */
+    background: #334155; /* Color gris azulado intermedio y apagado para la línea. */
+    transform: translateX(-50%); /* Ajusta hacia atrás un 50% de su grosor en el eje X para alinearlo de manera perfecta. */
+    z-index: 1; /* Posiciona la línea de conexión en una capa inferior por detrás del círculo. */
+}
+
+/* Estados de los Círculos de Pasos */
+.step-circle.state-idle {
+    background: #1e293b; /* Fondo gris oscuro por defecto. */
+    border-color: #475569; /* Contorno gris. */
+    color: #94a3b8; /* Número en gris. */
+}
+
+.step-circle.state-pending {
+    background: #1e293b; /* Mantiene fondo oscuro. */
+    border-color: #fbbf24; /* Borde amarillo brillante que denota que la operación actual está en progreso. */
+    color: #fbbf24; /* Número en color amarillo brillante. */
+    box-shadow: 0 0 10px rgba(251, 191, 36, 0.35); /* Halo de luz amarillo de 10px alrededor del indicador. */
+    animation: pulseBorder 1.5s infinite alternate; /* Inicia la animación interactiva de latido pulseBorder de 1.5s. */
+}
+
+.step-circle.state-fulfilled {
+    background: #064e3b; /* Color verde muy oscuro de fondo indicando éxito de este paso. */
+    border-color: #10b981; /* Borde verde esmeralda brillante. */
+    color: #34d399; /* Número del paso en verde brillante claro. */
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); /* Halo de luz verde suave de 10px alrededor del indicador. */
+}
+
+.step-circle.state-rejected {
+    background: #4c0519; /* Color rojo muy oscuro de fondo indicando que este paso falló. */
+    border-color: #f43f5e; /* Borde rojo rosáceo brillante. */
+    color: #f87171; /* Número del paso en rojo claro brillante. */
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.3); /* Halo de luz roja suave de 10px alrededor del indicador. */
+}
+
+.step-info {
+    flex: 1; /* Permite que el bloque de textos consuma todo el ancho restante lateral libre. */
+    text-align: left; /* Alinea los textos a la izquierda. */
+}
+
+.step-title {
+    font-size: 0.95rem; /* Ajusta el tamaño de la tipografía del título del paso a 0.95rem. */
+    font-weight: 600; /* Aplica peso de letra seminegrita para destacar el título. */
+    color: #e2e8f0; /* Pinta el texto principal del paso en un color claro y nítido. */
+    margin-bottom: 0.2rem; /* Deja un margen inferior de 0.2rem para espaciar la descripción. */
+}
+
+.step-desc {
+    font-size: 0.8rem; /* Pinta la descripción detallada en un tamaño compacto de 0.8rem. */
+    color: #64748b; /* Color de texto gris azulado para restar prioridad visual frente al título. */
+    margin-bottom: 0.4rem; /* Margen inferior de 0.4rem para separar la descripción de la etiqueta de estado. */
+}
+
+.step-status-text {
+    font-size: 0.8rem; /* Ajusta el tamaño del estado del paso en 0.8rem. */
+    font-weight: 600; /* Pone el texto en negrita. */
+    display: inline-block; /* Comportamiento en línea respetando márgenes. */
+}
+
+@keyframes pulseBorder {
+    from {
+        border-color: #fbbf24; /* Punto de partida del latido en el color amarillo inicial. */
+        box-shadow: 0 0 4px rgba(251, 191, 36, 0.2); /* Inicia con un brillo difuso y sutil (20% de opacidad). */
+    }
+    to {
+        border-color: #fbbf24; /* Punto final del latido manteniendo el mismo color amarillo. */
+        box-shadow: 0 0 14px rgba(251, 191, 36, 0.6); /* Incrementa el alcance del brillo a 14px y su opacidad al 60%. */
+    }
+}
+
+/* ===================================================================
+   TERMINAL VIRTUAL DE DEPURACIÓN (CONSOLE EMULATOR)
+   =================================================================== */
+.virtual-terminal {
+    margin-top: 1.5rem; /* Margen superior de 1.5rem para distanciar el bloque de código de la terminal. */
+    background: #050811; /* Color de fondo negro puro profundo para simular terminal física. */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Dibuja una línea de contorno sumamente tenue. */
+    border-radius: 14px; /* Redondea los bordes de la terminal a 14px. */
+    overflow: hidden; /* Corta cualquier contenido interno que sobresalga de las esquinas redondeadas. */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Agrega sombra negra profunda para efecto de superposición. */
+}
+
+.terminal-header {
+    background: #0d1321; /* Fondo azul grisáceo oscuro para destacar la barra de cabecera de la terminal. */
+    padding: 0.6rem 1rem; /* Relleno vertical de 0.6rem y horizontal de 1rem. */
+    display: flex; /* Utiliza flexbox para alinear los controles de botones de ventana. */
+    align-items: center; /* Alinea los elementos internos verticalmente al centro. */
+    justify-content: space-between; /* Separa los botones del título colocándolos en extremos opuestos. */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04); /* Línea de separación inferior muy delgada. */
+}
+
+.terminal-dots {
+    display: flex; /* Coloca los círculos de control en una fila horizontal usando flexbox. */
+    gap: 0.5rem; /* Deja un espacio horizontal de 0.5rem entre cada círculo de control. */
+}
+
+.terminal-dot {
+    width: 10px; /* Ancho fijo de 10px para el botón de control. */
+    height: 10px; /* Alto fijo de 10px para el botón de control. */
+    border-radius: 50%; /* Modifica a círculo perfecto aplicando un radio de 50%. */
+}
+
+.dot-close {
+    background: #ef4444; /* Pinta el círculo de color rojo (botón cerrar). */
+}
+
+.dot-min {
+    background: #f59e0b; /* Pinta el círculo de color amarillo (botón minimizar). */
+}
+
+.dot-max {
+    background: #10b981; /* Pinta el círculo de color verde (botón expandir). */
+}
+
+.terminal-title {
+    font-size: 0.75rem; /* Configura una tipografía pequeña de 0.75rem. */
+    color: #475569; /* Color de texto gris pizarra oscuro. */
+    font-weight: 600; /* Aplica peso de letra seminegrita para destacar el título de la consola. */
+    font-family: 'Consolas', monospace; /* Aplica fuente de ancho fijo (monospace) a la cabecera. */
+    letter-spacing: 0.05em; /* Añade espaciado horizontal de letras. */
+}
+
+.terminal-body {
+    padding: 1rem; /* Agrega un relleno interno uniforme de 1rem en el visor. */
+    height: 140px; /* Fija la altura del visor en 140px. */
+    overflow-y: auto; /* Habilita barra de desplazamiento vertical si se acumulan muchos logs. */
+    font-family: 'Consolas', 'Courier New', monospace; /* Aplica tipografía monospace ideal para lecturas de depuración. */
+    font-size: 0.82rem; /* Tamaño de letra compacto de 0.82rem para los textos del log. */
+    text-align: left; /* Alinea los logs hacia el lateral izquierdo. */
+}
+
+.terminal-line {
+    margin-bottom: 0.4rem; /* Deja una separación vertical de 0.4rem entre líneas del visor. */
+    line-height: 1.4; /* Ajusta la altura de línea a 1.4 para evitar el encabalgamiento de textos. */
+}
+
+.terminal-prompt {
+    color: #4f46e5; /* Color índigo brillante para el prompt o cursor terminal. */
+    margin-right: 0.5rem; /* Separa el prompt del texto de log con 0.5rem en el lateral derecho. */
+    user-select: none; /* Evita que el usuario seleccione el cursor terminal al copiar texto. */
+}
+
+/* Clases de colores correspondientes a cada estado de log de la terminal */
+.terminal-line.log {
+    color: #e2e8f0; /* Color gris claro por defecto para logs generales de texto. */
+}
+
+.terminal-line.success {
+    color: #34d399; /* Color verde brillante para logs de éxitos o datos resueltos. */
+}
+
+.terminal-line.error {
+    color: #f87171; /* Color rojo brillante para logs de errores de ejecución de código. */
+}
+
+.terminal-line.warning {
+    color: #fbbf24; /* Color amarillo brillante para alertas o estados pendientes temporales. */
+}
+
+.terminal-line.info {
+    color: #818cf8; /* Color azul claro brillante para información de inicialización. */
+}
+
+/* ===================================================================
+   RESALTADO DE LÍNEAS DE CÓDIGO DEL DEPURADOR (DEBUGGER EFFECT)
+   =================================================================== */
+.code-line {
+    display: block; /* Muestra cada línea de código como elemento de bloque independiente. */
+    padding: 0.15rem 0.6rem; /* Relleno vertical estrecho de 0.15rem y horizontal de 0.6rem. */
+    transition: all 0.3s ease; /* Transiciona suavemente el fondo y el color de borde en 0.3s. */
+    border-left: 3px solid transparent; /* Dibuja un contorno izquierdo transparente por defecto. */
+}
+
+/* Estados de iluminación dinámicos para las líneas del depurador virtual */
+.code-line.line-active-pending {
+    background: rgba(251, 191, 36, 0.15); /* Fondo amarillo muy translúcido al pausarse en await. */
+    border-left-color: #fbbf24; /* Ilumina el contorno izquierdo en color amarillo brillante. */
+}
+
+.code-line.line-active-success {
+    background: rgba(16, 185, 129, 0.15); /* Fondo verde translúcido al completarse con éxito. */
+    border-left-color: #10b981; /* Ilumina el contorno izquierdo en color verde brillante. */
+}
+
+.code-line.line-active-error {
+    background: rgba(244, 63, 94, 0.15); /* Fondo rojo translúcido al capturarse un error en catch. */
+    border-left-color: #f43f5e; /* Ilumina el contorno izquierdo en color rojo brillante. */
+}
+
+/* ===================================================================
+   RESPONSIVIDAD Y TRANSICIONES GENERALES
+   =================================================================== */
+@media (max-width: 500px) {
+    .controls-row {
+        flex-direction: column; /* Apila verticalmente los selectores de control en pantallas de móviles angostas. */
+    }
+    .info-card {
+        padding: 1.5rem; /* Reduce el relleno de la tarjeta principal a 1.5rem para maximizar el espacio móvil. */
+    }
+    .tabs-nav {
+        flex-direction: column; /* Apila de arriba a abajo los botones de las pestañas en pantallas muy pequeñas. */
+        gap: 0.25rem; /* Reduce el espacio entre botones verticales a 0.25rem. */
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Inicia la animación desde un estado completamente transparente (0% opacidad). */
+        transform: translateY(12px); /* Desplaza el contenedor 12px hacia abajo. */
+    }
+    to {
+        opacity: 1; /* Culmina la animación en estado totalmente opaco (100% visible). */
+        transform: translateY(0); /* Devuelve el contenedor a su posición original (0px). */
+    }
+}
