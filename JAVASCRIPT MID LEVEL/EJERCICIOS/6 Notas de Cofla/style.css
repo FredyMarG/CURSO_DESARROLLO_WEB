@@ -1,10 +1,9 @@
 /*
- * LABORATORIO: ASINCRONISMO Y RENDIMIENTO
+ * LABORATORIO: VISUALIZACIÓN DINÁMICA DE DATOS
  * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/style.css
- * Propósito: Estilizar la interfaz del "Ejercicio 6", presentando los enunciados,
- * los botones interactivos y la tabla de resultados que se construye dinámicamente
- * mediante Promesas (Promise) y Async/Await.
- * Metodología: Diseño moderno basado en tarjetas (cards), tipografía legible y transiciones suaves.
+ * Propósito: Estilizar la interfaz del "Ejercicio 6: Notas de Cofla", estructurando el enunciado, 
+ * las tarjetas interactivas, la tabla dinámica de asignaturas/calificaciones y las animaciones de visualización.
+ * Metodología: Diseño moderno basado en tarjetas (cards), tipografía legible, Flexbox y transiciones suaves.
  */
 
 /* 
@@ -135,98 +134,9 @@ ol>li::before {
 }
 
 /* 
-   5. COMPONENTES DINÁMICOS Y BOTONES
-   Diseño de los elementos que aparecen tras la interacción con JavaScript.
+   5. BOTONES Y ACCIONES DE INTERACCIÓN
+   Estilización del botón principal (Call To Action) que inicia la consulta asíncrona.
 */
-
-/* 
-   7. ESTILOS DEL FORMULARIO DE SOLUCIÓN
-   Configuramos la apariencia de los campos de entrada y el botón de envío.
-*/
-.ask form {
-    display: flex;                              /* Usa Flexbox para la disposición de los inputs. */
-    flex-direction: column;                     /* Alinea los campos uno debajo del otro. */
-    gap: 15px;                                  /* Espacio uniforme entre los campos del formulario. */
-    margin-top: 20px;                           /* Separación superior. */
-    max-width: 450px;                           /* Ancho máximo para que el formulario no sea demasiado largo. */
-    margin-left: auto;                          /* Centrado horizontal automático. */
-    margin-right: auto;                         /* Centrado horizontal automático. */
-}
-
-
-/* Estilo específico para el botón de enviar (input submit). */
-.ask input[type="submit"] {
-    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); /* Degradado azul vibrante. */
-    color: white;                               /* Texto en color blanco. */
-    padding: 15px;                              /* Relleno interno. */
-    border: none;                               /* Quita el borde por defecto. */
-    border-radius: 14px;                        /* Esquinas redondeadas. */
-    font-weight: 700;                           /* Texto en negrita. */
-    text-transform: uppercase;                  /* Convierte el texto a mayúsculas. */
-    letter-spacing: 1.5px;                      /* Espaciado extra entre letras. */
-    cursor: pointer;                            /* El cursor cambia a mano indicando que es clickeable. */
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); /* Sombra base azulada. */
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con efecto de rebote. */
-}
-
-/* Interacción con el botón de envío. */
-.ask input[type="submit"]:hover {
-    filter: brightness(1.1);                    /* Aclara un poco los colores al pasar el mouse. */
-    transform: translateY(-5px) scale(1.02);    /* Lo eleva y lo agranda mínimamente para dar profundidad. */
-    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4); /* Intensifica la sombra al flotar. */
-}
-
-.ask input[type="submit"]:active {
-    transform: translateY(-2px) scale(0.98);    /* Lo presiona ligeramente al hacer clic real. */
-}
-
-.resultado-msg {
-    margin-top: 25px;                           /* Margen superior. */
-    padding: 20px;                              /* Relleno interior. */
-    border-radius: 15px;                        /* Bordes redondeados. */
-    color: #ffffff;                             /* Color de texto blanco. */
-    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Fondo azul degradado. */
-    font-weight: 700;                           /* Texto en negrita. */
-    font-size: 1.1rem;                          /* Tamaño de letra un poco mayor. */
-    text-align: center;                         /* Centra el mensaje. */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  /* Sombra al texto para mejorar contraste. */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra exterior del mensaje. */
-    animation: mostrarMensaje 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Dispara la animación de entrada. */
-}
-
-.resultado-msg.fadeOut {
-    animation: ocultarMensaje 0.4s ease-in forwards; /* Dispara la animación de salida. */
-}
-
-/* 
-   8. ESTADOS DE RESPUESTA
-*/
-.success {
-    background: linear-gradient(135deg, #10b981 0%, #f0fff4 100%) !important; /* Degradado verde esmeralda. */
-    color: #064e3b !important;                  /* Texto verde muy oscuro para contraste. */
-    text-shadow: none !important;               /* Quita la sombra de texto. */
-}
-
-.success-res{
-    color: #064e3b !important;                  /* Color de texto para el título en caso de éxito. */
-    text-shadow: none !important;               /* Asegura que no tenga sombra. */
-}
-
-.error-res{
-    color: #7f1d1d !important;                  /* Color de texto rojo oscuro para el título en caso de error. */
-    text-shadow: none !important;               /* Asegura que no tenga sombra. */
-}
-
-.error {
-    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important; /* Fondo rojo pálido muy elegante */
-    color: #dc2626 !important;                  /* Letra roja vibrante para máxima claridad de error */
-    border: 1px solid #fecaca;                  /* Borde fino que le da estructura a la caja */
-    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.1); /* Sombra suave rojiza para dar profundidad */
-    text-shadow: none !important;               /* Mantenemos el texto nítido sin sombras */
-    font-weight: 600;                           /* Un poco más de grosor para resaltar el aviso */
-}
-
-/* Botón con estilo "Call to Action" (CTA). */
 button {
     display: inline-flex;                       /* Alineación flexible para el contenido del botón. */
     align-items: center;                        /* Centra el contenido verticalmente. */
@@ -257,90 +167,182 @@ button:active {
     transform: translateY(-2px) scale(0.98);    /* Efecto de "presión" al hacer clic. */
 }
 
-/* Estilizamos la columna de Nombre para darle jerarquía visual. */
-.nombre {
-    font-weight: 700;                           /* Texto en negrita. */
-    color: #1e3a8a !important;                  /* Azul oscuro para resaltar la identidad del alumno. */
+/* 
+   6. TABLA Y PRESENTACIÓN DE MATERIAS DINÁMICAS
+   Estilos específicos del Ejercicio 6 para la tabla que contiene las materias y calificaciones obtenidas.
+*/
+
+/* Contenedor de la solución: inicialmente oculto hasta que JavaScript añade la clase .mostrar */
+.solucion {
+    visibility: hidden;                         /* Oculto visualmente por defecto hasta la interacción. */
+    margin-top: 20px;                           /* Separación superior respecto al bloque anterior. */
+}
+
+.solucion h2 {
+    margin-bottom: 20px;                        /* Margen inferior para separar el título de la lista de materias. */
+}
+
+/* Tabla contenedora de la lista de materias */
+.solucion .materias {
+    width: 90%;                                 /* Ancho relativo al contenedor padre. */
+    background: #ccc;                           /* Fondo gris que actúa como borde/separador entre filas. */
+    padding: 2px;                               /* Espaciado perimetral mínimo para enmarcar las filas. */
+    font-size: 20px;                            /* Tamaño de fuente claro para las materias y notas. */
+    border-radius: 10px;                        /* Bordes redondeados en la tabla general. */
+}
+
+/* Fila individual que agrupa el nombre de la materia y su respectiva nota */
+.solucion .materia {
+    display: flex;                              /* Distribución en fila (Flexbox) para nombre y nota. */
+    background: #efefef;                        /* Fondo gris claro para cada registro. */
+}
+
+/* Celda o división interna dentro de cada fila de materia */
+.materia div {
+    padding: 20px;                              /* Espaciado interno generoso para facilitar la lectura. */
+}
+
+/* Columna del nombre de la materia */
+.materia .nombre {
+    flex-grow: 1;                               /* Se expande para ocupar todo el espacio disponible a la izquierda. */
+    font-weight: 700;                           /* Texto en negrita para jerarquía visual. */
+    color: #1e3a8a !important;                  /* Azul oscuro para resaltar la materia. */
+}
+
+/* Columna de la calificación obtenida */
+.materia .nota {
+    flex-basis: 20px;                           /* Ancho base para la columna de calificaciones. */
+    background: #ddd;                           /* Fondo gris un tono más oscuro para diferenciar la calificación. */
+    font-weight: 700;                           /* Texto en negrita para resaltar el valor numérico. */
 }
 
 /* 
-   6. SISTEMA DE ANIMACIONES (@keyframes)
-   Controlamos la entrada y salida de elementos para que no aparezcan de golpe.
+   7. FORMULARIOS Y MENSAJES DE RESPUESTA
+   Estilos utilitarios para formularios y estados de feedback visual (éxito, error y notificaciones).
 */
-
-/* Clase controlada por JavaScript para mostrar. */
-.mostrar{
-    animation: mostrarMensaje 0.8s ease forwards; /* Llama a la animación de entrada. */
+.ask form {
+    display: flex;                              /* Usa Flexbox para la disposición de los inputs. */
+    flex-direction: column;                     /* Alinea los campos uno debajo del otro. */
+    gap: 15px;                                  /* Espacio uniforme entre los campos del formulario. */
+    margin-top: 20px;                           /* Separación superior. */
+    max-width: 450px;                           /* Ancho máximo para que el formulario no sea demasiado largo. */
+    margin-left: auto;                          /* Centrado horizontal automático. */
+    margin-right: auto;                         /* Centrado horizontal automático. */
 }
 
-/* Clase controlada por JavaScript para ocultar. */
-.ocultar{
+/* Estilo específico para inputs submit en caso de usar formularios. */
+.ask input[type="submit"] {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); /* Degradado azul vibrante. */
+    color: white;                               /* Texto en color blanco. */
+    padding: 15px;                              /* Relleno interno. */
+    border: none;                               /* Quita el borde por defecto. */
+    border-radius: 14px;                        /* Esquinas redondeadas. */
+    font-weight: 700;                           /* Texto en negrita. */
+    text-transform: uppercase;                  /* Convierte el texto a mayúsculas. */
+    letter-spacing: 1.5px;                      /* Espaciado extra entre letras. */
+    cursor: pointer;                            /* El cursor cambia a mano indicando que es clickeable. */
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); /* Sombra base azulada. */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación con efecto de rebote. */
+}
+
+.ask input[type="submit"]:hover {
+    filter: brightness(1.1);                    /* Aclara un poco los colores al pasar el mouse. */
+    transform: translateY(-5px) scale(1.02);    /* Lo eleva y lo agranda mínimamente para dar profundidad. */
+    box-shadow: 0 12px 20px rgba(37, 99, 235, 0.4); /* Intensifica la sombra al flotar. */
+}
+
+.ask input[type="submit"]:active {
+    transform: translateY(-2px) scale(0.98);    /* Lo presiona ligeramente al hacer clic real. */
+}
+
+/* Contenedor genérico para mensajes de resultado */
+.resultado-msg {
+    margin-top: 25px;                           /* Margen superior. */
+    padding: 20px;                              /* Relleno interior. */
+    border-radius: 15px;                        /* Bordes redondeados. */
+    color: #ffffff;                             /* Color de texto blanco. */
+    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Fondo azul degradado. */
+    font-weight: 700;                           /* Texto en negrita. */
+    font-size: 1.1rem;                          /* Tamaño de letra un poco mayor. */
+    text-align: center;                         /* Centra el mensaje. */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);  /* Sombra al texto para mejorar contraste. */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra exterior del mensaje. */
+    animation: mostrarMensaje 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; /* Dispara la animación de entrada. */
+}
+
+.resultado-msg.fadeOut {
+    animation: ocultarMensaje 0.4s ease-in forwards; /* Dispara la animación de salida. */
+}
+
+/* Estado de éxito */
+.success {
+    background: linear-gradient(135deg, #10b981 0%, #f0fff4 100%) !important; /* Degradado verde esmeralda. */
+    color: #064e3b !important;                  /* Texto verde muy oscuro para contraste. */
+    text-shadow: none !important;               /* Quita la sombra de texto. */
+}
+
+.success-res {
+    color: #064e3b !important;                  /* Color de texto para el título en caso de éxito. */
+    text-shadow: none !important;               /* Asegura que no tenga sombra. */
+}
+
+/* Estado de error */
+.error {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%) !important; /* Fondo rojo pálido muy elegante. */
+    color: #dc2626 !important;                  /* Letra roja vibrante para máxima claridad de error. */
+    border: 1px solid #fecaca;                  /* Borde fino que le da estructura a la caja. */
+    box-shadow: 0 8px 16px rgba(220, 38, 38, 0.1); /* Sombra suave rojiza para dar profundidad. */
+    text-shadow: none !important;               /* Mantenemos el texto nítido sin sombras. */
+    font-weight: 600;                           /* Un poco más de grosor para resaltar el aviso. */
+}
+
+.error-res {
+    color: #7f1d1d !important;                  /* Color de texto rojo oscuro para el título en caso de error. */
+    text-shadow: none !important;               /* Asegura que no tenga sombra. */
+}
+
+/* 
+   8. SISTEMA DE ANIMACIONES (@keyframes)
+   Controlamos la entrada suave y salida de elementos para que aparezcan de forma fluida.
+*/
+
+/* Clase controlada por JavaScript para activar la animación de entrada */
+.mostrar {
+    animation: mostrarMensaje 0.8s ease forwards; /* Llama a la animación de entrada y preserva su estado final. */
+}
+
+/* Clase controlada por JavaScript para activar la animación de salida */
+.ocultar {
     animation: ocultarMensaje 0.6s ease forwards; /* Llama a la animación de salida. */
 }
 
-/* Estilos para la sección de solución (inicialmente oculta) */
-.solucion {
-    visibility: hidden;
-    margin-top: 20px;
-}
-
-.solucion h2{
-    margin-bottom: 20px;
-}
-.solucion .materias{
-    width: 90%;
-    background: #ccc;
-    padding: 2px;
-    font-size: 20px;
-    border-radius: 10px;
-}
-
-.solucion .materia{
-    display: flex;
-    background: #efefef;
-}
-
-.materia div{
-    padding: 20px;
-}
-
-.materia .nota{
-    flex-basis: 20px;
-    background: #ddd;
-    font-weight: 700;
-}
-
-.materia .nombre{
-    flex-grow: 1;
-}
-
-/* Animación de entrada: Viene de arriba, pequeño y transparente hacia su estado normal. */
+/* Animación de entrada: desciende sutilmente con opacidad y un ligero efecto elástico */
 @keyframes mostrarMensaje {
-    0%{
+    0% {
         opacity: 0;                              /* Invisible al inicio. */
         transform: translateY(-30px) scale(0.8); /* Posicionado arriba y más pequeño. */
     }
-    70%{                                         /* Efecto de rebote. */
-        transform: translateY(5px) scale(1.02);  /* Baja un poco más de su lugar y se agranda un poco. */
+    70% {                                         /* Efecto de rebote elástico. */
+        transform: translateY(5px) scale(1.02);  /* Baja un poco más de su lugar y se agranda ligeramente. */
     }
-    100%{
+    100% {
         opacity: 1;                              /* Visible al 100%. */
-        transform: translateY(0) scale(1);       /* Posición y tamaño final estable. */
-        visibility: visible;                     /* Asegura que el elemento sea interactuable. */
+        transform: translateY(0) scale(1);       /* Posición y escala finales estables. */
+        visibility: visible;                     /* Asegura que el elemento sea interactuable y visible. */
     }
 }
 
-/* Animación de salida: El elemento se encoge y sube mientras desaparece. */
+/* Animación de salida: el elemento se encoge y sube mientras desaparece gradualmente */
 @keyframes ocultarMensaje {
-    0%{
+    0% {
         opacity: 1;                              /* Visible al inicio. */
         transform: translateY(0) scale(1);       /* Estado normal. */
     }
-    30%{
+    30% {
         transform: translateY(5px) scale(1.02);  /* Rebote sutil antes de irse. */
     }
-    100%{
+    100% {
         opacity: 0;                              /* Se desvanece por completo. */
-        transform: translateY(-30px) scale(0.8); /* Sube y se hace pequeño. */
+        transform: translateY(-30px) scale(0.8); /* Sube y se reduce de tamaño. */
     }
 }
