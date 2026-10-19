@@ -1,0 +1,286 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador web -->
+<html lang="es"> <!-- Apertura del elemento raíz HTML con idioma español configurado -->
+<head> <!-- Sección de cabecera con metadatos técnicos y enlaces a recursos externos -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres estándar UTF-8 para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste responsivo de la escala inicial para pantallas móviles y de escritorio -->
+    <title>🌐 Laboratorio de AJAX y XMLHttpRequest en JavaScript | Guía Interactiva</title> <!-- Título descriptivo para la pestaña del navegador -->
+    <meta name="description" content="Aprende y domina AJAX y XMLHttpRequest en JavaScript: ciclo readyState, peticiones GET y POST, FormData, compatibilidad ActiveXObject y servidores locales."> <!-- Metadato SEO descriptivo para motores de búsqueda -->
+    <meta property="og:title" content="Laboratorio de AJAX y XMLHttpRequest en JavaScript"> <!-- Título para compartir en redes sociales mediante el protocolo Open Graph -->
+    <meta property="og:description" content="Simulador interactivo y visual de AJAX, el objeto XMLHttpRequest, estados de readyState y envío con FormData en JS."> <!-- Descripción para redes sociales -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseño visual moderno y tema oscuro -->
+</head> <!-- Cierre de la sección de cabecera -->
+<body> <!-- Apertura del cuerpo del documento que contiene todos los componentes visuales e interactivos -->
+    <main class="container"> <!-- Contenedor centralizado con estilos responsivos y efectos de transparencia -->
+        <header class="glass-header"> <!-- Encabezado principal estilizado con efecto cristal y degradados modernos -->
+            <h1>🌐 AJAX y XMLHttpRequest en JavaScript</h1> <!-- Título principal del laboratorio interactivo de AJAX -->
+            <p>Laboratorio interactivo de carga asíncrona de datos en segundo plano sin recargar la página</p> <!-- Subtítulo explicativo del proyecto pedagógico -->
+        </header> <!-- Cierre del encabezado principal -->
+
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+            <button class="tab-btn active" id="tabReadyState" data-target="readystate-tab">Ciclo readyState &amp; Eventos</button> <!-- Botón para activar la pestaña del ciclo de vida y eventos XHR -->
+            <button class="tab-btn" id="tabFormData" data-target="formdata-tab">ActiveXObject &amp; FormData</button> <!-- Botón para activar la pestaña de compatibilidad histórica y FormData -->
+        </nav> <!-- Cierre de la barra de navegación de pestañas -->
+
+        <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
+            <div class="status-badge">Laboratorio AJAX Activo</div> <!-- Insignia superior que indica el estado operativo del simulador -->
+
+            <!-- Etiqueta Informativa de Servidor Local XAMPP -->
+            <label class="xampp-info-label"> <!-- Etiqueta interactiva informativa para recordar la ruta de trabajo en el servidor local -->
+                <span class="xampp-icon">📁</span> <!-- Icono de carpeta de archivos para representar el directorio del servidor local -->
+                <div class="xampp-content"> <!-- Contenedor de los textos informativos de la etiqueta -->
+                    <span class="xampp-title">Servidor Local XAMPP Requerido</span> <!-- Título distintivo de la etiqueta informativa -->
+                    <span class="xampp-text">Revisar en <strong>XAMPP</strong> <code>htdocs</code> la carpeta <code>codigo</code> para los archivos del backend</span> <!-- Texto explicativo con la ruta de la carpeta de código en htdocs -->
+                </div> <!-- Cierre del contenedor de textos -->
+            </label> <!-- Cierre de la etiqueta informativa de XAMPP -->
+
+            <!-- Pestaña 1: Ciclo readyState & Eventos XHR -->
+            <div id="readystate-tab" class="tab-content"> <!-- Contenedor de la pestaña del ciclo de vida y eventos de XMLHttpRequest -->
+                <h2>¿Qué es AJAX y cómo funciona XMLHttpRequest?</h2> <!-- Título explicativo de la primera sección conceptual -->
+                <p><strong>AJAX</strong> (<em>Asynchronous JavaScript And XML</em>) es un conjunto de técnicas de desarrollo web que permite a las aplicaciones solicitar o enviar datos a un servidor en segundo plano y actualizar secciones específicas del DOM <strong>sin necesidad de recargar la página completa</strong>.</p> <!-- Párrafo sobre el concepto y utilidad de AJAX -->
+                <p>El corazón tradicional de AJAX es el objeto <code>XMLHttpRequest</code> (XHR). Al instanciarlo, este objeto pasa por <strong>5 estados progresivos</strong> representados por la propiedad <code>readyState</code> (desde <code>0</code> hasta <code>4</code>). En los inicios de la web se capturaba el evento <code>onreadystatechange</code> evaluando si se alcanzaba el estado final <code>4 (DONE)</code>, mientras que los estándares modernos permiten usar el evento directo <code>onload</code>.</p> <!-- Explicación del funcionamiento de XHR y sus eventos -->
+
+                <!-- Analogía Didáctica del Mensajero de Correspondencia -->
+                <div class="messenger-box"> <!-- Tarjeta destacada con la analogía del mensajero para afianzar el concepto -->
+                    <div class="messenger-icon">📬</div> <!-- Icono de buzón y correspondencia -->
+                    <div class="messenger-content"> <!-- Contenedor de los textos de la analogía -->
+                        <h3>La Analogía del Mensajero de Oficina</h3> <!-- Título de la analogía didáctica -->
+                        <p>Creas al mensajero (<code>new XMLHttpRequest()</code>), le indicas a dónde ir y qué traer (<code>xhr.open()</code>), dejas una nota en tu puerta con instrucciones para cuando él vuelva (<code>xhr.onload</code>), y le ordenas salir a la calle (<code>xhr.send()</code>). Mientras él viaja tú sigues trabajando en tu computadora sin pausar tu actividad (<strong>Asincronía</strong>).</p> <!-- Descripción paso a paso de la analogía -->
+                    </div> <!-- Cierre del contenido de la analogía -->
+                </div> <!-- Cierre de la tarjeta del mensajero -->
+
+                <div class="spam-alert"> <!-- Cuadro de advertencia técnica sobre entornos locales y errores de CORS -->
+                    <span>⚠️</span> <!-- Icono de advertencia de seguridad -->
+                    <p><strong>Requisito de Servidor Local:</strong> Las peticiones AJAX fallarán por políticas de seguridad (CORS) si abres este archivo con doble clic directo (<code>file:///C:/...</code>). Debes utilizar un servidor local como <strong>Live Server</strong> en VS Code o <code>http-server</code> en Node.js.</p> <!-- Explicación sobre la necesidad de usar un servidor local -->
+                </div> <!-- Cierre del cuadro de alerta informativa -->
+
+                <div class="demo-panel"> <!-- Panel interactivo con controles de configuración para probar peticiones AJAX -->
+                    <div class="controls-row"> <!-- Fila contenedora para organizar los selectores de control en paralelo -->
+                        <div class="control-group"> <!-- Grupo de control para configurar la petición y endpoint -->
+                            <label for="ajaxEndpointSelect">Petición / Endpoint a Probar</label> <!-- Etiqueta descriptiva del selector de endpoint -->
+                            <select id="ajaxEndpointSelect" class="form-select"> <!-- Lista desplegable con endpoints y métodos simulados -->
+                                <option value="get-users" selected>GET /api/usuarios (Lista - Responde 200 OK)</option> <!-- Petición GET para colección general -->
+                                <option value="get-user-1">GET /api/usuarios/1 (Detalle - Responde 200 OK)</option> <!-- Petición GET para recurso individual -->
+                                <option value="post-json">POST /api/usuarios (JSON Body - Responde 201 Created)</option> <!-- Petición POST con cabecera Content-Type JSON -->
+                                <option value="get-error">GET /api/recurso-inexistente (Error 404 Not Found)</option> <!-- Petición que fuerza código de error 404 -->
+                            </select> <!-- Cierre del selector de endpoint -->
+                        </div> <!-- Cierre del grupo de endpoint -->
+
+                        <div class="control-group"> <!-- Grupo de control para elegir la técnica de escucha del evento -->
+                            <label for="eventSelect">Técnica de Escucha</label> <!-- Etiqueta descriptiva del método de escucha de eventos -->
+                            <select id="eventSelect" class="form-select"> <!-- Lista desplegable con eventos clásico y moderno -->
+                                <option value="onload" selected>xhr.onload (XHR Nivel 2 Moderno)</option> <!-- Opción moderna que dispara solo al terminar -->
+                                <option value="onreadystatechange">xhr.onreadystatechange (Forma Clásica: readyState 4)</option> <!-- Opción clásica que monitorea cada estado -->
+                            </select> <!-- Cierre del selector de evento -->
+                        </div> <!-- Cierre del grupo de evento -->
+
+                        <div class="control-group"> <!-- Grupo de control para configurar la latencia simulada -->
+                            <label for="ajaxDelaySelect">Latencia de Red (ms)</label> <!-- Etiqueta descriptiva del retardo de conexión -->
+                            <select id="ajaxDelaySelect" class="form-select"> <!-- Lista desplegable con velocidades de simulación -->
+                                <option value="500">500 ms (Rápida)</option> <!-- Latencia baja -->
+                                <option value="1500" selected>1500 ms (Estándar)</option> <!-- Latencia media típica -->
+                                <option value="3000">3000 ms (Lenta / Conexión Móvil)</option> <!-- Latencia alta para apreciar las fases -->
+                            </select> <!-- Cierre del selector de latencia -->
+                        </div> <!-- Cierre del grupo de latencia -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="sendAjaxBtn">Enviar Petición AJAX 📡</button> <!-- Botón interactivo para disparar la petición XMLHttpRequest -->
+
+                    <div class="promise-visualizer"> <!-- Monitor visual de progreso y estado del tráfico AJAX -->
+                        <div class="visualizer-header">Monitor de Comunicación XMLHttpRequest</div> <!-- Título del monitor visual de red -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto de estado -->
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div> <!-- Círculo indicador de estado dinámico (idle, pending, fulfilled, rejected) -->
+                            <span id="promiseStateText" class="state-idle-text">En espera de emitir llamada AJAX...</span> <!-- Texto descriptivo del estado actual -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de fondo para la barra de carga de transferencia -->
+                            <div id="progressBar" class="progress-bar"></div> <!-- Barra interna de progreso que muestra el avance en tiempo real -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor de comunicación -->
+
+                    <div class="output-box"> <!-- Caja contenedora de la respuesta recibida mediante AJAX -->
+                        <p id="result">Presiona "Enviar Petición AJAX" para consultar el recurso...</p> <!-- Texto principal con la respuesta del servidor o mensaje de error -->
+                        <p id="demoNote">Estado XHR: Inactivo | readyState: 0 (UNSENT)</p> <!-- Nota secundaria con el código de estado y readyState -->
+                    </div> <!-- Cierre de la caja de respuestas -->
+
+                    <!-- Visualizador de Pasos (Timeline de las 5 Fases de readyState) -->
+                    <div class="steps-timeline"> <!-- Contenedor de la línea de tiempo vertical para mostrar las transiciones de readyState -->
+                        <!-- Paso 1: UNSENT y OPENED -->
+                        <div class="timeline-step" id="step1"> <!-- Componente contenedor del paso 1 -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical -->
+                                <div class="step-circle state-idle" id="step1Circle">1</div> <!-- Círculo con el número 1 indicando la apertura -->
+                                <div class="step-line"></div> <!-- Línea vertical conectora hacia el paso 2 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 1 -->
+                                <div class="step-title">readyState 1: OPENED (xhr.open)</div> <!-- Título del paso mostrando el método de inicialización -->
+                                <div class="step-desc">Se instancia el objeto (estado 0: UNSENT) y se llama a xhr.open() indicando método y endpoint (estado 1).</div> <!-- Explicación detallada de la fase OPENED -->
+                                <div class="step-status-text state-idle-text" id="step1Status">En espera...</div> <!-- Estado en tiempo real del primer paso -->
+                            </div> <!-- Cierre de la información del paso 1 -->
+                        </div> <!-- Cierre del componente paso 1 -->
+
+                        <!-- Paso 2: HEADERS_RECEIVED & LOADING -->
+                        <div class="timeline-step" id="step2"> <!-- Componente contenedor del paso 2 -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical -->
+                                <div class="step-circle state-idle" id="step2Circle">2</div> <!-- Círculo con el número 2 indicando el envío y descarga -->
+                                <div class="step-line"></div> <!-- Línea vertical conectora hacia el paso 3 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 2 -->
+                                <div class="step-title">readyState 2 y 3: HEADERS_RECEIVED &amp; LOADING (xhr.send)</div> <!-- Título del paso mostrando la transmisión física -->
+                                <div class="step-desc">El mensaje se envía a la red (send). Se reciben las cabeceras HTTP del servidor (estado 2) y se descarga el paquete (estado 3).</div> <!-- Explicación de los estados 2 y 3 -->
+                                <div class="step-status-text state-idle-text" id="step2Status">En espera...</div> <!-- Estado en tiempo real del segundo paso -->
+                            </div> <!-- Cierre de la información del paso 2 -->
+                        </div> <!-- Cierre del componente paso 2 -->
+
+                        <!-- Paso 3: DONE -->
+                        <div class="timeline-step" id="step3"> <!-- Componente contenedor del paso 3 -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo del paso 3 (sin línea descendente) -->
+                                <div class="step-circle state-idle" id="step3Circle">3</div> <!-- Círculo con el número 3 indicando la culminación -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 3 -->
+                                <div class="step-title">readyState 4: DONE (xhr.status 200/201 &amp; responseText)</div> <!-- Título del paso mostrando la finalización de la petición -->
+                                <div class="step-desc">Operación completada al 100%. Los datos están listos en xhr.responseText y el evento onload o onreadystatechange se ejecuta.</div> <!-- Explicación del estado DONE -->
+                                <div class="step-status-text state-idle-text" id="step3Status">En espera...</div> <!-- Estado en tiempo real del tercer paso -->
+                            </div> <!-- Cierre de la información del paso 3 -->
+                        </div> <!-- Cierre del componente paso 3 -->
+                    </div> <!-- Cierre de la línea de tiempo de pasos -->
+                </div> <!-- Cierre del panel de demostración interactiva -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código para comparar las dos formas de captura -->
+                    <div class="code-header">Comparativa técnica: onreadystatechange (Clásica) vs onload (Moderna):</div> <!-- Cabecera del bloque de código -->
+                    <pre><code id="codeBlock">// 1. FORMA CLÁSICA (Histórica con readyState):
+const xhrAntiguo = new XMLHttpRequest();
+xhrAntiguo.open("GET", "/api/usuarios", true);
+xhrAntiguo.onreadystatechange = function() {
+    // Es obligatorio evaluar manualmente si se alcanzó el estado final 4
+    if (xhrAntiguo.readyState === 4 && xhrAntiguo.status === 200) {
+        const datos = JSON.parse(xhrAntiguo.responseText);
+        console.log("Datos recibidos:", datos);
+    }
+};
+xhrAntiguo.send();
+
+// 2. FORMA MODERNA (XHR Nivel 2 con onload):
+const xhrModerno = new XMLHttpRequest();
+xhrModerno.open("GET", "/api/usuarios");
+// onload solo se dispara automáticamente cuando la operación ya culminó (estado DONE)
+xhrModerno.onload = function() {
+    if (xhrModerno.status === 200) {
+        console.log("Respuesta lista:", JSON.parse(xhrModerno.responseText));
+    }
+};
+xhrModerno.send();</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 1 -->
+
+            <!-- Pestaña 2: ActiveXObject & FormData -->
+            <div id="formdata-tab" class="tab-content hidden"> <!-- Contenedor de la pestaña de compatibilidad histórica y FormData -->
+                <h2>Compatibilidad Histórica (ActiveXObject) y Formularios (FormData)</h2> <!-- Título descriptivo de la segunda pestaña -->
+                <p>En los inicios de los años 2000, la técnica AJAX fue inventada por Microsoft e introducida en Internet Explorer 5 a través de un control propietario llamado <code>ActiveXObject("Microsoft.XMLHTTP")</code>. Para que una página funcionara en cualquier navegador antiguo, era obligatorio usar una condición de detección cruzada:</p> <!-- Explicación histórica del origen de AJAX en Internet Explorer -->
+
+                <div class="code-preview" style="margin-bottom: 1.5rem;"> <!-- Bloque de código con la detección histórica de ActiveXObject -->
+                    <div class="code-header">Detección universal de compatibilidad histórica:</div> <!-- Cabecera del bloque -->
+                    <pre><code>// Patrón canónico de compatibilidad multiplataforma de principios de los 2000:
+var xhr;
+if (window.XMLHttpRequest) {
+    xhr = new XMLHttpRequest(); // Navegadores estándar (Mozilla, Safari, Chrome, IE7+)
+} else {
+    xhr = new ActiveXObject("Microsoft.XMLHTTP"); // Internet Explorer 5 y 6
+}</code></pre> <!-- Código JavaScript de compatibilidad histórica -->
+                </div> <!-- Cierre del bloque de código -->
+
+                <h2>Envío de Formularios Dinámicos con FormData</h2> <!-- Subtítulo para la sección de FormData -->
+                <p>Construir cadenas JSON manualmente al enviar formularios con muchos campos puede ser propenso a errores. El objeto nativo <code>FormData</code> compila automáticamente los campos en pares clave-valor (formato <code>multipart/form-data</code>).</p> <!-- Párrafo sobre la utilidad de FormData -->
+
+                <div class="spam-alert"> <!-- Cuadro de consejo de oro técnico para desarrolladores -->
+                    <span>⭐</span> <!-- Icono de estrella dorada -->
+                    <p><strong>Regla de Oro:</strong> Al enviar un objeto <code>FormData</code> con <code>xhr.send(formData)</code>, <strong>NUNCA</strong> debes configurar manualmente la cabecera <code>Content-Type</code>. El navegador la calcula automáticamente junto con el delimitador (<em>boundary</em>) del paquete.</p> <!-- Consejo técnico sobre Content-Type en FormData -->
+                </div> <!-- Cierre del cuadro de alerta informativa -->
+
+                <!-- Formulario Simulado con FormData -->
+                <div class="demo-panel"> <!-- Panel de demostración interactiva con formulario dinámico -->
+                    <div class="db-title">Formulario de Registro Asíncrono (Sin recarga de pantalla)</div> <!-- Título del formulario interactivo -->
+                    
+                    <form id="ajaxForm" onsubmit="return false;"> <!-- Elemento formulario con envío bloqueado para gestionar por AJAX -->
+                        <div class="form-row"> <!-- Fila de campos de formulario -->
+                            <div class="control-group"> <!-- Grupo de control para el nombre del usuario -->
+                                <label for="inputNombre">Nombre Completo</label> <!-- Etiqueta descriptiva del nombre -->
+                                <input type="text" id="inputNombre" class="form-input" placeholder="Ej: Diana Prince" value="Diana Prince"> <!-- Campo de entrada de texto -->
+                            </div> <!-- Cierre del grupo de nombre -->
+
+                            <div class="control-group"> <!-- Grupo de control para el correo del usuario -->
+                                <label for="inputCorreo">Correo Electrónico</label> <!-- Etiqueta descriptiva del correo -->
+                                <input type="email" id="inputCorreo" class="form-input" placeholder="diana@correo.com" value="diana@correo.com"> <!-- Campo de entrada de email -->
+                            </div> <!-- Cierre del grupo de correo -->
+                        </div> <!-- Cierre de la fila de campos -->
+
+                        <div class="form-row"> <!-- Segunda fila de controles del formulario -->
+                            <div class="control-group"> <!-- Grupo de control para el rol profesional -->
+                                <label for="inputRol">Especialidad / Perfil</label> <!-- Etiqueta descriptiva de la especialidad -->
+                                <select id="inputRol" class="form-select"> <!-- Lista desplegable de perfiles disponibles -->
+                                    <option value="Arquitecta de Software" selected>Arquitecta de Software</option> <!-- Opción 1 -->
+                                    <option value="Desarrolladora Fullstack">Desarrolladora Fullstack</option> <!-- Opción 2 -->
+                                    <option value="Ingeniera DevOps">Ingeniera DevOps</option> <!-- Opción 3 -->
+                                </select> <!-- Cierre del selector de perfil -->
+                            </div> <!-- Cierre del grupo de perfil -->
+                        </div> <!-- Cierre de la segunda fila -->
+
+                        <button class="btn" id="sendFormDataBtn" style="margin-top: 0.5rem;">Enviar con FormData y POST 📤</button> <!-- Botón para emitir el formulario dinámico -->
+                    </form> <!-- Cierre del formulario -->
+
+                    <!-- Base de Datos en Memoria que se Actualiza en Tiempo Real -->
+                    <div class="db-section" style="margin-top: 1.5rem;"> <!-- Sección para visualizar los registros del servidor remoto -->
+                        <div class="db-title">Base de Datos del Servidor (Se actualiza en vivo con AJAX sin refrescar)</div> <!-- Título explicativo de la tabla de datos -->
+                        <div class="db-container"> <!-- Contenedor con borde y fondo oscuro para la tabla -->
+                            <table class="db-table"> <!-- Estructura de tabla para mostrar registros del servidor -->
+                                <thead> <!-- Cabecera de columnas de la tabla -->
+                                    <tr> <!-- Fila de la cabecera -->
+                                        <th>ID</th> <!-- Columna del identificador numérico de cada registro -->
+                                        <th>Nombre</th> <!-- Columna del nombre del usuario -->
+                                        <th>Correo</th> <!-- Columna del correo de contacto -->
+                                        <th>Especialidad</th> <!-- Columna con el rol o profesión -->
+                                    </tr> <!-- Cierre de la fila de cabecera -->
+                                </thead> <!-- Cierre de la cabecera de la tabla -->
+                                <tbody id="ajaxDbTableBody"> <!-- Cuerpo de la tabla que contiene los registros que se llenan en tiempo real -->
+                                    <tr id="ajax-row-0"> <!-- Registro inicial 0 -->
+                                        <td>0</td> <!-- Celda de ID 0 -->
+                                        <td>Fredy</td> <!-- Celda de nombre Fredy -->
+                                        <td>fredy@correo.com</td> <!-- Celda de correo -->
+                                        <td>Desarrollador Web</td> <!-- Celda de especialidad -->
+                                    </tr> <!-- Cierre de fila 0 -->
+                                    <tr id="ajax-row-1"> <!-- Registro inicial 1 -->
+                                        <td>1</td> <!-- Celda de ID 1 -->
+                                        <td>Ana</td> <!-- Celda de nombre Ana -->
+                                        <td>ana@correo.com</td> <!-- Celda de correo -->
+                                        <td>Arquitecta Cloud</td> <!-- Celda de especialidad -->
+                                    </tr> <!-- Cierre de fila 1 -->
+                                </tbody> <!-- Cierre del cuerpo de la tabla -->
+                            </table> <!-- Cierre de la tabla de registros -->
+                        </div> <!-- Cierre del contenedor de la tabla -->
+                    </div> <!-- Cierre de la sección de base de datos -->
+
+                    <div class="output-box"> <!-- Caja contenedora de la respuesta del envío con FormData -->
+                        <p id="formResult">Diligencia los campos y presiona "Enviar con FormData" para actualizar la tabla...</p> <!-- Texto principal con el resultado del envío -->
+                        <p id="formDemoNote">Formulario: Listo | Petición AJAX pendiente</p> <!-- Nota secundaria con el diagnóstico del envío -->
+                    </div> <!-- Cierre de la caja de resultados -->
+
+                    <!-- Consola Terminal Virtual de AJAX (XHR Inspector) -->
+                    <div class="virtual-terminal"> <!-- Contenedor con diseño de consola terminal para inspeccionar los logs de AJAX -->
+                        <div class="terminal-header"> <!-- Cabecera de la ventana de la terminal con controles de estilo moderno -->
+                            <div class="terminal-dots"> <!-- Contenedor para los círculos de control de la ventana -->
+                                <div class="terminal-dot dot-close"></div> <!-- Botón circular rojo (cerrar ventana) -->
+                                <div class="terminal-dot dot-min"></div> <!-- Botón circular amarillo (minimizar ventana) -->
+                                <div class="terminal-dot dot-max"></div> <!-- Botón circular verde (maximizar ventana) -->
+                            </div> <!-- Cierre de los círculos de control -->
+                            <div class="terminal-title">CONSOLA AJAX — XHR &amp; FORMDATA INSPECTOR</div> <!-- Título central de la consola de inspección de AJAX -->
+                        </div> <!-- Cierre de la cabecera de la terminal -->
+                        <div class="terminal-body" id="ajaxTerminal"> <!-- Cuerpo de la terminal con soporte de desplazamiento para mostrar logs de red -->
+                            <div class="terminal-line info"><span class="terminal-prompt">&gt;</span>[AJAX Engine] Monitor de tráfico XHR inicializado. Listo para registrar eventos.</div> <!-- Mensaje inicial informando que el motor está preparado -->
+                        </div> <!-- Cierre del cuerpo de la terminal -->
+                    </div> <!-- Cierre de la consola terminal virtual -->
+                </div> <!-- Cierre del panel de demostración de FormData -->
+            </div> <!-- Cierre de la Pestaña 2 -->
+        </section> <!-- Cierre de la sección de tarjeta principal -->
+    </main> <!-- Cierre del contenedor principal -->
+
+    <script src="main.js"></script> <!-- Carga el archivo de script principal main.js al final del body para no retrasar el renderizado visual -->
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->
