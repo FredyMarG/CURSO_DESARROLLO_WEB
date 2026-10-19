@@ -1,8 +1,9 @@
 /*
- * LABORATORIO: VISUALIZACIÓN DINÁMICA DE DATOS
- * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web copy/style.css
- * Propósito: Estilizar la interfaz del "Ejercicio 3", manejando la presentación de enunciados, 
- * formularios y la lógica visual de animaciones para mensajes de respuesta.
+ * LABORATORIO: ASINCRONISMO Y RENDIMIENTO
+ * Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/style.css
+ * Propósito: Estilizar la interfaz del "Ejercicio 6", presentando los enunciados,
+ * los botones interactivos y la tabla de resultados que se construye dinámicamente
+ * mediante Promesas (Promise) y Async/Await.
  * Metodología: Diseño moderno basado en tarjetas (cards), tipografía legible y transiciones suaves.
  */
 

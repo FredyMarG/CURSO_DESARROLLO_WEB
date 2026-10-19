@@ -1,52 +1,53 @@
 <!doctype html>
 <!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html
-     Título: Ejercicio 5
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html
+     Título: Ejercicio 6: Notas de Cofla
+     Propósito: Estructura semántica para la presentación del problema y el contenedor dinámico de asignaturas y calificaciones recuperadas de un servidor simulado.
+     Relación: Enlaza con style.css para el diseño y animaciones, y con main.js para la lógica asíncrona mediante Promesas y Async/Await.
 -->
 <!-- CURSO_WEB_HTML_STRUCT v1 -->
-
 
 <html lang="es"> <!-- Define el idioma principal del documento como español para accesibilidad y SEO. -->
 
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres para evitar problemas con tildes y eñes. -->
-    <link rel="stylesheet" href="style.css" /> <!-- Enlaza el archivo CSS externo para aplicar estilos a la página. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura la vista para dispositivos móviles, asegurando responsividad. -->
-    <title>Ejercicio 6</title> <!-- Define el título que aparece en la pestaña del navegador. -->
+    <!-- Cabecera (head): metadatos técnicos, título de la pestaña y enlaces a hojas de estilo externas -->
+    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres UTF-8 para admitir acentos y caracteres especiales. -->
+    <link rel="stylesheet" href="style.css" /> <!-- Enlaza los estilos CSS para la interfaz, tarjetas y animaciones. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Asegura un escalado y diseño responsivo en dispositivos móviles. -->
+    <title>Ejercicio 6 - Notas de Cofla</title> <!-- Título visible en la pestaña del navegador. -->
 </head>
 
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <!-- Cuerpo del documento (body): contiene todos los elementos visuales e interactivos de la aplicación -->
 
-    <div class="enunciado"> <!-- Contenedor principal para el enunciado del ejercicio. -->
-        <h1 class="title">Ejercicio 6</h1> <!-- Título principal del ejercicio, con una clase para estilos. -->
-        <p> <!-- Párrafo que describe la situación del ejercicio. -->
+    <!-- TARJETA 1: Contexto y enunciado del ejercicio -->
+    <div class="enunciado"> <!-- Contenedor principal del enunciado con diseño tipo tarjeta. -->
+        <h1 class="title">Ejercicio 6</h1> <!-- Título principal del ejercicio. -->
+        <p> <!-- Descripción del escenario de Cofla y la necesidad de consultar datos en otro servidor. -->
            Cofla esta en su último año y necesita recuperar todas sus notas para que le puedan decir si efectivamente pasó al último semestre, de ser así... cofla ya estaría a un solo paso de finalizar su carrera como ingeniero! peeero, hay un problema: estas notas estan almacenadas en otro servidor.
         </p>
-        <ol type="A"> <!-- Lista ordenada con tipo de numeración alfabética (A, B, C...). -->
-            <li> <!-- Primer elemento de la lista. -->
+        <ol type="A"> <!-- Lista ordenada con incisos alfabéticos que detalla los requisitos a resolver. -->
+            <li> <!-- Requisito principal: almacenamiento y presentación ordenada. -->
                 Crear un sistema que almacene toda la información de las materias y las muestre en pantalla de forma ordenada
             </li>
         </ol>
     </div>
 
-    <div class="ask"> <!-- Sección para la pregunta o interacción inicial. -->
-        <p>Realizaremos una tabla donde veremos la materia y la nota de Cofla</p>
-        <button class="aceptar" id="aceptar">👀 Solución</button>
+    <!-- TARJETA 2: Sección de interacción previa -->
+    <div class="ask"> <!-- Contenedor para el llamado a la acción inicial. -->
+        <p>Realizaremos una tabla donde veremos la materia y la nota de Cofla</p> <!-- Mensaje explicativo. -->
+        <button class="aceptar" id="aceptar">👀 Solución</button> <!-- Botón disparador que activa la consulta asíncrona en main.js. -->
     </div>
 
-    <div id="solucion" class="solucion"> <!-- Sección del formulario -->
-        <div class="materias">
-            <h2>Notas Cofla</h2>
-            
+    <!-- TARJETA 3: Sección de resultados (Solución) -->
+    <div id="solucion" class="solucion"> <!-- Panel inicialmente oculto que se visualiza con animación al hacer clic en el botón. -->
+        <div class="materias"> <!-- Contenedor en el cual main.js insertará dinámicamente las filas de cada materia y calificación. -->
+            <h2>Notas Cofla</h2> <!-- Encabezado de la tabla de calificaciones. -->
         </div>
     </div>
 
-    <script src="main.js"></script> <!-- Enlaza el archivo JavaScript externo para la lógica interactiva. -->
+    <!-- Carga del archivo JavaScript al final del body para garantizar que todo el DOM esté disponible antes de ejecutar la lógica -->
+    <script src="main.js"></script>
 
 </body>
 
