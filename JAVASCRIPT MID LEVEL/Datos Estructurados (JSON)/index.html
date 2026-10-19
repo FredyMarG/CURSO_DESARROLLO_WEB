@@ -1,0 +1,264 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador web -->
+<html lang="es"> <!-- Apertura del elemento raíz HTML con idioma español configurado -->
+<head> <!-- Sección de cabecera con metadatos técnicos y enlaces a recursos externos -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres estándar UTF-8 para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste responsivo de la escala inicial para pantallas móviles y de escritorio -->
+    <title>📦 Laboratorio de Datos Estructurados (JSON) en JavaScript | Guía Interactiva</title> <!-- Título descriptivo para la pestaña del navegador -->
+    <meta name="description" content="Aprende y domina los Datos Estructurados (JSON) en JavaScript: JSON.stringify, JSON.parse, serialización, tipos de datos compatibles y validación de sintaxis."> <!-- Metadato SEO descriptivo para motores de búsqueda -->
+    <meta property="og:title" content="Laboratorio de Datos Estructurados (JSON) en JavaScript"> <!-- Título para compartir en redes sociales mediante el protocolo Open Graph -->
+    <meta property="og:description" content="Simulador interactivo y visual de JSON.parse(), JSON.stringify() y serialización de datos estructurados en JS."> <!-- Descripción para redes sociales -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseño visual moderno y tema oscuro -->
+</head> <!-- Cierre de la sección de cabecera -->
+<body> <!-- Apertura del cuerpo del documento que contiene todos los componentes visuales e interactivos -->
+    <main class="container"> <!-- Contenedor centralizado con estilos responsivos y efectos de transparencia -->
+        <header class="glass-header"> <!-- Encabezado principal estilizado con efecto cristal y degradados modernos -->
+            <h1>📦 Datos Estructurados (JSON) en JavaScript</h1> <!-- Título principal del laboratorio interactivo de JSON -->
+            <p>Laboratorio interactivo de serialización, deserialización y manipulación de datos con JSON</p> <!-- Subtítulo explicativo del proyecto pedagógico -->
+        </header> <!-- Cierre del encabezado principal -->
+
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+            <button class="tab-btn active" id="tabMethods" data-target="methods-tab">JSON.stringify &amp; JSON.parse</button> <!-- Botón para activar la pestaña de métodos de conversión -->
+            <button class="tab-btn" id="tabValidation" data-target="validation-tab">Tipos, Reglas y Validación</button> <!-- Botón para activar la pestaña de reglas de tipos y validación -->
+        </nav> <!-- Cierre de la barra de navegación de pestañas -->
+
+        <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
+            <div class="status-badge">Laboratorio JSON Activo</div> <!-- Insignia superior que indica el estado operativo del simulador -->
+
+            <!-- Pestaña 1: Métodos de Conversión (JSON.stringify & JSON.parse) -->
+            <div id="methods-tab" class="tab-content"> <!-- Contenedor de la pestaña de métodos de conversión de datos -->
+                <h2>¿Qué es JSON y por qué lo usamos?</h2> <!-- Título explicativo de la sección conceptual -->
+                <p><strong>JSON</strong> (<em>JavaScript Object Notation</em>) es un formato ligero de intercambio de datos basado en texto. Aunque proviene de la sintaxis de objetos de JavaScript, es un formato <strong>independiente de cualquier lenguaje de programación</strong>. Esto significa que clientes y servidores desarrollados en Python, Java, PHP, C# o Node.js pueden comunicarse e intercambiar datos estructurados usando exactamente el mismo estándar de texto plano.</p> <!-- Párrafo detallado sobre el origen y la universalidad del formato JSON -->
+                <p>En JavaScript contamos con el objeto nativo <code>JSON</code> que provee dos métodos estáticos esenciales: <code>JSON.stringify()</code> para <strong>serializar</strong> (transformar objetos de la memoria en cadenas de texto para enviarlos o guardarlos) y <code>JSON.parse()</code> para <strong>deserializar</strong> (reconstruir un objeto JavaScript vivo a partir de un texto JSON recibido).</p> <!-- Párrafo explicativo de los procesos de serialización y deserialización -->
+
+                <div class="spam-alert"> <!-- Cuadro de sugerencia técnica y atajo de teclado para el desarrollador -->
+                    <span>💡</span> <!-- Icono de bombilla para destacar el consejo visual -->
+                    <p>Abre la consola del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para comprobar el operador <code>typeof</code> antes y después de cada transformación en tiempo real.</p> <!-- Consejo técnico para abrir las herramientas de desarrollador -->
+                </div> <!-- Cierre del cuadro de alerta informativa -->
+
+                <div class="demo-panel"> <!-- Panel interactivo con controles de configuración para probar transformaciones JSON -->
+                    <div class="controls-row"> <!-- Fila contenedora para organizar los selectores de control en paralelo -->
+                        <div class="control-group"> <!-- Grupo de control para elegir la operación a ejecutar -->
+                            <label for="operationSelect">Operación JSON</label> <!-- Etiqueta descriptiva del método o función a probar -->
+                            <select id="operationSelect" class="form-select"> <!-- Lista desplegable con las operaciones fundamentales de JSON -->
+                                <option value="stringify" selected>JSON.stringify() [Objeto ➡️ Texto]</option> <!-- Opción para serializar objeto a string estándar -->
+                                <option value="pretty">JSON.stringify(..., 2) [Formato Legible]</option> <!-- Opción para serializar con indentación visual pretty print -->
+                                <option value="parse">JSON.parse() [Texto ➡️ Objeto]</option> <!-- Opción para deserializar string a objeto JS -->
+                                <option value="parse-error">JSON.parse() con Error de Sintaxis</option> <!-- Opción para simular captura de SyntaxError en catch -->
+                            </select> <!-- Cierre del selector de operaciones -->
+                        </div> <!-- Cierre del grupo de operaciones -->
+
+                        <div class="control-group"> <!-- Grupo de control para elegir el objeto o dato de prueba -->
+                            <label for="dataSelect">Conjunto de Datos de Prueba</label> <!-- Etiqueta descriptiva del conjunto de datos -->
+                            <select id="dataSelect" class="form-select"> <!-- Lista desplegable con ejemplos de estructuras de datos -->
+                                <option value="user" selected>Perfil de Usuario (Objeto Estándar)</option> <!-- Objeto típico con strings, números y booleanos -->
+                                <option value="cart">Carrito de Compras (Objetos y Arrays)</option> <!-- Estructura compleja con arrays anidados -->
+                                <option value="incompatible">Objeto con Función y Undefined</option> <!-- Estructura para evidenciar descarte de tipos incompatibles -->
+                                <option value="malformed">Cadena JSON Inválida (Comillas simples)</option> <!-- String mal formado para probar errores -->
+                            </select> <!-- Cierre del selector de datos -->
+                        </div> <!-- Cierre del grupo de datos -->
+
+                        <div class="control-group"> <!-- Grupo de control para seleccionar el tiempo de procesamiento -->
+                            <label for="delaySelect">Retardo de Simulación (ms)</label> <!-- Etiqueta descriptiva de la demora simulada -->
+                            <select id="delaySelect" class="form-select"> <!-- Lista desplegable con tiempos de simulación -->
+                                <option value="300">300 ms (Rápido)</option> <!-- Opción de simulación rápida -->
+                                <option value="1000" selected>1000 ms (Estándar)</option> <!-- Opción por defecto para apreciar las transiciones -->
+                                <option value="2000">2000 ms (Lento)</option> <!-- Opción para observar la barra de progreso detalladamente -->
+                            </select> <!-- Cierre del selector de retardo -->
+                        </div> <!-- Cierre del grupo de retardo -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="runJsonBtn">Ejecutar Conversión JSON ⚡</button> <!-- Botón interactivo para disparar la transformación -->
+
+                    <div class="promise-visualizer"> <!-- Monitor visual de progreso y estado del proceso de conversión -->
+                        <div class="visualizer-header">Monitor de Serialización y Parseo</div> <!-- Título del monitor visual de conversión -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto de estado -->
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div> <!-- Círculo indicador de estado dinámico (idle, pending, fulfilled, rejected) -->
+                            <span id="promiseStateText" class="state-idle-text">En espera de iniciar transformación...</span> <!-- Texto descriptivo del estado actual -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de fondo para la barra de carga de la animación -->
+                            <div id="progressBar" class="progress-bar"></div> <!-- Barra interna animada que muestra el avance del procesamiento -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor de serialización -->
+
+                    <div class="output-box"> <!-- Caja contenedora del resultado devuelto por la operación JSON -->
+                        <p id="result">Presiona "Ejecutar Conversión JSON" para procesar los datos estructurados...</p> <!-- Texto principal con la salida formateada o mensaje de error -->
+                        <p id="demoNote">Tipo de Dato original: Sin procesar | Longitud: 0 caracteres</p> <!-- Nota secundaria con el typeof resultante y metadatos -->
+                    </div> <!-- Cierre de la caja de resultados -->
+                </div> <!-- Cierre del panel de demostración interactiva -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código con la sintaxis de JSON en JavaScript -->
+                    <div class="code-header">Sintaxis canónica de JSON en JavaScript:</div> <!-- Título del bloque de código -->
+                    <pre><code id="codeBlock">// 1. Serializar: Objeto en memoria ➡️ Cadena de texto JSON
+const usuario = { id: 1, nombre: "Fredy", premium: true };
+const cadenaJSON = JSON.stringify(usuario, null, 2); // Indentado a 2 espacios
+console.log(typeof cadenaJSON); // "string"
+
+// 2. Deserializar: Cadena de texto JSON ➡️ Objeto JavaScript vivo
+try {
+    const objetoRecuperado = JSON.parse(cadenaJSON);
+    console.log(typeof objetoRecuperado); // "object"
+    console.log(objetoRecuperado.nombre); // "Fredy"
+} catch (error) {
+    // Si la cadena JSON no cumple la sintaxis estricta, lanza un SyntaxError
+    console.error("Error al parsear JSON:", error.message);
+}</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 1 -->
+
+            <!-- Pestaña 2: Reglas de Sintaxis, Tipos y Validación -->
+            <div id="validation-tab" class="tab-content hidden"> <!-- Contenedor de la pestaña de reglas de tipos y validación sintáctica -->
+                <h2>Estructura, Tipos de Datos y Reglas Estrictas</h2> <!-- Título descriptivo de la segunda pestaña -->
+                <p>A diferencia de los objetos literales de JavaScript, JSON impone <strong>reglas sintácticas estrictas</strong>: las propiedades/claves deben estar obligatoriamente entre <em>comillas dobles</em> (<code>"clave"</code>), no se permiten comas al final del último elemento (<em>trailing commas</em>), y ciertos tipos de JavaScript (como funciones, <code>undefined</code> o <code>Symbol</code>) no existen en el estándar JSON y serán <strong>ignorados o descartados</strong> durante la serialización.</p> <!-- Explicación detallada de las restricciones sintácticas de JSON -->
+
+                <!-- Tabla Comparativa de Tipos de Datos Compatibles -->
+                <div class="db-section"> <!-- Sección para visualizar la compatibilidad de tipos entre JS y JSON -->
+                    <div class="db-title">Matriz de Compatibilidad de Tipos de Datos en JSON</div> <!-- Título explicativo de la tabla comparativa -->
+                    <div class="db-container"> <!-- Contenedor con borde y fondo oscuro para la tabla -->
+                        <table class="db-table"> <!-- Estructura de tabla para mostrar la comparación de tipos -->
+                            <thead> <!-- Cabecera de columnas de la tabla -->
+                                <tr> <!-- Fila de la cabecera -->
+                                    <th>Tipo de Dato</th> <!-- Columna del tipo de dato en JavaScript -->
+                                    <th>¿Soportado en JSON?</th> <!-- Columna que indica si es admitido en el estándar JSON -->
+                                    <th>Ejemplo en JavaScript</th> <!-- Columna mostrando la sintaxis en JS -->
+                                    <th>Comportamiento en JSON</th> <!-- Columna explicando cómo queda transformado -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera de la tabla -->
+                            <tbody id="dbTableBody"> <!-- Cuerpo de la tabla que contiene los registros comparativos -->
+                                <tr id="db-row-0"> <!-- Fila de Strings y Números -->
+                                    <td>String / Number</td> <!-- Celda de tipo cadena y número -->
+                                    <td>✅ Sí (Nativo)</td> <!-- Celda de soporte afirmativo -->
+                                    <td><code>"Hola"</code>, <code>42</code>, <code>3.14</code></td> <!-- Celda de ejemplos válidos -->
+                                    <td>Siempre comillas dobles en strings</td> <!-- Celda de explicación de comportamiento -->
+                                </tr> <!-- Cierre de la fila 0 -->
+                                <tr id="db-row-1"> <!-- Fila de Booleanos y Null -->
+                                    <td>Boolean / Null</td> <!-- Celda de tipo booleano y nulo -->
+                                    <td>✅ Sí (Nativo)</td> <!-- Celda de soporte afirmativo -->
+                                    <td><code>true</code>, <code>false</code>, <code>null</code></td> <!-- Celda de ejemplos válidos -->
+                                    <td>Preserva el valor literal exacto</td> <!-- Celda de explicación de comportamiento -->
+                                </tr> <!-- Cierre de la fila 1 -->
+                                <tr id="db-row-2"> <!-- Fila de Objetos y Arrays -->
+                                    <td>Object / Array</td> <!-- Celda de objetos y listas -->
+                                    <td>✅ Sí (Nativo)</td> <!-- Celda de soporte afirmativo -->
+                                    <td><code>{ a: 1 }</code>, <code>[1, 2, 3]</code></td> <!-- Celda de ejemplos de estructuras anidadas -->
+                                    <td>Soporta anidamiento multidimensional</td> <!-- Celda de explicación de comportamiento -->
+                                </tr> <!-- Cierre de la fila 2 -->
+                                <tr id="db-row-3"> <!-- Fila de Funciones y Undefined -->
+                                    <td>Function / Undefined</td> <!-- Celda de funciones y valor indefinido -->
+                                    <td>❌ NO Soportado</td> <!-- Celda de soporte negativo -->
+                                    <td><code>() => {}</code>, <code>undefined</code></td> <!-- Celda de ejemplos de tipos no soportados -->
+                                    <td>Se omiten en objetos; se convierten en null en arrays</td> <!-- Celda de advertencia técnica -->
+                                </tr> <!-- Cierre de la fila 3 -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla -->
+                        </table> <!-- Cierre de la tabla de registros -->
+                    </div> <!-- Cierre del contenedor de la tabla -->
+                </div> <!-- Cierre de la sección de matriz de compatibilidad -->
+
+                <div class="demo-panel"> <!-- Panel de demostración interactiva para validación y diagnóstico de JSON -->
+                    <div class="controls-row"> <!-- Fila contenedora de los selectores para la prueba de validación -->
+                        <div class="control-group"> <!-- Grupo de control para elegir el fragmento a validar -->
+                            <label for="validationSelect">Fragmento a Validar e Inspeccionar</label> <!-- Etiqueta descriptiva del selector de validación -->
+                            <select id="validationSelect" class="form-select"> <!-- Lista desplegable con ejemplos correctos y erróneos de JSON -->
+                                <option value="valid" selected>1. JSON Válido Estricto (Sintaxis Perfecta)</option> <!-- Fragmento con sintaxis 100% correcta -->
+                                <option value="single-quotes">2. Error: Claves con Comillas Simples ('clave')</option> <!-- Error típico de comillas simples -->
+                                <option value="unquoted-keys">3. Error: Claves sin comillas (Sintaxis de Objeto JS)</option> <!-- Error típico de sintaxis de objeto sin comillas -->
+                                <option value="trailing-comma">4. Error: Coma al final (Trailing Comma)</option> <!-- Error típico de coma sobrante al final -->
+                            </select> <!-- Cierre del selector de validación -->
+                        </div> <!-- Cierre del grupo de control -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="runValidationBtn">Validar y Diagnosticar Sintaxis JSON 🔍</button> <!-- Botón para ejecutar el análisis de sintaxis -->
+
+                    <!-- Visualizador de Pasos (Timeline de Validación de JSON) -->
+                    <div class="steps-timeline"> <!-- Contenedor de la línea de tiempo vertical para mostrar las fases de validación -->
+                        <!-- Paso 1: Análisis Léxico -->
+                        <div class="timeline-step" id="step1"> <!-- Componente contenedor del paso 1 de validación -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical del paso 1 -->
+                                <div class="step-circle state-idle" id="step1Circle">1</div> <!-- Círculo con el número 1 indicando el análisis léxico -->
+                                <div class="step-line"></div> <!-- Línea vertical que conecta el paso 1 con el paso 2 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 1 -->
+                                <div class="step-title">Fase 1: Verificación de Comillas Dobles en Claves ("key")</div> <!-- Título del paso de inspección léxica -->
+                                <div class="step-desc">El analizador comprueba que cada propiedad esté obligatoriamente delimitada por comillas dobles estándar.</div> <!-- Explicación detallada de la fase 1 -->
+                                <div class="step-status-text state-idle-text" id="step1Status">En espera...</div> <!-- Estado en tiempo real del primer paso -->
+                            </div> <!-- Cierre de la información del paso 1 -->
+                        </div> <!-- Cierre del componente paso 1 -->
+
+                        <!-- Paso 2: Detección de Tipos y Comas -->
+                        <div class="timeline-step" id="step2"> <!-- Componente contenedor del paso 2 de validación -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical del paso 2 -->
+                                <div class="step-circle state-idle" id="step2Circle">2</div> <!-- Círculo con el número 2 indicando la revisión de tipos y comas -->
+                                <div class="step-line"></div> <!-- Línea vertical que conecta el paso 2 con el paso 3 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 2 -->
+                                <div class="step-title">Fase 2: Ausencia de Comas Finales y Tipos Permitidos</div> <!-- Título del paso de comprobación de sintaxis -->
+                                <div class="step-desc">Se verifica que no existan comas sobrantes al final de listas u objetos y que todos los valores sean tipos JSON válidos.</div> <!-- Explicación de la fase 2 -->
+                                <div class="step-status-text state-idle-text" id="step2Status">En espera...</div> <!-- Estado en tiempo real del segundo paso -->
+                            </div> <!-- Cierre de la información del paso 2 -->
+                        </div> <!-- Cierre del componente paso 2 -->
+
+                        <!-- Paso 3: Deserialización con try/catch -->
+                        <div class="timeline-step" id="step3"> <!-- Componente contenedor del paso 3 de validación -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo del paso 3 (sin línea descendente) -->
+                                <div class="step-circle state-idle" id="step3Circle">3</div> <!-- Círculo con el número 3 indicando el parseo final -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 3 -->
+                                <div class="step-title">Fase 3: Deserialización Protegida con JSON.parse()</div> <!-- Título del paso de ejecución del método parse -->
+                                <div class="step-desc">Se evalúa la cadena dentro de un bloque try...catch para instanciar el objeto o capturar de forma segura el SyntaxError.</div> <!-- Explicación del parseo protegido -->
+                                <div class="step-status-text state-idle-text" id="step3Status">En espera...</div> <!-- Estado en tiempo real del tercer paso -->
+                            </div> <!-- Cierre de la información del paso 3 -->
+                        </div> <!-- Cierre del componente paso 3 -->
+                    </div> <!-- Cierre de la línea de tiempo de pasos -->
+
+                    <div class="output-box"> <!-- Caja contenedora de los resultados devueltos por el validador sintáctico -->
+                        <p id="valResult">El diagnóstico sintáctico del fragmento JSON aparecerá aquí...</p> <!-- Texto principal con el dictamen de validación o error -->
+                        <p id="valDemoNote">Estado de validación: Sin iniciar</p> <!-- Nota secundaria que resume el dictamen técnico -->
+                    </div> <!-- Cierre de la caja de resultados -->
+
+                    <!-- Consola Terminal Virtual de JSON (Serializer & Parser Inspector) -->
+                    <div class="virtual-terminal"> <!-- Contenedor con diseño de consola terminal para inspeccionar los logs de JSON -->
+                        <div class="terminal-header"> <!-- Cabecera de la ventana de la terminal con controles de estilo moderno -->
+                            <div class="terminal-dots"> <!-- Contenedor para los círculos de control de la ventana -->
+                                <div class="terminal-dot dot-close"></div> <!-- Botón circular rojo (cerrar ventana) -->
+                                <div class="terminal-dot dot-min"></div> <!-- Botón circular amarillo (minimizar ventana) -->
+                                <div class="terminal-dot dot-max"></div> <!-- Botón circular verde (maximizar ventana) -->
+                            </div> <!-- Cierre de los círculos de control -->
+                            <div class="terminal-title">CONSOLA JSON — SERIALIZER &amp; PARSER INSPECTOR</div> <!-- Título central de la consola de inspección de JSON -->
+                        </div> <!-- Cierre de la cabecera de la terminal -->
+                        <div class="terminal-body" id="jsonTerminal"> <!-- Cuerpo de la terminal con soporte de desplazamiento para mostrar los logs -->
+                            <div class="terminal-line info"><span class="terminal-prompt">&gt;</span>[JSON Engine] Inspector de datos estructurados inicializado. Listo para analizar.</div> <!-- Mensaje inicial informando que el motor está preparado -->
+                        </div> <!-- Cierre del cuerpo de la terminal -->
+                    </div> <!-- Cierre de la consola terminal virtual -->
+                </div> <!-- Cierre del panel de demostración de validación -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código para patrones profesionales con JSON -->
+                    <div class="code-header">Patrones profesionales con JSON (Deep Clone y Almacenamiento Local):</div> <!-- Cabecera del bloque de código -->
+                    <pre><code>// 1. Clonación profunda (Deep Copy) tradicional en JavaScript
+const original = { usuario: "Fredy", config: { tema: "oscuro", zoom: 100 } };
+const clonProfundo = JSON.parse(JSON.stringify(original));
+clonProfundo.config.tema = "claro"; // No muta al objeto original
+
+// 2. Almacenamiento estructurado en el navegador con localStorage
+const guardarSesion = (datosUsuario) => {
+    // localStorage solo admite texto plano, por lo que serializamos a JSON
+    localStorage.setItem("sesion_usuario", JSON.stringify(datosUsuario));
+};
+
+const recuperarSesion = () => {
+    const textoGuardado = localStorage.getItem("sesion_usuario");
+    if (!textoGuardado) return null;
+    try {
+        return JSON.parse(textoGuardado); // Reconstruye el objeto original
+    } catch (e) {
+        console.error("Corrupción de datos en localStorage:", e);
+        return null;
+    }
+};</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 2 -->
+        </section> <!-- Cierre de la sección de tarjeta principal -->
+    </main> <!-- Cierre del contenedor principal -->
+
+    <script src="main.js"></script> <!-- Carga el archivo de script principal main.js al final del body para no retrasar el renderizado visual -->
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->

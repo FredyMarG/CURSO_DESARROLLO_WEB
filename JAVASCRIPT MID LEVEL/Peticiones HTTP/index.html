@@ -1,0 +1,274 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador web -->
+<html lang="es"> <!-- Apertura del elemento raíz HTML con idioma español configurado -->
+<head> <!-- Sección de cabecera con metadatos técnicos y enlaces a recursos externos -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres estándar UTF-8 para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste responsivo de la escala inicial para dispositivos móviles y de escritorio -->
+    <title>🌐 Laboratorio de Peticiones HTTP en JavaScript | Guía Interactiva</title> <!-- Título descriptivo para la pestaña del navegador -->
+    <meta name="description" content="Aprende y domina las Peticiones HTTP en JavaScript: Fetch API, XMLHttpRequest, métodos GET, POST, PUT, DELETE, códigos de estado y respuestas JSON con este laboratorio interactivo."> <!-- Metadato SEO descriptivo para motores de búsqueda -->
+    <meta property="og:title" content="Laboratorio de Peticiones HTTP en JavaScript"> <!-- Título para compartir en redes sociales mediante el protocolo Open Graph -->
+    <meta property="og:description" content="Simulador interactivo y visual de Peticiones HTTP, métodos REST, códigos de estado y Fetch API en JavaScript."> <!-- Descripción para redes sociales -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseño visual moderno y tema oscuro -->
+</head> <!-- Cierre de la sección de cabecera -->
+<body> <!-- Apertura del cuerpo del documento que contiene todos los componentes visuales e interactivos -->
+    <main class="container"> <!-- Contenedor centralizado con estilos responsivos y efectos de transparencia -->
+        <header class="glass-header"> <!-- Encabezado principal estilizado con efecto cristal y degradados modernos -->
+            <h1>🌐 Peticiones HTTP en JavaScript</h1> <!-- Título principal del laboratorio de peticiones HTTP -->
+            <p>Laboratorio interactivo de comunicación Cliente-Servidor, Fetch API y AJAX</p> <!-- Subtítulo explicativo del proyecto pedagógico -->
+        </header> <!-- Cierre del encabezado principal -->
+
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+            <button class="tab-btn active" id="tabFetch" data-target="fetch-tab">Fetch API y Métodos</button> <!-- Botón para activar la pestaña de Fetch API y Métodos HTTP -->
+            <button class="tab-btn" id="tabXhr" data-target="xhr-tab">Ciclo XMLHttpRequest (AJAX)</button> <!-- Botón para activar la pestaña del ciclo de vida y XMLHttpRequest -->
+        </nav> <!-- Cierre de la barra de navegación de pestañas -->
+
+        <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
+            <div class="status-badge">Laboratorio HTTP Activo</div> <!-- Insignia superior que indica el estado operativo del simulador -->
+
+            <!-- Pestaña 1: Fetch API y Métodos HTTP -->
+            <div id="fetch-tab" class="tab-content"> <!-- Contenedor de la pestaña de Fetch API y Métodos HTTP -->
+                <h2>¿Qué es una Petición HTTP?</h2> <!-- Título explicativo de la sección conceptual -->
+                <p>Una <strong>petición HTTP</strong> (HyperText Transfer Protocol) es el mensaje que envía el <strong>cliente</strong> (el navegador web) a un <strong>servidor</strong> para solicitar recursos o realizar acciones. El servidor procesa la solicitud y devuelve una <strong>respuesta HTTP</strong> compuesta por un <em>código de estado (Status Code)</em>, <em>cabeceras (Headers)</em> y el <em>cuerpo (Body/Payload)</em> generalmente estructurado en formato <strong>JSON</strong>.</p> <!-- Párrafo detallado sobre el funcionamiento del protocolo HTTP -->
+                <p>Los métodos HTTP principales definen la intención de la operación: <code>GET</code> (consultar información), <code>POST</code> (enviar datos para crear un nuevo recurso), <code>PUT</code> (actualizar un recurso existente) y <code>DELETE</code> (eliminar información del servidor).</p> <!-- Párrafo explicativo de los métodos o verbos HTTP más habituales -->
+
+                <div class="spam-alert"> <!-- Cuadro de sugerencia técnica y atajo de teclado para el desarrollador -->
+                    <span>💡</span> <!-- Icono de bombilla para destacar el consejo visual -->
+                    <p>Abre la pestaña <strong>Network</strong> en DevTools (<code>F12</code> o <code>Ctrl + Shift + I</code>) para inspeccionar los paquetes de red reales y el intercambio de cabeceras en cada petición.</p> <!-- Consejo técnico para abrir las herramientas de desarrollador -->
+                </div> <!-- Cierre del cuadro de alerta informativa -->
+
+                <div class="demo-panel"> <!-- Panel interactivo con controles de configuración para emitir peticiones HTTP -->
+                    <div class="controls-row"> <!-- Fila contenedora para organizar los selectores de control en paralelo -->
+                        <div class="control-group"> <!-- Grupo de control para configurar el método HTTP -->
+                            <label for="methodSelect">Método HTTP (Verbo)</label> <!-- Etiqueta descriptiva del método HTTP -->
+                            <select id="methodSelect" class="form-select"> <!-- Lista desplegable con los métodos HTTP estándar -->
+                                <option value="GET" selected>GET (Consultar datos)</option> <!-- Opción para peticiones de consulta y lectura -->
+                                <option value="POST">POST (Crear recurso)</option> <!-- Opción para peticiones de creación con cuerpo JSON -->
+                                <option value="PUT">PUT (Actualizar recurso)</option> <!-- Opción para peticiones de modificación de recursos -->
+                                <option value="DELETE">DELETE (Eliminar recurso)</option> <!-- Opción para peticiones de supresión de datos -->
+                            </select> <!-- Cierre del selector de método HTTP -->
+                        </div> <!-- Cierre del grupo de método HTTP -->
+
+                        <div class="control-group"> <!-- Grupo de control para elegir el endpoint o ruta del servidor -->
+                            <label for="endpointSelect">Endpoint / Recurso API</label> <!-- Etiqueta descriptiva de la ruta API -->
+                            <select id="endpointSelect" class="form-select"> <!-- Lista desplegable con rutas API simuladas -->
+                                <option value="/api/usuarios" selected>/api/usuarios (Lista - 200 OK)</option> <!-- Endpoint de colección general de usuarios -->
+                                <option value="/api/usuarios/1">/api/usuarios/1 (Detalle - 200 OK)</option> <!-- Endpoint de un usuario específico por identificador -->
+                                <option value="/api/nuevo-registro">/api/nuevo-registro (Crear - 201 Created)</option> <!-- Endpoint de creación exitosa con código 201 -->
+                                <option value="/api/no-encontrado">/api/no-encontrado (Error 404 Not Found)</option> <!-- Endpoint no existente para forzar error 404 -->
+                                <option value="/api/error-servidor">/api/error-servidor (Fallo 500 Server Error)</option> <!-- Endpoint para simular error interno del servidor -->
+                            </select> <!-- Cierre del selector de ruta de la API -->
+                        </div> <!-- Cierre del grupo de endpoint -->
+
+                        <div class="control-group"> <!-- Grupo de control para simular la latencia de red -->
+                            <label for="delaySelect">Latencia de Red (ms)</label> <!-- Etiqueta descriptiva de la velocidad de conexión -->
+                            <select id="delaySelect" class="form-select"> <!-- Lista desplegable con tiempos de retardo simulados -->
+                                <option value="500">500 ms (Rápida)</option> <!-- Opción para conexiones de alta velocidad -->
+                                <option value="1500" selected>1500 ms (Estándar)</option> <!-- Opción por defecto para simular latencia de red típica -->
+                                <option value="3000">3000 ms (Lenta / 3G)</option> <!-- Opción para simular redes móviles lentas o congestionadas -->
+                            </select> <!-- Cierre del selector de latencia -->
+                        </div> <!-- Cierre del grupo de latencia -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="sendRequestBtn">Enviar Petición con fetch() 🚀</button> <!-- Botón interactivo para disparar la petición HTTP -->
+
+                    <div class="promise-visualizer"> <!-- Monitor visual de progreso y estado del tráfico HTTP en red -->
+                        <div class="visualizer-header">Monitor de Tráfico de Red</div> <!-- Título del monitor visual de red -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto de estado -->
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div> <!-- Círculo indicador de estado dinámico (idle, pending, fulfilled, rejected) -->
+                            <span id="promiseStateText" class="state-idle-text">En espera de enviar solicitud...</span> <!-- Texto descriptivo del estado actual de la petición -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de fondo para la barra de carga de transferencia -->
+                            <div id="progressBar" class="progress-bar"></div> <!-- Barra interna de progreso que se llena durante la comunicación -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor de tráfico -->
+
+                    <div class="output-box"> <!-- Caja contenedora de la respuesta recibida del servidor -->
+                        <p id="result">Presiona "Enviar Petición con fetch()" para consultar al servidor...</p> <!-- Texto principal con la respuesta JSON del servidor o error capturado -->
+                        <p id="demoNote">Status: En reposo | Cabeceras: Sin peticiones activas</p> <!-- Nota secundaria con el código de estado HTTP y metadatos -->
+                    </div> <!-- Cierre de la caja de respuestas -->
+                </div> <!-- Cierre del panel de demostración interactiva -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código para la sintaxis moderna de Fetch API -->
+                    <div class="code-header">Sintaxis moderna con Fetch API y Async / Await:</div> <!-- Título del bloque de código -->
+                    <pre><code id="codeBlock">// Petición HTTP asíncrona moderna mediante Fetch API
+const realizarPeticion = async (url, metodo = 'GET', datos = null) => {
+    try {
+        const opciones = {
+            method: metodo, // Define el verbo HTTP (GET, POST, PUT, DELETE)
+            headers: { 'Content-Type': 'application/json' }, // Cabecera para contenido JSON
+            body: datos ? JSON.stringify(datos) : null // Serializa el objeto a JSON si hay datos
+        };
+
+        // fetch retorna una Promesa con el objeto Response del servidor
+        const respuesta = await fetch(url, opciones);
+
+        // response.ok verifica si el código de estado está en el rango exitoso (200 - 299)
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status} - ${respuesta.statusText}`);
+        }
+
+        // response.json() parsea el flujo de bytes del cuerpo a objeto JavaScript
+        const datosServidor = await respuesta.json();
+        console.log("Datos recibidos del servidor:", datosServidor);
+        return datosServidor;
+    } catch (error) {
+        console.error("Fallo en la comunicación de red:", error.message);
+    }
+};</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 1 -->
+
+            <!-- Pestaña 2: Ciclo de Vida y XMLHttpRequest (AJAX) -->
+            <div id="xhr-tab" class="tab-content hidden"> <!-- Contenedor de la pestaña de simulación de XMLHttpRequest y ciclo de vida -->
+                <h2>Ciclo de Vida de una Petición y XMLHttpRequest</h2> <!-- Título descriptivo de la segunda pestaña -->
+                <p>Antes del estándar <code>fetch()</code>, las aplicaciones web utilizaban el objeto <code>XMLHttpRequest</code> para realizar peticiones asíncronas (AJAX) sin necesidad de recargar la página. Este objeto pasa por 5 fases o estados representados por la propiedad <code>readyState</code> (desde 0 hasta 4), emitiendo el evento <code>readystatechange</code> en cada transición.</p> <!-- Explicación detallada del funcionamiento de XMLHttpRequest y AJAX -->
+
+                <!-- Base de Datos Simulada en el Servidor -->
+                <div class="db-section"> <!-- Sección para visualizar los datos almacenados en el servidor remoto simulado -->
+                    <div class="db-title">Base de Datos Simulada en el Servidor (Endpoint: /api/usuarios)</div> <!-- Título explicativo de la tabla de datos remotos -->
+                    <div class="db-container"> <!-- Contenedor con borde y fondo oscuro para la tabla -->
+                        <table class="db-table"> <!-- Estructura de tabla para mostrar los registros del servidor -->
+                            <thead> <!-- Cabecera de columnas de la tabla -->
+                                <tr> <!-- Fila de la cabecera -->
+                                    <th>ID</th> <!-- Columna del identificador numérico de cada usuario -->
+                                    <th>Nombre</th> <!-- Columna del nombre del usuario -->
+                                    <th>Rol / Especialidad</th> <!-- Columna con el rol o profesión del registro -->
+                                    <th>Estado HTTP</th> <!-- Columna con el código de estado que responderá este registro -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera de la tabla -->
+                            <tbody id="dbTableBody"> <!-- Cuerpo de la tabla que contiene los registros de prueba -->
+                                <tr id="db-row-0"> <!-- Fila del registro con ID 0 -->
+                                    <td>0</td> <!-- Celda de ID 0 -->
+                                    <td>Fredy</td> <!-- Celda del nombre Fredy -->
+                                    <td>Desarrollador Web</td> <!-- Celda de rol Desarrollador Web -->
+                                    <td>200 OK</td> <!-- Celda de código de respuesta HTTP -->
+                                </tr> <!-- Cierre del registro 0 -->
+                                <tr id="db-row-1"> <!-- Fila del registro con ID 1 -->
+                                    <td>1</td> <!-- Celda de ID 1 -->
+                                    <td>Ana</td> <!-- Celda del nombre Ana -->
+                                    <td>Arquitecta Cloud</td> <!-- Celda de rol Arquitecta Cloud -->
+                                    <td>200 OK</td> <!-- Celda de código de respuesta HTTP -->
+                                </tr> <!-- Cierre del registro 1 -->
+                                <tr id="db-row-2"> <!-- Fila del registro con ID 2 -->
+                                    <td>2</td> <!-- Celda de ID 2 -->
+                                    <td>Luis</td> <!-- Celda del nombre Luis -->
+                                    <td>Ingeniero Frontend</td> <!-- Celda de rol Ingeniero Frontend -->
+                                    <td>200 OK</td> <!-- Celda de código de respuesta HTTP -->
+                                </tr> <!-- Cierre del registro 2 -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla -->
+                        </table> <!-- Cierre de la tabla de registros -->
+                    </div> <!-- Cierre del contenedor de la tabla -->
+                </div> <!-- Cierre de la sección de base de datos simulada -->
+
+                <div class="demo-panel"> <!-- Panel de demostración interactiva para la ejecución de XMLHttpRequest -->
+                    <div class="controls-row"> <!-- Fila contenedora de los selectores para la consulta AJAX -->
+                        <div class="control-group"> <!-- Grupo de control para elegir el ID a solicitar -->
+                            <label for="xhrUserSelect">Seleccionar ID para Consulta XHR</label> <!-- Etiqueta descriptiva del selector de ID -->
+                            <select id="xhrUserSelect" class="form-select"> <!-- Lista desplegable con opciones para consultar registros válidos o inexistentes -->
+                                <option value="0">ID 0: Fredy (Responde 200 OK)</option> <!-- Opción para consultar el registro con ID 0 -->
+                                <option value="1">ID 1: Ana (Responde 200 OK)</option> <!-- Opción para consultar el registro con ID 1 -->
+                                <option value="2" selected>ID 2: Luis (Responde 200 OK)</option> <!-- Opción por defecto para consultar el ID 2 -->
+                                <option value="3">ID 3: Inexistente (Simula Error 404 Not Found)</option> <!-- Opción que no existe en el servidor para disparar error 404 -->
+                            </select> <!-- Cierre del selector de ID -->
+                        </div> <!-- Cierre del grupo de control -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn" id="runXhrBtn">Ejecutar Petición XMLHttpRequest 📡</button> <!-- Botón para iniciar el ciclo de vida de la petición XMLHttpRequest -->
+
+                    <!-- Visualizador de Pasos (Timeline del Ciclo de Vida HTTP) -->
+                    <div class="steps-timeline"> <!-- Contenedor de la línea de tiempo vertical para mostrar las fases de readyState -->
+                        <!-- Paso 1: Conexión Abierta (OPENED) -->
+                        <div class="timeline-step" id="step1"> <!-- Componente contenedor del paso 1 del ciclo de vida -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical del paso 1 -->
+                                <div class="step-circle state-idle" id="step1Circle">1</div> <!-- Círculo con el número 1 indicando la apertura de la conexión -->
+                                <div class="step-line"></div> <!-- Línea vertical que conecta el paso 1 con el paso 2 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 1 -->
+                                <div class="step-title">readyState 1: OPENED (xhr.open)</div> <!-- Título del paso mostrando el método JS de apertura -->
+                                <div class="step-desc">Se inicializa la solicitud, definiéndose el método HTTP (GET/POST) y la URL del endpoint de destino.</div> <!-- Explicación detallada del estado OPENED -->
+                                <div class="step-status-text state-idle-text" id="step1Status">En espera...</div> <!-- Estado en tiempo real del primer paso -->
+                            </div> <!-- Cierre de la información del paso 1 -->
+                        </div> <!-- Cierre del componente paso 1 -->
+
+                        <!-- Paso 2: Envío y Carga (HEADERS_RECEIVED & LOADING) -->
+                        <div class="timeline-step" id="step2"> <!-- Componente contenedor del paso 2 del ciclo de vida -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo indicador y la línea vertical del paso 2 -->
+                                <div class="step-circle state-idle" id="step2Circle">2</div> <!-- Círculo con el número 2 indicando el envío y recepción de cabeceras -->
+                                <div class="step-line"></div> <!-- Línea vertical que conecta el paso 2 con el paso 3 -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 2 -->
+                                <div class="step-title">readyState 2 y 3: HEADERS_RECEIVED &amp; LOADING (xhr.send)</div> <!-- Título del paso mostrando el envío de datos por la red -->
+                                <div class="step-desc">La petición se transmite por la red; el servidor devuelve las cabeceras HTTP y comienza la descarga del cuerpo de la respuesta.</div> <!-- Explicación de las fases de recepción y descarga -->
+                                <div class="step-status-text state-idle-text" id="step2Status">En espera...</div> <!-- Estado en tiempo real del segundo paso -->
+                            </div> <!-- Cierre de la información del paso 2 -->
+                        </div> <!-- Cierre del componente paso 2 -->
+
+                        <!-- Paso 3: Operación Completada (DONE) -->
+                        <div class="timeline-step" id="step3"> <!-- Componente contenedor del paso 3 del ciclo de vida -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del círculo del paso 3 (no requiere línea descendente) -->
+                                <div class="step-circle state-idle" id="step3Circle">3</div> <!-- Círculo con el número 3 indicando la finalización de la petición -->
+                            </div> <!-- Cierre del envoltorio -->
+                            <div class="step-info"> <!-- Bloque informativo con la descripción del paso 3 -->
+                                <div class="step-title">readyState 4: DONE (xhr.status 200 OK &amp; responseText)</div> <!-- Título del paso mostrando la finalización de la comunicación -->
+                                <div class="step-desc">La transferencia ha concluido totalmente. Se evalúa el código de estado HTTP y se parsea el texto recibido con JSON.parse().</div> <!-- Explicación de la finalización y consumo del recurso -->
+                                <div class="step-status-text state-idle-text" id="step3Status">En espera...</div> <!-- Estado en tiempo real del tercer paso -->
+                            </div> <!-- Cierre de la información del paso 3 -->
+                        </div> <!-- Cierre del componente paso 3 -->
+                    </div> <!-- Cierre de la línea de tiempo de pasos -->
+
+                    <div class="output-box"> <!-- Caja contenedora de los resultados devueltos por la petición XMLHttpRequest -->
+                        <p id="xhrResult">El resultado de la petición XMLHttpRequest aparecerá aquí...</p> <!-- Texto principal con el recurso obtenido o el error capturado -->
+                        <p id="xhrDemoNote">Estado del ciclo: Sin iniciar</p> <!-- Nota secundaria que resume el estado global del flujo -->
+                    </div> <!-- Cierre de la caja de resultados -->
+
+                    <!-- Consola Terminal Virtual de Red (HTTP Inspector) -->
+                    <div class="virtual-terminal"> <!-- Contenedor con diseño de consola terminal para inspeccionar los paquetes de red -->
+                        <div class="terminal-header"> <!-- Cabecera de la ventana de la terminal con controles de estilo moderno -->
+                            <div class="terminal-dots"> <!-- Contenedor para los círculos de control de la ventana -->
+                                <div class="terminal-dot dot-close"></div> <!-- Botón circular rojo (cerrar ventana) -->
+                                <div class="terminal-dot dot-min"></div> <!-- Botón circular amarillo (minimizar ventana) -->
+                                <div class="terminal-dot dot-max"></div> <!-- Botón circular verde (maximizar ventana) -->
+                            </div> <!-- Cierre de los círculos de control -->
+                            <div class="terminal-title">CONSOLA DE RED — HTTP INSPECTOR</div> <!-- Título central de la consola de inspección de red -->
+                        </div> <!-- Cierre de la cabecera de la terminal -->
+                        <div class="terminal-body" id="networkTerminal"> <!-- Cuerpo de la terminal con soporte de desplazamiento para mostrar los registros de red -->
+                            <div class="terminal-line info"><span class="terminal-prompt">&gt;</span>[HTTP Client] Inspector de red inicializado. Listo para registrar paquetes.</div> <!-- Mensaje inicial informando que el monitor está preparado -->
+                        </div> <!-- Cierre del cuerpo de la terminal -->
+                    </div> <!-- Cierre de la consola terminal virtual -->
+                </div> <!-- Cierre del panel de demostración de XMLHttpRequest -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código para la sintaxis clásica de XMLHttpRequest -->
+                    <div class="code-header">Código de implementación con XMLHttpRequest tradicional:</div> <!-- Cabecera del bloque de código -->
+                    <pre><code>// Creación de una petición HTTP asíncrona con el objeto XMLHttpRequest (AJAX tradicional)
+const solicitarConXHR = (url) => {
+    const xhr = new XMLHttpRequest(); // 1. Se crea la instancia del objeto de comunicación
+
+    // 2. Se inicializa la petición indicando el método HTTP y la ruta del recurso (readyState 1: OPENED)
+    xhr.open("GET", url, true);
+
+    // 3. Se registra el escuchador del evento readystatechange para monitorear el ciclo de vida
+    xhr.addEventListener("readystatechange", () => {
+        // readyState 4 (DONE) indica que toda la operación de transferencia ha terminado
+        if (xhr.readyState === 4) {
+            // Se valida si el servidor respondió con un código de éxito 200 (OK)
+            if (xhr.status === 200) {
+                // Deserializa el texto recibido en formato JSON convirtiéndolo a objeto JavaScript
+                const datos = JSON.parse(xhr.responseText);
+                console.log("Respuesta exitosa recibida del servidor:", datos);
+            } else {
+                console.error(`Error HTTP: ${xhr.status} - No se pudo recuperar el recurso solicitado.`);
+            }
+        }
+    });
+
+    // 4. Se envía la solicitud por la red hacia el servidor destino
+    xhr.send();
+};</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 2 -->
+        </section> <!-- Cierre de la sección de tarjeta principal -->
+    </main> <!-- Cierre del contenedor principal -->
+
+    <script src="main.js"></script> <!-- Carga el archivo de script principal main.js al final del body para no retrasar el renderizado visual -->
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->
