@@ -1,0 +1,245 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador web -->
+<html lang="es"> <!-- Apertura del elemento raíz HTML con idioma español configurado -->
+<head> <!-- Sección de cabecera con metadatos técnicos y enlaces a recursos externos -->
+    <meta charset="UTF-8"> <!-- Codificación de caracteres estándar UTF-8 para admitir acentos y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste responsivo de la escala inicial para pantallas móviles y de escritorio -->
+    <title>🌐 Laboratorio de Fetch API y Axios en JavaScript | Guía Interactiva</title> <!-- Título descriptivo para la pestaña del navegador -->
+    <meta name="description" content="Aprende y domina la API Fetch y la biblioteca Axios en JavaScript: promesas nativas, lectores de cuerpo json/text/blob, comparativa técnica y manejo de errores."> <!-- Metadato SEO descriptivo para motores de búsqueda -->
+    <meta property="og:title" content="Laboratorio de Fetch API y Axios en JavaScript"> <!-- Título para compartir en redes sociales mediante el protocolo Open Graph -->
+    <meta property="og:description" content="Simulador interactivo y visual de Fetch API, lectores del cuerpo (Body Mixin) y la biblioteca Axios en JS."> <!-- Descripción para redes sociales -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseño visual moderno y tema oscuro -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Importa la biblioteca Axios oficial desde CDN para permitir peticiones directas -->
+</head> <!-- Cierre de la sección de cabecera -->
+<body> <!-- Apertura del cuerpo del documento que contiene todos los componentes visuales e interactivos -->
+    <main class="container"> <!-- Contenedor centralizado con estilos responsivos y efectos de transparencia -->
+        <header class="glass-header"> <!-- Encabezado principal estilizado con efecto cristal y degradados modernos -->
+            <h1>🌐 Fetch API y Axios en JavaScript</h1> <!-- Título principal del laboratorio interactivo de Fetch y Axios -->
+            <p>Laboratorio interactivo de consumo moderno de APIs, lectores de cuerpo y comparación técnica</p> <!-- Subtítulo explicativo del proyecto pedagógico -->
+        </header> <!-- Cierre del encabezado principal -->
+
+        <!-- Navegación de Pestañas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+            <button class="tab-btn active" id="tabFetch" data-target="fetch-tab">API Fetch &amp; Body Mixin</button> <!-- Botón para activar la pestaña de Fetch API y lectores de cuerpo -->
+            <button class="tab-btn" id="tabAxios" data-target="axios-tab">Axios vs. Fetch &amp; Comparativa</button> <!-- Botón para activar la pestaña de comparativa con Axios -->
+        </nav> <!-- Cierre de la barra de navegación de pestañas -->
+
+        <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
+            <div class="status-badge">Laboratorio Fetch Activo</div> <!-- Insignia superior que indica el estado operativo del simulador -->
+
+            <!-- Pestaña 1: API Fetch & Body Mixin -->
+            <div id="fetch-tab" class="tab-content"> <!-- Contenedor de la pestaña de Fetch API y sus lectores de cuerpo -->
+                <h2>La Era Moderna: Fetch API y Arquitectura de Promesas</h2> <!-- Título explicativo de la primera sección conceptual -->
+                <p>La <strong>API Fetch</strong> es el estándar nativo moderno de JavaScript para realizar peticiones HTTP. A diferencia del antiguo <code>XMLHttpRequest</code>, Fetch está <strong>completamente basado en Promesas nativas</strong>, lo que permite un código limpio, lineal y libre de <em>Callback Hell</em> mediante <code>async/await</code> o <code>.then()/.catch()</code>.</p> <!-- Párrafo sobre la arquitectura y evolución de Fetch -->
+                <p>Fetch opera en <strong>dos fases consecutivas</strong>: primero resuelve una promesa con el objeto <code>Response</code> (donde verificamos <code>response.ok</code> y las cabeceras), y en una segunda fase asíncrona debemos invocar al método lector del cuerpo adecuado para procesar los bytes descargados.</p> <!-- Párrafo explicativo del proceso en dos pasos -->
+
+                <!-- Analogía Didáctica del Restaurante Gourmet -->
+                <div class="restaurant-box"> <!-- Tarjeta destacada con la analogía del restaurante para afianzar el concepto -->
+                    <div class="restaurant-icon">🍽️</div> <!-- Icono de restaurante y comida -->
+                    <div class="restaurant-content"> <!-- Contenedor de los textos de la analogía -->
+                        <h3>La Analogía del Restaurante Gourmet</h3> <!-- Título de la analogía didáctica -->
+                        <p>Usar <strong>Fetch</strong> es como ir a un restaurante donde pides un platillo y el mesero te trae el plato cubierto a la mesa rápidamente (llegaron las cabeceras). Tú sabes que el pedido llegó bien, pero para poder comértelo tienes que destaparlo y prepararlo tú mismo (invocar a <code>.json()</code> o <code>.text()</code>).</p> <!-- Descripción pedagógica de la analogía de Fetch -->
+                    </div> <!-- Cierre del contenido de la analogía -->
+                </div> <!-- Cierre de la tarjeta del restaurante -->
+
+                <!-- Bloque de Selección de Lectores de Cuerpo (The Body Mixin) -->
+                <div class="db-section"> <!-- Sección para visualizar los 5 lectores nativos del cuerpo en Fetch -->
+                    <div class="db-title">Lectores Nativos del Cuerpo (The Body Mixin)</div> <!-- Título explicativo de la colección de lectores -->
+                    <div class="mixin-chips-container"> <!-- Contenedor de los chips con los métodos lectores del cuerpo -->
+                        <span class="mixin-chip active">.json() ➡️ Objetos / Arrays JS</span> <!-- Chip del lector json -->
+                        <span class="mixin-chip">.text() ➡️ Cadena String / TXT</span> <!-- Chip del lector text -->
+                        <span class="mixin-chip">.blob() ➡️ Binarios / Imágenes / PDF</span> <!-- Chip del lector blob -->
+                        <span class="mixin-chip">.formData() ➡️ Formularios Multipart</span> <!-- Chip del lector formData -->
+                        <span class="mixin-chip">.arrayBuffer() ➡️ Memoria Binaria Fija</span> <!-- Chip del lector arrayBuffer -->
+                    </div> <!-- Cierre del contenedor de chips -->
+                </div> <!-- Cierre de la sección de lectores -->
+
+                <div class="demo-panel"> <!-- Panel interactivo con controles de configuración para probar peticiones con Fetch -->
+                    <div class="controls-row"> <!-- Fila contenedora para organizar los selectores de control en paralelo -->
+                        <div class="control-group"> <!-- Grupo de control para elegir el lector y tipo de recurso -->
+                            <label for="fetchReaderSelect">Lector de Cuerpo / Endpoint</label> <!-- Etiqueta descriptiva del selector de lector -->
+                            <select id="fetchReaderSelect" class="form-select"> <!-- Lista desplegable con opciones de lectores y recursos simulados -->
+                                <option value="json" selected>1. response.json() ➡️ /api/usuarios (Objeto JS 200 OK)</option> <!-- Opción para probar json -->
+                                <option value="text">2. response.text() ➡️ /terminos.txt (Cadena de texto plana)</option> <!-- Opción para probar text -->
+                                <option value="blob">3. response.blob() ➡️ /avatar.png (Archivo Binario Imagen)</option> <!-- Opción para probar blob -->
+                                <option value="error404">4. Error 404: /api/no-existe (¿Entra al catch en Fetch?)</option> <!-- Opción para demostrar que 404 no va al catch directo -->
+                            </select> <!-- Cierre del selector de lector -->
+                        </div> <!-- Cierre del grupo de lector -->
+
+                        <div class="control-group"> <!-- Grupo de control para configurar la latencia simulada -->
+                            <label for="fetchDelaySelect">Latencia de Red (ms)</label> <!-- Etiqueta descriptiva de la demora de red -->
+                            <select id="fetchDelaySelect" class="form-select"> <!-- Lista desplegable con tiempos de simulación -->
+                                <option value="500">500 ms (Rápida)</option> <!-- Latencia baja -->
+                                <option value="1200" selected>1200 ms (Estándar)</option> <!-- Latencia normal recomendada -->
+                                <option value="2500">2500 ms (Lenta / 3G)</option> <!-- Latencia alta para observar fases -->
+                            </select> <!-- Cierre del selector de latencia -->
+                        </div> <!-- Cierre del grupo de latencia -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <button class="btn btn-fetch" id="runFetchBtn">Ejecutar Petición con fetch() ⚡</button> <!-- Botón interactivo para disparar la petición Fetch -->
+
+                    <div class="promise-visualizer"> <!-- Monitor visual de progreso y estado del flujo en dos pasos de Fetch -->
+                        <div class="visualizer-header">Monitor del Proceso en Dos Fases de Fetch</div> <!-- Título del monitor visual de red -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto de estado -->
+                            <div id="promiseIndicator" class="promise-indicator state-idle"></div> <!-- Círculo indicador de estado dinámico (idle, pending, fulfilled, rejected) -->
+                            <span id="promiseStateText" class="state-idle-text">En espera de emitir llamada fetch()...</span> <!-- Texto descriptivo del estado actual -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de fondo para la barra de carga de la petición -->
+                            <div id="progressBar" class="progress-bar"></div> <!-- Barra interna animada de progreso -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor de proceso -->
+
+                    <div class="output-box"> <!-- Caja contenedora de la respuesta recibida mediante Fetch -->
+                        <p id="result">Presiona "Ejecutar Petición con fetch()" para ver el flujo en acción...</p> <!-- Texto principal con la salida procesada -->
+                        <p id="demoNote">Fase 1: En reposo | Fase 2: Lector no invocado</p> <!-- Nota secundaria con el diagnóstico de las fases -->
+                    </div> <!-- Cierre de la caja de respuestas -->
+
+                    <!-- Vista previa multimedia si se selecciona un blob -->
+                    <div id="blobPreviewContainer" style="display: none; margin-top: 1rem; text-align: center;"> <!-- Contenedor para previsualizar imágenes Blob -->
+                        <div class="db-title">Vista Previa del Objeto Blob (Generado con URL.createObjectURL)</div> <!-- Título del contenedor de vista previa -->
+                        <img id="blobImagePreview" src="" alt="Vista previa de Blob" style="max-height: 120px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); margin-top: 0.5rem;"> <!-- Elemento imagen generado dinámicamente -->
+                    </div> <!-- Cierre del contenedor de vista previa -->
+                </div> <!-- Cierre del panel de demostración interactiva -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código para la sintaxis canónica de Fetch -->
+                    <div class="code-header">Sintaxis canónica con Fetch API y Async / Await:</div> <!-- Cabecera del bloque de código -->
+                    <pre><code id="codeBlock">// Petición moderna con Fetch API usando async/await
+const consultarDatos = async () => {
+    try {
+        // Fase 1: Se envían cabeceras y se recibe el objeto Response
+        const response = await fetch("/api/usuarios");
+
+        // Regla clave: Los errores 404 o 500 NO van al catch directo en Fetch;
+        // debemos evaluar manualmente la propiedad lógica response.ok (status 200-299)
+        if (!response.ok) {
+            throw new Error(`Error HTTP: ${response.status} - ${response.statusText}`);
+        }
+
+        // Fase 2: Se invoca al lector adecuado del cuerpo (.json(), .text(), .blob())
+        const datos = await response.json();
+        console.log("Datos recibidos y parseados:", datos);
+        return datos;
+    } catch (error) {
+        // Solo captura fallos críticos de red o excepciones lanzadas manualmente
+        console.error("Fallo capturado en catch:", error.message);
+    }
+};</code></pre> <!-- Bloque preformateado de código JavaScript formativo -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 1 -->
+
+            <!-- Pestaña 2: Axios vs. Fetch & Comparativa -->
+            <div id="axios-tab" class="tab-content hidden"> <!-- Contenedor de la pestaña de comparativa con Axios -->
+                <h2>¿Por qué usar Axios? La Evolución Profesional</h2> <!-- Título descriptivo de la segunda pestaña -->
+                <p>Aunque Fetch es nativo y excelente, en aplicaciones profesionales del mundo real se suele preferir <strong>Axios</strong> debido a que automatiza las tareas más repetitivas de red:</p> <!-- Explicación sobre las ventajas de Axios -->
+
+                <div class="messenger-box" style="border-left-color: #c084fc;"> <!-- Tarjeta destacada con las 4 ventajas de Axios -->
+                    <div class="messenger-icon">🚀</div> <!-- Icono de cohete espacial -->
+                    <div class="messenger-content"> <!-- Contenedor de las ventajas de Axios -->
+                        <h3>Las 4 Ventajas de Oro de Axios sobre Fetch</h3> <!-- Título de la tarjeta -->
+                        <p>1. <strong>Transformación automática de JSON:</strong> Los datos llegan listos y parseados en <code>response.data</code>.<br>
+                        2. <strong>Manejo automático de errores:</strong> Los códigos <code>4xx</code> y <code>5xx</code> se arrojan directamente al bloque <code>catch</code>.<br>
+                        3. <strong>Peticiones POST simplificadas:</strong> Serializa objetos a JSON automáticamente sin configurar cabeceras a mano.<br>
+                        4. <strong>Interceptores globales:</strong> Permite inyectar tokens JWT y auditar peticiones en una sola línea de configuración.</p> <!-- Lista explicativa de ventajas -->
+                    </div> <!-- Cierre del contenido de ventajas -->
+                </div> <!-- Cierre de la tarjeta de ventajas -->
+
+                <!-- Tabla Comparativa Técnica: Fetch vs Axios -->
+                <div class="db-section"> <!-- Sección para visualizar la tabla comparativa directa entre ambas tecnologías -->
+                    <div class="db-title">Matriz Comparativa: Fetch API (Nativo) vs. Axios (Librería)</div> <!-- Título de la tabla comparativa -->
+                    <div class="db-container"> <!-- Contenedor con borde y fondo oscuro para la tabla -->
+                        <table class="db-table"> <!-- Estructura de tabla para mostrar la comparación -->
+                            <thead> <!-- Cabecera de columnas de la tabla -->
+                                <tr> <!-- Fila de la cabecera -->
+                                    <th>Característica Técnica</th> <!-- Columna de la funcionalidad -->
+                                    <th>Fetch API (Nativo)</th> <!-- Columna del comportamiento en Fetch -->
+                                    <th>Axios (Biblioteca)</th> <!-- Columna del comportamiento en Axios -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera de la tabla -->
+                            <tbody> <!-- Cuerpo de la tabla que contiene los registros comparativos -->
+                                <tr> <!-- Fila 1: Transformación de JSON -->
+                                    <td><strong>Conversión de JSON</strong></td> <!-- Celda de característica -->
+                                    <td>Manual en 2 pasos (<code>await res.json()</code>)</td> <!-- Comportamiento en Fetch -->
+                                    <td>✅ Automática directa en <code>res.data</code></td> <!-- Comportamiento en Axios -->
+                                </tr> <!-- Cierre de fila 1 -->
+                                <tr> <!-- Fila 2: Manejo de errores HTTP -->
+                                    <td><strong>Errores 4xx y 5xx</strong></td> <!-- Celda de característica -->
+                                    <td>No van al catch (requiere <code>if (!res.ok)</code>)</td> <!-- Comportamiento en Fetch -->
+                                    <td>✅ Va directo al <code>catch</code> automáticamente</td> <!-- Comportamiento en Axios -->
+                                </tr> <!-- Cierre de fila 2 -->
+                                <tr> <!-- Fila 3: Peticiones POST -->
+                                    <td><strong>Envío POST con Body</strong></td> <!-- Celda de característica -->
+                                    <td>Requiere <code>JSON.stringify()</code> y Headers</td> <!-- Comportamiento en Fetch -->
+                                    <td>✅ Pasa el objeto directo: <code>axios.post(url, obj)</code></td> <!-- Comportamiento en Axios -->
+                                </tr> <!-- Cierre de fila 3 -->
+                                <tr> <!-- Fila 4: Interceptores -->
+                                    <td><strong>Interceptores de Red</strong></td> <!-- Celda de característica -->
+                                    <td>No disponible de forma nativa</td> <!-- Comportamiento en Fetch -->
+                                    <td>✅ Sí (<code>axios.interceptors.request</code>)</td> <!-- Comportamiento en Axios -->
+                                </tr> <!-- Cierre de fila 4 -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla -->
+                        </table> <!-- Cierre de la tabla comparativa -->
+                    </div> <!-- Cierre del contenedor de la tabla -->
+                </div> <!-- Cierre de la sección comparativa -->
+
+                <!-- Panel de Prueba Cara a Cara (Side-by-Side) -->
+                <div class="demo-panel"> <!-- Panel de demostración interactiva cara a cara -->
+                    <div class="db-title">Simulador Cara a Cara: Prueba el Comportamiento Idéntico</div> <!-- Título del panel de prueba -->
+                    
+                    <div class="controls-row"> <!-- Fila de controles para elegir el escenario de prueba -->
+                        <div class="control-group"> <!-- Grupo de control para el escenario de prueba -->
+                            <label for="compareScenarioSelect">Escenario de Prueba HTTP</label> <!-- Etiqueta descriptiva del selector -->
+                            <select id="compareScenarioSelect" class="form-select"> <!-- Lista desplegable con escenarios para comparar -->
+                                <option value="get-success" selected>1. GET Exitoso (200 OK) — Observa res.json() vs res.data</option> <!-- Escenario exitoso 200 -->
+                                <option value="get-404">2. Error 404 Not Found — ¿Quién cae al catch automáticamente?</option> <!-- Escenario de error 404 -->
+                                <option value="post-auto">3. POST con Objeto — JSON.stringify manual vs Automático</option> <!-- Escenario de creación POST -->
+                            </select> <!-- Cierre del selector de escenario -->
+                        </div> <!-- Cierre del grupo de control -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <!-- Botones de Acción Duales -->
+                    <div class="dual-buttons-row"> <!-- Fila de botones para probar cada tecnología por separado -->
+                        <button class="btn btn-fetch" id="runCompareFetchBtn">Probar con Fetch Nativo ⚡</button> <!-- Botón para probar con Fetch -->
+                        <button class="btn btn-axios" id="runCompareAxiosBtn">Probar con Axios 🚀</button> <!-- Botón para probar con Axios -->
+                    </div> <!-- Cierre de la fila de botones -->
+
+                    <div class="output-box"> <!-- Caja contenedora del resultado comparativo -->
+                        <p id="compareResult">Selecciona un escenario y presiona cualquiera de los dos botones para comparar el flujo...</p> <!-- Texto principal con el resultado -->
+                        <p id="compareDemoNote">Listo para emitir peticiones y comparar comportamientos</p> <!-- Nota secundaria con el diagnóstico -->
+                    </div> <!-- Cierre de la caja de resultados -->
+
+                    <!-- Consola Terminal Virtual de Red (Fetch & Axios Inspector) -->
+                    <div class="virtual-terminal"> <!-- Contenedor con diseño de consola terminal para inspeccionar los logs de red -->
+                        <div class="terminal-header"> <!-- Cabecera de la ventana de la terminal con controles de estilo moderno -->
+                            <div class="terminal-dots"> <!-- Contenedor para los círculos de control de la ventana -->
+                                <div class="terminal-dot dot-close"></div> <!-- Botón circular rojo (cerrar ventana) -->
+                                <div class="terminal-dot dot-min"></div> <!-- Botón circular amarillo (minimizar ventana) -->
+                                <div class="terminal-dot dot-max"></div> <!-- Botón circular verde (maximizar ventana) -->
+                            </div> <!-- Cierre de los círculos de control -->
+                            <div class="terminal-title">CONSOLA HTTP — FETCH &amp; AXIOS INSPECTOR</div> <!-- Título central de la consola de inspección de red -->
+                        </div> <!-- Cierre de la cabecera de la terminal -->
+                        <div class="terminal-body" id="networkTerminal"> <!-- Cuerpo de la terminal con soporte de desplazamiento para mostrar logs de red -->
+                            <div class="terminal-line info"><span class="terminal-prompt">&gt;</span>[Network Engine] Inspector de red HTTP inicializado. Fetch y Axios listos para pruebas.</div> <!-- Mensaje inicial informando que el motor está preparado -->
+                        </div> <!-- Cierre del cuerpo de la terminal -->
+                    </div> <!-- Cierre de la consola terminal virtual -->
+                </div> <!-- Cierre del panel de demostración de Axios -->
+
+                <div class="code-preview"> <!-- Contenedor de visualización de código comparativo entre ambas tecnologías -->
+                    <div class="code-header">Comparativa de código: Fetch (Nativo) vs. Axios:</div> <!-- Cabecera del bloque de código -->
+                    <pre><code>// 1. CON FETCH (Nativo de JavaScript):
+const datosFetch = await fetch("/api/usuarios");
+if (!datosFetch.ok) throw new Error("Fallo: " + datosFetch.status);
+const usuarios = await datosFetch.json(); // Segundo await obligatorio
+console.log(usuarios);
+
+// 2. CON AXIOS (Biblioteca Externa):
+const respuesta = await axios.get("/api/usuarios");
+console.log(respuesta.data); // Ya transformado a JSON directo en .data
+// Si el servidor responde 404 o 500, Axios lo arroja al catch automáticamente!</code></pre> <!-- Bloque de código formativo de comparación -->
+                </div> <!-- Cierre del contenedor de vista previa de código -->
+            </div> <!-- Cierre de la Pestaña 2 -->
+        </section> <!-- Cierre de la sección de tarjeta principal -->
+    </main> <!-- Cierre del contenedor principal -->
+
+    <img src="" alt="" class="imagen">
+    <script src="main.js"></script> <!-- Carga el archivo de script principal main.js al final del body para no retrasar el renderizado visual -->
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->
