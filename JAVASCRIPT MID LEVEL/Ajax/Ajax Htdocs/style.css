@@ -1,0 +1,516 @@
+/* Define la paleta, las dimensiones compartidas y la tipografía de toda la página. */
+:root {
+    --ink: #17233b; /* Establece el color principal del texto. */
+    --muted: #69758a; /* Da un tono secundario a las descripciones. */
+    --blue: #4569e8; /* Define el color principal de botones y acentos. */
+    --blue-dark: #3454c8; /* Aporta contraste al interactuar con el botón. */
+    --mint: #dff6ef; /* Suaviza el fondo de los detalles decorativos. */
+    --line: #e7eaf1; /* Define bordes discretos para separar secciones. */
+    --surface: #ffffff; /* Mantiene las tarjetas sobre un fondo blanco. */
+    --page: #f5f7fb; /* Proporciona un fondo general tenue. */
+    --shadow: 0 18px 50px rgba(30, 47, 83, 0.07); /* Añade profundidad sutil a las tarjetas. */
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; /* Usa una tipografía clara con alternativas del sistema. */
+    color: var(--ink); /* Aplica el color de texto predeterminado. */
+    background: var(--page); /* Aplica el fondo predeterminado del documento. */
+}
+
+/* Hace que el ancho de los elementos incluya relleno y bordes. */
+* {
+    box-sizing: border-box; /* Evita cálculos de ancho inesperados en el diseño. */
+}
+
+/* Elimina márgenes del navegador y ocupa la altura disponible de la ventana. */
+body {
+    min-width: 320px; /* Conserva una composición utilizable en móviles estrechos. */
+    min-height: 100vh; /* Permite que el fondo abarque al menos toda la pantalla. */
+    margin: 0; /* Elimina el margen predeterminado del navegador. */
+    background: radial-gradient(ellipse at 50% 0%, #eaf0ff 0, var(--page) 42rem); /* Añade un resplandor azul muy tenue en la parte superior. */
+}
+
+/* Centra el contenido y limita su ancho para una lectura cómoda. */
+.page-shell {
+    width: min(100% - 48px, 1080px); /* Mantiene márgenes laterales y un ancho máximo. */
+    margin: 0 auto; /* Centra la composición horizontalmente. */
+}
+
+/* Alinea la marca y la etiqueta de estado de la cabecera. */
+.topbar {
+    display: flex; /* Coloca los elementos de cabecera en una fila. */
+    align-items: center; /* Alinea verticalmente la marca y la etiqueta. */
+    justify-content: space-between; /* Distribuye el contenido a ambos extremos. */
+    min-height: 82px; /* Da espacio suficiente a la navegación superior. */
+    border-bottom: 1px solid rgba(23, 35, 59, 0.08); /* Separa la cabecera del contenido con una línea ligera. */
+}
+
+/* Agrupa el isotipo y el nombre del sitio como una sola marca. */
+.brand {
+    display: inline-flex; /* Mantiene juntos el icono y el nombre. */
+    align-items: center; /* Centra el icono con el texto de la marca. */
+    gap: 10px; /* Separa el icono del nombre. */
+    color: var(--ink); /* Conserva el color principal en la marca. */
+    font-size: 15px; /* Define un tamaño compacto para la identidad. */
+    font-weight: 750; /* Destaca el nombre del sitio. */
+    letter-spacing: -0.04em; /* Ajusta el espaciado para un aspecto más pulido. */
+    text-decoration: none; /* Quita el subrayado propio del enlace. */
+}
+
+/* Dibuja el recuadro del símbolo de código. */
+.brand-mark {
+    display: grid; /* Permite centrar el símbolo con facilidad. */
+    width: 34px; /* Fija el ancho del recuadro. */
+    height: 34px; /* Fija la altura del recuadro. */
+    place-items: center; /* Centra el símbolo horizontal y verticalmente. */
+    border-radius: 11px; /* Suaviza las esquinas del recuadro. */
+    background: var(--blue); /* Resalta el recuadro con el color de marca. */
+    color: #ffffff; /* Contrasta el símbolo con el fondo azul. */
+    font-size: 14px; /* Mantiene el símbolo compacto. */
+    letter-spacing: -0.08em; /* Acerca los caracteres del símbolo. */
+}
+
+/* Diferencia la palabra secundaria del nombre de marca. */
+.brand-light {
+    color: var(--muted); /* Reduce el peso visual de la palabra secundaria. */
+    font-weight: 500; /* Mantiene el texto más ligero que la marca principal. */
+}
+
+/* Presenta una etiqueta discreta en la parte superior derecha. */
+.topbar-label {
+    display: inline-flex; /* Alinea el indicador y el texto en una fila. */
+    align-items: center; /* Centra el indicador con el texto. */
+    gap: 8px; /* Separa el indicador del texto. */
+    color: var(--muted); /* Usa un tono secundario en la etiqueta. */
+    font-size: 12px; /* Mantiene la etiqueta discreta. */
+    font-weight: 600; /* Asegura que la etiqueta sea legible. */
+}
+
+/* Representa visualmente que la guía está disponible. */
+.online-dot {
+    width: 7px; /* Define el diámetro del indicador. */
+    height: 7px; /* Mantiene el indicador circular. */
+    border-radius: 50%; /* Convierte el elemento en un círculo. */
+    background: #36b487; /* Usa verde para representar disponibilidad. */
+    box-shadow: 0 0 0 4px rgba(54, 180, 135, 0.12); /* Añade un halo sutil alrededor del indicador. */
+}
+
+/* Crea el bloque de introducción con espacio generoso. */
+.hero {
+    max-width: 720px; /* Evita que las líneas de introducción sean demasiado largas. */
+    padding: 76px 0 54px; /* Separa la introducción de la cabecera y los paneles. */
+}
+
+/* Da formato a las pequeñas etiquetas en mayúsculas. */
+.eyebrow,
+.section-kicker {
+    margin: 0; /* Evita márgenes de párrafo innecesarios. */
+    color: var(--blue); /* Usa el color de acento para orientar la lectura. */
+    font-size: 10px; /* Mantiene la etiqueta pequeña y secundaria. */
+    font-weight: 800; /* Mejora la legibilidad de las mayúsculas pequeñas. */
+    letter-spacing: 0.14em; /* Separa ligeramente las letras de la etiqueta. */
+}
+
+/* Establece el tamaño y el ritmo del título principal. */
+.hero h1 {
+    margin: 15px 0 13px; /* Separa el título de la etiqueta y del texto descriptivo. */
+    font-size: clamp(42px, 7vw, 68px); /* Ajusta el título a la pantalla sin perder impacto. */
+    font-weight: 760; /* Da protagonismo al encabezado. */
+    letter-spacing: -0.075em; /* Compacta el título para un estilo editorial. */
+    line-height: 1.02; /* Mantiene el bloque del título compacto. */
+}
+
+/* Destaca la palabra final del encabezado con un acento de color. */
+.hero h1 span {
+    color: var(--blue); /* Resalta el tema principal del encabezado. */
+}
+
+/* Define el ancho y la apariencia del texto introductorio. */
+.hero-copy {
+    max-width: 590px; /* Mantiene una longitud de línea cómoda. */
+    margin: 0; /* Alinea el texto con el título. */
+    color: var(--muted); /* Diferencia el texto introductorio del encabezado. */
+    font-size: 16px; /* Facilita la lectura del texto principal. */
+    line-height: 1.75; /* Añade aire entre líneas. */
+}
+
+/* Destaca las instrucciones necesarias para abrir la página desde XAMPP. */
+.setup-note {
+    max-width: 650px;
+    margin-top: 22px;
+    padding: 15px 18px;
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.setup-note p:last-child {
+    margin: 7px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* Da un aspecto uniforme al código insertado en los textos. */
+code {
+    border-radius: 5px; /* Suaviza el fondo del código en línea. */
+    background: #eef1fa; /* Distingue el código del texto alrededor. */
+    color: #4054a5; /* Mantiene el código legible con un acento azul. */
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; /* Usa una fuente monoespaciada para el código. */
+    font-size: 0.92em; /* Evita que el código sobresalga demasiado del texto. */
+}
+
+/* Coloca las tarjetas de formulario y respuesta en dos columnas. */
+.workspace {
+    display: grid; /* Activa la cuadrícula de paneles. */
+    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr); /* Da un poco más de espacio a la respuesta. */
+    gap: 20px; /* Separa los paneles sin perder continuidad visual. */
+}
+
+/* Da estilo común a las tarjetas de la demostración. */
+.panel {
+    min-width: 0; /* Permite que el contenido se ajuste dentro de la cuadrícula. */
+    padding: 28px; /* Añade espacio interior uniforme. */
+    border: 1px solid rgba(224, 229, 239, 0.85); /* Dibuja un borde apenas visible. */
+    border-radius: 18px; /* Redondea las esquinas de las tarjetas. */
+    background: var(--surface); /* Separa las tarjetas del fondo general. */
+    box-shadow: var(--shadow); /* Añade profundidad sutil a la interfaz. */
+}
+
+/* Alinea los títulos y distintivos en las tarjetas. */
+.panel-heading {
+    display: flex; /* Coloca el título y su distintivo en la misma fila. */
+    align-items: flex-start; /* Alinea los elementos por su borde superior. */
+    justify-content: space-between; /* Deja el distintivo en el extremo opuesto. */
+    gap: 16px; /* Evita que los elementos queden pegados. */
+}
+
+/* Define los encabezados secundarios de cada panel. */
+.panel h2 {
+    margin: 7px 0 0; /* Deja espacio bajo la etiqueta de sección. */
+    font-size: 21px; /* Da jerarquía al título de la tarjeta. */
+    font-weight: 720; /* Resalta el título sin competir con el encabezado principal. */
+    letter-spacing: -0.045em; /* Hace el título más compacto. */
+}
+
+/* Identifica el método HTTP usado para la petición. */
+.method-badge {
+    padding: 7px 10px; /* Crea espacio interno alrededor del texto POST. */
+    border: 1px solid #d9e4ff; /* Enmarca suavemente el distintivo. */
+    border-radius: 8px; /* Redondea las esquinas del distintivo. */
+    background: #f1f5ff; /* Usa un fondo azul pálido para el método. */
+    color: var(--blue); /* Destaca el método en azul. */
+    font-family: "SFMono-Regular", Consolas, monospace; /* Presenta el método como una etiqueta técnica. */
+    font-size: 10px; /* Mantiene el distintivo pequeño. */
+    font-weight: 800; /* Refuerza la lectura de POST. */
+    letter-spacing: 0.08em; /* Separa ligeramente las letras del método. */
+}
+
+/* Da formato a la breve explicación dentro de los paneles. */
+.panel-copy {
+    margin: 12px 0 23px; /* Separa la descripción del encabezado y del formulario. */
+    color: var(--muted); /* Usa un tono suave para el texto auxiliar. */
+    font-size: 13px; /* Mantiene la descripción compacta. */
+    line-height: 1.65; /* Conserva una lectura cómoda en varias líneas. */
+}
+
+/* Organiza los campos y el botón del formulario verticalmente. */
+#user-form {
+    display: flex; /* Activa la disposición flexible del formulario. */
+    flex-direction: column; /* Apila etiquetas, campos y botón. */
+}
+
+/* Define el estilo de las etiquetas de entrada. */
+#user-form label {
+    margin: 0 0 7px; /* Separa cada etiqueta del campo correspondiente. */
+    color: #34415a; /* Mantiene las etiquetas legibles y sobrias. */
+    font-size: 12px; /* Hace las etiquetas compactas. */
+    font-weight: 700; /* Distingue las etiquetas de los campos. */
+}
+
+/* Estiliza los campos editables del formulario. */
+#user-form input {
+    width: 100%; /* Ocupa todo el ancho disponible del formulario. */
+    min-height: 44px; /* Facilita la interacción con ratón o pantalla táctil. */
+    margin-bottom: 17px; /* Separa un campo del siguiente elemento. */
+    padding: 0 13px; /* Añade espacio entre el borde y el texto. */
+    border: 1px solid #dfe4ee; /* Marca el contorno del campo con bajo contraste. */
+    border-radius: 9px; /* Redondea las esquinas del campo. */
+    outline: none; /* Deja que el anillo de foco personalizado controle el énfasis. */
+    background: #fcfdff; /* Distingue el campo blanco del fondo de la tarjeta. */
+    color: var(--ink); /* Mantiene el texto escrito con buen contraste. */
+    font: inherit; /* Hereda la tipografía general del proyecto. */
+    font-size: 13px; /* Mantiene el valor de entrada compacto. */
+    transition: border-color 160ms ease, box-shadow 160ms ease; /* Suaviza el cambio de aspecto al enfocar. */
+}
+
+/* Destaca el campo activo para facilitar la interacción con teclado. */
+#user-form input:focus {
+    border-color: #8ba0f2; /* Resalta el borde del campo enfocado. */
+    box-shadow: 0 0 0 3px rgba(69, 105, 232, 0.12); /* Añade un anillo visible sin alterar el diseño. */
+}
+
+/* Estiliza el botón que inicia la solicitud. */
+#submit-button {
+    display: flex; /* Alinea el texto y la flecha del botón. */
+    align-items: center; /* Centra verticalmente el contenido. */
+    justify-content: space-between; /* Coloca la flecha en el extremo derecho. */
+    min-height: 47px; /* Proporciona un área de interacción cómoda. */
+    margin-top: 2px; /* Separa ligeramente el botón del último campo. */
+    padding: 0 15px; /* Deja espacio entre el contenido y los bordes. */
+    border: 0; /* Elimina el borde estándar del botón. */
+    border-radius: 10px; /* Redondea las esquinas del botón. */
+    background: var(--blue); /* Usa el color principal para la acción. */
+    color: #ffffff; /* Asegura contraste entre el texto y el fondo. */
+    cursor: pointer; /* Indica que el botón se puede pulsar. */
+    font: inherit; /* Conserva la tipografía general. */
+    font-size: 13px; /* Define un tamaño legible para la acción. */
+    font-weight: 700; /* Destaca el texto del botón. */
+    transition: background 160ms ease, transform 160ms ease; /* Suaviza las interacciones del botón. */
+}
+
+/* Oscurece el botón al pasar el puntero cuando está disponible. */
+#submit-button:hover:not(:disabled) {
+    transform: translateY(-1px); /* Eleva ligeramente el botón al pasar el puntero. */
+    background: var(--blue-dark); /* Oscurece el fondo para señalar la interacción. */
+}
+
+/* Comunica visualmente que el formulario está enviándose. */
+#submit-button:disabled {
+    cursor: wait; /* Indica que hay que esperar a que termine la solicitud. */
+    opacity: 0.72; /* Atenúa el botón mientras la acción está bloqueada. */
+}
+
+/* Da un poco más de presencia a la flecha de acción. */
+.button-arrow {
+    font-size: 19px; /* Hace que la flecha se distinga del texto. */
+    font-weight: 400; /* Mantiene la flecha ligera. */
+    line-height: 1; /* Evita que la flecha altere la altura del botón. */
+}
+
+/* Presenta el estado de la petición bajo el botón. */
+.status {
+    display: flex; /* Alinea el indicador con el mensaje. */
+    align-items: flex-start; /* Alinea el indicador con la primera línea. */
+    gap: 9px; /* Separa el indicador del mensaje. */
+    min-height: 42px; /* Reserva un espacio estable para el estado. */
+    margin-top: 17px; /* Separa el estado del botón. */
+    padding: 11px 12px; /* Añade espacio interior a la notificación. */
+    border: 1px solid transparent; /* Reserva el borde para los estados con color. */
+    border-radius: 9px; /* Redondea el contenedor del estado. */
+    font-size: 11px; /* Mantiene el mensaje de estado compacto. */
+    line-height: 1.5; /* Facilita la lectura de mensajes que ocupan varias líneas. */
+}
+
+/* Define el estado inicial antes de enviar datos. */
+.status-idle {
+    border-color: #e8ebf2; /* Enmarca el mensaje inicial en gris claro. */
+    background: #f8f9fc; /* Distingue el estado inicial de la tarjeta. */
+    color: var(--muted); /* Mantiene el mensaje inicial en un tono secundario. */
+}
+
+/* Distingue una petición en curso. */
+.status-loading {
+    border-color: #dce5ff; /* Usa un borde azul tenue para el estado activo. */
+    background: #f4f7ff; /* Da un fondo azul suave al estado activo. */
+    color: #4059b3; /* Mantiene legible el mensaje de progreso. */
+}
+
+/* Distingue una respuesta satisfactoria. */
+.status-success {
+    border-color: #ccebdd; /* Enmarca el mensaje correcto con verde suave. */
+    background: #effaf5; /* Usa un fondo verde pálido para el éxito. */
+    color: #227451; /* Identifica el mensaje de éxito con texto verde. */
+}
+
+/* Distingue los errores HTTP, de red y de formato. */
+.status-error {
+    border-color: #f3d6d6; /* Enmarca el error con un borde rojizo suave. */
+    background: #fff5f5; /* Usa un fondo cálido que señala el problema. */
+    color: #a54444; /* Mantiene el mensaje de error visible. */
+}
+
+/* Dibuja el pequeño indicador circular de los estados. */
+.status-indicator {
+    flex: 0 0 7px; /* Conserva el tamaño del indicador aunque el texto sea largo. */
+    width: 7px; /* Define el ancho del círculo. */
+    height: 7px; /* Define la altura del círculo. */
+    margin-top: 4px; /* Alinea el círculo con el texto del estado. */
+    border-radius: 50%; /* Convierte el indicador en un círculo. */
+    background: currentColor; /* Usa el color del estado actual. */
+}
+
+/* Da formato al pequeño símbolo de la tarjeta de respuesta. */
+.response-icon {
+    display: grid; /* Permite centrar el símbolo en su recuadro. */
+    width: 36px; /* Define el ancho del recuadro decorativo. */
+    height: 36px; /* Define la altura del recuadro decorativo. */
+    place-items: center; /* Centra los caracteres del símbolo. */
+    border-radius: 10px; /* Suaviza las esquinas del recuadro. */
+    background: var(--mint); /* Añade un acento verde agua al panel de respuesta. */
+    color: #25866b; /* Contrasta el símbolo con su fondo. */
+    font-family: "SFMono-Regular", Consolas, monospace; /* Refuerza el carácter técnico del símbolo. */
+    font-size: 13px; /* Mantiene el símbolo compacto. */
+    font-weight: 800; /* Hace que el símbolo sea fácil de distinguir. */
+}
+
+/* Reserva una zona para el JSON y permite desplazarse si es extenso. */
+.response-output {
+    min-height: 237px; /* Mantiene el panel estable antes y después de la respuesta. */
+    max-height: 320px; /* Impide que una respuesta larga desplace toda la página. */
+    overflow: auto; /* Permite consultar contenido extenso dentro del panel. */
+    margin: 0; /* Alinea la salida con los bordes internos del panel. */
+    padding: 19px; /* Separa el JSON de los bordes del área. */
+    border: 1px solid #e5eaf3; /* Enmarca la salida de forma discreta. */
+    border-radius: 11px; /* Redondea el contenedor del JSON. */
+    background: #f7f9fd; /* Separa la salida del fondo blanco de la tarjeta. */
+    color: #334361; /* Mantiene legible el contenido JSON. */
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; /* Muestra los datos en una fuente monoespaciada. */
+    font-size: 12px; /* Mantiene una densidad adecuada para el JSON. */
+    line-height: 1.8; /* Facilita seguir cada línea de la respuesta. */
+    white-space: pre-wrap; /* Conserva el formato e inserta saltos si una línea es larga. */
+    overflow-wrap: anywhere; /* Evita que valores largos desborden el panel. */
+}
+
+/* Quita estilos heredados del código dentro de la salida de respuesta. */
+.response-output code {
+    padding: 0; /* Evita un relleno innecesario alrededor del JSON. */
+    background: transparent; /* Deja que el contenedor controle el fondo. */
+    color: inherit; /* Usa el color definido por el área de respuesta. */
+    font-size: inherit; /* Mantiene el mismo tamaño que el área de respuesta. */
+}
+
+/* Presenta la nota de conectividad bajo el resultado. */
+.response-note {
+    display: flex; /* Coloca el símbolo y la nota en una fila. */
+    gap: 8px; /* Separa el símbolo del texto informativo. */
+    margin: 14px 0 0; /* Separa la nota del bloque de respuesta. */
+    color: var(--muted); /* Mantiene la nota en segundo plano. */
+    font-size: 11px; /* Hace que la nota sea auxiliar pero legible. */
+    line-height: 1.55; /* Facilita la lectura de la nota en pantallas estrechas. */
+}
+
+/* Colorea el símbolo que introduce la nota. */
+.response-note span {
+    color: var(--blue); /* Usa el color de acento para el indicador. */
+    font-weight: 800; /* Asegura que el símbolo se distinga del texto. */
+}
+
+/* Separa la explicación de la demostración interactiva. */
+.explanation {
+    padding: 66px 0 54px; /* Da aire a la sección y al pie de página. */
+}
+
+/* Estiliza el título de la explicación. */
+.explanation-heading h2 {
+    margin: 9px 0 26px; /* Separa el título de la etiqueta y de los pasos. */
+    font-size: 25px; /* Da jerarquía a la explicación sin competir con el título principal. */
+    font-weight: 720; /* Resalta el encabezado de la sección. */
+    letter-spacing: -0.055em; /* Compacta el encabezado de la sección. */
+}
+
+/* Distribuye los pasos explicativos en tres columnas. */
+.steps {
+    display: grid; /* Activa el diseño en columnas para los pasos. */
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Da el mismo espacio a cada paso. */
+    gap: 24px; /* Separa cada explicación para que no se mezclen. */
+}
+
+/* Alinea el número y el texto de cada paso. */
+.step {
+    display: flex; /* Coloca el número junto al texto explicativo. */
+    align-items: flex-start; /* Alinea el número con el comienzo del título. */
+    gap: 13px; /* Separa el número del contenido. */
+}
+
+/* Destaca el número de cada paso con un círculo suave. */
+.step-number {
+    display: grid; /* Permite centrar el número en el círculo. */
+    flex: 0 0 29px; /* Mantiene un tamaño fijo para el indicador. */
+    width: 29px; /* Define el ancho del círculo numerado. */
+    height: 29px; /* Define la altura del círculo numerado. */
+    place-items: center; /* Centra el número horizontal y verticalmente. */
+    border: 1px solid #dce4ff; /* Añade un borde azul pálido. */
+    border-radius: 50%; /* Convierte el contenedor en círculo. */
+    background: #f0f4ff; /* Añade un fondo azulado suave. */
+    color: var(--blue); /* Destaca el número con el color de acento. */
+    font-size: 11px; /* Mantiene el número equilibrado con el círculo. */
+    font-weight: 800; /* Hace que el número se reconozca rápidamente. */
+}
+
+/* Da formato a los títulos de cada paso. */
+.step h3 {
+    margin: 2px 0 6px; /* Alinea el título y lo separa de su descripción. */
+    font-size: 13px; /* Define un tamaño secundario para el título. */
+    font-weight: 720; /* Distingue el título de la descripción. */
+    letter-spacing: -0.025em; /* Ajusta el espaciado del título. */
+}
+
+/* Estiliza el texto explicativo de cada paso. */
+.step p {
+    margin: 0; /* Quita el margen predeterminado del párrafo. */
+    color: var(--muted); /* Reduce el énfasis visual de la explicación. */
+    font-size: 12px; /* Mantiene el texto secundario compacto. */
+    line-height: 1.7; /* Da espacio suficiente entre líneas. */
+}
+
+/* Separa y alinea los elementos del pie de página. */
+.footer {
+    display: flex; /* Coloca los dos textos del pie en una fila. */
+    justify-content: space-between; /* Sitúa cada texto en un extremo. */
+    gap: 16px; /* Conserva espacio entre textos si la pantalla se estrecha. */
+    padding: 19px 0 25px; /* Separa el pie del contenido anterior y del borde inferior. */
+    border-top: 1px solid rgba(23, 35, 59, 0.08); /* Marca el inicio del pie con una línea ligera. */
+    color: #8490a3; /* Mantiene el pie con un tono discreto. */
+    font-size: 10px; /* Conserva el pie en segundo plano. */
+}
+
+/* Reorganiza las columnas cuando la ventana se vuelve más estrecha. */
+@media (max-width: 760px) {
+    .page-shell {
+        width: min(100% - 36px, 560px); /* Reduce los márgenes y limita el ancho móvil. */
+    }
+
+    .hero {
+        padding: 58px 0 38px; /* Reduce el espacio vertical de la introducción. */
+    }
+
+    .workspace {
+        grid-template-columns: 1fr; /* Apila las tarjetas en una sola columna. */
+    }
+
+    .response-output {
+        min-height: 190px; /* Reduce el espacio vacío de respuesta en móviles. */
+    }
+
+    .steps {
+        grid-template-columns: 1fr; /* Apila las explicaciones para mejorar la lectura. */
+        gap: 20px; /* Conserva separación entre los pasos apilados. */
+    }
+
+    .explanation {
+        padding: 50px 0 42px; /* Compacta la sección explicativa en móvil. */
+    }
+}
+
+/* Ajusta los márgenes y textos para teléfonos pequeños. */
+@media (max-width: 420px) {
+    .page-shell {
+        width: min(100% - 28px, 360px); /* Reduce un poco más los márgenes laterales. */
+    }
+
+    .topbar {
+        min-height: 70px; /* Compacta la cabecera para pantallas pequeñas. */
+    }
+
+    .panel {
+        padding: 21px; /* Reduce el relleno de las tarjetas en móviles estrechos. */
+        border-radius: 15px; /* Ajusta las esquinas al tamaño de las tarjetas. */
+    }
+
+    .hero-copy {
+        font-size: 14px; /* Ajusta el texto introductorio a la pantalla pequeña. */
+    }
+
+    .footer {
+        flex-direction: column; /* Apila los textos del pie cuando no caben en una fila. */
+        gap: 7px; /* Separa las líneas del pie. */
+    }
+}
