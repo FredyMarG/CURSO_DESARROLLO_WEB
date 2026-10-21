@@ -1,0 +1,273 @@
+/* Aplica el mismo modelo de caja, elimina márgenes base y unifica la tipografía. */
+* {
+    box-sizing: border-box; /* Incluye el relleno y el borde dentro del tamaño declarado. */
+    margin: 0; /* Quita los márgenes predeterminados del navegador. */
+    padding: 0; /* Quita los rellenos predeterminados del navegador. */
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Usa una fuente legible con alternativas comunes. */
+}
+
+/* Define el fondo y el espacio exterior de toda la página. */
+body {
+    min-height: 100vh; /* Hace que la página mida como mínimo toda la altura de la ventana. */
+    padding: 20px; /* Separa el contenido de los bordes de la ventana. */
+    background: linear-gradient(135deg, #eef2f7 0%, #dfe6f0 100%); /* Crea un fondo degradado diagonal y suave. */
+}
+
+/* Comparte el diseño de tarjeta entre el enunciado, la invitación y el panel de resultados. */
+.enunciado,
+.ask,
+#solucion {
+    width: min(90%, 1200px); /* Ocupa hasta el 90% del ancho y nunca supera 1200 píxeles. */
+    margin: 30px auto; /* Añade espacio vertical y centra cada tarjeta horizontalmente. */
+    padding: 30px; /* Separa el contenido de los bordes interiores de la tarjeta. */
+    text-align: center; /* Centra el texto y los elementos en línea. */
+    background: #fff; /* Usa un fondo blanco para las tarjetas. */
+    border-radius: 18px; /* Redondea las esquinas de las tarjetas. */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Añade una sombra suave bajo las tarjetas. */
+    transition: transform 0.3s ease; /* Suaviza el movimiento cuando la tarjeta se eleva. */
+}
+
+/* Eleva un poco las tarjetas al pasar el puntero por encima. */
+.enunciado:hover,
+.ask:hover,
+#solucion:hover {
+    transform: translateY(-3px); /* Desplaza la tarjeta tres píxeles hacia arriba. */
+}
+
+/* Da jerarquía al título principal del enunciado. */
+.title {
+    margin-bottom: 15px; /* Separa el título del texto que aparece debajo. */
+    color: #1e3a8a; /* Usa azul oscuro para el título. */
+    letter-spacing: 1px; /* Separa ligeramente las letras del título. */
+}
+
+/* Mejora la lectura del texto descriptivo. */
+.enunciado p {
+    margin: 10px 0; /* Añade espacio arriba y abajo del párrafo. */
+    color: #555; /* Usa gris oscuro para el texto. */
+    line-height: 1.7; /* Aumenta el espacio vertical entre líneas. */
+}
+
+/* Da formato a la lista de requisitos dentro del enunciado. */
+.enunciado ol {
+    margin: 15px 0 0; /* Separa la lista del párrafo de arriba. */
+    padding-left: 2rem; /* Reserva espacio para la numeración de la lista. */
+    color: #444; /* Usa gris oscuro para los elementos de la lista. */
+    line-height: 1.8; /* Separa verticalmente las líneas de la lista. */
+    text-align: left; /* Alinea los requisitos al margen izquierdo. */
+}
+
+/* Destaca las instrucciones necesarias para servir la página desde XAMPP. */
+.aviso-servidor {
+    width: min(90%, 1200px); /* Mantiene el aviso alineado con las tarjetas principales. */
+    margin: 0 auto 30px; /* Centra el aviso y lo separa del bloque siguiente. */
+    padding: 22px 26px; /* Da espacio generoso alrededor del contenido. */
+    border: 1px solid #dbeafe; /* Delimita el aviso con un borde azul tenue. */
+    border-left: 5px solid #3b82f6; /* Añade un acento azul para identificar el aviso rápidamente. */
+    border-radius: 16px; /* Redondea las esquinas de la tarjeta informativa. */
+    background: linear-gradient(120deg, #fff 0%, #f3f7ff 100%); /* Aplica un fondo claro con un suave matiz azul. */
+    box-shadow: 0 8px 24px rgba(30, 58, 138, 0.08); /* Separa visualmente el aviso del fondo de la página. */
+    color: #334155; /* Usa gris azulado oscuro para una lectura cómoda. */
+    line-height: 1.7; /* Da espacio vertical entre las líneas del aviso. */
+    text-align: left; /* Alinea el contenido para que se lea como instrucciones. */
+    transition: transform 0.25s ease, box-shadow 0.25s ease; /* Suaviza la elevación al pasar el puntero. */
+}
+
+/* Eleva suavemente el aviso cuando el usuario pasa el puntero encima. */
+.aviso-servidor:hover {
+    transform: translateY(-2px); /* Desplaza la tarjeta ligeramente hacia arriba. */
+    box-shadow: 0 12px 28px rgba(30, 58, 138, 0.12); /* Refuerza sutilmente la sombra de la tarjeta. */
+}
+
+/* Da jerarquía al título breve de las instrucciones. */
+.aviso-servidor strong {
+    display: block; /* Coloca el encabezado en su propia línea. */
+    margin-bottom: 5px; /* Separa el encabezado del texto explicativo. */
+    color: #1e3a8a; /* Resalta el encabezado en azul oscuro. */
+    font-size: 1.05rem; /* Aumenta ligeramente el tamaño del encabezado. */
+}
+
+/* Separa las instrucciones del encabezado del aviso. */
+.aviso-servidor p {
+    margin: 0; /* Evita márgenes predeterminados alrededor del párrafo. */
+}
+
+/* Resalta la ruta de la carpeta y la carpeta htdocs como texto de código. */
+.aviso-servidor code {
+    display: inline-block; /* Mantiene cada ruta como un bloque compacto dentro del texto. */
+    margin: 2px 3px; /* Evita que las rutas queden pegadas a las palabras vecinas. */
+    padding: 3px 8px; /* Añade espacio interior alrededor de cada ruta. */
+    border: 1px solid #dbeafe; /* Define el contorno de las rutas. */
+    border-radius: 7px; /* Redondea las esquinas del resaltado. */
+    background: #eaf1ff; /* Distingue las rutas del resto de las instrucciones. */
+    color: #1e40af; /* Mantiene buen contraste en el texto de las rutas. */
+    font-family: Consolas, "Courier New", monospace; /* Usa una tipografía monoespaciada para las rutas. */
+    font-size: 0.92em; /* Ajusta la ruta para integrarla con el texto de la instrucción. */
+}
+
+/* Destaca el enlace local para que sea fácil abrir la aplicación. */
+.aviso-servidor a {
+    display: inline-block; /* Permite separar y rellenar el enlace como una etiqueta. */
+    margin: 7px 0 0 3px; /* Separa el enlace del texto previo y le da aire. */
+    padding: 5px 10px; /* Añade espacio interior para facilitar su identificación y clic. */
+    border-radius: 8px; /* Redondea las esquinas del enlace destacado. */
+    background: #dbeafe; /* Resalta el enlace con un fondo azul claro. */
+    color: #1d4ed8; /* Usa azul intenso para identificarlo como enlace. */
+    font-weight: 700; /* Hace que la dirección sea fácil de identificar. */
+    text-decoration: none; /* Quita el subrayado para que parezca una etiqueta interactiva. */
+    overflow-wrap: anywhere; /* Permite partir el enlace en pantallas angostas. */
+    transition: background 0.2s ease, color 0.2s ease; /* Suaviza el cambio de color al pasar el puntero. */
+}
+
+/* Refuerza el contraste del enlace cuando el puntero está encima. */
+.aviso-servidor a:hover {
+    background: #1d4ed8; /* Cambia el fondo a azul intenso al interactuar. */
+    color: #fff; /* Cambia el texto a blanco para conservar el contraste. */
+}
+
+/* Da estilo común a todos los botones de la página. */
+button {
+    display: inline-flex; /* Permite centrar el contenido del botón con Flexbox. */
+    align-items: center; /* Centra el texto verticalmente dentro del botón. */
+    justify-content: center; /* Centra el texto horizontalmente dentro del botón. */
+    margin-top: 20px; /* Separa el botón del contenido que tiene encima. */
+    padding: 14px 28px; /* Define el espacio interior vertical y horizontal. */
+    border: 2px solid #fff; /* Añade un borde blanco alrededor del botón. */
+    border-radius: 16px; /* Redondea las esquinas del botón. */
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); /* Aplica un degradado azul oscuro. */
+    box-shadow: 0 8px 15px rgba(37, 99, 235, 0.25); /* Añade una sombra azul suave. */
+    color: #fff; /* Muestra el texto en blanco. */
+    font-size: 16px; /* Define un tamaño cómodo para el texto del botón. */
+    font-weight: 700; /* Resalta el texto con negrita. */
+    letter-spacing: 0.6px; /* Separa un poco las letras. */
+    text-transform: uppercase; /* Muestra el texto en mayúsculas. */
+    cursor: pointer; /* Indica visualmente que el botón se puede pulsar. */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease; /* Anima los cambios al interactuar. */
+}
+
+/* Cambia la apariencia del botón cuando el puntero está encima. */
+button:hover {
+    transform: translateY(-4px); /* Eleva el botón para indicar interacción. */
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%); /* Aclara el degradado azul. */
+    box-shadow: 0 12px 24px rgba(37, 99, 235, 0.35); /* Hace más intensa la sombra del botón. */
+}
+
+/* Simula que el botón se presiona mientras se hace clic. */
+button:active {
+    transform: translateY(-1px) scale(0.98); /* Baja y reduce ligeramente el botón. */
+}
+
+/* Mantiene oculto el panel hasta que JavaScript le añade la clase mostrar. */
+#solucion {
+    visibility: hidden; /* Oculta el panel sin quitar su espacio del diseño. */
+    margin-top: 20px; /* Separa el panel del bloque anterior. */
+}
+
+/* Anima la aparición del panel cuando se activa la clase mostrar. */
+#solucion.mostrar {
+    animation: aparecer 0.6s ease forwards; /* Ejecuta la animación y conserva su estado final visible. */
+}
+
+/* Organiza las tarjetas de resultados en dos columnas con espacio entre ellas. */
+.resultado {
+    display: grid; /* Usa CSS Grid para organizar las tarjetas de datos. */
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* Crea dos columnas iguales que pueden encogerse. */
+    gap: 16px; /* Deja espacio entre las tarjetas de resultados. */
+    width: min(100%, 700px); /* Limita el ancho y evita exceder el contenedor. */
+    margin: 24px auto 0; /* Añade espacio superior y centra el bloque. */
+}
+
+/* Comparte el formato básico de las tarjetas de aprobados y desaprobados. */
+.aprobados,
+.desaprobados {
+    padding: 24px; /* Separa el contenido del borde de cada tarjeta. */
+    border: 1px solid transparent; /* Reserva un borde sin alterar la alineación. */
+    border-radius: 14px; /* Redondea las esquinas de las tarjetas. */
+    font-size: 1.05rem; /* Ajusta el tamaño de las etiquetas. */
+    font-weight: 600; /* Destaca las etiquetas con un peso seminegrita. */
+    text-align: center; /* Centra etiquetas y cifras. */
+}
+
+/* Identifica visualmente el resultado de las personas aprobadas. */
+.aprobados {
+    border-color: #a7f3d0; /* Añade un borde verde claro. */
+    background: #ecfdf5; /* Usa un fondo verde muy claro. */
+    color: #047857; /* Muestra el texto en verde oscuro. */
+}
+
+/* Identifica visualmente el resultado de las personas desaprobadas. */
+.desaprobados {
+    border-color: #fecaca; /* Añade un borde rojo claro. */
+    background: #fef2f2; /* Usa un fondo rojo muy claro. */
+    color: #b91c1c; /* Muestra el texto en rojo oscuro. */
+}
+
+/* Oculta las tarjetas hasta que JavaScript inserte sus etiquetas y cantidades. */
+.aprobados:empty,
+.desaprobados:empty {
+    display: none; /* Evita mostrar tarjetas vacías antes de cargar los datos. */
+}
+
+/* Resalta los números dentro de las tarjetas de resultados. */
+.resultado b {
+    display: block; /* Coloca la cifra en una línea debajo de su etiqueta. */
+    margin-top: 8px; /* Separa la cifra de la etiqueta. */
+    font-size: clamp(1.8rem, 5vw, 2.5rem); /* Ajusta el tamaño de la cifra al ancho de pantalla. */
+    line-height: 1.1; /* Mantiene compacta la altura de las cifras. */
+}
+
+/* Oculta cifras y mensajes de error mientras no tengan contenido. */
+.resultado b:empty,
+.error-msg:empty {
+    display: none; /* Evita reservar espacio para elementos vacíos. */
+}
+
+/* Da formato al mensaje de error solo cuando JavaScript activa la clase error. */
+.error-msg.error {
+    grid-column: 1 / -1; /* Hace que el mensaje abarque todas las columnas de la cuadrícula. */
+    padding: 14px 16px; /* Separa el texto de los bordes del aviso. */
+    border: 1px solid #fecaca; /* Añade un borde rojo claro para destacar el aviso. */
+    border-radius: 12px; /* Redondea las esquinas del aviso. */
+    background: #fef2f2; /* Usa un fondo rojo muy claro. */
+    color: #b91c1c; /* Muestra el mensaje en rojo oscuro. */
+    line-height: 1.5; /* Facilita la lectura si el mensaje ocupa varias líneas. */
+}
+
+/* Define cómo aparece el panel de solución. */
+@keyframes aparecer {
+    /* Estado inicial: el panel está transparente y ligeramente desplazado hacia arriba. */
+    from {
+        opacity: 0; /* Hace que el panel empiece completamente transparente. */
+        transform: translateY(-16px); /* Inicia el panel 16 píxeles por encima de su posición. */
+    }
+
+    /* Estado final: el panel queda visible en su posición habitual. */
+    to {
+        opacity: 1; /* Hace que el panel termine completamente visible. */
+        transform: translateY(0); /* Devuelve el panel a su posición original. */
+        visibility: visible; /* Cambia la visibilidad para que el panel pueda verse e interactuarse. */
+    }
+}
+
+/* Ajusta los espacios y columnas para pantallas estrechas. */
+@media (max-width: 520px) {
+    /* Reduce el espacio exterior en dispositivos móviles. */
+    body {
+        padding: 12px; /* Evita márgenes excesivos en pantallas pequeñas. */
+    }
+
+    /* Permite que las tarjetas principales ocupen todo el ancho disponible. */
+    .enunciado,
+    .ask,
+    #solucion,
+    .aviso-servidor {
+        width: 100%; /* Usa el ancho completo del área de contenido. */
+        padding: 22px 18px; /* Reduce el relleno para dejar espacio al contenido. */
+    }
+
+    /* Coloca cada resultado debajo del anterior en móviles. */
+    .resultado {
+        grid-template-columns: 1fr; /* Cambia la cuadrícula a una sola columna. */
+        gap: 12px; /* Reduce el espacio vertical entre las tarjetas. */
+    }
+}

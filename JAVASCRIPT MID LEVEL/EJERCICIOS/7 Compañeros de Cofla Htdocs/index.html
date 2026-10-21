@@ -1,0 +1,74 @@
+<!doctype html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html
+     Título: Ejercicio 6: Notas de Cofla
+     Propósito: Estructura semántica para la presentación del problema y el contenedor dinámico de asignaturas y calificaciones recuperadas de un servidor simulado.
+     Relación: Enlaza con style.css para el diseño y animaciones, y con main.js para la lógica asíncrona mediante Promesas y Async/Await.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+<html lang="es"> <!-- Define el idioma principal del documento como español para accesibilidad y SEO. -->
+
+<head>
+    <!-- Cabecera (head): metadatos técnicos, título de la pestaña y enlaces a hojas de estilo externas -->
+    <meta charset="UTF-8" /> <!-- Especifica la codificación de caracteres UTF-8 para admitir acentos y caracteres especiales. -->
+    <link rel="stylesheet" href="style.css" /> <!-- Enlaza los estilos CSS para la interfaz, tarjetas y animaciones. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Asegura un escalado y diseño responsivo en dispositivos móviles. -->
+    <title>Ejercicio 7 - Compañeros de Cofla</title> <!-- Título visible en la pestaña del navegador. -->
+</head>
+
+<body>
+    <!-- Cuerpo del documento (body): contiene todos los elementos visuales e interactivos de la aplicación -->
+
+    <!-- TARJETA 1: Contexto y enunciado del ejercicio -->
+    <div class="enunciado"> <!-- Contenedor principal del enunciado con diseño tipo tarjeta. -->
+        <h1 class="title">Ejercicio 7</h1> <!-- Título principal del ejercicio. -->
+        <p> <!-- Descripción del escenario de Cofla y la necesidad de consultar datos en otro servidor. -->
+           Cofla ya esta cursando su último semestre en la universidad. Efectivamente tuvo todo lo necesario para pasar de año, pero el tiene una duda, quiere saber cuantas personas que cursan el último semestre, se reciben y cuantas no, esta información la tiene una API de su universidad a la que el tiene fácil acceso.
+        </p>
+        <ol type="A"> <!-- Lista ordenada con incisos alfabéticos que detalla los requisitos a resolver. -->
+            <li> <!-- Requisito principal: almacenamiento y presentación ordenada. -->
+                Crear un sistema para obtener esa información
+            </li>
+            <li>
+                Mostrarla ordenadamente en un sitio web
+            </li>
+        </ol>
+    </div>
+
+    <!-- Aviso con la ubicación requerida para ejecutar el proyecto desde un servidor local. -->
+    <aside class="aviso-servidor" aria-label="Instrucciones para ejecutar el proyecto">
+        <strong>Para ejecutar este proyecto en XAMPP:</strong>
+        <p>
+            Coloca la carpeta <code>7 Compañeros de Cofla Htdocs</code> dentro de
+            <code>C:\xampp\htdocs\</code>, inicia Apache y abre
+            <a href="http://localhost/7%20Compa%C3%B1eros%20de%20Cofla%20Htdocs/">
+                http://localhost/7 Compañeros de Cofla Htdocs/
+            </a>
+            en el navegador.
+        </p>
+    </aside>
+
+    <!-- TARJETA 2: Sección de interacción previa -->
+    <div class="ask"> <!-- Contenedor para el llamado a la acción inicial. -->
+        <p>Realizaremos el sistema con la informacion del API</p> <!-- Mensaje explicativo. -->
+        <button class="aceptar" id="aceptar">👀 Solución</button> <!-- Botón disparador que activa la consulta asíncrona en main.js. -->
+    </div>
+
+    <!-- TARJETA 3: Sección de resultados (Solución) -->
+    <div id="solucion" class="solucion"> <!-- Panel inicialmente oculto que se visualiza con animación al hacer clic en el botón. -->
+        <button id="getInfo">Obtener Info</button>
+        <div class="resultado">
+            <div class="aprobados"></div>
+            <div class="desaprobados"></div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <!-- Carga del archivo JavaScript al final del body para garantizar que todo el DOM esté disponible antes de ejecutar la lógica -->
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>
