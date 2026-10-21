@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+    <meta name="description" content="Compara Fetch y Axios con una petición POST interactiva en JavaScript.">
+    <link rel="stylesheet" href="style.css">
+    <title>Axios + Fetch | Peticiones HTTP</title>
+</head>
+<body>
+    <main class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="#" aria-label="Axios y Fetch, inicio">
+                <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+                <span>Axios <span class="brand-light">+</span> Fetch</span>
+            </a>
+            <span class="topbar-label">
+                <span class="online-dot"></span>
+                Laboratorio HTTP
+            </span>
+        </header>
+
+        <aside class="hosting-notice" role="note" aria-label="Instrucciones para visualizar la información">
+            <span class="hosting-notice-icon" aria-hidden="true">i</span>
+            <p>
+                <strong>Para visualizar la información:</strong> guarda esta carpeta dentro de
+                <code>htdocs</code> y abre el proyecto desde
+                <code>http://localhost/Axios-Fetch/</code>.
+            </p>
+        </aside>
+
+        <section class="hero" aria-labelledby="page-title">
+            <p class="eyebrow">JAVASCRIPT · PETICIONES HTTP</p>
+            <h1 id="page-title">Axios <span>o</span> Fetch.</h1>
+            <p class="hero-copy">
+                Dos formas de enviar datos al servidor sin recargar la página.
+                Elige una herramienta, envía la misma petición y compara la respuesta.
+            </p>
+        </section>
+
+        <section class="workspace" aria-label="Comparación interactiva de Axios y Fetch">
+            <article class="panel request-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="section-kicker">01 / CONFIGURA LA PETICIÓN</p>
+                        <h2>Crear un usuario</h2>
+                    </div>
+                    <span class="method-badge">POST</span>
+                </div>
+                <p class="panel-copy">
+                    Selecciona el cliente HTTP y envía estos datos como JSON a
+                    JSONPlaceholder.
+                </p>
+
+                <div class="client-picker" role="group" aria-label="Seleccionar cliente HTTP">
+                    <button
+                        class="client-option is-selected"
+                        type="button"
+                        data-client="fetch"
+                        aria-pressed="true"
+                    >
+                        Fetch
+                    </button>
+                    <button
+                        class="client-option"
+                        type="button"
+                        data-client="axios"
+                        aria-pressed="false"
+                    >
+                        Axios
+                    </button>
+                </div>
+                <p id="client-description" class="client-description">
+                    Fetch viene integrado en el navegador; hay que comprobar
+                    manualmente si la respuesta HTTP fue exitosa.
+                </p>
+
+                <form id="user-form">
+                    <label for="name">Nombre</label>
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value="Ada Lovelace"
+                        required
+                        maxlength="60"
+                        autocomplete="name"
+                    >
+
+                    <label for="job">Ocupación</label>
+                    <input
+                        id="job"
+                        name="job"
+                        type="text"
+                        value="Programadora"
+                        required
+                        maxlength="60"
+                    >
+
+                    <button id="submit-button" type="submit">
+                        <span>Enviar con Fetch</span>
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <div id="request-status" class="status status-idle" role="status" aria-live="polite">
+                    <span class="status-indicator" aria-hidden="true"></span>
+                    <span id="status-message">Listo para enviar. La respuesta aparecerá aquí.</span>
+                </div>
+            </article>
+
+            <article class="panel response-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="section-kicker">02 / REVISA EL RESULTADO</p>
+                        <h2>Respuesta del servidor</h2>
+                    </div>
+                    <span class="response-icon" aria-hidden="true">{ }</span>
+                </div>
+                <p class="panel-copy">
+                    La respuesta JSON y el estado HTTP se mostrarán aquí.
+                </p>
+                <pre
+                    id="response-output"
+                    class="response-output"
+                    aria-label="Datos de respuesta"
+                ><code>Esperando una petición...</code></pre>
+                <p class="response-note">
+                    <span aria-hidden="true">↳</span>
+                    JSONPlaceholder simula la creación y devuelve los datos enviados.
+                </p>
+                <div class="user-actions" aria-label="Consultar datos del usuario">
+                    <button id="nombre" class="secondary-button" type="button">
+                        Obtener nombre
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+                    <button id="edad" class="secondary-button" type="button">
+                        Obtener edad
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+                </div>
+                <div class="user-details" aria-label="Datos del usuario" aria-live="polite">
+                    <div class="user-detail">
+                        <span class="user-detail-label">Nombre</span>
+                        <div class="nombre">Sin consultar</div>
+                    </div>
+                    <div class="user-detail">
+                        <span class="user-detail-label">Edad</span>
+                        <div class="edad">Sin consultar</div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="explanation" aria-labelledby="explanation-title">
+            <div class="explanation-heading">
+                <p class="section-kicker">DOS CLIENTES, UN MISMO OBJETIVO</p>
+                <h2 id="explanation-title">¿Qué cambia entre Fetch y Axios?</h2>
+            </div>
+            <div class="steps">
+                <article class="step">
+                    <span class="step-number">1</span>
+                    <div>
+                        <h3>Fetch</h3>
+                        <p>
+                            Es una API nativa del navegador. Convierte la respuesta
+                            con <code>response.json()</code> y no rechaza
+                            automáticamente los errores HTTP.
+                        </p>
+                    </div>
+                </article>
+                <article class="step">
+                    <span class="step-number">2</span>
+                    <div>
+                        <h3>Axios</h3>
+                        <p>
+                            Es una biblioteca externa. Interpreta JSON
+                            automáticamente y rechaza la promesa cuando recibe un
+                            estado HTTP de error.
+                        </p>
+                    </div>
+                </article>
+                <article class="step">
+                    <span class="step-number">3</span>
+                    <div>
+                        <h3>La petición</h3>
+                        <p>
+                            Ambos envían el mismo <code>POST</code> con los mismos
+                            datos. Cambia el cliente, no el resultado que buscamos.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>Hecho para aprender, una petición a la vez.</span>
+            <span>HTML · CSS · JavaScript · Axios</span>
+        </footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js"></script>
+    <script src="main.js" defer></script>
+</body>
+</html>

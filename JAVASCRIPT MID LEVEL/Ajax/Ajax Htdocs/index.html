@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7fb">
+    <meta name="description" content="Aprende cómo funciona una petición AJAX con XMLHttpRequest y JSON.">
+    <link rel="stylesheet" href="style.css">
+    <title>AJAX explicado | Laboratorio web</title>
+</head>
+<body>
+    <main class="page-shell">
+        <header class="topbar">
+            <a class="brand" href="#" aria-label="Laboratorio web, inicio">
+                <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+                <span>Laboratorio<span class="brand-light"> web</span></span>
+            </a>
+            <span class="topbar-label"><span class="online-dot"></span> Guía interactiva</span>
+        </header>
+
+        <section class="hero" aria-labelledby="page-title">
+            <p class="eyebrow">JAVASCRIPT · PETICIONES HTTP</p>
+            <h1 id="page-title">AJAX, paso a <span>paso.</span></h1>
+            <p class="hero-copy">
+                Envía datos sin recargar la página y observa cómo el servidor responde.
+                Una demostración práctica con <code>XMLHttpRequest</code> y JSON.
+            </p>
+            <aside class="setup-note" aria-label="Instrucciones para visualizar la página">
+                <p class="section-kicker">CÓMO VISUALIZAR ESTA INFORMACIÓN</p>
+                <p>
+                    Guarda la carpeta <code>Ajax</code> dentro de <code>C:\xampp\htdocs</code>,
+                    inicia Apache desde XAMPP y abre <code>http://localhost/Ajax/</code> en el navegador.
+                </p>
+            </aside>
+        </section>
+
+        <section class="workspace" aria-label="Demostración de una petición AJAX">
+            <article class="panel request-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="section-kicker">01 / PREPARA LA PETICIÓN</p>
+                        <h2>Crear un usuario</h2>
+                    </div>
+                    <span class="method-badge">POST</span>
+                </div>
+                <p class="panel-copy">
+                    Completa los datos. Se enviarán como JSON al servicio de prueba ReqRes.
+                </p>
+
+                <form id="user-form">
+                    <label for="name">Nombre</label>
+                    <input id="name" name="name" type="text" value="Ada Lovelace" required maxlength="60" autocomplete="name">
+
+                    <label for="job">Ocupación</label>
+                    <input id="job" name="job" type="text" value="Programadora" required maxlength="60">
+
+                    <button id="submit-button" type="submit">
+                        <span>Enviar petición</span>
+                        <span class="button-arrow" aria-hidden="true">→</span>
+                    </button>
+                </form>
+
+                <div id="request-status" class="status status-idle" role="status" aria-live="polite">
+                    <span class="status-indicator" aria-hidden="true"></span>
+                    <span id="status-message">Listo para enviar. La respuesta aparecerá aquí.</span>
+                </div>
+            </article>
+
+            <article class="panel response-panel">
+                <div class="panel-heading">
+                    <div>
+                        <p class="section-kicker">02 / INSPECCIONA EL RESULTADO</p>
+                        <h2>Respuesta del servidor</h2>
+                    </div>
+                    <span class="response-icon" aria-hidden="true">{ }</span>
+                </div>
+                <p class="panel-copy">El contenido recibido se mostrará en este espacio.</p>
+                <pre id="response-output" class="response-output" aria-label="Datos de respuesta"><code>Esperando una petición...</code></pre>
+                <p class="response-note">
+                    <span aria-hidden="true">↳</span>
+                    El servicio puede requerir conexión a internet y podría limitar las peticiones.
+                </p>
+            </article>
+        </section>
+
+        <section class="explanation" aria-labelledby="explanation-title">
+            <div class="explanation-heading">
+                <p class="section-kicker">¿QUÉ ESTÁ PASANDO?</p>
+                <h2 id="explanation-title">Una conversación en tres pasos</h2>
+            </div>
+            <div class="steps">
+                <article class="step">
+                    <span class="step-number">1</span>
+                    <div>
+                        <h3>Preparamos los datos</h3>
+                        <p>Leemos el formulario y convertimos sus valores a JSON para enviarlos al servidor.</p>
+                    </div>
+                </article>
+                <article class="step">
+                    <span class="step-number">2</span>
+                    <div>
+                        <h3>Enviamos la petición</h3>
+                        <p><code>XMLHttpRequest</code> realiza una solicitud HTTP <code>POST</code> sin recargar esta página.</p>
+                    </div>
+                </article>
+                <article class="step">
+                    <span class="step-number">3</span>
+                    <div>
+                        <h3>Procesamos la respuesta</h3>
+                        <p>Al terminar, comprobamos el estado HTTP y mostramos los datos JSON o un mensaje de error.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>Hecho para aprender, una petición a la vez.</span>
+            <span>HTML · CSS · JavaScript</span>
+        </footer>
+    </main>
+    <script src="main.js" defer></script>
+</body>
+</html>

@@ -26,6 +26,15 @@
         <section class="info-card"> <!-- Sección de tarjeta principal que envuelve el simulador y las explicaciones -->
             <div class="status-badge">Laboratorio Fetch Activo</div> <!-- Insignia superior que indica el estado operativo del simulador -->
 
+            <!-- Etiqueta Informativa de Servidor Local XAMPP -->
+            <label class="xampp-info-label"> <!-- Etiqueta interactiva informativa para recordar la ruta de trabajo en el servidor local -->
+                <span class="xampp-icon">📁</span> <!-- Icono de carpeta de archivos para representar el directorio del servidor local -->
+                <div class="xampp-content"> <!-- Contenedor de los textos informativos de la etiqueta -->
+                    <span class="xampp-title">Servidor Local XAMPP Requerido</span> <!-- Título distintivo de la etiqueta informativa -->
+                    <span class="xampp-text">Revisar en <strong>XAMPP</strong> <code>htdocs</code> la carpeta <code>axios-fetch</code> para los archivos del backend</span> <!-- Texto explicativo con la ruta de la carpeta axios-fetch en htdocs -->
+                </div> <!-- Cierre del contenedor de textos informativos -->
+            </label> <!-- Cierre de la etiqueta informativa de XAMPP -->
+
             <!-- Pestaña 1: API Fetch & Body Mixin -->
             <div id="fetch-tab" class="tab-content"> <!-- Contenedor de la pestaña de Fetch API y sus lectores de cuerpo -->
                 <h2>La Era Moderna: Fetch API y Arquitectura de Promesas</h2> <!-- Título explicativo de la primera sección conceptual -->

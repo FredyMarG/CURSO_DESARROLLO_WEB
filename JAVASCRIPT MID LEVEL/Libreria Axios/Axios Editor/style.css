@@ -1,0 +1,1190 @@
+/* ===================================================================
+   HOJA DE ESTILOS: style.css — LABORATORIO DE LA LIBRERIA AXIOS
+   JavaScript Mid Level — Curso de Desarrollo Web
+   Tematica visual: Identidad oficial de Axios (Violeta #5A29E4 / Dark UI)
+   =================================================================== */
+
+/* Importacion de tipografia moderna Outfit y JetBrains Mono desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap'); /* Carga familias tipograficas */
+
+/* -------------------------------------------------------------------
+   VARIABLES CSS Y PALETA DE COLORES OFICIAL DE AXIOS
+   ------------------------------------------------------------------- */
+:root {
+    /* Color violeta de marca oficial de la libreria Axios */
+    --axios-primary: #5a29e4; /* Violeta oficial caracteristico del logotipo de Axios */
+    --axios-primary-light: #7c3aed; /* Tono violeta luminoso para hover y elementos activos */
+    --axios-primary-dark: #3c16a3; /* Tono violeta profundo para contrastes y fondos internos */
+    --axios-glow: rgba(90, 41, 228, 0.45); /* Resplandor difuminado violeta de marca */
+
+    /* Colores funcionales para flujos HTTP y estados de promesas */
+    --color-get: #10b981; /* Verde esmeralda para el verbo GET y respuestas exitosas */
+    --color-post: #6366f1; /* Indigo violeta para el verbo POST y serializacion */
+    --color-put: #f59e0b; /* Ambar para el verbo PUT y actualizaciones */
+    --color-delete: #ef4444; /* Rojo para el verbo DELETE y eliminacion */
+    --color-cyan: #38bdf8; /* Azul cian para enlaces de datos y flujo de red */
+
+    /* Tonos oscuros de fondo de interfaz (Dark Mode Glassmorphic) */
+    --bg-main: #0a0815; /* Fondo ultra oscuro con matiz violeta profundo */
+    --bg-card: rgba(18, 14, 34, 0.78); /* Fondo de tarjeta translucido con efecto cristal */
+    --bg-input: #120e24; /* Fondo oscuro solido para cajas de seleccion y campos de formulario */
+    --bg-terminal: #07050f; /* Fondo negro absoluto con matiz azulado para la terminal de depuracion */
+
+    /* Tipografias del sistema */
+    --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Tipografia principal para textos y titulos */
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Courier New', monospace; /* Tipografia monoespaciada para codigo y terminal */
+
+    /* Bordes y sombras universales */
+    --border-glass: 1px solid rgba(139, 92, 246, 0.18); /* Borde sutil violeta semitransparente */
+    --shadow-card: 0 25px 60px -15px rgba(0, 0, 0, 0.7); /* Sombra difusa de elevacion profunda */
+}
+
+/* -------------------------------------------------------------------
+   RESET GLOBAL Y CONFIGURACION DE BOX-SIZING
+   ------------------------------------------------------------------- */
+* {
+    margin: 0; /* Remueve los margenes por defecto de todos los elementos */
+    padding: 0; /* Remueve los rellenos internos por defecto de todos los elementos */
+    box-sizing: border-box; /* Incluye rellenos y bordes en el calculo de dimensiones totales */
+    font-family: var(--font-ui); /* Aplica la tipografia moderna Outfit a todo el documento */
+}
+
+/* -------------------------------------------------------------------
+   CUERPO DEL DOCUMENTO (BODY) Y FONDO GRADIENTE AXIOS
+   ------------------------------------------------------------------- */
+body {
+    background-color: var(--bg-main); /* Define el color base negro-violeta del fondo */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(90, 41, 228, 0.22) 0, transparent 55%), /* Mancha de luz violeta Axios en la esquina superior izquierda */
+        radial-gradient(at 100% 0%, rgba(56, 189, 248, 0.15) 0, transparent 50%), /* Mancha de luz cian en la esquina superior derecha */
+        radial-gradient(at 50% 100%, rgba(124, 58, 237, 0.18) 0, transparent 55%); /* Mancha violeta electrica en la base central */
+    background-attachment: fixed; /* Mantiene fijos los gradientes de fondo durante el desplazamiento vertical */
+    min-height: 100vh; /* Garantiza una altura minima igual al 100% de la ventana visible del navegador */
+    display: flex; /* Habilita el contenedor flexbox para centrar todo el contenido */
+    justify-content: center; /* Centra horizontalmente el contenedor principal */
+    align-items: center; /* Centra verticalmente el contenedor principal */
+    color: #f8fafc; /* Color de texto blanco-grisaceo suave de alto contraste y legibilidad */
+    padding: 2.5rem 1rem; /* Espaciado perimetral para evitar colisiones con los bordes de la pantalla */
+}
+
+/* -------------------------------------------------------------------
+   CONTENEDOR PRINCIPAL RESPONSIVO
+   ------------------------------------------------------------------- */
+.container {
+    width: 100%; /* Ocupa el ancho completo disponible */
+    max-width: 760px; /* Limita el ancho maximo a 760px para ergonomia de lectura en pantallas grandes */
+    animation: fadeIn 0.8s ease-out; /* Aplica animacion suave de entrada al cargar la pagina */
+}
+
+/* -------------------------------------------------------------------
+   ENCABEZADO PRINCIPAL (GLASS HEADER)
+   ------------------------------------------------------------------- */
+.glass-header {
+    text-align: center; /* Centra todos los textos e insignias del encabezado */
+    margin-bottom: 2rem; /* Separacion inferior con respecto a la barra de navegacion */
+}
+
+/* Insignia de Marca Oficial de Axios */
+.axios-brand-badge {
+    display: inline-flex; /* Alinea el isotipo y el texto en una sola linea compacta */
+    align-items: center; /* Centra verticalmente el icono SVG y el texto dentro de la insignia */
+    gap: 0.6rem; /* Espacio de separacion horizontal entre el isotipo y el texto */
+    background: rgba(90, 41, 228, 0.16); /* Fondo violeta translucido de identidad de Axios */
+    border: 1px solid rgba(139, 92, 246, 0.35); /* Borde violeta brillante para enmarcar la insignia */
+    padding: 0.45rem 1.1rem; /* Relleno interno superior/inferior y lateral */
+    border-radius: 9999px; /* Forma de pildora perfectamente redondeada */
+    margin-bottom: 1.2rem; /* Separacion inferior respecto al titulo h1 */
+    box-shadow: 0 0 20px rgba(90, 41, 228, 0.25); /* Resplandor difuminado de luz violeta */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transicion suave al interactuar */
+}
+
+.axios-brand-badge:hover {
+    transform: translateY(-2px); /* Eleva sutilmente la insignia al pasar el cursor */
+    box-shadow: 0 0 28px rgba(90, 41, 228, 0.45); /* Aumenta el resplandor de la insignia */
+}
+
+.axios-logo-svg {
+    width: 26px; /* Ancho fijo del isotipo vectorial de Axios */
+    height: 26px; /* Altura fija del isotipo vectorial de Axios */
+    flex-shrink: 0; /* Previene la deformacion del SVG en pantallas pequenas */
+}
+
+.axios-brand-text {
+    font-size: 0.75rem; /* Tamano compacto para la leyenda tecnica */
+    font-weight: 700; /* Tipografia en negrita para jerarquia visual */
+    letter-spacing: 0.08em; /* Espaciado expandido entre caracteres */
+    color: #c4b5fd; /* Color lavanda brillante para legibilidad sobre fondo oscuro */
+}
+
+/* Titulo Principal h1 con Gradiente de Axios */
+.glass-header h1 {
+    font-size: 2.6rem; /* Tamano tipografico amplio para protagonismo del encabezado */
+    font-weight: 700; /* Tipografia en grosor negrita */
+    background: linear-gradient(135deg, #ffffff 20%, #c4b5fd 60%, #818cf8 100%); /* Degradado de blanco a lavanda e indigo */
+    background-clip: text; /* Recorta el degradado dentro de la silueta del texto */
+    -webkit-background-clip: text; /* Compatibilidad de recorte de fondo para navegadores WebKit */
+    -webkit-text-fill-color: transparent; /* Vuelve transparente el relleno nativo para mostrar el degradado */
+    margin-bottom: 0.6rem; /* Margen inferior para separar el titulo del subtitulo */
+    letter-spacing: -0.02em; /* Ajuste optico entre letras para titulos grandes */
+}
+
+/* Subtitulo Explicativo */
+.glass-header p {
+    color: #94a3b8; /* Tono gris azulado suave para contraste moderado */
+    font-size: 1.08rem; /* Tamano de fuente comodo para lectura fluida */
+    font-weight: 300; /* Tipografia ligera para contraste con el titulo negrita */
+    line-height: 1.5; /* Altura de linea para optima legibilidad */
+    max-width: 620px; /* Limita el ancho del parrafo para evitar lineas excesivamente largas */
+    margin: 0 auto 1.4rem auto; /* Centra el bloque de parrafo horizontalmente */
+}
+
+/* Fila de Pildoras de Caracteristicas Clave */
+.features-pill-row {
+    display: flex; /* Dispone las pildoras informativas en fila flexible */
+    flex-wrap: wrap; /* Permite que las pildoras pasen a la siguiente linea en pantallas angostas */
+    justify-content: center; /* Centra horizontalmente las pildoras */
+    gap: 0.5rem; /* Espaciado uniforme de 0.5rem entre cada pildora */
+}
+
+.feature-pill {
+    background: rgba(255, 255, 255, 0.04); /* Fondo blanquecino sutil semitransparente */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde ultrafino para definir la pildora */
+    color: #cbd5e1; /* Color gris claro para el texto de la caracteristica */
+    font-size: 0.78rem; /* Tamano de letra compacto */
+    padding: 0.35rem 0.75rem; /* Relleno comodo interno */
+    border-radius: 9999px; /* Extremos completamente redondeados */
+    font-weight: 500; /* Peso tipografico intermedio */
+    backdrop-filter: blur(8px); /* Desenfoque de fondo para efecto cristal */
+}
+
+/* -------------------------------------------------------------------
+   SISTEMA DE PESTANAS (TABS NAVIGATION)
+   ------------------------------------------------------------------- */
+.tabs-nav {
+    display: flex; /* Alinea los botones de pestana horizontalmente */
+    gap: 0.6rem; /* Espacio de separacion entre los botones de navegacion */
+    background: rgba(18, 14, 34, 0.85); /* Fondo oscuro solido con matiz violeta */
+    border: var(--border-glass); /* Borde sutil que combina con la paleta de Axios */
+    padding: 0.45rem; /* Relleno perimetral donde descansan los botones */
+    border-radius: 20px; /* Esquinas redondeadas del contenedor de pestanas */
+    margin-bottom: 1.8rem; /* Separacion inferior con la tarjeta principal */
+    backdrop-filter: blur(14px); /* Efecto de desenfoque de cristal de fondo */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Sombra inferior suave */
+}
+
+.tab-btn {
+    flex: 1; /* Distribuye el espacio de manera equitativa entre ambas pestanas */
+    display: inline-flex; /* Alinea el icono y el texto de la pestana en linea */
+    align-items: center; /* Centra verticalmente el contenido dentro del boton */
+    justify-content: center; /* Centra horizontalmente el contenido del boton */
+    gap: 0.5rem; /* Espacio entre el icono de la pestana y el texto */
+    padding: 0.85rem 1.2rem; /* Relleno vertical y horizontal generoso para click facil */
+    border: 1px solid transparent; /* Borde transparente por defecto para evitar saltos de layout */
+    background: transparent; /* Fondo transparente para pestanas inactivas */
+    color: #94a3b8; /* Tono de texto inactivo en gris azulado discreto */
+    font-size: 0.95rem; /* Tamano de fuente equilibrado para botones */
+    font-weight: 600; /* Tipografia seminegrita para destacar las opciones */
+    border-radius: 14px; /* Esquinas redondeadas del boton individual */
+    cursor: pointer; /* Cambia el cursor a puntero interactivo al sobrevolar */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transicion elastica fluida */
+}
+
+.tab-btn:hover {
+    color: #f8fafc; /* Vuelve el texto casi blanco al pasar el raton */
+    background: rgba(90, 41, 228, 0.12); /* Ilumina el fondo con un tinte violeta suave */
+}
+
+.tab-btn.active {
+    color: #ffffff; /* Texto blanco brillante para la pestana actualmente seleccionada */
+    background: linear-gradient(135deg, rgba(90, 41, 228, 0.5), rgba(124, 58, 237, 0.4)); /* Degradado oficial violeta de Axios */
+    border-color: rgba(167, 139, 250, 0.4); /* Contorno violeta claro brillante */
+    box-shadow: 0 0 20px rgba(90, 41, 228, 0.35); /* Resplandor luminoso de activacion */
+}
+
+.tab-icon {
+    font-size: 1.1rem; /* Tamano destacado para los iconos emoji de pestana */
+}
+
+/* Control de Visibilidad de Paneles de Contenido */
+.tab-content {
+    display: block; /* Muestra el panel activo en el flujo normal */
+    animation: fadeIn 0.45s ease-out; /* Entrada suave animada al conmutar de pestana */
+}
+
+.tab-content.hidden {
+    display: none; /* Oculta completamente del DOM los paneles inactivos */
+}
+
+/* -------------------------------------------------------------------
+   TARJETA PRINCIPAL (INFO CARD CON GLASSMORPHISM)
+   ------------------------------------------------------------------- */
+.info-card {
+    background: var(--bg-card); /* Aplica el fondo translucido violeta oscuro */
+    backdrop-filter: blur(20px); /* Efecto de cristal esmerilado de alta gama */
+    -webkit-backdrop-filter: blur(20px); /* Compatibilidad de cristal esmerilado para Safari */
+    border: var(--border-glass); /* Borde sutil violeta caracteristico */
+    border-radius: 28px; /* Bordes redondeados pronunciados y modernos */
+    padding: 2.4rem; /* Relleno interior holgado para una sensacion limpia y premium */
+    box-shadow: var(--shadow-card); /* Sombra profunda para sensacion tridimensional de relieve */
+}
+
+.info-card h2 {
+    font-size: 1.65rem; /* Tamano jerarquico para los titulos de seccion */
+    color: #ffffff; /* Color de texto blanco puro para maxima notoriedad */
+    font-weight: 700; /* Grosor de letra en negrita */
+    margin-bottom: 0.85rem; /* Margen inferior para separar el titulo del parrafo */
+    text-align: left; /* Alinea los titulos hacia la izquierda */
+    letter-spacing: -0.01em; /* Ajuste fino de espaciado entre letras */
+}
+
+.info-card p {
+    color: #cbd5e1; /* Color gris suave para facilitar la lectura continua */
+    font-size: 1.02rem; /* Tamano de lectura optimo */
+    line-height: 1.65; /* Altura de interlineado amplia para descanso visual */
+    margin-bottom: 1.2rem; /* Margen inferior para separar parrafos */
+    text-align: left; /* Alineacion a la izquierda */
+}
+
+/* Codigo en linea (code tag) */
+code {
+    font-family: var(--font-mono); /* Tipografia monoespaciada para nombres tecnicos */
+    background: rgba(90, 41, 228, 0.18); /* Fondo violeta translucido */
+    color: #c4b5fd; /* Color lavanda brillante para las variables y metodos */
+    padding: 0.15rem 0.45rem; /* Relleno interno compacto alrededor del codigo */
+    border-radius: 6px; /* Bordes redondeados del fragmento de codigo */
+    font-size: 0.9em; /* Tamano relativo proporcional al texto que lo rodea */
+    border: 1px solid rgba(139, 92, 246, 0.25); /* Borde violeta sutil */
+}
+
+/* Insignia de Estado Operativo Superior */
+.status-badge {
+    display: inline-block; /* Elemento en linea con margen y padding configurables */
+    padding: 0.35rem 0.9rem; /* Relleno interno vertical y horizontal */
+    border-radius: 9999px; /* Geometria en forma de pildora */
+    font-size: 0.76rem; /* Tamano compacto */
+    font-weight: 700; /* Tipografia en negrita */
+    letter-spacing: 0.06em; /* Espaciado entre letras */
+    text-transform: uppercase; /* Letras en mayuscula obligatoria */
+    margin-bottom: 1.4rem; /* Separacion con respecto al contenido inferior */
+}
+
+.badge-axios {
+    background: rgba(90, 41, 228, 0.2); /* Fondo violeta de marca */
+    color: #a78bfa; /* Texto lavanda brillante */
+    border: 1px solid rgba(139, 92, 246, 0.4); /* Contorno violeta brillante */
+    box-shadow: 0 0 14px rgba(90, 41, 228, 0.25); /* Resplandor luminoso */
+}
+
+/* -------------------------------------------------------------------
+   TARJETA DIDACTICA DEL ASISTENTE VIP (ANALOGIA)
+   ------------------------------------------------------------------- */
+.axios-vip-box {
+    display: flex; /* Dispone el icono y el texto en columnas horizontales con flexbox */
+    align-items: flex-start; /* Alinea los componentes al borde superior */
+    gap: 1.1rem; /* Separacion de 1.1rem entre el icono de esmoquin y el texto */
+    background: linear-gradient(135deg, rgba(90, 41, 228, 0.12), rgba(56, 189, 248, 0.08)); /* Degradado sutil de violeta a cian */
+    border: 1px solid rgba(139, 92, 246, 0.28); /* Borde violeta luminoso de relieve */
+    border-radius: 18px; /* Esquinas redondeadas a 18px */
+    padding: 1.3rem 1.5rem; /* Relleno interno amplio */
+    margin: 1.6rem 0; /* Margen superior e inferior para separar de los otros bloques */
+    text-align: left; /* Alinea el texto de la analogia a la izquierda */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); /* Sombra de profundidad */
+}
+
+.axios-vip-icon {
+    font-size: 2.2rem; /* Tamano destacado para el emoji del asistente de esmoquin */
+    line-height: 1; /* Altura de linea ajustada */
+    flex-shrink: 0; /* Previene la reduccion del tamano del icono en moviles */
+}
+
+.axios-vip-content {
+    flex: 1; /* Permite que el texto ocupe todo el ancho horizontal disponible */
+}
+
+.axios-vip-content h3 {
+    font-size: 1.05rem; /* Tamano de fuente para el titulo de la analogia */
+    font-weight: 700; /* Tipografia en negrita */
+    color: #38bdf8; /* Color cian brillante para llamar la atencion didactica */
+    margin-bottom: 0.45rem; /* Margen inferior hacia la descripcion */
+}
+
+.axios-vip-content p {
+    color: #cbd5e1; /* Color gris suave para la explicacion de la analogia */
+    font-size: 0.95rem; /* Tamano comodo para lectura */
+    line-height: 1.55; /* Interlineado optimo */
+    margin: 0; /* Elimina margenes residuales */
+}
+
+/* -------------------------------------------------------------------
+   CAJA DE ADVERTENCIA DIDACTICA (ALERTA DE ERRORES FETCH VS AXIOS)
+   ------------------------------------------------------------------- */
+.axios-alert-box {
+    display: flex; /* Dispone el icono y el texto en fila flexible */
+    align-items: flex-start; /* Alinea el icono al borde superior */
+    gap: 1rem; /* Espacio horizontal de separacion */
+    background: rgba(239, 68, 68, 0.08); /* Fondo rojo transparente de advertencia */
+    border: 1px solid rgba(239, 68, 68, 0.28); /* Borde rojo sutil */
+    border-radius: 18px; /* Esquinas redondeadas */
+    padding: 1.2rem 1.4rem; /* Relleno interno */
+    margin: 1.6rem 0; /* Margen exterior */
+    text-align: left; /* Alineacion a la izquierda */
+}
+
+.alert-icon {
+    font-size: 1.8rem; /* Tamano prominente del icono de alarma */
+    flex-shrink: 0; /* Evita que el icono se comprima */
+}
+
+.alert-content {
+    flex: 1; /* Ocupa el ancho restante */
+}
+
+.alert-content h4 {
+    font-size: 1rem; /* Tamano del titulo de la alerta */
+    font-weight: 700; /* Negrita */
+    color: #f87171; /* Rojo brillante para destacar la importancia critica */
+    margin-bottom: 0.4rem; /* Espaciado con el parrafo */
+}
+
+.alert-content p {
+    color: #e2e8f0; /* Texto claro */
+    font-size: 0.92rem; /* Tamano de letra */
+    line-height: 1.55; /* Interlineado comodo */
+    margin: 0; /* Sin margenes sobrantes */
+}
+
+/* -------------------------------------------------------------------
+   TABLA DE ENDPOINTS DE PRUEBA Y METODOS HTTP
+   ------------------------------------------------------------------- */
+.db-section {
+    margin: 1.8rem 0; /* Margen exterior arriba y abajo de la seccion */
+}
+
+.db-title {
+    font-size: 0.8rem; /* Tamano compacto para la etiqueta de seccion */
+    font-weight: 700; /* Tipografia en negrita */
+    color: #a78bfa; /* Color lavanda que combina con Axios */
+    text-transform: uppercase; /* Mayusculas para dar formato de titular de consola */
+    letter-spacing: 0.08em; /* Separacion amplia entre caracteres */
+    margin-bottom: 0.75rem; /* Margen inferior hacia la tabla */
+    text-align: left; /* Alineacion a la izquierda */
+}
+
+.db-container {
+    background: var(--bg-terminal); /* Fondo negro absoluto con tinte violeta */
+    border: var(--border-glass); /* Borde fino violeta */
+    border-radius: 18px; /* Bordes redondeados de la tabla */
+    overflow: hidden; /* Corta los bordes rectos de las celdas en las esquinas */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* Sombra de elevacion */
+}
+
+.db-table {
+    width: 100%; /* La tabla abarca el 100% del ancho del contenedor */
+    border-collapse: collapse; /* Elimina los espacios dobles entre bordes de celdas */
+    font-size: 0.9rem; /* Tamano de letra compacto y legible */
+    text-align: left; /* Alineacion del texto a la izquierda */
+}
+
+.db-table th, .db-table td {
+    padding: 0.85rem 1.1rem; /* Relleno uniforme de cada celda */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Linea divisoria muy tenue entre filas */
+}
+
+.db-table th {
+    background: rgba(90, 41, 228, 0.12); /* Fondo violeta suave para la fila de cabecera */
+    color: #94a3b8; /* Gris azulado discreto para los titulos de columnas */
+    font-weight: 700; /* Negrita */
+    text-transform: uppercase; /* Mayusculas */
+    font-size: 0.75rem; /* Tamano pequeno */
+    letter-spacing: 0.06em; /* Separacion entre letras */
+}
+
+.db-table td {
+    color: #cbd5e1; /* Gris claro para el texto normal de las celdas */
+}
+
+.clickable-row {
+    cursor: pointer; /* Indica al usuario que puede hacer clic sobre la fila */
+    transition: background-color 0.25s ease, transform 0.25s ease; /* Transicion suave al interactuar */
+}
+
+.clickable-row:hover {
+    background: rgba(90, 41, 228, 0.15); /* Ilumina la fila en violeta suave al pasar el cursor */
+}
+
+.db-table tr.selected-row {
+    background: rgba(90, 41, 228, 0.25); /* Fondo violeta destacado para la fila activa */
+    border-left: 4px solid var(--axios-primary-light); /* Borde izquierdo violeta indicador */
+}
+
+.db-table tr.selected-row td {
+    color: #ffffff; /* Texto blanco puro */
+    font-weight: 600; /* Negrita en la fila seleccionada */
+}
+
+.table-hint {
+    display: block; /* Ocupa linea completa */
+    font-size: 0.8rem; /* Tamano pequeno */
+    color: #64748b; /* Gris discreto */
+    text-align: left; /* Alineacion a la izquierda */
+    margin-top: 0.6rem; /* Margen superior respecto a la tabla */
+    font-style: italic; /* Texto en cursiva didactica */
+}
+
+/* Insignias de Verbos HTTP */
+.badge-method {
+    display: inline-block; /* Comportamiento en linea con dimensiones y padding */
+    padding: 0.28rem 0.65rem; /* Relleno interno */
+    border-radius: 8px; /* Bordes redondeados a 8px */
+    font-size: 0.72rem; /* Tamano de letra compacto */
+    font-weight: 700; /* Tipografia en negrita */
+    letter-spacing: 0.05em; /* Espaciado entre caracteres */
+    text-transform: uppercase; /* Forzar mayusculas */
+    font-family: var(--font-mono); /* Tipografia de codigo para el verbo */
+}
+
+.badge-get {
+    background: rgba(16, 185, 129, 0.18); /* Fondo verde esmeralda translucido */
+    color: #34d399; /* Texto verde esmeralda brillante */
+    border: 1px solid rgba(16, 185, 129, 0.35); /* Borde verde sutil */
+}
+
+.badge-post {
+    background: rgba(90, 41, 228, 0.25); /* Fondo violeta Axios translucido */
+    color: #a78bfa; /* Texto lavanda brillante */
+    border: 1px solid rgba(139, 92, 246, 0.4); /* Borde violeta */
+}
+
+.badge-put {
+    background: rgba(245, 158, 11, 0.18); /* Fondo ambar translucido */
+    color: #fbbf24; /* Texto ambar brillante */
+    border: 1px solid rgba(245, 158, 11, 0.35); /* Borde ambar */
+}
+
+.badge-delete {
+    background: rgba(239, 68, 68, 0.18); /* Fondo rojo translucido */
+    color: #f87171; /* Texto rojo brillante */
+    border: 1px solid rgba(239, 68, 68, 0.35); /* Borde rojo */
+}
+
+/* -------------------------------------------------------------------
+   PANEL DE DEMOSTRACION INTERACTIVA Y CONTROLES
+   ------------------------------------------------------------------- */
+.demo-panel {
+    display: flex; /* Dispone los controles en columna flexible */
+    flex-direction: column; /* Apila verticalmente los selectores, boton y monitor */
+    gap: 1.3rem; /* Espaciado uniforme de 1.3rem entre los elementos del panel */
+    margin: 2rem 0; /* Margen superior e inferior para separar el panel */
+}
+
+.controls-row {
+    display: flex; /* Coloca los dos grupos de selectores lado a lado */
+    gap: 1.1rem; /* Espacio horizontal entre selectores */
+    width: 100%; /* Abarca el ancho completo del panel */
+}
+
+.control-group {
+    flex: 1; /* Distribuye el ancho al 50% para cada selector en pantallas normales */
+    display: flex; /* Dispone el label y el select en columna */
+    flex-direction: column; /* Apila el label arriba y el selector abajo */
+    gap: 0.5rem; /* Espacio de 0.5rem entre label y select */
+    text-align: left; /* Alinea los textos a la izquierda */
+}
+
+.control-group label {
+    font-size: 0.8rem; /* Tamano de letra compacto para etiquetas */
+    font-weight: 700; /* Negrita */
+    color: #a78bfa; /* Lavanda de identidad de Axios */
+    text-transform: uppercase; /* Mayusculas */
+    letter-spacing: 0.06em; /* Separacion entre letras */
+}
+
+.form-select {
+    width: 100%; /* Ocupa el 100% del ancho del grupo */
+    padding: 0.85rem 1.1rem; /* Relleno comodo interno para facilitar seleccion */
+    background: var(--bg-input); /* Fondo solido oscuro */
+    border: var(--border-glass); /* Borde sutil violeta */
+    border-radius: 14px; /* Esquinas redondeadas */
+    color: #f8fafc; /* Texto blanco puro */
+    font-size: 0.95rem; /* Tamano de texto */
+    font-weight: 500; /* Peso de fuente medio */
+    cursor: pointer; /* Cursor de mano interactiva */
+    transition: all 0.3s ease; /* Transicion fluida al enfocar */
+    outline: none; /* Remueve el contorno azul por defecto del navegador */
+    appearance: none; /* Elimina la flecha nativa del sistema operativo */
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23a78bfa' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>"); /* Flecha SVG personalizada pintada en color lavanda */
+    background-repeat: no-repeat; /* Evita que la flecha se repita en mosaico */
+    background-position: right 14px center; /* Posiciona la flecha a 14px de la derecha */
+}
+
+.form-select:focus {
+    border-color: #8b5cf6; /* Ilumina el contorno en violeta electrico */
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.28); /* Halo exterior de enfoque */
+}
+
+/* -------------------------------------------------------------------
+   BOTONES DE ACCION CON DEGRADADOS DE AXIOS
+   ------------------------------------------------------------------- */
+.btn {
+    width: 100%; /* Ocupa todo el ancho del contenedor */
+    padding: 1.05rem 1.6rem; /* Relleno generoso para un boton de gran impacto */
+    border: none; /* Remueve bordes nativos */
+    border-radius: 16px; /* Esquinas redondeadas a 16px */
+    color: #ffffff; /* Texto en blanco puro */
+    font-size: 1.05rem; /* Tamano de fuente prominente */
+    font-weight: 700; /* Tipografia en negrita */
+    cursor: pointer; /* Cursor de mano interactiva */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Curva de suavizado Bezier */
+    letter-spacing: 0.02em; /* Espaciado ligero entre caracteres */
+}
+
+/* Boton de la Primera Pestana (Metodos Shorthand) */
+.btn-axios {
+    background: linear-gradient(135deg, #5a29e4 0%, #7c3aed 50%, #38bdf8 100%); /* Degradado de violeta Axios a violeta electrico y cian */
+    box-shadow: 0 6px 20px rgba(90, 41, 228, 0.45); /* Sombra luminosa violeta de marca */
+}
+
+.btn-axios:hover:not(:disabled) {
+    transform: translateY(-2px); /* Eleva el boton 2px hacia arriba */
+    box-shadow: 0 10px 28px rgba(90, 41, 228, 0.6); /* Intensifica la sombra para efecto flotante */
+    background: linear-gradient(135deg, #6835f0 0%, #8b5cf6 50%, #0ea5e9 100%); /* Ilumina el degradado */
+}
+
+/* Boton de la Segunda Pestana (Configuracion e Instancias) */
+.btn-axios-config {
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 50%, #06b6d4 100%); /* Degradado violeta-magenta-cian */
+    box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45); /* Sombra luminosa violeta */
+}
+
+.btn-axios-config:hover:not(:disabled) {
+    transform: translateY(-2px); /* Eleva el boton */
+    box-shadow: 0 10px 28px rgba(124, 58, 237, 0.6); /* Intensifica el resplandor */
+    background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #0891b2 100%); /* Aclara los tonos */
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(1px); /* Respuesta haptica visual que simula pulsacion fisica */
+}
+
+.btn:disabled {
+    opacity: 0.65; /* Reduce la opacidad cuando la peticion esta en vuelo */
+    cursor: not-allowed; /* Muestra el cursor de bloqueo */
+}
+
+/* -------------------------------------------------------------------
+   MONITOR VISUAL DE PROCESO (UNA SOLA FASE DE AXIOS)
+   ------------------------------------------------------------------- */
+.promise-visualizer {
+    background: var(--bg-terminal); /* Fondo oscuro solido */
+    border: var(--border-glass); /* Borde sutil */
+    border-radius: 18px; /* Esquinas redondeadas */
+    padding: 1.25rem 1.4rem; /* Relleno interior */
+    text-align: left; /* Alineacion a la izquierda */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); /* Sombra difuminada */
+}
+
+.visualizer-header {
+    font-size: 0.74rem; /* Tamano compacto */
+    font-weight: 700; /* Negrita */
+    color: #64748b; /* Gris discreto para cabecera de monitor */
+    text-transform: uppercase; /* Mayusculas */
+    letter-spacing: 0.08em; /* Espaciado entre letras */
+    margin-bottom: 0.85rem; /* Margen inferior */
+}
+
+.promise-status-row {
+    display: flex; /* Alinea el circulo indicador con el texto de estado en fila */
+    align-items: center; /* Centra verticalmente */
+    gap: 0.85rem; /* Espaciado horizontal de 0.85rem */
+    margin-bottom: 0.85rem; /* Separacion con respecto a la barra de progreso */
+}
+
+.promise-indicator {
+    width: 16px; /* Ancho del indicador */
+    height: 16px; /* Altura del indicador */
+    border-radius: 50%; /* Circulo perfecto */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Transicion elastica de color y resplandor */
+    flex-shrink: 0; /* Previene deformaciones */
+}
+
+/* Estados Visuales del Indicador */
+.state-idle {
+    background: #475569; /* Gris para estado inactivo o en reposo */
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.4); /* Resplandor apagado */
+}
+
+.state-pending {
+    background: var(--color-put); /* Ambar para peticion en vuelo (pending) */
+    box-shadow: 0 0 16px var(--color-put); /* Resplandor ambar brillante */
+    animation: pulseGlow 1.4s infinite alternate; /* Animacion de latido continuo */
+}
+
+.state-fulfilled {
+    background: var(--color-get); /* Verde esmeralda para peticion resuelta con exito */
+    box-shadow: 0 0 18px var(--color-get); /* Resplandor verde brillante */
+}
+
+.state-rejected {
+    background: var(--color-delete); /* Rojo para peticion rechazada o fallida */
+    box-shadow: 0 0 18px var(--color-delete); /* Resplandor rojo brillante */
+}
+
+/* Clases de Color para el Texto del Estado */
+.state-idle-text { color: #94a3b8; font-weight: 500; font-size: 0.95rem; }
+.state-pending-text { color: #fbbf24; font-weight: 600; font-size: 0.95rem; }
+.state-fulfilled-text { color: #34d399; font-weight: 600; font-size: 0.95rem; }
+.state-rejected-text { color: #f87171; font-weight: 600; font-size: 0.95rem; }
+
+/* Carril y Barra Animada de Progreso */
+.progress-bar-container {
+    width: 100%; /* Abarca el 100% de la anchura */
+    height: 6px; /* Altura fina y estilizada de 6px */
+    background: rgba(255, 255, 255, 0.05); /* Fondo gris transparente para el carril */
+    border-radius: 9999px; /* Extremos redondeados */
+    overflow: hidden; /* Corta la barra interna en las curvas */
+}
+
+.progress-bar {
+    height: 100%; /* Llena toda la altura del carril */
+    width: 0%; /* Inicia en 0% antes de la llamada */
+    border-radius: 9999px; /* Bordes redondeados */
+    transition: width 0.1s linear; /* Animacion de avance continuo y lineal */
+}
+
+.progress-bar-axios {
+    background: linear-gradient(90deg, #5a29e4, #7c3aed, #38bdf8); /* Gradiente oficial de Axios */
+}
+
+.progress-bar-config {
+    background: linear-gradient(90deg, #7c3aed, #a855f7, #06b6d4); /* Gradiente para axios.create */
+}
+
+/* -------------------------------------------------------------------
+   CAJA DE SALIDA DE RESULTADOS (OUTPUT BOX)
+   ------------------------------------------------------------------- */
+.output-box {
+    background: var(--bg-terminal); /* Fondo negro de consola */
+    border-radius: 18px; /* Esquinas redondeadas */
+    padding: 1.3rem 1.5rem; /* Relleno interior comodo */
+    border: var(--border-glass); /* Borde sutil violeta */
+    text-align: left; /* Alinea los textos a la izquierda */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* Sombra de profundidad */
+}
+
+#axiosResult, #configResult {
+    color: #f8fafc; /* Texto blanco suave */
+    font-size: 0.95rem; /* Tamano de fuente */
+    line-height: 1.5; /* Altura de linea */
+}
+
+#axiosNote, #configNote {
+    margin-top: 0.6rem; /* Separacion superior respecto al resultado principal */
+    padding-top: 0.6rem; /* Relleno superior */
+    border-top: 1px solid rgba(255, 255, 255, 0.06); /* Linea divisoria muy tenue */
+}
+
+/* -------------------------------------------------------------------
+   INSPECTOR EN VIVO DEL OBJETO RESPONSE DE AXIOS
+   ------------------------------------------------------------------- */
+.response-inspector {
+    margin: 2rem 0; /* Margen superior e inferior para enmarcar el inspector */
+}
+
+.response-grid {
+    display: grid; /* Cuadricula CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas de ancho equitativo */
+    gap: 0.85rem; /* Espaciado uniforme de 0.85rem entre tarjetas */
+    margin-top: 0.85rem; /* Separacion con el titulo */
+}
+
+.response-prop {
+    background: rgba(90, 41, 228, 0.08); /* Fondo violeta translucido */
+    border: 1px solid rgba(139, 92, 246, 0.2); /* Borde violeta */
+    border-radius: 14px; /* Esquinas redondeadas */
+    padding: 0.9rem 1.1rem; /* Relleno interno */
+    display: flex; /* Dispone los textos verticalmente con flexbox */
+    flex-direction: column; /* Apila nombre, descripcion y valor */
+    gap: 0.35rem; /* Espaciado vertical entre elementos */
+    text-align: left; /* Alinea a la izquierda */
+    transition: all 0.3s ease; /* Transicion suave al iluminarse */
+}
+
+.response-prop:hover {
+    background: rgba(90, 41, 228, 0.14); /* Aumenta la intensidad del fondo al pasar el raton */
+    border-color: rgba(139, 92, 246, 0.4); /* Borde mas luminoso */
+    transform: translateY(-2px); /* Eleva sutilmente la tarjeta */
+}
+
+.response-prop.accent {
+    background: linear-gradient(135deg, rgba(90, 41, 228, 0.18), rgba(56, 189, 248, 0.12)); /* Fondo acentuado violeta-cian */
+    border-color: rgba(167, 139, 250, 0.35); /* Borde lavanda brillante */
+}
+
+.prop-name {
+    font-family: var(--font-mono); /* Tipografia monoespaciada para la propiedad tecnica */
+    font-size: 0.85rem; /* Tamano de fuente */
+    font-weight: 700; /* Negrita */
+    color: #38bdf8; /* Azul cian brillante para llamar la atencion */
+}
+
+.prop-desc {
+    font-size: 0.8rem; /* Tamano compacto */
+    color: #94a3b8; /* Gris azulado para la descripcion conceptual */
+    line-height: 1.4; /* Interlineado */
+}
+
+.prop-live {
+    font-family: var(--font-mono); /* Tipografia monoespaciada para valores en tiempo real */
+    font-size: 0.82rem; /* Tamano de fuente */
+    color: #a78bfa; /* Lavanda para valores por defecto */
+    margin-top: 0.25rem; /* Margen superior respecto a la descripcion */
+    font-weight: 600; /* Negrita */
+}
+
+.badge-advantage {
+    display: inline-block; /* Elemento en linea con padding */
+    padding: 0.2rem 0.55rem; /* Relleno compacto */
+    border-radius: 6px; /* Bordes redondeados */
+    background: rgba(16, 185, 129, 0.2); /* Fondo verde esmeralda */
+    color: #34d399; /* Texto verde esmeralda brillante */
+    border: 1px solid rgba(16, 185, 129, 0.35); /* Borde verde */
+    font-size: 0.75rem; /* Tamano */
+    font-weight: 700; /* Negrita */
+    align-self: flex-start; /* Se ajusta a su propio ancho */
+}
+
+/* -------------------------------------------------------------------
+   VISTA PREVIA DEL CODIGO GENERADO (CODE PREVIEW)
+   ------------------------------------------------------------------- */
+.code-preview {
+    background: var(--bg-terminal); /* Fondo negro absoluto de editor */
+    border-radius: 18px; /* Esquinas redondeadas */
+    padding: 1.3rem 1.5rem; /* Relleno interior holgado */
+    overflow-x: auto; /* Habilita desplazamiento horizontal si el codigo es ancho */
+    text-align: left; /* Alinea el codigo a la izquierda */
+    border: var(--border-glass); /* Borde sutil violeta */
+    margin: 1.8rem 0; /* Margen exterior */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); /* Sombra de profundidad */
+}
+
+.code-header {
+    font-size: 0.74rem; /* Tamano compacto */
+    font-weight: 700; /* Negrita */
+    color: #64748b; /* Gris discreto para la cabecera */
+    text-transform: uppercase; /* Mayusculas */
+    letter-spacing: 0.08em; /* Espaciado entre caracteres */
+    margin-bottom: 0.75rem; /* Margen inferior */
+}
+
+pre {
+    margin: 0; /* Remueve margenes nativos */
+}
+
+pre code {
+    background: transparent; /* Fondo transparente dentro de bloques pre */
+    border: none; /* Sin bordes */
+    padding: 0; /* Sin relleno extra */
+    color: #cbd5e1; /* Color de texto legible */
+    font-size: 0.88rem; /* Tamano de fuente */
+    line-height: 1.6; /* Interlineado comodo para lectura de codigo */
+    display: block; /* Ocupa el bloque completo */
+}
+
+/* -------------------------------------------------------------------
+   TERMINAL VIRTUAL DE DEPURACION (CONSOLE EMULATOR)
+   ------------------------------------------------------------------- */
+.virtual-terminal {
+    background: var(--bg-terminal); /* Fondo ultra oscuro de terminal Unix */
+    border: var(--border-glass); /* Borde sutil violeta */
+    border-radius: 18px; /* Esquinas redondeadas */
+    overflow: hidden; /* Corta bordes de la cabecera en las esquinas */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6); /* Sombra profunda */
+    margin: 1.8rem 0; /* Margen exterior */
+}
+
+.terminal-header {
+    background: #0e0a1f; /* Fondo oscuro diferenciado para la barra de cabecera */
+    padding: 0.7rem 1.2rem; /* Relleno superior/inferior y lateral */
+    display: flex; /* Dispone los botones y el titulo en fila */
+    align-items: center; /* Centra verticalmente */
+    justify-content: space-between; /* Distribuye controles en extremos opuestos */
+    border-bottom: 1px solid rgba(139, 92, 246, 0.15); /* Linea divisoria con el cuerpo */
+}
+
+.terminal-dots {
+    display: flex; /* Alinea los 3 circulos en fila horizontal */
+    gap: 0.5rem; /* Separacion de 0.5rem entre circulos */
+}
+
+.terminal-dot {
+    width: 11px; /* Diametro ancho */
+    height: 11px; /* Diametro alto */
+    border-radius: 50%; /* Circulo perfecto */
+}
+
+.dot-close { background: #ef4444; } /* Rojo (cerrar) */
+.dot-min { background: #f59e0b; } /* Ambar (minimizar) */
+.dot-max { background: #10b981; } /* Verde (maximizar) */
+
+.terminal-title {
+    font-family: var(--font-mono); /* Tipografia monoespaciada */
+    font-size: 0.75rem; /* Tamano compacto */
+    color: #94a3b8; /* Gris azulado suave */
+    font-weight: 600; /* Negrita */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+}
+
+.terminal-tag {
+    font-family: var(--font-mono); /* Tipografia monoespaciada */
+    font-size: 0.68rem; /* Tamano muy compacto */
+    padding: 0.2rem 0.55rem; /* Relleno */
+    border-radius: 6px; /* Bordes redondeados */
+    background: rgba(90, 41, 228, 0.25); /* Fondo violeta de Axios */
+    color: #c4b5fd; /* Texto lavanda */
+    font-weight: 700; /* Negrita */
+    border: 1px solid rgba(139, 92, 246, 0.35); /* Borde sutil */
+}
+
+.terminal-body {
+    padding: 1.1rem 1.3rem; /* Relleno interno del visor */
+    height: 160px; /* Altura fija para visualizacion de multiples logs */
+    overflow-y: auto; /* Habilita scroll vertical cuando los logs sobrepasan la altura */
+    font-family: var(--font-mono); /* Tipografia de consola */
+    font-size: 0.84rem; /* Tamano de fuente */
+    text-align: left; /* Alineacion a la izquierda */
+}
+
+/* Personalizacion de la Barra de Desplazamiento de la Terminal */
+.terminal-body::-webkit-scrollbar {
+    width: 6px; /* Grosor fino de la barra de desplazamiento */
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2); /* Fondo del carril de scroll */
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3); /* Color violeta del cursor de scroll */
+    border-radius: 9999px; /* Extremos redondeados */
+}
+
+.terminal-line {
+    margin-bottom: 0.45rem; /* Separacion vertical entre lineas de log */
+    line-height: 1.45; /* Interlineado */
+    word-break: break-all; /* Quiebra palabras largas para evitar desbordes */
+}
+
+.terminal-prompt {
+    color: var(--axios-primary-light); /* Color violeta electrico para el prompt de consola */
+    margin-right: 0.5rem; /* Separacion con respecto al mensaje */
+    user-select: none; /* Evita seleccion al copiar logs */
+}
+
+/* Tipos de Colores para Logs de la Terminal */
+.terminal-line.log { color: #e2e8f0; } /* Gris claro por defecto */
+.terminal-line.success { color: #34d399; } /* Verde esmeralda para peticiones resueltas */
+.terminal-line.error { color: #f87171; } /* Rojo para errores HTTP 4xx/5xx o de red */
+.terminal-line.warning { color: #fbbf24; } /* Ambar para avisos y procesos pendientes */
+.terminal-line.info { color: #38bdf8; } /* Azul cian para informacion de inicio */
+
+/* -------------------------------------------------------------------
+   LINEA DE TIEMPO DE PASOS (TIMELINE DE AXIOS.CREATE)
+   ------------------------------------------------------------------- */
+.steps-timeline {
+    display: flex; /* Contenedor flexbox */
+    flex-direction: column; /* Apila los pasos verticalmente */
+    margin: 1.6rem 0; /* Margen superior e inferior */
+    position: relative; /* Posicionamiento relativo para anclaje de la linea conectora */
+    padding-left: 0.5rem; /* Espaciado lateral para balance */
+}
+
+.timeline-step {
+    display: flex; /* Dispone el indicador circular y el texto en fila */
+    gap: 1.2rem; /* Separacion entre el circulo y el texto del paso */
+    position: relative; /* Posicionamiento relativo */
+    padding-bottom: 2rem; /* Espacio inferior para prolongar la linea conectora */
+}
+
+.timeline-step:last-child {
+    padding-bottom: 0; /* Remueve el padding en el ultimo paso para no desbordar */
+}
+
+.step-indicator-wrapper {
+    position: relative; /* Posicionamiento relativo */
+    display: flex; /* Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    width: 32px; /* Ancho fijo de la columna del indicador */
+}
+
+.step-circle {
+    width: 32px; /* Diametro de 32px */
+    height: 32px; /* Diametro de 32px */
+    border-radius: 50%; /* Circulo perfecto */
+    background: #15102a; /* Fondo violeta muy oscuro */
+    border: 2px solid #475569; /* Contorno gris para estado inactivo */
+    color: #94a3b8; /* Numero en gris */
+    display: flex; /* Flexbox */
+    align-items: center; /* Centrado vertical del numero */
+    justify-content: center; /* Centrado horizontal del numero */
+    font-size: 0.9rem; /* Tamano del numero */
+    font-weight: 700; /* Negrita */
+    z-index: 2; /* Sobrepone el circulo por encima de la linea conectora */
+    transition: all 0.35s ease; /* Transicion suave al cambiar de estado */
+}
+
+.step-line {
+    position: absolute; /* Linea absoluta vertical */
+    top: 32px; /* Inicia justo en la base del circulo */
+    bottom: 0; /* Se extiende hasta el fondo del paso */
+    left: 50%; /* Centrado en el eje horizontal */
+    width: 2px; /* Grosor de 2px */
+    background: rgba(139, 92, 246, 0.25); /* Color violeta translucido */
+    transform: translateX(-50%); /* Centrado exacto */
+    z-index: 1; /* Detras del circulo */
+}
+
+/* Estados de los Circulos de Pasos */
+.step-circle.state-idle {
+    background: #15102a; /* Fondo oscuro */
+    border-color: #475569; /* Borde gris */
+    color: #94a3b8; /* Numero gris */
+}
+
+.step-circle.state-pending {
+    background: #15102a; /* Fondo oscuro */
+    border-color: #fbbf24; /* Borde ambar */
+    color: #fbbf24; /* Numero ambar */
+    box-shadow: 0 0 12px rgba(251, 191, 36, 0.4); /* Resplandor ambar */
+    animation: pulseBorder 1.5s infinite alternate; /* Animacion de latido */
+}
+
+.step-circle.state-fulfilled {
+    background: #064e3b; /* Fondo verde oscuro */
+    border-color: #10b981; /* Borde verde esmeralda */
+    color: #34d399; /* Numero verde brillante */
+    box-shadow: 0 0 14px rgba(16, 185, 129, 0.4); /* Resplandor verde */
+}
+
+.step-circle.state-rejected {
+    background: #4c0519; /* Fondo rojo oscuro */
+    border-color: #ef4444; /* Borde rojo */
+    color: #f87171; /* Numero rojo brillante */
+    box-shadow: 0 0 14px rgba(239, 68, 68, 0.4); /* Resplandor rojo */
+}
+
+.step-info {
+    flex: 1; /* Ocupa el ancho restante */
+    text-align: left; /* Alinea a la izquierda */
+}
+
+.step-title {
+    font-size: 1rem; /* Tamano de fuente */
+    font-weight: 700; /* Negrita */
+    color: #ffffff; /* Blanco puro */
+    margin-bottom: 0.3rem; /* Margen inferior */
+}
+
+.step-desc {
+    font-size: 0.88rem; /* Tamano de la explicacion */
+    color: #94a3b8; /* Gris azulado */
+    line-height: 1.45; /* Interlineado */
+    margin-bottom: 0.45rem; /* Separacion con la etiqueta de estado */
+}
+
+.step-status-text {
+    font-size: 0.8rem; /* Tamano de la etiqueta de estado */
+    font-weight: 700; /* Negrita */
+    display: inline-block; /* En linea con formato de badge */
+    font-family: var(--font-mono); /* Tipografia monoespaciada */
+}
+
+/* -------------------------------------------------------------------
+   TABLA COMPARATIVA: FETCH VS AXIOS
+   ------------------------------------------------------------------- */
+.comparison-section {
+    margin: 2rem 0; /* Margen superior e inferior de la tabla comparativa */
+}
+
+.comparison-table td {
+    vertical-align: middle; /* Alinea verticalmente al centro el contenido de cada celda */
+}
+
+.cell-good {
+    color: #34d399 !important; /* Verde esmeralda para las ventajas de Axios */
+    font-size: 0.88rem; /* Tamano */
+}
+
+.cell-bad {
+    color: #f87171 !important; /* Rojo para las limitaciones o pasos manuales de Fetch */
+    font-size: 0.88rem; /* Tamano */
+}
+
+/* -------------------------------------------------------------------
+   ETIQUETA INFORMATIVA DE XAMPP Y HTDOCS
+   ------------------------------------------------------------------- */
+.xampp-info-label {
+    display: flex; /* Define flexbox para alinear el icono y los textos en una fila. */
+    align-items: center; /* Centra verticalmente los elementos en el eje transversal. */
+    gap: 0.85rem; /* Espaciado horizontal uniforme de 0.85rem entre el icono y el texto. */
+    padding: 0.85rem 1.25rem; /* Relleno interno de 0.85rem arriba/abajo y 1.25rem a los laterales. */
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.12), rgba(234, 88, 12, 0.05)); /* Fondo degradado suave en tonos naranja de XAMPP. */
+    border: 1px solid rgba(249, 115, 22, 0.35); /* Borde fino en color naranja translúcido para contraste y relieve. */
+    border-radius: 16px; /* Redondea las esquinas de la etiqueta con un radio de 16px. */
+    color: #ffedd5; /* Color del texto en un tono blanco anaranjado claro de alta legibilidad. */
+    font-size: 0.92rem; /* Tamaño de tipografía compacto de 0.92rem. */
+    margin: 1.2rem 0; /* Margen vertical exterior de 1.2rem para espaciarlo de los otros elementos. */
+    box-shadow: 0 4px 15px rgba(249, 115, 22, 0.12); /* Sombra naranja difuminada suave para generar sensación de elevación. */
+    transition: all 0.3s ease; /* Transiciona suavemente el borde, sombra y posición al interactuar. */
+    cursor: default; /* Puntero de flecha estándar para indicar elemento informativo. */
+}
+
+.xampp-info-label:hover {
+    border-color: #fb923c; /* Intensifica el contorno a color naranja vivo al posar el mouse por encima. */
+    box-shadow: 0 6px 22px rgba(249, 115, 22, 0.28); /* Incrementa el resplandor de la sombra naranja en hover. */
+    transform: translateY(-2px); /* Eleva sutilmente la etiqueta 2px hacia arriba para dar interactividad. */
+}
+
+.xampp-info-label .xampp-icon {
+    font-size: 1.5rem; /* Establece el tamaño del icono de carpeta a 1.5rem. */
+    display: flex; /* Habilita flexbox para centrar el icono. */
+    align-items: center; /* Alinea verticalmente el icono al centro. */
+    justify-content: center; /* Centra horizontalmente el icono. */
+    flex-shrink: 0; /* Impide que el icono se reduzca en pantallas estrechas. */
+}
+
+.xampp-info-label .xampp-content {
+    display: flex; /* Define flexbox para estructurar título y texto en columna. */
+    flex-direction: column; /* Apila el título arriba y la ruta debajo. */
+    gap: 0.2rem; /* Deja un espacio diminuto de 0.2rem entre líneas. */
+    text-align: left; /* Alinea el texto informativo hacia la izquierda. */
+}
+
+.xampp-info-label .xampp-title {
+    font-size: 0.75rem; /* Fuente pequeña de 0.75rem para el título superior. */
+    font-weight: 700; /* Aplica peso tipográfico de negrita para jerarquía visual. */
+    text-transform: uppercase; /* Convierte el texto del título a mayúsculas. */
+    letter-spacing: 0.08em; /* Genera separación horizontal entre las letras. */
+    color: #fdba74; /* Pinta el título en un tono naranja pastel brillante. */
+}
+
+.xampp-info-label .xampp-text {
+    line-height: 1.45; /* Configura una altura de línea de 1.45 para lectura cómoda. */
+    color: #fed7aa; /* Color del texto descriptivo en naranja claro suave. */
+}
+
+.xampp-info-label code {
+    background: rgba(0, 0, 0, 0.45); /* Fondo negro translúcido al 45% para aislar la palabra clave. */
+    color: #fb923c; /* Pinta las rutas y carpetas en naranja brillante. */
+    padding: 0.15rem 0.5rem; /* Deja un relleno interno de 0.15rem vertical y 0.5rem lateral. */
+    border-radius: 6px; /* Redondea las esquinas del bloque de código a 6px. */
+    border: 1px solid rgba(249, 115, 22, 0.3); /* Contorno naranja sutil para destacar el término. */
+    font-family: 'Consolas', 'Courier New', monospace; /* Tipografía monoespaciada ideal para rutas de directorios. */
+    font-size: 0.88rem; /* Ajusta el tamaño de letra del código a 0.88rem. */
+}
+
+.xampp-label {
+    display: flex; /* Dispone el icono y el texto en fila con flexbox */
+    align-items: flex-start; /* Alinea al borde superior */
+    gap: 0.9rem; /* Separacion de 0.9rem */
+    background: rgba(245, 158, 11, 0.08); /* Fondo ambar translucido */
+    border: 1px solid rgba(245, 158, 11, 0.28); /* Borde ambar sutil */
+    border-radius: 18px; /* Esquinas redondeadas */
+    padding: 1.15rem 1.4rem; /* Relleno interior */
+    margin-top: 1.8rem; /* Margen superior para distanciar del contenido principal */
+    text-align: left; /* Alineacion a la izquierda */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25); /* Sombra de profundidad */
+}
+
+.xampp-icon {
+    font-size: 1.8rem; /* Tamano del icono de carpeta */
+    flex-shrink: 0; /* Previene reduccion del tamano */
+}
+
+.xampp-text {
+    display: flex; /* Apila el titulo y el texto */
+    flex-direction: column; /* Columna */
+    gap: 0.35rem; /* Separacion */
+    color: #fbbf24; /* Color ambar para el titulo */
+    font-size: 0.92rem; /* Tamano */
+    line-height: 1.5; /* Interlineado */
+}
+
+.xampp-text span {
+    color: #cbd5e1; /* Gris suave para el texto de la ruta */
+    font-size: 0.86rem; /* Tamano */
+}
+
+/* -------------------------------------------------------------------
+   ANIMACIONES CLAVE (@KEYFRAMES)
+   ------------------------------------------------------------------- */
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Opacidad inicial cero */
+        transform: translateY(14px); /* Desplazamiento inicial 14px hacia abajo */
+    }
+    to {
+        opacity: 1; /* Opacidad final completa */
+        transform: translateY(0); /* Posicion original */
+    }
+}
+
+@keyframes pulseGlow {
+    from {
+        transform: scale(0.9); /* Reduccion al 90% */
+        box-shadow: 0 0 8px var(--color-put); /* Resplandor inicial sutil */
+        opacity: 0.85; /* Opacidad 85% */
+    }
+    to {
+        transform: scale(1.15); /* Crecimiento al 115% */
+        box-shadow: 0 0 22px var(--color-put); /* Resplandor maximo */
+        opacity: 1; /* Opacidad completa */
+    }
+}
+
+@keyframes pulseBorder {
+    from {
+        border-color: #fbbf24; /* Borde ambar inicial */
+        box-shadow: 0 0 6px rgba(251, 191, 36, 0.25); /* Brillo leve */
+    }
+    to {
+        border-color: #f59e0b; /* Borde ambar intenso */
+        box-shadow: 0 0 16px rgba(251, 191, 36, 0.65); /* Brillo expandido */
+    }
+}
+
+/* -------------------------------------------------------------------
+   RESPONSIVIDAD Y CONSULTAS DE MEDIOS (MEDIA QUERIES)
+   ------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    body {
+        padding: 1.5rem 0.8rem; /* Reduce el relleno perimetral en pantallas de telefonos */
+    }
+
+    .glass-header h1 {
+        font-size: 2.1rem; /* Reduce el tamano del titular en pantallas pequenas */
+    }
+
+    .info-card {
+        padding: 1.6rem 1.2rem; /* Reduce el relleno interior de la tarjeta principal */
+        border-radius: 22px; /* Esquinas ligeramente menos pronunciadas */
+    }
+
+    .tabs-nav {
+        flex-direction: column; /* Apila los botones de pestana verticalmente en moviles */
+        gap: 0.4rem; /* Separacion vertical */
+    }
+
+    .controls-row {
+        flex-direction: column; /* Apila los selectores de control en columna */
+        gap: 0.9rem; /* Separacion vertical */
+    }
+
+    .response-grid {
+        grid-template-columns: 1fr; /* Una sola columna para las propiedades de response en moviles */
+    }
+
+    .db-table th, .db-table td {
+        padding: 0.65rem 0.75rem; /* Relleno mas compacto en tablas para telefonos */
+        font-size: 0.82rem; /* Fuente mas pequena */
+    }
+}

@@ -1,0 +1,442 @@
+<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para los navegadores web modernos -->
+<html lang="es"> <!-- Apertura de la etiqueta raiz HTML con configuracion de idioma en espanol -->
+<head> <!-- Seccion de cabecera que contiene metadatos, fuentes y enlaces a recursos externos -->
+    <meta charset="UTF-8"> <!-- Codificacion estandar UTF-8 para admitir acentos, enes y caracteres especiales -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste de escala responsiva para visualizacion perfecta en moviles y escritorio -->
+    <title>Laboratorio de la Libreria Axios en JavaScript | Guia Interactiva</title> <!-- Titulo descriptivo de la pestana del navegador con la tematica de Axios -->
+    <meta name="description" content="Laboratorio didactico e interactivo de la libreria Axios en JavaScript: metodos shorthand get, post, put, delete, parseo automatico de JSON, axios.create() y catch automatico en errores HTTP."> <!-- Metadato SEO descriptivo -->
+    <meta property="og:title" content="Laboratorio de la Libreria Axios en JavaScript"> <!-- Titulo Open Graph para compartir en redes sociales -->
+    <meta property="og:description" content="Aprende y domina el cliente HTTP Axios en JavaScript con simulador visual, consola y comparativa técnica frente a Fetch."> <!-- Descripcion para redes sociales -->
+    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseno moderno, glassmorphism y tema oficial de Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Importa la libreria oficial Axios desde el CDN de jsDelivr para permitir peticiones HTTP directas -->
+</head> <!-- Cierre de la seccion de cabecera -->
+<body> <!-- Apertura del cuerpo del documento que contiene todos los elementos visuales e interactivos -->
+    <main class="container"> <!-- Contenedor principal centralizado con ancho maximo y estilos responsivos -->
+
+        <!-- Encabezado Principal con Tematica e Identidad Visual de Axios -->
+        <header class="glass-header"> <!-- Encabezado estilizado con efecto cristal y colores oficiales de Axios -->
+            <div class="axios-brand-badge"> <!-- Badge superior con isotipo SVG oficial y descripcion tecnologica -->
+                <svg class="axios-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"> <!-- Grafico vectorial SVG del isotipo estilizado de Axios -->
+                    <circle cx="50" cy="50" r="46" fill="url(#axiosGrad)" stroke="rgba(255,255,255,0.25)" stroke-width="3"/> <!-- Circulo violeta de fondo con degradado y contorno suave -->
+                    <path d="M28 66L44 32H56L72 66H60L56 56H44L40 66H28ZM47 48H53L50 40L47 48Z" fill="#FFFFFF"/> <!-- Letra A central inspirada en la tipografia oficial de Axios -->
+                    <path d="M68 34L76 42L68 50" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/> <!-- Flecha superior cian que representa el flujo de envio de la peticion request -->
+                    <path d="M32 66L24 58L32 50" stroke="#34D399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/> <!-- Flecha inferior verde que representa el retorno de la respuesta response -->
+                    <defs> <!-- Definiciones vectoriales de degradados reutilizables -->
+                        <linearGradient id="axiosGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"> <!-- Gradiente lineal caracteristico de Axios -->
+                            <stop offset="0%" stop-color="#5A29E4"/> <!-- Color violeta oficial #5A29E4 en el inicio -->
+                            <stop offset="100%" stop-color="#8B5CF6"/> <!-- Color violeta electrico en el final -->
+                        </linearGradient> <!-- Cierre del degradado -->
+                    </defs> <!-- Cierre de definiciones -->
+                </svg> <!-- Cierre del grafico SVG del isotipo -->
+                <span class="axios-brand-text">AXIOS HTTP CLIENT &bull; BASADO EN PROMESAS</span> <!-- Texto de identificacion dentro del badge -->
+            </div> <!-- Cierre del badge superior de Axios -->
+
+            <h1>Libreria Axios en JavaScript</h1> <!-- Titulo principal del laboratorio interactivo -->
+            <p>Laboratorio interactivo del cliente HTTP mas utilizado, potente y limpio del ecosistema moderno de JavaScript</p> <!-- Subtitulo descriptivo -->
+
+            <!-- Pildoras informativas de caracteristicas de Axios -->
+            <div class="features-pill-row"> <!-- Fila contenedora de pildoras con las ventajas cardinales de Axios -->
+                <span class="feature-pill">&#9889; Parseo Automatico de JSON</span> <!-- Pildora destacando la entrega de datos listos en response.data -->
+                <span class="feature-pill">&#128680; Catch Automatico en 4xx/5xx</span> <!-- Pildora destacando el rechazo automatico de codigos de error -->
+                <span class="feature-pill">&#128230; Serializacion Automatica POST</span> <!-- Pildora destacando el envio de objetos sin JSON.stringify -->
+                <span class="feature-pill">&#128295; Instancias con axios.create()</span> <!-- Pildora destacando la configuracion reutilizable con baseURL -->
+            </div> <!-- Cierre de la fila de pildoras -->
+        </header> <!-- Cierre del encabezado principal -->
+
+        <!-- Barra de Navegacion de Pestanas (Tabs) -->
+        <nav class="tabs-nav"> <!-- Barra horizontal para alternar entre las secciones tematicas del laboratorio -->
+            <button class="tab-btn active" id="tabShorthand" data-target="shorthand-tab"> <!-- Boton para activar la primera pestana -->
+                <span class="tab-icon">&#9889;</span> Metodos Shorthand (get &amp; post) <!-- Etiqueta de la pestana de metodos shorthand -->
+            </button> <!-- Cierre del boton de la primera pestana -->
+            <button class="tab-btn" id="tabConfig" data-target="config-tab"> <!-- Boton para activar la segunda pestana -->
+                <span class="tab-icon">&#128295;</span> Configuracion, Instancias &amp; Errores <!-- Etiqueta de la pestana de axios.create y catch -->
+            </button> <!-- Cierre del boton de la segunda pestana -->
+        </nav> <!-- Cierre de la barra de navegacion de pestanas -->
+
+        <!-- Tarjeta Principal con Efecto Glassmorphism -->
+        <section class="info-card"> <!-- Contenedor de cristal esmerilado que envuelve todo el laboratorio -->
+            <div class="status-badge badge-axios">&#128309; Laboratorio Axios Oficial Activo</div> <!-- Insignia de estado que valida la operacion del simulador -->
+
+            <!-- Etiqueta Informativa de Servidor Local XAMPP -->
+            <label class="xampp-info-label"> <!-- Etiqueta interactiva informativa para recordar la ruta de trabajo en el servidor local -->
+                <span class="xampp-icon">📁</span> <!-- Icono de carpeta de archivos para representar el directorio del servidor local -->
+                <div class="xampp-content"> <!-- Contenedor de los textos informativos de la etiqueta -->
+                    <span class="xampp-title">Servidor Local XAMPP Requerido</span> <!-- Titulo distintivo de la etiqueta informativa -->
+                    <span class="xampp-text">Revisar en <strong>XAMPP</strong> <code>htdocs</code> la carpeta <code>axios-fetch</code> para los archivos del backend</span> <!-- Texto explicativo con la ruta de la carpeta de axios-fetch en htdocs -->
+                </div> <!-- Cierre del contenedor de textos informativos -->
+            </label> <!-- Cierre de la etiqueta informativa de XAMPP -->
+
+            <!-- ===================================================== -->
+            <!-- PESTANA 1: Metodos Shorthand (get, post, put, delete)  -->
+            <!-- ===================================================== -->
+            <div id="shorthand-tab" class="tab-content"> <!-- Contenedor del panel de la primera pestana -->
+                <h2>Metodos Shorthand: <code>axios.get()</code> y <code>axios.post()</code></h2> <!-- Titulo principal de la seccion -->
+                <p>Axios expone <strong>metodos de acceso directo (shorthand)</strong> para cada verbo HTTP: <code>axios.get()</code>, <code>axios.post()</code>, <code>axios.put()</code> y <code>axios.delete()</code>. A diferencia de la API Fetch nativa, Axios entrega la respuesta con el JSON <strong>completamente parseado</strong> en la propiedad <code>response.data</code> en una sola operacion asincrona.</p> <!-- Explicacion de la ventaja cardinal de Axios frente a Fetch -->
+                <p>Al realizar peticiones <code>POST</code> o <code>PUT</code>, pasas el objeto literal de JavaScript directamente como segundo parametro. Axios lo serializa automaticamente a formato JSON y establece la cabecera <code>Content-Type: application/json</code> sin lineas de codigo repetitivas.</p> <!-- Explicacion sobre la serializacion automatica de peticiones -->
+
+                <!-- Analogia Didactica del Asistente VIP -->
+                <div class="axios-vip-box"> <!-- Tarjeta destacada con la analogia pedagogica -->
+                    <div class="axios-vip-icon">&#x1F935;</div> <!-- Icono de esmoquin del asistente VIP de Axios -->
+                    <div class="axios-vip-content"> <!-- Contenedor del texto descriptivo de la analogia -->
+                        <h3>La Analogia del Asistente VIP (Fetch vs. Axios)</h3> <!-- Titulo de la analogia -->
+                        <p>Con <strong>Fetch</strong> tienes que envolver el paquete con <code>JSON.stringify()</code>, ponerle las etiquetas manualmente en <code>headers</code> y luego desempaquetarlo con <code>response.json()</code> al recibirlo. Con <strong>Axios</strong>, tu asistente VIP toma el objeto directamente de tus manos, lo empaca, lo rotula y te entrega el resultado ya abierto y listo sobre tu escritorio en <code>response.data</code>.</p> <!-- Descripcion didactica que fija la diferencia fundamental -->
+                    </div> <!-- Cierre del contenido de la analogia -->
+                </div> <!-- Cierre de la tarjeta del asistente VIP -->
+
+                <!-- Tabla Interactiva de Endpoints Disponibles -->
+                <div class="db-section"> <!-- Seccion contenedora de la tabla de endpoints de prueba -->
+                    <div class="db-title">Endpoints de Prueba Disponibles (JSONPlaceholder API REST)</div> <!-- Titulo de la tabla de endpoints -->
+                    <div class="db-container"> <!-- Contenedor estilizado con bordes redondeados y fondo oscuro -->
+                        <table class="db-table"> <!-- Tabla con metodos, rutas y tipos de datos retornados -->
+                            <thead> <!-- Cabecera de la tabla con los nombres de las columnas -->
+                                <tr> <!-- Fila de cabecera -->
+                                    <th>Metodo</th> <!-- Columna del verbo HTTP -->
+                                    <th>Endpoint</th> <!-- Columna de la ruta URL relativa -->
+                                    <th>Descripcion / Retorno</th> <!-- Columna con la explicacion del recurso -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera -->
+                            <tbody> <!-- Cuerpo de la tabla con las opciones disponibles para probar -->
+                                <tr id="row-get-posts" class="clickable-row"> <!-- Fila del endpoint GET para listar publicaciones -->
+                                    <td><span class="badge-method badge-get">GET</span></td> <!-- Insignia con estilo esmeralda para el verbo GET -->
+                                    <td><code>/posts</code></td> <!-- Ruta del endpoint de publicaciones -->
+                                    <td>Array de 100 publicaciones (JSON parseado en response.data)</td> <!-- Descripcion del resultado retornado -->
+                                </tr> <!-- Cierre de la fila GET posts -->
+                                <tr id="row-get-user" class="clickable-row"> <!-- Fila del endpoint GET para obtener un usuario -->
+                                    <td><span class="badge-method badge-get">GET</span></td> <!-- Insignia con estilo esmeralda para el verbo GET -->
+                                    <td><code>/users/1</code></td> <!-- Ruta del endpoint de usuario con ID 1 -->
+                                    <td>Objeto de usuario individual con nombre, correo y empresa</td> <!-- Descripcion del resultado -->
+                                </tr> <!-- Cierre de la fila GET usuario -->
+                                <tr id="row-post-article" class="clickable-row"> <!-- Fila del endpoint POST para crear nueva publicacion -->
+                                    <td><span class="badge-method badge-post">POST</span></td> <!-- Insignia con estilo violeta para el verbo POST -->
+                                    <td><code>/posts</code></td> <!-- Ruta del endpoint de creacion de publicaciones -->
+                                    <td>Recurso creado exitosamente (HTTP 201 Created) con nuevo ID</td> <!-- Descripcion del resultado esperado -->
+                                </tr> <!-- Cierre de la fila POST publicacion -->
+                                <tr id="row-put-article" class="clickable-row"> <!-- Fila del endpoint PUT para actualizar publicacion -->
+                                    <td><span class="badge-method badge-put">PUT</span></td> <!-- Insignia con estilo ambar para el verbo PUT -->
+                                    <td><code>/posts/1</code></td> <!-- Ruta del endpoint de actualizacion del recurso con ID 1 -->
+                                    <td>Recurso actualizado con el nuevo objeto enviado (HTTP 200 OK)</td> <!-- Descripcion del resultado de actualizacion -->
+                                </tr> <!-- Cierre de la fila PUT publicacion -->
+                                <tr id="row-delete-article" class="clickable-row"> <!-- Fila del endpoint DELETE para eliminar publicacion -->
+                                    <td><span class="badge-method badge-delete">DELETE</span></td> <!-- Insignia con estilo rojo para el verbo DELETE -->
+                                    <td><code>/posts/1</code></td> <!-- Ruta del endpoint de eliminacion del recurso con ID 1 -->
+                                    <td>Recurso eliminado satisfactoriamente del servidor (HTTP 200 OK)</td> <!-- Descripcion del resultado de eliminacion -->
+                                </tr> <!-- Cierre de la fila DELETE publicacion -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla -->
+                        </table> <!-- Cierre de la tabla de endpoints -->
+                    </div> <!-- Cierre del contenedor de la tabla -->
+                    <span class="table-hint">&#128070; Haz clic en cualquier fila para seleccionarla automaticamente en el panel interactivo</span> <!-- Pista didactica para interactuar con la tabla -->
+                </div> <!-- Cierre de la seccion de endpoints -->
+
+                <!-- Panel de Demostracion Interactiva con Axios Shorthand -->
+                <div class="demo-panel"> <!-- Panel interactivo con controles de configuracion de la peticion -->
+                    <div class="controls-row"> <!-- Fila que alinea horizontalmente los selectores de control -->
+                        <div class="control-group"> <!-- Grupo de control para elegir el metodo y endpoint a disparar -->
+                            <label for="axiosMethodSelect">Metodo HTTP / Endpoint</label> <!-- Etiqueta descriptiva del selector -->
+                            <select id="axiosMethodSelect" class="form-select"> <!-- Lista desplegable con los metodos shorthand disponibles -->
+                                <option value="get-posts" selected>GET /posts &mdash; Listar publicaciones</option> <!-- Opcion para listar todas las publicaciones -->
+                                <option value="get-user">GET /users/1 &mdash; Obtener datos de usuario</option> <!-- Opcion para obtener un usuario especifico -->
+                                <option value="post-article">POST /posts &mdash; Crear publicacion (objeto JS puro)</option> <!-- Opcion para crear una publicacion -->
+                                <option value="put-article">PUT /posts/1 &mdash; Actualizar publicacion completa</option> <!-- Opcion para actualizar una publicacion -->
+                                <option value="delete-article">DELETE /posts/1 &mdash; Eliminar publicacion</option> <!-- Opcion para eliminar una publicacion -->
+                            </select> <!-- Cierre del selector de metodo -->
+                        </div> <!-- Cierre del grupo de control de metodo -->
+
+                        <div class="control-group"> <!-- Grupo de control para configurar la latencia de red simulada -->
+                            <label for="axiosDelaySelect">Latencia de Red Simulada</label> <!-- Etiqueta del selector de latencia -->
+                            <select id="axiosDelaySelect" class="form-select"> <!-- Lista desplegable de latencias simuladas -->
+                                <option value="400">400 ms (Conexion Rapida / Fibra)</option> <!-- Opcion de latencia rapida -->
+                                <option value="1200" selected>1200 ms (Conexion Estandar 4G)</option> <!-- Opcion de latencia estandar seleccionada por defecto -->
+                                <option value="2500">2500 ms (Conexion Lenta / Movil 3G)</option> <!-- Opcion de latencia alta para probar animaciones -->
+                            </select> <!-- Cierre del selector de latencia -->
+                        </div> <!-- Cierre del grupo de control de latencia -->
+                    </div> <!-- Cierre de la fila de controles -->
+
+                    <!-- Boton de Ejecucion con la Estetica de Axios -->
+                    <button class="btn btn-axios" id="runAxiosBtn">Ejecutar con axios() &#9889;</button> <!-- Boton interactivo para disparar la peticion configurada -->
+
+                    <!-- Monitor Visual de Flujo de la Peticion Axios (1 Sola Fase) -->
+                    <div class="promise-visualizer"> <!-- Caja contenedora del monitor visual de estado -->
+                        <div class="visualizer-header">Monitor de Peticion Axios &mdash; Flujo en Una Sola Fase (vs. Dos de Fetch)</div> <!-- Cabecera del monitor -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto del estado -->
+                            <div id="axiosIndicator" class="promise-indicator state-idle"></div> <!-- Circulo indicador que cambia de color segun el estado de la peticion -->
+                            <span id="axiosStateText" class="state-idle-text">En espera de invocar el metodo axios()...</span> <!-- Texto explicativo del estado actual -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de fondo para la barra de progreso animada -->
+                            <div id="axiosProgressBar" class="progress-bar progress-bar-axios"></div> <!-- Barra animada de progreso con degradado de Axios -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor visual -->
+
+                    <!-- Caja de Resultados de la Respuesta de Axios -->
+                    <div class="output-box" id="axiosOutputBox"> <!-- Contenedor estilizado para desplegar la respuesta recibida -->
+                        <div id="axiosResult">Aqui aparecera <code>response.data</code> automaticamente parseado sin llamar a .json()...</div> <!-- Elemento principal donde se inyecta el JSON de respuesta -->
+                        <div id="axiosNote"></div> <!-- Elemento secundario para notas informativas adicionales sobre la respuesta -->
+                    </div> <!-- Cierre de la caja de resultados -->
+                </div> <!-- Cierre del panel de demostracion -->
+
+                <!-- Inspector en Vivo del Objeto Response de Axios -->
+                <div class="response-inspector"> <!-- Seccion del inspector detallado de propiedades del objeto response -->
+                    <div class="db-title">Inspector en Vivo de las Propiedades de <code>response</code> en Axios</div> <!-- Titulo de la seccion del inspector -->
+                    <div class="response-grid"> <!-- Cuadricula responsiva con las propiedades fundamentales del objeto response -->
+                        <div class="response-prop" id="cardPropData"> <!-- Tarjeta de la propiedad response.data -->
+                            <span class="prop-name">response.data</span> <!-- Nombre de la propiedad de datos parseados -->
+                            <span class="prop-desc">El cuerpo de la respuesta ya convertido en objeto/array de JS.</span> <!-- Descripcion conceptual de la propiedad -->
+                            <span class="prop-live" id="livePropData">Pendiente</span> <!-- Valor dinamico en vivo que se actualiza al responder -->
+                        </div> <!-- Cierre de la tarjeta de response.data -->
+
+                        <div class="response-prop" id="cardPropStatus"> <!-- Tarjeta de la propiedad response.status -->
+                            <span class="prop-name">response.status</span> <!-- Nombre de la propiedad del codigo HTTP -->
+                            <span class="prop-desc">Codigo numerico de estado devuelto por el servidor (200, 201...).</span> <!-- Descripcion del codigo de estado -->
+                            <span class="prop-live" id="livePropStatus">--</span> <!-- Valor dinamico del status HTTP -->
+                        </div> <!-- Cierre de la tarjeta de response.status -->
+
+                        <div class="response-prop" id="cardPropStatusText"> <!-- Tarjeta de la propiedad response.statusText -->
+                            <span class="prop-name">response.statusText</span> <!-- Nombre de la propiedad del texto de estado -->
+                            <span class="prop-desc">Mensaje textual del codigo de estado HTTP (OK, Created...).</span> <!-- Descripcion del statusText -->
+                            <span class="prop-live" id="livePropStatusText">--</span> <!-- Valor dinamico del statusText -->
+                        </div> <!-- Cierre de la tarjeta de response.statusText -->
+
+                        <div class="response-prop" id="cardPropHeaders"> <!-- Tarjeta de la propiedad response.headers -->
+                            <span class="prop-name">response.headers</span> <!-- Nombre de la propiedad de cabeceras HTTP -->
+                            <span class="prop-desc">Cabeceras enviadas por el servidor (content-type, cache...).</span> <!-- Descripcion de las cabeceras -->
+                            <span class="prop-live" id="livePropHeaders">--</span> <!-- Valor dinamico de cabeceras principales -->
+                        </div> <!-- Cierre de la tarjeta de response.headers -->
+
+                        <div class="response-prop" id="cardPropConfig"> <!-- Tarjeta de la propiedad response.config -->
+                            <span class="prop-name">response.config</span> <!-- Nombre de la propiedad de configuracion de la peticion -->
+                            <span class="prop-desc">Configuracion interna que uso Axios al enviar la peticion.</span> <!-- Descripcion de la configuracion interna -->
+                            <span class="prop-live" id="livePropConfig">--</span> <!-- Valor dinamico de la configuracion interna -->
+                        </div> <!-- Cierre de la tarjeta de response.config -->
+
+                        <div class="response-prop accent"> <!-- Tarjeta acentuada que resalta la diferencia con Fetch -->
+                            <span class="prop-name">&#10024; Sin Fase 2 .json()</span> <!-- Titulo de la ventaja diferencial -->
+                            <span class="prop-desc">No requiere una segunda llamada asincrona como Fetch.</span> <!-- Explicacion de la eliminacion del paso intermedio -->
+                            <span class="prop-live badge-advantage">100% Directo</span> <!-- Insignia de ventaja directa de Axios -->
+                        </div> <!-- Cierre de la tarjeta acentuada -->
+                    </div> <!-- Cierre de la cuadricula de propiedades -->
+                </div> <!-- Cierre de la seccion del inspector -->
+
+                <!-- Bloque de Vista Previa del Codigo Generado en Tiempo Real -->
+                <div class="code-preview"> <!-- Contenedor estilizado como editor de codigo moderno con fondo oscuro -->
+                    <div class="code-header">Codigo Generado &mdash; Metodos Shorthand de Axios</div> <!-- Cabecera del bloque de codigo -->
+                    <pre><code id="axiosCodePreview">// Presiona el boton "Ejecutar con axios()" para ver el codigo JavaScript correspondiente...</code></pre> <!-- Elemento preformateado para desplegar el codigo fuente -->
+                </div> <!-- Cierre de la vista previa del codigo -->
+
+                <!-- Terminal Virtual de Depuracion en Vivo -->
+                <div class="virtual-terminal"> <!-- Componente que emula la consola del navegador con diseno de ventana Unix/Mac -->
+                    <div class="terminal-header"> <!-- Barra superior de la terminal virtual -->
+                        <div class="terminal-dots"> <!-- Contenedor de los 3 botones circulares de control de ventana -->
+                            <div class="terminal-dot dot-close"></div> <!-- Boton rojo que simula cerrar ventana -->
+                            <div class="terminal-dot dot-min"></div> <!-- Boton amarillo que simula minimizar ventana -->
+                            <div class="terminal-dot dot-max"></div> <!-- Boton verde que simula maximizar ventana -->
+                        </div> <!-- Cierre de los botones circulares -->
+                        <div class="terminal-title">axios-shorthand &mdash; consola interactiva</div> <!-- Titulo identificador de la terminal -->
+                        <div class="terminal-actions"> <!-- Acciones adicionales de la terminal -->
+                            <span class="terminal-tag">HTTP Live</span> <!-- Etiqueta que indica conexion activa -->
+                        </div> <!-- Cierre de las acciones de la terminal -->
+                    </div> <!-- Cierre de la cabecera de la terminal -->
+                    <div class="terminal-body" id="axiosTerminal"> <!-- Cuerpo desplazable de la terminal donde se insertan los logs -->
+                        <div class="terminal-line info"><span class="terminal-prompt">&#9658;</span> Libreria Axios cargada correctamente desde CDN oficial de jsDelivr.</div> <!-- Log inicial de confirmacion de carga de Axios -->
+                        <div class="terminal-line log"><span class="terminal-prompt">&#9658;</span> Selecciona un metodo HTTP y presiona el boton para ejecutar la peticion en tiempo real...</div> <!-- Log con instrucciones de uso para el estudiante -->
+                    </div> <!-- Cierre del cuerpo de la terminal -->
+                </div> <!-- Cierre de la terminal virtual -->
+            </div> <!-- Cierre del contenedor de la pestana 1 -->
+
+            <!-- ===================================================== -->
+            <!-- PESTANA 2: axios.create() & Catch Automatico           -->
+            <!-- ===================================================== -->
+            <div id="config-tab" class="tab-content hidden"> <!-- Contenedor de la segunda pestana oculta por defecto al cargar -->
+                <h2>Instancias Reutilizables con <code>axios.create()</code> y Catch Automatico</h2> <!-- Titulo principal de la segunda seccion -->
+                <p>En aplicaciones reales rara vez llamamos a <code>axios.get()</code> con URLs absolutas repetidas. Con <strong><code>axios.create()</code></strong> creamos una <em>instancia personalizada</em> con una <code>baseURL</code> preconfigurada, tiempo limite de espera (<code>timeout</code>) y cabeceras comunes para toda la aplicacion.</p> <!-- Parrafo explicativo sobre las instancias reutilizables de Axios -->
+                <p>Ademas, Axios implementa un comportamiento cardinal: <strong>rechaza automaticamente la promesa cuando el servidor responde con codigos fuera del rango exitoso 2xx</strong> (como un <code>404 Not Found</code> o <code>500 Server Error</code>). El flujo de control salta de inmediato al bloque <code>catch</code>, a diferencia de Fetch donde tienes que comprobar <code>if (!res.ok)</code> manualmente.</p> <!-- Parrafo que expone la ventaja del catch automatico -->
+
+                <!-- Cuadro de Alerta Informativo sobre la Diferencia con Fetch -->
+                <div class="axios-alert-box"> <!-- Caja destacada de advertencia didactica sobre el manejo de errores -->
+                    <div class="alert-icon">&#128680;</div> <!-- Icono de sirena de emergencia para llamar la atencion sobre este concepto clave -->
+                    <div class="alert-content"> <!-- Contenedor del texto informativo de la alerta -->
+                        <h4>Diferencia Critica en Manejo de Errores: Fetch vs. Axios</h4> <!-- Titulo de la advertencia didactica -->
+                        <p>En la API <strong>Fetch nativa</strong>, una respuesta con codigo <code>404</code> o <code>500</code> <strong>NO va al bloque catch</strong> porque la peticion HTTP se completo; Fetch solo rechaza ante fallos de red fisico. En <strong>Axios</strong>, cualquier codigo fuera de <code>2xx</code> salta <em>automaticamente</em> al <code>catch(error)</code> y nos entrega los detalles en <code>error.response</code>.</p> <!-- Explicacion comparativa concisa y precisa -->
+                    </div> <!-- Cierre del contenido de la alerta -->
+                </div> <!-- Cierre de la caja de alerta -->
+
+                <!-- Panel de Demostracion Interactiva de axios.create() y Errores -->
+                <div class="demo-panel"> <!-- Panel interactivo de la segunda pestana -->
+                    <div class="controls-row"> <!-- Fila de selectores en paralelo -->
+                        <div class="control-group"> <!-- Grupo de control para elegir el escenario a simular -->
+                            <label for="errorScenarioSelect">Escenario de la Instancia</label> <!-- Etiqueta descriptiva del selector -->
+                            <select id="errorScenarioSelect" class="form-select"> <!-- Lista desplegable con los escenarios de prueba -->
+                                <option value="ok" selected>GET /posts/1 &mdash; Peticion Exitosa (HTTP 200 OK)</option> <!-- Escenario exitoso estandar -->
+                                <option value="404">GET /recurso-invalido &mdash; Error 404 (Catch Automatico)</option> <!-- Escenario para demostrar el rechazo automatico en 404 -->
+                                <option value="create">POST /posts &mdash; Crear Recurso con Instancia (HTTP 201)</option> <!-- Escenario de creacion con codigo 201 -->
+                                <option value="params">GET /posts?userId=1 &mdash; Query Params Limpios</option> <!-- Escenario para demostrar la propiedad params -->
+                                <option value="timeout">Timeout Simulado (Instancia aborta peticion lenta)</option> <!-- Escenario para demostrar el timeout automatico -->
+                            </select> <!-- Cierre del selector de escenario -->
+                        </div> <!-- Cierre del grupo de escenario -->
+
+                        <div class="control-group"> <!-- Grupo de control para configurar el timeout de la instancia de Axios -->
+                            <label for="timeoutSelect">Timeout de la Instancia (ms)</label> <!-- Etiqueta del selector de timeout -->
+                            <select id="timeoutSelect" class="form-select"> <!-- Lista desplegable con opciones de timeout para axios.create -->
+                                <option value="1500">1500 ms (Estricto / Rapido)</option> <!-- Opcion de timeout corto -->
+                                <option value="4000" selected>4000 ms (Estandar Recomendado)</option> <!-- Opcion de timeout moderado por defecto -->
+                                <option value="8000">8000 ms (Permisivo / Red Lenta)</option> <!-- Opcion de timeout amplio -->
+                            </select> <!-- Cierre del selector de timeout -->
+                        </div> <!-- Cierre del grupo de timeout -->
+                    </div> <!-- Cierre de la fila de controles de la segunda pestana -->
+
+                    <!-- Boton de Ejecucion con la Estetica de Configuracion de Axios -->
+                    <button class="btn btn-axios-config" id="runConfigBtn">Probar con axios.create() &#128295;</button> <!-- Boton interactivo para ejecutar la prueba de la instancia -->
+
+                    <!-- Monitor Visual de la Instancia de Axios -->
+                    <div class="promise-visualizer"> <!-- Caja del monitor visual para la instancia configurada -->
+                        <div class="visualizer-header">Monitor de Instancia: axios.create({ baseURL, timeout, headers })</div> <!-- Cabecera descriptiva del monitor -->
+                        <div class="promise-status-row"> <!-- Fila que alinea el indicador circular con el texto -->
+                            <div id="configIndicator" class="promise-indicator state-idle"></div> <!-- Indicador circular para la segunda pestana -->
+                            <span id="configStateText" class="state-idle-text">Instancia de Axios lista para ser creada e invocada...</span> <!-- Texto descriptivo del estado -->
+                        </div> <!-- Cierre de la fila de estado -->
+                        <div class="progress-bar-container"> <!-- Carril de la barra de progreso -->
+                            <div id="configProgressBar" class="progress-bar progress-bar-config"></div> <!-- Barra animada con degradado especifico de configuracion -->
+                        </div> <!-- Cierre del contenedor de la barra de progreso -->
+                    </div> <!-- Cierre del monitor visual -->
+
+                    <!-- Caja de Resultados de la Instancia Configurada -->
+                    <div class="output-box"> <!-- Contenedor de resultados de la segunda pestana -->
+                        <div id="configResult">Aqui aparecera el resultado o el objeto de error capturado en el catch()...</div> <!-- Elemento donde se inyecta el resultado o error -->
+                        <div id="configNote"></div> <!-- Elemento secundario para notas tecnicas sobre el escenario -->
+                    </div> <!-- Cierre de la caja de resultados de configuracion -->
+                </div> <!-- Cierre del panel de demostracion de la segunda pestana -->
+
+                <!-- Linea de Tiempo Didactica del Flujo de axios.create() -->
+                <div class="db-section"> <!-- Seccion contenedora de la linea de tiempo en pasos -->
+                    <div class="db-title">Flujo de Trabajo Paso a Paso con axios.create()</div> <!-- Titulo de la linea de tiempo -->
+                    <div class="steps-timeline"> <!-- Contenedor principal de los pasos cronologicos -->
+
+                        <!-- Paso 1 de la Linea de Tiempo -->
+                        <div class="timeline-step"> <!-- Contenedor del primer paso -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio para alinear el circulo y la linea de conexion -->
+                                <div class="step-circle state-idle" id="cfgStep1">1</div> <!-- Circulo numerado del primer paso -->
+                                <div class="step-line"></div> <!-- Linea vertical que conecta con el siguiente paso -->
+                            </div> <!-- Cierre del envoltorio del indicador -->
+                            <div class="step-info"> <!-- Informacion textual del primer paso -->
+                                <div class="step-title"><code>axios.create({ baseURL, timeout, headers })</code></div> <!-- Titulo con la firma del metodo create -->
+                                <div class="step-desc">Se instancia un cliente Axios preconfigurado y reutilizable para todo el proyecto</div> <!-- Descripcion pedagogica del paso 1 -->
+                                <span class="step-status-text" id="cfgStep1Status">En espera</span> <!-- Estado textual dinamico del paso 1 -->
+                            </div> <!-- Cierre de la informacion del paso 1 -->
+                        </div> <!-- Cierre del paso 1 -->
+
+                        <!-- Paso 2 de la Linea de Tiempo -->
+                        <div class="timeline-step"> <!-- Contenedor del segundo paso -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio para alinear el circulo y la linea vertical -->
+                                <div class="step-circle state-idle" id="cfgStep2">2</div> <!-- Circulo numerado del segundo paso -->
+                                <div class="step-line"></div> <!-- Linea vertical conectora -->
+                            </div> <!-- Cierre del envoltorio del indicador -->
+                            <div class="step-info"> <!-- Informacion textual del segundo paso -->
+                                <div class="step-title"><code>instancia.get(ruta)</code> o <code>instancia.post(ruta, datos)</code></div> <!-- Titulo con los metodos de la instancia -->
+                                <div class="step-desc">Se invoca la peticion utilizando solo rutas relativas; la URL base se concatena en segundo plano</div> <!-- Descripcion pedagogica del paso 2 -->
+                                <span class="step-status-text" id="cfgStep2Status">En espera</span> <!-- Estado textual dinamico del paso 2 -->
+                            </div> <!-- Cierre de la informacion del paso 2 -->
+                        </div> <!-- Cierre del paso 2 -->
+
+                        <!-- Paso 3 de la Linea de Tiempo -->
+                        <div class="timeline-step"> <!-- Contenedor del tercer paso -->
+                            <div class="step-indicator-wrapper"> <!-- Envoltorio del circulo final -->
+                                <div class="step-circle state-idle" id="cfgStep3">3</div> <!-- Circulo numerado del tercer paso -->
+                            </div> <!-- Cierre del envoltorio del indicador -->
+                            <div class="step-info"> <!-- Informacion textual del tercer paso -->
+                                <div class="step-title"><code>try { response.data } catch(error) { error.response }</code></div> <!-- Titulo con el bloque try/catch -->
+                                <div class="step-desc">Si el status es 2xx entrega datos directos; si es 4xx o 5xx salta automaticamente al catch con error.response</div> <!-- Descripcion pedagogica del paso 3 -->
+                                <span class="step-status-text" id="cfgStep3Status">En espera</span> <!-- Estado textual dinamico del paso 3 -->
+                            </div> <!-- Cierre de la informacion del paso 3 -->
+                        </div> <!-- Cierre del paso 3 -->
+
+                    </div> <!-- Cierre de la linea de tiempo de pasos -->
+                </div> <!-- Cierre de la seccion de la linea de tiempo -->
+
+                <!-- Vista Previa del Codigo de axios.create() -->
+                <div class="code-preview"> <!-- Bloque de codigo preformateado de la segunda pestana -->
+                    <div class="code-header">Codigo Generado &mdash; Instancias Reutilizables y Catch Automatico</div> <!-- Cabecera del bloque de codigo -->
+                    <pre><code id="configCodePreview">// Presiona el boton "Probar con axios.create()" para ver el codigo del escenario seleccionado...</code></pre> <!-- Elemento donde se muestra el codigo JS dinamico -->
+                </div> <!-- Cierre de la vista previa del codigo de configuracion -->
+
+                <!-- Terminal Virtual de la Segunda Pestana -->
+                <div class="virtual-terminal"> <!-- Terminal virtual para visualizar el flujo de errores y respuestas de la instancia -->
+                    <div class="terminal-header"> <!-- Barra de cabecera de la terminal de configuracion -->
+                        <div class="terminal-dots"> <!-- Controles circulares de ventana -->
+                            <div class="terminal-dot dot-close"></div> <!-- Boton rojo de cerrar -->
+                            <div class="terminal-dot dot-min"></div> <!-- Boton amarillo de minimizar -->
+                            <div class="terminal-dot dot-max"></div> <!-- Boton verde de maximizar -->
+                        </div> <!-- Cierre de los controles circulares -->
+                        <div class="terminal-title">axios-instance &mdash; depurador de errores y configuracion</div> <!-- Titulo de la segunda terminal -->
+                        <div class="terminal-actions"> <!-- Acciones adicionales de la segunda terminal -->
+                            <span class="terminal-tag">Instance Active</span> <!-- Etiqueta de instancia activa -->
+                        </div> <!-- Cierre de las acciones -->
+                    </div> <!-- Cierre de la cabecera de la segunda terminal -->
+                    <div class="terminal-body" id="configTerminal"> <!-- Cuerpo desplazable de la segunda terminal virtual -->
+                        <div class="terminal-line info"><span class="terminal-prompt">&#9658;</span> Modulo axios.create() listo para configurar instancias HTTP.</div> <!-- Log inicial de bienvenida de la segunda terminal -->
+                        <div class="terminal-line log"><span class="terminal-prompt">&#9658;</span> Elige un escenario arriba y presiona el boton para comprobar el catch automatico...</div> <!-- Log con instrucciones iniciales -->
+                    </div> <!-- Cierre del cuerpo de la segunda terminal -->
+                </div> <!-- Cierre de la segunda terminal virtual -->
+
+                <!-- Tabla Comparativa Exhaustiva: Fetch Nativo vs. Libreria Axios -->
+                <div class="comparison-section"> <!-- Seccion contenedora de la matriz comparativa tecnica -->
+                    <div class="db-title">Matriz Comparativa: API Fetch Nativa vs. Libreria Axios</div> <!-- Titulo de la tabla comparativa -->
+                    <div class="db-container"> <!-- Contenedor con esquinas redondeadas para la tabla comparativa -->
+                        <table class="db-table comparison-table"> <!-- Tabla de comparacion de caracteristicas entre Fetch y Axios -->
+                            <thead> <!-- Cabecera de la tabla comparativa -->
+                                <tr> <!-- Fila de cabecera -->
+                                    <th>Caracteristica Tecnica</th> <!-- Columna del concepto comparado -->
+                                    <th>API Fetch Nativa (Navegador)</th> <!-- Columna de la implementacion con Fetch -->
+                                    <th>Libreria Axios (Cliente HTTP)</th> <!-- Columna de la implementacion con Axios -->
+                                </tr> <!-- Cierre de la fila de cabecera -->
+                            </thead> <!-- Cierre de la cabecera -->
+                            <tbody> <!-- Cuerpo de la tabla comparativa con las filas de analisis -->
+                                <tr> <!-- Fila de comparacion de parseo de JSON -->
+                                    <td><strong>Parseo de JSON</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; Manual: Requiere llamar a <code>res.json()</code> en una 2da promesa</td> <!-- Desventaja de Fetch -->
+                                    <td class="cell-good">&#9989; Automatico: JSON disponible directamente en <code>response.data</code></td> <!-- Ventaja de Axios -->
+                                </tr> <!-- Cierre de la fila de parseo de JSON -->
+                                <tr> <!-- Fila de comparacion de manejo de codigos de error HTTP -->
+                                    <td><strong>Errores HTTP (4xx / 5xx)</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; NO rechaza la promesa; debes chequear <code>if (!res.ok)</code></td> <!-- Desventaja critica de Fetch -->
+                                    <td class="cell-good">&#9989; Rechaza automaticamente y salta al bloque <code>catch(error)</code></td> <!-- Gran ventaja de Axios -->
+                                </tr> <!-- Cierre de la fila de codigos de error -->
+                                <tr> <!-- Fila de comparacion de envio de datos POST/PUT -->
+                                    <td><strong>Peticiones POST / PUT</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; Manual: Requiere <code>JSON.stringify(objeto)</code> y cabecera explicita</td> <!-- Desventaja de Fetch -->
+                                    <td class="cell-good">&#9989; Automatico: Pasas el objeto literal y Axios serializa a JSON</td> <!-- Ventaja de Axios -->
+                                </tr> <!-- Cierre de la fila de datos POST/PUT -->
+                                <tr> <!-- Fila de comparacion de parametros de consulta en la URL -->
+                                    <td><strong>Query Params (?a=1&amp;b=2)</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; Manual: Concatenacion de strings o clase <code>URLSearchParams</code></td> <!-- Desventaja de Fetch -->
+                                    <td class="cell-good">&#9989; Limpio: Propiedad integrada <code>params: { userId: 1 }</code></td> <!-- Ventaja de Axios -->
+                                </tr> <!-- Cierre de la fila de parametros de consulta -->
+                                <tr> <!-- Fila de comparacion de instancias y configuracion global -->
+                                    <td><strong>Instancias Reutilizables</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; No existe nativamente; debes programar un wrapper propio</td> <!-- Limitacion de Fetch -->
+                                    <td class="cell-good">&#9989; Nativo: <code>axios.create({ baseURL, timeout, headers })</code></td> <!-- Ventaja de Axios -->
+                                </tr> <!-- Cierre de la fila de instancias -->
+                                <tr> <!-- Fila de comparacion de control de timeout -->
+                                    <td><strong>Tiempo Limite (Timeout)</strong></td> <!-- Nombre de la caracteristica -->
+                                    <td class="cell-bad">&#10060; Complejo: Requiere instanciar <code>AbortController</code> y timers</td> <!-- Complejidad de Fetch -->
+                                    <td class="cell-good">&#9989; Simple: Propiedad directa <code>timeout: 5000</code> en milisegundos</td> <!-- Simplicidad de Axios -->
+                                </tr> <!-- Cierre de la fila de control de timeout -->
+                            </tbody> <!-- Cierre del cuerpo de la tabla comparativa -->
+                        </table> <!-- Cierre de la tabla comparativa -->
+                    </div> <!-- Cierre del contenedor de la tabla comparativa -->
+                </div> <!-- Cierre de la seccion comparativa -->
+            </div> <!-- Cierre del contenedor de la pestana 2 -->
+
+        </section> <!-- Cierre de la seccion principal de tarjeta de informacion -->
+
+        <!-- Etiqueta Informativa de Referencia a XAMPP y htdocs -->
+        <div class="xampp-label"> <!-- Etiqueta inferior con borde ambar y referencia a la ruta local del servidor -->
+            <span class="xampp-icon">&#128193;</span> <!-- Icono de carpeta de archivos para el contexto del servidor web -->
+            <div class="xampp-text"> <!-- Contenedor del texto informativo de XAMPP -->
+                <strong>Ubicacion en Servidor Local XAMPP &mdash; htdocs/axios-fetch</strong> <!-- Titulo destacado sobre la ubicacion en el servidor -->
+                <span>Los archivos de este modulo se encuentran en la carpeta <code>axios-fetch/</code> dentro de <code>htdocs/</code> de tu servidor XAMPP. Puedes ejecutarlos en <code>http://localhost/axios-fetch/</code> o directamente abriendo <code>index.html</code> en el navegador.</span> <!-- Descripcion pedagogica de la ruta de acceso -->
+            </div> <!-- Cierre del contenedor del texto de XAMPP -->
+        </div> <!-- Cierre de la etiqueta de XAMPP -->
+
+    </main> <!-- Cierre del contenedor principal -->
+
+    <script src="main.js"></script> <!-- Enlace al archivo JavaScript principal con toda la logica interactiva y comentarios didacticos -->
+</body> <!-- Cierre del cuerpo del documento HTML -->
+</html> <!-- Cierre del documento HTML principal -->
