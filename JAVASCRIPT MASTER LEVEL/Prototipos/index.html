@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentación interactiva y dinámica sobre Prototipos y Herencia Prototípica en JavaScript - JavaScript Master Level.">
+    <title>Prototipos y Herencia en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-presentation">
+
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">⚡</span>
+                <span class="title-text">Prototipos en JavaScript</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Prototipos">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Orientación a Objetos en JS</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Arquitectura de Memoria</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Prototipos y <span class="gradient-text">Herencia Prototípica</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Descubre el verdadero corazón del modelo de objetos en JavaScript: cómo funciona la 
+                    <strong>delegación</strong>, la <strong>cadena de prototipos</strong> y por qué es 
+                    mucho más ligera y flexible que las clases tradicionales.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">🧬</div>
+                        <h3>El Secreto de JS</h3>
+                        <p>No existen clases reales; todo es delegación de prototipos.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">⛓️</div>
+                        <h3>Prototype Chain</h3>
+                        <p>El camino de búsqueda ascendente hasta encontrar una propiedad.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="5">
+                        <div class="mini-card-icon">💾</div>
+                        <h3>Existencia en Memoria</h3>
+                        <p>Ahorro masivo de RAM al compartir una sola copia de métodos.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="6">
+                        <div class="mini-card-icon">🧰</div>
+                        <h3>Analogía Interactiva</h3>
+                        <p>La caja de herramientas familiar explicada de forma visual.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="8">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: DEFINICIÓN & MITO VS REALIDAD
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es un Prototipo?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es realmente un Prototipo?</h2>
+                    <p class="section-desc">
+                        A diferencia de Java o C# donde una clase es un plano intangible, en JavaScript los objetos 
+                        se vinculan directamente con otros <strong>objetos vivos</strong>.
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna Izquierda: Explicación y Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Definición Formal</span>
+                            </div>
+                            <p>
+                                Un <strong>prototipo</strong> es un mecanismo mediante el cual los objetos en JavaScript 
+                                heredan características entre sí. Cada objeto tiene un enlace interno oculto 
+                                (referenciado como <code>[[Prototype]]</code>) que apunta a otro objeto.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Delegación, no copia:</strong> Cuando pides una propiedad, tu objeto no la tiene clonada; 
+                                le pide el favor a su prototipo de prestarle el valor o ejecutar su método.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Clases Tradicionales (Java/C++)</h4>
+                                <ul>
+                                    <li>Las clases son <em>moldes estáticos</em> en papel.</li>
+                                    <li>Al instanciar, se <strong>copian</strong> todas las funciones.</li>
+                                    <li>No puedes modificar la estructura en caliente.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Prototipos de JavaScript</h4>
+                                <ul>
+                                    <li>Los prototipos son <strong>objetos reales en RAM</strong>.</li>
+                                    <li>No se copian métodos; existe <strong>delegación viva</strong>.</li>
+                                    <li>Son mutables en cualquier instante de ejecución.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Código Interactivo en Vivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">prototipo_basico.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">Copiar</button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-comment">// Creamos un objeto simple</span>
+<span class="c-keyword">const</span> <span class="c-variable">usuario</span> = {
+    <span class="c-prop">nombre</span>: <span class="c-string">"Carlos"</span>
+};
+
+<span class="c-comment">// ¿De dónde sale .toString() si nunca lo escribimos?</span>
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">usuario</span>.<span class="c-func">toString</span>()); 
+<span class="c-comment">// Resultado: "[object Object]"</span>
+
+<span class="c-comment">// Inspeccionamos su prototipo con el estándar moderno:</span>
+<span class="c-keyword">const</span> <span class="c-variable">proto</span> = <span class="c-func">Object</span>.<span class="c-func">getPrototypeOf</span>(<span class="c-variable">usuario</span>);
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">proto</span> === <span class="c-func">Object</span>.<span class="c-prop">prototype</span>); <span class="c-comment">// true!</span></code></pre>
+                            
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestProtoBasic">
+                                    ▶ Probar en Vivo en la Consola
+                                </button>
+                                <span class="run-status" id="testProtoBasicStatus">Listo para ejecutar</span>
+                            </div>
+                            
+                            <!-- Mini Visor de Consola -->
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">&gt; Haz clic en "Probar en Vivo" para ver la inspección en tiempo real...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: PROTOTYPE OBJECT vs __proto__
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Prototype vs __proto__">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>El Gran Dilema: <code>Función.prototype</code> vs <code>objeto.__proto__</code></h2>
+                    <p class="section-desc">
+                        La confusión número uno de los desarrolladores JavaScript explicada de forma clara e inequívoca.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Función.prototype -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Para Constructores</span>
+                            <h3>Función.prototype</h3>
+                            <span class="comp-subtitle">"El Contenedor o Fábrica"</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Es una propiedad especial que <strong>solo poseen las funciones y clases</strong>. 
+                                Actúa como la bandeja de donde se asignará el prototipo a todos los objetos creados con el operador <code>new</code>.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">🏭</span>
+                                <div class="vis-text">
+                                    <strong>Automovil.prototype</strong>
+                                    <small>Aquí guardas los métodos que compartirán los autos futuros.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente / Conector -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>new</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Vincula automáticamente</div>
+                    </div>
+
+                    <!-- Tarjeta 2: objeto.__proto__ -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Para Instancias</span>
+                            <h3>objeto.__proto__ / [[Prototype]]</h3>
+                            <span class="comp-subtitle">"El Enlace / Cable Vivo"</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Es el enlace real que tiene <strong>toda instancia</strong> hacia el prototipo que le dio vida. 
+                                Permite navegar hacia arriba en la cadena de búsqueda.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">🚗</span>
+                                <div class="vis-text">
+                                    <strong>miAuto.__proto__</strong>
+                                    <small>Apunta directamente a Automovil.prototype en memoria física.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparativa Visual Interactiva -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>Object.getPrototypeOf(miAuto) === Automovil.prototype</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckIdentity">
+                        🔍 Comprobar Identidad en Memoria
+                    </button>
+                    <div class="identity-result" id="identityResult">
+                        Presiona el botón para comprobar la referencia en RAM
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Propiedad</th>
+                                <th>¿Quién la posee?</th>
+                                <th>¿Para qué sirve?</th>
+                                <th>Recomendación Moderna</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>.prototype</code></td>
+                                <td>Solo Funciones constructoras y Clases</td>
+                                <td>Guardar métodos y atributos compartidos</td>
+                                <td>✅ <code>Clase.prototype.metodo = ...</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>[[Prototype]]</code></td>
+                                <td>Todos los objetos</td>
+                                <td>Enlace interno de delegación en la cadena</td>
+                                <td>Interno (oculto por el motor JS)</td>
+                            </tr>
+                            <tr>
+                                <td><code>.__proto__</code></td>
+                                <td>Todos los objetos</td>
+                                <td>Acceso histórico al prototipo</td>
+                                <td>⚠️ Obsoleto. Usar <code>Object.getPrototypeOf()</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: PROTOTYPE CHAIN & SIMULADOR
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Prototype Chain Interactiva">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 03</span>
+                    <h2>Prototype Chain: El Algoritmo de Búsqueda</h2>
+                    <p class="section-desc">
+                        ¿Qué ocurre paso a paso cuando solicitas una propiedad como <code>hijo.apellido</code>? 
+                        Descúbrelo con el simulador interactivo de delegación escalonada.
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE CADENA -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Propiedad a Buscar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-prop="nombre">hijo.nombre</button>
+                            <button class="sim-prop-btn" data-prop="profesion">hijo.profesion</button>
+                            <button class="sim-prop-btn" data-prop="apellido">hijo.apellido</button>
+                            <button class="sim-prop-btn" data-prop="toString">hijo.toString()</button>
+                            <button class="sim-prop-btn" data-prop="inexistente">hijo.volar</button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnRunChainSimulation">
+                            ⚡ Rastrear Búsqueda en la Cadena
+                        </button>
+                    </div>
+
+                    <!-- Representación Visual de la Cadena -->
+                    <div class="chain-visual-track" id="chainTrack">
+                        
+                        <!-- Nodo 1: Hijo -->
+                        <div class="chain-node" id="node-hijo" data-step="1">
+                            <div class="node-badge">Eslabón 1: Instancia</div>
+                            <div class="node-title">hijo (Objeto)</div>
+                            <div class="node-props">
+                                <span class="prop-item" data-has="nombre">nombre: "Lucas"</span>
+                            </div>
+                            <div class="node-proto-link">[[Prototype]] ⬇</div>
+                        </div>
+
+                        <!-- Conector 1-2 -->
+                        <div class="chain-link" id="link-1-2">
+                            <div class="link-pulse"></div>
+                        </div>
+
+                        <!-- Nodo 2: Padre -->
+                        <div class="chain-node" id="node-padre" data-step="2">
+                            <div class="node-badge">Eslabón 2: Prototipo</div>
+                            <div class="node-title">padre (Prototipo de hijo)</div>
+                            <div class="node-props">
+                                <span class="prop-item" data-has="profesion">profesion: "Ingeniero"</span>
+                            </div>
+                            <div class="node-proto-link">[[Prototype]] ⬇</div>
+                        </div>
+
+                        <!-- Conector 2-3 -->
+                        <div class="chain-link" id="link-2-3">
+                            <div class="link-pulse"></div>
+                        </div>
+
+                        <!-- Nodo 3: Abuelo -->
+                        <div class="chain-node" id="node-abuelo" data-step="3">
+                            <div class="node-badge">Eslabón 3: Prototipo</div>
+                            <div class="node-title">abuelo (Prototipo de padre)</div>
+                            <div class="node-props">
+                                <span class="prop-item" data-has="apellido">apellido: "Pérez"</span>
+                            </div>
+                            <div class="node-proto-link">[[Prototype]] ⬇</div>
+                        </div>
+
+                        <!-- Conector 3-4 -->
+                        <div class="chain-link" id="link-3-4">
+                            <div class="link-pulse"></div>
+                        </div>
+
+                        <!-- Nodo 4: Object.prototype -->
+                        <div class="chain-node" id="node-object-proto" data-step="4">
+                            <div class="node-badge">Eslabón 4: Raíz Universal</div>
+                            <div class="node-title">Object.prototype</div>
+                            <div class="node-props">
+                                <span class="prop-item" data-has="toString">toString: f()</span>
+                                <span class="prop-item" data-has="hasOwnProperty">hasOwnProperty: f()</span>
+                            </div>
+                            <div class="node-proto-link">[[Prototype]] ⬇</div>
+                        </div>
+
+                        <!-- Conector 4-5 -->
+                        <div class="chain-link" id="link-4-5">
+                            <div class="link-pulse"></div>
+                        </div>
+
+                        <!-- Nodo 5: null (Final de la cadena) -->
+                        <div class="chain-node node-null" id="node-null" data-step="5">
+                            <div class="node-badge">Fin de la Cadena</div>
+                            <div class="node-title">null</div>
+                            <div class="node-props">
+                                <span>No hay más prototipos</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Mensaje en Vivo del Recorrido -->
+                    <div class="chain-live-feedback" id="chainLiveFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="chainStepExplanation">
+                            Selecciona una propiedad y haz clic en <strong>"Rastrear Búsqueda en la Cadena"</strong> para ver la animación en vivo.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: 6 CARACTERÍSTICAS FUNDAMENTALES
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="6 Características Clave">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Anatomía Profunda</span>
+                    <h2>Las 6 Características Fundamentales de los Prototipos</h2>
+                    <p class="section-desc">
+                        Los prototipos no son planos rígidos. Son entidades dinámicas y vivas con estas 6 propiedades:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas / Acordeón -->
+                    <div class="char-tabs" id="charTabs">
+                        <button class="char-tab-btn active" data-char="1">
+                            <span class="char-num">4.1</span>
+                            <span class="char-title">Es Mutable</span>
+                        </button>
+                        <button class="char-tab-btn" data-char="2">
+                            <span class="char-num">4.2</span>
+                            <span class="char-title">Es un Objeto</span>
+                        </button>
+                        <button class="char-tab-btn" data-char="3">
+                            <span class="char-num">4.3</span>
+                            <span class="char-title">Existe en RAM</span>
+                        </button>
+                        <button class="char-tab-btn" data-char="4">
+                            <span class="char-num">4.4</span>
+                            <span class="char-title">Modificable & Invocable</span>
+                        </button>
+                        <button class="char-tab-btn" data-char="5">
+                            <span class="char-num">4.5</span>
+                            <span class="char-title">Modelo Ejemplar</span>
+                        </button>
+                        <button class="char-tab-btn" data-char="6">
+                            <span class="char-num">4.6</span>
+                            <span class="char-title">Hereda Valores & Métodos</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido Dinámico de la Característica -->
+                    <div class="char-display-panel" id="charDisplayPanel">
+                        
+                        <!-- Item 1: Mutable -->
+                        <div class="char-detail-view active" id="char-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">4.1 Mutabilidad en Tiempo de Ejecución</span>
+                                <h3>Se puede alterar el prototipo y todos los hijos se actualizan al instante</h3>
+                            </div>
+                            <p class="char-text">
+                                Si agregas o modificas un método en el prototipo <em>después</em> de haber creado miles de objetos, 
+                                ¡todos los objetos ya existentes adquieren la nueva habilidad automáticamente! No tienen copias, tienen un enlace vivo.
+                            </p>
+                            <div class="char-interactive-card">
+                                <div class="card-demo-top">
+                                    <span class="instance-pill">Instancia: <code>bot1 = new Robot("R2-D2")</code></span>
+                                    <button class="cta-btn secondary-btn" id="btnMutateProto">
+                                        ⚡ Inyectar Robot.prototype.saludar()
+                                    </button>
+                                </div>
+                                <div class="mutation-result-box" id="mutationResult">
+                                    Estado actual de bot1: Aún no tiene el método .saludar(). ¡Presiona el botón para inyectarlo en caliente!
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Es un objeto -->
+                        <div class="char-detail-view" id="char-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">4.2 Es en sí mismo un objeto, así como otros</span>
+                                <h3>No es una abstracción mística: es un objeto ordinario</h3>
+                            </div>
+                            <p class="char-text">
+                                El prototipo responde a <code>typeof === 'object'</code>, tiene llaves, valores y su propio prototipo 
+                                (que por defecto es <code>Object.prototype</code>). Puedes usar <code>Object.keys()</code> o inspeccionarlo libremente.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnInspectProtoObject">
+                                    🔍 Inspeccionar Persona.prototype
+                                </button>
+                                <pre class="output-pre" id="inspectProtoObjectOutput">Haz clic para evaluar Persona.prototype...</pre>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Existencia física en memoria -->
+                        <div class="char-detail-view" id="char-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">4.3 Tiene una existencia física en la memoria (Heap RAM)</span>
+                                <h3>Ahorro masivo de recursos en aplicaciones de alto rendimiento</h3>
+                            </div>
+                            <p class="char-text">
+                                En Java o C++, los planos no son instancias. En JS, el <strong>Prototype Object</strong> ocupa una dirección 
+                                real en el Heap desde el primer milisegundo. Si creas 10,000 enemigos en un videojuego, el método <code>atacar()</code> 
+                                solo consume memoria <strong>una sola vez</strong>.
+                            </p>
+                            
+                            <!-- Calculadora interactiva de RAM -->
+                            <div class="memory-calc-widget">
+                                <div class="calc-row">
+                                    <label for="instanceCountSlider">Número de Instancias Simuladas:</label>
+                                    <input type="range" id="instanceCountSlider" min="100" max="10000" step="100" value="2500">
+                                    <span class="slider-val" id="instanceCountVal">2,500 instancias</span>
+                                </div>
+                                <div class="memory-comparison-bars">
+                                    <div class="mem-bar-group">
+                                        <span>Sin Prototipos (Método clonado en cada instancia):</span>
+                                        <div class="mem-progress bad">
+                                            <div class="bar-fill" id="badMemFill" style="width: 80%"></div>
+                                        </div>
+                                        <strong id="badMemText">~2,500 funciones duplicadas en RAM</strong>
+                                    </div>
+                                    <div class="mem-bar-group">
+                                        <span>Con Prototipo (Compartido por referencia viva):</span>
+                                        <div class="mem-progress good">
+                                            <div class="bar-fill" style="width: 2%"></div>
+                                        </div>
+                                        <strong class="text-emerald">¡Solo 1 función única en toda la RAM! (99.9% de ahorro)</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 4: Modificado y llamado -->
+                        <div class="char-detail-view" id="char-view-4">
+                            <div class="char-view-header">
+                                <span class="badge badge-amber">4.4 Puede ser modificado y llamado directamente</span>
+                                <h3>Puedes invocar métodos del prototipo sin instanciar ningún hijo</h3>
+                            </div>
+                            <p class="char-text">
+                                Al ser un objeto existente, puedes llamar <code>PrototipoCalculadora.sumar(5, 3)</code> 
+                                directamente o editar sus propiedades con <code>delete</code> en caliente.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestDirectCall">
+                                    ▶ Ejecutar PrototipoCalculadora.sumar(12, 8) directamente
+                                </button>
+                                <div class="mutation-result-box" id="directCallResult">Esperando prueba...</div>
+                            </div>
+                        </div>
+
+                        <!-- Item 5: Modelo ejemplar / Arquetipo -->
+                        <div class="char-detail-view" id="char-view-5">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">4.5 Modelo Ejemplar de una Familia Objeto</span>
+                                <h3>El arquetipo que transmite los rasgos genéticos a su linaje</h3>
+                            </div>
+                            <p class="char-text">
+                                Define la naturaleza de una categoría de objetos. Por ejemplo, el modelo <code>Vehículo Acuático</code> 
+                                establece el rasgo de flotar y el medio "Agua", el cual comparten tanto el <code>Titanic</code> como el submarino <code>Nautilus</code>.
+                            </p>
+                            <div class="archetype-showcase">
+                                <div class="archetype-card archetype-parent">
+                                    <span class="arch-badge">Arquetipo Modelo</span>
+                                    <h4>ModeloAcuatico</h4>
+                                    <p>medio: "Agua", flotar()</p>
+                                </div>
+                                <div class="archetype-children">
+                                    <div class="archetype-card archetype-child">
+                                        <span class="arch-badge">Instancia 1</span>
+                                        <h4>Titanic</h4>
+                                        <p>nombre: "Titanic" → Hereda flotar()</p>
+                                    </div>
+                                    <div class="archetype-card archetype-child">
+                                        <span class="arch-badge">Instancia 2</span>
+                                        <h4>Nautilus</h4>
+                                        <p>nombre: "Nautilus" → Hereda flotar()</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 6: Hereda valores y métodos -->
+                        <div class="char-detail-view" id="char-view-6">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">4.6 Hereda tanto valores como métodos con contexto "this"</span>
+                                <h3>El método del prototipo se ejecuta usando los datos del hijo</h3>
+                            </div>
+                            <p class="char-text">
+                                Cuando <code>cuentaAhorros.mostrarSaldo()</code> es ejecutado, el código del método está en el prototipo, 
+                                pero la palabra reservada <code>this</code> apunta dinámicamente a <code>cuentaAhorros</code>, 
+                                leyendo su saldo propio con total fidelidad.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestThisContext">
+                                    ▶ Probar Delegación de 'this' en cuentaAhorros
+                                </button>
+                                <div class="mutation-result-box" id="thisContextResult">Presiona el botón para comprobar el valor de 'this'...</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: ANALOGÍA INTERACTIVA (CAJA DE HERRAMIENTAS)
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Analogía: Caja de Herramientas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 🧰</span>
+                    <h2>La Caja de Herramientas Familiar</h2>
+                    <p class="section-desc">
+                        Imagina el préstamo de herramientas en un taller familiar de 3 generaciones: 
+                        ¿Quién tiene la herramienta que necesitas para clavar tu cuadro?
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Instrucciones y Selector de Herramienta -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Elige la herramienta que necesitas usar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-tool="martillo">
+                                <span class="tool-icon">🔨</span>
+                                <span class="tool-name">Martillo</span>
+                            </button>
+                            <button class="tool-btn" data-tool="sierra">
+                                <span class="tool-icon">🪚</span>
+                                <span class="tool-name">Sierra Eléctrica</span>
+                            </button>
+                            <button class="tool-btn" data-tool="destornillador">
+                                <span class="tool-icon">🪛</span>
+                                <span class="tool-name">Destornillador</span>
+                            </button>
+                            <button class="tool-btn" data-tool="laser">
+                                <span class="tool-icon">⚡</span>
+                                <span class="tool-name">Cúter Láser</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Los Tres Talleres Familiares -->
+                    <div class="family-workshops">
+                        
+                        <!-- 1. Tú (Instancia) -->
+                        <div class="workshop-card" id="ws-you">
+                            <div class="ws-avatar">👦</div>
+                            <div class="ws-header">
+                                <h3>Tú (Objeto Hijo)</h3>
+                                <span class="ws-sub">Propiedades Propias</span>
+                            </div>
+                            <div class="ws-items" id="items-you">
+                                <div class="ws-item" data-has-item="destornillador">
+                                    <span>🪛</span> Destornillador (Propio)
+                                </div>
+                            </div>
+                            <div class="ws-status" id="status-you">¿Tienes la herramienta?</div>
+                        </div>
+
+                        <div class="ws-arrow-flow" id="flow-you-father">
+                            <span>[[Prototype]]</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- 2. Tu Padre (Prototipo) -->
+                        <div class="workshop-card" id="ws-father">
+                            <div class="ws-avatar">👨</div>
+                            <div class="ws-header">
+                                <h3>Tu Padre (Prototipo)</h3>
+                                <span class="ws-sub">Taller del Garaje</span>
+                            </div>
+                            <div class="ws-items" id="items-father">
+                                <div class="ws-item" data-has-item="martillo">
+                                    <span>🔨</span> Martillo
+                                </div>
+                            </div>
+                            <div class="ws-status" id="status-father">En espera...</div>
+                        </div>
+
+                        <div class="ws-arrow-flow" id="flow-father-grandpa">
+                            <span>[[Prototype]]</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- 3. Tu Abuelo (Prototipo del Prototipo) -->
+                        <div class="workshop-card" id="ws-grandpa">
+                            <div class="ws-avatar">👴</div>
+                            <div class="ws-header">
+                                <h3>Tu Abuelo (Prototipo Raíz)</h3>
+                                <span class="ws-sub">Taller Histórico</span>
+                            </div>
+                            <div class="ws-items" id="items-grandpa">
+                                <div class="ws-item" data-has-item="sierra">
+                                    <span>🪚</span> Sierra Eléctrica
+                                </div>
+                            </div>
+                            <div class="ws-status" id="status-grandpa">En espera...</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Panel de Conclusión de la Búsqueda -->
+                    <div class="toolbox-result-banner" id="toolboxBanner">
+                        <span class="banner-icon" id="bannerIcon">ℹ️</span>
+                        <span class="banner-text" id="bannerText">
+                            Selecciona una herramienta para ver cómo se resuelve la búsqueda en la familia.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: BUENAS PRÁCTICAS VS ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Buenas Prácticas & Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Código Profesional</span>
+                    <h2>Buenas Prácticas vs Errores Peligrosos</h2>
+                    <p class="section-desc">
+                        Dominar prototipos te hace inmune a los errores más difíciles de depurar en producción.
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta Buena Práctica 1 -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA</span>
+                            <h4>Usa Object.getPrototypeOf() y Object.create()</h4>
+                        </div>
+                        <p>Evita <code>__proto__</code> en producción. <code>Object.getPrototypeOf()</code> y <code>Object.create()</code> están altamente optimizados por el motor V8.</p>
+                        <div class="code-snippet-tiny">
+                            <code>const hijo = Object.create(padre);</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Error Común 1 -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR GRAVE</span>
+                            <h4>Monkey Patching en Prototipos Globales</h4>
+                        </div>
+                        <p>Jamás modifiques <code>Array.prototype</code> o <code>Object.prototype</code>. Provoca colisiones y rompe librerías externas.</p>
+                        <div class="code-snippet-tiny">
+                            <code>// ❌ NUNCA HAGAS ESTO:<br>Array.prototype.miMetodo = fn;</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Buena Práctica 2 -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA</span>
+                            <h4>Filtra con Object.hasOwn() en bucles</h4>
+                        </div>
+                        <p>Los bucles <code>for...in</code> leen también propiedades heredadas del prototipo. Filtra siempre con <code>Object.hasOwn(obj, key)</code>.</p>
+                        <div class="code-snippet-tiny">
+                            <code>if (Object.hasOwn(auto, prop)) { ... }</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Error Común 2 (Simulador Interactivo de Bug) -->
+                    <div class="practice-card bad interactive-bug-card">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR FRECUENTE</span>
+                            <h4>Arrays Mutables en el Prototipo</h4>
+                        </div>
+                        <p>Si colocas un Array en el prototipo, <strong>¡todas las instancias compartirán la misma lista en RAM!</strong></p>
+                        
+                        <div class="bug-sim-action">
+                            <button class="btn-trigger-bug" id="btnTriggerBugDemo">
+                                💥 Simular Bug de Arrays Compartidos
+                            </button>
+                            <div class="bug-sim-output" id="bugSimOutput">
+                                Haz clic para ver cómo Ana aparece en el perfil de Carlos sin querer...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground & Sandbox</span>
+                    <h2>Laboratorio de Código Interactivo</h2>
+                    <p class="section-desc">
+                        Escribe, edita y ejecuta código JavaScript con prototipos reales directamente en tu navegador.
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-1">1. Objeto simple & __proto__ (Básico)</option>
+                                    <option value="preset-2">2. Constructores y Automovil.prototype</option>
+                                    <option value="preset-3">3. Cadena de 3 Niveles con Object.create</option>
+                                    <option value="preset-4">4. Demostración de Ahorro de Memoria</option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">↺ Restaurar</button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida</span>
+                            <button class="btn-clear-console" id="btnClearConsole">Limpiar</button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: RETOS & EJERCICIOS INTERACTIVOS
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Retos & Ejercicios">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Demuestra tu Dominio</span>
+                    <h2>Ejercicios & Retos de Evaluación</h2>
+                    <p class="section-desc">
+                        Pon a prueba tu comprensión de la herencia prototípica resolviendo estos 3 retos graduales.
+                    </p>
+                </div>
+
+                <div class="exercises-wrapper">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card" id="exercise-1">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>El Vehículo Base con Object.create()</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea un prototipo <code>vehiculoPrototipo</code> con propiedad <code>ruedas: 4</code> y método <code>arrancar()</code>. 
+                            Instancia <code>miCoche</code> con <code>Object.create</code>, asígnale <code>marca</code> y comprueba que hereda <code>ruedas</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex1">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-1">Ver Solución Paso a Paso</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-1">
+<pre><code>const vehiculoPrototipo = {
+    ruedas: 4,
+    arrancar() { return `El vehículo de ${this.ruedas} ruedas ha arrancado.`; }
+};
+
+const miCoche = Object.create(vehiculoPrototipo);
+miCoche.marca = "Tesla";
+
+console.log(miCoche.marca);    // "Tesla" (Propiedad propia)
+console.log(miCoche.ruedas);   // 4 (Heredada del prototipo)
+console.log(miCoche.arrancar());</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card" id="exercise-2">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Mutabilidad Compartida en Personajes</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Declara <code>function Personaje(nombre, vida)</code> e instancia <code>guerrero</code> y <code>mago</code>. 
+                            Posteriormente inyecta en caliente <code>Personaje.prototype.curar</code> y verifica que ambos comparten exactamente la misma función en memoria (<code>===</code>).
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex2">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-2">Ver Solución Paso a Paso</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-2">
+<pre><code>function Personaje(nombre, vida) {
+    this.nombre = nombre;
+    this.vida = vida;
+}
+
+const guerrero = new Personaje("Thor", 100);
+const mago = new Personaje("Gandalf", 80);
+
+// Mutación en caliente del prototipo
+Personaje.prototype.curar = function(pts) {
+    this.vida += pts;
+    return `${this.nombre} curado. Vida: ${this.vida}`;
+};
+
+console.log(guerrero.curar(20)); // "Thor curado. Vida: 120"
+console.log(guerrero.curar === mago.curar); // true (Misma dirección RAM!)</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card" id="exercise-3">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Master</span>
+                            <h3>Cadena de 3 Niveles con Object.hasOwn()</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea la cadena <code>Entidad</code> (respirar) → <code>Empleado</code> (empresa: "TechCorp", trabajar) → <code>Desarrollador</code> (programar). 
+                            Demuestra la invocación en los 3 eslabones y comprueba con <code>Object.hasOwn()</code> cuáles propiedades le pertenecen a la instancia.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex3">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-3">Ver Solución Paso a Paso</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-3">
+<pre><code>const Entidad = {
+    respirar() { return "Respirando oxígeno..."; }
+};
+
+const Empleado = Object.create(Entidad);
+Empleado.empresa = "TechCorp";
+Empleado.trabajar = function() { return `Trabajando en ${this.empresa}`; };
+
+const dev = Object.create(Empleado);
+dev.nombre = "Sofia";
+dev.lenguaje = "JavaScript";
+dev.programar = function() { return `${this.nombre} programa en ${this.lenguaje}`; };
+
+// Invocación a través de los 3 niveles
+console.log(dev.programar()); // Nivel 1 (Propio)
+console.log(dev.trabajar());  // Nivel 2 (Empleado)
+console.log(dev.respirar());  // Nivel 3 (Entidad)
+
+// Comprobación de pertenencia directa
+console.log(Object.hasOwn(dev, "nombre"));   // true
+console.log(Object.hasOwn(dev, "empresa"));  // false (Heredada!)</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN & CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen & Chuleta">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet & Conclusión</span>
+                    <h2>Resumen Maestro de Prototipos</h2>
+                    <p class="section-desc">
+                        Los 5 mandamientos de la orientación a objetos en JavaScript para recordar siempre:
+                    </p>
+                </div>
+
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Todo es Delegación</h4>
+                        <p>Los objetos no copian propiedades; las buscan en su enlace oculto <code>[[Prototype]]</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>La Cadena Termina en null</h4>
+                        <p>El orden es: Objeto Propio → Constructor.prototype → Object.prototype → <code>null</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Ahorro de Memoria Vital</h4>
+                        <p>Colocar métodos en el prototipo los mantiene como una sola referencia física compartida en RAM.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Mutabilidad Viva</h4>
+                        <p>Modificar el prototipo altera en caliente el comportamiento de todas las instancias pasadas y futuras.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Estándares Modernos</h4>
+                        <p>Usa <code>Object.create()</code>, <code>Object.getPrototypeOf()</code> y <code>Object.hasOwn()</code>.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente con las miniaturas de las diapositivas -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

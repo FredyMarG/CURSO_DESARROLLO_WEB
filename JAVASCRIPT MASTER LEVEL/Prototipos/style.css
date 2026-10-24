@@ -1,0 +1,2354 @@
+/* ==========================================================================
+   PROTOTIPOS EN JAVASCRIPT - MASTER LEVEL
+   Estilos Visuales Premium, Dinámicos y Modernos
+   Documentación detallada línea por línea para fines pedagógicos
+   ========================================================================== */
+
+/* --- 1. Variables Globales & Sistema de Diseño (:root) --- */
+/* :root representa el elemento raíz del documento (HTML) y se usa para definir variables globales accesibles en todo el CSS */
+:root {
+    /* Color de fondo principal: tono azul muy oscuro cercano al negro azabache */
+    --bg-dark: #070a13;
+    /* Color de fondo secundario para superficies intermedias y barras elevadas */
+    --bg-surface: #0e1526;
+    /* Color de fondo para tarjetas translúcidas (75% de opacidad para permitir efecto vidrio/glassmorphism) */
+    --bg-card: rgba(16, 24, 42, 0.75);
+    /* Color de fondo de tarjeta al pasar el cursor (hover), más brillante y con 85% de opacidad */
+    --bg-card-hover: rgba(23, 34, 58, 0.85);
+    /* Tinte sutil blanco con 3% de opacidad para crear reflejos de cristal */
+    --bg-glass: rgba(255, 255, 255, 0.03);
+
+    /* Borde casi imperceptible con 8% de opacidad blanca para delimitar sin saturar */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    /* Borde más visible con 16% de opacidad blanca para elementos activos o hovered */
+    --border-light: rgba(255, 255, 255, 0.16);
+    /* Borde con acento violeta índigo para resaltar elementos seleccionados */
+    --border-accent: rgba(99, 102, 241, 0.4);
+
+    /* Color primario: Índigo vibrante moderno */
+    --primary: #6366f1;
+    /* Resplandor o sombra neón asociada al color primario */
+    --primary-glow: rgba(99, 102, 241, 0.35);
+    /* Variante más oscura del primario para estados de pulsación o hover */
+    --primary-hover: #4f46e5;
+
+    /* Color secundario: Cian neón tecnológico */
+    --cyan: #06b6d4;
+    /* Resplandor luminoso color cian */
+    --cyan-glow: rgba(6, 182, 212, 0.3);
+    /* Variante más oscura del cian al interactuar */
+    --cyan-hover: #0891b2;
+
+    /* Color semántico de éxito: Verde esmeralda */
+    --emerald: #10b981;
+    /* Resplandor asociado al verde esmeralda */
+    --emerald-glow: rgba(16, 185, 129, 0.3);
+
+    /* Color semántico de advertencia o llamada de atención: Ámbar / Dorado */
+    --amber: #f59e0b;
+    /* Resplandor asociado al ámbar */
+    --amber-glow: rgba(245, 158, 11, 0.3);
+
+    /* Color semántico de error o peligro: Rosa carmesí */
+    --rose: #f43f5e;
+    /* Resplandor asociado al tono rosa carmesí */
+    --rose-glow: rgba(244, 63, 94, 0.3);
+
+    /* Color principal de texto: blanco hueso de alta legibilidad */
+    --text-main: #f1f5f9;
+    /* Color de texto secundario: gris azulado para descripciones y subtítulos */
+    --text-muted: #94a3b8;
+    /* Color de texto terciario: gris atenuado para notas secundarias y metadatos */
+    --text-dim: #64748b;
+
+    /* Familia tipográfica principal: 'Outfit' con respaldo en fuentes del sistema */
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Familia tipográfica monoespaciada: 'Fira Code' para código fuente y métricas */
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Altura fija calculada para la barra de navegación superior */
+    --header-height: 72px;
+    /* Altura asignada para el área de control flotante inferior */
+    --bottom-height: 80px;
+    /* Radio de borde pequeño (8px) para etiquetas y botones compactos */
+    --radius-sm: 8px;
+    /* Radio de borde mediano (14px) para botones principales y paneles */
+    --radius-md: 14px;
+    /* Radio de borde grande (20px) para las tarjetas principales de diapositiva */
+    --radius-lg: 20px;
+    /* Radio de borde completo para píldoras y badges circulares */
+    --radius-pill: 9999px;
+
+    /* Transición rápida para micro-interacciones al pasar el ratón (hover) */
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Transición fluida para cambios de diapositiva y apertura de modales */
+    --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- 2. Reset y Configuración Base --- */
+/* Selector universal para todos los elementos y sus pseudo-elementos ::before y ::after */
+*, *::before, *::after {
+    /* El modelo de caja incluye el relleno (padding) y borde dentro del ancho y alto total */
+    box-sizing: border-box;
+    /* Elimina márgenes externos por defecto impuestos por el navegador */
+    margin: 0;
+    /* Elimina rellenos internos por defecto del navegador */
+    padding: 0;
+}
+
+/* Configuración de las etiquetas principales html y body */
+html, body {
+    /* Ocupa el 100% del ancho del viewport */
+    width: 100%;
+    /* Ocupa al menos el 100% de la altura de la ventana visible */
+    min-height: 100%;
+    /* Establece el color de fondo oscuro de base */
+    background-color: var(--bg-dark);
+    /* Establece el color de texto general */
+    color: var(--text-main);
+    /* Aplica la fuente moderna Outfit */
+    font-family: var(--font-sans);
+    /* Altura de línea óptima de 1.6 para lectura confortable */
+    line-height: 1.6;
+    /* Oculta desbordamientos horizontales accidentales */
+    overflow-x: hidden;
+    /* Suavizado tipográfico subpixel para navegadores WebKit/Blink */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Personalización del carril de la barra de desplazamiento */
+::-webkit-scrollbar {
+    /* Ancho de la barra de scroll vertical */
+    width: 8px;
+    /* Altura de la barra de scroll horizontal */
+    height: 8px;
+}
+/* Fondo del carril por donde se desliza la barra */
+::-webkit-scrollbar-track {
+    /* Fondo oscuro semitransparente */
+    background: rgba(0, 0, 0, 0.3);
+}
+/* Manija (cursor) deslizable de la barra de scroll */
+::-webkit-scrollbar-thumb {
+    /* Color gris sutil */
+    background: var(--border-light);
+    /* Bordes redondeados en forma de píldora */
+    border-radius: var(--radius-pill);
+}
+/* Efecto al pasar el cursor sobre la manija del scroll */
+::-webkit-scrollbar-thumb:hover {
+    /* Se ilumina con el color primario índigo */
+    background: var(--primary);
+}
+
+/* --- 3. Efectos de Fondo Ambientales (Luces de Neón & Malla) --- */
+/* Clase base para los círculos de luz difusa ambiental */
+.bg-glow {
+    /* Fijado en la ventana para que no se mueva con el scroll */
+    position: fixed;
+    /* Forma circular perfecta */
+    border-radius: 50%;
+    /* Desenfoque gaussiano masivo para crear aura difusa */
+    filter: blur(120px);
+    /* Permite hacer clic a través de este elemento sin bloquear botones */
+    pointer-events: none;
+    /* Se posiciona detrás de todo el contenido interactivo */
+    z-index: 0;
+    /* Opacidad moderada del 45% */
+    opacity: 0.45;
+    /* Animación continua de pulso y respiración de 12 segundos alternada */
+    animation: pulseAmbient 12s ease-in-out infinite alternate;
+}
+/* Primer foco de luz: Esquina superior izquierda en color primario */
+.glow-1 {
+    /* Ancho de 550 píxeles */
+    width: 550px;
+    /* Alto de 550 píxeles */
+    height: 550px;
+    /* Desplazado ligeramente fuera del borde superior */
+    top: -10%;
+    /* Desplazado ligeramente fuera del borde izquierdo */
+    left: -10%;
+    /* Gradiente radial desde el centro índigo hacia transparente */
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+}
+/* Segundo foco de luz: Esquina inferior derecha en color cian */
+.glow-2 {
+    /* Ancho de 600 píxeles */
+    width: 600px;
+    /* Alto de 600 píxeles */
+    height: 600px;
+    /* Desplazado fuera del borde inferior */
+    bottom: -10%;
+    /* Desplazado fuera del borde derecho */
+    right: -10%;
+    /* Gradiente radial cian a transparente */
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    /* Desfase de tiempo de -4 segundos para movimiento orgánico no sincronizado */
+    animation-delay: -4s;
+}
+/* Tercer foco de luz: Centro en tono púrpura */
+.glow-3 {
+    /* Ancho de 400 píxeles */
+    width: 400px;
+    /* Alto de 400 píxeles */
+    height: 400px;
+    /* Posicionado cerca del 40% vertical */
+    top: 40%;
+    /* Posicionado cerca del 45% horizontal */
+    left: 45%;
+    /* Gradiente radial púrpura a transparente */
+    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    /* Desfase de -8 segundos */
+    animation-delay: -8s;
+}
+
+/* Definición de la animación de pulso ambiental */
+@keyframes pulseAmbient {
+    /* Estado inicial: escala normal, sin desplazamiento y opacidad del 35% */
+    0% { transform: scale(1) translate(0, 0); opacity: 0.35; }
+    /* Punto medio: se expande 15%, se traslada y aumenta su brillo al 55% */
+    50% { transform: scale(1.15) translate(30px, 20px); opacity: 0.55; }
+    /* Estado final: se contrae levemente y se desplaza en sentido contrario */
+    100% { transform: scale(0.95) translate(-20px, -20px); opacity: 0.4; }
+}
+
+/* Cuadrícula geométrica de fondo (Grid Pattern) estilo Sci-Fi */
+.bg-grid-pattern {
+    /* Posición fija fija en toda la pantalla */
+    position: fixed;
+    /* Cubre los 4 extremos (top:0, right:0, bottom:0, left:0) */
+    inset: 0;
+    /* Dibuja líneas tenues horizontales y verticales cada 40 píxeles */
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    /* Tamaño de cada celda de la cuadrícula: 40x40px */
+    background-size: 40px 40px;
+    /* No intercepta clics del ratón */
+    pointer-events: none;
+    /* En la capa z=0 de fondo */
+    z-index: 0;
+}
+
+/* --- 4. Barra Superior (Top Nav) --- */
+/* Encabezado fijo en la parte superior */
+.top-nav {
+    /* Se mantiene anclado al desplazarse */
+    position: fixed;
+    /* Al ras superior */
+    top: 0;
+    /* Al ras izquierdo */
+    left: 0;
+    /* Cubre el 100% del ancho */
+    width: 100%;
+    /* Altura definida por la variable (72px) */
+    height: var(--header-height);
+    /* Fondo oscuro semitransparente para efecto glassmorphic */
+    background: rgba(7, 10, 19, 0.75);
+    /* Desenfoque de fondo estándar */
+    backdrop-filter: blur(16px);
+    /* Desenfoque de fondo para Safari */
+    -webkit-backdrop-filter: blur(16px);
+    /* Delgada línea divisoria inferior */
+    border-bottom: 1px solid var(--border-subtle);
+    /* Alinea sus elementos en una fila flexible */
+    display: flex;
+    /* Centra los elementos verticalmente */
+    align-items: center;
+    /* Separa los extremos: marca a la izquierda, controles a la derecha */
+    justify-content: space-between;
+    /* Espaciado interno horizontal de 2 rem (32px) */
+    padding: 0 2rem;
+    /* Elevado sobre las diapositivas (z=100) */
+    z-index: 100;
+}
+
+/* Contenedor del logotipo y nombre del curso */
+.nav-brand {
+    /* Disposición flexible en fila */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de 1rem entre insignia y texto */
+    gap: 1rem;
+}
+
+/* Insignia que indica el nivel del curso (JS MASTER LEVEL) */
+.brand-badge {
+    /* Fondo con gradiente índigo-cian translúcido */
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+    /* Borde resaltado con acento */
+    border: 1px solid var(--border-accent);
+    /* Color de texto cian */
+    color: var(--cyan);
+    /* Tamaño de letra compacto */
+    font-size: 0.75rem;
+    /* Peso de fuente negrita */
+    font-weight: 700;
+    /* Espaciado entre letras para aspecto profesional */
+    letter-spacing: 0.08em;
+    /* Relleno vertical de 0.3rem y horizontal de 0.7rem */
+    padding: 0.3rem 0.7rem;
+    /* Bordes completamente redondeados */
+    border-radius: var(--radius-pill);
+    /* Texto en mayúsculas */
+    text-transform: uppercase;
+}
+
+/* Agrupador del icono y el texto del título */
+.brand-title {
+    /* Fila flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de medio rem */
+    gap: 0.5rem;
+}
+/* Icono de rayo energético */
+.icon-proto {
+    /* Tamaño del icono */
+    font-size: 1.25rem;
+    /* Color ámbar brillante */
+    color: #fbbf24;
+    /* Sombra difusa resplandeciente */
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+}
+/* Texto del título en la barra */
+.title-text {
+    /* Tamaño de texto equilibrado */
+    font-size: 1.1rem;
+    /* Peso fuerte */
+    font-weight: 700;
+    /* Ajuste de espacio entre caracteres */
+    letter-spacing: -0.01em;
+    /* Color blanco principal */
+    color: var(--text-main);
+}
+
+/* Contenedor de la barra de progreso */
+.nav-progress-container {
+    /* Disposición en fila */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre barra y número */
+    gap: 1rem;
+    /* Ocupa hasta 360px según disponibilidad */
+    flex: 0 1 360px;
+}
+/* Carril gris de la barra de progreso */
+.progress-bar-bg {
+    /* Ocupa todo el espacio disponible */
+    flex: 1;
+    /* Altura delgada de 6px */
+    height: 6px;
+    /* Fondo blanco al 8% de opacidad */
+    background: rgba(255, 255, 255, 0.08);
+    /* Píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Oculta esquinas sobrantes */
+    overflow: hidden;
+}
+/* Relleno animado de progreso */
+.progress-bar-fill {
+    /* Ocupa toda la altura del carril */
+    height: 100%;
+    /* Ancho inicial (10% = Diapositiva 1 de 10) */
+    width: 10%;
+    /* Gradiente suave de índigo a cian */
+    background: linear-gradient(90deg, var(--primary), var(--cyan));
+    /* Píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Transición suave al cambiar de diapositiva */
+    transition: width var(--transition-smooth);
+    /* Resplandor neón en el extremo de avance */
+    box-shadow: 0 0 10px var(--cyan-glow);
+}
+/* Indicador numérico (ej. 1 / 10) */
+.progress-label {
+    /* Fuente tipográfica de código */
+    font-family: var(--font-mono);
+    /* Tamaño legible */
+    font-size: 0.85rem;
+    /* Color atenuado */
+    color: var(--text-muted);
+    /* Ancho mínimo para que no baile el texto al cambiar dígitos */
+    min-width: 50px;
+    /* Alineado a la derecha */
+    text-align: right;
+}
+
+/* Grupo de botones de acciones en la barra superior */
+.nav-actions {
+    /* Fila flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio de 0.5rem entre botones */
+    gap: 0.5rem;
+}
+
+/* Botones de navegación en la cabecera */
+.nav-btn {
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.04);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Texto blanco principal */
+    color: var(--text-main);
+    /* Relleno interno */
+    padding: 0.5rem 0.85rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Cursor de puntero al pasar el ratón */
+    cursor: pointer;
+    /* Tipografía Outfit */
+    font-family: var(--font-sans);
+    /* Tamaño de texto */
+    font-size: 0.85rem;
+    /* Peso intermedio */
+    font-weight: 500;
+    /* Disposición en línea flexible */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.5rem;
+    /* Transición rápida en todas las propiedades */
+    transition: all var(--transition-fast);
+}
+/* Estado hover de los botones superiores */
+.nav-btn:hover {
+    /* Aumenta el brillo del fondo */
+    background: rgba(255, 255, 255, 0.08);
+    /* Aclara el borde */
+    border-color: var(--border-light);
+    /* Eleva el botón 1 pixel hacia arriba */
+    transform: translateY(-1px);
+}
+/* Estado de clic presionado */
+.nav-btn:active {
+    /* Vuelve a su posición original */
+    transform: translateY(0);
+}
+/* Tamaño de icono dentro del botón */
+.btn-icon {
+    font-size: 1rem;
+}
+
+/* --- 5. Contenedor de Presentación / Modos (Presentation vs Document) --- */
+/* Envoltorio principal de las diapositivas */
+.presentation-wrapper {
+    /* Posición relativa para ubicar capas */
+    position: relative;
+    /* Por encima de la cuadrícula y luces de fondo */
+    z-index: 10;
+    /* Margen superior igual a la altura de la cabecera para no quedar oculto detrás */
+    margin-top: var(--header-height);
+    /* Margen inferior para no chocar con la barra de navegación flotante */
+    margin-bottom: var(--bottom-height);
+    /* Altura mínima calculada descontando cabecera y barra inferior */
+    min-height: calc(100vh - var(--header-height) - var(--bottom-height));
+    /* Ancho al 100% */
+    width: 100%;
+    /* Ancho máximo contenido en 1400px para pantallas grandes */
+    max-width: 1400px;
+    /* Centrado horizontal automático */
+    margin-left: auto;
+    margin-right: auto;
+    /* Espaciado interno general */
+    padding: 2rem 2.5rem;
+    /* Flexbox centrado */
+    display: flex;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: center;
+}
+
+/* REGLAS PARA EL MODO PRESENTACIÓN (Diapositivas individuales) */
+/* Oculta por defecto todas las diapositivas */
+body.mode-presentation .slide {
+    display: none;
+    /* Totalmente transparente */
+    opacity: 0;
+    /* Ligeramente reducida en escala y desplazada hacia abajo */
+    transform: scale(0.97) translateY(12px);
+    /* Transición suave de entrada */
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Ocupa todo el ancho */
+    width: 100%;
+}
+/* Muestra únicamente la diapositiva que tiene la clase .active */
+body.mode-presentation .slide.active {
+    /* Hace visible el bloque */
+    display: block;
+    /* Opacidad completa */
+    opacity: 1;
+    /* Escala original en su posición natural */
+    transform: scale(1) translateY(0);
+}
+
+/* REGLAS PARA EL MODO GUÍA / DOCUMENTO COMPLETO (Lectura continua) */
+/* El contenedor pasa a flujo de bloque continuo con scroll */
+body.mode-document .presentation-wrapper {
+    display: block;
+    /* Espacio extra al final para lectura cómoda */
+    padding-bottom: 5rem;
+}
+/* Todas las diapositivas se vuelven visibles sucesivamente */
+body.mode-document .slide {
+    display: block !important;
+    opacity: 1 !important;
+    transform: none !important;
+    /* Separación amplia entre secciones */
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    /* Línea divisoria elegante entre temas */
+    border-bottom: 1px solid var(--border-subtle);
+}
+/* Elimina el borde de la última diapositiva */
+body.mode-document .slide:last-child {
+    border-bottom: none;
+}
+/* En modo documento se oculta la barra flotante de diapositivas */
+body.mode-document .bottom-controls {
+    display: none;
+}
+
+/* --- 6. Componentes Comunes de las Diapositivas --- */
+/* Tarjeta principal contenedora de cada diapositiva */
+.slide-content {
+    /* Fondo translúcido tipo tarjeta */
+    background: var(--bg-card);
+    /* Efecto de cristal esmerilado */
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas de 20px */
+    border-radius: var(--radius-lg);
+    /* Relleno generoso de 3rem (48px) */
+    padding: 3rem;
+    /* Sombra profunda y reflejo superior para relieve tridimensional */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    /* Ocupa el 100% de su contenedor */
+    width: 100%;
+}
+
+/* Cabecera interna de cada diapositiva */
+.slide-header {
+    /* Margen inferior para separar del contenido */
+    margin-bottom: 2rem;
+}
+/* Etiqueta superior que indica el número de fundamento o módulo */
+.section-tag {
+    /* Comportamiento de bloque en línea */
+    display: inline-block;
+    /* Color cian tecnológico */
+    color: var(--cyan);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño compacto */
+    font-size: 0.8rem;
+    /* Negrita */
+    font-weight: 600;
+    /* En mayúsculas */
+    text-transform: uppercase;
+    /* Espaciado amplio entre letras */
+    letter-spacing: 0.1em;
+    /* Separación inferior */
+    margin-bottom: 0.5rem;
+}
+/* Título de nivel 2 (H2) de cada diapositiva */
+.slide-header h2 {
+    /* Tamaño de título prominente */
+    font-size: 2.2rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Condensación ligera entre letras */
+    letter-spacing: -0.02em;
+    /* Blanco puro */
+    color: #fff;
+    /* Margen inferior de medio rem */
+    margin-bottom: 0.5rem;
+}
+/* Párrafo explicativo debajo del título */
+.section-desc {
+    /* Color secundario legible */
+    color: var(--text-muted);
+    /* Tamaño de texto confortable */
+    font-size: 1.05rem;
+    /* Ancho máximo de línea para legibilidad ergonómica */
+    max-width: 900px;
+}
+
+/* ESTILOS DE INSIGNIAS (BADGES) */
+.badge {
+    /* En línea flexible */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Relleno compacto */
+    padding: 0.35rem 0.8rem;
+    /* Forma de píldora */
+    border-radius: var(--radius-pill);
+    /* Tamaño de fuente pequeño */
+    font-size: 0.75rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Espaciado entre caracteres */
+    letter-spacing: 0.03em;
+}
+/* Insignia color púrpura */
+.badge-purple {
+    background: rgba(99, 102, 241, 0.15);
+    color: #a5b4fc;
+    border: 1px solid rgba(99, 102, 241, 0.35);
+}
+/* Insignia color cian */
+.badge-cyan {
+    background: rgba(6, 182, 212, 0.15);
+    color: #67e8f9;
+    border: 1px solid rgba(6, 182, 212, 0.35);
+}
+/* Insignia color verde esmeralda */
+.badge-emerald {
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+/* Insignia color dorado ámbar */
+.badge-amber {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fcd34d;
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* BOTONES DE LLAMADA A LA ACCIÓN (CTA) */
+.cta-btn {
+    /* Disposición flexible en línea */
+    display: inline-flex;
+    /* Centrado horizontal y vertical */
+    align-items: center;
+    justify-content: center;
+    /* Espacio entre texto e icono */
+    gap: 0.6rem;
+    /* Relleno amplio para ergonomía táctil */
+    padding: 0.85rem 1.75rem;
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Tipografía Outfit */
+    font-family: var(--font-sans);
+    /* Tamaño de texto de 1rem (16px) */
+    font-size: 1rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Transición fluida */
+    transition: all var(--transition-smooth);
+    /* Sin borde por defecto */
+    border: none;
+    /* Sin subrayado en caso de ser enlace <a> */
+    text-decoration: none;
+}
+/* Botón principal primario con gradiente y sombra neón */
+.primary-btn {
+    /* Gradiente índigo a lavanda */
+    background: linear-gradient(135deg, var(--primary), #818cf8);
+    /* Texto blanco */
+    color: #ffffff;
+    /* Sombra de resplandor */
+    box-shadow: 0 4px 20px var(--primary-glow);
+}
+/* Efecto hover del botón primario */
+.primary-btn:hover {
+    /* Se eleva 2 píxeles */
+    transform: translateY(-2px);
+    /* Sombra más amplia y brillante */
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+    /* Gradiente más saturado */
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+/* Botón secundario con borde translúcido */
+.secondary-btn {
+    /* Fondo muy translúcido */
+    background: rgba(255, 255, 255, 0.05);
+    /* Borde definido */
+    border: 1px solid var(--border-light);
+    /* Texto blanco principal */
+    color: var(--text-main);
+}
+/* Hover del botón secundario */
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+/* GRADIENTE DE TEXTO TRICOLOR (Lavanda -> Azul Cielo -> Esmeralda) */
+.gradient-text {
+    /* Define el gradiente lineal en 135 grados */
+    background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 50%, #34d399 100%);
+    /* Recorta el fondo con la silueta exacta del texto */
+    background-clip: text;
+    /* Vuelve transparente el color del texto para revelar el gradiente inferior */
+    -webkit-text-fill-color: transparent;
+}
+
+/* ETIQUETA CODE EN LÍNEA */
+code {
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño proporcional al 90% */
+    font-size: 0.9em;
+    /* Fondo oscuro semitransparente */
+    background: rgba(255, 255, 255, 0.08);
+    /* Relleno compacto */
+    padding: 0.2rem 0.4rem;
+    /* Bordes sutilmente redondeados */
+    border-radius: 4px;
+    /* Color azul cielo tecnológico */
+    color: #38bdf8;
+}
+
+/* --- 7. SLIDE 1: PORTADA & BIENVENIDA --- */
+/* Diapositiva de entrada centrada */
+.hero-slide {
+    /* Centrado de texto */
+    text-align: center;
+    /* Relleno vertical ampliado */
+    padding: 4rem 3rem;
+}
+/* Fila de insignias centrada */
+.hero-badges {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+/* Gran título de bienvenida H1 */
+.hero-title {
+    /* Tamaño tipográfico masivo (56px) */
+    font-size: 3.5rem;
+    /* Extra negrita */
+    font-weight: 800;
+    /* Altura de línea ajustada para títulos */
+    line-height: 1.15;
+    /* Condensación de caracteres */
+    letter-spacing: -0.03em;
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+    /* Ancho máximo contenido */
+    max-width: 950px;
+    /* Centrado horizontal automático */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Subtítulo de bienvenida */
+.hero-subtitle {
+    /* Tamaño legible */
+    font-size: 1.25rem;
+    /* Color atenuado */
+    color: var(--text-muted);
+    /* Ancho óptimo */
+    max-width: 780px;
+    /* Centrado automático y margen inferior */
+    margin: 0 auto 3rem auto;
+    /* Peso normal */
+    font-weight: 400;
+}
+/* Énfasis en blanco dentro del subtítulo */
+.hero-subtitle strong {
+    color: #fff;
+}
+
+/* Cuadrícula de 4 tarjetas destacadas de la portada */
+.hero-card-grid {
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas responsivas que se ajustan solas (mínimo 240px cada una) */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 1.25rem;
+    /* Margen inferior antes de los botones */
+    margin-bottom: 3rem;
+}
+/* Mini tarjetas interactivas de la portada */
+.hero-mini-card {
+    /* Fondo tenue */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Texto alineado a la izquierda */
+    text-align: left;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición suave */
+    transition: all var(--transition-smooth);
+}
+/* Hover en mini tarjetas */
+.hero-mini-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-accent);
+    /* Se eleva 4px */
+    transform: translateY(-4px);
+    /* Sombra de elevación */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+/* Icono emoji dentro de la mini tarjeta */
+.mini-card-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+}
+/* Título de la mini tarjeta */
+.hero-mini-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.35rem;
+    color: #fff;
+}
+/* Descripción de la mini tarjeta */
+.hero-mini-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+/* Contenedor de botones de inicio */
+.hero-cta-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+/* Flecha o etiqueta decorativa en los botones */
+.arrow-icon, .code-tag {
+    font-weight: 700;
+}
+
+/* --- 8. SLIDE 2: DEFINICIÓN & MITO VS REALIDAD --- */
+/* Disposición en 2 columnas: concepto a la izquierda, código a la derecha */
+.two-columns-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+/* Tarjeta informativa */
+.info-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.card-badge-header {
+    margin-bottom: 1rem;
+}
+.info-card p {
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+}
+/* Bloque de aviso destacado con barra lateral violeta */
+.highlight-callout {
+    background: rgba(99, 102, 241, 0.08);
+    border-left: 3px solid var(--primary);
+    padding: 0.85rem 1rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+/* Comparativa Clases vs Prototipos */
+.vs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.vs-box {
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+}
+/* Caja de Clases tradicionales (rojo/rosado) */
+.class-box {
+    background: rgba(244, 63, 94, 0.05);
+    border: 1px solid rgba(244, 63, 94, 0.2);
+}
+.class-box h4 {
+    color: #fda4af;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+/* Caja de Prototipos de JS (verde esmeralda) */
+.proto-box {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.proto-box h4 {
+    color: #6ee7b7;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+}
+.vs-box ul {
+    list-style: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.vs-box li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1rem;
+}
+.vs-box li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+}
+
+/* PANELES DE CÓDIGO ESTILIZADOS */
+.code-panel {
+    background: #030712;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+/* Cabecera del panel de código tipo ventana de terminal */
+.code-panel-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+}
+/* Botones redondos de ventana (rojo, amarillo, verde) */
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+    margin-right: 1rem;
+}
+.terminal-dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.dot.red { background: #ef4444; }
+.dot.yellow { background: #f59e0b; }
+.dot.green { background: #10b981; }
+
+.file-name {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    flex: 1;
+}
+/* Botón para copiar código */
+.btn-copy-code {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition: all var(--transition-fast);
+}
+.btn-copy-code:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+/* Bloque <pre> donde se muestra el código */
+.code-block {
+    padding: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    color: #e2e8f0;
+}
+
+/* RESALTADO DE SINTAXIS (SYNTAX HIGHLIGHTING) */
+.c-keyword { color: #f43f5e; font-weight: 600; } /* Palabras clave como const, let, function */
+.c-variable { color: #fcd34d; }                   /* Nombres de variables */
+.c-prop { color: #38bdf8; }                       /* Propiedades y claves de objeto */
+.c-string { color: #34d399; }                     /* Cadenas de texto entre comillas */
+.c-func { color: #a78bfa; }                       /* Nombres de funciones y métodos */
+.c-comment { color: #64748b; font-style: italic; }/* Comentarios explicativos */
+
+/* Barra inferior interactiva de prueba rápida */
+.interactive-test-bar {
+    padding: 0.85rem 1.25rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.btn-run-action {
+    background: rgba(99, 102, 241, 0.2);
+    border: 1px solid var(--primary);
+    color: #c7d2fe;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.btn-run-action:hover {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+.run-status {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+}
+
+/* Mini pantalla de consola */
+.mini-console {
+    background: #02040a;
+    border-top: 1px dashed var(--border-subtle);
+    padding: 0.85rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: #38bdf8;
+    min-height: 60px;
+}
+.console-prompt {
+    color: var(--text-dim);
+}
+
+/* --- 9. SLIDE 3: PROTOTYPE OBJECT vs __proto__ --- */
+.comparison-grid {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+.comparison-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    transition: transform var(--transition-smooth);
+}
+.comparison-card:hover {
+    transform: translateY(-3px);
+}
+.card-constructor {
+    border-top: 3px solid var(--cyan);
+}
+.card-instance {
+    border-top: 3px solid var(--emerald);
+}
+.comp-badge {
+    margin-bottom: 0.75rem;
+}
+.comparison-card h3 {
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
+    color: #fff;
+    margin-bottom: 0.25rem;
+}
+.comp-subtitle {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    margin-bottom: 1.25rem;
+}
+.comp-body p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+/* Caja de previsualización visual con icono */
+.visual-box {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+}
+.vis-icon {
+    font-size: 1.75rem;
+}
+.vis-text strong {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: #fff;
+}
+.vis-text small {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+}
+
+/* Puente animado con flecha entre constructor e instancia */
+.comparison-bridge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    padding: 0 0.5rem;
+}
+.bridge-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--amber);
+}
+.arrow-flow {
+    font-size: 1.5rem;
+    animation: flowRight 1.5s infinite;
+}
+.bridge-caption {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+
+@keyframes flowRight {
+    0%, 100% { transform: translateX(0); opacity: 0.6; }
+    50% { transform: translateX(6px); opacity: 1; }
+}
+
+/* Comprobador interactivo de identidad de punteros de memoria */
+.identity-checker {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+.identity-expr code {
+    font-size: 1rem;
+    color: #e2e8f0;
+}
+.btn-check-identity {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid var(--emerald);
+    color: #6ee7b7;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.btn-check-identity:hover {
+    background: var(--emerald);
+    color: #000;
+    box-shadow: 0 0 15px var(--emerald-glow);
+}
+.identity-result {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+/* Tabla comparativa formal de prototipos */
+.proto-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+.proto-table th, .proto-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.proto-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    font-weight: 600;
+}
+.proto-table td {
+    color: var(--text-muted);
+}
+.proto-table tr:hover td {
+    background: rgba(255, 255, 255, 0.015);
+}
+
+/* --- 10. SLIDE 4: PROTOTYPE CHAIN & SIMULADOR --- */
+.chain-simulator-container {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+}
+.simulator-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+.sim-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.sim-buttons-group {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.sim-prop-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.sim-prop-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border-color: var(--border-light);
+}
+.sim-prop-btn.active {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--primary);
+    color: #c7d2fe;
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+.btn-run-chain {
+    margin-left: auto;
+}
+
+/* Pista visual que contiene los nodos eslabones */
+.chain-visual-track {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 1.5rem 0;
+    overflow-x: auto;
+}
+
+/* Tarjeta individual de cada nodo de la cadena */
+.chain-node {
+    background: #0f172a;
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    min-width: 190px;
+    position: relative;
+    transition: all var(--transition-smooth);
+}
+/* Nodo actualmente evaluado (animación de búsqueda en curso) */
+.chain-node.current-step {
+    border-color: var(--amber);
+    box-shadow: 0 0 20px var(--amber-glow);
+    transform: translateY(-4px);
+}
+/* Nodo donde sí se encontró la propiedad */
+.chain-node.found-here {
+    border-color: var(--emerald);
+    box-shadow: 0 0 25px var(--emerald-glow);
+    background: rgba(16, 185, 129, 0.1);
+    transform: translateY(-4px) scale(1.03);
+}
+/* Nodo donde no existía la propiedad */
+.chain-node.not-found-here {
+    border-color: rgba(244, 63, 94, 0.5);
+    opacity: 0.6;
+}
+
+.node-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+}
+.node-title {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.75rem;
+}
+.node-props {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+.prop-item {
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: var(--text-muted);
+}
+/* Resaltado verde cuando la propiedad coincide */
+.prop-item.prop-highlight {
+    background: var(--emerald);
+    color: #000;
+    font-weight: 700;
+    box-shadow: 0 0 10px var(--emerald-glow);
+}
+
+.node-proto-link {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--cyan);
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+/* Enlace o cable físico entre nodos */
+.chain-link {
+    flex: 1;
+    height: 4px;
+    background: var(--border-subtle);
+    position: relative;
+    min-width: 30px;
+    margin: 0 0.5rem;
+}
+.chain-link.link-active {
+    background: linear-gradient(90deg, var(--cyan), var(--primary));
+    box-shadow: 0 0 8px var(--cyan-glow);
+}
+.link-pulse {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #fff;
+    top: -3px;
+    left: 0;
+    opacity: 0;
+}
+.chain-link.link-active .link-pulse {
+    opacity: 1;
+    animation: pulseTravel 0.8s ease-in-out forwards;
+}
+
+@keyframes pulseTravel {
+    0% { left: 0%; transform: scale(1); }
+    100% { left: 100%; transform: scale(1.3); }
+}
+
+/* Panel de narración en vivo */
+.chain-live-feedback {
+    margin-top: 2rem;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.feedback-icon {
+    font-size: 1.25rem;
+}
+.feedback-text {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+/* --- 11. SLIDE 5: 6 CARACTERÍSTICAS FUNDAMENTALES --- */
+.characteristics-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+.char-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.char-tab-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all var(--transition-fast);
+}
+.char-tab-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-light);
+}
+.char-tab-btn.active {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+.char-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--cyan);
+}
+.char-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.char-display-panel {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    min-height: 420px;
+}
+.char-detail-view {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+.char-detail-view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.char-view-header {
+    margin-bottom: 1.25rem;
+}
+.char-view-header h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin-top: 0.5rem;
+}
+.char-text {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 1.75rem;
+    line-height: 1.7;
+}
+
+.char-interactive-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+.card-demo-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.instance-pill code {
+    font-size: 0.95rem;
+}
+.mutation-result-box {
+    background: #030712;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #38bdf8;
+}
+.output-pre {
+    background: #030712;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: #34d399;
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+/* CALCULADORA INTERACTIVA DE MEMORIA RAM */
+.memory-calc-widget {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+.calc-row {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+.calc-row label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+.calc-row input[type="range"] {
+    flex: 1;
+    min-width: 180px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+.slider-val {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--amber);
+}
+
+.memory-comparison-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.mem-bar-group span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+}
+.mem-progress {
+    height: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    margin-bottom: 0.35rem;
+}
+.mem-progress.bad .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f43f5e, #fb7185);
+    border-radius: var(--radius-pill);
+    transition: width 0.3s ease;
+}
+.mem-progress.good .bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--emerald), #34d399);
+    border-radius: var(--radius-pill);
+}
+.mem-bar-group strong {
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+}
+.text-emerald {
+    color: #34d399;
+}
+
+/* Arquetipos de Familia */
+.archetype-showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+.archetype-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem 1.75rem;
+    text-align: center;
+}
+.archetype-parent {
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+.arch-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--cyan);
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+.archetype-children {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+}
+.archetype-child {
+    flex: 1;
+}
+
+/* --- 12. SLIDE 6: ANALOGÍA (CAJA DE HERRAMIENTAS) --- */
+.toolbox-interactive-wrapper {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+}
+.tool-picker {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+.picker-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+.tools-btn-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.tool-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-fast);
+}
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+}
+.tool-btn.active {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--amber);
+    color: #fde68a;
+    box-shadow: 0 0 15px var(--amber-glow);
+}
+
+.family-workshops {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.workshop-card {
+    flex: 1;
+    background: #0f172a;
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: center;
+    transition: all var(--transition-smooth);
+}
+.workshop-card.ws-active-search {
+    border-color: var(--amber);
+    box-shadow: 0 0 20px var(--amber-glow);
+    transform: translateY(-4px);
+}
+.workshop-card.ws-found {
+    border-color: var(--emerald);
+    box-shadow: 0 0 25px var(--emerald-glow);
+    background: rgba(16, 185, 129, 0.08);
+    transform: translateY(-6px) scale(1.02);
+}
+.ws-avatar {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+.ws-header h3 {
+    font-size: 1.1rem;
+    color: #fff;
+}
+.ws-sub {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 1rem;
+}
+.ws-items {
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+.ws-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.4rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.ws-item.highlight-item {
+    background: var(--emerald);
+    color: #000;
+    font-weight: 700;
+}
+.ws-status {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+}
+
+.ws-arrow-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--cyan);
+}
+.arrow-beam {
+    font-size: 1.5rem;
+}
+
+.toolbox-result-banner {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+}
+.banner-icon {
+    font-size: 1.5rem;
+}
+.banner-text {
+    font-size: 1rem;
+    color: #e2e8f0;
+}
+
+/* --- 13. SLIDE 7: BUENAS PRÁCTICAS & ERRORES --- */
+.best-practices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+.practice-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.practice-card.good {
+    border-top: 3px solid var(--emerald);
+}
+.practice-card.bad {
+    border-top: 3px solid var(--rose);
+}
+.status-pill {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-pill);
+    display: inline-block;
+    margin-bottom: 0.75rem;
+}
+.pill-good {
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+}
+.pill-bad {
+    background: rgba(244, 63, 94, 0.15);
+    color: #fda4af;
+}
+.practice-card h4 {
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+.practice-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+.code-snippet-tiny {
+    background: #030712;
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+}
+
+.interactive-bug-card {
+    background: rgba(244, 63, 94, 0.03);
+}
+.btn-trigger-bug {
+    background: rgba(244, 63, 94, 0.2);
+    border: 1px solid var(--rose);
+    color: #fecdd3;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 0.75rem;
+    transition: all var(--transition-fast);
+}
+.btn-trigger-bug:hover {
+    background: var(--rose);
+    color: #fff;
+    box-shadow: 0 0 15px var(--rose-glow);
+}
+.bug-sim-output {
+    background: #030712;
+    padding: 0.6rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #fda4af;
+    min-height: 48px;
+}
+
+/* --- 14. SLIDE 8: PLAYGROUND / SANDBOX --- */
+.playground-layout {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 1.5rem;
+    height: 520px;
+}
+.editor-pane, .console-pane {
+    background: #030712;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.editor-toolbar, .console-toolbar {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.preset-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.preset-dropdown select {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: #fff;
+    padding: 0.35rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    cursor: pointer;
+}
+.preset-dropdown select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.btn-toolbar {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.btn-toolbar:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+.btn-run-editor {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+}
+
+.textarea-container {
+    flex: 1;
+    position: relative;
+}
+#liveCodeEditor {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #e2e8f0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    padding: 1.25rem;
+    resize: none;
+    outline: none;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.console-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    flex: 1;
+}
+.btn-clear-console {
+    background: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+.btn-clear-console:hover {
+    color: #fff;
+}
+.console-logs-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+.log-line {
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    word-break: break-all;
+    border-left: 2px solid transparent;
+}
+.log-line.info-line {
+    color: #38bdf8;
+    background: rgba(6, 182, 212, 0.05);
+}
+.log-line.log-normal {
+    color: #e2e8f0;
+    background: rgba(255, 255, 255, 0.02);
+}
+.log-line.log-error {
+    color: #fda4af;
+    background: rgba(244, 63, 94, 0.1);
+    border-left-color: var(--rose);
+}
+.log-line.log-success {
+    color: #6ee7b7;
+    background: rgba(16, 185, 129, 0.1);
+    border-left-color: var(--emerald);
+}
+.log-time {
+    color: var(--text-dim);
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+}
+
+/* --- 15. SLIDE 9: EJERCICIOS & RETOS --- */
+.exercises-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+.exercise-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+}
+.ex-header {
+    margin-bottom: 1rem;
+}
+.ex-level {
+    margin-bottom: 0.5rem;
+}
+.ex-header h3 {
+    font-size: 1.2rem;
+    color: #fff;
+}
+.ex-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    flex: 1;
+    line-height: 1.6;
+}
+.ex-footer {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.btn-ex-action, .btn-ex-solution {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.btn-ex-action:hover {
+    background: rgba(99, 102, 241, 0.2);
+    border-color: var(--primary);
+    color: #c7d2fe;
+}
+.btn-ex-solution:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+.ex-solution-box {
+    display: none;
+    margin-top: 1rem;
+    background: #030712;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: #38bdf8;
+    overflow-x: auto;
+    animation: fadeIn 0.3s ease;
+}
+.ex-solution-box.visible {
+    display: block;
+}
+
+/* --- 16. SLIDE 10: RESUMEN MAESTRO --- */
+.summary-slide {
+    text-align: center;
+}
+.summary-slide .slide-header {
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.summary-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+}
+.summary-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    text-align: left;
+    transition: transform var(--transition-smooth);
+}
+.summary-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-accent);
+}
+.sum-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+}
+.summary-card h4 {
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+}
+.summary-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.summary-actions-bar {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+/* --- 17. Barra Flotante de Navegación Inferior --- */
+.bottom-controls {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(14, 21, 38, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-pill);
+    padding: 0.5rem 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    z-index: 99;
+}
+.ctrl-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-main);
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all var(--transition-fast);
+}
+.ctrl-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px);
+}
+.ctrl-btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+.ctrl-btn-primary:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+.slide-dots-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.slide-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+}
+.slide-dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+.slide-dot.active {
+    background: var(--cyan);
+    box-shadow: 0 0 10px var(--cyan-glow);
+    width: 24px;
+    border-radius: var(--radius-pill);
+}
+
+/* --- 18. Modal de Visión General (Overview Grid) --- */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+.modal-window {
+    background: #0d1322;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 1000px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+.modal-header {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-header h3 {
+    font-size: 1.25rem;
+    color: #fff;
+}
+.btn-close-modal {
+    background: transparent;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+}
+.btn-close-modal:hover {
+    color: #fff;
+}
+.modal-grid {
+    padding: 2rem;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+}
+.overview-thumb {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.overview-thumb:hover {
+    background: rgba(99, 102, 241, 0.15);
+    border-color: var(--primary);
+    transform: translateY(-3px);
+}
+.overview-thumb.current {
+    border-color: var(--cyan);
+    box-shadow: 0 0 15px var(--cyan-glow);
+}
+.thumb-num {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--cyan);
+    margin-bottom: 0.35rem;
+    display: block;
+}
+.thumb-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* --- 19. Notificación Toast Flotante --- */
+.toast-notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #111827;
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--emerald);
+    color: #fff;
+    padding: 0.85rem 1.5rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    z-index: 1200;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.toast-notification.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.toast-icon {
+    color: var(--emerald);
+    font-size: 1.1rem;
+}
+
+/* --- 20. Consultas de Medios Responsivas (Media Queries) --- */
+/* Dispositivos con pantallas menores a 1024px (Tablets y Laptops pequeñas) */
+@media (max-width: 1024px) {
+    /* Las columnas dobles pasan a una sola columna vertical */
+    .two-columns-layout,
+    .playground-layout,
+    .characteristics-container {
+        grid-template-columns: 1fr;
+    }
+    .playground-layout {
+        height: auto;
+    }
+    .editor-pane, .console-pane {
+        height: 380px;
+    }
+    .comparison-grid {
+        flex-direction: column;
+    }
+    .comparison-bridge {
+        transform: rotate(90deg);
+        padding: 1rem 0;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Dispositivos con pantallas menores a 768px (Teléfonos móviles) */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 0 1rem;
+    }
+    /* Se oculta la barra de progreso en pantallas pequeñas para dar espacio */
+    .nav-progress-container {
+        display: none;
+    }
+    .presentation-wrapper {
+        padding: 1rem;
+    }
+    .slide-content {
+        padding: 1.5rem;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .bottom-controls {
+        gap: 0.75rem;
+        padding: 0.4rem 0.6rem;
+    }
+    /* Se oculta el texto "Anterior/Siguiente" dejando solo los símbolos ‹ y › */
+    .ctrl-text {
+        display: none;
+    }
+    .family-workshops {
+        flex-direction: column;
+    }
+    .ws-arrow-flow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+}
