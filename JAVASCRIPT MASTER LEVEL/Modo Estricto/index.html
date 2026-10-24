@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentación interactiva y dinámica sobre el Modo Estricto ('use strict') en JavaScript - JavaScript Master Level.">
+    <title>Modo Estricto ('use strict') en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-presentation">
+
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🛡️</span>
+                <span class="title-text">Modo Estricto ("use strict")</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Modo Estricto">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Seguridad & Calidad de Código</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Optimización V8</span>
+                </div>
+
+                <h1 class="hero-title">
+                    El Modo Estricto <span class="gradient-text">("use strict")</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Descubre cómo transformar los errores silenciosos en <strong>excepciones claras</strong>, 
+                    proteger palabras reservadas para <strong>ES6+</strong>, prevenir malas prácticas de sintaxis 
+                    y maximizar la <strong>velocidad de ejecución</strong> del motor de JavaScript.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">⚡</div>
+                        <h3>Adiós al Sloppy Mode</h3>
+                        <p>Supera el modo descuidado histórico de JavaScript.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🚨</div>
+                        <h3>Cero Errores Silenciosos</h3>
+                        <p>Fallas ocultas convertidas en excepciones inmediatas.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="5">
+                        <div class="mini-card-icon">🚀</div>
+                        <h3>Mayor Rendimiento</h3>
+                        <p>Optimización del compilador y ahorro de recursos en RAM.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">📝</div>
+                        <h3>Analogía Interactiva</h3>
+                        <p>El corrector ortográfico legal frente a la máquina de escribir.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: ¿QUÉ ES EL MODO ESTRICTO?
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es 'use strict'?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es el Modo Estricto y por qué existe?</h2>
+                    <p class="section-desc">
+                        Durante años, JavaScript mantuvo decisiones de diseño ambiguas para no romper webs antiguas. 
+                        ES5 introdujo <code>"use strict"</code> como una directiva para habilitar una variante segura y robusta.
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Definición Formal</span>
+                            </div>
+                            <p>
+                                <strong>"use strict"</strong> es una expresión literal introducida en <strong>ECMAScript 5 (ES5)</strong> 
+                                que indica al motor de ejecución que interprete el código bajo un conjunto de reglas mucho más estrictas.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Compatibilidad garantizada:</strong> Los navegadores antiguos que no lo entendían simplemente lo leían 
+                                como una cadena de texto inofensiva y continuaban sin fallar.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Sloppy Mode (Modo Normal)</h4>
+                                <ul>
+                                    <li>Tolera errores graves sin avisar.</li>
+                                    <li>Crea variables globales por error tipográfico.</li>
+                                    <li>Obliga al motor a hacer comprobaciones lentas.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Strict Mode ("use strict")</h4>
+                                <ul>
+                                    <li>Lanza excepciones inmediatas y descriptivas.</li>
+                                    <li>Prohíbe ensuciar el objeto global <code>window</code>.</li>
+                                    <li>Permite al compilador optimizar el código al máximo.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">comparativa_directiva.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">Copiar</button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-comment">// 1. Activación con la directiva literal:</span>
+<span class="c-string">"use strict"</span>;
+
+<span class="c-comment">// 2. Intento de asignar sin declarar con let/const:</span>
+<span class="c-keyword">try</span> {
+    <span class="c-variable">usuarioSinDeclarar</span> = <span class="c-string">"Elena"</span>;
+} <span class="c-keyword">catch</span> (<span class="c-variable">error</span>) {
+    <span class="c-keyword">console</span>.<span class="c-func">error</span>(<span class="c-variable">error</span>.<span class="c-prop">name</span> + <span class="c-string">": "</span> + <span class="c-variable">error</span>.<span class="c-prop">message</span>);
+    <span class="c-comment">// Resultado: ReferenceError: usuarioSinDeclarar is not defined</span>
+}</code></pre>
+                            
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestStrictIntro">
+                                    ▶ Probar Directiva en Vivo
+                                </button>
+                                <span class="run-status" id="testStrictIntroStatus">Listo para ejecutar</span>
+                            </div>
+                            
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">&gt; Haz clic en "Probar Directiva en Vivo" para ver la respuesta del motor JS...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: ÁMBITO GLOBAL VS LOCAL & CLASES
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="¿Cómo activarlo?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>¿Cómo activar el Modo Estricto? Ámbitos y Contextos</h2>
+                    <p class="section-desc">
+                        Aprende cuándo colocarlo a nivel de archivo completo, a nivel de funciones específicas y cómo los estándares modernos lo aplican por defecto.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Ámbito Global -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Todo el Archivo</span>
+                            <h3>Ámbito Global</h3>
+                            <span class="comp-subtitle">Primera línea del script</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Debe ser <strong>la primera instrucción ejecutable</strong> del archivo. Si colocas una sola sentencia antes, 
+                                la directiva será ignorada como un string ordinario.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">📄</span>
+                                <div class="vis-text">
+                                    <strong>"use strict"; al inicio</strong>
+                                    <small>Protege el 100% de las funciones y variables del archivo.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Alcance</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Flexibilidad Modular</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Ámbito Local -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Por Función</span>
+                            <h3>Ámbito Local</h3>
+                            <span class="comp-subtitle">Primera línea de una función</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Ideal para proyectos heredados donde convive código antiguo con código nuevo. 
+                                Solo esa función será estricta sin romper librerías externas.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">🎯</span>
+                                <div class="vis-text">
+                                    <strong>function miFuncion() { "use strict"; ... }</strong>
+                                    <small>Aísla la seguridad solo al bloque de la función.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Aviso ES6 Modules & Classes -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>Módulos ES6 (import/export) y Clases (class {}) ➔ ¡Activado Automáticamente!</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckAutoStrict">
+                        🔍 Comprobar Modo en Clases ES6
+                    </button>
+                    <div class="identity-result" id="autoStrictResult">
+                        Haz clic para verificar si las clases de ES6 ya son estrictas por diseño nativo
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Entorno / Contexto</th>
+                                <th>¿Cómo se activa?</th>
+                                <th>¿A quién afecta?</th>
+                                <th>Comportamiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Script Tradicional</td>
+                                <td>Escribir <code>"use strict";</code> en línea 1</td>
+                                <td>Todo el archivo actual</td>
+                                <td>Estricto</td>
+                            </tr>
+                            <tr>
+                                <td>Función Específica</td>
+                                <td>Escribir <code>"use strict";</code> en el cuerpo</td>
+                                <td>Solo a esa función y sus hijas</td>
+                                <td>Estricto local</td>
+                            </tr>
+                            <tr>
+                                <td>Módulos ES6 (<code>type="module"</code>)</td>
+                                <td>Automático por especificación</td>
+                                <td>Todo el módulo</td>
+                                <td>✅ 100% Estricto siempre</td>
+                            </tr>
+                            <tr>
+                                <td>Clases ES6 (<code>class {}</code>)</td>
+                                <td>Automático por especificación</td>
+                                <td>Todo el cuerpo de la clase</td>
+                                <td>✅ 100% Estricto siempre</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: SIMULADOR DE ERRORES SILENCIOSOS
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Errores Silenciosos ➔ Excepciones">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 03</span>
+                    <h2>Convierte Errores Silenciosos en Excepciones Explícitas</h2>
+                    <p class="section-desc">
+                        En modo descuidado, JavaScript ignora fallos graves y sigue corriendo. 
+                        En modo estricto, detiene la ejecución inmediatamente y arroja un <code>TypeError</code> claro.
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE ERRORES SILENCIOSOS -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Caso de Prueba Erróneo:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-error-case="readonly">1. Propiedad writable: false</button>
+                            <button class="sim-prop-btn" data-error-case="frozen">2. Objeto Object.freeze()</button>
+                            <button class="sim-prop-btn" data-error-case="primitive">3. Asignar a NaN o undefined</button>
+                            <button class="sim-prop-btn" data-error-case="delete">4. delete en propiedad no configurable</button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareErrorModes">
+                            ⚡ Comparar: Sloppy vs. Strict Mode
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Sloppy -->
+                        <div class="error-mode-card card-sloppy" id="cardSloppyResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Modo Normal (Sloppy)</span>
+                                <h4>Comportamiento Oculto</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSloppy">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusSloppy">
+                                ⚠️ Falla en silencio: El programa sigue con datos corruptos.
+                            </div>
+                        </div>
+
+                        <!-- Columna Strict -->
+                        <div class="error-mode-card card-strict" id="cardStrictResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Modo Estricto ("use strict")</span>
+                                <h4>Excepción Inmediata</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalStrict">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusStrict">
+                                🛡️ Detiene la ejecución: Arroja TypeError descriptivo con línea exacta.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="strictErrorFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="strictFeedbackText">
+                            Selecciona una prueba errónea y presiona <strong>"Comparar: Sloppy vs. Strict Mode"</strong> para ver la diferencia en tiempo real.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: OPTIMIZACIÓN Y TIEMPOS DE EJECUCIÓN
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Optimización y Rendimiento">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Rendimiento Interno V8</span>
+                    <h2>Optimización del Motor y Tiempos de Ejecución</h2>
+                    <p class="section-desc">
+                        El código ambiguo fuerza al compilador a realizar comprobaciones costosas. 
+                        El Modo Estricto elimina 3 cuellos de botella críticos en la memoria RAM:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="perfTabs">
+                        <button class="char-tab-btn active" data-perf="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Aislamiento de eval()</span>
+                        </button>
+                        <button class="char-tab-btn" data-perf="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Desvinculación de arguments</span>
+                        </button>
+                        <button class="char-tab-btn" data-perf="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Eliminación del bloque with</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="perfDisplayPanel">
+                        
+                        <!-- Item 1: eval() -->
+                        <div class="char-detail-view active" id="perf-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Aislamiento del Ámbito de eval()</span>
+                                <h3>Las variables creadas dentro de eval() no contaminan el exterior</h3>
+                            </div>
+                            <p class="char-text">
+                                En modo normal, <code>eval("var secreta = 42;")</code> inyecta la variable en tu función actual. 
+                                En modo estricto, <code>eval()</code> crea un entorno de ámbito aislado, permitiendo al compilador 
+                                optimizar las variables locales sin temor a modificaciones invisibles.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestEvalIsolation">
+                                    ▶ Probar Aislamiento de eval()
+                                </button>
+                                <div class="mutation-result-box" id="evalIsolationResult">
+                                    Haz clic para comprobar cómo eval() no escapa de su celda en Modo Estricto...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: arguments -->
+                        <div class="char-detail-view" id="perf-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Desvinculación de arguments y Parámetros</span>
+                                <h3>Elimina la sincronización mágica costosa en memoria RAM</h3>
+                            </div>
+                            <p class="char-text">
+                                En modo descuidado, modificar el valor de un parámetro modificaba automáticamente <code>arguments[0]</code> 
+                                y viceversa. Mantener esta sincronización en tiempo real consumía recursos del procesador. 
+                                En <code>"use strict"</code>, son totalmente independientes.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestArgumentsIndependence">
+                                    ▶ Probar Desvinculación de arguments
+                                </button>
+                                <div class="mutation-result-box" id="argumentsIndependenceResult">
+                                    Haz clic para evaluar la independencia de parámetros...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: with -->
+                        <div class="char-detail-view" id="perf-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Eliminación Total de la Sentencia 'with'</span>
+                                <h3>Búsqueda estática y directa de identificadores en memoria</h3>
+                            </div>
+                            <p class="char-text">
+                                La sentencia <code>with (objeto) { ... }</code> hacía imposible saber en tiempo de compilación 
+                                si una variable pertenecía al objeto o al ámbito local. El Modo Estricto <strong>prohíbe 'with'</strong>, 
+                                arrojando un <code>SyntaxError</code> y permitiendo que V8 ejecute optimizaciones inline rápidas.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestWithBlock">
+                                    ▶ Probar Rechazo de 'with'
+                                </button>
+                                <div class="mutation-result-box" id="withBlockResult">
+                                    Haz clic para verificar el SyntaxError al usar 'with'...
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: PALABRAS RESERVADAS PARA ES6+
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Palabras Reservadas ES6+">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Compatibilidad Futura</span>
+                    <h2>Protección de Palabras Reservadas para Estándares Posteriores</h2>
+                    <p class="section-desc">
+                        El Modo Estricto reserva palabras clave para evitar que el código antiguo colisione con características modernas como TypeScript, Clases y Módulos.
+                    </p>
+                </div>
+
+                <div class="reserved-words-wrapper">
+                    <p class="rw-intro">
+                        Las siguientes <strong>10 palabras</strong> no pueden usarse como nombres de variables, funciones o argumentos en <code>"use strict"</code>:
+                    </p>
+
+                    <div class="reserved-tags-grid">
+                        <div class="rw-tag" data-word="implements"><code>implements</code></div>
+                        <div class="rw-tag" data-word="interface"><code>interface</code></div>
+                        <div class="rw-tag" data-word="let"><code>let</code></div>
+                        <div class="rw-tag" data-word="package"><code>package</code></div>
+                        <div class="rw-tag" data-word="private"><code>private</code></div>
+                        <div class="rw-tag" data-word="protected"><code>protected</code></div>
+                        <div class="rw-tag" data-word="public"><code>public</code></div>
+                        <div class="rw-tag" data-word="static"><code>static</code></div>
+                        <div class="rw-tag" data-word="yield"><code>yield</code></div>
+                    </div>
+
+                    <!-- Probador Interactivo de Palabras Reservadas -->
+                    <div class="rw-tester-box">
+                        <div class="tester-input-group">
+                            <label for="reservedWordInput">Ingresa un nombre de variable para evaluar:</label>
+                            <div class="input-with-button">
+                                <input type="text" id="reservedWordInput" value="interface" placeholder="Ej: private, miVariable, static">
+                                <button class="cta-btn primary-btn" id="btnTestReservedWord">
+                                    Verificar en Modo Estricto
+                                </button>
+                            </div>
+                        </div>
+                        <div class="rw-tester-result" id="rwTesterResult">
+                            Presiona el botón para comprobar si esta palabra está protegida en Strict Mode.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: PREVENCIÓN DE MALA SINTAXIS
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Prevención de Mala Sintaxis">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Guardián de Calidad</span>
+                    <h2>Eliminación de la "Mala Sintaxis" y Descuidos Graves</h2>
+                    <p class="section-desc">
+                        JavaScript corrige 4 malas prácticas históricas que originaban los bugs más difíciles de depurar en producción:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Variables Globales Accidentales -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ SLOppy: CONTAMINA WINDOW</span>
+                            <h4>Variables Globales por Accidente</h4>
+                        </div>
+                        <p>Olvidar <code>let</code>/<code>const</code> o cometer una errata tipográfica crea una variable global en <code>window</code>. En Strict Mode lanza <code>ReferenceError</code>.</p>
+                        <div class="code-snippet-tiny">
+                            <code>totalPrecio = 100; // ❌ ReferenceError</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Parámetros Duplicados -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ SLOPPY: SOBRESCRIBE PARÁMETRO</span>
+                            <h4>Parámetros Duplicados en Funciones</h4>
+                        </div>
+                        <p>En modo normal, <code>function suma(a, b, a)</code> sobrescribía silenciosamente el primer parámetro. En Strict Mode lanza <code>SyntaxError</code>.</p>
+                        <div class="code-snippet-tiny">
+                            <code>function(x, y, x) {} // ❌ SyntaxError</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Números Octales Obsoletos -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ SLOPPY: 010 ES IGUAL A 8</span>
+                            <h4>Literales Octales con Cero Inicial</h4>
+                        </div>
+                        <p>Escribir <code>0123</code> hacía que JS lo interpretara en base 8, generando errores matemáticos. En Strict Mode exige la sintaxis explícita <code>0o123</code>.</p>
+                        <div class="code-snippet-tiny">
+                            <code>const cp = 0123; // ❌ SyntaxError</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Valor Seguro de 'this' -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ STRICT: THIS ES UNDEFINED</span>
+                            <h4>'this' Seguro en Funciones Sueltas</h4>
+                        </div>
+                        <p>Llamar una función simple sin objeto contexto en modo normal asignaba <code>this = window</code>. En Strict Mode, <code>this</code> es limpiamente <code>undefined</code>.</p>
+                        <div class="code-snippet-tiny">
+                            <code>function f() { console.log(this); } // undefined</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍA DEL CORRECTOR ORTOGRÁFICO
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogía: El Corrector Legal">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 📝</span>
+                    <h2>La Máquina de Escribir vs. El Editor Legal Automatizado</h2>
+                    <p class="section-desc">
+                        Imagina redactar un contrato comercial de alto riesgo: ¿Prefieres que los errores se ignoren o que te avisen al instante?
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Acción de Redacción -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Elige una acción riesgosa en la redacción del contrato:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-action="typo">
+                                <span class="tool-icon">✍️</span>
+                                <span class="tool-name">Errata en Nombre del Firmante</span>
+                            </button>
+                            <button class="tool-btn" data-action="override">
+                                <span class="tool-icon">🔒</span>
+                                <span class="tool-name">Alterar Cláusula Inmutable</span>
+                            </button>
+                            <button class="tool-btn" data-action="duplicate">
+                                <span class="tool-icon">📋</span>
+                                <span class="tool-name">Dos Cláusulas con Mismo Número</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        
+                        <!-- 1. Máquina de Escribir (Sloppy Mode) -->
+                        <div class="workshop-card" id="env-sloppy">
+                            <div class="ws-avatar">📠</div>
+                            <div class="ws-header">
+                                <h3>Máquina Antigua (Sloppy Mode)</h3>
+                                <span class="ws-sub">Sin validaciones ni alarmas</span>
+                            </div>
+                            <div class="ws-items" id="items-sloppy">
+                                <div class="ws-item">Permite el error en silencio</div>
+                            </div>
+                            <div class="ws-status" id="status-sloppy-desc">Imprime el papel con errores ocultos</div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>VS</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- 2. Editor Inteligente (Strict Mode) -->
+                        <div class="workshop-card" id="env-strict">
+                            <div class="ws-avatar">🛡️</div>
+                            <div class="ws-header">
+                                <h3>Editor Inteligente ("use strict")</h3>
+                                <span class="ws-sub">Validación en tiempo real</span>
+                            </div>
+                            <div class="ws-items" id="items-strict">
+                                <div class="ws-item highlight-item">Bloquea el teclado y hace sonar la alarma</div>
+                            </div>
+                            <div class="ws-status" id="status-strict-desc">Lanza excepción y señala el renglón</div>
+                        </div>
+
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="analogyBanner">
+                        <span class="banner-icon" id="analogyBannerIcon">ℹ️</span>
+                        <span class="banner-text" id="analogyBannerText">
+                            Selecciona una acción riesgosa para observar el comportamiento de ambos mundos.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground & Sandbox</span>
+                    <h2>Laboratorio de Código: Prueba el Modo Estricto</h2>
+                    <p class="section-desc">
+                        Experimenta con fragmentos de código reales. Activa o desactiva la directiva <code>"use strict";</code> para comparar resultados en vivo.
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-strict-1">1. Variable sin declarar (ReferenceError)</option>
+                                    <option value="preset-strict-2">2. Objeto Congelado (Object.freeze)</option>
+                                    <option value="preset-strict-3">3. Contexto 'this' en función suelta</option>
+                                    <option value="preset-strict-4">4. Parámetros duplicados y octales</option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">↺ Restaurar</button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida</span>
+                            <button class="btn-clear-console" id="btnClearConsole">Limpiar</button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen & Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet & Retos</span>
+                    <h2>Resumen Maestro y Retos de Evaluación</h2>
+                    <p class="section-desc">
+                        Pon a prueba tus conocimientos con los 3 retos del curso y llévate la chuleta rápida para producción:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem;">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Erratas Tipográficas Detectadas</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Declara una variable con <code>let</code> y en la siguiente línea asígnale un valor cometiendo una errata tipográfica a propósito en modo estricto.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-strict1">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-strict-1">Ver Solución</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-strict-1">
+<pre><code>"use strict";
+let contadorVisitas = 10;
+// Provocamos el ReferenceError:
+try {
+    contadoorVisitas = 11;
+} catch (e) {
+    console.error("Atrapado:", e.message);
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Captura de TypeError en Object.freeze()</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea un objeto <code>configuracionServidor = { puerto: 8080 }</code>, congélalo con <code>Object.freeze()</code> e intenta modificarlo dentro de un bloque <code>try/catch</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-strict2">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-strict-2">Ver Solución</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-strict-2">
+<pre><code>"use strict";
+const configuracionServidor = { puerto: 8080 };
+Object.freeze(configuracionServidor);
+
+try {
+    configuracionServidor.puerto = 3000; // TypeError!
+} catch (err) {
+    console.error("Seguridad activada:", err.message);
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Master</span>
+                            <h3>Refactorización de Código Heredado</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Refactoriza una función antigua llena de malas prácticas (parámetros duplicados, octales <code>015</code>, palabra reservada <code>package</code>).
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-strict3">Cargar en Playground</button>
+                            <button class="btn-ex-solution" data-sol="sol-strict-3">Ver Solución</button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-strict-3">
+<pre><code>"use strict";
+// Refactorizado sin errores:
+function procesarPedido(id, precio, cantidad) {
+    const impuestoBase = 0.19;
+    const paqueteEnvio = "Envío Express";
+    const codigoDescuento = 0o15; // Octal explícito ES6
+    return (precio * cantidad * (1 + impuestoBase)) - codigoDescuento;
+}
+console.log("Total:", procesarPedido(1, 100, 2));</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de Modo Estricto -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Siempre en Línea 1</h4>
+                        <p>Debe ser la primera instrucción ejecutable del archivo o función.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>Excepciones Inmediatas</h4>
+                        <p>Convierte errores silenciosos en fallos explícitos y fáciles de ubicar.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Motor Más Rápido</h4>
+                        <p>Aísla <code>eval()</code> y desvincula <code>arguments</code> para optimizar la compilación V8.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Protege Palabras Clave</h4>
+                        <p>Reserva términos clave para estándares de ES6 y TypeScript.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Nativo en ES6</h4>
+                        <p>Las Clases y Módulos de JavaScript ya lo tienen activo por defecto.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Modo Estricto</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+</body>
+</html>
