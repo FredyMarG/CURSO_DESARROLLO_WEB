@@ -1,12 +1,12 @@
 /**
  * ==============================================================================
- * ⚡ JAVASCRIPT MASTER LEVEL: MÓDULO COMPLETO DE FUNCIONES FLECHA (ARROW FUNCTIONS)
+ * ⚡ JAVASCRIPT MASTER LEVEL: MÓDULO INTEGRAL DE FUNCIONES FLECHA & CONCEPTOS AVANZADOS
  * ==============================================================================
  * Archivo: main.js
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: En terminal con 'node main.js' o directamente en la consola del navegador
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/FUNCIONES FLECHA.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/FUNCIONES FLECHA.md - 23 BLOQUES):
  * 1. ¿Por qué aparecieron las Funciones Flecha? (ES6, verbosidad y rescate de 'this')
  * 2. Sintaxis compacta y retornos implícitos (cuerpo de una sola expresión)
  * 3. Reglas de parámetros: cuándo usar y omitir paréntesis
@@ -16,28 +16,33 @@
  * 7. Comportamiento con los métodos call(), apply() y bind()
  * 8. Restricciones: por qué no deben usarse como métodos de objetos
  * 9. Restricciones: la ausencia del método interno [[Construct]] y fallo con 'new'
- * 10. Ausencia del objeto 'arguments' y la propiedad '.prototype' (uso de ...rest)
+ * 10. Ausencia del objeto 'arguments' y la propiedad '.prototype'
  * 11. Restricciones sintácticas: saltos de línea prohibidos y ausencia de 'yield'
  * 12. Orden de precedencia y parseo en el motor de JavaScript
- * 13. Analogía del mundo real: el espejo reflectante 🪞 vs. la cámara con flash 📷
- * 14. Diagrama de flujo de resolución del contexto 'this'
- * 15. Buenas prácticas recomendadas en producción
- * 16. Errores comunes y trampas típicas (DOM listeners y contexto)
- * 17. Solución detallada a los 3 Retos de Evaluación (Junior, Semi-Senior, Master)
- * 18. Resumen maestro y chuleta técnica para entrevistas
+ * 13. Funciones Recursivas (Recursividad y condición base en funciones flecha)
+ * 14. Cláusulas o Cierres (Closures y encapsulación de variables privadas)
+ * 15. Parámetros por defecto: validación antigua (pre-ES6) vs. actual (ES6+)
+ * 16. Parámetros Rest (...param): captura dinámica en Arrays nativos
+ * 17. Desestructuración de Arrays y Objetos (clave, posicional y omisión)
+ * 18. Desestructuración en Parámetros de Funciones (funciones desestructuradoras)
+ * 19. Analogías del mundo real: el espejo 🪞 y el archivador automatizado 🗂️
+ * 20. Diagrama de flujo de resolución del contexto 'this'
+ * 21. Buenas prácticas y errores comunes en producción
+ * 22. Ejercicios prácticos integradores resueltos (Niveles 1, 2 y 3)
+ * 23. Resumen técnico integral
  * ==============================================================================
  */
 
-// Activamos el modo estricto en el archivo para garantizar buenas prácticas de ES5/ES6
+// Activamos el modo estricto en todo el archivo para forzar buenas prácticas y consistencia
 "use strict";
 
-// Función auxiliar para imprimir encabezados limpios y delimitadores en la consola
+// Función utilitaria para imprimir encabezados visuales y pedagógicos en la consola
 function imprimirSeparador(numeroBloque, titulo) {
-    // Imprime un salto de línea inicial para separar del bloque previo
+    // Imprime un salto de línea inicial para aislar visualmente el bloque
     console.log("\n" + "=".repeat(78));
-    // Imprime el número del bloque y el título descriptivo en mayúsculas
+    // Imprime el identificador de bloque con su descripción técnica
     console.log(`📌 BLOQUE ${numeroBloque}: ${titulo}`);
-    // Imprime la línea divisoria inferior de cierre
+    // Imprime una línea divisoria de cierre
     console.log("=".repeat(78));
 }
 
@@ -47,20 +52,18 @@ function imprimirSeparador(numeroBloque, titulo) {
 // ==============================================================================
 imprimirSeparador(1, "¿POR QUÉ APARECIERON LAS FUNCIONES FLECHA?");
 
-// 1. Reducción de verbosidad: adiós a escribir 'function' y 'return' en callbacks cortos
-// 2. Eliminación de trucos antiguos para 'this' como 'var self = this;' o '.bind(this)'
+// 1. Reducción de verbosidad excesiva: elimina 'function' y 'return' en operaciones cortas
+// 2. Eliminación de problemas con 'this': conserva el ámbito léxico de su entorno padre
 
-// Demostración comparativa de sintaxis:
-// Forma tradicional previa a ES6:
+// Ejemplo con función tradicional previa a ES6:
 const duplicarTradicional = function(numero) {
-    // Requiere la palabra clave 'return' explícita
+    // Requiere llaves de bloque y retorno explícito
     return numero * 2;
 };
 
-// Forma moderna con función flecha (Arrow Function):
+// Ejemplo con función flecha moderna de ES6:
 const duplicarFlecha = numero => numero * 2;
 
-// Ejecutamos ambas implementaciones para comparar sus resultados
 console.log("Resultado Función Tradicional :", duplicarTradicional(5)); // Imprime 10
 console.log("Resultado Función Flecha      :", duplicarFlecha(5));      // Imprime 10
 
@@ -70,110 +73,95 @@ console.log("Resultado Función Flecha      :", duplicarFlecha(5));      // Impr
 // ==============================================================================
 imprimirSeparador(2, "SINTAXIS COMPACTA Y RETORNO IMPLÍCITO");
 
-// Regla de Oro: Si el cuerpo de la función tiene UNA SOLA EXPRESIÓN,
-// se pueden omitir las llaves {} y la palabra clave 'return'.
-// JavaScript evalúa la expresión y retorna automáticamente el resultado.
+// Regla: Si el cuerpo tiene UNA SOLA EXPRESIÓN, se omiten {} y 'return'.
+// El motor de JavaScript evalúa la expresión y la retorna automáticamente.
 
-// Ejemplo A: Retorno implícito de una operación aritmética
 const calcularIva = precio => precio * 0.19;
+const formatearSaludo = nombre => `Bienvenido, ${nombre.toUpperCase()}!`;
 
-// Ejemplo B: Retorno implícito de una plantilla de texto (template literal)
-const formatearMensaje = texto => `[SISTEMA]: ${texto.toUpperCase()}`;
-
-// Ejemplo C: Con bloque explícito (cuando hay más de una sentencia se requieren llaves y return)
-const calcularPrecioTotal = (precio, descuento) => {
-    // Sentencia 1: calculamos el valor rebajado
-    const precioConDescuento = precio - descuento;
-    // Sentencia 2: sumamos el impuesto
-    const totalFinal = precioConDescuento * 1.19;
-    // Al abrir llaves {}, el 'return' explícito es OBLIGATORIO
-    return totalFinal;
+// Si hay múltiples sentencias, se requieren llaves {} y 'return' explícito:
+const calcularPrecioFinal = (precio, descuento) => {
+    // Calculamos el subtotal restando el descuento
+    const subtotal = precio - descuento;
+    // Agregamos el impuesto correspondiente
+    const totalConImpuesto = subtotal * 1.19;
+    // Al abrir llaves {}, el return es obligatorio
+    return totalConImpuesto;
 };
 
-console.log("IVA de $1000 con retorno implícito :", calcularIva(1000));
-console.log("Mensaje formateado                 :", formatearMensaje("pedido completado"));
-console.log("Precio total con bloque explícito  :", calcularPrecioTotal(100, 10));
+console.log("IVA calculado implícitamente  :", calcularIva(100));
+console.log("Saludo formateado             :", formatearSaludo("Fredy"));
+console.log("Cálculo con bloque explícito  :", calcularPrecioFinal(200, 20));
 
 
 // ==============================================================================
-// BLOQUE 3: REGLAS DE PARÁMETROS (CUÁNDO USAR Y OMITIR PARÉNTESIS)
+// BLOQUE 3: REGLAS DE PARÁMETROS (PARÉNTESIS OPCIONALES Y OBLIGATORIOS)
 // ==============================================================================
-imprimirSeparador(3, "REGLAS DE PARÁMETROS (PARÉNTESIS)");
+imprimirSeparador(3, "REGLAS DE PARÁMETROS (CUÁNDO USAR PARÉNTESIS)");
 
-// Regla 3.1: CERO PARÁMETROS ➔ Los paréntesis () son OBLIGATORIOS
-const obtenerFechaActual = () => new Date().toISOString().split("T")[0];
-console.log("Cero parámetros ()          :", obtenerFechaActual());
+// 3.1 CERO PARÁMETROS ➔ Paréntesis () obligatorios
+const obtenerTimestamp = () => Date.now();
+console.log("0 parámetros ()               :", obtenerTimestamp());
 
-// Regla 3.2: EXACTAMENTE UN PARÁMETRO ➔ Los paréntesis () son OPCIONALES
-const cuadrado = x => x * x;
-console.log("Un parámetro sin paréntesis :", cuadrado(9));
+// 3.2 UN SOLO PARÁMETRO ➔ Paréntesis () opcionales
+const elevarAlCuadrado = x => x * x;
+console.log("1 parámetro sin ()            :", elevarAlCuadrado(8));
 
-// Regla 3.3: DOS O MÁS PARÁMETROS ➔ Los paréntesis () son OBLIGATORIOS
-const multiplicar = (a, b) => a * b;
-console.log("Dos parámetros (a, b)       :", multiplicar(7, 8));
-
-// Regla 3.4: Parámetros con valores por defecto o destructuración ➔ Requieren ()
-const saludarUsuario = ({ nombre, rol } = { nombre: "Invitado", rol: "Lector" }) => 
-    `Hola ${nombre}, tu rol asignado es [${rol}].`;
-console.log("Con destructuración en ()   :", saludarUsuario({ nombre: "Fredy", rol: "Admin" }));
+// 3.3 DOS O MÁS PARÁMETROS ➔ Paréntesis () obligatorios
+const calcularArea = (base, altura) => (base * altura) / 2;
+console.log("2+ parámetros (base, altura)  :", calcularArea(10, 5));
 
 
 // ==============================================================================
-// BLOQUE 4: RETORNO DE OBJETOS LITERALES Y LA AMBIGÜEDAD DE LAS LLAVES
+// BLOQUE 4: RETORNO DE OBJETOS LITERALES Y AMBIGÜEDAD DE LLAVES ({})
 // ==============================================================================
-imprimirSeparador(4, "RETORNO DE OBJETOS LITERALES Y AMBIGÜEDAD DE LLAVES");
+imprimirSeparador(4, "RETORNO DE OBJETOS LITERALES ({})");
 
-// Problema técnico: En JavaScript, las llaves {} se usan tanto para bloques de código
-// como para declarar objetos literales.
-// Si escribes: const crear = (id) => { id: id };
-// JavaScript interpreta { id: id } como un bloque de código con una etiqueta 'id:', y retorna undefined.
+// En JS, las llaves {} se usan para bloques de código y para objetos literales.
+// Si escribes: const crear = id => { id: id }; -> JS lo interpreta como un bloque vacío con etiqueta
+// Solución: Envolver el objeto literal entre paréntesis ({ ... })
 
-// Solución: Envolver el objeto entre paréntesis ({ ... })
-const crearUsuario = (id, nombre, email) => ({
-    // Definimos la propiedad 'id'
+const crearUsuario = (id, nombre, rol) => ({
+    // Asignamos la propiedad id
     id: id,
-    // Definimos la propiedad 'nombre'
+    // Asignamos la propiedad nombre
     nombre: nombre,
-    // Definimos la propiedad 'email'
-    email: email,
-    // Marcamos la fecha de creación del objeto
-    creadoEn: new Date().toLocaleDateString()
+    // Asignamos la propiedad rol
+    rol: rol,
+    // Asignamos fecha de alta en el sistema
+    fechaRegistro: new Date().toLocaleDateString()
 });
 
-const nuevoUsuario = crearUsuario(101, "Fredy Martínez", "fredy@dev.com");
-console.log("Objeto retornado implícitamente con ({}) :", nuevoUsuario);
+console.log("Objeto retornado con ({})     :", crearUsuario(101, "Fredy", "Arquitecto"));
 
 
 // ==============================================================================
 // BLOQUE 5: EL COMPORTAMIENTO DE 'this' CONTEXTUAL (ÁMBITO LÉXICO)
 // ==============================================================================
-imprimirSeparador(5, "EL COMPORTAMIENTO DE 'this' (ÁMBITO LÉXICO)");
+imprimirSeparador(5, "COMPORTAMIENTO DE 'this' (ÁMBITO LÉXICO)");
 
-// Concepto clave: Las funciones flecha NO TIENEN su propio 'this'.
-// Heredan 'this' del ámbito donde fueron DECLARADAS (ámbito léxico / lexical scope).
-// En cambio, las funciones tradicionales crean su propio 'this' según CÓMO SE INVOCAN.
+// Las funciones flecha NO TIENEN su propio 'this'.
+// Heredan 'this' del ámbito donde fueron DECLARADAS (lexical scope).
 
-const gestorTemporizador = {
-    nombreServicio: "Servicio de Monitoreo",
+const monitorServidor = {
+    nombreHost: "Cluster-Produccion-01",
     latidos: 0,
 
-    iniciarConFlecha: function() {
-        // En esta función tradicional, 'this' apunta al objeto 'gestorTemporizador'
-        console.log(`[OK] Iniciando ${this.nombreServicio}...`);
+    iniciarMonitoreo() {
+        console.log(`[OK] Monitoreando servidor: ${this.nombreHost}`);
 
-        // Dentro de una función flecha, 'this' sigue siendo 'gestorTemporizador':
-        const emitirLatido = () => {
+        // La función flecha mantiene el 'this' de 'iniciarMonitoreo' (monitorServidor):
+        const registrarPing = () => {
             this.latidos++;
-            console.log(`  -> Latido #${this.latidos} emitido para: ${this.nombreServicio}`);
+            console.log(`  -> Ping #${this.latidos} recibido para host: ${this.nombreHost}`);
         };
 
-        // Ejecutamos manualmente el callback
-        emitirLatido();
-        emitirLatido();
+        registrarPing();
+        registrarPing();
     }
 };
 
-gestorTemporizador.iniciarConFlecha();
+monitorServidor.iniciarMonitoreo();
 
 
 // ==============================================================================
@@ -181,17 +169,17 @@ gestorTemporizador.iniciarConFlecha();
 // ==============================================================================
 imprimirSeparador(6, "MODOS ESTRICTOS Y SU IMPACTO EN 'this'");
 
-// En modo estricto, una función tradicional suelta tiene 'this = undefined'.
-function funcionTradicionalSuelta() {
+// En modo estricto, una función tradicional suelta en ámbito global tiene 'this = undefined'.
+function tradicionalGlobal() {
     return this;
 }
 
-// En cambio, una función flecha ignora las restricciones de modo estricto sobre 'this',
-// porque busca el 'this' de su entorno padre (en el ámbito global, el objeto global).
-const funcionFlechaSuelta = () => this;
+// Una función flecha ignora la regla de 'this = undefined' del modo estricto,
+// porque busca el 'this' léxico del entorno padre (objeto global / window).
+const flechaGlobal = () => this;
 
-console.log("Tradicional en strict mode :", funcionTradicionalSuelta()); // undefined
-console.log("Flecha en el entorno global :", typeof funcionFlechaSuelta()); // 'object' (global/module.exports/window)
+console.log("Tradicional en strict global  :", tradicionalGlobal()); // undefined
+console.log("Flecha en entorno global      :", typeof flechaGlobal());   // 'object'
 
 
 // ==============================================================================
@@ -199,99 +187,81 @@ console.log("Flecha en el entorno global :", typeof funcionFlechaSuelta()); // '
 // ==============================================================================
 imprimirSeparador(7, "COMPORTAMIENTO CON call(), apply() Y bind()");
 
-// En funciones tradicionales, call/apply/bind permiten inyectar un 'this' arbitrario.
-// En funciones flecha: EL PRIMER ARGUMENTO (contexto) ES TOTALMENTE IGNORADO.
-// Los argumentos subsiguientes se transmiten normalmente.
+// En funciones flecha: EL PRIMER ARGUMENTO (contexto 'this') ES IGNORADO.
+// Los argumentos normales de datos se transmiten sin problemas.
 
-const contextoInyectado = {
-    etiqueta: "Contexto Forzado"
-};
+const contextoInyectado = { apodo: "Usuario_VIP" };
 
-const flechaSuma = (a, b) => {
-    // Intentamos imprimir this.etiqueta
-    const valorThis = this ? this.etiqueta : undefined;
+const operacionFlecha = (a, b) => {
+    // Verificamos si this fue alterado por call
+    const nombreEncontrado = this ? this.apodo : undefined;
     return {
-        contextoDetectado: valorThis,
-        suma: a + b
+        contextoDetectado: nombreEncontrado,
+        total: a + b
     };
 };
 
-// Invocamos usando .call() pasando 'contextoInyectado' como primer parámetro
-const resultadoCall = flechaSuma.call(contextoInyectado, 15, 25);
-console.log("Resultado de call() en Arrow Function:", resultadoCall);
-console.log("-> Nótese cómo 'contextoDetectado' es undefined: ignoró el contexto inyectado.");
+const resultadoInyeccion = operacionFlecha.call(contextoInyectado, 15, 25);
+console.log("Resultado con .call()         :", resultadoInyeccion);
+console.log("-> Nótese: contextoDetectado es undefined (call NO pudo cambiar 'this').");
 
 
 // ==============================================================================
-// BLOQUE 8: RESTRICCIÓN: POR QUÉ NO SIRVEN COMO MÉTODOS DE OBJETOS
+// BLOQUE 8: RESTRICCIONES: POR QUÉ NO SIRVEN COMO MÉTODOS DE OBJETOS
 // ==============================================================================
-imprimirSeparador(8, "RESTRICCIÓN: NO USAR COMO MÉTODOS DE OBJETOS");
+imprimirSeparador(8, "RESTRICCIONES: NO USAR COMO MÉTODOS DE OBJETOS");
 
-// Antipatrón muy común: Usar una función flecha como método de un objeto literal
-const vehiculoErroneo = {
-    modelo: "Tesla Model 3",
-    // ❌ ERROR: La función flecha captura el 'this' léxico exterior (global), no el objeto vehiculoErroneo
-    describir: () => `Vehículo: ${this ? this.modelo : "indefinido"}`
+// ❌ Antipatrón: Usar función flecha como método de objeto literal
+const autoErroneo = {
+    marca: "Tesla",
+    // Captura el 'this' exterior global, no el objeto autoErroneo
+    obtenerMarca: () => `Auto: ${this ? this.marca : "indefinido"}`
 };
 
-console.log("Llamada con método flecha :", vehiculoErroneo.describir()); // "Vehículo: undefined"
+console.log("Método flecha en objeto       :", autoErroneo.obtenerMarca()); // Auto: undefined
 
-// ✅ Solución: Usar la sintaxis de método abreviado de ES6 (función tradicional interna)
-const vehiculoCorrecto = {
-    modelo: "Tesla Model 3",
-    describir() {
-        // 'this' apunta correctamente a 'vehiculoCorrecto'
-        return `Vehículo: ${this.modelo}`;
+// ✅ Solución: Método abreviado de ES6 (función tradicional interna con this dinámico)
+const autoCorrecto = {
+    marca: "Tesla",
+    obtenerMarca() {
+        return `Auto: ${this.marca}`;
     }
 };
 
-console.log("Llamada con método ES6    :", vehiculoCorrecto.describir()); // "Vehículo: Tesla Model 3"
+console.log("Método ES6 abreviado          :", autoCorrecto.obtenerMarca()); // Auto: Tesla
 
 
 // ==============================================================================
-// BLOQUE 9: RESTRICCIÓN: LA AUSENCIA DEL CONSTRUCTOR (new) Y [[Construct]]
+// BLOQUE 9: RESTRICCIONES: AUSENCIA DEL CONSTRUCTOR ('new') Y [[Construct]]
 // ==============================================================================
-imprimirSeparador(9, "RESTRICCIÓN: AUSENCIA DEL CONSTRUCTOR ('new')");
+imprimirSeparador(9, "RESTRICCIONES: AUSENCIA DE 'new' Y [[Construct]]");
 
-// Las funciones flecha NO poseen el método interno [[Construct]].
-// Si intentas usar 'new' con una función flecha, JavaScript lanza un TypeError inmediato.
+// Las funciones flecha carecen del método interno [[Construct]].
+// Invocarlas con 'new' arroja un TypeError inmediato.
 
-const CreadorUsuarioFlecha = (nombre) => {
+const CreadorUsuario = (nombre) => {
     this.nombre = nombre;
 };
 
 try {
-    // Intentamos instanciar la función flecha
-    const usuarioNuevo = new CreadorUsuarioFlecha("Carlos");
+    const usuario = new CreadorUsuario("Ana");
 } catch (error) {
-    console.log("❌ [ERROR DETECTADO AL USAR 'new' CON ARROW FUNCTION]:");
-    console.log(`   Tipo de Excepción : ${error.name}`);
+    console.log("❌ [EXCEPCIÓN CAPTURADA AL INSTANCIAR CON 'new']:");
+    console.log(`   Tipo de Error     : ${error.name}`);
     console.log(`   Mensaje del Motor : ${error.message}`);
-    console.log("   💡 Diagnóstico    : Las funciones flecha carecen de [[Construct]] y no son instanciables.");
+    console.log("   Explicación       : Las funciones flecha no poseen [[Construct]] ni pueden ser llamadas con new.");
 }
 
 
 // ==============================================================================
-// BLOQUE 10: AUSENCIA DE 'arguments' Y DE '.prototype' (USO DE REST ...args)
+// BLOQUE 10: AUSENCIA DE 'arguments' Y DE '.prototype'
 // ==============================================================================
 imprimirSeparador(10, "AUSENCIA DE 'arguments' Y '.prototype'");
 
-// 1. Ausencia del objeto 'arguments':
-// Las funciones flecha no generan el objeto 'arguments'.
-// En su lugar, se debe utilizar el parámetro Rest (...args) de ES6.
-
-const procesarValoresRest = (...valores) => {
-    // 'valores' es un Array nativo real, no un objeto similar a un array
-    console.log("Parámetros recibidos con Rest (...valores):", valores);
-    return valores.reduce((acumulado, num) => acumulado + num, 0);
-};
-
-console.log("Suma total dinámica con Rest              :", procesarValoresRest(10, 20, 30, 40));
-
-// 2. Ausencia de '.prototype':
-// Como no pueden ser constructoras de prototipos, su propiedad prototype es undefined
-const funcionEjemplo = () => {};
-console.log("¿Las funciones flecha tienen prototype?   :", funcionEjemplo.prototype); // undefined
+// 1. No tienen objeto arguments (se debe usar Rest ...args)
+// 2. Su propiedad .prototype es estrictamente undefined
+const funcionPrueba = () => {};
+console.log("Propiedad prototype de flecha :", funcionPrueba.prototype); // undefined
 
 
 // ==============================================================================
@@ -299,19 +269,12 @@ console.log("¿Las funciones flecha tienen prototype?   :", funcionEjemplo.proto
 // ==============================================================================
 imprimirSeparador(11, "RESTRICCIONES SINTÁCTICAS: SALTOS DE LÍNEA Y YIELD");
 
-// 1. Prohibido salto de línea entre parámetros y la flecha '=>':
-// const malo = (a, b)
-// => a + b; // ❌ Provoca SyntaxError: Unexpected token '=>'
-
-// Si el cuerpo es extenso, el salto de línea va DESPUÉS de la flecha:
-const calcularOperacionLarga = (base, exponente) => 
-    Math.pow(base, exponente);
-
-console.log("Salto de línea válido (después de '=>')   :", calcularOperacionLarga(2, 8));
-
-// 2. Prohibido 'yield':
-// Una función flecha no puede usar 'yield' dentro de su cuerpo.
-// Es imposible crear funciones generadoras flecha (*=> no existe).
+// 1. Prohibido salto de línea entre parámetros y => (arroja SyntaxError)
+// 2. Prohibido 'yield' en su cuerpo (no existen funciones flecha generadoras)
+// Salto válido: estrictamente DESPUÉS de la flecha:
+const multiplicacionLarga = (a, b) => 
+    a * b;
+console.log("Salto de línea válido (después):", multiplicacionLarga(6, 7));
 
 
 // ==============================================================================
@@ -319,166 +282,292 @@ console.log("Salto de línea válido (después de '=>')   :", calcularOperacionL
 // ==============================================================================
 imprimirSeparador(12, "ORDEN DE PRECEDENCIA Y PARSEO EN EL MOTOR JS");
 
-// La flecha '=>' tiene una precedencia muy baja en la gramática de JavaScript.
-// Esto garantiza que la expresión de parámetros de la izquierda sea agrupada primero
-// antes de vincularse al cuerpo de la derecha.
-
-// Si usamos operadores ternarios o lógicos combinados con funciones flecha,
-// conviene agrupar con paréntesis explícitos para evitar confusiones de lectura:
-const autenticar = (esAdmin) => esAdmin ? () => "Acceso Total" : () => "Acceso Limitado";
-
-const permisoAdmin = autenticar(true)();
-const permisoLector = autenticar(false)();
-console.log("Permiso Administrador                     :", permisoAdmin);
-console.log("Permiso Lector                            :", permisoLector);
+// La flecha '=>' tiene precedencia baja. Los parámetros de la izquierda se agrupan
+// por completo antes de unirse al cuerpo ejecutable de la derecha.
+const fabricaDeRespuestas = (esAdmin) => esAdmin ? () => "Acceso Total" : () => "Acceso Restringido";
+console.log("Parseo con ternario (Admin)   :", fabricaDeRespuestas(true)());
+console.log("Parseo con ternario (Lector)  :", fabricaDeRespuestas(false)());
 
 
 // ==============================================================================
-// BLOQUE 13: ANALOGÍA DEL MUNDO REAL: EL ESPEJO REFLECTANTE 🪞
+// BLOQUE 13: FUNCIONES RECURSIVAS (RECURSIVIDAD EN FUNCIONES FLECHA)
 // ==============================================================================
-imprimirSeparador(13, "ANALOGÍA DEL MUNDO REAL: EL ESPEJO REFLECTANTE");
+imprimirSeparador(13, "FUNCIONES RECURSIVAS (RECURSIVIDAD)");
+
+// Toda función recursiva requiere:
+// 1. Condición base de parada (para evitar Stack Overflow).
+// 2. Llamada a sí misma con un subproblema menor.
+// Al asignarse a una constante, la función flecha puede referenciar su propio identificador:
+
+const factorial = n => {
+    // Condición base: si n es 1 o menor, el factorial es 1
+    if (n <= 1) return 1;
+    // Llamada recursiva: n multiplicado por el factorial de n - 1
+    return n * factorial(n - 1);
+};
+
+console.log("Factorial de 5 con flecha     :", factorial(5));  // 120
+console.log("Factorial de 6 con flecha     :", factorial(6));  // 720
+
+
+// ==============================================================================
+// BLOQUE 14: CLÁUSULAS O CIERRES (CLOSURES)
+// ==============================================================================
+imprimirSeparador(14, "CLÁUSULAS O CIERRES (CLOSURES)");
+
+// Un closure permite a una función interna recordar y acceder a las variables
+// de su entorno léxico externo, incluso después de que la función externa haya finalizado.
+
+const crearContador = () => {
+    // Variable privada encapsulada dentro del closure
+    let cuentaPrivada = 0;
+
+    return {
+        // Incrementa la variable privada
+        incrementar: () => ++cuentaPrivada,
+        // Decrementa la variable privada
+        decrementar: () => --cuentaPrivada,
+        // Devuelve el valor actual sin exponer la variable directa
+        obtenerValor: () => cuentaPrivada
+    };
+};
+
+const contadorA = crearContador();
+console.log("Closure - Incremento 1        :", contadorA.incrementar()); // 1
+console.log("Closure - Incremento 2        :", contadorA.incrementar()); // 2
+console.log("Closure - Valor Protegido     :", contadorA.obtenerValor()); // 2
+
+
+// ==============================================================================
+// BLOQUE 15: PARÁMETROS POR DEFECTO (VALIDACIÓN ANTIGUA VS. ACTUAL)
+// ==============================================================================
+imprimirSeparador(15, "PARÁMETROS POR DEFECTO: ANTIGUO VS. ES6+");
+
+// 1. Forma antigua (pre-ES6): comprobaciones manuales con || o typeof
+function configurarServidorAntiguo(puerto, timeout) {
+    puerto = puerto || 8080;
+    timeout = (typeof timeout !== "undefined") ? timeout : 5000;
+    return `[Antiguo] Puerto: ${puerto}, Timeout: ${timeout}ms`;
+}
+
+// 2. Forma moderna (ES6+): asignación directa en la firma de la función flecha
+const configurarServidorModerno = (puerto = 8080, timeout = 5000) => 
+    `[Moderno] Puerto: ${puerto}, Timeout: ${timeout}ms`;
+
+console.log(configurarServidorAntiguo());
+console.log(configurarServidorModerno());
+console.log(configurarServidorModerno(3000, 10000));
+
+
+// ==============================================================================
+// BLOQUE 16: PARÁMETROS REST (...param)
+// ==============================================================================
+imprimirSeparador(16, "PARÁMETROS REST (...param)");
+
+// El parámetro Rest (...param) captura un número indefinido de argumentos
+// y los empaqueta en un Array nativo legítimo (con .map, .filter, .reduce, etc.).
+// Regla: El parámetro Rest debe ser SIEMPRE el último parámetro de la firma.
+
+const calcularTotalConImpuesto = (tasaImpuesto, ...precios) => {
+    // Verificamos que 'precios' sea un Array auténtico
+    const subtotal = precios.reduce((acumulado, p) => acumulado + p, 0);
+    const impuesto = subtotal * tasaImpuesto;
+    return {
+        subtotal: subtotal,
+        impuesto: impuesto,
+        total: subtotal + impuesto
+    };
+};
+
+console.log("Cálculo con Rest (...precios) :", calcularTotalConImpuesto(0.19, 10, 25, 45, 120));
+
+
+// ==============================================================================
+// BLOQUE 17: DESESTRUCTURACIÓN DE ARRAYS Y OBJETOS
+// ==============================================================================
+imprimirSeparador(17, "DESESTRUCTURACIÓN DE ARRAYS Y OBJETOS");
+
+// 1. Desestructuración de Objetos (por nombre de clave / llave)
+const configuracionUsuario = {
+    tema: "dark",
+    idioma: "es",
+    nivelAcceso: "Admin"
+};
+
+// Extracción directa con renombramiento y valores por defecto:
+const { tema, idioma, nivelAcceso: rol, zonaHoraria = "UTC-5" } = configuracionUsuario;
+console.log(`Desestructuración Objeto      : Tema: ${tema}, Rol: ${rol}, Zona: ${zonaHoraria}`);
+
+// 2. Desestructuración de Arrays (por posición ordinal)
+const coordenadasGPS = [4.6097, -74.0817, 2600]; // Latitud, Longitud, Altitud
+const [latitud, longitud] = coordenadasGPS;
+const [, , altitud] = coordenadasGPS; // Omisión de elementos con coma vacía
+console.log(`Desestructuración Array       : Lat: ${latitud}, Lon: ${longitud}, Alt: ${altitud}m`);
+
+
+// ==============================================================================
+// BLOQUE 18: DESESTRUCTURACIÓN EN PARÁMETROS DE FUNCIONES
+// ==============================================================================
+imprimirSeparador(18, "DESESTRUCTURACIÓN EN PARÁMETROS DE FUNCIONES");
+
+// En lugar de recibir un objeto y descomponerlo en el cuerpo,
+// declaramos las propiedades deseadas directamente en la firma del parámetro:
+
+const productoInventario = {
+    id: 902,
+    nombre: "Teclado Mecánico RGB",
+    precio: 85,
+    stock: 14
+};
+
+const procesarEnvio = ({ nombre, precio, stock }) => 
+    `Envío confirmado: ${nombre} ($${precio} USD). Unidades restantes en bodega: ${stock}`;
+
+console.log("Función Desestructuradora     :", procesarEnvio(productoInventario));
+
+
+// ==============================================================================
+// BLOQUE 19: ANALOGÍAS DEL MUNDO REAL
+// ==============================================================================
+imprimirSeparador(19, "ANALOGÍAS DEL MUNDO REAL");
 
 console.log(`
-🪞 METÁFORA DEL CONTEXTO 'this':
-1. Función Tradicional: Es una CÁMARA CON FLASH PROPIO 📷.
-   Al dispararse, genera su propia luz y altera la iluminación de la sala
-   dependiendo de cómo sea invocada.
-2. Función Flecha: Es un ESPEJO PLANO EMPOTRADO 🪞.
-   No tiene luz propia. Refleja fielmente la luz del entorno donde fue instalado
-   (ámbito léxico). Si la habitación cambia de color, el espejo solo muestra
-   lo que ya estaba allí.
+1. EL ESPEJO REFLECTANTE 🪞 (Para el contexto 'this'):
+   - Función Tradicional: Es una CÁMARA CON FLASH PROPIO 📷. Genera su propia luz
+     contextual al dispararse, según cómo y dónde sea invocada.
+   - Función Flecha: Es un ESPEJO PLANO EMPOTRADO 🪞. No tiene luz propia; refleja
+     fielmente la iluminación del cuarto donde fue instalado (ámbito léxico).
+
+2. EL ARCHIVADOR AUTOMATIZADO 🗂️ (Para la Desestructuración):
+   - Sin desestructuración: Te entregan una caja llena de expedientes y tú debes
+     buscar y extraer uno a uno manualmente.
+   - Con desestructuración en parámetros: Un asistente robótico te entrega en mano
+     únicamente los 3 documentos exactos que necesitas, desechando la caja vacía.
 `);
 
 
 // ==============================================================================
-// BLOQUE 14: DIAGRAMA DE FLUJO DEL CONTEXTO 'this'
+// BLOQUE 20: DIAGRAMA DE FLUJO DEL CONTEXTO 'this'
 // ==============================================================================
-imprimirSeparador(14, "DIAGRAMA DE FLUJO DE RESOLUCIÓN DE 'this'");
+imprimirSeparador(20, "DIAGRAMA DE FLUJO DE RESOLUCIÓN DE 'this'");
 
 console.log(`
 ┌────────────────────────────────────────────────────────┐
-│ ¿En qué ámbito fue declarada la Función Flecha?        │
+│ ¿En qué ámbito léxico fue declarada la Función Flecha? │
 └───────────────────────────┬────────────────────────────┘
                             │
                             ▼
 ┌────────────────────────────────────────────────────────┐
-│ Captura el 'this' del padre en el momento de creación  │
-│ (Lexical Scope permanente e inmutable)                 │
+│ Captura de forma fija e inmutable el 'this' del padre  │
 └───────────────────────────┬────────────────────────────┘
                             │
                             ▼
 ┌────────────────────────────────────────────────────────┐
-│ ¿Se invoca con .call(), .apply() o .bind()?            │
-│ ➔ El argumento de contexto 'this' es IGNORADO          │
+│ ¿Se invoca mediante .call(), .apply() o .bind()?       │
+│ ➔ El primer argumento de contexto es TOTALMENTE IGNORADO│
 └───────────────────────────┬────────────────────────────┘
                             │
                             ▼
 ┌────────────────────────────────────────────────────────┐
-│ Ejecuta el cuerpo usando siempre el 'this' capturado   │
+│ Ejecuta el cuerpo usando siempre el 'this' original    │
 └────────────────────────────────────────────────────────┘
 `);
 
 
 // ==============================================================================
-// BLOQUE 15: BUENAS PRÁCTICAS EN PRODUCCIÓN
+// BLOQUE 21: BUENAS PRÁCTICAS Y ERRORES COMUNES EN PRODUCCIÓN
 // ==============================================================================
-imprimirSeparador(15, "BUENAS PRÁCTICAS EN PRODUCCIÓN");
+imprimirSeparador(21, "BUENAS PRÁCTICAS Y ERRORES COMUNES");
 
-// 1. Ideales para métodos de arrays: .map, .filter, .reduce, .find
-const numeros = [10, 25, 40, 55, 70];
-const mayoresQueTreinta = numeros.filter(n => n > 30);
-console.log("Filtrado funcional con Arrow Function    :", mayoresQueTreinta);
-
-// 2. Asignar siempre a constantes (const) para rastrear nombres en stack traces
-const formatearMoneda = (monto) => `$${monto.toFixed(2)}`;
-console.log("Función flecha nombrada asignada a const  :", formatearMoneda(45.5));
-
-// 3. Usar retorno implícito solo si cabe en una línea clara y legible
+// 1. Asignar siempre funciones flecha a constantes (const) para depurar stack traces
+// 2. Usar funciones flecha para callbacks de arrays (.map, .filter, .reduce)
+// 3. En listeners del DOM, usar función tradicional si requieres 'this = elemento',
+//    o usar función flecha con (e) => e.currentTarget.
+console.log("✅ Buenas prácticas: Asignar a const, usar en callbacks y usar Rest en vez de arguments.");
+console.log("❌ Error común evitado: No usar funciones flecha como métodos directos de objetos literales.");
 
 
 // ==============================================================================
-// BLOQUE 16: ERRORES COMUNES (EVENT LISTENERS DEL DOM)
+// BLOQUE 22: EJERCICIOS PRÁCTICOS INTEGRADORES RESUELTOS
 // ==============================================================================
-imprimirSeparador(16, "ERRORES COMUNES: EVENT LISTENERS DEL DOM");
+imprimirSeparador(22, "RESOLUCIÓN DE LOS 3 EJERCICIOS INTEGRADORES");
 
-// En el navegador:
-// boton.addEventListener('click', () => {
-//    this.classList.toggle('activo'); // ❌ ERROR: 'this' es window, no el botón
-// });
-// 
-// Solución correcta:
-// boton.addEventListener('click', (evento) => {
-//    evento.currentTarget.classList.toggle('activo'); // ✅ Seguro y explícito
-// });
-console.log("ℹ️ En listeners del DOM: usar el parámetro del evento (e.currentTarget) o función tradicional.");
-
-
-// ==============================================================================
-// BLOQUE 17: RESOLUCIÓN DE LOS 3 RETOS DE EVALUACIÓN
-// ==============================================================================
-imprimirSeparador(17, "RESOLUCIÓN DE LOS 3 RETOS DE EVALUACIÓN");
-
-// --- RETO 1 (Nivel Junior): Función de área de círculo en una línea ---
-console.log("--- RETO 1: calcularAreaCirculo (Retorno implícito sin paréntesis innecesarios) ---");
+// --- EJERCICIO 1: Nivel Junior ---
+// calcularAreaCirculo en una línea con retorno implícito y sin paréntesis innecesarios:
+console.log("--- EJERCICIO 1 (Junior): calcularAreaCirculo ---");
 const calcularAreaCirculo = radio => Math.PI * radio * radio;
-console.log("Área de círculo con radio 5               :", calcularAreaCirculo(5));
+console.log("Área para radio 5             :", calcularAreaCirculo(5));
 
-// --- RETO 2 (Nivel Semi-Senior): Objeto tienda con this léxico en map ---
-console.log("\n--- RETO 2: Objeto tienda con this léxico en .map() ---");
-const tienda = {
-    precioBase: 100,
-    descuentos: [0.10, 0.20, 0.30],
-    
-    // Método tradicional para que 'this' apunte al objeto tienda
-    aplicarDescuentos() {
-        // La función flecha dentro de .map hereda 'this' de aplicarDescuentos (la tienda)
-        return this.descuentos.map(descuento => {
-            const ahorro = this.precioBase * descuento;
-            const precioFinal = this.precioBase - ahorro;
-            return {
-                descuento: `${descuento * 100}%`,
-                precioFinal: precioFinal
-            };
-        });
-    }
+// --- EJERCICIO 2: Nivel Semi-Senior ---
+// crearCarrito con closure, lista privada, agregarProducto({ nombre, precio }) y obtenerTotal()
+console.log("\n--- EJERCICIO 2 (Semi Senior): crearCarrito con Closure & Desestructuración ---");
+const crearCarrito = () => {
+    // Array privado protegido por el entorno léxico del closure
+    const lista = [];
+
+    return {
+        // Método que recibe un objeto y desestructura nombre y precio en su firma
+        agregarProducto: ({ nombre, precio }) => {
+            lista.push({ nombre, precio });
+            console.log(`  + Producto agregado: ${nombre} ($${precio})`);
+        },
+        // Calcula el total acumulado usando reduce funcional
+        obtenerTotal: () => lista.reduce((total, prod) => total + prod.precio, 0),
+        // Permite inspeccionar la cantidad de artículos
+        obtenerCantidad: () => lista.length
+    };
 };
-console.log("Descuentos calculados con this léxico     :", tienda.aplicarDescuentos());
 
-// --- RETO 3 (Nivel Master): Instanciación con new y captura técnica ---
-console.log("\n--- RETO 3: Intento de instanciación con new e inspección técnica ---");
-const ServicioAPI = (url) => {
+const miCarrito = crearCarrito();
+miCarrito.agregarProducto({ nombre: "Monitor 4K", precio: 350 });
+miCarrito.agregarProducto({ nombre: "Mouse Ergonómico", precio: 60 });
+miCarrito.agregarProducto({ nombre: "Cable HDMI", precio: 15 });
+console.log("Total acumulado del carrito   : $" + miCarrito.obtenerTotal());
+
+// --- EJERCICIO 3: Nivel Avanzado / Master ---
+// Script que fuerza contexto con .call() y simultáneamente intenta instanciar con new,
+// capturando errores con try/catch e imprimiendo el diagnóstico técnico.
+console.log("\n--- EJERCICIO 3 (Avanzado): Forzar call() e Instanciar con new ---");
+const ServicioApi = (url) => {
     this.url = url;
 };
 
+// 1. Intento con .call()
+const contextoForzado = { url: "https://servidor-falso.com" };
+ServicioApi.call(contextoForzado, "https://api.real.com");
+console.log("Prueba .call()                : El contexto fue ignorado exitosamente.");
+
+// 2. Intento con 'new'
 try {
-    // Provocamos la excepción intencional
-    const api = new ServicioAPI("https://api.servidor.com");
-} catch (err) {
-    console.log("✅ Excepción capturada exitosamente con try/catch:");
-    console.log(`   Nombre del Error  : ${err.name}`);
-    console.log(`   Mensaje Oficial   : ${err.message}`);
-    console.log("   Explicación Técnica: Las funciones flecha no implementan la interfaz [[Construct]]");
-    console.log("                        de la especificación ECMAScript; por ello su .prototype es undefined");
-    console.log(`   ¿Tiene .prototype?: ${ServicioAPI.prototype}`);
+    const instancia = new ServicioApi("https://api.real.com");
+} catch (error) {
+    console.log("✅ Excepción técnica capturada con try/catch:");
+    console.log(`   Nombre de la Excepción    : ${error.name}`);
+    console.log(`   Mensaje del Motor V8      : ${error.message}`);
+    console.log(`   ¿Posee .prototype?        : ${ServicioApi.prototype}`);
+    console.log("   Diagnóstico Técnico       : Las funciones flecha no implementan [[Construct]],");
+    console.log("                               por lo que no pueden ser instanciadas como constructores.");
 }
 
 
 // ==============================================================================
-// BLOQUE 18: RESUMEN MAESTRO Y CONCLUSIONES
+// BLOQUE 23: RESUMEN TÉCNICO INTEGRAL
 // ==============================================================================
-imprimirSeparador(18, "RESUMEN MAESTRO DEL MÓDULO");
+imprimirSeparador(23, "RESUMEN TÉCNICO INTEGRAL");
 
 console.log(`
-RESUMEN EJECUTIVO DE FUNCIONES FLECHA:
+RESUMEN EJECUTIVO DE CONCEPTOS DOMINADOS:
 1. Sintaxis compacta: 'param => expresion' (retorno implícito sin llaves ni return).
-2. Objetos literales: Siempre envolver con paréntesis: '() => ({ a: 1 })'.
-3. 'this' Léxico: No tienen 'this' propio; heredan el del entorno circundante.
-4. 'call', 'apply', 'bind': Ignoran el primer argumento de contexto 'this'.
-5. Métodos de objeto: No usarlas como métodos si necesitas acceder a propiedades del objeto.
-6. 'new': No son constructores, no tienen [[Construct]], lanzan TypeError con 'new'.
-7. 'arguments' y 'prototype': No existen en funciones flecha; usar rest (...args).
-8. DOM Listeners: Preferir función tradicional o 'evento.currentTarget'.
+2. Objetos literales: '() => ({ a: 1 })' (los paréntesis resuelven la ambigüedad).
+3. 'this' Léxico: Heredan el contexto de su entorno de declaración permanentemente.
+4. 'call/apply/bind': Ignoran el primer parámetro de contexto 'this'.
+5. Sin Constructor: Carecen de [[Construct]] y arrojan TypeError si se usa 'new'.
+6. Sin 'arguments' ni 'prototype': Utilizar Rest (...args) para recibir Arrays reales.
+7. Recursividad: Perfectamente válida si se nombra la función flecha con const.
+8. Closures: Ideales para factorías de funciones y protección de variables privadas.
+9. Parámetros por Defecto: Valores de respaldo limpios en la firma (x = 10).
+10. Desestructuración: Extracción directa en parámetros '({ nombre, precio }) => ...'.
 `);
 console.log("==============================================================================");
-console.log("🎯 [FIN DEL LABORATORIO]: Módulo de Funciones Flecha completado con éxito.");
+console.log("🎯 [FIN DEL MÓDULO]: Todos los 23 bloques ejecutados y explicados con éxito.");
 console.log("==============================================================================\n");

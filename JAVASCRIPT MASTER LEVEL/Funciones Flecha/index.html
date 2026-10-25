@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Presentación interactiva y laboratorio profesional sobre Funciones Flecha (Arrow Functions) en JavaScript ES6 - JavaScript Master Level." />
-    <title>Funciones Flecha (Arrow Functions) en JavaScript | Master Level</title>
+        content="Guía y laboratorio interactivo completo sobre Funciones Flecha, Contexto Léxico, Closures, Recursividad y Desestructuración en JavaScript ES6+." />
+    <title>Funciones Flecha & Conceptos Avanzados | JS Master Level</title>
     <script src="app.js" defer></script>
 
     <!-- Google Fonts -->
@@ -32,7 +32,7 @@
             <span class="brand-badge">JS MASTER LEVEL</span>
             <div class="brand-title">
                 <span class="icon-proto">⚡</span>
-                <span class="title-text">Funciones Flecha (Arrow Functions)</span>
+                <span class="title-text">Funciones Flecha & Conceptos Avanzados</span>
             </div>
         </div>
 
@@ -41,7 +41,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -72,40 +72,40 @@
                 <div class="hero-badges">
                     <span class="badge badge-purple">ECMAScript 6 (ES6 - 2015)</span>
                     <span class="badge badge-cyan">Junior → Semi Senior</span>
-                    <span class="badge badge-emerald">Ámbito Léxico de 'this'</span>
+                    <span class="badge badge-emerald">Ámbito Léxico & Patrones ES6+</span>
                 </div>
 
                 <h1 class="hero-title">
                     Funciones Flecha
-                    <span class="gradient-text">(Arrow Functions)</span> en JavaScript
+                    <span class="gradient-text">&amp; Conceptos Avanzados</span> en JavaScript
                 </h1>
 
                 <p class="hero-subtitle">
-                    Domina el origen, la sintaxis ultracompacta y los retornos implícitos,
-                    comprende a fondo el <strong>ámbito léxico</strong> del contexto <code>this</code>
-                    y descubre sus <strong>restricciones técnicas</strong> frente a las funciones tradicionales.
+                    Domina el comportamiento integral de las <strong>funciones flecha</strong>, el control inmutable del contexto
+                    <code>this</code> léxico, y asimila patrones clave como la <strong>recursividad</strong>, los <strong>closures</strong>,
+                    los <strong>parámetros Rest</strong> y la <strong>desestructuración moderna</strong> en firmas de funciones.
                 </p>
 
                 <div class="hero-card-grid">
                     <div class="hero-mini-card" data-jump="2">
                         <div class="mini-card-icon">⚡</div>
                         <h3>Retorno Implícito</h3>
-                        <p>Escribe lógica limpia y expresiva en una sola línea de código.</p>
+                        <p>Sintaxis compacta y expresiva sin llaves ni return.</p>
                     </div>
                     <div class="hero-mini-card" data-jump="4">
                         <div class="mini-card-icon">🪞</div>
-                        <h3>'this' Contextual</h3>
-                        <p>Ámbito léxico inmutable: hereda el contexto de su entorno padre.</p>
+                        <h3>'this' Léxico</h3>
+                        <p>Inmutabilidad contextual: hereda el entorno padre.</p>
                     </div>
                     <div class="hero-mini-card" data-jump="7">
-                        <div class="mini-card-icon">🚫</div>
-                        <h3>Sin 'new' ni 'arguments'</h3>
-                        <p>Estructuras ultraligeras sin overhead de prototipos ni constructores.</p>
+                        <div class="mini-card-icon">🔄</div>
+                        <h3>Recursión &amp; Closures</h3>
+                        <p>Estructuras autorreferenciales y encapsulación privada.</p>
                     </div>
                     <div class="hero-mini-card" data-jump="8">
-                        <div class="mini-card-icon">🔍</div>
-                        <h3>El Espejo vs Flash</h3>
-                        <p>Analogía visual intuitiva para no dudar nunca más sobre 'this'.</p>
+                        <div class="mini-card-icon">🗂️</div>
+                        <h3>Rest &amp; Desestructuración</h3>
+                        <p>Firmas de parámetros limpias, modernas y tipadas.</p>
                     </div>
                 </div>
 
@@ -114,7 +114,7 @@
                         <span>Iniciar Presentación Interactiva</span>
                         <span class="arrow-icon">→</span>
                     </button>
-                    <button class="cta-btn secondary-btn" data-jump="9">
+                    <button class="cta-btn secondary-btn" data-jump="10">
                         <span>Ir al Playground en Vivo</span>
                         <span class="code-tag">&lt;/&gt;</span>
                     </button>
@@ -123,7 +123,7 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 2: ¿POR QUÉ APARECIERON? & SINTAXIS COMPACTA
+             SLIDE 2: ORIGEN & SINTAXIS COMPACTA
              ============================================== -->
         <section class="slide" id="slide-2" data-slide="2" data-title="Origen y Retorno Implícito">
             <div class="slide-content">
@@ -131,8 +131,7 @@
                     <span class="section-tag">Fundamento 01</span>
                     <h2>¿Por qué aparecieron las Funciones Flecha?</h2>
                     <p class="section-desc">
-                        Introducidas en <strong>ECMAScript 6 (2015)</strong>, no fueron solo una mejora visual,
-                        sino la solución definitiva a dos problemas históricos de JavaScript:
+                        Introducidas en <strong>ECMAScript 6 (2015)</strong>, resolvieron dos dolores de cabeza históricos del lenguaje:
                     </p>
                 </div>
 
@@ -145,15 +144,15 @@
                             </div>
                             <p>
                                 <strong>1. Reducir la verbosidad excesiva:</strong> Eliminar la repetición constante
-                                de las palabras clave <code>function</code> y <code>return</code> en callbacks y operaciones funcionales.
+                                de las palabras clave <code>function</code> y <code>return</code> en callbacks y operaciones cortas.
                             </p>
                             <p>
-                                <strong>2. Rescatar la pérdida de <code>this</code>:</strong> Evitar la mutación no deseada
-                                del contexto dentro de callbacks, métodos internos y temporizadores como <code>setInterval</code>.
+                                <strong>2. La pérdida de contexto de <code>this</code>:</strong> Evitar la mutación involuntaria
+                                del contexto dentro de métodos internos, callbacks o temporizadores como <code>setInterval</code>.
                             </p>
                             <p class="highlight-callout">
                                 💡 <strong>Retorno Implícito:</strong> Si el cuerpo contiene una sola expresión,
-                                se omiten las llaves <code>{}</code> y el <code>return</code>. JavaScript evalúa y devuelve el resultado de inmediato.
+                                se omiten las llaves <code>{}</code> y la palabra <code>return</code>. JavaScript evalúa y devuelve el resultado inmediatamente.
                             </p>
                         </div>
 
@@ -161,17 +160,17 @@
                             <div class="vs-box class-box">
                                 <h4>Función Tradicional (Pre-ES6)</h4>
                                 <ul>
-                                    <li>Sintaxis extensa con <code>function</code> y <code>return</code>.</li>
+                                    <li>Verbosa: requiere <code>function</code> y <code>return</code>.</li>
                                     <li>Crea su propio <code>this</code> dependiente de la llamada.</li>
-                                    <li>Requiere trucos como <code>var self = this</code> o <code>.bind()</code>.</li>
+                                    <li>Obligaba a usar trucos como <code>var self = this;</code> o <code>.bind(this)</code>.</li>
                                 </ul>
                             </div>
                             <div class="vs-box proto-box">
                                 <h4>Función Flecha (ES6+)</h4>
                                 <ul>
-                                    <li>Sintaxis en una línea: <code>x =&gt; x * 2</code>.</li>
-                                    <li>Retorno implícito sin llaves ni <code>return</code>.</li>
-                                    <li>Conserva el <code>this</code> de su entorno original de forma transparente.</li>
+                                    <li>Sintaxis limpia en una línea: <code>x =&gt; x * 2</code>.</li>
+                                    <li>Retorno implícito automático.</li>
+                                    <li>Conserva el <code>this</code> léxico de su entorno de origen.</li>
                                 </ul>
                             </div>
                         </div>
@@ -196,7 +195,7 @@
     <span class="c-keyword">return</span> <span class="c-prop">numero</span> * <span class="c-number">2</span>;
 };
 
-<span class="c-comment">// 2. Forma Moderna (Retorno Implícito):</span>
+<span class="c-comment">// 2. Forma Moderna (Retorno Implícito en una línea):</span>
 <span class="c-keyword">const</span> <span class="c-variable">duplicarFlecha</span> = <span class="c-prop">numero</span> =&gt; <span class="c-prop">numero</span> * <span class="c-number">2</span>;
 
 <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Tradicional:"</span>, <span class="c-variable">duplicarTradicional</span>(<span class="c-number">5</span>)); <span class="c-comment">// 10</span>
@@ -211,7 +210,7 @@
 
                             <div class="mini-console" id="console-output-1">
                                 <div class="console-prompt">
-                                    &gt; Haz clic en "Probar Comparativa en Vivo" para ver la respuesta del motor JS...
+                                    &gt; Haz clic en "Probar Comparativa en Vivo" para evaluar la respuesta del motor JS...
                                 </div>
                             </div>
                         </div>
@@ -229,8 +228,8 @@
                     <span class="section-tag">Fundamento 02</span>
                     <h2>Reglas de Parámetros y Retorno de Objetos Literales</h2>
                     <p class="section-desc">
-                        Aprende cuándo los paréntesis <code>()</code> son obligatorios u opcionales, y cómo resolver
-                        el clásico conflicto sintáctico al retornar objetos literales.
+                        Aprende cuándo los paréntesis <code>()</code> son obligatorios u opcionales y cómo resolver
+                        la ambigüedad sintáctica al retornar objetos en una sola línea.
                     </p>
                 </div>
 
@@ -247,13 +246,13 @@
                                 <li><strong>0 parámetros:</strong> Paréntesis obligatorios <code>() =&gt; ...</code></li>
                                 <li><strong>1 parámetro:</strong> Paréntesis opcionales <code>x =&gt; ...</code></li>
                                 <li><strong>2+ parámetros:</strong> Paréntesis obligatorios <code>(a, b) =&gt; ...</code></li>
-                                <li><strong>Destructuración / Rest:</strong> Paréntesis obligatorios <code>({id}) =&gt; ...</code></li>
+                                <li><strong>Desestructuración / Rest:</strong> Paréntesis obligatorios <code>({id}) =&gt; ...</code></li>
                             </ul>
                             <div class="visual-box">
                                 <span class="vis-icon">📝</span>
                                 <div class="vis-text">
                                     <strong>Regla de oro:</strong>
-                                    <small>Solo un identificador único y solitario puede omitir los paréntesis.</small>
+                                    <small>Solo un identificador único y solitario puede prescindir de los paréntesis.</small>
                                 </div>
                             </div>
                         </div>
@@ -277,8 +276,8 @@
                         </div>
                         <div class="comp-body">
                             <p>
-                                En JS, las llaves definen tanto el cuerpo de la función como objetos literales.
-                                <code>(id) =&gt; { id: 1 }</code> es interpretado como bloque con etiqueta, retornando <code>undefined</code>.
+                                Las llaves definen tanto bloques de código como objetos literales.
+                                <code>(id) =&gt; { id: 1 }</code> se interpreta como bloque con etiqueta y retorna <code>undefined</code>.
                             </p>
                             <div class="visual-box">
                                 <span class="vis-icon">🎯</span>
@@ -291,16 +290,16 @@
                     </div>
                 </div>
 
-                <!-- Probador Interactivo de Objeto Literal -->
+                <!-- Probador Interactivo -->
                 <div class="identity-checker">
                     <div class="identity-expr">
-                        <code>const crear = (id, nombre) =&gt; ({ id, nombre }); // ¡Retorno de Objeto Literal!</code>
+                        <code>const crear = (id, nombre) =&gt; ({ id, nombre }); // ¡Retorno de Objeto Literal Exitoso!</code>
                     </div>
                     <button class="btn-check-identity" id="btnCheckObjectReturn">
                         🔍 Probar Retorno de Objeto en Vivo
                     </button>
                     <div class="identity-result" id="objectReturnResult">
-                        Haz clic para ejecutar la prueba y verificar si devuelve el objeto o undefined...
+                        Haz clic para ejecutar la prueba y verificar si devuelve el objeto real o undefined...
                     </div>
                 </div>
 
@@ -309,24 +308,24 @@
                     <table class="proto-table">
                         <thead>
                             <tr>
-                                <th>Cantidad de Parámetros</th>
+                                <th>Cantidad / Tipo de Parámetros</th>
                                 <th>¿Paréntesis Requeridos?</th>
                                 <th>Ejemplo de Sintaxis</th>
-                                <th>Resultado</th>
+                                <th>Comportamiento</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td>Cero parámetros</td>
                                 <td>✅ <strong>Obligatorios</strong></td>
-                                <td><code>() =&gt; "Hola"</code></td>
+                                <td><code>() =&gt; Date.now()</code></td>
                                 <td>Ejecuta sin argumentos</td>
                             </tr>
                             <tr>
                                 <td>Exactamente uno</td>
                                 <td>⚪ <em>Opcionales</em></td>
                                 <td><code>x =&gt; x * x</code></td>
-                                <td>Sintaxis más compacta</td>
+                                <td>Sintaxis ultra compacta</td>
                             </tr>
                             <tr>
                                 <td>Dos o más</td>
@@ -335,9 +334,9 @@
                                 <td>Separados por comas</td>
                             </tr>
                             <tr>
-                                <td>Objeto Literal</td>
+                                <td>Retorno de Objeto Literal</td>
                                 <td>✅ <strong>Requiere ({ })</strong></td>
-                                <td><code>() =&gt; ({ exito: true })</code></td>
+                                <td><code>() =&gt; ({ ok: true })</code></td>
                                 <td>Retorna objeto intacto</td>
                             </tr>
                         </tbody>
@@ -356,7 +355,7 @@
                     <h2>El Comportamiento de 'this' Contextual (Ámbito Léxico)</h2>
                     <p class="section-desc">
                         Las funciones flecha <strong>no tienen su propio <code>this</code></strong>. En su lugar, capturan y fijan
-                        el <code>this</code> del contexto circundante donde fueron declaradas.
+                        el <code>this</code> del contexto circundante donde fueron declaradas (*lexical scope*).
                     </p>
                 </div>
 
@@ -434,7 +433,7 @@
                     <span class="section-tag">Inmutabilidad Contextual</span>
                     <h2>Comportamiento con call(), apply(), bind() y Modo Estricto</h2>
                     <p class="section-desc">
-                        Las funciones flecha son inmunes a los métodos de alteración de contexto.
+                        Las funciones flecha son inmunes a los métodos de alteración dinámica de contexto.
                         El primer parámetro (el objeto contexto) es <strong>completamente ignorado</strong>:
                     </p>
                 </div>
@@ -525,77 +524,76 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 6: RESTRICCIONES DE OBJETOS & EVENT LISTENERS
+             SLIDE 6: RESTRICCIONES TÉCNICAS
              ============================================== -->
-        <section class="slide" id="slide-6" data-slide="6" data-title="Restricciones de Métodos">
+        <section class="slide" id="slide-6" data-slide="6" data-title="Restricciones Técnicas">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Antipatrones Críticos</span>
-                    <h2>¿Por qué NO deben usarse como Métodos de Objetos?</h2>
+                    <span class="section-tag">Anatomía del Motor V8</span>
+                    <h2>Restricciones Técnicas: Métodos, 'new', 'arguments' y Sintaxis</h2>
                     <p class="section-desc">
-                        Dos trampas frecuentes que provocan errores silenciosos de valor <code>undefined</code>
-                        en producción:
+                        Las funciones flecha son estructuras ultraligeras sin overhead de prototipos. Conoce sus 4 límites técnicos:
                     </p>
                 </div>
 
                 <div class="best-practices-grid">
-                    <!-- Tarjeta 1: Métodos de Objeto Literal -->
+                    <!-- Tarjeta 1: Sin new -->
                     <div class="practice-card bad">
                         <div class="practice-header">
-                            <span class="status-pill pill-bad">❌ ANTIPATRÓN: MÉTODO FLECHA</span>
-                            <h4>Métodos en Objetos Literales</h4>
+                            <span class="status-pill pill-bad">❌ SIN CONSTRUCTOR [[Construct]]</span>
+                            <h4>Prohibido el uso de 'new'</h4>
                         </div>
                         <p>
-                            La función flecha captura el <code>this</code> exterior (ámbito global/módulo),
-                            no el objeto literal en el que está escrita.
+                            Carecen del método interno <code>[[Construct]]</code>. Ejecutar <code>new MiFlecha()</code>
+                            arroja un <code>TypeError: MiFlecha is not a constructor</code>.
                         </p>
                         <div class="code-snippet-tiny">
-                            <code>const obj = { nombre: "Fredy", saludar: () =&gt; this.nombre }; // ❌ undefined</code>
+                            <code>const F = () =&gt; {}; new F(); // ❌ TypeError</code>
                         </div>
                     </div>
 
-                    <!-- Tarjeta 2: Solución con Métodos ES6 -->
-                    <div class="practice-card good">
-                        <div class="practice-header">
-                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: MÉTODO ES6</span>
-                            <h4>Sintaxis Corta de Métodos</h4>
-                        </div>
-                        <p>
-                            La sintaxis abreviada de métodos de ES6 crea una función que enlaza
-                            el <code>this</code> dinámico al objeto que la contiene.
-                        </p>
-                        <div class="code-snippet-tiny">
-                            <code>const obj = { nombre: "Fredy", saludar() { return this.nombre; } }; // ✅ "Fredy"</code>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 3: Event Listeners del DOM -->
+                    <!-- Tarjeta 2: Sin arguments ni prototype -->
                     <div class="practice-card bad">
                         <div class="practice-header">
-                            <span class="status-pill pill-bad">❌ ANTIPATRÓN: THIS EN DOM</span>
-                            <h4>'this' en addEventListener</h4>
+                            <span class="status-pill pill-bad">❌ SIN ARGUMENTS NI PROTOTYPE</span>
+                            <h4>Memoria Ultraligera</h4>
                         </div>
                         <p>
-                            Con una función flecha, <code>this</code> no apunta al botón HTML que recibió el clic,
-                            sino al objeto global <code>window</code>.
+                            No poseen el objeto <code>arguments</code> (usar <code>...args</code>) y su propiedad
+                            <code>.prototype</code> es estrictamente <code>undefined</code>.
                         </p>
                         <div class="code-snippet-tiny">
-                            <code>boton.addEventListener("click", () =&gt; { this.classList.add("ok"); }); // ❌ Error</code>
+                            <code>F.prototype === undefined; // ✅ true</code>
                         </div>
                     </div>
 
-                    <!-- Tarjeta 4: Solución en DOM -->
-                    <div class="practice-card good">
+                    <!-- Tarjeta 3: Métodos de objetos -->
+                    <div class="practice-card bad">
                         <div class="practice-header">
-                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: EVENTO</span>
-                            <h4>Usar e.currentTarget</h4>
+                            <span class="status-pill pill-bad">❌ ANTIPATRÓN EN OBJETOS</span>
+                            <h4>No como Métodos de Objeto</h4>
                         </div>
                         <p>
-                            Si usas función flecha en un listener del DOM, accede al elemento interactivo
-                            mediante <code>evento.currentTarget</code>.
+                            Capturan el <code>this</code> exterior (global), provocando que <code>this.propiedad</code> devuelva <code>undefined</code>.
+                            Usar métodos ES6 <code>metodo() {}</code>.
                         </p>
                         <div class="code-snippet-tiny">
-                            <code>boton.addEventListener("click", (e) =&gt; { e.currentTarget.classList.add("ok"); }); // ✅</code>
+                            <code>obj = { v: 1, get: () =&gt; this.v }; // ❌ undefined</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Saltos de línea y yield -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ RESTRICCIONES DE PARSER</span>
+                            <h4>Saltos de Línea y 'yield'</h4>
+                        </div>
+                        <p>
+                            Prohibido salto de línea antes de <code>=&gt;</code> (SyntaxError). Prohibido el uso de <code>yield</code>
+                            (no pueden ser funciones generadoras).
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>(a, b) \n =&gt; a + b; // ❌ SyntaxError</code>
                         </div>
                     </div>
                 </div>
@@ -603,88 +601,67 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 7: AUSENCIA DE 'new', 'arguments' Y 'prototype'
+             SLIDE 7: RECURSIVIDAD Y CLOSURES
              ============================================== -->
-        <section class="slide" id="slide-7" data-slide="7" data-title="Sin 'new' ni 'arguments'">
+        <section class="slide" id="slide-7" data-slide="7" data-title="Recursividad y Closures">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Anatomía Interna del Motor</span>
-                    <h2>Ausencia del Constructor ('new'), 'arguments' y '.prototype'</h2>
+                    <span class="section-tag">Patrones Avanzados</span>
+                    <h2>Funciones Recursivas y Cláusulas Léxicas (Closures)</h2>
                     <p class="section-desc">
-                        Las funciones flecha se diseñaron para ser componentes ultraligeros en memoria RAM.
-                        Por ello, se eliminaron los mecanismos pesados de herencia prototípica:
+                        Las funciones flecha se integran naturalmente con dos de los patrones más poderosos del lenguaje:
                     </p>
                 </div>
 
                 <div class="two-columns-layout">
-                    <!-- Columna Izquierda: new y prototype -->
+                    <!-- Columna 1: Recursividad -->
                     <div class="concept-column">
                         <div class="info-card">
                             <div class="card-badge-header">
-                                <span class="badge badge-purple">1. Carecen de [[Construct]]</span>
+                                <span class="badge badge-purple">1. Recursividad en Funciones Flecha</span>
                             </div>
                             <p>
-                                En la especificación ECMAScript, las funciones invocables con <code>new</code> deben implementar
-                                el método interno <code>[[Construct]]</code>. Las funciones flecha solo tienen <code>[[Call]]</code>.
+                                Toda función recursiva requiere una <strong>condición base de salida</strong> para evitar desbordamientos
+                                (*Stack Overflow*). Al asignarse a una constante, la flecha puede referenciarse a sí misma con total seguridad:
                             </p>
-                            <p class="highlight-callout">
-                                🚨 <strong>TypeError Inmediato:</strong> Invocar <code>new MiFlecha()</code> detiene el programa
-                                con el error: <code>TypeError: MiFlecha is not a constructor</code>.
-                            </p>
-                        </div>
-
-                        <div class="info-card" style="margin-top: 1rem;">
-                            <div class="card-badge-header">
-                                <span class="badge badge-cyan">2. Propiedad .prototype es undefined</span>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-rec"><span class="c-keyword">const</span> <span class="c-variable">factorial</span> = <span class="c-prop">n</span> =&gt; {
+    <span class="c-keyword">if</span> (<span class="c-prop">n</span> &lt;= <span class="c-number">1</span>) <span class="c-keyword">return</span> <span class="c-number">1</span>; <span class="c-comment">// Condición base</span>
+    <span class="c-keyword">return</span> <span class="c-prop">n</span> * <span class="c-variable">factorial</span>(<span class="c-prop">n</span> - <span class="c-number">1</span>);
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestRecursion">
+                                    ▶ Calcular Factorial(5) en Vivo
+                                </button>
+                                <div class="mutation-result-box" id="recursionResult">
+                                    Haz clic para ejecutar la recursión...
+                                </div>
                             </div>
-                            <p>
-                                Al no poder instanciarse ni crear cadenas de prototipos, su propiedad <code>.prototype</code>
-                                no apunta a ningún objeto: es estrictamente <code>undefined</code>.
-                            </p>
                         </div>
                     </div>
 
-                    <!-- Columna Derecha: arguments vs Rest -->
+                    <!-- Columna 2: Closures -->
                     <div class="code-column">
                         <div class="info-card">
                             <div class="card-badge-header">
-                                <span class="badge badge-emerald">3. Sin 'arguments' ➔ Usar Rest (...args)</span>
+                                <span class="badge badge-emerald">2. Cláusulas o Cierres (Closures)</span>
                             </div>
                             <p>
-                                Las funciones flecha no poseen la variable local <code>arguments</code>.
-                                La solución moderna y estándar de ES6 es el <strong>parámetro Rest (<code>...args</code>)</strong>,
-                                que entrega un <strong>Array real</strong> con todos los métodos funcionales (.map, .reduce, etc.):
+                                Un <strong>closure</strong> le permite a una función flecha interna <strong>recordar y acceder a las variables privadas
+                                de su entorno externo</strong>, incluso después de que la función padre haya retornado:
                             </p>
-                        </div>
-
-                        <div class="code-panel" style="margin-top: 1rem;">
-                            <div class="code-panel-header">
-                                <div class="terminal-dots">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
-                                </div>
-                                <span class="file-name">prueba_constructor_rest.js</span>
-                            </div>
-                            <pre class="code-block"><code id="code-sample-rest"><span class="c-comment">// Prueba de 'new' en Arrow Function:</span>
-<span class="c-keyword">const</span> <span class="c-variable">Persona</span> = (<span class="c-prop">nombre</span>) =&gt; { <span class="c-keyword">this</span>.<span class="c-prop">nombre</span> = <span class="c-prop">nombre</span>; };
-
-<span class="c-keyword">try</span> {
-    <span class="c-keyword">const</span> <span class="c-variable">p</span> = <span class="c-keyword">new</span> <span class="c-variable">Persona</span>(<span class="c-string">"Ana"</span>);
-} <span class="c-keyword">catch</span> (<span class="c-variable">err</span>) {
-    <span class="c-keyword">console</span>.<span class="c-func">error</span>(<span class="c-variable">err</span>.<span class="c-prop">name</span> + <span class="c-string">": "</span> + <span class="c-variable">err</span>.<span class="c-prop">message</span>);
-}</code></pre>
-
-                            <div class="interactive-test-bar">
-                                <button class="btn-run-action" id="btnTestNewArrow">
-                                    ▶ Ejecutar Prueba de 'new' en Vivo
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-closure"><span class="c-keyword">const</span> <span class="c-variable">crearContador</span> = () =&gt; {
+    <span class="c-keyword">let</span> <span class="c-variable">cuentaPrivada</span> = <span class="c-number">0</span>;
+    <span class="c-keyword">return</span> {
+        <span class="c-func">incrementar</span>: () =&gt; ++<span class="c-variable">cuentaPrivada</span>,
+        <span class="c-func">obtener</span>: () =&gt; <span class="c-variable">cuentaPrivada</span>
+    };
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestClosure">
+                                    ▶ Probar Estado Privado del Closure
                                 </button>
-                                <span class="run-status" id="testNewArrowStatus">Listo</span>
-                            </div>
-
-                            <div class="mini-console" id="console-output-new">
-                                <div class="console-prompt">
-                                    &gt; Presiona el botón para comprobar el TypeError de [[Construct]]...
+                                <div class="mutation-result-box" id="closureResult">
+                                    Haz clic para probar el contador protegido...
                                 </div>
                             </div>
                         </div>
@@ -694,75 +671,135 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 8: RESTRICCIONES SINTÁCTICAS & ANALOGÍA
+             SLIDE 8: PARÁMETROS MODERNOS: DEFAULT, REST & DESTRUCTURING
              ============================================== -->
-        <section class="slide" id="slide-8" data-slide="8" data-title="Sintaxis y Analogía 🪞">
+        <section class="slide" id="slide-8" data-slide="8" data-title="Default, Rest y Desestructuración">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Gramática del Lenguaje & Metáfora Visual</span>
-                    <h2>Restricciones Sintácticas y la Analogía del Espejo 🪞</h2>
+                    <span class="section-tag">Sintaxis Moderna ES6+</span>
+                    <h2>Parámetros por Defecto, Parámetro Rest y Desestructuración</h2>
                     <p class="section-desc">
-                        Detalles específicos que el parser de JavaScript exige y la metáfora definitiva
-                        para dominar el contexto <code>this</code>:
+                        Herramientas modernas para firmas de funciones limpias, seguras y altamente legibles:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Card 1: Default Params -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ PARÁMETROS POR DEFECTO</span>
+                            <h4>Valores de Respaldo Limpios</h4>
+                        </div>
+                        <p>
+                            Supera las antiguas validaciones con <code>||</code> o <code>typeof</code>. Se inicializan directamente en la firma:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const server = (p = 8080, t = 5000) =&gt; ...</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Rest Params -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ PARÁMETRO REST (...args)</span>
+                            <h4>Array Real en Lugar de arguments</h4>
+                        </div>
+                        <p>
+                            Captura argumentos infinitos en un Array legítimo con acceso a <code>.reduce()</code>, <code>.map()</code>, etc.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const sum = (...n) =&gt; n.reduce((a, b) =&gt; a + b);</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Desestructuración Objetos -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ DESESTRUCTURACIÓN DE OBJETOS</span>
+                            <h4>Extracción por Nombre de Llave</h4>
+                        </div>
+                        <p>
+                            Extrae propiedades individuales con renombramiento y valores por defecto sin importar el orden:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const { tema, idioma = "es" } = config;</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Desestructuración en Firma -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ EN FIRMAS DE FUNCIONES</span>
+                            <h4>Funciones Desestructuradoras</h4>
+                        </div>
+                        <p>
+                            Desempaqueta el objeto entrante directamente en los parámetros de la función flecha:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const enviar = ({ nombre, precio }) =&gt; ...</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de Desestructuración en Firma -->
+                <div class="identity-checker" style="margin-top: 1.5rem;">
+                    <div class="identity-expr">
+                        <code>const procesar = ({ id, nombre, precio = 0 }) =&gt; `Item #${id}: ${nombre} ($${precio})`;</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnTestDestructuringParam">
+                        🔍 Probar Función Desestructuradora en Vivo
+                    </button>
+                    <div class="identity-result" id="destructuringParamResult">
+                        Haz clic para ejecutar el desempaquetado de propiedades en vivo...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: LAS 2 ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Analogías: Espejo y Archivador">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🪞 🗂️</span>
+                    <h2>Las Dos Grandes Analogías del Mundo Real</h2>
+                    <p class="section-desc">
+                        Dos modelos mentales intuitivos para dominar el contexto <code>this</code> y la desestructuración de parámetros:
                     </p>
                 </div>
 
                 <div class="toolbox-interactive-wrapper">
-                    <!-- Restricciones de Sintaxis -->
-                    <div class="best-practices-grid" style="margin-bottom: 2rem;">
-                        <div class="practice-card bad">
-                            <div class="practice-header">
-                                <span class="status-pill pill-bad">❌ SYNTAXERROR: SALTO ANTES DE =&gt;</span>
-                                <h4>Salto de Línea Prohibido</h4>
-                            </div>
-                            <p>No puede existir un salto de línea entre los parámetros y el token <code>=&gt;</code>.</p>
-                            <div class="code-snippet-tiny">
-                                <code>const fn = (a, b) <br>=&gt; a + b; // ❌ SyntaxError</code>
-                            </div>
-                        </div>
-
-                        <div class="practice-card bad">
-                            <div class="practice-header">
-                                <span class="status-pill pill-bad">❌ SYNTAXERROR: SIN YIELD</span>
-                                <h4>Prohibido 'yield'</h4>
-                            </div>
-                            <p>No pueden contener <code>yield</code> en su cuerpo. No existen funciones flecha generadoras.</p>
-                            <div class="code-snippet-tiny">
-                                <code>const fn = () =&gt; { yield 1; }; // ❌ SyntaxError</code>
-                            </div>
-                        </div>
-                    </div>
-
                     <!-- Selector de Metáfora -->
                     <div class="tool-picker">
-                        <span class="picker-label">Elige una perspectiva de iluminación para comparar el contexto 'this':</span>
+                        <span class="picker-label">Elige la analogía que deseas explorar:</span>
                         <div class="tools-btn-row">
-                            <button class="tool-btn active" data-analogy="flash">
-                                <span class="tool-icon">📷</span>
-                                <span class="tool-name">Función Tradicional (Cámara con Flash)</span>
-                            </button>
-                            <button class="tool-btn" data-analogy="mirror">
+                            <button class="tool-btn active" data-analogy="mirror">
                                 <span class="tool-icon">🪞</span>
-                                <span class="tool-name">Función Flecha (Espejo Plano Empotrado)</span>
+                                <span class="tool-name">1. El Espejo Reflectante ('this' Léxico)</span>
+                            </button>
+                            <button class="tool-btn" data-analogy="robot">
+                                <span class="tool-icon">🗂️</span>
+                                <span class="tool-name">2. El Archivador Automatizado (Desestructuración)</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Dos Entornos Frente a Frente -->
                     <div class="family-workshops">
-                        <!-- 1. Tradicional -->
-                        <div class="workshop-card" id="env-trad">
-                            <div class="ws-avatar">📷</div>
+                        <!-- Lado A -->
+                        <div class="workshop-card" id="analogCardLeft">
+                            <div class="ws-avatar" id="analogAvatarLeft">📷</div>
                             <div class="ws-header">
-                                <h3>Cámara con Flash Propio</h3>
-                                <span class="ws-sub">Genera su propia luz (this dinámico)</span>
+                                <h3 id="analogTitleLeft">Cámara con Flash Propio</h3>
+                                <span class="ws-sub" id="analogSubLeft">Función Tradicional (this dinámico)</span>
                             </div>
-                            <div class="ws-items" id="items-trad">
-                                <div class="ws-item">Al disparar, altera la iluminación de la sala</div>
-                                <div class="ws-item">Depende de cómo se apunte en ese instante</div>
+                            <div class="ws-items" id="analogItemsLeft">
+                                <div class="ws-item">Al disparar, genera su propia luz contextual</div>
+                                <div class="ws-item">Altera la iluminación del cuarto según cómo se llame</div>
                             </div>
-                            <div class="ws-status" id="status-trad-desc">
-                                'this' cambia según la llamada del momento
+                            <div class="ws-status" id="analogStatusLeft">
+                                'this' cambia dinámicamente según la llamada
                             </div>
                         </div>
 
@@ -771,19 +808,19 @@
                             <div class="arrow-beam">➔</div>
                         </div>
 
-                        <!-- 2. Flecha -->
-                        <div class="workshop-card" id="env-arrow">
-                            <div class="ws-avatar">🪞</div>
+                        <!-- Lado B -->
+                        <div class="workshop-card" id="analogCardRight">
+                            <div class="ws-avatar" id="analogAvatarRight">🪞</div>
                             <div class="ws-header">
-                                <h3>Espejo Plano Empotrado</h3>
-                                <span class="ws-sub">Refleja la luz del entorno (this léxico)</span>
+                                <h3 id="analogTitleRight">Espejo Plano Empotrado</h3>
+                                <span class="ws-sub" id="analogSubRight">Función Flecha (this léxico)</span>
                             </div>
-                            <div class="ws-items" id="items-arrow">
+                            <div class="ws-items" id="analogItemsRight">
                                 <div class="ws-item highlight-item">No tiene luz propia ni la crea</div>
-                                <div class="ws-item highlight-item">Refleja con fidelidad lo que ya había en la sala</div>
+                                <div class="ws-item highlight-item">Refleja la iluminación del cuarto donde fue instalado</div>
                             </div>
-                            <div class="ws-status" id="status-arrow-desc">
-                                'this' es inmutable e idéntico al del padre
+                            <div class="ws-status" id="analogStatusRight">
+                                'this' es inmutable y hereda el del padre
                             </div>
                         </div>
                     </div>
@@ -792,7 +829,7 @@
                     <div class="toolbox-result-banner" id="analogyBanner">
                         <span class="banner-icon" id="analogyBannerIcon">💡</span>
                         <span class="banner-text" id="analogyBannerText">
-                            La función flecha nunca altera el contexto: refleja el 'this' que ya existía donde fue declarada.
+                            La función flecha nunca altera el contexto: refleja fielmente el 'this' que ya existía donde fue creada.
                         </span>
                     </div>
                 </div>
@@ -800,16 +837,16 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             SLIDE 10: PLAYGROUND / CONSOLA EN VIVO
              ============================================== -->
-        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio en Vivo">
+        <section class="slide" id="slide-10" data-slide="10" data-title="Laboratorio en Vivo">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="section-tag">Playground & Sandbox</span>
                     <h2>Laboratorio de Código: Prueba las Funciones Flecha</h2>
                     <p class="section-desc">
-                        Experimenta con código real en vivo. Carga ejemplos predefinidos o escribe tus propias funciones
-                        para analizar el comportamiento de retorno implícito, <code>this</code> léxico y captura de excepciones.
+                        Experimenta con fragmentos de código interactivos. Carga ejemplos predefinidos de closures,
+                        recursión, desestructuración y contexto, o escribe tus propias funciones:
                     </p>
                 </div>
 
@@ -830,13 +867,19 @@
                                         3. Ámbito léxico de 'this' en un temporizador
                                     </option>
                                     <option value="preset-arrow-4">
-                                        4. Ignorando contexto con call() y apply()
+                                        4. Recursividad con Arrow Functions (Factorial)
                                     </option>
                                     <option value="preset-arrow-5">
-                                        5. Fallo con 'new' y ausencia de [[Construct]]
+                                        5. Closures y Variables Privadas
                                     </option>
                                     <option value="preset-arrow-6">
-                                        6. Parámetro Rest (...args) vs arguments
+                                        6. Parámetros Rest (...args) vs arguments
+                                    </option>
+                                    <option value="preset-arrow-7">
+                                        7. Desestructuración en Parámetros de Funciones
+                                    </option>
+                                    <option value="preset-arrow-8">
+                                        8. Fallo con 'new' y ausencia de [[Construct]]
                                     </option>
                                 </select>
                             </div>
@@ -880,20 +923,19 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             SLIDE 11: RESUMEN, RETOS Y CONCLUSIONES
              ============================================== -->
-        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen & Retos">
+        <section class="slide" id="slide-11" data-slide="11" data-title="Resumen & Retos">
             <div class="slide-content summary-slide">
                 <div class="slide-header">
-                    <span class="section-tag">Cheat Sheet & Retos</span>
-                    <h2>Resumen Maestro y Retos de Evaluación</h2>
+                    <span class="section-tag">Cheat Sheet & Retos Integradores</span>
+                    <h2>Resumen Maestro y los 3 Retos Integradores</h2>
                     <p class="section-desc">
-                        Pon a prueba tus conocimientos con los 3 retos del curso extraídos de la guía oficial
-                        y llévate la chuleta rápida para producción:
+                        Pon a prueba tus conocimientos con los 3 ejercicios integradores de la guía oficial:
                     </p>
                 </div>
 
-                <!-- 3 Retos del Temario -->
+                <!-- 3 Retos del Temario Actualizado -->
                 <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
                     <!-- Reto 1 -->
                     <div class="exercise-card">
@@ -902,8 +944,8 @@
                             <h3>calcularAreaCirculo en una línea</h3>
                         </div>
                         <p class="ex-desc">
-                            Transforma una función tradicional de área en una función flecha moderna en una sola línea,
-                            aprovechando el retorno implícito y eliminando paréntesis innecesarios.
+                            Optimiza la función tradicional pasándola a una estructura flecha moderna con retorno implícito en una sola línea,
+                            eliminando paréntesis redundantes.
                         </p>
                         <div class="ex-footer">
                             <button class="btn-ex-action" data-load-preset="preset-ex-arrow1">
@@ -925,11 +967,11 @@ console.log("Área radio 5:", calcularAreaCirculo(5));</code></pre>
                     <div class="exercise-card">
                         <div class="ex-header">
                             <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
-                            <h3>Objeto Tienda y 'this' Léxico en Array.map</h3>
+                            <h3>crearCarrito con Closure & Desestructuración</h3>
                         </div>
                         <p class="ex-desc">
-                            Crea un objeto con <code>precioBase = 100</code> y un método que mapee descuentos
-                            <code>[0.10, 0.20, 0.30]</code> usando una función flecha interna que acceda a <code>this.precioBase</code>.
+                            Crea <code>crearCarrito</code> que resguarde un array privado <code>const lista = []</code>.
+                            Retorna <code>agregarProducto({ nombre, precio })</code> desestructurando en la firma y <code>obtenerTotal()</code> sumando con reduce.
                         </p>
                         <div class="ex-footer">
                             <button class="btn-ex-action" data-load-preset="preset-ex-arrow2">
@@ -940,27 +982,28 @@ console.log("Área radio 5:", calcularAreaCirculo(5));</code></pre>
                             </button>
                         </div>
                         <div class="ex-solution-box" id="sol-arrow-2">
-                            <pre><code>const tienda = {
-    precioBase: 100,
-    descuentos: [0.10, 0.20, 0.30],
-    aplicarDescuento() {
-        // La función flecha hereda 'this' de aplicarDescuento:
-        return this.descuentos.map(d =&gt; this.precioBase * (1 - d));
-    }
+                            <pre><code>const crearCarrito = () =&gt; {
+    const lista = []; // Array privado por closure
+    return {
+        agregarProducto: ({ nombre, precio }) =&gt; lista.push({ nombre, precio }),
+        obtenerTotal: () =&gt; lista.reduce((tot, p) =&gt; tot + p.precio, 0)
+    };
 };
-console.log("Precios finales:", tienda.aplicarDescuento());</code></pre>
+const carrito = crearCarrito();
+carrito.agregarProducto({ nombre: "Laptop", precio: 1200 });
+console.log("Total:", carrito.obtenerTotal());</code></pre>
                         </div>
                     </div>
 
                     <!-- Reto 3 -->
                     <div class="exercise-card">
                         <div class="ex-header">
-                            <span class="ex-level badge badge-emerald">Nivel 3 — Master</span>
-                            <h3>Captura de TypeError con 'new'</h3>
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Avanzado</span>
+                            <h3>Forzar .call() e Instanciar con 'new'</h3>
                         </div>
                         <p class="ex-desc">
-                            Intenta instanciar una función flecha con <code>new</code>, captura la excepción con <code>try/catch</code>
-                            e imprime una explicación técnica basada en la falta de <code>[[Construct]]</code>.
+                            Intenta forzar el contexto con <code>.call()</code> e instanciar con <code>new</code> bajo bloques <code>try/catch</code>,
+                            imprimiendo las explicaciones técnicas basadas en la ausencia de <code>[[Construct]]</code>.
                         </p>
                         <div class="ex-footer">
                             <button class="btn-ex-action" data-load-preset="preset-ex-arrow3">
@@ -971,14 +1014,15 @@ console.log("Precios finales:", tienda.aplicarDescuento());</code></pre>
                             </button>
                         </div>
                         <div class="ex-solution-box" id="sol-arrow-3">
-                            <pre><code>const Servicio = (nombre) =&gt; { this.nombre = nombre; };
+                            <pre><code>const Api = (url) =&gt; { this.url = url; };
+// 1. call() ignora el primer parámetro de contexto:
+Api.call({ forzado: true });
 
+// 2. new arroja TypeError por carecer de [[Construct]]:
 try {
-    const s = new Servicio("Autenticador");
-} catch (error) {
-    console.error("Tipo de Error:", error.name);
-    console.error("Mensaje     :", error.message);
-    console.log("Diagnóstico : No tiene [[Construct]] ni .prototype");
+    new Api();
+} catch (e) {
+    console.error("Excepción:", e.name, "-", e.message);
 }</code></pre>
                         </div>
                     </div>
@@ -1001,7 +1045,7 @@ try {
                     <div class="summary-card">
                         <div class="sum-icon">3️⃣</div>
                         <h4>Objetos con ({})</h4>
-                        <p>Para retornar objetos literales en una línea, envuélvelos entre paréntesis.</p>
+                        <p>Para retornar objetos literales en una línea, envuélvelos siempre entre paréntesis.</p>
                     </div>
 
                     <div class="summary-card">
@@ -1012,8 +1056,8 @@ try {
 
                     <div class="summary-card">
                         <div class="sum-icon">5️⃣</div>
-                        <h4>No en Métodos Directos</h4>
-                        <p>Para métodos de objetos literales y listeners de DOM, usa métodos ES6.</p>
+                        <h4>Closures &amp; Desestructuración</h4>
+                        <p>Ideales para fábricas de funciones y desempacado directo en firmas <code>({ prop })</code>.</p>
                     </div>
                 </div>
 
@@ -1052,7 +1096,7 @@ try {
     <div class="modal-overlay" id="overviewModal">
         <div class="modal-window">
             <div class="modal-header">
-                <h3>Índice Rápido de Diapositivas: Funciones Flecha</h3>
+                <h3>Índice Rápido de Diapositivas: Funciones Flecha &amp; Avanzado</h3>
                 <button class="btn-close-modal" id="btnCloseOverview">✕</button>
             </div>
             <div class="modal-grid" id="overviewGrid">
