@@ -1,6 +1,6 @@
 /**
  * ==============================================================================
- * ⚡ JAVASCRIPT MASTER LEVEL: FUNCIONES FLECHA (ARROW FUNCTIONS)
+ * ⚡ JAVASCRIPT MASTER LEVEL: FUNCIONES FLECHA & CONCEPTOS AVANZADOS
  * ==============================================================================
  * Archivo: app.js
  * Propósito: Motor interactivo de la presentación web, simuladores y playground
@@ -16,8 +16,8 @@
 const AppState = {
     // Índice de la diapositiva actualmente visible (inicia en 1: Portada)
     currentSlide: 1,
-    // Cantidad total de diapositivas en la presentación
-    totalSlides: 10,
+    // Cantidad total de diapositivas en la presentación reorganizada (11 diapositivas)
+    totalSlides: 11,
     // Booleano: true para modo diapositivas (slides), false para modo documento continuo
     isPresentationMode: true,
     // Booleano: true si los efectos de sonido sintetizados están activos
@@ -26,8 +26,10 @@ const AppState = {
     audioCtx: null,
     // Caso de prueba actualmente seleccionado en el simulador de 'this' (Slide 4)
     activeThisCase: "callback",
-    // Caso seleccionado en la analogía de iluminación (Slide 8)
-    activeAnalogy: "mirror"
+    // Caso seleccionado en las analogías del mundo real (Slide 9: 'mirror' o 'robot')
+    activeAnalogy: "mirror",
+    // Contador interno para la demostración del closure en vivo (Slide 7)
+    closureCounterInstance: null
 };
 
 // --- MÓDULO DE EFECTOS DE SONIDO SINTETIZADOS (Web Audio API) ---
@@ -112,7 +114,7 @@ class SoundEffects {
 }
 
 
-// --- PRESETS DE CÓDIGO PARA EL PLAYGROUND (SLIDE 9 & RETOS) ---
+// --- PRESETS DE CÓDIGO PARA EL PLAYGROUND (SLIDE 10 & RETOS) ---
 // Diccionario que contiene los códigos interactivos listos para ejecutar en el editor virtual
 const CodePresets = {
     // Preset 1: Retorno implícito vs explícito
@@ -120,10 +122,10 @@ const CodePresets = {
 // 1. RETORNO IMPLÍCITO VS. EXPLÍCITO
 // ==========================================
 
-// Retorno implícito (cuerpo de una sola expresión sin {} ni return):
+// Retorno implícito: una sola expresión sin {} ni return
 const duplicar = x => x * 2;
 
-// Retorno explícito con bloque {} (exige 'return'):
+// Retorno explícito con bloque {} (exige 'return')
 const calcularTotal = (subtotal, tasaIva) => {
     const iva = subtotal * tasaIva;
     return subtotal + iva;
@@ -170,7 +172,7 @@ const contador = {
             console.log(\`[\${this.nombre}] Valor actual: \${this.valor}\`);
         };
 
-        // Simulamos 3 ciclos manuales de ejecución
+        // Simulamos 3 ciclos de ejecución
         incrementar();
         incrementar();
         incrementar();
@@ -179,31 +181,93 @@ const contador = {
 
 contador.iniciar();`,
 
-    // Preset 4: Ignorando contexto con call() y apply()
+    // Preset 4: Recursividad con Arrow Functions (Factorial)
     "preset-arrow-4": `// ==========================================
-// 4. IGNORANDO CONTEXTO EN call() Y apply()
+// 4. RECURSIVIDAD CON ARROW FUNCTIONS
 // ==========================================
 
-const usuarioForzado = {
-    apodo: "Cyborg99"
+// Función flecha recursiva para calcular el factorial:
+const factorial = n => {
+    if (n <= 1) return 1; // Condición base de parada
+    return n * factorial(n - 1); // Llamada recursiva
 };
 
-// Función tradicional: 'this' es alterable con .call()
-function saludarTradicional() {
-    return "Tradicional: " + (this ? this.apodo : "sin contexto");
-}
+console.log("Factorial de 3 :", factorial(3)); // 6
+console.log("Factorial de 5 :", factorial(5)); // 120
+console.log("Factorial de 7 :", factorial(7)); // 5040`,
 
-// Función flecha: el primer argumento de .call() es IGNORADO
-const saludarFlecha = () => {
-    return "Flecha: " + (this ? this.apodo : "ignora contexto forzado");
-};
-
-console.log(saludarTradicional.call(usuarioForzado)); // Imprime apodo
-console.log(saludarFlecha.call(usuarioForzado));       // Ignora usuarioForzado`,
-
-    // Preset 5: Fallo con 'new' y ausencia de [[Construct]]
+    // Preset 5: Closures y Variables Privadas
     "preset-arrow-5": `// ==========================================
-// 5. INTENTO DE USAR 'new' CON ARROW FUNCTION
+// 5. CLOSURES Y ENCAPSULACIÓN PRIVADA
+// ==========================================
+
+const crearCajaFuerte = (claveInicial) => {
+    // Variable privada protegida por el entorno léxico del closure:
+    let claveSecreta = claveInicial;
+    let intentosFallidos = 0;
+
+    return {
+        abrir: (intento) => {
+            if (intento === claveSecreta) {
+                return "🔓 ¡Acceso concedido al cofre!";
+            }
+            intentosFallidos++;
+            return \`🔒 Clave incorrecta. Fallos acumulados: \${intentosFallidos}\`;
+        },
+        cambiarClave: (claveVieja, claveNueva) => {
+            if (claveVieja === claveSecreta) {
+                claveSecreta = claveNueva;
+                return "✅ Clave actualizada con éxito.";
+            }
+            return "❌ No se puede actualizar: clave anterior inválida.";
+        }
+    };
+};
+
+const miCaja = crearCajaFuerte("1234");
+console.log(miCaja.abrir("9999"));
+console.log(miCaja.abrir("1234"));
+console.log(miCaja.cambiarClave("1234", "5678"));
+console.log(miCaja.abrir("5678"));`,
+
+    // Preset 6: Parámetros Rest (...args) vs arguments
+    "preset-arrow-6": `// ==========================================
+// 6. PARÁMETROS REST (...args) VS ARGUMENTS
+// ==========================================
+
+// En funciones flecha, 'arguments' no existe.
+// Usamos Rest (...numeros) para obtener un Array nativo con .reduce():
+const sumarTodo = (multiplicador, ...numeros) => {
+    console.log("¿Es Array legítimo?:", Array.isArray(numeros));
+    const suma = numeros.reduce((acumulado, n) => acumulado + n, 0);
+    return suma * multiplicador;
+};
+
+console.log("Suma con multiplicador x2 (10, 20, 30):", sumarTodo(2, 10, 20, 30));`,
+
+    // Preset 7: Desestructuración en Parámetros de Funciones
+    "preset-arrow-7": `// ==========================================
+// 7. DESESTRUCTURACIÓN EN FIRMAS DE FUNCIONES
+// ==========================================
+
+const pedido = {
+    id: 554,
+    cliente: { nombre: "Carlos", ciudad: "Medellín" },
+    total: 320,
+    descuento: 20
+};
+
+// La función desestructura directamente las propiedades requeridas:
+const procesarRecibo = ({ id, cliente: { nombre, ciudad }, total, descuento = 0 }) => {
+    const totalNeto = total - descuento;
+    return \`Factura #\${id} para \${nombre} (\${ciudad}). Total a pagar: $\${totalNeto}\`;
+};
+
+console.log(procesarRecibo(pedido));`,
+
+    // Preset 8: Fallo con 'new' y ausencia de [[Construct]]
+    "preset-arrow-8": `// ==========================================
+// 8. INTENTO DE USAR 'new' CON ARROW FUNCTION
 // ==========================================
 
 const CreadorAuto = (marca) => {
@@ -213,7 +277,6 @@ const CreadorAuto = (marca) => {
 console.log("¿Tiene .prototype?:", CreadorAuto.prototype); // undefined
 
 try {
-    // Provocamos la excepción técnica:
     const miAuto = new CreadorAuto("Toyota");
 } catch (error) {
     console.error("Tipo de error :", error.name);
@@ -221,55 +284,51 @@ try {
     console.log("💡 Diagnóstico : Las funciones flecha no implementan [[Construct]]");
 }`,
 
-    // Preset 6: Parámetro Rest (...args) vs arguments
-    "preset-arrow-6": `// ==========================================
-// 6. PARÁMETRO REST (...args) VS ARGUMENTS
-// ==========================================
-
-// En una función flecha, 'arguments' no existe.
-// Usamos el operador Rest (...args) para recibir un Array nativo:
-const sumarTodos = (...numeros) => {
-    console.log("¿Es un Array real?:", Array.isArray(numeros));
-    return numeros.reduce((acum, n) => acum + n, 0);
-};
-
-console.log("Suma dinámica (10, 20, 30, 40):", sumarTodos(10, 20, 30, 40));`,
-
-    // Presets de los retos
-    "preset-ex-arrow1": `// RETO 1: calcularAreaCirculo en una sola línea
+    // Presets de los 3 nuevos retos integradores del temario
+    "preset-ex-arrow1": `// RETO 1: calcularAreaCirculo en una sola línea (Junior)
 const calcularAreaCirculo = radio => Math.PI * radio * radio;
 
 console.log("Área para radio 5 :", calcularAreaCirculo(5));
 console.log("Área para radio 10:", calcularAreaCirculo(10));`,
 
-    "preset-ex-arrow2": `// RETO 2: Objeto tienda con this léxico en Array.map
-const tienda = {
-    precioBase: 100,
-    descuentos: [0.10, 0.20, 0.30],
-    
-    aplicarDescuento() {
-        // La función flecha conserva el 'this' de la tienda:
-        return this.descuentos.map(d => ({
-            porcentaje: \`\${d * 100}%\`,
-            precioFinal: this.precioBase * (1 - d)
-        }));
-    }
+    "preset-ex-arrow2": `// RETO 2: crearCarrito con Closure y Desestructuración (Semi Senior)
+const crearCarrito = () => {
+    const lista = []; // Array privado resguardado por el closure
+
+    return {
+        // Desestructuración directa en la firma del método:
+        agregarProducto: ({ nombre, precio }) => {
+            lista.push({ nombre, precio });
+            console.log(\`  + Agregado: \${nombre} ($ \${precio})\`);
+        },
+        // Total acumulado usando reduce funcional:
+        obtenerTotal: () => lista.reduce((acum, prod) => acum + prod.precio, 0),
+        obtenerCantidad: () => lista.length
+    };
 };
 
-console.log("Precios con descuento:", tienda.aplicarDescuento());`,
+const carrito = crearCarrito();
+carrito.agregarProducto({ nombre: "Laptop Gamer", precio: 1500 });
+carrito.agregarProducto({ nombre: "Mouse Pad XL", precio: 30 });
+carrito.agregarProducto({ nombre: "Teclado RGB", precio: 120 });
+console.log("Total final a pagar:", "$" + carrito.obtenerTotal());`,
 
-    "preset-ex-arrow3": `// RETO 3: Instanciación con new y diagnóstico técnico
-const ServicioAuth = (url) => {
+    "preset-ex-arrow3": `// RETO 3: Forzar .call() e Instanciar con new (Avanzado)
+const Servicio = (url) => {
     this.url = url;
 };
 
+// 1. call() procesa argumentos pero descarta el contexto:
+Servicio.call({ contexto: "invalido" }, "https://api.com");
+console.log("Prueba call() completada: contexto ignorado con éxito.");
+
+// 2. new arroja TypeError técnico:
 try {
-    const instancia = new ServicioAuth("https://api.segura.com");
-} catch (err) {
-    console.error("Capturado :", err.name);
-    console.error("Detalle   :", err.message);
-    console.log("Razón técnica: Carece del método interno [[Construct]]");
-    console.log("Propiedad prototype:", ServicioAuth.prototype);
+    const s = new Servicio("https://api.com");
+} catch (error) {
+    console.error("Excepción capturada:", error.name);
+    console.error("Mensaje oficial   :", error.message);
+    console.log("Diagnóstico técnico : Carece de [[Construct]] y prototype");
 }`
 };
 
@@ -341,7 +400,7 @@ class AppController {
             }
         });
 
-        // Actualiza el indicador de texto: "X / 10"
+        // Actualiza el indicador de texto: "X / 11"
         const slideIndicator = document.getElementById("slideIndicator");
         if (slideIndicator) {
             slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`;
@@ -587,7 +646,7 @@ class AppController {
 
         // Botones de salto [data-jump]
         document.querySelectorAll("[data-jump]").forEach(btn => {
-            btn.addEventListener("click", (e) => {
+            btn.addEventListener("click", () => {
                 const target = parseInt(btn.getAttribute("data-jump"), 10);
                 this.goToSlide(target);
             });
@@ -778,24 +837,64 @@ class AppController {
             });
         }
 
-        // Slide 7: Prueba de 'new'
-        const btnTestNewArrow = document.getElementById("btnTestNewArrow");
-        const consoleOutputNew = document.getElementById("console-output-new");
-        if (btnTestNewArrow && consoleOutputNew) {
-            btnTestNewArrow.addEventListener("click", () => {
-                SoundEffects.error();
-                consoleOutputNew.innerHTML = `
-                    <div class="term-line" style="color: var(--cyan);">&gt; const Persona = (nombre) =&gt; { this.nombre = nombre; };</div>
-                    <div class="term-line" style="color: var(--cyan);">&gt; const p = new Persona("Ana");</div>
-                    <div class="term-line" style="color: var(--rose);">❌ TypeError: Persona is not a constructor</div>
-                    <div class="term-line" style="color: var(--amber);">&gt; Persona.prototype ➔ undefined</div>
-                    <div class="term-line" style="color: var(--text-muted);">&gt; Diagnóstico: Las funciones flecha no poseen [[Construct]].</div>
+        // Slide 7: Prueba de Recursividad
+        const btnTestRecursion = document.getElementById("btnTestRecursion");
+        const recursionResult = document.getElementById("recursionResult");
+        if (btnTestRecursion && recursionResult) {
+            btnTestRecursion.addEventListener("click", () => {
+                SoundEffects.success();
+                const factorial = n => (n <= 1 ? 1 : n * factorial(n - 1));
+                const res = factorial(5);
+                recursionResult.innerHTML = `
+                    <code>factorial(5) ➔ 5 * 4 * 3 * 2 * 1 = <strong>${res}</strong></code><br>
+                    <small style="color: var(--emerald);">✔ Ejecutado con éxito mediante función flecha recursiva con condición base n &lt;= 1.</small>
                 `;
-                this.showToast("TypeError capturado como se esperaba", true);
+                this.showToast("Cálculo recursivo completado");
             });
         }
 
-        // Slide 8: Metáfora de Iluminación
+        // Slide 7: Prueba de Closure
+        const btnTestClosure = document.getElementById("btnTestClosure");
+        const closureResult = document.getElementById("closureResult");
+        if (btnTestClosure && closureResult) {
+            btnTestClosure.addEventListener("click", () => {
+                SoundEffects.click();
+                if (!AppState.closureCounterInstance) {
+                    const crearContador = () => {
+                        let cuentaPrivada = 0;
+                        return {
+                            incrementar: () => ++cuentaPrivada,
+                            obtener: () => cuentaPrivada
+                        };
+                    };
+                    AppState.closureCounterInstance = crearContador();
+                }
+                const nuevoValor = AppState.closureCounterInstance.incrementar();
+                closureResult.innerHTML = `
+                    Valor protegido en memoria: <strong>#${nuevoValor}</strong><br>
+                    <small style="color: var(--cyan);">La variable <code>cuentaPrivada</code> no es accesible desde el exterior, solo vive en el closure.</small>
+                `;
+            });
+        }
+
+        // Slide 8: Prueba de Desestructuración en Parámetros
+        const btnTestDestructuringParam = document.getElementById("btnTestDestructuringParam");
+        const destructuringParamResult = document.getElementById("destructuringParamResult");
+        if (btnTestDestructuringParam && destructuringParamResult) {
+            btnTestDestructuringParam.addEventListener("click", () => {
+                SoundEffects.success();
+                const procesar = ({ id, nombre, precio = 0 }) => `Item #${id}: ${nombre} ($${precio} USD)`;
+                const sample = { id: 701, nombre: "Auriculares Noise-Cancelling", precio: 199, extras: "Bluetooth 5.3" };
+                const output = procesar(sample);
+                destructuringParamResult.innerHTML = `
+                    <strong>Entrada:</strong> <code>${JSON.stringify(sample)}</code><br>
+                    <strong>Salida de la función flecha:</strong> <code>"${output}"</code><br>
+                    <small style="color: var(--emerald);">✔ La función extrajo únicamente 'id', 'nombre' y 'precio' directamente en su firma.</small>
+                `;
+            });
+        }
+
+        // Slide 9: Selector de Analogía (Espejo vs Archivador Robotizado)
         const analogyBtns = document.querySelectorAll("[data-analogy]");
         analogyBtns.forEach(btn => {
             btn.addEventListener("click", () => {
@@ -807,7 +906,7 @@ class AppController {
             });
         });
 
-        // Slide 9: Playground select preset
+        // Slide 10: Playground select preset
         const codePresetSelect = document.getElementById("codePresetSelect");
         if (codePresetSelect) {
             codePresetSelect.addEventListener("change", (e) => {
@@ -816,7 +915,7 @@ class AppController {
             });
         }
 
-        // Slide 9: Botón restaurar preset
+        // Slide 10: Botón restaurar preset
         const btnResetCode = document.getElementById("btnResetCode");
         if (btnResetCode) {
             btnResetCode.addEventListener("click", () => {
@@ -827,7 +926,7 @@ class AppController {
             });
         }
 
-        // Slide 9: Botón ejecutar código
+        // Slide 10: Botón ejecutar código
         const btnRunEditorCode = document.getElementById("btnRunEditorCode");
         if (btnRunEditorCode) {
             btnRunEditorCode.addEventListener("click", () => {
@@ -835,7 +934,7 @@ class AppController {
             });
         }
 
-        // Slide 9: Botón limpiar consola
+        // Slide 10: Botón limpiar consola
         const btnClearConsole = document.getElementById("btnClearConsole");
         const logsContainer = document.getElementById("consoleLogsContainer");
         if (btnClearConsole && logsContainer) {
@@ -845,18 +944,18 @@ class AppController {
             });
         }
 
-        // Slide 10: Botones "Cargar en Playground" de los retos
+        // Slide 11: Botones "Cargar en Playground" de los retos
         document.querySelectorAll("[data-load-preset]").forEach(btn => {
             btn.addEventListener("click", () => {
                 const presetKey = btn.getAttribute("data-load-preset");
                 SoundEffects.transition();
                 this.loadPlaygroundPreset(presetKey);
-                this.goToSlide(9); // Salta al playground
+                this.goToSlide(10); // Salta al playground
                 this.showToast("Reto cargado en el Playground");
             });
         });
 
-        // Slide 10: Botones "Ver Solución"
+        // Slide 11: Botones "Ver Solución"
         document.querySelectorAll("[data-sol]").forEach(btn => {
             btn.addEventListener("click", () => {
                 const solId = btn.getAttribute("data-sol");
@@ -869,7 +968,7 @@ class AppController {
             });
         });
 
-        // Slide 10: Reiniciar presentación
+        // Slide 11: Reiniciar presentación
         const btnRestart = document.getElementById("btnRestartPresentation");
         if (btnRestart) {
             btnRestart.addEventListener("click", () => {
@@ -878,32 +977,36 @@ class AppController {
             });
         }
 
-        // Slide 10: Copiar chuleta rápida en markdown
+        // Slide 11: Copiar chuleta rápida en markdown
         const btnCopySummaryCheat = document.getElementById("btnCopySummaryCheat");
         if (btnCopySummaryCheat) {
             btnCopySummaryCheat.addEventListener("click", () => {
-                const cheatText = `# CHULETA RÁPIDA: FUNCIONES FLECHA (ARROW FUNCTIONS) - JAVASCRIPT ES6
+                const cheatText = `# GUÍA MAESTRA: FUNCIONES FLECHA & CONCEPTOS AVANZADOS (ES6+)
 
-1. **Sintaxis y Retorno Implícito:**
-   const fn = x => x * 2; // Sin llaves ni return si es una sola expresión
+1. **Sintaxis Compacta & Retorno Implícito:**
+   const duplicar = x => x * 2; // Sin llaves ni return si es una sola expresión
 
 2. **Reglas de Parámetros:**
    - 0 params: () => ...
    - 1 param : x => ...
    - 2+ params: (a, b) => ...
+   - Objeto literal: () => ({ clave: valor })
 
-3. **Retorno de Objetos Literales:**
-   const crear = (id, nom) => ({ id, nom }); // Siempre envolver en ({ })
+3. **'this' Léxico (El Espejo Reflectante 🪞):**
+   No tienen 'this' propio. Capturan inmutablemente el del ámbito donde nacieron.
+   Los métodos .call(), .apply() y .bind() descartan el argumento de contexto.
 
-4. **'this' Léxico:**
-   No tienen su propio 'this'. Capturan el 'this' del ámbito donde fueron declaradas.
-   Inmunes a .call(), .apply() y .bind() para cambiar el contexto.
-
-5. **Restricciones Técnicas:**
-   - No usar como constructores (sin 'new', sin [[Construct]]).
+4. **Restricciones Técnicas:**
+   - Sin 'new' ni [[Construct]] (arroja TypeError).
    - .prototype es undefined.
-   - Sin objeto 'arguments' (usar parámetro Rest ...args).
-   - No usarlas como métodos directos de objetos ni en event listeners si se necesita 'this'.
+   - Sin 'arguments' (usar Rest: ...args).
+   - Prohibido saltos de línea antes de '=>' y prohibido 'yield'.
+
+5. **Patrones Modernos:**
+   - Recursividad: factorial = n => (n <= 1 ? 1 : n * factorial(n - 1));
+   - Closures: factorías y variables privadas protegidas en el entorno léxico.
+   - Parámetros por Defecto: (puerto = 8080, timeout = 5000) => ...
+   - Desestructuración en Firma: ({ nombre, precio }) => ...
 `;
                 navigator.clipboard.writeText(cheatText).then(() => {
                     SoundEffects.success();
@@ -975,20 +1078,69 @@ class AppController {
         }
     }
 
-    // Actualiza la visualización de la analogía en el Slide 8
+    // Actualiza la visualización de las analogías en el Slide 9
     static updateAnalogyView(analogyType) {
+        const titleLeft = document.getElementById("analogTitleLeft");
+        const subLeft = document.getElementById("analogSubLeft");
+        const avatarLeft = document.getElementById("analogAvatarLeft");
+        const itemsLeft = document.getElementById("analogItemsLeft");
+        const statusLeft = document.getElementById("analogStatusLeft");
+
+        const titleRight = document.getElementById("analogTitleRight");
+        const subRight = document.getElementById("analogSubRight");
+        const avatarRight = document.getElementById("analogAvatarRight");
+        const itemsRight = document.getElementById("analogItemsRight");
+        const statusRight = document.getElementById("analogStatusRight");
+
         const bannerText = document.getElementById("analogyBannerText");
         const bannerIcon = document.getElementById("analogyBannerIcon");
 
-        if (analogyType === "flash") {
-            if (bannerIcon) bannerIcon.textContent = "📷";
-            if (bannerText) {
-                bannerText.innerHTML = "<strong>Cámara con Flash (Función Tradicional):</strong> Genera su propia luz contextual. Cada vez que dispara, altera la iluminación del cuarto según cómo se configure.";
-            }
-        } else {
+        if (analogyType === "mirror") {
+            if (avatarLeft) avatarLeft.textContent = "📷";
+            if (titleLeft) titleLeft.textContent = "Cámara con Flash Propio";
+            if (subLeft) subLeft.textContent = "Función Tradicional (this dinámico)";
+            if (itemsLeft) itemsLeft.innerHTML = `
+                <div class="ws-item">Al disparar, genera su propia luz contextual</div>
+                <div class="ws-item">Altera la iluminación del cuarto según cómo se llame</div>
+            `;
+            if (statusLeft) statusLeft.textContent = "'this' cambia dinámicamente según la llamada";
+
+            if (avatarRight) avatarRight.textContent = "🪞";
+            if (titleRight) titleRight.textContent = "Espejo Plano Empotrado";
+            if (subRight) subRight.textContent = "Función Flecha (this léxico)";
+            if (itemsRight) itemsRight.innerHTML = `
+                <div class="ws-item highlight-item">No tiene luz propia ni la crea</div>
+                <div class="ws-item highlight-item">Refleja la iluminación del cuarto donde fue instalado</div>
+            `;
+            if (statusRight) statusRight.textContent = "'this' es inmutable y hereda el del padre";
+
             if (bannerIcon) bannerIcon.textContent = "🪞";
             if (bannerText) {
-                bannerText.innerHTML = "<strong>Espejo Plano (Función Flecha):</strong> No tiene luz propia. Refleja fielmente la luz del entorno donde fue empotrado (ámbito léxico). El contexto es constante e inmutable.";
+                bannerText.innerHTML = "<strong>El Espejo Reflectante:</strong> La función flecha nunca altera el contexto: refleja fielmente el 'this' que ya existía donde fue creada.";
+            }
+        } else {
+            // Analogía 2: Archivador automatizado (Desestructuración)
+            if (avatarLeft) avatarLeft.textContent = "📦";
+            if (titleLeft) titleLeft.textContent = "Caja Llena de Carpetas";
+            if (subLeft) subLeft.textContent = "Sin Desestructuración (Extracción Manual)";
+            if (itemsLeft) itemsLeft.innerHTML = `
+                <div class="ws-item">Recibes un objeto entero y pesado</div>
+                <div class="ws-item">Tienes que sacar cada propiedad línea por línea: const t = obj.t;</div>
+            `;
+            if (statusLeft) statusLeft.textContent = "Verbosidad y código repetitivo innecesario";
+
+            if (avatarRight) avatarRight.textContent = "🤖";
+            if (titleRight) titleRight.textContent = "Archivador Robotizado";
+            if (subRight) subRight.textContent = "Con Desestructuración ({ nombre, precio })";
+            if (itemsRight) itemsRight.innerHTML = `
+                <div class="ws-item highlight-item">Entrega directamente en mano los datos exactos</div>
+                <div class="ws-item highlight-item">Desecha el envoltorio del objeto al instante</div>
+            `;
+            if (statusRight) statusRight.textContent = "Código conciso, limpio y autodocumentado";
+
+            if (bannerIcon) bannerIcon.textContent = "🗂️";
+            if (bannerText) {
+                bannerText.innerHTML = "<strong>El Archivador Automatizado:</strong> La función desestructuradora recibe el objeto y te entrega exactamente las propiedades necesarias en su firma.";
             }
         }
     }

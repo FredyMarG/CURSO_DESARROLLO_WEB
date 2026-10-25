@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre el Operador Ternario (? :) en JavaScript - JavaScript Master Level." />
+    <title>El Operador Ternario (? :) en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">⚡</span>
+                <span class="title-text">El Operador Ternario (? :)</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Operador Ternario">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Operador de 3 Operandos</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Inmutabilidad con 'const'</span>
+                </div>
+
+                <h1 class="hero-title">
+                    El Operador Ternario
+                    <span class="gradient-text">(? :)</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Descubre el único operador de tres operandos del lenguaje: aprende cómo transformar
+                    bloques extensos de <code>if...else</code> en <strong>expresiones inmutables de una sola línea</strong>,
+                    domina la inyección dinámica en <strong>Template Literals</strong> y previene los antipatrones de anidamiento.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">⚡</div>
+                        <h3>Es una Expresión</h3>
+                        <p>Produce un valor de retorno directo asignable a variables.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🔒</div>
+                        <h3>Inmutabilidad 'const'</h3>
+                        <p>Elimina el uso forzado de variables mutables 'let'.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">💡</div>
+                        <h3>El Interruptor 💡</h3>
+                        <p>Analogía visual binaria: prendido o apagado sin estados flotantes.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="6">
+                        <div class="mini-card-icon">🚫</div>
+                        <h3>Cero Anidamiento</h3>
+                        <p>Buenas prácticas profesionales y alternativas con Object Lookup.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: EXPRESIÓN VS. DECLARACIÓN
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Expresión vs Declaración">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es el Operador Ternario? Expresión vs. Declaración</h2>
+                    <p class="section-desc">
+                        A diferencia de la instrucción <code>if...else</code> tradicional (que es una declaración),
+                        el operador ternario es una <strong>expresión evaluable</strong> que devuelve un valor inmediato:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Diferencia Fundamental</span>
+                            </div>
+                            <p>
+                                <strong>Declaración (Statement):</strong> Ejecuta una acción de control de flujo pero no
+                                produce un valor por sí misma. No puedes hacer: <code>const x = if(cond) { 1 };</code> (SyntaxError).
+                            </p>
+                            <p>
+                                <strong>Expresión (Expression):</strong> Se reduce a un valor concreto. Por ello,
+                                puedes asignarlo a una constante, pasarlo a funciones o meterlo en plantillas de texto.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>El Único Ternario:</strong> Recibe 3 operandos separados por los símbolos
+                                <code>?</code> (interrogación) y <code>:</code> (dos puntos).
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Declaración (if...else)</h4>
+                                <ul>
+                                    <li>No devuelve ningún valor de retorno directo.</li>
+                                    <li>Requiere múltiples líneas y llaves <code>{}</code>.</li>
+                                    <li>Exige declarar variables con <code>let</code> mutable.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Expresión Ternaria (? :)</h4>
+                                <ul>
+                                    <li>Devuelve el valor evaluado inmediatamente.</li>
+                                    <li>Sintaxis compacta en una sola línea.</li>
+                                    <li>Permite declarar variables con <code>const</code> inmutable.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">expresion_vs_declaracion.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-keyword">const</span> <span class="c-variable">edad</span> = <span class="c-number">20</span>;
+
+<span class="c-comment">// El ternario produce el valor "Adulto" y lo asigna a 'estado':</span>
+<span class="c-keyword">const</span> <span class="c-variable">estado</span> = <span class="c-variable">edad</span> &gt;= <span class="c-number">18</span> ? <span class="c-string">"Adulto"</span> : <span class="c-string">"Menor de edad"</span>;
+
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Resultado evaluado:"</span>, <span class="c-variable">estado</span>);</code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestTernaryIntro">
+                                    ▶ Probar Expresión en Vivo
+                                </button>
+                                <span class="run-status" id="testTernaryIntroStatus">Listo para ejecutar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Probar Expresión en Vivo" para ver la respuesta del motor JS...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: ANATOMÍA DE LOS 3 OPERANDOS
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Anatomía y Operandos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Anatomía de los 3 Operandos y Evaluación Truthy / Falsy</h2>
+                    <p class="section-desc">
+                        Aprende la función exacta de cada una de las 3 partes y cómo JavaScript evalúa condiciones booleanas o implícitas:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Estructura -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Sintaxis</span>
+                            <h3>Desglose de Operandos</h3>
+                            <span class="comp-subtitle">condicion ? exp1 : exp2</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. Condición:</strong> La pregunta lógica a evaluar (truthy o falsy).</li>
+                                <li><strong>2. Signo '?':</strong> "¿Es verdadera la condición?".</li>
+                                <li><strong>3. Expresión si es True:</strong> El valor que se devuelve si se cumple.</li>
+                                <li><strong>4. Dos Puntos ':':</strong> "De lo contrario...".</li>
+                                <li><strong>5. Expresión si es False:</strong> El valor que se devuelve si no se cumple.</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">🔍</span>
+                                <div class="vis-text">
+                                    <strong>Evaluación Cortocircuitada:</strong>
+                                    <small>Solo se evalúa una de las dos expresiones (la que coincida con el resultado de la condición).</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Coerción</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Truthy / Falsy</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Truthy vs Falsy -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Coerción Booleana</span>
+                            <h3>Valores Falsy en JS</h3>
+                            <span class="comp-subtitle">false, 0, "", null, undefined, NaN</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Cualquier valor distinto de los 6 Falsy históricos se evalúa automáticamente como <code>true</code> (Truthy),
+                                incluyendo cadenas con texto, números distintos de cero, arrays <code>[]</code> y objetos <code>{}</code>.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">💡</span>
+                                <div class="vis-text">
+                                    <strong>Ejemplo práctico:</strong>
+                                    <small><code>nombre ? nombre : "Invitado"</code> usa coerción natural de strings.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo Truthy / Falsy -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>const resultado = valor ? "Es Truthy ✅" : "Es Falsy ❌";</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckTruthy">
+                        🔍 Probar Valores Truthy / Falsy en Vivo
+                    </button>
+                    <div class="identity-result" id="truthyResult">
+                        Haz clic para evaluar diferentes tipos de datos (0, "", [], null, etc.) frente al operador ternario...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Valor de Entrada</th>
+                                <th>Evaluación Booleana</th>
+                                <th>Operación Ternaria</th>
+                                <th>Resultado Devuelto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>0</code> (cero numérico)</td>
+                                <td>❌ Falsy</td>
+                                <td><code>0 ? "Sí" : "No"</code></td>
+                                <td><code>"No"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>""</code> (string vacío)</td>
+                                <td>❌ Falsy</td>
+                                <td><code>"" ? "Sí" : "No"</code></td>
+                                <td><code>"No"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>"Hola"</code> (string con texto)</td>
+                                <td>✅ Truthy</td>
+                                <td><code>"Hola" ? "Sí" : "No"</code></td>
+                                <td><code>"Sí"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>[]</code> (array vacío)</td>
+                                <td>✅ Truthy (objeto en memoria)</td>
+                                <td><code>[] ? "Sí" : "No"</code></td>
+                                <td><code>"Sí"</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: INMUTABILIDAD CON 'const' VS IF...ELSE
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Inmutabilidad con 'const'">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 03</span>
+                    <h2>Inmutabilidad con 'const' vs. Reasignación Mutable con 'let'</h2>
+                    <p class="section-desc">
+                        Descubre cómo el operador ternario previene errores de reasignación accidental y promueve
+                        código funcional seguro:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE ENFOQUES -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Escenario de Decisión:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="tarifa">
+                                1. Tarifa según Membresía
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="descuento">
+                                2. Descuento por Volumen (&gt; $100)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="autenticacion">
+                                3. Redirección de Autenticación
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="tema">
+                                4. Modo Oscuro / Claro
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareTernaryModes">
+                            ⚡ Comparar: if...else tradicional vs. Operador Ternario
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna if...else -->
+                        <div class="error-mode-card card-sloppy" id="cardIfElseResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">if...else Tradicional (Mutable)</span>
+                                <h4>Declaración Verbosa</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalIfElse">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusIfElse">
+                                ⚠️ Requiere 'let' variable mutable y 6 líneas de código.
+                            </div>
+                        </div>
+
+                        <!-- Columna Ternario -->
+                        <div class="error-mode-card card-strict" id="cardTernaryResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Operador Ternario (Inmutable)</span>
+                                <h4>Expresión Concisa</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalTernary">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusTernary">
+                                🛡️ Declaración inmutable con 'const' en una sola línea limpia.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="ternaryFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="ternaryFeedbackText">
+                            Selecciona un caso y presiona <strong>"Comparar: if...else vs. Operador Ternario"</strong>
+                            para observar el contraste de sintaxis y arquitectura.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: DIAGRAMA DE FLUJO Y PRECEDENCIA
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Flujo y Precedencia">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Mecánica del Motor V8</span>
+                    <h2>Diagrama de Flujo de Decisión y Precedencia de Operadores</h2>
+                    <p class="section-desc">
+                        Conoce el orden exacto en que JavaScript evalúa las condiciones y por qué los paréntesis
+                        son el mejor aliado de la legibilidad:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="precedenceTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Bifurcación Binaria</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Precedencia de Operadores</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Paréntesis Recomendados</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: Flujo -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Bifurcación Binaria Directa</span>
+                                <h3>Solo un camino se ejecuta (Evaluación en Cortocircuito)</h3>
+                            </div>
+                            <p class="char-text">
+                                Si la condición es <code>true</code>, se ejecuta y devuelve la <strong>Expresión 1</strong>.
+                                La <strong>Expresión 2</strong> ni siquiera se evalúa, evitando llamadas a funciones o cálculos innecesarios.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestShortCircuit">
+                                    ▶ Probar Cortocircuito del Ternario
+                                </button>
+                                <div class="mutation-result-box" id="shortCircuitResult">
+                                    Haz clic para comprobar cómo la rama falsa no se ejecuta si la condición es verdadera...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Precedencia -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Precedencia Menor que Operadores Aritméticos</span>
+                                <h3>Las comparaciones se resuelven antes que el signo '?'</h3>
+                            </div>
+                            <p class="char-text">
+                                Los operadores aritméticos (<code>+</code>, <code>-</code>) y relacionales (<code>&gt;</code>, <code>&lt;</code>, <code>===</code>)
+                                tienen mayor prioridad que <code>? :</code>. Por lo tanto, <code>precio - desc &gt; 50 ? A : B</code>
+                                calcula primero la resta y la comparación antes de elegir el camino.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestPrecedence">
+                                    ▶ Probar Precedencia Aritmética
+                                </button>
+                                <div class="mutation-result-box" id="precedenceResult">
+                                    Haz clic para evaluar operaciones matemáticas dentro del ternario...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Paréntesis -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Uso de Paréntesis para Máxima Legibilidad</span>
+                                <h3>Delimita visualmente la frontera entre pregunta y respuesta</h3>
+                            </div>
+                            <p class="char-text">
+                                Aunque no siempre son obligatorios por el parser, envolver condiciones complejas entre paréntesis
+                                <code>(puntaje &gt; 700 &amp;&amp; ingresos &gt; 3000) ? "Aprobado" : "Rechazado"</code>
+                                elimina cualquier ambigüedad para el equipo de desarrollo.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestParentheses">
+                                    ▶ Probar Condición Compuesta con Paréntesis
+                                </button>
+                                <div class="mutation-result-box" id="parenthesesResult">
+                                    Haz clic para evaluar una condición compuesta con &amp;&amp;...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ANTIPATRONES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas & Antipatrones">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Código Limpio</span>
+                    <h2>Buenas Prácticas y Errores Comunes de la Industria</h2>
+                    <p class="section-desc">
+                        El operador ternario es elegante, pero su mal uso puede degradar la calidad del código.
+                        Conoce las 4 reglas maestras:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Anidamiento -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ANTIPATRÓN: TERNARIO ANIDADO</span>
+                            <h4>Ternarios Encadenados</h4>
+                        </div>
+                        <p>
+                            Anidar múltiples ternarios (<code>a ? b : c ? d : e</code>) destruye la legibilidad.
+                            Para 3 o más casos, usa <code>switch</code> u <strong>Object Lookup</strong>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const t = esEst ? 5 : esMayor ? 7 : 10; // ❌ Difícil</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Efectos Secundarios -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ANTIPATRÓN: EFECTOS MÚLTIPLES</span>
+                            <h4>Múltiples Instrucciones con Comas</h4>
+                        </div>
+                        <p>
+                            El ternario espera expresiones que devuelvan valores. No lo uses para ejecutar múltiples
+                            métodos con efectos secundarios separados por comas. Usa <code>if...else</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>auth ? (login(), load(), go()) : err(); // ❌</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Booleano Redundante -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ REDUNDANCIA: ? TRUE : FALSE</span>
+                            <h4>Retorno Booleano Innecesario</h4>
+                        </div>
+                        <p>
+                            Escribir <code>edad &gt;= 18 ? true : false</code> es redundante porque la comparación
+                            ya produce un booleano por sí misma.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const ok = edad &gt;= 18; // ✅ Limpio y directo</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Asignaciones Limpias -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: ASIGNACIÓN</span>
+                            <h4>Asignaciones Inmutables Cortas</h4>
+                        </div>
+                        <p>
+                            Ideal cuando la decisión cabe en una sola línea y define un valor atómico
+                            (string, número, booleano, objeto).
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const tema = oscuro ? "bg-dark" : "bg-light"; // ✅</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: FUNCIONES FLECHA & TEMPLATE LITERALS
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Flechas & Template Literals">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Integración Moderna ES6+</span>
+                    <h2>Uso en Funciones Flecha y Plantillas Literales (Template Strings)</h2>
+                    <p class="section-desc">
+                        Dos de las integraciones más potentes del operador ternario en el desarrollo diario con JavaScript moderno:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Funciones Flecha -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. En Retornos Implícitos de Funciones Flecha</span>
+                            </div>
+                            <p>
+                                Como el ternario es una expresión, encaja a la perfección con el retorno implícito de las funciones flecha:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-arrow-ternary"><span class="c-keyword">const</span> <span class="c-variable">evaluarNota</span> = <span class="c-prop">nota</span> =&gt; 
+    <span class="c-prop">nota</span> &gt;= <span class="c-number">90</span> ? <span class="c-string">"Sobresaliente"</span> : <span class="c-string">"Estándar"</span>;
+
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">evaluarNota</span>(<span class="c-number">95</span>)); <span class="c-comment">// Sobresaliente</span></code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestArrowTernary">
+                                    ▶ Probar Flecha con Ternario
+                                </button>
+                                <div class="mutation-result-box" id="arrowTernaryResult">
+                                    Haz clic para ejecutar la función flecha...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Template Literals -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Inyección Dinámica en ${}</span>
+                            </div>
+                            <p>
+                                A diferencia de <code>if...else</code>, puedes meter el operador ternario directamente
+                                dentro de <code>${}</code> para pluralizar palabras o añadir clases CSS dinámicas:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-template-ternary"><span class="c-keyword">const</span> <span class="c-variable">items</span> = <span class="c-number">1</span>;
+<span class="c-keyword">const</span> <span class="c-variable">txt</span> = <span class="c-string">`Tienes <span class="c-variable">\${items}</span> producto<span class="c-variable">\${items === 1 ? "" : "s"}</span>`</span>;
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">txt</span>); <span class="c-comment">// "Tienes 1 producto"</span></code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestTemplateTernary">
+                                    ▶ Probar Inyección Dinámica en Template
+                                </button>
+                                <div class="mutation-result-box" id="templateTernaryResult">
+                                    Haz clic para evaluar plurales y condicionales en texto...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍA DEL MUNDO REAL: EL INTERRUPTOR 💡
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogía: El Interruptor 💡">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 💡</span>
+                    <h2>La Analogía del Mundo Real: El Interruptor de Dos Vías</h2>
+                    <p class="section-desc">
+                        Comprende la naturaleza binaria e instantánea del operador ternario con un modelo mental cotidiano:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Interruptor -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Mueve el interruptor de luz en la pared:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-switch="on">
+                                <span class="tool-icon">💡</span>
+                                <span class="tool-name">Interruptor ARRIBA (true)</span>
+                            </button>
+                            <button class="tool-btn" data-switch="off">
+                                <span class="tool-icon">🌑</span>
+                                <span class="tool-name">Interruptor ABAJO (false)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: Condición -->
+                        <div class="workshop-card" id="switchCardLeft">
+                            <div class="ws-avatar" id="switchAvatarLeft">🔘</div>
+                            <div class="ws-header">
+                                <h3 id="switchTitleLeft">Posición del Interruptor</h3>
+                                <span class="ws-sub" id="switchSubLeft">Condición Lógica a Evaluar</span>
+                            </div>
+                            <div class="ws-items" id="switchItemsLeft">
+                                <div class="ws-item">El usuario pulsa el interruptor hacia arriba</div>
+                                <div class="ws-item">condicion = true</div>
+                            </div>
+                            <div class="ws-status" id="switchStatusLeft">
+                                La corriente fluye inmediatamente por el circuito
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>? :</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Consecuencia -->
+                        <div class="workshop-card" id="switchCardRight">
+                            <div class="ws-avatar" id="switchAvatarRight">💡</div>
+                            <div class="ws-header">
+                                <h3 id="switchTitleRight">Bombilla Encendida</h3>
+                                <span class="ws-sub" id="switchSubRight">Expresión 1 Retornada</span>
+                            </div>
+                            <div class="ws-items" id="switchItemsRight">
+                                <div class="ws-item highlight-item">La bombilla ilumina la habitación al 100%</div>
+                                <div class="ws-item highlight-item">Retorno inmediato: "Luz Encendida"</div>
+                            </div>
+                            <div class="ws-status" id="switchStatusRight">
+                                Bifurcación resuelta: la rama falsa se descarta
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="switchBanner">
+                        <span class="banner-icon" id="switchBannerIcon">💡</span>
+                        <span class="banner-text" id="switchBannerText">
+                            El interruptor solo tiene dos caminos definitivos: luz prendida o luz apagada. No hay estados flotantes.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground & Sandbox</span>
+                    <h2>Laboratorio de Código: Prueba el Operador Ternario</h2>
+                    <p class="section-desc">
+                        Experimenta con código interactivo en tiempo real. Carga ejemplos predefinidos o escribe tus propias condiciones
+                        para evaluar el comportamiento de expresiones, valores truthy/falsy y retornos inmutables:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-ternary-1">
+                                        1. Asignación directa inmutable con const
+                                    </option>
+                                    <option value="preset-ternary-2">
+                                        2. Evaluación de Truthy y Falsy (Coerción)
+                                    </option>
+                                    <option value="preset-ternary-3">
+                                        3. Inyección en Template Literals (${ ? : })
+                                    </option>
+                                    <option value="preset-ternary-4">
+                                        4. Función Flecha con Retorno Ternario
+                                    </option>
+                                    <option value="preset-ternary-5">
+                                        5. Condición Compuesta con Paréntesis Legibles
+                                    </option>
+                                    <option value="preset-ternary-6">
+                                        6. Antipatrón Anidado vs. Object Lookup
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen & Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet & Retos</span>
+                    <h2>Resumen Maestro y Retos de Evaluación</h2>
+                    <p class="section-desc">
+                        Pon a prueba tus conocimientos con los 3 retos del curso extraídos de la guía oficial:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Número Par o Impar</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Escribe un operador ternario que evalúe si un número guardado en <code>numero</code> es par o impar,
+                            y asigne <code>"Par"</code> o <code>"Impar"</code> a una constante llamada <code>resultado</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-ternary1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-ternary-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-ternary-1">
+                            <pre><code>const numero = 7;
+// Si el resto de dividir por 2 es 0, es Par:
+const resultado = numero % 2 === 0 ? "Par" : "Impar";
+
+console.log(`El número ${numero} es:`, resultado);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Optimización de Rol de Usuario</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Optimiza un bloque tradicional <code>if (rol === "admin") { acceso = true; } else { acceso = false; }</code>
+                            utilizando un único operador ternario dinámico e inmutable.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-ternary2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-ternary-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-ternary-2">
+                            <pre><code>const rol = "admin";
+
+// Con operador ternario inmutable:
+const acceso = rol === "admin" ? true : false;
+
+console.log("Acceso concedido:", acceso);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Avanzado</span>
+                            <h3>obtenerMensajeEnvio con Retorno Implícito</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea una función flecha <code>obtenerMensajeEnvio(totalCompra, esPremium)</code> que use un ternario
+                            en su retorno implícito para devolver <code>"Envío Gratis"</code> si total &gt;= 50 o es premium; de lo contrario <code>"Costo de envío: $5"</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-ternary3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-ternary-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-ternary-3">
+                            <pre><code>const obtenerMensajeEnvio = (totalCompra, esPremium) => 
+    (totalCompra >= 50 || esPremium) ? "Envío Gratis" : "Costo de envío: $5";
+
+console.log("Compra $30 no premium:", obtenerMensajeEnvio(30, false));
+console.log("Compra $60 no premium:", obtenerMensajeEnvio(60, false));
+console.log("Compra $20 con premium:", obtenerMensajeEnvio(20, true));</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos del Operador Ternario -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Es una Expresión</h4>
+                        <p>Retorna un valor directamente, permitiendo asignaciones con <code>const</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>3 Operandos Claros</h4>
+                        <p>Condición, <code>?</code> (caso verdadero) y <code>:</code> (caso falso).</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Cero Anidamiento</h4>
+                        <p>Evita ternarios encadenados; para 3+ opciones usa Object Lookup o switch.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Inyección en Template</h4>
+                        <p>Úsalo dentro de <code>${}</code> para plurales o textos dinámicos.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Usa Paréntesis</h4>
+                        <p>Envuelve condiciones compuestas complejas para mejorar la legibilidad.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Operador Ternario</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
