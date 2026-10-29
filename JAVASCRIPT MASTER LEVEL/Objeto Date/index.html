@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre El Objeto Date en JavaScript (Fechas, Horas, Getters y Formateo) - JavaScript Master Level." />
+    <title>El Objeto Date en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🕰️</span>
+                <span class="title-text">El Objeto Date en JavaScript</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: El Objeto Date">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Unix Epoch (1970 UTC)</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">new Date() &amp; Getters</span>
+                </div>
+
+                <h1 class="hero-title">
+                    El Objeto
+                    <span class="gradient-text">Date</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Domina la herramienta nativa de JavaScript para trabajar con <strong>fechas y horas</strong>:
+                    aprende a extraer día, mes, año y marcas horarias con sus <strong>7 métodos getters</strong>,
+                    formatea relojes digitales con <code>padStart()</code> y evita las trampas clásicas de indexación en cero y métodos obsoletos.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">⏱️</div>
+                        <h3>Unix Epoch (1970)</h3>
+                        <p>Milisegundos transcurridos e instanciación obligatoria con <code>new Date()</code>.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">📅</div>
+                        <h3>Los 7 Getters</h3>
+                        <p><code>getDate()</code>, <code>getDay()</code>, <code>getMonth()</code>, <code>getFullYear()</code> y reloj 24h.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">🕰️</div>
+                        <h3>Reloj Astronómico 🕰️</h3>
+                        <p>Analogía visual de la fotografía congelada y las rueditas en cero.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🚫</div>
+                        <h3>Cero Trampas</h3>
+                        <p>Por qué evitar <code>getYear()</code> (Efecto Y2K) y el inexistente <code>getDays()</code>.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: ¿QUÉ ES EL OBJETO DATE?
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es el Objeto Date?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es el Objeto Date y cómo se instancia?</h2>
+                    <p class="section-desc">
+                        El objeto nativo <code>Date</code> almacena internamente los milisegundos transcurridos desde el
+                        <strong>1 de enero de 1970 a las 00:00:00 UTC</strong> (conocido como <em>Unix Epoch</em>):
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Instanciación Obligatoria</span>
+                            </div>
+                            <p>
+                                <strong>No es un primitivo:</strong> Para utilizar <code>Date</code> y acceder a sus métodos de extracción
+                                (<em>getters</em>), es obligatorio <strong>instanciarlo</strong> usando el operador <code>new Date()</code>.
+                            </p>
+                            <p>
+                                <strong>Marca Temporal:</strong> Al ejecutar <code>new Date()</code> sin argumentos, JavaScript captura el
+                                milisegundo exacto del reloj del sistema en ese preciso instante.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Cuidado:</strong> Si olvidas la palabra <code>new</code> y escribes solo <code>Date()</code>,
+                                obtendrás un simple <code>string</code> de texto sin acceso a <code>.getDate()</code> ni <code>.getFullYear()</code>.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Sin 'new' ➔ Date()</h4>
+                                <ul>
+                                    <li>Devuelve una cadena de texto estática (<code>string</code>).</li>
+                                    <li>Ignora cualquier argumento que le pases.</li>
+                                    <li>No posee métodos (<code>getDate</code> es <code>undefined</code>).</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Con 'new' ➔ new Date()</h4>
+                                <ul>
+                                    <li>Crea una instancia real de objeto (<code>object</code>).</li>
+                                    <li>Almacena el timestamp numérico desde 1970.</li>
+                                    <li>Habilita todos los métodos <em>getters</em> de lectura.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">extraccion_practica_date.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-keyword">const</span> <span class="c-variable">fechaActual</span> = <span class="c-keyword">new</span> <span class="c-func">Date</span>();
+
+<span class="c-keyword">const</span> <span class="c-variable">diaMes</span> = <span class="c-variable">fechaActual</span>.<span class="c-func">getDate</span>();
+<span class="c-keyword">const</span> <span class="c-variable">mes</span> = <span class="c-variable">fechaActual</span>.<span class="c-func">getMonth</span>() + <span class="c-number">1</span>; <span class="c-comment">// Enero es 0</span>
+<span class="c-keyword">const</span> <span class="c-variable">anio</span> = <span class="c-variable">fechaActual</span>.<span class="c-func">getFullYear</span>();
+
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">`Fecha: \${diaMes}/\${mes}/\${anio}`</span>);</code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestDateIntro">
+                                    ▶ Capturar Fecha y Hora Actual en Vivo
+                                </button>
+                                <span class="run-status" id="testDateIntroStatus">Listo para instanciar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Capturar Fecha y Hora Actual en Vivo" para leer el reloj del sistema...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: SINTAXIS BÁSICA Y ANATOMÍA DE MÉTODOS
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Anatomía de los 7 Getters">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Sintaxis Básica y Anatomía de los 7 Métodos de Extracción (Getters)</h2>
+                    <p class="section-desc">
+                        Una vez creada la instancia <code>const ahora = new Date()</code>, disponemos de 7 métodos clave
+                        divididos entre calendario y reloj:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Calendario -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Métodos de Calendario</span>
+                            <h3>Día, Semana, Mes y Año</h3>
+                            <span class="comp-subtitle">Atención a los índices desde 0</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. <code>getDate()</code>:</strong> Día del mes numérico (<code>1</code> al <code>31</code>).</li>
+                                <li><strong>2. <code>getDay()</code>:</strong> Día de la semana (<code>0</code> Domingo a <code>6</code> Sábado).</li>
+                                <li><strong>3. <code>getMonth()</code>:</strong> Mes indexado en cero (<code>0</code> Enero a <code>11</code> Diciembre).</li>
+                                <li><strong>4. <code>getFullYear()</code>:</strong> Año completo de 4 dígitos (ej. <code>2026</code>).</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">⚠️</span>
+                                <div class="vis-text">
+                                    <strong>Diferencia Vital:</strong>
+                                    <small><code>getDate()</code> empieza en <strong>1</strong>, pero <code>getDay()</code> y <code>getMonth()</code> empiezan en <strong>0</strong>.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>new Date()</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">7 Getters</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Reloj 24h -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Métodos de Tiempo</span>
+                            <h3>Reloj Militar de 24 Horas</h3>
+                            <span class="comp-subtitle">getHours(), getMinutes(), getSeconds()</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>5. <code>getHours()</code>:</strong> Hora en formato 24h (<code>0</code> a <code>23</code>).</li>
+                                <li><strong>6. <code>getMinutes()</code>:</strong> Minutos actuales (<code>0</code> a <code>59</code>).</li>
+                                <li><strong>7. <code>getSeconds()</code>:</strong> Segundos actuales (<code>0</code> a <code>59</code>).</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">⌚</span>
+                                <div class="vis-text">
+                                    <strong>Retorno Numérico:</strong>
+                                    <small>Todos los getters devuelven números enteros (<code>number</code>), listos para operar o formatear.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de los 7 Getters -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>const ahora = new Date(); // Inspecciona los 7 valores devueltos en este instante</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckAllGetters">
+                        🔍 Extraer los 7 Métodos Getters en Tiempo Real
+                    </button>
+                    <div class="identity-result" id="allGettersResult">
+                        Haz clic para ejecutar los 7 métodos sobre la fecha y hora actual de tu equipo...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Método Getter</th>
+                                <th>Qué Extrae</th>
+                                <th>Rango de Retorno</th>
+                                <th>Observación Clave</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>getDate()</code></td>
+                                <td>Día del mes</td>
+                                <td><code>1</code> al <code>31</code></td>
+                                <td>Empieza en 1 (calendario normal)</td>
+                            </tr>
+                            <tr>
+                                <td><code>getDay()</code></td>
+                                <td>Día de la semana</td>
+                                <td><code>0</code> al <code>6</code></td>
+                                <td><code>0</code> es Domingo; se escribe en singular (no <code>getDays</code>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>getMonth()</code></td>
+                                <td>Mes del año</td>
+                                <td><code>0</code> al <code>11</code></td>
+                                <td><code>0</code> es Enero; sumar <code>+ 1</code> para mostrar del 1 al 12</td>
+                            </tr>
+                            <tr>
+                                <td><code>getFullYear()</code></td>
+                                <td>Año completo</td>
+                                <td>4 dígitos (ej. <code>2026</code>)</td>
+                                <td>Reemplaza al obsoleto <code>getYear()</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>getHours() / Minutes / Seconds</code></td>
+                                <td>Hora, Minutos y Segundos</td>
+                                <td><code>0-23</code> / <code>0-59</code> / <code>0-59</code></td>
+                                <td>Usar <code>padStart(2, "0")</code> para formato reloj digital</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: COMPARATIVA: TRAMPAS VS ESTÁNDAR MODERNO
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Trampas vs. Estándar Moderno">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Contraste Técnico</span>
+                    <h2>Comparativa: Código con Trampas / Obsoleto vs. Estándar Moderno</h2>
+                    <p class="section-desc">
+                        En apuntes antiguos suelen aparecer <code>getDays()</code> y <code>getYear()</code>. Descubre por qué
+                        fallan en el motor de JavaScript real y cuál es el estándar moderno correcto:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE TRAMPAS VS MODERNO -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Caso de Extracción a Comparar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="diaSemana">
+                                1. getDays() vs. getDay()
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="anio">
+                                2. getYear() (Y2K) vs. getFullYear()
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="mes">
+                                3. getMonth() Crudo vs. +1
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="diaMes">
+                                4. Confusión getDay() vs. getDate()
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareDateModes">
+                            ⚡ Comparar: Código con Trampas vs. Estándar Moderno
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Trampas / Obsoleto -->
+                        <div class="error-mode-card card-sloppy" id="cardTrapsResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Enfoque con Trampas / Obsoleto</span>
+                                <h4>Apuntes Antiguos o sin Ajuste</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalTraps">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusTraps">
+                                ⚠️ Provoca TypeError (getDays), años de 3 dígitos (126) o meses desfasados.
+                            </div>
+                        </div>
+
+                        <!-- Columna Estándar Moderno -->
+                        <div class="error-mode-card card-strict" id="cardModernResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Estándar Moderno y Seguro (ES6+)</span>
+                                <h4>Métodos Oficiales Verificados</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalModern">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusModern">
+                                🛡️ Usa getDay() en singular, getFullYear() de 4 dígitos y getMonth() + 1.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="dateFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="dateFeedbackText">
+                            Selecciona un caso y presiona <strong>"Comparar: Código con Trampas vs. Estándar Moderno"</strong>
+                            para observar la respuesta exacta del motor de JavaScript.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: DIAGRAMA DE FLUJO Y FORMATEO AVANZADO
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Flujo de Extracción y Formateo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura de Tiempo</span>
+                    <h2>Diagrama de Flujo de Extracción, padStart() y Arreglos</h2>
+                    <p class="section-desc">
+                        Explora cómo se ramifica la extracción a partir de <code>new Date()</code> y las técnicas profesionales
+                        para presentar fechas a los usuarios:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="dateFlowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Árbol de Extracción</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Relleno con padStart(2, "0")</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Arrays Indexados en Cero</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: Árbol de Extracción -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Las 3 Ramas de Extracción desde new Date()</span>
+                                <h3>Calendario (Día/Mes/Año), Día de Semana y Reloj 24h</h3>
+                            </div>
+                            <p class="char-text">
+                                A partir de una única instancia <code>new Date()</code>, extraemos tres familias de datos:
+                                <strong>Calendario</strong> (<code>getDate()</code> 1-31, <code>getMonth()</code> 0-11, <code>getFullYear()</code> YYYY),
+                                <strong>Día de Semana</strong> (<code>getDay()</code> 0-6) y <strong>Reloj 24h</strong>
+                                (<code>getHours()</code> 0-23, <code>getMinutes()</code> 0-59, <code>getSeconds()</code> 0-59).
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestExtractionTree">
+                                    ▶ Ejecutar Árbol Completo de Extracción
+                                </button>
+                                <div class="mutation-result-box" id="extractionTreeResult">
+                                    Haz clic para desglosar las 3 ramas sobre una instancia de tiempo...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: padStart -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Formateo de Relojes Digitales con .padStart(2, "0")</span>
+                                <h3>Convierte números de un dígito (5) en formato de dos dígitos ("05")</h3>
+                            </div>
+                            <p class="char-text">
+                                Métodos como <code>getMinutes()</code> o <code>getSeconds()</code> devuelven enteros simples (ej. <code>5</code> en lugar de <code>05</code>).
+                                Convertirlos con <code>String(valor).padStart(2, "0")</code> garantiza que un reloj digital se muestre como
+                                <code>14:05:09</code> y nunca como <code>14:5:9</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestPadStart">
+                                    ▶ Comparar Hora Cruda vs. Hora con padStart(2, "0")
+                                </button>
+                                <div class="mutation-result-box" id="padStartResult">
+                                    Haz clic para observar el efecto de padStart(2, "0") sobre las 08:05:09...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Arrays -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Sinergia Perfecta con Arreglos de JavaScript</span>
+                                <h3>Los retornos 0-6 y 0-11 encajan directo como índices de Array</h3>
+                            </div>
+                            <p class="char-text">
+                                El motivo por el que <code>getDay()</code> y <code>getMonth()</code> comienzan en <code>0</code> es para que
+                                coincidan exactamente con el índice <code>[0]</code> de los arreglos. Así,
+                                <code>dias[fecha.getDay()]</code> traduce el número a texto sin sumar ni restar nada.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestArrayNames">
+                                    ▶ Traducir Índices 0-6 y 0-11 con Arrays
+                                </button>
+                                <div class="mutation-result-box" id="arrayNamesResult">
+                                    Haz clic para obtener el nombre del día y del mes actual mediante arreglos...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Calidad de Software</span>
+                    <h2>Buenas Prácticas y Errores Comunes con el Objeto Date</h2>
+                    <p class="section-desc">
+                        Domina las 4 reglas esenciales para evitar errores de calendario en entrevistas técnicas y proyectos de producción:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Confundir getDate y getDay -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR #1 EN ENTREVISTAS</span>
+                            <h4>Confundir getDate() con getDay()</h4>
+                        </div>
+                        <p>
+                            <code>getDate()</code> devuelve el día del mes (<code>1-31</code>), mientras que <code>getDay()</code>
+                            devuelve el día de la semana (<code>0-6</code>). Además, <code>getDays()</code> con "s" no existe y lanza <code>TypeError</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>hoy.getDay(); // ❌ Da 0-6 (no el día del mes)</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Olvidar sumar 1 a getMonth -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR DE DESFASE: MES 0</span>
+                            <h4>Olvidar que getMonth() inicia en 0</h4>
+                        </div>
+                        <p>
+                            En JavaScript los meses van del <code>0</code> (Enero) al <code>11</code> (Diciembre). Mostrar
+                            <code>getMonth()</code> directamente en una fecha numérica mostrará diciembre como mes 11.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>new Date(2026, 11, 25).getMonth(); // ⚠️ Da 11</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Usar siempre getFullYear -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: 4 DÍGITOS</span>
+                            <h4>Usar siempre getFullYear()</h4>
+                        </div>
+                        <p>
+                            Nunca uses el obsoleto <code>getYear()</code> (que resta 1900 y devuelve <code>126</code> para 2026).
+                            Usa siempre <code>getFullYear()</code> para obtener <code>2026</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const anio = hoy.getFullYear(); // ✅ 2026</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: padStart y Arrays -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: FORMATEO</span>
+                            <h4>Usar padStart(2, "0") y Arreglos</h4>
+                        </div>
+                        <p>
+                            Aplica <code>String(min).padStart(2, "0")</code> para relojes digitales uniformes (<code>08:05:09</code>)
+                            y arreglos con Domingo en posición <code>0</code> para nombres de días.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>String(hoy.getMinutes()).padStart(2, "0"); // ✅</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: IMPLEMENTACIÓN DE FUNCIONES DE FECHA Y RELOJ
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Casos Prácticos: Nombres y Reloj">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Patrones de Producción</span>
+                    <h2>Traducción de Días en Español y Reloj Digital en Tiempo Real</h2>
+                    <p class="section-desc">
+                        Observa cómo combinar <code>getDay()</code> con arreglos y <code>getHours/Minutes/Seconds()</code>
+                        con <code>padStart()</code>:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Nombre del Día -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Traducción con Array (Domingo = Índice 0)</span>
+                            </div>
+                            <p>
+                                Como <code>getDay()</code> devuelve <code>0</code> para el Domingo hasta <code>6</code> para el Sábado,
+                                colocamos <code>"Domingo"</code> en el primer elemento del arreglo:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-day-array"><span class="c-keyword">function</span> <span class="c-func">obtenerNombreDia</span>(<span class="c-prop">fecha</span>) {
+  <span class="c-keyword">const</span> <span class="c-variable">dias</span> = [<span class="c-string">"Domingo"</span>, <span class="c-string">"Lunes"</span>, <span class="c-string">"Martes"</span>,
+    <span class="c-string">"Miércoles"</span>, <span class="c-string">"Jueves"</span>, <span class="c-string">"Viernes"</span>, <span class="c-string">"Sábado"</span>];
+  <span class="c-keyword">return</span> <span class="c-variable">dias</span>[<span class="c-prop">fecha</span>.<span class="c-func">getDay</span>()];
+}</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestDayArray">
+                                    ▶ Obtener Día de la Semana en Vivo
+                                </button>
+                                <div class="mutation-result-box" id="dayArrayResult">
+                                    Haz clic para evaluar obtenerNombreDia(new Date())...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Reloj Digital -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Reloj Digital HH:MM:SS con padStart(2, "0")</span>
+                            </div>
+                            <p>
+                                Convertimos cada unidad horaria a <code>String</code> y rellenamos con un cero a la izquierda
+                                cuando el número es menor a 10:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-digital-clock"><span class="c-keyword">const</span> <span class="c-func">relojDigital</span> = () =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">d</span> = <span class="c-keyword">new</span> <span class="c-func">Date</span>();
+  <span class="c-keyword">const</span> <span class="c-func">pad</span> = <span class="c-prop">n</span> =&gt; <span class="c-func">String</span>(<span class="c-prop">n</span>).<span class="c-func">padStart</span>(<span class="c-number">2</span>, <span class="c-string">"0"</span>);
+  <span class="c-keyword">return</span> <span class="c-string">`\${pad(d.getHours())}:\${pad(d.getMinutes())}:\${pad(d.getSeconds())}`</span>;
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestDigitalClock">
+                                    ▶ Generar Marca de Reloj Digital HH:MM:SS
+                                </button>
+                                <div class="mutation-result-box" id="digitalClockResult">
+                                    Haz clic para capturar la hora exacta formateada a 2 dígitos...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍA DEL MUNDO REAL: EL RELOJ ASTRONÓMICO 🕰️
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogía: El Reloj Astronómico 🕰️">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 🕰️</span>
+                    <h2>La Analogía del Mundo Real: El Reloj Astronómico de Pared</h2>
+                    <p class="section-desc">
+                        Comprende por qué <code>new Date()</code> congela el tiempo en una fotografía instantánea y cómo
+                        funcionan sus esferas e indicadores:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Mecanismo del Reloj -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Inspecciona las esferas del Reloj Astronómico:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-clock="snapshot">
+                                <span class="tool-icon">📸</span>
+                                <span class="tool-name">1. La Fotografía Instantánea y las Agujas (24h)</span>
+                            </button>
+                            <button class="tool-btn" data-clock="wheels">
+                                <span class="tool-icon">⚙️</span>
+                                <span class="tool-name">2. Las Rueditas del Calendario (Posición 0)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: Instancia -->
+                        <div class="workshop-card" id="clockCardLeft">
+                            <div class="ws-avatar" id="clockAvatarLeft">📸</div>
+                            <div class="ws-header">
+                                <h3 id="clockTitleLeft">1. Fotografía Instantánea (new Date())</h3>
+                                <span class="ws-sub" id="clockSubLeft">Congela el milisegundo exacto en memoria</span>
+                            </div>
+                            <div class="ws-items" id="clockItemsLeft">
+                                <div class="ws-item">Al hacer const foto = new Date(), tomas una foto del reloj</div>
+                                <div class="ws-item">Las agujas dentro de esa variable quedan fijas en ese instante</div>
+                            </div>
+                            <div class="ws-status" id="clockStatusLeft">
+                                Para saber la hora 5 segundos después, debes tomar una nueva foto
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>Getters</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Lectura de Esferas -->
+                        <div class="workshop-card" id="clockCardRight">
+                            <div class="ws-avatar" id="clockAvatarRight">🕰️</div>
+                            <div class="ws-header">
+                                <h3 id="clockTitleRight">2. Mirar las Agujas en la Foto</h3>
+                                <span class="ws-sub" id="clockSubRight">getHours(), getMinutes() y getSeconds()</span>
+                            </div>
+                            <div class="ws-items" id="clockItemsRight">
+                                <div class="ws-item highlight-item">Llamar a getHours() es observar dónde quedó la aguja de las horas</div>
+                                <div class="ws-item highlight-item">Llamar a getMinutes() o getSeconds() lee el minutero y segundero</div>
+                            </div>
+                            <div class="ws-status" id="clockStatusRight">
+                                Lectura directa e instantánea sin alterar la fotografía original
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="clockBanner">
+                        <span class="banner-icon" id="clockBannerIcon">🕰️</span>
+                        <span class="banner-text" id="clockBannerText">
+                            Instanciar <code>new Date()</code> es tomar una fotografía instantánea del reloj de pared: los métodos getters simplemente leen qué marcaba cada aguja o ruedita en esa foto.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Experimenta con el Objeto Date</h2>
+                    <p class="section-desc">
+                        Ejecuta código en tiempo real sobre el motor de JavaScript. Prueba los 7 métodos de extracción,
+                        compara <code>getFullYear()</code> frente a <code>getYear()</code> o carga los 3 ejercicios resueltos:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-date-1">
+                                        1. Desglose completo de los 7 métodos Getters
+                                    </option>
+                                    <option value="preset-date-2">
+                                        2. Extracción y formateo práctico (Fecha + Hora)
+                                    </option>
+                                    <option value="preset-date-3">
+                                        3. Comparativa: Trampas (getDays / getYear) vs. Moderno
+                                    </option>
+                                    <option value="preset-date-4">
+                                        4. Reloj Digital con String.prototype.padStart(2, "0")
+                                    </option>
+                                    <option value="preset-date-5">
+                                        5. Nombres de días y meses con Arrays indexados en 0
+                                    </option>
+                                    <option value="preset-date-6">
+                                        6. Unix Epoch y diferencia entre new Date() y Date()
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Oficiales Paso a Paso</h2>
+                    <p class="section-desc">
+                        Pon a prueba tu dominio del Objeto Date con los 3 ejercicios del curso y su solucionario oficial:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Fecha en Formato "DD/MM/YYYY"</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea una instancia de la fecha actual en una constante <code>hoy</code>. Extrae el día del mes, el mes
+                            (ajustado del 1 al 12) y el año completo de 4 dígitos, e imprime una cadena con el formato <code>"DD/MM/YYYY"</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-date1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-date-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-date-1">
+                            <pre><code>const hoy = new Date();
+
+const dia = hoy.getDate();
+const mes = hoy.getMonth() + 1; // Sumamos 1 porque enero es 0
+const anio = hoy.getFullYear(); // Evitamos getYear() para obtener 4 dígitos
+
+const fechaFormateada = `${dia}/${mes}/${anio}`;
+console.log(fechaFormateada);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Función obtenerNombreDia(fecha)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Escribe una función <code>obtenerNombreDia</code> que reciba un objeto <code>Date</code>. Usando
+                            <code>getDay()</code> y un arreglo con los días de la semana, retorna el nombre del día en español (<code>0</code> es <code>"Domingo"</code>).
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-date2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-date-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-date-2">
+                            <pre><code>function obtenerNombreDia(fecha) {
+    const diasSemana = [
+        "Domingo", "Lunes", "Martes", "Miércoles",
+        "Jueves", "Viernes", "Sábado"
+    ];
+    const indiceDia = fecha.getDay();
+    return diasSemana[indiceDia];
+}
+
+console.log("Hoy es:", obtenerNombreDia(new Date()));</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Avanzado</span>
+                            <h3>Función Flecha relojDigital()</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea una función flecha <code>relojDigital</code> que tome la hora actual (<code>getHours()</code>,
+                            <code>getMinutes()</code>, <code>getSeconds()</code>) y devuelva <code>"HH:MM:SS"</code> asegurando ceros a la izquierda (ej. <code>"08:05:09"</code>).
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-date3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-date-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-date-3">
+                            <pre><code>const relojDigital = () => {
+    const ahora = new Date();
+    const horas = String(ahora.getHours()).padStart(2, "0");
+    const minutos = String(ahora.getMinutes()).padStart(2, "0");
+    const segundos = String(ahora.getSeconds()).padStart(2, "0");
+    return `${horas}:${minutos}:${segundos}`;
+};
+
+console.log(relojDigital());</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos del Objeto Date -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Usa new Date()</h4>
+                        <p>Es obligatorio instanciar con <code>new</code> para acceder a los métodos de extracción.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>getDate vs getDay</h4>
+                        <p><code>getDate()</code> da el día del mes (1-31); <code>getDay()</code> da el día de semana (0-6).</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Enero es Mes 0</h4>
+                        <p><code>getMonth()</code> va de 0 a 11; suma siempre <code>+ 1</code> para formatos numéricos.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Usa getFullYear()</h4>
+                        <p>Obtén siempre el año de 4 dígitos (<code>2026</code>) y evita el obsoleto <code>getYear()</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>padStart(2, "0")</h4>
+                        <p>Rellena horas, minutos y segundos con un cero a la izquierda en relojes digitales.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: El Objeto Date en JavaScript</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
