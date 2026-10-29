@@ -1,0 +1,3358 @@
+/* ==========================================================================
+   LAS APIs EN EL DESARROLLO WEB (HTTP, REST & FETCH) - MASTER LEVEL
+   Estilos Visuales Premium, Dinámicos y Modernos
+   Documentación detallada LÍNEA POR LÍNEA para fines pedagógicos
+   ========================================================================== */
+
+/* --- 1. Variables Globales & Sistema de Diseño (:root) --- */
+/* :root representa el elemento raíz del documento (HTML) y se usa para definir variables globales accesibles en todo el CSS */
+:root {
+    /* Color de fondo principal: tono azul muy oscuro cercano al negro azabache */
+    --bg-dark: #070a13;
+    /* Color de fondo secundario para superficies intermedias y barras elevadas */
+    --bg-surface: #0e1526;
+    /* Color de fondo para tarjetas translúcidas (75% de opacidad para permitir efecto vidrio/glassmorphism) */
+    --bg-card: rgba(16, 24, 42, 0.75);
+    /* Color de fondo de tarjeta al pasar el cursor (hover), más brillante y con 85% de opacidad */
+    --bg-card-hover: rgba(23, 34, 58, 0.85);
+    /* Tinte sutil blanco con 3% de opacidad para crear reflejos de cristal */
+    --bg-glass: rgba(255, 255, 255, 0.03);
+
+    /* Borde casi imperceptible con 8% de opacidad blanca para delimitar sin saturar */
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    /* Borde más visible con 16% de opacidad blanca para elementos activos o hovered */
+    --border-light: rgba(255, 255, 255, 0.16);
+    /* Borde con acento violeta índigo para resaltar elementos seleccionados */
+    --border-accent: rgba(99, 102, 241, 0.4);
+
+    /* Color primario: Índigo vibrante moderno */
+    --primary: #6366f1;
+    /* Resplandor o sombra neón asociada al color primario */
+    --primary-glow: rgba(99, 102, 241, 0.35);
+    /* Variante más oscura del primario para estados de pulsación o hover */
+    --primary-hover: #4f46e5;
+
+    /* Color secundario: Cian neón tecnológico */
+    --cyan: #06b6d4;
+    /* Resplandor luminoso color cian */
+    --cyan-glow: rgba(6, 182, 212, 0.3);
+    /* Variante más oscura del cian al interactuar */
+    --cyan-hover: #0891b2;
+
+    /* Color semántico de éxito: Verde esmeralda */
+    --emerald: #10b981;
+    /* Resplandor asociado al verde esmeralda */
+    --emerald-glow: rgba(16, 185, 129, 0.3);
+
+    /* Color semántico de advertencia o llamada de atención: Ámbar / Dorado */
+    --amber: #f59e0b;
+    /* Resplandor asociado al ámbar */
+    --amber-glow: rgba(245, 158, 11, 0.3);
+
+    /* Color semántico de error o peligro: Rosa carmesí */
+    --rose: #f43f5e;
+    /* Resplandor asociado al tono rosa carmesí */
+    --rose-glow: rgba(244, 63, 94, 0.3);
+
+    /* Color principal de texto: blanco hueso de alta legibilidad */
+    --text-main: #f1f5f9;
+    /* Color de texto secundario: gris azulado para descripciones y subtítulos */
+    --text-muted: #94a3b8;
+    /* Color de texto terciario: gris atenuado para notas secundarias y metadatos */
+    --text-dim: #64748b;
+
+    /* Familia tipográfica principal: 'Outfit' con respaldo en fuentes del sistema */
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Familia tipográfica monoespaciada: 'Fira Code' para código fuente y métricas */
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Altura fija calculada para la barra de navegación superior */
+    --header-height: 72px;
+    /* Altura asignada para el área de control flotante inferior */
+    --bottom-height: 80px;
+    /* Radio de borde pequeño (8px) para etiquetas y botones compactos */
+    --radius-sm: 8px;
+    /* Radio de borde mediano (14px) para botones principales y paneles */
+    --radius-md: 14px;
+    /* Radio de borde grande (20px) para las tarjetas principales de diapositiva */
+    --radius-lg: 20px;
+    /* Radio de borde completo para píldoras y badges circulares */
+    --radius-pill: 9999px;
+
+    /* Transición rápida para micro-interacciones al pasar el ratón (hover) */
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Transición fluida para cambios de diapositiva y apertura de modales */
+    --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- 2. Reset y Configuración Base --- */
+/* Selector universal para todos los elementos y sus pseudo-elementos ::before y ::after */
+*, *::before, *::after {
+    /* El modelo de caja incluye el relleno (padding) y borde dentro del ancho y alto total */
+    box-sizing: border-box;
+    /* Elimina márgenes externos por defecto impuestos por el navegador */
+    margin: 0;
+    /* Elimina rellenos internos por defecto del navegador */
+    padding: 0;
+}
+
+/* Configuración de las etiquetas principales html y body */
+html, body {
+    /* Ocupa el 100% del ancho del viewport */
+    width: 100%;
+    /* Ocupa al menos el 100% de la altura de la ventana visible */
+    min-height: 100%;
+    /* Establece el color de fondo oscuro de base */
+    background-color: var(--bg-dark);
+    /* Establece el color de texto general */
+    color: var(--text-main);
+    /* Aplica la fuente moderna Outfit */
+    font-family: var(--font-sans);
+    /* Altura de línea óptima de 1.6 para lectura confortable */
+    line-height: 1.6;
+    /* Oculta desbordamientos horizontales accidentales */
+    overflow-x: hidden;
+    /* Suavizado tipográfico subpixel para navegadores WebKit/Blink */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Personalización del carril de la barra de desplazamiento */
+::-webkit-scrollbar {
+    /* Ancho de la barra de scroll vertical */
+    width: 8px;
+    /* Altura de la barra de scroll horizontal */
+    height: 8px;
+}
+/* Fondo del carril por donde se desliza la barra */
+::-webkit-scrollbar-track {
+    /* Fondo oscuro semitransparente */
+    background: rgba(0, 0, 0, 0.3);
+}
+/* Manija (cursor) deslizable de la barra de scroll */
+::-webkit-scrollbar-thumb {
+    /* Color gris sutil */
+    background: var(--border-light);
+    /* Bordes redondeados en forma de píldora */
+    border-radius: var(--radius-pill);
+}
+/* Efecto al pasar el cursor sobre la manija del scroll */
+::-webkit-scrollbar-thumb:hover {
+    /* Se ilumina con el color primario índigo */
+    background: var(--primary);
+}
+
+/* --- 3. Efectos de Fondo Ambientales (Luces de Neón & Malla) --- */
+/* Clase base para los círculos de luz difusa ambiental */
+.bg-glow {
+    /* Fijado en la ventana para que no se mueva con el scroll */
+    position: fixed;
+    /* Forma circular perfecta */
+    border-radius: 50%;
+    /* Desenfoque gaussiano masivo para crear aura difusa */
+    filter: blur(120px);
+    /* Permite hacer clic a través de este elemento sin bloquear botones */
+    pointer-events: none;
+    /* Se posiciona detrás de todo el contenido interactivo */
+    z-index: 0;
+    /* Opacidad moderada del 45% */
+    opacity: 0.45;
+    /* Animación continua de pulso y respiración de 12 segundos alternada */
+    animation: pulseAmbient 12s ease-in-out infinite alternate;
+}
+/* Primer foco de luz: Esquina superior izquierda en color primario */
+.glow-1 {
+    /* Ancho de 550 píxeles */
+    width: 550px;
+    /* Alto de 550 píxeles */
+    height: 550px;
+    /* Desplazado ligeramente fuera del borde superior */
+    top: -10%;
+    /* Desplazado ligeramente fuera del borde izquierdo */
+    left: -10%;
+    /* Gradiente radial desde el centro índigo hacia transparente */
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+}
+/* Segundo foco de luz: Esquina inferior derecha en color cian */
+.glow-2 {
+    /* Ancho de 600 píxeles */
+    width: 600px;
+    /* Alto de 600 píxeles */
+    height: 600px;
+    /* Desplazado fuera del borde inferior */
+    bottom: -10%;
+    /* Desplazado fuera del borde derecho */
+    right: -10%;
+    /* Gradiente radial cian a transparente */
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    /* Desfase de tiempo de -4 segundos para movimiento orgánico no sincronizado */
+    animation-delay: -4s;
+}
+/* Tercer foco de luz: Centro en tono púrpura */
+.glow-3 {
+    /* Ancho de 400 píxeles */
+    width: 400px;
+    /* Alto de 400 píxeles */
+    height: 400px;
+    /* Posicionado cerca del 40% vertical */
+    top: 40%;
+    /* Posicionado cerca del 45% horizontal */
+    left: 45%;
+    /* Gradiente radial púrpura a transparente */
+    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    /* Desfase de -8 segundos */
+    animation-delay: -8s;
+}
+
+/* Definición de la animación de pulso ambiental */
+@keyframes pulseAmbient {
+    /* Estado inicial: escala normal, sin desplazamiento y opacidad del 35% */
+    0% { transform: scale(1) translate(0, 0); opacity: 0.35; }
+    /* Punto medio: se expande 15%, se traslada y aumenta su brillo al 55% */
+    50% { transform: scale(1.15) translate(30px, 20px); opacity: 0.55; }
+    /* Estado final: se contrae levemente y se desplaza en sentido contrario */
+    100% { transform: scale(0.95) translate(-20px, -20px); opacity: 0.4; }
+}
+
+/* Cuadrícula geométrica de fondo (Grid Pattern) estilo Sci-Fi */
+.bg-grid-pattern {
+    /* Posición fija en toda la pantalla */
+    position: fixed;
+    /* Cubre los 4 extremos */
+    inset: 0;
+    /* Dibuja líneas tenues horizontales y verticales cada 40 píxeles */
+    background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    /* Tamaño de cada celda de la cuadrícula: 40x40px */
+    background-size: 40px 40px;
+    /* No intercepta clics del ratón */
+    pointer-events: none;
+    /* En la capa z=0 de fondo */
+    z-index: 0;
+}
+
+/* --- 4. Barra Superior (Top Nav) --- */
+/* Encabezado fijo en la parte superior */
+.top-nav {
+    /* Se mantiene anclado al desplazarse */
+    position: fixed;
+    /* Al ras superior */
+    top: 0;
+    /* Al ras izquierdo */
+    left: 0;
+    /* Cubre el 100% del ancho */
+    width: 100%;
+    /* Altura definida por la variable (72px) */
+    height: var(--header-height);
+    /* Fondo oscuro semitransparente para efecto glassmorphic */
+    background: rgba(7, 10, 19, 0.75);
+    /* Desenfoque de fondo estándar */
+    backdrop-filter: blur(16px);
+    /* Desenfoque de fondo para Safari */
+    -webkit-backdrop-filter: blur(16px);
+    /* Delgada línea divisoria inferior */
+    border-bottom: 1px solid var(--border-subtle);
+    /* Alinea sus elementos en una fila flexible */
+    display: flex;
+    /* Centra los elementos verticalmente */
+    align-items: center;
+    /* Separa los extremos: marca a la izquierda, controles a la derecha */
+    justify-content: space-between;
+    /* Espaciado interno horizontal de 2 rem (32px) */
+    padding: 0 2rem;
+    /* Elevado sobre las diapositivas (z=100) */
+    z-index: 100;
+}
+
+/* Contenedor del logotipo y nombre del curso */
+.nav-brand {
+    /* Disposición flexible en fila */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de 1rem entre insignia y texto */
+    gap: 1rem;
+}
+
+/* Insignia que indica el nivel del curso (JS MASTER LEVEL) */
+.brand-badge {
+    /* Fondo con gradiente índigo-cian translúcido */
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+    /* Borde resaltado con acento */
+    border: 1px solid var(--border-accent);
+    /* Color de texto cian */
+    color: var(--cyan);
+    /* Tamaño de letra compacto */
+    font-size: 0.75rem;
+    /* Peso de fuente negrita */
+    font-weight: 700;
+    /* Espaciado entre letras para aspecto profesional */
+    letter-spacing: 0.08em;
+    /* Relleno vertical de 0.3rem y horizontal de 0.7rem */
+    padding: 0.3rem 0.7rem;
+    /* Bordes completamente redondeados */
+    border-radius: var(--radius-pill);
+    /* Texto en mayúsculas */
+    text-transform: uppercase;
+}
+
+/* Agrupador del icono y el texto del título */
+.brand-title {
+    /* Fila flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de medio rem */
+    gap: 0.5rem;
+}
+/* Icono de escudo del Modo Estricto */
+.icon-proto {
+    /* Tamaño del icono */
+    font-size: 1.25rem;
+    /* Color ámbar brillante */
+    color: #fbbf24;
+    /* Sombra difusa resplandeciente */
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+}
+/* Texto del título en la barra */
+.title-text {
+    /* Tamaño de texto equilibrado */
+    font-size: 1.1rem;
+    /* Peso fuerte */
+    font-weight: 700;
+    /* Ajuste de espacio entre caracteres */
+    letter-spacing: -0.01em;
+    /* Color blanco principal */
+    color: var(--text-main);
+}
+
+/* Contenedor de la barra de progreso */
+.nav-progress-container {
+    /* Disposición en fila */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre barra y número */
+    gap: 1rem;
+    /* Ocupa hasta 360px según disponibilidad */
+    flex: 0 1 360px;
+}
+/* Carril gris de la barra de progreso */
+.progress-bar-bg {
+    /* Ocupa todo el espacio disponible */
+    flex: 1;
+    /* Altura delgada de 6px */
+    height: 6px;
+    /* Fondo blanco al 8% de opacidad */
+    background: rgba(255, 255, 255, 0.08);
+    /* Píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Oculta esquinas sobrantes */
+    overflow: hidden;
+}
+/* Relleno animado de avance */
+.progress-bar-fill {
+    /* Ocupa toda la altura del carril */
+    height: 100%;
+    /* Ancho inicial (10% = Diapositiva 1 de 10) */
+    width: 10%;
+    /* Gradiente suave de índigo a cian */
+    background: linear-gradient(90deg, var(--primary), var(--cyan));
+    /* Píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Transición suave al cambiar de diapositiva */
+    transition: width var(--transition-smooth);
+    /* Resplandor neón en el extremo de avance */
+    box-shadow: 0 0 10px var(--cyan-glow);
+}
+/* Indicador numérico (ej. 1 / 10) */
+.progress-label {
+    /* Fuente tipográfica de código */
+    font-family: var(--font-mono);
+    /* Tamaño legible */
+    font-size: 0.85rem;
+    /* Color atenuado */
+    color: var(--text-muted);
+    /* Ancho mínimo para que no baile el texto al cambiar dígitos */
+    min-width: 50px;
+    /* Alineado a la derecha */
+    text-align: right;
+}
+
+/* Grupo de botones de acciones en la barra superior */
+.nav-actions {
+    /* Fila flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio de 0.5rem entre botones */
+    gap: 0.5rem;
+}
+
+/* Botones de navegación en la cabecera */
+.nav-btn {
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.04);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Texto blanco principal */
+    color: var(--text-main);
+    /* Relleno interno */
+    padding: 0.5rem 0.85rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Cursor de puntero al pasar el ratón */
+    cursor: pointer;
+    /* Tipografía Outfit */
+    font-family: var(--font-sans);
+    /* Tamaño de texto */
+    font-size: 0.85rem;
+    /* Peso intermedio */
+    font-weight: 500;
+    /* Disposición en línea flexible */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.5rem;
+    /* Transición rápida en todas las propiedades */
+    transition: all var(--transition-fast);
+}
+/* Estado hover de los botones superiores */
+.nav-btn:hover {
+    /* Aumenta el brillo del fondo */
+    background: rgba(255, 255, 255, 0.08);
+    /* Aclara el borde */
+    border-color: var(--border-light);
+    /* Eleva el botón 1 pixel hacia arriba */
+    transform: translateY(-1px);
+}
+/* Estado de clic presionado */
+.nav-btn:active {
+    /* Vuelve a su posición original */
+    transform: translateY(0);
+}
+/* Tamaño de icono dentro del botón */
+.btn-icon {
+    font-size: 1rem;
+}
+
+/* --- 5. Contenedor de Presentación / Modos (Presentation vs Document) --- */
+/* Envoltorio principal de las diapositivas */
+.presentation-wrapper {
+    /* Posición relativa para ubicar capas */
+    position: relative;
+    /* Por encima de la cuadrícula y luces de fondo */
+    z-index: 10;
+    /* Margen superior igual a la altura de la cabecera para no quedar oculto detrás */
+    margin-top: var(--header-height);
+    /* Margen inferior para no chocar con la barra de navegación flotante */
+    margin-bottom: var(--bottom-height);
+    /* Altura mínima calculada descontando cabecera y barra inferior */
+    min-height: calc(100vh - var(--header-height) - var(--bottom-height));
+    /* Ancho al 100% */
+    width: 100%;
+    /* Ancho máximo contenido en 1400px para pantallas grandes */
+    max-width: 1400px;
+    /* Centrado horizontal automático */
+    margin-left: auto;
+    margin-right: auto;
+    /* Espaciado interno general */
+    padding: 2rem 2.5rem;
+    /* Flexbox centrado */
+    display: flex;
+    /* Centra horizontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    justify-content: center;
+}
+
+/* REGLAS PARA EL MODO PRESENTACIÓN (Diapositivas individuales) */
+/* Oculta por defecto todas las diapositivas */
+body.mode-presentation .slide {
+    /* Oculto en el flujo de la página */
+    display: none;
+    /* Totalmente transparente */
+    opacity: 0;
+    /* Ligeramente reducida en escala y desplazada hacia abajo */
+    transform: scale(0.97) translateY(12px);
+    /* Transición suave de entrada */
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Ocupa todo el ancho */
+    width: 100%;
+}
+/* Muestra únicamente la diapositiva que tiene la clase .active */
+body.mode-presentation .slide.active {
+    /* Hace visible el bloque */
+    display: block;
+    /* Opacidad completa */
+    opacity: 1;
+    /* Escala original en su posición natural */
+    transform: scale(1) translateY(0);
+}
+
+/* REGLAS PARA EL MODO GUÍA / DOCUMENTO COMPLETO (Lectura continua) */
+/* El contenedor pasa a flujo de bloque continuo con scroll */
+body.mode-document .presentation-wrapper {
+    /* Flujo de bloque normal */
+    display: block;
+    /* Espacio extra al final para lectura cómoda */
+    padding-bottom: 5rem;
+}
+/* Todas las diapositivas se vuelven visibles sucesivamente */
+body.mode-document .slide {
+    /* Se muestra forzosamente como bloque */
+    display: block !important;
+    /* Opacidad completa permanente */
+    opacity: 1 !important;
+    /* Sin transformaciones */
+    transform: none !important;
+    /* Separación amplia entre secciones */
+    margin-bottom: 4rem;
+    /* Relleno inferior */
+    padding-bottom: 3rem;
+    /* Línea divisoria elegante entre temas */
+    border-bottom: 1px solid var(--border-subtle);
+}
+/* Elimina el borde de la última diapositiva */
+body.mode-document .slide:last-child {
+    border-bottom: none;
+}
+/* En modo documento se oculta la barra flotante de diapositivas */
+body.mode-document .bottom-controls {
+    display: none;
+}
+
+/* --- 6. Componentes Comunes de las Diapositivas --- */
+/* Tarjeta principal contenedora de cada diapositiva */
+.slide-content {
+    /* Fondo translúcido tipo tarjeta */
+    background: var(--bg-card);
+    /* Efecto de cristal esmerilado estándar */
+    backdrop-filter: blur(20px);
+    /* Efecto de cristal para WebKit (Safari) */
+    -webkit-backdrop-filter: blur(20px);
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas de 20px */
+    border-radius: var(--radius-lg);
+    /* Relleno generoso de 3rem (48px) */
+    padding: 3rem;
+    /* Sombra profunda y reflejo superior para relieve tridimensional */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    /* Ocupa el 100% de su contenedor */
+    width: 100%;
+}
+
+/* Cabecera interna de cada diapositiva */
+.slide-header {
+    /* Margen inferior para separar del contenido */
+    margin-bottom: 2rem;
+}
+/* Etiqueta superior que indica el número de fundamento o módulo */
+.section-tag {
+    /* Comportamiento de bloque en línea */
+    display: inline-block;
+    /* Color cian tecnológico */
+    color: var(--cyan);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño compacto */
+    font-size: 0.8rem;
+    /* Negrita */
+    font-weight: 600;
+    /* En mayúsculas */
+    text-transform: uppercase;
+    /* Espaciado amplio entre letras */
+    letter-spacing: 0.1em;
+    /* Separación inferior */
+    margin-bottom: 0.5rem;
+}
+/* Título de nivel 2 (H2) de cada diapositiva */
+.slide-header h2 {
+    /* Tamaño de título prominente */
+    font-size: 2.2rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Condensación ligera entre letras */
+    letter-spacing: -0.02em;
+    /* Blanco puro */
+    color: #fff;
+    /* Margen inferior de medio rem */
+    margin-bottom: 0.5rem;
+}
+/* Párrafo explicativo debajo del título */
+.section-desc {
+    /* Color secundario legible */
+    color: var(--text-muted);
+    /* Tamaño de texto confortable */
+    font-size: 1.05rem;
+    /* Ancho máximo de línea para legibilidad ergonómica */
+    max-width: 900px;
+}
+
+/* ESTILOS DE INSIGNIAS (BADGES) */
+.badge {
+    /* En línea flexible */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Relleno compacto */
+    padding: 0.35rem 0.8rem;
+    /* Forma de píldora */
+    border-radius: var(--radius-pill);
+    /* Tamaño de fuente pequeño */
+    font-size: 0.75rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Espaciado entre caracteres */
+    letter-spacing: 0.03em;
+}
+/* Insignia color púrpura */
+.badge-purple {
+    /* Fondo translúcido púrpura */
+    background: rgba(99, 102, 241, 0.15);
+    /* Texto púrpura claro */
+    color: #a5b4fc;
+    /* Borde púrpura fino */
+    border: 1px solid rgba(99, 102, 241, 0.35);
+}
+/* Insignia color cian */
+.badge-cyan {
+    /* Fondo translúcido cian */
+    background: rgba(6, 182, 212, 0.15);
+    /* Texto cian claro */
+    color: #67e8f9;
+    /* Borde cian fino */
+    border: 1px solid rgba(6, 182, 212, 0.35);
+}
+/* Insignia color verde esmeralda */
+.badge-emerald {
+    /* Fondo translúcido verde esmeralda */
+    background: rgba(16, 185, 129, 0.15);
+    /* Texto verde claro */
+    color: #6ee7b7;
+    /* Borde verde fino */
+    border: 1px solid rgba(16, 185, 129, 0.35);
+}
+/* Insignia color dorado ámbar */
+.badge-amber {
+    /* Fondo translúcido ámbar */
+    background: rgba(245, 158, 11, 0.15);
+    /* Texto ámbar dorado */
+    color: #fcd34d;
+    /* Borde ámbar fino */
+    border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+/* BOTONES DE LLAMADA A LA ACCIÓN (CTA) */
+.cta-btn {
+    /* Disposición flexible en línea */
+    display: inline-flex;
+    /* Centrado horizontal y vertical */
+    align-items: center;
+    justify-content: center;
+    /* Espacio entre texto e icono */
+    gap: 0.6rem;
+    /* Relleno amplio para ergonomía táctil */
+    padding: 0.85rem 1.75rem;
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Tipografía Outfit */
+    font-family: var(--font-sans);
+    /* Tamaño de texto de 1rem (16px) */
+    font-size: 1rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Transición fluida */
+    transition: all var(--transition-smooth);
+    /* Sin borde por defecto */
+    border: none;
+    /* Sin subrayado en caso de ser enlace <a> */
+    text-decoration: none;
+}
+/* Botón principal primario con gradiente y sombra neón */
+.primary-btn {
+    /* Gradiente índigo a lavanda */
+    background: linear-gradient(135deg, var(--primary), #818cf8);
+    /* Texto blanco */
+    color: #ffffff;
+    /* Sombra de resplandor */
+    box-shadow: 0 4px 20px var(--primary-glow);
+}
+/* Efecto hover del botón primario */
+.primary-btn:hover {
+    /* Se eleva 2 píxeles */
+    transform: translateY(-2px);
+    /* Sombra más amplia y brillante */
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+    /* Gradiente más saturado */
+    background: linear-gradient(135deg, #4f46e5, #6366f1);
+}
+/* Botón secundario con borde translúcido */
+.secondary-btn {
+    /* Fondo muy translúcido */
+    background: rgba(255, 255, 255, 0.05);
+    /* Borde definido */
+    border: 1px solid var(--border-light);
+    /* Texto blanco principal */
+    color: var(--text-main);
+}
+/* Hover del botón secundario */
+.secondary-btn:hover {
+    /* Fondo ligeramente más brillante */
+    background: rgba(255, 255, 255, 0.1);
+    /* Borde más iluminado */
+    border-color: rgba(255, 255, 255, 0.3);
+    /* Se eleva 2 píxeles */
+    transform: translateY(-2px);
+}
+
+/* GRADIENTE DE TEXTO TRICOLOR (Lavanda -> Azul Cielo -> Esmeralda) */
+.gradient-text {
+    /* Define el gradiente lineal en 135 grados */
+    background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 50%, #34d399 100%);
+    /* Recorta el fondo con la silueta exacta del texto (estándar) */
+    background-clip: text;
+    /* Recorta el fondo en navegadores WebKit */
+    -webkit-background-clip: text;
+    /* Vuelve transparente el color del texto para revelar el gradiente inferior */
+    -webkit-text-fill-color: transparent;
+}
+
+/* ETIQUETA CODE EN LÍNEA */
+code {
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño proporcional al 90% */
+    font-size: 0.9em;
+    /* Fondo oscuro semitransparente */
+    background: rgba(255, 255, 255, 0.08);
+    /* Relleno compacto vertical y horizontal */
+    padding: 0.2rem 0.4rem;
+    /* Bordes sutilmente redondeados */
+    border-radius: 4px;
+    /* Color azul cielo tecnológico */
+    color: #38bdf8;
+}
+
+/* --- 7. SLIDE 1: PORTADA & BIENVENIDA --- */
+/* Diapositiva de entrada centrada */
+.hero-slide {
+    /* Centrado de texto */
+    text-align: center;
+    /* Relleno vertical ampliado */
+    padding: 4rem 3rem;
+}
+/* Fila de insignias centrada */
+.hero-badges {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Espacio entre insignias */
+    gap: 0.75rem;
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+    /* Permite envolver en múltiples líneas si es angosto */
+    flex-wrap: wrap;
+}
+/* Gran título de bienvenida H1 */
+.hero-title {
+    /* Tamaño tipográfico masivo (56px) */
+    font-size: 3.5rem;
+    /* Extra negrita */
+    font-weight: 800;
+    /* Altura de línea ajustada para títulos */
+    line-height: 1.15;
+    /* Condensación de caracteres */
+    letter-spacing: -0.03em;
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+    /* Ancho máximo contenido */
+    max-width: 950px;
+    /* Centrado horizontal automático */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Subtítulo de bienvenida */
+.hero-subtitle {
+    /* Tamaño legible */
+    font-size: 1.25rem;
+    /* Color atenuado */
+    color: var(--text-muted);
+    /* Ancho óptimo de lectura */
+    max-width: 780px;
+    /* Centrado automático y margen inferior */
+    margin: 0 auto 3rem auto;
+    /* Peso normal */
+    font-weight: 400;
+}
+/* Énfasis en blanco dentro del subtítulo */
+.hero-subtitle strong {
+    color: #fff;
+}
+
+/* Cuadrícula de 4 tarjetas destacadas de la portada */
+.hero-card-grid {
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas responsivas que se ajustan solas (mínimo 240px cada una) */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 1.25rem;
+    /* Margen inferior antes de los botones */
+    margin-bottom: 3rem;
+}
+/* Mini tarjetas interactivas de la portada */
+.hero-mini-card {
+    /* Fondo tenue */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Texto alineado a la izquierda */
+    text-align: left;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición suave */
+    transition: all var(--transition-smooth);
+}
+/* Hover en mini tarjetas */
+.hero-mini-card:hover {
+    /* Ilumina el fondo */
+    background: rgba(255, 255, 255, 0.06);
+    /* Borde resaltado */
+    border-color: var(--border-accent);
+    /* Se eleva 4px */
+    transform: translateY(-4px);
+    /* Sombra de elevación */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+/* Icono emoji dentro de la mini tarjeta */
+.mini-card-icon {
+    /* Tamaño del emoji */
+    font-size: 2rem;
+    /* Separación inferior */
+    margin-bottom: 0.75rem;
+}
+/* Título de la mini tarjeta */
+.hero-mini-card h3 {
+    /* Tamaño de texto */
+    font-size: 1.1rem;
+    /* Margen inferior */
+    margin-bottom: 0.35rem;
+    /* Blanco */
+    color: #fff;
+}
+/* Descripción de la mini tarjeta */
+.hero-mini-card p {
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+    /* Color gris atenuado */
+    color: var(--text-muted);
+}
+/* Contenedor de botones de inicio */
+.hero-cta-group {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Separación entre botones */
+    gap: 1.25rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+
+/* --- 8. SLIDE 2: DEFINICIÓN & SLOPPY VS STRICT --- */
+/* Disposición en 2 columnas: concepto a la izquierda, código a la derecha */
+.two-columns-layout {
+    /* Cuadrícula de 2 columnas proporcionales */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Espacio amplio entre columnas */
+    gap: 2.5rem;
+    /* Alinea al inicio vertical */
+    align-items: start;
+}
+/* Tarjeta informativa */
+.info-card {
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno */
+    padding: 1.5rem;
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+}
+/* Cabecera de la tarjeta con badge */
+.card-badge-header {
+    /* Separación inferior de 1rem */
+    margin-bottom: 1rem;
+}
+/* Párrafos dentro de la tarjeta */
+.info-card p {
+    /* Separación inferior entre párrafos */
+    margin-bottom: 1rem;
+    /* Color de texto gris claro legible */
+    color: #cbd5e1;
+}
+/* Bloque de aviso destacado con barra lateral violeta */
+.highlight-callout {
+    /* Fondo violeta al 8% */
+    background: rgba(99, 102, 241, 0.08);
+    /* Barra lateral izquierda de acento primario */
+    border-left: 3px solid var(--primary);
+    /* Relleno interno vertical y horizontal */
+    padding: 0.85rem 1rem;
+    /* Redondeo solo en el lado derecho */
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    /* Tamaño de texto equilibrado */
+    font-size: 0.95rem;
+    /* Color de texto claro */
+    color: #e2e8f0;
+}
+
+/* Comparativa Sloppy Mode vs Strict Mode */
+.vs-container {
+    /* Cuadrícula CSS de 2 columnas */
+    display: grid;
+    /* Dos columnas de igual ancho fraccionario */
+    grid-template-columns: 1fr 1fr;
+    /* Separación de 1rem entre columnas */
+    gap: 1rem;
+}
+/* Caja individual comparativa */
+.vs-box {
+    /* Esquinas curvas de 14px */
+    border-radius: var(--radius-md);
+    /* Relleno interno de 1.25rem */
+    padding: 1.25rem;
+}
+/* Caja de Sloppy Mode (rojo/rosado) */
+.class-box {
+    /* Fondo carmesí translúcido al 5% */
+    background: rgba(244, 63, 94, 0.05);
+    /* Borde rojizo fino de advertencia */
+    border: 1px solid rgba(244, 63, 94, 0.2);
+}
+/* Título de la caja Sloppy */
+.class-box h4 {
+    /* Tono rosado claro de advertencia */
+    color: #fda4af;
+    /* Tamaño de fuente compacto */
+    font-size: 0.95rem;
+    /* Margen inferior */
+    margin-bottom: 0.75rem;
+}
+/* Caja de Strict Mode (verde esmeralda) */
+.proto-box {
+    /* Fondo esmeralda translúcido al 5% */
+    background: rgba(16, 185, 129, 0.05);
+    /* Borde verde esmeralda fino */
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+/* Título de la caja Strict */
+.proto-box h4 {
+    /* Verde menta suave */
+    color: #6ee7b7;
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+    /* Separación inferior */
+    margin-bottom: 0.75rem;
+}
+/* Listas desordenadas dentro de las cajas */
+.vs-box ul {
+    /* Elimina los puntos predeterminados del navegador */
+    list-style: none;
+    /* Tamaño de letra para listas compactas */
+    font-size: 0.85rem;
+    /* Color gris atenuado */
+    color: var(--text-muted);
+}
+/* Elementos li de la lista */
+.vs-box li {
+    /* Espacio entre cada elemento de la lista */
+    margin-bottom: 0.5rem;
+    /* Posición relativa para anclar la viñeta personalizada */
+    position: relative;
+    /* Relleno izquierdo para dar espacio a la viñeta */
+    padding-left: 1rem;
+}
+/* Viñeta personalizada con punto */
+.vs-box li::before {
+    /* Carácter de punto como viñeta */
+    content: "•";
+    /* Posicionamiento absoluto */
+    position: absolute;
+    /* Anclado a la izquierda */
+    left: 0;
+    /* Color tenue para el punto */
+    color: var(--text-dim);
+}
+
+/* Paneles de Código Estilizados */
+.code-panel {
+    /* Fondo oscuro terminal */
+    background: #030712;
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Oculta desbordamientos */
+    overflow: hidden;
+    /* Sombra de ventana */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+/* Cabecera del panel de código tipo ventana de terminal */
+.code-panel-header {
+    /* Fondo sutil translúcido */
+    background: rgba(255, 255, 255, 0.03);
+    /* Relleno vertical de 0.75rem y horizontal de 1rem */
+    padding: 0.75rem 1rem;
+    /* Alineación flexible */
+    display: flex;
+    /* Centrado vertical de los botones y el título */
+    align-items: center;
+    /* Línea divisoria inferior */
+    border-bottom: 1px solid var(--border-subtle);
+}
+/* Botones redondos de ventana (rojo, amarillo, verde) */
+.terminal-dots {
+    /* Disposición en fila flexible */
+    display: flex;
+    /* Separación de 6px entre cada botón */
+    gap: 6px;
+    /* Margen a la derecha antes del título del archivo */
+    margin-right: 1rem;
+}
+/* Puntos individuales */
+.terminal-dots .dot {
+    /* Ancho de 10px */
+    width: 10px;
+    /* Alto de 10px */
+    height: 10px;
+    /* Forma perfectamente circular */
+    border-radius: 50%;
+}
+/* Botón rojo de cierre */
+.dot.red { 
+    /* Color rojo de cierre de ventana */
+    background: #ef4444; 
+}
+/* Botón amarillo de minimizar */
+.dot.yellow { 
+    /* Color amarillo de advertencia / minimizar */
+    background: #f59e0b; 
+}
+/* Botón verde de expandir */
+.dot.green { 
+    /* Color verde esmeralda / maximizar */
+    background: #10b981; 
+}
+
+/* Nombre del archivo en la cabecera */
+.file-name {
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño compacto */
+    font-size: 0.8rem;
+    /* Color gris azulado tenue */
+    color: var(--text-dim);
+    /* Expande para empujar el botón de copia al extremo */
+    flex: 1;
+}
+/* Botón para copiar código */
+.btn-copy-code {
+    /* Fondo transparente */
+    background: transparent;
+    /* Borde fino sutil */
+    border: 1px solid var(--border-subtle);
+    /* Color del texto */
+    color: var(--text-muted);
+    /* Tamaño pequeño */
+    font-size: 0.75rem;
+    /* Relleno compacto */
+    padding: 0.25rem 0.6rem;
+    /* Bordes ligeramente redondeados */
+    border-radius: var(--radius-sm);
+    /* Cursor de manito interactiva */
+    cursor: pointer;
+    /* Fuente sans-serif legible */
+    font-family: var(--font-sans);
+    /* Transición suave para hover */
+    transition: all var(--transition-fast);
+}
+/* Estado hover del botón de copiar */
+.btn-copy-code:hover {
+    /* Aclara el fondo al 8% */
+    background: rgba(255, 255, 255, 0.08);
+    /* Texto blanco puro */
+    color: #fff;
+}
+
+/* Bloque <pre> donde se muestra el código */
+.code-block {
+    /* Relleno interno generoso */
+    padding: 1.25rem;
+    /* Fuente monoespaciada técnica */
+    font-family: var(--font-mono);
+    /* Tamaño de texto de lectura */
+    font-size: 0.88rem;
+    /* Altura de línea para separación legible del código */
+    line-height: 1.6;
+    /* Permite scroll horizontal si el código es largo */
+    overflow-x: auto;
+    /* Color de texto claro por defecto */
+    color: #e2e8f0;
+}
+
+/* Resaltado de Sintaxis (Syntax Highlighting) */
+/* Palabras clave reservadas (try, catch, const, 'use strict') */
+.c-keyword { 
+    /* Tono carmesí para palabras clave */
+    color: #f43f5e; 
+    /* Negrita */
+    font-weight: 600; 
+}
+/* Nombres de variables y parámetros */
+.c-variable { 
+    /* Tono ámbar claro para identificadores */
+    color: #fcd34d; 
+}
+/* Propiedades y claves de objetos */
+.c-prop { 
+    /* Tono cian celeste para propiedades */
+    color: #38bdf8; 
+}
+/* Literales de texto y strings */
+.c-string { 
+    /* Tono verde esmeralda para cadenas */
+    color: #34d399; 
+}
+/* Nombres de funciones y llamadas a métodos */
+.c-func { 
+    /* Tono violeta para invocaciones */
+    color: #a78bfa; 
+}
+/* Comentarios dentro de las muestras de código */
+.c-comment { 
+    /* Gris pizarra atenuado en cursiva */
+    color: #64748b; 
+    /* Estilo itálico */
+    font-style: italic; 
+}
+
+/* Barra inferior interactiva de prueba rápida */
+.interactive-test-bar {
+    /* Relleno vertical y horizontal */
+    padding: 0.85rem 1.25rem;
+    /* Fondo casi imperceptible */
+    background: rgba(255, 255, 255, 0.02);
+    /* Delimitador superior sutil */
+    border-top: 1px solid var(--border-subtle);
+    /* Disposición horizontal flexible */
+    display: flex;
+    /* Centrado vertical de botón y etiqueta de estado */
+    align-items: center;
+    /* Separación de extremos */
+    justify-content: space-between;
+}
+/* Botón para ejecutar la acción */
+.btn-run-action {
+    /* Fondo índigo translúcido al 20% */
+    background: rgba(99, 102, 241, 0.2);
+    /* Borde primario índigo */
+    border: 1px solid var(--primary);
+    /* Color de texto violeta claro */
+    color: #c7d2fe;
+    /* Tipografía sans-serif */
+    font-family: var(--font-sans);
+    /* Tamaño de texto */
+    font-size: 0.85rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Relleno cómodo para clic */
+    padding: 0.5rem 1rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Cursor de interacción */
+    cursor: pointer;
+    /* Transición ágil */
+    transition: all var(--transition-fast);
+}
+/* Efecto hover al situar el ratón sobre el botón de acción */
+.btn-run-action:hover {
+    /* Fondo sólido del color primario */
+    background: var(--primary);
+    /* Texto en blanco */
+    color: #fff;
+    /* Resplandor neón alrededor */
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+/* Etiqueta de estado */
+.run-status {
+    /* Tamaño de letra compacto */
+    font-size: 0.8rem;
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+}
+
+/* Mini pantalla de consola */
+.mini-console {
+    /* Fondo negro profundo para consola */
+    background: #02040a;
+    /* Borde superior punteado */
+    border-top: 1px dashed var(--border-subtle);
+    /* Espaciado interno */
+    padding: 0.85rem 1.25rem;
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente de terminal */
+    font-size: 0.82rem;
+    /* Color cian tecnológico */
+    color: #38bdf8;
+    /* Altura mínima de 60px */
+    min-height: 60px;
+}
+/* Prompt o cursor de la consola */
+.console-prompt {
+    /* Color atenuado para el símbolo > */
+    color: var(--text-dim);
+}
+
+/* --- 9. SLIDE 3: ÁMBITOS & CLASES ES6 --- */
+/* Cuadrícula o contenedor flexible de comparación de ámbitos */
+.comparison-grid {
+    /* Disposición flexible */
+    display: flex;
+    /* Alineación vertical centrada */
+    align-items: center;
+    /* Separación de 1.5rem entre tarjetas */
+    gap: 1.5rem;
+    /* Margen inferior */
+    margin-bottom: 2rem;
+}
+/* Tarjeta individual de ámbito (Global, Función, Clase ES6) */
+.comparison-card {
+    /* Crece equitativamente para ocupar el espacio */
+    flex: 1;
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno de 2rem */
+    padding: 2rem;
+    /* Transición suave al elevarse con hover */
+    transition: transform var(--transition-smooth);
+}
+/* Efecto de elevación al pasar el cursor sobre la tarjeta */
+.comparison-card:hover {
+    /* Desplaza hacia arriba 3 píxeles */
+    transform: translateY(-3px);
+}
+/* Tarjeta de ámbito de función / constructor */
+.card-constructor {
+    /* Barra superior de acento cian */
+    border-top: 3px solid var(--cyan);
+}
+/* Tarjeta de ámbito de clase / módulo ES6 */
+.card-instance {
+    /* Barra superior de acento verde esmeralda */
+    border-top: 3px solid var(--emerald);
+}
+/* Insignia dentro de la tarjeta comparativa */
+.comp-badge {
+    /* Separación inferior */
+    margin-bottom: 0.75rem;
+}
+/* Título de nivel 3 de la tarjeta */
+.comparison-card h3 {
+    /* Fuente monoespaciada para términos de código */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente destacado */
+    font-size: 1.35rem;
+    /* Color blanco puro */
+    color: #fff;
+    /* Separación inferior mínima */
+    margin-bottom: 0.25rem;
+}
+/* Subtítulo explicativo de la tarjeta */
+.comp-subtitle {
+    /* Comportamiento de bloque */
+    display: block;
+    /* Tamaño de texto */
+    font-size: 0.9rem;
+    /* Color gris atenuado */
+    color: var(--text-dim);
+    /* Margen inferior */
+    margin-bottom: 1.25rem;
+}
+/* Párrafos del cuerpo de la tarjeta */
+.comp-body p {
+    /* Tamaño de fuente legible */
+    font-size: 0.95rem;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Margen inferior */
+    margin-bottom: 1.25rem;
+}
+
+/* Caja de previsualización visual con icono */
+.visual-box {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de 1rem entre icono y texto */
+    gap: 1rem;
+    /* Fondo oscuro translúcido */
+    background: rgba(0, 0, 0, 0.3);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Bordes ligeramente redondeados */
+    border-radius: var(--radius-sm);
+    /* Relleno interno */
+    padding: 0.85rem;
+}
+/* Icono emoji dentro de la caja visual */
+.vis-icon {
+    /* Tamaño prominente */
+    font-size: 1.75rem;
+}
+/* Texto en negrita dentro de la caja visual */
+.vis-text strong {
+    /* Se comporta como bloque */
+    display: block;
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+    /* Blanco */
+    color: #fff;
+}
+/* Texto pequeño o aclaratorio dentro de la caja visual */
+.vis-text small {
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Tamaño pequeño */
+    font-size: 0.8rem;
+}
+
+/* Puente animado con flecha */
+.comparison-bridge {
+    /* Disposición flexible */
+    display: flex;
+    /* Orientación en columna */
+    flex-direction: column;
+    /* Centrado horizontal de los ítems */
+    align-items: center;
+    /* Centrado vertical */
+    justify-content: center;
+    /* Separación mínima entre flecha y texto */
+    gap: 0.25rem;
+    /* Relleno horizontal */
+    padding: 0 0.5rem;
+}
+/* Contenedor de la flecha con indicador */
+.bridge-arrow {
+    /* Disposición flexible */
+    display: flex;
+    /* Orientación en columna */
+    flex-direction: column;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Fuente técnica */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Color ámbar dorado */
+    color: var(--amber);
+}
+/* Símbolo de la flecha con animación fluida */
+.arrow-flow {
+    /* Tamaño grande de la flecha */
+    font-size: 1.5rem;
+    /* Animación continua de flujo hacia la derecha */
+    animation: flowRight 1.5s infinite;
+}
+/* Subtítulo bajo la flecha */
+.bridge-caption {
+    /* Tamaño pequeño */
+    font-size: 0.75rem;
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Evita que el texto salte de línea */
+    white-space: nowrap;
+}
+
+/* Animación de desplazamiento lateral para la flecha */
+@keyframes flowRight {
+    /* Estado inicial y final: en reposo y con 60% de opacidad */
+    0%, 100% { 
+        transform: translateX(0); 
+        opacity: 0.6; 
+    }
+    /* Estado intermedio: avanza 6px hacia la derecha con opacidad total */
+    50% { 
+        transform: translateX(6px); 
+        opacity: 1; 
+    }
+}
+
+/* Comprobador interactivo de activación automática en clases */
+.identity-checker {
+    /* Fondo translúcido tenue */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde punteado para indicar zona de prueba interactiva */
+    border: 1px dashed var(--border-light);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno amplio */
+    padding: 1.25rem 2rem;
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Distribuye elementos a los extremos */
+    justify-content: space-between;
+    /* Separación entre elementos */
+    gap: 1.5rem;
+    /* Margen inferior */
+    margin-bottom: 2rem;
+    /* Envolvente para pantallas pequeñas */
+    flex-wrap: wrap;
+}
+/* Etiqueta <code> dentro de la expresión del comprobador */
+.identity-expr code {
+    /* Tamaño de código */
+    font-size: 1rem;
+    /* Color de texto claro */
+    color: #e2e8f0;
+}
+/* Botón para verificar el modo estricto en la clase */
+.btn-check-identity {
+    /* Fondo esmeralda translúcido al 15% */
+    background: rgba(16, 185, 129, 0.15);
+    /* Borde verde esmeralda */
+    border: 1px solid var(--emerald);
+    /* Color de texto verde menta */
+    color: #6ee7b7;
+    /* Fuente sans-serif */
+    font-family: var(--font-sans);
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Relleno interno */
+    padding: 0.6rem 1.25rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición rápida */
+    transition: all var(--transition-fast);
+}
+/* Efecto hover en botón de verificar identidad */
+.btn-check-identity:hover {
+    /* Fondo esmeralda completo */
+    background: var(--emerald);
+    /* Texto en negro para alto contraste */
+    color: #000;
+    /* Sombra de resplandor esmeralda */
+    box-shadow: 0 0 15px var(--emerald-glow);
+}
+/* Caja que muestra el resultado de la comprobación */
+.identity-result {
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de letra */
+    font-size: 0.9rem;
+    /* Color atenuado */
+    color: var(--text-muted);
+}
+
+/* Tabla comparativa formal de entornos */
+.proto-table {
+    /* Ancho completo */
+    width: 100%;
+    /* Colapsa los bordes dobles de tabla */
+    border-collapse: collapse;
+    /* Separación superior */
+    margin-top: 1rem;
+    /* Tamaño de fuente de datos */
+    font-size: 0.9rem;
+}
+/* Celdas de encabezado (th) y datos (td) */
+.proto-table th, .proto-table td {
+    /* Relleno interno vertical y horizontal */
+    padding: 0.85rem 1rem;
+    /* Alineación de texto a la izquierda */
+    text-align: left;
+    /* Delimitador de fila tenue */
+    border-bottom: 1px solid var(--border-subtle);
+}
+/* Encabezados de la tabla */
+.proto-table th {
+    /* Fondo sutil */
+    background: rgba(255, 255, 255, 0.03);
+    /* Color de texto principal */
+    color: var(--text-main);
+    /* Negrita */
+    font-weight: 600;
+}
+/* Celdas de datos regulares */
+.proto-table td {
+    /* Color secundario */
+    color: var(--text-muted);
+}
+/* Efecto hover sobre las filas de la tabla */
+.proto-table tr:hover td {
+    /* Ilumina el fondo de la fila al 1.5% */
+    background: rgba(255, 255, 255, 0.015);
+}
+
+/* --- 10. SLIDE 4: SIMULADOR DE ERRORES SILENCIOSOS --- */
+/* Contenedor principal del simulador de mutaciones y congelamiento */
+.chain-simulator-container {
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.3);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno de 2rem */
+    padding: 2rem;
+}
+/* Fila de controles interactivos del simulador */
+.simulator-controls {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre botones */
+    gap: 1rem;
+    /* Margen inferior */
+    margin-bottom: 2rem;
+    /* Permite acomodar elementos en varias líneas si no caben */
+    flex-wrap: wrap;
+}
+/* Etiqueta del simulador */
+.sim-label {
+    /* Seminegrita */
+    font-weight: 600;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Tamaño */
+    font-size: 0.9rem;
+}
+/* Grupo de botones para seleccionar el caso de prueba */
+.sim-buttons-group {
+    /* Disposición flexible */
+    display: flex;
+    /* Separación de medio rem */
+    gap: 0.5rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+/* Botón individual de propiedad a probar */
+.sim-prop-btn {
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.04);
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto atenuado */
+    color: var(--text-muted);
+    /* Relleno vertical y horizontal */
+    padding: 0.45rem 0.9rem;
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de texto */
+    font-size: 0.85rem;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición rápida */
+    transition: all var(--transition-fast);
+}
+/* Hover en botón de propiedad del simulador */
+.sim-prop-btn:hover {
+    /* Aclara el fondo */
+    background: rgba(255, 255, 255, 0.08);
+    /* Texto blanco */
+    color: #fff;
+    /* Borde más visible */
+    border-color: var(--border-light);
+}
+/* Estado seleccionado/activo del botón de prueba */
+.sim-prop-btn.active {
+    /* Fondo índigo */
+    background: rgba(99, 102, 241, 0.2);
+    /* Borde primario */
+    border-color: var(--primary);
+    /* Texto violeta claro */
+    color: #c7d2fe;
+    /* Resplandor neón */
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+/* Botón de ejecutar la prueba de mutación */
+.btn-run-chain {
+    /* Empuja el botón al extremo derecho */
+    margin-left: auto;
+}
+
+/* Cuadrícula paralela de comparación de errores silenciosos */
+.silent-error-comparison-grid {
+    /* Cuadrícula CSS de 2 columnas proporcionales */
+    display: grid;
+    /* Dos columnas iguales */
+    grid-template-columns: 1fr 1fr;
+    /* Separación entre columnas */
+    gap: 1.5rem;
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+}
+/* Tarjeta de resultado por cada modo (Sloppy vs Strict) */
+.error-mode-card {
+    /* Fondo azul oscuro elegante */
+    background: #0d1322;
+    /* Borde grueso de 2px */
+    border: 2px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Disposición vertical en columna */
+    display: flex;
+    flex-direction: column;
+    /* Distribuye espacio entre cabecera, terminal y estado */
+    justify-content: space-between;
+    /* Transición suave */
+    transition: all var(--transition-smooth);
+}
+/* Tarjeta de Sloppy Mode (borde superior ámbar) */
+.card-sloppy {
+    /* Borde superior ámbar de 4px */
+    border-top: 4px solid var(--amber);
+}
+/* Tarjeta de Strict Mode (borde superior verde esmeralda) */
+.card-strict {
+    /* Borde superior esmeralda de 4px */
+    border-top: 4px solid var(--emerald);
+}
+/* Cabecera de la tarjeta de modo */
+.mode-header {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación a los extremos */
+    justify-content: space-between;
+    /* Margen inferior */
+    margin-bottom: 1rem;
+}
+/* Título de la cabecera */
+.mode-header h4 {
+    /* Tamaño de texto */
+    font-size: 1rem;
+    /* Color blanco */
+    color: #fff;
+}
+/* Terminal interna que muestra el comportamiento en cada modo */
+.mode-terminal {
+    /* Fondo negro consola */
+    background: #02040a;
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Relleno interno */
+    padding: 1rem;
+    /* Tipografía monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente de código */
+    font-size: 0.85rem;
+    /* Texto claro */
+    color: #e2e8f0;
+    /* Altura mínima de 90px */
+    min-height: 90px;
+    /* Margen inferior */
+    margin-bottom: 1rem;
+    /* Permite scroll horizontal */
+    overflow-x: auto;
+}
+/* Etiqueta de resumen del estado de ejecución */
+.mode-status {
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+    /* Relleno interno */
+    padding: 0.5rem 0.75rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Tipografía sans-serif */
+    font-family: var(--font-sans);
+    /* Peso medio */
+    font-weight: 500;
+}
+/* Estado de peligro / fallo silencioso */
+.status-danger {
+    /* Fondo ámbar translúcido */
+    background: rgba(245, 158, 11, 0.1);
+    /* Texto ámbar cálido */
+    color: #fcd34d;
+    /* Barra lateral izquierda de acento ámbar */
+    border-left: 3px solid var(--amber);
+}
+/* Estado seguro / excepción explícita que avisa al desarrollador */
+.status-safe {
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.1);
+    /* Texto verde menta */
+    color: #6ee7b7;
+    /* Barra lateral izquierda de acento verde esmeralda */
+    border-left: 3px solid var(--emerald);
+}
+
+/* Banner de retroalimentación pedagógica en vivo */
+.chain-live-feedback {
+    /* Separación superior */
+    margin-top: 1rem;
+    /* Relleno interno */
+    padding: 1rem 1.5rem;
+    /* Fondo sutil */
+    background: rgba(255, 255, 255, 0.03);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación entre icono y mensaje */
+    gap: 0.75rem;
+}
+/* Icono del banner de retroalimentación */
+.feedback-icon {
+    /* Tamaño del icono */
+    font-size: 1.25rem;
+}
+/* Texto del banner de retroalimentación */
+.feedback-text {
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+    /* Color de texto claro */
+    color: #e2e8f0;
+}
+
+/* --- 11. SLIDE 5: OPTIMIZACIÓN Y TIEMPOS DE EJECUCIÓN --- */
+/* Disposición en cuadrícula para pestañas y panel de optimización V8 */
+.characteristics-container {
+    /* Cuadrícula CSS */
+    display: grid;
+    /* Pestañas de 280px y panel restante flexible */
+    grid-template-columns: 280px 1fr;
+    /* Espacio amplio de 2rem entre pestañas y panel */
+    gap: 2rem;
+    /* Alineación superior */
+    align-items: start;
+}
+/* Lista vertical de pestañas de optimización */
+.char-tabs {
+    /* Disposición flexible */
+    display: flex;
+    /* En columna vertical */
+    flex-direction: column;
+    /* Espacio de medio rem entre botones */
+    gap: 0.5rem;
+}
+/* Botón individual de pestaña */
+.char-tab-btn {
+    /* Fondo muy tenue */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 0.85rem 1rem;
+    /* Texto alineado a la izquierda */
+    text-align: left;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Alineación horizontal en fila */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre número y título */
+    gap: 0.75rem;
+    /* Transición ágil */
+    transition: all var(--transition-fast);
+}
+/* Hover en botón de pestaña */
+.char-tab-btn:hover {
+    /* Ilumina el fondo al 5% */
+    background: rgba(255, 255, 255, 0.05);
+    /* Borde más brillante */
+    border-color: var(--border-light);
+}
+/* Pestaña actualmente seleccionada */
+.char-tab-btn.active {
+    /* Fondo índigo translúcido */
+    background: rgba(99, 102, 241, 0.15);
+    /* Borde con color primario */
+    border-color: var(--primary);
+    /* Sombra de resplandor primario */
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+/* Número de la característica de optimización */
+.char-num {
+    /* Fuente técnica */
+    font-family: var(--font-mono);
+    /* Tamaño compacto */
+    font-size: 0.8rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Color cian brillante */
+    color: var(--cyan);
+}
+/* Título de la pestaña */
+.char-title {
+    /* Tamaño de texto */
+    font-size: 0.9rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Color principal blanco */
+    color: var(--text-main);
+}
+
+/* Panel donde se detalla la característica seleccionada */
+.char-display-panel {
+    /* Fondo translúcido */
+    background: rgba(0, 0, 0, 0.3);
+    /* Borde delimitador sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno de 2rem */
+    padding: 2rem;
+    /* Altura mínima para evitar saltos al cambiar de pestaña */
+    min-height: 380px;
+}
+/* Vista de detalle individual (oculta por defecto) */
+.char-detail-view {
+    /* Oculto */
+    display: none;
+    /* Animación de aparición suave */
+    animation: fadeIn 0.3s ease;
+}
+/* Vista de detalle activa */
+.char-detail-view.active {
+    /* Se muestra como bloque */
+    display: block;
+}
+
+/* Animación de entrada suave hacia arriba */
+@keyframes fadeIn {
+    /* Comienza transparente y ligeramente desplazado abajo */
+    from { 
+        opacity: 0; 
+        transform: translateY(6px); 
+    }
+    /* Termina opaco y en su posición natural */
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+/* Cabecera interna del panel de detalle */
+.char-view-header {
+    /* Margen inferior */
+    margin-bottom: 1.25rem;
+}
+/* Título H3 del detalle de optimización */
+.char-view-header h3 {
+    /* Tamaño de texto */
+    font-size: 1.4rem;
+    /* Blanco */
+    color: #fff;
+    /* Separación superior */
+    margin-top: 0.5rem;
+}
+/* Párrafo descriptivo de la optimización */
+.char-text {
+    /* Tamaño de fuente */
+    font-size: 1rem;
+    /* Color secundario legible */
+    color: var(--text-muted);
+    /* Margen inferior */
+    margin-bottom: 1.75rem;
+    /* Altura de línea para óptima legibilidad */
+    line-height: 1.7;
+}
+
+/* Tarjeta interactiva dentro del panel de optimización */
+.char-interactive-card {
+    /* Fondo sutil */
+    background: rgba(255, 255, 255, 0.03);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno */
+    padding: 1.5rem;
+}
+/* Caja que muestra el resultado de la prueba de optimización */
+.mutation-result-box {
+    /* Fondo oscuro consola */
+    background: #030712;
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Relleno interno */
+    padding: 1rem;
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de código */
+    font-size: 0.85rem;
+    /* Color cian tecnológico */
+    color: #38bdf8;
+    /* Margen superior */
+    margin-top: 1rem;
+}
+
+/* --- 12. SLIDE 6: PALABRAS RESERVADAS ES6+ --- */
+/* Envoltorio principal para las palabras reservadas */
+.reserved-words-wrapper {
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.3);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Relleno de 2rem */
+    padding: 2rem;
+}
+/* Párrafo introductorio de palabras reservadas */
+.rw-intro {
+    /* Tamaño de fuente */
+    font-size: 1.05rem;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Separación inferior */
+    margin-bottom: 1.5rem;
+}
+/* Contenedor flexible con los chips de palabras reservadas */
+.reserved-tags-grid {
+    /* Disposición flexible */
+    display: flex;
+    /* Envolvente para acomodar múltiples etiquetas */
+    flex-wrap: wrap;
+    /* Espacio entre etiquetas */
+    gap: 0.75rem;
+    /* Margen inferior antes del probador */
+    margin-bottom: 2rem;
+}
+/* Chip individual de palabra reservada */
+.rw-tag {
+    /* Fondo sutil translúcido */
+    background: rgba(255, 255, 255, 0.03);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Forma de píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Relleno vertical y horizontal */
+    padding: 0.5rem 1rem;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición suave */
+    transition: all var(--transition-fast);
+}
+/* Hover en el chip de palabra reservada */
+.rw-tag:hover {
+    /* Fondo índigo translúcido */
+    background: rgba(99, 102, 241, 0.2);
+    /* Borde primario resaltado */
+    border-color: var(--primary);
+    /* Se eleva 2 píxeles */
+    transform: translateY(-2px);
+    /* Resplandor neón */
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+/* Etiqueta <code> dentro del chip */
+.rw-tag code {
+    /* Fondo transparente */
+    background: transparent;
+    /* Sin relleno extra */
+    padding: 0;
+    /* Color violeta claro */
+    color: #a5b4fc;
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+}
+
+/* Caja del probador interactivo de palabras reservadas */
+.rw-tester-box {
+    /* Fondo sutil */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno */
+    padding: 1.5rem;
+}
+/* Etiqueta del probador */
+.tester-input-group label {
+    /* Se comporta como bloque */
+    display: block;
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Margen inferior */
+    margin-bottom: 0.75rem;
+}
+/* Contenedor horizontal de campo de entrada y botón */
+.input-with-button {
+    /* Disposición flexible */
+    display: flex;
+    /* Separación entre input y botón */
+    gap: 0.75rem;
+}
+/* Campo de texto donde el alumno escribe el identificador */
+.input-with-button input {
+    /* Ocupa todo el espacio horizontal restante */
+    flex: 1;
+    /* Fondo oscuro de consola */
+    background: #030712;
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto blanco */
+    color: #fff;
+    /* Tipografía monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de texto */
+    font-size: 0.95rem;
+    /* Relleno interno */
+    padding: 0.6rem 1rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Elimina contorno por defecto */
+    outline: none;
+    /* Transición de borde */
+    transition: border-color var(--transition-fast);
+}
+/* Foco en el campo de texto */
+.input-with-button input:focus {
+    /* Borde resaltado con el color primario */
+    border-color: var(--primary);
+}
+/* Pantalla de resultado del probador */
+.rw-tester-result {
+    /* Margen superior */
+    margin-top: 1rem;
+    /* Relleno interno */
+    padding: 0.85rem 1rem;
+    /* Fondo negro consola */
+    background: #02040a;
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño de letra */
+    font-size: 0.88rem;
+    /* Color cian tecnológico */
+    color: #38bdf8;
+}
+
+/* --- 13. SLIDE 7: PREVENCIÓN DE MALA SINTAXIS --- */
+/* Cuadrícula responsiva de buenas y malas prácticas sintácticas */
+.best-practices-grid {
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas autoajustables de mínimo 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 1.5rem;
+}
+/* Tarjeta individual de práctica de código */
+.practice-card {
+    /* Fondo muy sutil */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Disposición vertical */
+    display: flex;
+    flex-direction: column;
+    /* Distribución equilibrada */
+    justify-content: space-between;
+}
+/* Tarjeta de práctica correcta / código seguro */
+.practice-card.good {
+    /* Borde superior verde esmeralda de 3px */
+    border-top: 3px solid var(--emerald);
+}
+/* Tarjeta de práctica incorrecta / error en modo estricto */
+.practice-card.bad {
+    /* Borde superior carmesí de 3px */
+    border-top: 3px solid var(--rose);
+}
+/* Píldora de estado (CORRECTO / ERROR) */
+.status-pill {
+    /* Tamaño compacto */
+    font-size: 0.7rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Espaciado entre letras */
+    letter-spacing: 0.05em;
+    /* Relleno vertical y horizontal */
+    padding: 0.2rem 0.5rem;
+    /* Bordes completamente redondeados */
+    border-radius: var(--radius-pill);
+    /* Comportamiento de bloque en línea */
+    display: inline-block;
+    /* Separación inferior */
+    margin-bottom: 0.75rem;
+}
+/* Estilo de píldora para caso válido / aprobado */
+.pill-good {
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.15);
+    /* Color de texto verde menta */
+    color: #6ee7b7;
+}
+/* Estilo de píldora para error o sintaxis prohibida */
+.pill-bad {
+    /* Fondo rojo/rosado translúcido */
+    background: rgba(244, 63, 94, 0.15);
+    /* Color de texto rosado claro */
+    color: #fda4af;
+}
+/* Título de la tarjeta de práctica */
+.practice-card h4 {
+    /* Tamaño de texto */
+    font-size: 1.05rem;
+    /* Color blanco */
+    color: #fff;
+    /* Margen inferior */
+    margin-bottom: 0.5rem;
+}
+/* Párrafo explicativo de la práctica */
+.practice-card p {
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Separación inferior */
+    margin-bottom: 1rem;
+}
+/* Fragmento diminuto de código demostrativo */
+.code-snippet-tiny {
+    /* Fondo oscuro de terminal */
+    background: #030712;
+    /* Relleno compacto */
+    padding: 0.6rem 0.8rem;
+    /* Bordes redondeados */
+    border-radius: var(--radius-sm);
+    /* Fuente técnica */
+    font-family: var(--font-mono);
+    /* Tamaño pequeño */
+    font-size: 0.78rem;
+}
+
+/* --- 14. SLIDE 8: ANALOGÍA (CORRECTOR LEGAL) --- */
+/* Contenedor interactivo de la metáfora del corrector legal vs máquina de escribir */
+.toolbox-interactive-wrapper {
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.3);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno de 2rem */
+    padding: 2rem;
+}
+/* Fila selectora de herramientas legales / cláusulas */
+.tool-picker {
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de 1.25rem */
+    gap: 1.25rem;
+    /* Margen inferior */
+    margin-bottom: 2.5rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+/* Etiqueta del selector de herramientas */
+.picker-label {
+    /* Seminegrita */
+    font-weight: 600;
+    /* Color de texto secundario */
+    color: var(--text-muted);
+    /* Tamaño de texto */
+    font-size: 0.95rem;
+}
+/* Fila de botones para elegir la cláusula */
+.tools-btn-row {
+    /* Disposición horizontal */
+    display: flex;
+    /* Espacio entre botones */
+    gap: 0.75rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+/* Botón de cláusula o acción en la analogía */
+.tool-btn {
+    /* Fondo translúcido tenue */
+    background: rgba(255, 255, 255, 0.04);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto claro */
+    color: var(--text-main);
+    /* Relleno */
+    padding: 0.6rem 1.1rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Tipografía sans-serif */
+    font-family: var(--font-sans);
+    /* Tamaño de texto */
+    font-size: 0.9rem;
+    /* Peso medio */
+    font-weight: 500;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical con el icono */
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.5rem;
+    /* Transición rápida */
+    transition: all var(--transition-fast);
+}
+/* Hover en el botón de la analogía */
+.tool-btn:hover {
+    /* Aclara el fondo al 8% */
+    background: rgba(255, 255, 255, 0.08);
+    /* Se eleva 2px */
+    transform: translateY(-2px);
+}
+/* Botón actualmente seleccionado */
+.tool-btn.active {
+    /* Fondo índigo translúcido */
+    background: rgba(99, 102, 241, 0.2);
+    /* Borde primario */
+    border-color: var(--primary);
+    /* Color violeta claro */
+    color: #c7d2fe;
+    /* Resplandor neón */
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* Contenedor flexible de los talleres o escritorios de trabajo */
+.family-workshops {
+    /* Disposición horizontal flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio uniforme a los extremos */
+    justify-content: space-between;
+    /* Separación entre escritorios */
+    gap: 1.5rem;
+    /* Margen inferior */
+    margin-bottom: 2rem;
+}
+/* Tarjeta de taller / escritorio (Máquina antigua vs Corrector inteligente) */
+.workshop-card {
+    /* Ocupa espacio equitativo */
+    flex: 1;
+    /* Fondo azul noche */
+    background: #0f172a;
+    /* Borde grueso de 2px */
+    border: 2px solid var(--border-subtle);
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.75rem;
+    /* Texto centrado */
+    text-align: center;
+    /* Transición suave */
+    transition: all var(--transition-smooth);
+}
+/* Estado cuando el corrector detecta un error legal */
+.workshop-card.ws-found {
+    /* Borde verde esmeralda de alerta */
+    border-color: var(--emerald);
+    /* Sombra de resplandor esmeralda */
+    box-shadow: 0 0 25px var(--emerald-glow);
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.08);
+}
+/* Avatar o emoji del escritorio */
+.ws-avatar {
+    /* Tamaño gigante del emoji */
+    font-size: 2.5rem;
+    /* Margen inferior */
+    margin-bottom: 0.5rem;
+}
+/* Título del taller */
+.ws-header h3 {
+    /* Tamaño de texto */
+    font-size: 1.15rem;
+    /* Blanco */
+    color: #fff;
+}
+/* Subtítulo del taller */
+.ws-sub {
+    /* Tamaño pequeño */
+    font-size: 0.78rem;
+    /* Color atenuado */
+    color: var(--text-dim);
+    /* Se comporta como bloque */
+    display: block;
+    /* Margen inferior */
+    margin-bottom: 1rem;
+}
+/* Contenedor de cláusulas o documentos dentro del taller */
+.ws-items {
+    /* Altura mínima para estabilidad de layout */
+    min-height: 60px;
+    /* Disposición en columna */
+    display: flex;
+    flex-direction: column;
+    /* Separación entre cláusulas */
+    gap: 0.35rem;
+    /* Margen inferior */
+    margin-bottom: 1rem;
+}
+/* Ítem o cláusula individual */
+.ws-item {
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.05);
+    /* Relleno interno */
+    padding: 0.5rem 0.75rem;
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Tamaño de letra */
+    font-size: 0.88rem;
+    /* Color secundario */
+    color: var(--text-muted);
+}
+/* Ítem resaltado por el corrector estricto */
+.ws-item.highlight-item {
+    /* Fondo esmeralda brillante */
+    background: var(--emerald);
+    /* Texto negro de alto contraste */
+    color: #000;
+    /* Negrita */
+    font-weight: 700;
+}
+/* Texto de estado dentro del taller */
+.ws-status {
+    /* Tamaño de letra */
+    font-size: 0.82rem;
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Fuente monoespaciada */
+    font-family: var(--font-mono);
+}
+
+/* Flujo animado con flecha entre talleres */
+.ws-arrow-flow {
+    /* Disposición vertical */
+    display: flex;
+    flex-direction: column;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Espacio mínimo */
+    gap: 0.25rem;
+    /* Fuente técnica */
+    font-family: var(--font-mono);
+    /* Tamaño */
+    font-size: 0.85rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Color ámbar */
+    color: var(--amber);
+}
+/* Rayo o símbolo de flecha */
+.arrow-beam {
+    /* Tamaño grande */
+    font-size: 1.75rem;
+}
+
+/* Banner de conclusión de la analogía */
+.toolbox-result-banner {
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.03);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno */
+    padding: 1rem 1.5rem;
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.85rem;
+}
+/* Icono del banner de resultado */
+.banner-icon {
+    /* Tamaño de icono */
+    font-size: 1.5rem;
+}
+/* Mensaje explicativo del banner */
+.banner-text {
+    /* Tamaño de texto */
+    font-size: 1rem;
+    /* Color claro */
+    color: #e2e8f0;
+}
+
+/* --- 15. SLIDE 9: PLAYGROUND (ENTORNO DE PRUEBAS EN VIVO) --- */
+/* Disposición en cuadrícula del entorno de desarrollo: editor a la izquierda y consola a la derecha */
+.playground-layout {
+    /* Cuadrícula CSS */
+    display: grid;
+    /* 1.15 fracciones para el editor y 0.85 fracciones para la consola */
+    grid-template-columns: 1.15fr 0.85fr;
+    /* Espacio entre editor y consola */
+    gap: 1.5rem;
+    /* Altura fija de 520px para entorno de desarrollo */
+    height: 520px;
+}
+/* Paneles contenedores del editor y la consola interactiva */
+.editor-pane, .console-pane {
+    /* Fondo negro profundo para código */
+    background: #030712;
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Disposición flexible */
+    display: flex;
+    /* En orientación de columna */
+    flex-direction: column;
+    /* Oculta desbordamientos en las esquinas */
+    overflow: hidden;
+}
+/* Barra de herramientas superior para el editor y la consola */
+.editor-toolbar, .console-toolbar {
+    /* Fondo translúcido tenue */
+    background: rgba(255, 255, 255, 0.03);
+    /* Relleno vertical de 0.6rem y horizontal de 1rem */
+    padding: 0.6rem 1rem;
+    /* Línea divisoria inferior */
+    border-bottom: 1px solid var(--border-subtle);
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Distribución a los extremos */
+    justify-content: space-between;
+}
+/* Selector desplegable de plantillas y ejemplos predefinidos */
+.preset-dropdown {
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre etiqueta y select */
+    gap: 0.5rem;
+    /* Tamaño de texto */
+    font-size: 0.85rem;
+    /* Color secundario */
+    color: var(--text-muted);
+}
+/* Estilo del elemento select desplegable */
+.preset-dropdown select {
+    /* Fondo oscuro */
+    background: rgba(255, 255, 255, 0.05);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto blanco */
+    color: #fff;
+    /* Relleno compacto */
+    padding: 0.35rem 0.6rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radius-sm);
+    /* Tipografía sans-serif */
+    font-family: var(--font-sans);
+    /* Tamaño de fuente */
+    font-size: 0.82rem;
+    /* Cursor de clic */
+    cursor: pointer;
+}
+/* Foco sobre el select */
+.preset-dropdown select:focus {
+    /* Elimina el contorno por defecto */
+    outline: none;
+    /* Borde primario resaltado */
+    border-color: var(--primary);
+}
+
+/* Grupo de botones de acción en la barra del editor */
+.editor-actions {
+    /* Disposición flexible */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre botones */
+    gap: 0.5rem;
+}
+/* Botón genérico de la barra de herramientas */
+.btn-toolbar {
+    /* Fondo transparente */
+    background: transparent;
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto atenuado */
+    color: var(--text-muted);
+    /* Tamaño pequeño */
+    font-size: 0.8rem;
+    /* Relleno interno */
+    padding: 0.4rem 0.75rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Cursor de clic */
+    cursor: pointer;
+}
+/* Hover en botones de barra de herramientas */
+.btn-toolbar:hover {
+    /* Aclara el fondo */
+    background: rgba(255, 255, 255, 0.08);
+    /* Texto blanco */
+    color: #fff;
+}
+/* Botón principal para ejecutar el código del editor */
+.btn-run-editor {
+    /* Relleno cómodo */
+    padding: 0.45rem 1rem;
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+}
+
+/* Contenedor relativo del área de texto para abarcar toda la altura disponible */
+.textarea-container {
+    /* Expande para ocupar todo el espacio vertical del panel */
+    flex: 1;
+    /* Posicionamiento relativo para hijos absolutos */
+    position: relative;
+}
+/* Área de texto editable donde el usuario escribe código JavaScript */
+#liveCodeEditor {
+    /* Ocupa el 100% del ancho del panel */
+    width: 100%;
+    /* Ocupa el 100% de la altura */
+    height: 100%;
+    /* Fondo transparente sobre la base oscura */
+    background: transparent;
+    /* Sin borde nativo */
+    border: none;
+    /* Color de texto claro */
+    color: #e2e8f0;
+    /* Fuente monoespaciada para código */
+    font-family: var(--font-mono);
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+    /* Altura de línea para legibilidad */
+    line-height: 1.55;
+    /* Relleno interno */
+    padding: 1.25rem;
+    /* Desactiva el tirador de redimensionamiento nativo */
+    resize: none;
+    /* Sin contorno */
+    outline: none;
+    /* Respeta espacios en blanco y saltos de línea */
+    white-space: pre;
+    /* Ancho de tabulación a 4 espacios */
+    tab-size: 4;
+}
+
+/* Título de la consola */
+.console-title {
+    /* Fuente técnica */
+    font-family: var(--font-mono);
+    /* Tamaño de letra */
+    font-size: 0.85rem;
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Empuja los botones al extremo derecho */
+    flex: 1;
+}
+/* Botón para limpiar los mensajes de la consola */
+.btn-clear-console {
+    /* Fondo transparente */
+    background: transparent;
+    /* Borde fino */
+    border: 1px solid var(--border-subtle);
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Tamaño compacto */
+    font-size: 0.75rem;
+    /* Relleno pequeño */
+    padding: 0.25rem 0.5rem;
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Cursor de clic */
+    cursor: pointer;
+}
+/* Hover en botón limpiar consola */
+.btn-clear-console:hover {
+    /* Color de texto blanco puro */
+    color: #fff;
+}
+/* Contenedor con scroll de los registros generados por el sandbox */
+.console-logs-container {
+    /* Expande para ocupar el espacio vertical */
+    flex: 1;
+    /* Scroll vertical cuando hay muchos logs */
+    overflow-y: auto;
+    /* Relleno interno */
+    padding: 1rem;
+    /* Fuente monoespaciada de terminal */
+    font-family: var(--font-mono);
+    /* Tamaño de letra */
+    font-size: 0.84rem;
+    /* Disposición en columna */
+    display: flex;
+    flex-direction: column;
+    /* Espacio de 0.4rem entre líneas */
+    gap: 0.4rem;
+}
+/* Estilo base para cada línea de log */
+.log-line {
+    /* Relleno interno */
+    padding: 0.35rem 0.5rem;
+    /* Bordes redondeados */
+    border-radius: 4px;
+    /* Rompe palabras largas para evitar desbordes */
+    word-break: break-all;
+    /* Borde lateral izquierdo transparente por defecto */
+    border-left: 2px solid transparent;
+}
+/* Mensaje informativo del sistema */
+.log-line.info-line {
+    /* Color azul cian */
+    color: #38bdf8;
+    /* Fondo cian translúcido al 5% */
+    background: rgba(6, 182, 212, 0.05);
+}
+/* Registro estándar de console.log */
+.log-line.log-normal {
+    /* Color claro */
+    color: #e2e8f0;
+    /* Fondo sutil */
+    background: rgba(255, 255, 255, 0.02);
+}
+/* Registro de excepción o error (TypeError, ReferenceError) */
+.log-line.log-error {
+    /* Tono rosado de error */
+    color: #fda4af;
+    /* Fondo carmesí translúcido */
+    background: rgba(244, 63, 94, 0.1);
+    /* Borde izquierdo rojo carmesí */
+    border-left-color: var(--rose);
+}
+/* Registro de prueba exitosa o superada */
+.log-line.log-success {
+    /* Tono verde menta */
+    color: #6ee7b7;
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.1);
+    /* Borde izquierdo verde esmeralda */
+    border-left-color: var(--emerald);
+}
+/* Marca de tiempo o timestamp en los registros */
+.log-time {
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Separación a la derecha */
+    margin-right: 0.5rem;
+    /* Tamaño de fuente diminuto */
+    font-size: 0.75rem;
+}
+
+/* --- 16. SLIDE 10: RESUMEN & RETOS PRÁCTICOS --- */
+/* Diapositiva final de resumen */
+.summary-slide {
+    /* Alineación de texto centrada */
+    text-align: center;
+}
+/* Cabecera centrada de la diapositiva final */
+.summary-slide .slide-header {
+    /* Ancho máximo contenido en 700px */
+    max-width: 700px;
+    /* Centrado horizontal */
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Cuadrícula de tarjetas de ejercicios prácticos */
+.exercises-wrapper {
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas autoajustables de mínimo 320px */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 1.5rem;
+}
+/* Tarjeta individual de reto práctico */
+.exercise-card {
+    /* Fondo muy sutil */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno generoso */
+    padding: 1.75rem;
+    /* Disposición vertical */
+    display: flex;
+    flex-direction: column;
+    /* Texto alineado a la izquierda para cómoda lectura */
+    text-align: left;
+}
+/* Cabecera de la tarjeta del ejercicio */
+.ex-header {
+    /* Margen inferior */
+    margin-bottom: 1rem;
+}
+/* Insignia de nivel de dificultad (Básico, Intermedio, Avanzado) */
+.ex-level {
+    /* Separación inferior */
+    margin-bottom: 0.5rem;
+}
+/* Título del ejercicio */
+.ex-header h3 {
+    /* Tamaño de fuente */
+    font-size: 1.2rem;
+    /* Color blanco */
+    color: #fff;
+}
+/* Descripción detallada del reto a resolver */
+.ex-desc {
+    /* Tamaño de texto */
+    font-size: 0.9rem;
+    /* Color secundario */
+    color: var(--text-muted);
+    /* Margen inferior */
+    margin-bottom: 1.5rem;
+    /* Crece para empujar los botones al final */
+    flex: 1;
+    /* Altura de línea */
+    line-height: 1.6;
+}
+/* Pie de la tarjeta con botones de acción */
+.ex-footer {
+    /* Disposición flexible */
+    display: flex;
+    /* Espacio entre botones */
+    gap: 0.75rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+/* Botón de cargar ejercicio y botón de ver solución */
+.btn-ex-action, .btn-ex-solution {
+    /* Cada botón ocupa el 50% de la fila */
+    flex: 1;
+    /* Fondo translúcido */
+    background: rgba(255, 255, 255, 0.04);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Color principal */
+    color: var(--text-main);
+    /* Relleno */
+    padding: 0.6rem 0.8rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-sm);
+    /* Fuente sans-serif */
+    font-family: var(--font-sans);
+    /* Tamaño compacto */
+    font-size: 0.82rem;
+    /* Negrita */
+    font-weight: 600;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición ágil */
+    transition: all var(--transition-fast);
+}
+/* Hover en botón de cargar reto */
+.btn-ex-action:hover {
+    /* Fondo índigo translúcido */
+    background: rgba(99, 102, 241, 0.2);
+    /* Borde primario */
+    border-color: var(--primary);
+    /* Texto violeta claro */
+    color: #c7d2fe;
+}
+/* Hover en botón de revelar solución */
+.btn-ex-solution:hover {
+    /* Aclara el fondo al 10% */
+    background: rgba(255, 255, 255, 0.1);
+}
+/* Caja desplegable que contiene la solución comentada */
+.ex-solution-box {
+    /* Oculta por defecto */
+    display: none;
+    /* Margen superior */
+    margin-top: 1rem;
+    /* Fondo oscuro consola */
+    background: #030712;
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-sm);
+    /* Relleno interno */
+    padding: 0.75rem;
+    /* Tipografía monoespaciada */
+    font-family: var(--font-mono);
+    /* Tamaño pequeño */
+    font-size: 0.78rem;
+    /* Color cian */
+    color: #38bdf8;
+    /* Permite scroll horizontal */
+    overflow-x: auto;
+    /* Animación de fade */
+    animation: fadeIn 0.3s ease;
+}
+/* Clase para hacer visible la solución al pulsar el botón */
+.ex-solution-box.visible {
+    /* Muestra como bloque */
+    display: block;
+}
+
+/* Cuadrícula de tarjetas de recapitulación general */
+.summary-cards-grid {
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas autoajustables de mínimo 220px */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Espacio entre tarjetas */
+    gap: 1.25rem;
+    /* Margen inferior */
+    margin-bottom: 3rem;
+}
+/* Tarjeta individual de recapitulación */
+.summary-card {
+    /* Fondo muy tenue */
+    background: rgba(255, 255, 255, 0.02);
+    /* Borde sutil */
+    border: 1px solid var(--border-subtle);
+    /* Esquinas curvas */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Texto alineado a la izquierda */
+    text-align: left;
+    /* Transición de elevación */
+    transition: transform var(--transition-smooth);
+}
+/* Hover en tarjeta de resumen */
+.summary-card:hover {
+    /* Se eleva 4 píxeles */
+    transform: translateY(-4px);
+    /* Borde resaltado */
+    border-color: var(--border-accent);
+}
+/* Icono emoji de la tarjeta de resumen */
+.sum-icon {
+    /* Tamaño grande */
+    font-size: 1.75rem;
+    /* Margen inferior */
+    margin-bottom: 0.5rem;
+}
+/* Título de la tarjeta de resumen */
+.summary-card h4 {
+    /* Tamaño de texto */
+    font-size: 1.05rem;
+    /* Blanco */
+    color: #fff;
+    /* Separación inferior */
+    margin-bottom: 0.35rem;
+}
+/* Párrafo explicativo de la tarjeta de resumen */
+.summary-card p {
+    /* Tamaño de fuente */
+    font-size: 0.85rem;
+    /* Color secundario */
+    color: var(--text-muted);
+}
+/* Barra inferior con botones finales de acción */
+.summary-actions-bar {
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Espacio entre botones */
+    gap: 1.25rem;
+    /* Envolvente */
+    flex-wrap: wrap;
+}
+
+/* --- 17. Barra Flotante de Navegación Inferior --- */
+/* Barra de control fijada en el fondo para pasar diapositivas y ver progreso */
+.bottom-controls {
+    /* Posición fija en la pantalla */
+    position: fixed;
+    /* Separada 1.5rem del borde inferior */
+    bottom: 1.5rem;
+    /* Centrado horizontal al 50% de la ventana */
+    left: 50%;
+    /* Desplaza hacia atrás la mitad de su propio ancho para centrado perfecto */
+    transform: translateX(-50%);
+    /* Fondo oscuro glassmorphic con 85% de opacidad */
+    background: rgba(14, 21, 38, 0.85);
+    /* Desenfoque de cristal estándar */
+    backdrop-filter: blur(20px);
+    /* Desenfoque para Safari */
+    -webkit-backdrop-filter: blur(20px);
+    /* Borde fino reflectivo */
+    border: 1px solid var(--border-light);
+    /* Bordes completamente redondeados en forma de cápsula */
+    border-radius: var(--radius-pill);
+    /* Relleno vertical de 0.5rem y horizontal de 0.85rem */
+    padding: 0.5rem 0.85rem;
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación de 1.5rem entre botones y puntos */
+    gap: 1.5rem;
+    /* Sombra profunda para dar efecto de elevación flotante */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+    /* Elevado sobre las diapositivas */
+    z-index: 99;
+}
+/* Botón genérico de control (Anterior, Siguiente, etc.) */
+.ctrl-btn {
+    /* Fondo tenue translúcido */
+    background: rgba(255, 255, 255, 0.05);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Color de texto principal */
+    color: var(--text-main);
+    /* Relleno cómodo */
+    padding: 0.5rem 1.25rem;
+    /* Píldora redondeada */
+    border-radius: var(--radius-pill);
+    /* Fuente sans-serif */
+    font-family: var(--font-sans);
+    /* Tamaño de texto */
+    font-size: 0.9rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* En línea flexible para alinear texto e icono */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio entre icono y texto */
+    gap: 0.5rem;
+    /* Transición ágil */
+    transition: all var(--transition-fast);
+}
+/* Hover en botones de navegación */
+.ctrl-btn:hover {
+    /* Aclara el fondo al 12% */
+    background: rgba(255, 255, 255, 0.12);
+    /* Se eleva 1px */
+    transform: translateY(-1px);
+}
+/* Variante destacada del botón de navegación (Siguiente) */
+.ctrl-btn-primary {
+    /* Fondo índigo primario */
+    background: var(--primary);
+    /* Borde primario */
+    border-color: var(--primary);
+    /* Resplandor neón */
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+/* Hover en el botón primario */
+.ctrl-btn-primary:hover {
+    /* Fondo primario hover más oscuro */
+    background: var(--primary-hover);
+    /* Resplandor expandido */
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+/* Contenedor horizontal de puntos indicadores de diapositiva */
+.slide-dots-container {
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Espacio de medio rem entre puntos */
+    gap: 0.5rem;
+}
+/* Punto individual inactivo */
+.slide-dot {
+    /* Ancho de 10px */
+    width: 10px;
+    /* Alto de 10px */
+    height: 10px;
+    /* Forma perfectamente circular */
+    border-radius: 50%;
+    /* Fondo blanco al 20% */
+    background: rgba(255, 255, 255, 0.2);
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición suave para expandirse */
+    transition: all var(--transition-smooth);
+}
+/* Hover en punto */
+.slide-dot:hover {
+    /* Aclara al 50% */
+    background: rgba(255, 255, 255, 0.5);
+    /* Crece un 20% */
+    transform: scale(1.2);
+}
+/* Punto correspondiente a la diapositiva actual */
+.slide-dot.active {
+    /* Color cian brillante */
+    background: var(--cyan);
+    /* Resplandor neón cian */
+    box-shadow: 0 0 10px var(--cyan-glow);
+    /* Se alarga a 24px tipo píldora */
+    width: 24px;
+    /* Borde de píldora redondeada */
+    border-radius: var(--radius-pill);
+}
+
+/* --- 18. Modal de Visión General --- */
+/* Capa oscura superpuesta que cubre toda la pantalla al abrir el modal */
+.modal-overlay {
+    /* Posición fija en la ventana */
+    position: fixed;
+    /* Cubre los 4 extremos */
+    inset: 0;
+    /* Fondo negro con 85% de opacidad */
+    background: rgba(0, 0, 0, 0.85);
+    /* Desenfoque de cristal de fondo */
+    backdrop-filter: blur(12px);
+    /* Desenfoque para Safari */
+    -webkit-backdrop-filter: blur(12px);
+    /* Elevado al frente de todo */
+    z-index: 1000;
+    /* Oculto por defecto */
+    display: none;
+    /* Centrado horizontal de la ventana modal */
+    align-items: center;
+    /* Centrado vertical */
+    justify-content: center;
+    /* Espaciado de seguridad */
+    padding: 2rem;
+    /* Totalmente transparente por defecto */
+    opacity: 0;
+    /* Transición de fundido */
+    transition: opacity 0.25s ease;
+}
+/* Clase activa para mostrar el modal */
+.modal-overlay.active {
+    /* Se hace visible como contenedor flexible */
+    display: flex;
+    /* Opacidad completa */
+    opacity: 1;
+}
+/* Ventana o tarjeta del modal */
+.modal-window {
+    /* Fondo azul oscuro elegante */
+    background: #0d1322;
+    /* Borde reflectivo */
+    border: 1px solid var(--border-light);
+    /* Esquinas curvas de 20px */
+    border-radius: var(--radius-lg);
+    /* Ancho al 100% de su espacio disponible */
+    width: 100%;
+    /* Ancho máximo contenido en 1000px */
+    max-width: 1000px;
+    /* Altura máxima del 85% del alto de pantalla */
+    max-height: 85vh;
+    /* Disposición en columna */
+    display: flex;
+    flex-direction: column;
+    /* Oculta desbordamientos en las esquinas */
+    overflow: hidden;
+    /* Sombra profunda para destacar sobre el fondo */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+/* Encabezado del modal */
+.modal-header {
+    /* Relleno interno */
+    padding: 1.25rem 2rem;
+    /* Línea divisoria inferior */
+    border-bottom: 1px solid var(--border-subtle);
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Separación a los extremos */
+    justify-content: space-between;
+}
+/* Título del modal */
+.modal-header h3 {
+    /* Tamaño de texto */
+    font-size: 1.25rem;
+    /* Color blanco */
+    color: #fff;
+}
+/* Botón para cerrar el modal (X) */
+.btn-close-modal {
+    /* Fondo transparente */
+    background: transparent;
+    /* Sin borde */
+    border: none;
+    /* Color tenue */
+    color: var(--text-dim);
+    /* Tamaño del símbolo */
+    font-size: 1.25rem;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Relleno */
+    padding: 0.25rem;
+}
+/* Hover en botón cerrar */
+.btn-close-modal:hover {
+    /* Color blanco puro */
+    color: #fff;
+}
+/* Cuadrícula de miniaturas de diapositivas dentro del modal */
+.modal-grid {
+    /* Relleno interno */
+    padding: 2rem;
+    /* Scroll vertical si hay muchas miniaturas */
+    overflow-y: auto;
+    /* Cuadrícula CSS automática */
+    display: grid;
+    /* Columnas autoajustables de mínimo 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    /* Espacio entre miniaturas */
+    gap: 1.25rem;
+}
+/* Miniatura individual de diapositiva */
+.overview-thumb {
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.03);
+    /* Borde tenue */
+    border: 1px solid var(--border-subtle);
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Relleno interno */
+    padding: 1.25rem;
+    /* Cursor de clic */
+    cursor: pointer;
+    /* Transición ágil */
+    transition: all var(--transition-fast);
+}
+/* Hover en miniatura */
+.overview-thumb:hover {
+    /* Fondo índigo translúcido */
+    background: rgba(99, 102, 241, 0.15);
+    /* Borde primario */
+    border-color: var(--primary);
+    /* Se eleva 3 píxeles */
+    transform: translateY(-3px);
+}
+/* Miniatura correspondiente a la diapositiva en la que está el usuario actualmente */
+.overview-thumb.current {
+    /* Borde cian tecnológico */
+    border-color: var(--cyan);
+    /* Resplandor neón cian */
+    box-shadow: 0 0 15px var(--cyan-glow);
+}
+/* Número de diapositiva en la miniatura */
+.thumb-num {
+    /* Tipografía técnica */
+    font-family: var(--font-mono);
+    /* Tamaño pequeño */
+    font-size: 0.8rem;
+    /* Color cian */
+    color: var(--cyan);
+    /* Separación inferior */
+    margin-bottom: 0.35rem;
+    /* Se comporta como bloque */
+    display: block;
+}
+/* Título de la diapositiva en la miniatura */
+.thumb-title {
+    /* Tamaño de texto */
+    font-size: 0.95rem;
+    /* Seminegrita */
+    font-weight: 600;
+    /* Blanco */
+    color: #fff;
+}
+
+/* --- 19. Notificación Toast Flotante --- */
+/* Mensaje emergente flotante en la esquina inferior derecha */
+.toast-notification {
+    /* Posición fija en la pantalla */
+    position: fixed;
+    /* A 2rem del fondo */
+    bottom: 2rem;
+    /* A 2rem de la derecha */
+    right: 2rem;
+    /* Fondo gris oscuro azabache */
+    background: #111827;
+    /* Borde tenue general */
+    border: 1px solid var(--border-light);
+    /* Barra lateral izquierda verde esmeralda de confirmación */
+    border-left: 4px solid var(--emerald);
+    /* Texto blanco */
+    color: #fff;
+    /* Relleno vertical y horizontal */
+    padding: 0.85rem 1.5rem;
+    /* Bordes curvos */
+    border-radius: var(--radius-md);
+    /* Disposición horizontal */
+    display: flex;
+    /* Centrado vertical con el icono */
+    align-items: center;
+    /* Espacio entre icono y mensaje */
+    gap: 0.75rem;
+    /* Sombra profunda */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    /* Sobre todos los controles */
+    z-index: 1200;
+    /* Oculto por defecto */
+    opacity: 0;
+    /* Desplazado 20px hacia abajo */
+    transform: translateY(20px);
+    /* No intercepta clics mientras está oculto */
+    pointer-events: none;
+    /* Transición suave de entrada y salida */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* Clase activa para mostrar el toast */
+.toast-notification.active {
+    /* Se vuelve completamente opaco */
+    opacity: 1;
+    /* Se traslada a su posición natural */
+    transform: translateY(0);
+}
+/* Icono de verificación dentro del toast */
+.toast-icon {
+    /* Color verde esmeralda */
+    color: var(--emerald);
+    /* Tamaño del icono */
+    font-size: 1.1rem;
+}
+
+/* --- 20. Consultas de Medios Responsivas (Media Queries) --- */
+/* Dispositivos con pantallas menores a 1024px (Tablets y Laptops pequeñas) */
+@media (max-width: 1024px) {
+    /* Las columnas dobles pasan a una sola columna vertical */
+    .two-columns-layout,
+    .playground-layout,
+    .characteristics-container,
+    .silent-error-comparison-grid {
+        /* Una sola columna de ancho completo */
+        grid-template-columns: 1fr;
+    }
+    /* El playground pasa de altura fija a altura automática */
+    .playground-layout {
+        /* Altura automática */
+        height: auto;
+    }
+    /* Altura asignada individualmente para el editor y la consola */
+    .editor-pane, .console-pane {
+        /* Altura de 380px para cada panel */
+        height: 380px;
+    }
+    /* La cuadrícula de comparación de ámbitos pasa a orientarse verticalmente */
+    .comparison-grid {
+        /* Orientación en columna */
+        flex-direction: column;
+    }
+    /* El puente de flecha gira 90 grados para apuntar hacia abajo */
+    .comparison-bridge {
+        /* Rota hacia abajo */
+        transform: rotate(90deg);
+        /* Relleno vertical */
+        padding: 1rem 0;
+    }
+    /* Título principal de la portada adaptado a tablets */
+    .hero-title {
+        /* Tamaño de fuente reducido */
+        font-size: 2.5rem;
+    }
+}
+
+/* Dispositivos con pantallas menores a 768px (Teléfonos móviles) */
+@media (max-width: 768px) {
+    /* Reducción de espaciado en la barra superior */
+    .top-nav {
+        /* Relleno lateral de 1rem */
+        padding: 0 1rem;
+    }
+    /* Se oculta la barra de progreso en pantallas pequeñas para dar espacio */
+    .nav-progress-container {
+        /* Oculta */
+        display: none;
+    }
+    /* Reducción de relleno en el envoltorio de la presentación */
+    .presentation-wrapper {
+        /* Relleno compacto de 1rem */
+        padding: 1rem;
+    }
+    /* Relleno interno de la tarjeta de diapositiva */
+    .slide-content {
+        /* Relleno de 1.5rem */
+        padding: 1.5rem;
+    }
+    /* Título principal de la portada adaptado a móviles */
+    .hero-title {
+        /* Tamaño de 2rem */
+        font-size: 2rem;
+    }
+    /* Barra de navegación inferior más compacta */
+    .bottom-controls {
+        /* Separación más reducida */
+        gap: 0.75rem;
+        /* Relleno compacto */
+        padding: 0.4rem 0.6rem;
+    }
+    /* Se oculta el texto "Anterior/Siguiente" dejando solo los símbolos ‹ y › */
+    .ctrl-text {
+        /* Oculta */
+        display: none;
+    }
+    /* Los talleres de la analogía se ordenan verticalmente */
+    .family-workshops {
+        /* En columna */
+        flex-direction: column;
+    }
+    /* La flecha de la analogía gira hacia abajo */
+    .ws-arrow-flow {
+        /* Rota 90 grados hacia abajo */
+        transform: rotate(90deg);
+        /* Margen vertical */
+        margin: 0.5rem 0;
+    }
+}

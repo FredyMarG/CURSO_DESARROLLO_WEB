@@ -1,0 +1,1035 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Las APIs en el Desarrollo Web (HTTP, RESTful, JSON y Fetch API) - JavaScript Master Level." />
+    <title>Las APIs en el Desarrollo Web | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🌐</span>
+                <span class="title-text">Las APIs en el Desarrollo Web</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Las APIs en la Web">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Application Programming Interface</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">HTTP, RESTful &amp; JSON</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Las APIs en el
+                    <span class="gradient-text">Desarrollo Web</span> Moderno
+                </h1>
+
+                <p class="hero-subtitle">
+                    Comprende la estructura y el propósito de una <strong>API</strong> como puente de comunicación entre
+                    sistemas: domina la anatomía de las <strong>peticiones HTTP</strong>, el formato estándar
+                    <strong>JSON</strong>, la arquitectura <strong>RESTful</strong> y el consumo asíncrono seguro con <code>fetch()</code>.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">🌐</div>
+                        <h3>Puente de Software</h3>
+                        <p>Interfaz de código que comunica aplicaciones sin exponer su interior.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">📡</div>
+                        <h3>Anatomía HTTP</h3>
+                        <p>Endpoints, verbos (GET, POST, PUT, DELETE), Headers y Body.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">🍽️</div>
+                        <h3>El Camarero 🍽️</h3>
+                        <p>Analogía del restaurante: Cliente (Front-end), Camarero (API) y Cocina (Back-end).</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="6">
+                        <div class="mini-card-icon">🛡️</div>
+                        <h3>Seguridad &amp; Asincronía</h3>
+                        <p>Validación de <code>response.ok</code>, variables <code>.env</code> y control de promesas.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: ¿QUÉ ES UNA API? INTERFAZ DE CÓDIGO VS UI
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es una API?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es una API? Interfaz de Código vs. Interfaz de Usuario</h2>
+                    <p class="section-desc">
+                        Una <strong>API (Application Programming Interface)</strong> es un conjunto de reglas y definiciones
+                        que permite que diferentes aplicaciones de software se comuniquen entre sí:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">El Puente entre Sistemas</span>
+                            </div>
+                            <p>
+                                <strong>Abstracción y Seguridad:</strong> Actúa como un intermediario que permite a tu código
+                                solicitar datos o servicios de un servidor externo sin necesidad de conocer cómo está programado
+                                ni cómo gestiona su base de datos interna.
+                            </p>
+                            <p>
+                                <strong>Automatización Pura:</strong> Permite el intercambio directo de información estructurada
+                                entre servidores, navegadores web y aplicaciones móviles en milisegundos.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Diferencia Clave:</strong> Mientras la UI conecta a un humano con una máquina,
+                                la API conecta <code>máquina con máquina</code> mediante código.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Interfaz de Usuario (UI)</h4>
+                                <ul>
+                                    <li>Diseñada para la interacción humana visual.</li>
+                                    <li>Usa botones, menús, formularios y pantallas.</li>
+                                    <li>Consume datos ya procesados y listos para leer.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Interfaz de Código (API)</h4>
+                                <ul>
+                                    <li>Diseñada para la comunicación entre programas.</li>
+                                    <li>Usa URLs (Endpoints), métodos HTTP y cabeceras.</li>
+                                    <li>Intercambia datos estructurados en formato JSON.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">peticion_basica_fetch.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-comment">// Solicitamos los datos del usuario 42 al Endpoint de la API:</span>
+<span class="c-func">fetch</span>(<span class="c-string">'https://api.ejemplo.com/v1/usuarios/42'</span>)
+  .<span class="c-func">then</span>(<span class="c-variable">response</span> =&gt; <span class="c-variable">response</span>.<span class="c-func">json</span>())
+  .<span class="c-func">then</span>(<span class="c-variable">data</span> =&gt; <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">data</span>));</code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestApiIntro">
+                                    ▶ Simular Petición Fetch en Vivo
+                                </button>
+                                <span class="run-status" id="testApiIntroStatus">Listo para consultar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Simular Petición Fetch en Vivo" para observar la respuesta JSON del servidor...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: SINTAXIS BÁSICA Y ANATOMÍA DE UNA PETICIÓN
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Anatomía de una Petición HTTP">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Sintaxis Básica y Anatomía de una Petición HTTP</h2>
+                    <p class="section-desc">
+                        La comunicación con una API web se realiza a través del protocolo HTTP combinando 4 componentes fundamentales:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Los 4 Componentes -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Estructura HTTP</span>
+                            <h3>Los 4 Componentes Clave</h3>
+                            <span class="comp-subtitle">Endpoint + Method + Headers + Body</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. Endpoint (Ruta):</strong> La URL única que identifica el recurso (ej. <code>/v1/usuarios/42</code>).</li>
+                                <li><strong>2. Método HTTP (Verbo):</strong> Define la acción a ejecutar (<code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>DELETE</code>).</li>
+                                <li><strong>3. Headers (Cabeceras):</strong> Metadatos clave-valor (tipo de contenido, tokens de autenticación).</li>
+                                <li><strong>4. Body (Cuerpo):</strong> Datos estructurados enviados al servidor (en <code>POST</code>, <code>PUT</code>, <code>PATCH</code>).</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">🔗</span>
+                                <div class="vis-text">
+                                    <strong>Identificación de Recursos:</strong>
+                                    <small>En REST, cada URL representa un sustantivo claro (ej. <code>/libros</code>, <code>/productos</code>).</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>HTTP</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Verbos CRUD</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Verbos HTTP -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Acciones del Protocolo</span>
+                            <h3>Métodos (Verbos) HTTP</h3>
+                            <span class="comp-subtitle">GET, POST, PUT / PATCH, DELETE</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                El mismo Endpoint (por ejemplo, <code>/usuarios</code>) puede realizar acciones completamente distintas
+                                dependiendo del verbo HTTP utilizado en la petición:
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">⚡</span>
+                                <div class="vis-text">
+                                    <strong>Convención Estándar:</strong>
+                                    <small><code>GET</code> solo lee datos (sin Body); <code>POST</code> crea recursos enviando un Body JSON.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de Métodos HTTP -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>fetch(endpoint, { method: "POST | GET | PUT | DELETE", headers: {...}, body: JSON })</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckHttpMethods">
+                        🔍 Inspeccionar Comportamiento de los Verbos HTTP
+                    </button>
+                    <div class="identity-result" id="httpMethodsResult">
+                        Haz clic para visualizar qué hace cada verbo HTTP y qué código de estado devuelve el servidor...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Método HTTP</th>
+                                <th>Propósito / Acción CRUD</th>
+                                <th>¿Requiere Body?</th>
+                                <th>Ejemplo de Endpoint</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td>Solicitar u obtener datos de un recurso</td>
+                                <td>❌ No lleva Body</td>
+                                <td><code>GET /v1/usuarios/42</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>POST</code></td>
+                                <td>Enviar información para crear un nuevo recurso</td>
+                                <td>✅ Sí (JSON en Body)</td>
+                                <td><code>POST /v1/usuarios</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>PUT / PATCH</code></td>
+                                <td>Actualizar un recurso existente (total o parcial)</td>
+                                <td>✅ Sí (JSON en Body)</td>
+                                <td><code>PUT /v1/usuarios/42</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>DELETE</code></td>
+                                <td>Eliminar un recurso específico del servidor</td>
+                                <td>❌ Generalmente No</td>
+                                <td><code>DELETE /v1/usuarios/42</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: COMPARATIVA: API RESTful VS SOAP
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="RESTful vs. SOAP">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura de Software</span>
+                    <h2>Comparativa: API RESTful vs. APIs basadas en SOAP</h2>
+                    <p class="section-desc">
+                        Compara la arquitectura ligera basada en recursos más utilizada hoy frente al protocolo estricto
+                        tradicional de entornos corporativos:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE ARQUITECTURAS -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Criterio Arquitectónico a Comparar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="formato">
+                                1. Formato de Datos (JSON vs XML)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="arquitectura">
+                                2. Estructura y Contratos (URLs vs WSDL)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="rendimiento">
+                                3. Ligereza y Velocidad en Red
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="casos">
+                                4. Casos de Uso en la Industria
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareApiModes">
+                            ⚡ Comparar: Protocolo SOAP vs. Arquitectura RESTful
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna SOAP -->
+                        <div class="error-mode-card card-sloppy" id="cardSoapResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Estructura SOAP (Simple Object Access Protocol)</span>
+                                <h4>Protocolo Rígido Basado en XML</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSoap">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusSoap">
+                                ⚠️ Exclusivo en XML, requiere esquemas rígidos WSDL (entornos bancarios/legacy).
+                            </div>
+                        </div>
+
+                        <!-- Columna RESTful -->
+                        <div class="error-mode-card card-strict" id="cardRestResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Estructura RESTful (Representational State Transfer)</span>
+                                <h4>Arquitectura Ligera Basada en Recursos</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalRest">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusRest">
+                                🛡️ URLs claras, métodos HTTP estándar y formato JSON ligero para web y móvil.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="apiFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="apiFeedbackText">
+                            Selecciona un criterio y presiona <strong>"Comparar: Protocolo SOAP vs. Arquitectura RESTful"</strong>
+                            para analizar las diferencias técnicas en vivo.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: JSON Y DIAGRAMA DE FLUJO DE DECISIÓN
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="JSON y Flujo de Decisión">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Procesamiento de Respuestas</span>
+                    <h2>Formato Estándar JSON y Diagrama de Flujo de Decisión HTTP</h2>
+                    <p class="section-desc">
+                        Domina cómo se serializan y parsean los datos en formato JSON y cómo bifurcar el flujo según
+                        el código de estado HTTP (<code>2xx</code> vs. <code>4xx/5xx</code>):
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="flowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Formato Estándar JSON</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Flujo 2xx vs. 4xx / 5xx</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Validación de response.ok</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: JSON -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 JSON (JavaScript Object Notation)</span>
+                                <h3>El lenguaje universal de intercambio de datos en la Web</h3>
+                            </div>
+                            <p class="char-text">
+                                Es una representación textual ligera de los objetos de JavaScript. Al enviar datos al servidor
+                                los convertimos a texto con <code>JSON.stringify(obj)</code>, y al recibirlos los transformamos
+                                en un objeto nativo manipulable mediante <code>await response.json()</code> o <code>JSON.parse()</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestJsonParse">
+                                    ▶ Probar Serialización y Parseo JSON
+                                </button>
+                                <div class="mutation-result-box" id="jsonParseResult">
+                                    Haz clic para convertir el objeto de Ana López (id: 42) entre Objeto JS y texto JSON...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: Diagrama de Flujo -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Diagrama de Flujo de Decisión por Código de Estado</span>
+                                <h3>¿Código 2xx (Éxito) o Código 4xx / 5xx (Error)?</h3>
+                            </div>
+                            <p class="char-text">
+                                Cuando el cliente envía una petición HTTP, el servidor responde con un código numérico:
+                                <strong>2xx</strong> (ej. <code>200 OK</code>, <code>201 Created</code>) indica éxito y procede a procesar el JSON;
+                                <strong>4xx</strong> (error del cliente, ej. <code>404 Not Found</code>) o <strong>5xx</strong> (fallo del servidor, ej. <code>500</code>)
+                                debe desviarse al bloque <code>catch</code> para mostrar una alerta controlada en pantalla.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestStatusFlow">
+                                    ▶ Simular Bifurcación de Códigos HTTP (200 vs 404)
+                                </button>
+                                <div class="mutation-result-box" id="statusFlowResult">
+                                    Haz clic para evaluar cómo reacciona el flujo de decisión ante ambos escenarios...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: response.ok -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 ¿Por qué es obligatorio verificar 'response.ok'?</span>
+                                <h3>Fetch NO lanza excepción automática en errores 404 o 500</h3>
+                            </div>
+                            <p class="char-text">
+                                En JavaScript, <code>fetch()</code> solo rechaza su promesa automáticamente si falla la red física (sin internet).
+                                Si el servidor devuelve un error <code>404</code> o <code>500</code>, debemos verificar explícitamente
+                                <code>if (!response.ok) throw new Error(...)</code> antes de transformar o mutar nuestros datos.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestResponseOk">
+                                    ▶ Probar Guardia de Seguridad response.ok
+                                </button>
+                                <div class="mutation-result-box" id="responseOkResult">
+                                    Haz clic para comprobar cómo se captura un error HTTP 404 con response.ok...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Seguridad y Estabilidad</span>
+                    <h2>Buenas Prácticas y Errores Comunes al Consumir APIs</h2>
+                    <p class="section-desc">
+                        Evita vulnerabilidades de seguridad y fallos silenciosos aplicando los estándares profesionales de la industria:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Error API Key -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR GRAVE: CREDENCIALES EXPUESTAS</span>
+                            <h4>Exponer API Keys en el Front-end</h4>
+                        </div>
+                        <p>
+                            Escribir claves privadas en el código del navegador permite que cualquier usuario las robe desde la pestaña
+                            <em>Network</em> de DevTools. Usa un servidor propio como intermediario.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>fetch("https://api.com?key=12345_SECRET"); // ❌ Peligro</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Error Asincronía -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR COMÚN: LECTURA SÍNCRONA</span>
+                            <h4>Ignorar la Asincronía de la Red</h4>
+                        </div>
+                        <p>
+                            Las llamadas de red toman tiempo. Leer propiedades directamente de <code>fetch()</code> sin esperar con
+                            <code>await</code> o <code>.then()</code> devolverá <code>undefined</code> sobre una Promesa pendiente.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const d = fetch(url); console.log(d.nombre); // ❌ undefined</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Buena Práctica response.ok -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: VALIDAR ESTADO</span>
+                            <h4>Verificar siempre response.ok</h4>
+                        </div>
+                        <p>
+                            Comprueba el estado booleano <code>response.ok</code> (true para códigos 200-299) antes de ejecutar
+                            <code>response.json()</code> para capturar respuestas 404 o 500 de forma segura.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>if (!response.ok) throw new Error(response.status); // ✅</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Buena Práctica .env -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: ARCHIVOS .ENV</span>
+                            <h4>Usar Variables de Entorno</h4>
+                        </div>
+                        <p>
+                            Almacena siempre las credenciales y API Keys en archivos de configuración <code>.env</code> fuera del
+                            control de versiones para evitar filtraciones en repositorios públicos.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const apiKey = process.env.REACT_APP_MI_API_KEY; // ✅</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: ASINCRONÍA MODERNA: GET Y POST CON FETCH
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Asincronía: GET y POST">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Implementación Práctica</span>
+                    <h2>Consumo Asíncrono con async/await: Peticiones GET y POST</h2>
+                    <p class="section-desc">
+                        Observa cómo estructurar peticiones de lectura (<code>GET</code>) y creación (<code>POST</code>)
+                        con cabeceras y validación de errores:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Petición GET Segura -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Petición GET con async/await y Validación</span>
+                            </div>
+                            <p>
+                                Esperamos la resolución de red con <code>await</code>, verificamos <code>response.ok</code> y
+                                transformamos el cuerpo a JSON de forma segura:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-async-get"><span class="c-keyword">async function</span> <span class="c-func">conseguirDatos</span>() {
+  <span class="c-keyword">const</span> <span class="c-variable">res</span> = <span class="c-keyword">await</span> <span class="c-func">fetch</span>(<span class="c-string">"https://api.ejemplo.com/perfil"</span>);
+  <span class="c-keyword">if</span> (!<span class="c-variable">res</span>.<span class="c-prop">ok</span>) <span class="c-keyword">throw new</span> <span class="c-func">Error</span>(<span class="c-string">"Error HTTP: "</span> + <span class="c-variable">res</span>.<span class="c-prop">status</span>);
+  <span class="c-keyword">return await</span> <span class="c-variable">res</span>.<span class="c-func">json</span>();
+}</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestAsyncGet">
+                                    ▶ Ejecutar Petición GET Segura
+                                </button>
+                                <div class="mutation-result-box" id="asyncGetResult">
+                                    Haz clic para simular la obtención asíncrona del perfil...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Petición POST con JSON -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Petición POST con Headers y Body JSON</span>
+                            </div>
+                            <p>
+                                Para crear un recurso, especificamos <code>method: 'POST'</code>, declaramos la cabecera
+                                <code>'Content-Type': 'application/json'</code> y serializamos el objeto con <code>JSON.stringify()</code>:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-async-post"><span class="c-keyword">await</span> <span class="c-func">fetch</span>(<span class="c-string">"https://api.ficticia.com/productos"</span>, {
+  <span class="c-prop">method</span>: <span class="c-string">"POST"</span>,
+  <span class="c-prop">headers</span>: { <span class="c-string">"Content-Type"</span>: <span class="c-string">"application/json"</span> },
+  <span class="c-prop">body</span>: <span class="c-variable">JSON</span>.<span class="c-func">stringify</span>({ <span class="c-prop">nombre</span>: <span class="c-string">"Teclado Mecánico"</span>, <span class="c-prop">precio</span>: <span class="c-number">85</span> })
+});</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestAsyncPost">
+                                    ▶ Ejecutar Petición POST con Body JSON
+                                </button>
+                                <div class="mutation-result-box" id="asyncPostResult">
+                                    Haz clic para enviar el producto al servidor y recibir confirmación 201...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍA DEL MUNDO REAL: EL CAMARERO 🍽️
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogía: El Camarero 🍽️">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 🍽️</span>
+                    <h2>La Analogía del Mundo Real: El Camarero en el Restaurante</h2>
+                    <p class="section-desc">
+                        Comprende cómo interactúan el Front-end (Cliente), la API (Camarero) y el Back-end (Cocina)
+                        sin exponer los secretos del servidor:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Escenario del Restaurante -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Simula una orden desde tu mesa en el restaurante:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-waiter="200">
+                                <span class="tool-icon">🍽️</span>
+                                <span class="tool-name">Pedir Platillo Disponible (Estado 200 OK)</span>
+                            </button>
+                            <button class="tool-btn" data-waiter="404">
+                                <span class="tool-icon">🚫</span>
+                                <span class="tool-name">Pedir Platillo Fuera del Menú (Error 404)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: Cliente + Camarero -->
+                        <div class="workshop-card" id="waiterCardLeft">
+                            <div class="ws-avatar" id="waiterAvatarLeft">🧑‍💻</div>
+                            <div class="ws-header">
+                                <h3 id="waiterTitleLeft">1. Cliente en la Mesa (Front-end)</h3>
+                                <span class="ws-sub" id="waiterSubLeft">El Camarero (API) anota tu Petición HTTP</span>
+                            </div>
+                            <div class="ws-items" id="waiterItemsLeft">
+                                <div class="ws-item">El comensal solicita el platillo #42 del menú</div>
+                                <div class="ws-item">Petición: GET /v1/menu/platillos/42</div>
+                            </div>
+                            <div class="ws-status" id="waiterStatusLeft">
+                                El camarero lleva la orden a la cocina sin que tú entres a cocinar
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>API 🤵</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Cocina + Respuesta -->
+                        <div class="workshop-card" id="waiterCardRight">
+                            <div class="ws-avatar" id="waiterAvatarRight">👨‍🍳</div>
+                            <div class="ws-header">
+                                <h3 id="waiterTitleRight">2. La Cocina (Servidor Back-end)</h3>
+                                <span class="ws-sub" id="waiterSubRight">Respuesta 200 OK — Plato Servido (JSON)</span>
+                            </div>
+                            <div class="ws-items" id="waiterItemsRight">
+                                <div class="ws-item highlight-item">El chef prepara el pedido con ingredientes de la Base de Datos</div>
+                                <div class="ws-item highlight-item">El camarero regresa con el plato: { "plato": "Paella", "listo": true }</div>
+                            </div>
+                            <div class="ws-status" id="waiterStatusRight">
+                                Intercambio seguro: tus datos se renderizan en la mesa (pantalla)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="waiterBanner">
+                        <span class="banner-icon" id="waiterBannerIcon">🍽️</span>
+                        <span class="banner-text" id="waiterBannerText">
+                            Tú no necesitas entrar a la cocina ni saber cómo se encendieron las estufas; el camarero (API) gestiona el intercambio de forma segura y estandarizada.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Prueba Peticiones HTTP y APIs en Vivo</h2>
+                    <p class="section-desc">
+                        Experimenta con código interactivo en tiempo real (incluye simulador de servidor HTTP integrado para
+                        <code>api.ejemplo.com</code> y <code>api.ficticia.com</code>). Carga los ejemplos o ejecuta los 3 retos del curso:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-api-1">
+                                        1. Petición básica GET con fetch() y .then()
+                                    </option>
+                                    <option value="preset-api-2">
+                                        2. Serialización y Parseo del formato JSON
+                                    </option>
+                                    <option value="preset-api-3">
+                                        3. Asincronía moderna con async/await y response.ok
+                                    </option>
+                                    <option value="preset-api-4">
+                                        4. Petición POST enviando Headers y Body JSON
+                                    </option>
+                                    <option value="preset-api-5">
+                                        5. Manejo de Errores HTTP 404 en bloque try...catch
+                                    </option>
+                                    <option value="preset-api-6">
+                                        6. Error común: Olvidar await vs. Resolución correcta
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (Red Simulada Activa)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la respuesta HTTP...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Retos</span>
+                    <h2>Resumen Maestro y Retos de Evaluación</h2>
+                    <p class="section-desc">
+                        Pon a prueba tus conocimientos con los 3 ejercicios oficiales extraídos de la guía de APIs:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Diseño de Endpoints RESTful (Biblioteca)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Diseña conceptualmente las rutas (Endpoints) utilizando el estándar RESTful para una biblioteca escolar.
+                            Define la URL y el método HTTP para: 1) Obtener la lista completa de libros, y 2) Registrar un libro nuevo.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-api1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-api-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-api-1">
+                            <pre><code>// 1. Obtener la lista completa de libros:
+// Método HTTP: GET
+// Endpoint   : https://api.bibliotecaescolar.edu/v1/libros
+
+// 2. Registrar un libro nuevo en el catálogo:
+// Método HTTP: POST
+// Endpoint   : https://api.bibliotecaescolar.edu/v1/libros
+// Headers    : { "Content-Type": "application/json" }
+// Body       : { "titulo": "El Quijote", "autor": "Cervantes" }</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Optimización con async/await y Validación</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Corrige y optimiza la función <code>conseguirDatos()</code> agregando el manejo correcto de asincronía
+                            (<code>async/await</code>) y la validación de errores (<code>response.ok</code>) antes de transformar el cuerpo a JSON.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-api2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-api-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-api-2">
+                            <pre><code>async function conseguirDatos() {
+    try {
+        const respuesta = await fetch("https://api.ejemplo.com/perfil");
+        if (!respuesta.ok) {
+            throw new Error(`Error HTTP: ${respuesta.status}`);
+        }
+        const usuario = await respuesta.json();
+        return usuario;
+    } catch (error) {
+        console.error("Fallo al obtener perfil:", error.message);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Avanzado</span>
+                            <h3>Petición POST con Headers y Body JSON</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Escribe una función con <code>fetch</code> que envíe una petición <code>POST</code> a
+                            <code>https://api.ficticia.com/productos</code> con el objeto JSON <code>{ nombre: "Teclado Mecánico", precio: 85 }</code>
+                            y la cabecera <code>Content-Type: application/json</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-api3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-api-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-api-3">
+                            <pre><code>async function crearProducto() {
+    const respuesta = await fetch("https://api.ficticia.com/productos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nombre: "Teclado Mecánico",
+            precio: 85
+        })
+    });
+    if (!respuesta.ok) throw new Error(`Estado: ${respuesta.status}`);
+    return await respuesta.json();
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de las APIs -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Puente Estructurado</h4>
+                        <p>Una API comunica sistemas independientes sin exponer la lógica interna del servidor.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>4 Piezas HTTP</h4>
+                        <p>Toda petición combina Endpoint, Método (<code>GET</code>, <code>POST</code>...), Headers y Body opcional.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Estándar JSON</h4>
+                        <p>Usa <code>JSON.stringify()</code> para enviar datos y <code>await response.json()</code> al recibirlos.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Valida response.ok</h4>
+                        <p>Los errores 404/500 no lanzan excepción sola en <code>fetch()</code>; verifícalo siempre.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Protege tus Claves</h4>
+                        <p>Nunca expongas API Keys privadas en el Front-end; usa variables de entorno <code>.env</code>.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Las APIs en el Desarrollo Web</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
