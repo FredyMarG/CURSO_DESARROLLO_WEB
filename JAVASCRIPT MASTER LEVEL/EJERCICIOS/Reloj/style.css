@@ -1,0 +1,292 @@
+/* ==========================================================================
+   🕰️ EJERCICIO PRÁCTICO: RELOJ DIGITAL CON EL OBJETO DATE (DISEÑO PREMIUM)
+   ==========================================================================
+   Archivo: style.css
+   Propósito: Diseño moderno estilo panel digital/neón con centrado completo,
+              pantallas individuales con colores propios (Horas, Minutos, Segundos),
+              etiquetas con pseudo-elementos y tipografía monoespaciada tabular.
+   Documentación pedagógica detallada línea por línea.
+   ========================================================================== */
+
+/* --- 1. VARIABLES DE DISEÑO (:root) --- */
+/* Definimos variables CSS globales para mantener una paleta de colores coherente y fácil de personalizar */
+:root {
+    /* Color de fondo principal oscuro (azul noche profundo) */
+    --bg-page: #070a13;
+    /* Color secundario para el degradado ambiental del fondo */
+    --bg-radial: #111827;
+    /* Color superior de la carcasa del reloj */
+    --case-top: #1e293b;
+    /* Color inferior de la carcasa del reloj */
+    --case-bottom: #0f172a;
+    /* Fondo oscuro hundido para cada pantalla individual de dígitos */
+    --screen-bg: #060911;
+    /* Color base de respaldo para textos generales */
+    --digit-color: #f8fafc;
+
+    /* Paleta para las HORAS (.hora): Violeta / Púrpura Neón */
+    --hour-color: #c084fc;
+    /* Resplandor luminoso violeta para sombras de texto y bordes de las horas */
+    --hour-glow: rgba(192, 132, 252, 0.35);
+
+    /* Paleta para los MINUTOS (.min): Verde Esmeralda Neón */
+    --min-color: #34d399;
+    /* Resplandor luminoso esmeralda para sombras de texto y bordes de los minutos */
+    --min-glow: rgba(52, 211, 153, 0.35);
+
+    /* Paleta para los SEGUNDOS (.seg): Cian Neón Tecnológico */
+    --accent-cyan: #22d3ee;
+    /* Resplandor luminoso cian para sombras de texto y bordes de los segundos */
+    --accent-glow: rgba(34, 211, 238, 0.35);
+
+    /* Color gris azulado base para las etiquetas inferiores */
+    --label-color: #64748b;
+}
+
+/* --- 2. RESET BÁSICO Y ESTILOS DEL DOCUMENTO (BODY) --- */
+/* Eliminamos márgenes por defecto y ajustamos el modelo de caja en todos los elementos */
+*,
+*::before,
+*::after {
+    /* Incluye el padding y el border dentro del cálculo total de ancho y alto */
+    box-sizing: border-box;
+    /* Elimina los márgenes externos predeterminados del navegador */
+    margin: 0;
+    /* Elimina el relleno interno predeterminado del navegador */
+    padding: 0;
+}
+
+/* Configuramos el cuerpo de la página para centrar el reloj vertical y horizontalmente */
+body {
+    /* Ocupa como mínimo el 100% de la altura visible de la ventana (viewport height) */
+    min-height: 100vh;
+    /* Activa Flexbox para alinear el reloj en el centro exacto de la pantalla */
+    display: flex;
+    /* Centra el reloj horizontalmente en el eje principal */
+    justify-content: center;
+    /* Centra el reloj verticalmente en el eje secundario */
+    align-items: center;
+    /* Aplica un fondo con degradado radial desde el centro hacia los bordes para dar profundidad */
+    background: radial-gradient(circle at center, var(--bg-radial) 0%, var(--bg-page) 100%);
+    /* Define la familia tipográfica limpia sin remates para textos auxiliares */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Color de texto base */
+    color: var(--digit-color);
+}
+
+/* --- 3. CARCASA PRINCIPAL DEL RELOJ (.reloj) --- */
+/* Contenedor exterior que agrupa las 3 pantallas (horas, minutos y segundos) */
+.reloj {
+    /* Posicionamiento relativo para permitir elementos decorativos absolutos si se requieren */
+    position: relative;
+    /* Alinea las 3 casillas de tiempo en una fila horizontal flexible */
+    display: inline-flex;
+    /* Centra verticalmente las casillas dentro de la carcasa */
+    align-items: center;
+    /* Crea una separación uniforme de 16 píxeles entre las pantallas de hora, minuto y segundo */
+    gap: 16px;
+    /* Añade un espacio interno amplio alrededor de las pantallas para formar el cuerpo del reloj */
+    padding: 24px 28px;
+    /* Fondo con degradado en ángulo de 145 grados simulando un acabado metálico anodizado oscuro */
+    background: linear-gradient(145deg, var(--case-top), var(--case-bottom));
+    /* Borde sutil semitransparente que imita un bisel de cristal/metal */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Esquinas redondeadas pronunciadas de 20 píxeles para una estética moderna */
+    border-radius: 20px;
+    /* Sombra múltiple: caída profunda negra + resplandor ambiental multicolor + brillo interior superior */
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.75),
+        0 0 35px -5px rgba(34, 211, 238, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    /* Transición suave para animar el reloj cuando el usuario pasa el cursor por encima */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto interactivo al pasar el ratón (hover) sobre la carcasa del reloj */
+.reloj:hover {
+    /* Eleva ligeramente el reloj 3 píxeles hacia arriba */
+    transform: translateY(-3px);
+    /* Intensifica el resplandor neón alrededor del reloj */
+    box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.85),
+        0 0 45px 0 rgba(192, 132, 252, 0.22),
+        inset 0 1px 1px rgba(255, 255, 255, 0.25);
+}
+
+/* --- 4. PANTALLAS INDIVIDUALES DE DÍGITOS (.reloj div) --- */
+/* Estiliza cada una de las 3 celdas (.hora, .min, .seg) como un panel digital hundido */
+.reloj div {
+    /* Posicionamiento relativo para ubicar las etiquetas inferiores (::after) y los dos puntos (::before) */
+    position: relative;
+    /* Usa Flexbox en columna para centrar el número y su etiqueta descriptiva debajo */
+    display: flex;
+    /* Organiza el número arriba y la etiqueta (HORAS / MIN / SEG) abajo */
+    flex-direction: column;
+    /* Centra verticalmente el contenido de la celda */
+    justify-content: center;
+    /* Centra horizontalmente el contenido de la celda */
+    align-items: center;
+    /* Ancho mínimo fijo de 110px para que las 3 pantallas tengan exactamente el mismo tamaño */
+    min-width: 110px;
+    /* Relleno interno generoso (arriba, lados y espacio inferior extra para la etiqueta) */
+    padding: 18px 16px 28px;
+    /* Fondo oscuro profundo que simula una pantalla OLED/LCD empotrada */
+    background: var(--screen-bg);
+    /* Color base por defecto antes de aplicar el color específico de cada unidad */
+    color: var(--digit-color);
+    /* Tamaño de fuente grande (3.25rem = 52px) para una lectura protagonista */
+    font-size: 3.25rem;
+    /* Grosor de fuente en negrita para acentuar el estilo de reloj digital */
+    font-weight: 700;
+    /* Fuente monoespaciada para que todos los dígitos midan exactamente lo mismo de ancho */
+    font-family: "Fira Code", "JetBrains Mono", "Consolas", "Courier New", monospace;
+    /* Garantiza números tabulares de ancho idéntico para evitar saltos horizontales */
+    font-variant-numeric: tabular-nums;
+    /* Altura de línea compacta igual al tamaño de la fuente */
+    line-height: 1;
+    /* Espaciado sutil entre los 2 dígitos de cada casilla */
+    letter-spacing: 2px;
+    /* Borde sutil alrededor de cada pantalla individual */
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    /* Esquinas redondeadas de 14 píxeles en cada pantalla */
+    border-radius: 14px;
+    /* Sombra interna (inset) que crea el efecto visual de pantalla hundida en la carcasa */
+    box-shadow:
+        inset 0 4px 12px rgba(0, 0, 0, 0.8),
+        0 1px 0 rgba(255, 255, 255, 0.05);
+    /* Impide que el texto se seleccione accidentalmente al hacer clic sobre el reloj */
+    user-select: none;
+}
+
+/* --- 5. COLORES DISTINTIVOS PARA HORAS (.hora), MINUTOS (.min) Y SEGUNDOS (.seg) --- */
+/* 5.1 Estilo cromático para la casilla de las HORAS (Violeta Neón) */
+.reloj .hora {
+    /* Aplica el color violeta brillante a los dígitos de la hora */
+    color: var(--hour-color);
+    /* Tiñe sutilmente el borde de la casilla con el mismo tono violeta */
+    border-color: rgba(192, 132, 252, 0.28);
+    /* Añade el resplandor luminoso violeta a los números de la hora */
+    text-shadow: 0 0 16px var(--hour-glow);
+}
+
+/* 5.2 Estilo cromático para la casilla de los MINUTOS (Verde Esmeralda Neón) */
+.reloj .min {
+    /* Aplica el color verde esmeralda brillante a los dígitos de los minutos */
+    color: var(--min-color);
+    /* Tiñe sutilmente el borde de la casilla con el mismo tono esmeralda */
+    border-color: rgba(52, 211, 153, 0.28);
+    /* Añade el resplandor luminoso esmeralda a los números de los minutos */
+    text-shadow: 0 0 16px var(--min-glow);
+}
+
+/* 5.3 Estilo cromático para la casilla de los SEGUNDOS (Cian Neón) */
+.reloj .seg {
+    /* Aplica el color cian vibrante a los dígitos del segundero */
+    color: var(--accent-cyan);
+    /* Tiñe sutilmente el borde de la casilla con color cian */
+    border-color: rgba(34, 211, 238, 0.28);
+    /* Añade el resplandor luminoso cian a los números de los segundos */
+    text-shadow: 0 0 16px var(--accent-glow);
+}
+
+/* --- 6. ETIQUETAS AUTOMÁTICAS INFERIORES CON PSEUDO-ELEMENTOS (::after) --- */
+/* Estilo compartido para los subtítulos "HORAS", "MINUTOS" y "SEGUNDOS" sin ensuciar el HTML */
+.reloj div::after {
+    /* Posiciona la etiqueta en la parte baja interna de cada pantalla */
+    position: absolute;
+    /* Ubicada a 8 píxeles del borde inferior de la celda */
+    bottom: 8px;
+    /* Tamaño de letra pequeño (10px) y elegante */
+    font-size: 0.625rem;
+    /* Tipografía sans-serif limpia para contrastar con los números monoespaciados */
+    font-family: system-ui, -apple-system, sans-serif;
+    /* Peso seminegrita para buena legibilidad en tamaño reducido */
+    font-weight: 600;
+    /* Espaciado amplio entre letras (tracking) de estilo técnico */
+    letter-spacing: 2px;
+    /* Color base por defecto */
+    color: var(--label-color);
+    /* Elimina la sombra de texto heredada de los dígitos grandes */
+    text-shadow: none;
+}
+
+/* Asigna el texto "HORAS" en tono violeta suave debajo de la primera celda (.hora) */
+.reloj .hora::after {
+    content: "HORAS";
+    /* Tinte violeta armonizado con los dígitos de las horas */
+    color: rgba(192, 132, 252, 0.8);
+}
+
+/* Asigna el texto "MINUTOS" en tono esmeralda suave debajo de la segunda celda (.min) */
+.reloj .min::after {
+    content: "MINUTOS";
+    /* Tinte esmeralda armonizado con los dígitos de los minutos */
+    color: rgba(52, 211, 153, 0.8);
+}
+
+/* Asigna el texto "SEGUNDOS" en tono cian suave debajo de la tercera celda (.seg) */
+.reloj .seg::after {
+    content: "SEGUNDOS";
+    /* Tinte cian armonizado con los dígitos del segundero */
+    color: rgba(34, 211, 238, 0.8);
+}
+
+/* --- 7. SEPARADORES DE DOS PUNTOS (:) ENTRE PANTALLAS (::before) --- */
+/* Dibuja los dos puntos ':' entre Horas-Minutos y entre Minutos-Segundos automáticamente */
+.reloj .hora::before,
+.reloj .min::before {
+    /* Inserta el carácter de dos puntos */
+    content: ":";
+    /* Posicionamiento absoluto en el espacio de separación (gap) a la derecha de la celda */
+    position: absolute;
+    /* Lo coloca justo en el centro del espacio de 16px entre celdas */
+    right: -13px;
+    /* Alineado verticalmente con los números */
+    top: 38%;
+    /* Compensa su propia altura para quedar centrado */
+    transform: translateY(-50%);
+    /* Tamaño proporcional a los dígitos */
+    font-size: 1.75rem;
+    /* Color blanco azulado brillante para conectar visualmente las casillas de distinto color */
+    color: #94a3b8;
+    /* Resplandor luminoso suave en los dos puntos */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    /* Animación de parpadeo suave cada segundo como en los relojes digitales reales */
+    animation: parpadeoPuntos 1s infinite ease-in-out;
+}
+
+/* Definición de la animación de pulso para los dos puntos separadores */
+@keyframes parpadeoPuntos {
+    /* Al inicio y al final del segundo, los dos puntos brillan al 100% */
+    0%, 100% {
+        opacity: 1;
+    }
+    /* A mitad del segundo, se atenúan suavemente al 25% de opacidad */
+    50% {
+        opacity: 0.25;
+    }
+}
+
+/* --- 8. DISEÑO RESPONSIVO PARA MÓVILES (@media) --- */
+/* Ajusta el tamaño del reloj en pantallas pequeñas (teléfonos menores a 480px) */
+@media (max-width: 480px) {
+    /* Reduce el relleno y separación de la carcasa exterior */
+    .reloj {
+        padding: 16px;
+        gap: 10px;
+    }
+
+    /* Reduce el ancho mínimo y el tamaño de fuente de cada pantalla de dígitos */
+    .reloj div {
+        min-width: 82px;
+        font-size: 2.25rem;
+        padding: 14px 10px 24px;
+    }
+
+    /* Ajusta la posición de los dos puntos separadores al nuevo gap de 10px */
+    .reloj .hora::before,
+    .reloj .min::before {
+        right: -9px;
+        font-size: 1.25rem;
+    }
+}
