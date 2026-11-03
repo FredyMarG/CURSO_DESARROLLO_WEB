@@ -362,3 +362,12 @@ RESUMEN TÉCNICO:
 console.log("==============================================================================");
 console.log("🎯 [FIN DEL LABORATORIO]: Módulo de Operador Ternario completado con éxito.");
 console.log("==============================================================================\n");
+
+
+const sumar = (num1,num2,num3,num4)=>{
+    console.log(num1 + num2 + num3 + num4);
+    
+}
+let arr = [3,6,4,1]
+
+sumar(...arr)
