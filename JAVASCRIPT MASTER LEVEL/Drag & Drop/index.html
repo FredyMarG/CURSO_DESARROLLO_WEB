@@ -1,0 +1,1090 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre la API nativa de Drag & Drop en JavaScript - JavaScript Master Level." />
+    <title>API de Drag &amp; Drop en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🖐️</span>
+                <span class="title-text">API de Drag &amp; Drop</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Drag & Drop">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">API Nativa HTML5 / JS</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Objeto dataTransfer</span>
+                </div>
+
+                <h1 class="hero-title">
+                    API Nativa de
+                    <span class="gradient-text">Drag &amp; Drop</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Domina el ciclo de vida completo de <strong>Arrastrar y Soltar</strong> en la web: configura el atributo
+                    <code>draggable="true"</code>, controla los 3 eventos del objeto y los 4 eventos de la zona receptora,
+                    y transfiere datos de forma segura con <code>e.dataTransfer.setData()</code> y <code>getData()</code>.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">🎯</div>
+                        <h3>draggable="true"</h3>
+                        <p>Habilita cualquier nodo del DOM para iniciar el ciclo de arrastre nativo.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">🔄</div>
+                        <h3>7 Eventos del Ciclo</h3>
+                        <p>3 en el objeto (<code>dragstart</code>, <code>drag</code>, <code>dragend</code>) y 4 en la zona.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">📦</div>
+                        <h3>Objeto dataTransfer</h3>
+                        <p>Transporte transaccional en memoria con <code>setData()</code> y <code>getData()</code>.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="7">
+                        <div class="mini-card-icon">🎨</div>
+                        <h3>Proyecto Texturizador</h3>
+                        <p>Aplicación interactiva aplicando texturas dinámicas con desestructuración ES6+.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: INTRODUCCIÓN Y EL ATRIBUTO DRAGGABLE
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Introducción &amp; draggable">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>Introducción a la API de Drag &amp; Drop y el Atributo <code>draggable</code></h2>
+                    <p class="section-desc">
+                        La API de Drag &amp; Drop de HTML5 proporciona soporte nativo para arrastrar elementos y transferir
+                        datos entre componentes sin calcular coordenadas manualmente:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Configuración Inicial Obligatoria</span>
+                            </div>
+                            <p>
+                                <strong>Adiós al Cálculo Manual:</strong> Antes de HTML5 era necesario escuchar
+                                <code>mousedown</code>, <code>mousemove</code> y calcular manualmente <code>clientX</code> y
+                                <code>clientY</code>. Hoy el navegador expone un ecosistema nativo completo.
+                            </p>
+                            <p>
+                                <strong>El interruptor <code>draggable="true"</code>:</strong> Por defecto, solo las imágenes
+                                (<code>&lt;img&gt;</code>) y los enlaces (<code>&lt;a href="..."&gt;</code>) son arrastrables. Para
+                                cualquier <code>&lt;div&gt;</code> personalizado es obligatorio declarar <code>draggable="true"</code>.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Prueba en Vivo:</strong> Arrastra el <strong>círculo amarillo</strong> de la derecha y
+                                suéltalo dentro del <strong>cuadrado gris</strong> para disparar los eventos reales en pantalla.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Enfoque Antiguo (Coordenadas)</h4>
+                                <ul>
+                                    <li>Cálculo manual de <code>clientX</code> y <code>clientY</code>.</li>
+                                    <li>Posicionamiento absoluto forzado en CSS.</li>
+                                    <li>Sin soporte nativo para transferir archivos del SO.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>API Nativa Drag &amp; Drop</h4>
+                                <ul>
+                                    <li>7 eventos especializados de objeto y zona.</li>
+                                    <li>Transporte de datos integrado en <code>dataTransfer</code>.</li>
+                                    <li>Soporte directo con <code>draggable="true"</code>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo y Arena Drag & Drop en Vivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">circulo_y_cuadrado_drag_drop.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-string">"use strict"</span>;
+<span class="c-keyword">const</span> <span class="c-variable">circulo</span> = <span class="c-variable">document</span>.<span class="c-func">querySelector</span>(<span class="c-string">".circulo"</span>);
+<span class="c-keyword">const</span> <span class="c-variable">cuadrado</span> = <span class="c-variable">document</span>.<span class="c-func">querySelector</span>(<span class="c-string">".cuadrado"</span>);
+
+<span class="c-variable">circulo</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"dragstart"</span>, <span class="c-prop">e</span> =&gt; {
+    <span class="c-prop">e</span>.<span class="c-prop">dataTransfer</span>.<span class="c-func">setData</span>(<span class="c-string">"text-plain"</span>, <span class="c-prop">e</span>.<span class="c-prop">target</span>.<span class="c-prop">className</span>);
+});
+<span class="c-variable">cuadrado</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"dragover"</span>, <span class="c-prop">e</span> =&gt; <span class="c-prop">e</span>.<span class="c-func">preventDefault</span>());
+<span class="c-variable">cuadrado</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"drop"</span>, <span class="c-prop">e</span> =&gt; {
+    <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Drop:"</span>, <span class="c-prop">e</span>.<span class="c-prop">dataTransfer</span>.<span class="c-func">getData</span>(<span class="c-string">"text-plain"</span>));
+});</code></pre>
+
+                            <!-- Arena Interactiva Real (.circulo y .cuadrado) -->
+                            <div class="dnd-live-arena" id="liveArenaSlide2">
+                                <div class="circulo circulo-draggable" id="demoCirculo" draggable="true" title="Arrástrame hacia el cuadrado">
+                                    .circulo
+                                </div>
+                                <div class="cuadrado cuadrado-dropzone" id="demoCuadrado">
+                                    <strong>Zona .cuadrado (Drop Zone)</strong>
+                                    <span id="demoCuadradoStatus">Arrastra el círculo amarillo aquí o pulsa el botón inferior</span>
+                                </div>
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestDragIntro">
+                                    ▶ Simular Arrastre Completo (.circulo ➔ .cuadrado)
+                                </button>
+                                <span class="run-status" id="testDragIntroStatus">Listo para arrastrar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Arrastra el círculo amarillo hacia el cuadrado o haz clic en el botón para ver la traza de eventos...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: EVENTOS DEL OBJETO VS EVENTOS DE ZONA
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Eventos de Objeto y Zona">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>El Ciclo de Vida: 3 Eventos del Objeto vs. 4 Eventos de Zona</h2>
+                    <p class="section-desc">
+                        El ciclo de arrastre se divide arquitectónicamente en dos frentes: el elemento que se mueve (emisor)
+                        y el contenedor que lo recibe (receptor):
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Eventos del Objeto -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">1. El Elemento Arrastrado</span>
+                            <h3>Eventos del Objeto (3)</h3>
+                            <span class="comp-subtitle">Configurados sobre <code>.circulo</code> o <code>.textura</code></span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. <code>dragstart</code>:</strong> Se dispara en el milisegundo exacto en que inicia el arrastre. Único lugar para <code>setData()</code>.</li>
+                                <li><strong>2. <code>drag</code>:</strong> Se ejecuta en bucle continuo a alta frecuencia mientras el cursor desplaza el objeto.</li>
+                                <li><strong>3. <code>dragend</code>:</strong> Se activa al soltar el botón o cancelar con <code>Esc</code>. Ideal para restaurar estilos/opacidad.</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">⚡</span>
+                                <div class="vis-text">
+                                    <strong>Regla de Inicialización:</strong>
+                                    <small>La carga útil en <code>e.dataTransfer.setData()</code> solo puede escribirse dentro de <code>dragstart</code>.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Viaje DOM</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Emisor a Receptor</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Eventos de Zona -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">2. El Contenedor Receptor</span>
+                            <h3>Eventos de Zona (4)</h3>
+                            <span class="comp-subtitle">Configurados sobre <code>.cuadrado</code> o <code>.drop-zone</code></span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. <code>dragenter</code>:</strong> El cursor entra por primera vez en los límites de la zona (ilumina la interfaz).</li>
+                                <li><strong>2. <code>dragover</code> (o <code>dragmove</code>):</strong> Flota dentro de la zona. <strong>Obligatorio ejecutar <code>e.preventDefault()</code></strong>.</li>
+                                <li><strong>3. <code>dragleave</code>:</strong> El cursor sale de la zona sin soltar el objeto (limpia el resaltado).</li>
+                                <li><strong>4. <code>drop</code>:</strong> Se suelta el objeto en la zona habilitada y se lee <code>getData()</code>.</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">🔓</span>
+                                <div class="vis-text">
+                                    <strong>Desbloqueo de Recepción:</strong>
+                                    <small>Por defecto, el navegador prohíbe soltar elementos en un <code>div</code>; <code>e.preventDefault()</code> en <code>dragover</code> lo desbloquea.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de los 7 Eventos -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>dragstart ➔ drag ➔ dragenter ➔ dragover (preventDefault) ➔ [dragleave] ➔ drop ➔ dragend</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckLifecycleEvents">
+                        🔍 Inspeccionar Orden Cronológico de los 7 Eventos
+                    </button>
+                    <div class="identity-result" id="lifecycleEventsResult">
+                        Haz clic para ejecutar una traza cronológica completa desde dragstart hasta drop y dragend...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Evento</th>
+                                <th>Objetivo (Target)</th>
+                                <th>Frecuencia de Disparo</th>
+                                <th>Responsabilidad Principal en Producción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>dragstart</code></td>
+                                <td><strong>Objeto</strong></td>
+                                <td>1 sola vez (al iniciar)</td>
+                                <td>Cargar datos con <code>e.dataTransfer.setData()</code> y bajar opacidad (<code>classList.add</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><code>drag</code></td>
+                                <td><strong>Objeto</strong></td>
+                                <td>Continua (cada pocos ms)</td>
+                                <td>Monitorear desplazamiento o actualizar coordenadas en tiempo real.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dragend</code></td>
+                                <td><strong>Objeto</strong></td>
+                                <td>1 sola vez (al finalizar)</td>
+                                <td>Restaurar opacidad a <code>1</code> y limpiar clases del objeto arrastrado.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dragenter</code> / <code>dragleave</code></td>
+                                <td><strong>Zona</strong></td>
+                                <td>Al entrar / salir del borde</td>
+                                <td>Agregar o quitar la clase visual <code>.zona-activa</code> en el contenedor receptor.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dragover</code> (<code>dragmove</code>)</td>
+                                <td><strong>Zona</strong></td>
+                                <td>Continua sobre la zona</td>
+                                <td>Invocar <strong>obligatoriamente</strong> <code>e.preventDefault()</code> para habilitar el <code>drop</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>drop</code></td>
+                                <td><strong>Zona</strong></td>
+                                <td>1 sola vez (al soltar)</td>
+                                <td>Ejecutar <code>e.preventDefault()</code>, extraer carga con <code>getData()</code> y procesar cambios.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: MANIPULACIÓN DE DATOS CON dataTransfer
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Objeto dataTransfer">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Transferencia de Datos</span>
+                    <h2>El Motor <code>e.dataTransfer</code>: <code>setData()</code> y <code>getData()</code></h2>
+                    <p class="section-desc">
+                        La propiedad nativa <code>e.dataTransfer</code> actúa como una caja fuerte temporal en memoria durante
+                        el arrastre. Compara qué ocurre cuando cometes los errores típicos frente al uso correcto:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE ESCENARIOS DRAG & DROP -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Escenario Técnico a Evaluar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="prevent">
+                                1. dragover sin e.preventDefault()
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="aislamiento">
+                                2. Leer getData() en dragover vs. drop
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="draggable">
+                                3. &lt;div&gt; sin atributo draggable="true"
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="formato">
+                                4. Clave MIME en setData vs. getData
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareDragModes">
+                            ⚡ Comparar: Implementación Errónea vs. Estándar Correcto
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Error -->
+                        <div class="error-mode-card card-sloppy" id="cardImplicitResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Implementación Incorrecta</span>
+                                <h4>Qué ocurre al omitir las reglas de la API</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalImplicit">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusImplicit">
+                                ⚠️ El evento drop queda bloqueado o getData() devuelve una cadena vacía "".
+                            </div>
+                        </div>
+
+                        <!-- Columna Solución -->
+                        <div class="error-mode-card card-strict" id="cardSerializedResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Implementación Profesional</span>
+                                <h4>Ciclo dataTransfer Correcto</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSerialized">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusSerialized">
+                                🛡️ Desbloquea la zona en dragover y recupera el payload íntegro en drop.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="storageFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="storageFeedbackText">
+                            Selecciona un escenario arriba y presiona <strong>"Comparar: Implementación Errónea vs. Estándar Correcto"</strong>
+                            para analizar el comportamiento interno del navegador.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: DIAGRAMA DE FLUJO Y ARQUITECTURA
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Diagrama de Flujo y Reglas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura del Ciclo</span>
+                    <h2>Diagrama de Flujo del Arrastre, Desbloqueo de Zona y Seguridad</h2>
+                    <p class="section-desc">
+                        Explora paso a paso el árbol de decisiones que ejecuta el navegador desde que el usuario hace clic
+                        sobre el objeto hasta que lo libera en la zona de destino:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="storageFlowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Diagrama del Ciclo</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">El Rol de e.preventDefault()</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Protección de dataTransfer</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: Diagrama de Flujo -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Diagrama de Flujo del Ciclo de Arrastre</span>
+                                <h3>¿Entra en Zona de Destino? ¿Se suelta el objeto o sale de la zona?</h3>
+                            </div>
+                            <p class="char-text">
+                                <strong>1. Origen:</strong> Objeto con <code>draggable="true"</code> dispara <code>dragstart</code> (define carga con <code>setData()</code>) y entra en el ciclo <code>drag</code>.<br>
+                                <strong>2. Zona:</strong> Si entra a la zona dispara <code>dragenter</code> y <code>dragover</code> (con <code>e.preventDefault()</code>). Si sale sin soltar dispara <code>dragleave</code>; si suelta dispara <code>drop</code> (lee <code>getData()</code>) y cierra con <code>dragend</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestDecisionTree">
+                                    ▶ Recorrer Diagrama de Flujo Paso a Paso
+                                </button>
+                                <div class="mutation-result-box" id="decisionTreeResult">
+                                    Haz clic para visualizar la ruta completa exitosa vs. la ruta cancelada...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: preventDefault -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 ¿Por qué es obligatorio e.preventDefault() en dragover y drop?</span>
+                                <h3>Anulando la restricción nativa del navegador en contenedores genéricos</h3>
+                            </div>
+                            <p class="char-text">
+                                Por diseño estándar de HTML5, casi ningún elemento del DOM permite que le suelten objetos encima (muestra el cursor de prohibido 🚫).
+                                Invocar <code>e.preventDefault()</code> en <code>dragover</code> le indica al navegador que esa zona acepta entregas, y en <code>drop</code> evita que el navegador abra imágenes o enlaces arrastrados como una nueva pestaña.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestTryCatchParse">
+                                    ▶ Verificar Efecto de e.preventDefault() en Zona
+                                </button>
+                                <div class="mutation-result-box" id="tryCatchParseResult">
+                                    Haz clic para comparar el estado del cursor y del evento drop con y sin preventDefault...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Aislamiento de Seguridad -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Aislamiento de Seguridad en Eventos Intermedios</span>
+                                <h3>¿Por qué getData() solo entrega los datos en el evento drop?</h3>
+                            </div>
+                            <p class="char-text">
+                                Por razones estrictas de seguridad del navegador, el contenido guardado en <code>dataTransfer</code> permanece en modo protegido durante los eventos intermedios (<code>drag</code>, <code>dragenter</code>, <code>dragover</code>, <code>dragleave</code>). Esto impide que zonas publicitarias o elementos ajenos por los que pase el ratón espíen lo que el usuario está arrastrando antes de soltarlo.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestSecurityCheck">
+                                    ▶ Auditar Permisos de Lectura/Escritura de dataTransfer
+                                </button>
+                                <div class="mutation-result-box" id="securityCheckResult">
+                                    Haz clic para ver los permisos de dataTransfer en cada fase del ciclo...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Estándares de la Industria</span>
+                    <h2>Buenas Prácticas y Errores Comunes en Drag &amp; Drop</h2>
+                    <p class="section-desc">
+                        Domina las reglas técnicas para evitar bloqueos silenciosos al implementar interfaces arrastrables:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Error leer getData fuera de drop -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: LEER FUERA DE DROP</span>
+                            <h4>Invocar getData() en dragover o dragenter</h4>
+                        </div>
+                        <p>
+                            En los eventos intermedios como <code>dragover</code> o <code>dragenter</code>, el contenedor
+                            <code>dataTransfer</code> está bloqueado contra lectura por seguridad y devolverá <code>""</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>zona.addEventListener("dragover", e =&gt; e.dataTransfer.getData("text/plain")); // ❌ ""</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Error olvidar preventDefault -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: ZONA BLOQUEADA 🚫</span>
+                            <h4>Olvidar e.preventDefault() en dragover</h4>
+                        </div>
+                        <p>
+                            Si no cancelas el comportamiento por defecto en <code>dragover</code>, el puntero mostrará el
+                            icono de bloqueo y el evento <code>drop</code> jamás se ejecutará al soltar el clic.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>zona.addEventListener("dragover", e =&gt; console.log("Over")); // ❌ Drop nunca ocurre</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Buena práctica preventDefault -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: DESBLOQUEO</span>
+                            <h4>Cancelar siempre dragover y drop</h4>
+                        </div>
+                        <p>
+                            Invoca siempre <code>e.preventDefault()</code> tanto en <code>dragover</code> (para habilitar la
+                            recepción) como en <code>drop</code> (para evitar aperturas accidentales de archivos/URLs).
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>lienzo.addEventListener("dragover", e =&gt; e.preventDefault()); // ✅ Habilitado</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Buena práctica classList -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: ARQUITECTURA CSS</span>
+                            <h4>Usar classList en lugar de estilos inline</h4>
+                        </div>
+                        <p>
+                            Gestiona el feedback visual en <code>dragstart</code>/<code>dragend</code> y
+                            <code>dragenter</code>/<code>dragleave</code> añadiendo y removiendo clases CSS con <code>classList</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>lienzo.addEventListener("dragenter", ({ target }) =&gt; target.classList.add("zona-activa")); // ✅</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: PROYECTO INTEGRADOR: EL TEXTURIZADOR
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Proyecto: Texturizador">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Proyecto Integrador de Producción</span>
+                    <h2>Implementando un Texturizador Interactivo con <code>dataTransfer</code></h2>
+                    <p class="section-desc">
+                        Observa cómo combinamos <code>draggable="true"</code>, atributos <code>data-url</code> y desestructuración
+                        de parámetros <code>({ dataTransfer, target })</code> para aplicar texturas en vivo:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Código Fuente del Texturizador -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Código Moderno con Desestructuración ES6+</span>
+                            </div>
+                            <p>
+                                En cada miniatura guardamos su ID y su patrón CSS (<code>target.dataset.url</code>) durante
+                                <code>dragstart</code>, y lo aplicamos al fondo del lienzo en <code>drop</code>:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.7rem;"><code id="code-sample-texturizer"><span class="c-keyword">const</span> <span class="c-variable">texturas</span> = <span class="c-variable">document</span>.<span class="c-func">querySelectorAll</span>(<span class="c-string">".textura"</span>);
+<span class="c-keyword">const</span> <span class="c-variable">lienzo</span> = <span class="c-variable">document</span>.<span class="c-func">getElementById</span>(<span class="c-string">"canvas-destino"</span>);
+
+<span class="c-variable">texturas</span>.<span class="c-func">forEach</span>(<span class="c-prop">textura</span> =&gt; {
+  <span class="c-prop">textura</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"dragstart"</span>, ({ <span class="c-prop">dataTransfer</span>, <span class="c-prop">target</span> }) =&gt; {
+    <span class="c-prop">dataTransfer</span>.<span class="c-func">setData</span>(<span class="c-string">"text/plain"</span>, <span class="c-prop">target</span>.<span class="c-prop">id</span>);
+    <span class="c-prop">dataTransfer</span>.<span class="c-func">setData</span>(<span class="c-string">"text/url-pattern"</span>, <span class="c-prop">target</span>.<span class="c-prop">dataset</span>.<span class="c-prop">url</span>);
+    <span class="c-prop">target</span>.<span class="c-prop">classList</span>.<span class="c-func">add</span>(<span class="c-string">"arrastrando"</span>);
+  });
+  <span class="c-prop">textura</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"dragend"</span>, ({ <span class="c-prop">target</span> }) =&gt;
+    <span class="c-prop">target</span>.<span class="c-prop">classList</span>.<span class="c-func">remove</span>(<span class="c-string">"arrastrando"</span>));
+});
+
+<span class="c-variable">lienzo</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"dragover"</span>, <span class="c-prop">e</span> =&gt; <span class="c-prop">e</span>.<span class="c-func">preventDefault</span>());
+<span class="c-variable">lienzo</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"drop"</span>, <span class="c-prop">e</span> =&gt; {
+  <span class="c-prop">e</span>.<span class="c-func">preventDefault</span>();
+  <span class="c-keyword">const</span> <span class="c-variable">patron</span> = <span class="c-prop">e</span>.<span class="c-prop">dataTransfer</span>.<span class="c-func">getData</span>(<span class="c-string">"text/url-pattern"</span>);
+  <span class="c-keyword">if</span> (<span class="c-variable">patron</span>) <span class="c-variable">lienzo</span>.<span class="c-prop">style</span>.<span class="c-prop">background</span> = <span class="c-variable">patron</span>;
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Texturizador Interactivo en Vivo -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Pruébalo en Vivo: Arrastra una Textura al Lienzo</span>
+                            </div>
+                            <p>
+                                Arrastra cualquiera de las 3 texturas superiores y suéltala sobre el lienzo inferior (o haz clic en el botón de prueba automática):
+                            </p>
+
+                            <div class="texturizador-widget">
+                                <div class="panel-texturas-live">
+                                    <div id="textura-madera" class="textura-swatch tex-madera" draggable="true"
+                                        data-nombre="Madera Roble"
+                                        data-url="repeating-linear-gradient(45deg, #78350f, #78350f 12px, #92400e 12px, #92400e 24px)">
+                                        🪵 Madera
+                                    </div>
+                                    <div id="textura-metal" class="textura-swatch tex-metal" draggable="true"
+                                        data-nombre="Metal Titanio"
+                                        data-url="linear-gradient(135deg, #334155 0%, #94a3b8 50%, #1e293b 100%)">
+                                        ⚙️ Metal
+                                    </div>
+                                    <div id="textura-neon" class="textura-swatch tex-neon" draggable="true"
+                                        data-nombre="Ciber Neón"
+                                        data-url="linear-gradient(135deg, #4f46e5 0%, #06b6d4 50%, #10b981 100%)">
+                                        ✨ Neón
+                                    </div>
+                                </div>
+
+                                <div id="canvas-destino" class="canvas-destino-live">
+                                    <p id="canvas-destino-text">Arrastra una textura aquí para aplicarla al modelo</p>
+                                </div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 0.9rem;">
+                                <button class="btn-run-action" id="btnTestTexturizerLive">
+                                    ▶ Alternar Textura Automáticamente (Simular Drop)
+                                </button>
+                                <div class="mutation-result-box" id="texturizerLiveResult">
+                                    Arrastra una miniatura o pulsa el botón para inspeccionar el payload de dataTransfer...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍAS DEL MUNDO REAL 🚚 Y 🚪
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías: Camión y Tapete">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🚚 🚪</span>
+                    <h2>Analogías del Mundo Real: El Camión de Mudanzas y el Tapete de Tienda</h2>
+                    <p class="section-desc">
+                        Comprende de forma intuitiva cómo viajan los datos en <code>dataTransfer</code> y cómo reaccionan
+                        los bordes de una zona receptora:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Analogía -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Selecciona la analogía del temario que deseas explorar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-office="camion">
+                                <span class="tool-icon">🚚</span>
+                                <span class="tool-name">1. El Camión de Mudanzas (dataTransfer: setData y getData)</span>
+                            </button>
+                            <button class="tool-btn" data-office="tapete">
+                                <span class="tool-icon">🚪</span>
+                                <span class="tool-name">2. El Tapete de Bienvenida (dragenter y dragleave)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: Origen -->
+                        <div class="workshop-card" id="officeCardLeft">
+                            <div class="ws-avatar" id="officeAvatarLeft">🏠</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleLeft">1. Casa de Origen (Evento dragstart)</h3>
+                                <span class="ws-sub" id="officeSubLeft">Carga de Cajas en el Camión con setData()</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsLeft">
+                                <div class="ws-item">Cargas tus pertenencias en el camión antes de arrancar</div>
+                                <div class="ws-item">No puedes meter cajas nuevas al camión a mitad de la autopista</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusLeft">
+                                e.dataTransfer.setData("text/plain", id) al iniciar el viaje
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span id="officeArrowLabel">dataTransfer</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Destino -->
+                        <div class="workshop-card" id="officeCardRight">
+                            <div class="ws-avatar" id="officeAvatarRight">🏡</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleRight">2. Garaje del Nuevo Hogar (Evento drop)</h3>
+                                <span class="ws-sub" id="officeSubRight">Descarga Segura con getData()</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsRight">
+                                <div class="ws-item highlight-item">Las compuertas se abren únicamente al estacionar en destino</div>
+                                <div class="ws-item highlight-item">Se extraen las cajas intactas y se acomodan en la nueva casa</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusRight">
+                                e.dataTransfer.getData("text/plain") al soltar en la zona habilitada
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="officeBanner">
+                        <span class="banner-icon" id="officeBannerIcon">🚚</span>
+                        <span class="banner-text" id="officeBannerText">
+                            <strong>El Camión de Mudanzas (dataTransfer):</strong> <code>setData()</code> carga la información en la casa de origen (<code>dragstart</code>) y <code>getData()</code> abre las compuertas exclusivamente al estacionar en el destino final (<code>drop</code>).
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Experimenta con la API de Drag &amp; Drop</h2>
+                    <p class="section-desc">
+                        Ejecuta y modifica los 6 ejemplos interactivos del curso o prueba los 3 retos oficiales con nuestro
+                        simulador de eventos de arrastre integrado:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-drag-1">
+                                        1. Código Base: Eventos de .circulo y .cuadrado
+                                    </option>
+                                    <option value="preset-drag-2">
+                                        2. Los 3 Eventos del Objeto (dragstart, drag, dragend)
+                                    </option>
+                                    <option value="preset-drag-3">
+                                        3. Los 4 Eventos de Zona y el rol de e.preventDefault()
+                                    </option>
+                                    <option value="preset-drag-4">
+                                        4. Transporte en dataTransfer: setData() y getData()
+                                    </option>
+                                    <option value="preset-drag-5">
+                                        5. Seguridad: Por qué getData() devuelve "" fuera de drop
+                                    </option>
+                                    <option value="preset-drag-6">
+                                        6. Proyecto Integrador: El Texturizador con dataset.url
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (Drag &amp; Drop Activo)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Prácticos Paso a Paso</h2>
+                    <p class="section-desc">
+                        Consolida tu dominio de la API nativa de Drag &amp; Drop con estos 3 retos progresivos:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Control del Objeto Emisor (.circulo)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Configura los eventos <code>dragstart</code> y <code>dragend</code> sobre un elemento arrastrable
+                            para reducir su opacidad a <code>"0.5"</code> al iniciar el arrastre, guardar su clase o ID en
+                            <code>dataTransfer</code> y restaurar su opacidad a <code>"1"</code> al finalizar.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-drag1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-drag-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-drag-1">
+                            <pre><code>circulo.addEventListener("dragstart", (e) => {
+    circulo.style.opacity = "0.5";
+    e.dataTransfer.setData("text/plain", e.target.className);
+});
+
+circulo.addEventListener("dragend", () => {
+    circulo.style.opacity = "1";
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Zona Receptora Habilitada (.cuadrado)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Programa los 4 eventos de la zona receptora (<code>dragenter</code>, <code>dragover</code>,
+                            <code>dragleave</code> y <code>drop</code>) alternando la clase <code>"zona-activa"</code>,
+                            desbloqueando la recepción con <code>e.preventDefault()</code> y leyendo <code>getData()</code> al soltar.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-drag2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-drag-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-drag-2">
+                            <pre><code>cuadrado.addEventListener("dragenter", ({ target }) => target.classList.add("zona-activa"));
+cuadrado.addEventListener("dragleave", ({ target }) => target.classList.remove("zona-activa"));
+cuadrado.addEventListener("dragover", (e) => e.preventDefault());
+
+cuadrado.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const claseOrigen = e.dataTransfer.getData("text/plain");
+    cuadrado.classList.remove("zona-activa");
+    console.log("Elemento recibido:", claseOrigen);
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
+                            <h3>Proyecto Integrador: El Texturizador</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Implementa el motor del Texturizador usando desestructuración en los parámetros del evento
+                            <code>({ dataTransfer, target })</code> para transportar <code>target.dataset.url</code> bajo el formato
+                            <code>"text/url-pattern"</code> y aplicarlo a <code>backgroundImage</code> en el evento <code>drop</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-drag3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-drag-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-drag-3">
+                            <pre><code>texturas.forEach(textura => {
+    textura.addEventListener("dragstart", ({ dataTransfer, target }) => {
+        dataTransfer.setData("text/plain", target.id);
+        dataTransfer.setData("text/url-pattern", target.dataset.url);
+        target.classList.add("arrastrando");
+    });
+    textura.addEventListener("dragend", ({ target }) => target.classList.remove("arrastrando"));
+});
+
+lienzo.addEventListener("dragover", (e) => e.preventDefault());
+lienzo.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const { dataTransfer, target } = e;
+    const rutaImagen = dataTransfer.getData("text/url-pattern");
+    if (rutaImagen) target.style.backgroundImage = rutaImagen;
+    target.classList.remove("zona-activa");
+});</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de Drag & Drop -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Atributo draggable</h4>
+                        <p>Declara siempre <code>draggable="true"</code> en HTML para habilitar el arrastre en cualquier nodo del DOM.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>Dos Frentes de Eventos</h4>
+                        <p>Controla el objeto emisor (<code>dragstart</code>, <code>drag</code>, <code>dragend</code>) y la zona receptora (<code>dragenter</code>, <code>dragover</code>, <code>dragleave</code>, <code>drop</code>).</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>e.preventDefault()</h4>
+                        <p>Invócalo obligatoriamente en <code>dragover</code> para desbloquear la zona y permitir que ocurra el evento <code>drop</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Motor dataTransfer</h4>
+                        <p>Guarda datos en <code>dragstart</code> con <code>setData(formato, valor)</code> y extráelos en <code>drop</code> con <code>getData(formato)</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Clases CSS Limpias</h4>
+                        <p>Usa <code>classList.add()</code> y <code>remove()</code> para resaltar zonas activas y recuerda que <code>getData()</code> está aislado fuera de <code>drop</code>.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: API de Drag &amp; Drop</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
