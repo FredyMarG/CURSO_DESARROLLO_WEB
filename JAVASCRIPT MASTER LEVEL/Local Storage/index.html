@@ -1,0 +1,1033 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Almacenamiento Web: LocalStorage y SessionStorage en JavaScript - JavaScript Master Level." />
+    <title>LocalStorage y SessionStorage en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">💾</span>
+                <span class="title-text">LocalStorage y SessionStorage</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Web Storage">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">API Nativa Web Storage</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Persistencia Clave-Valor</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Almacenamiento Web:
+                    <span class="gradient-text">LocalStorage</span> y SessionStorage
+                </h1>
+
+                <p class="hero-subtitle">
+                    Comprende los mecanismos de persistencia de datos en el navegador: domina los 4 métodos de
+                    <strong>Web Storage</strong> (<code>setItem</code>, <code>getItem</code>, <code>removeItem</code>, <code>clear</code>),
+                    serializa objetos y arrays con <code>JSON.stringify()</code> y construye sistemas de preferencias listos para producción.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">💾</div>
+                        <h3>5MB - 10MB en Cliente</h3>
+                        <p>Persistencia local clave-valor sin enviar datos en cada petición HTTP.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">🛠️</div>
+                        <h3>Los 4 Métodos</h3>
+                        <p><code>setItem()</code>, <code>getItem()</code>, <code>removeItem()</code> y <code>clear()</code>.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">📂</div>
+                        <h3>El Archivador 📂</h3>
+                        <p>Analogía: Escritorio (RAM), Archivador (Local) y Bloc (Session).</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">📦</div>
+                        <h3>Serialización JSON</h3>
+                        <p>Evita el error <code>"[object Object]"</code> y la trampa del string <code>"false"</code>.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: ¿QUÉ ES EL ALMACENAMIENTO WEB?
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es Web Storage?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Qué es el Almacenamiento Web (Web Storage)?</h2>
+                    <p class="section-desc">
+                        Es una API nativa de los navegadores modernos que permite guardar datos localmente en el dispositivo
+                        del usuario bajo un formato de <strong>clave-valor (key-value)</strong>:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Evolución frente a las Cookies</span>
+                            </div>
+                            <p>
+                                <strong>Cero Tráfico de Red Innecesario:</strong> A diferencia de las antiguas Cookies, los datos
+                                de Web Storage <strong>no se envían automáticamente al servidor</strong> en cada petición HTTP.
+                            </p>
+                            <p>
+                                <strong>Alta Capacidad en Frontend:</strong> Ofrece entre <strong>5MB y 10MB</strong> de espacio por
+                                origen (frente a los apenas 4KB de una Cookie) con una API de JavaScript limpia e intuitiva.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Regla Fundamental:</strong> Tanto las claves como los valores en Web Storage se almacenan
+                                exclusivamente como <code>cadenas de texto (strings)</code>.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Antiguas Cookies HTTP</h4>
+                                <ul>
+                                    <li>Capacidad diminuta de apenas <code>4 KB</code>.</li>
+                                    <li>Viajan al servidor en cada petición HTTP.</li>
+                                    <li>Sintaxis de lectura y escritura manual compleja.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Web Storage Moderno</h4>
+                                <ul>
+                                    <li>Capacidad amplia de <code>5 MB a 10 MB</code>.</li>
+                                    <li>100% local en el cliente (cero peso en red).</li>
+                                    <li>Métodos nativos directos: <code>setItem</code> / <code>getItem</code>.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">primer_contacto_localstorage.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-string">"use strict"</span>;
+<span class="c-comment">// 1. Guardamos el par clave-valor en el navegador:</span>
+<span class="c-variable">localStorage</span>.<span class="c-func">setItem</span>(<span class="c-string">"nombre"</span>, <span class="c-string">"Fredy"</span>);
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">localStorage</span>);
+
+<span class="c-comment">// 2. Recuperamos el valor usando su clave:</span>
+<span class="c-keyword">let</span> <span class="c-variable">nombre</span> = <span class="c-variable">localStorage</span>.<span class="c-func">getItem</span>(<span class="c-string">"nombre"</span>);
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-variable">nombre</span>); <span class="c-comment">// Imprime: "Fredy"</span></code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestStorageIntro">
+                                    ▶ Guardar y Leer en LocalStorage en Vivo
+                                </button>
+                                <span class="run-status" id="testStorageIntroStatus">Listo para ejecutar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Guardar y Leer en LocalStorage en Vivo" para probar la persistencia...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: LOCALSTORAGE VS SESSIONSTORAGE Y LOS 4 MÉTODOS
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Local vs. Session &amp; Métodos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>LocalStorage vs. SessionStorage y Anatomía de los 4 Métodos</h2>
+                    <p class="section-desc">
+                        Ambos mecanismos comparten exactamente la misma API de 4 métodos, pero difieren en su persistencia y ámbito:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Los 4 Métodos -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Anatomía de la API</span>
+                            <h3>Los 4 Métodos Fundamentales</h3>
+                            <span class="comp-subtitle">Idénticos en localStorage y sessionStorage</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>1. <code>setItem(clave, valor)</code>:</strong> Inserta o actualiza un par clave-valor.</li>
+                                <li><strong>2. <code>getItem(clave)</code>:</strong> Lee el valor; si no existe devuelve <code>null</code>.</li>
+                                <li><strong>3. <code>removeItem(clave)</code>:</strong> Borra únicamente la clave especificada.</li>
+                                <li><strong>4. <code>clear()</code>:</strong> Vacía todas las claves del origen actual.</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">🔍</span>
+                                <div class="vis-text">
+                                    <strong>Retorno ante Clave Inexistente:</strong>
+                                    <small>A diferencia de los objetos comunes (<code>undefined</code>), <code>getItem()</code> retorna estrictamente <code>null</code>.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Ciclo de Vida</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Local vs. Session</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Ciclo de Vida -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Persistencia y Ámbito</span>
+                            <h3>¿Permanente o por Pestaña?</h3>
+                            <span class="comp-subtitle">Elige según el caso de uso</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                <strong>LocalStorage 💾:</strong> Permanente (no expira al cerrar el navegador) y compartido entre todas las pestañas del mismo dominio.<br>
+                                <strong>SessionStorage ⏱️:</strong> Temporal (muere al cerrar la pestaña) y aislado exclusivamente en la pestaña actual.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">🎯</span>
+                                <div class="vis-text">
+                                    <strong>Ejemplo Clave:</strong>
+                                    <small>Usa <code>localStorage</code> para el tema oscuro/idioma y <code>sessionStorage</code> para un formulario multipaso.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de los 4 Métodos -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>storage.setItem(k, v) ➔ storage.getItem(k) ➔ storage.removeItem(k) ➔ storage.clear()</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckStorageMethods">
+                        🔍 Probar Ciclo de los 4 Métodos en Tiempo Real
+                    </button>
+                    <div class="identity-result" id="storageMethodsResult">
+                        Haz clic para ejecutar secuencialmente setItem, getItem, removeItem y verificar el retorno null...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>LocalStorage 💾</th>
+                                <th>SessionStorage ⏱️</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Persistencia</strong></td>
+                                <td>✅ <strong>Permanente:</strong> No expira al cerrar la pestaña ni el navegador.</td>
+                                <td>⏱️ <strong>Temporal:</strong> Se destruye inmediatamente al cerrar la pestaña.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ámbito (Scope)</strong></td>
+                                <td>🌐 Compartido entre todas las pestañas/ventanas del mismo origen.</td>
+                                <td>🔒 Aislado por pestaña (otra pestaña crea una sesión nueva y vacía).</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Capacidad</strong></td>
+                                <td>Generalmente hasta <strong>5 MB - 10 MB</strong>.</td>
+                                <td>Generalmente hasta <strong>5 MB</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Casos de Uso</strong></td>
+                                <td>Preferencias de tema (oscuro/claro), idioma elegido, carrito de compras.</td>
+                                <td>Datos de un formulario multipaso, estados de una sola sesión.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: TIPOS DE DATOS: CONVERSIÓN IMPLÍCITA VS JSON
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Conversión Implícita vs. JSON">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Manejo de Tipos de Datos</span>
+                    <h2>El Problema de la Conversión Implícita vs. Serialización JSON</h2>
+                    <p class="section-desc">
+                        Web Storage <strong>solo almacena cadenas de texto (strings)</strong>. Observa qué sucede si guardas
+                        objetos, arrays o booleanos sin serializar frente a la solución profesional con <code>JSON.stringify()</code> y <code>JSON.parse()</code>:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE SERIALIZACIÓN -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Tipo de Dato a Almacenar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="objeto">
+                                1. Objeto Literal ({ tema, volumen })
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="array">
+                                2. Array de Búsquedas (["js", "css"])
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="booleano">
+                                3. Booleano (estaLogueado = false)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="corrupto">
+                                4. JSON Corrupto sin try...catch
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareStorageModes">
+                            ⚡ Comparar: Guardado Directo (Error) vs. Serialización JSON
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Error Conversión Implícita -->
+                        <div class="error-mode-card card-sloppy" id="cardImplicitResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Conversión Implícita (.toString())</span>
+                                <h4>Guardado Directo sin Serializar</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalImplicit">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusImplicit">
+                                ⚠️ Destruye objetos en "[object Object]" o vuelve truthy el string "false".
+                            </div>
+                        </div>
+
+                        <!-- Columna Solución JSON -->
+                        <div class="error-mode-card card-strict" id="cardSerializedResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Solución Profesional (Serialización JSON)</span>
+                                <h4>JSON.stringify() + JSON.parse()</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSerialized">
+                                <div class="term-line">&gt; Esperando simulación comparativa...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusSerialized">
+                                🛡️ Preserva intacta la estructura y los tipos de datos originales.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="storageFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="storageFeedbackText">
+                            Selecciona un escenario y presiona <strong>"Comparar: Guardado Directo vs. Serialización JSON"</strong>
+                            para inspeccionar cómo responde el motor de almacenamiento.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: DIAGRAMA DE FLUJO, TRY...CATCH Y SEGURIDAD
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Flujo de Decisión y Seguridad">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura y Blindaje</span>
+                    <h2>Diagrama de Flujo de Decisión, Blindaje try...catch y Seguridad</h2>
+                    <p class="section-desc">
+                        Aprende el árbol de decisiones para elegir el almacenamiento correcto y cómo proteger tu aplicación
+                        frente a datos corruptos y vulnerabilidades:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="storageFlowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Árbol de Decisión</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">JSON.parse con try...catch</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Seguridad y Límite XSS</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: Árbol de Decisión -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Diagrama de Flujo de Decisión de Persistencia</span>
+                                <h3>¿Debe persistir al cerrar el navegador? ¿Es un Objeto o Array?</h3>
+                            </div>
+                            <p class="char-text">
+                                <strong>Paso 1:</strong> Si los datos deben sobrevivir al cierre del navegador, elige <code>localStorage</code>;
+                                si solo sirven para la pestaña actual, elige <code>sessionStorage</code>.<br>
+                                <strong>Paso 2:</strong> Si el valor es un Objeto o Array, aplícale <code>JSON.stringify()</code> antes de llamar a <code>.setItem()</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestDecisionTree">
+                                    ▶ Simular Flujo de Decisión Paso a Paso
+                                </button>
+                                <div class="mutation-result-box" id="decisionTreeResult">
+                                    Haz clic para evaluar cómo se clasifica y guarda una preferencia de usuario...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: try...catch -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Envuelve siempre JSON.parse() en un bloque try...catch</span>
+                                <h3>Evita que un JSON corrupto rompa toda tu aplicación web</h3>
+                            </div>
+                            <p class="char-text">
+                                El usuario o una extensión puede alterar manualmente el contenido desde las DevTools del navegador.
+                                Si <code>JSON.parse()</code> encuentra texto inválido sin un bloque <code>try...catch</code>, lanzará un
+                                <code>SyntaxError</code> fatal que dejará la pantalla en blanco.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestTryCatchParse">
+                                    ▶ Probar Lectura Blindada ante JSON Corrupto
+                                </button>
+                                <div class="mutation-result-box" id="tryCatchParseResult">
+                                    Haz clic para simular la recuperación segura cuando el almacenamiento está dañado...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Seguridad -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Prohibido Guardar Información Confidencial</span>
+                                <h3>Cualquier script en la página puede leer localStorage.getItem()</h3>
+                            </div>
+                            <p class="char-text">
+                                Nunca guardes contraseñas, números de tarjetas de crédito ni datos médicos en Web Storage.
+                                Si tu sitio sufre una inyección de scripts (ataque XSS) o carga una librería maliciosa, el atacante
+                                podrá extraer todo el contenido de <code>localStorage</code> en una sola línea.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestSecurityCheck">
+                                    ▶ Auditar Qué Datos son Seguros de Almacenar
+                                </button>
+                                <div class="mutation-result-box" id="securityCheckResult">
+                                    Haz clic para contrastar datos permitidos vs. datos prohibidos en Web Storage...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Estándares de la Industria</span>
+                    <h2>Buenas Prácticas y Errores Comunes con Web Storage</h2>
+                    <p class="section-desc">
+                        Evita los 4 tropiezos más frecuentes al trabajar con persistencia en el navegador:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Error conversión implícita -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: "[object Object]"</span>
+                            <h4>Guardar Objetos sin JSON.stringify</h4>
+                        </div>
+                        <p>
+                            Pasar un objeto o array directamente a <code>setItem()</code> ejecuta <code>.toString()</code>
+                            de forma implícita, destruyendo la información original.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>localStorage.setItem("cfg", {a: 1}); // ❌ "[object Object]"</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Error booleano string -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: EL STRING "false" ES TRUTHY</span>
+                            <h4>Asumir que Regresa el Tipo Original</h4>
+                        </div>
+                        <p>
+                            <code>setItem("login", false)</code> guarda el texto <code>"false"</code>. En un condicional
+                            <code>if (getItem("login"))</code>, cualquier string no vacío evalúa como <code>true</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>if (localStorage.getItem("login")) // ❌ Entra con "false"</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Buena práctica try...catch -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: LECTURA SEGURA</span>
+                            <h4>Usar try...catch y Validar null</h4>
+                        </div>
+                        <p>
+                            Verifica siempre si <code>getItem()</code> devolvió <code>null</code> antes de usarlo y envuelve
+                            <code>JSON.parse()</code> en un bloque <code>try...catch</code> con valor por defecto.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>return datos ? JSON.parse(datos) : []; // ✅</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Buena práctica Seguridad y Cuota -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: PRIVACIDAD Y CUOTA</span>
+                            <h4>Cero Datos Sensibles y Control de Peso</h4>
+                        </div>
+                        <p>
+                            Usa Web Storage solo para preferencias de UI o estado público no sensible, respetando el límite
+                            de 5MB-10MB para evitar errores en dispositivos móviles.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>localStorage.setItem("app_lang", "es"); // ✅ Seguro</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: PATRONES DE PRODUCCIÓN: HISTORIAL E IDIOMA
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Producción: Historial e Idioma">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Casos Reales de Producción</span>
+                    <h2>Persistencia de Arrays (Historial) y Sistema de Preferencia de Idioma</h2>
+                    <p class="section-desc">
+                        Observa cómo se implementan los patrones de almacenamiento más solicitados en aplicaciones reales:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Historial con Arrays -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Guardar y Recuperar Arrays (Historial)</span>
+                            </div>
+                            <p>
+                                Serializamos el arreglo con <code>JSON.stringify()</code> al guardar y retornamos un array vacío
+                                <code>[]</code> como respaldo si la clave aún no existe:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-history"><span class="c-keyword">const</span> <span class="c-func">guardarHistorial</span> = <span class="c-prop">lista</span> =&gt;
+  <span class="c-variable">localStorage</span>.<span class="c-func">setItem</span>(<span class="c-string">"busquedas"</span>, <span class="c-variable">JSON</span>.<span class="c-func">stringify</span>(<span class="c-prop">lista</span>));
+
+<span class="c-keyword">const</span> <span class="c-func">obtenerHistorial</span> = () =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">raw</span> = <span class="c-variable">localStorage</span>.<span class="c-func">getItem</span>(<span class="c-string">"busquedas"</span>);
+  <span class="c-keyword">return</span> <span class="c-variable">raw</span> ? <span class="c-variable">JSON</span>.<span class="c-func">parse</span>(<span class="c-variable">raw</span>) : [];
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestHistoryStorage">
+                                    ▶ Probar Persistencia de Historial en Vivo
+                                </button>
+                                <div class="mutation-result-box" id="historyStorageResult">
+                                    Haz clic para guardar y reconstruir el array de búsquedas en localStorage...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Sistema de Idioma -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Sistema de Preferencia de Idioma (i18n)</span>
+                            </div>
+                            <p>
+                                Al iniciar la aplicación, verificamos si existe la clave <code>"app_lang"</code>; si es la primera visita,
+                                configuramos y guardamos <code>"es"</code> por defecto:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-lang"><span class="c-keyword">const</span> <span class="c-variable">IDIOMA_KEY</span> = <span class="c-string">"app_lang"</span>;
+<span class="c-keyword">const</span> <span class="c-func">inicializarIdioma</span> = () =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">guardado</span> = <span class="c-variable">localStorage</span>.<span class="c-func">getItem</span>(<span class="c-variable">IDIOMA_KEY</span>);
+  <span class="c-keyword">if</span> (<span class="c-variable">guardado</span>) <span class="c-keyword">return</span> <span class="c-variable">guardado</span>;
+  <span class="c-variable">localStorage</span>.<span class="c-func">setItem</span>(<span class="c-variable">IDIOMA_KEY</span>, <span class="c-string">"es"</span>);
+  <span class="c-keyword">return</span> <span class="c-string">"es"</span>;
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestLangStorage">
+                                    ▶ Simular Cambio y Recarga de Idioma
+                                </button>
+                                <div class="mutation-result-box" id="langStorageResult">
+                                    Haz clic para alternar el idioma entre Español ("es") e Inglés ("en")...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍA DEL MUNDO REAL: EL ARCHIVADOR 📂
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogía: El Archivador 📂">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáfora Visual 📂</span>
+                    <h2>La Analogía del Mundo Real: El Archivador del Escritorio</h2>
+                    <p class="section-desc">
+                        Imagina que estás trabajando en tu oficina. Así se comportan la Memoria RAM (Variables JS),
+                        el <strong>LocalStorage</strong> y el <strong>SessionStorage</strong>:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Almacenamiento en la Oficina -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Elige dónde guardar tus documentos antes de salir de la oficina:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-office="local">
+                                <span class="tool-icon">🗄️</span>
+                                <span class="tool-name">1. Archivador Metálico (LocalStorage 💾)</span>
+                            </button>
+                            <button class="tool-btn" data-office="session">
+                                <span class="tool-icon">📝</span>
+                                <span class="tool-name">2. Bloc de Notas por Cliente (SessionStorage ⏱️)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: El Escritorio (RAM) -->
+                        <div class="workshop-card" id="officeCardLeft">
+                            <div class="ws-avatar" id="officeAvatarLeft">🖥️</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleLeft">1. El Escritorio (Memoria RAM)</h3>
+                                <span class="ws-sub" id="officeSubLeft">Variables normales de JavaScript (let / const)</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsLeft">
+                                <div class="ws-item">Mientras trabajas, tus papeles están sobre la mesa</div>
+                                <div class="ws-item">Al recargar la página o irte a dormir, el escritorio se limpia</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusLeft">
+                                Las variables en RAM desaparecen en cuanto se recarga la pestaña
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>setItem()</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Archivador o Bloc -->
+                        <div class="workshop-card" id="officeCardRight">
+                            <div class="ws-avatar" id="officeAvatarRight">🗄️</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleRight">2. El Archivador Metálico (LocalStorage)</h3>
+                                <span class="ws-sub" id="officeSubRight">Persistencia Permanente en el Rincón de la Oficina</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsRight">
+                                <div class="ws-item highlight-item">Lo que guardes ahí permanece intacto para siempre</div>
+                                <div class="ws-item highlight-item">Aunque apagues la luz y cierres la oficina por vacaciones, sigue ahí</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusRight">
+                                Sobrevive al cierre de pestañas, reinicios del navegador y del sistema
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="officeBanner">
+                        <span class="banner-icon" id="officeBannerIcon">🗄️</span>
+                        <span class="banner-text" id="officeBannerText">
+                            <strong>Archivador Metálico (LocalStorage):</strong> Ideal para guardar preferencias permanentes que deben seguir ahí cuando el usuario regrese días después.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Prueba LocalStorage y SessionStorage</h2>
+                    <p class="section-desc">
+                        Ejecuta código real sobre el <code>localStorage</code> y <code>sessionStorage</code> de tu navegador.
+                        Prueba los 6 ejemplos predefinidos o carga los 3 ejercicios oficiales resueltos:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-storage-1">
+                                        1. Guardar y leer: setItem("nombre", "Fredy") y getItem()
+                                    </option>
+                                    <option value="preset-storage-2">
+                                        2. Los 4 métodos: setItem, getItem, removeItem y clear
+                                    </option>
+                                    <option value="preset-storage-3">
+                                        3. El error "[object Object]" vs. JSON.stringify / parse
+                                    </option>
+                                    <option value="preset-storage-4">
+                                        4. Lectura blindada de JSON con bloque try...catch
+                                    </option>
+                                    <option value="preset-storage-5">
+                                        5. La trampa del booleano "false" en string vs. JSON.parse
+                                    </option>
+                                    <option value="preset-storage-6">
+                                        6. Comparativa en vivo: localStorage vs. sessionStorage
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (Web Storage Activo)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Oficiales Paso a Paso</h2>
+                    <p class="section-desc">
+                        Pon a prueba tu dominio de LocalStorage y SessionStorage con los 3 ejercicios prácticos de la guía:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Token Selectivo en SessionStorage</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Guarda una clave llamada <code>token</code> con el valor <code>"xyz123"</code> en <code>sessionStorage</code>.
+                            Recupérala, muéstrala en consola y elimínala selectivamente sin borrar el resto del almacenamiento.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-storage1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-storage-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-storage-1">
+                            <pre><code>// 1. Guardamos el token en la sesión temporal
+sessionStorage.setItem("token", "xyz123");
+
+// 2. Recuperamos el valor y lo imprimimos
+const miToken = sessionStorage.getItem("token");
+console.log("El token recuperado es:", miToken);
+
+// 3. Eliminamos el token de forma específica
+sessionStorage.removeItem("token");</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>guardarHistorial y obtenerHistorial (Arrays)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea <code>guardarHistorial(lista)</code> para guardar un array en <code>localStorage</code> bajo la clave
+                            <code>"busquedas"</code>, y <code>obtenerHistorial()</code> que retorne el array original (o <code>[]</code> si no existe).
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-storage2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-storage-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-storage-2">
+                            <pre><code>const guardarHistorial = (listaBusquedas) => {
+    localStorage.setItem("busquedas", JSON.stringify(listaBusquedas));
+};
+
+const obtenerHistorial = () => {
+    const datosRaw = localStorage.getItem("busquedas");
+    if (!datosRaw) return [];
+    try {
+        return JSON.parse(datosRaw);
+    } catch (error) {
+        return [];
+    }
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
+                            <h3>Sistema de Preferencia de Idioma</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Programa <code>cambiarIdioma(nuevoIdioma)</code> para guardar la preferencia en <code>localStorage</code>,
+                            e <code>inicializarIdioma()</code> que retorne el idioma guardado o configure y retorne <code>"es"</code> por defecto.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-storage3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-storage-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-storage-3">
+                            <pre><code>const IDIOMA_KEY = "app_lang";
+
+const cambiarIdioma = (nuevoIdioma) => {
+    localStorage.setItem(IDIOMA_KEY, nuevoIdioma);
+};
+
+const inicializarIdioma = () => {
+    const guardado = localStorage.getItem(IDIOMA_KEY);
+    if (guardado) return guardado;
+    localStorage.setItem(IDIOMA_KEY, "es");
+    return "es";
+};</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de Web Storage -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Local vs Session</h4>
+                        <p><code>localStorage</code> es permanente; <code>sessionStorage</code> se borra al cerrar la pestaña.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>4 Métodos Clave</h4>
+                        <p>Domina <code>setItem()</code>, <code>getItem()</code>, <code>removeItem()</code> y <code>clear()</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Solo Strings</h4>
+                        <p>Usa <code>JSON.stringify()</code> al guardar objetos/arrays y <code>JSON.parse()</code> al leerlos.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Usa try...catch</h4>
+                        <p>Protege <code>JSON.parse()</code> ante datos corruptos y verifica siempre si <code>getItem()</code> es <code>null</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Cero Secretos</h4>
+                        <p>Jamás guardes contraseñas ni tarjetas de crédito en Web Storage por riesgo de ataques XSS.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: LocalStorage y SessionStorage</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

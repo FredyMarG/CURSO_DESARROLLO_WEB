@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cambiando Idioma con LocalStorage</title>
+</head>
+<body>
+    <!-- Panel principal de la página que refleja en vivo el idioma guardado en LocalStorage -->
+    <main class="contenido-pagina">
+        <span class="badge-storage" id="estadoStorage">localStorage.getItem("idioma") ➔ pendiente</span>
+        <h1 id="tituloPagina">Bienvenido a tu Aplicación Web</h1>
+        <p id="descripcionPagina">
+            Selecciona un idioma en la ventana emergente para guardar tu preferencia de forma permanente en el navegador usando <code>localStorage</code>.
+        </p>
+
+        <div class="acciones-pagina">
+            <button type="button" class="btn-secundario" id="btnCambiarIdioma">
+                🌐 Cambiar idioma
+            </button>
+            <button type="button" class="btn-peligro" id="btnBorrarStorage">
+                🗑️ Borrar localStorage y recargar
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal de selección inicial de idioma (estructura original del ejercicio) -->
+    <div class="modal-overlay">
+        <div class="modal">
+            <h2>¿En qué idioma quieres visualizar tu página?</h2>
+            <div class="botones-idioma">
+                <button class="en">🇺🇸 Inglés</button>
+                <button class="es">🇪🇸 Español</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

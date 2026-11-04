@@ -1,0 +1,379 @@
+/* ==========================================================================
+   💾 EJERCICIO PRÁCTICO: PREFERENCIA DE IDIOMA CON LOCALSTORAGE (DISEÑO PREMIUM)
+   ==========================================================================
+   Archivo: style.css
+   Propósito: Estilizar el modal de selección de idioma, las animaciones de
+              entrada/salida (@keyframes) y el panel interactivo de la página.
+   Documentación pedagógica detallada línea por línea.
+   ========================================================================== */
+
+/* --- 1. VARIABLES GLOBALES DE DISEÑO (:root) --- */
+/* Definimos la paleta de colores oscuros y acentos neón para mantener consistencia visual */
+:root {
+    /* Color de fondo principal oscuro (azul noche profundo) */
+    --bg-page: #070a13;
+    /* Color secundario para el degradado radial del fondo */
+    --bg-radial: #111827;
+    /* Color de superficie para tarjetas y ventana modal */
+    --card-bg: #131c31;
+    /* Borde sutil semitransparente para efecto de cristal/bisel */
+    --card-border: rgba(255, 255, 255, 0.12);
+    /* Color blanco principal para títulos y textos destacados */
+    --text-main: #f8fafc;
+    /* Color gris azulado para párrafos descriptivos */
+    --text-muted: #94a3b8;
+
+    /* Acento Cian Neón para el botón de Inglés (.en) */
+    --cyan-color: #22d3ee;
+    --cyan-glow: rgba(34, 211, 238, 0.3);
+
+    /* Acento Esmeralda Neón para el botón de Español (.es) */
+    --emerald-color: #34d399;
+    --emerald-glow: rgba(52, 211, 153, 0.3);
+
+    /* Acento Violeta para etiquetas de estado de LocalStorage */
+    --purple-color: #c084fc;
+    --purple-glow: rgba(192, 132, 252, 0.25);
+
+    /* Acento Carmesí para el botón de limpiar almacenamiento */
+    --rose-color: #fb7185;
+}
+
+/* --- 2. RESET GENERAL Y ESTILOS DEL DOCUMENTO (BODY) --- */
+/* Ajustamos el modelo de caja y eliminamos márgenes por defecto en todos los elementos */
+*,
+*::before,
+*::after {
+    /* El padding y el border se incluyen dentro del ancho y alto total del elemento */
+    box-sizing: border-box;
+    /* Elimina márgenes externos por defecto */
+    margin: 0;
+    /* Elimina rellenos internos por defecto */
+    padding: 0;
+}
+
+/* Configuramos el cuerpo principal de la página */
+body {
+    /* Altura mínima del 100% de la ventana visible */
+    min-height: 100vh;
+    /* Activa Flexbox para centrar el contenido principal en la pantalla */
+    display: flex;
+    /* Centra horizontalmente */
+    justify-content: center;
+    /* Centra verticalmente */
+    align-items: center;
+    /* Fondo oscuro con degradado radial suave */
+    background: radial-gradient(circle at center, var(--bg-radial) 0%, var(--bg-page) 100%);
+    /* Color de texto principal */
+    color: var(--text-main);
+    /* Tipografía moderna del sistema sin remates (sans-serif) */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Relleno lateral de seguridad para pantallas móviles */
+    padding: 20px;
+}
+
+/* --- 3. PANEL DE CONTENIDO DE LA PÁGINA (.contenido-pagina) --- */
+/* Tarjeta central que muestra el contenido traducido según el idioma guardado en LocalStorage */
+.contenido-pagina {
+    /* Ancho máximo de 580px para mantener líneas de lectura cómodas */
+    max-width: 580px;
+    /* Ocupa el 100% del espacio disponible hasta llegar a los 580px */
+    width: 100%;
+    /* Relleno interno amplio */
+    padding: 40px 36px;
+    /* Fondo con degradado oscuro elegante */
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    /* Borde sutil iluminado */
+    border: 1px solid var(--card-border);
+    /* Esquinas redondeadas de 22 píxeles */
+    border-radius: 22px;
+    /* Alineación de texto centrada */
+    text-align: center;
+    /* Sombra profunda para elevar la tarjeta sobre el fondo */
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.75),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Píldora superior que muestra en tiempo real el valor leído de localStorage */
+.badge-storage {
+    /* Permite definir rellenos y márgenes respetando el flujo en línea */
+    display: inline-block;
+    /* Relleno interno compacto */
+    padding: 6px 14px;
+    /* Margen inferior para separarlo del título principal */
+    margin-bottom: 20px;
+    /* Fuente monoespaciada para resaltar que es código de consola/storage */
+    font-family: "Fira Code", "Consolas", monospace;
+    /* Tamaño de fuente pequeño */
+    font-size: 0.82rem;
+    /* Color violeta neón */
+    color: var(--purple-color);
+    /* Fondo oscuro semitransparente con tinte violeta */
+    background: rgba(192, 132, 252, 0.1);
+    /* Borde violeta sutil */
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    /* Bordes completamente redondos (forma de píldora) */
+    border-radius: 999px;
+    /* Resplandor suave alrededor de la píldora */
+    box-shadow: 0 0 18px var(--purple-glow);
+}
+
+/* Título principal de la página traducida */
+.contenido-pagina h1 {
+    /* Tamaño de letra destacado */
+    font-size: 2rem;
+    /* Margen inferior hacia el párrafo */
+    margin-bottom: 14px;
+    /* Espaciado entre letras ligeramente ajustado */
+    letter-spacing: -0.5px;
+}
+
+/* Párrafo explicativo de la página */
+.contenido-pagina p {
+    /* Color gris azulado suave */
+    color: var(--text-muted);
+    /* Tamaño de fuente cómodo para lectura */
+    font-size: 1.05rem;
+    /* Altura de línea aireada */
+    line-height: 1.6;
+    /* Margen inferior antes de los botones de acción */
+    margin-bottom: 28px;
+}
+
+/* Etiquetas <code> dentro del párrafo */
+.contenido-pagina code {
+    /* Fuente monoespaciada */
+    font-family: monospace;
+    /* Color cian para destacar términos técnicos */
+    color: var(--cyan-color);
+    /* Fondo oscuro sutil */
+    background: rgba(34, 211, 238, 0.1);
+    /* Relleno pequeño */
+    padding: 2px 6px;
+    /* Esquinas redondeadas */
+    border-radius: 5px;
+}
+
+/* Contenedor de botones de control de la página */
+.acciones-pagina {
+    /* Alinea los botones en fila con Flexbox */
+    display: flex;
+    /* Permite que pasen a otra línea en pantallas muy estrechas */
+    flex-wrap: wrap;
+    /* Centra los botones horizontalmente */
+    justify-content: center;
+    /* Separación de 12 píxeles entre botones */
+    gap: 12px;
+}
+
+/* --- 4. CAPA DE FONDO DEL MODAL (.modal-overlay) --- */
+/* Cubre toda la ventana oscureciendo y desenfocando el fondo cuando se pide el idioma */
+.modal-overlay {
+    /* Fija la capa respecto a la ventana del navegador */
+    position: fixed;
+    /* Ancla la capa en la esquina superior izquierda (top: 0, left: 0) */
+    top: 0;
+    left: 0;
+    /* Cubre el 100% del ancho y alto de la pantalla */
+    width: 100%;
+    height: 100%;
+    /* Fondo negro semitransparente al 75% */
+    background: rgba(4, 7, 15, 0.75);
+    /* Aplica desenfoque de cristal (glassmorphism) al contenido que está detrás */
+    backdrop-filter: blur(8px);
+    /* Activa Flexbox para centrar la caja '.modal' en mitad de la pantalla */
+    display: flex;
+    /* Centra la ventana modal horizontalmente */
+    justify-content: center;
+    /* Centra la ventana modal verticalmente */
+    align-items: center;
+    /* Asegura que el modal quede por encima de cualquier otro elemento */
+    z-index: 100;
+    /* Inicia invisible (opacidad 0) para animar su entrada suavemente */
+    opacity: 0;
+    /* Ejecuta la animación 'aparecer' durante 0.6s y conserva el estado final ('forwards') */
+    animation: aparecer 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- 5. CAJA DE DIÁLOGO DEL MODAL (.modal) --- */
+/* Ventana emergente donde el usuario elige entre Inglés o Español */
+.modal {
+    /* Ancho máximo de 440px para una proporción equilibrada */
+    max-width: 440px;
+    /* Ocupa el 100% disponible en pantallas pequeñas con margen lateral */
+    width: 100%;
+    /* Margen exterior de seguridad */
+    margin: 20px;
+    /* Relleno interno generoso */
+    padding: 34px 30px;
+    /* Fondo oscuro con degradado metálico */
+    background: linear-gradient(145deg, var(--card-bg), #0b1120);
+    /* Borde luminoso sutil */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Esquinas redondeadas de 20 píxeles */
+    border-radius: 20px;
+    /* Centra el título y los botones dentro del modal */
+    text-align: center;
+    /* Sombra profunda con halo cian sutil */
+    box-shadow:
+        0 25px 60px -10px rgba(0, 0, 0, 0.85),
+        0 0 40px -10px var(--cyan-glow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* Título de pregunta dentro del modal (<h2>) */
+.modal h2 {
+    /* Tamaño de letra legible y destacado */
+    font-size: 1.4rem;
+    /* Altura de línea cómoda */
+    line-height: 1.4;
+    /* Color blanco brillante */
+    color: var(--text-main);
+    /* Separación inferior respecto a los botones de idioma */
+    margin-bottom: 24px;
+}
+
+/* Contenedor de los botones 'Inglés' y 'Español' dentro del modal */
+.botones-idioma {
+    /* Alinea ambos botones en fila horizontal */
+    display: flex;
+    /* Centra los botones */
+    justify-content: center;
+    /* Separación de 14 píxeles entre ambos botones */
+    gap: 14px;
+}
+
+/* --- 6. ESTILOS DE LOS BOTONES (button, .en, .es) --- */
+/* Reglas base compartidas por todos los botones del ejercicio */
+button {
+    /* Relleno interno cómodo */
+    padding: 12px 24px;
+    /* Sin borde por defecto (se personaliza en cada variante) */
+    border: 1px solid transparent;
+    /* Esquinas redondeadas modernas de 12 píxeles */
+    border-radius: 12px;
+    /* Tamaño de letra de 1rem (16px) */
+    font-size: 0.95rem;
+    /* Texto en seminegrita */
+    font-weight: 600;
+    /* Hereda la familia tipográfica principal */
+    font-family: inherit;
+    /* Cambia el cursor a una mano al pasar sobre el botón */
+    cursor: pointer;
+    /* Transición suave para color, sombra y elevación */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Efecto de elevación general al pasar el ratón por cualquier botón */
+button:hover {
+    /* Eleva el botón 2 píxeles hacia arriba */
+    transform: translateY(-2px);
+}
+
+/* Efecto de pulsación al hacer clic */
+button:active {
+    /* Regresa a su posición original al presionar */
+    transform: translateY(0);
+}
+
+/* Botón de idioma INGLÉS (.en) con acento Cian Neón */
+button.en {
+    /* Hace que ambos botones del modal compartan el mismo ancho */
+    flex: 1;
+    /* Fondo oscuro con tinte cian */
+    background: rgba(34, 211, 238, 0.12);
+    /* Texto en color cian brillante */
+    color: var(--cyan-color);
+    /* Borde cian sutil */
+    border-color: rgba(34, 211, 238, 0.35);
+}
+
+/* Hover del botón de idioma INGLÉS (.en) */
+button.en:hover {
+    /* Intensifica el fondo cian */
+    background: rgba(34, 211, 238, 0.22);
+    /* Aplica resplandor neón cian */
+    box-shadow: 0 0 20px var(--cyan-glow);
+}
+
+/* Botón de idioma ESPAÑOL (.es) con acento Verde Esmeralda Neón */
+button.es {
+    /* Hace que ambos botones del modal compartan el mismo ancho */
+    flex: 1;
+    /* Fondo oscuro con tinte esmeralda */
+    background: rgba(52, 211, 153, 0.12);
+    /* Texto en color verde esmeralda brillante */
+    color: var(--emerald-color);
+    /* Borde esmeralda sutil */
+    border-color: rgba(52, 211, 153, 0.35);
+}
+
+/* Hover del botón de idioma ESPAÑOL (.es) */
+button.es:hover {
+    /* Intensifica el fondo esmeralda */
+    background: rgba(52, 211, 153, 0.22);
+    /* Aplica resplandor neón esmeralda */
+    box-shadow: 0 0 20px var(--emerald-glow);
+}
+
+/* Botón secundario en la página principal (Cambiar idioma) */
+.btn-secundario {
+    /* Fondo gris azulado translúcido */
+    background: rgba(255, 255, 255, 0.06);
+    /* Texto blanco */
+    color: var(--text-main);
+    /* Borde blanco sutil */
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.btn-secundario:hover {
+    /* Más claro al pasar el cursor */
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Botón de peligro en la página principal (Borrar localStorage) */
+.btn-peligro {
+    /* Fondo carmesí translúcido */
+    background: rgba(251, 113, 133, 0.1);
+    /* Texto rosa carmesí */
+    color: var(--rose-color);
+    /* Borde carmesí sutil */
+    border-color: rgba(251, 113, 133, 0.3);
+}
+
+.btn-peligro:hover {
+    /* Intensifica el fondo carmesí al pasar el ratón */
+    background: rgba(251, 113, 133, 0.2);
+    /* Resplandor carmesí */
+    box-shadow: 0 0 18px rgba(251, 113, 133, 0.25);
+}
+
+/* --- 7. ANIMACIONES DE ENTRADA Y SALIDA (@keyframes) --- */
+/* Animación que muestra suavemente el modal al cargar la página */
+@keyframes aparecer {
+    /* Estado inicial: completamente transparente y ligeramente reducido */
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+    /* Estado final: 100% visible y en su tamaño original */
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animación que desvanece el modal cuando el usuario elige un idioma */
+@keyframes desaparecer {
+    /* Estado inicial: completamente visible */
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    /* Estado final: transparente y ligeramente reducido */
+    to {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+}
