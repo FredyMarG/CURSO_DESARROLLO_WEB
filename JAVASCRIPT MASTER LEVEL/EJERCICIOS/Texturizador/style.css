@@ -1,0 +1,559 @@
+/* ==========================================================================
+   🎨 EJERCICIO PRÁCTICO: TEXTURIZADOR INTERACTIVO CON DRAG & DROP (DISEÑO PREMIUM)
+   ==========================================================================
+   Archivo: style.css
+   Propósito: Estilizar la galería de miniaturas arrastrables (.texturas),
+              los estados interactivos de arrastre (.arrastrando, .zona-activa)
+              y el lienzo receptor (.zona) manteniendo cobertura completa (cover).
+   Documentación pedagógica detallada línea por línea.
+   ========================================================================== */
+
+/* --- 1. VARIABLES GLOBALES DE DISEÑO (:root) --- */
+/* Definimos la paleta oscura con acentos neón característica del curso Master Level */
+:root {
+    /* Color de fondo principal oscuro (azul noche profundo) */
+    --bg-page: #070a13;
+    /* Color secundario para el degradado radial del fondo */
+    --bg-radial: #111827;
+    /* Color de superficie para la tarjeta principal */
+    --card-bg: #131c31;
+    /* Borde sutil semitransparente para efecto de cristal/bisel */
+    --card-border: rgba(255, 255, 255, 0.12);
+    /* Color blanco principal para títulos */
+    --text-main: #f8fafc;
+    /* Color gris azulado para párrafos descriptivos */
+    --text-muted: #94a3b8;
+
+    /* Acento Cian Neón para resaltar la zona activa en dragenter / dragover */
+    --cyan-color: #22d3ee;
+    --cyan-glow: rgba(34, 211, 238, 0.35);
+
+    /* Acento Esmeralda Neón para confirmar cuando se aplica una textura en drop */
+    --emerald-color: #34d399;
+    --emerald-glow: rgba(52, 211, 153, 0.3);
+
+    /* Acento Violeta para la píldora de estado de dataTransfer */
+    --purple-color: #c084fc;
+    --purple-glow: rgba(192, 132, 252, 0.25);
+
+    /* Acento Ámbar para etiquetas de textura seleccionada */
+    --amber-color: #fbbf24;
+}
+
+/* --- 2. RESET GENERAL Y ESTILOS DEL DOCUMENTO (BODY) --- */
+/* Ajustamos el modelo de caja y eliminamos márgenes por defecto en todos los elementos */
+*,
+*::before,
+*::after {
+    /* El padding y el border se incluyen dentro del ancho y alto total del elemento */
+    box-sizing: border-box;
+    /* Elimina márgenes externos por defecto */
+    margin: 0;
+    /* Elimina rellenos internos por defecto */
+    padding: 0;
+}
+
+/* Configuramos el cuerpo principal de la página */
+body {
+    /* Altura mínima del 100% de la ventana visible */
+    min-height: 100vh;
+    /* Activa Flexbox para centrar el panel del texturizador en la pantalla */
+    display: flex;
+    /* Centra horizontalmente */
+    justify-content: center;
+    /* Centra verticalmente */
+    align-items: center;
+    /* Fondo oscuro con degradado radial suave */
+    background: radial-gradient(circle at center, var(--bg-radial) 0%, var(--bg-page) 100%);
+    /* Color de texto principal */
+    color: var(--text-main);
+    /* Tipografía moderna del sistema sin remates */
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    /* Relleno lateral de seguridad para pantallas móviles */
+    padding: 20px;
+}
+
+/* --- 3. PANEL CONTENEDOR PRINCIPAL (.panel-texturizador) --- */
+/* Tarjeta central que agrupa el encabezado, la barra de texturas y la zona receptora */
+.panel-texturizador {
+    /* Ancho máximo de 620px para lucir las texturas con amplitud */
+    max-width: 620px;
+    /* Ocupa el 100% disponible hasta llegar a los 620px */
+    width: 100%;
+    /* Relleno interno equilibrado */
+    padding: 36px 32px;
+    /* Fondo con degradado oscuro elegante */
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    /* Borde sutil iluminado */
+    border: 1px solid var(--card-border);
+    /* Esquinas redondeadas de 22 píxeles */
+    border-radius: 22px;
+    /* Alineación de texto centrada */
+    text-align: center;
+    /* Sombra profunda para elevar la tarjeta sobre el fondo */
+    box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.75),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+/* Píldora superior que muestra en tiempo real la carga de e.dataTransfer */
+.badge-transfer {
+    /* Permite definir rellenos y márgenes respetando el flujo en línea */
+    display: inline-block;
+    /* Relleno interno compacto */
+    padding: 6px 14px;
+    /* Margen inferior para separarlo del título */
+    margin-bottom: 16px;
+    /* Fuente monoespaciada para resaltar que es código de la API Drag & Drop */
+    font-family: "Fira Code", "Consolas", monospace;
+    /* Tamaño de fuente pequeño */
+    font-size: 0.82rem;
+    /* Color violeta neón */
+    color: var(--purple-color);
+    /* Fondo oscuro semitransparente con tinte violeta */
+    background: rgba(192, 132, 252, 0.1);
+    /* Borde violeta sutil */
+    border: 1px solid rgba(192, 132, 252, 0.3);
+    /* Bordes completamente redondos (forma de píldora) */
+    border-radius: 999px;
+    /* Resplandor suave alrededor de la píldora */
+    box-shadow: 0 0 18px var(--purple-glow);
+}
+
+/* Título principal del ejercicio */
+.panel-texturizador h1 {
+    /* Tamaño de letra destacado */
+    font-size: 1.9rem;
+    /* Margen inferior hacia la descripción */
+    margin-bottom: 10px;
+    /* Espaciado entre letras ligeramente ajustado */
+    letter-spacing: -0.5px;
+}
+
+/* Párrafo explicativo superior */
+.descripcion {
+    /* Color gris azulado suave */
+    color: var(--text-muted);
+    /* Tamaño de fuente cómodo */
+    font-size: 0.98rem;
+    /* Altura de línea aireada */
+    line-height: 1.55;
+    /* Margen inferior antes de la galería de texturas */
+    margin-bottom: 22px;
+}
+
+/* Etiquetas <code> dentro de la descripción */
+.descripcion code {
+    /* Fuente monoespaciada */
+    font-family: monospace;
+    /* Color cian para destacar selectores técnicos */
+    color: var(--cyan-color);
+    /* Fondo oscuro sutil */
+    background: rgba(34, 211, 238, 0.1);
+    /* Relleno pequeño */
+    padding: 2px 6px;
+    /* Esquinas redondeadas */
+    border-radius: 5px;
+}
+
+/* --- 4. GALERÍA DE MINIATURAS ARRASTRABLES (.texturas) --- */
+/* Contenedor que aloja las 3 muestras de textura (.textura1, .textura2, .textura3) */
+.texturas {
+    /* Usa Flexbox para alinear las miniaturas en fila y centrarlas */
+    display: flex;
+    /* Centra horizontalmente las muestras */
+    justify-content: center;
+    /* Centra verticalmente las muestras */
+    align-items: center;
+    /* Separación de 18 píxeles entre cada miniatura */
+    gap: 18px;
+    /* Margen inferior hacia la zona de destino */
+    margin: 0 0 22px 0;
+    /* Relleno interno para enmarcar las muestras */
+    padding: 16px 20px;
+    /* Fondo oscuro hundido estilo dock de herramientas */
+    background: rgba(6, 9, 17, 0.7);
+    /* Borde sutil alrededor de la paleta de texturas */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    /* Esquinas redondeadas de 16 píxeles */
+    border-radius: 16px;
+    /* Sombra interior para dar sensación de bandeja empotrada */
+    box-shadow: inset 0 3px 10px rgba(0, 0, 0, 0.65);
+}
+
+/* Estilo base compartido por cada miniatura dentro de .texturas */
+.texturas div {
+    /* Posicionamiento relativo para posicionar la etiqueta numérica inferior (::after) */
+    position: relative;
+    /* Ancho de cada muestra de textura */
+    width: 88px;
+    /* Alto de cada muestra de textura */
+    height: 88px;
+    /* Esquinas redondeadas de 14 píxeles */
+    border-radius: 14px;
+    /* Borde luminoso sutil para delimitar la imagen */
+    border: 2px solid rgba(255, 255, 255, 0.22);
+    /* Escala la imagen de textura para cubrir todo el recuadro sin deformarse */
+    background-size: cover;
+    /* Centra la imagen de textura dentro de la miniatura */
+    background-position: center;
+    /* Evita que la imagen se repita en mosaico */
+    background-repeat: no-repeat;
+    /* Cambia el cursor a una mano abierta indicando que el elemento es arrastrable */
+    cursor: grab;
+    /* Impide selecciones accidentales al iniciar el gesto de arrastre */
+    user-select: none;
+    /* Sombra pronunciada bajo cada miniatura */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+    /* Transición suave para elevación, borde y opacidad */
+    transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+}
+
+/* Efecto al pasar el cursor (hover) sobre una miniatura de textura */
+.texturas div:hover {
+    /* Eleva la miniatura 4 píxeles y la amplía ligeramente */
+    transform: translateY(-4px) scale(1.04);
+    /* Ilumina el borde en color cian neón */
+    border-color: var(--cyan-color);
+    /* Añade resplandor cian alrededor de la muestra */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.65), 0 0 16px var(--cyan-glow);
+}
+
+/* Estado visual mientras el usuario está arrastrando la miniatura (clase añadida en dragstart) */
+.texturas div.arrastrando {
+    /* Reduce la opacidad al 40% para indicar cuál es el objeto en tránsito */
+    opacity: 0.4;
+    /* Reduce ligeramente la escala */
+    transform: scale(0.92);
+    /* Cambia el cursor a mano cerrada */
+    cursor: grabbing;
+}
+
+/* Estado visual que marca cuál textura se encuentra aplicada actualmente en la zona */
+.texturas div.textura-activa {
+    /* Borde verde esmeralda brillante */
+    border-color: var(--emerald-color);
+    /* Halo luminoso verde esmeralda */
+    box-shadow: 0 0 20px var(--emerald-glow);
+}
+
+/* Etiquetas descriptivas automáticas en cada miniatura mediante pseudo-elemento ::after */
+.texturas div::after {
+    /* Posicionamiento en la parte baja de la miniatura */
+    position: absolute;
+    /* A 6 píxeles del borde inferior */
+    bottom: 6px;
+    /* Centrado horizontal */
+    left: 50%;
+    transform: translateX(-50%);
+    /* Fondo oscuro translúcido para asegurar legibilidad sobre cualquier imagen */
+    background: rgba(7, 10, 19, 0.82);
+    /* Color de texto blanco */
+    color: var(--text-main);
+    /* Fuente pequeña y en negrita */
+    font-size: 0.68rem;
+    font-weight: 700;
+    /* Relleno tipo píldora */
+    padding: 2px 8px;
+    border-radius: 999px;
+    /* Evita saltos de línea */
+    white-space: nowrap;
+    /* No interfiere con el evento de arrastre del ratón */
+    pointer-events: none;
+}
+
+/* Imágenes de fondo y etiquetas individuales para .textura1, .textura2 y .textura3 */
+.textura1 {
+    background-image: url("img/textura1.jpg");
+}
+.textura1::after {
+    content: "Textura 1";
+}
+
+.textura2 {
+    background-image: url("img/textura2.jpg");
+}
+.textura2::after {
+    content: "Textura 2";
+}
+
+.textura3 {
+    background-image: url("img/textura3.jpg");
+}
+.textura3::after {
+    content: "Textura 3";
+}
+
+/* --- 5. ZONA RECEPTORA / LIENZO DE DESTINO (.zona) --- */
+/* Contenedor donde el usuario suelta la textura para previsualizarla a gran escala */
+.zona {
+    /* Posicionamiento relativo para centrar el cartel indicador interno (::before) */
+    position: relative;
+    /* Activa Flexbox para centrar el indicador en medio del lienzo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Altura amplia de 250 píxeles para apreciar la textura en detalle */
+    height: 250px;
+    /* Margen inferior hacia el botón de reinicio */
+    margin: 0 0 20px 0;
+    /* Color de fondo inicial cuando aún no se ha aplicado ninguna textura */
+    background-color: rgba(15, 23, 42, 0.75);
+    /* Garantiza que la textura ocupe todo el contenedor proporcionalmente */
+    background-size: cover;
+    /* Centra la imagen de fondo en el lienzo */
+    background-position: center;
+    /* Impide que la imagen de fondo se repita */
+    background-repeat: no-repeat;
+    /* Borde discontinuo (dashed) que invita visualmente a soltar elementos aquí */
+    border: 2px dashed rgba(148, 163, 184, 0.38);
+    /* Esquinas redondeadas de 18 píxeles */
+    border-radius: 18px;
+    /* Oculta cualquier desbordamiento en las esquinas redondeadas */
+    overflow: hidden;
+    /* Sombra interior profunda */
+    box-shadow: inset 0 4px 20px rgba(0, 0, 0, 0.65);
+    /* Transición suave para cambios de borde, escala y sombra */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background-image 0.3s ease;
+}
+
+/* Cartel flotante automático dentro de .zona leyendo el atributo HTML 'data-mensaje' */
+.zona::before {
+    /* Toma el texto dinámicamente del atributo data-mensaje del elemento .zona */
+    content: attr(data-mensaje);
+    /* Relleno interno cómodo */
+    padding: 10px 20px;
+    /* Fondo oscuro translúcido con desenfoque de cristal */
+    background: rgba(7, 10, 19, 0.78);
+    backdrop-filter: blur(6px);
+    /* Borde sutil alrededor del cartel */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Forma de píldora redondeada */
+    border-radius: 999px;
+    /* Color y peso tipográfico */
+    color: var(--text-main);
+    font-size: 0.92rem;
+    font-weight: 600;
+    /* Sombra para destacar sobre texturas claras u oscuras */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    /* Evita que el cartel intercepte o interrumpa los eventos dragenter/dragleave de .zona */
+    pointer-events: none;
+    /* Transición suave */
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Estado visual cuando el cursor entra a .zona llevando una textura (dragenter / dragover) */
+.zona.zona-activa {
+    /* El borde discontinuo se ilumina en Cian Neón */
+    border-color: var(--cyan-color);
+    /* Se expande sutilmente para dar feedback de recepción activa */
+    transform: scale(1.015);
+    /* Resplandor neón cian exterior e interior */
+    box-shadow:
+        0 0 28px var(--cyan-glow),
+        inset 0 0 25px rgba(34, 211, 238, 0.18);
+}
+
+.zona.zona-activa::before {
+    /* Cambia el color del cartel a cian cuando la textura flota encima */
+    color: var(--cyan-color);
+    border-color: rgba(34, 211, 238, 0.45);
+    transform: scale(1.05);
+}
+
+/* Estado visual cuando ya se ha soltado y aplicado una textura con éxito (drop) */
+.zona.zona-aplicada {
+    /* Cambia el borde a línea continua verde esmeralda */
+    border-style: solid;
+    border-color: rgba(52, 211, 153, 0.55);
+    /* Sombra exterior esmeralda sutil */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 22px var(--emerald-glow);
+}
+
+.zona.zona-aplicada::before {
+    /* Destaca el mensaje de confirmación en verde esmeralda */
+    color: var(--emerald-color);
+    border-color: rgba(52, 211, 153, 0.45);
+}
+
+/* --- 6. CONTROLES INFERIORES (.acciones-zona Y .btn-reset) --- */
+.acciones-zona {
+    /* Centra el botón de reinicio */
+    display: flex;
+    justify-content: center;
+}
+
+.btn-reset {
+    /* Relleno interno cómodo */
+    padding: 10px 22px;
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.06);
+    /* Color de texto claro */
+    color: var(--text-main);
+    /* Borde blanco sutil */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Esquinas redondeadas de 12 píxeles */
+    border-radius: 12px;
+    /* Tipografía heredada en seminegrita */
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Transición suave */
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-reset:hover {
+    /* Eleva el botón ligeramente */
+    transform: translateY(-2px);
+    /* Aclara el fondo y el borde al pasar el ratón */
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+.btn-reset:active {
+    transform: translateY(0);
+}
+
+/* --- 7. DISEÑO RESPONSIVO PARA MÓVILES (@media) --- */
+@media (max-width: 480px) {
+    .panel-texturizador {
+        padding: 26px 18px;
+    }
+
+    .texturas {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .texturas div {
+        width: 72px;
+        height: 72px;
+    }
+
+    .zona {
+        height: 200px;
+    }
+}
+
+
+/* Cartel flotante automático dentro de .zona leyendo el atributo HTML 'data-mensaje' */
+.zona::before {
+    /* Toma el texto dinámicamente del atributo data-mensaje del elemento .zona */
+    content: attr(data-mensaje);
+    /* Relleno interno cómodo */
+    padding: 10px 20px;
+    /* Fondo oscuro translúcido con desenfoque de cristal */
+    background: rgba(7, 10, 19, 0.78);
+    backdrop-filter: blur(6px);
+    /* Borde sutil alrededor del cartel */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Forma de píldora redondeada */
+    border-radius: 999px;
+    /* Color y peso tipográfico */
+    color: var(--text-main);
+    font-size: 0.92rem;
+    font-weight: 600;
+    /* Sombra para destacar sobre texturas claras u oscuras */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    /* Evita que el cartel intercepte o interrumpa los eventos dragenter/dragleave de .zona */
+    pointer-events: none;
+    /* Transición suave */
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+/* Estado visual cuando el cursor entra a .zona llevando una textura (dragenter / dragover) */
+.zona.zona-activa {
+    /* El borde discontinuo se ilumina en Cian Neón */
+    border-color: var(--cyan-color);
+    /* Se expande sutilmente para dar feedback de recepción activa */
+    transform: scale(1.015);
+    /* Resplandor neón cian exterior e interior */
+    box-shadow:
+        0 0 28px var(--cyan-glow),
+        inset 0 0 25px rgba(34, 211, 238, 0.18);
+}
+
+.zona.zona-activa::before {
+    /* Cambia el color del cartel a cian cuando la textura flota encima */
+    color: var(--cyan-color);
+    border-color: rgba(34, 211, 238, 0.45);
+    transform: scale(1.05);
+}
+
+/* Estado visual cuando ya se ha soltado y aplicado una textura con éxito (drop) */
+.zona.zona-aplicada {
+    /* Cambia el borde a línea continua verde esmeralda */
+    border-style: solid;
+    border-color: rgba(52, 211, 153, 0.55);
+    /* Sombra exterior esmeralda sutil */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 22px var(--emerald-glow);
+}
+
+.zona.zona-aplicada::before {
+    /* Destaca el mensaje de confirmación en verde esmeralda */
+    color: var(--emerald-color);
+    border-color: rgba(52, 211, 153, 0.45);
+}
+
+/* --- 6. CONTROLES INFERIORES (.acciones-zona Y .btn-reset) --- */
+.acciones-zona {
+    /* Centra el botón de reinicio */
+    display: flex;
+    justify-content: center;
+}
+
+.btn-reset {
+    /* Relleno interno cómodo */
+    padding: 10px 22px;
+    /* Fondo translúcido sutil */
+    background: rgba(255, 255, 255, 0.06);
+    /* Color de texto claro */
+    color: var(--text-main);
+    /* Borde blanco sutil */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    /* Esquinas redondeadas de 12 píxeles */
+    border-radius: 12px;
+    /* Tipografía heredada en seminegrita */
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Transición suave */
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-reset:hover {
+    /* Eleva el botón ligeramente */
+    transform: translateY(-2px);
+    /* Aclara el fondo y el borde al pasar el ratón */
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.28);
+}
+
+.btn-reset:active {
+    transform: translateY(0);
+}
+
+/* --- 7. DISEÑO RESPONSIVO PARA MÓVILES (@media) --- */
+@media (max-width: 480px) {
+    .panel-texturizador {
+        padding: 26px 18px;
+    }
+
+    .texturas {
+        gap: 12px;
+        padding: 12px;
+    }
+
+    .texturas div {
+        width: 72px;
+        height: 72px;
+    }
+
+    .zona {
+        height: 200px;
+    }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Texturizador Interactivo con Drag &amp; Drop</title>
+</head>
+<body>
+    <!-- Contenedor principal del laboratorio del Texturizador -->
+    <main class="panel-texturizador">
+        <!-- Píldora superior que refleja en tiempo real el estado de dataTransfer -->
+        <span class="badge-transfer" id="estadoTransfer">
+            e.dataTransfer.getData("textura") ➔ esperando arrastre...
+        </span>
+
+        <h1>Texturizador Interactivo</h1>
+        <p class="descripcion">
+            Arrastra cualquiera de las miniaturas de <code>.texturas</code> y suéltala sobre la <code>.zona</code> inferior para aplicar su imagen de fondo mediante la API nativa de <strong>Drag &amp; Drop</strong>.
+        </p>
+
+        <!-- Selector de texturas (estructura original del ejercicio con atributo draggable="true") -->
+        <div class="texturas">
+            <div class="textura1" draggable="true" title="Arrastra la Textura 1 hacia la zona inferior"></div>
+            <div class="textura2" draggable="true" title="Arrastra la Textura 2 hacia la zona inferior"></div>
+            <div class="textura3" draggable="true" title="Arrastra la Textura 3 hacia la zona inferior"></div>
+        </div>
+
+        <!-- Zona receptora (Drop Zone original del ejercicio) -->
+        <div class="zona" data-mensaje="Arrastra y suelta una textura aquí"></div>
+
+        <!-- Barra inferior de acciones para reiniciar la zona de pruebas -->
+        <div class="acciones-zona">
+            <button type="button" class="btn-reset" id="btnResetZona">
+                ↺ Limpiar textura del lienzo
+            </button>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>
