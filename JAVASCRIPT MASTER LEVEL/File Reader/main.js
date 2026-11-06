@@ -1,28 +1,28 @@
 /**
  * ==============================================================================
- * 📜 JAVASCRIPT MASTER LEVEL: MÓDULO COMPLETO DEL OBJETO HISTORY (API DE HISTORIAL)
+ * 📁 JAVASCRIPT MASTER LEVEL: MÓDULO COMPLETO DE FILEREADER API
  * ==============================================================================
  * Archivo: main.js
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: Directamente en la consola del navegador o en terminal con 'node main.js'
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/HISTORIAL.md):
- * 1. Introducción al objeto 'history' y el modelo de pila de navegación (stack)
- * 2. Navegación básica tradicional: 'history.back()' y 'history.forward()'
- * 3. Tamaño y límites de la sesión: la propiedad 'history.length'
- * 4. Navegación con saltos relativos: 'history.go(delta)' y recarga con 'go(0)'
- * 5. HTML5 History API: 'history.pushState(state, unused, url)'
- * 6. Modificación in situ: 'history.replaceState(state, unused, url)'
- * 7. Almacenamiento de datos: inspección de 'history.state' y clonación estructurada
- * 8. El evento 'popstate': captura de navegación de usuario y lectura de 'event.state'
- * 9. La regla de oro: pushState y replaceState NUNCA disparan el evento popstate
- * 10. Analogía 1 del Mundo Real: La Pila de Platos 🍽️ (pushState vs. replaceState)
- * 11. Analogía 2 del Mundo Real: El Álbum de Fotos con Notas 📖 (state y popstate)
- * 12. Diagrama de flujo conceptual: Pila LIFO, puntero de navegación y truncamiento
- * 13. Buenas prácticas: Manejo seguro de 'state === null' y configuración de servidor SPA
- * 14. Errores comunes: DOMException SecurityError (Cross-Origin) y el error 404 en F5
- * 15. Proyecto Integrador: Mini Router SPA Completo con gestión de estado e historial
- * 16. Resolución comentada de los 3 Retos Prácticos (Nivel 1, Nivel 2 y Nivel 3)
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/FILE READER.md):
+ * 1. Introducción a la FileReader API y lectura asíncrona en el cliente
+ * 2. Diferenciación arquitectónica: Objetos File y Blob frente al servidor tradicional
+ * 3. Lectura de contenido textual mediante 'readAsText(blob[, encoding])'
+ * 4. Codificación en Data URL y Base64 mediante 'readAsDataURL(blob)'
+ * 5. Anatomía de una Data URI: data:[<mediatype>][;base64],<datos>
+ * 6. Caso Práctico 1: Carga y renderizado dinámico de galería multiarchivo
+ * 7. Iteración paralela de FileList: Regla de una instancia única de FileReader por archivo
+ * 8. Caso Práctico 2: Integración nativa con Drag & Drop (e.dataTransfer.files)
+ * 9. El ciclo de vida de eventos: loadstart, progress, load, error, abort y loadend
+ * 10. Monitoreo de bytes y cálculo porcentual: e.lengthComputable, e.loaded y e.total
+ * 11. Cancelación asíncrona de lecturas en curso mediante 'reader.abort()'
+ * 12. Analogía 1 del Mundo Real: El Traductor en Cabina 🎙️ (readAsText vs. readAsDataURL)
+ * 13. Analogía 2 del Mundo Real: La Báscula del Camión de Granos 🚚 (progress y loadend)
+ * 14. Buenas prácticas: Validación previa de tipo MIME, tamaño y alternativa URL.createObjectURL()
+ * 15. Errores comunes: Excepción InvalidStateError por concurrencia y confusión con subida HTTP
+ * 16. Resolución comentada de los 3 Retos Prácticos del Módulo (Nivel 1, Nivel 2 y Nivel 3)
  * ==============================================================================
  */
 
@@ -36,555 +36,547 @@ function imprimirSeparador(numeroBloque, titulo) {
 }
 
 // ==============================================================================
-// COMPATIBILIDAD UNIVERSAL Y AISLAMIENTO SEGURO
+// COMPATIBILIDAD UNIVERSAL: SIMULADOR DE FILEREADER PARA NODE.JS Y NAVEGADORES
 // ==============================================================================
-// Para permitir que este script se ejecute tanto en Node.js como en navegadores
-// web (incluso bajo protocolo file:///) sin provocar recargas de página destructivas
-// (como go(0)) ni errores de origen nulo, empleamos un simulador de History
-// de alta fidelidad que reproduce al 100% las especificaciones del W3C/WHATWG.
-class SimuladorHistory {
-    constructor(origen = "https://ejemplo.curso.dev") {
-        this._origen = origen;
-        this._listeners = { popstate: [] };
-        this._stack = [{
-            state: null,
-            url: `${origen}/index.html`,
-            title: "Página Inicial"
-        }];
-        this._pointer = 0;
-        this.location = {
-            href: `${origen}/index.html`,
-            origin: origen,
-            pathname: "/index.html",
-            search: "",
-            hash: ""
-        };
-    }
-
-    get length() {
-        return this._stack.length;
-    }
-
-    get state() {
-        const item = this._stack[this._pointer];
-        return item && item.state ? JSON.parse(JSON.stringify(item.state)) : null;
-    }
-
-    back() {
-        this.go(-1);
-    }
-
-    forward() {
-        this.go(1);
-    }
-
-    go(delta = 0) {
-        if (delta === 0) {
-            console.log("   [Simulador] -> history.go(0): Simula recarga completa del documento (location.reload).");
-            return;
-        }
-        const nuevoIndex = this._pointer + delta;
-        if (nuevoIndex >= 0 && nuevoIndex < this._stack.length) {
-            this._pointer = nuevoIndex;
-            const item = this._stack[this._pointer];
-            this._actualizarLocation(item.url);
-
-            // Disparar evento popstate a los oyentes registrados
-            const evt = { state: this.state, type: "popstate" };
-            this._listeners.popstate.forEach(fn => fn(evt));
-        } else {
-            console.log(`   [Simulador] -> history.go(${delta}): Límite de pila alcanzado (sin efecto).`);
-        }
-    }
-
-    pushState(state, unused, url) {
-        if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
-            try {
-                const parsed = new URL(url);
-                if (parsed.origin !== this._origen) {
-                    throw new Error("SecurityError: No se permite cambiar el origen (Same-Origin Policy)");
-                }
-            } catch (err) {
-                if (err.message.includes("SecurityError")) throw err;
+// En navegadores existe window.FileReader de forma nativa. Para garantizar que
+// este archivo pueda ejecutarse limpiamente tanto en Node.js como en navegadores
+// (incluso bajo protocolo file:///), proveemos un simulador de alta fidelidad.
+class SimuladorBlob {
+    constructor(partes = [], options = {}) {
+        this.type = options.type || "";
+        this.name = options.name || "archivo.bin";
+        
+        // Unimos el contenido como texto o búfer
+        let contenidoStr = "";
+        for (const parte of partes) {
+            if (typeof parte === "string") {
+                contenidoStr += parte;
+            } else if (parte instanceof Uint8Array || Buffer.isBuffer(parte)) {
+                contenidoStr += parte.toString();
+            } else if (parte instanceof SimuladorBlob) {
+                contenidoStr += parte._raw;
             }
         }
-
-        // Truncar entradas futuras si estábamos en una posición intermedia
-        if (this._pointer < this._stack.length - 1) {
-            this._stack.splice(this._pointer + 1);
-        }
-
-        const resolvedUrl = url ? new URL(url, this.location.href).href : this.location.href;
-        this._stack.push({
-            state: state ? JSON.parse(JSON.stringify(state)) : null,
-            url: resolvedUrl,
-            title: unused || ""
-        });
-        this._pointer = this._stack.length - 1;
-        this._actualizarLocation(resolvedUrl);
+        this._raw = contenidoStr;
+        this.size = Buffer.byteLength(this._raw, "utf-8");
     }
+}
 
-    replaceState(state, unused, url) {
-        if (url && (url.startsWith("http://") || url.startsWith("https://"))) {
-            try {
-                const parsed = new URL(url);
-                if (parsed.origin !== this._origen) {
-                    throw new Error("SecurityError: No se permite cambiar el origen (Same-Origin Policy)");
-                }
-            } catch (err) {
-                if (err.message.includes("SecurityError")) throw err;
-            }
-        }
+class SimuladorFile extends SimuladorBlob {
+    constructor(partes = [], nombre = "documento.txt", options = {}) {
+        super(partes, { ...options, name: nombre });
+        this.name = nombre;
+        this.lastModified = Date.now();
+    }
+}
 
-        const resolvedUrl = url ? new URL(url, this.location.href).href : this.location.href;
-        this._stack[this._pointer] = {
-            state: state ? JSON.parse(JSON.stringify(state)) : null,
-            url: resolvedUrl,
-            title: unused || ""
-        };
-        this._actualizarLocation(resolvedUrl);
+class SimuladorFileReader {
+    constructor() {
+        this.EMPTY = 0;
+        this.LOADING = 1;
+        this.DONE = 2;
+        this.readyState = this.EMPTY;
+        
+        this.result = null;
+        this.error = null;
+        this._listeners = {};
+        this._abortado = false;
     }
 
     addEventListener(event, callback) {
-        if (this._listeners[event]) {
-            this._listeners[event].push(callback);
-        }
+        if (!this._listeners[event]) this._listeners[event] = [];
+        this._listeners[event].push(callback);
     }
 
     removeEventListener(event, callback) {
+        if (!this._listeners[event]) return;
+        this._listeners[event] = this._listeners[event].filter(fn => fn !== callback);
+    }
+
+    _despachar(event, data = {}) {
+        const evtObj = { target: this, type: event, ...data };
+        if (this[`on${event}`]) this[`on${event}`](evtObj);
         if (this._listeners[event]) {
-            this._listeners[event] = this._listeners[event].filter(fn => fn !== callback);
+            this._listeners[event].forEach(fn => fn(evtObj));
         }
     }
 
-    _actualizarLocation(urlStr) {
-        this.location.href = urlStr;
-        try {
-            const parsed = new URL(urlStr);
-            this.location.pathname = parsed.pathname;
-            this.location.search = parsed.search;
-            this.location.hash = parsed.hash;
-        } catch (e) {}
+    abort() {
+        if (this.readyState === this.LOADING) {
+            this._abortado = true;
+            this.readyState = this.DONE;
+            this.result = null;
+            this._despachar("abort");
+            this._despachar("loadend");
+        }
+    }
+
+    readAsText(blob, encoding = "UTF-8") {
+        if (this.readyState === this.LOADING) {
+            throw new Error("InvalidStateError: La instancia ya está ejecutando una lectura activa.");
+        }
+
+        this.readyState = this.LOADING;
+        this._abortado = false;
+        this._despachar("loadstart");
+
+        // Simulación asíncrona de progreso y entrega
+        const total = blob.size || 1024;
+        const pasos = 3;
+        let pasoActual = 1;
+
+        const intervalo = setInterval(() => {
+            if (this._abortado) {
+                clearInterval(intervalo);
+                return;
+            }
+
+            const cargado = Math.min(total, Math.round((pasoActual / pasos) * total));
+            this._despachar("progress", {
+                lengthComputable: true,
+                loaded: cargado,
+                total: total
+            });
+
+            if (cargado >= total) {
+                clearInterval(intervalo);
+                this.readyState = this.DONE;
+
+                const finalizar = (texto) => {
+                    this.result = texto;
+                    this._despachar("load");
+                    this._despachar("loadend");
+                };
+
+                if (typeof blob.text === "function") {
+                    blob.text().then(txt => finalizar(txt)).catch(err => {
+                        this.error = err;
+                        this._despachar("error");
+                        this._despachar("loadend");
+                    });
+                } else {
+                    finalizar(blob._raw || String(blob));
+                }
+            }
+            pasoActual++;
+        }, 30);
+    }
+
+    readAsDataURL(blob) {
+        if (this.readyState === this.LOADING) {
+            throw new Error("InvalidStateError: La instancia ya está ejecutando una lectura activa.");
+        }
+
+        this.readyState = this.LOADING;
+        this._abortado = false;
+        this._despachar("loadstart");
+
+        setTimeout(() => {
+            if (this._abortado) return;
+
+            const finalizar = (base64Str) => {
+                const mime = blob.type || "application/octet-stream";
+                this.result = `data:${mime};base64,${base64Str}`;
+                this.readyState = this.DONE;
+
+                this._despachar("progress", {
+                    lengthComputable: true,
+                    loaded: blob.size || 1024,
+                    total: blob.size || 1024
+                });
+                this._despachar("load");
+                this._despachar("loadend");
+            };
+
+            if (typeof blob.arrayBuffer === "function") {
+                blob.arrayBuffer().then(buf => {
+                    finalizar(Buffer.from(buf).toString("base64"));
+                }).catch(err => {
+                    this.error = err;
+                    this._despachar("error");
+                    this._despachar("loadend");
+                });
+            } else {
+                finalizar(Buffer.from(blob._raw || "datos_binarios").toString("base64"));
+            }
+        }, 50);
     }
 }
 
-// Instanciamos el entorno de prueba para la ejecución limpia del temario
-const simHistory = new SimuladorHistory("https://ejemplo.curso.dev");
-
-// Garantizar compatibilidad global con window y window.history en Node.js
-if (typeof globalThis.window === "undefined") {
-    globalThis.window = globalThis;
-}
-if (typeof globalThis.window.history === "undefined") {
-    globalThis.window.history = simHistory;
-}
-
+// Exponemos el lector adecuado para el entorno
+const ReaderClass = (typeof globalThis.FileReader !== "undefined") ? globalThis.FileReader : SimuladorFileReader;
+const BlobClass = (typeof globalThis.Blob !== "undefined") ? globalThis.Blob : SimuladorBlob;
+const FileClass = (typeof globalThis.File !== "undefined") ? globalThis.File : SimuladorFile;
 
 // ==============================================================================
-// BLOQUE 1: INTRODUCCIÓN AL OBJETO HISTORY Y LA PILA DE NAVEGACIÓN
+// BLOQUE 1: INTRODUCCIÓN A LA FILEREADER API
 // ==============================================================================
-imprimirSeparador(1, "INTRODUCCIÓN AL OBJETO HISTORY Y LA PILA DE NAVEGACIÓN");
+imprimirSeparador(1, "INTRODUCCIÓN A LA FILEREADER API Y LECTURA EN CLIENTE");
 
-console.log("El objeto 'window.history' representa el historial de sesión de la pestaña actual.");
-console.log("Funciona como una estructura de datos tipo PILA (LIFO: Last In, First Out).");
-console.log("Cada vez que el usuario visita una página o una URL cambia, se añade una entrada.");
-console.log("\nInspección del objeto history en este entorno:");
-console.log("- Tipo de objeto:", typeof window.history);
-console.log("- Propiedad length inicial:", window.history.length);
-console.log("- Estado inicial (history.state):", window.history.state);
-
-// ==============================================================================
-// BLOQUE 2: NAVEGACIÓN BÁSICA: history.back() Y history.forward()
-// ==============================================================================
-imprimirSeparador(2, "NAVEGACIÓN BÁSICA: history.back() Y history.forward()");
-
-console.log("1. history.back():");
-console.log("   Equivale exactamente a que el usuario haga clic en la flecha 'Atrás' del navegador.");
-console.log("   Sintaxis: window.history.back(); // Retrocede 1 página");
-
-console.log("\n2. history.forward():");
-console.log("   Equivale a que el usuario haga clic en la flecha 'Adelante' del navegador.");
-console.log("   Sintaxis: window.history.forward(); // Avanza 1 página");
-
-console.log("\n3. Comportamiento en límites:");
-console.log("   Si el usuario no tiene historial previo (es la primera página abierta),");
-console.log("   llamar a history.back() NO lanza ningún error: simplemente no hace nada.");
+console.log("La FileReader API de HTML5 permite leer de forma asíncrona archivos del usuario");
+console.log("almacenados en su disco duro local utilizando objetos de tipo File o Blob.");
+console.log("\nVentajas clave del procesamiento en el cliente:");
+console.log("1. Cero consumo de ancho de banda: No se envían megabytes al servidor.");
+console.log("2. Respuesta en milisegundos: Ideal para previsualizaciones instantáneas.");
+console.log("3. Máxima privacidad: El archivo nunca abandona la máquina del usuario.");
+console.log(`\nEstado del entorno:`);
+console.log("- Clase constructora disponible:", typeof ReaderClass);
+console.log("- Soporte de Blob nativo/simulado:", typeof BlobClass);
 
 // ==============================================================================
-// BLOQUE 3: TAMAÑO Y LÍMITES DE SESIÓN: history.length
+// BLOQUE 2: OBJETOS FILE Y BLOB FRENTE AL SERVIDOR TRADICIONAL
 // ==============================================================================
-imprimirSeparador(3, "TAMAÑO DEL HISTORIAL DE SESIÓN (history.length)");
+imprimirSeparador(2, "OBJETOS FILE Y BLOB VS. SERVIDOR TRADICIONAL");
 
-console.log("La propiedad 'history.length' es de SOLO LECTURA (read-only).");
-console.log("Indica cuántas entradas existen en la sesión de navegación actual.");
-console.log(`Valor actual de history.length: ${window.history.length}`);
+console.log("1. ¿Qué es un 'Blob' (Binary Large Object)?");
+console.log("   Representa un trozo de datos crudos inmutables de longitud fija.");
+console.log("   Ejemplo: new Blob(['Hola mundo'], { type: 'text/plain' });");
 
-console.log("\n⚠️ NOTA DE PRIVACIDAD CRÍTICA:");
-console.log("Por razones de seguridad y privacidad, JavaScript NO PUEDE leer qué URLs");
-console.log("visitó el usuario (no puedes ver historial[0].url). Solo puedes saber cuántas hay.");
+console.log("\n2. ¿Qué es un 'File'?");
+console.log("   Es una subclase específica de Blob que añade metadatos del sistema operativo:");
+console.log("   - file.name: Nombre del archivo ('presupuesto.xlsx')");
+console.log("   - file.size: Tamaño en bytes (1048576 = 1 MB)");
+console.log("   - file.type: Tipo MIME ('application/pdf', 'image/png')");
+console.log("   - file.lastModified: Timestamp de última edición");
 
-// ==============================================================================
-// BLOQUE 4: NAVEGACIÓN CON SALTOS RELATIVOS: history.go(delta)
-// ==============================================================================
-imprimirSeparador(4, "NAVEGACIÓN CON SALTOS RELATIVOS: history.go(delta)");
-
-console.log("El método 'go(delta)' permite desplazarse un número relativo de pasos en la pila:");
-console.log("- delta negativo (ej. -1, -2): Retrocede tantas páginas como se indique.");
-console.log("- delta positivo (ej. 1, 2):   Avanza tantas páginas como se indique.");
-console.log("- delta = 0 o sin argumentos:  Recarga la página actual (equivale a location.reload()).");
-
-console.log("\nEjemplos de equivalencias universales:");
-console.log("history.go(-1)  <===>  history.back()");
-console.log("history.go(1)   <===>  history.forward()");
-console.log("history.go(0)   <===>  location.reload()");
-
-// Demostración simulada
-console.log("\nEjecutando demostración con go(0):");
-simHistory.go(0);
+const archivoEjemplo = new FileClass(["Contenido de prueba"], "informe.txt", { type: "text/plain" });
+console.log("\nInspección de un objeto File:");
+console.log("- Nombre:", archivoEjemplo.name);
+console.log("- Tamaño:", archivoEjemplo.size, "bytes");
+console.log("- Tipo MIME:", archivoEjemplo.type);
 
 // ==============================================================================
-// BLOQUE 5: HTML5 HISTORY API: history.pushState(state, unused, url)
+// BLOQUE 3: LECTURA TEXTUAL CON readAsText()
 // ==============================================================================
-imprimirSeparador(5, "HTML5 HISTORY API: history.pushState(state, unused, url)");
+imprimirSeparador(3, "LECTURA DE CONTENIDO TEXTUAL CON readAsText()");
 
-console.log("Introducido en HTML5, 'pushState()' revolucionó el desarrollo web moderno:");
-console.log("Permite agregar una nueva entrada al historial y cambiar la URL visible");
-console.log("¡SIN RECARGAR LA PÁGINA NI PEDIR NADA AL SERVIDOR!");
+console.log("El método 'readAsText(blob[, encoding])' interpreta los bytes del archivo");
+console.log("como una cadena de texto (string).");
+console.log("Parámetros: blob (File/Blob), encoding (opcional, por defecto 'UTF-8').");
+console.log("\n-> Ejecutando lectura asíncrona de un documento JSON...");
 
-console.log("\nParámetros que recibe pushState(state, unused, url):");
-console.log("1. state (Objeto JS): Datos asociados a esta entrada (serializados vía Structured Clone).");
-console.log("2. unused (String): Parámetro heredado del estándar (históricamente título). Hoy se pasa '' o null.");
-console.log("3. url (String): La nueva URL que mostrará el navegador (debe ser del MISMO ORIGEN).");
+const jsonMock = new FileClass([
+    '{\n  "curso": "JS Master Level",\n  "modulo": "FileReader",\n  "nivel": "Avanzado"\n}'
+], "curso.json", { type: "application/json" });
 
-console.log("\n-> Realizando pushState a '/catalogo' con datos asociados...");
-const estadoCatalogo = { seccion: "catalogo", categoria: "monitores", pagina: 1 };
-simHistory.pushState(estadoCatalogo, "", "/catalogo");
+const lectorTexto = new ReaderClass();
 
-console.log("✅ pushState ejecutado.");
-console.log("Nueva URL activa:", simHistory.location.href);
-console.log("Tamaño de historial (length):", simHistory.length);
-console.log("Datos en history.state:", simHistory.state);
+lectorTexto.addEventListener("load", () => {
+    console.log("✅ [readAsText completado] Contenido extraído:");
+    console.log(lectorTexto.result);
+});
 
-// ==============================================================================
-// BLOQUE 6: MODIFICACIÓN IN SITU: history.replaceState(state, unused, url)
-// ==============================================================================
-imprimirSeparador(6, "MODIFICACIÓN IN SITU: history.replaceState(state, unused, url)");
-
-console.log("A diferencia de pushState, 'replaceState()' NO crea una nueva entrada en la pila.");
-console.log("En su lugar, SOBREESCRIBE la entrada actual del historial.");
-
-console.log("\n¿Cuándo es imprescindible usar replaceState()?");
-console.log("1. Filtros de búsqueda en tiempo real: Si el usuario escribe letra por letra,");
-console.log("   usar pushState crearía 20 entradas en el botón 'Atrás'. Con replaceState se actualiza en el mismo sitio.");
-console.log("2. Pestañas activas o acordeones abiertos.");
-console.log("3. Guardar la posición de scroll antes de abandonar la vista.");
-
-const longitudAntes = simHistory.length;
-const estadoActualizado = { seccion: "catalogo", categoria: "monitores-4k", orden: "precio-asc" };
-
-console.log("\n-> Ejecutando replaceState con filtros actualizados...");
-simHistory.replaceState(estadoActualizado, "", "/catalogo?filtro=4k&orden=precio");
-
-console.log("Longitud de historial antes:", longitudAntes);
-console.log("Longitud de historial ahora:", simHistory.length, "(¡Permanece idéntica!)");
-console.log("URL actualizada:", simHistory.location.href);
-console.log("Nuevo estado:", simHistory.state);
+lectorTexto.readAsText(jsonMock, "UTF-8");
 
 // ==============================================================================
-// BLOQUE 7: ALMACENAMIENTO DE DATOS: history.state Y CLONACIÓN ESTRUCTURADA
+// BLOQUE 4: CODIFICACIÓN BASE64 CON readAsDataURL()
 // ==============================================================================
-imprimirSeparador(7, "ALMACENAMIENTO DE DATOS: history.state Y CLONACIÓN ESTRUCTURADA");
+setTimeout(() => {
+    imprimirSeparador(4, "CODIFICACIÓN EN DATA URL CON readAsDataURL()");
 
-console.log("La propiedad 'history.state' retorna los datos asociados a la entrada activa.");
-console.log("El navegador utiliza el 'Algoritmo de Clonación Estructurada' (Structured Clone):");
-console.log("- Soporta: Objetos, Arrays, Strings, Numbers, Booleans, Date, RegExp, Map, Set, Blobs.");
-console.log("- NO soporta: Funciones, Nodos del DOM (Element), Symbols ni referencias circulares no clonables.");
+    console.log("El método 'readAsDataURL(blob)' transforma los bytes binarios del archivo");
+    console.log("en una cadena de caracteres codificada en Base64 con el esquema 'data:'.");
+    console.log("\nPropósito principal:");
+    console.log("Asignar el resultado directamente a elementos gráficos del DOM:");
+    console.log("  miImagen.src = reader.result;");
 
-console.log("\nLímite de tamaño:");
-console.log("Cada navegador impone un límite (generalmente entre 2 MB y 64 MB de datos serializados).");
-console.log("Superar este límite lanzará una excepción DOMException.");
-console.log("Estado actual verificado:", simHistory.state);
+    const imgMock = new FileClass(["BINARIO_FOTO_PNG"], "avatar.png", { type: "image/png" });
+    const lectorImagen = new ReaderClass();
+
+    lectorImagen.addEventListener("load", () => {
+        console.log("✅ [readAsDataURL completado] URI generada:");
+        console.log(lectorImagen.result);
+    });
+
+    lectorImagen.readAsDataURL(imgMock);
+}, 120);
 
 // ==============================================================================
-// BLOQUE 8: EL EVENTO popstate: ESCUCHA Y RECUPERACIÓN DE ESTADO
+// BLOQUE 5: ANATOMÍA DE UNA DATA URI
 // ==============================================================================
-imprimirSeparador(8, "EL EVENTO popstate: ESCUCHA Y RECUPERACIÓN DE ESTADO");
+setTimeout(() => {
+    imprimirSeparador(5, "ANATOMÍA DE UNA DATA URI");
 
-console.log("El evento 'popstate' se despacha sobre el objeto 'window'.");
-console.log("Ocurre cuando la entrada activa del historial cambia debido a la navegación del usuario:");
-console.log("- Al hacer clic en el botón 'Atrás' o 'Adelante' del navegador.");
-console.log("- Al ejecutar 'history.back()', 'history.forward()' o 'history.go(delta)'.");
+    console.log("Una Data URI es una cadena autocontenida que encapsula los datos:");
+    console.log("  data:[<mediatype>][;base64],<datos>");
+    console.log("\nDesglose de partes:");
+    console.log("1. 'data:'             -> Esquema identificador del protocolo.");
+    console.log("2. 'image/png'         -> Tipo MIME del recurso incrustado.");
+    console.log("3. ';base64'           -> Indicador de codificación en Base64.");
+    console.log("4. 'iVBORw0KGgoAAA...' -> Carga binaria codificada en 64 caracteres ASCII.");
+    console.log("\nImpacto en peso:");
+    console.log("Base64 aumenta el peso del archivo un 33% adicional respecto al binario crudo.");
+}, 240);
 
-console.log("\nEstructura del manejador popstate:");
-console.log(`window.addEventListener('popstate', (event) => {
-    console.log("Estado restaurado:", event.state);
-    console.log("URL activa restaurada:", window.location.href);
+// ==============================================================================
+// BLOQUE 6: CASO PRÁCTICO 1: GALERÍA DINÁMICA MULTIARCHIVO
+// ==============================================================================
+setTimeout(() => {
+    imprimirSeparador(6, "CASO PRÁCTICO 1: GALERÍA DINÁMICA MULTIARCHIVO");
+
+    console.log("Permite seleccionar múltiples imágenes mediante <input type='file' multiple>.");
+    console.log("Para procesarlas de forma concurrente, iteramos sobre cada archivo:");
+
+    const fotos = [
+        new FileClass(["pixel1"], "foto_playa.jpg", { type: "image/jpeg" }),
+        new FileClass(["pixel2"], "foto_montana.png", { type: "image/png" })
+    ];
+
+    console.log(`Procesando colección de ${fotos.length} imágenes...`);
+
+    fotos.forEach((foto, idx) => {
+        const lectorGaleria = new ReaderClass();
+        lectorGaleria.addEventListener("load", () => {
+            console.log(`🖼️ [Miniatura ${idx + 1}] Creada para: ${foto.name} | DataURL: ${lectorGaleria.result.slice(0, 35)}...`);
+        });
+        lectorGaleria.readAsDataURL(foto);
+    });
+}, 360);
+
+// ==============================================================================
+// BLOQUE 7: ITERACIÓN PARALELA: REGLA DE UNA INSTANCIA POR ARCHIVO
+// ==============================================================================
+setTimeout(() => {
+    imprimirSeparador(7, "REGLA DE ORO: UNA INSTANCIA DE FILEREADER POR ARCHIVO");
+
+    console.log("⚠️ ERROR CRÍTICO COMÚN EN ENTREVISTAS:");
+    console.log("Intentar reutilizar una misma variable 'reader' dentro de un bucle 'forEach':");
+    console.log(`
+const reader = new FileReader(); // ❌ ERROR
+archivos.forEach(file => {
+    reader.readAsDataURL(file); // Lanzará: InvalidStateError
+});
+`);
+    console.log("👉 EXPLICACIÓN TÉCNICA:");
+    console.log("Un FileReader es una máquina de estados (EMPTY -> LOADING -> DONE).");
+    console.log("No puede procesar dos flujos asíncronos en paralelo simultáneamente.");
+    console.log("Solución correcta: 'new FileReader()' dentro del cuerpo de la iteración.");
+}, 480);
+
+// ==============================================================================
+// BLOQUE 8: CASO PRÁCTICO 2: INTEGRACIÓN CON DRAG & DROP
+// ==============================================================================
+setTimeout(() => {
+    imprimirSeparador(8, "CASO PRÁCTICO 2: INTEGRACIÓN CON DRAG & DROP");
+
+    console.log("La verdadera potencia interactiva surge con los eventos de arrastre nativos:");
+    console.log("1. Eventos 'dragover' y 'drop':");
+    console.log("   DEBES invocar 'e.preventDefault()' en ambos para evitar que el navegador");
+    console.log("   abandone tu aplicación y abra el archivo en una pestaña nueva.");
+    console.log("2. Extracción de archivos:");
+    console.log("   const archivos = e.dataTransfer.files; // Colección FileList");
+    console.log("3. Comprobación y lectura:");
+    console.log("   Determinar mediante 'file.type' si leer con readAsText o readAsDataURL.");
+}, 600);
+
+// ==============================================================================
+// BLOQUE 9: EL CICLO DE VIDA DE EVENTOS DE FILEREADER
+// ==============================================================================
+setTimeout(() => {
+    imprimirSeparador(9, "EL CICLO DE VIDA DE EVENTOS DE FILEREADER");
+
+    console.log("FileReader emite 6 eventos durante su ciclo de ejecución:");
+    console.log("1. 'loadstart' -> Se inicia el proceso de lectura (e.loaded = 0).");
+    console.log("2. 'progress'  -> Emisión periódica de bytes leídos (e.loaded / e.total).");
+    console.log("3. 'load'      -> Lectura completada con éxito (datos en reader.result).");
+    console.log("4. 'error'     -> Fallo de lectura o permisos (detalle en reader.error).");
+    console.log("5. 'abort'     -> Lectura cancelada por el usuario (reader.abort()).");
+    console.log("6. 'loadend'   -> Finalización formal absoluta (siempre se dispara al final).");
+}, 720);
+
+// ==============================================================================
+// BLOQUE 10: MONITOREO DE BYTES Y CÁLCULO DE PROGRESO
+// ==============================================================================
+setTimeout(() => {
+    imprimirSeparador(10, "MONITOREO DE BYTES Y CÁLCULO DE PROGRESO");
+
+    console.log("En archivos pesados, la experiencia de usuario (UX) exige una barra de carga:");
+    console.log("Estructura del cálculo porcentual:");
+    console.log(`
+reader.addEventListener("progress", (e) => {
+    if (e.lengthComputable) {
+        const porcentaje = Math.round((e.loaded / e.total) * 100);
+        barra.style.width = porcentaje + "%";
+    }
 });`);
 
-// Registramos un listener en vivo para probarlo
-simHistory.addEventListener('popstate', (event) => {
-    console.log("\n🔔 [EVENTO POPSTATE DETECTADO EN TIEMPO REAL]");
-    console.log("   event.state:", event.state);
-    console.log("   window.location.href:", simHistory.location.href);
-});
+    const archivoPesadoMock = new FileClass(["X".repeat(5000)], "video_render.mp4", { type: "video/mp4" });
+    const lectorProgreso = new ReaderClass();
+
+    lectorProgreso.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+            const pct = Math.round((e.loaded / e.total) * 100);
+            console.log(`📊 [Progreso en Vivo] ${pct}% (${e.loaded} de ${e.total} bytes leídos)`);
+        }
+    });
+
+    lectorProgreso.readAsText(archivoPesadoMock);
+}, 840);
 
 // ==============================================================================
-// BLOQUE 9: LA REGLA DE ORO: pushState Y replaceState NUNCA DISPARAN popstate
+// BLOQUE 11: CANCELACIÓN ASÍNCRONA CON reader.abort()
 // ==============================================================================
-imprimirSeparador(9, "LA REGLA DE ORO: pushState / replaceState NUNCA DISPARAN popstate");
+setTimeout(() => {
+    imprimirSeparador(11, "CANCELACIÓN ASÍNCRONA CON reader.abort()");
 
-console.log("Esta es una de las preguntas de entrevista técnica más comunes de JavaScript:");
-console.log("¿Llamar a history.pushState() dispara el evento 'popstate'?");
-console.log("👉 RESPUESTA ROTUNDA: NO. NUNCA.");
+    console.log("El método 'abort()' detiene de inmediato cualquier operación de lectura activa.");
+    console.log("Útil cuando el usuario cancela la carga de un archivo erróneo o demasiado pesado.");
 
-console.log("\nDemostración práctica:");
-let disparado = false;
-const testFn = () => { disparado = true; };
-simHistory.addEventListener('popstate', testFn);
+    const archivoParaAbortar = new FileClass(["DATOS_A_CANCELAR"], "archivo_largo.bin");
+    const lectorAbortable = new ReaderClass();
 
-console.log("1. Llamamos a pushState('/nueva-ruta')...");
-simHistory.pushState({ test: 123 }, "", "/nueva-ruta");
+    lectorAbortable.addEventListener("loadstart", () => {
+        console.log("▶ Iniciando lectura para abortar...");
+        setTimeout(() => {
+            console.log("🛑 Ejecutando lectorAbortable.abort()...");
+            lectorAbortable.abort();
+        }, 15);
+    });
 
-console.log("2. ¿Se ejecutó el listener de popstate?:", disparado);
-console.log("   (Como ves, 'disparado' es FALSE. Solo el usuario o history.go() lo activan).");
+    lectorAbortable.addEventListener("abort", () => {
+        console.log("⚠️ [Evento abort] La operación fue cancelada con éxito.");
+    });
 
-simHistory.removeEventListener('popstate', testFn);
+    lectorAbortable.addEventListener("loadend", () => {
+        console.log("🏁 [Evento loadend] Recursos liberados tras la cancelación.");
+    });
 
-console.log("\n3. Ahora provocamos un popstate legítimo llamando a history.back():");
-simHistory.back(); // Volvemos a /catalogo
-
-// ==============================================================================
-// BLOQUE 10: ANALOGÍA 1 DEL MUNDO REAL: LA PILA DE PLATOS 🍽️
-// ==============================================================================
-imprimirSeparador(10, "ANALOGÍA 1: LA PILA DE PLATOS 🍽️ (pushState vs. replaceState)");
-
-console.log("Imagina que cada página del historial es un plato en una torre de platos:\n");
-console.log("1. Navegar normalmente o hacer 'pushState':");
-console.log("   Tomas un PLATO NUEVO y lo colocas encima de la torre.");
-console.log("   La torre ahora es más alta (history.length aumenta en +1).");
-
-console.log("\n2. Hacer 'replaceState':");
-console.log("   Tomas un rotulador y PINTAS sobre el plato que ya está en la cima.");
-console.log("   No agregas ningún plato nuevo. La altura de la torre sigue siendo la misma.");
-
-console.log("\n3. Si estás en medio de la torre y colocas un nuevo plato (pushState):");
-console.log("   ¡Todos los platos que estaban por encima se descartan inmediatamente!");
-console.log("   (El botón 'Adelante' se deshabilita y se vacía).");
+    lectorAbortable.readAsText(archivoParaAbortar);
+}, 980);
 
 // ==============================================================================
-// BLOQUE 11: ANALOGÍA 2 DEL MUNDO REAL: EL ÁLBUM DE FOTOS CON NOTAS 📖
+// BLOQUE 12: ANALOGÍA 1 DEL MUNDO REAL: EL TRADUCTOR EN CABINA 🎙️
 // ==============================================================================
-imprimirSeparador(11, "ANALOGÍA 2: EL ÁLBUM DE FOTOS CON NOTAS 📖 (state y popstate)");
+setTimeout(() => {
+    imprimirSeparador(12, "ANALOGÍA 1: EL TRADUCTOR EN CABINA 🎙️ (readAsText vs readAsDataURL)");
 
-console.log("Imagina un álbum fotográfico familiar encuadernado:\n");
-console.log("- Cada fotografía es una página con su URL.");
-console.log("- 'state' es una NOTA ADHESIVA (Post-It) que pegas detrás de la foto con apuntes:");
-console.log("  '{ fecha: 2026, filtro: \"playa\", scroll: 300 }'.");
-console.log("- 'popstate' es cuando tú ojeas el álbum hacia atrás: al llegar a esa página,");
-console.log("  despegas el Post-It ('event.state') y lees exactamente en qué estado la dejaste.");
+    console.log("Imagina que tienes una carta sellada escrita en otro idioma:\n");
+    console.log("1. 'readAsText()':");
+    console.log("   Un traductor abre la carta y te la lee en voz alta en español.");
+    console.log("   El resultado final es texto directo, entendible por un ser humano.");
 
-// ==============================================================================
-// BLOQUE 12: DIAGRAMA DE FLUJO CONCEPTUAL: PILA LIFO Y TRUNCAMIENTO
-// ==============================================================================
-imprimirSeparador(12, "DIAGRAMA DE FLUJO: PILA LIFO, PUNTERO Y TRUNCAMIENTO");
-
-console.log(`
-Pila Inicial:
-[0] /inicio  --->  [1] /catalogo  --->  [2] /producto-42 (PUNTERO ACTUAL AQUÍ)
-
-Paso 1: Usuario pulsa "Atrás" (history.back()):
-[0] /inicio  --->  [1] /catalogo (PUNTERO AQUÍ)  --->  [2] /producto-42 (En el botón Adelante)
-
-Paso 2: Usuario navega a una nueva ruta con pushState('/contacto'):
-[0] /inicio  --->  [1] /catalogo  --->  [2] /contacto (NUEVO PUNTERO)
-*(¡Nótese que '/producto-42' fue DESTRUIDO de la pila! El botón Adelante queda deshabilitado)*
-`);
+    console.log("\n2. 'readAsDataURL()':");
+    console.log("   Toman una fotografía de la carta y la traducen a un telegrama en código");
+    console.log("   Morse en una sola línea continua. Ninguna persona se sienta a leerlo,");
+    console.log("   sino que se lo entregas a otra máquina (un <img>) para que lo pinte de inmediato.");
+}, 1120);
 
 // ==============================================================================
-// BLOQUE 13: BUENAS PRÁCTICAS EN APLICACIONES REALES (SPA)
+// BLOQUE 13: ANALOGÍA 2 DEL MUNDO REAL: LA BÁSCULA DEL CAMIÓN DE GRANOS 🚚
 // ==============================================================================
-imprimirSeparador(13, "BUENAS PRÁCTICAS EN APLICACIONES REALES (SPA)");
+setTimeout(() => {
+    imprimirSeparador(13, "ANALOGÍA 2: LA BÁSCULA DEL CAMIÓN DE GRANOS 🚚 (progress y loadend)");
 
-console.log("1. Controlar siempre 'event.state === null':");
-console.log("   Al retroceder hasta la primera entrada de la sesión, 'event.state' será null.");
-console.log("   Tu código debe tener un valor por defecto seguro (fallback):");
-console.log("   const estado = event.state || { vista: 'inicio' };");
+    console.log("Imagina un camión tolva descargando grano en un silo agrícola:\n");
+    console.log("1. 'progress':");
+    console.log("   Es la báscula de pesaje que va indicando tonelada por tonelada cuánto grano ha caído,");
+    console.log("   permitiendo saber en todo momento qué porcentaje del camión se ha vaciado.");
 
-console.log("\n2. Configuración obligatoria del Servidor Web (Server Fallback):");
-console.log("   En un SPA (React, Vue, Angular o JS Vanilla), cuando pushState genera '/usuarios/editar',");
-console.log("   si el usuario presiona F5 (recarga), el navegador solicitará ese archivo al servidor.");
-console.log("   Si el servidor no está configurado, devolverá un error '404 Not Found'.");
-console.log("   -> SOLUCIÓN: Redirigir todas las peticiones desconocidas a 'index.html' (rewrite rule).");
-
-console.log("\n3. No abusar del tamaño de 'state':");
-console.log("   No guardes datos gigantescos (ej. listas de 10.000 objetos) en el state.");
-console.log("   Guarda solo identificadores, parámetros de búsqueda y filtros ('{ id: 45, page: 2 }').");
+    console.log("\n2. 'loadend':");
+    console.log("   Es el pitido de la compuerta que se cierra. No importa si el camión se descargó");
+    console.log("   por completo ('load'), si se atascó ('error') o si el conductor se marchó ('abort'),");
+    console.log("   la compuerta siempre se cierra al final y el proceso queda cerrado formalmente.");
+}, 1240);
 
 // ==============================================================================
-// BLOQUE 14: ERRORES COMUNES Y CÓMO EVITARLOS
+// BLOQUE 14: BUENAS PRÁCTICAS EN APLICACIONES REALES
 // ==============================================================================
-imprimirSeparador(14, "ERRORES COMUNES Y CÓMO EVITARLOS");
+setTimeout(() => {
+    imprimirSeparador(14, "BUENAS PRÁCTICAS EN APLICACIONES REALES");
 
-console.log("1. DOMException: SecurityError (Same-Origin Violation):");
-console.log("   Intentar cambiar el origen mediante pushState o replaceState:");
-console.log("   history.pushState({}, '', 'https://google.com/search'); // 🛑 ERROR DE SEGURIDAD");
-console.log("   El protocolo, dominio y puerto DEBEN ser idénticos.");
+    console.log("1. Suscribir escuchadores ANTES de invocar el método de lectura:");
+    console.log("   Evita condiciones de carrera registrando 'load', 'progress' y 'error' previamente.");
 
-try {
-    console.log("\nProbando intento de cross-origin pushState...");
-    simHistory.pushState({}, "", "https://banco-malicioso.com/phishing");
-} catch (e) {
-    console.log("🛑 Capturado con éxito:", e.message);
-}
+    console.log("\n2. Validar tamaño y tipo MIME antes de leer:");
+    console.log("   if (file.size > 5 * 1024 * 1024) return alert('Máximo 5 MB');");
+    console.log("   Cargar archivos gigantescos con readAsDataURL puede agotar la memoria RAM.");
 
-console.log("\n2. Olvidar prevenir el comportamiento por defecto de enlaces <a>:");
-console.log("   Si tienes un enlace <a href='/perfil'>, debes llamar a 'e.preventDefault()'");
-console.log("   antes de ejecutar 'history.pushState()', o el navegador recargará la página por completo.");
+    console.log("\n3. Alternativa moderna: URL.createObjectURL(blob):");
+    console.log("   Si solo necesitas mostrar una imagen sin manipular su cadena Base64,");
+    console.log("   'URL.createObjectURL(file)' es instantáneo y consume muchísima menos memoria.");
+}, 1360);
 
 // ==============================================================================
-// BLOQUE 15: PROYECTO INTEGRADOR: MINI ROUTER SPA MODULAR
+// BLOQUE 15: ERRORES COMUNES Y CÓMO EVITARLOS
 // ==============================================================================
-imprimirSeparador(15, "PROYECTO INTEGRADOR: MINI ROUTER SPA MODULAR");
+setTimeout(() => {
+    imprimirSeparador(15, "ERRORES COMUNES Y CÓMO EVITARLOS");
 
-class SimpleSPARouter {
-    constructor(historyInstance = simHistory) {
-        this.hist = historyInstance;
-        this.rutas = new Map();
-        
-        // Escuchador global de popstate para responder a la navegación del navegador
-        this.hist.addEventListener('popstate', (e) => {
-            this._manejarPopstate(e.state);
-        });
-    }
+    console.log("1. Intentar acceder a 'reader.result' fuera de los eventos:");
+    console.log("   Como la lectura es asíncrona, llamar a 'reader.result' inmediatamente");
+    console.log("   después de 'reader.readAsText()' devolverá null.");
 
-    // Registrar una ruta y su función de renderizado
-    on(path, renderCallback) {
-        this.rutas.set(path, renderCallback);
-        return this;
-    }
-
-    // Navegar programáticamente a una nueva ruta
-    navegar(path, state = {}) {
-        const estadoConMeta = {
-            ...state,
-            path: path,
-            timestamp: Date.now()
-        };
-        
-        // 1. Modificar historial y URL
-        this.hist.pushState(estadoConMeta, "", path);
-        
-        // 2. Renderizar la vista correspondiente
-        this._render(path, estadoConMeta);
-    }
-
-    _manejarPopstate(state) {
-        const pathActual = this.hist.location.pathname;
-        console.log(`[SPA Router] Restaurando ruta por navegación: ${pathActual}`);
-        this._render(pathActual, state || { path: pathActual });
-    }
-
-    _render(path, state) {
-        const handler = this.rutas.get(path) || this._ruta404;
-        handler(state);
-    }
-
-    _ruta404(state) {
-        console.log(`[SPA Router] Error 404: La ruta '${simHistory.location.pathname}' no está registrada.`);
-    }
-}
-
-// Instanciación y registro de rutas del proyecto
-const router = new SimpleSPARouter(simHistory);
-
-router.on('/inicio', (state) => {
-    console.log("🏠 [VISTA RENDERIZADA] Bienvenido al Inicio");
-});
-
-router.on('/productos', (state) => {
-    console.log("📦 [VISTA RENDERIZADA] Listado de productos. Filtro:", state.filtro || "ninguno");
-});
-
-router.on('/checkout', (state) => {
-    console.log("💳 [VISTA RENDERIZADA] Pasarela de pago seguro. Total a pagar:", state.total || 0);
-});
-
-// Simulamos navegación fluida
-console.log("1. Navegando al inicio:");
-router.navegar('/inicio', { bienvenida: true });
-
-console.log("\n2. Navegando a productos con filtros:");
-router.navegar('/productos', { filtro: 'laptops' });
-
-console.log("\n3. Navegando al checkout:");
-router.navegar('/checkout', { total: 1250 });
-
-console.log("\n4. Simulando que el usuario pulsa 'Atrás' en el navegador:");
-simHistory.back(); // Vuelve a /productos y dispara popstate
+    console.log("\n2. Confundir la lectura en cliente con la subida al servidor:");
+    console.log("   FileReader NO sube nada por internet. Opera 100% en local.");
+    console.log("   Para subirlo a un backend, debes usar 'fetch()' con FormData o multipart.");
+}, 1480);
 
 // ==============================================================================
 // BLOQUE 16: RESOLUCIÓN DE LOS 3 RETOS PRÁCTICOS
 // ==============================================================================
-imprimirSeparador(16, "RESOLUCIÓN DE LOS 3 RETOS PRÁCTICOS DEL MÓDULO");
-
-console.log("--- RETO NIVEL 1: Paginador con pushState ---");
-function paginar(numPagina) {
-    if (numPagina < 1) return;
-    const nuevoEstado = { pagina: numPagina, timestamp: Date.now() };
-    const queryUrl = `?page=${numPagina}`;
-    
-    simHistory.pushState(nuevoEstado, "", queryUrl);
-    console.log(`[Reto 1] Navegando a página: ${numPagina} | URL: ${simHistory.location.search}`);
-}
-paginar(1);
-paginar(2);
-paginar(3);
-
-console.log("\n--- RETO NIVEL 2: Filtro con Debounce y replaceState ---");
-let timerDebounce = null;
-function filtrarEnTiempoReal(termino) {
-    clearTimeout(timerDebounce);
-    timerDebounce = setTimeout(() => {
-        const stateFiltro = { q: termino, actualizacion: Date.now() };
-        const queryUrl = termino ? `?buscar=${encodeURIComponent(termino)}` : "?";
-        
-        // Usamos replaceState para no saturar el historial con cada letra tecleada
-        simHistory.replaceState(stateFiltro, "", queryUrl);
-        console.log(`[Reto 2] Filtro aplicado sin agregar entrada al historial: '${termino}'`);
-        console.log(`         Tamaño del historial se mantiene en: ${simHistory.length}`);
-    }, 50); // 50ms para demo en consola
-}
-filtrarEnTiempoReal("j");
-filtrarEnTiempoReal("jav");
-filtrarEnTiempoReal("javascript");
-
-// Esperamos brevemente para que el timer de debounce del reto 2 ejecute antes de continuar
 setTimeout(() => {
-    console.log("\n--- RETO NIVEL 3: Flujo de Pasos y Modal de Confirmación ---");
-    class WizardCheckout {
-        constructor() {
-            this.paso = 1;
-        }
+    imprimirSeparador(16, "RESOLUCIÓN DE LOS 3 RETOS PRÁCTICOS DEL MÓDULO");
 
-        siguientePaso(numPaso) {
-            this.paso = numPaso;
-            const pasoState = { paso: numPaso, modalActivo: true };
-            simHistory.pushState(pasoState, "", `?paso=${numPaso}`);
-            console.log(`[Reto 3] Avanzado al paso ${numPaso} del Checkout.`);
-        }
+    console.log("--- RETO NIVEL 1: Lector y Validador JSON Seguro con try / catch ---");
+    function validarJSON(archivo) {
+        const lector = new ReaderClass();
+        lector.addEventListener("load", () => {
+            try {
+                const parseado = JSON.parse(lector.result);
+                console.log("[Reto 1] JSON verificado con éxito:", parseado);
+            } catch (err) {
+                console.error("[Reto 1] ❌ Error sintáctico en JSON:", err.message);
+            }
+        });
+        lector.readAsText(archivo, "UTF-8");
+    }
+    validarJSON(new FileClass(['{"usuario":"admin","activo":true}'], "datos.json"));
 
-        retroceder() {
-            console.log("[Reto 3] Usuario pulsa Atrás para cancelar o volver al paso anterior:");
-            simHistory.back();
+    console.log("\n--- RETO NIVEL 2: Discriminación de Tipo MIME en Drag & Drop ---");
+    function procesarArchivoDrop(archivo) {
+        const lector = new ReaderClass();
+        if (archivo.type.startsWith("image/")) {
+            lector.addEventListener("load", () => {
+                console.log(`[Reto 2] 🖼️ Imagen lista para galería: ${archivo.name}`);
+            });
+            lector.readAsDataURL(archivo);
+        } else {
+            lector.addEventListener("load", () => {
+                console.log(`[Reto 2] 📄 Documento de texto leído: ${archivo.name}`);
+            });
+            lector.readAsText(archivo, "UTF-8");
         }
     }
+    procesarArchivoDrop(new FileClass(["texto plano"], "notas.txt", { type: "text/plain" }));
+    procesarArchivoDrop(new FileClass(["binario_img"], "foto.png", { type: "image/png" }));
 
-    const wizard = new WizardCheckout();
-    wizard.siguientePaso(2); // Datos de entrega
-    wizard.siguientePaso(3); // Revisión y pago
-    wizard.retroceder();
+    console.log("\n--- RETO NIVEL 3: Clase Gestora de Lectura con Progreso y Abort ---");
+    class GestorLectura {
+        constructor(archivo) {
+            this.archivo = archivo;
+            this.lector = new ReaderClass();
+            this.lector.addEventListener("progress", (e) => {
+                if (e.lengthComputable) {
+                    console.log(`[Reto 3] 📊 Progreso: ${Math.round((e.loaded / e.total) * 100)}%`);
+                }
+            });
+            this.lector.addEventListener("load", () => {
+                console.log("[Reto 3] ✅ Lectura concluida satisfactoriamente");
+            });
+            this.lector.addEventListener("abort", () => {
+                console.log("[Reto 3] 🛑 Lectura abortada por el usuario");
+            });
+        }
+        iniciar() { this.lector.readAsText(this.archivo); }
+        abortar() { this.lector.abort(); }
+    }
 
-    console.log("\n" + "=".repeat(78));
-    console.log("🎉 ¡MÓDULO DEL OBJETO HISTORY COMPLETADO CON ÉXITO!");
-    console.log("=".repeat(78) + "\n");
-}, 80);
+    const tarea = new GestorLectura(new FileClass(["DATOS_LARGOS"], "bundle.js"));
+    tarea.iniciar();
+
+    setTimeout(() => {
+        console.log("\n" + "=".repeat(78));
+        console.log("🎉 ¡MÓDULO DE LA FILEREADER API COMPLETADO CON ÉXITO!");
+        console.log("=".repeat(78) + "\n");
+    }, 150);
+}, 1600);
