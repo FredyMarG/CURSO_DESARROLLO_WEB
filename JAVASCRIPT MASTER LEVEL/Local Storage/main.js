@@ -72,11 +72,11 @@ function crearStorageCompatible() {
     };
 }
 
-// Si estamos en Node.js (donde no existe window.localStorage), inyectamos el simulador en globalThis
-if (typeof globalThis.localStorage === "undefined") {
+// Si estamos en Node.js (donde no existe window.localStorage o es un stub sin métodos), inyectamos el simulador en globalThis
+if (typeof globalThis.localStorage === "undefined" || typeof globalThis.localStorage.setItem !== "function") {
     globalThis.localStorage = crearStorageCompatible();
 }
-if (typeof globalThis.sessionStorage === "undefined") {
+if (typeof globalThis.sessionStorage === "undefined" || typeof globalThis.sessionStorage.setItem !== "function") {
     globalThis.sessionStorage = crearStorageCompatible();
 }
 
