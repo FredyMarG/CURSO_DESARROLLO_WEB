@@ -563,8 +563,10 @@ class AppController {
 
     // Vincula las demostraciones interactivas de geolocalización (Slide 2 y Slide 7)
     static bindGeoLiveDemos() {
-        // Slide 2: Consulta en vivo
+        // Slide 2: Consulta en vivo (getCurrentPosition y watchPosition)
         const btnTestGeoLive = document.getElementById("btnTestGeoLive");
+        const btnTestWatchLive = document.getElementById("btnTestWatchLive");
+        const btnStopWatchLive = document.getElementById("btnStopWatchLive");
         const statusBanner = document.getElementById("geoLiveStatusBanner");
         const statusText = document.getElementById("geoLiveStatusText");
         const metricLat = document.getElementById("metricLat");
@@ -572,6 +574,90 @@ class AppController {
         const metricAcc = document.getElementById("metricAcc");
         const testStatus = document.getElementById("testGeoLiveStatus");
         const consoleOutput1 = document.getElementById("console-output-1");
+
+        let liveWatchId = null;
+        let liveWatchTick = 0;
+
+        if (btnTestWatchLive) {
+            btnTestWatchLive.addEventListener("click", () => {
+                if (!navigator.geolocation) {
+                    SoundEffects.error();
+                    AppController.showToast("Geolocalización no compatible", true);
+                    return;
+                }
+
+                SoundEffects.click();
+                liveWatchTick = 0;
+                btnTestWatchLive.style.display = "none";
+                if (btnStopWatchLive) btnStopWatchLive.style.display = "inline-flex";
+
+                if (statusBanner) {
+                    statusBanner.className = "geo-status-banner warning";
+                    statusText.textContent = "📡 watchPosition() activo: esperando cambios...";
+                }
+                if (testStatus) testStatus.textContent = "Rastreando en tiempo real";
+
+                liveWatchId = navigator.geolocation.watchPosition(
+                    (pos) => {
+                        liveWatchTick++;
+                        SoundEffects.success();
+                        const { latitude, longitude, accuracy, speed } = pos.coords;
+                        if (statusBanner) {
+                            statusBanner.className = "geo-status-banner success";
+                            statusText.textContent = `📡 watchPosition() [Tick #${liveWatchTick}] actualizado`;
+                        }
+                        if (metricLat) metricLat.textContent = `${latitude.toFixed(6)}°`;
+                        if (metricLng) metricLng.textContent = `${longitude.toFixed(6)}°`;
+                        if (metricAcc) metricAcc.textContent = `±${Math.round(accuracy)} m`;
+
+                        if (consoleOutput1) {
+                            const line = document.createElement("div");
+                            line.className = "term-line";
+                            line.style.color = "var(--emerald)";
+                            line.textContent = `> [watchPosition #${liveWatchId}] Tick #${liveWatchTick}: Lat ${latitude.toFixed(6)}°, Lng ${longitude.toFixed(6)}°, Margen ±${Math.round(accuracy)}m`;
+                            consoleOutput1.appendChild(line);
+                            consoleOutput1.scrollTop = consoleOutput1.scrollHeight;
+                        }
+                    },
+                    (err) => {
+                        SoundEffects.error();
+                        if (statusBanner) {
+                            statusBanner.className = "geo-status-banner error";
+                            statusText.textContent = `Error en watch (${err.code}): ${err.message}`;
+                        }
+                    },
+                    { enableHighAccuracy: true, timeout: 6000, maximumAge: 0 }
+                );
+
+                AppController.showToast(`watchPosition iniciado (ID: #${liveWatchId})`);
+            });
+        }
+
+        if (btnStopWatchLive) {
+            btnStopWatchLive.addEventListener("click", () => {
+                if (liveWatchId !== null) {
+                    navigator.geolocation.clearWatch(liveWatchId);
+                    SoundEffects.transition();
+                    if (statusBanner) {
+                        statusBanner.className = "geo-status-banner";
+                        statusText.textContent = `🛑 clearWatch(#${liveWatchId}) ejecutado. Rastreo detenido.`;
+                    }
+                    if (consoleOutput1) {
+                        const line = document.createElement("div");
+                        line.className = "term-line";
+                        line.style.color = "var(--amber)";
+                        line.textContent = `> navigator.geolocation.clearWatch(${liveWatchId}) ➔ Sensores GPS y batería liberados.`;
+                        consoleOutput1.appendChild(line);
+                        consoleOutput1.scrollTop = consoleOutput1.scrollHeight;
+                    }
+                    liveWatchId = null;
+                    btnStopWatchLive.style.display = "none";
+                    if (btnTestWatchLive) btnTestWatchLive.style.display = "inline-flex";
+                    if (testStatus) testStatus.textContent = "Rastreo detenido";
+                    AppController.showToast("clearWatch() ejecutado");
+                }
+            });
+        }
 
         if (btnTestGeoLive) {
             btnTestGeoLive.addEventListener("click", () => {

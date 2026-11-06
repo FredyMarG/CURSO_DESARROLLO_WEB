@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre la History API en JavaScript - JavaScript Master Level." />
+    <title>History API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🧭</span>
+                <span class="title-text">History API</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: History API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">BOM &amp; HTML5 History API</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Enrutamiento SPA</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Control del Historial:
+                    <span class="gradient-text">History API</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Domina la pila de navegación del navegador: aprende a desplazarte con <code>back()</code>, <code>forward()</code>
+                    y <code>go()</code>, inspecciona <code>history.length</code> y crea enrutadores modernos para aplicaciones
+                    <strong>SPA</strong> sin recargar la página mediante <code>pushState()</code>, <code>replaceState()</code> y el evento <code>popstate</code>.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">⏮️</div>
+                        <h3>back() &amp; forward()</h3>
+                        <p>Emula de forma programática las flechas Atrás y Adelante del navegador.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">🔢</div>
+                        <h3>history.length &amp; go()</h3>
+                        <p>Inspecciona la pila y salta de golpe hacia adelante o atrás con deltas relativos.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🚀</div>
+                        <h3>pushState vs replaceState</h3>
+                        <p>Cambia la URL visible y guarda estados en memoria sin provocar recarga de página.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="7">
+                        <div class="mini-card-icon">🔔</div>
+                        <h3>popstate &amp; Enrutador SPA</h3>
+                        <p>Restaura vistas y sincroniza la UI cuando el usuario navega en el historial.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: INTRODUCCIÓN Y NAVEGACIÓN BÁSICA
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Introducción &amp; back/forward">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>Introducción al Objeto <code>window.history</code>, <code>back()</code> y <code>forward()</code></h2>
+                    <p class="section-desc">
+                        El objeto global <code>history</code> permite interactuar directamente con la pila de navegación de la sesión activa:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">La Pila de Navegación (Stack)</span>
+                            </div>
+                            <p>
+                                <strong>La Memoria de la Pestaña:</strong> Cada pestaña del navegador mantiene una pila ordenada
+                                con las páginas visitadas durante esa sesión.
+                            </p>
+                            <p>
+                                <strong>Navegación Unitaria:</strong>
+                                <code>history.back()</code> retrocede una entrada (flecha Atrás).
+                                <code>history.forward()</code> avanza una entrada (flecha Adelante). Si no hay páginas en esa dirección,
+                                la instrucción se ignora silenciosamente sin arrojar error.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Simulación en Vivo:</strong> Usa los botones de navegación del simulador inferior para interactuar con la pila virtual.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Navegación Tradicional</h4>
+                                <ul>
+                                    <li>Enlaces <code>&lt;a href="..."&gt;</code> convencionales.</li>
+                                    <li>Provoca recarga completa (Full Page Reload).</li>
+                                    <li>Destruye el estado en memoria de JavaScript.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>History API en SPAs</h4>
+                                <ul>
+                                    <li>Modifica la URL sin recargar la página.</li>
+                                    <li>Conserva variables, estados y componentes en RAM.</li>
+                                    <li>Control bidireccional con eventos de navegación.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo y Simulador de Navegador en Vivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">navegacion_basica_history.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-string">"use strict"</span>;
+<span class="c-comment">// Retrocede una página en la pila:</span>
+<span class="c-variable">history</span>.<span class="c-func">back</span>();
+
+<span class="c-comment">// Avanza una página en la pila:</span>
+<span class="c-variable">history</span>.<span class="c-func">forward</span>();
+
+<span class="c-comment">// Inspecciona el total de entradas:</span>
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Entradas en historial:"</span>, <span class="c-variable">history</span>.<span class="c-prop">length</span>);</code></pre>
+
+                            <!-- Mockup de Navegador Interactivo -->
+                            <div class="history-browser-mockup">
+                                <div class="browser-bar-top">
+                                    <button class="browser-nav-btn" id="btnMockBack" title="history.back()">◀</button>
+                                    <button class="browser-nav-btn" id="btnMockForward" title="history.forward()">▶</button>
+                                    <button class="browser-nav-btn" id="btnMockReload" title="history.go(0)">↻</button>
+                                    <div class="browser-url-input">
+                                        <span class="browser-url-badge">🔒 https://</span>
+                                        <span id="mockUrlText">curso.dev/inicio</span>
+                                    </div>
+                                </div>
+                                <div class="history-stack-indicator">
+                                    <span>Puntero: <strong id="mockStackPointer" style="color: var(--cyan);">Posición 1 / 3</strong></span>
+                                    <span>history.length: <strong id="mockStackLength" style="color: var(--emerald);">3</strong></span>
+                                </div>
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestHistoryIntro">
+                                    ▶ Probar history.back() y history.forward()
+                                </button>
+                                <span class="run-status" id="testHistoryIntroStatus">Simulador listo</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en las flechas del navegador virtual o pulsa el botón para probar la navegación...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: LENGTH Y NAVEGACIÓN CON GO()
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="length &amp; go(delta)">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Inspección de Pila con <code>history.length</code> y Saltos con <code>history.go()</code></h2>
+                    <p class="section-desc">
+                        Aprende a consultar la profundidad del historial y realizar saltos relativos de varias páginas:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: history.length -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Métrica de Pila</span>
+                            <h3>history.length</h3>
+                            <span class="comp-subtitle">Profundidad total de la sesión activa</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>Propiedad de solo lectura:</strong> Indica cuántas páginas hay en la sesión actual.</li>
+                                <li><strong>Inicia en 1 o 2:</strong> Al abrir una pestaña nueva y entrar al primer sitio.</li>
+                                <li><strong>Privacidad estricta:</strong> Por seguridad, JavaScript <strong>no puede leer las URLs</strong> de las otras páginas del historial.</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">🛡️</span>
+                                <div class="vis-text">
+                                    <strong>Aislamiento de Privacidad:</strong>
+                                    <small>Solo conoces el conteo de páginas, nunca los dominios visitados por el usuario.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Salto</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Delta Relativo</div>
+                    </div>
+
+                    <!-- Tarjeta 2: history.go() -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Navegación Relativa</span>
+                            <h3>history.go(delta)</h3>
+                            <span class="comp-subtitle">Saltos hacia adelante, atrás o recarga</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong><code>go(-1)</code>:</strong> Equivalente exacto a <code>history.back()</code>.</li>
+                                <li><strong><code>go(1)</code>:</strong> Equivalente exacto a <code>history.forward()</code>.</li>
+                                <li><strong><code>go(-2)</code> o <code>go(3)</code>:</strong> Salta dos páginas atrás o tres adelante.</li>
+                                <li><strong><code>go(0)</code> o <code>go()</code>:</strong> Recarga la página actual (<code>location.reload()</code>).</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">⚡</span>
+                                <div class="vis-text">
+                                    <strong>Fuera de Límites:</strong>
+                                    <small>Si pasas <code>go(-99)</code> y no hay tantas páginas, se ignora silenciosamente.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de Saltos -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>history.go(-2) ➔ Salta 2 páginas atrás | history.go(0) ➔ Recarga la página</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckGoExamples">
+                        🔍 Probar Comportamiento de Deltas en history.go()
+                    </button>
+                    <div class="identity-result" id="goExamplesResult">
+                        Haz clic para evaluar los efectos de go(-2), go(1) y go(0)...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Invocación</th>
+                                <th>Delta</th>
+                                <th>Equivalente Estándar</th>
+                                <th>Efecto en la Pila</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>history.go(-1)</code></td>
+                                <td>-1</td>
+                                <td><code>history.back()</code></td>
+                                <td>Retrocede a la entrada inmediatamente anterior.</td>
+                            </tr>
+                            <tr>
+                                <td><code>history.go(1)</code></td>
+                                <td>+1</td>
+                                <td><code>history.forward()</code></td>
+                                <td>Avanza a la entrada inmediatamente siguiente.</td>
+                            </tr>
+                            <tr>
+                                <td><code>history.go(-2)</code></td>
+                                <td>-2</td>
+                                <td>Pulsar "Atrás" dos veces seguidas</td>
+                                <td>Salta 2 páginas atrás en una sola operación.</td>
+                            </tr>
+                            <tr>
+                                <td><code>history.go(0)</code></td>
+                                <td>0</td>
+                                <td><code>location.reload()</code></td>
+                                <td>Recarga el documento actual conservando la posición.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: PUSHSTATE VS REPLACESTATE
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="pushState vs replaceState">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Manipulación Dinámica</span>
+                    <h2>El Corazón de las SPAs: <code>pushState()</code> vs. <code>replaceState()</code></h2>
+                    <p class="section-desc">
+                        Ambos métodos modifican la URL visible en la barra del navegador y asocian un objeto de estado
+                        <strong>sin recargar la página</strong>, pero difieren en cómo alteran la pila:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO PUSHSTATE VS REPLACESTATE -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona la Operación de Historial a Ejecutar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="push">
+                                1. pushState({ id: 1 }, "", "/perfil")
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="replace">
+                                2. replaceState({ id: 2 }, "", "/filtro?p=2")
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="cross">
+                                3. Error Cross-Origin ("https://google.com")
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="popstate">
+                                4. ¿Dispara popstate al ser llamado?
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareHistoryModes">
+                            ⚡ Comparar Efecto en URL, Estado y Pila
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna pushState -->
+                        <div class="error-mode-card card-sloppy" id="cardImplicitResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">pushState(state, "", url)</span>
+                                <h4>Nueva Entrada en la Pila</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalImplicit">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusImplicit">
+                                📦 Añade un nuevo plato a la torre: history.length se incrementa en +1.
+                            </div>
+                        </div>
+
+                        <!-- Columna replaceState -->
+                        <div class="error-mode-card card-strict" id="cardSerializedResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">replaceState(state, "", url)</span>
+                                <h4>Sobrescritura de Entrada Actual</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSerialized">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusSerialized">
+                                🔄 Reemplaza el plato de la cima: history.length se mantiene idéntico.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="storageFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="storageFeedbackText">
+                            Selecciona una operación arriba y presiona <strong>"Comparar Efecto en URL, Estado y Pila"</strong>
+                            para inspeccionar cómo evoluciona la barra de direcciones y la memoria.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: EL OBJETO STATE Y EL EVENTO POPSTATE
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="history.state &amp; popstate">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Ciclo Reactivo</span>
+                    <h2>El Objeto <code>history.state</code> y el Evento Global <code>popstate</code></h2>
+                    <p class="section-desc">
+                        Aprende cómo viajar en el tiempo recuperando la información guardada en cada entrada del historial:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="storageFlowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">history.state</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Evento popstate</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Regla de No Disparo</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: history.state -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 La propiedad history.state</span>
+                                <h3>Acceso directo al estado serializado de la página actual</h3>
+                            </div>
+                            <p class="char-text">
+                                Devuelve el objeto serializable asociado con la entrada sobre la que está situado el navegador.
+                                Si el usuario entró directamente a la URL o no se asoció estado, devuelve <code>null</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestHistoryState">
+                                    ▶ Leer history.state en Tiempo Real
+                                </button>
+                                <div class="mutation-result-box" id="historyStateResult">
+                                    Haz clic para inspeccionar el valor actual de history.state...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: popstate -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 El evento window.onpopstate</span>
+                                <h3>Se dispara únicamente cuando el usuario navega en la pila</h3>
+                            </div>
+                            <p class="char-text">
+                                Se gatilla en <code>window</code> al presionar los botones Atrás / Adelante del navegador o ejecutar
+                                <code>history.back()</code>, <code>forward()</code> o <code>go()</code>. Expone <code>event.state</code> con los datos clonados.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestPopstate">
+                                    ▶ Simular Despacho de Evento popstate
+                                </button>
+                                <div class="mutation-result-box" id="popstateResult">
+                                    Haz clic para observar cómo se restaura el estado y se sincroniza la interfaz...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: Regla de No Disparo -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 La Regla de Oro: pushState NO activa popstate</span>
+                                <h3>El error número 1 de los desarrolladores en enrutamiento</h3>
+                            </div>
+                            <p class="char-text">
+                                Invocar <code>pushState()</code> o <code>replaceState()</code> <strong>jamás dispara el evento popstate</strong>.
+                                Por tanto, tu aplicación debe actualizar la vista de forma inmediata en el mismo manejador que llama a <code>pushState()</code>.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestNoTrigger">
+                                    ▶ Verificar la Regla de Despacho
+                                </button>
+                                <div class="mutation-result-box" id="noTriggerResult">
+                                    Haz clic para contrastar quién activa popstate y quién no...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Estándares de la Industria</span>
+                    <h2>Buenas Prácticas y Errores Comunes con la History API</h2>
+                    <p class="section-desc">
+                        Evita los errores típicos de seguridad y recargas accidentales al construir enrutadores Frontend:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Error Cross-Origin -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: CROSS-ORIGIN</span>
+                            <h4>Intentar Cambiar de Dominio</h4>
+                        </div>
+                        <p>
+                            Pasar una URL con protocolo o dominio distinto a <code>pushState()</code> lanza un error de seguridad
+                            fatal (<code>SecurityError: Blocked cross-origin navigation</code>).
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>history.pushState({}, "", "https://google.com"); // ❌ SecurityError</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Error 404 en Recarga -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: 404 EN RECARGA</span>
+                            <h4>Servidor sin Fallback SPA</h4>
+                        </div>
+                        <p>
+                            Si el usuario recarga la página en <code>/usuario/perfil</code>, el servidor web debe servir siempre
+                            el archivo <code>index.html</code> para que la SPA tome el control.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>GET /usuario/perfil ➔ 404 Not Found // ❌ Falta fallback</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Buena práctica validar null -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: MANEJAR NULL</span>
+                            <h4>Validar event.state === null</h4>
+                        </div>
+                        <p>
+                            En la visita inicial, <code>history.state</code> es <code>null</code>. Prevé siempre una vista por defecto
+                            leyendo <code>location.pathname</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const vista = event.state ? event.state.seccion : "inicio"; // ✅</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Buena práctica replaceState en filtros -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: REPLACESTATE</span>
+                            <h4>Filtros y Búsquedas sin Inflar Pila</h4>
+                        </div>
+                        <p>
+                            Usa <code>replaceState()</code> para paginaciones o filtros de búsqueda para no obligar al usuario a pulsar
+                            "Atrás" diez veces consecutivas.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>history.replaceState({ cat }, "", \`?cat=\${cat}\`); // ✅</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: PROYECTO INTEGRADOR: ENRUTADOR SPA
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Proyecto: Enrutador SPA">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Proyecto de Producción</span>
+                    <h2>Proyecto Integrador: Enrutador SPA con Historial y <code>popstate</code></h2>
+                    <p class="section-desc">
+                        Navegación dinámica entre pestañas actualizando la URL visible y restaurando vistas sin recargas:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Código Fuente -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Enrutador SPA Nativo</span>
+                            </div>
+                            <p>
+                                Interceptamos los clics de la barra de navegación, ejecutamos <code>pushState</code> y escuchamos <code>popstate</code>:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.7rem;"><code id="code-sample-spa"><span class="c-keyword">const</span> <span class="c-func">navegar</span> = (<span class="c-prop">ruta</span>, <span class="c-prop">datos</span>) =&gt; {
+  <span class="c-variable">history</span>.<span class="c-func">pushState</span>(<span class="c-prop">datos</span>, <span class="c-string">""</span>, <span class="c-prop">ruta</span>);
+  <span class="c-func">renderizarVista</span>(<span class="c-prop">datos</span>.<span class="c-prop">seccion</span>);
+};
+
+<span class="c-variable">window</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"popstate"</span>, (<span class="c-prop">e</span>) =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">seccion</span> = <span class="c-prop">e</span>.<span class="c-prop">state</span> ? <span class="c-prop">e</span>.<span class="c-prop">state</span>.<span class="c-prop">seccion</span> : <span class="c-string">"inicio"</span>;
+  <span class="c-func">renderizarVista</span>(<span class="c-variable">seccion</span>);
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Demostración Interactiva -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Probar Enrutador SPA en Vivo</span>
+                            </div>
+                            <p>
+                                Haz clic en las pestañas para navegar sin recargas y luego usa las flechas para retroceder:
+                            </p>
+
+                            <div class="history-browser-mockup" style="margin-top: 0.5rem;">
+                                <div class="browser-bar-top">
+                                    <button class="browser-nav-btn" id="btnSpaBack" title="Atrás">◀</button>
+                                    <button class="browser-nav-btn" id="btnSpaForward" title="Adelante">▶</button>
+                                    <div class="browser-url-input">
+                                        <span class="browser-url-badge">SPA:</span>
+                                        <span id="spaCurrentUrl">/inicio</span>
+                                    </div>
+                                </div>
+                                <div class="spa-nav-links">
+                                    <button class="spa-tab-btn active" data-sparoute="/inicio" data-spasec="inicio">🏠 Inicio</button>
+                                    <button class="spa-tab-btn" data-sparoute="/catalogo" data-spasec="catalogo">📦 Catálogo</button>
+                                    <button class="spa-tab-btn" data-sparoute="/perfil" data-spasec="perfil">👤 Perfil</button>
+                                </div>
+                                <div class="spa-view-canvas" id="spaCanvas">
+                                    <h4 id="spaCanvasTitle">Vista de Inicio</h4>
+                                    <p id="spaCanvasDesc">Bienvenido a nuestra aplicación SPA con navegación instantánea.</p>
+                                </div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <div class="mutation-result-box" id="spaStatusResult">
+                                    Pestaña activa: "inicio" | history.state: { seccion: "inicio" }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías del Mundo Real">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🍽️ 📸</span>
+                    <h2>Analogías del Mundo Real: La Pila de Platos y el Álbum de Fotos</h2>
+                    <p class="section-desc">
+                        Comprende de forma intuitiva cómo se comporta la pila de navegación y el almacenamiento de estados:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Analogía -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Selecciona la analogía del temario que deseas explorar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-office="platos">
+                                <span class="tool-icon">🍽️</span>
+                                <span class="tool-name">1. La Pila de Platos (pushState vs. replaceState)</span>
+                            </button>
+                            <button class="tool-btn" data-office="album">
+                                <span class="tool-icon">📸</span>
+                                <span class="tool-name">2. El Álbum de Fotos con Notas (state y popstate)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: pushState -->
+                        <div class="workshop-card" id="officeCardLeft">
+                            <div class="ws-avatar" id="officeAvatarLeft">🍽️</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleLeft">1. Colocar un Plato Nuevo (pushState)</h3>
+                                <span class="ws-sub" id="officeSubLeft">La torre crece en altura</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsLeft">
+                                <div class="ws-item">Lavas un plato nuevo y lo colocas en la cima de la torre</div>
+                                <div class="ws-item">El tamaño total de la pila (history.length) se incrementa en +1</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusLeft">
+                                El usuario podrá volver al plato anterior pulsando "Atrás"
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span id="officeArrowLabel">Comparativa</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: replaceState -->
+                        <div class="workshop-card" id="officeCardRight">
+                            <div class="ws-avatar" id="officeAvatarRight">🔄</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleRight">2. Cambiar el Plato de Arriba (replaceState)</h3>
+                                <span class="ws-sub" id="officeSubRight">La altura total no cambia</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsRight">
+                                <div class="ws-item highlight-item">Sustituyes el plato de la cima por otro de diferente color</div>
+                                <div class="ws-item highlight-item">La cantidad de platos (history.length) se mantiene intacta</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusRight">
+                                Evita inflar la pila al filtrar búsquedas o cambiar de pestaña
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="officeBanner">
+                        <span class="banner-icon" id="officeBannerIcon">🍽️</span>
+                        <span class="banner-text" id="officeBannerText">
+                            <strong>pushState vs replaceState:</strong> Usa <code>pushState()</code> cuando el cambio represente una página nueva a la que el usuario querrá volver; usa <code>replaceState()</code> para filtros, paginación o formularios multipaso.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Experimenta con la History API</h2>
+                    <p class="section-desc">
+                        Ejecuta y prueba los 6 ejemplos interactivos del curso o carga los retos resueltos con nuestro entorno en vivo:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-hist-1">
+                                        1. Navegación básica: back(), forward() y length
+                                    </option>
+                                    <option value="preset-hist-2">
+                                        2. Saltos relativos con history.go(delta)
+                                    </option>
+                                    <option value="preset-hist-3">
+                                        3. Adición de entradas con pushState()
+                                    </option>
+                                    <option value="preset-hist-4">
+                                        4. Sobrescritura con replaceState()
+                                    </option>
+                                    <option value="preset-hist-5">
+                                        5. Lectura de history.state y evento popstate
+                                    </option>
+                                    <option value="preset-hist-6">
+                                        6. Enrutador SPA completo con renderizado dinámico
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (History API Activa)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Prácticos Paso a Paso</h2>
+                    <p class="section-desc">
+                        Consolida tu dominio de la History API con estos 3 retos progresivos:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Navegación Relativa con go()</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Escribe una función que verifique si <code>history.length > 2</code>. Si es verdadero,
+                            debe retroceder 2 páginas de golpe con <code>history.go()</code>; si no, debe usar <code>history.back()</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-hist1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-hist-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-hist-1">
+                            <pre><code>const retrocederSeguro = () => {
+    if (history.length > 2) {
+        history.go(-2);
+    } else {
+        history.back();
+    }
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Filtro sin Inflar Pila con replaceState</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea una función <code>actualizarFiltro(categoria, pagina)</code> que guarde ambos valores en
+                            el objeto de estado y actualice la URL visible con <code>replaceState()</code> sin aumentar <code>history.length</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-hist2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-hist-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-hist-2">
+                            <pre><code>const actualizarFiltro = (categoria, pagina) => {
+    const estado = { categoria, pagina };
+    history.replaceState(estado, "", `?cat=${categoria}&p=${pagina}`);
+    console.log("Filtro actualizado:", history.state);
+};</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
+                            <h3>Enrutador con pushState y popstate</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Implementa la función <code>navegarA(ruta, seccion)</code> que agregue una entrada con <code>pushState</code>
+                            y registre el listener de <code>popstate</code> para sincronizar la interfaz ante las flechas del navegador.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-hist3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-hist-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-hist-3">
+                            <pre><code>const navegarA = (ruta, seccion) => {
+    history.pushState({ seccion }, "", ruta);
+    renderizar(seccion);
+};
+
+window.addEventListener("popstate", (e) => {
+    const sec = e.state ? e.state.seccion : "inicio";
+    renderizar(sec);
+});</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de History API -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>back(), forward() y go()</h4>
+                        <p>Desplazan el puntero en la pila: <code>go(-1)</code> retrocede y <code>go(1)</code> avanza.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>pushState vs replaceState</h4>
+                        <p><code>pushState()</code> agranda la pila (+1); <code>replaceState()</code> sobrescribe la entrada actual.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Cero Recarga</h4>
+                        <p>Ambos métodos cambian la URL visible sin provocar un refresco de página.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>popstate Reactivo</h4>
+                        <p>Se activa únicamente cuando el usuario navega (Atrás/Adelante); nunca con <code>pushState()</code>.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Mismo Origen (Same-Origin)</h4>
+                        <p>No se puede alterar el dominio a uno externo; lanzaría un <code>SecurityError</code> inmediato.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: History API</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

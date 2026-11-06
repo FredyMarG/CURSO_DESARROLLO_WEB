@@ -92,6 +92,11 @@
                         <h3>getCurrentPosition()</h3>
                         <p>Consulta asíncrona basada en callbacks con verificación obligatoria de HTTPS y permisos.</p>
                     </div>
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">📡</div>
+                        <h3>watchPosition()</h3>
+                        <p>Seguimiento continuo en tiempo real cancelable con <code>clearWatch(id)</code>.</p>
+                    </div>
                     <div class="hero-mini-card" data-jump="3">
                         <div class="mini-card-icon">🎯</div>
                         <h3>Objeto position.coords</h3>
@@ -101,11 +106,6 @@
                         <div class="mini-card-icon">🛡️</div>
                         <h3>Códigos de Error</h3>
                         <p>Gestión de <code>PERMISSION_DENIED</code>, <code>POSITION_UNAVAILABLE</code> y <code>TIMEOUT</code>.</p>
-                    </div>
-                    <div class="hero-mini-card" data-jump="5">
-                        <div class="mini-card-icon">⚙️</div>
-                        <h3>Objeto options</h3>
-                        <p>Control de GPS y batería con <code>enableHighAccuracy</code>, <code>timeout</code> y <code>maximumAge</code>.</p>
                     </div>
                 </div>
 
@@ -225,9 +225,15 @@
                                 </div>
                             </div>
 
-                            <div class="interactive-test-bar">
+                            <div class="interactive-test-bar" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                                 <button class="btn-run-action" id="btnTestGeoLive">
-                                    ▶ Probar getCurrentPosition() en el Navegador
+                                    ▶ getCurrentPosition() (Lectura Única)
+                                </button>
+                                <button class="btn-run-action" id="btnTestWatchLive" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+                                    📡 Iniciar watchPosition() en Vivo
+                                </button>
+                                <button class="btn-run-action" id="btnStopWatchLive" style="display: none; background: linear-gradient(135deg, var(--rose), #e11d48);">
+                                    🛑 clearWatch() (Detener)
                                 </button>
                                 <span class="run-status" id="testGeoLiveStatus">Pulsa para consultar</span>
                             </div>
