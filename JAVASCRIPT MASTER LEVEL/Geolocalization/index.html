@@ -1,0 +1,1081 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre la Geolocation API en JavaScript - JavaScript Master Level." />
+    <title>Geolocation API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">📍</span>
+                <span class="title-text">Geolocation API</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Geolocation API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">HTML5 Device API</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">navigator.geolocation</span>
+                </div>
+
+                <h1 class="hero-title">
+                    API Nativa de
+                    <span class="gradient-text">Geolocalización</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Aprende a capturar la posición física del usuario en tiempo real: domina el método asíncrono
+                    <code>getCurrentPosition()</code>, extrae coordenadas exactas (latitud, longitud, precisión),
+                    gestiona los 3 códigos de error nativos y calibra hardware y batería con <code>options</code>.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">📍</div>
+                        <h3>getCurrentPosition()</h3>
+                        <p>Consulta asíncrona basada en callbacks con verificación obligatoria de HTTPS y permisos.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">🎯</div>
+                        <h3>Objeto position.coords</h3>
+                        <p>Extracción de <code>latitude</code>, <code>longitude</code>, <code>accuracy</code> y marca temporal.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🛡️</div>
+                        <h3>Códigos de Error</h3>
+                        <p>Gestión de <code>PERMISSION_DENIED</code>, <code>POSITION_UNAVAILABLE</code> y <code>TIMEOUT</code>.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="5">
+                        <div class="mini-card-icon">⚙️</div>
+                        <h3>Objeto options</h3>
+                        <p>Control de GPS y batería con <code>enableHighAccuracy</code>, <code>timeout</code> y <code>maximumAge</code>.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: INTRODUCCIÓN Y getCurrentPosition
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Introducción &amp; getCurrentPosition">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>Introducción a la API de Geolocalización y el Método <code>getCurrentPosition()</code></h2>
+                    <p class="section-desc">
+                        A diferencia de la resolución de direcciones IP en servidores, esta API consulta directamente fuentes
+                        de hardware y red del cliente (GPS, Wi-Fi, antenas celulares y dirección IP):
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Seguridad y Permisos Obligatorios</span>
+                            </div>
+                            <p>
+                                <strong>Solo en Contextos Seguros (HTTPS):</strong> Por estrictas políticas de privacidad,
+                                los navegadores bloquean la API si se ejecuta sobre HTTP inseguro (solo se permite en HTTPS o <code>localhost</code>).
+                            </p>
+                            <p>
+                                <strong>Consentimiento del Usuario:</strong> El navegador muestra un cuadro de diálogo nativo; si el usuario
+                                cancela o bloquea el permiso, se dispara de inmediato el callback de error con <code>PERMISSION_DENIED</code>.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Sintaxis Básica:</strong> <code>navigator.geolocation.getCurrentPosition(success, error, options)</code>
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Geo por IP (Servidor)</h4>
+                                <ul>
+                                    <li>Aproximada a nivel de ciudad o país (radio de kilómetros).</li>
+                                    <li>Falla con proxies, VPNs o redes móviles.</li>
+                                    <li>No consulta sensores ni satélites de hardware.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Geolocation API (Cliente)</h4>
+                                <ul>
+                                    <li>Alta precisión métrica (GPS, Wi-Fi, antenas).</li>
+                                    <li>Acceso a margen de error (<code>accuracy</code> en metros).</li>
+                                    <li>Protección estricta de privacidad por el navegador.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo y Prueba en Vivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">primer_contacto_geolocalizacion.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-string">"use strict"</span>;
+<span class="c-keyword">const</span> <span class="c-variable">geolocation</span> = <span class="c-variable">navigator</span>.<span class="c-prop">geolocation</span>;
+
+<span class="c-keyword">const</span> <span class="c-func">posicion</span> = (<span class="c-prop">pos</span>) =&gt; {
+    <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Coordenadas:"</span>, <span class="c-prop">pos</span>.<span class="c-prop">coords</span>);
+};
+
+<span class="c-keyword">const</span> <span class="c-func">err</span> = (<span class="c-prop">error</span>) =&gt; {
+    <span class="c-keyword">console</span>.<span class="c-func">warn</span>(<span class="c-string">"Error:"</span>, <span class="c-prop">error</span>.<span class="c-prop">message</span>);
+};
+
+<span class="c-variable">geolocation</span>.<span class="c-func">getCurrentPosition</span>(<span class="c-func">posicion</span>, <span class="c-func">err</span>);</code></pre>
+
+                            <!-- Widget de Consulta en Vivo -->
+                            <div class="geo-live-card">
+                                <div class="geo-status-banner" id="geoLiveStatusBanner">
+                                    <span>📡 Estado:</span>
+                                    <strong id="geoLiveStatusText">Listo para consultar geolocalización</strong>
+                                </div>
+                                <div class="geo-metrics-grid">
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Latitud</span>
+                                        <span class="geo-metric-val" id="metricLat">--.------°</span>
+                                    </div>
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Longitud</span>
+                                        <span class="geo-metric-val" id="metricLng">--.------°</span>
+                                    </div>
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Precisión</span>
+                                        <span class="geo-metric-val" id="metricAcc">±-- m</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestGeoLive">
+                                    ▶ Probar getCurrentPosition() en el Navegador
+                                </button>
+                                <span class="run-status" id="testGeoLiveStatus">Pulsa para consultar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Probar getCurrentPosition()" para solicitar acceso a tu ubicación real...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: CALLBACK DE ÉXITO Y COORDENADAS
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Callback de Éxito &amp; Coords">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Callback de Éxito: Anatomía de <code>position</code> y <code>coords</code></h2>
+                    <p class="section-desc">
+                        Al obtener la posición con éxito, la función recibe un objeto <code>GeolocationPosition</code>
+                        con métricas físicas detalladas:
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Propiedades de coords -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Métricas Principales</span>
+                            <h3>Propiedades de coords</h3>
+                            <span class="comp-subtitle">Lectura decimal y margen de error</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong><code>latitude</code>:</strong> Latitud decimal en grados (-90° a +90°).</li>
+                                <li><strong><code>longitude</code>:</strong> Longitud decimal en grados (-180° a +180°).</li>
+                                <li><strong><code>accuracy</code>:</strong> Margen de confianza medido en <strong>metros</strong> con 95% de certeza.</li>
+                                <li><strong><code>altitude</code>:</strong> Altura sobre el nivel del mar en metros (o <code>null</code>).</li>
+                                <li><strong><code>speed</code> / <code>heading</code>:</strong> Velocidad (m/s) y dirección (0-360°).</li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">📐</span>
+                                <div class="vis-text">
+                                    <strong>Precisión en Metros:</strong>
+                                    <small>Un <code>accuracy: 15</code> significa que tu posición real está en un radio de 15 metros.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Lectura</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">pos.coords</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Marca de tiempo -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Metadatos de Lectura</span>
+                            <h3>Propiedad timestamp</h3>
+                            <span class="comp-subtitle">Momento exacto de la captura</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                <strong>Marca de Tiempo Unix:</strong> <code>position.timestamp</code> entrega los milisegundos
+                                transcurridos desde el Unix Epoch (1 de enero de 1970). Permite verificar la antigüedad de la lectura:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.5rem;"><code id="code-snippet-time"><span class="c-keyword">const</span> <span class="c-variable">fecha</span> = <span class="c-keyword">new</span> <span class="c-func">Date</span>(<span class="c-prop">position</span>.<span class="c-prop">timestamp</span>).<span class="c-func">toLocaleTimeString</span>();</code></pre>
+                            <div class="visual-box">
+                                <span class="vis-icon">⏱️</span>
+                                <div class="vis-text">
+                                    <strong>Evita Datos Viejos:</strong>
+                                    <small>Cruza <code>timestamp</code> con <code>maximumAge</code> para garantizar datos vigentes.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de Coordenadas -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>const { latitude, longitude, accuracy } = position.coords;</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckCoordsExample">
+                        🔍 Inspeccionar Desestructuración de position.coords
+                    </button>
+                    <div class="identity-result" id="coordsExampleResult">
+                        Haz clic para ver un ejemplo de coordenadas desestructuradas con formato decimal y redondeo...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Propiedad</th>
+                                <th>Tipo de Dato</th>
+                                <th>Unidad de Medida</th>
+                                <th>Disponibilidad en Dispositivos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>coords.latitude</code></td>
+                                <td>Número decimal</td>
+                                <td>Grados sexagesimales (-90 a 90)</td>
+                                <td>Universal (GPS, Wi-Fi, celular o IP)</td>
+                            </tr>
+                            <tr>
+                                <td><code>coords.longitude</code></td>
+                                <td>Número decimal</td>
+                                <td>Grados sexagesimales (-180 a 180)</td>
+                                <td>Universal (GPS, Wi-Fi, celular o IP)</td>
+                            </tr>
+                            <tr>
+                                <td><code>coords.accuracy</code></td>
+                                <td>Número entero / float</td>
+                                <td>Metros (radio de confianza)</td>
+                                <td>Universal (siempre presente)</td>
+                            </tr>
+                            <tr>
+                                <td><code>coords.altitude</code></td>
+                                <td>Número o <code>null</code></td>
+                                <td>Metros sobre el elipsoide</td>
+                                <td>Principalmente chips GPS (móviles)</td>
+                            </tr>
+                            <tr>
+                                <td><code>position.timestamp</code></td>
+                                <td>Entero (milisegundos)</td>
+                                <td>Unix Epoch timestamp (ms)</td>
+                                <td>Universal (fecha del sistema)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: CALLBACK DE ERROR Y SUS 3 CÓDIGOS
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Callback de Error &amp; Códigos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Gestión de Fallos</span>
+                    <h2>Callback de Error: Anatomía de <code>GeolocationPositionError</code></h2>
+                    <p class="section-desc">
+                        Si la consulta falla, el callback recibe un objeto de error con un código numérico (<code>error.code</code>)
+                        y un mensaje descriptivo:
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE CÓDIGOS DE ERROR -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Escenario de Error a Evaluar:</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-scenario="denied">
+                                1. PERMISSION_DENIED (Código 1)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="unavailable">
+                                2. POSITION_UNAVAILABLE (Código 2)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="timeout">
+                                3. TIMEOUT (Código 3)
+                            </button>
+                            <button class="sim-prop-btn" data-scenario="inseguro">
+                                4. Contexto Inseguro (HTTP)
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareErrorModes">
+                            ⚡ Simular Causa y Solución del Error
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Causa -->
+                        <div class="error-mode-card card-sloppy" id="cardImplicitResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Causa del Fallo</span>
+                                <h4>Qué provoca el error en el navegador</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalImplicit">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusImplicit">
+                                ⚠️ El usuario bloqueó permisos o no hubo señal de triangulación.
+                            </div>
+                        </div>
+
+                        <!-- Columna Solución -->
+                        <div class="error-mode-card card-strict" id="cardSerializedResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Manejo Profesional</span>
+                                <h4>Respuesta con switch(error.code)</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalSerialized">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusSerialized">
+                                🛡️ Feedback claro al usuario para guiarlo a habilitar permisos o reintentar.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="storageFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="storageFeedbackText">
+                            Selecciona un código de error arriba y presiona <strong>"Simular Causa y Solución del Error"</strong>
+                            para revisar cómo controlarlo con código limpio.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: OBJETO DE CONFIGURACIÓN OPTIONS
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Objeto options &amp; Parámetros">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Ajuste de Hardware</span>
+                    <h2>El Objeto <code>options</code>: Calibrando Precisión, Tiempo y Batería</h2>
+                    <p class="section-desc">
+                        El tercer argumento permite controlar el comportamiento interno del motor de ubicación con 3 parámetros clave:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="storageFlowTabs">
+                        <button class="char-tab-btn active" data-flow="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">enableHighAccuracy</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">timeout</span>
+                        </button>
+                        <button class="char-tab-btn" data-flow="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">maximumAge</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="flowDisplayPanel">
+                        <!-- Item 1: enableHighAccuracy -->
+                        <div class="char-detail-view active" id="flow-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 enableHighAccuracy (Booleano - Default: false)</span>
+                                <h3>¿Activar chip GPS satelital o conformarse con Wi-Fi e IP?</h3>
+                            </div>
+                            <p class="char-text">
+                                <strong>false:</strong> Usa triangulación rápida de redes Wi-Fi e IP. Responde en milisegundos y ahorra batería.<br>
+                                <strong>true:</strong> Solicita encender el chip GPS del dispositivo. Ofrece máxima exactitud (radio de pocos metros), pero tarda más en conectar con satélites y consume más batería.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestHighAccuracy">
+                                    ▶ Evaluar Diferencia de Precisión vs Batería
+                                </button>
+                                <div class="mutation-result-box" id="highAccuracyResult">
+                                    Haz clic para comparar el comportamiento de enableHighAccuracy: true vs false...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: timeout -->
+                        <div class="char-detail-view" id="flow-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 timeout (Milisegundos - Default: Infinity)</span>
+                                <h3>Tiempo máximo de espera antes de abortar la consulta</h3>
+                            </div>
+                            <p class="char-text">
+                                Define cuántos milisegundos esperará la aplicación antes de disparar el callback de error con <code>error.TIMEOUT</code>.
+                                <strong>Detalle técnico crucial:</strong> El temporizador comienza a contar <em>después</em> de que el usuario acepta el diálogo de permisos (el tiempo que tarda en hacer clic no cuenta contra el timeout).
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestTimeout">
+                                    ▶ Simular Control de Timeout (ej. 5000 ms)
+                                </button>
+                                <div class="mutation-result-box" id="timeoutResult">
+                                    Haz clic para ver cómo se evita que la aplicación quede esperando indefinidamente...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: maximumAge -->
+                        <div class="char-detail-view" id="flow-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 maximumAge (Milisegundos - Default: 0)</span>
+                                <h3>Vigencia máxima permitida para reutilizar posición en caché</h3>
+                            </div>
+                            <p class="char-text">
+                                <strong>maximumAge: 0:</strong> Obliga al hardware a calcular una posición nueva en tiempo real.<br>
+                                <strong>maximumAge: 60000 (1 min):</strong> Si el navegador tiene una posición obtenida hace menos de 60 segundos, la entrega al instante sin encender de nuevo el GPS, ahorrando tiempo y energía.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestMaxAge">
+                                    ▶ Analizar Caché vs Lectura Fresca en Tiempo Real
+                                </button>
+                                <div class="mutation-result-box" id="maxAgeResult">
+                                    Haz clic para contrastar maximumAge: 0 vs un valor en caché...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Estándares de la Industria</span>
+                    <h2>Buenas Prácticas y Errores Comunes con Geolocalización</h2>
+                    <p class="section-desc">
+                        Evita las fallas más recurrentes al implementar geolocalización en aplicaciones Frontend:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Error typo enableHighAccuracy -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: TYPO EN LA PROPIEDAD</span>
+                            <h4>Escribir enableHightAccuracy ("-ght")</h4>
+                        </div>
+                        <p>
+                            Escribir <code>enableHightAccuracy</code> con <strong>"t"</strong> intermedia hace que el navegador
+                            ignore la opción sin avisar y use el valor por defecto (<code>false</code>), perdiendo el GPS.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const options = { enableHightAccuracy: true }; // ❌ Ignorado silenciosamente</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Error omitir callback de error -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ERROR: SIN MANEJO DE ERROR</span>
+                            <h4>Omitir el segundo callback</h4>
+                        </div>
+                        <p>
+                            Si el usuario rechaza los permisos o se encuentra en un sótano sin señal, omitir el callback de error
+                            deja la interfaz congelada sin feedback visual para el usuario.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>navigator.geolocation.getCurrentPosition(success); // ❌ Se congela ante rechazo</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Buena práctica validar soporte -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: DETECCIÓN</span>
+                            <h4>Verificar "geolocation" in navigator</h4>
+                        </div>
+                        <p>
+                            Comprueba siempre si el objeto existe antes de invocarlo para no lanzar un <code>TypeError</code>
+                            en navegadores obsoletos o entornos restringidos.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>if ("geolocation" in navigator) { /* Seguro invocar */ } // ✅</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Buena práctica balancear timeout y maximumAge -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: EFICIENCIA</span>
+                            <h4>Configurar timeout y maximumAge</h4>
+                        </div>
+                        <p>
+                            Establece un <code>timeout</code> razonable (5s a 10s) para evitar bloqueos y aprovecha
+                            <code>maximumAge</code> cuando no requieras navegación paso a paso.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const opt = { timeout: 8000, maximumAge: 60000 }; // ✅ Rápido y eficiente</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: PROYECTO INTEGRADOR: RASTREADOR DE POSICIÓN
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Proyecto: Rastreador de Posición">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Proyecto de Producción</span>
+                    <h2>Proyecto Integrador: Rastreador de Posición y Mapa Dinámico</h2>
+                    <p class="section-desc">
+                        Implementación moderna con desestructuración ES6+, formato de coordenadas a 6 decimales y enlace directo a OpenStreetMap:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Código Fuente -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Código de Producción Limpio</span>
+                            </div>
+                            <p>
+                                Vincula el botón a <code>getCurrentPosition</code> con opciones de alta precisión y maneja todos los códigos de error:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.7rem;"><code id="code-sample-tracker"><span class="c-keyword">const</span> <span class="c-func">onSuccess</span> = ({ <span class="c-prop">coords</span>, <span class="c-prop">timestamp</span> }) =&gt; {
+  <span class="c-keyword">const</span> { <span class="c-prop">latitude</span>, <span class="c-prop">longitude</span>, <span class="c-prop">accuracy</span> } = <span class="c-prop">coords</span>;
+  <span class="c-variable">console</span>.<span class="c-func">log</span>(<span class="c-string">\`Lat: \${<span class="c-prop">latitude</span>.toFixed(6)} | Lng: \${<span class="c-prop">longitude</span>.toFixed(6)}\`</span>);
+  <span class="c-variable">console</span>.<span class="c-func">log</span>(<span class="c-string">\`Precisión: ±\${Math.round(<span class="c-prop">accuracy</span>)} m\`</span>);
+};
+
+<span class="c-keyword">const</span> <span class="c-func">onError</span> = ({ <span class="c-prop">code</span>, <span class="c-prop">message</span> }) =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">errores</span> = {
+    1: <span class="c-string">"Permiso denegado por el usuario"</span>,
+    2: <span class="c-string">"Ubicación no disponible"</span>,
+    3: <span class="c-string">"Tiempo de espera agotado"</span>
+  };
+  <span class="c-variable">console</span>.<span class="c-func">error</span>(<span class="c-variable">errores</span>[<span class="c-prop">code</span>] || <span class="c-prop">message</span>);
+};
+
+<span class="c-variable">navigator</span>.<span class="c-prop">geolocation</span>.<span class="c-func">getCurrentPosition</span>(
+  <span class="c-func">onSuccess</span>, <span class="c-func">onError</span>, { <span class="c-prop">enableHighAccuracy</span>: <span class="c-keyword">true</span>, <span class="c-prop">timeout</span>: 8000 }
+);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Demostración Interactiva -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Probar Rastreador Completo en Vivo</span>
+                            </div>
+                            <p>
+                                Consulta tu posición real del sistema o simula una captura exitosa con enlace geográfico:
+                            </p>
+
+                            <div class="geo-live-card" style="margin-top: 0.5rem;">
+                                <div class="geo-status-banner" id="trackerBanner">
+                                    <span>📍 Rastreador:</span>
+                                    <strong id="trackerBannerText">Listo para triangular</strong>
+                                </div>
+                                <div class="geo-metrics-grid">
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Latitud</span>
+                                        <span class="geo-metric-val" id="trackerLat">--.------°</span>
+                                    </div>
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Longitud</span>
+                                        <span class="geo-metric-val" id="trackerLng">--.------°</span>
+                                    </div>
+                                    <div class="geo-metric-box">
+                                        <span class="geo-metric-label">Margen Error</span>
+                                        <span class="geo-metric-val" id="trackerAcc">±-- m</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 0.5rem; text-align: center;">
+                                    <a id="trackerMapLink" href="#" target="_blank" style="display: none; color: var(--cyan); font-weight: 600; text-decoration: underline; font-size: 0.88rem;">
+                                        🗺️ Abrir ubicación en OpenStreetMap
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnRunTrackerDemo">
+                                    ▶ Ejecutar Rastreador (GPS Real / Simulado)
+                                </button>
+                                <div class="mutation-result-box" id="trackerDemoResult">
+                                    Haz clic para disparar la consulta con enableHighAccuracy: true...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías del Mundo Real">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🛰️ ⏱️</span>
+                    <h2>Analogías del Mundo Real: El Mensajero con Láser y la Foto con Vencimiento</h2>
+                    <p class="section-desc">
+                        Comprende de forma intuitiva cómo se comporta la precisión del GPS y la vigencia de la memoria caché:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Analogía -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Selecciona la analogía del temario que deseas explorar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-office="gps">
+                                <span class="tool-icon">🛰️</span>
+                                <span class="tool-name">1. El Mensajero y el Láser Satelital (enableHighAccuracy)</span>
+                            </button>
+                            <button class="tool-btn" data-office="foto">
+                                <span class="tool-icon">📸</span>
+                                <span class="tool-name">2. La Foto con Vencimiento (timeout y maximumAge)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A: Modo Ligero / Caché -->
+                        <div class="workshop-card" id="officeCardLeft">
+                            <div class="ws-avatar" id="officeAvatarLeft">🏙️</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleLeft">1. Modo Ligero (enableHighAccuracy: false)</h3>
+                                <span class="ws-sub" id="officeSubLeft">Pregunta el nombre del vecindario (Wi-Fi / IP)</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsLeft">
+                                <div class="ws-item">Responde casi instantáneamente en pocos milisegundos</div>
+                                <div class="ws-item">Ahorra 100% de batería al no encender el chip GPS</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusLeft">
+                                Precisión moderada a nivel de vecindario o calle
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span id="officeArrowLabel">Calibración</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B: Modo Alta Precisión / Lectura Fresca -->
+                        <div class="workshop-card" id="officeCardRight">
+                            <div class="ws-avatar" id="officeAvatarRight">🛰️</div>
+                            <div class="ws-header">
+                                <h3 id="officeTitleRight">2. Visor Láser Satelital (enableHighAccuracy: true)</h3>
+                                <span class="ws-sub" id="officeSubRight">Triangulación por Constelación GPS</span>
+                            </div>
+                            <div class="ws-items" id="officeItemsRight">
+                                <div class="ws-item highlight-item">Ubica la puerta exacta de tu casa con margen métrico</div>
+                                <div class="ws-item highlight-item">Requiere esperar conexión con satélites y gasta más batería</div>
+                            </div>
+                            <div class="ws-status" id="officeStatusRight">
+                                Precisión de alta fidelidad (±3 a ±10 metros)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="officeBanner">
+                        <span class="banner-icon" id="officeBannerIcon">🛰️</span>
+                        <span class="banner-text" id="officeBannerText">
+                            <strong>enableHighAccuracy:</strong> Usa <code>false</code> para catálogos locales o tiendas cercanas; activa <code>true</code> únicamente cuando desarrolles navegación por satélite, fitness o mapas paso a paso.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Experimenta con la Geolocation API</h2>
+                    <p class="section-desc">
+                        Ejecuta y prueba los 6 ejemplos interactivos del curso o carga los retos resueltos con nuestro entorno en vivo:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-geo-1">
+                                        1. Código Base: navigator.geolocation.getCurrentPosition()
+                                    </option>
+                                    <option value="preset-geo-2">
+                                        2. Extracción de coords (latitude, longitude, accuracy)
+                                    </option>
+                                    <option value="preset-geo-3">
+                                        3. Manejo de Errores con switch(error.code)
+                                    </option>
+                                    <option value="preset-geo-4">
+                                        4. Configuración options (enableHighAccuracy, timeout, maximumAge)
+                                    </option>
+                                    <option value="preset-geo-5">
+                                        5. Evitar el error común: typo "enableHightAccuracy"
+                                    </option>
+                                    <option value="preset-geo-6">
+                                        6. Proyecto Completo: Rastreador con enlace a OpenStreetMap
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (Geolocation Activa)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Prácticos Paso a Paso</h2>
+                    <p class="section-desc">
+                        Consolida tu dominio de la API nativa de Geolocalización con estos 3 retos progresivos:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Consulta Simple de Coordenadas</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Invoca <code>getCurrentPosition</code>, desestructura <code>latitude</code> y <code>longitude</code>
+                            desde <code>coords</code> e imprímelas en la consola junto con el margen de precisión en metros.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-geo1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-geo-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-geo-1">
+                            <pre><code>navigator.geolocation.getCurrentPosition((pos) => {
+    const { latitude, longitude, accuracy } = pos.coords;
+    console.log(`Latitud: ${latitude}, Longitud: ${longitude}`);
+    console.log(`Precisión: ±${accuracy} metros`);
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Gestor de Errores con switch(error.code)</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea un callback de error robusto que evalúe <code>PERMISSION_DENIED</code> (1),
+                            <code>POSITION_UNAVAILABLE</code> (2) y <code>TIMEOUT</code> (3), mostrando mensajes personalizados en español.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-geo2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-geo-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-geo-2">
+                            <pre><code>const onError = (error) => {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            console.error("Permiso denegado por el usuario.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.error("Ubicación física no disponible.");
+            break;
+        case error.TIMEOUT:
+            console.error("Se agotó el tiempo de espera.");
+            break;
+    }
+};
+navigator.geolocation.getCurrentPosition(pos => console.log(pos), onError);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
+                            <h3>Calibrador con Objeto options y Enlace a Mapa</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Configura <code>enableHighAccuracy: true</code>, <code>timeout: 5000</code> y <code>maximumAge: 0</code>.
+                            Al obtener la posición, construye una URL de OpenStreetMap con las coordenadas obtenidas.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-geo3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-geo-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-geo-3">
+                            <pre><code>const options = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
+navigator.geolocation.getCurrentPosition(
+    ({ coords }) => {
+        const url = `https://www.openstreetmap.org/#map=16/${coords.latitude}/${coords.longitude}`;
+        console.log("Enlace al mapa:", url);
+    },
+    (err) => console.warn(err.message),
+    options
+);</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de Geolocation API -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>HTTPS Obligatorio</h4>
+                        <p>Solo funciona bajo conexiones seguras (HTTPS o <code>localhost</code>); se bloquea en HTTP.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>Consentimiento del Usuario</h4>
+                        <p>Requiere autorización explícita; siempre implementa el callback de error para rechazos.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>position.coords</h4>
+                        <p>Entrega <code>latitude</code>, <code>longitude</code> y el margen de error <code>accuracy</code> en metros.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>3 Códigos de Error</h4>
+                        <p>Domina <code>PERMISSION_DENIED</code> (1), <code>POSITION_UNAVAILABLE</code> (2) y <code>TIMEOUT</code> (3).</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Calibra con options</h4>
+                        <p>Ajusta <code>enableHighAccuracy</code>, <code>timeout</code> y <code>maximumAge</code> según precisión y batería.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Geolocation API</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
