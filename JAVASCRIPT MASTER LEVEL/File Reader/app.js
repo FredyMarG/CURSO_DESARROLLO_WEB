@@ -1,8 +1,8 @@
 /**
  * ============================================================================
- * JAVASCRIPT MASTER LEVEL - MÓDULO: OBJETO HISTORY (API DE HISTORIAL)
+ * JAVASCRIPT MASTER LEVEL - MÓDULO: FILEREADER API
  * ARCHIVO: app.js
- * CONTROLADOR PRINCIPAL, SIMULADORES INTERACTIVOS, AUDIO Y PLAYGROUND
+ * CONTROLADOR PRINCIPAL, SIMULADORES DE LECTURA, DRAG & DROP Y PLAYGROUND
  * ============================================================================
  */
 
@@ -18,51 +18,50 @@
         viewMode: 'slides', // 'slides' | 'guide'
         soundEnabled: true,
 
-        // 1.1 Simulador del Navegador Básico (Slide 2)
-        mockHistory: {
-            stack: [
-                { url: 'curso.dev/inicio', state: { page: 'inicio' }, title: 'Página Inicial' },
-                { url: 'curso.dev/catalogo', state: { page: 'catalogo', categoria: 'todos' }, title: 'Catálogo de Cursos' },
-                { url: 'curso.dev/producto/42', state: { page: 'producto', id: 42 }, title: 'Detalle de Producto #42' }
-            ],
-            pointer: 2 // Inicia en la última página
+        // Demos integradas para cuando el usuario no sube archivos locales
+        demos: {
+            text: `// ==========================================
+// CONFIGURACIÓN DE APLICACIÓN - CONFIG.JSON
+// ==========================================
+{
+  "nombreProyecto": "JavaScript Master Level",
+  "modulo": "FileReader API",
+  "version": "2.4.0",
+  "autor": "Comunidad JS Pro",
+  "caracteristicas": [
+    "Lectura asíncrona en memoria local",
+    "Conversión automática a Base64",
+    "Soporte para Drag & Drop nativo",
+    "Monitoreo de eventos de progreso"
+  ],
+  "modoOffline": true,
+  "fechaCreacion": "${new Date().toISOString()}"
+}`,
+            // Imagen SVG de demostración codificada en Data URL
+            imageSvg: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="240" viewBox="0 0 400 240"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%236366f1"/><stop offset="100%" stop-color="%2306b6d4"/></linearGradient></defs><rect width="400" height="240" rx="16" fill="%230f172a"/><circle cx="200" cy="100" r="45" fill="url(%23g)"/><path d="M120 190 Q200 130 280 190" stroke="url(%23g)" stroke-width="8" fill="none" stroke-linecap="round"/><text x="200" y="220" text-anchor="middle" fill="%23f8fafc" font-family="sans-serif" font-size="14" font-weight="600">FileReader Demo DataURL</text></svg>',
+
+            gallery: [
+                { name: 'dashboard_ui.png', size: '240 KB', color: '#6366f1', icon: '📊' },
+                { name: 'avatar_usuario.webp', size: '48 KB', color: '#06b6d4', icon: '👤' },
+                { name: 'banner_promocion.jpg', size: '512 KB', color: '#10b981', icon: '🎨' },
+                { name: 'grafico_ventas.svg', size: '32 KB', color: '#f59e0b', icon: '📈' }
+            ]
         },
 
-        // 1.2 Simulador de Escenarios (Slide 4)
-        activeScenario: 'push',
-
-        // 1.3 Simulador SPA Completo (Slide 7)
-        spa: {
-            currentRoute: '/inicio',
-            history: [
-                { route: '/inicio', sec: 'inicio', state: { seccion: 'inicio' } }
-            ],
-            pointer: 0,
-            views: {
-                '/inicio': {
-                    title: '🏠 Vista de Inicio',
-                    desc: 'Bienvenido a nuestra aplicación SPA con navegación instantánea. El DOM se actualiza dinámicamente sin peticiones de recarga al servidor.',
-                    state: { seccion: 'inicio' }
-                },
-                '/catalogo': {
-                    title: '📦 Catálogo de Productos',
-                    desc: 'Explora la lista completa de artículos tecnológicos. Al pulsar Atrás en el navegador virtual, volverás a Inicio sin perder datos en memoria.',
-                    state: { seccion: 'catalogo', categoria: 'tecnologia' }
-                },
-                '/perfil': {
-                    title: '👤 Perfil de Usuario',
-                    desc: 'Configuración de cuenta y preferencias. La URL visible en la barra cambia limpiamente mediante history.pushState().',
-                    state: { seccion: 'perfil', usuarioId: 9942 }
-                }
-            }
+        // Estado del simulador de progreso
+        progressSim: {
+            timer: null,
+            loaded: 0,
+            total: 8192 * 1024, // 8 MB
+            isRunning: false
         },
 
-        // 1.4 Analogías Visuales (Slide 8)
-        activeOffice: 'platos'
+        // Analogías visuales
+        activeAnalogy: 'traductor'
     };
 
     /* ==========================================================================
-       2. MOTOR DE SONIDO SINTETIZADO (Web Audio API)
+       2. MOTOR DE AUDIO SINTETIZADO (Web Audio API)
        ========================================================================== */
     class SoundEngine {
         constructor() {
@@ -79,7 +78,7 @@
             }
         }
 
-        playTone(freq, type = 'sine', duration = 0.1, volume = 0.05) {
+        playTone(freq, type = 'sine', duration = 0.09, volume = 0.05) {
             if (!AppState.soundEnabled) return;
             try {
                 this.init();
@@ -99,29 +98,28 @@
 
                 osc.start();
                 osc.stop(this.ctx.currentTime + duration);
-            } catch (e) {
-                // Silencioso si el navegador bloquea audio sin interacción
-            }
+            } catch (e) {}
         }
 
         nav() {
-            this.playTone(480, 'sine', 0.08, 0.04);
+            this.playTone(480, 'sine', 0.07, 0.04);
         }
 
         click() {
-            this.playTone(600, 'triangle', 0.06, 0.05);
+            this.playTone(620, 'triangle', 0.06, 0.05);
         }
 
-        success() {
+        fileLoaded() {
             if (!AppState.soundEnabled) return;
-            this.playTone(523.25, 'sine', 0.09, 0.05);
-            setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 80);
+            this.playTone(523.25, 'sine', 0.08, 0.05);
+            setTimeout(() => this.playTone(659.25, 'sine', 0.08, 0.05), 70);
+            setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 140);
         }
 
-        warning() {
+        error() {
             if (!AppState.soundEnabled) return;
-            this.playTone(340, 'sawtooth', 0.12, 0.06);
-            setTimeout(() => this.playTone(260, 'sawtooth', 0.15, 0.06), 100);
+            this.playTone(320, 'sawtooth', 0.12, 0.06);
+            setTimeout(() => this.playTone(240, 'sawtooth', 0.15, 0.06), 90);
         }
     }
 
@@ -131,225 +129,258 @@
        3. PRESETS DE CÓDIGO EDITABLE PARA EL PLAYGROUND (Slide 9 & Retos)
        ========================================================================== */
     const CodePresets = {
-        'preset-hist-1': `// 1. Navegación Básica: back(), forward() y length
-console.log("=== INSPECCIÓN DEL HISTORIAL ===");
-console.log("Total de entradas en la sesión (history.length):", window.history.length);
-console.log("Estado actual (history.state):", window.history.state);
+        'preset-file-1': `// 1. Lectura de Archivo de Texto con readAsText()
+console.log("=== LECTURA DE TEXTO EN MEMORIA LOCAL ===");
 
-// Simulación de retroceso
-console.log("\\n-> Retrocediendo 1 página con history.back()...");
-// window.history.back(); // Descomentar en entorno con navegación previa
+// Creamos un Blob en memoria simulando un archivo seleccionado por el usuario
+const contenidoTexto = "Hola Mundo desde la FileReader API.\\nFecha: " + new Date().toLocaleString();
+const archivoFalso = new Blob([contenidoTexto], { type: "text/plain" });
 
-// Simulación de avance
-console.log("-> Avanzando 1 página con history.forward()...");
-// window.history.forward();
+const reader = new FileReader();
 
-console.log("¡Comandos analizados correctamente!");`,
+reader.addEventListener("loadstart", () => {
+    console.log("⏳ [1. loadstart] Inicio de la lectura del archivo");
+});
 
-        'preset-hist-2': `// 2. Saltos Relativos con history.go(delta)
-console.log("=== NAVEGACIÓN RELATIVA CON GO() ===");
-console.log("history.go(-1)  <==>  history.back()");
-console.log("history.go(1)   <===>  history.forward()");
-console.log("history.go(0)   <===>  location.reload()");
+reader.addEventListener("load", () => {
+    console.log("✅ [2. load] Archivo leído con éxito!");
+    console.log("Contenido del archivo (reader.result):");
+    console.log(reader.result);
+});
 
-console.log("\\n-> Probando cálculo de deltas:");
-const saltar = (delta) => {
-    console.log(\`Ejecutando salto relativo: \${delta > 0 ? '+' : ''}\${delta} páginas\`);
-    // window.history.go(delta);
-};
+reader.addEventListener("loadend", () => {
+    console.log("🏁 [3. loadend] Ciclo de vida de lectura finalizado");
+});
 
-saltar(-2); // Salta dos páginas atrás
-saltar(3);  // Salta tres páginas adelante`,
+// Iniciamos la lectura como texto UTF-8
+reader.readAsText(archivoFalso, "UTF-8");`,
 
-        'preset-hist-3': `// 3. Adición de Entradas con pushState()
-console.log("=== AGREGANDO ENTRADA CON PUSHSTATE ===");
-const nuevoEstado = {
-    seccion: "catalogo",
-    filtro: "monitores-4k",
-    orden: "precio-desc",
-    timestamp: Date.now()
-};
+        'preset-file-2': `// 2. Codificación Base64 con readAsDataURL()
+console.log("=== CODIFICACIÓN DE BINARIO A DATA URL ===");
 
-const nuevaUrl = "?seccion=catalogo&filtro=monitores-4k";
+// Creamos un Blob de imagen SVG en memoria
+const svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="purple" width="100" height="100"/></svg>';
+const blobImagen = new Blob([svgString], { type: "image/svg+xml" });
 
-console.log("Longitud antes de pushState:", window.history.length);
-window.history.pushState(nuevoEstado, "", nuevaUrl);
+const reader = new FileReader();
 
-console.log("✅ URL actualizada sin recargar la página.");
-console.log("Nueva URL activa:", window.location.search);
-console.log("Datos persistidos en memory state:", window.history.state);
-console.log("Nueva longitud de historial:", window.history.length);`,
+reader.addEventListener("load", () => {
+    console.log("✅ Imagen convertida a Data URL:");
+    console.log("Esquema Base64:", reader.result.substring(0, 45) + "...");
+    console.log("Longitud total de la cadena:", reader.result.length, "caracteres");
+    console.log("💡 Puedes asignar esta cadena directamente a: img.src = reader.result");
+});
 
-        'preset-hist-4': `// 4. Sobrescritura de Entrada con replaceState()
-console.log("=== REEMPLAZANDO ENTRADA CON REPLACESTATE ===");
-const estadoFiltro = {
-    seccion: "catalogo",
-    filtro: "laptops-gaming",
-    pagina: 2
-};
+reader.readAsDataURL(blobImagen);`,
 
-const longitudAntes = window.history.length;
-console.log("Longitud inicial de historial:", longitudAntes);
+        'preset-file-3': `// 3. Procesamiento Paralelo de Galería Múltiple
+console.log("=== LECTURA DE MÚLTIPLES ARCHIVOS ===");
 
-// Reemplazamos la entrada actual
-window.history.replaceState(estadoFiltro, "", "?filtro=laptops-gaming&page=2");
+// Simulamos una lista de 3 archivos recibidos de <input multiple>
+const archivosMock = [
+    new Blob(["img1"], { type: "image/png" }),
+    new Blob(["img2"], { type: "image/jpeg" }),
+    new Blob(["img3"], { type: "image/webp" })
+];
 
-console.log("✅ Entrada actual sobrescrita.");
-console.log("Longitud posterior:", window.history.length, "(¡Permanece idéntica!)");
-console.log("history.state actualizado:", window.history.state);`,
+console.log("Procesando", archivosMock.length, "archivos en paralelo:");
 
-        'preset-hist-5': `// 5. Lectura de history.state y Evento popstate
-console.log("=== ESCUCHANDO EVENTO POPSTATE ===");
-
-const miManejador = (event) => {
-    console.log("🔔 [POPSTATE DISPARADO]");
-    console.log("Estado restaurado (event.state):", event.state);
-    console.log("URL activa:", window.location.href);
-};
-
-window.addEventListener('popstate', miManejador);
-console.log("Listener registrado en window.");
-console.log("Pulsa las flechas Atrás / Adelante del navegador para probar.");
-
-// NOTA: Para remover el listener más adelante:
-// window.removeEventListener('popstate', miManejador);`,
-
-        'preset-hist-6': `// 6. Mini Enrutador SPA Completo con Renderizado Dinámico
-class MiniRouter {
-    constructor() {
-        this.rutas = new Map();
-        window.addEventListener('popstate', (e) => this._onPopState(e.state));
-    }
-
-    ruta(path, handler) {
-        this.rutas.set(path, handler);
-        return this;
-    }
-
-    navegar(path, state = {}) {
-        window.history.pushState(state, "", path);
-        this._render(path, state);
-    }
-
-    _onPopState(state) {
-        console.log("⏪ [PopState] Restaurando vista por navegación del usuario");
-        this._render(window.location.pathname, state);
-    }
-
-    _render(path, state) {
-        const handler = this.rutas.get(path) || (() => console.log("404: No encontrada"));
-        console.log("Renderizando ruta:", path, "con datos:", state);
-        handler(state);
-    }
-}
-
-const app = new MiniRouter();
-app.ruta('/inicio', (s) => console.log("🏠 Renderizando Inicio"));
-app.ruta('/articulos', (s) => console.log("📰 Renderizando Artículos"));
-
-app.navegar('/inicio', { rol: 'admin' });
-app.navegar('/articulos', { cat: 'js' });`,
-
-        // Presets de los Retos Prácticos
-        'preset-ex-hist1': `// RETO NIVEL 1: Paginador con pushState
-function cambiarPagina(numeroPagina) {
-    if (numeroPagina < 1) return;
+archivosMock.forEach((archivo, indice) => {
+    // REGLA: Cada archivo requiere su propia instancia de FileReader
+    const lector = new FileReader();
     
-    const estado = {
-        pagina: numeroPagina,
-        totalPaginas: 10,
-        fecha: new Date().toLocaleTimeString()
-    };
+    lector.addEventListener("load", () => {
+        console.log(\`🖼️ [Archivo \${indice + 1}] Minisello Base64 generado para tipo: \${archivo.type}\`);
+    });
     
-    const nuevaUrl = "?page=" + numeroPagina;
-    
-    // Agregamos la página a la pila de navegación
-    window.history.pushState(estado, "", nuevaUrl);
-    
-    console.log("📄 Navegando a Página:", numeroPagina);
-    console.log("URL en barra:", window.location.search);
-    console.log("Estado en memoria (history.state):", window.history.state);
-}
+    lector.readAsDataURL(archivo);
+});`,
 
-// Simulamos navegación a varias páginas:
-cambiarPagina(1);
-cambiarPagina(2);
-cambiarPagina(3);`,
+        'preset-file-4': `// 4. Integración de FileReader con Eventos Drag & Drop
+console.log("=== EVENTOS DE ARRASTRE Y SOLTURA (DRAG & DROP) ===");
 
-        'preset-ex-hist2': `// RETO NIVEL 2: Filtro de Búsqueda con Debounce y replaceState
-let timerDebounce = null;
-
-function filtrarConDebounce(termino) {
-    clearTimeout(timerDebounce);
+function manejarSolturaDeArchivos(eventoDrop) {
+    // 1. Evitamos que el navegador abra el archivo en una nueva pestaña
+    eventoDrop.preventDefault();
     
-    timerDebounce = setTimeout(() => {
-        const estadoFiltro = {
-            query: termino,
-            filtroActivo: termino.length > 0,
-            timestamp: Date.now()
-        };
-        
-        const params = new URLSearchParams(window.location.search);
-        if (termino.trim()) {
-            params.set('q', termino.trim());
+    // 2. Extraemos la colección de archivos de dataTransfer
+    const archivos = Array.from(eventoDrop.dataTransfer.files);
+    console.log("Archivos recibidos en la zona:", archivos.length);
+    
+    archivos.forEach(file => {
+        const reader = new FileReader();
+        if (file.type.startsWith("image/")) {
+            reader.addEventListener("load", () => console.log("Foto detectada:", file.name));
+            reader.readAsDataURL(file);
         } else {
-            params.delete('q');
+            reader.addEventListener("load", () => console.log("Texto detectado:", file.name));
+            reader.readAsText(file);
         }
-        
-        const nuevaUrl = "?" + params.toString();
-        
-        // Usamos replaceState para no saturar el historial con cada letra tecleada
-        window.history.replaceState(estadoFiltro, "", nuevaUrl);
-        
-        console.log("🔍 Filtro aplicado:", termino);
-        console.log("URL reemplazada:", nuevaUrl);
-        console.log("Tamaño de historial intacto:", window.history.length);
-    }, 250);
+    });
 }
 
-// Simulando tipeo en una caja de texto:
-filtrarConDebounce("j");
-filtrarConDebounce("jav");
-filtrarConDebounce("javascript");`,
+console.log("Función de dropzone lista para escuchar eventos dragover y drop.");`,
 
-        'preset-ex-hist3': `// RETO NIVEL 3: Flujo de Checkout con Modal y Botón Atrás
-class CheckoutFlow {
-    constructor() {
-        this.pasoActual = 1;
-        this.init();
+        'preset-file-5': `// 5. Monitoreo de Progreso de Lectura con progress
+console.log("=== MONITOREO DE EVENTO PROGRESS ===");
+
+// Creamos un Blob de 500 KB para observar avance
+const datosGrandes = new Uint8Array(500 * 1024);
+const archivoPesado = new Blob([datosGrandes], { type: "application/octet-stream" });
+
+const reader = new FileReader();
+
+reader.addEventListener("progress", (e) => {
+    if (e.lengthComputable) {
+        const porcentaje = Math.round((e.loaded / e.total) * 100);
+        console.log(\`📊 Progreso: \${porcentaje}% (\${(e.loaded / 1024).toFixed(0)} / \${(e.total / 1024).toFixed(0)} KB)\`);
+    }
+});
+
+reader.addEventListener("load", () => {
+    console.log("🎉 Lectura completada al 100%");
+});
+
+reader.readAsArrayBuffer(archivoPesado);`,
+
+        'preset-file-6': `// 6. Cancelación de Lectura con reader.abort()
+console.log("=== CANCELACIÓN ASÍNCRONA CON ABORT() ===");
+
+const archivoGrande = new Blob([new Uint8Array(1024 * 1024)]);
+const reader = new FileReader();
+
+reader.addEventListener("loadstart", () => {
+    console.log("Iniciando lectura pesada...");
+    // Simulamos que el usuario pulsa 'Cancelar' a los 2 milisegundos
+    setTimeout(() => {
+        console.log("🛑 El usuario canceló la operación. Ejecutando reader.abort()...");
+        reader.abort();
+    }, 2);
+});
+
+reader.addEventListener("abort", () => {
+    console.log("⚠️ Evento 'abort' capturado: La lectura fue cancelada exitosamente.");
+});
+
+reader.addEventListener("loadend", () => {
+    console.log("🏁 Evento 'loadend': Limpieza de recursos finalizada.");
+});
+
+reader.readAsArrayBuffer(archivoGrande);`,
+
+        // Retos Prácticos
+        'preset-ex-file1': `// RETO NIVEL 1: Lector y Validador JSON Seguro con try / catch
+function leerYValidarJSON(archivo) {
+    if (!archivo) {
+        console.error("Error: No se proporcionó ningún archivo.");
+        return;
     }
 
-    init() {
-        // Inicializamos estado base
-        window.history.replaceState({ paso: 1, modal: false }, "", "?paso=1");
-        
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.paso) {
-                console.log("🔄 [PopState] Restaurando Checkout al Paso:", e.state.paso);
-                this.pasoActual = e.state.paso;
-            } else {
-                console.log("⚠️ Volviendo al estado inicial del catálogo");
-                this.pasoActual = 1;
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+        try {
+            const objetoParseado = JSON.parse(reader.result);
+            console.log("✅ JSON válido analizado con éxito:", objetoParseado);
+            console.log("Claves encontradas:", Object.keys(objetoParseado));
+        } catch (error) {
+            console.error("❌ Archivo corrompido: La sintaxis no es un JSON válido.", error.message);
+        }
+    });
+
+    reader.addEventListener("error", () => {
+        console.error("Error de lectura de archivo:", reader.error.message);
+    });
+
+    reader.readAsText(archivo, "UTF-8");
+}
+
+// Prueba con JSON válido
+const mockValido = new Blob(['{"modulo":"FileReader","nivel":"Master"}'], { type: "application/json" });
+leerYValidarJSON(mockValido);
+
+// Prueba con JSON inválido
+const mockInvalido = new Blob(['{ modulo: "invalido", sin_comillas: }'], { type: "application/json" });
+leerYValidarJSON(mockInvalido);`,
+
+        'preset-ex-file2': `// RETO NIVEL 2: Discriminación de Tipo MIME en Zona Drag & Drop
+function procesarArchivosArrastrados(fileList) {
+    const archivos = Array.from(fileList);
+    console.log(\`📦 Procesando \${archivos.length} archivos...\`);
+
+    archivos.forEach(file => {
+        const reader = new FileReader();
+
+        if (file.type.startsWith("image/")) {
+            // Caso Imagen -> Base64 Data URL
+            reader.addEventListener("load", () => {
+                console.log(\`🖼️ [IMAGEN] \${file.name} (\${(file.size / 1024).toFixed(1)} KB) -> Asignar a galería <img src="\${reader.result.slice(0,30)}...">\`);
+            });
+            reader.readAsDataURL(file);
+        } else if (file.type.startsWith("text/") || file.name.endsWith(".json") || file.name.endsWith(".md")) {
+            // Caso Documento -> Texto Plano
+            reader.addEventListener("load", () => {
+                console.log(\`📄 [DOCUMENTO] \${file.name}: primer renglón -> \${reader.result.split("\\n")[0]}\`);
+            });
+            reader.readAsText(file, "UTF-8");
+        } else {
+            console.warn(\`⚠️ Tipo de archivo no admitido: \${file.name} (\${file.type || 'desconocido'})\`);
+        }
+    });
+}
+
+// Prueba
+procesarArchivosArrastrados([
+    new Blob(["# Título Markdown"], { type: "text/markdown" }),
+    new Blob(["data_bin"], { type: "image/png" }),
+    new Blob([new Uint8Array(10)], { type: "application/zip" })
+]);`,
+
+        'preset-ex-file3': `// RETO NIVEL 3: Clase FileUploaderManager con Progreso y Abort
+class FileUploaderManager {
+    constructor(archivo) {
+        this.archivo = archivo;
+        this.reader = new FileReader();
+        this._configurarEventos();
+    }
+
+    _configurarEventos() {
+        this.reader.addEventListener("loadstart", () => {
+            console.log("▶ [loadstart] Lectura iniciada para:", this.archivo.name || "archivo");
+        });
+
+        this.reader.addEventListener("progress", (e) => {
+            if (e.lengthComputable) {
+                const pct = Math.round((e.loaded / e.total) * 100);
+                console.log(\`📊 [progress] \${pct}% completado\`);
             }
+        });
+
+        this.reader.addEventListener("load", () => {
+            console.log("✅ [load] Lectura concluida satisfactoriamente");
+        });
+
+        this.reader.addEventListener("abort", () => {
+            console.warn("🛑 [abort] Operación cancelada por el usuario");
+        });
+
+        this.reader.addEventListener("loadend", () => {
+            console.log("🏁 [loadend] Limpieza de recursos completada");
         });
     }
 
-    avanzar(siguientePaso) {
-        this.pasoActual = siguientePaso;
-        const state = { paso: siguientePaso, modal: true, timestamp: Date.now() };
-        window.history.pushState(state, "", "?paso=" + siguientePaso);
-        console.log("➡️ Avanzado al paso " + siguientePaso + ". Si pulsas Atrás, volverás al paso anterior.");
+    iniciar() {
+        this.reader.readAsArrayBuffer(this.archivo);
     }
 
     cancelar() {
-        console.log("❌ Cancelando compra...");
-        window.history.back();
+        this.reader.abort();
     }
 }
 
-const checkout = new CheckoutFlow();
-checkout.avanzar(2); // Datos de entrega
-checkout.avanzar(3); // Método de pago`
+const mockPesado = new Blob([new Uint8Array(200 * 1024)]);
+const gestor = new FileUploaderManager(mockPesado);
+gestor.iniciar();`
     };
 
     /* ==========================================================================
@@ -366,23 +397,22 @@ checkout.avanzar(3); // Método de pago`
             this.bindEvents();
             this.buildSlideDots();
             this.updateSlideDisplay();
-            
+
             // Inicializar simuladores específicos
-            this.initMockBrowser();
-            this.initScenarioSimulator();
-            this.initFlowTabs();
-            this.initSpaSimulator();
+            this.initSlideText();
+            this.initSlideImage();
+            this.initSlideGallery();
+            this.initSlideDropZone();
+            this.initSlideProgress();
             this.initAnalogies();
-            this.loadCodePreset('preset-hist-1');
+            this.loadCodePreset('preset-file-1');
         }
 
         cacheDom() {
-            // Contenedores generales
             this.dom.body = document.body;
             this.dom.slides = document.querySelectorAll('.slide');
-            this.dom.presentationWrapper = document.getElementById('presentationWrapper');
 
-            // Navegación superior
+            // Navegación
             this.dom.progressBar = document.getElementById('progressBar');
             this.dom.slideIndicator = document.getElementById('slideIndicator');
             this.dom.btnToggleMode = document.getElementById('btnToggleMode');
@@ -392,78 +422,66 @@ checkout.avanzar(3); // Método de pago`
             this.dom.soundIcon = document.getElementById('soundIcon');
             this.dom.btnOverview = document.getElementById('btnOverview');
             this.dom.btnFullscreen = document.getElementById('btnFullscreen');
-
-            // Navegación inferior
             this.dom.btnPrevSlide = document.getElementById('btnPrevSlide');
             this.dom.btnNextSlide = document.getElementById('btnNextSlide');
             this.dom.slideDotsContainer = document.getElementById('slideDotsContainer');
-
-            // Hero Slide
             this.dom.btnStartPresentation = document.getElementById('btnStartPresentation');
+            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation');
             this.dom.jumpLinks = document.querySelectorAll('[data-jump]');
 
-            // Slide 2: Mockup Navegador
-            this.dom.btnMockBack = document.getElementById('btnMockBack');
-            this.dom.btnMockForward = document.getElementById('btnMockForward');
-            this.dom.btnMockReload = document.getElementById('btnMockReload');
-            this.dom.mockUrlText = document.getElementById('mockUrlText');
-            this.dom.mockStackPointer = document.getElementById('mockStackPointer');
-            this.dom.mockStackLength = document.getElementById('mockStackLength');
-            this.dom.btnTestHistoryIntro = document.getElementById('btnTestHistoryIntro');
-            this.dom.testHistoryIntroStatus = document.getElementById('testHistoryIntroStatus');
-            this.dom.consoleOutput1 = document.getElementById('console-output-1');
+            // Slide 2: Lector Texto
+            this.dom.dropZoneText = document.getElementById('dropZoneText');
+            this.dom.inputLocalText = document.getElementById('inputLocalText');
+            this.dom.btnLoadDemoText = document.getElementById('btnLoadDemoText');
+            this.dom.textReadStatus = document.getElementById('textReadStatus');
+            this.dom.textViewerResult = document.getElementById('textViewerResult');
 
-            // Slide 3: Pruebas de go()
-            this.dom.btnCheckGoExamples = document.getElementById('btnCheckGoExamples');
-            this.dom.goExamplesResult = document.getElementById('goExamplesResult');
+            // Slide 3: Lector Imagen DataURL
+            this.dom.dropZoneImage = document.getElementById('dropZoneImage');
+            this.dom.inputLocalImage = document.getElementById('inputLocalImage');
+            this.dom.btnLoadDemoImage = document.getElementById('btnLoadDemoImage');
+            this.dom.imageReadStatus = document.getElementById('imageReadStatus');
+            this.dom.imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            this.dom.imagePreviewPlaceholder = document.getElementById('imagePreviewPlaceholder');
+            this.dom.imagePreviewElement = document.getElementById('imagePreviewElement');
 
-            // Slide 4: Simulador de Escenarios
-            this.dom.simPropButtons = document.querySelectorAll('.sim-prop-btn');
-            this.dom.btnCompareHistoryModes = document.getElementById('btnCompareHistoryModes');
-            this.dom.terminalImplicit = document.getElementById('terminalImplicit');
-            this.dom.terminalSerialized = document.getElementById('terminalSerialized');
-            this.dom.statusImplicit = document.getElementById('statusImplicit');
-            this.dom.statusSerialized = document.getElementById('statusSerialized');
-            this.dom.storageFeedbackText = document.getElementById('storageFeedbackText');
+            // Slide 4: Galería
+            this.dom.btnSelectMultipleImages = document.getElementById('btnSelectMultipleImages');
+            this.dom.btnLoadDemoGallery = document.getElementById('btnLoadDemoGallery');
+            this.dom.inputMultipleGallery = document.getElementById('inputMultipleGallery');
+            this.dom.galleryCountStatus = document.getElementById('galleryCountStatus');
+            this.dom.galleryGridContainer = document.getElementById('galleryGridContainer');
 
-            // Slide 5: Pestañas de Características y Test en Vivo
-            this.dom.charTabButtons = document.querySelectorAll('.char-tab-btn');
-            this.dom.charDetailViews = document.querySelectorAll('.char-detail-view');
-            this.dom.btnTestHistoryState = document.getElementById('btnTestHistoryState');
-            this.dom.historyStateResult = document.getElementById('historyStateResult');
-            this.dom.btnTestPopstate = document.getElementById('btnTestPopstate');
-            this.dom.popstateResult = document.getElementById('popstateResult');
-            this.dom.btnTestNoTrigger = document.getElementById('btnTestNoTrigger');
-            this.dom.noTriggerResult = document.getElementById('noTriggerResult');
+            // Slide 5: Zona Drag & Drop
+            this.dom.interactiveMainDropZone = document.getElementById('interactiveMainDropZone');
+            this.dom.dropZoneResultBox = document.getElementById('dropZoneResultBox');
 
-            // Slide 7: Simulador SPA
-            this.dom.btnSpaBack = document.getElementById('btnSpaBack');
-            this.dom.btnSpaForward = document.getElementById('btnSpaForward');
-            this.dom.spaCurrentUrl = document.getElementById('spaCurrentUrl');
-            this.dom.spaTabs = document.querySelectorAll('.spa-tab-btn');
-            this.dom.spaCanvasTitle = document.getElementById('spaCanvasTitle');
-            this.dom.spaCanvasDesc = document.getElementById('spaCanvasDesc');
-            this.dom.spaStatusResult = document.getElementById('spaStatusResult');
+            // Slide 7: Progreso
+            this.dom.btnStartProgressSim = document.getElementById('btnStartProgressSim');
+            this.dom.btnAbortProgressSim = document.getElementById('btnAbortProgressSim');
+            this.dom.fileProgressBarFill = document.getElementById('fileProgressBarFill');
+            this.dom.progressPercentLabel = document.getElementById('progressPercentLabel');
+            this.dom.progressBytesLoaded = document.getElementById('progressBytesLoaded');
+            this.dom.progressBytesTotal = document.getElementById('progressBytesTotal');
+            this.dom.progressEventLogBox = document.getElementById('progressEventLogBox');
 
             // Slide 8: Analogías
             this.dom.toolButtons = document.querySelectorAll('.tool-btn');
-            this.dom.officeCardLeft = document.getElementById('officeCardLeft');
-            this.dom.officeAvatarLeft = document.getElementById('officeAvatarLeft');
-            this.dom.officeTitleLeft = document.getElementById('officeTitleLeft');
-            this.dom.officeSubLeft = document.getElementById('officeSubLeft');
-            this.dom.officeItemsLeft = document.getElementById('officeItemsLeft');
-            this.dom.officeStatusLeft = document.getElementById('officeStatusLeft');
+            this.dom.analogyAvatarLeft = document.getElementById('analogyAvatarLeft');
+            this.dom.analogyTitleLeft = document.getElementById('analogyTitleLeft');
+            this.dom.analogySubLeft = document.getElementById('analogySubLeft');
+            this.dom.analogyItemsLeft = document.getElementById('analogyItemsLeft');
+            this.dom.analogyStatusLeft = document.getElementById('analogyStatusLeft');
 
-            this.dom.officeCardRight = document.getElementById('officeCardRight');
-            this.dom.officeAvatarRight = document.getElementById('officeAvatarRight');
-            this.dom.officeTitleRight = document.getElementById('officeTitleRight');
-            this.dom.officeSubRight = document.getElementById('officeSubRight');
-            this.dom.officeItemsRight = document.getElementById('officeItemsRight');
-            this.dom.officeStatusRight = document.getElementById('officeStatusRight');
+            this.dom.analogyAvatarRight = document.getElementById('analogyAvatarRight');
+            this.dom.analogyTitleRight = document.getElementById('analogyTitleRight');
+            this.dom.analogySubRight = document.getElementById('analogySubRight');
+            this.dom.analogyItemsRight = document.getElementById('analogyItemsRight');
+            this.dom.analogyStatusRight = document.getElementById('analogyStatusRight');
 
-            this.dom.officeArrowLabel = document.getElementById('officeArrowLabel');
-            this.dom.officeBannerIcon = document.getElementById('officeBannerIcon');
-            this.dom.officeBannerText = document.getElementById('officeBannerText');
+            this.dom.analogyArrowLabel = document.getElementById('analogyArrowLabel');
+            this.dom.analogyBannerIcon = document.getElementById('analogyBannerIcon');
+            this.dom.analogyBannerText = document.getElementById('analogyBannerText');
 
             // Slide 9: Playground
             this.dom.codePresetSelect = document.getElementById('codePresetSelect');
@@ -473,10 +491,9 @@ checkout.avanzar(3); // Método de pago`
             this.dom.btnClearConsole = document.getElementById('btnClearConsole');
             this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer');
 
-            // Slide 10: Cheat Sheet & Retos
+            // Slide 10: Retos & Cheat Sheet
             this.dom.accordionHeaders = document.querySelectorAll('.accordion-header');
             this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]');
-            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation');
             this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat');
 
             // Modales & Toast
@@ -487,18 +504,17 @@ checkout.avanzar(3); // Método de pago`
             this.dom.toastIcon = document.getElementById('toastIcon');
             this.dom.toastMsg = document.getElementById('toastMsg');
 
-            // Botones de copia de código en tarjetas
+            // Copiar snippets
             this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code');
         }
 
         bindEvents() {
-            // Navegación por diapositivas
+            // Navegación
             if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide());
             if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide());
             if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2));
             if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1));
 
-            // Enlaces de salto directo en hero card
             this.dom.jumpLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10);
@@ -506,17 +522,16 @@ checkout.avanzar(3); // Método de pago`
                 });
             });
 
-            // Controles de barra superior
+            // Barra superior
             if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode());
             if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound());
             if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview());
             if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview());
             if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
 
-            // Navegación por Teclado
+            // Teclado
             window.addEventListener('keydown', (e) => {
                 if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
-                    // Permitir Ctrl + Enter en el playground para ejecutar
                     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                         e.preventDefault();
                         this.runPlaygroundCode();
@@ -539,54 +554,54 @@ checkout.avanzar(3); // Método de pago`
                 }
             });
 
-            // Slide 2: Mockup Navegador
-            if (this.dom.btnMockBack) this.dom.btnMockBack.addEventListener('click', () => this.mockNavBack());
-            if (this.dom.btnMockForward) this.dom.btnMockForward.addEventListener('click', () => this.mockNavForward());
-            if (this.dom.btnMockReload) this.dom.btnMockReload.addEventListener('click', () => this.mockNavReload());
-            if (this.dom.btnTestHistoryIntro) this.dom.btnTestHistoryIntro.addEventListener('click', () => this.runHistoryIntroTest());
+            // Slide 2: Lector Texto
+            if (this.dom.dropZoneText && this.dom.inputLocalText) {
+                this.dom.dropZoneText.addEventListener('click', () => this.dom.inputLocalText.click());
+                this.dom.inputLocalText.addEventListener('change', (e) => this.handleLocalTextInput(e));
+                this.setupDropZone(this.dom.dropZoneText, (file) => this.readTextFile(file));
+            }
+            if (this.dom.btnLoadDemoText) {
+                this.dom.btnLoadDemoText.addEventListener('click', () => this.loadDemoText());
+            }
 
-            // Slide 3: go()
-            if (this.dom.btnCheckGoExamples) this.dom.btnCheckGoExamples.addEventListener('click', () => this.runGoExamplesTest());
+            // Slide 3: Lector Imagen DataURL
+            if (this.dom.dropZoneImage && this.dom.inputLocalImage) {
+                this.dom.dropZoneImage.addEventListener('click', () => this.dom.inputLocalImage.click());
+                this.dom.inputLocalImage.addEventListener('change', (e) => this.handleLocalImageInput(e));
+                this.setupDropZone(this.dom.dropZoneImage, (file) => this.readImageFile(file));
+            }
+            if (this.dom.btnLoadDemoImage) {
+                this.dom.btnLoadDemoImage.addEventListener('click', () => this.loadDemoImage());
+            }
 
-            // Slide 4: Escenarios
-            this.dom.simPropButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    this.dom.simPropButtons.forEach(b => b.classList.remove('active'));
-                    e.currentTarget.classList.add('active');
-                    AppState.activeScenario = e.currentTarget.getAttribute('data-scenario');
-                    this.renderScenarioPreview();
-                    sound.click();
-                });
-            });
-            if (this.dom.btnCompareHistoryModes) this.dom.btnCompareHistoryModes.addEventListener('click', () => this.runCompareHistoryModes());
+            // Slide 4: Galería
+            if (this.dom.btnSelectMultipleImages && this.dom.inputMultipleGallery) {
+                this.dom.btnSelectMultipleImages.addEventListener('click', () => this.dom.inputMultipleGallery.click());
+                this.dom.inputMultipleGallery.addEventListener('change', (e) => this.handleMultipleGalleryInput(e));
+            }
+            if (this.dom.btnLoadDemoGallery) {
+                this.dom.btnLoadDemoGallery.addEventListener('click', () => this.loadDemoGallery());
+            }
 
-            // Slide 5: Pestañas de Características
-            this.dom.charTabButtons.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const flowId = e.currentTarget.getAttribute('data-flow');
-                    this.switchFlowTab(flowId);
-                });
-            });
-            if (this.dom.btnTestHistoryState) this.dom.btnTestHistoryState.addEventListener('click', () => this.testHistoryState());
-            if (this.dom.btnTestPopstate) this.dom.btnTestPopstate.addEventListener('click', () => this.testPopstate());
-            if (this.dom.btnTestNoTrigger) this.dom.btnTestNoTrigger.addEventListener('click', () => this.testNoTriggerRule());
+            // Slide 5: Zona Drag & Drop Interactiva
+            if (this.dom.interactiveMainDropZone) {
+                this.setupDropZone(this.dom.interactiveMainDropZone, (file) => this.handleMainDropFile(file));
+            }
 
-            // Slide 7: Simulador SPA
-            this.dom.spaTabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const route = e.currentTarget.getAttribute('data-sparoute');
-                    this.spaNavigate(route);
-                });
-            });
-            if (this.dom.btnSpaBack) this.dom.btnSpaBack.addEventListener('click', () => this.spaBack());
-            if (this.dom.btnSpaForward) this.dom.btnSpaForward.addEventListener('click', () => this.spaForward());
+            // Slide 7: Progreso
+            if (this.dom.btnStartProgressSim) {
+                this.dom.btnStartProgressSim.addEventListener('click', () => this.startProgressSimulation());
+            }
+            if (this.dom.btnAbortProgressSim) {
+                this.dom.btnAbortProgressSim.addEventListener('click', () => this.abortProgressSimulation());
+            }
 
             // Slide 8: Analogías
             this.dom.toolButtons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     this.dom.toolButtons.forEach(b => b.classList.remove('active'));
                     e.currentTarget.classList.add('active');
-                    AppState.activeOffice = e.currentTarget.getAttribute('data-office');
+                    AppState.activeAnalogy = e.currentTarget.getAttribute('data-analogy');
                     this.renderAnalogies();
                     sound.click();
                 });
@@ -594,20 +609,22 @@ checkout.avanzar(3); // Método de pago`
 
             // Slide 9: Playground
             if (this.dom.codePresetSelect) {
-                this.dom.codePresetSelect.addEventListener('change', (e) => {
-                    this.loadCodePreset(e.target.value);
-                });
+                this.dom.codePresetSelect.addEventListener('change', (e) => this.loadCodePreset(e.target.value));
             }
             if (this.dom.btnResetCode) {
                 this.dom.btnResetCode.addEventListener('click', () => {
                     this.loadCodePreset(this.dom.codePresetSelect.value);
-                    this.showToast('Código restaurado al estado original');
+                    this.showToast('Código restaurado');
                 });
             }
-            if (this.dom.btnRunEditorCode) this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode());
-            if (this.dom.btnClearConsole) this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole());
+            if (this.dom.btnRunEditorCode) {
+                this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode());
+            }
+            if (this.dom.btnClearConsole) {
+                this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole());
+            }
 
-            // Slide 10: Acordeones
+            // Slide 10: Retos
             this.dom.accordionHeaders.forEach(header => {
                 header.addEventListener('click', () => {
                     const item = header.parentElement;
@@ -620,7 +637,6 @@ checkout.avanzar(3); // Método de pago`
                 });
             });
 
-            // Cargar retos al Playground
             this.dom.btnLoadChallenges.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const challengeKey = e.currentTarget.getAttribute('data-load-challenge');
@@ -629,17 +645,16 @@ checkout.avanzar(3); // Método de pago`
                         this.dom.codePresetSelect.value = challengeKey;
                     }
                     this.loadCodePreset(challengeKey);
-                    this.showToast('Reto cargado en el Playground', '✔');
-                    sound.success();
+                    this.showToast('Solución cargada en el Playground', '✔');
+                    sound.fileLoaded();
                 });
             });
 
-            // Copiar Markdown de Chuleta
             if (this.dom.btnCopySummaryCheat) {
                 this.dom.btnCopySummaryCheat.addEventListener('click', () => this.copyCheatSheet());
             }
 
-            // Copiar Snippets
+            // Botones de copia de snippets
             this.dom.btnCopyCodes.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const targetId = e.currentTarget.getAttribute('data-target');
@@ -648,8 +663,8 @@ checkout.avanzar(3); // Método de pago`
                         navigator.clipboard.writeText(targetEl.innerText).then(() => {
                             btn.textContent = '¡Copiado!';
                             setTimeout(() => { btn.textContent = 'Copiar'; }, 2000);
-                            this.showToast('Código copiado al portapapeles');
-                            sound.success();
+                            this.showToast('Snippet copiado al portapapeles');
+                            sound.fileLoaded();
                         });
                     }
                 });
@@ -657,7 +672,7 @@ checkout.avanzar(3); // Método de pago`
         }
 
         /* --------------------------------------------------------------------------
-           Navegación entre Diapositivas
+           Navegación de Diapositivas
            -------------------------------------------------------------------------- */
         buildSlideDots() {
             if (!this.dom.slideDotsContainer) return;
@@ -709,21 +724,18 @@ checkout.avanzar(3); // Método de pago`
                 if (AppState.viewMode === 'slides') {
                     slide.classList.toggle('active', num === AppState.currentSlide);
                 } else {
-                    slide.classList.add('active'); // Modo guía: todas visibles
+                    slide.classList.add('active');
                 }
             });
 
-            // Actualizar bolitas
             const dots = document.querySelectorAll('.slide-dot');
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx + 1 === AppState.currentSlide);
             });
 
-            // Deshabilitar botones en extremos
             if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1;
             if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides;
 
-            // Scroll al inicio si cambiamos de diapositiva
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -732,14 +744,12 @@ checkout.avanzar(3); // Método de pago`
                 AppState.viewMode = 'guide';
                 this.dom.body.classList.remove('mode-presentation');
                 this.dom.body.classList.add('mode-document');
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
                 if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides';
                 this.showToast('Activado Modo Documento Continuo');
             } else {
                 AppState.viewMode = 'slides';
                 this.dom.body.classList.remove('mode-document');
                 this.dom.body.classList.add('mode-presentation');
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
                 if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía';
                 this.showToast('Activado Modo Diapositivas');
             }
@@ -770,14 +780,14 @@ checkout.avanzar(3); // Método de pago`
             this.dom.overviewGrid.innerHTML = '';
 
             const slideTitles = [
-                '1. Inicio: History API',
-                '2. Navegación Básica: back() & forward()',
-                '3. Inspección: length & go(delta)',
-                '4. pushState vs replaceState',
-                '5. history.state & popstate',
-                '6. Buenas Prácticas & Errores Comunes',
-                '7. Enrutador SPA en Tiempo Real',
-                '8. Analogías Visuales: Platos & Fotos',
+                '1. Inicio: FileReader API',
+                '2. Lectura Textual: readAsText()',
+                '3. Codificación Base64: readAsDataURL()',
+                '4. Galería Dinámica Multiarquivo',
+                '5. Integración con Drag & Drop',
+                '6. Arquitectura y Ciclo de Eventos',
+                '7. Laboratorio de Progreso en Vivo',
+                '8. Analogías del Mundo Real',
                 '9. Laboratorio de Código Playground',
                 '10. Chuleta Rápida & Retos Resueltos'
             ];
@@ -818,422 +828,379 @@ checkout.avanzar(3); // Método de pago`
             }, 2600);
         }
 
-        /* --------------------------------------------------------------------------
-           SLIDE 2: SIMULADOR DEL NAVEGADOR WEB (MOCKUP INTERACTIVO)
-           -------------------------------------------------------------------------- */
-        initMockBrowser() {
-            this.renderMockBrowser();
-        }
+        setupDropZone(element, onFileDropCallback) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(evt => {
+                element.addEventListener(evt, (e) => e.preventDefault());
+            });
 
-        renderMockBrowser() {
-            const h = AppState.mockHistory;
-            const current = h.stack[h.pointer] || { url: 'curso.dev/inicio', title: 'Página Inicial' };
+            element.addEventListener('dragenter', () => element.classList.add('dragover'));
+            element.addEventListener('dragover', () => element.classList.add('dragover'));
+            element.addEventListener('dragleave', () => element.classList.remove('dragover'));
 
-            // 1. Actualizar URL visible
-            if (this.dom.mockUrlText) {
-                this.dom.mockUrlText.textContent = current.url;
-            }
-
-            // 2. Actualizar Puntero y Tamaño
-            if (this.dom.mockStackPointer) {
-                this.dom.mockStackPointer.textContent = `Posición ${h.pointer + 1} / ${h.stack.length}`;
-            }
-
-            if (this.dom.mockStackLength) {
-                this.dom.mockStackLength.textContent = `${h.stack.length}`;
-            }
-
-            // 3. Habilitar/Deshabilitar botones de navegación
-            if (this.dom.btnMockBack) {
-                this.dom.btnMockBack.disabled = (h.pointer <= 0);
-            }
-            if (this.dom.btnMockForward) {
-                this.dom.btnMockForward.disabled = (h.pointer >= h.stack.length - 1);
-            }
-        }
-
-        logMockConsole(text) {
-            if (!this.dom.consoleOutput1) return;
-            const prompt = this.dom.consoleOutput1.querySelector('.console-prompt');
-            if (prompt) {
-                prompt.textContent = text;
-            } else {
-                this.dom.consoleOutput1.innerHTML = `<div class="console-prompt">${text}</div>`;
-            }
-        }
-
-        mockNavBack() {
-            if (AppState.mockHistory.pointer > 0) {
-                AppState.mockHistory.pointer--;
-                this.renderMockBrowser();
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
-                this.logMockConsole(`> [history.back()] Retrocediste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Retrocedido a ${item.url}`;
-                sound.nav();
-            }
-        }
-
-        mockNavForward() {
-            if (AppState.mockHistory.pointer < AppState.mockHistory.stack.length - 1) {
-                AppState.mockHistory.pointer++;
-                this.renderMockBrowser();
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
-                this.logMockConsole(`> [history.forward()] Avanzaste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Avanzado a ${item.url}`;
-                sound.nav();
-            }
-        }
-
-        mockNavReload() {
-            sound.click();
-            if (this.dom.mockUrlText) {
-                this.dom.mockUrlText.style.opacity = '0.3';
-                setTimeout(() => {
-                    this.dom.mockUrlText.style.opacity = '1';
-                }, 200);
-            }
-            const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
-            this.logMockConsole(`> [history.go(0)] Recargando página actual: ${item.url} (equivale a location.reload())`);
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Página recargada';
-        }
-
-        runHistoryIntroTest() {
-            sound.click();
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Ejecutando secuencia...';
-            
-            // Si estamos al final, retroceder y luego avanzar automáticamente
-            if (AppState.mockHistory.pointer > 0) {
-                this.mockNavBack();
-                setTimeout(() => {
-                    this.mockNavBack();
-                    setTimeout(() => {
-                        this.mockNavForward();
-                        if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
-                        sound.success();
-                    }, 800);
-                }, 800);
-            } else {
-                this.mockNavForward();
-                setTimeout(() => {
-                    this.mockNavForward();
-                    if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
-                    sound.success();
-                }, 800);
-            }
+            element.addEventListener('drop', (e) => {
+                element.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && onFileDropCallback) {
+                    onFileDropCallback(file);
+                }
+            });
         }
 
         /* --------------------------------------------------------------------------
-           SLIDE 3: PRUEBAS DE SALTOS CON GO(DELTA)
+           SLIDE 2: LECTURA DE TEXTO CON READASTEXT
            -------------------------------------------------------------------------- */
-        runGoExamplesTest() {
+        initSlideText() {}
+
+        handleLocalTextInput(e) {
+            const file = e.target.files[0];
+            if (file) this.readTextFile(file);
+        }
+
+        readTextFile(file) {
             sound.click();
-            if (!this.dom.goExamplesResult) return;
-            this.dom.goExamplesResult.innerHTML = `
-                <div style="font-family: var(--font-code); line-height: 1.6; font-size: 0.9rem;">
-                    <div>⚡ <strong>history.go(-2):</strong> Retrocede 2 posiciones completas de una sola vez en la pila.</div>
-                    <div>⚡ <strong>history.go(1):</strong> Equivalente directo a pulsar Adelante (<code>history.forward()</code>).</div>
-                    <div>⚡ <strong>history.go(0):</strong> Vuelve a pedir el documento al servidor (recarga pura).</div>
-                    <div>⚡ <strong>history.go(-99):</strong> Si el delta excede el rango del historial, <em>se descarta sin error</em>.</div>
+            if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = `Leyendo "${file.name}"...`;
+
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                if (this.dom.textViewerResult) {
+                    this.dom.textViewerResult.textContent = reader.result;
+                }
+                if (this.dom.textReadStatus) {
+                    this.dom.textReadStatus.textContent = `✅ "${file.name}" (${(file.size / 1024).toFixed(1)} KB) cargado`;
+                }
+                sound.fileLoaded();
+                this.showToast(`Archivo "${file.name}" leído como texto`);
+            });
+
+            reader.addEventListener('error', () => {
+                if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = '❌ Error al leer archivo';
+                sound.error();
+            });
+
+            reader.readAsText(file, 'UTF-8');
+        }
+
+        loadDemoText() {
+            sound.click();
+            if (this.dom.textViewerResult) {
+                this.dom.textViewerResult.textContent = AppState.demos.text;
+            }
+            if (this.dom.textReadStatus) {
+                this.dom.textReadStatus.textContent = '✅ Documento demo (config.json) cargado';
+            }
+            sound.fileLoaded();
+            this.showToast('Documento JSON demo cargado');
+        }
+
+        /* --------------------------------------------------------------------------
+           SLIDE 3: PREVISUALIZACIÓN DE IMÁGENES CON READDATAURL
+           -------------------------------------------------------------------------- */
+        initSlideImage() {}
+
+        handleLocalImageInput(e) {
+            const file = e.target.files[0];
+            if (file) this.readImageFile(file);
+        }
+
+        readImageFile(file) {
+            if (!file.type.startsWith('image/')) {
+                this.showToast('El archivo debe ser una imagen válida', '⚠️');
+                sound.error();
+                return;
+            }
+
+            sound.click();
+            if (this.dom.imageReadStatus) this.dom.imageReadStatus.textContent = `Procesando "${file.name}"...`;
+
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+                if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none';
+                if (this.dom.imagePreviewElement) {
+                    this.dom.imagePreviewElement.style.display = 'block';
+                    this.dom.imagePreviewElement.src = reader.result;
+                }
+                if (this.dom.imageReadStatus) {
+                    this.dom.imageReadStatus.textContent = `✅ "${file.name}" (${(file.size / 1024).toFixed(1)} KB)`;
+                }
+                sound.fileLoaded();
+                this.showToast('Imagen convertida a Data URL (Base64)');
+            });
+
+            reader.readAsDataURL(file);
+        }
+
+        loadDemoImage() {
+            sound.click();
+            if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none';
+            if (this.dom.imagePreviewElement) {
+                this.dom.imagePreviewElement.style.display = 'block';
+                this.dom.imagePreviewElement.src = AppState.demos.imageSvg;
+            }
+            if (this.dom.imageReadStatus) {
+                this.dom.imageReadStatus.textContent = '✅ Imagen vectorial Demo (DataURL) cargada';
+            }
+            sound.fileLoaded();
+            this.showToast('Imagen vectorial demo cargada');
+        }
+
+        /* --------------------------------------------------------------------------
+           SLIDE 4: GALERÍA DINÁMICA MULTIARCHIVO
+           -------------------------------------------------------------------------- */
+        initSlideGallery() {}
+
+        handleMultipleGalleryInput(e) {
+            const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
+            if (!files.length) return;
+
+            sound.click();
+            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = '';
+            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = `${files.length} imágenes`;
+
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.addEventListener('load', () => {
+                    this.renderGalleryCard(reader.result, file.name, (file.size / 1024).toFixed(1) + ' KB');
+                });
+                reader.readAsDataURL(file);
+            });
+
+            sound.fileLoaded();
+            this.showToast(`${files.length} imágenes procesadas en paralelo`);
+        }
+
+        loadDemoGallery() {
+            sound.click();
+            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = '';
+            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = '4 imágenes demo';
+
+            AppState.demos.gallery.forEach(item => {
+                const svgCard = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150"><rect width="200" height="150" fill="%230f172a"/><circle cx="100" cy="75" r="40" fill="${encodeURIComponent(item.color)}"/><text x="100" y="85" text-anchor="middle" font-size="32">${item.icon}</text></svg>`;
+                this.renderGalleryCard(svgCard, item.name, item.size);
+            });
+
+            sound.fileLoaded();
+            this.showToast('Galería demo cargada con 4 miniaturas');
+        }
+
+        renderGalleryCard(dataUrl, name, sizeStr) {
+            if (!this.dom.galleryGridContainer) return;
+            const fig = document.createElement('figure');
+            fig.className = 'tarjeta-miniatura';
+            fig.innerHTML = `
+                <img src="${dataUrl}" alt="${name}">
+                <figcaption title="${name} (${sizeStr})">${name} (${sizeStr})</figcaption>
+            `;
+            this.dom.galleryGridContainer.appendChild(fig);
+        }
+
+        /* --------------------------------------------------------------------------
+           SLIDE 5: ZONA DRAG & DROP INTERACTIVA
+           -------------------------------------------------------------------------- */
+        initSlideDropZone() {}
+
+        handleMainDropFile(file) {
+            sound.click();
+            const out = this.dom.dropZoneResultBox;
+            if (!out) return;
+
+            const isImg = file.type.startsWith('image/');
+            const reader = new FileReader();
+
+            out.innerHTML = `
+                <div style="font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.6;">
+                    <div>📂 <strong>Archivo detectado:</strong> ${file.name}</div>
+                    <div>⚖️ <strong>Tamaño:</strong> ${(file.size / 1024).toFixed(2)} KB</div>
+                    <div>🏷️ <strong>Tipo MIME:</strong> ${file.type || 'Desconocido'}</div>
+                    <div style="color: var(--cyan); margin-top: 0.35rem;">⏳ Procesando contenido con FileReader...</div>
                 </div>
             `;
-            sound.success();
+
+            if (isImg) {
+                reader.addEventListener('load', () => {
+                    out.innerHTML += `
+                        <div style="margin-top: 0.75rem;">
+                            <span class="badge badge-emerald">Previsualización de Imagen</span><br/>
+                            <img src="${reader.result}" style="max-height: 110px; border-radius: 6px; margin-top: 0.5rem; border: 1px solid var(--border-subtle);" alt="${file.name}">
+                        </div>
+                    `;
+                    sound.fileLoaded();
+                });
+                reader.readAsDataURL(file);
+            } else {
+                reader.addEventListener('load', () => {
+                    const firstLines = reader.result.split('\n').slice(0, 4).join('\n');
+                    out.innerHTML += `
+                        <div style="margin-top: 0.75rem;">
+                            <span class="badge badge-purple">Primeras Líneas de Texto</span>
+                            <pre style="background: rgba(0,0,0,0.4); padding: 0.5rem; border-radius: 4px; font-size: 0.78rem; margin-top: 0.4rem; color: var(--cyan);">${firstLines}</pre>
+                        </div>
+                    `;
+                    sound.fileLoaded();
+                });
+                reader.readAsText(file, 'UTF-8');
+            }
         }
 
         /* --------------------------------------------------------------------------
-           SLIDE 4: SIMULADOR DE ESCENARIOS PUSH VS REPLACE
+           SLIDE 7: SIMULADOR DE BARRA DE PROGRESO
            -------------------------------------------------------------------------- */
-        initScenarioSimulator() {
-            this.renderScenarioPreview();
-        }
+        initSlideProgress() {}
 
-        renderScenarioPreview() {
-            const sc = AppState.activeScenario;
-            if (!this.dom.terminalImplicit || !this.dom.terminalSerialized) return;
+        startProgressSimulation() {
+            const p = AppState.progressSim;
+            if (p.isRunning) return;
 
-            if (sc === 'push') {
-                this.dom.terminalImplicit.innerHTML = `
-                    <div class="term-line">&gt; window.history.pushState({ id: 1 }, "", "/perfil");</div>
-                    <div class="term-line" style="color: var(--emerald);">&gt; URL cambia a: https://curso.dev/perfil</div>
-                    <div class="term-line">&gt; history.length: 3 ➔ 4 (+1 entrada)</div>
-                    <div class="term-line" style="color: var(--amber);">&gt; popstate disparado: NO (false)</div>
-                `;
-                this.dom.terminalSerialized.innerHTML = `
-                    <div class="term-line" style="opacity: 0.6;">(Selecciona 'replace' para comparar la sobrescritura)</div>
-                `;
-                if (this.dom.storageFeedbackText) {
-                    this.dom.storageFeedbackText.innerHTML = '<strong>pushState:</strong> Agrega un nuevo registro a la pila. Si el usuario pulsa "Atrás", volverá a la página previa.';
-                }
-            } else if (sc === 'replace') {
-                this.dom.terminalImplicit.innerHTML = `
-                    <div class="term-line" style="opacity: 0.6;">(Comparando con replaceState...)</div>
-                `;
-                this.dom.terminalSerialized.innerHTML = `
-                    <div class="term-line">&gt; window.history.replaceState({ id: 2 }, "", "/filtro?p=2");</div>
-                    <div class="term-line" style="color: var(--emerald);">&gt; URL cambia a: https://curso.dev/filtro?p=2</div>
-                    <div class="term-line">&gt; history.length: 3 ➔ 3 (IDÉNTICO, no suma)</div>
-                    <div class="term-line" style="color: var(--amber);">&gt; popstate disparado: NO (false)</div>
-                `;
-                if (this.dom.storageFeedbackText) {
-                    this.dom.storageFeedbackText.innerHTML = '<strong>replaceState:</strong> Sobrescribe la entrada actual en memoria. Ideal para filtros de búsqueda y scroll.';
-                }
-            } else if (sc === 'cross') {
-                this.dom.terminalImplicit.innerHTML = `
-                    <div class="term-line">&gt; window.history.pushState({}, "", "https://google.com");</div>
-                    <div class="term-line" style="color: var(--rose); font-weight: bold;">
-                        &gt; Uncaught DOMException: SecurityError!
+            sound.click();
+            p.isRunning = true;
+            p.loaded = 0;
+
+            if (this.dom.progressEventLogBox) {
+                this.dom.progressEventLogBox.innerHTML = `
+                    <div style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.85rem;">
+                        🔔 [Evento loadstart] La lectura de 8,192 KB ha comenzado...
                     </div>
-                    <div class="term-line">&gt; Protocolo/Host/Puerto distintos.</div>
                 `;
-                this.dom.terminalSerialized.innerHTML = `
-                    <div class="term-line">&gt; Violación de la Same-Origin Policy (Mismo Origen).</div>
-                    <div class="term-line">&gt; Previene suplantación de identidad (Phishing).</div>
-                `;
-                if (this.dom.storageFeedbackText) {
-                    this.dom.storageFeedbackText.innerHTML = '🛑 <strong>SecurityError:</strong> La History API solo permite URLs que compartan exactamente el mismo origen.';
+            }
+
+            clearInterval(p.timer);
+            const stepBytes = 384 * 1024; // ~384 KB por pulso
+
+            p.timer = setInterval(() => {
+                p.loaded += stepBytes;
+                if (p.loaded >= p.total) {
+                    p.loaded = p.total;
+                    clearInterval(p.timer);
+                    p.isRunning = false;
+                    this.updateProgressUI(100, p.loaded, p.total);
+
+                    if (this.dom.progressEventLogBox) {
+                        this.dom.progressEventLogBox.innerHTML += `
+                            <div style="color: var(--emerald); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.35rem;">
+                                ✅ [Evento load] ¡Lectura completada al 100%!
+                            </div>
+                            <div style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem;">
+                                🏁 [Evento loadend] Conclusión formal del ciclo de vida.
+                            </div>
+                        `;
+                    }
+                    sound.fileLoaded();
+                    this.showToast('Simulación de lectura completada con éxito');
+                } else {
+                    const pct = Math.round((p.loaded / p.total) * 100);
+                    this.updateProgressUI(pct, p.loaded, p.total);
+                    sound.playTone(300 + pct * 5, 'sine', 0.03, 0.02);
                 }
-            } else if (sc === 'popstate') {
-                this.dom.terminalImplicit.innerHTML = `
-                    <div class="term-line">&gt; Llamada a pushState() o replaceState()...</div>
-                    <div class="term-line" style="color: var(--rose);">&gt; ¿Dispara evento 'popstate'?: NUNCA.</div>
-                `;
-                this.dom.terminalSerialized.innerHTML = `
-                    <div class="term-line">&gt; Clic en "Atrás" / "Adelante" del navegador...</div>
-                    <div class="term-line" style="color: var(--emerald);">&gt; ¿Dispara evento 'popstate'?: SÍ (true).</div>
-                `;
-                if (this.dom.storageFeedbackText) {
-                    this.dom.storageFeedbackText.innerHTML = '🔔 <strong>Regla de Oro:</strong> popstate es un evento de <em>navegación del usuario</em>. Las llamadas programáticas a pushState/replaceState nunca lo activan.';
-                }
-            }
+            }, 120);
         }
 
-        runCompareHistoryModes() {
-            sound.click();
-            this.renderScenarioPreview();
-            this.showToast('Escenario evaluado en tiempo real', '⚡');
-        }
+        abortProgressSimulation() {
+            const p = AppState.progressSim;
+            if (!p.isRunning) return;
 
-        /* --------------------------------------------------------------------------
-           SLIDE 5: PESTAÑAS DE CARACTERÍSTICAS Y PRUEBAS EN VIVO
-           -------------------------------------------------------------------------- */
-        initFlowTabs() {
-            this.switchFlowTab('1');
-        }
+            clearInterval(p.timer);
+            p.isRunning = false;
 
-        switchFlowTab(flowId) {
-            this.dom.charTabButtons.forEach(btn => {
-                btn.classList.toggle('active', btn.getAttribute('data-flow') === flowId);
-            });
-            this.dom.charDetailViews.forEach(view => {
-                view.classList.toggle('active', view.id === `flow-view-${flowId}`);
-            });
-            sound.click();
-        }
-
-        testHistoryState() {
-            sound.click();
-            const state = window.history.state;
-            const res = {
-                valorActual: state,
-                esNull: state === null,
-                longitudHistorial: window.history.length,
-                urlActual: window.location.href
-            };
-            if (this.dom.historyStateResult) {
-                this.dom.historyStateResult.innerHTML = `
-                    <strong>Lectura inmediata de window.history.state:</strong><br/>
-                    <code>${JSON.stringify(res, null, 2)}</code>
-                `;
-            }
-            sound.success();
-        }
-
-        testPopstate() {
-            sound.click();
-            if (this.dom.popstateResult) {
-                this.dom.popstateResult.innerHTML = `
-                    <span style="color: var(--cyan); font-weight: bold;">🔔 [Simulación de popstate]</span><br/>
-                    1. Usuario presionó "Atrás".<br/>
-                    2. El navegador restauró el estado: <code>{ seccion: "catalogo", page: 1 }</code><br/>
-                    3. La función escuchadora lee <code>event.state</code> y monta los componentes en el DOM.
-                `;
-            }
-            sound.success();
-        }
-
-        testNoTriggerRule() {
-            sound.click();
-            if (this.dom.noTriggerResult) {
-                this.dom.noTriggerResult.innerHTML = `
-                    <span style="color: var(--amber); font-weight: bold;">⚠️ Verificación de Regla de Oro:</span><br/>
-                    Se ejecutó <code>history.pushState({ demo: true }, '', '?demo=ok')</code>.<br/>
-                    El evento <strong>popstate NO se disparó</strong>.<br/>
-                    <em>Conclusión: Si usas pushState, debes renderizar tú mismo la vista en tu código.</em>
-                `;
-            }
-            sound.warning();
-        }
-
-        /* --------------------------------------------------------------------------
-           SLIDE 7: SIMULADOR DE ENRUTADOR SPA COMPLETO
-           -------------------------------------------------------------------------- */
-        initSpaSimulator() {
-            this.renderSpaView('/inicio');
-        }
-
-        spaNavigate(route) {
-            const view = AppState.spa.views[route];
-            if (!view) return;
-
-            // Truncar historial si estábamos navegando atrás
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
-                AppState.spa.history.splice(AppState.spa.pointer + 1);
-            }
-
-            // Añadir nueva entrada a la pila del SPA
-            AppState.spa.history.push({
-                route: route,
-                sec: view.state.seccion,
-                state: view.state
-            });
-            AppState.spa.pointer = AppState.spa.history.length - 1;
-
-            this.renderSpaView(route);
-            sound.click();
-        }
-
-        renderSpaView(route) {
-            AppState.spa.currentRoute = route;
-            const view = AppState.spa.views[route] || AppState.spa.views['/inicio'];
-
-            // 1. Actualizar URL visible
-            if (this.dom.spaCurrentUrl) {
-                this.dom.spaCurrentUrl.textContent = route;
-            }
-
-            // 2. Actualizar Pestaña Activa
-            this.dom.spaTabs.forEach(tab => {
-                const tabRoute = tab.getAttribute('data-sparoute');
-                tab.classList.toggle('active', tabRoute === route);
-            });
-
-            // 3. Actualizar Canvas Visual
-            if (this.dom.spaCanvasTitle) this.dom.spaCanvasTitle.textContent = view.title;
-            if (this.dom.spaCanvasDesc) this.dom.spaCanvasDesc.textContent = view.desc;
-
-            // 4. Actualizar Estado de Retroalimentación
-            if (this.dom.spaStatusResult) {
-                this.dom.spaStatusResult.innerHTML = `
-                    Pestaña activa: "<strong>${view.state.seccion}</strong>" | 
-                    history.state: <code>${JSON.stringify(view.state)}</code> | 
-                    Entrada en pila SPA: <strong>${AppState.spa.pointer + 1} de ${AppState.spa.history.length}</strong>
+            if (this.dom.progressEventLogBox) {
+                this.dom.progressEventLogBox.innerHTML += `
+                    <div style="color: var(--rose); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.35rem;">
+                        🛑 [Evento abort] Operación cancelada por el usuario con reader.abort().
+                    </div>
+                    <div style="color: var(--text-muted); font-family: var(--font-mono); font-size: 0.85rem;">
+                        🏁 [Evento loadend] Ciclo finalizado anticipadamente.
+                    </div>
                 `;
             }
 
-            // 5. Botones Atrás / Adelante del SPA
-            if (this.dom.btnSpaBack) {
-                this.dom.btnSpaBack.disabled = (AppState.spa.pointer <= 0);
-            }
-            if (this.dom.btnSpaForward) {
-                this.dom.btnSpaForward.disabled = (AppState.spa.pointer >= AppState.spa.history.length - 1);
-            }
+            sound.error();
+            this.showToast('Lectura cancelada con abort()', '🛑');
         }
 
-        spaBack() {
-            if (AppState.spa.pointer > 0) {
-                AppState.spa.pointer--;
-                const item = AppState.spa.history[AppState.spa.pointer];
-                this.renderSpaView(item.route);
-                sound.nav();
-            }
-        }
-
-        spaForward() {
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
-                AppState.spa.pointer++;
-                const item = AppState.spa.history[AppState.spa.pointer];
-                this.renderSpaView(item.route);
-                sound.nav();
+        updateProgressUI(pct, loaded, total) {
+            if (this.dom.fileProgressBarFill) this.dom.fileProgressBarFill.style.width = `${pct}%`;
+            if (this.dom.progressPercentLabel) this.dom.progressPercentLabel.textContent = `${pct}%`;
+            if (this.dom.progressBytesLoaded) {
+                this.dom.progressBytesLoaded.textContent = `${(loaded / 1024).toFixed(0)} KB leídos`;
             }
         }
 
         /* --------------------------------------------------------------------------
-           SLIDE 8: ANALOGÍAS VISUALES (PLATOS & ÁLBUM)
+           SLIDE 8: ANALOGÍAS VISUALES
            -------------------------------------------------------------------------- */
         initAnalogies() {
             this.renderAnalogies();
         }
 
         renderAnalogies() {
-            const mode = AppState.activeOffice;
-            if (mode === 'platos') {
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '🍽️';
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. Colocar un Plato Nuevo (pushState)';
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'La torre crece en altura';
-                if (this.dom.officeItemsLeft) {
-                    this.dom.officeItemsLeft.innerHTML = `
-                        <div class="ws-item">Lavas un plato nuevo y lo colocas en la cima de la torre</div>
-                        <div class="ws-item">El tamaño total de la pila (history.length) se incrementa en +1</div>
+            const mode = AppState.activeAnalogy;
+            if (mode === 'traductor') {
+                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '🎙️';
+                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'readAsText()';
+                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'Traducción directa a lenguaje humano';
+                if (this.dom.analogyItemsLeft) {
+                    this.dom.analogyItemsLeft.innerHTML = `
+                        <div class="ws-item">El traductor lee una carta y te dicta las palabras en español</div>
+                        <div class="ws-item">El resultado es una cadena de texto lista para ser leída y comprendida</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'El usuario podrá volver al plato anterior pulsando "Atrás"';
+                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Ideal para archivos de configuración, notas y código';
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '🔄';
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Cambiar el Plato de Arriba (replaceState)';
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'La altura total no cambia';
-                if (this.dom.officeItemsRight) {
-                    this.dom.officeItemsRight.innerHTML = `
-                        <div class="ws-item highlight-item">Sustituyes el plato de la cima por otro de diferente color</div>
-                        <div class="ws-item highlight-item">La cantidad de platos (history.length) se mantiene intacta</div>
+                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🖼️';
+                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'readAsDataURL()';
+                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'Telegrama en código Morse (Base64)';
+                if (this.dom.analogyItemsRight) {
+                    this.dom.analogyItemsRight.innerHTML = `
+                        <div class="ws-item highlight-item">Codifica cada pixel en una sola línea continua de caracteres</div>
+                        <div class="ws-item highlight-item">No está hecho para personas, sino para que el navegador lo pinte</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'Evita inflar la pila al filtrar búsquedas o cambiar de pestaña';
+                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Ideal para atributos src en imágenes y miniaturas';
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Pila LIFO';
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '🍽️';
-                if (this.dom.officeBannerText) {
-                    this.dom.officeBannerText.innerHTML = '<strong>pushState vs replaceState:</strong> Usa <code>pushState()</code> cuando el cambio represente una página nueva a la que el usuario querrá volver; usa <code>replaceState()</code> para filtros, paginación o formularios multipaso.';
+                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Comparativa';
+                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🎙️';
+                if (this.dom.analogyBannerText) {
+                    this.dom.analogyBannerText.innerHTML = '<strong>readAsText vs readAsDataURL:</strong> Usa <code>readAsText()</code> cuando necesites procesar texto, editar líneas o parsear JSON; usa <code>readAsDataURL()</code> para renderizar recursos visuales sin tocar el backend.';
                 }
             } else {
-                // Álbum de fotos
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '📸';
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. La Foto y la Nota Adhesiva (state)';
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'Memoria asociada a cada página';
-                if (this.dom.officeItemsLeft) {
-                    this.dom.officeItemsLeft.innerHTML = `
-                        <div class="ws-item">Cada foto tiene su imagen visible (la URL en la barra)</div>
-                        <div class="ws-item">Pegas un Post-It detrás con metadatos: { scroll: 400, filtro: 'viajes' }</div>
+                // Báscula de Granos
+                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '⚖️';
+                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'Evento progress';
+                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'La báscula de pesaje en tiempo real';
+                if (this.dom.analogyItemsLeft) {
+                    this.dom.analogyItemsLeft.innerHTML = `
+                        <div class="ws-item">Mide tonelada por tonelada mientras el grano cae al silo</div>
+                        <div class="ws-item">Calcula con precisión milimétrica el porcentaje de avance</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'history.state almacena una copia estructurada de tus datos';
+                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Permite actualizar barras de carga para feedback fluido';
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '📖';
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Hojear el Álbum (popstate)';
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'Navegación del usuario';
-                if (this.dom.officeItemsRight) {
-                    this.dom.officeItemsRight.innerHTML = `
-                        <div class="ws-item highlight-item">Cuando pasas la página hacia atrás, despegas la nota</div>
-                        <div class="ws-item highlight-item">event.state te entrega los datos para reconstruir la vista</div>
+                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🏁';
+                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'Evento loadend';
+                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'El pitido final de cierre de compuerta';
+                if (this.dom.analogyItemsRight) {
+                    this.dom.analogyItemsRight.innerHTML = `
+                        <div class="ws-item highlight-item">Se dispara siempre: con éxito, error o cancelación</div>
+                        <div class="ws-item highlight-item">Garantiza que la tolva quede desocupada para el siguiente ciclo</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'popstate sólo se dispara cuando el usuario hojea hacia adelante o atrás';
+                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Lugar obligatorio para ocultar spinners y habilitar botones';
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Inspección';
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '📸';
-                if (this.dom.officeBannerText) {
-                    this.dom.officeBannerText.innerHTML = '<strong>state y popstate:</strong> El estado viaja silenciosamente con la entrada del historial. Cuando el usuario navega, <code>event.state</code> te dice con precisión qué estaba viendo.';
+                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Ciclo de Vida';
+                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🚚';
+                if (this.dom.analogyBannerText) {
+                    this.dom.analogyBannerText.innerHTML = '<strong>progress & loadend:</strong> Mantén informados a tus usuarios en archivos pesados calculando <code>(loaded / total) * 100</code> y aprovecha <code>loadend</code> para cerrar modales pase lo que pase.';
                 }
             }
         }
 
         /* --------------------------------------------------------------------------
-           SLIDE 9: PLAYGROUND INTERACTIVO DE CÓDIGO
+           SLIDE 9: PLAYGROUND INTERACTIVO
            -------------------------------------------------------------------------- */
         loadCodePreset(presetKey) {
             const code = CodePresets[presetKey];
             if (code && this.dom.liveCodeEditor) {
                 this.dom.liveCodeEditor.value = code;
                 this.clearConsole();
-                this.printToConsole(`/* Preset cargado: [${presetKey}]. Pulsa "Ejecutar Código" (Ctrl + Enter) */`, 'info-line');
+                this.printToConsole(`/* Preset cargado: [${presetKey}]. Haz clic en "Ejecutar Código" (Ctrl + Enter) */`, 'info-line');
             }
         }
 
@@ -1272,7 +1239,6 @@ checkout.avanzar(3); // Método de pago`
             this.clearConsole();
             sound.click();
 
-            // Interceptar console de manera segura
             const oldLog = console.log;
             const oldInfo = console.info;
             const oldWarn = console.warn;
@@ -1313,11 +1279,11 @@ checkout.avanzar(3); // Método de pago`
             try {
                 const runFn = new Function(code);
                 runFn();
-                this.printToConsole('--- Ejecución completada sin errores ---', 'info-line');
-                sound.success();
+                this.printToConsole('--- Ejecución asíncrona despachada sin errores sintácticos ---', 'info-line');
+                sound.fileLoaded();
             } catch (err) {
                 this.printToConsole(`Error de ejecución: ${err.name} - ${err.message}`, 'error-line');
-                sound.warning();
+                sound.error();
             } finally {
                 console.log = oldLog;
                 console.info = oldInfo;
@@ -1330,41 +1296,33 @@ checkout.avanzar(3); // Método de pago`
            SLIDE 10: COPIAR CHULETA EN MARKDOWN
            -------------------------------------------------------------------------- */
         copyCheatSheet() {
-            const markdown = `# 📜 CHULETA RÁPIDA: HISTORY API EN JAVASCRIPT
+            const markdown = `# 📜 CHULETA RÁPIDA: FILEREADER API EN JAVASCRIPT
 
-## 1. Métodos Básicos de Navegación
-- \`history.back()\`: Retrocede 1 página (equivale a \`history.go(-1)\`).
-- \`history.forward()\`: Avanza 1 página (equivale a \`history.go(1)\`).
-- \`history.go(delta)\`: Salto relativo. \`go(0)\` recarga la página.
-- \`history.length\`: Número total de entradas en la sesión de navegación.
+## 1. Métodos de Lectura Asíncrona
+- \`reader.readAsText(blob[, encoding])\`: Lee archivos de texto plano (.txt, .json, .csv, .md) y devuelve una cadena UTF-8 en \`reader.result\`.
+- \`reader.readAsDataURL(blob)\`: Convierte el archivo binario en una URI Base64 (\`data:[mediatype];base64,...\`), ideal para \`img.src\`.
+- \`reader.readAsArrayBuffer(blob)\`: Devuelve un buffer de bajo nivel (\`ArrayBuffer\`) para operaciones con TypedArrays.
+- \`reader.abort()\`: Interrumpe la operación de lectura en curso.
 
-## 2. Métodos del HTML5 History API
-- \`history.pushState(state, unused, url)\`:
-  - Agrega una nueva entrada a la pila.
-  - Modifica la URL visible sin recargar la página.
-  - Trunca entradas posteriores en el botón "Adelante".
-  - **NUNCA dispara 'popstate'**.
-- \`history.replaceState(state, unused, url)\`:
-  - Sobrescribe la entrada actual en memoria.
-  - No incrementa \`history.length\`.
-  - Ideal para filtros de búsqueda, pestañas o posición de scroll.
-  - **NUNCA dispara 'popstate'**.
+## 2. Ciclo de Vida de Eventos
+1. \`loadstart\`: Comienza la lectura del archivo.
+2. \`progress\`: Se dispara periódicamente. Permite calcular el porcentaje con \`(e.loaded / e.total) * 100\` cuando \`e.lengthComputable\` es true.
+3. \`load\`: La lectura finalizó satisfactoriamente. Los datos están listos en \`reader.result\`.
+4. \`error\`: Ocurrió un problema de lectura. El detalle reside en \`reader.error\`.
+5. \`abort\`: La lectura fue cancelada programáticamente con \`reader.abort()\`.
+6. \`loadend\`: Conclusión formal absoluta del ciclo (siempre se dispara al final).
 
-## 3. Estado y Eventos
-- \`history.state\`: Devuelve los datos asociados a la entrada actual (Structured Clone).
-- \`window.addEventListener('popstate', (e) => { ... })\`:
-  - Se gatilla cuando el usuario pulsa Atrás / Adelante en el navegador o ejecuta \`history.go()\`.
-  - \`e.state\` contiene el objeto guardado en \`pushState\` o \`replaceState\`.
-  - Si se vuelve a la carga inicial del documento, \`e.state\` es \`null\`.
+## 3. Integración con Drag & Drop
+- Extrae los archivos desde \`e.dataTransfer.files\`.
+- **Obligatorio:** Invocar \`e.preventDefault()\` en los eventos \`dragover\` y \`drop\` para evitar que el navegador abra el archivo en una pestaña nueva.
 
-## 4. Reglas Críticas
-1. **Mismo Origen (Same-Origin)**: No se puede cambiar el protocolo, host ni puerto. Genera \`SecurityError\`.
-2. **Server Fallback (SPAs)**: Toda URL simulada por pushState debe devolver \`index.html\` en el servidor para evitar error 404 al presionar F5.
+## 4. Regla de Oro
+- **Una instancia por archivo:** Jamás intentes reutilizar la misma instancia de \`FileReader\` simultáneamente para leer varios archivos; de lo contrario se producirá un error \`InvalidStateError\`.
 `;
 
             navigator.clipboard.writeText(markdown).then(() => {
                 this.showToast('¡Chuleta copiada al portapapeles!');
-                sound.success();
+                sound.fileLoaded();
             }).catch(() => {
                 alert('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
             });

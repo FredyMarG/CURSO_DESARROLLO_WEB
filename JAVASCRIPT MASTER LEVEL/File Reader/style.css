@@ -3495,3 +3495,181 @@ code {
     background: rgba(0, 0, 0, 0.25);
     border-radius: var(--radius-sm);
 }
+
+
+/* ==========================================================================
+   ESTILOS ESPECÍFICOS: MÓDULO FILE READER API
+   ========================================================================== */
+.file-drop-zone {
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px dashed rgba(148, 163, 184, 0.35);
+    border-radius: var(--radius-md);
+    padding: 2.2rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.file-drop-zone:hover,
+.file-drop-zone.dragover {
+    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.08);
+    box-shadow: 0 0 25px rgba(99, 102, 241, 0.2);
+    transform: translateY(-2px);
+}
+
+.file-drop-zone.dragover {
+    border-style: solid;
+    border-color: var(--cyan);
+    background: rgba(6, 182, 212, 0.1);
+}
+
+.drop-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+    transition: transform var(--transition-fast);
+}
+
+.file-drop-zone:hover .drop-icon {
+    transform: scale(1.15) rotate(-5deg);
+}
+
+.drop-text-primary {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.35rem;
+}
+
+.drop-text-secondary {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.file-hidden-input {
+    display: none;
+}
+
+/* Visor de Texto */
+.file-text-viewer {
+    background: rgba(3, 7, 18, 0.85);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    min-height: 160px;
+    max-height: 240px;
+    overflow-y: auto;
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--cyan);
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-top: 0.9rem;
+}
+
+/* Vista previa de imagen */
+.file-image-preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    background: rgba(3, 7, 18, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    margin-top: 0.9rem;
+    padding: 0.8rem;
+    overflow: hidden;
+}
+
+.file-image-preview {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    object-fit: contain;
+}
+
+/* Grid de Galería de Miniaturas */
+.file-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.85rem;
+    margin-top: 1rem;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 0.4rem;
+}
+
+.tarjeta-miniatura {
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tarjeta-miniatura:hover {
+    transform: translateY(-3px);
+    border-color: var(--cyan);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tarjeta-miniatura img {
+    width: 100%;
+    height: 95px;
+    object-fit: cover;
+    background: #000;
+}
+
+.tarjeta-miniatura figcaption {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Barra de progreso de lectura */
+.file-progress-wrapper {
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.file-progress-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+    position: relative;
+    margin-top: 0.5rem;
+}
+
+.file-progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), var(--cyan));
+    border-radius: var(--radius-pill);
+    transition: width 0.15s ease-out;
+}
+
+.file-progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}

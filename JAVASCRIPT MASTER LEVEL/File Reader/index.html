@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description"
-        content="Guía y laboratorio interactivo completo sobre la History API en JavaScript - JavaScript Master Level." />
-    <title>History API en JavaScript | Master Level</title>
+        content="Guía y laboratorio interactivo completo sobre la FileReader API en JavaScript - JavaScript Master Level." />
+    <title>FileReader API en JavaScript | Master Level</title>
     <script src="app.js" defer></script>
 
     <!-- Google Fonts -->
@@ -31,8 +31,8 @@
         <div class="nav-brand">
             <span class="brand-badge">JS MASTER LEVEL</span>
             <div class="brand-title">
-                <span class="icon-proto">🧭</span>
-                <span class="title-text">History API</span>
+                <span class="icon-proto">📁</span>
+                <span class="title-text">FileReader API</span>
             </div>
         </div>
 
@@ -67,45 +67,45 @@
         <!-- ==============================================
              SLIDE 1: PORTADA & BIENVENIDA
              ============================================== -->
-        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: History API">
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: FileReader API">
             <div class="slide-content hero-slide">
                 <div class="hero-badges">
-                    <span class="badge badge-purple">BOM &amp; HTML5 History API</span>
+                    <span class="badge badge-purple">HTML5 File API</span>
                     <span class="badge badge-cyan">Junior → Semi Senior</span>
-                    <span class="badge badge-emerald">Enrutamiento SPA</span>
+                    <span class="badge badge-emerald">Procesamiento en Cliente</span>
                 </div>
 
                 <h1 class="hero-title">
-                    Control del Historial:
-                    <span class="gradient-text">History API</span> en JavaScript
+                    Procesamiento de Archivos Locales:
+                    <span class="gradient-text">FileReader API</span> en JavaScript
                 </h1>
 
                 <p class="hero-subtitle">
-                    Domina la pila de navegación del navegador: aprende a desplazarte con <code>back()</code>, <code>forward()</code>
-                    y <code>go()</code>, inspecciona <code>history.length</code> y crea enrutadores modernos para aplicaciones
-                    <strong>SPA</strong> sin recargar la página mediante <code>pushState()</code>, <code>replaceState()</code> y el evento <code>popstate</code>.
+                    Aprende a procesar archivos en el cliente sin depender del servidor. Domina la lectura de texto plano con <code>readAsText()</code>,
+                    la codificación Base64 con <code>readAsDataURL()</code>, la creación de galerías dinámicas, zonas <strong>Drag &amp; Drop</strong>
+                    y el monitoreo del ciclo de vida con eventos <code>progress</code> y <code>loadend</code>.
                 </p>
 
                 <div class="hero-card-grid">
                     <div class="hero-mini-card" data-jump="2">
-                        <div class="mini-card-icon">⏮️</div>
-                        <h3>back() &amp; forward()</h3>
-                        <p>Emula de forma programática las flechas Atrás y Adelante del navegador.</p>
+                        <div class="mini-card-icon">📄</div>
+                        <h3>readAsText()</h3>
+                        <p>Lee documentos de texto (.txt, .json, .csv, .md) directamente a strings en memoria.</p>
                     </div>
                     <div class="hero-mini-card" data-jump="3">
-                        <div class="mini-card-icon">🔢</div>
-                        <h3>history.length &amp; go()</h3>
-                        <p>Inspecciona la pila y salta de golpe hacia adelante o atrás con deltas relativos.</p>
+                        <div class="mini-card-icon">🖼️</div>
+                        <h3>readAsDataURL()</h3>
+                        <p>Convierte imágenes o binarios en URIs Base64 para previsualización inmediata en <code>&lt;img&gt;</code>.</p>
                     </div>
-                    <div class="hero-mini-card" data-jump="4">
-                        <div class="mini-card-icon">🚀</div>
-                        <h3>pushState vs replaceState</h3>
-                        <p>Cambia la URL visible y guarda estados en memoria sin provocar recarga de página.</p>
+                    <div class="hero-mini-card" data-jump="5">
+                        <div class="mini-card-icon">🎯</div>
+                        <h3>Drag &amp; Drop</h3>
+                        <p>Extrae y lee archivos arrastrados directamente desde el explorador del sistema operativo.</p>
                     </div>
                     <div class="hero-mini-card" data-jump="7">
-                        <div class="mini-card-icon">🔔</div>
-                        <h3>popstate &amp; Enrutador SPA</h3>
-                        <p>Restaura vistas y sincroniza la UI cuando el usuario navega en el historial.</p>
+                        <div class="mini-card-icon">📊</div>
+                        <h3>Métricas de Progreso</h3>
+                        <p>Calcula el porcentaje de bytes leídos en tiempo real con los eventos <code>progress</code> y <code>loadend</code>.</p>
                     </div>
                 </div>
 
@@ -123,15 +123,15 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 2: INTRODUCCIÓN Y NAVEGACIÓN BÁSICA
+             SLIDE 2: LECTURA TEXTUAL CON readAsText()
              ============================================== -->
-        <section class="slide" id="slide-2" data-slide="2" data-title="Introducción &amp; back/forward">
+        <section class="slide" id="slide-2" data-slide="2" data-title="Lectura Textual: readAsText()">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="section-tag">Fundamento 01</span>
-                    <h2>Introducción al Objeto <code>window.history</code>, <code>back()</code> y <code>forward()</code></h2>
+                    <h2>Lectura de Contenido Textual con <code>readAsText()</code></h2>
                     <p class="section-desc">
-                        El objeto global <code>history</code> permite interactuar directamente con la pila de navegación de la sesión activa:
+                        Lee archivos basados en texto plano directamente a una cadena string legible en JavaScript:
                     </p>
                 </div>
 
@@ -140,44 +140,40 @@
                     <div class="concept-column">
                         <div class="info-card">
                             <div class="card-badge-header">
-                                <span class="badge badge-purple">La Pila de Navegación (Stack)</span>
+                                <span class="badge badge-purple">Sintaxis &amp; Parámetros</span>
                             </div>
                             <p>
-                                <strong>La Memoria de la Pestaña:</strong> Cada pestaña del navegador mantiene una pila ordenada
-                                con las páginas visitadas durante esa sesión.
+                                <strong><code>reader.readAsText(blob[, encoding])</code></strong>
+                                inicia la lectura asíncrona del archivo especificado. Cuando la operación concluye, el resultado se expone en <code>reader.result</code>.
                             </p>
-                            <p>
-                                <strong>Navegación Unitaria:</strong>
-                                <code>history.back()</code> retrocede una entrada (flecha Atrás).
-                                <code>history.forward()</code> avanza una entrada (flecha Adelante). Si no hay páginas en esa dirección,
-                                la instrucción se ignora silenciosamente sin arrojar error.
-                            </p>
-                            <p class="highlight-callout">
-                                💡 <strong>Simulación en Vivo:</strong> Usa los botones de navegación del simulador inferior para interactuar con la pila virtual.
-                            </p>
+                            <ul>
+                                <li><strong><code>blob</code>:</strong> Un objeto <code>File</code> o <code>Blob</code> obtenido de un <code>&lt;input type="file"&gt;</code> o evento drop.</li>
+                                <li><strong><code>encoding</code>:</strong> Codificación de caracteres (por defecto <code>"UTF-8"</code>).</li>
+                                <li><strong>Formatos ideales:</strong> <code>.txt</code>, <code>.json</code>, <code>.csv</code>, <code>.md</code>, <code>.xml</code>, código fuente.</li>
+                            </ul>
                         </div>
 
                         <div class="vs-container">
                             <div class="vs-box class-box">
-                                <h4>Navegación Tradicional</h4>
+                                <h4>Enfoque Tradicional</h4>
                                 <ul>
-                                    <li>Enlaces <code>&lt;a href="..."&gt;</code> convencionales.</li>
-                                    <li>Provoca recarga completa (Full Page Reload).</li>
-                                    <li>Destruye el estado en memoria de JavaScript.</li>
+                                    <li>Subir archivo al servidor por POST/FormData.</li>
+                                    <li>Esperar respuesta por red.</li>
+                                    <li>Mayor latencia y consumo de ancho de banda.</li>
                                 </ul>
                             </div>
                             <div class="vs-box proto-box">
-                                <h4>History API en SPAs</h4>
+                                <h4>FileReader API</h4>
                                 <ul>
-                                    <li>Modifica la URL sin recargar la página.</li>
-                                    <li>Conserva variables, estados y componentes en RAM.</li>
-                                    <li>Control bidireccional con eventos de navegación.</li>
+                                    <li>Lectura 100% en memoria en el cliente.</li>
+                                    <li>Respuesta instantánea y offline.</li>
+                                    <li>Máxima privacidad y seguridad.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Código Interactivo y Simulador de Navegador en Vivo -->
+                    <!-- Demostración Interactiva -->
                     <div class="code-column">
                         <div class="code-panel">
                             <div class="code-panel-header">
@@ -186,48 +182,188 @@
                                     <span class="dot yellow"></span>
                                     <span class="dot green"></span>
                                 </div>
-                                <span class="file-name">navegacion_basica_history.js</span>
-                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                <span class="file-name">lector_texto_interactivo.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-readtext" title="Copiar código">
                                     Copiar
                                 </button>
                             </div>
-                            <pre class="code-block"><code id="code-sample-1"><span class="c-string">"use strict"</span>;
-<span class="c-comment">// Retrocede una página en la pila:</span>
-<span class="c-variable">history</span>.<span class="c-func">back</span>();
+                            <pre class="code-block"><code id="code-sample-readtext"><span class="c-keyword">const</span> <span class="c-variable">reader</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+<span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; {
+  <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Contenido:"</span>, <span class="c-variable">reader</span>.<span class="c-prop">result</span>);
+});
+<span class="c-variable">reader</span>.<span class="c-func">readAsText</span>(<span class="c-prop">archivo</span>, <span class="c-string">"UTF-8"</span>);</code></pre>
 
-<span class="c-comment">// Avanza una página en la pila:</span>
-<span class="c-variable">history</span>.<span class="c-func">forward</span>();
-
-<span class="c-comment">// Inspecciona el total de entradas:</span>
-<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Entradas en historial:"</span>, <span class="c-variable">history</span>.<span class="c-prop">length</span>);</code></pre>
-
-                            <!-- Mockup de Navegador Interactivo -->
-                            <div class="history-browser-mockup">
-                                <div class="browser-bar-top">
-                                    <button class="browser-nav-btn" id="btnMockBack" title="history.back()">◀</button>
-                                    <button class="browser-nav-btn" id="btnMockForward" title="history.forward()">▶</button>
-                                    <button class="browser-nav-btn" id="btnMockReload" title="history.go(0)">↻</button>
-                                    <div class="browser-url-input">
-                                        <span class="browser-url-badge">🔒 https://</span>
-                                        <span id="mockUrlText">curso.dev/inicio</span>
-                                    </div>
-                                </div>
-                                <div class="history-stack-indicator">
-                                    <span>Puntero: <strong id="mockStackPointer" style="color: var(--cyan);">Posición 1 / 3</strong></span>
-                                    <span>history.length: <strong id="mockStackLength" style="color: var(--emerald);">3</strong></span>
-                                </div>
+                            <!-- Zona Interactiva de Prueba -->
+                            <div class="file-drop-zone" id="dropZoneText" style="padding: 1.2rem;">
+                                <span class="drop-icon">📄</span>
+                                <div class="drop-text-primary">Selecciona o arrastra un archivo de texto</div>
+                                <div class="drop-text-secondary">Soporta .txt, .json, .csv o .md</div>
+                                <input type="file" id="inputLocalText" class="file-hidden-input" accept=".txt,.json,.csv,.md,text/*" />
                             </div>
 
                             <div class="interactive-test-bar">
-                                <button class="btn-run-action" id="btnTestHistoryIntro">
-                                    ▶ Probar history.back() y history.forward()
+                                <button class="btn-run-action" id="btnLoadDemoText">
+                                    ▶ Cargar Documento de Prueba Demo
                                 </button>
-                                <span class="run-status" id="testHistoryIntroStatus">Simulador listo</span>
+                                <span class="run-status" id="textReadStatus">Esperando archivo</span>
                             </div>
 
-                            <div class="mini-console" id="console-output-1">
-                                <div class="console-prompt">
-                                    &gt; Haz clic en las flechas del navegador virtual o pulsa el botón para probar la navegación...
+                            <div class="file-text-viewer" id="textViewerResult">Haz clic en "Cargar Documento de Prueba Demo" o selecciona tu propio archivo arriba para ver el texto extraído aquí...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: CODIFICACIÓN DATA URL CON readAsDataURL()
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Codificación Base64: readAsDataURL()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Codificación en Data URL con <code>readAsDataURL()</code></h2>
+                    <p class="section-desc">
+                        Convierte archivos binarios (imágenes, audios o documentos) en URIs Base64 autocontenidas:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-cyan">Esquema Data URI</span>
+                            </div>
+                            <p>
+                                <strong><code>reader.readAsDataURL(blob)</code></strong>
+                                lee los bytes crudos del archivo y genera una cadena con el siguiente formato:
+                            </p>
+                            <div class="identity-expr" style="margin: 0.6rem 0;">
+                                <code>data:[&lt;mediatype&gt;][;base64],&lt;datos-codificados&gt;</code>
+                            </div>
+                            <p>
+                                <strong>Ventaja inmediata:</strong> Puede asignarse de forma directa al atributo <code>src</code> de un elemento <code>&lt;img&gt;</code>,
+                                <code>&lt;video&gt;</code> o como fondo CSS sin necesidad de subir la imagen a ningún servidor.
+                            </p>
+                            <div class="visual-box" style="margin-top: 0.8rem;">
+                                <span class="vis-icon">💡</span>
+                                <div class="vis-text">
+                                    <strong>¿Sabías que?</strong>
+                                    <small>Base64 incrementa el peso del archivo aproximadamente un 33% respecto a sus bytes binarios originales.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demostración Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">previsualizador_imagen.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-dataurl" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-dataurl"><span class="c-keyword">const</span> <span class="c-variable">reader</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+<span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; {
+  <span class="c-variable">imgPreview</span>.<span class="c-prop">src</span> = <span class="c-variable">reader</span>.<span class="c-prop">result</span>; <span class="c-comment">// Base64 Data URL</span>
+});
+<span class="c-variable">reader</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivoImagen</span>);</code></pre>
+
+                            <!-- Zona Interactiva de Imagen -->
+                            <div class="file-drop-zone" id="dropZoneImage" style="padding: 1.2rem;">
+                                <span class="drop-icon">🖼️</span>
+                                <div class="drop-text-primary">Selecciona o arrastra una imagen</div>
+                                <div class="drop-text-secondary">PNG, JPG, SVG, WebP o GIF</div>
+                                <input type="file" id="inputLocalImage" class="file-hidden-input" accept="image/*" />
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnLoadDemoImage">
+                                    ▶ Cargar Imagen Demo
+                                </button>
+                                <span class="run-status" id="imageReadStatus">Sin imagen</span>
+                            </div>
+
+                            <div class="file-image-preview-container" id="imagePreviewContainer">
+                                <span id="imagePreviewPlaceholder" style="color: var(--text-muted); font-size: 0.85rem;">
+                                    Aquí aparecerá la imagen previsualizada con su Data URL...
+                                </span>
+                                <img id="imagePreviewElement" class="file-image-preview" style="display: none;" alt="Vista previa" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: GALERÍA DINÁMICA MULTIARCHIVO
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Galería Dinámica Multiarquivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Caso Práctico 01</span>
+                    <h2>Carga y Previsualización Dinámica de Galería Multiarquivo</h2>
+                    <p class="section-desc">
+                        Aprende a procesar múltiples archivos seleccionados mediante <code>&lt;input multiple&gt;</code> en paralelo:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">Procesamiento Paralelo de FileList</span>
+                            </div>
+                            <p>
+                                La propiedad <code>e.target.files</code> devuelve un objeto de tipo <code>FileList</code>. Para procesarlo de forma limpia con métodos de orden superior:
+                            </p>
+                            <ol style="padding-left: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem;">
+                                <li>Convertir la colección con <code>Array.from(e.target.files)</code>.</li>
+                                <li>Filtrar por tipo MIME usando <code>file.type.startsWith("image/")</code>.</li>
+                                <li><strong>Instanciar un nuevo <code>FileReader</code> para CADA archivo</strong> (recuerda que una misma instancia no puede leer dos archivos simultáneamente).</li>
+                                <li>Crear elementos <code>&lt;figure&gt;</code> con sus miniaturas en el evento <code>load</code>.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Galería Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">galeria_interactiva_grid.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-gallery" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-gallery"><span class="c-func">Array</span>.<span class="c-func">from</span>(<span class="c-variable">archivos</span>).<span class="c-func">forEach</span>(<span class="c-prop">archivo</span> =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">lector</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+  <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">crearMiniatura</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
+  <span class="c-variable">lector</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivo</span>);
+});</code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnSelectMultipleImages">
+                                    📁 Seleccionar Varias Imágenes
+                                </button>
+                                <button class="btn-run-action" id="btnLoadDemoGallery" style="background: rgba(255,255,255,0.08);">
+                                    ⚡ Galería Demo
+                                </button>
+                                <input type="file" id="inputMultipleGallery" class="file-hidden-input" accept="image/*" multiple />
+                                <span class="run-status" id="galleryCountStatus">0 imágenes</span>
+                            </div>
+
+                            <div class="file-gallery-grid" id="galleryGridContainer">
+                                <div style="grid-column: 1 / -1; text-align: center; color: var(--text-dim); padding: 1.5rem;">
+                                    Pulsa "⚡ Galería Demo" o selecciona tus imágenes para ver el grid en acción...
                                 </div>
                             </div>
                         </div>
@@ -237,124 +373,120 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 3: LENGTH Y NAVEGACIÓN CON GO()
+             SLIDE 5: COMBINACIÓN CON DRAG & DROP
              ============================================== -->
-        <section class="slide" id="slide-3" data-slide="3" data-title="length &amp; go(delta)">
+        <section class="slide" id="slide-5" data-slide="5" data-title="Integración Drag &amp; Drop">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Fundamento 02</span>
-                    <h2>Inspección de Pila con <code>history.length</code> y Saltos con <code>history.go()</code></h2>
+                    <span class="section-tag">Caso Práctico 02</span>
+                    <h2>Integración de FileReader con la API de Drag &amp; Drop</h2>
                     <p class="section-desc">
-                        Aprende a consultar la profundidad del historial y realizar saltos relativos de varias páginas:
+                        Permite a los usuarios arrastrar archivos directamente desde su escritorio a la aplicación:
                     </p>
                 </div>
 
-                <div class="comparison-grid">
-                    <!-- Tarjeta 1: history.length -->
-                    <div class="comparison-card card-constructor">
-                        <div class="comp-header">
-                            <span class="comp-badge badge-cyan">Métrica de Pila</span>
-                            <h3>history.length</h3>
-                            <span class="comp-subtitle">Profundidad total de la sesión activa</span>
-                        </div>
-                        <div class="comp-body">
-                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
-                                <li><strong>Propiedad de solo lectura:</strong> Indica cuántas páginas hay en la sesión actual.</li>
-                                <li><strong>Inicia en 1 o 2:</strong> Al abrir una pestaña nueva y entrar al primer sitio.</li>
-                                <li><strong>Privacidad estricta:</strong> Por seguridad, JavaScript <strong>no puede leer las URLs</strong> de las otras páginas del historial.</li>
-                            </ul>
-                            <div class="visual-box">
-                                <span class="vis-icon">🛡️</span>
-                                <div class="vis-text">
-                                    <strong>Aislamiento de Privacidad:</strong>
-                                    <small>Solo conoces el conteo de páginas, nunca los dominios visitados por el usuario.</small>
-                                </div>
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">e.dataTransfer.files</span>
                             </div>
+                            <p>
+                                Al arrastrar archivos desde el explorador del sistema operativo, el navegador expone los archivos en <code>e.dataTransfer.files</code>.
+                            </p>
+                            <div class="highlight-callout">
+                                ⚠️ <strong>Regla de Oro:</strong> Es indispensable llamar a <code>e.preventDefault()</code> en los eventos <code>dragover</code> y <code>drop</code>, de lo contrario el navegador intentará abrir el archivo en la pestaña actual.
+                            </div>
+                            <p style="margin-top: 0.7rem;">
+                                <strong>Feedback visual:</strong> Escucha <code>dragenter</code> y <code>dragleave</code> para añadir o remover clases de resaltado visual en la zona de aterrizaje.
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Tarjeta de Puente -->
-                    <div class="comparison-bridge">
-                        <div class="bridge-arrow">
-                            <span>Salto</span>
-                            <div class="arrow-flow">➔</div>
-                        </div>
-                        <div class="bridge-caption">Delta Relativo</div>
-                    </div>
+                    <!-- Drop Zone Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">zona_arrastre_completa.js</span>
+                            </div>
 
-                    <!-- Tarjeta 2: history.go() -->
-                    <div class="comparison-card card-instance">
-                        <div class="comp-header">
-                            <span class="comp-badge badge-emerald">Navegación Relativa</span>
-                            <h3>history.go(delta)</h3>
-                            <span class="comp-subtitle">Saltos hacia adelante, atrás o recarga</span>
-                        </div>
-                        <div class="comp-body">
-                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
-                                <li><strong><code>go(-1)</code>:</strong> Equivalente exacto a <code>history.back()</code>.</li>
-                                <li><strong><code>go(1)</code>:</strong> Equivalente exacto a <code>history.forward()</code>.</li>
-                                <li><strong><code>go(-2)</code> o <code>go(3)</code>:</strong> Salta dos páginas atrás o tres adelante.</li>
-                                <li><strong><code>go(0)</code> o <code>go()</code>:</strong> Recarga la página actual (<code>location.reload()</code>).</li>
-                            </ul>
-                            <div class="visual-box">
-                                <span class="vis-icon">⚡</span>
-                                <div class="vis-text">
-                                    <strong>Fuera de Límites:</strong>
-                                    <small>Si pasas <code>go(-99)</code> y no hay tantas páginas, se ignora silenciosamente.</small>
+                            <div class="file-drop-zone" id="interactiveMainDropZone">
+                                <span class="drop-icon">📥</span>
+                                <div class="drop-text-primary">Arrastra y suelta aquí cualquier archivo</div>
+                                <div class="drop-text-secondary">Detecta automáticamente imágenes o texto plano</div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 0.8rem;">
+                                <div class="mutation-result-box" id="dropZoneResultBox">
+                                    Estado: Esperando que sueltes un archivo en la zona de arrastre superior...
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Probador Interactivo de Saltos -->
-                <div class="identity-checker">
-                    <div class="identity-expr">
-                        <code>history.go(-2) ➔ Salta 2 páginas atrás | history.go(0) ➔ Recarga la página</code>
-                    </div>
-                    <button class="btn-check-identity" id="btnCheckGoExamples">
-                        🔍 Probar Comportamiento de Deltas en history.go()
-                    </button>
-                    <div class="identity-result" id="goExamplesResult">
-                        Haz clic para evaluar los efectos de go(-2), go(1) y go(0)...
-                    </div>
+        <!-- ==============================================
+             SLIDE 6: CICLO DE VIDA DE EVENTOS
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Ciclo de Vida de Eventos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura &amp; Eventos</span>
+                    <h2>El Ciclo de Vida de Eventos de FileReader</h2>
+                    <p class="section-desc">
+                        Comprende la secuencia cronológica y los estados asíncronos del proceso de lectura:
+                    </p>
                 </div>
 
-                <!-- Tabla de Referencia -->
                 <div class="table-responsive">
                     <table class="proto-table">
                         <thead>
                             <tr>
-                                <th>Invocación</th>
-                                <th>Delta</th>
-                                <th>Equivalente Estándar</th>
-                                <th>Efecto en la Pila</th>
+                                <th>Evento</th>
+                                <th>Momento de Disparo</th>
+                                <th>Propiedades Clave</th>
+                                <th>Uso Recomendado</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>history.go(-1)</code></td>
-                                <td>-1</td>
-                                <td><code>history.back()</code></td>
-                                <td>Retrocede a la entrada inmediatamente anterior.</td>
+                                <td><code>loadstart</code></td>
+                                <td>Comienza la lectura del archivo.</td>
+                                <td><code>e.loaded = 0</code></td>
+                                <td>Mostrar spinners, modales o inicializar barras de progreso.</td>
                             </tr>
                             <tr>
-                                <td><code>history.go(1)</code></td>
-                                <td>+1</td>
-                                <td><code>history.forward()</code></td>
-                                <td>Avanza a la entrada inmediatamente siguiente.</td>
+                                <td><code>progress</code></td>
+                                <td>Durante la lectura continua de bytes.</td>
+                                <td><code>e.lengthComputable</code>, <code>e.loaded</code>, <code>e.total</code></td>
+                                <td>Calcular porcentaje: <code>(loaded / total) * 100</code>.</td>
                             </tr>
                             <tr>
-                                <td><code>history.go(-2)</code></td>
-                                <td>-2</td>
-                                <td>Pulsar "Atrás" dos veces seguidas</td>
-                                <td>Salta 2 páginas atrás en una sola operación.</td>
+                                <td><code>load</code></td>
+                                <td>Lectura finalizada con éxito.</td>
+                                <td><code>reader.result</code> disponible</td>
+                                <td>Renderizar texto o asignar Base64 a la imagen.</td>
                             </tr>
                             <tr>
-                                <td><code>history.go(0)</code></td>
-                                <td>0</td>
-                                <td><code>location.reload()</code></td>
-                                <td>Recarga el documento actual conservando la posición.</td>
+                                <td><code>error</code></td>
+                                <td>Ocurre un error de lectura o permisos.</td>
+                                <td><code>reader.error</code></td>
+                                <td>Mostrar mensaje de error al usuario y loguear fallo.</td>
+                            </tr>
+                            <tr>
+                                <td><code>abort</code></td>
+                                <td>Se cancela la operación con <code>reader.abort()</code>.</td>
+                                <td>Lectura interrumpida</td>
+                                <td>Botones de "Cancelar carga" en archivos pesados.</td>
+                            </tr>
+                            <tr>
+                                <td><code>loadend</code></td>
+                                <td>Conclusión definitiva (éxito, error o aborto).</td>
+                                <td>Ciclo cerrado</td>
+                                <td>Ocultar loaders, resetear botones y liberar memoria.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -363,325 +495,67 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 4: PUSHSTATE VS REPLACESTATE
+             SLIDE 7: LABORATORIO DE PROGRESO EN VIVO
              ============================================== -->
-        <section class="slide" id="slide-4" data-slide="4" data-title="pushState vs replaceState">
+        <section class="slide" id="slide-7" data-slide="7" data-title="Simulador de Barra de Progreso">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Manipulación Dinámica</span>
-                    <h2>El Corazón de las SPAs: <code>pushState()</code> vs. <code>replaceState()</code></h2>
+                    <span class="section-tag">Laboratorio 03</span>
+                    <h2>Monitoreo de Progreso en Tiempo Real con <code>progress</code> y <code>loadend</code></h2>
                     <p class="section-desc">
-                        Ambos métodos modifican la URL visible en la barra del navegador y asocian un objeto de estado
-                        <strong>sin recargar la página</strong>, pero difieren en cómo alteran la pila:
-                    </p>
-                </div>
-
-                <!-- SIMULADOR INTERACTIVO PUSHSTATE VS REPLACESTATE -->
-                <div class="chain-simulator-container">
-                    <div class="simulator-controls">
-                        <span class="sim-label">Selecciona la Operación de Historial a Ejecutar:</span>
-                        <div class="sim-buttons-group">
-                            <button class="sim-prop-btn active" data-scenario="push">
-                                1. pushState({ id: 1 }, "", "/perfil")
-                            </button>
-                            <button class="sim-prop-btn" data-scenario="replace">
-                                2. replaceState({ id: 2 }, "", "/filtro?p=2")
-                            </button>
-                            <button class="sim-prop-btn" data-scenario="cross">
-                                3. Error Cross-Origin ("https://google.com")
-                            </button>
-                            <button class="sim-prop-btn" data-scenario="popstate">
-                                4. ¿Dispara popstate al ser llamado?
-                            </button>
-                        </div>
-                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareHistoryModes">
-                            ⚡ Comparar Efecto en URL, Estado y Pila
-                        </button>
-                    </div>
-
-                    <!-- Comparador Visual Paralelo -->
-                    <div class="silent-error-comparison-grid">
-                        <!-- Columna pushState -->
-                        <div class="error-mode-card card-sloppy" id="cardImplicitResult">
-                            <div class="mode-header">
-                                <span class="badge badge-amber">pushState(state, "", url)</span>
-                                <h4>Nueva Entrada en la Pila</h4>
-                            </div>
-                            <div class="mode-terminal" id="terminalImplicit">
-                                <div class="term-line">&gt; Esperando simulación...</div>
-                            </div>
-                            <div class="mode-status status-danger" id="statusImplicit">
-                                📦 Añade un nuevo plato a la torre: history.length se incrementa en +1.
-                            </div>
-                        </div>
-
-                        <!-- Columna replaceState -->
-                        <div class="error-mode-card card-strict" id="cardSerializedResult">
-                            <div class="mode-header">
-                                <span class="badge badge-emerald">replaceState(state, "", url)</span>
-                                <h4>Sobrescritura de Entrada Actual</h4>
-                            </div>
-                            <div class="mode-terminal" id="terminalSerialized">
-                                <div class="term-line">&gt; Esperando simulación...</div>
-                            </div>
-                            <div class="mode-status status-safe" id="statusSerialized">
-                                🔄 Reemplaza el plato de la cima: history.length se mantiene idéntico.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="chain-live-feedback" id="storageFeedback">
-                        <span class="feedback-icon">ℹ️</span>
-                        <span class="feedback-text" id="storageFeedbackText">
-                            Selecciona una operación arriba y presiona <strong>"Comparar Efecto en URL, Estado y Pila"</strong>
-                            para inspeccionar cómo evoluciona la barra de direcciones y la memoria.
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==============================================
-             SLIDE 5: EL OBJETO STATE Y EL EVENTO POPSTATE
-             ============================================== -->
-        <section class="slide" id="slide-5" data-slide="5" data-title="history.state &amp; popstate">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <span class="section-tag">Ciclo Reactivo</span>
-                    <h2>El Objeto <code>history.state</code> y el Evento Global <code>popstate</code></h2>
-                    <p class="section-desc">
-                        Aprende cómo viajar en el tiempo recuperando la información guardada en cada entrada del historial:
-                    </p>
-                </div>
-
-                <div class="characteristics-container">
-                    <!-- Selector de Pestañas -->
-                    <div class="char-tabs" id="storageFlowTabs">
-                        <button class="char-tab-btn active" data-flow="1">
-                            <span class="char-num">5.1</span>
-                            <span class="char-title">history.state</span>
-                        </button>
-                        <button class="char-tab-btn" data-flow="2">
-                            <span class="char-num">5.2</span>
-                            <span class="char-title">Evento popstate</span>
-                        </button>
-                        <button class="char-tab-btn" data-flow="3">
-                            <span class="char-num">5.3</span>
-                            <span class="char-title">Regla de No Disparo</span>
-                        </button>
-                    </div>
-
-                    <!-- Panel de Contenido -->
-                    <div class="char-display-panel" id="flowDisplayPanel">
-                        <!-- Item 1: history.state -->
-                        <div class="char-detail-view active" id="flow-view-1">
-                            <div class="char-view-header">
-                                <span class="badge badge-purple">5.1 La propiedad history.state</span>
-                                <h3>Acceso directo al estado serializado de la página actual</h3>
-                            </div>
-                            <p class="char-text">
-                                Devuelve el objeto serializable asociado con la entrada sobre la que está situado el navegador.
-                                Si el usuario entró directamente a la URL o no se asoció estado, devuelve <code>null</code>.
-                            </p>
-                            <div class="char-interactive-card">
-                                <button class="btn-run-action" id="btnTestHistoryState">
-                                    ▶ Leer history.state en Tiempo Real
-                                </button>
-                                <div class="mutation-result-box" id="historyStateResult">
-                                    Haz clic para inspeccionar el valor actual de history.state...
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 2: popstate -->
-                        <div class="char-detail-view" id="flow-view-2">
-                            <div class="char-view-header">
-                                <span class="badge badge-cyan">5.2 El evento window.onpopstate</span>
-                                <h3>Se dispara únicamente cuando el usuario navega en la pila</h3>
-                            </div>
-                            <p class="char-text">
-                                Se gatilla en <code>window</code> al presionar los botones Atrás / Adelante del navegador o ejecutar
-                                <code>history.back()</code>, <code>forward()</code> o <code>go()</code>. Expone <code>event.state</code> con los datos clonados.
-                            </p>
-                            <div class="char-interactive-card">
-                                <button class="btn-run-action" id="btnTestPopstate">
-                                    ▶ Simular Despacho de Evento popstate
-                                </button>
-                                <div class="mutation-result-box" id="popstateResult">
-                                    Haz clic para observar cómo se restaura el estado y se sincroniza la interfaz...
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Item 3: Regla de No Disparo -->
-                        <div class="char-detail-view" id="flow-view-3">
-                            <div class="char-view-header">
-                                <span class="badge badge-emerald">5.3 La Regla de Oro: pushState NO activa popstate</span>
-                                <h3>El error número 1 de los desarrolladores en enrutamiento</h3>
-                            </div>
-                            <p class="char-text">
-                                Invocar <code>pushState()</code> o <code>replaceState()</code> <strong>jamás dispara el evento popstate</strong>.
-                                Por tanto, tu aplicación debe actualizar la vista de forma inmediata en el mismo manejador que llama a <code>pushState()</code>.
-                            </p>
-                            <div class="char-interactive-card">
-                                <button class="btn-run-action" id="btnTestNoTrigger">
-                                    ▶ Verificar la Regla de Despacho
-                                </button>
-                                <div class="mutation-result-box" id="noTriggerResult">
-                                    Haz clic para contrastar quién activa popstate y quién no...
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==============================================
-             SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES
-             ============================================== -->
-        <section class="slide" id="slide-6" data-slide="6" data-title="Buenas Prácticas &amp; Errores">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <span class="section-tag">Estándares de la Industria</span>
-                    <h2>Buenas Prácticas y Errores Comunes con la History API</h2>
-                    <p class="section-desc">
-                        Evita los errores típicos de seguridad y recargas accidentales al construir enrutadores Frontend:
-                    </p>
-                </div>
-
-                <div class="best-practices-grid">
-                    <!-- Tarjeta 1: Error Cross-Origin -->
-                    <div class="practice-card bad">
-                        <div class="practice-header">
-                            <span class="status-pill pill-bad">❌ ERROR: CROSS-ORIGIN</span>
-                            <h4>Intentar Cambiar de Dominio</h4>
-                        </div>
-                        <p>
-                            Pasar una URL con protocolo o dominio distinto a <code>pushState()</code> lanza un error de seguridad
-                            fatal (<code>SecurityError: Blocked cross-origin navigation</code>).
-                        </p>
-                        <div class="code-snippet-tiny">
-                            <code>history.pushState({}, "", "https://google.com"); // ❌ SecurityError</code>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 2: Error 404 en Recarga -->
-                    <div class="practice-card bad">
-                        <div class="practice-header">
-                            <span class="status-pill pill-bad">❌ ERROR: 404 EN RECARGA</span>
-                            <h4>Servidor sin Fallback SPA</h4>
-                        </div>
-                        <p>
-                            Si el usuario recarga la página en <code>/usuario/perfil</code>, el servidor web debe servir siempre
-                            el archivo <code>index.html</code> para que la SPA tome el control.
-                        </p>
-                        <div class="code-snippet-tiny">
-                            <code>GET /usuario/perfil ➔ 404 Not Found // ❌ Falta fallback</code>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 3: Buena práctica validar null -->
-                    <div class="practice-card good">
-                        <div class="practice-header">
-                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: MANEJAR NULL</span>
-                            <h4>Validar event.state === null</h4>
-                        </div>
-                        <p>
-                            En la visita inicial, <code>history.state</code> es <code>null</code>. Prevé siempre una vista por defecto
-                            leyendo <code>location.pathname</code>.
-                        </p>
-                        <div class="code-snippet-tiny">
-                            <code>const vista = event.state ? event.state.seccion : "inicio"; // ✅</code>
-                        </div>
-                    </div>
-
-                    <!-- Tarjeta 4: Buena práctica replaceState en filtros -->
-                    <div class="practice-card good">
-                        <div class="practice-header">
-                            <span class="status-pill pill-good">✅ BUENA PRÁCTICA: REPLACESTATE</span>
-                            <h4>Filtros y Búsquedas sin Inflar Pila</h4>
-                        </div>
-                        <p>
-                            Usa <code>replaceState()</code> para paginaciones o filtros de búsqueda para no obligar al usuario a pulsar
-                            "Atrás" diez veces consecutivas.
-                        </p>
-                        <div class="code-snippet-tiny">
-                            <code>history.replaceState({ cat }, "", \`?cat=\${cat}\`); // ✅</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==============================================
-             SLIDE 7: PROYECTO INTEGRADOR: ENRUTADOR SPA
-             ============================================== -->
-        <section class="slide" id="slide-7" data-slide="7" data-title="Proyecto: Enrutador SPA">
-            <div class="slide-content">
-                <div class="slide-header">
-                    <span class="section-tag">Proyecto de Producción</span>
-                    <h2>Proyecto Integrador: Enrutador SPA con Historial y <code>popstate</code></h2>
-                    <p class="section-desc">
-                        Navegación dinámica entre pestañas actualizando la URL visible y restaurando vistas sin recargas:
+                        Simula o experimenta con la lectura de archivos de gran tamaño calculando el avance de bytes:
                     </p>
                 </div>
 
                 <div class="two-columns-layout">
-                    <!-- Columna 1: Código Fuente -->
+                    <!-- Columna Explicativa -->
                     <div class="concept-column">
                         <div class="info-card">
                             <div class="card-badge-header">
-                                <span class="badge badge-purple">1. Enrutador SPA Nativo</span>
+                                <span class="badge badge-emerald">Fórmula de Progreso</span>
                             </div>
-                            <p>
-                                Interceptamos los clics de la barra de navegación, ejecutamos <code>pushState</code> y escuchamos <code>popstate</code>:
-                            </p>
-                            <pre class="code-block" style="margin-top: 0.7rem;"><code id="code-sample-spa"><span class="c-keyword">const</span> <span class="c-func">navegar</span> = (<span class="c-prop">ruta</span>, <span class="c-prop">datos</span>) =&gt; {
-  <span class="c-variable">history</span>.<span class="c-func">pushState</span>(<span class="c-prop">datos</span>, <span class="c-string">""</span>, <span class="c-prop">ruta</span>);
-  <span class="c-func">renderizarVista</span>(<span class="c-prop">datos</span>.<span class="c-prop">seccion</span>);
-};
-
-<span class="c-variable">window</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"popstate"</span>, (<span class="c-prop">e</span>) =&gt; {
-  <span class="c-keyword">const</span> <span class="c-variable">seccion</span> = <span class="c-prop">e</span>.<span class="c-prop">state</span> ? <span class="c-prop">e</span>.<span class="c-prop">state</span>.<span class="c-prop">seccion</span> : <span class="c-string">"inicio"</span>;
-  <span class="c-func">renderizarVista</span>(<span class="c-variable">seccion</span>);
+                            <pre class="code-block"><code id="code-sample-progress"><span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"progress"</span>, (<span class="c-prop">e</span>) =&gt; {
+  <span class="c-keyword">if</span> (<span class="c-prop">e</span>.<span class="c-prop">lengthComputable</span>) {
+    <span class="c-keyword">const</span> <span class="c-variable">porcentaje</span> = <span class="c-func">Math</span>.<span class="c-func">round</span>((<span class="c-prop">e</span>.<span class="c-prop">loaded</span> / <span class="c-prop">e</span>.<span class="c-prop">total</span>) * <span class="c-number">100</span>);
+    <span class="c-variable">barra</span>.<span class="c-prop">style</span>.<span class="c-prop">width</span> = <span class="c-variable">porcentaje</span> + <span class="c-string">"%"</span>;
+  }
 });</code></pre>
                         </div>
                     </div>
 
-                    <!-- Columna 2: Demostración Interactiva -->
+                    <!-- Columna Simulador de Progreso -->
                     <div class="code-column">
-                        <div class="info-card">
-                            <div class="card-badge-header">
-                                <span class="badge badge-emerald">2. Probar Enrutador SPA en Vivo</span>
-                            </div>
-                            <p>
-                                Haz clic en las pestañas para navegar sin recargas y luego usa las flechas para retroceder:
-                            </p>
-
-                            <div class="history-browser-mockup" style="margin-top: 0.5rem;">
-                                <div class="browser-bar-top">
-                                    <button class="browser-nav-btn" id="btnSpaBack" title="Atrás">◀</button>
-                                    <button class="browser-nav-btn" id="btnSpaForward" title="Adelante">▶</button>
-                                    <div class="browser-url-input">
-                                        <span class="browser-url-badge">SPA:</span>
-                                        <span id="spaCurrentUrl">/inicio</span>
-                                    </div>
-                                </div>
-                                <div class="spa-nav-links">
-                                    <button class="spa-tab-btn active" data-sparoute="/inicio" data-spasec="inicio">🏠 Inicio</button>
-                                    <button class="spa-tab-btn" data-sparoute="/catalogo" data-spasec="catalogo">📦 Catálogo</button>
-                                    <button class="spa-tab-btn" data-sparoute="/perfil" data-spasec="perfil">👤 Perfil</button>
-                                </div>
-                                <div class="spa-view-canvas" id="spaCanvas">
-                                    <h4 id="spaCanvasTitle">Vista de Inicio</h4>
-                                    <p id="spaCanvasDesc">Bienvenido a nuestra aplicación SPA con navegación instantánea.</p>
-                                </div>
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">simulador_progreso_pesado.js</span>
                             </div>
 
-                            <div class="char-interactive-card" style="margin-top: 1rem;">
-                                <div class="mutation-result-box" id="spaStatusResult">
-                                    Pestaña activa: "inicio" | history.state: { seccion: "inicio" }
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnStartProgressSim">
+                                    ▶ Iniciar Simulación de Lectura (8 MB)
+                                </button>
+                                <button class="btn-run-action" id="btnAbortProgressSim" style="background: rgba(244, 63, 94, 0.2); border-color: var(--rose);">
+                                    ⏹ Cancelar (abort)
+                                </button>
+                            </div>
+
+                            <div class="file-progress-wrapper">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 600; font-size: 0.88rem;" id="progressFileName">video_render_4k.mp4</span>
+                                    <span style="font-size: 0.82rem; color: var(--cyan);" id="progressPercentLabel">0%</span>
+                                </div>
+                                <div class="file-progress-bar-bg">
+                                    <div class="file-progress-bar-fill" id="fileProgressBarFill"></div>
+                                </div>
+                                <div class="file-progress-stats">
+                                    <span id="progressBytesLoaded">0 KB leídos</span>
+                                    <span id="progressBytesTotal">Total: 8,192 KB</span>
+                                </div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 0.8rem;">
+                                <div class="mutation-result-box" id="progressEventLogBox">
+                                    Estado: Listo para iniciar la lectura y registrar eventos en tiempo real...
                                 </div>
                             </div>
                         </div>
@@ -696,10 +570,10 @@
         <section class="slide" id="slide-8" data-slide="8" data-title="Analogías del Mundo Real">
             <div class="slide-content">
                 <div class="slide-header">
-                    <span class="section-tag">Metáforas Visuales 🍽️ 📸</span>
-                    <h2>Analogías del Mundo Real: La Pila de Platos y el Álbum de Fotos</h2>
+                    <span class="section-tag">Metáforas Visuales 🎙️ 🚚</span>
+                    <h2>Analogías del Mundo Real: El Traductor y la Báscula de Granos</h2>
                     <p class="section-desc">
-                        Comprende de forma intuitiva cómo se comporta la pila de navegación y el almacenamiento de estados:
+                        Interioriza de forma intuitiva los conceptos esenciales de la FileReader API:
                     </p>
                 </div>
 
@@ -708,62 +582,62 @@
                     <div class="tool-picker">
                         <span class="picker-label">Selecciona la analogía del temario que deseas explorar:</span>
                         <div class="tools-btn-row">
-                            <button class="tool-btn active" data-office="platos">
-                                <span class="tool-icon">🍽️</span>
-                                <span class="tool-name">1. La Pila de Platos (pushState vs. replaceState)</span>
+                            <button class="tool-btn active" data-analogy="traductor">
+                                <span class="tool-icon">🎙️</span>
+                                <span class="tool-name">1. El Traductor en Cabina (readAsText vs readAsDataURL)</span>
                             </button>
-                            <button class="tool-btn" data-office="album">
-                                <span class="tool-icon">📸</span>
-                                <span class="tool-name">2. El Álbum de Fotos con Notas (state y popstate)</span>
+                            <button class="tool-btn" data-analogy="bascula">
+                                <span class="tool-icon">🚚</span>
+                                <span class="tool-name">2. La Báscula de Granos (progress y loadend)</span>
                             </button>
                         </div>
                     </div>
 
                     <!-- Dos Entornos Frente a Frente -->
                     <div class="family-workshops">
-                        <!-- Lado A: pushState -->
-                        <div class="workshop-card" id="officeCardLeft">
-                            <div class="ws-avatar" id="officeAvatarLeft">🍽️</div>
+                        <!-- Lado A -->
+                        <div class="workshop-card" id="analogyCardLeft">
+                            <div class="ws-avatar" id="analogyAvatarLeft">🎙️</div>
                             <div class="ws-header">
-                                <h3 id="officeTitleLeft">1. Colocar un Plato Nuevo (pushState)</h3>
-                                <span class="ws-sub" id="officeSubLeft">La torre crece en altura</span>
+                                <h3 id="analogyTitleLeft">readAsText()</h3>
+                                <span class="ws-sub" id="analogySubLeft">Traducción directa a lenguaje humano</span>
                             </div>
-                            <div class="ws-items" id="officeItemsLeft">
-                                <div class="ws-item">Lavas un plato nuevo y lo colocas en la cima de la torre</div>
-                                <div class="ws-item">El tamaño total de la pila (history.length) se incrementa en +1</div>
+                            <div class="ws-items" id="analogyItemsLeft">
+                                <div class="ws-item">El traductor lee una carta y te dicta las palabras en español</div>
+                                <div class="ws-item">El resultado es una cadena de texto lista para ser leída y comprendida</div>
                             </div>
-                            <div class="ws-status" id="officeStatusLeft">
-                                El usuario podrá volver al plato anterior pulsando "Atrás"
+                            <div class="ws-status" id="analogyStatusLeft">
+                                Ideal para archivos de configuración, notas y código
                             </div>
                         </div>
 
                         <div class="ws-arrow-flow">
-                            <span id="officeArrowLabel">Comparativa</span>
+                            <span id="analogyArrowLabel">Comparativa</span>
                             <div class="arrow-beam">➔</div>
                         </div>
 
-                        <!-- Lado B: replaceState -->
-                        <div class="workshop-card" id="officeCardRight">
-                            <div class="ws-avatar" id="officeAvatarRight">🔄</div>
+                        <!-- Lado B -->
+                        <div class="workshop-card" id="analogyCardRight">
+                            <div class="ws-avatar" id="analogyAvatarRight">🖼️</div>
                             <div class="ws-header">
-                                <h3 id="officeTitleRight">2. Cambiar el Plato de Arriba (replaceState)</h3>
-                                <span class="ws-sub" id="officeSubRight">La altura total no cambia</span>
+                                <h3 id="analogyTitleRight">readAsDataURL()</h3>
+                                <span class="ws-sub" id="analogySubRight">Telegrama en código Morse (Base64)</span>
                             </div>
-                            <div class="ws-items" id="officeItemsRight">
-                                <div class="ws-item highlight-item">Sustituyes el plato de la cima por otro de diferente color</div>
-                                <div class="ws-item highlight-item">La cantidad de platos (history.length) se mantiene intacta</div>
+                            <div class="ws-items" id="analogyItemsRight">
+                                <div class="ws-item highlight-item">Codifica cada pixel en una sola línea continua de caracteres</div>
+                                <div class="ws-item highlight-item">No está hecho para personas, sino para que el navegador lo pinte</div>
                             </div>
-                            <div class="ws-status" id="officeStatusRight">
-                                Evita inflar la pila al filtrar búsquedas o cambiar de pestaña
+                            <div class="ws-status" id="analogyStatusRight">
+                                Ideal para atributos src en imágenes y miniaturas
                             </div>
                         </div>
                     </div>
 
                     <!-- Banner de Conclusión -->
-                    <div class="toolbox-result-banner" id="officeBanner">
-                        <span class="banner-icon" id="officeBannerIcon">🍽️</span>
-                        <span class="banner-text" id="officeBannerText">
-                            <strong>pushState vs replaceState:</strong> Usa <code>pushState()</code> cuando el cambio represente una página nueva a la que el usuario querrá volver; usa <code>replaceState()</code> para filtros, paginación o formularios multipaso.
+                    <div class="toolbox-result-banner" id="analogyBanner">
+                        <span class="banner-icon" id="analogyBannerIcon">🎙️</span>
+                        <span class="banner-text" id="analogyBannerText">
+                            <strong>readAsText vs readAsDataURL:</strong> Usa <code>readAsText()</code> cuando necesites procesar texto, editar líneas o parsear JSON; usa <code>readAsDataURL()</code> para renderizar recursos visuales sin tocar el backend.
                         </span>
                     </div>
                 </div>
@@ -771,15 +645,15 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 9: PLAYGROUND / CONSOLA EN VIVO
+             SLIDE 9: PLAYGROUND INTERACTIVO
              ============================================== -->
         <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="section-tag">Playground &amp; Sandbox</span>
-                    <h2>Laboratorio de Código: Experimenta con la History API</h2>
+                    <h2>Laboratorio de Código: Experimenta con la FileReader API</h2>
                     <p class="section-desc">
-                        Ejecuta y prueba los 6 ejemplos interactivos del curso o carga los retos resueltos con nuestro entorno en vivo:
+                        Ejecuta los ejemplos del temario en vivo o prueba soluciones a retos con nuestra consola virtual:
                     </p>
                 </div>
 
@@ -790,23 +664,23 @@
                             <div class="preset-dropdown">
                                 <label for="codePresetSelect">Cargar Ejemplo:</label>
                                 <select id="codePresetSelect">
-                                    <option value="preset-hist-1">
-                                        1. Navegación básica: back(), forward() y length
+                                    <option value="preset-file-1">
+                                        1. Lectura de archivo de texto con readAsText()
                                     </option>
-                                    <option value="preset-hist-2">
-                                        2. Saltos relativos con history.go(delta)
+                                    <option value="preset-file-2">
+                                        2. Codificación Base64 con readAsDataURL()
                                     </option>
-                                    <option value="preset-hist-3">
-                                        3. Adición de entradas con pushState()
+                                    <option value="preset-file-3">
+                                        3. Carga y previsualización de galería múltiple
                                     </option>
-                                    <option value="preset-hist-4">
-                                        4. Sobrescritura con replaceState()
+                                    <option value="preset-file-4">
+                                        4. Integración completa con Drag &amp; Drop
                                     </option>
-                                    <option value="preset-hist-5">
-                                        5. Lectura de history.state y evento popstate
+                                    <option value="preset-file-5">
+                                        5. Monitoreo de bytes y eventos con progress
                                     </option>
-                                    <option value="preset-hist-6">
-                                        6. Enrutador SPA completo con renderizado dinámico
+                                    <option value="preset-file-6">
+                                        6. Cancelación de lectura asíncrona con abort()
                                     </option>
                                 </select>
                             </div>
@@ -833,7 +707,7 @@
                                 <span class="dot yellow"></span>
                                 <span class="dot green"></span>
                             </div>
-                            <span class="console-title">Consola Virtual de Salida (History API Activa)</span>
+                            <span class="console-title">Consola Virtual de Salida (FileReader Activo)</span>
                             <button class="btn-clear-console" id="btnClearConsole">
                                 Limpiar
                             </button>
@@ -850,7 +724,7 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 10: RESUMEN, RETOS Y CONCLUSIONES
+             SLIDE 10: RESUMEN, RETOS Y SOLUCIONARIO
              ============================================== -->
         <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
             <div class="slide-content summary-slide">
@@ -858,130 +732,90 @@
                     <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
                     <h2>Resumen Maestro y Retos Prácticos Paso a Paso</h2>
                     <p class="section-desc">
-                        Consolida tu dominio de la History API con estos 3 retos progresivos:
+                        Asegura tu comprensión resolviendo los 3 retos de aplicación real de la FileReader API:
                     </p>
                 </div>
 
-                <!-- 3 Retos del Temario -->
-                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                <!-- Acordeón de Retos -->
+                <div class="accordion-container">
                     <!-- Reto 1 -->
-                    <div class="exercise-card">
-                        <div class="ex-header">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
                             <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
-                            <h3>Navegación Relativa con go()</h3>
+                            <h3>Reto 1: Lector y Validador JSON Seguro con try / catch</h3>
+                            <span class="accordion-icon">▼</span>
                         </div>
-                        <p class="ex-desc">
-                            Escribe una función que verifique si <code>history.length > 2</code>. Si es verdadero,
-                            debe retroceder 2 páginas de golpe con <code>history.go()</code>; si no, debe usar <code>history.back()</code>.
-                        </p>
-                        <div class="ex-footer">
-                            <button class="btn-ex-action" data-load-preset="preset-ex-hist1">
-                                Cargar en Playground
-                            </button>
-                            <button class="btn-ex-solution" data-sol="sol-hist-1">
-                                Ver Solución
-                            </button>
-                        </div>
-                        <div class="ex-solution-box" id="sol-hist-1">
-                            <pre><code>const retrocederSeguro = () => {
-    if (history.length > 2) {
-        history.go(-2);
-    } else {
-        history.back();
-    }
-};</code></pre>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Crea una función que reciba un archivo <code>.json</code>, lo lea con <code>readAsText()</code> y parsee el contenido con <code>JSON.parse()</code> dentro de un bloque seguro para alertar al usuario si la sintaxis del archivo está corrompida.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file1">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Reto 2 -->
-                    <div class="exercise-card">
-                        <div class="ex-header">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
                             <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
-                            <h3>Filtro sin Inflar Pila con replaceState</h3>
+                            <h3>Reto 2: Zona Drag &amp; Drop con Discriminación de Tipo MIME</h3>
+                            <span class="accordion-icon">▼</span>
                         </div>
-                        <p class="ex-desc">
-                            Crea una función <code>actualizarFiltro(categoria, pagina)</code> que guarde ambos valores en
-                            el objeto de estado y actualice la URL visible con <code>replaceState()</code> sin aumentar <code>history.length</code>.
-                        </p>
-                        <div class="ex-footer">
-                            <button class="btn-ex-action" data-load-preset="preset-ex-hist2">
-                                Cargar en Playground
-                            </button>
-                            <button class="btn-ex-solution" data-sol="sol-hist-2">
-                                Ver Solución
-                            </button>
-                        </div>
-                        <div class="ex-solution-box" id="sol-hist-2">
-                            <pre><code>const actualizarFiltro = (categoria, pagina) => {
-    const estado = { categoria, pagina };
-    history.replaceState(estado, "", `?cat=${categoria}&p=${pagina}`);
-    console.log("Filtro actualizado:", history.state);
-};</code></pre>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Construye una zona de arrastre que examine <code>archivo.type</code>: si es una imagen, léela con <code>readAsDataURL()</code> e insértala en una galería; si es texto o código, léela con <code>readAsText()</code> y muéstrala en un bloque <code>&lt;pre&gt;</code>.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file2">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Reto 3 -->
-                    <div class="exercise-card">
-                        <div class="ex-header">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
                             <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
-                            <h3>Enrutador con pushState y popstate</h3>
+                            <h3>Reto 3: Lector Pesado con Barra de Progreso y Cancelación (abort)</h3>
+                            <span class="accordion-icon">▼</span>
                         </div>
-                        <p class="ex-desc">
-                            Implementa la función <code>navegarA(ruta, seccion)</code> que agregue una entrada con <code>pushState</code>
-                            y registre el listener de <code>popstate</code> para sincronizar la interfaz ante las flechas del navegador.
-                        </p>
-                        <div class="ex-footer">
-                            <button class="btn-ex-action" data-load-preset="preset-ex-hist3">
-                                Cargar en Playground
-                            </button>
-                            <button class="btn-ex-solution" data-sol="sol-hist-3">
-                                Ver Solución
-                            </button>
-                        </div>
-                        <div class="ex-solution-box" id="sol-hist-3">
-                            <pre><code>const navegarA = (ruta, seccion) => {
-    history.pushState({ seccion }, "", ruta);
-    renderizar(seccion);
-};
-
-window.addEventListener("popstate", (e) => {
-    const sec = e.state ? e.state.seccion : "inicio";
-    renderizar(sec);
-});</code></pre>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Implementa una clase <code>FileUploaderManager</code> que gestione la lectura de archivos con cálculo porcentual en el evento <code>progress</code> y permita al usuario abortar la operación en cualquier momento llamando a <code>reader.abort()</code>.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file3">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 5 Mandamientos de History API -->
+                <!-- Resumen en Tarjetas -->
                 <div class="summary-cards-grid">
                     <div class="summary-card">
                         <div class="sum-icon">1️⃣</div>
-                        <h4>back(), forward() y go()</h4>
-                        <p>Desplazan el puntero en la pila: <code>go(-1)</code> retrocede y <code>go(1)</code> avanza.</p>
+                        <h4>100% en Cliente</h4>
+                        <p>Lee archivos locales en memoria sin requerir transferencias al servidor.</p>
                     </div>
-
                     <div class="summary-card">
                         <div class="sum-icon">2️⃣</div>
-                        <h4>pushState vs replaceState</h4>
-                        <p><code>pushState()</code> agranda la pila (+1); <code>replaceState()</code> sobrescribe la entrada actual.</p>
+                        <h4>readAsText()</h4>
+                        <p>Ideal para strings, archivos de configuración, markdown, JSON y código.</p>
                     </div>
-
                     <div class="summary-card">
                         <div class="sum-icon">3️⃣</div>
-                        <h4>Cero Recarga</h4>
-                        <p>Ambos métodos cambian la URL visible sin provocar un refresco de página.</p>
+                        <h4>readAsDataURL()</h4>
+                        <p>Genera URIs Base64 listas para asignar a atributos <code>src</code> de imágenes.</p>
                     </div>
-
                     <div class="summary-card">
                         <div class="sum-icon">4️⃣</div>
-                        <h4>popstate Reactivo</h4>
-                        <p>Se activa únicamente cuando el usuario navega (Atrás/Adelante); nunca con <code>pushState()</code>.</p>
+                        <h4>Eventos &amp; Progreso</h4>
+                        <p>Monitorea bytes leídos con <code>progress</code> y limpia recursos en <code>loadend</code>.</p>
                     </div>
-
                     <div class="summary-card">
                         <div class="sum-icon">5️⃣</div>
-                        <h4>Mismo Origen (Same-Origin)</h4>
-                        <p>No se puede alterar el dominio a uno externo; lanzaría un <code>SecurityError</code> inmediato.</p>
+                        <h4>Instancias Únicas</h4>
+                        <p>Nunca reutilices la misma instancia de <code>FileReader</code> simultáneamente.</p>
                     </div>
                 </div>
 
@@ -1020,7 +854,7 @@ window.addEventListener("popstate", (e) => {
     <div class="modal-overlay" id="overviewModal">
         <div class="modal-window">
             <div class="modal-header">
-                <h3>Índice Rápido de Diapositivas: History API</h3>
+                <h3>Índice Rápido de Diapositivas: FileReader API</h3>
                 <button class="btn-close-modal" id="btnCloseOverview">✕</button>
             </div>
             <div class="modal-grid" id="overviewGrid">
