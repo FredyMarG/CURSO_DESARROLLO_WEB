@@ -10,19 +10,22 @@
  * 1. Introducción a la API de Geolocalización y verificación de soporte
  * 2. Contexto seguro obligatorio (HTTPS o localhost) y privacidad del usuario
  * 3. El método asíncrono 'getCurrentPosition(success, error, options)'
- * 4. Callback de Éxito: Objeto 'GeolocationPosition' y métricas en 'coords'
- * 5. Extracción de coordenadas: latitude, longitude, accuracy, altitude y timestamp
- * 6. Callback de Error: Objeto 'GeolocationPositionError' y sus 3 códigos nativos
- * 7. Gestión de fallos: PERMISSION_DENIED (1), POSITION_UNAVAILABLE (2) y TIMEOUT (3)
- * 8. Objeto de Configuración 'options': enableHighAccuracy, timeout y maximumAge
- * 9. Analogías del mundo real: El Mensajero con Láser 🛰️ y la Foto con Vencimiento ⏱️
- * 10. Diagrama de flujo completo de solicitud de ubicación
- * 11. Buena práctica 1: Implementar siempre el callback de error con feedback al usuario
- * 12. Buena práctica 2: Calibrar maximumAge para ahorrar batería y acelerar respuestas
- * 13. Error común 1: El clásico typo 'enableHightAccuracy' con 't' intermedia
- * 14. Error común 2: Ejecución en conexiones HTTP estándar sin certificado SSL
- * 15. Proyecto Integrador: Rastreador de Posición con enlace a OpenStreetMap
- * 16. Resolución completa de los 3 Retos Prácticos del Módulo (Niveles 1, 2 y 3)
+ * 4. El método de rastreo continuo en tiempo real 'watchPosition()' y 'clearWatch()'
+ * 5. Comparativa arquitectónica: getCurrentPosition() vs. watchPosition()
+ * 6. Callback de Éxito: Objeto 'GeolocationPosition' y métricas en 'coords'
+ * 7. Extracción de coordenadas: latitude, longitude, accuracy, speed y timestamp
+ * 8. Callback de Error: Objeto 'GeolocationPositionError' y sus 3 códigos nativos
+ * 9. Gestión de fallos: PERMISSION_DENIED (1), POSITION_UNAVAILABLE (2) y TIMEOUT (3)
+ * 10. Objeto de Configuración 'options': enableHighAccuracy, timeout y maximumAge
+ * 11. Analogías del mundo real: La Fotografía (getCurrentPosition) vs. El Video en Vivo (watchPosition)
+ * 12. Analogía de Precisión: El Mensajero con Láser 🛰️ y la Foto con Vencimiento ⏱️
+ * 13. Diagrama de flujo completo de solicitud y seguimiento de ubicación
+ * 14. Buena práctica 1: Detener siempre el rastreo con clearWatch(id) para no drenar la batería
+ * 15. Buena práctica 2: Implementar siempre el callback de error con feedback al usuario
+ * 16. Error común 1: El clásico typo 'enableHightAccuracy' con 't' intermedia
+ * 17. Error común 2: Ejecución en conexiones HTTP estándar sin certificado SSL
+ * 18. Proyecto Integrador: Rastreador Continuo con enlace dinámico a OpenStreetMap
+ * 19. Resolución completa de los 3 Retos Prácticos del Módulo (Niveles 1, 2 y 3)
  * ==============================================================================
  */
 
@@ -41,17 +44,20 @@ function imprimirSeparador(numeroBloque, titulo) {
 // ==============================================================================
 // En el navegador existe 'navigator.geolocation' de forma nativa.
 // Para que este archivo también pueda ejecutarse con 'node main.js' en la terminal
-// sin lanzar errores de 'navigator is not defined', creamos un simulador fiel:
+// sin lanzar errores de 'navigator is not defined', creamos un simulador fiel
+// que emula tanto 'getCurrentPosition' como 'watchPosition' y 'clearWatch':
 if (typeof globalThis.navigator === "undefined") {
     globalThis.navigator = {};
 }
 
 if (typeof globalThis.navigator.geolocation === "undefined") {
+    let watchIdCounter = 0;
+    const activeWatchers = new Map();
+
     globalThis.navigator.geolocation = {
+        // 1. getCurrentPosition: Lectura única
         getCurrentPosition(successCallback, errorCallback, options = {}) {
-            // Emulamos la naturaleza asíncrona de la API con setTimeout
             setTimeout(() => {
-                // Si options.timeout es absurdamente bajo (< 100ms), simulamos un TIMEOUT
                 if (options.timeout && options.timeout < 100) {
                     if (typeof errorCallback === "function") {
                         errorCallback({
@@ -65,7 +71,6 @@ if (typeof globalThis.navigator.geolocation === "undefined") {
                     return;
                 }
 
-                // Por defecto simulamos una lectura satelital exitosa en Madrid, España
                 if (typeof successCallback === "function") {
                     successCallback({
                         coords: {
@@ -80,7 +85,46 @@ if (typeof globalThis.navigator.geolocation === "undefined") {
                         timestamp: Date.now()
                     });
                 }
-            }, 150);
+            }, 100);
+        },
+
+        // 2. watchPosition: Seguimiento continuo (devuelve un ID numérico)
+        watchPosition(successCallback, errorCallback, options = {}) {
+            watchIdCounter++;
+            const currentId = watchIdCounter;
+            let paso = 0;
+
+            const intervalId = setInterval(() => {
+                paso++;
+                if (typeof successCallback === "function") {
+                    successCallback({
+                        coords: {
+                            // Simulamos un leve desplazamiento en cada actualización
+                            latitude: 40.416775 + paso * 0.00012,
+                            longitude: -3.703790 + paso * 0.00008,
+                            accuracy: options.enableHighAccuracy ? 6.2 : 120.0,
+                            altitude: 667.0 + paso * 0.5,
+                            altitudeAccuracy: 5.0,
+                            heading: 45.0,
+                            speed: 1.4 // metros por segundo (~5 km/h caminando)
+                        },
+                        timestamp: Date.now()
+                    });
+                }
+            }, 120);
+
+            activeWatchers.set(currentId, intervalId);
+            return currentId;
+        },
+
+        // 3. clearWatch: Detiene el rastreo usando el ID retornado por watchPosition
+        clearWatch(id) {
+            if (activeWatchers.has(id)) {
+                clearInterval(activeWatchers.get(id));
+                activeWatchers.delete(id);
+                return true;
+            }
+            return false;
         }
     };
 }
@@ -103,11 +147,6 @@ console.log("Objeto nativo en el entorno              :", navigator.geolocation)
 // ==============================================================================
 imprimirSeparador(2, "CONTEXTO SEGURO OBLIGATORIO (HTTPS) Y PRIVACIDAD");
 
-// Regla estricta de seguridad:
-// 1. La API SOLO se activa bajo HTTPS o en 'http://localhost' (desarrollo local).
-// 2. Requiere consentimiento explícito: el navegador muestra un cuadro de diálogo.
-//    Si el usuario rechaza, se dispara el callback de error (PERMISSION_DENIED).
-
 console.log("Protocolos permitidos : https:// o http://localhost");
 console.log("Protocolos bloqueados : http:// plano (inseguro)");
 console.log("Consentimiento        : Obligatorio mediante diálogo nativo del navegador");
@@ -116,20 +155,101 @@ console.log("Consentimiento        : Obligatorio mediante diálogo nativo del na
 // ==============================================================================
 // BLOQUE 3: EL MÉTODO ASÍNCRONO getCurrentPosition()
 // ==============================================================================
-imprimirSeparador(3, "EL MÉTODO ASÍNCRONO getCurrentPosition()");
+imprimirSeparador(3, "EL MÉTODO ASÍNCRONO getCurrentPosition() (LECTURA ÚNICA)");
 
 // Sintaxis canónica:
 // navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options);
-console.log("Firma del método : navigator.geolocation.getCurrentPosition(success, error, options)");
-console.log("Parámetro 1      : successCallback (Obligatorio) -> Recibe GeolocationPosition");
-console.log("Parámetro 2      : errorCallback   (Recomendado) -> Recibe GeolocationPositionError");
-console.log("Parámetro 3      : options         (Opcional)    -> Objeto JSON de configuración");
+console.log("Propósito       : Obtiene la ubicación física actual del dispositivo UNA SOLA VEZ.");
+console.log("Comportamiento  : Realiza la consulta, ejecuta el callback correspondiente y se apaga.");
+console.log("Firma del método: navigator.geolocation.getCurrentPosition(success, error, options)");
 
 
 // ==============================================================================
-// BLOQUE 4: CALLBACK DE ÉXITO: OBJETO position Y coords
+// BLOQUE 4: EL MÉTODO DE SEGUIMIENTO EN TIEMPO REAL: watchPosition() Y clearWatch()
 // ==============================================================================
-imprimirSeparador(4, "CALLBACK DE ÉXITO: ANATOMÍA DE position.coords");
+imprimirSeparador(4, "EL MÉTODO watchPosition() Y clearWatch() (SEGUIMIENTO EN VIVO)");
+
+// A diferencia de 'getCurrentPosition()', 'watchPosition()' registra una función de
+// escucha que se ejecuta automáticamente CADA VEZ que el dispositivo detecta un
+// cambio significativo en sus coordenadas o precisión (por ejemplo, cuando el usuario camina o viaja en auto).
+//
+// ⚠️ IMPORTANTE: 'watchPosition()' devuelve un número identificador (ID) único,
+// exactamente igual que 'setInterval()'. Para detener el consumo de batería y GPS,
+// debemos pasar ese ID al método 'navigator.geolocation.clearWatch(id)'.
+
+console.log("Firma de inicio  : const watchId = navigator.geolocation.watchPosition(success, error, options);");
+console.log("Firma de parada  : navigator.geolocation.clearWatch(watchId);");
+console.log("Retorno de watch : Un identificador entero positivo (watchId) para cancelar el listener.");
+
+
+// ==============================================================================
+// BLOQUE 5: COMPARATIVA: getCurrentPosition() VS. watchPosition()
+// ==============================================================================
+imprimirSeparador(5, "COMPARATIVA: getCurrentPosition() VS. watchPosition()");
+
+const tablaComparativa = [
+    {
+        criterio: "Frecuencia",
+        getCurrentPosition: "1 sola vez (disparo único)",
+        watchPosition: "Continua (cada cambio de posición)"
+    },
+    {
+        criterio: "Uso de Recursos",
+        getCurrentPosition: "Bajo (se apaga de inmediato)",
+        watchPosition: "Alto (mantiene sensores GPS activos)"
+    },
+    {
+        criterio: "Método de Parada",
+        getCurrentPosition: "No requiere (finaliza solo)",
+        watchPosition: "clearWatch(id) OBLIGATORIO"
+    },
+    {
+        criterio: "Casos de Uso",
+        getCurrentPosition: "Tiendas cercanas, clima actual, check-in",
+        watchPosition: "Apps de running/fitness, Waze, Uber, delivery"
+    }
+];
+
+tablaComparativa.forEach(fila => {
+    console.log(`[${fila.criterio.padEnd(16)}] -> getCurrent: ${fila.getCurrentPosition}`);
+    console.log(`${" ".repeat(21)}-> watch       : ${fila.watchPosition}`);
+});
+
+
+// ==============================================================================
+// BLOQUE 6: DEMOSTRACIÓN DE watchPosition() EN ACCIÓN
+// ==============================================================================
+imprimirSeparador(6, "DEMOSTRACIÓN DE watchPosition() CON clearWatch()");
+
+let conteoActualizaciones = 0;
+
+// Iniciamos el seguimiento en vivo
+const miWatchId = navigator.geolocation.watchPosition(
+    (pos) => {
+        conteoActualizaciones++;
+        const { latitude, longitude, accuracy, speed } = pos.coords;
+        console.log(`📍 [watchPosition tick #${conteoActualizaciones}]`);
+        console.log(`   Lat: ${latitude.toFixed(6)}° | Lng: ${longitude.toFixed(6)}° | ±${accuracy.toFixed(1)}m | Vel: ${speed} m/s`);
+
+        // Por seguridad pedagógica, tras 3 lecturas detenemos el seguimiento con clearWatch
+        if (conteoActualizaciones >= 3) {
+            console.log(`🛑 [clearWatch] Deteniendo el seguimiento del watchId #${miWatchId} para ahorrar batería.`);
+            navigator.geolocation.clearWatch(miWatchId);
+        }
+    },
+    (err) => {
+        console.error("Error en watchPosition:", err.message);
+    },
+    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+);
+
+console.log(`Watch iniciado con éxito. Identificador asignado: #${miWatchId}`);
+
+
+// ==============================================================================
+// BLOQUE 7: CALLBACK DE ÉXITO: OBJETO position Y coords
+// ==============================================================================
+imprimirSeparador(7, "CALLBACK DE ÉXITO: ANATOMÍA DE position.coords");
 
 // Cuando la triangulación concluye, el callback recibe un objeto 'GeolocationPosition':
 navigator.geolocation.getCurrentPosition(
@@ -144,28 +264,28 @@ navigator.geolocation.getCurrentPosition(
 
 
 // ==============================================================================
-// BLOQUE 5: EXTRACCIÓN Y DESESTRUCTURACIÓN DE COORDENADAS
+// BLOQUE 8: EXTRACCIÓN Y DESESTRUCTURACIÓN DE COORDENADAS
 // ==============================================================================
-imprimirSeparador(5, "EXTRACCIÓN DE MÉTRICAS GEOGRÁFICAS");
+imprimirSeparador(8, "EXTRACCIÓN DE MÉTRICAS GEOGRÁFICAS");
 
 navigator.geolocation.getCurrentPosition((pos) => {
-    const { latitude, longitude, accuracy, altitude } = pos.coords;
+    const { latitude, longitude, accuracy, altitude, speed } = pos.coords;
     const horaLectura = new Date(pos.timestamp).toLocaleTimeString();
 
     console.log("Latitud decimal          :", latitude.toFixed(6) + "°");
     console.log("Longitud decimal         :", longitude.toFixed(6) + "°");
     console.log("Margen de precisión      : ±" + Math.round(accuracy) + " metros (95% confianza)");
     console.log("Altitud sobre nivel mar  :", altitude !== null ? altitude + " m" : "null (no disponible)");
+    console.log("Velocidad instantánea    :", speed !== null ? speed + " m/s" : "null (estático)");
     console.log("Hora de captura satelital:", horaLectura);
 });
 
 
 // ==============================================================================
-// BLOQUE 6: CALLBACK DE ERROR: OBJETO GeolocationPositionError
+// BLOQUE 9: CALLBACK DE ERROR: OBJETO GeolocationPositionError
 // ==============================================================================
-imprimirSeparador(6, "CALLBACK DE ERROR Y CÓDIGOS NUMÉRICOS");
+imprimirSeparador(9, "CALLBACK DE ERROR Y CÓDIGOS NUMÉRICOS");
 
-// Si falla la consulta, el objeto de error contiene 'code' (número) y 'message' (texto):
 const codigosError = [
     { codigo: 1, constante: "PERMISSION_DENIED",    motivo: "El usuario pulsó 'Bloquear' en el diálogo de permisos" },
     { codigo: 2, constante: "POSITION_UNAVAILABLE", motivo: "Fallo físico de señal (sin cobertura GPS ni red Wi-Fi)" },
@@ -178,19 +298,19 @@ codigosError.forEach(item => {
 
 
 // ==============================================================================
-// BLOQUE 7: GESTIÓN DE FALLOS CON switch(error.code)
+// BLOQUE 10: GESTIÓN DE FALLOS CON switch(error.code)
 // ==============================================================================
-imprimirSeparador(7, "GESTIÓN ROBUSTA DE ERRORES CON switch");
+imprimirSeparador(10, "GESTIÓN ROBUSTA DE ERRORES CON switch");
 
 const manejarErrorGeolocalizacion = (error) => {
     switch (error.code) {
-        case 1: // error.PERMISSION_DENIED
+        case 1:
             console.error("❌ Código 1: El usuario denegó el acceso a la ubicación.");
             break;
-        case 2: // error.POSITION_UNAVAILABLE
+        case 2:
             console.error("❌ Código 2: Ubicación física no disponible en este momento.");
             break;
-        case 3: // error.TIMEOUT
+        case 3:
             console.error("❌ Código 3: Se agotó el tiempo de espera de la consulta.");
             break;
         default:
@@ -199,19 +319,13 @@ const manejarErrorGeolocalizacion = (error) => {
     }
 };
 
-// Demostramos el manejador simulando un error de timeout:
 manejarErrorGeolocalizacion({ code: 3, message: "Timeout expired" });
 
 
 // ==============================================================================
-// BLOQUE 8: OBJETO DE CONFIGURACIÓN 'options'
+// BLOQUE 11: OBJETO DE CONFIGURACIÓN 'options'
 // ==============================================================================
-imprimirSeparador(8, "CALIBRACIÓN CON EL OBJETO options");
-
-// Las 3 propiedades fundamentales de options:
-// 1. enableHighAccuracy (bool): true activa chip GPS (más consumo). false usa Wi-Fi/IP.
-// 2. timeout (ms): Límite de espera tras otorgar el permiso (ej. 5000 ms = 5s).
-// 3. maximumAge (ms): Antigüedad máxima de la posición en caché (0 = siempre fresca).
+imprimirSeparador(11, "CALIBRACIÓN CON EL OBJETO options");
 
 const opcionesConfiguradas = {
     enableHighAccuracy: true,
@@ -223,141 +337,77 @@ console.log("Configuración de alta precisión :", opcionesConfiguradas);
 
 
 // ==============================================================================
-// BLOQUE 9: ANALOGÍAS DEL MUNDO REAL (LÁSER SATELITAL Y FOTO CON VENCIMIENTO)
+// BLOQUE 12: ANALOGÍAS DEL MUNDO REAL
 // ==============================================================================
-imprimirSeparador(9, "ANALOGÍAS DEL MUNDO REAL: LÁSER 🛰️ Y FOTO ⏱️");
+imprimirSeparador(12, "ANALOGÍAS DEL MUNDO REAL");
 
 console.log(`
-🛰️ ANALOGÍA 1: EL MENSAJERO Y EL LÁSER SATELITAL (enableHighAccuracy)
-  - Con enableHighAccuracy: false, el repartidor mira el vecindario general mirando la
-    estación de tren (rápido, pero con margen de varias calles).
+📸 ANALOGÍA A: LA FOTOGRAFÍA VS. LA TRANSMISIÓN EN VIVO
+  - getCurrentPosition() es tomar UNA FOTO con la cámara: capturas el instante exacto,
+    guardas la imagen y guardas la cámara en el bolsillo (gasto mínimo de batería).
+  - watchPosition() es iniciar una TRANSMISIÓN EN VIVO (Live Streaming): la cámara
+    permanece encendida todo el tiempo transmitiendo cada paso que das (máximo detalle,
+    pero si no la apagas con clearWatch(), vaciará la batería de tu teléfono).
+
+🛰️ ANALOGÍA B: EL MENSAJERO Y EL LÁSER SATELITAL (enableHighAccuracy)
+  - Con enableHighAccuracy: false, el repartidor mira la estación de tren más cercana (rápido).
   - Con enableHighAccuracy: true, el repartidor enciende un visor láser satelital para
     ubicar la puerta exacta de tu casa (toma más tiempo y consume más batería).
-
-⏱️ ANALOGÍA 2: LA FOTO CON VENCIMIENTO (timeout y maximumAge)
-  - timeout es esperar el mensaje de un amigo con su ubicación: si no contesta en 5s, abortas.
-  - maximumAge es ver la última foto enviada: si tiene menos de 1 minuto (maximumAge > 0),
-    asumes que sigue ahí; si necesitas saber dónde está ahora (maximumAge: 0), pides una foto nueva.
 `);
 
 
 // ==============================================================================
-// BLOQUE 10: DIAGRAMA DE FLUJO DE SOLICITUD DE UBICACIÓN
+// BLOQUE 13: BUENA PRÁCTICA: DETENER watchPosition CON clearWatch()
 // ==============================================================================
-imprimirSeparador(10, "DIAGRAMA DE FLUJO DE SOLICITUD DE UBICACIÓN");
+imprimirSeparador(13, "BUENA PRÁCTICA: DETENER SIEMPRE watchPosition() CON clearWatch()");
 
-console.log(`
-   [ Llamada a getCurrentPosition(success, error, options) ]
-                               │
-                               ▼
-                   ¿Soporta Geolocation y HTTPS?
-                               │
-                     ┌─────────┴─────────┐
-                     ▼                   ▼
-                 [ SÍ ]                [ NO ] ──► Fallo inmediato / API no disponible
-                     │
-                     ▼
-          ¿Permiso ya otorgado?
-                     │
-           ┌─────────┴─────────┐
-           ▼                   ▼
-       [ SÍ ]                [ NO ] ──► Muestra diálogo nativo de permisos
-           │                                      │
-           │                            ┌─────────┴─────────┐
-           │                            ▼                   ▼
-           │                        [ Acepta ]          [ Rechaza ]
-           │                            │                   │
-           └────────────┬───────────────┘                   ▼
-                        ▼                     ( error.PERMISSION_DENIED )
-            Evalúa maximumAge en caché
-                        │
-              ┌─────────┴─────────┐
-              ▼                   ▼
-     ¿Caché válida?         ¿Caché caducada?
-              │                   │
-              │                   ▼
-              │        Activa GPS / Redes según enableHighAccuracy
-              │                   │
-              │         ¿Responde antes de timeout?
-              │                   │
-              │         ┌─────────┴─────────┐
-              │         ▼                   ▼
-              │       [ SÍ ]              [ NO ] ──► ( error.TIMEOUT )
-              │         │
-              ▼         ▼
-     ( Ejecuta successCallback con objeto position )
-`);
+console.log("✅ Regla de Oro en Producción:");
+console.log("   Siempre que uses watchPosition(), debes guardar su ID y ejecutar");
+console.log("   clearWatch(id) cuando el usuario cambie de pestaña, cierre el modal o");
+console.log("   el componente se desmonte (en React/Vue: componentWillUnmount / onUnmounted).");
 
 
 // ==============================================================================
-// BLOQUE 11: BUENA PRÁCTICA 1: GESTIÓN DE ERRORES CON FEEDBACK AL USUARIO
+// BLOQUE 14: ERROR COMÚN: TYPO EN enableHighAccuracy Y HTTP INSEGURO
 // ==============================================================================
-imprimirSeparador(11, "BUENA PRÁCTICA 1: FEEDBACK OBLIGATORIO ANTE ERRORES");
+imprimirSeparador(14, "ERRORES COMUNES (TYPO Y CONTEXTO INSEGURO)");
 
-console.log("✅ Regla de Oro: Nunca omitas el callback de error.");
-console.log("   Si el usuario bloquea los permisos y no manejas el error,");
-console.log("   tu aplicación quedará congelada sin ninguna explicación visual.");
-
-
-// ==============================================================================
-// BLOQUE 12: BUENA PRÁCTICA 2: CALIBRAR maximumAge
-// ==============================================================================
-imprimirSeparador(12, "BUENA PRÁCTICA 2: AHORRO DE BATERÍA CON maximumAge");
-
-console.log("✅ Si tu app solo necesita conocer la ciudad o región aproximada,");
-console.log("   define maximumAge: 60000 (1 min) o 300000 (5 min) para evitar encender el chip GPS.");
-
-
-// ==============================================================================
-// BLOQUE 13: ERROR COMÚN: TYPO EN enableHighAccuracy
-// ==============================================================================
-imprimirSeparador(13, "ERROR COMÚN: TYPO 'enableHightAccuracy' CON 't'");
-
-// ❌ Error clásico: escribir "enableHightAccuracy" (con 't' intermedia)
-const opcionesConTypo = { enableHightAccuracy: true };
 console.log("❌ enableHightAccuracy (con 't') : El navegador la ignora y usa false por defecto.");
 console.log("✅ enableHighAccuracy  (sin 't') : Propiedad estándar reconocida por la especificación.");
+console.log("❌ Servir en http:// plano       : Bloqueo inmediato del navegador por falta de SSL.");
 
 
 // ==============================================================================
-// BLOQUE 14: ERROR COMÚN: EJECUCIÓN EN HTTP INSEGURO
+// BLOQUE 15: PROYECTO INTEGRADOR: RASTREADOR EN TIEMPO REAL
 // ==============================================================================
-imprimirSeparador(14, "ERROR COMÚN: EJECUCIÓN EN HTTP INSEGURO");
+imprimirSeparador(15, "PROYECTO INTEGRADOR: RASTREADOR EN TIEMPO REAL");
 
-console.log("❌ En dominios 'http://', el navegador bloquea la llamada por seguridad.");
-console.log("✅ Solución: Instalar certificados SSL/TLS (HTTPS) o probar en 'localhost'.");
+const iniciarRastreadorEnVivo = () => {
+    let watchId = null;
 
-
-// ==============================================================================
-// BLOQUE 15: PROYECTO INTEGRADOR: RASTREADOR DE POSICIÓN
-// ==============================================================================
-imprimirSeparador(15, "PROYECTO INTEGRADOR: RASTREADOR Y MAPA OPENSTREETMAP");
-
-const rastrearUsuario = () => {
-    const opcionesRastreo = {
-        enableHighAccuracy: true,
-        timeout: 8000,
-        maximumAge: 0
+    const iniciar = () => {
+        watchId = navigator.geolocation.watchPosition(
+            ({ coords }) => {
+                const osmUrl = `https://www.openstreetmap.org/#map=18/${coords.latitude}/${coords.longitude}`;
+                console.log(`🗺️ [En vivo] Posición: ${coords.latitude.toFixed(6)}, ${coords.longitude.toFixed(6)} | Ver mapa: ${osmUrl}`);
+            },
+            (err) => console.error("Error en rastreador:", err.message),
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+        return watchId;
     };
 
-    const exito = ({ coords, timestamp }) => {
-        const { latitude, longitude, accuracy } = coords;
-        const enlaceMapa = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=16/${latitude}/${longitude}`;
-
-        console.log("1. Posición fijada exitosamente:");
-        console.log(`   Lat: ${latitude.toFixed(6)}° | Lng: ${longitude.toFixed(6)}° | Margen: ±${Math.round(accuracy)}m`);
-        console.log("2. Enlace generado a OpenStreetMap:");
-        console.log(`   ${enlaceMapa}`);
+    const detener = (id) => {
+        navigator.geolocation.clearWatch(id);
+        console.log(`🛑 Rastreador #${id} detenido.`);
     };
 
-    const fallo = (error) => {
-        console.error("Fallo al rastrear:", error.message);
-    };
-
-    navigator.geolocation.getCurrentPosition(exito, fallo, opcionesRastreo);
+    return { iniciar, detener };
 };
 
-rastrearUsuario();
+const rastreador = iniciarRastreadorEnVivo();
+const idActivo = rastreador.iniciar();
+setTimeout(() => rastreador.detener(idActivo), 250);
 
 
 // ==============================================================================
@@ -365,8 +415,8 @@ rastrearUsuario();
 // ==============================================================================
 imprimirSeparador(16, "RESOLUCIÓN DE LOS 3 RETOS PRÁCTICOS (NIVELES 1, 2 Y 3)");
 
-// --- RETO NIVEL 1 (Junior): Consulta Simple ---
-console.log("--- RETO NIVEL 1 (Junior): Consulta Simple de Coordenadas ---");
+// --- RETO NIVEL 1 (Junior): Consulta Simple con getCurrentPosition ---
+console.log("--- RETO NIVEL 1 (Junior): Consulta Simple ---");
 navigator.geolocation.getCurrentPosition((pos) => {
     const { latitude, longitude, accuracy } = pos.coords;
     console.log(`Latitud: ${latitude}, Longitud: ${longitude}, Precisión: ±${accuracy}m`);
@@ -383,18 +433,19 @@ const gestorErrores = (err) => {
 };
 navigator.geolocation.getCurrentPosition(pos => console.log("OK Nivel 2:", pos.coords.latitude), gestorErrores);
 
-// --- RETO NIVEL 3 (Producción): options y Enlace ---
-console.log("\n--- RETO NIVEL 3 (Producción): Calibrador con options y Enlace ---");
-const opcionesReto3 = { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 };
-navigator.geolocation.getCurrentPosition(
+// --- RETO NIVEL 3 (Producción): watchPosition y clearWatch ---
+console.log("\n--- RETO NIVEL 3 (Producción): Seguimiento Continuo con watchPosition y clearWatch ---");
+let reto3Id = null;
+reto3Id = navigator.geolocation.watchPosition(
     ({ coords }) => {
-        const url = `https://www.openstreetmap.org/#map=16/${coords.latitude}/${coords.longitude}`;
-        console.log("Enlace Nivel 3 generado:", url);
+        console.log(`[Reto 3 Live] Lat: ${coords.latitude.toFixed(6)} | Lng: ${coords.longitude.toFixed(6)}`);
+        // Cancelamos inmediatamente para limpiar la prueba
+        navigator.geolocation.clearWatch(reto3Id);
     },
-    err => console.warn(err.message),
-    opcionesReto3
+    (err) => console.warn(err.message),
+    { enableHighAccuracy: true }
 );
 
 console.log("\n" + "=".repeat(78));
-console.log("🎯 [FIN DEL LABORATORIO]: Módulo de Geolocation API completado.");
+console.log("🎯 [FIN DEL LABORATORIO]: Módulo de Geolocation API (con watchPosition) completado.");
 console.log("=".repeat(78) + "\n");
