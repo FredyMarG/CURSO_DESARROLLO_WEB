@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería Dinámica | JavaScript Master Level</title>
+    <!-- Tipografías de Google Fonts: Outfit para textos y Fira Code para métricas/código -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Efectos visuales de iluminación de fondo -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Contenedor principal de la aplicación -->
+    <div class="contenedor-app">
+        <!-- Encabezado de la galería -->
+        <header class="header-galeria">
+            <span class="badge-modulo">JAVASCRIPT MASTER LEVEL</span>
+            <h1 class="titulo-galeria">🖼️ Galería Dinámica con FileReader API</h1>
+            <p class="subtitulo-galeria">
+                Selecciona o arrastra imágenes locales para procesarlas asíncronamente en el cliente mediante 
+                <code>FileReader.readAsDataURL()</code> y renderizarlas en una cuadrícula mosaico interactiva (Bento Grid).
+            </p>
+        </header>
+
+        <!-- Panel de control y zona de carga de archivos -->
+        <section class="panel-carga">
+            <!-- Zona interactiva Drag & Drop -->
+            <div class="zona-drop" id="zonaDrop">
+                <span class="icono-drop">📥</span>
+                <p class="texto-drop-principal">Arrastra y suelta tus imágenes aquí</p>
+                <p class="texto-drop-secundario">o pulsa para explorar archivos desde tu equipo (JPG, PNG, WebP, GIF, SVG)</p>
+                <!-- Input de tipo file original con soporte para múltiples archivos -->
+                <input type="file" id="archivo" class="input-archivo-oculto" multiple accept="image/*">
+            </div>
+
+            <!-- Barra de botones de acción y estadísticas -->
+            <div class="barra-acciones">
+                <div class="grupo-botones">
+                    <button type="button" class="btn btn-primario" id="btnSeleccionar">
+                        📁 Seleccionar Fotos
+                    </button>
+                    <button type="button" class="btn btn-secundario" id="btnCargarDemo">
+                        ⚡ Cargar Fotos Demo
+                    </button>
+                    <button type="button" class="btn btn-peligro" id="btnLimpiar">
+                        🗑️ Limpiar Galería
+                    </button>
+                </div>
+
+                <!-- Métricas en vivo del lote de imágenes -->
+                <div class="metricas-lote" id="metricasLote">
+                    <span>Imágenes: <strong id="contadorFotos">0</strong></span>
+                    <span class="separador-metrica">|</span>
+                    <span>Peso total: <strong id="tamanoTotal">0 KB</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensaje de estado vacío cuando no hay imágenes -->
+        <div class="estado-vacio" id="estadoVacio">
+            <span class="icono-vacio">🌄</span>
+            <p>Tu galería está vacía actualmente.</p>
+            <p class="subtexto-vacio">Haz clic en <strong>"📁 Seleccionar Fotos"</strong> o <strong>"⚡ Cargar Fotos Demo"</strong> para comenzar.</p>
+        </div>
+
+        <!-- Contenedor principal donde se inyectan las imágenes dinámicamente -->
+        <main class="resultado" id="resultado"></main>
+    </div>
+
+    <!-- Modal Lightbox para visualización de imagen en tamaño completo -->
+    <div class="modal-lightbox" id="modalLightbox">
+        <div class="lightbox-contenido">
+            <button type="button" class="btn-cerrar-modal" id="btnCerrarModal" title="Cerrar modal (Escape)">✕</button>
+            <img src="" alt="Vista previa en alta resolución" id="imgLightbox" class="img-lightbox">
+            <div class="lightbox-info">
+                <span class="lightbox-nombre" id="nombreLightbox">imagen.png</span>
+                <span class="lightbox-tamano" id="tamanoLightbox">0 KB</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script principal de la galería -->
+    <script src="main.js"></script>
+</body>
+</html>

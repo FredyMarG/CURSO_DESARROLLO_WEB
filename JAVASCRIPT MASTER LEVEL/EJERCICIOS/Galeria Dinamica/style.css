@@ -1,0 +1,1027 @@
+/**
+ * ==============================================================================
+ * 🎨 EJERCICIO PRÁCTICO: GALERÍA DINÁMICA DE IMÁGENES (BENTO GRID & FILEREADER API)
+ * ==============================================================================
+ * Archivo: style.css
+ * Propósito: Estilos visuales modernos, sistema de diseño responsivo y cuadrícula
+ *            tipo mosaico (Bento Grid) con animaciones fluidas y visor Lightbox.
+ * Documentación pedagógica detallada línea por línea al 100%.
+ * ==============================================================================
+ */
+
+/* ==============================================================================
+   1. VARIABLES GLOBALES DE DISEÑO (:root)
+   ============================================================================== */
+
+/* Selector de la raíz del documento para centralizar colores, tipografías y métricas */
+:root {
+    /* Color de fondo principal de la página: azul ultra profundo */
+    --bg-principal: #070a13;
+    /* Color de fondo de los paneles y tarjetas: azul noche traslúcido */
+    --bg-tarjeta: rgba(15, 23, 42, 0.75);
+    /* Color de fondo para superficies elevadas y botones secundarios */
+    --bg-superficie: rgba(30, 41, 59, 0.65);
+    /* Color de fondo al pasar el cursor (hover) */
+    --bg-hover: rgba(51, 65, 85, 0.85);
+
+    /* Color primario de énfasis: índigo vibrante */
+    --color-primario: #6366f1;
+    /* Resplandor luminoso neón para el color primario */
+    --resplandor-primario: rgba(99, 102, 241, 0.35);
+    /* Color secundario tecnológico: cian neón */
+    --color-cian: #06b6d4;
+    /* Resplandor neón para el cian */
+    --resplandor-cian: rgba(6, 182, 212, 0.3);
+    /* Color semántico de advertencia o peligro: rosa carmesí */
+    --color-peligro: #f43f5e;
+    /* Resplandor neón para el tono de peligro */
+    --resplandor-peligro: rgba(244, 63, 94, 0.3);
+
+    /* Color de texto principal: blanco hueso de alto contraste */
+    --texto-principal: #f8fafc;
+    /* Color de texto secundario: gris azulado para descripciones */
+    --texto-secundario: #94a3b8;
+    /* Color de texto atenuado para metadatos y notas */
+    --texto-atenuado: #64748b;
+
+    /* Borde sutil traslúcido de 8% de opacidad blanca */
+    --borde-sutil: rgba(255, 255, 255, 0.08);
+    /* Borde interactivo con acento de color primario */
+    --borde-acento: rgba(99, 102, 241, 0.4);
+
+    /* Familia tipográfica principal para títulos y párrafos */
+    --fuente-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Familia tipográfica monoespaciada para códigos y métricas numéricas */
+    --fuente-mono: 'Fira Code', ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+    /* Radio de curvatura pequeño para botones e insignias */
+    --radio-sm: 8px;
+    /* Radio de curvatura mediano para tarjetas de imágenes */
+    --radio-md: 14px;
+    /* Radio de curvatura grande para paneles y modales */
+    --radio-lg: 20px;
+    /* Radio de curvatura completa para píldoras */
+    --radio-pildora: 9999px;
+
+    /* Transición suave para micro-interacciones al pasar el ratón */
+    --transicion-rapida: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Transición fluida para aperturas y transformaciones complejas */
+    --transicion-suave: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==============================================================================
+   2. REINICIO DE ESTILOS Y ESTRUCTURA BASE
+   ============================================================================== */
+
+/* Aplicamos el modelo de caja border-box a todos los elementos del documento */
+*, *::before, *::after {
+    /* Incluye padding y border en el cálculo del ancho y alto total */
+    box-sizing: border-box;
+    /* Eliminamos los márgenes por defecto del navegador */
+    margin: 0;
+    /* Eliminamos el relleno por defecto del navegador */
+    padding: 0;
+}
+
+/* Configuración del cuerpo del documento */
+body {
+    /* Color de fondo principal oscuro */
+    background-color: var(--bg-principal);
+    /* Asignamos la tipografía principal */
+    font-family: var(--fuente-sans);
+    /* Color de texto claro predeterminado */
+    color: var(--texto-principal);
+    /* Altura mínima del 100% del viewport */
+    min-height: 100vh;
+    /* Posicionamiento relativo para contener los efectos luminosos absolutos */
+    position: relative;
+    /* Ocultamos cualquier desbordamiento horizontal accidental */
+    overflow-x: hidden;
+    /* Suavizado de fuentes para renderizado nítido */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==============================================================================
+   3. EFECTOS LUMINOSOS AMBIENTALES DE FONDO
+   ============================================================================== */
+
+/* Capa de iluminación difusa superior izquierda */
+.bg-glow {
+    /* Posicionamiento absoluto respecto a body */
+    position: fixed;
+    /* Anchura fija de la burbuja de luz */
+    width: 450px;
+    /* Altura fija de la burbuja de luz */
+    height: 450px;
+    /* Radio circular perfecto */
+    border-radius: 50%;
+    /* Filtro de desenfoque gaussiano para crear efecto neón difuso */
+    filter: blur(140px);
+    /* Desactivamos eventos de puntero para que no bloquee clics */
+    pointer-events: none;
+    /* Capa de profundidad detrás del contenido */
+    z-index: 0;
+    /* Opacidad sutil */
+    opacity: 0.35;
+}
+
+/* Posición y color de la primera burbuja luminosa */
+.glow-1 {
+    /* Ubicada en la parte superior */
+    top: -100px;
+    /* Alineada hacia la izquierda */
+    left: -100px;
+    /* Gradiente radial índigo */
+    background: radial-gradient(circle, var(--color-primario), transparent 70%);
+}
+
+/* Posición y color de la segunda burbuja luminosa */
+.glow-2 {
+    /* Ubicada hacia el fondo de la pantalla */
+    bottom: -100px;
+    /* Alineada hacia la derecha */
+    right: -100px;
+    /* Gradiente radial cian */
+    background: radial-gradient(circle, var(--color-cian), transparent 70%);
+}
+
+/* ==============================================================================
+   4. CONTENEDOR PRINCIPAL Y ENCABEZADO DE LA GALERÍA
+   ============================================================================== */
+
+/* Envoltorio principal que centra el contenido en pantalla */
+.contenedor-app {
+    /* Anchura máxima de contenido para pantallas grandes */
+    max-width: 1200px;
+    /* Centrado horizontal automático */
+    margin: 0 auto;
+    /* Relleno interno en los bordes */
+    padding: 2.5rem 1.5rem 4rem;
+    /* Posicionamiento relativo para estar por encima del fondo */
+    position: relative;
+    /* Capa de profundidad superior */
+    z-index: 1;
+}
+
+/* Cabecera descriptiva de la aplicación */
+.header-galeria {
+    /* Centramos el texto del encabezado */
+    text-align: center;
+    /* Espacio inferior de separación */
+    margin-bottom: 2rem;
+}
+
+/* Insignia pequeña que indica el módulo del curso */
+.badge-modulo {
+    /* Visualización en línea de bloque */
+    display: inline-block;
+    /* Relleno interno superior/inferior y lateral */
+    padding: 0.3rem 0.85rem;
+    /* Fondo translúcido con tono índigo */
+    background: rgba(99, 102, 241, 0.15);
+    /* Borde fino del color primario */
+    border: 1px solid var(--borde-acento);
+    /* Bordes completamente redondeados */
+    border-radius: var(--radio-pildora);
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto reducido */
+    font-size: 0.72rem;
+    /* Peso tipográfico seminegrita */
+    font-weight: 600;
+    /* Letras en mayúsculas */
+    text-transform: uppercase;
+    /* Espaciado entre letras */
+    letter-spacing: 0.08em;
+    /* Color de texto primario */
+    color: var(--color-cian);
+    /* Separación inferior */
+    margin-bottom: 0.8rem;
+}
+
+/* Título principal de la galería */
+.titulo-galeria {
+    /* Tamaño de fuente grande y legible */
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    /* Peso tipográfico muy marcado */
+    font-weight: 800;
+    /* Altura de línea compacta */
+    line-height: 1.2;
+    /* Color de texto principal */
+    color: var(--texto-principal);
+    /* Margen inferior */
+    margin-bottom: 0.6rem;
+}
+
+/* Subtítulo explicativo del temario */
+.subtitulo-galeria {
+    /* Tamaño de texto intermedio */
+    font-size: 1rem;
+    /* Color de texto secundario para no competir con el título */
+    color: var(--texto-secundario);
+    /* Anchura máxima para lectura cómoda */
+    max-width: 680px;
+    /* Centrado horizontal automático */
+    margin: 0 auto;
+    /* Altura de línea relajada */
+    line-height: 1.6;
+}
+
+/* Estilo para los bloques inline de código dentro del subtítulo */
+.subtitulo-galeria code {
+    /* Fondo oscuro para destacar código */
+    background: rgba(255, 255, 255, 0.08);
+    /* Relleno interno fino */
+    padding: 0.15rem 0.4rem;
+    /* Bordes redondeados */
+    border-radius: 4px;
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño proporcional */
+    font-size: 0.88em;
+    /* Color de texto cian */
+    color: var(--color-cian);
+}
+
+/* ==============================================================================
+   5. PANEL DE CARGA: ZONA DRAG & DROP Y BARRA DE ACCIONES
+   ============================================================================== */
+
+/* Panel contenedor de la zona de subida y botones */
+.panel-carga {
+    /* Fondo translúcido con efecto vidrio (glassmorphism) */
+    background: var(--bg-tarjeta);
+    /* Borde sutil que delimita la tarjeta */
+    border: 1px solid var(--borde-sutil);
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-lg);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Sombra elegante de elevación */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    /* Desenfoque del fondo translúcido */
+    backdrop-filter: blur(12px);
+    /* Separación con el grid inferior */
+    margin-bottom: 2rem;
+}
+
+/* Zona interactiva de arrastre y soltado de archivos */
+.zona-drop {
+    /* Borde discontinuo (dashed) que invita a soltar archivos */
+    border: 2px dashed rgba(255, 255, 255, 0.18);
+    /* Bordes redondeados */
+    border-radius: var(--radio-md);
+    /* Fondo oscuro semitransparente */
+    background: rgba(14, 21, 38, 0.45);
+    /* Relleno interno amplio */
+    padding: 2rem 1rem;
+    /* Centrado de los elementos */
+    text-align: center;
+    /* Cursor de puntero que indica interactividad */
+    cursor: pointer;
+    /* Transición fluida para cambios de color y escala */
+    transition: all var(--transicion-rapida);
+    /* Posicionamiento relativo para contener el input oculto */
+    position: relative;
+}
+
+/* Efecto hover sobre la zona de arrastre */
+.zona-drop:hover {
+    /* Borde de acento cian */
+    border-color: var(--color-cian);
+    /* Fondo sutilmente coloreado con cian */
+    background: rgba(6, 182, 212, 0.06);
+    /* Resplandor neón cian */
+    box-shadow: 0 0 25px var(--resplandor-cian);
+}
+
+/* Estado activo cuando el usuario arrastra un archivo por encima */
+.zona-drop.dragover {
+    /* Borde más grueso y vibrante */
+    border-color: var(--color-primario);
+    /* Fondo más iluminado */
+    background: rgba(99, 102, 241, 0.12);
+    /* Ligera escala de elevación */
+    transform: scale(1.01);
+    /* Resplandor neón primario */
+    box-shadow: 0 0 30px var(--resplandor-primario);
+}
+
+/* Icono grande del área de arrastre */
+.icono-drop {
+    /* Tamaño grande y destacado */
+    font-size: 2.4rem;
+    /* Mostrado como bloque para forzar salto de línea */
+    display: block;
+    /* Separación inferior */
+    margin-bottom: 0.5rem;
+    /* Transición suave al pasar el ratón */
+    transition: transform var(--transicion-rapida);
+}
+
+/* Animación de salto del icono en hover */
+.zona-drop:hover .icono-drop {
+    /* Se eleva 4 píxeles */
+    transform: translateY(-4px);
+}
+
+/* Texto principal dentro del área de arrastre */
+.texto-drop-principal {
+    /* Tamaño de texto destacado */
+    font-size: 1.05rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Color de texto blanco hueso */
+    color: var(--texto-principal);
+    /* Separación inferior */
+    margin-bottom: 0.3rem;
+}
+
+/* Texto secundario de formatos permitidos */
+.texto-drop-secundario {
+    /* Tamaño de texto reducido */
+    font-size: 0.85rem;
+    /* Color de texto atenuado */
+    color: var(--texto-secundario);
+}
+
+/* Input nativo de tipo file oculto pero accesible */
+.input-archivo-oculto {
+    /* Lo ocultamos visualmente pero mantenemos en el DOM para procesar eventos */
+    position: absolute;
+    /* Ancho mínimo */
+    width: 1px;
+    /* Alto mínimo */
+    height: 1px;
+    /* Relleno cero */
+    padding: 0;
+    /* Margen negativo para sacarlo de flujo */
+    margin: -1px;
+    /* Ocultamos desbordamiento */
+    overflow: hidden;
+    /* Cortamos con clip */
+    clip: rect(0, 0, 0, 0);
+    /* Borde cero */
+    border: 0;
+    /* Opacidad cero */
+    opacity: 0;
+}
+
+/* ==============================================================================
+   6. BOTONES DE ACCIÓN Y MÉTRICAS EN VIVO
+   ============================================================================== */
+
+/* Barra flexible que aloja los botones y las métricas */
+.barra-acciones {
+    /* Modelo de caja flexible */
+    display: flex;
+    /* Envolver en múltiples líneas si no cabe en pantallas pequeñas */
+    flex-wrap: wrap;
+    /* Alinear elementos verticalmente al centro */
+    align-items: center;
+    /* Distribuir espacio entre botones y métricas */
+    justify-content: space-between;
+    /* Espacio entre elementos */
+    gap: 1rem;
+    /* Separación superior respecto a la zona drop */
+    margin-top: 1.25rem;
+}
+
+/* Grupo que envuelve los botones de acción */
+.grupo-botones {
+    /* Modelo flexible */
+    display: flex;
+    /* Envolver si el ancho es estrecho */
+    flex-wrap: wrap;
+    /* Espacio entre botones */
+    gap: 0.65rem;
+}
+
+/* Estilo base compartido para todos los botones */
+.btn {
+    /* Modelo flexible para alinear texto e iconos */
+    display: inline-flex;
+    /* Alineación vertical */
+    align-items: center;
+    /* Alineación horizontal */
+    justify-content: center;
+    /* Relleno interno */
+    padding: 0.65rem 1.15rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-sm);
+    /* Tipografía del sistema */
+    font-family: var(--fuente-sans);
+    /* Tamaño de texto legible */
+    font-size: 0.88rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Cursor interactivo */
+    cursor: pointer;
+    /* Transición de colores y escala */
+    transition: all var(--transicion-rapida);
+    /* Sin subrayado */
+    text-decoration: none;
+    /* Borde transparente por defecto */
+    border: 1px solid transparent;
+}
+
+/* Efecto al presionar cualquier botón */
+.btn:active {
+    /* Ligera contracción que emula pulsación física */
+    transform: scale(0.97);
+}
+
+/* Botón primario: Seleccionar fotos locales */
+.btn-primario {
+    /* Fondo con gradiente lineal primario */
+    background: linear-gradient(135deg, var(--color-primario), #4f46e5);
+    /* Color de texto blanco */
+    color: #ffffff;
+    /* Sombra sutil de relieve */
+    box-shadow: 0 4px 14px var(--resplandor-primario);
+}
+
+/* Hover del botón primario */
+.btn-primario:hover {
+    /* Elevación sutil */
+    transform: translateY(-2px);
+    /* Intensificamos la sombra */
+    box-shadow: 0 6px 20px var(--resplandor-primario);
+}
+
+/* Botón secundario: Cargar imágenes demo */
+.btn-secundario {
+    /* Fondo translúcido */
+    background: var(--bg-superficie);
+    /* Borde sutil */
+    border-color: var(--borde-sutil);
+    /* Color de texto principal */
+    color: var(--texto-principal);
+}
+
+/* Hover del botón secundario */
+.btn-secundario:hover {
+    /* Fondo más brillante */
+    background: var(--bg-hover);
+    /* Borde resaltado */
+    border-color: var(--color-cian);
+    /* Elevación */
+    transform: translateY(-2px);
+    /* Color cian en texto */
+    color: var(--color-cian);
+}
+
+/* Botón de peligro: Limpiar galería */
+.btn-peligro {
+    /* Fondo translúcido rojizo */
+    background: rgba(244, 63, 94, 0.12);
+    /* Borde rojizo sutil */
+    border-color: rgba(244, 63, 94, 0.25);
+    /* Color de texto carmesí */
+    color: var(--color-peligro);
+}
+
+/* Hover del botón de peligro */
+.btn-peligro:hover {
+    /* Fondo rojizo más intenso */
+    background: rgba(244, 63, 94, 0.22);
+    /* Borde rojo vibrante */
+    border-color: var(--color-peligro);
+    /* Elevación sutil */
+    transform: translateY(-2px);
+    /* Sombra neón roja */
+    box-shadow: 0 4px 14px var(--resplandor-peligro);
+}
+
+/* Barra de métricas en vivo */
+.metricas-lote {
+    /* Modelo flexible */
+    display: flex;
+    /* Alineación vertical centrada */
+    align-items: center;
+    /* Espacio entre datos */
+    gap: 0.6rem;
+    /* Tipografía monoespaciada para evitar saltos numéricos */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto reducido */
+    font-size: 0.8rem;
+    /* Color de texto atenuado */
+    color: var(--texto-secundario);
+    /* Fondo oscuro de píldora */
+    background: rgba(0, 0, 0, 0.35);
+    /* Relleno interno */
+    padding: 0.45rem 0.85rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-sm);
+    /* Borde fino */
+    border: 1px solid var(--borde-sutil);
+}
+
+/* Números destacados en las métricas */
+.metricas-lote strong {
+    /* Color cian de alto contraste */
+    color: var(--color-cian);
+}
+
+/* Separador visual entre métricas */
+.separador-metrica {
+    /* Color transparente atenuado */
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==============================================================================
+   7. ESTADO VACÍO (EMPTY STATE)
+   ============================================================================== */
+
+/* Mensaje mostrado cuando la galería aún no tiene fotos cargadas */
+.estado-vacio {
+    /* Centrado de texto */
+    text-align: center;
+    /* Relleno amplio */
+    padding: 3.5rem 1rem;
+    /* Borde fino discontinuo */
+    border: 1px dashed var(--borde-sutil);
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-lg);
+    /* Fondo translúcido */
+    background: rgba(15, 23, 42, 0.35);
+    /* Transición suave para ocultarlo */
+    transition: opacity var(--transicion-rapida), display var(--transicion-rapida);
+}
+
+/* Icono grande del estado vacío */
+.icono-vacio {
+    /* Tamaño grande */
+    font-size: 3rem;
+    /* Bloque para salto de línea */
+    display: block;
+    /* Separación inferior */
+    margin-bottom: 0.8rem;
+    /* Opacidad semitransparente */
+    opacity: 0.7;
+}
+
+/* Texto principal del estado vacío */
+.estado-vacio p {
+    /* Tamaño de texto destacado */
+    font-size: 1.1rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Color blanco hueso */
+    color: var(--texto-principal);
+}
+
+/* Subtexto orientativo del estado vacío */
+.subtexto-vacio {
+    /* Tamaño de texto secundario */
+    font-size: 0.9rem !important;
+    /* Color atenuado */
+    color: var(--texto-secundario) !important;
+    /* Peso normal */
+    font-weight: 400 !important;
+    /* Separación superior */
+    margin-top: 0.4rem;
+}
+
+/* ==============================================================================
+   8. CUADRÍCULA MOSAICO BENTO GRID (.resultado)
+   ============================================================================== */
+
+/* Contenedor principal de imágenes en cuadrícula mosaico */
+.resultado {
+    /* Modelo de cuadrícula bidimensional de CSS Grid */
+    display: grid;
+    /* Columnas responsivas que se autocompletan adaptándose al ancho disponible */
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    /* Altura base de cada fila de la cuadrícula */
+    grid-auto-rows: 150px;
+    /* Hueco o separación entre celdas */
+    grid-gap: 12px;
+    /* Relleno de seguridad */
+    padding: 0.5rem 0;
+    /* Modo de empaquetado denso para rellenar huecos vacíos automáticamente */
+    grid-auto-flow: dense;
+}
+
+/* Tarjeta individual que envuelve cada imagen generada dinámicamente */
+.tarjeta-foto {
+    /* Posicionamiento relativo para anclar la información superpuesta */
+    position: relative;
+    /* Esquinas redondeadas elegantes */
+    border-radius: var(--radio-md);
+    /* Ocultamos cualquier desbordamiento de la imagen al hacer zoom */
+    overflow: hidden;
+    /* Fondo oscuro de carga */
+    background: #0b1120;
+    /* Borde fino traslúcido */
+    border: 1px solid var(--borde-sutil);
+    /* Cursor de lupa que indica que se puede abrir */
+    cursor: pointer;
+    /* Transición suave para elevación y borde */
+    transition: transform var(--transicion-rapida), box-shadow var(--transicion-rapida), border-color var(--transicion-rapida);
+    /* Animación de entrada al inyectar en el DOM */
+    animation: aparecerTarjeta 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Keyframes de la animación de entrada suave */
+@keyframes aparecerTarjeta {
+    /* Estado inicial */
+    from {
+        /* Opacidad cero */
+        opacity: 0;
+        /* Escala ligeramente reducida */
+        transform: scale(0.92) translateY(12px);
+    }
+    /* Estado final */
+    to {
+        /* Totalmente visible */
+        opacity: 1;
+        /* Escala natural */
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Efecto hover sobre la tarjeta de imagen */
+.tarjeta-foto:hover {
+    /* Elevación sutil de 4 píxeles */
+    transform: translateY(-4px);
+    /* Borde iluminado con cian */
+    border-color: var(--color-cian);
+    /* Sombra de profundidad pronunciada */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px var(--resplandor-cian);
+    /* Capa de profundidad superior para que no quede detrás de otras */
+    z-index: 2;
+}
+
+/* Imagen dentro de cada tarjeta */
+.tarjeta-foto img {
+    /* Ancho completo del contenedor */
+    width: 100%;
+    /* Alto completo del contenedor */
+    height: 100%;
+    /* Recorte proporcional para cubrir sin deformar la relación de aspecto */
+    object-fit: cover;
+    /* Centrado de la imagen */
+    object-position: center;
+    /* Visualización en bloque para evitar espacios inferiores fantasma */
+    display: block;
+    /* Transición suave para el efecto zoom en hover */
+    transition: transform var(--transicion-suave), filter var(--transicion-suave);
+}
+
+/* Efecto de zoom suave sobre la imagen al pasar el cursor */
+.tarjeta-foto:hover img {
+    /* Escala ampliada un 6% */
+    transform: scale(1.06);
+    /* Aumentamos ligeramente el brillo */
+    filter: brightness(1.08);
+}
+
+/* Capa oscura superpuesta con metadatos que aparece al hacer hover */
+.tarjeta-overlay {
+    /* Posicionamiento absoluto que cubre la parte inferior de la tarjeta */
+    position: absolute;
+    /* Alineado al fondo */
+    bottom: 0;
+    /* Alineado a la izquierda */
+    left: 0;
+    /* Ancho completo */
+    right: 0;
+    /* Gradiente vertical de negro transparente a negro sólido */
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+    /* Relleno interno */
+    padding: 1rem 0.8rem 0.6rem;
+    /* Modelo flexible para ordenar metadatos y botón */
+    display: flex;
+    /* Alineación vertical */
+    align-items: flex-end;
+    /* Distribuir texto a la izquierda y acción a la derecha */
+    justify-content: space-between;
+    /* Oculto por defecto mediante opacidad */
+    opacity: 0;
+    /* Desplazado ligeramente hacia abajo */
+    transform: translateY(6px);
+    /* Transición fluida de aparición */
+    transition: all var(--transicion-rapida);
+    /* Desactivar selección de texto */
+    user-select: none;
+}
+
+/* Revelar el overlay al hacer hover sobre la tarjeta */
+.tarjeta-foto:hover .tarjeta-overlay {
+    /* Totalmente visible */
+    opacity: 1;
+    /* Vuelve a su posición original */
+    transform: translateY(0);
+}
+
+/* Información de nombre y peso del archivo */
+.tarjeta-info {
+    /* Ancho máximo para truncar con puntos suspensivos */
+    max-width: 80%;
+}
+
+/* Nombre de la imagen en el overlay */
+.tarjeta-nombre {
+    /* Tamaño de texto pequeño */
+    font-size: 0.78rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Color blanco */
+    color: #ffffff;
+    /* Evitar salto de línea */
+    white-space: nowrap;
+    /* Ocultar desbordamiento */
+    overflow: hidden;
+    /* Puntos suspensivos al final */
+    text-overflow: ellipsis;
+    /* Bloque para permitir truncamiento */
+    display: block;
+}
+
+/* Tamaño de la imagen en el overlay */
+.tarjeta-tamano {
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño fino */
+    font-size: 0.7rem;
+    /* Color atenuado */
+    color: var(--color-cian);
+}
+
+/* Botón individual para eliminar una foto de la galería */
+.btn-eliminar-foto {
+    /* Fondo rojizo translúcido */
+    background: rgba(244, 63, 94, 0.25);
+    /* Borde fino rojo */
+    border: 1px solid var(--color-peligro);
+    /* Color blanco */
+    color: #ffffff;
+    /* Ancho y alto de icono */
+    width: 26px;
+    height: 26px;
+    /* Esquinas redondeadas */
+    border-radius: 50%;
+    /* Centrado de icono */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Cursor de botón */
+    cursor: pointer;
+    /* Tamaño de fuente */
+    font-size: 0.72rem;
+    /* Transición suave */
+    transition: all var(--transicion-rapida);
+}
+
+/* Hover sobre el botón de eliminar foto */
+.btn-eliminar-foto:hover {
+    /* Fondo rojo sólido */
+    background: var(--color-peligro);
+    /* Ligera escala */
+    transform: scale(1.15);
+}
+
+/* ==============================================================================
+   9. PATRONES MOSAICO BENTO GRID (REGLAS DE REPARTO ESPACIAL)
+   ============================================================================== */
+
+/* La primera foto de la galería ocupa un bloque destacado de 2x2 celdas */
+.tarjeta-foto:first-child {
+    /* Abarca 2 columnas en pantallas medianas y grandes */
+    grid-column: span 2;
+    /* Abarca 2 filas */
+    grid-row: span 2;
+}
+
+/* La 4ta foto se expande horizontalmente como banner */
+.tarjeta-foto:nth-child(4) {
+    /* Ocupa 2 columnas */
+    grid-column: span 2;
+}
+
+/* La 6ta foto ocupa otro bloque destacado de 2x2 celdas */
+.tarjeta-foto:nth-child(6) {
+    /* Abarca 2 columnas */
+    grid-column: span 2;
+    /* Abarca 2 filas */
+    grid-row: span 2;
+}
+
+/* La 9na foto se expande verticalmente (formato retrato) */
+.tarjeta-foto:nth-child(9) {
+    /* Ocupa 2 filas de altura */
+    grid-row: span 2;
+}
+
+/* La 11va foto se expande horizontalmente */
+.tarjeta-foto:nth-child(11) {
+    /* Abarca 2 columnas */
+    grid-column: span 2;
+}
+
+/* ==============================================================================
+   10. MODAL LIGHTBOX (VISOR A PANTALLA COMPLETA)
+   ============================================================================== */
+
+/* Capa de fondo oscura que bloquea la interacción con la página */
+.modal-lightbox {
+    /* Posicionamiento fijo que cubre toda la pantalla */
+    position: fixed;
+    /* Anclado a todos los bordes */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Fondo negro profundo con 88% de opacidad */
+    background: rgba(4, 7, 15, 0.9);
+    /* Desenfoque del contenido posterior */
+    backdrop-filter: blur(14px);
+    /* Oculto por defecto mediante display none */
+    display: none;
+    /* Centrado de la ventana modal */
+    align-items: center;
+    justify-content: center;
+    /* Relleno de seguridad */
+    padding: 1.5rem;
+    /* Capa de profundidad muy superior a todo */
+    z-index: 1000;
+}
+
+/* Estado activo del modal Lightbox */
+.modal-lightbox.activo {
+    /* Cambia a flexbox para centrar contenido */
+    display: flex;
+    /* Animación de fundido de entrada */
+    animation: fadeInLightbox 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animación de entrada del modal */
+@keyframes fadeInLightbox {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Contenedor interno del visor */
+.lightbox-contenido {
+    /* Posicionamiento relativo para colocar el botón de cierre */
+    position: relative;
+    /* Anchura máxima de la foto */
+    max-width: 90vw;
+    /* Altura máxima de la foto */
+    max-height: 85vh;
+    /* Modelo flexible en columna */
+    display: flex;
+    flex-direction: column;
+    /* Centrado */
+    align-items: center;
+    /* Animación de zoom suave al abrir */
+    animation: zoomInLightbox 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animación de escalado de la foto en el visor */
+@keyframes zoomInLightbox {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Imagen dentro del visor Lightbox */
+.img-lightbox {
+    /* Anchura adaptable sin desbordar */
+    max-width: 100%;
+    /* Altura adaptable sin superar la pantalla */
+    max-height: 75vh;
+    /* Ajuste de contención sin distorsión */
+    object-fit: contain;
+    /* Bordes redondeados */
+    border-radius: var(--radio-md);
+    /* Sombra exterior pronunciada */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--resplandor-primario);
+    /* Borde sutil */
+    border: 1px solid var(--borde-acento);
+}
+
+/* Botón flotante para cerrar el visor */
+.btn-cerrar-modal {
+    /* Posicionamiento absoluto en la esquina superior derecha */
+    position: absolute;
+    /* Desplazado 12px hacia arriba */
+    top: -16px;
+    /* Desplazado 16px hacia la derecha */
+    right: -16px;
+    /* Tamaño circular */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    /* Fondo oscuro traslúcido */
+    background: rgba(30, 41, 59, 0.9);
+    /* Borde blanco sutil */
+    border: 1px solid var(--borde-sutil);
+    /* Color blanco */
+    color: #ffffff;
+    /* Tamaño del símbolo ✕ */
+    font-size: 1.1rem;
+    /* Centrado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Cursor de botón */
+    cursor: pointer;
+    /* Transición rápida */
+    transition: all var(--transicion-rapida);
+    /* Elevado sobre la foto */
+    z-index: 10;
+}
+
+/* Hover sobre el botón de cerrar */
+.btn-cerrar-modal:hover {
+    /* Fondo rojo de advertencia */
+    background: var(--color-peligro);
+    /* Borde rojo */
+    border-color: var(--color-peligro);
+    /* Rotación de 90 grados */
+    transform: rotate(90deg) scale(1.1);
+}
+
+/* Pie de información del Lightbox */
+.lightbox-info {
+    /* Modelo flexible */
+    display: flex;
+    /* Espacio entre nombre y peso */
+    gap: 1rem;
+    /* Separación superior respecto a la imagen */
+    margin-top: 0.8rem;
+    /* Relleno de píldora */
+    padding: 0.4rem 1rem;
+    /* Fondo oscuro */
+    background: rgba(15, 23, 42, 0.8);
+    /* Borde fino */
+    border: 1px solid var(--borde-sutil);
+    /* Bordes redondeados */
+    border-radius: var(--radio-pildora);
+    /* Tipografía */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto */
+    font-size: 0.82rem;
+}
+
+/* Nombre del archivo en Lightbox */
+.lightbox-nombre {
+    /* Color blanco */
+    color: var(--texto-principal);
+    /* Peso seminegrita */
+    font-weight: 600;
+}
+
+/* Peso del archivo en Lightbox */
+.lightbox-tamano {
+    /* Color cian */
+    color: var(--color-cian);
+}
+
+/* ==============================================================================
+   11. ADAPTABILIDAD RESPONSIVA (MEDIA QUERIES)
+   ============================================================================== */
+
+/* Ajustes para pantallas móviles o tablets pequeñas (menos de 768px) */
+@media (max-width: 768px) {
+    /* Reducimos el relleno general de la app */
+    .contenedor-app {
+        /* Relleno inferior menor */
+        padding: 1.5rem 1rem 3rem;
+    }
+
+    /* Reducimos la cuadrícula en móviles */
+    .resultado {
+        /* Columnas de mínimo 140px */
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        /* Filas de 120px */
+        grid-auto-rows: 120px;
+        /* Menor separación */
+        grid-gap: 8px;
+    }
+
+    /* Anulamos la expansión de 2 columnas en pantallas pequeñas para evitar desbordamientos */
+    .tarjeta-foto:first-child,
+    .tarjeta-foto:nth-child(4),
+    .tarjeta-foto:nth-child(6),
+    .tarjeta-foto:nth-child(11) {
+        /* Vuelve a ocupar 1 columna */
+        grid-column: span 1;
+        /* Mantiene proporción de 1 fila */
+        grid-row: span 1;
+    }
+
+    /* En móviles la primera foto ocupa 2 filas para conservar dinamismo */
+    .tarjeta-foto:first-child {
+        /* Ocupa 2 filas */
+        grid-row: span 2;
+    }
+
+    /* Botón de cerrar modal ajustado a la pantalla */
+    .btn-cerrar-modal {
+        /* Más cercano a la esquina */
+        top: -10px;
+        right: -10px;
+    }
+}
