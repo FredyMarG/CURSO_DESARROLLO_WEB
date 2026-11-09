@@ -304,15 +304,15 @@
         </section>
 
         <!-- ==============================================
-             SLIDE 4: GALERÍA DINÁMICA MULTIARCHIVO
+             SLIDE 4: CARGA DE MÚLTIPLES ARCHIVOS & GALERÍA MULTIARCHIVO
              ============================================== -->
-        <section class="slide" id="slide-4" data-slide="4" data-title="Galería Dinámica Multiarquivo">
+        <section class="slide" id="slide-4" data-slide="4" data-title="Carga de Varios Archivos &amp; Galería Multiarquivo">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="section-tag">Caso Práctico 01</span>
-                    <h2>Carga y Previsualización Dinámica de Galería Multiarquivo</h2>
+                    <h2>Carga de Múltiples Archivos (Multi-File Loader) &amp; Galería Dinámica</h2>
                     <p class="section-desc">
-                        Aprende a procesar múltiples archivos seleccionados mediante <code>&lt;input multiple&gt;</code> en paralelo:
+                        Aprende a procesar colecciones completas de archivos seleccionados mediante <code>&lt;input multiple&gt;</code> o Drag &amp; Drop en paralelo:
                     </p>
                 </div>
 
@@ -324,48 +324,95 @@
                                 <span class="badge badge-emerald">Procesamiento Paralelo de FileList</span>
                             </div>
                             <p>
-                                La propiedad <code>e.target.files</code> devuelve un objeto de tipo <code>FileList</code>. Para procesarlo de forma limpia con métodos de orden superior:
+                                Al añadir el atributo <code>multiple</code> a un <code>&lt;input type="file"&gt;</code> o recibir varios archivos por Drag &amp; Drop, el navegador entrega un <code>FileList</code>.
                             </p>
                             <ol style="padding-left: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem;">
                                 <li>Convertir la colección con <code>Array.from(e.target.files)</code>.</li>
-                                <li>Filtrar por tipo MIME usando <code>file.type.startsWith("image/")</code>.</li>
-                                <li><strong>Instanciar un nuevo <code>FileReader</code> para CADA archivo</strong> (recuerda que una misma instancia no puede leer dos archivos simultáneamente).</li>
-                                <li>Crear elementos <code>&lt;figure&gt;</code> con sus miniaturas en el evento <code>load</code>.</li>
+                                <li><strong>Detectar el tipo MIME:</strong>
+                                    <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                        <li><code>image/*</code> ➔ leer con <code>readAsDataURL()</code> (miniaturas).</li>
+                                        <li><code>text/*</code>, <code>.json</code>, <code>.csv</code> ➔ leer con <code>readAsText()</code>.</li>
+                                        <li>Binarios ➔ leer con <code>readAsArrayBuffer()</code>.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Instanciar un nuevo <code>FileReader</code> para CADA archivo</strong> (evita la excepción <code>InvalidStateError</code>).</li>
+                                <li>Renderizar tarjetas interactivas con tamaño, estado y previsualización.</li>
                             </ol>
                         </div>
                     </div>
 
-                    <!-- Galería Interactiva -->
+                    <!-- Sección Interactiva: Carga de Varios Archivos -->
                     <div class="code-column">
                         <div class="code-panel">
                             <div class="code-panel-header">
-                                <span class="file-name">galeria_interactiva_grid.js</span>
+                                <span class="file-name">carga_multiples_archivos.js</span>
                                 <button class="btn-copy-code" data-target="code-sample-gallery" title="Copiar código">
                                     Copiar
                                 </button>
                             </div>
-                            <pre class="code-block"><code id="code-sample-gallery"><span class="c-func">Array</span>.<span class="c-func">from</span>(<span class="c-variable">archivos</span>).<span class="c-func">forEach</span>(<span class="c-prop">archivo</span> =&gt; {
+                            <pre class="code-block"><code id="code-sample-gallery"><span class="c-comment">// Procesar múltiples archivos de cualquier tipo</span>
+<span class="c-func">Array</span>.<span class="c-func">from</span>(<span class="c-variable">archivos</span>).<span class="c-func">forEach</span>(<span class="c-prop">archivo</span> =&gt; {
   <span class="c-keyword">const</span> <span class="c-variable">lector</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
-  <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">crearMiniatura</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
-  <span class="c-variable">lector</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivo</span>);
+  <span class="c-keyword">if</span> (<span class="c-prop">archivo</span>.<span class="c-prop">type</span>.<span class="c-func">startsWith</span>(<span class="c-string">"image/"</span>)) {
+    <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">mostrarMiniatura</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
+    <span class="c-variable">lector</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivo</span>);
+  } <span class="c-keyword">else</span> {
+    <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">mostrarTexto</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
+    <span class="c-variable">lector</span>.<span class="c-func">readAsText</span>(<span class="c-prop">archivo</span>, <span class="c-string">"UTF-8"</span>);
+  }
 });</code></pre>
 
-                            <div class="interactive-test-bar">
-                                <button class="btn-run-action" id="btnSelectMultipleImages">
-                                    📁 Seleccionar Varias Imágenes
-                                </button>
-                                <button class="btn-run-action" id="btnLoadDemoGallery" style="background: rgba(255,255,255,0.08);">
-                                    ⚡ Galería Demo
-                                </button>
-                                <input type="file" id="inputMultipleGallery" class="file-hidden-input" accept="image/*" multiple />
-                                <span class="run-status" id="galleryCountStatus">0 imágenes</span>
+                            <!-- Zona de Arrastre para Varios Archivos -->
+                            <div class="multifile-drop-zone" id="dropZoneMultiple">
+                                <span class="drop-icon">📂</span>
+                                <div class="drop-text-primary">Arrastra y suelta varios archivos aquí</div>
+                                <div class="drop-text-secondary">Soporta cualquier combinación: imágenes, documentos, JSON, CSV o texto</div>
                             </div>
 
-                            <div class="file-gallery-grid" id="galleryGridContainer">
-                                <div style="grid-column: 1 / -1; text-align: center; color: var(--text-dim); padding: 1.5rem;">
-                                    Pulsa "⚡ Galería Demo" o selecciona tus imágenes para ver el grid en acción...
+                            <!-- Botones de Acción -->
+                            <div class="multifile-actions-bar">
+                                <button class="btn-run-action" id="btnSelectMultipleFiles">
+                                    📁 Cargar Varios Archivos
+                                </button>
+                                <button class="btn-run-action" id="btnLoadDemoMultiFiles" style="background: rgba(255,255,255,0.08);">
+                                    ⚡ Lote Demo Multiarchivo
+                                </button>
+                                <button class="btn-run-action" id="btnSelectMultipleImages" style="background: rgba(255,255,255,0.05);" title="Filtrar solo imágenes">
+                                    🖼️ Solo Fotos
+                                </button>
+                                <button class="btn-run-action" id="btnClearMultiFiles" style="background: rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.25); color: var(--rose);">
+                                    🗑️ Limpiar
+                                </button>
+                                <input type="file" id="inputMultipleFiles" class="file-hidden-input" multiple />
+                                <input type="file" id="inputMultipleGallery" class="file-hidden-input" accept="image/*" multiple />
+                            </div>
+
+                            <!-- Barra de Estadísticas y Conteo -->
+                            <div class="multifile-stats-bar" id="multiFilesStatsBar">
+                                <span>Archivos en memoria: <strong class="multifile-stats-badge" id="multiFilesCount">0</strong></span>
+                                <span>Peso total: <strong class="multifile-stats-badge" id="multiFilesTotalSize">0 KB</strong></span>
+                            </div>
+
+                            <!-- Lista Scrollable de Archivos Procesados -->
+                            <div class="multifile-list-container" id="multiFilesListContainer">
+                                <div style="text-align: center; color: var(--text-dim); padding: 1.2rem; font-size: 0.85rem;">
+                                    Pulsa <strong>"📁 Cargar Varios Archivos"</strong>, <strong>"⚡ Lote Demo Multiarchivo"</strong> o arrastra archivos arriba para procesarlos en paralelo...
                                 </div>
                             </div>
+
+                            <!-- Panel de Previsualización del Archivo Seleccionado -->
+                            <div class="multifile-preview-panel" id="multiFilePreviewBox">
+                                <div class="multifile-preview-header">
+                                    <span id="multiFilePreviewTitle">📄 Vista Previa de Contenido</span>
+                                    <button class="btn-close-preview" id="btnCloseMultiPreview" title="Cerrar vista previa">✕</button>
+                                </div>
+                                <div class="multifile-preview-body" id="multiFilePreviewBody">
+                                    <!-- Contenido inyectado dinámicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Galería tradicional de imágenes (respaldo compatible) -->
+                            <div class="file-gallery-grid" id="galleryGridContainer" style="display: none;"></div>
                         </div>
                     </div>
                 </div>

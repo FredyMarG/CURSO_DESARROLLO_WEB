@@ -45,6 +45,42 @@
                 { name: 'avatar_usuario.webp', size: '48 KB', color: '#06b6d4', icon: '👤' },
                 { name: 'banner_promocion.jpg', size: '512 KB', color: '#10b981', icon: '🎨' },
                 { name: 'grafico_ventas.svg', size: '32 KB', color: '#f59e0b', icon: '📈' }
+            ],
+
+            // Lote demo heterogéneo para la sección de carga de múltiples archivos
+            multiFiles: [
+                {
+                    name: 'usuarios_registrados.json',
+                    type: 'application/json',
+                    size: 1540,
+                    method: 'readAsText',
+                    icon: '📊',
+                    content: '{\n  "total": 3,\n  "usuarios": [\n    {"id": 1, "nombre": "Carlos Gómez", "rol": "Admin"},\n    {"id": 2, "nombre": "Laura Ruiz", "rol": "Desarrollador"},\n    {"id": 3, "nombre": "Mateo Vega", "rol": "Diseñador UI"}\n  ]\n}'
+                },
+                {
+                    name: 'reporte_ventas_2026.csv',
+                    type: 'text/csv',
+                    size: 890,
+                    method: 'readAsText',
+                    icon: '📈',
+                    content: 'id,mes,ventas_usd,nuevos_alumnos\n1,Enero,18450,142\n2,Febrero,22300,185\n3,Marzo,19800,160'
+                },
+                {
+                    name: 'notas_arquitectura.md',
+                    type: 'text/markdown',
+                    size: 720,
+                    method: 'readAsText',
+                    icon: '📄',
+                    content: '# Arquitectura de Procesamiento en Cliente\n\n- **Zero Server Overhead**: La lectura ocurre 100% en RAM local.\n- **Concurrencia Segura**: Un objeto FileReader dedicado por archivo.\n- **Detección MIME**: Bifurcación entre readAsText y readAsDataURL.'
+                },
+                {
+                    name: 'avatar_corporativo.png',
+                    type: 'image/png',
+                    size: 2840,
+                    method: 'readAsDataURL',
+                    icon: '🖼️',
+                    content: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="160" viewBox="0 0 240 160"><rect width="240" height="160" rx="12" fill="%230f172a"/><circle cx="120" cy="70" r="42" fill="%236366f1"/><text x="120" y="82" text-anchor="middle" font-size="34">👤</text><text x="120" y="135" text-anchor="middle" fill="%23f8fafc" font-family="sans-serif" font-size="12" font-weight="600">Avatar Demo Multiarchivo</text></svg>'
+                }
             ]
         },
 
@@ -445,7 +481,21 @@ gestor.iniciar();`
             this.dom.imagePreviewPlaceholder = document.getElementById('imagePreviewPlaceholder');
             this.dom.imagePreviewElement = document.getElementById('imagePreviewElement');
 
-            // Slide 4: Galería
+            // Slide 4: Carga de Múltiples Archivos & Galería
+            this.dom.btnSelectMultipleFiles = document.getElementById('btnSelectMultipleFiles');
+            this.dom.btnLoadDemoMultiFiles = document.getElementById('btnLoadDemoMultiFiles');
+            this.dom.btnClearMultiFiles = document.getElementById('btnClearMultiFiles');
+            this.dom.inputMultipleFiles = document.getElementById('inputMultipleFiles');
+            this.dom.dropZoneMultiple = document.getElementById('dropZoneMultiple');
+            this.dom.multiFilesStatsBar = document.getElementById('multiFilesStatsBar');
+            this.dom.multiFilesCount = document.getElementById('multiFilesCount');
+            this.dom.multiFilesTotalSize = document.getElementById('multiFilesTotalSize');
+            this.dom.multiFilesListContainer = document.getElementById('multiFilesListContainer');
+            this.dom.multiFilePreviewBox = document.getElementById('multiFilePreviewBox');
+            this.dom.multiFilePreviewTitle = document.getElementById('multiFilePreviewTitle');
+            this.dom.multiFilePreviewBody = document.getElementById('multiFilePreviewBody');
+            this.dom.btnCloseMultiPreview = document.getElementById('btnCloseMultiPreview');
+
             this.dom.btnSelectMultipleImages = document.getElementById('btnSelectMultipleImages');
             this.dom.btnLoadDemoGallery = document.getElementById('btnLoadDemoGallery');
             this.dom.inputMultipleGallery = document.getElementById('inputMultipleGallery');
@@ -574,7 +624,29 @@ gestor.iniciar();`
                 this.dom.btnLoadDemoImage.addEventListener('click', () => this.loadDemoImage());
             }
 
-            // Slide 4: Galería
+            // Slide 4: Carga de Múltiples Archivos & Galería
+            if (this.dom.btnSelectMultipleFiles && this.dom.inputMultipleFiles) {
+                this.dom.btnSelectMultipleFiles.addEventListener('click', () => this.dom.inputMultipleFiles.click());
+                this.dom.inputMultipleFiles.addEventListener('change', (e) => this.handleMultipleFilesInput(e.target.files));
+            }
+            if (this.dom.btnLoadDemoMultiFiles) {
+                this.dom.btnLoadDemoMultiFiles.addEventListener('click', () => this.loadDemoMultiFiles());
+            }
+            if (this.dom.btnClearMultiFiles) {
+                this.dom.btnClearMultiFiles.addEventListener('click', () => this.clearMultiFiles());
+            }
+            if (this.dom.dropZoneMultiple) {
+                this.dom.dropZoneMultiple.addEventListener('click', () => {
+                    if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.click();
+                });
+                this.setupDropZone(this.dom.dropZoneMultiple, (singleFile, allFiles) => {
+                    const files = allFiles && allFiles.length > 0 ? allFiles : [singleFile];
+                    this.handleMultipleFilesInput(files);
+                });
+            }
+            if (this.dom.btnCloseMultiPreview) {
+                this.dom.btnCloseMultiPreview.addEventListener('click', () => this.closeMultiPreview());
+            }
             if (this.dom.btnSelectMultipleImages && this.dom.inputMultipleGallery) {
                 this.dom.btnSelectMultipleImages.addEventListener('click', () => this.dom.inputMultipleGallery.click());
                 this.dom.inputMultipleGallery.addEventListener('change', (e) => this.handleMultipleGalleryInput(e));
@@ -783,7 +855,7 @@ gestor.iniciar();`
                 '1. Inicio: FileReader API',
                 '2. Lectura Textual: readAsText()',
                 '3. Codificación Base64: readAsDataURL()',
-                '4. Galería Dinámica Multiarquivo',
+                '4. Carga de Varios Archivos & Galería',
                 '5. Integración con Drag & Drop',
                 '6. Arquitectura y Ciclo de Eventos',
                 '7. Laboratorio de Progreso en Vivo',
@@ -841,7 +913,7 @@ gestor.iniciar();`
                 element.classList.remove('dragover');
                 const file = e.dataTransfer.files[0];
                 if (file && onFileDropCallback) {
-                    onFileDropCallback(file);
+                    onFileDropCallback(file, e.dataTransfer.files);
                 }
             });
         }
@@ -944,9 +1016,207 @@ gestor.iniciar();`
         }
 
         /* --------------------------------------------------------------------------
-           SLIDE 4: GALERÍA DINÁMICA MULTIARCHIVO
+           SLIDE 4: CARGA DE MÚLTIPLES ARCHIVOS & GALERÍA MULTIARCHIVO
            -------------------------------------------------------------------------- */
         initSlideGallery() {}
+
+        handleMultipleFilesInput(fileList) {
+            const files = Array.from(fileList || []);
+            if (!files.length) return;
+
+            sound.click();
+            if (this.dom.multiFilesListContainer) {
+                this.dom.multiFilesListContainer.innerHTML = '';
+            }
+
+            let totalBytes = 0;
+            let loadedCount = 0;
+
+            files.forEach(file => {
+                totalBytes += file.size;
+
+                // Detección inteligente de tipo para seleccionar el método FileReader óptimo
+                const isImage = file.type.startsWith('image/');
+                const isText = file.type.startsWith('text/') ||
+                               file.type.includes('json') ||
+                               file.type.includes('csv') ||
+                               file.type.includes('xml') ||
+                               /\.(txt|json|csv|md|js|ts|html|css|py|sql)$/i.test(file.name);
+
+                let method = 'readAsArrayBuffer';
+                let methodClass = 'badge-method-buffer';
+                let icon = '📦';
+
+                if (isImage) {
+                    method = 'readAsDataURL';
+                    methodClass = 'badge-method-dataurl';
+                    icon = '🖼️';
+                } else if (isText) {
+                    method = 'readAsText';
+                    methodClass = 'badge-method-text';
+                    if (file.name.endsWith('.json')) icon = '📊';
+                    else if (file.name.endsWith('.csv')) icon = '📈';
+                    else icon = '📄';
+                }
+
+                // REGLA CLAVE: Instanciamos un FileReader único e independiente por cada archivo
+                const reader = new FileReader();
+
+                reader.addEventListener('load', () => {
+                    loadedCount++;
+                    const sizeStr = (file.size / 1024).toFixed(1) + ' KB';
+                    this.renderMultiFileCard({
+                        name: file.name,
+                        sizeStr: sizeStr,
+                        type: file.type || 'desconocido',
+                        icon: icon,
+                        method: method,
+                        methodClass: methodClass,
+                        content: reader.result
+                    });
+
+                    if (loadedCount === files.length) {
+                        sound.fileLoaded();
+                        this.showToast(`¡Lote de ${files.length} archivos procesado con éxito!`);
+                    }
+                });
+
+                reader.addEventListener('error', () => {
+                    console.error(`Error leyendo ${file.name}`);
+                });
+
+                // Ejecutamos el método según corresponda
+                if (isImage) {
+                    reader.readAsDataURL(file);
+                } else if (isText) {
+                    reader.readAsText(file, 'UTF-8');
+                } else {
+                    reader.readAsArrayBuffer(file);
+                }
+            });
+
+            this.updateMultiFilesStats(files.length, totalBytes);
+        }
+
+        loadDemoMultiFiles() {
+            sound.click();
+            if (this.dom.multiFilesListContainer) {
+                this.dom.multiFilesListContainer.innerHTML = '';
+            }
+
+            let totalBytes = 0;
+            AppState.demos.multiFiles.forEach(item => {
+                totalBytes += item.size;
+                const sizeStr = (item.size / 1024).toFixed(1) + ' KB';
+                const methodClass = item.method === 'readAsDataURL' ? 'badge-method-dataurl' : 'badge-method-text';
+                this.renderMultiFileCard({
+                    name: item.name,
+                    sizeStr: sizeStr,
+                    type: item.type,
+                    icon: item.icon,
+                    method: item.method,
+                    methodClass: methodClass,
+                    content: item.content
+                });
+            });
+
+            this.updateMultiFilesStats(AppState.demos.multiFiles.length, totalBytes);
+            sound.fileLoaded();
+            this.showToast(`Lote Demo de ${AppState.demos.multiFiles.length} archivos mixtos cargado`);
+        }
+
+        clearMultiFiles() {
+            sound.click();
+            if (this.dom.multiFilesListContainer) {
+                this.dom.multiFilesListContainer.innerHTML = `
+                    <div style="text-align: center; color: var(--text-dim); padding: 1.2rem; font-size: 0.85rem;">
+                        Pulsa <strong>"📁 Cargar Varios Archivos"</strong>, <strong>"⚡ Lote Demo Multiarchivo"</strong> o arrastra archivos arriba para procesarlos en paralelo...
+                    </div>
+                `;
+            }
+            if (this.dom.galleryGridContainer) {
+                this.dom.galleryGridContainer.innerHTML = '';
+            }
+            if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.value = '';
+            if (this.dom.inputMultipleGallery) this.dom.inputMultipleGallery.value = '';
+            this.updateMultiFilesStats(0, 0);
+            this.closeMultiPreview();
+            this.showToast('Lista de archivos limpiada');
+        }
+
+        renderMultiFileCard(info) {
+            if (!this.dom.multiFilesListContainer) return;
+
+            const card = document.createElement('div');
+            card.className = 'multifile-card-item';
+            card.innerHTML = `
+                <div class="multifile-item-left">
+                    <span class="multifile-item-icon">${info.icon}</span>
+                    <div class="multifile-item-info">
+                        <div class="multifile-item-name" title="${info.name}">${info.name}</div>
+                        <div class="multifile-item-meta">${info.sizeStr} • ${info.type}</div>
+                    </div>
+                </div>
+                <div class="multifile-item-right">
+                    <span class="badge-method ${info.methodClass}">${info.method}()</span>
+                    <button class="btn-inspect-file">👁️ Inspeccionar</button>
+                </div>
+            `;
+
+            const btnInspect = card.querySelector('.btn-inspect-file');
+            btnInspect.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.previewMultiFile(info.name, info.type, info.content, info.method);
+            });
+
+            this.dom.multiFilesListContainer.appendChild(card);
+        }
+
+        previewMultiFile(name, type, content, method) {
+            sound.click();
+            if (!this.dom.multiFilePreviewBox || !this.dom.multiFilePreviewBody) return;
+
+            if (this.dom.multiFilePreviewTitle) {
+                this.dom.multiFilePreviewTitle.textContent = `👁️ Inspeccionando: ${name} (${method})`;
+            }
+
+            this.dom.multiFilePreviewBody.innerHTML = '';
+
+            if (method === 'readAsDataURL') {
+                const img = document.createElement('img');
+                img.src = content;
+                img.alt = name;
+                this.dom.multiFilePreviewBody.appendChild(img);
+            } else if (method === 'readAsText') {
+                const pre = document.createElement('pre');
+                pre.style.margin = '0';
+                pre.textContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+                this.dom.multiFilePreviewBody.appendChild(pre);
+            } else {
+                this.dom.multiFilePreviewBody.textContent = `[Búfer binario en memoria: ${content ? (content.byteLength || content.length || 0) : 0} bytes crudos cargados]`;
+            }
+
+            this.dom.multiFilePreviewBox.classList.add('active');
+            this.dom.multiFilePreviewBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        closeMultiPreview() {
+            if (this.dom.multiFilePreviewBox) {
+                this.dom.multiFilePreviewBox.classList.remove('active');
+            }
+        }
+
+        updateMultiFilesStats(count, totalBytes) {
+            if (this.dom.multiFilesCount) {
+                this.dom.multiFilesCount.textContent = count;
+            }
+            if (this.dom.multiFilesTotalSize) {
+                const formatted = totalBytes >= 1048576
+                    ? (totalBytes / 1048576).toFixed(2) + ' MB'
+                    : (totalBytes / 1024).toFixed(1) + ' KB';
+                this.dom.multiFilesTotalSize.textContent = formatted;
+            }
+        }
 
         handleMultipleGalleryInput(e) {
             const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));

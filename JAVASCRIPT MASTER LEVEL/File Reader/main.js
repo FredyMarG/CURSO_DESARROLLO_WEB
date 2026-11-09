@@ -12,7 +12,7 @@
  * 3. Lectura de contenido textual mediante 'readAsText(blob[, encoding])'
  * 4. Codificación en Data URL y Base64 mediante 'readAsDataURL(blob)'
  * 5. Anatomía de una Data URI: data:[<mediatype>][;base64],<datos>
- * 6. Caso Práctico 1: Carga y renderizado dinámico de galería multiarchivo
+ * 6. Caso Práctico 1: Carga de múltiples archivos (Multi-File Loader) heterogéneo y galería dinámica
  * 7. Iteración paralela de FileList: Regla de una instancia única de FileReader por archivo
  * 8. Caso Práctico 2: Integración nativa con Drag & Drop (e.dataTransfer.files)
  * 9. El ciclo de vida de eventos: loadstart, progress, load, error, abort y loadend
@@ -310,6 +310,61 @@ class SimuladorFileReader {
             }
         }, 50); // Simulación con 50 milisegundos de latencia
     }
+
+    // Método readAsArrayBuffer para procesar bytes crudos en memoria
+    readAsArrayBuffer(blob) {
+        // Comprobamos si la instancia ya está procesando una lectura activa
+        if (this.readyState === this.LOADING) {
+            // Lanzamos error de estado inválido
+            throw new Error("InvalidStateError: La instancia ya está ejecutando una lectura activa.");
+        }
+
+        // Marcamos el estado interno en LOADING
+        this.readyState = this.LOADING;
+        // Reiniciamos bandera de cancelación
+        this._abortado = false;
+        // Despachamos evento inicial loadstart
+        this._despachar("loadstart");
+
+        // Temporizador para simular lectura binaria
+        setTimeout(() => {
+            // Si fue abortado, salimos
+            if (this._abortado) return;
+
+            // Función para finalizar y guardar buffer
+            const finalizar = (buffer) => {
+                // Asignamos el buffer en result
+                this.result = buffer;
+                // Marcamos estado finalizado DONE
+                this.readyState = this.DONE;
+                // Despachamos evento load
+                this._despachar("load");
+                // Despachamos evento loadend
+                this._despachar("loadend");
+            };
+
+            // Si el objeto blob posee arrayBuffer nativo
+            if (typeof blob.arrayBuffer === "function") {
+                // Resolvemos promesa nativa
+                blob.arrayBuffer().then(buf => finalizar(buf)).catch(err => {
+                    // Guardamos error
+                    this.error = err;
+                    // Despachamos error
+                    this._despachar("error");
+                    // Despachamos loadend
+                    this._despachar("loadend");
+                });
+            // Si es simulado
+            } else {
+                // Convertimos el texto crudo a buffer
+                const rawStr = blob._raw || "datos_binarios";
+                // Creamos buffer
+                const buf = new Uint8Array(Buffer.from(rawStr)).buffer;
+                // Finalizamos
+                finalizar(buf);
+            }
+        }, 30); // Latencia de 30ms
+    }
 }
 
 // Determinamos la clase de FileReader a emplear: nativa si existe en window, o el simulador en Node
@@ -480,41 +535,103 @@ setTimeout(() => {
 }, 240);
 
 // ==============================================================================
-// BLOQUE 6: CASO PRÁCTICO 1: GALERÍA DINÁMICA MULTIARCHIVO
+// BLOQUE 6: CASO PRÁCTICO 1: CARGA DE MÚLTIPLES ARCHIVOS (MULTI-FILE LOADER) Y GALERÍA
 // ==============================================================================
 // Temporizador para el bloque 6
 setTimeout(() => {
     // Encabezado divisor del bloque 6
-    imprimirSeparador(6, "CASO PRÁCTICO 1: GALERÍA DINÁMICA MULTIARCHIVO");
+    imprimirSeparador(6, "CARGA DE MÚLTIPLES ARCHIVOS (MULTI-FILE LOADER) Y GALERÍA");
 
-    // Explicación del uso del atributo multiple en inputs
-    console.log("Permite seleccionar múltiples imágenes mediante <input type='file' multiple>.");
-    // Estrategia de iteración concurrente
-    console.log("Para procesarlas de forma concurrente, iteramos sobre cada archivo:");
+    // Explicación didáctica sobre el atributo multiple en el control HTML
+    console.log("El atributo 'multiple' en <input type='file' multiple> permite al usuario");
+    // Detalle sobre la selección múltiple en el explorador
+    console.log("seleccionar varios archivos a la vez, entregando una colección FileList.");
+    // Explicación de la estrategia de procesamiento heterogéneo
+    console.log("A continuación, demostramos la lectura concurrente de un lote con diferentes formatos:");
 
-    // Arreglo de archivos de prueba que simulan una selección múltiple del usuario
-    const fotos = [
-        // Archivo 1: Imagen JPEG
-        new FileClass(["pixel1"], "foto_playa.jpg", { type: "image/jpeg" }),
-        // Archivo 2: Imagen PNG
-        new FileClass(["pixel2"], "foto_montana.png", { type: "image/png" })
+    // Definición de una colección heterogénea de prueba que emula múltiples archivos seleccionados
+    const loteArchivos = [
+        // Archivo 1: Imagen en formato JPEG
+        new FileClass(["BINARIO_FOTO_PLAYA"], "playa.jpg", { type: "image/jpeg" }),
+        // Archivo 2: Documento estructurado en formato JSON
+        new FileClass(['{"sistema":"activo","usuarios":42}'], "config.json", { type: "application/json" }),
+        // Archivo 3: Tabla de datos en texto plano CSV
+        new FileClass(["id,nombre,rol\n1,Ana,Dev\n2,Leo,QA"], "equipo.csv", { type: "text/csv" }),
+        // Archivo 4: Documento de notas en texto plano
+        new FileClass(["Reunión fijada para las 10:00 AM"], "notas.txt", { type: "text/plain" })
     ];
 
-    // Log informativo sobre la cantidad de archivos a procesar
-    console.log(`Procesando colección de ${fotos.length} imágenes...`);
+    // Log informativo sobre el tamaño del lote a procesar
+    console.log(`\n📂 Lote de ${loteArchivos.length} archivos detectado en memoria.`);
 
-    // Iteración funcional sobre cada archivo de la lista
-    fotos.forEach((foto, idx) => {
-        // REGLA CLAVE: Instanciamos un lector ÚNICO e INDEPENDIENTE por cada archivo individual
-        const lectorGaleria = new ReaderClass();
-        // Registramos el manejador load para este lector en particular
-        lectorGaleria.addEventListener("load", () => {
-            // Imprimimos la confirmación de la miniatura generada con un fragmento de su Data URL
-            console.log(`🖼️ [Miniatura ${idx + 1}] Creada para: ${foto.name} | DataURL: ${lectorGaleria.result.slice(0, 35)}...`);
+    // Función auxiliar que envuelve la lectura de un archivo individual dentro de una Promesa
+    function procesarArchivoConcurrente(archivo, indice) {
+        // Retornamos una nueva instancia de Promise para coordinar la lectura asíncrona
+        return new Promise((resolve, reject) => {
+            // REGLA FUNDAMENTAL: Instanciamos un FileReader ÚNICO e INDEPENDIENTE por cada archivo
+            const lector = new ReaderClass();
+
+            // Evaluamos si el archivo es una imagen mediante su tipo MIME
+            const esImagen = archivo.type.startsWith("image/");
+
+            // Determinamos el método adecuado a emplear
+            const metodoUsado = esImagen ? "readAsDataURL" : "readAsText";
+
+            // Registramos el manejador 'load' que se activará cuando concluya la lectura con éxito
+            lector.addEventListener("load", () => {
+                // Preparamos un extracto breve del resultado para visualización pedagógica
+                const extracto = String(lector.result).slice(0, 38);
+                // Imprimimos el estado individual del archivo procesado
+                console.log(`  [Archivo ${indice + 1}/${loteArchivos.length}] ✅ '${archivo.name}' | Método: ${metodoUsado}() | Tamaño: ${archivo.size}B`);
+                console.log(`               Resultado: ${extracto}...`);
+                // Resolvemos la promesa entregando un objeto descriptor
+                resolve({
+                    nombre: archivo.name,
+                    tipo: archivo.type,
+                    tamano: archivo.size,
+                    metodo: metodoUsado,
+                    resultado: lector.result
+                });
+            });
+
+            // Registramos el manejador 'error' por si la lectura falla
+            lector.addEventListener("error", () => {
+                // Rechazamos la promesa informando del fallo
+                reject(new Error(`Fallo al leer archivo: ${archivo.name}`));
+            });
+
+            // Si es imagen, leemos con readAsDataURL para generar la cadena Base64
+            if (esImagen) {
+                // Invocamos readAsDataURL
+                lector.readAsDataURL(archivo);
+            // Si es documento de texto, JSON o CSV, leemos con readAsText en codificación UTF-8
+            } else {
+                // Invocamos readAsText
+                lector.readAsText(archivo, "UTF-8");
+            }
         });
-        // Iniciamos la lectura de este archivo específico
-        lectorGaleria.readAsDataURL(foto);
-    });
+    }
+
+    // Encabezado de inicio de procesamiento masivo en paralelo
+    console.log("\n-> Iniciando lectura concurrente mediante Promise.all():");
+
+    // Mapeamos el lote de archivos a un arreglo de promesas individuales
+    const promesasLectura = loteArchivos.map((archivo, i) => procesarArchivoConcurrente(archivo, i));
+
+    // Coordinamos la culminación de todo el lote mediante Promise.all
+    Promise.all(promesasLectura)
+        .then(resultados => {
+            // Calculamos el peso total acumulado sumando el tamaño de cada archivo
+            const totalBytes = resultados.reduce((acc, item) => acc + item.tamano, 0);
+            // Imprimimos la confirmación de lote completado al 100%
+            console.log(`\n🎉 [LOTE MULTIARCHIVO COMPLETADO]: ${resultados.length} archivos leídos con éxito.`);
+            // Imprimimos el total de bytes procesados en memoria
+            console.log(`   Peso acumulado procesado en el cliente: ${totalBytes} bytes (0 peticiones HTTP al servidor).`);
+        })
+        .catch(err => {
+            // Manejador en caso de fallos
+            console.error("🛑 Error en lectura concurrente:", err.message);
+        });
 }, 360);
 
 // ==============================================================================
