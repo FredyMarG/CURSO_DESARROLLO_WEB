@@ -1,0 +1,991 @@
+/**
+ * ==============================================================================
+ * 🎨 EJERCICIO PRÁCTICO: DRAG & DROP CON FILEREADER API
+ * ==============================================================================
+ * Archivo: style.css
+ * Propósito: Estilos visuales modernos, animaciones interactivas de arrastre
+ *            y renderizado estético para imágenes y visores de texto plano.
+ * Documentación pedagógica detallada línea por línea al 100%.
+ * ==============================================================================
+ */
+
+/* ==============================================================================
+   1. VARIABLES GLOBALES DE DISEÑO (:root)
+   ============================================================================== */
+
+/* Selector de la raíz del documento para declarar propiedades personalizadas (variables CSS) */
+:root {
+    /* Color de fondo principal: azul ultra profundo casi negro */
+    --bg-principal: #070a13;
+    /* Color de fondo de los paneles y contenedores con transparencia para efecto vidrio */
+    --bg-tarjeta: rgba(15, 23, 42, 0.75);
+    /* Color de fondo para elementos interactivos elevados */
+    --bg-superficie: rgba(30, 41, 59, 0.65);
+    /* Color de fondo de botones al pasar el ratón */
+    --bg-superficie-hover: rgba(51, 65, 85, 0.85);
+
+    /* Color primario de acento: índigo vibrante */
+    --color-primario: #6366f1;
+    /* Resplandor neón asociado al color primario */
+    --resplandor-primario: rgba(99, 102, 241, 0.35);
+
+    /* Color secundario: cian luminoso para datos y estados activos */
+    --color-cian: #06b6d4;
+    /* Resplandor neón asociado al color cian */
+    --resplandor-cian: rgba(6, 182, 212, 0.3);
+
+    /* Color semántico de éxito: verde esmeralda */
+    --color-exito: #10b981;
+    /* Resplandor esmeralda */
+    --resplandor-exito: rgba(16, 185, 129, 0.3);
+
+    /* Color semántico de peligro o reinicio: rosa carmesí */
+    --color-peligro: #f43f5e;
+    /* Resplandor carmesí */
+    --resplandor-peligro: rgba(244, 63, 94, 0.3);
+
+    /* Color de texto principal: blanco hueso de alta legibilidad */
+    --texto-principal: #f8fafc;
+    /* Color de texto secundario: gris azulado para descripciones */
+    --texto-secundario: #94a3b8;
+    /* Color de texto atenuado para notas secundarias */
+    --texto-atenuado: #64748b;
+
+    /* Borde sutil blanco traslúcido al 8% */
+    --borde-sutil: rgba(255, 255, 255, 0.08);
+    /* Borde medio blanco traslúcido al 16% */
+    --borde-medio: rgba(255, 255, 255, 0.16);
+    /* Borde interactivo con tono índigo */
+    --borde-acento: rgba(99, 102, 241, 0.4);
+
+    /* Tipografía principal sin serifa */
+    --fuente-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    /* Tipografía monoespaciada para código y métricas */
+    --fuente-mono: 'Fira Code', ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+    /* Radios de borde para esquinas */
+    --radio-sm: 8px;
+    --radio-md: 14px;
+    --radio-lg: 20px;
+    --radio-pildora: 9999px;
+
+    /* Transición rápida para micro-interacciones */
+    --transicion-rapida: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Transición fluida para transformaciones complejas */
+    --transicion-suave: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==============================================================================
+   2. REINICIO DE ESTILOS Y CUERPO PRINCIPAL
+   ============================================================================== */
+
+/* Selector universal para normalizar el modelo de cajas y eliminar márgenes por defecto */
+*, *::before, *::after {
+    /* El relleno y el borde se incluyen dentro del ancho y alto total */
+    box-sizing: border-box;
+    /* Eliminamos márgenes residuales */
+    margin: 0;
+    /* Eliminamos rellenos residuales */
+    padding: 0;
+}
+
+/* Estilos aplicados al elemento body */
+body {
+    /* Asignamos el fondo oscuro */
+    background-color: var(--bg-principal);
+    /* Tipografía principal del proyecto */
+    font-family: var(--fuente-sans);
+    /* Color de texto predeterminado claro */
+    color: var(--texto-principal);
+    /* Altura mínima igual al 100% de la ventana */
+    min-height: 100vh;
+    /* Posicionamiento relativo para contener las luces de fondo */
+    position: relative;
+    /* Ocultamos cualquier desbordamiento horizontal */
+    overflow-x: hidden;
+    /* Suavizado de fuentes para máxima nitidez */
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==============================================================================
+   3. EFECTOS LUMINOSOS AMBIENTALES DE FONDO
+   ============================================================================== */
+
+/* Estilos base de las esferas de luz difusas */
+.bg-glow {
+    /* Fijamos la posición respecto a la pantalla */
+    position: fixed;
+    /* Ancho de la esfera luminosa */
+    width: 450px;
+    /* Alto de la esfera luminosa */
+    height: 450px;
+    /* Forma circular */
+    border-radius: 50%;
+    /* Desenfoque pronunciado para difuminar la luz */
+    filter: blur(140px);
+    /* Permitir clics a través de la luz */
+    pointer-events: none;
+    /* Ubicado detrás de todo el contenido */
+    z-index: 0;
+    /* Opacidad moderada */
+    opacity: 0.35;
+}
+
+/* Primera esfera luminosa (superior izquierda) */
+.glow-1 {
+    /* Desplazada hacia arriba */
+    top: -120px;
+    /* Desplazada hacia la izquierda */
+    left: -120px;
+    /* Gradiente radial con tono primario índigo */
+    background: radial-gradient(circle, var(--color-primario), transparent 70%);
+}
+
+/* Segunda esfera luminosa (inferior derecha) */
+.glow-2 {
+    /* Desplazada hacia abajo */
+    bottom: -120px;
+    /* Desplazada hacia la derecha */
+    right: -120px;
+    /* Gradiente radial con tono cian */
+    background: radial-gradient(circle, var(--color-cian), transparent 70%);
+}
+
+/* ==============================================================================
+   4. CONTENEDOR PRINCIPAL Y ENCABEZADO
+   ============================================================================== */
+
+/* Contenedor central que limita y alinea el contenido */
+.contenedor-principal {
+    /* Ancho máximo para mantener legibilidad */
+    max-width: 860px;
+    /* Centrado horizontal automático */
+    margin: 0 auto;
+    /* Relleno superior, lateral e inferior */
+    padding: 2.5rem 1.5rem 4rem;
+    /* Posicionamiento relativo sobre las luces */
+    position: relative;
+    /* Nivel de capa superior */
+    z-index: 1;
+}
+
+/* Encabezado pedagógico */
+.encabezado {
+    /* Centramos el texto */
+    text-align: center;
+    /* Margen de separación inferior */
+    margin-bottom: 2rem;
+}
+
+/* Insignia pequeña que indica el módulo */
+.badge-modulo {
+    /* Visualización en línea de bloque */
+    display: inline-block;
+    /* Relleno interno */
+    padding: 0.3rem 0.85rem;
+    /* Fondo translúcido con acento índigo */
+    background: rgba(99, 102, 241, 0.15);
+    /* Borde fino */
+    border: 1px solid var(--borde-acento);
+    /* Bordes redondeados en píldora */
+    border-radius: var(--radio-pildora);
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño pequeño */
+    font-size: 0.72rem;
+    /* Negrita */
+    font-weight: 600;
+    /* Color cian tecnológico */
+    color: var(--color-cian);
+    /* Separación inferior */
+    margin-bottom: 0.8rem;
+    /* Texto en mayúsculas */
+    text-transform: uppercase;
+    /* Espaciado de letras */
+    letter-spacing: 0.08em;
+}
+
+/* Título principal */
+.titulo {
+    /* Tamaño fluido según el ancho de pantalla */
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    /* Peso seminegrita marcado */
+    font-weight: 800;
+    /* Altura de línea compacta */
+    line-height: 1.2;
+    /* Color blanco */
+    color: var(--texto-principal);
+    /* Margen inferior */
+    margin-bottom: 0.6rem;
+}
+
+/* Descripción explicativa */
+.descripcion {
+    /* Tamaño estándar legible */
+    font-size: 1rem;
+    /* Color secundario grisáceo */
+    color: var(--texto-secundario);
+    /* Ancho máximo para líneas cómodas */
+    max-width: 680px;
+    /* Centrado horizontal */
+    margin: 0 auto;
+    /* Altura de línea relajada */
+    line-height: 1.6;
+}
+
+/* Bloques de código inline dentro de la descripción */
+.descripcion code {
+    /* Fondo oscuro para resaltar */
+    background: rgba(255, 255, 255, 0.08);
+    /* Relleno interno */
+    padding: 0.15rem 0.4rem;
+    /* Esquinas redondeadas */
+    border-radius: 4px;
+    /* Tipografía de código */
+    font-family: var(--fuente-mono);
+    /* Tamaño proporcional */
+    font-size: 0.88em;
+    /* Color de texto cian */
+    color: var(--color-cian);
+}
+
+/* ==============================================================================
+   5. ZONA DE ARRASTRE (.zona-arrastre)
+   ============================================================================== */
+
+/* Contenedor interactivo de arrastre y soltado de archivos */
+.zona-arrastre {
+    /* Borde discontinuo característico de Drag & Drop */
+    border: 3px dashed rgba(255, 255, 255, 0.22);
+    /* Esquinas redondeadas grandes */
+    border-radius: var(--radio-lg);
+    /* Fondo translúcido con efecto glassmorphism */
+    background: var(--bg-tarjeta);
+    /* Desenfoque de fondo */
+    backdrop-filter: blur(12px);
+    /* Relleno interno amplio */
+    padding: 3rem 1.5rem;
+    /* Centrado de textos e iconos */
+    text-align: center;
+    /* Cursor de mano para invitar al clic */
+    cursor: pointer;
+    /* Transición suave para cambios de borde, fondo y escala */
+    transition: all var(--transicion-rapida);
+    /* Posicionamiento relativo para contener el input oculto */
+    position: relative;
+    /* Sombra exterior sutil */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+/* Efecto hover sobre la zona de arrastre */
+.zona-arrastre:hover {
+    /* Borde cian interactivo */
+    border-color: var(--color-cian);
+    /* Fondo sutilmente teñido de cian */
+    background: rgba(6, 182, 212, 0.06);
+    /* Resplandor neón cian */
+    box-shadow: 0 0 25px var(--resplandor-cian);
+    /* Elevación sutil */
+    transform: translateY(-2px);
+}
+
+/* Estado activo cuando un archivo es arrastrado sobre la zona (.dragover) */
+.zona-arrastre.dragover {
+    /* Borde primario índigo vibrante */
+    border-color: var(--color-primario);
+    /* Fondo con resplandor índigo */
+    background: rgba(99, 102, 241, 0.15);
+    /* Escala ampliada que da sensación de absorción */
+    transform: scale(1.02);
+    /* Resplandor neón marcado */
+    box-shadow: 0 0 35px var(--resplandor-primario);
+}
+
+/* Icono central de arrastre */
+.icono-arrastre {
+    /* Tamaño prominente */
+    font-size: 3rem;
+    /* Bloque para salto de línea */
+    display: block;
+    /* Separación inferior */
+    margin-bottom: 0.6rem;
+    /* Transición para animación de salto */
+    transition: transform var(--transicion-rapida);
+}
+
+/* Salto del icono al pasar el ratón */
+.zona-arrastre:hover .icono-arrastre,
+.zona-arrastre.dragover .icono-arrastre {
+    /* Se eleva 6 píxeles */
+    transform: translateY(-6px);
+}
+
+/* Texto principal dentro de la zona de arrastre */
+.texto-principal {
+    /* Tamaño destacado */
+    font-size: 1.15rem;
+    /* Peso seminegrita */
+    font-weight: 700;
+    /* Color blanco */
+    color: var(--texto-principal);
+    /* Separación inferior */
+    margin-bottom: 0.3rem;
+}
+
+/* Texto secundario de ayuda */
+.texto-secundario {
+    /* Tamaño reducido */
+    font-size: 0.88rem;
+    /* Color secundario grisáceo */
+    color: var(--texto-secundario);
+}
+
+/* Input file oculto pero accesible */
+.input-archivo-oculto {
+    /* Posición absoluta fuera de la vista */
+    position: absolute;
+    /* Ancho mínimo */
+    width: 1px;
+    /* Alto mínimo */
+    height: 1px;
+    /* Opacidad cero */
+    opacity: 0;
+    /* Clip para ocultar */
+    clip: rect(0, 0, 0, 0);
+    /* Sin puntero directo */
+    pointer-events: none;
+}
+
+/* ==============================================================================
+   6. BARRA DE ACCIONES Y METADATOS DEL ARCHIVO
+   ============================================================================== */
+
+/* Barra contenedora de botones y estado */
+.barra-acciones {
+    /* Modelo de caja flexible */
+    display: flex;
+    /* Envolver si no cabe en pantalla estrecha */
+    flex-wrap: wrap;
+    /* Alineación vertical */
+    align-items: center;
+    /* Distribuir botones a la izquierda y estado a la derecha */
+    justify-content: space-between;
+    /* Espacio entre elementos */
+    gap: 1rem;
+    /* Margen superior respecto a la zona de arrastre */
+    margin-top: 1.25rem;
+    /* Margen inferior antes del resultado */
+    margin-bottom: 1.5rem;
+}
+
+/* Grupo flexible de botones de prueba */
+.grupo-botones {
+    /* Modelo flexible */
+    display: flex;
+    /* Envolver en móviles */
+    flex-wrap: wrap;
+    /* Espacio entre botones */
+    gap: 0.65rem;
+}
+
+/* Estilo base compartido para todos los botones */
+.btn {
+    /* Modelo flexible */
+    display: inline-flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Relleno interno cómodo */
+    padding: 0.55rem 1rem;
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-sm);
+    /* Tipografía principal */
+    font-family: var(--fuente-sans);
+    /* Tamaño de texto legible */
+    font-size: 0.85rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Cursor de mano */
+    cursor: pointer;
+    /* Transición suave */
+    transition: all var(--transicion-rapida);
+    /* Borde transparente por defecto */
+    border: 1px solid transparent;
+}
+
+/* Efecto al presionar un botón */
+.btn:active {
+    /* Reducción sutil de escala que simula clic físico */
+    transform: scale(0.97);
+}
+
+/* Botón demo para texto plano */
+.btn-demo-texto {
+    /* Fondo translúcido verdoso */
+    background: rgba(16, 185, 129, 0.15);
+    /* Borde verde */
+    border-color: rgba(16, 185, 129, 0.35);
+    /* Color esmeralda */
+    color: var(--color-exito);
+}
+
+/* Hover botón demo texto */
+.btn-demo-texto:hover {
+    /* Fondo más vivo */
+    background: rgba(16, 185, 129, 0.25);
+    /* Elevación */
+    transform: translateY(-2px);
+    /* Sombra esmeralda */
+    box-shadow: 0 4px 12px var(--resplandor-exito);
+}
+
+/* Botón demo para imagen */
+.btn-demo-img {
+    /* Fondo translúcido índigo */
+    background: rgba(99, 102, 241, 0.15);
+    /* Borde índigo */
+    border-color: rgba(99, 102, 241, 0.35);
+    /* Color primario */
+    color: var(--color-primario);
+}
+
+/* Hover botón demo imagen */
+.btn-demo-img:hover {
+    /* Fondo más vivo */
+    background: rgba(99, 102, 241, 0.25);
+    /* Elevación */
+    transform: translateY(-2px);
+    /* Sombra índigo */
+    box-shadow: 0 4px 12px var(--resplandor-primario);
+}
+
+/* Botón para limpiar resultado */
+.btn-limpiar {
+    /* Fondo rojizo translúcido */
+    background: rgba(244, 63, 94, 0.12);
+    /* Borde rojizo */
+    border-color: rgba(244, 63, 94, 0.3);
+    /* Color carmesí */
+    color: var(--color-peligro);
+}
+
+/* Hover botón limpiar */
+.btn-limpiar:hover {
+    /* Fondo más vivo */
+    background: rgba(244, 63, 94, 0.22);
+    /* Elevación */
+    transform: translateY(-2px);
+    /* Sombra carmesí */
+    box-shadow: 0 4px 12px var(--resplandor-peligro);
+}
+
+/* Caja de información y metadatos del archivo */
+.info-archivo {
+    /* Modelo flexible */
+    display: flex;
+    /* Alineación vertical centrada */
+    align-items: center;
+    /* Espacio entre píldoras */
+    gap: 0.6rem;
+    /* Relleno interno */
+    padding: 0.45rem 0.85rem;
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.4);
+    /* Borde sutil */
+    border: 1px solid var(--borde-sutil);
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-sm);
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño fino */
+    font-size: 0.78rem;
+}
+
+/* Insignia del tipo de archivo y método */
+.metadato-badge {
+    /* Fondo cian translúcido */
+    background: rgba(6, 182, 212, 0.15);
+    /* Borde fino */
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    /* Color cian */
+    color: var(--color-cian);
+    /* Relleno de píldora */
+    padding: 0.15rem 0.5rem;
+    /* Bordes redondeados */
+    border-radius: var(--radio-pildora);
+    /* Peso seminegrita */
+    font-weight: 600;
+}
+
+/* Nombre del archivo en la barra */
+.metadato-nombre {
+    /* Color blanco */
+    color: var(--texto-principal);
+    /* Anchura máxima para truncar si es muy largo */
+    max-width: 180px;
+    /* Evitar salto de línea */
+    white-space: nowrap;
+    /* Ocultar desbordamiento */
+    overflow: hidden;
+    /* Puntos suspensivos */
+    text-overflow: ellipsis;
+}
+
+/* Tamaño del archivo en la barra */
+.metadato-tamano {
+    /* Color atenuado */
+    color: var(--texto-atenuado);
+}
+
+/* ==============================================================================
+   7. CONTENEDOR DE RESULTADO (.resultado)
+   ============================================================================== */
+
+/* Contenedor principal donde se inyecta la imagen o el texto (.resultado) */
+.resultado {
+    /* Fondo de tarjeta oscura translúcida */
+    background: var(--bg-tarjeta);
+    /* Borde sutil */
+    border: 1px solid var(--borde-sutil);
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-lg);
+    /* Relleno interno */
+    padding: 1.5rem;
+    /* Altura mínima para mantener estructura visual */
+    min-height: 280px;
+    /* Modelo flexible para centrar contenidos */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Posicionamiento relativo */
+    position: relative;
+    /* Desenfoque de fondo */
+    backdrop-filter: blur(12px);
+    /* Sombra de caja */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    /* Transición suave */
+    transition: border-color var(--transicion-rapida);
+}
+
+/* Animación de entrada al inyectar contenido */
+.resultado > * {
+    /* Aplicamos animación de aparición fluida */
+    animation: fadeInResultado 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Keyframes de la animación de aparición */
+@keyframes fadeInResultado {
+    /* Estado inicial */
+    from {
+        /* Opacidad cero */
+        opacity: 0;
+        /* Ligero desplazamiento hacia arriba */
+        transform: translateY(8px);
+    }
+    /* Estado final */
+    to {
+        /* Opacidad completa */
+        opacity: 1;
+        /* Posición original */
+        transform: translateY(0);
+    }
+}
+
+/* Estado inicial vacío cuando no se ha cargado ningún archivo */
+.estado-inicial {
+    /* Texto centrado */
+    text-align: center;
+    /* Color atenuado */
+    color: var(--texto-secundario);
+    /* Relleno */
+    padding: 2rem 1rem;
+}
+
+/* Icono del estado inicial */
+.icono-estado {
+    /* Tamaño grande */
+    font-size: 2.8rem;
+    /* Bloque para salto de línea */
+    display: block;
+    /* Separación inferior */
+    margin-bottom: 0.6rem;
+    /* Opacidad moderada */
+    opacity: 0.6;
+}
+
+/* Párrafo del estado inicial */
+.estado-inicial p {
+    /* Tamaño de texto */
+    font-size: 1.05rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Color blanco */
+    color: var(--texto-principal);
+    /* Margen inferior */
+    margin-bottom: 0.3rem;
+}
+
+/* Subtexto aclaratorio */
+.estado-inicial small {
+    /* Tamaño fino */
+    font-size: 0.82rem;
+    /* Color atenuado */
+    color: var(--texto-atenuado);
+}
+
+/* ==============================================================================
+   8. CONTENEDOR Y RENDERIZADO DE IMÁGENES
+   ============================================================================== */
+
+/* Envoltorio semántico <figure> para la imagen renderizada */
+.contenedor-imagen {
+    /* Ancho completo hasta el límite del contenedor */
+    width: 100%;
+    /* Modelo flexible en columna */
+    display: flex;
+    flex-direction: column;
+    /* Centrado horizontal */
+    align-items: center;
+    /* Sin márgenes residuales */
+    margin: 0;
+}
+
+/* Imagen cargada dinámicamente */
+.contenedor-imagen img {
+    /* Anchura máxima responsiva */
+    max-width: 100%;
+    /* Altura máxima de visualización para que no desborde la pantalla */
+    max-height: 480px;
+    /* Ajuste de contención proporcional sin deformar */
+    object-fit: contain;
+    /* Esquinas redondeadas */
+    border-radius: var(--radio-md);
+    /* Sombra de relieve exterior */
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 20px var(--resplandor-primario);
+    /* Borde sutil con acento índigo */
+    border: 1px solid var(--borde-acento);
+    /* Visualización en bloque */
+    display: block;
+}
+
+/* Pie de foto descriptivo de la imagen */
+.caption-imagen {
+    /* Separación superior respecto a la imagen */
+    margin-top: 1rem;
+    /* Relleno de píldora */
+    padding: 0.4rem 1rem;
+    /* Fondo oscuro translúcido */
+    background: rgba(0, 0, 0, 0.5);
+    /* Borde fino */
+    border: 1px solid var(--borde-sutil);
+    /* Bordes redondeados */
+    border-radius: var(--radio-pildora);
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto */
+    font-size: 0.78rem;
+    /* Color cian de metadatos */
+    color: var(--color-cian);
+}
+
+/* ==============================================================================
+   9. CONTENEDOR Y RENDERIZADO DE TEXTO PLANO
+   ============================================================================== */
+
+/* Envoltorio del visor de texto y código */
+.contenedor-texto {
+    /* Ancho completo */
+    width: 100%;
+    /* Modelo flexible en columna */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra superior con encabezado del documento de texto */
+.header-texto {
+    /* Modelo flexible */
+    display: flex;
+    /* Alineación vertical */
+    align-items: center;
+    /* Distribuir título a la izquierda y badge a la derecha */
+    justify-content: space-between;
+    /* Relleno */
+    padding: 0.6rem 1rem;
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.4);
+    /* Borde superior y laterales */
+    border: 1px solid var(--borde-sutil);
+    border-bottom: none;
+    /* Esquinas superiores redondeadas */
+    border-top-left-radius: var(--radio-sm);
+    border-top-right-radius: var(--radio-sm);
+    /* Tipografía */
+    font-family: var(--fuente-mono);
+    /* Tamaño fino */
+    font-size: 0.8rem;
+    /* Color blanco */
+    color: var(--texto-principal);
+}
+
+/* Visor de código preformateado <pre> */
+.visor-codigo {
+    /* Ancho completo */
+    width: 100%;
+    /* Altura máxima con barra de desplazamiento vertical */
+    max-height: 420px;
+    /* Desplazamiento automático si el contenido excede la altura */
+    overflow-y: auto;
+    /* Desplazamiento horizontal si hay líneas muy largas */
+    overflow-x: auto;
+    /* Relleno interno */
+    padding: 1.2rem;
+    /* Fondo oscuro estilo terminal */
+    background: #050811;
+    /* Borde completo */
+    border: 1px solid var(--borde-sutil);
+    /* Esquinas inferiores redondeadas */
+    border-bottom-left-radius: var(--radio-sm);
+    border-bottom-right-radius: var(--radio-sm);
+    /* Tipografía de código */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto de código */
+    font-size: 0.85rem;
+    /* Altura de línea cómoda para lectura */
+    line-height: 1.6;
+    /* Color de texto claro */
+    color: #e2e8f0;
+    /* Conservar saltos de línea y espacios */
+    white-space: pre-wrap;
+    /* Romper palabras excesivamente largas */
+    word-break: break-word;
+}
+
+/* Personalización de la barra de desplazamiento en el visor de código */
+.visor-codigo::-webkit-scrollbar {
+    /* Ancho de la barra */
+    width: 8px;
+    height: 8px;
+}
+
+.visor-codigo::-webkit-scrollbar-track {
+    /* Fondo de la pista */
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.visor-codigo::-webkit-scrollbar-thumb {
+    /* Color del pulgar de la barra */
+    background: rgba(255, 255, 255, 0.15);
+    /* Bordes redondeados */
+    border-radius: 4px;
+}
+
+.visor-codigo::-webkit-scrollbar-thumb:hover {
+    /* Pulgar más claro al pasar el cursor */
+    background: var(--color-cian);
+}
+
+/* ==============================================================================
+   10. ADAPTABILIDAD RESPONSIVA (MEDIA QUERIES)
+   ============================================================================== */
+
+/* Ajustes para dispositivos móviles (anchura menor a 640px) */
+@media (max-width: 640px) {
+    /* Reducimos el relleno de la zona de arrastre */
+    .zona-arrastre {
+        /* Relleno menor */
+        padding: 2rem 1rem;
+    }
+
+    /* Orientación vertical para la barra de acciones */
+    .barra-acciones {
+        /* Columna */
+        flex-direction: column;
+        /* Alinear al inicio */
+        align-items: stretch;
+    }
+
+    /* Botones ocupan el ancho disponible */
+    .grupo-botones {
+        /* Ancho completo */
+        width: 100%;
+        /* Distribución equitativa */
+        justify-content: stretch;
+    }
+
+    /* Cada botón crece proporcionalmente */
+    .grupo-botones .btn {
+        /* Crecer */
+        flex: 1 1 auto;
+    }
+
+    /* Caja de información centrada */
+    .info-archivo {
+        /* Centrado */
+        justify-content: center;
+        /* Ancho completo */
+        width: 100%;
+    }
+}
+
+
+/* Pie de foto descriptivo de la imagen */
+.caption-imagen {
+    /* Separación superior respecto a la imagen */
+    margin-top: 1rem;
+    /* Relleno de píldora */
+    padding: 0.4rem 1rem;
+    /* Fondo oscuro translúcido */
+    background: rgba(0, 0, 0, 0.5);
+    /* Borde fino */
+    border: 1px solid var(--borde-sutil);
+    /* Bordes redondeados */
+    border-radius: var(--radio-pildora);
+    /* Tipografía monoespaciada */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto */
+    font-size: 0.78rem;
+    /* Color cian de metadatos */
+    color: var(--color-cian);
+}
+
+/* ==============================================================================
+   9. CONTENEDOR Y RENDERIZADO DE TEXTO PLANO
+   ============================================================================== */
+
+/* Envoltorio del visor de texto y código */
+.contenedor-texto {
+    /* Ancho completo */
+    width: 100%;
+    /* Modelo flexible en columna */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Barra superior con encabezado del documento de texto */
+.header-texto {
+    /* Modelo flexible */
+    display: flex;
+    /* Alineación vertical */
+    align-items: center;
+    /* Distribuir título a la izquierda y badge a la derecha */
+    justify-content: space-between;
+    /* Relleno */
+    padding: 0.6rem 1rem;
+    /* Fondo oscuro */
+    background: rgba(0, 0, 0, 0.4);
+    /* Borde superior y laterales */
+    border: 1px solid var(--borde-sutil);
+    border-bottom: none;
+    /* Esquinas superiores redondeadas */
+    border-top-left-radius: var(--radio-sm);
+    border-top-right-radius: var(--radio-sm);
+    /* Tipografía */
+    font-family: var(--fuente-mono);
+    /* Tamaño fino */
+    font-size: 0.8rem;
+    /* Color blanco */
+    color: var(--texto-principal);
+}
+
+/* Visor de código preformateado <pre> */
+.visor-codigo {
+    /* Ancho completo */
+    width: 100%;
+    /* Altura máxima con barra de desplazamiento vertical */
+    max-height: 420px;
+    /* Desplazamiento automático si el contenido excede la altura */
+    overflow-y: auto;
+    /* Desplazamiento horizontal si hay líneas muy largas */
+    overflow-x: auto;
+    /* Relleno interno */
+    padding: 1.2rem;
+    /* Fondo oscuro estilo terminal */
+    background: #050811;
+    /* Borde completo */
+    border: 1px solid var(--borde-sutil);
+    /* Esquinas inferiores redondeadas */
+    border-bottom-left-radius: var(--radio-sm);
+    border-bottom-right-radius: var(--radio-sm);
+    /* Tipografía de código */
+    font-family: var(--fuente-mono);
+    /* Tamaño de texto de código */
+    font-size: 0.85rem;
+    /* Altura de línea cómoda para lectura */
+    line-height: 1.6;
+    /* Color de texto claro */
+    color: #e2e8f0;
+    /* Conservar saltos de línea y espacios */
+    white-space: pre-wrap;
+    /* Romper palabras excesivamente largas */
+    word-break: break-word;
+}
+
+/* Personalización de la barra de desplazamiento en el visor de código */
+.visor-codigo::-webkit-scrollbar {
+    /* Ancho de la barra */
+    width: 8px;
+    height: 8px;
+}
+
+.visor-codigo::-webkit-scrollbar-track {
+    /* Fondo de la pista */
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.visor-codigo::-webkit-scrollbar-thumb {
+    /* Color del pulgar de la barra */
+    background: rgba(255, 255, 255, 0.15);
+    /* Bordes redondeados */
+    border-radius: 4px;
+}
+
+.visor-codigo::-webkit-scrollbar-thumb:hover {
+    /* Pulgar más claro al pasar el cursor */
+    background: var(--color-cian);
+}
+
+/* ==============================================================================
+   10. ADAPTABILIDAD RESPONSIVA (MEDIA QUERIES)
+   ============================================================================== */
+
+/* Ajustes para dispositivos móviles (anchura menor a 640px) */
+@media (max-width: 640px) {
+    /* Reducimos el relleno de la zona de arrastre */
+    .zona-arrastre {
+        /* Relleno menor */
+        padding: 2rem 1rem;
+    }
+
+    /* Orientación vertical para la barra de acciones */
+    .barra-acciones {
+        /* Columna */
+        flex-direction: column;
+        /* Alinear al inicio */
+        align-items: stretch;
+    }
+
+    /* Botones ocupan el ancho disponible */
+    .grupo-botones {
+        /* Ancho completo */
+        width: 100%;
+        /* Distribución equitativa */
+        justify-content: stretch;
+    }
+
+    /* Cada botón crece proporcionalmente */
+    .grupo-botones .btn {
+        /* Crecer */
+        flex: 1 1 auto;
+    }
+
+    /* Caja de información centrada */
+    .info-archivo {
+        /* Centrado */
+        justify-content: center;
+        /* Ancho completo */
+        width: 100%;
+    }
+}
