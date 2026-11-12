@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop con FileReader API | JavaScript Master Level</title>
+    <!-- Google Fonts: Outfit para textos y Fira Code para código y métricas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos externa -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Efectos ambientales luminosos de fondo -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Contenedor principal de la aplicación -->
+    <main class="contenedor-principal">
+        <!-- Encabezado pedagógico del ejercicio -->
+        <header class="encabezado">
+            <span class="badge-modulo">JAVASCRIPT MASTER LEVEL</span>
+            <h1 class="titulo">📁 Drag &amp; Drop con FileReader API</h1>
+            <p class="descripcion">
+                Arrastra y suelta cualquier archivo en la zona interactiva. La aplicación detecta automáticamente el tipo de archivo:
+                si es una <strong>imagen</strong> (o archivo no textual) se renderiza visualmente con <code>readAsDataURL()</code>, y si es un 
+                <strong>documento de texto</strong> se extrae su contenido con <code>readAsText()</code>.
+            </p>
+        </header>
+
+        <!-- Zona interactiva de arrastre original (.zona-arrastre) -->
+        <section class="zona-arrastre" id="zonaArrastre">
+            <span class="icono-arrastre">📥</span>
+            <p class="texto-principal">Arrastre y suelte un archivo aquí</p>
+            <p class="texto-secundario">o haga clic para seleccionarlo desde su dispositivo (imágenes o textos)</p>
+            <!-- Input file oculto para permitir también selección mediante clic -->
+            <input type="file" id="inputArchivo" class="input-archivo-oculto">
+        </section>
+
+        <!-- Barra de botones de acción y estado del archivo procesado -->
+        <div class="barra-acciones">
+            <div class="grupo-botones">
+                <button type="button" class="btn btn-demo-texto" id="btnDemoTexto">
+                    📄 Probar Texto Demo
+                </button>
+                <button type="button" class="btn btn-demo-img" id="btnDemoImg">
+                    🖼️ Probar Imagen Demo
+                </button>
+                <button type="button" class="btn btn-limpiar" id="btnLimpiar">
+                    🗑️ Limpiar
+                </button>
+            </div>
+
+            <!-- Información en vivo del archivo cargado -->
+            <div class="info-archivo" id="infoArchivo">
+                <span class="metadato-badge" id="badgeTipo">Esperando archivo</span>
+                <span class="metadato-nombre" id="nombreArchivo">Ningún archivo cargado</span>
+                <span class="metadato-tamano" id="tamanoArchivo">0 KB</span>
+            </div>
+        </div>
+
+        <!-- Contenedor donde se muestra el resultado cargado (.resultado) -->
+        <section class="resultado" id="resultado">
+            <div class="estado-inicial">
+                <span class="icono-estado">⏳</span>
+                <p>El contenido del archivo leído aparecerá aquí...</p>
+                <small>Suelta una imagen (.png, .jpg, .svg, .webp) o un documento (.txt, .json, .csv, .md, .js)</small>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script de lógica JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
