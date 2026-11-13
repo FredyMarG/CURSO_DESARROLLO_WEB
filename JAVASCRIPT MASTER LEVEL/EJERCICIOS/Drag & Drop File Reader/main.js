@@ -58,6 +58,11 @@ if (typeof document !== "undefined") {
         // Restauramos el estilo visual de la zona de arrastre a su color gris original (#888)
         changeStyle(e.target, "#888");
 
+        // Limpiamos el resultado anterior y removemos la clase de animación para preparar la nueva carga
+        result.classList.remove("animar-aparicion");
+        // Vaciamos el contenido textual o multimedia previo del contenedor
+        result.textContent = "";
+
         // Obtenemos el archivo soltado accediendo a la primera posición de files en dataTransfer
         const ar = e.dataTransfer.files[0];
 
@@ -85,6 +90,30 @@ if (typeof document !== "undefined") {
         obj.style.color = col;
         // Asignamos el borde discontinuo (dashed) de 4px con el color indicado
         obj.style.border = `4px dashed ${col}`;
+    };
+
+    // Función que inyecta el archivo procesado en el contenedor y ejecuta la animación de aparición
+    const mostrarResultadoConAnimacion = (nodoOTexto, tipo) => {
+        // Removemos la clase de animación si estaba activa de una carga previa
+        result.classList.remove("animar-aparicion");
+        // Limpiamos contenidos residuales del contenedor
+        result.textContent = "";
+
+        // Si el contenido a insertar es un texto plano
+        if (tipo === "texto") {
+            // Asignamos directamente la cadena de texto
+            result.textContent = nodoOTexto;
+        // Si el contenido es un elemento multimedia (imagen o video)
+        } else {
+            // Agregamos el elemento al árbol del DOM
+            result.appendChild(nodoOTexto);
+        }
+
+        // Forzamos un reflow del navegador para reiniciar la animación CSS limpiamente
+        void result.offsetWidth;
+
+        // Añadimos la clase '.animar-aparicion' para ejecutar la animación de entrada
+        result.classList.add("animar-aparicion");
     };
 
     // Función que anima el avance de la barra y el porcentaje con una transición ultra fluida
@@ -143,8 +172,8 @@ if (typeof document !== "undefined") {
         animacionFrameId = pedirFrame(paso);
     };
 
-    // Función que vincula los eventos de la FileReader API con la barra de carga en el DOM
-    const actualizarBarra = (reader, ar) => {
+    // Función que vincula los eventos de la FileReader API con la barra de carga y ejecuta la aparición al 100%
+    const actualizarBarra = (reader, ar, callbackAlCompletar) => {
         // Si no existen los elementos requeridos de la barra, salimos de la función
         if (!barraDeCarga && !porcentajeCarga) return;
 
@@ -195,6 +224,11 @@ if (typeof document !== "undefined") {
                     // Restauramos el borde de la zona de arrastre a su color original (#888)
                     changeStyle(zona, "#888");
                 }, 1400);
+
+                // Ejecutamos el callback para mostrar el archivo con la animación justo cuando la barra llega al 100%
+                if (typeof callbackAlCompletar === "function") {
+                    callbackAlCompletar();
+                }
             });
         });
     };
@@ -203,14 +237,19 @@ if (typeof document !== "undefined") {
     const cargarArchivo = (ar) => {
         // Instanciamos un nuevo lector FileReader dedicado al archivo de texto
         const reader = new FileReader();
+        // Variable local para almacenar el contenido textual una vez leído
+        let contenidoTexto = "";
 
-        // Conectamos la barra de carga para monitorear el progreso del archivo textual
-        actualizarBarra(reader, ar);
-
-        // Registramos el evento 'load' que se ejecuta cuando el archivo ha terminado de leerse
+        // Registramos el evento 'load' que se ejecuta cuando el archivo ha terminado de leerse en memoria
         reader.addEventListener("load", (e) => {
-            // Limpiamos contenidos anteriores e inyectamos el texto leído en el contenedor resultado
-            result.textContent = e.currentTarget.result;
+            // Guardamos el texto obtenido del archivo
+            contenidoTexto = e.currentTarget.result;
+        });
+
+        // Conectamos la barra de carga y le pasamos el callback para mostrar el texto al llegar al 100%
+        actualizarBarra(reader, ar, () => {
+            // Mostramos el texto leído detonando la animación de aparición
+            mostrarResultadoConAnimacion(contenidoTexto, "texto");
         });
 
         // Iniciamos la lectura del archivo interpretando sus bytes como texto con codificación UTF-8
@@ -221,22 +260,26 @@ if (typeof document !== "undefined") {
     const cargarImg = (ar) => {
         // Instanciamos un nuevo lector FileReader dedicado a la imagen
         const reader = new FileReader();
-
-        // Conectamos la barra de carga para monitorear el progreso de la imagen
-        actualizarBarra(reader, ar);
+        // Variable local para almacenar el elemento <img> generado
+        let imagenCreada = null;
 
         // Registramos el evento 'load' que se ejecuta cuando la lectura de la imagen termina
-        reader.addEventListener("load", (e) => {
+        reader.addEventListener("load", () => {
             // Generamos una URL temporal en memoria que apunta al archivo local (Blob)
             let url = URL.createObjectURL(ar);
             // Creamos un nuevo elemento <img> en el documento
-            let img = document.createElement("IMG");
+            imagenCreada = document.createElement("IMG");
             // Asignamos la URL generada al atributo src de la imagen
-            img.setAttribute("src", url);
-            // Limpiamos el contenedor para evitar que se superponga con textos o imágenes previas
-            result.textContent = "";
-            // Insertamos la nueva imagen como hijo dentro del contenedor resultado
-            result.appendChild(img);
+            imagenCreada.setAttribute("src", url);
+        });
+
+        // Conectamos la barra de carga y le pasamos el callback para mostrar la imagen al llegar al 100%
+        actualizarBarra(reader, ar, () => {
+            // Si la imagen fue creada correctamente
+            if (imagenCreada) {
+                // Mostramos la imagen detonando la animación de aparición
+                mostrarResultadoConAnimacion(imagenCreada, "imagen");
+            }
         });
 
         // Iniciamos la lectura asíncrona de la imagen codificándola en formato Data URL (Base64)
@@ -247,9 +290,8 @@ if (typeof document !== "undefined") {
     const cargarVideo = (ar) => {
         // Instanciamos un nuevo lector FileReader dedicado al procesamiento binario del video
         const reader = new FileReader();
-
-        // Conectamos la barra de carga para monitorear el progreso de lectura del video
-        actualizarBarra(reader, ar);
+        // Variable local para almacenar el elemento <video> generado
+        let videoCreado = null;
 
         // Registramos el evento 'load' que se dispara cuando los bytes binarios están listos
         reader.addEventListener("load", (e) => {
@@ -258,17 +300,22 @@ if (typeof document !== "undefined") {
             // Generamos una URL en memoria que apunta directamente al Blob del video
             let url = URL.createObjectURL(video);
             // Creamos un nuevo elemento <video> en el documento
-            let vid = document.createElement("VIDEO");
+            videoCreado = document.createElement("VIDEO");
             // Asignamos la URL generada al atributo src del reproductor de video
-            vid.setAttribute("src", url);
+            videoCreado.setAttribute("src", url);
             // Habilitamos los controles nativos de reproducción (play, pausa, barra de tiempo, volumen)
-            vid.setAttribute("controls", "true");
-            // Limpiamos cualquier texto o imagen anterior dentro del contenedor de resultado
-            result.textContent = "";
-            // Insertamos el elemento video dentro del contenedor resultado
-            result.appendChild(vid);
-            // Iniciamos la reproducción automática del video
-            vid.play();
+            videoCreado.setAttribute("controls", "true");
+        });
+
+        // Conectamos la barra de carga y le pasamos el callback para mostrar el video al llegar al 100%
+        actualizarBarra(reader, ar, () => {
+            // Si el video fue creado correctamente
+            if (videoCreado) {
+                // Mostramos el video detonando la animación de aparición
+                mostrarResultadoConAnimacion(videoCreado, "video");
+                // Iniciamos la reproducción automática del video una vez insertado en pantalla
+                videoCreado.play();
+            }
         });
 
         // Leemos el archivo de video como un ArrayBuffer binario para máxima eficiencia de memoria
