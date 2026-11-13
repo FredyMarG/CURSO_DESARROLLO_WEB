@@ -347,8 +347,6 @@ body {
     overflow-y: auto;
     /* Oculta desbordamiento horizontal */
     overflow-x: hidden;
-    /* Animación de entrada al inyectar el contenido */
-    animation: fadeInResultado 0.35s ease-out forwards;
 }
 
 /* Ocultamos el contenedor .resultado cuando esté vacío */
@@ -357,21 +355,56 @@ body {
     display: none;
 }
 
-/* Animación keyframe para aparición suave del resultado */
-@keyframes fadeInResultado {
-    /* Estado inicial */
-    from {
-        /* Totalmente transparente */
+/* Clase añadida desde JavaScript para disparar la animación de aparición del archivo al cargar */
+.resultado.animar-aparicion {
+    /* Ejecuta la animación de aparición elegante con curva cúbica suave */
+    animation: aparecerArchivo 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animación complementaria para elementos multimedia (imágenes y videos) al aparecer */
+.resultado.animar-aparicion img,
+.resultado.animar-aparicion video {
+    /* Ejecuta una animación de enfoque y escala suave */
+    animation: zoomArchivo 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Animación keyframe para la aparición elegante del contenedor del archivo */
+@keyframes aparecerArchivo {
+    /* Estado inicial: transparente, ligeramente desplazado hacia abajo y reducido */
+    0% {
+        /* Totalmente invisible */
         opacity: 0;
-        /* Ligeramente desplazado hacia abajo */
-        transform: translateY(12px);
+        /* Desplazamiento hacia abajo de 16 píxeles con ligera escala del 97% */
+        transform: translateY(16px) scale(0.97);
+        /* Desenfoque sutil de 4 píxeles */
+        filter: blur(4px);
+    }
+    /* Estado final: totalmente nítido, centrado y en su escala natural */
+    100% {
+        /* Opacidad completa */
+        opacity: 1;
+        /* Posición vertical original y tamaño al 100% */
+        transform: translateY(0) scale(1);
+        /* Nitidez total sin desenfoque */
+        filter: blur(0);
+    }
+}
+
+/* Animación keyframe para zoom suave en imágenes y videos al cargarse */
+@keyframes zoomArchivo {
+    /* Estado inicial */
+    0% {
+        /* Transparente al inicio */
+        opacity: 0;
+        /* Escala ligeramente menor al 95% */
+        transform: scale(0.95);
     }
     /* Estado final */
-    to {
-        /* Totalmente visible */
+    100% {
+        /* Opacidad total */
         opacity: 1;
-        /* En su posición original */
-        transform: translateY(0);
+        /* Escala completa al 100% */
+        transform: scale(1);
     }
 }
 
