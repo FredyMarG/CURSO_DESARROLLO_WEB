@@ -1,991 +1,493 @@
-/**
- * ==============================================================================
- * 🎨 EJERCICIO PRÁCTICO: DRAG & DROP CON FILEREADER API
- * ==============================================================================
- * Archivo: style.css
- * Propósito: Estilos visuales modernos, animaciones interactivas de arrastre
- *            y renderizado estético para imágenes y visores de texto plano.
- * Documentación pedagógica detallada línea por línea al 100%.
- * ==============================================================================
- */
-
 /* ==============================================================================
-   1. VARIABLES GLOBALES DE DISEÑO (:root)
+   ESTILOS PREMIUM Y MODERNOS CON ENCABEZADO Y TÍTULO DE ALTO IMPACTO
+   Documentación pedagógica detallada LÍNEA POR LÍNEA al 100%
    ============================================================================== */
 
-/* Selector de la raíz del documento para declarar propiedades personalizadas (variables CSS) */
+/* Selector de la raíz (:root) para definir la paleta de colores y variables globales */
 :root {
-    /* Color de fondo principal: azul ultra profundo casi negro */
-    --bg-principal: #070a13;
-    /* Color de fondo de los paneles y contenedores con transparencia para efecto vidrio */
-    --bg-tarjeta: rgba(15, 23, 42, 0.75);
-    /* Color de fondo para elementos interactivos elevados */
-    --bg-superficie: rgba(30, 41, 59, 0.65);
-    /* Color de fondo de botones al pasar el ratón */
-    --bg-superficie-hover: rgba(51, 65, 85, 0.85);
-
-    /* Color primario de acento: índigo vibrante */
+    /* Color de fondo principal: azul medianoche ultra oscuro */
+    --color-fondo: #090d16;
+    /* Fondo translúcido con efecto glassmorphism para paneles */
+    --color-tarjeta: rgba(15, 23, 42, 0.8);
+    /* Color de texto principal en blanco de alto contraste */
+    --color-texto: #f8fafc;
+    /* Color de texto secundario en gris azulado suave */
+    --color-texto-suave: #94a3b8;
+    /* Color primario de énfasis: tono índigo eléctrico */
     --color-primario: #6366f1;
-    /* Resplandor neón asociado al color primario */
+    /* Resplandor luminoso neón para el color primario */
     --resplandor-primario: rgba(99, 102, 241, 0.35);
-
-    /* Color secundario: cian luminoso para datos y estados activos */
+    /* Color secundario tecnológico: cian brillante */
     --color-cian: #06b6d4;
-    /* Resplandor neón asociado al color cian */
+    /* Resplandor neón cian */
     --resplandor-cian: rgba(6, 182, 212, 0.3);
-
-    /* Color semántico de éxito: verde esmeralda */
-    --color-exito: #10b981;
-    /* Resplandor esmeralda */
-    --resplandor-exito: rgba(16, 185, 129, 0.3);
-
-    /* Color semántico de peligro o reinicio: rosa carmesí */
-    --color-peligro: #f43f5e;
-    /* Resplandor carmesí */
-    --resplandor-peligro: rgba(244, 63, 94, 0.3);
-
-    /* Color de texto principal: blanco hueso de alta legibilidad */
-    --texto-principal: #f8fafc;
-    /* Color de texto secundario: gris azulado para descripciones */
-    --texto-secundario: #94a3b8;
-    /* Color de texto atenuado para notas secundarias */
-    --texto-atenuado: #64748b;
-
-    /* Borde sutil blanco traslúcido al 8% */
-    --borde-sutil: rgba(255, 255, 255, 0.08);
-    /* Borde medio blanco traslúcido al 16% */
-    --borde-medio: rgba(255, 255, 255, 0.16);
-    /* Borde interactivo con tono índigo */
-    --borde-acento: rgba(99, 102, 241, 0.4);
-
-    /* Tipografía principal sin serifa */
-    --fuente-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    /* Tipografía monoespaciada para código y métricas */
-    --fuente-mono: 'Fira Code', ui-monospace, Menlo, Monaco, Consolas, monospace;
-
-    /* Radios de borde para esquinas */
-    --radio-sm: 8px;
-    --radio-md: 14px;
-    --radio-lg: 20px;
-    --radio-pildora: 9999px;
-
-    /* Transición rápida para micro-interacciones */
-    --transicion-rapida: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-    /* Transición fluida para transformaciones complejas */
-    --transicion-suave: 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    /* Borde fino translúcido para tarjetas de cristal */
+    --borde-vidrio: rgba(255, 255, 255, 0.12);
+    /* Radio de curvatura para esquinas redondeadas */
+    --radio-tarjeta: 16px;
+    /* Tipografía principal sans-serif para títulos y párrafos */
+    --fuente-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+    /* Tipografía monoespaciada para código, métricas y barra de carga */
+    --fuente-mono: 'Fira Code', Consolas, monospace;
+    /* Transición suave para micro-interacciones al pasar el cursor */
+    --transicion-suave: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-/* ==============================================================================
-   2. REINICIO DE ESTILOS Y CUERPO PRINCIPAL
-   ============================================================================== */
 
 /* Selector universal para normalizar el modelo de cajas y eliminar márgenes por defecto */
 *, *::before, *::after {
-    /* El relleno y el borde se incluyen dentro del ancho y alto total */
+    /* Incluye el padding y el border en el cálculo del tamaño total */
     box-sizing: border-box;
-    /* Eliminamos márgenes residuales */
+    /* Elimina márgenes exteriores residuales del navegador */
     margin: 0;
-    /* Eliminamos rellenos residuales */
+    /* Elimina rellenos internos residuales del navegador */
     padding: 0;
 }
 
-/* Estilos aplicados al elemento body */
+/* Selector para el elemento body que configura el lienzo visual completo */
 body {
-    /* Asignamos el fondo oscuro */
-    background-color: var(--bg-principal);
-    /* Tipografía principal del proyecto */
+    /* Fondo con gradiente radial que proyecta una aureola de luz en la parte superior */
+    background: radial-gradient(circle at 50% 12%, #1a233d 0%, var(--color-fondo) 65%);
+    /* Asigna el color de texto claro predeterminado */
+    color: var(--color-texto);
+    /* Aplica la tipografía principal del sistema de diseño */
     font-family: var(--fuente-sans);
-    /* Color de texto predeterminado claro */
-    color: var(--texto-principal);
-    /* Altura mínima igual al 100% de la ventana */
-    min-height: 100vh;
-    /* Posicionamiento relativo para contener las luces de fondo */
-    position: relative;
-    /* Ocultamos cualquier desbordamiento horizontal */
-    overflow-x: hidden;
-    /* Suavizado de fuentes para máxima nitidez */
+    /* Suavizado de fuentes para renderizado nítido en pantallas modernas */
     -webkit-font-smoothing: antialiased;
+    /* Altura mínima del 100% de la ventana visible */
+    min-height: 100vh;
+    /* Modelo de caja flexible para estructurar los elementos en columna */
+    display: flex;
+    /* Distribución en dirección vertical */
+    flex-direction: column;
+    /* Centra los bloques horizontalmente en la pantalla */
+    align-items: center;
+    /* Relleno superior, lateral e inferior de holgura */
+    padding: 40px 20px 60px;
+    /* Evita el desbordamiento horizontal accidental */
+    overflow-x: hidden;
 }
 
-/* ==============================================================================
-   3. EFECTOS LUMINOSOS AMBIENTALES DE FONDO
-   ============================================================================== */
-
-/* Estilos base de las esferas de luz difusas */
-.bg-glow {
-    /* Fijamos la posición respecto a la pantalla */
-    position: fixed;
-    /* Ancho de la esfera luminosa */
-    width: 450px;
-    /* Alto de la esfera luminosa */
-    height: 450px;
-    /* Forma circular */
-    border-radius: 50%;
-    /* Desenfoque pronunciado para difuminar la luz */
-    filter: blur(140px);
-    /* Permitir clics a través de la luz */
-    pointer-events: none;
-    /* Ubicado detrás de todo el contenido */
-    z-index: 0;
-    /* Opacidad moderada */
-    opacity: 0.35;
+/* Selector para el contenedor principal que agrupa y centra toda la aplicación */
+.contenedor-app {
+    /* Ancho al 100% de su espacio disponible */
+    width: 100%;
+    /* Límite de ancho máximo de 540 píxeles para una proporción armónica */
+    max-width: 540px;
+    /* Modelo flexible en columna para apilar encabezado, zona y resultado */
+    display: flex;
+    /* Dirección vertical */
+    flex-direction: column;
+    /* Centra los elementos hijos horizontalmente */
+    align-items: center;
 }
 
-/* Primera esfera luminosa (superior izquierda) */
-.glow-1 {
-    /* Desplazada hacia arriba */
-    top: -120px;
-    /* Desplazada hacia la izquierda */
-    left: -120px;
-    /* Gradiente radial con tono primario índigo */
-    background: radial-gradient(circle, var(--color-primario), transparent 70%);
-}
-
-/* Segunda esfera luminosa (inferior derecha) */
-.glow-2 {
-    /* Desplazada hacia abajo */
-    bottom: -120px;
-    /* Desplazada hacia la derecha */
-    right: -120px;
-    /* Gradiente radial con tono cian */
-    background: radial-gradient(circle, var(--color-cian), transparent 70%);
-}
-
-/* ==============================================================================
-   4. CONTENEDOR PRINCIPAL Y ENCABEZADO
-   ============================================================================== */
-
-/* Contenedor central que limita y alinea el contenido */
-.contenedor-principal {
-    /* Ancho máximo para mantener legibilidad */
-    max-width: 860px;
-    /* Centrado horizontal automático */
-    margin: 0 auto;
-    /* Relleno superior, lateral e inferior */
-    padding: 2.5rem 1.5rem 4rem;
-    /* Posicionamiento relativo sobre las luces */
-    position: relative;
-    /* Nivel de capa superior */
-    z-index: 1;
-}
-
-/* Encabezado pedagógico */
+/* Selector para el bloque de encabezado */
 .encabezado {
-    /* Centramos el texto */
+    /* Centra el texto del título y subtítulo */
     text-align: center;
-    /* Margen de separación inferior */
-    margin-bottom: 2rem;
+    /* Separación inferior antes de la zona de arrastre */
+    margin-bottom: 25px;
 }
 
-/* Insignia pequeña que indica el módulo */
+/* Insignia decorativa sobre el título */
 .badge-modulo {
     /* Visualización en línea de bloque */
     display: inline-block;
-    /* Relleno interno */
+    /* Relleno interno superior/inferior y lateral */
     padding: 0.3rem 0.85rem;
-    /* Fondo translúcido con acento índigo */
+    /* Fondo oscuro translúcido con tinte índigo */
     background: rgba(99, 102, 241, 0.15);
-    /* Borde fino */
-    border: 1px solid var(--borde-acento);
-    /* Bordes redondeados en píldora */
-    border-radius: var(--radio-pildora);
-    /* Tipografía monoespaciada */
+    /* Borde fino con acento cian */
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    /* Esquinas completamente redondeadas en forma de píldora */
+    border-radius: 9999px;
+    /* Tipografía monoespaciada para aspecto tecnológico */
     font-family: var(--fuente-mono);
-    /* Tamaño pequeño */
+    /* Tamaño de texto fino */
     font-size: 0.72rem;
-    /* Negrita */
+    /* Peso seminegrita */
     font-weight: 600;
-    /* Color cian tecnológico */
-    color: var(--color-cian);
-    /* Separación inferior */
-    margin-bottom: 0.8rem;
-    /* Texto en mayúsculas */
+    /* Letras en mayúsculas */
     text-transform: uppercase;
-    /* Espaciado de letras */
+    /* Espaciado entre letras */
     letter-spacing: 0.08em;
+    /* Color de texto cian */
+    color: var(--color-cian);
+    /* Separación inferior respecto al título */
+    margin-bottom: 0.75rem;
+    /* Sombra sutil de resplandor */
+    box-shadow: 0 0 12px var(--resplandor-cian);
 }
 
-/* Título principal */
-.titulo {
-    /* Tamaño fluido según el ancho de pantalla */
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    /* Peso seminegrita marcado */
+/* Título principal de la aplicación */
+.titulo-principal {
+    /* Tamaño fluido y adaptable según el ancho de pantalla */
+    font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+    /* Peso tipográfico extra negrita para máximo impacto */
     font-weight: 800;
     /* Altura de línea compacta */
     line-height: 1.2;
-    /* Color blanco */
-    color: var(--texto-principal);
-    /* Margen inferior */
+    /* Fondo con gradiente metálico moderno entre blanco, lavanda y cian */
+    background: linear-gradient(135deg, #ffffff 30%, #c7d2fe 70%, var(--color-cian) 100%);
+    /* Aplica el gradiente como máscara de recorte sobre el texto en navegadores WebKit */
+    background-clip: text;
+    /* Hace transparente el relleno del texto para revelar el gradiente */
+    -webkit-text-fill-color: transparent;
+    /* Margen inferior que lo separa del subtítulo */
     margin-bottom: 0.6rem;
 }
 
-/* Descripción explicativa */
-.descripcion {
-    /* Tamaño estándar legible */
-    font-size: 1rem;
-    /* Color secundario grisáceo */
-    color: var(--texto-secundario);
-    /* Ancho máximo para líneas cómodas */
-    max-width: 680px;
-    /* Centrado horizontal */
+/* Subtítulo explicativo del ejercicio */
+.subtitulo {
+    /* Tamaño de fuente legible */
+    font-size: 0.95rem;
+    /* Color de texto suave para no competir con el título principal */
+    color: var(--color-texto-suave);
+    /* Altura de línea cómoda para lectura */
+    line-height: 1.55;
+    /* Ancho máximo para evitar líneas excesivamente largas */
+    max-width: 480px;
+    /* Centrado horizontal automático */
     margin: 0 auto;
-    /* Altura de línea relajada */
-    line-height: 1.6;
 }
 
-/* Bloques de código inline dentro de la descripción */
-.descripcion code {
-    /* Fondo oscuro para resaltar */
-    background: rgba(255, 255, 255, 0.08);
-    /* Relleno interno */
-    padding: 0.15rem 0.4rem;
-    /* Esquinas redondeadas */
-    border-radius: 4px;
-    /* Tipografía de código */
-    font-family: var(--fuente-mono);
-    /* Tamaño proporcional */
-    font-size: 0.88em;
-    /* Color de texto cian */
-    color: var(--color-cian);
-}
-
-/* ==============================================================================
-   5. ZONA DE ARRASTRE (.zona-arrastre)
-   ============================================================================== */
-
-/* Contenedor interactivo de arrastre y soltado de archivos */
+/* Selector para la zona interactiva donde se arrastran y sueltan los archivos */
 .zona-arrastre {
-    /* Borde discontinuo característico de Drag & Drop */
-    border: 3px dashed rgba(255, 255, 255, 0.22);
-    /* Esquinas redondeadas grandes */
-    border-radius: var(--radio-lg);
-    /* Fondo translúcido con efecto glassmorphism */
-    background: var(--bg-tarjeta);
-    /* Desenfoque de fondo */
-    backdrop-filter: blur(12px);
-    /* Relleno interno amplio */
-    padding: 3rem 1.5rem;
-    /* Centrado de textos e iconos */
+    /* Ancho al 100% dentro del contenedor principal */
+    width: 100%;
+    /* Relleno interno amplio de 50 píxeles */
+    padding: 50px 25px;
+    /* Borde discontinuo (dashed) de 4 píxeles en color gris medio (#888) */
+    border: 4px dashed #888;
+    /* Esquinas redondeadas elegantes */
+    border-radius: var(--radio-tarjeta);
+    /* Fondo oscuro translúcido tipo tarjeta de cristal */
+    background: var(--color-tarjeta);
+    /* Desenfoque de fondo glassmorphism de 14 píxeles */
+    backdrop-filter: blur(14px);
+    /* Sombra exterior de profundidad */
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+    /* Color inicial del texto interior en gris medio */
+    color: #888;
+    /* Centra el texto dentro del contenedor */
     text-align: center;
-    /* Cursor de mano para invitar al clic */
+    /* Tamaño de fuente destacado */
+    font-size: 20px;
+    /* Peso seminegrita para que la instrucción resalte */
+    font-weight: 600;
+    /* Separación entre letras */
+    letter-spacing: 0.02em;
+    /* Cursor de selección que invita a la interactividad */
     cursor: pointer;
-    /* Transición suave para cambios de borde, fondo y escala */
-    transition: all var(--transicion-rapida);
-    /* Posicionamiento relativo para contener el input oculto */
+    /* Evita seleccionar el texto al arrastrar el puntero */
+    user-select: none;
+    /* Transición suave para que el cambio de color de borde del JS no sea brusco */
+    transition: var(--transicion-suave);
+    /* Posicionamiento relativo para anclar el pseudo-elemento del icono */
     position: relative;
-    /* Sombra exterior sutil */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
 }
 
-/* Efecto hover sobre la zona de arrastre */
-.zona-arrastre:hover {
-    /* Borde cian interactivo */
-    border-color: var(--color-cian);
-    /* Fondo sutilmente teñido de cian */
-    background: rgba(6, 182, 212, 0.06);
-    /* Resplandor neón cian */
-    box-shadow: 0 0 25px var(--resplandor-cian);
-    /* Elevación sutil */
-    transform: translateY(-2px);
-}
-
-/* Estado activo cuando un archivo es arrastrado sobre la zona (.dragover) */
-.zona-arrastre.dragover {
-    /* Borde primario índigo vibrante */
-    border-color: var(--color-primario);
-    /* Fondo con resplandor índigo */
-    background: rgba(99, 102, 241, 0.15);
-    /* Escala ampliada que da sensación de absorción */
-    transform: scale(1.02);
-    /* Resplandor neón marcado */
-    box-shadow: 0 0 35px var(--resplandor-primario);
-}
-
-/* Icono central de arrastre */
-.icono-arrastre {
-    /* Tamaño prominente */
-    font-size: 3rem;
-    /* Bloque para salto de línea */
+/* Pseudo-elemento ::before para añadir un icono ilustrativo arriba de la instrucción */
+.zona-arrastre::before {
+    /* Contenido con emoji representativo de bandeja de entrada */
+    content: "📥";
+    /* Se visualiza como bloque para forzar salto de línea */
     display: block;
-    /* Separación inferior */
-    margin-bottom: 0.6rem;
-    /* Transición para animación de salto */
-    transition: transform var(--transicion-rapida);
+    /* Tamaño de icono grande y llamativo */
+    font-size: 40px;
+    /* Margen inferior de separación con el texto */
+    margin-bottom: 10px;
+    /* Transición suave para animación al pasar el cursor */
+    transition: transform var(--transicion-suave);
 }
 
-/* Salto del icono al pasar el ratón */
-.zona-arrastre:hover .icono-arrastre,
-.zona-arrastre.dragover .icono-arrastre {
-    /* Se eleva 6 píxeles */
+/* Efecto hover al pasar el cursor sobre la zona de arrastre */
+.zona-arrastre:hover {
+    /* Elevación sutil de 4 píxeles */
+    transform: translateY(-4px);
+    /* Intensifica la sombra exterior con un halo luminoso */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55), 0 0 20px var(--resplandor-primario);
+}
+
+/* Animación de elevación del icono al hacer hover en la zona */
+.zona-arrastre:hover::before {
+    /* Eleva el icono 6 píxeles simulando flotación */
     transform: translateY(-6px);
 }
 
-/* Texto principal dentro de la zona de arrastre */
-.texto-principal {
-    /* Tamaño destacado */
-    font-size: 1.15rem;
-    /* Peso seminegrita */
-    font-weight: 700;
-    /* Color blanco */
-    color: var(--texto-principal);
-    /* Separación inferior */
-    margin-bottom: 0.3rem;
-}
-
-/* Texto secundario de ayuda */
-.texto-secundario {
-    /* Tamaño reducido */
-    font-size: 0.88rem;
-    /* Color secundario grisáceo */
-    color: var(--texto-secundario);
-}
-
-/* Input file oculto pero accesible */
-.input-archivo-oculto {
-    /* Posición absoluta fuera de la vista */
-    position: absolute;
-    /* Ancho mínimo */
-    width: 1px;
-    /* Alto mínimo */
-    height: 1px;
-    /* Opacidad cero */
-    opacity: 0;
-    /* Clip para ocultar */
-    clip: rect(0, 0, 0, 0);
-    /* Sin puntero directo */
-    pointer-events: none;
-}
-
-/* ==============================================================================
-   6. BARRA DE ACCIONES Y METADATOS DEL ARCHIVO
-   ============================================================================== */
-
-/* Barra contenedora de botones y estado */
-.barra-acciones {
-    /* Modelo de caja flexible */
-    display: flex;
-    /* Envolver si no cabe en pantalla estrecha */
-    flex-wrap: wrap;
-    /* Alineación vertical */
-    align-items: center;
-    /* Distribuir botones a la izquierda y estado a la derecha */
-    justify-content: space-between;
-    /* Espacio entre elementos */
-    gap: 1rem;
-    /* Margen superior respecto a la zona de arrastre */
-    margin-top: 1.25rem;
-    /* Margen inferior antes del resultado */
-    margin-bottom: 1.5rem;
-}
-
-/* Grupo flexible de botones de prueba */
-.grupo-botones {
-    /* Modelo flexible */
-    display: flex;
-    /* Envolver en móviles */
-    flex-wrap: wrap;
-    /* Espacio entre botones */
-    gap: 0.65rem;
-}
-
-/* Estilo base compartido para todos los botones */
-.btn {
-    /* Modelo flexible */
-    display: inline-flex;
-    /* Centrado vertical */
-    align-items: center;
-    /* Centrado horizontal */
-    justify-content: center;
-    /* Relleno interno cómodo */
-    padding: 0.55rem 1rem;
-    /* Esquinas redondeadas */
-    border-radius: var(--radio-sm);
-    /* Tipografía principal */
-    font-family: var(--fuente-sans);
-    /* Tamaño de texto legible */
-    font-size: 0.85rem;
-    /* Peso seminegrita */
-    font-weight: 600;
-    /* Cursor de mano */
-    cursor: pointer;
-    /* Transición suave */
-    transition: all var(--transicion-rapida);
-    /* Borde transparente por defecto */
-    border: 1px solid transparent;
-}
-
-/* Efecto al presionar un botón */
-.btn:active {
-    /* Reducción sutil de escala que simula clic físico */
-    transform: scale(0.97);
-}
-
-/* Botón demo para texto plano */
-.btn-demo-texto {
-    /* Fondo translúcido verdoso */
-    background: rgba(16, 185, 129, 0.15);
-    /* Borde verde */
-    border-color: rgba(16, 185, 129, 0.35);
-    /* Color esmeralda */
-    color: var(--color-exito);
-}
-
-/* Hover botón demo texto */
-.btn-demo-texto:hover {
-    /* Fondo más vivo */
-    background: rgba(16, 185, 129, 0.25);
-    /* Elevación */
-    transform: translateY(-2px);
-    /* Sombra esmeralda */
-    box-shadow: 0 4px 12px var(--resplandor-exito);
-}
-
-/* Botón demo para imagen */
-.btn-demo-img {
-    /* Fondo translúcido índigo */
-    background: rgba(99, 102, 241, 0.15);
-    /* Borde índigo */
-    border-color: rgba(99, 102, 241, 0.35);
-    /* Color primario */
-    color: var(--color-primario);
-}
-
-/* Hover botón demo imagen */
-.btn-demo-img:hover {
-    /* Fondo más vivo */
-    background: rgba(99, 102, 241, 0.25);
-    /* Elevación */
-    transform: translateY(-2px);
-    /* Sombra índigo */
-    box-shadow: 0 4px 12px var(--resplandor-primario);
-}
-
-/* Botón para limpiar resultado */
-.btn-limpiar {
-    /* Fondo rojizo translúcido */
-    background: rgba(244, 63, 94, 0.12);
-    /* Borde rojizo */
-    border-color: rgba(244, 63, 94, 0.3);
-    /* Color carmesí */
-    color: var(--color-peligro);
-}
-
-/* Hover botón limpiar */
-.btn-limpiar:hover {
-    /* Fondo más vivo */
-    background: rgba(244, 63, 94, 0.22);
-    /* Elevación */
-    transform: translateY(-2px);
-    /* Sombra carmesí */
-    box-shadow: 0 4px 12px var(--resplandor-peligro);
-}
-
-/* Caja de información y metadatos del archivo */
-.info-archivo {
-    /* Modelo flexible */
-    display: flex;
-    /* Alineación vertical centrada */
-    align-items: center;
-    /* Espacio entre píldoras */
-    gap: 0.6rem;
-    /* Relleno interno */
-    padding: 0.45rem 0.85rem;
-    /* Fondo oscuro */
-    background: rgba(0, 0, 0, 0.4);
-    /* Borde sutil */
-    border: 1px solid var(--borde-sutil);
-    /* Esquinas redondeadas */
-    border-radius: var(--radio-sm);
-    /* Tipografía monoespaciada */
-    font-family: var(--fuente-mono);
-    /* Tamaño fino */
-    font-size: 0.78rem;
-}
-
-/* Insignia del tipo de archivo y método */
-.metadato-badge {
-    /* Fondo cian translúcido */
-    background: rgba(6, 182, 212, 0.15);
-    /* Borde fino */
-    border: 1px solid rgba(6, 182, 212, 0.35);
-    /* Color cian */
-    color: var(--color-cian);
-    /* Relleno de píldora */
-    padding: 0.15rem 0.5rem;
-    /* Bordes redondeados */
-    border-radius: var(--radio-pildora);
-    /* Peso seminegrita */
-    font-weight: 600;
-}
-
-/* Nombre del archivo en la barra */
-.metadato-nombre {
-    /* Color blanco */
-    color: var(--texto-principal);
-    /* Anchura máxima para truncar si es muy largo */
-    max-width: 180px;
-    /* Evitar salto de línea */
-    white-space: nowrap;
-    /* Ocultar desbordamiento */
-    overflow: hidden;
-    /* Puntos suspensivos */
-    text-overflow: ellipsis;
-}
-
-/* Tamaño del archivo en la barra */
-.metadato-tamano {
-    /* Color atenuado */
-    color: var(--texto-atenuado);
-}
-
-/* ==============================================================================
-   7. CONTENEDOR DE RESULTADO (.resultado)
-   ============================================================================== */
-
-/* Contenedor principal donde se inyecta la imagen o el texto (.resultado) */
-.resultado {
-    /* Fondo de tarjeta oscura translúcida */
-    background: var(--bg-tarjeta);
-    /* Borde sutil */
-    border: 1px solid var(--borde-sutil);
-    /* Esquinas redondeadas */
-    border-radius: var(--radio-lg);
-    /* Relleno interno */
-    padding: 1.5rem;
-    /* Altura mínima para mantener estructura visual */
-    min-height: 280px;
-    /* Modelo flexible para centrar contenidos */
-    display: flex;
-    /* Centrado vertical */
-    align-items: center;
-    /* Centrado horizontal */
-    justify-content: center;
-    /* Posicionamiento relativo */
+/* Selector para el contenedor pista que aloja la barra de carga (.contenedor-barra) */
+.contenedor-barra {
+    /* Posicionamiento relativo para que la barra interior y el porcentaje se ubiquen de forma absoluta */
     position: relative;
-    /* Desenfoque de fondo */
-    backdrop-filter: blur(12px);
-    /* Sombra de caja */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    /* Transición suave */
-    transition: border-color var(--transicion-rapida);
+    /* Ocupa el 100% del ancho del contenedor de la aplicación */
+    width: 100%;
+    /* Altura adecuada de 42 píxeles para excelente legibilidad */
+    height: 42px;
+    /* Margen de separación superior con la zona de arrastre */
+    margin-top: 20px;
+    /* Fondo oscuro glassmorphism con transparencia */
+    background: rgba(15, 23, 42, 0.85);
+    /* Borde fino sutil con resplandor translúcido */
+    border: 1px solid var(--borde-vidrio);
+    /* Esquinas redondeadas suaves */
+    border-radius: 12px;
+    /* Oculta desbordamientos de la barra interior */
+    overflow: hidden;
+    /* Desenfoque de fondo tipo cristal */
+    backdrop-filter: blur(14px);
+    /* Sombra interna para crear efecto de riel o carril de carga */
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.65), 0 8px 24px rgba(0, 0, 0, 0.35);
+    /* Oculto inicialmente con opacidad cero */
+    opacity: 0;
+    /* Oculto para evitar clics accidentales antes de soltar */
+    visibility: hidden;
+    /* Ligero desplazamiento vertical para la transición de entrada */
+    transform: translateY(-8px);
+    /* Transición suave para cuando la barra de carga aparezca */
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
 }
 
-/* Animación de entrada al inyectar contenido */
-.resultado > * {
-    /* Aplicamos animación de aparición fluida */
-    animation: fadeInResultado 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* Modificador .activo para mostrar el contenedor de la barra con animación de entrada */
+.contenedor-barra.activo {
+    /* Opacidad total visible */
+    opacity: 1;
+    /* Elemento visible en pantalla */
+    visibility: visible;
+    /* Posición vertical original sin desplazamiento */
+    transform: translateY(0);
 }
 
-/* Keyframes de la animación de aparición */
+/* Selector para la barra de carga interior que se expande del 0% al 100% */
+.barra-de-carga {
+    /* Posicionamiento absoluto anclado a la esquina superior izquierda de la pista */
+    position: absolute;
+    /* Posición superior en cero */
+    top: 0;
+    /* Posición izquierda en cero */
+    left: 0;
+    /* Cubre el 100% de la altura de la pista */
+    height: 100%;
+    /* Ancho inicial en 0% antes de comenzar la carga */
+    width: 0%;
+    /* Gradiente tecnológico vibrante entre índigo y cian */
+    background: linear-gradient(90deg, var(--color-primario), var(--color-cian));
+    /* Sombra luminosa neón que acompaña la expansión */
+    box-shadow: 0 0 22px var(--resplandor-primario);
+    /* Esquinas redondeadas interiores */
+    border-radius: 10px;
+    /* Transición suave y ultra fluida para que el porcentaje avance progresivamente */
+    transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s ease;
+}
+
+/* Selector para el texto central que muestra el porcentaje de carga numérico */
+.porcentaje-carga {
+    /* Posicionamiento absoluto que cubre todo el contenedor para centrado perfecto */
+    position: absolute;
+    /* Cubre los 4 costados del contenedor padre */
+    inset: 0;
+    /* Contenedor flexible para alinear texto en el centro exacto */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Tipografía monoespaciada para evitar saltos al cambiar los números */
+    font-family: var(--fuente-mono);
+    /* Tamaño de fuente destacado */
+    font-size: 14px;
+    /* Peso negrita para máxima legibilidad */
+    font-weight: 700;
+    /* Espaciado elegante entre caracteres */
+    letter-spacing: 0.04em;
+    /* Color de texto blanco puro */
+    color: #ffffff;
+    /* Sombra de texto pronunciada para garantizar lectura clara sobre cualquier fondo */
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+    /* Evita capturar eventos de ratón sobre el texto */
+    pointer-events: none;
+    /* Capa superior para estar siempre por encima de la barra que avanza */
+    z-index: 2;
+    /* Transición suave de color de texto */
+    transition: color 0.3s ease;
+}
+
+/* Selector para el contenedor donde se renderiza el resultado final (.resultado) */
+.resultado {
+    /* Ancho al 100% dentro del contenedor principal */
+    width: 100%;
+    /* Margen superior de 20 píxeles */
+    margin-top: 20px;
+    /* Relleno interno de 18 píxeles */
+    padding: 18px;
+    /* Fondo translúcido tipo tarjeta de cristal */
+    background: var(--color-tarjeta);
+    /* Desenfoque de fondo glassmorphism de 14 píxeles */
+    backdrop-filter: blur(14px);
+    /* Borde fino translúcido */
+    border: 1px solid var(--borde-vidrio);
+    /* Esquinas redondeadas coincidentes con la zona de arrastre */
+    border-radius: var(--radio-tarjeta);
+    /* Sombra de profundidad */
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+    /* Color de texto claro */
+    color: #e2e8f0;
+    /* Tipografía monoespaciada para documentos de texto y código */
+    font-family: var(--fuente-mono);
+    /* Tamaño de fuente óptimo para lectura */
+    font-size: 14px;
+    /* Altura de línea cómoda para lectura */
+    line-height: 1.6;
+    /* Respeta los saltos de línea y tabulaciones del archivo original */
+    white-space: pre-wrap;
+    /* Rompe palabras largas para evitar desbordamiento horizontal */
+    word-break: break-word;
+    /* Altura máxima con barra de desplazamiento para textos extensos */
+    max-height: 450px;
+    /* Activa desplazamiento vertical automático si es necesario */
+    overflow-y: auto;
+    /* Oculta desbordamiento horizontal */
+    overflow-x: hidden;
+    /* Animación de entrada al inyectar el contenido */
+    animation: fadeInResultado 0.35s ease-out forwards;
+}
+
+/* Ocultamos el contenedor .resultado cuando esté vacío */
+.resultado:empty {
+    /* Permanece invisible mientras no haya ningún resultado cargado */
+    display: none;
+}
+
+/* Animación keyframe para aparición suave del resultado */
 @keyframes fadeInResultado {
     /* Estado inicial */
     from {
-        /* Opacidad cero */
+        /* Totalmente transparente */
         opacity: 0;
-        /* Ligero desplazamiento hacia arriba */
-        transform: translateY(8px);
+        /* Ligeramente desplazado hacia abajo */
+        transform: translateY(12px);
     }
     /* Estado final */
     to {
-        /* Opacidad completa */
+        /* Totalmente visible */
         opacity: 1;
-        /* Posición original */
+        /* En su posición original */
         transform: translateY(0);
     }
 }
 
-/* Estado inicial vacío cuando no se ha cargado ningún archivo */
-.estado-inicial {
-    /* Texto centrado */
-    text-align: center;
-    /* Color atenuado */
-    color: var(--texto-secundario);
-    /* Relleno */
-    padding: 2rem 1rem;
+/* Personalización de la barra de desplazamiento (scrollbar) para navegadores WebKit */
+.resultado::-webkit-scrollbar {
+    /* Ancho fino de 7 píxeles */
+    width: 7px;
 }
 
-/* Icono del estado inicial */
-.icono-estado {
-    /* Tamaño grande */
-    font-size: 2.8rem;
-    /* Bloque para salto de línea */
-    display: block;
-    /* Separación inferior */
-    margin-bottom: 0.6rem;
-    /* Opacidad moderada */
-    opacity: 0.6;
-}
-
-/* Párrafo del estado inicial */
-.estado-inicial p {
-    /* Tamaño de texto */
-    font-size: 1.05rem;
-    /* Peso seminegrita */
-    font-weight: 600;
-    /* Color blanco */
-    color: var(--texto-principal);
-    /* Margen inferior */
-    margin-bottom: 0.3rem;
-}
-
-/* Subtexto aclaratorio */
-.estado-inicial small {
-    /* Tamaño fino */
-    font-size: 0.82rem;
-    /* Color atenuado */
-    color: var(--texto-atenuado);
-}
-
-/* ==============================================================================
-   8. CONTENEDOR Y RENDERIZADO DE IMÁGENES
-   ============================================================================== */
-
-/* Envoltorio semántico <figure> para la imagen renderizada */
-.contenedor-imagen {
-    /* Ancho completo hasta el límite del contenedor */
-    width: 100%;
-    /* Modelo flexible en columna */
-    display: flex;
-    flex-direction: column;
-    /* Centrado horizontal */
-    align-items: center;
-    /* Sin márgenes residuales */
-    margin: 0;
-}
-
-/* Imagen cargada dinámicamente */
-.contenedor-imagen img {
-    /* Anchura máxima responsiva */
-    max-width: 100%;
-    /* Altura máxima de visualización para que no desborde la pantalla */
-    max-height: 480px;
-    /* Ajuste de contención proporcional sin deformar */
-    object-fit: contain;
+/* Pista de la barra de scroll */
+.resultado::-webkit-scrollbar-track {
+    /* Fondo oscuro semitransparente */
+    background: rgba(0, 0, 0, 0.25);
     /* Esquinas redondeadas */
-    border-radius: var(--radio-md);
+    border-radius: 4px;
+}
+
+/* Pulgar indicador de la barra de scroll */
+.resultado::-webkit-scrollbar-thumb {
+    /* Color gris con transparencia */
+    background: rgba(255, 255, 255, 0.2);
+    /* Esquinas redondeadas */
+    border-radius: 4px;
+}
+
+/* Hover del pulgar de scroll */
+.resultado::-webkit-scrollbar-thumb:hover {
+    /* Resalta con color cian al pasar el cursor */
+    background: var(--color-cian);
+}
+
+/* Selector para las imágenes cargadas dinámicamente */
+img {
+    /* Ancho completo del contenedor */
+    width: 100%;
+    /* Altura automática conservando la relación de aspecto */
+    height: auto;
+    /* Altura máxima controlada para no desbordar */
+    max-height: 440px;
+    /* Ajuste de contención proporcional sin deformación */
+    object-fit: contain;
+    /* Visualización en bloque eliminando espacios inferiores fantasma */
+    display: block;
+    /* Esquinas redondeadas modernas */
+    border-radius: 12px;
+    /* Borde fino translúcido */
+    border: 1px solid var(--borde-vidrio);
     /* Sombra de relieve exterior */
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 20px var(--resplandor-primario);
-    /* Borde sutil con acento índigo */
-    border: 1px solid var(--borde-acento);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Selector para los videos cargados dinámicamente */
+video {
+    /* Ancho completo del contenedor */
+    width: 100%;
+    /* Altura automática proporcional */
+    height: auto;
+    /* Altura máxima controlada */
+    max-height: 440px;
     /* Visualización en bloque */
     display: block;
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Fondo negro para el reproductor */
+    background: #000000;
+    /* Borde fino con acento índigo */
+    border: 1px solid var(--color-primario);
+    /* Sombra de relieve con resplandor neón */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55), 0 0 15px var(--resplandor-primario);
+    /* Quita el contorno azul de foco por defecto */
+    outline: none;
 }
 
-/* Pie de foto descriptivo de la imagen */
-.caption-imagen {
-    /* Separación superior respecto a la imagen */
-    margin-top: 1rem;
-    /* Relleno de píldora */
-    padding: 0.4rem 1rem;
-    /* Fondo oscuro translúcido */
-    background: rgba(0, 0, 0, 0.5);
-    /* Borde fino */
-    border: 1px solid var(--borde-sutil);
-    /* Bordes redondeados */
-    border-radius: var(--radio-pildora);
-    /* Tipografía monoespaciada */
-    font-family: var(--fuente-mono);
-    /* Tamaño de texto */
-    font-size: 0.78rem;
-    /* Color cian de metadatos */
-    color: var(--color-cian);
-}
+/* Reglas de adaptabilidad responsiva para pantallas móviles (ancho inferior a 600px) */
+@media (max-width: 600px) {
+    /* Reducción de relleno en el body */
+    body {
+        /* Relleno más compacto */
+        padding: 30px 14px 45px;
+    }
 
-/* ==============================================================================
-   9. CONTENEDOR Y RENDERIZADO DE TEXTO PLANO
-   ============================================================================== */
+    /* Reducción del tamaño del título en móviles */
+    .titulo-principal {
+        /* Tamaño menor adaptado */
+        font-size: 1.7rem;
+    }
 
-/* Envoltorio del visor de texto y código */
-.contenedor-texto {
-    /* Ancho completo */
-    width: 100%;
-    /* Modelo flexible en columna */
-    display: flex;
-    flex-direction: column;
-}
+    /* Subtítulo más compacto */
+    .subtitulo {
+        /* Tamaño reducido */
+        font-size: 0.88rem;
+    }
 
-/* Barra superior con encabezado del documento de texto */
-.header-texto {
-    /* Modelo flexible */
-    display: flex;
-    /* Alineación vertical */
-    align-items: center;
-    /* Distribuir título a la izquierda y badge a la derecha */
-    justify-content: space-between;
-    /* Relleno */
-    padding: 0.6rem 1rem;
-    /* Fondo oscuro */
-    background: rgba(0, 0, 0, 0.4);
-    /* Borde superior y laterales */
-    border: 1px solid var(--borde-sutil);
-    border-bottom: none;
-    /* Esquinas superiores redondeadas */
-    border-top-left-radius: var(--radio-sm);
-    border-top-right-radius: var(--radio-sm);
-    /* Tipografía */
-    font-family: var(--fuente-mono);
-    /* Tamaño fino */
-    font-size: 0.8rem;
-    /* Color blanco */
-    color: var(--texto-principal);
-}
-
-/* Visor de código preformateado <pre> */
-.visor-codigo {
-    /* Ancho completo */
-    width: 100%;
-    /* Altura máxima con barra de desplazamiento vertical */
-    max-height: 420px;
-    /* Desplazamiento automático si el contenido excede la altura */
-    overflow-y: auto;
-    /* Desplazamiento horizontal si hay líneas muy largas */
-    overflow-x: auto;
-    /* Relleno interno */
-    padding: 1.2rem;
-    /* Fondo oscuro estilo terminal */
-    background: #050811;
-    /* Borde completo */
-    border: 1px solid var(--borde-sutil);
-    /* Esquinas inferiores redondeadas */
-    border-bottom-left-radius: var(--radio-sm);
-    border-bottom-right-radius: var(--radio-sm);
-    /* Tipografía de código */
-    font-family: var(--fuente-mono);
-    /* Tamaño de texto de código */
-    font-size: 0.85rem;
-    /* Altura de línea cómoda para lectura */
-    line-height: 1.6;
-    /* Color de texto claro */
-    color: #e2e8f0;
-    /* Conservar saltos de línea y espacios */
-    white-space: pre-wrap;
-    /* Romper palabras excesivamente largas */
-    word-break: break-word;
-}
-
-/* Personalización de la barra de desplazamiento en el visor de código */
-.visor-codigo::-webkit-scrollbar {
-    /* Ancho de la barra */
-    width: 8px;
-    height: 8px;
-}
-
-.visor-codigo::-webkit-scrollbar-track {
-    /* Fondo de la pista */
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.visor-codigo::-webkit-scrollbar-thumb {
-    /* Color del pulgar de la barra */
-    background: rgba(255, 255, 255, 0.15);
-    /* Bordes redondeados */
-    border-radius: 4px;
-}
-
-.visor-codigo::-webkit-scrollbar-thumb:hover {
-    /* Pulgar más claro al pasar el cursor */
-    background: var(--color-cian);
-}
-
-/* ==============================================================================
-   10. ADAPTABILIDAD RESPONSIVA (MEDIA QUERIES)
-   ============================================================================== */
-
-/* Ajustes para dispositivos móviles (anchura menor a 640px) */
-@media (max-width: 640px) {
-    /* Reducimos el relleno de la zona de arrastre */
+    /* Reducción de relleno en la zona de arrastre */
     .zona-arrastre {
-        /* Relleno menor */
-        padding: 2rem 1rem;
+        /* Relleno vertical y lateral menor */
+        padding: 35px 18px;
+        /* Tamaño de fuente adaptado a móviles */
+        font-size: 17px;
     }
 
-    /* Orientación vertical para la barra de acciones */
-    .barra-acciones {
-        /* Columna */
-        flex-direction: column;
-        /* Alinear al inicio */
-        align-items: stretch;
+    /* Reducción de tamaño del icono en móviles */
+    .zona-arrastre::before {
+        /* Tamaño menor de 32px */
+        font-size: 32px;
     }
 
-    /* Botones ocupan el ancho disponible */
-    .grupo-botones {
-        /* Ancho completo */
-        width: 100%;
-        /* Distribución equitativa */
-        justify-content: stretch;
+    /* Ajuste de altura en el contenedor pista de la barra de carga */
+    .contenedor-barra {
+        /* Altura compacta de 36 píxeles en pantallas móviles */
+        height: 36px;
     }
 
-    /* Cada botón crece proporcionalmente */
-    .grupo-botones .btn {
-        /* Crecer */
-        flex: 1 1 auto;
-    }
-
-    /* Caja de información centrada */
-    .info-archivo {
-        /* Centrado */
-        justify-content: center;
-        /* Ancho completo */
-        width: 100%;
-    }
-}
-
-
-/* Pie de foto descriptivo de la imagen */
-.caption-imagen {
-    /* Separación superior respecto a la imagen */
-    margin-top: 1rem;
-    /* Relleno de píldora */
-    padding: 0.4rem 1rem;
-    /* Fondo oscuro translúcido */
-    background: rgba(0, 0, 0, 0.5);
-    /* Borde fino */
-    border: 1px solid var(--borde-sutil);
-    /* Bordes redondeados */
-    border-radius: var(--radio-pildora);
-    /* Tipografía monoespaciada */
-    font-family: var(--fuente-mono);
-    /* Tamaño de texto */
-    font-size: 0.78rem;
-    /* Color cian de metadatos */
-    color: var(--color-cian);
-}
-
-/* ==============================================================================
-   9. CONTENEDOR Y RENDERIZADO DE TEXTO PLANO
-   ============================================================================== */
-
-/* Envoltorio del visor de texto y código */
-.contenedor-texto {
-    /* Ancho completo */
-    width: 100%;
-    /* Modelo flexible en columna */
-    display: flex;
-    flex-direction: column;
-}
-
-/* Barra superior con encabezado del documento de texto */
-.header-texto {
-    /* Modelo flexible */
-    display: flex;
-    /* Alineación vertical */
-    align-items: center;
-    /* Distribuir título a la izquierda y badge a la derecha */
-    justify-content: space-between;
-    /* Relleno */
-    padding: 0.6rem 1rem;
-    /* Fondo oscuro */
-    background: rgba(0, 0, 0, 0.4);
-    /* Borde superior y laterales */
-    border: 1px solid var(--borde-sutil);
-    border-bottom: none;
-    /* Esquinas superiores redondeadas */
-    border-top-left-radius: var(--radio-sm);
-    border-top-right-radius: var(--radio-sm);
-    /* Tipografía */
-    font-family: var(--fuente-mono);
-    /* Tamaño fino */
-    font-size: 0.8rem;
-    /* Color blanco */
-    color: var(--texto-principal);
-}
-
-/* Visor de código preformateado <pre> */
-.visor-codigo {
-    /* Ancho completo */
-    width: 100%;
-    /* Altura máxima con barra de desplazamiento vertical */
-    max-height: 420px;
-    /* Desplazamiento automático si el contenido excede la altura */
-    overflow-y: auto;
-    /* Desplazamiento horizontal si hay líneas muy largas */
-    overflow-x: auto;
-    /* Relleno interno */
-    padding: 1.2rem;
-    /* Fondo oscuro estilo terminal */
-    background: #050811;
-    /* Borde completo */
-    border: 1px solid var(--borde-sutil);
-    /* Esquinas inferiores redondeadas */
-    border-bottom-left-radius: var(--radio-sm);
-    border-bottom-right-radius: var(--radio-sm);
-    /* Tipografía de código */
-    font-family: var(--fuente-mono);
-    /* Tamaño de texto de código */
-    font-size: 0.85rem;
-    /* Altura de línea cómoda para lectura */
-    line-height: 1.6;
-    /* Color de texto claro */
-    color: #e2e8f0;
-    /* Conservar saltos de línea y espacios */
-    white-space: pre-wrap;
-    /* Romper palabras excesivamente largas */
-    word-break: break-word;
-}
-
-/* Personalización de la barra de desplazamiento en el visor de código */
-.visor-codigo::-webkit-scrollbar {
-    /* Ancho de la barra */
-    width: 8px;
-    height: 8px;
-}
-
-.visor-codigo::-webkit-scrollbar-track {
-    /* Fondo de la pista */
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.visor-codigo::-webkit-scrollbar-thumb {
-    /* Color del pulgar de la barra */
-    background: rgba(255, 255, 255, 0.15);
-    /* Bordes redondeados */
-    border-radius: 4px;
-}
-
-.visor-codigo::-webkit-scrollbar-thumb:hover {
-    /* Pulgar más claro al pasar el cursor */
-    background: var(--color-cian);
-}
-
-/* ==============================================================================
-   10. ADAPTABILIDAD RESPONSIVA (MEDIA QUERIES)
-   ============================================================================== */
-
-/* Ajustes para dispositivos móviles (anchura menor a 640px) */
-@media (max-width: 640px) {
-    /* Reducimos el relleno de la zona de arrastre */
-    .zona-arrastre {
-        /* Relleno menor */
-        padding: 2rem 1rem;
-    }
-
-    /* Orientación vertical para la barra de acciones */
-    .barra-acciones {
-        /* Columna */
-        flex-direction: column;
-        /* Alinear al inicio */
-        align-items: stretch;
-    }
-
-    /* Botones ocupan el ancho disponible */
-    .grupo-botones {
-        /* Ancho completo */
-        width: 100%;
-        /* Distribución equitativa */
-        justify-content: stretch;
-    }
-
-    /* Cada botón crece proporcionalmente */
-    .grupo-botones .btn {
-        /* Crecer */
-        flex: 1 1 auto;
-    }
-
-    /* Caja de información centrada */
-    .info-archivo {
-        /* Centrado */
-        justify-content: center;
-        /* Ancho completo */
-        width: 100%;
+    /* Ajuste de tamaño en el texto del porcentaje para pantallas móviles */
+    .porcentaje-carga {
+        /* Tamaño de fuente ligeramente más pequeño */
+        font-size: 12px;
     }
 }

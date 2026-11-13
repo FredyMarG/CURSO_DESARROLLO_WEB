@@ -3,74 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drag & Drop con FileReader API | JavaScript Master Level</title>
-    <!-- Google Fonts: Outfit para textos y Fira Code para código y métricas -->
+    <title>Drag & Drop FileReader | Master Level</title>
+    <!-- Google Fonts: Outfit para textos y Fira Code para métricas y código -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Hoja de estilos externa -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos vinculada -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Efectos ambientales luminosos de fondo -->
-    <div class="bg-glow glow-1"></div>
-    <div class="bg-glow glow-2"></div>
-
-    <!-- Contenedor principal de la aplicación -->
-    <main class="contenedor-principal">
-        <!-- Encabezado pedagógico del ejercicio -->
+    <!-- Contenedor principal que estructura y centra la aplicación -->
+    <div class="contenedor-app">
+        <!-- Encabezado con título principal y descripción -->
         <header class="encabezado">
             <span class="badge-modulo">JAVASCRIPT MASTER LEVEL</span>
-            <h1 class="titulo">📁 Drag &amp; Drop con FileReader API</h1>
-            <p class="descripcion">
-                Arrastra y suelta cualquier archivo en la zona interactiva. La aplicación detecta automáticamente el tipo de archivo:
-                si es una <strong>imagen</strong> (o archivo no textual) se renderiza visualmente con <code>readAsDataURL()</code>, y si es un 
-                <strong>documento de texto</strong> se extrae su contenido con <code>readAsText()</code>.
-            </p>
+            <h1 class="titulo-principal">📁 Drag &amp; Drop File Reader</h1>
+            <p class="subtitulo">Arrastra y suelta imágenes, videos o documentos de texto para procesarlos con barra de carga en tiempo real</p>
         </header>
 
-        <!-- Zona interactiva de arrastre original (.zona-arrastre) -->
-        <section class="zona-arrastre" id="zonaArrastre">
-            <span class="icono-arrastre">📥</span>
-            <p class="texto-principal">Arrastre y suelte un archivo aquí</p>
-            <p class="texto-secundario">o haga clic para seleccionarlo desde su dispositivo (imágenes o textos)</p>
-            <!-- Input file oculto para permitir también selección mediante clic -->
-            <input type="file" id="inputArchivo" class="input-archivo-oculto">
-        </section>
-
-        <!-- Barra de botones de acción y estado del archivo procesado -->
-        <div class="barra-acciones">
-            <div class="grupo-botones">
-                <button type="button" class="btn btn-demo-texto" id="btnDemoTexto">
-                    📄 Probar Texto Demo
-                </button>
-                <button type="button" class="btn btn-demo-img" id="btnDemoImg">
-                    🖼️ Probar Imagen Demo
-                </button>
-                <button type="button" class="btn btn-limpiar" id="btnLimpiar">
-                    🗑️ Limpiar
-                </button>
-            </div>
-
-            <!-- Información en vivo del archivo cargado -->
-            <div class="info-archivo" id="infoArchivo">
-                <span class="metadato-badge" id="badgeTipo">Esperando archivo</span>
-                <span class="metadato-nombre" id="nombreArchivo">Ningún archivo cargado</span>
-                <span class="metadato-tamano" id="tamanoArchivo">0 KB</span>
-            </div>
+        <!-- Zona interactiva donde el usuario arrastra y suelte el archivo -->
+        <div class="zona-arrastre">
+            arrastre y suelte un archivo
         </div>
 
-        <!-- Contenedor donde se muestra el resultado cargado (.resultado) -->
-        <section class="resultado" id="resultado">
-            <div class="estado-inicial">
-                <span class="icono-estado">⏳</span>
-                <p>El contenido del archivo leído aparecerá aquí...</p>
-                <small>Suelta una imagen (.png, .jpg, .svg, .webp) o un documento (.txt, .json, .csv, .md, .js)</small>
-            </div>
-        </section>
-    </main>
+        <!-- Contenedor pista de la barra de carga que permite apreciar la transición fluida -->
+        <div class="contenedor-barra">
+            <!-- Barra interior animada que expande su ancho del 0% al 100% -->
+            <div class="barra-de-carga"></div>
+            <!-- Etiqueta central que proyecta con total nitidez el porcentaje de carga en tiempo real -->
+            <span class="porcentaje-carga">0%</span>
+        </div>
 
-    <!-- Script de lógica JavaScript -->
+        <!-- Contenedor donde se renderiza el resultado final (texto, imagen o video) -->
+        <div class="resultado"></div>
+    </div>
+
+    <!-- Script de lógica de la aplicación -->
     <script src="main.js"></script>
 </body>
 </html>
