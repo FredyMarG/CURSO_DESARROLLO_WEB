@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts: Outfit para diseño editorial y Fira Code para etiquetas técnicas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Texturizador Interactivo con Drag &amp; Drop</title>
+    <title>Texturizador Interactivo con Drag &amp; Drop | Master Level</title>
 </head>
 <body>
+    <!-- Luces ambientales de fondo estilo Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
     <!-- Contenedor principal del laboratorio del Texturizador -->
     <main class="panel-texturizador">
+        <span class="badge-modulo">JAVASCRIPT MASTER LEVEL</span>
         <!-- Píldora superior que refleja en tiempo real el estado de dataTransfer -->
         <span class="badge-transfer" id="estadoTransfer">
             e.dataTransfer.getData("textura") ➔ esperando arrastre...

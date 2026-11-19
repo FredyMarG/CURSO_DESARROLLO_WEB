@@ -557,3 +557,47 @@ body {
         height: 200px;
     }
 }
+
+
+/* ==========================================================================
+   ESTILOS DE PRESENTACIÓN MASTER LEVEL (LUCES AMBIENTALES Y BADGE)
+   ========================================================================== */
+.bg-glow {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.25;
+    pointer-events: none;
+    z-index: 0;
+}
+.glow-1 {
+    width: 420px;
+    height: 420px;
+    background: #6366f1;
+    top: -120px;
+    left: -120px;
+}
+.glow-2 {
+    width: 380px;
+    height: 380px;
+    background: #38bdf8;
+    bottom: -100px;
+    right: -100px;
+}
+.panel-texturizador {
+    position: relative;
+    z-index: 1;
+}
+.badge-modulo {
+    display: inline-block;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+}

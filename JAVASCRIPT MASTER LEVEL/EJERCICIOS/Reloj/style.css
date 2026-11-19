@@ -290,3 +290,145 @@ body {
         font-size: 1.25rem;
     }
 }
+
+
+/* ==========================================================================
+   ESTILOS DE PRESENTACIÓN MASTER LEVEL (ENCABEZADO Y LUCES DE FONDO)
+   Comentado línea por línea en español
+   ========================================================================== */
+
+/* Luces ambientales desenfocadas de fondo */
+.bg-glow {
+    /* Fijas respecto a la ventana */
+    position: fixed;
+    /* Forma circular */
+    border-radius: 50%;
+    /* Desenfoque intenso */
+    filter: blur(110px);
+    /* Opacidad suave */
+    opacity: 0.25;
+    /* No interceptan clics */
+    pointer-events: none;
+    /* Detrás del contenido */
+    z-index: 0;
+}
+
+/* Primera luz ambiental superior izquierda */
+.glow-1 {
+    /* Dimensiones del halo */
+    width: 420px;
+    height: 420px;
+    /* Color índigo */
+    background: #6366f1;
+    /* Posición superior izquierda */
+    top: -120px;
+    left: -120px;
+}
+
+/* Segunda luz ambiental inferior derecha */
+.glow-2 {
+    /* Dimensiones del halo */
+    width: 380px;
+    height: 380px;
+    /* Color cian */
+    background: #38bdf8;
+    /* Posición inferior derecha */
+    bottom: -100px;
+    right: -100px;
+}
+
+/* Contenedor principal que agrupa el encabezado y el reloj */
+.contenedor-app {
+    /* Posición relativa sobre las luces de fondo */
+    position: relative;
+    /* Nivel superior al fondo */
+    z-index: 1;
+    /* Disposición flexible en columna centrada */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Separación entre el encabezado y el reloj */
+    gap: 28px;
+    /* Relleno lateral para móviles */
+    padding: 30px 20px;
+}
+
+/* Encabezado editorial de presentación */
+.encabezado {
+    /* Texto centrado */
+    text-align: center;
+    /* Tipografía editorial */
+    font-family: 'Outfit', system-ui, sans-serif;
+}
+
+/* Etiqueta superior del curso */
+.badge-modulo {
+    /* Bloque en línea */
+    display: inline-block;
+    /* Tipografía monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Tamaño compacto */
+    font-size: 0.75rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Espaciado entre letras */
+    letter-spacing: 1.5px;
+    /* Color cian */
+    color: #38bdf8;
+    /* Fondo cian translúcido */
+    background: rgba(56, 189, 248, 0.12);
+    /* Borde fino cian */
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    /* Relleno tipo píldora */
+    padding: 5px 14px;
+    /* Bordes redondeados */
+    border-radius: 999px;
+    /* Margen inferior */
+    margin-bottom: 14px;
+}
+
+/* Título principal con gradiente */
+.titulo-principal {
+    /* Tamaño adaptable */
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    /* Peso extra negrita */
+    font-weight: 800;
+    /* Gradiente de blanco a cian */
+    background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+    /* Recorte al texto */
+    -webkit-background-clip: text;
+    /* Relleno transparente */
+    -webkit-text-fill-color: transparent;
+    /* Separación inferior */
+    margin-bottom: 10px;
+}
+
+/* Subtítulo descriptivo */
+.subtitulo {
+    /* Color gris azulado legible */
+    color: #94a3b8;
+    /* Tamaño estándar */
+    font-size: 1rem;
+    /* Altura de línea */
+    line-height: 1.55;
+    /* Ancho máximo */
+    max-width: 580px;
+    /* Centrado horizontal */
+    margin: 0 auto;
+}
+
+/* Etiquetas de código dentro del subtítulo */
+.subtitulo code {
+    /* Tipografía monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Color cian */
+    color: #38bdf8;
+    /* Fondo sutil */
+    background: rgba(56, 189, 248, 0.12);
+    /* Relleno compacto */
+    padding: 2px 6px;
+    /* Esquinas redondeadas */
+    border-radius: 4px;
+    /* Tamaño proporcional */
+    font-size: 0.88em;
+}

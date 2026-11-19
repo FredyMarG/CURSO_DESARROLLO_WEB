@@ -1,192 +1,372 @@
 /* ==========================================================================
-   ESTILOS DEL EJERCICIO: LAZY LOAD CON INTERSECTION OBSERVER
+   DISEÑO DE PRESENTACIÓN MASTER LEVEL: LAZY LOAD CON INTERSECTION OBSERVER
    Comentado línea por línea en español
    ========================================================================== */
 
-/* Selector universal para estandarizar el cálculo de cajas */
+/* Variables globales de diseño para mantener consistencia visual */
+:root {
+    /* Fondo oscuro principal de la presentación */
+    --bg-dark: #070a13;
+    /* Fondo de tarjeta translúcido estilo cristal */
+    --bg-card: rgba(16, 24, 42, 0.78);
+    /* Color de acento primario índigo */
+    --primary: #6366f1;
+    /* Color de acento secundario cian */
+    --cyan: #38bdf8;
+    /* Color de acento esmeralda para estados activos */
+    --emerald: #10b981;
+    /* Color principal de texto claro */
+    --text-main: #f8fafc;
+    /* Color secundario de texto atenuado */
+    --text-muted: #94a3b8;
+    /* Borde fino translúcido */
+    --border-light: rgba(255, 255, 255, 0.1);
+}
+
+/* Selector universal para estandarizar el cálculo de dimensiones */
 * {
-    /* Incluye el padding y el borde dentro del ancho y alto total */
+    /* Incluye relleno y borde dentro del ancho y alto total */
     box-sizing: border-box;
-}
-
-/* Estilos generales del cuerpo del documento */
-body {
-    /* Color de texto oscuro principal */
-    color: #222;
-    /* Color de fondo gris muy suave para resaltar las tarjetas blancas */
-    background-color: #f4f6f9;
-    /* Tipografía limpia sin serifas */
-    font-family: sans-serif;
-    /* Alineación centrada por defecto para elementos en línea o títulos principales */
-    text-align: center;
-}
-
-/* Reinicio básico de márgenes y rellenos en los elementos utilizados */
-body, h1, h3, div, p, input {
-    /* Elimina el margen externo predeterminado del navegador */
+    /* Reinicia márgenes externos predeterminados */
     margin: 0;
-    /* Elimina el relleno interno predeterminado del navegador */
+    /* Reinicia rellenos internos predeterminados */
     padding: 0;
 }
 
-/* Título principal ubicado en la parte superior */
-.titulo-principal {
-    /* Color azul acorde a la paleta del ejercicio */
-    color: #48e;
-    /* Tamaño de fuente destacado */
-    font-size: 1.8rem;
-    /* Espaciado superior e inferior para darle aire al encabezado */
-    padding: 25px 15px 10px;
+/* Estilos base del documento */
+body {
+    /* Fondo oscuro profundo */
+    background-color: var(--bg-dark);
+    /* Color de texto claro por defecto */
+    color: var(--text-main);
+    /* Tipografía editorial moderna */
+    font-family: 'Outfit', system-ui, sans-serif;
+    /* Altura mínima igual al alto completo de la ventana */
+    min-height: 100vh;
+    /* Evita desplazamiento horizontal por luces ambientales */
+    overflow-x: hidden;
+    /* Posición relativa para capas de fondo */
+    position: relative;
 }
 
-/* Contenedor principal que agrupa todas las publicaciones */
-.publicaciones {
-    /* Limita el ancho máximo para mejorar la lectura en pantallas grandes */
-    max-width: 720px;
-    /* Centra el contenedor horizontalmente */
+/* Luces ambientales desenfocadas de fondo */
+.bg-glow {
+    /* Fijas respecto a la ventana al hacer scroll */
+    position: fixed;
+    /* Forma completamente circular */
+    border-radius: 50%;
+    /* Desenfoque intenso tipo aura */
+    filter: blur(110px);
+    /* Opacidad suave para no distraer */
+    opacity: 0.25;
+    /* No interceptan clics del usuario */
+    pointer-events: none;
+    /* Ubicadas detrás de todo el contenido */
+    z-index: 0;
+}
+
+/* Primera luz ambiental superior izquierda */
+.glow-1 {
+    /* Ancho del halo */
+    width: 420px;
+    /* Alto del halo */
+    height: 420px;
+    /* Color índigo primario */
+    background: var(--primary);
+    /* Posición superior izquierda */
+    top: -120px;
+    left: -120px;
+}
+
+/* Segunda luz ambiental inferior derecha */
+.glow-2 {
+    /* Ancho del halo */
+    width: 380px;
+    /* Alto del halo */
+    height: 380px;
+    /* Color cian brillante */
+    background: var(--cyan);
+    /* Posición inferior derecha */
+    bottom: -100px;
+    right: -100px;
+}
+
+/* Contenedor principal centrado sobre el fondo */
+.contenedor-app {
+    /* Ancho máximo ideal para lectura cómoda */
+    max-width: 780px;
+    /* Centrado horizontal automático */
     margin: 0 auto;
-    /* Añade un pequeño margen lateral y espacio inferior */
-    padding: 10px 16px 40px;
+    /* Espaciado interno general */
+    padding: 40px 20px 60px;
+    /* Posición relativa sobre los halos de fondo */
+    position: relative;
+    /* Nivel superior al fondo */
+    z-index: 1;
 }
 
-/* Tarjeta individual de cada publicación */
+/* Encabezado de presentación del ejercicio */
+.encabezado {
+    /* Texto centrado */
+    text-align: center;
+    /* Separación inferior respecto a la lista de tarjetas */
+    margin-bottom: 32px;
+}
+
+/* Etiqueta superior identificadora del curso */
+.badge-modulo {
+    /* Se comporta como bloque en línea */
+    display: inline-block;
+    /* Tipografía monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Tamaño compacto */
+    font-size: 0.75rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Espaciado entre letras */
+    letter-spacing: 1.5px;
+    /* Color cian */
+    color: var(--cyan);
+    /* Fondo cian translúcido */
+    background: rgba(56, 189, 248, 0.12);
+    /* Borde fino cian */
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    /* Relleno tipo píldora */
+    padding: 5px 14px;
+    /* Bordes completamente redondeados */
+    border-radius: 999px;
+    /* Margen inferior */
+    margin-bottom: 14px;
+}
+
+/* Título principal de la presentación */
+.titulo-principal {
+    /* Tamaño grande y llamativo */
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    /* Peso extra negrita */
+    font-weight: 800;
+    /* Gradiente de texto claro hacia cian */
+    background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
+    /* Recorte del fondo al texto */
+    -webkit-background-clip: text;
+    /* Color de relleno transparente para lucir el gradiente */
+    -webkit-text-fill-color: transparent;
+    /* Separación inferior */
+    margin-bottom: 10px;
+}
+
+/* Subtítulo explicativo del ejercicio */
+.subtitulo {
+    /* Color atenuado legible */
+    color: var(--text-muted);
+    /* Tamaño cómodo */
+    font-size: 1rem;
+    /* Altura de línea */
+    line-height: 1.55;
+    /* Ancho máximo centrado */
+    max-width: 620px;
+    /* Centrado horizontal */
+    margin: 0 auto;
+}
+
+/* Fragmentos de código en línea dentro del subtítulo */
+.subtitulo code {
+    /* Tipografía monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Color cian */
+    color: var(--cyan);
+    /* Fondo oscuro translúcido */
+    background: rgba(56, 189, 248, 0.12);
+    /* Relleno compacto */
+    padding: 2px 6px;
+    /* Esquinas redondeadas */
+    border-radius: 4px;
+    /* Tamaño ligeramente menor */
+    font-size: 0.88em;
+}
+
+/* Contenedor de todas las tarjetas de publicaciones */
+.publicaciones {
+    /* Disposición flexible en columna */
+    display: flex;
+    /* Dirección vertical */
+    flex-direction: column;
+    /* Separación uniforme entre publicaciones */
+    gap: 22px;
+}
+
+/* Tarjeta individual de publicación con efecto Glassmorphism */
 .publicacion {
-    /* Alinea el texto de la publicación a la izquierda */
+    /* Fondo translúcido oscuro */
+    background: var(--bg-card);
+    /* Desenfoque de cristal */
+    backdrop-filter: blur(14px);
+    /* Soporte WebKit para desenfoque */
+    -webkit-backdrop-filter: blur(14px);
+    /* Borde fino luminoso */
+    border: 1px solid var(--border-light);
+    /* Esquinas redondeadas */
+    border-radius: 14px;
+    /* Relleno interno amplio */
+    padding: 22px 24px;
+    /* Sombra profunda */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    /* Alineación de texto a la izquierda */
     text-align: left;
-    /* Fondo blanco para destacar sobre el fondo de la página */
-    background-color: #fff;
-    /* Espaciado vertical entre tarjetas */
-    margin: 20px 0;
-    /* Relleno interno uniforme para el contenido */
-    padding: 18px 20px;
-    /* Esquinas suavemente redondeadas */
-    border-radius: 8px;
-    /* Sombra sutil para dar sensación de elevación */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    /* Color gris medio para el texto descriptivo */
-    color: #555;
-    /* Opacidad inicial en 0 para ocultarla antes de entrar en pantalla */
+    /* Opacidad inicial en 0 antes de entrar al viewport */
     opacity: 0;
     /* Desplazamiento inicial hacia abajo antes de animarse */
-    transform: translateY(30px);
+    transform: translateY(30px) scale(0.98);
 }
 
-/* Estado visible que activa la animación cuando la tarjeta entra al viewport */
+/* Estado visible activado por IntersectionObserver al entrar en pantalla */
 .publicacion.visible {
-    /* Ejecuta la animación 'aparecer' en 0.55s manteniendo el estado final */
-    animation: aparecer 0.55s ease forwards;
-}
-
-/* Párrafo de contenido dentro de cada publicación */
-.publicacion p {
-    /* Espaciado interno entre el borde izquierdo y el texto */
-    padding: 8px 16px;
-    /* Separación superior e inferior respecto al título y los comentarios */
-    margin: 12px 0;
-    /* Altura de línea cómoda para leer párrafos largos */
-    line-height: 1.6;
-    /* Línea decorativa azul a la izquierda */
-    border-left: 3px solid #48e;
+    /* Dispara la animación 'aparecer' de 0.55s */
+    animation: aparecer 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* Nombre del autor de la publicación */
 .publicacion h3 {
-    /* Color azul característico del tema */
-    color: #48e;
-    /* Subrayado inferior del mismo tono azul */
-    border-bottom: 2px solid #48e;
-    /* Ajusta el ancho del borde exactamente al largo del nombre */
+    /* Color cian brillante */
+    color: var(--cyan);
+    /* Tamaño de fuente destacado */
+    font-size: 1.2rem;
+    /* Peso seminegrita */
+    font-weight: 700;
+    /* Ajuste exacto al ancho del texto */
     display: inline-block;
-    /* Pequeña separación entre el texto y su línea inferior */
-    padding-bottom: 3px;
+    /* Línea decorativa inferior */
+    border-bottom: 2px solid rgba(56, 189, 248, 0.45);
+    /* Separación debajo del texto */
+    padding-bottom: 4px;
 }
 
-/* Contenedor flexible para la barra de comentarios */
+/* Párrafo descriptivo de la publicación */
+.publicacion p {
+    /* Color gris claro de alta legibilidad */
+    color: #cbd5e1;
+    /* Espaciado interno entre el borde izquierdo y el texto */
+    padding: 6px 16px;
+    /* Separación vertical respecto al título y comentarios */
+    margin: 14px 0 18px;
+    /* Altura de línea cómoda */
+    line-height: 1.65;
+    /* Borde izquierdo decorativo índigo */
+    border-left: 3px solid var(--primary);
+}
+
+/* Contenedor de la barra de comentarios */
 .comentarios {
-    /* Distribuye el campo de texto y el botón en una misma fila */
+    /* Alinea el campo de texto y el botón horizontalmente */
     display: flex;
-    /* Añade un pequeño margen superior de separación */
+    /* Separación opcional cero para unirlos como cápsula */
+    gap: 0;
+}
+
+/* Estilos comunes para el campo de texto y el botón */
+.comentarios input {
+    /* Relleno interno cómodo */
+    padding: 10px 14px;
+    /* Borde fino sutil */
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    /* Color de texto blanco */
+    color: #ffffff;
+    /* Elimina contorno azul predeterminado */
+    outline: none;
+    /* Tipografía heredada */
+    font-family: 'Outfit', sans-serif;
+    /* Tamaño de texto legible */
+    font-size: 0.92rem;
+}
+
+/* Campo de entrada de texto del comentario */
+.comentarios .comentario {
+    /* Ocupa todo el espacio horizontal disponible */
+    flex-grow: 1;
+    /* Fondo oscuro translúcido */
+    background: rgba(10, 15, 28, 0.75);
+    /* Redondeado solo en las esquinas izquierdas */
+    border-radius: 8px 0 0 8px;
+    /* Transición suave al enfocar */
+    transition: border-color 0.2s ease;
+}
+
+/* Estado enfocado del campo de comentario */
+.comentarios .comentario:focus {
+    /* Ilumina el borde con color cian */
+    border-color: var(--cyan);
+}
+
+/* Texto guía (placeholder) del campo de comentario */
+.comentarios .comentario::placeholder {
+    /* Color atenuado legible */
+    color: #64748b;
+}
+
+/* Botón de envío del comentario */
+.comentarios .enviar {
+    /* Ancho mínimo */
+    min-width: 95px;
+    /* Fondo gradiente índigo */
+    background: linear-gradient(135deg, var(--primary), #4f46e5);
+    /* Tipografía monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Redondeado solo en las esquinas derechas */
+    border-radius: 0 8px 8px 0;
+    /* Cursor de puntero interactivo */
+    cursor: pointer;
+    /* Transición suave de brillo */
+    transition: filter 0.2s ease, transform 0.15s ease;
+}
+
+/* Efecto hover en el botón de enviar */
+.comentarios .enviar:hover {
+    /* Aumenta ligeramente el brillo */
+    filter: brightness(1.15);
+}
+
+/* Efecto al hacer clic en el botón de enviar */
+.comentarios .enviar:active {
+    /* Ligera reducción táctil */
+    transform: scale(0.98);
+}
+
+/* Mensaje final cuando se cargan todas las publicaciones */
+.sin-mas {
+    /* Texto centrado */
+    text-align: center;
+    /* Color verde esmeralda */
+    color: var(--emerald);
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.1);
+    /* Borde fino esmeralda */
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    /* Relleno tipo tarjeta */
+    padding: 16px 22px;
+    /* Bordes redondeados */
+    border-radius: 12px;
+    /* Tamaño de texto moderado */
+    font-size: 1rem;
+    /* Margen superior */
     margin-top: 8px;
 }
 
-/* Estilos compartidos para el campo de texto y el botón de envío */
-.comentarios input {
-    /* Relleno interno cómodo */
-    padding: 9px 12px;
-    /* Elimina el borde gris predeterminado del navegador */
-    border: none;
-    /* Color de fondo azul principal */
-    background-color: #48e;
-    /* Color de texto blanco para generar contraste */
-    color: #fff;
-    /* Elimina el contorno predeterminado al enfocar */
-    outline: none;
-    /* Tamaño de fuente legible */
-    font-size: 0.9rem;
-}
-
-/* Campo de entrada de texto para escribir un comentario */
-.comentarios .comentario {
-    /* Ocupa todo el ancho disponible restante dentro del contenedor flex */
-    flex-grow: 1;
-    /* Redondea únicamente las esquinas del lado izquierdo */
-    border-radius: 5px 0 0 5px;
-}
-
-/* Botón para enviar el comentario */
-.comentarios .enviar {
-    /* Ancho mínimo fijo para mantener proporción visual */
-    min-width: 80px;
-    /* Texto en negrita */
-    font-weight: 700;
-    /* Tipografía monoespaciada para el botón */
-    font-family: monospace;
-    /* Redondea únicamente las esquinas del lado derecho */
-    border-radius: 0 5px 5px 0;
-    /* Cambia el cursor a manito indicando que es clicable */
-    cursor: pointer;
-    /* Transición suave al pasar el ratón */
-    transition: background-color 0.2s ease;
-}
-
-/* Efecto visual al pasar el cursor sobre el botón enviar */
-.comentarios .enviar:hover {
-    /* Oscurece ligeramente el azul al interactuar */
-    background-color: #36c;
-}
-
-/* Estilo del texto guía (placeholder) dentro del input de comentario */
-.comentarios input::placeholder {
-    /* Azul claro legible sobre el fondo azul */
-    color: #bcf;
-    /* Asegura que no herede sombras de texto */
-    text-shadow: none;
-}
-
-/* Mensaje final cuando ya no quedan más publicaciones por cargar */
-.sin-mas {
-    /* Relleno vertical amplio */
-    padding: 25px;
-    /* Color gris neutro */
-    color: #666;
-    /* Tamaño de fuente moderado */
-    font-size: 1.1rem;
-}
-
-/* Definición de la animación de entrada para cada publicación */
+/* Animación de aparición suave para cada tarjeta */
 @keyframes aparecer {
-    /* Estado inicial antes de mostrarse */
+    /* Estado inicial oculto */
     from {
-        /* Completamente invisible */
+        /* Invisible */
         opacity: 0;
         /* Desplazada hacia abajo y ligeramente reducida */
         transform: translateY(30px) scale(0.98);
     }
-    /* Estado final al completar la animación */
+    /* Estado final visible */
     to {
-        /* Completamente visible */
+        /* Totalmente visible */
         opacity: 1;
-        /* Regresa a su posición y tamaño original */
+        /* Posición y tamaño natural */
         transform: translateY(0) scale(1);
     }
 }
