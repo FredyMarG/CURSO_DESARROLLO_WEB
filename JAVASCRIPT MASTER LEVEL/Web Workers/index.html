@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Web Workers API en JavaScript - JavaScript Master Level." />
+    <title>Web Workers API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">⚙️</span>
+                <span class="title-text">Web Workers</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Web Workers API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Multihilo en el Navegador</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">UI Fluida a 60 FPS</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Hilos en Segundo Plano:<br />
+                    <span class="gradient-text">Web Workers API</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Ejecuta cálculos pesados y procesamiento masivo de datos en hilos secundarios paralelos sin congelar el hilo principal ni bloquear la interfaz del usuario.
+                </p>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧵</div>
+                        <h3>Hilos Paralelos</h3>
+                        <p>Libera el <em>Main Thread</em> delegando tareas intensivas al sistema operativo.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📬</div>
+                        <h3>Mensajería Segura</h3>
+                        <p>Intercambia datos entre hilos aislados mediante <code>postMessage()</code> y <code>onmessage</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🛑</div>
+                        <h3>Ciclo Controlado</h3>
+                        <p>Destruye procesos al instante con <code>worker.terminate()</code> o <code>self.close()</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔒</div>
+                        <h3>Aislamiento Seguro</h3>
+                        <p>Sujeto a política <em>Same-Origin</em> y sin acceso directo a <code>document</code> o <code>window</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: SINGLE-THREAD VS MULTIHILO
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Hilo Principal vs Worker">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Arquitectura de Navegador</span>
+                    <h2 class="slide-title">1. ¿Por qué son necesarios los Web Workers?</h2>
+                    <p class="slide-description">
+                        JavaScript es un lenguaje de <strong>un solo hilo</strong>: si una operación bloquea ese hilo, la interfaz entera deja de responder.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card card-bad">
+                        <div class="comp-badge badge-danger">⚠️ Todo en el Main Thread</div>
+                        <h3>Bloqueo Total de la Interfaz</h3>
+                        <p>Si ejecutas un bucle de 2 mil millones de iteraciones en <code>main.js</code>:</p>
+                        <ul class="comp-list">
+                            <li>❌ Los botones dejan de responder a los clics.</li>
+                            <li>❌ Las animaciones CSS y el scroll se congelan.</li>
+                            <li>❌ El navegador muestra el aviso de <em>"La página no responde"</em>.</li>
+                        </ul>
+                    </div>
+
+                    <div class="comp-card card-good">
+                        <div class="comp-badge badge-success">✅ Con Dedicated Worker</div>
+                        <h3>Ejecución Paralela Fluida</h3>
+                        <p>Delegar la carga pesada a un hilo secundario mantiene el navegador ágil:</p>
+                        <ul class="comp-list">
+                            <li>✔️ El usuario sigue navegando y haciendo clic sin interrupciones.</li>
+                            <li>✔️ El cálculo corre en paralelo en otro núcleo de la CPU.</li>
+                            <li>✔️ Al finalizar, el resultado llega limpio mediante evento.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: TIPOS DE WEB WORKERS
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Tipos de Web Workers">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Ecosistema Web</span>
+                    <h2 class="slide-title">2. Tipos de Web Workers</h2>
+                    <p class="slide-description">
+                        Cada variante cumple un rol distinto según el alcance de la tarea y el ciclo de vida de la pestaña.
+                    </p>
+                </div>
+
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">⚙️</div>
+                        <h4>Dedicated Worker</h4>
+                        <div class="feat-code"><code>new Worker("worker.js")</code></div>
+                        <p>El más común. Pertenece exclusivamente al script/pestaña que lo creó y muere automáticamente al cerrarla.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🌐</div>
+                        <h4>Service Worker</h4>
+                        <div class="feat-code"><code>navigator.serviceWorker</code></div>
+                        <p>Proxy de red programable: intercepta peticiones <code>fetch</code>, gestiona caché <em>offline</em> (PWAs) y notificaciones Push.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🧱</div>
+                        <h4>Abstract Worker</h4>
+                        <div class="feat-code"><code>onerror (Interfaz Base)</code></div>
+                        <p>No se instancia directamente; es la interfaz base de la que heredan <code>Worker</code> y <code>SharedWorker</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: CONSTRUCTOR Y PARÁMETRO OPTIONS
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="new Worker(url, options)">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Instanciación &amp; Configuración</span>
+                    <h2 class="slide-title">3. El Constructor `Worker()` y su parámetro `options`</h2>
+                    <p class="slide-description">
+                        Se instancia pasando la ruta del archivo separado y un objeto opcional con tres propiedades clave.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">📦</div>
+                        <h3>Sintaxis con Opciones</h3>
+                        <div class="code-snippet">
+                            <code>const miWorker = new Worker("worker.js", {<br>
+                            &nbsp;&nbsp;type: "module",<br>
+                            &nbsp;&nbsp;credentials: "same-origin",<br>
+                            &nbsp;&nbsp;name: "procesador-datos"<br>
+                            });</code>
+                        </div>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3>Propiedades de `options`</h3>
+                        <div class="property-table">
+                            <div class="prop-row">
+                                <span class="prop-name">type</span>
+                                <span class="prop-desc"><code>"classic"</code> (defecto) o <code>"module"</code> para usar <code>import/export</code>.</span>
+                            </div>
+                            <div class="prop-row">
+                                <span class="prop-name">credentials</span>
+                                <span class="prop-desc">Envío de cookies/cabeceras en módulos: <code>"omit"</code>, <code>"same-origin"</code> o <code>"include"</code>.</span>
+                            </div>
+                            <div class="prop-row">
+                                <span class="prop-name">name</span>
+                                <span class="prop-desc">Nombre legible en DevTools, accesible dentro como <code>self.name</code>.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: COMUNICACIÓN BIDIRECCIONAL
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="postMessage y onmessage">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Paso de Mensajes</span>
+                    <h2 class="slide-title">4. Comunicación Bidireccional: `postMessage()` y `onmessage`</h2>
+                    <p class="slide-description">
+                        Al vivir en entornos de memoria aislados, los hilos se comunican enviando copias mediante el <em>Structured Clone Algorithm</em>.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <span class="badge badge-cyan">En main.js (Hilo Principal)</span>
+                        <h3>Enviar y Escuchar Respuesta</h3>
+                        <div class="code-snippet">
+                            <code>const worker = new Worker("worker.js");<br><br>
+                            // 1. Enviamos carga de trabajo<br>
+                            worker.postMessage({ accion: "calcular", n: 500000 });<br><br>
+                            // 2. Recibimos respuesta en e.data<br>
+                            worker.onmessage = (e) =&gt; {<br>
+                            &nbsp;&nbsp;console.log("Resultado:", e.data);<br>
+                            };</code>
+                        </div>
+                    </div>
+
+                    <div class="col-card">
+                        <span class="badge badge-emerald">En worker.js (Hilo Secundario)</span>
+                        <h3>Procesar y Devolver</h3>
+                        <div class="code-snippet">
+                            <code>// 1. Escuchamos mensajes del padre<br>
+                            self.onmessage = (e) =&gt; {<br>
+                            &nbsp;&nbsp;const { accion, n } = e.data;<br>
+                            &nbsp;&nbsp;if (accion === "calcular") {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;const res = n * 2;<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;// 2. Devolvemos resultado<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;self.postMessage(res);<br>
+                            &nbsp;&nbsp;}<br>
+                            };</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: FINALIZACIÓN DEL CICLO DE VIDA
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="terminate() y close()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Gestión de Memoria</span>
+                    <h2 class="slide-title">5. Finalización del Ciclo de Vida: `terminate()` y `self.close()`</h2>
+                    <p class="slide-description">
+                        Cada worker consume RAM y CPU del sistema operativo; detenerlos cuando terminan libera recursos de inmediato.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">🛑</div>
+                        <h3>Desde main.js: `worker.terminate()`</h3>
+                        <p>Detiene abruptamente al worker sin esperar a que termine su tarea actual. No puede reutilizarse después.</p>
+                        <div class="code-snippet">
+                            <code>miWorker.terminate();<br>
+                            console.log("Worker destruido desde el hilo principal.");</code>
+                        </div>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">🔌</div>
+                        <h3>Desde worker.js: `self.close()`</h3>
+                        <p>El propio trabajador cierra su hilo tras enviar su último resultado al hilo principal.</p>
+                        <div class="code-snippet">
+                            <code>self.postMessage("Tarea finalizada");<br>
+                            self.close(); // Se cierra a sí mismo</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: POLÍTICA SAME-ORIGIN Y RESTRICCIONES
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Same-Origin y Sin Acceso al DOM">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Seguridad &amp; Entorno</span>
+                    <h2 class="slide-title">6. Política de Origen Cruzado (*Same-Origin*) y Limitaciones</h2>
+                    <p class="slide-description">
+                        Reglas estrictas de seguridad y aislamiento que debes tener presentes al trabajar con hilos secundarios.
+                    </p>
+                </div>
+
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">🔒</div>
+                        <h4>Mismo Origen</h4>
+                        <p><code>worker.js</code> debe provenir del mismo protocolo, dominio y puerto. URLs externas lanzan <code>SecurityError</code>.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🌐</div>
+                        <h4>Bloqueo en `file://`</h4>
+                        <p>Abrir <code>index.html</code> directamente desde disco bloquea la carga del worker; usa siempre <code>localhost</code> o Live Server.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🧩</div>
+                        <h4>Sin DOM ni `window`</h4>
+                        <p>Dentro del worker no existen <code>document</code>, <code>window</code> ni <code>parent</code>. Solo procesa datos y responde vía <code>postMessage()</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍAS Y BUENAS PRÁCTICAS
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías y Buenas Prácticas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Comprensión &amp; Calidad</span>
+                    <h2 class="slide-title">7. Analogías y Buenas Prácticas</h2>
+                    <p class="slide-description">
+                        Comprende la separación de hilos y evita errores habituales en producción.
+                    </p>
+                </div>
+
+                <div class="analogy-wrapper">
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">👨‍🍳</div>
+                        <h3>El Chef y el Ayudante de Cocina</h3>
+                        <p>
+                            El <strong>Chef (Main Thread)</strong> atiende a los clientes en la barra sin parar.
+                            Cuando llega un pedido de picar 50kg de cebolla, lo envía por la ventanilla (<code>postMessage</code>) al <strong>Ayudante (Worker)</strong> en la cocina trasera.
+                        </p>
+                    </div>
+
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">🛡️</div>
+                        <h3>Reglas de Oro en Producción</h3>
+                        <p>
+                            Registra siempre <code>worker.onerror</code>, usa <strong>Transferable Objects</strong> (<code>ArrayBuffer</code>) para datos gigantes sin copiar memoria, y llama a <code>terminate()</code> al concluir tareas puntuales.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: LABORATORIO INTERACTIVO EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio Interactivo en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Worker Real en Segundo Plano</span>
+                    <h2 class="slide-title">8. Laboratorio Interactivo: Cálculo Pesado sin Congelar la UI</h2>
+                    <p class="slide-description">
+                        Inicia un cálculo intensivo de <strong>500,000,000 iteraciones</strong> en un Web Worker real mientras compruebas con el botón de clics que la interfaz sigue respondiendo al instante.
+                    </p>
+                </div>
+
+                <div class="ww-dashboard-mockup">
+                    <!-- Banner de estado del Worker -->
+                    <div class="ww-status-banner" id="wwStatusBanner">
+                        <div>
+                            <strong>Estado del Worker: </strong>
+                            <code id="wwStatusText">En espera (hilo secundario inactivo)</code>
+                        </div>
+                        <span class="badge badge-cyan" id="wwBadgeState">Listo</span>
+                    </div>
+
+                    <!-- Métricas comparativas en vivo -->
+                    <div class="ww-metrics-grid">
+                        <div class="ww-metric-card">
+                            <span class="ww-metric-label">🖱️ Clics en UI (Main Thread)</span>
+                            <span class="ww-metric-value" id="wwUiClicks">0</span>
+                        </div>
+                        <div class="ww-metric-card">
+                            <span class="ww-metric-label">🧮 Resultado del Worker</span>
+                            <span class="ww-metric-value" id="wwWorkerResult">-</span>
+                        </div>
+                        <div class="ww-metric-card">
+                            <span class="ww-metric-label">⏱️ Tiempo de Ejecución</span>
+                            <span class="ww-metric-value" id="wwElapsedTime">0 ms</span>
+                        </div>
+                    </div>
+
+                    <!-- Controles interactivos del laboratorio -->
+                    <div class="ww-controls-bar">
+                        <button class="nav-btn" id="btnStartWorker">🚀 Iniciar Cálculo en Worker (500M)</button>
+                        <button class="nav-btn" id="btnTestUiFluency">🖱️ Probar Fluidez UI (Clic aquí)</button>
+                        <button class="nav-btn" id="btnTerminateWorker" disabled>🛑 Cancelar (terminate)</button>
+                        <button class="nav-btn" id="btnClearWwLogs">🧹 Limpiar Logs</button>
+                    </div>
+
+                    <!-- Terminal de eventos del Worker -->
+                    <div class="ww-log-terminal" id="wwLogTerminal">
+                        <div class="ww-log-line">
+                            <span class="ww-log-time">[00:00:00]</span>
+                            <span>Laboratorio de Web Workers listo. Inicia el cálculo y pulsa "Probar Fluidez UI" al mismo tiempo.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: PROYECTO INTEGRADOR
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Proyecto: main.js + worker.js">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Arquitectura Completa</span>
+                    <h2 class="slide-title">9. Proyecto Integrador: `main.js` + `worker.js`</h2>
+                    <p class="slide-description">
+                        Estructura limpia con manejo de errores (`onerror`) y cancelación inmediata (`terminate()`).
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <span class="badge badge-cyan">main.js</span>
+                        <h3>Hilo Principal</h3>
+                        <div class="code-snippet">
+                            <code>const w = new Worker("worker.js", { name: "calculo" });<br>
+                            w.postMessage({ iteraciones: 2_000_000_000 });<br>
+                            w.onmessage = (e) =&gt; {<br>
+                            &nbsp;&nbsp;console.log("Resultado:", e.data);<br>
+                            &nbsp;&nbsp;w.terminate();<br>
+                            };<br>
+                            w.onerror = (err) =&gt; console.error(err.message);</code>
+                        </div>
+                    </div>
+
+                    <div class="col-card">
+                        <span class="badge badge-emerald">worker.js</span>
+                        <h3>Hilo Secundario</h3>
+                        <div class="code-snippet">
+                            <code>self.onmessage = (e) =&gt; {<br>
+                            &nbsp;&nbsp;const { iteraciones } = e.data;<br>
+                            &nbsp;&nbsp;let suma = 0;<br>
+                            &nbsp;&nbsp;for (let i = 0; i &lt; iteraciones; i++) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;suma += i;<br>
+                            &nbsp;&nbsp;}<br>
+                            &nbsp;&nbsp;self.postMessage(suma);<br>
+                            };</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 11: RESUMEN TÉCNICO & CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Resumen Técnico">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Síntesis Final</span>
+                    <h2 class="slide-title">10. Resumen Técnico del Módulo</h2>
+                    <p class="slide-description">
+                        Conceptos clave para paralelizar tareas pesadas en aplicaciones web modernas sin sacrificar fluidez.
+                    </p>
+                </div>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧵</div>
+                        <h3>Hilos Paralelos</h3>
+                        <p>Evita congelar el hilo principal ejecutando cálculos intensivos en segundo plano.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">⚙️</div>
+                        <h3>Constructor Flexible</h3>
+                        <p>Configura <code>type</code> (<code>classic</code>/<code>module</code>), <code>credentials</code> y <code>name</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📬</div>
+                        <h3>postMessage / onmessage</h3>
+                        <p>Comunicación bidireccional segura mediante copias de datos en <code>e.data</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🛑</div>
+                        <h3>Limpieza &amp; Seguridad</h3>
+                        <p>Finaliza con <code>terminate()</code> y respeta el mismo origen sin acceso al DOM.</p>
+                    </div>
+                </div>
+
+                <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
+                    <strong>🎓 ¡Felicidades!</strong> Has completado el módulo de <strong>Web Workers API en JavaScript Master Level</strong>.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables de diapositivas -->
+        <div class="slide-dots-container" id="slideDotsContainer"></div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Web Workers</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="overview-grid" id="overviewGrid">
+                <!-- Se rellena dinámicamente con tarjetas en miniatura de cada diapositiva -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de la guía práctica y consola -->
+    <script src="main.js"></script>
+</body>
+</html>
