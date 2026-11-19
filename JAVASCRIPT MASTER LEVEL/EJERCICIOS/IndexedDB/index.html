@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con IndexedDB | Master Level</title>
+    <!-- Google Fonts: Tipografía moderna Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Contenedor principal centrado -->
+    <div class="contenedor-app">
+        <!-- Encabezado con título del ejercicio -->
+        <header class="encabezado">
+            <h1>🗄️ Gestor de Nombres</h1>
+            <p>Almacenamiento persistente con IndexedDB</p>
+        </header>
+
+        <!-- Sección para agregar nuevos nombres -->
+        <div class="add-nombres">
+            <input type="text" id="name" placeholder="Introduce un nombre..." autocomplete="off">
+            <button id="add">Añadir</button>
+        </div>
+
+        <!-- Contenedor donde se listan los nombres almacenados -->
+        <div class="nombres">
+            <!-- Los elementos se cargan dinámicamente desde main.js -->
+        </div>
+    </div>
+
+    <!-- Script con la lógica de IndexedDB -->
+    <script src="main.js"></script>
+</body>
+</html>
