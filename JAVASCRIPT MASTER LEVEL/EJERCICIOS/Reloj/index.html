@@ -1,16 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reloj Digital con Objeto Date | Master Level</title>
+    <!-- Google Fonts: Outfit para títulos y Fira Code para etiquetas técnicas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos vinculada -->
     <link rel="stylesheet" href="style.css">
-    <title>Reloj Con Date</title>
 </head>
 <body>
-    <div class="reloj">
-        <div class="hora"></div>
-        <div class="min"></div>
-        <div class="seg"></div>
+    <!-- Luces ambientales de fondo estilo Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <!-- Contenedor principal de presentación del ejercicio -->
+    <div class="contenedor-app">
+        <!-- Encabezado editorial del módulo -->
+        <header class="encabezado">
+            <span class="badge-modulo">JAVASCRIPT MASTER LEVEL</span>
+            <h1 class="titulo-principal">🕰️ Reloj Digital en Tiempo Real</h1>
+            <p class="subtitulo">
+                Sincronización segundo a segundo obteniendo la hora del sistema con <code>new Date()</code> y <code>setInterval()</code>.
+            </p>
+        </header>
+
+        <!-- Carcasa original del reloj digital (100% funcional con main.js) -->
+        <div class="reloj">
+            <div class="hora"></div>
+            <div class="min"></div>
+            <div class="seg"></div>
+        </div>
     </div>
 
     <script src="main.js"></script>
