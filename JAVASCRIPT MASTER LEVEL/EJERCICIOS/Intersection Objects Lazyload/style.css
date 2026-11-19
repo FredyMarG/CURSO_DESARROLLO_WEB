@@ -148,7 +148,7 @@ body {
     /* Gradiente de texto claro hacia cian */
     background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
     /* Recorte del fondo al texto */
-    -webkit-background-clip: text;
+    background-clip: text;
     /* Color de relleno transparente para lucir el gradiente */
     -webkit-text-fill-color: transparent;
     /* Separación inferior */
