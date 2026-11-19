@@ -1,0 +1,397 @@
+/* ==============================================================================
+   ESTILOS MODERNOS Y REFINADOS PARA EL CRUD DE INDEXEDDB (SIN EXAGERAR)
+   Documentación pedagógica LÍNEA POR LÍNEA al 100%
+   ============================================================================== */
+
+/* Selector para definir variables de colores y fuentes principales */
+:root {
+    /* Color de fondo principal azul muy oscuro */
+    --color-fondo: #0b0f19;
+    /* Fondo de tarjeta translúcido con glassmorphism */
+    --color-tarjeta: rgba(17, 24, 39, 0.85);
+    /* Borde fino translúcido para delimitar contenedores */
+    --borde-suave: rgba(255, 255, 255, 0.1);
+    /* Color de texto principal blanco suave */
+    --color-texto: #f3f4f6;
+    /* Color de texto secundario grisáceo */
+    --color-texto-mutado: #9ca3af;
+    /* Color de acento primario azul índigo */
+    --color-primario: #3b82f6;
+    /* Resplandor luminoso azul */
+    --resplandor-primario: rgba(59, 130, 246, 0.35);
+    /* Color verde esmeralda para el botón de guardar activo */
+    --color-exito: #10b981;
+    /* Color carmesí para el botón de eliminar */
+    --color-peligro: #ef4444;
+    /* Tipografía principal sans-serif moderna */
+    --fuente-principal: 'Outfit', system-ui, -apple-system, sans-serif;
+    /* Transición rápida para micro-interacciones suaves */
+    --transicion-rapida: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset universal para normalizar el modelo de cajas en todos los elementos */
+*, *::before, *::after {
+    /* Incluye padding y border en el cálculo del ancho y alto total */
+    box-sizing: border-box;
+    /* Elimina márgenes externos por defecto */
+    margin: 0;
+    /* Elimina rellenos internos por defecto */
+    padding: 0;
+}
+
+/* Selector para el cuerpo completo del documento */
+body {
+    /* Aplica el color de fondo oscuro de base */
+    background-color: var(--color-fondo);
+    /* Fondo con gradiente radial sutil que ilumina el centro */
+    background-image: radial-gradient(circle at 50% 10%, #172554 0%, var(--color-fondo) 70%);
+    /* Asigna el color de texto claro predeterminado */
+    color: var(--color-texto);
+    /* Tipografía moderna Outfit */
+    font-family: var(--fuente-principal);
+    /* Altura de línea cómoda para lectura */
+    line-height: 1.5;
+    /* Asegura ocupar al menos el 100% de la altura visible */
+    min-height: 100vh;
+    /* Relleno superior e inferior para despegar del borde de la pantalla */
+    padding: 40px 16px;
+    /* Disposición flexible para centrar el contenido */
+    display: flex;
+    /* Centra horizontalmente el contenedor principal */
+    justify-content: center;
+    /* Alineación superior natural */
+    align-items: flex-start;
+}
+
+/* Contenedor principal que estructura el ejercicio de forma limpia y compacta */
+.contenedor-app {
+    /* Ancho máximo cómodo de 520 píxeles */
+    width: 100%;
+    /* Límite de ancho para no verse estirado */
+    max-width: 520px;
+    /* Fondo de cristal tipo tarjeta */
+    background: var(--color-tarjeta);
+    /* Desenfoque de fondo tipo glassmorphism */
+    backdrop-filter: blur(16px);
+    /* Borde fino sutil */
+    border: 1px solid var(--borde-suave);
+    /* Esquinas redondeadas suaves */
+    border-radius: 16px;
+    /* Relleno interno de 28 píxeles */
+    padding: 28px;
+    /* Sombra profunda que da relieve al contenedor */
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Encabezado del ejercicio con título y descripción */
+.encabezado {
+    /* Alineación de texto centrada */
+    text-align: center;
+    /* Margen inferior de separación */
+    margin-bottom: 24px;
+}
+
+/* Título principal dentro del encabezado */
+.encabezado h1 {
+    /* Tamaño de fuente destacado */
+    font-size: 1.65rem;
+    /* Peso negrita */
+    font-weight: 700;
+    /* Color de texto brillante */
+    color: #ffffff;
+    /* Margen inferior sutil */
+    margin-bottom: 6px;
+}
+
+/* Subtítulo descriptivo */
+.encabezado p {
+    /* Tamaño de fuente reducido */
+    font-size: 0.9rem;
+    /* Color de texto atenuado */
+    color: var(--color-texto-mutado);
+}
+
+/* Barra interactiva para agregar nuevos nombres (.add-nombres) */
+.add-nombres {
+    /* Disposición flexible en fila */
+    display: flex;
+    /* Espacio entre el input y el botón */
+    gap: 8px;
+    /* Margen inferior para separar de la lista */
+    margin-bottom: 24px;
+}
+
+/* Campo de entrada de texto (#name) */
+#name {
+    /* Ocupa todo el espacio horizontal disponible */
+    flex: 1;
+    /* Fondo oscuro para contraste */
+    background: rgba(15, 23, 42, 0.8);
+    /* Borde fino sutil */
+    border: 1px solid var(--borde-suave);
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Relleno interno cómodo */
+    padding: 10px 14px;
+    /* Color de texto blanco */
+    color: var(--color-texto);
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+    /* Tipografía heredada */
+    font-family: inherit;
+    /* Transición suave para el foco */
+    transition: var(--transicion-rapida);
+}
+
+/* Efecto de foco al hacer clic en el campo de texto */
+#name:focus {
+    /* Quita el contorno azul por defecto del navegador */
+    outline: none;
+    /* Borde resaltado con el color primario */
+    border-color: var(--color-primario);
+    /* Resplandor neón sutil */
+    box-shadow: 0 0 12px var(--resplandor-primario);
+}
+
+/* Botón para añadir un nuevo registro (#add) */
+#add {
+    /* Fondo azul primario */
+    background: var(--color-primario);
+    /* Color de texto blanco puro */
+    color: #ffffff;
+    /* Sin borde visible */
+    border: none;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Relleno horizontal cómodo */
+    padding: 10px 20px;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Tamaño de fuente */
+    font-size: 0.95rem;
+    /* Tipografía heredada */
+    font-family: inherit;
+    /* Cursor de selección interactivo */
+    cursor: pointer;
+    /* Transición suave para hover */
+    transition: var(--transicion-rapida);
+    /* Sombra sutil del botón */
+    box-shadow: 0 4px 14px var(--resplandor-primario);
+}
+
+/* Efecto hover sobre el botón de añadir */
+#add:hover {
+    /* Tono azul más saturado */
+    background: #2563eb;
+    /* Ligera elevación de 1 píxel */
+    transform: translateY(-1px);
+}
+
+/* Efecto activo al presionar el botón de añadir */
+#add:active {
+    /* Contracción sutil al hacer clic */
+    transform: translateY(0);
+}
+
+/* Contenedor donde se listan los elementos (.nombres) */
+.nombres {
+    /* Disposición flexible en columna */
+    display: flex;
+    /* Dirección vertical */
+    flex-direction: column;
+    /* Espacio entre cada tarjeta de nombre */
+    gap: 10px;
+}
+
+/* Tarjeta individual de cada nombre (.nombre) */
+.nombre {
+    /* Disposición en cuadrícula de dos columnas: nombre y opciones */
+    display: grid;
+    /* Primera columna flexible para el texto y segunda para las opciones */
+    grid-template-columns: 1fr auto;
+    /* Centrado vertical de los elementos */
+    align-items: center;
+    /* Fondo ligeramente translúcido para cada tarjeta */
+    background: rgba(30, 41, 59, 0.45);
+    /* Borde fino sutil alrededor de la tarjeta */
+    border: 1px solid var(--borde-suave);
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Relleno interno */
+    padding: 8px 12px;
+    /* Transición suave para estados interactivos */
+    transition: var(--transicion-rapida);
+}
+
+/* Efecto hover sobre cada tarjeta de nombre */
+.nombre:hover {
+    /* Fondo ligeramente más visible */
+    background: rgba(30, 41, 59, 0.7);
+    /* Borde más iluminado */
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Estilo del texto del nombre editable (h2) */
+.nombre h2 {
+    /* Tamaño de fuente adecuado para listas */
+    font-size: 1rem;
+    /* Peso seminegrita */
+    font-weight: 500;
+    /* Color de texto claro */
+    color: var(--color-texto);
+    /* Relleno interno suave */
+    padding: 6px 8px;
+    /* Esquinas redondeadas del área editable */
+    border-radius: 6px;
+    /* Permite seleccionar el texto */
+    user-select: text;
+    /* Transición suave al enfocar */
+    transition: var(--transicion-rapida);
+    /* Evita desbordamiento si el texto es muy largo */
+    word-break: break-word;
+}
+
+/* Estilo visual cuando el usuario hace clic para editar el h2 (contenteditable) */
+.nombre h2:focus {
+    /* Elimina el contorno azul rígido */
+    outline: none;
+    /* Fondo sutil azulado para indicar modo de edición */
+    background: rgba(59, 130, 246, 0.15);
+    /* Borde sutil que delimita la zona de edición */
+    box-shadow: inset 0 0 0 1px var(--color-primario);
+}
+
+/* Contenedor de botones de acción (.options) */
+.options {
+    /* Disposición flexible en fila */
+    display: flex;
+    /* Alineación vertical */
+    align-items: center;
+    /* Espacio entre el botón de guardar y eliminar */
+    gap: 6px;
+}
+
+/* Estilo base para todos los botones dentro de .options */
+.options button {
+    /* Fondo transparente */
+    background: transparent;
+    /* Sin borde por defecto */
+    border: none;
+    /* Relleno cómodo de pastilla */
+    padding: 6px 12px;
+    /* Esquinas redondeadas */
+    border-radius: 6px;
+    /* Tamaño de fuente compacto */
+    font-size: 0.82rem;
+    /* Peso seminegrita */
+    font-weight: 600;
+    /* Tipografía heredada */
+    font-family: inherit;
+    /* Quita el contorno */
+    outline: none;
+    /* Transición suave */
+    transition: var(--transicion-rapida);
+}
+
+/* Estado del botón Guardar cuando NO hay cambios que guardar (.imposible) */
+.imposible {
+    /* Color de texto atenuado apagado */
+    color: #4b5563;
+    /* Cursor deshabilitado */
+    cursor: default;
+    /* Opacidad reducida */
+    opacity: 0.45;
+}
+
+/* Estado del botón Guardar cuando el usuario modificó el texto (.posible) */
+.posible {
+    /* Color verde esmeralda brillante */
+    color: var(--color-exito);
+    /* Fondo verde translúcido */
+    background: rgba(16, 185, 129, 0.15) !important;
+    /* Borde fino verde */
+    border: 1px solid rgba(16, 185, 129, 0.3) !important;
+    /* Cursor de selección activo */
+    cursor: pointer;
+    /* Animación de entrada para llamar la atención */
+    animation: pulsoVerde 1.5s infinite alternate;
+}
+
+/* Hover sobre el botón Guardar cuando está activo (.posible) */
+.posible:hover {
+    /* Fondo verde más intenso */
+    background: rgba(16, 185, 129, 0.25) !important;
+    /* Escala sutil */
+    transform: scale(1.05);
+}
+
+/* Animación sutil de pulso para el botón posible */
+@keyframes pulsoVerde {
+    /* Estado inicial */
+    from {
+        /* Sombra tenue */
+        box-shadow: 0 0 4px rgba(16, 185, 129, 0.2);
+    }
+    /* Estado final */
+    to {
+        /* Sombra expandida */
+        box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+    }
+}
+
+/* Botón de eliminar (.delete) */
+.delete {
+    /* Color gris azulado suave */
+    color: var(--color-texto-mutado);
+    /* Cursor de puntero */
+    cursor: pointer;
+}
+
+/* Hover sobre el botón de eliminar */
+.delete:hover {
+    /* Cambia al color carmesí */
+    color: var(--color-peligro);
+    /* Fondo carmesí translúcido */
+    background: rgba(239, 68, 68, 0.12);
+}
+
+/* Mensaje visual cuando la base de datos no tiene registros todavía */
+.mensaje-vacio {
+    /* Centrado de texto */
+    text-align: center;
+    /* Relleno vertical generoso */
+    padding: 24px 12px;
+    /* Color de texto atenuado */
+    color: var(--color-texto-mutado);
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+    /* Borde punteado sutil */
+    border: 1px dashed var(--borde-suave);
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+}
+
+
+/* Hover sobre el botón de eliminar */
+.delete:hover {
+    /* Cambia al color carmesí */
+    color: var(--color-peligro);
+    /* Fondo carmesí translúcido */
+    background: rgba(239, 68, 68, 0.12);
+}
+
+/* Mensaje visual cuando la base de datos no tiene registros todavía */
+.mensaje-vacio {
+    /* Centrado de texto */
+    text-align: center;
+    /* Relleno vertical generoso */
+    padding: 24px 12px;
+    /* Color de texto atenuado */
+    color: var(--color-texto-mutado);
+    /* Tamaño de fuente */
+    font-size: 0.9rem;
+    /* Borde punteado sutil */
+    border: 1px dashed var(--borde-suave);
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+}
