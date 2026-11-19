@@ -1,0 +1,184 @@
+{
+    "content": [
+        {
+            "nombre": "Fredy Martinez",
+            "contenido": "Desarrollador Frontend apasionado por la arquitectura web moderna y el rendimiento en el navegador. Especializado en interfaces reactivas con JavaScript puro, optimización del Critical Rendering Path y diseño de experiencias fluidas mediante Intersection Observer y Lazy Loading. A lo largo de su trayectoria ha liderado migraciones hacia estándares web nativos, reduciendo drásticamente el peso de los paquetes enviados al cliente y mejorando los tiempos de carga inicial en redes móviles de baja velocidad. Además, colabora activamente en comunidades locales compartiendo guías prácticas sobre optimización del DOM y buenas prácticas de código limpio. En su día a día también realiza auditorías con Lighthouse para detectar recursos bloqueantes, ajustar estrategias de precarga y garantizar una interacción inmediata desde el primer segundo."
+        },
+        {
+            "nombre": "Andres Ramirez",
+            "contenido": "Ingeniero de Software enfocado en aplicaciones escalables y microservicios en la nube. Disfruta mentorizando a nuevos programadores en buenas prácticas de código limpio, pruebas unitarias automatizadas y optimización de consultas en bases de datos relacionales y no relacionales. En sus proyectos diarios diseña arquitecturas tolerantes a fallos capaces de responder a picos inesperados de tráfico sin degradar la experiencia del usuario final. También dedica parte de su semana a revisar Pull Requests, documentar decisiones técnicas clave y promover una cultura de mejora continua dentro de su equipo. Cuando enfrenta sistemas heredados de alta complejidad, planifica refactorizaciones incrementales respaldadas por pruebas de integración que aseguran estabilidad durante todo el proceso."
+        },
+        {
+            "nombre": "Felipe Hernandez",
+            "contenido": "Especialista en diseño de interfaces y sistemas modulares con CSS Grid, Flexbox y variables personalizadas. Cree firmemente que la accesibilidad web y las transiciones sutiles marcan la diferencia entre un sitio común y un producto digital verdaderamente memorable para todos los visitantes. Ha construido bibliotecas de componentes visuales utilizadas por múltiples equipos de producto, garantizando consistencia tipográfica, contrastes adecuados y tiempos de respuesta inmediatos en cualquier dispositivo. Su filosofía combina estética minimalista con una estructura semántica impecable en HTML. Constantemente explora nuevas capacidades de CSS moderno como container queries, subgrid y selectores relacionales para resolver maquetaciones complejas sin depender de JavaScript innecesario."
+        },
+        {
+            "nombre": "Camilo Morales",
+            "contenido": "Arquitecto Full Stack con amplia experiencia en Node.js, APIs RESTful y servicios GraphQL. Actualmente investiga patrones de sincronización offline-first utilizando IndexedDB, Service Workers y almacenamiento en caché inteligente para aplicaciones web progresivas de alto nivel. Gracias a estas estrategias logra que herramientas empresariales funcionen sin interrupciones incluso en zonas con conectividad intermitente o nula. Suele impartir charlas técnicas sobre cómo unificar la validación de datos entre servidor y cliente manteniendo una base de código clara y fácil de escalar. Además, diseña contratos de API versionados y documentados automáticamente para facilitar la integración paralela entre equipos frontend, móviles y de servicios externos."
+        },
+        {
+            "nombre": "Cristian Galindez",
+            "contenido": "Entusiasta de la seguridad informática y el desarrollo backend robusto. Dedica su tiempo libre a analizar vulnerabilidades comunes en aplicaciones web modernas, implementar autenticación segura basada en tokens firmados y fortalecer la integridad de los datos en producción. Participa en auditorías preventivas donde evalúa cabeceras HTTP, políticas de contenido y manejo de sesiones para blindar plataformas financieras y educativas. Para él, la seguridad no es un paso final antes del despliegue, sino un pilar fundamental que acompaña cada línea de código desde el primer día. También capacita a equipos de desarrollo en prevención de inyecciones, manejo seguro de secretos y principios de mínimo privilegio en cada capa de la infraestructura."
+        },
+        {
+            "nombre": "Alfredo Agudelo",
+            "contenido": "Líder técnico de equipos ágiles con enfoque en entrega continua y automatización de infraestructura DevOps. Promueve la cultura de revisión de código constructiva, documentación técnica clara y monitoreo constante de métricas de rendimiento en servidores distribuidos. Ha implementado flujos de integración continua que ejecutan cientos de pruebas automáticas en cuestión de minutos, reduciendo el margen de error humano durante los lanzamientos semanales. Le apasiona ayudar a los desarrolladores a comprender todo el ciclo de vida del software desde el entorno local hasta producción. Mediante despliegues progresivos y estrategias de reversión automática, logra que cada equipo publique mejoras diarias con serenidad y respaldo técnico."
+        },
+        {
+            "nombre": "Esteban Alarcon",
+            "contenido": "Creador de contenido educativo sobre programación y desarrollo web en español. Su objetivo principal es transformar conceptos complejos como closures, prototipos, asincronía y observadores del DOM en explicaciones prácticas, dinámicas y fáciles de asimilar para estudiantes de todos los niveles. Cada semana publica ejercicios interactivos donde los aprendices pueden experimentar directamente en el navegador sin configuraciones tediosas. Cree que la mejor forma de dominar un lenguaje es construir proyectos reales paso a paso entendiendo el porqué de cada instrucción. En sus materiales didácticos incluye comparativas visuales, analogías cotidianas y retos guiados que fortalecen el pensamiento lógico de quienes inician su carrera."
+        },
+        {
+            "nombre": "Vanesa Puentes",
+            "contenido": "Diseñadora de producto digital e investigadora de experiencia de usuario. Combina pruebas de usabilidad reales con prototipado rápido e iterativo para asegurar que cada flujo de navegación sea intuitivo, claro y libre de fricciones innecesarias para el usuario final. Trabaja codo a codo con desarrolladores frontend para traducir hallazgos de entrevistas en mejoras concretas de interfaz que aumentan la satisfacción y la retención. Su enfoque siempre parte de la empatía y la observación directa de cómo las personas reales interactúan con la tecnología. Antes de aprobar cualquier pantalla nueva, valida jerarquías visuales, flujos de error y estados vacíos junto a usuarios representativos."
+        },
+        {
+            "nombre": "Laura Mendoza",
+            "contenido": "Desarrolladora Web orientada al detalle y amante de las animaciones eficientes con CSS y JavaScript. Implementa técnicas avanzadas de carga diferida para reducir drásticamente el consumo de datos móviles y mejorar el puntaje de Core Web Vitals en dispositivos de gama media y baja. Prefiere animar propiedades compuestas por la GPU como transform y opacity para mantener sesenta fotogramas por segundo estables en todo momento. Además, disfruta creando microinteracciones sutiles que guían la atención del usuario de forma natural. También respeta las preferencias de accesibilidad del sistema operativo desactivando movimientos complejos cuando detecta la regla prefers-reduced-motion."
+        },
+        {
+            "nombre": "Santiago Ospina",
+            "contenido": "Ingeniero de datos y analítica web especializado en visualización interactiva con SVG y Canvas. Transforma grandes volúmenes de información compleja en tableros comprensibles que ayudan a las organizaciones a tomar decisiones estratégicas basadas en métricas reales y verificables. Ha optimizado procesos de agregación que permiten explorar miles de registros históricos en milisegundos sin congelar la pestaña del navegador. Su meta constante es unir la precisión estadística con un diseño visual limpio que cuente historias claras. Para lograrlo, aplica técnicas de muestreo inteligente, escalas dinámicas y tooltips accesibles que funcionan igual de bien con ratón o teclado."
+        },
+        {
+            "nombre": "Valentina Rojas",
+            "contenido": "Desarrolladora Mobile y Web híbrida interesada en experiencias multiplataforma fluidas. Trabaja optimizando el desplazamiento infinito en listas extensas para evitar bloqueos del hilo principal y mantener una tasa estable de sesenta fotogramas por segundo constantes. Utiliza observadores de intersección y reciclaje de nodos del DOM para que catálogos con miles de tarjetas se sientan ligeros incluso en teléfonos antiguos. También experimenta con gestos táctiles naturales que acercan las aplicaciones web al nivel de respuesta de una app nativa. Cuida especialmente la gestión de memoria en sesiones largas para prevenir recargas inesperadas del navegador en dispositivos móviles."
+        },
+        {
+            "nombre": "Mateo Castano",
+            "contenido": "Especialista en SEO técnico y rendimiento frontend avanzado. Audita constantemente sitios de alto tráfico para eliminar scripts bloqueantes, optimizar la carga de fuentes tipográficas y estructurar marcado HTML semántico que impulse el posicionamiento orgánico en buscadores. Ha ayudado a medios digitales y tiendas en línea a duplicar su tráfico orgánico mejorando los tiempos de Largest Contentful Paint y reduciendo los cambios inesperados de diseño. Considera que un sitio rápido y bien estructurado beneficia tanto a los usuarios como a los motores de búsqueda. Complementa su trabajo implementando datos estructurados, mapas de sitio dinámicos y políticas limpias de URL canónicas."
+        },
+        {
+            "nombre": "Sofia Delgado",
+            "contenido": "Ingeniera QA enfocada en automatización de pruebas End-to-End y pruebas de regresión visual. Garantiza que cada nueva funcionalidad desplegada mantenga la estabilidad integral del sistema en distintos navegadores modernos y múltiples resoluciones de pantalla. Diseña escenarios de prueba realistas que simulan conexiones lentas, errores de red y flujos completos de usuario antes de aprobar una versión. Su trabajo meticuloso da tranquilidad al equipo de ingeniería para lanzar mejoras frecuentes con total confianza. Además, mantiene reportes históricos de flakiness para depurar pruebas inestables y asegurar que cada alerta refleje un problema real."
+        },
+        {
+            "nombre": "Daniela Vargas",
+            "contenido": "Programadora creativa que explora la intersección entre el arte generativo y el código en el navegador. Experimenta con WebGL, shaders personalizados y APIs nativas de audio para construir instalaciones visuales interactivas directamente dentro de estándares web abiertos. Sus obras combinan matemáticas, física de partículas y respuesta en tiempo real al movimiento del cursor o micrófono del visitante. Le encanta demostrar que el navegador moderno es un lienzo poderoso capaz de expresar creatividad mucho más allá de los formularios tradicionales. Regularmente comparte fragmentos experimentales y demostraciones abiertas para inspirar a otros desarrolladores a explorar el lado artístico del código."
+        },
+        {
+            "nombre": "Sebastian Navarro",
+            "contenido": "Consultor en arquitectura cloud y optimización de costos de infraestructura digital. Diseña despliegues sin servidor (Serverless) y redes de distribución de contenido (CDN) para entregar respuestas veloces y confiables desde cualquier región geográfica del mundo. Realiza análisis profundos de consumo de recursos para eliminar cuellos de botella y reducir facturas mensuales sin sacrificar capacidad de respuesta. Su enfoque pragmático prioriza soluciones simples de operar, altamente disponibles y preparadas para escalar. También asesora a startups en crecimiento sobre cómo elegir servicios gestionados adecuados sin quedar atrapados en configuraciones excesivamente complejas."
+        },
+        {
+            "nombre": "Mariana Castro",
+            "contenido": "Desarrolladora Frontend con fuerte enfoque en diseño responsivo mediante window.matchMedia() y consultas de contenedor. Se asegura de que cada componente visual se adapte con elegancia y legibilidad desde relojes inteligentes hasta monitores ultrapanorámicos actuales. Sustituye pesados escuchadores de redimensionamiento por consultas reactivas limpias que respetan las preferencias del sistema operativo, como el modo oscuro o la reducción de movimiento. Para ella, una interfaz verdaderamente adaptable respeta tanto el dispositivo como las necesidades de quien la usa. Documenta cada punto de quiebre dentro de un sistema de diseño compartido para mantener coherencia en todo el producto."
+        },
+        {
+            "nombre": "Alejandro Herrera",
+            "contenido": "Apasionado por el código abierto y las herramientas de productividad para desarrolladores. Contribuye activamente a librerías de utilidades escritas en JavaScript estándar sin dependencias externas y promueve el uso responsable de APIs nativas del navegador. Mantiene varios repositorios comunitarios con documentación detallada y ejemplos ejecutables que facilitan la adopción de nuevas características de ECMAScript. Cree firmemente en devolver conocimiento a la comunidad mediante código claro, modular y bien probado. Antes de incorporar cualquier paquete externo en un proyecto, evalúa su impacto en tamaño, mantenimiento y seguridad a largo plazo."
+        },
+        {
+            "nombre": "Camila Restrepo",
+            "contenido": "Especialista en comercio electrónico de alto rendimiento y conversión. Implementa estrategias de precarga predictiva y lazy loading progresivo en catálogos con miles de productos para maximizar la velocidad de navegación y la satisfacción del cliente final. Analiza cuidadosamente cada segundo del proceso de compra para eliminar distracciones y reducir el abandono del carrito en dispositivos móviles. Su trabajo demuestra que cada milisegundo ahorrado en la carga de imágenes impacta directamente en los resultados del negocio. También optimiza formatos modernos como WebP y AVIF adaptados automáticamente al tamaño exacto de cada contenedor."
+        },
+        {
+            "nombre": "Nicolas Pardo",
+            "contenido": "Ingeniero de sistemas interesado en inteligencia artificial aplicada al desarrollo web moderno. Integra modelos de procesamiento de lenguaje natural y búsqueda semántica dentro de interfaces ligeras, rápidas y accesibles desde cualquier navegador de escritorio o móvil. Trabaja en equilibrar respuestas enriquecidas con latencias mínimas mediante streaming de texto y almacenamiento en caché local de consultas frecuentes. Le entusiasma crear herramientas inteligentes que potencien la productividad diaria sin complicar la experiencia de uso. Cuida especialmente la claridad de los estados de carga y el manejo elegante de errores ante límites de red."
+        },
+        {
+            "nombre": "Isabella Quintero",
+            "contenido": "Diseñadora de interacciones y redacción UX centrada en las personas. Cuida cada mensaje de error, estado vacío y transición de carga asíncrona para transmitir confianza, claridad absoluta y personalidad coherente en cada pantalla de la aplicación web. Colabora en la definición de guías de tono y voz que hacen que la tecnología se sienta cercana y humana incluso ante fallos técnicos. Sabe que unas pocas palabras bien elegidas pueden evitar frustraciones y guiar al usuario hacia la solución correcta. Realiza pruebas constantes de comprensión lectora sobre formularios complejos para simplificar etiquetas y textos de ayuda."
+        },
+        {
+            "nombre": "Gabriel Suarez",
+            "contenido": "Desarrollador Backend enfocado en alta concurrencia y colas de mensajería distribuida. Construye sistemas tolerantes a fallos capaces de procesar miles de peticiones simultáneas por segundo manteniendo la consistencia transaccional y disponibilidad del servicio. Implementa patrones de reintento exponencial, disyuntores y procesamiento en segundo plano para que las operaciones pesadas nunca bloqueen las respuestas principales. Disfruta resolviendo problemas complejos de escalabilidad con código limpio y observabilidad precisa. Además, diseña pruebas de carga periódicas para verificar que cada servicio se degrade de forma controlada ante escenarios extremos."
+        },
+        {
+            "nombre": "Lucia Benitez",
+            "contenido": "Especialista en accesibilidad digital (WCAG) y tecnologías de navegación asistida. Audita contrastes de color, soporte completo mediante teclado y atributos ARIA semánticos para garantizar que la web sea verdaderamente inclusiva y usable para todas las personas. Realiza pruebas continuas con lectores de pantalla reales para detectar barreras invisibles que suelen pasar desapercibidas en revisiones puramente visuales. Promueve la idea de que diseñar para la diversidad mejora la experiencia de todos los usuarios sin excepción. También elabora listas de verificación prácticas para que cada desarrollador valide el foco visible y el orden lógico de tabulación."
+        },
+        {
+            "nombre": "Julian Cordoba",
+            "contenido": "Entusiasta de la arquitectura limpia y los patrones de diseño clásicos en JavaScript. Aplica principios SOLID y programación funcional declarativa para escribir módulos desacoplados, fáciles de probar, mantener y sencillos de escalar a lo largo del tiempo. Evita la sobreingeniería innecesaria apostando por funciones puras, inmutabilidad y contratos claros entre capas de la aplicación. Sus proyectos destacan por lo fácil que resulta para nuevos integrantes del equipo comprender el flujo de datos desde el primer día. Suele organizar sesiones internas de refactorización donde el equipo simplifica módulos complejos en piezas pequeñas y legibles."
+        },
+        {
+            "nombre": "Paula Torres",
+            "contenido": "Gestora técnica de proyectos digitales con sólida formación en desarrollo web. Coordina equipos multidisciplinarios de ingeniería y diseño alineando objetivos estratégicos de negocio, tiempos realistas de entrega y calidad técnica en cada iteración del producto. Facilita la comunicación entre áreas eliminando bloqueos diarios y protegiendo el enfoque del equipo de desarrollo. Su experiencia previa programando le permite estimar riesgos técnicos con precisión y construir cronogramas sostenibles. Fomenta retrospectivas honestas orientadas a la acción donde cada integrante participa en la mejora continua de los procesos."
+        },
+        {
+            "nombre": "Diego Salgado",
+            "contenido": "Desarrollador de videojuegos web con HTML5 Canvas y WebAssembly. Optimiza motores de físicas en tiempo real y gestión de memoria para lograr experiencias jugables fluidas directamente en el navegador sin necesidad de instalar complementos ni software adicional. Crea bucles de renderizado desacoplados de la lógica de juego y sistemas eficientes de colisiones que corren sin problemas en hardware modesto. Su pasión es llevar la diversión de los juegos clásicos y modernos a cualquier pantalla con un solo clic. También integra soporte para mandos físicos mediante la Gamepad API y almacenamiento automático de partidas locales."
+        },
+        {
+            "nombre": "Natalia Bermudez",
+            "contenido": "Ingeniera de confiabilidad del sitio (SRE) dedicada a la observabilidad y respuesta ante incidentes. Configura métricas detalladas, trazas distribuidas y alertas inteligentes para asegurar que las plataformas críticas funcionen sin interrupciones las veinticuatro horas del día. Documenta manuales de acción rápida y realiza simulacros periódicos de recuperación para que el equipo esté preparado ante cualquier eventualidad. Cree que la verdadera estabilidad nace de medir constantemente y aprender de cada incidente. Trabaja estrechamente con desarrollo para establecer presupuestos de error claros que equilibren velocidad de innovación y fiabilidad."
+        },
+        {
+            "nombre": "Tomas Echeverri",
+            "contenido": "Especialista en integraciones de pago y comercio digital internacional. Diseña flujos de checkout seguros, resilientes ante fallos de red y compatibles con múltiples divisas locales para facilitar transacciones rápidas y confiables en toda Latinoamérica. Implementa mecanismos de idempotencia que evitan cobros duplicados incluso cuando el usuario recarga la página en medio de una operación. Su prioridad absoluta es generar confianza financiera mediante interfaces claras y procesos transparentes. También monitorea tasas de aprobación por método de pago para detectar fricciones y mejorar continuamente la experiencia de compra."
+        },
+        {
+            "nombre": "Valeria Giraldo",
+            "contenido": "Investigadora en interacción humano-computadora y diseño centrado en datos. Analiza mapas de calor, tiempos de permanencia y tasas de abandono para proponer mejoras basadas en evidencia que incrementen la retención y el compromiso de los usuarios. Combina métricas cuantitativas con sesiones cualitativas para entender no solo qué hacen los visitantes, sino por qué toman ciertas decisiones dentro del sitio. Sus recomendaciones transforman suposiciones en resultados medibles. Antes de proponer rediseños profundos, diseña prototipos ligeros para validar rápidamente cada hipótesis con usuarios reales."
+        },
+        {
+            "nombre": "Hector Villalobos",
+            "contenido": "Administrador de bases de datos PostgreSQL y MongoDB de gran escala. Implementa estrategias de indexación compuesta, replicación geográfica y respaldos automatizados para garantizar consultas rápidas y cero pérdida de información ante fallos inesperados. Monitorea planes de ejecución diariamente para detectar consultas lentas antes de que afecten el rendimiento general de la aplicación. Para él, una base de datos bien modelada es el corazón silencioso de todo sistema exitoso. Realiza pruebas periódicas de restauración en entornos aislados para verificar que cada respaldo sea íntegro y recuperable en minutos."
+        },
+        {
+            "nombre": "Sara Montoya",
+            "contenido": "Desarrolladora Frontend especialista en Web Components nativos y Shadow DOM. Crea bibliotecas de componentes reutilizables independientes del framework, permitiendo que distintos equipos compartan una misma identidad visual sin conflictos de estilos CSS. Aprovecha los estándares propios del navegador para construir elementos encapsulados, ligeros y altamente portables entre proyectos antiguos y modernos. Su objetivo es crear interfaces duraderas que no dependan de modas pasajeras. Cuida la ergonomía de cada componente exponiendo propiedades claras, eventos personalizados y ranuras flexibles para contenido dinámico."
+        },
+        {
+            "nombre": "Oscar Pineda",
+            "contenido": "Arquitecto de soluciones empresariales con enfoque en migración hacia la nube. Acompaña a organizaciones tradicionales en la modernización de sistemas heredados hacia arquitecturas modulares basadas en contenedores Docker y orquestación con Kubernetes. Diseña planes de transición graduales que minimizan el riesgo operativo mientras liberan al equipo de limitaciones físicas de hardware. Disfruta traduciendo necesidades complejas de negocio en plataformas tecnológicas ágiles. Además, capacita a los equipos internos en automatización de infraestructura como código para mantener entornos reproducibles y seguros."
+        },
+        {
+            "nombre": "Elena Cardona",
+            "contenido": "Especialista en pruebas de rendimiento y estrés para aplicaciones web. Simula miles de usuarios concurrentes para detectar cuellos de botella en servidores, fugas de memoria en el navegador y consultas lentas antes del lanzamiento oficial a producción. Elabora reportes detallados con perfiles de CPU y consumo de red que ayudan a los desarrolladores a atacar exactamente los puntos críticos. Gracias a su labor, las plataformas soportan eventos masivos sin caídas. También integra umbrales automáticos de rendimiento en el flujo de integración continua para evitar regresiones silenciosas."
+        },
+        {
+            "nombre": "Ricardo Molina",
+            "contenido": "Desarrollador Full Stack apasionado por la automatización de flujos de trabajo. Crea scripts en Node.js y herramientas de línea de comandos personalizadas que eliminan tareas repetitivas del equipo y aceleran significativamente el ciclo diario de desarrollo. Desde generadores de plantillas hasta validadores automáticos de archivos, busca siempre ahorrar minutos valiosos que pueden invertirse en resolver problemas de mayor impacto. Cree que todo proceso manual repetido tres veces merece ser automatizado. Sus utilidades internas se caracterizan por mensajes claros de ayuda y cero fricción al ejecutarse."
+        },
+        {
+            "nombre": "Adriana Londono",
+            "contenido": "Diseñadora de sistemas tipográficos y maquetación editorial para la web. Explora el uso de tipografías variables, cuadrículas asimétricas y jerarquías visuales claras para ofrecer experiencias de lectura cómodas tanto en pantallas grandes como en teléfonos móviles. Cuida el interlineado, la longitud óptima de cada línea y el ritmo vertical para que textos extensos resulten ligeros y atractivos. Su trabajo eleva el contenido escrito a una experiencia visual placentera. También optimiza la carga de fuentes mediante subconjuntos de caracteres y estrategias font-display para evitar saltos bruscos de texto."
+        },
+        {
+            "nombre": "Mauricio Zapata",
+            "contenido": "Ingeniero de telecomunicaciones y redes enfocado en optimización del protocolo HTTP/3. Analiza tiempos de latencia, compresión Brotli y estrategias de caché en el borde (Edge Computing) para reducir el tiempo hasta el primer byte en todo el continente. Trabaja ajustando encabezados de caché y políticas de precarga para que los recursos estáticos y dinámicos viajen por la ruta más eficiente posible. Sabe que una buena red bien aprovechada multiplica la velocidad de cualquier aplicación. Evalúa constantemente el comportamiento real de usuarios desde distintas operadoras para detectar rutas subóptimas."
+        },
+        {
+            "nombre": "Carolina Mejia",
+            "contenido": "Mentora de talento tecnológico y organizadora de comunidades locales de JavaScript. Impulsa talleres prácticos gratuitos donde personas que inician en la programación aprenden a construir sus primeros proyectos reales con confianza y acompañamiento continuo. Fomenta espacios seguros para hacer preguntas, compartir errores y celebrar los primeros logros técnicos de cada participante. Está convencida de que el aprendizaje colaborativo acelera el crecimiento profesional de toda la industria. Además, conecta a nuevos desarrolladores con oportunidades laborales mediante revisiones de portafolio y entrevistas simuladas."
+        },
+        {
+            "nombre": "Javier Ordonez",
+            "contenido": "Programador de sistemas embebidos e Internet de las Cosas conectado a la web. Utiliza WebSockets y WebSerial para comunicar sensores físicos en tiempo real con tableros web interactivos que monitorean variables ambientales al instante. Ha desarrollado soluciones para agricultura inteligente y domótica donde cualquier usuario puede controlar dispositivos desde una página web ligera. Su especialidad une la electrónica práctica con las capacidades modernas del navegador. Cuida especialmente la reconexión automática y el almacenamiento temporal cuando la señal inalámbrica fluctúa en campo."
+        },
+        {
+            "nombre": "Manuela Valencia",
+            "contenido": "Especialista en analítica de producto y experimentación mediante pruebas A/B. Diseña hipótesis medibles para validar nuevas características de interfaz y asegurar que cada cambio publicado aporte valor real tanto al usuario como al negocio. Trabaja con muestreo estadístico riguroso evitando conclusiones apresuradas y documentando cada aprendizaje obtenido. Su meta es que el producto evolucione guiado por datos reales y no por simples intuiciones. También colabora con ingeniería para implementar banderas de funcionalidades limpias que no añadan complejidad innecesaria al código."
+        },
+        {
+            "nombre": "Fernando Duarte",
+            "contenido": "Desarrollador enfocado en la gestión eficiente del estado y programación reactiva. Domina el uso de flujos de eventos asíncronos, promesas encadenadas y observadores del navegador para mantener sincronizada la interfaz con datos cambiantes en vivo. Diseña arquitecturas predecibles donde cada transición de estado es fácil de rastrear y depurar cuando surge un comportamiento inesperado. Le apasiona escribir lógica limpia que responda al instante a cada acción del usuario. Evita mutaciones accidentales y sincronizaciones frágiles manteniendo una única fuente de verdad clara en toda la aplicación."
+        },
+        {
+            "nombre": "Ximena Acosta",
+            "contenido": "Consultora en transformación digital y metodologías de trabajo colaborativo. Ayuda a equipos remotos a estructurar flujos de trabajo claros en Git, revisiones de Pull Requests efectivas y despliegues frecuentes con mínimo riesgo operacional. Implementa tableros transparentes que visibilizan avances reales sin saturar a los ingenieros con reuniones innecesarias. Cree que las mejores herramientas técnicas solo brillan cuando van acompañadas de acuerdos humanos saludables. Dedica tiempo a fortalecer la comunicación asíncrona para que equipos en distintas zonas horarias avancen con fluidez."
+        },
+        {
+            "nombre": "Rodrigo Penaloza",
+            "contenido": "Ingeniero especializado en procesamiento de imágenes y multimedia en el cliente. Implementa compresión de fotografías en el navegador mediante Canvas y Web Workers antes de subirlas al servidor, ahorrando ancho de banda y espacio de almacenamiento. También desarrolla filtros en tiempo real y recortadores responsivos que ofrecen retroalimentación instantánea al usuario. Su trabajo reduce costos de servidor mientras hace la carga de archivos mucho más veloz. Aprovecha las APIs modernas de lectura de archivos para previsualizar contenido multimedia al instante sin bloquear la interfaz."
+        },
+        {
+            "nombre": "Juliana Aristizabal",
+            "contenido": "Desarrolladora Web apasionada por las aplicaciones educativas interactivas. Construye simuladores visuales de algoritmos y laboratorios de código en vivo para que los estudiantes experimenten directamente en su navegador sin configuraciones complejas. Combina explicaciones paso a paso con retroalimentación visual inmediata para que cada concepto cobre vida en pantalla. Sueña con hacer la educación tecnológica más accesible, entretenida y práctica. Cuida que cada ejercicio ofrezca pistas progresivas que motiven al estudiante a pensar y descubrir la solución por sí mismo."
+        },
+        {
+            "nombre": "Gustavo Rincon",
+            "contenido": "Experto en almacenamiento local en el navegador con LocalStorage, SessionStorage e IndexedDB. Diseña arquitecturas capaces de guardar borradores, preferencias y catálogos completos localmente para seguir trabajando incluso sin conexión a internet. Implementa colas de sincronización automática que envían los cambios pendientes apenas el dispositivo recupera la señal. Su enfoque garantiza que el usuario nunca pierda su trabajo por un corte temporal de red. Además, diseña políticas de limpieza automática de datos antiguos para respetar las cuotas de almacenamiento de cada navegador."
+        },
+        {
+            "nombre": "Monica Cifuentes",
+            "contenido": "Especialista en privacidad de datos y cumplimiento normativo en aplicaciones web. Implementa gestión transparente de consentimiento, minimización de rastreadores de terceros y manejo responsable de la información personal de cada visitante. Trabaja junto a equipos legales y de ingeniería para traducir regulaciones complejas en configuraciones claras y honestas dentro de la interfaz. Cree firmemente que respetar la privacidad fortalece la relación a largo plazo con los usuarios. Audita periódicamente las dependencias externas para asegurar que ningún script recopile información sin autorización explícita."
+        },
+        {
+            "nombre": "Ivan Beltran",
+            "contenido": "Desarrollador Senior dedicado a la refactorización y deuda técnica en proyectos grandes. Transforma código complejo y acoplado en funciones puras bien documentadas, logrando aplicaciones más rápidas, predecibles y agradables de mantener en equipo. Realiza mejoras incrementales sin detener la entrega de nuevas funcionalidades, reduciendo progresivamente la tasa de errores en producción. Para él, cuidar la calidad interna del código es la mejor inversión para el futuro del producto. También mentoriza a desarrolladores intermedios en el diseño de pruebas sólidas que respalden cada cambio arquitectónico."
+        }
+    ]
+}
