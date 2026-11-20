@@ -1,38 +1,120 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Outline/outline.html
-     Título: Lección: Outline y Border
-     Propósito: demostrar la diferencia visual y de comportamiento entre outline y border.
-     Relación: enlaza con outline.css en la misma carpeta.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
+<!doctype html>
 <html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="outline.css">
-    <title>Lección: Outline</title>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Outline vs Border en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <main>
-        <h1>Diferencia entre Border y Outline</h1>
-        
-        <!-- Caja estándar con borde para comparación. -->
-        <div class="box">Caja con Borde</div>
-
-        <!-- Caja con el estilo outline-demo para ver el offset. -->
-        <div class="box outline-demo">Caja con Outline Offset</div>
-        
-        <p>Prueba a hacer click en el input para ver el outline de foco personalizado:</p>
-        <input type="text" placeholder="Hazme focus...">
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · CONTORNOS</span><div class="brand-title"><span>🔲</span><span>Outline vs Border</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Outline">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">outline</span><span class="badge badge-purple">outline-offset</span><span class="badge badge-emerald">Sin mover el layout</span></div>
+                <h1 class="hero-title">Contornos Sin Empujar:<br /><span class="gradient-text">Propiedad outline</span></h1>
+                <p class="hero-subtitle">A diferencia de <code>border</code>, <code>outline</code> no ocupa espacio en el Modelo de Caja, por lo que nunca provoca saltos al hacer <code>:hover</code> o <code>:focus</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">⚖️</div><h3>Outline vs Border</h3><p>Diferencias clave y <code>outline-offset</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Valida tus conocimientos.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba anillos de foco con <code>outline-offset</code>.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Outline vs Border?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Outline vs Border y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">A diferencia de <code>border</code>, <code>outline</code> no ocupa espacio en el Modelo de Caja, por lo que nunca provoca saltos al hacer <code>:hover</code> o <code>:focus</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Outline vs Border">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · COMPARATIVA</span><h2 class="slide-title">Diferencias entre border y outline</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Característica</th><th>border</th><th>outline</th></tr></thead>
+                <tbody>
+                    <tr><td>¿Ocupa espacio?</td><td>Sí (puede empujar elementos)</td><td>No (se dibuja por fuera)</td></tr>
+                    <tr><td>¿Lados individuales?</td><td>Sí (<code>border-top</code>, etc.)</td><td>No (siempre los 4 lados)</td></tr>
+                    <tr><td>Separación del borde</td><td>No tiene</td><td>Sí (<code>outline-offset: 4px</code>)</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Outline vs Border">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Outline vs Border</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Outline">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="outline no forma parte del Box Model y no altera el tamaño ni la posición de otros elementos." data-err="Añadir un border grueso en :hover puede mover la caja; outline no ocupa espacio.">
+                    <div class="quiz-q-title">1. ¿Por qué es mejor usar <code>outline</code> que <code>border</code> para resaltar un botón al hacer <code>:focus</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Porque outline no ocupa espacio ni mueve el layout</button><button class="quiz-option" data-opt="b">Porque outline solo funciona en Chrome</button><button class="quiz-option" data-opt="c">Porque border no tiene color</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="outline-offset separa el contorno hacia afuera (valores positivos) o hacia adentro (negativos)." data-err="outline-offset controla la distancia entre el borde de la caja y el outline.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad separa el <code>outline</code> unos píxeles del borde del botón?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">outline-margin</button><button class="quiz-option" data-opt="b">outline-offset</button><button class="quiz-option" data-opt="c">border-spacing</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Outline">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Anillo de Foco con outline-offset</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
+  .btn { padding: 12px 24px; border-radius: 12px; border: 0; background: #38bdf8; color: #0f172a; font-weight: 800; cursor: pointer; }
+  .btn:hover, .btn:focus-visible { outline: 3px solid #38bdf8; outline-offset: 4px; }
+&lt;/style&gt;
+&lt;button class=&quot;btn&quot;&gt;Pasa el cursor o usa Tab&lt;/button&gt;">Anillo Offset</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
+  .btn { padding: 12px 24px; border-radius: 12px; border: 0; background: #38bdf8; color: #0f172a; font-weight: 800; cursor: pointer; }
+  .btn:hover, .btn:focus-visible { outline: 3px solid #38bdf8; outline-offset: 4px; }
+&lt;/style&gt;
+&lt;button class="btn"&gt;Pasa el cursor o usa Tab&lt;/button&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
     </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animaciones CSS — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+    <style>
+        @keyframes simSlide { 0% { transform: translateX(0); } 50% { transform: translateX(220px); } 100% { transform: translateX(0); } }
+        @keyframes simPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+        @keyframes simSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes simBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-55px); } }
+    </style>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · MOVIMIENTO A 60 FPS</span>
+            <div class="brand-title"><span>✨</span><span>Animaciones CSS</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Animaciones CSS">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">@keyframes</span>
+                    <span class="badge badge-purple">Timing Functions</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">Animaciones CSS</span></h1>
+                <p class="hero-subtitle">Crea transiciones expresivas y animaciones fluidas a 60 FPS usando <code>@keyframes</code>, curvas <code>cubic-bezier</code>, composición en GPU y animaciones ligadas al scroll.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🎬</div>
+                        <h3>Transition vs @keyframes</h3>
+                        <p>Cuándo usar transiciones de estado y cuándo líneas de tiempo completas.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Rendimiento GPU 60 FPS</h3>
+                        <p>Por qué animar <code>transform</code> y <code>opacity</code> evita saltos visuales.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador de Curvas</h3>
+                        <p>Prueba <code>ease</code>, <code>linear</code> y rebotes <code>cubic-bezier</code> en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Transiciones vs Animaciones (@keyframes)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · CUÁNDO USAR CADA UNA</span>
+                <h2 class="slide-title">Transiciones vs Animaciones (@keyframes)</h2>
+                <p class="slide-lead">Las transiciones requieren un cambio de estado (como <code>:hover</code>); las animaciones corren solas y en bucle.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🔄 <code>transition</code></h3>
+                    <ul class="styled-list">
+                        <li>Solo tiene dos estados: inicio (A) y fin (B).</li>
+                        <li>Ideal para hover de botones, menús desplegables y foco de inputs.</li>
+                        <li><code>transition: transform 0.25s ease, opacity 0.25s ease;</code></li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🎞️ <code>@keyframes</code> + <code>animation</code></h3>
+                    <ul class="styled-list">
+                        <li>Múltiples pasos intermedios (<code>0%</code>, <code>50%</code>, <code>100%</code>).</li>
+                        <li>Puede repetirse infinitamente (<code>infinite</code>) y alternar dirección (<code>alternate</code>).</li>
+                        <li>Ideal para loaders, pulsos, entradas y efectos continuos.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <strong>💡 Buena práctica:</strong> Nunca escribas <code>transition: all 0.3s;</code> en producción; especifica las propiedades exactas (ej. <code>transform, background-color</code>) para evitar animar propiedades costosas sin querer.
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="Anatomía de @keyframes y animation">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS COMPLETA</span>
+                <h2 class="slide-title">Anatomía de @keyframes y animation</h2>
+                <p class="slide-lead">Controla duración, curva de aceleración, retardo, iteraciones y estado final.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📝 Línea de tiempo</h3>
+                    <pre class="code-block"><code>@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.icono {
+  animation: flotar 2.4s ease-in-out infinite;
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🎛️ Propiedades clave</h3>
+                    <ul class="styled-list">
+                        <li><code>animation-fill-mode: forwards</code> → conserva el estilo del último keyframe al terminar.</li>
+                        <li><code>animation-direction: alternate</code> → va de 0%→100% y regresa 100%→0%.</li>
+                        <li><code>animation-play-state: paused</code> → pausa la animación al hacer hover.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Rendimiento a 60 FPS en GPU">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · RENDIMIENTO WEB</span>
+                <h2 class="slide-title">Rendimiento a 60 FPS (GPU Compositing)</h2>
+                <p class="slide-lead">El navegador tiene ~16.6 ms por fotograma. Animar propiedades equivocadas provoca tirones (jank).</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Propiedad animada</th><th>Fase del navegador</th><th>Rendimiento</th><th>Alternativa recomendada</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>top / left / width / height</code></td><td>Layout + Paint + Composite</td><td>🔴 Lento (recalcula toda la página)</td><td><code>transform: translate() / scale()</code></td></tr>
+                    <tr><td><code>background / box-shadow</code></td><td>Paint + Composite</td><td>🟡 Medio</td><td>Animar <code>opacity</code> de un pseudo-elemento</td></tr>
+                    <tr><td><code>transform / opacity</code></td><td>Solo Composite (GPU)</td><td>🟢 60 FPS fluidos</td><td>¡Úsalas siempre que puedas!</td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-analogy">
+                <strong>🧠 Analogía mental:</strong> Mover una caja con <code>left</code> es como derribar y reconstruir una pared cada milisegundo. Moverla con <code>transform: translateX()</code> es como deslizar un acetato ya dibujado encima de la mesa.
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Curvas de Aceleración (Timing Functions)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · FÍSICA NATURAL</span>
+                <h2 class="slide-title">Timing Functions y cubic-bezier()</h2>
+                <p class="slide-lead">En la vida real nada arranca ni frena de golpe: las curvas dan peso, elasticidad y naturalidad.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📈 Curvas estándar</h3>
+                    <ul class="styled-list">
+                        <li><code>linear</code>: velocidad constante (ideal para rotaciones continuas/loaders).</li>
+                        <li><code>ease-out</code>: arranca rápido y frena suave (ideal para elementos que <strong>entran</strong>).</li>
+                        <li><code>ease-in</code>: arranca lento y acelera (ideal para elementos que <strong>salen</strong>).</li>
+                        <li><code>ease-in-out</code>: suave al inicio y al final (ideal para bucles).</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🏀 Efecto rebote con <code>cubic-bezier()</code></h3>
+                    <pre class="code-block"><code>.boton {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.boton:hover {
+  transform: scale(1.08);
+}</code></pre>
+                    <p style="margin-top:8px;">Cuando el segundo o cuarto valor supera <code>1</code>, la animación hace un ligero sobreimpulso elástico.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="Animaciones de Scroll y Accesibilidad">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CSS MODERNO Y ACCESIBLE</span>
+                <h2 class="slide-title">Scroll-Driven Animations y prefers-reduced-motion</h2>
+                <p class="slide-lead">Sincroniza animaciones con el desplazamiento sin JavaScript y respeta a usuarios sensibles al movimiento.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📜 Scroll-Driven Animations</h3>
+                    <pre class="code-block"><code>.barra-progreso {
+  animation: crecer linear both;
+  animation-timeline: scroll();
+}</code></pre>
+                    <p style="margin-top:8px;">Con <code>view()</code> puedes animar tarjetas justo cuando entran en pantalla.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>♿ Respetar preferencia del sistema</h3>
+                    <pre class="code-block"><code>@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: 🔹 ¿Qué hace realmente una transición?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · ANIMACIONES.md</span>
+                <h2 class="slide-title">🔹 ¿Qué hace realmente una transición?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Una transición le dice al navegador:</p>
+<div class="callout callout-tip">&quot;Cuando esta propiedad cambie de valor, no la cambies</div>
+<div class="callout callout-tip">instantáneamente. Interpólala en el tiempo.&quot;</div>
+<p style="margin-bottom:8px;line-height:1.6;">El navegador calcula los valores intermedios automáticamente.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: 🔹 transition: propiedad duración timing delay;">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · ANIMACIONES.md</span>
+                <h2 class="slide-title">🔹 transition: propiedad duración timing delay;</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Ejemplo:</p>
+<pre class="code-block"><code>transition: background-color 0.3s ease 0.1s;</code></pre>
+<h3 style="margin-top:12px;color:#38bdf8;">1. Propiedad</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Es la propiedad que será animada.</p>
+<h3 style="margin-top:12px;color:#38bdf8;">2. duration</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Tiempo total de interpolación.</p>
+<h3 style="margin-top:12px;color:#38bdf8;">3. timing-function</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Curva de velocidad (Bézier cúbica).</p>
+<h3 style="margin-top:12px;color:#38bdf8;">4. delay</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Tiempo antes de comenzar.</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: 🔹 ¿Por qué NO animar width o height?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · ANIMACIONES.md</span>
+                <h2 class="slide-title">🔹 ¿Por qué NO animar width o height?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Porque causan:</p>
+<ul class="styled-list">
+<li>-   Reflow</li>
+<li>-   Repaint</li>
+<li>-   Impacto en performance</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">Mientras que:</p>
+<ul class="styled-list">
+<li>-   <code>transform</code></li>
+<li>-   <code>opacity</code></li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">Se ejecutan en la GPU → más eficientes.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 2️⃣ Animaciones (@keyframes)</p></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: 🔹 ¿Qué hace @keyframes?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · ANIMACIONES.md</span>
+                <h2 class="slide-title">🔹 ¿Qué hace @keyframes?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Define una línea de tiempo.</p>
+<pre class="code-block"><code>@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}</code></pre></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR VISUAL -->
+        <section class="slide" data-slide="11" data-title="Simulador de Animaciones">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador de @keyframes y Curvas</h2>
+                <p class="slide-lead">Cambia el efecto, la duración y la curva de aceleración para comparar cómo se siente el movimiento.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Animación (@keyframes)</label>
+                        <select id="animType">
+                            <option value="simSlide">Deslizar (translateX)</option>
+                            <option value="simPulse">Pulso (scale)</option>
+                            <option value="simSpin">Rotación (rotate)</option>
+                            <option value="simBounce">Rebote (translateY)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Curva (timing-function)</label>
+                        <select id="animCurve">
+                            <option value="ease">ease</option>
+                            <option value="linear">linear</option>
+                            <option value="ease-in">ease-in</option>
+                            <option value="ease-out">ease-out</option>
+                            <option value="ease-in-out">ease-in-out</option>
+                            <option value="cubic-bezier(0.34, 1.56, 0.64, 1)">cubic-bezier (Rebote)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Duración <span id="animDurVal">1.6s</span></label>
+                        <input type="range" id="animDur" min="0.4" max="4" step="0.2" value="1.6" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" style="display:flex; align-items:center; justify-content:flex-start; padding:24px 32px; min-height:200px;">
+                        <div id="animBox" style="width:74px; height:74px; border-radius:16px; background:linear-gradient(135deg,#38bdf8,#818cf8); color:#070a13; font-weight:800; display:grid; place-items:center; box-shadow:0 10px 25px rgba(56,189,248,0.35);">60 FPS</div>
+                    </div>
+                    <pre class="sim-code" id="animCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de Animaciones">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Animaciones CSS</h2>
+                <p class="slide-lead">Pon a prueba tus conocimientos sobre rendimiento, keyframes y accesibilidad.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="transform y opacity se procesan en la capa de composición de la GPU sin recalcular el layout."
+                    data-err="Animar width, height o top/left obliga al navegador a recalcular el diseño (Layout) en cada frame.">
+                    <div class="quiz-q-title">1. ¿Qué par de propiedades ofrecen el mejor rendimiento (60 FPS en GPU) al animar?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">top y left</button>
+                        <button class="quiz-option" data-opt="b">width y margin</button>
+                        <button class="quiz-option" data-opt="c">transform y opacity</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="animation-fill-mode: forwards mantiene los estilos del último keyframe una vez finalizada la animación."
+                    data-err="Sin forwards, el elemento regresa abruptamente a su estado inicial al terminar.">
+                    <div class="quiz-q-title">2. ¿Qué valor de <code>animation-fill-mode</code> hace que el elemento conserve el estilo final al terminar?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">forwards</button>
+                        <button class="quiz-option" data-opt="b">infinite</button>
+                        <button class="quiz-option" data-opt="c">alternate</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="prefers-reduced-motion: reduce permite desactivar o suavizar animaciones para personas con sensibilidad vestibular."
+                    data-err="El estándar de accesibilidad en CSS es la media query prefers-reduced-motion.">
+                    <div class="quiz-q-title">3. ¿Qué media query detecta si el usuario prefiere reducir las animaciones del sistema?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">@media (no-animation)</button>
+                        <button class="quiz-option" data-opt="b">@media (prefers-reduced-motion: reduce)</button>
+                        <button class="quiz-option" data-opt="c">@media (animation: off)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56,189,248,0.6); }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(56,189,248,0); }
+  }
+  .orb { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #818cf8); animation: pulse 1.8s ease-in-out infinite; display: grid; place-items: center; color: #0f172a; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;orb&quot;&gt;60 FPS&lt;/div&gt;">Pulso + Rebote</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #f8fafc; }
+  .btn { padding: 14px 26px; background: #4f46e5; color: #fff; border: 0; border-radius: 12px; font-weight: 700; cursor: pointer; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s; }
+  .btn:hover { transform: translateY(-5px) scale(1.04); box-shadow: 0 14px 24px rgba(79,70,229,0.35); }
+&lt;/style&gt;
+&lt;button class=&quot;btn&quot;&gt;Pasa el cursor aquí&lt;/button&gt;">Botón Hover 3D</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56,189,248,0.6); }
+    50% { transform: scale(1.08); box-shadow: 0 0 0 18px rgba(56,189,248,0); }
+  }
+  .orb { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8, #818cf8); animation: pulse 1.8s ease-in-out infinite; display: grid; place-items: center; color: #0f172a; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class="orb"&gt;60 FPS&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/ANIMACIONES.md" style="color:#38bdf8;">ANIMACIONES.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (5)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Animaciones/animaciones.html"><span class="file-name">📁 Animaciones</span><span class="file-path">animaciones.html</span></a>
+                    <a class="file-card" href="Botones%20Animados/botones.html"><span class="file-name">📁 Botones Animados</span><span class="file-path">botones.html</span></a>
+                    <a class="file-card" href="Scroll/"><span class="file-name">📁 Scroll</span><span class="file-path">Carpeta de práctica</span></a>
+                    <a class="file-card" href="Texto/texto.html"><span class="file-name">📁 Texto</span><span class="file-path">texto.html</span></a>
+                    <a class="file-card" href="Transiciones%20(Repaso)/transiciones.html"><span class="file-name">📁 Transiciones (Repaso)</span><span class="file-path">transiciones.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const box = document.getElementById('animBox');
+            const out = document.getElementById('animCodeOut');
+            const type = document.getElementById('animType');
+            const curve = document.getElementById('animCurve');
+            const dur = document.getElementById('animDur');
+            const durVal = document.getElementById('animDurVal');
+
+            function updateAnimSim() {
+                const d = dur.value + 's';
+                durVal.textContent = d;
+                box.style.animation = `${type.value} ${d} ${curve.value} infinite`;
+                out.textContent = `.elemento {\n  animation: ${type.value} ${d} ${curve.value} infinite;\n}`;
+            }
+            [type, curve, dur].forEach(el => el.addEventListener('input', updateAnimSim));
+            updateAnimSim();
+        })();
+    </script>
+</body>
+</html>

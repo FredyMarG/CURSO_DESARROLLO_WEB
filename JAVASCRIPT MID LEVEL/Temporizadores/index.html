@@ -1,56 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Temporizadores JS</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Temporizadores JS — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Asincronía &amp; Event Loop</span>
-            <h1>Temporizadores: <code>setTimeout</code> &amp; <code>setInterval</code></h1>
-            <p class="subtitle">Controla ejecución diferida, intervalos repetitivos y limpieza segura con <code>clearTimeout</code> / <code>clearInterval</code>.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · ASINCRONÍA</span><div class="brand-title"><span>⏱️</span><span>Temporizadores JS</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
-
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. <code>setTimeout</code> (Ejecución Diferida Cancelable)</h2>
-            <p class="desc">Programa una tarea única tras un retardo en milisegundos o cancélala antes de que dispare.</p>
-            <div class="controls">
-                <label for="delayInput">Retardo (ms):</label>
-                <input id="delayInput" type="number" value="2000" min="200" max="10000" step="200">
-                <div class="btn-row">
-                    <button type="button" id="btnStartTimeout" class="btn primary">Iniciar Timeout</button>
-                    <button type="button" id="btnCancelTimeout" class="btn" disabled>Cancelar (clearTimeout)</button>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Temporizadores JS">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">setTimeout</span><span class="badge badge-purple">setInterval</span><span class="badge badge-emerald">clearInterval</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Temporizadores JS</span></h1>
+                <p class="hero-subtitle">Programa tareas diferidas o repetitivas usando los temporizadores nativos del navegador.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
                 </div>
             </div>
-            <div id="timeoutOutput" class="output" aria-live="polite">Inactivo.</div>
         </section>
-
-        <section class="card">
-            <h2>2. Cronómetro con <code>setInterval</code></h2>
-            <p class="desc">Ejecuta un callback cada 100 ms con control de inicio, pausa y reinicio sin fugas de memoria.</p>
-            <div class="timer-display" id="cronoDisplay">00.0 s</div>
-            <div class="btn-row">
-                <button type="button" id="btnStartInterval" class="btn primary">Iniciar</button>
-                <button type="button" id="btnPauseInterval" class="btn" disabled>Pausar</button>
-                <button type="button" id="btnResetInterval" class="btn">Reiniciar</button>
-            </div>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Temporizadores JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Temporizadores JS?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Programa tareas diferidas o repetitivas usando los temporizadores nativos del navegador.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> <code>setTimeout</code> es una alarma que suena una vez; <code>setInterval</code> es un metrónomo que se repite cada N milisegundos.</div>
         </section>
-
-        <section class="card full-width">
-            <h2>3. Event Loop: <code>setTimeout(..., 0)</code> vs <code>Promise.resolve()</code></h2>
-            <p class="desc">Comprueba en vivo cómo las Microtasks (Promesas) se ejecutan antes que las Macrotasks (<code>setTimeout</code>).</p>
-            <div class="btn-row">
-                <button type="button" id="btnEventLoop" class="btn primary">Probar Orden del Event Loop</button>
+        <section class="slide" data-slide="3" data-title="Uso y limpieza de timers">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Uso y limpieza de timers</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const id = setInterval(() => console.log("Tic"), 1000);
+setTimeout(() => clearInterval(id), 5000);</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="📚 TEMARIO">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · WINDOW.md</span>
+                <h2 class="slide-title">📚 TEMARIO</h2>
             </div>
-            <div id="loopOutput" class="terminal" aria-live="polite"></div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">1. ¿Qué es el objeto <code>window</code>?</p>
+<p style="margin-bottom:8px;line-height:1.6;">2. Relación entre Browser → Window → DOM</p>
+<p style="margin-bottom:8px;line-height:1.6;">3. Métodos de apertura y cierre</p>
+<ul class="styled-list">
+<li>* <code>open()</code></li>
+<li>* <code>close()</code></li>
+<li>* <code>closed</code></li>
+<li>* <code>stop()</code></li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">4. Métodos de interacción con el usuario</p>
+<ul class="styled-list">
+<li>* <code>alert()</code></li>
+<li>* <code>prompt()</code></li>
+<li>* <code>confirm()</code></li>
+<li>* <code>print()</code></li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">5. Diagramas visuales</p>
+<p style="margin-bottom:8px;line-height:1.6;">6. Ejemplos reales</p>
+<p style="margin-bottom:8px;line-height:1.6;">7. Casos prácticos</p>
+<p style="margin-bottom:8px;line-height:1.6;">8. Errores comunes</p>
+<p style="margin-bottom:8px;line-height:1.6;">9. Buenas prácticas PRO</p>
+<p style="margin-bottom:8px;line-height:1.6;">10. Debugging</p>
+<p style="margin-bottom:8px;line-height:1.6;">11. Mini proyecto práctico</p>
+<p style="margin-bottom:8px;line-height:1.6;">12. Resumen final</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="🌎 ¿QUÉ ES EL OBJETO window?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · WINDOW.md</span>
+                <h2 class="slide-title">🌎 ¿QUÉ ES EL OBJETO window?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">El objeto <code>window</code> es el objeto principal del navegador.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Representa toda la ventana del navegador donde se ejecuta JavaScript.</p>
+<p style="margin-bottom:8px;line-height:1.6;">TODO en el navegador vive dentro de <code>window</code>.</p></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="🧠 PIÉNSALO ASÍ">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · WINDOW.md</span>
+                <h2 class="slide-title">🧠 PIÉNSALO ASÍ</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>NAVEGADOR
+ └── WINDOW
+      ├── DOCUMENT (HTML)
+      ├── SCREEN
+      ├── LOCATION
+      ├── HISTORY
+      ├── CONSOLE
+      ├── ALERT
+      ├── PROMPT
+      └── MUCHAS MÁS...</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="🔥 IMPORTANTE">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · WINDOW.md</span>
+                <h2 class="slide-title">🔥 IMPORTANTE</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Cuando escribes:</p>
+<pre class="code-block"><code>alert(&quot;Hola&quot;)</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">REALMENTE estás escribiendo:</p>
+<pre class="code-block"><code>window.alert(&quot;Hola&quot;)</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">El navegador permite omitir <code>window</code>.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-warn"><strong>⚠️ Memoria:</strong> Siempre limpia tus intervalos con <code>clearInterval(id)</code> cuando ya no se necesiten.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Temporizadores JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="clearInterval recibe el ID devuelto por setInterval." data-err="Se detiene con clearInterval(id)."><div class="quiz-q-title">1. ¿Qué función detiene un <code>setInterval</code> activo?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">clearInterval(id)</button><button class="quiz-option" data-opt="b">stopTimer(id)</button><button class="quiz-option" data-opt="c">breakInterval()</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Temporizadores JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;t&quot; style=&quot;font-family:system-ui;font-size:20px;font-weight:700;padding:14px&quot;&gt;0s&lt;/div&gt;
+&lt;script&gt;
+  let s = 0; setInterval(() =&gt; { document.getElementById(&#x27;t&#x27;).textContent = (++s) + &#x27;s&#x27;; }, 1000);
+&lt;/script&gt;">Cronómetro Vivo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;t&quot; style=&quot;font-family:system-ui;font-size:20px;font-weight:700;padding:14px&quot;&gt;0s&lt;/div&gt;
+&lt;script&gt;
+  let s = 0; setInterval(() =&gt; { document.getElementById(&#x27;t&#x27;).textContent = (++s) + &#x27;s&#x27;; }, 1000);
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
-
-    <script src="main.js"></script>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

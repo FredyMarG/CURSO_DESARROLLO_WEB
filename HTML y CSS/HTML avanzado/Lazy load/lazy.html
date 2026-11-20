@@ -1,48 +1,124 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Lazy load/lazy.html
-     Título: Lazy load
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="lazy.css">
-    <title>Lazy load</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lazy Loading en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · RENDIMIENTO</span><div class="brand-title"><span>⚡</span><span>Lazy Loading</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-    <!-- 
-        Uso de etiquetas de bloque: <p> define párrafos de texto. 
-        Para un mejor SEO y accesibilidad, el contenido principal debería estar dentro de una etiqueta <main>.
-    -->
-    <!-- Párrafo de texto. -->
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam ratione, officia ducimus accusamus recusandae dolores illo dolore nam reiciendis ipsum quidem cumque, repudiandae quibusdam vitae, pariatur vel minima dolor magni!
-    </p>
-    
-    <!-- 
-        PERFORMANCE: Atributo 'loading="lazy"'. 
-        - 'lazy': Indica al navegador que posponga la carga de la imagen hasta que esté cerca del viewport (el área visible).
-        - Ventaja: Ahorra ancho de banda, mejora el tiempo de carga inicial (LCP) y la experiencia de usuario en móviles.
-        - 'eager' (por defecto): Carga la imagen de inmediato, ideal para imágenes 'Above the Fold' (cabeceras).
-    -->
-    
-    <!-- 
-        ACCESIBILIDAD (A11y) y SEO: 
-        Falta el atributo 'alt'. Siempre debe incluirse para describir la imagen a lectores de pantalla 
-        y para cuando la imagen no carga.
-    -->
-    <img src="img/img1.jpg" loading="lazy" alt="Descripción descriptiva de la imagen para SEO y accesibilidad">
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Lazy Loading">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">loading="lazy"</span><span class="badge badge-purple">fetchpriority="high"</span><span class="badge badge-emerald">Core Web Vitals</span></div>
+                <h1 class="hero-title">Carga Inteligente:<br /><span class="gradient-text">Lazy Loading Nativo</span></h1>
+                <p class="hero-subtitle">Acelera la carga inicial de tu sitio difiriendo imágenes e <code>&lt;iframe&gt;</code> fuera de pantalla hasta que el usuario haga scroll cerca de ellos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🚀</div><h3>Eager vs Lazy</h3><p>Cuándo usar <code>loading="lazy"</code> y cuándo NO usarlo (Hero / LCP).</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu criterio de rendimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Compara atributos de carga y dimensiones.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Lazy Loading?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Lazy Loading y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Acelera la carga inicial de tu sitio difiriendo imágenes e <code>&lt;iframe&gt;</code> fuera de pantalla hasta que el usuario haga scroll cerca de ellos. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Eager vs Lazy Loading">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · OPTIMIZACIÓN LCP</span><h2 class="slide-title">¿Dónde aplicar loading="lazy"?</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>✅ SÍ en imágenes inferiores</h3><pre class="code-block"><code>&lt;img src="galeria-1.webp"
+     alt="Foto"
+     width="800" height="500"
+     loading="lazy"&gt;</code></pre></div>
+                <div class="glass-card"><h3>⚡ NO en la imagen Hero (primera vista)</h3><pre class="code-block"><code>&lt;img src="hero.webp"
+     alt="Portada"
+     fetchpriority="high"&gt;</code></pre><p style="margin-top:8px;">Poner <code>loading="lazy"</code> en la imagen principal retrasa el LCP (Largest Contentful Paint).</p></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Lazy Loading">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Lazy Loading</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz Lazy Loading">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="b" data-ok="La imagen principal (above the fold) debe cargarse de inmediato; diferirla empeora el tiempo de LCP." data-err="loading='lazy' es para imágenes abajo en el scroll, nunca para la imagen principal de portada.">
+                    <div class="quiz-q-title">1. ¿Es recomendable poner <code>loading="lazy"</code> en la imagen principal del Hero (visible apenas carga la página)?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Sí, siempre</button><button class="quiz-option" data-opt="b">No, retrasa el LCP</button><button class="quiz-option" data-opt="c">Solo en escritorio</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Declarar width y height permite al navegador reservar el espacio exacto y evitar saltos visuales (CLS)." data-err="Sin width y height, la página salta cuando la imagen diferida termina de descargarse.">
+                    <div class="quiz-q-title">2. ¿Por qué conviene incluir <code>width</code> y <code>height</code> junto a <code>loading="lazy"</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Evita saltos de diseño (CLS)</button><button class="quiz-option" data-opt="b">Comprime el archivo JPG</button><button class="quiz-option" data-opt="c">Activa el modo oscuro</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Lazy Loading">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Ejemplo de Galería con Lazy Loading</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } .card { background: #1e293b; padding: 12px; border-radius: 10px; margin-bottom: 12px; }&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Hero (carga prioritaria):&lt;/strong&gt;&lt;br&gt;&lt;code&gt;&amp;lt;img src=&quot;hero.webp&quot; fetchpriority=&quot;high&quot;&amp;gt;&lt;/code&gt;&lt;/div&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Galería inferior (carga diferida):&lt;/strong&gt;&lt;br&gt;&lt;code&gt;&amp;lt;img src=&quot;foto.webp&quot; loading=&quot;lazy&quot; width=&quot;800&quot; height=&quot;500&quot;&amp;gt;&lt;/code&gt;&lt;/div&gt;">Comparativa Carga</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } .card { background: #1e293b; padding: 12px; border-radius: 10px; margin-bottom: 12px; }&lt;/style&gt;
+&lt;div class="card"&gt;&lt;strong&gt;Hero (carga prioritaria):&lt;/strong&gt;&lt;br&gt;&lt;code&gt;&amp;lt;img src="hero.webp" fetchpriority="high"&amp;gt;&lt;/code&gt;&lt;/div&gt;
+&lt;div class="card"&gt;&lt;strong&gt;Galería inferior (carga diferida):&lt;/strong&gt;&lt;br&gt;&lt;code&gt;&amp;lt;img src="foto.webp" loading="lazy" width="800" height="500"&amp;gt;&lt;/code&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
-</html> 
+</html>

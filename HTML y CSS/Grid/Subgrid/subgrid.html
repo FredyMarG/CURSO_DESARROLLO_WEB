@@ -1,64 +1,87 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Grid/Subgrid/subgrid.html
-     Título: Subgrid
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="subgrid.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subgrid</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Subgrid — Guía Interactiva | CSS Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Contenedor principal que organiza elementos en la interfaz. -->
-    <div class="grid">
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">
-    <!-- Contenedor con clase(s) subgrid-item para estilo o disposición. -->
-            <div class="subgrid-item">SUB 1</div>
-    <!-- Contenedor con clase(s) subgrid-item para estilo o disposición. -->
-            <div class="subgrid-item">SUB 2</div>
-    <!-- Contenedor con clase(s) subgrid-item para estilo o disposición. -->
-            <div class="subgrid-item">SUB 3</div>
-    <!-- Contenedor con clase(s) subgrid-item para estilo o disposición. -->
-            <div class="subgrid-item">SUB 4</div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · CSS GRID</span><div class="brand-title"><span>🧬</span><span>CSS Subgrid</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Grid</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">2</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">3</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">4</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">5</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">6</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">7</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">8</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">9</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">10</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">11</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">12</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">13</div>
-    </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: CSS Subgrid">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">grid-template-rows: subgrid</span><span class="badge badge-purple">Alineación entre tarjetas</span><span class="badge badge-emerald">CSS Moderno</span></div>
+                <h1 class="hero-title">CSS Grid:<br /><span class="gradient-text">CSS Subgrid</span></h1>
+                <p class="hero-subtitle">Permite que los elementos internos de una tarjeta se alineen con las pistas del Grid padre.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es CSS Subgrid y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es CSS Subgrid y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Permite que los elementos internos de una tarjeta se alineen con las pistas del Grid padre. Dominar <strong>CSS Subgrid</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Alineación perfecta con subgrid">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Alineación perfecta con subgrid</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.card {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en CSS Subgrid">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en CSS Subgrid</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: CSS Subgrid">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="subgrid comparte las pistas del padre con los nietos." data-err="subgrid alinea elementos internos entre tarjetas hermanas."><div class="quiz-q-title">1. ¿Para qué sirve <code>grid-template-rows: subgrid</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Para ocultar filas</button><button class="quiz-option" data-opt="b">Para que un hijo herede las filas del Grid padre y alinee su contenido con otras tarjetas</button><button class="quiz-option" data-opt="c">Para convertir Grid en Flexbox</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: CSS Subgrid">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 12px; background: #0f172a; color: #fff; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { display: grid; grid-row: span 3; grid-template-rows: subgrid; background: #1e293b; padding: 12px; border-radius: 10px; border: 1px solid #38bdf8; }
+  .btn { background: #38bdf8; color: #0f172a; padding: 6px; border-radius: 6px; text-align: center; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Título corto&lt;/strong&gt;&lt;p style=&quot;margin:0;color:#94a3b8&quot;&gt;Descripción breve.&lt;/p&gt;&lt;div class=&quot;btn&quot;&gt;Ver&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Título mucho más largo en dos líneas&lt;/strong&gt;&lt;p style=&quot;margin:0;color:#94a3b8&quot;&gt;Texto alineado.&lt;/p&gt;&lt;div class=&quot;btn&quot;&gt;Ver&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;">Subgrid en Tarjetas</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 12px; background: #0f172a; color: #fff; }
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .card { display: grid; grid-row: span 3; grid-template-rows: subgrid; background: #1e293b; padding: 12px; border-radius: 10px; border: 1px solid #38bdf8; }
+  .btn { background: #38bdf8; color: #0f172a; padding: 6px; border-radius: 6px; text-align: center; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Título corto&lt;/strong&gt;&lt;p style=&quot;margin:0;color:#94a3b8&quot;&gt;Descripción breve.&lt;/p&gt;&lt;div class=&quot;btn&quot;&gt;Ver&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;&lt;strong&gt;Título mucho más largo en dos líneas&lt;/strong&gt;&lt;p style=&quot;margin:0;color:#94a3b8&quot;&gt;Texto alineado.&lt;/p&gt;&lt;div class=&quot;btn&quot;&gt;Ver&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Grid</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🧬 Guía Completa CSS Grid</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

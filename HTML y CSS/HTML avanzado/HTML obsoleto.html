@@ -1,52 +1,136 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/HTML obsoleto.html
-     Título: Document
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Obsoleto vs Estándar Moderno — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-    
-    <!-- 
-        IMPORTANTE: Los siguientes elementos NO deben usarse en desarrollo moderno.
-        La presentación visual debe manejarse exclusivamente con CSS.
-    -->
-    
-    <!-- <font>: Obsoleto. Usar la propiedad 'font-family' o 'color' en CSS. -->
-    <font>
-        ya no se usa este elemento
-    </font>
-    <!-- <center>: Obsoleto. Usar 'text-align: center' o Flexbox/Grid en CSS. -->
-    <center>
-        tampoco se usa este elemento
-    </center>
-    <!-- <big>: Obsoleto. Usar 'font-size' en CSS. -->
-    <big>
-        tampoco se usa este elemento
-    </big>
-    <!-- <strike>: Obsoleto. Usar <del> (semántico) o 'text-decoration: line-through' (visual) en CSS. -->
-    <strike>
-        Otra obsoleta tachada
-    </strike>
-    
-    <!-- <tt>: Teletype. Obsoleto. Usar <code> o <kbd> para semántica, o CSS 'font-family: monospace' para estilo -->
-    <tt>tampoco se usa este elemento</tt>
-    
-    <!-- Párrafo de texto. -->
-    <p>Nota: Siempre maneja el diseño con <strong>CSS externo</strong> para mantener la separación de responsabilidades.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · BUENAS PRÁCTICAS</span><div class="brand-title"><span>🚫</span><span>HTML Obsoleto</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: HTML Obsoleto">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&lt;font&gt; ❌</span><span class="badge badge-purple">&lt;center&gt; ❌</span><span class="badge badge-emerald">CSS3 ✅</span></div>
+                <h1 class="hero-title">Etiquetas Obsoletas vs<br /><span class="gradient-text">Estándar HTML5 + CSS3</span></h1>
+                <p class="hero-subtitle">Reconoce qué etiquetas antiguas fueron eliminadas del estándar HTML5 por mezclar diseño con estructura y aprende sus reemplazos modernos en CSS.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📋</div><h3>Tabla de Reemplazos</h3><p><code>&lt;center&gt;</code>, <code>&lt;font&gt;</code>, <code>&lt;marquee&gt;</code> y su equivalente CSS.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Identifica qué etiquetas evitar.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Moderniza código HTML antiguo con CSS3.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es HTML Obsoleto?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es HTML Obsoleto y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Reconoce qué etiquetas antiguas fueron eliminadas del estándar HTML5 por mezclar diseño con estructura y aprende sus reemplazos modernos en CSS. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Tabla de Etiquetas Obsoletas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · MIGRACIÓN</span><h2 class="slide-title">Qué NO usar y cómo reemplazarlo</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Etiqueta Obsoleta</th><th>Por qué se eliminó</th><th>Reemplazo Moderno</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&lt;center&gt;</code></td><td>Es puro diseño visual</td><td><code>text-align: center</code> / Flexbox / Grid</td></tr>
+                    <tr><td><code>&lt;font color="..."&gt;</code></td><td>Mezcla estilo con HTML</td><td><code>color</code> y <code>font-family</code> en CSS</td></tr>
+                    <tr><td><code>&lt;marquee&gt;</code></td><td>Mala accesibilidad y rendimiento</td><td><code>@keyframes</code> + <code>transform</code></td></tr>
+                    <tr><td><code>&lt;strike&gt;</code></td><td>Reemplazada por semántica</td><td><code>&lt;del&gt;</code> o <code>&lt;s&gt;</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: HTML Obsoleto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en HTML Obsoleto</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz HTML Obsoleto">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="b" data-ok="El centrado es una responsabilidad visual de CSS (text-align: center, Flexbox o Grid), no de HTML." data-err="&lt;center&gt; está obsoleta en HTML5; el centrado se hace con CSS.">
+                    <div class="quiz-q-title">1. ¿Con qué debes reemplazar la etiqueta obsoleta <code>&lt;center&gt;</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;middle&gt;</button><button class="quiz-option" data-opt="b">CSS (text-align / Flexbox / Grid)</button><button class="quiz-option" data-opt="c">&lt;align&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="&lt;del&gt; indica contenido eliminado semánticamente (por ejemplo, un precio anterior)." data-err="Para texto tachado con significado de eliminación se usa &lt;del&gt; o &lt;s&gt;.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta moderna reemplaza a <code>&lt;strike&gt;</code> para indicar un texto eliminado o precio anterior?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;del&gt;</button><button class="quiz-option" data-opt="b">&lt;font&gt;</button><button class="quiz-option" data-opt="c">&lt;marquee&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Modernización">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · REFACTORIZACIÓN</span><h2 class="slide-title">🧪 Moderniza con CSS3</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; color: #f8fafc; text-align: center; }
+  .precio-antes { color: #94a3b8; margin-right: 8px; }
+  .precio-ahora { color: #10b981; font-size: 1.5rem; font-weight: 800; }
+&lt;/style&gt;
+&lt;div&gt;
+  &lt;h2&gt;Curso HTML5 Moderno&lt;/h2&gt;
+  &lt;p&gt;&lt;del class=&quot;precio-antes&quot;&gt;$99&lt;/del&gt; &lt;strong class=&quot;precio-ahora&quot;&gt;$29&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;">HTML5 + CSS3 Limpio</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; color: #f8fafc; text-align: center; }
+  .precio-antes { color: #94a3b8; margin-right: 8px; }
+  .precio-ahora { color: #10b981; font-size: 1.5rem; font-weight: 800; }
+&lt;/style&gt;
+&lt;div&gt;
+  &lt;h2&gt;Curso HTML5 Moderno&lt;/h2&gt;
+  &lt;p&gt;&lt;del class="precio-antes"&gt;$99&lt;/del&gt; &lt;strong class="precio-ahora"&gt;$29&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -14,6 +14,113 @@
             <p>Compara métodos de redondeo (incluso con negativos), genera números aleatorios en rango o UUIDs seguros con <code>crypto</code>, y entiende la precisión flotante IEEE 754.</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (MATH.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Métodos de Redondeo y Signo</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Comportamiento | <code>4.7</code> | <code>4.2</code> | <code>-4.2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :---: | :---: | :---: |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.round(x)</code> | Al entero más cercano | <code>5</code> | <code>4</code> | <code>-4</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.floor(x)</code> | Hacia abajo (piso, $-\infty$) | <code>4</code> | <code>4</code> | <strong><code>-5</code></strong> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.ceil(x)</code> | Hacia arriba (techo, $+\infty$) | <code>5</code> | <code>5</code> | <code>-4</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.trunc(x)</code> | Elimina decimales (corta hacia <code>0</code>) | <code>4</code> | <code>4</code> | <strong><code>-4</code></strong> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.sign(x)</code> | Devuelve <code>1</code>, <code>-1</code>, <code>0</code> o <code>-0</code> según el signo | <code>1</code> | <code>1</code> | <code>-1</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; <strong>Diferencia clave <code>floor</code> vs <code>trunc</code>:</strong> Con números positivos son idénticos, pero con negativos <code>Math.floor(-4.2)</code> baja a <code>-5</code> mientras <code>Math.trunc(-4.2)</code> simplemente corta los decimales y devuelve <code>-4</code>.</p></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Aritmética, Potencias y Extremos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Descripción | Ejemplo |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.abs(x)</code> | Valor absoluto (siempre positivo) | <code>Math.abs(-15)</code> → <code>15</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.pow(base, exp)</code> | Potencia (equivale a <code>base ** exp</code>) | <code>Math.pow(2, 5)</code> → <code>32</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.sqrt(x)</code> / <code>Math.cbrt(x)</code> | Raíz cuadrada / raíz cúbica | <code>Math.sqrt(81)</code> → <code>9</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.max(...nums)</code> | El valor mayor de los argumentos | <code>Math.max(5, 12, 3)</code> → <code>12</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.min(...nums)</code> | El valor menor de los argumentos | <code>Math.min(5, 12, 3)</code> → <code>3</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>Math.hypot(a, b)</code> | Hipotenusa $\sqrt{a^2 + b^2}$ | <code>Math.hypot(3, 4)</code> → <code>5</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; <strong>Tip con Arrays:</strong> <code>Math.max()</code> no acepta un array directamente. Usa el operador *spread*: <code>Math.max(...[10, 45, 22])</code> → <code>45</code>.</p></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Generación de Números Aleatorios</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;"><code>Math.random()</code></h4>
+<p style="margin:6px 0;line-height:1.6;">Devuelve un número decimal pseudoaleatorio en el rango $[0, 1)$ (<code>0</code> incluido, <code>1</code> excluido).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Fórmula para entero aleatorio entre <code>min</code> y <code>max</code> (ambos incluidos):</h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>function aleatorioEntre(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+console.log(aleatorioEntre(1, 6)); // Simula un dado (1 a 6)</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Aleatorios Criptográficamente Seguros (<code>crypto</code>)</h4>
+<p style="margin:6px 0;line-height:1.6;"><code>Math.random()</code> <strong>NO</strong> es seguro para contraseñas, tokens o sorteos críticos. Para seguridad real usa la Web Crypto API:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>// Generar un UUID v4 único y seguro (estándar en navegadores y Node.js)
+const idUnico = crypto.randomUUID();
+
+// Generar un entero seguro usando crypto.getRandomValues()
+const buffer = new Uint32Array(1);
+crypto.getRandomValues(buffer);
+const numeroSeguro = buffer[0];</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Precisión Flotante (0.1 + 0.2) y Validación Numérica</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">JavaScript usa el estándar <strong>IEEE 754</strong> de coma flotante binaria de 64 bits, lo que provoca imprecisiones clásicas en decimales:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.log(0.1 + 0.2);          // 0.30000000000000004
+console.log(0.1 + 0.2 === 0.3);  // false ⚠️
+
+// ✅ Soluciones para dinero o cálculos exactos:
+// 1. Trabajar en centavos (enteros):
+const totalCentavos = 10 + 20; // 30 centavos ($0.30)
+
+// 2. Redondear para mostrar o comparar con tolerancia (Number.EPSILON):
+const sonIguales = Math.abs((0.1 + 0.2) - 0.3) &lt; Number.EPSILON; // true
+const formateado = (0.1 + 0.2).toFixed(2); // &quot;0.30&quot; (devuelve string)</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Validaciones modernas en <code>Number</code></h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>Number.isInteger(42);     // true
+Number.isInteger(42.5);   // false
+Number.isNaN(NaN);        // true
+Number.isFinite(100);     // true (false para Infinity, -Infinity, NaN)</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Constantes Matemáticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <code>Math.PI</code>: <code>3.141592653589793</code> ($\pi$)</li>
+<li>* <code>Math.E</code>: <code>2.718281828459045</code> (número de Euler)</li>
+<li>* <code>Math.SQRT2</code>: <code>1.4142135623730951</code> ($\sqrt{2}$)</li>
+</ul></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <section class="card" aria-labelledby="m1">
                 <h2 id="m1">1. Redondeo: <code>round</code>, <code>floor</code>, <code>ceil</code>, <code>trunc</code></h2>

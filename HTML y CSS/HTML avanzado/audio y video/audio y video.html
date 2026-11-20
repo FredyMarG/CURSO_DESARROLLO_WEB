@@ -1,31 +1,131 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Audio y video/audio y video.html
-     Título: Audio y video
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="video.css">
-    <title>Audio y video</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Audio y Video en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · MULTIMEDIA</span><div class="brand-title"><span>🎬</span><span>Audio y Video</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-    <video autoplay loop muted controls src="video.mp4" width="90%">
-        <track src="captions.vtt" default kind="captions" srclang="es" label="Español(La)">
-        Tu navegador no soporta videos</video>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Audio y Video">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&lt;video&gt;</span><span class="badge badge-purple">&lt;audio&gt;</span><span class="badge badge-emerald">&lt;track&gt; Subtítulos</span></div>
+                <h1 class="hero-title">Multimedia Nativa:<br /><span class="gradient-text">&lt;audio&gt; y &lt;video&gt;</span></h1>
+                <p class="hero-subtitle">Reproduce audio y video sin plugins externos, ofrece múltiples formatos con <code>&lt;source&gt;</code>, añade subtítulos y controla <code>autoplay</code> de forma responsable.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🎞️</div><h3>Atributos Multimedia</h3><p><code>controls</code>, <code>muted</code>, <code>loop</code>, <code>poster</code> y <code>preload</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba la estructura de <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code>.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Audio y Video?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Audio y Video y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Reproduce audio y video sin plugins externos, ofrece múltiples formatos con <code>&lt;source&gt;</code>, añade subtítulos y controla <code>autoplay</code> de forma responsable. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
 
-    <audio controls autoplay src="MyOnlyOne.mp3"></audio>
+        <section class="slide" data-slide="3" data-title="Etiquetas Video, Audio y Source">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · REPRODUCCIÓN NATIVA</span><h2 class="slide-title">Video, Audio y Subtítulos</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>🎬 Video optimizado</h3><pre class="code-block"><code>&lt;video controls preload="metadata" poster="portada.jpg"&gt;
+  &lt;source src="video.webm" type="video/webm"&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+  &lt;track src="subs.vtt" kind="subtitles" srclang="es" label="Español"&gt;
+&lt;/video&gt;</code></pre></div>
+                <div class="glass-card"><h3>🔇 Regla de <code>autoplay</code></h3><p>Los navegadores modernos bloquean <code>autoplay</code> con sonido. Para que un video de fondo arranque solo, debe incluir <code>autoplay muted loop playsinline</code>.</p></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Audio y Video">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Audio y Video</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz Audio y Video">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="b" data-ok="Los navegadores exigen el atributo muted para permitir autoplay automático sin molestar al usuario." data-err="Sin muted, los navegadores bloquean la reproducción automática con audio.">
+                    <div class="quiz-q-title">1. ¿Qué atributo acompaña obligatoriamente a <code>autoplay</code> para que los navegadores permitan reproducir un video automáticamente?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">controls</button><button class="quiz-option" data-opt="b">muted</button><button class="quiz-option" data-opt="c">poster</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="&lt;track&gt; carga archivos .vtt de subtítulos o descripciones accesibles." data-err="&lt;source&gt; indica los archivos de video/audio; &lt;track&gt; añade subtítulos.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta se utiliza dentro de <code>&lt;video&gt;</code> para añadir subtítulos (.vtt)?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;track&gt;</button><button class="quiz-option" data-opt="b">&lt;source&gt;</button><button class="quiz-option" data-opt="c">&lt;caption&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Multimedia">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio Interactivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } video, audio { width: 100%; max-width: 360px; border-radius: 10px; }&lt;/style&gt;
+&lt;h3&gt;Reproductor de Video y Audio HTML5&lt;/h3&gt;
+&lt;video controls preload=&quot;metadata&quot; style=&quot;background:#1e293b; height:150px;&quot;&gt;
+  &lt;source src=&quot;demo.mp4&quot; type=&quot;video/mp4&quot;&gt;
+&lt;/video&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;audio controls&gt;&lt;source src=&quot;audio.mp3&quot; type=&quot;audio/mpeg&quot;&gt;&lt;/audio&gt;">Reproductor HTML5</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } video, audio { width: 100%; max-width: 360px; border-radius: 10px; }&lt;/style&gt;
+&lt;h3&gt;Reproductor de Video y Audio HTML5&lt;/h3&gt;
+&lt;video controls preload="metadata" style="background:#1e293b; height:150px;"&gt;
+  &lt;source src="demo.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;audio controls&gt;&lt;source src="audio.mp3" type="audio/mpeg"&gt;&lt;/audio&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

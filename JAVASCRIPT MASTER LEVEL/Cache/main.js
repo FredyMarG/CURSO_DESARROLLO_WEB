@@ -2,63 +2,99 @@
  * ============================================================================
  * JAVASCRIPT MASTER LEVEL - MÓDULO: CACHE API (caches)
  * ARCHIVO: main.js
- * Guía teórica, preservación del código inicial, simulador en Node.js y ejemplos
- * Documentación pedagógica LÍNEA POR LÍNEA al 100%
+ * Guía práctica simplificada paso a paso (Navegador + Node.js)
  * ============================================================================
  */
 
-// Activamos el modo estricto de ECMAScript para evitar errores silenciosos y variables globales accidentales
+// Activamos el modo estricto para escribir JavaScript seguro y sin errores silenciosos
 "use strict";
 
-/* ==========================================================================
-   0. ADAPTADOR UNIVERSAL PARA EJECUCIÓN EN NAVEGADOR Y NODE.JS
-   ========================================================================== */
-// Detectamos si nos encontramos en un navegador web con soporte nativo para window.caches
-const esEntornoNavegador = typeof window !== "undefined" && "caches" in window;
+// ----------------------------------------------------------------------------
+// 1. PRIMER PASO: ABRIR O CREAR UN ALMACÉN DE CACHÉ
+// ----------------------------------------------------------------------------
+// En el navegador usamos window.caches; si ejecutamos con Node.js usamos el simulador de abajo
+const cachesRef = (typeof window !== "undefined" && "caches" in window)
+    ? window.caches
+    : crearSimuladorCache();
 
-// Creamos un simulador en memoria de CacheStorage y Cache para ejecutar la guía en Node.js sin errores
-const cacheStorageSimulado = (() => {
-    // Mapa interno que almacena cada almacén de caché por su nombre
+// Código inicial preservado: abre o crea el almacén llamado "archivos.estaticos"
+cachesRef.open("archivos.estaticos");
+
+// ----------------------------------------------------------------------------
+// 2. LECCIÓN PASO A PASO (FÁCIL DE LEER Y SEGUIR)
+// ----------------------------------------------------------------------------
+async function aprenderCachePasoAPaso() {
+    console.log("🚀 INICIANDO GUÍA PRÁCTICA DE CACHE API\n");
+
+    // PASO 1: Abrir nuestra "despensa" de archivos
+    const cache = await cachesRef.open("archivos.estaticos");
+    console.log("1️⃣ [open] Almacén 'archivos.estaticos' abierto y listo.");
+
+    // En Node.js demostramos el ciclo completo de guardar, buscar y borrar sin depender de internet
+    if (typeof window === "undefined") {
+        // PASO 2: Guardar archivos (add, addAll, put)
+        await cache.add("/estilos.css");
+        await cache.addAll(["/index.html", "/app.js"]);
+        await cache.put("/api/saludo", { status: 200, text: async () => "¡Hola desde Caché!" });
+        console.log("2️⃣ [add / addAll / put] Archivos guardados en el almacén.");
+
+        // PASO 3: Consultar lo que guardamos (keys, match, matchAll)
+        const llaves = await cache.keys();
+        console.log("3️⃣ [keys] Archivos en caché:", llaves.map((req) => req.url));
+
+        const encontrado = await cachesRef.match("/api/saludo");
+        if (encontrado) {
+            console.log("4️⃣ [match] ¡Encontrado al instante! ->", await encontrado.text());
+        }
+
+        const todas = await cache.matchAll();
+        console.log("5️⃣ [matchAll] Total de respuestas almacenadas:", todas.length);
+
+        // PASO 4: Limpiar un archivo puntual o borrar una versión vieja
+        await cache.delete("/estilos.css");
+        console.log("6️⃣ [delete] '/estilos.css' eliminado correctamente.");
+    } else {
+        console.log("💡 Estás en el navegador: abre la Diapositiva 9 para probar todo con botones.");
+    }
+
+    console.log("\n🎓 Resumen: open() -> add()/put() -> match()/keys() -> delete()");
+}
+
+// Ejecutamos la lección
+aprenderCachePasoAPaso();
+
+/* ============================================================================
+   SIMULADOR PARA NODE.JS (Permite ejecutar 'node main.js' sin navegador)
+   ============================================================================ */
+function crearSimuladorCache() {
     const almacenes = new Map();
-
-    // Clase que emula una instancia individual de Cache
     class CacheSimulada {
         constructor(nombre) {
             this.nombre = nombre;
             this.entradas = new Map();
         }
         async add(url) {
-            const res = { url, status: 200, text: async () => `Contenido simulado de ${url}`, clone() { return { ...this }; } };
-            this.entradas.set(url, res);
+            this.entradas.set(url, { url, status: 200, text: async () => `Archivo ${url}` });
         }
         async addAll(urls) {
             for (const u of urls) await this.add(u);
         }
         async put(req, res) {
-            const clave = typeof req === "string" ? req : req.url;
-            this.entradas.set(clave, res);
+            this.entradas.set(typeof req === "string" ? req : req.url, res);
         }
         async match(req) {
-            const clave = typeof req === "string" ? req : req.url;
-            return this.entradas.get(clave);
+            return this.entradas.get(typeof req === "string" ? req : req.url);
         }
-        // Emula cache.matchAll(): devuelve un arreglo con todas las coincidencias
-        async matchAll(req) {
-            if (!req) return Array.from(this.entradas.values());
-            const clave = typeof req === "string" ? req : req.url;
-            return Array.from(this.entradas.entries())
-                .filter(([k]) => k.startsWith(clave))
-                .map(([, v]) => v);
+        async matchAll() {
+            return Array.from(this.entradas.values());
         }
         async keys() {
-            return Array.from(this.entradas.keys()).map((u) => ({ url: `https://localhost${u}` }));
+            return Array.from(this.entradas.keys()).map((u) => ({ url: u }));
         }
         async delete(req) {
-            const clave = typeof req === "string" ? req : req.url;
-            return this.entradas.delete(clave);
+            return this.entradas.delete(typeof req === "string" ? req : req.url);
         }
     }
-
     return {
         async open(nombre) {
             if (!almacenes.has(nombre)) almacenes.set(nombre, new CacheSimulada(nombre));
@@ -71,96 +107,7 @@ const cacheStorageSimulado = (() => {
             }
             return undefined;
         },
-        async keys() {
-            return Array.from(almacenes.keys());
-        },
-        async delete(nombre) {
-            return almacenes.delete(nombre);
-        }
+        async keys() { return Array.from(almacenes.keys()); },
+        async delete(nombre) { return almacenes.delete(nombre); }
     };
-})();
-
-// Seleccionamos window.caches en el navegador o nuestro simulador en Node.js
-const cachesRef = esEntornoNavegador ? window.caches : cacheStorageSimulado;
-
-// Código inicial del usuario preservado: abre o crea el almacén "archivos.estaticos"
-cachesRef.open("archivos.estaticos");
-
-/* ==========================================================================
-   UTILIDAD DE IMPRESIÓN PEDAGÓGICA EN CONSOLA
-   ========================================================================== */
-function imprimirTitulo(numero, titulo) {
-    console.log("\n" + "=".repeat(78));
-    console.log(`📌 BLOQUE ${numero}: ${titulo}`);
-    console.log("=".repeat(78));
 }
-
-/* ==========================================================================
-   FLUJO PEDAGÓGICO COMPLETO DE CACHE API (ASÍNCRONO)
-   ========================================================================== */
-async function ejecutarGuiaCache() {
-    // --- BLOQUE 1: DEFINICIÓN Y VENTAJAS ---
-    imprimirTitulo(1, "¿QUÉ ES LA CACHE API (caches) Y EN QUÉ SUPERA A localStorage?");
-    console.log("📦 Cache API (CacheStorage):");
-    console.log("   • Almacena pares completos Request / Response de forma 100% asíncrona.");
-    console.log("   • Soporta HTML, CSS, JS, imágenes, fuentes y JSON (cientos de MB).");
-    console.log("   • Funciona en el hilo principal y en Service Workers (requiere HTTPS/localhost).");
-
-    // --- BLOQUE 2: APERTURA Y ALMACENAMIENTO (open, add, addAll, put) ---
-    imprimirTitulo(2, "APERTURA Y ALMACENAMIENTO: open(), add(), addAll() y put()");
-    const cache = await cachesRef.open("archivos.estaticos");
-    console.log("✅ Almacén 'archivos.estaticos' abierto correctamente.");
-
-    if (!esEntornoNavegador) {
-        await cache.add("/styles.css");
-        await cache.addAll(["/index.html", "/app.js"]);
-        await cache.put("/api/config", { status: 200, json: async () => ({ tema: "oscuro" }) });
-        console.log("   ↳ Recursos precargados con add(), addAll() y put().");
-    }
-
-    // --- BLOQUE 3: CONSULTA (match, matchAll, keys) ---
-    imprimirTitulo(3, "CONSULTA DE RECURSOS: match(), matchAll() Y keys()");
-    if (!esEntornoNavegador) {
-        const keys = await cache.keys();
-        console.log("📋 cache.keys() en 'archivos.estaticos':", keys.map((k) => k.url));
-        const resp = await cachesRef.match("/api/config");
-        if (resp) console.log("⚡ caches.match('/api/config'):", await resp.json());
-        const todas = await cache.matchAll();
-        console.log("📚 cache.matchAll() total de respuestas:", todas.length);
-    } else {
-        console.log("ℹ️ Usa el Laboratorio de la Diapositiva 9 para probar put(), match() y keys() en vivo.");
-    }
-
-    // --- BLOQUE 4: ELIMINACIÓN (cache.delete y caches.delete) ---
-    imprimirTitulo(4, "ELIMINACIÓN Y VERSIONADO: cache.delete() Y caches.delete()");
-    if (!esEntornoNavegador) {
-        const borrado = await cache.delete("/styles.css");
-        console.log(`🗑️ ¿Se eliminó '/styles.css'?: ${borrado}`);
-        await cachesRef.open("archivos-v1");
-        const cachesAntes = await cachesRef.keys();
-        console.log("📦 Almacenes antes de limpiar versiones:", cachesAntes);
-        await cachesRef.delete("archivos-v1");
-        console.log("🧹 Almacén antiguo 'archivos-v1' eliminado con caches.delete().");
-    }
-
-    // --- BLOQUE 5: ESTRATEGIAS Y BUENAS PRÁCTICAS ---
-    imprimirTitulo(5, "ESTRATEGIAS OFFLINE, ANALOGÍAS Y BUENAS PRÁCTICAS");
-    console.log("1. ⚡ Cache-First: Ideal para CSS, fuentes, iconos y App Shell.");
-    console.log("2. 🌐 Network-First: Ideal para noticias o datos que cambian seguido.");
-    console.log("3. 🔄 Stale-While-Revalidate: Sirve caché al instante y actualiza en segundo plano.");
-    console.log("4. 🛡️ Clona siempre con response.clone() antes de usar cache.put().");
-    console.log("5. ❌ La Cache API solo almacena peticiones GET (POST lanza TypeError).");
-
-    // --- BLOQUE 6: RESUMEN TÉCNICO ---
-    imprimirTitulo(6, "RESUMEN TÉCNICO DE CACHE API");
-    console.log("• caches.open(nombre) -> Abre o crea el almacén.");
-    console.log("• cache.add() / addAll() / put() -> Guarda pares Request/Response.");
-    console.log("• caches.match() -> Recupera respuestas locales sin usar la red.");
-    console.log("• cache.delete() / caches.delete() -> Limpia archivos o versiones viejas.");
-    console.log("=".repeat(78));
-    console.log("🎓 ¡Módulo de Cache API completado con éxito al 100%!");
-    console.log("=".repeat(78));
-}
-
-// Ejecutamos la guía práctica
-ejecutarGuiaCache();

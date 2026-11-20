@@ -1,107 +1,140 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Selec,datalist y option.html
-     Título: Select y Datalist
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/formulario.css">
-    <title>Select y Datalist</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select, Datalist y Option en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · SELECTORES</span><div class="brand-title"><span>🔽</span><span>Select, Datalist y Option</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-    <!-- 
-        'method="GET"': Los datos se adjuntan a la URL. Útil para búsquedas o filtros, 
-        pero no se debe usar para datos sensibles (contraseñas).
-    -->
-    <!-- Formulario para recoger datos del usuario. -->
-    <form action="#" method="GET">
-        <h2>Formulario de contacto</h2>
-        
-        <!-- fieldset se usa para agrupar campos relacionados, como datos personales o de envío. -->
-        <fieldset>
-            <legend>Información básica</legend>
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="nombre">Nombre completo</label>
-            <input id="nombre" type="text" placeholder="Jhon Doe">
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Select y Datalist">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&lt;select&gt;</span><span class="badge badge-purple">&lt;datalist&gt;</span><span class="badge badge-emerald">&lt;optgroup&gt;</span></div>
+                <h1 class="hero-title">Listas de Selección:<br /><span class="gradient-text">Select vs Datalist</span></h1>
+                <p class="hero-subtitle">Elige entre una lista cerrada de opciones con <code>&lt;select&gt;</code> o un campo de texto con autocompletado nativo usando <code>&lt;datalist&gt;</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">⚖️</div><h3>Diferencia Clave</h3><p>Lista cerrada vs sugerencias escribibles.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba cuándo usar cada uno.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba <code>&lt;select&gt;</code> con <code>&lt;optgroup&gt;</code> y <code>&lt;datalist&gt;</code>.</p></div>
+                </div>
             </div>
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" placeholder="ejemplo@dominio.com">
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Select, Datalist y Option?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Select, Datalist y Option y para qué sirve?</h2>
             </div>
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="asunto">Asunto</label>
-                <input id="asunto" type="text" placeholder="Asunto del mensaje">
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Elige entre una lista cerrada de opciones con <code>&lt;select&gt;</code> o un campo de texto con autocompletado nativo usando <code>&lt;datalist&gt;</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
             </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
 
-        </fieldset>
+        <section class="slide" data-slide="3" data-title="Select vs Datalist">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · COMPARATIVA</span><h2 class="slide-title">&lt;select&gt; vs &lt;datalist&gt;</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>🔒 <code>&lt;select&gt;</code> (Lista cerrada)</h3><pre class="code-block"><code>&lt;select name="pais"&gt;
+  &lt;optgroup label="América"&gt;
+    &lt;option value="co"&gt;Colombia&lt;/option&gt;
+    &lt;option value="mx"&gt;México&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</code></pre></div>
+                <div class="glass-card"><h3>🔍 <code>&lt;datalist&gt;</code> (Autocompletado)</h3><pre class="code-block"><code>&lt;input list="langs" placeholder="Elige..."&gt;
+&lt;datalist id="langs"&gt;
+  &lt;option value="HTML5"&gt;
+  &lt;option value="CSS3"&gt;
+&lt;/datalist&gt;</code></pre></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Select, Datalist y Option">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Select, Datalist y Option</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
 
-        <!-- <select>: Menú desplegable. Cada <option> representa una elección estricta -->
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <Label for="user">Tipo de usuario</Label>
-            <select id="user" name="type-of-user">
-                <!-- 
-                     OPCIÓN POR DEFECTO: 
-                     'disabled' evita que se envíe como dato válido, 
-                     'selected' la muestra al cargar la página. 
-                -->
-                <option value="" disabled selected>Selecciona una opción</option>
-                <option value="user1">Seguidor</option>
-                <option value="user2">Empresa</option>
-                <option value="user3">Otros</option>
-            </select>
-        </div>
+        <section class="slide" data-slide="5" data-title="Quiz Select y Datalist">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="El atributo list del &lt;input&gt; debe coincidir exactamente con el id del &lt;datalist&gt;." data-err="for es para &lt;label&gt;; &lt;input&gt; se conecta a &lt;datalist&gt; mediante list='id'.">
+                    <div class="quiz-q-title">1. ¿Qué atributo conecta un <code>&lt;input&gt;</code> con su <code>&lt;datalist&gt;</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">list</button><button class="quiz-option" data-opt="b">for</button><button class="quiz-option" data-opt="c">src</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="&lt;optgroup label='...'&gt; agrupa visualmente opciones relacionadas dentro de un &lt;select&gt;." data-err="&lt;fieldset&gt; es para formularios; dentro de &lt;select&gt; se usa &lt;optgroup&gt;.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta agrupa opciones por categoría dentro de un <code>&lt;select&gt;</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;fieldset&gt;</button><button class="quiz-option" data-opt="b">&lt;optgroup&gt;</button><button class="quiz-option" data-opt="c">&lt;group&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
 
-        <!-- 
-            <datalist>: A diferencia del <select>, permite al usuario escribir su propia respuesta 
-            mientras ofrece sugerencias predefinidas. El 'id' del datalist debe coincidir con el 'list' del input.
-        -->
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Select y Datalist">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio Interactivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; gap: 12px; max-width: 320px; }
+  select, input { padding: 9px 12px; border-radius: 8px; border: 1px solid #38bdf8; background: #1e293b; color: #fff; }
+&lt;/style&gt;
+&lt;label&gt;País (Select):&lt;/label&gt;
+&lt;select&gt;&lt;optgroup label=&quot;Latam&quot;&gt;&lt;option value=&quot;co&quot;&gt;Colombia&lt;/option&gt;&lt;option value=&quot;mx&quot;&gt;México&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;
+&lt;label&gt;Lenguaje (Datalist):&lt;/label&gt;
+&lt;input list=&quot;langs&quot; placeholder=&quot;Escribe CSS, HTML...&quot;&gt;
+&lt;datalist id=&quot;langs&quot;&gt;&lt;option value=&quot;HTML5&quot;&gt;&lt;option value=&quot;CSS3&quot;&gt;&lt;option value=&quot;JavaScript&quot;&gt;&lt;/datalist&gt;">Select + Datalist</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; gap: 12px; max-width: 320px; }
+  select, input { padding: 9px 12px; border-radius: 8px; border: 1px solid #38bdf8; background: #1e293b; color: #fff; }
+&lt;/style&gt;
+&lt;label&gt;País (Select):&lt;/label&gt;
+&lt;select&gt;&lt;optgroup label="Latam"&gt;&lt;option value="co"&gt;Colombia&lt;/option&gt;&lt;option value="mx"&gt;México&lt;/option&gt;&lt;/optgroup&gt;&lt;/select&gt;
+&lt;label&gt;Lenguaje (Datalist):&lt;/label&gt;
+&lt;input list="langs" placeholder="Escribe CSS, HTML..."&gt;
+&lt;datalist id="langs"&gt;&lt;option value="HTML5"&gt;&lt;option value="CSS3"&gt;&lt;option value="JavaScript"&gt;&lt;/datalist&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
 
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <Label>Referente</Label>
-            <!-- El atributo 'list' vincula este input con el 'id' del <datalist> -->
-            <input list="referente" name="referente">
-            <datalist id="referente" name="type-of-user">
-                <!-- Las opciones aquí actúan como sugerencias, no restringen la entrada -->
-                <option value="Fredy">Persona normal</option>
-                <option value="Una Empresa">Compañia</option>
-                <option value="Amigo">Conocido</option>
-            </datalist>
-        </div>
-
-        <!--text area-->
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="mensaje">mensaje</label>
-            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
-            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
-        </div>
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="tyc">Acepto los términos y condiciones</label>
-            <input type="checkbox" id="tyc" class="checkbox">
-        </div>
-        
-    </form>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

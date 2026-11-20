@@ -1,66 +1,78 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Funciones Avanzadas/Unidades del Viewport/unidades.html
-     Título: Unidades del Viewport
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="unidades.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unidades del Viewport</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unidades del Viewport — Guía Interactiva | Funciones Avanzadas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box">
-    <!-- Párrafo de texto. -->
-        <p>Había una vez un chico llamado Fredy Leonardo Martínez Galeano. Tenía 24 años y una mente que nunca se quedaba quieta. Mientras otros veían la tecnología como algo complicado, él la veía como un rompecabezas gigante esperando ser resuelto.</p>
-
-    <!-- Párrafo de texto. -->
-        <p>Fredy estudiaba Ingeniería de Software. No lo hacía solo por un título, sino porque le gustaba entender cómo funcionan las cosas por dentro. No se conformaba con que algo “funcionara”; quería saber por qué funcionaba, cómo optimizarlo y cómo hacerlo mejor que ayer. Por eso, cuando estudia CSS, animaciones, funciones avanzadas o arquitectura de renderizado, no lo hace por cumplir… lo hace para dominarlo.</p>
-
-    <!-- Párrafo de texto. -->
-        <p>Le gusta aprender con intensidad. Cuando pregunta algo, no quiere una respuesta simple: quiere el desglose completo, el porqué técnico, el rendimiento, los errores comunes, el nivel entrevista, el nivel arquitecto. Quiere perfección.</p>
-
-        <span>Pero Fredy no es solo código.</span>
-
-    <!-- Párrafo de texto. -->
-        <p>También le gusta el fútbol. Disfruta esa sensación de competencia, estrategia y disciplina. Sabe que el fútbol, como la programación, es táctica, lectura del juego y precisión en el momento justo. Y cuando se desconecta del mundo del desarrollo, el cine lo atrapa. Las historias, los guiones, la forma en que una escena puede transmitir más que mil palabras… eso también le inspira.</p>
-
-        <span>Y en medio de todo eso, hay alguien.</span>
-
-    <!-- Párrafo de texto. -->
-        <p>No lo grita al mundo, pero se nota en la forma en que escribe mensajes románticos, en cómo busca las palabras exactas para una rosa, un desayuno sorpresa o un peluche. Hay una chica que le gusta. Alguien que lo mueve de una forma distinta a cualquier algoritmo. Con ella no quiere optimizar rendimiento, quiere optimizar momentos. No quiere debuggear errores, quiere evitar malentendidos. No quiere arquitectura escalable… quiere construir algo que dure.</p>
-
-    <!-- Párrafo de texto. -->
-        <p>Fredy es curioso, intenso cuando se propone algo y detallista cuando algo le importa. Cuando ama, ama con intención. Cuando estudia, estudia en serio. Cuando pregunta, es porque quiere crecer.</p>
-
-    <!-- Párrafo de texto. -->
-        <p>En el fondo, es alguien que está construyendo dos cosas al mismo tiempo: <br>
-
-        1. Su futuro profesional como desarrollador de alto nivel.
-        2. Su historia personal, intentando ser mejor cada día para sí mismo y para esa persona que le inspira a escribir mensajes más dulces de lo que admitiría en voz alta.
-
-        Y tal vez la mejor parte de su historia es esta:
-
-        No está buscando ser “bueno”.
-        Está buscando ser excelente.</p>
-
-        <span>el código.
-        En sus metas.
-        Y en el amor.
-        </span>
-    </div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · FUNCIONES</span><div class="brand-title"><span>📱</span><span>Unidades del Viewport</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Funciones Avanzadas</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Unidades del Viewport">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">dvh</span><span class="badge badge-purple">svh</span><span class="badge badge-emerald">lvh &amp; vw</span></div>
+                <h1 class="hero-title">Funciones Avanzadas:<br /><span class="gradient-text">Unidades del Viewport</span></h1>
+                <p class="hero-subtitle">Evita que la barra de direcciones de los navegadores móviles corte tus secciones de pantalla completa.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Unidades del Viewport y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Unidades del Viewport y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Evita que la barra de direcciones de los navegadores móviles corte tus secciones de pantalla completa. Dominar <strong>Unidades del Viewport</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="vh vs dvh, svh y lvh">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">vh vs dvh, svh y lvh</h2></div>
+            <ul class="styled-list glass-card"><li><code>100dvh</code>: altura dinámica actual del viewport móvil.</li><li><code>100svh</code>: altura mínima segura (barra visible).</li><li><code>100lvh</code>: altura máxima (barra oculta).</li></ul>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Unidades del Viewport">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Unidades del Viewport</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Unidades del Viewport">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="100dvh (Dynamic Viewport Height) se ajusta cuando aparece u oculta la barra del navegador." data-err="dvh es la unidad dinámica moderna del viewport."><div class="quiz-q-title">1. ¿Qué unidad reemplaza a <code>100vh</code> para adaptarse dinámicamente en móviles?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">100dvh</button><button class="quiz-option" data-opt="b">100px</button><button class="quiz-option" data-opt="c">100%</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Unidades del Viewport">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 0; min-height: 100dvh; display: grid; place-items: center; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff; }
+  .pill { padding: 14px 24px; border-radius: 999px; background: #38bdf8; color: #0f172a; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;pill&quot;&gt;min-height: 100dvh&lt;/div&gt;">Hero 100dvh</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 0; min-height: 100dvh; display: grid; place-items: center; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff; }
+  .pill { padding: 14px 24px; border-radius: 999px; background: #38bdf8; color: #0f172a; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;pill&quot;&gt;min-height: 100dvh&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Funciones Avanzadas</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">📱 Guía Completa Funciones Avanzadas</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

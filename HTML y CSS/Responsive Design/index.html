@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Design — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · DISEÑO ADAPTATIVO</span>
+            <div class="brand-title"><span>📱</span><span>Responsive Design</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Responsive Design">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">Mobile-First</span>
+                    <span class="badge badge-purple">@media &amp; @container</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">Responsive Design</span></h1>
+                <p class="hero-subtitle">Diseña interfaces que se ven y funcionan impecablemente desde un teléfono de 360px hasta un monitor ultrawide usando Mobile-First, Media Queries, Container Queries e imágenes adaptativas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📱</div>
+                        <h3>Estrategia Mobile-First</h3>
+                        <p>Empieza por pantallas pequeñas y escala progresivamente con <code>min-width</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">📦</div>
+                        <h3>Container Queries</h3>
+                        <p>Componentes que se adaptan al tamaño de su contenedor, no solo de la ventana.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador Breakpoints</h3>
+                        <p>Cambia el ancho de pantalla y observa cómo cambia la grilla en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Viewport y Mobile-First">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · BASE OBLIGATORIA</span>
+                <h2 class="slide-title">Meta Viewport y Filosofía Mobile-First</h2>
+                <p class="slide-lead">Sin la etiqueta <code>viewport</code>, los teléfonos simulan una pantalla de 980px y encogen toda tu web.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🏷️ Meta tag indispensable</h3>
+                    <pre class="code-block"><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+                    <p style="margin-top:8px;">Indica al navegador que el ancho CSS coincida con el ancho real de la pantalla del dispositivo.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>📈 Mobile-First con <code>min-width</code></h3>
+                    <pre class="code-block"><code>/* Base: 1 columna en móvil */
+.grid { display: grid; gap: 16px; }
+
+/* Tablet / Desktop */
+@media (min-width: 768px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}</code></pre>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <strong>💡 ¿Por qué Mobile-First?</strong> En móvil el layout suele ser más simple (apilado en 1 columna). Es mucho más limpio agregar complejidad al crecer la pantalla que intentar "desarmar" un layout complejo de escritorio.
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="Media Queries y Feature Queries">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · PUNTOS DE QUIEBRE</span>
+                <h2 class="slide-title">@media y @supports (Feature Queries)</h2>
+                <p class="slide-lead">Adapta estilos según ancho de pantalla, orientación o soporte del navegador.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Breakpoint común</th><th>Dispositivo típico</th><th>Media Query (Mobile-First)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Base (&lt; 640px)</td><td>Teléfonos</td><td>Estilos por defecto (sin media query)</td></tr>
+                    <tr><td><code>640px</code> / <code>768px</code></td><td>Tablets / Móvil horizontal</td><td><code>@media (min-width: 768px)</code></td></tr>
+                    <tr><td><code>1024px</code> / <code>1280px</code></td><td>Laptops y Escritorio</td><td><code>@media (min-width: 1024px)</code></td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-analogy">
+                <strong>🛡️ Feature Queries (<code>@supports</code>):</strong> Pregunta al navegador si entiende una propiedad moderna antes de aplicarla: <code>@supports (display: grid) { ... }</code>.
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Container Queries (@container)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · CSS MODERNO</span>
+                <h2 class="slide-title">Container Queries (@container)</h2>
+                <p class="slide-lead">Una misma tarjeta puede estar en un sidebar estrecho o en el área principal ancha. Con <code>@container</code> se adapta a su propio padre.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📦 1. Declara el contenedor</h3>
+                    <pre class="code-block"><code>.sidebar, .main-feed {
+  container-type: inline-size;
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🧩 2. Responde al ancho del padre</h3>
+                    <pre class="code-block"><code>@container (min-width: 380px) {
+  .tarjeta {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+  }
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Multimedia Flexible">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · IMÁGENES Y VIDEOS</span>
+                <h2 class="slide-title">Multimedia Flexible sin Desbordamientos</h2>
+                <p class="slide-lead">Evita que imágenes grandes rompan el diseño en pantallas pequeñas y mantén su proporción.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🖼️ Regla global de imágenes</h3>
+                    <pre class="code-block"><code>img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🎬 <code>aspect-ratio</code></h3>
+                    <pre class="code-block"><code>.video-box {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="Imágenes Adaptativas: srcset y picture">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · RENDIMIENTO MÓVIL</span>
+                <h2 class="slide-title">srcset, sizes y &lt;picture&gt;</h2>
+                <p class="slide-lead">No envíes una foto de 4 MB a un teléfono móvil. Deja que el navegador elija la resolución o formato óptimo.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📐 <code>srcset</code> y <code>sizes</code> (Resolución)</h3>
+                    <pre class="code-block"><code>&lt;img
+  src="foto-800.jpg"
+  srcset="foto-400.jpg 400w, foto-800.jpg 800w"
+  sizes="(max-width: 600px) 100vw, 50vw"
+  alt="Paisaje"&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🎨 <code>&lt;picture&gt;</code> (Dirección de arte / WebP)</h3>
+                    <pre class="code-block"><code>&lt;picture&gt;
+  &lt;source srcset="hero.webp" type="image/webp"&gt;
+  &lt;source media="(max-width: 600px)" srcset="vertical.jpg"&gt;
+  &lt;img src="desktop.jpg" alt="Hero"&gt;
+&lt;/picture&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: 🔹 Bloques Flexibles">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · RESPONSIVE.md</span>
+                <h2 class="slide-title">🔹 Bloques Flexibles</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Evita valores fijos en píxeles para contenedores principales.</p>
+<h3 style="margin-top:12px;color:#38bdf8;">❌ Incorrecto</h3>
+<pre class="code-block"><code>.container {
+  width: 1200px;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Esto asume siempre un ancho mínimo de 1200px y rompe en pantallas más pequeñas.</p>
+<h3 style="margin-top:12px;color:#38bdf8;">✅ Correcto</h3>
+<pre class="code-block"><code>.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Explicación:</p>
+<ul class="styled-list">
+<li>- <code>width: 90%</code> → El contenedor se adapta al ancho disponible del viewport o del padre.</li>
+<li>- <code>max-width: 1200px</code> → Evita que el contenido se expanda demasiado en pantallas muy grandes.</li>
+<li>- <code>margin: auto</code> → Centra el contenedor horizontalmente en la página.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">En layouts modernos también es común combinar esto con <code>display: flex</code> o <code>display: grid</code> para generar estructuras complejas que igual siguen siendo fluidas.</p>
+<h3 style="margin-top:12px;color:#38bdf8;">📌 Unidades recomendadas</h3>
+<p style="margin-bottom:8px;line-height:1.6;">| Unidad | Uso                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|--------|-------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| %      | Relativa al contenedor padre. |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| em     | Relativa al font-size del padre. |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| rem    | Relativa al font-size del <code>html</code> (root). |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| vw     | 1% del ancho del viewport.    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| vh     | 1% del alto del viewport.     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">Notas importantes:</p>
+<ul class="styled-list">
+<li>- <code>rem</code> es ideal para tipografía coherente en toda la app, porque todos los tamaños dependen de un único valor base.</li></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: 🔹 Multimedia Flexible">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · RESPONSIVE.md</span>
+                <h2 class="slide-title">🔹 Multimedia Flexible</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Las imágenes y videos también deben ser <strong>flexibles</strong>, para no desbordar su contenedor.</p>
+<pre class="code-block"><code>img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}</code></pre>
+<ul class="styled-list">
+<li>- <code>max-width: 100%</code> → Garantiza que la imagen nunca será más ancha que su contenedor.</li>
+<li>- <code>height: auto</code> → Mantiene la proporción original, evitando distorsiones.</li>
+<li>- <code>display: block</code> → Elimina espacios extra bajo la imagen (alineación de inline elements).</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">En casos más avanzados puedes usar:</p>
+<pre class="code-block"><code>img {
+  object-fit: cover;   /* recorta para llenar el contenedor */
+  object-position: center;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Esto es muy útil en banners o cards donde te importa más la composición visual que ver el 100% de la imagen.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 3️⃣ SRCSET y SIZES</p>
+<p style="margin-bottom:8px;line-height:1.6;">Para optimizar imágenes en dispositivos con distintos anchos y densidades de pantalla se usa <code>srcset</code> y <code>sizes</code>.</p>
+<pre class="code-block"><code>&lt;img 
+  src=&quot;imagen-800.jpg&quot;
+  srcset=&quot;imagen-400.jpg 400w,
+          imagen-800.jpg 800w,
+          imagen-1200.jpg 1200w&quot;
+  sizes=&quot;(max-width: 600px) 90vw, 800px&quot;
+  alt=&quot;Producto&quot;&gt;</code></pre>
+<ul class="styled-list">
+<li>- <code>src</code> → Imagen por defecto, usada como fallback.</li>
+<li>- <code>srcset</code> → Lista de versiones de la misma imagen con su ancho intrínseco (<code>400w</code>, <code>800w</code>, <code>1200w</code>).</li>
+<li>- <code>sizes</code> → Le dice al navegador cuánto espacio (en CSS) ocupará la imagen en distintos anchos de viewport.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">El navegador calcula qué archivo es más eficiente según:</p>
+<ul class="styled-list">
+<li>- Ancho real que tendrá la imagen en el layout.</li>
+<li>- Densidad de pixeles del dispositivo (1x, 2x, 3x).</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">Beneficios:</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: 🖨 Media Query para Print (@media print)">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · RESPONSIVE.md</span>
+                <h2 class="slide-title">🖨 Media Query para Print (@media print)</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Además de pantallas, CSS permite definir estilos específicos para <strong>impresión</strong>.</p>
+<pre class="code-block"><code>@media print {
+  /* Quitar elementos que no tienen sentido en papel */
+  nav,
+  .sidebar,
+  .boton-compra,
+  .anuncio {
+    display: none;
+  }
+
+  /* Ajustar tipografía y colores para impresión */
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+    color: #000;
+    background: #fff;
+  }
+
+  a::after {</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Usos comunes:</p>
+<ul class="styled-list">
+<li>- Ocultar menús, anuncios, carousels y elementos interactivos.</li>
+<li>- Asegurar texto oscuro sobre fondo claro para ahorrar tinta y mejorar legibilidad.</li>
+<li>- Añadir la URL de los enlaces como texto al lado, para que tengan sentido en papel.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">También puedes combinar tipos de medio:</p>
+<pre class="code-block"><code>/* Estilos para pantalla */
+@media screen {
+  body {
+    background: #0f172a;
+    color: #e5e7eb;
+  }
+}
+
+/* Estilos para impresión */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Esto te permite tener una versión oscura en pantalla y una versión optimizada en impresora sin cambiar el HTML.</p></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: ⚙️ Otras media features útiles">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · RESPONSIVE.md</span>
+                <h2 class="slide-title">⚙️ Otras media features útiles</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Algunas media features modernas muy útiles:</p>
+<pre class="code-block"><code>/* Orientación del dispositivo */
+@media (orientation: landscape) { ... }
+
+/* Usuario prefiere menos animaciones */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Usuario prefiere modo oscuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #020617;
+    color: #e5e7eb;
+  }
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Estas te permiten respetar preferencias de accesibilidad y del sistema operativo.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 6️⃣ Mobile First</p>
+<p style="margin-bottom:8px;line-height:1.6;">El enfoque <strong>Mobile First</strong> implica diseñar y escribir CSS primero pensando en la experiencia móvil (pantallas pequeñas) y luego ir agregando mejoras para pantallas más grandes usando <code>min-width</code>.</p>
+<pre class="code-block"><code>/* Estilos base: móviles por defecto */
+.card {
+  width: 100%;
+}
+
+/* Tablet en adelante */
+@media (min-width: 768px) {
+  .card {
+    width: 50%;
+  }
+}
+
+/* Desktop en adelante */
+@media (min-width: 1024px) {
+  .card {
+    width: 33.33%;
+  }
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Ventajas:</p>
+<ul class="styled-list">
+<li>- El CSS base suele ser más simple y ligero, ideal para móviles con menos recursos.</li>
+<li>- Facilita el <strong>progressive enhancement</strong>: todos los dispositivos reciben algo funcional, los más grandes obtienen mejoras.</li>
+<li>- Se alinea mejor con el uso real: el tráfico móvil suele ser mayoritario.</li>
+</ul></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR DE BREAKPOINTS -->
+        <section class="slide" data-slide="11" data-title="Simulador de Breakpoints">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador de Viewport y Breakpoints</h2>
+                <p class="slide-lead">Desliza el ancho de pantalla para ver cómo una maquetación Mobile-First pasa de 1 a 2 y 3 columnas.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Ancho del dispositivo <span id="rdWidthVal">420px</span></label>
+                        <input type="range" id="rdWidth" min="320" max="1200" value="420" />
+                    </div>
+                    <div style="font-size:0.84rem; color:#94a3b8; line-height:1.5;">
+                        <div>📱 <strong>&lt; 640px:</strong> Móvil (1 col)</div>
+                        <div>📟 <strong>640px – 959px:</strong> Tablet (2 cols)</div>
+                        <div>🖥️ <strong>&ge; 960px:</strong> Desktop (3 cols)</div>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" style="display:flex; justify-content:center; align-items:flex-start;">
+                        <div id="rdFrame" style="width:100%; max-width:420px; background:#0f172a; border:2px solid #38bdf8; border-radius:12px; padding:12px; transition:max-width 0.15s;">
+                            <div id="rdDeviceLabel" style="font-family:var(--font-mono); font-size:0.78rem; color:#38bdf8; margin-bottom:10px;">📱 Móvil (420px) · 1 columna</div>
+                            <div id="rdGrid" style="display:grid; grid-template-columns:1fr; gap:8px;">
+                                <div style="background:#1e293b; padding:12px; border-radius:8px; text-align:center; font-weight:700;">Card 1</div>
+                                <div style="background:#1e293b; padding:12px; border-radius:8px; text-align:center; font-weight:700;">Card 2</div>
+                                <div style="background:#1e293b; padding:12px; border-radius:8px; text-align:center; font-weight:700;">Card 3</div>
+                            </div>
+                        </div>
+                    </div>
+                    <pre class="sim-code" id="rdCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de Responsive Design">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Responsive Design</h2>
+                <p class="slide-lead">Comprueba tu dominio de Mobile-First, Container Queries e imágenes adaptativas.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="En Mobile-First se parte de estilos móviles base y se usan media queries con min-width para pantallas más grandes."
+                    data-err="max-width se usa en el enfoque Desktop-First; Mobile-First siempre usa min-width.">
+                    <div class="quiz-q-title">1. ¿Qué condición de Media Query se utiliza en el enfoque Mobile-First?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">@media (min-width: 768px)</button>
+                        <button class="quiz-option" data-opt="b">@media (max-width: 768px)</button>
+                        <button class="quiz-option" data-opt="c">@media (device: mobile)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="@container mide el ancho del contenedor padre directo (con container-type: inline-size), no del navegador completo."
+                    data-err="@media siempre mide el viewport completo; @container mide el contenedor padre.">
+                    <div class="quiz-q-title">2. ¿Qué ventaja ofrece <code>@container</code> frente a <code>@media</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Funciona sin CSS</button>
+                        <button class="quiz-option" data-opt="b">Reemplaza la etiqueta &lt;meta viewport&gt;</button>
+                        <button class="quiz-option" data-opt="c">Permite que un componente se adapte al ancho de su padre</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="max-width: 100% y height: auto evitan que la imagen supere el ancho de su contenedor y conservan su proporción."
+                    data-err="Fijar width: 100% con height fijo deforma la imagen; max-width: 100% + height: auto es la regla estándar.">
+                    <div class="quiz-q-title">3. ¿Qué combinación CSS hace que una imagen nunca desborde su contenedor ni se deforme?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">width: 100vw; height: 300px;</button>
+                        <button class="quiz-option" data-opt="b">max-width: 100%; height: auto;</button>
+                        <button class="quiz-option" data-opt="c">overflow: scroll;</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o arrastra el contenedor para probar Container Queries.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #f8fafc; }
+  .panel { container-type: inline-size; resize: horizontal; overflow: auto; border: 2px dashed #94a3b8; padding: 12px; width: 100%; max-width: 100%; background: #fff; border-radius: 12px; }
+  .card { display: grid; gap: 10px; background: #e0f2fe; padding: 14px; border-radius: 10px; }
+  @container (min-width: 340px) { .card { grid-template-columns: 100px 1fr; align-items: center; } }
+  .thumb { height: 70px; background: #0284c7; border-radius: 8px; color: #fff; display: grid; place-items: center; font-weight: 700; }
+&lt;/style&gt;
+&lt;p style=&quot;font-size:0.85rem;margin-top:0&quot;&gt;Arrastra la esquina inferior derecha del cuadro punteado:&lt;/p&gt;
+&lt;div class=&quot;panel&quot;&gt;&lt;div class=&quot;card&quot;&gt;&lt;div class=&quot;thumb&quot;&gt;IMG&lt;/div&gt;&lt;div&gt;&lt;strong&gt;Tarjeta Adaptable&lt;/strong&gt;&lt;p style=&quot;margin:4px 0 0&quot;&gt;Cambia de columna a fila según el ancho del padre.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;">Container Query</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #f8fafc; }
+  .panel { container-type: inline-size; resize: horizontal; overflow: auto; border: 2px dashed #94a3b8; padding: 12px; width: 100%; max-width: 100%; background: #fff; border-radius: 12px; }
+  .card { display: grid; gap: 10px; background: #e0f2fe; padding: 14px; border-radius: 10px; }
+  @container (min-width: 340px) { .card { grid-template-columns: 100px 1fr; align-items: center; } }
+  .thumb { height: 70px; background: #0284c7; border-radius: 8px; color: #fff; display: grid; place-items: center; font-weight: 700; }
+&lt;/style&gt;
+&lt;p style="font-size:0.85rem;margin-top:0"&gt;Arrastra la esquina inferior derecha del cuadro punteado:&lt;/p&gt;
+&lt;div class="panel"&gt;&lt;div class="card"&gt;&lt;div class="thumb"&gt;IMG&lt;/div&gt;&lt;div&gt;&lt;strong&gt;Tarjeta Adaptable&lt;/strong&gt;&lt;p style="margin:4px 0 0"&gt;Cambia de columna a fila según el ancho del padre.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/RESPONSIVE.md" style="color:#38bdf8;">RESPONSIVE.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (9)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Bloques%20Flexibles/bloques_flexibles.html"><span class="file-name">📁 Bloques Flexibles</span><span class="file-path">bloques_flexibles.html</span></a>
+                    <a class="file-card" href="Container%20Queries/container.html"><span class="file-name">📁 Container Queries</span><span class="file-path">container.html</span></a>
+                    <a class="file-card" href="Feature%20Queries/features.html"><span class="file-name">📁 Feature Queries</span><span class="file-path">features.html</span></a>
+                    <a class="file-card" href="Holi%20Grail/holigrail.html"><span class="file-name">📁 Holi Grail</span><span class="file-path">holigrail.html</span></a>
+                    <a class="file-card" href="Media%20Queries/mediaq.html"><span class="file-name">📁 Media Queries</span><span class="file-path">mediaq.html</span></a>
+                    <a class="file-card" href="Mobile%20Design/mobile.html"><span class="file-name">📁 Mobile Design</span><span class="file-path">mobile.html</span></a>
+                    <a class="file-card" href="Multimedia%20Flexible/multimedia.html"><span class="file-name">📁 Multimedia Flexible</span><span class="file-path">multimedia.html</span></a>
+                    <a class="file-card" href="Picture,Source,Media/picture.html"><span class="file-name">📁 Picture,Source,Media</span><span class="file-path">picture.html</span></a>
+                    <a class="file-card" href="Srcset%20y%20Sizes/src-szs.html"><span class="file-name">📁 Srcset y Sizes</span><span class="file-path">src-szs.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const wInput = document.getElementById('rdWidth');
+            const wVal = document.getElementById('rdWidthVal');
+            const frame = document.getElementById('rdFrame');
+            const label = document.getElementById('rdDeviceLabel');
+            const grid = document.getElementById('rdGrid');
+            const out = document.getElementById('rdCodeOut');
+
+            function updateRD() {
+                const w = +wInput.value;
+                wVal.textContent = w + 'px';
+                frame.style.maxWidth = Math.min(w, 660) + 'px';
+                let cols = 1, dev = '📱 Móvil', mq = 'Base (sin Media Query)';
+                if (w >= 960) { cols = 3; dev = '🖥️ Desktop'; mq = '@media (min-width: 960px)'; }
+                else if (w >= 640) { cols = 2; dev = '📟 Tablet'; mq = '@media (min-width: 640px)'; }
+                grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+                label.textContent = `${dev} (${w}px) · ${cols} columna${cols > 1 ? 's' : ''}`;
+                out.textContent = `/* Regla activa a ${w}px: ${mq} */\n.grid {\n  display: grid;\n  grid-template-columns: repeat(${cols}, 1fr);\n}`;
+            }
+            wInput.addEventListener('input', updateRD);
+            updateRD();
+        })();
+    </script>
+</body>
+</html>

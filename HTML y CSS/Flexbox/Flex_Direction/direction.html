@@ -1,35 +1,84 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Flexbox/Flex_Direction/direction.html
-     Título: Flex Direction
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="direction.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flex Direction</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flex Direction — Guía Interactiva | Flexbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Contenedor con clase(s) flexbox para estilo o disposición. -->
-    <div class="flexbox">
-    <!-- Contenedor con clase(s) flex-item para estilo o disposición. -->
-        <div class="flex-item">1</div>
-    <!-- Contenedor con clase(s) flex-item para estilo o disposición. -->
-        <div class="flex-item">2</div>
-    <!-- Contenedor con clase(s) flex-item para estilo o disposición. -->
-        <div class="flex-item">3</div>
-    </div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · FLEXBOX</span><div class="brand-title"><span>🧭</span><span>Flex Direction</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Flexbox</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Flex Direction">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">row</span><span class="badge badge-purple">row-reverse</span><span class="badge badge-emerald">column &amp; column-reverse</span></div>
+                <h1 class="hero-title">Flexbox:<br /><span class="gradient-text">Flex Direction</span></h1>
+                <p class="hero-subtitle">Controla la dirección del eje principal (Main Axis) para organizar ítems en fila o columna.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Flex Direction y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Flex Direction y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Controla la dirección del eje principal (Main Axis) para organizar ítems en fila o columna. Dominar <strong>Flex Direction</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Valores de flex-direction">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Valores de flex-direction</h2></div>
+            <div class="grid-2"><div class="glass-card"><h3>➡️ Ejes según dirección</h3><ul class="styled-list"><li><code>row</code> (defecto): izquierda → derecha.</li><li><code>row-reverse</code>: derecha → izquierda.</li><li><code>column</code>: arriba → abajo (el eje principal pasa a ser vertical).</li><li><code>column-reverse</code>: abajo → arriba.</li></ul></div><div class="glass-card"><h3>💻 Ejemplo</h3><pre class="code-block"><code>.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}</code></pre></div></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Flex Direction">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Flex Direction</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Flex Direction">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="Al usar column, el eje principal es vertical de arriba hacia abajo." data-err="row es horizontal; column cambia el eje principal a vertical."><div class="quiz-q-title">1. En <code>flex-direction: column</code>, ¿qué dirección tiene el eje principal?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Horizontal</button><button class="quiz-option" data-opt="b">Vertical</button><button class="quiz-option" data-opt="c">Diagonal</button></div><div class="quiz-feedback"></div></div><div class="quiz-question" data-answer="a" data-ok="row-reverse dibuja los ítems de derecha a izquierda." data-err="row-reverse invierte la dirección horizontal."><div class="quiz-q-title">2. ¿Qué valor invierte el orden visual en una fila sin modificar el HTML?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">row-reverse</button><button class="quiz-option" data-opt="b">column</button><button class="quiz-option" data-opt="c">wrap-reverse</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Flex Direction">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
+  .box { display: flex; flex-direction: row-reverse; gap: 10px; background: #1e293b; padding: 14px; border-radius: 12px; }
+  .it { background: #38bdf8; color: #0f172a; font-weight: 800; padding: 12px 18px; border-radius: 8px; }
+&lt;/style&gt;
+&lt;div class=&quot;box&quot;&gt;&lt;div class=&quot;it&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;3&lt;/div&gt;&lt;/div&gt;">Flex Direction</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
+  .box { display: flex; flex-direction: row-reverse; gap: 10px; background: #1e293b; padding: 14px; border-radius: 12px; }
+  .it { background: #38bdf8; color: #0f172a; font-weight: 800; padding: 12px 18px; border-radius: 8px; }
+&lt;/style&gt;
+&lt;div class=&quot;box&quot;&gt;&lt;div class=&quot;it&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;3&lt;/div&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Flexbox</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🧭 Guía Completa Flexbox</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

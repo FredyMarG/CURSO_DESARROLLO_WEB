@@ -14,6 +14,95 @@
             <p>Practica <code>querySelector</code>, <code>classList</code>, creación eficiente con <code>DocumentFragment</code>, <code>append</code>/<code>prepend</code>/<code>replaceChildren</code>, delegación de eventos y <code>closest()</code>.</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (DOM.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">🧠 ¿Qué encontrarás en esta guía?</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Esta guía está diseñada para aprender el DOM desde cero hasta un nivel profesional 🚀</p>
+<p style="margin:6px 0;line-height:1.6;">Incluye:</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Explicaciones claras</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Diagramas visuales</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Ejemplos prácticos</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Analogías fáciles</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Flujo visual del DOM</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Buenas prácticas</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Errores comunes</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Explicaciones para desarrolladores junior</p>
+<p style="margin:6px 0;line-height:1.6;"># 📑 TEMARIO</p></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1️⃣ Introducción al DOM</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* ¿Qué es el DOM?</li>
+<li>* Cómo funciona</li>
+<li>* Representación visual</li>
+<li>* Árbol DOM</li>
+<li>* Relación entre HTML y JavaScript</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2️⃣ Métodos de selección de elementos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* getElementById()</li>
+<li>* querySelector()</li>
+<li>* querySelectorAll()</li>
+<li>* getElementsByClassName()</li>
+<li>* getElementsByTagName()</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3️⃣ Métodos de atributos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* getAttribute()</li>
+<li>* setAttribute()</li>
+<li>* removeAttribute()</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4️⃣ Atributos globales</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* id</li>
+<li>* class</li>
+<li>* title</li>
+<li>* hidden</li>
+<li>* contenteditable</li>
+</ul></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <!-- Tarjeta 1: classList y textContent -->
             <section class="card" aria-labelledby="d1">

@@ -1,43 +1,228 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Basico/Titulos y parrafos.html
-     Título: Document
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Títulos y Párrafos en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-    <!-- 
-        JERARQUÍA SEMÁNTICA (SEO):
-        - <h1>: Es el título principal. Solo debe haber UNO por página. Es vital para buscadores como Google.
-        - <h2> a <h6>: Definen subtítulos y secciones. No deben saltarse niveles (ej. no pasar de h2 a h4).
-    -->
-    <h1>este es un titulo</h1>
-    <h2>este es un titulo</h2>
-    <h3>este es un titulo</h3>
-    <h4>este es un titulo</h4>
-    <h5>este es un titulo</h5>
-    <h6>este es un titulo</h6>
-    
-    <!-- 
-        Etiqueta <p>: Define un bloque de texto. 
-        El navegador añade automáticamente un margen superior e inferior para separar los párrafos.
-    -->
-    <!-- Párrafo de texto. -->
-    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe mollitia, ipsa quidem, quia quae fugit aperiam earum repellat ea pariatur, dolores beatae vero sed voluptatum ab tempore iste. Corporis, facilis!</p>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 BÁSICO · TEXTO</span>
+            <div class="brand-title"><span>📝</span><span>Títulos y Párrafos</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
+            <a class="nav-btn" href="../../index.html" title="Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Títulos y Párrafos">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">&lt;h1&gt; – &lt;h6&gt;</span>
+                    <span class="badge badge-purple">&lt;p&gt; Párrafos</span>
+                    <span class="badge badge-emerald">&lt;strong&gt; &amp; &lt;em&gt;</span>
+                </div>
+                <h1 class="hero-title">Jerarquía de<br /><span class="gradient-text">Títulos y Párrafos</span></h1>
+                <p class="hero-subtitle">Aprende a estructurar textos legibles, optimizados para SEO y accesibles usando encabezados jerárquicos, párrafos y etiquetas de énfasis semántico.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📚</div>
+                        <h3>Encabezados h1–h6</h3>
+                        <p>Cómo organizar secciones sin saltarse niveles.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">✍️</div>
+                        <h3>Párrafos y Énfasis</h3>
+                        <p>Diferencia entre <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;b&gt;</code> e <code>&lt;i&gt;</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio en Vivo</h3>
+                        <p>Practica jerarquías de artículos y encabezados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Títulos y Párrafos?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Títulos y Párrafos y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Aprende a estructurar textos legibles, optimizados para SEO y accesibles usando encabezados jerárquicos, párrafos y etiquetas de énfasis semántico. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Encabezados h1 a h6">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · JERARQUÍA SEMÁNTICA</span>
+                <h2 class="slide-title">Los 6 Niveles de Encabezados (&lt;h1&gt; – &lt;h6&gt;)</h2>
+                <p class="slide-lead">No elijas un encabezado por su tamaño de letra (eso se cambia con CSS), sino por su importancia en el documento.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🏛️ Reglas de oro</h3>
+                    <ul class="styled-list">
+                        <li>Usa <strong>un solo <code>&lt;h1&gt;</code></strong> por página para el título principal.</li>
+                        <li>Usa <code>&lt;h2&gt;</code> para capítulos o secciones principales.</li>
+                        <li>Usa <code>&lt;h3&gt;</code> para subtemas dentro de un <code>&lt;h2&gt;</code>.</li>
+                        <li>Nunca saltes de <code>&lt;h1&gt;</code> a <code>&lt;h4&gt;</code> directamente.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>📝 Ejemplo estructurado</h3>
+                    <pre class="code-block"><code>&lt;h1&gt;Curso de Desarrollo Web&lt;/h1&gt;
+&lt;h2&gt;Módulo 1: HTML5&lt;/h2&gt;
+&lt;p&gt;Aprende la estructura base...&lt;/p&gt;
+&lt;h3&gt;Títulos y Párrafos&lt;/h3&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Párrafos y Etiquetas de Texto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · FORMATO SEMÁNTICO</span>
+                <h2 class="slide-title">Párrafos (&lt;p&gt;) y Énfasis Semántico</h2>
+                <p class="slide-lead">HTML5 distingue entre significado semántico (para lectores de pantalla y buscadores) y estilo puramente visual.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Etiqueta</th><th>Significado</th><th>Uso recomendado</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>&lt;strong&gt;</code></td><td>Importancia grave o urgente</td><td>Palabras clave importantes</td></tr>
+                    <tr><td><code>&lt;em&gt;</code></td><td>Énfasis en la entonación</td><td>Resaltar un matiz en la frase</td></tr>
+                    <tr><td><code>&lt;mark&gt;</code></td><td>Texto resaltado</td><td>Resultados de búsqueda o citas</td></tr>
+                    <tr><td><code>&lt;hr&gt;</code></td><td>Cambio temático</td><td>Separador horizontal entre secciones</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="5" data-title="Buenas Prácticas: Títulos y Párrafos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Títulos y Párrafos</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz de Títulos y Párrafos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Títulos y Párrafos</h2>
+                <p class="slide-lead">Comprueba tu dominio de la jerarquía de texto en HTML5.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b"
+                    data-ok="Por SEO y accesibilidad, debe haber un único &lt;h1&gt; que represente el título principal del documento."
+                    data-err="Se recomienda un solo &lt;h1&gt; principal y usar &lt;h2&gt;–&lt;h6&gt; para subsecciones.">
+                    <div class="quiz-q-title">1. ¿Cuántos encabezados <code>&lt;h1&gt;</code> principales se recomienda tener por página?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Uno por cada párrafo</button>
+                        <button class="quiz-option" data-opt="b">Uno solo principal</button>
+                        <button class="quiz-option" data-opt="c">Ninguno, es mejor usar &lt;p&gt; grande</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="&lt;strong&gt; aporta importancia semántica, mientras que &lt;b&gt; solo cambia el estilo visual a negrita."
+                    data-err="&lt;b&gt; es solo visual; &lt;strong&gt; indica importancia semántica real.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta indica importancia semántica real además de mostrar negrita?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">&lt;strong&gt;</button>
+                        <button class="quiz-option" data-opt="b">&lt;b&gt;</button>
+                        <button class="quiz-option" data-opt="c">&lt;br&gt;</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Títulos y Párrafos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Texto</h2>
+                <p class="slide-lead">Edita los encabezados y párrafos para ver la jerarquía en vivo.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 18px; background: #f8fafc; color: #0f172a; line-height: 1.6; }&lt;/style&gt;
+&lt;h1&gt;Título Principal (h1)&lt;/h1&gt;
+&lt;p&gt;Este es un párrafo con &lt;strong&gt;texto importante&lt;/strong&gt;, &lt;em&gt;énfasis&lt;/em&gt; y &lt;mark&gt;resaltado&lt;/mark&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Subtítulo de Sección (h2)&lt;/h2&gt;
+&lt;h3&gt;Subsección (h3)&lt;/h3&gt;
+&lt;p&gt;Contenido ordenado jerárquicamente.&lt;/p&gt;">Jerarquía Completa</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 18px; background: #f8fafc; color: #0f172a; line-height: 1.6; }&lt;/style&gt;
+&lt;h1&gt;Título Principal (h1)&lt;/h1&gt;
+&lt;p&gt;Este es un párrafo con &lt;strong&gt;texto importante&lt;/strong&gt;, &lt;em&gt;énfasis&lt;/em&gt; y &lt;mark&gt;resaltado&lt;/mark&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Subtítulo de Sección (h2)&lt;/h2&gt;
+&lt;h3&gt;Subsección (h3)&lt;/h3&gt;
+&lt;p&gt;Contenido ordenado jerárquicamente.&lt;/p&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
+                <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>
+                <p class="slide-lead">Explora el resto de guías interactivas del módulo.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="index.html"><span class="file-name">🧱 Guía Completa HTML Básico</span><span class="file-path">index.html</span></a>
+                    <a class="file-card" href="listas.html"><span class="file-name">📋 Listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="enlaces.html"><span class="file-name">🔗 Enlaces</span><span class="file-path">enlaces.html</span></a>
+                    <a class="file-card" href="img.html"><span class="file-name">🖼️ Imágenes</span><span class="file-path">img.html</span></a>
+                    <a class="file-card" href="formularios.html"><span class="file-name">📋 Formularios</span><span class="file-path">formularios.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

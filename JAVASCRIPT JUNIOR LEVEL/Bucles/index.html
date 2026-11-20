@@ -14,6 +14,106 @@
             <p>Comprende cuándo la condición se evalúa antes o después de ejecutar el bloque, y cómo detener o saltar iteraciones con <code>break</code> y <code>continue</code>.</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (BUCLES.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Bucle for Clásico</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Úsalo cuando conoces el número exacto de iteraciones o necesitas manipular el índice manualmente (por ejemplo, avanzar de 2 en 2 o recorrer hacia atrás).</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>for (let i = 0; i &lt; 5; i++) {
+    console.log(`Iteración #${i}`);
+}</code></pre>
+<ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong>Inicialización (<code>let i = 0</code>):</strong> Se ejecuta una sola vez al inicio. Usa siempre <code>let</code> (nunca <code>var</code>).</li>
+<li>* <strong>Condición (<code>i &lt; 5</code>):</strong> Se evalúa antes de cada vuelta. Si es <code>false</code>, el bucle termina.</li>
+<li>* <strong>Actualización (<code>i++</code>):</strong> Se ejecuta al final de cada vuelta.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Bucle while</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Úsalo cuando <strong>no sabes de antemano</strong> cuántas iteraciones ocurrirán y dependes de que una condición cambie dinámicamente.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>let energia = 3;
+
+while (energia &gt; 0) {
+    console.log(`Ejecutando tarea. Energía restante: ${energia}`);
+    energia--; // Sin esto, el bucle sería infinito
+}</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Bucle do...while</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Igual que <code>while</code>, pero evalúa la condición <strong>al final</strong>, garantizando que el bloque se ejecute <strong>al menos una vez</strong>.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>let intento = 0;
+
+do {
+    intento++;
+    console.log(`Intento de conexión #${intento}`);
+} while (intento &lt; 1); // Se ejecuta 1 vez aunque la condición sea falsa tras la primera vuelta</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Bucle for...of (Valores de Iterables — Estándar ES6+)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Recorre directamente los <strong>valores</strong> de cualquier objeto iterable (<code>Array</code>, <code>String</code>, <code>Set</code>, <code>Map</code>, <code>NodeList</code>). Es la forma más limpia de recorrer arrays cuando quieres usar <code>break</code> o <code>continue</code>.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const frutas = [&quot;Manzana&quot;, &quot;Banana&quot;, &quot;Uva&quot;];
+
+for (const fruta of frutas) {
+    console.log(fruta);
+}
+
+// Si además necesitas el índice, usa .entries() con destructuring:
+for (const [indice, fruta] of frutas.entries()) {
+    console.log(`${indice}: ${fruta}`);
+}</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Bucle for...in (Claves de Objetos)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Recorre las <strong>propiedades enumerables (claves)</strong> de un objeto plano.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const configuracion = { tema: &quot;oscuro&quot;, idioma: &quot;es&quot;, notificaciones: true };
+
+for (const clave in configuracion) {
+    if (Object.hasOwn(configuracion, clave)) {
+        console.log(`${clave}: ${configuracion[clave]}`);
+    }
+}</code></pre>
+<p style="margin:6px 0;line-height:1.6;">&gt; <strong>Alternativa moderna para objetos:</strong> <code>Object.entries(obj)</code> combinado con <code>for...of</code> evita recorrer propiedades heredadas del prototipo:</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; ```javascript</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; for (const [clave, valor] of Object.entries(configuracion)) {</p>
+<p style="margin:6px 0;line-height:1.6;">&gt;     console.log(<code>${clave} =&gt; ${valor}</code>);</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; }</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; ```</p></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <section class="card" aria-labelledby="b1">
                 <h2 id="b1">1. <code>while</code> vs <code>do...while</code></h2>

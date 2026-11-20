@@ -1,57 +1,154 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Switch y Tablas Lookup</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentencia Switch — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Control de Flujo</span>
-            <h1>Sentencia <code>switch</code> vs. Lookup Moderno</h1>
-            <p class="subtitle">Prueba comparación estricta (<code>===</code>), agrupación de casos, <code>switch(true)</code> y tablas de búsqueda.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · CONTROL</span><div class="brand-title"><span>🔀</span><span>Sentencia Switch</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
-
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. Evaluador de Código HTTP (<code>switch</code> clásico)</h2>
-            <p class="desc">Selecciona o escribe un código HTTP para ver cómo actúa <code>switch</code> y la agrupación de <code>case</code>.</p>
-            <div class="controls">
-                <label for="httpCodeSelect">Código HTTP:</label>
-                <select id="httpCodeSelect">
-                    <option value="200">200 — OK</option>
-                    <option value="201">201 — Created</option>
-                    <option value="204">204 — No Content</option>
-                    <option value="401">401 — Unauthorized</option>
-                    <option value="404">404 — Not Found</option>
-                    <option value="500">500 — Server Error</option>
-                    <option value="999">999 — Desconocido (default)</option>
-                </select>
-                <label class="inline-check">
-                    <input id="simularSinBreak" type="checkbox">
-                    Simular error de <strong>fall-through</strong> (sin <code>break</code>)
-                </label>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Sentencia Switch">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">switch (expr)</span><span class="badge badge-purple">case &amp; break</span><span class="badge badge-emerald">default</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Sentencia Switch</span></h1>
+                <p class="hero-subtitle">Evalúa múltiples casos exactos de forma limpia en lugar de encadenar muchos if / else if.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
             </div>
-            <div id="httpOutput" class="output" aria-live="polite"></div>
         </section>
-
-        <section class="card">
-            <h2>2. <code>switch(true)</code> por Rangos &amp; Object Lookup</h2>
-            <p class="desc">Evalúa calificaciones con <code>switch(true)</code> y compáralo con una tabla de búsqueda moderna.</p>
-            <div class="controls">
-                <label for="notaRange">Calificación: <strong id="notaValor">85</strong>/100</label>
-                <input id="notaRange" type="range" min="0" max="100" value="85">
+        <section class="slide" data-slide="2" data-title="Fundamentos: Sentencia Switch">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Sentencia Switch?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Evalúa múltiples casos exactos de forma limpia en lugar de encadenar muchos if / else if.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> <code>switch</code> funciona como un selector de canales: salta al <code>case</code> que coincide y se detiene con <code>break</code>.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Estructura de switch">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Estructura de switch</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>switch (rol) {
+  case "admin": accesoTotal(); break;
+  case "editor": editarContenido(); break;
+  default: soloLectura();
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="PASO 1">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · SWITCH.md</span>
+                <h2 class="slide-title">PASO 1</h2>
             </div>
-            <div id="notaOutput" class="output" aria-live="polite"></div>
-            <pre class="code-box"><code>// Alternativa moderna O(1) con Objeto/Map:
-const roles = { admin: "Total", editor: "Contenido" };
-const acceso = roles[rol] ?? "Solo lectura";</code></pre>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Evalúa la expresión.</p>
+<pre class="code-block"><code>switch(opcion)</code></pre></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="PASO 2">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · SWITCH.md</span>
+                <h2 class="slide-title">PASO 2</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Obtiene el valor resultante.</p>
+<pre class="code-block"><code>opcion = 3</code></pre></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="PASO 3">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · SWITCH.md</span>
+                <h2 class="slide-title">PASO 3</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Compara con cada case.</p>
+<pre class="code-block"><code>case 1
+case 2
+case 3</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="PASO 7">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · SWITCH.md</span>
+                <h2 class="slide-title">PASO 7</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Finaliza.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔬 DIAGRAMA INTERNO</p>
+<pre class="code-block"><code>              switch()
+                  |
+                  V
+         Evaluar expresión
+                  |
+                  V
+         Comparar case 1
+                  |
+         ¿Coincide?
+           /      \
+         No       Sí
+         |         |
+         V         V
+   Siguiente    Ejecutar
+      Case      instrucciones
+                    |
+                    V
+             ¿Existe break?</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🧩 ANATOMÍA COMPLETA</p>
+<pre class="code-block"><code>switch(expresion){
+
+    case valor1:
+        instrucciones;
+        break;
+
+    case valor2:
+        instrucciones;
+        break;
+
+    default:
+        instrucciones;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🎯 EXPRESIÓN EVALUADA</p>
+<p style="margin-bottom:8px;line-height:1.6;">Es el valor que JavaScript analizará.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-warn"><strong>⚠️ Error común:</strong> Olvidar <code>break;</code> provoca que se ejecuten los casos siguientes en cascada (fall-through).</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Sentencia Switch">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Sin break ocurre el efecto fall-through." data-err="break detiene la ejecución dentro del switch."><div class="quiz-q-title">1. ¿Qué ocurre si omites <code>break</code> al final de un <code>case</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Se ejecutan también los casos siguientes hasta hallar un break</button><button class="quiz-option" data-opt="b">Lanza SyntaxError</button><button class="quiz-option" data-opt="c">Sale de la función</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Sentencia Switch">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const dia = &#x27;lunes&#x27;; let msg = &#x27;&#x27;;
+  switch (dia) { case &#x27;lunes&#x27;: msg = &#x27;Inicio de semana&#x27;; break; default: msg = &#x27;Otro día&#x27;; }
+  document.getElementById(&#x27;out&#x27;).textContent = msg;
+&lt;/script&gt;">Switch en Vivo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const dia = &#x27;lunes&#x27;; let msg = &#x27;&#x27;;
+  switch (dia) { case &#x27;lunes&#x27;: msg = &#x27;Inicio de semana&#x27;; break; default: msg = &#x27;Otro día&#x27;; }
+  document.getElementById(&#x27;out&#x27;).textContent = msg;
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
-
-    <script src="main.js"></script>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

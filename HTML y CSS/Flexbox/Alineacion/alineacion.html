@@ -1,41 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <!-- 
-        PROYECTO: Guía de Alineación Flexbox
-        OBJETIVO: Demostrar las propiedades de alineación en contenedores flexibles.
-    -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastering Flexbox - Alineación</title>
-    
-    <!-- Estilos principales del ejercicio -->
-    <link rel="stylesheet" href="alineacion.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alineación Flex — Guía Interactiva | Flexbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-
-    <header>
-        <h1>Visualización de Alineación Flexbox</h1>
-    </header>
-
-    <main>
-        <!-- 
-            CONTENEDOR PADRE (Flex Container)
-            Aquí se aplican propiedades como justify-content y align-items.
-        -->
-        <div class="flexbox" aria-label="Contenedor de demostración flexbox">
-            <!-- HIJOS DIRECTOS (Flex Items) -->
-            <div class="flex-item">1</div>
-            <div class="flex-item">2</div>
-            <div class="flex-item">3</div>
-            <div class="flex-item">4</div>
-            <div class="flex-item">5</div>
-            <div class="flex-item">6</div>
-            <div class="flex-item">7</div>
-            <div class="flex-item">8</div>
-            <div class="flex-item">9</div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · FLEXBOX</span><div class="brand-title"><span>🎯</span><span>Alineación Flex</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Flexbox</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Alineación Flex">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">justify-content</span><span class="badge badge-purple">align-items</span><span class="badge badge-emerald">align-content</span></div>
+                <h1 class="hero-title">Flexbox:<br /><span class="gradient-text">Alineación Flex</span></h1>
+                <p class="hero-subtitle">Alinea elementos a lo largo del eje principal y del eje transversal con precisión.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Alineación Flex y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Alineación Flex y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Alinea elementos a lo largo del eje principal y del eje transversal con precisión. Dominar <strong>Alineación Flex</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="justify-content vs align-items">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">justify-content vs align-items</h2></div>
+            <div class="grid-2"><div class="glass-card"><h3>↔️ Eje principal: <code>justify-content</code></h3><ul class="styled-list"><li><code>center</code>, <code>flex-start</code>, <code>flex-end</code></li><li><code>space-between</code>, <code>space-around</code>, <code>space-evenly</code></li></ul></div><div class="glass-card"><h3>↕️ Eje cruzado: <code>align-items</code></h3><ul class="styled-list"><li><code>stretch</code> (estira por defecto), <code>center</code>, <code>baseline</code></li></ul></div></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Alineación Flex">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Alineación Flex</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Alineación Flex">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="align-items alinea en el eje perpendicular al eje principal." data-err="justify-content actúa sobre el eje principal; align-items sobre el cruzado."><div class="quiz-q-title">1. ¿Qué propiedad alinea elementos en el eje transversal (cruzado)?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">justify-content</button><button class="quiz-option" data-opt="b">align-items</button><button class="quiz-option" data-opt="c">flex-wrap</button></div><div class="quiz-feedback"></div></div><div class="quiz-question" data-answer="b" data-ok="space-evenly garantiza distancias idénticas entre todos los ítems y bordes." data-err="space-between no deja espacio en los bordes externos."><div class="quiz-q-title">2. ¿Cuál distribuye el mismo espacio incluso entre los bordes y los extremos?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">space-between</button><button class="quiz-option" data-opt="b">space-evenly</button><button class="quiz-option" data-opt="c">flex-start</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Alineación Flex">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 0; height: 200px; display: flex; justify-content: space-evenly; align-items: center; background: #0f172a; }
+  .it { background: #818cf8; color: #fff; font-weight: 800; padding: 14px 20px; border-radius: 10px; }
+&lt;/style&gt;
+&lt;div class=&quot;it&quot;&gt;A&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;B&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;C&lt;/div&gt;">Centrado Perfecto</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 0; height: 200px; display: flex; justify-content: space-evenly; align-items: center; background: #0f172a; }
+  .it { background: #818cf8; color: #fff; font-weight: 800; padding: 14px 20px; border-radius: 10px; }
+&lt;/style&gt;
+&lt;div class=&quot;it&quot;&gt;A&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;B&lt;/div&gt;&lt;div class=&quot;it&quot;&gt;C&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Flexbox</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🎯 Guía Completa Flexbox</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
     </main>
-
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

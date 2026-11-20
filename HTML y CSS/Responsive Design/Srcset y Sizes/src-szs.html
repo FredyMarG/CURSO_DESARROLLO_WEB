@@ -1,58 +1,75 @@
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Responsive Design/Srcset y Sizes/src-szs.html
-     Título: Lección: Srcset y Sizes
-     Propósito: demostrar cómo los atributos srcset y sizes optimizan la carga de imágenes según el dispositivo y el layout.
-     Relación: enlaza con src-szs.css para control dimensional.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<!-- Definición del idioma del documento para accesibilidad y SEO. -->
+<!doctype html>
 <html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8"> <!-- Codificación universal de caracteres para evitar problemas con acentos. -->
-    <link rel="stylesheet" href="src-szs.css"> <!-- Vinculación con la hoja de estilos principal. -->
-    <!-- 
-        meta viewport: Esencial para el diseño responsivo. 
-        'width=device-width' ajusta el ancho del viewport al ancho del dispositivo.
-        'initial-scale=1.0' establece el nivel de zoom inicial.
-    -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Lección: Srcset y Sizes</title> <!-- Título que aparece en la pestaña del navegador. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Srcset y Sizes — Guía Interactiva | Responsive Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <main> <!-- Elemento semántico que representa el contenido principal del documento. -->
-        <h1>Imágenes Responsivas con <code>srcset</code> y <code>sizes</code></h1>
-        <p>Redimensiona la ventana del navegador para ver cómo la imagen se adapta y, potencialmente, cambia de resolución.</p>
-        
-        <!-- 
-            ETIQUETA <img>: Elemento para incrustar imágenes.
-            
-            src: URL de la imagen de respaldo. Es obligatoria y se usa si srcset no es compatible.
-            
-            srcset: Lista de URLs de imágenes y sus descriptores de ancho (w).
-            - "fredy-small.jpg 400w": Indica que fredy-small.jpg tiene un ancho intrínseco de 400 píxeles.
-            - "fredy-medium.jpg 800w": Indica que fredy-medium.jpg tiene un ancho intrínseco de 800 píxeles.
-            - "fredy.jpg 1200w": Indica que fredy.jpg tiene un ancho intrínseco de 1200 píxeles.
-            
-            sizes: Lista de condiciones de medios y el ancho que la imagen ocupará en el layout.
-            - "(max-width: 600px) 100vw": Si el viewport es <= 600px, la imagen ocupará el 100% del ancho del viewport.
-            - "(max-width: 1200px) 50vw": Si el viewport es <= 1200px, la imagen ocupará el 50% del ancho del viewport.
-            - "33vw": Por defecto, en pantallas más grandes, la imagen ocupará el 33% del ancho del viewport.
-            
-            alt: Texto alternativo para accesibilidad y SEO, crucial si la imagen no carga.
-        -->
-        <img
-            src="fredy.jpg"
-            srcset="fredy-small.jpg 400w, fredy-medium.jpg 800w, fredy.jpg 1200w"
-            sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            alt="Retrato de Fredy"
-        >
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · RESPONSIVE</span><div class="brand-title"><span>📏</span><span>Srcset y Sizes</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Responsive Design</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Srcset y Sizes">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">srcset (400w, 800w)</span><span class="badge badge-purple">sizes</span><span class="badge badge-emerald">Ahorro de Datos</span></div>
+                <h1 class="hero-title">Responsive Design:<br /><span class="gradient-text">Srcset y Sizes</span></h1>
+                <p class="hero-subtitle">Permite que el navegador descargue la resolución exacta según el ancho y densidad de píxeles (Retina).</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Srcset y Sizes y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Srcset y Sizes y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Permite que el navegador descargue la resolución exacta según el ancho y densidad de píxeles (Retina). Dominar <strong>Srcset y Sizes</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Sintaxis de srcset y sizes">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis de srcset y sizes</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>&lt;img src="foto-800.jpg"
+     srcset="foto-400.jpg 400w, foto-800.jpg 800w"
+     sizes="(max-width: 600px) 100vw, 50vw"
+     alt="Paisaje"&gt;</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Srcset y Sizes">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Srcset y Sizes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Srcset y Sizes">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="La unidad w informa al navegador cuántos píxeles de ancho mide esa versión de la imagen." data-err="w significa width descriptor (ancho real de la imagen)."><div class="quiz-q-title">1. ¿Qué indica <code>400w</code> dentro de <code>srcset</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">El ancho intrínseco en píxeles de ese archivo de imagen</button><button class="quiz-option" data-opt="b">400 kilobytes</button><button class="quiz-option" data-opt="c">400% de zoom</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Srcset y Sizes">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #cbd5e1; }&lt;/style&gt;
+&lt;p&gt;&lt;strong&gt;srcset&lt;/strong&gt; ofrece múltiples resoluciones y &lt;strong&gt;sizes&lt;/strong&gt; indica cuánto ancho ocupará en pantalla.&lt;/p&gt;">Ejemplo srcset</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #cbd5e1; }&lt;/style&gt;
+&lt;p&gt;&lt;strong&gt;srcset&lt;/strong&gt; ofrece múltiples resoluciones y &lt;strong&gt;sizes&lt;/strong&gt; indica cuánto ancho ocupará en pantalla.&lt;/p&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Responsive Design</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">📏 Guía Completa Responsive Design</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
     </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
+</html>

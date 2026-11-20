@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Avanzado — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · ARQUITECTURA &amp; POSICIONAMIENTO</span>
+            <div class="brand-title"><span>⚡</span><span>CSS Avanzado</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: CSS Avanzado">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">Especificidad</span>
+                    <span class="badge badge-purple">Position &amp; BEM</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">CSS Avanzado</span></h1>
+                <p class="hero-subtitle">Comprende la cascada y especificidad, posiciona elementos con precisión usando <code>position</code> y <code>z-index</code>, y escribe CSS escalable con BEM, pseudoclases y pseudoelementos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">⚖️</div>
+                        <h3>Especificidad y Cascada</h3>
+                        <p>Descubre qué regla gana cuando dos selectores apuntan al mismo elemento.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">📍</div>
+                        <h3>Position &amp; Display</h3>
+                        <p>Controla el flujo del documento con <code>relative</code>, <code>absolute</code> y <code>sticky</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador de Position</h3>
+                        <p>Mueve un badge en vivo y prueba <code>z-index</code> y coordenadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Especificidad, Cascada y Herencia">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · REGLAS DE PRIORIDAD</span>
+                <h2 class="slide-title">Especificidad, Cascada y Herencia</h2>
+                <p class="slide-lead">Cuando múltiples reglas aplican al mismo elemento, CSS decide el ganador usando un sistema de puntos.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Selector</th><th>Peso (A, B, C)</th><th>Ejemplo</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Etiqueta / Pseudoelemento</td><td><code>(0, 0, 1)</code></td><td><code>p</code>, <code>div::before</code></td></tr>
+                    <tr><td>Clase / Pseudoclase / Atributo</td><td><code>(0, 1, 0)</code></td><td><code>.btn</code>, <code>:hover</code>, <code>[type="text"]</code></td></tr>
+                    <tr><td>ID</td><td><code>(1, 0, 0)</code></td><td><code>#header</code></td></tr>
+                    <tr><td>Estilo en línea (<code>style=""</code>)</td><td>Gana a los anteriores</td><td><code>&lt;p style="color:red"&gt;</code></td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-warn">
+                <strong>⚠️ Evita <code>!important</code>:</strong> Rompe la cascada natural y vuelve imposible sobrescribir estilos después. Solo úsalo en clases de utilidad puntuales o accesibilidad.
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="Display, Overflow y Object-Fit">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · COMPORTAMIENTO DE CAJAS</span>
+                <h2 class="slide-title">Display, Overflow y Object-Fit</h2>
+                <p class="slide-lead">Controla cómo fluyen los elementos, qué pasa cuando el contenido se desborda y cómo se recortan las imágenes.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧱 Tipos de <code>display</code></h3>
+                    <ul class="styled-list">
+                        <li><code>block</code>: ocupa todo el ancho disponible y hace salto de línea.</li>
+                        <li><code>inline</code>: ocupa solo su contenido (ignora <code>width/height</code> y <code>margin-top/bottom</code>).</li>
+                        <li><code>inline-block</code>: fluye en línea pero sí acepta <code>width</code> y <code>height</code>.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🖼️ <code>object-fit: cover</code></h3>
+                    <pre class="code-block"><code>.avatar {
+  width: 120px;
+  height: 120px;
+  object-fit: cover; /* Recorta sin deformar */
+  object-position: center top;
+}</code></pre>
+                    <p style="margin-top:8px;">Con <code>overflow: hidden</code> ocultas lo que sobresale; con <code>overflow: auto</code> muestras scroll solo si hace falta.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Posicionamiento (Position y Z-Index)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · SACAR ELEMENTOS DEL FLUJO</span>
+                <h2 class="slide-title">Position: Relative, Absolute, Fixed y Sticky</h2>
+                <p class="slide-lead">Coloca badges, modales, barras fijas y encabezados pegajosos exactamente donde los necesitas.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📍 Los 4 modos clave</h3>
+                    <ul class="styled-list">
+                        <li><code>relative</code>: se mueve respecto a su posición original y sirve de <strong>ancla</strong> para hijos absolutos.</li>
+                        <li><code>absolute</code>: sale del flujo y se posiciona respecto al ancestro posicionado más cercano.</li>
+                        <li><code>fixed</code>: fijo respecto a la ventana del navegador (viewport).</li>
+                        <li><code>sticky</code>: se comporta normal hasta alcanzar un umbral de scroll (<code>top: 0</code>).</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>📚 Capas con <code>z-index</code></h3>
+                    <pre class="code-block"><code>.padre { position: relative; }
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  z-index: 10; /* Solo funciona si position != static */
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Pseudoclases y Pseudoelementos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ESTADOS Y DECORACIÓN</span>
+                <h2 class="slide-title">Pseudoclases (<code>:</code>) vs Pseudoelementos (<code>::</code>)</h2>
+                <p class="slide-lead">Reacciona a estados del usuario e inserta elementos decorativos sin ensuciar el HTML.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🎭 Pseudoclases (<code>:</code>) — Estados</h3>
+                    <ul class="styled-list">
+                        <li><code>:hover</code>, <code>:focus-visible</code>, <code>:active</code></li>
+                        <li><code>:nth-child(odd)</code> / <code>:first-child</code></li>
+                        <li><code>:not(.deshabilitado)</code></li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>✨ Pseudoelementos (<code>::</code>) — Partes virtuales</h3>
+                    <pre class="code-block"><code>.titulo::after {
+  content: ""; /* Obligatorio */
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: #38bdf8;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="Metodología BEM">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CÓDIGO ESCALABLE</span>
+                <h2 class="slide-title">Metodología BEM (Block, Element, Modifier)</h2>
+                <p class="slide-lead">Evita colisiones de nombres y mantén la especificidad plana (siempre 1 clase) en proyectos grandes.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧱 Convención de nombres</h3>
+                    <ul class="styled-list">
+                        <li><strong>Bloque:</strong> <code>.card</code> (componente independiente)</li>
+                        <li><strong>Elemento:</strong> <code>.card__title</code> (parte interna, doble guion bajo)</li>
+                        <li><strong>Modificador:</strong> <code>.card--featured</code> (variante, doble guion medio)</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>💻 Ejemplo limpio</h3>
+                    <pre class="code-block"><code>&lt;article class="card card--featured"&gt;
+  &lt;h3 class="card__title"&gt;Plan Pro&lt;/h3&gt;
+  &lt;button class="card__btn"&gt;Elegir&lt;/button&gt;
+&lt;/article&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Display, flujo y posicionamiento">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Display, flujo y posicionamiento</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad       | Ejemplo                         | Descripción breve                                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|-----------------|----------------------------------|-----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>display</code>       | <code>display: block;</code>               | Tipo de caja (<code>block</code>, <code>inline</code>, <code>flex</code>, <code>grid</code>, etc.).                   |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>visibility</code>    | <code>visibility: hidden;</code>           | Oculta manteniendo el espacio.                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>overflow</code>      | <code>overflow: auto;</code>               | Comportamiento del contenido que se desborda.                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>overflow-x</code>    | <code>overflow-x: scroll;</code>           | Desbordamiento horizontal.                                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>overflow-y</code>    | <code>overflow-y: hidden;</code>           | Desbordamiento vertical.                                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>position</code>      | <code>position: absolute;</code>           | Modelo de posicionamiento (<code>static</code>, <code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>). |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>top</code> / <code>left</code> / <code>right</code> / <code>bottom</code> | <code>top: 0; left: 0;</code> | Offset cuando <code>position</code> ≠ <code>static</code>.                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>z-index</code>       | <code>z-index: 10;</code>                  | Orden de apilamiento.                                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>float</code>         | <code>float: left;</code>                  | Flotado (layout clásico).                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>clear</code>         | <code>clear: both;</code>                  | Cancelación de flotados.                                                  |</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Flexbox</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad           | Ejemplo                          | Descripción breve                                                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|---------------------|-----------------------------------|----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>display</code>           | <code>display: flex;</code>                 | Activa el contexto flex.                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-direction</code>    | <code>flex-direction: row;</code>           | Dirección principal (<code>row</code>, <code>column</code>).                                   |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-wrap</code>         | <code>flex-wrap: wrap;</code>               | Permite que los ítems salten de línea.                                   |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-flow</code>         | <code>flex-flow: row wrap;</code>           | Atajo para dirección y wrap.                                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>justify-content</code>   | <code>justify-content: space-between;</code>| Distribución en el eje principal.                                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>align-items</code>       | <code>align-items: center;</code>           | Alineación en el eje cruzado.                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>align-content</code>     | <code>align-content: flex-start;</code>     | Alinea las líneas cuando hay múltiples filas.                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>gap</code>               | <code>gap: 1rem;</code>                     | Espacio entre ítems.                                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-grow</code>         | <code>flex-grow: 1;</code>                  | Capacidad de crecer para ocupar espacio.                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-shrink</code>       | <code>flex-shrink: 0;</code>                | Capacidad de encoger.                                                    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex-basis</code>        | <code>flex-basis: 200px;</code>             | Tamaño base antes de distribuir espacio.                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex</code>              | <code>flex: 1 0 200px;</code>               | Atajo para grow, shrink y basis.                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>align-self</code>        | <code>align-self: flex-end;</code>          | Alineación de un ítem individual.                                        |</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Grid">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Grid</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad                | Ejemplo                                 | Descripción breve                                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|--------------------------|------------------------------------------|-----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>display</code>                | <code>display: grid;</code>                        | Activa el contexto grid.                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-template-columns</code>  | <code>grid-template-columns: 1fr 2fr;</code>       | Definición de columnas.                                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-template-rows</code>     | <code>grid-template-rows: auto 1fr auto;</code>    | Definición de filas.                                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-template-areas</code>    | <code>grid-template-areas: &quot;h h&quot; &quot;s m&quot; &quot;f f&quot;;</code> | Áreas nombradas.                                                       |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-column-gap</code> / <code>grid-row-gap</code> | <code>grid-column-gap: 1rem;</code>    | Separación entre columnas/filas (predecesor de <code>column-gap</code>/<code>row-gap</code>).  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>gap</code>                    | <code>gap: 1rem;</code>                            | Espaciado general en grid/flex.                                          |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>justify-items</code>          | <code>justify-items: center;</code>                | Alineación horizontal de ítems en sus celdas.                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>align-items</code>            | <code>align-items: start;</code>                   | Alineación vertical de ítems.                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>justify-content</code>        | <code>justify-content: center;</code>              | Alineación del grid dentro del contenedor.                               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>align-content</code>          | <code>align-content: space-between;</code>         | Distribución vertical del grid como bloque.                              |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-column</code>            | <code>grid-column: 1 / 3;</code>                   | Inicio/fin de columna de un ítem.                                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>grid-row</code>               | <code>grid-row: 2 / 4;</code>                      | Inicio/fin de fila de un ítem.                                           |</p></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Transformaciones, transiciones y animaciones">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Transformaciones, transiciones y animaciones</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad         | Ejemplo                                | Descripción breve                                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|-------------------|-----------------------------------------|-----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transform</code>       | <code>transform: translateY(-4px) scale(1.1);</code> | Mover, escalar, rotar, sesgar.                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transform-origin</code>| <code>transform-origin: center center;</code>      | Punto de origen de la transformación.                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transition-property</code> | <code>transition-property: background;</code> | Qué propiedades se animan en una transición.                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transition-duration</code> | <code>transition-duration: 0.3s;</code>       | Duración de la transición.                                               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transition-timing-function</code> | <code>transition-timing-function: ease;</code> | Curva de velocidad (por ejemplo <code>ease</code>, <code>linear</code>).                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transition-delay</code> | <code>transition-delay: 0.1s;</code>             | Retardo antes de iniciar la transición.                                   |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>transition</code>      | <code>transition: all 0.2s ease-in-out;</code>    | Atajo para las anteriores.                                               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-name</code>  | <code>animation-name: fade-in;</code>             | Nombre de la animación definida con <code>@keyframes</code>.                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-duration</code> | <code>animation-duration: 1s;</code>          | Duración de un ciclo.                                                    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-timing-function</code> | <code>animation-timing-function: ease-out;</code> | Curva de la animación.                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-iteration-count</code> | <code>animation-iteration-count: infinite;</code> | Número de repeticiones.                                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-direction</code> | <code>animation-direction: alternate;</code>  | Dirección (normal, inversa, alterna).                                    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-delay</code> | <code>animation-delay: 0.5s;</code>               | Retardo antes de iniciar la animación.                                   |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation-fill-mode</code> | <code>animation-fill-mode: forwards;</code>   | Cómo se comporta antes/después de la animación.                          |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>animation</code>       | <code>animation: fade-in 1s ease-out both;</code> | Atajo para las propiedades de animación.                                 |</p></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR POSITION -->
+        <section class="slide" data-slide="11" data-title="Simulador de Position y Z-Index">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador de Position y Capas</h2>
+                <p class="slide-lead">Cambia el <code>position</code> del badge y mueve sus coordenadas <code>top</code> y <code>left</code> respecto a la tarjeta.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>position</label>
+                        <select id="posMode">
+                            <option value="absolute" selected>absolute (anclado al padre)</option>
+                            <option value="relative">relative (desde su lugar)</option>
+                            <option value="static">static (ignora top/left)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>top <span id="posTopVal">12px</span></label>
+                        <input type="range" id="posTop" min="-16" max="140" value="12" />
+                    </div>
+                    <div class="sim-control">
+                        <label>left <span id="posLeftVal">16px</span></label>
+                        <input type="range" id="posLeft" min="-16" max="260" value="16" />
+                    </div>
+                    <div class="sim-control">
+                        <label>z-index del badge</label>
+                        <select id="posZ">
+                            <option value="10">10 (Encima de la caja)</option>
+                            <option value="0">0 (Detrás de la caja z-index: 2)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" style="display:grid; place-items:center; min-height:220px;">
+                        <div style="position:relative; width:300px; height:150px; background:rgba(30,41,59,0.9); border:2px solid #38bdf8; border-radius:14px; padding:18px;">
+                            <div id="posBadge" style="background:#f43f5e; color:#fff; font-weight:800; font-size:0.78rem; padding:6px 12px; border-radius:999px; display:inline-block;">BADGE</div>
+                            <div style="position:relative; z-index:2; margin-top:16px; background:#0f172a; border:1px solid rgba(255,255,255,0.15); padding:12px; border-radius:10px;">
+                                <strong>Tarjeta Padre</strong> (<code>position: relative</code>)<br>
+                                <span style="font-size:0.8rem; color:#94a3b8;">Esta caja interna tiene z-index: 2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <pre class="sim-code" id="posCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de CSS Avanzado">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de CSS Avanzado</h2>
+                <p class="slide-lead">Evalúa tu conocimiento sobre especificidad, position y BEM.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="Un selector de ID (#titulo) tiene peso (1,0,0), superando a cualquier cantidad de clases (0,1,0)."
+                    data-err="Los IDs tienen mayor especificidad que las clases, sin importar el orden en el archivo CSS.">
+                    <div class="quiz-q-title">1. ¿Qué regla gana entre <code>#titulo { color: cyan; }</code> y <code>.hero .titulo { color: red; }</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">.hero .titulo (porque tiene 2 clases)</button>
+                        <button class="quiz-option" data-opt="b">#titulo (porque tiene un ID)</button>
+                        <button class="quiz-option" data-opt="c">La que aparezca al final del archivo</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="position: relative en el padre crea el contexto de referencia para que el hijo con position: absolute se ancle a él."
+                    data-err="Sin position: relative (o distinto de static) en el padre, el hijo absoluto se anclará hasta el &lt;body&gt; / viewport.">
+                    <div class="quiz-q-title">2. Para que un hijo con <code>position: absolute</code> se posicione respecto a su tarjeta padre y no a toda la pantalla, ¿qué debe tener el padre?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">position: relative</button>
+                        <button class="quiz-option" data-opt="b">display: block</button>
+                        <button class="quiz-option" data-opt="c">z-index: 1</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="En BEM, los modificadores se escriben con doble guion medio (--) sobre el bloque o elemento."
+                    data-err="Doble guion bajo (__) es para elementos; doble guion medio (--) es para modificadores.">
+                    <div class="quiz-q-title">3. Según la metodología BEM, ¿cuál representa un modificador de un botón?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">.btn__primario</button>
+                        <button class="quiz-option" data-opt="b">.btn_primario</button>
+                        <button class="quiz-option" data-opt="c">.btn--primario</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  .card { position: relative; width: 260px; padding: 24px; background: #1e293b; color: #f8fafc; border-radius: 16px; border: 1px solid #334155; }
+  .badge { position: absolute; top: -10px; right: 16px; background: #10b981; color: #052e16; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;span class=&quot;badge&quot;&gt;NUEVO&lt;/span&gt;&lt;h3&gt;Tarjeta Posicionada&lt;/h3&gt;&lt;p&gt;El padre usa &lt;code&gt;position: relative&lt;/code&gt; y el badge &lt;code&gt;position: absolute&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;">Position Absolute</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #f8fafc; }
+  .titulo { position: relative; font-size: 24px; color: #0f172a; }
+  .titulo::after { content: &quot;&quot;; display: block; width: 60%; height: 4px; background: #38bdf8; border-radius: 99px; margin-top: 6px; }
+&lt;/style&gt;
+&lt;h2 class=&quot;titulo&quot;&gt;Pseudoelemento ::after&lt;/h2&gt;">Pseudoelemento ::after</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  .card { position: relative; width: 260px; padding: 24px; background: #1e293b; color: #f8fafc; border-radius: 16px; border: 1px solid #334155; }
+  .badge { position: absolute; top: -10px; right: 16px; background: #10b981; color: #052e16; font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+&lt;/style&gt;
+&lt;div class="card"&gt;&lt;span class="badge"&gt;NUEVO&lt;/span&gt;&lt;h3&gt;Tarjeta Posicionada&lt;/h3&gt;&lt;p&gt;El padre usa &lt;code&gt;position: relative&lt;/code&gt; y el badge &lt;code&gt;position: absolute&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Ejercicios y Subtemas Unidos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · EJERCICIOS Y RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">🛠️ Ejercicios Prácticos y Subtemas Unidos</h2>
+                <p class="slide-lead">Todas las subcarpetas de CSS Avanzado están integradas aquí. Carga la Ventana Modal en el laboratorio o abre cada práctica individual.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>🪟 Ejercicio Real: Ventana Modal con &lt;dialog&gt; y BEM</h3>
+                <p style="margin-top:6px;">Combina <code>&lt;dialog open&gt;</code>, <code>position: fixed</code>/<code>absolute</code> y nomenclatura BEM (<code>.modal__content</code>, <code>.modal__close-button</code>).</p>
+                <button class="try-lab-btn" data-lab-code="&lt;style&gt;
+  body { font-family: system-ui; background: #0f172a; color: #cbd5e1; padding: 20px; min-height: 220px; }
+  dialog { border: 1px solid #38bdf8; border-radius: 14px; background: #1e293b; color: #f8fafc; padding: 22px; max-width: 320px; margin: 20px auto; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+  .modal__title { margin: 0 0 8px; color: #38bdf8; }
+  .modal__close-button { position: absolute; top: 10px; right: 12px; background: #f43f5e; color: #fff; border: 0; border-radius: 6px; padding: 4px 9px; font-weight: 700; cursor: pointer; }
+&lt;/style&gt;
+&lt;dialog open&gt;
+  &lt;div class=&quot;modal__content&quot;&gt;
+    &lt;h2 class=&quot;modal__title&quot;&gt;VENTANA MODAL&lt;/h2&gt;
+    &lt;p&gt;Construida con &amp;lt;dialog&amp;gt;, &lt;code&gt;position: absolute&lt;/code&gt; y metodología BEM.&lt;/p&gt;
+    &lt;form method=&quot;dialog&quot;&gt;&lt;button class=&quot;modal__close-button&quot;&gt;X&lt;/button&gt;&lt;/form&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;">🧪 Cargar Ventana Modal en el Lab</button>
+                <p style="margin-top:12px;">Apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/CSS.md" style="color:#38bdf8;">CSS.md</a>) · <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>📂 Prácticas de la Carpeta (17)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="BEM/bem.html"><span class="file-name">📁 BEM</span><span class="file-path">bem.html</span></a>
+                    <a class="file-card" href="Control_flujo_texto/control_texto.html"><span class="file-name">📁 Control_flujo_texto</span><span class="file-path">control_texto.html</span></a>
+                    <a class="file-card" href="Display/display.html"><span class="file-name">📁 Display</span><span class="file-path">display.html</span></a>
+                    <a class="file-card" href="Ejercicios/Ventana%20Modal/modal.html"><span class="file-name">🪟 Ejercicio: Ventana Modal</span><span class="file-path">modal.html</span></a>
+                    <a class="file-card" href="Especificidad%20y%20Casacada/style.css"><span class="file-name">🎨 Especificidad y Cascada</span><span class="file-path">style.css</span></a>
+                    <a class="file-card" href="Herencia/herencia.html"><span class="file-name">📁 Herencia</span><span class="file-path">herencia.html</span></a>
+                    <a class="file-card" href="Object%20Fit_Position/fit_position.html"><span class="file-name">📁 Object Fit_Position</span><span class="file-path">fit_position.html</span></a>
+                    <a class="file-card" href="Outline/outline.html"><span class="file-name">📁 Outline</span><span class="file-path">outline.html</span></a>
+                    <a class="file-card" href="Overflow/overflow.html"><span class="file-name">📁 Overflow</span><span class="file-path">overflow.html</span></a>
+                    <a class="file-card" href="Position/position_html/position-relative.html"><span class="file-name">📍 Position Relative</span><span class="file-path">position-relative.html</span></a>
+                    <a class="file-card" href="Position/position_html/position-absolute.html"><span class="file-name">📍 Position Absolute</span><span class="file-path">position-absolute.html</span></a>
+                    <a class="file-card" href="Position/position_html/position-fixed.html"><span class="file-name">📍 Position Fixed</span><span class="file-path">position-fixed.html</span></a>
+                    <a class="file-card" href="Position/position_html/position-sticky.html"><span class="file-name">📍 Position Sticky</span><span class="file-path">position-sticky.html</span></a>
+                    <a class="file-card" href="Pseudoclases/pseudoclases.html"><span class="file-name">📁 Pseudoclases</span><span class="file-path">pseudoclases.html</span></a>
+                    <a class="file-card" href="Pseudoelementos/pseudoelementos.html"><span class="file-name">📁 Pseudoelementos</span><span class="file-path">pseudoelementos.html</span></a>
+                    <a class="file-card" href="selectores/selectores.html"><span class="file-name">📁 selectores</span><span class="file-path">selectores.html</span></a>
+                    <a class="file-card" href="Transition/transition.html"><span class="file-name">📁 Transition</span><span class="file-path">transition.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const badge = document.getElementById('posBadge');
+            const out = document.getElementById('posCodeOut');
+            const mode = document.getElementById('posMode');
+            const top = document.getElementById('posTop');
+            const left = document.getElementById('posLeft');
+            const z = document.getElementById('posZ');
+
+            function updatePos() {
+                document.getElementById('posTopVal').textContent = top.value + 'px';
+                document.getElementById('posLeftVal').textContent = left.value + 'px';
+                badge.style.position = mode.value;
+                badge.style.top = top.value + 'px';
+                badge.style.left = left.value + 'px';
+                badge.style.zIndex = z.value;
+                out.textContent = `.badge {\n  position: ${mode.value};\n  top: ${top.value}px;\n  left: ${left.value}px;\n  z-index: ${z.value};\n}`;
+            }
+            [mode, top, left, z].forEach(el => el.addEventListener('input', updatePos));
+            updatePos();
+        })();
+    </script>
+</body>
+</html>

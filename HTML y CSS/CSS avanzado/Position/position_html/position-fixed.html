@@ -1,53 +1,123 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Position/position_html/position-fixed.html
-     Título: Fixed
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../position_css/fixed.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fixed</title>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position Fixed en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../slides-engine.css" /><script src="../../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Ventana modal o contenido emergente. -->
-    <div class="overlay">
-
-    </div>
-    <!-- Contenedor con clase(s) contenedor para estilo o disposición. -->
-    <div class="contenedor">
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-        <div class="box">
-            <h2>NECESITAS ACCESO</h2>
-    <!-- Párrafo de texto. -->
-            <p>Para ver el contenido completo por favor registrate <a href="">aqui</a></p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · POSITION</span><div class="brand-title"><span>📌</span><span>Position Fixed</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
-    </div>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quam ab beatae totam fugiat incidunt, ipsam quod optio voluptas ipsum nemo aliquid dolores, molestias aspernatur natus. Similique quas molestiae adipisci!
-    Totam laudantium in aut repellendus suscipit. Minus reiciendis ut nam ea, a aspernatur ex expedita omnis cupiditate alias voluptas labore corrupti! Eaque porro nostrum sit obcaecati odio explicabo dolore distinctio!
-    Esse reprehenderit repellat deserunt minima. Quam maxime nisi neque vero cum architecto at, recusandae libero saepe sunt hic provident molestias. Repellat, repellendus esse. Et fuga dolorum voluptas eius nisi tempore!
-    Quam, porro. Quisquam a iusto deleniti tempore labore modi nostrum asperiores ipsum esse repellat possimus minima nihil blanditiis dolore autem cumque perferendis, animi sint totam excepturi natus! Nisi, nostrum quae?
-    Cumque accusamus nisi expedita laudantium? Enim suscipit reiciendis, deleniti doloribus corporis, natus veniam aliquid voluptates eum accusamus fugiat, beatae tempora iure. Totam excepturi, odio at provident nemo cumque repudiandae debitis.
-    Repudiandae, soluta expedita consequuntur cum pariatur officiis ut, laboriosam voluptates voluptas eos nihil explicabo quasi nostrum. Dolor, vel. Quia optio praesentium, eum consequuntur mollitia maxime. Aperiam harum aliquam minus animi!
-    Numquam illum temporibus quisquam mollitia nihil cum quas, labore omnis non vero autem inventore, veniam et maxime molestiae veritatis voluptatum cumque nulla ex. Voluptatem recusandae fugiat enim corporis optio pariatur?
-    Officia nostrum libero repellat sint ex est doloremque ducimus numquam corporis vero, nesciunt voluptatum dolorem in earum dolor provident nobis incidunt nihil? Possimus, voluptates culpa voluptate illo enim eius excepturi.
-    Perspiciatis quisquam error, dolores a et dicta adipisci. Quis veritatis, omnis excepturi reiciendis illum dolorem eos tempora nemo officia ipsam dolore fugit, iste ratione porro? Repellendus eum necessitatibus qui molestiae!
-    Ea itaque non sequi fuga impedit quasi. Necessitatibus harum alias debitis, ab quidem ea temporibus eveniet totam deleniti ratione ad voluptas reiciendis quam reprehenderit praesentium dignissimos sapiente veniam sint esse!
-    Ad ducimus officiis velit culpa, quisquam deleniti, enim provident totam nemo accusantium, fugiat ipsum sit labore aliquid ipsam error? Quidem blanditiis quod delectus excepturi pariatur beatae error consequatur. A, rem.
-    Assumenda architecto libero Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse recusandae alias illum ipsam aliquid! Cumque ab vel nihil consectetur, natus nisi veritatis id impedit eligendi incidunt! Mollitia quo at dignissimos.
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae impedit voluptas mollitia culpa expedita inventore maiores alias cum, quos veritatis animi? Sapiente perspiciatis repudiandae harum placeat eos dolorum doloremque veniam.
-     
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Position Fixed">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">position: fixed</span><span class="badge badge-purple">Fijo al Viewport</span><span class="badge badge-emerald">Navbars &amp; Botón Flotante</span></div>
+                <h1 class="hero-title">Posicionamiento:<br /><span class="gradient-text">position: fixed</span></h1>
+                <p class="hero-subtitle">Ancla barras de navegación, botones de WhatsApp o modales directamente a la ventana del navegador para que permanezcan visibles al hacer scroll.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📌</div><h3>Casos de Uso</h3><p>Botones flotantes, headers fijos y overlays.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba un botón flotante con scroll.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Position Fixed?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Position Fixed y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Ancla barras de navegación, botones de WhatsApp o modales directamente a la ventana del navegador para que permanezcan visibles al hacer scroll. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Cómo funciona Fixed">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · VENTANA</span><h2 class="slide-title">Fijo respecto al Viewport</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><pre class="code-block"><code>.fab-chat {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}</code></pre></div>
+                <div class="glass-card"><h3>⚠️ Cuidado con headers fixed</h3><p>Como <code>fixed</code> sale del flujo, un header fijo de <code>64px</code> tapará el inicio de tu contenido si no agregas <code>padding-top: 64px;</code> al <code>&lt;body&gt;</code>.</p></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Position Fixed">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Position Fixed</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Position Fixed">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="b" data-ok="fixed se posiciona respecto a la ventana visible del navegador (viewport), por eso no se mueve al hacer scroll." data-err="absolute se mueve al hacer scroll junto con su contenedor; fixed queda pegado al viewport.">
+                    <div class="quiz-q-title">1. ¿Respecto a qué se posiciona un elemento con <code>position: fixed</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Al elemento padre directo</button><button class="quiz-option" data-opt="b">A la ventana del navegador (viewport)</button><button class="quiz-option" data-opt="c">Al último párrafo</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Al salir del flujo, el header fijo flota encima del contenido; padding-top en el body evita que lo tape." data-err="Añadir padding-top igual a la altura del header evita que tape el contenido inicial.">
+                    <div class="quiz-q-title">2. Si tu barra superior tiene <code>position: fixed; height: 64px;</code> y tapa el título inicial, ¿cómo lo solucionas?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Añadiendo padding-top: 64px al body/main</button><button class="quiz-option" data-opt="b">Poniendo z-index: -1 al body</button><button class="quiz-option" data-opt="c">Cambiando a display: inline</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Fixed">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Botón Flotante con Scroll</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #cbd5e1; height: 600px; }
+  .fab { position: fixed; bottom: 16px; right: 16px; background: #10b981; color: #052e16; font-weight: 800; padding: 10px 16px; border-radius: 999px; border: 0; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+&lt;/style&gt;
+&lt;p&gt;Haz scroll hacia abajo en este panel para comprobar que el botón verde permanece fijo.&lt;/p&gt;
+&lt;button class=&quot;fab&quot;&gt;💬 Chat Fijo&lt;/button&gt;">Botón Flotante</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #cbd5e1; height: 600px; }
+  .fab { position: fixed; bottom: 16px; right: 16px; background: #10b981; color: #052e16; font-weight: 800; padding: 10px 16px; border-radius: 999px; border: 0; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+&lt;/style&gt;
+&lt;p&gt;Haz scroll hacia abajo en este panel para comprobar que el botón verde permanece fijo.&lt;/p&gt;
+&lt;button class="fab"&gt;💬 Chat Fijo&lt;/button&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Otros Modos de Position">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · CONTINÚA</span><h2 class="slide-title">📂 Otros Modos de Position</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="position-relative.html"><span class="file-name">📍 Position Relative</span><span class="file-path">position-relative.html</span></a>
+                <a class="file-card" href="position-absolute.html"><span class="file-name">📍 Position Absolute</span><span class="file-path">position-absolute.html</span></a>
+                <a class="file-card" href="position-sticky.html"><span class="file-name">📍 Position Sticky</span><span class="file-path">position-sticky.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

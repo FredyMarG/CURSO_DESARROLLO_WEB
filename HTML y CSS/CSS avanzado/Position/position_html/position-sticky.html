@@ -1,56 +1,131 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Position/position_html/position-sticky.html
-     Título: Sticky
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../position_css/sticky.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sticky</title>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position Sticky en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../slides-engine.css" /><script src="../../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur quam ab beatae totam fugiat incidunt, ipsam quod optio voluptas ipsum nemo aliquid dolores, molestias aspernatur natus. Similique quas molestiae adipisci!
-    Totam laudantium in aut repellendus suscipit. Minus reiciendis ut nam ea, a aspernatur ex expedita omnis cupiditate alias voluptas labore corrupti! Eaque porro nostrum sit obcaecati odio explicabo dolore distinctio!
-    Esse reprehenderit repellat deserunt minima. Quam maxime nisi neque vero cum architecto at, recusandae libero saepe sunt hic provident molestias. Repellat, repellendus esse. Et fuga dolorum voluptas eius nisi tempore!
-    Quam, porro. Quisquam a iusto deleniti tempore labore modi nostrum asperiores ipsum esse repellat possimus minima nihil blanditiis dolore autem cumque perferendis, animi sint totam excepturi natus! Nisi, nostrum quae?
-    Cumque accusamus nisi expedita laudantium? Enim suscipit reiciendis, deleniti doloribus corporis, natus veniam aliquid voluptates eum accusamus fugiat, beatae tempora iure. Totam excepturi, odio at provident nemo cumque repudiandae debitis.
-    Repudiandae, soluta expedita consequuntur cum pariatur officiis ut, laboriosam voluptates voluptas eos nihil explicabo quasi nostrum. Dolor, vel. Quia optio praesentium, eum consequuntur mollitia maxime. Aperiam harum aliquam minus animi!
-    <!-- Contenedor con clase(s) box-sticky para estilo o disposición. -->
-    <div class="box-sticky">
-        
-    </div>
-    Numquam illum temporibus quisquam mollitia nihil cum quas, labore omnis non vero autem inventore, veniam et maxime molestiae veritatis voluptatum cumque nulla ex. Voluptatem recusandae fugiat enim corporis optio pariatur?
-    Officia nostrum libero repellat sint ex est doloremque ducimus numquam corporis vero, nesciunt voluptatum dolorem in earum dolor provident nobis incidunt nihil? Possimus, voluptates culpa voluptate illo enim eius excepturi.
-    Perspiciatis quisquam error, dolores a et dicta adipisci. Quis veritatis, omnis excepturi reiciendis illum dolorem eos tempora nemo officia ipsam dolore fugit, iste ratione porro? Repellendus eum necessitatibus qui molestiae!
-    Ea itaque non sequi fuga impedit quasi. Necessitatibus harum alias debitis, ab quidem ea temporibus eveniet totam deleniti ratione ad voluptas reiciendis quam reprehenderit praesentium dignissimos sapiente veniam sint esse!
-    Ad ducimus officiis velit culpa, quisquam deleniti, enim provident totam nemo accusantium, fugiat ipsum sit labore aliquid ipsam error? Quidem blanditiis quod delectus excepturi pariatur beatae error consequatur. A, rem.
-    Assumenda architecto libero Lorem, Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse recusandae alias illum ipsam aliquid! Cumque ab vel nihil consectetur, natus nisi veritatis id impedit eligendi incidunt! Mollitia quo at dignissimos. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit minima cumque error saepe aspernatur esse, qui nemo quis amet laboriosam eveniet. Rem est aperiam dolore tempora iure repellendus non corrupti?
-    Rerum pariatur nostrum, explicabo quam adipisci deleniti fugiat ad commodi. Laudantium veritatis, molestias saepe consequuntur, numquam ducimus aut ea, sed eum molestiae sequi hic expedita provident nulla consequatur? Impedit, harum.
-    Fuga similique, optio iusto, sapiente maiores aut reprehenderit beatae placeat aspernatur dolore praesentium, doloremque quaerat alias? Aperiam deleniti dolor sunt provident et tempora. Ipsa unde vitae voluptatem amet, iusto illo?
-    Error, ea incidunt laborum dolorem adipisci ipsum suscipit accusantium itaque laboriosam modi corporis, iusto debitis beatae. Accusantium, cum voluptatibus tempora repudiandae, quibusdam quisquam culpa excepturi minima veniam omnis repellat numquam?
-    Perspiciatis, tempora architecto officia natus dolorem, atque excepturi eligendi tempore quidem aut nisi pariatur est porro quia. Qui autem fuga, dolor animi, doloribus quibusdam ducimus ipsa nesciunt repudiandae at perspiciatis?
-    Ipsam aliquid, earum illum necessitatibus rerum debitis qui odio quae vel quas facilis sunt minus unde quod quisquam! Possimus, obcaecati similique! Quidem ratione maxime id sunt rem deleniti, reprehenderit reiciendis?
-    Dolorem distinctio ea cupiditate nulla temporibus aliquam velit incidunt in sint voluptates, quos totam sit aliquid numquam laborum et minus nostrum fuga officiis, quod ipsa labore mollitia sunt tempore? Porro.
-    Rem, itaque tempore id eos sit voluptatum quam non? Deserunt amet tenetur in temporibus a consectetur iure pariatur, officiis minus explicabo mollitia nostrum eum labore harum dignissimos reiciendis adipisci? Maxime.
-    Expedita excepturi a earum et eius beatae, tenetur ullam tempora ea? Perspiciatis facere dolor nisi quae, quo sapiente eius accusantium harum animi hic unde, aperiam fugiat reiciendis accusamus dolorem earum.
-    Animi architecto, minima commodi est molestias officia vero voluptates necessitatibus quo repudiandae. Consequatur perspiciatis fuga blanditiis porro nostrum laborum sed doloremque? Voluptatibus nisi sit officiis atque facilis quis ipsam non.
-    Magnam similique quasi aperiam voluptas aliquam atque? Et veniam iure optio molestias praesentium dolorem illum ducimus, nam odio soluta reprehenderit. Quasi, esse! Repudiandae cumque dolorem fuga vero explicabo nulla quis?
-    Earum, dignissimos sit. Corporis, adipisci architecto. Dicta facere fugit eos in deleniti necessitatibus, recusandae obcaecati alias dolorum perferendis eaque reprehenderit non vero suscipit. Corrupti ipsum, voluptatibus qui veritatis beatae in.
-    Reprehenderit blanditiis laborum dolor magni ea sapiente rerum cumque in iusto temporibus maiores ipsam dolore nemo doloremque, adipisci beatae natus veritatis praesentium est. Modi commodi assumenda dolores sunt quaerat illo.
-    Commodi unde vero repudiandae neque fugiat quas quasi deserunt esse, praesentium vitae nisi nesciunt obcaecati et explicabo, quos non perspiciatis eveniet? Ad libero doloribus, quisquam dicta autem laborum id placeat.
-    Eligendi corrupti veritatis voluptatibus culpa numquam similique, eveniet dolor, ducimus distinctio perspiciatis minima ratione, ipsum consequatur provident fugit sint dolorum nihil. Sequi corrupti aspernatur commodi, temporibus dolorem pariatur veniam amet.
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · POSITION</span><div class="brand-title"><span>🧲</span><span>Position Sticky</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Position Sticky">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">position: sticky</span><span class="badge badge-purple">top: 0</span><span class="badge badge-emerald">Híbrido Relative + Fixed</span></div>
+                <h1 class="hero-title">Posicionamiento:<br /><span class="gradient-text">position: sticky</span></h1>
+                <p class="hero-subtitle">Un híbrido inteligente: fluye normalmente hasta que el scroll alcanza el umbral definido (como <code>top: 0</code>), y entonces se queda pegado dentro de su contenedor.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧲</div><h3>Requisitos de Sticky</h3><p>Umbral obligatorio y cuidado con <code>overflow: hidden</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba encabezados de sección pegajosos.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Position Sticky?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Position Sticky y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Un híbrido inteligente: fluye normalmente hasta que el scroll alcanza el umbral definido (como <code>top: 0</code>), y entonces se queda pegado dentro de su contenedor. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Requisitos de Sticky">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · REGLAS</span><h2 class="slide-title">Por qué a veces sticky "no funciona"</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><pre class="code-block"><code>.encabezado-sticky {
+  position: sticky;
+  top: 0; /* ¡Obligatorio! */
+  background: #0f172a;
+}</code></pre></div>
+                <div class="glass-card"><h3>⚠️ 2 motivos de fallo</h3><ul class="styled-list">
+                    <li>Olvidar definir un umbral (<code>top: 0</code> o <code>bottom: 0</code>).</li>
+                    <li>Que un ancestro tenga <code>overflow: hidden</code> (usa <code>overflow: clip</code> en su lugar).</li>
+                </ul></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Position Sticky">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Position Sticky</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Position Sticky">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="Sin una coordenada umbral como top: 0, el navegador no sabe en qué punto debe pegarse." data-err="position: sticky exige definir al menos top, bottom, left o right.">
+                    <div class="quiz-q-title">1. ¿Qué propiedad es obligatoria junto a <code>position: sticky</code> para que se quede pegado al hacer scroll?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Un umbral (ej. top: 0)</button><button class="quiz-option" data-opt="b">overflow: hidden en el padre</button><button class="quiz-option" data-opt="c">float: left</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="overflow: hidden en un ancestro rompe position: sticky; overflow: clip lo soluciona." data-err="overflow: hidden en cualquier elemento padre desactiva el comportamiento sticky.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad en un contenedor padre suele impedir que <code>position: sticky</code> funcione?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">display: grid</button><button class="quiz-option" data-opt="b">padding: 16px</button><button class="quiz-option" data-opt="c">overflow: hidden</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Sticky">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Encabezados Sticky en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 0; background: #0f172a; color: #cbd5e1; }
+  .sticky-h { position: sticky; top: 0; background: #0284c7; color: #fff; padding: 10px 16px; font-weight: 800; }
+  .sec { height: 220px; padding: 14px 16px; }
+&lt;/style&gt;
+&lt;div class=&quot;sticky-h&quot;&gt;Sección A (sticky top: 0)&lt;/div&gt;
+&lt;div class=&quot;sec&quot;&gt;Haz scroll hacia abajo...&lt;/div&gt;
+&lt;div class=&quot;sticky-h&quot; style=&quot;background:#6366f1&quot;&gt;Sección B (sticky top: 0)&lt;/div&gt;
+&lt;div class=&quot;sec&quot;&gt;Más contenido abajo...&lt;/div&gt;">Sticky Headers</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 0; background: #0f172a; color: #cbd5e1; }
+  .sticky-h { position: sticky; top: 0; background: #0284c7; color: #fff; padding: 10px 16px; font-weight: 800; }
+  .sec { height: 220px; padding: 14px 16px; }
+&lt;/style&gt;
+&lt;div class="sticky-h"&gt;Sección A (sticky top: 0)&lt;/div&gt;
+&lt;div class="sec"&gt;Haz scroll hacia abajo...&lt;/div&gt;
+&lt;div class="sticky-h" style="background:#6366f1"&gt;Sección B (sticky top: 0)&lt;/div&gt;
+&lt;div class="sec"&gt;Más contenido abajo...&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Otros Modos de Position">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · CONTINÚA</span><h2 class="slide-title">📂 Otros Modos de Position</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="position-relative.html"><span class="file-name">📍 Position Relative</span><span class="file-path">position-relative.html</span></a>
+                <a class="file-card" href="position-absolute.html"><span class="file-name">📍 Position Absolute</span><span class="file-path">position-absolute.html</span></a>
+                <a class="file-card" href="position-fixed.html"><span class="file-name">📍 Position Fixed</span><span class="file-path">position-fixed.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

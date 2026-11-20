@@ -224,6 +224,7 @@
             this.dotsContainer = document.getElementById('slideDotsContainer');
 
             // Botón de alternar modo presentación / guía
+            this.btnGoLab = document.getElementById('btnGoLab');
             this.btnToggleMode = document.getElementById('btnToggleMode');
             // Texto del botón de modo
             this.modeText = document.getElementById('modeText');
@@ -361,6 +362,13 @@
             }
 
             // Botón de alternar modo presentación / guía
+            if (this.btnGoLab) {
+                this.btnGoLab.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.goToSlide(9);
+                });
+            }
+
             if (this.btnToggleMode) {
                 this.btnToggleMode.addEventListener('click', () => {
                     SoundFX.click();

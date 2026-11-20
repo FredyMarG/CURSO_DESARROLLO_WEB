@@ -1,73 +1,131 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Text-area y labels.html
-     Título: Text Area y labels - formulario de contacto
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-    
-    <!-- Caracteres universales (acentos, ñ) -->
-    <meta charset="UTF-8">
-    <!-- Adaptabilidad a dispositivos móviles (Responsive Design) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Enlace a estilos externos: separa la estructura de la presentación -->
-    <link rel="stylesheet" href="css/formulario.css">
-    <title>Text Area y labels - formulario de contacto</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Textarea y Labels en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · FORMULARIOS</span><div class="brand-title"><span>✍️</span><span>Textarea y Labels</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-    <!-- 
-        ETIQUETA <form>:
-        - 'action="#"': Indica a dónde se envían los datos (normalmente un script de servidor).
-        - 'method="POST"': Método seguro para enviar datos sensibles o largos, ya que no los muestra en la URL.
-        
-        ACCESIBILIDAD:
-        - El uso de <label for="ID"> es vital. Permite que usuarios con lectores de pantalla sepan 
-          qué deben escribir y amplía el área de clic para usuarios con dificultades motrices.
-    -->
-    <!-- Formulario para recoger datos del usuario. -->
-    <form action="#" method="POST">
-        <h2>Formulario de contacto</h2>
-        
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="nombre">Nombre completo</label>
-            <!-- 'placeholder': Proporciona una pista visual, no sustituye a una etiqueta <label>. -->
-            <input id="nombre" type="text" placeholder="Jhon Doe">
-        </div>
-        
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="correo">Correo electrónico</label>
-            <input type="email" id="correo" placeholder="ejemplo@dominio.com">
-        </div>
-        
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="mensaje">mensaje</label>
-            <!-- <textarea>: Entrada de texto multilínea. 'rows' define la altura inicial en líneas -->
-            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
-        </div>
-        
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <!-- Labels para Checkboxes: Mejoran la usabilidad al permitir marcar el cuadro haciendo clic en el texto -->
-            <label for="tyc">Acepto los términos y condiciones</label>
-            <input type="checkbox" id="tyc" class="checkbox">
-        </div>
-        
-        <!-- Recomendación: Añadir un <button type="submit"> para procesar el formulario -->
-    <!-- Botón interactivo. -->
-        <button type="submit">Enviar mensaje</button>
-    </form>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Textarea y Labels">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&lt;textarea&gt;</span><span class="badge badge-purple">&lt;label for="..."&gt;</span><span class="badge badge-emerald">resize CSS</span></div>
+                <h1 class="hero-title">Texto Multilínea:<br /><span class="gradient-text">&lt;textarea&gt; y &lt;label&gt;</span></h1>
+                <p class="hero-subtitle">Captura comentarios y mensajes largos con <code>&lt;textarea&gt;</code>, controla su tamaño con CSS <code>resize</code> y garantiza accesibilidad total con <code>&lt;label&gt;</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📝</div><h3>Atributos Clave</h3><p><code>rows</code>, <code>maxlength</code>, <code>readonly</code> y <code>resize</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba un comentario con límite y estilos.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Textarea y Labels?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Textarea y Labels y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Captura comentarios y mensajes largos con <code>&lt;textarea&gt;</code>, controla su tamaño con CSS <code>resize</code> y garantiza accesibilidad total con <code>&lt;label&gt;</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Uso de Textarea y Labels">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · SINTAXIS Y CSS</span><h2 class="slide-title">&lt;textarea&gt; vs &lt;input&gt;</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>📄 Código HTML</h3><pre class="code-block"><code>&lt;label for="mensaje"&gt;Tu mensaje:&lt;/label&gt;
+&lt;textarea id="mensaje" name="mensaje"
+  rows="4" maxlength="200"
+  placeholder="Escribe aquí..."&gt;&lt;/textarea&gt;</code></pre></div>
+                <div class="glass-card"><h3>🎨 Control de redimensión</h3><pre class="code-block"><code>textarea {
+  resize: vertical; /* none | both | horizontal */
+  min-height: 90px;
+}</code></pre></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Textarea y Labels">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Textarea y Labels</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz Textarea">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="resize: vertical permite estirar solo hacia abajo evitando romper el ancho del diseño." data-err="En CSS la propiedad que controla si el usuario puede arrastrar la esquina del &lt;textarea&gt; es resize.">
+                    <div class="quiz-q-title">1. ¿Qué propiedad CSS permite que el usuario redimensione un <code>&lt;textarea&gt;</code> solo verticalmente?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">resize: vertical</button><button class="quiz-option" data-opt="b">overflow: vertical</button><button class="quiz-option" data-opt="c">flex-direction: column</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="maxlength='200' limita la cantidad máxima de caracteres que el usuario puede escribir." data-err="rows define la altura inicial en líneas; maxlength limita los caracteres.">
+                    <div class="quiz-q-title">2. ¿Qué atributo HTML limita la cantidad máxima de caracteres en un <code>&lt;textarea&gt;</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">rows</button><button class="quiz-option" data-opt="b">maxlength</button><button class="quiz-option" data-opt="c">cols</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Textarea">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio Interactivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; gap: 8px; max-width: 340px; }
+  textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #38bdf8; background: #1e293b; color: #fff; resize: vertical; font-family: inherit; }
+&lt;/style&gt;
+&lt;label for=&quot;bio&quot;&gt;&lt;strong&gt;Biografía (máx. 150 caracteres):&lt;/strong&gt;&lt;/label&gt;
+&lt;textarea id=&quot;bio&quot; rows=&quot;4&quot; maxlength=&quot;150&quot; placeholder=&quot;Cuéntanos sobre ti...&quot;&gt;&lt;/textarea&gt;">Textarea Estilizado</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; gap: 8px; max-width: 340px; }
+  textarea { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #38bdf8; background: #1e293b; color: #fff; resize: vertical; font-family: inherit; }
+&lt;/style&gt;
+&lt;label for="bio"&gt;&lt;strong&gt;Biografía (máx. 150 caracteres):&lt;/strong&gt;&lt;/label&gt;
+&lt;textarea id="bio" rows="4" maxlength="150" placeholder="Cuéntanos sobre ti..."&gt;&lt;/textarea&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

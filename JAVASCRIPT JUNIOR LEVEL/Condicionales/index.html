@@ -14,6 +14,129 @@
             <p>Prueba en tiempo real <code>if / else if / else</code>, <code>switch</code>, el operador ternario, valores <strong>Truthy / Falsy</strong> y cláusulas de guarda (<em>Early Return</em>).</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (CONDICIONALES.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Bloques if, else if y else</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Evalúan condiciones booleanas en orden secuencial. En cuanto una rama resulta verdadera, se ejecuta y el resto se omite.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const nota = 85;
+
+if (nota &gt;= 90) {
+    console.log(&quot;Excelente (A)&quot;);
+} else if (nota &gt;= 70) {
+    console.log(&quot;Aprobado (B)&quot;);
+} else {
+    console.log(&quot;Necesita mejorar&quot;);
+}</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Truthy y Falsy</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">En JavaScript, cualquier valor puede evaluarse dentro de un <code>if</code> como booleano mediante coerción implícita.</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Los únicos valores *Falsy* en JavaScript:</h4>
+<p style="margin:6px 0;line-height:1.6;">1. <code>false</code></p>
+<p style="margin:6px 0;line-height:1.6;">2. <code>0</code>, <code>-0</code> y <code>0n</code> (<code>BigInt</code> cero)</p>
+<p style="margin:6px 0;line-height:1.6;">3. <code>&quot;&quot;</code>, <code>&#x27;&#x27;</code>, `<code> </code><code> </code>` (string vacío)</p>
+<p style="margin:6px 0;line-height:1.6;">4. <code>null</code></p>
+<p style="margin:6px 0;line-height:1.6;">5. <code>undefined</code></p>
+<p style="margin:6px 0;line-height:1.6;">6. <code>NaN</code></p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Valores *Truthy* (todo lo demás):</h4>
+<p style="margin:6px 0;line-height:1.6;"><code>&quot;0&quot;</code>, <code>&quot;false&quot;</code>, <code>&quot; &quot;</code>, <code>[]</code> (array vacío), <code>{}</code> (objeto vacío), <code>function() {}</code>, cualquier número distinto de <code>0</code> o <code>NaN</code>.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const carrito = [];
+if (carrito) {
+    // ⚠️ Entra aquí porque [] es truthy, ¡aunque esté vacío!
+}
+if (carrito.length &gt; 0) {
+    // ✅ Forma correcta de verificar si un array tiene elementos
+}</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Cláusulas de Guarda (Early Return)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">En lugar de anidar múltiples <code>if</code> uno dentro de otro (el antipatrón &quot;pirámide de la muerte&quot; o *arrow code*), valida primero los casos de error o salida y retorna inmediatamente:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>// ❌ Difícil de leer (anidamiento profundo)
+function procesarPago(usuario, monto) {
+    if (usuario) {
+        if (usuario.activo) {
+            if (monto &gt; 0) {
+                return `Pago de $${monto} procesado.`;
+            }
+        }
+    }
+    return &quot;No se pudo procesar.&quot;;
+}
+
+// ✅ Limpio y profesional (Cláusulas de guarda)
+function procesarPagoLimpio(usuario, monto) {
+    if (!usuario) return &quot;Usuario requerido.&quot;;
+    if (!usuario.activo) return &quot;Usuario inactivo.&quot;;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Sentencia switch</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Ideal cuando comparas <strong>una misma expresión</strong> contra múltiples valores exactos (usa comparación estricta <code>===</code> internamente).</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const rol = &quot;editor&quot;;
+
+switch (rol) {
+    case &quot;admin&quot;:
+        console.log(&quot;Acceso total&quot;);
+        break;
+    case &quot;editor&quot;:
+    case &quot;moderador&quot;: // Agrupación de casos (fall-through intencional)
+        console.log(&quot;Acceso de edición&quot;);
+        break;
+    default:
+        console.log(&quot;Acceso de solo lectura&quot;);
+}</code></pre>
+<p style="margin:6px 0;line-height:1.6;">&gt; <strong>Tip de Scope en <code>switch</code>:</strong> Si declaras variables con <code>let</code> o <code>const</code> dentro de un <code>case</code>, envuelve el bloque del <code>case</code> en llaves <code>{ ... }</code> para evitar colisiones de nombres con otros casos.</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Alternativa moderna: Diccionario / Objeto de mapeo</h4>
+<p style="margin:6px 0;line-height:1.6;">Para mapeos directos de clave-valor, un objeto o <code>Map</code> suele ser más conciso y extensible que un <code>switch</code>:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const permisosPorRol = {
+    admin: &quot;Acceso total&quot;,
+    editor: &quot;Acceso de edición&quot;,
+    invitado: &quot;Solo lectura&quot;,
+};
+
+const mensaje = permisosPorRol[rol] ?? &quot;Rol desconocido&quot;;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Operador Ternario (? :)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Es una <strong>expresión</strong> (devuelve un valor) pensada para asignaciones simples en una sola línea:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const edad = 19;
+const tarifa = edad &gt;= 18 ? 15 : 8;</code></pre></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <!-- Tarjeta 1: if / else if / else + Ternario -->
             <section class="card" aria-labelledby="cd1">

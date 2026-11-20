@@ -1,65 +1,240 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Basico/Formularios.html
-     Título: Formularios
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formularios</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formularios en HTML5 (&lt;form&gt;, &lt;input&gt;) — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-    <!-- Formulario para recoger datos del usuario. -->
-    <form action="#" method="POST">
-        <!-- 
-             Nota sobre Accesibilidad (A11y): 
-             Cada <input> DEBERÍA tener una etiqueta <label for="ID_DEL_INPUT"> 
-             para que sea usable por lectores de pantalla y facilitar el clic.
-        -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 BÁSICO · FORMULARIOS</span>
+            <div class="brand-title"><span>📋</span><span>Formularios HTML</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
+            <a class="nav-btn" href="../../index.html" title="Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
 
-        <!-- 
-            Atributos clave en inputs:
-            - 'name': Identificador que recibirá el servidor (backend). Sin esto, el dato no se envía.
-            - 'id': Identificador único para CSS, JS y para vincularlo con etiquetas <label>.
-            - 'required': Validación nativa del navegador para evitar campos vacíos.
-        -->
-        <input type="text" name="nombre" id="nombre" required placeholder="Username">
-        
-        <!-- Permite al usuario seleccionar un color mediante un selector nativo del sistema -->
-        <input type="color" name="tema_color" id="color">
-        
-        <!-- Validaciones de tipo: El navegador verifica el formato @ sin JS extra -->
-        <input type="email" name="email" id="email">
-        
-        <!-- Ofusca los caracteres para seguridad visual al escribir contraseñas -->
-        <input type="password" name="contraseña" id="contraseña">
-        
-        <!-- Checkbox: Valor booleano (on/off) -->
-        <input type="checkbox" name="aceptar" id="aceptar">
-        
-        <!-- 
-            Radios: Para opciones excluyentes. 
-            IMPORTANTE: Deben compartir el mismo 'name' para que el navegador sepa que pertenecen al mismo grupo.
-        -->
-        <input type="radio" name="genero" id="masculino" value="masculino">
-        <input type="radio" name="genero" id="femenino" value="femenino">
-        
-        <!-- Control para subir documentos desde el dispositivo del usuario -->
-        <input type="file" name="archivo" id="archivo">
-        <input type="date" name="fecha" id="fecha">
-        <input type="submit" value="Enviar"> <!-- Gatillo para enviar el formulario -->
-    </form>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Formularios HTML5">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">&lt;form&gt; &amp; &lt;label&gt;</span>
+                    <span class="badge badge-purple">Tipos de &lt;input&gt;</span>
+                    <span class="badge badge-emerald">Validación Nativa</span>
+                </div>
+                <h1 class="hero-title">Domina los<br /><span class="gradient-text">Formularios HTML5</span></h1>
+                <p class="hero-subtitle">Recoge datos de usuarios de forma accesible, usa los tipos nativos de <code>&lt;input&gt;</code> para mostrar el teclado correcto en móviles y valida sin escribir JavaScript.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🏷️</div>
+                        <h3>Estructura y Labels</h3>
+                        <p>Por qué vincular <code>for</code> e <code>id</code> y usar <code>name</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">⌨️</div>
+                        <h3>Tipos y Validación</h3>
+                        <p><code>email</code>, <code>password</code>, <code>number</code>, <code>required</code> y <code>minlength</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio en Vivo</h3>
+                        <p>Construye y valida un formulario de registro al instante.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Formularios HTML?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Formularios HTML y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Recoge datos de usuarios de forma accesible, usa los tipos nativos de <code>&lt;input&gt;</code> para mostrar el teclado correcto en móviles y valida sin escribir JavaScript. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Anatomía de un Formulario">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ESTRUCTURA BASE</span>
+                <h2 class="slide-title">Anatomía de &lt;form&gt;, &lt;label&gt; e &lt;input&gt;</h2>
+                <p class="slide-lead">Cada campo necesita un <code>&lt;label&gt;</code> accesible y un atributo <code>name</code> para identificar el dato al enviarse.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📝 Formulario limpio</h3>
+                    <pre class="code-block"><code>&lt;form action="/registro" method="POST"&gt;
+  &lt;label for="usuario"&gt;Usuario:&lt;/label&gt;
+  &lt;input id="usuario" name="usuario" type="text" required&gt;
+  &lt;button type="submit"&gt;Crear cuenta&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🔎 Atributos clave</h3>
+                    <ul class="styled-list">
+                        <li><code>for</code> + <code>id</code>: al hacer clic en la etiqueta, enfoca el campo.</li>
+                        <li><code>name</code>: clave con la que viaja el valor al servidor.</li>
+                        <li><code>placeholder</code>: pista visual (no reemplaza al <code>&lt;label&gt;</code>).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Tipos de Input y Validación Nativa">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · VALIDACIÓN SIN JAVASCRIPT</span>
+                <h2 class="slide-title">Tipos de &lt;input&gt; y Reglas HTML5</h2>
+                <p class="slide-lead">El navegador valida formatos y longitudes antes de permitir el envío del formulario.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Tipo / Atributo</th><th>Qué hace</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>type="email"</code></td><td>Exige formato válido con <code>@</code> y dominio</td></tr>
+                    <tr><td><code>type="password"</code></td><td>Oculta caracteres sensibles</td></tr>
+                    <tr><td><code>type="checkbox"</code> / <code>radio</code></td><td>Selección múltiple o única</td></tr>
+                    <tr><td><code>required</code> / <code>minlength="6"</code></td><td>Impide enviar vacío o con menos de 6 caracteres</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="5" data-title="Buenas Prácticas: Formularios HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Formularios HTML</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz de Formularios">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Formularios HTML</h2>
+                <p class="slide-lead">Comprueba tu comprensión sobre accesibilidad y validación nativa.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b"
+                    data-ok="El atributo name define el nombre del campo cuando el formulario se envía al servidor."
+                    data-err="placeholder es solo texto de ayuda visual; el servidor recibe los pares name=valor.">
+                    <div class="quiz-q-title">1. ¿Qué atributo identifica el dato de un <code>&lt;input&gt;</code> cuando se envía al servidor?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">placeholder</button>
+                        <button class="quiz-option" data-opt="b">name</button>
+                        <button class="quiz-option" data-opt="c">alt</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="required obliga al usuario a completar el campo antes de que el navegador permita el submit."
+                    data-err="checked es para checkboxes/radios marcados por defecto; required exige que el campo no esté vacío.">
+                    <div class="quiz-q-title">2. ¿Qué atributo impide enviar un formulario si el campo está vacío?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">required</button>
+                        <button class="quiz-option" data-opt="b">checked</button>
+                        <button class="quiz-option" data-opt="c">readonly</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Formularios">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Formularios</h2>
+                <p class="slide-lead">Prueba la validación nativa enviando el formulario con datos vacíos o inválidos.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  form { display: grid; gap: 10px; max-width: 320px; background: #1e293b; padding: 18px; border-radius: 14px; }
+  input, button { padding: 10px; border-radius: 8px; border: 1px solid #334155; }
+  button { background: #38bdf8; color: #0f172a; font-weight: 800; border: 0; cursor: pointer; }
+&lt;/style&gt;
+&lt;form onsubmit=&quot;event.preventDefault(); alert(&#39;¡Formulario válido!&#39;)&quot;&gt;
+  &lt;label for=&quot;u&quot;&gt;Nombre (mín. 3 letras)&lt;/label&gt;
+  &lt;input id=&quot;u&quot; name=&quot;usuario&quot; type=&quot;text&quot; minlength=&quot;3&quot; required placeholder=&quot;Ana&quot;&gt;
+  &lt;label for=&quot;c&quot;&gt;Correo&lt;/label&gt;
+  &lt;input id=&quot;c&quot; name=&quot;email&quot; type=&quot;email&quot; required placeholder=&quot;ana@web.com&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;Registrarme&lt;/button&gt;
+&lt;/form&gt;">Formulario Validado</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  form { display: grid; gap: 10px; max-width: 320px; background: #1e293b; padding: 18px; border-radius: 14px; }
+  input, button { padding: 10px; border-radius: 8px; border: 1px solid #334155; }
+  button { background: #38bdf8; color: #0f172a; font-weight: 800; border: 0; cursor: pointer; }
+&lt;/style&gt;
+&lt;form onsubmit="event.preventDefault(); alert('¡Formulario válido!')"&gt;
+  &lt;label for="u"&gt;Nombre (mín. 3 letras)&lt;/label&gt;
+  &lt;input id="u" name="usuario" type="text" minlength="3" required placeholder="Ana"&gt;
+  &lt;label for="c"&gt;Correo&lt;/label&gt;
+  &lt;input id="c" name="email" type="email" required placeholder="ana@web.com"&gt;
+  &lt;button type="submit"&gt;Registrarme&lt;/button&gt;
+&lt;/form&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
+                <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>
+                <p class="slide-lead">Explora el resto de guías interactivas del módulo.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="index.html"><span class="file-name">🧱 Guía Completa HTML Básico</span><span class="file-path">index.html</span></a>
+                    <a class="file-card" href="Titulos%20y%20parrafos.html"><span class="file-name">📝 Títulos y Párrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
+                    <a class="file-card" href="listas.html"><span class="file-name">📋 Listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="enlaces.html"><span class="file-name">🔗 Enlaces</span><span class="file-path">enlaces.html</span></a>
+                    <a class="file-card" href="img.html"><span class="file-name">🖼️ Imágenes</span><span class="file-path">img.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -1,98 +1,140 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Enlaces avanzados/enlaces avanzado.html
-     Título: Enlaces avanzado
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/formulario.css">
-    <title>Enlaces avanzado</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enlaces Avanzados en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · NAVEGACIÓN</span><div class="brand-title"><span>🔗</span><span>Enlaces Avanzados</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-    <!-- Formulario para recoger datos del usuario. -->
-    <form action="">
-<!-- Formulario de envío de datos (form) -->
-
-
-        <h2>Formulario de contacto</h2>
-
-        <fieldset>
-            <legend>Información básica</legend>
-            <!-- simple inputs-->
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="nombre">Nombre completo</label>
-            <input id="nombre" type="text" placeholder="Jhon Doe">
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Enlaces Avanzados">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">download</span><span class="badge badge-purple">Anclas #id</span><span class="badge badge-emerald">mailto: &amp; tel:</span></div>
+                <h1 class="hero-title">Dominio Total de<br /><span class="gradient-text">Enlaces Avanzados</span></h1>
+                <p class="hero-subtitle">Descubre cómo forzar descargas con <code>download</code>, crear índices internos con anclas suaves, abrir correos con asunto prellenado y enlazar términos locales.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📥</div><h3>Protocolos y Download</h3><p><code>download</code>, <code>mailto:</code>, <code>tel:</code> y <code>rel="nofollow"</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Pon a prueba tus conocimientos.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba anclas internas y enlaces especiales.</p></div>
+                </div>
             </div>
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" placeholder="ejemplo@dominio.com">
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Enlaces Avanzados?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Enlaces Avanzados y para qué sirve?</h2>
             </div>
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-            <div class="form_input">
-                <label for="asunto">Asunto</label>
-                <input id="asunto" type="text" placeholder="Asunto del mensaje">
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Descubre cómo forzar descargas con <code>download</code>, crear índices internos con anclas suaves, abrir correos con asunto prellenado y enlazar términos locales. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
             </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
 
-        </fieldset>
+        <section class="slide" data-slide="3" data-title="Atributos y Protocolos Avanzados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNCIONES EXTRA</span><h2 class="slide-title">Más Allá del Enlace Común</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Caso de uso</th><th>Código HTML</th></tr></thead>
+                <tbody>
+                    <tr><td>Forzar descarga con nombre</td><td><code>&lt;a href="doc.pdf" download="Manual.pdf"&gt;</code></td></tr>
+                    <tr><td>Correo con asunto</td><td><code>&lt;a href="mailto:hi@web.com?subject=Hola"&gt;</code></td></tr>
+                    <tr><td>Llamada en móviles</td><td><code>&lt;a href="tel:+573001234567"&gt;</code></td></tr>
+                    <tr><td>Salto suave a sección</td><td><code>html { scroll-behavior: smooth; }</code> + <code>href="#sec"</code></td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip"><strong>📄 Archivo relacionado:</strong> En esta misma carpeta tienes <a href="terms.html" style="color:#38bdf8;font-weight:700;">terms.html</a> como ejemplo de documento enlazado localmente.</div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Enlaces Avanzados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Enlaces Avanzados</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
 
+        <section class="slide" data-slide="5" data-title="Quiz Enlaces Avanzados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="El atributo download indica al navegador que descargue el archivo en lugar de navegar hacia él." data-err="download es el atributo HTML5 para descargar recursos del mismo origen.">
+                    <div class="quiz-q-title">1. ¿Qué atributo hace que un enlace <code>&lt;a&gt;</code> descargue un archivo en lugar de abrirlo?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">download</button><button class="quiz-option" data-opt="b">save</button><button class="quiz-option" data-opt="c">target="_download"</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="scroll-behavior: smooth en html hace que todas las anclas internas (#id) se desplacen suavemente." data-err="En CSS, scroll-behavior: smooth suaviza el salto de las anclas internas.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad CSS hace que los saltos con anclas (<code>href="#seccion"</code>) se animen suavemente?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">transition: scroll 0.5s</button><button class="quiz-option" data-opt="b">overflow: smooth</button><button class="quiz-option" data-opt="c">scroll-behavior: smooth</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
 
-        
-        <!-- select y option lista desplegable con opciones predefinidas -->
-        
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <Label for="user">Tipo de usuario</Label>
-            <select id="user" name="type-of-user">
-                <option value="user1">Seguidor</option>
-                <option value="user2">Empresa</option>
-                <option value="user3">Otros</option>
-            </select>
-        </div>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Enlaces Avanzados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio Interactivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  html { scroll-behavior: smooth; }
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  nav { display: flex; gap: 12px; margin-bottom: 16px; }
+  a { color: #38bdf8; font-weight: 600; }
+  .box { height: 180px; background: #1e293b; border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+&lt;/style&gt;
+&lt;nav&gt;&lt;a href=&quot;#sec1&quot;&gt;Ir a Sección 1&lt;/a&gt;&lt;a href=&quot;#sec2&quot;&gt;Ir a Sección 2&lt;/a&gt;&lt;a href=&quot;mailto:info@web.com?subject=Consulta&quot;&gt;Enviar Email&lt;/a&gt;&lt;/nav&gt;
+&lt;div id=&quot;sec1&quot; class=&quot;box&quot;&gt;Sección 1&lt;/div&gt;
+&lt;div id=&quot;sec2&quot; class=&quot;box&quot;&gt;Sección 2&lt;/div&gt;">Anclas Suaves</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  html { scroll-behavior: smooth; }
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  nav { display: flex; gap: 12px; margin-bottom: 16px; }
+  a { color: #38bdf8; font-weight: 600; }
+  .box { height: 180px; background: #1e293b; border-radius: 10px; padding: 16px; margin-bottom: 14px; }
+&lt;/style&gt;
+&lt;nav&gt;&lt;a href="#sec1"&gt;Ir a Sección 1&lt;/a&gt;&lt;a href="#sec2"&gt;Ir a Sección 2&lt;/a&gt;&lt;a href="mailto:info@web.com?subject=Consulta"&gt;Enviar Email&lt;/a&gt;&lt;/nav&gt;
+&lt;div id="sec1" class="box"&gt;Sección 1&lt;/div&gt;
+&lt;div id="sec2" class="box"&gt;Sección 2&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
 
-        <!-- datalist -->
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <Label>Referente</Label>
-            <input list="referente" name="referente">
-            <datalist id="referente" name="type-of-user">
-                <option value="Fredy">Persona normal</option>
-                <option value="Una Empresa">Compañia</option>
-                <option value="Amigo">Conocido</option>
-            </datalist>
-        </div>
-
-        <!--text area-->
-
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="mensaje">mensaje</label>
-            <!-- con row puedo controlar la cantidad de lineas que se pueden ecribir-->
-            <textarea id="mensaje" rows="8" placeholder="Deja un mensaje..."></textarea>
-        </div>
-    <!-- Contenedor con clase(s) form_input para estilo o disposición. -->
-        <div class="form_input">
-            <label for="tyc">Acepto los <a href="terms.html">términos y condiciones</a></label>
-            <input type="checkbox" id="tyc" class="checkbox">
-        </div>
-        
-    </form>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="terms.html"><span class="file-name">📄 Ejemplo: terms.html</span><span class="file-path">terms.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

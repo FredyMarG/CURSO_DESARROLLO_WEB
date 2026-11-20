@@ -14,6 +14,138 @@
             <p>Experimenta con asignación compuesta, igualdad estricta (<code>===</code>), Nullish Coalescing (<code>??</code>), Optional Chaining (<code>?.</code>) y asignación lógica.</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (OPERADORES.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Operadores de Asignación</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Asignan un valor a la variable de la izquierda basándose en la expresión de la derecha.</p>
+<p style="margin:6px 0;line-height:1.6;">| Operador | Nombre | Ejemplo | Equivalente |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>=</code> | Asignación simple | <code>x = 10</code> | <code>x = 10</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>+=</code> | Suma y asignación | <code>x += 5</code> | <code>x = x + 5</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>-=</code> | Resta y asignación | <code>x -= 3</code> | <code>x = x - 3</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>*=</code> | Multiplicación y asignación | <code>x *= 2</code> | <code>x = x * 2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>/=</code> | División y asignación | <code>x /= 2</code> | <code>x = x / 2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%=</code> | Residuo y asignación | <code>x %= 3</code> | <code>x = x % 3</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code><strong>=</code> | Exponente y asignación | <code>x </strong>= 2</code> | <code>x = x ** 2</code> |</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Operadores de Asignación Lógica (ES2021)</h4>
+<p style="margin:6px 0;line-height:1.6;">Combinan evaluación lógica con asignación y solo escriben si la condición de cortocircuito se cumple:</p>
+<p style="margin:6px 0;line-height:1.6;">| Operador | Significado | Equivalente | Caso de uso real |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>x ??= y</code> | Asigna <code>y</code> solo si <code>x</code> es <code>null</code> o <code>undefined</code> | <code>x ?? (x = y)</code> | Valores por defecto sin pisar <code>0</code> ni <code>false</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>x ||= y</code> | Asigna <code>y</code> solo si <code>x</code> es *falsy* | <code>x || (x = y)</code> | Rellenar strings vacíos o contadores en <code>0</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>x &amp;&amp;= y</code> | Asigna <code>y</code> solo si <code>x</code> es *truthy* | <code>x &amp;&amp; (x = y)</code> | Actualizar un valor solo si ya existía |</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const configuracion = { tema: &quot;&quot;, reintentos: 0 };
+
+configuracion.tema ||= &quot;oscuro&quot;;      // &quot;&quot; es falsy → cambia a &quot;oscuro&quot;
+configuracion.reintentos ??= 3;       // 0 NO es nullish → mantiene 0
+configuracion.usuario ??= &quot;Invitado&quot;; // undefined → asigna &quot;Invitado&quot;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Operadores Aritméticos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Operador | Descripción | Ejemplo | Resultado |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>+</code> | Suma (o concatenación si hay un string) | <code>10 + 5</code> | <code>15</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>-</code> | Resta | <code>10 - 5</code> | <code>5</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>*</code> | Multiplicación | <code>4 * 3</code> | <code>12</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>/</code> | División | <code>10 / 4</code> | <code>2.5</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%</code> | Módulo (resto de la división entera) | <code>10 % 3</code> | <code>1</code> (útil para saber pares: <code>n % 2 === 0</code>) |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code><strong></code> | Exponenciación (ES2016) | <code>2 </strong> 3</code> | <code>8</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>++</code> | Incremento en 1 | <code>let i = 1; i++;</code> | <code>2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>--</code> | Decremento en 1 | <code>let i = 3; i--;</code> | <code>2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; <strong>Prefijo vs Sufijo en <code>++</code> / <code>--</code>:</strong> <code>++x</code> incrementa y devuelve el nuevo valor; <code>x++</code> devuelve el valor actual y luego incrementa. Para evitar confusiones, úsalos en su propia línea o prefiere <code>x += 1</code>.</p></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Operadores de Comparación</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Evalúan dos operandos y siempre devuelven un booleano (<code>true</code> o <code>false</code>).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Igualdad Débil (<code>==</code>) vs Igualdad Estricta (<code>===</code>)</h4>
+<ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong><code>==</code> / <code>!=</code>:</strong> Realizan <strong>coerción de tipos</strong> antes de comparar, generando resultados contraintuitivos (<code>0 == &quot;&quot;</code> es <code>true</code>, <code>null == undefined</code> es <code>true</code>).</li>
+<li>* <strong><code>===</code> / <code>!==</code>:</strong> Comparan <strong>valor Y tipo</strong> sin convertir nada. <strong>Úsalos siempre.</strong></li>
+</ul>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>5 == &quot;5&quot;    // true  (coerción peligrosa)
+5 === &quot;5&quot;   // false (number !== string)
+0 == false  // true
+0 === false // false</code></pre>
+<p style="margin:6px 0;line-height:1.6;">| Operador | Descripción | Ejemplo |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>===</code> | Estrictamente igual | <code>&quot;a&quot; === &quot;a&quot;</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>!==</code> | Estrictamente diferente | <code>5 !== &quot;5&quot;</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>&gt;</code> / <code>&gt;=</code> | Mayor / Mayor o igual | <code>18 &gt;= 18</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>&lt;</code> / <code>&lt;=</code> | Menor / Menor o igual | <code>10 &lt; 20</code> → <code>true</code> |</p></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Operadores Lógicos y Cortocircuito (Short-Circuit)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Operador | Nombre | Comportamiento |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>&amp;&amp;</code> | AND lógico | Devuelve el primer valor *falsy* o el último valor si todos son *truthy* |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>||</code> | OR lógico | Devuelve el primer valor *truthy* o el último valor si todos son *falsy* |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>!</code> | NOT lógico | Invierte el valor booleano (<code>!true</code> → <code>false</code>, <code>!!&quot;hola&quot;</code> → <code>true</code>) |</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Evaluación en Cortocircuito</h4>
+<p style="margin:6px 0;line-height:1.6;">JavaScript evalúa de izquierda a derecha y se detiene en cuanto el resultado es definitivo:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const estaLogueado = true;
+estaLogueado &amp;&amp; console.log(&quot;Acceso concedido&quot;); // Ejecuta el console.log
+
+const puerto = process.env.PORT || 3000; // Si PORT es falsy, usa 3000</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Operadores Modernos Imprescindibles (ES2020+)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;">Nullish Coalescing (<code>??</code>)</h4>
+<p style="margin:6px 0;line-height:1.6;">A diferencia de <code>||</code> (que reacciona a <strong>todos</strong> los valores *falsy* como <code>0</code>, <code>&quot;&quot;</code> o <code>false</code>), <code>??</code> solo activa el valor por defecto cuando la izquierda es <strong><code>null</code> o <code>undefined</code></strong>:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const stock = 0;
+console.log(stock || 10); // 10  ❌ Error lógico: 0 es un stock válido
+console.log(stock ?? 10); // 0   ✅ Correcto: 0 no es null ni undefined</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Optional Chaining (<code>?.</code>)</h4>
+<p style="margin:6px 0;line-height:1.6;">Permite leer propiedades anidadas, índices o llamar métodos sin que la aplicación explote con <code>TypeError</code> si algún eslabón intermedio es <code>null</code> o <code>undefined</code>:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const usuario = { perfil: null };
+
+// Sin ?. lanzaría TypeError: Cannot read properties of null
+const ciudad = usuario.perfil?.direccion?.ciudad ?? &quot;Sin ciudad&quot;;
+console.log(ciudad); // &quot;Sin ciudad&quot;
+
+// También funciona con arrays y métodos:
+const primerItem = usuario.pedidos?.[0];
+const saludo = usuario.saludar?.();</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Operador Ternario (<code>condición ? siTrue : siFalse</code>)</h4>
+<p style="margin:6px 0;line-height:1.6;">Es la única expresión condicional en línea que devuelve un valor:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const edad = 20;
+const categoria = edad &gt;= 18 ? &quot;Adulto&quot; : &quot;Menor&quot;;</code></pre></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <!-- Tarjeta 1: Acumulador con asignación compuesta -->
             <section class="card" aria-labelledby="op1">

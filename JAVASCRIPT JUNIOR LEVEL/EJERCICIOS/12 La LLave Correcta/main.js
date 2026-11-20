@@ -1,92 +1,84 @@
-/** 
- * Lógica para la generación dinámica, renderizado optimizado y selección de llaves en el DOM.
- * 
- * FLUJO:
- * 1. Selecciona contenedores.
- * 2. Genera datos aleatorios (modelo y precio).
- * 3. Crea elementos HTML en memoria usando un Fragmento (Rendimiento).
- * 4. Inyecta todo al DOM en una sola operación.
+/**
+ * Lógica para la generación dinámica, renderizado optimizado con DocumentFragment
+ * y selección accesible de llaves en el DOM.
  */
 
-const contenedor = document.querySelector(".flex-container"),
-      boton = document.querySelector(".send-button")
-let botonAntiguo = boton.value
-boton.value = botonAntiguo.toUpperCase()
+const contenedor = document.querySelector(".flex-container");
+const boton = document.querySelector(".send-button");
+const form = document.getElementById("keyForm");
+const keyDataInput = document.querySelector(".key-data");
+const statusPill = document.getElementById("selectedStatus");
+const resultBox = document.getElementById("resultBox");
+
+boton.value = boton.value.toUpperCase();
 
 /**
- * Genera la estructura de datos visual (HTML) de una llave individual.
- *
- * @param {string} nombre - Nombre descriptivo de la llave (ej. "Llave 1").
- * @param {string} modelo - Identificador único o número de serie del modelo.
- * @param {string} precio - Valor comercial de la llave formateado como string.
- * @returns {string[]} Arreglo con HTML para imagen, nombre, modelo y precio.
+ * Genera el contenido HTML de una tarjeta de llave.
  */
 function crearLLave(nombre, modelo, precio) {
-    /**
-     * Se define la imagen. Nota: Se asume que 'llave.jpg' reside en la raíz del proyecto.
-     * @type {string}
-     */
-    const img = `<img class="llave-img" src="llave.jpg" alt="Llave">`
-
-    /** @type {string} Título de la tarjeta */
-    nombre = `<h2>${nombre}</h2>`
-
-    /** 
-     * Encabezado de nivel 3 para el modelo. 
-     * Se asigna el ID dinámicamente para que sea fácilmente identificable.
-     * @type {string} 
-     */
-    modelo = `<h3 id="${modelo}">${modelo}</h3>`
-
-    /** @type {string} Párrafo con el precio resaltado */
-    precio = `<p>Precio: <b>${precio}</b></p>`
-
-    return [img, nombre, modelo, precio]
+    const img = `<img class="llave-img" src="llave.jpg" alt="${nombre}">`;
+    const titulo = `<h2>${nombre}</h2>`;
+    const sub = `<h3 id="${modelo}">${modelo}</h3>`;
+    const valor = `<p>Precio: <b>${precio}</b></p>`;
+    return [img, titulo, sub, valor];
 }
 
 /**
- * Escribe el identificador numérico de la llave seleccionada en el campo oculto del formulario.
- * @param {string} number - Valor del modelo capturado de la tarjeta seleccionada.
+ * Actualiza el campo oculto del formulario y el feedback visual.
  */
-const changeHidden = (number)=>{
-    document.querySelector(".key-data").value = number
+function seleccionarLlave(card, nombre, modelo, precio) {
+    document.querySelectorAll(".flex-item.selected").forEach((el) => {
+        el.classList.remove("selected");
+    });
+    card.classList.add("selected");
+    keyDataInput.value = modelo;
+
+    if (statusPill) {
+        statusPill.textContent = `🔑 Seleccionaste: ${nombre} — ${modelo} (${precio})`;
+        statusPill.classList.add("has-selection");
+    }
+    if (resultBox) {
+        resultBox.className = "result-box";
+        resultBox.textContent = "";
+    }
 }
 
-/** 
- * OPTIMIZACIÓN: El DocumentFragment actúa como un "piso falso". 
- * Construimos todo sobre él y luego lo "pegamos" al DOM real de golpe. 
- */
-let fragment = document.createDocumentFragment()
+const fragment = document.createDocumentFragment();
 
 for (let i = 1; i <= 20; i++) {
-    // Generación de identificador único entre 0 y 9999
-    let modeloRandom = Math.floor(Math.random() * 10000)
+    const modeloRandom = Math.floor(Math.random() * 9000) + 1000;
+    const precioRandom = `$${(Math.random() * 10 + 30).toFixed(2)}`;
+    const nombre = `Llave ${i}`;
+    const modelo = `Modelo ${modeloRandom}`;
 
-    // Generación de precio con rango dinámico y redondeo a 2 decimales
-    let precioRandom = (Math.random() * 10 + 30).toFixed(2)
-    
-    let llave = crearLLave(`Llave ${i}`, `Modelo ${modeloRandom}`, `$${precioRandom}`)
+    const llave = crearLLave(nombre, modelo, precioRandom);
+    const div = document.createElement("div");
 
-    let div = document.createElement("div")
+    div.tabIndex = 0;
+    div.setAttribute("role", "button");
+    div.classList.add(`item-${i}`, "flex-item");
+    div.innerHTML = llave.join("");
 
-    // Closure: Cada div recuerda su 'modeloRandom' específico gracias al ámbito del bucle.
-    div.addEventListener("click", ()=>{
-        changeHidden(`Modelo ${modeloRandom}`)
-    })
+    div.addEventListener("click", () => seleccionarLlave(div, nombre, modelo, precioRandom));
+    div.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            seleccionarLlave(div, nombre, modelo, precioRandom);
+        }
+    });
 
-    /**
-     * ACCESIBILIDAD (A11y):
-     * ACCESIBILIDAD: El tabIndex hace que el DIV (que no es interactivo por defecto) 
-     * sea detectable por lectores de pantalla y navegable con la tecla TAB.
-     */
-    div.tabIndex = i
-    div.classList.add(`item-${i}`,`flex-item`)
-
-    // Inyección de piezas de la llave.
-    // Nota: innerHTML es rápido aquí, pero en apps con inputs de usuario usaríamos nodos.
-    div.innerHTML = llave[0] + llave[1] + llave[2] + llave[3]
-
-    fragment.appendChild(div)
+    fragment.appendChild(div);
 }
 
-contenedor.appendChild(fragment)
+contenedor.appendChild(fragment);
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    if (!keyDataInput.value) {
+        resultBox.textContent = "⚠️ Primero selecciona una llave haciendo clic sobre su tarjeta.";
+        resultBox.className = "result-box err";
+        return;
+    }
+    resultBox.textContent = `✅ ¡Pedido confirmado! El cerrajero llevará la llave ${keyDataInput.value}.`;
+    resultBox.className = "result-box ok";
+});

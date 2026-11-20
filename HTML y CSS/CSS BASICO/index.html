@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Básico — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · FUNDAMENTOS</span>
+            <div class="brand-title"><span>🎨</span><span>CSS Básico</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: CSS Básico">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">Box Model</span>
+                    <span class="badge badge-purple">Tipografía &amp; Colores</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">CSS Básico</span></h1>
+                <p class="hero-subtitle">Aprende cómo el navegador dibuja cada etiqueta HTML como una caja rectangular y controla sus colores, tipografía, bordes, márgenes y sombras.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📦</div>
+                        <h3>El Modelo de Caja</h3>
+                        <p>Content, Padding, Border y Margin: la base de todo diseño web.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">📏</div>
+                        <h3>Unidades de Medida</h3>
+                        <p>Cuándo usar <code>px</code>, <code>%</code>, <code>rem</code> y <code>em</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador Box Model</h3>
+                        <p>Mueve sliders y observa la diferencia entre <code>content-box</code> y <code>border-box</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Anatomía de una Regla CSS">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · SINTAXIS Y SELECTORES</span>
+                <h2 class="slide-title">¿Cómo funciona una regla CSS?</h2>
+                <p class="slide-lead">CSS selecciona elementos del HTML y les aplica pares de <code>propiedad: valor;</code>.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧩 Anatomía básica</h3>
+                    <pre class="code-block"><code>/* Selector de clase (reutilizable) */
+.tarjeta {
+  background-color: #0f172a;
+  color: #f8fafc;
+  padding: 20px;
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🎯 Selectores esenciales</h3>
+                    <ul class="styled-list">
+                        <li><strong>Etiqueta:</strong> <code>p { }</code> — aplica a todos los párrafos.</li>
+                        <li><strong>Clase:</strong> <code>.boton { }</code> — la forma recomendada para estilizar.</li>
+                        <li><strong>ID:</strong> <code>#menu { }</code> — único por página; mejor reservarlo para JS o anclas.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <strong>💡 Buena práctica:</strong> Enlaza tu CSS externo en el <code>&lt;head&gt;</code> con <code>&lt;link rel="stylesheet" href="style.css"&gt;</code> para mantener HTML y estilos separados y fáciles de mantener.
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="El Modelo de Caja (Box Model)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · CONCEPTO REY DE CSS</span>
+                <h2 class="slide-title">El Modelo de Caja (Box Model)</h2>
+                <p class="slide-lead">Cada elemento HTML es una caja compuesta por cuatro capas concéntricas de adentro hacia afuera.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧅 Las 4 capas</h3>
+                    <ul class="styled-list">
+                        <li><strong>1. Content:</strong> el texto o imagen (<code>width</code> / <code>height</code>).</li>
+                        <li><strong>2. Padding:</strong> relleno interno entre el contenido y el borde (hereda el fondo).</li>
+                        <li><strong>3. Border:</strong> el contorno visible de la caja.</li>
+                        <li><strong>4. Margin:</strong> espacio externo transparente que separa la caja de sus vecinas.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🛡️ El reset obligatorio: <code>border-box</code></h3>
+                    <pre class="code-block"><code>*, *::before, *::after {
+  box-sizing: border-box;
+}</code></pre>
+                    <p style="margin-top:8px;">Con <code>border-box</code>, si dices <code>width: 300px</code>, la caja mide exactamente 300px aunque agregues padding y borde.</p>
+                </div>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Analogía mental:</strong> Imagina un cuadro enmarcado en una galería: la pintura es el <strong>Content</strong>, el paspartú blanco es el <strong>Padding</strong>, el marco de madera es el <strong>Border</strong> y la distancia hasta el siguiente cuadro en la pared es el <strong>Margin</strong>.
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Unidades de Medida">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · TAMAÑOS Y ESCALADO</span>
+                <h2 class="slide-title">Unidades Absolutas vs Relativas</h2>
+                <p class="slide-lead">Elegir la unidad correcta hace que tu diseño sea legible y accesible en cualquier pantalla.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Unidad</th><th>Tipo</th><th>Referencia</th><th>Cuándo usarla</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>px</code></td><td>Absoluta</td><td>Píxeles CSS</td><td>Bordes (<code>1px</code>), sombras, radios pequeños</td></tr>
+                    <tr><td><code>rem</code></td><td>Relativa</td><td>Tamaño de fuente del <code>&lt;html&gt;</code> (16px)</td><td>Tipografías, paddings y márgenes consistentes</td></tr>
+                    <tr><td><code>em</code></td><td>Relativa</td><td>Tamaño de fuente del padre/elemento</td><td>Espaciados que escalan con el botón o texto</td></tr>
+                    <tr><td><code>%</code></td><td>Relativa</td><td>Contenedor padre</td><td>Anchos fluidos (<code>width: 100%</code>)</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Tipografía y Colores">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ESTÉTICA Y LEGIBILIDAD</span>
+                <h2 class="slide-title">Propiedades de Texto y Sistemas de Color</h2>
+                <p class="slide-lead">La buena tipografía y el contraste adecuado definen el 80% de la calidad visual de una web.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>✍️ Tipografía legible</h3>
+                    <pre class="code-block"><code>body {
+  font-family: 'Outfit', system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6; /* Aire entre líneas */
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🌈 Formatos de color</h3>
+                    <ul class="styled-list">
+                        <li><strong>HEX:</strong> <code>#38bdf8</code> (compacto y universal).</li>
+                        <li><strong>RGB / RGBA:</strong> <code>rgba(56, 189, 248, 0.2)</code> (ideal para transparencias).</li>
+                        <li><strong>HSL:</strong> <code>hsl(199, 89%, 60%)</code> (tono, saturación, brillo: muy intuitivo).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="Fondos, Bordes y Sombras">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PROFUNDIDAD VISUAL</span>
+                <h2 class="slide-title">Gradientes, Border-Radius y Box-Shadow</h2>
+                <p class="slide-lead">Crea tarjetas modernas con profundidad sutil sin recurrir a imágenes pesadas.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🌅 Gradientes CSS</h3>
+                    <pre class="code-block"><code>.hero {
+  background: linear-gradient(135deg, #0284c7, #6366f1);
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>☁️ Sombras realistas</h3>
+                    <pre class="code-block"><code>.card {
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}</code></pre>
+                    <p style="margin-top:8px;">Orden de valores: <code>offset-x offset-y blur spread color</code>.</p>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Tabla de selectores comunes">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Tabla de selectores comunes</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Tipo                 | Ejemplo                | Descripción breve                                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|----------------------|------------------------|-----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Universal            | <code>*</code>                    | Selecciona todos los elementos.                                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Tipo (etiqueta)      | <code>p</code>, <code>h1</code>, <code>div</code>       | Selecciona por nombre de elemento.                                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Clase                | <code>.btn</code>                 | Elementos con <code>class=&quot;btn&quot;</code>.                                              |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| ID                   | <code>#main</code>                | Elemento con <code>id=&quot;main&quot;</code>.                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Atributo             | <code>a[target=&quot;_blank&quot;]</code>   | Elementos con atributo que cumple una condición.                          |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Descendiente         | <code>nav a</code>                | <code>a</code> dentro de <code>nav</code> (en cualquier profundidad).                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Hijo directo         | <code>ul &gt; li</code>              | <code>li</code> hijos directos de <code>ul</code>.                                              |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Hermano adyacente    | <code>h2 + p</code>               | Primer <code>p</code> inmediatamente después de <code>h2</code>.                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Hermano general      | <code>h2 ~ p</code>               | Todos los <code>p</code> hermanos posteriores de <code>h2</code>.                               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Pseudo‑clase estado  | <code>a:hover</code>              | Estado especial, por ejemplo, al pasar el ratón.                          |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Pseudo‑clase estructura | <code>li:first-child</code>    | Según posición entre hermanos.                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| Pseudo‑elemento      | <code>p::first-line</code>        | Parte de un elemento (primera línea, letra, etc.).                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Propiedades por categoría</p>
+<p style="margin-bottom:8px;line-height:1.6;">A continuación, una <strong>tabla de referencia rápida</strong> con muchas de las propiedades CSS más usadas, agrupadas por función (no exhaustiva, pero amplia).</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Texto y tipografía">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Texto y tipografía</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad        | Ejemplo                 | Descripción breve                                                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|------------------|-------------------------|----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>color</code>          | <code>color: #333;</code>          | Color del texto.                                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>font-family</code>    | <code>font-family: Arial;</code>   | Familia de fuente preferida.                                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>font-size</code>      | <code>font-size: 16px;</code>      | Tamaño de la fuente.                                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>font-weight</code>    | <code>font-weight: 700;</code>     | Grosor (<code>normal</code>, <code>bold</code>, <code>100–900</code>).                                    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>font-style</code>     | <code>font-style: italic;</code>   | Estilo (<code>normal</code>, <code>italic</code>, <code>oblique</code>).                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>line-height</code>    | <code>line-height: 1.5;</code>     | Altura de línea.                                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>font-variant</code>   | <code>font-variant: small-caps;</code> | Variantes tipográficas (versalitas, etc.).                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>text-align</code>     | <code>text-align: center;</code>   | Alineación horizontal del texto.                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>text-decoration</code>| <code>text-decoration: underline;</code> | Subrayado, tachado, etc.                                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>text-transform</code> | <code>text-transform: uppercase;</code> | Mayúsculas, minúsculas, capitalización.                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>letter-spacing</code> | <code>letter-spacing: 0.05em;</code> | Espacio entre letras.                                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>word-spacing</code>   | <code>word-spacing: 0.2em;</code>  | Espacio entre palabras.                                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>text-indent</code>    | <code>text-indent: 2em;</code>     | Sangría de la primera línea.                                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>white-space</code>    | <code>white-space: nowrap;</code>  | Cómo se manejan espacios y saltos de línea.                              |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>text-overflow</code>  | <code>text-overflow: ellipsis;</code> | Cómo mostrar texto recortado (p. ej. <code>...</code>).                         |</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Fondo y color">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Fondo y color</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad            | Ejemplo                                   | Descripción breve                                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|----------------------|-------------------------------------------|-----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-color</code>   | <code>background-color: #f5f5f5;</code>             | Color de fondo.                                                           |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-image</code>   | <code>background-image: url(bg.png);</code>         | Imagen de fondo.                                                          |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-repeat</code>  | <code>background-repeat: no-repeat;</code>          | Repetición de la imagen de fondo.                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-position</code>| <code>background-position: center center;</code>    | Posición inicial del fondo.                                               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-size</code>    | <code>background-size: cover;</code>                | Tamaño del fondo (<code>auto</code>, <code>cover</code>, <code>contain</code>, etc.).                      |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-attachment</code> | <code>background-attachment: fixed;</code>      | Fijo respecto a la ventana o al elemento.                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background-clip</code>    | <code>background-clip: padding-box;</code>          | Hasta dónde se pinta el fondo.                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>background</code>         | <code>background: #000 url(bg.png) no-repeat center/cover;</code> | Atajo para múltiples propiedades de fondo. |</p></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Modelo de caja (Box model), espaciado y borde">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CSS.md</span>
+                <h2 class="slide-title">Modelo de caja (Box model), espaciado y borde</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">| Propiedad        | Ejemplo                      | Descripción breve                                                                |</p>
+<p style="margin-bottom:8px;line-height:1.6;">|------------------|------------------------------|----------------------------------------------------------------------------------|</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>width</code>          | <code>width: 300px;</code>              | Ancho del contenido.                                                     |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>height</code>         | <code>height: 200px;</code>             | Alto del contenido.                                                      |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>max-width</code>      | <code>max-width: 100%;</code>           | Ancho máximo.                                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>max-height</code>     | <code>max-height: 80vh;</code>          | Alto máximo.                                                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>min-width</code>      | <code>min-width: 200px;</code>          | Ancho mínimo.                                                            |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>min-height</code>     | <code>min-height: 50px;</code>          | Alto mínimo.                                                             |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>padding</code>        | <code>padding: 1rem;</code>             | Relleno interno (atajo).                                                 |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>padding-top</code>    | <code>padding-top: 10px;</code>         | Relleno por lado.                                                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>margin</code>         | <code>margin: 0 auto;</code>            | Margen externo (atajo).                                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>margin-top</code>     | <code>margin-top: 2rem;</code>          | Margen por lado.                                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>border</code>         | <code>border: 1px solid #ccc;</code>    | Borde completo (atajo).                                                  |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>border-width</code>   | <code>border-width: 2px;</code>         | Ancho del borde.                                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>border-style</code>   | <code>border-style: dashed;</code>      | Estilo (<code>solid</code>, <code>dashed</code>, etc.).                                        |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>border-color</code>   | <code>border-color: red;</code>         | Color del borde.                                                         |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>border-radius</code>  | <code>border-radius: 8px;</code>        | Esquinas redondeadas.                                                    |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>box-sizing</code>     | <code>box-sizing: border-box;</code>    | Cómo se calcula <code>width</code> (incluyendo borde y padding o no).               |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>box-shadow</code>     | <code>box-shadow: 0 4px 10px rgba(0,0,0,0.2);</code> | Sombra externa de la caja.                                           |</p></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR BOX MODEL -->
+        <section class="slide" data-slide="11" data-title="Simulador del Box Model">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador del Modelo de Caja</h2>
+                <p class="slide-lead">Ajusta <code>padding</code>, <code>border</code>, <code>margin</code> y observa cómo cambia el tamaño total según <code>box-sizing</code>.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>box-sizing</label>
+                        <select id="bmSizing">
+                            <option value="border-box">border-box (Recomendado)</option>
+                            <option value="content-box">content-box (Por defecto)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>padding <span id="bmPadVal">20px</span></label>
+                        <input type="range" id="bmPad" min="0" max="48" value="20" />
+                    </div>
+                    <div class="sim-control">
+                        <label>border <span id="bmBorVal">6px</span></label>
+                        <input type="range" id="bmBor" min="0" max="20" value="6" />
+                    </div>
+                    <div class="sim-control">
+                        <label>margin <span id="bmMarVal">16px</span></label>
+                        <input type="range" id="bmMar" min="0" max="40" value="16" />
+                    </div>
+                    <div class="sim-control">
+                        <label>border-radius <span id="bmRadVal">14px</span></label>
+                        <input type="range" id="bmRad" min="0" max="40" value="14" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" style="display:grid; place-items:center; background:rgba(245,158,11,0.08);">
+                        <div id="bmBox" style="width:220px; background:linear-gradient(135deg,#0284c7,#4f46e5); color:#fff; border-style:solid; border-color:#38bdf8; text-align:center; font-weight:700; transition:all 0.15s;">
+                            <div style="background:rgba(7,10,19,0.55); padding:10px; border-radius:6px;">width: 220px<br><span id="bmTotal" style="font-size:0.82rem; color:#6ee7b7;">Total real: 220px</span></div>
+                        </div>
+                    </div>
+                    <pre class="sim-code" id="bmCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de CSS Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de CSS Básico</h2>
+                <p class="slide-lead">Verifica que dominas el Box Model, selectores y unidades.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="border-box incluye el padding y el border dentro del width declarado, evitando que la caja crezca."
+                    data-err="Con content-box (el valor por defecto), el padding y el border se suman fuera del width.">
+                    <div class="quiz-q-title">1. Si una caja tiene <code>width: 200px; padding: 20px; border: 5px solid; box-sizing: border-box;</code>, ¿cuánto mide de ancho total en pantalla?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">250px</button>
+                        <button class="quiz-option" data-opt="b">200px</button>
+                        <button class="quiz-option" data-opt="c">225px</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="padding es el espacio interno entre el contenido y el borde; margin es el espacio externo fuera del borde."
+                    data-err="margin separa elementos entre sí por fuera del borde.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad agrega espacio interno entre el texto de un botón y su borde?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">padding</button>
+                        <button class="quiz-option" data-opt="b">margin</button>
+                        <button class="quiz-option" data-opt="c">border-spacing</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="1rem equivale siempre al font-size del elemento raíz &lt;html&gt; (por defecto 16px)."
+                    data-err="em depende del elemento padre; rem depende siempre de la raíz &lt;html&gt;.">
+                    <div class="quiz-q-title">3. ¿A qué hace referencia la unidad relativa <code>rem</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Al ancho de la ventana</button>
+                        <button class="quiz-option" data-opt="b">Al font-size del elemento padre directo</button>
+                        <button class="quiz-option" data-opt="c">Al font-size del elemento raíz (&lt;html&gt;)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #f8fafc; }
+  .caja { width: 280px; padding: 24px; margin: 16px auto; border: 4px solid #0284c7; border-radius: 16px; background: linear-gradient(135deg, #e0f2fe, #eef2ff); box-shadow: 0 14px 28px rgba(2, 132, 199, 0.2); text-align: center; box-sizing: border-box; }
+&lt;/style&gt;
+&lt;div class=&quot;caja&quot;&gt;&lt;h2&gt;Border-Box&lt;/h2&gt;&lt;p&gt;Ancho exacto de 280px incluyendo padding y borde.&lt;/p&gt;&lt;/div&gt;">Tarjeta Box Model</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  .pill { padding: 12px 28px; border-radius: 999px; background: linear-gradient(90deg, #38bdf8, #818cf8); color: #0f172a; font-weight: 800; box-shadow: 0 8px 24px rgba(56,189,248,0.4); }
+&lt;/style&gt;
+&lt;div class=&quot;pill&quot;&gt;Gradiente + Sombra&lt;/div&gt;">Botón Gradiente</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #f8fafc; }
+  .caja { width: 280px; padding: 24px; margin: 16px auto; border: 4px solid #0284c7; border-radius: 16px; background: linear-gradient(135deg, #e0f2fe, #eef2ff); box-shadow: 0 14px 28px rgba(2, 132, 199, 0.2); text-align: center; box-sizing: border-box; }
+&lt;/style&gt;
+&lt;div class="caja"&gt;&lt;h2&gt;Border-Box&lt;/h2&gt;&lt;p&gt;Ancho exacto de 280px incluyendo padding y borde.&lt;/p&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: EJERCICIOS Y SUBTEMAS UNIDOS -->
+        <section class="slide" data-slide="14" data-title="Ejercicios y Subtemas Unidos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · EJERCICIOS Y RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">🛠️ Ejercicios Prácticos y Subtemas Unidos</h2>
+                <p class="slide-lead">Todas las subcarpetas de CSS Básico están integradas en esta guía. Carga el ejercicio real en el laboratorio o inspecciona cada hoja de estilos.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>🪪 Ejercicio Real: Tarjeta de Presentación</h3>
+                <p style="margin-top:6px;">Aplica Box Model, <code>margin: auto</code>, <code>border-radius</code>, <code>box-shadow</code> y variantes de color (<code>.red-card</code>, <code>.green-card</code>).</p>
+                <button class="try-lab-btn" data-lab-code="&lt;style&gt;
+  body { background: #fff; font-family: sans-serif; color: white; padding: 16px; }
+  .card { background: #6ac; text-align: center; width: 300px; margin: 16px auto; padding: 20px 14px; box-shadow: 0 0 30px #0006; border-radius: 8px; }
+  .red-card { background: #f86; }
+  .green-card { background: #5b7; }
+  .card_title { font-size: 22px; margin: 0; }
+  .card_subtitle { font-size: 13px; font-weight: 100; letter-spacing: 2px; margin: 4px 0 10px; }
+  .card_content { font-size: 12px; line-height: 1.5; margin: 0; }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;h1 class=&quot;card_title&quot;&gt;Fredy Martinez&lt;/h1&gt;&lt;h2 class=&quot;card_subtitle&quot;&gt;Programador de desarrollo web&lt;/h2&gt;&lt;p class=&quot;card_content&quot;&gt;Tarjeta de presentación aplicando padding, margin: auto, border-radius y box-shadow.&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;card red-card&quot;&gt;&lt;h1 class=&quot;card_title&quot;&gt;Variante Coral&lt;/h1&gt;&lt;h2 class=&quot;card_subtitle&quot;&gt;.red-card&lt;/h2&gt;&lt;p class=&quot;card_content&quot;&gt;Reutilización de clase base .card con modificador de color.&lt;/p&gt;&lt;/div&gt;">🧪 Cargar Ejercicio en el Laboratorio</button>
+                <p style="margin-top:12px;">Apuntes completos en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/CSS.md" style="color:#38bdf8;">CSS.md</a>) · <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>📂 Hojas de Estilos de Subcarpetas (11)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Inicio/style.css"><span class="file-name">🎨 Inicio</span><span class="file-path">Inicio/style.css</span></a>
+                    <a class="file-card" href="Colores/style.css"><span class="file-name">🎨 Colores</span><span class="file-path">Colores/style.css</span></a>
+                    <a class="file-card" href="Bordes/style.css"><span class="file-name">🎨 Bordes</span><span class="file-path">Bordes/style.css</span></a>
+                    <a class="file-card" href="Box%20Sizing/style.css"><span class="file-name">🎨 Box Sizing</span><span class="file-path">Box Sizing/style.css</span></a>
+                    <a class="file-card" href="Fondo%20y%20gradiente/style.css"><span class="file-name">🎨 Fondo y Gradiente</span><span class="file-path">Fondo y gradiente/style.css</span></a>
+                    <a class="file-card" href="medidas/style.css"><span class="file-name">🎨 Medidas</span><span class="file-path">medidas/style.css</span></a>
+                    <a class="file-card" href="padding%20y%20margin/style.css"><span class="file-name">🎨 Padding y Margin</span><span class="file-path">padding y margin/style.css</span></a>
+                    <a class="file-card" href="Propiedades%20de%20texto/style.css"><span class="file-name">🎨 Propiedades de Texto</span><span class="file-path">Propiedades de texto/style.css</span></a>
+                    <a class="file-card" href="sombras/style.css"><span class="file-name">🎨 Sombras</span><span class="file-path">sombras/style.css</span></a>
+                    <a class="file-card" href="width%20y%20heigth/style.css"><span class="file-name">🎨 Width y Height</span><span class="file-path">width y heigth/style.css</span></a>
+                    <a class="file-card" href="Ejercicios/Tarjeta%20de%20presentacion/style.css"><span class="file-name">🪪 Tarjeta de Presentación</span><span class="file-path">Ejercicios/.../style.css</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const box = document.getElementById('bmBox');
+            const total = document.getElementById('bmTotal');
+            const out = document.getElementById('bmCodeOut');
+            const sizing = document.getElementById('bmSizing');
+            const pad = document.getElementById('bmPad');
+            const bor = document.getElementById('bmBor');
+            const mar = document.getElementById('bmMar');
+            const rad = document.getElementById('bmRad');
+
+            function updateBM() {
+                const p = +pad.value, b = +bor.value, m = +mar.value, r = +rad.value;
+                document.getElementById('bmPadVal').textContent = p + 'px';
+                document.getElementById('bmBorVal').textContent = b + 'px';
+                document.getElementById('bmMarVal').textContent = m + 'px';
+                document.getElementById('bmRadVal').textContent = r + 'px';
+
+                box.style.boxSizing = sizing.value;
+                box.style.padding = p + 'px';
+                box.style.borderWidth = b + 'px';
+                box.style.margin = m + 'px';
+                box.style.borderRadius = r + 'px';
+
+                const realW = sizing.value === 'border-box' ? 220 : 220 + (p * 2) + (b * 2);
+                total.textContent = `Ancho total: ${realW}px`;
+                out.textContent = `.caja {\n  box-sizing: ${sizing.value};\n  width: 220px;\n  padding: ${p}px;\n  border: ${b}px solid #38bdf8;\n  margin: ${m}px;\n  border-radius: ${r}px;\n}`;
+            }
+            [sizing, pad, bor, mar, rad].forEach(el => el.addEventListener('input', updateBM));
+            updateBM();
+        })();
+    </script>
+</body>
+</html>

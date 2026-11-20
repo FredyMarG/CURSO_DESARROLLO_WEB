@@ -1,99 +1,90 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Flexbox/Layout/layout.html
-     Título: Layout Flex
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Layout Flex</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Layout con Flexbox — Guía Interactiva | Flexbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Encabezado de página o sección con título e invitación. -->
-    <header class="header">
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
-
-    <!-- Contenedor con clase(s) header__overlay para estilo o disposición. -->
-        <div class="header__overlay">
-
-        </div>
-    <!-- Contenedor con clase(s) header__item-container para estilo o disposición. -->
-        <div class="header__item-container">
-            <img class="header__img" src="img/20260130_092442.JPG" alt="">
-            <h1>Layout Flexbox</h1>
-    <!-- Párrafo de texto. -->
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore pariatur unde totam id iure quis quo Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis nostrum doloribus possimus sint, alias obcaecati explicabo libero voluptas velit soluta, voluptate dolore, eius beatae. Vel a provident cupiditate sed voluptates.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · FLEXBOX</span><div class="brand-title"><span>🧩</span><span>Layout con Flexbox</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Flexbox</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-    <nav class="nav">
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Contenedor con clase(s) nav__ul-container para estilo o disposición. -->
-        <div class="nav__ul-container">
-    <!-- Lista de elementos relacionados. -->
-            <ul class="nav__ul">
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="nav__item"><a href="#" class="nav__link">Home</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="nav__item"><a href="#" class="nav__link">About us</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="nav__item"><a href="#" class="nav__link">Contact</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="nav__item"><a href="#" class="nav__link link--login">Log In</a></li>
-            </ul>
-        </div>
-    <!-- Contenedor con clase(s) nav__logo-container para estilo o disposición. -->
-        <div class="nav__logo-container">
-            <img class="nav__logo" src="img/logo.png" alt="">
-        </div>
-    </nav>
-    <!-- Bloque principal con el contenido más importante. -->
-    <main>
-<!-- Contenido principal del documento (main) -->
-
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, molestias doloremque! Eos eveniet impedit odit eligendi, deleniti molestiae odio fugiat quibusdam libero magnam maxime quasi ab vel earum incidunt nisi. Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident optio dolorem quae quasi perspiciatis iste debitis facilis odio sequi, neque quia itaque hic, culpa voluptatem, molestias laudantium necessitatibus consequuntur totam? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto harum, quaerat, odit rerum tempore praesentium voluptatum consequatur, perferendis dolore officiis quisquam cumque? Sequi nihil, ab numquam vitae dolores ipsa ipsam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed maxime ipsa repudiandae in atque blanditiis quibusdam omnis incidunt maiores, modi nemo. Quos dolor molestiae enim debitis? Sunt molestiae rem eligendi?
-        Nemo quia perferendis nostrum iusto nam expedita ipsum, illum nobis! Omnis nostrum debitis dolorum odio eaque, quae vel numquam possimus quia pariatur laborum facilis quos, doloribus tempora tempore consequuntur repellat?
-        Ullam enim commodi itaque ipsum magni tempora, architecto quae incidunt tenetur explicabo perferendis totam soluta exercitationem, ipsam at magnam quam qui iste dolorum expedita illo culpa atque? Totam, laboriosam consectetur.
-        In explicabo suscipit quasi! Placeat nemo dolore laboriosam dolor aliquid odio tempora vitae alias reprehenderit fugit. Provident, molestiae. Nemo maxime laborum officia itaque tempora maiores, beatae aliquam fugiat suscipit necessitatibus?
-        Unde aspernatur voluptatem nulla modi magnam culpa accusamus explicabo velit, numquam quibusdam, ullam ex ratione. Voluptate mollitia animi ut, corrupti voluptatum ullam dolorem? Nihil rerum nobis, exercitationem eveniet error libero.
-        Dolorum incidunt impedit ipsum nam numquam distinctio tempora necessitatibus, porro beatae. Voluptates eveniet aspernatur molestiae, animi reprehenderit maiores mollitia dolore praesentium inventore nisi architecto soluta deserunt quisquam officiis! Ipsa, adipisci?
-        Animi, dignissimos fugit nihil, nulla eaque nemo corporis deleniti recusandae ipsum tempora sapiente est. Quam earum sunt error ullam aut blanditiis, corrupti fuga reiciendis molestiae officiis consectetur excepturi non tempora?
-        Voluptatum doloribus nobis exercitationem impedit commodi temporibus ad maxime voluptates molestiae officia obcaecati aliquid rem non quis officiis, amet facilis iste porro, vero numquam adipisci nihil quibusdam? Obcaecati, vel placeat!
-        Sint at facere nulla quod aspernatur iste aliquam consequatur voluptas, provident ut minima rerum et ratione expedita ad dignissimos sequi sed fugiat ipsam porro labore accusantium excepturi officiis nihil. Sed.
-        Et pariatur illum ipsam commodi nesciunt distinctio cumque maiores dignissimos, consectetur beatae suscipit necessitatibus ratione facilis modi, repellat blanditiis a similique aliquid velit voluptatem quisquam alias odit vel ullam. Neque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ipsa id vero, officia placeat ducimus aperiam perspiciatis sed, libero quis, nemo cumque eum quidem error magni autem atque quibusdam temporibus.
-        Quos aliquid cumque possimus ullam corporis, natus sint esse animi omnis perspiciatis maxime ab laborum voluptates id cupiditate sequi perferendis placeat incidunt vitae eum iure vero aperiam voluptatum. Eius, voluptate!
-        Distinctio possimus libero fugiat ullam assumenda, eligendi corporis nihil amet aspernatur cum, dolore temporibus, facere nostrum alias molestiae? Quo dolor blanditiis consequatur placeat minima magni iure quas quibusdam eum nulla!
-        Error aliquid beatae doloremque expedita aut deleniti optio officiis qui sit laudantium nisi numquam mollitia, minima natus hic exercitationem quo tempora corrupti possimus fugiat debitis suscipit illum obcaecati ullam? Ea!
-        Necessitatibus recusandae ipsum explicabo doloribus, iste ab, porro in laboriosam molestias tempore alias optio rem, magni soluta suscipit? Rerum voluptatum veniam ex blanditiis magni consequuntur neque recusandae quae quod amet!
-        Quos asperiores laudantium voluptates numquam debitis, quasi qui maiores, ipsa, ad assumenda sunt nulla illo tempore placeat nihil laboriosam tenetur inventore voluptatem aperiam ullam maxime cum mollitia repellendus dolore. Omnis.
-        Magnam ea nisi quod laborum vel quia iure obcaecati! Accusamus quam ipsa odit facere dolorem quisquam, ex quas necessitatibus, voluptates at ullam et sint. Iusto excepturi labore impedit quasi aliquid?
-        Rem consequuntur, labore eos illum ad porro sit magni animi perspiciatis hic, explicabo excepturi nisi placeat quos facilis debitis maxime nihil cupiditate impedit sint. Doloribus consequatur dicta dolorum mollitia repellat.
-        Eum exercitationem delectus asperiores placeat obcaecati soluta minima saepe labore ab, aliquid a, dolorem commodi maxime itaque sequi magni facere accusantium magnam minus voluptate. Ipsa nesciunt non odit tempore harum.
-        Labore neque reprehenderit maiores ad cum aut incidunt ut explicabo commodi omnis vero iste tenetur nulla, recusandae facere sint. Dolorum soluta placeat quibusdam deleniti hic voluptate. Repudiandae asperiores accusamus esse?
-        Asperiores esse sunt repellat vitae quae atque rem? Dolorem eligendi repellat cum in tempora sed asperiores autem mollitia vero fugiat officia, id nesciunt dignissimos. Quod, culpa? Hic adipisci odio similique.
-        Harum, dolor saepe aliquid amet exercitationem sit commodi provident enim. Natus temporibus quisquam sed maxime repellat officia a officiis nisi eveniet, quae tempore provident obcaecati aut expedita. Vitae, delectus repellendus.
-        Molestias architecto praesentium quibusdam aliquid, itaque placeat, recusandae doloremque labore est debitis temporibus vero, voluptatibus exercitationem? Quidem ratione unde reprehenderit illum voluptatum asperiores at ipsum vero, sed ipsa atque accusamus.
-        Beatae architecto aspernatur asperiores consequuntur iusto rem voluptatem officia aut earum deleniti exercitationem quisquam repudiandae laboriosam cum veniam eveniet commodi, ut, porro maiores nulla et? Ullam atque accusamus officiis soluta.
-        Libero quas eaque voluptatem, laudantium nobis voluptatum quisquam consequuntur molestiae doloribus, ipsam magni. Error distinctio dolorem eius explicabo vero quam id ipsum facere eaque temporibus, aut laboriosam eligendi aperiam beatae.
-        Dolorum praesentium, obcaecati similique iure consequatur officiis ad. Cupiditate aut sequi dicta. Perspiciatis suscipit sequi, a sit, eaque quasi quod quo ut excepturi fugit deserunt nisi vel repudiandae animi aut!
-        A possimus asperiores incidunt veniam fugiat maxime atque natus beatae minima. Eius qui aperiam deserunt facilis magni suscipit? Itaque deserunt consequuntur nesciunt deleniti rem iure unde sapiente dolorem! Voluptate, dolore!
-        Necessitatibus iure delectus officiis quo asperiores consequuntur sunt sequi mollitia, dolore tenetur minus, exercitationem quam cum eaque deleniti animi odio vel aperiam maxime cumque a sint, ea debitis ut! Assumenda!
-        Assumenda provident distinctio ipsam vitae quibusdam delectus est sapiente veritatis, deserunt error eaque quas alias voluptatum incidunt tenetur, illum veniam perferendis iusto maiores ea facere libero. Quod, commodi! Accusantium, dolore?
-        Temporibus veritatis officia sit quam, quos exercitationem minima magni porro commodi eius ab illo unde. Impedit, odio distinctio! Animi accusantium, eaque officiis optio repellendus voluptatibus aliquam unde omnis facere quasi.
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Layout con Flexbox">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Navbar</span><span class="badge badge-purple">Sticky Footer</span><span class="badge badge-emerald">Cards Flexibles</span></div>
+                <h1 class="hero-title">Flexbox:<br /><span class="gradient-text">Layout con Flexbox</span></h1>
+                <p class="hero-subtitle">Combina las propiedades de Flexbox para construir layouts completos de producción.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Layout con Flexbox y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Layout con Flexbox y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Combina las propiedades de Flexbox para construir layouts completos de producción. Dominar <strong>Layout con Flexbox</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Patrones de Layout en Flexbox">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Patrones de Layout en Flexbox</h2></div>
+            <div class="grid-2"><div class="glass-card"><h3>🧭 Navbar + Push</h3><pre class="code-block"><code>.nav { display: flex; align-items: center; gap: 14px; }
+.nav .login { margin-left: auto; }</code></pre></div><div class="glass-card"><h3>🦶 Sticky Footer</h3><pre class="code-block"><code>body { display: flex; flex-direction: column; min-height: 100dvh; }
+main { flex: 1; }</code></pre></div></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Layout con Flexbox">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Layout con Flexbox</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Layout con Flexbox">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="margin-left: auto absorbe todo el espacio libre a su izquierda." data-err="En Flexbox, margin: auto consume el espacio sobrante en esa dirección."><div class="quiz-q-title">1. En una barra horizontal Flex, ¿qué hace <code>margin-left: auto</code> en el último botón?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Lo centra</button><button class="quiz-option" data-opt="b">Lo empuja completamente a la derecha</button><button class="quiz-option" data-opt="c">Lo oculta</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Layout con Flexbox">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 0; min-height: 210px; display: flex; flex-direction: column; background: #0f172a; color: #fff; }
+  header { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #1e293b; }
+  .cta { margin-left: auto; background: #38bdf8; color: #0f172a; padding: 5px 12px; border-radius: 8px; font-weight: 800; }
+  main { flex: 1; padding: 16px; }
+  footer { padding: 8px 16px; background: #1e293b; text-align: center; font-size: 12px; color: #94a3b8; }
+&lt;/style&gt;
+&lt;header&gt;&lt;strong&gt;Logo&lt;/strong&gt;&lt;span&gt;Inicio&lt;/span&gt;&lt;span class=&quot;cta&quot;&gt;Entrar&lt;/span&gt;&lt;/header&gt;
+&lt;main&gt;Contenido principal (flex: 1)&lt;/main&gt;
+&lt;footer&gt;Sticky Footer&lt;/footer&gt;">Layout Completo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 0; min-height: 210px; display: flex; flex-direction: column; background: #0f172a; color: #fff; }
+  header { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: #1e293b; }
+  .cta { margin-left: auto; background: #38bdf8; color: #0f172a; padding: 5px 12px; border-radius: 8px; font-weight: 800; }
+  main { flex: 1; padding: 16px; }
+  footer { padding: 8px 16px; background: #1e293b; text-align: center; font-size: 12px; color: #94a3b8; }
+&lt;/style&gt;
+&lt;header&gt;&lt;strong&gt;Logo&lt;/strong&gt;&lt;span&gt;Inicio&lt;/span&gt;&lt;span class=&quot;cta&quot;&gt;Entrar&lt;/span&gt;&lt;/header&gt;
+&lt;main&gt;Contenido principal (flex: 1)&lt;/main&gt;
+&lt;footer&gt;Sticky Footer&lt;/footer&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Flexbox</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🧩 Guía Completa Flexbox</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
     </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>
