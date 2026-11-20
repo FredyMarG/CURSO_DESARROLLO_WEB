@@ -1,36 +1,239 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Basico/Img.html
-     Título: Imagenes
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imagenes</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Imágenes en HTML5 (&lt;img&gt;, &lt;figure&gt;) — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-    <!-- 
-        Etiqueta <img>: Es un elemento 'empty' (no tiene etiqueta de cierre).
-        
-        ATRIBUTOS CRÍTICOS:
-        - 'src': Fuente de la imagen. Puede ser una ruta local o una URL externa.
-        - 'alt' (Texto Alternativo): 
-            1. ACCESIBILIDAD: Leído por lectores de pantalla para personas con discapacidad visual.
-            2. SEO: Ayuda a Google a entender de qué trata la imagen.
-            3. FALLBACK: Aparece si la imagen falla al cargar.
-    -->
-    <img src="https://images.pexels.com/photos/13260076/pexels-photo-13260076.jpeg" alt="Descripción de la imagen">
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 BÁSICO · MULTIMEDIA</span>
+            <div class="brand-title"><span>🖼️</span><span>Imágenes (&lt;img&gt;)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
+            <a class="nav-btn" href="../../index.html" title="Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Imágenes en HTML5">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">&lt;img src="..." alt="..."&gt;</span>
+                    <span class="badge badge-purple">&lt;figure&gt; &amp; &lt;figcaption&gt;</span>
+                    <span class="badge badge-emerald">loading="lazy"</span>
+                </div>
+                <h1 class="hero-title">Domina las<br /><span class="gradient-text">Imágenes en HTML5</span></h1>
+                <p class="hero-subtitle">Inserta gráficos accesibles y optimizados usando texto alternativo <code>alt</code>, dimensiones explícitas para evitar saltos de diseño y carga diferida.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🏷️</div>
+                        <h3>Atributos src y alt</h3>
+                        <p>Rutas de imagen y descripción accesible obligatoria.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Rendimiento y Figure</h3>
+                        <p>Evita Cumulative Layout Shift (CLS) y usa pies de foto.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio en Vivo</h3>
+                        <p>Prueba imágenes SVG/inline, <code>&lt;figure&gt;</code> y bordes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Imágenes (&amp;lt;img&amp;gt;)?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Imágenes (&amp;lt;img&amp;gt;) y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Inserta gráficos accesibles y optimizados usando texto alternativo <code>alt</code>, dimensiones explícitas para evitar saltos de diseño y carga diferida. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Atributos Esenciales de <img>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · SINTAXIS Y ACCESIBILIDAD</span>
+                <h2 class="slide-title">La Etiqueta &lt;img&gt; (Sin Cierre)</h2>
+                <p class="slide-lead"><code>&lt;img&gt;</code> es un elemento vacío (no lleva <code>&lt;/img&gt;</code>) y requiere dos atributos fundamentales: <code>src</code> y <code>alt</code>.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📝 Ejemplo correcto</h3>
+                    <pre class="code-block"><code>&lt;img
+  src="img/paisaje.webp"
+  alt="Montañas nevadas al amanecer"
+  width="600"
+  height="400"
+  loading="lazy"&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🔎 Qué aporta cada atributo</h3>
+                    <ul class="styled-list">
+                        <li><code>src</code>: ruta relativa o URL de la imagen.</li>
+                        <li><code>alt</code>: texto leído por lectores de pantalla y mostrado si falla la carga.</li>
+                        <li><code>width</code> / <code>height</code>: reserva el espacio antes de descargarla.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="<figure>, <figcaption> y Formatos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · SEMÁNTICA Y FORMATOS WEB</span>
+                <h2 class="slide-title">&lt;figure&gt; y Formatos Modernos (WebP / SVG)</h2>
+                <p class="slide-lead">Agrupa una imagen con su pie de foto usando <code>&lt;figure&gt;</code> y elige el formato más ligero.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🖼️ Pie de foto semántico</h3>
+                    <pre class="code-block"><code>&lt;figure&gt;
+  &lt;img src="diagrama.svg" alt="Arquitectura Web"&gt;
+  &lt;figcaption&gt;Fig 1. Flujo Cliente-Servidor&lt;/figcaption&gt;
+&lt;/figure&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>📦 ¿Qué formato elegir?</h3>
+                    <ul class="styled-list">
+                        <li><strong>WebP / AVIF:</strong> fotos con máxima compresión y calidad.</li>
+                        <li><strong>SVG:</strong> logotipos e iconos vectoriales (nítidos a cualquier zoom).</li>
+                        <li><strong>PNG:</strong> gráficos con transparencia cuando no se usa WebP.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Buenas Prácticas: Imágenes (&amp;lt;img&amp;gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Imágenes (&amp;lt;img&amp;gt;)</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz de Imágenes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Imágenes HTML</h2>
+                <p class="slide-lead">Valida tus conocimientos sobre accesibilidad y rendimiento gráfico.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b"
+                    data-ok="SVG es vectorial, por lo que nunca se pixela aunque lo amplíes en pantallas Retina o 4K."
+                    data-err="JPG y PNG son mapas de bits; SVG es vectorial e ideal para logos e iconos.">
+                    <div class="quiz-q-title">1. ¿Qué formato es ideal para logotipos e iconos que deben verse nítidos a cualquier tamaño?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">JPG</button>
+                        <button class="quiz-option" data-opt="b">SVG</button>
+                        <button class="quiz-option" data-opt="c">BMP</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="&lt;figcaption&gt; dentro de &lt;figure&gt; asocia semánticamente una leyenda o descripción a la imagen."
+                    data-err="Un &lt;p&gt; suelto no vincula semánticamente la leyenda con la imagen como &lt;figcaption&gt;.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta define el pie de foto dentro de un <code>&lt;figure&gt;</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">&lt;figcaption&gt;</button>
+                        <button class="quiz-option" data-opt="b">&lt;caption&gt;</button>
+                        <button class="quiz-option" data-opt="c">&lt;alt&gt;</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Imágenes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Imágenes</h2>
+                <p class="slide-lead">Prueba <code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code> y estilos CSS para imágenes responsivas.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; place-items: center; }
+  figure { margin: 0; background: #1e293b; padding: 12px; border-radius: 14px; text-align: center; border: 1px solid #334155; }
+  figcaption { margin-top: 8px; font-size: 13px; color: #94a3b8; }
+&lt;/style&gt;
+&lt;figure&gt;
+  &lt;svg width=&quot;220&quot; height=&quot;110&quot; viewBox=&quot;0 0 220 110&quot;&gt;&lt;rect width=&quot;220&quot; height=&quot;110&quot; rx=&quot;12&quot; fill=&quot;#0284c7&quot;/&gt;&lt;circle cx=&quot;60&quot; cy=&quot;55&quot; r=&quot;26&quot; fill=&quot;#38bdf8&quot;/&gt;&lt;text x=&quot;105&quot; y=&quot;60&quot; fill=&quot;#fff&quot; font-weight=&quot;bold&quot; font-family=&quot;sans-serif&quot;&gt;SVG Nítido&lt;/text&gt;&lt;/svg&gt;
+  &lt;figcaption&gt;Gráfico vectorial dentro de &amp;lt;figure&amp;gt;&lt;/figcaption&gt;
+&lt;/figure&gt;">Figure + SVG</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; display: grid; place-items: center; }
+  figure { margin: 0; background: #1e293b; padding: 12px; border-radius: 14px; text-align: center; border: 1px solid #334155; }
+  figcaption { margin-top: 8px; font-size: 13px; color: #94a3b8; }
+&lt;/style&gt;
+&lt;figure&gt;
+  &lt;svg width="220" height="110" viewBox="0 0 220 110"&gt;&lt;rect width="220" height="110" rx="12" fill="#0284c7"/&gt;&lt;circle cx="60" cy="55" r="26" fill="#38bdf8"/&gt;&lt;text x="105" y="60" fill="#fff" font-weight="bold" font-family="sans-serif"&gt;SVG Nítido&lt;/text&gt;&lt;/svg&gt;
+  &lt;figcaption&gt;Gráfico vectorial dentro de &amp;lt;figure&amp;gt;&lt;/figcaption&gt;
+&lt;/figure&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
+                <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>
+                <p class="slide-lead">Explora el resto de guías interactivas del módulo.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="index.html"><span class="file-name">🧱 Guía Completa HTML Básico</span><span class="file-path">index.html</span></a>
+                    <a class="file-card" href="Titulos%20y%20parrafos.html"><span class="file-name">📝 Títulos y Párrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
+                    <a class="file-card" href="listas.html"><span class="file-name">📋 Listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="enlaces.html"><span class="file-name">🔗 Enlaces</span><span class="file-path">enlaces.html</span></a>
+                    <a class="file-card" href="formularios.html"><span class="file-name">📋 Formularios</span><span class="file-path">formularios.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -1,49 +1,81 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Funciones Avanzadas/Scroll/scroll.html
-     Título: Scroll Propiedades
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="scroll.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroll Propiedades</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll Snap y Smooth — Guía Interactiva | Funciones Avanzadas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box">
-        <a href="#venir" id="subir">BAJAR</a>
-        <h1>TITULO</h1>
-    <!-- Contenedor con clase(s) crecer para estilo o disposición. -->
-        <div class="crecer">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis assumenda sit ipsum voluptatibus quibusdam enim! Veniam, laborum consectetur. Deserunt doloremque expedita ipsam, similique porro quo molestias doloribus est explicabo ullam!
-            Dicta quod laborum asperiores ipsa impedit veritatis sapiente doloribus corporis porro, esse atque incidunt illum quam reprehenderit maiores iure facilis quo nisi vel harum totam facere? Maiores velit sequi iure.
-            Quibusdam, illo consectetur? Perferendis, quasi voluptate consectetur repellat molestias illo laborum reprehenderit magnam cupiditate sed culpa possimus repudiandae quod dicta et, dignissimos aliquid itaque odio quia aut omnis! Consectetur, sit.
-            Aut non nisi reiciendis beatae maiores. Voluptatem ducimus consequuntur excepturi culpa dignissimos accusantium dolore voluptas eius, necessitatibus temporibus incidunt eveniet, delectus labore fugiat beatae iure repellendus eos facilis consequatur amet.
-            Recusandae dignissimos soluta nihil modi nam assumenda dicta aperiam a tempora animi eveniet, unde, quaerat itaque mollitia voluptatibus commodi praesentium illum illo fuga atque doloribus in iste officia? Adipisci, enim?
-            Ipsam dolore, ex, eos minima expedita error cum sequi veritatis qui vero voluptatibus, ducimus ut eum odit odio! Non nam sed, est reiciendis sint ea error animi consequuntur at magnam.
-            Accusantium corrupti quaerat explicabo quos! Dolore odit, tempora nostrum sit, quod sed laboriosam architecto in eaque minima, voluptas ullam omnis fugit nulla itaque enim perferendis vero! Unde minus odit porro.
-            Suscipit, nisi repellendus recusandae dolore maxime nostrum, maiores et impedit fugit ex itaque atque placeat magnam, exercitationem quisquam! Explicabo corporis nihil fugit ipsam eius illum ab voluptatibus voluptates magnam molestias!
-            Totam dolorem error quis nihil! Pariatur facere alias iste? Commodi ab maxime maiores error molestias consequuntur laborum illum architecto eum, voluptatibus cumque! Aperiam, impedit doloremque illo quidem vero ea aliquam!
-            Accusantium asperiores nulla animi reprehenderit harum ullam quaerat quia dolores. Sit, quos dignissimos. Soluta, eveniet veritatis obcaecati ex dolores excepturi maxime id aperiam nobis maiores molestiae repellat vel eligendi quidem!
-            Tenetur necessitatibus earum in, totam sed magnam beatae unde officia voluptatibus reprehenderit, odit nihil quisquam at. Beatae tenetur maxime, accusantium libero ea culpa minus voluptatum quidem, est at doloribus amet?
-            Eius cum animi ea a veniam iusto eos, laboriosam cumque, ipsam tempore veritatis ut, id minima esse aliquid asperiores? Est labore ipsa dolor temporibus sit nihil sed vel. Est, fuga?
-            Reiciendis in quod animi! Vel necessitatibus iure quae, recusandae illo aperiam placeat ea quia porro blanditiis, modi perferendis sapiente impedit libero nobis. Excepturi, animi reprehenderit? Ex obcaecati debitis esse sapiente?
-            Incidunt totam aliquam ipsum natus labore voluptatibus. Sapiente eligendi.
-            <a id="venir" href="#subir">SUBIR</a>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · FUNCIONES</span><div class="brand-title"><span>🧲</span><span>Scroll Snap y Smooth</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Funciones Avanzadas</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
-    </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Scroll Snap y Smooth">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">scroll-snap-type</span><span class="badge badge-purple">scroll-snap-align</span><span class="badge badge-emerald">scroll-behavior</span></div>
+                <h1 class="hero-title">Funciones Avanzadas:<br /><span class="gradient-text">Scroll Snap y Smooth</span></h1>
+                <p class="hero-subtitle">Crea carruseles nativos que encajan exactamente en cada tarjeta sin JavaScript.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Scroll Snap y Smooth y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Scroll Snap y Smooth y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Crea carruseles nativos que encajan exactamente en cada tarjeta sin JavaScript. Dominar <strong>Scroll Snap y Smooth</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Carrusel con Scroll Snap">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Carrusel con Scroll Snap</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>.carrusel { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; }
+.slide { flex: 0 0 80%; scroll-snap-align: center; }</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Scroll Snap y Smooth">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Scroll Snap y Smooth</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Scroll Snap y Smooth">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="scroll-snap-align: center encaja la tarjeta automáticamente." data-err="scroll-snap-type va en el padre y scroll-snap-align en los hijos."><div class="quiz-q-title">1. ¿Qué propiedad alinea cada tarjeta al centro o inicio al soltar el scroll en un carrusel?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">scroll-snap-align</button><button class="quiz-option" data-opt="b">scroll-behavior</button><button class="quiz-option" data-opt="c">overflow-wrap</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Scroll Snap y Smooth">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
+  .track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
+  .card { flex: 0 0 75%; scroll-snap-align: center; background: #1e293b; border: 1px solid #38bdf8; padding: 28px; border-radius: 14px; text-align: center; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;card&quot;&gt;Slide 1 (desliza →)&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 2&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 3&lt;/div&gt;&lt;/div&gt;">Carrusel Scroll Snap</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
+  .track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 10px; }
+  .card { flex: 0 0 75%; scroll-snap-align: center; background: #1e293b; border: 1px solid #38bdf8; padding: 28px; border-radius: 14px; text-align: center; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;card&quot;&gt;Slide 1 (desliza →)&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 2&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 3&lt;/div&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Funciones Avanzadas</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🧲 Guía Completa Funciones Avanzadas</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

@@ -1,49 +1,132 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Emmet/emmet.html
-     Título: Emmet
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="emmet.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emmet</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emmet para HTML5 y CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-
-    <!-- Encabezado de página o sección con título e invitación. -->
-    <header class="header">
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
-
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-        <nav class="header-nav">
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Lista de elementos relacionados. -->
-            <ul class="header-ul">
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="list-item"><a href="" class="link">Item 1</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li class="list-item"><a href="" class="link">Item 2</a></li>
-            </ul>
-        </nav>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · PRODUCTIVIDAD</span><div class="brand-title"><span>⚡</span><span>Abreviaturas Emmet</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
     </header>
 
-    <!-- Ejemplo de abreviaturas Emmet:
-         div.clase  -> <div class="clase"></div>
-         div#id     -> <div id="id"></div>
-    -->
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Emmet">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">! + Tab</span><span class="badge badge-purple">ul>li*5</span><span class="badge badge-emerald">.card>.title</span></div>
+                <h1 class="hero-title">Escribe HTML 10x Rápido:<br /><span class="gradient-text">Emmet en VS Code</span></h1>
+                <p class="hero-subtitle">Genera estructuras HTML complejas en segundos usando abreviaturas similares a selectores CSS integradas nativamente en VS Code.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">⌨️</div><h3>Atajos Esenciales</h3><p><code>&gt;</code>, <code>+</code>, <code>*</code>, <code>$</code> y <code>{texto}</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Adivina qué HTML genera cada abreviatura.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Visualiza el resultado de estructuras generadas con Emmet.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Abreviaturas Emmet?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Abreviaturas Emmet y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Genera estructuras HTML complejas en segundos usando abreviaturas similares a selectores CSS integradas nativamente en VS Code. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Operadores Emmet">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · SINTAXIS DE ATAJOS</span><h2 class="slide-title">Operadores Clave de Emmet</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Abreviatura</th><th>Qué genera</th></tr></thead>
+                <tbody>
+                    <tr><td><code>!</code> + Tab</td><td>Esqueleto completo HTML5</td></tr>
+                    <tr><td><code>ul.menu&gt;li*3&gt;a{Item $}</code></td><td>Lista <code>.menu</code> con 3 enlaces numerados (Item 1, 2, 3)</td></tr>
+                    <tr><td><code>header+main+footer</code></td><td>Tres etiquetas hermanas al mismo nivel</td></tr>
+                    <tr><td><code>div.card#hero</code></td><td><code>&lt;div class="card" id="hero"&gt;&lt;/div&gt;</code></td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Abreviaturas Emmet">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Abreviaturas Emmet</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz Emmet">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido de Emmet</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="&gt; crea elementos hijos anidados, *4 los multiplica por cuatro." data-err="El operador &gt; indica hijo directo y *4 repite el elemento 4 veces.">
+                    <div class="quiz-q-title">1. ¿Qué genera la abreviatura <code>ul&gt;li*4</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Un &lt;ul&gt; con 4 &lt;li&gt; dentro</button><button class="quiz-option" data-opt="b">4 &lt;ul&gt; hermanos</button><button class="quiz-option" data-opt="c">Un &lt;ul&gt; seguido de 4 &lt;li&gt; fuera</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="El operador $ se reemplaza automáticamente por el número de iteración (1, 2, 3...)." data-err="$ es el contador incremental automático en Emmet.">
+                    <div class="quiz-q-title">2. ¿Qué símbolo inserta una numeración automática (1, 2, 3...) al multiplicar con <code>*</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">#</button><button class="quiz-option" data-opt="b">@</button><button class="quiz-option" data-opt="c">$</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Emmet">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · RESULTADO</span><h2 class="slide-title">🧪 Resultado de <code>ul.lista&gt;li*4{Elemento $}</code></h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } .lista { background: #1e293b; padding: 16px 32px; border-radius: 12px; max-width: 240px; }&lt;/style&gt;
+&lt;ul class=&quot;lista&quot;&gt;
+  &lt;li&gt;Elemento 1&lt;/li&gt;
+  &lt;li&gt;Elemento 2&lt;/li&gt;
+  &lt;li&gt;Elemento 3&lt;/li&gt;
+  &lt;li&gt;Elemento 4&lt;/li&gt;
+&lt;/ul&gt;">Expandido por Emmet</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; } .lista { background: #1e293b; padding: 16px 32px; border-radius: 12px; max-width: 240px; }&lt;/style&gt;
+&lt;ul class="lista"&gt;
+  &lt;li&gt;Elemento 1&lt;/li&gt;
+  &lt;li&gt;Elemento 2&lt;/li&gt;
+  &lt;li&gt;Elemento 3&lt;/li&gt;
+  &lt;li&gt;Elemento 4&lt;/li&gt;
+&lt;/ul&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

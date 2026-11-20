@@ -1,39 +1,86 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Animaciones/Botones Animados/botones.html
-     Título: Botones Animados
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="botones.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Botones Animados</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Botones Animados — Guía Interactiva | Animaciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Contenedor wrapper para agrupar elementos y centrar contenido. -->
-    <div class="wrapper">
-    <!-- Contenedor con clase(s) button-container para estilo o disposición. -->
-        <div class="button-container">
-    <!-- Botón interactivo. -->
-            <button class="btn btn-1">BUTTON</button>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · ANIMACIONES</span><div class="brand-title"><span>🔘</span><span>Botones Animados</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Animaciones</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
-    <!-- Contenedor con clase(s) button-container para estilo o disposición. -->
-        <div class="button-container">
-    <!-- Botón interactivo. -->
-            <button class="btn btn-2">BUTTON</button>
-        </div>
-    </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Botones Animados">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Microinteracciones</span><span class="badge badge-purple">cubic-bezier</span><span class="badge badge-emerald">60 FPS</span></div>
+                <h1 class="hero-title">Animaciones:<br /><span class="gradient-text">Botones Animados</span></h1>
+                <p class="hero-subtitle">Diseña botones con retroalimentación táctil fluida usando transform y box-shadow.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Botones Animados y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Botones Animados y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Diseña botones con retroalimentación táctil fluida usando transform y box-shadow. Dominar <strong>Botones Animados</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Botones con efecto elástico">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Botones con efecto elástico</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>.btn {
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1);
+}
+.btn:hover { transform: translateY(-4px) scale(1.04); }
+.btn:active { transform: scale(0.97); }</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Botones Animados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Botones Animados</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Botones Animados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok=":active se aplica mientras el usuario mantiene presionado el botón." data-err=":active representa el estado de pulsación."><div class="quiz-q-title">1. ¿Qué pseudoclase simula el hundimiento del botón justo al presionarlo?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">:hover</button><button class="quiz-option" data-opt="b">:active</button><button class="quiz-option" data-opt="c">:visited</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Botones Animados">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
+  .btn { padding: 14px 28px; border: 0; border-radius: 12px; background: #38bdf8; color: #0f172a; font-weight: 800; cursor: pointer; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+  .btn:hover { transform: translateY(-5px) scale(1.05); }
+  .btn:active { transform: scale(0.95); }
+&lt;/style&gt;
+&lt;button class=&quot;btn&quot;&gt;Haz clic o pasa el cursor&lt;/button&gt;">Botón Elástico</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
+  .btn { padding: 14px 28px; border: 0; border-radius: 12px; background: #38bdf8; color: #0f172a; font-weight: 800; cursor: pointer; transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1); }
+  .btn:hover { transform: translateY(-5px) scale(1.05); }
+  .btn:active { transform: scale(0.95); }
+&lt;/style&gt;
+&lt;button class=&quot;btn&quot;&gt;Haz clic o pasa el cursor&lt;/button&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Animaciones</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🔘 Guía Completa Animaciones</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

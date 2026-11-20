@@ -1,100 +1,180 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/sol.css
- * Carpeta del tema: «12 La LLave Correcta». Hoja: «sol».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
- */
+/* Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/sol.css — Estilos/lógica del módulo de aprendizaje */
+* {
+    box-sizing: border-box;
+}
 
 body {
-    overflow-x: hidden; /* Evita el scroll horizontal si algún elemento sobresale */
+    margin: 0;
+    min-height: 100vh;
+    background: radial-gradient(circle at top left, #0f172a, #070a13 65%);
+    color: #f1f5f9;
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
+    padding: 24px 16px 48px;
+}
+
+.top-header {
+    max-width: 1120px;
+    margin: 0 auto 24px;
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-bottom: 12px;
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    padding: 6px 14px;
+    border-radius: 999px;
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(56, 189, 248, 0.14);
+}
+
+.top-header h1 {
+    margin: 0 0 10px;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+}
+
+.status-pill {
+    display: inline-block;
+    margin: 0;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    color: #94a3b8;
+    font-size: 0.92rem;
+}
+
+.status-pill.has-selection {
+    color: #6ee7b7;
+    border-color: #10b981;
 }
 
 .flex-container {
-.flex-container { /* Selector de la clase .flex-container, define un contenedor flexible para las tarjetas. */
-    /* Layout flexible que permite que las tarjetas se ajusten según el ancho de pantalla */
-	display: flex;           /* Activa el modelo Flexbox para organizar los elementos hijos. */
-	flex-wrap: wrap;         /* Permite que los elementos hijos se envuelvan a la siguiente línea si no hay espacio suficiente. */
-	justify-content: center; /* Centra los elementos hijos horizontalmente dentro del contenedor. */
-	color: #333;             /* Establece un color de texto gris oscuro por defecto para los elementos dentro del contenedor. */
-	font-family: sans-serif; /* Define una fuente genérica sin serifa para una mejor legibilidad. */
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
 .flex-item {
-.flex-item { /* Selector de la clase .flex-item, aplica estilos a cada tarjeta individual. */
-    /* Glassmorphism: Efecto de cristal translúcido */
-	flex-grow: 1;        /* Permite que la tarjeta crezca para ocupar el espacio disponible dentro del flex-container. */
-	margin: 20px;        /* Establece un margen exterior de 20px alrededor de cada tarjeta. */
-	max-width: 320px;    /* Limita el ancho máximo de cada tarjeta a 320px. */
-    color: #e0e0e0;      /* Define un color de texto claro para un mejor contraste sobre el fondo oscuro. */
-    background: linear-gradient(135deg, rgba(31, 33, 35, 0.7), rgba(15, 20, 25, 0.5)); /* Aplica un degradado de fondo sofisticado con transparencia para el efecto glassmorphism. */
-    /* El desenfoque del fondo da un toque premium */
-    backdrop-filter: blur(15px); /* Aplica un desenfoque intenso al fondo detrás del elemento, creando un efecto de cristal realista. */
-    --current-color: #71a154;   /* Define una variable CSS personalizada para sincronizar el color del borde y el resplandor. */
-	border: 2px solid var(--current-color); /* Establece un borde de 2px cuyo color está vinculado a la variable animada. */
-    border-radius: 24px;        /* Redondea las esquinas de la tarjeta de forma pronunciada. */
-	padding: 2rem 1.5rem;       /* Aplica un relleno interno de 2rem vertical y 1.5rem horizontal. */
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3); /* Añade una sombra pesada para dar un fuerte efecto de elevación. */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Suaviza las transiciones de transformación y sombra. */
-    text-align: center;         /* Centra todo el contenido de texto dentro de la tarjeta. */
-    position: relative;         /* Establece el contexto de posicionamiento para elementos hijos posicionados absolutamente. */
-    cursor: pointer;            /* Cambia el cursor a un puntero (mano) al pasar sobre la tarjeta. */
-    animation: borderCycle 2s infinite step-end; /* Aplica una animación llamada 'borderCycle' que se repite infinitamente con un paso final. */
+    flex: 1 1 250px;
+    max-width: 280px;
+    color: #e2e8f0;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.75));
+    backdrop-filter: blur(12px);
+    --current-color: #38bdf8;
+    border: 2px solid var(--current-color);
+    border-radius: 20px;
+    padding: 1.5rem 1.25rem;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    text-align: center;
+    cursor: pointer;
 }
 
-.flex-item:hover { /* Selector de pseudo-clase :hover para la tarjeta. */
-	transform: translateY(-10px); /* Mueve la tarjeta 10px hacia arriba para un efecto de elevación. */
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 40px var(--current-color); /* Añade una sombra de elevación y un resplandor cuyo color está sincronizado con la variable animada. */
-    border-width: 3px;            /* Aumenta ligeramente el grosor del borde a 3px al pasar el cursor. */
-}
-.flex-item:focus { /* Selector de pseudo-clase :focus para la tarjeta. */
-    outline: none; /* Elimina el contorno predeterminado que aparece al enfocar la tarjeta. */
-    transform: scale(1.05); /* Escala la tarjeta un 5% al enfocarla. */
-	box-shadow: 0px 25px 40px rgba(0, 0, 0, 0.3), 0px 0px 30px var(--current-color); /* Aplica una sombra de elevación y un resplandor sincronizado al enfocar. */
+.flex-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.25);
 }
 
-h2,h3 { /* Selector de las etiquetas h2 y h3, aplica estilos a los títulos de segundo y tercer nivel. */
-	margin: 0; /* Elimina los márgenes por defecto de los títulos para permitir un control manual más preciso. */
+.flex-item:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
 }
 
-h3 { /* Selector de la etiqueta h3, aplica estilos a los títulos de tercer nivel. */
-	color: #ffffff; /* Establece el color del texto en blanco puro para el modelo. */
+.flex-item.selected {
+    --current-color: #10b981;
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 28px rgba(16, 185, 129, 0.4);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.88));
 }
 
-p b { /* Selector de la etiqueta b dentro de un párrafo, aplica estilos al texto en negrita. */
-	color: green /* Establece el color del texto en negrita (usado para el precio) en verde. */
+h2, h3 {
+    margin: 0 0 6px;
 }
 
-.llave-img { /* Selector de la clase .llave-img, aplica estilos a la imagen de la llave. */
-	width: 300px;        /* Establece un ancho fijo de 300px para la imagen. */
-    border-radius: 10px; /* Redondea ligeramente las esquinas de la imagen. */
-    margin-bottom: 10px; /* Añade un margen inferior de 10px debajo de la imagen. */
+h2 {
+    font-size: 1.2rem;
+    color: #fff;
 }
 
-
-form { /* Selector de la etiqueta form, aplica estilos al formulario. */
-	width: 100%;         /* Hace que el formulario ocupe todo el ancho disponible. */
-	text-align: center;  /* Centra el contenido del formulario, incluyendo el botón de enviar. */
-	padding: 50px;       /* Aplica un gran relleno interno de 50px alrededor del formulario. */
+h3 {
+    font-size: 0.98rem;
+    color: #38bdf8;
+    font-weight: 600;
 }
 
-input[type="submit"]{ /* Selector de input con atributo type="submit", aplica estilos al botón de envío. */
-	background: #71a154; /* Establece un fondo verde para el botón. */
-	color: #fff;         /* Define el color del texto en blanco. */
-	border: none;        /* Elimina los bordes predeterminados del botón. */
-	padding: 12px 36px;  /* Aplica un relleno interno de 12px vertical y 36px horizontal para un botón grande y cómodo. */
-    border-radius: 10px; /* Redondea las esquinas del botón. */
-	font-size: 17px;     /* Establece el tamaño de la fuente en 17px para una letra legible. */
-	letter-spacing: 1px  /* Añade un espaciado de 1px entre las letras para un toque moderno. */
+p {
+    margin: 6px 0 0;
+    color: #cbd5e1;
 }
 
-/* --- Animación de Ciclo de Colores Profesional --- */
-@keyframes borderCycle { /* Define una animación de fotogramas clave llamada 'borderCycle'. */
-    0%   { --current-color: #71a154; } /* En el 0% de la animación, la variable --current-color es verde. */
-    25%  { --current-color: #3b82f6; } /* En el 25% de la animación, cambia a un azul profesional. */
-    50%  { --current-color: #8b5cf6; } /* En el 50% de la animación, cambia a un púrpura elegante. */
-    75%  { --current-color: #ef4444; } /* En el 75% de la animación, cambia a un rojo suave. */
-    100% { --current-color: #71a154; } /* En el 100% de la animación, vuelve al verde original, cerrando el ciclo. */
+p b {
+    color: #34d399;
 }
+
+.llave-img {
+    width: 100%;
+    max-width: 220px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
 }
+
+form {
+    width: 100%;
+    text-align: center;
+    padding: 36px 16px 12px;
+}
+
+input[type="submit"] {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #052e16;
+    font-weight: 800;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 12px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.result-box {
+    max-width: 480px;
+    margin: 18px auto 0;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: none;
+}
+
+.result-box.ok {
+    display: block;
+    background: rgba(16, 185, 129, 0.14);
+    border: 1px solid rgba(16, 185, 129, 0.45);
+    color: #6ee7b7;
+}
+
+.result-box.err {
+    display: block;
+    background: rgba(244, 63, 94, 0.14);
+    border: 1px solid rgba(244, 63, 94, 0.45);
+    color: #fda4af;
 }

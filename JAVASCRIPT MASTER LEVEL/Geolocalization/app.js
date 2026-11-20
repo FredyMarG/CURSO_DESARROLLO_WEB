@@ -800,6 +800,9 @@ class AppController {
             });
         });
 
+        const btnGoLab = document.getElementById("btnGoLab");
+        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(6));
+
         const btnToggleMode = document.getElementById("btnToggleMode");
         if (btnToggleMode) btnToggleMode.addEventListener("click", () => this.toggleMode());
 

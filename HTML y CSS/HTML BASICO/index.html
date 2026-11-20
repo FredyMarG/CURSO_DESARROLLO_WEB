@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Básico — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 · FUNDAMENTOS</span>
+            <div class="brand-title"><span>🧱</span><span>HTML Básico</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: HTML Básico">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">Estructura Web</span>
+                    <span class="badge badge-purple">Etiquetas &amp; Formularios</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">HTML5 Básico</span></h1>
+                <p class="hero-subtitle">Aprende el lenguaje que da estructura y significado a toda la web: documentos válidos, textos, enlaces, imágenes y formularios interactivos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🦴</div>
+                        <h3>Anatomía del Documento</h3>
+                        <p>Entiende <code>&lt;!doctype html&gt;</code>, <code>&lt;head&gt;</code> y <code>&lt;body&gt;</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🔗</div>
+                        <h3>Enlaces e Imágenes</h3>
+                        <p>Rutas relativas vs absolutas y accesibilidad con <code>alt</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Probador de Inputs</h3>
+                        <p>Experimenta con tipos de <code>&lt;input&gt;</code> y validación nativa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Estructura Base de un Documento HTML5">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · EL ESQUELETO WEB</span>
+                <h2 class="slide-title">Estructura Base de un Documento HTML5</h2>
+                <p class="slide-lead">Todo archivo HTML moderno comienza con el mismo esqueleto estándar (puedes generarlo en VS Code escribiendo <code>!</code> + Tab).</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📄 Plantilla HTML5</h3>
+                    <pre class="code-block"><code>&lt;!doctype html&gt;
+&lt;html lang="es"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;Mi Página&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hola Mundo&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🔎 Qué hace cada parte</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;!doctype html&gt;</code>: activa el modo estándar moderno del navegador.</li>
+                        <li><code>&lt;head&gt;</code>: metadatos invisibles (codificación UTF-8, título de pestaña, CSS).</li>
+                        <li><code>&lt;body&gt;</code>: todo el contenido visible para el usuario.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="Títulos, Párrafos y Listas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · JERARQUÍA DE CONTENIDO</span>
+                <h2 class="slide-title">Encabezados (h1–h6), Párrafos y Listas</h2>
+                <p class="slide-lead">Usa los encabezados por su jerarquía semántica (como el índice de un libro), no solo por su tamaño visual.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📚 Jerarquía correcta</h3>
+                    <ul class="styled-list">
+                        <li>Un solo <code>&lt;h1&gt;</code> principal por página (título del documento).</li>
+                        <li><code>&lt;h2&gt;</code> para secciones principales y <code>&lt;h3&gt;</code> para subsecciones.</li>
+                        <li><code>&lt;strong&gt;</code> indica importancia; <code>&lt;em&gt;</code> indica énfasis.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>📋 Listas ordenadas y desordenadas</h3>
+                    <pre class="code-block"><code>&lt;ul&gt; &lt;!-- Sin orden (viñetas) --&gt;
+  &lt;li&gt;HTML5&lt;/li&gt;
+  &lt;li&gt;CSS3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt; &lt;!-- Pasos numerados --&gt;
+  &lt;li&gt;Estructurar&lt;/li&gt;
+  &lt;li&gt;Estilizar&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Enlaces e Imágenes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · NAVEGACIÓN Y MULTIMEDIA</span>
+                <h2 class="slide-title">Enlaces (&lt;a&gt;) e Imágenes (&lt;img&gt;)</h2>
+                <p class="slide-lead">Conecta páginas con hipervínculos y muestra imágenes accesibles con texto alternativo.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🔗 Rutas y seguridad en enlaces</h3>
+                    <pre class="code-block"><code>&lt;!-- Ruta relativa --&gt;
+&lt;a href="contacto.html"&gt;Ir a Contacto&lt;/a&gt;
+
+&lt;!-- Enlace externo seguro --&gt;
+&lt;a href="https://mdn.io" target="_blank" rel="noopener noreferrer"&gt;MDN&lt;/a&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🖼️ Imágenes con <code>alt</code></h3>
+                    <pre class="code-block"><code>&lt;img src="img/perfil.jpg" alt="Retrato de Ana sonriendo" loading="lazy"&gt;</code></pre>
+                    <p style="margin-top:8px;">El atributo <code>alt</code> describe la imagen para lectores de pantalla y se muestra si la imagen falla al cargar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Formularios Básicos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · INTERACCIÓN CON EL USUARIO</span>
+                <h2 class="slide-title">Formularios: &lt;form&gt;, &lt;label&gt; e &lt;input&gt;</h2>
+                <p class="slide-lead">Captura datos del usuario usando los tipos nativos de HTML5 para obtener validación y teclados móviles adecuados.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📝 Asociar <code>label</code> con <code>input</code></h3>
+                    <pre class="code-block"><code>&lt;form&gt;
+  &lt;label for="correo"&gt;Email:&lt;/label&gt;
+  &lt;input id="correo" type="email" required placeholder="tu@email.com"&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>⌨️ Tipos útiles de <code>input</code></h3>
+                    <ul class="styled-list">
+                        <li><code>type="email"</code>: valida formato de correo.</li>
+                        <li><code>type="password"</code>: oculta los caracteres.</li>
+                        <li><code>type="number"</code>, <code>type="date"</code>, <code>type="checkbox"</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas en HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD DE CÓDIGO</span>
+                <h2 class="slide-title">Errores Comunes que Debes Evitar</h2>
+                <p class="slide-lead">Escribir HTML limpio desde el inicio te ahorra horas de depuración en CSS y JavaScript.</p>
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ 3 errores clásicos:</strong><br>
+                1. Usar <code>&lt;br&gt;</code> repetidos para crear espacios (eso se hace con <code>margin</code> o <code>padding</code> en CSS).<br>
+                2. Saltar de <code>&lt;h1&gt;</code> directo a <code>&lt;h4&gt;</code> solo porque "se veía muy grande".<br>
+                3. Olvidar el atributo <code>alt</code> en imágenes o el <code>for</code> en etiquetas <code>&lt;label&gt;</code>.
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Analogía mental:</strong> HTML es la estructura y las instalaciones de una casa (paredes, puertas, ventanas). CSS es la pintura y decoración. JavaScript es la electricidad y automatización.
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
+                <h2 class="slide-title">Elemento | Descripción</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;html&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;html&gt;</code> (o elemento HTML raíz) representa la raíz de un documento HTML. El resto de elementos descienden de este elemento.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Metadatos del documento</p>
+<p style="margin-bottom:8px;line-height:1.6;">Los metadatos contienen información sobre la página. Esto incluye información sobre estilos, scripts y datos que ayudan al software (search engines, browsers, etc.) a usar y generar la página. Los metadatos de estilos y scripts pueden estar definidos en la página o estar enlazados a otro fichero que contiene la información.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
+                <h2 class="slide-title">Elemento | Descripción</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;base&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;base&gt;</code> especifica la dirección URL base que se utilizará para todas las direcciones URL relativas contenidas dentro de un documento. Solo puede haber un elemento <code>&lt;base&gt;</code> en un documento.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;head&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;head&gt;</code> provee información general (metadatos) acerca del documento, incluyendo su título y enlaces a scripts y hojas de estilos.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;link&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;link&gt;</code> especifica la relación entre el documento actual y un recurso externo. Los usos posibles de este elemento incluyen la definición de un marco relacional para navegación. Este elemento es más frecuentemente usado para enlazar hojas de estilos.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;meta&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;meta&gt;</code> (solo tiene una).</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;style&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;style&gt;</code> y <code>&lt;/style&gt;</code> (ambas obligatorias).</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;title&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;title&gt;</code> HTML define el título del documento que se muestra en un browser en la barra de título o la pestaña de una página. Solo contiene texto; las etiquetas dentro del elemento se ignoran.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Seccionamiento básico</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
+                <h2 class="slide-title">Elemento | Descripción</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;body&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;body&gt;</code> de HTML representa el contenido de un documento HTML. Solo puede haber un elemento <code>&lt;body&gt;</code> en un documento.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Seccionamiento del contenido</p>
+<p style="margin-bottom:8px;line-height:1.6;">Los elementos de seccionamiento del contenido te permiten organizar los contenidos del documento en partes lógicas. Usa los elementos de seccionado para crear una descripción amplia de los contenidos de tu página, incluyendo el encabezado y pie de página y elementos para identificar secciones.</p></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
+                <h2 class="slide-title">Elemento | Descripción</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;address&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;address&gt;</code> aporta información de contacto para su <code>&lt;article&gt;</code> más cercano o ancestro <code>&lt;body&gt;</code>; en el último caso lo aplica a todo el documento.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;article&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento de HTML <code>&lt;article&gt;</code> representa una composición auto-contenida en un documento, una página, una aplicación o en un sitio, que se quiere que sea distribuible y/o reutilizable de manera independiente, por ejemplo, en la redifusión.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Algunos ejemplos podrían ser un mensaje en un foro, un artículo de una revista o un periódico, una entrada de blog, el comentario de un usuario, un widget o gadget interactivo, o cualquier otro elemento de contenido independiente.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;aside&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;aside&gt;</code> representa una sección de una página que consiste en contenido que está indirectamente relacionado con el contenido principal del documento.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Estas secciones son a menudo representadas como barras laterales o como inserciones y contienen una explicación al margen como una definición de glosario, elementos relacionados indirectamente como publicidad, la biografía del autor o, en aplicaciones web, la información de perfil o enlaces a blogs relacionados.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;footer&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML Footer (<code>&lt;footer&gt;</code>) representa un pie de página para el contenido de sección más cercano o el elemento raíz de sección (por ejemplo, su ancestro más cercano <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;details&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;figure&gt;</code>, <code>&lt;td&gt;</code>).</p>
+<p style="margin-bottom:8px;line-height:1.6;">Un pie de página típicamente contiene información acerca del autor de la sección, datos de derechos de autor o enlaces a documentos relacionados.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;header&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento de HTML Header (<code>&lt;header&gt;</code>) representa un grupo de ayudas introductorias o de navegación. Puede contener algunos elementos de encabezado, así como también un logo, un formulario de búsqueda, un nombre de autor y otros componentes.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, <code>&lt;h6&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">Los elementos de encabezado implementan seis niveles de encabezado del documento, <code>&lt;h1&gt;</code> es el más importante y <code>&lt;h6&gt;</code>, el menos importante.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Un elemento de encabezado describe brevemente el tema de la sección que presenta. La información de encabezado puede ser usada por los agentes usuarios, por ejemplo, para construir una tabla de contenidos para un documento automáticamente.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;main&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;main&gt;</code> representa el contenido principal del <code>&lt;body&gt;</code> de un documento o aplicación.</p>
+<p style="margin-bottom:8px;line-height:1.6;">El área principal del contenido consiste en el contenido que está directamente relacionado o se expande sobre el tema central de un documento o la funcionalidad central de una aplicación.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Este contenido debe ser único al documento, excluyendo cualquier contenido que se repita a través de un conjunto de documentos como barras laterales, enlaces de navegación, información de derechos de autor, logos del sitio y formularios de búsqueda (a menos que la función principal del documento sea un formulario de búsqueda).</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;nav&gt;</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;nav&gt;</code> representa una sección de una página cuyo propósito es proporcionar enlaces de navegación, ya sea dentro del documento actual o a otros documentos.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Ejemplos comunes de secciones de navegación son menús, tablas de contenido e índices.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;section&gt;</code></h3></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR DE INPUTS -->
+        <section class="slide" data-slide="11" data-title="Probador Interactivo de Inputs">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Probador Interactivo de &lt;input&gt;</h2>
+                <p class="slide-lead">Cambia el atributo <code>type</code>, activa <code>required</code> y prueba la validación nativa del navegador.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Atributo type</label>
+                        <select id="hbType">
+                            <option value="email">email</option>
+                            <option value="text">text</option>
+                            <option value="password">password</option>
+                            <option value="number">number</option>
+                            <option value="date">date</option>
+                            <option value="color">color</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>placeholder</label>
+                        <input type="text" id="hbPlace" value="ejemplo@correo.com" />
+                    </div>
+                    <div class="sim-control">
+                        <label><input type="checkbox" id="hbReq" checked style="width:auto; margin-right:8px;" /> Atributo required</label>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" style="display:grid; place-items:center;">
+                        <form onsubmit="event.preventDefault(); document.getElementById('hbMsg').textContent='✅ ¡Formulario válido!';" style="display:flex; flex-direction:column; gap:10px; width:100%; max-width:320px;">
+                            <label for="hbPreviewInput" style="font-weight:600; font-size:0.9rem;">Campo de prueba:</label>
+                            <input id="hbPreviewInput" type="email" required placeholder="ejemplo@correo.com" style="padding:10px 12px; border-radius:8px; border:1px solid #38bdf8; background:#0f172a; color:#fff; font-size:0.95rem;" />
+                            <button type="submit" class="ctrl-btn" style="background:#38bdf8; color:#070a13;">Probar envío</button>
+                            <span id="hbMsg" style="font-size:0.85rem; color:#6ee7b7;"></span>
+                        </form>
+                    </div>
+                    <pre class="sim-code" id="hbCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de HTML Básico</h2>
+                <p class="slide-lead">Comprueba lo aprendido sobre estructura, enlaces, imágenes y formularios.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="El atributo alt describe la imagen para accesibilidad (lectores de pantalla) y cuando falla la carga."
+                    data-err="title solo muestra un tooltip al pasar el mouse; alt es el atributo obligatorio de accesibilidad.">
+                    <div class="quiz-q-title">1. ¿Qué atributo de <code>&lt;img&gt;</code> describe la imagen para lectores de pantalla y casos de error?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">alt</button>
+                        <button class="quiz-option" data-opt="b">src</button>
+                        <button class="quiz-option" data-opt="c">href</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="target='_blank' abre el enlace en una nueva pestaña y rel='noopener noreferrer' protege la seguridad."
+                    data-err="href indica la dirección destino; target='_blank' controla que se abra en otra pestaña.">
+                    <div class="quiz-q-title">2. ¿Qué atributo hace que un enlace <code>&lt;a&gt;</code> se abra en una nueva pestaña?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">open="new"</button>
+                        <button class="quiz-option" data-opt="b">target="_blank"</button>
+                        <button class="quiz-option" data-opt="c">rel="external"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="El atributo for del &lt;label&gt; debe coincidir exactamente con el id del &lt;input&gt;."
+                    data-err="El atributo name sirve para enviar datos al servidor; for + id vinculan visual y accesiblemente label e input.">
+                    <div class="quiz-q-title">3. ¿Qué atributos vinculan un <code>&lt;label&gt;</code> con su <code>&lt;input&gt;</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">class y type</button>
+                        <button class="quiz-option" data-opt="b">name y value</button>
+                        <button class="quiz-option" data-opt="c">for (en label) e id (en input)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; background: #f8fafc; padding: 20px; }
+  .card { background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; max-width: 360px; }
+  h1 { margin: 0 0 8px; color: #0f172a; font-size: 1.4rem; }
+  p { color: #475569; line-height: 1.5; }
+  a { display: inline-block; margin-top: 10px; color: #0284c7; font-weight: 600; }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;h1&gt;Ana García&lt;/h1&gt;&lt;p&gt;Desarrolladora Frontend aprendiendo &lt;strong&gt;HTML5&lt;/strong&gt; y &lt;em&gt;CSS3&lt;/em&gt;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;HTML Semántico&lt;/li&gt;&lt;li&gt;Accesibilidad Web&lt;/li&gt;&lt;/ul&gt;&lt;a href=&quot;#&quot;&gt;Ver portafolio →&lt;/a&gt;&lt;/div&gt;">Tarjeta Perfil</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; background: #0f172a; color: #fff; padding: 20px; }
+  form { display: grid; gap: 10px; max-width: 300px; }
+  input, button { padding: 10px; border-radius: 8px; border: 1px solid #334155; }
+  button { background: #38bdf8; color: #0f172a; font-weight: 700; border: 0; cursor: pointer; }
+&lt;/style&gt;
+&lt;form&gt;&lt;label for=&quot;n&quot;&gt;Nombre&lt;/label&gt;&lt;input id=&quot;n&quot; type=&quot;text&quot; required placeholder=&quot;Tu nombre&quot;&gt;&lt;label for=&quot;e&quot;&gt;Correo&lt;/label&gt;&lt;input id=&quot;e&quot; type=&quot;email&quot; required placeholder=&quot;tu@email.com&quot;&gt;&lt;button type=&quot;submit&quot;&gt;Enviar&lt;/button&gt;&lt;/form&gt;">Formulario Básico</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; background: #f8fafc; padding: 20px; }
+  .card { background: #fff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; max-width: 360px; }
+  h1 { margin: 0 0 8px; color: #0f172a; font-size: 1.4rem; }
+  p { color: #475569; line-height: 1.5; }
+  a { display: inline-block; margin-top: 10px; color: #0284c7; font-weight: 600; }
+&lt;/style&gt;
+&lt;div class="card"&gt;&lt;h1&gt;Ana García&lt;/h1&gt;&lt;p&gt;Desarrolladora Frontend aprendiendo &lt;strong&gt;HTML5&lt;/strong&gt; y &lt;em&gt;CSS3&lt;/em&gt;.&lt;/p&gt;&lt;ul&gt;&lt;li&gt;HTML Semántico&lt;/li&gt;&lt;li&gt;Accesibilidad Web&lt;/li&gt;&lt;/ul&gt;&lt;a href="#"&gt;Ver portafolio →&lt;/a&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/HTML.md" style="color:#38bdf8;">HTML.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (5)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="enlaces.html"><span class="file-name">📄 enlaces</span><span class="file-path">enlaces.html</span></a>
+                    <a class="file-card" href="formularios.html"><span class="file-name">📄 formularios</span><span class="file-path">formularios.html</span></a>
+                    <a class="file-card" href="img.html"><span class="file-name">📄 img</span><span class="file-path">img.html</span></a>
+                    <a class="file-card" href="listas.html"><span class="file-name">📄 listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="Titulos%20y%20parrafos.html"><span class="file-name">📄 Titulos y parrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const typeEl = document.getElementById('hbType');
+            const placeEl = document.getElementById('hbPlace');
+            const reqEl = document.getElementById('hbReq');
+            const input = document.getElementById('hbPreviewInput');
+            const out = document.getElementById('hbCodeOut');
+            const msg = document.getElementById('hbMsg');
+
+            function updateInputSim() {
+                input.type = typeEl.value;
+                input.placeholder = placeEl.value;
+                input.required = reqEl.checked;
+                msg.textContent = '';
+                const reqAttr = reqEl.checked ? ' required' : '';
+                const phAttr = placeEl.value ? ` placeholder="${placeEl.value}"` : '';
+                out.textContent = `<label for="campo">Campo:</label>\n<input id="campo" type="${typeEl.value}"${phAttr}${reqAttr}>`;
+            }
+            [typeEl, placeEl, reqEl].forEach(el => el.addEventListener('input', updateInputSim));
+            updateInputSim();
+        })();
+    </script>
+</body>
+</html>

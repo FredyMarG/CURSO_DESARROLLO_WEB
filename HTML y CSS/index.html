@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mega-Portal HTML5 y CSS3 — Ruta Completa Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #070a13;
+            --card: rgba(16, 24, 42, 0.84);
+            --border: rgba(255, 255, 255, 0.1);
+            --primary: #38bdf8;
+            --indigo: #818cf8;
+            --emerald: #10b981;
+            --amber: #f59e0b;
+            --text: #f1f5f9;
+            --muted: #94a3b8;
+            --sans: 'Outfit', system-ui, sans-serif;
+            --mono: 'Fira Code', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; }
+        .bg-glow { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; opacity: 0.32; }
+        .g1 { width: 420px; height: 420px; background: #0284c7; top: -120px; left: -100px; }
+        .g2 { width: 400px; height: 400px; background: #6366f1; bottom: -120px; right: -80px; }
+        .wrap { position: relative; z-index: 1; max-width: 1220px; margin: 0 auto; padding: 28px 22px 72px; }
+        .topbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+        .badge { font-family: var(--mono); font-size: 0.74rem; color: var(--primary); background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.35); padding: 5px 12px; border-radius: 999px; }
+        .top-links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            background: rgba(255,255,255,0.06); color: var(--text); border: 1px solid var(--border);
+            border-radius: 10px; padding: 8px 14px; font-size: 0.86rem; font-weight: 600;
+            text-decoration: none; cursor: pointer; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+        }
+        .btn:hover { border-color: var(--primary); background: rgba(56,189,248,0.14); }
+        .btn-primary { background: linear-gradient(135deg, var(--primary), var(--indigo)); color: #070a13; border: 0; }
+        .btn-primary:hover { filter: brightness(1.08); background: linear-gradient(135deg, var(--primary), var(--indigo)); }
+
+        .hero { text-align: center; margin-bottom: 32px; }
+        .hero h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; line-height: 1.1; margin: 12px 0; }
+        .grad { background: linear-gradient(135deg, #38bdf8, #818cf8, #10b981); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--muted); max-width: 740px; margin: 0 auto 20px; line-height: 1.6; font-size: 1.02rem; }
+
+        .search-bar { max-width: 560px; margin: 0 auto 28px; }
+        .search-bar input {
+            width: 100%; background: rgba(14,21,38,0.9); color: #fff;
+            border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+            font-family: var(--sans); font-size: 0.95rem; outline: none;
+        }
+        .search-bar input:focus { border-color: var(--primary); }
+
+        .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 18px; }
+        .mod-card {
+            background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+            padding: 22px; display: flex; flex-direction: column; gap: 12px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .mod-card:hover { transform: translateY(-3px); border-color: rgba(56,189,248,0.45); }
+        .mod-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .mod-step { font-family: var(--mono); font-size: 0.72rem; color: var(--emerald); background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); padding: 3px 10px; border-radius: 999px; }
+        .mod-title { font-size: 1.25rem; font-weight: 800; color: #fff; }
+        .mod-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+        .subtopics { display: flex; flex-wrap: wrap; gap: 6px; }
+        .chip {
+            font-family: var(--mono); font-size: 0.72rem; color: #cbd5e1;
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+            padding: 3px 8px; border-radius: 6px;
+        }
+        .mod-actions { margin-top: auto; padding-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+        @media (max-width: 600px) { .modules-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="bg-glow g1"></div>
+    <div class="bg-glow g2"></div>
+    <div class="wrap">
+        <div class="topbar">
+            <span class="badge">MÓDULO COMPLETO · HTML5 &amp; CSS3</span>
+            <div class="top-links">
+                <a class="btn" href="Documentacion/index.html">📘 Documentación Offline (8 Guías)</a>
+                <a class="btn" href="PROYECTOS/index.html">🚀 7 Proyectos Reales</a>
+                <a class="btn" href="../index.html">🏠 Portal Principal</a>
+            </div>
+        </div>
+
+        <section class="hero">
+            <h1>Ruta Completa de<br><span class="grad">HTML5 y CSS3 Interactivo</span></h1>
+            <p>Domina desde las etiquetas básicas hasta Grid, Flexbox, Animaciones a 60 FPS y Responsive Design. Cada módulo incluye teoría clara, simulador visual en vivo, quiz de autoevaluación, laboratorio y ejercicios reales.</p>
+            <div id="overallProgress" style="max-width:460px;margin:0 auto;background:rgba(16,24,42,0.8);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:10px 16px;font-size:0.86rem;color:#94a3b8;"></div>
+        </section>
+
+        <div class="search-bar">
+            <input type="search" id="modSearch" placeholder="🔍 Filtrar tema o subtema (ej. clamp, border-box, @keyframes, ARIA, subgrid)..." />
+        </div>
+
+        <main class="modules-grid" id="modulesGrid"></main>
+    </div>
+
+    <script>
+        const MODULES = [
+            {
+                step: 'PASO 1 · ESTRUCTURA',
+                title: '🧱 HTML Básico',
+                desc: 'Aprende el esqueleto de un documento HTML5 válido, jerarquía de encabezados, listas, enlaces, imágenes accesibles y formularios con validación nativa.',
+                chips: ['<!doctype html>', 'h1–h6 & p', 'ul / ol', 'a href & target', 'img alt', 'form & input', 'Probador de Inputs', 'Quiz + Lab'],
+                guide: 'HTML BASICO/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 2 · SEMÁNTICA',
+                title: '🏛️ HTML Avanzado',
+                desc: 'Domina HTML semántico para SEO y lectores de pantalla, atributos WAI-ARIA, tablas estructuradas, multimedia nativa, datalist, details/summary y lazy loading.',
+                chips: ['header/main/article', 'WAI-ARIA', 'table & scope', 'audio / video', 'loading="lazy"', 'fieldset / datalist', 'Inspector Semántico', 'Quiz + Lab'],
+                guide: 'HTML avanzado/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 3 · ESTILOS BASE',
+                title: '🎨 CSS Básico',
+                desc: 'Comprende cómo CSS dibuja cada caja: selectores, Modelo de Caja (content, padding, border, margin), box-sizing: border-box, unidades, colores, tipografía, gradientes, sombras y el ejercicio Tarjeta de Presentación.',
+                chips: ['Box Model', 'border-box', 'px / rem / em', 'HEX / RGB / HSL', 'linear-gradient', 'box-shadow', 'Simulador Box Model', 'Tarjeta Presentación'],
+                guide: 'CSS BASICO/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 4 · ARQUITECTURA',
+                title: '⚡ CSS Avanzado',
+                desc: 'Resuelve conflictos con Especificidad y Cascada, controla el flujo con Display, Position (relative, absolute, fixed, sticky), z-index, Pseudoclases, Pseudoelementos, BEM y el ejercicio Ventana Modal.',
+                chips: ['Especificidad', 'Position & z-index', 'Display & Overflow', 'object-fit: cover', ':hover / ::after', 'Metodología BEM', 'Simulador Position', 'Ventana Modal'],
+                guide: 'CSS avanzado/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 5 · LAYOUT 1D',
+                title: '📐 Flexbox CSS',
+                desc: 'Domina el eje principal y cruzado, justify-content, align-items, flex-wrap, flex-grow/shrink/basis, order, align-self y patrones de producción como Navbars y Sticky Footers.',
+                chips: ['Main & Cross Axis', 'justify-content', 'align-items', 'flex-grow/shrink', 'flex-wrap & gap', 'align-self & order', 'Simulador Flexbox', 'Quiz + Lab'],
+                guide: 'Flexbox/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 6 · LAYOUT 2D',
+                title: '🍱 CSS Grid Layout',
+                desc: 'Diseña grillas bidimensionales con fr, repeat(auto-fit, minmax()), grid-template-areas, span, grid-auto-flow: dense, place-items y Subgrid.',
+                chips: ['Unidad fr', 'repeat() & minmax()', 'template-areas', 'Explícito/Implícito', 'dense', 'Subgrid', 'Simulador Grid', 'Quiz + Lab'],
+                guide: 'Grid/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 7 · ADAPTATIVO',
+                title: '📱 Responsive Design',
+                desc: 'Construye interfaces Mobile-First con meta viewport, Media Queries, Feature Queries (@supports), Container Queries (@container), imágenes srcset/<picture> y Holy Grail Layout.',
+                chips: ['Mobile-First', '@media min-width', '@container', '@supports', 'srcset & <picture>', 'aspect-ratio', 'Simulador Breakpoints', 'Quiz + Lab'],
+                guide: 'Responsive Design/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 8 · CSS MODERNO',
+                title: '🧮 Funciones Avanzadas',
+                desc: 'Potencia tu CSS con Variables (--var), calc(), min(), max(), clamp() para tipografía fluida, unidades dinámicas dvh/svh, color-mix(), backdrop-filter y clip-path.',
+                chips: ['Variables --var', 'calc() / min() / max()', 'clamp() fluido', '100dvh / svh', 'color-mix()', 'backdrop-filter', 'clip-path', 'Simulador clamp()'],
+                guide: 'Funciones Avanzadas/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 9 · MOVIMIENTO',
+                title: '✨ Animaciones CSS',
+                desc: 'Crea transiciones y @keyframes fluidos a 60 FPS en GPU (transform y opacity), curvas cubic-bezier con rebote, animaciones de scroll y accesibilidad con prefers-reduced-motion.',
+                chips: ['transition vs @keyframes', 'GPU 60 FPS', 'cubic-bezier()', 'fill-mode: forwards', 'animation-timeline', 'reduced-motion', 'Simulador Curvas', 'Quiz + Lab'],
+                guide: 'Animaciones/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 10 · PORTAFOLIO',
+                title: '🚀 Proyectos Reales (7)',
+                desc: 'Aplica todo lo aprendido en 7 proyectos de CSS puro: Accordion Menu (2 versiones), Flipper Card 3D, Chatbox, Sidebar Menu, One View Page, Web Page y Web Page Animations.',
+                chips: ['Accordion Menu', 'Flipper Card 3D', 'Chatbox UI', 'Sidebar Menu', 'One View Page', 'Web Page', 'Web Animations'],
+                guide: 'PROYECTOS/index.html',
+                doc: 'Documentacion/index.html'
+            },
+            {
+                step: 'PASO 11 · REFERENCIA',
+                title: '📘 Documentación & Hosting',
+                desc: 'Consulta los 8 manuales completos en Markdown sin necesidad de servidor local, incluyendo la guía de Hosting y Despliegue (GitHub Pages, Netlify, DNS).',
+                chips: ['HTML.md', 'CSS.md', 'FLEXBOX.md', 'GRID.md', 'RESPONSIVE.md', 'ANIMACIONES.md', 'FUNCIONES_AVANZADAS.md', 'HOSTING.md'],
+                guide: 'Documentacion/index.html',
+                doc: null
+            }
+        ];
+
+        const grid = document.getElementById('modulesGrid');
+        const search = document.getElementById('modSearch');
+        const overallEl = document.getElementById('overallProgress');
+
+        function getProgressMap() {
+            try { return JSON.parse(localStorage.getItem('curso_web_progress') || '{}'); }
+            catch (_) { return {}; }
+        }
+
+        function render(q = '') {
+            const term = q.trim().toLowerCase();
+            const prog = getProgressMap();
+            const doneCount = MODULES.filter(m => prog['HTML y CSS/' + m.guide]?.completed).length;
+            if (overallEl) {
+                overallEl.innerHTML = `Progreso guardado: <strong style="color:#10b981;">${doneCount} / ${MODULES.length}</strong> módulos completados`;
+            }
+
+            grid.innerHTML = '';
+            MODULES.filter(m => !term || m.title.toLowerCase().includes(term) || m.desc.toLowerCase().includes(term) || m.chips.some(c => c.toLowerCase().includes(term)))
+                .forEach(m => {
+                    const entry = prog['HTML y CSS/' + m.guide];
+                    const doneBadge = entry?.completed
+                        ? `<span class="mod-step" style="color:#38bdf8;border-color:rgba(56,189,248,0.4);background:rgba(56,189,248,0.12);">✅ Completado${entry.quizTotal ? ` (${entry.quizScore}/${entry.quizTotal})` : ''}</span>`
+                        : '';
+                    const card = document.createElement('article');
+                    card.className = 'mod-card';
+                    card.innerHTML = `
+                        <div class="mod-head">
+                            <span class="mod-step">${m.step}</span>
+                            ${doneBadge}
+                        </div>
+                        <h2 class="mod-title">${m.title}</h2>
+                        <p class="mod-desc">${m.desc}</p>
+                        <div class="subtopics">${m.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+                        <div class="mod-actions">
+                            <a class="btn btn-primary" href="${encodeURI(m.guide)}">Abrir Guía Interactiva →</a>
+                            ${m.doc ? `<a class="btn" href="${encodeURI(m.doc)}">📘 Apuntes</a>` : ''}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+        }
+
+        search.addEventListener('input', () => render(search.value));
+        render();
+    </script>
+</body>
+</html>

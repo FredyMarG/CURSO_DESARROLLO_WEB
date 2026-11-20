@@ -1,42 +1,231 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Basico/Enlaces.html
-     Título: Enlaces o hipervinculos
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enlaces o hipervinculos</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enlaces e Hipervínculos (&lt;a&gt;) — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-    <!-- 
-        NAVEGACIÓN INTERNA/ESTÁNDAR:
-        Se utiliza la etiqueta <a> (Anchor). El atributo 'href' es obligatorio.
-    -->
-    <!-- Párrafo de texto. -->
-    <p>Enalce en una misma pestaña</p>
-    <a href="https://www.youtube.com">Youtube</a>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 BÁSICO · NAVEGACIÓN</span>
+            <div class="brand-title"><span>🔗</span><span>Enlaces (&lt;a&gt;)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
+            <a class="nav-btn" href="../../index.html" title="Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
 
-    <!-- 
-        NAVEGACIÓN EXTERNA:
-        target="_blank": Abre el enlace en una nueva pestaña.
-        SEGURIDAD: Se añade rel="noopener noreferrer" para evitar ataques de acceso al objeto 'window.opener' 
-        de la página de origen y mejorar el rendimiento.
-    -->
-    <!-- Párrafo de texto. -->
-    <p>Enlace que se abre en una nueva pestaña</p>
-    <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">Google</a>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Enlaces en HTML5">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">&lt;a href="..."&gt;</span>
+                    <span class="badge badge-purple">Rutas &amp; Seguridad</span>
+                    <span class="badge badge-emerald">Anclas, Email y Tel</span>
+                </div>
+                <h1 class="hero-title">Domina los<br /><span class="gradient-text">Enlaces e Hipervínculos</span></h1>
+                <p class="hero-subtitle">Conecta páginas internas, sitios externos seguros, secciones dentro de un mismo documento, descargas, correos y llamadas telefónicas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧭</div>
+                        <h3>Rutas Relativas vs Absolutas</h3>
+                        <p>Cuándo enlazar archivos locales y cuándo URLs completas.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🛡️</div>
+                        <h3>Target &amp; Seguridad</h3>
+                        <p>Por qué usar <code>rel="noopener noreferrer"</code> con <code>_blank</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio en Vivo</h3>
+                        <p>Prueba enlaces externos, anclas <code>#id</code> y botones estilizados.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Enlaces (&amp;lt;a&amp;gt;)?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Enlaces (&amp;lt;a&amp;gt;) y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Conecta páginas internas, sitios externos seguros, secciones dentro de un mismo documento, descargas, correos y llamadas telefónicas. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Rutas Relativas, Absolutas y Protocolos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · EL ATRIBUTO HREF</span>
+                <h2 class="slide-title">Anatomía de &lt;a&gt; y Tipos de Rutas</h2>
+                <p class="slide-lead">La etiqueta <code>&lt;a&gt;</code> (Anchor) requiere el atributo obligatorio <code>href</code> para funcionar como enlace navegable.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Tipo de enlace</th><th>Ejemplo</th><th>Para qué sirve</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Absoluta</td><td><code>href="https://www.google.com"</code></td><td>Ir a otro sitio web externo</td></tr>
+                    <tr><td>Relativa</td><td><code>href="listas.html"</code> / <code>../index.html</code></td><td>Navegar entre páginas de tu proyecto</td></tr>
+                    <tr><td>Ancla interna</td><td><code>href="#contacto"</code></td><td>Saltar a una sección con <code>id="contacto"</code></td></tr>
+                    <tr><td>Acciones especiales</td><td><code>mailto:hola@web.com</code> / <code>tel:+57...</code></td><td>Abrir cliente de correo o marcar teléfono</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Seguridad con target='_blank'">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · SEGURIDAD Y BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Abrir en Nueva Pestaña de Forma Segura</h2>
+                <p class="slide-lead">Al abrir un sitio externo en otra pestaña, protege el rendimiento y la seguridad de tu página.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🔐 Enlace externo seguro</h3>
+                    <pre class="code-block"><code>&lt;a href="https://www.google.com"
+   target="_blank"
+   rel="noopener noreferrer"&gt;
+  Ir a Google
+&lt;/a&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>📥 Descargas directas</h3>
+                    <pre class="code-block"><code>&lt;a href="guia.pdf" download="Guia-HTML5.pdf"&gt;
+  Descargar Guía PDF
+&lt;/a&gt;</code></pre>
+                    <p style="margin-top:8px;">El atributo <code>download</code> indica al navegador que descargue el archivo en lugar de abrirlo.</p>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <strong>💡 ¿Por qué <code>rel="noopener noreferrer"</code>?</strong> Evita que la pestaña externa pueda manipular tu página original vía <code>window.opener</code> y mejora el aislamiento de procesos del navegador.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Buenas Prácticas: Enlaces (&amp;lt;a&amp;gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Enlaces (&amp;lt;a&amp;gt;)</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz de Enlaces">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Enlaces HTML</h2>
+                <p class="slide-lead">Verifica tus conocimientos sobre rutas, anclas y seguridad.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="c"
+                    data-ok="href='#footer' enlaza directamente con el elemento que tenga id='footer' en la misma página."
+                    data-err="El símbolo # en href hace referencia al atributo id de una sección interna.">
+                    <div class="quiz-q-title">1. ¿Cómo creas un enlace que salte a una sección con <code>id="footer"</code> en la misma página?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">href="footer.html"</button>
+                        <button class="quiz-option" data-opt="b">href="@footer"</button>
+                        <button class="quiz-option" data-opt="c">href="#footer"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="target='_blank' abre una nueva pestaña y rel='noopener noreferrer' protege la página de origen."
+                    data-err="target='_self' abre en la misma pestaña (comportamiento por defecto).">
+                    <div class="quiz-q-title">2. ¿Qué combinación abre un enlace externo en una nueva pestaña de forma segura?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">target="_blank" rel="noopener noreferrer"</button>
+                        <button class="quiz-option" data-opt="b">target="_self" rel="external"</button>
+                        <button class="quiz-option" data-opt="c">open="tab"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Enlaces">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Enlaces</h2>
+                <p class="slide-lead">Prueba el ejemplo original de enlaces o experimenta con botones-enlace estilizados.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #f8fafc; } a { color: #0284c7; font-weight: 600; }&lt;/style&gt;
+&lt;p&gt;Enlace en una misma pestaña:&lt;/p&gt;
+&lt;a href=&quot;https://www.youtube.com&quot;&gt;YouTube&lt;/a&gt;
+&lt;p&gt;Enlace que se abre en una nueva pestaña (seguro):&lt;/p&gt;
+&lt;a href=&quot;https://www.google.com&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;Google ↗&lt;/a&gt;">Ejemplo Original</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
+  .cta { display: inline-block; padding: 12px 24px; background: #38bdf8; color: #0f172a; border-radius: 999px; text-decoration: none; font-weight: 800; }
+&lt;/style&gt;
+&lt;a class=&quot;cta&quot; href=&quot;mailto:hola@ejemplo.com&quot;&gt;✉️ Enviar Correo&lt;/a&gt;">Enlace Botón + mailto</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;body { font-family: system-ui; padding: 16px; background: #f8fafc; } a { color: #0284c7; font-weight: 600; }&lt;/style&gt;
+&lt;p&gt;Enlace en una misma pestaña:&lt;/p&gt;
+&lt;a href="https://www.youtube.com"&gt;YouTube&lt;/a&gt;
+&lt;p&gt;Enlace que se abre en una nueva pestaña (seguro):&lt;/p&gt;
+&lt;a href="https://www.google.com" target="_blank" rel="noopener noreferrer"&gt;Google ↗&lt;/a&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
+                <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>
+                <p class="slide-lead">Explora el resto de guías interactivas del módulo.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="index.html"><span class="file-name">🧱 Guía Completa HTML Básico</span><span class="file-path">index.html</span></a>
+                    <a class="file-card" href="Titulos%20y%20parrafos.html"><span class="file-name">📝 Títulos y Párrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
+                    <a class="file-card" href="listas.html"><span class="file-name">📋 Listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="img.html"><span class="file-name">🖼️ Imágenes</span><span class="file-path">img.html</span></a>
+                    <a class="file-card" href="formularios.html"><span class="file-name">📋 Formularios</span><span class="file-path">formularios.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

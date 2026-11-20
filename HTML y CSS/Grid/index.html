@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · LAYOUT BIDIMENSIONAL</span>
+            <div class="brand-title"><span>🍱</span><span>CSS Grid</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: CSS Grid">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">display: grid</span>
+                    <span class="badge badge-purple">Filas y Columnas 2D</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">CSS Grid Layout</span></h1>
+                <p class="hero-subtitle">El sistema más poderoso de CSS para diseñar maquetaciones en dos dimensiones (filas y columnas simultáneamente) con código limpio y responsivo.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📐</div>
+                        <h3>Unidad <code>fr</code> y <code>repeat()</code></h3>
+                        <p>Reparte espacio libre sin desbordamientos ni cálculos de porcentajes.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🗺️</div>
+                        <h3>Áreas y Líneas</h3>
+                        <p>Dibuja layouts completos con <code>grid-template-areas</code> o <code>span</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador Grid</h3>
+                        <p>Modifica columnas, <code>gap</code> y alineación en tiempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: FLEXBOX VS GRID -->
+        <section class="slide" data-slide="2" data-title="¿Grid o Flexbox?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · CUÁNDO USAR CADA UNO</span>
+                <h2 class="slide-title">Grid (2D) vs Flexbox (1D)</h2>
+                <p class="slide-lead">No compiten entre sí: se complementan. Grid estructura la página; Flexbox alinea el contenido dentro de cada componente.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Característica</th><th>Flexbox (1D)</th><th>CSS Grid (2D)</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Dimensión</td><td>Una fila <strong>o</strong> una columna a la vez</td><td>Filas <strong>y</strong> columnas al mismo tiempo</td></tr>
+                    <tr><td>Enfoque</td><td>Contenido hacia afuera (Content-first)</td><td>Contenedor hacia adentro (Layout-first)</td></tr>
+                    <tr><td>Caso ideal</td><td>Navbars, botones, grupos de iconos, chat</td><td>Layouts completos, dashboards, galerías</td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-analogy">
+                <strong>🧠 Analogía mental:</strong> Grid es el plano arquitectónico de un edificio (define habitaciones en filas y columnas). Flexbox es cómo acomodas los muebles dentro de una habitación.
+            </div>
+        </section>
+
+        <!-- SLIDE 3: UNIDAD FR Y REPEAT -->
+        <section class="slide" data-slide="3" data-title="Unidad fr, repeat() y minmax()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · COLUMNAS INTELIGENTES</span>
+                <h2 class="slide-title">La magia de <code>fr</code>, <code>repeat()</code> y <code>minmax()</code></h2>
+                <p class="slide-lead">Olvídate de calcular <code>width: 33.33%</code> menos el <code>gap</code>. La unidad <code>fr</code> (fracción) lo hace automáticamente.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📊 <code>fr</code> (Espacio disponible)</h3>
+                    <pre class="code-block"><code>.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 2fr;
+  gap: 16px;
+}</code></pre>
+                    <p style="margin-top:8px;">La 1ª columna mide 240px fijos; del espacio sobrante, la 2ª toma 1 parte y la 3ª el doble.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>📱 Grilla Responsiva en 1 línea</h3>
+                    <pre class="code-block"><code>.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}</code></pre>
+                    <p style="margin-top:8px;">Crea tantas columnas de mínimo 220px como quepan, sin escribir una sola Media Query.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: ÁREAS Y POSICIONAMIENTO -->
+        <section class="slide" data-slide="4" data-title="Líneas, Span y Template Areas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · POSICIONAMIENTO 2D</span>
+                <h2 class="slide-title">grid-column, span y grid-template-areas</h2>
+                <p class="slide-lead">Haz que cualquier elemento ocupe múltiples celdas o dibuja tu interfaz con nombres legibles.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🗺️ <code>grid-template-areas</code></h3>
+                    <pre class="code-block"><code>.pagina {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-areas:
+    "header header"
+    "aside  main"
+    "footer footer";
+}
+.header { grid-area: header; }</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>↔️ Expansión con <code>span</code></h3>
+                    <pre class="code-block"><code>.destacado {
+  grid-column: span 2; /* Ocupa 2 columnas */
+  grid-row: span 2;    /* Ocupa 2 filas */
+}</code></pre>
+                    <p style="margin-top:10px;">Si agregas <code>grid-auto-flow: dense;</code> al padre, Grid rellena los huecos vacíos automáticamente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: EXPLÍCITO VS IMPLÍCITO -->
+        <section class="slide" data-slide="5" data-title="Grid Explícito, Implícito y Subgrid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ARQUITECTURA AVANZADA</span>
+                <h2 class="slide-title">Grid Explícito vs Implícito y Subgrid</h2>
+                <p class="slide-lead">¿Qué ocurre cuando llegan más elementos de los que definiste en tu plantilla?</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧱 Explícito vs Implícito</h3>
+                    <ul class="styled-list">
+                        <li><strong>Explícito:</strong> las filas/columnas que defines con <code>grid-template-columns</code> / <code>rows</code>.</li>
+                        <li><strong>Implícito:</strong> las filas extra que Grid crea solo cuando hay más ítems. Contrólalas con <code>grid-auto-rows: 160px;</code>.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🧬 <code>subgrid</code> (CSS Moderno)</h3>
+                    <pre class="code-block"><code>.card {
+  display: grid;
+  grid-row: span 3;
+  grid-template-rows: subgrid;
+}</code></pre>
+                    <p style="margin-top:8px;">Permite que los hijos internos de una tarjeta se alineen con las pistas del Grid padre.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: ALINEACIÓN EN GRID -->
+        <section class="slide" data-slide="6" data-title="Alineación en Grid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ALINEACIÓN</span>
+                <h2 class="slide-title">place-items y place-content</h2>
+                <p class="slide-lead">Centra cualquier elemento dentro de su celda con una sola propiedad.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🎯 El truco del centrado en 2 líneas</h3>
+                    <pre class="code-block"><code>.centro {
+  display: grid;
+  place-items: center; /* align-items + justify-items */
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🔎 Diferencia clave</h3>
+                    <ul class="styled-list">
+                        <li><code>*-items</code>: alinea el contenido <strong>dentro</strong> de cada celda.</li>
+                        <li><code>*-content</code>: mueve toda la <strong>cuadrícula completa</strong> cuando sobra espacio en el contenedor.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: 1. ¿Qué es CSS Grid?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · GRID.md</span>
+                <h2 class="slide-title">1. ¿Qué es CSS Grid?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">CSS Grid Layout es un sistema de diseño <strong>bidimensional</strong> para la web que permite trabajar con filas y columnas al mismo tiempo. Fue creado para resolver maquetaciones complejas que antes se hacían con floats, posicionamiento absoluto o hacks.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: 2. Conceptos básicos: contenedor e ítems">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · GRID.md</span>
+                <h2 class="slide-title">2. Conceptos básicos: contenedor e ítems</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;">2.1 Grid container</h3>
+<pre class="code-block"><code>.container {
+  display: grid;
+}</code></pre>
+<h3 style="margin-top:12px;color:#38bdf8;">2.2 Grid items</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Los hijos directos se convierten en grid items y pueden posicionarse con <code>grid-column</code>, <code>grid-row</code> o <code>grid-area</code>.</p></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: 3. Creando una cuadrícula básica">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · GRID.md</span>
+                <h2 class="slide-title">3. Creando una cuadrícula básica</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>.container {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: 4. Unidades clave: auto y fr">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · GRID.md</span>
+                <h2 class="slide-title">4. Unidades clave: auto y fr</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>auto</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">Se ajusta al contenido.</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>fr</code></h3>
+<p style="margin-bottom:8px;line-height:1.6;">Representa fracciones del espacio disponible.</p></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR VISUAL INTERACTIVO -->
+        <section class="slide" data-slide="11" data-title="Simulador Visual Grid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador Interactivo de CSS Grid</h2>
+                <p class="slide-lead">Ajusta columnas, espaciado y alineación para ver la cuadrícula en acción.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Columnas <span id="gridColsVal">3</span></label>
+                        <input type="range" id="gridCols" min="1" max="5" value="3" />
+                    </div>
+                    <div class="sim-control">
+                        <label>gap <span id="gridGapVal">12px</span></label>
+                        <input type="range" id="gridGap" min="0" max="32" value="12" />
+                    </div>
+                    <div class="sim-control">
+                        <label>justify-items</label>
+                        <select id="gridJustify">
+                            <option value="stretch">stretch</option>
+                            <option value="start">start</option>
+                            <option value="center">center</option>
+                            <option value="end">end</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>align-items</label>
+                        <select id="gridAlign">
+                            <option value="stretch">stretch</option>
+                            <option value="start">start</option>
+                            <option value="center">center</option>
+                            <option value="end">end</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Primer ítem (span)</label>
+                        <select id="gridSpan">
+                            <option value="1">Normal (1 celda)</option>
+                            <option value="2">grid-column: span 2</option>
+                            <option value="3">grid-column: span 3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="gridStage" style="display:grid; min-height:230px;">
+                        <div id="gridFirst" style="background:linear-gradient(135deg,#38bdf8,#0284c7);color:#070a13;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">1</div>
+                        <div style="background:linear-gradient(135deg,#818cf8,#4f46e5);color:#fff;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">2</div>
+                        <div style="background:linear-gradient(135deg,#10b981,#059669);color:#070a13;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">3</div>
+                        <div style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a13;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">4</div>
+                        <div style="background:linear-gradient(135deg,#ec4899,#db2777);color:#fff;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">5</div>
+                        <div style="background:linear-gradient(135deg,#14b8a6,#0d9488);color:#070a13;font-weight:800;padding:14px;border-radius:10px;display:grid;place-items:center;">6</div>
+                    </div>
+                    <pre class="sim-code" id="gridCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de CSS Grid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de CSS Grid</h2>
+                <p class="slide-lead">Comprueba tu dominio de pistas, fracciones y áreas.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="fr reparte únicamente el espacio sobrante después de restar el gap y las columnas fijas."
+                    data-err="50% + 50% + gap provoca desbordamiento horizontal; fr evita ese problema.">
+                    <div class="quiz-q-title">1. ¿Por qué conviene usar <code>1fr 1fr</code> en lugar de <code>50% 50%</code> cuando hay un <code>gap: 20px</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Porque % no funciona en Grid</button>
+                        <button class="quiz-option" data-opt="b">Porque fr descuenta el gap y evita desbordamientos</button>
+                        <button class="quiz-option" data-opt="c">Porque fr solo funciona en móviles</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="repeat(auto-fit, minmax(220px, 1fr)) ajusta automáticamente el número de columnas al ancho disponible."
+                    data-err="repeat(3, 1fr) siempre mantendrá 3 columnas aunque la pantalla sea muy estrecha.">
+                    <div class="quiz-q-title">2. ¿Qué expresión crea columnas responsivas sin necesidad de Media Queries?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">repeat(auto-fit, minmax(220px, 1fr))</button>
+                        <button class="quiz-option" data-opt="b">repeat(3, 1fr)</button>
+                        <button class="quiz-option" data-opt="c">grid-auto-flow: column</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="place-items: center combina align-items: center y justify-items: center en una sola línea."
+                    data-err="place-items es el shorthand de align-items + justify-items.">
+                    <div class="quiz-q-title">3. ¿Qué propiedad resume <code>align-items: center</code> y <code>justify-items: center</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">grid-area: center</button>
+                        <button class="quiz-option" data-opt="b">place-self: stretch</button>
+                        <button class="quiz-option" data-opt="c">place-items: center</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 12px; background: #0f172a; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+  .item { background: linear-gradient(135deg, #38bdf8, #818cf8); color: #0f172a; font-weight: 800; padding: 20px; border-radius: 10px; text-align: center; }
+  .wide { grid-column: span 2; background: linear-gradient(135deg, #10b981, #38bdf8); }
+&lt;/style&gt;
+&lt;div class=&quot;grid&quot;&gt;
+  &lt;div class=&quot;item wide&quot;&gt;Span 2&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;2&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;3&lt;/div&gt;
+  &lt;div class=&quot;item&quot;&gt;4&lt;/div&gt;
+&lt;/div&gt;">Bento Grid</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 10px; }
+  .app { display: grid; grid-template-columns: 110px 1fr; grid-template-rows: 44px 130px 38px; gap: 8px; grid-template-areas: &#39;h h&#39; &#39;s m&#39; &#39;f f&#39;; }
+  .app &gt; * { border-radius: 8px; display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; }
+  .h { grid-area: h; background: #0284c7; }
+  .s { grid-area: s; background: #6366f1; }
+  .m { grid-area: m; background: #0f172a; }
+  .f { grid-area: f; background: #334155; }
+&lt;/style&gt;
+&lt;div class=&quot;app&quot;&gt;&lt;div class=&quot;h&quot;&gt;Header&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;Sidebar&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Main&lt;/div&gt;&lt;div class=&quot;f&quot;&gt;Footer&lt;/div&gt;&lt;/div&gt;">Layout Áreas</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 12px; background: #0f172a; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+  .item { background: linear-gradient(135deg, #38bdf8, #818cf8); color: #0f172a; font-weight: 800; padding: 20px; border-radius: 10px; text-align: center; }
+  .wide { grid-column: span 2; background: linear-gradient(135deg, #10b981, #38bdf8); }
+&lt;/style&gt;
+&lt;div class="grid"&gt;
+  &lt;div class="item wide"&gt;Span 2&lt;/div&gt;
+  &lt;div class="item"&gt;2&lt;/div&gt;
+  &lt;div class="item"&gt;3&lt;/div&gt;
+  &lt;div class="item"&gt;4&lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/GRID.md" style="color:#38bdf8;">GRID.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (11)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Alineacion/alineacion.html"><span class="file-name">📁 Alineacion</span><span class="file-path">alineacion.html</span></a>
+                    <a class="file-card" href="Area/area.html"><span class="file-name">📁 Area</span><span class="file-path">area.html</span></a>
+                    <a class="file-card" href="Auto%20y%20FR/auto.html"><span class="file-name">📁 Auto y FR</span><span class="file-path">auto.html</span></a>
+                    <a class="file-card" href="Dense/dense.html"><span class="file-name">📁 Dense</span><span class="file-path">dense.html</span></a>
+                    <a class="file-card" href="Dinamico(Responsive)/dinamico.html"><span class="file-name">📁 Dinamico(Responsive)</span><span class="file-path">dinamico.html</span></a>
+                    <a class="file-card" href="Gap/gap.html"><span class="file-name">📁 Gap</span><span class="file-path">gap.html</span></a>
+                    <a class="file-card" href="Grid%20Explicito%20e%20Implicito/exp-imp.html"><span class="file-name">📁 Grid Explicito e Implicito</span><span class="file-path">exp-imp.html</span></a>
+                    <a class="file-card" href="Principios/grid.html"><span class="file-name">📁 Principios</span><span class="file-path">grid.html</span></a>
+                    <a class="file-card" href="Repeat/repeat.html"><span class="file-name">📁 Repeat</span><span class="file-path">repeat.html</span></a>
+                    <a class="file-card" href="Row-Column/row-column.html"><span class="file-name">📁 Row-Column</span><span class="file-path">row-column.html</span></a>
+                    <a class="file-card" href="Subgrid/subgrid.html"><span class="file-name">📁 Subgrid</span><span class="file-path">subgrid.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const stage = document.getElementById('gridStage');
+            const out = document.getElementById('gridCodeOut');
+            const cols = document.getElementById('gridCols');
+            const colsVal = document.getElementById('gridColsVal');
+            const gap = document.getElementById('gridGap');
+            const gapVal = document.getElementById('gridGapVal');
+            const just = document.getElementById('gridJustify');
+            const align = document.getElementById('gridAlign');
+            const span = document.getElementById('gridSpan');
+            const first = document.getElementById('gridFirst');
+
+            function updateGridSim() {
+                stage.style.gridTemplateColumns = `repeat(${cols.value}, 1fr)`;
+                stage.style.gap = gap.value + 'px';
+                stage.style.justifyItems = just.value;
+                stage.style.alignItems = align.value;
+                first.style.gridColumn = span.value === '1' ? 'auto' : `span ${span.value}`;
+                colsVal.textContent = cols.value;
+                gapVal.textContent = gap.value + 'px';
+                out.textContent = `.contenedor {\n  display: grid;\n  grid-template-columns: repeat(${cols.value}, 1fr);\n  gap: ${gap.value}px;\n  justify-items: ${just.value};\n  align-items: ${align.value};\n}` + (span.value !== '1' ? `\n.item-1 { grid-column: span ${span.value}; }` : '');
+            }
+            [cols, gap, just, align, span].forEach(el => el.addEventListener('input', updateGridSim));
+            updateGridSim();
+        })();
+    </script>
+</body>
+</html>

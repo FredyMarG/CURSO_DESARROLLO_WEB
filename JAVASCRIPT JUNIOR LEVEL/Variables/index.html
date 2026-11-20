@@ -16,6 +16,162 @@
             </div>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (VARIABLES.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Declaración de Variables: var vs let vs const</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">En JavaScript moderno existen tres palabras clave para declarar variables, pero solo dos deben usarse en código nuevo:</p>
+<p style="margin:6px 0;line-height:1.6;">| Característica | <code>const</code> | <code>let</code> | <code>var</code> (Legado) |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Alcance (Scope)</strong> | Bloque (<code>{}</code>) | Bloque (<code>{}</code>) | Función o Global |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Reasignable</strong> | ❌ No | ✅ Sí | ✅ Sí |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Redeclarable en mismo scope</strong> | ❌ No | ❌ No | ✅ Sí (peligroso) |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Inicialización obligatoria</strong> | ✅ Sí | ❌ No (<code>undefined</code>) | ❌ No (<code>undefined</code>) |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Hoisting / TDZ</strong> | Elevada en <strong>TDZ</strong> | Elevada en <strong>TDZ</strong> | Elevada e inicializada como <code>undefined</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <strong>Recomendación</strong> | ✅ <strong>Usar por defecto</strong> | ✅ Solo si el valor cambiará | ❌ <strong>Evitar en código moderno</strong> |</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">¿Por qué <code>const</code> no significa &quot;valor inmutable&quot;?</h4>
+<p style="margin:6px 0;line-height:1.6;"><code>const</code> impide <strong>reasignar la referencia</strong> de la variable, pero si almacena un objeto o un array, sus propiedades o elementos internos <strong>sí pueden mutarse</strong>:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const usuario = { nombre: &quot;Ana&quot;, rol: &quot;Junior&quot; };
+usuario.rol = &quot;Mid&quot;; // ✅ Válido: mutamos una propiedad interna
+
+// usuario = { nombre: &quot;Luis&quot; }; // ❌ TypeError: Assignment to constant variable.
+
+// Si quieres inmutabilidad real en un objeto superficial:
+const config = Object.freeze({ apiUrl: &quot;https://api.ejemplo.com&quot;, timeout: 5000 });</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. El Motor de JS: Scope, Hoisting y Temporal Dead Zone (TDZ)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;">Alcance (Scope)</h4>
+<p style="margin:6px 0;line-height:1.6;">Determina desde dónde es accesible una variable:</p>
+<p style="margin:6px 0;line-height:1.6;">1. <strong>Scope Global:</strong> Declarada fuera de cualquier función o bloque. En módulos ES (<code>&lt;script type=&quot;module&quot;&gt;</code>), las variables de nivel superior quedan aisladas al módulo y no contaminan <code>window</code>.</p>
+<p style="margin:6px 0;line-height:1.6;">2. <strong>Scope de Función:</strong> Las variables declaradas con <code>var</code>, <code>let</code> o <code>const</code> dentro de una función no existen fuera de ella.</p>
+<p style="margin:6px 0;line-height:1.6;">3. <strong>Scope de Bloque (<code>{}</code>):</strong> Todo par de llaves (<code>if</code>, <code>for</code>, <code>while</code>, <code>{ ... }</code>) crea un ámbito aislado para <code>let</code> y <code>const</code>. <code>var</code> <strong>ignora</strong> los bloques <code>if</code>/<code>for</code> y se filtra al ámbito de función o global.</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>if (true) {
+    var filtrada = &quot;Soy accesible fuera del if&quot;;
+    let privada = &quot;Solo existo dentro del if&quot;;
+}
+console.log(filtrada); // &quot;Soy accesible fuera del if&quot;
+// console.log(privada); // ❌ ReferenceError: privada is not defined</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Hoisting y la Temporal Dead Zone (TDZ)</h4>
+<p style="margin:6px 0;line-height:1.6;">Antes de ejecutar el código línea por línea, el motor de JavaScript realiza una fase de creación/compilación donde registra las declaraciones en memoria (*hoisting*):</p>
+<ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong><code>var</code>:</strong> Se registra e inicializa automáticamente con <code>undefined</code>. Por eso no lanza error si se lee antes, aunque devuelve <code>undefined</code> (fuente de bugs silenciosos).</li>
+<li>* <strong><code>let</code> y <code>const</code>:</strong> También se registran en memoria al inicio del bloque, pero <strong>permanecen sin inicializar</strong> dentro de la <strong>Temporal Dead Zone (TDZ)</strong> hasta que la ejecución alcanza exactamente su línea de declaración. Leerlas antes lanza un <code>ReferenceError</code>.</li>
+<li>* <strong>Declaraciones de función (<code>function saludar() {}</code>):</strong> Se elevan por completo (nombre y cuerpo), permitiendo invocarlas antes de su definición.</li>
+</ul>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.log(legado); // undefined (hoisting de var)
+var legado = 10;
+
+// console.log(moderna); // ❌ ReferenceError: Cannot access &#x27;moderna&#x27; before initialization (TDZ)
+let moderna = 20;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Tipos de Datos: Primitivos vs Referencia</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">JavaScript tiene <strong>7 tipos primitivos</strong> y <strong>1 tipo de objeto</strong> (referencia).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">A. Tipos Primitivos (Inmutables y pasados por valor)</h4>
+<p style="margin:6px 0;line-height:1.6;">1. <strong><code>string</code></strong>: Texto UTF-16. Soporta comillas simples <code>&#x27;...&#x27;</code>, dobles <code>&quot;...&quot;</code> y *Template Literals* `<code> </code>...<code> </code>`.</p>
+<p style="margin:6px 0;line-height:1.6;">2. <strong><code>number</code></strong>: Números en formato IEEE 754 de 64 bits (enteros y decimales). Incluye <code>Infinity</code>, <code>-Infinity</code> y <code>NaN</code>.</p>
+<p style="margin:6px 0;line-height:1.6;">3. <strong><code>bigint</code></strong>: Enteros de precisión arbitraria que superan <code>Number.MAX_SAFE_INTEGER</code> (<code>2^53 - 1</code>). Se escriben con <code>n</code> al final: <code>9007199254740993n</code>.</p>
+<p style="margin:6px 0;line-height:1.6;">4. <strong><code>boolean</code></strong>: Valores lógicos <code>true</code> o <code>false</code>.</p>
+<p style="margin:6px 0;line-height:1.6;">5. <strong><code>undefined</code></strong>: Variable declarada sin valor asignado o parámetro no enviado.</p>
+<p style="margin:6px 0;line-height:1.6;">6. <strong><code>null</code></strong>: Ausencia <strong>intencional</strong> de valor u objeto.</p>
+<p style="margin:6px 0;line-height:1.6;">7. <strong><code>symbol</code></strong>: Identificador único e irrepetible, útil para claves privadas o metadatos en objetos (<code>Symbol(&quot;id&quot;)</code>).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">B. Tipos de Referencia (Objetos, Arrays, Funciones)</h4>
+<p style="margin:6px 0;line-height:1.6;">Los objetos (<code>{}</code>), arrays (<code>[]</code>), funciones, <code>Map</code>, <code>Set</code>, <code>Date</code>, etc., se almacenan en el *Heap* y la variable guarda una <strong>referencia</strong> (dirección en memoria).</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>// Primitivos: copia por VALOR (independientes)
+let a = 10;
+let b = a;
+b = 20;
+console.log(a); // 10
+
+// Referencia: copia de DIRECCIÓN (apuntan al mismo objeto)
+const perfil1 = { nombre: &quot;Carlos&quot; };
+const perfil2 = perfil1;
+perfil2.nombre = &quot;Lucía&quot;;
+console.log(perfil1.nombre); // &quot;Lucía&quot; (¡ambos cambiaron!)
+
+// Copia profunda moderna (ES2022+): structuredClone()
+const copiaReal = structuredClone(perfil1);
+copiaReal.nombre = &quot;Marta&quot;;
+console.log(perfil1.nombre); // &quot;Lucía&quot; (independiente)</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. El operador typeof y sus peculiaridades</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">El operador <code>typeof</code> devuelve un string indicando el tipo del operando, pero tiene casos históricos famosos que todo desarrollador debe conocer:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>typeof &quot;hola&quot;       // &quot;string&quot;
+typeof 42           // &quot;number&quot;
+typeof NaN          // &quot;number&quot;  ⚠️ NaN es técnicamente de tipo number
+typeof 100n         // &quot;bigint&quot;
+typeof true         // &quot;boolean&quot;
+typeof undefined    // &quot;undefined&quot;
+typeof Symbol()     // &quot;symbol&quot;
+typeof (() =&gt; {})   // &quot;function&quot; (subtipo especial de objeto)
+typeof {}           // &quot;object&quot;
+typeof []           // &quot;object&quot;   ⚠️ Un array devuelve &quot;object&quot;
+typeof null         // &quot;object&quot;   ⚠️ Error histórico de JS desde 1995</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Cómo comprobar tipos de forma segura:</h4>
+<ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong>¿Es <code>null</code>?</strong> → <code>valor === null</code></li>
+<li>* <strong>¿Es un Array?</strong> → <code>Array.isArray(valor)</code></li>
+<li>* <strong>¿Es <code>NaN</code> real?</strong> → <code>Number.isNaN(valor)</code> (evita el <code>isNaN()</code> global que convierte strings a número primero).</li>
+<li>* <strong>¿Es un número finito válido?</strong> → <code>Number.isFinite(valor)</code></li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Ejemplo Práctico: Conversión Segura de Entradas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Cuando recibimos datos de un <code>&lt;input&gt;</code> del DOM (o de un <code>prompt()</code>), siempre llegan como <code>string</code>. Nunca operes matemáticamente sin validar y convertir antes:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>&quot;use strict&quot;;
+
+function calcularCuadrado(entradaTexto) {
+    if (entradaTexto === null || entradaTexto.trim() === &quot;&quot;) {
+        return { ok: false, error: &quot;Entrada vacía o cancelada.&quot; };
+    }
+
+    const numero = Number(entradaTexto);
+
+    if (Number.isNaN(numero) || !Number.isFinite(numero)) {
+        return { ok: false, error: `&quot;${entradaTexto}&quot; no es un número válido.` };
+    }
+
+    return { ok: true, resultado: numero ** 2 };
+}
+</code></pre></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <!-- Tarjeta 1: Inspector de typeof -->
             <section class="card" aria-labelledby="t1">

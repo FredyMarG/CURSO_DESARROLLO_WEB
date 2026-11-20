@@ -1,71 +1,229 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/Tablas.html
-     Título: Tablas
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-<!-- Definición del idioma para accesibilidad y motores de búsqueda. -->
+<!doctype html>
 <html lang="es">
 <head>
-<!-- Cabecera (head): Contiene metadatos e instrucciones para el navegador -->
-
-    <meta charset="UTF-8"> <!-- Codificación universal para soportar acentos y caracteres especiales. -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Control del escalado en dispositivos móviles. -->
-    <link rel="stylesheet" href="css/tabla.css"> <!-- Vinculación con la hoja de estilos externa. -->
-    <title>Lección: Estructura de Tablas Semánticas</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tablas Semánticas en HTML5 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-    <!-- 
-        ETIQUETA <table>: Define el inicio del modelo de datos tabular. 
-        Se recomienda el uso de thead, tbody y tfoot para mejorar la accesibilidad (lectores de pantalla) 
-        y facilitar estilos CSS avanzados (como encabezados fijos).
-    -->
-    <table>
-        <thead> <!-- thead: Define el conjunto de filas que actúan como cabecera de las columnas. -->
-            <tr>
-                <!-- <th>: Celda de encabezado. Proporciona contexto semántico a los datos de la columna. -->
-                <th>Producto</th>
-                <th>Costo</th>
-                <th>Unidades</th>
-            </tr>
-        </thead>
-        <tbody> <!-- tbody: Encapsula el cuerpo principal de la tabla donde residen los datos. -->
-            <tr>
-                <!-- <td>: Celda de datos estándar. Representa una unidad de información dentro de la fila. -->
-                <td>Banano</td> 
-                <td>$3</td>
-                <td>3</td>
-            </tr>
-            <tr>
-                <td>Manzana</td>
-                <td>$2</td>
-                <td>5</td>
-            </tr>
-            <tr>
-                <td>Melon</td>
-                <td>$5</td>
-                <td>2</td>
-            </tr>
-        </tbody>
-            
-        <tfoot> <!-- tfoot: Define la fila de resumen o conclusiones (ej. totales), suele ir al final. -->
-            <tr>
-                <!-- .ht: Clase definida en tabla.css para dar jerarquía visual al pie. -->
-                <th class="ht">Total</th>
-                <!-- 
-                    'colspan="2"': Atributo de expansión. Indica que esta celda 
-                    debe ocupar el espacio horizontal de dos columnas del grid de la tabla. 
-                -->
-                <td class="ht" colspan="2">$10</td>
-            </tr>
-        </tfoot>
-    </table>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 AVANZADO · TABLAS</span>
+            <div class="brand-title"><span>📊</span><span>Tablas Semánticas</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 7</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="index.html" title="Volver a HTML Avanzado">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../index.html" title="Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice (O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Tablas HTML5">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">&lt;table&gt;</span>
+                    <span class="badge badge-purple">&lt;thead&gt; · &lt;tbody&gt; · &lt;tfoot&gt;</span>
+                    <span class="badge badge-emerald">colspan &amp; scope</span>
+                </div>
+                <h1 class="hero-title">Domina las<br /><span class="gradient-text">Tablas Semánticas</span></h1>
+                <p class="hero-subtitle">Organiza datos tabulares (horarios, comparativas, facturas) con encabezados accesibles usando <code>&lt;th scope="col"&gt;</code> y combinación de celdas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧱</div>
+                        <h3>Estructura Completa</h3>
+                        <p><code>thead</code>, <code>tbody</code>, <code>tfoot</code> y <code>caption</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🧠</div>
+                        <h3>Quiz Rápido</h3>
+                        <p>Pon a prueba <code>colspan</code>, <code>rowspan</code> y <code>scope</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio en Vivo</h3>
+                        <p>Estiliza una tabla moderna con filas alternadas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Tablas Semánticas?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Tablas Semánticas y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Organiza datos tabulares (horarios, comparativas, facturas) con encabezados accesibles usando <code>&lt;th scope="col"&gt;</code> y combinación de celdas. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Anatomía de una Tabla Accesible">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ESTRUCTURA Y ACCESIBILIDAD</span>
+                <h2 class="slide-title">thead, tbody, tfoot y scope</h2>
+                <p class="slide-lead">Las tablas deben usarse únicamente para datos tabulares, nunca para maquetar el diseño de una página.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📝 Tabla bien estructurada</h3>
+                    <pre class="code-block"><code>&lt;table&gt;
+  &lt;caption&gt;Planes del Curso&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th scope="col"&gt;Módulo&lt;/th&gt;&lt;th scope="col"&gt;Nivel&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;HTML5&lt;/td&gt;&lt;td&gt;Avanzado&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;&lt;td colspan="2"&gt;Incluye ejercicios&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tfoot&gt;
+&lt;/table&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🔎 Atributos clave</h3>
+                    <ul class="styled-list">
+                        <li><code>scope="col"</code> / <code>scope="row"</code>: indica a lectores de pantalla si el encabezado es de columna o fila.</li>
+                        <li><code>colspan="2"</code>: una celda ocupa 2 columnas.</li>
+                        <li><code>rowspan="2"</code>: una celda ocupa 2 filas.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Tablas Semánticas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Tablas Semánticas</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Quiz de Tablas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Tablas HTML5</h2>
+                <p class="slide-lead">Valida tus conocimientos sobre estructura y combinación de celdas.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="colspan='3' expande la celda horizontalmente para abarcar 3 columnas."
+                    data-err="rowspan expande verticalmente (filas); colspan expande horizontalmente (columnas).">
+                    <div class="quiz-q-title">1. ¿Qué atributo hace que una celda <code>&lt;td&gt;</code> ocupe el ancho de 3 columnas?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">colspan="3"</button>
+                        <button class="quiz-option" data-opt="b">rowspan="3"</button>
+                        <button class="quiz-option" data-opt="c">width="3"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b"
+                    data-ok="scope='col' indica explícitamente que la celda &lt;th&gt; es el encabezado de una columna."
+                    data-err="title es un tooltip; scope='col' es el estándar de accesibilidad para tablas.">
+                    <div class="quiz-q-title">2. ¿Qué atributo mejora la accesibilidad en un <code>&lt;th&gt;</code> de encabezado de columna?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">alt="col"</button>
+                        <button class="quiz-option" data-opt="b">scope="col"</button>
+                        <button class="quiz-option" data-opt="c">type="col"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio de Tablas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Tablas</h2>
+                <p class="slide-lead">Edita la tabla y prueba <code>border-collapse: collapse</code> y <code>:nth-child(even)</code>.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 10px; overflow: hidden; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #334155; }
+  thead th { background: #0284c7; color: #fff; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+&lt;/style&gt;
+&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;Tecnología&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;Uso&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;HTML5&lt;/td&gt;&lt;td&gt;Estructura&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;CSS3&lt;/td&gt;&lt;td&gt;Estilos y Layout&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;td colspan=&quot;2&quot;&gt;Total: 2 tecnologías base&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;">Tabla Estilizada</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  table { width: 100%; border-collapse: collapse; background: #1e293b; border-radius: 10px; overflow: hidden; }
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #334155; }
+  thead th { background: #0284c7; color: #fff; }
+  tbody tr:nth-child(even) { background: rgba(255,255,255,0.04); }
+&lt;/style&gt;
+&lt;table&gt;
+  &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Tecnología&lt;/th&gt;&lt;th scope="col"&gt;Uso&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;HTML5&lt;/td&gt;&lt;td&gt;Estructura&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td&gt;CSS3&lt;/td&gt;&lt;td&gt;Estilos y Layout&lt;/td&gt;&lt;/tr&gt;
+  &lt;/tbody&gt;
+  &lt;tfoot&gt;&lt;tr&gt;&lt;td colspan="2"&gt;Total: 2 tecnologías base&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span>
+                <h2 class="slide-title">📂 Continúa con HTML Avanzado</h2>
+                <p class="slide-lead">Regresa a la guía principal de HTML Avanzado o explora la documentación.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                    <a class="file-card" href="../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

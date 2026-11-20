@@ -14,6 +14,109 @@
             <p>Los strings en JavaScript son <strong>inmutables</strong>. Prueba en vivo búsqueda, limpieza, corte con <code>.slice()</code>, <code>.split()</code>, <code>.replaceAll()</code> y <code>.padStart()</code>.</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (CADENAS.md, METODOS DE CADENA.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Creación y Acceso a Caracteres</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const simple = &#x27;Comillas simples&#x27;;
+const doble = &quot;Comillas dobles&quot;;
+const plantilla = `Template Literal: ${simple}`;
+
+// Acceso por índice (base 0) o con .at() (ES2022)
+const palabra = &quot;JavaScript&quot;;
+console.log(palabra.length);  // 10
+console.log(palabra[0]);      // &quot;J&quot;
+console.log(palabra.at(-1));  // &quot;t&quot; (último carácter)
+console.log(palabra.at(-6));  // &quot;S&quot;
+
+// ❌ Error común: los strings son inmutables
+palabra[0] = &quot;j&quot;; // No hace nada (en modo estricto lanza TypeError)</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Métodos de Búsqueda y Validación</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | ¿Qué devuelve? | Ejemplo |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.includes(sub, pos?)</code> | <code>true</code> si contiene el texto | <code>&quot;Hola mundo&quot;.includes(&quot;mundo&quot;)</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.startsWith(sub)</code> | <code>true</code> si empieza con el texto | <code>&quot;https://web.dev&quot;.startsWith(&quot;https&quot;)</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.endsWith(sub)</code> | <code>true</code> si termina con el texto | <code>&quot;foto.webp&quot;.endsWith(&quot;.webp&quot;)</code> → <code>true</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.indexOf(sub)</code> | Índice de la primera coincidencia o <code>-1</code> | <code>&quot;banana&quot;.indexOf(&quot;na&quot;)</code> → <code>2</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.lastIndexOf(sub)</code> | Índice de la última coincidencia o <code>-1</code> | <code>&quot;banana&quot;.lastIndexOf(&quot;a&quot;)</code> → <code>5</code> |</p></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Métodos de Limpieza y Transformación</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Descripción | Ejemplo |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.toLowerCase()</code> / <code>.toUpperCase()</code> | Convierte a minúsculas / mayúsculas | <code>&quot;JS&quot;.toLowerCase()</code> → <code>&quot;js&quot;</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.trim()</code> | Elimina espacios en ambos extremos | <code>&quot;  hola  &quot;.trim()</code> → <code>&quot;hola&quot;</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.trimStart()</code> / <code>.trimEnd()</code> | Elimina espacios solo al inicio o al final | <code>&quot;  hola&quot;.trimStart()</code> → <code>&quot;hola&quot;</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.replace(buscar, nuevo)</code> | Reemplaza la <strong>primera</strong> coincidencia (o RegExp) | <code>&quot;a-b-c&quot;.replace(&quot;-&quot;, &quot;_&quot;)</code> → <code>&quot;a_b-c&quot;</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.replaceAll(buscar, nuevo)</code> | Reemplaza <strong>todas</strong> las coincidencias (ES2021) | <code>&quot;a-b-c&quot;.replaceAll(&quot;-&quot;, &quot;_&quot;)</code> → <code>&quot;a_b_c&quot;</code> |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>.repeat(n)</code> | Repite la cadena <code>n</code> veces | <code>&quot;=&quot;.repeat(5)</code> → <code>&quot;=====&quot;</code> |</p></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Extracción, División y Relleno</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;"><code>.slice(inicio, fin?)</code> vs <code>.substring(inicio, fin?)</code></h4>
+<ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong><code>.slice(inicio, fin)</code> (Recomendado):</strong> Acepta índices negativos para contar desde el final.</li>
+<li>* <strong><code>.substring(inicio, fin)</code>:</strong> Convierte los negativos a <code>0</code> e intercambia los índices si <code>inicio &gt; fin</code>.</li>
+</ul>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const codigo = &quot;JS-2025-PRO&quot;;
+console.log(codigo.slice(0, 2));   // &quot;JS&quot;
+console.log(codigo.slice(-3));     // &quot;PRO&quot;
+console.log(codigo.slice(3, -4));  // &quot;2025&quot;</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;"><code>.split(separador)</code> y Padding (<code>.padStart()</code> / <code>.padEnd()</code>)</h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>// Dividir en array
+const tags = &quot;html, css, js&quot;.split(&quot;, &quot;); // [&quot;html&quot;, &quot;css&quot;, &quot;js&quot;]
+
+// Rellenar hasta alcanzar longitud fija (ideal para fechas, relojes o tarjetas)
+const mes = &quot;7&quot;.padStart(2, &quot;0&quot;);         // &quot;07&quot;
+const tarjeta = &quot;4242&quot;.padStart(16, &quot;*&quot;); // &quot;************4242&quot;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">5. Caso Práctico: Normalización de Entrada de Usuario</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>function normalizarEmail(entrada) {
+    if (typeof entrada !== &quot;string&quot;) return &quot;&quot;;
+    return entrada.trim().toLowerCase();
+}
+
+console.log(normalizarEmail(&quot;  Usuario.Dev@Correo.COM  &quot;));
+// &quot;usuario.dev@correo.com&quot;</code></pre></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <section class="card" aria-labelledby="s1">
                 <h2 id="s1">1. Transformador y Limpiador de Texto</h2>

@@ -1,0 +1,472 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flexbox CSS — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · LAYOUT UNIDIMENSIONAL</span>
+            <div class="brand-title"><span>📐</span><span>Flexbox</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Flexbox">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">display: flex</span>
+                    <span class="badge badge-purple">Eje Principal &amp; Cruzado</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">Flexbox CSS</span></h1>
+                <p class="hero-subtitle">Alinea, distribuye y adapta elementos en una dimensión (fila o columna) con precisión matemática, sin trucos de <code>float</code> ni cálculos manuales.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧭</div>
+                        <h3>Ejes Main &amp; Cross</h3>
+                        <p>Entiende por qué <code>justify-content</code> y <code>align-items</code> cambian según la dirección.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">⚖️</div>
+                        <h3>Grow, Shrink y Basis</h3>
+                        <p>Controla cómo crecen y se encogen los hijos con el shorthand <code>flex</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador Visual</h3>
+                        <p>Prueba cada propiedad en tiempo real y copia el CSS generado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: EJES -->
+        <section class="slide" data-slide="2" data-title="El Modelo de Ejes (Main y Cross)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · CONCEPTO FUNDAMENTAL</span>
+                <h2 class="slide-title">Eje Principal (Main Axis) y Eje Cruzado (Cross Axis)</h2>
+                <p class="slide-lead">Todo en Flexbox gira alrededor de dos ejes perpendiculares que se definen con <code>flex-direction</code>.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>➡️ En <code>flex-direction: row</code> (por defecto)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Main Axis:</strong> horizontal (izquierda → derecha).</li>
+                        <li><strong>Cross Axis:</strong> vertical (arriba → abajo).</li>
+                        <li><code>justify-content</code> mueve elementos en horizontal.</li>
+                        <li><code>align-items</code> alinea elementos en vertical.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>⬇️ En <code>flex-direction: column</code></h3>
+                    <ul class="styled-list">
+                        <li><strong>Main Axis:</strong> vertical (arriba → abajo).</li>
+                        <li><strong>Cross Axis:</strong> horizontal (izquierda → derecha).</li>
+                        <li><code>justify-content</code> ahora mueve en <strong>vertical</strong>.</li>
+                        <li><code>align-items</code> ahora alinea en <strong>horizontal</strong>.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Analogía mental:</strong> Piensa en un riel de tren (<code>Main Axis</code>). <code>justify-content</code> desliza los vagones a lo largo del riel, mientras que <code>align-items</code> los centra respecto al ancho de la vía (<code>Cross Axis</code>). Si giras la vía 90° (<code>column</code>), ambos controles giran con ella.
+            </div>
+        </section>
+
+        <!-- SLIDE 3: ALINEACIÓN -->
+        <section class="slide" data-slide="3" data-title="Alineación y Espaciado">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · DISTRIBUCIÓN DEL ESPACIO</span>
+                <h2 class="slide-title">justify-content, align-items y gap</h2>
+                <p class="slide-lead">Aprende a centrar elementos y repartir el espacio sobrante limpiamente.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📏 Valores clave de <code>justify-content</code></h3>
+                    <ul class="styled-list">
+                        <li><code>flex-start</code> / <code>flex-end</code>: agrupa al inicio o final del eje.</li>
+                        <li><code>center</code>: centra todos los ítems en el eje principal.</li>
+                        <li><code>space-between</code>: pega extremos y reparte espacio en medio.</li>
+                        <li><code>space-around</code> / <code>space-evenly</code>: espacio uniforme alrededor o entre todos.</li>
+                    </ul>
+                </div>
+                <div class="glass-card">
+                    <h3>🎯 Centrado perfecto + <code>gap</code></h3>
+                    <pre class="code-block"><code>.contenedor {
+  display: flex;
+  justify-content: center; /* Eje principal */
+  align-items: center;     /* Eje cruzado */
+  gap: 16px;               /* Separación limpia */
+}</code></pre>
+                    <p style="margin-top:10px;">Usa <code>gap</code> en lugar de márgenes manuales para evitar espacios sobrantes en los bordes.</p>
+                </div>
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error común:</strong> Aplicar <code>align-items: center</code> en un contenedor que no tiene altura suficiente (solo mide lo que miden sus hijos). Si no hay espacio vertical sobrante, ¡parecerá que no hace nada!
+            </div>
+        </section>
+
+        <!-- SLIDE 4: FLEX-GROW, SHRINK Y BASIS -->
+        <section class="slide" data-slide="4" data-title="flex-grow, flex-shrink y flex-basis">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PROPIEDADES DE LOS HIJOS</span>
+                <h2 class="slide-title">flex-grow, flex-shrink y flex-basis</h2>
+                <p class="slide-lead">Mientras el padre define la dirección, los hijos deciden cómo repartirse el espacio disponible.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Propiedad</th><th>Por defecto</th><th>Qué hace</th><th>Ejemplo típico</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>flex-grow</code></td><td><code>0</code></td><td>Factor de crecimiento si sobra espacio</td><td><code>flex-grow: 1</code> (ocupa el resto)</td></tr>
+                    <tr><td><code>flex-shrink</code></td><td><code>1</code></td><td>Factor de encogimiento si falta espacio</td><td><code>flex-shrink: 0</code> (no se aplasta)</td></tr>
+                    <tr><td><code>flex-basis</code></td><td><code>auto</code></td><td>Tamaño base ideal antes de repartir</td><td><code>flex-basis: 240px</code></td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip">
+                <strong>💡 Regla de oro:</strong> Usa el shorthand <code>flex: 1</code> (equivale a <code>1 1 0%</code>) para columnas iguales, o <code>flex: 1 1 250px</code> junto con <code>flex-wrap: wrap</code> para crear grillas responsivas sin Media Queries.
+            </div>
+        </section>
+
+        <!-- SLIDE 5: WRAP, ORDER Y ALIGN-SELF -->
+        <section class="slide" data-slide="5" data-title="Wrap, Order y Align-Self">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · CONTROL FINO</span>
+                <h2 class="slide-title">flex-wrap, order y align-self</h2>
+                <p class="slide-lead">Permite saltos de línea, reordenamiento visual y excepciones individuales.</p>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <h3>↩️ <code>flex-wrap: wrap</code></h3>
+                    <p>Por defecto los ítems intentan caber en una sola línea (<code>nowrap</code>). Con <code>wrap</code> bajan a la siguiente fila automáticamente.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🔢 <code>order: N</code></h3>
+                    <p>Cambia el orden visual sin tocar el HTML (por defecto todos valen <code>0</code>). Útil para móviles, pero cuida la accesibilidad del teclado.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🧍 <code>align-self</code></h3>
+                    <p>Sobrescribe el <code>align-items</code> del padre para un solo hijo (ej. <code>align-self: flex-end</code> en un chatbox).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: PATRONES REALES -->
+        <section class="slide" data-slide="6" data-title="Patrones Reales con Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · RECETAS DE PRODUCCIÓN</span>
+                <h2 class="slide-title">3 Patrones que Usarás Todos los Días</h2>
+                <p class="slide-lead">Combina <code>margin-left: auto</code>, <code>flex: 1</code> y <code>min-height: 100dvh</code>.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧭 Navbar con logo a la izquierda y botón a la derecha</h3>
+                    <pre class="code-block"><code>.navbar { display: flex; align-items: center; gap: 16px; }
+.navbar .cta { margin-left: auto; }</code></pre>
+                    <p style="margin-top:8px;">En Flexbox, <code>margin: auto</code> absorbe todo el espacio libre en esa dirección.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🦶 Sticky Footer (pie siempre abajo)</h3>
+                    <pre class="code-block"><code>body { display: flex; flex-direction: column; min-height: 100dvh; }
+main { flex: 1; } /* Empuja el footer al fondo */</code></pre>
+                    <p style="margin-top:8px;">Incluso si la página tiene poco contenido, el footer queda pegado abajo.</p>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: 1. Idea central de Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
+                <h2 class="slide-title">1. Idea central de Flexbox</h2>
+            </div>
+            <div class="glass-card"><ul class="styled-list">
+<li>- Flexbox se activa poniendo <code>display: flex</code> (o <code>inline-flex</code>) en un contenedor; sus hijos se convierten en “flex items”.</li>
+<li>- Está pensado para controlar una sola dimensión a la vez: fila (horizontal) o columna (vertical), con alineación muy precisa y fácil.</li>
+<li>- Los ítems pueden encogerse, crecer y reordenarse sin cambiar el HTML, solo con CSS.</li>
+</ul>
+<h3 style="margin-top:12px;color:#38bdf8;">Ejemplo mínimo</h3></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: 9. Resumen mental rápido">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
+                <h2 class="slide-title">9. Resumen mental rápido</h2>
+            </div>
+            <div class="glass-card"><ul class="styled-list">
+<li>- Activar: <code>display: flex</code>.</li>
+<li>- Eje: <code>flex-direction</code>.</li>
+<li>- Distribuir en el eje principal: <code>justify-content</code>.</li>
+<li>- Alinear en el eje cruzado: <code>align-items</code> (una línea) y <code>align-content</code> (múltiples líneas).</li>
+<li>- Espacios entre ítems: <code>gap</code>.</li>
+</ul></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: 10. Profundización: flex Shorthand, align-content vs align-items, y Accesibilidad">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
+                <h2 class="slide-title">10. Profundización: flex Shorthand, align-content vs align-items, y Accesibilidad</h2>
+            </div>
+            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>flex</code> Shorthand (Valores Clave)</h3>
+<p style="margin-bottom:8px;line-height:1.6;">| Atajo | Equivale a | Comportamiento |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: 1</code> | <code>flex: 1 1 0%</code> | Crece y encoge por igual ignorando el tamaño del contenido |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: auto</code> | <code>flex: 1 1 auto</code> | Crece y encoge partiendo del tamaño intrínseco del contenido |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: none</code> | <code>flex: 0 0 auto</code> | Ni crece ni encoge (mantiene su tamaño natural) |</p>
+<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: 0 0 240px</code> | <code>0 0 240px</code> | Columna/sidebar fija de exactamente <code>240px</code> |</p>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>align-items</code> vs <code>align-content</code></h3>
+<ul class="styled-list">
+<li>- <strong><code>align-items</code></strong>: alinea los ítems <strong>dentro de cada fila/línea</strong> en el eje cruzado. Funciona siempre (con 1 o más líneas).</li>
+<li>- <strong><code>align-content</code></strong>: distribuye <strong>el bloque completo de líneas</strong> en el eje cruzado. <strong>No tiene efecto si <code>flex-wrap: nowrap</code></strong> o si solo hay una línea.</li>
+</ul>
+<h3 style="margin-top:12px;color:#38bdf8;"><code>order</code> y Accesibilidad (a11y)</h3>
+<p style="margin-bottom:8px;line-height:1.6;">Cambiar <code>order</code> (o usar <code>row-reverse</code> / <code>column-reverse</code>) <strong>solo altera el orden visual</strong>, pero el orden de tabulación con <code>Tab</code> y el orden de lectura de los lectores de pantalla siguen siendo el orden del DOM HTML.</p>
+<ul class="styled-list">
+<li>- <strong>Regla:</strong> Si el orden lógico importa para formularios, navegación o lectura, <strong>reordena el HTML</strong> en lugar de depender de <code>order</code> para cambios estructurales importantes.</li>
+</ul></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: 11. Errores Comunes en Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
+                <h2 class="slide-title">11. Errores Comunes en Flexbox</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">1. <strong>Usar <code>align-content</code> sin <code>flex-wrap: wrap</code>:</strong> No hace absolutamente nada porque solo existe una línea.</p>
+<p style="margin-bottom:8px;line-height:1.6;">2. <strong>Olvidar <code>min-width: 0</code> en un flex item con texto largo o <code>overflow: ellipsis</code>:</strong> Por defecto los flex items tienen <code>min-width: auto</code> y se niegan a encogerse por debajo de su contenido.</p>
+<p style="margin-bottom:8px;line-height:1.6;">3. <strong>Confundir <code>flex: 1</code> con <code>width: 100%</code>:</strong> En una fila con varios ítems, <code>flex: 1</code> reparte el espacio equitativamente; <code>width: 100%</code> intenta ocupar todo el contenedor.</p>
+<p style="margin-bottom:8px;line-height:1.6;">4. <strong>Seguir usando márgenes con <code>:last-child { margin-right: 0 }</code>:</strong> Usa <code>gap</code> directamente; funciona en <code>row</code>, <code>column</code> y <code>wrap</code> sin márgenes residuales.</p></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR VISUAL INTERACTIVO -->
+        <section class="slide" data-slide="11" data-title="Simulador Visual Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador Interactivo de Flexbox</h2>
+                <p class="slide-lead">Cambia las propiedades del contenedor y observa al instante cómo se comportan las cajas.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>flex-direction</label>
+                        <select id="flexDir">
+                            <option value="row">row</option>
+                            <option value="row-reverse">row-reverse</option>
+                            <option value="column">column</option>
+                            <option value="column-reverse">column-reverse</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>justify-content</label>
+                        <select id="flexJustify">
+                            <option value="flex-start">flex-start</option>
+                            <option value="center">center</option>
+                            <option value="flex-end">flex-end</option>
+                            <option value="space-between">space-between</option>
+                            <option value="space-around">space-around</option>
+                            <option value="space-evenly">space-evenly</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>align-items</label>
+                        <select id="flexAlign">
+                            <option value="stretch">stretch</option>
+                            <option value="flex-start">flex-start</option>
+                            <option value="center" selected>center</option>
+                            <option value="flex-end">flex-end</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>flex-wrap</label>
+                        <select id="flexWrap">
+                            <option value="nowrap">nowrap</option>
+                            <option value="wrap">wrap</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>gap <span id="flexGapVal">12px</span></label>
+                        <input type="range" id="flexGap" min="0" max="36" value="12" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="flexStage" style="display:flex; min-height:230px; align-items:center; gap:12px;">
+                        <div style="background:linear-gradient(135deg,#38bdf8,#0284c7);color:#070a13;font-weight:800;padding:14px 20px;border-radius:10px;">1</div>
+                        <div style="background:linear-gradient(135deg,#818cf8,#4f46e5);color:#fff;font-weight:800;padding:22px 24px;border-radius:10px;">2 (Alto)</div>
+                        <div style="background:linear-gradient(135deg,#10b981,#059669);color:#070a13;font-weight:800;padding:14px 20px;border-radius:10px;">3</div>
+                        <div style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#070a13;font-weight:800;padding:14px 20px;border-radius:10px;">4</div>
+                    </div>
+                    <pre class="sim-code" id="flexCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ INTERACTIVO -->
+        <section class="slide" data-slide="12" data-title="Quiz de Flexbox">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Flexbox</h2>
+                <p class="slide-lead">Valida lo que aprendiste antes de pasar al laboratorio de código.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="Cuando flex-direction es column, el eje principal pasa a ser vertical y justify-content alinea verticalmente."
+                    data-err="Recuerda que al cambiar a column, los ejes giran 90 grados: justify-content controla el eje vertical.">
+                    <div class="quiz-q-title">1. Si un contenedor tiene <code>display: flex; flex-direction: column;</code>, ¿qué propiedad centra los elementos verticalmente?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">align-items: center</button>
+                        <button class="quiz-option" data-opt="b">justify-content: center</button>
+                        <button class="quiz-option" data-opt="c">text-align: center</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="flex-shrink: 0 impide que el elemento se encoja por debajo de su tamaño aunque falte espacio en el contenedor."
+                    data-err="Por defecto flex-shrink vale 1 (sí se encoge). Debes ponerlo en 0 para proteger el tamaño del ítem.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad evita que un avatar o botón se aplaste cuando el contenedor se hace estrecho?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">flex-grow: 0</button>
+                        <button class="quiz-option" data-opt="b">flex-wrap: nowrap</button>
+                        <button class="quiz-option" data-opt="c">flex-shrink: 0</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="space-between pega el primer ítem al inicio, el último al final y reparte el espacio solo entre ellos."
+                    data-err="space-around y space-evenly también agregan espacio en los bordes externos.">
+                    <div class="quiz-q-title">3. ¿Qué valor de <code>justify-content</code> pega el primer y último elemento a los bordes sin dejar margen exterior?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">space-between</button>
+                        <button class="quiz-option" data-opt="b">space-around</button>
+                        <button class="quiz-option" data-opt="c">space-evenly</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 12px; background: #f8fafc; }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #0f172a; color: #fff; border-radius: 10px; margin-bottom: 14px; }
+  .links { display: flex; gap: 14px; font-size: 14px; }
+  .cards { display: flex; flex-wrap: wrap; gap: 12px; }
+  .card { flex: 1 1 140px; background: #fff; padding: 16px; border-radius: 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: 600; }
+&lt;/style&gt;
+&lt;nav class=&quot;nav&quot;&gt;&lt;strong&gt;MiMarca&lt;/strong&gt;&lt;div class=&quot;links&quot;&gt;&lt;span&gt;Inicio&lt;/span&gt;&lt;span&gt;Cursos&lt;/span&gt;&lt;span&gt;Contacto&lt;/span&gt;&lt;/div&gt;&lt;/nav&gt;
+&lt;div class=&quot;cards&quot;&gt;&lt;div class=&quot;card&quot;&gt;Flex 1&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Flex 2&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Flex 3&lt;/div&gt;&lt;/div&gt;">Navbar + Cards</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 0; height: 220px; display: flex; justify-content: center; align-items: center; background: #0f172a; color: #fff; }
+  .box { padding: 20px 30px; background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 14px; font-weight: 800; color: #0f172a; }
+&lt;/style&gt;
+&lt;div class=&quot;box&quot;&gt;Centrado Perfecto&lt;/div&gt;">Centrado Perfecto</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 12px; background: #f8fafc; }
+  .nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: #0f172a; color: #fff; border-radius: 10px; margin-bottom: 14px; }
+  .links { display: flex; gap: 14px; font-size: 14px; }
+  .cards { display: flex; flex-wrap: wrap; gap: 12px; }
+  .card { flex: 1 1 140px; background: #fff; padding: 16px; border-radius: 10px; border: 1px solid #cbd5e1; text-align: center; font-weight: 600; }
+&lt;/style&gt;
+&lt;nav class="nav"&gt;&lt;strong&gt;MiMarca&lt;/strong&gt;&lt;div class="links"&gt;&lt;span&gt;Inicio&lt;/span&gt;&lt;span&gt;Cursos&lt;/span&gt;&lt;span&gt;Contacto&lt;/span&gt;&lt;/div&gt;&lt;/nav&gt;
+&lt;div class="cards"&gt;&lt;div class="card"&gt;Flex 1&lt;/div&gt;&lt;div class="card"&gt;Flex 2&lt;/div&gt;&lt;div class="card"&gt;Flex 3&lt;/div&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/FLEXBOX.md" style="color:#38bdf8;">FLEXBOX.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (7)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Align%20Self/align.html"><span class="file-name">📁 Align Self</span><span class="file-path">align.html</span></a>
+                    <a class="file-card" href="Alineacion/alineacion.html"><span class="file-name">📁 Alineacion</span><span class="file-path">alineacion.html</span></a>
+                    <a class="file-card" href="Flex_Direction/direction.html"><span class="file-name">📁 Flex_Direction</span><span class="file-path">direction.html</span></a>
+                    <a class="file-card" href="Grow,Shrink%20y%20Basis/grow.html"><span class="file-name">📁 Grow,Shrink y Basis</span><span class="file-path">grow.html</span></a>
+                    <a class="file-card" href="Layout/layout.html"><span class="file-name">📁 Layout</span><span class="file-path">layout.html</span></a>
+                    <a class="file-card" href="Order/order.html"><span class="file-name">📁 Order</span><span class="file-path">order.html</span></a>
+                    <a class="file-card" href="Wrap%20y%20Flow/wrap_flow.html"><span class="file-name">📁 Wrap y Flow</span><span class="file-path">wrap_flow.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const stage = document.getElementById('flexStage');
+            const out = document.getElementById('flexCodeOut');
+            const dir = document.getElementById('flexDir');
+            const just = document.getElementById('flexJustify');
+            const align = document.getElementById('flexAlign');
+            const wrap = document.getElementById('flexWrap');
+            const gap = document.getElementById('flexGap');
+            const gapVal = document.getElementById('flexGapVal');
+
+            function updateFlexSim() {
+                stage.style.flexDirection = dir.value;
+                stage.style.justifyContent = just.value;
+                stage.style.alignItems = align.value;
+                stage.style.flexWrap = wrap.value;
+                stage.style.gap = gap.value + 'px';
+                gapVal.textContent = gap.value + 'px';
+                out.textContent = `.contenedor {\n  display: flex;\n  flex-direction: ${dir.value};\n  justify-content: ${just.value};\n  align-items: ${align.value};\n  flex-wrap: ${wrap.value};\n  gap: ${gap.value}px;\n}`;
+            }
+            [dir, just, align, wrap, gap].forEach(el => el.addEventListener('input', updateFlexSim));
+            updateFlexSim();
+        })();
+    </script>
+</body>
+</html>

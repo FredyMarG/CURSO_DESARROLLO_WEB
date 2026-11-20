@@ -1,94 +1,88 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Responsive Design/Holi Grail/holigrail.html
-     Título: Holi grail
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="holi.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Holi grail</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holy Grail Layout — Guía Interactiva | Responsive Design</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Encabezado de página o sección con título e invitación. -->
-    <header class="header">
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
-
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-        <nav class="main-navbar">
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Lista de elementos relacionados. -->
-            <ul>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="#">Home</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="#">About us</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="#">Contact</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="#">Login</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="#">Register</a></li>
-            </ul>
-        </nav>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · RESPONSIVE</span><div class="brand-title"><span>🏛️</span><span>Holy Grail Layout</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Responsive Design</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
     </header>
-    <!-- Contenedor wrapper para agrupar elementos y centrar contenido. -->
-    <div class="main-wrapper">
-    <!-- Información complementaria o lateral. -->
-        <aside class="secondary-navbar">
-<!-- Contenido complementario (aside), barras laterales o notas -->
-
-            <h2>ELIGE EL CONCEPTO</h2>
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-            <nav>
-    <!-- Lista de elementos relacionados. -->
-                <ul>
-        <!-- Elemento individual dentro de la lista. -->
-                    <li><a href="#">Concepto 1</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                    <li><a href="#">Concepto 2</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                    <li><a href="#">Concepto 3</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                    <li><a href="#">Concepto 4</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                    <li><a href="#">Concepto 5</a></li>
-                </ul>
-            </nav>
-        </aside>
-    <!-- Bloque principal con el contenido más importante. -->
-        <main>
-<!-- Contenido principal del documento (main) -->
-
-            <h1>Titulo principal</h1>
-    <!-- Párrafo de texto. -->
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur quibusdam assumenda repellendus quam vitae facere hic saepe nisi rerum, beatae cumque adipisci! Rem eligendi dolorem, magni mollitia odio nemo rerum.Consectetur adipisci, optio maxime facere corporis natus accusamus, vitae beatae, asperiores quas labore rem sapiente. Similique quam deserunt quibusdam nisi a aliquid, architecto, qui aperiam labore ipsum optio commodi repudiandae?Porro excepturi deserunt ullam eum! Earum blanditiis magni possimus sapiente, labore obcaecati voluptatem eius ea placeat quasi. Blanditiis vel quia voluptates ut ex sunt. Quasi totam repellendus obcaecati voluptatum quis!</p>
-        </main>
-    <!-- Información complementaria o lateral. -->
-        <aside>
-            <h2>TItulo</h2>
-    <!-- Párrafo de texto. -->
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, recusandae molestias sapiente et libero inventore. Facere iusto deserunt veritatis, nihil praesentium velit ad perferendis. Inventore repudiandae possimus animi! Amet, sapiente.</p>
-        </aside>
-    </div>
-    <!-- Pie de página con créditos o enlaces secundarios. -->
-    <footer>
-<!-- Pie de página o de sección (footer) -->
-
-        Fredy - copyrigth 2026
-    </footer>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Holy Grail Layout">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Header + 3 Columnas + Footer</span><span class="badge badge-purple">CSS Grid</span><span class="badge badge-emerald">Responsive</span></div>
+                <h1 class="hero-title">Responsive Design:<br /><span class="gradient-text">Holy Grail Layout</span></h1>
+                <p class="hero-subtitle">El diseño clásico de cabecera, barra lateral izquierda, contenido principal, barra derecha y pie de página.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Holy Grail Layout y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Holy Grail Layout y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">El diseño clásico de cabecera, barra lateral izquierda, contenido principal, barra derecha y pie de página. Dominar <strong>Holy Grail Layout</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Holy Grail con CSS Grid">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Holy Grail con CSS Grid</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>.holy { display: grid; gap: 10px; }
+@media (min-width: 600px) {
+  .holy { grid-template-columns: 120px 1fr 120px; }
+  header, footer { grid-column: 1 / -1; }
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Holy Grail Layout">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Holy Grail Layout</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Holy Grail Layout">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="1 / -1 expande el elemento desde la primera línea hasta la última." data-err="grid-column: 1 / -1 ocupa todo el ancho de la cuadrícula."><div class="quiz-q-title">1. En el Holy Grail con Grid, ¿qué regla hace que <code>header</code> y <code>footer</code> abarquen las 3 columnas?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">grid-column: 1 / -1</button><button class="quiz-option" data-opt="b">flex: 1</button><button class="quiz-option" data-opt="c">width: 100vh</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Holy Grail Layout">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 10px; background: #0f172a; color: #fff; }
+  .holy { display: grid; grid-template-columns: 80px 1fr 80px; gap: 8px; }
+  .holy &gt; * { padding: 12px; border-radius: 8px; text-align: center; font-weight: 700; }
+  header, footer { grid-column: 1 / -1; background: #0284c7; }
+  nav, aside { background: #6366f1; } main { background: #1e293b; }
+&lt;/style&gt;
+&lt;div class=&quot;holy&quot;&gt;&lt;header&gt;Header&lt;/header&gt;&lt;nav&gt;Nav&lt;/nav&gt;&lt;main&gt;Main&lt;/main&gt;&lt;aside&gt;Aside&lt;/aside&gt;&lt;footer&gt;Footer&lt;/footer&gt;&lt;/div&gt;">Holy Grail Layout</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 10px; background: #0f172a; color: #fff; }
+  .holy { display: grid; grid-template-columns: 80px 1fr 80px; gap: 8px; }
+  .holy &gt; * { padding: 12px; border-radius: 8px; text-align: center; font-weight: 700; }
+  header, footer { grid-column: 1 / -1; background: #0284c7; }
+  nav, aside { background: #6366f1; } main { background: #1e293b; }
+&lt;/style&gt;
+&lt;div class=&quot;holy&quot;&gt;&lt;header&gt;Header&lt;/header&gt;&lt;nav&gt;Nav&lt;/nav&gt;&lt;main&gt;Main&lt;/main&gt;&lt;aside&gt;Aside&lt;/aside&gt;&lt;footer&gt;Footer&lt;/footer&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Responsive Design</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa Responsive Design</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

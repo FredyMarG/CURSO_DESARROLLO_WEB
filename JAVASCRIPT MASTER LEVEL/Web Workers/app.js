@@ -141,6 +141,7 @@
             this.btnNext = document.getElementById('btnNextSlide');
             this.dotsContainer = document.getElementById('slideDotsContainer');
 
+            this.btnGoLab = document.getElementById('btnGoLab');
             this.btnToggleMode = document.getElementById('btnToggleMode');
             this.modeText = document.getElementById('modeText');
             this.modeIcon = document.getElementById('modeIcon');
@@ -231,6 +232,13 @@
                 this.btnNext.addEventListener('click', () => {
                     SoundFX.click();
                     this.nextSlide();
+                });
+            }
+
+            if (this.btnGoLab) {
+                this.btnGoLab.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.goToSlide(9);
                 });
             }
 

@@ -1,30 +1,123 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Control_flujo_texto/control_texto.html
-     Título: Control de flujo de texto
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="control.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control de flujo de texto</title>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Control de Flujo de Texto en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, ea tempora eveniet consequatur, ducimus fugit odit numquam quo provident voluptates in consequuntur recusandae eum. Dolorem dicta delectus distinctio ducimus alias. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, dignissimos tenetur fuga dolor eaque eligendi ex odit nesciunt laboriosam quisquam ducimus delectus cum est labore minus, ipsa architecto voluptate quam.
-    </div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · TIPOGRAFÍA</span><div class="brand-title"><span>✂️</span><span>Control de Texto</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Control de Texto">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">text-overflow: ellipsis</span><span class="badge badge-purple">overflow-wrap</span><span class="badge badge-emerald">line-clamp</span></div>
+                <h1 class="hero-title">Textos sin Desbordes:<br /><span class="gradient-text">Flujo y Truncado CSS</span></h1>
+                <p class="hero-subtitle">Evita que URLs largas o títulos extensos rompan tus tarjetas usando <code>text-overflow: ellipsis</code>, <code>line-clamp</code> y <code>overflow-wrap</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">✂️</div><h3>Recetas de Truncado</h3><p>1 línea con <code>...</code> o múltiples líneas con <code>line-clamp</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba truncado de 1 línea y de 2 líneas.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Control de Texto?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Control de Texto y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Evita que URLs largas o títulos extensos rompan tus tarjetas usando <code>text-overflow: ellipsis</code>, <code>line-clamp</code> y <code>overflow-wrap</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Recetas de Control de Texto">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · RECETAS</span><h2 class="slide-title">Truncar en 1 Línea y Romper Palabras Largas</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>✂️ 1 línea con puntos suspensivos</h3><pre class="code-block"><code>.truncado {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}</code></pre></div>
+                <div class="glass-card"><h3>🔗 Romper URLs largas</h3><pre class="code-block"><code>.articulo {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}</code></pre></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Control de Texto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Control de Texto</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Control de Texto">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="Para que text-overflow: ellipsis funcione en 1 línea, se requieren white-space: nowrap y overflow: hidden." data-err="Sin white-space: nowrap y overflow: hidden, ellipsis no tiene efecto.">
+                    <div class="quiz-q-title">1. ¿Qué propiedad muestra puntos suspensivos (<code>...</code>) cuando un texto de una línea no cabe?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">text-overflow: ellipsis</button><button class="quiz-option" data-opt="b">word-break: dots</button><button class="quiz-option" data-opt="c">overflow: dots</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="overflow-wrap: break-word parte una palabra o URL muy larga solo si no cabe en toda la línea." data-err="overflow-wrap: break-word evita que palabras gigantes desborden el contenedor.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad evita que una URL larga sin espacios rompa el ancho de una tarjeta?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">white-space: nowrap</button><button class="quiz-option" data-opt="b">overflow-wrap: break-word</button><button class="quiz-option" data-opt="c">text-align: justify</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Control Texto">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Truncado con Ellipsis en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  .card { width: 240px; background: #1e293b; padding: 14px; border-radius: 10px; border: 1px solid #334155; }
+  .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #38bdf8; font-weight: 700; }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;div class=&quot;ellipsis&quot;&gt;Este título es demasiado largo para caber en una sola línea&lt;/div&gt;&lt;/div&gt;">Ellipsis 1 Línea</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  .card { width: 240px; background: #1e293b; padding: 14px; border-radius: 10px; border: 1px solid #334155; }
+  .ellipsis { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #38bdf8; font-weight: 700; }
+&lt;/style&gt;
+&lt;div class="card"&gt;&lt;div class="ellipsis"&gt;Este título es demasiado largo para caber en una sola línea&lt;/div&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

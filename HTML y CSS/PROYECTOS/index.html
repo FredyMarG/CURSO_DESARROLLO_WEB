@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyectos Prácticos HTML5 y CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 &amp; CSS3 · PRÁCTICA REAL</span>
+            <div class="brand-title"><span>🚀</span><span>Proyectos Integradores</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 6</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Proyectos HTML y CSS">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">7 Proyectos Reales</span>
+                    <span class="badge badge-purple">Sin JavaScript / CSS Puro</span>
+                    <span class="badge badge-emerald">Portafolio Práctico</span>
+                </div>
+                <h1 class="hero-title">Aprende Construyendo<br /><span class="gradient-text">Proyectos Reales</span></h1>
+                <p class="hero-subtitle">Cada proyecto combina HTML semántico, Flexbox, Grid, transiciones, transformaciones 3D y trucos de CSS puro como <code>:checked</code> o <code>&lt;details&gt;</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧩</div>
+                        <h3>Componentes UI</h3>
+                        <p>Accordion Menu, Flipper Card 3D, Chatbox y Sidebar colapsable.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🌐</div>
+                        <h3>Páginas Completas</h3>
+                        <p>One View Page, Web Page clásica y Web Page con Animaciones.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🧠</div>
+                        <h3>Quiz de Arquitectura</h3>
+                        <p>Pon a prueba qué técnica CSS resuelve cada reto de diseño.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: COMPONENTES UI -->
+        <section class="slide" data-slide="2" data-title="Componentes UI Interactivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · COMPONENTES REUTILIZABLES</span>
+                <h2 class="slide-title">Componentes UI con CSS Puro</h2>
+                <p class="slide-lead">Antes de usar JavaScript, HTML5 y CSS3 permiten crear acordeones, tarjetas 3D, chats y menús laterales.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>📂 Accordion Menu (2 Enfoques)</h3>
+                    <ul class="styled-list">
+                        <li><strong>Nativo (<code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code>):</strong> accesible por teclado sin una sola línea de JS.</li>
+                        <li><strong>Con <code>input[type="checkbox"]</code> + <code>:checked</code>:</strong> permite animar <code>max-height</code> o <code>grid-template-rows</code>.</li>
+                    </ul>
+                    <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+                        <a class="nav-btn" href="ACCORDION%20MENU/SUMMARY-DETAILS/index.html">Ver Summary/Details →</a>
+                        <a class="nav-btn" href="ACCORDION%20MENU/DIVS/index.html">Ver Divs + CSS →</a>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>🃏 Flipper Card 3D</h3>
+                    <ul class="styled-list">
+                        <li>Usa <code>perspective: 1000px</code> en el contenedor padre.</li>
+                        <li>Aplica <code>transform-style: preserve-3d</code> y <code>backface-visibility: hidden</code> en ambas caras.</li>
+                        <li>Al hacer <code>:hover</code>, rota <code>rotateY(180deg)</code> suavemente.</li>
+                    </ul>
+                    <div style="margin-top:12px;">
+                        <a class="nav-btn" href="FLIPPER%20CARD/index.html">Abrir Flipper Card →</a>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>💬 Chatbox UI</h3>
+                    <ul class="styled-list">
+                        <li>Maquetación con Flexbox en columna (mensajes enviados vs recibidos con <code>align-self</code>).</li>
+                        <li>Burbujas con <code>border-radius</code> asimétrico y scroll interno.</li>
+                    </ul>
+                    <div style="margin-top:12px;">
+                        <a class="nav-btn" href="CHATBOX/index.html">Abrir Chatbox →</a>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>📑 Sidebar Menu</h3>
+                    <ul class="styled-list">
+                        <li>Barra lateral fija o colapsable usando el truco del checkbox oculto (<code>#menu:checked ~ .sidebar</code>).</li>
+                        <li>Transiciones suaves en <code>width</code>, <code>transform</code> y opacidad de etiquetas.</li>
+                    </ul>
+                    <div style="margin-top:12px;">
+                        <a class="nav-btn" href="SIDEBAR%20MENU/index.html">Abrir Sidebar Menu →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: PÁGINAS COMPLETAS -->
+        <section class="slide" data-slide="3" data-title="Landing Pages y Webs Completas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · MAQUETACIÓN DE PÁGINAS</span>
+                <h2 class="slide-title">Páginas Web Completas</h2>
+                <p class="slide-lead">Integra cabecera, hero, grillas de tarjetas, formularios y footer responsivo en proyectos reales.</p>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <h3>🖼️ One View Page</h3>
+                    <p>Diseño de una sola pantalla (<code>100dvh</code>) enfocado en tipografía, jerarquía visual y centrado perfecto.</p>
+                    <div style="margin-top:14px;">
+                        <a class="nav-btn" href="ONE%20VIEW%20PAGE/index.html">Abrir Proyecto →</a>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>🌐 Web Page</h3>
+                    <p>Sitio multipropósito con barra de navegación, secciones estructuradas, tarjetas con Grid/Flexbox y footer.</p>
+                    <div style="margin-top:14px;">
+                        <a class="nav-btn" href="WEB%20PAGE/index.html">Abrir Proyecto →</a>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <h3>✨ Web Page Animations</h3>
+                    <p>Portafolio/landing page potenciado con <code>@keyframes</code>, efectos hover y animaciones ligadas al scroll.</p>
+                    <div style="margin-top:14px;">
+                        <a class="nav-btn" href="WEB%20PAGE%20ANIMATIONS/index.html">Abrir Proyecto →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="callout callout-tip">
+                <strong>💡 Consejo de estudio:</strong> Abre cada proyecto, presiona <code>F12</code> (DevTools) e inspecciona cómo están estructuradas las cajas con Flexbox y Grid. Intenta cambiar colores o espaciados en vivo.
+            </div>
+        </section>
+
+        <!-- SLIDE 4: QUIZ -->
+        <section class="slide" data-slide="4" data-title="Quiz de Proyectos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz: ¿Qué técnica CSS usarías?</h2>
+                <p class="slide-lead">Comprueba si reconoces las propiedades clave detrás de los proyectos de esta carpeta.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="backface-visibility: hidden oculta el reverso de cada cara cuando rota 180 grados en 3D."
+                    data-err="Sin backface-visibility: hidden verías el texto invertido al girar la tarjeta 180°.">
+                    <div class="quiz-q-title">1. En la Flipper Card 3D, ¿qué propiedad evita que se vea la cara trasera espejada al rotar?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">overflow: hidden</button>
+                        <button class="quiz-option" data-opt="b">backface-visibility: hidden</button>
+                        <button class="quiz-option" data-opt="c">z-index: -1</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="Las etiquetas nativas &lt;details&gt; y &lt;summary&gt; ofrecen soporte de teclado y lectores de pantalla gratis."
+                    data-err="Los &lt;div&gt; no tienen semántica ni navegación por teclado por defecto.">
+                    <div class="quiz-q-title">2. ¿Cuál es la forma más accesible y semántica de crear un Accordion Menu sin JavaScript?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Etiquetas &lt;details&gt; y &lt;summary&gt;</button>
+                        <button class="quiz-option" data-opt="b">Solo &lt;div&gt; con :hover</button>
+                        <button class="quiz-option" data-opt="c">Tablas HTML</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="En un contenedor Flex en columna, align-self: flex-end empuja los mensajes propios a la derecha y flex-start los recibidos a la izquierda."
+                    data-err="En flex-direction: column, el eje transversal es horizontal y se controla con align-self.">
+                    <div class="quiz-q-title">3. En el Chatbox (flex-direction: column), ¿cómo alineas un mensaje propio a la derecha y uno recibido a la izquierda?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">float: right / left</button>
+                        <button class="quiz-option" data-opt="b">justify-content: space-between</button>
+                        <button class="quiz-option" data-opt="c">align-self: flex-end / flex-start</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="5" data-lab="true" data-title="Laboratorio de Proyectos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio de Componentes UI</h2>
+                <p class="slide-lead">Prueba una tarjeta 3D giratoria o un acordeón nativo sin JavaScript directamente aquí.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 210px; background: #0f172a; perspective: 900px; }
+  .card { width: 190px; height: 120px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+  .card:hover { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: #0f172a; }
+  .front { background: linear-gradient(135deg, #38bdf8, #818cf8); }
+  .back { background: linear-gradient(135deg, #10b981, #38bdf8); transform: rotateY(180deg); }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;&lt;div class=&quot;face front&quot;&gt;Pasa el cursor ↻&lt;/div&gt;&lt;div class=&quot;face back&quot;&gt;¡Cara Trasera 3D!&lt;/div&gt;&lt;/div&gt;">Flipper Card 3D</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  details { background: #1e293b; border: 1px solid #38bdf8; border-radius: 10px; padding: 12px 16px; margin-bottom: 10px; }
+  summary { font-weight: 700; cursor: pointer; }
+&lt;/style&gt;
+&lt;details name=&quot;p&quot; open&gt;&lt;summary&gt;Proyecto 1: Accordion&lt;/summary&gt;&lt;p&gt;Construido con &amp;lt;details&amp;gt; sin JS.&lt;/p&gt;&lt;/details&gt;
+&lt;details name=&quot;p&quot;&gt;&lt;summary&gt;Proyecto 2: Chatbox&lt;/summary&gt;&lt;p&gt;Alineación con Flexbox y align-self.&lt;/p&gt;&lt;/details&gt;">Accordion Nativo</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 210px; background: #0f172a; perspective: 900px; }
+  .card { width: 190px; height: 120px; position: relative; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+  .card:hover { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: #0f172a; }
+  .front { background: linear-gradient(135deg, #38bdf8, #818cf8); }
+  .back { background: linear-gradient(135deg, #10b981, #38bdf8); transform: rotateY(180deg); }
+&lt;/style&gt;
+&lt;div class="card"&gt;&lt;div class="face front"&gt;Pasa el cursor ↻&lt;/div&gt;&lt;div class="face back"&gt;¡Cara Trasera 3D!&lt;/div&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: ÍNDICE DIRECTO -->
+        <section class="slide" data-slide="6" data-title="Todos los Proyectos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ACCESO DIRECTO</span>
+                <h2 class="slide-title">📂 Todos los Proyectos de la Carpeta</h2>
+                <p class="slide-lead">Haz clic en cualquier tarjeta para abrir el proyecto en el navegador.</p>
+            </div>
+            <div class="glass-card">
+                <div class="files-grid">
+                    <a class="file-card" href="ACCORDION%20MENU/SUMMARY-DETAILS/index.html"><span class="file-name">🪗 Accordion (Summary/Details)</span><span class="file-path">ACCORDION MENU/SUMMARY-DETAILS/</span></a>
+                    <a class="file-card" href="ACCORDION%20MENU/DIVS/index.html"><span class="file-name">🪗 Accordion (Divs + CSS)</span><span class="file-path">ACCORDION MENU/DIVS/</span></a>
+                    <a class="file-card" href="CHATBOX/index.html"><span class="file-name">💬 Chatbox UI</span><span class="file-path">CHATBOX/index.html</span></a>
+                    <a class="file-card" href="FLIPPER%20CARD/index.html"><span class="file-name">🃏 Flipper Card 3D</span><span class="file-path">FLIPPER CARD/index.html</span></a>
+                    <a class="file-card" href="ONE%20VIEW%20PAGE/index.html"><span class="file-name">🖼️ One View Page</span><span class="file-path">ONE VIEW PAGE/index.html</span></a>
+                    <a class="file-card" href="SIDEBAR%20MENU/index.html"><span class="file-name">📑 Sidebar Menu</span><span class="file-path">SIDEBAR MENU/index.html</span></a>
+                    <a class="file-card" href="WEB%20PAGE/index.html"><span class="file-name">🌐 Web Page</span><span class="file-path">WEB PAGE/index.html</span></a>
+                    <a class="file-card" href="WEB%20PAGE%20ANIMATIONS/index.html"><span class="file-name">✨ Web Page Animations</span><span class="file-path">WEB PAGE ANIMATIONS/index.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+</body>
+</html>

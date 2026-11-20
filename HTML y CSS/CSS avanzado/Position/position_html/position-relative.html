@@ -1,41 +1,134 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Position/position_html/position-relative.html
-     Título: Relative
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../position_css/relative.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relative</title>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Position Relative en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../slides-engine.css" /><script src="../../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!--   Separa elementos por capas -->
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box">
-        CAJA
-    </div>
-
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box box-blue">
-        CAJA2
-    </div>
-
-    <!-- Caja visual para agrupar contenido con fondo, borde o padding. -->
-    <div class="box box-red">
-        CAJA3
-    </div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · POSITION</span><div class="brand-title"><span>📍</span><span>Position Relative</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Position Relative">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">position: relative</span><span class="badge badge-purple">Conserva su espacio</span><span class="badge badge-emerald">Ancla para absolute</span></div>
+                <h1 class="hero-title">Posicionamiento:<br /><span class="gradient-text">position: relative</span></h1>
+                <p class="hero-subtitle">Desplaza un elemento desde su posición original sin quitarle el hueco en el flujo normal, y conviértelo en el marco de referencia para hijos <code>absolute</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📐</div><h3>Doble Función</h3><p>Desplazamiento relativo y anclaje de hijos.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Comprueba tu conocimiento.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Mueve una caja sin alterar a sus vecinas.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Position Relative?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Position Relative y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Desplaza un elemento desde su posición original sin quitarle el hueco en el flujo normal, y conviértelo en el marco de referencia para hijos <code>absolute</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Cómo funciona Relative">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · COMPORTAMIENTO</span><h2 class="slide-title">Conserva el espacio y sirve de ancla</h2></div>
+            <div class="grid-2">
+                <div class="glass-card"><h3>📍 Regla básica</h3><pre class="code-block"><code>.caja {
+  position: relative;
+  top: 12px;
+  left: 20px;
+}</code></pre></div>
+                <div class="glass-card"><h3>🔑 Puntos clave</h3><ul class="styled-list">
+                    <li>Su espacio original sigue reservado (los hermanos no se mueven).</li>
+                    <li>Habilita <code>z-index</code>.</li>
+                    <li>Es el contenedor ideal para hijos con <code>position: absolute</code>.</li>
+                </ul></div>
+            </div>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Position Relative">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Position Relative</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Position Relative">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="relative mantiene su espacio original reservado en el flujo del documento." data-err="absolute y fixed salen del flujo; relative conserva su hueco.">
+                    <div class="quiz-q-title">1. Al mover una caja con <code>position: relative; top: 20px;</code>, ¿qué ocurre con el espacio original que ocupaba?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Se conserva reservado</button><button class="quiz-option" data-opt="b">Se elimina y suben los demás</button><button class="quiz-option" data-opt="c">Desaparece la caja</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="static es el único valor que ignora top, left y z-index." data-err="Sí: position: relative permite aplicar z-index sobre el elemento.">
+                    <div class="quiz-q-title">2. ¿Funciona <code>z-index</code> en un elemento con <code>position: relative</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">No, solo en fixed</button><button class="quiz-option" data-opt="b">Sí, funciona</button><button class="quiz-option" data-opt="c">Solo si tiene float</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Relative">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Desplazamiento Relativo en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #fff; }
+  .box { width: 140px; padding: 14px; border-radius: 10px; margin-bottom: 8px; font-weight: 700; }
+  .b1 { background: #334155; }
+  .b2 { background: #38bdf8; color: #0f172a; position: relative; top: 14px; left: 32px; }
+  .b3 { background: #6366f1; }
+&lt;/style&gt;
+&lt;div class=&quot;box b1&quot;&gt;Caja 1&lt;/div&gt;
+&lt;div class=&quot;box b2&quot;&gt;Caja 2 (relative)&lt;/div&gt;
+&lt;div class=&quot;box b3&quot;&gt;Caja 3 (mantiene su sitio)&lt;/div&gt;">Relative en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #fff; }
+  .box { width: 140px; padding: 14px; border-radius: 10px; margin-bottom: 8px; font-weight: 700; }
+  .b1 { background: #334155; }
+  .b2 { background: #38bdf8; color: #0f172a; position: relative; top: 14px; left: 32px; }
+  .b3 { background: #6366f1; }
+&lt;/style&gt;
+&lt;div class="box b1"&gt;Caja 1&lt;/div&gt;
+&lt;div class="box b2"&gt;Caja 2 (relative)&lt;/div&gt;
+&lt;div class="box b3"&gt;Caja 3 (mantiene su sitio)&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Otros Modos de Position">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · CONTINÚA</span><h2 class="slide-title">📂 Otros Modos de Position</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="position-absolute.html"><span class="file-name">📍 Position Absolute</span><span class="file-path">position-absolute.html</span></a>
+                <a class="file-card" href="position-fixed.html"><span class="file-name">📍 Position Fixed</span><span class="file-path">position-fixed.html</span></a>
+                <a class="file-card" href="position-sticky.html"><span class="file-name">📍 Position Sticky</span><span class="file-path">position-sticky.html</span></a>
+                <a class="file-card" href="../../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

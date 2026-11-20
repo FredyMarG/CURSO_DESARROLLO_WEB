@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funciones Avanzadas CSS — Guía Dinámica e Interactiva | HTML5 y CSS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../slides-engine.css" />
+    <script src="../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 · FUNCIONES MODERNAS</span>
+            <div class="brand-title"><span>🧮</span><span>Funciones Avanzadas</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html" title="Volver al Portal Principal">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab" title="Ir al Laboratorio en Vivo">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode" title="Cambiar entre Diapositivas y Modo Guía"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Silenciar audio"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview" title="Índice de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Funciones Avanzadas">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">--variables</span>
+                    <span class="badge badge-purple">calc() · clamp()</span>
+                    <span class="badge badge-emerald">Simulador + Quiz</span>
+                </div>
+                <h1 class="hero-title">Domina<br /><span class="gradient-text">Funciones Avanzadas CSS</span></h1>
+                <p class="hero-subtitle">Escribe hojas de estilo dinámicas e inteligentes usando variables CSS nativas, matemáticas fluidas con <code>clamp()</code> y <code>calc()</code>, filtros glassmorphism y recortes geométricos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🎨</div>
+                        <h3>Variables CSS</h3>
+                        <p>Centraliza colores y crea modo claro/oscuro en segundos.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">📐</div>
+                        <h3>calc(), min(), max(), clamp()</h3>
+                        <p>Tipografía y espaciados fluidos sin saltos bruscos.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>Simulador clamp()</h3>
+                        <p>Visualiza cómo escala una fuente según el ancho de pantalla.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2 -->
+        <section class="slide" data-slide="2" data-title="Variables CSS (Custom Properties)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · TOKENS DE DISEÑO</span>
+                <h2 class="slide-title">Variables CSS (<code>--nombre</code> y <code>var()</code>)</h2>
+                <p class="slide-lead">A diferencia de Sass, las variables nativas viven en tiempo de ejecución y pueden cambiar dinámicamente con media queries o JavaScript.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🌐 Definición global en <code>:root</code></h3>
+                    <pre class="code-block"><code>:root {
+  --bg: #070a13;
+  --accent: #38bdf8;
+  --radius: 14px;
+}
+.boton {
+  background: var(--accent, #0284c7);
+  border-radius: var(--radius);
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🌗 Cambio de tema instantáneo</h3>
+                    <pre class="code-block"><code>body.light-theme {
+  --bg: #f8fafc;
+  --accent: #4f46e5;
+}</code></pre>
+                    <p style="margin-top:8px;">El segundo parámetro de <code>var(--accent, #0284c7)</code> es un valor de respaldo (fallback) si la variable no existe.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3 -->
+        <section class="slide" data-slide="3" data-title="calc(), min(), max() y clamp()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · MATEMÁTICAS EN CSS</span>
+                <h2 class="slide-title">calc(), min(), max() y clamp()</h2>
+                <p class="slide-lead">Combina unidades distintas (como <code>100% - 2rem</code>) y establece límites seguros para que nada se rompa.</p>
+            </div>
+            <table class="compare-table">
+                <thead>
+                    <tr><th>Función</th><th>Qué devuelve</th><th>Ejemplo práctico</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>calc(a + b)</code></td><td>Suma/resta/multiplica unidades mixtas</td><td><code>width: calc(100% - 240px);</code></td></tr>
+                    <tr><td><code>min(a, b)</code></td><td>El valor más pequeño (tope máximo)</td><td><code>width: min(92%, 1100px);</code></td></tr>
+                    <tr><td><code>max(a, b)</code></td><td>El valor más grande (tope mínimo)</td><td><code>padding: max(16px, 4vw);</code></td></tr>
+                    <tr><td><code>clamp(min, ideal, max)</code></td><td>Escala fluido entre un piso y un techo</td><td><code>font-size: clamp(1.4rem, 3vw, 2.8rem);</code></td></tr>
+                </tbody>
+            </table>
+            <div class="callout callout-tip">
+                <strong>💡 Tip profesional:</strong> En <code>calc(100% - 20px)</code>, los espacios alrededor del <code>+</code> y <code>-</code> son <strong>obligatorios</strong>. Sin espacios, CSS lo interpreta como un número negativo inválido.
+            </div>
+        </section>
+
+        <!-- SLIDE 4 -->
+        <section class="slide" data-slide="4" data-title="Unidades Modernas del Viewport">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · MÓVILES SIN BUGS</span>
+                <h2 class="slide-title">Unidades del Viewport: vh vs dvh, svh, lvh</h2>
+                <p class="slide-lead">En móviles, la barra de direcciones del navegador cambia de altura al hacer scroll. <code>100vh</code> clásico suele cortar el contenido.</p>
+            </div>
+            <div class="grid-3">
+                <div class="glass-card">
+                    <h3>📱 <code>100dvh</code> (Dynamic)</h3>
+                    <p>Se recalcula dinámicamente según si la barra de direcciones está visible u oculta. Ideal para pantallas completas.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>📐 <code>100svh</code> (Small)</h3>
+                    <p>La altura mínima garantizada (con barra visible). Evita saltos bruscos de layout al desplazarse.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>🖥️ <code>100lvh</code> (Large)</h3>
+                    <p>La altura máxima posible cuando la barra del navegador se oculta por completo.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5 -->
+        <section class="slide" data-slide="5" data-title="Efectos Visuales: Filter, Backdrop y Clip-Path">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · EFECTOS MODERNOS</span>
+                <h2 class="slide-title">backdrop-filter, filter y clip-path</h2>
+                <p class="slide-lead">Consigue efectos de vidrio esmerilado (glassmorphism) y formas poligonales sin Photoshop.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🪟 Glassmorphism real</h3>
+                    <pre class="code-block"><code>.panel-vidrio {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>✂️ Recortes con <code>clip-path</code></h3>
+                    <pre class="code-block"><code>.diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}</code></pre>
+                    <p style="margin-top:8px;">También acepta <code>circle(50%)</code> y <code>inset(10px round 12px)</code>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6 -->
+        <section class="slide" data-slide="6" data-title="color-mix() y Transformaciones">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · COLORES Y GEOMETRÍA</span>
+                <h2 class="slide-title">color-mix(), transform y initial-letter</h2>
+                <p class="slide-lead">Mezcla colores nativamente en CSS y crea variaciones de hover sin declarar decenas de códigos HEX.</p>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧪 <code>color-mix()</code></h3>
+                    <pre class="code-block"><code>.btn:hover {
+  background: color-mix(in srgb, var(--accent) 80%, white);
+}</code></pre>
+                    <p style="margin-top:8px;">Aclara u oscurece cualquier color base automáticamente.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>📰 <code>initial-letter</code></h3>
+                    <pre class="code-block"><code>p::first-letter {
+  initial-letter: 3; /* Letra capital de 3 líneas */
+  margin-right: 10px;
+}</code></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Concepto Técnico">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
+                <h2 class="slide-title">Concepto Técnico</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>filter</code> aplica efectos gráficos en la etapa de post-renderizado. El</p>
+<p style="margin-bottom:8px;line-height:1.6;">navegador primero pinta el elemento y luego aplica el efecto como una</p>
+<p style="margin-bottom:8px;line-height:1.6;">capa adicional.</p>
+<ul class="styled-list">
+<li>-   No altera el layout.</li>
+<li>-   Se ejecuta en la fase de composición.</li>
+<li>-   Puede usar aceleración por GPU.</li>
+</ul></div>
+        </section>
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Sintaxis">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
+                <h2 class="slide-title">Sintaxis</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>selector {
+  filter: &lt;filter-function&gt;+;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Se pueden encadenar múltiples funciones:</p>
+<pre class="code-block"><code>filter: blur(5px) brightness(120%) contrast(110%);</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 2. BACKDROP-FILTER</p>
+<p style="margin-bottom:8px;line-height:1.6;">Aplica efectos al contenido detrás del elemento.</p>
+<pre class="code-block"><code>.card {
+  backdrop-filter: blur(15px);
+  background: rgba(255,255,255,0.2);
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 3. TRANSFORM</p>
+<p style="margin-bottom:8px;line-height:1.6;">No modifica el flujo del documento. Más eficiente que usar top/left.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 4. MIN(), MAX(), CLAMP()</p>
+<p style="margin-bottom:8px;line-height:1.6;">Ideal para tipografía fluida:</p>
+<pre class="code-block"><code>font-size: clamp(1rem, 1.5vw + 1rem, 2rem);</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 5. VARIABLES CSS</p>
+<pre class="code-block"><code>:root {
+  --primary-color: #3498db;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 6. CALC()</p>
+<pre class="code-block"><code>width: calc(100% - 80px);</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 7. PROPIEDADES DE SCROLL</p>
+<pre class="code-block"><code>html { scroll-behavior: smooth; }</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 8. INITIAL-LETTER</p>
+<pre class="code-block"><code>p::first-letter {
+  initial-letter: 3 2;
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 9. UNIDADES VIEWPORT MODERNAS</p>
+<pre class="code-block"><code>height: 100dvh;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 10. MIN-CONTENT, MAX-CONTENT Y FIT-CONTENT</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 11. COLOR-MIX()</p>
+<pre class="code-block"><code>background: color-mix(in lch, red 40%, blue);</code></pre></div>
+        </section>
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Concepto Técnico">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
+                <h2 class="slide-title">Concepto Técnico</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>clip-path</code> permite recortar visualmente un elemento definiendo una</p>
+<p style="margin-bottom:8px;line-height:1.6;">región visible. Todo lo que quede fuera de esa región no se renderiza.</p>
+<ul class="styled-list">
+<li>-   No modifica el layout.</li>
+<li>-   Afecta únicamente la pintura (paint phase).</li>
+<li>-   Puede combinarse con animaciones y transform.</li>
+<li>-   Es acelerado por GPU en la mayoría de navegadores modernos.</li>
+</ul></div>
+        </section>
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Sintaxis General">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
+                <h2 class="slide-title">Sintaxis General</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>selector {
+  clip-path: shape();
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Puede usar: - <code>circle()</code> - <code>ellipse()</code> - <code>inset()</code> - <code>polygon()</code> -</p>
+<p style="margin-bottom:8px;line-height:1.6;"><code>path()</code></p></div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR CLAMP + COLOR-MIX -->
+        <section class="slide" data-slide="11" data-title="Simulador de clamp() y color-mix()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXPERIMENTA EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador de Tipografía Fluida <code>clamp()</code></h2>
+                <p class="slide-lead">Mueve el ancho simulado del viewport y observa cómo <code>clamp(18px, 4vw, 48px)</code> respeta el mínimo y máximo.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Ancho de pantalla simulado <span id="clampWVal">800px</span></label>
+                        <input type="range" id="clampW" min="320" max="1400" value="800" />
+                    </div>
+                    <div class="sim-control">
+                        <label>Mezcla color-mix (% Cyan) <span id="mixVal">65%</span></label>
+                        <input type="range" id="mixPct" min="0" max="100" value="65" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="clampStage" style="display:grid; place-items:center; text-align:center; min-height:200px;">
+                        <div>
+                            <div id="clampTitle" style="font-weight:800; line-height:1.15; transition:all 0.1s;">Texto Fluido con clamp()</div>
+                            <div id="clampInfo" style="margin-top:10px; font-family:var(--font-mono); font-size:0.84rem; color:#94a3b8;"></div>
+                        </div>
+                    </div>
+                    <pre class="sim-code" id="clampCodeOut"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="12" data-title="Quiz de Funciones Avanzadas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Funciones CSS</h2>
+                <p class="slide-lead">Comprueba tu comprensión de variables, funciones matemáticas y viewport moderno.</p>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+
+                <div class="quiz-question" data-answer="b"
+                    data-ok="clamp(min, ideal, max) garantiza que el valor nunca baje del mínimo ni supere el máximo."
+                    data-err="min() solo pone tope superior y max() solo pone tope inferior; clamp() combina ambos.">
+                    <div class="quiz-q-title">1. ¿Qué función permite definir un tamaño mínimo, un tamaño fluido ideal y un máximo al mismo tiempo?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">calc()</button>
+                        <button class="quiz-option" data-opt="b">clamp()</button>
+                        <button class="quiz-option" data-opt="c">minmax()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="a"
+                    data-ok="100dvh se adapta dinámicamente cuando la barra de direcciones del navegador móvil aparece o desaparece."
+                    data-err="100vh suele desbordarse en móviles cuando la barra de direcciones está visible.">
+                    <div class="quiz-q-title">2. ¿Qué unidad reemplaza a <code>100vh</code> para evitar cortes por la barra de direcciones en móviles?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">100dvh</button>
+                        <button class="quiz-option" data-opt="b">100px</button>
+                        <button class="quiz-option" data-opt="c">100em</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+
+                <div class="quiz-question" data-answer="c"
+                    data-ok="En var(--color, #fff), el segundo argumento actúa como valor de respaldo si la variable no está definida."
+                    data-err="El segundo parámetro dentro de var() es un fallback seguro.">
+                    <div class="quiz-q-title">3. En <code>color: var(--primario, #38bdf8);</code>, ¿qué significa <code>#38bdf8</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Un segundo color para degradado</button>
+                        <button class="quiz-option" data-opt="b">El color en modo oscuro</button>
+                        <button class="quiz-option" data-opt="c">El valor de respaldo si --primario no existe</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo en Vivo</h2>
+                <p class="slide-lead">Edita el código HTML y CSS a la izquierda o carga un ejemplo predefinido para ver el resultado al instante.</p>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  :root { --accent: #38bdf8; }
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff; }
+  .glass { width: min(90%, 340px); padding: 24px; border-radius: 18px; background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
+  h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--accent); margin: 0 0 8px; }
+&lt;/style&gt;
+&lt;div class=&quot;glass&quot;&gt;&lt;h2&gt;Glassmorphism + Clamp&lt;/h2&gt;&lt;p&gt;Combinando &lt;code&gt;backdrop-filter&lt;/code&gt;, &lt;code&gt;min()&lt;/code&gt; y &lt;code&gt;clamp()&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;">Glass + Clamp</button>
+                    <button class="preset-btn" data-code="&lt;style&gt;
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: #0f172a; }
+  .shape { width: 160px; height: 140px; background: linear-gradient(135deg, #10b981, #38bdf8); clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%); display: grid; place-items: center; color: #0f172a; font-weight: 800; }
+&lt;/style&gt;
+&lt;div class=&quot;shape&quot;&gt;Clip-Path&lt;/div&gt;">Polígono Clip-Path</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  :root { --accent: #38bdf8; }
+  body { font-family: system-ui; display: grid; place-items: center; min-height: 220px; background: linear-gradient(135deg, #0f172a, #1e1b4b); color: #fff; }
+  .glass { width: min(90%, 340px); padding: 24px; border-radius: 18px; background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); }
+  h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); color: var(--accent); margin: 0 0 8px; }
+&lt;/style&gt;
+&lt;div class="glass"&gt;&lt;h2&gt;Glassmorphism + Clamp&lt;/h2&gt;&lt;p&gt;Combinando &lt;code&gt;backdrop-filter&lt;/code&gt;, &lt;code&gt;min()&lt;/code&gt; y &lt;code&gt;clamp()&lt;/code&gt;.&lt;/p&gt;&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa del laboratorio"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PRÁCTICAS DE LA CARPETA Y DOCUMENTACIÓN -->
+        <section class="slide" data-slide="14" data-title="Prácticas y Documentación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · RECURSOS DEL MÓDULO</span>
+                <h2 class="slide-title">📂 Prácticas de la Carpeta y Guía Completa</h2>
+                <p class="slide-lead">Explora cada archivo de práctica real dentro de esta carpeta o abre la documentación técnica.</p>
+            </div>
+            <div class="glass-card" style="margin-bottom: 18px;">
+                <h3>📘 Documentación de Referencia</h3>
+                <p style="margin-top:6px;">Consulta los apuntes en <a href="../Documentacion/index.html" style="color:#38bdf8;font-weight:700;">Centro de Documentación</a> (<a href="../Documentacion/FUNCIONES_AVANZADAS.md" style="color:#38bdf8;">FUNCIONES_AVANZADAS.md</a>) o vuelve al <a href="../../index.html" style="color:#38bdf8;font-weight:700;">Portal del Curso</a>.</p>
+            </div>
+            <div class="glass-card">
+                <h3>🛠️ Archivos y Subcarpetas (10)</h3>
+                <div class="files-grid">
+                    <a class="file-card" href="Calc/calc.html"><span class="file-name">📁 Calc</span><span class="file-path">calc.html</span></a>
+                    <a class="file-card" href="Clip%20Path/clip.html"><span class="file-name">📁 Clip Path</span><span class="file-path">clip.html</span></a>
+                    <a class="file-card" href="Color%20MIx/color.html"><span class="file-name">📁 Color MIx</span><span class="file-path">color.html</span></a>
+                    <a class="file-card" href="Filter%20y%20Backdrop/filter.html"><span class="file-name">📁 Filter y Backdrop</span><span class="file-path">filter.html</span></a>
+                    <a class="file-card" href="Initial%20Letter/initial.html"><span class="file-name">📁 Initial Letter</span><span class="file-path">initial.html</span></a>
+                    <a class="file-card" href="Max%20Min%20Clamp/max-min.html"><span class="file-name">📁 Max Min Clamp</span><span class="file-path">max-min.html</span></a>
+                    <a class="file-card" href="Scroll/scroll.html"><span class="file-name">📁 Scroll</span><span class="file-path">scroll.html</span></a>
+                    <a class="file-card" href="Transform/transform.html"><span class="file-name">📁 Transform</span><span class="file-path">transform.html</span></a>
+                    <a class="file-card" href="Unidades%20del%20Viewport/unidades.html"><span class="file-name">📁 Unidades del Viewport</span><span class="file-path">unidades.html</span></a>
+                    <a class="file-card" href="Variables/variables.html"><span class="file-name">📁 Variables</span><span class="file-path">variables.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O (Índice)</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+
+    <script>
+        (function () {
+            const wInput = document.getElementById('clampW');
+            const wVal = document.getElementById('clampWVal');
+            const mixInput = document.getElementById('mixPct');
+            const mixVal = document.getElementById('mixVal');
+            const title = document.getElementById('clampTitle');
+            const info = document.getElementById('clampInfo');
+            const out = document.getElementById('clampCodeOut');
+
+            function updateClamp() {
+                const vw = +wInput.value;
+                const ideal = +(vw * 0.04).toFixed(1);
+                const computed = Math.max(18, Math.min(48, ideal));
+                wVal.textContent = vw + 'px';
+                mixVal.textContent = mixInput.value + '%';
+                title.style.fontSize = computed + 'px';
+                title.style.color = `color-mix(in srgb, #38bdf8 ${mixInput.value}%, #f43f5e)`;
+                info.textContent = `4vw = ${ideal}px → Resultado aplicado: ${computed}px (límites: 18px – 48px)`;
+                out.textContent = `.titulo {\n  font-size: clamp(18px, 4vw, 48px); /* Calculado a ${vw}px: ${computed}px */\n  color: color-mix(in srgb, #38bdf8 ${mixInput.value}%, #f43f5e);\n}`;
+            }
+            [wInput, mixInput].forEach(el => el.addEventListener('input', updateClamp));
+            updateClamp();
+        })();
+    </script>
+</body>
+</html>

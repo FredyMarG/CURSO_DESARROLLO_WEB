@@ -295,6 +295,9 @@ class PresentationController {
         if (btnNext) btnNext.addEventListener("click", () => this.nextSlide());
         if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide());
 
+        const btnGoLab = document.getElementById("btnGoLab");
+        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(9));
+
         const btnToggleMode = document.getElementById("btnToggleMode");
         const btnToggleSound = document.getElementById("btnToggleSound");
         const btnOverview = document.getElementById("btnOverview");

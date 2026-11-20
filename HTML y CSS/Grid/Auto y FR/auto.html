@@ -1,41 +1,80 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/Grid/Auto y FR/auto.html
-     Título: Auto y FR
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="auto.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto y FR</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto y Unidad FR — Guía Interactiva | CSS Grid</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Contenedor principal que organiza elementos en la interfaz. -->
-    <div class="grid">
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">1</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">2</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">3</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">4</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">5</div>
-    <!-- Contenedor con clase(s) grid-item para estilo o disposición. -->
-        <div class="grid-item">6</div>
-    </div>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 · CSS GRID</span><div class="brand-title"><span>⚖️</span><span>Auto y Unidad FR</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Grid</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Auto y Unidad FR">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">fr (fracción)</span><span class="badge badge-purple">auto</span><span class="badge badge-emerald">Espacio libre</span></div>
+                <h1 class="hero-title">CSS Grid:<br /><span class="gradient-text">Auto y Unidad FR</span></h1>
+                <p class="hero-subtitle">Reparte el espacio sobrante de la cuadrícula proporcionalmente sin provocar desbordamientos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el porqué antes de memorizar propiedades.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y Reglas</h3><p>Valores, ejemplos comentados y tablas claras.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">💡</div><h3>3. Buenas Prácticas</h3><p>Errores frecuentes y casos de producción.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Auto y Unidad FR y para qué sirve?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Auto y Unidad FR y para qué sirve?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en el desarrollo real</h3><p style="line-height:1.65;">Reparte el espacio sobrante de la cuadrícula proporcionalmente sin provocar desbordamientos. Dominar <strong>Auto y Unidad FR</strong> te permite escribir menos código CSS, evitar hacks antiguos y construir interfaces predecibles en cualquier dispositivo.</p></div><div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Piensa siempre en la relación <strong>Padre → Hijos</strong>: primero define las reglas estructurales en el contenedor y luego ajusta los detalles puntuales en los elementos internos.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Diferencia entre fr, auto y %">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Diferencia entre fr, auto y %</h2></div>
+            <table class="compare-table"><thead><tr><th>Unidad</th><th>Comportamiento</th></tr></thead><tbody><tr><td><code>1fr</code></td><td>Toma 1 parte del espacio libre restante (descontando el <code>gap</code>)</td></tr><tr><td><code>auto</code></td><td>Se ajusta al ancho mínimo del contenido</td></tr><tr><td><code>50%</code></td><td>50% del padre (puede desbordar si hay <code>gap</code>)</td></tr></tbody></table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas prácticas y errores comunes en Auto y Unidad FR">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Auto y Unidad FR</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz: Auto y Unidad FR">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="Divide el espacio disponible en 3 partes: 1/3 para la primera y 2/3 para la segunda." data-err="fr reparte el espacio disponible de forma proporcional."><div class="quiz-q-title">1. ¿Qué significa <code>grid-template-columns: 1fr 2fr;</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Dos columnas iguales</button><button class="quiz-option" data-opt="b">La segunda columna recibe el doble del espacio libre que la primera</button><button class="quiz-option" data-opt="c">Miden 1px y 2px</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Auto y Unidad FR">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; }
+  .g { display: grid; grid-template-columns: auto 1fr 2fr; gap: 10px; }
+  .c { background: #818cf8; color: #fff; font-weight: 700; padding: 14px; border-radius: 8px; text-align: center; }
+&lt;/style&gt;
+&lt;div class=&quot;g&quot;&gt;&lt;div class=&quot;c&quot;&gt;auto&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;1fr&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;2fr&lt;/div&gt;&lt;/div&gt;">1fr vs 2fr</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 14px; background: #0f172a; }
+  .g { display: grid; grid-template-columns: auto 1fr 2fr; gap: 10px; }
+  .c { background: #818cf8; color: #fff; font-weight: 700; padding: 14px; border-radius: 8px; text-align: center; }
+&lt;/style&gt;
+&lt;div class=&quot;g&quot;&gt;&lt;div class=&quot;c&quot;&gt;auto&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;1fr&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;2fr&lt;/div&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Grid</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⚖️ Guía Completa CSS Grid</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

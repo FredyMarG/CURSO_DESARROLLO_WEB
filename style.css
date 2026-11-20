@@ -381,3 +381,63 @@ h1 {
     /* Altura de línea cómoda para lectura rápida */
     line-height: 1.5;
 }
+
+/* ==========================================================================
+   RUTA VISUAL DE APRENDIZAJE PASO A PASO (.learning-path)
+   ========================================================================== */
+
+/* Contenedor horizontal de los 5 pasos recomendados del curso */
+.learning-path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+/* Tarjeta-botón individual de cada paso en la ruta */
+.path-step {
+    background: rgba(16, 24, 42, 0.85);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    min-width: 155px;
+    text-align: left;
+}
+
+/* Efecto hover para resaltar el paso interactivo */
+.path-step:hover {
+    transform: translateY(-2px);
+    border-color: var(--cyan);
+}
+
+/* Etiqueta superior del número de paso */
+.step-num {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.68rem;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+/* Subtítulo descriptivo corto del paso */
+.path-step small {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+}
+
+/* Flecha conectora entre pasos */
+.path-arrow {
+    color: var(--text-muted);
+    font-size: 1rem;
+    user-select: none;
+}

@@ -1,77 +1,138 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/HTML Avanzado/HTML Semantico/HTML semantico.html
-     Título: HTML Semantico
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="semantico.css">
-    <title>HTML Semantico</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Semántico — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <!-- Encabezado de página o sección con título e invitación. -->
-    <header>
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
-
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-        <nav>
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Lista de elementos relacionados. -->
-            <ul>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="">Item 1</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="">Item 2</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="">Item 3</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="">Item 4</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-                <li><a href="">Item 5</a></li>
-            </ul>
-        </nav>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">HTML5 AVANZADO · ARQUITECTURA</span><div class="brand-title"><span>🏛️</span><span>HTML Semántico</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">HTML Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
     </header>
-    <!-- Bloque principal con el contenido más importante. -->
-    <main>
-<!-- Contenido principal del documento (main) -->
 
-    <!-- Sección temática que agrupa contenido relacionado. -->
-        <section class="recipe-container">
-<!-- Sección temática de contenido (section) -->
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: HTML Semántico">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&lt;header&gt; &amp; &lt;nav&gt;</span><span class="badge badge-purple">&lt;main&gt; &amp; &lt;article&gt;</span><span class="badge badge-emerald">&lt;aside&gt; &amp; &lt;footer&gt;</span></div>
+                <h1 class="hero-title">Estructura con Sentido:<br /><span class="gradient-text">HTML5 Semántico</span></h1>
+                <p class="hero-subtitle">Reemplaza los <code>&lt;div&gt;</code> genéricos por etiquetas que comunican exactamente qué rol cumple cada sección de tu página a navegadores, Google y lectores de pantalla.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🗺️</div><h3>Mapa de Etiquetas</h3><p>Diferencia entre <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code> y <code>&lt;aside&gt;</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Elige la etiqueta correcta para cada caso.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Maqueta una página semántica completa.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es HTML Semántico?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es HTML Semántico y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Reemplaza los <code>&lt;div&gt;</code> genéricos por etiquetas que comunican exactamente qué rol cumple cada sección de tu página a navegadores, Google y lectores de pantalla. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
 
+        <section class="slide" data-slide="3" data-title="Etiquetas Semánticas Principales">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · ROLES</span><h2 class="slide-title">¿Cuándo usar cada etiqueta?</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Etiqueta</th><th>Propósito</th></tr></thead>
+                <tbody>
+                    <tr><td><code>&lt;header&gt;</code></td><td>Cabecera de la página o de un artículo</td></tr>
+                    <tr><td><code>&lt;nav&gt;</code></td><td>Bloque principal de enlaces de navegación</td></tr>
+                    <tr><td><code>&lt;main&gt;</code></td><td>Contenido central único (solo 1 visible por página)</td></tr>
+                    <tr><td><code>&lt;article&gt;</code></td><td>Contenido independiente reutilizable (post, noticia, producto)</td></tr>
+                    <tr><td><code>&lt;section&gt;</code></td><td>Agrupación temática con encabezado propio</td></tr>
+                    <tr><td><code>&lt;aside&gt;</code> / <code>&lt;footer&gt;</code></td><td>Barra lateral complementaria y pie de página</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: HTML Semántico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en HTML Semántico</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
 
+        <section class="slide" data-slide="5" data-title="Quiz HTML Semántico">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="b" data-ok="&lt;article&gt; representa contenido autónomo que tendría sentido incluso si se distribuye por separado (post, tarjeta de noticia)." data-err="&lt;aside&gt; es para contenido secundario; un post independiente va en &lt;article&gt;.">
+                    <div class="quiz-q-title">1. ¿Qué etiqueta es más adecuada para una entrada de blog o tarjeta de noticia independiente?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;aside&gt;</button><button class="quiz-option" data-opt="b">&lt;article&gt;</button><button class="quiz-option" data-opt="c">&lt;div&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="&lt;aside&gt; agrupa contenido relacionado tangencialmente, como una barra lateral, widgets o anuncios." data-err="&lt;aside&gt; es la etiqueta semántica estándar para barras laterales.">
+                    <div class="quiz-q-title">2. ¿Qué etiqueta semántica representa una barra lateral con enlaces relacionados o publicidad?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">&lt;aside&gt;</button><button class="quiz-option" data-opt="b">&lt;main&gt;</button><button class="quiz-option" data-opt="c">&lt;header&gt;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Semántico">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Layout Semántico con Grid</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; margin: 10px; background: #0f172a; color: #f8fafc; display: grid; gap: 8px; grid-template-columns: 1fr 120px; grid-template-areas: &#39;h h&#39; &#39;m a&#39; &#39;f f&#39;; }
+  header, main, aside, footer { padding: 12px; border-radius: 10px; background: #1e293b; border: 1px solid #334155; }
+  header { grid-area: h; border-color: #38bdf8; } main { grid-area: m; border-color: #10b981; } aside { grid-area: a; } footer { grid-area: f; }
+&lt;/style&gt;
+&lt;header&gt;&lt;nav&gt;Header + Nav&lt;/nav&gt;&lt;/header&gt;
+&lt;main&gt;&lt;article&gt;&lt;h3 style=&quot;margin:0&quot;&gt;Article Principal&lt;/h3&gt;&lt;p&gt;Contenido semántico.&lt;/p&gt;&lt;/article&gt;&lt;/main&gt;
+&lt;aside&gt;Aside&lt;/aside&gt;
+&lt;footer&gt;Footer © 2026&lt;/footer&gt;">Página Semántica</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; margin: 10px; background: #0f172a; color: #f8fafc; display: grid; gap: 8px; grid-template-columns: 1fr 120px; grid-template-areas: 'h h' 'm a' 'f f'; }
+  header, main, aside, footer { padding: 12px; border-radius: 10px; background: #1e293b; border: 1px solid #334155; }
+  header { grid-area: h; border-color: #38bdf8; } main { grid-area: m; border-color: #10b981; } aside { grid-area: a; } footer { grid-area: f; }
+&lt;/style&gt;
+&lt;header&gt;&lt;nav&gt;Header + Nav&lt;/nav&gt;&lt;/header&gt;
+&lt;main&gt;&lt;article&gt;&lt;h3 style="margin:0"&gt;Article Principal&lt;/h3&gt;&lt;p&gt;Contenido semántico.&lt;/p&gt;&lt;/article&gt;&lt;/main&gt;
+&lt;aside&gt;Aside&lt;/aside&gt;
+&lt;footer&gt;Footer © 2026&lt;/footer&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con HTML Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">🏛️ Guía Completa HTML Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
         </section>
     </main>
-    <!-- Información complementaria o lateral. -->
-    <aside>
-<!-- Contenido complementario (aside), barras laterales o notas -->
-
-
-    </aside>
-    <!-- Sección temática que agrupa contenido relacionado. -->
-    <section class="comments-container">
-
-    </section>
-    <!-- Pie de página con créditos o enlaces secundarios. -->
-    <footer>
-<!-- Pie de página o de sección (footer) -->
-
-    <!-- Párrafo de texto. -->
-        <p>Copyright 2026 - Protegido por derechos de autor</p>
-    </footer>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

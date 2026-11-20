@@ -14,6 +14,110 @@
             <p>Dispara cada método de depuración y observa el resultado en el panel inferior y en la consola real del navegador (<code>F12</code> / <code>Ctrl + Shift + I</code>).</p>
         </header>
 
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (CONSOLE.LOG.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Niveles de Registro (Logging)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Uso | Apariencia en DevTools |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>console.log(...)</code> | Salida general de depuración | Texto estándar |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>console.info(...)</code> | Mensajes informativos | Icono/estilo informativo |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>console.warn(...)</code> | Advertencias no críticas | Fondo amarillo + triángulo ⚠️ |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>console.error(...)</code> | Errores críticos + *stack trace* | Fondo rojo + icono ❌ |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>console.assert(cond, msg)</code> | Imprime error <strong>solo si <code>cond</code> es falsa</strong> | Igual que <code>error</code> cuando falla |</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.assert(edad &gt;= 18, &quot;Error: El usuario debe ser mayor de edad&quot;, { edad });</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Inspección Estructurada: table, dir y trace</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;"><code>console.table(datos, columnas?)</code></h4>
+<p style="margin:6px 0;line-height:1.6;">Convierte arrays de objetos u objetos planos en una tabla ordenable e increíblemente legible:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const usuarios = [
+    { id: 1, nombre: &quot;Ana&quot;, rol: &quot;Admin&quot; },
+    { id: 2, nombre: &quot;Luis&quot;, rol: &quot;Editor&quot; },
+];
+console.table(usuarios, [&quot;nombre&quot;, &quot;rol&quot;]);</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;"><code>console.dir(objeto)</code></h4>
+<p style="margin:6px 0;line-height:1.6;">Muestra la representación interactiva de propiedades JS de un objeto (muy útil para inspeccionar nodos del DOM en lugar de ver su HTML).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;"><code>console.trace(etiqueta?)</code></h4>
+<p style="margin:6px 0;line-height:1.6;">Imprime la <strong>pila de llamadas</strong> (*stack trace*) exacta que llevó hasta esa línea de código, ideal para saber qué función llamó a otra.</p></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Agrupación, Contadores y Temporizadores</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;">Agrupar mensajes: <code>group</code> / <code>groupCollapsed</code> / <code>groupEnd</code></h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.groupCollapsed(&quot;📦 Carga de Perfil&quot;); // Inicia colapsado
+console.log(&quot;Usuario:&quot;, &quot;Carlos&quot;);
+console.log(&quot;Permisos:&quot;, [&quot;read&quot;, &quot;write&quot;]);
+console.groupEnd();</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Contar ejecuciones: <code>count</code> / <code>countReset</code></h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>function procesarClick() {
+    console.count(&quot;Botón Guardar&quot;); // &quot;Botón Guardar: 1&quot;, &quot;Botón Guardar: 2&quot;...
+}</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Medir rendimiento: <code>time</code> / <code>timeLog</code> / <code>timeEnd</code></h4>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.time(&quot;bucle-millon&quot;);
+let suma = 0;
+for (let i = 0; i &lt; 1_000_000; i++) suma += i;
+console.timeEnd(&quot;bucle-millon&quot;); // &quot;bucle-millon: 2.45 ms&quot;</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Placeholders y Estilos CSS (%c)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Puedes formatear mensajes usando especificadores de formato y estilos CSS directamente en la consola del navegador:</p>
+<p style="margin:6px 0;line-height:1.6;">| Placeholder | Tipo |</p>
+<p style="margin:6px 0;line-height:1.6;">| :--- | :--- |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%s</code> | String |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%d</code> / <code>%i</code> | Entero |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%f</code> | Flotante |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%o</code> / <code>%O</code> | Objeto interactivo |</p>
+<p style="margin:6px 0;line-height:1.6;">| <code>%c</code> | Aplica estilos CSS al texto siguiente |</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.log(
+    &quot;%c ¡SISTEMA LISTO! %c Versión %s &quot;,
+    &quot;background: #10b981; color: #052e16; font-weight: bold; padding: 2px 6px; border-radius: 4px;&quot;,
+    &quot;color: #94a3b8; font-style: italic;&quot;,
+    &quot;v2.4.0&quot;
+);</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong>Dejar <code>console.log()</code> con datos sensibles en producción:</strong> Expone tokens, correos o lógica interna a cualquier usuario que abra DevTools.</li>
+<li>* <strong>Imprimir objetos mutables y confiar en la vista previa colapsada:</strong> En DevTools, al expandir un objeto con la flecha <code>▶</code>, el navegador lee su estado <strong>actual</strong>, no el que tenía en el instante del <code>console.log</code>. Usa <code>console.log(structuredClone(obj))</code> si necesitas una foto exacta de ese momento.</li>
+<li>* <strong>Olvidar cerrar <code>console.group()</code> con <code>console.groupEnd()</code>:</strong> Todos los logs posteriores quedarán anidados dentro del grupo.</li>
+</ul></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
         <main class="grid">
             <section class="card" aria-labelledby="co1">
                 <h2 id="co1">1. Niveles de Registro y <code>assert</code></h2>

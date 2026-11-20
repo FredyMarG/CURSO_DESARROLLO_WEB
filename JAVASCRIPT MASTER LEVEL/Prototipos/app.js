@@ -366,6 +366,9 @@ class PresentationController {
         if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide());
 
         // Botones de acción de la barra superior
+        const btnGoLab = document.getElementById("btnGoLab");
+        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(7));
+
         const btnToggleMode = document.getElementById("btnToggleMode");
         const btnToggleSound = document.getElementById("btnToggleSound");
         const btnOverview = document.getElementById("btnOverview");

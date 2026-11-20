@@ -1,48 +1,131 @@
-<!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/CSS Avanzado/Selectores/selectores.html
-     Título: Lección de Selectores CSS Avanzados
-     Propósito: estructura de práctica para aplicar combinadores y selectores de atributo.
-     Relación: enlaza con style.css para demostrar visualmente el flujo de los selectores.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
+<!doctype html>
 <html lang="es">
 <head>
-<!-- Cabecera (head): metadatos y vinculación de estilos -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Práctica: Selectores y Combinadores</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selectores Avanzados en CSS3 — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../slides-engine.css" />
+    <script src="../../slides-engine.js" defer></script>
 </head>
-<body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    <h1>Ingredientes</h1>
-    
-    <!-- Párrafos para demostrar combinadores adyacentes (+ y ~). -->
-    <p>Este es el primer párrafo adyacente al h1 (debería verse azul).</p>
-    <p>Este es el segundo párrafo adyacente (debería verse verde).</p>
-    <p>Este párrafo es un hermano general (debería tener fuente sans-serif).</p>
-
-    <!-- Lista para demostrar selectores de clase y combinadores de hijo directo (>). -->
-    <ul>
-        <li class="ingrediente-faltante">Harina</li>
-        <li>Aceite</li>
-        <!-- El em aquí es un hijo directo de li, afectado por li > em. -->
-        <li>Leche <em>condensada</em></li>
-        <li>Sal</li>
-        <li class="ingrediente-secreto">Levadura</li>
-    </ul>
-
-    <h2>Referencia Visual</h2>
-    <p>Debajo se encuentra la imagen seleccionada por atributo src.</p>
-
-    <!-- Imagen seleccionada específicamente mediante su atributo src en el CSS. -->
-    <img src="../../HTML avanzado/Lazy load/img/img1.jpg" alt="">
-
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · SELECTORES</span><div class="brand-title"><span>🎯</span><span>Selectores Avanzados</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Selectores Avanzados">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">&gt; · + · ~</span><span class="badge badge-purple">[atributo]</span><span class="badge badge-emerald">:is() &amp; :has()</span></div>
+                <h1 class="hero-title">Precisión Quirúrgica:<br /><span class="gradient-text">Selectores Avanzados</span></h1>
+                <p class="hero-subtitle">Apunta exactamente a los elementos que necesitas usando combinadores de relación, selectores de atributo y selectores relacionales modernos como <code>:has()</code>.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🔗</div><h3>Combinadores y Atributos</h3><p>Hijo directo (<code>&gt;</code>), hermano adyacente (<code>+</code>) y <code>[href^="https"]</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Pon a prueba tu lectura de selectores.</p></div>
+                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Experimenta con combinadores y <code>:has()</code>.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="¿Qué es Selectores Avanzados?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
+                <h2 class="slide-title">¿Qué es Selectores Avanzados y para qué sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <h3>🎯 Propósito en proyectos reales</h3>
+                <p style="line-height:1.65;">Apunta exactamente a los elementos que necesitas usando combinadores de relación, selectores de atributo y selectores relacionales modernos como <code>:has()</code>. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
+            </div>
+            <div class="callout callout-analogy">
+                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
+            </div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Combinadores y Atributos">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · TABLA DE REFERENCIA</span><h2 class="slide-title">Combinadores y Selectores de Atributo</h2></div>
+            <table class="compare-table">
+                <thead><tr><th>Selector</th><th>Qué selecciona</th></tr></thead>
+                <tbody>
+                    <tr><td><code>.caja &gt; p</code></td><td>Solo párrafos hijos directos de <code>.caja</code></td></tr>
+                    <tr><td><code>h2 + p</code></td><td>El párrafo inmediatamente siguiente a un <code>&lt;h2&gt;</code></td></tr>
+                    <tr><td><code>a[href^="https"]</code></td><td>Enlaces cuyo <code>href</code> empieza con <code>https</code></td></tr>
+                    <tr><td><code>.card:has(img)</code></td><td>Tarjetas que contienen una imagen dentro (selector padre)</td></tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Selectores Avanzados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
+                <h2 class="slide-title">Buenas prácticas y errores comunes en Selectores Avanzados</h2>
+            </div>
+            <div class="callout callout-tip">
+                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
+            </div>
+            <div class="callout callout-warn">
+                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
+            </div>
+        </section>
+        <section class="slide" data-slide="5" data-title="Quiz Selectores">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="a" data-ok="El combinador &gt; selecciona únicamente los hijos directos de primer nivel." data-err="Un espacio (.menu a) selecciona todos los descendientes; &gt; solo los hijos directos.">
+                    <div class="quiz-q-title">1. ¿Qué hace el selector <code>.menu &gt; li</code>?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">Selecciona solo los &lt;li&gt; hijos directos de .menu</button><button class="quiz-option" data-opt="b">Selecciona todos los &lt;li&gt; aunque estén en submenús</button><button class="quiz-option" data-opt="c">Selecciona el &lt;li&gt; hermano siguiente</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok=":has() permite estilizar un elemento padre dependiendo de los hijos o estados que contenga." data-err=":has() es el selector relacional ('selector padre') de CSS moderno.">
+                    <div class="quiz-q-title">2. ¿Qué pseudoclase moderna permite estilizar una <code>.card</code> solo si contiene un <code>&lt;img&gt;</code> dentro?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">:contains(img)</button><button class="quiz-option" data-opt="b">:is(img)</button><button class="quiz-option" data-opt="c">:has(img)</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Selectores">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Combinadores y Atributos en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  a[href^=&quot;https&quot;] { color: #10b981; font-weight: 700; }
+  h3 + p { color: #38bdf8; border-left: 3px solid #38bdf8; padding-left: 10px; }
+&lt;/style&gt;
+&lt;h3&gt;Título&lt;/h3&gt;
+&lt;p&gt;Párrafo seleccionado con h3 + p.&lt;/p&gt;
+&lt;p&gt;Segundo párrafo normal.&lt;/p&gt;
+&lt;a href=&quot;https://ejemplo.com&quot;&gt;Enlace HTTPS (verde)&lt;/a&gt;">Combinadores + Atributo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; padding: 16px; background: #0f172a; color: #f8fafc; }
+  a[href^="https"] { color: #10b981; font-weight: 700; }
+  h3 + p { color: #38bdf8; border-left: 3px solid #38bdf8; padding-left: 10px; }
+&lt;/style&gt;
+&lt;h3&gt;Título&lt;/h3&gt;
+&lt;p&gt;Párrafo seleccionado con h3 + p.&lt;/p&gt;
+&lt;p&gt;Segundo párrafo normal.&lt;/p&gt;
+&lt;a href="https://ejemplo.com"&gt;Enlace HTTPS (verde)&lt;/a&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Avanzado</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
-<!-- Cierre del documento HTML -->
 </html>
