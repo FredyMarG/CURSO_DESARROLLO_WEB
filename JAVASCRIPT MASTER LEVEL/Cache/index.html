@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Cache API (caches) en JavaScript - JavaScript Master Level." />
+    <title>Cache API (caches) en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">📦</span>
+                <span class="title-text">Cache API</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Cache API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">CacheStorage &amp; Offline-First</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Pares Request / Response</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Almacenamiento de Red:<br />
+                    <span class="gradient-text">Cache API (caches)</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Intercepta, guarda, consulta y versiona respuestas HTTP completas de forma 100% asíncrona para construir aplicaciones web ultrarrápidas y funcionales sin conexión.
+                </p>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📴</div>
+                        <h3>Modo Offline (PWA)</h3>
+                        <p>Guarda el <em>App Shell</em> (HTML, CSS, JS, iconos) para cargar sin internet.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Carga Instantánea</h3>
+                        <p>Sirve recursos desde el disco en milisegundos reduciendo latencia y datos móviles.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔄</div>
+                        <h3>Control de Versiones</h3>
+                        <p>Actualiza tu web limpiando almacenes obsoletos con <code>caches.delete()</code>.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔒</div>
+                        <h3>Asíncrono &amp; Seguro</h3>
+                        <p>Basado en Promesas, funciona en <code>window</code> y <em>Service Workers</em> bajo HTTPS/localhost.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: DEFINICIÓN VS LOCALSTORAGE -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Cache API vs localStorage">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Arquitectura de Almacenamiento</span>
+                    <h2 class="slide-title">1. ¿Qué es la Cache API y en qué supera a `localStorage`?</h2>
+                    <p class="slide-description">
+                        Diseñada específicamente para almacenar respuestas de red completas, sin bloquear el hilo principal.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card card-bad">
+                        <div class="comp-badge badge-danger">⚠️ localStorage</div>
+                        <h3>Solo Texto Síncrono (~5 MB)</h3>
+                        <ul class="comp-list">
+                            <li>❌ Bloquea el hilo principal al leer/escribir.</li>
+                            <li>❌ Solo acepta cadenas de texto (Strings).</li>
+                            <li>❌ No disponible dentro de Service Workers.</li>
+                        </ul>
+                    </div>
+                    <div class="comp-card card-good">
+                        <div class="comp-badge badge-success">✅ Cache API (caches)</div>
+                        <h3>Pares Request / Response Asíncronos</h3>
+                        <ul class="comp-list">
+                            <li>✔️ 100% asíncrona basada en Promesas.</li>
+                            <li>✔️ Guarda binarios, imágenes, fuentes, HTML y JSON.</li>
+                            <li>✔️ Capacidad de cientos de MB según cuota del disco.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: APERTURA CACHES.OPEN -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="caches.open() y Versionado">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Gestión de Almacenes</span>
+                    <h2 class="slide-title">2. Apertura de Almacenes con `caches.open()`</h2>
+                    <p class="slide-description">
+                        Si el almacén indicado no existe, el navegador lo crea automáticamente de forma persistente.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-emerald">Apertura con Versión</span>
+                        <span class="code-file-label">cache.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">iniciarCache</span> = <span class="token-keyword">async</span> () =&gt; {
+    <span class="token-keyword">const</span> cache = <span class="token-keyword">await</span> <span class="token-variable">caches</span>.<span class="token-function">open</span>(<span class="token-string">"archivos.estaticos"</span>);
+    <span class="token-variable">console</span>.<span class="token-function">log</span>(<span class="token-string">"Caché abierta y lista:"</span>, cache);
+};</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: ALMACENAR ADD, ADDALL, PUT -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="add(), addAll() y put()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Escritura en Caché</span>
+                    <h2 class="slide-title">3. Almacenar Recursos: `add()`, `addAll()` y `put()`</h2>
+                    <p class="slide-description">
+                        Tres métodos especializados según si deseas descargar automáticamente o guardar una respuesta manual.
+                    </p>
+                </div>
+
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">📄</div>
+                        <h4>cache.add(url)</h4>
+                        <div class="feat-code"><code>await cache.add("/style.css");</code></div>
+                        <p>Ejecuta <code>fetch()</code> automáticamente y guarda la respuesta. Si falla la red, rechaza la promesa.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">📦</div>
+                        <h4>cache.addAll(urls)</h4>
+                        <div class="feat-code"><code>await cache.addAll(["/", "/app.js"]);</code></div>
+                        <p>Descarga todo en paralelo. Es <strong>atómico</strong>: si falla un archivo, no guarda ninguno.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">✍️</div>
+                        <h4>cache.put(req, res)</h4>
+                        <div class="feat-code"><code>await cache.put(url, res.clone());</code></div>
+                        <p>Guarda manualmente un par Request/Response ya obtenido (o creado con <code>new Response()</code>).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: CONSULTAR MATCH Y KEYS -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="match(), matchAll() y keys()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Lectura de Caché</span>
+                    <h2 class="slide-title">4. Consultar Información: `match()` y `keys()`</h2>
+                    <p class="slide-description">
+                        Recupera respuestas guardadas al instante o inspecciona todas las rutas almacenadas.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">🔍</div>
+                        <h3>caches.match(request)</h3>
+                        <p>Busca en todos los almacenes de caché y retorna la <code>Response</code> encontrada o <code>undefined</code>.</p>
+                        <div class="code-snippet">
+                            <code>const res = await caches.match("/api/saludo");<br>
+                            if (res) return res;</code>
+                        </div>
+                    </div>
+                    <div class="col-card">
+                        <div class="card-icon">🗝️</div>
+                        <h3>cache.keys() y caches.keys()</h3>
+                        <p><code>cache.keys()</code> lista las peticiones dentro de una caché; <code>caches.keys()</code> lista los nombres de todos los almacenes.</p>
+                        <div class="code-snippet">
+                            <code>const reqs = await cache.keys();<br>
+                            const nombres = await caches.keys();</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: ELIMINAR -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="cache.delete() y caches.delete()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Limpieza &amp; Versionado</span>
+                    <h2 class="slide-title">5. Eliminar Información: `cache.delete()` y `caches.delete()`</h2>
+                    <p class="slide-description">
+                        Mantén el almacenamiento limpio eliminando archivos puntuales o versiones antiguas completas.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">🗑️</div>
+                        <h3>Borrar 1 Recurso: `cache.delete()`</h3>
+                        <div class="code-snippet">
+                            <code>const cache = await caches.open("archivos.estaticos");<br>
+                            const ok = await cache.delete("/api/saludo");</code>
+                        </div>
+                    </div>
+                    <div class="col-card">
+                        <div class="card-icon">💥</div>
+                        <h3>Borrar Almacén: `caches.delete()`</h3>
+                        <div class="code-snippet">
+                            <code>const nombres = await caches.keys();<br>
+                            await Promise.all(nombres.map(n =&gt; n !== "v2" ? caches.delete(n) : null));</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ESTRATEGIAS PROFESIONALES -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Estrategias de Caché">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Patrones PWA</span>
+                    <h2 class="slide-title">6. Estrategias Profesionales de Caché</h2>
+                    <p class="slide-description">
+                        Elige la estrategia adecuada según la frecuencia con que cambian tus recursos.
+                    </p>
+                </div>
+
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">⚡</div>
+                        <h4>Cache-First</h4>
+                        <p>Responde desde caché primero; solo va a la red si no existe. Ideal para CSS, fuentes, iconos y <em>App Shell</em>.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">🌐</div>
+                        <h4>Network-First</h4>
+                        <p>Intenta descargar datos frescos; si falla (offline), usa la copia en caché. Ideal para noticias o feeds.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">🔄</div>
+                        <h4>Stale-While-Revalidate</h4>
+                        <p>Sirve caché al instante en 0 ms y descarga en segundo plano una versión nueva para la próxima visita.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: ANALOGÍAS Y BUENAS PRÁCTICAS -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías y Buenas Prácticas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Comprensión &amp; Calidad</span>
+                    <h2 class="slide-title">7. Analogías y Buenas Prácticas</h2>
+                    <p class="slide-description">
+                        Evita los errores clásicos con <code>Response.clone()</code>, métodos <code>POST</code> y rutas rotas en <code>addAll()</code>.
+                    </p>
+                </div>
+
+                <div class="analogy-wrapper">
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">🥫</div>
+                        <h3>La Despensa y Cajas de Mudanza</h3>
+                        <p>
+                            Ir al súper cada vez es <code>fetch()</code>; guardar básicos en la despensa es <code>cache.addAll()</code>. Cada versión de tu app es una caja sellada (<code>"app-v1"</code>) que desechas completa con <code>caches.delete()</code>.
+                        </p>
+                    </div>
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">🛡️</div>
+                        <h3>Reglas de Oro</h3>
+                        <p>
+                            Usa <code>res.clone()</code> antes de <code>cache.put()</code> (un <em>Response stream</em> solo se lee una vez). Almacena únicamente peticiones <code>GET</code> (<code>POST</code> lanza <code>TypeError</code>).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO INTERACTIVO EN VIVO -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio Interactivo en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Gestor Real de CacheStorage</span>
+                    <h2 class="slide-title">8. Laboratorio Interactivo: `archivos.estaticos`</h2>
+                    <p class="slide-description">
+                        Almacena respuestas con <code>cache.put()</code>, consúltalas con <code>caches.match()</code>, lista llaves y purga el almacén en vivo.
+                    </p>
+                </div>
+
+                <div class="ca-dashboard-mockup">
+                    <div class="ca-status-banner" id="caStatusBanner">
+                        <div>
+                            <strong>Almacén Activo: </strong>
+                            <code>archivos.estaticos</code>
+                        </div>
+                        <span class="badge badge-cyan" id="caModeBadge">Verificando...</span>
+                    </div>
+
+                    <div class="ca-metrics-grid">
+                        <div class="ca-metric-card">
+                            <span class="ca-metric-label">📦 Entradas en Caché</span>
+                            <span class="ca-metric-value" id="caCount">0</span>
+                        </div>
+                        <div class="ca-metric-card">
+                            <span class="ca-metric-label">⚡ Cache Hits</span>
+                            <span class="ca-metric-value" id="caHits">0</span>
+                        </div>
+                        <div class="ca-metric-card">
+                            <span class="ca-metric-label">🐢 Cache Misses</span>
+                            <span class="ca-metric-value" id="caMisses">0</span>
+                        </div>
+                    </div>
+
+                    <div class="ca-entries-list" id="caEntriesList">
+                        <span style="color: var(--text-dim); font-size: 0.8rem;">Caché vacía (0 recursos)...</span>
+                    </div>
+
+                    <div class="ca-controls-bar">
+                        <button class="nav-btn" id="btnCaPut">💾 Guardar Recursos (put)</button>
+                        <button class="nav-btn" id="btnCaMatch">🔍 Consultar /api/saludo (match)</button>
+                        <button class="nav-btn" id="btnCaKeys">📋 Listar Llaves (keys)</button>
+                        <button class="nav-btn" id="btnCaDeleteOne">🗑️ Borrar /api/saludo</button>
+                        <button class="nav-btn" id="btnCaDeleteAll">💥 Vaciar Almacén</button>
+                        <button class="nav-btn" id="btnClearCaLogs">🧹 Limpiar Logs</button>
+                    </div>
+
+                    <div class="ca-log-terminal" id="caLogTerminal">
+                        <div class="ca-log-line">
+                            <span class="ca-log-time">[00:00:00]</span>
+                            <span>Laboratorio de Cache API listo. Pulsa "Guardar Recursos (put)" para comenzar.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PROYECTO INTEGRADOR -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Proyecto: Gestor Offline">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Caso de Uso Real</span>
+                    <h2 class="slide-title">9. Proyecto Integrador: Gestor de Recursos Offline</h2>
+                    <p class="slide-description">
+                        Flujo completo con <code>caches.open()</code>, <code>cache.put()</code>, <code>cache.keys()</code> y limpieza.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-cyan">Gestor Asíncrono Completo</span>
+                        <span class="code-file-label">gestor-cache.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> cache = <span class="token-keyword">await</span> <span class="token-variable">caches</span>.<span class="token-function">open</span>(<span class="token-string">"archivos.estaticos"</span>);
+<span class="token-keyword">await</span> cache.<span class="token-function">put</span>(<span class="token-string">"/api/saludo"</span>, <span class="token-keyword">new</span> <span class="token-function">Response</span>(<span class="token-string">"Hola Offline"</span>));
+<span class="token-keyword">const</span> lista = <span class="token-keyword">await</span> cache.<span class="token-function">keys</span>();
+<span class="token-keyword">const</span> respuesta = <span class="token-keyword">await</span> <span class="token-variable">caches</span>.<span class="token-function">match</span>(<span class="token-string">"/api/saludo"</span>);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS Y SOLUCIONARIO -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Ejercicios y Solucionario">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Autoevaluación</span>
+                    <h2 class="slide-title">10. Ejercicios Prácticos y Solucionario</h2>
+                    <p class="slide-description">
+                        Domina la apertura, lectura JSON desde caché y limpieza de versiones antiguas.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <span class="badge badge-cyan">Nivel 1 &amp; Nivel 2</span>
+                        <h3>put() y match() con JSON</h3>
+                        <div class="code-snippet">
+                            <code>const c = await caches.open("archivos.estaticos");<br>
+                            await c.put("/api/user", new Response(JSON.stringify({ nombre: "Ana" })));<br>
+                            const res = await caches.match("/api/user");<br>
+                            console.log(await res.json());</code>
+                        </div>
+                    </div>
+                    <div class="col-card">
+                        <span class="badge badge-emerald">Nivel 3: Purgar Versiones</span>
+                        <h3>Limpiar Cachés Obsoletas</h3>
+                        <div class="code-snippet">
+                            <code>const limpiar = async (actual) =&gt; {<br>
+                            &nbsp;&nbsp;const keys = await caches.keys();<br>
+                            &nbsp;&nbsp;await Promise.all(keys.map(k =&gt; k !== actual ? caches.delete(k) : null));<br>
+                            };</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: RESUMEN Y CHEATSHEET -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Resumen & Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Síntesis Final</span>
+                    <h2 class="slide-title">11. Resumen Técnico y Hoja de Trucos</h2>
+                    <p class="slide-description">
+                        Referencia rápida de métodos esenciales de la Cache API.
+                    </p>
+                </div>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📂</div>
+                        <h3>caches.open()</h3>
+                        <p>Abre o crea un almacén versionado de forma asíncrona.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">💾</div>
+                        <h3>add / addAll / put</h3>
+                        <p>Guarda URLs automáticas o pares Request/Response clonados.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔍</div>
+                        <h3>match() / keys()</h3>
+                        <p>Recupera respuestas en milisegundos sin tocar la red.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧹</div>
+                        <h3>delete()</h3>
+                        <p>Elimina entradas obsoletas o almacenes de versiones antiguas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+        <div class="slide-dots-container" id="slideDotsContainer"></div>
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Cache API</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="overview-grid" id="overviewGrid"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
