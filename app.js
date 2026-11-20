@@ -40,6 +40,8 @@ const modules = [
     { cat: "master", title: "Operador Ternario", tag: "11 Slides", desc: "Expresiones condicionales, ?? Nullish Coalescing y legibilidad.", href: "JAVASCRIPT MASTER LEVEL/Operador Ternario/index.html" },
     // Módulo sobre herencia prototípica, Prototype Chain y clases ES6+
     { cat: "master", title: "Prototipos", tag: "11 Slides", desc: "Prototype Chain, herencia prototípica y equivalencia con class.", href: "JAVASCRIPT MASTER LEVEL/Prototipos/index.html" },
+    // Módulo de Service Workers para proxy de red, PWAs y modo offline
+    { cat: "master", title: "Service Workers", tag: "12 Slides", desc: "Ciclo de vida, fetch offline, Cache API y postMessage().", href: "JAVASCRIPT MASTER LEVEL/Service Workers/index.html" },
     // Módulo de detección de pestaña activa o en segundo plano (Page Visibility API)
     { cat: "master", title: "Visibility Change", tag: "12 Slides", desc: "Page Visibility API, ahorro de CPU/red y reproductor inteligente.", href: "JAVASCRIPT MASTER LEVEL/Visibility Change/index.html" },
     // Módulo de ejecución paralela en hilos secundarios con Web Workers
