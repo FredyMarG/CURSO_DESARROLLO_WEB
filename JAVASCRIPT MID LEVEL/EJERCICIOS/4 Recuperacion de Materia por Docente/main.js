@@ -93,17 +93,21 @@ boton.addEventListener("click", () => {
                 resultadoDiv.style.display = "none";
             }, 1500);            
     } else {
-        // Reemplazar los selects por el valor de texto seleccionado
+        // Solicita confirmación antes de reemplazar los selectores
+        const confirmar = confirm("¿Deseas guardar los cambios?");
+        if (!confirmar) return;
+
+        // Reemplaza los selects por la semana confirmada en verde neón
         for (let i = 0; i < elementos.length; i++) {
-            let contenedorSemana = elementos[i];
+            const contenedorSemana = elementos[i];
             contenedorSemana.innerHTML = semanaElegida[i].value;
+            contenedorSemana.classList.add("success");
         }
 
-        // --- Persistencia ---
-        // Se solicita confirmación antes de finalizar la edición
-        const confirmar = confirm("¿Deseas guardar los cambios?");
-        if (confirmar) {
-            boton.style.display = "none"; // Deshabilitar edición adicional
-        }
+        // Muestra mensaje de confirmación en verde neón y oculta el botón confirmar
+        resultadoDiv.style.display = "block";
+        resultadoDiv.innerHTML = "<p>✅ Semanas de recuperación asignadas y guardadas correctamente.</p>";
+        resultadoDiv.className = "resultado-msg success";
+        boton.style.display = "none";
     }
 });

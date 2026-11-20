@@ -5,15 +5,10 @@ let info = document.getElementById("tabla-contenido"),
     sol = document.getElementById("main-sol")
 
 /**
- * Función envolvente que inicializa la lógica del ejercicio.
- * PATRÓN IIFE (Immediately Invoked Function Expression):
- * Encapsula el código para evitar conflictos de nombres en el scope global.
- * 
- * DISEÑO:
- * Sigue el principio de separación de responsabilidades:
- * 1. Datos (objeto materias). 2. Lógica de búsqueda. 3. Renderizado (DOM).
+ * Función principal invocada al pulsar el botón "Solución" (onclick="solucion()").
+ * Renderiza las 3 tablas de materias, conteo por alumno y detalle con rowspan.
  */
-(function solucion(){
+function solucion() {
     /** @type {Object.<string, string[]>} Base de datos simulada. Estructura: materia: [Profesor, ...Alumnos] */
     const materias = {
         matematicas: ['Carlos', 'Juan', 'Pedro', 'Maria', 'Luisa', 'Andres', 'Sofia', 'Diego', 'Camila'],
@@ -163,8 +158,9 @@ const mostrarTabla = () => {
     complete.innerHTML = html;
 };
 
-mostrarTabla()
+mostrarTabla();
 
 /* Visualización final del contenedor de resultados */
-sol.style.display = "block"
-})(); // Cierre de la IIFE
+sol.style.display = "block";
+sol.scrollIntoView({ behavior: "smooth", block: "start" });
+} // Fin de solucion()

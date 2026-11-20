@@ -30,15 +30,24 @@ btnAceptar.addEventListener("click", () => {
  * Se dispara al intentar guardar la tercera nota. 
  * Implementa un bloque try-catch para gestionar errores de validación.
  */
+const notaForm = document.querySelector(".nota-form");
+if (notaForm) {
+    notaForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        sendButton.click();
+    });
+}
+
 sendButton.addEventListener("click", () => {
     let resultado, mensaje;
     try {
-        // 1. Sanitización: Convertimos la entrada a un número entero
-        const prevRes = parseInt(document.getElementById("nota").value);
+        // 1. Sanitización: Convertimos la entrada a número decimal válido
+        const raw = document.getElementById("nota").value.trim();
+        const prevRes = Number(raw);
         
-        // 2. Validación de datos: Comprobamos si la conversión falló (NaN)
-        if (isNaN(prevRes)) {
-            throw "La nota debe ser un numero";
+        // 2. Validación de datos: Comprobamos que sea número en el rango [0, 10]
+        if (raw === "" || Number.isNaN(prevRes) || prevRes < 0 || prevRes > 10) {
+            throw "La nota debe ser un número entre 0 y 10";
         }
 
         // 3. Procesamiento: Cálculo del promedio aritmético simple
@@ -115,7 +124,7 @@ const abrirModal = (res, msg, prevRes, promedio) => {
     document.querySelector(".primera").textContent = `Nota 1: ${nota1}`;
     document.querySelector(".segunda").textContent = `Nota 2: ${nota2}`;
     document.querySelector(".tercera").textContent = `Nota 3: ${prevRes}`;
-    document.querySelector(".promedio").textContent = `Promedio: ${Math.round(promedio)}`;
+    document.querySelector(".promedio").textContent = `Promedio: ${promedio.toFixed(2)}`;
     
     const resElement = document.querySelector(".resultado");
     const msgElement = document.querySelector(".mensaje");

@@ -1370,6 +1370,13 @@ const modules = [
   // 12. Ejercicios Prácticos
   {
     cat: "htmlcss",
+    title: "Ejercicio: Tarjeta de Presentación",
+    tag: "Ejercicio",
+    desc: "Maquetación de tarjeta de perfil con Box Model, sombras, border-radius: 50% y variantes de color.",
+    href: "HTML y CSS/CSS BASICO/Ejercicios/Tarjeta de presentacion/index.html",
+  },
+  {
+    cat: "htmlcss",
     title: "Ejercicio: Ventana Modal",
     tag: "Ejercicio",
     desc: "Construcción de una ventana modal con <dialog>, position y metodología BEM.",

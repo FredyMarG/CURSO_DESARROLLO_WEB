@@ -68,7 +68,7 @@ const materias = [
 const obtenerMateria = (id) => {
     return new Promise((resolve, reject) => {
         // Accedemos a la materia en el arreglo según el índice recibido
-        materia = materias[id];
+        const materia = materias[id];
 
         // Verificamos si la materia no existe (índice fuera de rango)
         if (materia == undefined) {
@@ -92,6 +92,7 @@ const obtenerMateria = (id) => {
  * de cada petición de forma secuencial y construye la interfaz visual dinámicamente.
  */
 const devolverMaterias = async () => {
+    materiasHTML.innerHTML = '<h2>Notas Cofla</h2>';
     let materia = [];
 
     // Recorremos secuencialmente todas las materias disponibles
@@ -121,7 +122,9 @@ const devolverMaterias = async () => {
  * la carga asíncrona de las notas de Cofla.
  */
 button.addEventListener("click", async () => {
-    // Agrega la clase CSS 'mostrar' para ejecutar la animación de entrada
+    // Muestra el panel de solución inmediatamente y agrega la clase 'mostrar'
+    solucion.style.visibility = "visible";
+    solucion.style.display = "block";
     solucion.classList.add("mostrar");
 
     // Ejecuta la consulta secuencial y pintado de las materias en pantalla

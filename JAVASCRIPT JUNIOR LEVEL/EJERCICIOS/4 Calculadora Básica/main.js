@@ -2,62 +2,64 @@
  * EJERCICIO: calculadora básica con funciones flecha y menú por prompt.
  */
 
-let respuesta = document.getElementById("respuesta"),
-    calc = document.getElementById("calcular"),
-    sol = document.getElementById("main-sol"),
-    num1,
-    num2
+const respuesta = document.getElementById("respuesta");
+const sol = document.getElementById("main-sol");
 
-/** Suma dos valores enteros leídos como texto */
-    const sumar = (num1,num2)=>{
-        return parseInt(num1) + parseInt(num2)
+/** Suma dos valores numéricos */
+const sumar = (num1, num2) => Number(num1) + Number(num2);
+
+/** Resta dos valores numéricos */
+const restar = (num1, num2) => Number(num1) - Number(num2);
+
+/** Multiplica dos valores numéricos */
+const multiplicar = (num1, num2) => Number(num1) * Number(num2);
+
+/** Divide dos valores numéricos (el divisor cero se valida en calculo) */
+const dividir = (num1, num2) => Number(num1) / Number(num2);
+
+/** Pide un número válido por prompt y retorna null si se cancela o no es numérico */
+function pedirNumero(mensaje) {
+    const entrada = prompt(mensaje);
+    if (entrada === null || entrada.trim() === "" || Number.isNaN(Number(entrada))) {
+        return null;
     }
-/** Resta dos valores enteros */
-    const restar = (num1,num2)=>{
-        return parseInt(num1) - parseInt(num2)
-    }
-/** Multiplica dos valores enteros */
-    const multiplicar = (num1,num2)=>{
-        return parseInt(num1) * parseInt(num2)
-    }
-/** Divide dos valores enteros (el divisor cero se valida en calculo) */
-    const dividir = (num1,num2)=>{
-        return parseInt(num1) / parseInt(num2)
-    }
+    return Number(entrada);
+}
+
+/** Muestra un mensaje de éxito (verde neón) o error (rojo neón) */
+function mostrarResultado(texto, esError = false) {
+    respuesta.className = esError ? "result error" : "result success";
+    respuesta.textContent = texto;
+    sol.style.display = "block";
+}
 
 /**
- * Lee la operación elegida en el select, pide números por prompt y muestra el resultado.
+ * Lee la operación elegida, pide números por prompt y muestra el resultado.
  */
 function calculo() {
-    let operacion = document.getElementById("operacion")
-    operacion = operacion.value
-    if (operacion == 1) {
-        let numero1 = prompt("Primer número para sumar")
-        let numero2 = prompt("Segundo número para sumar")
-        resultado = sumar(numero1,numero2)
-        respuesta.innerHTML = `El resultado de la suma es ${resultado}`
-    }else if (operacion == 2) {
-        let numero1 = prompt("Primer número para restar")
-        let numero2 = prompt("Segundo número para restar")
-        resultado = restar(numero1,numero2)
-        respuesta.innerHTML = `El resultado de la resta es ${resultado}`
-    }else if (operacion == 3) {
-        let numero1 = prompt("Primer número para multipicar")
-        let numero2 = prompt("Segundo número para multipicar")
-        resultado = multiplicar(numero1,numero2)
-        respuesta.innerHTML = `El resultado de la multiplicación es ${resultado}`
-    }else if (operacion == 4) {
-        let numero1 = prompt("Primer número para dividir")
-        let numero2 = prompt("Segundo número para dividir")
-        if (numero2 == 0) {
-            respuesta.innerHTML = `!Error¡ no se puede dividir entre 0`
-        }else{
-            resultado = dividir(numero1,numero2)
-            respuesta.innerHTML = `El resultado de la división es ${resultado}`
-        }
-    }else{
-            respuesta.innerHTML = "El valor ingresado no es correcto"
+    const operacion = document.getElementById("operacion").value;
+
+    if (operacion < "1" || operacion > "4" || operacion === "") {
+        return mostrarResultado("El valor ingresado no es correcto (elige entre 1 y 4).", true);
     }
 
-    sol.style.display = "block"
+    const numero1 = pedirNumero("Primer número");
+    if (numero1 === null) return mostrarResultado("¡Error! Primer número inválido o cancelado.", true);
+
+    const numero2 = pedirNumero("Segundo número");
+    if (numero2 === null) return mostrarResultado("¡Error! Segundo número inválido o cancelado.", true);
+
+    if (operacion == 1) {
+        mostrarResultado(`El resultado de la suma es ${sumar(numero1, numero2)}`);
+    } else if (operacion == 2) {
+        mostrarResultado(`El resultado de la resta es ${restar(numero1, numero2)}`);
+    } else if (operacion == 3) {
+        mostrarResultado(`El resultado de la multiplicación es ${multiplicar(numero1, numero2)}`);
+    } else if (operacion == 4) {
+        if (numero2 === 0) {
+            mostrarResultado("¡Error! No se puede dividir entre 0.", true);
+        } else {
+            mostrarResultado(`El resultado de la división es ${dividir(numero1, numero2)}`);
+        }
+    }
 }
