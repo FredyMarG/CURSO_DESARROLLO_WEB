@@ -200,35 +200,35 @@
             </div>
         </section>
 
-        <!-- SLIDE 5: CONSULTAR MATCH Y KEYS -->
+        <!-- SLIDE 5: CONSULTAR MATCH, MATCHALL Y KEYS -->
         <section class="slide" id="slide-5" data-slide="5" data-title="match(), matchAll() y keys()">
             <div class="slide-content">
                 <div class="slide-header">
                     <span class="slide-badge">Lectura de Caché</span>
-                    <h2 class="slide-title">4. Consultar Información: `match()` y `keys()`</h2>
+                    <h2 class="slide-title">4. Consultar Información: `match()`, `matchAll()` y `keys()`</h2>
                     <p class="slide-description">
-                        Recupera respuestas guardadas al instante o inspecciona todas las rutas almacenadas.
+                        Recupera una respuesta puntual, múltiples coincidencias en arreglo o inspecciona todas las llaves guardadas.
                     </p>
                 </div>
 
-                <div class="two-col-layout">
-                    <div class="col-card">
-                        <div class="card-icon">🔍</div>
-                        <h3>caches.match(request)</h3>
-                        <p>Busca en todos los almacenes de caché y retorna la <code>Response</code> encontrada o <code>undefined</code>.</p>
-                        <div class="code-snippet">
-                            <code>const res = await caches.match("/api/saludo");<br>
-                            if (res) return res;</code>
-                        </div>
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">🔍</div>
+                        <h4>match(request)</h4>
+                        <div class="feat-code"><code>await caches.match("/api/saludo");</code></div>
+                        <p>Devuelve la <strong>primera</strong> <code>Response</code> que coincida o <code>undefined</code> si no existe.</p>
                     </div>
-                    <div class="col-card">
-                        <div class="card-icon">🗝️</div>
-                        <h3>cache.keys() y caches.keys()</h3>
-                        <p><code>cache.keys()</code> lista las peticiones dentro de una caché; <code>caches.keys()</code> lista los nombres de todos los almacenes.</p>
-                        <div class="code-snippet">
-                            <code>const reqs = await cache.keys();<br>
-                            const nombres = await caches.keys();</code>
-                        </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">📚</div>
+                        <h4>matchAll(req, opts)</h4>
+                        <div class="feat-code"><code>await cache.matchAll("/api", { ignoreSearch: true });</code></div>
+                        <p>Devuelve un <strong>Array</strong> con <em>todas</em> las respuestas coincidentes (ej. distintos query params).</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feat-icon">🗝️</div>
+                        <h4>keys()</h4>
+                        <div class="feat-code"><code>await cache.keys(); // Requests<br>await caches.keys(); // Nombres</code></div>
+                        <p>Lista las peticiones dentro de un almacén o los nombres de todos los almacenes.</p>
                     </div>
                 </div>
             </div>

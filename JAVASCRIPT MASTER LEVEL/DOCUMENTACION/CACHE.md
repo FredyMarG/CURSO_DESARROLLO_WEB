@@ -113,9 +113,12 @@ const guardarRespuestaManual = async () => {
 
 ---
 
-# Consultar información almacenada
+# Consultar información almacenada (`match()`, `matchAll()`, `keys()`)
 
-Para recuperar un recurso guardado previamente se utiliza **`cache.match(request)`** (o `caches.match(request)` para buscar en todos los almacenes a la vez). Devuelve una Promesa que resuelve con el objeto `Response` encontrado, o `undefined` si no existe coincidencia.
+Para inspeccionar y recuperar recursos guardados en caché existen **tres métodos principales**:
+
+### 1. `cache.match(request)` (o `caches.match(request)`)
+Busca y devuelve **la primera coincidencia** (`Response`) que corresponda con la petición indicada, o `undefined` si no existe. `caches.match()` busca en todos los almacenes abiertos, mientras que `cache.match()` busca solo en ese almacén.
 
 ```javascript
 const obtenerDeCache = async (url) => {
@@ -128,6 +131,33 @@ const obtenerDeCache = async (url) => {
 
     console.log("No encontrado en caché, solicitando a la red...");
     return fetch(url);
+};
+```
+
+### 2. `cache.matchAll(request, options)`
+A diferencia de `match()` (que solo retorna la primera respuesta), **`matchAll()`** devuelve una Promesa con un **arreglo (`Array`) de todas las respuestas (`Response[]`)** que coinciden con la petición (muy útil cuando existen varias versiones de una misma ruta con distintos parámetros de consulta `?v=1`, `?v=2` usando `{ ignoreSearch: true }`).
+
+```javascript
+const buscarTodasLasCoincidencias = async () => {
+    const cache = await caches.open("archivos.estaticos");
+    // Si omites el argumento o pasas { ignoreSearch: true }, devuelve todas las coincidencias
+    const respuestas = await cache.matchAll("/api/productos", { ignoreSearch: true });
+    console.log("Coincidencias encontradas:", respuestas.length);
+};
+```
+
+### 3. `cache.keys()` y `caches.keys()`
+* **`cache.keys()`:** Devuelve una Promesa con un arreglo de todos los objetos **`Request`** (llaves) almacenados dentro de ese almacén específico.
+* **`caches.keys()`:** Devuelve una Promesa con un arreglo de cadenas de texto (`string[]`) con los **nombres de todos los almacenes** de caché creados por el origen.
+
+```javascript
+const listarContenido = async () => {
+    const nombresAlmacenes = await caches.keys();
+    console.log("Almacenes existentes:", nombresAlmacenes);
+
+    const cache = await caches.open("archivos.estaticos");
+    const peticiones = await cache.keys();
+    console.log("URLs guardadas:", peticiones.map((req) => req.url));
 };
 ```
 
