@@ -42,6 +42,14 @@ const cacheStorageSimulado = (() => {
             const clave = typeof req === "string" ? req : req.url;
             return this.entradas.get(clave);
         }
+        // Emula cache.matchAll(): devuelve un arreglo con todas las coincidencias
+        async matchAll(req) {
+            if (!req) return Array.from(this.entradas.values());
+            const clave = typeof req === "string" ? req : req.url;
+            return Array.from(this.entradas.entries())
+                .filter(([k]) => k.startsWith(clave))
+                .map(([, v]) => v);
+        }
         async keys() {
             return Array.from(this.entradas.keys()).map((u) => ({ url: `https://localhost${u}` }));
         }
@@ -110,13 +118,15 @@ async function ejecutarGuiaCache() {
         console.log("   ↳ Recursos precargados con add(), addAll() y put().");
     }
 
-    // --- BLOQUE 3: CONSULTA (match, keys) ---
-    imprimirTitulo(3, "CONSULTA DE RECURSOS: match() Y keys()");
+    // --- BLOQUE 3: CONSULTA (match, matchAll, keys) ---
+    imprimirTitulo(3, "CONSULTA DE RECURSOS: match(), matchAll() Y keys()");
     if (!esEntornoNavegador) {
         const keys = await cache.keys();
-        console.log("📋 Llaves guardadas en 'archivos.estaticos':", keys.map((k) => k.url));
+        console.log("📋 cache.keys() en 'archivos.estaticos':", keys.map((k) => k.url));
         const resp = await cachesRef.match("/api/config");
-        if (resp) console.log("⚡ Cache Hit en '/api/config':", await resp.json());
+        if (resp) console.log("⚡ caches.match('/api/config'):", await resp.json());
+        const todas = await cache.matchAll();
+        console.log("📚 cache.matchAll() total de respuestas:", todas.length);
     } else {
         console.log("ℹ️ Usa el Laboratorio de la Diapositiva 9 para probar put(), match() y keys() en vivo.");
     }

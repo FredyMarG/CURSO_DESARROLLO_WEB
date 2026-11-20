@@ -126,6 +126,20 @@ const modules = [
     { cat: "mid", title: "Temporizadores", tag: "Mid Level", desc: "Control del tiempo con setTimeout, setInterval y clear.", href: "JAVASCRIPT MID LEVEL/Temporizadores/index.html" },
     // Práctica sobre código obsoleto y reemplazos modernos
     { cat: "mid", title: "Código Obsoleto", tag: "Mid Level", desc: "Patrones heredados y sus equivalentes actuales.", href: "JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html" },
+    // Sub-prácticas de AJAX
+    { cat: "mid", title: "AJAX (Editor)", tag: "Mid Level", desc: "Peticiones asíncronas clásicas con XMLHttpRequest.", href: "JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html" },
+    { cat: "mid", title: "AJAX (Htdocs)", tag: "Mid Level", desc: "Práctica de AJAX en entorno de servidor local.", href: "JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html" },
+    // Sub-prácticas de Librería Axios
+    { cat: "mid", title: "Librería Axios (Editor)", tag: "Mid Level", desc: "Cliente HTTP basado en Promesas con Axios.", href: "JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html" },
+    { cat: "mid", title: "Axios vs Fetch (Htdocs)", tag: "Mid Level", desc: "Comparativa práctica entre Axios y Fetch.", href: "JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html" },
+    // Sub-prácticas de Eventos
+    { cat: "mid", title: "Eventos: Handlers", tag: "Mid Level", desc: "Registro y remoción de escuchadores de eventos.", href: "JAVASCRIPT MID LEVEL/Eventos/Handlers/index.html" },
+    { cat: "mid", title: "Eventos: Event Flow", tag: "Mid Level", desc: "Propagación de eventos (Bubbling y Capturing).", href: "JAVASCRIPT MID LEVEL/Eventos/Event Flow/index.html" },
+    { cat: "mid", title: "Eventos de Mouse", tag: "Mid Level", desc: "Interacciones de clic, doble clic y movimiento.", href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Mouse/index.html" },
+    { cat: "mid", title: "Eventos de Teclado", tag: "Mid Level", desc: "Captura de teclas con keydown, keyup y keypress.", href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Teclado/index.html" },
+    { cat: "mid", title: "Eventos de Interfaz", tag: "Mid Level", desc: "Eventos load, resize, scroll y select.", href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Interfaz/index.html" },
+    // Sub-práctica de DevTools
+    { cat: "mid", title: "DevTools: Pestaña Application", tag: "Mid Level", desc: "Inspección de almacenamiento y caché en DevTools.", href: "JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html" },
     // Acceso directo a la carpeta de las 25 guías Markdown de Mid Level
     { cat: "mid", title: "Documentación Completa Mid Level", tag: "25 Guías MD", desc: "Eventos, Axios, Window, DevTools, HTTP y más.", href: "JAVASCRIPT MID LEVEL/DOCUMENTACION/" },
 
@@ -172,6 +186,24 @@ const modules = [
     { cat: "htmlcss", title: "Proyecto: Web Page", tag: "Proyecto", desc: "Sitio web completo estructurado con Grid y Flexbox.", href: "HTML y CSS/PROYECTOS/WEB PAGE/index.html" },
     // Proyecto: Página web con animaciones CSS
     { cat: "htmlcss", title: "Proyecto: Web Page Animations", tag: "Proyecto", desc: "Transiciones y @keyframes aplicados a una landing page.", href: "HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html" },
+    // Proyecto: Menú acordeón con Divs
+    { cat: "htmlcss", title: "Proyecto: Accordion Menu (Divs)", tag: "Proyecto", desc: "Acordeón interactivo construido con contenedores div.", href: "HTML y CSS/PROYECTOS/ACCORDION MENU/DIVS/index.html" },
+    // Proyecto: Menú acordeón nativo con Summary/Details
+    { cat: "htmlcss", title: "Proyecto: Accordion (Summary)", tag: "Proyecto", desc: "Acordeón semántico nativo usando <details> y <summary>.", href: "HTML y CSS/PROYECTOS/ACCORDION MENU/SUMMARY-DETAILS/index.html" },
+    // Prácticas de CSS Básico y Avanzado
+    { cat: "htmlcss", title: "CSS Básico: Inicio", tag: "CSS Básico", desc: "Primeros pasos y selectores fundamentales en CSS.", href: "HTML y CSS/CSS BASICO/Inicio/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Colores", tag: "CSS Básico", desc: "Modelos de color HEX, RGB, RGBA y HSL.", href: "HTML y CSS/CSS BASICO/Colores/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Bordes", tag: "CSS Básico", desc: "Estilos, grosores y redondeo de bordes.", href: "HTML y CSS/CSS BASICO/Bordes/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Box Sizing", tag: "CSS Básico", desc: "Diferencia entre content-box y border-box.", href: "HTML y CSS/CSS BASICO/Box Sizing/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Fondo y Gradiente", tag: "CSS Básico", desc: "Fondos, imágenes y degradados lineales/radiales.", href: "HTML y CSS/CSS BASICO/Fondo y gradiente/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Medidas", tag: "CSS Básico", desc: "Unidades absolutas y relativas (px, rem, em, %).", href: "HTML y CSS/CSS BASICO/medidas/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Padding y Margin", tag: "CSS Básico", desc: "Espaciado interno y externo del modelo de caja.", href: "HTML y CSS/CSS BASICO/padding y margin/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Propiedades de Texto", tag: "CSS Básico", desc: "Tipografía, alineación, pesos e interlineado.", href: "HTML y CSS/CSS BASICO/Propiedades de texto/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Sombras", tag: "CSS Básico", desc: "Aplicación de box-shadow y text-shadow.", href: "HTML y CSS/CSS BASICO/sombras/index.html" },
+    { cat: "htmlcss", title: "CSS Básico: Width y Height", tag: "CSS Básico", desc: "Dimensionamiento de cajas con ancho y alto.", href: "HTML y CSS/CSS BASICO/width y heigth/index.html" },
+    { cat: "htmlcss", title: "Ejercicio: Tarjeta de Presentación", tag: "Ejercicio", desc: "Maquetación de tarjeta personal con CSS básico.", href: "HTML y CSS/CSS BASICO/Ejercicios/Tarjeta de presentacion/index.html" },
+    { cat: "htmlcss", title: "CSS Avanzado: Especificidad y Cascada", tag: "CSS Avanzado", desc: "Jerarquía de selectores y resolución de conflictos.", href: "HTML y CSS/CSS avanzado/Especificidad y Casacada/index.html" },
+    { cat: "htmlcss", title: "CSS Avanzado: Position", tag: "CSS Avanzado", desc: "Posicionamiento static, relative, absolute, fixed y sticky.", href: "HTML y CSS/CSS avanzado/Position/index.html" },
     // Acceso directo a las 8 guías Markdown de HTML5 y CSS3
     { cat: "htmlcss", title: "Documentación Completa HTML y CSS", tag: "8 Guías MD", desc: "HTML, CSS, Flexbox, Grid, Animaciones, Responsive, Funciones Avanzadas y Hosting.", href: "HTML y CSS/Documentacion/" }
 ];
