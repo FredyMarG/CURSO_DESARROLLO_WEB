@@ -1,215 +1,383 @@
+/* ==========================================================================
+   ESTILOS DEL PORTAL INTERACTIVO DEL CURSO DE DESARROLLO WEB
+   Comentado línea por línea en español
+   ========================================================================== */
+
+/* Variables globales de diseño para mantener una paleta coherente */
 :root {
+    /* Fondo oscuro principal de la página */
     --bg-dark: #070a13;
+    /* Fondo translúcido para tarjetas estilo cristal */
     --bg-card: rgba(16, 24, 42, 0.78);
+    /* Color primario índigo */
     --primary: #6366f1;
+    /* Color de acento cian brillante */
     --cyan: #38bdf8;
+    /* Color de acento verde esmeralda */
     --emerald: #10b981;
+    /* Color de acento púrpura para documentación */
     --purple: #c084fc;
+    /* Color principal para textos claros */
     --text-main: #f8fafc;
+    /* Color secundario para subtítulos y descripciones */
     --text-muted: #94a3b8;
+    /* Color de borde fino semitransparente */
     --border-light: rgba(255, 255, 255, 0.1);
 }
 
+/* Selector universal para normalizar márgenes, rellenos y modelo de caja */
 * {
+    /* Incluye el relleno y el borde dentro del ancho y alto total */
     box-sizing: border-box;
+    /* Elimina márgenes externos predeterminados */
     margin: 0;
+    /* Elimina rellenos internos predeterminados */
     padding: 0;
 }
 
+/* Configuración general del cuerpo del documento */
 body {
+    /* Aplica el fondo oscuro principal */
     background-color: var(--bg-dark);
+    /* Define el color de texto claro por defecto */
     color: var(--text-main);
+    /* Tipografía moderna principal */
     font-family: 'Outfit', system-ui, sans-serif;
+    /* Ocupa al menos el alto completo de la ventana */
     min-height: 100vh;
+    /* Oculta cualquier desbordamiento horizontal generado por las luces de fondo */
     overflow-x: hidden;
+    /* Posicionamiento relativo para capas internas */
     position: relative;
 }
 
+/* Clase base para las luces ambientales desenfocadas de fondo */
 .bg-glow {
+    /* Se mantienen fijas en la pantalla al hacer scroll */
     position: fixed;
+    /* Forma completamente circular */
     border-radius: 50%;
+    /* Desenfoque intenso para crear efecto aura luminosa */
     filter: blur(115px);
+    /* Opacidad suave para no competir con la lectura */
     opacity: 0.24;
+    /* Evita que intercepten clics del ratón */
     pointer-events: none;
+    /* Se ubican detrás de todo el contenido */
     z-index: 0;
 }
 
+/* Primera luz ambiental ubicada arriba a la izquierda */
 .glow-1 {
+    /* Ancho del círculo luminoso */
     width: 460px;
+    /* Alto del círculo luminoso */
     height: 460px;
+    /* Color índigo primario */
     background: var(--primary);
+    /* Desplazamiento superior hacia afuera */
     top: -140px;
+    /* Desplazamiento izquierdo hacia afuera */
     left: -140px;
 }
 
+/* Segunda luz ambiental ubicada abajo a la derecha */
 .glow-2 {
+    /* Ancho del círculo luminoso */
     width: 420px;
+    /* Alto del círculo luminoso */
     height: 420px;
+    /* Color cian brillante */
     background: var(--cyan);
+    /* Desplazamiento inferior hacia afuera */
     bottom: -120px;
+    /* Desplazamiento derecho hacia afuera */
     right: -120px;
 }
 
+/* Contenedor principal centrado que agrupa el portal */
 .container {
+    /* Ancho máximo ideal para escritorios */
     max-width: 1180px;
+    /* Centrado horizontal automático */
     margin: 0 auto;
+    /* Espaciado interno superior, lateral e inferior */
     padding: 40px 20px 70px;
+    /* Posición relativa sobre el fondo */
     position: relative;
+    /* Nivel superior a las luces ambientales */
     z-index: 1;
 }
 
+/* Encabezado superior del portal */
 header {
+    /* Alineación centrada del título y descripción */
     text-align: center;
+    /* Separación inferior respecto a la barra de herramientas */
     margin-bottom: 32px;
 }
 
+/* Insignia superior identificadora de la ruta de aprendizaje */
 .badge {
+    /* Comportamiento en línea con soporte para padding */
     display: inline-block;
+    /* Tipografía monoespaciada técnica */
     font-family: 'Fira Code', monospace;
+    /* Tamaño compacto */
     font-size: 0.76rem;
+    /* Peso seminegrita */
     font-weight: 600;
+    /* Espaciado entre letras */
     letter-spacing: 1.5px;
+    /* Color de texto cian */
     color: var(--cyan);
+    /* Fondo cian translúcido */
     background: rgba(56, 189, 248, 0.12);
+    /* Borde fino cian */
     border: 1px solid rgba(56, 189, 248, 0.3);
+    /* Relleno interno tipo píldora */
     padding: 6px 16px;
+    /* Bordes completamente redondeados */
     border-radius: 999px;
+    /* Separación inferior respecto al título */
     margin-bottom: 14px;
 }
 
+/* Título principal del portal */
 h1 {
+    /* Tamaño fluido adaptable entre móvil y escritorio */
     font-size: clamp(2rem, 4.5vw, 3rem);
+    /* Peso extra negrita */
     font-weight: 800;
+    /* Degradado diagonal desde blanco hacia cian */
     background: linear-gradient(135deg, #ffffff 30%, var(--cyan) 100%);
+    /* Recorta el degradado al contorno del texto */
     background-clip: text;
+    /* Hace transparente el relleno sólido para revelar el degradado */
     -webkit-text-fill-color: transparent;
+    /* Separación inferior */
     margin-bottom: 10px;
 }
 
+/* Subtítulo descriptivo debajo del título principal */
 .subtitle {
+    /* Color gris azulado atenuado */
     color: var(--text-muted);
+    /* Ancho máximo para facilitar la lectura */
     max-width: 720px;
+    /* Centrado horizontal y margen inferior */
     margin: 0 auto 24px;
+    /* Altura de línea cómoda */
     line-height: 1.6;
 }
 
+/* Barra de herramientas con el buscador y botones de filtro */
 .toolbar {
+    /* Activa Flexbox para alinear controles */
     display: flex;
+    /* Permite que los botones salten a otra línea en pantallas pequeñas */
     flex-wrap: wrap;
+    /* Espacio uniforme entre elementos */
     gap: 12px;
+    /* Centrado horizontal */
     justify-content: center;
+    /* Centrado vertical */
     align-items: center;
+    /* Separación inferior respecto a las secciones */
     margin-bottom: 34px;
 }
 
+/* Campo de búsqueda en tiempo real */
 .search-input {
+    /* Fondo oscuro semitransparente */
     background: rgba(14, 21, 38, 0.85);
+    /* Borde fino translúcido */
     border: 1px solid var(--border-light);
+    /* Esquinas redondeadas */
     border-radius: 10px;
+    /* Relleno interno cómodo */
     padding: 10px 16px;
+    /* Color de texto claro */
     color: var(--text-main);
+    /* Tipografía principal */
     font-family: 'Outfit', sans-serif;
+    /* Tamaño legible */
     font-size: 0.95rem;
+    /* Ancho mínimo del buscador */
     min-width: 280px;
+    /* Elimina el contorno azul por defecto del navegador */
     outline: none;
 }
 
+/* Estilo del buscador cuando el usuario hace clic o escribe en él */
 .search-input:focus {
+    /* Resalta el borde con color cian */
     border-color: var(--cyan);
 }
 
+/* Botones de filtro por categoría */
 .filter-btn {
+    /* Fondo translúcido tenue */
     background: rgba(255, 255, 255, 0.06);
+    /* Borde fino sutil */
     border: 1px solid var(--border-light);
+    /* Color de texto claro */
     color: var(--text-main);
+    /* Relleno interno tipo cápsula */
     padding: 9px 16px;
+    /* Bordes completamente redondeados */
     border-radius: 999px;
+    /* Cursor de manito indicando interactividad */
     cursor: pointer;
+    /* Tipografía principal */
     font-family: 'Outfit', sans-serif;
+    /* Peso seminegrita */
     font-weight: 600;
+    /* Tamaño de texto */
     font-size: 0.88rem;
+    /* Transición suave para cambios de color y borde */
     transition: all 0.2s ease;
 }
 
+/* Estado hover y estado activo del botón de filtro */
 .filter-btn:hover,
 .filter-btn.active {
+    /* Fondo cian translúcido */
     background: rgba(56, 189, 248, 0.18);
+    /* Borde cian iluminado */
     border-color: var(--cyan);
+    /* Texto cian brillante */
     color: var(--cyan);
 }
 
+/* Contenedor de cada sección de curso */
 .course-section {
+    /* Separación inferior entre bloques de cursos */
     margin-bottom: 42px;
 }
 
+/* Título de cada sección de curso */
 .course-title {
+    /* Tamaño destacado */
     font-size: 1.4rem;
+    /* Peso negrita */
     font-weight: 700;
+    /* Separación inferior respecto a la cuadrícula */
     margin-bottom: 16px;
+    /* Disposición flexible para alinear icono y texto */
     display: flex;
+    /* Centrado vertical */
     align-items: center;
+    /* Espacio entre elementos */
     gap: 10px;
+    /* Línea divisoria inferior sutil */
     border-bottom: 1px solid var(--border-light);
+    /* Relleno inferior antes de la línea */
     padding-bottom: 10px;
 }
 
+/* Cuadrícula responsiva para las tarjetas de módulos */
 .grid {
+    /* Activa CSS Grid */
     display: grid;
+    /* Crea columnas automáticas con un mínimo de 255px */
     grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    /* Espaciado uniforme entre tarjetas */
     gap: 16px;
 }
 
+/* Tarjeta individual de cada módulo o guía */
 .card {
+    /* Fondo oscuro translúcido */
     background: var(--bg-card);
+    /* Desenfoque de cristal (Glassmorphism) */
     backdrop-filter: blur(14px);
+    /* Borde fino luminoso */
     border: 1px solid var(--border-light);
+    /* Esquinas redondeadas */
     border-radius: 14px;
+    /* Relleno interno */
     padding: 18px;
+    /* Disposición flexible en columna */
     display: flex;
+    /* Orientación vertical */
     flex-direction: column;
+    /* Separación entre fila superior y descripción */
     gap: 10px;
+    /* Transición suave al pasar el cursor */
     transition: transform 0.2s ease, border-color 0.2s ease;
+    /* Elimina el subrayado clásico de los enlaces */
     text-decoration: none;
+    /* Hereda el color de texto claro del cuerpo */
     color: inherit;
 }
 
+/* Efecto de elevación e iluminación al pasar el cursor sobre la tarjeta */
 .card:hover {
+    /* Eleva ligeramente la tarjeta hacia arriba */
     transform: translateY(-3px);
+    /* Ilumina el borde con color cian */
     border-color: var(--cyan);
 }
 
+/* Fila superior de la tarjeta que contiene título y etiqueta */
 .card-top {
+    /* Disposición flexible horizontal */
     display: flex;
+    /* Separa el título a la izquierda y el badge a la derecha */
     justify-content: space-between;
+    /* Centrado vertical */
     align-items: center;
+    /* Espacio mínimo entre ambos */
     gap: 8px;
 }
 
+/* Título del módulo dentro de la tarjeta */
 .card-title {
+    /* Peso negrita */
     font-weight: 700;
+    /* Tamaño legible */
     font-size: 1.05rem;
+    /* Color blanco puro */
     color: #ffffff;
 }
 
+/* Etiqueta tipo pastilla que indica cantidad de slides o tipo de recurso */
 .tag {
+    /* Tipografía monoespaciada */
     font-family: 'Fira Code', monospace;
+    /* Tamaño compacto */
     font-size: 0.7rem;
+    /* Relleno interno */
     padding: 3px 8px;
+    /* Bordes completamente redondeados */
     border-radius: 999px;
+    /* Fondo verde esmeralda translúcido */
     background: rgba(16, 185, 129, 0.15);
+    /* Texto verde esmeralda */
     color: var(--emerald);
+    /* Borde fino esmeralda */
     border: 1px solid rgba(16, 185, 129, 0.35);
+    /* Evita que el texto de la etiqueta se parta en dos líneas */
     white-space: nowrap;
 }
 
+/* Variante de etiqueta púrpura para carpetas de documentación y proyectos */
 .tag-doc {
+    /* Fondo púrpura translúcido */
     background: rgba(192, 132, 252, 0.14);
+    /* Texto púrpura claro */
     color: var(--purple);
+    /* Borde fino púrpura */
     border-color: rgba(192, 132, 252, 0.35);
 }
 
+/* Texto descriptivo del módulo dentro de la tarjeta */
 .card-desc {
+    /* Tamaño ligeramente menor al título */
     font-size: 0.86rem;
+    /* Color gris azulado atenuado */
     color: var(--text-muted);
+    /* Altura de línea cómoda para lectura rápida */
     line-height: 1.5;
 }
