@@ -998,3 +998,19 @@ Un desarrollador profesional debe:
 Y recuerda:
 
 > El código que funciona hoy no siempre será el código correcto para mañana.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET): OBSOLETO → MODERNO
+
+| Código Obsoleto / Legacy | Estándar Moderno Recomendado | Motivo |
+| :--- | :--- | :--- |
+| `var x = 1` | `const x = 1` / `let x = 1` | Alcance de bloque y evita *hoisting* confuso. |
+| `document.write()` | `el.textContent` / `el.append()` | `document.write` bloquea el parseo y borra el DOM. |
+| `XMLHttpRequest` / `ActiveXObject` | `fetch()` + `async/await` | Basado en Promesas, sintaxis limpia y `AbortSignal`. |
+| `substr(inicio, long)` | `slice(inicio, fin)` | `substr` está marcado como legado en ECMAScript. |
+| `escape()` / `unescape()` | `encodeURIComponent()` / `decodeURIComponent()` | Soporte correcto de UTF-8 y caracteres especiales. |
+| `e.keyCode` / `e.which` | `e.key` / `e.code` | Legible e independiente de la distribución del teclado. |
+| `axios.CancelToken` | `AbortController` (`signal`) | Estándar Web API unificado para Fetch y Axios. |
+| `alert()` / `prompt()` | `<dialog>` con `.showModal()` | No bloquea el hilo principal y es estilizable. |
+| `JSON.parse(JSON.stringify(x))` | `structuredClone(x)` | Preserva `Date`, `Map`, `Set` y referencias circulares. |

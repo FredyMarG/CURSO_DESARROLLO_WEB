@@ -42,7 +42,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 11</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -653,6 +653,46 @@ observador.<span class="token-function">observe</span>(caja);</code></pre>
 
                 <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
                     <strong>🎓 ¡Excelente trabajo!</strong> Has completado el módulo de <strong>Intersection Observer API en JavaScript Master Level</strong>.
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Scroll Infinito, Video y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. Scroll Infinito, Control de Video y Cheatsheet</h2>
+                    <p class="slide-description">Aplica centinelas para carga infinita y pausa automática de multimedia fuera de pantalla.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">♾️</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Scroll Infinito con Centinela</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const io = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) cargarMas();
+}, { rootMargin: '200px' });</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Observa un div vacío al final de la lista para precargar antes de llegar al fondo.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🎬</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Auto-Pausa de Video</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>entries.forEach(e => e.isIntersecting ? e.target.play() : e.target.pause());</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Ahorra ancho de banda y batería pausando videos cuando salen del viewport.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>root: null (viewport) | Element
+rootMargin: '150px' (anticipar)
+threshold: 0..1 | [0, 0.5, 1]</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Llama a observer.unobserve(el) en tareas de un solo disparo como Lazy Load.</p>
+                    </div>
                 </div>
             </div>
         </section>

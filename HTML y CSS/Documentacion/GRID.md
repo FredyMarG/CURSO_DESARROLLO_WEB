@@ -187,47 +187,131 @@ Uso ideal:
 
 ---
 
-## 11. `grid-template-areas`
+## 11. `grid-template-areas` (Layouts Declarativos Completos)
 
-Permite layouts declarativos.
+Permite dibujar visualmente la estructura de la página con nombres semánticos:
+
+```css
+.page-layout {
+  display: grid;
+  grid-template-columns: 240px 1fr 220px;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header header  header"
+    "nav    main    aside"
+    "footer footer  footer";
+  min-height: 100dvh;
+  gap: 1rem;
+}
+
+.header { grid-area: header; }
+.nav    { grid-area: nav; }
+.main   { grid-area: main; }
+.aside  { grid-area: aside; }
+.footer { grid-area: footer; }
+
+/* Responsive declarativo en móvil */
+@media (max-width: 768px) {
+  .page-layout {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+  }
+}
+```
+
+> **Tip:** Usa un punto (`.`) para representar una celda vacía intencional dentro de `grid-template-areas`.
 
 ---
 
-## 12. Alineación
+## 12. Alineación (`place-items`, `place-content`, `place-self`)
 
-`justify-items`, `align-items`, `place-items`, etc.
+En CSS Grid existen dos ejes de alineación: **Inline** (horizontal, `justify-*`) y **Block** (vertical, `align-*`).
 
----
-
-## 13. Subgrid
-
-Permite heredar tracks del grid padre.
-
----
-
-## 14. Propiedades completas
-
-Listado completo de propiedades Grid.
+- **`justify-items` / `align-items` / `place-items`:** Alinea los ítems **dentro de sus celdas**.
+  - `place-items: <align-items> <justify-items>;` → Ejemplo: `place-items: center;` centra horizontal y verticalmente cada ítem en su celda.
+- **`justify-content` / `align-content` / `place-content`:** Alinea **toda la cuadrícula** dentro del contenedor cuando sobra espacio.
+  - `place-content: center space-between;`
+- **`justify-self` / `align-self` / `place-self`:** Sobrescribe la alineación en un único ítem hijo.
 
 ---
 
-## 15. Errores comunes
+## 13. Subgrid (`grid-template-columns: subgrid` / `grid-template-rows: subgrid`)
 
-- No usar gap.
-- Abusar de tamaños fijos.
+`subgrid` permite que un elemento hijo (que también es `display: grid`) **herede exactamente las líneas y pistas del grid padre**, logrando alineación perfecta entre tarjetas hermanas (títulos, descripciones y botones alineados aunque tengan distinta longitud de texto):
+
+```css
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  display: grid;
+  grid-row: span 3; /* Reserva 3 filas: título, descripción, botón */
+  grid-template-rows: subgrid; /* Hereda el alto de fila de las tarjetas vecinas */
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: #1e293b;
+  border-radius: 12px;
+}
+```
 
 ---
 
-## 16. Buenas prácticas senior
+## 14. Inspección de Grid en DevTools
 
-- Grid para macro layout.
-- Flexbox para micro layout.
+Tanto Chrome/Edge como Firefox incluyen un **Grid Inspector** integrado:
+
+1. Abre DevTools (`F12`) y haz clic en el badge **`grid`** junto al elemento en el panel Elements/Inspector.
+2. Activa **Mostrar números de línea**, **Nombres de áreas** y **Tamaños de pista** en la pestaña *Layout* (Diseño).
+3. Úsalo para depurar desbordamientos implícitos, verificar `auto-fit` vs `auto-fill` y comprobar qué tracks hereda `subgrid`.
 
 ---
 
-## 17. Ejemplo completo
+## 15. Errores Comunes en CSS Grid
 
-Layout con `grid-template-areas` y media query.
+1. **Usar `repeat(auto-fit, 1fr)` sin `minmax()`:** Provoca columnas diminutas o una sola columna rígida; siempre combina con `minmax(250px, 1fr)`.
+2. **Olvidar `min-width: 0` en ítems con contenido largo:** Un `<pre>` o URL larga puede estirar una columna `1fr`; usa `minmax(0, 1fr)` para evitarlo.
+3. **Abusar de `height` fijo en filas:** Prefiere `minmax(120px, auto)` o `auto` para evitar texto cortado.
+4. **Confundir `align-items` con `align-content`:** `align-items` mueve ítems dentro de su celda; `align-content` mueve toda la grilla dentro del contenedor.
+
+---
+
+## 16. Buenas Prácticas Senior
+
+- **Grid para macro-layout, Flexbox para micro-layout:** Usa Grid para la estructura general de la página o grillas de tarjetas, y Flexbox dentro de cada barra de navegación o fila de botones.
+- Prefiere `gap` sobre márgenes externos entre ítems.
+- Usa `minmax(0, 1fr)` en columnas críticas con contenido dinámico para evitar desbordamientos horizontales.
+- Aprovecha `subgrid` para alinear encabezados y botones entre tarjetas de altura variable.
+
+---
+
+## 17. Ejemplo Completo: Dashboard Responsivo
+
+```css
+.dashboard {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-rows: 64px 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar content";
+  min-height: 100dvh;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+```
 
 
 ---
@@ -330,4 +414,17 @@ Sin necesidad de media queries.
 - `1fr` = Toma el espacio sobrante.
 
 ---
+
+# Hoja de Trucos (Cheatsheet) — CSS Grid
+
+| Propiedad / Función | Uso Principal |
+| :--- | :--- |
+| `display: grid;` | Convierte el contenedor en una cuadrícula bidimensional |
+| `grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));` | Columnas responsivas automáticas sin media queries |
+| `grid-template-areas` + `grid-area` | Layout declarativo por nombres semánticos |
+| `grid-template-rows: subgrid;` | Hereda pistas del grid padre para alinear tarjetas hermanas |
+| `gap: 1.5rem;` | Espaciado uniforme entre filas y columnas |
+| `place-items: center;` | Atajo de `align-items` + `justify-items` dentro de cada celda |
+| `place-content: center;` | Alinea toda la cuadrícula dentro del contenedor |
+| `grid-column: 1 / span 2;` | Hace que un ítem ocupe 2 columnas desde la línea 1 |
 

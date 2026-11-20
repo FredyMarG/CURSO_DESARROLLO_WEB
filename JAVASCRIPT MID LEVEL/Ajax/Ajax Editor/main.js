@@ -359,7 +359,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const rolValor = inputRol.value;
 
         if (!nombreValor || !correoValor) {
-            alert("Por favor completa el nombre y el correo antes de enviar.");
+            formResult.className = "error";
+            formResult.textContent = "Por favor completa el nombre y el correo antes de enviar.";
+            formDemoNote.textContent = "Validación: Faltan campos requeridos antes de instanciar FormData.";
+            logToTerminal("[VALIDACIÓN] Nombre y correo son obligatorios.", "warning");
             return;
         } // Fin de validación
 

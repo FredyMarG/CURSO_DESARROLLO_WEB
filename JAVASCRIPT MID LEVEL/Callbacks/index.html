@@ -3,39 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Callbacks en JavaScript</title>
+    <title>Guía Interactiva — Callbacks en JavaScript</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <main class="container">
-        <header class="glass-header">
-            <h1>🔁 Callbacks en JavaScript</h1>
-            <p>Laboratorio de funciones de orden superior</p>
-        </header>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">JavaScript Mid Level</span>
+            <h1>Callbacks y Flujo Asíncrono</h1>
+            <p class="subtitle">Explora callbacks síncronos, asíncronos, el patrón Error-First y cómo evitar el Callback Hell.</p>
+        </div>
+    </header>
 
-        <section class="info-card">
-            <div class="status-badge">Demo activa</div>
-            <h2>¿Qué hace esta callback?</h2>
-            <p>La función <code>procesarNombre</code> recibe otra función y la ejecuta cuando termina la acción.</p>
-
-            <div class="spam-alert">
-                <span>⚠️</span>
-                <p>Abre la terminal del navegador (<code>F12</code> o <code>Ctrl + Shift + I</code>) para ver los mensajes de la consola.</p>
-            </div>
-
-            <div class="demo-panel">
-                <button class="btn" id="runCallback">Ejecutar callback</button>
-                <div class="output-box">
-                    <p id="result">Esperando acción...</p>
-                    <p id="demoNote">Estado: la callback aún no se ha ejecutado.</p>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Callback Síncrono (Transformación)</h2>
+            <p class="desc">Pasa una función como argumento para transformar un arreglo de números en tiempo real.</p>
+            <div class="controls">
+                <label for="numerosInput">Números (separados por coma):</label>
+                <input id="numerosInput" type="text" value="2, 4, 6, 8, 10">
+                <div class="btn-row">
+                    <button type="button" class="btn" data-op="doble">Duplicar (x2)</button>
+                    <button type="button" class="btn" data-op="cuadrado">Al cuadrado (n²)</button>
+                    <button type="button" class="btn" data-op="pares">Filtrar &gt; 5</button>
                 </div>
             </div>
-
-            <div class="code-preview">
-                <pre><code>function procesarNombre(nombre, callback) {
-    callback(nombre);
+            <pre class="code-box"><code>function procesarLista(arr, callback) {
+    return arr.map(callback);
 }</code></pre>
+            <div id="syncOutput" class="output" aria-live="polite">Selecciona una operación para ver el resultado.</div>
+        </section>
+
+        <section class="card">
+            <h2>2. Callback Asíncrono &amp; Error-First</h2>
+            <p class="desc">Simula una consulta a base de datos con retardo de red y manejo de error <code>(err, data)</code>.</p>
+            <div class="controls">
+                <label for="userIdInput">ID de usuario (1 a 3 válidos, otro genera error):</label>
+                <input id="userIdInput" type="number" value="1" min="0" max="10">
+                <div class="btn-row">
+                    <button type="button" id="btnFetchUser" class="btn primary">Consultar Usuario</button>
+                    <button type="button" id="btnCallbackHell" class="btn secondary">Simular Cadena (3 pasos)</button>
+                </div>
             </div>
+            <div id="asyncOutput" class="output" aria-live="polite">Esperando consulta...</div>
+        </section>
+
+        <section class="card full-width">
+            <div class="terminal-header">
+                <h2>Consola de Ejecución en Vivo</h2>
+                <button type="button" id="btnClearLog" class="btn small">Limpiar</button>
+            </div>
+            <div id="logTerminal" class="terminal" aria-live="polite"></div>
         </section>
     </main>
 

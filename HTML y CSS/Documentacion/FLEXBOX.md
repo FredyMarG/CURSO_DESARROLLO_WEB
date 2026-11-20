@@ -401,14 +401,66 @@ Para ver diagramas, animaciones e imágenes que ayuden a interiorizar Flexbox, p
 
 “Flexbox photo gallery examples” (galerías de imágenes usando Flexbox).
 
-9. Resumen mental rápido
-Activar: display: flex.
+## 9. Resumen mental rápido
 
-Eje: flex-direction.
+- Activar: `display: flex`.
+- Eje: `flex-direction`.
+- Distribuir en el eje principal: `justify-content`.
+- Alinear en el eje cruzado: `align-items` (una línea) y `align-content` (múltiples líneas).
+- Espacios entre ítems: `gap`.
 
-Distribuir en el eje principal: justify-content.
+---
 
-Alinear en el eje cruzado: align-items (una línea) y align-content (múltiples líneas).
+## 10. Profundización: `flex` Shorthand, `align-content` vs `align-items`, y Accesibilidad
 
-Espacios entre ítems: gap.
+### `flex` Shorthand (Valores Clave)
+
+| Atajo | Equivale a | Comportamiento |
+| :--- | :--- | :--- |
+| `flex: 1` | `flex: 1 1 0%` | Crece y encoge por igual ignorando el tamaño del contenido |
+| `flex: auto` | `flex: 1 1 auto` | Crece y encoge partiendo del tamaño intrínseco del contenido |
+| `flex: none` | `flex: 0 0 auto` | Ni crece ni encoge (mantiene su tamaño natural) |
+| `flex: 0 0 240px` | `0 0 240px` | Columna/sidebar fija de exactamente `240px` |
+
+### `align-items` vs `align-content`
+- **`align-items`**: alinea los ítems **dentro de cada fila/línea** en el eje cruzado. Funciona siempre (con 1 o más líneas).
+- **`align-content`**: distribuye **el bloque completo de líneas** en el eje cruzado. **No tiene efecto si `flex-wrap: nowrap`** o si solo hay una línea.
+
+### `order` y Accesibilidad (a11y)
+Cambiar `order` (o usar `row-reverse` / `column-reverse`) **solo altera el orden visual**, pero el orden de tabulación con `Tab` y el orden de lectura de los lectores de pantalla siguen siendo el orden del DOM HTML.
+- **Regla:** Si el orden lógico importa para formularios, navegación o lectura, **reordena el HTML** en lugar de depender de `order` para cambios estructurales importantes.
+
+---
+
+## 11. Errores Comunes en Flexbox
+
+1. **Usar `align-content` sin `flex-wrap: wrap`:** No hace absolutamente nada porque solo existe una línea.
+2. **Olvidar `min-width: 0` en un flex item con texto largo o `overflow: ellipsis`:** Por defecto los flex items tienen `min-width: auto` y se niegan a encogerse por debajo de su contenido.
+3. **Confundir `flex: 1` con `width: 100%`:** En una fila con varios ítems, `flex: 1` reparte el espacio equitativamente; `width: 100%` intenta ocupar todo el contenedor.
+4. **Seguir usando márgenes con `:last-child { margin-right: 0 }`:** Usa `gap` directamente; funciona en `row`, `column` y `wrap` sin márgenes residuales.
+
+---
+
+## 12. Buenas Prácticas
+
+- Usa `gap` (y `row-gap`/`column-gap`) para toda separación entre flex items.
+- Usa `margin-inline-start: auto` (o `margin-left: auto`) en un ítem específico para empujarlo al extremo opuesto de una barra de navegación.
+- Aplica `min-width: 0` en contenedores flex que incluyan textos truncados o bloques `<pre>`.
+- Reserva Flexbox para componentes unidimensionales (navbars, botones, toolbars, cards internas) y CSS Grid para layouts bidimensionales.
+
+---
+
+# Hoja de Trucos (Cheatsheet) — Flexbox
+
+| Propiedad | Valor / Ejemplo | Propósito |
+| :--- | :--- | :--- |
+| `display: flex` | `flex` / `inline-flex` | Activa el contexto flex en el contenedor |
+| `flex-direction` | `row` / `column` | Define el eje principal |
+| `flex-wrap` | `wrap` / `nowrap` | Permite que los ítems salten a nuevas líneas |
+| `justify-content` | `center` / `space-between` | Distribuye ítems en el eje principal |
+| `align-items` | `center` / `stretch` | Alinea ítems en el eje cruzado (por línea) |
+| `align-content` | `space-between` / `center` | Distribuye múltiples líneas en el eje cruzado |
+| `gap` | `1rem` / `8px 16px` | Espacio uniforme entre ítems sin márgenes extra |
+| `flex` | `1` / `0 0 250px` / `1 1 260px` | Atajo de `flex-grow`, `flex-shrink` y `flex-basis` |
+| `align-self` | `flex-end` / `center` | Sobrescribe `align-items` para un único hijo |
 

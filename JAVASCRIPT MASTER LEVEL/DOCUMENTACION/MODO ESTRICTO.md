@@ -135,8 +135,9 @@ moduloNuevoSeguro();
 
 > [!IMPORTANT]  
 > En el desarrollo profesional contemporáneo (React, Vue, Angular, Node.js con ESM), **NO necesitas escribir `"use strict"` manualmente** si estás usando:
-> 1. **Módulos de ES6:** Cualquier archivo importado con `import`/`export` o cargado en HTML con `<script type="module" src="app.js"></script>` es **estricto por definición**.
-> 2. **Clases de ES6:** Todo el cuerpo interno de una `class MiClase { ... }` se ejecuta obligatoriamente en modo estricto.
+> 1. **Módulos de ES6:** Cualquier archivo importado con `import`/`export` o cargado en HTML con `<script type="module" src="app.js"></script>` es **estricto por definición** (incluso sin poner la directiva).
+> 2. **Clases de ES6:** Todo el cuerpo interno de una `class MiClase { ... }` (constructor, métodos, getters/setters y bloques `static { ... }`) se ejecuta obligatoriamente en modo estricto.
+> 3. **Restricción con parámetros no simples (ES6+):** No puedes colocar `"use strict";` dentro de una función que use parámetros por defecto, desestructuración o *rest parameters* (ej. `function f(a = 1) { "use strict"; }`), ya que lanza un `SyntaxError`. En esos casos, activa el modo estricto a nivel de archivo o usa ES Modules.
 
 ```javascript
 // ==============================================================================
@@ -768,24 +769,19 @@ variableX = 50;
 
 Guarda esta tabla de referencia rápida para recordar qué hace y qué previene `"use strict"`:
 
-```
-┌──────────────────────────────────────┬─────────────────────────────────────────────────────────┐
-│ REGLA DEL MODO ESTRICTO              │ CONSECUENCIA DIRECTA                                    │
-├──────────────────────────────────────┼─────────────────────────────────────────────────────────┤
-│ Asignar a variable no declarada      │ ❌ ReferenceError (Impide contaminar la memoria global) │
-│ Modificar objeto con Object.freeze() │ ❌ TypeError (Protege la inmutabilidad de datos)        │
-│ Modificar propiedad 'writable:false' │ ❌ TypeError (Protege campos de solo lectura)           │
-│ Parámetros con el mismo nombre       │ ❌ SyntaxError (Evita sobreescritura accidental)        │
-│ Usar 'delete' en variables normales  │ ❌ SyntaxError (delete solo es para propiedades)        │
-│ Usar 'with'                          │ ❌ SyntaxError (with está prohibido permanentemente)   │
-│ Usar palabras reservadas (interface) │ ❌ SyntaxError (Reserva sintaxis para estándares ES6+)  │
-│ Literales octales con cero (ej. 015) │ ❌ SyntaxError (Obliga a usar el prefijo moderno '0o')  │
-│ Invocar función libre                │ 🎯 'this' es 'undefined' en lugar de 'window'           │
-│ Parámetros vs arguments              │ ⚡ No se sincronizan en memoria (Mayor velocidad de CPU)│
-│ Ámbito de eval()                     │ 🔒 Totalmente aislado del exterior (Evita polución)    │
-│ Módulos ES6 y Clases                 │ 🤖 Modo estricto activado por defecto automáticamente   │
-└──────────────────────────────────────┴─────────────────────────────────────────────────────────┘
-```
+| Regla / Comportamiento | Modo Normal (Sloppy) | Modo Estricto (`"use strict"`) |
+| :--- | :--- | :--- |
+| **Asignar a variable no declarada** | Crea propiedad global en `window` | ❌ `ReferenceError` |
+| **Modificar `Object.freeze()` o `writable: false`** | Falla en silencio | ❌ `TypeError` |
+| **Parámetros duplicados `fn(a, a)`** | El segundo sobrescribe al primero | ❌ `SyntaxError` |
+| **`delete` en variables/funciones** | Retorna `false` en silencio | ❌ `SyntaxError` |
+| **Uso de `with (obj)`** | Permitido (lento y ambiguo) | ❌ `SyntaxError` |
+| **Palabras reservadas (`interface`, `package`, `private`)** | Permitidas como nombres | ❌ `SyntaxError` |
+| **Literales octales con cero (`015`)** | Se interpreta en base 8 (`13`) | ❌ `SyntaxError` (usar `0o15`) |
+| **`this` en función suelta** | Apunta a `window` / `global` | 🎯 `undefined` |
+| **`arguments` vs parámetros** | Sincronizados en memoria | ⚡ Independientes (más rápido) |
+| **Ámbito de `eval()`** | Contamina el scope exterior | 🔒 Aislado en su propio scope |
+| **ES Modules (`type="module"`) y `class`** | N/A | 🤖 Estricto automático por estándar |
 
 ---
 

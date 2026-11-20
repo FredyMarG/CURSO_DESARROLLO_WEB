@@ -271,3 +271,92 @@ boton.addEventListener("click", () => {
 * **El objeto `position`** provee la latitud, longitud y margen de error (en metros) a través de su sub-objeto `coords`.
 * **El objeto `error`** tipifica los fallos en tres códigos numéricos universales: `PERMISSION_DENIED` (1), `POSITION_UNAVAILABLE` (2) y `TIMEOUT` (3).
 * **El objeto `options`** permite calibrar el rendimiento del hardware mediante `enableHighAccuracy` (prioriza precisión sobre batería), `timeout` (límite de espera) y `maximumAge` (reutilización de caché).
+
+
+---
+
+# Conceptos Complementarios: Seguimiento en Tiempo Real (`watchPosition` y `clearWatch`)
+
+Mientras que `getCurrentPosition()` obtiene la ubicación **una sola vez**, **`watchPosition()`** suscribe un observador continuo que se dispara automáticamente cada vez que el usuario se desplaza o cambia la precisión del GPS:
+
+```javascript
+// Iniciar rastreo continuo (ideal para apps de mapas o running)
+const watchId = navigator.geolocation.watchPosition(
+    (pos) => {
+        console.log("Nueva posición:", pos.coords.latitude, pos.coords.longitude);
+    },
+    (err) => console.error("Error de rastreo:", err.message),
+    { enableHighAccuracy: true, maximumAge: 0 }
+);
+
+// Detener el rastreo para ahorrar batería
+navigator.geolocation.clearWatch(watchId);
+```
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Verifica si `"geolocation" in navigator` existe y solicita la posición actual mostrando `latitude` y `longitude` en consola.
+
+## Nivel 2
+Maneja los 3 códigos posibles del callback de error (`PERMISSION_DENIED` = 1, `POSITION_UNAVAILABLE` = 2, `TIMEOUT` = 3) mostrando un mensaje amigable en español para cada caso.
+
+## Nivel 3
+Crea un botón de rastreo que active `watchPosition()` con `enableHighAccuracy: true` y `timeout: 5000`, y otro botón que detenga el seguimiento usando `clearWatch(watchId)`.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition((pos) => {
+        console.log(`Lat: ${pos.coords.latitude}, Lng: ${pos.coords.longitude}`);
+    });
+}
+```
+
+## Solución Nivel 2
+```javascript
+const manejarErrorGeo = (err) => {
+    const mensajes = {
+        1: "Permiso de ubicación denegado por el usuario.",
+        2: "Ubicación no disponible en este momento.",
+        3: "Tiempo de espera agotado al buscar señal GPS."
+    };
+    console.error(mensajes[err.code] || "Error desconocido de geolocalización.");
+};
+```
+
+## Solución Nivel 3
+```javascript
+let idRastreo = null;
+const iniciarRastreo = () => {
+    idRastreo = navigator.geolocation.watchPosition(
+        (pos) => console.log(pos.coords.latitude, pos.coords.longitude),
+        (err) => console.error(err.message),
+        { enableHighAccuracy: true, timeout: 5000 }
+    );
+};
+const detenerRastreo = () => {
+    if (idRastreo !== null) {
+        navigator.geolocation.clearWatch(idRastreo);
+        idRastreo = null;
+    }
+};
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / Propiedad | Tipo | Uso Principal |
+| :--- | :--- | :--- |
+| `getCurrentPosition(ok, err, opt)` | Método | Obtiene la ubicación una sola vez |
+| `watchPosition(ok, err, opt)` | Método | Rastreo continuo (retorna `watchId`) |
+| `clearWatch(watchId)` | Método | Detiene el rastreo continuo |
+| `pos.coords.latitude / longitude` | Number | Coordenadas geográficas exactas |
+| `enableHighAccuracy` | Boolean | Activa GPS de alta precisión (consume más batería) |

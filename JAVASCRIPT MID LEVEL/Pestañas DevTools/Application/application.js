@@ -1,19 +1,45 @@
-/**
- * 💾 APPLICATION TAB LABORATORY
- * Gestión de persistencia: LocalStorage y SessionStorage.
- */
+// DevTools Lab — Pestaña Application
 
-// 1. Definición de llaves para el almacenamiento
-const LLAVE_TEMA = "theme_preference";
-const VALOR_TEMA = "dark_modern_pro";
+const keyInput = document.getElementById("keyInput");
+const valInput = document.getElementById("valInput");
+const storageView = document.getElementById("storageView");
 
-// 2. Escritura en LocalStorage (Persiste tras cerrar el navegador)
-// Verifica esto en: Application -> Storage -> Local Storage
-localStorage.setItem(LLAVE_TEMA, VALOR_TEMA);
+function renderStorage() {
+    const localData = {};
+    for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        localData[k] = localStorage.getItem(k);
+    }
 
-// 3. Escritura en SessionStorage (Solo dura esta pestaña abierta)
-// Verifica esto en: Application -> Storage -> Session Storage
-sessionStorage.setItem("pestaña_activa", "true");
+    const sessionData = {};
+    for (let i = 0; i < sessionStorage.length; i++) {
+        const k = sessionStorage.key(i);
+        sessionData[k] = sessionStorage.getItem(k);
+    }
 
-// 4. Lectura y log para confirmación
-console.log("Valor recuperado de Application:", localStorage.getItem(LLAVE_TEMA));
+    storageView.textContent =
+        `localStorage:\n${JSON.stringify(localData, null, 2)}\n\n` +
+        `sessionStorage:\n${JSON.stringify(sessionData, null, 2)}`;
+}
+
+document.getElementById("btnSaveLocal").addEventListener("click", () => {
+    const k = keyInput.value.trim();
+    if (!k) return;
+    localStorage.setItem(k, valInput.value);
+    renderStorage();
+});
+
+document.getElementById("btnSaveSession").addEventListener("click", () => {
+    const k = keyInput.value.trim();
+    if (!k) return;
+    sessionStorage.setItem(k, valInput.value);
+    renderStorage();
+});
+
+document.getElementById("btnClearStorage").addEventListener("click", () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    renderStorage();
+});
+
+renderStorage();

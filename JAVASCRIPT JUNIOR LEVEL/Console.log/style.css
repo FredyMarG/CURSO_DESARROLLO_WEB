@@ -1,67 +1,37 @@
-/**
- * ESTILOS LABORATORIO: CONSOLE.LOG
- * Tema visual: Slate / Pizarra (Representa un entorno técnico de terminal).
- */
-
-/* Reset global: Estandariza el comportamiento de la caja y márgenes */
-* { 
-    margin: 0;              /* Elimina márgenes del navegador */
-    padding: 0;             /* Elimina rellenos del navegador */
-    box-sizing: border-box; /* El tamaño incluye padding/border para evitar desbordamientos */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-2: #1e293b;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #06b6d4;
+    --accent-soft: rgba(6, 182, 212, 0.16);
+    --radius: 14px;
 }
 
-body {
-    font-family: 'Segoe UI', system-ui, sans-serif; /* Tipografía técnica y clara */
-    background-color: #f8fafc; /* Fondo pizarra muy tenue (Slate 50) */
-    display: flex;             /* Habilita Flexbox para centrado total */
-    align-items: center;       /* Centra verticalmente en el eje Y */
-    justify-content: center;   /* Centra horizontalmente en el eje X */
-    min-height: 100vh;         /* Ocupa el 100% de la altura de la ventana */
-    color: #1e293b;            /* Texto en gris azulado oscuro (Slate 800) */
-}
-
-/* Tarjeta de presentación (Card Design) */
-.card {
-    background: white;         /* Base blanca sólida */
-    padding: 2.5rem;           /* Espaciado interno generoso */
-    border-radius: 1.5rem;     /* Esquinas redondeadas modernas */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); /* Sombra suave para profundidad */
-    max-width: 400px;          /* Limita el ancho en pantallas grandes */
-    width: 90%;                /* Fluidez en dispositivos móviles */
-    text-align: center;        /* Alineación central de elementos */
-    border: 1px solid #e2e8f0; /* Borde sutil (Slate 200) para definición */
-}
-
-/* Icono de terminal (>_) */
-.icon {
-    font-size: 1.8rem;         /* Escala del texto del icono */
-    background: #f1f5f9;       /* Fondo gris claro (Slate 100) */
-    color: #475569;            /* Color del símbolo (Slate 600) */
-    width: 64px;               /* Ancho fijo */
-    height: 64px;              /* Alto fijo para simetría */
-    display: flex;             /* Centra el texto >_ internamente */
-    align-items: center;       /* Centrado vertical */
-    justify-content: center;   /* Centrado horizontal */
-    border-radius: 0.75rem;    /* Forma de cuadrado redondeado */
-    margin: 0 auto 1.5rem;     /* Centra el bloque y da espacio inferior */
-    font-weight: bold;         /* Resalta el símbolo de prompt */
-    font-family: 'Courier New', monospace; /* Fuente de estilo código */
-}
-
-h1 { margin-bottom: 1rem; font-size: 1.5rem; color: #0f172a; }
-
-p { color: #64748b; line-height: 1.6; margin-bottom: 2rem; }
-
-/* Caja de estado del script */
-.status-box {
-    background: #f8fafc;       /* Fondo destacado sutil */
-    padding: 0.75rem;          /* Relleno interno */
-    border-radius: 0.5rem;     /* Redondeo de esquinas */
-    display: flex;             /* Alineación horizontal punto/texto */
-    align-items: center;       /* Centrado vertical */
-    justify-content: center;   /* Centrado horizontal */
-    gap: 0.6rem;               /* Espaciado entre elementos */
-    font-size: 0.85rem;        /* Tamaño de fuente informativo */
-}
-
-.status-dot { width: 10px; height: 10px; background: #64748b; border-radius: 50%; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: radial-gradient(circle at top, #083344 0%, var(--bg) 55%); color: var(--text); min-height: 100vh; line-height: 1.6; padding: 2rem 1rem 4rem; }
+.app-shell { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+.hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 2rem; }
+.badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #67e8f9; background: var(--accent-soft); padding: 0.25rem 0.75rem; border-radius: 999px; margin-bottom: 0.5rem; }
+.hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: #fff; }
+.hero p { color: var(--muted); max-width: 65ch; margin-top: 0.35rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.card h2 { font-size: 1.1rem; color: #fff; }
+.note { font-size: 0.9rem; color: var(--muted); background: rgba(15, 23, 42, 0.7); border-left: 3px solid var(--accent); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; }
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border: none; border-radius: 8px; padding: 0.55rem 0.95rem; font-weight: 600; font-size: 0.9rem; background: var(--accent); color: #083344; transition: filter 0.15s ease; }
+button:hover { filter: brightness(1.1); }
+button.secondary { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
+.output { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.88rem; color: #e2e8f0; min-height: 3.2rem; white-space: pre-wrap; word-break: break-word; }
+.code-preview { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.82rem; color: #a5f3fc; overflow-x: auto; }
+.console-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.console-log { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.83rem; max-height: 240px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.35rem; }
+.log-line { color: #cbd5e1; }
+.log-line.ok { color: #34d399; }
+.log-line.warn { color: #fbbf24; }
+.log-line.err { color: #f87171; }

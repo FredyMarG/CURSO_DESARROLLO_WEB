@@ -1,33 +1,75 @@
 <!DOCTYPE html>
-<!-- 
-    VISTA: OBJETO MATH
-    Propósito: Interfaz para la ejecución de funciones matemáticas y constantes.
-    La interacción se realiza vía consola para visualizar precisión decimal.
--->
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Codificación universal -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptabilidad móvil -->
-    <title>JS Junior - Objeto Math</title>
-    <!-- Vinculación del diseño modular -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de Math y Precisión</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">f(x)</div>
-            <h1>Objeto Math</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 11 · Objeto Math & Crypto</span>
+            <h1>Matemáticas, Aleatorios y Precisión Numérica</h1>
+            <p>Compara métodos de redondeo (incluso con negativos), genera números aleatorios en rango o UUIDs seguros con <code>crypto</code>, y entiende la precisión flotante IEEE 754.</p>
         </header>
-        <section class="content">
-            <p>Exploración de potencias, raíces, redondeo y generación de números aleatorios en JavaScript.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Cálculos listos en <b>Consola (Ctrl + Shift + I)</b></span>
+
+        <main class="grid">
+            <section class="card" aria-labelledby="m1">
+                <h2 id="m1">1. Redondeo: <code>round</code>, <code>floor</code>, <code>ceil</code>, <code>trunc</code></h2>
+                <p class="note">Prueba un número negativo como <code>-4.2</code> para ver la diferencia entre <code>Math.floor()</code> y <code>Math.trunc()</code>.</p>
+                <div class="controls">
+                    <div>
+                        <label for="math-num">Número decimal:</label>
+                        <input id="math-num" type="number" step="0.1" value="-4.2">
+                    </div>
+                    <button id="btn-redondear" type="button">Calcular Redondeos</button>
+                </div>
+                <pre class="code-preview">Math.floor(-4.2) // -5 | Math.trunc(-4.2) // -4</pre>
+                <div id="out-redondeo" class="output" aria-live="polite">Pulsa "Calcular Redondeos".</div>
+            </section>
+
+            <section class="card" aria-labelledby="m2">
+                <h2 id="m2">2. Aleatorios en Rango y <code>crypto.randomUUID()</code></h2>
+                <p class="note">Usa <code>Math.random()</code> para juegos/simulaciones y <code>crypto.randomUUID()</code> para identificadores únicos seguros.</p>
+                <div class="controls">
+                    <div class="row">
+                        <div style="flex:1">
+                            <label for="math-min">Mínimo:</label>
+                            <input id="math-min" type="number" value="1">
+                        </div>
+                        <div style="flex:1">
+                            <label for="math-max">Máximo:</label>
+                            <input id="math-max" type="number" value="6">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <button id="btn-random" type="button">Generar Aleatorio</button>
+                        <button id="btn-uuid" type="button" class="secondary">Generar UUID</button>
+                    </div>
+                </div>
+                <pre class="code-preview">Math.floor(Math.random() * (max - min + 1)) + min</pre>
+                <div id="out-random" class="output" aria-live="polite">Genera un número en rango o un UUID v4.</div>
+            </section>
+
+            <section class="card" aria-labelledby="m3">
+                <h2 id="m3">3. Precisión Flotante (<code>0.1 + 0.2</code>)</h2>
+                <p class="note">El estándar binario IEEE 754 hace que <code>0.1 + 0.2 !== 0.3</code>. En dinero, opera en centavos enteros o compara con <code>Number.EPSILON</code>.</p>
+                <button id="btn-flotante" type="button">Probar 0.1 + 0.2</button>
+                <pre class="code-preview">Math.abs((0.1 + 0.2) - 0.3) &lt; Number.EPSILON</pre>
+                <div id="out-flotante" class="output" aria-live="polite">Pulsa para inspeccionar la precisión flotante.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 
-    <!-- Lógica matemática -->
     <script src="math.js"></script>
 </body>
 </html>

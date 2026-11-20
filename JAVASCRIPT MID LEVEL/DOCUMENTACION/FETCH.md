@@ -16,14 +16,18 @@
    - `blob()`
    - `formData()`
    - `arrayBuffer()`
-5. Introducción a Axios: ¿Por qué usar una biblioteca externa?
-6. Comparativa técnica: Fetch vs. Axios
-7. Analogía del mundo real
-8. Diagrama de flujo de datos
-9. Buenas prácticas
-10. Errores comunes
-11. Ejercicios prácticos
-12. Resumen
+5. Manejo de errores HTTP (`if (!res.ok)`), `Headers`, `Request` y `Response`
+6. Envío de `FormData` con Fetch
+7. Cancelación y Timeouts (`AbortController` y `AbortSignal.timeout()`)
+8. Introducción a Axios: ¿Por qué usar una biblioteca externa?
+9. Comparativa técnica: Fetch vs. Axios
+10. Analogía del mundo real
+11. Diagrama de flujo de datos
+12. Buenas prácticas
+13. Errores comunes
+14. Ejercicios prácticos
+15. Resumen
+16. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -123,6 +127,119 @@ fetch("/archivo.bin")
 
 ---
 
+# Manejo de errores HTTP (`if (!res.ok)`), `Headers`, `Request` y `Response`
+
+### 1. Validación obligatoria de `res.ok`
+A diferencia de Axios, `fetch()` **solo rechaza la promesa cuando hay un fallo de red** (sin internet, DNS caído o bloqueo CORS). Si el servidor responde `404 Not Found` o `500 Internal Server Error`, la promesa se **resuelve** normalmente. Por eso es imprescindible validar `res.ok` (que es `true` solo para códigos `200–299`):
+
+```javascript
+async function obtenerPerfil(id) {
+    const res = await fetch(`https://api.ejemplo.com/usuarios/${id}`);
+
+    if (!res.ok) {
+        // Opcional: leer detalle de error si el servidor devuelve JSON
+        const detalle = await res.text().catch(() => "");
+        throw new Error(`Error HTTP ${res.status} (${res.statusText}): ${detalle}`);
+    }
+
+    return res.json();
+}
+```
+
+### 2. Las interfaces `Headers`, `Request` y `Response`
+Fetch se apoya en tres clases estándar del navegador (Web Fetch API):
+
+* **`Headers`:** Colección case-insensitive para manipular cabeceras de forma segura (`.get()`, `.set()`, `.append()`, `.has()`).
+* **`Request`:** Encapsula URL, método, cabeceras y cuerpo en un objeto reutilizable.
+* **`Response`:** Representa la respuesta del servidor; incluye `res.ok`, `res.status`, `res.headers` y `res.clone()` (útil si necesitas leer el cuerpo en un logger/caché sin agotar el stream).
+
+```javascript
+const headers = new Headers({
+    "Accept": "application/json",
+    "Authorization": "Bearer mi_token_jwt"
+});
+
+const peticion = new Request("https://api.ejemplo.com/ordenes", {
+    method: "GET",
+    headers
+});
+
+const respuesta = await fetch(peticion);
+const copiaParaCache = respuesta.clone(); // Evita "body stream already read"
+const datos = await respuesta.json();
+```
+
+---
+
+# Envío de `FormData` con Fetch
+
+Al igual que con XHR, puedes pasar un objeto `FormData` directamente en `body` para enviar archivos o formularios sin configurar `Content-Type` manualmente (el navegador genera el `multipart/form-data` con su `boundary` automático):
+
+```javascript
+async function subirAvatar(archivo) {
+    const formData = new FormData();
+    formData.append("avatar", archivo);
+    formData.append("usuarioId", "42");
+
+    const res = await fetch("/api/perfil/avatar", {
+        method: "POST",
+        body: formData
+        // ⚠️ NO agregues 'Content-Type': 'multipart/form-data' manualmente
+    });
+
+    if (!res.ok) throw new Error(`Fallo al subir: ${res.status}`);
+    return res.json();
+}
+```
+
+---
+
+# Cancelación y Timeouts (`AbortController` y `AbortSignal.timeout()`)
+
+En aplicaciones reales (buscadores en tiempo real, cambio de vista en una SPA o redes lentas), debes cancelar peticiones obsoletas o establecer un tiempo límite.
+
+### 1. Cancelación manual con `AbortController`
+```javascript
+const controller = new AbortController();
+
+// Cancelar manualmente tras algún evento (ej. el usuario escribe otra letra)
+setTimeout(() => controller.abort("Búsqueda cancelada por el usuario"), 1500);
+
+try {
+    const res = await fetch("https://api.ejemplo.com/buscar?q=js", {
+        signal: controller.signal
+    });
+    const data = await res.json();
+} catch (err) {
+    if (err.name === "AbortError") {
+        console.warn("Petición abortada limpiamente.");
+    } else {
+        console.error("Error real:", err);
+    }
+}
+```
+
+### 2. Timeout moderno en una sola línea: `AbortSignal.timeout()`
+Desde los estándares modernos de Web APIs (ES2023+/Navegadores actuales), ya no necesitas crear un `setTimeout` manual para abortar por tiempo límite:
+
+```javascript
+try {
+    const res = await fetch("https://api.ejemplo.com/lento", {
+        signal: AbortSignal.timeout(5000) // Aborta automáticamente tras 5 segundos
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+} catch (err) {
+    if (err.name === "TimeoutError") {
+        console.error("La petición excedió los 5 segundos.");
+    }
+}
+```
+
+> **Tip Pro (`AbortSignal.any`):** Puedes combinar cancelación manual + timeout usando `AbortSignal.any([controller.signal, AbortSignal.timeout(5000)])`.
+
+---
+
 # Introducción a Axios: ¿Por qué usar una biblioteca externa?
 
 Aunque Fetch es espectacular y nativo, tiene ciertas limitaciones en proyectos grandes del mundo real. Para resolver estas fricciones y acelerar el desarrollo profesional nació **Axios**, una biblioteca basada en promesas sumamente popular.
@@ -190,7 +307,7 @@ async function crearPostFetch() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ titulo: "Nuevo Post", autor: "Junior" })
     });
-    const datos = await respuesta.get();
+    const datos = await respuesta.json();
 }
 ```
 
@@ -297,3 +414,20 @@ Toma el ejercicio anterior de registro de usuarios mediante `POST` y realízalo 
 *   Fetch opera en **dos fases**: la verificación inicial de la llegada del mensaje y la descarga/conversión posterior del cuerpo.
 *   El cuerpo de las respuestas de Fetch debe procesarse mediante lectores asíncronos específicos: **`json()`**, **`text()`**, **`blob()`**, **`formData()`** o **`arrayBuffer()`**.
 *   **Axios** es una potente librería externa que simplifica la experiencia de desarrollo al automatizar el parseo a JSON, rechazar promesas en errores HTTP (4xx/5xx) y empaquetar herramientas como interceptores globales.
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento / API | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| `fetch(url, options)` | Inicia una petición HTTP basada en Promesas. | `await fetch("/api/users", { method: "GET" })` |
+| `res.ok` / `res.status` | Verifica éxito HTTP (`200–299`) y código numérico. | `if (!res.ok) throw new Error(res.status)` |
+| `res.json()` / `res.text()` | Lee el stream del cuerpo como JSON o texto plano. | `const data = await res.json()` |
+| `res.blob()` / `res.arrayBuffer()` | Lee datos binarios (imágenes, PDFs, audio). | `const img = await res.blob()` |
+| `res.clone()` | Clona una `Response` para leer el cuerpo dos veces. | `const copy = res.clone()` |
+| `new Headers(obj)` | Manipula cabeceras HTTP de forma segura. | `headers.set("Authorization", "Bearer ...")` |
+| `new Request(url, init)` | Encapsula una petición reutilizable. | `const req = new Request(url, { method: "POST" })` |
+| `new FormData(form)` | Envía formularios y archivos `multipart/form-data`. | `fetch(url, { method: "POST", body: formData })` |
+| `new AbortController()` | Permite cancelar manualmente una o más peticiones. | `fetch(url, { signal: controller.signal })` |
+| `AbortSignal.timeout(ms)` | Cancela automáticamente si supera `ms` milisegundos. | `fetch(url, { signal: AbortSignal.timeout(4000) })` |

@@ -1006,3 +1006,33 @@ permite escribir aplicaciones más organizadas, mantenibles y fáciles de escala
 ✅ Integración con APIs
 
 ✅ Patrones avanzados como switch(true)
+
+---
+
+# 🚀 Alternativa Moderna: Tablas de Búsqueda (Object / Map Lookup)
+
+Cuando un `switch` solo mapea un valor a otro o ejecuta una función por clave, un **Objeto** o **`Map`** suele ser más limpio, extensible y evita olvidar el `break`:
+
+```javascript
+const acciones = {
+    admin: () => "Panel completo",
+    editor: () => "Panel de contenido",
+    lector: () => "Solo lectura"
+};
+
+const resultado = (acciones[rol] ?? (() => "Acceso denegado"))();
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Concepto / Sintaxis | Detalle clave | Ejemplo |
+| :--- | :--- | :--- |
+| `switch (expr)` | Evalúa `expr` con comparación estricta (`===`). | `switch (estado) { ... }` |
+| `case valor:` | Rama que coincide si `expr === valor`. | `case 200: return "OK";` |
+| `break;` | Detiene la ejecución para evitar *fall-through*. | `case "a": hacerAlgo(); break;` |
+| Fall-through intencional | Agrupa varios `case` que comparten lógica. | `case "sab": case "dom": esFinde = true;` |
+| `default:` | Rama por defecto si ningún `case` coincide. | `default: console.warn("Desconocido");` |
+| `switch (true)` | Permite evaluar rangos y condiciones booleanas. | `case nota >= 90: return "A";` |
+| Object / `Map` Lookup | Alternativa declarativa sin `break`. | `const msg = mapa[codigo] ?? "Otro";` |

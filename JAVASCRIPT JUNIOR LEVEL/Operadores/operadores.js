@@ -1,63 +1,99 @@
 /**
- * LABORATORIO: OPERADORES EN JAVASCRIPT
- * Exploración de asignación compuesta, comparación de valores y lógica booleana.
+ * GUÍA INTERACTIVA: OPERADORES EN JAVASCRIPT (ES2020+)
  */
 
-/**
- * Impresión de encabezado en consola.
- * El primer argumento usa %c para aplicar los estilos definidos en el segundo argumento.
- */
-console.log("%c--- LABORATORIO: OPERADORES ---", "color: #f59e0b; font-weight: bold; font-size: 12px;");
+"use strict";
 
-/* 1. Operadores de asignación compuesta */
-// Permiten realizar una operación aritmética y asignar el resultado a la misma variable en un solo paso.
-let numero = 10; // Paso 1: Inicializamos la variable 'numero' con el valor 10.
+const liveConsole = document.getElementById("live-console");
 
-numero += 5;   // Paso 2: Suma 5 al valor actual (10) y lo guarda. Nuevo valor: 15.
-console.log("%cSuma compuesta (+=):", "color: #f59e0b;", numero);
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+}
 
-numero -= 5;   // Paso 3: Resta 5 al valor actual (15) y lo guarda. Nuevo valor: 10.
-console.log("%cResta compuesta (-=):", "color: #f59e0b;", numero);
+// 1. Asignación compuesta
+let valor = 10;
+const outAcumulador = document.getElementById("out-acumulador");
 
-numero /= 2;   // Paso 4: Divide el valor actual (10) por 2 y lo guarda. Nuevo valor: 5.
-console.log("%cDivisión compuesta (/=):", "color: #f59e0b;", numero);
+document.querySelectorAll("[data-op]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const op = btn.dataset.op;
+        const previo = valor;
+        let expresion = "";
 
-numero %= 2;   // Paso 5: Obtiene el resto de dividir 5 entre 2 (que es 1) y lo guarda. Nuevo valor: 1.
-console.log("%cMódulo compuesto (%=):", "color: #f59e0b;", numero);
+        if (op === "add") { valor += 5; expresion = `${previo} += 5`; }
+        else if (op === "sub") { valor -= 3; expresion = `${previo} -= 3`; }
+        else if (op === "mul") { valor *= 2; expresion = `${previo} *= 2`; }
+        else if (op === "pow") { valor **= 2; expresion = `${previo} **= 2`; }
+        else if (op === "mod") { valor %= 3; expresion = `${previo} %= 3`; }
+        else { valor = 10; expresion = "Reset a 10"; }
 
-numero **= 3;  // Paso 6: Eleva el valor actual (1) a la potencia de 3 (1*1*1) y lo guarda. Nuevo valor: 1.
-console.log("%cExponencial compuesto (**=):", "color: #f59e0b;", numero);
+        outAcumulador.textContent = `Operación: ${expresion}\nValor actual: ${valor}`;
+        registrar(`Asignación (${expresion}) -> ${valor}`);
+    });
+});
 
-numero++;      // Paso 7: Operador de incremento simple. Suma 1 al valor actual (1). Nuevo valor: 2.
-console.log("%cIncremento final (++):", "color: #f59e0b;", numero);
+// 2. Comparación == vs ===
+const paresComparacion = {
+    "5_str5": { a: 5, b: "5", label: '5 y "5"' },
+    "0_false": { a: 0, b: false, label: "0 y false" },
+    "empty_0": { a: "", b: 0, label: '"" y 0' },
+    "null_undef": { a: null, b: undefined, label: "null y undefined" },
+    "5_5": { a: 5, b: 5, label: "5 y 5" }
+};
 
-/* 2. Operadores de comparación */
-// Devuelven un valor booleano (true o false).
-let comparador1 = 23; // Declaramos primer valor para comparar.
-let comparador2 = 13; // Declaramos segundo valor para comparar.
+document.getElementById("btn-comparar").addEventListener("click", () => {
+    const par = paresComparacion[document.getElementById("cmp-preset").value];
+    // eslint-disable-next-line eqeqeq
+    const debil = par.a == par.b;
+    const estricta = par.a === par.b;
 
-// Comprobamos si los valores son diferentes. Resultado esperado: true.
-console.log("%c¿Es diferente? (!=):", "font-weight: bold;", comparador1 != comparador2);
+    document.getElementById("out-comparar").textContent =
+        `Comparando ${par.label}:\n  ==  (débil):    ${debil}\n  === (estricta): ${estricta}`;
+    registrar(`Comparar ${par.label} -> ==: ${debil}, ===: ${estricta}`, debil !== estricta ? "warn" : "ok");
+});
 
-// Comprobamos si los valores son estrictamente iguales. Resultado esperado: false.
-console.log("%c¿Es igual? (==):", "font-weight: bold;", comparador1 == comparador2);
+// 3. || vs ??
+const valoresNullish = {
+    "0": { v: 0, label: "0" },
+    "empty": { v: "", label: '""' },
+    "false": { v: false, label: "false" },
+    "null": { v: null, label: "null" },
+    "undefined": { v: undefined, label: "undefined" }
+};
 
-// Comprobamos si el primer valor es mayor o igual al segundo. Resultado esperado: true.
-console.log("%c¿Es mayor o igual? (>=):", "font-weight: bold;", comparador1 >= comparador2);
+document.getElementById("btn-nullish").addEventListener("click", () => {
+    const item = valoresNullish[document.getElementById("nullish-input").value];
+    const conOr = item.v || 100;
+    const conNullish = item.v ?? 100;
 
-/* 3. Operadores lógicos */
-let num1 = 12; // Variable numérica para lógica.
-let num2 = 24; // Variable numérica para lógica.
+    document.getElementById("out-nullish").textContent =
+        `Entrada: ${item.label}\n  entrada || 100 -> ${JSON.stringify(conOr)}\n  entrada ?? 100 -> ${JSON.stringify(conNullish)}`;
+    registrar(`OR vs Nullish (${item.label}) -> ||: ${conOr}, ??: ${conNullish}`);
+});
 
-let af1 = num1 < num2;  // Evaluación 1: ¿12 es menor que 24? Sí (true).
-let af2 = num1 != num2; // Evaluación 2: ¿12 es distinto de 24? Sí (true).
+// 4. Optional Chaining ?.
+function evaluarCadena(usuario, etiqueta) {
+    const ciudad = usuario.perfil?.direccion?.ciudad ?? "Sin ciudad registrada";
+    document.getElementById("out-chain").textContent =
+        `${etiqueta}\nResultado seguro: "${ciudad}" (cero errores lanzados)`;
+    registrar(`Optional Chaining (${etiqueta}) -> "${ciudad}"`);
+}
 
-// AND (&&): Devuelve true solo si ambos lados son true.
-// En este caso: true && true -> true.
-console.log("%cAND lógico (&&):", "color: #d97706; font-weight: bold;", af1 && af2);
+document.getElementById("btn-chain-ok").addEventListener("click", () => {
+    evaluarCadena({ perfil: { direccion: { ciudad: "Bogotá" } } }, "Objeto completo");
+});
 
-// OR (||): Devuelve true si al menos uno de los lados es true.
-af1 = num1 > num2; // Reasignación: ¿12 es mayor que 24? No (false).
+document.getElementById("btn-chain-null").addEventListener("click", () => {
+    evaluarCadena({ perfil: null }, "Objeto con perfil: null");
+});
 
-// Evaluación: false || true. Como af2 sigue siendo true, el resultado es true.
-console.log("%cOR lógico (||):", "color: #d97706; font-weight: bold;", af1 || af2);
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+registrar("Laboratorio de Operadores listo.");

@@ -1,78 +1,83 @@
 /**
- * DEFINICIÓN DE FUNCIONES BÁSICAS
- * Un bloque de código reutilizable que realiza una acción.
+ * GUÍA INTERACTIVA: FUNCIONES, PARÁMETROS REST, CALLBACKS Y CLOSURES
  */
 
-/** Solicita entrada al usuario y muestra una respuesta condicional */
-function saludar() {
-    respuesta = prompt("¡Hola Fredy! ¿Como fue tu dia?")
-    if (respuesta == "bien") {
-        alert("Me alegro")
-    }else{
-        alert("Una pena")
-    }
-}
-saludar()
+"use strict";
 
-/**
- * VALORES DE RETORNO (RETURN)
- * Especifica qué dato devuelve la función al ser ejecutada y finaliza su ejecución.
- */
+const liveConsole = document.getElementById("live-console");
 
-/** 
- * Muestra una alerta y retorna un string con formato HTML 
- * @returns {string} Frase de saludo
- */
-function sal() {
-    alert("hola");
-    return "La funcion te saludo <br>"
-}
-let saludo = sal()
-document.write(saludo)
+window.registrarFuncionLog = function registrar(mensaje) {
+    const linea = document.createElement("div");
+    linea.className = "log-line ok";
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+};
 
-/**
- * USO DE PARÁMETROS
- * Variables locales que la función utiliza para procesar datos dinámicos.
- */
+// 1. Parámetros por defecto + Arrow Function
+const saludarUsuario = (nombre = "Invitado") => `¡Hola, ${nombre}! Bienvenido a JS moderno.`;
 
-/**
- * Suma dos valores numéricos
- * @param {number} num1 Primer sumando
- * @param {number} num2 Segundo sumando
- * @returns {number} Resultado de la suma
- */
-function suma(num1,num2) {
-    let res = num1 + num2
-    return res
+document.getElementById("btn-saludar").addEventListener("click", () => {
+    const raw = document.getElementById("fn-nombre").value.trim();
+    const mensaje = raw ? saludarUsuario(raw) : saludarUsuario(undefined);
+    document.getElementById("out-saludar").textContent = mensaje;
+    window.registrarFuncionLog(`saludarUsuario(${raw ? `"${raw}"` : "undefined"}) -> "${mensaje}"`);
+});
+
+// 2. Parámetros Rest + Callbacks
+function procesarLista(callback, ...numeros) {
+    return callback(numeros);
 }
 
-let resultado = suma(20,25)
-document.write(resultado + "<br>")
+const cbSumar = (arr) => arr.reduce((a, b) => a + b, 0);
+const cbPromedio = (arr) => (arr.length ? cbSumar(arr) / arr.length : 0);
 
-/**
- * Escribe un saludo personalizado en el documento
- * @param {string} nombre Nombre de la persona a saludar
- */
-function saludos(nombre){
-    let frase = `!Hola ${nombre}¡ ¿Como estas? <br>`
-    document.write(frase)
+document.querySelectorAll("[data-cb]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const lista = document
+            .getElementById("fn-nums")
+            .value.split(",")
+            .map((v) => Number(v.trim()))
+            .filter((n) => !Number.isNaN(n));
+
+        const tipo = btn.dataset.cb;
+        const resultado = tipo === "sumar" ? procesarLista(cbSumar, ...lista) : procesarLista(cbPromedio, ...lista);
+
+        document.getElementById("out-rest").textContent =
+            `Números válidos: ${JSON.stringify(lista)}\nCallback (${tipo}): ${resultado}`;
+        window.registrarFuncionLog(`Callback ${tipo} sobre ${JSON.stringify(lista)} -> ${resultado}`);
+    });
+});
+
+// 3. Closures
+function crearContador(inicial = 0) {
+    let cuenta = inicial;
+    return {
+        incrementar: () => ++cuenta,
+        reiniciar: () => {
+            cuenta = 0;
+            return cuenta;
+        }
+    };
 }
-saludos("petrosky")
 
-/**
- * ÁMBITO (SCOPE) Y FUNCIONES EXPRESADAS
- */
+const contador = crearContador(0);
 
-/** 
- * Función anónima asignada a una constante (Function Expression)
- * @param {string} nombre 
- */
-const sayHi = function(nombre){
-    let fraseLocal = `!Hola ${nombre}¡ ¿Como estas? <br>`;
-    document.write(fraseLocal);
-}
+document.getElementById("btn-closure-inc").addEventListener("click", () => {
+    const actual = contador.incrementar();
+    document.getElementById("out-closure").textContent = `Cuenta actual (closure privado): ${actual}`;
+    window.registrarFuncionLog(`Closure incrementar() -> ${actual}`);
+});
 
-//const sayHi = nombre=> document.write(frase) abreviatura de funciones
+document.getElementById("btn-closure-reset").addEventListener("click", () => {
+    const actual = contador.reiniciar();
+    document.getElementById("out-closure").textContent = `Cuenta reiniciada: ${actual}`;
+    window.registrarFuncionLog(`Closure reiniciar() -> ${actual}`);
+});
 
-// Invocación de la función expresada sayHi.
-sayHi("Pedro");
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+window.registrarFuncionLog("Laboratorio de Funciones listo.");

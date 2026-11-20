@@ -1,36 +1,54 @@
-/**
- * ESTILOS LABORATORIO: CONDICIONALES
- * Diseño enfocado en la toma de decisiones lógicas.
- */
-
-body { 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografías seguras para la web */
-    text-align: center;                 /* Alineación: centra el contenido del contenedor */
-    padding-top: 80px;                  /* Margen interno superior: separa el contenido del borde */
-    background-color: #f0f4f8;          /* Color: azul grisáceo muy pálido, calmante */
-    color: #2d3748;                     /* Color: gris azulado oscuro para el texto */
-    
-    /* Posicionamiento Flex */
-    display: flex;                      /* Flex: permite el centrado total */
-    justify-content: center;            /* Centra en el eje X */
-    align-items: center;                /* Centra en el eje Y */
-    min-height: 100vh;                  /* Alto: ocupa toda la ventana visible */
-    margin: 0;                          /* Reset: limpia márgenes */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-2: #1e293b;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #e11d48;
+    --accent-soft: rgba(225, 29, 72, 0.16);
+    --radius: 14px;
 }
 
-.container { 
-    background: white;                  /* Fondo: blanco puro para la tarjeta */
-    padding: 40px;                      /* Espaciado: 40px en todos los lados internos */
-    border-radius: 15px;                /* Radio: curvas suaves y modernas */
-    display: inline-block;              /* Tamaño: auto-ajustable al contenido */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05); /* Elevación: sombra ligera para "flotar" el elemento */
-    border: 1px solid #e2e8f0;          /* Línea: borde casi invisible para definición */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at top, #4c0519 0%, var(--bg) 55%);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    padding: 2rem 1rem 4rem;
 }
 
-/* Estilo de resaltado para instrucciones técnicas */
-code { 
-    color: #e53e3e;                     /* Color: rojo suave para llamar la atención */
-    background: #fff5f5;                /* Fondo: rosado muy claro para contraste de código */
-    padding: 2px 5px;                   /* Padding: pequeño margen para el bloque de código */
-    border-radius: 4px;                 /* Redondeo: consistente con el resto del diseño */
-}
+.app-shell { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+.hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 2rem; }
+.badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #fb7185; background: var(--accent-soft); padding: 0.25rem 0.75rem; border-radius: 999px; margin-bottom: 0.5rem; }
+.hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: #fff; }
+.hero p { color: var(--muted); max-width: 65ch; margin-top: 0.35rem; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.card h2 { font-size: 1.1rem; color: #fff; }
+.note { font-size: 0.9rem; color: var(--muted); background: rgba(15, 23, 42, 0.7); border-left: 3px solid var(--accent); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; }
+.controls { display: flex; flex-direction: column; gap: 0.75rem; }
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+
+label { font-size: 0.85rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: 0.25rem; }
+input, select { width: 100%; padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 0.95rem; }
+input[type="checkbox"] { width: auto; accent-color: var(--accent); }
+input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+button { cursor: pointer; border: none; border-radius: 8px; padding: 0.55rem 0.95rem; font-weight: 600; font-size: 0.9rem; background: var(--accent); color: #fff; transition: filter 0.15s ease; }
+button:hover { filter: brightness(1.1); }
+button.secondary { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
+
+.output { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.88rem; color: #e2e8f0; min-height: 3.2rem; white-space: pre-wrap; word-break: break-word; }
+.code-preview { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.82rem; color: #fda4af; overflow-x: auto; }
+.console-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.console-log { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.83rem; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.35rem; }
+.log-line { color: #cbd5e1; }
+.log-line.ok { color: #34d399; }
+.log-line.warn { color: #fbbf24; }
+.log-line.err { color: #f87171; }

@@ -309,3 +309,116 @@ self.onmessage = (e) => {
 * **La comunicación** se realiza exclusivamente mediante paso de mensajes usando **`postMessage()`** para enviar datos y el evento **`onmessage`** (`e.data`) para recibirlos.
 * **El método `terminate()`** finaliza inmediatamente la ejecución del worker desde el hilo principal, liberando sus recursos del sistema.
 * **Por seguridad (*Same-Origin*)**, el script del worker debe pertenecer al mismo origen que la página principal y no tiene acceso directo al DOM ni al objeto `window`.
+
+
+---
+
+# Conceptos Complementarios: Transferable Objects, `messageerror` y Blob Workers
+
+### 1. Transferable Objects (`ArrayBuffer`)
+Por defecto `postMessage(datos)` clona los datos. Si necesitas mover decenas de megabytes (audio, imágenes, buffers binarios) sin duplicar memoria RAM, transfiere la propiedad del buffer en **~0 ms**:
+```javascript
+const buffer = new ArrayBuffer(1024 * 1024 * 32); // 32 MB
+worker.postMessage(buffer, [buffer]);
+// Aquí buffer.byteLength ahora es 0 porque pertenece al Worker
+```
+
+### 2. Workers Dinámicos en Línea (`Blob` + `URL.createObjectURL`)
+Permite crear un worker sin un archivo `.js` externo separado:
+```javascript
+const codigo = `self.onmessage = (e) => self.postMessage(e.data * 2);`;
+const blob = new Blob([codigo], { type: "application/javascript" });
+const url = URL.createObjectURL(blob);
+const worker = new Worker(url);
+URL.revokeObjectURL(url); // Libera la URL temporal de memoria
+```
+
+### 3. Captura de errores de serialización (`messageerror`)
+Además de `worker.onerror` (errores de ejecución), `worker.addEventListener("messageerror", ...)` captura fallos cuando un objeto no puede clonarse (por ejemplo, funciones o nodos del DOM).
+
+### 4. `SharedWorker` vs `DedicatedWorker`
+* **`DedicatedWorker` (`new Worker(...)`):** Exclusivo de la pestaña o script que lo creó. Al cerrar la pestaña, el worker se destruye.
+* **`SharedWorker` (`new SharedWorker(...)`):** Puede ser compartido simultáneamente por **múltiples pestañas, ventanas o iframes del mismo origen**. La comunicación se realiza a través de un puerto (`worker.port.postMessage()` y `worker.port.onmessage` tras llamar a `worker.port.start()`), y dentro del worker se escucha el evento `onconnect`.
+
+```javascript
+// En cualquier pestaña (main.js)
+const shared = new SharedWorker("shared-worker.js");
+shared.port.start();
+shared.port.postMessage("Hola desde una pestaña");
+shared.port.onmessage = (e) => console.log("SharedWorker dice:", e.data);
+```
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Crea un Web Worker que reciba un número mediante `postMessage()` y devuelva su cuadrado (`n * n`) al hilo principal.
+
+## Nivel 2
+Configura un worker con `{ name: "validador-datos" }` que escuche errores mediante `worker.onerror` y se cierre a sí mismo desde su interior usando `self.close()` tras responder.
+
+## Nivel 3
+Implementa una función `ejecutarEnWorker(fnTexto, datos)` que genere un `Blob Worker` temporal, envíe `datos`, resuelva una **Promesa** con la respuesta del worker y llame automáticamente a `worker.terminate()` y `URL.revokeObjectURL()`.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+// En worker.js:
+self.onmessage = (e) => self.postMessage(e.data * e.data);
+
+// En main.js:
+const w = new Worker("worker.js");
+w.onmessage = (e) => console.log("Cuadrado:", e.data);
+w.postMessage(12);
+```
+
+## Solución Nivel 2
+```javascript
+// En worker.js:
+self.onmessage = (e) => {
+    self.postMessage(`Procesado por ${self.name}: ${e.data}`);
+    self.close();
+};
+
+// En main.js:
+const w = new Worker("worker.js", { name: "validador-datos" });
+w.onerror = (err) => console.error("Error en worker:", err.message);
+w.postMessage("OK");
+```
+
+## Solución Nivel 3
+```javascript
+const ejecutarEnWorker = (codigoWorker, datos) => new Promise((resolve, reject) => {
+    const blob = new Blob([codigoWorker], { type: "application/javascript" });
+    const url = URL.createObjectURL(blob);
+    const worker = new Worker(url);
+
+    worker.onmessage = (e) => {
+        resolve(e.data);
+        worker.terminate();
+        URL.revokeObjectURL(url);
+    };
+    worker.onerror = (err) => {
+        reject(err);
+        worker.terminate();
+        URL.revokeObjectURL(url);
+    };
+    worker.postMessage(datos);
+});
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento | Dónde se usa | Función |
+| :--- | :--- | :--- |
+| `new Worker(url, options)` | Main Thread | Crea hilo secundario (`type`, `credentials`, `name`) |
+| `postMessage(data, [transfer])` | Ambos | Envía copia o transfiere `ArrayBuffer` |
+| `onmessage` / `addEventListener` | Ambos | Recibe datos en `e.data` |
+| `worker.terminate()` / `self.close()` | Main / Worker | Destruye el hilo y libera memoria |
+| `worker.onerror` | Main Thread | Captura excepciones del hilo secundario |

@@ -13,7 +13,7 @@ const AppState = {
     // Índice de la diapositiva actualmente visible (inicia en 1: Portada)
     currentSlide: 1,
     // Cantidad total de diapositivas en la presentación
-    totalSlides: 10,
+    totalSlides: 11,
     // Booleano: true para modo diapositivas (slides), false para modo documento continuo
     isPresentationMode: true,
     // Booleano: true si los efectos de sonido sintetizados están activos

@@ -1,25 +1,101 @@
-<!DOCTYPE html> <!-- HTML5 Standard -->
-
-<!-- 
-    LABORATORIO: OPERADORES ARITMÉTICOS Y LÓGICOS
-    Enfoque: Procesamiento de datos y evaluación de expresiones booleanas.
--->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Soporte de idioma -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive -->
-    <title>JS Junior - Operadores</title>
-    <!-- Vinculación del archivo de estilos externo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de Operadores</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Práctica de Operadores</h1>
-        <p>Este laboratorio evalúa <b>Asignación, Comparación y Lógica</b>.</p>
-        <p>Abre la consola con <code>Ctrl + Shift + I</code> para ver los cálculos en tiempo real.</p>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 02 · Operadores ES2020+</span>
+            <h1>Operadores Aritméticos, Lógicos y Modernos</h1>
+            <p>Experimenta con asignación compuesta, igualdad estricta (<code>===</code>), Nullish Coalescing (<code>??</code>), Optional Chaining (<code>?.</code>) y asignación lógica.</p>
+        </header>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Acumulador con asignación compuesta -->
+            <section class="card" aria-labelledby="op1">
+                <h2 id="op1">1. Asignación Compuesta</h2>
+                <p class="note">Aplica operadores sobre una variable de estado (<code>valor = 10</code> inicialmente) y observa cómo muta paso a paso.</p>
+                <div class="row">
+                    <button type="button" data-op="add">+= 5</button>
+                    <button type="button" data-op="sub">-= 3</button>
+                    <button type="button" data-op="mul">*= 2</button>
+                    <button type="button" data-op="pow">**= 2</button>
+                    <button type="button" data-op="mod">%= 3</button>
+                    <button type="button" data-op="reset" class="secondary">Reset (10)</button>
+                </div>
+                <pre class="code-preview">let valor = 10; valor += 5; // 15</pre>
+                <div id="out-acumulador" class="output" aria-live="polite">Valor actual: 10</div>
+            </section>
+
+            <!-- Tarjeta 2: == vs === -->
+            <section class="card" aria-labelledby="op2">
+                <h2 id="op2">2. Igualdad Débil (<code>==</code>) vs Estricta (<code>===</code>)</h2>
+                <p class="note"><code>==</code> convierte tipos automáticamente (coerción). <code>===</code> exige que valor y tipo coincidan.</p>
+                <div class="controls">
+                    <div>
+                        <label for="cmp-preset">Caso de comparación:</label>
+                        <select id="cmp-preset">
+                            <option value="5_str5">5 vs "5"</option>
+                            <option value="0_false">0 vs false</option>
+                            <option value="empty_0">"" vs 0</option>
+                            <option value="null_undef">null vs undefined</option>
+                            <option value="5_5">5 vs 5</option>
+                        </select>
+                    </div>
+                    <button id="btn-comparar" type="button">Comparar</button>
+                </div>
+                <pre class="code-preview">5 == "5"  // true (⚠️ coerción)
+5 === "5" // false (✅ estricto)</pre>
+                <div id="out-comparar" class="output" aria-live="polite">Elige un par y presiona "Comparar".</div>
+            </section>
+
+            <!-- Tarjeta 3: || vs ?? -->
+            <section class="card" aria-labelledby="op3">
+                <h2 id="op3">3. OR (<code>||</code>) vs Nullish Coalescing (<code>??</code>)</h2>
+                <p class="note"><code>||</code> reemplaza cualquier valor <em>falsy</em> (<code>0</code>, <code>""</code>, <code>false</code>). <code>??</code> solo actúa ante <code>null</code> o <code>undefined</code>.</p>
+                <div class="controls">
+                    <div>
+                        <label for="nullish-input">Simular valor recibido:</label>
+                        <select id="nullish-input">
+                            <option value="0">0 (número cero válido)</option>
+                            <option value="empty">"" (string vacío)</option>
+                            <option value="false">false (booleano)</option>
+                            <option value="null">null</option>
+                            <option value="undefined">undefined</option>
+                        </select>
+                    </div>
+                    <button id="btn-nullish" type="button">Evaluar con defecto = 100</button>
+                </div>
+                <pre class="code-preview">valor || 100  // vs  valor ?? 100</pre>
+                <div id="out-nullish" class="output" aria-live="polite">Comprueba por qué ?? es vital para valores como 0.</div>
+            </section>
+
+            <!-- Tarjeta 4: Optional Chaining ?. -->
+            <section class="card" aria-labelledby="op4">
+                <h2 id="op4">4. Optional Chaining (<code>?.</code>)</h2>
+                <p class="note">Evita el clásico <code>TypeError</code> al leer propiedades anidadas que podrían no existir en una respuesta de API.</p>
+                <div class="row">
+                    <button id="btn-chain-ok" type="button">Usuario con dirección</button>
+                    <button id="btn-chain-null" type="button" class="secondary">Usuario sin perfil (null)</button>
+                </div>
+                <pre class="code-preview">const ciudad = user.perfil?.direccion?.ciudad ?? "Sin ciudad";</pre>
+                <div id="out-chain" class="output" aria-live="polite">Prueba ambos objetos para ver cómo ?. protege tu app.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
     </div>
 
-    <!-- El script procesa la lógica matemática y lógica definida en operadores.js -->
     <script src="operadores.js"></script>
 </body>
 </html>

@@ -1,58 +1,88 @@
-/**
- * LABORATORIO: TEMPORIZADORES EN JAVASCRIPT
- * Este script explora el uso de funciones de temporización asíncronas en JavaScript:
- * `setTimeout` para ejecutar una función una vez después de un retardo, y
- * `setInterval` para ejecutar una función repetidamente con un intervalo fijo.
- * También se demuestra cómo cancelar estos temporizadores con `clearTimeout` y `clearInterval`.
- */
+// Guía Interactiva — Temporizadores JS
 
-console.log("%c--- LABORATORIO: TEMPORIZADORES ---", "color: #3b82f6; font-weight: bold; font-size: 12px;");
+let timeoutId = null;
+let intervalId = null;
+let decimas = 0;
 
-/*
- * 1. setTimeout()
- * Ejecuta una función o un fragmento de código una sola vez después de un retardo especificado.
- * Sintaxis: setTimeout(funcion, retardoEnMilisegundos, [arg1, arg2, ...])
- * Devuelve un ID numérico que puede usarse con clearTimeout().
- */
-console.log("Iniciando setTimeout: Se mostrará un mensaje después de 3 segundos (si no se cancela).");
-const timeout = setTimeout(() => {
-   // Esta función se ejecutará 3000 milisegundos (3 segundos) después de que se llame a setTimeout.
-   document.write('Han pasado 3 segundos (desde setTimeout).');
-   console.log("Mensaje de setTimeout mostrado.");
-}, 3000);
+const delayInput = document.getElementById("delayInput");
+const btnStartTimeout = document.getElementById("btnStartTimeout");
+const btnCancelTimeout = document.getElementById("btnCancelTimeout");
+const timeoutOutput = document.getElementById("timeoutOutput");
 
-// 2. clearTimeout()
-// Cancela la ejecución programada por setTimeout().
-// Recibe como argumento el ID devuelto por setTimeout().
-console.log("Intentando cancelar el setTimeout inmediatamente después de programarlo.");
-clearTimeout(timeout); // Se cancela el temporizador 'timeout'. El mensaje "Han pasado 3 segundos" NO se mostrará.
-console.log("setTimeout cancelado. El mensaje no debería aparecer en el documento.");
+btnStartTimeout.addEventListener("click", () => {
+    const ms = Math.max(200, Number(delayInput.value) || 2000);
+    if (timeoutId) clearTimeout(timeoutId);
 
+    timeoutOutput.className = "output warn";
+    timeoutOutput.textContent = `Esperando ${ms} ms...`;
+    btnCancelTimeout.disabled = false;
 
-/*
- * 3. setInterval()
- * Ejecuta una función o un fragmento de código repetidamente, con un retardo fijo entre cada ejecución.
- * Sintaxis: setInterval(funcion, intervaloEnMilisegundos, [arg1, arg2, ...])
- * Devuelve un ID numérico que puede usarse con clearInterval().
- */
-console.log("\nIniciando setInterval: Se mostrará un mensaje cada 3 segundos (si no se cancela).");
-const intervalo =setInterval(() => {
-   // Esta función se ejecutará cada 3000 milisegundos (3 segundos) indefinidamente.
-   document.write('Han pasado 3 segundos (desde setInterval).<br>');
-   console.log("Mensaje de setInterval mostrado.");
-}, 3000);
+    timeoutId = setTimeout(() => {
+        timeoutOutput.className = "output ok";
+        timeoutOutput.textContent = `¡setTimeout ejecutado tras ${ms} ms!`;
+        btnCancelTimeout.disabled = true;
+        timeoutId = null;
+    }, ms);
+});
 
-/*
- * 4. clearInterval()
- * Cancela la ejecución repetida programada por setInterval().
- * Recibe como argumento el ID devuelto por setInterval().
- * Sin esta llamada, el setInterval se ejecutaría indefinidamente, lo que podría causar problemas de rendimiento.
- */
-console.log("Programando la cancelación del setInterval después de 5 segundos para permitir algunas ejecuciones.");
-// Para demostrar que setInterval funciona, lo dejaremos correr por un corto tiempo antes de cancelarlo.
-setTimeout(() => {
-    clearInterval(intervalo); // Se cancela el temporizador 'intervalo'.
-    console.log("setInterval cancelado después de 5 segundos.");
-}, 5000); // Cancela el intervalo después de 5 segundos (permitiendo al menos una ejecución completa).
+btnCancelTimeout.addEventListener("click", () => {
+    if (!timeoutId) return;
+    clearTimeout(timeoutId);
+    timeoutId = null;
+    btnCancelTimeout.disabled = true;
+    timeoutOutput.className = "output";
+    timeoutOutput.textContent = "Temporizador cancelado con clearTimeout().";
+});
 
-console.log("\nFin del script principal. Revisa la consola y el documento para ver los resultados de los temporizadores.");
+// Cronómetro con setInterval
+const cronoDisplay = document.getElementById("cronoDisplay");
+const btnStartInterval = document.getElementById("btnStartInterval");
+const btnPauseInterval = document.getElementById("btnPauseInterval");
+const btnResetInterval = document.getElementById("btnResetInterval");
+
+function renderCrono() {
+    cronoDisplay.textContent = `${(decimas / 10).toFixed(1).padStart(4, "0")} s`;
+}
+
+btnStartInterval.addEventListener("click", () => {
+    if (intervalId) return;
+    intervalId = setInterval(() => {
+        decimas += 1;
+        renderCrono();
+    }, 100);
+    btnStartInterval.disabled = true;
+    btnPauseInterval.disabled = false;
+});
+
+btnPauseInterval.addEventListener("click", () => {
+    clearInterval(intervalId);
+    intervalId = null;
+    btnStartInterval.disabled = false;
+    btnPauseInterval.disabled = true;
+});
+
+btnResetInterval.addEventListener("click", () => {
+    clearInterval(intervalId);
+    intervalId = null;
+    decimas = 0;
+    renderCrono();
+    btnStartInterval.disabled = false;
+    btnPauseInterval.disabled = true;
+});
+
+// Event Loop Demo: Microtasks vs Macrotasks
+const loopOutput = document.getElementById("loopOutput");
+
+document.getElementById("btnEventLoop").addEventListener("click", () => {
+    loopOutput.innerHTML = "";
+    const pushLine = (txt) => {
+        const div = document.createElement("div");
+        div.textContent = txt;
+        loopOutput.appendChild(div);
+    };
+
+    pushLine("1. Código síncrono (inicio)");
+    setTimeout(() => pushLine("4. Macrotask: setTimeout(..., 0)"), 0);
+    Promise.resolve().then(() => pushLine("3. Microtask: Promise.resolve().then(...)"));
+    pushLine("2. Código síncrono (fin)");
+});

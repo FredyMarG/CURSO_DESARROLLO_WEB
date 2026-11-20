@@ -42,7 +42,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 11</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -536,6 +536,47 @@
 
                 <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
                     <strong>🎓 ¡Felicidades!</strong> Has completado el módulo de <strong>Web Workers API en JavaScript Master Level</strong>.
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Transferables, Blob Workers y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. Transferable Objects, Blob Workers y Cheatsheet</h2>
+                    <p class="slide-description">Transfiere memoria binaria en ~0 ms sin copiarla, crea workers en línea y depura errores.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🚀</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Transferable Objects</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const buf = new ArrayBuffer(32 * 1024 * 1024);
+worker.postMessage(buf, [buf]);
+// buf.byteLength === 0 en el emisor</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Cede la propiedad de grandes bloques de memoria sin duplicar RAM.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🧩</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Inline Blob Worker</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const blob = new Blob([code], { type: 'text/javascript' });
+const w = new Worker(URL.createObjectURL(blob));</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Útil para librerías autocontenidas sin archivos externos.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>postMessage() / onmessage (e.data)
+worker.terminate() / self.close()
+worker.onerror & messageerror</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Sin acceso a document ni window dentro del hilo secundario.</p>
+                    </div>
                 </div>
             </div>
         </section>

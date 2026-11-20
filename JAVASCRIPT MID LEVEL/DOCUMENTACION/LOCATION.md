@@ -747,3 +747,39 @@ Es fundamental para:
 🔥 dashboards  
 🔥 SPAs  
 🔥 navegación dinámica
+
+---
+
+# 🚀 Estándar Moderno: `URL` y `URLSearchParams`
+
+Aunque `window.location` sigue vigente para leer o navegar, para **construir o manipular URLs y parámetros de búsqueda (`?q=js&page=2`)** sin errores de concatenación se usan las clases nativas `URL` y `URLSearchParams`:
+
+```javascript
+// Parsear la URL actual de forma segura
+const urlActual = new URL(window.location.href);
+const pagina = urlActual.searchParams.get("page") ?? "1";
+
+// Construir o modificar parámetros sin recargar
+const params = new URLSearchParams(window.location.search);
+params.set("orden", "recientes");
+params.delete("debug");
+
+// Actualizar la barra de direcciones sin recargar la página (SPAs)
+history.replaceState(null, "", `?${params.toString()}`);
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Propiedad / API | Qué hace | Ejemplo |
+| :--- | :--- | :--- |
+| `location.href` | Lee la URL completa o redirige al asignarle valor. | `location.href = "/dashboard";` |
+| `location.pathname` | Ruta relativa sin dominio ni query string. | `"/productos/42"` |
+| `location.search` | Cadena de parámetros desde `?`. | `"?categoria=tech&page=2"` |
+| `location.hash` | Fragmento ancla desde `#`. | `"#seccion-precios"` |
+| `location.assign(url)` | Navega guardando entrada en el historial. | `location.assign("https://ejemplo.com")` |
+| `location.replace(url)` | Redirige reemplazando el historial (sin botón Atrás). | `location.replace("/login")` |
+| `location.reload()` | Recarga la página actual. | `location.reload()` |
+| `new URL(str)` | Parsea protocolo, host, pathname y searchParams. | `new URL(location.href).hostname` |
+| `new URLSearchParams(str)` | Lee, agrega, modifica o serializa query params. | `params.get("token")` |

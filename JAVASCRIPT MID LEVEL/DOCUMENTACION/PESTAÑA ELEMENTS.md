@@ -1591,3 +1591,26 @@ Después de dominar Elements deberías aprender:
 7. Application
 
 Porque juntas forman el ecosistema completo de debugging profesional.
+
+---
+
+# 🚀 Funciones Modernas en Chrome DevTools (Elements)
+
+* **Overlays de CSS Grid y Flexbox:** Insignias `grid` y `flex` junto al nodo HTML para visualizar líneas, áreas, `gap` y alineación directamente en la página.
+* **Forzar Estado (`:hov`):** Simula `:hover`, `:active`, `:focus`, `:focus-visible` y `:target` sin mantener el cursor encima.
+* **Emulación de Preferencias (`Rendering`):** Prueba `prefers-color-scheme: dark/light` y `prefers-reduced-motion`.
+* **DOM Breakpoints (`Break on...`):** Pausa el JavaScript exactamente en la línea que modifica un subárbol, un atributo o elimina un nodo.
+* **Accessibility Tree:** Alterna la vista de accesibilidad para verificar roles ARIA, nombres accesibles y contraste de color.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Herramienta / Atajo | Propósito | Cómo usarla |
+| :--- | :--- | :--- |
+| `Ctrl+Shift+C` (`Cmd+Shift+C`) | Activa el selector visual de elementos. | Haz clic en cualquier parte de la página. |
+| `$0` en Console | Accede al nodo actualmente seleccionado. | Úsalo tras seleccionar un elemento en Elements. |
+| Panel **Styles** / **Computed** | Edita CSS en vivo y ve valores finales calculados. | Útil para depurar cascada y especificidad. |
+| **Box Model** interactivo | Visualiza y edita `margin`, `border`, `padding`, `content`. | Haz doble clic en cualquier número. |
+| **Event Listeners** | Lista todos los listeners adjuntos al nodo y ancestros. | Marca *Ancestors* o *Passive* para auditar. |
+| `Break on > Attribute modifications` | Pausa el JS cuando cambia un atributo del nodo. | Clic derecho sobre el nodo en el árbol DOM. |

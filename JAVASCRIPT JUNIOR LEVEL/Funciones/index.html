@@ -1,18 +1,90 @@
-<!DOCTYPE html> <!-- HTML5 Standard -->
-<!-- 
-    PRÁCTICA DE FUNCIONES: Modularidad y Reutilización
-    Aquí se prueban funciones declarativas, de flecha (Arrow Functions) y callbacks.
--->
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Junior - Funciones</title>
+    <title>JS Junior — Guía Interactiva de Funciones</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Entorno de Pruebas: Funciones en JavaScript</h1>
-    <p>La lógica de este ejercicio se procesa enteramente en la consola.</p>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 10 · Modularidad y Scope</span>
+            <h1>Funciones, Callbacks y Closures</h1>
+            <p>Explora funciones declaradas vs flecha, parámetros por defecto y Rest (<code>...args</code>), callbacks, closures con estado privado y listeners de un solo uso.</p>
+        </header>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Parámetros por defecto y Arrow -->
+            <section class="card" aria-labelledby="fn1">
+                <h2 id="fn1">1. Parámetros por Defecto & Arrow Functions</h2>
+                <p class="note">Si dejas el nombre vacío, la función usa el valor por defecto <code>"Invitado"</code>.</p>
+                <div class="controls">
+                    <div>
+                        <label for="fn-nombre">Nombre (opcional):</label>
+                        <input id="fn-nombre" type="text" placeholder="Déjalo vacío para probar el default">
+                    </div>
+                    <button id="btn-saludar" type="button">Invocar saludar(nombre)</button>
+                </div>
+                <pre class="code-preview">const saludar = (nombre = "Invitado") => `¡Hola, ${nombre}!`;</pre>
+                <div id="out-saludar" class="output" aria-live="polite">Pulsa el botón para invocar la función.</div>
+            </section>
+
+            <!-- Tarjeta 2: Parámetros Rest + Callbacks -->
+            <section class="card" aria-labelledby="fn2">
+                <h2 id="fn2">2. Parámetros Rest (<code>...nums</code>) & Callbacks</h2>
+                <p class="note">Ingresa números separados por coma y elige qué operación callback aplicar sobre ellos.</p>
+                <div class="controls">
+                    <div>
+                        <label for="fn-nums">Números (separados por coma):</label>
+                        <input id="fn-nums" type="text" value="10, 25, 15, 50">
+                    </div>
+                    <div class="row">
+                        <button type="button" data-cb="sumar">Callback: Sumar</button>
+                        <button type="button" data-cb="promedio" class="secondary">Callback: Promedio</button>
+                    </div>
+                </div>
+                <pre class="code-preview">const operar = (cb, ...nums) => cb(nums);</pre>
+                <div id="out-rest" class="output" aria-live="polite">Elige un callback para procesar los números.</div>
+            </section>
+
+            <!-- Tarjeta 3: Closures -->
+            <section class="card" aria-labelledby="fn3">
+                <h2 id="fn3">3. Closures (Estado Privado)</h2>
+                <p class="note">Cada contador recuerda su propia variable <code>cuenta</code> interna gracias a su closure léxico.</p>
+                <div class="row">
+                    <button id="btn-closure-inc" type="button">Incrementar Closure (+1)</button>
+                    <button id="btn-closure-reset" type="button" class="secondary">Reiniciar</button>
+                </div>
+                <pre class="code-preview">function crearContador() {
+  let cuenta = 0;
+  return () => ++cuenta;
+}</pre>
+                <div id="out-closure" class="output" aria-live="polite">Cuenta actual: 0</div>
+            </section>
+
+            <!-- Tarjeta 4: Listener único (main.js) -->
+            <section class="card" aria-labelledby="fn4">
+                <h2 id="fn4">4. Evento Único (<code>removeEventListener</code>)</h2>
+                <p class="note">El botón inferior ejecuta su saludo solo en el <strong>primer clic</strong> y luego se auto-elimina con <code>removeEventListener</code>.</p>
+                <div class="row">
+                    <button class="button" type="button">Probar Listener Único</button>
+                </div>
+                <pre class="code-preview">btn.addEventListener("click", saludarUnaVez);</pre>
+                <div id="out-listener" class="output" aria-live="polite">Haz clic en el botón (1ª vez saluda y se desuscribe).</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
+    </div>
 
     <script src="funciones.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

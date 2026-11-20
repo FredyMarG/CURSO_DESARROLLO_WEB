@@ -839,3 +839,42 @@ Comprenderlos es fundamental para escribir aplicaciones robustas y profesionales
 ✅ Manejo estructurado de errores
 
 ✅ Arquitectura resiliente
+
+---
+
+# 🚀 Errores Personalizados y `cause` (ES2022)
+
+En aplicaciones profesionales se crean clases de error propias heredando de `Error` y conservando la causa raíz con `{ cause }`:
+
+```javascript
+class HttpError extends Error {
+    constructor(status, message, options) {
+        super(message, options);
+        this.name = "HttpError";
+        this.status = status;
+    }
+}
+
+try {
+    throw new HttpError(404, "Usuario no encontrado", { cause: originalErr });
+} catch (err) {
+    if (err instanceof HttpError) {
+        console.error(err.status, err.message, err.cause);
+    }
+}
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Tipo de Error | Cuándo ocurre | Ejemplo |
+| :--- | :--- | :--- |
+| `Error` | Error genérico o lanzado manualmente con `throw`. | `throw new Error("Algo falló")` |
+| `TypeError` | Operación sobre un tipo incompatible (`null.prop`). | `undefined.map(...)` |
+| `ReferenceError` | Variable no declarada o fuera de alcance (TDZ). | `console.log(noExiste)` |
+| `SyntaxError` | Código JS o JSON mal formado. | `JSON.parse("{mal}")` |
+| `RangeError` | Valor numérico fuera de rango válido o recursión infinita. | `new Array(-1)` |
+| `URIError` | Uso inválido de `decodeURIComponent` / `encodeURI`. | `decodeURIComponent("%")` |
+| `AggregateError` | Múltiples errores agrupados (ej. `Promise.any`). | `err.errors` |
+| `new Error(msg, { cause })` | Preserva la causa raíz al relanzar errores (ES2022). | `throw new Error("Fallo", { cause: e })` |

@@ -14,12 +14,14 @@
 5. Estructura de una petición y respuesta
 6. Métodos HTTP (Verbos)
 7. Códigos de Estado (Status Codes)
-8. Analogía del mundo real
-9. Diagrama de flujo mental
-10. Buenas prácticas
-11. Errores comunes
-12. Ejercicios
-13. Resumen
+8. CORS (Cross-Origin Resource Sharing) y Preflight `OPTIONS`
+9. Analogía del mundo real
+10. Diagrama de flujo mental
+11. Buenas prácticas
+12. Errores comunes
+13. Ejercicios
+14. Resumen
+15. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -131,18 +133,35 @@ El servidor utiliza un número de 3 dígitos para informarle rápidamente al cli
 ### 🟢 2xx — Respuestas Exitosas (Todo salió bien)
 *   **`200 OK`:** La petición fue exitosa y se devuelven los datos (común en `GET` y `PUT`).
 *   **`201 Created`:** El recurso se creó con éxito (común en respuestas de `POST`).
+*   **`204 No Content`:** Operación exitosa sin cuerpo de respuesta (muy común en `DELETE`).
 
-### 🟡 3xx — Redirecciones (El recurso se movió)
+### 🟡 3xx — Redirecciones y Caché
 *   **`301 Moved Permanently`:** La página o recurso cambió de dirección URL para siempre.
+*   **`304 Not Modified`:** El recurso no cambió desde la última petición; el navegador usa su caché local.
 
 ### 🔴 4xx — Errores del Cliente (Te equivocaste tú)
 *   **`400 Bad Request`:** Los datos enviados están mal formateados o incompletos.
-*   **`401 Unauthorized`:** No has iniciado sesión o no incluiste las credenciales necesarias.
+*   **`401 Unauthorized`:** No has iniciado sesión o tu token es inválido/expirado.
 *   **`403 Forbidden`:** El servidor sabe quién eres, pero **no tienes permisos** para entrar ahí.
 *   **`404 Not Found`:** El recurso o la ruta solicitada no existe.
+*   **`409 Conflict`:** Conflicto con el estado actual (ej. registrar un correo que ya existe).
+*   **`422 Unprocessable Entity`:** Sintaxis JSON válida, pero errores de validación de negocio.
+*   **`429 Too Many Requests`:** Superaste el límite de peticiones permitidas (Rate Limiting).
 
 ### 💥 5xx — Errores del Servidor (Se rompió el sistema)
 *   **`500 Internal Server Error`:** El código del servidor falló catastróficamente (un bug, base de datos caída, etc.).
+*   **`502 Bad Gateway` / `503 Service Unavailable` / `504 Gateway Timeout`:** Fallos de proxy, sobrecarga temporal o tiempo de espera agotado entre servidores.
+
+---
+
+# CORS (Cross-Origin Resource Sharing) y Preflight `OPTIONS`
+
+Por seguridad (**Same-Origin Policy**), los navegadores bloquean peticiones `fetch()` o `XHR` hacia un origen distinto (diferente protocolo, dominio o puerto, ej. de `http://localhost:5173` a `https://api.miweb.com`), a menos que el servidor responda con cabeceras **CORS** explícitas:
+
+*   **`Access-Control-Allow-Origin`:** Indica qué dominios pueden leer la respuesta (`*` o `https://miweb.com`).
+*   **`Access-Control-Allow-Methods`:** Verbos permitidos (`GET, POST, PUT, DELETE`).
+*   **`Access-Control-Allow-Headers`:** Cabeceras personalizadas permitidas (ej. `Authorization, Content-Type`).
+*   **Petición Preflight (`OPTIONS`):** Antes de enviar un `POST` con `application/json` o cabeceras `Authorization` a otro origen, el navegador envía automáticamente una petición previa `OPTIONS` para preguntar al servidor si tiene permiso. **CORS se configura en el servidor, nunca se "desactiva" en JavaScript del cliente.**
 
 ---
 
@@ -230,3 +249,19 @@ Diseña conceptualmente las rutas para una API REST de una biblioteca de libros.
 *   Para simular memoria y mantener sesiones abiertas, el cliente recurre a **Cookies y Tokens** en cada Request.
 *   Los **Métodos HTTP** (`GET`, `POST`, `PUT`, `PATCH`, `DELETE`) aportan un estándar de comportamiento semántico a las acciones web.
 *   Los **Códigos de Estado** le informan al navegador el destino de la operación de forma estandarizada mediante números de 3 dígitos divididos en familias del `100` al `500`.
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Concepto / Código | Significado / Uso | Ejemplo práctico |
+| :--- | :--- | :--- |
+| `GET` / `POST` | Leer recurso / Crear nuevo recurso. | `GET /api/users` · `POST /api/users` |
+| `PUT` / `PATCH` / `DELETE` | Reemplazar completo / Modificar parcial / Eliminar. | `PATCH /api/users/1` · `DELETE /api/users/1` |
+| `200` / `201` / `204` | OK / Creado / Éxito sin contenido en body. | Respuesta tras `DELETE` → `204` |
+| `301` / `304` | Redirección permanente / Usar caché local. | Optimización de recursos estáticos |
+| `400` / `401` / `403` | Petición inválida / Sin autenticar / Sin permisos. | Falta token JWT → `401` |
+| `404` / `409` / `422` / `429` | No existe / Conflicto / Validación fallida / Rate limit. | Email duplicado → `409` |
+| `500` / `502` / `503` | Error interno del servidor / Bad Gateway / No disponible. | Excepción no controlada en backend |
+| `Content-Type` / `Authorization` | Tipo de formato del body y credenciales Bearer/JWT. | `Content-Type: application/json` |
+| `CORS` + `OPTIONS` | Permiso entre orígenes distintos (preflight automático). | `Access-Control-Allow-Origin: *` |

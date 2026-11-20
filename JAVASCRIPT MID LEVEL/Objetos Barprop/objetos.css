@@ -1,60 +1,80 @@
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --success: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Fuente: Pila moderna para legibilidad universal */
-    background-color: #f8fafc; /* Color de fondo: Blanco grisáceo muy suave para confort visual */
-    color: #1e293b;            /* Color de texto: Gris oscuro (Slate-800) para legibilidad */
-    display: flex;             /* Layout: Activa Flexbox para centrado y control de flujo */
-    justify-content: center;   /* Alineación: Centra el contenido horizontalmente */
-    padding: 2rem;             /* Relleno: Margen interno de seguridad para el contenido */
-    margin: 0;                 /* Margen: Elimina el espaciado predeterminado del navegador */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-.container {
-    max-width: 800px;          /* Ancho máximo: Limita la expansión en pantallas ultra-panorámicas */
-    width: 100%;               /* Ancho: Ocupa el 100% del espacio disponible hasta el máximo */
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-header {
-    text-align: center;        /* Alineación: Centra el texto del encabezado */
-    margin-bottom: 3rem;       /* Margen: Separa el título del grid de tarjetas */
-}
-
-h1 { color: #2563eb; font-size: 2.25rem; margin-bottom: 0.5rem; } /* Estilo del título principal */
-.subtitle { color: #64748b; } /* Estilo del subtítulo en tono grisáceo */
-
-.grid {
-    display: grid;             /* Layout: Activa el sistema de cuadrícula bidimensional */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas: Adaptables según el ancho disponible */
-    gap: 1.5rem;               /* Brecha: Espacio uniforme de 24px entre tarjetas */
-}
-
-.status-card {
-    background: white;         /* Fondo: Superficie limpia para cada ítem de estado */
-    padding: 1.5rem;           /* Relleno: Espacio interno para el contenido de la card */
-    border-radius: 12px;       /* Bordes: Esquinas suavizadas para estética moderna */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Sombra: Aporta elevación sutil */
-    display: flex;             /* Layout: Flexbox interno para organizar el contenido */
-    flex-direction: column;    /* Dirección: Organiza el título y el badge verticalmente */
-    align-items: center;       /* Alineación: Centra los elementos hijos horizontalmente */
-    transition: transform 0.2s; /* Transición: Suaviza la animación del escalado en hover */
-}
-
-.status-card:hover { transform: translateY(-4px); } /* Hover: Efecto de elevación al interactuar */
-
-.status-card h3 {
-    font-size: 1rem;           /* Tamaño: Fuente base para el nombre de la barra */
-    margin-bottom: 1rem;       /* Margen: Separa el título del badge de estado */
-    color: #475569;            /* Color: Tono neutro para el encabezado de la card */
-}
-
 .badge {
-    padding: 0.5rem 1rem;      /* Relleno: Crea la forma de píldora del badge */
-    border-radius: 9999px;     /* Bordes: Máxima curvatura para estilo pill */
-    font-size: 0.875rem;       /* Tamaño: Fuente compacta para etiquetas */
-    font-weight: 600;          /* Grosor: Resalta el estado del componente */
-    text-transform: uppercase; /* Transformación: Todo en mayúsculas para estilo UI */
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-/* Clases de estado dinámicas */
-.status-visible { background-color: #dcfce7; color: #166534; } /* Estado: Verde para visibilidad activa */
-.status-hidden { background-color: #f1f5f9; color: #64748b; }  /* Estado: Gris para visibilidad oculta */
-.status-hidden::after { content: " (Hidden)"; }                /* Contenido: Sufijo explicativo para el badge oculto */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
+}
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.desc { color: var(--muted); font-size: 0.92rem; }
+.kv-list { display: flex; flex-direction: column; gap: 0.45rem; }
+.kv-item {
+    display: flex;
+    justify-content: space-between;
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
+}
+.kv-item strong { color: var(--success); }
+.btn {
+    background: var(--accent);
+    color: #082f49;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.output {
+    background: #0f172a;
+    border-left: 3px solid var(--accent);
+    padding: 0.85rem;
+    border-radius: 6px;
+    font-family: ui-monospace, monospace;
+    font-size: 0.88rem;
+}

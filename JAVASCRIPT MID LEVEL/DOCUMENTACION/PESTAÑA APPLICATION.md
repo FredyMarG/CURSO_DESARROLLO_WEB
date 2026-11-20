@@ -863,3 +863,25 @@ Dominarla significa:
 ✅ Background Services.
 ✅ Estrategias de cache.
 ✅ Debugging avanzado de almacenamiento.
+
+---
+
+# 🚀 Funciones Modernas en Chrome DevTools (Application)
+
+* **Storage Overview & Quota:** Gráfico de uso de almacenamiento por origen y botón **Clear site data** (incluye cookies de terceros y caché).
+* **Manifest & PWA Checks:** Verifica en tiempo real si el `manifest.json`, iconos y Service Worker cumplen los requisitos de instalabilidad.
+* **Service Workers:** Permite activar *Update on reload*, *Bypass for network* y simular eventos *Push* o *Sync* sin servidor.
+* **Cookies particionadas (CHIPS):** Inspección de atributos `SameSite`, `HttpOnly`, `Secure` y `Partition Key`.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Sección | Qué inspecciona / Permite | Caso de uso |
+| :--- | :--- | :--- |
+| **Local / Session Storage** | Pares clave-valor persistentes o por pestaña. | Editar tokens o preferencias en vivo. |
+| **IndexedDB** | Base de datos NoSQL asíncrona en el navegador. | Apps offline y almacenamiento de archivos/objetos. |
+| **Cookies** | `Name`, `Value`, `Domain`, `SameSite`, `HttpOnly`. | Depurar autenticación y expiración de sesión. |
+| **Service Workers** | Estado, actualización forzada y simulación offline. | Probar PWAs y estrategias de caché. |
+| **Cache Storage** | Respuestas HTTP cacheadas por Service Workers. | Auditar recursos guardados para modo offline. |
+| **Storage (Clear site data)** | Limpia todo el almacenamiento del origen en 1 clic. | Resetear estado limpio al probar flujos de login. |

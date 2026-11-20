@@ -1,27 +1,25 @@
 /**
- * GESTIÓN DE EVENTOS Y CICLO DE VIDA DE LISTENERS
- * Este script demuestra cómo registrar, ejecutar y eliminar escuchadores de eventos.
+ * GESTIÓN DE EVENTOS Y CICLO DE VIDA DE LISTENERS (sin alert bloqueante)
  */
+
+"use strict";
 
 const button = document.querySelector(".button");
+const outListener = document.getElementById("out-listener");
 
-// Registramos el evento 'click'. Nota: Pasamos la referencia de la función 'saludar' sin paréntesis.
-button.addEventListener("click", saludar);
-
-/**
- * Saluda y se auto-elimina como listener para ejecutarse solo una vez.
- * Para usar removeEventListener, es obligatorio pasar la misma referencia de función que se usó en addEventListener.
- */
-function saludar() {
-    alert("Hola!");
-    button.removeEventListener("click", saludar);
+function saludarUnaVez() {
+    if (outListener) {
+        outListener.textContent = "✅ ¡Hola! Este listener se ejecutó 1 vez y ahora se ha auto-eliminado.";
+    }
+    if (typeof window.registrarFuncionLog === "function") {
+        window.registrarFuncionLog("saludarUnaVez() ejecutado y eliminado con removeEventListener.");
+    }
+    button.removeEventListener("click", saludarUnaVez);
 }
 
-/**
- * Listener persistente mediante una función de flecha (anónima).
- * @param {Event} e - El objeto de evento que contiene toda la información de la interacción.
- * .target: Identifica exactamente qué elemento recibió el clic.
- */
-button.addEventListener("click", (e)=>{
-    console.log(e.target);
-});
+if (button) {
+    button.addEventListener("click", saludarUnaVez);
+    button.addEventListener("click", (e) => {
+        console.log("Listener persistente (target):", e.currentTarget);
+    });
+}

@@ -1,93 +1,151 @@
-# ⚡ GUÍA DE FUNCIONES EN JAVASCRIPT
+# ⚡ Guía Completa de Funciones en JavaScript
 
-Una función es un bloque de código diseñado para realizar una tarea específica. Se define una vez y se puede ejecutar (llamar) muchas veces.
+Las funciones son bloques de código reutilizables que encapsulan lógica. En JavaScript las funciones son **ciudadanos de primera clase**: pueden guardarse en variables, pasarse como argumentos (*callbacks*) y devolverse desde otras funciones (*closures*).
 
 ---
 
-# 1️⃣ Declaración de Funciones
-Es la forma clásica. Goza de **Hoisting** (puedes llamarla antes de que aparezca en el código).
+## 1. Formas de Definir Funciones
 
-```js
+### A. Declaración de Función (*Function Declaration*)
+Tiene **Hoisting completo**: puedes invocarla incluso líneas antes de su definición.
+
+```javascript
+console.log(saludar("Ana")); // ✅ Funciona por hoisting
+
 function saludar(nombre) {
-    return `Hola ${nombre}`;
+    return `Hola, ${nombre}`;
 }
 ```
 
----
+### B. Expresión de Función (*Function Expression*)
+Se asigna a una variable (`const`). No tiene hoisting usable antes de su línea (está en la TDZ).
 
-# 2️⃣ Expresiones de Función
-La función se guarda en una variable. No tiene hoisting.
-
-```js
-const sumar = function(a, b) {
+```javascript
+const sumar = function (a, b) {
     return a + b;
 };
 ```
 
----
+### C. Funciones Flecha (*Arrow Functions* — ES6+)
+Sintaxis concisa, ideal para callbacks y funciones cortas.
 
-# 3️⃣ Funciones Flecha (Arrow Functions) 🏹
-Introducidas en ES6. Son más cortas y modernas.
+```javascript
+// Forma completa
+const multiplicar = (a, b) => {
+    return a * b;
+};
 
-```js
-const multiplicar = (a, b) => a * b;
+// Retorno implícito (sin llaves)
+const doble = n => n * 2;
+
+// ⚠️ Para retornar implícitamente un objeto literal, envuélvelo en paréntesis:
+const crearUsuario = (nombre, rol) => ({ nombre, rol });
 ```
 
-### 🧠 Reglas de las Arrow Functions:
-1.  Si solo tienen **un parámetro**, puedes quitar los paréntesis: `n => n * 2`.
-2.  Si solo tienen **una línea**, puedes quitar las llaves `{}` y el `return` (el retorno es implícito).
-3.  **Contexto `this`:** No tienen su propio `this`, heredan el del scope padre (vital para el DOM).
+**Diferencia clave (`this`):** Las *Arrow Functions* no crean su propio contexto `this`; heredan el `this` del ámbito donde fueron creadas. Además, no poseen el objeto `arguments` ni pueden usarse como constructores con `new`.
 
 ---
 
-# 4️⃣ Parámetros y Retorno
+## 2. Parámetros Modernos: Por Defecto y Rest (`...`)
 
-### Parámetros por defecto
-Evitan errores si no se pasa un valor al llamar a la función.
-```js
-const despedir = (nombre = "Invitado") => `Adiós ${nombre}`;
+### Parámetros por Defecto (ES6)
+Se aplican cuando el argumento no se envía o es `undefined`:
+
+```javascript
+function crearSaludo(nombre = "Invitado", idioma = "es") {
+    return idioma === "es" ? `Hola, ${nombre}` : `Hello, ${nombre}`;
+}
 ```
 
-### El `return`
-Finaliza la ejecución de la función y devuelve un valor. Si no hay `return`, la función devuelve `undefined`.
+### Parámetros Rest (`...args`)
+Agrupa un número indefinido de argumentos en un **array real**:
 
----
-
-# 5️⃣ Ámbito de las variables (Scope)
-
-*   **Global:** Variable declarada fuera de cualquier función. Accesible en todo el código.
-*   **Local (Función/Bloque):** Variable declarada dentro de una función o bloque `{ }`. Solo existe allí dentro.
-
-```js
-let global = "Soy global";
-
-function prueba() {
-    let local = "Soy local";
-    console.log(global); // ✅ Funciona
+```javascript
+function sumarTodos(...numeros) {
+    return numeros.reduce((total, n) => total + n, 0);
 }
 
-console.log(local); // ❌ ERROR
+console.log(sumarTodos(10, 20, 30, 40)); // 100
 ```
 
 ---
 
-# 📊 Analogía para Niños
-Imagina que una función es una **Máquina de Jugos** 🍹.
-1.  **Parámetros:** Son las frutas que le echas (Input).
-2.  **Código interno:** Son las cuchillas licuando.
-3.  **Return:** Es el vaso de jugo que sale al final (Output).
+## 3. `return` y Retorno Temprano (*Early Return*)
+
+Toda función sin `return` explícito devuelve `undefined`. Usar `return` al inicio para descartar casos inválidos evita anidar `if/else` innecesarios:
+
+```javascript
+function dividir(a, b) {
+    if (typeof a !== "number" || typeof b !== "number") return null;
+    if (b === 0) return Infinity;
+    return a / b;
+}
+```
 
 ---
 
-# ⚠️ Errores Comunes
-❌ Intentar usar una variable local fuera de su función.
-❌ Olvidar el `return` cuando necesitas que la función te devuelva un dato para usarlo después.
+## 4. Callbacks (Introducción)
+
+Un **callback** es una función que se pasa como argumento a otra función para que esta la ejecute en el momento adecuado:
+
+```javascript
+function procesarOperacion(a, b, operacionCallback) {
+    return operacionCallback(a, b);
+}
+
+const resultado = procesarOperacion(5, 3, (x, y) => x * y); // 15
+```
+
+Los callbacks son la base de eventos del DOM (`addEventListener`), temporizadores (`setTimeout`) y métodos de array (`.map()`, `.filter()`).
 
 ---
 
-# ✅ Buenas Prácticas
-✔️ Usa **Arrow Functions** para funciones anónimas y callbacks.
-✔️ Aplica el principio de **Responsabilidad Única**: una función debería hacer solo una cosa.
-✔️ Nombra tus funciones con **verbos** (ej: `calcularPrecio`, `obtenerDatos`).
+## 5. Closures (Introducción)
+
+Un **closure** (clausura) ocurre cuando una función interna recuerda y puede acceder a las variables de su función padre, incluso después de que la función padre haya terminado de ejecutarse:
+
+```javascript
+function crearContador(inicial = 0) {
+    let cuenta = inicial; // Variable privada protegida por el closure
+
+    return function incrementar() {
+        cuenta++;
+        return cuenta;
+    };
+}
+
+const contadorA = crearContador(10);
+console.log(contadorA()); // 11
+console.log(contadorA()); // 12
+```
 
 ---
+
+## ⚠️ Errores Comunes
+
+* **Confundir referencia con invocación:** Pasar `miFuncion()` en lugar de `miFuncion` a un `addEventListener` la ejecuta inmediatamente en lugar de esperar al clic.
+* **Olvidar paréntesis al retornar un objeto en Arrow Function:** `x => { id: x }` interpreta `{}` como bloque de función y devuelve `undefined`. Usa `x => ({ id: x })`.
+* **Mutar parámetros u objetos externos sin intención:** Modificar un objeto recibido por parámetro afecta al objeto original fuera de la función (efectos secundarios).
+* **Olvidar `return`:** Si una función calcula un valor pero no tiene `return`, devolverá `undefined`.
+
+## ✅ Buenas Prácticas
+
+* **Responsabilidad única:** Cada función debe hacer una sola tarea bien definida y tener un nombre verbal claro (`calcularTotal`, `validarEmail`).
+* Usa `const` para declarar expresiones y *arrow functions*.
+* Prefiere funciones puras (mismos argumentos → mismo resultado, sin efectos secundarios) siempre que sea posible.
+* Limita los parámetros a 2 o 3; si necesitas más, pasa un objeto de opciones con destructuring: `function crear({ nombre, edad, rol = "user" }) {}`.
+
+---
+
+## Hoja de Trucos (Cheatsheet) — Funciones
+
+| Concepto | Sintaxis | Característica clave |
+| :--- | :--- | :--- |
+| **Declaración** | `function fn(a) { return a; }` | Tiene hoisting completo |
+| **Expresión** | `const fn = function(a) { return a; };` | Sin hoisting usable antes de la línea |
+| **Arrow Function** | `const fn = a => a * 2;` | Retorno implícito y `this` léxico |
+| **Retornar objeto** | `const fn = id => ({ id });` | Paréntesis obligatorios alrededor de `{}` |
+| **Valor por defecto** | `function fn(x = 10) {}` | Se usa si `x` es `undefined` |
+| **Parámetro Rest** | `function fn(...args) {}` | Recibe N argumentos como Array |
+| **Callback** | `arr.map(item => item * 2)` | Función pasada como argumento |
+| **Closure** | Función interna que recuerda su scope | Permite estado privado sin clases |

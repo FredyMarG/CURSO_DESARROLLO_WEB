@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Interactivo — Curso de Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <div class="container">
+        <header>
+            <span class="badge">CURSO DESARROLLO WEB — RUTA COMPLETA</span>
+            <h1>Portal Interactivo de Aprendizaje</h1>
+            <p class="subtitle">
+                Accede rápidamente a todas las presentaciones interactivas, laboratorios en vivo, ejercicios prácticos y guías de documentación de los 4 niveles del curso.
+            </p>
+        </header>
+
+        <div class="toolbar">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar tema (ej. Fetch, Grid, IndexedDB, Workers)...">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="master">JS Master Level</button>
+            <button class="filter-btn" data-filter="mid">JS Mid Level</button>
+            <button class="filter-btn" data-filter="junior">JS Junior Level</button>
+            <button class="filter-btn" data-filter="htmlcss">HTML y CSS</button>
+            <button class="filter-btn" data-filter="ejercicios">Ejercicios</button>
+        </div>
+
+        <main id="portalContent"></main>
+    </div>
+
+    <script src="app.js" defer></script>
+</body>
+</html>

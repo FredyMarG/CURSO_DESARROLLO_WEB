@@ -1,99 +1,71 @@
 /**
- * GUÍA TÉCNICA DEL OBJETO MATH EN JAVASCRIPT
- * El objeto Math es un objeto incorporado que tiene propiedades y métodos para constantes y funciones matemáticas.
- * Nota: Math no es un constructor; todas las propiedades y métodos son estáticos.
+ * GUÍA INTERACTIVA: OBJETO MATH Y PRECISIÓN NUMÉRICA
  */
 
-console.log("%c--- MÉTODOS DEL OBJETO MATH ---", "color: #059669; font-weight: bold;");
+"use strict";
 
-let numero;
+const liveConsole = document.getElementById("live-console");
 
-/** --- MÉTODOS DE CÁLCULO Y ARITMÉTICA --- */
+function registrar(mensaje) {
+    const linea = document.createElement("div");
+    linea.className = "log-line ok";
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+}
 
-// Math.sqrt(x): Devuelve la raíz cuadrada de un número. Si x es negativo, devuelve NaN.
-numero = Math.sqrt(25); 
-console.log(numero);
+// 1. Redondeo
+document.getElementById("btn-redondear").addEventListener("click", () => {
+    const n = Number(document.getElementById("math-num").value);
+    if (Number.isNaN(n)) return;
 
-// Math.cbrt(x): Devuelve la raíz cúbica de un número.
-numero = Math.cbrt(27); 
-console.log(numero);
+    document.getElementById("out-redondeo").textContent =
+        `Entrada: ${n}\n` +
+        `Math.round(${n}): ${Math.round(n)}\n` +
+        `Math.floor(${n}): ${Math.floor(n)}\n` +
+        `Math.ceil(${n}):  ${Math.ceil(n)}\n` +
+        `Math.trunc(${n}): ${Math.trunc(n)}\n` +
+        `Math.sign(${n}):  ${Math.sign(n)}`;
+    registrar(`Redondeos para ${n} calculados.`);
+});
 
-// Math.max(...valores): Compara una lista de números y retorna el valor más alto.
-numero = Math.max(5, 10, 15, 0, 30, 1, 100); 
-console.log(numero);
+// 2. Aleatorio en rango y UUID
+document.getElementById("btn-random").addEventListener("click", () => {
+    const min = Math.ceil(Number(document.getElementById("math-min").value) || 1);
+    const max = Math.floor(Number(document.getElementById("math-max").value) || 6);
+    const low = Math.min(min, max);
+    const high = Math.max(min, max);
 
-// Math.min(...valores): Compara una lista de números y retorna el valor más bajo.
-numero = Math.min(5, 10, 15, 0, 30, 1, 100); 
-console.log(numero);
+    const aleatorio = Math.floor(Math.random() * (high - low + 1)) + low;
+    document.getElementById("out-random").textContent =
+        `Rango [${low}, ${high}] -> Resultado: ${aleatorio}`;
+    registrar(`Aleatorio [${low}, ${high}] -> ${aleatorio}`);
+});
 
-/** --- GENERACIÓN DE NÚMEROS ALEATORIOS --- */
+document.getElementById("btn-uuid").addEventListener("click", () => {
+    const uuid = crypto.randomUUID();
+    document.getElementById("out-random").textContent = `crypto.randomUUID():\n${uuid}`;
+    registrar(`UUID generado: ${uuid}`);
+});
 
-// Math.random(): Genera un número de punto flotante pseudo-aleatorio entre 0 (inclusive) y 1 (exclusivo).
-numero = Math.random(); 
-console.log(numero);
+// 3. Precisión flotante
+document.getElementById("btn-flotante").addEventListener("click", () => {
+    const suma = 0.1 + 0.2;
+    const exacta = suma === 0.3;
+    const conEpsilon = Math.abs(suma - 0.3) < Number.EPSILON;
+    const centavos = (10 + 20) / 100;
 
-// Generación de un rango: Para obtener un entero entre 0 y 100, multiplicamos y luego redondeamos.
-numero = Math.random() * 100; 
-console.log(numero);
+    document.getElementById("out-flotante").textContent =
+        `0.1 + 0.2 = ${suma}\n` +
+        `(0.1 + 0.2) === 0.3 -> ${exacta}\n` +
+        `Con Number.EPSILON -> ${conEpsilon}\n` +
+        `En centavos (10 + 20) / 100 -> ${centavos}`;
+    registrar(`0.1 + 0.2 = ${suma} (EPSILON=${conEpsilon})`);
+});
 
-/** --- MÉTODOS DE REDONDEO Y TRUNCAMIENTO --- */
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
 
-// Math.round(x): Redondea al entero más próximo. .5 redondea hacia arriba (hacia el infinito positivo).
-numero = Math.round(4.7); 
-console.log(numero);
-
-// Math.floor(x): "Piso". Redondea hacia abajo al entero más cercano.
-numero = Math.floor(4.7); 
-console.log(numero);
-
-// Math.fround(x): Retorna la representación flotante de precisión simple (32 bits) más cercana.
-numero = Math.fround(4.7549999999999); 
-console.log(numero);
-
-// Math.trunc(x): Elimina la parte decimal. A diferencia de floor, simplemente corta los decimales.
-numero = Math.trunc(5.99999); 
-console.log(numero);
-
-/** --- CONSTANTES MATEMÁTICAS (PROPIEDADES) --- */
-
-// Math.PI: Relación entre la longitud de la circunferencia de un círculo y su diámetro (~3.14159).
-numero = Math.PI; 
-console.log(numero);
-
-// Math.E: Constante de Euler, base de los logaritmos naturales (~2.718).
-numero = Math.E; 
-console.log(numero);
-
-// Math.SQRT1_2: Raíz cuadrada de 1/2, equivalente a 1 dividido por la raíz cuadrada de 2 (~0.707).
-numero = Math.SQRT1_2; 
-console.log(numero);
-
-// Math.SQRT2: Raíz cuadrada de 2 (~1.414).
-numero = Math.SQRT2; 
-console.log(numero);
-
-/** --- LOGARITMOS --- */
-
-// Math.LN2: Logaritmo natural de 2 (~0.693).
-numero = Math.LN2; 
-console.log(numero);
-
-// Math.LN10: Logaritmo natural de 10 (~2.302).
-numero = Math.LN10; 
-console.log(numero);
-
-// Math.LOG2E: Logaritmo de E en base 2 (~1.442).
-numero = Math.LOG2E; 
-console.log(numero);
-
-// Math.LOG10E: Logaritmo de E en base 10 (~0.434).
-numero = Math.LOG10E; 
-console.log(numero);
-
-/** 
- * RESUMEN DE USO:
- * - Para números aleatorios enteros: Math.floor(Math.random() * (max - min + 1)) + min.
- * - Para formatear decimales visualmente (no matemático): usar el método .toFixed() de los números.
- */
-
-console.log("%c-------------------------------", "color: #059669;");
+registrar("Laboratorio de Math listo.");

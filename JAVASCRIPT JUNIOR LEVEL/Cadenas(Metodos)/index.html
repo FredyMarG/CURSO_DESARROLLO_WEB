@@ -1,32 +1,77 @@
 <!DOCTYPE html>
-<!-- 
-    VISTA: MÉTODOS DE CADENAS
-    Propósito: Estructura base para visualizar la manipulación de objetos String.
--->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Junior - Cadenas</title>
-    <!-- Enlace al CSS externo para mantener la separación de responsabilidades -->
+    <title>JS Junior — Guía Interactiva de Métodos de Cadena</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">abc</div>
-            <h1>Manipulación de Texto</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 08 · String.prototype</span>
+            <h1>Métodos de Cadenas (Strings)</h1>
+            <p>Los strings en JavaScript son <strong>inmutables</strong>. Prueba en vivo búsqueda, limpieza, corte con <code>.slice()</code>, <code>.split()</code>, <code>.replaceAll()</code> y <code>.padStart()</code>.</p>
         </header>
-        <section class="content">
-            <p>JavaScript ofrece métodos potentes para buscar, recortar y transformar cadenas de texto.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Resultados disponibles en <b>Consola (Ctrl + Shift + I)</b></span>
+
+        <main class="grid">
+            <section class="card" aria-labelledby="s1">
+                <h2 id="s1">1. Transformador y Limpiador de Texto</h2>
+                <p class="note">Escribe una frase con espacios extra o mayúsculas mezcladas y aplica métodos sin mutar el original.</p>
+                <div class="controls">
+                    <div>
+                        <label for="str-input">Texto de entrada:</label>
+                        <input id="str-input" type="text" value="   JavaScript Moderno ES2025   ">
+                    </div>
+                    <div class="row">
+                        <button type="button" data-str="trim">.trim()</button>
+                        <button type="button" data-str="lower" class="secondary">.toLowerCase()</button>
+                        <button type="button" data-str="upper" class="secondary">.toUpperCase()</button>
+                        <button type="button" data-str="slug">Crear Slug</button>
+                    </div>
+                </div>
+                <pre class="code-preview">texto.trim().toLowerCase().replaceAll(" ", "-")</pre>
+                <div id="out-str-trans" class="output" aria-live="polite">Pulsa cualquier botón para transformar el texto.</div>
+            </section>
+
+            <section class="card" aria-labelledby="s2">
+                <h2 id="s2">2. Búsqueda, <code>.slice()</code> y <code>.at()</code></h2>
+                <p class="note">Comprueba si contiene una subcadena y extrae caracteres desde el inicio o desde el final con índices negativos.</p>
+                <div class="controls">
+                    <div>
+                        <label for="str-buscar">Subcadena a buscar:</label>
+                        <input id="str-buscar" type="text" value="Moderno">
+                    </div>
+                    <button id="btn-str-buscar" type="button">Analizar Búsqueda y Corte</button>
+                </div>
+                <pre class="code-preview">str.includes(sub); str.at(-1); str.slice(0, 10);</pre>
+                <div id="out-str-search" class="output" aria-live="polite">Analiza el texto superior con la subcadena indicada.</div>
+            </section>
+
+            <section class="card" aria-labelledby="s3">
+                <h2 id="s3">3. <code>.padStart()</code> y <code>.split()</code></h2>
+                <p class="note">Formatea números con ceros a la izquierda o divide una lista CSV en un Array.</p>
+                <div class="controls">
+                    <div>
+                        <label for="str-num-pad">Número de factura (1–999):</label>
+                        <input id="str-num-pad" type="text" value="42">
+                    </div>
+                    <button id="btn-str-pad" type="button">Formatear con .padStart(5, "0")</button>
+                </div>
+                <pre class="code-preview">"42".padStart(5, "0") // "00042"</pre>
+                <div id="out-str-pad" class="output" aria-live="polite">Resultado del relleno y split().</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 
-    <!-- Carga de la lógica de métodos de cadena -->
     <script src="cadena.js"></script>
 </body>
 </html>

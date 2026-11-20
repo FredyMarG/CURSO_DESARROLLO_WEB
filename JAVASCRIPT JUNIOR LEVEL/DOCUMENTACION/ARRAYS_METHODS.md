@@ -1,506 +1,182 @@
-# 📘 GUÍA DEFINITIVA DE MÉTODOS DE ARRAYS EN JAVASCRIPT
+# 📘 Guía Definitiva de Métodos de Arrays en JavaScript (ES2023–ES2025)
 
-## 🔥 NIVEL DIOS PRO EXTREMO
-
----
-
-# 📌 1. LISTA COMPLETA DE MÉTODOS DE ARRAYS
-
-## 🔁 RECORRIDO
-
-* `forEach()`
-* `map()`
-* `filter()`
-* `find()`
-* `findIndex()`
-* `some()`
-* `every()`
+Dominar los métodos funcionales de arrays te permite escribir código declarativo, legible y libre de bucles manuales propensos a errores.
 
 ---
 
-## 📦 MODIFICACIÓN
+## 1. Clasificación Rápida: Mutables vs Inmutables
 
-* `push()`
-* `pop()`
-* `shift()`
-* `unshift()`
-* `splice()`
-* `reverse()`
-* `sort()`
-* `fill()`
-* `copyWithin()`
+| Categoría | Métodos | ¿Modifican el array original? |
+| :--- | :--- | :--- |
+| **Transformación y Filtrado** | `.map()`, `.filter()`, `.flat()`, `.flatMap()`, `.slice()`, `.concat()` | ❌ No (devuelven array nuevo) |
+| **Búsqueda y Validación** | `.find()`, `.findLast()`, `.findIndex()`, `.findLastIndex()`, `.some()`, `.every()`, `.includes()`, `.indexOf()` | ❌ No |
+| **Reducción** | `.reduce()`, `.reduceRight()`, `.join()` | ❌ No |
+| **Inmutables ES2023** | `.toSorted()`, `.toReversed()`, `.toSpliced()`, `.with()` | ❌ No (devuelven copia modificada) |
+| **Mutables (Efecto directo)** | `.push()`, `.pop()`, `.shift()`, `.unshift()`, `.splice()`, `.sort()`, `.reverse()`, `.fill()` | ✅ Sí (alteran el original) |
 
 ---
 
-## 🔍 BÚSQUEDA
+## 2. Recorrido y Transformación
 
-* `includes()`
-* `indexOf()`
-* `lastIndexOf()`
+### `.forEach(callback)`
+Ejecuta una función por cada elemento. **Siempre devuelve `undefined`**, por lo que solo sirve para efectos secundarios (imprimir, guardar, modificar el DOM).
 
----
+```javascript
+const tareas = ["Estudiar", "Practicar", "Descansar"];
+tareas.forEach((tarea, indice) => {
+    console.log(`${indice + 1}. ${tarea}`);
+});
+```
 
-## 🔄 TRANSFORMACIÓN
+### `.map(callback)`
+Transforma cada elemento y devuelve un **nuevo array de la misma longitud**.
 
-* `join()`
-* `slice()`
-* `concat()`
-* `flat()`
-* `flatMap()`
+```javascript
+const precios = [100, 200, 300];
+const conIVA = precios.map(precio => Number((precio * 1.16).toFixed(2)));
+// [116, 232, 348]
+```
 
----
+### `.filter(callback)`
+Devuelve un **nuevo array** únicamente con los elementos cuya condición retorne `true`.
 
-## 🧪 OTROS
+```javascript
+const usuarios = [
+    { nombre: "Ana", activo: true },
+    { nombre: "Luis", activo: false },
+    { nombre: "Sofía", activo: true },
+];
+const activos = usuarios.filter(u => u.activo);
+// [{ nombre: "Ana", activo: true }, { nombre: "Sofía", activo: true }]
+```
 
-* `reduce()`
-* `reduceRight()`
-* `Array.from()`
-* `Array.isArray()`
+### `.flat(profundidad)` y `.flatMap(callback)`
+* `.flat(nivel)` aplana arrays anidados (por defecto 1 nivel; usa `Infinity` para aplanar todo).
+* `.flatMap()` ejecuta primero `.map()` y luego aplana 1 nivel automáticamente (más rápido que llamarlos por separado).
 
----
+```javascript
+const anidado = [1, [2, 3], [4, [5]]];
+anidado.flat(2); // [1, 2, 3, 4, 5]
 
-# 🧠 2. EXPLICACIÓN UNO A UNO
-
----
-
-# 🔁 forEach()
-
-## 📌 Función
-
-👉 Recorrer un array sin retornar nada
-
-```js
-// FUNCIÓN: Mostrar lista de productos
-let productos = ["zapatos", "camisa", "gorra"];
-
-productos.forEach(p => console.log(p));
+const frases = ["Hola mundo", "JS moderno"];
+const palabras = frases.flatMap(frase => frase.split(" "));
+// ["Hola", "mundo", "JS", "moderno"]
 ```
 
 ---
 
-# 🔁 map()
+## 3. Búsqueda y Validación
 
-## 📌 Función
+| Método | ¿Qué devuelve si encuentra? | ¿Si NO encuentra? |
+| :--- | :--- | :--- |
+| `.find(fn)` | El **primer** elemento que cumple | `undefined` |
+| `.findLast(fn)` *(ES2023)* | El **último** elemento que cumple (busca desde el final) | `undefined` |
+| `.findIndex(fn)` | El índice del primer elemento que cumple | `-1` |
+| `.some(fn)` | `true` si **al menos uno** cumple (se detiene al hallarlo) | `false` |
+| `.every(fn)` | `true` si **todos** cumplen (se detiene si uno falla) | `false` |
+| `.includes(valor)` | `true` si el valor existe (usa igualdad `SameValueZero`) | `false` |
 
-👉 Crear un nuevo array transformando datos
+```javascript
+const pedidos = [
+    { id: 1, estado: "pendiente", total: 50 },
+    { id: 2, estado: "pagado", total: 120 },
+    { id: 3, estado: "pagado", total: 300 },
+];
 
-```js
-// FUNCIÓN: Aplicar descuento a precios
-let precios = [100, 200, 300];
-
-let conDescuento = precios.map(p => p * 0.9);
-```
-
-🧠 DIAGRAMA:
-
-```text
-[100,200,300] → map → [90,180,270]
-```
-
----
-
-# 🔁 filter()
-
-## 📌 Función
-
-👉 Filtrar elementos que cumplen condición
-
-```js
-// FUNCIÓN: Obtener mayores de edad 👤
-let edades = [12, 18, 25, 15];
-
-let mayores = edades.filter(e => e >= 18);
+const ultimoPagado = pedidos.findLast(p => p.estado === "pagado"); // { id: 3, ... }
+const hayGrandes = pedidos.some(p => p.total > 250);               // true
+const todosPagados = pedidos.every(p => p.estado === "pagado");    // false
 ```
 
 ---
 
-# 🔁 find()
+## 4. Reducción: `.reduce(callback, valorInicial)`
 
-## 📌 Función
+Acumula todos los elementos del array en un único resultado (un número, un string, un objeto agrupado, etc.).
 
-👉 Obtener el primer elemento que cumpla condición
+```javascript
+const carrito = [
+    { producto: "Teclado", precio: 45, cantidad: 1 },
+    { producto: "Mouse", precio: 25, cantidad: 2 },
+];
 
-```js
-// FUNCIÓN: Encontrar primer producto caro
-let precios = [50, 200, 30];
+const total = carrito.reduce((acumulador, item) => {
+    return acumulador + (item.precio * item.cantidad);
+}, 0); // 0 es el valor inicial
 
-precios.find(p => p > 100);
+console.log(total); // 95
+```
+
+> **Consejo:** Pasa **siempre** el `valorInicial` (segundo argumento) a `.reduce()` para evitar errores cuando el array esté vacío.
+
+---
+
+## 5. Métodos Inmutables Modernos (ES2023)
+
+Antes de ES2023, `.sort()`, `.reverse()` y `.splice()` mutaban el array original obligando a clonar con `[...arr]`. Hoy tenemos equivalentes seguros:
+
+```javascript
+const puntajes = [85, 40, 100, 70];
+
+// Ordenar de mayor a menor sin mutar 'puntajes'
+const ranking = puntajes.toSorted((a, b) => b - a); // [100, 85, 70, 40]
+
+// Invertir sin mutar
+const invertido = puntajes.toReversed();            // [70, 100, 40, 85]
+
+// Reemplazar un elemento en el índice 1 sin mutar
+const corregido = puntajes.with(1, 60);             // [85, 60, 100, 70]
+
+// Eliminar 1 elemento desde el índice 2 e insertar 95 sin mutar
+const editado = puntajes.toSpliced(2, 1, 95);       // [85, 40, 95, 70]
 ```
 
 ---
 
-# 🔁 findIndex()
+## 6. Caso Real: Encadenamiento (*Method Chaining*)
 
-## 📌 Función
+```javascript
+const productos = [
+    { nombre: "Monitor", categoria: "tech", precio: 300, stock: 4 },
+    { nombre: "Silla", categoria: "oficina", precio: 180, stock: 0 },
+    { nombre: "Teclado", categoria: "tech", precio: 80, stock: 12 },
+];
 
-👉 Obtener posición del elemento encontrado
+const resumenTech = productos
+    .filter(p => p.categoria === "tech" && p.stock > 0)
+    .toSorted((a, b) => a.precio - b.precio)
+    .map(p => `${p.nombre}: $${p.precio}`);
 
-```js
-// FUNCIÓN: Encontrar índice
-[10,20,30].findIndex(n => n === 20);
+console.log(resumenTech); // ["Teclado: $80", "Monitor: $300"]
 ```
 
 ---
 
-# 🔁 some()
+## ⚠️ Errores Comunes
 
-## 📌 Función
+* **Olvidar el `return` en `.map()` o `.filter()` con llaves `{}`:** `arr.map(x => { x * 2 })` devuelve `[undefined, undefined]`. Si usas llaves, escribe `return`.
+* **Usar `.forEach()` esperando un nuevo array:** `.forEach()` siempre devuelve `undefined`. Usa `.map()`.
+* **Usar `.sort()` directamente sobre un array de estado:** Muta el array original; prefiere `.toSorted()`.
+* **No pasar valor inicial a `.reduce()`:** En un array vacío `[]`, `[].reduce((a, b) => a + b)` lanza `TypeError`.
 
-👉 Verificar si al menos uno cumple
+## ✅ Buenas Prácticas
 
-```js
-// FUNCIÓN: Verificar si hay menores
-[10, 20, 30].some(n => n < 18);
-```
-
----
-
-# 🔁 every()
-
-## 📌 Función
-
-👉 Verificar si todos cumplen
-
-```js
-// FUNCIÓN: Validar todos positivos
-[1,2,3].every(n => n > 0);
-```
+* Elige el método con la intención semántica exacta: `some` para existencia, `find` para obtener un ítem, `filter` para subconjuntos, `map` para transformar 1 a 1.
+* En encadenamientos largos, intenta filtrar primero (`.filter()`) para reducir la cantidad de elementos antes de transformar (`.map()`).
+* Si necesitas detener una iteración anticipadamente por rendimiento, usa `for...of` con `break` o `.some()` / `.find()` en lugar de `.forEach()` (ya que `forEach` no soporta `break`).
 
 ---
 
-# 📦 push()
-
-## 📌 Función
-
-👉 Agregar al final
-
-```js
-// FUNCIÓN: Agregar producto al carrito 🛒
-let carrito = ["camisa"];
-carrito.push("zapatos");
-```
-
----
-
-# 📦 pop()
-
-## 📌 Función
-
-👉 Eliminar último elemento
-
-```js
-// FUNCIÓN: Quitar último producto
-carrito.pop();
-```
-
----
-
-# 📦 shift()
-
-## 📌 Función
-
-👉 Eliminar primero
-
-```js
-// FUNCIÓN: Sacar primer cliente
-clientes.shift();
-```
-
----
-
-# 📦 unshift()
-
-## 📌 Función
-
-👉 Agregar al inicio
-
-```js
-// FUNCIÓN: Prioridad cliente VIP
-clientes.unshift("VIP");
-```
-
----
-
-# 📦 splice()
-
-## 📌 Función
-
-👉 Agregar, eliminar o reemplazar
-
-```js
-// FUNCIÓN: Modificar lista
-let nums = [1,2,3];
-nums.splice(1,1); // elimina 2
-```
-
----
-
-# 📦 reverse()
-
-## 📌 Función
-
-👉 Invertir array
-
-```js
-// FUNCIÓN: Cambiar orden
-[1,2,3].reverse();
-```
-
----
-
-# 📦 sort()
-
-## 📌 Función
-
-👉 Ordenar elementos
-
-```js
-// FUNCIÓN: Ordenar precios
-[100, 50, 200].sort((a,b)=>a-b);
-```
-
----
-
-# 🔍 includes()
-
-## 📌 Función
-
-👉 Verificar si existe un elemento
-
-```js
-// FUNCIÓN: Verificar producto
-["pan","leche"].includes("pan");
-```
-
----
-
-# 🔍 indexOf()
-
-## 📌 Función
-
-👉 Obtener posición
-
-```js
-// FUNCIÓN: Buscar posición
-["a","b","c"].indexOf("b");
-```
-
----
-
-# 🔄 join()
-
-## 📌 Función
-
-👉 Convertir array a string
-
-```js
-// FUNCIÓN: Mostrar lista
-["a","b"].join("-");
-```
-
----
-
-# 🔄 slice()
-
-## 📌 Función
-
-👉 Copiar parte del array
-
-```js
-// FUNCIÓN: Obtener subconjunto
-[1,2,3,4].slice(1,3);
-```
-
----
-
-# 🔄 concat()
-
-## 📌 Función
-
-👉 Unir arrays
-
-```js
-// FUNCIÓN: Unir listas
-[1,2].concat([3,4]);
-```
-
----
-
-# 🔄 flat()
-
-## 📌 Función
-
-👉 Aplanar arrays
-
-```js
-// FUNCIÓN: Eliminar niveles
-[1,[2,3]].flat();
-```
-
----
-
-# 🔄 flatMap()
-
-## 📌 Función
-
-👉 map + flat
-
-```js
-// FUNCIÓN: Transformar y aplanar
-[1,2].flatMap(n => [n, n*2]);
-```
-
----
-
-# 🧪 reduce()
-
-## 📌 Función
-
-👉 Reducir a un solo valor
-
-```js
-// FUNCIÓN: Sumar valores
-[1,2,3].reduce((acc, n) => acc + n, 0);
-```
-
-🧠 DIAGRAMA:
-
-```text
-0 → +1 → 1 → +2 → 3 → +3 → 6
-```
-
----
-
-# 🧪 Array.from()
-
-## 📌 Función
-
-👉 Crear array desde iterable
-
-```js
-// FUNCIÓN: Convertir string a array
-Array.from("hola");
-```
-
----
-
-# 🧪 Array.isArray()
-
-## 📌 Función
-
-👉 Verificar si es array
-
-```js
-// FUNCIÓN: Validación
-Array.isArray([1,2]);
-```
-
----
-
-# 🧭 3. CUÁNDO USAR Y CUÁNDO NO
-
-## ✅ USAR
-
-* map → transformar
-* filter → filtrar
-* reduce → cálculos
-
-## ❌ NO USAR
-
-* forEach si necesitas retornar → usa map
-* sort sin función → puede fallar
-
----
-
-# ⚔️ 4. COMPARACIONES
-
-## map vs forEach
-
-| Método  | Retorna | Uso         |
-| ------- | ------- | ----------- |
-| map     | ✅       | transformar |
-| forEach | ❌       | recorrer    |
-
----
-
-# 🧪 5. CASO REAL
-
-## 🛒 TIENDA
-
-```js
-// FUNCIÓN: Filtrar productos baratos
-let precios = [100, 50, 200];
-
-let baratos = precios.filter(p => p < 100);
-```
-
----
-
-# 🧱 6. PATRÓN PROFESIONAL
-
-```js
-let resultado = productos
-    .filter(p => p.precio > 50)
-    .map(p => p.nombre);
-```
-
----
-
-# 🐞 7. DEBUGGING
-
-```js
-// FUNCIÓN: Evitar errores
-if (Array.isArray(datos)) {
-    datos.map(...)
-}
-```
-
----
-
-# ⚠️ 8. ERRORES COMUNES
-
-* No retornar en map
-* Usar sort sin comparar
-* Mutar arrays sin querer
-
----
-
-# ⚡ 9. OPTIMIZACIÓN
-
-❌
-
-```js
-for (...) array.push(...)
-```
-
-✅
-
-```js
-array.map(...)
-```
-
----
-
-# 🧩 10. EJERCICIOS
-
-1. Filtrar números pares
-2. Sumar array con reduce
-3. Ordenar lista
-
----
-
-# 🧾 11. RESUMEN FINAL
-
-* map → transformar
-* filter → filtrar
-* reduce → calcular
-* push → agregar
-* slice → copiar
-
----
-
-# 🔥 CONCLUSIÓN
-
-Dominar arrays = pensar como programador real.
-
-👉 Esto ya es nivel **PRO** 🚀
+## Hoja de Trucos (Cheatsheet) — Métodos de Arrays
+
+| Necesito... | Método recomendado | Ejemplo |
+| :--- | :--- | :--- |
+| Transformar cada elemento | `.map()` | `nums.map(n => n * 2)` |
+| Filtrar elementos | `.filter()` | `nums.filter(n => n > 10)` |
+| Buscar primer / último match | `.find()` / `.findLast()` | `users.find(u => u.id === 5)` |
+| Saber si al menos uno / todos cumplen | `.some()` / `.every()` | `nums.every(n => n > 0)` |
+| Sumar o agrupar en un valor | `.reduce()` | `nums.reduce((a, b) => a + b, 0)` |
+| Ordenar sin mutar (ES2023) | `.toSorted()` | `nums.toSorted((a, b) => a - b)` |
+| Invertir sin mutar (ES2023) | `.toReversed()` | `nums.toReversed()` |
+| Reemplazar índice sin mutar (ES2023) | `.with()` | `arr.with(0, "nuevo")` |
+| Aplanar y mapear | `.flatMap()` | `arr.flatMap(x => [x, x * 2])` |

@@ -1,42 +1,79 @@
-/**
- * 🛠️ MODULE: APPLICATION DEVTOOLS INSPECTOR
- * 
- * ESTRATEGIA: Diseño de alto contraste (Dark Container) para visualización de datos técnicos.
- * ACCESIBILIDAD: Cumplimiento de ratios de contraste para texto sobre fondos oscuros.
- * INTERACCIÓN: Micro-interacciones (hover) para identificar elementos activos en el DOM.
- */
-
-/* BASE STYLES: Configuración del entorno global y tipografía heredada */
-body{
-    color: #222;               /* Slate-900: Color base para texto fuera de contenedores oscuros */
-    font-family: sans-serif;   /* Tipografía agnóstica al sistema para carga instantánea */
-    margin: 0;                 /* Reset de seguridad para evitar desbordamientos laterales */
-    padding: 20px;             /* Espaciado de cortesía para el contenido principal */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
 }
-
-/* CONTAINER: Bloque de visualización principal (Dark Mode context) */
-div{
-    background-color: #000;    /* Fondo negro puro: maximiza el enfoque en los datos blancos/grises */
-    padding: 20px;             /* Gutters internos para separar el contenido de los bordes del bloque */
-    border-radius: 8px;        /* Suavizado de bordes para una estética de componente moderno */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* HEADINGS: Títulos de sección dentro del contenedor */
-h2{
-    color: #fff;               /* Máximo contraste para encabezados sobre fondo oscuro */
-    margin-top: 0;             /* Elimina el margen superior para alineación perfecta con el padding del padre */
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* TEXT CONTENT: Párrafos informativos */
-p{
-    color: #ccc;               /* Gris suave: reduce la fatiga visual en textos largos sobre negro */
-    padding: 10px;             /* Área de interacción expandida para el estado hover */
-    transition: all 0.2s ease; /* Transición fluida para cambios de estado (DX) */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-/* INTERACTION: Feedback visual de selección */
-p:hover {
-    background: red;           /* Color de alerta/resalte para identificar el nodo bajo el puntero */
-    color: white;              /* Asegura legibilidad sobre el fondo rojo */
-    cursor: pointer;           /* Indica al usuario que el elemento es accionable */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
+}
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.controls { display: flex; flex-direction: column; gap: 0.55rem; }
+label { font-size: 0.85rem; color: var(--muted); }
+input {
+    background: #020617;
+    color: var(--text);
+    border: 1px solid var(--surface-alt);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+}
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.35rem; }
+.btn {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.84rem;
+    white-space: pre-wrap;
+    min-height: 180px;
 }

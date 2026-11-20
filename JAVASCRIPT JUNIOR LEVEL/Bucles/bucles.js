@@ -1,35 +1,66 @@
 /**
- * BUCLES Y CONTROL DE FLUJO
- * while, do...while y uso de break para salir antes de tiempo.
+ * GUÍA INTERACTIVA: BUCLES WHILE, DO...WHILE, BREAK Y CONTINUE
  */
 
-let numero = 0
+"use strict";
 
-if (numero < 10) {
-/* --- Condición simple con if --- */
-    console.log("Es menor que 10");    
+const liveConsole = document.getElementById("live-console");
+
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
 }
 
-/* --- while: evalúa la condición al inicio de cada iteración --- */
-while(numero < 6){
-    numero++
-    console.log(numero);
-}
+// 1. while vs do...while
+document.getElementById("btn-while-cmp").addEventListener("click", () => {
+    const limite = Math.min(10, Math.max(0, Number(document.getElementById("input-limite-while").value) || 0));
 
-numero = 0
-/* --- do...while: ejecuta al menos una vez y luego evalúa la condición --- */
-do{
-    console.log(numero);
-    numero++
-    
-} while(numero <= 6)
-
-numero = 0 
-while (numero < 1000){
-    numero++
-    console.log(numero);
-    if (numero == 10) {
-        /* break: interrumpe el bucle por completo --- */
-        break
+    const pasosWhile = [];
+    let i = 0;
+    while (i < limite) {
+        pasosWhile.push(i);
+        i++;
     }
-}
+
+    const pasosDo = [];
+    let j = 0;
+    do {
+        pasosDo.push(j);
+        j++;
+    } while (j < limite);
+
+    document.getElementById("out-while-cmp").textContent =
+        `Límite: ${limite}\nwhile:      ${JSON.stringify(pasosWhile)} (${pasosWhile.length} ejecuciones)\ndo...while: ${JSON.stringify(pasosDo)} (${pasosDo.length} ejecuciones)`;
+    registrar(`while vs do...while con límite=${limite} -> while: ${pasosWhile.length}, do...while: ${pasosDo.length}`);
+});
+
+// 2. break y continue
+document.getElementById("btn-flow").addEventListener("click", () => {
+    const skip = Number(document.getElementById("input-skip").value);
+    const stop = Number(document.getElementById("input-stop").value);
+
+    const resultado = [];
+    let n = 0;
+    while (n < 10) {
+        n++;
+        if (n === skip) continue;
+        if (n === stop) {
+            resultado.push(`[BREAK en ${n}]`);
+            break;
+        }
+        resultado.push(n);
+    }
+
+    document.getElementById("out-flow").textContent = `Salida: ${resultado.join(" → ")}`;
+    registrar(`Secuencia (skip=${skip}, stop=${stop}): ${resultado.join(", ")}`);
+});
+
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+registrar("Laboratorio de Bucles (while / do...while) listo.");

@@ -1,19 +1,31 @@
-/**
- * 🌳 ELEMENTS TAB LABORATORY
- * Manipulación dinámica del DOM para inspección de nodos.
- */
+// DevTools Lab — Pestaña Elements
 
-// Esperamos a que el DOM esté listo para evitar errores de referencia
-document.addEventListener("DOMContentLoaded", () => {
-    // Localizamos el contenedor donde inyectaremos nuevos elementos
-    const contenedor = document.querySelector('.nested-content');
-    
-    // Creamos un nuevo elemento de párrafo (nodo)
-    const nuevoNodo = document.createElement('p');
-    
-    // Definimos el contenido; notarás que 'Elements' resalta el cambio en morado/azul
-    nuevoNodo.innerHTML = "<strong>Nivel 4:</strong> Nodo inyectado dinámicamente para inspección.";
-    
-    // Insertamos el hijo en el árbol; observa cómo se expande la jerarquía en DevTools
-    contenedor.appendChild(nuevoNodo);
+const targetElement = document.getElementById("targetElement");
+const domInfo = document.getElementById("domInfo");
+
+function actualizarInfo() {
+    const styles = getComputedStyle(targetElement);
+    domInfo.textContent =
+        `classList:   [${[...targetElement.classList].join(", ")}]\n` +
+        `data-estado: "${targetElement.dataset.estado}"\n` +
+        `padding:     ${styles.padding}\n` +
+        `borderColor: ${styles.borderColor}`;
+}
+
+document.getElementById("btnToggleClass").addEventListener("click", () => {
+    targetElement.classList.toggle("resaltado");
+    actualizarInfo();
 });
+
+document.getElementById("btnMutateAttr").addEventListener("click", () => {
+    targetElement.dataset.estado =
+        targetElement.dataset.estado === "activo" ? "pausado" : "activo";
+    actualizarInfo();
+});
+
+document.getElementById("btnPadding").addEventListener("click", () => {
+    targetElement.classList.toggle("extra-pad");
+    actualizarInfo();
+});
+
+actualizarInfo();

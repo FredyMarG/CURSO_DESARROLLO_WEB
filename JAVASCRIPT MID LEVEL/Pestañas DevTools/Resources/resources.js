@@ -1,25 +1,28 @@
-/**
- * 🧪 SOURCES TAB LABORATORY
- * Este script está diseñado para practicar Debugging.
- */
+// DevTools Lab — Pestaña Sources (Debugging)
 
-// Función que simula un proceso de cálculo para probar Breakpoints
-const calcularEstadoRecursos = () => {
-    console.log("Iniciando análisis de recursos...");
-    
-    // Intenta colocar un 'Breakpoint' en la línea de abajo para inspeccionar la variable 'i'
-    for (let i = 1; i <= 3; i++) {
-        const mensaje = `Analizando recurso nivel ${i}...`;
-        console.log(mensaje);
+const sourcesOutput = document.getElementById("sourcesOutput");
+
+function aplicarDescuento(precio, porcentaje) {
+    return precio - precio * (porcentaje / 100);
+}
+
+function calcularTotal() {
+    let acumulado = 0;
+    for (let i = 1; i <= 10; i++) {
+        // Ideal para practicar Conditional Breakpoint: i === 5
+        acumulado += aplicarDescuento(i * 10, 10);
     }
-    
-    console.info("Análisis finalizado. Intenta usar 'Pretty Print' ({}) en la pestaña Sources.");
-};
+    return acumulado;
+}
 
-// Ejecución inicial
-calcularEstadoRecursos();
+document.getElementById("btnRunLoop").addEventListener("click", () => {
+    const total = calcularTotal();
+    sourcesOutput.textContent = `calcularTotal() completado.\nResultado final: $${total.toFixed(2)}`;
+});
 
-/**
- * TIP PROFESIONAL:
- * Usa CTRL + P para buscar rápidamente este archivo (resources.js) dentro de la pestaña Sources.
- */
+document.getElementById("btnDebugger").addEventListener("click", () => {
+    const contexto = { usuario: "dev", paso: "inspección manual" };
+    // Si DevTools está abierto, esta sentencia pausa aquí automáticamente:
+    debugger;
+    sourcesOutput.textContent = `Ejecución reanudada tras debugger; (${JSON.stringify(contexto)})`;
+});

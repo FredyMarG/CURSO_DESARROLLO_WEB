@@ -1,79 +1,113 @@
 /**
- * LABORATORIO: ESTRUCTURAS DE CONTROL CONDICIONALES
- * En este script exploramos cómo el programa puede "decidir" qué camino tomar
- * dependiendo de si una condición es verdadera (true) o falsa (false).
+ * GUÍA INTERACTIVA: ESTRUCTURAS CONDICIONALES
  */
 
-console.log("%c--- LABORATORIO: CONDICIONALES ---", "color: #e11d48; font-weight: bold; font-size: 12px;");
+"use strict";
 
-/* 1. Estructura Básica: if / else if / else */
-let hora = 14;
+const liveConsole = document.getElementById("live-console");
 
-/**
- * El bloque 'if' evalúa una expresión booleana.
- * FLUJO: Evaluación secuencial hasta encontrar la primera coincidencia verdadera.
- */
-if (hora < 12) {
-    console.log("%cResultado IF:", "color: #e11d48;", "Buenos días");
-} else if (hora >= 12 && hora <= 18) {
-    console.log("%cResultado ELSE IF:", "color: #e11d48;", "Buenas tardes"); 
-} else {
-    console.log("%cResultado ELSE:", "color: #e11d48;", "Buenas noches");
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
 }
 
-/* 2. Operador Ternario (Condicional en una sola línea) */
-/**
- * SINTAXIS: (condicion) ? valor_si_true : valor_si_false;
- * Sintaxis: (condicion) ? valor_si_es_verdadero : valor_si_es_falso;
- */
-let edad = 20;
-let mensaje = (edad >= 18) ? "Es mayor de edad" : "Es menor de edad";
-console.log("%cOperador Ternario:", "color: #e11d48; font-style: italic;", mensaje);
+// 1. if / else if / else + Ternario
+document.getElementById("btn-eval-hora").addEventListener("click", () => {
+    const hora = Number(document.getElementById("input-hora").value);
+    const out = document.getElementById("out-hora");
 
-/* 3. Estructura Switch */
-/**
- * OPTIMIZACIÓN: Ideal para evaluar una sola variable contra múltiples valores constantes.
- * IMPORTANTE: El 'break' evita la ejecución en cascada (fall-through).
- */
-let diaSemana = 3;
-let nombreDia = "";
+    if (Number.isNaN(hora) || hora < 0 || hora > 23) {
+        out.textContent = "❌ Ingresa una hora válida entre 0 y 23.";
+        registrar("Hora fuera de rango (0-23).", "err");
+        return;
+    }
 
-switch (diaSemana) {
-    case 1:
-        nombreDia = "Lunes";
-        break;
-    case 2:
-        nombreDia = "Martes";
-        break;
-    case 3:
-        nombreDia = "Miércoles"; // Caso coincidente
-        break;
-    default:
-        nombreDia = "Día no válido"; // Se ejecuta si ningún caso coincide
+    let saludo = "";
+    if (hora < 12) saludo = "Buenos días ☀️";
+    else if (hora <= 18) saludo = "Buenas tardes 🌤️";
+    else saludo = "Buenas noches 🌙";
+
+    const jornada = hora >= 6 && hora < 19 ? "Horario diurno" : "Horario nocturno";
+    out.textContent = `Hora: ${hora}:00\nSaludo (if/else): ${saludo}\nTernario: ${jornada}`;
+    registrar(`Hora ${hora} -> ${saludo} (${jornada})`);
+});
+
+// 2. Switch vs Diccionario
+document.getElementById("btn-eval-rol").addEventListener("click", () => {
+    const rol = document.getElementById("select-rol").value;
+    let permisoSwitch = "";
+
+    switch (rol) {
+        case "admin":
+            permisoSwitch = "Acceso total al sistema";
+            break;
+        case "editor":
+        case "moderador":
+            permisoSwitch = "Edición y moderación de contenido";
+            break;
+        case "invitado":
+            permisoSwitch = "Solo lectura";
+            break;
+        default:
+            permisoSwitch = "Sin permisos asignados";
+    }
+
+    const mapa = {
+        admin: "Acceso total al sistema",
+        editor: "Edición y moderación de contenido",
+        moderador: "Edición y moderación de contenido",
+        invitado: "Solo lectura"
+    };
+    const permisoMapa = mapa[rol] ?? "Sin permisos asignados";
+
+    document.getElementById("out-rol").textContent =
+        `Rol: "${rol}"\nResultado switch: ${permisoSwitch}\nResultado diccionario: ${permisoMapa}`;
+    registrar(`Rol "${rol}" -> ${permisoSwitch}`);
+});
+
+// 3. Truthy vs Falsy
+const muestrasTruthy = {
+    empty_str: { val: "", label: '""' },
+    zero_str: { val: "0", label: '"0"' },
+    zero: { val: 0, label: "0" },
+    empty_arr: { val: [], label: "[]" },
+    empty_obj: { val: {}, label: "{}" },
+    null: { val: null, label: "null" },
+    nan: { val: NaN, label: "NaN" }
+};
+
+document.getElementById("btn-eval-truthy").addEventListener("click", () => {
+    const item = muestrasTruthy[document.getElementById("select-truthy").value];
+    const esTruthy = Boolean(item.val);
+
+    document.getElementById("out-truthy").textContent =
+        `Valor: ${item.label}\nBoolean(valor): ${esTruthy}\nClasificación: ${esTruthy ? "✅ TRUTHY (entra al if)" : "❌ FALSY (entra al else)"}`;
+    registrar(`${item.label} es ${esTruthy ? "Truthy" : "Falsy"}`, esTruthy ? "ok" : "warn");
+});
+
+// 4. Cláusulas de guarda (Early Return)
+function verificarAcceso(edad, tieneEntrada) {
+    if (Number.isNaN(edad) || edad < 0) return { ok: false, msg: "❌ Edad inválida." };
+    if (edad < 18) return { ok: false, msg: "⛔ Denegado: debes ser mayor de 18 años." };
+    if (!tieneEntrada) return { ok: false, msg: "⛔ Denegado: necesitas una entrada válida." };
+    return { ok: true, msg: "✅ Acceso concedido. ¡Bienvenido al evento!" };
 }
-console.log("%cResultado SWITCH:", "color: #e11d48; font-weight: bold;", `Hoy es ${nombreDia}`);
 
-/* 4. Evaluación de valores "Truthy" y "Falsy" */
-/**
- * JavaScript convierte valores automáticamente a booleanos en contextos condicionales.
- * VALORES FALSY: false, 0, "", null, undefined, NaN.
- */
-let nombreUsuario = ""; // String vacío es 'Falsy'
+document.getElementById("btn-eval-acceso").addEventListener("click", () => {
+    const edad = Number(document.getElementById("input-edad-acceso").value);
+    const tieneEntrada = document.getElementById("chk-entrada").checked;
+    const res = verificarAcceso(edad, tieneEntrada);
 
-if (nombreUsuario) {
-    console.log("Bienvenido " + nombreUsuario);
-} else {
-    console.log("%cEvaluación Truthy/Falsy:", "color: #4b5563;", "Usuario anónimo detectado");
-}
+    document.getElementById("out-acceso").textContent = res.msg;
+    registrar(`Validar acceso (edad=${edad}, entrada=${tieneEntrada}) -> ${res.msg}`, res.ok ? "ok" : "warn");
+});
 
-/* 5. Ejemplo práctico: Validación de acceso */
-let tieneEntrada = true;
-let dinero = 50;
-const PRECIO_ENTRADA = 100;
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
 
-// Uso de operadores lógicos combinados
-if (tieneEntrada || dinero >= PRECIO_ENTRADA) {
-    console.log("%cAcceso:", "color: #059669; font-weight: bold;", "Concedido");
-} else {
-    console.log("%cAcceso:", "color: #dc2626; font-weight: bold;", "Denegado");
-}
+registrar("Laboratorio de Condicionales listo.");

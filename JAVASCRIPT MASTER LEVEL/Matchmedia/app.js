@@ -19,7 +19,7 @@
         // Índice de la diapositiva actualmente mostrada (del 1 al 11)
         currentSlide: 1,
         // Número total de diapositivas interactivas definidas en el documento
-        totalSlides: 11,
+        totalSlides: 12,
         // Modo de visualización actual: 'slides' para presentación o 'guide' para lectura continua
         viewMode: 'slides',
         // Indicador booleano para habilitar o silenciar los efectos del sintetizador de audio

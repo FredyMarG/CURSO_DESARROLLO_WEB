@@ -1,58 +1,131 @@
 /**
- * PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
- * Clase base, herencia con extends/super y getters/setters.
+ * GUÍA INTERACTIVA: PROGRAMACIÓN ORIENTADA A OBJETOS (ES2022+)
  */
 
-console.log("%c--- LABORATORIO: POO ---", "color: #1a73e8; font-weight: bold; font-size: 12px;");
+"use strict";
 
-/**
- * CLASE BASE (Animal): Define la estructura común para cualquier animal.
- */
+const liveConsole = document.getElementById("live-console");
+
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+}
+
+// 1. Clases, Herencia y Polimorfismo
 class Animal {
-    constructor(especie, edad, color){
+    constructor(nombre, especie) {
+        this.nombre = nombre;
         this.especie = especie;
-        this.edad = edad;
-        this.color = color;
-        /** Propiedad calculada durante la instanciación */
-        this.info = `Soy ${this.especie}, tengo ${this.edad} años y soy de color ${this.color}`;
     }
 
-    /* Método de instancia: imprime la información del animal */
-    verInfo(){
-        console.log(`%c[Animal]: %c${this.info}`, "color: #1a73e8; font-weight: bold;", "color: #111827;");
+    sonido() {
+        return "Sonido genérico";
+    }
+
+    describir() {
+        return `${this.nombre} (${this.especie}) dice: ${this.sonido()}`;
     }
 }
 
-/* Herencia: Perro extiende Animal y añade la noción de raza */
-class Perro extends Animal{
-    constructor(especie,edad,color,raza){
-        // super(): Llama al constructor padre para reutilizar su lógica
-        super(especie,edad,color);
+class Perro extends Animal {
+    constructor(nombre, raza) {
+        super(nombre, "Perro");
         this.raza = raza;
     }
 
-    /* SETTER: Permite modificar la raza de forma controlada */
-    // Se usa como: perro.raza = "Nuevo Valor"
-    set setRaza(newName) {
-        this.raza = newName;
-    }
-
-    /* GETTER: Permite obtener la raza como si fuera una propiedad */
-    // Se usa como: console.log(perro.raza)
-    get getRaza() {
-        return this.raza;
+    sonido() {
+        return "¡Guau!";
     }
 }
 
-/* --- PRUEBAS DE INSTANCIACIÓN --- */
-const perro = new Perro("perro",5,"marron", "doberman")
-const gato = new Animal("gato", 2, "negro")
-const pajaro = new Animal("pajaro", 1, "verde")
+document.getElementById("btn-crear-perro").addEventListener("click", () => {
+    const nombre = document.getElementById("poo-nombre").value.trim() || "Rex";
+    const raza = document.getElementById("poo-raza").value.trim() || "Mestizo";
+    const perro = new Perro(nombre, raza);
 
-perro.verInfo();
-gato.verInfo();
+    document.getElementById("out-poo-herencia").textContent =
+        `${perro.describir()}\nRaza: ${perro.raza}\n` +
+        `perro instanceof Perro:  ${perro instanceof Perro}\n` +
+        `perro instanceof Animal: ${perro instanceof Animal}`;
+    registrar(`Instanciado Perro("${nombre}", "${raza}").`);
+});
 
-// Uso del SETTER (se comporta como una asignación de propiedad)
-perro.setRaza = "Golden Retriever";
-// Uso del GETTER (se comporta como una propiedad de solo lectura)
-console.log("%cNueva raza del perro (vía Getter):", "color: #1e40af; font-style: italic;", perro.getRaza);
+// 2. Encapsulamiento con #campoPrivado
+class CuentaBancaria {
+    #saldo = 100;
+
+    get saldo() {
+        return this.#saldo;
+    }
+
+    depositar(monto) {
+        if (Number.isNaN(monto) || monto <= 0) {
+            throw new Error("El depósito debe ser mayor a 0.");
+        }
+        this.#saldo += monto;
+    }
+
+    retirar(monto) {
+        if (Number.isNaN(monto) || monto <= 0) {
+            throw new Error("El retiro debe ser mayor a 0.");
+        }
+        if (monto > this.#saldo) {
+            throw new Error("Fondos insuficientes.");
+        }
+        this.#saldo -= monto;
+    }
+}
+
+const cuenta = new CuentaBancaria();
+const outCuenta = document.getElementById("out-poo-cuenta");
+
+document.getElementById("btn-depositar").addEventListener("click", () => {
+    const monto = Number(document.getElementById("poo-monto").value);
+    try {
+        cuenta.depositar(monto);
+        outCuenta.textContent = `✅ Depósito de $${monto} exitoso.\nSaldo actual (getter): $${cuenta.saldo}`;
+        registrar(`Depósito $${monto} -> Saldo: $${cuenta.saldo}`);
+    } catch (err) {
+        outCuenta.textContent = `❌ ${err.message}\nSaldo actual: $${cuenta.saldo}`;
+        registrar(err.message, "err");
+    }
+});
+
+document.getElementById("btn-retirar").addEventListener("click", () => {
+    const monto = Number(document.getElementById("poo-monto").value);
+    try {
+        cuenta.retirar(monto);
+        outCuenta.textContent = `✅ Retiro de $${monto} exitoso.\nSaldo actual (getter): $${cuenta.saldo}`;
+        registrar(`Retiro $${monto} -> Saldo: $${cuenta.saldo}`);
+    } catch (err) {
+        outCuenta.textContent = `❌ ${err.message}\nSaldo actual: $${cuenta.saldo}`;
+        registrar(err.message, "err");
+    }
+});
+
+// 3. Métodos estáticos
+class Validador {
+    static MIN_CARACTERES = 3;
+
+    static esNombreValido(texto) {
+        return typeof texto === "string" && texto.trim().length >= this.MIN_CARACTERES;
+    }
+}
+
+document.getElementById("btn-static").addEventListener("click", () => {
+    const texto = document.getElementById("poo-validar-nombre").value;
+    const valido = Validador.esNombreValido(texto);
+    document.getElementById("out-poo-static").textContent =
+        `Validador.esNombreValido(${JSON.stringify(texto)}) -> ${valido} (mín. ${Validador.MIN_CARACTERES} caracteres)`;
+    registrar(`Validador.esNombreValido("${texto}") -> ${valido}`);
+});
+
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+registrar("Laboratorio de POO listo.");

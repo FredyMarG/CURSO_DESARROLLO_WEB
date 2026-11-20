@@ -722,35 +722,66 @@ Puede romper:
 
 ---
 
-# 24. DELEGACIÓN DE EVENTOS
+# 24. DELEGACIÓN DE EVENTOS Y PATRONES MODERNOS
 
-- Concepto
-- Ventajas
-- event.target
-- event.currentTarget
-- matches()
-- closest()
+En lugar de asignar un `addEventListener` a cientos de botones o elementos dinámicos, se asigna **un solo listener al contenedor padre** aprovechando el *bubbling*:
+
+```javascript
+const lista = document.querySelector("#lista-tareas");
+
+lista.addEventListener("click", (e) => {
+    const botonEliminar = e.target.closest("[data-action='delete']");
+    if (!botonEliminar || !lista.contains(botonEliminar)) return;
+
+    const item = botonEliminar.closest("li");
+    item.remove();
+});
+```
+
+### Opciones modernas de `addEventListener(tipo, fn, opciones)`
+* **`{ once: true }`:** Ejecuta el listener una sola vez y se auto-elimina.
+* **`{ passive: true }`:** Promete al navegador que no llamarás `e.preventDefault()`, optimizando el scroll táctil/rueda (60 FPS).
+* **`{ signal: controller.signal }`:** Permite remover múltiples listeners de golpe llamando `controller.abort()`.
+
+### Eventos Personalizados (`CustomEvent`)
+Permiten comunicar módulos desacoplados emitiendo datos en `detail`:
+```javascript
+document.dispatchEvent(new CustomEvent("carrito:actualizado", {
+    detail: { totalItems: 3, subtotal: 120 }
+}));
+
+document.addEventListener("carrito:actualizado", (e) => {
+    console.log("Items:", e.detail.totalItems);
+});
+```
 
 ---
 
 # 25. BUENAS PRÁCTICAS
 
-# 26. ERRORES COMUNES
-
-# 27. DEBUGGING
-
-# 28. OPTIMIZACIÓN
-
-# 29. PROYECTOS PRÁCTICOS
-
-1. Atajos de teclado
-2. Menú contextual
-3. Sistema Drag & Drop
-4. Reproductor multimedia
-5. Formulario avanzado
+* ✅ **Usa Delegación de Eventos** con `e.target.closest(selector)` para listas dinámicas y tablas.
+* ✅ **Limpia listeners innecesarios** con `AbortController` en componentes que se montan y desmontan.
+* ✅ **Aplica `{ passive: true }`** en eventos `scroll`, `wheel` y `touchstart` cuando no bloquees el desplazamiento.
+* ✅ **Usa `pointerdown` / `pointerup`** en lugar de duplicar lógica para `mouse` y `touch`.
 
 ---
 
-# 30. RESUMEN FINAL
+# 26. ERRORES COMUNES
 
-Esta es la estructura maestra sobre la que se debe expandir cada evento con explicaciones completas, ejemplos, casos reales, debugging, optimización y ejercicios.
+* ❌ **Confundir `e.target` con `e.currentTarget`:** `target` es el elemento exacto donde ocurrió el clic (puede ser un `<span>` o `<svg>` dentro del botón); `currentTarget` es el elemento que tiene el listener.
+* ❌ **Usar funciones anónimas si luego necesitas `removeEventListener`:** Sin una referencia guardada a la función (o un `AbortController`), no podrás removerla.
+* ❌ **Abusar de `e.stopPropagation()`:** Puede romper librerías de analítica, menús que se cierran al hacer clic fuera o delegación en ancestros.
+
+---
+
+# 27. HOJA DE TRUCOS (CHEATSHEET)
+
+| API / Patrón | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| `el.addEventListener(ev, fn, opts)` | Registra un manejador de eventos. | `btn.addEventListener("click", fn, { once: true })` |
+| `{ passive: true }` | Mejora rendimiento en `scroll`/`touch`. | `window.addEventListener("scroll", fn, { passive: true })` |
+| `{ signal: ctrl.signal }` | Remueve listeners con `ctrl.abort()`. | `el.addEventListener("click", fn, { signal })` |
+| `e.target.closest(sel)` | Encuentra el ancestro más cercano que coincide. | `const btn = e.target.closest(".btn-edit");` |
+| `e.preventDefault()` | Cancela la acción nativa (ej. submit de `<form>`). | `form.addEventListener("submit", e => e.preventDefault())` |
+| `e.stopPropagation()` | Detiene la propagación (bubbling) hacia padres. | `modal.addEventListener("click", e => e.stopPropagation())` |
+| `new CustomEvent(name, { detail })` | Crea un evento personalizado con payload. | `el.dispatchEvent(new CustomEvent("saved", { detail }))` |

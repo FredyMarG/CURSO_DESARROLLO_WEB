@@ -1,95 +1,103 @@
-/**
- * 🛠️ MODULE: SCREEN & SCROLL TELEMETRY
- * 
- * ARQUITECTURA: Layout basado en Grid para la presentación de métricas.
- * RENDIMIENTO: Uso de 'contain: layout' para aislar el renderizado del panel de datos.
- */
-
-/* BASE STYLES: Configuración del entorno global */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --success: #34d399;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    color: #f8fafc;            /* Color de texto: Gris muy claro para contraste en fondo oscuro */
-    font-family: 'Inter', system-ui, sans-serif; /* Tipografía: Pila de fuentes modernas y legibles */
-    background-color: #0f172a; /* Color de fondo: Azul marino profundo (Slate-900) */
-    margin: 0;                 /* Margen: Elimina el espacio exterior predeterminado del navegador */
-    padding: 0;                /* Relleno: Elimina el espacio interior predeterminado */
-    line-height: 1.5;          /* Interlineado: Mejora la legibilidad vertical del texto */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* DASHBOARD: Contenedor principal fijo */
-.dashboard {
-    padding: 2rem;             /* Relleno: Espacio interno de 32px para alejar contenido de los bordes */
-    max-width: 900px;          /* Ancho máximo: Limita el crecimiento horizontal en pantallas grandes */
-    margin: 0 auto;            /* Margen: Centra horizontalmente el contenedor en la pantalla */
+.container { width: min(1050px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-header {
-    margin-bottom: 2rem;       /* Margen inferior: Separa el encabezado del panel de monitoreo */
-    border-left: 4px solid #3b82f6; /* Acento visual azul */
-    padding-left: 1rem;        /* Relleno izquierdo: Espacio entre el borde decorativo y el texto */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-h1 { margin: 0; font-size: 1.8rem; } /* Elimina margen y establece tamaño de fuente jerárquico */
-.subtitle { color: #94a3b8; font-size: 0.9rem; } /* Color tenue y tamaño reducido para contexto */
-
-/* MONITOR PANEL: Grid de tarjetas de datos */
-.monitor-panel {
-    display: grid;             /* Grid: Activa el sistema de rejilla bidimensional */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Columnas: Layout responsivo sin media queries */
-    gap: 1.5rem;               /* Brecha: Espacio de 24px entre las tarjetas del panel */
-    position: sticky;          /* Posición: Mantiene el elemento fijo al hacer scroll dentro del contenedor */
-    top: 2rem;                 /* Top: Define la distancia desde el borde superior donde se "pega" */
-    z-index: 10;               /* Z-Index: Asegura que el panel quede por encima del contenido al scrollear */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* STAT CARD: Estilo de contenedor para métricas */
-.stat-card {
-    background: #1e293b;       /* Color de fondo: Gris azulado oscuro (Slate-800) */
-    padding: 1.5rem;           /* Relleno: Espacio interno generoso para los datos */
-    border-radius: 12px;       /* Bordes: Esquinas suavizadas para estética moderna */
-    border: 1px solid #334155; /* Borde: Define los límites con un color sutil */
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); /* Sombra: Aporta profundidad y elevación */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
-
-.stat-card h2 {
-    font-size: 1.1rem;         /* Tamaño de fuente: Jerarquía clara para títulos de sección */
-    margin-top: 0;             /* Margen: Alineación perfecta con el borde superior de la card */
-    color: #60a5fa;            /* Color: Azul brillante para énfasis técnico */
+.full-width { grid-column: 1 / -1; min-height: 220px; }
+.desc { color: var(--muted); font-size: 0.92rem; }
+.kv-list { display: flex; flex-direction: column; gap: 0.45rem; }
+.kv-item {
+    display: flex;
+    justify-content: space-between;
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.84rem;
 }
-
-.data-grid p {
-    font-family: 'Courier New', monospace; /* Fuente: Monoespaciada para datos de telemetría */
-    background: #0f172a;       /* Fondo: Contraste oscuro para cada línea de datos */
-    padding: 8px;              /* Relleno: Área interna para legibilidad del dato */
-    border-radius: 6px;        /* Bordes: Consistencia con el diseño de la card */
-    display: flex;             /* Flex: Alinea el label y el valor en los extremos */
-    justify-content: space-between; /* Justificación: Distribuye espacio entre elementos */
-}
-
-span { color: #fbbf24; }      /* Color: Ámbar para resaltar los valores numéricos dinámicos */
-
-/* ACTIONS: Botonera de control de scroll */
-.button-group {
-    display: flex;             /* Flex: Organiza los botones en una fila horizontal */
-    gap: 10px;                 /* Brecha: Separación de 10px entre botones */
-    margin-top: 1rem;          /* Margen superior: Separa la botonera de los datos */
-}
-
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .btn {
-    flex: 1;                   /* Flex: Permite que los botones crezcan equitativamente */
-    padding: 10px;             /* Relleno: Área de clic cómoda */
-    border: none;              /* Borde: Elimina el estilo predeterminado del navegador */
-    border-radius: 6px;        /* Bordes: Curvatura consistente con la UI */
-    cursor: pointer;           /* Cursor: Cambia a puntero para indicar interactividad */
-    font-weight: 600;          /* Grosor: Resalta el texto de acción */
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-.btn-primary { background: #3b82f6; color: white; } /* Botón principal: Azul brillante */
-.btn-secondary { background: #475569; color: white; } /* Botón secundario: Gris neutro */
-
-/* SPACER: Fuerza el scroll vertical para pruebas */
-.content-spacer {
-    height: 2000px;            /* Altura: Crea un área extensa para habilitar el desplazamiento vertical */
-    background: linear-gradient(to bottom, transparent, #1e293b); /* Fondo: Degradado decorativo */
-    margin-top: 2rem;          /* Margen: Separación del panel de monitoreo */
-    opacity: 0.3;              /* Opacidad: Reduce la intensidad visual del espaciador */
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.scroll-container {
+    height: 170px;
+    overflow-y: auto;
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
 }
+.spacer { height: 180px; color: var(--muted); display: grid; place-items: center; }
+.target-card {
+    padding: 1.2rem;
+    background: rgba(56, 189, 248, 0.14);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 700;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+.target-card.visible {
+    border-color: var(--success);
+    transform: scale(1.02);
+}
+.output {
+    background: #0f172a;
+    border-left: 3px solid var(--accent);
+    padding: 0.7rem;
+    border-radius: 6px;
+}
+.output.ok { border-left-color: var(--success); color: var(--success); }

@@ -18,11 +18,13 @@
 12. El método `.finally()`
 13. Encadenamiento de Promesas (Promise Chaining)
 14. Evitando el Callback Hell
-15. Métodos estáticos útiles (Promise.all, Promise.allSettled, etc.)
-16. Ejemplos del mundo real
-17. Errores comunes
-18. Ejercicios prácticos
-19. Resumen final
+15. Métodos estáticos útiles (`Promise.all`, `allSettled`, `race`, `any`, `withResolvers`)
+16. Event Loop: Microtasks vs. Macrotasks
+17. Buenas prácticas
+18. Errores comunes
+19. Ejercicios prácticos
+20. Resumen final
+21. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -346,6 +348,60 @@ Promise.race([descargaRapida, descargaLenta])
 
 ---
 
+## 4. Promise.any() (ES2021)
+
+Recibe un array de promesas y se resuelve con el valor de **la primera promesa que tenga éxito** (`fulfilled`), ignorando los rechazos previos. Solo falla (lanzando un `AggregateError`) si **todas** las promesas son rechazadas. Es ideal para consultar múltiples servidores espejo (mirrors) y quedarse con el primero que responda bien.
+
+```javascript
+Promise.any([servidorMirror1, servidorMirror2, servidorMirror3])
+    .then(dato => console.log("Primer servidor exitoso:", dato))
+    .catch(err => console.error("Todos fallaron:", err.errors));
+```
+
+---
+
+## 5. Promise.withResolvers() (ES2024)
+
+Introducido en **ECMAScript 2024**, permite extraer `{ promise, resolve, reject }` directamente sin tener que anidar el código dentro del callback ejecutor `new Promise((resolve, reject) => ...)`. Es muy útil cuando necesitas resolver una promesa desde un evento externo o desde fuera de su creación.
+
+```javascript
+const { promise, resolve, reject } = Promise.withResolvers();
+
+// Puedes pasar resolve/reject a manejadores externos limpiamente
+botonConfirmar.addEventListener("click", () => resolve("Confirmado"), { once: true });
+botonCancelar.addEventListener("click", () => reject(new Error("Cancelado")), { once: true });
+
+promise.then(console.log).catch(console.error);
+```
+
+---
+
+# ⏱️ EVENT LOOP: MICROTASKS VS. MACROTASKS
+
+Las callbacks de las promesas (`.then`, `.catch`, `.finally`) no se ejecutan inmediatamente ni en la misma cola que `setTimeout`. Viven en la **Microtask Queue (Cola de Microtareas)**, que tiene **mayor prioridad** que la **Macrotask Queue** (`setTimeout`, `setInterval`, eventos DOM).
+
+```javascript
+console.log("1. Síncrono");
+
+setTimeout(() => console.log("4. Macrotask (setTimeout)"), 0);
+
+Promise.resolve().then(() => console.log("3. Microtask (Promise.then)"));
+
+console.log("2. Síncrono");
+// Orden real de salida: 1 -> 2 -> 3 -> 4
+```
+
+---
+
+# ✅ BUENAS PRÁCTICAS
+
+* ✅ **Retorna siempre en los `.then()`:** Garantiza que la cadena reciba el valor o espere la siguiente promesa.
+* ✅ **Rechaza siempre con objetos `Error` (`reject(new Error("..."))`):** Así conservas el `stack trace` para depurar, en lugar de pasar strings simples.
+* ✅ **Usa `Promise.allSettled()` cuando necesites resultados parciales:** Si cargar un widget secundario falla, no arruines toda la pantalla usando `Promise.all()`.
+* ✅ **Prefiere `async/await` para flujos secuenciales complejos** y combina con `Promise.all` para tareas independientes en paralelo.
+
+---
+
 # ⚠️ ERRORES COMUNES
 
 ## 1. Olvidar retornar la promesa en una cadena
@@ -453,3 +509,19 @@ Dadas dos promesas, una que tarda 1 segundo y otra que tarda 2 segundos. Utiliza
 * Se crean con `new Promise((resolve, reject) => { ... })`.
 * Se consumen con `.then()` para el éxito, `.catch()` para los errores y `.finally()` para tareas de cierre.
 * Permiten el encadenamiento (`chaining`) de operaciones consecutivas de forma limpia y legible.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| API / Método | Comportamiento | Caso de uso ideal |
+| :--- | :--- | :--- |
+| `new Promise((res, rej) => ...)` | Crea una promesa manualmente. | Envolver APIs antiguas basadas en callbacks. |
+| `Promise.withResolvers()` | Devuelve `{ promise, resolve, reject }` (ES2024). | Resolver promesas desde eventos externos. |
+| `Promise.resolve(val)` / `reject(err)` | Crea una promesa ya resuelta o rechazada. | Tests, valores por defecto o caché inmediata. |
+| `.then(fn)` / `.catch(fn)` / `.finally(fn)` | Maneja éxito, error y limpieza final. | Consumo y encadenamiento de promesas. |
+| `Promise.all([...])` | Espera a todas; falla rápido si **una** rechaza. | Cargar datos dependientes entre sí en paralelo. |
+| `Promise.allSettled([...])` | Espera a todas; devuelve estado de cada una. | Múltiples peticiones independientes sin abortar todo. |
+| `Promise.race([...])` | Gana la primera en terminar (éxito o error). | Competencia de velocidad o timeouts manuales. |
+| `Promise.any([...])` | Gana la primera en **resolverse** con éxito (ES2021). | Consultar múltiples servidores espejo (fallback). |
+| Microtask Queue | Cola prioritaria de `.then/.catch` en el Event Loop. | Se ejecuta antes que cualquier `setTimeout(..., 0)`. |

@@ -41,7 +41,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 11</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -1068,6 +1068,46 @@ try {
                     <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
                         <span>📋 Copiar Chuleta Rápida en Markdown</span>
                     </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Solucionario & Cheatsheet Flecha">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Referencia & Solucionario</span>
+                    <h2 class="slide-title">11. Solucionario Integrador y Hoja de Trucos</h2>
+                    <p class="slide-description">Repaso rápido de closures, recursividad, parámetros rest y diferencias clave frente a function tradicional.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🔁</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Closures & Recursividad</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const crearContador = (n = 0) => () => ++n;
+const fact = n => n <= 1 ? 1 : n * fact(n - 1);</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Las funciones flecha brillan en callbacks, cierres léxicos y expresiones funcionales.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🎯</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Ámbito Léxico de 'this'</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>// Hereda 'this' del contexto padre
+// No usar como método ni con 'new'</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">No poseen arguments, prototype ni constructor propio.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>n => n * 2 // retorno implícito
+() => ({ id: 1 }) // objeto entre ()
+(...args) => args.length // rest</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Usa paréntesis obligatorios cuando retornas un objeto literal implícitamente.</p>
+                    </div>
                 </div>
             </div>
         </section>

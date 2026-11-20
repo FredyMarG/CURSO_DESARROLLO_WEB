@@ -1,72 +1,83 @@
-/**
- * GUÍA DE MANEJO DE EXCEPCIONES EN JAVASCRIPT
- * Este script demuestra el flujo de control mediante try, catch, finally
- * y la capacidad de lanzar excepciones personalizadas.
- */
+// Guía Interactiva — Try, Catch, Finally y Error({ cause })
 
-// 1. Estructura básica Try-Catch
-// Se utiliza para envolver código que puede fallar (como variables no definidas).
-try {
-    // Intentamos acceder a una variable que no existe (ReferenceError)
-    fhjsjsj;
-} catch (error) {
-    console.log("Ocurrió un error de referencia");
-}
-
-// 2. Lógica interna en el bloque Catch
-// El bloque catch es un entorno de ejecución normal donde podemos aplicar lógica.
-try {
-    asjfjgj; // Provoca error
-} catch (error) {
-    // Ejemplo de validación lógica dentro del manejo de la excepción
-    if (3 > 5) {
-        console.log("Ocurrió un error de referencia");
-    } else {
-        console.log("Error capturado, pero la condición lógica resultó en 'nada'");
+class ValidationError extends Error {
+    constructor(message, options) {
+        super(message, options);
+        this.name = "ValidationError";
     }
 }
 
-/**
- * 3. El comportamiento crítico de 'finally'
- * El bloque finally SIEMPRE se ejecuta, independientemente de si hubo error o no.
- * NOTA: Si finally retorna un valor, sobrescribirá cualquier return previo del try o catch.
- * 
- * @returns {number} Retornará 3 debido a la prioridad de finally sobre try.
- */
-const pruebaTry = () => {
+const jsonInput = document.getElementById("jsonInput");
+const jsonOutput = document.getElementById("jsonOutput");
+const edadInput = document.getElementById("edadInput");
+const errorOutput = document.getElementById("errorOutput");
+const traceTerminal = document.getElementById("traceTerminal");
+
+function addTrace(texto, clase = "") {
+    const div = document.createElement("div");
+    div.className = clase;
+    div.textContent = `[${new Date().toLocaleTimeString()}] ${texto}`;
+    traceTerminal.appendChild(div);
+    traceTerminal.scrollTop = traceTerminal.scrollHeight;
+}
+
+document.getElementById("btnBreakJson").addEventListener("click", () => {
+    jsonInput.value = "{'curso': 'JS', activo: true,}";
+});
+
+document.getElementById("btnParseJson").addEventListener("click", () => {
+    traceTerminal.innerHTML = "";
+    addTrace("try { JSON.parse(...) }");
     try {
-        return 1; // Se prepara el retorno 1
-    } catch (e) {
-        return 2;
+        const parsed = JSON.parse(jsonInput.value);
+        jsonOutput.className = "output ok";
+        jsonOutput.textContent = `JSON válido: ${JSON.stringify(parsed)}`;
+        addTrace("Éxito: JSON deserializado correctamente.", "ok");
+    } catch (err) {
+        jsonOutput.className = "output err";
+        jsonOutput.textContent = `${err.name}: ${err.message}`;
+        addTrace(`catch (${err.name}): ${err.message}`, "err");
     } finally {
-        // Este bloque se ejecuta justo antes de que la función termine.
-        // Al tener un return aquí, invalida el 'return 1' del bloque try.
-        return 3;
+        addTrace("finally: Limpieza ejecutada siempre.", "warn");
     }
-};
+});
 
-console.log(`Resultado de pruebaTry: ${pruebaTry()}`);
+document.getElementById("btnValidarEdad").addEventListener("click", () => {
+    traceTerminal.innerHTML = "";
+    const edad = Number(edadInput.value);
+    addTrace(`try { validarEdad(${edad}) }`);
 
-// 4. Lanzamiento de excepciones personalizadas (Throw)
-// En JS podemos lanzar no solo objetos Error, sino cualquier tipo de dato (objetos, strings, etc).
-try {
-    // Lanzamos un objeto literal como excepción
-    throw {
-        error: "Nombre del error",
-        info: "Información adicional sobre la falla"
-    };
-} catch (error) {
-    // El parámetro 'error' recibe exactamente lo que lanzamos arriba
-    console.log("Excepción personalizada capturada:");
-    console.log(error);
-}
+    try {
+        if (Number.isNaN(edad) || edad < 0) {
+            throw new TypeError("La edad debe ser un número positivo.");
+        }
+        if (edad < 18) {
+            throw new ValidationError("Acceso denegado: debes ser mayor de 18 años.");
+        }
+        errorOutput.className = "output ok";
+        errorOutput.textContent = `Edad válida (${edad} años). Acceso permitido.`;
+        addTrace("Validación superada sin excepciones.", "ok");
+    } catch (err) {
+        errorOutput.className = "output err";
+        errorOutput.textContent = `[${err.name}] ${err.message}`;
+        addTrace(`catch capturó ${err.name}: ${err.message}`, "err");
+    } finally {
+        addTrace("finally: Recursos liberados.", "warn");
+    }
+});
 
-// 5. Lanzamiento de colecciones (Arrays)
-// Al igual que con objetos, podemos lanzar arrays y procesarlos por índice dentro del catch.
-try {
-    // Lanzamos un array de strings como error
-    throw ["pedro", "jorge"];
-} catch (e) {
-    // El parámetro 'e' ahora es el array, por lo que podemos acceder a sus posiciones
-    console.log(`Usuario capturado en la excepción: ${e[1]}`); // Imprime "jorge"
-}
+document.getElementById("btnErrorCausa").addEventListener("click", () => {
+    traceTerminal.innerHTML = "";
+    try {
+        try {
+            JSON.parse("{corrupto}");
+        } catch (origen) {
+            throw new Error("Fallo al cargar la configuración del usuario", { cause: origen });
+        }
+    } catch (err) {
+        errorOutput.className = "output err";
+        errorOutput.textContent = `${err.message} | Causa raíz (${err.cause.name}): ${err.cause.message}`;
+        addTrace(`Error principal: ${err.message}`, "err");
+        addTrace(`err.cause: ${err.cause.name} -> ${err.cause.message}`, "warn");
+    }
+});

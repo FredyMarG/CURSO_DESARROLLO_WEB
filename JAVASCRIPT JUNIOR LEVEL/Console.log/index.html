@@ -1,50 +1,67 @@
-<!DOCTYPE html> <!-- Define que el documento utiliza el estándar HTML5 moderno -->
-<!-- 
-    ESTRUCTURA TÉCNICA: Pruebas de Consola
-    Este archivo actúa como un contenedor (host) para ejecutar scripts de depuración.
-    Al ser una práctica de consola, el cuerpo (body) permanece vacío visualmente.
--->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- 
-        METADATOS: Configuraciones que el navegador lee pero el usuario no ve.
-    -->
-    
-    <!-- Codificación universal: Permite mostrar tildes, eñes y caracteres especiales sin errores -->
     <meta charset="UTF-8">
-    
-    <!-- 
-        Diseño Responsivo: Asegura que la página se adapte al ancho de la pantalla 
-        de cualquier dispositivo (móvil, tablet o PC) y mantenga una escala inicial de 1:1.
-    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Texto que aparece en la pestaña del navegador -->
-    <title>Herramientas de Consola - JS Junior</title>
-
-    <!-- Vinculación de estilos externos (Modularidad) -->
+    <title>JS Junior — Guía Interactiva de Console API</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">>_</div>
-            <h1>Depuración y Consola</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 09 · Depuración y DevTools</span>
+            <h1>API <code>console</code> en JavaScript</h1>
+            <p>Dispara cada método de depuración y observa el resultado en el panel inferior y en la consola real del navegador (<code>F12</code> / <code>Ctrl + Shift + I</code>).</p>
         </header>
-        <section class="content">
-            <p>Aprende a inspeccionar variables, rastrear errores y estilizar mensajes directamente en el motor del navegador.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Abre la <b>Consola (Ctrl + Shift + I)</b> para ver los logs.</span>
+
+        <main class="grid">
+            <section class="card" aria-labelledby="co1">
+                <h2 id="co1">1. Niveles de Registro y <code>assert</code></h2>
+                <p class="note">Diferencia mensajes informativos, advertencias, errores y aserciones condicionales.</p>
+                <div class="row">
+                    <button type="button" data-con="log">console.log()</button>
+                    <button type="button" data-con="warn" class="secondary">console.warn()</button>
+                    <button type="button" data-con="error" class="secondary">console.error()</button>
+                    <button type="button" data-con="assert" class="secondary">console.assert()</button>
+                </div>
+                <pre class="code-preview">console.assert(stock &gt; 0, "Sin stock disponible");</pre>
+                <div id="out-con-niveles" class="output" aria-live="polite">Pulsa un botón para emitir un registro.</div>
+            </section>
+
+            <section class="card" aria-labelledby="co2">
+                <h2 id="co2">2. <code>table</code>, <code>group</code> y Estilos <code>%c</code></h2>
+                <p class="note">Visualiza arrays de objetos como tabla, agrupa trazas y aplica CSS en DevTools con <code>%c</code>.</p>
+                <div class="row">
+                    <button type="button" data-con="table">console.table()</button>
+                    <button type="button" data-con="group" class="secondary">console.group()</button>
+                    <button type="button" data-con="css" class="secondary">Estilos %c</button>
+                </div>
+                <pre class="code-preview">console.table(usuarios, ["nombre", "rol"]);</pre>
+                <div id="out-con-estruc" class="output" aria-live="polite">Mira la tabla formateada aquí y en DevTools.</div>
+            </section>
+
+            <section class="card" aria-labelledby="co3">
+                <h2 id="co3">3. Rendimiento (<code>time</code>), <code>count</code> y <code>trace</code></h2>
+                <p class="note">Mide cuánto tarda un algoritmo en milisegundos, cuenta invocaciones e imprime el <em>stack trace</em>.</p>
+                <div class="row">
+                    <button type="button" data-con="time">Medir bucle (time)</button>
+                    <button type="button" data-con="count" class="secondary">console.count()</button>
+                    <button type="button" data-con="trace" class="secondary">console.trace()</button>
+                </div>
+                <pre class="code-preview">console.time("bucle"); /* ... */ console.timeEnd("bucle");</pre>
+                <div id="out-con-perf" class="output" aria-live="polite">Ejecuta un benchmark o contador en vivo.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 
-    <!-- 
-        INYECCIÓN DE LÓGICA:
-        Colocamos el script al final del body para garantizar que el HTML se procese 
-        completamente antes de ejecutar el JavaScript, evitando bloqueos de carga.
-    -->
     <script src="console.log.js"></script>
 </body>
 </html>

@@ -327,3 +327,42 @@ const mostrarCatalogo = async (db) => {
 * **IndexedDB** es una base de datos NoSQL asíncrona en el navegador ideal para guardar grandes volúmenes de objetos nativos y archivos de forma persistente.
 * **Su arquitectura gira en torno a eventos y transacciones:** La estructura se define en `onupgradeneeded` y las operaciones se ejecutan dentro de transacciones `"readonly"` o `"readwrite"`.
 * **Encapsular las solicitudes en `Promise`** permite integrar IndexedDB con la sintaxis moderna de `async/await`, facilitando su combinación con `fetch()` para aplicaciones *offline-first*.
+
+
+---
+
+# Conceptos Complementarios: Índices Secundarios (`createIndex`) y Cursores (`openCursor`)
+
+### 1. Búsquedas rápidas por otro campo (`createIndex`)
+Dentro de `onupgradeneeded`, puedes crear índices para buscar sin recorrer toda la base:
+```javascript
+const store = db.createObjectStore("usuarios", { keyPath: "id", autoIncrement: true });
+store.createIndex("por_email", "email", { unique: true });
+
+// Luego, en una transacción de lectura:
+const index = tx.objectStore("usuarios").index("por_email");
+const req = index.get("ana@ejemplo.com");
+```
+
+### 2. Recorrer registros uno a uno (`openCursor`)
+```javascript
+store.openCursor().onsuccess = (e) => {
+    const cursor = e.target.result;
+    if (cursor) {
+        console.log(cursor.key, cursor.value);
+        cursor.continue(); // Avanza al siguiente registro
+    }
+};
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / Evento | Uso Principal |
+| :--- | :--- |
+| `indexedDB.open(nombre, version)` | Abre o crea la base de datos |
+| `onupgradeneeded` | Único lugar permitido para `createObjectStore()` y `createIndex()` |
+| `db.transaction([store], modo)` | Inicia transacción `"readonly"` o `"readwrite"` |
+| `store.add()` / `put()` / `get()` / `delete()` | Operaciones CRUD sobre el almacén |
+| `store.getAll()` | Obtiene todos los registros en un arreglo |

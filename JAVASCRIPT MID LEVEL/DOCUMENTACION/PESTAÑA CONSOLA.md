@@ -923,3 +923,31 @@ Dominarla significa:
 ✅ Performance debugging.
 ✅ Consola interactiva.
 ✅ Análisis profundo de ejecución.
+
+---
+
+# 🚀 Console Utilities API y Funciones Modernas
+
+Chrome DevTools ofrece utilidades exclusivas dentro de la pestaña **Console** (no existen en código normal de producción):
+
+* **`$0` a `$4`:** Referencian los últimos 5 elementos seleccionados en la pestaña **Elements** (`$0` es el actual).
+* **`$_`:** Devuelve el resultado de la última expresión evaluada en la consola.
+* **`$(selector)` y `$$(selector)`:** Atajos para `document.querySelector()` y `[...document.querySelectorAll()]`.
+* **`copy(valor)`:** Copia cualquier objeto, string o JSON directamente al portapapeles del sistema.
+* **`monitorEvents(el, "click")` / `unmonitorEvents(el)`:** Imprime en consola cada vez que se dispara un evento en `el`.
+* **Top-Level `await` en Consola:** Puedes ejecutar `await fetch("/api/test").then(r => r.json())` directamente sin función `async`.
+* **Live Expressions (icono del ojo 👁️):** Fija una expresión (ej. `document.activeElement` o `window.scrollY`) para ver su valor en tiempo real sin llenar la consola de logs.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Utilidad / Método | Función | Ejemplo en Consola |
+| :--- | :--- | :--- |
+| `$0` / `$_` | Último nodo DOM inspeccionado / último resultado. | `$0.classList.add("debug")` |
+| `$(sel)` / `$$(sel)` | `querySelector` / `querySelectorAll` como Array. | `$$("img").map(i => i.src)` |
+| `copy(obj)` | Copia datos formateados al portapapeles. | `copy(JSON.stringify(datos, null, 2))` |
+| `monitorEvents(el, ev)` | Registra eventos disparados en un elemento. | `monitorEvents($0, "mouse")` |
+| `console.table(arr)` | Muestra arrays u objetos en tabla interactiva. | `console.table(usuarios)` |
+| `console.time(id)` / `timeEnd` | Mide el tiempo exacto de ejecución en ms. | `console.time("api"); ... console.timeEnd("api")` |
+| `console.groupCollapsed()` | Agrupa logs colapsados para mantener orden. | `console.groupCollapsed("Auth")` |

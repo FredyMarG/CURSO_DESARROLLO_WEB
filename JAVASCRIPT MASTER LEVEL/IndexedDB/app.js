@@ -19,7 +19,7 @@
         // Índice de la diapositiva actualmente visible (1 a 11)
         currentSlide: 1,
         // Cantidad total de diapositivas interactivas
-        totalSlides: 11,
+        totalSlides: 12,
         // Modo de visualización activo: 'slides' (presentación) o 'guide' (documento continuo)
         viewMode: 'slides',
         // Estado del sintetizador de audio para efectos sonoros
@@ -692,7 +692,8 @@
                     const nivel = inputNivel ? inputNivel.value.trim() : '';
 
                     if (!nombre) {
-                        alert('Por favor introduce un nombre para el registro.');
+                        this.log('⚠️ Por favor introduce un nombre para el registro.');
+                        if (inputNombre) inputNombre.focus();
                         return;
                     }
 

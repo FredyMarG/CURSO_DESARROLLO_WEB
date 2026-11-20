@@ -305,3 +305,41 @@ crearPublicacion("Aprendiendo APIs", "El uso de fetch es muy poderoso.")
 * **Una API** es el puente de comunicación que permite intercambiar información entre el cliente y el servidor mediante peticiones HTTP.
 * **`fetch()` junto con `async/await`** es el estándar moderno en JavaScript para consumir APIs de manera asíncrona y legible.
 * **La conversión a `.json()` es obligatoria y asíncrona**, y siempre debe ir acompañada de la validación `response.ok` dentro de un bloque `try...catch` para garantizar un software robusto.
+
+
+---
+
+# Conceptos Complementarios: `AbortController` y Peticiones en Paralelo
+
+### 1. Cancelar una petición `fetch()` o aplicar Timeout (`AbortController`)
+```javascript
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5000); // Cancela si tarda más de 5 segundos
+
+try {
+    const res = await fetch("https://api.ejemplo.com/datos", { signal: controller.signal });
+    const data = await res.json();
+} catch (err) {
+    if (err.name === "AbortError") console.warn("Petición cancelada por tiempo límite.");
+}
+```
+
+### 2. Múltiples peticiones simultáneas (`Promise.all`)
+```javascript
+const [usuarios, productos] = await Promise.all([
+    fetch("/api/usuarios").then(r => r.json()),
+    fetch("/api/productos").then(r => r.json())
+]);
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento | Propósito |
+| :--- | :--- |
+| `fetch(url, options)` | Realiza peticiones HTTP asíncronas (retorna Promesa) |
+| `response.ok` | `true` si el código HTTP está entre `200` y `299` |
+| `response.json()` | Parsea el cuerpo de la respuesta JSON (asíncrono) |
+| `JSON.stringify(obj)` | Convierte un objeto JS en texto JSON para `body` en `POST`/`PUT` |
+| `AbortController` | Permite abortar peticiones `fetch()` en curso |

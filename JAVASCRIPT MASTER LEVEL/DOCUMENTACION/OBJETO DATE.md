@@ -248,3 +248,53 @@ console.log(relojDigital()); // Ejemplo de salida: "14:05:09"
 * **El objeto `Date`** requiere instanciarse con `new Date()` para poder invocar sus métodos de extracción de fecha y hora.
 * **Cuidado con los nombres de métodos:** en JavaScript real se escribe **`getDay()`** (en singular, no `getDays()`) para el día de la semana, y se debe usar **`getFullYear()`** en lugar del obsoleto `getYear()`.
 * **Atención a la indexación en cero:** tanto `getMonth()` (`0-11`) como `getDay()` (`0-6`) comienzan a contar desde cero, mientras que `getDate()` (`1-31`) empieza desde uno.
+
+
+---
+
+# Conceptos Complementarios: Formateo Moderno con `Intl.DateTimeFormat` y `Date.now()`
+
+### 1. Formateo Internacional Elegante (`Intl.DateTimeFormat`)
+En lugar de concatenar manualmente meses y días, la API nativa `Intl` formatea fechas según idioma y zona horaria:
+```javascript
+const fecha = new Date();
+const formato = new Intl.DateTimeFormat("es-CO", {
+    dateStyle: "full",
+    timeStyle: "short"
+}).format(fecha);
+console.log(formato); // Ej: "jueves, 19 de noviembre de 2026, 7:20 p. m."
+```
+
+### 2. Timestamps rápidos con `Date.now()`
+Si solo necesitas medir milisegundos o generar marcas de tiempo numéricas sin crear un objeto completo, usa `Date.now()`.
+
+### 3. El futuro moderno: la API `Temporal`
+Aunque `Date` ha sido el estándar desde 1995, presenta problemas históricos bien conocidos: es **mutable** (métodos como `setHours()` alteran la instancia original), los meses empiezan en `0`, y su soporte de zonas horarias es limitado.  
+Para resolverlo, el estándar ECMAScript introduce la API **`Temporal`** (sucesora moderna de `Date`), que ofrece:
+* **Inmutabilidad total:** Cada operación devuelve un nuevo objeto sin modificar el original.
+* **Meses humanos (`1` a `12`):** Enero es `1` y Diciembre es `12`.
+* **Zonas horarias IANA nativas:** Soporte de primera clase para `Temporal.ZonedDateTime`, `Temporal.PlainDate` y `Temporal.Instant`.
+
+```javascript
+// Ejemplo conceptual de Temporal (en navegadores modernos / polyfill @js-temporal/polyfill)
+if (typeof Temporal !== "undefined") {
+    const hoy = Temporal.Now.plainDateISO();
+    const enUnaSemana = hoy.add({ days: 7 }); // No muta 'hoy'
+    console.log(hoy.toString(), "->", enUnaSemana.toString());
+}
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / API | Retorno / Rango | Uso Principal |
+| :--- | :--- | :--- |
+| `new Date()` | Objeto `Date` | Fecha y hora actual del sistema |
+| `getFullYear()` | Número (4 dígitos) | Año completo (ej. `2026`) |
+| `getMonth()` | `0` a `11` | Mes (sumar `+1` al mostrarlo) |
+| `getDate()` / `getDay()` | `1..31` / `0..6` | Día del mes / Día de la semana (`0` = Domingo) |
+| `getHours() / Minutes() / Seconds()` | `0..23` / `0..59` | Componentes de hora |
+| `Date.now()` | Número (ms) | Milisegundos desde 1 de enero de 1970 |
+| `Intl.DateTimeFormat` | String formateado | Formateo localizado por idioma y zona horaria |
+| `Temporal` (Estándar moderno) | Objetos inmutables | Sucesor moderno de `Date` para fechas y zonas horarias |

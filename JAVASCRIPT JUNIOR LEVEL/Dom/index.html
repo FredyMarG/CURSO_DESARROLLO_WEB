@@ -1,55 +1,81 @@
 <!DOCTYPE html>
-<!-- 
-    LABORATORIO INTEGRADO: DOM (DOCUMENT OBJECT MODEL)
-    Este archivo unifica las prácticas de atributos, estilos, classList y navegación 
-    entre nodos (hijos, padres y hermanos).
--->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Enlace a la hoja de estilos externa para mantener la separación de intereses (Separation of Concerns) -->
+    <title>JS Junior — Guía Interactiva del DOM</title>
     <link rel="stylesheet" href="style.css">
-    <title>Aprendiendo el DOM - Junior Level</title>
 </head>
 <body>
-    <div class="card">
-        <!-- Atributo 'title': Proporciona información adicional (Tooltip nativo) -->
-        <h1 class="titulo" title="Encabezado principal">Manipulación del DOM</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 13 · Document Object Model</span>
+            <h1>Manipulación Moderna del DOM</h1>
+            <p>Practica <code>querySelector</code>, <code>classList</code>, creación eficiente con <code>DocumentFragment</code>, <code>append</code>/<code>prepend</code>/<code>replaceChildren</code>, delegación de eventos y <code>closest()</code>.</p>
+        </header>
 
-        <!-- Input fuera de formulario para pruebas de selección directa -->
-        <input type="text" class="input-normal" id="input-externo" placeholder="Input independiente">
+        <main class="grid">
+            <!-- Tarjeta 1: classList y textContent -->
+            <section class="card" aria-labelledby="d1">
+                <h2 id="d1">1. <code>classList</code> y <code>textContent</code></h2>
+                <p class="note">Alterna clases CSS sin tocar estilos inline y actualiza texto de forma segura (anti-XSS).</p>
+                <div id="caja-estilo" class="preview-box">Elemento manipulable del DOM</div>
+                <div class="row">
+                    <button id="btn-toggle-dest" type="button">toggle("destacado")</button>
+                    <button id="btn-toggle-grande" type="button" class="secondary">toggle("grande")</button>
+                </div>
+                <div class="controls">
+                    <label for="dom-texto-input">Nuevo texto (seguro con textContent):</label>
+                    <div class="row">
+                        <input id="dom-texto-input" type="text" value="¡DOM actualizado!" style="flex:1">
+                        <button id="btn-aplicar-texto" type="button">Aplicar</button>
+                    </div>
+                </div>
+                <div id="out-classlist" class="output" aria-live="polite">Clases actuales: "preview-box"</div>
+            </section>
 
-        <!-- Estructura de Formulario -->
-        <form id="formulario">
-            <div class="field-group">
-                <label for="nombre">Nombre de usuario:</label>
-                <input type="text" class="input-normal" id="nombre" placeholder="Ej: Fredy">
+            <!-- Tarjeta 2: Delegación de eventos + Fragment + replaceChildren -->
+            <section class="card" aria-labelledby="d2">
+                <h2 id="d2">2. Lista Dinámica, Delegación y <code>Fragment</code></h2>
+                <p class="note">Un único <code>addEventListener</code> en el <code>&lt;ul&gt;</code> padre detecta clics en cualquier botón eliminar usando <code>event.target.closest()</code>.</p>
+                <div class="controls">
+                    <label for="dom-item-input">Nuevo elemento:</label>
+                    <div class="row">
+                        <input id="dom-item-input" type="text" placeholder="Ej: Aprender IntersectionObserver" style="flex:1">
+                        <button id="btn-add-append" type="button">append()</button>
+                        <button id="btn-add-prepend" type="button" class="secondary">prepend()</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <button id="btn-add-lote" type="button" class="secondary">+3 con DocumentFragment</button>
+                    <button id="btn-vaciar" type="button" class="secondary">replaceChildren() (Vaciar)</button>
+                </div>
+                <ul id="dom-lista" class="dom-lista" aria-live="polite">
+                    <li><span>Elemento inicial 1</span><button type="button" class="btn-del">Eliminar</button></li>
+                    <li><span>Elemento inicial 2</span><button type="button" class="btn-del">Eliminar</button></li>
+                </ul>
+            </section>
+
+            <!-- Tarjeta 3: Navegación entre nodos -->
+            <section class="card" aria-labelledby="d3">
+                <h2 id="d3">3. Navegación entre Nodos y <code>closest()</code></h2>
+                <p class="note">Inspecciona hijos, hermanos y ancestros reales (ignorando nodos de texto/espacios).</p>
+                <div id="contenedor-nav" class="preview-box">
+                    <strong id="nav-hijo-1">Hijo 1</strong> · <span id="nav-hijo-2">Hijo 2</span>
+                </div>
+                <button id="btn-inspeccionar-dom" type="button">Inspeccionar Relaciones</button>
+                <pre class="code-preview">hijo1.nextElementSibling; hijo1.closest(".card");</pre>
+                <div id="out-nav" class="output" aria-live="polite">Pulsa el botón para inspeccionar el árbol DOM.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
-            
-            <div class="field-group">
-                <label for="archivo">Subir evidencia:</label>
-                <input type="file" class="input-normal" id="archivo">
-            </div>
-        </form>
-
-        <button type="submit" form="formulario">Enviar Datos</button>
-
-        <hr>
-
-        <!-- Manipulación de contenido y estilos -->
-        <p class="style">Elemento a <b>modificar</b> mediante JS</p>
-
-        <!-- Contenedor para prácticas de navegación (Padres/Hijos/Hermanos) -->
-        <div class="contenedor" style="margin-top: 20px; border: 1px dashed #ccc; padding: 10px;">
-            <h2>Subtítulo antiguo</h2>
-            <p>Este es el primer hijo del contenedor.</p>
-        </div>
-
-        <div class="status-box" style="margin-top: 20px;">
-            <span class="status-dot"></span>
-            <span>Resultados en <b>Consola (Ctrl + Shift + I)</b></span>
-        </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
     </div>
 
     <script src="main.js"></script>

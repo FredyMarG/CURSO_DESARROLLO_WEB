@@ -1,25 +1,39 @@
-/**
- * 💻 CONSOLE TAB LABORATORY
- * Uso de métodos de visualización y depuración avanzada.
- */
+// DevTools Lab — Pestaña Console
 
-// 1. Registro básico de información
-console.log("Iniciando monitor de consola...");
-
-// 2. Visualización de datos complejos en formato de tabla (Data Mapping)
-const dataset = [
-    { id: 101, evento: "Click", timestamp: Date.now() },
-    { id: 102, evento: "Scroll", timestamp: Date.now() }
+const consoleMirror = document.getElementById("consoleMirror");
+const usuarios = [
+    { id: 1, nombre: "Ana", nivel: "Senior" },
+    { id: 2, nombre: "Luis", nivel: "Mid" }
 ];
-console.table(dataset); // Genera una tabla interactiva en la consola
 
-// 3. Agrupación lógica de mensajes (Grouping)
-console.group("Diagnóstico de Carga");
-console.info("DOM: Cargado");
-console.info("Scripts: Activos");
-console.warn("Advertencia: Latencia de renderizado detectada");
-console.groupEnd(); // Finaliza el bloque de grupo
+document.querySelectorAll("[data-cmd]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const cmd = btn.dataset.cmd;
 
-// 4. Personalización estética del log mediante CSS (String substitution)
-const estilos = "color: white; background: #2563eb; padding: 5px; border-radius: 3px;";
-console.log("%c INFO: Laboratorio de Consola configurado con éxito ", estilos);
+        if (cmd === "log") {
+            console.log("Log informativo:", { fecha: new Date().toISOString() });
+            consoleMirror.textContent = "console.log() enviado a DevTools.";
+        } else if (cmd === "warn") {
+            console.warn("Advertencia: Este endpoint se deprecará pronto.");
+            consoleMirror.textContent = "console.warn() enviado (resaltado en amarillo).";
+        } else if (cmd === "error") {
+            console.error("Error simulado: Fallo de validación.");
+            consoleMirror.textContent = "console.error() enviado con stack trace.";
+        } else if (cmd === "table") {
+            console.table(usuarios);
+            consoleMirror.textContent = `console.table() enviado:\n${JSON.stringify(usuarios, null, 2)}`;
+        } else if (cmd === "time") {
+            console.time("calculo");
+            let total = 0;
+            for (let i = 0; i < 100000; i++) total += i;
+            console.timeEnd("calculo");
+            consoleMirror.textContent = `Medición completada (ver tiempo exacto en Console). Suma: ${total}`;
+        } else if (cmd === "group") {
+            console.groupCollapsed("Grupo de Autenticación");
+            console.log("Paso 1: Validar token");
+            console.log("Paso 2: Cargar permisos");
+            console.groupEnd();
+            consoleMirror.textContent = "Grupo colapsado creado en Console.";
+        }
+    });
+});

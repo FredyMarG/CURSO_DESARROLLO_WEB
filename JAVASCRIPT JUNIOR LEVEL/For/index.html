@@ -1,41 +1,70 @@
 <!DOCTYPE html>
-
-<!-- 
-    LABORATORIO MAESTRO: ESTRUCTURAS DE CONTROL (BUCLES)
-    Este archivo unifica todas las variantes de iteración en JavaScript.
-    La arquitectura separa la estructura (HTML), el diseño (CSS) y la lógica (JS).
--->
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Encoding UTF-8 para compatibilidad global -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Prevención de zoom automático en móviles -->
-    
-    <!-- Título descriptivo para la pestaña del navegador -->
-    <title>JS Junior - Control de Bucles</title>
-
-    <!-- Vinculación del diseño externo para bucles (Separación de capas) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de For, For...of y For...in</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">↺</div>
-            <h1>Iteración y Bucles</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 07 · Bucles For y Etiquetas</span>
+            <h1><code>for</code> Clásico, <code>for...of</code>, <code>for...in</code> y Labels</h1>
+            <p>Compara cómo recorren arrays y objetos las distintas variantes de <code>for</code>, y prueba el control de bucles anidados mediante etiquetas (<code>label</code>).</p>
         </header>
-        <section class="content">
-            <p>Guía unificada de estructuras repetitivas: desde el clásico <b>For</b> hasta <b>While</b>, <b>Do While</b> y control de flujo avanzado.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Resultados iterativos en <b>Consola (Ctrl + Shift + I)</b></span>
+
+        <main class="grid">
+            <section class="card" aria-labelledby="f1">
+                <h2 id="f1">1. Bucle <code>for</code> Clásico (Tabla dinámica)</h2>
+                <p class="note">Ideal cuando sabes exactamente cuántas iteraciones necesitas o requieres un paso personalizado.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-tabla-num">Generar tabla de multiplicar del:</label>
+                        <input id="input-tabla-num" type="number" min="1" max="20" value="7">
+                    </div>
+                    <button id="btn-tabla" type="button">Generar Tabla (1 al 5)</button>
+                </div>
+                <pre class="code-preview">for (let i = 1; i &lt;= 5; i++) { ... }</pre>
+                <div id="out-tabla" class="output" aria-live="polite">Pulsa el botón para generar la tabla.</div>
+            </section>
+
+            <section class="card" aria-labelledby="f2">
+                <h2 id="f2">2. <code>for...of</code> (Valores) vs <code>for...in</code> (Claves)</h2>
+                <p class="note"><code>for...of</code> recorre valores de iterables (Arrays, Strings). <code>for...in</code> recorre claves enumerables (incluyendo propiedades extra si se usa en un array).</p>
+                <div class="row">
+                    <button id="btn-for-of" type="button">Ejecutar for...of</button>
+                    <button id="btn-for-in" type="button" class="secondary">Ejecutar for...in</button>
+                    <button id="btn-entries" type="button" class="secondary">Object.entries()</button>
+                </div>
+                <pre class="code-preview">for (const [i, v] of animales.entries()) { ... }</pre>
+                <div id="out-for-comp" class="output" aria-live="polite">Compara las salidas sobre ["gato", "perro", "loro"].</div>
+            </section>
+
+            <section class="card" aria-labelledby="f3">
+                <h2 id="f3">3. Bucles Anidados con <code>label</code></h2>
+                <p class="note">Busca un nombre dentro de una matriz bidimensional y detén ambos bucles al instante con <code>break externo;</code>.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-buscar-label">Nombre a buscar en la matriz:</label>
+                        <input id="input-buscar-label" type="text" value="josefa">
+                    </div>
+                    <button id="btn-label" type="button">Buscar con break etiqueta</button>
+                </div>
+                <pre class="code-preview">externo: for (...) { for (...) { if (match) break externo; } }</pre>
+                <div id="out-label" class="output" aria-live="polite">Prueba buscar "josefa", "marcelo" o "ana".</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 
-    <!-- 
-        Inyección de lógica:
-        Se carga al final del body para asegurar que la interfaz esté lista 
-        antes de iniciar las iteraciones por consola.
-    -->
     <script src="for.js"></script>
 </body>
 </html>

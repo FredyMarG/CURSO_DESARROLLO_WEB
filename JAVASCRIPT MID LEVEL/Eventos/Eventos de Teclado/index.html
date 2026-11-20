@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio de Eventos de Teclado</title>
-    <!-- Enlazamos la hoja de estilos externa para definir la apariencia visual -->
+    <title>Guía Interactiva — Eventos de Teclado</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Eventos del DOM</span>
+            <h1>Eventos de Teclado: <code>keydown</code>, <code>keyup</code> &amp; Atajos</h1>
+            <p class="subtitle">Inspecciona <code>e.key</code>, <code>e.code</code> y teclas modificadoras (<code>Ctrl</code>, <code>Shift</code>, <code>Alt</code>) sin usar el obsoleto <code>keyCode</code>.</p>
+        </div>
+    </header>
 
-    <!-- Contenedor principal que centra el contenido en pantalla -->
-    <div class="contenedor1">
-        <h1>Eventos de Teclado</h1>
-        <p>Interactúa con el campo de texto para ver los eventos en la consola.</p>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Inspector de Teclas en Vivo</h2>
+            <p class="desc">Escribe en el campo o presiona combinaciones como <kbd>Ctrl</kbd> + <kbd>K</kbd> o <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
+            <input id="keyInput" type="text" placeholder="Haz clic aquí y presiona teclas...">
+            <div class="metrics">
+                <div class="metric"><span>e.key</span><strong id="valKey">—</strong></div>
+                <div class="metric"><span>e.code</span><strong id="valCode">—</strong></div>
+                <div class="metric"><span>Modificadores</span><strong id="valMods">Ninguno</strong></div>
+            </div>
+        </section>
 
-        <!-- Input de texto donde capturaremos las pulsaciones de teclas -->
-        <input type="text" class="input-prueba" placeholder="Escribe algo aquí...">
-    </div>
+        <section class="card">
+            <h2>2. Historial de Pulsaciones</h2>
+            <div id="keyLog" class="terminal" aria-live="polite"></div>
+        </section>
+    </main>
 
-    <!-- Importamos el script de JavaScript al final para asegurar que el DOM esté cargado -->
     <script src="main.js"></script>
 </body>
 </html>

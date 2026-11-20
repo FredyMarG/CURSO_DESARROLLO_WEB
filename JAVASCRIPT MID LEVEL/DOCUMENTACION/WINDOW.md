@@ -733,3 +733,30 @@ Dominarlo te permite:
 
 Es una de las bases MÁS importantes del desarrollo web frontend profesional.
 
+---
+
+## 🚀 Alternativas Modernas a `alert()`, `prompt()` y `confirm()`
+
+Los diálogos nativos (`alert`, `prompt`, `confirm`) **bloquean por completo el hilo principal** y no se pueden estilizar. En aplicaciones modernas se utiliza la etiqueta HTML nativa **`<dialog>`** con `.showModal()`:
+
+```javascript
+const modal = document.querySelector("#mi-dialogo");
+modal.showModal(); // Abre modal accesible con soporte nativo para tecla ESC y ::backdrop
+```
+
+Además, al usar `window.open(url, "_blank", "noopener,noreferrer")`, evita que la pestaña abierta acceda a `window.opener` (seguridad contra *tabnabbing*).
+
+---
+
+## 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Propiedad / Método | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `window.open(url, target, features)` | Abre nueva pestaña o ventana segura. | `window.open(url, "_blank", "noopener,noreferrer")` |
+| `ventana.close()` / `.closed` | Cierra ventana abierta por script y verifica estado. | `if (!win.closed) win.close();` |
+| `window.innerWidth` / `innerHeight` | Ancho y alto del área visible del viewport. | `console.log(window.innerWidth)` |
+| `window.devicePixelRatio` | Densidad de píxeles de la pantalla (Retina/HiDPI). | `window.devicePixelRatio` |
+| `dialog.showModal()` | Reemplazo moderno, no bloqueante, de `alert`/`confirm`. | `document.querySelector("dialog").showModal()` |
+| `window.print()` | Abre el diálogo de impresión del navegador. | `btnPrint.onclick = () => window.print()` |
+| `window.stop()` | Detiene la descarga de recursos de la página. | `window.stop()` |
+

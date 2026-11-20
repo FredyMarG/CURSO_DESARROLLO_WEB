@@ -1,33 +1,55 @@
-/**
- * GESTIÓN DE MANEJADORES DE EVENTOS (EVENT HANDLERS)
- * Demostración de asignación dinámica y limpieza de memoria mediante remoción de listeners.
- */
+// Guía Interactiva — Event Handlers Modernos
 
-/** @type {HTMLButtonElement} - Referencia al nodo del botón principal */
-const button = document.querySelector(".button");
+const onceOutput = document.getElementById("onceOutput");
+const btnOnce = document.getElementById("btnOnce");
 
-/**
- * Registro de un Event Listener utilizando una función nominada.
- * El uso de funciones nominadas es obligatorio si se planea usar removeEventListener posteriormente.
- */
-button.addEventListener("click", saludar);
+btnOnce.addEventListener("click", () => {
+    onceOutput.className = "output ok";
+    onceOutput.textContent = "¡Ejecutado! Este listener ya fue removido automáticamente ({ once: true }).";
+    btnOnce.textContent = "Listener consumido";
+}, { once: true });
 
-/**
- * Callback para el evento click.
- * Implementa un patrón de ejecución única (Self-removing listener).
- * @function saludar
- */
-function saludar() {
-    alert("Hola!");
-    // Remoción del listener para liberar recursos y evitar ejecuciones redundantes.
-    button.removeEventListener("click", saludar);
+// 2. AbortController para remover listeners limpiamente
+const btnTarget = document.getElementById("btnTarget");
+const abortOutput = document.getElementById("abortOutput");
+let clickCount = 0;
+let controller = null;
+
+function activarListener() {
+    if (controller) controller.abort();
+    controller = new AbortController();
+    btnTarget.addEventListener("click", () => {
+        clickCount += 1;
+        abortOutput.className = "output ok";
+        abortOutput.textContent = `Clic #${clickCount} registrado.`;
+    }, { signal: controller.signal });
+    abortOutput.className = "output";
+    abortOutput.textContent = "Listener activo: haz clic en \"Botón de Prueba\".";
 }
 
-/**
- * Registro concurrente de un segundo manejador.
- * Las funciones anónimas (Arrow functions) son útiles para lógica rápida pero difíciles de remover.
- */
-button.addEventListener("click", (e)=>{
-    /** @param {Event} e - El objeto de evento generado por el navegador */
-    console.log(e.target);
+document.getElementById("btnAbort").addEventListener("click", () => {
+    if (controller) controller.abort();
+    abortOutput.className = "output";
+    abortOutput.textContent = "Listener desconectado con controller.abort().";
+});
+
+document.getElementById("btnRebind").addEventListener("click", activarListener);
+activarListener();
+
+// 3. CustomEvent
+const customMsgInput = document.getElementById("customMsgInput");
+const customOutput = document.getElementById("customOutput");
+
+document.addEventListener("usuario:notificacion", (e) => {
+    customOutput.className = "output ok";
+    customOutput.textContent = `CustomEvent recibido [${e.detail.hora}]: "${e.detail.mensaje}"`;
+});
+
+document.getElementById("btnDispatchCustom").addEventListener("click", () => {
+    document.dispatchEvent(new CustomEvent("usuario:notificacion", {
+        detail: {
+            mensaje: customMsgInput.value.trim() || "Sin mensaje",
+            hora: new Date().toLocaleTimeString()
+        }
+    }));
 });

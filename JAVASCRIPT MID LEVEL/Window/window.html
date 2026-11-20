@@ -3,47 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Mid Level - Window Object Master</title>
+    <title>Guía Interactiva — Objeto Window &amp; &lt;dialog&gt; Moderno</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main: Contenedor raíz del laboratorio de interacción global -->
-    <main class="window-dashboard">
-        <header>
-            <h1>Window Object Explorer</h1>
-            <p class="subtitle">Laboratorio de métodos globales y control del navegador</p>
-        </header>
-
-        <div class="control-grid">
-            <!-- Sección de interacción con el usuario -->
-            <section class="control-card">
-                <h2>💬 User Interaction</h2>
-                <div class="button-group">
-                    <button onclick="ejecutarAlert()" class="btn btn-indigo">Alert</button>
-                    <button onclick="ejecutarPrompt()" class="btn btn-indigo">Prompt</button>
-                    <button onclick="ejecutarConfirm()" class="btn btn-indigo">Confirm</button>
-                </div>
-            </section>
-
-            <!-- Sección de gestión de ventanas -->
-            <section class="control-card">
-                <h2>🪟 Window Management</h2>
-                <div class="button-group">
-                    <button onclick="abrirVentana()" class="btn btn-blue">Open Window</button>
-                    <button onclick="cerrarVentana()" class="btn btn-red">Close Window</button>
-                </div>
-            </section>
-
-            <!-- Utilidades del sistema -->
-            <section class="control-card">
-                <h2>⚙️ System Utilities</h2>
-                <div class="button-group">
-                    <button onclick="window.print()" class="btn btn-slate">Print Page</button>
-                    <button onclick="window.stop()" class="btn btn-slate">Stop Load</button>
-                </div>
-            </section>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Browser Object Model</span>
+            <h1>El Objeto Global <code>window</code> &amp; Modal <code>&lt;dialog&gt;</code></h1>
+            <p class="subtitle">Gestiona ventanas emergentes seguras (<code>open</code>/<code>close</code>/<code>closed</code>) y reemplaza <code>alert()</code>/<code>prompt()</code> con <code>&lt;dialog&gt;</code>.</p>
         </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Control de Ventanas (<code>open</code>, <code>close</code>, <code>closed</code>)</h2>
+            <p class="desc">Abre una ventana hija controlada por script, verifica su estado <code>.closed</code> y ciérrala desde aquí.</p>
+            <div class="btn-row">
+                <button type="button" id="btnOpenWin" class="btn primary">Abrir Ventana</button>
+                <button type="button" id="btnCheckWin" class="btn">Verificar .closed</button>
+                <button type="button" id="btnCloseWin" class="btn">Cerrar Ventana</button>
+            </div>
+            <div id="winStatus" class="output" aria-live="polite">Ninguna ventana abierta aún.</div>
+        </section>
+
+        <section class="card">
+            <h2>2. Diálogo Moderno No Bloqueante (<code>&lt;dialog&gt;</code>)</h2>
+            <p class="desc">A diferencia de <code>prompt()</code> o <code>alert()</code>, <code>dialog.showModal()</code> no bloquea el hilo principal y se integra con CSS.</p>
+            <div class="btn-row">
+                <button type="button" id="btnShowModal" class="btn primary">Abrir Modal &lt;dialog&gt;</button>
+                <button type="button" id="btnPrint" class="btn">window.print()</button>
+            </div>
+            <div id="modalResult" class="output" aria-live="polite">Esperando interacción con el diálogo...</div>
+        </section>
     </main>
-    <script src="window.js"></script>
+
+    <dialog id="modernDialog" class="dialog-box">
+        <form method="dialog" class="dialog-form">
+            <h3>Confirmar Acción</h3>
+            <label for="dialogNameInput">Tu nombre:</label>
+            <input id="dialogNameInput" type="text" placeholder="Ej. Camila" required>
+            <div class="btn-row">
+                <button type="submit" value="confirmado" class="btn primary">Confirmar</button>
+                <button type="button" id="btnCancelDialog" class="btn">Cancelar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script src="Window.js"></script>
 </body>
 </html>

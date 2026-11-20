@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Timeline-Performance/timeline.html
-     Título: Timeline
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Lab — Pestaña Performance (Timeline)</title>
     <link rel="stylesheet" href="style.css">
-    <title>Timeline</title>
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Chrome DevTools</span>
+            <h1>Pestaña <code>Performance</code>: Long Tasks &amp; <code>requestAnimationFrame</code></h1>
+            <p class="subtitle">Graba un perfil en DevTools → Performance para comparar una tarea bloqueante (>50ms) frente a una animación fluida a 60 FPS.</p>
+        </div>
+    </header>
 
-    
-    <div>
-        <h2>Titulo</h2>
-        <p>REVISAR LA DOCUMENTACION
-        </p>
-    </div>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Simulador de Hilo Principal (Main Thread)</h2>
+            <div class="btn-row">
+                <button type="button" id="btnLongTask" class="btn">Simular Long Task (Bloqueo CPU)</button>
+                <button type="button" id="btnAnimate" class="btn primary">Alternar Animación rAF (transform)</button>
+            </div>
+            <div class="stage">
+                <div id="perfBox" class="perf-box">60 FPS</div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>2. Métricas de Ejecución (<code>performance.now()</code>)</h2>
+            <div id="perfOutput" class="terminal" aria-live="polite">Haz clic en un botón para medir el impacto en el hilo principal.</div>
+        </section>
+    </main>
 
     <script src="timeline.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

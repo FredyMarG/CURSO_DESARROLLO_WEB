@@ -351,7 +351,7 @@ Para que el diseño responsive funcione bien en móviles, es clave el meta viewp
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 
-- `width=device-width` → Ajusta el ancho del viewport al ancho físico del dispositivo. [web:7
+- `width=device-width` → Ajusta el ancho del viewport al ancho físico del dispositivo.
 - `initial-scale=1.0` → Evita que la página se muestre alejada (zoom out) por defecto. 
 
 Sin este meta, muchos móviles simulan un viewport de ~980px y tu CSS responsive no se comporta como esperas.
@@ -538,21 +538,80 @@ También puedes combinar condiciones:
 
 
 
+### 🔹 Unidades de Contenedor (`cqw`, `cqh`, `cqi`, `cqb`) y Shorthand `container`
+
+Cuando defines un contenedor con el atajo `container: nombre / inline-size;`, puedes usar unidades relativas al tamaño de ese contenedor (no del viewport):
+
+```css
+.card-wrapper {
+  container: card / inline-size;
+}
+
+.card__title {
+  /* 5% del ancho del contenedor, limitado entre 1rem y 1.75rem */
+  font-size: clamp(1rem, 5cqi, 1.75rem);
+}
+```
+
+- `cqw` / `cqi`: 1% del ancho / tamaño inline del contenedor.
+- `cqh` / `cqb`: 1% del alto / tamaño block del contenedor.
+
 ---
 
-# 🔟 Buenas Prácticas
+# 🔟 Nuevas Unidades de Viewport (`dvh`, `svh`, `lvh`) y Media Queries de Interacción
+
+### 🔹 `svh`, `lvh` y `dvh` (Solución al bug de `100vh` en móviles)
+En navegadores móviles (iOS Safari, Chrome Android), la barra de direcciones aparece y desaparece al hacer scroll, haciendo que `100vh` quede cortado o provoque saltos:
+
+| Unidad | Significado | Cuándo usarla |
+| :--- | :--- | :--- |
+| `svh` (*Small Viewport Height*) | Alto mínimo con barras del navegador **visibles** | Hero sections que deben verse completas al cargar |
+| `lvh` (*Large Viewport Height*) | Alto máximo con barras del navegador **ocultas** | Fondos decorativos a pantalla máxima |
+| `dvh` (*Dynamic Viewport Height*) | Se adapta dinámicamente al mostrarse/ocultarse las barras | Layouts tipo app (`min-height: 100dvh`) y modales |
+
+### 🔹 `@media (hover: hover)` y `(pointer: fine | coarse)`
+Evita que los efectos `:hover` queden "pegados" tras tocar la pantalla en dispositivos táctiles, y agranda botones en pantallas táctiles:
+
+```css
+/* Solo aplica hover en dispositivos con cursor real (mouse/trackpad) */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Aumenta el área táctil en pantallas táctiles (dedo) */
+@media (pointer: coarse) {
+  .btn {
+    min-height: 44px;
+    padding-inline: 1.25rem;
+  }
+}
+```
+
+---
+
+# 1️⃣1️⃣ Buenas Prácticas y Errores Comunes
+
+### ❌ Errores Comunes
+1. **Usar `font-size: 4vw` sin `clamp()`:** En pantallas muy grandes el texto es gigante, en móviles ilegible y bloquea el zoom del usuario (`WCAG`). Usa siempre `clamp(1rem, 0.9rem + 1.5vw, 2rem)`.
+2. **Usar `100vh` en lugar de `100dvh` o `100svh`:** Provoca scroll accidental o botones ocultos bajo la barra de navegación en móviles.
+3. **Bloquear el zoom con `user-scalable=no` o `maximum-scale=1`:** Es una falla grave de accesibilidad.
+4. **Diseñar breakpoints por marcas ("iPhone", "iPad"):** Diseña breakpoints donde el **contenido** lo necesite.
+
+### ✅ Buenas Prácticas
 
 Una estrategia **profesional** de diseño responsive suele seguir estas recomendaciones:
 
 - Usar enfoque **Mobile First** con media queries de `min-width`.
 - Definir pocos breakpoints pero bien justificados (en función del diseño, no de modelos de dispositivos específicos).
-- Trabajar con un sistema de diseño basado en componentes, no en páginas monolíticas.
-- Optimizar imágenes (formatos modernos, `srcset`, compresión, lazy loading)
+- Trabajar con un sistema de diseño basado en componentes usando **Container Queries** (`@container`, `cqi`).
+- Optimizar imágenes (AVIF/WebP, `srcset`, `sizes`, `<picture>`, `loading="lazy"`).
 - Evitar dependencias excesivas en valores fijos (anchos, alturas, font-size en px).
 - Probar en dispositivos reales y en distintos navegadores, no solo en el inspector.
-- Respetar preferencias del usuario: `prefers-reduced-motion`, `prefers-color-scheme`, etc. 
-- Incluir estilos de impresión básicos mediante `@media print` para documentos que se esperan imprimir (facturas, reportes, artículos). 
-- Mantener el CSS organizado: agrupar por componentes, usar comentarios para secciones de breakpoints y reutilizar variables (custom properties) para colores, espacios, tipografía. 
+- Respetar preferencias del usuario: `prefers-reduced-motion`, `prefers-color-scheme`, `hover: hover`.
+- Incluir estilos de impresión básicos mediante `@media print` para documentos que se esperan imprimir (facturas, reportes, artículos).
+- Mantener el CSS organizado: agrupar por componentes, usar `@layer` y reutilizar variables (custom properties) para colores, espacios y tipografía.
 
 ---
 
@@ -608,3 +667,17 @@ El diseño responsive moderno combina de forma coherente:
 - Componentización y, cada vez más, Container Queries para componentes realmente adaptables.
 
 Dominar estos conceptos convierte el responsive en una **base obligatoria** para cualquier desarrollador frontend profesional. 
+---
+
+# Hoja de Trucos (Cheatsheet) — Diseño Responsivo
+
+| Regla / Práctica | Propósito |
+| :--- | :--- |
+| `<meta name="viewport" content="width=device-width, initial-scale=1.0">` | Imprescindible para escalar correctamente en móviles |
+| Mobile First (`min-width`) | Diseña primero para móvil y escala hacia pantallas grandes |
+| `@container (min-width: 400px)` + `cqi` | Adapta componentes al tamaño de su contenedor padre |
+| `100dvh` / `100svh` / `100lvh` | Altos de viewport dinámicos, seguros ante barras móviles |
+| `clamp(1rem, 0.9rem + 1.5vw, 2.25rem)` | Tipografía fluida accesible sin media queries |
+| `@media (hover: hover)` / `(pointer: coarse)` | Evita hovers pegados en táctil y amplía áreas táctiles |
+| `@media (prefers-color-scheme: dark)` | Respeta el tema oscuro del sistema operativo |
+| `img { max-width: 100%; height: auto; }` | Evita que las imágenes desborden contenedores pequeños |

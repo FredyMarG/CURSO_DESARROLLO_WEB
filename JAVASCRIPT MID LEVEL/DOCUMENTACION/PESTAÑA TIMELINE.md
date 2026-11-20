@@ -937,3 +937,29 @@ Dominarla significa:
 ✅ Reflows.
 ✅ Performance móvil.
 ✅ Debugging avanzado de rendimiento.
+
+---
+
+# 🚀 Evolución Moderna: Panel **Performance**, Core Web Vitals y **Lighthouse**
+
+> **Nota:** La antigua pestaña *Timeline* hoy se llama **Performance** en Chrome DevTools.
+
+* **Core Web Vitals en vivo:** La vista inicial del panel **Performance** muestra métricas clave en tiempo real:
+  * **LCP (Largest Contentful Paint):** Velocidad de carga del elemento principal (< 2.5s recomendado).
+  * **INP (Interaction to Next Paint):** Capacidad de respuesta tras clics/teclado (< 200ms).
+  * **CLS (Cumulative Layout Shift):** Estabilidad visual sin saltos inesperados (< 0.1).
+* **CPU & Network Throttling:** Simula dispositivos móviles de gama media (*4x slowdown*) para detectar **Long Tasks** (> 50ms) que bloquean el hilo principal.
+* **Pestaña Lighthouse:** Genera auditorías automáticas de **Performance, Accessibility, Best Practices y SEO** con recomendaciones accionables.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Concepto / Métrica | Qué mide / Para qué sirve | Objetivo saludable |
+| :--- | :--- | :--- |
+| **Flame Chart (Main)** | Tiempo de ejecución de JS, Layout y Paint en el hilo principal. | Evitar bloques rojos (*Long Tasks* > 50ms). |
+| **LCP** | Cuándo se renderiza el contenido principal visible. | ≤ 2.5 segundos. |
+| **INP** | Latencia desde interacción del usuario hasta el siguiente frame. | ≤ 200 milisegundos. |
+| **CLS** | Desplazamientos inesperados de diseño durante la carga. | ≤ 0.1. |
+| **Reflow (Layout) vs Repaint** | Recálculo de geometría vs repintado de píxeles. | Animar `transform`/`opacity` en lugar de `top`/`width`. |
+| **Lighthouse** | Auditoría integral de rendimiento, accesibilidad y SEO. | Puntuación ≥ 90 en verde. |

@@ -784,4 +784,38 @@ Hoy en día lo más usado realmente es:
 🔥 eventos dinámicos  
 
 mientras que mover/minimizar ventanas es cada vez menos común.
-````
+
+---
+
+# 🚀 Alternativa Moderna: `ResizeObserver` y `matchMedia`
+
+Dado que `resizeTo()` y `moveTo()` están bloqueados en pestañas normales por seguridad, en desarrollo web moderno se reacciona al tamaño real del viewport o de cada componente usando:
+
+```javascript
+// 1. Observar cambios de tamaño de un elemento específico (sin evento global resize)
+const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+        console.log("Nuevo ancho:", entry.contentRect.width);
+    }
+});
+observer.observe(document.querySelector(".panel-grafico"));
+
+// 2. Detectar breakpoints CSS desde JavaScript
+const esMovil = window.matchMedia("(max-width: 768px)");
+esMovil.addEventListener("change", (e) => {
+    console.log("¿Modo móvil?:", e.matches);
+});
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Método / API | Función | Estado en navegadores modernos |
+| :--- | :--- | :--- |
+| `window.innerWidth` / `innerHeight` | Tamaño interno del viewport (px). | Estándar, muy usado. |
+| `window.outerWidth` / `outerHeight` | Tamaño total de la ventana del navegador. | Estándar. |
+| `ResizeObserver` | Observa cambios de tamaño de cualquier elemento DOM. | **Estándar moderno recomendado.** |
+| `window.matchMedia(query)` | Evalúa media queries CSS en JS con eventos. | **Estándar moderno recomendado.** |
+| `window.resizeTo(w, h)` / `resizeBy(dw, dh)` | Cambia tamaño de ventana. | Restringido a popups abiertos por script. |
+| `window.moveTo(x, y)` / `moveBy(dx, dy)` | Mueve posición de ventana. | Restringido a popups abiertos por script. |

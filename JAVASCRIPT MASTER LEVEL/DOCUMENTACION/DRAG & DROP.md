@@ -239,3 +239,91 @@ lienzo.addEventListener("drop", (e) => {
 * **El atributo `draggable="true"`** es el interruptor de encendido mandatorio en HTML para otorgarle propiedades de arrastre a cualquier nodo de la estructura jerárquica del DOM.
 * **El método `e.preventDefault()`** debe ser invocado de forma mandatoria en los eventos de movimiento intermedios de la zona objetivo para abrir los canales de comunicación y permitir la liberación del objeto.
 * **El objeto `dataTransfer`** garantiza la integridad transaccional de los datos de la interfaz mediante sus métodos acoplados de escritura y lectura remota `setData()` y `getData()`.
+
+
+---
+
+# Conceptos Complementarios: Archivos del Escritorio (`dataTransfer.files`) y `dropEffect`
+
+### 1. Recibir archivos arrastrados desde el sistema operativo
+Cuando el usuario arrastra un archivo desde su explorador hacia una zona web, el evento `drop` expone la lista de archivos en **`e.dataTransfer.files`**:
+```javascript
+zona.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const archivos = e.dataTransfer.files;
+    if (archivos.length > 0) {
+        console.log("Archivo soltado:", archivos[0].name);
+    }
+});
+```
+
+### 2. Control visual de la operación (`effectAllowed` y `dropEffect`)
+* En `dragstart`: `e.dataTransfer.effectAllowed = "move"` (o `"copy"`, `"link"`).
+* En `dragover`: `e.dataTransfer.dropEffect = "move"` para que el cursor del sistema muestre el icono correcto de mover/copiar.
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Habilita el atributo `draggable="true"` en un elemento `#ficha` y registra un evento `dragstart` que guarde el texto `"ficha-azul"` usando `e.dataTransfer.setData("text/plain", ...)`.
+
+## Nivel 2
+Configura una zona receptora `#tablero` escuchando `dragover` (sin olvidar `e.preventDefault()`) y `drop`, recuperando el dato guardado con `getData("text/plain")` para mostrarlo en consola.
+
+## Nivel 3
+Implementa un sistema de dos listas (`#pendientes` y `#completadas`) donde puedas arrastrar cualquier tarjeta `.tarea` de una columna a otra añadiendo una clase visual `.sobre-zona` durante `dragenter` y removiéndola en `dragleave` y `drop`.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+const ficha = document.getElementById("ficha");
+ficha.addEventListener("dragstart", (e) => {
+    e.dataTransfer.setData("text/plain", "ficha-azul");
+});
+```
+
+## Solución Nivel 2
+```javascript
+const tablero = document.getElementById("tablero");
+tablero.addEventListener("dragover", (e) => e.preventDefault());
+tablero.addEventListener("drop", (e) => {
+    e.preventDefault();
+    const dato = e.dataTransfer.getData("text/plain");
+    console.log("Elemento soltado:", dato);
+});
+```
+
+## Solución Nivel 3
+```javascript
+const zonas = document.querySelectorAll(".columna");
+document.querySelectorAll(".tarea").forEach((t) => {
+    t.addEventListener("dragstart", (e) => e.dataTransfer.setData("text/plain", t.id));
+});
+
+zonas.forEach((zona) => {
+    zona.addEventListener("dragover", (e) => e.preventDefault());
+    zona.addEventListener("dragenter", () => zona.classList.add("sobre-zona"));
+    zona.addEventListener("dragleave", () => zona.classList.remove("sobre-zona"));
+    zona.addEventListener("drop", (e) => {
+        e.preventDefault();
+        zona.classList.remove("sobre-zona");
+        const id = e.dataTransfer.getData("text/plain");
+        zona.appendChild(document.getElementById(id));
+    });
+});
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Evento / Propiedad | Objetivo | Cuándo ocurre |
+| :--- | :--- | :--- |
+| `dragstart` | Elemento arrastrado | Al iniciar el arrastre (`setData`) |
+| `dragover` | Zona receptora | Continuo encima (`e.preventDefault()` obligatorio) |
+| `drop` | Zona receptora | Al soltar (`e.preventDefault()` + `getData` / `files`) |
+| `dragend` | Elemento arrastrado | Al finalizar o cancelar el arrastre |

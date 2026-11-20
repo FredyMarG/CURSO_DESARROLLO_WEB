@@ -1,84 +1,76 @@
 /**
- * LABORATORIO: MÉTODOS DE CADENAS (STRING)
- * En JS, los strings son inmutables: los métodos no cambian el texto original,
- * sino que generan una nueva versión del mismo.
+ * GUÍA INTERACTIVA: MÉTODOS DE CADENAS (STRINGS)
  */
 
-console.log("%c--- MÉTODOS DE CADENAS ---", "color: #2563eb; font-weight: bold;");
+"use strict";
 
-let cadena = "cadena de prueba",
-    cadena2 = " cadena";
+const liveConsole = document.getElementById("live-console");
 
-/* Variable para almacenar los retornos de los métodos */
-let resultado;
+function registrar(mensaje) {
+    const linea = document.createElement("div");
+    linea.className = "log-line ok";
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+}
 
-/* --- concat: une dos o más cadenas --- */
-resultado = cadena.concat(cadena2);
-console.log("Concat:", resultado);
+// 1. Transformador
+document.querySelectorAll("[data-str]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const original = document.getElementById("str-input").value;
+        const accion = btn.dataset.str;
+        let resultado = "";
 
-/* --- Búsqueda: startsWith, endsWith, includes, indexOf, lastIndexOf --- */
-resultado = cadena.startsWith("cadena"); // true: verifica el inicio
-console.log("¿Empieza con 'cadena'?:", resultado);
+        if (accion === "trim") resultado = original.trim();
+        else if (accion === "lower") resultado = original.toLowerCase();
+        else if (accion === "upper") resultado = original.toUpperCase();
+        else {
+            resultado = original
+                .trim()
+                .toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-");
+        }
 
-resultado = cadena.endsWith("prueba"); // true: verifica el final
-console.log("¿Termina en 'prueba'?:", resultado);
+        document.getElementById("out-str-trans").textContent =
+            `Original (${original.length} chars): ${JSON.stringify(original)}\nResultado (${resultado.length} chars): ${JSON.stringify(resultado)}\n(El original permanece inmutable)`;
+        registrar(`String.${accion} -> ${JSON.stringify(resultado)}`);
+    });
+});
 
-resultado = cadena.includes("de"); // true: busca coincidencia en cualquier parte
-console.log("¿Contiene 'de'?:", resultado);
+// 2. Búsqueda y slice / at
+document.getElementById("btn-str-buscar").addEventListener("click", () => {
+    const texto = document.getElementById("str-input").value.trim();
+    const sub = document.getElementById("str-buscar").value;
 
-resultado = cadena.indexOf("de"); // 7: índice de la primera aparición (-1 si no existe)
-console.log("Posición de 'de':", resultado);
+    const incluye = texto.includes(sub);
+    const indice = texto.indexOf(sub);
+    const inicia = texto.startsWith(sub);
+    const termina = texto.endsWith(sub);
+    const ultimoChar = texto.at(-1) ?? "";
+    const primeros5 = texto.slice(0, 5);
 
-resultado = cadena.lastIndexOf("a"); // 15: busca de derecha a izquierda
-console.log("Última posición de 'a':", resultado);
+    document.getElementById("out-str-search").textContent =
+        `Texto base: ${JSON.stringify(texto)}\n.includes("${sub}"): ${incluye}\n.indexOf("${sub}"): ${indice}\n.startsWith(): ${inicia} | .endsWith(): ${termina}\n.at(-1): "${ultimoChar}" | .slice(0, 5): "${primeros5}"`;
+    registrar(`Búsqueda "${sub}" -> includes: ${incluye}, indexOf: ${indice}`);
+});
 
-/* --- Relleno y repetición: padStart, padEnd, repeat --- */
-let textoCorto = "abc";
-resultado = textoCorto.padStart(6, "4"); // "444abc": rellena al inicio hasta tener longitud 6
-console.log("padStart (long 6):", resultado);
+// 3. padStart y split
+document.getElementById("btn-str-pad").addEventListener("click", () => {
+    const val = document.getElementById("str-num-pad").value.trim() || "0";
+    const factura = `FAC-${val.padStart(5, "0")}`;
+    const palabras = document.getElementById("str-input").value.trim().split(/\s+/);
 
-resultado = textoCorto.padEnd(6, "4"); // "abc444": rellena al final
-console.log("padEnd (long 6):", resultado);
+    document.getElementById("out-str-pad").textContent =
+        `padStart(5, "0"): "${factura}"\nsplit(/\\s+/) del texto superior: ${JSON.stringify(palabras)}`;
+    registrar(`padStart -> ${factura} | split -> ${palabras.length} palabras`);
+});
 
-resultado = "123 ".repeat(3); // Repite el string N veces
-console.log("Repeat (3 veces):", resultado);
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
 
-/* --- División y recorte: split, substring, toLowerCase, toUpperCase --- */
-let saludo = "Hola como estas?";
-resultado = saludo.split(" "); // ["Hola", "como", "estas?"]: convierte a Array usando el separador
-console.log("Split por espacios:", resultado);
-
-let letras = "AbCdEfG";
-resultado = letras.substring(2, 5); // "CdE": extrae desde índice 2 hasta antes del 5
-console.log("Substring (2 a 5):", resultado);
-
-resultado = letras.toLowerCase();
-console.log("Minúsculas:", resultado);
-
-resultado = letras.toUpperCase();
-console.log("Mayúsculas:", resultado);
-
-/* --- Conversión número → cadena --- */
-let num = 550;
-resultado = num.toString();
-console.log("Número a String:", typeof resultado);
-
-/* --- Limpieza de espacios --- */
-let conEspacios = "   limpiame   ";
-console.log("Trim (total):", `'${conEspacios.trim()}'`);
-console.log("TrimStart:", `'${conEspacios.trimStart()}'`);
-console.log("TrimEnd:", `'${conEspacios.trimEnd()}'`);
-
-/* --- Reemplazo y Slicing --- */
-let frase = "Javascript es genial";
-resultado = frase.replace("genial", "increíble"); // Reemplaza la primera coincidencia
-console.log("Replace:", resultado);
-
-resultado = frase.replaceAll("a", "4"); // Reemplaza todas las coincidencias
-console.log("ReplaceAll (a -> 4):", resultado);
-
-resultado = frase.slice(0, 10); // Similar a substring pero soporta índices negativos
-console.log("Slice (0 a 10):", resultado);
-
-console.log("ValueOf:", frase.valueOf()); // Devuelve el valor primitivo
-console.log("%c---------------------------", "color: #2563eb;");
+registrar("Laboratorio de Cadenas listo.");

@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Mid Level - Network Inspector</title>
-    <link rel="stylesheet" href="style.css"> <!-- Vinculación de estilos para el laboratorio -->
+    <title>DevTools Lab — Pestaña Network</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main: Contenedor raíz para el laboratorio de redes -->
-    <main class="network-lab">
-        <header>
-            <h1>Monitor de Recursos (Network)</h1>
-            <p class="instruction-text">Filtra por 'Fetch/XHR' en las DevTools para ver el tráfico saliente.</p>
-        </header>
-
-        <!-- Bloque de visualización que emula un panel de control -->
-        <div class="network-container">
-            <section class="request-list">
-                <h2>Últimas Peticiones</h2>
-                <p><strong>GET</strong> /api/v1/user-profile - <span class="status">200 OK</span></p>
-                <p><strong>POST</strong> /auth/login - <span class="status">201 Created</span></p>
-                <p><strong>GET</strong> /assets/config.json - <span class="status error">404 Not Found</span></p>
-            </section>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Chrome DevTools</span>
+            <h1>Pestaña <code>Network</code>: Fetch, Status &amp; Throttling</h1>
+            <p class="subtitle">Abre DevTools → Network (filtra por <strong>Fetch/XHR</strong>) y dispara peticiones reales para analizar Headers, Payload y Waterfall.</p>
         </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Lanzador de Peticiones HTTP</h2>
+            <div class="btn-row">
+                <button type="button" id="btnGetOk" class="btn primary">GET 200 OK</button>
+                <button type="button" id="btnGet404" class="btn">GET 404 Not Found</button>
+                <button type="button" id="btnPost" class="btn">POST 201 Created</button>
+            </div>
+            <p class="desc">Prueba activar <strong>Slow 4G</strong> u <strong>Offline</strong> en Network para observar el comportamiento.</p>
+        </section>
+
+        <section class="card">
+            <h2>2. Respuesta Recibida</h2>
+            <div id="netOutput" class="terminal" aria-live="polite">Esperando petición...</div>
+        </section>
     </main>
 
     <script src="networks.js"></script>

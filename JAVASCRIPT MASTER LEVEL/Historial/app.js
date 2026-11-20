@@ -14,7 +14,7 @@
        ========================================================================== */
     const AppState = {
         currentSlide: 1,
-        totalSlides: 10,
+        totalSlides: 11,
         viewMode: 'slides', // 'slides' | 'guide'
         soundEnabled: true,
 
@@ -1366,7 +1366,7 @@ checkout.avanzar(3); // Método de pago`
                 this.showToast('¡Chuleta copiada al portapapeles!');
                 sound.success();
             }).catch(() => {
-                alert('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
+                this.showToast('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
             });
         }
     }

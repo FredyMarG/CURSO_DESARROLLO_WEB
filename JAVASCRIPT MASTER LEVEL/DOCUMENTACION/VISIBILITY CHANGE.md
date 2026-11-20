@@ -217,3 +217,97 @@ video.addEventListener("pause", () => {
 * **La propiedad `document.visibilityState`** devuelve `"visible"` o `"hidden"` (mientras que `document.hidden` devuelve un booleano `true` o `false`).
 * **Sus principales usos** incluyen pausar contenido multimedia, detener peticiones periódicas a APIs (*polling*), ahorrar batería en animaciones y medir tiempos reales de lectura.
 * **A diferencia de `window.blur`**, esta API no genera falsos positivos cuando el usuario interactúa con la interfaz del navegador o ventanas divididas.
+
+
+---
+
+# Conceptos Complementarios: `pageshow` / `pagehide` y Polling Inteligente
+
+### 1. Diferencia con `pageshow` y `pagehide` (*Back/Forward Cache*)
+* `visibilitychange` detecta cambios de pestaña o minimización de la ventana mientras la página sigue viva en memoria.
+* `pagehide` y `pageshow` detectan cuando el usuario navega hacia otra URL o vuelve con los botones Atrás/Adelante del navegador (donde entra en juego la caché *bfcache*).
+
+### 2. Patrón de Polling Inteligente
+Detener peticiones periódicas al servidor cuando la pestaña está oculta ahorra ancho de banda y recursos de backend:
+```javascript
+let intervaloId = null;
+
+const iniciarPolling = () => {
+    if (intervaloId) return;
+    intervaloId = setInterval(() => console.log("Consultando API..."), 5000);
+};
+
+const detenerPolling = () => {
+    clearInterval(intervaloId);
+    intervaloId = null;
+};
+
+document.addEventListener("visibilitychange", () => {
+    document.hidden ? detenerPolling() : iniciarPolling();
+});
+```
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Escucha el evento `visibilitychange` en `document` y cambia `document.title` a `"¡Vuelve pronto!"` cuando `document.hidden` sea `true`, y a `"Bienvenido de nuevo"` cuando sea `false`.
+
+## Nivel 2
+Implementa un contador de segundos que solo sume `+1` cada segundo mientras `document.visibilityState === "visible"`, pausándose automáticamente cuando el usuario cambie de pestaña.
+
+## Nivel 3
+Crea un controlador de temporizador para una API (`iniciarSincronizacion` / `pausarSincronizacion`) que ejecute una función de actualización inmediatamente cuando el usuario regrese a la pestaña tras haber estado oculta.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+document.addEventListener("visibilitychange", () => {
+    document.title = document.hidden ? "¡Vuelve pronto!" : "Bienvenido de nuevo";
+});
+```
+
+## Solución Nivel 2
+```javascript
+let segundosActivos = 0;
+setInterval(() => {
+    if (document.visibilityState === "visible") {
+        segundosActivos++;
+        console.log(`Tiempo real de lectura: ${segundosActivos}s`);
+    }
+}, 1000);
+```
+
+## Solución Nivel 3
+```javascript
+let timer = null;
+const sincronizar = () => console.log("🔄 Datos sincronizados:", new Date().toLocaleTimeString());
+
+const gestionarVisibilidad = () => {
+    if (document.visibilityState === "visible") {
+        sincronizar();
+        if (!timer) timer = setInterval(sincronizar, 10000);
+    } else {
+        clearInterval(timer);
+        timer = null;
+    }
+};
+
+gestionarVisibilidad();
+document.addEventListener("visibilitychange", gestionarVisibilidad);
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento | Valor / Uso | Descripción |
+| :--- | :--- | :--- |
+| `document.addEventListener("visibilitychange", fn)` | Evento | Se dispara al mostrar u ocultar la pestaña |
+| `document.visibilityState` | `"visible"` \| `"hidden"` | Estado descriptivo recomendado |
+| `document.hidden` | `true` \| `false` | Booleano rápido de visibilidad |
+| `window.onblur` ❌ | Evitar para visibilidad | Falla con DevTools o pantalla dividida |

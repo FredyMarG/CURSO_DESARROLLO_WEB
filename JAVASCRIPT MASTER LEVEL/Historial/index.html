@@ -41,7 +41,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -992,6 +992,47 @@ window.addEventListener("popstate", (e) => {
                     <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
                         <span>📋 Copiar Chuleta Rápida en Markdown</span>
                     </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 11: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="scrollRestoration y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">10. scrollRestoration, hashchange y Cheatsheet</h2>
+                    <p class="slide-description">Controla la restauración del scroll en SPAs y distingue entre popstate y hashchange.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📜</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">history.scrollRestoration</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Evita saltos automáticos del navegador al usar los botones Atrás/Adelante.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🔗</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">popstate vs hashchange</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>window.onpopstate -> pushState/replaceState
+window.onhashchange -> #ancla en URL</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">popstate gestiona rutas completas; hashchange solo fragmentos #.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>history.pushState(state, '', url)
+history.replaceState(state, '', url)
+history.back() / forward() / go(n)</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">pushState apila entradas nuevas sin recargar; replaceState actualiza la actual.</p>
+                    </div>
                 </div>
             </div>
         </section>

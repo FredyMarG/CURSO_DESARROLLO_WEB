@@ -761,3 +761,50 @@ Dominar `screen`, `scroll`, `resize` y `move` te permite:
 ✅ crear experiencias frontend avanzadas
 
 Son herramientas FUNDAMENTALES en desarrollo web moderno.
+
+---
+
+# 🚀 Scroll Moderno: `scrollIntoView()` e `IntersectionObserver`
+
+1. **Desplazamiento suave a un elemento:**
+```javascript
+document.querySelector("#contacto").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+});
+```
+
+2. **Detectar visibilidad al hacer scroll sin saturar el evento `scroll`:**
+```javascript
+const observer = new IntersectionObserver((entradas) => {
+    entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+            entrada.target.classList.add("visible");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".animar").forEach((el) => observer.observe(el));
+```
+
+---
+
+# ✅ BUENAS PRÁCTICAS
+
+* ✅ Usa `{ behavior: "smooth" }` en `scrollTo()` y `scrollIntoView()` respetando `prefers-reduced-motion` en CSS.
+* ✅ Reemplaza listeners pesados de `scroll` por `IntersectionObserver` para *lazy loading*, animaciones o scroll infinito.
+* ✅ Si usas `window.addEventListener("scroll", fn, { passive: true })`, nunca bloquees el hilo principal.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Propiedad / Método | Función | Ejemplo |
+| :--- | :--- | :--- |
+| `screen.width` / `screen.height` | Resolución total de la pantalla. | `screen.width` |
+| `screen.availWidth` / `availHeight` | Espacio útil sin barra de tareas. | `screen.availHeight` |
+| `window.scrollX` / `window.scrollY` | Desplazamiento actual en píxeles. | `if (window.scrollY > 300) ...` |
+| `window.scrollTo({ top, behavior })` | Desplaza a una coordenada exacta. | `window.scrollTo({ top: 0, behavior: "smooth" })` |
+| `window.scrollBy({ top, behavior })` | Desplaza de forma relativa. | `window.scrollBy({ top: 400, behavior: "smooth" })` |
+| `el.scrollIntoView(opts)` | Lleva un elemento a la vista. | `el.scrollIntoView({ behavior: "smooth" })` |
+| `IntersectionObserver` | Detecta cuando un elemento entra al viewport. | `new IntersectionObserver(cb, { threshold: 0.5 })` |

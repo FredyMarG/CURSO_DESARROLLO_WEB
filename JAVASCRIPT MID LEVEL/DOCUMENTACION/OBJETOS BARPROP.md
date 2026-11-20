@@ -666,4 +666,28 @@ Hoy en día son más útiles para comprender:
 🔥 el objeto `window`  
 🔥 compatibilidad web  
 🔥 APIs antiguas de JavaScript
-````
+
+---
+
+# 🌐 Alternativa Moderna en PWAs: `display-mode`
+
+Hoy en día los navegadores ignoran la ocultación de barras desde scripts por seguridad (evitar *phishing*). Para detectar si tu app corre como PWA instalada sin barras de navegador, usa **`window.matchMedia()`**:
+
+```javascript
+const esPWA = window.matchMedia("(display-mode: standalone)").matches;
+console.log("¿Ejecutando como app instalada?:", esPWA);
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Propiedad `BarProp` | Qué representa | Uso moderno |
+| :--- | :--- | :--- |
+| `window.locationbar.visible` | Barra de direcciones. | Solo lectura / diagnóstico. |
+| `window.menubar.visible` | Barra de menú del navegador. | Solo lectura / compatibilidad. |
+| `window.personalbar.visible` | Barra de marcadores/favoritos. | Solo lectura. |
+| `window.scrollbars.visible` | Barras de desplazamiento. | Control visual mediante CSS (`overflow`). |
+| `window.statusbar.visible` | Barra de estado inferior. | Solo lectura. |
+| `window.toolbar.visible` | Barra de herramientas. | Solo lectura. |
+| `matchMedia("(display-mode: standalone)")` | Detecta modo app (PWA) sin barras. | Estándar moderno recomendado. |

@@ -1,140 +1,201 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
-/* Importa la fuente Outfit desde Google Fonts para usarla en toda la página. */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --accent-hover: #0ea5e9;
+    --success: #34d399;
+    --error: #f87171;
+    --warn: #fbbf24;
+}
 
 * {
-    margin: 0; /* Elimina el margen por defecto de los elementos. */
-    padding: 0; /* Elimina el padding por defecto de los elementos. */
-    box-sizing: border-box; /* Hace que width/height incluyan padding y borde. */
-    font-family: 'Outfit', sans-serif; /* Aplica la fuente principal a todo el documento. */
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background: #0f172a; /* Define el color base del fondo. */
-    background-image:
-        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.15) 0, transparent 50%), /* Brillo superior izquierdo. */
-        radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.15) 0, transparent 50%); /* Brillo inferior derecho. */
-    min-height: 100vh; /* Hace que el body ocupe toda la altura de la ventana. */
-    display: flex; /* Activa flexbox para centrar el contenido. */
-    justify-content: center; /* Centra horizontalmente el contenido. */
-    align-items: center; /* Centra verticalmente el contenido. */
-    color: #f8fafc; /* Color de texto claro para contraste. */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
 .container {
-    width: 90%; /* Ocupa el 90% del ancho disponible. */
-    max-width: 650px; /* No permite que el contenedor sea más ancho de 650px. */
-    animation: fadeIn 0.8s ease-out; /* Aplica una animación suave al cargar la página. */
+    width: min(1100px, 92%);
+    margin-inline: auto;
 }
 
-.glass-header {
-    text-align: center; /* Centra el contenido del encabezado. */
-    margin-bottom: 2rem; /* Añade espacio debajo del encabezado. */
+.hero {
+    padding: 2.2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
 
-.glass-header h1 {
-    font-size: 2.5rem; /* Tamaño grande para el título principal. */
-    background: linear-gradient(to right, #818cf8, #f472b6); /* Degradado colorido en el texto. */
-    background-clip: text; /* Hace que el degradado se vea dentro del texto. */
-    -webkit-text-fill-color: transparent; /* Hace el texto transparente para mostrar el degradado. */
-    margin-bottom: 0.5rem; /* Separación entre el título y el subtítulo. */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
 
-.info-card {
-    background: rgba(30, 41, 59, 0.7); /* Fondo oscuro semi transparente. */
-    backdrop-filter: blur(10px); /* Aplica desenfoque al fondo detrás de la tarjeta. */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil. */
-    border-radius: 24px; /* Bordes redondeados. */
-    padding: 2.5rem; /* Espacio interno amplio. */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra profunda para dar profundidad. */
-    text-align: center; /* Centra el contenido dentro de la tarjeta. */
+h1 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    margin-bottom: 0.35rem;
 }
 
-.spam-alert {
-    display: flex; /* Organiza el icono y el texto en fila. */
-    align-items: center; /* Alinea verticalmente el contenido. */
-    justify-content: center; /* Centra el contenido horizontalmente. */
-    gap: 0.6rem; /* Añade espacio entre el icono y el texto. */
-    background: rgba(251, 146, 60, 0.12); /* Fondo naranja suave. */
-    border: 1px solid rgba(251, 146, 60, 0.35); /* Borde naranja tenue. */
-    border-radius: 14px; /* Bordes redondeados. */
-    padding: 0.9rem 1rem; /* Espacio interno. */
-    margin: 1rem 0; /* Espacio arriba y abajo del aviso. */
-    color: #fdba74; /* Color del texto del aviso. */
-    font-size: 0.95rem; /* Tamaño del texto. */
+.subtitle {
+    color: var(--muted);
 }
 
-.spam-alert p {
-    margin: 0; /* Elimina el margen del párrafo para que se vea limpio. */
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
 
-.status-badge {
-    display: inline-block; /* Permite aplicar padding y margen como si fuera una caja. */
-    padding: 0.25rem 0.75rem; /* Espacio interno pequeño. */
-    background: rgba(34, 197, 94, 0.2); /* Fondo verde suave. */
-    color: #4ade80; /* Texto verde brillante. */
-    border-radius: 9999px; /* Hace que el badge tenga forma de píldora. */
-    font-size: 0.75rem; /* Texto pequeño. */
-    font-weight: 600; /* Texto medio en negrita. */
-    margin-bottom: 1.5rem; /* Separación inferior. */
-    text-transform: uppercase; /* Convierte el texto a mayúsculas. */
-    letter-spacing: 0.05em; /* Espacio entre letras. */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
 
-.demo-panel {
-    display: flex; /* Organiza los elementos en fila. */
-    flex-direction: column; /* Cambia la dirección a columna. */
-    gap: 1rem; /* Añade espacio entre los elementos internos. */
-    margin: 1.5rem 0; /* Margen vertical para separar la sección. */
+.full-width {
+    grid-column: 1 / -1;
+}
+
+h2 {
+    font-size: 1.1rem;
+    color: #f8fafc;
+}
+
+.desc {
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+label {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+input {
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--surface-alt);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.95rem;
+}
+
+input:focus {
+    outline: 2px solid var(--accent);
+    border-color: transparent;
+}
+
+.btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .btn {
-    display: inline-block; /* Hace que el botón se comporte como bloque en línea. */
-    padding: 0.9rem 1.4rem; /* Espacio interno del botón. */
-    border: none; /* Quita el borde por defecto. */
-    border-radius: 999px; /* Bordes muy redondeados. */
-    background: linear-gradient(to right, #818cf8, #ec4899); /* Degradado del botón. */
-    color: white; /* Texto blanco. */
-    font-weight: 600; /* Texto semi-bold. */
-    cursor: pointer; /* Cambia el cursor a mano al pasar por encima. */
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
 }
 
-.output-box {
-    background: #0f172a; /* Fondo oscuro para el bloque de salida. */
-    border-radius: 16px; /* Bordes redondeados. */
-    padding: 1rem; /* Espacio interno. */
+.btn:hover {
+    background: #334155;
 }
 
-#result {
-    color: #f472b6; /* Color rosado para el mensaje principal. */
-    font-weight: 600; /* Texto en negrita. */
-    margin-bottom: 0.4rem; /* Separación con el siguiente texto. */
+.btn.primary {
+    background: var(--accent);
+    color: #082f49;
+    border-color: transparent;
 }
 
-#demoNote {
-    color: #cbd5e1; /* Color claro para el texto secundario. */
-    font-size: 0.95rem; /* Tamaño ligeramente menor. */
+.btn.primary:hover {
+    background: var(--accent-hover);
 }
 
-.code-preview {
-    background: #0f172a; /* Fondo oscuro para el bloque de código. */
-    border-radius: 16px; /* Bordes redondeados. */
-    padding: 1rem; /* Espacio interno. */
-    overflow: auto; /* Añade scroll si el contenido es muy ancho. */
-    text-align: left; /* Alinea el código a la izquierda. */
+.btn.small {
+    padding: 0.3rem 0.65rem;
+    font-size: 0.8rem;
 }
 
-code {
-    color: #f472b6; /* Color rosado para el texto dentro de code. */
-    font-family: monospace; /* Fuente monoespaciada, típica para código. */
+.code-box {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 0.82rem;
+    color: #7dd3fc;
+    overflow-x: auto;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0; /* Inicia invisible. */
-        transform: translateY(20px); /* Inicia un poco más abajo. */
-    }
-    to {
-        opacity: 1; /* Termina visible. */
-        transform: translateY(0); /* Vuelve a su posición original. */
-    }
+.output {
+    background: rgba(15, 23, 42, 0.9);
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.92rem;
 }
+
+.output.ok { border-left-color: var(--success); color: var(--success); }
+.output.err { border-left-color: var(--error); color: var(--error); }
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.84rem;
+    min-height: 140px;
+    max-height: 240px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.log-line { color: var(--text); }
+.log-line.info { color: var(--accent); }
+.log-line.ok { color: var(--success); }
+.log-line.err { color: var(--error); }
+.log-line.warn { color: var(--warn); }

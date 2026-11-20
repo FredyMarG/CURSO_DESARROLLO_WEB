@@ -1,38 +1,39 @@
-/**
- * ESTILOS LABORATORIO: POO
- * Diseño enfocado en la presentación limpia de conceptos de arquitectura.
- */
-
-/* Reset global para estandarizar el renderizado en todos los navegadores */
-* {
-    margin: 0;              /* Elimina márgenes externos por defecto */
-    padding: 0;             /* Elimina rellenos internos por defecto */
-    box-sizing: border-box; /* El tamaño total del elemento incluye el padding y el borde */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-2: #1e293b;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59, 130, 246, 0.16);
+    --radius: 14px;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía para legibilidad técnica */
-    line-height: 1.6;        /* Altura de línea para evitar que el texto se sienta apretado */
-    background-color: #f0f2f5; /* Color de fondo gris azulado suave (estilo Facebook antiguo) */
-    color: #1c1e21;          /* Texto principal en gris casi negro */
-    
-    /* Centrado absoluto usando Flexbox */
-    display: flex;           /* Convierte el body en contenedor flexible */
-    flex-direction: column;  /* Alinea los elementos hijos en vertical */
-    align-items: center;     /* Centra los elementos en el eje horizontal */
-    justify-content: center; /* Centra los elementos en el eje vertical */
-    height: 100vh;           /* Fuerza al body a ocupar el 100% de la altura de la pantalla */
-}
-
-h1 {
-    color: #1a73e8;          /* Color azul corporativo para resaltar el título */
-    margin-bottom: 1rem;     /* Espacio inferior para separar del párrafo */
-    font-size: 2.5rem;       /* Tamaño destacado para el encabezado principal */
-}
-
-p {
-    background: white;       /* Fondo blanco para simular una caja de texto */
-    padding: 1rem 2rem;      /* Espacio interno para dar "aire" al mensaje */
-    border-radius: 50px;     /* Bordes redondeados estilo cápsula */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra sutil para dar elevación */
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: radial-gradient(circle at top, #172554 0%, var(--bg) 55%); color: var(--text); min-height: 100vh; line-height: 1.6; padding: 2rem 1rem 4rem; }
+.app-shell { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+.hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.75rem 2rem; }
+.badge { display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #93c5fd; background: var(--accent-soft); padding: 0.25rem 0.75rem; border-radius: 999px; margin-bottom: 0.5rem; }
+.hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: #fff; }
+.hero p { color: var(--muted); max-width: 65ch; margin-top: 0.35rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.card h2 { font-size: 1.1rem; color: #fff; }
+.note { font-size: 0.9rem; color: var(--muted); background: rgba(15, 23, 42, 0.7); border-left: 3px solid var(--accent); padding: 0.65rem 0.85rem; border-radius: 0 8px 8px 0; }
+.controls { display: flex; flex-direction: column; gap: 0.75rem; }
+.row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+label { font-size: 0.85rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: 0.25rem; }
+input, select { width: 100%; padding: 0.6rem 0.8rem; border-radius: 8px; border: 1px solid var(--border); background: var(--surface-2); color: var(--text); font-size: 0.95rem; }
+input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+button { cursor: pointer; border: none; border-radius: 8px; padding: 0.55rem 0.95rem; font-weight: 600; font-size: 0.9rem; background: var(--accent); color: #fff; transition: filter 0.15s ease; }
+button:hover { filter: brightness(1.1); }
+button.secondary { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
+.output { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.88rem; color: #e2e8f0; min-height: 3.2rem; white-space: pre-wrap; word-break: break-word; }
+.code-preview { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.82rem; color: #93c5fd; overflow-x: auto; }
+.console-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }
+.console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+.console-log { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.83rem; max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.35rem; }
+.log-line { color: #cbd5e1; }
+.log-line.ok { color: #34d399; }
+.log-line.err { color: #f87171; }

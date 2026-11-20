@@ -3,29 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio: Pestaña Application</title>
+    <title>DevTools Lab — Pestaña Application (Storage)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main actúa como el contenedor raíz del contenido principal -->
-    <main>
-        <h1>Explorador de Almacenamiento</h1>
-        
-        <!-- Este div representa el contenedor oscuro definido en el CSS -->
-        <div class="data-container">
-            <h2>Local Storage Items</h2>
-            
-            <!-- Párrafos organizados como items de una lista técnica -->
-            <article class="data-list">
-                <p><strong>user_id:</strong> 550e8400-e29b-41d4-a716-446655440000</p>
-                <p><strong>session_token:</strong> exp_2024_05_20_99x82</p>
-                <p><strong>theme_preference:</strong> dark_modern_pro</p>
-                <p><strong>last_login:</strong> 2024-05-14T03:00:00Z</p>
-            </article>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Chrome DevTools</span>
+            <h1>Pestaña <code>Application</code>: LocalStorage &amp; SessionStorage</h1>
+            <p class="subtitle">Guarda, lee y elimina claves en tiempo real mientras las inspeccionas en DevTools → Application.</p>
         </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Editor de <code>localStorage</code> y <code>sessionStorage</code></h2>
+            <div class="controls">
+                <label for="keyInput">Clave:</label>
+                <input id="keyInput" type="text" value="tema_usuario">
+                <label for="valInput">Valor:</label>
+                <input id="valInput" type="text" value="oscuro">
+                <div class="btn-row">
+                    <button type="button" id="btnSaveLocal" class="btn primary">Guardar en localStorage</button>
+                    <button type="button" id="btnSaveSession" class="btn">Guardar en sessionStorage</button>
+                    <button type="button" id="btnClearStorage" class="btn">Limpiar Todo</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>2. Contenido Actual</h2>
+            <div id="storageView" class="terminal" aria-live="polite"></div>
+        </section>
     </main>
 
-    <!-- Script para futuras implementaciones de Application API -->
     <script src="application.js"></script>
 </body>
 </html>
