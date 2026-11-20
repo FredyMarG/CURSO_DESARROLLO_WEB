@@ -589,12 +589,18 @@ tbody tr:hover td {
     text-shadow: 0 0 8px rgba(255, 51, 88, 0.45);
 }
 
-/* Cápsula flotante de regreso al Portal Principal */
-.neon-portal-pill {
+/* Cápsula flotante de regreso a Proyectos y al Portal Principal */
+.neon-nav-group {
     position: fixed;
     bottom: 16px;
     right: 16px;
     z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.neon-portal-pill {
     background: rgba(5, 7, 17, 0.92);
     color: var(--neon-cyan) !important;
     border: 1px solid rgba(0, 240, 255, 0.5);

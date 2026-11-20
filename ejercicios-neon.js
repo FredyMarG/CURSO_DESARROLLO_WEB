@@ -1,7 +1,7 @@
 /**
  * ============================================================================
  * COMPLEMENTO DINÁMICO NEÓN PARA TODOS LOS EJERCICIOS DEL CURSO
- * Agrega botón flotante de regreso al Portal Principal si no existe barra.
+ * Agrega barra flotante con acceso directo a Proyectos y al Portal Principal.
  * Documentación línea por línea en español.
  * ============================================================================
  */
@@ -10,12 +10,14 @@
     'use strict';
 
     // Si la página ya tiene barra superior o HUD de proyectos, no duplica navegación
-    if (document.querySelector('.top-nav, .ej-hud, .neon-portal-pill')) return;
+    if (document.querySelector('.top-nav, .ej-hud, .neon-nav-group')) return;
 
-    // Crea un enlace flotante hacia el portal principal (3 niveles arriba desde EJERCICIOS/<Tema>/)
-    const pill = document.createElement('a');
-    pill.className = 'neon-portal-pill';
-    pill.href = '../../../index.html';
-    pill.textContent = '🏠 Portal del Curso';
-    document.body.appendChild(pill);
+    // Crea una cápsula flotante con accesos rápidos a Proyectos y Portal
+    const group = document.createElement('div');
+    group.className = 'neon-nav-group';
+    group.innerHTML = `
+        <a class="neon-portal-pill" href="../../../HTML%20y%20CSS/PROYECTOS/index.html">💼 Proyectos</a>
+        <a class="neon-portal-pill" href="../../../index.html">🏠 Portal del Curso</a>
+    `;
+    document.body.appendChild(group);
 })();
