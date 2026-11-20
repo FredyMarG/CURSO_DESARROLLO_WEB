@@ -257,3 +257,87 @@ imagenes.forEach(imagen => observadorImagenes.observe(imagen));
 * **El constructor** requiere una función `callback(entries, observer)` y acepta un objeto opcional `options` (`root`, `rootMargin`, `threshold`).
 * **La propiedad `entry.isIntersecting`** devuelve un booleano (`true` o `false`) que confirma si el elemento observado está cruzando actualmente hacia el interior del área vigilada.
 * **La gestión de memoria** se optimiza invocando `observer.unobserve(target)` una vez completadas tareas de un solo disparo como la carga diferida de recursos.
+
+
+---
+
+# Conceptos Complementarios: Scroll Infinito y Control de Video
+
+### 1. Scroll Infinito con Elemento Centinela
+En lugar de observar cada tarjeta individualmente, puedes colocar un `<div id="centinela"></div>` al final de la lista: cuando entra en pantalla, solicitas el siguiente lote a tu API.
+```javascript
+const centinela = document.getElementById("centinela");
+const ioScroll = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) cargarSiguientePagina();
+}, { rootMargin: "200px" });
+
+ioScroll.observe(centinela);
+```
+
+### 2. Reproducción y Pausa Automática de Video
+```javascript
+const ioVideo = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        entry.isIntersecting ? entry.target.play() : entry.target.pause();
+    });
+}, { threshold: 0.6 });
+```
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Crea un `IntersectionObserver` que observe una caja `#caja` y muestre en consola `"¡Caja visible!"` únicamente cuando `entry.isIntersecting` sea `true`.
+
+## Nivel 2
+Configura un observador con `threshold: [0, 0.5, 1]` que imprima el porcentaje visible redondeado (`Math.round(entry.intersectionRatio * 100) + "%"`) cada vez que el elemento cruce uno de esos hitos.
+
+## Nivel 3
+Implementa un observador de animaciones de un solo disparo para todas las tarjetas `.card-animada`: al entrar al menos un `20%` (`threshold: 0.2`), añade la clase `"aparecer"` y llama a `observer.unobserve(entry.target)`.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) console.log("¡Caja visible!");
+});
+io.observe(document.getElementById("caja"));
+```
+
+## Solución Nivel 2
+```javascript
+const ioPorcentaje = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+        console.log(`Visible: ${Math.round(e.intersectionRatio * 100)}%`);
+    });
+}, { threshold: [0, 0.5, 1] });
+```
+
+## Solución Nivel 3
+```javascript
+const ioAnimar = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("aparecer");
+        observer.unobserve(entry.target);
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".card-animada").forEach((card) => ioAnimar.observe(card));
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Opción / Propiedad | Tipo | Uso Principal |
+| :--- | :--- | :--- |
+| `root` | Element \| null | Contenedor marco (`null` = viewport completo) |
+| `rootMargin` | String | Margen CSS (`"150px"` precarga antes de entrar) |
+| `threshold` | Number \| Array | Porcentaje visible (`0` a `1`) para disparar |
+| `entry.isIntersecting` | Boolean | `true` al entrar, `false` al salir |
+| `observer.unobserve(el)` | Método | Libera un elemento tras una acción única |

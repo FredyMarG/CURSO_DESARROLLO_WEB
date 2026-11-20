@@ -239,7 +239,7 @@ button {
 | `@media`    | `@media (max-width: 768px){}` | Aplica estilos bajo condiciones de media.                               |
 | `@font-face`| Define fuentes externas        | Carga fuentes personalizadas.                                           |
 | `@keyframes`| `@keyframes fade-in { ... }`   | Define fotogramas de animaciones CSS.                                   |
-| `@supports` | `@supports (display: grid){}` | Aplica estilos solo si el navegador soporta una característica. [web:16]         |
+| `@supports` | `@supports (display: grid){}` | Aplica estilos solo si el navegador soporta una característica.         |
 
 Ejemplo con `@keyframes`:
 
@@ -255,3 +255,192 @@ Ejemplo con `@keyframes`:
 ```
 
 ---
+
+---
+
+# CSS Moderno (Estándares 2024–2026)
+
+## 1. CSS Nesting Nativo (Anidamiento)
+
+CSS ahora permite anidar reglas directamente sin necesidad de preprocesadores como Sass:
+
+```css
+.card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #1e293b;
+
+  & .card__title {
+    font-size: 1.25rem;
+    color: #f8fafc;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+}
+```
+
+- El símbolo `&` representa el selector padre (similar a Sass).
+- También permite anidar `@media`, `@container` y `@supports` dentro de la propia regla.
+
+---
+
+## 2. Cascade Layers (`@layer`)
+
+Las **Cascade Layers** permiten controlar explícitamente la prioridad entre grupos de estilos, independientemente de la especificidad de los selectores:
+
+```css
+/* El orden de declaración define la prioridad (de menor a mayor) */
+@layer reset, base, components, utilities;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+}
+
+@layer components {
+  .btn-primary {
+    background: #2563eb;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@layer utilities {
+  .p-0 { padding: 0; } /* Gana sobre .btn-primary aunque tenga igual o menor especificidad */
+}
+```
+
+> **Regla clave:** Los estilos fuera de cualquier `@layer` tienen **mayor prioridad** que los que están dentro de capas.
+
+---
+
+## 3. Selectores Funcionales Modernos: `:is()`, `:where()` y `:has()`
+
+| Selector | Especificidad | Uso principal |
+| :--- | :--- | :--- |
+| `:is(h1, h2, h3)` | Toma la del argumento **más específico** | Agrupar selectores largos de forma compacta |
+| `:where(h1, h2, h3)` | Siempre **0** | Resets y librerías fáciles de sobrescribir |
+| `:has(...)` | Toma la del argumento más específico | "Selector de padre": estiliza un elemento según sus hijos o hermanos |
+
+```css
+/* :is() reduce repetición */
+:is(header, footer) a:hover {
+  color: #38bdf8;
+}
+
+/* :where() mantiene especificidad 0 para poder sobrescribirse fácilmente */
+:where(ul, ol) {
+  padding-inline-start: 1.25rem;
+}
+
+/* :has() — Estiliza la tarjeta si contiene una imagen */
+.card:has(img) {
+  grid-template-rows: 200px 1fr;
+}
+
+/* :has() — Estiliza el formulario si tiene un campo inválido */
+form:has(input:invalid) .submit-btn {
+  opacity: 0.5;
+  pointer-events: none;
+}
+```
+
+---
+
+## 4. `@property` (Variables CSS Tipadas y Animables)
+
+`@property` registra una Custom Property con un tipo (`syntax`), herencia (`inherits`) y valor inicial (`initial-value`). Esto permite **animar degradados y variables** que antes eran imposibles:
+
+```css
+@property --angulo {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.borde-animado {
+  background: conic-gradient(from var(--angulo), #38bdf8, #818cf8, #38bdf8);
+  transition: --angulo 0.8s ease;
+}
+
+.borde-animado:hover {
+  --angulo: 180deg;
+}
+```
+
+---
+
+## 5. Propiedades Lógicas (`margin-inline`, `padding-block`, `inset`)
+
+En lugar de direcciones físicas (`left`, `right`, `top`, `bottom`), las propiedades lógicas se adaptan automáticamente a la dirección de escritura (`ltr`, `rtl`, vertical):
+
+| Propiedad Física | Propiedad Lógica Moderna | Significado |
+| :--- | :--- | :--- |
+| `margin-left` + `margin-right` | `margin-inline` | Margen en el eje del texto (horizontal en español) |
+| `padding-top` + `padding-bottom` | `padding-block` | Relleno en el eje de bloque (vertical en español) |
+| `top: 0; right: 0; bottom: 0; left: 0;` | `inset: 0;` | Atajo para los 4 lados en `position: absolute/fixed` |
+| `width` / `height` | `inline-size` / `block-size` | Ancho y alto lógicos |
+| `border-top-left-radius` | `border-start-start-radius` | Esquina lógica inicial |
+
+---
+
+## 6. `aspect-ratio` y `accent-color`
+
+### `aspect-ratio`
+Mantiene una proporción fija en tarjetas, videos o contenedores sin hacks de `padding-bottom`:
+
+```css
+.video-card {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+```
+
+### `accent-color`
+Personaliza al instante el color nativo de `checkbox`, `radio`, `range` y `<progress>` respetando accesibilidad:
+
+```css
+:root {
+  accent-color: #38bdf8;
+}
+```
+
+---
+
+# Errores Comunes en CSS
+
+1. **Abusar de `!important`:** Rompe la cascada natural y dificulta el mantenimiento; usa `@layer` o mejora la estructura de selectores.
+2. **Olvidar `box-sizing: border-box;`:** Hace que `padding` y `border` sumen al `width`, rompiendo layouts.
+3. **Usar `id` (`#header`) para dar estilos:** Genera especificidad excesiva difícil de sobrescribir.
+4. **Animar `top`, `left`, `width` o `height`:** Provoca *reflow* continuo; prefiere `transform` y `opacity`.
+5. **Altura fija (`height: 500px`) en contenedores con texto:** Si el texto crece o el usuario hace zoom, se desborda; usa `min-height`.
+
+---
+
+# Buenas Prácticas Profesionales
+
+- Inicia tus hojas de estilo con un reset moderno (`box-sizing: border-box`, `img { max-width: 100%; display: block; }`).
+- Organiza la arquitectura usando `@layer` (`reset`, `base`, `components`, `utilities`).
+- Define tokens de diseño en `:root` (colores, tipografía, espaciados) y úsalos con `var()`.
+- Usa propiedades lógicas (`margin-inline`, `padding-block`, `inset`) para facilitar la internacionalización.
+- Aprovecha `:has()` y CSS Nesting nativo para reducir código repetitivo y dependencias de JavaScript o Sass.
+
+---
+
+# Hoja de Trucos (Cheatsheet) — CSS Moderno
+
+| Concepto | Ejemplo / Regla |
+| :--- | :--- |
+| Especificidad | En línea > `#id` > `.clase` > `etiqueta` (`:where()` vale 0) |
+| Modelo de Caja | `box-sizing: border-box` incluye `padding` y `border` |
+| Nesting nativo | `.card { &:hover { ... } }` |
+| Cascade Layers | `@layer reset, base, components, utilities;` |
+| Selector de padre | `.card:has(img) { ... }` |
+| Variable tipada | `@property --x { syntax: "<color>"; inherits: false; initial-value: #000; }` |
+| Propiedades lógicas | `margin-inline: auto; padding-block: 2rem; inset: 0;` |
+| Proporción y formularios | `aspect-ratio: 16 / 9;` / `accent-color: #38bdf8;` |

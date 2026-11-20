@@ -3,24 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Junior - Arrays</title>
+    <title>JS Junior — Guía Interactiva de Arrays</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">[]</div>
-            <h1>Colecciones (Arrays)</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 05 · Colecciones ES2023+</span>
+            <h1>Arrays y Métodos Funcionales</h1>
+            <p>Manipula colecciones en vivo: métodos mutables (<code>push</code>, <code>pop</code>, <code>shift</code>), transformación funcional (<code>map</code>, <code>filter</code>, <code>reduce</code>) e inmutabilidad ES2023 (<code>toSorted</code>, <code>toReversed</code>, <code>with</code>).</p>
         </header>
-        <section class="content">
-            <p>Aprende a gestionar listas de datos, ordenar elementos y transformar colecciones de forma eficiente.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Resultados en <b>Consola (Ctrl + Shift + I)</b></span>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Mutación en vivo -->
+            <section class="card" aria-labelledby="ar1">
+                <h2 id="ar1">1. Métodos Mutables (Pila y Cola)</h2>
+                <p class="note">Agrega o quita elementos del array <code>frutas</code> y observa cómo cambia su contenido y longitud.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-fruta">Nueva fruta:</label>
+                        <input id="input-fruta" type="text" placeholder="Ej: Mango" value="Mango">
+                    </div>
+                    <div class="row">
+                        <button type="button" data-arr="push">push()</button>
+                        <button type="button" data-arr="pop" class="secondary">pop()</button>
+                        <button type="button" data-arr="unshift">unshift()</button>
+                        <button type="button" data-arr="shift" class="secondary">shift()</button>
+                        <button type="button" data-arr="reset" class="secondary">Reset</button>
+                    </div>
+                </div>
+                <pre class="code-preview">frutas.push("Mango"); frutas.at(-1); // último</pre>
+                <div id="out-arr-mut" class="output" aria-live="polite"></div>
+            </section>
+
+            <!-- Tarjeta 2: map, filter, reduce -->
+            <section class="card" aria-labelledby="ar2">
+                <h2 id="ar2">2. Pipeline Funcional (<code>filter</code> → <code>map</code> → <code>reduce</code>)</h2>
+                <p class="note">Procesa el array de precios <code>[40, 120, 85, 210, 30]</code> sin mutar el original.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-min-precio">Filtrar precios mayores o iguales a ($):</label>
+                        <input id="input-min-precio" type="number" value="80" min="0">
+                    </div>
+                    <button id="btn-pipeline" type="button">Ejecutar Pipeline (+10% desc.)</button>
+                </div>
+                <pre class="code-preview">precios.filter(p => p >= min).map(p => p * 0.9)</pre>
+                <div id="out-pipeline" class="output" aria-live="polite">Presiona el botón para ver cada etapa del pipeline.</div>
+            </section>
+
+            <!-- Tarjeta 3: Inmutables ES2023 -->
+            <section class="card" aria-labelledby="ar3">
+                <h2 id="ar3">3. Métodos Inmutables ES2023</h2>
+                <p class="note"><code>.toSorted()</code>, <code>.toReversed()</code> y <code>.with()</code> devuelven una copia nueva dejando el array original <code>[30, 5, 100, 20]</code> intacto.</p>
+                <div class="row">
+                    <button type="button" data-es2023="sort">.toSorted((a,b) => a - b)</button>
+                    <button type="button" data-es2023="rev" class="secondary">.toReversed()</button>
+                    <button type="button" data-es2023="with" class="secondary">.with(-1, 999)</button>
+                </div>
+                <pre class="code-preview">const ordenados = nums.toSorted((a, b) => a - b);</pre>
+                <div id="out-es2023" class="output" aria-live="polite">Original: [30, 5, 100, 20]</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
-            <div class="methods-tag">
-                <span>Push</span> <span>Pop</span> <span>Splice</span> <span>Sort</span>
-            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 

@@ -1,177 +1,125 @@
-# GUÍA DEL OBJETO MATH
+# 📐 Guía Completa del Objeto `Math` y Precisión Numérica
 
-El objeto `Math` es una herramienta integrada en JavaScript para realizar operaciones matemáticas complejas.
-⚠️ **Nota:** `Math` no es una función, es un objeto estático (no usas `new Math()`).
+El objeto integrado `Math` proporciona constantes y funciones matemáticas estáticas. **No es un constructor** (nunca uses `new Math()`).
 
 ---
 
-# 🔢 1. Funciones de Redondeo
+## 1. Métodos de Redondeo y Signo
 
-| Método | Descripción | Ejemplo (4.7) |
+| Método | Comportamiento | `4.7` | `4.2` | `-4.2` |
+| :--- | :--- | :---: | :---: | :---: |
+| `Math.round(x)` | Al entero más cercano | `5` | `4` | `-4` |
+| `Math.floor(x)` | Hacia abajo (piso, $-\infty$) | `4` | `4` | **`-5`** |
+| `Math.ceil(x)` | Hacia arriba (techo, $+\infty$) | `5` | `5` | `-4` |
+| `Math.trunc(x)` | Elimina decimales (corta hacia `0`) | `4` | `4` | **`-4`** |
+| `Math.sign(x)` | Devuelve `1`, `-1`, `0` o `-0` según el signo | `1` | `1` | `-1` |
+
+> **Diferencia clave `floor` vs `trunc`:** Con números positivos son idénticos, pero con negativos `Math.floor(-4.2)` baja a `-5` mientras `Math.trunc(-4.2)` simplemente corta los decimales y devuelve `-4`.
+
+---
+
+## 2. Aritmética, Potencias y Extremos
+
+| Método | Descripción | Ejemplo |
 | :--- | :--- | :--- |
-| `Math.round()` | Redondea al entero más cercano. | 5 |
-| `Math.floor()` | Redondea hacia **abajo** (Piso). | 4 |
-| `Math.ceil()` | Redondea hacia **arriba** (Techo). | 5 |
-| `Math.trunc()` | Elimina la parte decimal (Trunca). | 4 |
+| `Math.abs(x)` | Valor absoluto (siempre positivo) | `Math.abs(-15)` → `15` |
+| `Math.pow(base, exp)` | Potencia (equivale a `base ** exp`) | `Math.pow(2, 5)` → `32` |
+| `Math.sqrt(x)` / `Math.cbrt(x)` | Raíz cuadrada / raíz cúbica | `Math.sqrt(81)` → `9` |
+| `Math.max(...nums)` | El valor mayor de los argumentos | `Math.max(5, 12, 3)` → `12` |
+| `Math.min(...nums)` | El valor menor de los argumentos | `Math.min(5, 12, 3)` → `3` |
+| `Math.hypot(a, b)` | Hipotenusa $\sqrt{a^2 + b^2}$ | `Math.hypot(3, 4)` → `5` |
+
+> **Tip con Arrays:** `Math.max()` no acepta un array directamente. Usa el operador *spread*: `Math.max(...[10, 45, 22])` → `45`.
 
 ---
 
-# 🚀 2. Generación de Aleatorios
+## 3. Generación de Números Aleatorios
 
-## 🎲 `Math.random()
+### `Math.random()`
+Devuelve un número decimal pseudoaleatorio en el rango $[0, 1)$ (`0` incluido, `1` excluido).
 
-Genera un número decimal entre 0 (inclusive) y 1 (exclusivo).
-
-### 🎯 Fórmula para un Rango Entero
-
-Para obtener un número entre `min` y `max`:
-
-```js
-let random = Math.floor(Math.random() * (max - min + 1)) + min;
-```
-
----
-
-# 📐 3. Aritmética y Potencia
-
-| Método | Descripción |
-| :--- | :--- |
-| `Math.pow(base, exp)` | Eleva la base al exponente. |
-| `Math.sqrt(n)` | Raíz cuadrada. |
-| `Math.cbrt(n)` | Raíz cúbica. |
-| `Math.abs(n)` | Valor absoluto (convierte negativos a positivos). |
-| `Math.max(a, b, c...)` | Devuelve el número más alto de la lista. |
-| `Math.min(a, b, c...)` | Devuelve el número más bajo de la lista. |
-
----
-
-# 🥧 4. Constantes Matemáticas
-
-| Propiedad | Valor Aproximado |
-| :--- | :--- |
-| `Math.PI` | 3.14159265... |
-| `Math.E` | 2.718... (Constante de Euler) |
-| `Math.SQRT2` | 1.414... (Raíz de 2) |
-
----
-
-# 🧠 Caso Práctico: El Sorteo
-
-```js
-const participantes = ["Ana", "Pedro", "Luis", "Maria"];
-const ganadorIndice = Math.floor(Math.random() * participantes.length);
-console.log(`El ganador es: ${participantes[ganadorIndice]}`);
-```
-
----
-
-# ⚠️ Diferencia Importante: floor vs trunc
-
-* Para números **positivos**, hacen lo mismo.
-* Para números **negativos**, `floor` redondea alejándose de cero (`-4.1` → `-5`), mientras que `trunc` solo corta decimales (`-4.1` → `-4`).
-
----
-
-# ⚠️ Errores Comunes
-
-❌ Escribir `math` en minúscula. JavaScript es *case-sensitive* y debe ser `Math`.
-❌ Pensar que `Math.random()` llega hasta el número máximo (recuerda que el 1 es exclusivo).
-
----
-
-# ✅ Buenas Prácticas
-
-✔️ Usa `Math.floor` cuando trabajes con índices de arrays (ya que los índices son siempre enteros).
-✔️ Para redondear a una cantidad específica de decimales, usa `numero.toFixed(2)` (pero recuerda que devuelve un String).
-
----
-
-```
-
-```js
-if (condicion) {
-    // se ejecuta si es true
-} else if (otraCondicion) {
-    // se ejecuta si la primera fue false y esta es true
-} else {
-    // se ejecuta si ninguna anterior se cumplió
+### Fórmula para entero aleatorio entre `min` y `max` (ambos incluidos):
+```javascript
+function aleatorioEntre(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+console.log(aleatorioEntre(1, 6)); // Simula un dado (1 a 6)
+```
+
+### Aleatorios Criptográficamente Seguros (`crypto`)
+`Math.random()` **NO** es seguro para contraseñas, tokens o sorteos críticos. Para seguridad real usa la Web Crypto API:
+
+```javascript
+// Generar un UUID v4 único y seguro (estándar en navegadores y Node.js)
+const idUnico = crypto.randomUUID();
+
+// Generar un entero seguro usando crypto.getRandomValues()
+const buffer = new Uint32Array(1);
+crypto.getRandomValues(buffer);
+const numeroSeguro = buffer[0];
 ```
 
 ---
 
-# 2️⃣ Operador Ternario ⚡
+## 4. Precisión Flotante (`0.1 + 0.2`) y Validación Numérica
 
-Es la versión corta de un `if/else`. Ideal para asignar valores rápidos.
+JavaScript usa el estándar **IEEE 754** de coma flotante binaria de 64 bits, lo que provoca imprecisiones clásicas en decimales:
 
-**Sintaxis:**
-`condicion ? valor_si_true : valor_si_false`
+```javascript
+console.log(0.1 + 0.2);          // 0.30000000000000004
+console.log(0.1 + 0.2 === 0.3);  // false ⚠️
 
-**Ejemplo:**
+// ✅ Soluciones para dinero o cálculos exactos:
+// 1. Trabajar en centavos (enteros):
+const totalCentavos = 10 + 20; // 30 centavos ($0.30)
 
-```js
-const mensaje = (edad >= 18) ? "Bienvenido" : "Eres menor";
+// 2. Redondear para mostrar o comparar con tolerancia (Number.EPSILON):
+const sonIguales = Math.abs((0.1 + 0.2) - 0.3) < Number.EPSILON; // true
+const formateado = (0.1 + 0.2).toFixed(2); // "0.30" (devuelve string)
+```
+
+### Validaciones modernas en `Number`
+```javascript
+Number.isInteger(42);     // true
+Number.isInteger(42.5);   // false
+Number.isNaN(NaN);        // true
+Number.isFinite(100);     // true (false para Infinity, -Infinity, NaN)
 ```
 
 ---
 
-# 3️⃣ Sentencia Switch 🎛️
+## 5. Constantes Matemáticas
 
-Ideal cuando tienes una variable que puede tomar muchos valores exactos (como un menú o los días de la semana).
-
-```js
-switch (variable) {
-    case valor1:
-        // codigo
-        break; // ⚠️ Obligatorio para no ejecutar el siguiente caso
-    case valor2:
-        // codigo
-        break;
-    default:
-        // se ejecuta si no hubo coincidencias
-}
-```
+* `Math.PI`: `3.141592653589793` ($\pi$)
+* `Math.E`: `2.718281828459045` (número de Euler)
+* `Math.SQRT2`: `1.4142135623730951` ($\sqrt{2}$)
 
 ---
 
-# 🧠 Concepto Pro: Truthy y Falsy
+## ⚠️ Errores Comunes
 
-En JavaScript, no necesitas comparar siempre con `true`. El lenguaje evalúa los valores por sí mismos.
+* **Escribir `math` en minúscula:** JavaScript distingue mayúsculas; siempre es `Math`.
+* **Pasar un array directo a `Math.max(arr)`:** Devuelve `NaN`. Debes expandirlo con `Math.max(...arr)`.
+* **Olvidar `+ 1` en la fórmula de rango:** `Math.floor(Math.random() * (max - min)) + min` nunca incluirá `max`.
+* **Usar `.toFixed(2)` y seguir operando matemáticamente:** `.toFixed()` devuelve un `string`; conviértelo con `Number(val.toFixed(2))`.
 
-### ❌ Valores Falsy (Se evalúan como `false`)
+## ✅ Buenas Prácticas
 
-* `false`
-* `0` (Cero)
-* `""` (String vacío)
-* `null`
-* `undefined`
-* `NaN`
-
-### ✅ Valores Truthy
-
-Todo lo demás (`"Hola"`, `1`, `[]`, `{}`).
-
-**Ejemplo:**
-
-```js
-let nombre = "";
-if (nombre) { // Evalúa como false porque es un string vacío
-    console.log("Hola!");
-}
-```
+* Usa `crypto.randomUUID()` para generar IDs únicos en lugar de `Math.random().toString(36)`.
+* En aplicaciones financieras, almacena y calcula precios en la unidad mínima entera (centavos) y formatea solo al mostrar en pantalla.
+* Usa `Number.isInteger()` y `Number.isFinite()` para validar entradas numéricas.
 
 ---
 
-# ⚠️ Errores Comunes
+## Hoja de Trucos (Cheatsheet) — `Math` y Números
 
-❌ Olvidar el `break` en un `switch` (ejecutará todos los casos hacia abajo).
-❌ Usar `=` en lugar de `===` dentro de un `if`.
-
----
-
-# ✅ Buenas Prácticas
-
-✔️ Usa el operador ternario para condiciones simples de una sola línea.
-✔️ Usa `switch` cuando tengas más de 3 condiciones basadas en una sola variable.
-
----
+| Operación | Código | Resultado / Uso |
+| :--- | :--- | :--- |
+| **Redondeo cercano / piso / techo** | `Math.round(x)` / `floor(x)` / `ceil(x)` | Entero según dirección |
+| **Quitar decimales** | `Math.trunc(x)` | Corta decimales sin importar signo |
+| **Entero aleatorio `[min, max]`** | `Math.floor(Math.random() * (max - min + 1)) + min` | Juegos y simulaciones |
+| **ID único seguro** | `crypto.randomUUID()` | Identificadores únicos (UUID v4) |
+| **Máximo / Mínimo de array** | `Math.max(...arr)` / `Math.min(...arr)` | Requiere spread `...` |
+| **Validar entero** | `Number.isInteger(n)` | `true` si es entero exacto |
+| **Formatear decimales** | `Number(n.toFixed(2))` | Redondea a 2 decimales numéricos |

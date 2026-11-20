@@ -1,95 +1,92 @@
-/**
- * 🎨 SYSTEM DESIGN - LOCATION INSPECTOR MODULE
- * 
- * ARQUITECTURA: Diseño centrado en la legibilidad y la usabilidad.
- * RENDIMIENTO: Uso de propiedades que no fuerzan el reflow del DOM en animaciones.
- * ACCESIBILIDAD: Contraste de colores adecuado y feedback visual claro para interacciones.
- */
-
-/* BASE STYLES: Configuración global para el cuerpo del documento */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Pila de fuentes del sistema para rendimiento */
-    background-color: #f0f2f5; /* Color de fondo suave para un aspecto limpio */
-    display: flex; /* Activa Flexbox para un centrado eficiente */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    min-height: 100vh; /* Asegura que el cuerpo ocupe toda la altura del viewport */
-    margin: 0; /* Elimina el margen predeterminado del navegador */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* CONTAINER: Estilos para el contenedor principal de la interfaz */
-.container {
-    background: white; /* Fondo blanco para la tarjeta principal */
-    padding: 2rem; /* Espaciado interno para el contenido */
-    border-radius: 12px; /* Bordes redondeados para una estética moderna */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra sutil para dar profundidad */
-    max-width: 600px; /* Ancho máximo para legibilidad en pantallas grandes */
-    width: 90%; /* Ancho responsivo para pantallas más pequeñas */
+.container { width: min(1050px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* TYPOGRAPHY: Estilos para los elementos de texto */
-h1 {
-    color: #1a73e8; /* Color primario para el título */
-    margin-bottom: 0.5rem; /* Espacio debajo del título */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-.subtitle {
-    color: #5f6368; /* Color secundario para el subtítulo */
-    margin-bottom: 2rem; /* Espacio generoso debajo del subtítulo */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* CARD COMPONENT: Estilos para la tarjeta de visualización de datos */
 .card {
-    background: #f8f9fa; /* Fondo ligeramente gris para diferenciar la tarjeta */
-    border-left: 5px solid #1a73e8; /* Borde izquierdo de color primario para énfasis */
-    padding: 1.5rem; /* Relleno interno de la tarjeta */
-    border-radius: 4px; /* Bordes ligeramente redondeados */
-    margin-bottom: 2rem; /* Espacio debajo de la tarjeta */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
-
-/* DATA ITEM: Estilos para cada línea de información dentro de la tarjeta */
-.data-item {
-    margin-bottom: 1rem; /* Espacio entre cada elemento de datos */
-    font-size: 0.95rem; /* Tamaño de fuente ligeramente más pequeño */
-    color: #3c4043; /* Color de texto oscuro para legibilidad */
+.desc { color: var(--muted); font-size: 0.92rem; }
+.kv-list { display: flex; flex-direction: column; gap: 0.45rem; }
+.kv-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.84rem;
 }
-
-/* DATA ITEM SPAN: Estilos para los valores de los datos (URL, Host, etc.) */
-.data-item span {
-    font-family: 'Courier New', Courier, monospace; /* Fuente monoespaciada para datos técnicos */
-    background: #e8eaed; /* Fondo sutil para resaltar el valor */
-    padding: 2px 6px; /* Relleno ligero alrededor del texto */
-    border-radius: 4px; /* Bordes redondeados para el fondo del valor */
-    word-break: break-all; /* Permite que las palabras largas se rompan para evitar desbordamiento */
+.kv-item span { color: var(--muted); }
+.kv-item strong { color: var(--accent); word-break: break-all; text-align: right; }
+label { font-size: 0.85rem; color: var(--muted); }
+input {
+    background: #020617;
+    color: var(--text);
+    border: 1px solid var(--surface-alt);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
 }
-
-/* ACTIONS: Contenedor para los botones de acción */
-.actions {
-    display: flex; /* Usa Flexbox para organizar los botones */
-    gap: 1rem; /* Espacio entre los botones */
-}
-
-/* BUTTON BASE STYLES: Estilos base para todos los botones */
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .btn {
-    padding: 10px 20px; /* Relleno interno para el tamaño del botón */
-    border: none; /* Elimina el borde predeterminado */
-    border-radius: 6px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor para indicar interactividad */
-    font-weight: 600; /* Texto en negrita para énfasis */
-    transition: opacity 0.2s; /* Transición suave para el efecto hover */
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-.btn:hover {
-    opacity: 0.8; /* Reduce la opacidad en hover para feedback visual */
-}
-
-/* BUTTON VARIANT: Estilos específicos para el botón de recarga */
-.btn-reload {
-    background-color: #34a853; /* Color verde para la acción de recargar */
-    color: white; /* Texto blanco para contraste */
-}
-
-/* BUTTON VARIANT: Estilos específicos para el botón de asignación (navegar) */
-.btn-assign {
-    background-color: #1a73e8; /* Color azul para la acción de navegar */
-    color: white; /* Texto blanco para contraste */
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.84rem;
+    white-space: pre-wrap;
 }

@@ -1,0 +1,35 @@
+/* Estilos básicos de apoyo para el ejemplo de estructura generada con Emmet */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+    padding: 2rem;
+}
+
+.header {
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+}
+
+.header-ul {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+.link {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

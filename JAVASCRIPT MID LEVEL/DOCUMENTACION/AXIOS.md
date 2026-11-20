@@ -14,13 +14,17 @@
 5. Peticiones de lectura con `get()`
 6. Peticiones de creación con `post()`
 7. Formas de enviar datos al servidor
-8. Ventajas competitivas frente a Fetch
-9. Analogía del mundo real
-10. Diagrama de flujo de Axios
-11. Buenas prácticas
-12. Errores comunes
-13. Ejercicios
-14. Resumen
+8. Instancias con `axios.create()` e Interceptores
+9. Cancelación con `AbortController` (reemplazo de `CancelToken`)
+10. Manejo profesional de errores en Axios
+11. Ventajas competitivas frente a Fetch
+12. Analogía del mundo real
+13. Diagrama de flujo de Axios
+14. Buenas prácticas
+15. Errores comunes
+16. Ejercicios
+17. Resumen
+18. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -201,6 +205,113 @@ const respuesta = await axios.post("/api/subir", formulario);
 
 ---
 
+# Instancias con `axios.create()` e Interceptores
+
+En aplicaciones reales no se usa el objeto global `axios` directamente en cada archivo; se crea una **instancia configurada** con dominio base, cabeceras por defecto y timeout, y se conectan **interceptores** para lógica transversal (autenticación, logs o renovación de tokens).
+
+### 1. Crear una instancia reutilizable
+```javascript
+const api = axios.create({
+    baseURL: "https://api.miapp.com/v1",
+    timeout: 8000,
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+});
+```
+
+### 2. Interceptores de Request y Response
+* **Interceptor de Request:** Se ejecuta *antes* de enviar cualquier petición. Ideal para inyectar el token JWT automáticamente.
+* **Interceptor de Response:** Se ejecuta *al recibir* la respuesta o el error. Ideal para manejar `401 Unauthorized` o formatear errores globales.
+
+```javascript
+// Inyectar token en cada petición saliente
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem("access_token");
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+// Manejo centralizado de respuestas y errores
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            console.warn("Sesión expirada. Redirigiendo a login...");
+        }
+        return Promise.reject(error);
+    }
+);
+```
+
+---
+
+# Cancelación con `AbortController` (reemplazo de `CancelToken`)
+
+> ⚠️ **Nota de actualización:** En versiones antiguas de Axios se usaba `axios.CancelToken`, pero **está obsoleto (deprecated)** desde Axios v0.22+. El estándar actual es usar la Web API nativa **`AbortController`**, exactamente igual que en `fetch()`.
+
+```javascript
+const controller = new AbortController();
+
+async function buscarProductos(termino) {
+    try {
+        const res = await api.get("/productos", {
+            params: { q: termino },
+            signal: controller.signal // Conectamos la señal de cancelación
+        });
+        return res.data;
+    } catch (error) {
+        if (axios.isCancel(error)) {
+            console.info("Petición cancelada por el usuario.");
+        } else {
+            throw error;
+        }
+    }
+}
+
+// Para abortar la petición en curso:
+controller.abort();
+```
+
+---
+
+# Manejo profesional de errores en Axios
+
+Cuando Axios entra al `catch(error)`, el objeto `error` puede clasificarse en tres escenarios distintos:
+
+```javascript
+try {
+    const res = await api.get("/usuarios/999");
+    console.log(res.data);
+} catch (error) {
+    if (axios.isCancel(error)) {
+        console.log("Petición abortada intencionalmente.");
+    } else if (axios.isAxiosError(error)) {
+        if (error.response) {
+            // 1. El servidor respondió con código fuera de 2xx (400, 401, 404, 500)
+            console.error("Error HTTP:", error.response.status, error.response.data);
+        } else if (error.request) {
+            // 2. La petición se envió pero no hubo respuesta (sin red, CORS, timeout)
+            console.error("Sin respuesta del servidor:", error.message);
+        } else {
+            // 3. Error al construir la configuración de la petición
+            console.error("Error de configuración:", error.message);
+        }
+    } else {
+        // Error de JavaScript ajeno a Axios
+        console.error("Error inesperado:", error);
+    }
+}
+```
+
+---
+
 # Ventajas competitivas frente a Fetch
 
 | Característica | API Fetch Nativa | Librería Axios |
@@ -302,3 +413,20 @@ Desarrolla una función de búsqueda avanzada que reciba dos argumentos de texto
 *   El método **`get()`** acepta la propiedad `params` para formatear de manera segura parámetros de búsqueda en la URL.
 *   El método **`post()`** inyecta objetos complejos directamente como segundo parámetro para ser transmitidos en el cuerpo del mensaje.
 *   Posee un **sistema automático de control de errores** que desvía de forma inmediata cualquier respuesta de estado HTTP fuera del rango exitoso (`2xx`) hacia el bloque `catch`.
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| API / Patrón | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| `axios.create(config)` | Crea una instancia aislada con `baseURL`, `timeout` y `headers`. | `const api = axios.create({ baseURL: "/api" })` |
+| `api.get(url, { params })` | Envía `GET` con query params serializados automáticamente. | `await api.get("/users", { params: { page: 2 } })` |
+| `api.post(url, data)` | Envía `POST` serializando `data` a JSON automáticamente. | `await api.post("/users", { name: "Ana" })` |
+| `api.put` / `patch` / `delete` | Métodos abreviados para actualizar o eliminar recursos. | `await api.delete("/users/5")` |
+| `interceptors.request.use` | Intercepta peticiones antes de salir (ej. inyectar JWT). | `api.interceptors.request.use(cfg => ...)` |
+| `interceptors.response.use` | Intercepta respuestas/errores globales (ej. `401`). | `api.interceptors.response.use(res => res, err => ...)` |
+| `signal: controller.signal` | Cancela peticiones con `AbortController` (estándar actual). | `api.get("/search", { signal: controller.signal })` |
+| `axios.isAxiosError(err)` | Verifica de forma segura si el error proviene de Axios. | `if (axios.isAxiosError(err)) { ... }` |
+| `axios.isCancel(err)` | Comprueba si el error se debe a una cancelación con `AbortController`. | `if (axios.isCancel(err)) return;` |
+| `err.response` / `err.request` | Distingue error HTTP del servidor vs. fallo de red sin respuesta. | `err.response?.status` |

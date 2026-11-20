@@ -1,94 +1,98 @@
 /**
- * LABORATORIO MAESTRO: BUCLES Y ESTRUCTURAS REPETITIVAS
- * Este script centraliza el estudio de la iteración en JavaScript.
- * Temas: For, While, Do While, For...in (claves), For...of (valores) y Labels.
+ * GUÍA INTERACTIVA: FOR, FOR...OF, FOR...IN Y LABELS
  */
 
-console.log("%c--- LABORATORIO: BUCLES (FOR) ---", "color: #7c3aed; font-weight: bold; font-size: 12px;");
+"use strict";
 
-/* --- Bucle for básico: cuenta de 0 a 5 --- */
-// i++ es la expresión final que incrementa el contador en cada vuelta.
-for (let i = 0; i < 5; i++) { // Bucle que itera de 0 a 4
-    console.log(`%cBucle for: %citeración ${i}`, "color: #7c3aed;", "font-weight: bold;");
+const liveConsole = document.getElementById("live-console");
+
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
 }
 
-/* --- Control de flujo con continue --- */
-console.log("%c--- Control con Continue (salta el 5) ---", "color: #6d28d9; font-style: italic;");
-for(let i = 0; i < 10; i++){ // Itera de 0 a 9
-    if (i === 5) { // Si i es 5, salta esta iteración
-        // continue: Interrumpe la iteración actual y salta a la siguiente sin terminar el bloque.
-        continue;
+// 1. for clásico
+document.getElementById("btn-tabla").addEventListener("click", () => {
+    const base = Number(document.getElementById("input-tabla-num").value) || 1;
+    const lineas = [];
+    for (let i = 1; i <= 5; i++) {
+        lineas.push(`${base} x ${i} = ${base * i}`);
     }
-    console.log(`%cValor: %c${i}`, "color: #7c3aed;", "color: #111827;");
-}
+    document.getElementById("out-tabla").textContent = lineas.join("\n");
+    registrar(`Tabla del ${base} generada con bucle for.`);
+});
 
-/* --- Bucle while: evalúa antes de ejecutar --- */
-let contadorWhile = 0;
-console.log("%c--- Estructura While ---", "color: #6d28d9; font-weight: bold;");
-while (contadorWhile < 3) {
-    console.log(`%cWhile: %citeración ${contadorWhile}`, "color: #4c1d95;", "font-weight: bold;");
-    contadorWhile++;
-}
+// 2. for...of vs for...in vs Object.entries
+const animales = ["gato", "perro", "loro"];
 
-/* --- Bucle do...while: asegura al menos una ejecución --- */
-let contadorDo = 0;
-console.log("%c--- Estructura Do While ---", "color: #6d28d9; font-weight: bold;");
-do {
-    console.log(`%cDo While: %citeración ${contadorDo}`, "color: #4c1d95;", "font-weight: bold;");
-    contadorDo++;
-} while (contadorDo < 3);
+document.getElementById("btn-for-of").addEventListener("click", () => {
+    const pasos = [];
+    for (const [indice, animal] of animales.entries()) {
+        pasos.push(`[${indice}] => "${animal}"`);
+    }
+    document.getElementById("out-for-comp").textContent =
+        `for...of con .entries() (Valores reales):\n${pasos.join("\n")}`;
+    registrar("for...of ejecutado sobre array de animales.");
+});
 
-/* --- Colecciones e Iteradores específicos --- */
-const animales = ["gato", "perro", "tiranosaurio rex"];
-animales.edad = 20; // Propiedad extra para demostrar que for...in la captura
+document.getElementById("btn-for-in").addEventListener("click", () => {
+    const copia = [...animales];
+    copia.extra = "propiedad_ajena"; // Demostración de por qué evitar for...in en arrays
+    const pasos = [];
+    for (const clave in copia) {
+        pasos.push(`clave "${clave}" => ${copia[clave]}`);
+    }
+    document.getElementById("out-for-comp").textContent =
+        `for...in (⚠️ incluye propiedades extra en arrays):\n${pasos.join("\n")}`;
+    registrar("for...in capturó índices como strings + propiedad extra.", "warn");
+});
 
-/** 
- * for...in: Itera sobre propiedades enumerables (las llaves/índices).
- * Útil para objetos, pero en arrays devuelve el índice y propiedades personalizadas.
- */
-console.log("%c--- for...in (Keys/Indices) ---", "color: #6d28d9; font-weight: bold;");
-for(const key in animales){
-    console.log(`%cPropiedad: %c${key} %c-> Valor: %c${animales[key]}`, "color: #6d28d9;", "font-weight: bold;", "color: #9ca3af;", "color: #111827;");
-}
+document.getElementById("btn-entries").addEventListener("click", () => {
+    const perfil = { nombre: "Carlos", nivel: "Junior", activo: true };
+    const pasos = [];
+    for (const [clave, valor] of Object.entries(perfil)) {
+        pasos.push(`${clave}: ${valor}`);
+    }
+    document.getElementById("out-for-comp").textContent =
+        `Object.entries(perfil) + for...of (Recomendado para objetos):\n${pasos.join("\n")}`;
+    registrar("Object.entries() + for...of ejecutado sobre objeto.");
+});
 
-/** 
- * for...of: Itera sobre los valores de objetos iterables (Arrays, Strings, Maps).
- * A diferencia de for...in, este solo devuelve los elementos del array y omite propiedades extra.
- */
-console.log("%c--- Bucle for...of (valores del iterable) ---", "color: #6d28d9; font-weight: bold;");
-for(let animal of animales){
-    console.log(`%cfor...of (valor): %c${animal}`, "color: #7c3aed;", "font-weight: bold;");
-}
+// 3. Labels en bucles anidados
+const grupos = [
+    ["pedro", "marcelo"],
+    ["maria", "josefa", "roberta"],
+    ["josefina", "lucas"]
+];
 
-/* --- Control Avanzado: Labels --- */
-console.log("%c--- Sentencias Etiquetadas (Labels) ---", "color: #4c1d95; font-weight: bold; border-top: 1px solid #ddd; padding-top: 10px;");
+document.getElementById("btn-label").addEventListener("click", () => {
+    const objetivo = document.getElementById("input-buscar-label").value.trim().toLowerCase();
+    const visitados = [];
+    let encontrado = false;
 
-const array1 = ["maria", "josefa", "roberta"];
-const array2 = ["pedro", "marcelo", array1, "josefina"];
-
-/**
- * SENTENCIAS ETIQUETADAS (Labels):
- * Permiten nombrar un bucle para poder controlarlo (break/continue) desde un bucle anidado.
- */
-bucleExterno: // Etiqueta aplicada al bucle externo
-for (let i = 0; i < array2.length; i++){
-    let actual = array2[i];
-    if (typeof array2[i] === 'string') { // Si es un string directo
-        console.log(`%cElemento de array2: %c${array2[i]}`, "color: #4c1d95;", "font-weight: bold;");
-        if (array2[i] === "marcelo") {
-            console.log("%c¡Encontrado 'marcelo'! Rompiendo ambos bucles.", "color: #dc2626; font-weight: bold;");
-            break bucleExterno; // Sale completamente del bucle 'bucleExterno'
-        }
-    } else if (Array.isArray(array2[i])) { // Si es un array anidado
-        console.log(`Iterando array anidado en índice ${i}:`);
-        for (let j = 0; j < array2[i].length; j++) {
-            console.log(`  Elemento de array1: ${array2[i][j]}`);
-            if (array2[i][j] === "josefa") {
-                console.log("¡Encontrado 'josefa' en el array anidado! Rompiendo ambos bucles.");
-                break bucleExterno; // Sale completamente del bucle 'bucleExterno'
+    bucleExterno:
+    for (let i = 0; i < grupos.length; i++) {
+        for (let j = 0; j < grupos[i].length; j++) {
+            const actual = grupos[i][j];
+            visitados.push(`[${i}][${j}] ${actual}`);
+            if (actual === objetivo) {
+                encontrado = true;
+                break bucleExterno;
             }
         }
     }
-}
 
-console.log("%c----------------------------------------", "color: #7c3aed;");
+    document.getElementById("out-label").textContent =
+        `Buscando "${objetivo}": ${encontrado ? "✅ ENCONTRADO (break bucleExterno)" : "❌ No existe"}\nRecorrido:\n${visitados.join(" -> ")}`;
+    registrar(`Búsqueda con label ("${objetivo}"): ${encontrado ? "encontrado" : "no encontrado"}`);
+});
+
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+registrar("Laboratorio de For y Labels listo.");

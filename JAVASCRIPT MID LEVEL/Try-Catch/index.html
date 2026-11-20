@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- 
-        PROYECTO: Laboratorio de JavaScript (Nivel Medio)
-        TEMA: Control de errores y excepciones.
-        OBJETIVO: Ejecutar y demostrar el comportamiento de bloques try, catch y finally.
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio: Try - Catch</title>
+    <title>Guía Interactiva — Try, Catch, Finally y Excepciones</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Manejo de Excepciones</span>
+            <h1><code>try</code> / <code>catch</code> / <code>finally</code> y <code>Error({ cause })</code></h1>
+            <p class="subtitle">Simula errores reales, valida JSON de forma segura y observa cómo <code>finally</code> siempre se ejecuta.</p>
+        </div>
+    </header>
 
-    <main class="container">
-        <header class="glass-header">
-            <h1>⚠️ JavaScript Exceptions</h1>
-            <p>Laboratorio de Control de Flujo y Errores</p>
-        </header>
-
-        <section class="info-card">
-            <div class="status-badge">Modo Debug Activo</div>
-            <h2>Entorno de Pruebas</h2>
-            <p>El script <code>main.js</code> está analizando bloques críticos. Para ver la magia técnica:</p>
-            
-            <div class="instruction-box">
-                <span>Presiona</span>
-                <kbd>F12</kbd>
-                <span>o</span>
-                <kbd>Ctrl + Shift + I</kbd>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Validador JSON Seguro (<code>try/catch</code>)</h2>
+            <p class="desc">Edita el JSON (rompe una comilla o coma) para capturar el <code>SyntaxError</code> sin detener la app.</p>
+            <textarea id="jsonInput" rows="5">{"curso": "JavaScript Mid Level", "activo": true}</textarea>
+            <div class="btn-row">
+                <button type="button" id="btnParseJson" class="btn primary">Parsear JSON</button>
+                <button type="button" id="btnBreakJson" class="btn">Cargar JSON Corrupto</button>
             </div>
+            <div id="jsonOutput" class="output" aria-live="polite">Listo para validar.</div>
+        </section>
 
-            <div class="visual-flow">
-                <div class="node try">Try</div>
-                <div class="node catch">Catch</div>
-                <div class="node finally">Finally</div>
+        <section class="card">
+            <h2>2. Lanzar Errores Personalizados &amp; <code>{ cause }</code></h2>
+            <p class="desc">Prueba excepciones tipadas (<code>ValidationError</code>, <code>TypeError</code>) y observa la ejecución garantizada de <code>finally</code>.</p>
+            <div class="controls">
+                <label for="edadInput">Edad del usuario (debe ser &ge; 18):</label>
+                <input id="edadInput" type="number" value="16">
+                <div class="btn-row">
+                    <button type="button" id="btnValidarEdad" class="btn primary">Validar con throw</button>
+                    <button type="button" id="btnErrorCausa" class="btn">Simular Error con { cause }</button>
+                </div>
             </div>
+            <div id="errorOutput" class="output" aria-live="polite">Esperando prueba...</div>
+        </section>
+
+        <section class="card full-width">
+            <h2>Traza de Ejecución (<code>try → catch → finally</code>)</h2>
+            <div id="traceTerminal" class="terminal" aria-live="polite"></div>
         </section>
     </main>
 
-    <!-- 
-        INCLUSIÓN DE LÓGICA:
-        Se carga 'main.js' al final del body para garantizar que los elementos 
-        del DOM (si los hubiera) se carguen antes de ejecutar el script.
-    -->
     <script src="main.js"></script>
 </body>
 </html>

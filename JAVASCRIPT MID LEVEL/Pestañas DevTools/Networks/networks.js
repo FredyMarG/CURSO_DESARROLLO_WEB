@@ -1,24 +1,34 @@
-/**
- * 🌐 NETWORK TAB LABORATORY
- * Este script simula el ciclo de vida de una petición HTTP.
- */
+// DevTools Lab — Pestaña Network
 
-// Definimos una función asíncrona para manejar peticiones Fetch
-const simularTraficoDeRed = async () => {
+const netOutput = document.getElementById("netOutput");
+
+async function ejecutarPeticion(url, options = {}) {
+    netOutput.textContent = `Enviando ${options.method || "GET"} ${url}...`;
     try {
-        // Iniciamos la petición a una API externa (aparecerá en la pestaña Network como 'fetch')
-        const respuesta = await fetch('https://jsonplaceholder.typicode.com/posts/1');
-        
-        // Parseamos el cuerpo de la respuesta a formato JSON (ver pestaña 'Response')
-        const datos = await respuesta.json();
-        
-        // Imprimimos en consola para confirmar la llegada de los datos
-        console.log("Datos de red obtenidos:", datos);
-    } catch (error) {
-        // En caso de fallo (ej. sin internet), la petición se marcará en rojo en 'Network'
-        console.error("Fallo detectado en el flujo de red:", error);
+        const res = await fetch(url, {
+            ...options,
+            signal: AbortSignal.timeout(5000)
+        });
+        const text = await res.text();
+        netOutput.textContent =
+            `Status: ${res.status} ${res.statusText} (ok=${res.ok})\n\n${text.slice(0, 350)}`;
+    } catch (err) {
+        netOutput.textContent = `Error de red (${err.name}): ${err.message}`;
     }
-};
+}
 
-// Ejecutamos la función inmediatamente al cargar la página
-simularTraficoDeRed();
+document.getElementById("btnGetOk").addEventListener("click", () => {
+    ejecutarPeticion("https://jsonplaceholder.typicode.com/todos/1");
+});
+
+document.getElementById("btnGet404").addEventListener("click", () => {
+    ejecutarPeticion("https://jsonplaceholder.typicode.com/todos/999999");
+});
+
+document.getElementById("btnPost").addEventListener("click", () => {
+    ejecutarPeticion("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title: "DevTools Network Test", userId: 1 })
+    });
+});

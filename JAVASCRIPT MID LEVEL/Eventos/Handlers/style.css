@@ -1,145 +1,80 @@
-/**
- * 🎨 SYSTEM DESIGN - EVENT HANDLERS MODULE
- * 
- * ARQUITECTURA: Basada en Design Tokens (Custom Properties) para escalabilidad y mantenimiento.
- * RENDIMIENTO: Optimizada mediante el uso de propiedades sintéticas (transform/opacity) 
- *             para delegar el renderizado a la GPU y evitar el Layout Thrashing.
- * ACCESIBILIDAD: Cumplimiento de contrastes y estados de foco claros según WCAG.
- */
-
 :root {
-    /* COLOR TOKENS: Definición semántica de la paleta para facilitar el soporte a Dark Mode */
-    --primary-color: #4f46e5;      /* Color base de la marca: define la identidad visual principal */
-    --primary-hover: #4338ca;      /* Variante tonal: proporciona feedback visual en estados interactivos */
-    --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Gradiente direccional para profundidad */
-    
-    /* NEUTRAL TOKENS: Jerarquía de contenido basada en contraste */
-    --text-main: #1f2937;          /* Contraste alto: asegura legibilidad según estándares WCAG */
-    --text-muted: #6b7280;         /* Contraste medio: jerarquiza la información secundaria */
-    --card-bg: #ffffff;            /* Fondo neutro: superficie de elevación para componentes */
-    
-    /* ELEVATION SYSTEM: Sombras multi-capa para realismo óptico (Material Design Principle) */
-    --shadow-soft: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); /* Sombras ambientales */
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+    --success: #34d399;
 }
-
-/* RESET ESTRUCTURAL: Estandarización del modelo de caja */
-* {
-    margin: 0;                     /* Elimina el espaciado exterior residual del navegador */
-    padding: 0;                    /* Elimina el relleno interior por defecto de los elementos */
-    /* Garantiza que padding y border no alteren las dimensiones finales de los elementos */
-    box-sizing: border-box;        /* Cambia el cálculo del ancho para incluir padding y borde */
-}
-
-/* LAYOUT ENGINE: Configuración del contenedor raíz */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    /* System Font Stack: Prioriza fuentes del sistema para rendimiento de carga (0 CLS) */
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Fallback de fuentes nativas */
-    background: var(--bg-gradient); /* Aplica el fondo degradado definido en los tokens */
-    color: var(--text-main);        /* Hereda el color de texto principal a todos los nodos */
-    
-    /* Viewport Semantics: Ocupa el 100% de la altura visual sin scroll innecesario */
-    min-height: 100vh;             /* Altura mínima equivalente al 100% del viewport */
-    
-    /* CENTRADO MODERNO: Flexbox ofrece mejor control de alineación que los métodos legacy */
-    display: flex;                 /* Activa el contexto de formato flexible */
-    justify-content: center;       /* Centra los elementos hijos en el eje horizontal (Main Axis) */
-    align-items: center;           /* Centra los elementos hijos en el eje vertical (Cross Axis) */
-    
-    /* Optimización de lectura: Interlineado estándar para párrafos */
-    line-height: 1.6;              /* Mejora la escaneabilidad del texto mediante el Leading */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* CONTAINER: Restricción de ancho para control de legibilidad (Max line length) */
-.main-container {
-    width: 90%;                    /* Fluidez responsiva para dispositivos móviles */
-    max-width: 500px;              /* Evita que el contenedor se estire demasiado en desktops */
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* Tarjeta de presentación (Componente Card) */
-.event-card {
-    background-color: var(--card-bg); /* Superficie blanca definida en variables */
-    padding: 2.5rem;               /* Espaciado interno generoso para dar "aire" al contenido */
-    border-radius: 1.5rem;         /* Curvatura de esquinas para una estética moderna y amigable */
-    box-shadow: var(--shadow-soft); /* Aplica la elevación visual mediante sombras */
-    text-align: center;            /* Centra el texto y elementos inline-block dentro de la card */
-    
-    /* RENDIMIENTO: 'transform' no dispara el reflujo del DOM (Reflow), se procesa en el Compositor Thread */
-    transition: transform 0.3s ease; /* Transición suave para la propiedad transform */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-.event-card:hover {
-    /* AFFORDANCE: Feedback visual sutil que indica que el elemento es interactivo */
-    transform: translateY(-5px);   /* Desplaza el elemento hacia arriba en el eje Y */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* TIPOGRAFÍA: Jerarquía visual (Visual Hierarchy) */
-.card-title {
-    font-size: 1.8rem;             /* Tamaño destacado para establecer el encabezado de la página */
-    font-weight: 800;              /* Grosor "Extra Bold" para énfasis visual */
-    color: var(--text-main);       /* Color de alto contraste */
-    margin-bottom: 0.5rem;         /* Espacio inferior para separar del subtítulo */
-    
-    /* TRACKING: Ajuste negativo en títulos grandes para mejorar la densidad visual */
-    letter-spacing: -0.025em;      /* Reduce el tracking para una apariencia más profesional */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
-
-.card-subtitle {
-    color: var(--text-muted);      /* Color atenuado para jerarquía visual secundaria */
-    font-size: 1rem;               /* Tamaño de cuerpo de texto estándar */
-    margin-bottom: 2rem;           /* Margen amplio para delimitar la sección de cabecera */
+.full-width { grid-column: 1 / -1; }
+.desc { color: var(--muted); font-size: 0.92rem; }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+input {
+    flex: 1;
+    min-width: 220px;
+    background: #020617;
+    color: var(--text);
+    border: 1px solid var(--surface-alt);
+    border-radius: 8px;
+    padding: 0.55rem 0.75rem;
 }
-
-.info-text {
-    margin-top: 1.5rem;            /* Separación respecto al botón superior */
-    font-size: 0.85rem;            /* Tamaño reducido para notas informativas */
-    color: var(--text-muted);      /* Color secundario */
-    /* Diferenciación semántica mediante estilo */
-    font-style: italic;            /* Estilo cursiva para denotar aclaración o nota */
+.btn {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-/** 
- * ACTION COMPONENT: .button
- * 
- * ELEMENTO OBJETIVO: Este es el nodo que el DOM detectará en el Event Listener.
- * ESTADOS: Incluye Hover, Active y Focus para cubrir todas las modalidades de entrada (Mouse, Touch, Teclado).
- */
-.button {
-    background-color: var(--primary-color); /* Color de fondo principal */
-    color: white;                  /* Color de texto contrastado */
-    border: none;                  /* Elimina el borde nativo del elemento button */
-    padding: 0.8rem 2rem;          /* Relleno táctil (Touch target size) óptimo */
-    font-size: 1rem;               /* Tamaño de fuente legible */
-    font-weight: 600;              /* Grosor de fuente semi-bold */
-    border-radius: 0.75rem;        /* Esquinas suavizadas coherentes con el diseño general */
-    cursor: pointer;               /* Cambia el puntero: indicación universal de interactividad */
-    outline: none;                 /* Suprime el outline por defecto para evitar duplicidad visual */
-    
-    /* MOTION DESIGN: Curva cubic-bezier para simular aceleración física natural (Ease-in-out) */
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); /* Animación fluida de estados */
-    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); /* Sombra difusa con el tono de la marca */
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.output {
+    background: #0f172a;
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.92rem;
 }
-
-.button:hover {
-    background-color: var(--primary-hover); /* Oscurece el botón al pasar el cursor */
-    /* Elevación dinámica para feedback de proximidad */
-    box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3); /* Incrementa la sombra en hover */
-    transform: scale(1.02);        /* Aumenta ligeramente el tamaño (Micro-interacción) */
-}
-
-.button:active {
-    /* FEEDBACK HÁPTICO: Simulación de presión física mediante escala inversa */
-    transform: scale(0.98);        /* Reduce el tamaño para dar sensación de pulsación */
-}
-
-/* ACCESIBILIDAD (A11Y): Estilos para navegación por teclado */
-.button:focus-visible {
-    /* Anillo de enfoque externo (Focus Ring) para cumplir con criterios de éxito WCAG */
-    outline: 2px solid var(--primary-color); /* Borde de enfoque de alta visibilidad */
-    outline-offset: 4px;           /* Separa el borde de enfoque del elemento para claridad */
-}
-
-/* RESPONSIVIDAD: Mobile-First / Mobile-Specific adjustments */
-@media (max-width: 480px) {
-    /* Reducción de padding para maximizar el espacio en pantallas pequeñas */
-    .event-card { padding: 1.5rem; } /* Ajusta el espacio interno en dispositivos móviles */
-}
+.output.ok { border-left-color: var(--success); color: var(--success); }

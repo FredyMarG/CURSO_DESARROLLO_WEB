@@ -1,78 +1,61 @@
-/**
- * 🏛️ MODULE: WINDOW GLOBAL INTERFACE
- * Laboratorio de métodos nativos del objeto global 'window'.
- */
+// Guía Interactiva — Objeto Window y <dialog> Moderno
 
-// Variable global para mantener la referencia de la ventana hija
-let ventanaReferencia = null;
+let ventanaHija = null;
+const winStatus = document.getElementById("winStatus");
+const modernDialog = document.getElementById("modernDialog");
+const dialogNameInput = document.getElementById("dialogNameInput");
+const modalResult = document.getElementById("modalResult");
 
-/**
- * Muestra un cuadro de alerta bloqueante.
- * @function ejecutarAlert
- */
-function ejecutarAlert() {
-    // window.alert: Detiene la ejecución del hilo principal hasta que se cierra.
-    window.alert("¡Este es un mensaje de alerta global!");
-}
-
-/**
- * Solicita una entrada de texto al usuario.
- * @function ejecutarPrompt
- */
-function ejecutarPrompt() {
-    // prompt(mensaje, valorPorDefecto): Retorna el string ingresado o null.
-    const nombre = window.prompt("¿Cómo te llamas?", "Invitado");
-    
-    if (nombre) {
-        console.log(`Usuario identificado: ${nombre}`);
-    } else {
-        console.warn("El usuario canceló la entrada de datos.");
+document.getElementById("btnOpenWin").addEventListener("click", () => {
+    ventanaHija = window.open("", "ventanaDemo", "width=400,height=300");
+    if (!ventanaHija) {
+        winStatus.textContent = "El navegador bloqueó la ventana emergente.";
+        return;
     }
-}
+    ventanaHija.document.body.innerHTML =
+        "<h2 style='font-family:sans-serif;padding:20px'>Ventana controlada por JS</h2>";
+    winStatus.className = "output ok";
+    winStatus.textContent = "Ventana abierta (ventana.closed === false).";
+});
 
-/**
- * Solicita una confirmación booleana.
- * @function ejecutarConfirm
- */
-function ejecutarConfirm() {
-    // confirm(): Retorna true (Aceptar) o false (Cancelar).
-    const respuesta = window.confirm("¿Deseas guardar los cambios realizados?");
-    console.log(`Decisión del usuario: ${respuesta ? "Aceptada" : "Rechazada"}`);
-}
-
-/**
- * Gestión de apertura de ventanas (Pop-ups).
- * @function abrirVentana
- */
-function abrirVentana() {
-    const url = "https://www.google.com";
-    const nombre = "GoogleLab";
-    const specs = "width=600,height=400,left=200,top=100";
-
-    // open(): Abre una nueva ventana. Retorna la referencia al nuevo objeto window.
-    ventanaReferencia = window.open(url, nombre, specs);
-
-    if (ventanaReferencia) {
-        console.log("Ventana abierta con éxito.");
-    } else {
-        console.error("La ventana fue bloqueada por el navegador (Pop-up blocker).");
+document.getElementById("btnCheckWin").addEventListener("click", () => {
+    if (!ventanaHija) {
+        winStatus.textContent = "No has abierto ninguna ventana todavía.";
+        return;
     }
-}
+    winStatus.className = "output";
+    winStatus.textContent = `Estado actual: ventana.closed === ${ventanaHija.closed}`;
+});
 
-/**
- * Cierre de la ventana referenciada.
- * @function cerrarVentana
- */
-function cerrarVentana() {
-    // Verificamos si la referencia existe y si la ventana aún no está cerrada.
-    if (ventanaReferencia && !ventanaReferencia.closed) {
-        // close(): Cierra la ventana referenciada.
-        ventanaReferencia.close();
-        console.log("Ventana hija cerrada programáticamente.");
+document.getElementById("btnCloseWin").addEventListener("click", () => {
+    if (ventanaHija && !ventanaHija.closed) {
+        ventanaHija.close();
+        winStatus.className = "output";
+        winStatus.textContent = `Ventana cerrada (ventana.closed === ${ventanaHija.closed}).`;
     } else {
-        console.warn("No hay ninguna ventana activa para cerrar.");
+        winStatus.textContent = "La ventana ya estaba cerrada.";
     }
-}
+});
 
-// Log de inicialización
-console.log("Monitor del Objeto Window: Activo y listo.");
+document.getElementById("btnShowModal").addEventListener("click", () => {
+    dialogNameInput.value = "";
+    modernDialog.showModal();
+});
+
+document.getElementById("btnCancelDialog").addEventListener("click", () => {
+    modernDialog.close("cancelado");
+});
+
+modernDialog.addEventListener("close", () => {
+    if (modernDialog.returnValue === "confirmado") {
+        modalResult.className = "output ok";
+        modalResult.textContent = `Modal confirmado por: ${dialogNameInput.value.trim()}`;
+    } else {
+        modalResult.className = "output";
+        modalResult.textContent = "Modal cerrado/cancelado sin bloquear el hilo.";
+    }
+});
+
+document.getElementById("btnPrint").addEventListener("click", () => {
+    window.print();
+});

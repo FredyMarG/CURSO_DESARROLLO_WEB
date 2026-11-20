@@ -822,3 +822,45 @@ Controla los errores con `try/catch`.
 * `Promise.all()` permite ejecutar varias tareas independientes en paralelo y esperar a que todas finalicen.
 * `async/await` mejora la legibilidad del código, pero no hace que las operaciones sean más rápidas por sí mismas; la mejora proviene de usar correctamente la concurrencia cuando es posible.
 * Comprender cómo interactúan `Promises`, `async`, `await` y el Event Loop es fundamental para desarrollar aplicaciones JavaScript modernas.
+
+---
+
+# Novedades Modernas y Optimización de Concurrencia
+
+### 1. Top-Level `await` (ES2022)
+En **ES Modules** (`<script type="module">` o archivos `.mjs` / `"type": "module"` en Node.js), puedes usar `await` directamente en el nivel superior del módulo sin envolverlo en una función `async`:
+
+```javascript
+// archivo: config.js (ES Module)
+const res = await fetch("/config.json");
+export const config = await res.json();
+```
+
+### 2. Error común: Loops secuenciales innecesarios vs. Paralelismo
+Usar `await` dentro de un `for` o `for...of` cuando las peticiones son independientes las vuelve **secuenciales** (una espera a la anterior). Si son independientes, usa `Promise.all()` o `Promise.allSettled()`:
+
+```javascript
+// ❌ LENTO (Secuencial: 3s si cada una tarda 1s)
+for (const id of [1, 2, 3]) {
+    const user = await fetch(`/api/users/${id}`).then(r => r.json());
+}
+
+// ✅ RÁPIDO (Paralelo: ~1s en total)
+const resultados = await Promise.allSettled(
+    [1, 2, 3].map(id => fetch(`/api/users/${id}`).then(r => r.json()))
+);
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Sintaxis / Patrón | Propósito | Ejemplo |
+| :--- | :--- | :--- |
+| `async function fn()` | Declara una función que siempre retorna una `Promise`. | `async function cargar() { return 42; }` |
+| `await promesa` | Pausa la función `async` hasta resolver/rechazar. | `const data = await res.json();` |
+| Top-level `await` | `await` en raíz de un ES Module (ES2022). | `const cfg = await loadConfig();` |
+| `try / catch / finally` | Captura rechazos de `await` y ejecuta limpieza. | `try { await api(); } catch (e) { ... }` |
+| `Promise.all([...])` | Ejecuta promesas en paralelo (falla si una falla). | `const [a, b] = await Promise.all([p1, p2]);` |
+| `Promise.allSettled([...])` | Ejecuta en paralelo y reporta éxito/fallo individual. | `const res = await Promise.allSettled([p1, p2]);` |
+| `for await (const x of stream)` | Itera sobre iterables asíncronos (streams, paginación). | `for await (const chunk of body) { ... }` |

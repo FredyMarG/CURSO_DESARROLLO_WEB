@@ -38,7 +38,17 @@ Aunque ambos comparten exactamente los mismos métodos y propiedades, difieren d
 | **Persistencia** | Permanente. No expira al cerrar la pestaña o el navegador. | Temporal. Se destruye inmediatamente al cerrar la pestaña. |
 | **Ámbito (Scope)** | Compartido entre todas las pestañas/ventanas con el mismo origen (protocolo, dominio y puerto). | Aislado por pestaña. Abrir la misma URL en otra pestaña crea una sesión nueva y vacía. |
 | **Capacidad** | Generalmente hasta **5MB - 10MB**. | Generalmente hasta **5MB**. |
-| **Casos de uso** | Preferencias de tema (oscuro/claro), tokens de sesión (JWT), idioma elegido, carrito de compras. | Datos de un formulario multipaso, estados temporales de una sola sesión de navegación. |
+| **Casos de uso** | Preferencias de tema (oscuro/claro), idioma elegido, carrito de compras. | Datos de un formulario multipaso, estados temporales de una sola sesión de navegación. |
+
+### Comparativa General de Almacenamiento en el Navegador
+
+| Mecanismo | Capacidad típica | Persistencia | ¿Se envía en HTTP? | Tipo de datos / Uso ideal |
+| :--- | :--- | :--- | :--- | :--- |
+| **`localStorage`** | ~5 - 10 MB | Permanente | No | Strings síncronos (preferencias, estado ligero) |
+| **`sessionStorage`** | ~5 MB | Hasta cerrar pestaña | No | Strings síncronos por pestaña (formularios) |
+| **`IndexedDB`** | Cientos de MB / GB | Permanente | No | Base de datos NoSQL asíncrona (archivos, offline) |
+| **`Cookies`** | ~4 KB por cookie | Configurable (`Expires`) | **Sí** (en cada petición) | Sesiones de servidor, flags HTTP-only |
+| **`Cache API`** | Cientos de MB / GB | Permanente | No | Peticiones y respuestas HTTP (`Request`/`Response`) para PWAs |
 
 ---
 
@@ -175,8 +185,22 @@ if (localStorage.getItem("estaLogueado")) {
 }
 ```
 
-### ❌ Intentar guardar datos sin límite en dispositivos móviles
-Aunque el límite teórico en computadoras de escritorio suele ser de 5MB a 10MB, algunos navegadores móviles restringen severamente el espacio o eliminan el `localStorage` si el dispositivo se queda sin memoria de almacenamiento general.
+### ❌ Intentar guardar datos sin límite en dispositivos móviles (y no manejar `QuotaExceededError`)
+Aunque el límite teórico en computadoras de escritorio suele ser de 5MB a 10MB, algunos navegadores móviles restringen severamente el espacio o lanzan una excepción `QuotaExceededError` (además de en modo incógnito estricto). Envuelve siempre las escrituras críticas en `try...catch`:
+
+```javascript
+const guardarSeguro = (clave, valor) => {
+    try {
+        localStorage.setItem(clave, valor);
+    } catch (error) {
+        if (error.name === "QuotaExceededError") {
+            console.warn("Almacenamiento lleno. Libera espacio antiguo antes de guardar.");
+        } else {
+            console.error("Error de almacenamiento:", error);
+        }
+    }
+};
+```
 
 ---
 
@@ -294,3 +318,31 @@ const idiomaAlRecargar = inicializarIdioma(); // Imprime: "Idioma cargado desde 
 * Los métodos fundamentales son idénticos para ambos componentes: `.setItem()`, `.getItem()`, `.removeItem()` y `.clear()`.
 * **Web Storage solo entiende strings**. El uso de `JSON.stringify()` y `JSON.parse()` es indispensable para manipular objetos y arrays sin corromperlos.
 * Por motivos de **seguridad**, nunca debe utilizarse para almacenar credenciales críticas, tokens vulnerables a robo de identidad o información sensible de los usuarios.
+
+
+---
+
+# Conceptos Complementarios: Sincronización entre Pestañas (`evento storage`)
+
+Cuando un usuario tiene abiertas dos pestañas del mismo sitio y cambia el tema o cierra sesión en una de ellas, la otra pestaña puede reaccionar en vivo escuchando el evento **`storage`** en `window`:
+
+```javascript
+window.addEventListener("storage", (e) => {
+    console.log("Clave modificada:", e.key);
+    console.log("Valor anterior:", e.oldValue, "-> Nuevo:", e.newValue);
+});
+```
+*(Nota: El evento `storage` se dispara en todas las demás pestañas del mismo origen, no en la pestaña que ejecutó `setItem()`).*
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / Propiedad | Descripción |
+| :--- | :--- |
+| `localStorage.setItem(k, v)` | Guarda un par clave-valor persistente (solo strings) |
+| `localStorage.getItem(k)` | Recupera el valor o `null` si no existe |
+| `localStorage.removeItem(k)` | Elimina una clave específica |
+| `localStorage.clear()` | Borra todas las claves del dominio actual |
+| `JSON.stringify` / `JSON.parse` | Necesarios para guardar objetos y arreglos |
+| `window.addEventListener("storage", ...)` | Sincroniza cambios de `localStorage` entre otras pestañas abiertas |

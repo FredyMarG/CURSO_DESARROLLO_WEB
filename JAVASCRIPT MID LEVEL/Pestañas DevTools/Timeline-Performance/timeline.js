@@ -1,40 +1,39 @@
-/**
- * ⏱️ PERFORMANCE TAB LABORATORY
- * Este script simula cargas de trabajo para analizar el Main Thread.
- */
+// DevTools Lab — Pestaña Performance (Timeline)
 
-const boton = document.getElementById('btn-heavy');
-const status = document.getElementById('status-text');
+const perfOutput = document.getElementById("perfOutput");
+const perfBox = document.getElementById("perfBox");
 
-/**
- * Simula una tarea pesada que bloquea el hilo principal.
- * En la pestaña Performance, esto aparecerá como una barra roja (Long Task).
- */
-const ejecutarTareaPesada = () => {
-    // Actualizamos el DOM antes del bloqueo
-    status.innerHTML = 'Estado: <span class="status-busy">BLOQUEADO (Procesando...)</span>';
-    
-    // Iniciamos la medición de tiempo en consola
-    console.time("TareaPesada");
-    
-    // Un bucle síncrono largo que consume CPU (Aproximadamente 500ms-1s dependiendo del equipo)
-    const inicio = performance.now();
-    while (performance.now() - inicio < 1000) {
-        // El navegador está totalmente congelado aquí
-        // No se puede hacer scroll, ni click, ni animaciones.
+let animating = false;
+let rafId = null;
+let angle = 0;
+
+function tick() {
+    if (!animating) return;
+    angle = (angle + 4) % 360;
+    const x = Math.sin((angle * Math.PI) / 180) * 90 + 90;
+    perfBox.style.transform = `translateX(${x.toFixed(1)}px)`;
+    rafId = requestAnimationFrame(tick);
+}
+
+document.getElementById("btnAnimate").addEventListener("click", () => {
+    animating = !animating;
+    if (animating) {
+        perfOutput.textContent = "Animación rAF activa usando transform (sin Reflow).";
+        tick();
+    } else {
+        cancelAnimationFrame(rafId);
+        perfOutput.textContent = "Animación detenida.";
     }
-    
-    console.timeEnd("TareaPesada");
-    
-    // Restauramos el estado
-    status.innerHTML = 'Estado: <span class="status-ready">Tarea Finalizada - Revisa el Flame Chart</span>';
-};
-
-// Event listener para disparar la tarea manualmente durante la grabación
-boton.addEventListener('click', () => {
-    // Usamos un pequeño timeout para que el cambio de texto en el DOM se pinte 
-    // ANTES de que el bucle bloquee el hilo principal.
-    setTimeout(ejecutarTareaPesada, 100);
 });
 
-console.log("Laboratorio de Performance listo. Presiona Record y luego el botón.");
+document.getElementById("btnLongTask").addEventListener("click", () => {
+    const t0 = performance.now();
+    // Bloqueo intencional de ~120 ms para observar un Long Task rojo en Flame Chart
+    while (performance.now() - t0 < 120) {
+        // Trabajo síncrono bloqueante
+    }
+    const duracion = (performance.now() - t0).toFixed(2);
+    perfOutput.textContent =
+        `Long Task completada en ${duracion} ms (> 50 ms).\n` +
+        "Graba en DevTools → Performance para ver el bloque marcado en rojo.";
+});

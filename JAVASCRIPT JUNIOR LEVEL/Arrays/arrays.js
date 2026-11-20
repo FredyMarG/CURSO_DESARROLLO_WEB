@@ -1,104 +1,100 @@
 /**
- * LABORATORIO INTEGRADO: ARRAYS Y ESTRUCTURAS DE DATOS
- * Este script unifica la definición, manipulación y métodos avanzados de colecciones.
- * Clasificación: Mutabilidad, Acceso e Iteración (Higher-Order Functions).
+ * GUÍA INTERACTIVA: ARRAYS Y MÉTODOS (ES2023+)
  */
 
-console.log("%c--- MÉTODOS DE ARRAYS ---", "color: #9333ea; font-weight: bold;");
+"use strict";
 
-/* === 1. DEFINICIÓN Y ESTRUCTURAS BÁSICAS === */
+const liveConsole = document.getElementById("live-console");
 
-/** 
- * Array Indexado: Colección ordenada. 
- * Usamos 'const' porque la referencia al array no cambia, aunque sus elementos sí.
- */
-const frutas = ["Manzana", "Pera", "Naranja"];
-console.log("%cOriginal:", "color: #9333ea; font-style: italic;", frutas);
+function registrar(mensaje, tipo = "ok") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
+    linea.textContent = `> ${mensaje}`;
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
+    console.log(mensaje);
+}
 
-/**
- * Objeto Literal: Pares clave-valor. 
- * Ideal para registros de datos donde el orden no es la prioridad, sino la etiqueta.
- */
-const pc = {
-    nombre: "Fredypc",
-    procesador: "Ryzen5",
-    ram: "16GB",
-    espacio: "1TB"
-};
-console.log("%cAcceso a Objeto (Clave):", "color: #a855f7;", pc["nombre"]);
+// 1. Métodos Mutables
+let frutas = ["Manzana", "Pera", "Naranja"];
+const outMut = document.getElementById("out-arr-mut");
 
-/**
- * Matriz (Array Multidimensional): Array de arrays.
- * Acceso mediante coordenadas: [fila][columna].
- */
-const matrix = [["Fredy", 1], ["Andres", 3], ["Nicol", 5]];
-console.log("%cAcceso a Matriz [2][1]:", "color: #c084fc;", matrix[2][1]);
+function renderFrutas(accion = "Estado inicial") {
+    outMut.textContent =
+        `Acción: ${accion}\nArray: ${JSON.stringify(frutas)}\nLongitud: ${frutas.length} | Último (.at(-1)): ${frutas.at(-1) ?? "vacío"}`;
+}
 
+document.querySelectorAll("[data-arr]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const op = btn.dataset.arr;
+        const nueva = document.getElementById("input-fruta").value.trim() || "Uva";
+        let detalle = "";
 
-/* === 2. MÉTODOS MUTADORES (Transforman el array original) === */
+        if (op === "push") {
+            frutas.push(nueva);
+            detalle = `push("${nueva}")`;
+        } else if (op === "pop") {
+            const eliminado = frutas.pop();
+            detalle = `pop() -> eliminó ${JSON.stringify(eliminado)}`;
+        } else if (op === "unshift") {
+            frutas.unshift(nueva);
+            detalle = `unshift("${nueva}")`;
+        } else if (op === "shift") {
+            const eliminado = frutas.shift();
+            detalle = `shift() -> eliminó ${JSON.stringify(eliminado)}`;
+        } else {
+            frutas = ["Manzana", "Pera", "Naranja"];
+            detalle = "Reset";
+        }
 
-/** push/pop: O(1) - Alta eficiencia al operar al final del array. */
-frutas.push("Uva");        // Insertar al final
-frutas.pop();              // Extraer del final
-
-/** unshift/shift: O(n) - Menos eficientes; obligan a reindexar todo el array. */
-frutas.unshift("Mango");   // Insertar al inicio
-frutas.shift();            // Extraer del inicio
-
-/** 
- * .sort(): O(n log n) - Ordenamiento.
- * IMPORTANTE: Por defecto ordena como strings Unicode (10 iría antes que 2).
- * Para números usamos la función de comparación (a, b) => a - b.
- */
-frutas.sort();
-
-/** .splice(inicio, cantidad, ...elementos): El más potente. Permite borrar e insertar en cualquier punto. */
-frutas.splice(1, 1, "Piña"); // En la pos 1, borra 1 e inserta "Piña"
-
-console.log("%cTras mutaciones:", "color: #9333ea; font-weight: bold;", frutas);
-
-
-/* === 3. MÉTODOS ACCESORES (Inmutables - Devuelven algo nuevo) === */
-
-/** .join(separador): Convierte el array en un string. */
-const listaString = frutas.join(" - ");
-console.log("%cJoin (String):", "color: #9333ea;", listaString);
-
-/** 
- * .slice(inicio, fin): Crea una copia superficial (shallow copy).
- * Muy utilizado para no romper la inmutabilidad de los datos originales.
- */
-const seleccion = frutas.slice(0, 2);
-console.log("%cSlice (Copia parcial):", "color: #9333ea;", seleccion);
-
-/** .includes() / .indexOf(): Búsquedas lineales. */
-console.log("%c¿Tiene Manzana?:", "color: #9333ea;", frutas.includes("Manzana"));
-
-
-/* === 4. MÉTODOS DE ITERACIÓN (Higher-Order Functions) === */
-
-const numeros = [1, 2, 3, 4, 5];
-
-/** 
- * .forEach(): Ejecuta una función para cada elemento.
- * Se usa para Side Effects (como imprimir en consola), no devuelve nada.
- */
-console.log("%cEjecución forEach:", "color: #7c3aed; font-weight: bold;");
-numeros.forEach((n, i) => {
-    console.log(`%cÍndice ${i}: %c${n}`, "color: #a855f7;", "color: #111827;");
+        renderFrutas(detalle);
+        registrar(`${detalle} -> ${JSON.stringify(frutas)}`);
+    });
 });
 
-/** 
- * .map(): Transforma cada elemento y devuelve un array nuevo del mismo tamaño.
- * Es el pilar de frameworks modernos como React.
- */
-const duplicados = numeros.map(n => n * 2);
-console.log("%cMap (Duplicados):", "color: #7c3aed;", duplicados);
+// 2. Pipeline funcional
+const preciosBase = [40, 120, 85, 210, 30];
 
-/** 
- * .filter(): Crea un nuevo array solo con los elementos que cumplen la condición.
- */
-const mayoresQueDos = numeros.filter(n => n > 2);
-console.log("%cFilter (> 2):", "color: #7c3aed;", mayoresQueDos);
+document.getElementById("btn-pipeline").addEventListener("click", () => {
+    const min = Number(document.getElementById("input-min-precio").value) || 0;
+    const filtrados = preciosBase.filter((p) => p >= min);
+    const conDescuento = filtrados.map((p) => Number((p * 0.9).toFixed(2)));
+    const total = conDescuento.reduce((acc, n) => acc + n, 0);
 
-console.log("%c---------------------------", "color: #9333ea;");
+    document.getElementById("out-pipeline").textContent =
+        `Original (intacto): ${JSON.stringify(preciosBase)}\n1) filter(>= ${min}): ${JSON.stringify(filtrados)}\n2) map(-10%): ${JSON.stringify(conDescuento)}\n3) reduce(suma): $${total.toFixed(2)}`;
+    registrar(`Pipeline >= ${min} -> Total: $${total.toFixed(2)}`);
+});
+
+// 3. Inmutables ES2023
+const numerosES2023 = [30, 5, 100, 20];
+
+document.querySelectorAll("[data-es2023]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+        const tipo = btn.dataset.es2023;
+        let copia;
+        let etiqueta = "";
+
+        if (tipo === "sort") {
+            copia = numerosES2023.toSorted((a, b) => a - b);
+            etiqueta = ".toSorted((a, b) => a - b)";
+        } else if (tipo === "rev") {
+            copia = numerosES2023.toReversed();
+            etiqueta = ".toReversed()";
+        } else {
+            copia = numerosES2023.with(-1, 999);
+            etiqueta = ".with(-1, 999)";
+        }
+
+        document.getElementById("out-es2023").textContent =
+            `Método: ${etiqueta}\nOriginal (intacto): ${JSON.stringify(numerosES2023)}\nNuevo Array:        ${JSON.stringify(copia)}`;
+        registrar(`${etiqueta} -> ${JSON.stringify(copia)} (original intacto)`);
+    });
+});
+
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
+});
+
+renderFrutas();
+registrar("Laboratorio de Arrays listo.");

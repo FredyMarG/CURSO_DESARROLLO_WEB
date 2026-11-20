@@ -216,8 +216,136 @@ Ejemplo tipo reveal:
 
 ------------------------------------------------------------------------
 
+# 13. MASK-IMAGE
+
+Mientras `clip-path` recorta por geometría vectorial, `mask-image` utiliza la transparencia (canal alfa) o luminancia de un degradado o imagen para ocultar suavemente partes de un elemento:
+
+```css
+/* Desvanecimiento suave en los bordes de un carrusel horizontal */
+.carousel {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+```
+
+---
+
+# 14. COLOR MODERNO: `oklch()`, `oklab()`, `light-dark()`, `color-mix()` y Relative Color Syntax
+
+### `oklch()` y `oklab()`
+Espacios de color **perceptualmente uniformes** que soportan pantallas de gama amplia (Display P3):
+- `oklch(L C H / alpha)`: Luminosidad (`0%–100%` o `0–1`), Croma (saturación), Tono (`0deg–360deg`).
+- Dos colores en `oklch()` con la misma `L` se perciben exactamente igual de brillantes para el ojo humano.
+
+```css
+:root {
+  --brand: oklch(62% 0.21 255);
+  --brand-soft: oklch(62% 0.21 255 / 0.15);
+}
+```
+
+### `color-mix()` y Relative Color Syntax
+Genera variantes de color dinámicas sin preprocesadores:
+
+```css
+.btn {
+  background: var(--brand);
+}
+
+/* Mezcla 20% negro para estado hover */
+.btn:hover {
+  background: color-mix(in oklch, var(--brand) 80%, black);
+}
+
+/* Relative Color Syntax: aclara o cambia opacidad derivando del token base */
+.badge {
+  background: oklch(from var(--brand) calc(l + 0.2) c h / 0.2);
+  color: oklch(from var(--brand) calc(l + 0.15) c h);
+}
+```
+
+### `light-dark()`
+Define valores para modo claro y oscuro en una sola línea sin duplicar `@media (prefers-color-scheme: dark)`:
+
+```css
+:root {
+  color-scheme: light dark;
+  --surface: light-dark(#ffffff, #0f172a);
+  --text: light-dark(#0f172a, #f8fafc);
+}
+```
+
+---
+
+# 15. `env()` (Variables de Entorno del Dispositivo)
+
+Accede a áreas seguras del dispositivo (notch, Dynamic Island, barra gestual inferior en móviles) cuando se usa `viewport-fit=cover`:
+
+```css
+.bottom-bar {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px));
+}
+```
+
+---
+
+# 16. CSS Anchor Positioning (`anchor()`)
+
+Permite posicionar tooltips, menús y popovers respecto a un elemento ancla en cualquier parte del DOM, sin librerías como Popper.js:
+
+```css
+.trigger-btn {
+  anchor-name: --mi-boton;
+}
+
+.tooltip {
+  position: fixed;
+  position-anchor: --mi-boton;
+  top: calc(anchor(bottom) + 8px);
+  left: anchor(center);
+  translate: -50% 0;
+}
+```
+
+---
+
+# 17. ERRORES COMUNES Y BUENAS PRÁCTICAS
+
+### ❌ Errores Comunes
+1. **Usar `backdrop-filter: blur()` sin fondo semitransparente:** Si el fondo es opaco (`#fff`), el desenfoque no se nota.
+2. **Olvidar `color-scheme: light dark;` al usar `light-dark()`:** Sin esa declaración, `light-dark()` siempre devuelve el valor claro.
+3. **Animar `polygon()` con decenas de vértices:** Impacta el rendimiento de pintura.
+4. **Olvidar un valor fallback en `env()`:** Usa `env(safe-area-inset-bottom, 0px)` para evitar resultados inválidos en escritorio.
+
+### ✅ Buenas Prácticas
+- Adopta `oklch()` + `color-mix()` o Relative Color Syntax para sistemas de diseño escalables.
+- Combina `clamp()` con unidades relativas (`rem` + `vw`) para nunca bloquear el zoom de accesibilidad.
+- Prefiere `mask-image` con degradados para desvanecimientos suaves y `clip-path` para recortes geométricos nítidos.
+
+------------------------------------------------------------------------
+
 # CONCLUSIÓN PROFESIONAL
 
-Dominar estos conceptos permite construir interfaces modernas,
-optimizadas y escalables siguiendo estándares actuales de desarrollo
-web.
+Dominar estas funciones permite construir interfaces modernas, adaptables, accesibles y escalables siguiendo los estándares actuales de CSS sin depender de preprocesadores ni JavaScript innecesario.
+
+---
+
+# Hoja de Trucos (Cheatsheet) — Funciones CSS Modernas
+
+| Función | Propósito |
+| :--- | :--- |
+| `clamp(min, ideal, max)` | Tipografía y tamaños fluidos con límites seguros |
+| `calc()` / `min()` / `max()` | Operaciones matemáticas y selección dinámica de límites |
+| `color-mix(in oklch, c1 80%, c2)` | Mezcla dinámica de colores en espacios perceptuales |
+| `light-dark(claro, oscuro)` | Alterna valores según `color-scheme` en una línea |
+| `oklch(L C H / a)` | Color perceptualmente uniforme con soporte de gama amplia P3 |
+| `oklch(from var(--c) ...)` | Relative Color Syntax para derivar tonos desde un token |
+| `env(safe-area-inset-bottom)` | Respeta áreas seguras (notch/gestos) en móviles |
+| `anchor(bottom)` | Posiciona elementos flotantes respecto a un elemento ancla |
+| `clip-path` / `mask-image` | Recorte geométrico vectorial o máscara por transparencia |

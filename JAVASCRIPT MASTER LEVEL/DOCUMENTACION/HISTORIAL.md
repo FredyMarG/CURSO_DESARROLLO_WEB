@@ -296,3 +296,89 @@ window.addEventListener("DOMContentLoaded", () => {
 * **`history.pushState()`** inserta una nueva URL y objeto de estado en la pila sin recargar la página.
 * **`history.replaceState()`** reemplaza la URL y el estado de la entrada activa sin alterar el tamaño de la pila.
 * **El evento `popstate`** reacciona a las navegaciones del usuario en la pila y entrega el objeto asociado a través de `event.state` y `history.state`.
+
+
+---
+
+# Conceptos Complementarios: `scrollRestoration` y `hashchange` vs `popstate`
+
+### 1. Control del Scroll al Navegar (`history.scrollRestoration`)
+Por defecto los navegadores recuerdan la posición del scroll al pulsar "Atrás" (`"auto"`). En aplicaciones SPA con transiciones personalizadas puedes desactivarlo:
+```javascript
+if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual"; // Tú decides dónde posicionar el scroll
+}
+```
+
+### 2. `popstate` vs `hashchange`
+* **`popstate`:** Se dispara al navegar por entradas del historial creadas con `pushState()` / `replaceState()`.
+* **`hashchange`:** Se dispara exclusivamente cuando cambia la parte `#ancla` de la URL (`window.location.hash`).
+
+### 3. La evolución moderna: `Navigation API` (`window.navigation`)
+La **Navigation API** es el sucesor moderno de `History API` diseñado específicamente para aplicaciones SPA. A diferencia de `history.pushState()` (que no dispara `popstate` ni intercepta clics en enlaces `<a>` automáticamente), `window.navigation` centraliza **todas** las navegaciones en un único evento `navigate`:
+```javascript
+if ("navigation" in window) {
+    navigation.addEventListener("navigate", (event) => {
+        // Permite interceptar navegaciones del mismo origen sin recargar la página
+        if (event.canIntercept) {
+            event.intercept({
+                async handler() {
+                    console.log("Navegando a:", event.destination.url);
+                }
+            });
+        }
+    });
+}
+```
+*(Nota: Al ser una API moderna, verifica siempre `"navigation" in window` o mantén `History API` como respaldo para máxima compatibilidad).*
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Muestra en consola la cantidad de entradas en la sesión actual usando `history.length` y crea dos funciones que naveguen atrás y adelante con `history.back()` y `history.forward()`.
+
+## Nivel 2
+Usa `history.pushState({ seccion: "productos" }, "", "?vista=productos")` para cambiar la URL sin recargar la página y verifica el valor de `history.state`.
+
+## Nivel 3
+Implementa un escuchador `window.addEventListener("popstate", ...)` que lea `e.state` y actualice el título del documento o muestre qué vista se recuperó al pulsar los botones Atrás/Adelante del navegador.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+console.log("Páginas en historial:", history.length);
+const irAtras = () => history.back();
+const irAdelante = () => history.forward();
+```
+
+## Solución Nivel 2
+```javascript
+history.pushState({ seccion: "productos" }, "", "?vista=productos");
+console.log("Estado actual:", history.state);
+```
+
+## Solución Nivel 3
+```javascript
+window.addEventListener("popstate", (e) => {
+    const vista = e.state?.seccion || "inicio";
+    document.title = `App | ${vista}`;
+    console.log("Navegación restaurada hacia:", vista);
+});
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / Propiedad | Propósito | ¿Recarga la página? |
+| :--- | :--- | :--- |
+| `history.back()` / `forward()` | Navega 1 paso atrás o adelante | Depende del origen |
+| `history.go(n)` | Salta `n` pasos relativos (`0` recarga) | Sí en `go(0)` |
+| `history.pushState(state, "", url)` | Añade nueva entrada al historial | No |
+| `history.replaceState(state, "", url)` | Reemplaza la entrada actual sin apilar | No |
+| `window.onpopstate` | Detecta navegación por el historial | No |

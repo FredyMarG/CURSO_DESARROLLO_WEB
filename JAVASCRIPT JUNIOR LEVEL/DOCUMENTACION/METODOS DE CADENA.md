@@ -1,384 +1,148 @@
-# 📘 GUÍA DEFINITIVA DE MÉTODOS DE CADENA EN JAVASCRIPT
+# 📘 Guía Definitiva de Métodos de Cadena en JavaScript (ES2023–ES2025)
 
-## 🔥 NIVEL DIOS PRO EXTREMO (MEJORADO)
-
----
-
-# 📌 1. LISTA COMPLETA DE MÉTODOS
-
-## 🔍 BÚSQUEDA
-
-* `includes()`
-* `indexOf()`
-* `lastIndexOf()`
-* `startsWith()`
-* `endsWith()`
-* `search()`
-* `match()`
-* `matchAll()`
-
-## ✂️ EXTRACCIÓN
-
-* `slice()`
-* `substring()`
-* `substr()` ⚠️
-
-## 🔄 REEMPLAZO
-
-* `replace()`
-* `replaceAll()`
-
-## 🔤 TRANSFORMACIÓN
-
-* `toUpperCase()`
-* `toLowerCase()`
-* `trim()`
-* `trimStart()`
-* `trimEnd()`
-* `normalize()`
-
-## 📦 DIVISIÓN Y UNIÓN
-
-* `split()`
-* `concat()`
-
-## 🔢 ACCESO
-
-* `charAt()`
-* `charCodeAt()`
-* `at()`
-
-## 🧪 OTROS
-
-* `repeat()`
-* `padStart()`
-* `padEnd()`
-* `localeCompare()`
+Referencia técnica completa de los métodos de `String.prototype`, con casos reales, introducción a expresiones regulares y comparativas prácticas.
 
 ---
 
-# 🧠 2. EXPLICACIÓN UNO A UNO
+## 1. Catálogo de Métodos por Categoría
+
+* **Acceso:** `.at()`, `.charAt()`, `.charCodeAt()`, `.codePointAt()`
+* **Búsqueda:** `.includes()`, `.startsWith()`, `.endsWith()`, `.indexOf()`, `.lastIndexOf()`, `.search()`, `.match()`, `.matchAll()`
+* **Extracción:** `.slice()`, `.substring()` *(evitar `.substr()`)*
+* **Transformación y Limpieza:** `.toLowerCase()`, `.toUpperCase()`, `.trim()`, `.trimStart()`, `.trimEnd()`, `.normalize()`
+* **Reemplazo:** `.replace()`, `.replaceAll()`
+* **División, Unión y Formato:** `.split()`, `.concat()`, `.repeat()`, `.padStart()`, `.padEnd()`, `.localeCompare()`
 
 ---
 
-# 🔍 includes()
+## 2. Acceso y Búsqueda Avanzada
 
-## 📌 Función
+### `.at(indice)` (ES2022)
+Permite acceder a caracteres con índices positivos o negativos (contando desde el final):
+```javascript
+const texto = "Frontend";
+texto.at(0);   // "F"
+texto.at(-1);  // "d"
+```
 
-👉 Verifica si un texto contiene otro texto
-
-## 🌍 Ejemplo (tienda 🛒)
-
-```js
-// FUNCIÓN: Buscar si un producto es de cierta marca
-let producto = "Camisa Nike";
-producto.includes("Nike"); // true
+### `.includes()`, `.startsWith()`, `.endsWith()`
+Aceptan un segundo argumento opcional de posición para acotar la búsqueda:
+```javascript
+const archivo = "reporte-2025.pdf";
+archivo.startsWith("reporte"); // true
+archivo.endsWith(".pdf");      // true
+archivo.includes("2025");      // true
 ```
 
 ---
 
-# 🔍 indexOf()
+## 3. Introducción a Expresiones Regulares (RegExp) con Strings
 
-## 📌 Función
+Muchos métodos de cadena aceptan **Expresiones Regulares** (`/patrón/banderas`) para búsquedas y reemplazos inteligentes:
+* `g` (*global*): busca todas las coincidencias, no solo la primera.
+* `i` (*insensitive*): ignora mayúsculas y minúsculas.
 
-👉 Devuelve la posición donde inicia un texto
+```javascript
+const mensaje = "Pedido #1042 y Pedido #2099 listos";
 
-```js
-// FUNCIÓN: Encontrar posición de una parte del texto
-"carro".indexOf("rr") // 2
+// .match(regex): extrae coincidencias
+const numeros = mensaje.match(/\d+/g); // ["1042", "2099"]
+
+// .replace() con RegExp para limpiar múltiples espacios internos
+const sucio = "Hola     mundo   JS";
+const limpio = sucio.replace(/\s+/g, " "); // "Hola mundo JS"
+
+// .search(regex): devuelve el índice de la primera coincidencia o -1
+const posPrimerNumero = mensaje.search(/\d+/); // 8
+```
+
+> **Nota sobre `.replaceAll()`:** Si pasas una expresión regular a `.replaceAll()`, es obligatorio incluir la bandera `g` (`/patron/g`); de lo contrario lanzará un `TypeError`.
+
+---
+
+## 4. Limpieza, Relleno y División
+
+### `.trim()`, `.trimStart()`, `.trimEnd()`
+```javascript
+const entrada = "   hola@web.dev   ";
+entrada.trim();      // "hola@web.dev"
+entrada.trimStart(); // "hola@web.dev   "
+entrada.trimEnd();   // "   hola@web.dev"
+```
+
+### `.padStart()` y `.padEnd()`
+Ideales para formatear relojes, códigos, facturas o enmascarar datos sensibles:
+```javascript
+const segundos = "9".padStart(2, "0");         // "09"
+const ultimos4 = "4821";
+const enmascarado = ultimos4.padStart(16, "•"); // "••••••••••••4821"
+```
+
+### `.split(separador, limite?)`
+```javascript
+const csv = "Ana,Luis,Sofía,Carlos";
+csv.split(",", 2); // ["Ana", "Luis"] (el segundo parámetro limita el resultado)
 ```
 
 ---
 
-# 🔍 lastIndexOf()
+## 5. Ordenación Alfabética Correcta: `.localeCompare()`
 
-## 📌 Función
+Comparar strings con `<` o `>` falla con acentos y ñ (`"á"` queda después de `"z"`). Usa `localeCompare()`:
 
-👉 Busca desde el final
-
-```js
-// FUNCIÓN: Encontrar la última aparición
-"banana".lastIndexOf("a") // 5
+```javascript
+const nombres = ["Ángel", "Zoe", "Ana", "ñandú"];
+const ordenados = nombres.toSorted((a, b) => a.localeCompare(b, "es"));
+// ["Ana", "Ángel", "ñandú", "Zoe"]
 ```
 
 ---
 
-# 🔍 startsWith()
+## 6. Caso Real: Generador de *Slug* para URLs
 
-## 📌 Función
+```javascript
+function crearSlug(titulo) {
+    return titulo
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")                   // Separa letras de sus tildes
+        .replace(/[\u0300-\u036f]/g, "")    // Elimina las tildes
+        .replace(/[^a-z0-9\s-]/g, "")       // Elimina caracteres especiales
+        .replace(/\s+/g, "-");              // Espacios a guiones
+}
 
-👉 Verifica cómo inicia un texto
-
-```js
-// FUNCIÓN: Validar inicio de texto
-"perro negro".startsWith("perro")
+console.log(crearSlug("  Guía de JavaScript: ¡Nivel Pro!  "));
+// "guia-de-javascript-nivel-pro"
 ```
 
 ---
 
-# 🔍 endsWith()
+## ⚠️ Errores Comunes
 
-## 📌 Función
+* **Olvidar que los strings son inmutables:** Llamar a `str.toUpperCase()` sin guardar el resultado en una variable no cambia `str`.
+* **Usar `.substr()`:** Está obsoleto (*deprecated*). Usa `.slice(inicio, fin)`.
+* **Usar `.replace(" ", "-")` esperando reemplazar todos los espacios:** `.replace()` con string solo reemplaza la **primera** coincidencia. Usa `.replaceAll(" ", "-")`.
+* **Llamar métodos sobre `null` o `undefined`:** Usa `texto?.trim() ?? ""` si el dato puede venir vacío desde una API.
 
-👉 Verifica cómo termina un texto
+## ✅ Buenas Prácticas
 
-```js
-// FUNCIÓN: Validar tipo de archivo
-"foto.png".endsWith(".png")
-```
-
----
-
-# 🔍 search()
-
-## 📌 Función
-
-👉 Buscar usando expresiones regulares
-
-```js
-// FUNCIÓN: Buscar patrón dentro del texto
-"hola mundo".search("mundo")
-```
+* Encadena `.trim().toLowerCase()` antes de validar emails o comparar búsquedas de usuario.
+* Usa `.localeCompare()` con el código de idioma (`"es"`) al ordenar listas visibles para el usuario.
+* Usa `.slice()` en lugar de `.substring()` para aprovechar índices negativos de forma consistente con `Array.prototype.slice()`.
 
 ---
 
-# 🔍 match()
-
-## 📌 Función
-
-👉 Obtener coincidencias
-
-```js
-// FUNCIÓN: Extraer palabras repetidas
-"hola hola".match(/hola/g)
-```
-
----
-
-# ✂️ slice()
-
-## 📌 Función
-
-👉 Extraer una parte del texto
-
-```js
-// FUNCIÓN: Cortar texto (animal 🐶)
-let animal = "perrito";
-animal.slice(0, 4) // "perr"
-```
-
----
-
-# ✂️ substring()
-
-## 📌 Función
-
-👉 Extraer texto sin negativos
-
-```js
-// FUNCIÓN: Cortar texto básico
-"javascript".substring(0,4)
-```
-
----
-
-# 🔄 replace()
-
-## 📌 Función
-
-👉 Reemplazar una parte del texto
-
-```js
-// FUNCIÓN: Cambiar palabra
-"perro grande".replace("perro", "gato")
-```
-
----
-
-# 🔄 replaceAll()
-
-## 📌 Función
-
-👉 Reemplazar todas las coincidencias
-
-```js
-// FUNCIÓN: Reemplazar múltiples palabras
-"perro perro".replaceAll("perro", "gato")
-```
-
----
-
-# 🔤 toUpperCase()
-
-## 📌 Función
-
-👉 Convertir a mayúsculas
-
-```js
-// FUNCIÓN: Normalizar texto
-"hola".toUpperCase()
-```
-
----
-
-# 🔤 toLowerCase()
-
-## 📌 Función
-
-👉 Convertir a minúsculas
-
-```js
-// FUNCIÓN: Comparaciones sin error
-"HOLA".toLowerCase()
-```
-
----
-
-# 🔤 trim()
-
-## 📌 Función
-
-👉 Eliminar espacios
-
-```js
-// FUNCIÓN: Limpiar datos
-"  gato  ".trim()
-```
-
----
-
-# 📦 split()
-
-## 📌 Función
-
-👉 Convertir string a array
-
-```js
-// FUNCIÓN: Separar lista (frutas 🍎)
-"manzana,pera,uvas".split(",")
-```
-
----
-
-# 📦 concat()
-
-## 📌 Función
-
-👉 Unir textos
-
-```js
-// FUNCIÓN: Unir palabras
-"hola".concat(" mundo")
-```
-
----
-
-# 🔢 charAt()
-
-## 📌 Función
-
-👉 Obtener un carácter por posición
-
-```js
-// FUNCIÓN: Obtener letra
-"gato".charAt(0)
-```
-
----
-
-# 🔢 at()
-
-## 📌 Función
-
-👉 Acceder desde el final
-
-```js
-// FUNCIÓN: Obtener último carácter
-"gato".at(-1)
-```
-
----
-
-# 🧪 repeat()
-
-## 📌 Función
-
-👉 Repetir texto
-
-```js
-// FUNCIÓN: Generar patrón
-"ha".repeat(3)
-```
-
----
-
-# 🧪 padStart()
-
-## 📌 Función
-
-👉 Rellenar al inicio
-
-```js
-// FUNCIÓN: Formatear números
-"5".padStart(3, "0") // 005
-```
-
----
-
-# 🧱 3. PATRÓN PROFESIONAL
-
-```js
-// FUNCIÓN: Normalizar texto antes de usarlo
-let limpio = texto.trim().toLowerCase();
-```
-
----
-
-# 🐞 4. DEBUGGING
-
-```js
-// FUNCIÓN: Evitar errores con undefined
-if (texto && texto.includes("hola"))
-```
-
----
-
-# ⚠️ 5. ERRORES COMUNES
-
-* No validar valores
-* Pensar que modifican el original
-* No limpiar datos
-
----
-
-# ⚡ 6. OPTIMIZACIÓN
-
-```js
-// FUNCIÓN: Evitar cálculos repetidos
-let limpio = texto.trim();
-```
-
----
-
-# 🧩 7. EJERCICIOS
-
-1. Validar un email
-2. Limpiar un nombre
-3. Separar productos
-
----
-
-# 🧾 8. RESUMEN FINAL
-
-* includes → buscar
-* slice → cortar
-* replace → cambiar
-* split → dividir
-* trim → limpiar
-
----
-
-# 🔥 CONCLUSIÓN
-
-Ahora no solo sabes los métodos…
-👉 Sabes exactamente **para qué sirve cada uno en la vida real** 🚀
+## Hoja de Trucos (Cheatsheet) — Métodos de Cadena
+
+| Método | Uso Principal | Ejemplo |
+| :--- | :--- | :--- |
+| `.at(-1)` | Último carácter | `"JS".at(-1)` → `"S"` |
+| `.includes(sub)` | ¿Contiene el texto? | `"Hola".includes("la")` → `true` |
+| `.startsWith()` / `.endsWith()` | Validar prefijo o sufijo | `"app.js".endsWith(".js")` → `true` |
+| `.trim()` / `.trimStart()` / `.trimEnd()` | Quitar espacios sobrantes | `"  a ".trim()` → `"a"` |
+| `.slice(ini, fin)` | Extraer subcadena (acepta negativos) | `"Hola".slice(0, -1)` → `"Hol"` |
+| `.replaceAll(a, b)` | Reemplazar todas las apariciones | `"a-b-c".replaceAll("-", "/")` → `"a/b/c"` |
+| `.split(sep)` | Dividir string en Array | `"1,2,3".split(",")` → `["1","2","3"]` |
+| `.padStart(n, ch)` | Rellenar al inicio | `"7".padStart(2, "0")` → `"07"` |
+| `.match(regex)` | Extraer coincidencias con RegExp | `"a1b2".match(/\d/g)` → `["1", "2"]` |
+| `.localeCompare(otro, "es")` | Ordenar respetando tildes y ñ | `"árbol".localeCompare("casa", "es")` |

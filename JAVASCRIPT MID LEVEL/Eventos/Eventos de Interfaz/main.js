@@ -1,64 +1,38 @@
-/**
- * Seleccionamos el elemento de imagen del DOM. 
- * Los eventos de interfaz nos permiten monitorear el estado de carga y manipulación de recursos.
- */
-const img = document.querySelector('.img-prueba');
-const input = document.querySelector('.prueba');
+// Guía Interactiva — Eventos de Interfaz
 
-/**
- * Evento 'error': Se dispara cuando un recurso (como una imagen) no puede cargarse.
- * Útil para manejar rutas rotas o fallos de red y mostrar una imagen de respaldo.
- */
-img.addEventListener('error', () => {
-    console.log('Error al cargar la imagen');
+const selectInput = document.getElementById("selectInput");
+const selectOutput = document.getElementById("selectOutput");
+const resizeOutput = document.getElementById("resizeOutput");
+const scrollBox = document.getElementById("scrollBox");
+const scrollOutput = document.getElementById("scrollOutput");
+const demoImg = document.getElementById("demoImg");
+const imgStatus = document.getElementById("imgStatus");
+
+selectInput.addEventListener("select", (e) => {
+    const start = e.target.selectionStart;
+    const end = e.target.selectionEnd;
+    const texto = e.target.value.slice(start, end);
+    selectOutput.textContent = `Seleccionado (${start}..${end}): "${texto}"`;
 });
 
-/**
- * Evento 'load': Se dispara cuando el recurso se ha descargado y procesado completamente.
- * Es fundamental para ejecutar lógica que dependa de que los elementos ya existan visualmente.
- */
-img.addEventListener('load', () => {
-    console.log('Imagen cargada');
-}); 
+function actualizarViewport() {
+    resizeOutput.textContent = `Viewport: ${window.innerWidth}px × ${window.innerHeight}px`;
+}
 
-/**
- * Evento 'beforeunload': (Debería aplicarse a 'window').
- * Se activa justo antes de que el usuario abandone la página (refrescar o cerrar).
- * Permite mostrar un cuadro de diálogo de confirmación si hay cambios sin guardar.
- */
-window.addEventListener('beforeunload', () => {
-    console.log('La página se va a recargar o cerrar');
+window.addEventListener("resize", actualizarViewport);
+actualizarViewport();
+
+scrollBox.addEventListener("scroll", () => {
+    scrollOutput.textContent = `Scroll interno: ${Math.round(scrollBox.scrollTop)} px`;
+}, { passive: true });
+
+demoImg.addEventListener("error", () => {
+    imgStatus.className = "status-text err";
+    imgStatus.textContent = "Evento error disparado: la imagen no pudo cargarse (404).";
 });
 
-/**
- * Evento 'unload': Se dispara cuando la página se está descargando definitivamente.
- * Se utiliza para tareas de limpieza final o para enviar analíticas antes de cerrar.
- */
-window.addEventListener('unload', () => {
-    console.log('La página se ha recargado o cerrado');
-});
-
-/**
- * Evento 'resize': Se dispara al cambiar el tamaño de la ventana del navegador.
- * Es la base para crear comportamientos responsivos dinámicos mediante JavaScript.
- */
-window.addEventListener('resize', () => {
-    console.log('La ventana ha sido redimensionada');
-});
-
-/**
- * Evento 'scroll': Se ejecuta cada vez que el usuario se desplaza por la página o un elemento.
- * Ideal para efectos de "sticky headers", carga infinita o animaciones al hacer scroll.
- */
-window.addEventListener('scroll', () => {
-    console.log('La ventana ha sido desplazada');
-});
-
-/**
- * Evento 'select': (Nota Técnica).
- * Este evento se utiliza normalmente en elementos <input> o <textarea> cuando se selecciona texto.
- * En imágenes no tiene un comportamiento estándar por defecto a menos que se use en contextos específicos.
- */
-input.addEventListener('select', () => {
-    console.log('Texto seleccionado en la imagen');
+document.getElementById("btnBrokenImg").addEventListener("click", () => {
+    imgStatus.className = "status-text";
+    imgStatus.textContent = "Intentando cargar imagen...";
+    demoImg.src = "ruta-inexistente-404.png";
 });

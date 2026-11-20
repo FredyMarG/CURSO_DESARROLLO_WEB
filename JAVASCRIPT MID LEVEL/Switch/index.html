@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- 
-        PROYECTO: Laboratorio de JavaScript (Nivel Medio)
-        TEMA: Estructura de Control Switch.
-        OBJETIVO: Demostrar la evaluación de múltiples casos sobre una sola expresión.
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio: Sentencia Switch</title>
+    <title>Guía Interactiva — Switch y Tablas Lookup</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Control de Flujo</span>
+            <h1>Sentencia <code>switch</code> vs. Lookup Moderno</h1>
+            <p class="subtitle">Prueba comparación estricta (<code>===</code>), agrupación de casos, <code>switch(true)</code> y tablas de búsqueda.</p>
+        </div>
+    </header>
 
-    <main class="container">
-        <header class="glass-header">
-            <h1>🎛️ JavaScript Switch</h1>
-            <p>Evaluación de Casos y Control de Flujo</p>
-        </header>
-
-        <section class="info-card">
-            <div class="status-badge">Análisis Lógico Activo</div>
-            <h2>Selector de Frutas</h2>
-            <p>El script <code>main.js</code> está evaluando una variable mediante un bloque switch para determinar propiedades visuales.</p>
-            
-            <div class="warning-box">
-                <p class="warning-note"><strong>Atención:</strong> El uso de <code>document.write</code> en el script reemplazará este diseño. Se recomienda revisar el código en la consola o actualizarlo a <code>innerHTML</code>.</p>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Evaluador de Código HTTP (<code>switch</code> clásico)</h2>
+            <p class="desc">Selecciona o escribe un código HTTP para ver cómo actúa <code>switch</code> y la agrupación de <code>case</code>.</p>
+            <div class="controls">
+                <label for="httpCodeSelect">Código HTTP:</label>
+                <select id="httpCodeSelect">
+                    <option value="200">200 — OK</option>
+                    <option value="201">201 — Created</option>
+                    <option value="204">204 — No Content</option>
+                    <option value="401">401 — Unauthorized</option>
+                    <option value="404">404 — Not Found</option>
+                    <option value="500">500 — Server Error</option>
+                    <option value="999">999 — Desconocido (default)</option>
+                </select>
+                <label class="inline-check">
+                    <input id="simularSinBreak" type="checkbox">
+                    Simular error de <strong>fall-through</strong> (sin <code>break</code>)
+                </label>
             </div>
+            <div id="httpOutput" class="output" aria-live="polite"></div>
+        </section>
+
+        <section class="card">
+            <h2>2. <code>switch(true)</code> por Rangos &amp; Object Lookup</h2>
+            <p class="desc">Evalúa calificaciones con <code>switch(true)</code> y compáralo con una tabla de búsqueda moderna.</p>
+            <div class="controls">
+                <label for="notaRange">Calificación: <strong id="notaValor">85</strong>/100</label>
+                <input id="notaRange" type="range" min="0" max="100" value="85">
+            </div>
+            <div id="notaOutput" class="output" aria-live="polite"></div>
+            <pre class="code-box"><code>// Alternativa moderna O(1) con Objeto/Map:
+const roles = { admin: "Total", editor: "Contenido" };
+const acceso = roles[rol] ?? "Solo lectura";</code></pre>
         </section>
     </main>
 

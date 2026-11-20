@@ -1084,3 +1084,25 @@ Dominarla significa:
 ✅ Performance.
 ✅ Debugging avanzado.
 ✅ Optimización de tráfico.
+
+---
+
+# 🚀 Funciones Modernas en Chrome DevTools (Network)
+
+* **Network Throttling:** Simula redes reales (*Fast 4G*, *Slow 4G*, *3G*, *Offline* o perfiles personalizados) para probar tiempos de carga, spinners y `AbortSignal.timeout()`.
+* **Override Content / Response Headers (Local Overrides):** Haz clic derecho en una petición → **Override content** o **Override headers**. Permite modificar el JSON de respuesta o añadir cabeceras CORS localmente para probar casos extremos en el frontend sin tocar el backend.
+* **Copy as `fetch` / Copy as cURL:** Clic derecho → *Copy* para reproducir exactamente la misma petición con sus headers y payload en la consola o terminal.
+* **Initiator & Waterfall:** La columna *Initiator* (con `Shift` sobre la fila) muestra exactamente qué línea de JavaScript disparó la petición.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Función / Filtro | Qué hace | Uso práctico |
+| :--- | :--- | :--- |
+| Filtro `Fetch/XHR` | Muestra solo peticiones API dinámicas. | Depurar llamadas `fetch()`, `Axios` o `XHR`. |
+| Filtro `status-code:404` / `method:POST` | Filtra por código HTTP, método o dominio. | Encontrar errores en cientos de peticiones. |
+| **Disable cache** | Ignora la caché mientras DevTools está abierto. | Evitar falsos positivos al probar cambios. |
+| **Preserve log** | Mantiene el historial aunque recargues o navegues. | Depurar redirecciones `301`/`302` y logins. |
+| **Override content** | Sustituye la respuesta de una API por un JSON local. | Simular errores `500` o datos nuevos en UI. |
+| **Throttling (Slow 4G / Offline)** | Limita ancho de banda y latencia simulada. | Verificar UX en conexiones móviles lentas. |

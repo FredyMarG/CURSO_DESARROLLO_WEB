@@ -1,26 +1,78 @@
 <!DOCTYPE html>
-<!-- 
-    VISTA: CONCATENACIÓN Y TEMPLATE LITERALS
-    Conceptos: Unión de cadenas, interpolación y legibilidad de código.
--->
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Junior - Concatenación</title>
+    <title>JS Junior — Guía Interactiva de Concatenación</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">" "</div>
-            <h1>Unión de Cadenas</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 03 · Strings e Interpolación</span>
+            <h1>Concatenación y Template Literals</h1>
+            <p>Compara el operador <code>+</code>, <code>.concat()</code>, <code>Array.join()</code> y los modernos <strong>Template Literals</strong>, además de cómo prevenir vulnerabilidades XSS al mostrar texto en el DOM.</p>
         </header>
-        <p>Aprende las diferencias entre el operador <code>+</code> y los modernos <b>Template Literals</b>.</p>
-        <div class="status-box">
-            <span class="status-dot"></span>
-            <span>Procesando en <b>Consola (Ctrl + Shift + I)</b></span>
-        </div>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Comparador en vivo -->
+            <section class="card" aria-labelledby="c1">
+                <h2 id="c1">1. Constructor de Template Literals</h2>
+                <p class="note">Edita los campos para ver cómo se construye el mismo mensaje con <code>+</code>, <code>.concat()</code> y backticks <code>`${}`</code>.</p>
+                <div class="controls">
+                    <div>
+                        <label for="cat-nombre">Nombre:</label>
+                        <input id="cat-nombre" type="text" value="Alex">
+                    </div>
+                    <div>
+                        <label for="cat-lenguaje">Lenguaje:</label>
+                        <input id="cat-lenguaje" type="text" value="JavaScript">
+                    </div>
+                    <button id="btn-generar-cat" type="button">Generar Comparación</button>
+                </div>
+                <pre class="code-preview">`Hola, soy ${nombre} y domino ${lenguaje}.`</pre>
+                <div id="out-cat" class="output" aria-live="polite">Presiona "Generar Comparación" para ver los 3 métodos.</div>
+            </section>
+
+            <!-- Tarjeta 2: Coerción de tipos -->
+            <section class="card" aria-labelledby="c2">
+                <h2 id="c2">2. Coerción de Tipos con <code>+</code></h2>
+                <p class="note">JavaScript evalúa de izquierda a derecha. Un solo string convierte el resto de la suma en concatenación si no usas paréntesis.</p>
+                <div class="controls">
+                    <div class="row">
+                        <button type="button" data-coercion="5_str5">5 + "5"</button>
+                        <button type="button" data-coercion="str_5_3">"Total: " + 5 + 3</button>
+                        <button type="button" data-coercion="str_paren">"Total: " + (5 + 3)</button>
+                    </div>
+                </div>
+                <pre class="code-preview">"Total: " + 5 + 3   // "Total: 53"
+"Total: " + (5 + 3) // "Total: 8"</pre>
+                <div id="out-coercion" class="output" aria-live="polite">Elige una expresión para evaluar su resultado y tipo.</div>
+            </section>
+
+            <!-- Tarjeta 3: Seguridad XSS -->
+            <section class="card" aria-labelledby="c3">
+                <h2 id="c3">3. Inserción Segura (<code>textContent</code>)</h2>
+                <p class="note">Nunca insertes texto de usuario con <code>innerHTML</code>. Usa <code>textContent</code> para que etiquetas maliciosas se muestren como texto inofensivo.</p>
+                <div class="controls">
+                    <div>
+                        <label for="xss-input">Texto ingresado por el usuario:</label>
+                        <input id="xss-input" type="text" value='<img src=x onerror="alert(1)">'>
+                    </div>
+                    <button id="btn-xss-safe" type="button">Insertar de forma segura</button>
+                </div>
+                <pre class="code-preview">nodo.textContent = `Comentario: ${entrada}`;</pre>
+                <div id="out-xss" class="output" aria-live="polite">El texto se renderizará de forma segura aquí.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
     </div>
 
     <script src="concatenacion.js"></script>

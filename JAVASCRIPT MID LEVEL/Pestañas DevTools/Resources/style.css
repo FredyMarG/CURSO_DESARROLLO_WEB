@@ -1,43 +1,70 @@
-/**
- * 🛠️ MODULE: RESOURCES / SOURCES DEVTOOLS LAB
- * 
- * ARQUITECTURA: Diseño de entorno oscuro (Terminal UI) para facilitar la lectura de código y depuración.
- * RENDIMIENTO: Uso de propiedades que aprovechan la aceleración por hardware.
- */
-
-/* BASE STYLES: Configuración global y tipografía */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    color: #222;               /* Slate-900: Color base para texto fuera de la zona de consola */
-    font-family: sans-serif;   /* Tipografía de sistema para carga inmediata sin CLS (Cumulative Layout Shift) */
-    margin: 0;                 /* Elimina los márgenes intrínsecos del User-Agent */
-    padding: 2rem;             /* Relleno perimetral para una mejor jerarquía visual en el viewport */
-    background-color: #f8fafc; /* Fondo neutro ligero para contraste con el contenedor oscuro */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* CODE CONTAINER: Simulación de editor de código o terminal */
-div {
-    background-color: #000;    /* Fondo negro: maximiza la concentración en los recursos visualizados */
-    padding: 25px;             /* Define el espaciado interno (Box Model) del componente */
-    border-radius: 10px;       /* Curvatura de esquinas para una estética de software moderno */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* Profundidad visual mediante sombras de elevación */
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* HEADINGS: Títulos de sección internos */
-h2 {
-    color: #fff;               /* Contraste máximo para títulos sobre superficies oscuras */
-    margin-top: 0;             /* Alineación vertical corregida respecto al contenedor padre */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-/* RESOURCE ITEMS: Representación de archivos o líneas de código */
-p {
-    color: #ccc;               /* Gris suave: legibilidad equilibrada para reducir fatiga visual */
-    padding: 8px;              /* Aumenta el área de selección para interacción táctil y mouse */
-    transition: all 0.2s ease; /* Interpolación suave para cambios de estado (DX) */
+.subtitle, .desc { color: var(--muted); font-size: 0.92rem; }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* INTERACTION: Feedback visual para depuración */
-p:hover {
-    background: #cc0000;       /* Rojo vibrante: resalta la línea seleccionada en el árbol de recursos */
-    color: #fff;               /* Asegura el contraste al cambiar el fondo */
-    cursor: pointer;           /* Indica explícitamente que el nodo es inspeccionable o ejecutable */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.btn {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.84rem;
+    white-space: pre-wrap;
+    min-height: 150px;
 }

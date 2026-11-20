@@ -960,3 +960,27 @@ Dominarla significa:
 ✅ Source maps.
 ✅ Automatización.
 ✅ Análisis completo de ejecución.
+
+---
+
+# 🚀 Funciones Modernas en Chrome DevTools (Sources)
+
+* **Logpoints (Puntos de registro sin editar código):** Clic derecho en el número de línea → *Add logpoint*. Imprime expresiones en consola (ej. `'Usuario:', user.id`) sin pausar la ejecución ni ensuciar el código fuente con `console.log`.
+* **Conditional Breakpoints:** Pausa la ejecución solo cuando una condición es verdadera (ej. `i === 99` o `res.status >= 400`).
+* **Local Overrides:** Modifica archivos JS/CSS directamente en el navegador y persiste los cambios entre recargas.
+* **Ignore List (antes Blackboxing):** Excluye librerías externas (`node_modules`, `axios.min.js`) del *Step Into* para depurar únicamente tu código.
+* **Snippets:** Guarda y ejecuta scripts reutilizables de utilidad en cualquier página web.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Herramienta / Atajo | Acción | Cuándo usarla |
+| :--- | :--- | :--- |
+| `F8` (Resume) / `F10` (Step Over) | Continúa o avanza a la siguiente línea. | Navegar paso a paso por una función. |
+| `F11` (Step Into) / `Shift+F11` (Out) | Entra o sale de la función llamada. | Inspeccionar lógica interna de un método. |
+| **Conditional Breakpoint** | Pausa solo si se cumple una expresión JS. | Depurar iteraciones específicas en bucles. |
+| **Logpoint** | Registra valores en Console sin pausar. | Depurar en producción sin modificar archivos. |
+| **Call Stack & Scope** | Muestra la pila de llamadas y variables locales/closures. | Entender cómo llegó la ejecución y qué valores tiene. |
+| **Pretty Print (`{}`)** | Formatea código minificado en líneas legibles. | Leer bundles de producción o librerías CDN. |
+| **Pause on caught/uncaught exceptions** | Detiene la ejecución justo cuando ocurre un `throw`. | Encontrar el origen exacto de errores silenciosos. |

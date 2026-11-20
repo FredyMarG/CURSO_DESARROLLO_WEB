@@ -3,29 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Mid Level - Resources/Sources Inspector</title>
-    <link rel="stylesheet" href="style.css"> <!-- Vinculación de estilos técnicos -->
+    <title>DevTools Lab — Pestaña Sources (Debugging &amp; Breakpoints)</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main: Contenedor semántico para el laboratorio de recursos -->
-    <main class="resources-lab">
-        <header>
-            <h1>Explorador de Archivos (Sources)</h1>
-            <p class="guide-text">Abre la pestaña 'Sources' para explorar la jerarquía de archivos del sitio.</p>
-        </header>
-
-        <!-- Terminal UI: Contenedor para simular la visualización de archivos cargados -->
-        <div class="file-inspector">
-            <section class="file-list">
-                <h2>Archivos en Memoria</h2>
-                <p><strong>📄 index.html</strong> - Estructura cargada</p>
-                <p><strong>🎨 style.css</strong> - Estilos aplicados</p>
-                <p><strong>⚡ resources.js</strong> - Lógica activa (intenta poner un breakpoint)</p>
-            </section>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Chrome DevTools</span>
+            <h1>Pestaña <code>Sources</code>: Breakpoints, Logpoints &amp; Call Stack</h1>
+            <p class="subtitle">Abre DevTools → Sources → <code>resources.js</code> y practica pausar ejecución, inspeccionar Scope y usar Logpoints.</p>
         </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Simulador de Call Stack y Bucle</h2>
+            <p class="desc">Coloca un <strong>Conditional Breakpoint</strong> (<code>i === 5</code>) o un <strong>Logpoint</strong> dentro de <code>calcularTotal()</code>.</p>
+            <div class="btn-row">
+                <button type="button" id="btnRunLoop" class="btn primary">Ejecutar calcularTotal()</button>
+                <button type="button" id="btnDebugger" class="btn">Pausar con debugger;</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>2. Resultado de Ejecución</h2>
+            <div id="sourcesOutput" class="terminal" aria-live="polite">Listo para depurar.</div>
+        </section>
     </main>
 
-    <!-- Script para prácticas de Debugging y Snippets -->
     <script src="resources.js"></script>
 </body>
 </html>

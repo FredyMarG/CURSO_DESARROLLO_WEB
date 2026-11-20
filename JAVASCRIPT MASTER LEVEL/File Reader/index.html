@@ -41,7 +41,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -873,6 +873,47 @@
                     <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
                         <span>📋 Copiar Chuleta Rápida en Markdown</span>
                     </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 11: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="ArrayBuffer, abort() y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">10. Lectura Binaria, Alternativas Modernas y Cheatsheet</h2>
+                    <p class="slide-description">Domina la lectura binaria, cancelación de lecturas pesadas y métodos modernos de File/Blob.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🧱</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">readAsArrayBuffer() y abort()</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>reader.readAsArrayBuffer(file);
+// Cancelar lectura en curso:
+reader.abort();</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Ideal para procesar bytes crudos o enviar buffers binarios a Web Workers.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">⚡</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Alternativas Modernas</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const txt = await file.text();
+const url = URL.createObjectURL(file);</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">file.text() y createObjectURL() simplifican vistas previas sin Base64.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>readAsText() -> texto plano/JSON
+readAsDataURL() -> imágenes en Base64
+progress -> e.loaded / e.total</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Usa el evento progress con lengthComputable para barras de carga.</p>
+                    </div>
                 </div>
             </div>
         </section>

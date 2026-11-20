@@ -1,122 +1,91 @@
-/* Importación de la fuente moderna 'Outfit' */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
-
-/* Reseteo completo para control total del diseño */
-* {
-    margin: 0; /* Elimina márgenes */
-    padding: 0; /* Elimina rellenos */
-    box-sizing: border-box; /* Incluye bordes en el tamaño final */
-    font-family: 'Outfit', sans-serif; /* Fuente uniforme */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
 }
-
-/* Estilo del cuerpo con degradado radial dinámico */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    background: #0f172a; /* Azul noche profundo */
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.15) 0, transparent 50%), /* Brillo azul superior */
-        radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.15) 0, transparent 50%); /* Brillo verde inferior */
-    min-height: 100vh; /* Altura mínima de la ventana */
-    display: flex; /* Centrado con flexbox */
-    justify-content: center; /* Centro horizontal */
-    align-items: center; /* Centro vertical */
-    color: #f8fafc; /* Texto claro */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* Contenedor con animación de entrada suave */
-.container {
-    width: 90%; /* Ancho responsivo */
-    max-width: 600px; /* Límite de expansión */
-    animation: fadeIn 0.8s ease-out; /* Animación de aparición */
+.container { width: min(1050px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* Encabezado con efecto de texto degradado */
-.glass-header {
-    text-align: center; /* Texto centrado */
-    margin-bottom: 2rem; /* Separación inferior */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-.glass-header h1 {
-    font-size: 2.8rem; /* Tamaño prominente */
-    background: linear-gradient(to right, #60a5fa, #34d399); /* Degradado azul-verde */
-    background-clip: text; /* Aplica degradado solo al texto */
-    -webkit-text-fill-color: transparent; /* Hace el texto transparente */
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* Tarjeta principal con efecto de cristal (Glassmorphism) */
-.info-card {
-    background: rgba(30, 41, 59, 0.7); /* Fondo traslúcido */
-    backdrop-filter: blur(12px); /* Desenfoque del fondo */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde sutil */
-    border-radius: 24px; /* Esquinas redondeadas */
-    padding: 2.5rem; /* Espaciado interno */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra elegante */
-    text-align: center; /* Centra contenido */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
 }
-
-/* Insignia de estado */
-.status-badge {
-    display: inline-block; /* Comportamiento de bloque en línea */
-    padding: 0.3rem 1rem; /* Relleno */
-    background: rgba(59, 130, 246, 0.2); /* Fondo azul sutil */
-    color: #60a5fa; /* Texto azul brillante */
-    border-radius: 9999px; /* Forma de píldora */
-    font-weight: 600; /* Negrita */
-    margin-bottom: 1rem; /* Margen inferior */
-    text-transform: uppercase; /* Mayúsculas */
-    font-size: 0.75rem; /* Tamaño reducido */
+.desc { color: var(--muted); font-size: 0.92rem; }
+.resizable-box {
+    resize: both;
+    overflow: auto;
+    min-width: 180px;
+    min-height: 110px;
+    max-width: 100%;
+    height: 150px;
+    background: #020617;
+    border: 2px dashed var(--accent);
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-family: ui-monospace, monospace;
+    color: var(--accent);
 }
-
-/* Caja de instrucciones de teclado */
-.instruction-box {
-    background: #1e293b; /* Fondo sólido oscuro */
-    padding: 1rem; /* Espaciado */
-    border-radius: 12px; /* Esquinas suaves */
-    margin: 1.5rem 0; /* Margen vertical */
-    display: flex; /* Flexbox para alineación */
-    justify-content: center; /* Centro horizontal */
-    align-items: center; /* Centro vertical */
-    gap: 12px; /* Espacio entre elementos */
+.kv-list { display: flex; flex-direction: column; gap: 0.45rem; }
+.kv-item {
+    display: flex;
+    justify-content: space-between;
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.85rem;
 }
-
-/* Estilo para teclas representadas */
-kbd {
-    background: #334155; /* Fondo de tecla */
-    padding: 0.2rem 0.6rem; /* Relleno */
-    border-radius: 4px; /* Esquina de tecla */
-    border-bottom: 3px solid #0f172a; /* Profundidad visual */
-    color: #34d399; /* Color verde esmeralda */
-    font-family: monospace; /* Fuente de código */
-}
-
-/* Grupo de botones de acción */
-.button-group {
-    display: flex; /* Flexbox */
-    gap: 1rem; /* Espacio entre botones */
-    justify-content: center; /* Centrado */
-}
-
-/* Estilo base de botones */
 .btn {
-    padding: 0.8rem 1.5rem; /* Tamaño táctil */
-    border: none; /* Sin bordes nativos */
-    border-radius: 10px; /* Redondeado moderno */
-    font-weight: 600; /* Grosor de fuente */
-    cursor: pointer; /* Mano al pasar */
-    transition: 0.3s all ease; /* Transición suave */
-    color: white; /* Texto blanco */
-    flex: 1; /* Crecen equitativamente */
+    background: var(--accent);
+    color: #082f49;
+    border: none;
+    border-radius: 8px;
+    padding: 0.55rem 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
 }
-
-.btn-primary { background: #3b82f6; } /* Azul principal */
-.btn-secondary { background: #10b981; } /* Verde secundario */
-
-.btn:hover {
-    filter: brightness(1.1); /* Brillo al pasar */
-    transform: translateY(-2px); /* Pequeña elevación */
-}
-
-/* Animación de entrada */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); } /* Desde abajo e invisible */
-    to { opacity: 1; transform: translateY(0); } /* Posición final visible */
+.output {
+    background: #0f172a;
+    border-left: 3px solid var(--accent);
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }

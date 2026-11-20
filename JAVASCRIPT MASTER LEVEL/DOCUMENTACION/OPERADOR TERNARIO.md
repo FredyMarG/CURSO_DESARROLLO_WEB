@@ -179,3 +179,51 @@ Crea una función flecha llamada `obtenerMensajeEnvio` que reciba dos parámetro
 * **El operador ternario** (`? :`) es una expresión compacta de tres operandos que sirve como alternativa directa a la estructura `if...else`.
 * **Retorna un valor implícitamente**, lo que lo hace perfecto para realizar asignaciones directas de variables basadas en condiciones específicas.
 * **No debe ser anidado** ni encadenado de forma sucesiva debido a que reduce severamente la legibilidad y mantenibilidad del software.
+
+
+---
+
+# Conceptos Complementarios: Ternario vs `??` (*Nullish Coalescing*) y `&&`
+
+* **Operador Ternario (`cond ? a : b`):** Ideal cuando necesitas elegir entre **dos valores distintos** según una condición booleana.
+* **Nullish Coalescing (`valor ?? "defecto"`):** Úsalo cuando solo quieras asignar un respaldo si el valor es `null` o `undefined` (a diferencia del ternario, respeta `0`, `false` y `""`).
+* **Cortocircuito (`cond && accion()`):** Útil en JSX/React o expresiones simples cuando no hay rama `else`, aunque en JavaScript puro un `if` suele ser más legible.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+const edad = 20;
+const acceso = edad >= 18 ? "Permitido" : "Denegado";
+console.log(acceso);
+```
+
+## Solución Nivel 2
+```javascript
+const esMiembro = true;
+const total = 100;
+const precioFinal = esMiembro ? total * 0.8 : total;
+console.log(`Precio final: $${precioFinal}`);
+```
+
+## Solución Nivel 3
+```javascript
+const nota = 85;
+const calificacion = nota >= 90 ? "Excelente"
+                   : nota >= 70 ? "Aprobado"
+                   : "Reprobado";
+console.log(calificacion);
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Patrón | Ejemplo | Recomendación |
+| :--- | :--- | :--- |
+| Asignación simple | `const tipo = ok ? "Sí" : "No";` | ✅ Muy limpio |
+| Retorno en función flecha | `const par = n => n % 2 === 0 ? "Par" : "Impar";` | ✅ Excelente |
+| Ternarios anidados profundos | `a ? b ? c : d : e` | ❌ Mejor usar `if/else` o `switch` |
+| Respaldo de `null`/`undefined` | `const nombre = input ?? "Anónimo";` | ✅ Preferir `??` |

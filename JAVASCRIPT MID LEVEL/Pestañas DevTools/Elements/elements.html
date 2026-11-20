@@ -3,26 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Mid Level - Elements Inspector</title>
-    <link rel="stylesheet" href="style.css"> <!-- Vinculación de estilos para pruebas en vivo -->
+    <title>DevTools Lab — Pestaña Elements (DOM &amp; CSS)</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Main: Contenedor semántico principal -->
-    <main class="dom-inspector-lab">
-        <header>
-            <h1>Laboratorio de Estructura (DOM)</h1>
-            <p class="guide-text">Usa el inspector (Ctrl+Shift+C) para analizar las relaciones de este nodo.</p>
-        </header>
-
-        <!-- Bloque de inspección profunda -->
-        <div class="node-container">
-            <section class="nested-content">
-                <h2>Árbol de Elementos</h2>
-                <p>Nivel 1: Haz hover para ver el cambio de estado.</p>
-                <p>Nivel 2: Edita este texto directamente en las DevTools.</p>
-                <p>Nivel 3: Intenta duplicar este nodo en la pestaña Elements.</p>
-            </section>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Chrome DevTools</span>
+            <h1>Pestaña <code>Elements</code>: DOM, Box Model &amp; Breakpoints</h1>
+            <p class="subtitle">Inspecciona el nodo objetivo en Elements, activa <code>Break on &gt; Attribute modifications</code> y prueba mutaciones en vivo.</p>
         </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Nodo Objetivo para Inspección</h2>
+            <div id="targetElement" class="target-box" data-estado="activo">
+                <p>Caja Flexbox con <code>data-estado</code> y clases dinámicas.</p>
+                <span>Inspeccióname en Elements → Styles / Computed</span>
+            </div>
+            <div class="btn-row">
+                <button type="button" id="btnToggleClass" class="btn primary">Alternar Clase .resaltado</button>
+                <button type="button" id="btnMutateAttr" class="btn">Cambiar data-estado</button>
+                <button type="button" id="btnPadding" class="btn">Alternar Padding</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>2. Estado Computado en Tiempo Real</h2>
+            <div id="domInfo" class="terminal" aria-live="polite"></div>
+        </section>
     </main>
 
     <script src="elements.js"></script>

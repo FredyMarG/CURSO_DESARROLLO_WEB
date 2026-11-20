@@ -42,7 +42,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 11</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -551,6 +551,48 @@ IDBRequest.<span class="code-function">addEventListener</span>(<span class="code
                             &nbsp;&nbsp;req.onsuccess = () => resolve(req.result);<br>
                             });</code>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Índices, Cursores y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. createIndex(), openCursor() y Hoja de Trucos</h2>
+                    <p class="slide-description">Optimiza búsquedas por campos secundarios y recorre grandes almacenes de objetos registro a registro.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🔍</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Índices Secundarios (createIndex)</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>store.createIndex('por_email', 'email', { unique: true });
+const req = store.index('por_email').get('a@b.com');</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Permite consultar por propiedades distintas a la keyPath principal.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">⏭️</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cursores (openCursor)</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>store.openCursor().onsuccess = (e) => {
+  const cursor = e.target.result;
+  if (cursor) { cursor.continue(); }
+};</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Itera registros de forma eficiente sin cargar miles de objetos en RAM.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>onupgradeneeded -> crear stores/índices
+db.transaction(['s'], 'readwrite')
+add() / put() / get() / getAll()</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Toda operación de lectura/escritura ocurre dentro de una transacción.</p>
                     </div>
                 </div>
             </div>

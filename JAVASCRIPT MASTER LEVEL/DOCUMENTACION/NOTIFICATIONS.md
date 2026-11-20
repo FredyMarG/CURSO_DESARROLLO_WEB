@@ -262,3 +262,87 @@ actualizarInterfaz();
 * **`Notification.requestPermission()`** retorna una promesa con la respuesta del usuario y debe ejecutarse siempre tras una interacción explícita (como un clic).
 * **`new Notification(titulo, options)`** crea y muestra la notificación nativa en el sistema operativo utilizando configuraciones como `body`, `icon`, `tag` y `silent`.
 * **Las instancias de notificación** soportan eventos como `click` y `close` para enfocar la ventana del navegador o ejecutar acciones al interactuar con la alerta.
+
+
+---
+
+# Conceptos Complementarios: Service Worker Notifications y Botones de Acción
+
+En aplicaciones web progresivas (**PWAs**) o cuando necesitas mostrar botones interactivos (`actions`) dentro de la notificación incluso con la pestaña cerrada, se utiliza **`registration.showNotification()`** desde un Service Worker:
+
+```javascript
+// Dentro de un contexto con Service Worker registrado
+const reg = await navigator.serviceWorker.ready;
+reg.showNotification("Nuevo Pedido #402", {
+    body: "Un cliente acaba de confirmar su compra.",
+    tag: "pedido-402",
+    actions: [
+        { action: "ver", title: "👁️ Ver Pedido" },
+        { action: "descartar", title: "✖️ Ignorar" }
+    ]
+});
+```
+
+> **Nota:** La propiedad `actions` solo está disponible en notificaciones mostradas mediante `ServiceWorkerRegistration.showNotification()`, no en el constructor `new Notification()` directo.
+
+---
+
+# Ejercicios
+
+## Nivel 1
+Escribe un script que verifique si `"Notification" in window` es verdadero e imprima en consola el valor actual de `Notification.permission`.
+
+## Nivel 2
+Crea un botón en HTML (`#btn-permiso`) que, al hacer clic, solicite autorización mediante `Notification.requestPermission()` usando `async/await` y muestre un mensaje distinto para `"granted"` y `"denied"`.
+
+## Nivel 3
+Crea una función `notificarSiOculto(titulo, mensaje)` que combine `document.hidden` con `Notification`: si la pestaña está oculta y el permiso es `"granted"`, lanza una notificación con `tag: "aviso-unico"` y enfoca la ventana al hacer clic; si está visible, imprime el aviso en consola.
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+if ("Notification" in window) {
+    console.log("Permiso actual:", Notification.permission);
+} else {
+    console.log("Este navegador no soporta Notifications API.");
+}
+```
+
+## Solución Nivel 2
+```javascript
+document.getElementById("btn-permiso").addEventListener("click", async () => {
+    const decision = await Notification.requestPermission();
+    console.log(decision === "granted" ? "✅ Autorizado" : "🚫 No autorizado");
+});
+```
+
+## Solución Nivel 3
+```javascript
+const notificarSiOculto = (titulo, mensaje) => {
+    if (!document.hidden) {
+        console.log(`💬 Aviso interno: ${titulo} - ${mensaje}`);
+        return;
+    }
+    if (Notification.permission === "granted") {
+        const noti = new Notification(titulo, { body: mensaje, tag: "aviso-unico" });
+        noti.addEventListener("click", () => {
+            window.focus();
+            noti.close();
+        });
+    }
+};
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| API / Propiedad | Tipo | Uso Principal |
+| :--- | :--- | :--- |
+| `Notification.permission` | String | `"default"`, `"granted"` o `"denied"` |
+| `Notification.requestPermission()` | Promise | Pide autorización (solo dentro de un clic) |
+| `new Notification(title, options)` | Constructor | Emite alerta nativa (`body`, `icon`, `tag`, `silent`) |
+| `noti.addEventListener("click", fn)` | Evento | Permite ejecutar `window.focus()` y `noti.close()` |

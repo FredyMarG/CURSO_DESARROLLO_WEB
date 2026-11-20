@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- 
-        PROYECTO: Laboratorio de JavaScript (Nivel Medio)
-        TEMA: Temporizadores Asíncronos (setTimeout, setInterval).
-        OBJETIVO: Demostrar el uso y control de temporizadores en JavaScript.
-    -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio: Temporizadores JS</title>
+    <title>Guía Interactiva — Temporizadores JS</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <main class="container">
-        <header class="glass-header">
-            <h1>⏰ JavaScript Timers</h1>
-            <p>Explorando <code>setTimeout</code> y <code>setInterval</code></p>
-        </header>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Asincronía &amp; Event Loop</span>
+            <h1>Temporizadores: <code>setTimeout</code> &amp; <code>setInterval</code></h1>
+            <p class="subtitle">Controla ejecución diferida, intervalos repetitivos y limpieza segura con <code>clearTimeout</code> / <code>clearInterval</code>.</p>
+        </div>
+    </header>
 
-        <section class="info-card">
-            <div class="status-badge">Modo Asíncrono Activo</div>
-            <h2>Entorno de Pruebas</h2>
-            <p>El script <code>main.js</code> está ejecutando temporizadores. Para observar su comportamiento y los mensajes:</p>
-            
-            <div class="instruction-box">
-                <span>Abre la</span>
-                <kbd>Consola (F12)</kbd>
-            </div>
-
-            <div class="timer-display">
-                <div class="timer-status" id="setTimeoutStatus">
-                    <h3>setTimeout</h3>
-                    <p>Estado: <span class="status-text pending">Pendiente/Cancelado</span></p>
-                </div>
-                <div class="timer-status" id="setIntervalStatus">
-                    <h3>setInterval</h3>
-                    <p>Estado: <span class="status-text pending">Pendiente/Cancelado</span></p>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. <code>setTimeout</code> (Ejecución Diferida Cancelable)</h2>
+            <p class="desc">Programa una tarea única tras un retardo en milisegundos o cancélala antes de que dispare.</p>
+            <div class="controls">
+                <label for="delayInput">Retardo (ms):</label>
+                <input id="delayInput" type="number" value="2000" min="200" max="10000" step="200">
+                <div class="btn-row">
+                    <button type="button" id="btnStartTimeout" class="btn primary">Iniciar Timeout</button>
+                    <button type="button" id="btnCancelTimeout" class="btn" disabled>Cancelar (clearTimeout)</button>
                 </div>
             </div>
-            <p class="warning-note"><strong>Nota:</strong> Los mensajes de <code>document.write</code> sobrescribirán esta página. Revisa la consola para el flujo completo.</p>
+            <div id="timeoutOutput" class="output" aria-live="polite">Inactivo.</div>
+        </section>
+
+        <section class="card">
+            <h2>2. Cronómetro con <code>setInterval</code></h2>
+            <p class="desc">Ejecuta un callback cada 100 ms con control de inicio, pausa y reinicio sin fugas de memoria.</p>
+            <div class="timer-display" id="cronoDisplay">00.0 s</div>
+            <div class="btn-row">
+                <button type="button" id="btnStartInterval" class="btn primary">Iniciar</button>
+                <button type="button" id="btnPauseInterval" class="btn" disabled>Pausar</button>
+                <button type="button" id="btnResetInterval" class="btn">Reiniciar</button>
+            </div>
+        </section>
+
+        <section class="card full-width">
+            <h2>3. Event Loop: <code>setTimeout(..., 0)</code> vs <code>Promise.resolve()</code></h2>
+            <p class="desc">Comprueba en vivo cómo las Microtasks (Promesas) se ejecutan antes que las Macrotasks (<code>setTimeout</code>).</p>
+            <div class="btn-row">
+                <button type="button" id="btnEventLoop" class="btn primary">Probar Orden del Event Loop</button>
+            </div>
+            <div id="loopOutput" class="terminal" aria-live="polite"></div>
         </section>
     </main>
 

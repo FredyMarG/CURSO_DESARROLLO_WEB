@@ -14,7 +14,7 @@
        ========================================================================== */
     const AppState = {
         currentSlide: 1,
-        totalSlides: 10,
+        totalSlides: 11,
         viewMode: 'slides', // 'slides' | 'guide'
         soundEnabled: true,
 
@@ -1594,7 +1594,7 @@ gestor.iniciar();`
                 this.showToast('¡Chuleta copiada al portapapeles!');
                 sound.fileLoaded();
             }).catch(() => {
-                alert('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
+                this.showToast('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
             });
         }
     }

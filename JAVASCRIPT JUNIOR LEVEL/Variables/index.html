@@ -1,35 +1,106 @@
-<!DOCTYPE html> <!-- Definición de tipo de documento para HTML5 -->
-
-<!-- 
-    LABORATORIO: VARIABLES Y TIPOS DE DATOS
-    Nivel: Junior Level
-    Propósito: Entorno de ejecución para el motor de JS (V8/SpiderMonkey). 
-    En este módulo se prueban las interacciones síncronas (prompt/alert) y la consola.
--->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Meta-información técnica -->
-    <meta charset="UTF-8"> <!-- Garantiza el renderizado de caracteres UTF-8 (acentos, ñ) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Viewport: Fundamental para el diseño responsivo en móviles -->
-
-    <!-- El título es indexado por motores de búsqueda (SEO) -->
-    <title>JS Junior - Variables y Tipos</title>
-    <!-- Vinculación del archivo de estilos externo (Separación de responsabilidades) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de Variables y Tipos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Interfaz de usuario simple para visualización -->
-    <div class="container">
-        <h1>Práctica de Variables</h1>
-        <p>La lógica se procesa mediante <b>ventanas emergentes</b> y la <b>consola</b>.</p>
-        <p>Presiona <code>Ctrl + Shift + I</code> para ver los resultados del <code>console.log</code>.</p>
+    <div class="app-shell">
+        <header class="hero">
+            <div>
+                <span class="badge">Módulo 01 · Fundamentos ES2023+</span>
+                <h1>Variables, Scope y Tipos de Datos</h1>
+                <p>Prueba en vivo <code>const</code>, <code>let</code>, <code>var</code>, la Temporal Dead Zone (TDZ), el operador <code>typeof</code> y la diferencia entre copia por valor y por referencia.</p>
+            </div>
+        </header>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Inspector de typeof -->
+            <section class="card" aria-labelledby="t1">
+                <h2 id="t1">1. Inspector de Tipos (<code>typeof</code>)</h2>
+                <p class="note">Elige un valor o escribe uno personalizado para inspeccionar su tipo real y sus casos especiales (<code>null</code>, <code>NaN</code>, <code>Array</code>).</p>
+                <div class="controls">
+                    <div>
+                        <label for="preset-tipo">Valor de prueba:</label>
+                        <select id="preset-tipo">
+                            <option value="string">"Hola JS" (String)</option>
+                            <option value="number">42 (Number)</option>
+                            <option value="bigint">9007199254740995n (BigInt)</option>
+                            <option value="boolean">true (Boolean)</option>
+                            <option value="undefined">undefined</option>
+                            <option value="null">null (Error histórico de JS)</option>
+                            <option value="nan">NaN (Not a Number)</option>
+                            <option value="array">[1, 2, 3] (Array)</option>
+                            <option value="symbol">Symbol("id")</option>
+                        </select>
+                    </div>
+                    <button id="btn-inspeccionar" type="button">Inspeccionar Tipo</button>
+                </div>
+                <pre class="code-preview">typeof valor; Array.isArray(valor); Number.isNaN(valor);</pre>
+                <div id="out-tipo" class="output" aria-live="polite">Selecciona un valor y presiona "Inspeccionar Tipo".</div>
+            </section>
+
+            <!-- Tarjeta 2: Saludo sin prompt/alert -->
+            <section class="card" aria-labelledby="t2">
+                <h2 id="t2">2. Conversión Segura de Entradas</h2>
+                <p class="note">Los inputs del DOM (como <code>prompt()</code>) siempre devuelven texto (<code>string</code>). Conviértelos con <code>Number()</code> antes de operar.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-nombre">Tu nombre:</label>
+                        <input id="input-nombre" type="text" placeholder="Ej: Sofía" value="Sofía">
+                    </div>
+                    <div>
+                        <label for="input-numero">Número para elevar al cuadrado:</label>
+                        <input id="input-numero" type="text" placeholder="Ej: 7" value="7">
+                    </div>
+                    <button id="btn-calcular" type="button">Validar y Calcular</button>
+                </div>
+                <pre class="code-preview">const num = Number(entrada);
+if (!Number.isNaN(num)) resultado = num ** 2;</pre>
+                <div id="out-calculo" class="output" aria-live="polite">Esperando entrada...</div>
+            </section>
+
+            <!-- Tarjeta 3: Scope y TDZ -->
+            <section class="card" aria-labelledby="t3">
+                <h2 id="t3">3. Scope (<code>var</code> vs <code>let</code>/<code>const</code>) & TDZ</h2>
+                <p class="note"><code>let</code> y <code>const</code> respetan bloques <code>{}</code> y entran en la Temporal Dead Zone antes de declararse. <code>var</code> se filtra fuera del bloque.</p>
+                <div class="controls">
+                    <div class="row">
+                        <button id="btn-scope-block" type="button">Probar Scope de Bloque</button>
+                        <button id="btn-tdz" type="button" class="secondary">Simular TDZ</button>
+                    </div>
+                </div>
+                <pre class="code-preview">if (true) { var a = 1; let b = 2; }
+// 'a' existe aquí; 'b' lanza ReferenceError</pre>
+                <div id="out-scope" class="output" aria-live="polite">Presiona un botón para ver el comportamiento del motor JS.</div>
+            </section>
+
+            <!-- Tarjeta 4: Valor vs Referencia -->
+            <section class="card" aria-labelledby="t4">
+                <h2 id="t4">4. Primitivos (Valor) vs Objetos (Referencia)</h2>
+                <p class="note">Copiar un objeto con <code>=</code> comparte la misma dirección en memoria. Usa <code>structuredClone()</code> para una copia independiente.</p>
+                <div class="controls">
+                    <div class="row">
+                        <button id="btn-ref-compartida" type="button">Mutar Referencia (=)</button>
+                        <button id="btn-ref-clon" type="button" class="secondary">Usar structuredClone()</button>
+                    </div>
+                </div>
+                <pre class="code-preview">const copia = structuredClone(original);</pre>
+                <div id="out-ref" class="output" aria-live="polite">Compara cómo reacciona el objeto original en ambos casos.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo (también en DevTools)</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
     </div>
 
-    <!-- 
-        VINCULACIÓN DE LÓGICA:
-        Se carga al final del body para no interrumpir el análisis (parsing) del DOM.
-        'variables.js' maneja la entrada de datos del usuario.
-    -->
     <script src="variables.js"></script>
 </body>
 </html>

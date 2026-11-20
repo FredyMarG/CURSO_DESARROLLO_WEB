@@ -486,3 +486,49 @@ Escribe un script estructurado que intente forzar el contexto de una función fl
 * **Carecen de constructor**, por lo que lanzarían un error fatal si se intentan invocar mediante el operador `new`.
 * **No tienen acceso al objeto `arguments` ni a la propiedad `.prototype`**, lo que las vuelve estructuras ligeras pero inadecuadas para patrones de herencia clásica u orientada a objetos en JavaScript.
 * **La recursividad, los closures y las desestructuraciones en parámetros** se integran de forma natural y nativa dentro del ecosistema de las funciones flecha, potenciando la modularidad y la claridad del código JavaScript moderno.
+
+
+---
+
+# Solucionario de Ejercicios Integradores
+
+## Solución Nivel 1 (Junior)
+```javascript
+const saludar = (nombre = "Invitado") => `¡Hola, ${nombre}!`;
+const calcularCuadrado = n => n * n;
+console.log(saludar("Laura"), calcularCuadrado(9));
+```
+
+## Solución Nivel 2 (Semi Senior)
+```javascript
+const crearUsuario = (nombre, rol = "lector", ...permisos) => ({
+    nombre,
+    rol,
+    permisos
+});
+console.log(crearUsuario("Carlos", "editor", "leer", "escribir"));
+```
+
+## Solución Nivel 3 (Avanzado / Closures & Recursividad)
+```javascript
+const crearContador = (inicio = 0) => {
+    let cuenta = inicio;
+    return () => ++cuenta;
+};
+const contar = crearContador(10);
+console.log(contar(), contar()); // 11, 12
+
+const factorial = (n) => (n <= 1 ? 1 : n * factorial(n - 1));
+console.log("5! =", factorial(5)); // 120
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Característica | Función Tradicional | Función Flecha (`=>`) |
+| :--- | :--- | :--- |
+| `this` propio | Dinámico (según quién llame) | Léxico (hereda del contexto padre) |
+| Uso con `new` | ✅ Sí (constructor) | ❌ No (`TypeError`) |
+| Objeto `arguments` | ✅ Sí | ❌ No (usar `...rest`) |
+| Retorno implícito | ❌ No | ✅ Sí (sin llaves `{}` o con `({})` para objetos) |

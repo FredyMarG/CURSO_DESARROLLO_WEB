@@ -1,25 +1,108 @@
 <!DOCTYPE html>
-<!-- 
-    LABORATORIO: ESTRUCTURAS CONDICIONALES
-    Propósito: Evaluar la toma de decisiones en el código basada en expresiones booleanas.
-    Contenido: Bloques if, else if, else, Switch y Operadores Ternarios.
--->
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Codificación universal para soportar caracteres especiales -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Junior - Condicionales</title>
-    <!-- Estilos externos para un código más modular y limpio -->
+    <title>JS Junior — Guía Interactiva de Condicionales</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Toma de Decisiones en JS</h1>
-        <p>Este script evalúa condiciones lógicas para controlar el flujo del programa.</p>
-        <p>Abre la consola con <code>Ctrl + Shift + I</code> para observar los resultados de las evaluaciones.</p>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 04 · Control de Flujo</span>
+            <h1>Estructuras Condicionales</h1>
+            <p>Prueba en tiempo real <code>if / else if / else</code>, <code>switch</code>, el operador ternario, valores <strong>Truthy / Falsy</strong> y cláusulas de guarda (<em>Early Return</em>).</p>
+        </header>
+
+        <main class="grid">
+            <!-- Tarjeta 1: if / else if / else + Ternario -->
+            <section class="card" aria-labelledby="cd1">
+                <h2 id="cd1">1. Saludo por Hora (<code>if / else if</code>)</h2>
+                <p class="note">Ajusta la hora del día (0–23) para ver qué rama del bloque condicional se ejecuta.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-hora">Hora del día (0–23):</label>
+                        <input id="input-hora" type="number" min="0" max="23" value="14">
+                    </div>
+                    <button id="btn-eval-hora" type="button">Evaluar Hora</button>
+                </div>
+                <pre class="code-preview">if (hora &lt; 12) ... else if (hora &lt;= 18) ... else ...</pre>
+                <div id="out-hora" class="output" aria-live="polite">Ajusta la hora y presiona "Evaluar Hora".</div>
+            </section>
+
+            <!-- Tarjeta 2: Switch y Diccionario -->
+            <section class="card" aria-labelledby="cd2">
+                <h2 id="cd2">2. Sentencia <code>switch</code> vs Diccionario</h2>
+                <p class="note"><code>switch</code> compara con igualdad estricta (<code>===</code>). Un objeto diccionario suele ser una alternativa más limpia para mapeos simples.</p>
+                <div class="controls">
+                    <div>
+                        <label for="select-rol">Selecciona un rol:</label>
+                        <select id="select-rol">
+                            <option value="admin">admin</option>
+                            <option value="editor" selected>editor</option>
+                            <option value="moderador">moderador</option>
+                            <option value="invitado">invitado</option>
+                            <option value="desconocido">otro (default)</option>
+                        </select>
+                    </div>
+                    <button id="btn-eval-rol" type="button">Evaluar Permisos</button>
+                </div>
+                <pre class="code-preview">switch (rol) { case "admin": ... break; default: ... }</pre>
+                <div id="out-rol" class="output" aria-live="polite">Selecciona un rol para evaluar sus permisos.</div>
+            </section>
+
+            <!-- Tarjeta 3: Truthy & Falsy -->
+            <section class="card" aria-labelledby="cd3">
+                <h2 id="cd3">3. Laboratorio Truthy vs Falsy</h2>
+                <p class="note">En JS solo 6 valores (<code>false</code>, <code>0</code>, <code>""</code>, <code>null</code>, <code>undefined</code>, <code>NaN</code>) son <em>falsy</em>. ¡Incluso <code>[]</code> y <code>{}</code> son <em>truthy</em>!</p>
+                <div class="controls">
+                    <div>
+                        <label for="select-truthy">Valor a evaluar con <code>Boolean(valor)</code>:</label>
+                        <select id="select-truthy">
+                            <option value="empty_str">"" (string vacío)</option>
+                            <option value="zero_str">"0" (string con cero)</option>
+                            <option value="zero">0 (número cero)</option>
+                            <option value="empty_arr">[] (array vacío)</option>
+                            <option value="empty_obj">{} (objeto vacío)</option>
+                            <option value="null">null</option>
+                            <option value="nan">NaN</option>
+                        </select>
+                    </div>
+                    <button id="btn-eval-truthy" type="button">Comprobar Boolean()</button>
+                </div>
+                <pre class="code-preview">if (valor) { /* truthy */ } else { /* falsy */ }</pre>
+                <div id="out-truthy" class="output" aria-live="polite">Prueba qué valores entran al if y cuáles al else.</div>
+            </section>
+
+            <!-- Tarjeta 4: Cláusulas de Guarda -->
+            <section class="card" aria-labelledby="cd4">
+                <h2 id="cd4">4. Cláusulas de Guarda (Early Return)</h2>
+                <p class="note">Valida errores o requisitos al principio y retorna temprano para evitar anidar múltiples <code>if</code>.</p>
+                <div class="controls">
+                    <label class="row">
+                        <input id="chk-entrada" type="checkbox" checked> Tiene entrada VIP
+                    </label>
+                    <div>
+                        <label for="input-edad-acceso">Edad del visitante:</label>
+                        <input id="input-edad-acceso" type="number" min="0" max="120" value="21">
+                    </div>
+                    <button id="btn-eval-acceso" type="button">Validar Acceso</button>
+                </div>
+                <pre class="code-preview">if (edad &lt; 18) return "Denegado: menor de edad";
+if (!tieneEntrada) return "Denegado: falta entrada";</pre>
+                <div id="out-acceso" class="output" aria-live="polite">Pulsa "Validar Acceso" para probar las guardas.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
     </div>
 
-    <!-- Vinculación de la lógica de control de flujo -->
     <script src="condicionales.js"></script>
 </body>
 </html>

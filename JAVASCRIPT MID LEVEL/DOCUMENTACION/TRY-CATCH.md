@@ -1111,3 +1111,42 @@ Dominar estas herramientas permite crear aplicaciones más robustas, seguras y f
 ✅ Logging profesional
 
 ✅ Manejo centralizado de errores
+
+---
+
+# 🚀 Mejoras Modernas en `try / catch`
+
+### 1. Optional Catch Binding (ES2019)
+Si no necesitas inspeccionar el objeto `error` (por ejemplo, al intentar un `JSON.parse` con valor de respaldo), puedes omitir los paréntesis:
+```javascript
+let datos;
+try {
+    datos = JSON.parse(raw);
+} catch {
+    datos = {}; // Sin '(error)' innecesario
+}
+```
+
+### 2. Encadenar errores con `{ cause }` (ES2022)
+Al capturar un error técnico y relanzar uno de dominio, conserva el error original en `cause`:
+```javascript
+try {
+    await conectarDB();
+} catch (err) {
+    throw new Error("No se pudo iniciar el servicio de usuarios", { cause: err });
+}
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Bloque / Propiedad | Función | Ejemplo |
+| :--- | :--- | :--- |
+| `try { ... }` | Envuelve código susceptible de lanzar excepciones. | `try { riesgos(); }` |
+| `catch (err) { ... }` | Captura el error lanzado en `try` (solo síncrono o `await`). | `catch (err) { console.error(err.message); }` |
+| `catch { ... }` | Captura sin declarar variable de error (ES2019). | `catch { return fallback; }` |
+| `finally { ... }` | Se ejecuta **siempre** (haya error o no, incluso tras `return`). | `finally { loader.hide(); }` |
+| `throw new Error(msg)` | Lanza una excepción personalizada. | `throw new Error("ID inválido");` |
+| `err.name` / `err.message` / `err.stack` | Tipo, descripción y traza de llamadas del error. | `console.error(err.name, err.stack);` |
+| `err.cause` | Error original encadenado (ES2022). | `new Error("Fallo API", { cause: err })` |

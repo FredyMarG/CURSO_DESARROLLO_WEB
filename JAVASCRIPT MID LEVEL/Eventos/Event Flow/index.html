@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Eventos/Event Flow/index.html
-     Título: Event Flow
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva — Event Flow (Capturing &amp; Bubbling)</title>
     <link rel="stylesheet" href="style.css">
-    <title>Event Flow</title>
 </head>
 <body>
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
-
-    
-    <div class="contenedor1">
-        <div class="contenedor2">
-            <button class="button">Click</button>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Eventos del DOM</span>
+            <h1>Event Flow: Capturing, Target &amp; Bubbling</h1>
+            <p class="subtitle">Visualiza el orden exacto de propagación de eventos entre contenedores anidados.</p>
         </div>
-    </div>
+    </header>
+
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Simulador Visual de Propagación</h2>
+            <div class="controls">
+                <label class="inline-check">
+                    <input id="chkCapture" type="checkbox"> Activar fase <strong>Capturing</strong> (<code>{ capture: true }</code>)
+                </label>
+                <label class="inline-check">
+                    <input id="chkStop" type="checkbox"> Detener en Contenedor Azul (<code>e.stopPropagation()</code>)
+                </label>
+            </div>
+            <div id="abuelo" class="box abuelo">
+                Abuelo (Contenedor Rojo)
+                <div id="padre" class="box padre">
+                    Padre (Contenedor Azul)
+                    <button type="button" id="hijo" class="btn primary">Hijo (Botón)</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="terminal-header">
+                <h2>Orden de Ejecución</h2>
+                <button type="button" id="btnClear" class="btn small">Limpiar</button>
+            </div>
+            <div id="flowLog" class="terminal" aria-live="polite">Haz clic en el botón "Hijo" para observar el flujo.</div>
+        </section>
+    </main>
 
     <script src="main.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

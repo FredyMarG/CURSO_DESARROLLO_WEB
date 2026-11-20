@@ -1,36 +1,64 @@
 <!DOCTYPE html>
-<!-- 
-    LABORATORIO MAESTRO: ESTRUCTURAS DE CONTROL (BUCLES)
-    Este archivo unifica todas las variantes de iteración en JavaScript.
-    La arquitectura separa la estructura (HTML), el diseño (CSS) y la lógica (JS).
--->
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Encoding UTF-8 para compatibilidad global -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Prevención de zoom automático en móviles -->
-    
-    <!-- Título descriptivo para la pestaña del navegador -->
-    <title>JS Junior - Control de Bucles</title>
-
-    <!-- Vinculación del diseño externo para bucles (Separación de capas) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de Bucles (While / Do-While)</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="card">
-        <header>
-            <div class="icon">↺</div>
-            <h1>Iteración y Bucles</h1>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 06 · Iteración Condicional</span>
+            <h1>Bucles <code>while</code>, <code>do...while</code> y Control de Flujo</h1>
+            <p>Comprende cuándo la condición se evalúa antes o después de ejecutar el bloque, y cómo detener o saltar iteraciones con <code>break</code> y <code>continue</code>.</p>
         </header>
-        <section class="content">
-            <p>Guía unificada de estructuras repetitivas: desde el clásico <b>For</b> hasta <b>While</b>, <b>Do While</b> y control de flujo avanzado.</p>
-            <div class="status-box">
-                <span class="status-dot"></span>
-                <span>Resultados iterativos en <b>Consola (Ctrl + Shift + I)</b></span>
+
+        <main class="grid">
+            <section class="card" aria-labelledby="b1">
+                <h2 id="b1">1. <code>while</code> vs <code>do...while</code></h2>
+                <p class="note">Prueba un límite inicial de <code>0</code>: <code>while</code> no se ejecuta ninguna vez; <code>do...while</code> se ejecuta al menos 1 vez.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-limite-while">Límite (0 a 10):</label>
+                        <input id="input-limite-while" type="number" min="0" max="10" value="0">
+                    </div>
+                    <button id="btn-while-cmp" type="button">Comparar while vs do...while</button>
+                </div>
+                <pre class="code-preview">while (i &lt; limite) { ... }
+do { ... } while (i &lt; limite);</pre>
+                <div id="out-while-cmp" class="output" aria-live="polite">Prueba con límite = 0 o límite = 4.</div>
+            </section>
+
+            <section class="card" aria-labelledby="b2">
+                <h2 id="b2">2. <code>break</code> (Detener) y <code>continue</code> (Saltar)</h2>
+                <p class="note">Recorremos números del 1 al 10. Configura un número para saltar (<code>continue</code>) y otro para detener todo (<code>break</code>).</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-skip">Saltar número (continue):</label>
+                        <input id="input-skip" type="number" min="1" max="10" value="3">
+                    </div>
+                    <div>
+                        <label for="input-stop">Detener en número (break):</label>
+                        <input id="input-stop" type="number" min="1" max="10" value="7">
+                    </div>
+                    <button id="btn-flow" type="button">Ejecutar Secuencia</button>
+                </div>
+                <pre class="code-preview">if (i === skip) continue;
+if (i === stop) break;</pre>
+                <div id="out-flow" class="output" aria-live="polite">Pulsa "Ejecutar Secuencia".</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
             </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
         </section>
     </div>
 
-    <!-- Inyección de la lógica centralizada de bucles -->
     <script src="bucles.js"></script>
 </body>
 </html>

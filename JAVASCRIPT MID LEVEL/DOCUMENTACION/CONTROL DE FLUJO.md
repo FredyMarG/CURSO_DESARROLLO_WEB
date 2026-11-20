@@ -985,3 +985,34 @@ Dominar estas estructuras es fundamental antes de aprender manejo de excepciones
 ✅ Prevención de bucles infinitos
 
 ✅ Arquitectura basada en estados
+
+---
+
+# 🚀 Patrones Modernos de Control de Flujo
+
+1. **Early Return (Cláusulas de Guarda):** Valida errores al inicio y retorna pronto para evitar `if/else` profundamente anidados.
+```javascript
+function procesarPedido(pedido) {
+    if (!pedido) return;
+    if (!pedido.pagado) throw new Error("Pendiente de pago");
+    enviar(pedido);
+}
+```
+2. **Nullish Coalescing (`??`) y Optional Chaining (`?.`):** Evitan condicionales largos para comprobar `null`/`undefined`.
+```javascript
+const tema = usuario?.preferencias?.tema ?? "oscuro";
+```
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Estructura / Operador | Uso principal | Ejemplo |
+| :--- | :--- | :--- |
+| `if / else if / else` | Bifurcación condicional estándar. | `if (edad >= 18) { ... }` |
+| Ternario (`cond ? a : b`) | Asignación condicional en una expresión. | `const tipo = ok ? "Pro" : "Free";` |
+| `for...of` | Itera valores de iterables (`Array`, `String`, `Set`). | `for (const item of lista) { ... }` |
+| `for...in` | Itera claves enumerables de un objeto. | `for (const key in obj) { ... }` |
+| `while` / `do...while` | Repite mientras la condición sea verdadera. | `while (cola.length > 0) { ... }` |
+| `break` / `continue` | Sale del bucle o salta a la siguiente iteración. | `if (x < 0) continue;` |
+| `?.` y `??` | Acceso seguro y valor por defecto ante `null/undefined`. | `user?.name ?? "Anónimo"` |

@@ -850,3 +850,24 @@ Async/Await
 ```
 
 Sin embargo, dominar los callbacks sigue siendo indispensable porque muchas herramientas y librerías modernas se apoyan en ellos internamente.
+
+---
+
+# 20. Callbacks en JavaScript Moderno
+
+Aunque la asincronía compleja migró a **Promesas** y **`async/await`**, los callbacks siguen siendo omnipresentes en código síncrono y reactivo:
+* **Métodos de Arrays:** `.map()`, `.filter()`, `.reduce()`, `.find()`, `.sort()`.
+* **Eventos del DOM:** `element.addEventListener("click", (e) => { ... })`.
+* **Temporizadores y Observadores:** `setTimeout`, `IntersectionObserver`, `ResizeObserver`.
+
+---
+
+# 📋 HOJA DE TRUCOS (CHEATSHEET)
+
+| Patrón / Concepto | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| Callback síncrono | Se ejecuta inmediatamente dentro de otra función. | `[1, 2, 3].map(n => n * 2)` |
+| Callback asíncrono | Se ejecuta después al completarse un evento o timer. | `setTimeout(() => console.log("Listo"), 1000)` |
+| Error-First Callback | Convención clásica `(err, data)` en Node.js. | `fs.readFile("a.txt", (err, data) => ...)` |
+| Callback Hell | Anidación excesiva difícil de mantener. | Se resuelve con **Promesas** o `async/await`. |
+| Promisificar callback | Envolver un callback antiguo en `new Promise`. | `const wait = ms => new Promise(r => setTimeout(r, ms))` |

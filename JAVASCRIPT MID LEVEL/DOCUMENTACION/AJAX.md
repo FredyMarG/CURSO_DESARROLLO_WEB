@@ -20,8 +20,10 @@
 11. Diagrama de ciclo de vida de una petición
 12. Buenas prácticas
 13. Errores comunes
-14. Ejercicios
-15. Resumen
+14. Comparativa: `XMLHttpRequest` vs `fetch()` y código legacy
+15. Ejercicios
+16. Resumen
+17. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -274,6 +276,26 @@ Imagina que estás trabajando en tu escritorio y necesitas un reporte de la ofic
 
 ---
 
+# Comparativa: `XMLHttpRequest` vs `fetch()` y código legacy
+
+Hoy en día, **`fetch()`** (junto con `async/await`) ha reemplazado casi por completo a `XMLHttpRequest` en proyectos nuevos. Sin embargo, entender `XHR` sigue siendo valioso en el mundo profesional:
+
+| Característica | `XMLHttpRequest` (XHR) | `fetch()` (Estándar moderno) |
+| :--- | :--- | :--- |
+| **Paradigma** | Basado en eventos y callbacks (`onload`, `onerror`). | Basado en **Promesas** (`async/await`, `.then()`). |
+| **Manejo de errores HTTP** | Se verifica `xhr.status` dentro de `onload`. | `fetch()` no rechaza en `404`/`500`; se debe validar `if (!res.ok)`. |
+| **Progreso de subida** | **Nativo y sencillo** via `xhr.upload.onprogress`. | Complejo (requiere `ReadableStream` en el body). |
+| **Cancelación** | Método directo `xhr.abort()`. | `AbortController` y `AbortSignal`. |
+| **Timeout** | Propiedad `xhr.timeout = 5000`. | `AbortSignal.timeout(5000)`. |
+| **Lectura de cuerpo** | `xhr.responseText` o `xhr.response` (con `responseType`). | Métodos asíncronos: `.json()`, `.text()`, `.blob()`. |
+
+### ¿Cuándo sigue apareciendo `XMLHttpRequest` hoy?
+1. **Bases de código legacy y librerías clásicas:** Aplicaciones empresariales antiguas (jQuery `$.ajax`, sistemas bancarios o ERPs mantenidos por años).
+2. **Barras de progreso de subida de archivos:** Cuando necesitas mostrar un porcentaje exacto (`0%` → `100%`) al subir un video o archivo grande, `xhr.upload.onprogress` sigue siendo la solución nativa más directa y compatible en todos los navegadores.
+3. **Internamente en Axios (en navegadores o adaptadores):** Librerías HTTP populares encapsulan XHR por debajo para ofrecer compatibilidad uniforme y eventos de progreso (`onUploadProgress`).
+
+---
+
 # Buenas prácticas
 
 ✅ **Usa siempre `try/catch` al parsear la respuesta:** El servidor podría responder con un código HTTP 200 pero devolver un texto corrupto o un mensaje de error que no sea un JSON válido. El método `JSON.parse(xhr.responseText)` lanzará un error que debes capturar.
@@ -320,3 +342,21 @@ Escribe un script de JavaScript que capture el envío de un formulario de regist
 *   **`ActiveXObject`** fue la implementación propietaria de Microsoft para permitir AJAX dentro de los ecosistemas antiguos de Internet Explorer.
 *   El evento moderno **`.onload`** simplifica la lectura de respuestas al activarse únicamente cuando la operación de red se ha completado.
 *   **`FormData`** permite agrupar y serializar colecciones complejas de inputs de formularios y archivos binarios nativos de forma automática y transparente antes de ser despachados mediante una petición `POST`.
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento / Método | Descripción rápida | Ejemplo |
+| :--- | :--- | :--- |
+| `new XMLHttpRequest()` | Crea una nueva instancia XHR. | `const xhr = new XMLHttpRequest();` |
+| `xhr.open(metodo, url)` | Configura verbo HTTP y destino. | `xhr.open("GET", "/api/datos");` |
+| `xhr.setRequestHeader()` | Define cabecera HTTP antes de `send()`. | `xhr.setRequestHeader("Content-Type", "application/json");` |
+| `xhr.send(body)` | Envía la petición por la red. | `xhr.send(JSON.stringify(datos));` |
+| `xhr.onload` | Se ejecuta al completar la descarga (`readyState === 4`). | `xhr.onload = () => { ... };` |
+| `xhr.onerror` | Se ejecuta ante fallo de red / CORS. | `xhr.onerror = () => console.error("Sin red");` |
+| `xhr.timeout` / `ontimeout` | Tiempo máximo en ms y su manejador. | `xhr.timeout = 5000;` |
+| `xhr.upload.onprogress` | Mide el progreso de subida de archivos. | `xhr.upload.onprogress = (e) => { ... };` |
+| `xhr.abort()` | Cancela una petición en curso. | `xhr.abort();` |
+| `xhr.status` / `responseText` | Código HTTP y texto devuelto por el servidor. | `if (xhr.status === 200) JSON.parse(xhr.responseText);` |
+| `new FormData(form)` | Serializa campos y archivos de un `<form>`. | `const fd = new FormData(formEl);` |

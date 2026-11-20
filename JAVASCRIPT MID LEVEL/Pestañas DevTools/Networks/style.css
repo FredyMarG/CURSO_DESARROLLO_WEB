@@ -1,43 +1,70 @@
-/**
- * 🛠️ MODULE: NETWORK DEVTOOLS LAB
- * 
- * ARQUITECTURA: Interfaz de alto contraste diseñada para la inspección de logs y tráfico.
- * DX (Developer Experience): Micro-interacciones optimizadas para identificar entradas de datos.
- */
-
-/* BASE STYLES: Configuración global del documento */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --surface-alt: #1e293b;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-    color: #222;               /* Slate-900: Color base para textos descriptivos externos */
-    font-family: sans-serif;   /* Tipografía estándar para garantizar legibilidad y carga veloz */
-    padding: 2.5rem;           /* Espaciado generoso para separar el contenido de los bordes del navegador */
-    background-color: #f4f4f9; /* Tono neutro de fondo para reducir la fatiga visual */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-/* TERMINAL CONTEXT: Contenedor oscuro para visualización de logs de red */
-div {
-    background-color: #000;    /* Fondo negro: simula un entorno de consola o terminal de tráfico */
-    padding: 25px;             /* Define el área de padding interna para separar los logs del borde */
-    border-radius: 10px;       /* Bordes suavizados para una estética de hardware/software moderno */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* Profundidad visual para destacar el monitor de red */
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
 }
-
-/* HEADINGS: Títulos dentro del monitor */
-h2 {
-    color: #fff;               /* Máximo contraste para encabezados sobre fondo oscuro */
-    margin-top: 0;             /* Alineación vertical perfecta con el contenedor */
-    font-size: 1.4rem;         /* Escala tipográfica moderada para jerarquía interna */
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
 }
-
-/* LOG ITEMS: Representación de cada petición o recurso */
-p {
-    color: #ccc;               /* Gris suave: legibilidad óptima para datos técnicos secundarios */
-    margin: 10px 0;            /* Espaciado vertical entre peticiones para facilitar el escaneo visual */
-    transition: all 0.2s ease; /* Transición fluida para efectos de interacción */
+.subtitle, .desc { color: var(--muted); font-size: 0.92rem; }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
 }
-
-/* INTERACTION: Feedback visual al inspeccionar una línea */
-p:hover {
-    background: #cc0000;       /* Rojo: indica selección activa sobre una petición específica */
-    color: #fff;               /* Cambio a blanco puro para asegurar el contraste en hover */
-    cursor: pointer;           /* Indica al usuario que el log es un elemento accionable */
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.btn {
+    background: var(--surface-alt);
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.5rem 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.84rem;
+    white-space: pre-wrap;
+    min-height: 170px;
 }

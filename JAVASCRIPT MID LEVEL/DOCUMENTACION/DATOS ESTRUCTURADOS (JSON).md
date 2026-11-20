@@ -10,15 +10,17 @@
 1. ¿Qué es JSON?
 2. Definición, Usos y Sintaxis
 3. El viaje de los datos: Red vs. Memoria
-4. Serialización con `JSON.stringify()`
-5. Deserialización con `JSON.parse()`
-6. ¿Qué es un JSON Polyfill?
-7. Analogía del mundo real
-8. Diagrama de flujo conceptual
-9. Buenas prácticas
-10. Errores comunes (SyntaxError)
-11. Ejercicios
-12. Resumen
+4. Serialización con `JSON.stringify()` (`replacer` y `space`)
+5. Deserialización con `JSON.parse()` (`reviver` y manejo de `Date`/`Map`/`Set`)
+6. Copia profunda moderna: `structuredClone()` vs `JSON`
+7. ¿Qué es un JSON Polyfill?
+8. Analogía del mundo real
+9. Diagrama de flujo conceptual
+10. Buenas prácticas
+11. Errores comunes (SyntaxError)
+12. Ejercicios
+13. Resumen
+14. Hoja de Trucos (Cheatsheet)
 
 ---
 
@@ -101,6 +103,20 @@ console.log(cadenaJSON);
 // Resultado: '{"nombre":"Ana","roles":["admin","editor"],"edad":32}'
 ```
 
+### Parámetros avanzados: `replacer` y `space`
+`JSON.stringify(valor, replacer, space)` acepta dos parámetros opcionales muy útiles:
+1. **`replacer` (función o array):** Filtra o transforma qué propiedades incluir (por ejemplo, ocultar contraseñas).
+2. **`space` (número o string):** Define la indentación para hacer el JSON legible ("pretty print").
+
+```javascript
+const cuenta = { usuario: "ana", password: "123", rol: "admin" };
+
+// Ocultar 'password' usando replacer e indentar con 2 espacios
+const seguro = JSON.stringify(cuenta, (clave, valor) => {
+    return clave === "password" ? undefined : valor;
+}, 2);
+```
+
 ---
 
 # Deserialización con `JSON.parse()`
@@ -118,6 +134,49 @@ const tarea = JSON.parse(respuestaDelServidor);
 console.log(typeof tarea); // "object"
 console.log(tarea.id);      // 101
 console.log(tarea.completado); // true
+```
+
+### Serialización de `Date`, `Map` y `Set` (y uso de `reviver`)
+* **`Date`:** `JSON.stringify()` convierte automáticamente un `Date` a string ISO (`"2026-10-19T12:00:00.000Z"`), pero `JSON.parse()` lo deja como string. Puedes reconstruirlo con el segundo parámetro **`reviver`**:
+```javascript
+const texto = '{"evento":"Lanzamiento","fecha":"2026-10-19T12:00:00.000Z"}';
+const obj = JSON.parse(texto, (clave, valor) => {
+    return clave === "fecha" ? new Date(valor) : valor;
+});
+console.log(obj.fecha instanceof Date); // true
+```
+* **`Map` y `Set`:** Si los pasas directo a `JSON.stringify()`, se convierten en `{}` vacío. Conviértelos antes a estructuras estándar:
+```javascript
+const etiquetas = new Set(["js", "web"]);
+const mapa = new Map([["tema", "oscuro"]]);
+
+JSON.stringify([...etiquetas]);            // '["js","web"]'
+JSON.stringify(Object.fromEntries(mapa));  // '{"tema":"oscuro"}'
+```
+
+---
+
+# Copia profunda moderna: `structuredClone()` vs `JSON`
+
+Durante años se usó el truco `JSON.parse(JSON.stringify(obj))` para clonar objetos profundamente, pero **pierde** tipos como `Date`, `Map`, `Set`, `RegExp`, `undefined` y falla con referencias circulares.
+
+Hoy el estándar moderno en navegadores y Node.js es **`structuredClone()`**:
+
+```javascript
+const original = {
+    nombre: "Proyecto",
+    creado: new Date(),
+    tags: new Set(["es2024", "web"]),
+    meta: { version: 2 }
+};
+original.self = original; // Referencia circular soportada
+
+const copia = structuredClone(original);
+copia.meta.version = 3;
+
+console.log(original.meta.version); // 2 (intacto)
+console.log(copia.creado instanceof Date); // true
+console.log(copia.tags instanceof Set);    // true
 ```
 
 ---
@@ -237,3 +296,18 @@ Simula la recepción de una respuesta de API corrupta usando una cadena de texto
 *   **`JSON.parse()`** realiza la **deserialización**: toma un string con formato JSON válido y lo reconstruye en un objeto de JavaScript utilizable.
 *   Cualquier fallo de formato al usar `.parse()` disparará un **`SyntaxError`** que debe ser controlado.
 *   Históricamente se usaban **JSON Polyfills** para dotar de soporte de parseo nativo a los navegadores que carecían de estas herramientas globales.
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Método / Concepto | Descripción | Ejemplo |
+| :--- | :--- | :--- |
+| `JSON.stringify(obj)` | Convierte objeto JS a string JSON. | `JSON.stringify({ a: 1 })` → `'{"a":1}'` |
+| `JSON.stringify(obj, null, 2)` | Serializa con indentación legible de 2 espacios. | `JSON.stringify(user, null, 2)` |
+| `JSON.stringify(obj, replacer)` | Filtra o transforma claves al serializar. | `JSON.stringify(obj, ["id", "name"])` |
+| `JSON.parse(str)` | Convierte string JSON válido en objeto JS. | `JSON.parse('{"ok":true}')` |
+| `JSON.parse(str, reviver)` | Transforma valores al deserializar (ej. `Date`). | `JSON.parse(str, (k, v) => ...)` |
+| `structuredClone(obj)` | Copia profunda moderna (preserva `Date`, `Map`, `Set`). | `const copia = structuredClone(original)` |
+| `[...set]` / `Object.fromEntries(map)` | Prepara `Set` y `Map` antes de serializar a JSON. | `JSON.stringify([...miSet])` |
+| `try { JSON.parse(...) } catch` | Evita que un JSON corrupto detenga la app (`SyntaxError`). | `try { return JSON.parse(raw); } catch { return null; }` |

@@ -1,42 +1,49 @@
 <!DOCTYPE html>
-<!-- Definición del tipo de documento como HTML5 para que el navegador interprete los estándares modernos. -->
 <html lang="es">
 <head>
-    <!-- Metadatos esenciales para el soporte de caracteres especiales y el ajuste correcto en dispositivos móviles. -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Título descriptivo que se visualiza en la pestaña del navegador. -->
-    <title>Laboratorio de Eventos de Interfaz</title>
-    
-    <!-- Vinculación con la hoja de estilos externa para aplicar el diseño visual "claro" y profesional. -->
+    <title>Guía Interactiva — Eventos de Interfaz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Eventos del DOM</span>
+            <h1>Eventos de Interfaz: <code>select</code>, <code>resize</code>, <code>scroll</code> &amp; <code>error</code></h1>
+            <p class="subtitle">Prueba selección de texto, redimensionamiento de ventana, scroll pasivo y manejo de error en imágenes.</p>
+        </div>
+    </header>
 
-    <!-- 
-         Contenedor Principal (.contenedor1): 
-         Funciona como el "wrapper" o tarjeta (card) central. Su propósito es agrupar 
-         los elementos del laboratorio y aplicarles el centrado y la estética de tarjeta blanca.
-    -->
-    <div class="contenedor1">
-        <!-- Título Principal (h1): Es el encabezado del laboratorio, estilizado para dar jerarquía visual. -->
-        <h1>Eventos de Interfaz</h1>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Evento <code>select</code> &amp; <code>focus</code>/<code>blur</code></h2>
+            <p class="desc">Selecciona parte del texto dentro del campo para capturar el fragmento exacto.</p>
+            <input id="selectInput" type="text" value="Selecciona cualquier palabra de esta frase con el mouse">
+            <div id="selectOutput" class="output" aria-live="polite">Texto seleccionado: (ninguno)</div>
+        </section>
 
-        <!-- Párrafo descriptivo: Explica al usuario qué acciones realizar para ver los resultados en la consola. -->
-        <p>Interactúa con el elemento o redimensiona la ventana para observar los eventos.</p>
+        <section class="card">
+            <h2>2. Evento <code>resize</code> &amp; <code>scroll</code> Pasivo</h2>
+            <p class="desc">Redimensiona la ventana o haz scroll en el recuadro inferior.</p>
+            <div class="output" id="resizeOutput">Viewport: —</div>
+            <div id="scrollBox" class="scroll-box">
+                <div class="scroll-inner">Desplázate verticalmente aquí para medir <code>scrollTop</code> en tiempo real.</div>
+            </div>
+            <div class="output" id="scrollOutput">Scroll interno: 0 px</div>
+        </section>
 
-        <input type="text" class="prueba">
+        <section class="card full-width">
+            <h2>3. Evento <code>error</code> en Carga de Imagen</h2>
+            <p class="desc">Simula una ruta rota para observar cómo el evento <code>error</code> permite aplicar un fallback limpio.</p>
+            <div class="btn-row">
+                <button type="button" id="btnBrokenImg" class="btn primary">Cargar URL Rota</button>
+                <span id="imgStatus" class="status-text">Esperando prueba...</span>
+            </div>
+            <img id="demoImg" alt="Vista previa de prueba" hidden>
+        </section>
+    </main>
 
-        <img src="https://w.wallhaven.cc/full/9d/wallhaven-9dq59w.jpg" alt="Imagen de ejmplo de eventos de interfaz" class="img-prueba">
-        
-    </div>
-
-    <!-- 
-         Carga del archivo de lógica (script): 
-         El atributo 'defer' asegura que el JavaScript se ejecute una vez que toda la estructura 
-         HTML ha sido cargada y procesada por el navegador. 
-    -->
-    <script src="main.js" defer></script>
+    <script src="main.js"></script>
 </body>
 </html>

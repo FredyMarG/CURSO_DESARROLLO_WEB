@@ -1,607 +1,170 @@
-# 🧠 PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
+# 🧠 Guía Completa de Programación Orientada a Objetos (POO) en JavaScript
 
-## 🚀 Guía Definitiva Nivel DIOS
+La **Programación Orientada a Objetos (POO)** organiza el código en torno a **objetos** que combinan **datos (propiedades)** y **comportamiento (métodos)**. Desde ES6, JavaScript ofrece la sintaxis `class` (azúcar sintáctico sobre su sistema de prototipos) y en ES2022+ incorporó campos privados reales (`#`).
 
 ---
 
-# 📌 1. ¿Qué es la POO?
+## 1. Clases, Constructor e Instancias
 
-La **Programación Orientada a Objetos (POO)** es un paradigma de programación que organiza el código en torno a **objetos**, los cuales representan entidades del mundo real.
+Una **clase** es el molde; un **objeto (instancia)** es cada entidad creada a partir de ese molde usando `new`.
 
-### 💡 Idea clave
+```javascript
+class Producto {
+    constructor(nombre, precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+    }
 
-En vez de pensar en funciones sueltas, pensamos en:
+    describir() {
+        return `${this.nombre} — $${this.precio}`;
+    }
+}
 
+const laptop = new Producto("Laptop Pro", 1200);
+console.log(laptop.describir()); // "Laptop Pro — $1200"
+console.log(laptop instanceof Producto); // true
 ```
-Objeto = Datos (atributos) + Comportamiento (métodos)
+
+---
+
+## 2. Encapsulamiento Real con Campos Privados (`#`) (ES2022)
+
+Antes se usaba el prefijo `_propiedad` por convención, pero seguía siendo accesible desde fuera. Hoy el prefijo `#` garantiza **privacidad estricta** a nivel del motor de JS:
+
+```javascript
+class CuentaBancaria {
+    #saldo = 0; // Campo privado: inaccesible fuera de la clase
+
+    constructor(titular, saldoInicial = 0) {
+        this.titular = titular;
+        if (saldoInicial > 0) this.#saldo = saldoInicial;
+    }
+
+    depositar(monto) {
+        if (monto <= 0) throw new Error("El monto debe ser positivo.");
+        this.#saldo += monto;
+    }
+
+    get saldo() {
+        return this.#saldo;
+    }
+}
+
+const cuenta = new CuentaBancaria("Ana", 100);
+cuenta.depositar(50);
+console.log(cuenta.saldo); // 150
+// console.log(cuenta.#saldo); // ❌ SyntaxError: Private field '#saldo' must be declared in an enclosing class
 ```
 
 ---
 
-## 🎯 ¿Para qué sirve?
+## 3. Getters y Setters (`get` / `set`)
 
-* Modelar problemas reales
-* Reutilizar código
-* Hacer sistemas escalables
-* Facilitar mantenimiento
+Permiten leer o modificar propiedades ejecutando validaciones o cálculos automáticos, pero usándolas con la sintaxis limpia de una propiedad (`obj.prop`) en lugar de un método (`obj.prop()`).
 
----
+```javascript
+class Usuario {
+    #edad;
 
-## 🧪 Ejemplo básico
-
-```js
-class Persona {
     constructor(nombre, edad) {
-        this.nombre = nombre
-        this.edad = edad
-    }
-
-    saludar() {
-        return `Hola, soy ${this.nombre}`
-    }
-}
-
-const p1 = new Persona("Juan", 20)
-console.log(p1.saludar())
-```
-
----
-
-# 🧩 2. CONCEPTOS BÁSICOS DE POO
-
----
-
-## 🏗️ Clase
-
-Es una **plantilla** para crear objetos.
-
-```
-Clase → Molde
-Objeto → Producto final
-```
-
-```js
-class Auto {
-    marca = ""
-    color = ""
-}
-```
-
----
-
-## 📦 Objeto
-
-Es una **instancia de una clase**.
-
-```js
-const carro = new Auto()
-```
-
----
-
-## 🧾 Atributo
-
-Son las **propiedades** del objeto.
-
-```js
-this.nombre = "Juan"
-this.edad = 20
-```
-
----
-
-## ⚙️ Método
-
-Son funciones dentro de la clase.
-
-```js
-saludar() {
-    return "Hola"
-}
-```
-
----
-
-## 🏁 Constructor
-
-Método especial que se ejecuta al crear el objeto.
-
-```js
-constructor(nombre) {
-    this.nombre = nombre
-}
-```
-
----
-
-## 🧬 Instanciación
-
-Proceso de crear un objeto.
-
-```js
-const persona = new Persona("Ana", 25)
-```
-
----
-
-# 🧱 3. CARACTERÍSTICAS DE LA POO
-
----
-
-## 🧠 Abstracción
-
-Oculta los detalles internos y muestra solo lo necesario.
-
-### 📊 Ejemplo
-
-```
-[ Usuario ]
-     |
-     | → login()
-     | → logout()
-
-(No importa cómo funciona internamente)
-```
-
----
-
-## 🧩 Modularidad
-
-Divide el sistema en partes independientes.
-
-```
-Sistema
- ├── Usuario.js
- ├── Producto.js
- └── Carrito.js
-```
-
----
-
-## 🧬 Jerarquía
-
-Organiza clases en niveles.
-
-```
-Animal
- ├── Perro
- └── Gato
-```
-
----
-
-# 🔥 4. OTROS CONCEPTOS CLAVE
-
----
-
-## 🔁 Polimorfismo
-
-Un mismo método puede comportarse diferente.
-
-```js
-class Animal {
-    sonido() {
-        return "Sonido genérico"
-    }
-}
-
-class Perro extends Animal {
-    sonido() {
-        return "Ladrido"
-    }
-}
-```
-
----
-
-## 🧬 Herencia
-
-Permite que una clase herede de otra.
-
-```js
-class Animal {
-    respirar() {
-        return "Respirando"
-    }
-}
-
-class Perro extends Animal {}
-```
-
----
-
-## 🔒 Encapsulamiento
-
-El **encapsulamiento** consiste en **proteger los datos internos de un objeto** y controlar cómo se accede o modifica.
-
-### 💡 Idea clave
-
-```
-NO acceder directamente a los datos
-SÍ usar métodos controlados
-```
-
----
-
-## 🧠 ¿Por qué es importante?
-
-* Evita modificaciones incorrectas
-* Permite validar datos
-* Hace el código más seguro
-* Mejora mantenimiento
-
----
-
-## 🔐 Ejemplo básico (sin encapsulamiento)
-
-```js
-class Cuenta {
-    saldo = 0
-}
-
-const c = new Cuenta()
-c.saldo = -1000 // ❌ Error lógico (no controlado)
-```
-
----
-
-## ✅ Ejemplo con encapsulamiento
-
-```js
-class Cuenta {
-    #saldo = 0
-
-    depositar(valor) {
-        if (valor > 0) {
-            this.#saldo += valor
-        }
-    }
-
-    verSaldo() {
-        return this.#saldo
-    }
-}
-```
-
----
-
-# ⚙️ MÉTODOS ACCESORES (GETTERS Y SETTERS)
-
-Son métodos especiales para **leer y modificar atributos privados de forma controlada**.
-
----
-
-## 👁️ Getter (obtener valor)
-
-Permite acceder a un valor como si fuera una propiedad.
-
-```js
-class Persona {
-    #edad
-
-    constructor(edad) {
-        this.#edad = edad
+        this.nombre = nombre;
+        this.edad = edad; // Invoca al setter automáticamente
     }
 
     get edad() {
-        return this.#edad
-    }
-}
-
-const p = new Persona(20)
-console.log(p.edad) // 20
-```
-
-### 🔍 ¿Qué pasa aquí?
-
-* `get edad()` actúa como propiedad
-* No necesitas usar paréntesis
-* Protege el acceso al dato
-
----
-
-## ✏️ Setter (modificar valor)
-
-Permite cambiar un valor con validación.
-
-```js
-class Persona {
-    #edad
-
-    constructor(edad) {
-        this.#edad = edad
+        return this.#edad;
     }
 
     set edad(valor) {
-        if (valor >= 0) {
-            this.#edad = valor
-        } else {
-            console.log("Edad inválida")
+        if (!Number.isInteger(valor) || valor < 0) {
+            throw new RangeError("La edad debe ser un entero positivo.");
         }
-    }
-}
-
-const p = new Persona(20)
-p.edad = -5 // ❌ bloqueado
-p.edad = 25 // ✅ válido
-```
-
----
-
-## 🔥 Getter + Setter completo
-
-```js
-class Usuario {
-    #password
-
-    constructor(password) {
-        this.#password = password
-    }
-
-    get password() {
-        return "********" // nunca mostrar real
-    }
-
-    set password(nueva) {
-        if (nueva.length >= 6) {
-            this.#password = nueva
-        } else {
-            console.log("Contraseña muy corta")
-        }
+        this.#edad = valor;
     }
 }
 ```
 
 ---
 
-## 🧩 Diagrama mental
+## 4. Herencia (`extends`), `super` y Polimorfismo
 
-```
-[ Usuario ]
-     |
-     | → get password()   → leer seguro
-     | → set password()   → validar antes de cambiar
-     |
-     └── #password (privado)
-```
+Una subclase hereda propiedades y métodos de una clase padre con `extends`. Si defines un `constructor` en la subclase, **debes llamar a `super(...)` antes de usar `this`**.
 
----
-
-## ⚠️ Errores comunes con getters/setters
-
-* ❌ Olvidar validaciones en setters
-* ❌ Exponer directamente datos sensibles
-* ❌ Pensar que son funciones normales
-
----
-
-## ✅ Buenas prácticas
-
-* ✔️ Usar getters para solo lectura
-* ✔️ Validar SIEMPRE en setters
-* ✔️ No abusar (solo cuando sea necesario)
-* ✔️ Mantener atributos privados (`#`)
-
----
-
-## 🧠 Nivel PRO (detalle importante)
-
-Los getters y setters permiten:
-
-* Crear lógica sin cambiar cómo se usa el objeto
-* Simular propiedades dinámicas
-* Mantener compatibilidad si cambias implementación interna
-
----
-
-## 🚀 Ejemplo avanzado
-
-```js
-class Producto {
-    #precio
-
-    constructor(precio) {
-        this.#precio = precio
+```javascript
+class Empleado {
+    constructor(nombre, salarioBase) {
+        this.nombre = nombre;
+        this.salarioBase = salarioBase;
     }
 
-    get precioConIVA() {
-        return this.#precio * 1.19
+    calcularPago() {
+        return this.salarioBase;
     }
 }
 
-const p = new Producto(100)
-console.log(p.precioConIVA) // 119
-```
+class Desarrollador extends Empleado {
+    constructor(nombre, salarioBase, bono = 0) {
+        super(nombre, salarioBase); // Llama al constructor de Empleado
+        this.bono = bono;
+    }
 
-👉 Aquí el getter actúa como una propiedad calculada
-
----
-
-🔥 **Conclusión:**
-
-Encapsular + usar getters/setters = código seguro, profesional y escalable.
-
-Es una de las diferencias clave entre un programador básico y uno avanzado.
-
----
-
-# ⚠️ ERRORES COMUNES
-
-* ❌ No usar clases cuando el problema lo requiere
-* ❌ Mezclar lógica sin estructura
-* ❌ No entender "this"
-* ❌ Crear clases innecesarias
-
----
-
-# ✅ BUENAS PRÁCTICAS
-
-* ✔️ Una clase = una responsabilidad
-* ✔️ Usar nombres claros
-* ✔️ Evitar código repetido (usar herencia)
-* ✔️ Encapsular datos importantes
-
----
-
-# 🧠 RESUMEN FINAL
-
-```
-POO
- ├── Clase
- ├── Objeto
- ├── Atributos
- ├── Métodos
- ├── Herencia
- ├── Polimorfismo
- └── Encapsulamiento
-```
-
----
-
----
-
-# ⚡ MÉTODOS ESTÁTICOS (STATIC)
-
-Los **métodos estáticos** pertenecen a la clase, **no a los objetos**.
-
-### 💡 Idea clave
-
-```
-Se usan SIN crear una instancia
-```
-
----
-
-## 🧠 ¿Para qué sirven?
-
-* Crear utilidades relacionadas con la clase
-* Operaciones generales
-* Validaciones
-* Métodos auxiliares
-
----
-
-## 🧪 Ejemplo básico
-
-```js
-class Matematica {
-    static sumar(a, b) {
-        return a + b
+    // Polimorfismo: sobrescribe el método del padre
+    calcularPago() {
+        return super.calcularPago() + this.bono;
     }
 }
 
-console.log(Matematica.sumar(5, 3)) // 8
-```
-
-👉 No necesitas hacer:
-
-```js
-const m = new Matematica()
+const dev = new Desarrollador("Carlos", 2000, 500);
+console.log(dev.calcularPago());      // 2500
+console.log(dev instanceof Empleado); // true
 ```
 
 ---
 
-## ⚠️ Diferencia clave
+## 5. Métodos y Propiedades Estáticas (`static`)
 
-```js
-class Ejemplo {
-    static estatico() {
-        return "Soy estático"
-    }
+Pertenecen a la **clase en sí misma**, no a las instancias. Son ideales para utilidades o métodos fábrica (*factory methods*).
 
-    normal() {
-        return "Soy normal"
+```javascript
+class Validador {
+    static LONGITUD_MINIMA = 4;
+
+    static esNombreValido(nombre) {
+        return typeof nombre === "string" && nombre.trim().length >= this.LONGITUD_MINIMA;
     }
 }
 
-Ejemplo.estatico() // ✅
-
-const e = new Ejemplo()
-e.normal() // ✅
-
-e.estatico() // ❌ Error
+console.log(Validador.esNombreValido("Sofía")); // true
+console.log(Validador.esNombreValido("Ana"));   // false
 ```
 
 ---
 
-## 🧩 Diagrama mental
+## ⚠️ Errores Comunes
 
-```
-Clase
- ├── static metodo()   → se usa directo
- └── metodo()          → necesita objeto
-```
+* **Olvidar `new` al instanciar:** `const p = Producto("TV", 500)` lanza `TypeError: Class constructor Producto cannot be invoked without 'new'`.
+* **Usar `this` antes de `super()` en una subclase:** Lanza `ReferenceError`.
+* **Perder el contexto de `this` al pasar métodos como callbacks:** `btn.addEventListener("click", obj.metodo)` hace que `this` sea el botón. Solución: `() => obj.metodo()` o `obj.metodo.bind(obj)`.
+* **Llamar a un método `static` desde una instancia:** `new Validador().esNombreValido(...)` lanza `TypeError`.
 
----
+## ✅ Buenas Prácticas
 
-## 🔥 Ejemplo real (validaciones)
-
-```js
-class Usuario {
-    constructor(nombre) {
-        this.nombre = nombre
-    }
-
-    static validarNombre(nombre) {
-        return nombre.length > 3
-    }
-}
-
-console.log(Usuario.validarNombre("Ana")) // true
-```
+* Nombra las clases en `PascalCase` (`CuentaBancaria`, `CarritoCompras`).
+* Protege el estado interno crítico con campos privados `#` y valida en los `setters` o métodos públicos.
+* Prefiere la **composición** sobre jerarquías de herencia demasiado profundas (evita heredar más de 2 o 3 niveles).
+* Usa `instanceof` cuando necesites verificar si un objeto pertenece a una clase o subclase específica.
 
 ---
 
-## 🧠 Nivel PRO
+## Hoja de Trucos (Cheatsheet) — POO en JavaScript
 
-Puedes combinar métodos estáticos con encapsulamiento:
-
-```js
-class Cuenta {
-    #saldo
-
-    constructor(saldo) {
-        this.#saldo = saldo
-    }
-
-    static crearCuentaBasica() {
-        return new Cuenta(0)
-    }
-}
-
-const c = Cuenta.crearCuentaBasica()
-```
-
-👉 Aquí el método estático actúa como **fábrica de objetos**
-
----
-
-## ⚠️ Errores comunes
-
-* ❌ Intentar usar `this` como si fuera instancia
-* ❌ Llamar métodos estáticos desde objetos
-* ❌ Usarlos cuando deberían ser métodos normales
-
----
-
-## ✅ Buenas prácticas
-
-* ✔️ Usarlos para utilidades relacionadas
-* ✔️ Usarlos como "factory methods"
-* ✔️ Mantener lógica independiente de instancia
-
----
-
-🔥 **Conclusión:**
-
-Los métodos estáticos son ideales para lógica general que no depende de un objeto específico.
-
----
-
-# 🚀 CONCLUSIÓN
-
-La POO te permite escribir código más organizado, reutilizable y fácil de mantener. Es fundamental para proyectos grandes y desarrollo profesional.
-
----
-
-🔥 Si dominas esto, estás a otro nivel.
+| Elemento | Sintaxis | Propósito |
+| :--- | :--- | :--- |
+| **Clase** | `class Nombre { ... }` | Plantilla para crear objetos |
+| **Constructor** | `constructor(a, b) { this.a = a; }` | Se ejecuta automáticamente con `new` |
+| **Campo privado** | `#secreto = 0;` | Propiedad encapsulada accesible solo dentro de la clase |
+| **Getter / Setter** | `get prop() {}` / `set prop(v) {}` | Lectura calculada y escritura validada |
+| **Herencia** | `class Hija extends Padre {}` | Reutiliza y extiende otra clase |
+| **`super()`** | `super(arg)` / `super.metodo()` | Invoca constructor o método de la clase padre |
+| **Estático** | `static utilidad() {}` | Se llama directo en la clase (`Clase.utilidad()`) |
+| **Verificar tipo** | `obj instanceof Clase` | Devuelve `true` si `obj` deriva de `Clase` |

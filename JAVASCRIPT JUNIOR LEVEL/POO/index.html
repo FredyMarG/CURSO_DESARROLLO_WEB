@@ -1,27 +1,82 @@
-<!DOCTYPE html> <!-- Document Type Definition (DTD) -->
-
-<!-- 
-    LABORATORIO: PROGRAMACIÓN ORIENTADA A OBJETOS (POO)
-    Descripción: Este archivo sirve como host para la lógica de clases.
-    La POO en JS se basa en prototipos, aunque aquí usamos la sintaxis de 'class' (ES6).
--->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Codificación de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Escalamiento en dispositivos -->
-    
-    <title>JS Junior - POO</title>
-    <!-- Vinculación del archivo de estilos externo -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de POO</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Laboratorio de POO</h1>
-    <p>Abre la <b>Consola (Ctrl + Shift + I)</b> para ver la creación de objetos y el uso de herencia.</p>
+    <div class="app-shell">
+        <header class="hero">
+            <span class="badge">Módulo 12 · Clases ES2022+</span>
+            <h1>Programación Orientada a Objetos (POO)</h1>
+            <p>Crea instancias con <code>class</code> y <code>new</code>, extiende comportamiento con <code>extends</code> y <code>super()</code>, encapsula datos con campos privados (<code>#</code>) y usa métodos <code>static</code>.</p>
+        </header>
 
-    <!-- 
-        CARGA DE MÓDULO:
-        'poo.js' contiene la definición de Clases, Getters, Setters y Herencia.
-    -->
+        <main class="grid">
+            <!-- Tarjeta 1: Herencia y Polimorfismo -->
+            <section class="card" aria-labelledby="p1">
+                <h2 id="p1">1. Clases, Herencia (<code>extends</code>) & <code>instanceof</code></h2>
+                <p class="note">Instancia un <code>Perro</code> (subclase de <code>Animal</code>) y observa cómo hereda propiedades y sobrescribe métodos.</p>
+                <div class="controls">
+                    <div>
+                        <label for="poo-nombre">Nombre de la mascota:</label>
+                        <input id="poo-nombre" type="text" value="Max">
+                    </div>
+                    <div>
+                        <label for="poo-raza">Raza:</label>
+                        <input id="poo-raza" type="text" value="Golden Retriever">
+                    </div>
+                    <button id="btn-crear-perro" type="button">Instanciar Perro</button>
+                </div>
+                <pre class="code-preview">class Perro extends Animal { constructor(n, r) { super(n); } }</pre>
+                <div id="out-poo-herencia" class="output" aria-live="polite">Pulsa "Instanciar Perro" para crear el objeto.</div>
+            </section>
+
+            <!-- Tarjeta 2: Encapsulamiento (#saldo) -->
+            <section class="card" aria-labelledby="p2">
+                <h2 id="p2">2. Encapsulamiento Real (<code>#saldo</code>) y Getters</h2>
+                <p class="note"><code>#saldo</code> es privado: solo puede modificarse mediante <code>depositar()</code> o <code>retirar()</code> validados.</p>
+                <div class="controls">
+                    <div>
+                        <label for="poo-monto">Monto ($):</label>
+                        <input id="poo-monto" type="number" value="50">
+                    </div>
+                    <div class="row">
+                        <button id="btn-depositar" type="button">Depositar</button>
+                        <button id="btn-retirar" type="button" class="secondary">Retirar</button>
+                    </div>
+                </div>
+                <pre class="code-preview">class Cuenta { #saldo = 100; get saldo() { return this.#saldo; } }</pre>
+                <div id="out-poo-cuenta" class="output" aria-live="polite">Saldo inicial: $100</div>
+            </section>
+
+            <!-- Tarjeta 3: Métodos Estáticos -->
+            <section class="card" aria-labelledby="p3">
+                <h2 id="p3">3. Métodos Estáticos (<code>static</code>)</h2>
+                <p class="note">Los métodos estáticos se llaman directo en la clase (sin usar <code>new</code>).</p>
+                <div class="controls">
+                    <div>
+                        <label for="poo-validar-nombre">Probar <code>Validador.esNombreValido(texto)</code>:</label>
+                        <input id="poo-validar-nombre" type="text" value="Sofía">
+                    </div>
+                    <button id="btn-static" type="button">Validar con Método Estático</button>
+                </div>
+                <pre class="code-preview">Validador.esNombreValido("Sofía") // true</pre>
+                <div id="out-poo-static" class="output" aria-live="polite">Prueba nombres cortos (&lt; 3 letras) vs válidos.</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
+    </div>
+
     <script src="poo.js"></script>
 </body>
 </html>

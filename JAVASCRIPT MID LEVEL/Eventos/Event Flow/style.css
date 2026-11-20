@@ -1,26 +1,87 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: JAVASCRIPT MID LEVEL/Eventos/Event Flow/style.css
- * Carpeta del tema: «Event Flow». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
- */
-
-body{
-    color: #222; /* Color de texto gris oscuro */
-    font-family: sans-serif; /* Fuente genérica sin serifa */
+:root {
+    --bg: #0b1120;
+    --surface: #111827;
+    --border: #1f2937;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --accent: #38bdf8;
 }
-
-.contenedor1{
-    padding: 30px; /* Relleno interno de 30px */
-    background: red; /* Color de fondo rojo */
-    /* Margen superior para separar del borde de la página o de otros elementos */
-    margin-top: 20px; 
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
 }
-
-.contenedor2{
-    padding: 30px; /* Relleno interno de 30px */
-    background:blue; /* Color de fondo azul */
-    /* Margen superior para separar del contenedor1 */
-    margin-top: 20px; 
+.container { width: min(1000px, 92%); margin-inline: auto; }
+.hero {
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
+}
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 0.6rem;
+}
+.subtitle { color: var(--muted); }
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 1.25rem;
+    padding: 1.75rem 0 3rem;
+}
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+.controls { display: flex; flex-direction: column; gap: 0.45rem; font-size: 0.9rem; color: var(--muted); }
+.inline-check { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; }
+.box {
+    padding: 1.25rem;
+    border-radius: 10px;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+.abuelo { background: rgba(239, 68, 68, 0.12); border-color: #ef4444; color: #fca5a5; }
+.padre { background: rgba(59, 130, 246, 0.14); border-color: #3b82f6; color: #93c5fd; }
+.btn {
+    background: #1e293b;
+    color: var(--text);
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 0.55rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    align-self: flex-start;
+}
+.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.btn.small { padding: 0.3rem 0.65rem; font-size: 0.8rem; }
+.terminal-header { display: flex; justify-content: space-between; align-items: center; }
+.terminal {
+    background: #020617;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.84rem;
+    min-height: 190px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
 }

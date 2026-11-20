@@ -3156,6 +3156,132 @@ elemento.nodeType
 
 ---
 
+# 🚀 MÉTODOS Y PATRONES MODERNOS DEL DOM
+
+## 1️⃣ `replaceChildren()` (Limpiar o reemplazar hijos en un solo paso)
+
+Antes, para vaciar un contenedor se usaba `contenedor.innerHTML = ""` (que invoca al parser HTML). Hoy la forma estándar, limpia y rápida es `replaceChildren()`:
+
+```javascript
+// Vaciar completamente un contenedor
+lista.replaceChildren();
+
+// Reemplazar todos sus hijos por nuevos nodos de una sola vez
+const item1 = document.createElement("li");
+item1.textContent = "Nuevo ítem 1";
+const item2 = document.createElement("li");
+item2.textContent = "Nuevo ítem 2";
+
+lista.replaceChildren(item1, item2);
+```
+
+---
+
+## 2️⃣ `closest()` y `matches()`
+
+* **`elemento.closest(selector)`:** Sube por el árbol DOM (incluyendo el propio elemento) y devuelve el **ancestro más cercano** que coincida con el selector CSS, o `null` si no existe.
+* **`elemento.matches(selector)`:** Devuelve `true` o `false` indicando si el elemento cumple con un selector CSS.
+
+```javascript
+const boton = document.querySelector(".btn-eliminar");
+const tarjeta = boton.closest(".card"); // Encuentra la tarjeta contenedora
+
+if (tarjeta && tarjeta.matches(".card.activa")) {
+    console.log("La tarjeta está activa");
+}
+```
+
+---
+
+## 3️⃣ Delegación de Eventos (*Event Delegation*)
+
+En lugar de añadir un `addEventListener` a cada uno de los 100 botones de una lista (lo cual consume memoria y falla para elementos creados dinámicamente), escucha en el **contenedor padre** y filtra con `event.target.closest()`:
+
+```javascript
+const listaTareas = document.querySelector("#lista-tareas");
+
+listaTareas.addEventListener("click", (event) => {
+    const botonEliminar = event.target.closest(".btn-eliminar");
+    if (!botonEliminar) return; // El clic no fue en un botón eliminar
+
+    const tarea = botonEliminar.closest("li");
+    tarea?.remove();
+});
+```
+
+---
+
+## 4️⃣ `IntersectionObserver` (Introducción)
+
+Permite detectar de forma **asíncrona y sin afectar el rendimiento** cuándo un elemento entra o sale del *viewport* (área visible de la pantalla). Reemplaza al antiguo y costoso evento `scroll`.
+
+```javascript
+const observador = new IntersectionObserver((entradas, obs) => {
+    for (const entrada of entradas) {
+        if (entrada.isIntersecting) {
+            entrada.target.classList.add("visible");
+            obs.unobserve(entrada.target); // Deja de observar si solo anima una vez
+        }
+    }
+}, { threshold: 0.2 }); // Se dispara cuando al menos el 20% es visible
+
+document.querySelectorAll(".animar-scroll").forEach((el) => observador.observe(el));
+```
+
+---
+
+## 5️⃣ Seguridad en el DOM: `textContent` vs `innerHTML`
+
+* **`textContent`:** Inserta texto plano literal. El navegador **NO** interpreta etiquetas HTML ni ejecuta scripts. **Úsalo siempre para datos de usuarios o APIs.**
+* **`innerHTML`:** Parsea la cadena como HTML real. Si concatenas entrada de usuario dentro de `innerHTML`, expones tu sitio a ataques **XSS (Cross-Site Scripting)**.
+
+```javascript
+const comentarioUsuario = '<img src=x onerror="alert(1)">';
+
+// ❌ INSEGURO (ejecuta código malicioso)
+caja.innerHTML = `<p>${comentarioUsuario}</p>`;
+
+// ✅ SEGURO (muestra el texto literal de forma inofensiva)
+const p = document.createElement("p");
+p.textContent = comentarioUsuario;
+caja.append(p);
+```
+
+---
+
+# ⚠️ ERRORES COMUNES
+
+* ❌ Usar `innerHTML` con datos ingresados por el usuario (riesgo de XSS).
+* ❌ Añadir cientos de `addEventListener` individuales en listas dinámicas en lugar de usar **delegación de eventos**.
+* ❌ Olvidar `defer` en `<script src="app.js" defer>` cuando el script está en el `<head>`, provocando que `querySelector` devuelva `null`.
+* ❌ Confundir colecciones vivas (`getElementsByClassName`) con estáticas (`querySelectorAll`).
+
+# ✅ BUENAS PRÁCTICAS
+
+* ✔️ Usa `querySelector()` / `querySelectorAll()` por su flexibilidad con selectores CSS.
+* ✔️ Usa `append()`, `prepend()` y `replaceChildren()` para manipular nodos de forma moderna.
+* ✔️ Usa `DocumentFragment` cuando insertes decenas o cientos de nodos en un bucle para evitar múltiples *reflows*.
+* ✔️ Usa `classList` en lugar de manipular `element.style` en exceso para mantener separados los estilos (CSS) de la lógica (JS).
+
+---
+
+# Hoja de Trucos (Cheatsheet) — DOM
+
+| Categoría | Método / Propiedad | Uso |
+| :--- | :--- | :--- |
+| **Selección** | `document.querySelector(sel)` / `querySelectorAll(sel)` | Primer elemento o `NodeList` estática |
+| **Navegación** | `el.closest(sel)` / `el.matches(sel)` | Ancestro más cercano / comprobar selector |
+| **Contenido seguro** | `el.textContent = "..."` | Leer o escribir texto sin riesgo XSS |
+| **Clases** | `el.classList.add/remove/toggle/contains` | Manipular clases CSS |
+| **Creación** | `document.createElement("tag")` | Crear nodo HTML en memoria |
+| **Inserción** | `padre.append(a, b)` / `padre.prepend(a)` | Insertar al final o al inicio |
+| **Reemplazo / Limpieza** | `padre.replaceChildren(...nodos)` | Vaciar o sustituir hijos |
+| **Rendimiento** | `document.createDocumentFragment()` | Agrupar inserciones en un solo render |
+| **Eventos** | `padre.addEventListener("click", fn)` | Base para delegación de eventos |
+| **Visibilidad** | `new IntersectionObserver(cb, opts)` | Lazy loading y animaciones al scroll |
+
+---
+
 # 🌟 FRASE FINAL
 
 ```txt

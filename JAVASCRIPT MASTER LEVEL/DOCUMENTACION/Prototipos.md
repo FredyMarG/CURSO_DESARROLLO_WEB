@@ -332,3 +332,79 @@ Instancia un objeto final y demuestra cómo puede invocar métodos de los 3 esla
 *   **Prototype Chain:** Es el camino de búsqueda ascendente que recorre JavaScript a través de los enlaces `[[Prototype]]` hasta encontrar una propiedad o toparse con `null`.
 *   **Prototype Object:** Es el objeto contenedor alojado en `Constructor.prototype` que sirve como molde para las instancias creadas con `new`.
 *   **Características clave:** Los prototipos son objetos reales con **existencia física única en memoria**, son **mutables en tiempo de ejecución**, pueden **ser llamados o editados directamente**, actúan como **modelos ejemplares de una familia de objetos** y permiten **heredar tanto valores como métodos**.
+
+
+---
+
+# Conceptos Complementarios: `class` / `extends` (Azúcar Sintáctico ES6+)
+
+En JavaScript moderno, la sintaxis **`class`** no crea un sistema de clases clásico como Java o C++; simplemente es **azúcar sintáctico** sobre la herencia prototípica:
+
+```javascript
+class Animal {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+    saludar() {
+        return `Hola, soy ${this.nombre}`;
+    }
+}
+
+class Perro extends Animal {
+    ladrar() {
+        return "¡Guau!";
+    }
+}
+// Internamente, Perro.prototype hereda de Animal.prototype
+```
+
+---
+
+# Solucionario paso a paso
+
+## Solución Nivel 1
+```javascript
+function Vehiculo(marca) {
+    this.marca = marca;
+}
+Vehiculo.prototype.arrancar = function () {
+    console.log(`${this.marca} ha arrancado.`);
+};
+const auto = new Vehiculo("Toyota");
+auto.arrancar();
+```
+
+## Solución Nivel 2
+```javascript
+const base = { tipo: "Usuario", activo: true };
+const admin = Object.create(base);
+admin.nivel = "SuperAdmin";
+console.log(admin.tipo, admin.nivel); // Hereda 'tipo' de base
+```
+
+## Solución Nivel 3
+```javascript
+class Cuenta {
+    constructor(titular, saldo = 0) {
+        this.titular = titular;
+        this.saldo = saldo;
+    }
+    depositar(monto) {
+        this.saldo += monto;
+        return this.saldo;
+    }
+}
+const c1 = new Cuenta("Ana", 100);
+console.log("Nuevo saldo:", c1.depositar(50));
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Concepto / Método | Propósito |
+| :--- | :--- |
+| `Object.getPrototypeOf(obj)` | Inspecciona el prototipo real de un objeto (preferido sobre `__proto__`) |
+| `Object.create(proto)` | Crea un objeto nuevo heredando directamente de `proto` |
+| `Constructor.prototype` | Objeto compartido por todas las instancias creadas con `new` |
+| `obj.hasOwnProperty(prop)` | Verifica si la propiedad es propia o heredada de la cadena |

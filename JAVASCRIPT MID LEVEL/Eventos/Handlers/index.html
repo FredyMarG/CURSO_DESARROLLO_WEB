@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/Eventos/Handlers/index.html
-     Título: Handlers, Listeners y Objeto Evento
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Interactiva — Event Handlers &amp; Opciones Modernas</title>
     <link rel="stylesheet" href="style.css">
-    <title>JS Mid Level - Event Handlers</title>
 </head>
 <body>
-    <!-- Contenedor principal para centrar la interfaz en pantalla -->
-    <main class="main-container">
-        <section class="event-card">
-            <header class="card-header">
-                <h1 class="card-title">Gestión de Eventos</h1>
-                <p class="card-subtitle">Laboratorio de Handlers y Remoción de Listeners</p>
-            </header>
+    <header class="hero">
+        <div class="container">
+            <span class="badge">Eventos del DOM</span>
+            <h1>Event Handlers, <code>{ once }</code>, <code>AbortController</code> &amp; <code>CustomEvent</code></h1>
+            <p class="subtitle">Domina <code>addEventListener</code>, limpieza automática con señales y eventos personalizados.</p>
+        </div>
+    </header>
 
-            <div class="card-body">
-                <button class="button">¡Haz clic aquí!</button>
-                <p class="info-text">El primer clic disparará una alerta y se auto-eliminará. Los siguientes clics solo se verán en consola.</p>
+    <main class="container grid-layout">
+        <section class="card">
+            <h2>1. Listener único (<code>{ once: true }</code>)</h2>
+            <p class="desc">Este botón solo responde al primer clic; después el navegador remueve el listener automáticamente.</p>
+            <button type="button" id="btnOnce" class="btn primary">Haz clic (solo funciona 1 vez)</button>
+            <div id="onceOutput" class="output" aria-live="polite">Esperando primer clic...</div>
+        </section>
+
+        <section class="card">
+            <h2>2. Control con <code>AbortController</code></h2>
+            <p class="desc">Activa o desactiva el listener de clics usando una señal <code>signal</code> sin guardar referencia de función.</p>
+            <div class="btn-row">
+                <button type="button" id="btnTarget" class="btn">Botón de Prueba</button>
+                <button type="button" id="btnAbort" class="btn">Desactivar con abort()</button>
+                <button type="button" id="btnRebind" class="btn primary">Reactivar</button>
             </div>
+            <div id="abortOutput" class="output" aria-live="polite">Listener activo: haz clic en "Botón de Prueba".</div>
+        </section>
+
+        <section class="card full-width">
+            <h2>3. Eventos Personalizados (<code>CustomEvent</code>)</h2>
+            <p class="desc">Emite un evento de dominio <code>usuario:notificacion</code> con payload en <code>e.detail</code>.</p>
+            <div class="btn-row">
+                <input id="customMsgInput" type="text" value="Pedido #402 confirmado">
+                <button type="button" id="btnDispatchCustom" class="btn primary">Disparar CustomEvent</button>
+            </div>
+            <div id="customOutput" class="output" aria-live="polite">Ningún evento personalizado recibido aún.</div>
         </section>
     </main>
 
     <script src="main.js"></script>
 </body>
-<!-- Cierre del documento HTML -->
 </html>

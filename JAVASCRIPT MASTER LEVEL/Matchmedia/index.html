@@ -42,7 +42,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 11</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
 
         <!-- Controles de la Aplicación -->
@@ -682,6 +682,48 @@ mqEscritorio.<span class="token-function">addEventListener</span>(<span class="t
 
                 <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
                     <strong>🎓 ¡Felicidades!</strong> Has completado el módulo de <strong>window.matchMedia() en JavaScript Master Level</strong>. Tu código responsive ahora es limpio, veloz y altamente eficiente.
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Consultas Compuestas y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. Consultas Compuestas y Hoja de Trucos</h2>
+                    <p class="slide-description">Combina múltiples reglas CSS en una sola consulta y repasa la sintaxis esencial de matchMedia().</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🔗</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Combinación con 'and' y ','</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const mq = window.matchMedia(
+  '(min-width: 600px) and (orientation: landscape)'
+);</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Soporta operadores lógicos CSS completos igual que @media en hojas de estilo.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🌙</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Preferencias de Usuario</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>(prefers-color-scheme: dark)
+(prefers-reduced-motion: reduce)
+(pointer: coarse)</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Adapta lógica de JS al tema oscuro, accesibilidad y pantallas táctiles.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>mq.matches -> booleano actual
+mq.addEventListener('change', fn)
+// Evitar addListener() obsoleto</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Ejecuta tu función manejadora una vez al inicio y suscríbela a 'change'.</p>
+                    </div>
                 </div>
             </div>
         </section>

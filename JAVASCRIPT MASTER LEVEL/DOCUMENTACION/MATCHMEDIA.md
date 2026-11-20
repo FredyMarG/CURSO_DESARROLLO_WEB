@@ -302,3 +302,30 @@ configurarNavegacionAdaptativa();
 * **`window.matchMedia()`** permite evaluar reglas *Media Query* de CSS directamente desde JavaScript devolviendo un objeto `MediaQueryList`.
 * **La propiedad `matches`** indica con un booleano (`true`/`false`) si la condición se cumple en ese instante, mientras que **`change` (`onchange`)** dispara una notificación únicamente cuando ese estado cambia.
 * **Es mucho más eficiente que `window.resize`** porque evita ejecuciones innecesarias en cada píxel de movimiento, siendo la herramienta ideal para controlar lógica del DOM, librerías y preferencias del sistema.
+
+
+---
+
+# Conceptos Complementarios: Combinación de Consultas y `Hoja de Trucos`
+
+### 1. Consultas compuestas (`and`, `,`, `not`)
+Puedes combinar múltiples condiciones CSS dentro de la misma cadena de `matchMedia()`:
+```javascript
+// Tablet en orientación horizontal
+const tabletHorizontal = window.matchMedia("(min-width: 600px) and (max-width: 1023px) and (orientation: landscape)");
+
+// Móvil o usuario con reducción de movimiento activa
+const modoLigero = window.matchMedia("(max-width: 599px), (prefers-reduced-motion: reduce)");
+```
+
+---
+
+# Hoja de Trucos (Cheatsheet)
+
+| Elemento | Tipo | Descripción |
+| :--- | :--- | :--- |
+| `window.matchMedia("(regla)")` | Método | Evalúa una Media Query CSS (paréntesis obligatorios) |
+| `mql.matches` | Boolean | `true` si la condición se cumple actualmente |
+| `mql.media` | String | Cadena serializada de la consulta |
+| `mql.addEventListener("change", fn)` | Evento | Se dispara solo al cruzar el punto de quiebre |
+| `mql.addListener()` ❌ | Obsoleto | Deprecado; usar siempre `addEventListener("change")` |

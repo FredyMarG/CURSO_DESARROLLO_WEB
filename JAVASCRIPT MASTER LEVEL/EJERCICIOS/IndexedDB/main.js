@@ -251,10 +251,11 @@ if (typeof document !== "undefined") {
                     saveButton.classList.replace("posible", "imposible");
                 // Si el usuario intentó dejarlo en blanco
                 } else {
-                    // Alertamos al usuario
-                    alert("El nombre no puede quedar vacío.");
-                    // Restauramos el nombre original
+                    // Indicamos visualmente sin bloquear con alert() y restauramos el nombre original
+                    console.warn("El nombre no puede quedar vacío.");
                     h2.textContent = name.nombre;
+                    h2.style.outline = "2px solid #ef4444";
+                    setTimeout(() => { h2.style.outline = ""; }, 1200);
                     // Desactivamos el botón
                     saveButton.classList.replace("posible", "imposible");
                 }
