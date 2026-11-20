@@ -1,0 +1,688 @@
+/* ==========================================================================
+   TEMA OSCURO NEÓN UNIFICADO PARA TODOS LOS EJERCICIOS PRÁCTICOS
+   Estilo cyber-dark glassmorphism con aciertos en verde neón (#00ff88)
+   y errores en rojo neón (#ff3358). Documentado en español.
+   ========================================================================== */
+
+:root {
+    --neon-bg: #050711;
+    --neon-card: rgba(12, 18, 36, 0.88);
+    --neon-surface: #0b1020;
+    --neon-cyan: #00f0ff;
+    --neon-purple: #a855f7;
+    --neon-green: #00ff88;
+    --neon-red: #ff3358;
+    --neon-text: #f8fafc;
+    --neon-muted: #cbd5e1;
+    --neon-border: rgba(0, 240, 255, 0.26);
+}
+
+/* Fondo oscuro profundo con resplandores neón ambientales */
+html, body {
+    background:
+        radial-gradient(circle at 12% 10%, rgba(0, 240, 255, 0.14), transparent 36%),
+        radial-gradient(circle at 88% 85%, rgba(168, 85, 247, 0.14), transparent 38%),
+        var(--neon-bg) !important;
+    color: var(--neon-text) !important;
+    font-family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif !important;
+    min-height: 100vh;
+}
+
+/* Tarjetas principales de enunciado, preguntas, formularios y soluciones */
+.enunciado,
+.pregunta,
+.solucion,
+#solucion,
+.aviso-servidor,
+.ask:not(:has(> button:only-child)):not(:has(> label:only-child)),
+.sol,
+.ejercicio,
+.container,
+.contenedor,
+.panel-carga,
+.publicacion,
+.reloj,
+.card,
+.box,
+.resultado,
+.result-box,
+.grid-container,
+.flex-item,
+.modal,
+.modal-content,
+.modal-body,
+form {
+    background: var(--neon-card) !important;
+    color: var(--neon-text) !important;
+    border: 1px solid var(--neon-border) !important;
+    border-radius: 16px !important;
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.08), 0 12px 32px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(12px);
+    animation: neonFadeUp 0.35s ease both;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.enunciado:hover,
+.pregunta:hover,
+.solucion:hover,
+.ejercicio:hover,
+.publicacion:hover,
+.flex-item:hover {
+    border-color: rgba(0, 240, 255, 0.48) !important;
+    box-shadow: 0 0 28px rgba(0, 240, 255, 0.18), 0 14px 34px rgba(0, 0, 0, 0.55) !important;
+}
+
+@keyframes neonFadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Contenedor de botón único de solución sin fondo ni borde: deja solo el botón animado */
+.ask:has(> button:only-child),
+.ask:has(> label:only-child) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+/* Formulario dentro de .ask o .solucion: sin doble tarjeta, ancho equilibrado y etiquetas alineadas */
+.ask form,
+.solucion form {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    max-width: 640px;
+    margin: 0 auto !important;
+    text-align: left !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ask form label,
+.solucion form label {
+    color: var(--neon-cyan) !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    margin-top: 4px;
+}
+
+.ask form input,
+.ask form select,
+.solucion form input,
+.solucion form select {
+    width: 100%;
+    font-size: 0.95rem !important;
+}
+
+.ask form button,
+.ask form input[type="submit"],
+.solucion form button,
+.solucion form input[type="submit"] {
+    align-self: center;
+    min-width: 220px;
+    margin-top: 10px;
+    padding: 12px 28px !important;
+}
+
+/* Respuesta compacta integrada justo debajo del formulario en Inscripción de Materias Adeudadas */
+.ask #solucion {
+    width: 100% !important;
+    max-width: 640px !important;
+    margin: 18px auto 0 !important;
+    padding: 16px 20px !important;
+}
+
+.ask #solucion.solucion {
+    display: none !important;
+}
+
+.ask #solucion.mostrar {
+    display: block !important;
+}
+
+.ask #solucion h2 {
+    font-size: 1.05rem !important;
+    margin-bottom: 10px !important;
+}
+
+/* Cabeceras y filas de Nota Final Materias (10 Nota Final Consola) */
+.sol .label {
+    color: var(--neon-cyan) !important;
+    border-bottom: 2px solid rgba(0, 240, 255, 0.45) !important;
+    background: rgba(0, 240, 255, 0.06);
+    border-radius: 10px 10px 0 0;
+}
+
+.sol .resultado:has(.fila) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+.fila {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(0, 240, 255, 0.16) !important;
+    border-radius: 12px !important;
+    gap: 18px !important;
+    padding: 12px 16px !important;
+}
+
+.fila .nombre {
+    color: var(--neon-cyan) !important;
+    font-size: 1rem !important;
+}
+
+/* Cuadrícula de 4 columnas en 4 Recuperación de Materia por Docente */
+#solucion .grid-container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    display: grid !important;
+    grid-template-columns: 1.1fr 1.4fr 1fr 1.2fr;
+    gap: 10px;
+    align-items: center;
+    margin: 20px 0 !important;
+}
+
+#solucion .grid-container > div {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 240, 255, 0.18);
+    border-radius: 10px;
+    padding: 10px 14px;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#solucion .grid-container > .nombre {
+    color: var(--neon-cyan) !important;
+    font-weight: 700;
+}
+
+#solucion .grid-container > .semana {
+    padding: 4px 8px;
+}
+
+#solucion .grid-container > .semana select {
+    width: 100%;
+    padding: 8px 10px !important;
+}
+
+#solucion #confirmar {
+    margin-top: 16px;
+    min-width: 220px;
+    padding: 12px 26px !important;
+}
+
+@media (max-width: 760px) {
+    #solucion .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Aviso de servidor local (7 Compañeros de Cofla Htdocs) */
+.aviso-servidor {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 18px 22px;
+    border-left: 4px solid var(--neon-cyan) !important;
+}
+
+.aviso-servidor a {
+    color: var(--neon-cyan) !important;
+    word-break: break-all;
+}
+
+.aviso-servidor code {
+    background: rgba(0, 240, 255, 0.12);
+    color: var(--neon-cyan);
+    padding: 2px 7px;
+    border-radius: 6px;
+}
+
+/* Tarjetas lado a lado de Aprobados / Desaprobados en 7 Compañeros de Cofla */
+#solucion:has(.aprobados) {
+    text-align: center;
+}
+
+#solucion:has(.aprobados) #getInfo {
+    margin-bottom: 18px;
+    min-width: 200px;
+}
+
+#solucion .resultado:has(.aprobados) {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+}
+
+#solucion .aprobados,
+#solucion .desaprobados {
+    padding: 18px 20px !important;
+    border-radius: 14px !important;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+#solucion .error-msg {
+    grid-column: 1 / -1;
+    padding: 14px 18px;
+    border-radius: 12px;
+}
+
+/* Tabla de materias y notas en 6 Notas de Cofla */
+.solucion.mostrar {
+    visibility: visible !important;
+    display: block !important;
+}
+
+.solucion .materias {
+    width: 100% !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.solucion .materia {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(0, 240, 255, 0.22) !important;
+    border-radius: 12px !important;
+    overflow: hidden;
+}
+
+.materia .nombre {
+    color: #f8fafc !important;
+}
+
+.materia .nota {
+    min-width: 72px;
+    text-align: center;
+    background: rgba(0, 255, 136, 0.14) !important;
+    color: var(--neon-green) !important;
+    border-left: 1px solid rgba(0, 255, 136, 0.4);
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+}
+
+ol > li::before {
+    color: var(--neon-cyan) !important;
+}
+
+/* Fondo oscuro difuminado para modales emergentes */
+.modal-bg {
+    background: rgba(5, 7, 17, 0.78) !important;
+    backdrop-filter: blur(8px);
+    z-index: 9998 !important;
+}
+
+/* Modal centrado con espacio superior reservado para el botón de cierre */
+.modal {
+    position: relative !important;
+    padding: 58px 28px 28px !important;
+    min-width: min(420px, 92vw);
+    max-width: 480px;
+}
+
+.modal .resultado {
+    margin: 6px auto 14px !important;
+    position: relative;
+    z-index: 1;
+}
+
+.modal .mensaje {
+    margin-top: 18px !important;
+    padding: 12px 16px !important;
+    border-radius: 12px !important;
+}
+
+/* Botón circular de cierre ubicado 20px más arriba sobre el borde superior derecho */
+.modal__close-button {
+    position: absolute !important;
+    top: -8px !important;
+    right: 12px !important;
+    z-index: 20 !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: grid !important;
+    place-items: center !important;
+    font-size: 0.95rem !important;
+    line-height: 1 !important;
+    background: rgba(255, 51, 88, 0.14) !important;
+    color: var(--neon-red) !important;
+    border: 1px solid rgba(255, 51, 88, 0.55) !important;
+    box-shadow: 0 0 12px rgba(255, 51, 88, 0.25) !important;
+}
+
+.modal__close-button:hover {
+    background: var(--neon-red) !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 18px rgba(255, 51, 88, 0.65) !important;
+    transform: rotate(90deg) scale(1.05) !important;
+}
+
+/* Zonas interactivas Drag & Drop (sin !important en background de .zona para permitir texturas dinámicas) */
+.zona-arrastre,
+.zona-drop {
+    border: 2px dashed rgba(0, 240, 255, 0.45) !important;
+    background: rgba(0, 240, 255, 0.05) !important;
+    color: #e2e8f0 !important;
+    transition: all 0.25s ease;
+}
+
+.zona {
+    border: 2px dashed rgba(0, 240, 255, 0.45);
+    color: #e2e8f0;
+    transition: all 0.25s ease;
+}
+
+.zona-arrastre:hover,
+.zona-drop:hover,
+.zona-drop.dragover {
+    border-color: var(--neon-cyan) !important;
+    background: rgba(0, 240, 255, 0.12) !important;
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.28) !important;
+}
+
+/* Títulos con acento cian neón */
+h1, h2, h3, .title, .titulo {
+    color: var(--neon-cyan) !important;
+    text-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+}
+
+/* Textos generales legibles sobre fondo oscuro (baja especificidad con :where para no pisar estados neón) */
+:where(p, li, dt, dd, .enunciado p, .pregunta p, .sol p, .ask p, .enunciado li, .pregunta li, .sol li, .ask li, .solucion li) {
+    color: var(--neon-muted) !important;
+}
+
+.ask span,
+.sol span,
+.enunciado span {
+    color: #f1f5f9;
+}
+
+/* Etiquetas de formulario normales (no botones de solución) */
+label:not([onclick]):not(#sol):not([for="mostrar"]):not(.btn-solucion) {
+    color: #e2e8f0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Viñetas personalizadas en cian neón */
+ul > li::before {
+    color: var(--neon-cyan) !important;
+}
+
+/* Campos de entrada, selectores y áreas de texto oscuros con foco neón */
+input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+select,
+textarea {
+    background: #070b17 !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(0, 240, 255, 0.28) !important;
+    border-radius: 10px !important;
+    padding: 10px 12px !important;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--neon-cyan) !important;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35) !important;
+}
+
+/* Botones principales y etiquetas que actúan como botón de solución */
+button,
+input[type="submit"],
+input[type="button"],
+.btn,
+label[onclick],
+label#sol,
+label[for="mostrar"],
+label.btn-solucion {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(168, 85, 247, 0.22)) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(0, 240, 255, 0.5) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.18) !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s !important;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.btn:hover,
+label[onclick]:hover,
+label#sol:hover,
+label[for="mostrar"]:hover,
+label.btn-solucion:hover {
+    background: var(--neon-cyan) !important;
+    color: #050711 !important;
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.55) !important;
+    transform: translateY(-2px);
+}
+
+/* Tablas oscuras con bordes, filas alternas y hover cian neón */
+table {
+    background: #070b17 !important;
+    border-collapse: collapse;
+    border: 1px solid var(--neon-border) !important;
+}
+
+thead,
+thead .title {
+    background: rgba(0, 240, 255, 0.12) !important;
+    color: var(--neon-cyan) !important;
+}
+
+th,
+thead th {
+    background: rgba(0, 240, 255, 0.12) !important;
+    color: var(--neon-cyan) !important;
+    border-bottom: 1px solid var(--neon-border) !important;
+}
+
+td,
+tbody td {
+    color: #e2e8f0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+tbody tr:hover {
+    background: rgba(0, 240, 255, 0.14) !important;
+    box-shadow: inset 0 0 16px rgba(0, 240, 255, 0.2) !important;
+}
+
+tbody tr:hover td {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.55);
+}
+
+/* ==========================================================================
+   ACIERTOS / APROBADOS / ÉXITO -> VERDE NEÓN (#00ff88)
+   ========================================================================== */
+.green,
+.verde,
+.success,
+.success-res,
+.result-box.ok,
+.resultado.success,
+.aprobados,
+.fila.aprobado,
+.posible,
+.save {
+    color: var(--neon-green) !important;
+    background: rgba(0, 255, 136, 0.12) !important;
+    border: 1px solid rgba(0, 255, 136, 0.6) !important;
+    box-shadow: 0 0 18px rgba(0, 255, 136, 0.3) !important;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+}
+
+[style*="color: green"],
+[style*="color:green"] {
+    color: var(--neon-green) !important;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+}
+
+.green *,
+.success *,
+.resultado.success *,
+.aprobados *,
+.fila.aprobado .nombre,
+[style*="color: green"] *,
+[style*="color:green"] * {
+    color: inherit !important;
+}
+
+.fila.aprobado input {
+    border-color: var(--neon-green) !important;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3) !important;
+}
+
+/* ==========================================================================
+   ERRORES / REPROBADOS / FALLOS -> ROJO NEÓN (#ff3358)
+   ========================================================================== */
+.red,
+.rojo,
+.error,
+.error-res,
+.error-msg.error,
+.resultado.error,
+.reprobados,
+.desaprobados,
+.fila.reprobado,
+.imposible,
+.delete,
+.btn-peligro {
+    color: var(--neon-red) !important;
+    background: rgba(255, 51, 88, 0.12) !important;
+    border: 1px solid rgba(255, 51, 88, 0.65) !important;
+    box-shadow: 0 0 18px rgba(255, 51, 88, 0.32) !important;
+    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45);
+}
+
+/* Cápsula flotante de regreso al Portal Principal */
+.neon-portal-pill {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 9999;
+    background: rgba(5, 7, 17, 0.92);
+    color: var(--neon-cyan) !important;
+    border: 1px solid rgba(0, 240, 255, 0.5);
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+    backdrop-filter: blur(12px);
+    transition: all 0.2s ease;
+}
+
+.neon-portal-pill:hover {
+    background: var(--neon-cyan) !important;
+    color: #050711 !important;
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.6);
+}
+
+[style*="color: red"],
+[style*="color:red"] {
+    color: var(--neon-red) !important;
+    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45);
+}
+
+.red *,
+.error *,
+.resultado.error *,
+.error-msg.error *,
+.fila.reprobado .nombre,
+[style*="color: red"] *,
+[style*="color:red"] * {
+    color: inherit !important;
+}
+
+.fila.reprobado input {
+    border-color: var(--neon-red) !important;
+    box-shadow: 0 0 10px rgba(255, 51, 88, 0.35) !important;
+}
+
+/* ==========================================================================
+   ADVERTENCIAS / AVISOS -> ÁMBAR NEÓN (#ffb800)
+   ========================================================================== */
+.warning,
+.resultado.warning {
+    color: #ffd166 !important;
+    background: rgba(255, 184, 0, 0.12) !important;
+    border: 1px solid rgba(255, 184, 0, 0.6) !important;
+    box-shadow: 0 0 18px rgba(255, 184, 0, 0.25) !important;
+    text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
+}
+
+.warning *,
+.resultado.warning * {
+    color: inherit !important;
+}
+
+/* Listas comparativas Antes / Después en Inscripción de Materias */
+.before,
+.after {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(0, 240, 255, 0.2) !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+}
+
+/* Mensajes de datos/resultado neutros (ej. 2 Mostrar Datos Web: #protocol, #host, #path, #href) */
+.resultado-msg:not(.success):not(.error):not(.warning) {
+    background: rgba(0, 240, 255, 0.06) !important;
+    border: 1px solid rgba(0, 240, 255, 0.28) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    margin-top: 10px !important;
+    color: #f8fafc !important;
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.1) !important;
+    word-break: break-word;
+}
+
+.resultado-msg:empty {
+    display: none !important;
+}
+
+/* Ocultar cajas vacías para evitar bordes neón sin contenido */
+.aprobados:empty,
+.desaprobados:empty,
+.error-msg:empty,
+.resultado:empty,
+.success-res:empty,
+.error-res:empty {
+    display: none !important;
+}

@@ -39,24 +39,24 @@ if (typeof document !== "undefined") {
     zona.addEventListener("dragover", (e) => {
         // Prevenimos el comportamiento por defecto del navegador para permitir el soltado del archivo
         e.preventDefault();
-        // Llamamos a changeStyle para cambiar el color del borde y texto a gris oscuro (#444)
-        changeStyle(e.target, "#444");
+        // Resaltamos el borde y texto en cian neón al arrastrar un archivo encima
+        changeStyle(e.target, "#00f0ff");
     });
 
     // Escuchamos el evento 'dragleave' que se dispara cuando el archivo arrastrado sale del área de la zona
     zona.addEventListener("dragleave", (e) => {
         // Prevenimos el comportamiento por defecto del navegador
         e.preventDefault();
-        // Llamamos a changeStyle para restaurar el borde y texto a su color original (#888)
-        changeStyle(e.target, "#888");
+        // Restauramos el borde y texto a su tono suave original
+        changeStyle(e.target, "#94a3b8");
     });
 
     // Escuchamos el evento 'drop' que se dispara en el momento en que el usuario suelta el archivo
     zona.addEventListener("drop", (e) => {
         // Prevenimos que el navegador abra el archivo directamente en una nueva pestaña
         e.preventDefault();
-        // Restauramos el estilo visual de la zona de arrastre a su color gris original (#888)
-        changeStyle(e.target, "#888");
+        // Restauramos el estilo visual de la zona de arrastre a su tono suave original
+        changeStyle(e.target, "#94a3b8");
 
         // Limpiamos el resultado anterior y removemos la clase de animación para preparar la nueva carga
         result.classList.remove("animar-aparicion");

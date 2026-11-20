@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- CURSO_WEB_DOC_HTML v1
-     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html
+     Archivo: JAVASCRIPT MID LEVEL/EJERCICIOS/3 Materia Pendiente/index.html
      Título: Ejercicio 3
      Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
      Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="style.css" /> <!-- Enlaza el archivo CSS externo para aplicar estilos a la página. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configura la vista para dispositivos móviles, asegurando responsividad. -->
     <title>Ejercicio 3</title> <!-- Define el título que aparece en la pestaña del navegador. -->
+    <link rel="stylesheet" href="../../../ejercicios-neon.css">
+    <script src="../../../ejercicios-neon.js" defer></script>
 </head>
 
 <body>
@@ -49,11 +51,11 @@
             <input type="text" id="materia" placeholder="Materia Adeudada" required/>
             <input type="submit" value="📄 Solicitar Mesa" id="enviar" />
         </form>
-    </div>
 
-    <div id="solucion" class="solucion">
-        <h2 id="sol-res">Respuesta a Solicitud</h2>
-        <p id="respuesta"></p> <!-- Párrafo para mostrar la respuesta o resultado de la interacción. -->
+        <div id="solucion" class="solucion">
+            <h2 id="sol-res">Respuesta a Solicitud</h2>
+            <p id="respuesta"></p> <!-- Párrafo para mostrar la respuesta o resultado de la interacción. -->
+        </div>
     </div>
 
     <script src="main.js"></script> <!-- Enlaza el archivo JavaScript externo para la lógica interactiva. -->

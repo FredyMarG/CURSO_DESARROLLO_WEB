@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio: Tarjeta de Presentación — Guía Interactiva</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../slides-engine.css" />
+    <script src="../../../slides-engine.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">CSS3 BÁSICO · EJERCICIO</span>
+            <div class="brand-title"><span>🪪</span><span>Tarjeta de Presentación</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 6</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">⬅ <span class="btn-text">CSS Básico</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Tarjeta de Presentación">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">Box Model</span>
+                    <span class="badge badge-purple">Sombras &amp; Border-Radius</span>
+                    <span class="badge badge-emerald">Modificadores CSS</span>
+                </div>
+                <h1 class="hero-title">Ejercicio Práctico:<br /><span class="gradient-text">Tarjeta de Presentación</span></h1>
+                <p class="hero-subtitle">Maqueta una tarjeta de perfil centrada combinando <code>margin: auto</code>, <code>padding</code>, <code>box-shadow</code>, imagen circular con <code>border-radius: 50%</code> y variantes de color.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📦</div><h3>Anatomía de la Tarjeta</h3><p>Cómo trabajan juntas las clases <code>.card</code>, <code>.red-card</code> y <code>.green-card</code>.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🎨</div><h3>Propiedades Clave</h3><p>Sombras difuminadas, centrado y avatar circular.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Edita las variantes de tarjeta en tiempo real.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="2" data-title="Anatomía HTML + CSS">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ESTRUCTURA DEL EJERCICIO</span>
+                <h2 class="slide-title">Clase base + Variantes de color</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card">
+                    <h3>🧱 HTML del componente</h3>
+                    <pre class="code-block"><code>&lt;div class="card"&gt;
+  &lt;img class="card_img" src="..." alt="Avatar"&gt;
+  &lt;h1 class="card_title"&gt;Alex Rivera&lt;/h1&gt;
+  &lt;h2 class="card_subtitle"&gt;PROGRAMADOR WEB&lt;/h2&gt;
+  &lt;p class="card_content"&gt;...&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+                <div class="glass-card">
+                    <h3>🎨 Reutilización inteligente</h3>
+                    <p>La clase <code>.card</code> define ancho, padding, centrado y sombra. Luego agregas <code>.red-card</code> o <code>.green-card</code> para cambiar solo el color de fondo sin repetir código.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Propiedades CSS aplicadas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · ESTILOS DEL ARCHIVO style.css</span>
+                <h2 class="slide-title">Box Model, Sombras y Tipografía</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><code>width: 300px; margin: auto;</code> centra horizontalmente una caja con ancho definido.</li>
+                    <li><code>box-shadow: 0 0 30px #0006;</code> añade una sombra suave con transparencia alfa hexadecimal.</li>
+                    <li><code>border-radius: 50%;</code> convierte cualquier imagen cuadrada en un avatar circular perfecto.</li>
+                    <li><code>letter-spacing: 2px;</code> aporta aire tipográfico al subtítulo del cargo.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Quiz Tarjeta de Presentación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                <div class="quiz-question" data-answer="c" data-ok="border-radius: 50% redondea las esquinas hasta formar un círculo perfecto en imágenes cuadradas." data-err="8px solo suaviza las esquinas; para un círculo perfecto se usa 50%.">
+                    <div class="quiz-q-title">1. ¿Qué valor de <code>border-radius</code> convierte la imagen de perfil en un círculo?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">8px</button><button class="quiz-option" data-opt="b">100px</button><button class="quiz-option" data-opt="c">50%</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Al tener width fijo (300px), margin: auto reparte el espacio restante por igual a izquierda y derecha." data-err="text-align solo centra texto/inline interno, no la caja .card completa.">
+                    <div class="quiz-q-title">2. ¿Qué combinación centra horizontalmente la caja <code>.card</code> en la página?</div>
+                    <div class="quiz-options"><button class="quiz-option" data-opt="a">width: 300px; margin: auto;</button><button class="quiz-option" data-opt="b">text-align: center;</button><button class="quiz-option" data-opt="c">padding: 20px;</button></div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Laboratorio Tarjeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · EJERCICIO EN VIVO</span><h2 class="slide-title">🧪 Tarjetas de Presentación en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  body { font-family: system-ui; background: #0f172a; padding: 20px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; color: #fff; }
+  .card { background: #3b82f6; text-align: center; width: 220px; padding: 20px 14px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); border-radius: 14px; }
+  .red-card { background: #f43f5e; }
+  .green-card { background: #10b981; }
+  .card_img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .card_title { font-size: 1.15rem; margin: 0; }
+  .card_subtitle { font-size: 0.72rem; font-weight: 400; letter-spacing: 2px; margin: 4px 0 10px; opacity: 0.9; }
+  .card_content { font-size: 0.8rem; line-height: 1.45; margin: 0; opacity: 0.95; }
+&lt;/style&gt;
+&lt;div class=&quot;card&quot;&gt;
+  &lt;img class=&quot;card_img&quot; src=&quot;https://picsum.photos/150&quot; alt=&quot;Avatar&quot;&gt;
+  &lt;h1 class=&quot;card_title&quot;&gt;Alex Rivera&lt;/h1&gt;
+  &lt;h2 class=&quot;card_subtitle&quot;&gt;FRONTEND DEV&lt;/h2&gt;
+  &lt;p class=&quot;card_content&quot;&gt;Tarjeta base azul con Box Model y sombra.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;card red-card&quot;&gt;
+  &lt;img class=&quot;card_img&quot; src=&quot;https://picsum.photos/151&quot; alt=&quot;Avatar&quot;&gt;
+  &lt;h1 class=&quot;card_title&quot;&gt;Lucía Gómez&lt;/h1&gt;
+  &lt;h2 class=&quot;card_subtitle&quot;&gt;UI DESIGNER&lt;/h2&gt;
+  &lt;p class=&quot;card_content&quot;&gt;Variante con clase modificadora .red-card.&lt;/p&gt;
+&lt;/div&gt;">3 Variantes (.card)</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  body { font-family: system-ui; background: #0f172a; padding: 20px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; color: #fff; }
+  .card { background: #3b82f6; text-align: center; width: 220px; padding: 20px 14px; box-shadow: 0 12px 30px rgba(0,0,0,0.45); border-radius: 14px; }
+  .red-card { background: #f43f5e; }
+  .green-card { background: #10b981; }
+  .card_img { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid rgba(255,255,255,0.4); margin-bottom: 8px; }
+  .card_title { font-size: 1.15rem; margin: 0; }
+  .card_subtitle { font-size: 0.72rem; font-weight: 400; letter-spacing: 2px; margin: 4px 0 10px; opacity: 0.9; }
+  .card_content { font-size: 0.8rem; line-height: 1.45; margin: 0; opacity: 0.95; }
+&lt;/style&gt;
+&lt;div class="card"&gt;
+  &lt;img class="card_img" src="https://picsum.photos/150" alt="Avatar"&gt;
+  &lt;h1 class="card_title"&gt;Alex Rivera&lt;/h1&gt;
+  &lt;h2 class="card_subtitle"&gt;FRONTEND DEV&lt;/h2&gt;
+  &lt;p class="card_content"&gt;Tarjeta base azul con Box Model y sombra.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="card red-card"&gt;
+  &lt;img class="card_img" src="https://picsum.photos/151" alt="Avatar"&gt;
+  &lt;h1 class="card_title"&gt;Lucía Gómez&lt;/h1&gt;
+  &lt;h2 class="card_subtitle"&gt;UI DESIGNER&lt;/h2&gt;
+  &lt;p class="card_content"&gt;Variante con clase modificadora .red-card.&lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Volver al Módulo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Básico</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../../index.html"><span class="file-name">🎨 Guía Completa CSS Básico</span><span class="file-path">index.html</span></a>
+                <a class="file-card" href="style.css"><span class="file-name">📄 Ver style.css original</span><span class="file-path">style.css</span></a>
+            </div></div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

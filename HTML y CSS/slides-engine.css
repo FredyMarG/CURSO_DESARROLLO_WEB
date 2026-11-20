@@ -6,32 +6,32 @@
 
 /* Selector :root: define variables globales CSS accesibles en toda la hoja */
 :root {
-    /* Color de fondo principal del lienzo (azul noche muy oscuro) */
-    --bg-dark: #070a13;
+    /* Color de fondo principal del lienzo (negro azulado profundo para resaltar neones) */
+    --bg-dark: #050711;
     /* Color de fondo secundario para superficies elevadas */
-    --bg-surface: #0e1526;
-    /* Fondo translúcido para tarjetas con efecto vidrio (78% de opacidad) */
-    --bg-card: rgba(16, 24, 42, 0.78);
-    /* Fondo de tarjeta más intenso al pasar el cursor (90% de opacidad) */
-    --bg-card-hover: rgba(23, 34, 58, 0.9);
+    --bg-surface: #0b1020;
+    /* Fondo translúcido para tarjetas con efecto vidrio (82% de opacidad) */
+    --bg-card: rgba(12, 18, 36, 0.82);
+    /* Fondo de tarjeta más intenso al pasar el cursor (92% de opacidad) */
+    --bg-card-hover: rgba(18, 28, 54, 0.92);
     /* Borde sutil casi transparente para delimitar contenedores */
-    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.09);
     /* Borde más visible para estados activos o hover */
-    --border-light: rgba(255, 255, 255, 0.16);
-    /* Color de acento principal (azul cian brillante) */
-    --primary: #38bdf8;
-    /* Resplandor translúcido del color primario */
-    --primary-glow: rgba(56, 189, 248, 0.3);
-    /* Color secundario índigo para gradientes y etiquetas */
-    --indigo: #818cf8;
-    /* Color semántico verde esmeralda para aciertos y consejos */
-    --emerald: #10b981;
-    /* Color semántico ámbar para advertencias */
-    --amber: #f59e0b;
-    /* Color semántico rosa carmesí para errores */
-    --rose: #f43f5e;
+    --border-light: rgba(0, 240, 255, 0.28);
+    /* Color de acento principal (cian neón vibrante) */
+    --primary: #00f0ff;
+    /* Resplandor translúcido del color primario neón */
+    --primary-glow: rgba(0, 240, 255, 0.4);
+    /* Color secundario púrpura neón para gradientes y etiquetas */
+    --indigo: #a855f7;
+    /* Color semántico verde neón para aciertos y consejos */
+    --emerald: #00ff88;
+    /* Color semántico ámbar neón para advertencias */
+    --amber: #ffb800;
+    /* Color semántico rojo neón para errores y fallos */
+    --rose: #ff3358;
     /* Color de texto principal de alta legibilidad */
-    --text-main: #f1f5f9;
+    --text-main: #f8fafc;
     /* Color de texto secundario o descripciones apagadas */
     --text-muted: #94a3b8;
     /* Pila tipográfica principal para títulos y párrafos */
@@ -73,10 +73,10 @@ html, body {
     /* Reduce su intensidad al 35% para no distraer */
     opacity: 0.35;
 }
-/* Primer orbe de luz azul ubicado arriba a la izquierda */
-.glow-1 { width: 420px; height: 420px; background: #0284c7; top: -120px; left: -100px; }
-/* Segundo orbe de luz índigo ubicado abajo a la derecha */
-.glow-2 { width: 380px; height: 380px; background: #6366f1; bottom: -120px; right: -80px; }
+/* Primer orbe de luz cian neón ubicado arriba a la izquierda */
+.glow-1 { width: 420px; height: 420px; background: #00f0ff; top: -120px; left: -100px; }
+/* Segundo orbe de luz púrpura neón ubicado abajo a la derecha */
+.glow-2 { width: 380px; height: 380px; background: #a855f7; bottom: -120px; right: -80px; }
 /* Patrón de puntos sutil que cubre todo el fondo */
 .bg-grid-pattern {
     /* Fijo en toda la ventana */
@@ -152,8 +152,8 @@ html, body {
 .nav-progress-container { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 300px; }
 /* Riel de fondo de la barra de progreso */
 .progress-bar-bg { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; }
-/* Relleno dinámico cuyo ancho actualiza JavaScript */
-.progress-bar-fill { height: 100%; width: 12%; background: linear-gradient(90deg, var(--primary), var(--indigo)); border-radius: 999px; transition: width 0.3s ease; }
+/* Relleno dinámico neón cuyo ancho actualiza JavaScript */
+.progress-bar-fill { height: 100%; width: 12%; background: linear-gradient(90deg, var(--primary), var(--indigo)); border-radius: 999px; box-shadow: 0 0 12px var(--primary-glow); transition: width 0.3s ease; }
 /* Etiqueta numérica (ej. "1 / 8") */
 .progress-label { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); min-width: 48px; text-align: right; }
 
@@ -188,8 +188,8 @@ html, body {
     /* Transición suave para estados hover */
     transition: all 0.2s ease;
 }
-/* Efecto hover en botones de navegación superior */
-.nav-btn:hover { background: rgba(56, 189, 248, 0.14); border-color: var(--primary); color: #fff; }
+/* Efecto hover neón en botones de navegación superior */
+.nav-btn:hover { background: rgba(0, 240, 255, 0.16); border-color: var(--primary); color: #fff; box-shadow: 0 0 14px rgba(0, 240, 255, 0.28); }
 
 /* --- Contenedor de diapositivas --- */
 /* Área central que limita el ancho máximo del contenido */
@@ -363,16 +363,18 @@ code {
     font-size: 0.94rem;
     line-height: 1.6;
 }
-/* Variante ámbar para advertencias y errores frecuentes */
+/* Variante rojo neón para advertencias y errores frecuentes */
 .tip-box.warn {
-    border-color: rgba(245, 158, 11, 0.35);
-    background: rgba(245, 158, 11, 0.08);
-    color: #fef3c7;
+    border-color: rgba(255, 51, 88, 0.55);
+    background: rgba(255, 51, 88, 0.1);
+    box-shadow: 0 0 18px rgba(255, 51, 88, 0.18);
+    color: #ffe4e6;
 }
-/* Variante verde esmeralda para buenas prácticas */
+/* Variante verde neón para buenas prácticas y aciertos */
 .tip-box.good {
-    border-color: rgba(16, 185, 129, 0.35);
-    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(0, 255, 136, 0.55);
+    background: rgba(0, 255, 136, 0.1);
+    box-shadow: 0 0 18px rgba(0, 255, 136, 0.18);
     color: #d1fae5;
 }
 
@@ -412,8 +414,8 @@ code {
     cursor: pointer;
     transition: all 0.2s;
 }
-/* Estado activo y hover de botones de preset */
-.preset-btn:hover, .preset-btn.active { background: var(--primary); color: #070a13; border-color: var(--primary); }
+/* Estado activo y hover neón de botones de preset */
+.preset-btn:hover, .preset-btn.active { background: var(--primary); color: #050711; border-color: var(--primary); box-shadow: 0 0 14px var(--primary-glow); }
 
 /* Distribución lado a lado: editor a la izquierda, iframe a la derecha */
 .lab-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -431,12 +433,12 @@ code {
     line-height: 1.55;
     resize: vertical;
 }
-/* Marco iframe aislado con fondo blanco para renderizar el HTML/CSS en vivo */
+/* Marco iframe aislado con fondo oscuro para renderizar el HTML/CSS en vivo */
 .lab-preview {
     width: 100%;
     min-height: 270px;
-    background: #ffffff;
-    border: 1px solid var(--border-subtle);
+    background: #0b1020;
+    border: 1px solid var(--border-light);
     border-radius: 12px;
 }
 
@@ -579,12 +581,12 @@ code {
 }
 /* Resalta texto en negrita dentro de los callouts */
 .callout strong { color: #fff; }
-/* Variante verde para consejos prácticos */
-.callout-tip { border-left: 4px solid var(--emerald); background: rgba(16, 185, 129, 0.08); }
-/* Variante ámbar para precauciones */
-.callout-warn { border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.08); }
-/* Variante índigo para analogías del mundo real */
-.callout-analogy { border-left: 4px solid var(--indigo); background: rgba(129, 140, 248, 0.09); }
+/* Variante verde neón para consejos prácticos */
+.callout-tip { border-left: 4px solid var(--emerald); background: rgba(0, 255, 136, 0.09); box-shadow: 0 0 16px rgba(0, 255, 136, 0.14); }
+/* Variante rojo neón para advertencias y errores */
+.callout-warn { border-left: 4px solid var(--rose); background: rgba(255, 51, 88, 0.09); box-shadow: 0 0 16px rgba(255, 51, 88, 0.14); }
+/* Variante púrpura neón para analogías del mundo real */
+.callout-analogy { border-left: 4px solid var(--indigo); background: rgba(168, 85, 247, 0.1); box-shadow: 0 0 16px rgba(168, 85, 247, 0.14); }
 
 /* --- Tablas Comparativas --- */
 /* Tabla estilizada con bordes redondeados y fondo oscuro */
@@ -751,10 +753,10 @@ code {
 }
 /* Hover sobre opciones aún disponibles */
 .quiz-option:hover:not(:disabled) { border-color: var(--primary); background: rgba(56, 189, 248, 0.1); }
-/* Estilo cuando la opción marcada es la correcta */
-.quiz-option.is-correct { border-color: var(--emerald); background: rgba(16, 185, 129, 0.18); color: #fff; }
-/* Estilo cuando la opción elegida es incorrecta */
-.quiz-option.is-wrong { border-color: var(--rose); background: rgba(244, 63, 94, 0.18); color: #fff; }
+/* Estilo verde neón cuando la opción marcada es la correcta */
+.quiz-option.is-correct { border-color: var(--emerald); background: rgba(0, 255, 136, 0.16); color: #fff; box-shadow: 0 0 16px rgba(0, 255, 136, 0.32); }
+/* Estilo rojo neón cuando la opción elegida es incorrecta */
+.quiz-option.is-wrong { border-color: var(--rose); background: rgba(255, 51, 88, 0.16); color: #fff; box-shadow: 0 0 16px rgba(255, 51, 88, 0.32); }
 /* Quita el cursor de clic tras responder */
 .quiz-option:disabled { cursor: default; }
 /* Caja oculta de retroalimentación debajo de las opciones */
@@ -768,10 +770,10 @@ code {
 }
 /* Muestra la retroalimentación tras elegir respuesta */
 .quiz-feedback.show { display: block; }
-/* Retroalimentación positiva en verde */
-.quiz-feedback.ok { background: rgba(16, 185, 129, 0.12); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
-/* Retroalimentación de error en rosa */
-.quiz-feedback.err { background: rgba(244, 63, 94, 0.12); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.3); }
+/* Retroalimentación positiva en verde neón */
+.quiz-feedback.ok { background: rgba(0, 255, 136, 0.12); color: #6ee7b7; border: 1px solid rgba(0, 255, 136, 0.5); box-shadow: 0 0 14px rgba(0, 255, 136, 0.2); }
+/* Retroalimentación de error en rojo neón */
+.quiz-feedback.err { background: rgba(255, 51, 88, 0.12); color: #fda4af; border: 1px solid rgba(255, 51, 88, 0.5); box-shadow: 0 0 14px rgba(255, 51, 88, 0.2); }
 
 /* --- Botón Probar en Lab --- */
 /* Botón contextual en diapositivas teóricas para cargar el código directo al Lab */
