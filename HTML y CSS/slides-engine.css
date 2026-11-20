@@ -1,137 +1,234 @@
 /* ==========================================================================
    MOTOR DE PRESENTACIONES INTERACTIVAS — HTML5 Y CSS3
    Estilos visuales glassmorphism, modo diapositivas, modo guía y laboratorio
+   Documentación pedagógica LÍNEA POR LÍNEA en español
    ========================================================================== */
 
+/* Selector :root: define variables globales CSS accesibles en toda la hoja */
 :root {
+    /* Color de fondo principal del lienzo (azul noche muy oscuro) */
     --bg-dark: #070a13;
+    /* Color de fondo secundario para superficies elevadas */
     --bg-surface: #0e1526;
+    /* Fondo translúcido para tarjetas con efecto vidrio (78% de opacidad) */
     --bg-card: rgba(16, 24, 42, 0.78);
+    /* Fondo de tarjeta más intenso al pasar el cursor (90% de opacidad) */
     --bg-card-hover: rgba(23, 34, 58, 0.9);
+    /* Borde sutil casi transparente para delimitar contenedores */
     --border-subtle: rgba(255, 255, 255, 0.08);
+    /* Borde más visible para estados activos o hover */
     --border-light: rgba(255, 255, 255, 0.16);
+    /* Color de acento principal (azul cian brillante) */
     --primary: #38bdf8;
+    /* Resplandor translúcido del color primario */
     --primary-glow: rgba(56, 189, 248, 0.3);
+    /* Color secundario índigo para gradientes y etiquetas */
     --indigo: #818cf8;
+    /* Color semántico verde esmeralda para aciertos y consejos */
     --emerald: #10b981;
+    /* Color semántico ámbar para advertencias */
     --amber: #f59e0b;
+    /* Color semántico rosa carmesí para errores */
     --rose: #f43f5e;
+    /* Color de texto principal de alta legibilidad */
     --text-main: #f1f5f9;
+    /* Color de texto secundario o descripciones apagadas */
     --text-muted: #94a3b8;
+    /* Pila tipográfica principal para títulos y párrafos */
     --font-sans: 'Outfit', system-ui, -apple-system, sans-serif;
+    /* Pila tipográfica monoespaciada para código y métricas */
     --font-mono: 'Fira Code', monospace;
 }
 
+/* Reset universal: incluye padding/border en el ancho total y limpia márgenes por defecto */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Estilos base para html y body */
 html, body {
+    /* Aplica el color de fondo oscuro global */
     background: var(--bg-dark);
+    /* Aplica el color de texto principal */
     color: var(--text-main);
+    /* Define la fuente sans-serif global */
     font-family: var(--font-sans);
+    /* Garantiza al menos el 100% del alto de la ventana */
     min-height: 100vh;
+    /* Evita scroll horizontal accidental por brillos de fondo */
     overflow-x: hidden;
 }
 
 /* --- Fondo ambiental --- */
+/* Clase base para los orbes de luz difuminados en el fondo */
 .bg-glow {
+    /* Fija los orbes respecto a la pantalla al hacer scroll */
     position: fixed;
+    /* Convierte los bloques en círculos perfectos */
     border-radius: 50%;
+    /* Desenfoque extremo para crear iluminación ambiental suave */
     filter: blur(110px);
+    /* Evita que bloqueen clics sobre el contenido */
     pointer-events: none;
+    /* Los ubica detrás de todo el contenido */
     z-index: 0;
+    /* Reduce su intensidad al 35% para no distraer */
     opacity: 0.35;
 }
+/* Primer orbe de luz azul ubicado arriba a la izquierda */
 .glow-1 { width: 420px; height: 420px; background: #0284c7; top: -120px; left: -100px; }
+/* Segundo orbe de luz índigo ubicado abajo a la derecha */
 .glow-2 { width: 380px; height: 380px; background: #6366f1; bottom: -120px; right: -80px; }
+/* Patrón de puntos sutil que cubre todo el fondo */
 .bg-grid-pattern {
+    /* Fijo en toda la ventana */
     position: fixed;
+    /* Equivalente a top:0 right:0 bottom:0 left:0 */
     inset: 0;
+    /* Dibuja puntos blancos al 4% de opacidad mediante gradiente radial */
     background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    /* Repite la cuadrícula cada 28px x 28px */
     background-size: 28px 28px;
+    /* No intercepta eventos del ratón */
     pointer-events: none;
+    /* Se mantiene en la capa de fondo */
     z-index: 0;
 }
 
 /* --- Barra superior --- */
+/* Barra de navegación fija en la parte superior */
 .top-nav {
+    /* Posición fija arriba */
     position: fixed;
+    /* Pegada a los bordes superior, izquierdo y derecho */
     top: 0; left: 0; right: 0;
+    /* Altura fija de 64px */
     height: 64px;
+    /* Espaciado horizontal interno */
     padding: 0 24px;
+    /* Fondo oscuro semitransparente */
     background: rgba(7, 10, 19, 0.86);
+    /* Desenfoque tipo vidrio esmerilado detrás de la barra */
     backdrop-filter: blur(16px);
+    /* Línea divisoria inferior sutil */
     border-bottom: 1px solid var(--border-subtle);
+    /* Distribuye marca, progreso y botones en fila */
     display: flex;
+    /* Centra verticalmente los elementos */
     align-items: center;
+    /* Separa los bloques a los extremos y centro */
     justify-content: space-between;
+    /* Espacio mínimo entre secciones de la barra */
     gap: 16px;
+    /* Capa elevada sobre las diapositivas */
     z-index: 50;
 }
 
+/* Contenedor de insignia y título del tema */
 .nav-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+/* Etiqueta tipo píldora con el nivel/tecnología */
 .brand-badge {
+    /* Tipografía monoespaciada */
     font-family: var(--font-mono);
+    /* Tamaño compacto */
     font-size: 0.7rem;
+    /* Grosor seminegrita */
     font-weight: 600;
+    /* Texto en azul primario */
     color: var(--primary);
+    /* Fondo cian muy suave */
     background: rgba(56, 189, 248, 0.12);
+    /* Borde cian semitransparente */
     border: 1px solid rgba(56, 189, 248, 0.3);
+    /* Relleno interno */
     padding: 4px 10px;
+    /* Bordes completamente redondeados */
     border-radius: 999px;
+    /* Evita saltos de línea dentro de la insignia */
     white-space: nowrap;
 }
+/* Título principal de la barra con truncado elegante si falta espacio */
 .brand-title { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* Contenedor de la barra de progreso y contador numérico */
 .nav-progress-container { display: flex; align-items: center; gap: 10px; flex: 1; max-width: 300px; }
+/* Riel de fondo de la barra de progreso */
 .progress-bar-bg { flex: 1; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: 999px; overflow: hidden; }
+/* Relleno dinámico cuyo ancho actualiza JavaScript */
 .progress-bar-fill { height: 100%; width: 12%; background: linear-gradient(90deg, var(--primary), var(--indigo)); border-radius: 999px; transition: width 0.3s ease; }
+/* Etiqueta numérica (ej. "1 / 8") */
 .progress-label { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); min-width: 48px; text-align: right; }
 
+/* Grupo de botones de acción en la derecha de la barra */
 .nav-actions { display: flex; align-items: center; gap: 8px; }
+/* Botón estándar de la barra superior */
 .nav-btn {
+    /* Fondo sutil translúcido */
     background: rgba(255, 255, 255, 0.05);
+    /* Color de texto claro */
     color: var(--text-main);
+    /* Borde fino */
     border: 1px solid var(--border-subtle);
+    /* Esquinas redondeadas */
     border-radius: 10px;
+    /* Relleno cómodo para clic */
     padding: 7px 12px;
+    /* Fuente principal */
     font-family: var(--font-sans);
+    /* Tamaño de texto */
     font-size: 0.82rem;
+    /* Peso seminegrita */
     font-weight: 600;
+    /* Cursor de mano interactiva */
     cursor: pointer;
+    /* Sin subrayado cuando es enlace <a> */
     text-decoration: none;
+    /* Alineación interna de icono y texto */
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    /* Transición suave para estados hover */
     transition: all 0.2s ease;
 }
+/* Efecto hover en botones de navegación superior */
 .nav-btn:hover { background: rgba(56, 189, 248, 0.14); border-color: var(--primary); color: #fff; }
 
 /* --- Contenedor de diapositivas --- */
+/* Área central que limita el ancho máximo del contenido */
 .presentation-wrapper {
+    /* Contexto de apilamiento sobre el fondo */
     position: relative;
     z-index: 1;
+    /* Ancho máximo legible */
     max-width: 1100px;
+    /* Centrado horizontal */
     margin: 0 auto;
+    /* Margen superior/inferior para liberar barras fijas */
     padding: 88px 24px 96px;
 }
 
+/* En modo presentación oculta todas las diapositivas por defecto y anima al mostrarse */
 body.mode-presentation .slide { display: none; animation: fadeSlideIn 0.32s ease; }
+/* Muestra únicamente la diapositiva que tenga la clase .active */
 body.mode-presentation .slide.active { display: block; }
 
+/* En modo guía muestra todas las diapositivas apiladas como documento continuo */
 body.mode-guide .slide {
     display: block;
     margin-bottom: 48px;
     padding-bottom: 36px;
     border-bottom: 1px solid var(--border-subtle);
 }
+/* Oculta la barra inferior de anterior/siguiente cuando se está en modo guía */
 body.mode-guide .bottom-controls { display: none; }
 
+/* Animación de entrada suave para cada cambio de diapositiva */
 @keyframes fadeSlideIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Cabecera estándar de una diapositiva */
 .slide-header { margin-bottom: 22px; }
+/* Antetítulo pequeño en mayúsculas con número de diapositiva */
 .slide-kicker {
     font-family: var(--font-mono);
     font-size: 0.76rem;
@@ -141,17 +238,22 @@ body.mode-guide .bottom-controls { display: none; }
     margin-bottom: 6px;
     display: block;
 }
+/* Título principal de diapositiva con tamaño fluido mediante clamp() */
 .slide-title {
     font-size: clamp(1.55rem, 3.2vw, 2.25rem);
     font-weight: 800;
     line-height: 1.2;
     margin-bottom: 8px;
 }
+/* Párrafo introductorio debajo del título de diapositiva */
 .slide-lead { color: var(--text-muted); font-size: 1.02rem; line-height: 1.6; }
 
 /* --- Portada (Hero) --- */
+/* Centrado general de la diapositiva de portada */
 .hero-slide { text-align: center; padding: 20px 0 8px; }
+/* Fila de insignias superiores de la portada */
 .hero-badges { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+/* Estilo base para insignias de tema */
 .badge {
     font-family: var(--font-mono);
     font-size: 0.76rem;
@@ -159,20 +261,26 @@ body.mode-guide .bottom-controls { display: none; }
     border-radius: 999px;
     border: 1px solid;
 }
+/* Variantes cromáticas de insignias */
 .badge-cyan { color: #38bdf8; background: rgba(56, 189, 248, 0.12); border-color: rgba(56, 189, 248, 0.35); }
 .badge-purple { color: #a5b4fc; background: rgba(129, 140, 248, 0.12); border-color: rgba(129, 140, 248, 0.35); }
 .badge-emerald { color: #34d399; background: rgba(16, 185, 129, 0.12); border-color: rgba(16, 185, 129, 0.35); }
 
+/* Gran título de bienvenida en portada */
 .hero-title { font-size: clamp(2rem, 4.8vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+/* Texto con degradado aplicado únicamente a las letras mediante background-clip */
 .gradient-text {
     background: linear-gradient(135deg, #38bdf8 0%, #818cf8 55%, #34d399 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+/* Subtítulo descriptivo de la portada */
 .hero-subtitle { max-width: 720px; margin: 0 auto 28px; color: var(--text-muted); font-size: 1.08rem; line-height: 1.65; }
 
+/* Cuadrícula responsiva para las tarjetas resumen de la portada */
 .hero-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; text-align: left; }
+/* Tarjetas glassmorphism compartidas entre portada y contenido */
 .hero-card, .glass-card {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -181,16 +289,24 @@ body.mode-guide .bottom-controls { display: none; }
     backdrop-filter: blur(12px);
     transition: border-color 0.2s ease, transform 0.2s ease;
 }
+/* Resalta el borde al pasar el cursor sobre la tarjeta */
 .hero-card:hover, .glass-card:hover { border-color: var(--border-light); }
+/* Icono grande superior dentro de tarjetas hero */
 .hero-card-icon { font-size: 1.7rem; margin-bottom: 10px; }
+/* Títulos internos de tarjetas */
 .hero-card h3, .glass-card h3 { font-size: 1.05rem; margin-bottom: 8px; color: #fff; }
+/* Párrafos descriptivos dentro de tarjetas */
 .hero-card p, .glass-card p { font-size: 0.92rem; color: var(--text-muted); line-height: 1.55; }
 
 /* --- Grids y tarjetas de contenido --- */
+/* Cuadrícula adaptable de 2 columnas */
 .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; margin-bottom: 18px; }
+/* Cuadrícula adaptable de 3 columnas */
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-bottom: 18px; }
 
+/* Lista sin viñetas nativas con separación vertical uniforme */
 .styled-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+/* Cada ítem reserva espacio a la izquierda para la viñeta personalizada */
 .styled-list li {
     position: relative;
     padding-left: 22px;
@@ -198,6 +314,7 @@ body.mode-guide .bottom-controls { display: none; }
     font-size: 0.95rem;
     line-height: 1.55;
 }
+/* Viñeta triangular cian insertada mediante pseudoelemento ::before */
 .styled-list li::before {
     content: "▸";
     position: absolute;
@@ -206,6 +323,7 @@ body.mode-guide .bottom-controls { display: none; }
     font-weight: 700;
 }
 
+/* Fragmentos de código en línea dentro de textos */
 code {
     font-family: var(--font-mono);
     font-size: 0.84em;
@@ -215,6 +333,7 @@ code {
     border-radius: 6px;
 }
 
+/* Bloques de código multilínea (<pre class="code-block">) */
 .code-block {
     background: #050811;
     border: 1px solid var(--border-subtle);
@@ -227,11 +346,13 @@ code {
     color: #e2e8f0;
     margin-top: 10px;
 }
+/* Colores opcionales para resaltado manual de sintaxis */
 .code-block .cm { color: #64748b; }
 .code-block .tag { color: #f472b6; }
 .code-block .attr { color: #38bdf8; }
 .code-block .val { color: #34d399; }
 
+/* Cajas de consejos rápidos (.tip-box) */
 .tip-box {
     border-radius: 14px;
     padding: 16px 18px;
@@ -242,11 +363,13 @@ code {
     font-size: 0.94rem;
     line-height: 1.6;
 }
+/* Variante ámbar para advertencias y errores frecuentes */
 .tip-box.warn {
     border-color: rgba(245, 158, 11, 0.35);
     background: rgba(245, 158, 11, 0.08);
     color: #fef3c7;
 }
+/* Variante verde esmeralda para buenas prácticas */
 .tip-box.good {
     border-color: rgba(16, 185, 129, 0.35);
     background: rgba(16, 185, 129, 0.08);
@@ -254,23 +377,30 @@ code {
 }
 
 /* --- Tablas comparativas --- */
+/* Tabla simple sin bordes dobles */
 .data-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+/* Celdas de cabecera y cuerpo */
 .data-table th, .data-table td {
     text-align: left;
     padding: 11px 14px;
     border-bottom: 1px solid var(--border-subtle);
 }
+/* Cabecera destacada en color primario */
 .data-table th { color: var(--primary); font-weight: 700; background: rgba(56, 189, 248, 0.06); }
+/* Color legible en celdas de datos */
 .data-table td { color: #cbd5e1; }
 
 /* --- Laboratorio Interactivo en Vivo --- */
+/* Contenedor principal del editor y vista previa */
 .lab-panel {
     background: var(--bg-card);
     border: 1px solid var(--border-light);
     border-radius: 16px;
     padding: 18px;
 }
+/* Fila de botones para cargar ejemplos predefinidos */
 .lab-presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+/* Botón individual de preset */
 .preset-btn {
     background: rgba(255, 255, 255, 0.06);
     color: var(--text-main);
@@ -282,9 +412,12 @@ code {
     cursor: pointer;
     transition: all 0.2s;
 }
+/* Estado activo y hover de botones de preset */
 .preset-btn:hover, .preset-btn.active { background: var(--primary); color: #070a13; border-color: var(--primary); }
 
+/* Distribución lado a lado: editor a la izquierda, iframe a la derecha */
 .lab-split { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+/* Área de texto donde el estudiante escribe HTML/CSS */
 .lab-editor {
     width: 100%;
     min-height: 270px;
@@ -298,6 +431,7 @@ code {
     line-height: 1.55;
     resize: vertical;
 }
+/* Marco iframe aislado con fondo blanco para renderizar el HTML/CSS en vivo */
 .lab-preview {
     width: 100%;
     min-height: 270px;
@@ -307,7 +441,9 @@ code {
 }
 
 /* --- Prácticas de la carpeta --- */
+/* Cuadrícula automática para listar archivos y subcarpetas del tema */
 .files-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 12px; }
+/* Tarjeta clicable hacia cada archivo de práctica */
 .file-card {
     background: rgba(14, 21, 38, 0.85);
     border: 1px solid var(--border-subtle);
@@ -320,11 +456,15 @@ code {
     gap: 4px;
     transition: border-color 0.2s, transform 0.2s;
 }
+/* Eleva levemente la tarjeta al pasar el ratón */
 .file-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+/* Nombre principal del archivo */
 .file-name { font-weight: 600; font-size: 0.94rem; color: #fff; }
+/* Ruta relativa en fuente monoespaciada */
 .file-path { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); word-break: break-all; }
 
 /* --- Controles inferiores --- */
+/* Cápsula flotante centrada abajo para avanzar y retroceder diapositivas */
 .bottom-controls {
     position: fixed;
     bottom: 18px;
@@ -341,6 +481,7 @@ code {
     z-index: 50;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
 }
+/* Botones Anterior / Siguiente */
 .ctrl-btn {
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
@@ -353,11 +494,15 @@ code {
     cursor: pointer;
     transition: all 0.2s;
 }
+/* Estado hover cuando el botón está habilitado */
 .ctrl-btn:hover:not(:disabled) { background: var(--primary); color: #070a13; border-color: var(--primary); }
+/* Apariencia atenuada cuando está en la primera o última diapositiva */
 .ctrl-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+/* Texto informativo de atajos de teclado */
 .ctrl-hint { font-family: var(--font-mono); font-size: 0.76rem; color: var(--text-muted); }
 
 /* --- Modal Overview --- */
+/* Capa a pantalla completa para ver todas las diapositivas en miniatura */
 .overview-modal {
     position: fixed;
     inset: 0;
@@ -368,7 +513,9 @@ code {
     padding: 84px 24px 32px;
     overflow-y: auto;
 }
+/* Muestra el modal cuando recibe la clase .open desde JS */
 .overview-modal.open { display: block; }
+/* Cuadrícula de tarjetas del índice */
 .overview-grid {
     max-width: 1040px;
     margin: 0 auto;
@@ -376,6 +523,7 @@ code {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 14px;
 }
+/* Tarjeta clicable de cada diapositiva en el índice */
 .overview-item {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -386,18 +534,27 @@ code {
     color: var(--text-main);
     transition: all 0.2s;
 }
+/* Resalta la diapositiva seleccionada o actual */
 .overview-item:hover, .overview-item.active { border-color: var(--primary); background: var(--bg-card-hover); }
+/* Etiqueta "SLIDE N" dentro de cada tarjeta del índice */
 .overview-num { font-family: var(--font-mono); font-size: 0.75rem; color: var(--primary); margin-bottom: 6px; display: block; }
 
+/* Ajustes responsivos para pantallas móviles y tablets pequeñas */
 @media (max-width: 780px) {
+    /* Oculta barra de progreso y etiquetas largas de botones para ganar espacio */
     .nav-progress-container, .btn-text { display: none; }
+    /* Apila el editor arriba y la vista previa abajo */
     .lab-split { grid-template-columns: 1fr; }
+    /* Oculta la pista de atajos de teclado en móvil */
     .ctrl-hint { display: none; }
 }
 
 /* --- Tarjetas Hero Interactivas --- */
+/* Indica que las tarjetas con data-jump son botones de salto rápido */
 .hero-card[data-jump] { cursor: pointer; position: relative; }
+/* Eleva y resalta la tarjeta al pasar el cursor */
 .hero-card[data-jump]:hover { border-color: var(--primary); transform: translateY(-4px); box-shadow: 0 12px 28px rgba(56, 189, 248, 0.16); }
+/* Añade una indicación visual automática al pie de las tarjetas con salto */
 .hero-card[data-jump]::after {
     content: "Ir al tema →";
     display: inline-block;
@@ -409,6 +566,7 @@ code {
 }
 
 /* --- Callouts Pedagógicos --- */
+/* Caja destacada para notas, analogías y advertencias */
 .callout {
     border-radius: 14px;
     padding: 14px 18px;
@@ -419,12 +577,17 @@ code {
     line-height: 1.55;
     color: var(--text-main);
 }
+/* Resalta texto en negrita dentro de los callouts */
 .callout strong { color: #fff; }
+/* Variante verde para consejos prácticos */
 .callout-tip { border-left: 4px solid var(--emerald); background: rgba(16, 185, 129, 0.08); }
+/* Variante ámbar para precauciones */
 .callout-warn { border-left: 4px solid var(--amber); background: rgba(245, 158, 11, 0.08); }
+/* Variante índigo para analogías del mundo real */
 .callout-analogy { border-left: 4px solid var(--indigo); background: rgba(129, 140, 248, 0.09); }
 
 /* --- Tablas Comparativas --- */
+/* Tabla estilizada con bordes redondeados y fondo oscuro */
 .compare-table {
     width: 100%;
     border-collapse: collapse;
@@ -435,11 +598,13 @@ code {
     overflow: hidden;
     border: 1px solid var(--border-subtle);
 }
+/* Espaciado interno de filas y columnas */
 .compare-table th, .compare-table td {
     padding: 11px 14px;
     text-align: left;
     border-bottom: 1px solid var(--border-subtle);
 }
+/* Cabecera en mayúsculas con fondo cian translúcido */
 .compare-table th {
     background: rgba(56, 189, 248, 0.1);
     color: var(--primary);
@@ -448,7 +613,9 @@ code {
     text-transform: uppercase;
     letter-spacing: 0.04em;
 }
+/* Elimina la línea inferior de la última fila */
 .compare-table tr:last-child td { border-bottom: none; }
+/* Estilo de código en línea dentro de tablas comparativas */
 .compare-table code {
     font-family: var(--font-mono);
     font-size: 0.82rem;
@@ -459,6 +626,7 @@ code {
 }
 
 /* --- Simuladores Visuales Interactivos --- */
+/* Panel dividido en controles a la izquierda (310px) y escenario a la derecha */
 .sim-panel {
     background: var(--bg-card);
     border: 1px solid var(--border-light);
@@ -468,11 +636,13 @@ code {
     grid-template-columns: 310px 1fr;
     gap: 18px;
 }
+/* Columna vertical de selectores y deslizadores */
 .sim-controls {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
+/* Grupo individual etiqueta + control */
 .sim-control {
     display: flex;
     flex-direction: column;
@@ -480,7 +650,9 @@ code {
     font-size: 0.85rem;
     color: var(--text-muted);
 }
+/* Etiqueta que muestra nombre a la izquierda y valor actual a la derecha */
 .sim-control label { font-weight: 600; color: var(--text-main); display: flex; justify-content: space-between; }
+/* Campos select, range y text dentro de simuladores */
 .sim-control select, .sim-control input[type="range"], .sim-control input[type="text"] {
     width: 100%;
     background: #070b15;
@@ -491,8 +663,11 @@ code {
     font-family: var(--font-mono);
     font-size: 0.82rem;
 }
+/* Personaliza el color del deslizador range */
 .sim-control input[type="range"] { padding: 0; accent-color: var(--primary); cursor: pointer; }
+/* Contenedor derecho del escenario visual + código CSS generado */
 .sim-stage-wrap { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+/* Caja donde se visualiza en vivo el comportamiento CSS */
 .sim-stage {
     background: #060913;
     border: 1px dashed rgba(56, 189, 248, 0.35);
@@ -502,6 +677,7 @@ code {
     overflow: hidden;
     position: relative;
 }
+/* Bloque que muestra el código CSS resultante del simulador */
 .sim-code {
     background: #050811;
     border: 1px solid var(--border-subtle);
@@ -513,12 +689,15 @@ code {
     white-space: pre-wrap;
     word-break: break-word;
 }
+/* En pantallas medianas o pequeñas apila controles y escenario */
 @media (max-width: 860px) {
     .sim-panel { grid-template-columns: 1fr; }
 }
 
 /* --- Quiz Interactivo --- */
+/* Contenedor vertical del cuestionario */
 .quiz-container { display: flex; flex-direction: column; gap: 16px; }
+/* Barra superior del quiz con puntaje y botón de reinicio */
 .quiz-header {
     display: flex;
     justify-content: space-between;
@@ -530,7 +709,9 @@ code {
     border-radius: 14px;
     padding: 12px 18px;
 }
+/* Texto del marcador actual */
 .quiz-score { font-family: var(--font-mono); font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+/* Botón para reiniciar todas las preguntas */
 .quiz-reset-btn {
     background: rgba(56, 189, 248, 0.14);
     color: #fff;
@@ -542,15 +723,20 @@ code {
     font-weight: 600;
     cursor: pointer;
 }
+/* Hover del botón reiniciar quiz */
 .quiz-reset-btn:hover { background: var(--primary); color: #070a13; }
+/* Tarjeta individual de cada pregunta */
 .quiz-question {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: 14px;
     padding: 18px;
 }
+/* Enunciado de la pregunta */
 .quiz-q-title { font-weight: 700; font-size: 1rem; margin-bottom: 12px; color: #fff; }
+/* Cuadrícula responsiva para las opciones de respuesta */
 .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+/* Botón de cada opción de respuesta */
 .quiz-option {
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid var(--border-subtle);
@@ -563,10 +749,15 @@ code {
     cursor: pointer;
     transition: all 0.2s;
 }
+/* Hover sobre opciones aún disponibles */
 .quiz-option:hover:not(:disabled) { border-color: var(--primary); background: rgba(56, 189, 248, 0.1); }
+/* Estilo cuando la opción marcada es la correcta */
 .quiz-option.is-correct { border-color: var(--emerald); background: rgba(16, 185, 129, 0.18); color: #fff; }
+/* Estilo cuando la opción elegida es incorrecta */
 .quiz-option.is-wrong { border-color: var(--rose); background: rgba(244, 63, 94, 0.18); color: #fff; }
+/* Quita el cursor de clic tras responder */
 .quiz-option:disabled { cursor: default; }
+/* Caja oculta de retroalimentación debajo de las opciones */
 .quiz-feedback {
     margin-top: 10px;
     font-size: 0.86rem;
@@ -575,11 +766,15 @@ code {
     border-radius: 8px;
     display: none;
 }
+/* Muestra la retroalimentación tras elegir respuesta */
 .quiz-feedback.show { display: block; }
+/* Retroalimentación positiva en verde */
 .quiz-feedback.ok { background: rgba(16, 185, 129, 0.12); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); }
+/* Retroalimentación de error en rosa */
 .quiz-feedback.err { background: rgba(244, 63, 94, 0.12); color: #fda4af; border: 1px solid rgba(244, 63, 94, 0.3); }
 
 /* --- Botón Probar en Lab --- */
+/* Botón contextual en diapositivas teóricas para cargar el código directo al Lab */
 .try-lab-btn {
     margin-top: 10px;
     background: rgba(56, 189, 248, 0.14);
@@ -596,10 +791,13 @@ code {
     gap: 6px;
     transition: all 0.2s;
 }
+/* Efecto hover del botón Probar en Lab */
 .try-lab-btn:hover { background: var(--primary); color: #070a13; }
 
 /* --- Botón Copiar en Bloques de Código --- */
+/* Contenedor relativo generado por JS alrededor de cada pre.code-block */
 .code-block-wrap { position: relative; }
+/* Botón flotante en la esquina superior derecha del bloque de código */
 .code-copy-btn {
     position: absolute;
     top: 8px;
@@ -615,4 +813,5 @@ code {
     z-index: 2;
     transition: all 0.2s;
 }
+/* Efecto hover del botón Copiar */
 .code-copy-btn:hover { background: var(--primary); color: #070a13; border-color: var(--primary); }
