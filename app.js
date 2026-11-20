@@ -181,196 +181,71 @@ const modules = [
     href: "JAVASCRIPT MASTER LEVEL/DOCUMENTACION/index.html",
   },
 
-  // --- SECCIÓN: EJERCICIOS PRÁCTICOS (MASTER, MID Y JUNIOR LEVEL) ---
-  // Ejercicio Master: carga diferida progresiva y animación al scroll
+  // --- SECCIÓN: EJERCICIOS PRÁCTICOS (PROGRESIÓN: JUNIOR → MID LEVEL) ---
+  // 01–11: Ejercicios Junior Level
   {
     cat: "ejercicios",
-    title: "Lazy Load con IntersectionObserver",
-    tag: "Master",
-    desc: "Carga progresiva de 45 publicaciones con animación al scroll.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Intersection Objects Lazyload/index.html",
-  },
-  // Ejercicio Master: CRUD persistente usando IndexedDB
-  {
-    cat: "ejercicios",
-    title: "CRUD con IndexedDB",
-    tag: "Master",
-    desc: "Gestor persistente de nombres en IndexedDB.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
-  },
-  // Ejercicio Master: carga por arrastre con barra de progreso animada
-  {
-    cat: "ejercicios",
-    title: "Drag & Drop File Reader",
-    tag: "Master",
-    desc: "Carga de archivos con barra de progreso animada.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Drag & Drop File Reader/index.html",
-  },
-  // Ejercicio Master: galería mosaico interactiva con Lightbox
-  {
-    cat: "ejercicios",
-    title: "Galería Dinámica",
-    tag: "Master",
-    desc: "Bento Grid interactivo con FileReader y Lightbox.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Galeria Dinamica/index.html",
-  },
-  // Ejercicio Master: selector de idioma persistente con LocalStorage
-  {
-    cat: "ejercicios",
-    title: "Idioma con LocalStorage",
-    tag: "Master",
-    desc: "Selector bilingüe persistente con modal animado.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Local Storage/index.html",
-  },
-  // Ejercicio Master: reloj digital en tiempo real con el objeto Date
-  {
-    cat: "ejercicios",
-    title: "Reloj Digital (Date)",
-    tag: "Master",
-    desc: "Reloj digital en tiempo real con setInterval.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Reloj/index.html",
-  },
-  // Ejercicio Master: aplicación de texturas mediante Drag & Drop
-  {
-    cat: "ejercicios",
-    title: "Texturizador Drag & Drop",
-    tag: "Master",
-    desc: "Aplicación de texturas por arrastre con dataTransfer.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Texturizador/index.html",
-  },
-
-  // Ejercicios Mid Level (7)
-  // Ejercicio Mid 1: Comprar computador
-  {
-    cat: "ejercicios",
-    title: "1. Comprar Computador",
-    tag: "Mid",
-    desc: "Práctica de objetos, condiciones y presupuesto en pantalla.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/index.html",
-  },
-  // Ejercicio Mid 2: Mostrar datos web
-  {
-    cat: "ejercicios",
-    title: "2. Mostrar Datos Web",
-    tag: "Mid",
-    desc: "Renderizado dinámico de información en el DOM.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html",
-  },
-  // Ejercicio Mid 3: Materia pendiente
-  {
-    cat: "ejercicios",
-    title: "3. Materia Pendiente",
-    tag: "Mid",
-    desc: "Validación de formularios y gestión de materias.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/3 Materia Pendiente/index.html",
-  },
-  // Ejercicio Mid 4: Recuperación de materia por docente
-  {
-    cat: "ejercicios",
-    title: "4. Recuperación por Docente",
-    tag: "Mid",
-    desc: "Asignación y control de estado académico.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/4 Recuperacion de Materia por Docente/index.html",
-  },
-  // Ejercicio Mid 5: Promedio de notas corrección
-  {
-    cat: "ejercicios",
-    title: "5. Promedio de Notas",
-    tag: "Mid",
-    desc: "Cálculo y validación de promedios con manejo de errores.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/5 Promedio de Notas Corrección/index.html",
-  },
-  // Ejercicio Mid 6: Notas de Cofla
-  {
-    cat: "ejercicios",
-    title: "6. Notas de Cofla",
-    tag: "Mid",
-    desc: "Promesas y asincronía simulando obtención de calificaciones.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html",
-  },
-  // Ejercicio Mid 7: Compañeros de Cofla Htdocs
-  {
-    cat: "ejercicios",
-    title: "7. Compañeros de Cofla",
-    tag: "Mid",
-    desc: "Consumo asíncrono de datos con Fetch/Axios.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/7 Compañeros de Cofla Htdocs/index.html",
-  },
-
-  // Ejercicios Junior Level (12)
-  // Ejercicio Junior 1: Helados y precios
-  {
-    cat: "ejercicios",
-    title: "1. Helados y Precios",
+    title: "01. Helados y Precios",
     tag: "Junior",
     desc: "Condicionales y selección de productos según dinero disponible.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/1 Helados y Precios/index.html",
   },
-  // Ejercicio Junior 2: Fiesta y entrada
   {
     cat: "ejercicios",
-    title: "2. Fiesta y Entrada",
+    title: "02. Fiesta y Entrada",
     tag: "Junior",
     desc: "Control de edad y horario con funciones y condicionales.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/2 Fiesta y Entrada/index.html",
   },
-  // Ejercicio Junior 3: Asistencia
   {
     cat: "ejercicios",
-    title: "3. Control de Asistencia",
+    title: "03. Control de Asistencia",
     tag: "Junior",
     desc: "Registro de asistencia con bucles y arreglos.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/3 Asistencia/index.html",
   },
-  // Ejercicio Junior 4: Calculadora básica
   {
     cat: "ejercicios",
-    title: "4. Calculadora Básica",
+    title: "04. Calculadora Básica",
     tag: "Junior",
     desc: "Operaciones aritméticas básicas mediante funciones.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/4 Calculadora Básica/index.html",
   },
-  // Ejercicio Junior 5: Celular nuevo
   {
     cat: "ejercicios",
-    title: "5. Celular Nuevo (POO)",
+    title: "05. Celular Nuevo (POO)",
     tag: "Junior",
     desc: "Modelado de dispositivos con clases y métodos.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/5 Celular Nuevo/index.html",
   },
-  // Ejercicio Junior 6: Apps celular nuevo
   {
     cat: "ejercicios",
-    title: "6. Apps Celular Nuevo",
+    title: "06. Apps Celular Nuevo",
     tag: "Junior",
     desc: "Simulación de descarga e instalación de aplicaciones.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/6 Apps Celular Nuevo/index.html",
   },
-  // Ejercicio Junior 7: Calculadora avanzada
   {
     cat: "ejercicios",
-    title: "7. Calculadora Avanzada",
+    title: "07. Calculadora Avanzada",
     tag: "Junior",
     desc: "Potencias y raíces usando el objeto Math.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/7 Calculadora Avanzada/index.html",
   },
-  // Ejercicio Junior 8: Materias y profesores
   {
     cat: "ejercicios",
-    title: "8. Materias y Profesores",
+    title: "08. Materias y Profesores",
     tag: "Junior",
     desc: "Búsqueda y filtrado sobre arreglos de datos.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/8 Materias y Profesores/index.html",
   },
-  // Ejercicio Junior 9: Inscripción de materias
   {
     cat: "ejercicios",
-    title: "9. Inscripción de Materias",
+    title: "09. Inscripción de Materias",
     tag: "Junior",
     desc: "Validación de cupos e inscripción dinámica.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/9 Inscripción de Materias/index.html",
   },
-  // Ejercicio Junior 10: Nota final consola
   {
     cat: "ejercicios",
     title: "10. Nota Final Consola",
@@ -378,7 +253,6 @@ const modules = [
     desc: "Cálculo de resultados y estilos en console.log.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/10 Nota Final Consola/index.html",
   },
-  // Ejercicio Junior 11: Ordenar tareas
   {
     cat: "ejercicios",
     title: "11. Ordenar Tareas",
@@ -386,13 +260,116 @@ const modules = [
     desc: "Planificación y agrupación de actividades diarias.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/11 Ordenar Tareas/index.html",
   },
-  // Ejercicio Junior 12: La llave correcta
+  // 12–15: Ejercicios Mid Level
   {
     cat: "ejercicios",
-    title: "12. La Llave Correcta",
-    tag: "Junior",
+    title: "12. Comprar Computador",
+    tag: "Mid",
+    desc: "Práctica de objetos, condiciones y presupuesto en pantalla.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/index.html",
+  },
+  {
+    cat: "ejercicios",
+    title: "13. Mostrar Datos Web",
+    tag: "Mid",
+    desc: "Renderizado dinámico de información en el DOM.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html",
+  },
+  {
+    cat: "ejercicios",
+    title: "14. Materia Pendiente",
+    tag: "Mid",
+    desc: "Validación de formularios y gestión de materias.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/3 Materia Pendiente/index.html",
+  },
+  {
+    cat: "ejercicios",
+    title: "15. Promedio de Notas",
+    tag: "Mid",
+    desc: "Cálculo y validación de promedios con manejo de errores.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/5 Promedio de Notas Corrección/index.html",
+  },
+
+  // --- SECCIÓN: PROYECTOS INTEGRADORES (PROGRESIÓN: HTML/CSS → JUNIOR → MID → MASTER) ---
+  // 10: Proyecto Junior Level
+  {
+    cat: "proyectos",
+    title: "10. La Llave Correcta",
+    tag: "Proyecto Junior",
     desc: "Creación dinámica de tarjetas seleccionables en el DOM.",
     href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/index.html",
+  },
+  // 11–13: Proyectos Mid Level
+  {
+    cat: "proyectos",
+    title: "11. Recuperación por Docente",
+    tag: "Proyecto Mid",
+    desc: "Asignación y control de estado académico.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/4 Recuperacion de Materia por Docente/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "12. Notas de Cofla",
+    tag: "Proyecto Mid",
+    desc: "Promesas y asincronía simulando obtención de calificaciones.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "13. Compañeros de Cofla",
+    tag: "Proyecto Mid",
+    desc: "Consumo asíncrono de datos con Fetch/Axios.",
+    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/7 Compañeros de Cofla Htdocs/index.html",
+  },
+  // 14–20: Proyectos Master Level
+  {
+    cat: "proyectos",
+    title: "14. Reloj Digital (Date)",
+    tag: "Proyecto Master",
+    desc: "Reloj digital en tiempo real con setInterval.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Reloj/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "15. Idioma con LocalStorage",
+    tag: "Proyecto Master",
+    desc: "Selector bilingüe persistente con modal animado.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Local Storage/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "16. Drag & Drop File Reader",
+    tag: "Proyecto Master",
+    desc: "Carga de archivos con barra de progreso animada.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Drag & Drop File Reader/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "17. Texturizador Drag & Drop",
+    tag: "Proyecto Master",
+    desc: "Aplicación de texturas por arrastre con dataTransfer.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Texturizador/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "18. Galería Dinámica",
+    tag: "Proyecto Master",
+    desc: "Bento Grid interactivo con FileReader y Lightbox.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Galeria Dinamica/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "19. Lazy Load con IntersectionObserver",
+    tag: "Proyecto Master",
+    desc: "Carga progresiva de 45 publicaciones con animación al scroll.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Intersection Objects Lazyload/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "20. CRUD con IndexedDB",
+    tag: "Proyecto Master",
+    desc: "Gestor persistente de nombres en IndexedDB.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
   },
 
   // --- SECCIÓN: JS MID LEVEL ---
@@ -1383,69 +1360,69 @@ const modules = [
     href: "HTML y CSS/CSS avanzado/Ejercicios/Ventana Modal/modal.html",
   },
 
-  // 13. Proyectos Integradores (al final)
+  // 01–09: Proyectos HTML y CSS (al inicio de Proyectos)
   {
-    cat: "htmlcss",
-    title: "Proyectos HTML y CSS (Guía + Showcase)",
+    cat: "proyectos",
+    title: "01. Proyectos HTML y CSS (Guía + Showcase)",
     tag: "Proyecto",
     desc: "Guía arquitectónica de los 7 proyectos reales de CSS puro, quiz de técnicas y acceso directo.",
     href: "HTML y CSS/PROYECTOS/index.html",
   },
   {
-    cat: "htmlcss",
-    title: "Proyecto: Chatbox",
+    cat: "proyectos",
+    title: "02. Accordion (Summary)",
     tag: "Proyecto",
-    desc: "Interfaz de mensajería moderna con Flexbox y burbujas.",
-    href: "HTML y CSS/PROYECTOS/CHATBOX/index.html",
+    desc: "Acordeón semántico nativo usando <details> y <summary>.",
+    href: "HTML y CSS/PROYECTOS/ACCORDION MENU/SUMMARY-DETAILS/index.html",
   },
   {
-    cat: "htmlcss",
-    title: "Proyecto: Flipper Card 3D",
-    tag: "Proyecto",
-    desc: "Efecto de rotación 3D con perspectiva CSS.",
-    href: "HTML y CSS/PROYECTOS/FLIPPER CARD/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Proyecto: One View Page",
-    tag: "Proyecto",
-    desc: "Maquetación de pantalla completa con diseño limpio.",
-    href: "HTML y CSS/PROYECTOS/ONE VIEW PAGE/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Proyecto: Sidebar Menu",
-    tag: "Proyecto",
-    desc: "Barra de navegación lateral adaptable con transiciones.",
-    href: "HTML y CSS/PROYECTOS/SIDEBAR MENU/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Proyecto: Web Page",
-    tag: "Proyecto",
-    desc: "Sitio web completo estructurado con Grid y Flexbox.",
-    href: "HTML y CSS/PROYECTOS/WEB PAGE/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Proyecto: Web Page Animations",
-    tag: "Proyecto",
-    desc: "Transiciones y @keyframes aplicados a una landing page.",
-    href: "HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Proyecto: Accordion Menu (Divs)",
+    cat: "proyectos",
+    title: "03. Accordion Menu (Divs)",
     tag: "Proyecto",
     desc: "Acordeón interactivo construido con contenedores div.",
     href: "HTML y CSS/PROYECTOS/ACCORDION MENU/DIVS/index.html",
   },
   {
-    cat: "htmlcss",
-    title: "Proyecto: Accordion (Summary)",
+    cat: "proyectos",
+    title: "04. Chatbox",
     tag: "Proyecto",
-    desc: "Acordeón semántico nativo usando <details> y <summary>.",
-    href: "HTML y CSS/PROYECTOS/ACCORDION MENU/SUMMARY-DETAILS/index.html",
+    desc: "Interfaz de mensajería moderna con Flexbox y burbujas.",
+    href: "HTML y CSS/PROYECTOS/CHATBOX/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "05. Flipper Card 3D",
+    tag: "Proyecto",
+    desc: "Efecto de rotación 3D con perspectiva CSS.",
+    href: "HTML y CSS/PROYECTOS/FLIPPER CARD/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "06. One View Page",
+    tag: "Proyecto",
+    desc: "Maquetación de pantalla completa con diseño limpio.",
+    href: "HTML y CSS/PROYECTOS/ONE VIEW PAGE/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "07. Sidebar Menu",
+    tag: "Proyecto",
+    desc: "Barra de navegación lateral adaptable con transiciones.",
+    href: "HTML y CSS/PROYECTOS/SIDEBAR MENU/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "08. Web Page",
+    tag: "Proyecto",
+    desc: "Sitio web completo estructurado con Grid y Flexbox.",
+    href: "HTML y CSS/PROYECTOS/WEB PAGE/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "09. Web Page Animations",
+    tag: "Proyecto",
+    desc: "Transiciones y @keyframes aplicados a una landing page.",
+    href: "HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html",
   },
 ];
 
@@ -1461,6 +1438,8 @@ const titles = {
   junior: "🌱 JavaScript Junior Level",
   // Encabezado para HTML y CSS
   htmlcss: "🎨 HTML5 y CSS3",
+  // Encabezado para Proyectos Integradores
+  proyectos: "💼 Proyectos Integradores — HTML/CSS y JavaScript",
 };
 
 // Referencia al contenedor principal donde se inyectan las secciones y tarjetas
@@ -1480,7 +1459,7 @@ function render() {
   portal.innerHTML = "";
 
   // Definimos el orden visual en que se mostrarán las categorías
-  const order = ["master", "ejercicios", "mid", "junior", "htmlcss"];
+  const order = ["master", "ejercicios", "proyectos", "mid", "junior", "htmlcss"];
   // Recorremos cada categoría en el orden establecido
   order.forEach((cat) => {
     // Si hay un filtro activo distinto de 'all' y no coincide con esta categoría, la omitimos
@@ -1495,6 +1474,11 @@ function render() {
     );
     // Si ningún módulo coincide en esta categoría, no creamos sección vacía
     if (items.length === 0) return;
+
+    // Ordena numéricamente Ejercicios (01–15) y Proyectos (01–20) según el avance del curso
+    if (cat === "ejercicios" || cat === "proyectos") {
+      items.sort((a, b) => parseInt(a.title, 10) - parseInt(b.title, 10));
+    }
 
     // Creamos el elemento <section> contenedor de la categoría
     const sec = document.createElement("section");
