@@ -575,6 +575,7 @@ tbody tr:hover td {
 .error,
 .error-res,
 .error-msg.error,
+.result-box.err,
 .resultado.error,
 .reprobados,
 .desaprobados,
