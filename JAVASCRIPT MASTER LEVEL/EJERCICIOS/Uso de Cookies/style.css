@@ -1,0 +1,346 @@
+/* ==========================================================================
+   EJERCICIO: USO DE COOKIES (CONSENTIMIENTO PERSISTENTE) - MASTER LEVEL
+   Estilos visuales oscuros neón documentados LÍNEA POR LÍNEA en español
+   ========================================================================== */
+
+/* Selector universal: asegura que padding y border se incluyan en el ancho total */
+* {
+    /* Modelo de caja moderno para evitar desbordamientos */
+    box-sizing: border-box;
+}
+
+/* Estilos base del cuerpo del documento */
+body {
+    /* Color de texto claro de alta legibilidad sobre fondo oscuro */
+    color: #f8fafc;
+    /* Tipografía principal del curso */
+    font-family: 'Outfit', 'Segoe UI', sans-serif;
+    /* Elimina márgenes por defecto del navegador */
+    margin: 0;
+    /* Espaciado interno general de la página */
+    padding: 32px 16px 80px;
+}
+
+/* Resetea márgenes en encabezados y párrafos */
+h2, h3, p {
+    /* Elimina margen exterior inicial */
+    margin: 0;
+    /* Elimina relleno inicial */
+    padding: 0;
+}
+
+/* Contenedor principal que centra el enunciado y el panel de estado */
+.cookie-page {
+    /* Ocupa el 92% del ancho disponible */
+    width: 92%;
+    /* Limita el ancho máximo para lectura cómoda */
+    max-width: 900px;
+    /* Centra horizontalmente */
+    margin: 0 auto;
+    /* Organiza las tarjetas en columna */
+    display: flex;
+    /* Dirección vertical */
+    flex-direction: column;
+    /* Separación uniforme entre secciones */
+    gap: 22px;
+}
+
+/* Ajustes de espaciado interno en tarjetas de enunciado y estado */
+.cookie-page .enunciado,
+.cookie-page .cookie-status-card {
+    /* Relleno interno generoso */
+    padding: 26px;
+    /* Evita márgenes laterales innecesarios dentro de .cookie-page */
+    margin: 0;
+    /* Ocupa todo el ancho de .cookie-page */
+    width: 100%;
+}
+
+/* Párrafo descriptivo del enunciado */
+.cookie-page .enunciado p {
+    /* Espacio superior respecto al título */
+    margin-top: 12px;
+    /* Interlineado cómodo */
+    line-height: 1.65;
+}
+
+/* Tarjeta inferior que muestra el estado de la cookie */
+.cookie-status-card {
+    /* Centra el contenido de la tarjeta de estado */
+    text-align: center;
+    /* Disposición vertical ordenada */
+    display: flex;
+    /* Dirección en columna */
+    flex-direction: column;
+    /* Centra elementos hijos horizontalmente */
+    align-items: center;
+    /* Separación entre elementos internos */
+    gap: 14px;
+}
+
+/* Caja de estado visual (aceptada en verde neón / rechazada en rojo neón) */
+.cookie-status {
+    /* Ancho completo hasta un máximo legible */
+    width: 100%;
+    /* Limita el ancho de la píldora de estado */
+    max-width: 560px;
+    /* Espaciado interno cómodo */
+    padding: 14px 18px;
+    /* Esquinas redondeadas */
+    border-radius: 12px;
+    /* Fuente en negrita */
+    font-weight: 700;
+    /* Tamaño de letra legible */
+    font-size: 1rem;
+    /* Transición suave al cambiar de estado */
+    transition: all 0.25s ease;
+}
+
+/* Línea técnica que muestra el valor crudo de document.cookie */
+.cookie-raw {
+    /* Fuente monoespaciada o secundaria */
+    font-size: 0.9rem;
+    /* Color gris azulado suave */
+    color: #94a3b8;
+    /* Permite cortar cadenas largas sin desbordar */
+    word-break: break-all;
+}
+
+/* Fila de botones para reabrir el modal o borrar la cookie */
+.cookie-controls {
+    /* Alinea los botones en fila */
+    display: flex;
+    /* Permite saltar de línea en pantallas pequeñas */
+    flex-wrap: wrap;
+    /* Centra los botones */
+    justify-content: center;
+    /* Separación entre botones */
+    gap: 12px;
+    /* Margen superior */
+    margin-top: 4px;
+}
+
+/* Capa de fondo oscuro difuminado del modal de consentimiento */
+.bg-modal {
+    /* Fondo negro semitransparente */
+    background: rgba(5, 7, 17, 0.8);
+    /* Desenfoque tipo vidrio detrás del modal */
+    backdrop-filter: blur(8px);
+    /* Fijo cubriendo toda la ventana */
+    position: fixed;
+    /* Cubre los cuatro bordes */
+    inset: 0;
+    /* Oculto inicialmente mediante opacidad */
+    opacity: 0;
+    /* Transición suave de aparición y desaparición */
+    transition: opacity 0.45s ease;
+    /* Por defecto queda detrás y no bloquea clics */
+    z-index: -1;
+    /* Centra el modal en pantalla usando Flexbox */
+    display: flex;
+    /* Centrado vertical */
+    align-items: center;
+    /* Centrado horizontal */
+    justify-content: center;
+    /* Margen de seguridad en móviles */
+    padding: 16px;
+}
+
+/* Caja central del modal de cookies */
+.bg-modal .modal {
+    /* Ancho adaptable */
+    width: min(440px, 100%);
+    /* Relleno interno equilibrado */
+    padding: 30px 26px !important;
+    /* Texto centrado */
+    text-align: center;
+    /* Aplica una ligera escala inicial para animación */
+    transform: translateY(8px);
+    /* Suaviza el movimiento */
+    transition: transform 0.35s ease;
+}
+
+/* Insignia superior del modal */
+.modal-badge {
+    /* Se comporta como bloque en línea */
+    display: inline-block;
+    /* Fuente monoespaciada */
+    font-family: 'Fira Code', monospace;
+    /* Tamaño compacto */
+    font-size: 0.72rem;
+    /* Negrita */
+    font-weight: 700;
+    /* Color cian neón */
+    color: #00f0ff;
+    /* Fondo cian sutil */
+    background: rgba(0, 240, 255, 0.12);
+    /* Borde cian translúcido */
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    /* Relleno tipo píldora */
+    padding: 4px 12px;
+    /* Bordes completamente redondeados */
+    border-radius: 999px;
+    /* Espacio inferior */
+    margin-bottom: 12px;
+}
+
+/* Párrafo explicativo dentro del modal */
+.modal-desc {
+    /* Color gris claro legible */
+    color: #cbd5e1 !important;
+    /* Tamaño de texto cómodo */
+    font-size: 0.94rem;
+    /* Interlineado amplio */
+    line-height: 1.55;
+    /* Separación arriba y abajo */
+    margin: 12px 0 20px;
+}
+
+/* Contenedor de los botones Sí / No del modal */
+.modal-actions {
+    /* Disposición en fila */
+    display: flex;
+    /* Centra ambos botones */
+    justify-content: center;
+    /* Permite envolver en pantallas muy angostas */
+    flex-wrap: wrap;
+    /* Espacio entre botones */
+    gap: 12px;
+}
+
+/* Estilo base para botones del ejercicio */
+button {
+    /* Relleno cómodo */
+    padding: 10px 22px;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Peso seminegrita */
+    font-weight: 700;
+    /* Cursor interactivo */
+    cursor: pointer;
+}
+
+/* Botón Aceptar en verde neón */
+.btn-accept {
+    /* Texto verde neón */
+    color: #00ff88 !important;
+    /* Fondo verde translúcido */
+    background: rgba(0, 255, 136, 0.14) !important;
+    /* Borde verde neón */
+    border: 1px solid rgba(0, 255, 136, 0.65) !important;
+    /* Resplandor verde neón */
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.25) !important;
+}
+
+/* Hover del botón Aceptar */
+.btn-accept:hover {
+    /* Fondo sólido verde neón */
+    background: #00ff88 !important;
+    /* Texto oscuro para máximo contraste */
+    color: #050711 !important;
+    /* Intensifica el resplandor */
+    box-shadow: 0 0 24px rgba(0, 255, 136, 0.6) !important;
+}
+
+/* Botón Rechazar en rojo neón */
+.btn-deny {
+    /* Texto rojo neón */
+    color: #ff3358 !important;
+    /* Fondo rojo translúcido */
+    background: rgba(255, 51, 88, 0.14) !important;
+    /* Borde rojo neón */
+    border: 1px solid rgba(255, 51, 88, 0.65) !important;
+    /* Resplandor rojo neón */
+    box-shadow: 0 0 16px rgba(255, 51, 88, 0.25) !important;
+}
+
+/* Hover del botón Rechazar */
+.btn-deny:hover {
+    /* Fondo sólido rojo neón */
+    background: #ff3358 !important;
+    /* Texto blanco para máximo contraste */
+    color: #ffffff !important;
+    /* Intensifica el resplandor */
+    box-shadow: 0 0 24px rgba(255, 51, 88, 0.6) !important;
+}
+
+
+/* Párrafo explicativo dentro del modal */
+.modal-desc {
+    /* Color gris claro legible */
+    color: #cbd5e1 !important;
+    /* Tamaño de texto cómodo */
+    font-size: 0.94rem;
+    /* Interlineado amplio */
+    line-height: 1.55;
+    /* Separación arriba y abajo */
+    margin: 12px 0 20px;
+}
+
+/* Contenedor de los botones Sí / No del modal */
+.modal-actions {
+    /* Disposición en fila */
+    display: flex;
+    /* Centra ambos botones */
+    justify-content: center;
+    /* Permite envolver en pantallas muy angostas */
+    flex-wrap: wrap;
+    /* Espacio entre botones */
+    gap: 12px;
+}
+
+/* Estilo base para botones del ejercicio */
+button {
+    /* Relleno cómodo */
+    padding: 10px 22px;
+    /* Esquinas redondeadas */
+    border-radius: 10px;
+    /* Peso seminegrita */
+    font-weight: 700;
+    /* Cursor interactivo */
+    cursor: pointer;
+}
+
+/* Botón Aceptar en verde neón */
+.btn-accept {
+    /* Texto verde neón */
+    color: #00ff88 !important;
+    /* Fondo verde translúcido */
+    background: rgba(0, 255, 136, 0.14) !important;
+    /* Borde verde neón */
+    border: 1px solid rgba(0, 255, 136, 0.65) !important;
+    /* Resplandor verde neón */
+    box-shadow: 0 0 16px rgba(0, 255, 136, 0.25) !important;
+}
+
+/* Hover del botón Aceptar */
+.btn-accept:hover {
+    /* Fondo sólido verde neón */
+    background: #00ff88 !important;
+    /* Texto oscuro para máximo contraste */
+    color: #050711 !important;
+    /* Intensifica el resplandor */
+    box-shadow: 0 0 24px rgba(0, 255, 136, 0.6) !important;
+}
+
+/* Botón Rechazar en rojo neón */
+.btn-deny {
+    /* Texto rojo neón */
+    color: #ff3358 !important;
+    /* Fondo rojo translúcido */
+    background: rgba(255, 51, 88, 0.14) !important;
+    /* Borde rojo neón */
+    border: 1px solid rgba(255, 51, 88, 0.65) !important;
+    /* Resplandor rojo neón */
+    box-shadow: 0 0 16px rgba(255, 51, 88, 0.25) !important;
+}
+
+/* Hover del botón Rechazar */
+.btn-deny:hover {
+    /* Fondo sólido rojo neón */
+    background: #ff3358 !important;
+    /* Texto blanco para máximo contraste */
+    color: #ffffff !important;
+    /* Intensifica el resplandor */
+    box-shadow: 0 0 24px rgba(255, 51, 88, 0.6) !important;
+}

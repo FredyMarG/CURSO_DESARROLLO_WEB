@@ -379,6 +379,13 @@ const modules = [
     desc: "Gestor persistente de nombres en IndexedDB.",
     href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
   },
+  {
+    cat: "proyectos",
+    title: "21. Uso de Cookies (Consentimiento)",
+    tag: "Proyecto Master",
+    desc: "Modal interactivo de aceptación de cookies con expiración UTC y estado neón.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Uso de Cookies/index.html",
+  },
 
   // --- SECCIÓN: JS MID LEVEL ---
   // Práctica de programación asíncrona moderna con async y await
