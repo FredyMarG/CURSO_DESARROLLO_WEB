@@ -20,6 +20,14 @@ const modules = [
     desc: "CacheStorage, put/match/delete, estrategias PWA y soporte offline.",
     href: "JAVASCRIPT MASTER LEVEL/Cache/index.html",
   },
+  // Módulo de Cookies (document.cookie) para persistencia HTTP y seguridad web
+  {
+    cat: "master",
+    title: "Cookies (document.cookie)",
+    tag: "11 Slides",
+    desc: "Creación, lectura, modificación, eliminación, encodeURIComponent, SameSite y Lab.",
+    href: "JAVASCRIPT MASTER LEVEL/Cookies/index.html",
+  },
   // Módulo de API nativa de arrastrar y soltar elementos y archivos
   {
     cat: "master",

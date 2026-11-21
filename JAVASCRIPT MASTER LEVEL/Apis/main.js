@@ -6,7 +6,7 @@
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: En terminal con 'node main.js' o directamente en la consola del navegador
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/APIs.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/apuntes/APIs.md):
  * 1. Definición de API (Application Programming Interface)
  * 2. Interfaz de Código (API) vs. Interfaz de Usuario (UI)
  * 3. Sintaxis básica de Fetch API y anatomía de una petición HTTP

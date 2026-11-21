@@ -6,7 +6,7 @@
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: Directamente en la consola del navegador o en terminal con 'node main.js'
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/LOCALSTORAGE.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/apuntes/LOCALSTORAGE.md):
  * 1. ¿Qué es el Almacenamiento Web (Web Storage) y por qué supera a las Cookies?
  * 2. Primer contacto práctico: Guardar y leer con setItem("nombre", "Fredy") y getItem()
  * 3. Diferencias clave: LocalStorage (Permanente) vs. SessionStorage (Temporal por pestaña)

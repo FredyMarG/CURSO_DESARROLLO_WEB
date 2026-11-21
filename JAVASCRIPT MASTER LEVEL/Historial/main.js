@@ -6,7 +6,7 @@
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: Directamente en la consola del navegador o en terminal con 'node main.js'
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/HISTORIAL.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/apuntes/HISTORIAL.md):
  * 1. Introducción al objeto 'history' y el modelo de pila de navegación (stack)
  * 2. Navegación básica tradicional: 'history.back()' y 'history.forward()'
  * 3. Tamaño y límites de la sesión: la propiedad 'history.length'

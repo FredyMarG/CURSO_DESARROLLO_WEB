@@ -6,7 +6,7 @@
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: En consola del navegador o directamente en terminal con 'node main.js'
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/MATCHMEDIA.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/apuntes/MATCHMEDIA.md):
  * 1. ¿Qué es window.matchMedia()? Media queries dinámicas evaluadas desde JavaScript
  * 2. Anatomía de MediaQueryList: propiedad .matches, .media y evento change (onchange)
  * 3. Patrón estándar: Evaluación inicial obligatoria + suscripción reactiva en tiempo real

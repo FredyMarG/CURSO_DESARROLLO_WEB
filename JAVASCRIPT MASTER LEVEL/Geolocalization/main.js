@@ -6,7 +6,7 @@
  * Propósito: Guía práctica ejecutable, comentada y explicada línea por línea al 100%
  * Ejecución: Directamente en la consola del navegador o en terminal con 'node main.js'
  * 
- * TEMARIO DEL MÓDULO (DOCUMENTACION/GEOLOCALIZACIÓN.md):
+ * TEMARIO DEL MÓDULO (DOCUMENTACION/apuntes/GEOLOCALIZACIÓN.md):
  * 1. Introducción a la API de Geolocalización y verificación de soporte
  * 2. Contexto seguro obligatorio (HTTPS o localhost) y privacidad del usuario
  * 3. El método asíncrono 'getCurrentPosition(success, error, options)'
