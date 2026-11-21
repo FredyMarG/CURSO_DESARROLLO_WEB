@@ -136,6 +136,14 @@
             solution: 'document.cookie = `usuario=${encodeURIComponent("Ana; Pro")}; max-age=3600; path=/; SameSite=Lax`;',
             test: v => /document\.cookie\s*=/.test(v) && /encodeURIComponent\s*\(/.test(v) && /max-age/i.test(v)
         },
+        'Canvas': { // Reto práctico de HTML5 Canvas 2D
+            title: 'Reto Canvas 2D: Contexto + Rectángulo Neón',
+            desc: 'Obtén el contexto "2d" del canvas, asigna fillStyle y dibuja un rectángulo con fillRect().',
+            placeholder: 'const ctx = canvas.getContext("2d");\nctx.fillStyle = "#00f0ff";\nctx.fillRect(20, 20, 120, 80);',
+            hint: 'Incluye getContext("2d"), fillStyle y fillRect(...).',
+            solution: 'const ctx = canvas.getContext("2d");\nctx.fillStyle = "#00f0ff";\nctx.fillRect(20, 20, 140, 80);',
+            test: v => /getContext\s*\(\s*["']2d["']\s*\)/.test(v) && /fillStyle\s*=/.test(v) && /fillRect\s*\(/.test(v)
+        },
         'Objeto Screen': { // Instrucción JavaScript
             title: 'Reto Screen: Medir Barra del Sistema',
             desc: 'Calcula el alto ocupado por la barra del sistema restando screen.availHeight a screen.height.',

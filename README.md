@@ -31,7 +31,7 @@ CURSO_DESARROLLO_WEB/
 ├── HTML y CSS/                   # 10 módulos principales + 8 guías .md + sub-módulos y proyectos
 ├── JAVASCRIPT JUNIOR LEVEL/      # 13 módulos + 14 guías .md + 12 ejercicios
 ├── JAVASCRIPT MID LEVEL/         # 19 módulos + 25 guías .md + 7 ejercicios
-└── JAVASCRIPT MASTER LEVEL/      # 23 módulos + 23 guías .md + 8 ejercicios
+└── JAVASCRIPT MASTER LEVEL/      # 24 módulos + 24 guías .md + 8 ejercicios
 ```
 
 ---
@@ -51,8 +51,8 @@ CURSO_DESARROLLO_WEB/
 - **Práctica:** 19 módulos interactivos con laboratorio, reto práctico y quiz, más 7 ejercicios en `EJERCICIOS/`.
 
 ### 4. [JavaScript Master Level](./JAVASCRIPT%20MASTER%20LEVEL)
-- **Documentación (`JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 23 guías avanzadas sobre Web APIs y fundamentos profundos (`APIs`, `Cache`, `Cookies`, `Drag & Drop`, `File Reader`, `Funciones Flecha`, `Geolocalización`, `Historial`, `IndexedDB`, `Intersection Observer`, `LocalStorage`, `MatchMedia`, `Memoization`, `Modo Estricto`, `Objeto Date`, `Objeto Navigator`, `Objeto Screen`, `Notifications`, `Operador Ternario`, `Prototipos`, `Service Workers`, `Visibility Change`, `Web Workers`).
-- **Práctica:** 23 módulos interactivos y 8 ejercicios avanzados en `EJERCICIOS/` (incluyendo `Uso de Cookies`, `Drag & Drop File Reader`, `IndexedDB`, `Intersection Objects Lazyload`, `Galería Dinámica`, `Local Storage`, `Reloj` y `Texturizador`).
+- **Documentación (`JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 24 guías avanzadas sobre Web APIs y fundamentos profundos (`APIs`, `Cache`, `Canvas`, `Cookies`, `Drag & Drop`, `File Reader`, `Funciones Flecha`, `Geolocalización`, `Historial`, `IndexedDB`, `Intersection Observer`, `LocalStorage`, `MatchMedia`, `Memoization`, `Modo Estricto`, `Objeto Date`, `Objeto Navigator`, `Objeto Screen`, `Notifications`, `Operador Ternario`, `Prototipos`, `Service Workers`, `Visibility Change`, `Web Workers`).
+- **Práctica:** 24 módulos interactivos y 8 ejercicios avanzados en `EJERCICIOS/` (incluyendo `Uso de Cookies`, `Drag & Drop File Reader`, `IndexedDB`, `Intersection Objects Lazyload`, `Galería Dinámica`, `Local Storage`, `Reloj` y `Texturizador`).
 
 ---
 

@@ -148,6 +148,14 @@ const modules = [
     desc: "Resolución total, availWidth/availHeight, colorDepth, orientation y Lab.",
     href: "JAVASCRIPT MASTER LEVEL/Objeto Screen/index.html",
   },
+  // Módulo sobre gráficos 2D con HTML5 Canvas API (rectángulos, paths, arcos y animación)
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Canvas (HTML5 Canvas 2D)",
+    tag: "11 Slides",
+    desc: "Contexto 2D, fillRect/strokeRect, beginPath, arc, requestAnimationFrame y Lab.",
+    href: "JAVASCRIPT MASTER LEVEL/Canvas/index.html",
+  },
   // Módulo sobre expresiones condicionales cortas y Nullish Coalescing
   { // Instrucción JavaScript
     cat: "master",
