@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../slides-engine.css" />
     <script src="../slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23fb923c'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8F%97%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
@@ -204,111 +207,94 @@
                 </div>
             </div>
         </section>
-        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+                <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Citas, Fechas y Semántica">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">1. Citas, Fechas y Semántica en Línea</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;blockquote&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;blockquote&gt;</code> y <code>&lt;/blockquote&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;dd&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;dd&gt;</code> provee detalles acerca de o la definición de un término precedente (<code>&lt;dt&gt;</code>) en una lista de descripciones (<code>&lt;dl&gt;</code>).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;div&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;div&gt;</code> y <code>&lt;/div&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;dl&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;dl&gt;</code> representa una lista descriptiva.</p>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento encierra una lista de grupos de términos (especificados con el uso del elemento <code>&lt;dt&gt;</code>) y de descripciones (proveídas con elementos <code>&lt;dd&gt;</code>).</p>
-<p style="margin-bottom:8px;line-height:1.6;">Algunos usos comunes para este elemento son implementar un glosario o para desplegar metadatos (lista de pares llave-valor).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;dt&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;dt&gt;</code> especifica un término en una descripción o lista de definiciones, y como tal debe utilizarse dentro de un elemento <code>&lt;dl&gt;</code>.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Es usualmente seguido por un elemento <code>&lt;dd&gt;</code>; sin embargo, múltiples elementos <code>&lt;dt&gt;</code> en un renglón indican diferentes términos los cuales todos son definidos por el siguiente elemento <code>&lt;dd&gt;</code>.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;figcaption&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;figcaption&gt;</code> representa un subtítulo o leyenda asociado al contenido del elemento padre <code>&lt;figure&gt;</code>, pudiendo ser colocado como primer o último hijo.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Es importante destacar que el elemento <code>&lt;figcaption&gt;</code> es opcional.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;figure&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;figure&gt;</code> representa contenido independiente, a menudo con un título.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Si bien se relaciona con el flujo principal, su posición es independiente de este.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Por lo general, se trata de una imagen, una ilustración, un diagrama, un fragmento de código o un esquema al que se hace referencia en el texto principal, pero que se puede mover a otra página o a un apéndice sin que afecte al flujo principal.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;hr&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;hr/&gt;</code> (solo tiene una).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;li&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;li&gt;</code> y <code>&lt;/li&gt;</code> (la de cierre es opcional).</p></div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Elemento</th><th>Uso semántico</th><th>Ejemplo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>&lt;blockquote cite="..."&gt;</code></td><td>Cita extensa en bloque con referencia opcional.</td><td><code>&lt;blockquote&gt;Texto citado&lt;/blockquote&gt;</code></td></tr>
+                        <tr><td><code>&lt;time datetime="..."&gt;</code></td><td>Fecha u hora legible tanto para humanos como máquinas.</td><td><code>&lt;time datetime="2026-11-21"&gt;Hoy&lt;/time&gt;</code></td></tr>
+                        <tr><td><code>&lt;mark&gt;</code></td><td>Resalta texto relevante dentro de un contexto o búsqueda.</td><td><code>&lt;mark&gt;Importante&lt;/mark&gt;</code></td></tr>
+                        <tr><td><code>&lt;abbr title="..."&gt;</code></td><td>Abreviatura con su significado completo al pasar el cursor.</td><td><code>&lt;abbr title="HyperText Markup Language"&gt;HTML&lt;/abbr&gt;</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Enlaces e Interacción Nativa">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">2. Enlaces Seguros e Interacción sin JavaScript</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;a&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML Anchor <code>&lt;a&gt;</code> crea un enlace a otras páginas de internet, archivos o ubicaciones dentro de la misma página, direcciones de correo o cualquier otra URL.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;abbr&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;abbr&gt;</code> (o Elemento de Abreviación HTML) representa una abreviación o acrónimo; el atributo opcional <code>title</code> puede ampliar o describir la abreviatura.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Si está presente, el atributo <code>title</code> debe contener la descripción completa y nada más.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;b&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;"><code>b</code> de bold = negrita.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;bdi&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;bdi&gt;</code> (o elemento de aislamiento Bi-Direccional) aísla un trozo de texto para que pueda ser formateado con una dirección diferente al texto que hay fuera de él.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;bdo&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;"><code>bdo</code> Bi-Directional Overriding = Anulación de bidireccionalidad.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;br&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML line break <code>&lt;br&gt;</code> produce un salto de línea en el texto (retorno de carro).</p>
-<p style="margin-bottom:8px;line-height:1.6;">Es útil para escribir un poema o una dirección, donde la división de las líneas es significante.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;cite&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;cite&gt;</code> y <code>&lt;/cite&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;code&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;code&gt;</code> y <code>&lt;/code&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;data&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;data&gt;</code> vincula un contenido dado con una traducción legible por una máquina.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Si el contenido está relacionado con tiempo o fecha, debe usarse el elemento <code>&lt;time&gt;</code>.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;dfn&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;dfn&gt;</code> y <code>&lt;/dfn&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;em&gt;</code></h3></div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Enlaces y edición</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;a target="_blank" rel="noopener noreferrer"&gt;</code>: abre pestaña nueva sin exponer <code>window.opener</code>.</li>
+                        <li><code>&lt;del&gt;</code> e <code>&lt;ins&gt;</code>: marcan contenido eliminado y añadido con precisión semántica.</li>
+                        <li><code>&lt;dialog&gt;</code>: modales nativos accesibles con foco atrapado y cierre con <code>Esc</code>.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Acordeón nativo (<code>&lt;details&gt;</code>)</h3>
+                    <pre class="code-block"><code>&lt;details open&gt;
+          &lt;summary&gt;¿Necesito JS para esto?&lt;/summary&gt;
+          &lt;p&gt;No, el navegador lo abre y cierra de forma nativa y accesible.&lt;/p&gt;
+        &lt;/details&gt;</code></pre>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Multimedia Moderna">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">3. Multimedia Moderna: <code>&lt;picture&gt;</code>, <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code></h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;area&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;"><code>area</code> de area = área.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;audio&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;audio&gt;</code> se usa para insertar contenido de audio en un documento HTML o XHTML.</p>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;audio&gt;</code> se agregó como parte de HTML5.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;img&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento de imagen HTML <code>&lt;img&gt;</code> representa una imagen en el documento.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;map&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;map&gt;</code> y <code>&lt;/map&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;track&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;track&gt;</code> se utiliza como elemento hijo de los elementos multimedia <code>&lt;audio&gt;</code> y <code>&lt;video&gt;</code>.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Le permite especificar pistas de texto cronometradas (o datos basados en el tiempo), por ejemplo, para manejar subtítulos automáticamente.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Las pistas están formateadas en formato WebVTT (archivos <code>.vtt</code>): Web Video Text Tracks.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;video&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;video&gt;</code> se utiliza para incrustar vídeos en un documento HTML o XHTML.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Contenido incrustado</p>
-<p style="margin-bottom:8px;line-height:1.6;">Además de los contenidos multimedia habituales, HTML puede incluir otra variedad de contenidos, aunque no siempre es fácil de interactuar con ellos.</p></div>
+            <div class="grid-2">
+                <div class="glass-card border-purple">
+                    <h3>Imágenes adaptables con <code>&lt;picture&gt;</code></h3>
+                    <pre class="code-block"><code>&lt;picture&gt;
+          &lt;source srcset="hero.avif" type="image/avif" /&gt;
+          &lt;source srcset="hero.webp" type="image/webp" /&gt;
+          &lt;img src="hero.jpg" alt="Portada" loading="lazy" /&gt;
+        &lt;/picture&gt;</code></pre>
+                </div>
+                <div class="glass-card border-cyan">
+                    <h3>Video y subtítulos</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;video controls preload="metadata"&gt;</code> evita descargar el video entero hasta reproducir.</li>
+                        <li><code>&lt;track kind="subtitles" srclang="es" src="subs.vtt"&gt;</code> añade subtítulos accesibles.</li>
+                        <li><code>&lt;map&gt;</code> + <code>&lt;area&gt;</code> permiten zonas clicables sobre una imagen.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Formularios Avanzados y Embebidos">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">4. Formularios Avanzados, <code>&lt;iframe&gt;</code> y <code>&lt;canvas&gt;</code></h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;embed&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML Embed (<code>&lt;embed&gt;</code>) representa un punto de integración para una aplicación externa o de contenido interactivo (en otras palabras, un plug-in).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;iframe&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;iframe&gt;</code> (de inline frame) representa un contexto de navegación anidado, el cual permite incrustar otra página HTML en la página actual.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;object&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;object&gt;</code> representa un recurso externo, que puede ser tratado como una imagen, un contexto de navegación anidado o como un recurso que debe ser manejado por un plugin.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;picture&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;picture&gt;</code> es un contenedor usado para especificar múltiples elementos <code>&lt;source&gt;</code> y un elemento <code>&lt;img&gt;</code> contenido en él para proveer versiones de una imagen para diferentes escenarios de dispositivos.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Si no hay coincidencias con los elementos <code>&lt;source&gt;</code>, el archivo especificado en los atributos <code>src</code> del elemento <code>&lt;img&gt;</code> es utilizado.</p>
-<p style="margin-bottom:8px;line-height:1.6;">La imagen seleccionada es entonces presentada en el espacio ocupado por el elemento <code>&lt;img&gt;</code>.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;portal&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Habilita la incrustación de otra página HTML en la actual con el fin de permitir una navegación más fluida en nuevas páginas.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;source&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;source&gt;</code> especifica recursos de medios múltiples para los elementos <code>&lt;picture&gt;</code>, <code>&lt;audio&gt;</code> o <code>&lt;video&gt;</code>.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Es un elemento vacío. Normalmente se utiliza para servir el mismo contenido multimedia en varios formatos soportados por diferentes navegadores.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># SVG y MathML</p>
-<p style="margin-bottom:8px;line-height:1.6;">Puede incrustar contenido SVG y MathML directamente en documentos HTML, usando los elementos <code>&lt;svg&gt;</code> y <code>&lt;math&gt;</code>.</p></div>
+            <div class="grid-2">
+                <div class="glass-card border-emerald">
+                    <h3>Controles modernos</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;datalist&gt;</code>: autocompletado nativo vinculado por <code>list="id"</code>.</li>
+                        <li><code>&lt;output&gt;</code>: muestra resultados calculados en formularios.</li>
+                        <li><code>&lt;progress&gt;</code> y <code>&lt;meter&gt;</code>: barras de progreso y medidores de rango.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-amber">
+                    <h3>Contenido embebido seguro</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;iframe sandbox loading="lazy"&gt;</code>: aísla contenido externo y mejora el rendimiento.</li>
+                        <li><code>&lt;canvas&gt;</code> y <code>&lt;svg&gt;</code>: gráficos 2D/WebGL por script vs vectores declarativos escalables.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <!-- SLIDE 7: INSPECTOR SEMÁNTICO -->
@@ -453,17 +439,17 @@
                 <div class="files-grid">
                     <a class="file-card" href="Accesibilidad/accesibilidad.html"><span class="file-name">📁 Accesibilidad</span><span class="file-path">accesibilidad.html</span></a>
                     <a class="file-card" href="audio%20y%20video/audio%20y%20video.html"><span class="file-name">📁 audio y video</span><span class="file-path">audio y video.html</span></a>
-                    <a class="file-card" href="comentarios-metatags-iconos.html"><span class="file-name">📄 comentarios-metatags-iconos</span><span class="file-path">comentarios-metatags-iconos.html</span></a>
-                    <a class="file-card" href="details%20y%20summary.html"><span class="file-name">📄 details y summary</span><span class="file-path">details y summary.html</span></a>
+                    <a class="file-card" href="Comentarios%20Metatags%20Iconos/comentarios-metatags-iconos.html"><span class="file-name">📄 comentarios-metatags-iconos</span><span class="file-path">comentarios-metatags-iconos.html</span></a>
+                    <a class="file-card" href="Details%20y%20Summary/details%20y%20summary.html"><span class="file-name">📄 details y summary</span><span class="file-path">details y summary.html</span></a>
                     <a class="file-card" href="Emmet/emmet.html"><span class="file-name">📁 Emmet</span><span class="file-path">emmet.html</span></a>
                     <a class="file-card" href="Enlaces%20avanzados/enlaces%20avanzado.html"><span class="file-name">📁 Enlaces avanzados</span><span class="file-path">enlaces avanzado.html</span></a>
-                    <a class="file-card" href="fieldset%20y%20legend.html"><span class="file-name">📄 fieldset y legend</span><span class="file-path">fieldset y legend.html</span></a>
-                    <a class="file-card" href="HTML%20obsoleto.html"><span class="file-name">📄 HTML obsoleto</span><span class="file-path">HTML obsoleto.html</span></a>
+                    <a class="file-card" href="Fieldset%20y%20Legend/fieldset%20y%20legend.html"><span class="file-name">📄 fieldset y legend</span><span class="file-path">fieldset y legend.html</span></a>
+                    <a class="file-card" href="HTML%20Obsoleto/HTML%20obsoleto.html"><span class="file-name">📄 HTML obsoleto</span><span class="file-path">HTML obsoleto.html</span></a>
                     <a class="file-card" href="HTML%20Semantico/HTML%20semantico.html"><span class="file-name">📁 HTML Semantico</span><span class="file-path">HTML semantico.html</span></a>
                     <a class="file-card" href="Lazy%20load/lazy.html"><span class="file-name">📁 Lazy load</span><span class="file-path">lazy.html</span></a>
-                    <a class="file-card" href="selec,datalist%20y%20option.html"><span class="file-name">📄 selec,datalist y option</span><span class="file-path">selec,datalist y option.html</span></a>
-                    <a class="file-card" href="tablas.html"><span class="file-name">📄 tablas</span><span class="file-path">tablas.html</span></a>
-                    <a class="file-card" href="text-area%20y%20labels.html"><span class="file-name">📄 text-area y labels</span><span class="file-path">text-area y labels.html</span></a>
+                    <a class="file-card" href="Select%20Datalist%20y%20Option/selec,datalist%20y%20option.html"><span class="file-name">📄 selec,datalist y option</span><span class="file-path">selec,datalist y option.html</span></a>
+                    <a class="file-card" href="Tablas/tablas.html"><span class="file-name">📄 tablas</span><span class="file-path">tablas.html</span></a>
+                    <a class="file-card" href="Textarea%20y%20Labels/text-area%20y%20labels.html"><span class="file-name">📄 text-area y labels</span><span class="file-path">text-area y labels.html</span></a>
                 </div>
             </div>
         </section>

@@ -1,13 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Junior — Guía Interactiva de Concatenación</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css">
+    <script src="../../RESOURCES COURSE/junior-theme.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2338bdf8'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%94%97%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body>
     <div class="app-shell">
+                <nav class="jr-top-nav" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.28);border-radius:14px;backdrop-filter:blur(12px);">
+            <span style="font-family:monospace;font-size:0.78rem;color:#38bdf8;font-weight:700;">🌱 JS JUNIOR LEVEL</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <a href="../DOCUMENTACION/index.html" style="color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);">📘 Apuntes</a>
+                <a href="../../index.html" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:#38bdf8;">🏠 Portal Principal</a>
+            </div>
+        </nav>
         <header class="hero">
             <span class="badge">Módulo 03 · Strings e Interpolación</span>
             <h1>Concatenación y Template Literals</h1>
@@ -66,13 +76,8 @@ console.log(etiquetas.join(&quot; • &quot;)); // &quot;HTML • CSS • JavaSc
             <div class="jr-slide" data-idx="1" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Caracteres de Escape</h3>
                 <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Dentro de comillas normales (<code>&#x27;...&#x27;</code> o <code>&quot;...&quot;</code>), ciertos caracteres requieren una barra invertida <code>\</code> para representarse:</p>
-<p style="margin:6px 0;line-height:1.6;">| Secuencia | Significado | Ejemplo |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>\n</code> | Salto de línea | <code>&quot;Línea 1\nLínea 2&quot;</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>\t</code> | Tabulación | <code>&quot;Col1\tCol2&quot;</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>\&quot;</code> o <code>\&#x27;</code> | Comilla literal dentro del mismo tipo de comilla | <code>&#x27;Es \&#x27;genial\&#x27;&#x27;</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>\\</code> | Barra invertida literal | <code>&quot;C:\\Users\\Dev&quot;</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| `<code> \</code> `<code> | Backtick literal dentro de un Template Literal | </code><code> </code>Usa \<code>backticks\</code><code> </code>` |</p></div>
+<table class="compare-table"><thead><tr><th>Secuencia</th><th>Significado</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>\n</code></td><td>Salto de línea</td><td><code>&quot;Línea 1\nLínea 2&quot;</code></td></tr><tr><td><code>\t</code></td><td>Tabulación</td><td><code>&quot;Col1\tCol2&quot;</code></td></tr><tr><td><code>\&quot;</code> o <code>\&#x27;</code></td><td>Comilla literal dentro del mismo tipo de comilla</td><td><code>&#x27;Es \&#x27;genial\&#x27;&#x27;</code></td></tr><tr><td><code>\\</code></td><td>Barra invertida literal</td><td><code>&quot;C:\\Users\\Dev&quot;</code></td></tr><tr><td>`<code> \</code> `<code></td><td>Backtick literal dentro de un Template Literal</td><td></code><code> </code>Usa \<code>backticks\</code><code> </code>`</td></tr></tbody></table>
+</div>
             </div>
             <div class="jr-slide" data-idx="2" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Tagged Templates (Introducción)</h3>
@@ -197,3 +202,5 @@ contenedor.append(parrafo);</code></pre></div>
     <script src="concatenacion.js"></script>
 </body>
 </html>
+
+

@@ -6,178 +6,178 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Familia tipográfica */
 }
 
-body {
-    background: linear-gradient(135deg, #f4f4f4, #e9ecf3);
-    min-height: 100vh;
+body { /* Regla de estilo para body */
+    background: linear-gradient(135deg, #f4f4f4, #e9ecf3); /* Fondo o degradado */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
 /* TARJETA PRINCIPAL */
-.enunciado {
-    width: 85%;
-    max-width: 900px;
-    margin: 25px auto;
-    padding: 25px;
+.enunciado { /* Regla de estilo para .enunciado */
+    width: 85%; /* Ancho del elemento */
+    max-width: 900px; /* Ancho máximo permitido */
+    margin: 25px auto; /* Margen exterior */
+    padding: 25px; /* Relleno interior */
 
-    background: white;
-    border-radius: 16px;
+    background: white; /* Fondo o degradado */
+    border-radius: 16px; /* Redondeo de esquinas */
 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08); /* Sombra proyectada */
 }
 
 /* TITULO */
-h1 {
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 15px;
-    color: #333;
+h1 { /* Regla de estilo para h1 */
+    text-align: center; /* Alineación horizontal del texto */
+    font-style: italic; /* Propiedad CSS: font-style */
+    margin-bottom: 15px; /* Margen exterior inferior */
+    color: #333; /* Color del texto */
 }
 
 /* TEXTO */
-.enunciado p {
-    margin: 10px 0;
-    line-height: 1.6;
-    color: #555;
+.enunciado p { /* Regla de estilo para .enunciado p */
+    margin: 10px 0; /* Margen exterior */
+    line-height: 1.6; /* Altura de línea del texto */
+    color: #555; /* Color del texto */
 }
 
 /* LISTAS */
-ol {
-    margin: 15px 20px;
+ol { /* Regla de estilo para ol */
+    margin: 15px 20px; /* Margen exterior */
 }
 
-li {
-    margin: 6px 0;
+li { /* Regla de estilo para li */
+    margin: 6px 0; /* Margen exterior */
 }
 
 /* BOTÓN */
-label {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
+label { /* Regla de estilo para label */
+    display: block; /* Define el tipo de caja/layout */
+    margin-top: 20px; /* Margen exterior superior */
+    text-align: center; /* Alineación horizontal del texto */
 
-    padding: 12px;
-    border-radius: 10px;
+    padding: 12px; /* Relleno interior */
+    border-radius: 10px; /* Redondeo de esquinas */
 
-    background: linear-gradient(135deg, #009879, #00b894);
-    color: white;
+    background: linear-gradient(135deg, #009879, #00b894); /* Fondo o degradado */
+    color: white; /* Color del texto */
 
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Grosor de la fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
 
-    cursor: pointer;
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
 
-label:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 152, 121, 0.3);
+label:hover { /* Propiedad CSS: label */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 8px 15px rgba(0, 152, 121, 0.3); /* Sombra proyectada */
 }
 
-label:active {
-    transform: scale(0.97);
+label:active { /* Propiedad CSS: label */
+    transform: scale(0.97); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* RESULTADO (CARD) */
-.sol {
-    width: 85%;
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    display: none;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    animation: aparecer 1s ease;
+.sol { /* Regla de estilo para .sol */
+    width: 85%; /* Ancho del elemento */
+    max-width: 900px; /* Ancho máximo permitido */
+    margin: 20px auto; /* Margen exterior */
+    padding: 20px; /* Relleno interior */
+    border-radius: 16px; /* Redondeo de esquinas */
+    background: white; /* Fondo o degradado */
+    display: none; /* Define el tipo de caja/layout */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombra proyectada */
+    animation: aparecer 1s ease; /* Animación con keyframes */
 }
 
 /* ANIMACIÓN */
 
 /* --- Animación (@keyframes aparecer) --- */
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+@keyframes aparecer { /* Definición de animación por fotogramas clave */
+    from { /* Regla de estilo para from */
+        opacity: 0; /* Nivel de transparencia */
+        transform: translateY(10px); /* Transformación 2D/3D (escala, rotación, traslación) */
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to { /* Regla de estilo para to */
+        opacity: 1; /* Nivel de transparencia */
+        transform: translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
     }
 }
 
 /* TITULO RESULTADOS */
-.sol h2 {
-    text-align: center;
-    color: #009879;
-    margin-bottom: 15px;
+.sol h2 { /* Regla de estilo para .sol h2 */
+    text-align: center; /* Alineación horizontal del texto */
+    color: #009879; /* Color del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
 }
 
 /* TABLA PRO */
-.sol table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
-    overflow: hidden;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+.sol table { /* Regla de estilo para .sol table */
+    width: 100%; /* Ancho del elemento */
+    border-collapse: collapse; /* Propiedad CSS: border-collapse */
+    margin-top: 20px; /* Margen exterior superior */
+    border-bottom-left-radius: 12px; /* Propiedad CSS: border-bottom-left-radius */
+    border-bottom-right-radius: 12px; /* Propiedad CSS: border-bottom-right-radius */
+    overflow: hidden; /* Control de contenido desbordado */
+    text-align: center; /* Alineación horizontal del texto */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Sombra proyectada */
 }
 
 /* CABECERA */
-table thead th {
-    background: linear-gradient(105deg, #009879, #00b894);
-    color: white;
-    padding: 12px;
-    font-weight: bolder;
-    font-size: 1.2rem;
+table thead th { /* Regla de estilo para table thead th */
+    background: linear-gradient(105deg, #009879, #00b894); /* Fondo o degradado */
+    color: white; /* Color del texto */
+    padding: 12px; /* Relleno interior */
+    font-weight: bolder; /* Grosor de la fuente */
+    font-size: 1.2rem; /* Tamaño de fuente */
 }
 
 /* TITULO TABLA */
-table .titlet {
-    background: #f8f9fa;
-    color: #333;
-    font-size: 1.1rem;
-    padding: 15px;
-    border-bottom: 2px solid #009879;
-    letter-spacing: 2px;
+table .titlet { /* Regla de estilo para table .titlet */
+    background: #f8f9fa; /* Fondo o degradado */
+    color: #333; /* Color del texto */
+    font-size: 1.1rem; /* Tamaño de fuente */
+    padding: 15px; /* Relleno interior */
+    border-bottom: 2px solid #009879; /* Borde inferior */
+    letter-spacing: 2px; /* Espaciado entre letras */
 }
 
 /* FILAS */
-table tbody {
-    font-weight: bold;
+table tbody { /* Regla de estilo para table tbody */
+    font-weight: bold; /* Grosor de la fuente */
 }
 
-table tbody td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
+table tbody td { /* Regla de estilo para table tbody td */
+    padding: 12px; /* Relleno interior */
+    border-bottom: 1px solid #eee; /* Borde inferior */
 }
 
 /* FILAS PARES */
-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+table tbody tr:nth-child(even) { /* Regla de estilo para table tbody tr:nth-child(even) */
+    background-color: #f9f9f9; /* Color de fondo */
 }
 
 /* HOVER FILA */
-table tbody tr:hover {
-    background-color: #eefaf7;
-    transition: 0.2s;
-    cursor: pointer;
+table tbody tr:hover { /* Regla de estilo para table tbody tr:hover */
+    background-color: #eefaf7; /* Color de fondo */
+    transition: 0.2s; /* Transición suave de propiedades */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
 
 /* BORDE FINAL */
-table tbody tr:last-child {
-    border-bottom: 2px solid #009879;
+table tbody tr:last-child { /* Regla de estilo para table tbody tr:last-child */
+    border-bottom: 2px solid #009879; /* Borde inferior */
 }
 
 /* MOSTRAR RESULTADO */
-.sol.active {
-    display: block;
+.sol.active { /* Regla de estilo para .sol.active */
+    display: block; /* Define el tipo de caja/layout */
 }

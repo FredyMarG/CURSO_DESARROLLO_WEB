@@ -7,15 +7,15 @@
  * ============================================================================
  */
 
-(function () {
+(function () { // Instrucción JavaScript
     // Activamos el modo estricto para garantizar rigor en la ejecución de JavaScript
-    'use strict';
+    'use strict'; // Activa el modo estricto de JavaScript
 
     /* ==========================================================================
        1. ESTADO GLOBAL DE LA APLICACIÓN (AppState)
        ========================================================================== */
     // Objeto centralizado que almacena el estado reactivo de la presentación y del laboratorio
-    const AppState = {
+    const AppState = { // Declara e inicializa "AppState"
         // Índice de la diapositiva actualmente visible (1 a 11)
         currentSlide: 1,
         // Cantidad total de diapositivas interactivas
@@ -28,7 +28,7 @@
         overviewOpen: false,
 
         // Estado del laboratorio interactivo de Intersection Observer
-        ioLab: {
+        ioLab: { // Instrucción JavaScript
             // Umbral o arreglo de umbrales activo en el observador real
             threshold: [0, 0.25, 0.5, 0.75, 1],
             // Margen de raíz activo para expandir o contraer el marco de detección
@@ -42,131 +42,131 @@
        2. MÓDULO DE AUDIO: SINTETIZADOR PROCEDURAL (Web Audio API)
        ========================================================================== */
     // Generador de efectos de sonido procedurales sin archivos de audio externos
-    const SoundFX = {
+    const SoundFX = { // Declara e inicializa "SoundFX"
         // Referencia al contexto único de audio del navegador
         ctx: null,
 
         // Inicializa el contexto de audio de forma segura tras la primera acción
-        init() {
+        init() { // Instrucción JavaScript
             // Comprobamos si no existe contexto y el navegador soporta Web Audio API
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
                 // Obtenemos la clase constructora estándar o con prefijo
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa "AudioConstructor"
                 // Creamos la instancia del contexto de audio
-                this.ctx = new AudioConstructor();
+                this.ctx = new AudioConstructor(); // Asigna valor
             }
         },
 
         // Sonido suave para transiciones entre diapositivas
-        slide() {
+        slide() { // Instrucción JavaScript
             // Si el sonido está silenciado, salimos
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición
             // Inicializamos el contexto si aún no existe
-            this.init();
+            this.init(); // Ejecuta llamada o método
             // Si no hay soporte de audio, abortamos
-            if (!this.ctx) return;
+            if (!this.ctx) return; // Evalúa condición
             // Reanudamos el contexto si estuviera suspendido por políticas del navegador
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
             // Creamos un oscilador de audio
-            const osc = this.ctx.createOscillator();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
             // Creamos un nodo de ganancia para la envolvente de volumen
-            const gain = this.ctx.createGain();
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
             // Onda senoidal suave
-            osc.type = 'sine';
+            osc.type = 'sine'; // Asigna valor
             // Marca de tiempo actual del reloj de audio
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
             // Frecuencia inicial de 320 Hz
-            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.setValueAtTime(320, now); // Ejecuta llamada o método
             // Rampa ascendente hasta 480 Hz en 120ms
-            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
+            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12); // Ejecuta llamada o método
 
             // Volumen inicial casi nulo
-            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.setValueAtTime(0.001, now); // Ejecuta llamada o método
             // Ataque rápido hasta 0.08
-            gain.gain.linearRampToValueAtTime(0.08, now + 0.02);
+            gain.gain.linearRampToValueAtTime(0.08, now + 0.02); // Ejecuta llamada o método
             // Desvanecimiento suave en 180ms
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18); // Ejecuta llamada o método
 
             // Conectamos el oscilador a la ganancia
-            osc.connect(gain);
+            osc.connect(gain); // Ejecuta llamada o método
             // Conectamos la ganancia a los altavoces
-            gain.connect(this.ctx.destination);
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
 
             // Iniciamos la generación del tono
-            osc.start(now);
+            osc.start(now); // Ejecuta llamada o método
             // Detenemos el tono tras 180ms
-            osc.stop(now + 0.18);
+            osc.stop(now + 0.18); // Ejecuta llamada o método
         },
 
         // Sonido percusivo breve para clics en botones
-        click() {
+        click() { // Instrucción JavaScript
             // Salimos si el audio está desactivado
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición
             // Aseguramos inicialización
-            this.init();
+            this.init(); // Ejecuta llamada o método
             // Validamos existencia del contexto
-            if (!this.ctx) return;
+            if (!this.ctx) return; // Evalúa condición
             // Reanudamos si está suspendido
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
             // Oscilador y nodo de ganancia
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
             // Onda triangular ligera
-            osc.type = 'triangle';
+            osc.type = 'triangle'; // Asigna valor
             // Tiempo actual
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
             // Frecuencia de 600 Hz
-            osc.frequency.setValueAtTime(600, now);
+            osc.frequency.setValueAtTime(600, now); // Ejecuta llamada o método
             // Volumen inicial
-            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
             // Caída rápida en 40ms
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04); // Ejecuta llamada o método
 
             // Conexiones del circuito de audio
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
+            osc.connect(gain); // Ejecuta llamada o método
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
 
             // Disparo y parada
-            osc.start(now);
-            osc.stop(now + 0.04);
+            osc.start(now); // Ejecuta llamada o método
+            osc.stop(now + 0.04); // Ejecuta llamada o método
         },
 
         // Tono agradable cuando un objetivo entra en el área de intersección
-        intersectEnter() {
+        intersectEnter() { // Instrucción JavaScript
             // Verificamos si el audio está activo
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición
             // Inicializamos
-            this.init();
+            this.init(); // Ejecuta llamada o método
             // Validamos
-            if (!this.ctx) return;
+            if (!this.ctx) return; // Evalúa condición
             // Reanudamos
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
             // Oscilador y ganancia
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
             // Onda senoidal pura
-            osc.type = 'sine';
+            osc.type = 'sine'; // Asigna valor
             // Tiempo actual
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
             // Tono ascendente de confirmación (540 Hz a 820 Hz)
-            osc.frequency.setValueAtTime(540, now);
-            osc.frequency.exponentialRampToValueAtTime(820, now + 0.12);
+            osc.frequency.setValueAtTime(540, now); // Ejecuta llamada o método
+            osc.frequency.exponentialRampToValueAtTime(820, now + 0.12); // Ejecuta llamada o método
 
             // Envolvente suave
-            gain.gain.setValueAtTime(0.05, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14); // Ejecuta llamada o método
 
             // Conexión y ejecución
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.14);
+            osc.connect(gain); // Ejecuta llamada o método
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
+            osc.start(now); // Ejecuta llamada o método
+            osc.stop(now + 0.14); // Ejecuta llamada o método
         }
     };
 
@@ -174,105 +174,105 @@
        3. CONTROLADOR DE NAVEGACIÓN DE DIAPOSITIVAS (SlideNavigation)
        ========================================================================== */
     // Orquesta la paginación, barra de progreso, atajos de teclado y modal de índice
-    const SlideNavigation = {
+    const SlideNavigation = { // Declara e inicializa "SlideNavigation"
         // Inicializa las referencias del DOM y eventos
-        init() {
+        init() { // Instrucción JavaScript
             // Contenedor principal y colección de diapositivas
-            this.wrapper = document.getElementById('presentationWrapper');
-            this.slides = document.querySelectorAll('.slide');
+            this.wrapper = document.getElementById('presentationWrapper'); // Asigna valor
+            this.slides = document.querySelectorAll('.slide'); // Asigna valor
             // Barra de progreso e indicador numérico
-            this.progressBar = document.getElementById('progressBar');
-            this.slideIndicator = document.getElementById('slideIndicator');
+            this.progressBar = document.getElementById('progressBar'); // Asigna valor
+            this.slideIndicator = document.getElementById('slideIndicator'); // Asigna valor
 
             // Botones inferiores y contenedor de puntos
-            this.btnPrev = document.getElementById('btnPrevSlide');
-            this.btnNext = document.getElementById('btnNextSlide');
-            this.dotsContainer = document.getElementById('slideDotsContainer');
+            this.btnPrev = document.getElementById('btnPrevSlide'); // Asigna valor
+            this.btnNext = document.getElementById('btnNextSlide'); // Asigna valor
+            this.dotsContainer = document.getElementById('slideDotsContainer'); // Asigna valor
 
             // Botón de alternancia de modo presentación / documento
-            this.btnGoLab = document.getElementById('btnGoLab');
-            this.btnToggleMode = document.getElementById('btnToggleMode');
-            this.modeText = document.getElementById('modeText');
-            this.modeIcon = document.getElementById('modeIcon');
+            this.btnGoLab = document.getElementById('btnGoLab'); // Asigna valor
+            this.btnToggleMode = document.getElementById('btnToggleMode'); // Asigna valor
+            this.modeText = document.getElementById('modeText'); // Asigna valor
+            this.modeIcon = document.getElementById('modeIcon'); // Asigna valor
 
             // Botón de audio
-            this.btnToggleSound = document.getElementById('btnToggleSound');
-            this.soundIcon = document.getElementById('soundIcon');
+            this.btnToggleSound = document.getElementById('btnToggleSound'); // Asigna valor
+            this.soundIcon = document.getElementById('soundIcon'); // Asigna valor
 
             // Elementos del modal de vista general
-            this.btnOverview = document.getElementById('btnOverview');
-            this.overviewModal = document.getElementById('overviewModal');
-            this.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.overviewGrid = document.getElementById('overviewGrid');
+            this.btnOverview = document.getElementById('btnOverview'); // Asigna valor
+            this.overviewModal = document.getElementById('overviewModal'); // Asigna valor
+            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Asigna valor
+            this.overviewGrid = document.getElementById('overviewGrid'); // Asigna valor
 
             // Botón de pantalla completa
-            this.btnFullscreen = document.getElementById('btnFullscreen');
+            this.btnFullscreen = document.getElementById('btnFullscreen'); // Asigna valor
 
             // Construimos los puntos indicadores y la cuadrícula de miniaturas
-            this.buildSlideDots();
-            this.buildOverviewGrid();
+            this.buildSlideDots(); // Ejecuta llamada o método
+            this.buildOverviewGrid(); // Ejecuta llamada o método
             // Registramos escuchadores de eventos
-            this.bindEvents();
+            this.bindEvents(); // Ejecuta llamada o método
             // Sincronizamos el estado inicial
-            this.updateUI();
+            this.updateUI(); // Ejecuta llamada o método
         },
 
         // Genera los círculos clicables en la barra inferior
-        buildSlideDots() {
+        buildSlideDots() { // Instrucción JavaScript
             // Validamos existencia del contenedor
-            if (!this.dotsContainer) return;
+            if (!this.dotsContainer) return; // Evalúa condición
             // Limpiamos el contenido previo
-            this.dotsContainer.innerHTML = '';
+            this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
             // Creamos un botón por cada diapositiva
-            this.slides.forEach((slide, index) => {
+            this.slides.forEach((slide, index) => { // Instrucción JavaScript
                 // Índice basado en 1
-                const slideNum = index + 1;
+                const slideNum = index + 1; // Declara e inicializa "slideNum"
                 // Elemento botón
-                const dot = document.createElement('button');
+                const dot = document.createElement('button'); // Crea nuevo elemento DOM "dot"
                 // Clase visual
-                dot.className = 'slide-dot';
+                dot.className = 'slide-dot'; // Asigna valor
                 // Etiqueta de accesibilidad
-                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
+                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`); // Ejecuta llamada o método
                 // Tooltip con el título de la diapositiva
-                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Asigna valor
 
                 // Resaltamos el punto si coincide con la diapositiva activa
-                if (slideNum === AppState.currentSlide) {
-                    dot.classList.add('active');
+                if (slideNum === AppState.currentSlide) { // Evalúa condición
+                    dot.classList.add('active'); // Modifica clases CSS del elemento
                 }
 
                 // Al hacer clic saltamos a la diapositiva elegida
-                dot.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(slideNum);
+                dot.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(slideNum); // Ejecuta llamada o método
                 });
 
                 // Insertamos en el DOM
-                this.dotsContainer.appendChild(dot);
+                this.dotsContainer.appendChild(dot); // Inserta nodo en el DOM
             });
         },
 
         // Genera las tarjetas del índice visual dentro del modal
-        buildOverviewGrid() {
+        buildOverviewGrid() { // Instrucción JavaScript
             // Validamos existencia
-            if (!this.overviewGrid) return;
+            if (!this.overviewGrid) return; // Evalúa condición
             // Limpiamos tarjetas previas
-            this.overviewGrid.innerHTML = '';
+            this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             // Iteramos sobre todas las diapositivas
-            this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+            this.slides.forEach((slide, index) => { // Instrucción JavaScript
+                const slideNum = index + 1; // Declara e inicializa "slideNum"
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa "title"
 
                 // Creamos la tarjeta
-                const card = document.createElement('div');
-                card.className = 'overview-card';
-                card.dataset.slideIndex = slideNum;
+                const card = document.createElement('div'); // Crea nuevo elemento DOM "card"
+                card.className = 'overview-card'; // Asigna valor
+                card.dataset.slideIndex = slideNum; // Asigna valor
 
                 // Marcamos como activa si corresponde
-                if (slideNum === AppState.currentSlide) {
-                    card.classList.add('active');
+                if (slideNum === AppState.currentSlide) { // Evalúa condición
+                    card.classList.add('active'); // Modifica clases CSS del elemento
                 }
 
                 // Contenido interno de la tarjeta
@@ -282,297 +282,297 @@
                 `;
 
                 // Evento clic para navegar y cerrar el modal
-                card.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(slideNum);
-                    this.closeOverview();
+                card.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(slideNum); // Ejecuta llamada o método
+                    this.closeOverview(); // Ejecuta llamada o método
                 });
 
                 // Agregamos a la rejilla
-                this.overviewGrid.appendChild(card);
+                this.overviewGrid.appendChild(card); // Inserta nodo en el DOM
             });
         },
 
         // Asocia los eventos de clic y teclado a sus controladores
-        bindEvents() {
+        bindEvents() { // Instrucción JavaScript
             // Botón anterior
-            if (this.btnPrev) {
-                this.btnPrev.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.prevSlide();
+            if (this.btnPrev) { // Evalúa condición
+                this.btnPrev.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.prevSlide(); // Ejecuta llamada o método
                 });
             }
 
             // Botón siguiente
-            if (this.btnNext) {
-                this.btnNext.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.nextSlide();
+            if (this.btnNext) { // Evalúa condición
+                this.btnNext.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
                 });
             }
 
             // Alternar modo presentación / guía
-            if (this.btnGoLab) {
-                this.btnGoLab.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(9);
+            if (this.btnGoLab) { // Evalúa condición
+                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(9); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnToggleMode) {
-                this.btnToggleMode.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleViewMode();
+            if (this.btnToggleMode) { // Evalúa condición
+                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleViewMode(); // Ejecuta llamada o método
                 });
             }
 
             // Alternar sonido
-            if (this.btnToggleSound) {
-                this.btnToggleSound.addEventListener('click', () => {
-                    this.toggleSound();
+            if (this.btnToggleSound) { // Evalúa condición
+                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de eventos
+                    this.toggleSound(); // Ejecuta llamada o método
                 });
             }
 
             // Abrir/cerrar cuadrícula general
-            if (this.btnOverview) {
-                this.btnOverview.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleOverview();
+            if (this.btnOverview) { // Evalúa condición
+                this.btnOverview.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleOverview(); // Ejecuta llamada o método
                 });
             }
 
             // Cerrar modal con botón X
-            if (this.btnCloseOverview) {
-                this.btnCloseOverview.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.closeOverview();
+            if (this.btnCloseOverview) { // Evalúa condición
+                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.closeOverview(); // Ejecuta llamada o método
                 });
             }
 
             // Cerrar modal haciendo clic fuera de la ventana
-            if (this.overviewModal) {
-                this.overviewModal.addEventListener('click', (e) => {
-                    if (e.target === this.overviewModal) {
-                        this.closeOverview();
+            if (this.overviewModal) { // Evalúa condición
+                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de eventos
+                    if (e.target === this.overviewModal) { // Evalúa condición
+                        this.closeOverview(); // Ejecuta llamada o método
                     }
                 });
             }
 
             // Pantalla completa
-            if (this.btnFullscreen) {
-                this.btnFullscreen.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleFullscreen();
+            if (this.btnFullscreen) { // Evalúa condición
+                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleFullscreen(); // Ejecuta llamada o método
                 });
             }
 
             // Atajos de teclado globales
-            document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+            document.addEventListener('keydown', (e) => this.handleKeyDown(e)); // Registra escuchador de eventos
         },
 
         // Gestiona la navegación mediante teclas
-        handleKeyDown(e) {
+        handleKeyDown(e) { // Instrucción JavaScript
             // Ignoramos si el usuario escribe en un campo de formulario
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición
 
             // Evaluamos la tecla pulsada
-            switch (e.key) {
+            switch (e.key) { // Evalúa múltiples casos
                 // Avanzar con flecha derecha o D
                 case 'ArrowRight':
                 case 'd':
                 case 'D':
-                    e.preventDefault();
-                    this.nextSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Retroceder con flecha izquierda o A
                 case 'ArrowLeft':
                 case 'a':
                 case 'A':
-                    e.preventDefault();
-                    this.prevSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.prevSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Avanzar con barra espaciadora
                 case ' ':
-                    e.preventDefault();
-                    this.nextSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Abrir/cerrar cuadrícula con O
                 case 'o':
                 case 'O':
-                    e.preventDefault();
-                    this.toggleOverview();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.toggleOverview(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Pantalla completa con F
                 case 'f':
                 case 'F':
-                    e.preventDefault();
-                    this.toggleFullscreen();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.toggleFullscreen(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Cerrar modal con Escape
                 case 'Escape':
-                    if (AppState.overviewOpen) {
-                        this.closeOverview();
+                    if (AppState.overviewOpen) { // Evalúa condición
+                        this.closeOverview(); // Ejecuta llamada o método
                     }
-                    break;
+                    break; // Instrucción JavaScript
 
                 // Ir al inicio con Home
                 case 'Home':
-                    e.preventDefault();
-                    this.goToSlide(1);
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.goToSlide(1); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 // Ir al final con End
                 case 'End':
-                    e.preventDefault();
-                    this.goToSlide(AppState.totalSlides);
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.goToSlide(AppState.totalSlides); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
 
                 default:
-                    break;
+                    break; // Instrucción JavaScript
             }
         },
 
         // Navega a la diapositiva indicada por su número
-        goToSlide(index) {
+        goToSlide(index) { // Instrucción JavaScript
             // Validamos límites
-            if (index < 1 || index > AppState.totalSlides) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición
             // Evitamos recarga redundante si ya estamos en ella
-            if (index === AppState.currentSlide) return;
+            if (index === AppState.currentSlide) return; // Evalúa condición
 
             // Guardamos nuevo índice
-            AppState.currentSlide = index;
+            AppState.currentSlide = index; // Asigna valor
             // Sonido de transición
-            SoundFX.slide();
+            SoundFX.slide(); // Ejecuta llamada o método
             // Refrescamos interfaz
-            this.updateUI();
+            this.updateUI(); // Ejecuta llamada o método
         },
 
         // Avanza una diapositiva
-        nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
-                this.goToSlide(AppState.currentSlide + 1);
+        nextSlide() { // Instrucción JavaScript
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
+                this.goToSlide(AppState.currentSlide + 1); // Ejecuta llamada o método
             }
         },
 
         // Retrocede una diapositiva
-        prevSlide() {
-            if (AppState.currentSlide > 1) {
-                this.goToSlide(AppState.currentSlide - 1);
+        prevSlide() { // Instrucción JavaScript
+            if (AppState.currentSlide > 1) { // Evalúa condición
+                this.goToSlide(AppState.currentSlide - 1); // Ejecuta llamada o método
             }
         },
 
         // Cambia entre vista de diapositivas individuales y documento continuo
-        toggleViewMode() {
+        toggleViewMode() { // Instrucción JavaScript
             // Alternamos estado
-            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
+            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides'; // Asigna valor
 
             // Aplicamos clases correspondientes en el body
-            if (AppState.viewMode === 'guide') {
-                document.body.classList.remove('mode-presentation');
-                document.body.classList.add('mode-document');
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
-            } else {
-                document.body.classList.remove('mode-document');
-                document.body.classList.add('mode-presentation');
-                if (this.modeText) this.modeText.textContent = 'Modo Guía';
-                if (this.modeIcon) this.modeIcon.textContent = '📑';
+            if (AppState.viewMode === 'guide') { // Evalúa condición
+                document.body.classList.remove('mode-presentation'); // Modifica clases CSS del elemento
+                document.body.classList.add('mode-document'); // Modifica clases CSS del elemento
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición
+            } else { // Instrucción JavaScript
+                document.body.classList.remove('mode-document'); // Modifica clases CSS del elemento
+                document.body.classList.add('mode-presentation'); // Modifica clases CSS del elemento
+                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición
+                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición
             }
 
             // Sincronizamos visibilidad
-            this.updateUI();
+            this.updateUI(); // Ejecuta llamada o método
         },
 
         // Activa o desactiva el audio
-        toggleSound() {
-            AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.soundIcon) {
-                this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇';
+        toggleSound() { // Instrucción JavaScript
+            AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
+            if (this.soundIcon) { // Evalúa condición
+                this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click();
+            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición
         },
 
         // Abre o cierra el modal de índice
-        toggleOverview() {
-            if (AppState.overviewOpen) {
-                this.closeOverview();
-            } else {
-                this.openOverview();
+        toggleOverview() { // Instrucción JavaScript
+            if (AppState.overviewOpen) { // Evalúa condición
+                this.closeOverview(); // Ejecuta llamada o método
+            } else { // Instrucción JavaScript
+                this.openOverview(); // Ejecuta llamada o método
             }
         },
 
         // Abre el modal de vista general
-        openOverview() {
-            AppState.overviewOpen = true;
-            if (this.overviewModal) this.overviewModal.classList.add('active');
-            const cards = document.querySelectorAll('.overview-card');
-            cards.forEach(card => {
-                const idx = parseInt(card.dataset.slideIndex, 10);
-                card.classList.toggle('active', idx === AppState.currentSlide);
+        openOverview() { // Instrucción JavaScript
+            AppState.overviewOpen = true; // Asigna valor
+            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición
+            const cards = document.querySelectorAll('.overview-card'); // Obtiene referencia DOM para "cards"
+            cards.forEach(card => { // Instrucción JavaScript
+                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa "idx"
+                card.classList.toggle('active', idx === AppState.currentSlide); // Modifica clases CSS del elemento
             });
         },
 
         // Cierra el modal de vista general
-        closeOverview() {
-            AppState.overviewOpen = false;
-            if (this.overviewModal) this.overviewModal.classList.remove('active');
+        closeOverview() { // Instrucción JavaScript
+            AppState.overviewOpen = false; // Asigna valor
+            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición
         },
 
         // Alterna pantalla completa nativa
-        toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => {});
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen().catch(() => {});
+        toggleFullscreen() { // Instrucción JavaScript
+            if (!document.fullscreenElement) { // Evalúa condición
+                document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
+            } else if (document.exitFullscreen) { // Instrucción JavaScript
+                document.exitFullscreen().catch(() => {}); // Ejecuta llamada o método
             }
         },
 
         // Actualiza diapositivas activas, barra de progreso, puntos y botones
-        updateUI() {
+        updateUI() { // Instrucción JavaScript
             // En modo presentación mostramos solo la diapositiva activa
-            if (AppState.viewMode === 'slides') {
-                this.slides.forEach((slide, index) => {
-                    const slideNum = index + 1;
-                    if (slideNum === AppState.currentSlide) {
-                        slide.classList.add('active');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        slide.classList.remove('active');
+            if (AppState.viewMode === 'slides') { // Evalúa condición
+                this.slides.forEach((slide, index) => { // Instrucción JavaScript
+                    const slideNum = index + 1; // Declara e inicializa "slideNum"
+                    if (slideNum === AppState.currentSlide) { // Evalúa condición
+                        slide.classList.add('active'); // Modifica clases CSS del elemento
+                        window.scrollTo({ top: 0, behavior: 'smooth' }); // Ejecuta llamada o método
+                    } else { // Instrucción JavaScript
+                        slide.classList.remove('active'); // Modifica clases CSS del elemento
                     }
                 });
-            } else {
+            } else { // Instrucción JavaScript
                 // En modo documento mostramos todas las secciones
-                this.slides.forEach(slide => slide.classList.add('active'));
+                this.slides.forEach(slide => slide.classList.add('active')); // Modifica clases CSS del elemento
             }
 
             // Actualizamos barra de progreso
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa "percent"
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición
 
             // Actualizamos indicador de texto
-            if (this.slideIndicator) {
-                this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`;
+            if (this.slideIndicator) { // Evalúa condición
+                this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
             // Actualizamos puntos de paginación
-            const dots = document.querySelectorAll('.slide-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
+            const dots = document.querySelectorAll('.slide-dot'); // Obtiene referencia DOM para "dots"
+            dots.forEach((dot, index) => { // Instrucción JavaScript
+                dot.classList.toggle('active', (index + 1) === AppState.currentSlide); // Modifica clases CSS del elemento
             });
 
             // Deshabilitamos visualmente botones en los extremos
-            if (this.btnPrev) {
-                this.btnPrev.disabled = AppState.currentSlide === 1;
-                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
+            if (this.btnPrev) { // Evalúa condición
+                this.btnPrev.disabled = AppState.currentSlide === 1; // Asigna valor
+                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1'; // Asigna valor
             }
-            if (this.btnNext) {
-                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
-                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
+            if (this.btnNext) { // Evalúa condición
+                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides; // Asigna valor
+                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1'; // Asigna valor
             }
         }
     };
@@ -581,31 +581,31 @@
        4. CONTROLADOR DEL LABORATORIO INTERACTIVO DE INTERSECTION OBSERVER
        ========================================================================== */
     // Implementa un IntersectionObserver REAL sobre un contenedor scrolleable del DOM
-    const IOLabController = {
+    const IOLabController = { // Declara e inicializa "IOLabController"
         // Inicializa referencias, eventos y crea el observador nativo
-        init() {
+        init() { // Instrucción JavaScript
             // Contenedor scrollable que actúa como root del observador
-            this.scrollViewport = document.getElementById('ioScrollViewport');
+            this.scrollViewport = document.getElementById('ioScrollViewport'); // Asigna valor
             // Terminal de logs del laboratorio
-            this.terminal = document.getElementById('ioLogTerminal');
+            this.terminal = document.getElementById('ioLogTerminal'); // Asigna valor
 
             // Mapa de los 3 elementos objetivo vigilados y sus elementos de métricas
             this.targets = [
-                {
+                { // Instrucción JavaScript
                     el: document.getElementById('ioTarget1'),
                     badge: document.getElementById('badgeIo1'),
                     ratioText: document.getElementById('ratioText1'),
                     ratioBar: document.getElementById('ratioBar1'),
                     name: 'Objetivo #1'
                 },
-                {
+                { // Instrucción JavaScript
                     el: document.getElementById('ioTarget2'),
                     badge: document.getElementById('badgeIo2'),
                     ratioText: document.getElementById('ratioText2'),
                     ratioBar: document.getElementById('ratioBar2'),
                     name: 'Objetivo #2'
                 },
-                {
+                { // Instrucción JavaScript
                     el: document.getElementById('ioTarget3'),
                     badge: document.getElementById('badgeIo3'),
                     ratioText: document.getElementById('ratioText3'),
@@ -615,38 +615,38 @@
             ];
 
             // Referencias de botones de configuración de threshold
-            this.btnThresh0 = document.getElementById('btnThresh0');
-            this.btnThresh05 = document.getElementById('btnThresh05');
-            this.btnThresh1 = document.getElementById('btnThresh1');
-            this.btnThreshArray = document.getElementById('btnThreshArray');
+            this.btnThresh0 = document.getElementById('btnThresh0'); // Asigna valor
+            this.btnThresh05 = document.getElementById('btnThresh05'); // Asigna valor
+            this.btnThresh1 = document.getElementById('btnThresh1'); // Asigna valor
+            this.btnThreshArray = document.getElementById('btnThreshArray'); // Asigna valor
 
             // Referencias de botones de configuración de rootMargin
-            this.btnMargin0 = document.getElementById('btnMargin0');
-            this.btnMarginPos = document.getElementById('btnMarginPos');
-            this.btnMarginNeg = document.getElementById('btnMarginNeg');
+            this.btnMargin0 = document.getElementById('btnMargin0'); // Asigna valor
+            this.btnMarginPos = document.getElementById('btnMarginPos'); // Asigna valor
+            this.btnMarginNeg = document.getElementById('btnMarginNeg'); // Asigna valor
 
             // Referencias de botones de utilidad
-            this.btnResetScroll = document.getElementById('btnResetScroll');
-            this.btnClearLogs = document.getElementById('btnClearIoLogs');
+            this.btnResetScroll = document.getElementById('btnResetScroll'); // Asigna valor
+            this.btnClearLogs = document.getElementById('btnClearIoLogs'); // Asigna valor
 
             // Vinculamos los clics de todos los botones del panel
-            this.bindControls();
+            this.bindControls(); // Ejecuta llamada o método
             // Creamos y arrancamos la primera instancia de IntersectionObserver
-            this.createObserver();
+            this.createObserver(); // Ejecuta llamada o método
         },
 
         // Destruye cualquier observador previo y crea uno nuevo con las opciones activas
-        createObserver() {
+        createObserver() { // Instrucción JavaScript
             // Si ya existe un observador activo, lo desconectamos limpiamente para evitar fugas
-            if (AppState.ioLab.observer) {
-                AppState.ioLab.observer.disconnect();
+            if (AppState.ioLab.observer) { // Evalúa condición
+                AppState.ioLab.observer.disconnect(); // Ejecuta llamada o método
             }
 
             // Validamos que el contenedor root exista en el DOM
-            if (!this.scrollViewport || typeof window.IntersectionObserver === 'undefined') return;
+            if (!this.scrollViewport || typeof window.IntersectionObserver === 'undefined') return; // Evalúa condición
 
             // Construimos el objeto options con el root personalizado y los valores actuales
-            const options = {
+            const options = { // Declara e inicializa "options"
                 // El marco de vigilancia es nuestra caja scrolleable en lugar de toda la ventana
                 root: this.scrollViewport,
                 // Margen de expansión o contracción configurado por el usuario
@@ -656,123 +656,123 @@
             };
 
             // Instanciamos el IntersectionObserver nativo del navegador
-            const observer = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => { // Define función flecha "observer"
                 // Recorremos cada entrada reportada por el motor del navegador
-                entries.forEach((entry) => {
+                entries.forEach((entry) => { // Instrucción JavaScript
                     // Buscamos la metadata visual asociada a este target
-                    const item = this.targets.find(t => t.el === entry.target);
+                    const item = this.targets.find(t => t.el === entry.target); // Define función flecha "item"
                     // Si no se encuentra, continuamos
-                    if (!item) return;
+                    if (!item) return; // Evalúa condición
 
                     // Calculamos el porcentaje redondeado de intersección
-                    const pct = Math.round(entry.intersectionRatio * 100);
+                    const pct = Math.round(entry.intersectionRatio * 100); // Declara e inicializa "pct"
 
                     // Aplicamos o removemos la clase visual luminosa en la tarjeta objetivo
-                    if (entry.isIntersecting) {
-                        item.el.classList.add('is-visible');
+                    if (entry.isIntersecting) { // Evalúa condición
+                        item.el.classList.add('is-visible'); // Modifica clases CSS del elemento
                         // Reproducimos un sonido sutil de confirmación al entrar
-                        SoundFX.intersectEnter();
-                    } else {
-                        item.el.classList.remove('is-visible');
+                        SoundFX.intersectEnter(); // Ejecuta llamada o método
+                    } else { // Instrucción JavaScript
+                        item.el.classList.remove('is-visible'); // Modifica clases CSS del elemento
                     }
 
                     // Actualizamos el badge booleano de isIntersecting
-                    if (item.badge) {
-                        item.badge.textContent = `isIntersecting: ${entry.isIntersecting}`;
+                    if (item.badge) { // Evalúa condición
+                        item.badge.textContent = `isIntersecting: ${entry.isIntersecting}`; // Actualiza contenido en el DOM
                         item.badge.className = entry.isIntersecting
                             ? 'io-badge-state is-true'
-                            : 'io-badge-state is-false';
+                            : 'io-badge-state is-false'; // Instrucción JavaScript
                     }
 
                     // Actualizamos el texto y la barra de progreso de intersectionRatio
-                    if (item.ratioText) item.ratioText.textContent = `${pct}%`;
-                    if (item.ratioBar) item.ratioBar.style.width = `${pct}%`;
+                    if (item.ratioText) item.ratioText.textContent = `${pct}%`; // Evalúa condición
+                    if (item.ratioBar) item.ratioBar.style.width = `${pct}%`; // Evalúa condición
 
                     // Registramos la transición en el terminal de eventos
-                    const estado = entry.isIntersecting ? 'ENTRÓ 🟢' : 'SALIÓ 🔴';
-                    this.log(`${estado} ${item.name} -> ratio: ${pct}% (isIntersecting: ${entry.isIntersecting})`);
+                    const estado = entry.isIntersecting ? 'ENTRÓ 🟢' : 'SALIÓ 🔴'; // Declara e inicializa "estado"
+                    this.log(`${estado} ${item.name} -> ratio: ${pct}% (isIntersecting: ${entry.isIntersecting})`); // Ejecuta llamada o método
                 });
-            }, options);
+            }, options); // Ejecuta llamada o método
 
             // Guardamos la instancia activa en el estado global
-            AppState.ioLab.observer = observer;
+            AppState.ioLab.observer = observer; // Asigna valor
 
             // Ponemos bajo vigilancia a cada uno de los 3 elementos objetivo
-            this.targets.forEach((item) => {
-                if (item.el) {
-                    observer.observe(item.el);
+            this.targets.forEach((item) => { // Instrucción JavaScript
+                if (item.el) { // Evalúa condición
+                    observer.observe(item.el); // Ejecuta llamada o método
                 }
             });
         },
 
         // Vincula los botones interactivos para cambiar options y controlar el scroll
-        bindControls() {
+        bindControls() { // Instrucción JavaScript
             // Función auxiliar para actualizar threshold y reconstruir el observador
-            const setThreshold = (value, label) => {
-                SoundFX.click();
-                AppState.ioLab.threshold = value;
-                this.log(`⚙️ Nuevo threshold aplicado: ${label}`);
-                this.createObserver();
+            const setThreshold = (value, label) => { // Define función flecha "setThreshold"
+                SoundFX.click(); // Ejecuta llamada o método
+                AppState.ioLab.threshold = value; // Asigna valor
+                this.log(`⚙️ Nuevo threshold aplicado: ${label}`); // Ejecuta llamada o método
+                this.createObserver(); // Ejecuta llamada o método
             };
 
             // Función auxiliar para actualizar rootMargin y reconstruir el observador
-            const setRootMargin = (value) => {
-                SoundFX.click();
-                AppState.ioLab.rootMargin = value;
-                this.log(`📏 Nuevo rootMargin aplicado: "${value}"`);
-                this.createObserver();
+            const setRootMargin = (value) => { // Define función flecha "setRootMargin"
+                SoundFX.click(); // Ejecuta llamada o método
+                AppState.ioLab.rootMargin = value; // Asigna valor
+                this.log(`📏 Nuevo rootMargin aplicado: "${value}"`); // Ejecuta llamada o método
+                this.createObserver(); // Ejecuta llamada o método
             };
 
             // Botones de threshold
-            if (this.btnThresh0) this.btnThresh0.addEventListener('click', () => setThreshold(0, '0'));
-            if (this.btnThresh05) this.btnThresh05.addEventListener('click', () => setThreshold(0.5, '0.5'));
-            if (this.btnThresh1) this.btnThresh1.addEventListener('click', () => setThreshold(1.0, '1.0'));
-            if (this.btnThreshArray) this.btnThreshArray.addEventListener('click', () => setThreshold([0, 0.25, 0.5, 0.75, 1], '[0, 0.25, 0.5, 0.75, 1]'));
+            if (this.btnThresh0) this.btnThresh0.addEventListener('click', () => setThreshold(0, '0')); // Evalúa condición
+            if (this.btnThresh05) this.btnThresh05.addEventListener('click', () => setThreshold(0.5, '0.5')); // Evalúa condición
+            if (this.btnThresh1) this.btnThresh1.addEventListener('click', () => setThreshold(1.0, '1.0')); // Evalúa condición
+            if (this.btnThreshArray) this.btnThreshArray.addEventListener('click', () => setThreshold([0, 0.25, 0.5, 0.75, 1], '[0, 0.25, 0.5, 0.75, 1]')); // Evalúa condición
 
             // Botones de rootMargin
-            if (this.btnMargin0) this.btnMargin0.addEventListener('click', () => setRootMargin('0px'));
-            if (this.btnMarginPos) this.btnMarginPos.addEventListener('click', () => setRootMargin('40px'));
-            if (this.btnMarginNeg) this.btnMarginNeg.addEventListener('click', () => setRootMargin('-40px'));
+            if (this.btnMargin0) this.btnMargin0.addEventListener('click', () => setRootMargin('0px')); // Evalúa condición
+            if (this.btnMarginPos) this.btnMarginPos.addEventListener('click', () => setRootMargin('40px')); // Evalúa condición
+            if (this.btnMarginNeg) this.btnMarginNeg.addEventListener('click', () => setRootMargin('-40px')); // Evalúa condición
 
             // Botón para devolver la caja scrolleable al tope superior
-            if (this.btnResetScroll) {
-                this.btnResetScroll.addEventListener('click', () => {
-                    SoundFX.click();
-                    if (this.scrollViewport) {
-                        this.scrollViewport.scrollTo({ top: 0, behavior: 'smooth' });
-                        this.log('⬆️ Scroll restablecido al inicio.');
+            if (this.btnResetScroll) { // Evalúa condición
+                this.btnResetScroll.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    if (this.scrollViewport) { // Evalúa condición
+                        this.scrollViewport.scrollTo({ top: 0, behavior: 'smooth' }); // Ejecuta llamada o método
+                        this.log('⬆️ Scroll restablecido al inicio.'); // Ejecuta llamada o método
                     }
                 });
             }
 
             // Botón para limpiar los registros del terminal
-            if (this.btnClearLogs) {
-                this.btnClearLogs.addEventListener('click', () => {
-                    SoundFX.click();
-                    if (this.terminal) {
-                        this.terminal.innerHTML = '';
-                        this.log('🧹 Terminal de eventos limpiado.');
+            if (this.btnClearLogs) { // Evalúa condición
+                this.btnClearLogs.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    if (this.terminal) { // Evalúa condición
+                        this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
+                        this.log('🧹 Terminal de eventos limpiado.'); // Ejecuta llamada o método
                     }
                 });
             }
         },
 
         // Añade una línea con marca temporal al terminal del laboratorio
-        log(message) {
+        log(message) { // Instrucción JavaScript
             // Si no existe terminal en el DOM, salimos
-            if (!this.terminal) return;
+            if (!this.terminal) return; // Evalúa condición
 
             // Generamos la hora actual en formato HH:MM:SS
-            const now = new Date();
+            const now = new Date(); // Declara e inicializa "now"
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
-            ].join(':');
+            ].join(':'); // Ejecuta llamada o método
 
             // Creamos el elemento div de la línea
-            const line = document.createElement('div');
-            line.className = 'io-log-line';
+            const line = document.createElement('div'); // Crea nuevo elemento DOM "line"
+            line.className = 'io-log-line'; // Asigna valor
 
             // Rellenamos con la marca temporal y el mensaje
             line.innerHTML = `
@@ -781,9 +781,9 @@
             `;
 
             // Insertamos al final del terminal
-            this.terminal.appendChild(line);
+            this.terminal.appendChild(line); // Inserta nodo en el DOM
             // Desplazamos el scroll del terminal automáticamente al último mensaje
-            this.terminal.scrollTop = this.terminal.scrollHeight;
+            this.terminal.scrollTop = this.terminal.scrollHeight; // Asigna valor
         }
     };
 
@@ -791,17 +791,17 @@
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
     // Función de inicialización general
-    function startApplication() {
+    function startApplication() { // Declara función
         // Iniciamos navegación de diapositivas
-        SlideNavigation.init();
+        SlideNavigation.init(); // Ejecuta llamada o método
         // Iniciamos el laboratorio interactivo de Intersection Observer
-        IOLabController.init();
+        IOLabController.init(); // Ejecuta llamada o método
     }
 
     // Verificamos si el DOM ya terminó de cargarse
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startApplication);
-    } else {
-        startApplication();
+    if (document.readyState === 'loading') { // Evalúa condición
+        document.addEventListener('DOMContentLoaded', startApplication); // Registra escuchador de eventos
+    } else { // Instrucción JavaScript
+        startApplication(); // Ejecuta llamada o método
     }
-})();
+})(); // Ejecuta llamada o método

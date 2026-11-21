@@ -6,205 +6,205 @@
 
 /* --- 1. Variables Globales & Sistema de Diseño (:root) --- */
 /* :root representa el elemento raíz del documento (HTML) y se usa para definir variables globales accesibles en todo el CSS */
-:root {
+:root { /* Regla de estilo para :root */
     /* Color de fondo principal: tono azul muy oscuro cercano al negro azabache */
-    --bg-dark: #070a13;
+    --bg-dark: #070a13; /* Variable CSS personalizada (--bg-dark) */
     /* Color de fondo secundario para superficies intermedias y barras elevadas */
-    --bg-surface: #0e1526;
+    --bg-surface: #0e1526; /* Variable CSS personalizada (--bg-surface) */
     /* Color de fondo para tarjetas translúcidas (75% de opacidad para permitir efecto vidrio/glassmorphism) */
-    --bg-card: rgba(16, 24, 42, 0.75);
+    --bg-card: rgba(16, 24, 42, 0.75); /* Variable CSS personalizada (--bg-card) */
     /* Color de fondo de tarjeta al pasar el cursor (hover), más brillante y con 85% de opacidad */
-    --bg-card-hover: rgba(23, 34, 58, 0.85);
+    --bg-card-hover: rgba(23, 34, 58, 0.85); /* Variable CSS personalizada (--bg-card-hover) */
     /* Tinte sutil blanco con 3% de opacidad para crear reflejos de cristal */
-    --bg-glass: rgba(255, 255, 255, 0.03);
+    --bg-glass: rgba(255, 255, 255, 0.03); /* Variable CSS personalizada (--bg-glass) */
 
     /* Borde casi imperceptible con 8% de opacidad blanca para delimitar sin saturar */
-    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-subtle: rgba(255, 255, 255, 0.08); /* Variable CSS personalizada (--border-subtle) */
     /* Borde más visible con 16% de opacidad blanca para elementos activos o hovered */
-    --border-light: rgba(255, 255, 255, 0.16);
+    --border-light: rgba(255, 255, 255, 0.16); /* Variable CSS personalizada (--border-light) */
     /* Borde con acento violeta índigo para resaltar elementos seleccionados */
-    --border-accent: rgba(99, 102, 241, 0.4);
+    --border-accent: rgba(99, 102, 241, 0.4); /* Variable CSS personalizada (--border-accent) */
 
     /* Color primario: Índigo vibrante moderno */
-    --primary: #6366f1;
+    --primary: #6366f1; /* Variable CSS personalizada (--primary) */
     /* Resplandor o sombra neón asociada al color primario */
-    --primary-glow: rgba(99, 102, 241, 0.35);
+    --primary-glow: rgba(99, 102, 241, 0.35); /* Variable CSS personalizada (--primary-glow) */
     /* Variante más oscura del primario para estados de pulsación o hover */
-    --primary-hover: #4f46e5;
+    --primary-hover: #4f46e5; /* Variable CSS personalizada (--primary-hover) */
 
     /* Color secundario: Cian neón tecnológico */
-    --cyan: #06b6d4;
+    --cyan: #06b6d4; /* Variable CSS personalizada (--cyan) */
     /* Resplandor luminoso color cian */
-    --cyan-glow: rgba(6, 182, 212, 0.3);
+    --cyan-glow: rgba(6, 182, 212, 0.3); /* Variable CSS personalizada (--cyan-glow) */
     /* Variante más oscura del cian al interactuar */
-    --cyan-hover: #0891b2;
+    --cyan-hover: #0891b2; /* Variable CSS personalizada (--cyan-hover) */
 
     /* Color semántico de éxito: Verde esmeralda */
-    --emerald: #10b981;
+    --emerald: #10b981; /* Variable CSS personalizada (--emerald) */
     /* Resplandor asociado al verde esmeralda */
-    --emerald-glow: rgba(16, 185, 129, 0.3);
+    --emerald-glow: rgba(16, 185, 129, 0.3); /* Variable CSS personalizada (--emerald-glow) */
 
     /* Color semántico de advertencia o llamada de atención: Ámbar / Dorado */
-    --amber: #f59e0b;
+    --amber: #f59e0b; /* Variable CSS personalizada (--amber) */
     /* Resplandor asociado al ámbar */
-    --amber-glow: rgba(245, 158, 11, 0.3);
+    --amber-glow: rgba(245, 158, 11, 0.3); /* Variable CSS personalizada (--amber-glow) */
 
     /* Color semántico de error o peligro: Rosa carmesí */
-    --rose: #f43f5e;
+    --rose: #f43f5e; /* Variable CSS personalizada (--rose) */
     /* Resplandor asociado al tono rosa carmesí */
-    --rose-glow: rgba(244, 63, 94, 0.3);
+    --rose-glow: rgba(244, 63, 94, 0.3); /* Variable CSS personalizada (--rose-glow) */
 
     /* Color principal de texto: blanco hueso de alta legibilidad */
-    --text-main: #f1f5f9;
+    --text-main: #f1f5f9; /* Variable CSS personalizada (--text-main) */
     /* Color de texto secundario: gris azulado para descripciones y subtítulos */
-    --text-muted: #94a3b8;
+    --text-muted: #94a3b8; /* Variable CSS personalizada (--text-muted) */
     /* Color de texto terciario: gris atenuado para notas secundarias y metadatos */
-    --text-dim: #64748b;
+    --text-dim: #64748b; /* Variable CSS personalizada (--text-dim) */
 
     /* Familia tipográfica principal: 'Outfit' con respaldo en fuentes del sistema */
-    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; /* Variable CSS personalizada (--font-sans) */
     /* Familia tipográfica monoespaciada: 'Fira Code' para código fuente y métricas */
-    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; /* Variable CSS personalizada (--font-mono) */
 
     /* Altura fija calculada para la barra de navegación superior */
-    --header-height: 72px;
+    --header-height: 72px; /* Variable CSS personalizada (--header-height) */
     /* Altura asignada para el área de control flotante inferior */
-    --bottom-height: 80px;
+    --bottom-height: 80px; /* Variable CSS personalizada (--bottom-height) */
     /* Radio de borde pequeño (8px) para etiquetas y botones compactos */
-    --radius-sm: 8px;
+    --radius-sm: 8px; /* Variable CSS personalizada (--radius-sm) */
     /* Radio de borde mediano (14px) para botones principales y paneles */
-    --radius-md: 14px;
+    --radius-md: 14px; /* Variable CSS personalizada (--radius-md) */
     /* Radio de borde grande (20px) para las tarjetas principales de diapositiva */
-    --radius-lg: 20px;
+    --radius-lg: 20px; /* Variable CSS personalizada (--radius-lg) */
     /* Radio de borde completo para píldoras y badges circulares */
-    --radius-pill: 9999px;
+    --radius-pill: 9999px; /* Variable CSS personalizada (--radius-pill) */
 
     /* Transición rápida para micro-interacciones al pasar el ratón (hover) */
-    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1); /* Variable CSS personalizada (--transition-fast) */
     /* Transición fluida para cambios de diapositiva y apertura de modales */
-    --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1); /* Variable CSS personalizada (--transition-smooth) */
 }
 
 /* --- 2. Reset y Configuración Base --- */
 /* Selector universal para todos los elementos y sus pseudo-elementos ::before y ::after */
-*, *::before, *::after {
+*, *::before, *::after { /* Regla de estilo para *, *::before, *::after */
     /* El modelo de caja incluye el relleno (padding) y borde dentro del ancho y alto total */
-    box-sizing: border-box;
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
     /* Elimina márgenes externos por defecto impuestos por el navegador */
-    margin: 0;
+    margin: 0; /* Margen exterior */
     /* Elimina rellenos internos por defecto del navegador */
-    padding: 0;
+    padding: 0; /* Relleno interior */
 }
 
 /* Configuración de las etiquetas principales html y body */
-html, body {
+html, body { /* Regla de estilo para html, body */
     /* Ocupa el 100% del ancho del viewport */
-    width: 100%;
+    width: 100%; /* Ancho del elemento */
     /* Ocupa al menos el 100% de la altura de la ventana visible */
-    min-height: 100%;
+    min-height: 100%; /* Alto mínimo permitido */
     /* Establece el color de fondo oscuro de base */
-    background-color: var(--bg-dark);
+    background-color: var(--bg-dark); /* Color de fondo */
     /* Establece el color de texto general */
-    color: var(--text-main);
+    color: var(--text-main); /* Color del texto */
     /* Aplica la fuente moderna Outfit */
-    font-family: var(--font-sans);
+    font-family: var(--font-sans); /* Familia tipográfica */
     /* Altura de línea óptima de 1.6 para lectura confortable */
-    line-height: 1.6;
+    line-height: 1.6; /* Altura de línea del texto */
     /* Oculta desbordamientos horizontales accidentales */
-    overflow-x: hidden;
+    overflow-x: hidden; /* Control de desbordamiento horizontal */
     /* Suavizado tipográfico subpixel para navegadores WebKit/Blink */
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased; /* Propiedad CSS: -webkit-font-smoothing */
 }
 
 /* Personalización del carril de la barra de desplazamiento */
-::-webkit-scrollbar {
+::-webkit-scrollbar { /* Regla de estilo para ::-webkit-scrollbar */
     /* Ancho de la barra de scroll vertical */
-    width: 8px;
+    width: 8px; /* Ancho del elemento */
     /* Altura de la barra de scroll horizontal */
-    height: 8px;
+    height: 8px; /* Alto del elemento */
 }
 /* Fondo del carril por donde se desliza la barra */
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track { /* Regla de estilo para ::-webkit-scrollbar-track */
     /* Fondo oscuro semitransparente */
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.3); /* Fondo o degradado */
 }
 /* Manija (cursor) deslizable de la barra de scroll */
-::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb { /* Regla de estilo para ::-webkit-scrollbar-thumb */
     /* Color gris sutil */
-    background: var(--border-light);
+    background: var(--border-light); /* Fondo o degradado */
     /* Bordes redondeados en forma de píldora */
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
 }
 /* Efecto al pasar el cursor sobre la manija del scroll */
-::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover { /* Regla de estilo para ::-webkit-scrollbar-thumb:hover */
     /* Se ilumina con el color primario índigo */
-    background: var(--primary);
+    background: var(--primary); /* Fondo o degradado */
 }
 
 /* --- 3. Efectos de Fondo Ambientales (Luces de Neón & Malla) --- */
 /* Clase base para los círculos de luz difusa ambiental */
-.bg-glow {
+.bg-glow { /* Regla de estilo para .bg-glow */
     /* Fijado en la ventana para que no se mueva con el scroll */
-    position: fixed;
+    position: fixed; /* Define el esquema de posicionamiento */
     /* Forma circular perfecta */
-    border-radius: 50%;
+    border-radius: 50%; /* Redondeo de esquinas */
     /* Desenfoque gaussiano masivo para crear aura difusa */
-    filter: blur(120px);
+    filter: blur(120px); /* Filtro gráfico aplicado al elemento */
     /* Permite hacer clic a través de este elemento sin bloquear botones */
-    pointer-events: none;
+    pointer-events: none; /* Control de interacción con el puntero */
     /* Se posiciona detrás de todo el contenido interactivo */
-    z-index: 0;
+    z-index: 0; /* Orden de apilamiento en el eje Z */
     /* Opacidad moderada del 45% */
-    opacity: 0.45;
+    opacity: 0.45; /* Nivel de transparencia */
     /* Animación continua de pulso y respiración de 12 segundos alternada */
-    animation: pulseAmbient 12s ease-in-out infinite alternate;
+    animation: pulseAmbient 12s ease-in-out infinite alternate; /* Animación con keyframes */
 }
 /* Primer foco de luz: Esquina superior izquierda en color primario */
-.glow-1 {
+.glow-1 { /* Regla de estilo para .glow-1 */
     /* Ancho de 550 píxeles */
-    width: 550px;
+    width: 550px; /* Ancho del elemento */
     /* Alto de 550 píxeles */
-    height: 550px;
+    height: 550px; /* Alto del elemento */
     /* Desplazado ligeramente fuera del borde superior */
-    top: -10%;
+    top: -10%; /* Desplazamiento superior */
     /* Desplazado ligeramente fuera del borde izquierdo */
-    left: -10%;
+    left: -10%; /* Desplazamiento izquierdo */
     /* Gradiente radial desde el centro índigo hacia transparente */
-    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%); /* Fondo o degradado */
 }
 /* Segundo foco de luz: Esquina inferior derecha en color cian */
-.glow-2 {
+.glow-2 { /* Regla de estilo para .glow-2 */
     /* Ancho de 600 píxeles */
-    width: 600px;
+    width: 600px; /* Ancho del elemento */
     /* Alto de 600 píxeles */
-    height: 600px;
+    height: 600px; /* Alto del elemento */
     /* Desplazado fuera del borde inferior */
-    bottom: -10%;
+    bottom: -10%; /* Desplazamiento inferior */
     /* Desplazado fuera del borde derecho */
-    right: -10%;
+    right: -10%; /* Desplazamiento derecho */
     /* Gradiente radial cian a transparente */
-    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--cyan) 0%, transparent 70%); /* Fondo o degradado */
     /* Desfase de tiempo de -4 segundos para movimiento orgánico no sincronizado */
-    animation-delay: -4s;
+    animation-delay: -4s; /* Propiedad CSS: animation-delay */
 }
 /* Tercer foco de luz: Centro en tono púrpura */
-.glow-3 {
+.glow-3 { /* Regla de estilo para .glow-3 */
     /* Ancho de 400 píxeles */
-    width: 400px;
+    width: 400px; /* Ancho del elemento */
     /* Alto de 400 píxeles */
-    height: 400px;
+    height: 400px; /* Alto del elemento */
     /* Posicionado cerca del 40% vertical */
-    top: 40%;
+    top: 40%; /* Desplazamiento superior */
     /* Posicionado cerca del 45% horizontal */
-    left: 45%;
+    left: 45%; /* Desplazamiento izquierdo */
     /* Gradiente radial púrpura a transparente */
-    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%); /* Fondo o degradado */
     /* Desfase de -8 segundos */
-    animation-delay: -8s;
+    animation-delay: -8s; /* Propiedad CSS: animation-delay */
 }
 
 /* Definición de la animación de pulso ambiental */
-@keyframes pulseAmbient {
+@keyframes pulseAmbient { /* Definición de animación por fotogramas clave */
     /* Estado inicial: escala normal, sin desplazamiento y opacidad del 35% */
     0% { transform: scale(1) translate(0, 0); opacity: 0.35; }
     /* Punto medio: se expande 15%, se traslada y aumenta su brillo al 55% */
@@ -214,765 +214,765 @@ html, body {
 }
 
 /* Cuadrícula geométrica de fondo (Grid Pattern) estilo Sci-Fi */
-.bg-grid-pattern {
+.bg-grid-pattern { /* Regla de estilo para .bg-grid-pattern */
     /* Posición fija fija en toda la pantalla */
-    position: fixed;
+    position: fixed; /* Define el esquema de posicionamiento */
     /* Cubre los 4 extremos (top:0, right:0, bottom:0, left:0) */
-    inset: 0;
+    inset: 0; /* Desplazamiento en los cuatro lados */
     /* Dibuja líneas tenues horizontales y verticales cada 40 píxeles */
     background-image: 
         linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px); /* Regla CSS */
     /* Tamaño de cada celda de la cuadrícula: 40x40px */
-    background-size: 40px 40px;
+    background-size: 40px 40px; /* Escalado del fondo */
     /* No intercepta clics del ratón */
-    pointer-events: none;
+    pointer-events: none; /* Control de interacción con el puntero */
     /* En la capa z=0 de fondo */
-    z-index: 0;
+    z-index: 0; /* Orden de apilamiento en el eje Z */
 }
 
 /* --- 4. Barra Superior (Top Nav) --- */
 /* Encabezado fijo en la parte superior */
-.top-nav {
+.top-nav { /* Regla de estilo para .top-nav */
     /* Se mantiene anclado al desplazarse */
-    position: fixed;
+    position: fixed; /* Define el esquema de posicionamiento */
     /* Al ras superior */
-    top: 0;
+    top: 0; /* Desplazamiento superior */
     /* Al ras izquierdo */
-    left: 0;
+    left: 0; /* Desplazamiento izquierdo */
     /* Cubre el 100% del ancho */
-    width: 100%;
+    width: 100%; /* Ancho del elemento */
     /* Altura definida por la variable (72px) */
-    height: var(--header-height);
+    height: var(--header-height); /* Alto del elemento */
     /* Fondo oscuro semitransparente para efecto glassmorphic */
-    background: rgba(7, 10, 19, 0.75);
+    background: rgba(7, 10, 19, 0.75); /* Fondo o degradado */
     /* Desenfoque de fondo estándar */
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px); /* Filtro aplicado al fondo detrás del elemento */
     /* Desenfoque de fondo para Safari */
-    -webkit-backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); /* Propiedad CSS: -webkit-backdrop-filter */
     /* Delgada línea divisoria inferior */
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
     /* Alinea sus elementos en una fila flexible */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centra los elementos verticalmente */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Separa los extremos: marca a la izquierda, controles a la derecha */
-    justify-content: space-between;
+    justify-content: space-between; /* Alineación en el eje principal */
     /* Espaciado interno horizontal de 2 rem (32px) */
-    padding: 0 2rem;
+    padding: 0 2rem; /* Relleno interior */
     /* Elevado sobre las diapositivas (z=100) */
-    z-index: 100;
+    z-index: 100; /* Orden de apilamiento en el eje Z */
 }
 
 /* Contenedor del logotipo y nombre del curso */
-.nav-brand {
+.nav-brand { /* Regla de estilo para .nav-brand */
     /* Disposición flexible en fila */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Separación de 1rem entre insignia y texto */
-    gap: 1rem;
+    gap: 1rem; /* Separación entre filas y columnas */
 }
 
 /* Insignia que indica el nivel del curso (JS MASTER LEVEL) */
-.brand-badge {
+.brand-badge { /* Regla de estilo para .brand-badge */
     /* Fondo con gradiente índigo-cian translúcido */
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2));
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(6, 182, 212, 0.2)); /* Fondo o degradado */
     /* Borde resaltado con acento */
-    border: 1px solid var(--border-accent);
+    border: 1px solid var(--border-accent); /* Borde del contenedor */
     /* Color de texto cian */
-    color: var(--cyan);
+    color: var(--cyan); /* Color del texto */
     /* Tamaño de letra compacto */
-    font-size: 0.75rem;
+    font-size: 0.75rem; /* Tamaño de fuente */
     /* Peso de fuente negrita */
-    font-weight: 700;
+    font-weight: 700; /* Grosor de la fuente */
     /* Espaciado entre letras para aspecto profesional */
-    letter-spacing: 0.08em;
+    letter-spacing: 0.08em; /* Espaciado entre letras */
     /* Relleno vertical de 0.3rem y horizontal de 0.7rem */
-    padding: 0.3rem 0.7rem;
+    padding: 0.3rem 0.7rem; /* Relleno interior */
     /* Bordes completamente redondeados */
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
     /* Texto en mayúsculas */
-    text-transform: uppercase;
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
 }
 
 /* Agrupador del icono y el texto del título */
-.brand-title {
+.brand-title { /* Regla de estilo para .brand-title */
     /* Fila flexible */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Separación de medio rem */
-    gap: 0.5rem;
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
 /* Icono de rayo energético */
-.icon-proto {
+.icon-proto { /* Regla de estilo para .icon-proto */
     /* Tamaño del icono */
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Tamaño de fuente */
     /* Color ámbar brillante */
-    color: #fbbf24;
+    color: #fbbf24; /* Color del texto */
     /* Sombra difusa resplandeciente */
-    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5));
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.5)); /* Filtro gráfico aplicado al elemento */
 }
 /* Texto del título en la barra */
-.title-text {
+.title-text { /* Regla de estilo para .title-text */
     /* Tamaño de texto equilibrado */
-    font-size: 1.1rem;
+    font-size: 1.1rem; /* Tamaño de fuente */
     /* Peso fuerte */
-    font-weight: 700;
+    font-weight: 700; /* Grosor de la fuente */
     /* Ajuste de espacio entre caracteres */
-    letter-spacing: -0.01em;
+    letter-spacing: -0.01em; /* Espaciado entre letras */
     /* Color blanco principal */
-    color: var(--text-main);
+    color: var(--text-main); /* Color del texto */
 }
 
 /* Contenedor de la barra de progreso */
-.nav-progress-container {
+.nav-progress-container { /* Regla de estilo para .nav-progress-container */
     /* Disposición en fila */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Espacio entre barra y número */
-    gap: 1rem;
+    gap: 1rem; /* Separación entre filas y columnas */
     /* Ocupa hasta 360px según disponibilidad */
-    flex: 0 1 360px;
+    flex: 0 1 360px; /* Factor de crecimiento, encogimiento y base flex */
 }
 /* Carril gris de la barra de progreso */
-.progress-bar-bg {
+.progress-bar-bg { /* Regla de estilo para .progress-bar-bg */
     /* Ocupa todo el espacio disponible */
-    flex: 1;
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
     /* Altura delgada de 6px */
-    height: 6px;
+    height: 6px; /* Alto del elemento */
     /* Fondo blanco al 8% de opacidad */
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
     /* Píldora redondeada */
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
     /* Oculta esquinas sobrantes */
-    overflow: hidden;
+    overflow: hidden; /* Control de contenido desbordado */
 }
 /* Relleno animado de progreso */
-.progress-bar-fill {
+.progress-bar-fill { /* Regla de estilo para .progress-bar-fill */
     /* Ocupa toda la altura del carril */
-    height: 100%;
+    height: 100%; /* Alto del elemento */
     /* Ancho inicial (10% = Diapositiva 1 de 10) */
-    width: 10%;
+    width: 10%; /* Ancho del elemento */
     /* Gradiente suave de índigo a cian */
-    background: linear-gradient(90deg, var(--primary), var(--cyan));
+    background: linear-gradient(90deg, var(--primary), var(--cyan)); /* Fondo o degradado */
     /* Píldora redondeada */
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
     /* Transición suave al cambiar de diapositiva */
-    transition: width var(--transition-smooth);
+    transition: width var(--transition-smooth); /* Transición suave de propiedades */
     /* Resplandor neón en el extremo de avance */
-    box-shadow: 0 0 10px var(--cyan-glow);
+    box-shadow: 0 0 10px var(--cyan-glow); /* Sombra proyectada */
 }
 /* Indicador numérico (ej. 1 / 10) */
-.progress-label {
+.progress-label { /* Regla de estilo para .progress-label */
     /* Fuente tipográfica de código */
-    font-family: var(--font-mono);
+    font-family: var(--font-mono); /* Familia tipográfica */
     /* Tamaño legible */
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* Tamaño de fuente */
     /* Color atenuado */
-    color: var(--text-muted);
+    color: var(--text-muted); /* Color del texto */
     /* Ancho mínimo para que no baile el texto al cambiar dígitos */
-    min-width: 50px;
+    min-width: 50px; /* Ancho mínimo permitido */
     /* Alineado a la derecha */
-    text-align: right;
+    text-align: right; /* Alineación horizontal del texto */
 }
 
 /* Grupo de botones de acciones en la barra superior */
-.nav-actions {
+.nav-actions { /* Regla de estilo para .nav-actions */
     /* Fila flexible */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Espacio de 0.5rem entre botones */
-    gap: 0.5rem;
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
 
 /* Botones de navegación en la cabecera */
-.nav-btn {
+.nav-btn { /* Regla de estilo para .nav-btn */
     /* Fondo translúcido sutil */
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.04); /* Fondo o degradado */
     /* Borde sutil */
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
     /* Texto blanco principal */
-    color: var(--text-main);
+    color: var(--text-main); /* Color del texto */
     /* Relleno interno */
-    padding: 0.5rem 0.85rem;
+    padding: 0.5rem 0.85rem; /* Relleno interior */
     /* Esquinas redondeadas */
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
     /* Cursor de puntero al pasar el ratón */
-    cursor: pointer;
+    cursor: pointer; /* Estilo del puntero al pasar encima */
     /* Tipografía Outfit */
-    font-family: var(--font-sans);
+    font-family: var(--font-sans); /* Familia tipográfica */
     /* Tamaño de texto */
-    font-size: 0.85rem;
+    font-size: 0.85rem; /* Tamaño de fuente */
     /* Peso intermedio */
-    font-weight: 500;
+    font-weight: 500; /* Grosor de la fuente */
     /* Disposición en línea flexible */
-    display: inline-flex;
+    display: inline-flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Espacio entre icono y texto */
-    gap: 0.5rem;
+    gap: 0.5rem; /* Separación entre filas y columnas */
     /* Transición rápida en todas las propiedades */
-    transition: all var(--transition-fast);
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
 /* Estado hover de los botones superiores */
-.nav-btn:hover {
+.nav-btn:hover { /* Regla de estilo para .nav-btn:hover */
     /* Aumenta el brillo del fondo */
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
     /* Aclara el borde */
-    border-color: var(--border-light);
+    border-color: var(--border-light); /* Color del borde */
     /* Eleva el botón 1 pixel hacia arriba */
-    transform: translateY(-1px);
+    transform: translateY(-1px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 /* Estado de clic presionado */
-.nav-btn:active {
+.nav-btn:active { /* Regla de estilo para .nav-btn:active */
     /* Vuelve a su posición original */
-    transform: translateY(0);
+    transform: translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 /* Tamaño de icono dentro del botón */
-.btn-icon {
-    font-size: 1rem;
+.btn-icon { /* Regla de estilo para .btn-icon */
+    font-size: 1rem; /* Tamaño de fuente */
 }
 
 /* --- 5. Contenedor de Presentación / Modos (Presentation vs Document) --- */
 /* Envoltorio principal de las diapositivas */
-.presentation-wrapper {
+.presentation-wrapper { /* Regla de estilo para .presentation-wrapper */
     /* Posición relativa para ubicar capas */
-    position: relative;
+    position: relative; /* Define el esquema de posicionamiento */
     /* Por encima de la cuadrícula y luces de fondo */
-    z-index: 10;
+    z-index: 10; /* Orden de apilamiento en el eje Z */
     /* Margen superior igual a la altura de la cabecera para no quedar oculto detrás */
-    margin-top: var(--header-height);
+    margin-top: var(--header-height); /* Margen exterior superior */
     /* Margen inferior para no chocar con la barra de navegación flotante */
-    margin-bottom: var(--bottom-height);
+    margin-bottom: var(--bottom-height); /* Margen exterior inferior */
     /* Altura mínima calculada descontando cabecera y barra inferior */
-    min-height: calc(100vh - var(--header-height) - var(--bottom-height));
+    min-height: calc(100vh - var(--header-height) - var(--bottom-height)); /* Alto mínimo permitido */
     /* Ancho al 100% */
-    width: 100%;
+    width: 100%; /* Ancho del elemento */
     /* Ancho máximo contenido en 1400px para pantallas grandes */
-    max-width: 1400px;
+    max-width: 1400px; /* Ancho máximo permitido */
     /* Centrado horizontal automático */
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; /* Margen exterior izquierdo */
+    margin-right: auto; /* Margen exterior derecho */
     /* Espaciado interno general */
-    padding: 2rem 2.5rem;
+    padding: 2rem 2.5rem; /* Relleno interior */
     /* Flexbox centrado */
-    display: flex;
+    display: flex; /* Define el tipo de caja/layout */
     /* Centra horizontalmente */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Centra verticalmente */
-    justify-content: center;
+    justify-content: center; /* Alineación en el eje principal */
 }
 
 /* REGLAS PARA EL MODO PRESENTACIÓN (Diapositivas individuales) */
 /* Oculta por defecto todas las diapositivas */
-body.mode-presentation .slide {
-    display: none;
+body.mode-presentation .slide { /* Regla de estilo para body.mode-presentation .slide */
+    display: none; /* Define el tipo de caja/layout */
     /* Totalmente transparente */
-    opacity: 0;
+    opacity: 0; /* Nivel de transparencia */
     /* Ligeramente reducida en escala y desplazada hacia abajo */
-    transform: scale(0.97) translateY(12px);
+    transform: scale(0.97) translateY(12px); /* Transformación 2D/3D (escala, rotación, traslación) */
     /* Transición suave de entrada */
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Transición suave de propiedades */
     /* Ocupa todo el ancho */
-    width: 100%;
+    width: 100%; /* Ancho del elemento */
 }
 /* Muestra únicamente la diapositiva que tiene la clase .active */
-body.mode-presentation .slide.active {
+body.mode-presentation .slide.active { /* Regla de estilo para body.mode-presentation .slide.active */
     /* Hace visible el bloque */
-    display: block;
+    display: block; /* Define el tipo de caja/layout */
     /* Opacidad completa */
-    opacity: 1;
+    opacity: 1; /* Nivel de transparencia */
     /* Escala original en su posición natural */
-    transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* REGLAS PARA EL MODO GUÍA / DOCUMENTO COMPLETO (Lectura continua) */
 /* El contenedor pasa a flujo de bloque continuo con scroll */
-body.mode-document .presentation-wrapper {
-    display: block;
+body.mode-document .presentation-wrapper { /* Regla de estilo para body.mode-document .presentation-wrapper */
+    display: block; /* Define el tipo de caja/layout */
     /* Espacio extra al final para lectura cómoda */
-    padding-bottom: 5rem;
+    padding-bottom: 5rem; /* Relleno interior inferior */
 }
 /* Todas las diapositivas se vuelven visibles sucesivamente */
-body.mode-document .slide {
-    display: block !important;
-    opacity: 1 !important;
-    transform: none !important;
+body.mode-document .slide { /* Regla de estilo para body.mode-document .slide */
+    display: block !important; /* Define el tipo de caja/layout */
+    opacity: 1 !important; /* Nivel de transparencia */
+    transform: none !important; /* Transformación 2D/3D (escala, rotación, traslación) */
     /* Separación amplia entre secciones */
-    margin-bottom: 4rem;
-    padding-bottom: 3rem;
+    margin-bottom: 4rem; /* Margen exterior inferior */
+    padding-bottom: 3rem; /* Relleno interior inferior */
     /* Línea divisoria elegante entre temas */
-    border-bottom: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
 }
 /* Elimina el borde de la última diapositiva */
-body.mode-document .slide:last-child {
-    border-bottom: none;
+body.mode-document .slide:last-child { /* Regla de estilo para body.mode-document .slide:last-child */
+    border-bottom: none; /* Borde inferior */
 }
 /* En modo documento se oculta la barra flotante de diapositivas */
-body.mode-document .bottom-controls {
-    display: none;
+body.mode-document .bottom-controls { /* Regla de estilo para body.mode-document .bottom-controls */
+    display: none; /* Define el tipo de caja/layout */
 }
 
 /* --- 6. Componentes Comunes de las Diapositivas --- */
 /* Tarjeta principal contenedora de cada diapositiva */
-.slide-content {
+.slide-content { /* Regla de estilo para .slide-content */
     /* Fondo translúcido tipo tarjeta */
-    background: var(--bg-card);
+    background: var(--bg-card); /* Fondo o degradado */
     /* Efecto de cristal esmerilado */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); /* Filtro aplicado al fondo detrás del elemento */
+    -webkit-backdrop-filter: blur(20px); /* Propiedad CSS: -webkit-backdrop-filter */
     /* Borde fino */
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
     /* Esquinas curvas de 20px */
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-lg); /* Redondeo de esquinas */
     /* Relleno generoso de 3rem (48px) */
-    padding: 3rem;
+    padding: 3rem; /* Relleno interior */
     /* Sombra profunda y reflejo superior para relieve tridimensional */
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05); /* Sombra proyectada */
     /* Ocupa el 100% de su contenedor */
-    width: 100%;
+    width: 100%; /* Ancho del elemento */
 }
 
 /* Cabecera interna de cada diapositiva */
-.slide-header {
+.slide-header { /* Regla de estilo para .slide-header */
     /* Margen inferior para separar del contenido */
-    margin-bottom: 2rem;
+    margin-bottom: 2rem; /* Margen exterior inferior */
 }
 /* Etiqueta superior que indica el número de fundamento o módulo */
-.section-tag {
+.section-tag { /* Regla de estilo para .section-tag */
     /* Comportamiento de bloque en línea */
-    display: inline-block;
+    display: inline-block; /* Define el tipo de caja/layout */
     /* Color cian tecnológico */
-    color: var(--cyan);
+    color: var(--cyan); /* Color del texto */
     /* Fuente monoespaciada */
-    font-family: var(--font-mono);
+    font-family: var(--font-mono); /* Familia tipográfica */
     /* Tamaño compacto */
-    font-size: 0.8rem;
+    font-size: 0.8rem; /* Tamaño de fuente */
     /* Negrita */
-    font-weight: 600;
+    font-weight: 600; /* Grosor de la fuente */
     /* En mayúsculas */
-    text-transform: uppercase;
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
     /* Espaciado amplio entre letras */
-    letter-spacing: 0.1em;
+    letter-spacing: 0.1em; /* Espaciado entre letras */
     /* Separación inferior */
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
 /* Título de nivel 2 (H2) de cada diapositiva */
-.slide-header h2 {
+.slide-header h2 { /* Regla de estilo para .slide-header h2 */
     /* Tamaño de título prominente */
-    font-size: 2.2rem;
+    font-size: 2.2rem; /* Tamaño de fuente */
     /* Negrita */
-    font-weight: 700;
+    font-weight: 700; /* Grosor de la fuente */
     /* Condensación ligera entre letras */
-    letter-spacing: -0.02em;
+    letter-spacing: -0.02em; /* Espaciado entre letras */
     /* Blanco puro */
-    color: #fff;
+    color: #fff; /* Color del texto */
     /* Margen inferior de medio rem */
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
 /* Párrafo explicativo debajo del título */
-.section-desc {
+.section-desc { /* Regla de estilo para .section-desc */
     /* Color secundario legible */
-    color: var(--text-muted);
+    color: var(--text-muted); /* Color del texto */
     /* Tamaño de texto confortable */
-    font-size: 1.05rem;
+    font-size: 1.05rem; /* Tamaño de fuente */
     /* Ancho máximo de línea para legibilidad ergonómica */
-    max-width: 900px;
+    max-width: 900px; /* Ancho máximo permitido */
 }
 
 /* ESTILOS DE INSIGNIAS (BADGES) */
-.badge {
+.badge { /* Regla de estilo para .badge */
     /* En línea flexible */
-    display: inline-flex;
+    display: inline-flex; /* Define el tipo de caja/layout */
     /* Centrado vertical */
-    align-items: center;
+    align-items: center; /* Alineación en el eje cruzado */
     /* Relleno compacto */
-    padding: 0.35rem 0.8rem;
+    padding: 0.35rem 0.8rem; /* Relleno interior */
     /* Forma de píldora */
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
     /* Tamaño de fuente pequeño */
-    font-size: 0.75rem;
+    font-size: 0.75rem; /* Tamaño de fuente */
     /* Seminegrita */
-    font-weight: 600;
+    font-weight: 600; /* Grosor de la fuente */
     /* Espaciado entre caracteres */
-    letter-spacing: 0.03em;
+    letter-spacing: 0.03em; /* Espaciado entre letras */
 }
 /* Insignia color púrpura */
-.badge-purple {
-    background: rgba(99, 102, 241, 0.15);
-    color: #a5b4fc;
-    border: 1px solid rgba(99, 102, 241, 0.35);
+.badge-purple { /* Regla de estilo para .badge-purple */
+    background: rgba(99, 102, 241, 0.15); /* Fondo o degradado */
+    color: #a5b4fc; /* Color del texto */
+    border: 1px solid rgba(99, 102, 241, 0.35); /* Borde del contenedor */
 }
 /* Insignia color cian */
-.badge-cyan {
-    background: rgba(6, 182, 212, 0.15);
-    color: #67e8f9;
-    border: 1px solid rgba(6, 182, 212, 0.35);
+.badge-cyan { /* Regla de estilo para .badge-cyan */
+    background: rgba(6, 182, 212, 0.15); /* Fondo o degradado */
+    color: #67e8f9; /* Color del texto */
+    border: 1px solid rgba(6, 182, 212, 0.35); /* Borde del contenedor */
 }
 /* Insignia color verde esmeralda */
-.badge-emerald {
-    background: rgba(16, 185, 129, 0.15);
-    color: #6ee7b7;
-    border: 1px solid rgba(16, 185, 129, 0.35);
+.badge-emerald { /* Regla de estilo para .badge-emerald */
+    background: rgba(16, 185, 129, 0.15); /* Fondo o degradado */
+    color: #6ee7b7; /* Color del texto */
+    border: 1px solid rgba(16, 185, 129, 0.35); /* Borde del contenedor */
 }
 /* Insignia color dorado ámbar */
-.badge-amber {
-    background: rgba(245, 158, 11, 0.15);
-    color: #fcd34d;
-    border: 1px solid rgba(245, 158, 11, 0.35);
+.badge-amber { /* Regla de estilo para .badge-amber */
+    background: rgba(245, 158, 11, 0.15); /* Fondo o degradado */
+    color: #fcd34d; /* Color del texto */
+    border: 1px solid rgba(245, 158, 11, 0.35); /* Borde del contenedor */
 }
 
 /* BOTONES DE LLAMADA A LA ACCIÓN (CTA) */
-.cta-btn {
+.cta-btn { /* Regla de estilo para .cta-btn */
     /* Disposición flexible en línea */
-    display: inline-flex;
+    display: inline-flex; /* Define el tipo de caja/layout */
     /* Centrado horizontal y vertical */
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
     /* Espacio entre texto e icono */
-    gap: 0.6rem;
+    gap: 0.6rem; /* Separación entre filas y columnas */
     /* Relleno amplio para ergonomía táctil */
-    padding: 0.85rem 1.75rem;
+    padding: 0.85rem 1.75rem; /* Relleno interior */
     /* Esquinas curvas */
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
     /* Tipografía Outfit */
-    font-family: var(--font-sans);
+    font-family: var(--font-sans); /* Familia tipográfica */
     /* Tamaño de texto de 1rem (16px) */
-    font-size: 1rem;
+    font-size: 1rem; /* Tamaño de fuente */
     /* Seminegrita */
-    font-weight: 600;
+    font-weight: 600; /* Grosor de la fuente */
     /* Cursor de mano */
-    cursor: pointer;
+    cursor: pointer; /* Estilo del puntero al pasar encima */
     /* Transición fluida */
-    transition: all var(--transition-smooth);
+    transition: all var(--transition-smooth); /* Transición suave de propiedades */
     /* Sin borde por defecto */
-    border: none;
+    border: none; /* Borde del contenedor */
     /* Sin subrayado en caso de ser enlace <a> */
-    text-decoration: none;
+    text-decoration: none; /* Decoración del texto */
 }
 /* Botón principal primario con gradiente y sombra neón */
-.primary-btn {
+.primary-btn { /* Regla de estilo para .primary-btn */
     /* Gradiente índigo a lavanda */
-    background: linear-gradient(135deg, var(--primary), #818cf8);
+    background: linear-gradient(135deg, var(--primary), #818cf8); /* Fondo o degradado */
     /* Texto blanco */
-    color: #ffffff;
+    color: #ffffff; /* Color del texto */
     /* Sombra de resplandor */
-    box-shadow: 0 4px 20px var(--primary-glow);
+    box-shadow: 0 4px 20px var(--primary-glow); /* Sombra proyectada */
 }
 /* Efecto hover del botón primario */
-.primary-btn:hover {
+.primary-btn:hover { /* Regla de estilo para .primary-btn:hover */
     /* Se eleva 2 píxeles */
-    transform: translateY(-2px);
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
     /* Sombra más amplia y brillante */
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5); /* Sombra proyectada */
     /* Gradiente más saturado */
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background: linear-gradient(135deg, #4f46e5, #6366f1); /* Fondo o degradado */
 }
 /* Botón secundario con borde translúcido */
-.secondary-btn {
+.secondary-btn { /* Regla de estilo para .secondary-btn */
     /* Fondo muy translúcido */
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
     /* Borde definido */
-    border: 1px solid var(--border-light);
+    border: 1px solid var(--border-light); /* Borde del contenedor */
     /* Texto blanco principal */
-    color: var(--text-main);
+    color: var(--text-main); /* Color del texto */
 }
 /* Hover del botón secundario */
-.secondary-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
+.secondary-btn:hover { /* Regla de estilo para .secondary-btn:hover */
+    background: rgba(255, 255, 255, 0.1); /* Fondo o degradado */
+    border-color: rgba(255, 255, 255, 0.3); /* Color del borde */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* GRADIENTE DE TEXTO TRICOLOR (Lavanda -> Azul Cielo -> Esmeralda) */
-.gradient-text {
+.gradient-text { /* Regla de estilo para .gradient-text */
     /* Define el gradiente lineal en 135 grados */
-    background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 50%, #34d399 100%);
+    background: linear-gradient(135deg, #a5b4fc 0%, #38bdf8 50%, #34d399 100%); /* Fondo o degradado */
     /* Recorta el fondo con la silueta exacta del texto */
-    background-clip: text;
+    background-clip: text; /* Propiedad CSS: background-clip */
     /* Vuelve transparente el color del texto para revelar el gradiente inferior */
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent; /* Propiedad CSS: -webkit-text-fill-color */
 }
 
 /* ETIQUETA CODE EN LÍNEA */
-code {
+code { /* Regla de estilo para code */
     /* Fuente monoespaciada */
-    font-family: var(--font-mono);
+    font-family: var(--font-mono); /* Familia tipográfica */
     /* Tamaño proporcional al 90% */
-    font-size: 0.9em;
+    font-size: 0.9em; /* Tamaño de fuente */
     /* Fondo oscuro semitransparente */
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
     /* Relleno compacto */
-    padding: 0.2rem 0.4rem;
+    padding: 0.2rem 0.4rem; /* Relleno interior */
     /* Bordes sutilmente redondeados */
-    border-radius: 4px;
+    border-radius: 4px; /* Redondeo de esquinas */
     /* Color azul cielo tecnológico */
-    color: #38bdf8;
+    color: #38bdf8; /* Color del texto */
 }
 
 /* --- 7. SLIDE 1: PORTADA & BIENVENIDA --- */
 /* Diapositiva de entrada centrada */
-.hero-slide {
+.hero-slide { /* Regla de estilo para .hero-slide */
     /* Centrado de texto */
-    text-align: center;
+    text-align: center; /* Alineación horizontal del texto */
     /* Relleno vertical ampliado */
-    padding: 4rem 3rem;
+    padding: 4rem 3rem; /* Relleno interior */
 }
 /* Fila de insignias centrada */
-.hero-badges {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
+.hero-badges { /* Regla de estilo para .hero-badges */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 0.75rem; /* Separación entre filas y columnas */
+    margin-bottom: 1.5rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
 /* Gran título de bienvenida H1 */
-.hero-title {
+.hero-title { /* Regla de estilo para .hero-title */
     /* Tamaño tipográfico masivo (56px) */
-    font-size: 3.5rem;
+    font-size: 3.5rem; /* Tamaño de fuente */
     /* Extra negrita */
-    font-weight: 800;
+    font-weight: 800; /* Grosor de la fuente */
     /* Altura de línea ajustada para títulos */
-    line-height: 1.15;
+    line-height: 1.15; /* Altura de línea del texto */
     /* Condensación de caracteres */
-    letter-spacing: -0.03em;
+    letter-spacing: -0.03em; /* Espaciado entre letras */
     /* Margen inferior */
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem; /* Margen exterior inferior */
     /* Ancho máximo contenido */
-    max-width: 950px;
+    max-width: 950px; /* Ancho máximo permitido */
     /* Centrado horizontal automático */
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: auto; /* Margen exterior izquierdo */
+    margin-right: auto; /* Margen exterior derecho */
 }
 /* Subtítulo de bienvenida */
-.hero-subtitle {
+.hero-subtitle { /* Regla de estilo para .hero-subtitle */
     /* Tamaño legible */
-    font-size: 1.25rem;
+    font-size: 1.25rem; /* Tamaño de fuente */
     /* Color atenuado */
-    color: var(--text-muted);
+    color: var(--text-muted); /* Color del texto */
     /* Ancho óptimo */
-    max-width: 780px;
+    max-width: 780px; /* Ancho máximo permitido */
     /* Centrado automático y margen inferior */
-    margin: 0 auto 3rem auto;
+    margin: 0 auto 3rem auto; /* Margen exterior */
     /* Peso normal */
-    font-weight: 400;
+    font-weight: 400; /* Grosor de la fuente */
 }
 /* Énfasis en blanco dentro del subtítulo */
-.hero-subtitle strong {
-    color: #fff;
+.hero-subtitle strong { /* Regla de estilo para .hero-subtitle strong */
+    color: #fff; /* Color del texto */
 }
 
 /* Cuadrícula de 4 tarjetas destacadas de la portada */
-.hero-card-grid {
+.hero-card-grid { /* Regla de estilo para .hero-card-grid */
     /* Cuadrícula CSS automática */
-    display: grid;
+    display: grid; /* Define el tipo de caja/layout */
     /* Columnas responsivas que se ajustan solas (mínimo 240px cada una) */
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Definición de columnas de la grilla */
     /* Espacio entre tarjetas */
-    gap: 1.25rem;
+    gap: 1.25rem; /* Separación entre filas y columnas */
     /* Margen inferior antes de los botones */
-    margin-bottom: 3rem;
+    margin-bottom: 3rem; /* Margen exterior inferior */
 }
 /* Mini tarjetas interactivas de la portada */
-.hero-mini-card {
+.hero-mini-card { /* Regla de estilo para .hero-mini-card */
     /* Fondo tenue */
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
     /* Borde sutil */
-    border: 1px solid var(--border-subtle);
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
     /* Esquinas curvas */
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
     /* Relleno interno */
-    padding: 1.5rem;
+    padding: 1.5rem; /* Relleno interior */
     /* Texto alineado a la izquierda */
-    text-align: left;
+    text-align: left; /* Alineación horizontal del texto */
     /* Cursor de clic */
-    cursor: pointer;
+    cursor: pointer; /* Estilo del puntero al pasar encima */
     /* Transición suave */
-    transition: all var(--transition-smooth);
+    transition: all var(--transition-smooth); /* Transición suave de propiedades */
 }
 /* Hover en mini tarjetas */
-.hero-mini-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: var(--border-accent);
+.hero-mini-card:hover { /* Regla de estilo para .hero-mini-card:hover */
+    background: rgba(255, 255, 255, 0.06); /* Fondo o degradado */
+    border-color: var(--border-accent); /* Color del borde */
     /* Se eleva 4px */
-    transform: translateY(-4px);
+    transform: translateY(-4px); /* Transformación 2D/3D (escala, rotación, traslación) */
     /* Sombra de elevación */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra proyectada */
 }
 /* Icono emoji dentro de la mini tarjeta */
-.mini-card-icon {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
+.mini-card-icon { /* Regla de estilo para .mini-card-icon */
+    font-size: 2rem; /* Tamaño de fuente */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
 /* Título de la mini tarjeta */
-.hero-mini-card h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.35rem;
-    color: #fff;
+.hero-mini-card h3 { /* Regla de estilo para .hero-mini-card h3 */
+    font-size: 1.1rem; /* Tamaño de fuente */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
+    color: #fff; /* Color del texto */
 }
 /* Descripción de la mini tarjeta */
-.hero-mini-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+.hero-mini-card p { /* Regla de estilo para .hero-mini-card p */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
 /* Contenedor de botones de inicio */
-.hero-cta-group {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+.hero-cta-group { /* Regla de estilo para .hero-cta-group */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
 /* Flecha o etiqueta decorativa en los botones */
-.arrow-icon, .code-tag {
-    font-weight: 700;
+.arrow-icon, .code-tag { /* Regla de estilo para .arrow-icon, .code-tag */
+    font-weight: 700; /* Grosor de la fuente */
 }
 
 /* --- 8. SLIDE 2: DEFINICIÓN & MITO VS REALIDAD --- */
 /* Disposición en 2 columnas: concepto a la izquierda, código a la derecha */
-.two-columns-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    align-items: start;
+.two-columns-layout { /* Regla de estilo para .two-columns-layout */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: 1fr 1fr; /* Definición de columnas de la grilla */
+    gap: 2.5rem; /* Separación entre filas y columnas */
+    align-items: start; /* Alineación en el eje cruzado */
 }
 /* Tarjeta informativa */
-.info-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
+.info-card { /* Regla de estilo para .info-card */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
+    margin-bottom: 1.5rem; /* Margen exterior inferior */
 }
-.card-badge-header {
-    margin-bottom: 1rem;
+.card-badge-header { /* Regla de estilo para .card-badge-header */
+    margin-bottom: 1rem; /* Margen exterior inferior */
 }
-.info-card p {
-    margin-bottom: 1rem;
-    color: #cbd5e1;
+.info-card p { /* Regla de estilo para .info-card p */
+    margin-bottom: 1rem; /* Margen exterior inferior */
+    color: #cbd5e1; /* Color del texto */
 }
 /* Bloque de aviso destacado con barra lateral violeta */
-.highlight-callout {
-    background: rgba(99, 102, 241, 0.08);
-    border-left: 3px solid var(--primary);
-    padding: 0.85rem 1rem;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    font-size: 0.95rem;
-    color: #e2e8f0;
+.highlight-callout { /* Regla de estilo para .highlight-callout */
+    background: rgba(99, 102, 241, 0.08); /* Fondo o degradado */
+    border-left: 3px solid var(--primary); /* Borde izquierdo */
+    padding: 0.85rem 1rem; /* Relleno interior */
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0; /* Redondeo de esquinas */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    color: #e2e8f0; /* Color del texto */
 }
 
 /* Comparativa Clases vs Prototipos */
-.vs-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+.vs-container { /* Regla de estilo para .vs-container */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: 1fr 1fr; /* Definición de columnas de la grilla */
+    gap: 1rem; /* Separación entre filas y columnas */
 }
-.vs-box {
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
+.vs-box { /* Regla de estilo para .vs-box */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
 }
 /* Caja de Clases tradicionales (rojo/rosado) */
-.class-box {
-    background: rgba(244, 63, 94, 0.05);
-    border: 1px solid rgba(244, 63, 94, 0.2);
+.class-box { /* Regla de estilo para .class-box */
+    background: rgba(244, 63, 94, 0.05); /* Fondo o degradado */
+    border: 1px solid rgba(244, 63, 94, 0.2); /* Borde del contenedor */
 }
-.class-box h4 {
-    color: #fda4af;
-    font-size: 0.95rem;
-    margin-bottom: 0.75rem;
+.class-box h4 { /* Regla de estilo para .class-box h4 */
+    color: #fda4af; /* Color del texto */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
 /* Caja de Prototipos de JS (verde esmeralda) */
-.proto-box {
-    background: rgba(16, 185, 129, 0.05);
-    border: 1px solid rgba(16, 185, 129, 0.2);
+.proto-box { /* Regla de estilo para .proto-box */
+    background: rgba(16, 185, 129, 0.05); /* Fondo o degradado */
+    border: 1px solid rgba(16, 185, 129, 0.2); /* Borde del contenedor */
 }
-.proto-box h4 {
-    color: #6ee7b7;
-    font-size: 0.95rem;
-    margin-bottom: 0.75rem;
+.proto-box h4 { /* Regla de estilo para .proto-box h4 */
+    color: #6ee7b7; /* Color del texto */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
-.vs-box ul {
-    list-style: none;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+.vs-box ul { /* Regla de estilo para .vs-box ul */
+    list-style: none; /* Propiedad CSS: list-style */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
-.vs-box li {
-    margin-bottom: 0.5rem;
-    position: relative;
-    padding-left: 1rem;
+.vs-box li { /* Regla de estilo para .vs-box li */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding-left: 1rem; /* Relleno interior izquierdo */
 }
-.vs-box li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--text-dim);
+.vs-box li::before { /* Regla de estilo para .vs-box li::before */
+    content: "•"; /* Contenido generado para pseudoelemento */
+    position: absolute; /* Define el esquema de posicionamiento */
+    left: 0; /* Desplazamiento izquierdo */
+    color: var(--text-dim); /* Color del texto */
 }
 
 /* PANELES DE CÓDIGO ESTILIZADOS */
-.code-panel {
-    background: #030712;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+.code-panel { /* Regla de estilo para .code-panel */
+    background: #030712; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    overflow: hidden; /* Control de contenido desbordado */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); /* Sombra proyectada */
 }
 /* Cabecera del panel de código tipo ventana de terminal */
-.code-panel-header {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 0.75rem 1rem;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--border-subtle);
+.code-panel-header { /* Regla de estilo para .code-panel-header */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    padding: 0.75rem 1rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
 }
 /* Botones redondos de ventana (rojo, amarillo, verde) */
-.terminal-dots {
-    display: flex;
-    gap: 6px;
-    margin-right: 1rem;
+.terminal-dots { /* Regla de estilo para .terminal-dots */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 6px; /* Separación entre filas y columnas */
+    margin-right: 1rem; /* Margen exterior derecho */
 }
-.terminal-dots .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+.terminal-dots .dot { /* Regla de estilo para .terminal-dots .dot */
+    width: 10px; /* Ancho del elemento */
+    height: 10px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
 }
 .dot.red { background: #ef4444; }
 .dot.yellow { background: #f59e0b; }
 .dot.green { background: #10b981; }
 
-.file-name {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    flex: 1;
+.file-name { /* Regla de estilo para .file-name */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
 }
 /* Botón para copiar código */
-.btn-copy-code {
-    background: transparent;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    padding: 0.25rem 0.6rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-family: var(--font-sans);
-    transition: all var(--transition-fast);
+.btn-copy-code { /* Regla de estilo para .btn-copy-code */
+    background: transparent; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-muted); /* Color del texto */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    padding: 0.25rem 0.6rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.btn-copy-code:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
+.btn-copy-code:hover { /* Regla de estilo para .btn-copy-code:hover */
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
+    color: #fff; /* Color del texto */
 }
 
 /* Bloque <pre> donde se muestra el código */
-.code-block {
-    padding: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    overflow-x: auto;
-    color: #e2e8f0;
+.code-block { /* Regla de estilo para .code-block */
+    padding: 1.25rem; /* Relleno interior */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    line-height: 1.6; /* Altura de línea del texto */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
+    color: #e2e8f0; /* Color del texto */
 }
 
 /* RESALTADO DE SINTAXIS (SYNTAX HIGHLIGHTING) */
@@ -984,1371 +984,1371 @@ code {
 .c-comment { color: #64748b; font-style: italic; }/* Comentarios explicativos */
 
 /* Barra inferior interactiva de prueba rápida */
-.interactive-test-bar {
-    padding: 0.85rem 1.25rem;
-    background: rgba(255, 255, 255, 0.02);
-    border-top: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.interactive-test-bar { /* Regla de estilo para .interactive-test-bar */
+    padding: 0.85rem 1.25rem; /* Relleno interior */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border-top: 1px solid var(--border-subtle); /* Borde superior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
 }
-.btn-run-action {
-    background: rgba(99, 102, 241, 0.2);
-    border: 1px solid var(--primary);
-    color: #c7d2fe;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.btn-run-action { /* Regla de estilo para .btn-run-action */
+    background: rgba(99, 102, 241, 0.2); /* Fondo o degradado */
+    border: 1px solid var(--primary); /* Borde del contenedor */
+    color: #c7d2fe; /* Color del texto */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    padding: 0.5rem 1rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.btn-run-action:hover {
-    background: var(--primary);
-    color: #fff;
-    box-shadow: 0 0 15px var(--primary-glow);
+.btn-run-action:hover { /* Regla de estilo para .btn-run-action:hover */
+    background: var(--primary); /* Fondo o degradado */
+    color: #fff; /* Color del texto */
+    box-shadow: 0 0 15px var(--primary-glow); /* Sombra proyectada */
 }
-.run-status {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    font-family: var(--font-mono);
+.run-status { /* Regla de estilo para .run-status */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    font-family: var(--font-mono); /* Familia tipográfica */
 }
 
 /* Mini pantalla de consola */
-.mini-console {
-    background: #02040a;
-    border-top: 1px dashed var(--border-subtle);
-    padding: 0.85rem 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    color: #38bdf8;
-    min-height: 60px;
+.mini-console { /* Regla de estilo para .mini-console */
+    background: #02040a; /* Fondo o degradado */
+    border-top: 1px dashed var(--border-subtle); /* Borde superior */
+    padding: 0.85rem 1.25rem; /* Relleno interior */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    color: #38bdf8; /* Color del texto */
+    min-height: 60px; /* Alto mínimo permitido */
 }
-.console-prompt {
-    color: var(--text-dim);
+.console-prompt { /* Regla de estilo para .console-prompt */
+    color: var(--text-dim); /* Color del texto */
 }
 
 /* --- 9. SLIDE 3: PROTOTYPE OBJECT vs __proto__ --- */
-.comparison-grid {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+.comparison-grid { /* Regla de estilo para .comparison-grid */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1.5rem; /* Separación entre filas y columnas */
+    margin-bottom: 2rem; /* Margen exterior inferior */
 }
-.comparison-card {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 2rem;
-    transition: transform var(--transition-smooth);
+.comparison-card { /* Regla de estilo para .comparison-card */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 2rem; /* Relleno interior */
+    transition: transform var(--transition-smooth); /* Transición suave de propiedades */
 }
-.comparison-card:hover {
-    transform: translateY(-3px);
+.comparison-card:hover { /* Regla de estilo para .comparison-card:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.card-constructor {
-    border-top: 3px solid var(--cyan);
+.card-constructor { /* Regla de estilo para .card-constructor */
+    border-top: 3px solid var(--cyan); /* Borde superior */
 }
-.card-instance {
-    border-top: 3px solid var(--emerald);
+.card-instance { /* Regla de estilo para .card-instance */
+    border-top: 3px solid var(--emerald); /* Borde superior */
 }
-.comp-badge {
-    margin-bottom: 0.75rem;
+.comp-badge { /* Regla de estilo para .comp-badge */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
-.comparison-card h3 {
-    font-family: var(--font-mono);
-    font-size: 1.35rem;
-    color: #fff;
-    margin-bottom: 0.25rem;
+.comparison-card h3 { /* Regla de estilo para .comparison-card h3 */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 1.35rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    margin-bottom: 0.25rem; /* Margen exterior inferior */
 }
-.comp-subtitle {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--text-dim);
-    margin-bottom: 1.25rem;
+.comp-subtitle { /* Regla de estilo para .comp-subtitle */
+    display: block; /* Define el tipo de caja/layout */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    margin-bottom: 1.25rem; /* Margen exterior inferior */
 }
-.comp-body p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-bottom: 1.25rem;
+.comp-body p { /* Regla de estilo para .comp-body p */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+    margin-bottom: 1.25rem; /* Margen exterior inferior */
 }
 
 /* Caja de previsualización visual con icono */
-.visual-box {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    padding: 0.85rem;
+.visual-box { /* Regla de estilo para .visual-box */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1rem; /* Separación entre filas y columnas */
+    background: rgba(0, 0, 0, 0.3); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
 }
-.vis-icon {
-    font-size: 1.75rem;
+.vis-icon { /* Regla de estilo para .vis-icon */
+    font-size: 1.75rem; /* Tamaño de fuente */
 }
-.vis-text strong {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: #fff;
+.vis-text strong { /* Regla de estilo para .vis-text strong */
+    display: block; /* Define el tipo de caja/layout */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
 }
-.vis-text small {
-    color: var(--text-dim);
-    font-size: 0.8rem;
+.vis-text small { /* Regla de estilo para .vis-text small */
+    color: var(--text-dim); /* Color del texto */
+    font-size: 0.8rem; /* Tamaño de fuente */
 }
 
 /* Puente animado con flecha entre constructor e instancia */
-.comparison-bridge {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.25rem;
-    padding: 0 0.5rem;
+.comparison-bridge { /* Regla de estilo para .comparison-bridge */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 0.25rem; /* Separación entre filas y columnas */
+    padding: 0 0.5rem; /* Relleno interior */
 }
-.bridge-arrow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--amber);
+.bridge-arrow { /* Regla de estilo para .bridge-arrow */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    align-items: center; /* Alineación en el eje cruzado */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    color: var(--amber); /* Color del texto */
 }
-.arrow-flow {
-    font-size: 1.5rem;
-    animation: flowRight 1.5s infinite;
+.arrow-flow { /* Regla de estilo para .arrow-flow */
+    font-size: 1.5rem; /* Tamaño de fuente */
+    animation: flowRight 1.5s infinite; /* Animación con keyframes */
 }
-.bridge-caption {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    white-space: nowrap;
+.bridge-caption { /* Regla de estilo para .bridge-caption */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    white-space: nowrap; /* Control de espacios y saltos de línea */
 }
 
-@keyframes flowRight {
+@keyframes flowRight { /* Definición de animación por fotogramas clave */
     0%, 100% { transform: translateX(0); opacity: 0.6; }
     50% { transform: translateX(6px); opacity: 1; }
 }
 
 /* Comprobador interactivo de identidad de punteros de memoria */
-.identity-checker {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed var(--border-light);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
+.identity-checker { /* Regla de estilo para .identity-checker */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px dashed var(--border-light); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.25rem 2rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    gap: 1.5rem; /* Separación entre filas y columnas */
+    margin-bottom: 2rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.identity-expr code {
-    font-size: 1rem;
-    color: #e2e8f0;
+.identity-expr code { /* Regla de estilo para .identity-expr code */
+    font-size: 1rem; /* Tamaño de fuente */
+    color: #e2e8f0; /* Color del texto */
 }
-.btn-check-identity {
-    background: rgba(16, 185, 129, 0.15);
-    border: 1px solid var(--emerald);
-    color: #6ee7b7;
-    font-family: var(--font-sans);
-    font-weight: 600;
-    padding: 0.6rem 1.25rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.btn-check-identity { /* Regla de estilo para .btn-check-identity */
+    background: rgba(16, 185, 129, 0.15); /* Fondo o degradado */
+    border: 1px solid var(--emerald); /* Borde del contenedor */
+    color: #6ee7b7; /* Color del texto */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-weight: 600; /* Grosor de la fuente */
+    padding: 0.6rem 1.25rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.btn-check-identity:hover {
-    background: var(--emerald);
-    color: #000;
-    box-shadow: 0 0 15px var(--emerald-glow);
+.btn-check-identity:hover { /* Regla de estilo para .btn-check-identity:hover */
+    background: var(--emerald); /* Fondo o degradado */
+    color: #000; /* Color del texto */
+    box-shadow: 0 0 15px var(--emerald-glow); /* Sombra proyectada */
 }
-.identity-result {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: var(--text-muted);
+.identity-result { /* Regla de estilo para .identity-result */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
 
 /* Tabla comparativa formal de prototipos */
-.proto-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-    font-size: 0.9rem;
+.proto-table { /* Regla de estilo para .proto-table */
+    width: 100%; /* Ancho del elemento */
+    border-collapse: collapse; /* Propiedad CSS: border-collapse */
+    margin-top: 1rem; /* Margen exterior superior */
+    font-size: 0.9rem; /* Tamaño de fuente */
 }
-.proto-table th, .proto-table td {
-    padding: 0.85rem 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-subtle);
+.proto-table th, .proto-table td { /* Regla de estilo para .proto-table th, .proto-table td */
+    padding: 0.85rem 1rem; /* Relleno interior */
+    text-align: left; /* Alineación horizontal del texto */
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
 }
-.proto-table th {
-    background: rgba(255, 255, 255, 0.03);
-    color: var(--text-main);
-    font-weight: 600;
+.proto-table th { /* Regla de estilo para .proto-table th */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    color: var(--text-main); /* Color del texto */
+    font-weight: 600; /* Grosor de la fuente */
 }
-.proto-table td {
-    color: var(--text-muted);
+.proto-table td { /* Regla de estilo para .proto-table td */
+    color: var(--text-muted); /* Color del texto */
 }
-.proto-table tr:hover td {
-    background: rgba(255, 255, 255, 0.015);
+.proto-table tr:hover td { /* Regla de estilo para .proto-table tr:hover td */
+    background: rgba(255, 255, 255, 0.015); /* Fondo o degradado */
 }
 
 /* --- 10. SLIDE 4: PROTOTYPE CHAIN & SIMULADOR --- */
-.chain-simulator-container {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 2rem;
+.chain-simulator-container { /* Regla de estilo para .chain-simulator-container */
+    background: rgba(0, 0, 0, 0.3); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 2rem; /* Relleno interior */
 }
-.simulator-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
+.simulator-controls { /* Regla de estilo para .simulator-controls */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1rem; /* Separación entre filas y columnas */
+    margin-bottom: 2.5rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.sim-label {
-    font-weight: 600;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+.sim-label { /* Regla de estilo para .sim-label */
+    font-weight: 600; /* Grosor de la fuente */
+    color: var(--text-muted); /* Color del texto */
+    font-size: 0.9rem; /* Tamaño de fuente */
 }
-.sim-buttons-group {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+.sim-buttons-group { /* Regla de estilo para .sim-buttons-group */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 0.5rem; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.sim-prop-btn {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-muted);
-    padding: 0.45rem 0.9rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.sim-prop-btn { /* Regla de estilo para .sim-prop-btn */
+    background: rgba(255, 255, 255, 0.04); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-muted); /* Color del texto */
+    padding: 0.45rem 0.9rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.sim-prop-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-    border-color: var(--border-light);
+.sim-prop-btn:hover { /* Regla de estilo para .sim-prop-btn:hover */
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
+    color: #fff; /* Color del texto */
+    border-color: var(--border-light); /* Color del borde */
 }
-.sim-prop-btn.active {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: var(--primary);
-    color: #c7d2fe;
-    box-shadow: 0 0 10px var(--primary-glow);
+.sim-prop-btn.active { /* Regla de estilo para .sim-prop-btn.active */
+    background: rgba(99, 102, 241, 0.2); /* Fondo o degradado */
+    border-color: var(--primary); /* Color del borde */
+    color: #c7d2fe; /* Color del texto */
+    box-shadow: 0 0 10px var(--primary-glow); /* Sombra proyectada */
 }
-.btn-run-chain {
-    margin-left: auto;
+.btn-run-chain { /* Regla de estilo para .btn-run-chain */
+    margin-left: auto; /* Margen exterior izquierdo */
 }
 
 /* Pista visual que contiene los nodos eslabones */
-.chain-visual-track {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    padding: 1.5rem 0;
-    overflow-x: auto;
+.chain-visual-track { /* Regla de estilo para .chain-visual-track */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding: 1.5rem 0; /* Relleno interior */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
 }
 
 /* Tarjeta individual de cada nodo de la cadena */
-.chain-node {
-    background: #0f172a;
-    border: 2px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
-    min-width: 190px;
-    position: relative;
-    transition: all var(--transition-smooth);
+.chain-node { /* Regla de estilo para .chain-node */
+    background: #0f172a; /* Fondo o degradado */
+    border: 2px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
+    min-width: 190px; /* Ancho mínimo permitido */
+    position: relative; /* Define el esquema de posicionamiento */
+    transition: all var(--transition-smooth); /* Transición suave de propiedades */
 }
 /* Nodo actualmente evaluado (animación de búsqueda en curso) */
-.chain-node.current-step {
-    border-color: var(--amber);
-    box-shadow: 0 0 20px var(--amber-glow);
-    transform: translateY(-4px);
+.chain-node.current-step { /* Regla de estilo para .chain-node.current-step */
+    border-color: var(--amber); /* Color del borde */
+    box-shadow: 0 0 20px var(--amber-glow); /* Sombra proyectada */
+    transform: translateY(-4px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 /* Nodo donde sí se encontró la propiedad */
-.chain-node.found-here {
-    border-color: var(--emerald);
-    box-shadow: 0 0 25px var(--emerald-glow);
-    background: rgba(16, 185, 129, 0.1);
-    transform: translateY(-4px) scale(1.03);
+.chain-node.found-here { /* Regla de estilo para .chain-node.found-here */
+    border-color: var(--emerald); /* Color del borde */
+    box-shadow: 0 0 25px var(--emerald-glow); /* Sombra proyectada */
+    background: rgba(16, 185, 129, 0.1); /* Fondo o degradado */
+    transform: translateY(-4px) scale(1.03); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 /* Nodo donde no existía la propiedad */
-.chain-node.not-found-here {
-    border-color: rgba(244, 63, 94, 0.5);
-    opacity: 0.6;
+.chain-node.not-found-here { /* Regla de estilo para .chain-node.not-found-here */
+    border-color: rgba(244, 63, 94, 0.5); /* Color del borde */
+    opacity: 0.6; /* Nivel de transparencia */
 }
 
-.node-badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--text-dim);
-    letter-spacing: 0.05em;
-    margin-bottom: 0.35rem;
+.node-badge { /* Regla de estilo para .node-badge */
+    font-size: 0.7rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    color: var(--text-dim); /* Color del texto */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
 }
-.node-title {
-    font-family: var(--font-mono);
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fff;
-    margin-bottom: 0.75rem;
+.node-title { /* Regla de estilo para .node-title */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    color: #fff; /* Color del texto */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
-.node-props {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+.node-props { /* Regla de estilo para .node-props */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.35rem; /* Separación entre filas y columnas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.8rem; /* Tamaño de fuente */
 }
-.prop-item {
-    background: rgba(255, 255, 255, 0.04);
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    color: var(--text-muted);
+.prop-item { /* Regla de estilo para .prop-item */
+    background: rgba(255, 255, 255, 0.04); /* Fondo o degradado */
+    padding: 0.25rem 0.5rem; /* Relleno interior */
+    border-radius: 4px; /* Redondeo de esquinas */
+    color: var(--text-muted); /* Color del texto */
 }
 /* Resaltado verde cuando la propiedad coincide */
-.prop-item.prop-highlight {
-    background: var(--emerald);
-    color: #000;
-    font-weight: 700;
-    box-shadow: 0 0 10px var(--emerald-glow);
+.prop-item.prop-highlight { /* Regla de estilo para .prop-item.prop-highlight */
+    background: var(--emerald); /* Fondo o degradado */
+    color: #000; /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
+    box-shadow: 0 0 10px var(--emerald-glow); /* Sombra proyectada */
 }
 
-.node-proto-link {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--cyan);
-    margin-top: 0.75rem;
-    text-align: center;
+.node-proto-link { /* Regla de estilo para .node-proto-link */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.7rem; /* Tamaño de fuente */
+    color: var(--cyan); /* Color del texto */
+    margin-top: 0.75rem; /* Margen exterior superior */
+    text-align: center; /* Alineación horizontal del texto */
 }
 
 /* Enlace o cable físico entre nodos */
-.chain-link {
-    flex: 1;
-    height: 4px;
-    background: var(--border-subtle);
-    position: relative;
-    min-width: 30px;
-    margin: 0 0.5rem;
+.chain-link { /* Regla de estilo para .chain-link */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    height: 4px; /* Alto del elemento */
+    background: var(--border-subtle); /* Fondo o degradado */
+    position: relative; /* Define el esquema de posicionamiento */
+    min-width: 30px; /* Ancho mínimo permitido */
+    margin: 0 0.5rem; /* Margen exterior */
 }
-.chain-link.link-active {
-    background: linear-gradient(90deg, var(--cyan), var(--primary));
-    box-shadow: 0 0 8px var(--cyan-glow);
+.chain-link.link-active { /* Regla de estilo para .chain-link.link-active */
+    background: linear-gradient(90deg, var(--cyan), var(--primary)); /* Fondo o degradado */
+    box-shadow: 0 0 8px var(--cyan-glow); /* Sombra proyectada */
 }
-.link-pulse {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #fff;
-    top: -3px;
-    left: 0;
-    opacity: 0;
+.link-pulse { /* Regla de estilo para .link-pulse */
+    position: absolute; /* Define el esquema de posicionamiento */
+    width: 10px; /* Ancho del elemento */
+    height: 10px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    background: #fff; /* Fondo o degradado */
+    top: -3px; /* Desplazamiento superior */
+    left: 0; /* Desplazamiento izquierdo */
+    opacity: 0; /* Nivel de transparencia */
 }
-.chain-link.link-active .link-pulse {
-    opacity: 1;
-    animation: pulseTravel 0.8s ease-in-out forwards;
+.chain-link.link-active .link-pulse { /* Regla de estilo para .chain-link.link-active .link-pulse */
+    opacity: 1; /* Nivel de transparencia */
+    animation: pulseTravel 0.8s ease-in-out forwards; /* Animación con keyframes */
 }
 
-@keyframes pulseTravel {
+@keyframes pulseTravel { /* Definición de animación por fotogramas clave */
     0% { left: 0%; transform: scale(1); }
     100% { left: 100%; transform: scale(1.3); }
 }
 
 /* Panel de narración en vivo */
-.chain-live-feedback {
-    margin-top: 2rem;
-    padding: 1rem 1.5rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+.chain-live-feedback { /* Regla de estilo para .chain-live-feedback */
+    margin-top: 2rem; /* Margen exterior superior */
+    padding: 1rem 1.5rem; /* Relleno interior */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.75rem; /* Separación entre filas y columnas */
 }
-.feedback-icon {
-    font-size: 1.25rem;
+.feedback-icon { /* Regla de estilo para .feedback-icon */
+    font-size: 1.25rem; /* Tamaño de fuente */
 }
-.feedback-text {
-    font-size: 0.95rem;
-    color: #e2e8f0;
+.feedback-text { /* Regla de estilo para .feedback-text */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    color: #e2e8f0; /* Color del texto */
 }
 
 /* --- 11. SLIDE 5: 6 CARACTERÍSTICAS FUNDAMENTALES --- */
-.characteristics-container {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 2rem;
-    align-items: start;
+.characteristics-container { /* Regla de estilo para .characteristics-container */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: 280px 1fr; /* Definición de columnas de la grilla */
+    gap: 2rem; /* Separación entre filas y columnas */
+    align-items: start; /* Alineación en el eje cruzado */
 }
-.char-tabs {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.char-tabs { /* Regla de estilo para .char-tabs */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
-.char-tab-btn {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 0.85rem 1rem;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    transition: all var(--transition-fast);
+.char-tab-btn { /* Regla de estilo para .char-tab-btn */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 0.85rem 1rem; /* Relleno interior */
+    text-align: left; /* Alineación horizontal del texto */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.75rem; /* Separación entre filas y columnas */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.char-tab-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--border-light);
+.char-tab-btn:hover { /* Regla de estilo para .char-tab-btn:hover */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    border-color: var(--border-light); /* Color del borde */
 }
-.char-tab-btn.active {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: var(--primary);
-    box-shadow: 0 4px 15px var(--primary-glow);
+.char-tab-btn.active { /* Regla de estilo para .char-tab-btn.active */
+    background: rgba(99, 102, 241, 0.15); /* Fondo o degradado */
+    border-color: var(--primary); /* Color del borde */
+    box-shadow: 0 4px 15px var(--primary-glow); /* Sombra proyectada */
 }
-.char-num {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--cyan);
+.char-num { /* Regla de estilo para .char-num */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    color: var(--cyan); /* Color del texto */
 }
-.char-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-.char-display-panel {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 2rem;
-    min-height: 420px;
-}
-.char-detail-view {
-    display: none;
-    animation: fadeIn 0.3s ease;
-}
-.char-detail-view.active {
-    display: block;
+.char-title { /* Regla de estilo para .char-title */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    color: var(--text-main); /* Color del texto */
 }
 
-@keyframes fadeIn {
+.char-display-panel { /* Regla de estilo para .char-display-panel */
+    background: rgba(0, 0, 0, 0.3); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 2rem; /* Relleno interior */
+    min-height: 420px; /* Alto mínimo permitido */
+}
+.char-detail-view { /* Regla de estilo para .char-detail-view */
+    display: none; /* Define el tipo de caja/layout */
+    animation: fadeIn 0.3s ease; /* Animación con keyframes */
+}
+.char-detail-view.active { /* Regla de estilo para .char-detail-view.active */
+    display: block; /* Define el tipo de caja/layout */
+}
+
+@keyframes fadeIn { /* Definición de animación por fotogramas clave */
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.char-view-header {
-    margin-bottom: 1.25rem;
+.char-view-header { /* Regla de estilo para .char-view-header */
+    margin-bottom: 1.25rem; /* Margen exterior inferior */
 }
-.char-view-header h3 {
-    font-size: 1.4rem;
-    color: #fff;
-    margin-top: 0.5rem;
+.char-view-header h3 { /* Regla de estilo para .char-view-header h3 */
+    font-size: 1.4rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    margin-top: 0.5rem; /* Margen exterior superior */
 }
-.char-text {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 1.75rem;
-    line-height: 1.7;
+.char-text { /* Regla de estilo para .char-text */
+    font-size: 1rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+    margin-bottom: 1.75rem; /* Margen exterior inferior */
+    line-height: 1.7; /* Altura de línea del texto */
 }
 
-.char-interactive-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+.char-interactive-card { /* Regla de estilo para .char-interactive-card */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
 }
-.card-demo-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 1rem;
+.card-demo-top { /* Regla de estilo para .card-demo-top */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    margin-bottom: 1rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    gap: 1rem; /* Separación entre filas y columnas */
 }
-.instance-pill code {
-    font-size: 0.95rem;
+.instance-pill code { /* Regla de estilo para .instance-pill code */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
-.mutation-result-box {
-    background: #030712;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    padding: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: #38bdf8;
+.mutation-result-box { /* Regla de estilo para .mutation-result-box */
+    background: #030712; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    padding: 1rem; /* Relleno interior */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: #38bdf8; /* Color del texto */
 }
-.output-pre {
-    background: #030712;
-    padding: 1rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: #34d399;
-    margin-top: 1rem;
-    overflow-x: auto;
+.output-pre { /* Regla de estilo para .output-pre */
+    background: #030712; /* Fondo o degradado */
+    padding: 1rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: #34d399; /* Color del texto */
+    margin-top: 1rem; /* Margen exterior superior */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
 }
 
 /* CALCULADORA INTERACTIVA DE MEMORIA RAM */
-.memory-calc-widget {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
+.memory-calc-widget { /* Regla de estilo para .memory-calc-widget */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
 }
-.calc-row {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
+.calc-row { /* Regla de estilo para .calc-row */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    margin-bottom: 1.5rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.calc-row label {
-    font-size: 0.95rem;
-    color: var(--text-muted);
+.calc-row label { /* Regla de estilo para .calc-row label */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
-.calc-row input[type="range"] {
-    flex: 1;
-    min-width: 180px;
-    accent-color: var(--primary);
-    cursor: pointer;
+.calc-row input[type="range"] { /* Regla de estilo para .calc-row input[type="range"] */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    min-width: 180px; /* Ancho mínimo permitido */
+    accent-color: var(--primary); /* Propiedad CSS: accent-color */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
-.slider-val {
-    font-family: var(--font-mono);
-    font-weight: 700;
-    color: var(--amber);
+.slider-val { /* Regla de estilo para .slider-val */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-weight: 700; /* Grosor de la fuente */
+    color: var(--amber); /* Color del texto */
 }
 
-.memory-comparison-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+.memory-comparison-bars { /* Regla de estilo para .memory-comparison-bars */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 1.25rem; /* Separación entre filas y columnas */
 }
-.mem-bar-group span {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 0.35rem;
+.mem-bar-group span { /* Regla de estilo para .mem-bar-group span */
+    display: block; /* Define el tipo de caja/layout */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
 }
-.mem-progress {
-    height: 14px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: var(--radius-pill);
-    overflow: hidden;
-    margin-bottom: 0.35rem;
+.mem-progress { /* Regla de estilo para .mem-progress */
+    height: 14px; /* Alto del elemento */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
+    overflow: hidden; /* Control de contenido desbordado */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
 }
-.mem-progress.bad .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #f43f5e, #fb7185);
-    border-radius: var(--radius-pill);
-    transition: width 0.3s ease;
+.mem-progress.bad .bar-fill { /* Regla de estilo para .mem-progress.bad .bar-fill */
+    height: 100%; /* Alto del elemento */
+    background: linear-gradient(90deg, #f43f5e, #fb7185); /* Fondo o degradado */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
+    transition: width 0.3s ease; /* Transición suave de propiedades */
 }
-.mem-progress.good .bar-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--emerald), #34d399);
-    border-radius: var(--radius-pill);
+.mem-progress.good .bar-fill { /* Regla de estilo para .mem-progress.good .bar-fill */
+    height: 100%; /* Alto del elemento */
+    background: linear-gradient(90deg, var(--emerald), #34d399); /* Fondo o degradado */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
 }
-.mem-bar-group strong {
-    font-size: 0.85rem;
-    font-family: var(--font-mono);
+.mem-bar-group strong { /* Regla de estilo para .mem-bar-group strong */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-family: var(--font-mono); /* Familia tipográfica */
 }
-.text-emerald {
-    color: #34d399;
+.text-emerald { /* Regla de estilo para .text-emerald */
+    color: #34d399; /* Color del texto */
 }
 
 /* Arquetipos de Familia */
-.archetype-showcase {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+.archetype-showcase { /* Regla de estilo para .archetype-showcase */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1.5rem; /* Separación entre filas y columnas */
 }
-.archetype-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.25rem 1.75rem;
-    text-align: center;
+.archetype-card { /* Regla de estilo para .archetype-card */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.25rem 1.75rem; /* Relleno interior */
+    text-align: center; /* Alineación horizontal del texto */
 }
-.archetype-parent {
-    border-color: var(--primary);
-    box-shadow: 0 0 15px var(--primary-glow);
+.archetype-parent { /* Regla de estilo para .archetype-parent */
+    border-color: var(--primary); /* Color del borde */
+    box-shadow: 0 0 15px var(--primary-glow); /* Sombra proyectada */
 }
-.arch-badge {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--cyan);
-    font-family: var(--font-mono);
-    letter-spacing: 0.05em;
-    display: block;
-    margin-bottom: 0.25rem;
+.arch-badge { /* Regla de estilo para .arch-badge */
+    font-size: 0.7rem; /* Tamaño de fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    color: var(--cyan); /* Color del texto */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+    display: block; /* Define el tipo de caja/layout */
+    margin-bottom: 0.25rem; /* Margen exterior inferior */
 }
-.archetype-children {
-    display: flex;
-    gap: 1.5rem;
-    width: 100%;
+.archetype-children { /* Regla de estilo para .archetype-children */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 1.5rem; /* Separación entre filas y columnas */
+    width: 100%; /* Ancho del elemento */
 }
-.archetype-child {
-    flex: 1;
+.archetype-child { /* Regla de estilo para .archetype-child */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
 }
 
 /* --- 12. SLIDE 6: ANALOGÍA (CAJA DE HERRAMIENTAS) --- */
-.toolbox-interactive-wrapper {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 2rem;
+.toolbox-interactive-wrapper { /* Regla de estilo para .toolbox-interactive-wrapper */
+    background: rgba(0, 0, 0, 0.3); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 2rem; /* Relleno interior */
 }
-.tool-picker {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
+.tool-picker { /* Regla de estilo para .tool-picker */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    margin-bottom: 2.5rem; /* Margen exterior inferior */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.picker-label {
-    font-weight: 600;
-    color: var(--text-muted);
-    font-size: 0.95rem;
+.picker-label { /* Regla de estilo para .picker-label */
+    font-weight: 600; /* Grosor de la fuente */
+    color: var(--text-muted); /* Color del texto */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
-.tools-btn-row {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+.tools-btn-row { /* Regla de estilo para .tools-btn-row */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 0.75rem; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.tool-btn {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-main);
-    padding: 0.6rem 1.1rem;
-    border-radius: var(--radius-md);
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all var(--transition-fast);
+.tool-btn { /* Regla de estilo para .tool-btn */
+    background: rgba(255, 255, 255, 0.04); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-main); /* Color del texto */
+    padding: 0.6rem 1.1rem; /* Relleno interior */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    font-weight: 500; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.5rem; /* Separación entre filas y columnas */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.tool-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
+.tool-btn:hover { /* Regla de estilo para .tool-btn:hover */
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.tool-btn.active {
-    background: rgba(245, 158, 11, 0.15);
-    border-color: var(--amber);
-    color: #fde68a;
-    box-shadow: 0 0 15px var(--amber-glow);
-}
-
-.family-workshops {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-.workshop-card {
-    flex: 1;
-    background: #0f172a;
-    border: 2px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    text-align: center;
-    transition: all var(--transition-smooth);
-}
-.workshop-card.ws-active-search {
-    border-color: var(--amber);
-    box-shadow: 0 0 20px var(--amber-glow);
-    transform: translateY(-4px);
-}
-.workshop-card.ws-found {
-    border-color: var(--emerald);
-    box-shadow: 0 0 25px var(--emerald-glow);
-    background: rgba(16, 185, 129, 0.08);
-    transform: translateY(-6px) scale(1.02);
-}
-.ws-avatar {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
-}
-.ws-header h3 {
-    font-size: 1.1rem;
-    color: #fff;
-}
-.ws-sub {
-    font-size: 0.75rem;
-    color: var(--text-dim);
-    display: block;
-    margin-bottom: 1rem;
-}
-.ws-items {
-    min-height: 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-    margin-bottom: 1rem;
-}
-.ws-item {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.4rem 0.6rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-.ws-item.highlight-item {
-    background: var(--emerald);
-    color: #000;
-    font-weight: 700;
-}
-.ws-status {
-    font-size: 0.8rem;
-    color: var(--text-dim);
-    font-family: var(--font-mono);
+.tool-btn.active { /* Regla de estilo para .tool-btn.active */
+    background: rgba(245, 158, 11, 0.15); /* Fondo o degradado */
+    border-color: var(--amber); /* Color del borde */
+    color: #fde68a; /* Color del texto */
+    box-shadow: 0 0 15px var(--amber-glow); /* Sombra proyectada */
 }
 
-.ws-arrow-flow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--cyan);
+.family-workshops { /* Regla de estilo para .family-workshops */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    gap: 1rem; /* Separación entre filas y columnas */
+    margin-bottom: 2rem; /* Margen exterior inferior */
 }
-.arrow-beam {
-    font-size: 1.5rem;
+.workshop-card { /* Regla de estilo para .workshop-card */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    background: #0f172a; /* Fondo o degradado */
+    border: 2px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
+    text-align: center; /* Alineación horizontal del texto */
+    transition: all var(--transition-smooth); /* Transición suave de propiedades */
+}
+.workshop-card.ws-active-search { /* Regla de estilo para .workshop-card.ws-active-search */
+    border-color: var(--amber); /* Color del borde */
+    box-shadow: 0 0 20px var(--amber-glow); /* Sombra proyectada */
+    transform: translateY(-4px); /* Transformación 2D/3D (escala, rotación, traslación) */
+}
+.workshop-card.ws-found { /* Regla de estilo para .workshop-card.ws-found */
+    border-color: var(--emerald); /* Color del borde */
+    box-shadow: 0 0 25px var(--emerald-glow); /* Sombra proyectada */
+    background: rgba(16, 185, 129, 0.08); /* Fondo o degradado */
+    transform: translateY(-6px) scale(1.02); /* Transformación 2D/3D (escala, rotación, traslación) */
+}
+.ws-avatar { /* Regla de estilo para .ws-avatar */
+    font-size: 2.5rem; /* Tamaño de fuente */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
+}
+.ws-header h3 { /* Regla de estilo para .ws-header h3 */
+    font-size: 1.1rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+}
+.ws-sub { /* Regla de estilo para .ws-sub */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    display: block; /* Define el tipo de caja/layout */
+    margin-bottom: 1rem; /* Margen exterior inferior */
+}
+.ws-items { /* Regla de estilo para .ws-items */
+    min-height: 60px; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.35rem; /* Separación entre filas y columnas */
+    margin-bottom: 1rem; /* Margen exterior inferior */
+}
+.ws-item { /* Regla de estilo para .ws-item */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    padding: 0.4rem 0.6rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+}
+.ws-item.highlight-item { /* Regla de estilo para .ws-item.highlight-item */
+    background: var(--emerald); /* Fondo o degradado */
+    color: #000; /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
+}
+.ws-status { /* Regla de estilo para .ws-status */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    font-family: var(--font-mono); /* Familia tipográfica */
 }
 
-.toolbox-result-banner {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
+.ws-arrow-flow { /* Regla de estilo para .ws-arrow-flow */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.25rem; /* Separación entre filas y columnas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    color: var(--cyan); /* Color del texto */
 }
-.banner-icon {
-    font-size: 1.5rem;
+.arrow-beam { /* Regla de estilo para .arrow-beam */
+    font-size: 1.5rem; /* Tamaño de fuente */
 }
-.banner-text {
-    font-size: 1rem;
-    color: #e2e8f0;
+
+.toolbox-result-banner { /* Regla de estilo para .toolbox-result-banner */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1rem 1.5rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.85rem; /* Separación entre filas y columnas */
+}
+.banner-icon { /* Regla de estilo para .banner-icon */
+    font-size: 1.5rem; /* Tamaño de fuente */
+}
+.banner-text { /* Regla de estilo para .banner-text */
+    font-size: 1rem; /* Tamaño de fuente */
+    color: #e2e8f0; /* Color del texto */
 }
 
 /* --- 13. SLIDE 7: BUENAS PRÁCTICAS & ERRORES --- */
-.best-practices-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
+.best-practices-grid { /* Regla de estilo para .best-practices-grid */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.5rem; /* Separación entre filas y columnas */
 }
-.practice-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.practice-card { /* Regla de estilo para .practice-card */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    justify-content: space-between; /* Alineación en el eje principal */
 }
-.practice-card.good {
-    border-top: 3px solid var(--emerald);
+.practice-card.good { /* Regla de estilo para .practice-card.good */
+    border-top: 3px solid var(--emerald); /* Borde superior */
 }
-.practice-card.bad {
-    border-top: 3px solid var(--rose);
+.practice-card.bad { /* Regla de estilo para .practice-card.bad */
+    border-top: 3px solid var(--rose); /* Borde superior */
 }
-.status-pill {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.5rem;
-    border-radius: var(--radius-pill);
-    display: inline-block;
-    margin-bottom: 0.75rem;
+.status-pill { /* Regla de estilo para .status-pill */
+    font-size: 0.7rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    letter-spacing: 0.05em; /* Espaciado entre letras */
+    padding: 0.2rem 0.5rem; /* Relleno interior */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
+    display: inline-block; /* Define el tipo de caja/layout */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
 }
-.pill-good {
-    background: rgba(16, 185, 129, 0.15);
-    color: #6ee7b7;
+.pill-good { /* Regla de estilo para .pill-good */
+    background: rgba(16, 185, 129, 0.15); /* Fondo o degradado */
+    color: #6ee7b7; /* Color del texto */
 }
-.pill-bad {
-    background: rgba(244, 63, 94, 0.15);
-    color: #fda4af;
+.pill-bad { /* Regla de estilo para .pill-bad */
+    background: rgba(244, 63, 94, 0.15); /* Fondo o degradado */
+    color: #fda4af; /* Color del texto */
 }
-.practice-card h4 {
-    font-size: 1.05rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
+.practice-card h4 { /* Regla de estilo para .practice-card h4 */
+    font-size: 1.05rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
-.practice-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
+.practice-card p { /* Regla de estilo para .practice-card p */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+    margin-bottom: 1rem; /* Margen exterior inferior */
 }
-.code-snippet-tiny {
-    background: #030712;
-    padding: 0.6rem 0.8rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
+.code-snippet-tiny { /* Regla de estilo para .code-snippet-tiny */
+    background: #030712; /* Fondo o degradado */
+    padding: 0.6rem 0.8rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.78rem; /* Tamaño de fuente */
 }
 
-.interactive-bug-card {
-    background: rgba(244, 63, 94, 0.03);
+.interactive-bug-card { /* Regla de estilo para .interactive-bug-card */
+    background: rgba(244, 63, 94, 0.03); /* Fondo o degradado */
 }
-.btn-trigger-bug {
-    background: rgba(244, 63, 94, 0.2);
-    border: 1px solid var(--rose);
-    color: #fecdd3;
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    width: 100%;
-    margin-bottom: 0.75rem;
-    transition: all var(--transition-fast);
+.btn-trigger-bug { /* Regla de estilo para .btn-trigger-bug */
+    background: rgba(244, 63, 94, 0.2); /* Fondo o degradado */
+    border: 1px solid var(--rose); /* Borde del contenedor */
+    color: #fecdd3; /* Color del texto */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    padding: 0.5rem 1rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    width: 100%; /* Ancho del elemento */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.btn-trigger-bug:hover {
-    background: var(--rose);
-    color: #fff;
-    box-shadow: 0 0 15px var(--rose-glow);
+.btn-trigger-bug:hover { /* Regla de estilo para .btn-trigger-bug:hover */
+    background: var(--rose); /* Fondo o degradado */
+    color: #fff; /* Color del texto */
+    box-shadow: 0 0 15px var(--rose-glow); /* Sombra proyectada */
 }
-.bug-sim-output {
-    background: #030712;
-    padding: 0.6rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: #fda4af;
-    min-height: 48px;
+.bug-sim-output { /* Regla de estilo para .bug-sim-output */
+    background: #030712; /* Fondo o degradado */
+    padding: 0.6rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    color: #fda4af; /* Color del texto */
+    min-height: 48px; /* Alto mínimo permitido */
 }
 
 /* --- 14. SLIDE 8: PLAYGROUND / SANDBOX --- */
-.playground-layout {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 1.5rem;
-    height: 520px;
+.playground-layout { /* Regla de estilo para .playground-layout */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: 1.15fr 0.85fr; /* Definición de columnas de la grilla */
+    gap: 1.5rem; /* Separación entre filas y columnas */
+    height: 520px; /* Alto del elemento */
 }
-.editor-pane, .console-pane {
-    background: #030712;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
+.editor-pane, .console-pane { /* Regla de estilo para .editor-pane, .console-pane */
+    background: #030712; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    overflow: hidden; /* Control de contenido desbordado */
 }
-.editor-toolbar, .console-toolbar {
-    background: rgba(255, 255, 255, 0.03);
-    padding: 0.6rem 1rem;
-    border-bottom: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.editor-toolbar, .console-toolbar { /* Regla de estilo para .editor-toolbar, .console-toolbar */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    padding: 0.6rem 1rem; /* Relleno interior */
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
 }
-.preset-dropdown {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--text-muted);
+.preset-dropdown { /* Regla de estilo para .preset-dropdown */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.5rem; /* Separación entre filas y columnas */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
-.preset-dropdown select {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-subtle);
-    color: #fff;
-    padding: 0.35rem 0.6rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    cursor: pointer;
+.preset-dropdown select { /* Regla de estilo para .preset-dropdown select */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: #fff; /* Color del texto */
+    padding: 0.35rem 0.6rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
-.preset-dropdown select:focus {
-    outline: none;
-    border-color: var(--primary);
-}
-
-.editor-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.btn-toolbar {
-    background: transparent;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-muted);
-    font-size: 0.8rem;
-    padding: 0.4rem 0.75rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-}
-.btn-toolbar:hover {
-    background: rgba(255, 255, 255, 0.08);
-    color: #fff;
-}
-.btn-run-editor {
-    padding: 0.45rem 1rem;
-    font-size: 0.85rem;
+.preset-dropdown select:focus { /* Regla de estilo para .preset-dropdown select:focus */
+    outline: none; /* Contorno de enfoque accesible */
+    border-color: var(--primary); /* Color del borde */
 }
 
-.textarea-container {
-    flex: 1;
-    position: relative;
+.editor-actions { /* Regla de estilo para .editor-actions */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
-#liveCodeEditor {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    color: #e2e8f0;
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    line-height: 1.55;
-    padding: 1.25rem;
-    resize: none;
-    outline: none;
-    white-space: pre;
-    tab-size: 4;
+.btn-toolbar { /* Regla de estilo para .btn-toolbar */
+    background: transparent; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-muted); /* Color del texto */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    padding: 0.4rem 0.75rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+}
+.btn-toolbar:hover { /* Regla de estilo para .btn-toolbar:hover */
+    background: rgba(255, 255, 255, 0.08); /* Fondo o degradado */
+    color: #fff; /* Color del texto */
+}
+.btn-run-editor { /* Regla de estilo para .btn-run-editor */
+    padding: 0.45rem 1rem; /* Relleno interior */
+    font-size: 0.85rem; /* Tamaño de fuente */
 }
 
-.console-title {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--text-dim);
-    flex: 1;
+.textarea-container { /* Regla de estilo para .textarea-container */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    position: relative; /* Define el esquema de posicionamiento */
 }
-.btn-clear-console {
-    background: transparent;
-    border: 1px solid var(--border-subtle);
-    color: var(--text-dim);
-    font-size: 0.75rem;
-    padding: 0.25rem 0.5rem;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
+#liveCodeEditor { /* Regla de estilo para #liveCodeEditor */
+    width: 100%; /* Ancho del elemento */
+    height: 100%; /* Alto del elemento */
+    background: transparent; /* Fondo o degradado */
+    border: none; /* Borde del contenedor */
+    color: #e2e8f0; /* Color del texto */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    line-height: 1.55; /* Altura de línea del texto */
+    padding: 1.25rem; /* Relleno interior */
+    resize: none; /* Propiedad CSS: resize */
+    outline: none; /* Contorno de enfoque accesible */
+    white-space: pre; /* Control de espacios y saltos de línea */
+    tab-size: 4; /* Propiedad CSS: tab-size */
 }
-.btn-clear-console:hover {
-    color: #fff;
+
+.console-title { /* Regla de estilo para .console-title */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-dim); /* Color del texto */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
 }
-.console-logs-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-    font-family: var(--font-mono);
-    font-size: 0.84rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+.btn-clear-console { /* Regla de estilo para .btn-clear-console */
+    background: transparent; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-dim); /* Color del texto */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    padding: 0.25rem 0.5rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
-.log-line {
-    padding: 0.35rem 0.5rem;
-    border-radius: 4px;
-    word-break: break-all;
-    border-left: 2px solid transparent;
+.btn-clear-console:hover { /* Regla de estilo para .btn-clear-console:hover */
+    color: #fff; /* Color del texto */
 }
-.log-line.info-line {
-    color: #38bdf8;
-    background: rgba(6, 182, 212, 0.05);
+.console-logs-container { /* Regla de estilo para .console-logs-container */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    padding: 1rem; /* Relleno interior */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.4rem; /* Separación entre filas y columnas */
 }
-.log-line.log-normal {
-    color: #e2e8f0;
-    background: rgba(255, 255, 255, 0.02);
+.log-line { /* Regla de estilo para .log-line */
+    padding: 0.35rem 0.5rem; /* Relleno interior */
+    border-radius: 4px; /* Redondeo de esquinas */
+    word-break: break-all; /* Control de quiebre de palabras */
+    border-left: 2px solid transparent; /* Borde izquierdo */
 }
-.log-line.log-error {
-    color: #fda4af;
-    background: rgba(244, 63, 94, 0.1);
-    border-left-color: var(--rose);
+.log-line.info-line { /* Regla de estilo para .log-line.info-line */
+    color: #38bdf8; /* Color del texto */
+    background: rgba(6, 182, 212, 0.05); /* Fondo o degradado */
 }
-.log-line.log-success {
-    color: #6ee7b7;
-    background: rgba(16, 185, 129, 0.1);
-    border-left-color: var(--emerald);
+.log-line.log-normal { /* Regla de estilo para .log-line.log-normal */
+    color: #e2e8f0; /* Color del texto */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
 }
-.log-time {
-    color: var(--text-dim);
-    margin-right: 0.5rem;
-    font-size: 0.75rem;
+.log-line.log-error { /* Regla de estilo para .log-line.log-error */
+    color: #fda4af; /* Color del texto */
+    background: rgba(244, 63, 94, 0.1); /* Fondo o degradado */
+    border-left-color: var(--rose); /* Propiedad CSS: border-left-color */
+}
+.log-line.log-success { /* Regla de estilo para .log-line.log-success */
+    color: #6ee7b7; /* Color del texto */
+    background: rgba(16, 185, 129, 0.1); /* Fondo o degradado */
+    border-left-color: var(--emerald); /* Propiedad CSS: border-left-color */
+}
+.log-time { /* Regla de estilo para .log-time */
+    color: var(--text-dim); /* Color del texto */
+    margin-right: 0.5rem; /* Margen exterior derecho */
+    font-size: 0.75rem; /* Tamaño de fuente */
 }
 
 /* --- 15. SLIDE 9: EJERCICIOS & RETOS --- */
-.exercises-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+.exercises-wrapper { /* Regla de estilo para .exercises-wrapper */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.5rem; /* Separación entre filas y columnas */
 }
-.exercise-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.75rem;
-    display: flex;
-    flex-direction: column;
+.exercise-card { /* Regla de estilo para .exercise-card */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.75rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
 }
-.ex-header {
-    margin-bottom: 1rem;
+.ex-header { /* Regla de estilo para .ex-header */
+    margin-bottom: 1rem; /* Margen exterior inferior */
 }
-.ex-level {
-    margin-bottom: 0.5rem;
+.ex-level { /* Regla de estilo para .ex-level */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
-.ex-header h3 {
-    font-size: 1.2rem;
-    color: #fff;
+.ex-header h3 { /* Regla de estilo para .ex-header h3 */
+    font-size: 1.2rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
 }
-.ex-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    margin-bottom: 1.5rem;
-    flex: 1;
-    line-height: 1.6;
+.ex-desc { /* Regla de estilo para .ex-desc */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
+    margin-bottom: 1.5rem; /* Margen exterior inferior */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    line-height: 1.6; /* Altura de línea del texto */
 }
-.ex-footer {
-    display: flex;
-    gap: 0.75rem;
-    flex-wrap: wrap;
+.ex-footer { /* Regla de estilo para .ex-footer */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 0.75rem; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
-.btn-ex-action, .btn-ex-solution {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-main);
-    padding: 0.6rem 0.8rem;
-    border-radius: var(--radius-sm);
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.btn-ex-action, .btn-ex-solution { /* Regla de estilo para .btn-ex-action, .btn-ex-solution */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    background: rgba(255, 255, 255, 0.04); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-main); /* Color del texto */
+    padding: 0.6rem 0.8rem; /* Relleno interior */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.btn-ex-action:hover {
-    background: rgba(99, 102, 241, 0.2);
-    border-color: var(--primary);
-    color: #c7d2fe;
+.btn-ex-action:hover { /* Regla de estilo para .btn-ex-action:hover */
+    background: rgba(99, 102, 241, 0.2); /* Fondo o degradado */
+    border-color: var(--primary); /* Color del borde */
+    color: #c7d2fe; /* Color del texto */
 }
-.btn-ex-solution:hover {
-    background: rgba(255, 255, 255, 0.1);
+.btn-ex-solution:hover { /* Regla de estilo para .btn-ex-solution:hover */
+    background: rgba(255, 255, 255, 0.1); /* Fondo o degradado */
 }
-.ex-solution-box {
-    display: none;
-    margin-top: 1rem;
-    background: #030712;
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    padding: 0.75rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: #38bdf8;
-    overflow-x: auto;
-    animation: fadeIn 0.3s ease;
+.ex-solution-box { /* Regla de estilo para .ex-solution-box */
+    display: none; /* Define el tipo de caja/layout */
+    margin-top: 1rem; /* Margen exterior superior */
+    background: #030712; /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-sm); /* Redondeo de esquinas */
+    padding: 0.75rem; /* Relleno interior */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    color: #38bdf8; /* Color del texto */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
+    animation: fadeIn 0.3s ease; /* Animación con keyframes */
 }
-.ex-solution-box.visible {
-    display: block;
+.ex-solution-box.visible { /* Regla de estilo para .ex-solution-box.visible */
+    display: block; /* Define el tipo de caja/layout */
 }
 
 /* --- 16. SLIDE 10: RESUMEN MAESTRO --- */
-.summary-slide {
-    text-align: center;
+.summary-slide { /* Regla de estilo para .summary-slide */
+    text-align: center; /* Alineación horizontal del texto */
 }
-.summary-slide .slide-header {
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
+.summary-slide .slide-header { /* Regla de estilo para .summary-slide .slide-header */
+    max-width: 700px; /* Ancho máximo permitido */
+    margin-left: auto; /* Margen exterior izquierdo */
+    margin-right: auto; /* Margen exterior derecho */
 }
-.summary-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.25rem;
-    margin-bottom: 3rem;
+.summary-cards-grid { /* Regla de estilo para .summary-cards-grid */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    margin-bottom: 3rem; /* Margen exterior inferior */
 }
-.summary-card {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.5rem;
-    text-align: left;
-    transition: transform var(--transition-smooth);
+.summary-card { /* Regla de estilo para .summary-card */
+    background: rgba(255, 255, 255, 0.02); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
+    text-align: left; /* Alineación horizontal del texto */
+    transition: transform var(--transition-smooth); /* Transición suave de propiedades */
 }
-.summary-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--border-accent);
+.summary-card:hover { /* Regla de estilo para .summary-card:hover */
+    transform: translateY(-4px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    border-color: var(--border-accent); /* Color del borde */
 }
-.sum-icon {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
+.sum-icon { /* Regla de estilo para .sum-icon */
+    font-size: 1.75rem; /* Tamaño de fuente */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
-.summary-card h4 {
-    font-size: 1.05rem;
-    color: #fff;
-    margin-bottom: 0.35rem;
+.summary-card h4 { /* Regla de estilo para .summary-card h4 */
+    font-size: 1.05rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
 }
-.summary-card p {
-    font-size: 0.85rem;
-    color: var(--text-muted);
+.summary-card p { /* Regla de estilo para .summary-card p */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--text-muted); /* Color del texto */
 }
-.summary-actions-bar {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+.summary-actions-bar { /* Regla de estilo para .summary-actions-bar */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
 }
 
 /* --- 17. Barra Flotante de Navegación Inferior --- */
-.bottom-controls {
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(14, 21, 38, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-pill);
-    padding: 0.5rem 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    z-index: 99;
+.bottom-controls { /* Regla de estilo para .bottom-controls */
+    position: fixed; /* Define el esquema de posicionamiento */
+    bottom: 1.5rem; /* Desplazamiento inferior */
+    left: 50%; /* Desplazamiento izquierdo */
+    transform: translateX(-50%); /* Transformación 2D/3D (escala, rotación, traslación) */
+    background: rgba(14, 21, 38, 0.85); /* Fondo o degradado */
+    backdrop-filter: blur(20px); /* Filtro aplicado al fondo detrás del elemento */
+    -webkit-backdrop-filter: blur(20px); /* Propiedad CSS: -webkit-backdrop-filter */
+    border: 1px solid var(--border-light); /* Borde del contenedor */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
+    padding: 0.5rem 0.85rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 1.5rem; /* Separación entre filas y columnas */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); /* Sombra proyectada */
+    z-index: 99; /* Orden de apilamiento en el eje Z */
 }
-.ctrl-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border-subtle);
-    color: var(--text-main);
-    padding: 0.5rem 1.25rem;
-    border-radius: var(--radius-pill);
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all var(--transition-fast);
+.ctrl-btn { /* Regla de estilo para .ctrl-btn */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    color: var(--text-main); /* Color del texto */
+    padding: 0.5rem 1.25rem; /* Relleno interior */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
+    font-family: var(--font-sans); /* Familia tipográfica */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    display: inline-flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.5rem; /* Separación entre filas y columnas */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.ctrl-btn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-1px);
+.ctrl-btn:hover { /* Regla de estilo para .ctrl-btn:hover */
+    background: rgba(255, 255, 255, 0.12); /* Fondo o degradado */
+    transform: translateY(-1px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.ctrl-btn-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    box-shadow: 0 0 15px var(--primary-glow);
+.ctrl-btn-primary { /* Regla de estilo para .ctrl-btn-primary */
+    background: var(--primary); /* Fondo o degradado */
+    border-color: var(--primary); /* Color del borde */
+    box-shadow: 0 0 15px var(--primary-glow); /* Sombra proyectada */
 }
-.ctrl-btn-primary:hover {
-    background: var(--primary-hover);
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+.ctrl-btn-primary:hover { /* Regla de estilo para .ctrl-btn-primary:hover */
+    background: var(--primary-hover); /* Fondo o degradado */
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.6); /* Sombra proyectada */
 }
 
-.slide-dots-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.slide-dots-container { /* Regla de estilo para .slide-dots-container */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
-.slide-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    cursor: pointer;
-    transition: all var(--transition-smooth);
+.slide-dot { /* Regla de estilo para .slide-dot */
+    width: 10px; /* Ancho del elemento */
+    height: 10px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    background: rgba(255, 255, 255, 0.2); /* Fondo o degradado */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-smooth); /* Transición suave de propiedades */
 }
-.slide-dot:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(1.2);
+.slide-dot:hover { /* Regla de estilo para .slide-dot:hover */
+    background: rgba(255, 255, 255, 0.5); /* Fondo o degradado */
+    transform: scale(1.2); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.slide-dot.active {
-    background: var(--cyan);
-    box-shadow: 0 0 10px var(--cyan-glow);
-    width: 24px;
-    border-radius: var(--radius-pill);
+.slide-dot.active { /* Regla de estilo para .slide-dot.active */
+    background: var(--cyan); /* Fondo o degradado */
+    box-shadow: 0 0 10px var(--cyan-glow); /* Sombra proyectada */
+    width: 24px; /* Ancho del elemento */
+    border-radius: var(--radius-pill); /* Redondeo de esquinas */
 }
 
 /* --- 18. Modal de Visión General (Overview Grid) --- */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    z-index: 1000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    opacity: 0;
-    transition: opacity 0.25s ease;
+.modal-overlay { /* Regla de estilo para .modal-overlay */
+    position: fixed; /* Define el esquema de posicionamiento */
+    inset: 0; /* Desplazamiento en los cuatro lados */
+    background: rgba(0, 0, 0, 0.85); /* Fondo o degradado */
+    backdrop-filter: blur(12px); /* Filtro aplicado al fondo detrás del elemento */
+    -webkit-backdrop-filter: blur(12px); /* Propiedad CSS: -webkit-backdrop-filter */
+    z-index: 1000; /* Orden de apilamiento en el eje Z */
+    display: none; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    padding: 2rem; /* Relleno interior */
+    opacity: 0; /* Nivel de transparencia */
+    transition: opacity 0.25s ease; /* Transición suave de propiedades */
 }
-.modal-overlay.active {
-    display: flex;
-    opacity: 1;
+.modal-overlay.active { /* Regla de estilo para .modal-overlay.active */
+    display: flex; /* Define el tipo de caja/layout */
+    opacity: 1; /* Nivel de transparencia */
 }
-.modal-window {
-    background: #0d1322;
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    width: 100%;
-    max-width: 1000px;
-    max-height: 85vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+.modal-window { /* Regla de estilo para .modal-window */
+    background: #0d1322; /* Fondo o degradado */
+    border: 1px solid var(--border-light); /* Borde del contenedor */
+    border-radius: var(--radius-lg); /* Redondeo de esquinas */
+    width: 100%; /* Ancho del elemento */
+    max-width: 1000px; /* Ancho máximo permitido */
+    max-height: 85vh; /* Alto máximo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    overflow: hidden; /* Control de contenido desbordado */
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8); /* Sombra proyectada */
 }
-.modal-header {
-    padding: 1.25rem 2rem;
-    border-bottom: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.modal-header { /* Regla de estilo para .modal-header */
+    padding: 1.25rem 2rem; /* Relleno interior */
+    border-bottom: 1px solid var(--border-subtle); /* Borde inferior */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
 }
-.modal-header h3 {
-    font-size: 1.25rem;
-    color: #fff;
+.modal-header h3 { /* Regla de estilo para .modal-header h3 */
+    font-size: 1.25rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
 }
-.btn-close-modal {
-    background: transparent;
-    border: none;
-    color: var(--text-dim);
-    font-size: 1.25rem;
-    cursor: pointer;
-    padding: 0.25rem;
+.btn-close-modal { /* Regla de estilo para .btn-close-modal */
+    background: transparent; /* Fondo o degradado */
+    border: none; /* Borde del contenedor */
+    color: var(--text-dim); /* Color del texto */
+    font-size: 1.25rem; /* Tamaño de fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    padding: 0.25rem; /* Relleno interior */
 }
-.btn-close-modal:hover {
-    color: #fff;
+.btn-close-modal:hover { /* Regla de estilo para .btn-close-modal:hover */
+    color: #fff; /* Color del texto */
 }
-.modal-grid {
-    padding: 2rem;
-    overflow-y: auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.25rem;
+.modal-grid { /* Regla de estilo para .modal-grid */
+    padding: 2rem; /* Relleno interior */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
 }
-.overview-thumb {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-md);
-    padding: 1.25rem;
-    cursor: pointer;
-    transition: all var(--transition-fast);
+.overview-thumb { /* Regla de estilo para .overview-thumb */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid var(--border-subtle); /* Borde del contenedor */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all var(--transition-fast); /* Transición suave de propiedades */
 }
-.overview-thumb:hover {
-    background: rgba(99, 102, 241, 0.15);
-    border-color: var(--primary);
-    transform: translateY(-3px);
+.overview-thumb:hover { /* Regla de estilo para .overview-thumb:hover */
+    background: rgba(99, 102, 241, 0.15); /* Fondo o degradado */
+    border-color: var(--primary); /* Color del borde */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.overview-thumb.current {
-    border-color: var(--cyan);
-    box-shadow: 0 0 15px var(--cyan-glow);
+.overview-thumb.current { /* Regla de estilo para .overview-thumb.current */
+    border-color: var(--cyan); /* Color del borde */
+    box-shadow: 0 0 15px var(--cyan-glow); /* Sombra proyectada */
 }
-.thumb-num {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--cyan);
-    margin-bottom: 0.35rem;
-    display: block;
+.thumb-num { /* Regla de estilo para .thumb-num */
+    font-family: var(--font-mono); /* Familia tipográfica */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    color: var(--cyan); /* Color del texto */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
+    display: block; /* Define el tipo de caja/layout */
 }
-.thumb-title {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #fff;
+.thumb-title { /* Regla de estilo para .thumb-title */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    color: #fff; /* Color del texto */
 }
 
 /* --- 19. Notificación Toast Flotante --- */
-.toast-notification {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: #111827;
-    border: 1px solid var(--border-light);
-    border-left: 4px solid var(--emerald);
-    color: #fff;
-    padding: 0.85rem 1.5rem;
-    border-radius: var(--radius-md);
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    z-index: 1200;
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.toast-notification { /* Regla de estilo para .toast-notification */
+    position: fixed; /* Define el esquema de posicionamiento */
+    bottom: 2rem; /* Desplazamiento inferior */
+    right: 2rem; /* Desplazamiento derecho */
+    background: #111827; /* Fondo o degradado */
+    border: 1px solid var(--border-light); /* Borde del contenedor */
+    border-left: 4px solid var(--emerald); /* Borde izquierdo */
+    color: #fff; /* Color del texto */
+    padding: 0.85rem 1.5rem; /* Relleno interior */
+    border-radius: var(--radius-md); /* Redondeo de esquinas */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 0.75rem; /* Separación entre filas y columnas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Sombra proyectada */
+    z-index: 1200; /* Orden de apilamiento en el eje Z */
+    opacity: 0; /* Nivel de transparencia */
+    transform: translateY(20px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    pointer-events: none; /* Control de interacción con el puntero */
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); /* Transición suave de propiedades */
 }
-.toast-notification.active {
-    opacity: 1;
-    transform: translateY(0);
+.toast-notification.active { /* Regla de estilo para .toast-notification.active */
+    opacity: 1; /* Nivel de transparencia */
+    transform: translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
-.toast-icon {
-    color: var(--emerald);
-    font-size: 1.1rem;
+.toast-icon { /* Regla de estilo para .toast-icon */
+    color: var(--emerald); /* Color del texto */
+    font-size: 1.1rem; /* Tamaño de fuente */
 }
 
 /* --- 20. Consultas de Medios Responsivas (Media Queries) --- */
 /* Dispositivos con pantallas menores a 1024px (Tablets y Laptops pequeñas) */
-@media (max-width: 1024px) {
+@media (max-width: 1024px) { /* Regla responsiva según tamaño de pantalla */
     /* Las columnas dobles pasan a una sola columna vertical */
     .two-columns-layout,
     .playground-layout,
-    .characteristics-container {
-        grid-template-columns: 1fr;
+    .characteristics-container { /* Regla de estilo para .characteristics-container */
+        grid-template-columns: 1fr; /* Definición de columnas de la grilla */
     }
-    .playground-layout {
-        height: auto;
+    .playground-layout { /* Regla de estilo para .playground-layout */
+        height: auto; /* Alto del elemento */
     }
-    .editor-pane, .console-pane {
-        height: 380px;
+    .editor-pane, .console-pane { /* Regla de estilo para .editor-pane, .console-pane */
+        height: 380px; /* Alto del elemento */
     }
-    .comparison-grid {
-        flex-direction: column;
+    .comparison-grid { /* Regla de estilo para .comparison-grid */
+        flex-direction: column; /* Dirección del eje principal flex */
     }
-    .comparison-bridge {
-        transform: rotate(90deg);
-        padding: 1rem 0;
+    .comparison-bridge { /* Regla de estilo para .comparison-bridge */
+        transform: rotate(90deg); /* Transformación 2D/3D (escala, rotación, traslación) */
+        padding: 1rem 0; /* Relleno interior */
     }
-    .hero-title {
-        font-size: 2.5rem;
+    .hero-title { /* Regla de estilo para .hero-title */
+        font-size: 2.5rem; /* Tamaño de fuente */
     }
 }
 
 /* Dispositivos con pantallas menores a 768px (Teléfonos móviles) */
-@media (max-width: 768px) {
-    .top-nav {
-        padding: 0 1rem;
+@media (max-width: 768px) { /* Regla responsiva según tamaño de pantalla */
+    .top-nav { /* Regla de estilo para .top-nav */
+        padding: 0 1rem; /* Relleno interior */
     }
     /* Se oculta la barra de progreso en pantallas pequeñas para dar espacio */
-    .nav-progress-container {
-        display: none;
+    .nav-progress-container { /* Regla de estilo para .nav-progress-container */
+        display: none; /* Define el tipo de caja/layout */
     }
-    .presentation-wrapper {
-        padding: 1rem;
+    .presentation-wrapper { /* Regla de estilo para .presentation-wrapper */
+        padding: 1rem; /* Relleno interior */
     }
-    .slide-content {
-        padding: 1.5rem;
+    .slide-content { /* Regla de estilo para .slide-content */
+        padding: 1.5rem; /* Relleno interior */
     }
-    .hero-title {
-        font-size: 2rem;
+    .hero-title { /* Regla de estilo para .hero-title */
+        font-size: 2rem; /* Tamaño de fuente */
     }
-    .bottom-controls {
-        gap: 0.75rem;
-        padding: 0.4rem 0.6rem;
+    .bottom-controls { /* Regla de estilo para .bottom-controls */
+        gap: 0.75rem; /* Separación entre filas y columnas */
+        padding: 0.4rem 0.6rem; /* Relleno interior */
     }
     /* Se oculta el texto "Anterior/Siguiente" dejando solo los símbolos ‹ y › */
-    .ctrl-text {
-        display: none;
+    .ctrl-text { /* Regla de estilo para .ctrl-text */
+        display: none; /* Define el tipo de caja/layout */
     }
-    .family-workshops {
-        flex-direction: column;
+    .family-workshops { /* Regla de estilo para .family-workshops */
+        flex-direction: column; /* Dirección del eje principal flex */
     }
-    .ws-arrow-flow {
-        transform: rotate(90deg);
-        margin: 0.5rem 0;
+    .ws-arrow-flow { /* Regla de estilo para .ws-arrow-flow */
+        transform: rotate(90deg); /* Transformación 2D/3D (escala, rotación, traslación) */
+        margin: 0.5rem 0; /* Margen exterior */
     }
 }

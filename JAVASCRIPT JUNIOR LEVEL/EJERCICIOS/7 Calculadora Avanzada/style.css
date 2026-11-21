@@ -6,130 +6,130 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Familia tipográfica */
 }
 
-body {
-    background: linear-gradient(135deg, #f4f4f4, #e9ecf3);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body { /* Regla de estilo para body */
+    background: linear-gradient(135deg, #f4f4f4, #e9ecf3); /* Fondo o degradado */
+    min-height: 100vh; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    align-items: center; /* Alineación en el eje cruzado */
 }
 
 /* TITULO */
-h1 {
-    margin: 20px 0;
-    text-align: center;
-    font-style: italic;
-    color: #333;
+h1 { /* Regla de estilo para h1 */
+    margin: 20px 0; /* Margen exterior */
+    text-align: center; /* Alineación horizontal del texto */
+    font-style: italic; /* Propiedad CSS: font-style */
+    color: #333; /* Color del texto */
 }
 
 /* TARJETAS */
-.enunciado, .ask, .sol {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    margin: 15px auto;
-    width: 80%;
-    max-width: 800px;
+.enunciado, .ask, .sol { /* Regla de estilo para .enunciado, .ask, .sol */
+    background: white; /* Fondo o degradado */
+    border-radius: 16px; /* Redondeo de esquinas */
+    padding: 20px; /* Relleno interior */
+    margin: 15px auto; /* Margen exterior */
+    width: 80%; /* Ancho del elemento */
+    max-width: 800px; /* Ancho máximo permitido */
 
     /* Sombra suave */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08); /* Sombra proyectada */
 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transición suave de propiedades */
 }
 
 /* Hover bonito */
-.enunciado:hover, .ask:hover, .sol:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+.enunciado:hover, .ask:hover, .sol:hover { /* Regla de estilo para .enunciado:hover, .ask:hover, .sol:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 12px 25px rgba(0,0,0,0.12); /* Sombra proyectada */
 }
 
 /* TEXTO */
-.enunciado p {
-    margin-top: 10px;
-    line-height: 1.6;
-    color: #555;
+.enunciado p { /* Regla de estilo para .enunciado p */
+    margin-top: 10px; /* Margen exterior superior */
+    line-height: 1.6; /* Altura de línea del texto */
+    color: #555; /* Color del texto */
 }
 
-.ask {
-    font-size: 18px;
+.ask { /* Regla de estilo para .ask */
+    font-size: 18px; /* Tamaño de fuente */
 }
 
 /* INPUT */
-.ask input {
-    margin-top: 10px;
-    padding: 10px;
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    font-size: 16px;
-    transition: 0.2s;
+.ask input { /* Regla de estilo para .ask input */
+    margin-top: 10px; /* Margen exterior superior */
+    padding: 10px; /* Relleno interior */
+    width: 100%; /* Ancho del elemento */
+    border-radius: 8px; /* Redondeo de esquinas */
+    border: 1px solid #ccc; /* Borde del contenedor */
+    outline: none; /* Contorno de enfoque accesible */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: 0.2s; /* Transición suave de propiedades */
 }
 
-.ask button {
-    margin-top: 15px;
-    padding: 12px;
-    width: 100%;
-    border: none;
-    border-radius: 10px;
+.ask button { /* Regla de estilo para .ask button */
+    margin-top: 15px; /* Margen exterior superior */
+    padding: 12px; /* Relleno interior */
+    width: 100%; /* Ancho del elemento */
+    border: none; /* Borde del contenedor */
+    border-radius: 10px; /* Redondeo de esquinas */
 
-    background: linear-gradient(135deg, #ff2fd2, #ff6ec7);
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    background: linear-gradient(135deg, #ff2fd2, #ff6ec7); /* Fondo o degradado */
+    color: white; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Grosor de la fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
 
-    cursor: pointer;
-    transition: all 0.2s ease;
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
 
 /* HOVER */
-.ask button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(255, 47, 210, 0.3);
+.ask button:hover { /* Regla de estilo para .ask button:hover */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 8px 15px rgba(255, 47, 210, 0.3); /* Sombra proyectada */
 }
 
 /* CLICK */
-.ask button:active {
-    transform: scale(0.97);
-    box-shadow: 0 4px 10px rgba(255, 47, 210, 0.2);
+.ask button:active { /* Regla de estilo para .ask button:active */
+    transform: scale(0.97); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 4px 10px rgba(255, 47, 210, 0.2); /* Sombra proyectada */
 }
 
-.ask input:focus {
-    border-color: #ff2fd2;
-    box-shadow: 0 0 5px rgba(255, 47, 210, 0.3);
+.ask input:focus { /* Regla de estilo para .ask input:focus */
+    border-color: #ff2fd2; /* Color del borde */
+    box-shadow: 0 0 5px rgba(255, 47, 210, 0.3); /* Sombra proyectada */
 }
 
 /* RESULTADO */
-.sol {
-    text-align: center;
-    display: none;
+.sol { /* Regla de estilo para .sol */
+    text-align: center; /* Alineación horizontal del texto */
+    display: none; /* Define el tipo de caja/layout */
 }
 
-.sol h2 {
-    color: rgb(255, 47, 210);
-    margin-bottom: 10px;
+.sol h2 { /* Regla de estilo para .sol h2 */
+    color: rgb(255, 47, 210); /* Color del texto */
+    margin-bottom: 10px; /* Margen exterior inferior */
 }
 
-.result {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
+.result { /* Regla de estilo para .result */
+    font-size: 20px; /* Tamaño de fuente */
+    font-weight: bold; /* Grosor de la fuente */
+    color: #333; /* Color del texto */
 }
 
 /* LISTAS */
-ol {
-    margin-left: 20px;
-    margin-top: 10px;
+ol { /* Regla de estilo para ol */
+    margin-left: 20px; /* Margen exterior izquierdo */
+    margin-top: 10px; /* Margen exterior superior */
 }
 
-li {
-    margin: 5px 0;
+li { /* Regla de estilo para li */
+    margin: 5px 0; /* Margen exterior */
 }

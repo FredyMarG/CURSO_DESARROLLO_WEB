@@ -1,13 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Junior — Guía Interactiva de Console API</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css">
+    <script src="../../RESOURCES COURSE/junior-theme.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%96%A5%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body>
     <div class="app-shell">
+                <nav class="jr-top-nav" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.28);border-radius:14px;backdrop-filter:blur(12px);">
+            <span style="font-family:monospace;font-size:0.78rem;color:#38bdf8;font-weight:700;">🌱 JS JUNIOR LEVEL</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <a href="../DOCUMENTACION/index.html" style="color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);">📘 Apuntes</a>
+                <a href="../../index.html" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:#38bdf8;">🏠 Portal Principal</a>
+            </div>
+        </nav>
         <header class="hero">
             <span class="badge">Módulo 09 · Depuración y DevTools</span>
             <h1>API <code>console</code> en JavaScript</h1>
@@ -30,13 +40,7 @@
             
             <div class="jr-slide" data-idx="0" style="display:block;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Niveles de Registro (Logging)</h3>
-                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Uso | Apariencia en DevTools |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>console.log(...)</code> | Salida general de depuración | Texto estándar |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>console.info(...)</code> | Mensajes informativos | Icono/estilo informativo |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>console.warn(...)</code> | Advertencias no críticas | Fondo amarillo + triángulo ⚠️ |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>console.error(...)</code> | Errores críticos + *stack trace* | Fondo rojo + icono ❌ |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>console.assert(cond, msg)</code> | Imprime error <strong>solo si <code>cond</code> es falsa</strong> | Igual que <code>error</code> cuando falla |</p>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Método</th><th>Uso</th><th>Apariencia en DevTools</th></tr></thead><tbody><tr><td><code>console.log(...)</code></td><td>Salida general de depuración</td><td>Texto estándar</td></tr><tr><td><code>console.info(...)</code></td><td>Mensajes informativos</td><td>Icono/estilo informativo</td></tr><tr><td><code>console.warn(...)</code></td><td>Advertencias no críticas</td><td>Fondo amarillo + triángulo ⚠️</td></tr><tr><td><code>console.error(...)</code></td><td>Errores críticos + *stack trace*</td><td>Fondo rojo + icono ❌</td></tr><tr><td><code>console.assert(cond, msg)</code></td><td>Imprime error <strong>solo si <code>cond</code> es falsa</strong></td><td>Igual que <code>error</code> cuando falla</td></tr></tbody></table>
 <pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.assert(edad &gt;= 18, &quot;Error: El usuario debe ser mayor de edad&quot;, { edad });</code></pre></div>
             </div>
             <div class="jr-slide" data-idx="1" style="display:none;">
@@ -73,13 +77,7 @@ console.timeEnd(&quot;bucle-millon&quot;); // &quot;bucle-millon: 2.45 ms&quot;<
             <div class="jr-slide" data-idx="3" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Placeholders y Estilos CSS (%c)</h3>
                 <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Puedes formatear mensajes usando especificadores de formato y estilos CSS directamente en la consola del navegador:</p>
-<p style="margin:6px 0;line-height:1.6;">| Placeholder | Tipo |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%s</code> | String |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%d</code> / <code>%i</code> | Entero |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%f</code> | Flotante |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%o</code> / <code>%O</code> | Objeto interactivo |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%c</code> | Aplica estilos CSS al texto siguiente |</p>
+<table class="compare-table"><thead><tr><th>Placeholder</th><th>Tipo</th></tr></thead><tbody><tr><td><code>%s</code></td><td>String</td></tr><tr><td><code>%d</code> / <code>%i</code></td><td>Entero</td></tr><tr><td><code>%f</code></td><td>Flotante</td></tr><tr><td><code>%o</code> / <code>%O</code></td><td>Objeto interactivo</td></tr><tr><td><code>%c</code></td><td>Aplica estilos CSS al texto siguiente</td></tr></tbody></table>
 <pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>console.log(
     &quot;%c ¡SISTEMA LISTO! %c Versión %s &quot;,
     &quot;background: #10b981; color: #052e16; font-weight: bold; padding: 2px 6px; border-radius: 4px;&quot;,
@@ -169,3 +167,5 @@ console.timeEnd(&quot;bucle-millon&quot;); // &quot;bucle-millon: 2.45 ms&quot;<
     <script src="console.log.js"></script>
 </body>
 </html>
+
+

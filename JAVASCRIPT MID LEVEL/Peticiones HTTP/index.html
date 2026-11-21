@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
     <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
@@ -76,17 +79,8 @@
 <li>*   Los <strong>Códigos de Estado</strong> le informan al navegador el destino de la operación de forma estandarizada mediante números de 3 dígitos divididos en familias del <code>100</code> al <code>500</code>.</li>
 </ul>
 <p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
-<p style="margin-bottom:8px;line-height:1.6;">| Concepto / Código | Significado / Uso | Ejemplo práctico |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>GET</code> / <code>POST</code> | Leer recurso / Crear nuevo recurso. | <code>GET /api/users</code> · <code>POST /api/users</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>PUT</code> / <code>PATCH</code> / <code>DELETE</code> | Reemplazar completo / Modificar parcial / Eliminar. | <code>PATCH /api/users/1</code> · <code>DELETE /api/users/1</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>200</code> / <code>201</code> / <code>204</code> | OK / Creado / Éxito sin contenido en body. | Respuesta tras <code>DELETE</code> → <code>204</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>301</code> / <code>304</code> | Redirección permanente / Usar caché local. | Optimización de recursos estáticos |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>400</code> / <code>401</code> / <code>403</code> | Petición inválida / Sin autenticar / Sin permisos. | Falta token JWT → <code>401</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>404</code> / <code>409</code> / <code>422</code> / <code>429</code> | No existe / Conflicto / Validación fallida / Rate limit. | Email duplicado → <code>409</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>500</code> / <code>502</code> / <code>503</code> | Error interno del servidor / Bad Gateway / No disponible. | Excepción no controlada en backend |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>Content-Type</code> / <code>Authorization</code> | Tipo de formato del body y credenciales Bearer/JWT. | <code>Content-Type: application/json</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>CORS</code> + <code>OPTIONS</code> | Permiso entre orígenes distintos (preflight automático). | <code>Access-Control-Allow-Origin: *</code> |</p></div>
+<table class="compare-table"><thead><tr><th>Concepto / Código</th><th>Significado / Uso</th><th>Ejemplo práctico</th></tr></thead><tbody><tr><td><code>GET</code> / <code>POST</code></td><td>Leer recurso / Crear nuevo recurso.</td><td><code>GET /api/users</code> · <code>POST /api/users</code></td></tr><tr><td><code>PUT</code> / <code>PATCH</code> / <code>DELETE</code></td><td>Reemplazar completo / Modificar parcial / Eliminar.</td><td><code>PATCH /api/users/1</code> · <code>DELETE /api/users/1</code></td></tr><tr><td><code>200</code> / <code>201</code> / <code>204</code></td><td>OK / Creado / Éxito sin contenido en body.</td><td>Respuesta tras <code>DELETE</code> → <code>204</code></td></tr><tr><td><code>301</code> / <code>304</code></td><td>Redirección permanente / Usar caché local.</td><td>Optimización de recursos estáticos</td></tr><tr><td><code>400</code> / <code>401</code> / <code>403</code></td><td>Petición inválida / Sin autenticar / Sin permisos.</td><td>Falta token JWT → <code>401</code></td></tr><tr><td><code>404</code> / <code>409</code> / <code>422</code> / <code>429</code></td><td>No existe / Conflicto / Validación fallida / Rate limit.</td><td>Email duplicado → <code>409</code></td></tr><tr><td><code>500</code> / <code>502</code> / <code>503</code></td><td>Error interno del servidor / Bad Gateway / No disponible.</td><td>Excepción no controlada en backend</td></tr><tr><td><code>Content-Type</code> / <code>Authorization</code></td><td>Tipo de formato del body y credenciales Bearer/JWT.</td><td><code>Content-Type: application/json</code></td></tr><tr><td><code>CORS</code> + <code>OPTIONS</code></td><td>Permiso entre orígenes distintos (preflight automático).</td><td><code>Access-Control-Allow-Origin: *</code></td></tr></tbody></table>
+</div>
         </section>
         <section class="slide" data-slide="7" data-title="Buenas Prácticas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>

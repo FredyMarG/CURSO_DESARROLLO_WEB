@@ -1,0 +1,375 @@
+/**
+ * ============================================================================
+ * TRANSFORMADOR DE INTERFAZ UNIFICADA ESTILO JUNIOR LEVEL (ARRAYS)
+ * Convierte automáticamente los módulos de HTML/CSS, JS Mid y JS Master
+ * al formato: .jr-top-nav -> .jr-hero -> #jrDocSlides -> .jr-main-grid -> .jr-console-panel
+ * Documentación línea por línea en español.
+ * ============================================================================
+ */
+(function () { // Instrucción JavaScript
+    'use strict'; // Activa el modo estricto de JavaScript
+
+    // Detecta curso y tema actual desde la URL (soporta subcarpetas y archivos .html directos)
+    const parts = decodeURIComponent(window.location.pathname).split('/').filter(Boolean); // Declara e inicializa "parts"
+    const fileName = parts[parts.length - 1] || 'index.html'; // Declara e inicializa "fileName"
+    const rawFolder = parts.length >= 2 ? parts[parts.length - 2] : 'Módulo'; // Declara e inicializa "rawFolder"
+    const fileBase = fileName.replace(/\.html?$/i, ''); // Declara e inicializa "fileBase"
+    const brandTitleText = document.querySelector('.brand-title')?.textContent.trim(); // Obtiene referencia DOM para "brandTitleText"
+    const topicFolder = /^index\.html?$/i.test(fileName) ? rawFolder : (brandTitleText || fileBase); // Declara e inicializa "topicFolder"
+    const knownCourses = ['HTML y CSS', 'JAVASCRIPT MID LEVEL', 'JAVASCRIPT MASTER LEVEL']; // Declara e inicializa "knownCourses"
+    const courseIdx = parts.findIndex(p => knownCourses.includes(p)); // Define función flecha "courseIdx"
+    const courseFolder = courseIdx !== -1 ? parts[courseIdx] : (parts.length >= 3 ? parts[parts.length - 3] : 'Curso'); // Declara e inicializa "courseFolder"
+    const depthInCourse = courseIdx !== -1 ? Math.max(1, parts.length - 2 - courseIdx) : 1; // Declara e inicializa "depthInCourse"
+    const toCourseRoot = '../'.repeat(depthInCourse); // Declara e inicializa "toCourseRoot"
+    const toPortalRoot = '../'.repeat(depthInCourse + 1); // Declara e inicializa "toPortalRoot"
+
+    const courseMeta = { // Declara e inicializa "courseMeta"
+        'HTML y CSS': { badge: '🎨 HTML5 & CSS3', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'JAVASCRIPT MID LEVEL': { badge: '⚡ JS MID LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` }
+    };
+    const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa "meta"
+
+    // Asigna un tema de color distinto por módulo (como en Junior Level)
+    const THEMES = ['cyan', 'purple', 'emerald', 'amber', 'rose']; // Declara e inicializa "THEMES"
+    if (!document.body.dataset.theme) { // Evalúa condición
+        let hash = 0; // Declara e inicializa "hash"
+        for (let i = 0; i < topicFolder.length; i++) hash += topicFolder.charCodeAt(i); // Inicia bucle de iteración
+        document.body.dataset.theme = THEMES[hash % THEMES.length]; // Asigna valor
+    }
+
+    // Banco de retos prácticos específicos por tema
+    const CHALLENGES = { // Declara e inicializa "CHALLENGES"
+        'HTML BASICO': { // Instrucción JavaScript
+            title: 'Reto HTML Básico: Imagen Accesible + Enlace Seguro',
+            desc: 'Escribe una etiqueta <img> con alt="..." y un enlace <a> con target="_blank".',
+            placeholder: '<img src="logo.png" alt="Logo">\n<a href="https://web.dev" target="_blank">Visitar</a>',
+            hint: 'Incluye <img ... alt="..."> y <a ... target="_blank">.',
+            solution: '<img src="logo.png" alt="Logo">\n<a href="https://web.dev" target="_blank" rel="noopener">Visitar</a>',
+            test: v => /<img[^>]*alt=/i.test(v) && /<a[^>]*target=["']_blank["']/i.test(v)
+        },
+        'HTML avanzado': { // Instrucción JavaScript
+            title: 'Reto HTML Avanzado: Acordeón Nativo',
+            desc: 'Construye un acordeón semántico usando <details> y <summary> sin JavaScript.',
+            placeholder: '<details>\n  <summary>Pregunta</summary>\n  <p>Respuesta</p>\n</details>',
+            hint: 'Usa <details> con <summary> dentro.',
+            solution: '<details>\n  <summary>¿Qué es ARIA?</summary>\n  <p>Atributos para accesibilidad web.</p>\n</details>',
+            test: v => /<details[\s>][\s\S]*<summary[\s>]/i.test(v)
+        },
+        'CSS BASICO': { // Instrucción JavaScript
+            title: 'Reto CSS Básico: Box Model Moderno',
+            desc: 'Estiliza .caja con box-sizing: border-box y padding.',
+            placeholder: '.caja {\n  box-sizing: border-box;\n  padding: 20px;\n}',
+            hint: 'Incluye box-sizing: border-box; y padding.',
+            solution: '.caja {\n  box-sizing: border-box;\n  width: 300px;\n  padding: 20px;\n}',
+            test: v => /box-sizing\s*:\s*border-box/i.test(v) && /padding\s*:/i.test(v)
+        },
+        'Tarjeta de presentacion': { // Instrucción JavaScript
+            title: 'Reto Tarjeta de Presentación: Perfil Estilizado',
+            desc: 'Crea la clase .card con border-radius, padding y box-shadow para dar profundidad.',
+            placeholder: '.card {\n  border-radius: 16px;\n  padding: 24px;\n  box-shadow: 0 10px 30px rgba(0,0,0,0.3);\n}',
+            hint: 'Incluye border-radius, padding y box-shadow.',
+            solution: '.card {\n  max-width: 340px;\n  border-radius: 16px;\n  padding: 24px;\n  box-shadow: 0 12px 32px rgba(0,0,0,0.35);\n}',
+            test: v => /border-radius\s*:/i.test(v) && /padding\s*:/i.test(v) && /box-shadow\s*:/i.test(v)
+        },
+        'CSS avanzado': { // Instrucción JavaScript
+            title: 'Reto CSS Avanzado: Badge Posicionado',
+            desc: 'Posiciona .badge en una esquina usando position: absolute, top y right.',
+            placeholder: '.badge {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n}',
+            hint: 'Usa position: absolute; con top y right.',
+            solution: '.badge {\n  position: absolute;\n  top: 8px;\n  right: 12px;\n}',
+            test: v => /position\s*:\s*absolute/i.test(v) && /top\s*:/i.test(v) && /right\s*:/i.test(v)
+        },
+        'Flexbox': { // Instrucción JavaScript
+            title: 'Reto Flexbox: Centrado Perfecto',
+            desc: 'Centra en ambos ejes un contenedor con display: flex, justify-content y align-items.',
+            placeholder: '.box {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}',
+            hint: 'Usa display: flex, justify-content: center y align-items: center.',
+            solution: '.box {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  gap: 16px;\n}',
+            test: v => /display\s*:\s*flex/i.test(v) && /justify-content\s*:\s*center/i.test(v) && /align-items\s*:\s*center/i.test(v)
+        },
+        'Grid': { // Instrucción JavaScript
+            title: 'Reto CSS Grid: Columnas Auto-Responsivas',
+            desc: 'Usa display: grid y grid-template-columns con repeat(auto-fit, minmax(...)).',
+            placeholder: '.grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));\n}',
+            hint: 'Combina display: grid, repeat(auto-fit, minmax(...)).',
+            solution: '.grid {\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));\n  gap: 16px;\n}',
+            test: v => /display\s*:\s*grid/i.test(v) && /repeat\(\s*auto-fit/i.test(v) && /minmax\(/i.test(v)
+        },
+        'Animaciones': { // Instrucción JavaScript
+            title: 'Reto Animaciones: Keyframes GPU 60 FPS',
+            desc: 'Define @keyframes animando transform y conéctalo con animation.',
+            placeholder: '@keyframes pulso {\n  50% { transform: scale(1.1); }\n}\n.btn { animation: pulso 1.5s infinite; }',
+            hint: 'Usa @keyframes, transform y animation.',
+            solution: '@keyframes flotar {\n  50% { transform: translateY(-10px); }\n}\n.card { animation: flotar 2s ease-in-out infinite; }',
+            test: v => /@keyframes/i.test(v) && /transform\s*:/i.test(v) && /animation\s*:/i.test(v)
+        },
+        'Funciones Avanzadas': { // Instrucción JavaScript
+            title: 'Reto CSS Moderno: clamp() + Variable',
+            desc: 'Combina clamp(min, ideal, max) con una variable CSS var(--...).',
+            placeholder: 'h1 {\n  font-size: clamp(1.5rem, 4vw, 3rem);\n  color: var(--accent);\n}',
+            hint: 'Usa clamp(...) y var(--...).',
+            solution: 'h1 {\n  font-size: clamp(1.5rem, 4vw, 3rem);\n  color: var(--accent, #00f0ff);\n}',
+            test: v => /clamp\(/i.test(v) && /var\(--/i.test(v)
+        },
+        'Responsive Design': { // Instrucción JavaScript
+            title: 'Reto Responsive: Mobile First',
+            desc: 'Escribe una Media Query @media (min-width: 768px) para pantallas medianas.',
+            placeholder: '@media (min-width: 768px) {\n  .grid { grid-template-columns: 1fr 1fr; }\n}',
+            hint: 'Usa @media (min-width: ...).',
+            solution: '@media (min-width: 768px) {\n  .grid { grid-template-columns: repeat(2, 1fr); }\n}',
+            test: v => /@media\s*\(\s*min-width\s*:/i.test(v)
+        },
+        'PROYECTOS': { // Instrucción JavaScript
+            title: 'Reto Proyectos: Flipper Card 3D en CSS Puro',
+            desc: 'Configura la perspectiva 3D y preserva el espacio 3D para girar una tarjeta al hacer :hover.',
+            placeholder: '.scene { perspective: 1000px; }\n.card { transform-style: preserve-3d; }\n.scene:hover .card { transform: rotateY(180deg); }',
+            hint: 'Incluye perspective:, transform-style: preserve-3d y rotateY(180deg).',
+            solution: '.scene { perspective: 1000px; }\n.card { transform-style: preserve-3d; transition: transform 0.6s; }\n.scene:hover .card { transform: rotateY(180deg); }',
+            test: v => /perspective\s*:/i.test(v) && /preserve-3d/i.test(v) && /rotateY\(/i.test(v)
+        },
+        'Cookies': { // Instrucción JavaScript
+            title: 'Reto Cookies: Escritura Segura',
+            desc: 'Guarda una cookie usando document.cookie, encodeURIComponent() y max-age.',
+            placeholder: 'document.cookie = `tema=${encodeURIComponent("oscuro")}; max-age=3600; path=/`;',
+            hint: 'Incluye document.cookie = ..., encodeURIComponent( y max-age.',
+            solution: 'document.cookie = `usuario=${encodeURIComponent("Ana; Pro")}; max-age=3600; path=/; SameSite=Lax`;',
+            test: v => /document\.cookie\s*=/.test(v) && /encodeURIComponent\s*\(/.test(v) && /max-age/i.test(v)
+        },
+        'Objeto Screen': { // Instrucción JavaScript
+            title: 'Reto Screen: Medir Barra del Sistema',
+            desc: 'Calcula el alto ocupado por la barra del sistema restando screen.availHeight a screen.height.',
+            placeholder: 'const barra = screen.height - screen.availHeight;',
+            hint: 'Usa screen.height y screen.availHeight.',
+            solution: 'const altoBarra = screen.height - screen.availHeight;\nconsole.log(altoBarra);',
+            test: v => /screen\.height/.test(v) && /screen\.availHeight/.test(v)
+        },
+        'Fetch': { // Instrucción JavaScript
+            title: 'Reto Fetch: Petición Validada',
+            desc: 'Usa await fetch(...), verifica res.ok y parsea con res.json().',
+            placeholder: 'const res = await fetch("/api");\nif (!res.ok) throw new Error(res.status);\nconst data = await res.json();',
+            hint: 'Incluye fetch(, .ok y .json().',
+            solution: 'async function cargar() {\n  const res = await fetch("/api");\n  if (!res.ok) throw new Error("Error");\n  return await res.json();\n}',
+            test: v => /fetch\s*\(/i.test(v) && /\.ok\b/.test(v) && /\.json\s*\(\)/.test(v)
+        },
+        'Cache': { // Instrucción JavaScript
+            title: 'Reto Cache API: Precarga de Recursos',
+            desc: 'Abre un almacén con caches.open() y guarda archivos con cache.add() o cache.put().',
+            placeholder: 'const cache = await caches.open("v1");\nawait cache.add("/index.html");',
+            hint: 'Usa caches.open( y .add( / .put(.',
+            solution: 'const cache = await caches.open("app-v1");\nawait cache.addAll(["/", "/index.html"]);',
+            test: v => /caches\.open\s*\(/.test(v) && /\.(add|addAll|put)\s*\(/.test(v)
+        }
+    };
+
+    const slides = Array.from(document.querySelectorAll('.presentation-wrapper .slide')); // Obtiene referencia DOM para "slides"
+    if (slides.length === 0) return; // Evalúa condición
+
+    // Extrae datos de la portada (Slide 1)
+    const heroSlide = slides[0]; // Declara e inicializa "heroSlide"
+    const heroTitle = heroSlide.querySelector('h1')?.textContent.trim() || topicFolder; // Obtiene referencia DOM para "heroTitle"
+    const heroDesc = heroSlide.querySelector('.hero-subtitle, .lead-text, p')?.textContent.trim() || ''; // Obtiene referencia DOM para "heroDesc"
+    const heroBadgeText = document.querySelector('.brand-badge')?.textContent.trim() || meta.badge; // Obtiene referencia DOM para "heroBadgeText"
+
+    // Separa diapositivas de teoría vs Lab y Quiz
+    const labSlides = []; // Declara e inicializa "labSlides"
+    const quizSlides = []; // Declara e inicializa "quizSlides"
+    const theorySlides = []; // Declara e inicializa "theorySlides"
+
+    slides.slice(1).forEach(s => { // Instrucción JavaScript
+        const isLab = s.dataset.lab === 'true' || Boolean(s.querySelector('#labEditor, .lab-panel, #ckConsole, #screenConsole')); // Obtiene referencia DOM para "isLab"
+        const isQuiz = Boolean(s.querySelector('.quiz-container, .quiz-box')); // Obtiene referencia DOM para "isQuiz"
+        if (isLab) labSlides.push(s); // Evalúa condición
+        else if (isQuiz) quizSlides.push(s); // Evalúa condición alternativa
+        else theorySlides.push(s); // Rama alternativa
+    });
+
+    // Construye el contenedor principal .jr-app-shell
+    const shell = document.createElement('div'); // Crea nuevo elemento DOM "shell"
+    shell.className = 'jr-app-shell'; // Asigna valor
+
+    // 1. Barra superior
+    const topNav = document.createElement('nav'); // Crea nuevo elemento DOM "topNav"
+    topNav.className = 'jr-top-nav'; // Asigna valor
+    topNav.innerHTML = `
+        <span class="jr-nav-badge">${meta.badge} · ${topicFolder}</span>
+        <div class="jr-nav-right">
+            <div class="theme-dots" title="Cambiar color del módulo"></div>
+            <a class="jr-nav-link" href="${meta.docsHref}">📘 Apuntes</a>
+            <a class="jr-nav-link primary" href="${meta.portalHref}">🏠 Portal Principal</a>
+        </div>
+    `;
+    const dotsWrap = topNav.querySelector('.theme-dots'); // Obtiene referencia DOM para "dotsWrap"
+    THEMES.forEach(t => { // Instrucción JavaScript
+        const b = document.createElement('button'); // Crea nuevo elemento DOM "b"
+        b.type = 'button'; // Asigna valor
+        b.className = 'theme-dot' + (document.body.dataset.theme === t ? ' active' : ''); // Asigna valor
+        b.dataset.setTheme = t; // Asigna valor
+        b.addEventListener('click', () => { // Registra escuchador de eventos
+            document.body.dataset.theme = t; // Asigna valor
+            dotsWrap.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active')); // Modifica clases CSS del elemento
+            b.classList.add('active'); // Modifica clases CSS del elemento
+            logConsole(`🎨 Tema cambiado a "${t}"`, 'ok'); // Ejecuta llamada o método
+        });
+        dotsWrap.appendChild(b); // Inserta nodo en el DOM
+    });
+    shell.appendChild(topNav); // Inserta nodo en el DOM
+
+    // 2. Cabecera .jr-hero
+    const hero = document.createElement('header'); // Crea nuevo elemento DOM "hero"
+    hero.className = 'jr-hero'; // Asigna valor
+    hero.innerHTML = `
+        <span class="jr-hero-badge">${heroBadgeText}</span>
+        <h1>${heroTitle}</h1>
+        <p>${heroDesc}</p>
+    `;
+    shell.appendChild(hero); // Inserta nodo en el DOM
+
+    // 3. Carrusel de teoría (#jrDocSlides)
+    if (theorySlides.length > 0) { // Evalúa condición
+        const docBox = document.createElement('section'); // Crea nuevo elemento DOM "docBox"
+        docBox.className = 'jr-doc-slides'; // Asigna valor
+        docBox.innerHTML = `
+            <div class="jr-slides-bar">
+                <div>
+                    <div class="jr-slides-kicker">📘 TEORÍA INTERACTIVA — ${topicFolder.toUpperCase()}</div>
+                    <div class="jr-slides-ind" id="jrSlideInd">Diapositiva 1 / ${theorySlides.length}</div>
+                </div>
+                <div class="jr-slides-btns">
+                    <button type="button" class="jr-slide-btn" id="jrPrevBtn">⬅ Anterior</button>
+                    <button type="button" class="jr-slide-btn" id="jrNextBtn">Siguiente ➡</button>
+                    <a class="jr-slides-apuntes" href="${meta.docsHref}">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            <div id="jrSlidesBody"></div>
+        `;
+
+        const slidesBody = docBox.querySelector('#jrSlidesBody'); // Obtiene referencia DOM para "slidesBody"
+        theorySlides.forEach((s, idx) => { // Instrucción JavaScript
+            const pane = document.createElement('div'); // Crea nuevo elemento DOM "pane"
+            pane.className = 'jr-doc-slide' + (idx === 0 ? ' active' : ''); // Asigna valor
+            const content = s.querySelector('.slide-content') || s; // Obtiene referencia DOM para "content"
+            while (content.firstChild) pane.appendChild(content.firstChild); // Inicia bucle de iteración
+            slidesBody.appendChild(pane); // Inserta nodo en el DOM
+        });
+
+        const panes = Array.from(slidesBody.querySelectorAll('.jr-doc-slide')); // Obtiene referencia DOM para "panes"
+        const ind = docBox.querySelector('#jrSlideInd'); // Obtiene referencia DOM para "ind"
+        const prevBtn = docBox.querySelector('#jrPrevBtn'); // Obtiene referencia DOM para "prevBtn"
+        const nextBtn = docBox.querySelector('#jrNextBtn'); // Obtiene referencia DOM para "nextBtn"
+        let cur = 0; // Declara e inicializa "cur"
+
+        function showSlide(idx) { // Declara función
+            cur = Math.max(0, Math.min(panes.length - 1, idx)); // Asigna valor
+            panes.forEach((p, i) => p.classList.toggle('active', i === cur)); // Modifica clases CSS del elemento
+            ind.textContent = `Diapositiva ${cur + 1} / ${panes.length}`; // Actualiza contenido en el DOM
+            prevBtn.disabled = cur === 0; // Asigna valor
+            nextBtn.disabled = cur === panes.length - 1; // Asigna valor
+        }
+        prevBtn.addEventListener('click', () => { showSlide(cur - 1); logConsole(`⬅ Diapositiva ${cur + 1}/${panes.length}`); }); // Registra escuchador de eventos
+        nextBtn.addEventListener('click', () => { showSlide(cur + 1); logConsole(`➡ Diapositiva ${cur + 1}/${panes.length}`); }); // Registra escuchador de eventos
+        showSlide(0); // Ejecuta llamada o método
+        shell.appendChild(docBox); // Inserta nodo en el DOM
+    }
+
+    // 4. Rejilla principal (.jr-main-grid): Lab + Reto Práctico + Quiz
+    const mainGrid = document.createElement('main'); // Crea nuevo elemento DOM "mainGrid"
+    mainGrid.className = 'jr-main-grid'; // Asigna valor
+
+    labSlides.forEach(s => { // Instrucción JavaScript
+        const card = document.createElement('section'); // Crea nuevo elemento DOM "card"
+        card.className = 'jr-card full-span'; // Asigna valor
+        const content = s.querySelector('.slide-content') || s; // Obtiene referencia DOM para "content"
+        while (content.firstChild) card.appendChild(content.firstChild); // Inicia bucle de iteración
+        mainGrid.appendChild(card); // Inserta nodo en el DOM
+    });
+
+    // Reto Práctico inventado por módulo
+    const ch = CHALLENGES[topicFolder] || { // Declara e inicializa "ch"
+        title: `Reto Práctico: ${topicFolder}`,
+        desc: `Escribe un fragmento de código aplicando lo visto en "${topicFolder}" (mínimo 15 caracteres) y verifícalo.`,
+        placeholder: `// Escribe aquí tu práctica de ${topicFolder}\n`,
+        hint: `Usa la sintaxis principal mostrada en las diapositivas de ${topicFolder}.`,
+        solution: `// Solución ejemplo de ${topicFolder}\nconsole.log("Práctica completada: ${topicFolder}");`,
+        test: v => v.trim().length >= 15
+    };
+
+    const challengeCard = document.createElement('section'); // Crea nuevo elemento DOM "challengeCard"
+    challengeCard.className = 'challenge-panel'; // Asigna valor
+    challengeCard.innerHTML = `
+        <span class="challenge-badge">🏆 RETO PRÁCTICO DEL MÓDULO</span>
+        <h2 class="challenge-title">${ch.title}</h2>
+        <p class="challenge-desc">${ch.desc}</p>
+        <textarea class="challenge-editor" spellcheck="false" placeholder="${ch.placeholder.replace(/"/g, '&quot;')}"></textarea>
+        <div class="challenge-actions">
+            <button type="button" class="challenge-btn primary" data-act="check">✅ Verificar Solución</button>
+            <button type="button" class="challenge-btn" data-act="hint">💡 Pista</button>
+            <button type="button" class="challenge-btn" data-act="solve">✨ Ver Solución</button>
+        </div>
+        <div class="challenge-feedback" aria-live="polite"></div>
+    `;
+    const chEditor = challengeCard.querySelector('.challenge-editor'); // Obtiene referencia DOM para "chEditor"
+    const chFeedback = challengeCard.querySelector('.challenge-feedback'); // Obtiene referencia DOM para "chFeedback"
+    challengeCard.querySelector('[data-act="check"]').addEventListener('click', () => { // Registra escuchador de eventos
+        if (ch.test(chEditor.value || '')) { // Evalúa condición
+            chFeedback.textContent = '✅ ¡Correcto! Dominaste el reto práctico del módulo.'; // Actualiza contenido en el DOM
+            chFeedback.className = 'challenge-feedback show ok'; // Asigna valor
+            logConsole(`✅ Reto "${topicFolder}" superado`, 'ok'); // Ejecuta llamada o método
+        } else { // Instrucción JavaScript
+            chFeedback.textContent = '❌ Aún falta algún detalle clave. Revisa la pista e inténtalo de nuevo.'; // Actualiza contenido en el DOM
+            chFeedback.className = 'challenge-feedback show err'; // Asigna valor
+            logConsole(`❌ Reto "${topicFolder}" incompleto`, 'err'); // Ejecuta llamada o método
+        }
+    });
+    challengeCard.querySelector('[data-act="hint"]').addEventListener('click', () => { // Registra escuchador de eventos
+        chFeedback.textContent = `💡 Pista: ${ch.hint}`; // Actualiza contenido en el DOM
+        chFeedback.className = 'challenge-feedback show ok'; // Asigna valor
+    });
+    challengeCard.querySelector('[data-act="solve"]').addEventListener('click', () => { // Registra escuchador de eventos
+        chEditor.value = ch.solution; // Asigna valor
+        chFeedback.textContent = '✨ Solución cargada. Pulsa "Verificar Solución" o personalízala.'; // Actualiza contenido en el DOM
+        chFeedback.className = 'challenge-feedback show ok'; // Asigna valor
+        logConsole(`✨ Solución ejemplo cargada para "${topicFolder}"`); // Ejecuta llamada o método
+    });
+    mainGrid.appendChild(challengeCard); // Inserta nodo en el DOM
+
+    quizSlides.forEach(s => { // Instrucción JavaScript
+        const card = document.createElement('section'); // Crea nuevo elemento DOM "card"
+        card.className = 'jr-card'; // Asigna valor
+        const content = s.querySelector('.slide-content') || s; // Obtiene referencia DOM para "content"
+        while (content.firstChild) card.appendChild(content.firstChild); // Inicia bucle de iteración
+        mainGrid.appendChild(card); // Inserta nodo en el DOM
+    });
+
+    shell.appendChild(mainGrid); // Inserta nodo en el DOM
+
+    // 5. Consola en Vivo (.jr-console-panel)
+    const consolePanel = document.createElement('section'); // Crea nuevo elemento DOM "consolePanel"
+    consolePanel.className = 'jr-console-panel'; // Asigna valor
+    consolePanel.innerHTML = `
+        <div class="jr-console-header">
+            <h2>Registro de Consola en Vivo (también en DevTools)</h2>
+            <button type="button" class="jr-slide-btn" id="jrClearLog">Limpiar</button>
+        </div>
+        <div class="jr-console-log" id="jrConsoleLog"></div>
+    `;
+    shell.appendChild(consolePanel); // Inserta nodo en el DOM
+
+    const logBox = consolePanel.querySelector('#jrConsoleLog'); // Obtiene referencia DOM para "logBox"
+    function logConsole(msg, type = '') { // Declara función
+        if (!logBox) return; // Evalúa condición
+        const line = document.createElement('div'); // Crea nuevo elemento DOM "line"
+        line.className = `jr-log-line ${type}`.trim(); // Asigna valor
+        const hora = new Date().toLocaleTimeString(); // Declara e inicializa "hora"
+        line.textContent = `[${hora}] ${msg}`; // Actualiza contenido en el DOM
+        logBox.appendChild(line); // Inserta nodo en el DOM
+        logBox.scrollTop = logBox.scrollHeight; // Asigna valor
+    }
+    consolePanel.querySelector('#jrClearLog').addEventListener('click', () => { // Registra escuchador de eventos
+        logBox.innerHTML = ''; // Actualiza contenido en el DOM
+    });
+
+    document.body.classList.add('jr-unified'); // Modifica clases CSS del elemento
+    document.body.prepend(shell); // Ejecuta llamada o método
+    logConsole(`🚀 Módulo "${topicFolder}" cargado con estructura unificada Junior Level.`, 'ok'); // Ejecuta llamada o método
+})(); // Ejecuta llamada o método

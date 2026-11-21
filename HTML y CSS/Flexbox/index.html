@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../slides-engine.css" />
     <script src="../slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
@@ -202,58 +205,122 @@ main { flex: 1; } /* Empuja el footer al fondo */</code></pre>
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
                 <h2 class="slide-title">1. Idea central de Flexbox</h2>
             </div>
-            <div class="glass-card"><ul class="styled-list">
-<li>- Flexbox se activa poniendo <code>display: flex</code> (o <code>inline-flex</code>) en un contenedor; sus hijos se convierten en “flex items”.</li>
-<li>- Está pensado para controlar una sola dimensión a la vez: fila (horizontal) o columna (vertical), con alineación muy precisa y fácil.</li>
-<li>- Los ítems pueden encogerse, crecer y reordenarse sin cambiar el HTML, solo con CSS.</li>
-</ul>
-<h3 style="margin-top:12px;color:#38bdf8;">Ejemplo mínimo</h3></div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Conceptos clave</h3>
+                    <ul class="styled-list">
+                        <li><code>display: flex</code> convierte el contenedor en un bloque flexible y a sus hijos directos en <strong>flex items</strong>.</li>
+                        <li><code>display: inline-flex</code> hace lo mismo, pero el contenedor se comporta externamente como un elemento en línea.</li>
+                        <li>Controla <strong>una dimensión a la vez</strong> (fila o columna) con alineación precisa, crecimiento, encogimiento y reordenamiento visual sin modificar el HTML.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Ejemplo mínimo funcional</h3>
+                    <pre class="code-block"><code>&lt;div class="fila"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;
+
+/* CSS */
+.fila {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}</code></pre>
+                </div>
+            </div>
         </section>
         <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: 9. Resumen mental rápido">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
-                <h2 class="slide-title">9. Resumen mental rápido</h2>
+                <h2 class="slide-title">9. Resumen mental rápido (Padre vs Hijos)</h2>
             </div>
-            <div class="glass-card"><ul class="styled-list">
-<li>- Activar: <code>display: flex</code>.</li>
-<li>- Eje: <code>flex-direction</code>.</li>
-<li>- Distribuir en el eje principal: <code>justify-content</code>.</li>
-<li>- Alinear en el eje cruzado: <code>align-items</code> (una línea) y <code>align-content</code> (múltiples líneas).</li>
-<li>- Espacios entre ítems: <code>gap</code>.</li>
-</ul></div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Propiedad</th>
+                            <th>Se aplica a</th>
+                            <th>Función principal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>display: flex / inline-flex</code></td><td>Contenedor (Padre)</td><td>Activa el contexto flexible para sus hijos directos.</td></tr>
+                        <tr><td><code>flex-direction</code></td><td>Contenedor (Padre)</td><td>Define el eje principal (<code>row</code>, <code>column</code>, <code>*-reverse</code>).</td></tr>
+                        <tr><td><code>justify-content</code></td><td>Contenedor (Padre)</td><td>Distribuye el espacio a lo largo del <strong>eje principal</strong>.</td></tr>
+                        <tr><td><code>align-items</code></td><td>Contenedor (Padre)</td><td>Alinea los ítems en el <strong>eje cruzado</strong> dentro de cada línea.</td></tr>
+                        <tr><td><code>align-content</code></td><td>Contenedor (Padre)</td><td>Distribuye múltiples líneas en el eje cruzado (requiere <code>wrap</code>).</td></tr>
+                        <tr><td><code>flex-wrap</code> y <code>gap</code></td><td>Contenedor (Padre)</td><td>Permite saltos de línea y define separación sin márgenes extra.</td></tr>
+                        <tr><td><code>flex</code> (<code>grow / shrink / basis</code>)</td><td>Flex Item (Hijo)</td><td>Controla cuánto crece, encoge y qué tamaño base tiene cada ítem.</td></tr>
+                        <tr><td><code>align-self</code> y <code>order</code></td><td>Flex Item (Hijo)</td><td>Sobrescribe la alineación individual o cambia el orden visual.</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
         <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: 10. Profundización: flex Shorthand, align-content vs align-items, y Accesibilidad">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
-                <h2 class="slide-title">10. Profundización: flex Shorthand, align-content vs align-items, y Accesibilidad</h2>
+                <h2 class="slide-title">10. Profundización: <code>flex</code> Shorthand, Alineación y a11y</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>flex</code> Shorthand (Valores Clave)</h3>
-<p style="margin-bottom:8px;line-height:1.6;">| Atajo | Equivale a | Comportamiento |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: 1</code> | <code>flex: 1 1 0%</code> | Crece y encoge por igual ignorando el tamaño del contenido |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: auto</code> | <code>flex: 1 1 auto</code> | Crece y encoge partiendo del tamaño intrínseco del contenido |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: none</code> | <code>flex: 0 0 auto</code> | Ni crece ni encoge (mantiene su tamaño natural) |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>flex: 0 0 240px</code> | <code>0 0 240px</code> | Columna/sidebar fija de exactamente <code>240px</code> |</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>align-items</code> vs <code>align-content</code></h3>
-<ul class="styled-list">
-<li>- <strong><code>align-items</code></strong>: alinea los ítems <strong>dentro de cada fila/línea</strong> en el eje cruzado. Funciona siempre (con 1 o más líneas).</li>
-<li>- <strong><code>align-content</code></strong>: distribuye <strong>el bloque completo de líneas</strong> en el eje cruzado. <strong>No tiene efecto si <code>flex-wrap: nowrap</code></strong> o si solo hay una línea.</li>
-</ul>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>order</code> y Accesibilidad (a11y)</h3>
-<p style="margin-bottom:8px;line-height:1.6;">Cambiar <code>order</code> (o usar <code>row-reverse</code> / <code>column-reverse</code>) <strong>solo altera el orden visual</strong>, pero el orden de tabulación con <code>Tab</code> y el orden de lectura de los lectores de pantalla siguen siendo el orden del DOM HTML.</p>
-<ul class="styled-list">
-<li>- <strong>Regla:</strong> Si el orden lógico importa para formularios, navegación o lectura, <strong>reordena el HTML</strong> en lugar de depender de <code>order</code> para cambios estructurales importantes.</li>
-</ul></div>
+            <div class="glass-card" style="margin-bottom:16px;">
+                <h3 style="margin-bottom:10px;color:#38bdf8;"><code>flex</code> Shorthand (Valores Clave)</h3>
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Atajo</th>
+                            <th>Equivale a</th>
+                            <th>Comportamiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>flex: 1</code></td><td><code>flex: 1 1 0%</code></td><td>Crece y encoge por igual ignorando el tamaño del contenido.</td></tr>
+                        <tr><td><code>flex: auto</code></td><td><code>flex: 1 1 auto</code></td><td>Crece y encoge partiendo del tamaño intrínseco del contenido.</td></tr>
+                        <tr><td><code>flex: none</code></td><td><code>flex: 0 0 auto</code></td><td>Ni crece ni encoge; mantiene su tamaño natural.</td></tr>
+                        <tr><td><code>flex: 0 0 240px</code></td><td><code>0 0 240px</code></td><td>Columna o sidebar fija de exactamente <code>240px</code>.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3><code>align-items</code> vs <code>align-content</code></h3>
+                    <ul class="styled-list">
+                        <li><strong><code>align-items</code>:</strong> alinea los ítems <strong>dentro de cada línea</strong> en el eje cruzado. Funciona siempre (con 1 o más líneas).</li>
+                        <li><strong><code>align-content</code>:</strong> distribuye <strong>el bloque completo de líneas</strong> en el eje cruzado. No tiene efecto si <code>flex-wrap: nowrap</code> o si solo hay una línea.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-purple">
+                    <h3><code>order</code> y Accesibilidad (a11y)</h3>
+                    <ul class="styled-list">
+                        <li>Cambiar <code>order</code> (o usar <code>row-reverse</code> / <code>column-reverse</code>) <strong>solo altera el orden visual</strong>; el foco con <code>Tab</code> y los lectores de pantalla siguen el DOM HTML.</li>
+                        <li><strong>Regla:</strong> si el orden lógico importa para navegación o formularios, <strong>reordena el HTML</strong> en lugar de depender de <code>order</code>.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
         <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: 11. Errores Comunes en Flexbox">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FLEXBOX.md</span>
                 <h2 class="slide-title">11. Errores Comunes en Flexbox</h2>
             </div>
-            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">1. <strong>Usar <code>align-content</code> sin <code>flex-wrap: wrap</code>:</strong> No hace absolutamente nada porque solo existe una línea.</p>
-<p style="margin-bottom:8px;line-height:1.6;">2. <strong>Olvidar <code>min-width: 0</code> en un flex item con texto largo o <code>overflow: ellipsis</code>:</strong> Por defecto los flex items tienen <code>min-width: auto</code> y se niegan a encogerse por debajo de su contenido.</p>
-<p style="margin-bottom:8px;line-height:1.6;">3. <strong>Confundir <code>flex: 1</code> con <code>width: 100%</code>:</strong> En una fila con varios ítems, <code>flex: 1</code> reparte el espacio equitativamente; <code>width: 100%</code> intenta ocupar todo el contenedor.</p>
-<p style="margin-bottom:8px;line-height:1.6;">4. <strong>Seguir usando márgenes con <code>:last-child { margin-right: 0 }</code>:</strong> Usa <code>gap</code> directamente; funciona en <code>row</code>, <code>column</code> y <code>wrap</code> sin márgenes residuales.</p></div>
+            <div class="grid-2">
+                <div class="glass-card border-rose">
+                    <h3>1. <code>align-content</code> sin <code>flex-wrap: wrap</code></h3>
+                    <p style="line-height:1.6;">No hace absolutamente nada porque solo existe una única línea. Activa primero <code>flex-wrap: wrap</code> cuando necesites distribuir varias filas.</p>
+                </div>
+                <div class="glass-card border-amber">
+                    <h3>2. Olvidar <code>min-width: 0</code></h3>
+                    <p style="line-height:1.6;">Por defecto los flex items tienen <code>min-width: auto</code> y se niegan a encogerse por debajo de un texto largo o una URL, rompiendo <code>overflow: ellipsis</code>.</p>
+                </div>
+                <div class="glass-card border-cyan">
+                    <h3>3. Confundir <code>flex: 1</code> con <code>width: 100%</code></h3>
+                    <p style="line-height:1.6;">En una fila con varios ítems, <code>flex: 1</code> reparte el espacio disponible equitativamente; <code>width: 100%</code> intenta acaparar todo el contenedor.</p>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>4. Márgenes con <code>:last-child</code> en vez de <code>gap</code></h3>
+                    <p style="line-height:1.6;">Usa <code>gap</code> directamente en el contenedor: funciona de forma limpia en <code>row</code>, <code>column</code> y <code>wrap</code> sin dejar márgenes residuales.</p>
+                </div>
+            </div>
         </section>
 
         <!-- SLIDE 7: SIMULADOR VISUAL INTERACTIVO -->

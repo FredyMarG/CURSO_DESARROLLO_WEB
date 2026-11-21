@@ -9,27 +9,27 @@
 
 
 /* Reset general: normaliza márgenes y box-sizing. */
-*{
-    box-sizing: border-box;
-    margin: 0;
-    font-family: "montserrat";
+*{ /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    font-family: "montserrat"; /* Familia tipográfica */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    background-color: #e2eaff;
-    color: #101632dd;
-    scroll-behavior: smooth;
+body{ /* Regla de estilo para body */
+    background-color: #e2eaff; /* Color de fondo */
+    color: #101632dd; /* Color del texto */
+    scroll-behavior: smooth; /* Propiedad CSS: scroll-behavior */
 }
 
 
 
 /* Estilos del selector body, div, ul , li, nav, header, footer, a, li, label. */
-body, div, ul , li, nav, header, footer, a, li, label{
-    margin: 0;
-    padding: 0;
+body, div, ul , li, nav, header, footer, a, li, label{ /* Regla de estilo para body, div, ul , li, nav, header, footer, a, li, label */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
@@ -37,131 +37,131 @@ body, div, ul , li, nav, header, footer, a, li, label{
 
 
 /* Estilo de estructura para navegación o encabezado/pie. */
-.header{
-    background-color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    container-type: inline-size;
-    container-name: header;
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    font-size: 20px;
+.header{ /* Regla de estilo para .header */
+    background-color: #fff; /* Color de fondo */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    container-type: inline-size; /* Propiedad CSS: container-type */
+    container-name: header; /* Propiedad CSS: container-name */
+    position: relative; /* Define el esquema de posicionamiento */
+    z-index: 10; /* Orden de apilamiento en el eje Z */
+    text-align: center; /* Alineación horizontal del texto */
+    font-size: 20px; /* Tamaño de fuente */
 }
 
 
 
 /* Estilos del selector .header__open-nav-button. */
-.header__open-nav-button{
-    color: #48e;
-    font-size: 3rem;
-    font-weight: 700;
-    position: absolute;
-    right: 10px;
+.header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
+    color: #48e; /* Color del texto */
+    font-size: 3rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    position: absolute; /* Define el esquema de posicionamiento */
+    right: 10px; /* Desplazamiento derecho */
 }
 
 
 
 /* Estilos del selector .header__checkbox. */
-.header__checkbox{
-    display: none;
+.header__checkbox{ /* Regla de estilo para .header__checkbox */
+    display: none; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Estilos del selector .header__nav. */
-.header__nav{
-    display: none;
-    background-color: #fff;
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
-    top:0;
-    z-index: -1;
+.header__nav{ /* Regla de estilo para .header__nav */
+    display: none; /* Define el tipo de caja/layout */
+    background-color: #fff; /* Color de fondo */
+    position: absolute; /* Define el esquema de posicionamiento */
+    height: 100vh; /* Alto del elemento */
+    width: 100vw; /* Ancho del elemento */
+    top:0; /* Desplazamiento superior */
+    z-index: -1; /* Orden de apilamiento en el eje Z */
 }
 
 
 
 /* Estilos del selector .header__nav-list. */
-.header__nav-list{
-    display: flex;
-    flex-direction: column;
-    height: 40vh;
-    margin: auto;
-    justify-content: space-evenly;
+.header__nav-list{ /* Regla de estilo para .header__nav-list */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    height: 40vh; /* Alto del elemento */
+    margin: auto; /* Margen exterior */
+    justify-content: space-evenly; /* Alineación en el eje principal */
 }
 
 
 
 /* Estado o pseudo-clase .header__checkbox:checked ~ .header__nav: estilo cuando el usuario interactúa. */
-.header__checkbox:checked ~ .header__nav{
-    display: flex;
+.header__checkbox:checked ~ .header__nav{ /* Regla de estilo para .header__checkbox:checked ~ .header__nav */
+    display: flex; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Estilos del selector .header__logo. */
-.header__logo{
-    max-width: 100%;
-    width: 64px;
-    margin: 10px 20px;
+.header__logo{ /* Regla de estilo para .header__logo */
+    max-width: 100%; /* Ancho máximo permitido */
+    width: 64px; /* Ancho del elemento */
+    margin: 10px 20px; /* Margen exterior */
 }
 
 
 
 /* Estilos del selector .header__nav-item. */
-.header__nav-item{
-    list-style: none;
+.header__nav-item{ /* Regla de estilo para .header__nav-item */
+    list-style: none; /* Propiedad CSS: list-style */
 }
 
 
 
 /* Estilos del selector .header__nav-item a. */
-.header__nav-item a{
-    color: #48e;
-    text-decoration: none;
+.header__nav-item a{ /* Regla de estilo para .header__nav-item a */
+    color: #48e; /* Color del texto */
+    text-decoration: none; /* Decoración del texto */
 }
 
 
 
 /* Estado o pseudo-clase .header__nav-item :is(:hover, :active): estilo cuando el usuario interactúa. */
-.header__nav-item :is(:hover, :active){
-    text-decoration: underline;
+.header__nav-item :is(:hover, :active){ /* Regla de estilo para .header__nav-item :is(:hover, :active) */
+    text-decoration: underline; /* Decoración del texto */
 }
 
 
 
 
 /* Estado o pseudo-clase @container header (min-width: 600px): estilo cuando el usuario interactúa. */
-@container header (min-width: 600px){
+@container header (min-width: 600px){ /* Regla at-rule de CSS */
 
 
 /* Estilos del selector .header__nav. */
-    .header__nav{
-        display: block;
-        position: static;
-        height: auto;
-        z-index: 1;
-        width: auto;
-        justify-content: space-between;
+    .header__nav{ /* Regla de estilo para .header__nav */
+        display: block; /* Define el tipo de caja/layout */
+        position: static; /* Define el esquema de posicionamiento */
+        height: auto; /* Alto del elemento */
+        z-index: 1; /* Orden de apilamiento en el eje Z */
+        width: auto; /* Ancho del elemento */
+        justify-content: space-between; /* Alineación en el eje principal */
     }
 
 
 
 /* Estilos del selector .header__nav-list. */
-    .header__nav-list{
-        flex-direction: row;
-        height: auto;
-        gap: 20px;
-        margin-right: 40px;
+    .header__nav-list{ /* Regla de estilo para .header__nav-list */
+        flex-direction: row; /* Dirección del eje principal flex */
+        height: auto; /* Alto del elemento */
+        gap: 20px; /* Separación entre filas y columnas */
+        margin-right: 40px; /* Margen exterior derecho */
     }
 
 
 
 /* Estilos del selector .header__open-nav-button. */
-    .header__open-nav-button{
-        display: none;
+    .header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
+        display: none; /* Define el tipo de caja/layout */
     }
 
 }
@@ -171,184 +171,184 @@ body, div, ul , li, nav, header, footer, a, li, label{
 
 
 /* Estilos del selector .profile. */
-.profile{
-    container-type: inline-size;
-    container-name:profile ;
+.profile{ /* Regla de estilo para .profile */
+    container-type: inline-size; /* Propiedad CSS: container-type */
+    container-name:profile ; /* Propiedad CSS: container-name */
 }
 
 
 
 /* Estilos del selector .profile__wrapper. */
-.profile__wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin: auto;
-    background-color: #fff;
-    max-width: 1400px;
+.profile__wrapper{ /* Regla de estilo para .profile__wrapper */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    justify-content: center; /* Alineación en el eje principal */
+    margin: auto; /* Margen exterior */
+    background-color: #fff; /* Color de fondo */
+    max-width: 1400px; /* Ancho máximo permitido */
 }
 
 
 
 /* Estilos del selector .profile__data-container. */
-.profile__data-container{
-    max-width: 600px;
-    padding: 12px;
+.profile__data-container{ /* Regla de estilo para .profile__data-container */
+    max-width: 600px; /* Ancho máximo permitido */
+    padding: 12px; /* Relleno interior */
 }
 
 
 
 /* Estilos del selector .profile__img-container. */
-.profile__img-container{
-    max-height: 500px;
-    overflow: hidden;
+.profile__img-container{ /* Regla de estilo para .profile__img-container */
+    max-height: 500px; /* Alto máximo permitido */
+    overflow: hidden; /* Control de contenido desbordado */
 }
 
 
 
 /* Estilos del selector .profile__img. */
-.profile__img{
-    max-width: 100%;
-    width: 720px;
+.profile__img{ /* Regla de estilo para .profile__img */
+    max-width: 100%; /* Ancho máximo permitido */
+    width: 720px; /* Ancho del elemento */
 }
 
 
 
 /* Estilos del selector h1. */
-h1{
-    color: #26a;
+h1{ /* Regla de estilo para h1 */
+    color: #26a; /* Color del texto */
 }
 
 
 
 /* Estilos del selector .profile__skills-container h2. */
-.profile__skills-container h2{
-    color: #26a;
+.profile__skills-container h2{ /* Regla de estilo para .profile__skills-container h2 */
+    color: #26a; /* Color del texto */
 }
 
 
 
 /* Estilos del selector .profile__skill. */
-.profile__skill{
-    list-style: none;
-    display: flex;
-    margin: 10px;
-    max-width: 600px;
-    margin-left: 0;
-    align-items: center;
+.profile__skill{ /* Regla de estilo para .profile__skill */
+    list-style: none; /* Propiedad CSS: list-style */
+    display: flex; /* Define el tipo de caja/layout */
+    margin: 10px; /* Margen exterior */
+    max-width: 600px; /* Ancho máximo permitido */
+    margin-left: 0; /* Margen exterior izquierdo */
+    align-items: center; /* Alineación en el eje cruzado */
 }
 
 
 
 /* Estilos del selector .load-bar. */
-.load-bar{
-    border: 2px solid #48e;
-    border-radius: 6px;
-    color: #fff;
-    padding: 2px;
-    font-size: 12px;
-    width: 80%;
-    margin: 4px;
-    margin-left: 0;
+.load-bar{ /* Regla de estilo para .load-bar */
+    border: 2px solid #48e; /* Borde del contenedor */
+    border-radius: 6px; /* Redondeo de esquinas */
+    color: #fff; /* Color del texto */
+    padding: 2px; /* Relleno interior */
+    font-size: 12px; /* Tamaño de fuente */
+    width: 80%; /* Ancho del elemento */
+    margin: 4px; /* Margen exterior */
+    margin-left: 0; /* Margen exterior izquierdo */
 }
 
 
 
 /* Estilos del selector .load-bar__bar. */
-.load-bar__bar{
-    background-color: #48e;
-    border-radius:  3px ;
-    padding: 4px 6px;
+.load-bar__bar{ /* Regla de estilo para .load-bar__bar */
+    background-color: #48e; /* Color de fondo */
+    border-radius:  3px ; /* Redondeo de esquinas */
+    padding: 4px 6px; /* Relleno interior */
 }
 
 
 
 /* Estilos del selector .bar--80. */
-.bar--80{
-    width: 80%;
+.bar--80{ /* Regla de estilo para .bar--80 */
+    width: 80%; /* Ancho del elemento */
 
 
 /* Estilos del selector }.bar--90. */
-}.bar--90{
-    width: 90%;
+}.bar--90{ /* Regla de estilo para }.bar--90 */
+    width: 90%; /* Ancho del elemento */
 }
 
 
 /* Estilos del selector .bar--70. */
-.bar--70{
-    width: 70%;
+.bar--70{ /* Regla de estilo para .bar--70 */
+    width: 70%; /* Ancho del elemento */
 }
 
 
 /* Estilos del selector .bar--60. */
-.bar--60{
-    width: 60%;
+.bar--60{ /* Regla de estilo para .bar--60 */
+    width: 60%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase @container profile (min-width:720px): estilo cuando el usuario interactúa. */
-@container profile (min-width:720px){
+@container profile (min-width:720px){ /* Regla at-rule de CSS */
 
 
 /* Estilos del selector .profile__wrapper. */
-    .profile__wrapper{
-        flex-direction: row;
-        padding: 20px;
-        background-color: transparent;
-        height: 90vh;
-        margin: auto;
+    .profile__wrapper{ /* Regla de estilo para .profile__wrapper */
+        flex-direction: row; /* Dirección del eje principal flex */
+        padding: 20px; /* Relleno interior */
+        background-color: transparent; /* Color de fondo */
+        height: 90vh; /* Alto del elemento */
+        margin: auto; /* Margen exterior */
     }
 
 
 
 /* Estilos del selector .profile__data-container{. */
-    .profile__data-container{        
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        border-radius: 0px 25px 25px 0;
-        box-shadow: 0 0 9px #0002;
+    .profile__data-container{         /* Regla de estilo para .profile__data-container */
+        background-color: #fff; /* Color de fondo */
+        display: flex; /* Define el tipo de caja/layout */
+        align-items: center; /* Alineación en el eje cruzado */
+        border-radius: 0px 25px 25px 0; /* Redondeo de esquinas */
+        box-shadow: 0 0 9px #0002; /* Sombra proyectada */
     }
 
 
 
 /* Estilos del selector h1. */
-    h1{
-        margin-top: 0;
-        font-size: 4rem;
-        text-wrap: balance;
+    h1{ /* Regla de estilo para h1 */
+        margin-top: 0; /* Margen exterior superior */
+        font-size: 4rem; /* Tamaño de fuente */
+        text-wrap: balance; /* Propiedad CSS: text-wrap */
     }
 
 
 
 /* Estilos del selector .profile__skills-container > h2. */
-    .profile__skills-container > h2{
-        margin-top: 0;
+    .profile__skills-container > h2{ /* Regla de estilo para .profile__skills-container > h2 */
+        margin-top: 0; /* Margen exterior superior */
     }
 
 
 
 /* Estilos del selector .profile__data. */
-    .profile__data{
-        max-width: 620px;
+    .profile__data{ /* Regla de estilo para .profile__data */
+        max-width: 620px; /* Ancho máximo permitido */
     }
 
 
 
 /* Estilos del selector .profile__img-container. */
-    .profile__img-container{
-        max-height: initial;
-        border-radius: 25px 0 0 25px;
+    .profile__img-container{ /* Regla de estilo para .profile__img-container */
+        max-height: initial; /* Alto máximo permitido */
+        border-radius: 25px 0 0 25px; /* Redondeo de esquinas */
     }
 
 
 
 /* Estilos del selector .profile__img. */
-    .profile__img{
-        height: 100%;
-        object-fit: cover;
-        width: 400px;
+    .profile__img{ /* Regla de estilo para .profile__img */
+        height: 100%; /* Alto del elemento */
+        object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
+        width: 400px; /* Ancho del elemento */
     }
 }
 
@@ -357,118 +357,118 @@ h1{
 
 
 /* Estilos del selector .portfolio. */
-.portfolio{
-    background-color: #18233f;
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    container-type: inline-size;
-    container-name: portfolio;
-    justify-content: space-evenly;
+.portfolio{ /* Regla de estilo para .portfolio */
+    background-color: #18233f; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    min-height: 100vh; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    text-align: center; /* Alineación horizontal del texto */
+    container-type: inline-size; /* Propiedad CSS: container-type */
+    container-name: portfolio; /* Propiedad CSS: container-name */
+    justify-content: space-evenly; /* Alineación en el eje principal */
 }
 
 
 
 /* Estilos del selector .portfolio_title. */
-.portfolio_title{
-    font-size: 3rem;
-    margin-bottom: 0;
+.portfolio_title{ /* Regla de estilo para .portfolio_title */
+    font-size: 3rem; /* Tamaño de fuente */
+    margin-bottom: 0; /* Margen exterior inferior */
 }
 
 
 
 /* Estilos del selector .portfolio__project-container. */
-.portfolio__project-container{
-    display: grid;
-    grid-template-columns: 1fr;
-    max-width: 1300px;
-    margin: auto;
-    width: 100%;
-    gap: 12px;
-    padding: 12px;
-    min-height: 90vh;
+.portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: 1fr; /* Definición de columnas de la grilla */
+    max-width: 1300px; /* Ancho máximo permitido */
+    margin: auto; /* Margen exterior */
+    width: 100%; /* Ancho del elemento */
+    gap: 12px; /* Separación entre filas y columnas */
+    padding: 12px; /* Relleno interior */
+    min-height: 90vh; /* Alto mínimo permitido */
 }
 
 
 
 /* Estilos del selector .portfolio__project. */
-.portfolio__project{
-    background-image:linear-gradient(#0006, #0006), url("img/fondo.jpg");
-    background-position: center;
-    background-size: cover;
-    display: grid;
-    place-content: center;
-    border-radius: 12px;
+.portfolio__project{ /* Regla de estilo para .portfolio__project */
+    background-image:linear-gradient(#0006, #0006), url("img/fondo.jpg"); /* Imagen o degradado de fondo */
+    background-position: center; /* Posición del fondo */
+    background-size: cover; /* Escalado del fondo */
+    display: grid; /* Define el tipo de caja/layout */
+    place-content: center; /* Propiedad CSS: place-content */
+    border-radius: 12px; /* Redondeo de esquinas */
 }
 
 
 
 /* Estado o pseudo-clase .portfolio__project:hover: estilo cuando el usuario interactúa. */
-.portfolio__project:hover{
-    opacity: 0.74;
-    outline: 2px solid #fff6;
+.portfolio__project:hover{ /* Regla de estilo para .portfolio__project:hover */
+    opacity: 0.74; /* Nivel de transparencia */
+    outline: 2px solid #fff6; /* Contorno de enfoque accesible */
 }
 
 
 
 /* Estilos del selector .portfolio__project-name. */
-.portfolio__project-name{
-    font-size: 1rem;
+.portfolio__project-name{ /* Regla de estilo para .portfolio__project-name */
+    font-size: 1rem; /* Tamaño de fuente */
 }
 
 
 
 /* Estado o pseudo-clase @container portfolio (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 56.25rem){
+@container portfolio (min-width: 56.25rem){ /* Regla at-rule de CSS */
 
 
 
 /* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{
-        grid-template-columns: repeat(auto-fill, minmax(420px,1fr));
+    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
+        grid-template-columns: repeat(auto-fill, minmax(420px,1fr)); /* Definición de columnas de la grilla */
     }
 
 
 
 /* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{
-        grid-column: span 2;
-        grid-row: span 2;
+    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
+        grid-column: span 2; /* Ubicación/expansión en columnas */
+        grid-row: span 2; /* Propiedad CSS: grid-row */
     }
 
 
 
 /* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){
-        grid-column: span 2;
+    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
+        grid-column: span 2; /* Ubicación/expansión en columnas */
     }
 }
 
 
 /* Estado o pseudo-clase @container portfolio (min-width: 81.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 81.25rem){
+@container portfolio (min-width: 81.25rem){ /* Regla at-rule de CSS */
 
 
 /* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{
-        grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
+        grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); /* Definición de columnas de la grilla */
     }
 
 
 
 /* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{
-        grid-column: span 2;
-        grid-row: span 2;
+    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
+        grid-column: span 2; /* Ubicación/expansión en columnas */
+        grid-row: span 2; /* Propiedad CSS: grid-row */
     }
 
 
 
 /* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){
-        grid-column: span 4;
+    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
+        grid-column: span 4; /* Ubicación/expansión en columnas */
     }
 }
 
@@ -476,128 +476,128 @@ h1{
 
 
 /* Estilos del selector .form. */
-.form{
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0;
-    container-type: inline-size;
-    container-name: form;
+.form{ /* Regla de estilo para .form */
+    min-height: 60vh; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    justify-content: center; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    padding: 30px 0; /* Relleno interior */
+    container-type: inline-size; /* Propiedad CSS: container-type */
+    container-name: form; /* Propiedad CSS: container-name */
 }
 
 
 
 /* Estilos del selector .form__form. */
-.form__form{
-    padding: 12px;
-    max-width: 600px;
-    width: 100%;
-    display: grid;
-    margin-bottom: 30px;
+.form__form{ /* Regla de estilo para .form__form */
+    padding: 12px; /* Relleno interior */
+    max-width: 600px; /* Ancho máximo permitido */
+    width: 100%; /* Ancho del elemento */
+    display: grid; /* Define el tipo de caja/layout */
+    margin-bottom: 30px; /* Margen exterior inferior */
 }
 
 
 
 /* Estado o pseudo-clase .form__input-container :is(input, textarea ): estilo cuando el usuario interactúa. */
-.form__input-container :is(input, textarea ){
-    width: 100%;
-    padding: 9px;
-    font-size: 16px;
-    margin: 4px;
-    border: none;
-    box-shadow: 2px 2px 4px #0003;
-    background-color: #fffd;
+.form__input-container :is(input, textarea ){ /* Regla de estilo para .form__input-container :is(input, textarea ) */
+    width: 100%; /* Ancho del elemento */
+    padding: 9px; /* Relleno interior */
+    font-size: 16px; /* Tamaño de fuente */
+    margin: 4px; /* Margen exterior */
+    border: none; /* Borde del contenedor */
+    box-shadow: 2px 2px 4px #0003; /* Sombra proyectada */
+    background-color: #fffd; /* Color de fondo */
 }
 
 
 
 /* Estilos del selector .form__input-container textarea. */
-.form__input-container textarea{
-    resize: none;
-    min-height: 120px;
-    font-family: inherit;
+.form__input-container textarea{ /* Regla de estilo para .form__input-container textarea */
+    resize: none; /* Propiedad CSS: resize */
+    min-height: 120px; /* Alto mínimo permitido */
+    font-family: inherit; /* Familia tipográfica */
 }
 
 
 
 /* Estilos del selector .form__input-container input[type="submit"]. */
-.form__input-container input[type="submit"]{
-    padding: 12px;
-    background-color: #48e;
-    color: #fff;
+.form__input-container input[type="submit"]{ /* Regla de estilo para .form__input-container input[type="submit"] */
+    padding: 12px; /* Relleno interior */
+    background-color: #48e; /* Color de fondo */
+    color: #fff; /* Color del texto */
 }
 
 
 
 /* Estilos del selector .form__title. */
-.form__title{
-    font-size: 2.4rem;
+.form__title{ /* Regla de estilo para .form__title */
+    font-size: 2.4rem; /* Tamaño de fuente */
 }
 
 
 
 /* Estado o pseudo-clase @container form (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container form (min-width: 56.25rem){
+@container form (min-width: 56.25rem){ /* Regla at-rule de CSS */
 
 
 /* Estilos del selector .form__form. */
-    .form__form{
-        grid-template-columns: 1fr 1fr;
+    .form__form{ /* Regla de estilo para .form__form */
+        grid-template-columns: 1fr 1fr; /* Definición de columnas de la grilla */
         grid-template-areas:
         "name lastname"
         "email email"
         "message message"
         "button button"
-        ;
-        gap: 12px;
-        background-image: radial-gradient(#18233f06,#18233f33);
-        padding: 30px;
-        border-radius: 12px;
-        box-shadow: 0 0 40px #0006;
+        ; /* Regla CSS */
+        gap: 12px; /* Separación entre filas y columnas */
+        background-image: radial-gradient(#18233f06,#18233f33); /* Imagen o degradado de fondo */
+        padding: 30px; /* Relleno interior */
+        border-radius: 12px; /* Redondeo de esquinas */
+        box-shadow: 0 0 40px #0006; /* Sombra proyectada */
     }
 
 
 
 /* Estado o pseudo-clase .form__input-container:first-child: estilo cuando el usuario interactúa. */
-    .form__input-container:first-child{
-        grid-area: name;
+    .form__input-container:first-child{ /* Regla de estilo para .form__input-container:first-child */
+        grid-area: name; /* Propiedad CSS: grid-area */
     }
 
 
 
 /* Estado o pseudo-clase .form__input-container:nth-child(2): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(2){
-        grid-area: lastname;
+    .form__input-container:nth-child(2){ /* Regla de estilo para .form__input-container:nth-child(2) */
+        grid-area: lastname; /* Propiedad CSS: grid-area */
     }
 
 
 /* Estado o pseudo-clase .form__input-container:nth-child(3): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(3){
-        grid-area: email;
+    .form__input-container:nth-child(3){ /* Regla de estilo para .form__input-container:nth-child(3) */
+        grid-area: email; /* Propiedad CSS: grid-area */
     }
 
 
 
 /* Estado o pseudo-clase .form__input-container:nth-child(4): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(4) {
-        grid-area: message;
+    .form__input-container:nth-child(4) { /* Regla de estilo para .form__input-container:nth-child(4) */
+        grid-area: message; /* Propiedad CSS: grid-area */
     }
 
 
 
 /* Estado o pseudo-clase .form__input-container:nth-child(5): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(5){
-        grid-area: button;
+    .form__input-container:nth-child(5){ /* Regla de estilo para .form__input-container:nth-child(5) */
+        grid-area: button; /* Propiedad CSS: grid-area */
     }
 
 
 
 /* Estado o pseudo-clase .form__input-container :is(input, textarea): estilo cuando el usuario interactúa. */
-    .form__input-container :is(input, textarea){
-        box-shadow: none;
-        border-radius: 4px;
+    .form__input-container :is(input, textarea){ /* Regla de estilo para .form__input-container :is(input, textarea) */
+        box-shadow: none; /* Sombra proyectada */
+        border-radius: 4px; /* Redondeo de esquinas */
     }
 }
 
@@ -606,10 +606,10 @@ h1{
 
 
 /* Estilos del selector footer. */
-footer{
-    padding: 60px;
-    text-align: center;
-    background-color: #18233f;
-    color: #fffd;
-    font-size: 22px;
+footer{ /* Regla de estilo para footer */
+    padding: 60px; /* Relleno interior */
+    text-align: center; /* Alineación horizontal del texto */
+    background-color: #18233f; /* Color de fondo */
+    color: #fffd; /* Color del texto */
+    font-size: 22px; /* Tamaño de fuente */
 }

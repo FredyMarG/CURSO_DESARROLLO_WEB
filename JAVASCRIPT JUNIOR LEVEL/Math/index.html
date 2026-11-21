@@ -1,13 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Junior — Guía Interactiva de Math y Precisión</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css">
+    <script src="../../RESOURCES COURSE/junior-theme.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body>
     <div class="app-shell">
+                <nav class="jr-top-nav" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.28);border-radius:14px;backdrop-filter:blur(12px);">
+            <span style="font-family:monospace;font-size:0.78rem;color:#38bdf8;font-weight:700;">🌱 JS JUNIOR LEVEL</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <a href="../DOCUMENTACION/index.html" style="color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);">📘 Apuntes</a>
+                <a href="../../index.html" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:#38bdf8;">🏠 Portal Principal</a>
+            </div>
+        </nav>
         <header class="hero">
             <span class="badge">Módulo 11 · Objeto Math & Crypto</span>
             <h1>Matemáticas, Aleatorios y Precisión Numérica</h1>
@@ -30,25 +40,12 @@
             
             <div class="jr-slide" data-idx="0" style="display:block;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Métodos de Redondeo y Signo</h3>
-                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Comportamiento | <code>4.7</code> | <code>4.2</code> | <code>-4.2</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :---: | :---: | :---: |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.round(x)</code> | Al entero más cercano | <code>5</code> | <code>4</code> | <code>-4</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.floor(x)</code> | Hacia abajo (piso, $-\infty$) | <code>4</code> | <code>4</code> | <strong><code>-5</code></strong> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.ceil(x)</code> | Hacia arriba (techo, $+\infty$) | <code>5</code> | <code>5</code> | <code>-4</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.trunc(x)</code> | Elimina decimales (corta hacia <code>0</code>) | <code>4</code> | <code>4</code> | <strong><code>-4</code></strong> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.sign(x)</code> | Devuelve <code>1</code>, <code>-1</code>, <code>0</code> o <code>-0</code> según el signo | <code>1</code> | <code>1</code> | <code>-1</code> |</p>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Método</th><th>Comportamiento</th><th><code>4.7</code></th><th><code>4.2</code></th><th><code>-4.2</code></th></tr></thead><tbody><tr><td><code>Math.round(x)</code></td><td>Al entero más cercano</td><td><code>5</code></td><td><code>4</code></td><td><code>-4</code></td></tr><tr><td><code>Math.floor(x)</code></td><td>Hacia abajo (piso, $-\infty$)</td><td><code>4</code></td><td><code>4</code></td><td><strong><code>-5</code></strong></td></tr><tr><td><code>Math.ceil(x)</code></td><td>Hacia arriba (techo, $+\infty$)</td><td><code>5</code></td><td><code>5</code></td><td><code>-4</code></td></tr><tr><td><code>Math.trunc(x)</code></td><td>Elimina decimales (corta hacia <code>0</code>)</td><td><code>4</code></td><td><code>4</code></td><td><strong><code>-4</code></strong></td></tr><tr><td><code>Math.sign(x)</code></td><td>Devuelve <code>1</code>, <code>-1</code>, <code>0</code> o <code>-0</code> según el signo</td><td><code>1</code></td><td><code>1</code></td><td><code>-1</code></td></tr></tbody></table>
 <p style="margin:6px 0;line-height:1.6;">&gt; <strong>Diferencia clave <code>floor</code> vs <code>trunc</code>:</strong> Con números positivos son idénticos, pero con negativos <code>Math.floor(-4.2)</code> baja a <code>-5</code> mientras <code>Math.trunc(-4.2)</code> simplemente corta los decimales y devuelve <code>-4</code>.</p></div>
             </div>
             <div class="jr-slide" data-idx="1" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Aritmética, Potencias y Extremos</h3>
-                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Método | Descripción | Ejemplo |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.abs(x)</code> | Valor absoluto (siempre positivo) | <code>Math.abs(-15)</code> → <code>15</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.pow(base, exp)</code> | Potencia (equivale a <code>base ** exp</code>) | <code>Math.pow(2, 5)</code> → <code>32</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.sqrt(x)</code> / <code>Math.cbrt(x)</code> | Raíz cuadrada / raíz cúbica | <code>Math.sqrt(81)</code> → <code>9</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.max(...nums)</code> | El valor mayor de los argumentos | <code>Math.max(5, 12, 3)</code> → <code>12</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.min(...nums)</code> | El valor menor de los argumentos | <code>Math.min(5, 12, 3)</code> → <code>3</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>Math.hypot(a, b)</code> | Hipotenusa $\sqrt{a^2 + b^2}$ | <code>Math.hypot(3, 4)</code> → <code>5</code> |</p>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Método</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>Math.abs(x)</code></td><td>Valor absoluto (siempre positivo)</td><td><code>Math.abs(-15)</code> → <code>15</code></td></tr><tr><td><code>Math.pow(base, exp)</code></td><td>Potencia (equivale a <code>base ** exp</code>)</td><td><code>Math.pow(2, 5)</code> → <code>32</code></td></tr><tr><td><code>Math.sqrt(x)</code> / <code>Math.cbrt(x)</code></td><td>Raíz cuadrada / raíz cúbica</td><td><code>Math.sqrt(81)</code> → <code>9</code></td></tr><tr><td><code>Math.max(...nums)</code></td><td>El valor mayor de los argumentos</td><td><code>Math.max(5, 12, 3)</code> → <code>12</code></td></tr><tr><td><code>Math.min(...nums)</code></td><td>El valor menor de los argumentos</td><td><code>Math.min(5, 12, 3)</code> → <code>3</code></td></tr><tr><td><code>Math.hypot(a, b)</code></td><td>Hipotenusa $\sqrt{a^2 + b^2}$</td><td><code>Math.hypot(3, 4)</code> → <code>5</code></td></tr></tbody></table>
 <p style="margin:6px 0;line-height:1.6;">&gt; <strong>Tip con Arrays:</strong> <code>Math.max()</code> no acepta un array directamente. Usa el operador *spread*: <code>Math.max(...[10, 45, 22])</code> → <code>45</code>.</p></div>
             </div>
             <div class="jr-slide" data-idx="2" style="display:none;">
@@ -180,3 +177,5 @@ Number.isFinite(100);     // true (false para Infinity, -Infinity, NaN)</code></
     <script src="math.js"></script>
 </body>
 </html>
+
+

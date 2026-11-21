@@ -1,95 +1,95 @@
 /* Archivo: JAVASCRIPT MID LEVEL/Eventos/Eventos de Teclado/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-alt: #1e293b;
-    --border: #1f2937;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-alt: #1e293b; /* Variable CSS personalizada (--surface-alt) */
+    --border: #1f2937; /* Variable CSS personalizada (--border) */
+    --text: #e2e8f0; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #38bdf8; /* Variable CSS personalizada (--accent) */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+body { /* Regla de estilo para body */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* Familia tipográfica */
+    background: var(--bg); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 .container { width: min(1000px, 92%); margin-inline: auto; }
-.hero {
-    padding: 2rem 0 1.5rem;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
+.hero { /* Regla de estilo para .hero */
+    padding: 2rem 0 1.5rem; /* Relleno interior */
+    border-bottom: 1px solid var(--border); /* Borde inferior */
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent); /* Fondo o degradado */
 }
-.badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.12);
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    margin-bottom: 0.6rem;
+.badge { /* Regla de estilo para .badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    color: var(--accent); /* Color del texto */
+    background: rgba(56, 189, 248, 0.12); /* Fondo o degradado */
+    padding: 0.25rem 0.65rem; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    margin-bottom: 0.6rem; /* Margen exterior inferior */
 }
 .subtitle { color: var(--muted); }
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-    gap: 1.25rem;
-    padding: 1.75rem 0 3rem;
+.grid-layout { /* Regla de estilo para .grid-layout */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    padding: 1.75rem 0 3rem; /* Relleno interior */
 }
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
+.card { /* Regla de estilo para .card */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 12px; /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.9rem; /* Separación entre filas y columnas */
 }
 .desc { color: var(--muted); font-size: 0.92rem; }
-kbd {
-    background: var(--surface-alt);
-    border: 1px solid #475569;
-    border-radius: 4px;
-    padding: 0.1rem 0.35rem;
-    font-size: 0.82rem;
+kbd { /* Regla de estilo para kbd */
+    background: var(--surface-alt); /* Fondo o degradado */
+    border: 1px solid #475569; /* Borde del contenedor */
+    border-radius: 4px; /* Redondeo de esquinas */
+    padding: 0.1rem 0.35rem; /* Relleno interior */
+    font-size: 0.82rem; /* Tamaño de fuente */
 }
-input {
-    background: #020617;
-    color: var(--text);
-    border: 1px solid var(--surface-alt);
-    border-radius: 8px;
-    padding: 0.65rem 0.8rem;
-    font-size: 0.95rem;
+input { /* Regla de estilo para input */
+    background: #020617; /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid var(--surface-alt); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.65rem 0.8rem; /* Relleno interior */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
-.metrics {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem;
+.metrics { /* Regla de estilo para .metrics */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(3, 1fr); /* Definición de columnas de la grilla */
+    gap: 0.6rem; /* Separación entre filas y columnas */
 }
-.metric {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.65rem;
-    display: flex;
-    flex-direction: column;
+.metric { /* Regla de estilo para .metric */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.65rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
 }
 .metric span { font-size: 0.75rem; color: var(--muted); }
 .metric strong { color: var(--accent); font-family: ui-monospace, monospace; }
-.terminal {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.84rem;
-    min-height: 200px;
-    max-height: 200px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+.terminal { /* Regla de estilo para .terminal */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* Familia tipográfica */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    min-height: 200px; /* Alto mínimo permitido */
+    max-height: 200px; /* Alto máximo permitido */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.3rem; /* Separación entre filas y columnas */
 }

@@ -1,198 +1,198 @@
 /* Archivo: JAVASCRIPT MID LEVEL/Callbacks/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-alt: #1e293b;
-    --border: #1f2937;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
-    --accent-hover: #0ea5e9;
-    --success: #34d399;
-    --error: #f87171;
-    --warn: #fbbf24;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-alt: #1e293b; /* Variable CSS personalizada (--surface-alt) */
+    --border: #1f2937; /* Variable CSS personalizada (--border) */
+    --text: #e2e8f0; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #38bdf8; /* Variable CSS personalizada (--accent) */
+    --accent-hover: #0ea5e9; /* Variable CSS personalizada (--accent-hover) */
+    --success: #34d399; /* Variable CSS personalizada (--success) */
+    --error: #f87171; /* Variable CSS personalizada (--error) */
+    --warn: #fbbf24; /* Variable CSS personalizada (--warn) */
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
-body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
+body { /* Regla de estilo para body */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* Familia tipográfica */
+    background: var(--bg); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
-.container {
-    width: min(1100px, 92%);
-    margin-inline: auto;
+.container { /* Regla de estilo para .container */
+    width: min(1100px, 92%); /* Ancho del elemento */
+    margin-inline: auto; /* Propiedad CSS: margin-inline */
 }
 
-.hero {
-    padding: 2.2rem 0 1.5rem;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
+.hero { /* Regla de estilo para .hero */
+    padding: 2.2rem 0 1.5rem; /* Relleno interior */
+    border-bottom: 1px solid var(--border); /* Borde inferior */
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent); /* Fondo o degradado */
 }
 
-.badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.12);
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    margin-bottom: 0.6rem;
+.badge { /* Regla de estilo para .badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    letter-spacing: 0.06em; /* Espaciado entre letras */
+    color: var(--accent); /* Color del texto */
+    background: rgba(56, 189, 248, 0.12); /* Fondo o degradado */
+    padding: 0.25rem 0.65rem; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    margin-bottom: 0.6rem; /* Margen exterior inferior */
 }
 
-h1 {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
-    margin-bottom: 0.35rem;
+h1 { /* Regla de estilo para h1 */
+    font-size: clamp(1.6rem, 3vw, 2.2rem); /* Tamaño de fuente */
+    margin-bottom: 0.35rem; /* Margen exterior inferior */
 }
 
-.subtitle {
-    color: var(--muted);
+.subtitle { /* Regla de estilo para .subtitle */
+    color: var(--muted); /* Color del texto */
 }
 
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.25rem;
-    padding: 1.75rem 0 3rem;
+.grid-layout { /* Regla de estilo para .grid-layout */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    padding: 1.75rem 0 3rem; /* Relleno interior */
 }
 
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
+.card { /* Regla de estilo para .card */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 12px; /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.9rem; /* Separación entre filas y columnas */
 }
 
-.full-width {
-    grid-column: 1 / -1;
+.full-width { /* Regla de estilo para .full-width */
+    grid-column: 1 / -1; /* Ubicación/expansión en columnas */
 }
 
-h2 {
-    font-size: 1.1rem;
-    color: #f8fafc;
+h2 { /* Regla de estilo para h2 */
+    font-size: 1.1rem; /* Tamaño de fuente */
+    color: #f8fafc; /* Color del texto */
 }
 
-.desc {
-    color: var(--muted);
-    font-size: 0.92rem;
+.desc { /* Regla de estilo para .desc */
+    color: var(--muted); /* Color del texto */
+    font-size: 0.92rem; /* Tamaño de fuente */
 }
 
-.controls {
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
+.controls { /* Regla de estilo para .controls */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.6rem; /* Separación entre filas y columnas */
 }
 
-label {
-    font-size: 0.85rem;
-    color: var(--muted);
+label { /* Regla de estilo para label */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    color: var(--muted); /* Color del texto */
 }
 
-input {
-    background: var(--bg);
-    color: var(--text);
-    border: 1px solid var(--surface-alt);
-    border-radius: 8px;
-    padding: 0.55rem 0.75rem;
-    font-size: 0.95rem;
+input { /* Regla de estilo para input */
+    background: var(--bg); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid var(--surface-alt); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.55rem 0.75rem; /* Relleno interior */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
 
-input:focus {
-    outline: 2px solid var(--accent);
-    border-color: transparent;
+input:focus { /* Propiedad CSS: input */
+    outline: 2px solid var(--accent); /* Contorno de enfoque accesible */
+    border-color: transparent; /* Color del borde */
 }
 
-.btn-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+.btn-row { /* Regla de estilo para .btn-row */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
 
-.btn {
-    background: var(--surface-alt);
-    color: var(--text);
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 0.5rem 0.9rem;
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s ease, transform 0.1s ease;
+.btn { /* Regla de estilo para .btn */
+    background: var(--surface-alt); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid #334155; /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.5rem 0.9rem; /* Relleno interior */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: background 0.15s ease, transform 0.1s ease; /* Transición suave de propiedades */
 }
 
-.btn:hover {
-    background: #334155;
+.btn:hover { /* Regla de estilo para .btn:hover */
+    background: #334155; /* Fondo o degradado */
 }
 
-.btn.primary {
-    background: var(--accent);
-    color: #082f49;
-    border-color: transparent;
+.btn.primary { /* Regla de estilo para .btn.primary */
+    background: var(--accent); /* Fondo o degradado */
+    color: #082f49; /* Color del texto */
+    border-color: transparent; /* Color del borde */
 }
 
-.btn.primary:hover {
-    background: var(--accent-hover);
+.btn.primary:hover { /* Regla de estilo para .btn.primary:hover */
+    background: var(--accent-hover); /* Fondo o degradado */
 }
 
-.btn.small {
-    padding: 0.3rem 0.65rem;
-    font-size: 0.8rem;
+.btn.small { /* Regla de estilo para .btn.small */
+    padding: 0.3rem 0.65rem; /* Relleno interior */
+    font-size: 0.8rem; /* Tamaño de fuente */
 }
 
-.code-box {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    font-size: 0.82rem;
-    color: #7dd3fc;
-    overflow-x: auto;
+.code-box { /* Regla de estilo para .code-box */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.75rem; /* Relleno interior */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    color: #7dd3fc; /* Color del texto */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
 }
 
-.output {
-    background: rgba(15, 23, 42, 0.9);
-    border-left: 3px solid var(--accent);
-    padding: 0.75rem 0.9rem;
-    border-radius: 6px;
-    font-size: 0.92rem;
+.output { /* Regla de estilo para .output */
+    background: rgba(15, 23, 42, 0.9); /* Fondo o degradado */
+    border-left: 3px solid var(--accent); /* Borde izquierdo */
+    padding: 0.75rem 0.9rem; /* Relleno interior */
+    border-radius: 6px; /* Redondeo de esquinas */
+    font-size: 0.92rem; /* Tamaño de fuente */
 }
 
 .output.ok { border-left-color: var(--success); color: var(--success); }
 .output.err { border-left-color: var(--error); color: var(--error); }
 
-.terminal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.terminal-header { /* Regla de estilo para .terminal-header */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
 }
 
-.terminal {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.84rem;
-    min-height: 140px;
-    max-height: 240px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
+.terminal { /* Regla de estilo para .terminal */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; /* Familia tipográfica */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    min-height: 140px; /* Alto mínimo permitido */
+    max-height: 240px; /* Alto máximo permitido */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.35rem; /* Separación entre filas y columnas */
 }
 
 .log-line { color: var(--text); }

@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../slides-engine.css" />
     <script src="../slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%A7%AE%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
@@ -192,83 +195,104 @@
                 </div>
             </div>
         </section>
-        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Concepto Técnico">
+                <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: filter y Efectos Gráficos">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
-                <h2 class="slide-title">Concepto Técnico</h2>
+                <h2 class="slide-title">1. <code>filter</code> y <code>backdrop-filter</code> en CSS</h2>
             </div>
-            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>filter</code> aplica efectos gráficos en la etapa de post-renderizado. El</p>
-<p style="margin-bottom:8px;line-height:1.6;">navegador primero pinta el elemento y luego aplica el efecto como una</p>
-<p style="margin-bottom:8px;line-height:1.6;">capa adicional.</p>
-<ul class="styled-list">
-<li>-   No altera el layout.</li>
-<li>-   Se ejecuta en la fase de composición.</li>
-<li>-   Puede usar aceleración por GPU.</li>
-</ul></div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Efectos visuales en GPU</h3>
+                    <ul class="styled-list">
+                        <li><code>filter</code> aplica desenfoque, brillo, contraste o sombras sobre el elemento completo.</li>
+                        <li><code>backdrop-filter</code> aplica el efecto solo al fondo detrás de un contenedor translúcido (efecto cristal / <em>glassmorphism</em>).</li>
+                        <li><code>drop-shadow()</code> respeta la silueta transparente de PNG/SVG, a diferencia de <code>box-shadow</code>.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Ejemplo Glassmorphism</h3>
+                    <pre class="code-block"><code>.tarjeta-cristal {
+          background: rgba(15, 23, 42, 0.55);
+          backdrop-filter: blur(14px) saturate(140%);
+        }
+        .icono-png {
+          filter: drop-shadow(0 6px 12px rgba(0, 240, 255, 0.4));
+        }</code></pre>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Sintaxis">
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Funciones de filter">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
-                <h2 class="slide-title">Sintaxis</h2>
+                <h2 class="slide-title">2. Funciones Principales de <code>filter</code></h2>
             </div>
-            <div class="glass-card"><pre class="code-block"><code>selector {
-  filter: &lt;filter-function&gt;+;
-}</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;">Se pueden encadenar múltiples funciones:</p>
-<pre class="code-block"><code>filter: blur(5px) brightness(120%) contrast(110%);</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 2. BACKDROP-FILTER</p>
-<p style="margin-bottom:8px;line-height:1.6;">Aplica efectos al contenido detrás del elemento.</p>
-<pre class="code-block"><code>.card {
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.2);
-}</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 3. TRANSFORM</p>
-<p style="margin-bottom:8px;line-height:1.6;">No modifica el flujo del documento. Más eficiente que usar top/left.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 4. MIN(), MAX(), CLAMP()</p>
-<p style="margin-bottom:8px;line-height:1.6;">Ideal para tipografía fluida:</p>
-<pre class="code-block"><code>font-size: clamp(1rem, 1.5vw + 1rem, 2rem);</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 5. VARIABLES CSS</p>
-<pre class="code-block"><code>:root {
-  --primary-color: #3498db;
-}</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 6. CALC()</p>
-<pre class="code-block"><code>width: calc(100% - 80px);</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 7. PROPIEDADES DE SCROLL</p>
-<pre class="code-block"><code>html { scroll-behavior: smooth; }</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 8. INITIAL-LETTER</p>
-<pre class="code-block"><code>p::first-letter {
-  initial-letter: 3 2;
-}</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 9. UNIDADES VIEWPORT MODERNAS</p>
-<pre class="code-block"><code>height: 100dvh;</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 10. MIN-CONTENT, MAX-CONTENT Y FIT-CONTENT</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 11. COLOR-MIX()</p>
-<pre class="code-block"><code>background: color-mix(in lch, red 40%, blue);</code></pre></div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Función</th><th>Rango típico</th><th>Efecto visual</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>blur(px)</code></td><td><code>0px</code> a <code>20px+</code></td><td>Desenfoque gaussiano suave.</td></tr>
+                        <tr><td><code>brightness(%)</code></td><td><code>0%</code> a <code>200%</code></td><td>Oscurece o ilumina la imagen (<code>100%</code> = normal).</td></tr>
+                        <tr><td><code>contrast(%)</code></td><td><code>0%</code> a <code>200%</code></td><td>Aumenta o reduce la diferencia entre luces y sombras.</td></tr>
+                        <tr><td><code>grayscale(%)</code></td><td><code>0%</code> a <code>100%</code></td><td>Convierte a escala de grises.</td></tr>
+                        <tr><td><code>hue-rotate(deg)</code></td><td><code>0deg</code> a <code>360deg</code></td><td>Rota los tonos en el círculo cromático.</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Concepto Técnico">
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: clip-path y Recortes">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
-                <h2 class="slide-title">Concepto Técnico</h2>
+                <h2 class="slide-title">3. <code>clip-path</code>: Recorte Geométrico</h2>
             </div>
-            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>clip-path</code> permite recortar visualmente un elemento definiendo una</p>
-<p style="margin-bottom:8px;line-height:1.6;">región visible. Todo lo que quede fuera de esa región no se renderiza.</p>
-<ul class="styled-list">
-<li>-   No modifica el layout.</li>
-<li>-   Afecta únicamente la pintura (paint phase).</li>
-<li>-   Puede combinarse con animaciones y transform.</li>
-<li>-   Es acelerado por GPU en la mayoría de navegadores modernos.</li>
-</ul></div>
+            <div class="grid-2">
+                <div class="glass-card border-purple">
+                    <h3>Formas geométricas nativas</h3>
+                    <ul class="styled-list">
+                        <li><code>circle(50% at center)</code>: recorte circular perfecto.</li>
+                        <li><code>ellipse(45% 30% at 50% 50%)</code>: elipse adaptable.</li>
+                        <li><code>polygon(x1 y1, x2 y2, ...)</code>: triángulos, hexágonos o cortes diagonales.</li>
+                        <li><code>inset(10px round 16px)</code>: recorte rectangular con esquinas redondeadas.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-cyan">
+                    <h3>Ejemplo animable</h3>
+                    <pre class="code-block"><code>.banner-diagonal {
+          clip-path: polygon(0 0, 100% 0, 100% 82%, 0 100%);
+        }
+        .avatar-hex {
+          clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }</code></pre>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Sintaxis General">
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: calc(), clamp(), min(), max() y var()">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FUNCIONES_AVANZADAS.md</span>
-                <h2 class="slide-title">Sintaxis General</h2>
+                <h2 class="slide-title">4. Funciones Matemáticas y Custom Properties</h2>
             </div>
-            <div class="glass-card"><pre class="code-block"><code>selector {
-  clip-path: shape();
-}</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;">Puede usar: - <code>circle()</code> - <code>ellipse()</code> - <code>inset()</code> - <code>polygon()</code> -</p>
-<p style="margin-bottom:8px;line-height:1.6;"><code>path()</code></p></div>
+            <div class="grid-2">
+                <div class="glass-card border-emerald">
+                    <h3>Matemáticas fluidas</h3>
+                    <ul class="styled-list">
+                        <li><code>calc(100% - 2rem)</code>: mezcla unidades relativas y fijas (deja espacios alrededor de <code>+</code> y <code>-</code>).</li>
+                        <li><code>clamp(1.2rem, 3vw, 2.5rem)</code>: tipografía fluida con límite mínimo y máximo sin media queries.</li>
+                        <li><code>min()</code> y <code>max()</code>: eligen el menor o mayor valor dinámicamente.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-amber">
+                    <h3>Variables CSS (<code>var()</code>)</h3>
+                    <pre class="code-block"><code>:root {
+          --accent: #00f0ff;
+          --space: clamp(1rem, 2vw, 2rem);
+        }
+        .panel {
+          padding: var(--space);
+          border: 1px solid var(--accent, #38bdf8);
+        }</code></pre>
+                </div>
+            </div>
         </section>
 
         <!-- SLIDE 7: SIMULADOR CLAMP + COLOR-MIX -->

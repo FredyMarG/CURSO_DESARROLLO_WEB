@@ -10,28 +10,28 @@
 
 
 /* Definición de una fuente personalizada. */
-@font-face {
-    font-family: "montserrat";
-    src: url("fonts/Montserrat-Regular.ttf")format("truetype");
-    font-weight: 400;
+@font-face { /* Regla at-rule de CSS */
+    font-family: "montserrat"; /* Familia tipográfica */
+    src: url("fonts/Montserrat-Regular.ttf")format("truetype"); /* Propiedad CSS: src */
+    font-weight: 400; /* Grosor de la fuente */
 }
 
 
 
 
 /* Definición de una fuente personalizada. */
-@font-face {
-    font-family: "montserrat";
-    src: url("fonts/Montserrat-ExtraBold.ttf")format("truetype");
-    font-weight: 700;
+@font-face { /* Regla at-rule de CSS */
+    font-family: "montserrat"; /* Familia tipográfica */
+    src: url("fonts/Montserrat-ExtraBold.ttf")format("truetype"); /* Propiedad CSS: src */
+    font-weight: 700; /* Grosor de la fuente */
 }
 
 
 
 
 /* Definición de una fuente personalizada. */
-@font-face {
-    font-family: "montserrat";
-    src: url("fonts/Montserrat-ExtraLight.ttf")format("truetype");
-    font-weight: 100;
+@font-face { /* Regla at-rule de CSS */
+    font-family: "montserrat"; /* Familia tipográfica */
+    src: url("fonts/Montserrat-ExtraLight.ttf")format("truetype"); /* Propiedad CSS: src */
+    font-weight: 100; /* Grosor de la fuente */
 }

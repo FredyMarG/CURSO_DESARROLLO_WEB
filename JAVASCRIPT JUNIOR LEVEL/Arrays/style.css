@@ -1,25 +1,25 @@
 /* Archivo: JAVASCRIPT JUNIOR LEVEL/Arrays/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-2: #1e293b;
-    --border: #334155;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --accent: #a855f7;
-    --accent-soft: rgba(168, 85, 247, 0.16);
-    --radius: 14px;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-2: #1e293b; /* Variable CSS personalizada (--surface-2) */
+    --border: #334155; /* Variable CSS personalizada (--border) */
+    --text: #f1f5f9; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #a855f7; /* Variable CSS personalizada (--accent) */
+    --accent-soft: rgba(168, 85, 247, 0.16); /* Variable CSS personalizada (--accent-soft) */
+    --radius: 14px; /* Variable CSS personalizada (--radius) */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: radial-gradient(circle at top, #3b0764 0%, var(--bg) 55%);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-    padding: 2rem 1rem 4rem;
+body { /* Regla de estilo para body */
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Familia tipográfica */
+    background: radial-gradient(circle at top, #3b0764 0%, var(--bg) 55%); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    min-height: 100vh; /* Alto mínimo permitido */
+    line-height: 1.6; /* Altura de línea del texto */
+    padding: 2rem 1rem 4rem; /* Relleno interior */
 }
 
 .app-shell { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }

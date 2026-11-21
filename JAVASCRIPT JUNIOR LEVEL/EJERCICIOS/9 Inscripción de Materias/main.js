@@ -18,7 +18,7 @@ let nombre = document.getElementById("nombre"),         // Campo de texto para e
 // 2. BASE DE DATOS (ESTADO)
 // Objeto que almacena las materias y sus listas de alumnos inscritos.
 // Está fuera de la función para que los cambios persistan entre envíos del formulario.
-const materias = {
+const materias = { // Declara e inicializa "materias"
     matematicas: ['Carlos', 'Juan', 'Pedro', 'Maria', 'Luisa', 'Andres', 'Sofia', 'Diego', 'Camila'],
     fisica: ['Laura', 'Pedro', 'Andres', 'Juan', 'Valentina', 'Sofia', 'Mateo', 'Camila', 'Daniel'],
     quimica: ['Andres', 'Maria', 'Juan', 'Santiago', 'Camila', 'Valentina', 'Diego', 'Luisa', 'Mateo'],
@@ -39,7 +39,7 @@ const materias = {
  * Maneja el evento de 'submit', procesa los datos y actualiza la visualización.
  * @param {Event} e - Objeto del evento de envío del formulario.
  */
-function solucion(e) {
+function solucion(e) { // Declara función
     e.preventDefault(); // Detiene la recarga automática de la página para procesar con JS.
 
     // Activamos la visibilidad del contenedor de solución.
@@ -49,7 +49,7 @@ function solucion(e) {
     let materia = mat.value;         // Captura la materia seleccionada.
 
     // VALIDACIÓN 1: Campos vacíos.
-    if (alumno === "" || materia === "") {
+    if (alumno === "" || materia === "") { // Evalúa condición
         resultado.innerHTML = "🚨 Por favor, completa todos los campos."
         before.innerHTML = ""
         after.innerHTML = ""
@@ -74,7 +74,7 @@ function solucion(e) {
     `
 
     // VALIDACIÓN 2: Límite de cupo (Máximo 20 alumnos).
-    if (alumnos.length >= 20) {
+    if (alumnos.length >= 20) { // Evalúa condición
         resultado.innerHTML = `❌ Lo siento <b>${alumno}</b>, cupo lleno en <b>${materia}</b>`
         before.innerHTML = `
             <p>📘 Antes (${alumnos.length} alumnos):</p>
@@ -90,14 +90,14 @@ function solucion(e) {
         after.style.display = "none"
         resultado.className = "resultado error"
         
-        setTimeout(() => {
+        setTimeout(() => { // Instrucción JavaScript
             form.reset(); // Resetea el formulario tras un breve retardo.
         }, 1000)
         return
     }
 
     // VALIDACIÓN 3: Alumno ya inscrito (Evita duplicados).
-    if (alumnos.includes(alumno)) { 
+    if (alumnos.includes(alumno)) {  // Evalúa condición
         resultado.innerHTML = `⚠️ <b>${alumno.replace(/\b\w/g, l => l.toUpperCase())}</b> ya está inscrito en <b>${materia.replace(/\b\w/g, l => l.toUpperCase())}</b>`
         before.innerHTML = `
             <p>📘 ${alumnos.length} alumnos:</p>
@@ -111,14 +111,14 @@ function solucion(e) {
         after.innerHTML = ""
         after.style.display = "none"
         
-        setTimeout(() => {
-            form.reset();
+        setTimeout(() => { // Instrucción JavaScript
+            form.reset(); // Ejecuta llamada o método
         }, 1000)
         return
     }
 
     // PROCESO DE INSCRIPCIÓN: Agregamos al alumno al array correspondiente.
-    alumnos.push(alumno);
+    alumnos.push(alumno); // Ejecuta llamada o método
 
     // RENDERIZADO DEL ESTADO FINAL (AFTER)
     after.innerHTML = `
@@ -140,8 +140,8 @@ function solucion(e) {
     after.style.display = "block"
     before.style.display = "block"
     
-    setTimeout(() => {
-        form.reset();
+    setTimeout(() => { // Instrucción JavaScript
+        form.reset(); // Ejecuta llamada o método
     }, 1000)
 }
 
@@ -150,4 +150,4 @@ function solucion(e) {
  * 4. INICIALIZACIÓN
  * Agregamos el "escuchador de eventos" al formulario.
  */
-form.addEventListener("submit", solucion);
+form.addEventListener("submit", solucion); // Registra escuchador de eventos

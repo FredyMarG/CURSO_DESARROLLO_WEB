@@ -9,107 +9,107 @@
 
 
 /* Reset general: normaliza márgenes y box-sizing. */
-*{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+*{ /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    font-family: sans-serif; /* Familia tipográfica */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    --bg-color: #ff9464;
-    --card-color:#fff;
-    --darkcolor: #f62;
-    background-image: url("img/fondo.gif");
-    background-position: center;
-    background-size: cover;
+body{ /* Regla de estilo para body */
+    --bg-color: #ff9464; /* Variable CSS personalizada (--bg-color) */
+    --card-color:#fff; /* Variable CSS personalizada (--card-color) */
+    --darkcolor: #f62; /* Variable CSS personalizada (--darkcolor) */
+    background-image: url("img/fondo.gif"); /* Imagen o degradado de fondo */
+    background-position: center; /* Posición del fondo */
+    background-size: cover; /* Escalado del fondo */
 }
 
 
 
 /* Estilos del selector header. */
-header{
-    min-height: 200dvh;
-    display: flex;
-    justify-content: center;
-    mix-blend-mode: difference;
+header{ /* Regla de estilo para header */
+    min-height: 200dvh; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: center; /* Alineación en el eje principal */
+    mix-blend-mode: difference; /* Propiedad CSS: mix-blend-mode */
 }
 
 
 
 /* Estilos del selector .text-container. */
-.text-container{
-    min-height: 100vh;
-    position: fixed;
-    top: 0;
-    display: flex;
-    font-size: clamp(1rem, 9vw, 12rem );
-    color: #999;
-    font-weight: 600;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
-    padding: 3vw;
-    animation: aparecer-texto both;
-    animation-timeline: scroll();
+.text-container{ /* Regla de estilo para .text-container */
+    min-height: 100vh; /* Alto mínimo permitido */
+    position: fixed; /* Define el esquema de posicionamiento */
+    top: 0; /* Desplazamiento superior */
+    display: flex; /* Define el tipo de caja/layout */
+    font-size: clamp(1rem, 9vw, 12rem ); /* Tamaño de fuente */
+    color: #999; /* Color del texto */
+    font-weight: 600; /* Grosor de la fuente */
+    justify-content: space-between; /* Alineación en el eje principal */
+    width: 100%; /* Ancho del elemento */
+    align-items: center; /* Alineación en el eje cruzado */
+    padding: 3vw; /* Relleno interior */
+    animation: aparecer-texto both; /* Animación con keyframes */
+    animation-timeline: scroll(); /* Propiedad CSS: animation-timeline */
 }
 
 
 
 /* Estilos del selector .left-text. */
-.left-text{
-    color:#48e;
-    padding-left: 4vw;
-    filter: drop-shadow(0px 0px 1px #48e) drop-shadow(0px 0px 9px #48e);
+.left-text{ /* Regla de estilo para .left-text */
+    color:#48e; /* Color del texto */
+    padding-left: 4vw; /* Relleno interior izquierdo */
+    filter: drop-shadow(0px 0px 1px #48e) drop-shadow(0px 0px 9px #48e); /* Filtro gráfico aplicado al elemento */
 }
 
 
 
 /* Estilos del selector .right-text. */
-.right-text{
-    font-weight: 900;
+.right-text{ /* Regla de estilo para .right-text */
+    font-weight: 900; /* Grosor de la fuente */
 }
 
 
 
 /* Estilos del selector img. */
-img{
-    mix-blend-mode: screen;
-    filter: grayscale();
-    position: fixed;
-    mix-blend-mode: darken;
-    top: 0;
-    max-width: 100dvw;
-    animation: aparecer both;
-    animation-timeline: scroll();
+img{ /* Regla de estilo para img */
+    mix-blend-mode: screen; /* Propiedad CSS: mix-blend-mode */
+    filter: grayscale(); /* Filtro gráfico aplicado al elemento */
+    position: fixed; /* Define el esquema de posicionamiento */
+    mix-blend-mode: darken; /* Propiedad CSS: mix-blend-mode */
+    top: 0; /* Desplazamiento superior */
+    max-width: 100dvw; /* Ancho máximo permitido */
+    animation: aparecer both; /* Animación con keyframes */
+    animation-timeline: scroll(); /* Propiedad CSS: animation-timeline */
 }
 
 
 
 
 /* Animación aparecer: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes aparecer {
+@keyframes aparecer { /* Definición de animación por fotogramas clave */
 
 
 /* Estilos del selector 0%. */
-    0%{
-        opacity: 0;
-        filter: grayscale();
-        translate: 0 -20%;
-        scale: .7;
+    0%{ /* Regla de estilo para 0% */
+        opacity: 0; /* Nivel de transparencia */
+        filter: grayscale(); /* Filtro gráfico aplicado al elemento */
+        translate: 0 -20%; /* Propiedad CSS: translate */
+        scale: .7; /* Propiedad CSS: scale */
     }
 
 
 
 /* Estilos del selector 100%. */
-    100%{
-        opacity: 1;
-        filter: grayscale();
-        translate: 0 0;
-        scale: 1;
+    100%{ /* Regla de estilo para 100% */
+        opacity: 1; /* Nivel de transparencia */
+        filter: grayscale(); /* Filtro gráfico aplicado al elemento */
+        translate: 0 0; /* Propiedad CSS: translate */
+        scale: 1; /* Propiedad CSS: scale */
     }
 }
 
@@ -117,23 +117,23 @@ img{
 
 
 /* Animación aparecer-texto: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes aparecer-texto {
+@keyframes aparecer-texto { /* Definición de animación por fotogramas clave */
 
 
 /* Estilos del selector 0%. */
-    0%{
-        opacity: 0;
-        translate: 0 20%;
-        scale: 2;
+    0%{ /* Regla de estilo para 0% */
+        opacity: 0; /* Nivel de transparencia */
+        translate: 0 20%; /* Propiedad CSS: translate */
+        scale: 2; /* Propiedad CSS: scale */
     }
 
 
 
 /* Estilos del selector 100%. */
-    100%{
-        opacity: 1;
-        translate: 0 0;
-        scale: 1;
+    100%{ /* Regla de estilo para 100% */
+        opacity: 1; /* Nivel de transparencia */
+        translate: 0 0; /* Propiedad CSS: translate */
+        scale: 1; /* Propiedad CSS: scale */
     }
 }
 
@@ -141,11 +141,11 @@ img{
 
 
 /* Media query: adapta el diseño a pantallas o condiciones específicas. */
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 900px) { /* Regla responsiva según tamaño de pantalla */
 
 
 /* Estilos del selector .text-container. */
-    .text-container{
-        justify-content: space-evenly;
+    .text-container{ /* Regla de estilo para .text-container */
+        justify-content: space-evenly; /* Alineación en el eje principal */
     }
 }

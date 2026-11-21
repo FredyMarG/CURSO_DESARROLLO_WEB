@@ -4,115 +4,115 @@
    ========================================================================== */
 
 /* Cápsula flotante fija en la esquina inferior derecha */
-.ej-hud {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    background: rgba(5, 7, 17, 0.92);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(0, 240, 255, 0.45);
-    border-radius: 999px;
-    padding: 7px 12px;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.2), 0 12px 30px rgba(0, 0, 0, 0.55);
-    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-    color: #f8fafc;
+.ej-hud { /* Regla de estilo para .ej-hud */
+    position: fixed; /* Define el esquema de posicionamiento */
+    bottom: 16px; /* Desplazamiento inferior */
+    right: 16px; /* Desplazamiento derecho */
+    z-index: 9999; /* Orden de apilamiento en el eje Z */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 8px; /* Separación entre filas y columnas */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    background: rgba(5, 7, 17, 0.92); /* Fondo o degradado */
+    backdrop-filter: blur(14px); /* Filtro aplicado al fondo detrás del elemento */
+    border: 1px solid rgba(0, 240, 255, 0.45); /* Borde del contenedor */
+    border-radius: 999px; /* Redondeo de esquinas */
+    padding: 7px 12px; /* Relleno interior */
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.2), 0 12px 30px rgba(0, 0, 0, 0.55); /* Sombra proyectada */
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Familia tipográfica */
+    color: #f8fafc; /* Color del texto */
 }
 
 /* Insignia con el nombre del proyecto */
-.ej-hud-title {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: #00f0ff;
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.45);
-    padding: 0 6px;
+.ej-hud-title { /* Regla de estilo para .ej-hud-title */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    color: #00f0ff; /* Color del texto */
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.45); /* Sombra del texto */
+    padding: 0 6px; /* Relleno interior */
 }
 
 /* Botones y enlaces del HUD */
-.ej-hud-btn {
-    background: rgba(255, 255, 255, 0.07);
-    color: #f8fafc;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 999px;
-    padding: 5px 11px;
-    font-size: 0.76rem;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.ej-hud-btn { /* Regla de estilo para .ej-hud-btn */
+    background: rgba(255, 255, 255, 0.07); /* Fondo o degradado */
+    color: #f8fafc; /* Color del texto */
+    border: 1px solid rgba(255, 255, 255, 0.16); /* Borde del contenedor */
+    border-radius: 999px; /* Redondeo de esquinas */
+    padding: 5px 11px; /* Relleno interior */
+    font-size: 0.76rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    text-decoration: none; /* Decoración del texto */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
 
-.ej-hud-btn:hover {
-    background: #00f0ff;
-    color: #050711;
-    border-color: #00f0ff;
-    box-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
+.ej-hud-btn:hover { /* Regla de estilo para .ej-hud-btn:hover */
+    background: #00f0ff; /* Fondo o degradado */
+    color: #050711; /* Color del texto */
+    border-color: #00f0ff; /* Color del borde */
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.5); /* Sombra proyectada */
 }
 
 /* Cajón lateral deslizable para leer explicación y CSS en vivo */
-.ej-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: min(440px, 94vw);
-    height: 100vh;
-    background: rgba(7, 10, 19, 0.96);
-    backdrop-filter: blur(18px);
-    border-left: 1px solid rgba(56, 189, 248, 0.3);
-    z-index: 10000;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transform: translateX(105%);
-    transition: transform 0.28s ease;
-    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-    color: #f1f5f9;
-    box-shadow: -16px 0 40px rgba(0, 0, 0, 0.55);
+.ej-drawer { /* Regla de estilo para .ej-drawer */
+    position: fixed; /* Define el esquema de posicionamiento */
+    top: 0; /* Desplazamiento superior */
+    right: 0; /* Desplazamiento derecho */
+    width: min(440px, 94vw); /* Ancho del elemento */
+    height: 100vh; /* Alto del elemento */
+    background: rgba(7, 10, 19, 0.96); /* Fondo o degradado */
+    backdrop-filter: blur(18px); /* Filtro aplicado al fondo detrás del elemento */
+    border-left: 1px solid rgba(56, 189, 248, 0.3); /* Borde izquierdo */
+    z-index: 10000; /* Orden de apilamiento en el eje Z */
+    padding: 20px; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 12px; /* Separación entre filas y columnas */
+    transform: translateX(105%); /* Transformación 2D/3D (escala, rotación, traslación) */
+    transition: transform 0.28s ease; /* Transición suave de propiedades */
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Familia tipográfica */
+    color: #f1f5f9; /* Color del texto */
+    box-shadow: -16px 0 40px rgba(0, 0, 0, 0.55); /* Sombra proyectada */
 }
 
-.ej-drawer.open {
-    transform: translateX(0);
+.ej-drawer.open { /* Regla de estilo para .ej-drawer.open */
+    transform: translateX(0); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
-.ej-drawer-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
+.ej-drawer-head { /* Regla de estilo para .ej-drawer-head */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 10px; /* Separación entre filas y columnas */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borde inferior */
+    padding-bottom: 10px; /* Relleno interior inferior */
 }
 
-.ej-drawer-head h3 {
-    margin: 0;
-    font-size: 1.02rem;
-    color: #38bdf8;
+.ej-drawer-head h3 { /* Regla de estilo para .ej-drawer-head h3 */
+    margin: 0; /* Margen exterior */
+    font-size: 1.02rem; /* Tamaño de fuente */
+    color: #38bdf8; /* Color del texto */
 }
 
-.ej-drawer-desc {
-    margin: 0;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    color: #cbd5e1;
+.ej-drawer-desc { /* Regla de estilo para .ej-drawer-desc */
+    margin: 0; /* Margen exterior */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    line-height: 1.5; /* Altura de línea del texto */
+    color: #cbd5e1; /* Color del texto */
 }
 
-.ej-drawer-code {
-    flex: 1;
-    overflow: auto;
-    margin: 0;
-    padding: 14px;
-    background: #050811;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.78rem;
-    line-height: 1.55;
-    color: #34d399;
-    white-space: pre-wrap;
-    word-break: break-word;
+.ej-drawer-code { /* Regla de estilo para .ej-drawer-code */
+    flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+    overflow: auto; /* Control de contenido desbordado */
+    margin: 0; /* Margen exterior */
+    padding: 14px; /* Relleno interior */
+    background: #050811; /* Fondo o degradado */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde del contenedor */
+    border-radius: 12px; /* Redondeo de esquinas */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    line-height: 1.55; /* Altura de línea del texto */
+    color: #34d399; /* Color del texto */
+    white-space: pre-wrap; /* Control de espacios y saltos de línea */
+    word-break: break-word; /* Control de quiebre de palabras */
 }

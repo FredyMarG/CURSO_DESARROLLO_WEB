@@ -9,116 +9,116 @@
 
 
 /* Reset general: normaliza márgenes y box-sizing. */
-*{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+*{ /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    font-family: sans-serif; /* Familia tipográfica */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    --bg-color: color-mix(in srgb, #f62 70%, #fff);
-    --cb-color:#fff;
-    --darkcolor: #f62;
-    background-color: var(--bg-color);
+body{ /* Regla de estilo para body */
+    --bg-color: color-mix(in srgb, #f62 70%, #fff); /* Variable CSS personalizada (--bg-color) */
+    --cb-color:#fff; /* Variable CSS personalizada (--cb-color) */
+    --darkcolor: #f62; /* Variable CSS personalizada (--darkcolor) */
+    background-color: var(--bg-color); /* Color de fondo */
 }
 
 
 
 /* Estilos del selector .chat. */
-.chat{
-    max-width: clamp(300px, 70%, 900pc);
-    background-color: var(--cb-color);
-    margin: 50px auto;
-    border-radius: 20px;
-    box-shadow: 2px 2px 6px #0003;
+.chat{ /* Regla de estilo para .chat */
+    max-width: clamp(300px, 70%, 900pc); /* Ancho máximo permitido */
+    background-color: var(--cb-color); /* Color de fondo */
+    margin: 50px auto; /* Margen exterior */
+    border-radius: 20px; /* Redondeo de esquinas */
+    box-shadow: 2px 2px 6px #0003; /* Sombra proyectada */
 }
 
 
 
 /* Estilos del selector .chat-user. */
-.chat-user{
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid  var(--darkcolor);
+.chat-user{ /* Regla de estilo para .chat-user */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    border-bottom: 1px solid  var(--darkcolor); /* Borde inferior */
 }
 
 
 
 /* Estilos del selector .chat-user img. */
-.chat-user img{
-    max-width: 2.3rem;
-    border-radius: 50%;
-    margin: 6px;
+.chat-user img{ /* Regla de estilo para .chat-user img */
+    max-width: 2.3rem; /* Ancho máximo permitido */
+    border-radius: 50%; /* Redondeo de esquinas */
+    margin: 6px; /* Margen exterior */
 }
 
 
 
 /* Estilos del selector .chat-user span. */
-.chat-user span{
-    margin-left: 5px;
-    font-size: .9rem;
+.chat-user span{ /* Regla de estilo para .chat-user span */
+    margin-left: 5px; /* Margen exterior izquierdo */
+    font-size: .9rem; /* Tamaño de fuente */
 }
 
 
 
 /* Estilos del selector .chat-content. */
-.chat-content{
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
+.chat-content{ /* Regla de estilo para .chat-content */
+    padding: 12px; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
 }
 
 
 
 /* Estilos del selector .msg. */
-.msg{
-    background-color: var(--bg-color);
-    color: #fff;
-    font-size: .6rem;
-    padding: 7px;
-    border-radius: 9px 9px 9px 0;
-    position: relative;
-    z-index: 10;
-    max-width: clamp(300px, 70%, 600px);
-    margin: 6px;
-    width: fit-content;
+.msg{ /* Regla de estilo para .msg */
+    background-color: var(--bg-color); /* Color de fondo */
+    color: #fff; /* Color del texto */
+    font-size: .6rem; /* Tamaño de fuente */
+    padding: 7px; /* Relleno interior */
+    border-radius: 9px 9px 9px 0; /* Redondeo de esquinas */
+    position: relative; /* Define el esquema de posicionamiento */
+    z-index: 10; /* Orden de apilamiento en el eje Z */
+    max-width: clamp(300px, 70%, 600px); /* Ancho máximo permitido */
+    margin: 6px; /* Margen exterior */
+    width: fit-content; /* Ancho del elemento */
 }
 
 
 
 /* Pseudo-elemento .msg::before: agrega contenido o decoración adicional. */
-.msg::before{
-    content: '';
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    background-color: var(--bg-color);
-    bottom: -3px;
-    left: -4px;
-    clip-path: polygon(43% 0, 0 100%, 100% 68%);
-    z-index: -1;
+.msg::before{ /* Regla de estilo para .msg::before */
+    content: ''; /* Contenido generado para pseudoelemento */
+    position: absolute; /* Define el esquema de posicionamiento */
+    height: 18px; /* Alto del elemento */
+    width: 18px; /* Ancho del elemento */
+    background-color: var(--bg-color); /* Color de fondo */
+    bottom: -3px; /* Desplazamiento inferior */
+    left: -4px; /* Desplazamiento izquierdo */
+    clip-path: polygon(43% 0, 0 100%, 100% 68%); /* Propiedad CSS: clip-path */
+    z-index: -1; /* Orden de apilamiento en el eje Z */
 }
 
 
 
 /* Estilos del selector .self. */
-.self{
-    background-color: var(--darkcolor);
-    margin-left: auto;
-    border-radius: 9px 9px 0px 9px;
+.self{ /* Regla de estilo para .self */
+    background-color: var(--darkcolor); /* Color de fondo */
+    margin-left: auto; /* Margen exterior izquierdo */
+    border-radius: 9px 9px 0px 9px; /* Redondeo de esquinas */
 }
 
 
 
 /* Pseudo-elemento .self::before: agrega contenido o decoración adicional. */
-.self::before{
-    background-color: var(--darkcolor);
-    clip-path: polygon(57% 0, 100% 100%, 0% 68%);
-    bottom: -3px;
-    left: auto;
-    right: -4px;
+.self::before{ /* Regla de estilo para .self::before */
+    background-color: var(--darkcolor); /* Color de fondo */
+    clip-path: polygon(57% 0, 100% 100%, 0% 68%); /* Propiedad CSS: clip-path */
+    bottom: -3px; /* Desplazamiento inferior */
+    left: auto; /* Desplazamiento izquierdo */
+    right: -4px; /* Desplazamiento derecho */
 }

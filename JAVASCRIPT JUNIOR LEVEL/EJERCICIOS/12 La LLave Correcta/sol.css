@@ -1,180 +1,180 @@
 /* Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/sol.css — Estilos/lógica del módulo de aprendizaje */
-* {
-    box-sizing: border-box;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    background: radial-gradient(circle at top left, #0f172a, #070a13 65%);
-    color: #f1f5f9;
-    font-family: system-ui, -apple-system, sans-serif;
-    overflow-x: hidden;
-    padding: 24px 16px 48px;
+body { /* Regla de estilo para body */
+    margin: 0; /* Margen exterior */
+    min-height: 100vh; /* Alto mínimo permitido */
+    background: radial-gradient(circle at top left, #0f172a, #070a13 65%); /* Fondo o degradado */
+    color: #f1f5f9; /* Color del texto */
+    font-family: system-ui, -apple-system, sans-serif; /* Familia tipográfica */
+    overflow-x: hidden; /* Control de desbordamiento horizontal */
+    padding: 24px 16px 48px; /* Relleno interior */
 }
 
-.top-header {
-    max-width: 1120px;
-    margin: 0 auto 24px;
-    text-align: center;
+.top-header { /* Regla de estilo para .top-header */
+    max-width: 1120px; /* Ancho máximo permitido */
+    margin: 0 auto 24px; /* Margen exterior */
+    text-align: center; /* Alineación horizontal del texto */
 }
 
-.back-btn {
-    display: inline-block;
-    margin-bottom: 12px;
-    color: #38bdf8;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    padding: 6px 14px;
-    border-radius: 999px;
-    transition: background-color 0.2s;
+.back-btn { /* Regla de estilo para .back-btn */
+    display: inline-block; /* Define el tipo de caja/layout */
+    margin-bottom: 12px; /* Margen exterior inferior */
+    color: #38bdf8; /* Color del texto */
+    text-decoration: none; /* Decoración del texto */
+    font-weight: 600; /* Grosor de la fuente */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    border: 1px solid rgba(56, 189, 248, 0.35); /* Borde del contenedor */
+    padding: 6px 14px; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    transition: background-color 0.2s; /* Transición suave de propiedades */
 }
 
-.back-btn:hover {
-    background: rgba(56, 189, 248, 0.14);
+.back-btn:hover { /* Regla de estilo para .back-btn:hover */
+    background: rgba(56, 189, 248, 0.14); /* Fondo o degradado */
 }
 
-.top-header h1 {
-    margin: 0 0 10px;
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
+.top-header h1 { /* Regla de estilo para .top-header h1 */
+    margin: 0 0 10px; /* Margen exterior */
+    font-size: clamp(1.6rem, 3vw, 2.2rem); /* Tamaño de fuente */
 }
 
-.status-pill {
-    display: inline-block;
-    margin: 0;
-    padding: 8px 18px;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.85);
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    color: #94a3b8;
-    font-size: 0.92rem;
+.status-pill { /* Regla de estilo para .status-pill */
+    display: inline-block; /* Define el tipo de caja/layout */
+    margin: 0; /* Margen exterior */
+    padding: 8px 18px; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(15, 23, 42, 0.85); /* Fondo o degradado */
+    border: 1px solid rgba(56, 189, 248, 0.35); /* Borde del contenedor */
+    color: #94a3b8; /* Color del texto */
+    font-size: 0.92rem; /* Tamaño de fuente */
 }
 
-.status-pill.has-selection {
-    color: #6ee7b7;
-    border-color: #10b981;
+.status-pill.has-selection { /* Regla de estilo para .status-pill.has-selection */
+    color: #6ee7b7; /* Color del texto */
+    border-color: #10b981; /* Color del borde */
 }
 
-.flex-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+.flex-container { /* Regla de estilo para .flex-container */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 0 auto; /* Margen exterior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 20px; /* Separación entre filas y columnas */
 }
 
-.flex-item {
-    flex: 1 1 250px;
-    max-width: 280px;
-    color: #e2e8f0;
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.75));
-    backdrop-filter: blur(12px);
-    --current-color: #38bdf8;
-    border: 2px solid var(--current-color);
-    border-radius: 20px;
-    padding: 1.5rem 1.25rem;
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-    text-align: center;
-    cursor: pointer;
+.flex-item { /* Regla de estilo para .flex-item */
+    flex: 1 1 250px; /* Factor de crecimiento, encogimiento y base flex */
+    max-width: 280px; /* Ancho máximo permitido */
+    color: #e2e8f0; /* Color del texto */
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.75)); /* Fondo o degradado */
+    backdrop-filter: blur(12px); /* Filtro aplicado al fondo detrás del elemento */
+    --current-color: #38bdf8; /* Variable CSS personalizada (--current-color) */
+    border: 2px solid var(--current-color); /* Borde del contenedor */
+    border-radius: 20px; /* Redondeo de esquinas */
+    padding: 1.5rem 1.25rem; /* Relleno interior */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35); /* Sombra proyectada */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; /* Transición suave de propiedades */
+    text-align: center; /* Alineación horizontal del texto */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
 
-.flex-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.25);
+.flex-item:hover { /* Regla de estilo para .flex-item:hover */
+    transform: translateY(-6px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 24px rgba(56, 189, 248, 0.25); /* Sombra proyectada */
 }
 
-.flex-item:focus-visible {
-    outline: 3px solid #f59e0b;
-    outline-offset: 3px;
+.flex-item:focus-visible { /* Regla de estilo para .flex-item:focus-visible */
+    outline: 3px solid #f59e0b; /* Contorno de enfoque accesible */
+    outline-offset: 3px; /* Separación del contorno de enfoque */
 }
 
-.flex-item.selected {
-    --current-color: #10b981;
-    transform: translateY(-6px) scale(1.02);
-    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 28px rgba(16, 185, 129, 0.4);
-    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.88));
+.flex-item.selected { /* Regla de estilo para .flex-item.selected */
+    --current-color: #10b981; /* Variable CSS personalizada (--current-color) */
+    transform: translateY(-6px) scale(1.02); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 20px 36px rgba(0, 0, 0, 0.45), 0 0 28px rgba(16, 185, 129, 0.4); /* Sombra proyectada */
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.16), rgba(15, 23, 42, 0.88)); /* Fondo o degradado */
 }
 
-h2, h3 {
-    margin: 0 0 6px;
+h2, h3 { /* Regla de estilo para h2, h3 */
+    margin: 0 0 6px; /* Margen exterior */
 }
 
-h2 {
-    font-size: 1.2rem;
-    color: #fff;
+h2 { /* Regla de estilo para h2 */
+    font-size: 1.2rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
 }
 
-h3 {
-    font-size: 0.98rem;
-    color: #38bdf8;
-    font-weight: 600;
+h3 { /* Regla de estilo para h3 */
+    font-size: 0.98rem; /* Tamaño de fuente */
+    color: #38bdf8; /* Color del texto */
+    font-weight: 600; /* Grosor de la fuente */
 }
 
-p {
-    margin: 6px 0 0;
-    color: #cbd5e1;
+p { /* Regla de estilo para p */
+    margin: 6px 0 0; /* Margen exterior */
+    color: #cbd5e1; /* Color del texto */
 }
 
-p b {
-    color: #34d399;
+p b { /* Regla de estilo para p b */
+    color: #34d399; /* Color del texto */
 }
 
-.llave-img {
-    width: 100%;
-    max-width: 220px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 12px;
+.llave-img { /* Regla de estilo para .llave-img */
+    width: 100%; /* Ancho del elemento */
+    max-width: 220px; /* Ancho máximo permitido */
+    height: 150px; /* Alto del elemento */
+    object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
+    border-radius: 12px; /* Redondeo de esquinas */
+    margin-bottom: 12px; /* Margen exterior inferior */
 }
 
-form {
-    width: 100%;
-    text-align: center;
-    padding: 36px 16px 12px;
+form { /* Regla de estilo para form */
+    width: 100%; /* Ancho del elemento */
+    text-align: center; /* Alineación horizontal del texto */
+    padding: 36px 16px 12px; /* Relleno interior */
 }
 
-input[type="submit"] {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: #052e16;
-    font-weight: 800;
-    border: none;
-    padding: 14px 40px;
-    border-radius: 12px;
-    font-size: 1rem;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: transform 0.2s ease, filter 0.2s ease;
+input[type="submit"] { /* Regla de estilo para input[type="submit"] */
+    background: linear-gradient(135deg, #10b981, #059669); /* Fondo o degradado */
+    color: #052e16; /* Color del texto */
+    font-weight: 800; /* Grosor de la fuente */
+    border: none; /* Borde del contenedor */
+    padding: 14px 40px; /* Relleno interior */
+    border-radius: 12px; /* Redondeo de esquinas */
+    font-size: 1rem; /* Tamaño de fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: transform 0.2s ease, filter 0.2s ease; /* Transición suave de propiedades */
 }
 
-input[type="submit"]:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08);
+input[type="submit"]:hover { /* Regla de estilo para input[type="submit"]:hover */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    filter: brightness(1.08); /* Filtro gráfico aplicado al elemento */
 }
 
-.result-box {
-    max-width: 480px;
-    margin: 18px auto 0;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-weight: 600;
-    display: none;
+.result-box { /* Regla de estilo para .result-box */
+    max-width: 480px; /* Ancho máximo permitido */
+    margin: 18px auto 0; /* Margen exterior */
+    padding: 12px 18px; /* Relleno interior */
+    border-radius: 12px; /* Redondeo de esquinas */
+    font-weight: 600; /* Grosor de la fuente */
+    display: none; /* Define el tipo de caja/layout */
 }
 
-.result-box.ok {
-    display: block;
-    background: rgba(16, 185, 129, 0.14);
-    border: 1px solid rgba(16, 185, 129, 0.45);
-    color: #6ee7b7;
+.result-box.ok { /* Regla de estilo para .result-box.ok */
+    display: block; /* Define el tipo de caja/layout */
+    background: rgba(16, 185, 129, 0.14); /* Fondo o degradado */
+    border: 1px solid rgba(16, 185, 129, 0.45); /* Borde del contenedor */
+    color: #6ee7b7; /* Color del texto */
 }
 
-.result-box.err {
-    display: block;
-    background: rgba(244, 63, 94, 0.14);
-    border: 1px solid rgba(244, 63, 94, 0.45);
-    color: #fda4af;
+.result-box.err { /* Regla de estilo para .result-box.err */
+    display: block; /* Define el tipo de caja/layout */
+    background: rgba(244, 63, 94, 0.14); /* Fondo o degradado */
+    border: 1px solid rgba(244, 63, 94, 0.45); /* Borde del contenedor */
+    color: #fda4af; /* Color del texto */
 }

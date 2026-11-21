@@ -1,14 +1,14 @@
 /* Archivo: JAVASCRIPT JUNIOR LEVEL/Dom/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-2: #1e293b;
-    --border: #334155;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --accent: #0ea5e9;
-    --accent-soft: rgba(14, 165, 233, 0.16);
-    --radius: 14px;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-2: #1e293b; /* Variable CSS personalizada (--surface-2) */
+    --border: #334155; /* Variable CSS personalizada (--border) */
+    --text: #f1f5f9; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #0ea5e9; /* Variable CSS personalizada (--accent) */
+    --accent-soft: rgba(14, 165, 233, 0.16); /* Variable CSS personalizada (--accent-soft) */
+    --radius: 14px; /* Variable CSS personalizada (--radius) */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,43 +33,43 @@ button.secondary { background: var(--surface-2); border: 1px solid var(--border)
 .output { background: #020617; border: 1px solid var(--border); border-radius: 8px; padding: 0.85rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.88rem; color: #e2e8f0; min-height: 3.2rem; white-space: pre-wrap; word-break: break-word; }
 .code-preview { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 0.75rem 1rem; font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; font-size: 0.82rem; color: #bae6fd; overflow-x: auto; }
 
-.preview-box {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    transition: all 0.2s ease;
+.preview-box { /* Regla de estilo para .preview-box */
+    background: var(--surface-2); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 10px; /* Redondeo de esquinas */
+    padding: 1rem; /* Relleno interior */
+    text-align: center; /* Alineación horizontal del texto */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
-.preview-box.destacado {
-    border-color: var(--accent);
-    background: rgba(14, 165, 233, 0.15);
-    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25);
-    font-weight: 700;
+.preview-box.destacado { /* Regla de estilo para .preview-box.destacado */
+    border-color: var(--accent); /* Color del borde */
+    background: rgba(14, 165, 233, 0.15); /* Fondo o degradado */
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25); /* Sombra proyectada */
+    font-weight: 700; /* Grosor de la fuente */
 }
 .preview-box.grande { font-size: 1.35rem; color: #38bdf8; }
 
-.dom-lista {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.dom-lista { /* Regla de estilo para .dom-lista */
+    list-style: none; /* Propiedad CSS: list-style */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.5rem; /* Separación entre filas y columnas */
 }
-.dom-lista li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
+.dom-lista li { /* Regla de estilo para .dom-lista li */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    background: var(--surface-2); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.5rem 0.75rem; /* Relleno interior */
+    font-size: 0.9rem; /* Tamaño de fuente */
 }
-.dom-lista .btn-del {
-    background: #ef4444;
-    color: #fff;
-    padding: 0.25rem 0.6rem;
-    font-size: 0.8rem;
+.dom-lista .btn-del { /* Regla de estilo para .dom-lista .btn-del */
+    background: #ef4444; /* Fondo o degradado */
+    color: #fff; /* Color del texto */
+    padding: 0.25rem 0.6rem; /* Relleno interior */
+    font-size: 0.8rem; /* Tamaño de fuente */
 }
 
 .console-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; }

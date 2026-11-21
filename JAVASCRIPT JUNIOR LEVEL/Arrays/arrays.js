@@ -2,99 +2,99 @@
  * GUÍA INTERACTIVA: ARRAYS Y MÉTODOS (ES2023+)
  */
 
-"use strict";
+"use strict"; // Activa el modo estricto de JavaScript
 
-const liveConsole = document.getElementById("live-console");
+const liveConsole = document.getElementById("live-console"); // Obtiene referencia DOM para "liveConsole"
 
-function registrar(mensaje, tipo = "ok") {
-    const linea = document.createElement("div");
-    linea.className = `log-line ${tipo}`;
-    linea.textContent = `> ${mensaje}`;
-    liveConsole.append(linea);
-    liveConsole.scrollTop = liveConsole.scrollHeight;
-    console.log(mensaje);
+function registrar(mensaje, tipo = "ok") { // Declara función
+    const linea = document.createElement("div"); // Crea nuevo elemento DOM "linea"
+    linea.className = `log-line ${tipo}`; // Asigna valor
+    linea.textContent = `> ${mensaje}`; // Actualiza contenido en el DOM
+    liveConsole.append(linea); // Inserta nodo en el DOM
+    liveConsole.scrollTop = liveConsole.scrollHeight; // Asigna valor
+    console.log(mensaje); // Imprime salida en consola
 }
 
 // 1. Métodos Mutables
-let frutas = ["Manzana", "Pera", "Naranja"];
-const outMut = document.getElementById("out-arr-mut");
+let frutas = ["Manzana", "Pera", "Naranja"]; // Declara e inicializa "frutas"
+const outMut = document.getElementById("out-arr-mut"); // Obtiene referencia DOM para "outMut"
 
-function renderFrutas(accion = "Estado inicial") {
+function renderFrutas(accion = "Estado inicial") { // Declara función
     outMut.textContent =
-        `Acción: ${accion}\nArray: ${JSON.stringify(frutas)}\nLongitud: ${frutas.length} | Último (.at(-1)): ${frutas.at(-1) ?? "vacío"}`;
+        `Acción: ${accion}\nArray: ${JSON.stringify(frutas)}\nLongitud: ${frutas.length} | Último (.at(-1)): ${frutas.at(-1) ?? "vacío"}`; // Instrucción JavaScript
 }
 
-document.querySelectorAll("[data-arr]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const op = btn.dataset.arr;
-        const nueva = document.getElementById("input-fruta").value.trim() || "Uva";
-        let detalle = "";
+document.querySelectorAll("[data-arr]").forEach((btn) => { // Instrucción JavaScript
+    btn.addEventListener("click", () => { // Registra escuchador de eventos
+        const op = btn.dataset.arr; // Declara e inicializa "op"
+        const nueva = document.getElementById("input-fruta").value.trim() || "Uva"; // Obtiene referencia DOM para "nueva"
+        let detalle = ""; // Declara e inicializa "detalle"
 
-        if (op === "push") {
-            frutas.push(nueva);
-            detalle = `push("${nueva}")`;
-        } else if (op === "pop") {
-            const eliminado = frutas.pop();
-            detalle = `pop() -> eliminó ${JSON.stringify(eliminado)}`;
-        } else if (op === "unshift") {
-            frutas.unshift(nueva);
-            detalle = `unshift("${nueva}")`;
-        } else if (op === "shift") {
-            const eliminado = frutas.shift();
-            detalle = `shift() -> eliminó ${JSON.stringify(eliminado)}`;
-        } else {
-            frutas = ["Manzana", "Pera", "Naranja"];
-            detalle = "Reset";
+        if (op === "push") { // Evalúa condición
+            frutas.push(nueva); // Ejecuta llamada o método
+            detalle = `push("${nueva}")`; // Asigna valor
+        } else if (op === "pop") { // Instrucción JavaScript
+            const eliminado = frutas.pop(); // Declara e inicializa "eliminado"
+            detalle = `pop() -> eliminó ${JSON.stringify(eliminado)}`; // Asigna valor
+        } else if (op === "unshift") { // Instrucción JavaScript
+            frutas.unshift(nueva); // Ejecuta llamada o método
+            detalle = `unshift("${nueva}")`; // Asigna valor
+        } else if (op === "shift") { // Instrucción JavaScript
+            const eliminado = frutas.shift(); // Declara e inicializa "eliminado"
+            detalle = `shift() -> eliminó ${JSON.stringify(eliminado)}`; // Asigna valor
+        } else { // Instrucción JavaScript
+            frutas = ["Manzana", "Pera", "Naranja"]; // Asigna valor
+            detalle = "Reset"; // Asigna valor
         }
 
-        renderFrutas(detalle);
-        registrar(`${detalle} -> ${JSON.stringify(frutas)}`);
+        renderFrutas(detalle); // Ejecuta llamada o método
+        registrar(`${detalle} -> ${JSON.stringify(frutas)}`); // Ejecuta llamada o método
     });
 });
 
 // 2. Pipeline funcional
-const preciosBase = [40, 120, 85, 210, 30];
+const preciosBase = [40, 120, 85, 210, 30]; // Declara e inicializa "preciosBase"
 
-document.getElementById("btn-pipeline").addEventListener("click", () => {
-    const min = Number(document.getElementById("input-min-precio").value) || 0;
-    const filtrados = preciosBase.filter((p) => p >= min);
-    const conDescuento = filtrados.map((p) => Number((p * 0.9).toFixed(2)));
-    const total = conDescuento.reduce((acc, n) => acc + n, 0);
+document.getElementById("btn-pipeline").addEventListener("click", () => { // Registra escuchador de eventos
+    const min = Number(document.getElementById("input-min-precio").value) || 0; // Obtiene referencia DOM para "min"
+    const filtrados = preciosBase.filter((p) => p >= min); // Define función flecha "filtrados"
+    const conDescuento = filtrados.map((p) => Number((p * 0.9).toFixed(2))); // Define función flecha "conDescuento"
+    const total = conDescuento.reduce((acc, n) => acc + n, 0); // Define función flecha "total"
 
     document.getElementById("out-pipeline").textContent =
-        `Original (intacto): ${JSON.stringify(preciosBase)}\n1) filter(>= ${min}): ${JSON.stringify(filtrados)}\n2) map(-10%): ${JSON.stringify(conDescuento)}\n3) reduce(suma): $${total.toFixed(2)}`;
-    registrar(`Pipeline >= ${min} -> Total: $${total.toFixed(2)}`);
+        `Original (intacto): ${JSON.stringify(preciosBase)}\n1) filter(>= ${min}): ${JSON.stringify(filtrados)}\n2) map(-10%): ${JSON.stringify(conDescuento)}\n3) reduce(suma): $${total.toFixed(2)}`; // Instrucción JavaScript
+    registrar(`Pipeline >= ${min} -> Total: $${total.toFixed(2)}`); // Ejecuta llamada o método
 });
 
 // 3. Inmutables ES2023
-const numerosES2023 = [30, 5, 100, 20];
+const numerosES2023 = [30, 5, 100, 20]; // Declara e inicializa "numerosES2023"
 
-document.querySelectorAll("[data-es2023]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const tipo = btn.dataset.es2023;
-        let copia;
-        let etiqueta = "";
+document.querySelectorAll("[data-es2023]").forEach((btn) => { // Instrucción JavaScript
+    btn.addEventListener("click", () => { // Registra escuchador de eventos
+        const tipo = btn.dataset.es2023; // Declara e inicializa "tipo"
+        let copia; // Declara e inicializa "copia"
+        let etiqueta = ""; // Declara e inicializa "etiqueta"
 
-        if (tipo === "sort") {
-            copia = numerosES2023.toSorted((a, b) => a - b);
-            etiqueta = ".toSorted((a, b) => a - b)";
-        } else if (tipo === "rev") {
-            copia = numerosES2023.toReversed();
-            etiqueta = ".toReversed()";
-        } else {
-            copia = numerosES2023.with(-1, 999);
-            etiqueta = ".with(-1, 999)";
+        if (tipo === "sort") { // Evalúa condición
+            copia = numerosES2023.toSorted((a, b) => a - b); // Asigna valor
+            etiqueta = ".toSorted((a, b) => a - b)"; // Asigna valor
+        } else if (tipo === "rev") { // Instrucción JavaScript
+            copia = numerosES2023.toReversed(); // Asigna valor
+            etiqueta = ".toReversed()"; // Asigna valor
+        } else { // Instrucción JavaScript
+            copia = numerosES2023.with(-1, 999); // Asigna valor
+            etiqueta = ".with(-1, 999)"; // Asigna valor
         }
 
         document.getElementById("out-es2023").textContent =
-            `Método: ${etiqueta}\nOriginal (intacto): ${JSON.stringify(numerosES2023)}\nNuevo Array:        ${JSON.stringify(copia)}`;
-        registrar(`${etiqueta} -> ${JSON.stringify(copia)} (original intacto)`);
+            `Método: ${etiqueta}\nOriginal (intacto): ${JSON.stringify(numerosES2023)}\nNuevo Array:        ${JSON.stringify(copia)}`; // Instrucción JavaScript
+        registrar(`${etiqueta} -> ${JSON.stringify(copia)} (original intacto)`); // Ejecuta llamada o método
     });
 });
 
-document.getElementById("btn-limpiar-log").addEventListener("click", () => {
-    liveConsole.replaceChildren();
+document.getElementById("btn-limpiar-log").addEventListener("click", () => { // Registra escuchador de eventos
+    liveConsole.replaceChildren(); // Ejecuta llamada o método
 });
 
-renderFrutas();
-registrar("Laboratorio de Arrays listo.");
+renderFrutas(); // Ejecuta llamada o método
+registrar("Laboratorio de Arrays listo."); // Ejecuta llamada o método

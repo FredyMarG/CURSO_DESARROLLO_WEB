@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../slides-engine.css" />
     <script src="../slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23f97316'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%A7%B1%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
@@ -196,74 +199,107 @@
                 <strong>🧠 Analogía mental:</strong> HTML es la estructura y las instalaciones de una casa (paredes, puertas, ventanas). CSS es la pintura y decoración. JavaScript es la electricidad y automatización.
             </div>
         </section>
-        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+                <section class="slide" data-slide="7" data-doc-slide="true" data-title="Apunte: Estructura Raíz HTML5">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">1. Estructura Raíz: <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code> y <code>&lt;head&gt;</code></h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;html&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;html&gt;</code> (o elemento HTML raíz) representa la raíz de un documento HTML. El resto de elementos descienden de este elemento.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Metadatos del documento</p>
-<p style="margin-bottom:8px;line-height:1.6;">Los metadatos contienen información sobre la página. Esto incluye información sobre estilos, scripts y datos que ayudan al software (search engines, browsers, etc.) a usar y generar la página. Los metadatos de estilos y scripts pueden estar definidos en la página o estar enlazados a otro fichero que contiene la información.</p></div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Elementos esenciales</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;!DOCTYPE html&gt;</code> activa el modo estándar moderno en todos los navegadores.</li>
+                        <li><code>&lt;html lang="es"&gt;</code> define el idioma raíz para SEO y lectores de pantalla.</li>
+                        <li><code>&lt;head&gt;</code> contiene metadatos invisibles (charset, viewport, título y CSS).</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Esqueleto mínimo válido</h3>
+                    <pre class="code-block"><code>&lt;!doctype html&gt;
+        &lt;html lang="es"&gt;
+          &lt;head&gt;
+            &lt;meta charset="UTF-8" /&gt;
+            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;
+            &lt;title&gt;Mi Página&lt;/title&gt;
+          &lt;/head&gt;
+          &lt;body&gt;...&lt;/body&gt;
+        &lt;/html&gt;</code></pre>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="8" data-doc-slide="true" data-title="Apunte: Metadatos y Recursos">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">2. Metadatos del Documento (<code>&lt;meta&gt;</code>, <code>&lt;link&gt;</code>, <code>&lt;base&gt;</code>)</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;base&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;base&gt;</code> especifica la dirección URL base que se utilizará para todas las direcciones URL relativas contenidas dentro de un documento. Solo puede haber un elemento <code>&lt;base&gt;</code> en un documento.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;head&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;head&gt;</code> provee información general (metadatos) acerca del documento, incluyendo su título y enlaces a scripts y hojas de estilos.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;link&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;link&gt;</code> especifica la relación entre el documento actual y un recurso externo. Los usos posibles de este elemento incluyen la definición de un marco relacional para navegación. Este elemento es más frecuentemente usado para enlazar hojas de estilos.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;meta&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;meta&gt;</code> (solo tiene una).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;style&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Sus etiquetas son: <code>&lt;style&gt;</code> y <code>&lt;/style&gt;</code> (ambas obligatorias).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;title&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;title&gt;</code> HTML define el título del documento que se muestra en un browser en la barra de título o la pestaña de una página. Solo contiene texto; las etiquetas dentro del elemento se ignoran.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Seccionamiento básico</p></div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Etiqueta</th><th>Propósito principal</th><th>Ejemplo clave</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>&lt;meta charset="UTF-8"&gt;</code></td><td>Soporta tildes, ñ y emojis sin errores de codificación.</td><td><code>&lt;meta charset="UTF-8"&gt;</code></td></tr>
+                        <tr><td><code>&lt;meta name="viewport"&gt;</code></td><td>Ajusta el ancho al dispositivo móvil (clave para Responsive).</td><td><code>content="width=device-width, initial-scale=1.0"</code></td></tr>
+                        <tr><td><code>&lt;link&gt;</code></td><td>Conecta hojas de estilos CSS, favicons o fuentes externas.</td><td><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></td></tr>
+                        <tr><td><code>&lt;base&gt;</code></td><td>Define la URL base para enlaces relativos del documento.</td><td><code>&lt;base href="https://miweb.com/"&gt;</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
-        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="9" data-doc-slide="true" data-title="Apunte: Seccionamiento Semántico">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">3. Seccionamiento Semántico (<code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>)</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;body&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento <code>&lt;body&gt;</code> de HTML representa el contenido de un documento HTML. Solo puede haber un elemento <code>&lt;body&gt;</code> en un documento.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Seccionamiento del contenido</p>
-<p style="margin-bottom:8px;line-height:1.6;">Los elementos de seccionamiento del contenido te permiten organizar los contenidos del documento en partes lógicas. Usa los elementos de seccionado para crear una descripción amplia de los contenidos de tu página, incluyendo el encabezado y pie de página y elementos para identificar secciones.</p></div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Bloques estructurales</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;header&gt;</code>: cabecera introductoria o barra superior.</li>
+                        <li><code>&lt;nav&gt;</code>: bloque principal de enlaces de navegación.</li>
+                        <li><code>&lt;main&gt;</code>: contenido principal único del documento.</li>
+                        <li><code>&lt;section&gt;</code> y <code>&lt;article&gt;</code>: secciones temáticas y contenido independiente.</li>
+                        <li><code>&lt;aside&gt;</code> y <code>&lt;footer&gt;</code>: barra lateral y pie de página.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-purple">
+                    <h3>Jerarquía limpia</h3>
+                    <pre class="code-block"><code>&lt;body&gt;
+          &lt;header&gt;&lt;nav&gt;...&lt;/nav&gt;&lt;/header&gt;
+          &lt;main&gt;
+            &lt;section&gt;
+              &lt;article&gt;Contenido&lt;/article&gt;
+            &lt;/section&gt;
+          &lt;/main&gt;
+          &lt;footer&gt;© 2026&lt;/footer&gt;
+        &lt;/body&gt;</code></pre>
+                </div>
+            </div>
         </section>
-        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Elemento | Descripción">
+        <section class="slide" data-slide="10" data-doc-slide="true" data-title="Apunte: Texto, Listas y Agrupación">
             <div class="slide-header">
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · HTML.md</span>
-                <h2 class="slide-title">Elemento | Descripción</h2>
+                <h2 class="slide-title">4. Texto, Listas y Agrupación Semántica</h2>
             </div>
-            <div class="glass-card"><h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;address&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;address&gt;</code> aporta información de contacto para su <code>&lt;article&gt;</code> más cercano o ancestro <code>&lt;body&gt;</code>; en el último caso lo aplica a todo el documento.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;article&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento de HTML <code>&lt;article&gt;</code> representa una composición auto-contenida en un documento, una página, una aplicación o en un sitio, que se quiere que sea distribuible y/o reutilizable de manera independiente, por ejemplo, en la redifusión.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Algunos ejemplos podrían ser un mensaje en un foro, un artículo de una revista o un periódico, una entrada de blog, el comentario de un usuario, un widget o gadget interactivo, o cualquier otro elemento de contenido independiente.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;aside&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;aside&gt;</code> representa una sección de una página que consiste en contenido que está indirectamente relacionado con el contenido principal del documento.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Estas secciones son a menudo representadas como barras laterales o como inserciones y contienen una explicación al margen como una definición de glosario, elementos relacionados indirectamente como publicidad, la biografía del autor o, en aplicaciones web, la información de perfil o enlaces a blogs relacionados.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;footer&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML Footer (<code>&lt;footer&gt;</code>) representa un pie de página para el contenido de sección más cercano o el elemento raíz de sección (por ejemplo, su ancestro más cercano <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;body&gt;</code>, <code>&lt;details&gt;</code>, <code>&lt;fieldset&gt;</code>, <code>&lt;figure&gt;</code>, <code>&lt;td&gt;</code>).</p>
-<p style="margin-bottom:8px;line-height:1.6;">Un pie de página típicamente contiene información acerca del autor de la sección, datos de derechos de autor o enlaces a documentos relacionados.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;header&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento de HTML Header (<code>&lt;header&gt;</code>) representa un grupo de ayudas introductorias o de navegación. Puede contener algunos elementos de encabezado, así como también un logo, un formulario de búsqueda, un nombre de autor y otros componentes.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>, <code>&lt;h5&gt;</code>, <code>&lt;h6&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">Los elementos de encabezado implementan seis niveles de encabezado del documento, <code>&lt;h1&gt;</code> es el más importante y <code>&lt;h6&gt;</code>, el menos importante.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Un elemento de encabezado describe brevemente el tema de la sección que presenta. La información de encabezado puede ser usada por los agentes usuarios, por ejemplo, para construir una tabla de contenidos para un documento automáticamente.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;main&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;main&gt;</code> representa el contenido principal del <code>&lt;body&gt;</code> de un documento o aplicación.</p>
-<p style="margin-bottom:8px;line-height:1.6;">El área principal del contenido consiste en el contenido que está directamente relacionado o se expande sobre el tema central de un documento o la funcionalidad central de una aplicación.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Este contenido debe ser único al documento, excluyendo cualquier contenido que se repita a través de un conjunto de documentos como barras laterales, enlaces de navegación, información de derechos de autor, logos del sitio y formularios de búsqueda (a menos que la función principal del documento sea un formulario de búsqueda).</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;nav&gt;</code></h3>
-<p style="margin-bottom:8px;line-height:1.6;">El elemento HTML <code>&lt;nav&gt;</code> representa una sección de una página cuyo propósito es proporcionar enlaces de navegación, ya sea dentro del documento actual o a otros documentos.</p>
-<p style="margin-bottom:8px;line-height:1.6;">Ejemplos comunes de secciones de navegación son menús, tablas de contenido e índices.</p>
-<h3 style="margin-top:12px;color:#38bdf8;"><code>&lt;section&gt;</code></h3></div>
+            <div class="grid-2">
+                <div class="glass-card border-emerald">
+                    <h3>Etiquetas de contenido</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;h1&gt;</code> a <code>&lt;h6&gt;</code>: jerarquía de encabezados (un solo <code>&lt;h1&gt;</code> principal por vista).</li>
+                        <li><code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code> y <code>&lt;em&gt;</code>: párrafos y énfasis semántico real.</li>
+                        <li><code>&lt;ul&gt;</code> / <code>&lt;ol&gt;</code> / <code>&lt;li&gt;</code>: listas desordenadas y ordenadas.</li>
+                        <li><code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code>: imagen o gráfico con pie descriptivo.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-amber">
+                    <h3>Contacto y código</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;address&gt;</code>: información de contacto del autor o empresa.</li>
+                        <li><code>&lt;pre&gt;</code> + <code>&lt;code&gt;</code>: bloques de código conservando saltos de línea y espacios.</li>
+                        <li><strong>Regla de oro:</strong> usa <code>&lt;div&gt;</code> solo cuando no exista una etiqueta semántica adecuada.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <!-- SLIDE 7: SIMULADOR DE INPUTS -->
@@ -412,11 +448,11 @@
             <div class="glass-card">
                 <h3>🛠️ Archivos y Subcarpetas (5)</h3>
                 <div class="files-grid">
-                    <a class="file-card" href="enlaces.html"><span class="file-name">📄 enlaces</span><span class="file-path">enlaces.html</span></a>
-                    <a class="file-card" href="formularios.html"><span class="file-name">📄 formularios</span><span class="file-path">formularios.html</span></a>
-                    <a class="file-card" href="img.html"><span class="file-name">📄 img</span><span class="file-path">img.html</span></a>
-                    <a class="file-card" href="listas.html"><span class="file-name">📄 listas</span><span class="file-path">listas.html</span></a>
-                    <a class="file-card" href="Titulos%20y%20parrafos.html"><span class="file-name">📄 Titulos y parrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
+                    <a class="file-card" href="Enlaces/enlaces.html"><span class="file-name">📄 enlaces</span><span class="file-path">enlaces.html</span></a>
+                    <a class="file-card" href="Formularios/formularios.html"><span class="file-name">📄 formularios</span><span class="file-path">formularios.html</span></a>
+                    <a class="file-card" href="Imagenes/img.html"><span class="file-name">📄 img</span><span class="file-path">img.html</span></a>
+                    <a class="file-card" href="Listas/listas.html"><span class="file-name">📄 listas</span><span class="file-path">listas.html</span></a>
+                    <a class="file-card" href="Titulos%20y%20Parrafos/Titulos%20y%20parrafos.html"><span class="file-name">📄 Titulos y parrafos</span><span class="file-path">Titulos y parrafos.html</span></a>
                 </div>
             </div>
         </section>

@@ -7,182 +7,182 @@
  */
 
 /* RESET */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Familia tipográfica */
 }
 
-body {
-    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
-    min-height: 100vh;
+body { /* Regla de estilo para body */
+    background: linear-gradient(135deg, #eef2f7, #dfe6f0); /* Fondo o degradado */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
 /* 🔹 CONTENEDOR PRINCIPAL */
-.enunciado {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+.enunciado { /* Regla de estilo para .enunciado */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 30px auto; /* Margen exterior */
+    background: #ffffff; /* Fondo o degradado */
+    padding: 25px; /* Relleno interior */
+    border-radius: 18px; /* Redondeo de esquinas */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra proyectada */
+    transition: 0.3s; /* Transición suave de propiedades */
 }
 
-.enunciado:hover {
-    transform: translateY(-3px);
+.enunciado:hover { /* Regla de estilo para .enunciado:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* 🔹 TITULO */
-.title {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #1e3a8a;
-    font-weight: bold;
-    letter-spacing: 1px;
+.title { /* Regla de estilo para .title */
+    text-align: center; /* Alineación horizontal del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
+    color: #1e3a8a; /* Color del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 /* 🔹 TEXTO */
-.enunciado p {
-    margin: 10px 0;
-    line-height: 1.7;
-    color: #555;
+.enunciado p { /* Regla de estilo para .enunciado p */
+    margin: 10px 0; /* Margen exterior */
+    line-height: 1.7; /* Altura de línea del texto */
+    color: #555; /* Color del texto */
 }
 
 /* 🔹 LISTA */
-ul {
-    list-style-type: none;
-    padding-left: 40px;
+ul { /* Regla de estilo para ul */
+    list-style-type: none; /* Propiedad CSS: list-style-type */
+    padding-left: 40px; /* Relleno interior izquierdo */
 }
 
-ul>li {
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+ul>li { /* Regla de estilo para ul>li */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding-left: 20px; /* Relleno interior izquierdo */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 
-ul>li::before {
-    content: '●';
-    color: #2563eb;
-    font-size: 18px;
-    position: absolute;
-    left: 0;
-    top: -3px;
+ul>li::before { /* Regla de estilo para ul>li::before */
+    content: '●'; /* Contenido generado para pseudoelemento */
+    color: #2563eb; /* Color del texto */
+    font-size: 18px; /* Tamaño de fuente */
+    position: absolute; /* Define el esquema de posicionamiento */
+    left: 0; /* Desplazamiento izquierdo */
+    top: -3px; /* Desplazamiento superior */
 }
 
-ol {
-    list-style-type: none;
-    counter-reset: item;
-    padding-left: 0;
-    margin: 15px 0;
+ol { /* Regla de estilo para ol */
+    list-style-type: none; /* Propiedad CSS: list-style-type */
+    counter-reset: item; /* Propiedad CSS: counter-reset */
+    padding-left: 0; /* Relleno interior izquierdo */
+    margin: 15px 0; /* Margen exterior */
 }
 
-ol>li {
-    counter-increment: item;
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+ol>li { /* Regla de estilo para ol>li */
+    counter-increment: item; /* Propiedad CSS: counter-increment */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding-left: 20px; /* Relleno interior izquierdo */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 
-ol>li::before {
-    content: counter(item) '.';
-    color: #2563eb;
-    font-weight: bold;
-    font-size: 16px;
-    position: absolute;
-    left: 0;
-    top: 0;
+ol>li::before { /* Regla de estilo para ol>li::before */
+    content: counter(item) '.'; /* Contenido generado para pseudoelemento */
+    color: #2563eb; /* Color del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    font-size: 16px; /* Tamaño de fuente */
+    position: absolute; /* Define el esquema de posicionamiento */
+    left: 0; /* Desplazamiento izquierdo */
+    top: 0; /* Desplazamiento superior */
 }
 
-li {
-    margin: 8px 0;
-    color: #444;
+li { /* Regla de estilo para li */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
 }
 
 /* 🔹 BOTÓN CONTENEDOR */
-.ask {
-    text-align: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+.ask { /* Regla de estilo para .ask */
+    text-align: center; /* Alineación horizontal del texto */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 30px auto; /* Margen exterior */
+    background: #ffffff; /* Fondo o degradado */
+    padding: 25px; /* Relleno interior */
+    border-radius: 18px; /* Redondeo de esquinas */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra proyectada */
+    transition: 0.3s; /* Transición suave de propiedades */
 }
 
-.ask h2 {
-    color: #1e3a8a;
-    margin-bottom: 15px;
+.ask h2 { /* Regla de estilo para .ask h2 */
+    color: #1e3a8a; /* Color del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
 }
 
-.ask p {
-    color: #555;
-    line-height: 1.7;
-    font-size: 17px;
+.ask p { /* Regla de estilo para .ask p */
+    color: #555; /* Color del texto */
+    line-height: 1.7; /* Altura de línea del texto */
+    font-size: 17px; /* Tamaño de fuente */
 }
 
-.ask:hover {
-    transform: translateY(-3px);
+.ask:hover { /* Regla de estilo para .ask:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    padding: 14px 28px;
-    border: 1px solid rgba(37, 99, 235, 0.22);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%);
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.35s ease, border-color 0.25s ease;
-    box-shadow: 0 14px 28px rgba(31, 79, 181, 0.18);
+button { /* Regla de estilo para button */
+    display: inline-flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    margin-top: 20px; /* Margen exterior superior */
+    padding: 14px 28px; /* Relleno interior */
+    border: 1px solid rgba(37, 99, 235, 0.22); /* Borde del contenedor */
+    border-radius: 16px; /* Redondeo de esquinas */
+    background: linear-gradient(180deg, #2f6ad6 0%, #1f4fb5 100%); /* Fondo o degradado */
+    color: #ffffff; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    letter-spacing: 0.6px; /* Espaciado entre letras */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.35s ease, border-color 0.25s ease; /* Transición suave de propiedades */
+    box-shadow: 0 14px 28px rgba(31, 79, 181, 0.18); /* Sombra proyectada */
 }
 
-button:hover {
-    transform: translateY(-1px);
-    background: linear-gradient(180deg, #1b3ea8 0%, #60a5fa 100%);
-    border-color: rgba(37, 99, 235, 0.45);
-    box-shadow: 0 18px 32px rgba(31, 79, 181, 0.3);
+button:hover { /* Propiedad CSS: button */
+    transform: translateY(-1px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    background: linear-gradient(180deg, #1b3ea8 0%, #60a5fa 100%); /* Fondo o degradado */
+    border-color: rgba(37, 99, 235, 0.45); /* Color del borde */
+    box-shadow: 0 18px 32px rgba(31, 79, 181, 0.3); /* Sombra proyectada */
 }
 
-button a {
-    color: inherit;
-    text-decoration: none;
-    width: 100%;
-    height: 100%;
-    display: inline-block;
+button a { /* Regla de estilo para button a */
+    color: inherit; /* Color del texto */
+    text-decoration: none; /* Decoración del texto */
+    width: 100%; /* Ancho del elemento */
+    height: 100%; /* Alto del elemento */
+    display: inline-block; /* Define el tipo de caja/layout */
 }
 
-button a:hover {
-    color: inherit;
+button a:hover { /* Regla de estilo para button a:hover */
+    color: inherit; /* Color del texto */
 }
 
-a {
-    color: #2563eb;
-    text-decoration: none;
-    transition: color 0.2s ease, text-decoration 0.2s ease;
+a { /* Regla de estilo para a */
+    color: #2563eb; /* Color del texto */
+    text-decoration: none; /* Decoración del texto */
+    transition: color 0.2s ease, text-decoration 0.2s ease; /* Transición suave de propiedades */
 }
 
-a:hover {
-    color: #1d4ed8;
+a:hover { /* Propiedad CSS: a */
+    color: #1d4ed8; /* Color del texto */
 }
 
 a:focus,
-button:focus {
-    outline: 3px solid rgba(37, 99, 235, 0.28);
-    outline-offset: 4px;
+button:focus { /* Propiedad CSS: button */
+    outline: 3px solid rgba(37, 99, 235, 0.28); /* Contorno de enfoque accesible */
+    outline-offset: 4px; /* Separación del contorno de enfoque */
 }

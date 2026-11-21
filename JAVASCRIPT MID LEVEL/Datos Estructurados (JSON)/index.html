@@ -8,6 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
     <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%8B%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
@@ -74,16 +77,8 @@ const obj = JSON.parse(texto);</code></pre></div>
 <li>*   Históricamente se usaban <strong>JSON Polyfills</strong> para dotar de soporte de parseo nativo a los navegadores que carecían de estas herramientas globales.</li>
 </ul>
 <p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
-<p style="margin-bottom:8px;line-height:1.6;">| Método / Concepto | Descripción | Ejemplo |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>JSON.stringify(obj)</code> | Convierte objeto JS a string JSON. | <code>JSON.stringify({ a: 1 })</code> → <code>&#x27;{&quot;a&quot;:1}&#x27;</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>JSON.stringify(obj, null, 2)</code> | Serializa con indentación legible de 2 espacios. | <code>JSON.stringify(user, null, 2)</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>JSON.stringify(obj, replacer)</code> | Filtra o transforma claves al serializar. | <code>JSON.stringify(obj, [&quot;id&quot;, &quot;name&quot;])</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>JSON.parse(str)</code> | Convierte string JSON válido en objeto JS. | <code>JSON.parse(&#x27;{&quot;ok&quot;:true}&#x27;)</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>JSON.parse(str, reviver)</code> | Transforma valores al deserializar (ej. <code>Date</code>). | <code>JSON.parse(str, (k, v) =&gt; ...)</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>structuredClone(obj)</code> | Copia profunda moderna (preserva <code>Date</code>, <code>Map</code>, <code>Set</code>). | <code>const copia = structuredClone(original)</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>[...set]</code> / <code>Object.fromEntries(map)</code> | Prepara <code>Set</code> y <code>Map</code> antes de serializar a JSON. | <code>JSON.stringify([...miSet])</code> |</p>
-<p style="margin-bottom:8px;line-height:1.6;">| <code>try { JSON.parse(...) } catch</code> | Evita que un JSON corrupto detenga la app (<code>SyntaxError</code>). | <code>try { return JSON.parse(raw); } catch { return null; }</code> |</p></div>
+<table class="compare-table"><thead><tr><th>Método / Concepto</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>JSON.stringify(obj)</code></td><td>Convierte objeto JS a string JSON.</td><td><code>JSON.stringify({ a: 1 })</code> → <code>&#x27;{&quot;a&quot;:1}&#x27;</code></td></tr><tr><td><code>JSON.stringify(obj, null, 2)</code></td><td>Serializa con indentación legible de 2 espacios.</td><td><code>JSON.stringify(user, null, 2)</code></td></tr><tr><td><code>JSON.stringify(obj, replacer)</code></td><td>Filtra o transforma claves al serializar.</td><td><code>JSON.stringify(obj, [&quot;id&quot;, &quot;name&quot;])</code></td></tr><tr><td><code>JSON.parse(str)</code></td><td>Convierte string JSON válido en objeto JS.</td><td><code>JSON.parse(&#x27;{&quot;ok&quot;:true}&#x27;)</code></td></tr><tr><td><code>JSON.parse(str, reviver)</code></td><td>Transforma valores al deserializar (ej. <code>Date</code>).</td><td><code>JSON.parse(str, (k, v) =&gt; ...)</code></td></tr><tr><td><code>structuredClone(obj)</code></td><td>Copia profunda moderna (preserva <code>Date</code>, <code>Map</code>, <code>Set</code>).</td><td><code>const copia = structuredClone(original)</code></td></tr><tr><td><code>[...set]</code> / <code>Object.fromEntries(map)</code></td><td>Prepara <code>Set</code> y <code>Map</code> antes de serializar a JSON.</td><td><code>JSON.stringify([...miSet])</code></td></tr><tr><td><code>try { JSON.parse(...) } catch</code></td><td>Evita que un JSON corrupto detenga la app (<code>SyntaxError</code>).</td><td><code>try { return JSON.parse(raw); } catch { return null; }</code></td></tr></tbody></table>
+</div>
         </section>
         <section class="slide" data-slide="7" data-title="Buenas Prácticas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>

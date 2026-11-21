@@ -1,0 +1,406 @@
+/* ==========================================================================
+   ESTRUCTURA UNIFICADA ESTILO JUNIOR LEVEL (ARRAYS) PARA TODO EL CURSO
+   Aplica a HTML y CSS, JavaScript Mid Level y JavaScript Master Level:
+   - .app-shell + .jr-top-nav + .hero + #jrDocSlides + .grid + .console-panel
+   - Texturas radiales y paletas neón dinámicas por módulo
+   - Aciertos en verde neón (#00ff88) y errores en rojo neón (#ff3358)
+   ========================================================================== */
+
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-2: #1e293b; /* Variable CSS personalizada (--surface-2) */
+    --border: #334155; /* Variable CSS personalizada (--border) */
+    --text: #f1f5f9; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --polish-accent: #38bdf8; /* Variable CSS personalizada (--polish-accent) */
+    --polish-accent-2: #818cf8; /* Variable CSS personalizada (--polish-accent-2) */
+    --polish-top-glow: #172554; /* Variable CSS personalizada (--polish-top-glow) */
+    --polish-glow: rgba(56, 189, 248, 0.28); /* Variable CSS personalizada (--polish-glow) */
+    --polish-bg-tint: rgba(56, 189, 248, 0.14); /* Variable CSS personalizada (--polish-bg-tint) */
+    --radius: 14px; /* Variable CSS personalizada (--radius) */
+}
+
+/* Paletas de color por módulo (idénticas a la variedad visual de Junior Level) */
+body[data-theme="cyan"]    { --polish-accent: #00f0ff; --polish-accent-2: #38bdf8; --polish-top-glow: #083344; --polish-glow: rgba(0, 240, 255, 0.28); --polish-bg-tint: rgba(0, 240, 255, 0.13); }
+body[data-theme="purple"]  { --polish-accent: #a855f7; --polish-accent-2: #c084fc; --polish-top-glow: #3b0764; --polish-glow: rgba(168, 85, 247, 0.28); --polish-bg-tint: rgba(168, 85, 247, 0.15); }
+body[data-theme="emerald"] { --polish-accent: #10b981; --polish-accent-2: #00ff88; --polish-top-glow: #064e3b; --polish-glow: rgba(0, 255, 136, 0.26); --polish-bg-tint: rgba(16, 185, 129, 0.14); }
+body[data-theme="amber"]   { --polish-accent: #f59e0b; --polish-accent-2: #fbbf24; --polish-top-glow: #451a03; --polish-glow: rgba(251, 191, 36, 0.26); --polish-bg-tint: rgba(245, 158, 11, 0.14); }
+body[data-theme="rose"]    { --polish-accent: #f43f5e; --polish-accent-2: #fb7185; --polish-top-glow: #4c0519; --polish-glow: rgba(255, 51, 88, 0.26); --polish-bg-tint: rgba(244, 63, 94, 0.14); }
+
+/* Fondo con textura radial vibrante + cuadrícula sutil */
+body.jr-unified { /* Regla de estilo para body.jr-unified */
+    font-family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif !important; /* Familia tipográfica */
+    background:
+        radial-gradient(circle at top, var(--polish-top-glow) 0%, var(--bg) 55%),
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px) !important; /* Regla CSS */
+    background-size: 100% 100%, 24px 24px !important; /* Escalado del fondo */
+    color: var(--text) !important; /* Color del texto */
+    min-height: 100vh; /* Alto mínimo permitido */
+    padding: 1.75rem 1rem 4rem !important; /* Relleno interior */
+    overflow-x: hidden; /* Control de desbordamiento horizontal */
+}
+
+/* Oculta barras fijas antiguas cuando la estructura Junior Level está activa */
+body.jr-unified .top-nav,
+body.jr-unified .bottom-nav,
+body.jr-unified .bottom-controls,
+body.jr-unified .presentation-wrapper { /* Regla de estilo para body.jr-unified .presentation-wrapper */
+    display: none !important; /* Define el tipo de caja/layout */
+}
+
+/* Contenedor principal centrado idéntico a Arrays/style.css */
+.jr-app-shell { /* Regla de estilo para .jr-app-shell */
+    position: relative; /* Define el esquema de posicionamiento */
+    z-index: 2; /* Orden de apilamiento en el eje Z */
+    max-width: 1100px; /* Ancho máximo permitido */
+    margin: 0 auto; /* Margen exterior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 1.4rem; /* Separación entre filas y columnas */
+}
+
+/* Barra superior de navegación (.jr-top-nav) */
+.jr-top-nav { /* Regla de estilo para .jr-top-nav */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    gap: 10px; /* Separación entre filas y columnas */
+    padding: 10px 16px; /* Relleno interior */
+    background: rgba(15, 23, 42, 0.88); /* Fondo o degradado */
+    border: 1px solid var(--polish-glow); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    backdrop-filter: blur(12px); /* Filtro aplicado al fondo detrás del elemento */
+    box-shadow: 0 0 20px var(--polish-bg-tint); /* Sombra proyectada */
+}
+
+.jr-nav-badge { /* Regla de estilo para .jr-nav-badge */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    color: var(--polish-accent); /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
+}
+
+.jr-nav-right { /* Regla de estilo para .jr-nav-right */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 8px; /* Separación entre filas y columnas */
+    align-items: center; /* Alineación en el eje cruzado */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+}
+
+.jr-nav-link { /* Regla de estilo para .jr-nav-link */
+    color: #cbd5e1; /* Color del texto */
+    text-decoration: none !important; /* Decoración del texto */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    padding: 6px 12px; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    border: 1px solid rgba(255, 255, 255, 0.14); /* Borde del contenedor */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
+}
+
+.jr-nav-link:hover { /* Regla de estilo para .jr-nav-link:hover */
+    border-color: var(--polish-accent); /* Color del borde */
+    color: #fff; /* Color del texto */
+}
+
+.jr-nav-link.primary { /* Regla de estilo para .jr-nav-link.primary */
+    color: #070a13; /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
+    background: var(--polish-accent); /* Fondo o degradado */
+    border-color: var(--polish-accent); /* Color del borde */
+}
+
+/* Selector de 5 colores dinámicos */
+.theme-dots { /* Regla de estilo para .theme-dots */
+    display: inline-flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 6px; /* Separación entre filas y columnas */
+    padding: 4px 8px; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(255, 255, 255, 0.05); /* Fondo o degradado */
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Borde del contenedor */
+}
+
+.theme-dot { /* Regla de estilo para .theme-dot */
+    width: 13px; /* Ancho del elemento */
+    height: 13px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    border: 2px solid rgba(255, 255, 255, 0.35); /* Borde del contenedor */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    padding: 0; /* Relleno interior */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Transición suave de propiedades */
+}
+
+.theme-dot:hover,
+.theme-dot.active { /* Regla de estilo para .theme-dot.active */
+    transform: scale(1.22); /* Transformación 2D/3D (escala, rotación, traslación) */
+    border-color: #ffffff; /* Color del borde */
+    box-shadow: 0 0 10px currentColor; /* Sombra proyectada */
+}
+
+.theme-dot[data-set-theme="cyan"]    { background: #00f0ff; color: #00f0ff; }
+.theme-dot[data-set-theme="purple"]  { background: #c084fc; color: #c084fc; }
+.theme-dot[data-set-theme="emerald"] { background: #00ff88; color: #00ff88; }
+body .theme-dot[data-set-theme="amber"]   { background: #fbbf24; color: #fbbf24; }
+.theme-dot[data-set-theme="rose"]    { background: #ff3366; color: #ff3366; }
+
+/* Cabecera .hero */
+.jr-hero { /* Regla de estilo para .jr-hero */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.65rem 1.85rem; /* Relleno interior */
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35); /* Sombra proyectada */
+}
+
+.jr-hero-badge { /* Regla de estilo para .jr-hero-badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    font-size: 0.74rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    letter-spacing: 0.06em; /* Espaciado entre letras */
+    color: var(--polish-accent); /* Color del texto */
+    background: var(--polish-bg-tint); /* Fondo o degradado */
+    padding: 0.25rem 0.75rem; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    margin-bottom: 0.55rem; /* Margen exterior inferior */
+}
+
+.jr-hero h1 { /* Regla de estilo para .jr-hero h1 */
+    font-size: clamp(1.45rem, 2.7vw, 2.1rem); /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+    margin-bottom: 0.4rem; /* Margen exterior inferior */
+}
+
+.jr-hero p { /* Regla de estilo para .jr-hero p */
+    color: var(--muted); /* Color del texto */
+    max-width: 72ch; /* Ancho máximo permitido */
+    line-height: 1.6; /* Altura de línea del texto */
+}
+
+/* Tarjeta de Diapositivas Embebidas (#jrDocSlides) */
+.jr-doc-slides { /* Regla de estilo para .jr-doc-slides */
+    background: rgba(15, 23, 42, 0.9); /* Fondo o degradado */
+    border: 1px solid var(--polish-glow); /* Borde del contenedor */
+    border-radius: 16px; /* Redondeo de esquinas */
+    padding: 1.35rem 1.5rem; /* Relleno interior */
+    box-shadow: 0 0 24px var(--polish-bg-tint); /* Sombra proyectada */
+}
+
+.jr-slides-bar { /* Regla de estilo para .jr-slides-bar */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+    gap: 10px; /* Separación entre filas y columnas */
+    margin-bottom: 14px; /* Margen exterior inferior */
+    padding-bottom: 12px; /* Relleno interior inferior */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borde inferior */
+}
+
+.jr-slides-kicker { /* Regla de estilo para .jr-slides-kicker */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    color: var(--polish-accent); /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
+}
+
+.jr-slides-ind { /* Regla de estilo para .jr-slides-ind */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    color: var(--muted); /* Color del texto */
+    margin-top: 2px; /* Margen exterior superior */
+}
+
+.jr-slides-btns { /* Regla de estilo para .jr-slides-btns */
+    display: flex; /* Define el tipo de caja/layout */
+    gap: 8px; /* Separación entre filas y columnas */
+    align-items: center; /* Alineación en el eje cruzado */
+    flex-wrap: wrap; /* Salto de línea en contenedor flex */
+}
+
+.jr-slide-btn { /* Regla de estilo para .jr-slide-btn */
+    background: var(--surface-2); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 6px 12px; /* Relleno interior */
+    font-weight: 600; /* Grosor de la fuente */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all 0.2s; /* Transición suave de propiedades */
+}
+
+.jr-slide-btn:hover:not(:disabled) { /* Regla de estilo para .jr-slide-btn:hover:not(:disabled) */
+    border-color: var(--polish-accent); /* Color del borde */
+    color: var(--polish-accent); /* Color del texto */
+}
+
+.jr-slide-btn:disabled { /* Regla de estilo para .jr-slide-btn:disabled */
+    opacity: 0.4; /* Nivel de transparencia */
+    cursor: not-allowed; /* Estilo del puntero al pasar encima */
+}
+
+.jr-slides-apuntes { /* Regla de estilo para .jr-slides-apuntes */
+    color: var(--polish-accent); /* Color del texto */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
+    text-decoration: none; /* Decoración del texto */
+    margin-left: 6px; /* Margen exterior izquierdo */
+}
+
+.jr-doc-slide { /* Regla de estilo para .jr-doc-slide */
+    display: none; /* Define el tipo de caja/layout */
+    animation: jrFade 0.25s ease; /* Animación con keyframes */
+}
+
+.jr-doc-slide.active { /* Regla de estilo para .jr-doc-slide.active */
+    display: block; /* Define el tipo de caja/layout */
+}
+
+@keyframes jrFade { /* Definición de animación por fotogramas clave */
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Rejilla de tarjetas interactivas (Lab + Reto + Quiz) */
+.jr-main-grid { /* Regla de estilo para .jr-main-grid */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+}
+
+.jr-card { /* Regla de estilo para .jr-card */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.4rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.9rem; /* Separación entre filas y columnas */
+}
+
+.jr-card.full-span { /* Regla de estilo para .jr-card.full-span */
+    grid-column: 1 / -1; /* Ubicación/expansión en columnas */
+}
+
+.jr-card h2 { /* Regla de estilo para .jr-card h2 */
+    font-size: 1.12rem; /* Tamaño de fuente */
+    color: #fff; /* Color del texto */
+}
+
+/* Panel de Reto Práctico */
+.challenge-panel { /* Regla de estilo para .challenge-panel */
+    background: rgba(15, 23, 42, 0.92); /* Fondo o degradado */
+    border: 1px solid var(--polish-glow); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.4rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.8rem; /* Separación entre filas y columnas */
+}
+
+.challenge-badge { /* Regla de estilo para .challenge-badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    width: fit-content; /* Ancho del elemento */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.72rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    color: var(--polish-accent); /* Color del texto */
+    background: var(--polish-bg-tint); /* Fondo o degradado */
+    border: 1px solid var(--polish-glow); /* Borde del contenedor */
+    padding: 4px 10px; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+}
+
+.challenge-title { font-size: 1.1rem; font-weight: 800; color: #fff; }
+.challenge-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+
+.challenge-editor { /* Regla de estilo para .challenge-editor */
+    width: 100%; /* Ancho del elemento */
+    min-height: 105px; /* Alto mínimo permitido */
+    background: #020617; /* Fondo o degradado */
+    color: #34d399; /* Color del texto */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 10px; /* Redondeo de esquinas */
+    padding: 12px; /* Relleno interior */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    line-height: 1.5; /* Altura de línea del texto */
+    resize: vertical; /* Propiedad CSS: resize */
+}
+
+.challenge-editor:focus { outline: 2px solid var(--polish-accent); }
+
+.challenge-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.challenge-btn { /* Regla de estilo para .challenge-btn */
+    background: var(--surface-2); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 7px 14px; /* Relleno interior */
+    font-weight: 600; /* Grosor de la fuente */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: all 0.2s; /* Transición suave de propiedades */
+}
+
+.challenge-btn.primary { /* Regla de estilo para .challenge-btn.primary */
+    background: var(--polish-accent); /* Fondo o degradado */
+    color: #050711; /* Color del texto */
+    border-color: var(--polish-accent); /* Color del borde */
+}
+
+.challenge-feedback { /* Regla de estilo para .challenge-feedback */
+    padding: 10px 14px; /* Relleno interior */
+    border-radius: 8px; /* Redondeo de esquinas */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    display: none; /* Define el tipo de caja/layout */
+}
+
+.challenge-feedback.show { display: block; }
+.challenge-feedback.ok { background: rgba(0, 255, 136, 0.12); border: 1px solid #00ff88; color: #00ff88; box-shadow: 0 0 14px rgba(0, 255, 136, 0.22); }
+.challenge-feedback.err { background: rgba(255, 51, 88, 0.12); border: 1px solid #ff3358; color: #ff3358; box-shadow: 0 0 14px rgba(255, 51, 88, 0.22); }
+
+/* Panel de Consola en Vivo idéntico a Junior Level */
+.jr-console-panel { /* Regla de estilo para .jr-console-panel */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.25rem 1.4rem; /* Relleno interior */
+}
+
+.jr-console-header { /* Regla de estilo para .jr-console-header */
+    display: flex; /* Define el tipo de caja/layout */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: center; /* Alineación en el eje cruzado */
+    margin-bottom: 0.75rem; /* Margen exterior inferior */
+}
+
+.jr-console-header h2 { font-size: 1rem; color: #fff; }
+
+.jr-console-log { /* Regla de estilo para .jr-console-log */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    max-height: 190px; /* Alto máximo permitido */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.35rem; /* Separación entre filas y columnas */
+}
+
+.jr-log-line { color: #cbd5e1; }
+.jr-log-line.ok { color: #00ff88; }
+.jr-log-line.err { color: #ff3358; }
+
+@media (max-width: 720px) { /* Regla responsiva según tamaño de pantalla */
+    .theme-dots { display: none; }
+    .jr-main-grid { grid-template-columns: 1fr; }
+}

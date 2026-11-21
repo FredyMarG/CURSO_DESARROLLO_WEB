@@ -1,87 +1,87 @@
 /* Archivo: JAVASCRIPT MID LEVEL/Pestañas DevTools/Elements/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-alt: #1e293b;
-    --border: #1f2937;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --accent: #38bdf8;
-    --success: #34d399;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-alt: #1e293b; /* Variable CSS personalizada (--surface-alt) */
+    --border: #1f2937; /* Variable CSS personalizada (--border) */
+    --text: #e2e8f0; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #38bdf8; /* Variable CSS personalizada (--accent) */
+    --success: #34d399; /* Variable CSS personalizada (--success) */
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
+body { /* Regla de estilo para body */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; /* Familia tipográfica */
+    background: var(--bg); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 .container { width: min(1000px, 92%); margin-inline: auto; }
-.hero {
-    padding: 2rem 0 1.5rem;
-    border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent);
+.hero { /* Regla de estilo para .hero */
+    padding: 2rem 0 1.5rem; /* Relleno interior */
+    border-bottom: 1px solid var(--border); /* Borde inferior */
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.08), transparent); /* Fondo o degradado */
 }
-.badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(56, 189, 248, 0.12);
-    padding: 0.25rem 0.65rem;
-    border-radius: 999px;
-    margin-bottom: 0.6rem;
+.badge { /* Regla de estilo para .badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    color: var(--accent); /* Color del texto */
+    background: rgba(56, 189, 248, 0.12); /* Fondo o degradado */
+    padding: 0.25rem 0.65rem; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    margin-bottom: 0.6rem; /* Margen exterior inferior */
 }
 .subtitle { color: var(--muted); }
-.grid-layout {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-    gap: 1.25rem;
-    padding: 1.75rem 0 3rem;
+.grid-layout { /* Regla de estilo para .grid-layout */
+    display: grid; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 1.25rem; /* Separación entre filas y columnas */
+    padding: 1.75rem 0 3rem; /* Relleno interior */
 }
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
+.card { /* Regla de estilo para .card */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 12px; /* Redondeo de esquinas */
+    padding: 1.25rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.9rem; /* Separación entre filas y columnas */
 }
-.target-box {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    padding: 1rem;
-    background: #020617;
-    border: 2px solid var(--accent);
-    border-radius: 10px;
-    transition: all 0.2s ease;
+.target-box { /* Regla de estilo para .target-box */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.4rem; /* Separación entre filas y columnas */
+    padding: 1rem; /* Relleno interior */
+    background: #020617; /* Fondo o degradado */
+    border: 2px solid var(--accent); /* Borde del contenedor */
+    border-radius: 10px; /* Redondeo de esquinas */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
-.target-box.resaltado {
-    border-color: var(--success);
-    background: rgba(52, 211, 153, 0.12);
+.target-box.resaltado { /* Regla de estilo para .target-box.resaltado */
+    border-color: var(--success); /* Color del borde */
+    background: rgba(52, 211, 153, 0.12); /* Fondo o degradado */
 }
 .target-box.extra-pad { padding: 2rem; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.btn {
-    background: var(--surface-alt);
-    color: var(--text);
-    border: 1px solid #334155;
-    border-radius: 8px;
-    padding: 0.5rem 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
+.btn { /* Regla de estilo para .btn */
+    background: var(--surface-alt); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    border: 1px solid #334155; /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.5rem 0.85rem; /* Relleno interior */
+    font-weight: 600; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 }
 .btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
-.terminal {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem;
-    font-family: ui-monospace, monospace;
-    font-size: 0.84rem;
-    white-space: pre-wrap;
-    min-height: 160px;
+.terminal { /* Regla de estilo para .terminal */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
+    font-family: ui-monospace, monospace; /* Familia tipográfica */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    white-space: pre-wrap; /* Control de espacios y saltos de línea */
+    min-height: 160px; /* Alto mínimo permitido */
 }

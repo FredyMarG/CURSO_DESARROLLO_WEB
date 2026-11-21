@@ -1,13 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JS Junior — Guía Interactiva de Operadores</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css">
+    <script src="../../RESOURCES COURSE/junior-theme.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23eab308'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%E2%9E%95%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body>
     <div class="app-shell">
+                <nav class="jr-top-nav" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.28);border-radius:14px;backdrop-filter:blur(12px);">
+            <span style="font-family:monospace;font-size:0.78rem;color:#38bdf8;font-weight:700;">🌱 JS JUNIOR LEVEL</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <a href="../DOCUMENTACION/index.html" style="color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);">📘 Apuntes</a>
+                <a href="../../index.html" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:#38bdf8;">🏠 Portal Principal</a>
+            </div>
+        </nav>
         <header class="hero">
             <span class="badge">Módulo 02 · Operadores ES2020+</span>
             <h1>Operadores Aritméticos, Lógicos y Modernos</h1>
@@ -31,22 +41,10 @@
             <div class="jr-slide" data-idx="0" style="display:block;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Operadores de Asignación</h3>
                 <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Asignan un valor a la variable de la izquierda basándose en la expresión de la derecha.</p>
-<p style="margin:6px 0;line-height:1.6;">| Operador | Nombre | Ejemplo | Equivalente |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>=</code> | Asignación simple | <code>x = 10</code> | <code>x = 10</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>+=</code> | Suma y asignación | <code>x += 5</code> | <code>x = x + 5</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>-=</code> | Resta y asignación | <code>x -= 3</code> | <code>x = x - 3</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>*=</code> | Multiplicación y asignación | <code>x *= 2</code> | <code>x = x * 2</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>/=</code> | División y asignación | <code>x /= 2</code> | <code>x = x / 2</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%=</code> | Residuo y asignación | <code>x %= 3</code> | <code>x = x % 3</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code><strong>=</code> | Exponente y asignación | <code>x </strong>= 2</code> | <code>x = x ** 2</code> |</p>
+<table class="compare-table"><thead><tr><th>Operador</th><th>Nombre</th><th>Ejemplo</th><th>Equivalente</th></tr></thead><tbody><tr><td><code>=</code></td><td>Asignación simple</td><td><code>x = 10</code></td><td><code>x = 10</code></td></tr><tr><td><code>+=</code></td><td>Suma y asignación</td><td><code>x += 5</code></td><td><code>x = x + 5</code></td></tr><tr><td><code>-=</code></td><td>Resta y asignación</td><td><code>x -= 3</code></td><td><code>x = x - 3</code></td></tr><tr><td><code>*=</code></td><td>Multiplicación y asignación</td><td><code>x *= 2</code></td><td><code>x = x * 2</code></td></tr><tr><td><code>/=</code></td><td>División y asignación</td><td><code>x /= 2</code></td><td><code>x = x / 2</code></td></tr><tr><td><code>%=</code></td><td>Residuo y asignación</td><td><code>x %= 3</code></td><td><code>x = x % 3</code></td></tr><tr><td><code><strong>=</code></td><td>Exponente y asignación</td><td><code>x </strong>= 2</code></td><td><code>x = x ** 2</code></td></tr></tbody></table>
 <h4 style="margin:10px 0 4px;color:#38bdf8;">Operadores de Asignación Lógica (ES2021)</h4>
 <p style="margin:6px 0;line-height:1.6;">Combinan evaluación lógica con asignación y solo escriben si la condición de cortocircuito se cumple:</p>
-<p style="margin:6px 0;line-height:1.6;">| Operador | Significado | Equivalente | Caso de uso real |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>x ??= y</code> | Asigna <code>y</code> solo si <code>x</code> es <code>null</code> o <code>undefined</code> | <code>x ?? (x = y)</code> | Valores por defecto sin pisar <code>0</code> ni <code>false</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>x ||= y</code> | Asigna <code>y</code> solo si <code>x</code> es *falsy* | <code>x || (x = y)</code> | Rellenar strings vacíos o contadores en <code>0</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>x &amp;&amp;= y</code> | Asigna <code>y</code> solo si <code>x</code> es *truthy* | <code>x &amp;&amp; (x = y)</code> | Actualizar un valor solo si ya existía |</p>
+<table class="compare-table"><thead><tr><th>Operador</th><th>Significado</th><th>Equivalente</th><th>Caso de uso real</th></tr></thead><tbody><tr><td><code>x ??= y</code></td><td>Asigna <code>y</code> solo si <code>x</code> es <code>null</code> o <code>undefined</code></td><td><code>x ?? (x = y)</code></td><td>Valores por defecto sin pisar <code>0</code> ni <code>false</code></td></tr><tr><td><code>x</td><td></td><td>= y</code></td><td>Asigna <code>y</code> solo si <code>x</code> es *falsy*</td><td><code>x</td><td></td><td>(x = y)</code></td><td>Rellenar strings vacíos o contadores en <code>0</code></td></tr><tr><td><code>x &amp;&amp;= y</code></td><td>Asigna <code>y</code> solo si <code>x</code> es *truthy*</td><td><code>x &amp;&amp; (x = y)</code></td><td>Actualizar un valor solo si ya existía</td></tr></tbody></table>
 <pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const configuracion = { tema: &quot;&quot;, reintentos: 0 };
 
 configuracion.tema ||= &quot;oscuro&quot;;      // &quot;&quot; es falsy → cambia a &quot;oscuro&quot;
@@ -55,16 +53,7 @@ configuracion.usuario ??= &quot;Invitado&quot;; // undefined → asigna &quot;In
             </div>
             <div class="jr-slide" data-idx="1" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Operadores Aritméticos</h3>
-                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Operador | Descripción | Ejemplo | Resultado |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>+</code> | Suma (o concatenación si hay un string) | <code>10 + 5</code> | <code>15</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>-</code> | Resta | <code>10 - 5</code> | <code>5</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>*</code> | Multiplicación | <code>4 * 3</code> | <code>12</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>/</code> | División | <code>10 / 4</code> | <code>2.5</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>%</code> | Módulo (resto de la división entera) | <code>10 % 3</code> | <code>1</code> (útil para saber pares: <code>n % 2 === 0</code>) |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code><strong></code> | Exponenciación (ES2016) | <code>2 </strong> 3</code> | <code>8</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>++</code> | Incremento en 1 | <code>let i = 1; i++;</code> | <code>2</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>--</code> | Decremento en 1 | <code>let i = 3; i--;</code> | <code>2</code> |</p>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Operador</th><th>Descripción</th><th>Ejemplo</th><th>Resultado</th></tr></thead><tbody><tr><td><code>+</code></td><td>Suma (o concatenación si hay un string)</td><td><code>10 + 5</code></td><td><code>15</code></td></tr><tr><td><code>-</code></td><td>Resta</td><td><code>10 - 5</code></td><td><code>5</code></td></tr><tr><td><code>*</code></td><td>Multiplicación</td><td><code>4 * 3</code></td><td><code>12</code></td></tr><tr><td><code>/</code></td><td>División</td><td><code>10 / 4</code></td><td><code>2.5</code></td></tr><tr><td><code>%</code></td><td>Módulo (resto de la división entera)</td><td><code>10 % 3</code></td><td><code>1</code> (útil para saber pares: <code>n % 2 === 0</code>)</td></tr><tr><td><code><strong></code></td><td>Exponenciación (ES2016)</td><td><code>2 </strong> 3</code></td><td><code>8</code></td></tr><tr><td><code>++</code></td><td>Incremento en 1</td><td><code>let i = 1; i++;</code></td><td><code>2</code></td></tr><tr><td><code>--</code></td><td>Decremento en 1</td><td><code>let i = 3; i--;</code></td><td><code>2</code></td></tr></tbody></table>
 <p style="margin:6px 0;line-height:1.6;">&gt; <strong>Prefijo vs Sufijo en <code>++</code> / <code>--</code>:</strong> <code>++x</code> incrementa y devuelve el nuevo valor; <code>x++</code> devuelve el valor actual y luego incrementa. Para evitar confusiones, úsalos en su propia línea o prefiere <code>x += 1</code>.</p></div>
             </div>
             <div class="jr-slide" data-idx="2" style="display:none;">
@@ -79,20 +68,12 @@ configuracion.usuario ??= &quot;Invitado&quot;; // undefined → asigna &quot;In
 5 === &quot;5&quot;   // false (number !== string)
 0 == false  // true
 0 === false // false</code></pre>
-<p style="margin:6px 0;line-height:1.6;">| Operador | Descripción | Ejemplo |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>===</code> | Estrictamente igual | <code>&quot;a&quot; === &quot;a&quot;</code> → <code>true</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>!==</code> | Estrictamente diferente | <code>5 !== &quot;5&quot;</code> → <code>true</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>&gt;</code> / <code>&gt;=</code> | Mayor / Mayor o igual | <code>18 &gt;= 18</code> → <code>true</code> |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>&lt;</code> / <code>&lt;=</code> | Menor / Menor o igual | <code>10 &lt; 20</code> → <code>true</code> |</p></div>
+<table class="compare-table"><thead><tr><th>Operador</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>===</code></td><td>Estrictamente igual</td><td><code>&quot;a&quot; === &quot;a&quot;</code> → <code>true</code></td></tr><tr><td><code>!==</code></td><td>Estrictamente diferente</td><td><code>5 !== &quot;5&quot;</code> → <code>true</code></td></tr><tr><td><code>&gt;</code> / <code>&gt;=</code></td><td>Mayor / Mayor o igual</td><td><code>18 &gt;= 18</code> → <code>true</code></td></tr><tr><td><code>&lt;</code> / <code>&lt;=</code></td><td>Menor / Menor o igual</td><td><code>10 &lt; 20</code> → <code>true</code></td></tr></tbody></table>
+</div>
             </div>
             <div class="jr-slide" data-idx="3" style="display:none;">
                 <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Operadores Lógicos y Cortocircuito (Short-Circuit)</h3>
-                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">| Operador | Nombre | Comportamiento |</p>
-<p style="margin:6px 0;line-height:1.6;">| :--- | :--- | :--- |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>&amp;&amp;</code> | AND lógico | Devuelve el primer valor *falsy* o el último valor si todos son *truthy* |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>||</code> | OR lógico | Devuelve el primer valor *truthy* o el último valor si todos son *falsy* |</p>
-<p style="margin:6px 0;line-height:1.6;">| <code>!</code> | NOT lógico | Invierte el valor booleano (<code>!true</code> → <code>false</code>, <code>!!&quot;hola&quot;</code> → <code>true</code>) |</p>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Operador</th><th>Nombre</th><th>Comportamiento</th></tr></thead><tbody><tr><td><code>&amp;&amp;</code></td><td>AND lógico</td><td>Devuelve el primer valor *falsy* o el último valor si todos son *truthy*</td></tr><tr><td><code></td><td></td><td></code></td><td>OR lógico</td><td>Devuelve el primer valor *truthy* o el último valor si todos son *falsy*</td></tr><tr><td><code>!</code></td><td>NOT lógico</td><td>Invierte el valor booleano (<code>!true</code> → <code>false</code>, <code>!!&quot;hola&quot;</code> → <code>true</code>)</td></tr></tbody></table>
 <h4 style="margin:10px 0 4px;color:#38bdf8;">Evaluación en Cortocircuito</h4>
 <p style="margin:6px 0;line-height:1.6;">JavaScript evalúa de izquierda a derecha y se detiene en cuanto el resultado es definitivo:</p>
 <pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const estaLogueado = true;
@@ -231,3 +212,5 @@ const categoria = edad &gt;= 18 ? &quot;Adulto&quot; : &quot;Menor&quot;;</code>
     <script src="operadores.js"></script>
 </body>
 </html>
+
+

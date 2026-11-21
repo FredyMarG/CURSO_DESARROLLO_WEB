@@ -4,28 +4,28 @@
    y errores en rojo neón (#ff3358). Documentado en español.
    ========================================================================== */
 
-:root {
-    --neon-bg: #050711;
-    --neon-card: rgba(12, 18, 36, 0.88);
-    --neon-surface: #0b1020;
-    --neon-cyan: #00f0ff;
-    --neon-purple: #a855f7;
-    --neon-green: #00ff88;
-    --neon-red: #ff3358;
-    --neon-text: #f8fafc;
-    --neon-muted: #cbd5e1;
-    --neon-border: rgba(0, 240, 255, 0.26);
+:root { /* Regla de estilo para :root */
+    --neon-bg: #050711; /* Variable CSS personalizada (--neon-bg) */
+    --neon-card: rgba(12, 18, 36, 0.88); /* Variable CSS personalizada (--neon-card) */
+    --neon-surface: #0b1020; /* Variable CSS personalizada (--neon-surface) */
+    --neon-cyan: #00f0ff; /* Variable CSS personalizada (--neon-cyan) */
+    --neon-purple: #a855f7; /* Variable CSS personalizada (--neon-purple) */
+    --neon-green: #00ff88; /* Variable CSS personalizada (--neon-green) */
+    --neon-red: #ff3358; /* Variable CSS personalizada (--neon-red) */
+    --neon-text: #f8fafc; /* Variable CSS personalizada (--neon-text) */
+    --neon-muted: #cbd5e1; /* Variable CSS personalizada (--neon-muted) */
+    --neon-border: rgba(0, 240, 255, 0.26); /* Variable CSS personalizada (--neon-border) */
 }
 
 /* Fondo oscuro profundo con resplandores neón ambientales */
-html, body {
+html, body { /* Regla de estilo para html, body */
     background:
         radial-gradient(circle at 12% 10%, rgba(0, 240, 255, 0.14), transparent 36%),
         radial-gradient(circle at 88% 85%, rgba(168, 85, 247, 0.14), transparent 38%),
-        var(--neon-bg) !important;
-    color: var(--neon-text) !important;
-    font-family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif !important;
-    min-height: 100vh;
+        var(--neon-bg) !important; /* Regla CSS */
+    color: var(--neon-text) !important; /* Color del texto */
+    font-family: 'Outfit', 'Segoe UI', system-ui, -apple-system, sans-serif !important; /* Familia tipográfica */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
 /* Tarjetas principales de enunciado, preguntas, formularios y soluciones */
@@ -51,15 +51,15 @@ html, body {
 .modal,
 .modal-content,
 .modal-body,
-form {
-    background: var(--neon-card) !important;
-    color: var(--neon-text) !important;
-    border: 1px solid var(--neon-border) !important;
-    border-radius: 16px !important;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.08), 0 12px 32px rgba(0, 0, 0, 0.5) !important;
-    backdrop-filter: blur(12px);
-    animation: neonFadeUp 0.35s ease both;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+form { /* Regla de estilo para form */
+    background: var(--neon-card) !important; /* Fondo o degradado */
+    color: var(--neon-text) !important; /* Color del texto */
+    border: 1px solid var(--neon-border) !important; /* Borde del contenedor */
+    border-radius: 16px !important; /* Redondeo de esquinas */
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.08), 0 12px 32px rgba(0, 0, 0, 0.5) !important; /* Sombra proyectada */
+    backdrop-filter: blur(12px); /* Filtro aplicado al fondo detrás del elemento */
+    animation: neonFadeUp 0.35s ease both; /* Animación con keyframes */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease; /* Transición suave de propiedades */
 }
 
 .enunciado:hover,
@@ -67,390 +67,390 @@ form {
 .solucion:hover,
 .ejercicio:hover,
 .publicacion:hover,
-.flex-item:hover {
-    border-color: rgba(0, 240, 255, 0.48) !important;
-    box-shadow: 0 0 28px rgba(0, 240, 255, 0.18), 0 14px 34px rgba(0, 0, 0, 0.55) !important;
+.flex-item:hover { /* Regla de estilo para .flex-item:hover */
+    border-color: rgba(0, 240, 255, 0.48) !important; /* Color del borde */
+    box-shadow: 0 0 28px rgba(0, 240, 255, 0.18), 0 14px 34px rgba(0, 0, 0, 0.55) !important; /* Sombra proyectada */
 }
 
-@keyframes neonFadeUp {
+@keyframes neonFadeUp { /* Definición de animación por fotogramas clave */
     from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* Contenedor de botón único de solución sin fondo ni borde: deja solo el botón animado */
 .ask:has(> button:only-child),
-.ask:has(> label:only-child) {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
+.ask:has(> label:only-child) { /* Regla de estilo para .ask:has(> label:only-child) */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
+    backdrop-filter: none !important; /* Filtro aplicado al fondo detrás del elemento */
 }
 
 /* Formulario dentro de .ask o .solucion: sin doble tarjeta, ancho equilibrado y etiquetas alineadas */
 .ask form,
-.solucion form {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    max-width: 640px;
-    margin: 0 auto !important;
-    text-align: left !important;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.solucion form { /* Regla de estilo para .solucion form */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
+    backdrop-filter: none !important; /* Filtro aplicado al fondo detrás del elemento */
+    max-width: 640px; /* Ancho máximo permitido */
+    margin: 0 auto !important; /* Margen exterior */
+    text-align: left !important; /* Alineación horizontal del texto */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 12px; /* Separación entre filas y columnas */
 }
 
 .ask form label,
-.solucion form label {
-    color: var(--neon-cyan) !important;
-    font-size: 0.95rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.02em;
-    margin-top: 4px;
+.solucion form label { /* Regla de estilo para .solucion form label */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    font-size: 0.95rem !important; /* Tamaño de fuente */
+    font-weight: 600 !important; /* Grosor de la fuente */
+    letter-spacing: 0.02em; /* Espaciado entre letras */
+    margin-top: 4px; /* Margen exterior superior */
 }
 
 .ask form input,
 .ask form select,
 .solucion form input,
-.solucion form select {
-    width: 100%;
-    font-size: 0.95rem !important;
+.solucion form select { /* Regla de estilo para .solucion form select */
+    width: 100%; /* Ancho del elemento */
+    font-size: 0.95rem !important; /* Tamaño de fuente */
 }
 
 .ask form button,
 .ask form input[type="submit"],
 .solucion form button,
-.solucion form input[type="submit"] {
-    align-self: center;
-    min-width: 220px;
-    margin-top: 10px;
-    padding: 12px 28px !important;
+.solucion form input[type="submit"] { /* Regla de estilo para .solucion form input[type="submit"] */
+    align-self: center; /* Alineación individual del ítem */
+    min-width: 220px; /* Ancho mínimo permitido */
+    margin-top: 10px; /* Margen exterior superior */
+    padding: 12px 28px !important; /* Relleno interior */
 }
 
 /* Respuesta compacta integrada justo debajo del formulario en Inscripción de Materias Adeudadas */
-.ask #solucion {
-    width: 100% !important;
-    max-width: 640px !important;
-    margin: 18px auto 0 !important;
-    padding: 16px 20px !important;
+.ask #solucion { /* Regla de estilo para .ask #solucion */
+    width: 100% !important; /* Ancho del elemento */
+    max-width: 640px !important; /* Ancho máximo permitido */
+    margin: 18px auto 0 !important; /* Margen exterior */
+    padding: 16px 20px !important; /* Relleno interior */
 }
 
-.ask #solucion.solucion {
-    display: none !important;
+.ask #solucion.solucion { /* Regla de estilo para .ask #solucion.solucion */
+    display: none !important; /* Define el tipo de caja/layout */
 }
 
-.ask #solucion.mostrar {
-    display: block !important;
+.ask #solucion.mostrar { /* Regla de estilo para .ask #solucion.mostrar */
+    display: block !important; /* Define el tipo de caja/layout */
 }
 
-.ask #solucion h2 {
-    font-size: 1.05rem !important;
-    margin-bottom: 10px !important;
+.ask #solucion h2 { /* Regla de estilo para .ask #solucion h2 */
+    font-size: 1.05rem !important; /* Tamaño de fuente */
+    margin-bottom: 10px !important; /* Margen exterior inferior */
 }
 
 /* Cabeceras y filas de Nota Final Materias (10 Nota Final Consola) */
-.sol .label {
-    color: var(--neon-cyan) !important;
-    border-bottom: 2px solid rgba(0, 240, 255, 0.45) !important;
-    background: rgba(0, 240, 255, 0.06);
-    border-radius: 10px 10px 0 0;
+.sol .label { /* Regla de estilo para .sol .label */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    border-bottom: 2px solid rgba(0, 240, 255, 0.45) !important; /* Borde inferior */
+    background: rgba(0, 240, 255, 0.06); /* Fondo o degradado */
+    border-radius: 10px 10px 0 0; /* Redondeo de esquinas */
 }
 
-.sol .resultado:has(.fila) {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
+.sol .resultado:has(.fila) { /* Regla de estilo para .sol .resultado:has(.fila) */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
+    padding: 0 !important; /* Relleno interior */
 }
 
-.fila {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(0, 240, 255, 0.16) !important;
-    border-radius: 12px !important;
-    gap: 18px !important;
-    padding: 12px 16px !important;
+.fila { /* Regla de estilo para .fila */
+    background: rgba(255, 255, 255, 0.03) !important; /* Fondo o degradado */
+    border: 1px solid rgba(0, 240, 255, 0.16) !important; /* Borde del contenedor */
+    border-radius: 12px !important; /* Redondeo de esquinas */
+    gap: 18px !important; /* Separación entre filas y columnas */
+    padding: 12px 16px !important; /* Relleno interior */
 }
 
-.fila .nombre {
-    color: var(--neon-cyan) !important;
-    font-size: 1rem !important;
+.fila .nombre { /* Regla de estilo para .fila .nombre */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    font-size: 1rem !important; /* Tamaño de fuente */
 }
 
 /* Cuadrícula de 4 columnas en 4 Recuperación de Materia por Docente */
-#solucion .grid-container {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    display: grid !important;
-    grid-template-columns: 1.1fr 1.4fr 1fr 1.2fr;
-    gap: 10px;
-    align-items: center;
-    margin: 20px 0 !important;
+#solucion .grid-container { /* Regla de estilo para #solucion .grid-container */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
+    backdrop-filter: none !important; /* Filtro aplicado al fondo detrás del elemento */
+    display: grid !important; /* Define el tipo de caja/layout */
+    grid-template-columns: 1.1fr 1.4fr 1fr 1.2fr; /* Definición de columnas de la grilla */
+    gap: 10px; /* Separación entre filas y columnas */
+    align-items: center; /* Alineación en el eje cruzado */
+    margin: 20px 0 !important; /* Margen exterior */
 }
 
-#solucion .grid-container > div {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 240, 255, 0.18);
-    border-radius: 10px;
-    padding: 10px 14px;
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+#solucion .grid-container > div { /* Regla de estilo para #solucion .grid-container > div */
+    background: rgba(255, 255, 255, 0.03); /* Fondo o degradado */
+    border: 1px solid rgba(0, 240, 255, 0.18); /* Borde del contenedor */
+    border-radius: 10px; /* Redondeo de esquinas */
+    padding: 10px 14px; /* Relleno interior */
+    min-height: 46px; /* Alto mínimo permitido */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    text-align: center; /* Alineación horizontal del texto */
 }
 
-#solucion .grid-container > .nombre {
-    color: var(--neon-cyan) !important;
-    font-weight: 700;
+#solucion .grid-container > .nombre { /* Regla de estilo para #solucion .grid-container > .nombre */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    font-weight: 700; /* Grosor de la fuente */
 }
 
-#solucion .grid-container > .semana {
-    padding: 4px 8px;
+#solucion .grid-container > .semana { /* Regla de estilo para #solucion .grid-container > .semana */
+    padding: 4px 8px; /* Relleno interior */
 }
 
-#solucion .grid-container > .semana select {
-    width: 100%;
-    padding: 8px 10px !important;
+#solucion .grid-container > .semana select { /* Regla de estilo para #solucion .grid-container > .semana select */
+    width: 100%; /* Ancho del elemento */
+    padding: 8px 10px !important; /* Relleno interior */
 }
 
-#solucion #confirmar {
-    margin-top: 16px;
-    min-width: 220px;
-    padding: 12px 26px !important;
+#solucion #confirmar { /* Regla de estilo para #solucion #confirmar */
+    margin-top: 16px; /* Margen exterior superior */
+    min-width: 220px; /* Ancho mínimo permitido */
+    padding: 12px 26px !important; /* Relleno interior */
 }
 
-@media (max-width: 760px) {
-    #solucion .grid-container {
-        grid-template-columns: 1fr;
+@media (max-width: 760px) { /* Regla responsiva según tamaño de pantalla */
+    #solucion .grid-container { /* Regla de estilo para #solucion .grid-container */
+        grid-template-columns: 1fr; /* Definición de columnas de la grilla */
     }
 }
 
 /* Aviso de servidor local (7 Compañeros de Cofla Htdocs) */
-.aviso-servidor {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 18px 22px;
-    border-left: 4px solid var(--neon-cyan) !important;
+.aviso-servidor { /* Regla de estilo para .aviso-servidor */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 20px auto; /* Margen exterior */
+    padding: 18px 22px; /* Relleno interior */
+    border-left: 4px solid var(--neon-cyan) !important; /* Borde izquierdo */
 }
 
-.aviso-servidor a {
-    color: var(--neon-cyan) !important;
-    word-break: break-all;
+.aviso-servidor a { /* Regla de estilo para .aviso-servidor a */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    word-break: break-all; /* Control de quiebre de palabras */
 }
 
-.aviso-servidor code {
-    background: rgba(0, 240, 255, 0.12);
-    color: var(--neon-cyan);
-    padding: 2px 7px;
-    border-radius: 6px;
+.aviso-servidor code { /* Regla de estilo para .aviso-servidor code */
+    background: rgba(0, 240, 255, 0.12); /* Fondo o degradado */
+    color: var(--neon-cyan); /* Color del texto */
+    padding: 2px 7px; /* Relleno interior */
+    border-radius: 6px; /* Redondeo de esquinas */
 }
 
 /* Tarjetas lado a lado de Aprobados / Desaprobados en 7 Compañeros de Cofla */
-#solucion:has(.aprobados) {
-    text-align: center;
+#solucion:has(.aprobados) { /* Regla de estilo para #solucion:has(.aprobados) */
+    text-align: center; /* Alineación horizontal del texto */
 }
 
-#solucion:has(.aprobados) #getInfo {
-    margin-bottom: 18px;
-    min-width: 200px;
+#solucion:has(.aprobados) #getInfo { /* Regla de estilo para #solucion:has(.aprobados) #getInfo */
+    margin-bottom: 18px; /* Margen exterior inferior */
+    min-width: 200px; /* Ancho mínimo permitido */
 }
 
-#solucion .resultado:has(.aprobados) {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    display: grid !important;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 14px;
+#solucion .resultado:has(.aprobados) { /* Regla de estilo para #solucion .resultado:has(.aprobados) */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
+    padding: 0 !important; /* Relleno interior */
+    display: grid !important; /* Define el tipo de caja/layout */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Definición de columnas de la grilla */
+    gap: 14px; /* Separación entre filas y columnas */
 }
 
 #solucion .aprobados,
-#solucion .desaprobados {
-    padding: 18px 20px !important;
-    border-radius: 14px !important;
-    font-size: 1.1rem;
-    font-weight: 700;
+#solucion .desaprobados { /* Regla de estilo para #solucion .desaprobados */
+    padding: 18px 20px !important; /* Relleno interior */
+    border-radius: 14px !important; /* Redondeo de esquinas */
+    font-size: 1.1rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
 }
 
-#solucion .error-msg {
-    grid-column: 1 / -1;
-    padding: 14px 18px;
-    border-radius: 12px;
+#solucion .error-msg { /* Regla de estilo para #solucion .error-msg */
+    grid-column: 1 / -1; /* Ubicación/expansión en columnas */
+    padding: 14px 18px; /* Relleno interior */
+    border-radius: 12px; /* Redondeo de esquinas */
 }
 
 /* Tabla de materias y notas en 6 Notas de Cofla */
-.solucion.mostrar {
-    visibility: visible !important;
-    display: block !important;
+.solucion.mostrar { /* Regla de estilo para .solucion.mostrar */
+    visibility: visible !important; /* Propiedad CSS: visibility */
+    display: block !important; /* Define el tipo de caja/layout */
 }
 
-.solucion .materias {
-    width: 100% !important;
-    background: transparent !important;
-    padding: 0 !important;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.solucion .materias { /* Regla de estilo para .solucion .materias */
+    width: 100% !important; /* Ancho del elemento */
+    background: transparent !important; /* Fondo o degradado */
+    padding: 0 !important; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 10px; /* Separación entre filas y columnas */
 }
 
-.solucion .materia {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(0, 240, 255, 0.22) !important;
-    border-radius: 12px !important;
-    overflow: hidden;
+.solucion .materia { /* Regla de estilo para .solucion .materia */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    background: rgba(255, 255, 255, 0.03) !important; /* Fondo o degradado */
+    border: 1px solid rgba(0, 240, 255, 0.22) !important; /* Borde del contenedor */
+    border-radius: 12px !important; /* Redondeo de esquinas */
+    overflow: hidden; /* Control de contenido desbordado */
 }
 
-.materia .nombre {
-    color: #f8fafc !important;
+.materia .nombre { /* Regla de estilo para .materia .nombre */
+    color: #f8fafc !important; /* Color del texto */
 }
 
-.materia .nota {
-    min-width: 72px;
-    text-align: center;
-    background: rgba(0, 255, 136, 0.14) !important;
-    color: var(--neon-green) !important;
-    border-left: 1px solid rgba(0, 255, 136, 0.4);
-    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+.materia .nota { /* Regla de estilo para .materia .nota */
+    min-width: 72px; /* Ancho mínimo permitido */
+    text-align: center; /* Alineación horizontal del texto */
+    background: rgba(0, 255, 136, 0.14) !important; /* Fondo o degradado */
+    color: var(--neon-green) !important; /* Color del texto */
+    border-left: 1px solid rgba(0, 255, 136, 0.4); /* Borde izquierdo */
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45); /* Sombra del texto */
 }
 
-ol > li::before {
-    color: var(--neon-cyan) !important;
+ol > li::before { /* Regla de estilo para ol > li::before */
+    color: var(--neon-cyan) !important; /* Color del texto */
 }
 
 /* Fondo oscuro difuminado para modales emergentes */
-.modal-bg {
-    background: rgba(5, 7, 17, 0.78) !important;
-    backdrop-filter: blur(8px);
-    z-index: 9998 !important;
+.modal-bg { /* Regla de estilo para .modal-bg */
+    background: rgba(5, 7, 17, 0.78) !important; /* Fondo o degradado */
+    backdrop-filter: blur(8px); /* Filtro aplicado al fondo detrás del elemento */
+    z-index: 9998 !important; /* Orden de apilamiento en el eje Z */
 }
 
 /* Modal centrado con espacio superior reservado para el botón de cierre */
-.modal {
-    position: relative !important;
-    padding: 58px 28px 28px !important;
-    min-width: min(420px, 92vw);
-    max-width: 480px;
+.modal { /* Regla de estilo para .modal */
+    position: relative !important; /* Define el esquema de posicionamiento */
+    padding: 58px 28px 28px !important; /* Relleno interior */
+    min-width: min(420px, 92vw); /* Ancho mínimo permitido */
+    max-width: 480px; /* Ancho máximo permitido */
 }
 
-.modal .resultado {
-    margin: 6px auto 14px !important;
-    position: relative;
-    z-index: 1;
+.modal .resultado { /* Regla de estilo para .modal .resultado */
+    margin: 6px auto 14px !important; /* Margen exterior */
+    position: relative; /* Define el esquema de posicionamiento */
+    z-index: 1; /* Orden de apilamiento en el eje Z */
 }
 
-.modal .mensaje {
-    margin-top: 18px !important;
-    padding: 12px 16px !important;
-    border-radius: 12px !important;
+.modal .mensaje { /* Regla de estilo para .modal .mensaje */
+    margin-top: 18px !important; /* Margen exterior superior */
+    padding: 12px 16px !important; /* Relleno interior */
+    border-radius: 12px !important; /* Redondeo de esquinas */
 }
 
 /* Botón circular de cierre ubicado 20px más arriba sobre el borde superior derecho */
-.modal__close-button {
-    position: absolute !important;
-    top: -8px !important;
-    right: 12px !important;
-    z-index: 20 !important;
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 0 !important;
-    padding: 0 !important;
-    border-radius: 50% !important;
-    display: grid !important;
-    place-items: center !important;
-    font-size: 0.95rem !important;
-    line-height: 1 !important;
-    background: rgba(255, 51, 88, 0.14) !important;
-    color: var(--neon-red) !important;
-    border: 1px solid rgba(255, 51, 88, 0.55) !important;
-    box-shadow: 0 0 12px rgba(255, 51, 88, 0.25) !important;
+.modal__close-button { /* Regla de estilo para .modal__close-button */
+    position: absolute !important; /* Define el esquema de posicionamiento */
+    top: -8px !important; /* Desplazamiento superior */
+    right: 12px !important; /* Desplazamiento derecho */
+    z-index: 20 !important; /* Orden de apilamiento en el eje Z */
+    width: 36px !important; /* Ancho del elemento */
+    height: 36px !important; /* Alto del elemento */
+    min-width: 0 !important; /* Ancho mínimo permitido */
+    padding: 0 !important; /* Relleno interior */
+    border-radius: 50% !important; /* Redondeo de esquinas */
+    display: grid !important; /* Define el tipo de caja/layout */
+    place-items: center !important; /* Propiedad CSS: place-items */
+    font-size: 0.95rem !important; /* Tamaño de fuente */
+    line-height: 1 !important; /* Altura de línea del texto */
+    background: rgba(255, 51, 88, 0.14) !important; /* Fondo o degradado */
+    color: var(--neon-red) !important; /* Color del texto */
+    border: 1px solid rgba(255, 51, 88, 0.55) !important; /* Borde del contenedor */
+    box-shadow: 0 0 12px rgba(255, 51, 88, 0.25) !important; /* Sombra proyectada */
 }
 
-.modal__close-button:hover {
-    background: var(--neon-red) !important;
-    color: #ffffff !important;
-    box-shadow: 0 0 18px rgba(255, 51, 88, 0.65) !important;
-    transform: rotate(90deg) scale(1.05) !important;
+.modal__close-button:hover { /* Regla de estilo para .modal__close-button:hover */
+    background: var(--neon-red) !important; /* Fondo o degradado */
+    color: #ffffff !important; /* Color del texto */
+    box-shadow: 0 0 18px rgba(255, 51, 88, 0.65) !important; /* Sombra proyectada */
+    transform: rotate(90deg) scale(1.05) !important; /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* Zonas interactivas Drag & Drop (sin !important en background de .zona para permitir texturas dinámicas) */
 .zona-arrastre,
-.zona-drop {
-    border: 2px dashed rgba(0, 240, 255, 0.45) !important;
-    background: rgba(0, 240, 255, 0.05) !important;
-    color: #e2e8f0 !important;
-    transition: all 0.25s ease;
+.zona-drop { /* Regla de estilo para .zona-drop */
+    border: 2px dashed rgba(0, 240, 255, 0.45) !important; /* Borde del contenedor */
+    background: rgba(0, 240, 255, 0.05) !important; /* Fondo o degradado */
+    color: #e2e8f0 !important; /* Color del texto */
+    transition: all 0.25s ease; /* Transición suave de propiedades */
 }
 
-.zona {
-    border: 2px dashed rgba(0, 240, 255, 0.45);
-    color: #e2e8f0;
-    transition: all 0.25s ease;
+.zona { /* Regla de estilo para .zona */
+    border: 2px dashed rgba(0, 240, 255, 0.45); /* Borde del contenedor */
+    color: #e2e8f0; /* Color del texto */
+    transition: all 0.25s ease; /* Transición suave de propiedades */
 }
 
 .zona-arrastre:hover,
 .zona-drop:hover,
-.zona-drop.dragover {
-    border-color: var(--neon-cyan) !important;
-    background: rgba(0, 240, 255, 0.12) !important;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.28) !important;
+.zona-drop.dragover { /* Regla de estilo para .zona-drop.dragover */
+    border-color: var(--neon-cyan) !important; /* Color del borde */
+    background: rgba(0, 240, 255, 0.12) !important; /* Fondo o degradado */
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.28) !important; /* Sombra proyectada */
 }
 
 /* Títulos con acento cian neón */
-h1, h2, h3, .title, .titulo {
-    color: var(--neon-cyan) !important;
-    text-shadow: 0 0 14px rgba(0, 240, 255, 0.3);
+h1, h2, h3, .title, .titulo { /* Regla de estilo para h1, h2, h3, .title, .titulo */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    text-shadow: 0 0 14px rgba(0, 240, 255, 0.3); /* Sombra del texto */
 }
 
 /* Textos generales legibles sobre fondo oscuro (baja especificidad con :where para no pisar estados neón) */
-:where(p, li, dt, dd, .enunciado p, .pregunta p, .sol p, .ask p, .enunciado li, .pregunta li, .sol li, .ask li, .solucion li) {
-    color: var(--neon-muted) !important;
+:where(p, li, dt, dd, .enunciado p, .pregunta p, .sol p, .ask p, .enunciado li, .pregunta li, .sol li, .ask li, .solucion li) { /* Regla de estilo para :where(p, li, dt, dd, .enunciado p, .pregunta p, .sol p, .ask p, .enunciado li, .pregunta li, .sol li, .ask li, .solucion li) */
+    color: var(--neon-muted) !important; /* Color del texto */
 }
 
 .ask span,
 .sol span,
-.enunciado span {
-    color: #f1f5f9;
+.enunciado span { /* Regla de estilo para .enunciado span */
+    color: #f1f5f9; /* Color del texto */
 }
 
 /* Etiquetas de formulario normales (no botones de solución) */
-label:not([onclick]):not(#sol):not([for="mostrar"]):not(.btn-solucion) {
-    color: #e2e8f0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+label:not([onclick]):not(#sol):not([for="mostrar"]):not(.btn-solucion) { /* Propiedad CSS: label */
+    color: #e2e8f0 !important; /* Color del texto */
+    background: transparent !important; /* Fondo o degradado */
+    border: none !important; /* Borde del contenedor */
+    box-shadow: none !important; /* Sombra proyectada */
 }
 
 /* Viñetas personalizadas en cian neón */
-ul > li::before {
-    color: var(--neon-cyan) !important;
+ul > li::before { /* Regla de estilo para ul > li::before */
+    color: var(--neon-cyan) !important; /* Color del texto */
 }
 
 /* Campos de entrada, selectores y áreas de texto oscuros con foco neón */
 input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
 select,
-textarea {
-    background: #070b17 !important;
-    color: #f8fafc !important;
-    border: 1px solid rgba(0, 240, 255, 0.28) !important;
-    border-radius: 10px !important;
-    padding: 10px 12px !important;
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
+textarea { /* Regla de estilo para textarea */
+    background: #070b17 !important; /* Fondo o degradado */
+    color: #f8fafc !important; /* Color del texto */
+    border: 1px solid rgba(0, 240, 255, 0.28) !important; /* Borde del contenedor */
+    border-radius: 10px !important; /* Redondeo de esquinas */
+    padding: 10px 12px !important; /* Relleno interior */
+    outline: none; /* Contorno de enfoque accesible */
+    transition: border-color 0.2s, box-shadow 0.2s; /* Transición suave de propiedades */
 }
 
 input:focus,
 select:focus,
-textarea:focus {
-    border-color: var(--neon-cyan) !important;
-    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35) !important;
+textarea:focus { /* Propiedad CSS: textarea */
+    border-color: var(--neon-cyan) !important; /* Color del borde */
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.35) !important; /* Sombra proyectada */
 }
 
 /* Botones principales y etiquetas que actúan como botón de solución */
@@ -461,15 +461,15 @@ input[type="button"],
 label[onclick],
 label#sol,
 label[for="mostrar"],
-label.btn-solucion {
-    background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(168, 85, 247, 0.22)) !important;
-    color: #ffffff !important;
-    border: 1px solid rgba(0, 240, 255, 0.5) !important;
-    border-radius: 10px !important;
-    box-shadow: 0 0 16px rgba(0, 240, 255, 0.18) !important;
-    font-weight: 700 !important;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s, background 0.2s !important;
+label.btn-solucion { /* Regla de estilo para label.btn-solucion */
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.18), rgba(168, 85, 247, 0.22)) !important; /* Fondo o degradado */
+    color: #ffffff !important; /* Color del texto */
+    border: 1px solid rgba(0, 240, 255, 0.5) !important; /* Borde del contenedor */
+    border-radius: 10px !important; /* Redondeo de esquinas */
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.18) !important; /* Sombra proyectada */
+    font-weight: 700 !important; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s !important; /* Transición suave de propiedades */
 }
 
 button:hover,
@@ -479,51 +479,51 @@ input[type="button"]:hover,
 label[onclick]:hover,
 label#sol:hover,
 label[for="mostrar"]:hover,
-label.btn-solucion:hover {
-    background: var(--neon-cyan) !important;
-    color: #050711 !important;
-    box-shadow: 0 0 22px rgba(0, 240, 255, 0.55) !important;
-    transform: translateY(-2px);
+label.btn-solucion:hover { /* Regla de estilo para label.btn-solucion:hover */
+    background: var(--neon-cyan) !important; /* Fondo o degradado */
+    color: #050711 !important; /* Color del texto */
+    box-shadow: 0 0 22px rgba(0, 240, 255, 0.55) !important; /* Sombra proyectada */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* Tablas oscuras con bordes, filas alternas y hover cian neón */
-table {
-    background: #070b17 !important;
-    border-collapse: collapse;
-    border: 1px solid var(--neon-border) !important;
+table { /* Regla de estilo para table */
+    background: #070b17 !important; /* Fondo o degradado */
+    border-collapse: collapse; /* Propiedad CSS: border-collapse */
+    border: 1px solid var(--neon-border) !important; /* Borde del contenedor */
 }
 
 thead,
-thead .title {
-    background: rgba(0, 240, 255, 0.12) !important;
-    color: var(--neon-cyan) !important;
+thead .title { /* Regla de estilo para thead .title */
+    background: rgba(0, 240, 255, 0.12) !important; /* Fondo o degradado */
+    color: var(--neon-cyan) !important; /* Color del texto */
 }
 
 th,
-thead th {
-    background: rgba(0, 240, 255, 0.12) !important;
-    color: var(--neon-cyan) !important;
-    border-bottom: 1px solid var(--neon-border) !important;
+thead th { /* Regla de estilo para thead th */
+    background: rgba(0, 240, 255, 0.12) !important; /* Fondo o degradado */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    border-bottom: 1px solid var(--neon-border) !important; /* Borde inferior */
 }
 
 td,
-tbody td {
-    color: #e2e8f0 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+tbody td { /* Regla de estilo para tbody td */
+    color: #e2e8f0 !important; /* Color del texto */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important; /* Borde inferior */
 }
 
-tbody tr:nth-child(even) {
-    background: rgba(255, 255, 255, 0.03) !important;
+tbody tr:nth-child(even) { /* Regla de estilo para tbody tr:nth-child(even) */
+    background: rgba(255, 255, 255, 0.03) !important; /* Fondo o degradado */
 }
 
-tbody tr:hover {
-    background: rgba(0, 240, 255, 0.14) !important;
-    box-shadow: inset 0 0 16px rgba(0, 240, 255, 0.2) !important;
+tbody tr:hover { /* Regla de estilo para tbody tr:hover */
+    background: rgba(0, 240, 255, 0.14) !important; /* Fondo o degradado */
+    box-shadow: inset 0 0 16px rgba(0, 240, 255, 0.2) !important; /* Sombra proyectada */
 }
 
-tbody tr:hover td {
-    color: #ffffff !important;
-    text-shadow: 0 0 10px rgba(0, 240, 255, 0.55);
+tbody tr:hover td { /* Regla de estilo para tbody tr:hover td */
+    color: #ffffff !important; /* Color del texto */
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.55); /* Sombra del texto */
 }
 
 /* ==========================================================================
@@ -538,18 +538,18 @@ tbody tr:hover td {
 .aprobados,
 .fila.aprobado,
 .posible,
-.save {
-    color: var(--neon-green) !important;
-    background: rgba(0, 255, 136, 0.12) !important;
-    border: 1px solid rgba(0, 255, 136, 0.6) !important;
-    box-shadow: 0 0 18px rgba(0, 255, 136, 0.3) !important;
-    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+.save { /* Regla de estilo para .save */
+    color: var(--neon-green) !important; /* Color del texto */
+    background: rgba(0, 255, 136, 0.12) !important; /* Fondo o degradado */
+    border: 1px solid rgba(0, 255, 136, 0.6) !important; /* Borde del contenedor */
+    box-shadow: 0 0 18px rgba(0, 255, 136, 0.3) !important; /* Sombra proyectada */
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45); /* Sombra del texto */
 }
 
 [style*="color: green"],
-[style*="color:green"] {
-    color: var(--neon-green) !important;
-    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45);
+[style*="color:green"] { /* Regla de estilo para [style*="color:green"] */
+    color: var(--neon-green) !important; /* Color del texto */
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.45); /* Sombra del texto */
 }
 
 .green *,
@@ -558,13 +558,13 @@ tbody tr:hover td {
 .aprobados *,
 .fila.aprobado .nombre,
 [style*="color: green"] *,
-[style*="color:green"] * {
-    color: inherit !important;
+[style*="color:green"] * { /* Regla de estilo para [style*="color:green"] * */
+    color: inherit !important; /* Color del texto */
 }
 
-.fila.aprobado input {
-    border-color: var(--neon-green) !important;
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3) !important;
+.fila.aprobado input { /* Regla de estilo para .fila.aprobado input */
+    border-color: var(--neon-green) !important; /* Color del borde */
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3) !important; /* Sombra proyectada */
 }
 
 /* ==========================================================================
@@ -582,49 +582,49 @@ tbody tr:hover td {
 .fila.reprobado,
 .imposible,
 .delete,
-.btn-peligro {
-    color: var(--neon-red) !important;
-    background: rgba(255, 51, 88, 0.12) !important;
-    border: 1px solid rgba(255, 51, 88, 0.65) !important;
-    box-shadow: 0 0 18px rgba(255, 51, 88, 0.32) !important;
-    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45);
+.btn-peligro { /* Regla de estilo para .btn-peligro */
+    color: var(--neon-red) !important; /* Color del texto */
+    background: rgba(255, 51, 88, 0.12) !important; /* Fondo o degradado */
+    border: 1px solid rgba(255, 51, 88, 0.65) !important; /* Borde del contenedor */
+    box-shadow: 0 0 18px rgba(255, 51, 88, 0.32) !important; /* Sombra proyectada */
+    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45); /* Sombra del texto */
 }
 
 /* Cápsula flotante de regreso a Proyectos y al Portal Principal */
-.neon-nav-group {
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.neon-nav-group { /* Regla de estilo para .neon-nav-group */
+    position: fixed; /* Define el esquema de posicionamiento */
+    bottom: 16px; /* Desplazamiento inferior */
+    right: 16px; /* Desplazamiento derecho */
+    z-index: 9999; /* Orden de apilamiento en el eje Z */
+    display: flex; /* Define el tipo de caja/layout */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 8px; /* Separación entre filas y columnas */
 }
 
-.neon-portal-pill {
-    background: rgba(5, 7, 17, 0.92);
-    color: var(--neon-cyan) !important;
-    border: 1px solid rgba(0, 240, 255, 0.5);
-    border-radius: 999px;
-    padding: 8px 14px;
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-decoration: none !important;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
-    backdrop-filter: blur(12px);
-    transition: all 0.2s ease;
+.neon-portal-pill { /* Regla de estilo para .neon-portal-pill */
+    background: rgba(5, 7, 17, 0.92); /* Fondo o degradado */
+    color: var(--neon-cyan) !important; /* Color del texto */
+    border: 1px solid rgba(0, 240, 255, 0.5); /* Borde del contenedor */
+    border-radius: 999px; /* Redondeo de esquinas */
+    padding: 8px 14px; /* Relleno interior */
+    font-size: 0.8rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-decoration: none !important; /* Decoración del texto */
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.25); /* Sombra proyectada */
+    backdrop-filter: blur(12px); /* Filtro aplicado al fondo detrás del elemento */
+    transition: all 0.2s ease; /* Transición suave de propiedades */
 }
 
-.neon-portal-pill:hover {
-    background: var(--neon-cyan) !important;
-    color: #050711 !important;
-    box-shadow: 0 0 24px rgba(0, 240, 255, 0.6);
+.neon-portal-pill:hover { /* Regla de estilo para .neon-portal-pill:hover */
+    background: var(--neon-cyan) !important; /* Fondo o degradado */
+    color: #050711 !important; /* Color del texto */
+    box-shadow: 0 0 24px rgba(0, 240, 255, 0.6); /* Sombra proyectada */
 }
 
 [style*="color: red"],
-[style*="color:red"] {
-    color: var(--neon-red) !important;
-    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45);
+[style*="color:red"] { /* Regla de estilo para [style*="color:red"] */
+    color: var(--neon-red) !important; /* Color del texto */
+    text-shadow: 0 0 8px rgba(255, 51, 88, 0.45); /* Sombra del texto */
 }
 
 .red *,
@@ -633,55 +633,55 @@ tbody tr:hover td {
 .error-msg.error *,
 .fila.reprobado .nombre,
 [style*="color: red"] *,
-[style*="color:red"] * {
-    color: inherit !important;
+[style*="color:red"] * { /* Regla de estilo para [style*="color:red"] * */
+    color: inherit !important; /* Color del texto */
 }
 
-.fila.reprobado input {
-    border-color: var(--neon-red) !important;
-    box-shadow: 0 0 10px rgba(255, 51, 88, 0.35) !important;
+.fila.reprobado input { /* Regla de estilo para .fila.reprobado input */
+    border-color: var(--neon-red) !important; /* Color del borde */
+    box-shadow: 0 0 10px rgba(255, 51, 88, 0.35) !important; /* Sombra proyectada */
 }
 
 /* ==========================================================================
    ADVERTENCIAS / AVISOS -> ÁMBAR NEÓN (#ffb800)
    ========================================================================== */
 .warning,
-.resultado.warning {
-    color: #ffd166 !important;
-    background: rgba(255, 184, 0, 0.12) !important;
-    border: 1px solid rgba(255, 184, 0, 0.6) !important;
-    box-shadow: 0 0 18px rgba(255, 184, 0, 0.25) !important;
-    text-shadow: 0 0 8px rgba(255, 184, 0, 0.4);
+.resultado.warning { /* Regla de estilo para .resultado.warning */
+    color: #ffd166 !important; /* Color del texto */
+    background: rgba(255, 184, 0, 0.12) !important; /* Fondo o degradado */
+    border: 1px solid rgba(255, 184, 0, 0.6) !important; /* Borde del contenedor */
+    box-shadow: 0 0 18px rgba(255, 184, 0, 0.25) !important; /* Sombra proyectada */
+    text-shadow: 0 0 8px rgba(255, 184, 0, 0.4); /* Sombra del texto */
 }
 
 .warning *,
-.resultado.warning * {
-    color: inherit !important;
+.resultado.warning * { /* Regla de estilo para .resultado.warning * */
+    color: inherit !important; /* Color del texto */
 }
 
 /* Listas comparativas Antes / Después en Inscripción de Materias */
 .before,
-.after {
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(0, 240, 255, 0.2) !important;
-    border-radius: 12px !important;
-    padding: 14px 18px !important;
+.after { /* Regla de estilo para .after */
+    background: rgba(255, 255, 255, 0.03) !important; /* Fondo o degradado */
+    border: 1px solid rgba(0, 240, 255, 0.2) !important; /* Borde del contenedor */
+    border-radius: 12px !important; /* Redondeo de esquinas */
+    padding: 14px 18px !important; /* Relleno interior */
 }
 
 /* Mensajes de datos/resultado neutros (ej. 2 Mostrar Datos Web: #protocol, #host, #path, #href) */
-.resultado-msg:not(.success):not(.error):not(.warning) {
-    background: rgba(0, 240, 255, 0.06) !important;
-    border: 1px solid rgba(0, 240, 255, 0.28) !important;
-    border-radius: 12px !important;
-    padding: 12px 16px !important;
-    margin-top: 10px !important;
-    color: #f8fafc !important;
-    box-shadow: 0 0 14px rgba(0, 240, 255, 0.1) !important;
-    word-break: break-word;
+.resultado-msg:not(.success):not(.error):not(.warning) { /* Regla de estilo para .resultado-msg:not(.success):not(.error):not(.warning) */
+    background: rgba(0, 240, 255, 0.06) !important; /* Fondo o degradado */
+    border: 1px solid rgba(0, 240, 255, 0.28) !important; /* Borde del contenedor */
+    border-radius: 12px !important; /* Redondeo de esquinas */
+    padding: 12px 16px !important; /* Relleno interior */
+    margin-top: 10px !important; /* Margen exterior superior */
+    color: #f8fafc !important; /* Color del texto */
+    box-shadow: 0 0 14px rgba(0, 240, 255, 0.1) !important; /* Sombra proyectada */
+    word-break: break-word; /* Control de quiebre de palabras */
 }
 
-.resultado-msg:empty {
-    display: none !important;
+.resultado-msg:empty { /* Regla de estilo para .resultado-msg:empty */
+    display: none !important; /* Define el tipo de caja/layout */
 }
 
 /* Ocultar cajas vacías para evitar bordes neón sin contenido */
@@ -690,6 +690,6 @@ tbody tr:hover td {
 .error-msg:empty,
 .resultado:empty,
 .success-res:empty,
-.error-res:empty {
-    display: none !important;
+.error-res:empty { /* Regla de estilo para .error-res:empty */
+    display: none !important; /* Define el tipo de caja/layout */
 }

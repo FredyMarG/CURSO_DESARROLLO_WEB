@@ -1,14 +1,14 @@
 /* Archivo: JAVASCRIPT JUNIOR LEVEL/Funciones/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-2: #1e293b;
-    --border: #334155;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --accent: #f97316;
-    --accent-soft: rgba(249, 115, 22, 0.16);
-    --radius: 14px;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-2: #1e293b; /* Variable CSS personalizada (--surface-2) */
+    --border: #334155; /* Variable CSS personalizada (--border) */
+    --text: #f1f5f9; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #f97316; /* Variable CSS personalizada (--accent) */
+    --accent-soft: rgba(249, 115, 22, 0.16); /* Variable CSS personalizada (--accent-soft) */
+    --radius: 14px; /* Variable CSS personalizada (--radius) */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }

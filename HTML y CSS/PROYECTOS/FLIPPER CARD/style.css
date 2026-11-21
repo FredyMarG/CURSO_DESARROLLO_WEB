@@ -9,180 +9,180 @@
 
 
 /* Reset general: normaliza márgenes y box-sizing. */
-*{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+*{ /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    font-family: sans-serif; /* Familia tipográfica */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    --bg-color: color-mix(in srgb, #f62 70%, #fff);
-    --card-color:#fff;
-    --card-bg-color:#fff6;
-    --darkcolor: #f62;
-    --text-color: #444;
-    background-color: var(--bg-color);
-    display: flex;
+body{ /* Regla de estilo para body */
+    --bg-color: color-mix(in srgb, #f62 70%, #fff); /* Variable CSS personalizada (--bg-color) */
+    --card-color:#fff; /* Variable CSS personalizada (--card-color) */
+    --card-bg-color:#fff6; /* Variable CSS personalizada (--card-bg-color) */
+    --darkcolor: #f62; /* Variable CSS personalizada (--darkcolor) */
+    --text-color: #444; /* Variable CSS personalizada (--text-color) */
+    background-color: var(--bg-color); /* Color de fondo */
+    display: flex; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Caja visual que agrupa contenido con estilo propio. */
-.card{
-    max-width: clamp(160px, 50%, 320px );
-    background-color: var(--card-bg-color);
-    margin: 50px auto;
-    position: relative;
-    border-radius: 20px;
+.card{ /* Regla de estilo para .card */
+    max-width: clamp(160px, 50%, 320px ); /* Ancho máximo permitido */
+    background-color: var(--card-bg-color); /* Color de fondo */
+    margin: 50px auto; /* Margen exterior */
+    position: relative; /* Define el esquema de posicionamiento */
+    border-radius: 20px; /* Redondeo de esquinas */
 }
 
 
 
 /* Estilos del selector .card-front, .card-back. */
-.card-front, .card-back{
-    backface-visibility: hidden;
-    transition: transform 1s;
-    background-color: var(--card-color);
-    border-radius: 20px;
-    overflow: hidden;
-    padding-bottom: 6px;
+.card-front, .card-back{ /* Regla de estilo para .card-front, .card-back */
+    backface-visibility: hidden; /* Propiedad CSS: backface-visibility */
+    transition: transform 1s; /* Transición suave de propiedades */
+    background-color: var(--card-color); /* Color de fondo */
+    border-radius: 20px; /* Redondeo de esquinas */
+    overflow: hidden; /* Control de contenido desbordado */
+    padding-bottom: 6px; /* Relleno interior inferior */
 }
 
 
 
 /* Estado o pseudo-clase .card:hover .card-front: estilo cuando el usuario interactúa. */
-.card:hover .card-front{
-    transform: perspective(1100px) rotateY(180deg);
+.card:hover .card-front{ /* Regla de estilo para .card:hover .card-front */
+    transform: perspective(1100px) rotateY(180deg); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 
 
 /* Estado o pseudo-clase .card:hover .card-back: estilo cuando el usuario interactúa. */
-.card:hover .card-back{
-    transform: perspective(1100px) rotateY(360deg);
+.card:hover .card-back{ /* Regla de estilo para .card:hover .card-back */
+    transform: perspective(1100px) rotateY(360deg); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 
 
 /* Estilos del selector .card-front. */
-.card-front{
-    transform: perspective(1100px) rotateY(0deg);
+.card-front{ /* Regla de estilo para .card-front */
+    transform: perspective(1100px) rotateY(0deg); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 
 
 /* Estilos del selector .card-back. */
-.card-back{
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    padding: 12px;
-    transform: perspective(1100px) rotateY(180deg);
+.card-back{ /* Regla de estilo para .card-back */
+    position: absolute; /* Define el esquema de posicionamiento */
+    top: 0; /* Desplazamiento superior */
+    width: 100%; /* Ancho del elemento */
+    height: 100%; /* Alto del elemento */
+    display: grid; /* Define el tipo de caja/layout */
+    padding: 12px; /* Relleno interior */
+    transform: perspective(1100px) rotateY(180deg); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 
 
 /* Estilos del selector .card-back > span. */
-.card-back > span{
-    font-size: 1.4rem;
-    margin: 6px 0;
+.card-back > span{ /* Regla de estilo para .card-back > span */
+    font-size: 1.4rem; /* Tamaño de fuente */
+    margin: 6px 0; /* Margen exterior */
 }
 
 
 
 /* Estilos del selector .card-worker. */
-.card-worker {
-    max-height: 150px;
-    overflow: hidden;
-    display: block;
+.card-worker { /* Regla de estilo para .card-worker */
+    max-height: 150px; /* Alto máximo permitido */
+    overflow: hidden; /* Control de contenido desbordado */
+    display: block; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Estilos del selector .card-worker img. */
-.card-worker img {
-    max-width: 100%;
+.card-worker img { /* Regla de estilo para .card-worker img */
+    max-width: 100%; /* Ancho máximo permitido */
 }
 
 
 
 /* Estilos del selector .card-data. */
-.card-data{
-    padding: 12px;
+.card-data{ /* Regla de estilo para .card-data */
+    padding: 12px; /* Relleno interior */
 }
 
 
 
 /* Estilos del selector .card-data > span. */
-.card-data > span{
-    font-size: 1.4rem;
-    margin: 6px 0;
-    display: block;
+.card-data > span{ /* Regla de estilo para .card-data > span */
+    font-size: 1.4rem; /* Tamaño de fuente */
+    margin: 6px 0; /* Margen exterior */
+    display: block; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Estilos del selector .skill-bar. */
-.skill-bar{
-    border: 3px solid var(--bg-color);
-    margin: 15px;
-    padding: 3px ;
-    border-radius: 4px;
+.skill-bar{ /* Regla de estilo para .skill-bar */
+    border: 3px solid var(--bg-color); /* Borde del contenedor */
+    margin: 15px; /* Margen exterior */
+    padding: 3px ; /* Relleno interior */
+    border-radius: 4px; /* Redondeo de esquinas */
 }
 
 
 
 /* Estilos del selector .skill-bar .bar. */
-.skill-bar .bar{
-    background-color: var(--bg-color);
-    padding: 9px;
-    color: var(--card-color);
+.skill-bar .bar{ /* Regla de estilo para .skill-bar .bar */
+    background-color: var(--bg-color); /* Color de fondo */
+    padding: 9px; /* Relleno interior */
+    color: var(--card-color); /* Color del texto */
 }
 
 
 
 /* Estado o pseudo-clase .skill-bar:nth-child(2) .bar: estilo cuando el usuario interactúa. */
-.skill-bar:nth-child(2) .bar{
-    width: 95%;
+.skill-bar:nth-child(2) .bar{ /* Regla de estilo para .skill-bar:nth-child(2) .bar */
+    width: 95%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase .skill-bar:nth-child(3) .bar: estilo cuando el usuario interactúa. */
-.skill-bar:nth-child(3) .bar{
-    width: 80%;
+.skill-bar:nth-child(3) .bar{ /* Regla de estilo para .skill-bar:nth-child(3) .bar */
+    width: 80%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase .skill-bar:nth-child(4) .bar: estilo cuando el usuario interactúa. */
-.skill-bar:nth-child(4) .bar{
-    width: 75%;
+.skill-bar:nth-child(4) .bar{ /* Regla de estilo para .skill-bar:nth-child(4) .bar */
+    width: 75%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase .skill-bar:nth-child(5) .bar: estilo cuando el usuario interactúa. */
-.skill-bar:nth-child(5) .bar{
-    width: 60%;
+.skill-bar:nth-child(5) .bar{ /* Regla de estilo para .skill-bar:nth-child(5) .bar */
+    width: 60%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase .skill-bar:last-child .bar: estilo cuando el usuario interactúa. */
-.skill-bar:last-child .bar{
-    width: 50%;
+.skill-bar:last-child .bar{ /* Regla de estilo para .skill-bar:last-child .bar */
+    width: 50%; /* Ancho del elemento */
 }
 
 
 
 /* Estado o pseudo-clase .card:nth-child(2) img: estilo cuando el usuario interactúa. */
-.card:nth-child(2) img {
-    opacity: .7;
+.card:nth-child(2) img { /* Regla de estilo para .card:nth-child(2) img */
+    opacity: .7; /* Nivel de transparencia */
 }

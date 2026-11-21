@@ -1,47 +1,47 @@
 /* Archivo: JAVASCRIPT JUNIOR LEVEL/Operadores/style.css — Estilos/lógica del módulo de aprendizaje */
-:root {
-    --bg: #0b1120;
-    --surface: #111827;
-    --surface-2: #1e293b;
-    --border: #334155;
-    --text: #f1f5f9;
-    --muted: #94a3b8;
-    --accent: #f59e0b;
-    --accent-soft: rgba(245, 158, 11, 0.15);
-    --radius: 14px;
+:root { /* Regla de estilo para :root */
+    --bg: #0b1120; /* Variable CSS personalizada (--bg) */
+    --surface: #111827; /* Variable CSS personalizada (--surface) */
+    --surface-2: #1e293b; /* Variable CSS personalizada (--surface-2) */
+    --border: #334155; /* Variable CSS personalizada (--border) */
+    --text: #f1f5f9; /* Variable CSS personalizada (--text) */
+    --muted: #94a3b8; /* Variable CSS personalizada (--muted) */
+    --accent: #f59e0b; /* Variable CSS personalizada (--accent) */
+    --accent-soft: rgba(245, 158, 11, 0.15); /* Variable CSS personalizada (--accent-soft) */
+    --radius: 14px; /* Variable CSS personalizada (--radius) */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-body {
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: radial-gradient(circle at top, #451a03 0%, var(--bg) 55%);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-    padding: 2rem 1rem 4rem;
+body { /* Regla de estilo para body */
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Familia tipográfica */
+    background: radial-gradient(circle at top, #451a03 0%, var(--bg) 55%); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    min-height: 100vh; /* Alto mínimo permitido */
+    line-height: 1.6; /* Altura de línea del texto */
+    padding: 2rem 1rem 4rem; /* Relleno interior */
 }
 
 .app-shell { max-width: 1050px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
 
-.hero {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.75rem 2rem;
+.hero { /* Regla de estilo para .hero */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.75rem 2rem; /* Relleno interior */
 }
 
-.badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    background: var(--accent-soft);
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    margin-bottom: 0.5rem;
+.badge { /* Regla de estilo para .badge */
+    display: inline-block; /* Define el tipo de caja/layout */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor de la fuente */
+    text-transform: uppercase; /* Transformación de mayúsculas/minúsculas */
+    letter-spacing: 0.06em; /* Espaciado entre letras */
+    color: var(--accent); /* Color del texto */
+    background: var(--accent-soft); /* Fondo o degradado */
+    padding: 0.25rem 0.75rem; /* Relleno interior */
+    border-radius: 999px; /* Redondeo de esquinas */
+    margin-bottom: 0.5rem; /* Margen exterior inferior */
 }
 
 .hero h1 { font-size: clamp(1.4rem, 2.5vw, 2rem); color: #fff; }
@@ -49,25 +49,25 @@ body {
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1.25rem; }
 
-.card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.card { /* Regla de estilo para .card */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.5rem; /* Relleno interior */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 1rem; /* Separación entre filas y columnas */
 }
 
 .card h2 { font-size: 1.1rem; color: #fff; }
 
-.note {
-    font-size: 0.9rem;
-    color: var(--muted);
-    background: rgba(15, 23, 42, 0.7);
-    border-left: 3px solid var(--accent);
-    padding: 0.65rem 0.85rem;
-    border-radius: 0 8px 8px 0;
+.note { /* Regla de estilo para .note */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    color: var(--muted); /* Color del texto */
+    background: rgba(15, 23, 42, 0.7); /* Fondo o degradado */
+    border-left: 3px solid var(--accent); /* Borde izquierdo */
+    padding: 0.65rem 0.85rem; /* Relleno interior */
+    border-radius: 0 8px 8px 0; /* Redondeo de esquinas */
 }
 
 .controls { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -75,78 +75,78 @@ body {
 
 label { font-size: 0.85rem; font-weight: 600; color: var(--muted); display: block; margin-bottom: 0.25rem; }
 
-input, select {
-    width: 100%;
-    padding: 0.6rem 0.8rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    color: var(--text);
-    font-size: 0.95rem;
+input, select { /* Regla de estilo para input, select */
+    width: 100%; /* Ancho del elemento */
+    padding: 0.6rem 0.8rem; /* Relleno interior */
+    border-radius: 8px; /* Redondeo de esquinas */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    background: var(--surface-2); /* Fondo o degradado */
+    color: var(--text); /* Color del texto */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
 
 input:focus, select:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-button {
-    cursor: pointer;
-    border: none;
-    border-radius: 8px;
-    padding: 0.55rem 0.95rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-    background: var(--accent);
-    color: #0b1120;
-    transition: filter 0.15s ease;
+button { /* Regla de estilo para button */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    border: none; /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.55rem 0.95rem; /* Relleno interior */
+    font-weight: 600; /* Grosor de la fuente */
+    font-size: 0.9rem; /* Tamaño de fuente */
+    background: var(--accent); /* Fondo o degradado */
+    color: #0b1120; /* Color del texto */
+    transition: filter 0.15s ease; /* Transición suave de propiedades */
 }
 
 button:hover { filter: brightness(1.1); }
 button.secondary { background: var(--surface-2); border: 1px solid var(--border); color: var(--text); }
 
-.output {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem 1rem;
-    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
-    font-size: 0.88rem;
-    color: #e2e8f0;
-    min-height: 3.2rem;
-    white-space: pre-wrap;
-    word-break: break-word;
+.output { /* Regla de estilo para .output */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem 1rem; /* Relleno interior */
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; /* Familia tipográfica */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    color: #e2e8f0; /* Color del texto */
+    min-height: 3.2rem; /* Alto mínimo permitido */
+    white-space: pre-wrap; /* Control de espacios y saltos de línea */
+    word-break: break-word; /* Control de quiebre de palabras */
 }
 
-.code-preview {
-    background: #0f172a;
-    border: 1px solid #1e293b;
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
-    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
-    font-size: 0.82rem;
-    color: #fcd34d;
-    overflow-x: auto;
+.code-preview { /* Regla de estilo para .code-preview */
+    background: #0f172a; /* Fondo o degradado */
+    border: 1px solid #1e293b; /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.75rem 1rem; /* Relleno interior */
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; /* Familia tipográfica */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    color: #fcd34d; /* Color del texto */
+    overflow-x: auto; /* Control de desbordamiento horizontal */
 }
 
-.console-panel {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
+.console-panel { /* Regla de estilo para .console-panel */
+    background: var(--surface); /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: var(--radius); /* Redondeo de esquinas */
+    padding: 1.25rem 1.5rem; /* Relleno interior */
 }
 
 .console-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
 
-.console-log {
-    background: #020617;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.85rem;
-    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
-    font-size: 0.83rem;
-    max-height: 220px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
+.console-log { /* Regla de estilo para .console-log */
+    background: #020617; /* Fondo o degradado */
+    border: 1px solid var(--border); /* Borde del contenedor */
+    border-radius: 8px; /* Redondeo de esquinas */
+    padding: 0.85rem; /* Relleno interior */
+    font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace; /* Familia tipográfica */
+    font-size: 0.83rem; /* Tamaño de fuente */
+    max-height: 220px; /* Alto máximo permitido */
+    overflow-y: auto; /* Control de desbordamiento vertical */
+    display: flex; /* Define el tipo de caja/layout */
+    flex-direction: column; /* Dirección del eje principal flex */
+    gap: 0.35rem; /* Separación entre filas y columnas */
 }
 
 .log-line { color: #cbd5e1; }

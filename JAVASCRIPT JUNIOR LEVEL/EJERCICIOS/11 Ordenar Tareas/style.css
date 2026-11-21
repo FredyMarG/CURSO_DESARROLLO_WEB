@@ -7,223 +7,223 @@
  */
 
 /* RESET */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Familia tipográfica */
 }
 
-body {
-    background: linear-gradient(135deg, #eef2f7, #dfe6f0);
-    min-height: 100vh;
+body { /* Regla de estilo para body */
+    background: linear-gradient(135deg, #eef2f7, #dfe6f0); /* Fondo o degradado */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
 /* 🔹 CONTENEDOR PRINCIPAL */
-.enunciado {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+.enunciado { /* Regla de estilo para .enunciado */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 30px auto; /* Margen exterior */
+    background: #ffffff; /* Fondo o degradado */
+    padding: 25px; /* Relleno interior */
+    border-radius: 18px; /* Redondeo de esquinas */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra proyectada */
+    transition: 0.3s; /* Transición suave de propiedades */
 }
 
-.enunciado:hover {
-    transform: translateY(-3px);
+.enunciado:hover { /* Regla de estilo para .enunciado:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* 🔹 TITULO */
-.title {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #1e3a8a;
-    font-weight: bold;
-    letter-spacing: 1px;
+.title { /* Regla de estilo para .title */
+    text-align: center; /* Alineación horizontal del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
+    color: #1e3a8a; /* Color del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
 }
 
 /* 🔹 TEXTO */
-.enunciado p {
-    margin: 10px 0;
-    line-height: 1.7;
-    color: #555;
+.enunciado p { /* Regla de estilo para .enunciado p */
+    margin: 10px 0; /* Margen exterior */
+    line-height: 1.7; /* Altura de línea del texto */
+    color: #555; /* Color del texto */
 }
 
 /* 🔹 LISTA */
-ul {
-    list-style-type: none;
-    padding-left: 40px;
+ul { /* Regla de estilo para ul */
+    list-style-type: none; /* Propiedad CSS: list-style-type */
+    padding-left: 40px; /* Relleno interior izquierdo */
 }
 
-ul>li {
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+ul>li { /* Regla de estilo para ul>li */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding-left: 20px; /* Relleno interior izquierdo */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 
-ul>li::before {
-    content: '●';
-    color: #2563eb;
-    font-size: 18px;
-    position: absolute;
-    left: 0;
-    top: -3px;
+ul>li::before { /* Regla de estilo para ul>li::before */
+    content: '●'; /* Contenido generado para pseudoelemento */
+    color: #2563eb; /* Color del texto */
+    font-size: 18px; /* Tamaño de fuente */
+    position: absolute; /* Define el esquema de posicionamiento */
+    left: 0; /* Desplazamiento izquierdo */
+    top: -3px; /* Desplazamiento superior */
 }
 
-ol {
-    list-style-type: none;
-    counter-reset: item;
-    padding-left: 0;
-    margin: 15px 0;
+ol { /* Regla de estilo para ol */
+    list-style-type: none; /* Propiedad CSS: list-style-type */
+    counter-reset: item; /* Propiedad CSS: counter-reset */
+    padding-left: 0; /* Relleno interior izquierdo */
+    margin: 15px 0; /* Margen exterior */
 }
 
-ol>li {
-    counter-increment: item;
-    position: relative;
-    padding-left: 20px;
-    margin: 8px 0;
-    color: #444;
-    line-height: 1.6;
+ol>li { /* Regla de estilo para ol>li */
+    counter-increment: item; /* Propiedad CSS: counter-increment */
+    position: relative; /* Define el esquema de posicionamiento */
+    padding-left: 20px; /* Relleno interior izquierdo */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
+    line-height: 1.6; /* Altura de línea del texto */
 }
 
-ol>li::before {
-    content: counter(item) '.';
-    color: #2563eb;
-    font-weight: bold;
-    font-size: 16px;
-    position: absolute;
-    left: 0;
-    top: 0;
+ol>li::before { /* Regla de estilo para ol>li::before */
+    content: counter(item) '.'; /* Contenido generado para pseudoelemento */
+    color: #2563eb; /* Color del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    font-size: 16px; /* Tamaño de fuente */
+    position: absolute; /* Define el esquema de posicionamiento */
+    left: 0; /* Desplazamiento izquierdo */
+    top: 0; /* Desplazamiento superior */
 }
 
-li {
-    margin: 8px 0;
-    color: #444;
+li { /* Regla de estilo para li */
+    margin: 8px 0; /* Margen exterior */
+    color: #444; /* Color del texto */
 }
 
 /* 🔹 BOTÓN CONTENEDOR */
-.ask {
-    text-align: center;
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    transition: 0.3s;
+.ask { /* Regla de estilo para .ask */
+    text-align: center; /* Alineación horizontal del texto */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 30px auto; /* Margen exterior */
+    background: #ffffff; /* Fondo o degradado */
+    padding: 25px; /* Relleno interior */
+    border-radius: 18px; /* Redondeo de esquinas */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Sombra proyectada */
+    transition: 0.3s; /* Transición suave de propiedades */
 }
 
-.ask h2 {
-    color: #1e3a8a;
-    margin-bottom: 15px;
+.ask h2 { /* Regla de estilo para .ask h2 */
+    color: #1e3a8a; /* Color del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
 }
 
-.ask p {
-    color: #555;
-    line-height: 1.7;
-    font-size: 17px;
+.ask p { /* Regla de estilo para .ask p */
+    color: #555; /* Color del texto */
+    line-height: 1.7; /* Altura de línea del texto */
+    font-size: 17px; /* Tamaño de fuente */
 }
 
-.ask span {
-    color: #2563eb;
-    font-weight: bold;
+.ask span { /* Regla de estilo para .ask span */
+    color: #2563eb; /* Color del texto */
+    font-weight: bold; /* Grosor de la fuente */
 }
 
-.ask:hover {
-    transform: translateY(-3px);
+.ask:hover { /* Regla de estilo para .ask:hover */
+    transform: translateY(-3px); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* 🔹 RESULTADO */
-.sol {
-    width: 90%;
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 25px;
-    border-radius: 18px;
-    background: #fff;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+.sol { /* Regla de estilo para .sol */
+    width: 90%; /* Ancho del elemento */
+    max-width: 1200px; /* Ancho máximo permitido */
+    margin: 30px auto; /* Margen exterior */
+    padding: 25px; /* Relleno interior */
+    border-radius: 18px; /* Redondeo de esquinas */
+    background: #fff; /* Fondo o degradado */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* Sombra proyectada */
 }
 
 /* 🔹 TITULO RESULTADO */
-.sol h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #1e40af;
+.sol h2 { /* Regla de estilo para .sol h2 */
+    text-align: center; /* Alineación horizontal del texto */
+    margin-bottom: 20px; /* Margen exterior inferior */
+    color: #1e40af; /* Color del texto */
 }
 
-.sol > div {
-    margin-top: 20px;
+.sol > div { /* Regla de estilo para .sol > div */
+    margin-top: 20px; /* Margen exterior superior */
 }
 
 /* 📦 SEMANA */
-details.week {
-    background: #f4f6f8;
-    border-radius: 14px;
-    margin-bottom: 15px;
-    padding: 12px 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
+details.week { /* Regla de estilo para details.week */
+    background: #f4f6f8; /* Fondo o degradado */
+    border-radius: 14px; /* Redondeo de esquinas */
+    margin-bottom: 15px; /* Margen exterior inferior */
+    padding: 12px 16px; /* Relleno interior */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Sombra proyectada */
+    transition: all 0.3s ease; /* Transición suave de propiedades */
 }
 
-details.week:hover {
-    transform: scale(1.01);
+details.week:hover { /* Regla de estilo para details.week:hover */
+    transform: scale(1.01); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* 🔽 TITULO SEMANA */
-summary {
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 600;
+summary { /* Regla de estilo para summary */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor de la fuente */
     color: #4a90e2; /* azul suave */
 }
 
 /* 📅 CONTENEDOR */
-.dias {
-    margin-top: 10px;
+.dias { /* Regla de estilo para .dias */
+    margin-top: 10px; /* Margen exterior superior */
 }
 
 /* 📌 TARJETA DÍA */
-.dia {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 12px;
-    margin: 10px 0;
-    transition: all 0.25s ease;
+.dia { /* Regla de estilo para .dia */
+    background: #ffffff; /* Fondo o degradado */
+    border-radius: 12px; /* Redondeo de esquinas */
+    padding: 12px; /* Relleno interior */
+    margin: 10px 0; /* Margen exterior */
+    transition: all 0.25s ease; /* Transición suave de propiedades */
 
     /* animación suave */
-    opacity: 0;
-    transform: translateY(10px);
-    animation: aparecer 0.4s forwards;
+    opacity: 0; /* Nivel de transparencia */
+    transform: translateY(10px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    animation: aparecer 0.4s forwards; /* Animación con keyframes */
 }
 
 /* ✨ HOVER */
-.dia:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+.dia:hover { /* Regla de estilo para .dia:hover */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08); /* Sombra proyectada */
 }
 
 /* 📝 TEXTO */
-.dia h4 {
-    margin: 0;
-    font-size: 16px;
-    color: #333;
+.dia h4 { /* Regla de estilo para .dia h4 */
+    margin: 0; /* Margen exterior */
+    font-size: 16px; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
 }
 
-.dia small {
-    color: #777;
-    display: block;
-    margin-bottom: 5px;
+.dia small { /* Regla de estilo para .dia small */
+    color: #777; /* Color del texto */
+    display: block; /* Define el tipo de caja/layout */
+    margin-bottom: 5px; /* Margen exterior inferior */
 }
 
-.dia p {
-    margin: 2px 0;
-    font-size: 14px;
-    color: #555;
+.dia p { /* Regla de estilo para .dia p */
+    margin: 2px 0; /* Margen exterior */
+    font-size: 14px; /* Tamaño de fuente */
+    color: #555; /* Color del texto */
 }
 
 /* ========================= */
@@ -231,21 +231,21 @@ summary {
 /* ========================= */
 
 /* 🟢 suave */
-.green {
-    border-left: 6px solid #a8e6cf;
-    background: #f0fff7;
+.green { /* Regla de estilo para .green */
+    border-left: 6px solid #a8e6cf; /* Borde izquierdo */
+    background: #f0fff7; /* Fondo o degradado */
 }
 
 /* 🟠 suave */
-.orange {
-    border-left: 6px solid #ffd3b6;
-    background: #fff7f2;
+.orange { /* Regla de estilo para .orange */
+    border-left: 6px solid #ffd3b6; /* Borde izquierdo */
+    background: #fff7f2; /* Fondo o degradado */
 }
 
 /* 🔴 suave */
-.red {
-    border-left: 6px solid #ffaaa5;
-    background: #fff2f2;
+.red { /* Regla de estilo para .red */
+    border-left: 6px solid #ffaaa5; /* Borde izquierdo */
+    background: #fff2f2; /* Fondo o degradado */
 }
 
 /* ========================= */
@@ -254,9 +254,9 @@ summary {
 
 
 /* --- Animación (@keyframes aparecer) --- */
-@keyframes aparecer {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+@keyframes aparecer { /* Definición de animación por fotogramas clave */
+    to { /* Regla de estilo para to */
+        opacity: 1; /* Nivel de transparencia */
+        transform: translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
     }
 }

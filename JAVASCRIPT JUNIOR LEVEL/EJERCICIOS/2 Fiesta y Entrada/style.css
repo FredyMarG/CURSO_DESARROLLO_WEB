@@ -6,162 +6,162 @@
  * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
  */
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+* { /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
+    font-family: 'Segoe UI', Tahoma, sans-serif; /* Familia tipográfica */
 }
 
-body {
-    background: linear-gradient(135deg, #f4f4f4, #e9ecf3);
-    min-height: 100vh;
+body { /* Regla de estilo para body */
+    background: linear-gradient(135deg, #f4f4f4, #e9ecf3); /* Fondo o degradado */
+    min-height: 100vh; /* Alto mínimo permitido */
 }
 
 /* CONTENEDOR PRINCIPAL */
-.enunciado {
-    width: 85%;
-    max-width: 900px;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 16px;
+.enunciado { /* Regla de estilo para .enunciado */
+    width: 85%; /* Ancho del elemento */
+    max-width: 900px; /* Ancho máximo permitido */
+    margin: 20px auto; /* Margen exterior */
+    background: white; /* Fondo o degradado */
+    padding: 20px; /* Relleno interior */
+    border-radius: 16px; /* Redondeo de esquinas */
 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* Sombra proyectada */
 }
 
 /* TITULO */
-h1 {
-    text-align: center;
-    font-style: italic;
-    margin-bottom: 10px;
-    color: #333;
+h1 { /* Regla de estilo para h1 */
+    text-align: center; /* Alineación horizontal del texto */
+    font-style: italic; /* Propiedad CSS: font-style */
+    margin-bottom: 10px; /* Margen exterior inferior */
+    color: #333; /* Color del texto */
 }
 
 /* TEXTO */
-.enunciado p {
-    margin: 10px 0;
-    line-height: 1.6;
-    color: #555;
+.enunciado p { /* Regla de estilo para .enunciado p */
+    margin: 10px 0; /* Margen exterior */
+    line-height: 1.6; /* Altura de línea del texto */
+    color: #555; /* Color del texto */
 }
 
 /* LISTAS */
 ul,
-ol {
-    margin: 15px 20px;
+ol { /* Regla de estilo para ol */
+    margin: 15px 20px; /* Margen exterior */
 }
 
-ul{
-    list-style: none;
+ul{ /* Regla de estilo para ul */
+    list-style: none; /* Propiedad CSS: list-style */
 }
 
-li {
-    margin: 5px 0;
+li { /* Regla de estilo para li */
+    margin: 5px 0; /* Margen exterior */
 }
 
 /* BOTÓN (LABEL) */
-label {
-    display: block;
-    margin-top: 20px;
-    text-align: center;
+label { /* Regla de estilo para label */
+    display: block; /* Define el tipo de caja/layout */
+    margin-top: 20px; /* Margen exterior superior */
+    text-align: center; /* Alineación horizontal del texto */
 
-    padding: 12px;
-    border-radius: 10px;
+    padding: 12px; /* Relleno interior */
+    border-radius: 10px; /* Redondeo de esquinas */
 
-    background: linear-gradient(135deg, rgb(0, 120, 225), rgb(70, 163, 244));
-    color: white;
+    background: linear-gradient(135deg, rgb(0, 120, 225), rgb(70, 163, 244)); /* Fondo o degradado */
+    color: white; /* Color del texto */
 
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
+    font-size: 18px; /* Tamaño de fuente */
+    font-weight: bold; /* Grosor de la fuente */
+    cursor: pointer; /* Estilo del puntero al pasar encima */
 
-    transition: 0.2s;
+    transition: 0.2s; /* Transición suave de propiedades */
 }
 
 /* HOVER BOTÓN */
-label:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px rgba(0, 120, 225, 0.3);
+label:hover { /* Propiedad CSS: label */
+    transform: translateY(-2px); /* Transformación 2D/3D (escala, rotación, traslación) */
+    box-shadow: 0 8px 15px rgba(0, 120, 225, 0.3); /* Sombra proyectada */
 }
 
 /* CLICK */
-label:active {
-    transform: scale(0.97);
+label:active { /* Propiedad CSS: label */
+    transform: scale(0.97); /* Transformación 2D/3D (escala, rotación, traslación) */
 }
 
 /* OCULTAR CHECKBOX */
-input {
-    display: none;
+input { /* Regla de estilo para input */
+    display: none; /* Define el tipo de caja/layout */
 }
 
 /* RESULTADO (TARJETA) */
-.sol {
-    width: 85%;
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    display: none;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    animation: aparecer 0.5s ease;
+.sol { /* Regla de estilo para .sol */
+    width: 85%; /* Ancho del elemento */
+    max-width: 700px; /* Ancho máximo permitido */
+    margin: 20px auto; /* Margen exterior */
+    padding: 20px; /* Relleno interior */
+    border-radius: 16px; /* Redondeo de esquinas */
+    background: white; /* Fondo o degradado */
+    display: none; /* Define el tipo de caja/layout */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Sombra proyectada */
+    animation: aparecer 0.5s ease; /* Animación con keyframes */
 }
 
 /* ANIMACIÓN */
 
 /* --- Animación (@keyframes aparecer) --- */
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+@keyframes aparecer { /* Definición de animación por fotogramas clave */
+    from { /* Regla de estilo para from */
+        opacity: 0; /* Nivel de transparencia */
+        transform: translateY(10px); /* Transformación 2D/3D (escala, rotación, traslación) */
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    to { /* Regla de estilo para to */
+        opacity: 1; /* Nivel de transparencia */
+        transform: translateY(0); /* Transformación 2D/3D (escala, rotación, traslación) */
     }
 }
 
 /* TITULO RESULTADO */
-.sol h2 {
-    text-align: center;
-    color: rgb(0, 120, 225);
-    margin-bottom: 15px;
+.sol h2 { /* Regla de estilo para .sol h2 */
+    text-align: center; /* Alineación horizontal del texto */
+    color: rgb(0, 120, 225); /* Color del texto */
+    margin-bottom: 15px; /* Margen exterior inferior */
 }
 
 /* BLOQUE PERSONAS */
-.sol>ul {
-    margin: 15px 0;
-    padding: 10px;
+.sol>ul { /* Regla de estilo para .sol>ul */
+    margin: 15px 0; /* Margen exterior */
+    padding: 10px; /* Relleno interior */
 
-    background: #f8fbff;
-    border-radius: 10px;
-    border: 1px solid rgb(9, 139, 253);
+    background: #f8fbff; /* Fondo o degradado */
+    border-radius: 10px; /* Redondeo de esquinas */
+    border: 1px solid rgb(9, 139, 253); /* Borde del contenedor */
 }
 
-.sol>ul li {
-    text-align: center;
-    font-weight: bold;
-    color: rgb(9, 139, 253);
+.sol>ul li { /* Regla de estilo para .sol>ul li */
+    text-align: center; /* Alineación horizontal del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    color: rgb(9, 139, 253); /* Color del texto */
 }
 
 /* BLOQUE RESULTADO */
-.sol .result {
-    margin-top: 15px;
-    padding: 10px;
+.sol .result { /* Regla de estilo para .sol .result */
+    margin-top: 15px; /* Margen exterior superior */
+    padding: 10px; /* Relleno interior */
 
-    border-radius: 10px;
-    border: 1px solid rgb(70, 163, 244);
-    background: #f8fbff;
+    border-radius: 10px; /* Redondeo de esquinas */
+    border: 1px solid rgb(70, 163, 244); /* Borde del contenedor */
+    background: #f8fbff; /* Fondo o degradado */
 }
 
-.sol .result p {
-    text-align: center;
-    font-weight: bold;
-    color: rgb(70, 163, 244);
+.sol .result p { /* Regla de estilo para .sol .result p */
+    text-align: center; /* Alineación horizontal del texto */
+    font-weight: bold; /* Grosor de la fuente */
+    color: rgb(70, 163, 244); /* Color del texto */
 }
 
 /* MOSTRAR AL ACTIVAR */
-input:checked+.sol {
-    display: block;
+input:checked+.sol { /* Propiedad CSS: input */
+    display: block; /* Define el tipo de caja/layout */
 }

@@ -7,14 +7,14 @@
  * ============================================================================
  */
 
-(function () {
+(function () { // Instrucción JavaScript
     // Activamos el modo estricto para garantizar rigor en la ejecución de JavaScript
-    'use strict';
+    'use strict'; // Activa el modo estricto de JavaScript
 
     /* ==========================================================================
        1. ESTADO GLOBAL DE LA APLICACIÓN (AppState)
        ========================================================================== */
-    const AppState = {
+    const AppState = { // Declara e inicializa "AppState"
         currentSlide: 1,
         totalSlides: 12,
         viewMode: 'slides',
@@ -25,157 +25,157 @@
     /* ==========================================================================
        2. MÓDULO DE AUDIO: SINTETIZADOR PROCEDURAL (Web Audio API)
        ========================================================================== */
-    const SoundFX = {
+    const SoundFX = { // Declara e inicializa "SoundFX"
         ctx: null,
 
-        init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
-                this.ctx = new AudioConstructor();
+        init() { // Instrucción JavaScript
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa "AudioConstructor"
+                this.ctx = new AudioConstructor(); // Asigna valor
             }
         },
 
-        slide() {
-            if (!AppState.soundEnabled) return;
-            this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+        slide() { // Instrucción JavaScript
+            if (!AppState.soundEnabled) return; // Evalúa condición
+            this.init(); // Ejecuta llamada o método
+            if (!this.ctx) return; // Evalúa condición
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
+            osc.type = 'sine'; // Asigna valor
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
-            osc.frequency.setValueAtTime(320, now);
-            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
+            osc.frequency.setValueAtTime(320, now); // Ejecuta llamada o método
+            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12); // Ejecuta llamada o método
 
-            gain.gain.setValueAtTime(0.001, now);
-            gain.gain.linearRampToValueAtTime(0.08, now + 0.02);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+            gain.gain.setValueAtTime(0.001, now); // Ejecuta llamada o método
+            gain.gain.linearRampToValueAtTime(0.08, now + 0.02); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18); // Ejecuta llamada o método
 
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.18);
+            osc.connect(gain); // Ejecuta llamada o método
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
+            osc.start(now); // Ejecuta llamada o método
+            osc.stop(now + 0.18); // Ejecuta llamada o método
         },
 
-        click() {
-            if (!AppState.soundEnabled) return;
-            this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+        click() { // Instrucción JavaScript
+            if (!AppState.soundEnabled) return; // Evalúa condición
+            this.init(); // Ejecuta llamada o método
+            if (!this.ctx) return; // Evalúa condición
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'triangle';
-            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
+            osc.type = 'triangle'; // Asigna valor
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
-            osc.frequency.setValueAtTime(600, now);
-            gain.gain.setValueAtTime(0.05, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+            osc.frequency.setValueAtTime(600, now); // Ejecuta llamada o método
+            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04); // Ejecuta llamada o método
 
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.04);
+            osc.connect(gain); // Ejecuta llamada o método
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
+            osc.start(now); // Ejecuta llamada o método
+            osc.stop(now + 0.04); // Ejecuta llamada o método
         },
 
-        hit() {
-            if (!AppState.soundEnabled) return;
-            this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+        hit() { // Instrucción JavaScript
+            if (!AppState.soundEnabled) return; // Evalúa condición
+            this.init(); // Ejecuta llamada o método
+            if (!this.ctx) return; // Evalúa condición
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
-            osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
+            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
+            osc.type = 'sine'; // Asigna valor
+            const now = this.ctx.currentTime; // Declara e inicializa "now"
 
-            osc.frequency.setValueAtTime(620, now);
-            osc.frequency.exponentialRampToValueAtTime(920, now + 0.12);
-            gain.gain.setValueAtTime(0.05, now);
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+            osc.frequency.setValueAtTime(620, now); // Ejecuta llamada o método
+            osc.frequency.exponentialRampToValueAtTime(920, now + 0.12); // Ejecuta llamada o método
+            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14); // Ejecuta llamada o método
 
-            osc.connect(gain);
-            gain.connect(this.ctx.destination);
-            osc.start(now);
-            osc.stop(now + 0.14);
+            osc.connect(gain); // Ejecuta llamada o método
+            gain.connect(this.ctx.destination); // Ejecuta llamada o método
+            osc.start(now); // Ejecuta llamada o método
+            osc.stop(now + 0.14); // Ejecuta llamada o método
         }
     };
 
     /* ==========================================================================
        3. CONTROLADOR DE NAVEGACIÓN DE DIAPOSITIVAS (SlideNavigation)
        ========================================================================== */
-    const SlideNavigation = {
-        init() {
-            this.wrapper = document.getElementById('presentationWrapper');
-            this.slides = document.querySelectorAll('.slide');
-            this.progressBar = document.getElementById('progressBar');
-            this.slideIndicator = document.getElementById('slideIndicator');
+    const SlideNavigation = { // Declara e inicializa "SlideNavigation"
+        init() { // Instrucción JavaScript
+            this.wrapper = document.getElementById('presentationWrapper'); // Asigna valor
+            this.slides = document.querySelectorAll('.slide'); // Asigna valor
+            this.progressBar = document.getElementById('progressBar'); // Asigna valor
+            this.slideIndicator = document.getElementById('slideIndicator'); // Asigna valor
 
-            this.btnPrev = document.getElementById('btnPrevSlide');
-            this.btnNext = document.getElementById('btnNextSlide');
-            this.dotsContainer = document.getElementById('slideDotsContainer');
+            this.btnPrev = document.getElementById('btnPrevSlide'); // Asigna valor
+            this.btnNext = document.getElementById('btnNextSlide'); // Asigna valor
+            this.dotsContainer = document.getElementById('slideDotsContainer'); // Asigna valor
 
-            this.btnGoLab = document.getElementById('btnGoLab');
-            this.btnToggleMode = document.getElementById('btnToggleMode');
-            this.modeText = document.getElementById('modeText');
-            this.modeIcon = document.getElementById('modeIcon');
+            this.btnGoLab = document.getElementById('btnGoLab'); // Asigna valor
+            this.btnToggleMode = document.getElementById('btnToggleMode'); // Asigna valor
+            this.modeText = document.getElementById('modeText'); // Asigna valor
+            this.modeIcon = document.getElementById('modeIcon'); // Asigna valor
 
-            this.btnToggleSound = document.getElementById('btnToggleSound');
-            this.soundIcon = document.getElementById('soundIcon');
+            this.btnToggleSound = document.getElementById('btnToggleSound'); // Asigna valor
+            this.soundIcon = document.getElementById('soundIcon'); // Asigna valor
 
-            this.btnOverview = document.getElementById('btnOverview');
-            this.overviewModal = document.getElementById('overviewModal');
-            this.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.overviewGrid = document.getElementById('overviewGrid');
+            this.btnOverview = document.getElementById('btnOverview'); // Asigna valor
+            this.overviewModal = document.getElementById('overviewModal'); // Asigna valor
+            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Asigna valor
+            this.overviewGrid = document.getElementById('overviewGrid'); // Asigna valor
 
-            this.btnFullscreen = document.getElementById('btnFullscreen');
+            this.btnFullscreen = document.getElementById('btnFullscreen'); // Asigna valor
 
-            this.buildSlideDots();
-            this.buildOverviewGrid();
-            this.bindEvents();
-            this.updateUI();
+            this.buildSlideDots(); // Ejecuta llamada o método
+            this.buildOverviewGrid(); // Ejecuta llamada o método
+            this.bindEvents(); // Ejecuta llamada o método
+            this.updateUI(); // Ejecuta llamada o método
         },
 
-        buildSlideDots() {
-            if (!this.dotsContainer) return;
-            this.dotsContainer.innerHTML = '';
+        buildSlideDots() { // Instrucción JavaScript
+            if (!this.dotsContainer) return; // Evalúa condición
+            this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
-            this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const dot = document.createElement('button');
-                dot.className = 'slide-dot';
-                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
-                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+            this.slides.forEach((slide, index) => { // Instrucción JavaScript
+                const slideNum = index + 1; // Declara e inicializa "slideNum"
+                const dot = document.createElement('button'); // Crea nuevo elemento DOM "dot"
+                dot.className = 'slide-dot'; // Asigna valor
+                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`); // Ejecuta llamada o método
+                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Asigna valor
 
-                if (slideNum === AppState.currentSlide) {
-                    dot.classList.add('active');
+                if (slideNum === AppState.currentSlide) { // Evalúa condición
+                    dot.classList.add('active'); // Modifica clases CSS del elemento
                 }
 
-                dot.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(slideNum);
+                dot.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(slideNum); // Ejecuta llamada o método
                 });
 
-                this.dotsContainer.appendChild(dot);
+                this.dotsContainer.appendChild(dot); // Inserta nodo en el DOM
             });
         },
 
-        buildOverviewGrid() {
-            if (!this.overviewGrid) return;
-            this.overviewGrid.innerHTML = '';
+        buildOverviewGrid() { // Instrucción JavaScript
+            if (!this.overviewGrid) return; // Evalúa condición
+            this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
-            this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+            this.slides.forEach((slide, index) => { // Instrucción JavaScript
+                const slideNum = index + 1; // Declara e inicializa "slideNum"
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa "title"
 
-                const card = document.createElement('div');
-                card.className = 'overview-card';
-                card.dataset.slideIndex = slideNum;
+                const card = document.createElement('div'); // Crea nuevo elemento DOM "card"
+                card.className = 'overview-card'; // Asigna valor
+                card.dataset.slideIndex = slideNum; // Asigna valor
 
-                if (slideNum === AppState.currentSlide) {
-                    card.classList.add('active');
+                if (slideNum === AppState.currentSlide) { // Evalúa condición
+                    card.classList.add('active'); // Modifica clases CSS del elemento
                 }
 
                 card.innerHTML = `
@@ -183,240 +183,240 @@
                     <div class="ov-title">${title}</div>
                 `;
 
-                card.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(slideNum);
-                    this.closeOverview();
+                card.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(slideNum); // Ejecuta llamada o método
+                    this.closeOverview(); // Ejecuta llamada o método
                 });
 
-                this.overviewGrid.appendChild(card);
+                this.overviewGrid.appendChild(card); // Inserta nodo en el DOM
             });
         },
 
-        bindEvents() {
-            if (this.btnPrev) {
-                this.btnPrev.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.prevSlide();
+        bindEvents() { // Instrucción JavaScript
+            if (this.btnPrev) { // Evalúa condición
+                this.btnPrev.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.prevSlide(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnNext) {
-                this.btnNext.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.nextSlide();
+            if (this.btnNext) { // Evalúa condición
+                this.btnNext.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnGoLab) {
-                this.btnGoLab.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.goToSlide(9);
+            if (this.btnGoLab) { // Evalúa condición
+                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.goToSlide(9); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnToggleMode) {
-                this.btnToggleMode.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleViewMode();
+            if (this.btnToggleMode) { // Evalúa condición
+                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleViewMode(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnToggleSound) {
-                this.btnToggleSound.addEventListener('click', () => {
-                    this.toggleSound();
+            if (this.btnToggleSound) { // Evalúa condición
+                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de eventos
+                    this.toggleSound(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnOverview) {
-                this.btnOverview.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleOverview();
+            if (this.btnOverview) { // Evalúa condición
+                this.btnOverview.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleOverview(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.btnCloseOverview) {
-                this.btnCloseOverview.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.closeOverview();
+            if (this.btnCloseOverview) { // Evalúa condición
+                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.closeOverview(); // Ejecuta llamada o método
                 });
             }
 
-            if (this.overviewModal) {
-                this.overviewModal.addEventListener('click', (e) => {
-                    if (e.target === this.overviewModal) {
-                        this.closeOverview();
+            if (this.overviewModal) { // Evalúa condición
+                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de eventos
+                    if (e.target === this.overviewModal) { // Evalúa condición
+                        this.closeOverview(); // Ejecuta llamada o método
                     }
                 });
             }
 
-            if (this.btnFullscreen) {
-                this.btnFullscreen.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.toggleFullscreen();
+            if (this.btnFullscreen) { // Evalúa condición
+                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.toggleFullscreen(); // Ejecuta llamada o método
                 });
             }
 
-            document.addEventListener('keydown', (e) => this.handleKeyDown(e));
+            document.addEventListener('keydown', (e) => this.handleKeyDown(e)); // Registra escuchador de eventos
         },
 
-        handleKeyDown(e) {
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+        handleKeyDown(e) { // Instrucción JavaScript
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición
 
-            switch (e.key) {
+            switch (e.key) { // Evalúa múltiples casos
                 case 'ArrowRight':
                 case 'd':
                 case 'D':
-                    e.preventDefault();
-                    this.nextSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case 'ArrowLeft':
                 case 'a':
                 case 'A':
-                    e.preventDefault();
-                    this.prevSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.prevSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case ' ':
-                    e.preventDefault();
-                    this.nextSlide();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.nextSlide(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case 'o':
                 case 'O':
-                    e.preventDefault();
-                    this.toggleOverview();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.toggleOverview(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case 'f':
                 case 'F':
-                    e.preventDefault();
-                    this.toggleFullscreen();
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.toggleFullscreen(); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case 'Escape':
-                    if (AppState.overviewOpen) this.closeOverview();
-                    break;
+                    if (AppState.overviewOpen) this.closeOverview(); // Evalúa condición
+                    break; // Instrucción JavaScript
                 case 'Home':
-                    e.preventDefault();
-                    this.goToSlide(1);
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.goToSlide(1); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 case 'End':
-                    e.preventDefault();
-                    this.goToSlide(AppState.totalSlides);
-                    break;
+                    e.preventDefault(); // Ejecuta llamada o método
+                    this.goToSlide(AppState.totalSlides); // Ejecuta llamada o método
+                    break; // Instrucción JavaScript
                 default:
-                    break;
+                    break; // Instrucción JavaScript
             }
         },
 
-        goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
-            if (index === AppState.currentSlide) return;
-            AppState.currentSlide = index;
-            SoundFX.slide();
-            this.updateUI();
+        goToSlide(index) { // Instrucción JavaScript
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición
+            if (index === AppState.currentSlide) return; // Evalúa condición
+            AppState.currentSlide = index; // Asigna valor
+            SoundFX.slide(); // Ejecuta llamada o método
+            this.updateUI(); // Ejecuta llamada o método
         },
 
-        nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
-                this.goToSlide(AppState.currentSlide + 1);
+        nextSlide() { // Instrucción JavaScript
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
+                this.goToSlide(AppState.currentSlide + 1); // Ejecuta llamada o método
             }
         },
 
-        prevSlide() {
-            if (AppState.currentSlide > 1) {
-                this.goToSlide(AppState.currentSlide - 1);
+        prevSlide() { // Instrucción JavaScript
+            if (AppState.currentSlide > 1) { // Evalúa condición
+                this.goToSlide(AppState.currentSlide - 1); // Ejecuta llamada o método
             }
         },
 
-        toggleViewMode() {
-            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
+        toggleViewMode() { // Instrucción JavaScript
+            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides'; // Asigna valor
 
-            if (AppState.viewMode === 'guide') {
-                document.body.classList.remove('mode-presentation');
-                document.body.classList.add('mode-document');
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
-            } else {
-                document.body.classList.remove('mode-document');
-                document.body.classList.add('mode-presentation');
-                if (this.modeText) this.modeText.textContent = 'Modo Guía';
-                if (this.modeIcon) this.modeIcon.textContent = '📑';
+            if (AppState.viewMode === 'guide') { // Evalúa condición
+                document.body.classList.remove('mode-presentation'); // Modifica clases CSS del elemento
+                document.body.classList.add('mode-document'); // Modifica clases CSS del elemento
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición
+            } else { // Instrucción JavaScript
+                document.body.classList.remove('mode-document'); // Modifica clases CSS del elemento
+                document.body.classList.add('mode-presentation'); // Modifica clases CSS del elemento
+                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición
+                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición
             }
 
-            this.updateUI();
+            this.updateUI(); // Ejecuta llamada o método
         },
 
-        toggleSound() {
-            AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.soundIcon) {
-                this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇';
+        toggleSound() { // Instrucción JavaScript
+            AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
+            if (this.soundIcon) { // Evalúa condición
+                this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click();
+            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición
         },
 
-        toggleOverview() {
-            if (AppState.overviewOpen) {
-                this.closeOverview();
-            } else {
-                this.openOverview();
+        toggleOverview() { // Instrucción JavaScript
+            if (AppState.overviewOpen) { // Evalúa condición
+                this.closeOverview(); // Ejecuta llamada o método
+            } else { // Instrucción JavaScript
+                this.openOverview(); // Ejecuta llamada o método
             }
         },
 
-        openOverview() {
-            AppState.overviewOpen = true;
-            if (this.overviewModal) this.overviewModal.classList.add('active');
-            const cards = document.querySelectorAll('.overview-card');
-            cards.forEach(card => {
-                const idx = parseInt(card.dataset.slideIndex, 10);
-                card.classList.toggle('active', idx === AppState.currentSlide);
+        openOverview() { // Instrucción JavaScript
+            AppState.overviewOpen = true; // Asigna valor
+            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición
+            const cards = document.querySelectorAll('.overview-card'); // Obtiene referencia DOM para "cards"
+            cards.forEach(card => { // Instrucción JavaScript
+                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa "idx"
+                card.classList.toggle('active', idx === AppState.currentSlide); // Modifica clases CSS del elemento
             });
         },
 
-        closeOverview() {
-            AppState.overviewOpen = false;
-            if (this.overviewModal) this.overviewModal.classList.remove('active');
+        closeOverview() { // Instrucción JavaScript
+            AppState.overviewOpen = false; // Asigna valor
+            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición
         },
 
-        toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen().catch(() => {});
-            } else if (document.exitFullscreen) {
-                document.exitFullscreen().catch(() => {});
+        toggleFullscreen() { // Instrucción JavaScript
+            if (!document.fullscreenElement) { // Evalúa condición
+                document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
+            } else if (document.exitFullscreen) { // Instrucción JavaScript
+                document.exitFullscreen().catch(() => {}); // Ejecuta llamada o método
             }
         },
 
-        updateUI() {
-            if (AppState.viewMode === 'slides') {
-                this.slides.forEach((slide, index) => {
-                    const slideNum = index + 1;
-                    if (slideNum === AppState.currentSlide) {
-                        slide.classList.add('active');
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        slide.classList.remove('active');
+        updateUI() { // Instrucción JavaScript
+            if (AppState.viewMode === 'slides') { // Evalúa condición
+                this.slides.forEach((slide, index) => { // Instrucción JavaScript
+                    const slideNum = index + 1; // Declara e inicializa "slideNum"
+                    if (slideNum === AppState.currentSlide) { // Evalúa condición
+                        slide.classList.add('active'); // Modifica clases CSS del elemento
+                        window.scrollTo({ top: 0, behavior: 'smooth' }); // Ejecuta llamada o método
+                    } else { // Instrucción JavaScript
+                        slide.classList.remove('active'); // Modifica clases CSS del elemento
                     }
                 });
-            } else {
-                this.slides.forEach(slide => slide.classList.add('active'));
+            } else { // Instrucción JavaScript
+                this.slides.forEach(slide => slide.classList.add('active')); // Modifica clases CSS del elemento
             }
 
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa "percent"
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición
 
-            if (this.slideIndicator) {
-                this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`;
+            if (this.slideIndicator) { // Evalúa condición
+                this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            const dots = document.querySelectorAll('.slide-dot');
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
+            const dots = document.querySelectorAll('.slide-dot'); // Obtiene referencia DOM para "dots"
+            dots.forEach((dot, index) => { // Instrucción JavaScript
+                dot.classList.toggle('active', (index + 1) === AppState.currentSlide); // Modifica clases CSS del elemento
             });
 
-            if (this.btnPrev) {
-                this.btnPrev.disabled = AppState.currentSlide === 1;
-                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
+            if (this.btnPrev) { // Evalúa condición
+                this.btnPrev.disabled = AppState.currentSlide === 1; // Asigna valor
+                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1'; // Asigna valor
             }
-            if (this.btnNext) {
-                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
-                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
+            if (this.btnNext) { // Evalúa condición
+                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides; // Asigna valor
+                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1'; // Asigna valor
             }
         }
     };
@@ -424,202 +424,202 @@
     /* ==========================================================================
        4. CONTROLADOR DEL LABORATORIO INTERACTIVO DE MEMOIZATION (MMLabController)
        ========================================================================== */
-    const MMLabController = {
+    const MMLabController = { // Declara e inicializa "MMLabController"
         // Inicializa caché Map, contadores y eventos del laboratorio
-        init() {
-            this.cache = new Map();
-            this.hits = 0;
-            this.misses = 0;
+        init() { // Instrucción JavaScript
+            this.cache = new Map(); // Asigna valor
+            this.hits = 0; // Asigna valor
+            this.misses = 0; // Asigna valor
 
-            this.banner = document.getElementById('mmStatusBanner');
-            this.statusText = document.getElementById('mmStatusText');
-            this.badgeState = document.getElementById('mmBadgeState');
+            this.banner = document.getElementById('mmStatusBanner'); // Asigna valor
+            this.statusText = document.getElementById('mmStatusText'); // Asigna valor
+            this.badgeState = document.getElementById('mmBadgeState'); // Asigna valor
 
-            this.resultEl = document.getElementById('mmResult');
-            this.timeEl = document.getElementById('mmTime');
-            this.hitsEl = document.getElementById('mmHits');
-            this.missesEl = document.getElementById('mmMisses');
-            this.cachePillsEl = document.getElementById('mmCachePills');
+            this.resultEl = document.getElementById('mmResult'); // Asigna valor
+            this.timeEl = document.getElementById('mmTime'); // Asigna valor
+            this.hitsEl = document.getElementById('mmHits'); // Asigna valor
+            this.missesEl = document.getElementById('mmMisses'); // Asigna valor
+            this.cachePillsEl = document.getElementById('mmCachePills'); // Asigna valor
 
-            this.inputN = document.getElementById('mmInputN');
-            this.btnCalcMemo = document.getElementById('btnCalcMemo');
-            this.btnCalcNoMemo = document.getElementById('btnCalcNoMemo');
-            this.btnClearCache = document.getElementById('btnClearCache');
-            this.btnClearLogs = document.getElementById('btnClearMmLogs');
-            this.terminal = document.getElementById('mmLogTerminal');
+            this.inputN = document.getElementById('mmInputN'); // Asigna valor
+            this.btnCalcMemo = document.getElementById('btnCalcMemo'); // Asigna valor
+            this.btnCalcNoMemo = document.getElementById('btnCalcNoMemo'); // Asigna valor
+            this.btnClearCache = document.getElementById('btnClearCache'); // Asigna valor
+            this.btnClearLogs = document.getElementById('btnClearMmLogs'); // Asigna valor
+            this.terminal = document.getElementById('mmLogTerminal'); // Asigna valor
 
-            this.bindControls();
-            this.renderCachePills();
+            this.bindControls(); // Ejecuta llamada o método
+            this.renderCachePills(); // Ejecuta llamada o método
         },
 
         // Fibonacci recursivo tradicional SIN caché O(2^n)
-        fibSlow(n) {
-            if (n <= 1) return n;
-            return this.fibSlow(n - 1) + this.fibSlow(n - 2);
+        fibSlow(n) { // Instrucción JavaScript
+            if (n <= 1) return n; // Evalúa condición
+            return this.fibSlow(n - 1) + this.fibSlow(n - 2); // Retorna resultado
         },
 
         // Fibonacci recursivo CON caché Map O(n)
-        fibMemo(n) {
-            if (n <= 1) return n;
-            if (this.cache.has(n)) return this.cache.get(n);
-            const res = this.fibMemo(n - 1) + this.fibMemo(n - 2);
-            this.cache.set(n, res);
-            return res;
+        fibMemo(n) { // Instrucción JavaScript
+            if (n <= 1) return n; // Evalúa condición
+            if (this.cache.has(n)) return this.cache.get(n); // Evalúa condición
+            const res = this.fibMemo(n - 1) + this.fibMemo(n - 2); // Declara e inicializa "res"
+            this.cache.set(n, res); // Ejecuta llamada o método
+            return res; // Retorna resultado
         },
 
         // Renderiza visualmente las entradas almacenadas actualmente en el Map
-        renderCachePills() {
-            if (!this.cachePillsEl) return;
-            if (this.cache.size === 0) {
-                this.cachePillsEl.innerHTML = '<span style="color: var(--text-dim); font-size: 0.8rem;">Caché vacía (0 entradas)...</span>';
-                return;
+        renderCachePills() { // Instrucción JavaScript
+            if (!this.cachePillsEl) return; // Evalúa condición
+            if (this.cache.size === 0) { // Evalúa condición
+                this.cachePillsEl.innerHTML = '<span style="color: var(--text-dim); font-size: 0.8rem;">Caché vacía (0 entradas)...</span>'; // Actualiza contenido en el DOM
+                return; // Retorna resultado
             }
 
-            this.cachePillsEl.innerHTML = '';
+            this.cachePillsEl.innerHTML = ''; // Actualiza contenido en el DOM
             // Mostramos hasta las últimas 12 claves para mantener limpio el panel
-            const entries = Array.from(this.cache.entries()).slice(-12);
-            entries.forEach(([k, v]) => {
-                const chip = document.createElement('span');
-                chip.className = 'mm-cache-chip';
-                chip.textContent = `fib(${k}) = ${v.toLocaleString('es-ES')}`;
-                this.cachePillsEl.appendChild(chip);
+            const entries = Array.from(this.cache.entries()).slice(-12); // Declara e inicializa "entries"
+            entries.forEach(([k, v]) => { // Instrucción JavaScript
+                const chip = document.createElement('span'); // Crea nuevo elemento DOM "chip"
+                chip.className = 'mm-cache-chip'; // Asigna valor
+                chip.textContent = `fib(${k}) = ${v.toLocaleString('es-ES')}`; // Actualiza contenido en el DOM
+                this.cachePillsEl.appendChild(chip); // Inserta nodo en el DOM
             });
         },
 
         // Vincula los botones del laboratorio
-        bindControls() {
+        bindControls() { // Instrucción JavaScript
             // Botón para calcular CON memoización
-            if (this.btnCalcMemo) {
-                this.btnCalcMemo.addEventListener('click', () => {
-                    const n = Math.min(Math.max(parseInt(this.inputN.value, 10) || 1, 1), 42);
-                    this.inputN.value = n;
+            if (this.btnCalcMemo) { // Evalúa condición
+                this.btnCalcMemo.addEventListener('click', () => { // Registra escuchador de eventos
+                    const n = Math.min(Math.max(parseInt(this.inputN.value, 10) || 1, 1), 42); // Declara e inicializa "n"
+                    this.inputN.value = n; // Asigna valor
 
-                    const wasHit = this.cache.has(n);
-                    const t0 = performance.now();
-                    const res = this.fibMemo(n);
-                    const elapsed = (performance.now() - t0).toFixed(3);
+                    const wasHit = this.cache.has(n); // Declara e inicializa "wasHit"
+                    const t0 = performance.now(); // Declara e inicializa "t0"
+                    const res = this.fibMemo(n); // Declara e inicializa "res"
+                    const elapsed = (performance.now() - t0).toFixed(3); // Declara e inicializa "elapsed"
 
-                    if (wasHit) {
-                        this.hits++;
-                        SoundFX.hit();
-                        if (this.banner) this.banner.className = 'mm-status-banner is-hit';
-                        if (this.statusText) this.statusText.textContent = `fib(${n}) devuelto desde Map en ${elapsed} ms`;
-                        if (this.badgeState) {
-                            this.badgeState.textContent = 'CACHE HIT ⚡';
-                            this.badgeState.className = 'badge badge-emerald';
+                    if (wasHit) { // Evalúa condición
+                        this.hits++; // Instrucción JavaScript
+                        SoundFX.hit(); // Ejecuta llamada o método
+                        if (this.banner) this.banner.className = 'mm-status-banner is-hit'; // Evalúa condición
+                        if (this.statusText) this.statusText.textContent = `fib(${n}) devuelto desde Map en ${elapsed} ms`; // Evalúa condición
+                        if (this.badgeState) { // Evalúa condición
+                            this.badgeState.textContent = 'CACHE HIT ⚡'; // Actualiza contenido en el DOM
+                            this.badgeState.className = 'badge badge-emerald'; // Asigna valor
                         }
-                        this.log(`⚡ [CACHE HIT] fib(${n}) = ${res.toLocaleString('es-ES')} (${elapsed} ms)`);
-                    } else {
-                        this.misses++;
-                        SoundFX.click();
-                        if (this.banner) this.banner.className = 'mm-status-banner is-miss';
-                        if (this.statusText) this.statusText.textContent = `fib(${n}) calculado y guardado en Map (${elapsed} ms)`;
-                        if (this.badgeState) {
-                            this.badgeState.textContent = 'CACHE MISS 💾';
-                            this.badgeState.className = 'badge badge-cyan';
+                        this.log(`⚡ [CACHE HIT] fib(${n}) = ${res.toLocaleString('es-ES')} (${elapsed} ms)`); // Ejecuta llamada o método
+                    } else { // Instrucción JavaScript
+                        this.misses++; // Instrucción JavaScript
+                        SoundFX.click(); // Ejecuta llamada o método
+                        if (this.banner) this.banner.className = 'mm-status-banner is-miss'; // Evalúa condición
+                        if (this.statusText) this.statusText.textContent = `fib(${n}) calculado y guardado en Map (${elapsed} ms)`; // Evalúa condición
+                        if (this.badgeState) { // Evalúa condición
+                            this.badgeState.textContent = 'CACHE MISS 💾'; // Actualiza contenido en el DOM
+                            this.badgeState.className = 'badge badge-cyan'; // Asigna valor
                         }
-                        this.log(`💾 [CACHE MISS] fib(${n}) = ${res.toLocaleString('es-ES')} calculado en ${elapsed} ms`);
+                        this.log(`💾 [CACHE MISS] fib(${n}) = ${res.toLocaleString('es-ES')} calculado en ${elapsed} ms`); // Ejecuta llamada o método
                     }
 
-                    if (this.resultEl) this.resultEl.textContent = res.toLocaleString('es-ES');
-                    if (this.timeEl) this.timeEl.textContent = `${elapsed} ms`;
-                    if (this.hitsEl) this.hitsEl.textContent = this.hits;
-                    if (this.missesEl) this.missesEl.textContent = this.misses;
-                    this.renderCachePills();
+                    if (this.resultEl) this.resultEl.textContent = res.toLocaleString('es-ES'); // Evalúa condición
+                    if (this.timeEl) this.timeEl.textContent = `${elapsed} ms`; // Evalúa condición
+                    if (this.hitsEl) this.hitsEl.textContent = this.hits; // Evalúa condición
+                    if (this.missesEl) this.missesEl.textContent = this.misses; // Evalúa condición
+                    this.renderCachePills(); // Ejecuta llamada o método
                 });
             }
 
             // Botón para calcular SIN memoización (comparativa real de velocidad)
-            if (this.btnCalcNoMemo) {
-                this.btnCalcNoMemo.addEventListener('click', () => {
-                    SoundFX.click();
-                    const n = Math.min(Math.max(parseInt(this.inputN.value, 10) || 1, 1), 39);
-                    this.inputN.value = n;
+            if (this.btnCalcNoMemo) { // Evalúa condición
+                this.btnCalcNoMemo.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    const n = Math.min(Math.max(parseInt(this.inputN.value, 10) || 1, 1), 39); // Declara e inicializa "n"
+                    this.inputN.value = n; // Asigna valor
 
-                    const t0 = performance.now();
-                    const res = this.fibSlow(n);
-                    const elapsed = (performance.now() - t0).toFixed(2);
+                    const t0 = performance.now(); // Declara e inicializa "t0"
+                    const res = this.fibSlow(n); // Declara e inicializa "res"
+                    const elapsed = (performance.now() - t0).toFixed(2); // Declara e inicializa "elapsed"
 
-                    if (this.banner) this.banner.className = 'mm-status-banner';
-                    if (this.statusText) this.statusText.textContent = `fibSinMemo(${n}) recalculado desde cero`;
-                    if (this.badgeState) {
-                        this.badgeState.textContent = 'SIN CACHÉ 🐢';
-                        this.badgeState.className = 'badge badge-purple';
+                    if (this.banner) this.banner.className = 'mm-status-banner'; // Evalúa condición
+                    if (this.statusText) this.statusText.textContent = `fibSinMemo(${n}) recalculado desde cero`; // Evalúa condición
+                    if (this.badgeState) { // Evalúa condición
+                        this.badgeState.textContent = 'SIN CACHÉ 🐢'; // Actualiza contenido en el DOM
+                        this.badgeState.className = 'badge badge-purple'; // Asigna valor
                     }
-                    if (this.resultEl) this.resultEl.textContent = res.toLocaleString('es-ES');
-                    if (this.timeEl) this.timeEl.textContent = `${elapsed} ms`;
+                    if (this.resultEl) this.resultEl.textContent = res.toLocaleString('es-ES'); // Evalúa condición
+                    if (this.timeEl) this.timeEl.textContent = `${elapsed} ms`; // Evalúa condición
 
-                    this.log(`🐢 [SIN MEMO] fib(${n}) = ${res.toLocaleString('es-ES')} tardó ${elapsed} ms`);
+                    this.log(`🐢 [SIN MEMO] fib(${n}) = ${res.toLocaleString('es-ES')} tardó ${elapsed} ms`); // Ejecuta llamada o método
                 });
             }
 
             // Botón para limpiar la caché del Map
-            if (this.btnClearCache) {
-                this.btnClearCache.addEventListener('click', () => {
-                    SoundFX.click();
-                    this.cache.clear();
-                    this.hits = 0;
-                    this.misses = 0;
-                    if (this.hitsEl) this.hitsEl.textContent = '0';
-                    if (this.missesEl) this.missesEl.textContent = '0';
-                    if (this.resultEl) this.resultEl.textContent = '-';
-                    if (this.timeEl) this.timeEl.textContent = '0.00 ms';
-                    if (this.banner) this.banner.className = 'mm-status-banner';
-                    if (this.statusText) this.statusText.textContent = 'Caché reiniciada';
-                    if (this.badgeState) {
-                        this.badgeState.textContent = 'En espera';
-                        this.badgeState.className = 'badge badge-cyan';
+            if (this.btnClearCache) { // Evalúa condición
+                this.btnClearCache.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    this.cache.clear(); // Ejecuta llamada o método
+                    this.hits = 0; // Asigna valor
+                    this.misses = 0; // Asigna valor
+                    if (this.hitsEl) this.hitsEl.textContent = '0'; // Evalúa condición
+                    if (this.missesEl) this.missesEl.textContent = '0'; // Evalúa condición
+                    if (this.resultEl) this.resultEl.textContent = '-'; // Evalúa condición
+                    if (this.timeEl) this.timeEl.textContent = '0.00 ms'; // Evalúa condición
+                    if (this.banner) this.banner.className = 'mm-status-banner'; // Evalúa condición
+                    if (this.statusText) this.statusText.textContent = 'Caché reiniciada'; // Evalúa condición
+                    if (this.badgeState) { // Evalúa condición
+                        this.badgeState.textContent = 'En espera'; // Actualiza contenido en el DOM
+                        this.badgeState.className = 'badge badge-cyan'; // Asigna valor
                     }
-                    this.renderCachePills();
-                    this.log('🗑️ Caché Map() vaciada completamente.');
+                    this.renderCachePills(); // Ejecuta llamada o método
+                    this.log('🗑️ Caché Map() vaciada completamente.'); // Ejecuta llamada o método
                 });
             }
 
             // Botón para limpiar logs
-            if (this.btnClearLogs) {
-                this.btnClearLogs.addEventListener('click', () => {
-                    SoundFX.click();
-                    if (this.terminal) {
-                        this.terminal.innerHTML = '';
-                        this.log('🧹 Terminal limpiado.');
+            if (this.btnClearLogs) { // Evalúa condición
+                this.btnClearLogs.addEventListener('click', () => { // Registra escuchador de eventos
+                    SoundFX.click(); // Ejecuta llamada o método
+                    if (this.terminal) { // Evalúa condición
+                        this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
+                        this.log('🧹 Terminal limpiado.'); // Ejecuta llamada o método
                     }
                 });
             }
         },
 
-        log(message) {
-            if (!this.terminal) return;
+        log(message) { // Instrucción JavaScript
+            if (!this.terminal) return; // Evalúa condición
 
-            const now = new Date();
+            const now = new Date(); // Declara e inicializa "now"
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
-            ].join(':');
+            ].join(':'); // Ejecuta llamada o método
 
-            const line = document.createElement('div');
-            line.className = 'mm-log-line';
+            const line = document.createElement('div'); // Crea nuevo elemento DOM "line"
+            line.className = 'mm-log-line'; // Asigna valor
             line.innerHTML = `
                 <span class="mm-log-time">[${timeStr}]</span>
                 <span>${message}</span>
             `;
 
-            this.terminal.appendChild(line);
-            this.terminal.scrollTop = this.terminal.scrollHeight;
+            this.terminal.appendChild(line); // Inserta nodo en el DOM
+            this.terminal.scrollTop = this.terminal.scrollHeight; // Asigna valor
         }
     };
 
     /* ==========================================================================
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
-    function startApplication() {
-        SlideNavigation.init();
-        MMLabController.init();
+    function startApplication() { // Declara función
+        SlideNavigation.init(); // Ejecuta llamada o método
+        MMLabController.init(); // Ejecuta llamada o método
     }
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', startApplication);
-    } else {
-        startApplication();
+    if (document.readyState === 'loading') { // Evalúa condición
+        document.addEventListener('DOMContentLoaded', startApplication); // Registra escuchador de eventos
+    } else { // Instrucción JavaScript
+        startApplication(); // Ejecuta llamada o método
     }
-})();
+})(); // Ejecuta llamada o método

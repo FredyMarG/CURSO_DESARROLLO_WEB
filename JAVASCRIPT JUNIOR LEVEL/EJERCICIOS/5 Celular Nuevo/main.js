@@ -8,9 +8,9 @@ let mobiles = document.getElementById("mobile"),
     altag = document.getElementById("altag"),
     sol = document.getElementById("main-sol")
     
-    class Celular{
+    class Celular{ // Define clase
         /** Guarda las características físicas y de hardware del teléfono */
-        constructor(color,peso, tamaño, rdc,ram){
+        constructor(color,peso, tamaño, rdc,ram){ // Instrucción JavaScript
             this.color = color,
             this.peso = peso,
             this.tamaño  = tamaño,
@@ -20,38 +20,38 @@ let mobiles = document.getElementById("mobile"),
         }
 
     /** Alterna encendido/apagado y devuelve un mensaje descriptivo */
-        presionarBotonEncendido(){
-            let estado;
-            if (this.encendido === false) {
-                estado = "Celular Encendido";             
-                this.encendido = true;
-            } else {
-                estado = "Celular Apagado";
-                this.encendido = false;
+        presionarBotonEncendido(){ // Instrucción JavaScript
+            let estado; // Declara e inicializa "estado"
+            if (this.encendido === false) { // Evalúa condición
+                estado = "Celular Encendido";              // Asigna valor
+                this.encendido = true; // Asigna valor
+            } else { // Instrucción JavaScript
+                estado = "Celular Apagado"; // Asigna valor
+                this.encendido = false; // Asigna valor
             }
-            return estado;
+            return estado; // Retorna resultado
         }
 
         /** Solicita reinicio si el equipo está encendido (ojo: usa asignación = en la condición) */
-        reiniciar(){
-            if (this.encendido = true) {                
+        reiniciar(){ // Instrucción JavaScript
+            if (this.encendido = true) {                 // Evalúa condición
                 return "Reiniciando el Celular"
-            }else{
-                return "El celular esta apagado";
+            }else{ // Instrucción JavaScript
+                return "El celular esta apagado"; // Retorna resultado
             }
         }
         
         /** Mensaje simulado de captura de foto con la resolución configurada */
-        tomarFoto(){
-            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`;
+        tomarFoto(){ // Instrucción JavaScript
+            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`; // Retorna resultado
         }
 
         /** Mensaje simulado de grabación de video */
-        grabarVideo(){
-            return `Grabando video en ${this.resolucionDeCamara}`;
+        grabarVideo(){ // Instrucción JavaScript
+            return `Grabando video en ${this.resolucionDeCamara}`; // Retorna resultado
         }
         /** Resumen HTML con color, peso, tamaño, cámara y RAM */
-        mobileInfo(){
+        mobileInfo(){ // Instrucción JavaScript
             return `
             Color: <b>${this.color}</b><br>
             Peso: <b>${this.peso}</b><br>
@@ -63,18 +63,18 @@ let mobiles = document.getElementById("mobile"),
     }
 
     /** Extiende Celular con cámara extra y funciones premium */
-    class CelularAltaGama extends Celular{
-        constructor(color,peso,tamaño,rdc,ram,rdce){
-            super(color,peso,tamaño,rdc,ram);
-            this.resolucionDeCamaraExtra = rdce;
+    class CelularAltaGama extends Celular{ // Define clase
+        constructor(color,peso,tamaño,rdc,ram,rdce){ // Instrucción JavaScript
+            super(color,peso,tamaño,rdc,ram); // Ejecuta llamada o método
+            this.resolucionDeCamaraExtra = rdce; // Asigna valor
         }
-        grabarVideoLento(){
-            return `Tiene Video en Cámara Lenta`;
+        grabarVideoLento(){ // Instrucción JavaScript
+            return `Tiene Video en Cámara Lenta`; // Retorna resultado
         }
-        reconocimientoFacial(){
+        reconocimientoFacial(){ // Instrucción JavaScript
             return "Tiene Reconocimiento Facial"
         }
-        infoAltaGama(){
+        infoAltaGama(){ // Instrucción JavaScript
             return this.mobileInfo() + `Resolución de cámara extra: <b>${this.resolucionDeCamaraExtra}</b>`
         }
     }
@@ -94,8 +94,8 @@ celag = [
 /**
  * Rellena las tablas del DOM con datos de celulares básicos y de gama alta.
  */
-function mostrar(){
-    for (let i = 0; i < celular.length; i++) {
+function mostrar(){ // Declara función
+    for (let i = 0; i < celular.length; i++) { // Inicia bucle de iteración
         mobiles.innerHTML += `<tr>
                         <td>${i+1}</td>
                         <td>${celular[i].color}</td>
@@ -114,7 +114,7 @@ function mostrar(){
                     </tr>`
     }
 
-    for (let i = 0; i < celag.length; i++) {
+    for (let i = 0; i < celag.length; i++) { // Inicia bucle de iteración
         altag.innerHTML += ` <tr>
                             <td>${i+1}</td>
                             <td>${celag[i].color}</td>

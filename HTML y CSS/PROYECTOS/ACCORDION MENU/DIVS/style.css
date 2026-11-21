@@ -9,184 +9,184 @@
 
 
 /* Reset general: normaliza márgenes y box-sizing. */
-*{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+*{ /* Regla de estilo para * */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    font-family: sans-serif; /* Familia tipográfica */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    --bg-color: #ff9464;
-    --card-color:#fff;
-    --darkcolor: #f62;
-    --text-color: #333;
-    background-color: var(--bg-color);
+body{ /* Regla de estilo para body */
+    --bg-color: #ff9464; /* Variable CSS personalizada (--bg-color) */
+    --card-color:#fff; /* Variable CSS personalizada (--card-color) */
+    --darkcolor: #f62; /* Variable CSS personalizada (--darkcolor) */
+    --text-color: #333; /* Variable CSS personalizada (--text-color) */
+    background-color: var(--bg-color); /* Color de fondo */
 
 
 /* Estilos del selector }*. */
-}*{
-    box-sizing: border-box;
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
+}*{ /* Regla de estilo para }* */
+    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
+    font-family: sans-serif; /* Familia tipográfica */
+    margin: 0; /* Margen exterior */
+    padding: 0; /* Relleno interior */
 }
 
 
 
 /* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{
-    --bg-color: #ff9464;
-    --card-color:#fff;
-    --darkcolor: #f62;
-    --text-color: #333;
-    background-color: var(--bg-color);
+body{ /* Regla de estilo para body */
+    --bg-color: #ff9464; /* Variable CSS personalizada (--bg-color) */
+    --card-color:#fff; /* Variable CSS personalizada (--card-color) */
+    --darkcolor: #f62; /* Variable CSS personalizada (--darkcolor) */
+    --text-color: #333; /* Variable CSS personalizada (--text-color) */
+    background-color: var(--bg-color); /* Color de fondo */
 }
 
 
 
 /* Sección interactiva de preguntas frecuentes o acordeón. */
-.faq{
-    margin: auto;
+.faq{ /* Regla de estilo para .faq */
+    margin: auto; /* Margen exterior */
 }
 
 
 
 /* Estilos del selector .faq-option. */
-.faq-option{
-    background-color: var(--card-color);
-    margin: 7px;
-    padding: 7px;
-    border-radius: 10px;
-    max-height: 34px;
-    transition: max-height .5s;
-    overflow: hidden;
-    display: block;
+.faq-option{ /* Regla de estilo para .faq-option */
+    background-color: var(--card-color); /* Color de fondo */
+    margin: 7px; /* Margen exterior */
+    padding: 7px; /* Relleno interior */
+    border-radius: 10px; /* Redondeo de esquinas */
+    max-height: 34px; /* Alto máximo permitido */
+    transition: max-height .5s; /* Transición suave de propiedades */
+    overflow: hidden; /* Control de contenido desbordado */
+    display: block; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Estado o pseudo-clase .faq-option:has(input[type="checkbox"]:checked): estilo cuando el usuario interactúa. */
-.faq-option:has(input[type="checkbox"]:checked){
-    max-height: 150px;
-    transition: max-height 1s;
+.faq-option:has(input[type="checkbox"]:checked){ /* Regla de estilo para .faq-option:has(input[type="checkbox"]:checked) */
+    max-height: 150px; /* Alto máximo permitido */
+    transition: max-height 1s; /* Transición suave de propiedades */
 }
 
 
 
 /* Estado o pseudo-clase .faq-option:has(input[type="checkbox"]:checked) .content: estilo cuando el usuario interactúa. */
-.faq-option:has(input[type="checkbox"]:checked) .content{
-    animation: aparecer 1s both;
+.faq-option:has(input[type="checkbox"]:checked) .content{ /* Regla de estilo para .faq-option:has(input[type="checkbox"]:checked) .content */
+    animation: aparecer 1s both; /* Animación con keyframes */
 }
 
 
 
 /* Estilos del selector .faq-ask. */
-.faq-ask{
-    user-select: none;
-    position: relative;
+.faq-ask{ /* Regla de estilo para .faq-ask */
+    user-select: none; /* Control de selección de texto */
+    position: relative; /* Define el esquema de posicionamiento */
 }
 
 
 
 /* Bloque de contenido con información principal. */
-.content {
-    padding:5px 10px;
-    margin:10px;
-    margin-bottom: 0;
-    font-size: .8rem;
-    color: var(--text-color);
+.content { /* Regla de estilo para .content */
+    padding:5px 10px; /* Relleno interior */
+    margin:10px; /* Margen exterior */
+    margin-bottom: 0; /* Margen exterior inferior */
+    font-size: .8rem; /* Tamaño de fuente */
+    color: var(--text-color); /* Color del texto */
 }
 
 
 
 /* Pseudo-elemento .faq-ask::marker: agrega contenido o decoración adicional. */
-.faq-ask::marker{
-    content: '';    
+.faq-ask::marker{ /* Regla de estilo para .faq-ask::marker */
+    content: '';     /* Contenido generado para pseudoelemento */
 }
 
 
 
 /* Pseudo-elemento .faq-ask::before: agrega contenido o decoración adicional. */
-.faq-ask::before{
-    content: '+';
-    color: var(--darkcolor);
-    position: absolute;
-    right: 0;
-    font-weight: 900;
-    top: -2px;
+.faq-ask::before{ /* Regla de estilo para .faq-ask::before */
+    content: '+'; /* Contenido generado para pseudoelemento */
+    color: var(--darkcolor); /* Color del texto */
+    position: absolute; /* Define el esquema de posicionamiento */
+    right: 0; /* Desplazamiento derecho */
+    font-weight: 900; /* Grosor de la fuente */
+    top: -2px; /* Desplazamiento superior */
 }
 
 
 
 /* Estilos del selector input[type="checkbox"]. */
-input[type="checkbox"]{
-    display: none;
+input[type="checkbox"]{ /* Regla de estilo para input[type="checkbox"] */
+    display: none; /* Define el tipo de caja/layout */
 }
 
 
 
 /* Pseudo-elemento .faq-option:has(input[type="checkbox"]:checked) .faq-ask::before: agrega contenido o decoración adicional. */
-.faq-option:has(input[type="checkbox"]:checked) .faq-ask::before{
-    content: '-';
-    font-weight: 900;
-    right: 2px;
-    top: -2px;
+.faq-option:has(input[type="checkbox"]:checked) .faq-ask::before{ /* Regla de estilo para .faq-option:has(input[type="checkbox"]:checked) .faq-ask::before */
+    content: '-'; /* Contenido generado para pseudoelemento */
+    font-weight: 900; /* Grosor de la fuente */
+    right: 2px; /* Desplazamiento derecho */
+    top: -2px; /* Desplazamiento superior */
 }
 
 
 
 /* Estilos del selector .faq-option b. */
-.faq-option b {
-    background-color: var(--darkcolor);
-    color: #fff;
-    padding:2px 4px;
+.faq-option b { /* Regla de estilo para .faq-option b */
+    background-color: var(--darkcolor); /* Color de fondo */
+    color: #fff; /* Color del texto */
+    padding:2px 4px; /* Relleno interior */
 }
 
 
 
 /* Estado o pseudo-clase .faq-option:nth-child(2) b: estilo cuando el usuario interactúa. */
-.faq-option:nth-child(2) b{
-    background-color: #48e;
+.faq-option:nth-child(2) b{ /* Regla de estilo para .faq-option:nth-child(2) b */
+    background-color: #48e; /* Color de fondo */
 }
 
 
 
 /* Estado o pseudo-clase .faq-option:nth-child(3) b: estilo cuando el usuario interactúa. */
-.faq-option:nth-child(3) b{
-    background-color: #4b7;
+.faq-option:nth-child(3) b{ /* Regla de estilo para .faq-option:nth-child(3) b */
+    background-color: #4b7; /* Color de fondo */
 }
 
 
 
 
 /* Animación aparecer: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes aparecer {
+@keyframes aparecer { /* Definición de animación por fotogramas clave */
 
 
 /* Estilos del selector from. */
-    from{
-        opacity: 0;
-        translate: 0 -20px;
+    from{ /* Regla de estilo para from */
+        opacity: 0; /* Nivel de transparencia */
+        translate: 0 -20px; /* Propiedad CSS: translate */
     }
 
 
 
 /* Estilos del selector 50%. */
-    50%{
-        border-top:1px solid transparent ;
+    50%{ /* Regla de estilo para 50% */
+        border-top:1px solid transparent ; /* Borde superior */
     }
 
 
 
 /* Estilos del selector to. */
-    to{
-        opacity: 1;
-        translate: 0 0;
-        border-top: 1px solid var(--bg-color);
+    to{ /* Regla de estilo para to */
+        opacity: 1; /* Nivel de transparencia */
+        translate: 0 0; /* Propiedad CSS: translate */
+        border-top: 1px solid var(--bg-color); /* Borde superior */
     }
 }
 
@@ -194,12 +194,12 @@ input[type="checkbox"]{
 
 
 /* Media query: adapta el diseño a pantallas o condiciones específicas. */
-@media screen and (min-width:600px) {
+@media screen and (min-width:600px) { /* Regla responsiva según tamaño de pantalla */
 
 
 /* Sección interactiva de preguntas frecuentes o acordeón. */
-    .faq{
-        max-width: clamp(300px, 70%,700px);
-        margin: 40px auto;
+    .faq{ /* Regla de estilo para .faq */
+        max-width: clamp(300px, 70%,700px); /* Ancho máximo permitido */
+        margin: 40px auto; /* Margen exterior */
     }
 }
