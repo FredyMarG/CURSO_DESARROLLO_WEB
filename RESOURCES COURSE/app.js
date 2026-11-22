@@ -3,6 +3,32 @@
 
 // Arreglo maestro que contiene todos los módulos, guías interactivas, ejercicios, proyectos y documentación del curso
 const modules = [
+  // --- SECCIÓN: NODE.JS (Backend, Entorno de Ejecución y APIs) ---
+  // Módulo 01 interactivo de Fundamentos de Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "01. Fundamentos de Node.js", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Entorno de ejecución, V8, libuv, Event Loop, npm, primer servidor HTTP y API de bienvenida.", // Descripción breve
+    href: "NODE/Fundamentos/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 02 interactivo de REPL de Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "02. REPL de Node.js", // Título visible en la tarjeta
+    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
+    href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Acceso directo a la documentación técnica de Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "Documentación Completa Node.js", // Título visible en la tarjeta
+    tag: "2 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de Fundamentos y REPL de Node.js, ejercicios por niveles, solucionario y cheatsheet.", // Descripción breve
+    href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
+  },
+
   // --- SECCIÓN: JS MASTER LEVEL (19 Guías Interactivas de 11-12 diapositivas + Documentación) ---
   // Módulo de consumo de APIs REST con Fetch, AbortController y Promise.all
   { // Instrucción JavaScript
@@ -1487,6 +1513,8 @@ const modules = [
 
 // Diccionario que asigna un título legible con emoji a cada categoría del portal
 const titles = { // Declara e inicializa "titles"
+  // Encabezado para Node.js
+  node: "🟢 Node.js — Backend y Entorno de Ejecución",
   // Encabezado para Master Level
   master: "🚀 JavaScript Master Level — Guías Interactivas",
   // Encabezado para Ejercicios
@@ -1518,7 +1546,7 @@ function render() { // Declara función
   portal.innerHTML = ""; // Actualiza contenido en el DOM
 
   // Definimos el orden visual en que se mostrarán las categorías
-  const order = ["master", "ejercicios", "proyectos", "mid", "junior", "htmlcss"]; // Declara e inicializa "order"
+  const order = ["node", "master", "ejercicios", "proyectos", "mid", "junior", "htmlcss"]; // Declara e inicializa "order"
   // Recorremos cada categoría en el orden establecido
   order.forEach((cat) => { // Instrucción JavaScript
     // Si hay un filtro activo distinto de 'all' y no coincide con esta categoría, la omitimos

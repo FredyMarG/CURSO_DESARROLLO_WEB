@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 02: REPL de Node.js — Ciclo Read-Eval-Print-Loop, comandos especiales, await interactivo y prototipo de catálogo." />
+    <title>REPL de Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%96%A5%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · MÓDULO 02</span>
+            <div class="brand-title"><span>🖥️</span><span>REPL de Node.js</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: REPL de Node.js">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Read–Eval–Print–Loop</span>
+                    <span class="badge badge-cyan">.help · .save · .load · .editor</span>
+                    <span class="badge badge-purple">Top-level await</span>
+                </div>
+                <h1 class="hero-title">Node.js:<br /><span class="gradient-text">Entorno Interactivo REPL</span></h1>
+                <p class="hero-subtitle">
+                    Ejecuta expresiones JavaScript al instante sin crear archivos, inspecciona módulos nativos, prueba funciones con <code>await</code> interactivo y construye un prototipo de catálogo en memoria.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🔄</div>
+                        <h3>1. Ciclo R-E-P-L</h3>
+                        <p>Qué es, cómo iniciar con <code>node</code> y cómo salir con <code>.exit</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">⌨️</div>
+                        <h3>2. Comandos Especiales</h3>
+                        <p>Domina <code>.help</code>, <code>.save</code>, <code>.load</code>, <code>.editor</code> y <code>.clear</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>3. Módulos y await</h3>
+                        <p>Usa <code>process</code>, <code>Buffer</code>, <code>node:os</code> y <code>await import()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>4. Laboratorio</h3>
+                        <p>Simula sesiones REPL y prueba el prototipo de catálogo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES REPL Y CÓMO INICIAR/SALIR -->
+        <section class="slide" data-slide="2" data-title="¿Qué es REPL? Iniciar y Salir">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · DEFINICIÓN Y USO INICIAL</span>
+                <h2 class="slide-title">¿Qué es REPL? Iniciar y Salir</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <strong>REPL</strong> significa <strong>Read–Eval–Print–Loop</strong> (Leer–Evaluar–Imprimir–Repetir). Es una consola interactiva integrada en Node.js para probar expresiones JavaScript sin guardar archivos <code>.js</code> y sin necesidad de conexión a Internet.
+                </p>
+                <pre class="code-block"><code># 1. En PowerShell o terminal integrada de VS Code, escribe:
+node
+
+# 2. Aparece el indicador interactivo (>):
+&gt; 2 + 3
+5
+&gt; "Hola desde Node.js"
+'Hola desde Node.js'
+
+# 3. Para salir del REPL:
+&gt; .exit
+# (También puedes pulsar Ctrl+C dos veces o Ctrl+D)</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: EL CICLO READ-EVAL-PRINT-LOOP -->
+        <section class="slide" data-slide="3" data-title="El ciclo Read-Eval-Print-Loop">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · MECÁNICA INTERNA</span>
+                <h2 class="slide-title">Las 4 Fases del Ciclo R-E-P-L</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Fase</th><th>Nombre</th><th>Acción</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>R</strong></td><td>Read</td><td>Lee la expresión o instrucción que escribes.</td></tr>
+                        <tr><td><strong>E</strong></td><td>Eval</td><td>Evalúa el código como JavaScript en el motor V8.</td></tr>
+                        <tr><td><strong>P</strong></td><td>Print</td><td>Imprime el resultado devuelto en pantalla.</td></tr>
+                        <tr><td><strong>L</strong></td><td>Loop</td><td>Vuelve al indicador <code>&gt;</code> esperando la siguiente entrada.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-analogy" style="margin-top:16px;">
+                <strong>🧮 Analogía:</strong> REPL es como una calculadora de bolsillo o una mesa de pruebas en un taller: pruebas una operación al instante antes de llevarla a un archivo <code>.js</code> del proyecto.
+            </div>
+        </section>
+
+        <!-- SLIDE 4: EXPRESIONES, VARIABLES, FUNCIONES Y ARREGLOS -->
+        <section class="slide" data-slide="4" data-title="Expresiones, Variables y Colecciones">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PRUEBAS RÁPIDAS</span>
+                <h2 class="slide-title">Variables, Funciones, Arreglos y Objetos</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// Variables y funciones flecha
+const calcularAvance = (completados, total) =&gt;
+  total === 0 ? 0 : (completados / total) * 100;
+calcularAvance(3, 5); // 60
+
+// Arreglos y filtrado en tiempo real
+const lecciones = [
+  { titulo: "REPL", completada: true },
+  { titulo: "npm", completada: false },
+  { titulo: "Módulos", completada: true }
+];
+lecciones.filter(l =&gt; l.completada);</code></pre>
+            </div>
+            <div class="callout callout-warn" style="margin-top:16px;">
+                <strong>⚠️ Nota sobre <code>undefined</code>:</strong> Declaraciones como <code>const precio = 12000</code> imprimen <code>undefined</code> porque no retornan un valor; eso es normal y no indica error.
+            </div>
+        </section>
+
+        <!-- SLIDE 5: COMANDOS ESPECIALES DEL REPL -->
+        <section class="slide" data-slide="5" data-title="Comandos Especiales (.help, .save, .load, .editor)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · COMANDOS CON PUNTO</span>
+                <h2 class="slide-title">Comandos Especiales del REPL</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Los comandos que comienzan con punto (<code>.</code>) <strong>no son JavaScript</strong>: son órdenes de control del entorno REPL.
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>.help</code></td><td>Muestra la lista de comandos disponibles.</td></tr>
+                        <tr><td><code>.exit</code></td><td>Cierra la sesión del REPL.</td></tr>
+                        <tr><td><code>.clear</code></td><td>Reinicia el contexto de evaluación de la sesión.</td></tr>
+                        <tr><td><code>.break</code></td><td>Cancela una expresión multilínea incompleta.</td></tr>
+                        <tr><td><code>.save archivo.js</code></td><td>Guarda el historial de la sesión en un archivo.</td></tr>
+                        <tr><td><code>.load archivo.js</code></td><td>Carga y evalúa un archivo JavaScript dentro del REPL.</td></tr>
+                        <tr><td><code>.editor</code></td><td>Abre modo edición multilínea (<code>Ctrl+D</code> ejecuta, <code>Ctrl+C</code> cancela).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: HISTORIAL, AUTOCOMPLETADO Y MULTILÍNEA -->
+        <section class="slide" data-slide="6" data-title="Historial, Tab y Multilínea">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PRODUCTIVIDAD EN TERMINAL</span>
+                <h2 class="slide-title">Historial, Autocompletado y Multilínea</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>Flecha ↑ / ↓:</strong> navega por las instrucciones ejecutadas anteriormente.</li>
+                    <li><strong>Tecla Tab:</strong> sugiere y autocompleta nombres de variables, propiedades y métodos.</li>
+                    <li><strong>Expresiones multilínea:</strong> si dejas una llave <code>{</code> o paréntesis <code>(</code> abierto, el REPL espera a que lo cierres.</li>
+                    <li><strong><code>.break</code>:</strong> abandona al instante una entrada multilínea que quedó mal escrita.</li>
+                </ul>
+            </div>
+            <div class="glass-card" style="margin-top:16px;">
+                <pre class="code-block"><code>&gt; function doble(numero) {
+...   return numero * 2;
+... }
+undefined
+&gt; doble(21)
+42</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: VARIABLES GLOBALES, MÓDULOS Y AWAIT INTERACTIVO -->
+        <section class="slide" data-slide="7" data-title="Módulos Nativos y await Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ENTORNO NODE EN VIVO</span>
+                <h2 class="slide-title">Módulos Nativos y <code>await</code> de Nivel Superior</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// Globales y módulos integrados
+process.version
+process.cwd()
+Buffer.from("Hola").toString("hex")
+
+const os = require("node:os")
+os.cpus().length
+
+// Top-level await en REPL moderno
+const fs = await import("node:fs/promises")
+await fs.writeFile("nota-repl.txt", "Aprendí REPL", "utf8")
+await fs.readFile("nota-repl.txt", "utf8") // 'Aprendí REPL'</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: COMPARATIVA REPL VS NODE APP.JS VS CONSOLA NAVEGADOR -->
+        <section class="slide" data-slide="8" data-title="REPL vs node app.js vs Navegador">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · CUÁNDO USAR CADA UNO</span>
+                <h2 class="slide-title">REPL vs <code>node app.js</code> vs Consola del Navegador</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Característica</th><th>REPL de Node.js</th><th><code>node app.js</code></th><th>Consola Navegador</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ejecución interactiva</td><td>Sí</td><td>No (ejecuta archivo)</td><td>Sí</td></tr>
+                        <tr><td>Requiere archivo guardado</td><td>No</td><td>Sí</td><td>No</td></tr>
+                        <tr><td>APIs nativas de Node (<code>fs</code>, <code>os</code>)</td><td>Sí</td><td>Sí</td><td>No</td></tr>
+                        <tr><td>Acceso al DOM (<code>document</code>)</td><td>No</td><td>No</td><td>Sí</td></tr>
+                        <tr><td>Ideal para</td><td>Experimentar rápido</td><td>Aplicaciones reales</td><td>Depurar frontend</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: BUENAS PRÁCTICAS Y ERRORES COMUNES -->
+        <section class="slide" data-slide="9" data-title="Buenas Prácticas y Errores Comunes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRECAUCIONES</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>❌ Escribir <code>node app.js</code> dentro del REPL:</strong> es un comando de terminal, no JS; sal primero con <code>.exit</code>.</li>
+                    <li><strong>❌ Redeclarar <code>const</code>:</strong> volver a usar el mismo nombre con <code>const</code> lanza error de identificador duplicado; usa <code>.clear</code> o un nombre nuevo.</li>
+                    <li><strong>❌ Creer que <code>document</code> existe:</strong> pertenece al navegador, no al REPL de Node.js.</li>
+                    <li><strong>❌ Introducir contraseñas o tokens reales:</strong> el historial del REPL puede guardarse localmente.</li>
+                    <li><strong>✅ Traslada lo útil a archivos:</strong> usa <code>.save</code> o crea módulos con pruebas automatizadas.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PROYECTO INTEGRADOR (CATÁLOGO EN MEMORIA) -->
+        <section class="slide" data-slide="10" data-title="Proyecto Integrador: Catálogo en Memoria">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · PROTOTIPO DE NEGOCIO</span>
+                <h2 class="slide-title">Prototipo de Catálogo (<code>catalogo.js</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Antes de crear una API REST, probamos la lógica de negocio en REPL cargando <code>.load catalogo.js</code>:
+                </p>
+                <pre class="code-block"><code>agregarCurso(1, "Node.js", 26);
+agregarCurso(2, "JavaScript", 20);
+registrarAvance(1, 13);
+registrarAvance(2, 20);
+
+calcularProgreso(catalogo[0]); // 50 (%)
+cursosFinalizados();           // [{ id: 2, nombre: "JavaScript", ... }]</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: QUIZ INTERACTIVO -->
+        <section class="slide" data-slide="11" data-title="Quiz: REPL de Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de REPL</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 4 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: Read–Eval–Print–Loop." data-err="REPL significa Read–Eval–Print–Loop.">
+                    <div class="quiz-q-title">1. ¿Qué significan las siglas REPL?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Read–Eval–Print–Loop</button>
+                        <button class="quiz-option" data-opt="b">Run–Execute–Parse–Log</button>
+                        <button class="quiz-option" data-opt="c">Request–Endpoint–Process–Listen</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: .load archivo.js carga y evalúa un archivo dentro de la sesión." data-err=".save guarda el historial; .load carga un archivo existente.">
+                    <div class="quiz-q-title">2. ¿Qué comando del REPL carga y ejecuta un archivo JavaScript existente?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">.save archivo.js</button>
+                        <button class="quiz-option" data-opt="b">.editor</button>
+                        <button class="quiz-option" data-opt="c">.load archivo.js</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: .exit (o Ctrl+C dos veces) cierra el REPL." data-err="node app.js es un comando de terminal, no de salida del REPL.">
+                    <div class="quiz-q-title">3. ¿Cómo sales correctamente de una sesión REPL?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Escribiendo node exit</button>
+                        <button class="quiz-option" data-opt="b">Escribiendo .exit o pulsando Ctrl+C dos veces</button>
+                        <button class="quiz-option" data-opt="c">Usando document.close()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: las declaraciones const/let no devuelven un valor imprimible y muestran undefined." data-err="undefined en una declaración const/let es comportamiento normal del REPL, no un error.">
+                    <div class="quiz-q-title">4. ¿Por qué <code>const x = 10</code> muestra <code>undefined</code> en el REPL?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Porque una declaración no produce un valor de retorno útil</button>
+                        <button class="quiz-option" data-opt="b">Porque ocurrió un SyntaxError</button>
+                        <button class="quiz-option" data-opt="c">Porque const no funciona en Node.js</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Laboratorio REPL y Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 12 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Simulador REPL &amp; Catálogo de Cursos</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.65&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const catalogo = [];
+  function agregarCurso(id, nombre, lecciones) {
+    const curso = { id, nombre, lecciones, completadas: 0 };
+    catalogo.push(curso);
+    return curso;
+  }
+  function registrarAvance(id, completadas) {
+    const c = catalogo.find(x =&gt; x.id === id);
+    if (!c || completadas &lt; 0 || completadas &gt; c.lecciones) throw new Error(&#x27;Avance inválido&#x27;);
+    c.completadas = completadas;
+    return c;
+  }
+  const calcularProgreso = c =&gt; Math.round((c.completadas / c.lecciones) * 100);
+  agregarCurso(1, &#x27;Node.js&#x27;, 26);
+  agregarCurso(2, &#x27;JavaScript&#x27;, 20);
+  registrarAvance(1, 13);
+  registrarAvance(2, 20);
+  document.getElementById(&#x27;out&#x27;).innerHTML = catalogo.map(c =&gt;
+    `&lt;div&gt;&gt; ${c.nombre}: ${c.completadas}/${c.lecciones} (${calcularProgreso(c)}%)&lt;/div&gt;`
+  ).join(&#x27;&#x27;);
+&lt;/script&gt;">Prototipo Catálogo REPL</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.65&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const lecciones = [
+    { titulo: &#x27;REPL&#x27;, completada: true },
+    { titulo: &#x27;npm&#x27;, completada: false },
+    { titulo: &#x27;Módulos&#x27;, completada: true }
+  ];
+  const completadas = lecciones.filter(l =&gt; l.completada).map(l =&gt; l.titulo);
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Completadas: &#x27; + JSON.stringify(completadas);
+&lt;/script&gt;">Filtrado en Sesión</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.65&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const catalogo = [];
+  function agregarCurso(id, nombre, lecciones) {
+    const curso = { id, nombre, lecciones, completadas: 0 };
+    catalogo.push(curso);
+    return curso;
+  }
+  function registrarAvance(id, completadas) {
+    const c = catalogo.find(x =&gt; x.id === id);
+    if (!c || completadas &lt; 0 || completadas &gt; c.lecciones) throw new Error(&#x27;Avance inválido&#x27;);
+    c.completadas = completadas;
+    return c;
+  }
+  const calcularProgreso = c =&gt; Math.round((c.completadas / c.lecciones) * 100);
+  agregarCurso(1, &#x27;Node.js&#x27;, 26);
+  agregarCurso(2, &#x27;JavaScript&#x27;, 20);
+  registrarAvance(1, 13);
+  registrarAvance(2, 20);
+  document.getElementById(&#x27;out&#x27;).innerHTML = catalogo.map(c =&gt;
+    `&lt;div&gt;&gt; ${c.nombre}: ${c.completadas}/${c.lecciones} (${calcularProgreso(c)}%)&lt;/div&gt;`
+  ).join(&#x27;&#x27;);
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+            <div class="glass-card" style="margin-top:16px;">
+                <div class="files-grid">
+                    <a class="file-card" href="../Documentacion/index.html"><span class="file-name">📘 Apuntes Completos Node.js</span><span class="file-path">NODE/Documentacion/index.html</span></a>
+                    <a class="file-card" href="catalogo.js"><span class="file-name">📦 Prototipo Catálogo (.load)</span><span class="file-path">NODE/REPL/catalogo.js</span></a>
+                    <a class="file-card" href="../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

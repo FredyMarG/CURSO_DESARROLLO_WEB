@@ -16,19 +16,20 @@
     const fileBase = fileName.replace(/\.html?$/i, ''); // Declara e inicializa "fileBase"
     const brandTitleText = document.querySelector('.brand-title')?.textContent.trim(); // Obtiene referencia DOM para "brandTitleText"
     const topicFolder = /^index\.html?$/i.test(fileName) ? rawFolder : (brandTitleText || fileBase); // Declara e inicializa "topicFolder"
-    const knownCourses = ['HTML y CSS', 'JAVASCRIPT MID LEVEL', 'JAVASCRIPT MASTER LEVEL']; // Declara e inicializa "knownCourses"
+    const knownCourses = ['HTML y CSS', 'JAVASCRIPT MID LEVEL', 'JAVASCRIPT MASTER LEVEL', 'NODE']; // Declara e inicializa "knownCourses"
     const courseIdx = parts.findIndex(p => knownCourses.includes(p)); // Define función flecha "courseIdx"
     const courseFolder = courseIdx !== -1 ? parts[courseIdx] : (parts.length >= 3 ? parts[parts.length - 3] : 'Curso'); // Declara e inicializa "courseFolder"
     const depthInCourse = courseIdx !== -1 ? Math.max(1, parts.length - 2 - courseIdx) : 1; // Declara e inicializa "depthInCourse"
     const toCourseRoot = '../'.repeat(depthInCourse); // Declara e inicializa "toCourseRoot"
-    const portalIdx = parts.findIndex(p => p === 'HTML y CSS' || p === 'JAVASCRIPT'); // Ubica la carpeta raíz del bloque respecto al portal
+    const portalIdx = parts.findIndex(p => p === 'HTML y CSS' || p === 'JAVASCRIPT' || p === 'NODE'); // Ubica la carpeta raíz del bloque respecto al portal
     const depthToPortal = portalIdx !== -1 ? Math.max(1, parts.length - 1 - portalIdx) : depthInCourse + 1; // Calcula niveles hasta la raíz del repositorio
     const toPortalRoot = '../'.repeat(depthToPortal); // Declara e inicializa "toPortalRoot"
 
     const courseMeta = { // Declara e inicializa "courseMeta"
         'HTML y CSS': { badge: '🎨 HTML5 & CSS3', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
         'JAVASCRIPT MID LEVEL': { badge: '⚡ JS MID LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
-        'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` }
+        'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'NODE': { badge: '🟢 NODE.JS', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` }
     };
     const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa "meta"
 
@@ -42,6 +43,24 @@
 
     // Banco de retos prácticos específicos por tema
     const CHALLENGES = { // Declara e inicializa "CHALLENGES"
+        // Reto práctico específico para el módulo REPL de Node.js
+        'REPL': { // Instrucción JavaScript
+            title: 'Reto Node.js REPL: Función de Avance Segura', // Título del reto
+            desc: 'Crea una función flecha calcularAvance(completados, total) que devuelva 0 si total === 0 y el porcentaje en caso contrario.', // Consigna
+            placeholder: "const calcularAvance = (completados, total) =>\n  total === 0 ? 0 : (completados / total) * 100;", // Código guía
+            hint: "Usa total === 0 ? 0 : (completados / total) * 100.", // Pista
+            solution: "const calcularAvance = (completados, total) =>\n  total === 0 ? 0 : Math.round((completados / total) * 100);", // Solución
+            test: v => /=>/.test(v) && /total\s*===\s*0/.test(v) && /100/.test(v) // Validación
+        },
+        // Reto práctico específico para el módulo Fundamentos de Node.js
+        'Fundamentos': { // Instrucción JavaScript
+            title: 'Reto Node.js Fundamentos: Servidor HTTP Básico', // Título del reto
+            desc: 'Importa node:http con require y crea un servidor usando http.createServer que responda con res.end().', // Consigna
+            placeholder: "const http = require('node:http');\nconst server = http.createServer((req, res) => {\n  res.end('Hola Node.js');\n});", // Código guía
+            hint: "Usa require('node:http'), http.createServer(...) y res.end(...).", // Pista para el estudiante
+            solution: "const http = require('node:http');\nconst server = http.createServer((req, res) => {\n  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });\n  res.end(JSON.stringify({ ok: true }));\n});\nserver.listen(3000);", // Solución de referencia
+            test: v => /require\(['"](node:)?http['"]\)/.test(v) && /createServer\s*\(/.test(v) && /res\.end\s*\(/.test(v) // Validación por expresión regular
+        },
         'HTML BASICO': { // Instrucción JavaScript
             title: 'Reto HTML Básico: Imagen Accesible + Enlace Seguro',
             desc: 'Escribe una etiqueta <img> con alt="..." y un enlace <a> con target="_blank".',
