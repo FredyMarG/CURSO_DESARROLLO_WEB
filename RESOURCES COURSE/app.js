@@ -409,6 +409,13 @@ const modules = [
     desc: "Pizarra interactiva con pincel, borrador, grosor, Deshacer (Ctrl+Z) y descarga PNG.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/index.html",
   },
+  { // Proyecto práctico de gestor de finanzas personales con Canvas y localStorage
+    cat: "proyectos",
+    title: "23. Finanzas APP",
+    tag: "Proyecto JS",
+    desc: "Control de ingresos y gastos con separador de miles en vivo, localStorage y gráfico Canvas.",
+    href: "JAVASCRIPT/PROYECTOS/Finanzas APP/index.html",
+  },
 
   // --- SECCIÓN: JS MID LEVEL ---
   // Práctica de programación asíncrona moderna con async y await

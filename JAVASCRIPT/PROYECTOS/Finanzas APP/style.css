@@ -1,0 +1,322 @@
+/* ==========================================================================
+   ESTILOS DE FINANZAS APP — DISEÑO MODERNO ESTILO PORTAL DEL CURSO
+   Comentado línea a línea de forma educativa en español
+   ========================================================================== */
+
+/* Variables CSS globales para reutilizar colores en todo el archivo */
+:root {
+  --fondo-oscuro: #070a13; /* Color principal de fondo de la página */
+  --fondo-tarjeta: rgba(16, 24, 42, 0.85); /* Fondo semitransparente para la tarjeta principal */
+  --fondo-input: rgba(10, 15, 28, 0.9); /* Fondo oscuro para los campos de entrada */
+  --borde-sutil: rgba(255, 255, 255, 0.1); /* Borde fino y translúcido para separar secciones */
+  --cian: #38bdf8; /* Color de acento cian para el balance y focos */
+  --indigo: #6366f1; /* Color secundario índigo para degradados */
+  --esmeralda: #10b981; /* Color verde para resaltar ingresos positivos */
+  --rosa: #fb7185; /* Color rojo/rosa para gastos y botón de borrar */
+  --texto-principal: #f8fafc; /* Color claro para textos principales */
+  --texto-secundario: #94a3b8; /* Color gris azulado para etiquetas y placeholders */
+}
+
+/* Selector universal: aplica estas reglas a todos los elementos HTML */
+* {
+  box-sizing: border-box; /* Hace que padding y border se incluyan dentro del ancho/alto definido */
+  margin: 0; /* Elimina los márgenes externos por defecto del navegador */
+  padding: 0; /* Elimina los rellenos internos por defecto del navegador */
+}
+
+/* Estilos generales del cuerpo del documento */
+body {
+  min-height: 100vh; /* Ocupa como mínimo el 100% del alto visible de la pantalla */
+  background-color: var(--fondo-oscuro); /* Aplica el color de fondo oscuro base */
+  background-image: /* Crea dos halos de luz suaves en las esquinas */
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.14), transparent 38%), /* Luz cian arriba a la izquierda */
+    radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.16), transparent 40%); /* Luz índigo abajo a la derecha */
+  color: var(--texto-principal); /* Define el color de texto por defecto */
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Tipografía moderna con respaldos del sistema */
+  display: flex; /* Activa Flexbox para centrar el contenido */
+  justify-content: center; /* Centra la tarjeta horizontalmente */
+  align-items: center; /* Centra la tarjeta verticalmente */
+  padding: 24px 16px; /* Espacio interno para que no pegue a los bordes en pantallas pequeñas */
+}
+
+/* Contenedor principal de la aplicación con efecto cristal (glassmorphism) */
+.container {
+  width: 100%; /* Se adapta al ancho disponible */
+  max-width: 560px; /* Limita el ancho máximo en pantallas grandes */
+  background: var(--fondo-tarjeta); /* Fondo oscuro translúcido */
+  border: 1px solid var(--borde-sutil); /* Borde sutil alrededor de la tarjeta */
+  border-radius: 20px; /* Esquinas redondeadas */
+  padding: 28px; /* Espaciado interno uniforme */
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55); /* Sombra profunda para dar sensación de elevación */
+  backdrop-filter: blur(12px); /* Desenfoca el fondo detrás de la tarjeta */
+}
+
+/* Título principal con texto en degradado */
+h1 {
+  text-align: center; /* Centra el título horizontalmente */
+  font-size: 1.85rem; /* Tamaño grande y legible */
+  font-weight: 800; /* Grosor extra negrita */
+  margin-bottom: 22px; /* Separación inferior respecto al resumen */
+  background: linear-gradient(135deg, var(--cian), #818cf8); /* Degradado diagonal cian a índigo */
+  -webkit-background-clip: text; /* Recorta el fondo con la forma del texto (prefijo Safari/Chrome) */
+  background-clip: text; /* Recorta el fondo con la forma del texto (estándar) */
+  -webkit-text-fill-color: transparent; /* Vuelve transparente el relleno del texto para ver el degradado */
+}
+
+/* Sección de resumen dividida en 3 columnas iguales */
+.resumen {
+  display: grid; /* Activa CSS Grid */
+  grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas del mismo ancho */
+  gap: 12px; /* Espacio entre las 3 tarjetas */
+  margin-bottom: 22px; /* Separación inferior respecto al formulario */
+}
+
+/* Cada tarjeta individual dentro del resumen (Balance, Ingresos, Gastos) */
+.resumen > div {
+  background: rgba(255, 255, 255, 0.04); /* Fondo ligeramente más claro que la tarjeta */
+  border: 1px solid var(--borde-sutil); /* Borde fino semitransparente */
+  border-radius: 14px; /* Esquinas redondeadas */
+  padding: 14px 12px; /* Relleno interno */
+  display: flex; /* Usa Flexbox para apilar etiqueta y monto */
+  flex-direction: column; /* Coloca el monto debajo de la etiqueta */
+  align-items: center; /* Centra el contenido horizontalmente */
+  gap: 6px; /* Espacio vertical entre etiqueta y cifra */
+  font-size: 0.85rem; /* Tamaño discreto para la etiqueta */
+  color: var(--texto-secundario); /* Color grisáceo para la etiqueta */
+}
+
+/* Cifras numéricas dentro de las tarjetas de resumen */
+.resumen span {
+  font-size: 1.15rem; /* Tamaño destacado para el dinero */
+  font-weight: 700; /* Negrita para facilitar la lectura rápida */
+  font-variant-numeric: tabular-nums; /* Hace que todos los dígitos tengan el mismo ancho */
+  color: var(--texto-principal); /* Color base blanco si no hay otro específico */
+}
+
+/* Color específico para el saldo total */
+#balance {
+  color: var(--cian); /* Resalta el balance en cian */
+}
+
+/* Color específico para los ingresos */
+#ingresos {
+  color: var(--esmeralda); /* Resalta los ingresos en verde esmeralda */
+}
+
+/* Color específico para los gastos */
+#gastos {
+  color: var(--rosa); /* Resalta los gastos en rosa/rojo */
+}
+
+/* Tarjeta que contiene el gráfico circular y su leyenda */
+.grafico-card {
+  background: rgba(255, 255, 255, 0.03); /* Fondo sutil para enmarcar el gráfico */
+  border: 1px solid var(--borde-sutil); /* Borde fino acorde a las demás tarjetas */
+  border-radius: 14px; /* Esquinas redondeadas */
+  padding: 16px; /* Espaciado interno */
+  margin-bottom: 22px; /* Separación inferior respecto al formulario */
+  display: flex; /* Coloca el canvas y la leyenda lado a lado */
+  align-items: center; /* Centra verticalmente el gráfico y los textos */
+  justify-content: center; /* Centra el conjunto horizontalmente */
+  gap: 24px; /* Espacio entre el gráfico y la leyenda */
+}
+
+/* Lienzo donde JavaScript dibuja el gráfico de dona */
+#grafico-resumen {
+  width: 150px; /* Ancho visual en pantalla */
+  height: 150px; /* Alto visual en pantalla */
+  flex-shrink: 0; /* Evita que el gráfico se encoja si falta espacio */
+}
+
+/* Contenedor de la leyenda de colores */
+.leyenda-grafico {
+  display: flex; /* Organiza los elementos de la leyenda */
+  flex-direction: column; /* Apila Ingresos encima de Gastos */
+  gap: 10px; /* Separación vertical entre ambos indicadores */
+  font-size: 0.92rem; /* Tamaño de letra legible */
+  color: var(--texto-secundario); /* Color suave para las etiquetas */
+}
+
+/* Cada fila de la leyenda (punto de color + texto + porcentaje) */
+.leyenda-item {
+  display: flex; /* Alinea el círculo de color junto al texto */
+  align-items: center; /* Centra verticalmente el círculo y el texto */
+  gap: 8px; /* Espacio entre el círculo y la etiqueta */
+}
+
+/* Resalta el valor del porcentaje en blanco y negrita */
+.leyenda-item strong {
+  color: var(--texto-principal); /* Color claro para destacar el porcentaje */
+}
+
+/* Círculo indicador de color en la leyenda */
+.punto-color {
+  width: 12px; /* Ancho del círculo */
+  height: 12px; /* Alto del círculo */
+  border-radius: 50%; /* Lo convierte en un círculo perfecto */
+  display: inline-block; /* Permite darle ancho y alto en línea */
+}
+
+/* Color verde esmeralda para el indicador de ingresos */
+.punto-ingresos {
+  background-color: var(--esmeralda); /* Mismo verde que la tarjeta de ingresos */
+}
+
+/* Color rosa para el indicador de gastos */
+.punto-gastos {
+  background-color: var(--rosa); /* Mismo rosa que la tarjeta de gastos */
+}
+
+/* Formulario de registro distribuido en 2 columnas */
+#form-transaccion {
+  display: grid; /* Activa CSS Grid para alinear los campos */
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño (monto y tipo) */
+  gap: 12px; /* Separación entre campos */
+  margin-bottom: 24px; /* Espacio inferior antes de la lista de movimientos */
+}
+
+/* El campo de concepto ocupa ambas columnas completas */
+#concepto {
+  grid-column: 1 / -1; /* Se extiende desde la primera columna hasta la última */
+}
+
+/* Reglas compartidas para los inputs y el selector desplegable */
+#form-transaccion input,
+#form-transaccion select {
+  width: 100%; /* Ocupa todo el ancho de su celda en el grid */
+  background: var(--fondo-input); /* Fondo oscuro para contraste */
+  color: var(--texto-principal); /* Texto claro al escribir */
+  border: 1px solid var(--borde-sutil); /* Borde sutil por defecto */
+  border-radius: 10px; /* Bordes suavemente redondeados */
+  padding: 11px 14px; /* Espacio interno cómodo para escribir o tocar */
+  font-family: inherit; /* Hereda la tipografía 'Outfit' del body */
+  font-size: 0.95rem; /* Tamaño de letra legible */
+  outline: none; /* Quita el contorno azul predeterminado del navegador */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Anima suavemente el enfoque */
+}
+
+/* Color del texto de ayuda (placeholder) dentro de los inputs */
+#form-transaccion input::placeholder {
+  color: var(--texto-secundario); /* Gris suave para no confundirse con texto escrito */
+}
+
+/* Estado visual cuando el usuario hace clic o navega con Tab a un campo */
+#form-transaccion input:focus,
+#form-transaccion select:focus {
+  border-color: var(--cian); /* Ilumina el borde en cian */
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18); /* Añade un resplandor cian alrededor */
+}
+
+/* Botón principal para enviar el formulario */
+#form-transaccion button[type="submit"] {
+  grid-column: 1 / -1; /* Ocupa todo el ancho del formulario */
+  background: linear-gradient(135deg, var(--cian), var(--indigo)); /* Fondo degradado llamativo */
+  color: #070a13; /* Texto oscuro para lograr alto contraste sobre el cian */
+  border: none; /* Sin borde predeterminado */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 12px 16px; /* Relleno vertical y horizontal */
+  font-family: inherit; /* Hereda la fuente del proyecto */
+  font-size: 0.98rem; /* Tamaño ligeramente mayor al de los inputs */
+  font-weight: 700; /* Negrita para destacar la acción principal */
+  cursor: pointer; /* Cambia el cursor a mano al pasar por encima */
+  transition: transform 0.15s ease, filter 0.2s ease; /* Transición suave para hover y click */
+}
+
+/* Efecto al pasar el mouse sobre el botón Agregar */
+#form-transaccion button[type="submit"]:hover {
+  filter: brightness(1.08); /* Aumenta levemente el brillo del degradado */
+  transform: translateY(-1px); /* Eleva el botón 1 píxel hacia arriba */
+}
+
+/* Efecto al presionar el botón Agregar */
+#form-transaccion button[type="submit"]:active {
+  transform: translateY(0); /* Devuelve el botón a su posición original */
+}
+
+/* Contenedor de la lista de transacciones */
+#lista {
+  list-style: none; /* Quita los puntos (viñetas) por defecto de la etiqueta <ul> */
+  display: flex; /* Usa Flexbox para apilar los movimientos */
+  flex-direction: column; /* Ordena los movimientos uno debajo del otro */
+  gap: 10px; /* Espacio vertical entre cada movimiento */
+  max-height: 300px; /* Altura máxima antes de mostrar barra de desplazamiento */
+  overflow-y: auto; /* Activa scroll vertical automático si hay muchos elementos */
+}
+
+/* Cada fila de movimiento creada dinámicamente por JavaScript */
+#lista li {
+  background: rgba(255, 255, 255, 0.04); /* Fondo sutil semitransparente */
+  border: 1px solid var(--borde-sutil); /* Borde fino alrededor de la fila */
+  border-left: 3px solid var(--cian); /* Acento visual en el borde izquierdo */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 11px 14px; /* Espaciado interno */
+  display: flex; /* Alinea el texto y el botón de borrar en la misma línea */
+  justify-content: space-between; /* Empuja el texto a la izquierda y el botón a la derecha */
+  align-items: center; /* Centra ambos verticalmente */
+  gap: 12px; /* Espacio mínimo entre texto y botón */
+  font-size: 0.95rem; /* Tamaño de texto cómodo */
+  transition: background-color 0.2s ease, border-color 0.2s ease; /* Suaviza el efecto hover */
+}
+
+/* Resaltado sutil al pasar el cursor sobre un movimiento */
+#lista li:hover {
+  background: rgba(255, 255, 255, 0.07); /* Aclara ligeramente el fondo de la fila */
+}
+
+/* Estilo en verde para los movimientos de tipo ingreso */
+#lista li.item-ingreso {
+  border-left-color: var(--esmeralda); /* Cambia la barra lateral izquierda a verde esmeralda */
+}
+
+#lista li.item-ingreso .monto-item {
+  color: var(--esmeralda); /* Colorea el monto del ingreso en verde esmeralda */
+}
+
+/* Estilo en rojo/rosa para los movimientos de tipo egreso (gasto) */
+#lista li.item-gasto {
+  border-left-color: var(--rosa); /* Cambia la barra lateral izquierda a rojo/rosa */
+}
+
+#lista li.item-gasto .monto-item {
+  color: var(--rosa); /* Colorea el monto del egreso en rojo/rosa */
+}
+
+/* Botón "X" para eliminar un movimiento específico */
+#lista li button {
+  background: rgba(251, 113, 133, 0.15); /* Fondo rosa translúcido */
+  color: var(--rosa); /* Letra en color rosa/rojo */
+  border: 1px solid rgba(251, 113, 133, 0.35); /* Borde rosa semitransparente */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 4px 10px; /* Tamaño compacto */
+  font-family: inherit; /* Hereda la tipografía principal */
+  font-size: 0.8rem; /* Texto pequeño y limpio */
+  font-weight: 700; /* Negrita para la "X" */
+  cursor: pointer; /* Cursor de mano interactivo */
+  transition: background-color 0.2s ease, color 0.2s ease; /* Transición suave al pasar el mouse */
+}
+
+/* Efecto hover en el botón de eliminar */
+#lista li button:hover {
+  background: var(--rosa); /* Rellena el botón completamente de rosa */
+  color: #070a13; /* Cambia el texto a oscuro para mantener contraste */
+}
+
+/* Media query: reglas que solo se aplican en pantallas de hasta 500px (móviles) */
+@media (max-width: 500px) {
+  .container {
+    padding: 20px 16px; /* Reduce un poco el relleno para aprovechar mejor el ancho móvil */
+  }
+
+  .resumen {
+    grid-template-columns: 1fr; /* Apila las 3 tarjetas de resumen en una sola columna */
+  }
+
+  #form-transaccion {
+    grid-template-columns: 1fr; /* Apila todos los campos del formulario en una sola columna */
+  }
+
+  .grafico-card {
+    flex-direction: column; /* Coloca el gráfico encima de la leyenda en pantallas pequeñas */
+    gap: 14px; /* Reduce el espacio entre el gráfico y la leyenda */
+  }
+}
