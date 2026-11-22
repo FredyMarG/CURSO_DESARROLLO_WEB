@@ -2,7 +2,7 @@
 
 > **Nivel:** Principiante a avanzado (Junior → Semi Senior)  
 > **Módulo:** Nivel 1 — Fundamentos de Node.js  
-> **Objetivo:** Comprender cómo dividir aplicaciones Node.js en módulos reutilizables, dominar CommonJS y ECMAScript Modules (ESM), importar módulos nativos y externos, resolver rutas, identificar errores frecuentes y organizar el código de `CURSO_DESARROLLO_WEB`.  
+> **Objetivo:** Comprender cómo dividir aplicaciones Node.js en módulos reutilizables, dominar CommonJS y ECMAScript Modules (ESM), importar módulos nativos y externos, resolver rutas, identificar errores frecuentes y organizar el código de `la plataforma`.  
 > **Requisitos:** JavaScript básico, terminal, Node.js instalado y VS Code.  
 > **Modalidad:** Offline. Todos los laboratorios y el proyecto principal utilizan únicamente Node.js nativo.
 
@@ -819,7 +819,7 @@ npm test
 
 ---
 
-# Proyecto integrador — Gestor modular de cursos de CURSO_DESARROLLO_WEB
+# Proyecto integrador — Gestor modular de cursos del curso
 
 Vamos a construir una aplicación de consola que permita registrar cursos, listarlos, actualizar el progreso y obtener estadísticas. Se organiza por módulos y guarda datos en un archivo JSON.
 

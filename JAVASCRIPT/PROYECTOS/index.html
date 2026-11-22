@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exhibición de Proyectos — JavaScript | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%23F7DF1E'%2F%3E%3Ctext%20x%3D'52'%20y%3D'52'%20text-anchor%3D'end'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23111827'%3EJS%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <style>
+        /* ==================================================================
+           ESTILOS DE LA EXHIBICIÓN DE PROYECTOS JAVASCRIPT
+           Comentado línea por línea en español
+           ================================================================== */
+
+        /* Variables globales de diseño y paleta */
+        :root {
+            --bg: #070a13; /* Fondo oscuro principal */
+            --card: rgba(16, 24, 42, 0.82); /* Fondo cristal para tarjetas */
+            --border: rgba(255, 255, 255, 0.1); /* Borde fino semitransparente */
+            --cyan: #38bdf8; /* Acento cian */
+            --js: #f7df1e; /* Amarillo oficial de JavaScript */
+            --text: #f8fafc; /* Color de texto principal */
+            --muted: #94a3b8; /* Color de texto secundario */
+        }
+
+        /* Barras de desplazamiento personalizadas en tono amarillo JS */
+        * { scrollbar-width: thin; scrollbar-color: rgba(247, 223, 30, 0.45) #070a13; }
+        /* Tamaño de barra WebKit */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        /* Carril oscuro */
+        ::-webkit-scrollbar-track { background: #070a13; }
+        /* Pulgar redondeado amarillo JS */
+        ::-webkit-scrollbar-thumb { background: rgba(247, 223, 30, 0.45); border-radius: 999px; border: 2px solid #070a13; }
+        /* Pulgar iluminado al pasar el ratón */
+        ::-webkit-scrollbar-thumb:hover { background: var(--js); }
+
+        /* Reinicio global de márgenes, rellenos y modelo de caja */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* Configuración base del cuerpo */
+        body {
+            background: var(--bg); /* Fondo oscuro */
+            color: var(--text); /* Texto claro */
+            font-family: 'Outfit', system-ui, sans-serif; /* Tipografía principal */
+            min-height: 100vh; /* Ocupa al menos el alto de pantalla */
+            position: relative; /* Referencia para brillos ambientales */
+            overflow-x: hidden; /* Evita scroll horizontal */
+        }
+
+        /* Halos ambientales decorativos de fondo */
+        .bg-glow {
+            position: fixed; /* Fijos en pantalla */
+            width: 420px; /* Ancho del halo */
+            height: 420px; /* Alto del halo */
+            border-radius: 50%; /* Forma circular */
+            filter: blur(120px); /* Desenfoque suave */
+            opacity: 0.2; /* Opacidad sutil */
+            pointer-events: none; /* No bloquean clics */
+            z-index: 0; /* Detrás del contenido */
+        }
+        /* Halo superior izquierdo */
+        .glow-1 { background: #eab308; top: -150px; left: -140px; }
+        /* Halo inferior derecho */
+        .glow-2 { background: var(--cyan); bottom: -140px; right: -140px; }
+
+        /* Contenedor principal centrado */
+        .container {
+            max-width: 1180px; /* Ancho máximo */
+            margin: 0 auto; /* Centrado horizontal */
+            padding: 28px 20px 64px; /* Espaciado interno */
+            position: relative; /* Sobre los halos */
+            z-index: 1; /* Capa superior */
+        }
+
+        /* Barra superior de navegación */
+        .topbar {
+            display: flex; /* Disposición horizontal */
+            justify-content: space-between; /* Separa insignia y botones */
+            align-items: center; /* Centrado vertical */
+            flex-wrap: wrap; /* Adaptable en móviles */
+            gap: 12px; /* Espacio entre elementos */
+            margin-bottom: 34px; /* Separación inferior */
+            padding: 12px 18px; /* Relleno interno */
+            background: rgba(15, 23, 42, 0.85); /* Fondo cristal oscuro */
+            border: 1px solid var(--border); /* Borde fino */
+            border-radius: 14px; /* Esquinas redondeadas */
+            backdrop-filter: blur(12px); /* Efecto vidrio */
+        }
+
+        /* Insignia en la barra superior */
+        .nav-badge {
+            font-family: 'Fira Code', monospace; /* Fuente monoespaciada */
+            font-size: 0.78rem; /* Tamaño compacto */
+            font-weight: 600; /* Seminegrita */
+            color: var(--js); /* Amarillo JavaScript */
+        }
+
+        /* Grupo de botones de navegación */
+        .nav-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        /* Botón de navegación */
+        .btn {
+            text-decoration: none; /* Sin subrayado */
+            color: var(--text); /* Texto claro */
+            background: rgba(255, 255, 255, 0.06); /* Fondo sutil */
+            border: 1px solid var(--border); /* Borde fino */
+            padding: 7px 14px; /* Relleno interno */
+            border-radius: 999px; /* Forma de cápsula */
+            font-size: 0.85rem; /* Tamaño legible */
+            font-weight: 600; /* Seminegrita */
+            transition: all 0.2s ease; /* Transición suave */
+        }
+        /* Hover del botón */
+        .btn:hover { border-color: var(--js); color: var(--js); }
+        /* Variante primaria del botón */
+        .btn-primary { background: var(--js); color: #111827; border-color: var(--js); }
+        /* Hover del botón primario */
+        .btn-primary:hover { background: #fde047; color: #111827; }
+
+        /* Encabezado de la exhibición */
+        header { text-align: center; margin-bottom: 40px; }
+
+        /* Píldora superior */
+        .hero-badge {
+            display: inline-block; /* Comportamiento en línea */
+            font-family: 'Fira Code', monospace; /* Fuente técnica */
+            font-size: 0.76rem; /* Tamaño compacto */
+            font-weight: 600; /* Seminegrita */
+            color: var(--js); /* Amarillo JavaScript */
+            background: rgba(247, 223, 30, 0.12); /* Fondo amarillo suave */
+            border: 1px solid rgba(247, 223, 30, 0.35); /* Borde amarillo */
+            padding: 6px 14px; /* Relleno */
+            border-radius: 999px; /* Píldora */
+            margin-bottom: 14px; /* Separación inferior */
+        }
+
+        /* Título principal con degradado */
+        h1 {
+            font-size: clamp(2rem, 4.5vw, 2.9rem); /* Tamaño adaptable */
+            font-weight: 800; /* Extra negrita */
+            background: linear-gradient(135deg, #ffffff 30%, var(--js) 100%); /* Degradado blanco a amarillo JS */
+            background-clip: text; /* Recorta al texto */
+            -webkit-text-fill-color: transparent; /* Revela el degradado */
+            margin-bottom: 10px; /* Separación inferior */
+        }
+
+        /* Subtítulo introductorio */
+        .subtitle { color: var(--muted); max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+        /* Contenedor de cada sección */
+        .section { margin-bottom: 40px; }
+
+        /* Título de sección */
+        .section-title {
+            font-size: 1.3rem; /* Tamaño destacado */
+            font-weight: 700; /* Negrita */
+            margin-bottom: 16px; /* Separación inferior */
+            padding-bottom: 10px; /* Espacio antes de la línea */
+            border-bottom: 1px solid var(--border); /* Línea divisoria */
+            display: flex; /* Alineación flexible */
+            align-items: center; /* Centrado vertical */
+            gap: 10px; /* Espacio entre elementos */
+        }
+
+        /* Insignia de conteo */
+        .count {
+            font-family: 'Fira Code', monospace; /* Fuente técnica */
+            font-size: 0.75rem; /* Tamaño compacto */
+            color: var(--js); /* Amarillo JS */
+            background: rgba(247, 223, 30, 0.12); /* Fondo suave */
+            border: 1px solid rgba(247, 223, 30, 0.3); /* Borde amarillo */
+            padding: 2px 10px; /* Relleno */
+            border-radius: 999px; /* Píldora */
+        }
+
+        /* Rejilla responsiva de tarjetas */
+        .grid {
+            display: grid; /* Activa CSS Grid */
+            grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); /* Columnas automáticas */
+            gap: 18px; /* Separación uniforme */
+        }
+
+        /* Tarjeta individual de proyecto */
+        .card {
+            display: flex; /* Disposición en columna */
+            flex-direction: column; /* Apila cabecera, descripción y enlace */
+            justify-content: space-between; /* Empuja el CTA al fondo */
+            gap: 12px; /* Separación interna */
+            background: var(--card); /* Fondo cristal */
+            border: 1px solid var(--border); /* Borde fino */
+            border-radius: 16px; /* Esquinas redondeadas */
+            padding: 20px; /* Relleno interno */
+            text-decoration: none; /* Sin subrayado */
+            color: var(--text); /* Texto claro */
+            backdrop-filter: blur(14px); /* Efecto vidrio */
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; /* Animación suave */
+        }
+
+        /* Efecto hover de tarjeta */
+        .card:hover {
+            transform: translateY(-4px); /* Elevación sutil */
+            border-color: var(--js); /* Borde amarillo JS */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45); /* Sombra profunda */
+        }
+
+        /* Cabecera de la tarjeta */
+        .card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        /* Título del proyecto */
+        .card-title { font-size: 1.05rem; font-weight: 700; }
+        /* Etiqueta de tecnología */
+        .card-tag {
+            font-family: 'Fira Code', monospace; /* Fuente monoespaciada */
+            font-size: 0.72rem; /* Tamaño compacto */
+            color: var(--js); /* Amarillo JS */
+            background: rgba(247, 223, 30, 0.12); /* Fondo amarillo suave */
+            border: 1px solid rgba(247, 223, 30, 0.3); /* Borde amarillo */
+            padding: 2px 8px; /* Relleno */
+            border-radius: 999px; /* Píldora */
+        }
+        /* Descripción del proyecto */
+        .card-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+        /* Llamado a la acción inferior */
+        .card-cta { color: var(--cyan); font-size: 0.85rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <div class="container">
+        <nav class="topbar">
+            <span class="nav-badge">🟨 JAVASCRIPT · EXHIBICIÓN DE PROYECTOS</span>
+            <div class="nav-actions">
+                <a class="btn" href="../JAVASCRIPT%20JUNIOR%20LEVEL/DOCUMENTACION/index.html">📘 Docs Junior</a>
+                <a class="btn" href="../JAVASCRIPT%20MID%20LEVEL/DOCUMENTACION/index.html">📘 Docs Mid</a>
+                <a class="btn" href="../JAVASCRIPT%20MASTER%20LEVEL/DOCUMENTACION/index.html">📘 Docs Master</a>
+                <a class="btn" href="../../index.html?filter=proyectos">🚀 Proyectos</a>
+                <a class="btn btn-primary" href="../../index.html">🏠 Portal Principal</a>
+            </div>
+        </nav>
+
+        <header>
+            <span class="hero-badge">16 PROYECTOS REALES · VANILLA JS &amp; WEB APIS</span>
+            <h1>Exhibición de Proyectos JavaScript</h1>
+            <p class="subtitle">
+                Explora las aplicaciones web completas, laboratorios con Web APIs modernas (Canvas, IndexedDB, LocalStorage, Drag &amp; Drop, Cookies) y proyectos prácticos del curso.
+            </p>
+        </header>
+
+        <section class="section">
+            <h2 class="section-title">💼 Aplicaciones Completas <span class="count">3</span></h2>
+            <div class="grid">
+                <a class="card" href="Finanzas%20APP/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">💰 Finanzas APP</span><span class="card-tag">App JS</span></div>
+                        <p class="card-desc">Gestor personal de ingresos y gastos con balance dinámico, historial y persistencia.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="Buscador%20de%20Peliculas/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🎬 Buscador de Películas</span><span class="card-tag">Fetch / UI</span></div>
+                        <p class="card-desc">Buscador interactivo con tarjetas dinámicas, filtros y consumo de datos asíncronos.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="Tablero%20Kanban/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🗂️ Tablero Kanban</span><span class="card-tag">Drag &amp; Drop</span></div>
+                        <p class="card-desc">Organizador visual de tareas por columnas con arrastrar y soltar y estado persistente.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">🚀 Proyectos con Web APIs (Master Level) <span class="count">9</span></h2>
+            <div class="grid">
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Reloj/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">⏰ Reloj Digital</span><span class="card-tag">Date</span></div>
+                        <p class="card-desc">Reloj en tiempo real usando el objeto <code>Date</code> y temporizadores.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Local%20Storage/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🌍 Idioma con LocalStorage</span><span class="card-tag">Storage</span></div>
+                        <p class="card-desc">Selector de idioma persistente entre recargas con <code>localStorage</code>.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Drag%20%26%20Drop%20File%20Reader/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🖱️ Drag &amp; Drop File Reader</span><span class="card-tag">FileReader</span></div>
+                        <p class="card-desc">Carga y vista previa de archivos locales arrastrándolos desde el escritorio.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Texturizador/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🧱 Texturizador Drag &amp; Drop</span><span class="card-tag">Drag &amp; Drop</span></div>
+                        <p class="card-desc">Aplicación interactiva de texturas sobre un lienzo mediante arrastre.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Galeria%20Dinamica/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🖼️ Galería Dinámica</span><span class="card-tag">DOM + Files</span></div>
+                        <p class="card-desc">Construcción dinámica de galería de imágenes con lectura de archivos.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Intersection%20Objects%20Lazyload/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">👁️ Lazy Load</span><span class="card-tag">IntersectionObserver</span></div>
+                        <p class="card-desc">Carga diferida de elementos e imágenes al entrar en el viewport.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/IndexedDB/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🗄️ CRUD con IndexedDB</span><span class="card-tag">IndexedDB</span></div>
+                        <p class="card-desc">Base de datos NoSQL en el navegador con altas, bajas y consultas.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Uso%20de%20Cookies/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🍪 Uso de Cookies</span><span class="card-tag">Cookies</span></div>
+                        <p class="card-desc">Banner de consentimiento y gestión de cookies con <code>document.cookie</code>.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MASTER%20LEVEL/EJERCICIOS/Web%20Paint/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🎨 Web Paint</span><span class="card-tag">Canvas 2D</span></div>
+                        <p class="card-desc">Lienzo de dibujo libre con selector de color, grosor y trazos en <code>&lt;canvas&gt;</code>.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">⚡ Proyectos Prácticos (Junior y Mid Level) <span class="count">4</span></h2>
+            <div class="grid">
+                <a class="card" href="../JAVASCRIPT%20JUNIOR%20LEVEL/EJERCICIOS/12%20La%20LLave%20Correcta/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🔑 La Llave Correcta</span><span class="card-tag">Junior DOM</span></div>
+                        <p class="card-desc">Generación dinámica de tarjetas de llaves y selección interactiva en el DOM.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MID%20LEVEL/EJERCICIOS/4%20Recuperacion%20de%20Materia%20por%20Docente/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">📚 Recuperación por Docente</span><span class="card-tag">Mid Eventos</span></div>
+                        <p class="card-desc">Formulario con validación de materias, eventos y envío controlado.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MID%20LEVEL/EJERCICIOS/6%20Notas%20de%20Cofla/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🎓 Notas de Cofla</span><span class="card-tag">Mid Async</span></div>
+                        <p class="card-desc">Simulación de carga de calificaciones y cálculo de resultados.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../JAVASCRIPT%20MID%20LEVEL/EJERCICIOS/7%20Compa%C3%B1eros%20de%20Cofla%20Htdocs/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">👥 Compañeros de Cofla</span><span class="card-tag">Mid Fetch</span></div>
+                        <p class="card-desc">Consumo de datos JSON y renderizado de asistentes en el navegador.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -21,6 +21,25 @@
     --radius: 14px; /* Variable CSS personalizada (--radius) */
 }
 
+/* Personalización de barras de desplazamiento acorde al color neón del módulo */
+* {
+    /* Barra delgada con el color de acento activo (--polish-accent) */
+    scrollbar-width: thin;
+    scrollbar-color: var(--polish-accent, #38bdf8) #0b1120;
+}
+/* Tamaño de la barra en Chrome/Edge/Safari */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Carril oscuro */
+::-webkit-scrollbar-track { background: #0b1120; }
+/* Pulgar redondeado con el color de acento del módulo */
+::-webkit-scrollbar-thumb {
+    background: var(--polish-accent, #38bdf8);
+    border-radius: 999px;
+    border: 2px solid #0b1120;
+}
+/* Pulgar más brillante al interactuar */
+::-webkit-scrollbar-thumb:hover { background: var(--polish-accent-2, #818cf8); }
+
 /* Paletas de color por módulo (idénticas a la variedad visual de Junior Level) */
 body[data-theme="cyan"]    { --polish-accent: #00f0ff; --polish-accent-2: #38bdf8; --polish-top-glow: #083344; --polish-glow: rgba(0, 240, 255, 0.28); --polish-bg-tint: rgba(0, 240, 255, 0.13); }
 body[data-theme="purple"]  { --polish-accent: #a855f7; --polish-accent-2: #c084fc; --polish-top-glow: #3b0764; --polish-glow: rgba(168, 85, 247, 0.28); --polish-bg-tint: rgba(168, 85, 247, 0.15); }

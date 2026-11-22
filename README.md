@@ -1,18 +1,19 @@
-# 🚀 Curso Completo de Desarrollo Web Frontend (HTML5, CSS3 & JavaScript)
+# 🚀 Curso Completo de Desarrollo Web (HTML5, CSS3, JavaScript & Node.js)
 
-Repositorio integral e interactivo de aprendizaje y práctica progresiva de desarrollo web frontend. Combina **documentación técnica en Markdown**, **diapositivas interactivas**, **laboratorios en vivo**, **retos prácticos de código**, **quizzes** y **consola integrada en el navegador**, todo unificado bajo una interfaz moderna de temas neón dinámicos.
+Repositorio integral e interactivo de aprendizaje y práctica progresiva de desarrollo web Full Stack. Combina **documentación técnica en Markdown**, **diapositivas interactivas**, **laboratorios en vivo**, **retos prácticos de código**, **quizzes**, **consola integrada en el navegador** y **ejemplos ejecutables en Node.js**, todo unificado bajo una interfaz moderna de temas neón dinámicos.
 
 ---
 
 ## ✨ Características Principales
 
-- **Portal Central Unificado (`index.html`)**: Buscador, catálogo completo y acceso directo a los 4 niveles del curso, documentación y ejercicios.
-- **Interfaz Interactiva Unificada (`RESOURCES COURSE/`)**:
-  - **5 temas de color dinámicos** (*Cyan, Purple, Emerald, Amber, Rose*) intercambiables en tiempo real desde la barra superior.
-  - **Carrusel de teoría interactiva** con ejemplos de código y tablas comparativas limpias.
-  - **Laboratorio en vivo + Reto Práctico del Módulo + Quiz + Consola integrada** en cada lección.
-- **Favicons SVG personalizados por módulo**: Cada una de las 206 páginas `.html` cuenta con un ícono acorde a su temática.
-- **Código documentado línea a línea**: Todos los archivos `.js` (129) y `.css` (124) cuentan con comentarios explicativos en español.
+- **Portal Central Unificado (`index.html`)**: Buscador con *debounce*, catálogo completo de 204 recursos con iconos oficiales (Flaticon), filtros por nivel, ruta visual guiada de 5 pasos y optimización de renderizado (`DocumentFragment`, `loading="lazy"`, `content-visibility: auto`).
+- **Navegación Directa entre Módulos (`RESOURCES COURSE/`)**:
+  - **5 temas de color dinámicos** (*Cyan, Purple, Emerald, Amber, Rose*) intercambiables en tiempo real.
+  - Botones automáticos de **⬅ Módulo Anterior**, **Siguiente Módulo ➡**, **📘 Apuntes** y **🚀 Proyectos** en todos los niveles.
+  - **Carrusel de teoría interactiva + Laboratorio en vivo + Reto Práctico + Quiz + Consola integrada**.
+- **Visores de Documentación Offline-Ready**: 5 centros de documentación (`HTML y CSS`, `JS Junior`, `JS Mid`, `JS Master` y `Node.js`) con índice lateral completo, buscador en tiempo real, tablas Markdown, botones de copia y enlace directo al módulo correspondiente.
+- **Exhibiciones de Proyectos (`HTML y CSS/PROYECTOS/` y `JAVASCRIPT/PROYECTOS/`)**: Galerías dedicadas para explorar los 8 proyectos de HTML/CSS y los 16 proyectos de JavaScript sin distracciones.
+- **Código documentado línea a línea**: Las **217** páginas `.html`, **141** archivos `.js` y **129** archivos `.css` cuentan con sintaxis validada y comentarios explicativos en español.
 
 ---
 
@@ -20,18 +21,26 @@ Repositorio integral e interactivo de aprendizaje y práctica progresiva de desa
 
 ```text
 CURSO_DESARROLLO_WEB/
-├── index.html                    # Portal principal con catálogo y navegación global
+├── index.html                    # Portal principal con catálogo, iconos y navegación global
 ├── README.md                     # Documentación general del repositorio
-├── RESOURCES COURSE/             # Motor visual, catálogo, temas neón y retos compartidos
-│   ├── app.js                    # Lógica y catálogo del portal principal
+├── RESOURCES COURSE/             # Motor visual, catálogo, temas neón, retos y navegación
+│   ├── app.js                    # Lógica y catálogo optimizado del portal principal
 │   ├── style.css                 # Estilos del portal principal
-│   ├── course-polish.js/.css     # Transformador unificado (HTML/CSS, Mid, Master) + Retos
-│   ├── junior-theme.js           # Selector de 5 temas neón y estilos de tabla para Junior
-│   └── ejercicios-neon.js/.css   # Interfaz neón unificada para ejercicios prácticos
-├── HTML y CSS/                   # 10 módulos principales + 8 guías .md + sub-módulos y proyectos
-├── JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/      # 13 módulos + 14 guías .md + 12 ejercicios
-├── JAVASCRIPT/JAVASCRIPT MID LEVEL/         # 19 módulos + 25 guías .md + 7 ejercicios
-└── JAVASCRIPT/JAVASCRIPT MASTER LEVEL/      # 24 módulos + 24 guías .md + 9 ejercicios
+│   ├── course-polish.js/.css     # Transformador unificado (HTML/CSS, Mid, Master, Node) + Retos
+│   ├── junior-theme.js           # Selector de 5 temas neón y navegación para Junior
+│   └── ejercicios-neon.js/.css   # Interfaz neón unificada para ejercicios y proyectos
+├── HTML y CSS/                   # 10 módulos principales + 8 guías .md + exhibición de 8 proyectos
+├── JAVASCRIPT/
+│   ├── JAVASCRIPT JUNIOR LEVEL/  # 13 módulos + 14 guías .md + 12 ejercicios
+│   ├── JAVASCRIPT MID LEVEL/     # 19 módulos + 25 guías .md + 7 ejercicios
+│   ├── JAVASCRIPT MASTER LEVEL/  # 24 módulos + 24 guías .md + 9 ejercicios
+│   └── PROYECTOS/                # Exhibición de 16 proyectos JS + 3 apps completas
+└── NODE/                         # 4 módulos interactivos + 4 guías .md + scripts CLI/HTTP
+    ├── Fundamentos/              # Presentación + index.js (CLI) + servidor.js (node:http)
+    ├── Instalacion/              # Presentación de LTS, winget, nvm-windows, PATH y VS Code
+    ├── REPL/                     # Presentación + catalogo.js (prototipo en memoria)
+    ├── Modulos/                  # Presentación + saludo.js / app.js (CommonJS y ESM)
+    └── Documentacion/            # Visor offline + apuntes/*.md + docs-data.js
 ```
 
 ---
@@ -39,34 +48,49 @@ CURSO_DESARROLLO_WEB/
 ## 📚 Contenido por Nivel
 
 ### 1. [HTML y CSS](./HTML%20y%20CSS)
-- **Documentación (`HTML y CSS/Documentacion/`):** 8 guías técnicas actualizadas (HTML Living Standard, CSS moderno, Flexbox, Grid & `subgrid`, Responsive Design & Container Queries, Animaciones, Funciones Avanzadas como `color-mix()`/`clamp()`, y Hosting/Edge).
-- **Módulos y Sub-módulos organizados:** `HTML BASICO` (Enlaces, Formularios, Imágenes, Listas, Títulos y Párrafos), `HTML avanzado` (Accesibilidad, Audio/Video, HTML Semántico, Tablas, Details/Summary, etc.), `CSS BASICO` (incluye ejercicio `Tarjeta de presentacion`), `CSS avanzado` (BEM, Display, Position, Pseudoclases, Pseudoelementos, Transiciones, Ventana Modal), `Flexbox`, `Grid`, `Animaciones`, `Funciones Avanzadas`, `Responsive Design` y `PROYECTOS` (Accordion, Chatbox, Flipper Card 3D, Sidebar Menu, One View Page y Web Pages).
+- **Documentación (`HTML y CSS/Documentacion/`):** 8 guías técnicas actualizadas (incluyendo *qué es y para qué sirve* HTML5 y CSS3, Flexbox, Grid & `subgrid`, Responsive Design & Container Queries, Animaciones, Funciones Avanzadas como `color-mix()`/`clamp()`, y Hosting/Edge).
+- **Módulos y Proyectos:** `HTML BASICO`, `HTML avanzado`, `CSS BASICO`, `CSS avanzado`, `Flexbox`, `Grid`, `Animaciones`, `Funciones Avanzadas`, `Responsive Design` y exhibición en `HTML y CSS/PROYECTOS/`.
 
 ### 2. [JavaScript Junior Level](./JAVASCRIPT/JAVASCRIPT%20JUNIOR%20LEVEL)
-- **Documentación (`JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/`):** 14 guías actualizadas a ES2023–ES2025 (`VARIABLES.md`, `OPERADORES.md`, `CONCATENACION.md`, `CONDICIONALES.md`, `ARRAYS.md`, `ARRAYS_METHODS.md`, `BUCLES.md`, `CADENAS.md`, `METODOS DE CADENA.md`, `FUNCIONES.md`, `MATH.md`, `CONSOLE.LOG.md`, `POO.md`, `DOM.md`).
-- **Práctica:** 13 laboratorios interactivos con salida visual en el DOM, selector de tema dinámico y 12 ejercicios resueltos en `EJERCICIOS/`.
+- **Documentación (`JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/`):** 14 guías ordenadas progresivamente del `01.` al `14.` (`VARIABLES.md` → `DOM.md`).
+- **Práctica:** 13 laboratorios interactivos con navegación directa entre módulos y 12 ejercicios resueltos en `EJERCICIOS/`.
 
 ### 3. [JavaScript Mid Level](./JAVASCRIPT/JAVASCRIPT%20MID%20LEVEL)
-- **Documentación (`JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/`):** 25 guías técnicas (Callbacks, Promesas, Async/Await, Fetch, Axios, AJAX, JSON, HTTP, Eventos, Try-Catch, Temporizadores, Window/Location/Screen/Resize, Código Obsoleto y pestañas de Chrome DevTools).
+- **Documentación (`JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/`):** 25 guías técnicas ordenadas del `01.` al `25.` (`WINDOW.md`, `OBJETOS BARPROP.md` → `PESTAÑA APPLICATION.md`), con soporte de tablas Markdown.
 - **Práctica:** 19 módulos interactivos con laboratorio, reto práctico y quiz, más 7 ejercicios en `EJERCICIOS/`.
 
 ### 4. [JavaScript Master Level](./JAVASCRIPT/JAVASCRIPT%20MASTER%20LEVEL)
-- **Documentación (`JAVASCRIPT/JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 24 guías avanzadas sobre Web APIs y fundamentos profundos (`APIs`, `Cache`, `Canvas`, `Cookies`, `Drag & Drop`, `File Reader`, `Funciones Flecha`, `Geolocalización`, `Historial`, `IndexedDB`, `Intersection Observer`, `LocalStorage`, `MatchMedia`, `Memoization`, `Modo Estricto`, `Objeto Date`, `Objeto Navigator`, `Objeto Screen`, `Notifications`, `Operador Ternario`, `Prototipos`, `Service Workers`, `Visibility Change`, `Web Workers`).
-- **Práctica:** 24 módulos interactivos y 9 ejercicios avanzados en `EJERCICIOS/` (incluyendo `Web Paint`, `Uso de Cookies`, `Drag & Drop File Reader`, `IndexedDB`, `Intersection Objects Lazyload`, `Galería Dinámica`, `Local Storage`, `Reloj` y `Texturizador`).
+- **Documentación (`JAVASCRIPT/JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 24 guías avanzadas ordenadas del `01.` al `24.` sobre Web APIs y fundamentos profundos (`MODO ESTRICTO.md` → `SERVICE WORKERS.md`).
+- **Práctica:** 24 módulos interactivos, 9 ejercicios avanzados en `EJERCICIOS/` y exhibición unificada en [JAVASCRIPT/PROYECTOS/index.html](./JAVASCRIPT/PROYECTOS/index.html).
+
+### 5. [Node.js](./NODE)
+- **Documentación (`NODE/Documentacion/`):** 4 guías completas ordenadas del `01.` al `04.` (`FUNDAMENTOS.md`, `INSTALACION.md`, `REPL.md`, `MODULOS.md`).
+- **Módulos y Práctica:**
+  - `01. Fundamentos`: introducción al backend, V8, libuv, Event Loop, `index.js` y servidor HTTP nativo (`servidor.js`).
+  - `02. Instalación y Entorno`: LTS vs Current, `.msi`, `winget`, `nvm-windows`, `PATH`, PowerShell y `node --watch`.
+  - `03. REPL`: ciclo Read–Eval–Print–Loop, comandos `.help`/`.save`/`.load`/`.editor` y prototipo `catalogo.js`.
+  - `04. Módulos`: CommonJS (`require` / `module.exports`), ESM (`import` / `export`), módulos nativos y práctica `saludo.js` + `app.js`.
 
 ---
 
 ## 🛠️ Cómo Ejecutar en Local
 
 1. Clona o descarga este repositorio.
-2. Para la mayoría de módulos basta con abrir [index.html](./index.html) en tu navegador.
+2. Para explorar los módulos y documentación basta con abrir [index.html](./index.html) en tu navegador (los datos offline `docs-data.js` permiten leer todas las guías sin servidor).
 3. **Recomendado (para módulos con `Fetch`, `Ajax`, `Cache`, `Cookies` o `Service Workers`):** inicia un servidor HTTP local desde la carpeta raíz:
    - Con **VS Code**: extensión **Live Server** → *Open with Live Server* sobre `index.html`.
    - Con **Node.js**:
-     ```bash
+     ```powershell
      npx serve .
      ```
    - Con **Python**:
-     ```bash
+     ```powershell
      python -m http.server 8080
      ```
+4. **Para ejecutar las prácticas de Node.js en terminal:**
+   ```powershell
+   node NODE/Fundamentos/index.js
+   node NODE/Fundamentos/servidor.js
+   node NODE/REPL/catalogo.js
+   node NODE/Modulos/app.js
+   ```

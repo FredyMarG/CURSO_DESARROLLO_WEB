@@ -2,7 +2,7 @@
 
 > **Nivel:** Principiante → Intermedio (base para Junior)  
 > **Módulo:** 01 — Introducción al backend y Node.js  
-> **Objetivo:** Comprender qué es Node.js, para qué sirve, cómo se relaciona con JavaScript y el navegador, cómo funciona una aplicación cliente-servidor y cómo ejecutar el primer programa y servidor HTTP. Aplicaremos lo aprendido al proyecto **CURSO_DESARROLLO_WEB**.
+> **Objetivo:** Comprender qué es Node.js, para qué sirve, cómo se relaciona con JavaScript y el navegador, cómo funciona una aplicación cliente-servidor y cómo ejecutar el primer programa y servidor HTTP. Aplicaremos lo aprendido a la plataforma del curso.
 
 ---
 
@@ -54,7 +54,7 @@ El **backend** procesa solicitudes, aplica reglas de negocio, valida datos, gest
 | Ejemplo en la plataforma | Mostrar un catálogo de cursos | Guardar el progreso del estudiante |
 | Seguridad | No se confían secretos al navegador | Puede proteger credenciales y validar permisos |
 
-**Ejemplo aplicado:** un estudiante pulsa «Completar lección» en `CURSO_DESARROLLO_WEB`.
+**Ejemplo aplicado:** un estudiante pulsa «Completar lección» en `la plataforma`.
 
 1. El frontend detecta el clic.
 2. Envía una solicitud al backend.
@@ -421,13 +421,13 @@ Una recepción puede registrar múltiples solicitudes y continuar atendiendo mie
 
 ---
 
-# Proyecto integrador: API de bienvenida para CURSO_DESARROLLO_WEB
+# Proyecto integrador: API de bienvenida paral curso
 
 ## Objetivo
 
 Construir una pequeña API con Node.js **sin dependencias externas**. Devolverá información del curso y permitirá comprobar el funcionamiento de rutas, métodos, respuestas JSON y códigos HTTP.
 
-> **Alcance:** este proyecto se desarrolla de forma aislada para no modificar todavía los archivos existentes de `CURSO_DESARROLLO_WEB`. Su integración visual se hará después de revisar el código real del portal.
+> **Alcance:** este proyecto se desarrolla de forma aislada para no modificar todavía los archivos existentes de `la plataforma`. Su integración visual se hará después de revisar el código real del portal.
 
 ## Estructura
 
@@ -477,7 +477,7 @@ const servidor = http.createServer((req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/bienvenida') {
     res.writeHead(200);
     res.end(JSON.stringify({
-      mensaje: 'Bienvenido a CURSO_DESARROLLO_WEB',
+      mensaje: 'Bienvenido al curso',
       moduloActual: 'Fundamentos de Node.js'
     }));
     return;
@@ -532,7 +532,7 @@ Para `/api/bienvenida`:
 
 ```json
 {
-  "mensaje": "Bienvenido a CURSO_DESARROLLO_WEB",
+  "mensaje": "Bienvenido al curso",
   "moduloActual": "Fundamentos de Node.js"
 }
 ```
@@ -732,7 +732,7 @@ http.createServer((req, res) => {
 7. ¿Qué función cumple `res.end()`?
 8. ¿Por qué no conviene guardar contraseñas en el frontend?
 9. ¿Qué diferencia existe entre datos guardados en un arreglo y datos persistidos en una base de datos?
-10. ¿Qué relación tiene este módulo con la futura integración de Node.js en `CURSO_DESARROLLO_WEB`?
+10. ¿Qué relación tiene este módulo con la futura integración de Node.js en `la plataforma`?
 
 **Rúbrica sugerida:**
 

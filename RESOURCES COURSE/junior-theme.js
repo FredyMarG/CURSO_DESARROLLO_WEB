@@ -34,11 +34,11 @@
     const initial = keys[hash % keys.length]; // Declara e inicializa "initial"
     aplicarTema(initial); // Ejecuta llamada o método
 
-    // Inyecta estilos para tablas comparativas (.compare-table) en módulos Junior
+    // Inyecta estilos para tablas comparativas (.compare-table) y scrollbars neón en módulos Junior
     if (!document.getElementById('jrCompareTableStyle')) {
         const st = document.createElement('style'); // Crea nuevo elemento DOM "st"
         st.id = 'jrCompareTableStyle'; // Asigna id único
-        st.textContent = `.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem;background:rgba(2,6,23,.55);border:1px solid var(--border,#334155);border-radius:10px;overflow:hidden}.compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}.compare-table th{color:var(--accent,#00f0ff);background:rgba(15,23,42,.85);font-weight:700}.compare-table tr:last-child td{border-bottom:none}`; // Asigna reglas CSS
+        st.textContent = `*{scrollbar-width:thin;scrollbar-color:var(--accent,#00f0ff) #0b1120}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b1120}::-webkit-scrollbar-thumb{background:var(--accent,#00f0ff);border-radius:999px;border:2px solid #0b1120}.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem;background:rgba(2,6,23,.55);border:1px solid var(--border,#334155);border-radius:10px;overflow:hidden}.compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}.compare-table th{color:var(--accent,#00f0ff);background:rgba(15,23,42,.85);font-weight:700}.compare-table tr:last-child td{border-bottom:none}`; // Asigna reglas CSS
         document.head.appendChild(st); // Inserta estilo en head
     }
 
@@ -76,6 +76,12 @@
                 aPrev.style.cssText = btnStyle; // Aplica estilo
                 navRight.appendChild(aPrev); // Inserta en barra superior
             }
+            // Botón directo a la pestaña de Proyectos del portal
+            const aProj = document.createElement('a'); // Crea enlace a Proyectos
+            aProj.href = '../../../index.html?filter=proyectos'; // Ruta hacia la pestaña de Proyectos
+            aProj.textContent = '🚀 Proyectos'; // Texto visible
+            aProj.style.cssText = btnStyle; // Aplica estilo común
+            navRight.appendChild(aProj); // Inserta en la barra superior
             if (nextJ) { // Agrega botón siguiente en la barra superior
                 const aNext = document.createElement('a'); // Crea enlace siguiente
                 aNext.href = encodeURI(`../${nextJ}/index.html`); // Ruta relativa

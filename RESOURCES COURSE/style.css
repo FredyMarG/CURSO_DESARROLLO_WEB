@@ -25,6 +25,29 @@
     --border-light: rgba(255, 255, 255, 0.1);
 }
 
+/* Personalización de barras de desplazamiento para que combinen con el tema oscuro */
+* {
+    /* Soporte estándar (Firefox y navegadores modernos) */
+    scrollbar-width: thin;
+    /* Color del pulgar cian translúcido sobre fondo oscuro */
+    scrollbar-color: rgba(56, 189, 248, 0.45) #070a13;
+}
+
+/* Ancho de la barra de desplazamiento en navegadores WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Carril de fondo oscuro */
+::-webkit-scrollbar-track { background: #070a13; }
+/* Pulgar redondeado con degradado índigo-cian */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.55), rgba(56, 189, 248, 0.55));
+    border-radius: 999px;
+    border: 2px solid #070a13;
+}
+/* Resaltado del pulgar al pasar el ratón */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary), var(--cyan));
+}
+
 /* Selector universal para normalizar márgenes, rellenos y modelo de caja */
 * {
     /* Incluye el relleno y el borde dentro del ancho y alto total */
@@ -254,6 +277,10 @@ h1 {
 .course-section {
     /* Separación inferior entre bloques de cursos */
     margin-bottom: 42px;
+    /* Omite layout y pintado de secciones fuera de pantalla hasta acercarse al viewport */
+    content-visibility: auto;
+    /* Altura estimada para evitar saltos de barra de scroll */
+    contain-intrinsic-size: 320px;
 }
 
 /* Contenedor de icono oficial de tecnología (HTML, CSS, JS, Node.js) */

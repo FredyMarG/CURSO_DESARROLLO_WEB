@@ -17,6 +17,25 @@
     --neon-border: rgba(0, 240, 255, 0.26); /* Variable CSS personalizada (--neon-border) */
 }
 
+/* Personalización de barras de desplazamiento en tema oscuro neón */
+* {
+    /* Barra delgada cian sobre fondo oscuro */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 240, 255, 0.5) #050711;
+}
+/* Tamaño de barra WebKit */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+/* Carril oscuro */
+::-webkit-scrollbar-track { background: #050711; }
+/* Pulgar con degradado cian-púrpura neón */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, rgba(0, 240, 255, 0.55), rgba(168, 85, 247, 0.55));
+    border-radius: 999px;
+    border: 2px solid #050711;
+}
+/* Pulgar iluminado al pasar el ratón */
+::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple)); }
+
 /* Fondo oscuro profundo con resplandores neón ambientales */
 html, body { /* Regla de estilo para html, body */
     background:

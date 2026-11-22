@@ -16,8 +16,8 @@ function presentarCurso(nombre, cantidad) {
   return `Bienvenido a ${nombre}. El programa tiene ${cantidad} módulos.`;
 } // Fin de la función presentarCurso
 
-// Imprimimos el saludo inicial del proyecto en la terminal
-console.log("Bienvenido a CURSO_DESARROLLO_WEB");
+// Imprimimos el saludo inicial del curso en la terminal
+console.log("Bienvenido al curso de Node.js");
 // Imprimimos el nombre del curso almacenado en la constante
 console.log("Curso:", curso);
 // Imprimimos el nivel actual del módulo

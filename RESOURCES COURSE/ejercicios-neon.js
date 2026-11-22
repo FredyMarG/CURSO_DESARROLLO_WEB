@@ -21,7 +21,7 @@
     const group = document.createElement('div');
     group.className = 'neon-nav-group';
     group.innerHTML = `
-        <a class="neon-portal-pill" href="${toPortalRoot}HTML%20y%20CSS/PROYECTOS/index.html">💼 Proyectos</a>
+        <a class="neon-portal-pill" href="${toPortalRoot}index.html?filter=proyectos">🚀 Proyectos</a>
         <a class="neon-portal-pill" href="${toPortalRoot}index.html">🏠 Portal del Curso</a>
     `;
     document.body.appendChild(group);

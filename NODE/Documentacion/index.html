@@ -28,6 +28,17 @@
             --mono: 'Fira Code', monospace; /* Tipografía monoespaciada */
         }
 
+        /* Barras de desplazamiento personalizadas en verde Node.js */
+        * { scrollbar-width: thin; scrollbar-color: rgba(16, 185, 129, 0.45) #070a13; }
+        /* Tamaño de barra WebKit */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        /* Carril oscuro */
+        ::-webkit-scrollbar-track { background: #070a13; }
+        /* Pulgar redondeado verde Node.js */
+        ::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.45); border-radius: 999px; border: 2px solid #070a13; }
+        /* Pulgar iluminado al pasar el ratón */
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
         /* Normalización global de márgenes, rellenos y modelo de caja */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 

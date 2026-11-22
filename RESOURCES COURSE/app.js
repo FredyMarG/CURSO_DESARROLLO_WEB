@@ -1464,10 +1464,17 @@ const modules = [
   // 01–09: Proyectos HTML y CSS (al inicio de Proyectos)
   { // Instrucción JavaScript
     cat: "proyectos",
-    title: "01. Proyectos HTML y CSS (Guía + Showcase)",
+    title: "00. Proyectos HTML y CSS (Exhibición)",
     tag: "Proyecto",
-    desc: "Guía arquitectónica de los 7 proyectos reales de CSS puro, quiz de técnicas y acceso directo.",
+    desc: "Exhibición visual de los 8 proyectos reales de HTML5 y CSS3.",
     href: "HTML y CSS/PROYECTOS/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "proyectos",
+    title: "01. Exhibición de Proyectos JS",
+    tag: "Proyecto",
+    desc: "Exhibición visual de las 16 aplicaciones y proyectos prácticos de JavaScript.",
+    href: "JAVASCRIPT/PROYECTOS/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
@@ -1527,16 +1534,16 @@ const modules = [
   },
 ];
 
-// Iconos oficiales tomados de Flaticon (HTML5, CSS3, JavaScript y Node.js)
+// Iconos oficiales tomados de Flaticon (HTML5, CSS3, JavaScript y Node.js) con carga diferida
 const TECH_ICONS = { // Declara e inicializa "TECH_ICONS"
   // Icono oficial de HTML5 en Flaticon
-  html: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" alt=""></span>',
+  html: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/174/174854.png" alt=""></span>',
   // Icono oficial de CSS3 en Flaticon
-  css: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt=""></span>',
+  css: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt=""></span>',
   // Icono oficial de JavaScript en Flaticon
-  js: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt=""></span>',
+  js: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt=""></span>',
   // Icono oficial de Node.js en Flaticon
-  node: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt=""></span>',
+  node: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt=""></span>',
 };
 
 // Función auxiliar que determina qué icono de tecnología corresponde a cada tarjeta del portal
@@ -1646,6 +1653,12 @@ function render() { // Declara función
     return false; // Por defecto no coincide
   };
 
+  // Leemos una única vez el progreso guardado en localStorage antes de recorrer categorías
+  let progressMap = {}; // Declara e inicializa "progressMap"
+  try { progressMap = JSON.parse(localStorage.getItem("curso_web_progress") || "{}"); } catch (_) {}
+  // Fragmento principal para insertar todas las secciones en una sola operación DOM
+  const portalFrag = document.createDocumentFragment(); // Crea DocumentFragment para minimizar reflows
+
   // Definimos el orden progresivo del curso (HTML/CSS → JS Junior → JS Mid → JS Master → Node.js → Ejercicios → Proyectos)
   const order = ["htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"]; // Declara e inicializa "order"
   // Recorremos cada categoría en el orden establecido
@@ -1681,10 +1694,8 @@ function render() { // Declara función
     const grid = document.createElement("div"); // Crea nuevo elemento DOM "grid"
     // Asignamos la clase CSS de rejilla responsiva
     grid.className = "grid"; // Asigna valor
-
-    // Leemos el progreso guardado en localStorage para marcar tarjetas completadas
-    let progressMap = {}; // Declara e inicializa "progressMap"
-    try { progressMap = JSON.parse(localStorage.getItem("curso_web_progress") || "{}"); } catch (_) {}
+    // Fragmento local para insertar todas las tarjetas de la sección juntas
+    const gridFrag = document.createDocumentFragment(); // Crea fragmento de cuadrícula
 
     // Recorremos cada módulo filtrado para construir su tarjeta clicable
     items.forEach((item) => { // Instrucción JavaScript
@@ -1709,15 +1720,19 @@ function render() { // Declara función
                 </div>
                 <p class="card-desc">${item.desc}</p>
             `;
-      // Añadimos la tarjeta a la cuadrícula
-      grid.appendChild(a); // Inserta nodo en el DOM
+      // Añadimos la tarjeta al fragmento de cuadrícula
+      gridFrag.appendChild(a); // Inserta nodo en el fragmento
     });
 
+    // Insertamos todas las tarjetas de una sola vez en la cuadrícula
+    grid.appendChild(gridFrag); // Inserta fragmento en el DOM
     // Insertamos la cuadrícula dentro de la sección
     sec.appendChild(grid); // Inserta nodo en el DOM
-    // Insertamos la sección completa dentro del portal principal
-    portal.appendChild(sec); // Inserta nodo en el DOM
+    // Añadimos la sección al fragmento principal
+    portalFrag.appendChild(sec); // Inserta sección en el fragmento
   });
+  // Insertamos todas las secciones en el portal en una sola operación DOM
+  portal.appendChild(portalFrag); // Inserta fragmento completo en el DOM
 }
 
 // Registramos el evento clic en cada botón de filtro para cambiar la categoría activa
@@ -1735,8 +1750,12 @@ filterBtns.forEach((btn) => { // Instrucción JavaScript
   });
 });
 
-// Escuchamos el evento 'input' en la barra de búsqueda para filtrar en tiempo real al escribir
-searchInput.addEventListener("input", render); // Registra escuchador de eventos
+// Escuchamos el evento 'input' en la barra de búsqueda con un breve retardo (debounce) para evitar renders innecesarios al teclear rápido
+let searchTimer; // Temporizador de debounce para búsqueda
+searchInput.addEventListener("input", () => { // Registra escuchador de eventos
+  clearTimeout(searchTimer); // Cancela el render pendiente si sigue escribiendo
+  searchTimer = setTimeout(render, 80); // Ejecuta render 80ms después de pausar la escritura
+});
 
 // Conectamos los botones de la Ruta Visual Paso a Paso para activar el filtro correspondiente con un clic
 document.querySelectorAll(".path-step").forEach((stepBtn) => { // Instrucción JavaScript

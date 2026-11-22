@@ -49,7 +49,7 @@
                 </div>
                 <h1 class="hero-title">Curso de Node.js:<br /><span class="gradient-text">Fundamentos del Backend</span></h1>
                 <p class="hero-subtitle">
-                    Comprende qué es Node.js, para qué sirve, cómo se diferencia del frontend en el navegador, cómo funciona el ciclo HTTP cliente-servidor y construye tu primer programa y API de bienvenida para <strong>CURSO_DESARROLLO_WEB</strong>.
+                    Comprende qué es Node.js, para qué sirve, cómo se diferencia del frontend en el navegador, cómo funciona el ciclo HTTP cliente-servidor y construye tu primer programa y API de bienvenida.
                 </p>
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2">
@@ -279,7 +279,7 @@ const servidor = http.createServer((req, res) => {
   if (req.method === 'GET' && url.pathname === '/api/bienvenida') {
     res.writeHead(200);
     return res.end(JSON.stringify({
-      mensaje: 'Bienvenido a CURSO_DESARROLLO_WEB',
+      mensaje: 'Bienvenido al curso de Node.js',
       moduloActual: 'Fundamentos de Node.js'
     }));
   }
@@ -436,7 +436,7 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
   function simularServidor(method, rawUrl) {
     const url = new URL(rawUrl, &#x27;http://localhost:3000&#x27;);
     if (method === &#x27;GET&#x27; &amp;&amp; url.pathname === &#x27;/api/bienvenida&#x27;) {
-      return { status: 200, body: { mensaje: &#x27;Bienvenido a CURSO_DESARROLLO_WEB&#x27;, modulo: &#x27;Fundamentos de Node.js&#x27; } };
+      return { status: 200, body: { mensaje: &#x27;Bienvenido al curso de Node.js&#x27;, modulo: &#x27;Fundamentos de Node.js&#x27; } };
     }
     if (method === &#x27;GET&#x27; &amp;&amp; url.pathname === &#x27;/api/cursos&#x27;) {
       return { status: 200, body: { total: cursos.length, cursos } };
@@ -476,7 +476,7 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
   function simularServidor(method, rawUrl) {
     const url = new URL(rawUrl, &#x27;http://localhost:3000&#x27;);
     if (method === &#x27;GET&#x27; &amp;&amp; url.pathname === &#x27;/api/bienvenida&#x27;) {
-      return { status: 200, body: { mensaje: &#x27;Bienvenido a CURSO_DESARROLLO_WEB&#x27;, modulo: &#x27;Fundamentos de Node.js&#x27; } };
+      return { status: 200, body: { mensaje: &#x27;Bienvenido al curso de Node.js&#x27;, modulo: &#x27;Fundamentos de Node.js&#x27; } };
     }
     if (method === &#x27;GET&#x27; &amp;&amp; url.pathname === &#x27;/api/cursos&#x27;) {
       return { status: 200, body: { total: cursos.length, cursos } };

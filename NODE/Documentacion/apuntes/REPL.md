@@ -2,7 +2,7 @@
 
 > **Nivel:** Principiante a intermedio (con prácticas avanzadas)  
 > **Módulo:** Nivel 1 — Fundamentos de Node.js  
-> **Objetivo:** Dominar el entorno interactivo REPL de Node.js para ejecutar JavaScript sin crear archivos, inspeccionar objetos, probar expresiones, experimentar con módulos y depurar ideas antes de incorporarlas a `CURSO_DESARROLLO_WEB`.  
+> **Objetivo:** Dominar el entorno interactivo REPL de Node.js para ejecutar JavaScript sin crear archivos, inspeccionar objetos, probar expresiones, experimentar con módulos y depurar ideas antes de incorporarlas a `la plataforma`.  
 > **Requisitos:** Node.js instalado, terminal de Windows, PowerShell o terminal integrada de VS Code.  
 > **Modalidad:** Totalmente offline; los ejemplos principales no requieren instalar paquetes.
 
@@ -152,7 +152,7 @@ estudiantes
 Resultado: `7`.
 
 ```javascript
-const plataforma = "CURSO_DESARROLLO_WEB"
+const plataforma = "la plataforma"
 plataforma.toLowerCase()
 ```
 
@@ -617,7 +617,7 @@ cursosFinalizados()
 - Un ID duplicado genera un error controlado.
 - Un avance mayor al total genera un error controlado.
 
-## ¿Cómo se integra en CURSO_DESARROLLO_WEB?
+## ¿Cómo se integra en la plataforma?
 
 Este proyecto es un **prototipo en memoria**, no una base de datos. En módulos posteriores podremos trasladar estas funciones a servicios backend, conectarlas con MySQL o PostgreSQL y exponerlas mediante rutas HTTP. No modifica tu plataforma actual.
 
@@ -658,7 +658,7 @@ Este proyecto es un **prototipo en memoria**, no una base de datos. En módulos 
 
 ```javascript
 15 * 4
-const plataforma = "CURSO_DESARROLLO_WEB"
+const plataforma = "la plataforma"
 plataforma.toUpperCase()
 process.version
 ```

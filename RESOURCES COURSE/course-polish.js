@@ -243,6 +243,7 @@
         <div class="jr-nav-right">
             <div class="theme-dots" title="Cambiar color del módulo"></div>
             <a class="jr-nav-link" href="${meta.docsHref}">📘 Apuntes</a>
+            <a class="jr-nav-link" href="${meta.portalHref}?filter=proyectos">🚀 Proyectos</a>
             <a class="jr-nav-link primary" href="${meta.portalHref}">🏠 Portal Principal</a>
         </div>
     `;

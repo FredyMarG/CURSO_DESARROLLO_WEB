@@ -36,7 +36,7 @@ const servidor = http.createServer((req, res) => {
     return res.end(
       JSON.stringify({
         // Mensaje principal de bienvenida
-        mensaje: "Bienvenido a CURSO_DESARROLLO_WEB",
+        mensaje: "Bienvenido al curso de Node.js",
         // Nombre del módulo actual
         moduloActual: "Fundamentos de Node.js",
         // Versión activa de Node.js en el servidor

@@ -9,7 +9,11 @@
     <script src="docs-data.js"></script>
     <style>
         :root { --bg:#070a13; --card:rgba(16,24,42,0.85); --border:rgba(255,255,255,0.1); --primary:#38bdf8; --indigo:#818cf8; --text:#f1f5f9; --muted:#94a3b8; --sans:'Outfit',system-ui,sans-serif; --mono:'Fira Code',monospace; }
-        * { box-sizing:border-box; margin:0; padding:0; }
+        * { box-sizing:border-box; margin:0; padding:0; scrollbar-width:thin; scrollbar-color:rgba(56,189,248,0.45) #070a13; }
+        ::-webkit-scrollbar { width:10px; height:10px; }
+        ::-webkit-scrollbar-track { background:#070a13; }
+        ::-webkit-scrollbar-thumb { background:rgba(56,189,248,0.45); border-radius:999px; border:2px solid #070a13; }
+        ::-webkit-scrollbar-thumb:hover { background:var(--primary); }
         body { background:var(--bg); color:var(--text); font-family:var(--sans); min-height:100vh; display:flex; flex-direction:column; }
         .topbar { position:sticky; top:0; z-index:40; background:rgba(7,10,19,0.92); backdrop-filter:blur(14px); border-bottom:1px solid var(--border); padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap; }
         .brand { display:flex; align-items:center; gap:12px; }

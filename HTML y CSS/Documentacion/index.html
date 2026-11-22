@@ -22,6 +22,12 @@
             --sans: 'Outfit', system-ui, sans-serif;
             --mono: 'Fira Code', monospace;
         }
+        /* Barras de desplazamiento personalizadas acordes al lector oscuro */
+        * { scrollbar-width: thin; scrollbar-color: rgba(56, 189, 248, 0.45) #070a13; }
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #070a13; }
+        ::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.45); border-radius: 999px; border: 2px solid #070a13; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { background: var(--bg); color: var(--text); font-family: var(--sans); min-height: 100vh; display: flex; flex-direction: column; }
         .topbar {

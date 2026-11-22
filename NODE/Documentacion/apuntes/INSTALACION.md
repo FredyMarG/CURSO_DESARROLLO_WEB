@@ -2,7 +2,7 @@
 
 > **Nivel:** Principiante → Intermedio  
 > **Módulo:** 02 — Instalación y Entorno de Desarrollo  
-> **Objetivo:** Instalar Node.js correctamente en Windows, comprender la diferencia entre versiones **LTS** y **Current**, administrar múltiples versiones con `nvm-windows`, resolver errores comunes de `PATH` y PowerShell, y configurar Visual Studio Code para trabajar en `CURSO_DESARROLLO_WEB`.
+> **Objetivo:** Instalar Node.js correctamente en Windows, comprender la diferencia entre versiones **LTS** y **Current**, administrar múltiples versiones con `nvm-windows`, resolver errores comunes de `PATH` y PowerShell, y configurar Visual Studio Code para trabajar en `la plataforma`.
 
 ---
 
