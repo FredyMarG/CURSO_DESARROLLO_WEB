@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Memoization (Memoización) en JavaScript - JavaScript Master Level." />
+    <title>Memoization en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23eab308'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%E2%9A%A1%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🧠</span>
+                <span class="title-text">Memoization</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo (Slide 9)">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Memoization">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Optimización de Algoritmos</span>
+                    <span class="badge badge-cyan">Semi Senior → Senior</span>
+                    <span class="badge badge-emerald">Closures &amp; Caché en O(1)</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Rendimiento Inteligente:<br />
+                    <span class="gradient-text">Memoization</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Almacena en caché los resultados de funciones puras y costosas para devolver respuestas instantáneas cuando vuelvan a invocarse con los mismos argumentos.
+                </p>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Cache Hit O(1)</h3>
+                        <p>Respuestas instantáneas cuando los argumentos ya fueron calculados previamente.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔒</div>
+                        <h3>Closures + Map</h3>
+                        <p>Mantiene un diccionario privado en memoria sin contaminar el ámbito global.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📈</div>
+                        <h3>Adiós O(2ⁿ)</h3>
+                        <p>Reduce algoritmos exponenciales como Fibonacci recursivo a tiempo lineal O(n).</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧹</div>
+                        <h3>Control de RAM</h3>
+                        <p>Evita fugas de memoria con límites máximos (LRU) y el uso de <code>WeakMap</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES MEMOIZATION -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="¿Qué es la Memoización?">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Fundamentos</span>
+                    <h2 class="slide-title">1. ¿Qué es la Memoización (*Memoization*)?</h2>
+                    <p class="slide-description">
+                        Es un patrón de diseño que intercambia un poco de memoria RAM a cambio de una mejora masiva en velocidad de CPU.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">🐢</div>
+                        <h3>Cache Miss (Fallo de Caché)</h3>
+                        <p>Es la primera vez que la función recibe esos argumentos exactos. Ejecuta el cálculo completo, guarda el resultado en el diccionario y lo retorna.</p>
+                    </div>
+                    <div class="col-card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Cache Hit (Acierto de Caché)</h3>
+                        <p>Los argumentos ya existen en el diccionario. Se omite todo el cálculo pesado y se devuelve la copia guardada en ~0.00 ms.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: FUNCIONES PURAS -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Funciones Puras">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Requisito Indispensable</span>
+                    <h2 class="slide-title">2. Funciones Puras e Idempotencia</h2>
+                    <p class="slide-description">
+                        Para memoizar de forma segura, una función debe ser <strong>determinista</strong> y carecer de efectos secundarios.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card card-good">
+                        <div class="comp-badge badge-success">✅ Función Pura (Memoizable)</div>
+                        <h3>Mismas entradas = Misma salida</h3>
+                        <div class="code-snippet success-snippet">
+                            <code>const calcularArea = (r) => Math.PI * r * r;<br>
+                            // Siempre retorna lo mismo para r = 5</code>
+                        </div>
+                    </div>
+                    <div class="comp-card card-bad">
+                        <div class="comp-badge badge-danger">❌ Función Impura (NO Memoizar)</div>
+                        <h3>Depende de tiempo, azar o estado externo</h3>
+                        <div class="code-snippet danger-snippet">
+                            <code>const horaActual = () => Date.now();<br>
+                            const azar = (n) => Math.random() * n;</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: ANATOMÍA CLOSURE + MAP -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Anatomía: Closure + Map">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Implementación Base</span>
+                    <h2 class="slide-title">3. Anatomía Interna: Closures + `Map`</h2>
+                    <p class="slide-description">
+                        El <em>Closure</em> protege la caché privada entre llamadas, y <code>Map</code> ofrece búsqueda rápida con cualquier tipo de clave.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-emerald">Patrón Clásico de 1 Argumento</span>
+                        <span class="code-file-label">memoize.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">memoizarSimple</span> = (fn) =&gt; {
+    <span class="token-keyword">const</span> cache = <span class="token-keyword">new</span> <span class="token-function">Map</span>(); <span class="token-comment">// Privado gracias al Closure</span>
+
+    <span class="token-keyword">return</span> (arg) =&gt; {
+        <span class="token-keyword">if</span> (cache.<span class="token-function">has</span>(arg)) <span class="token-keyword">return</span> cache.<span class="token-function">get</span>(arg); <span class="token-comment">// ⚡ Cache Hit</span>
+        <span class="token-keyword">const</span> resultado = <span class="token-function">fn</span>(arg); <span class="token-comment">// 🐢 Cache Miss</span>
+        cache.<span class="token-function">set</span>(arg, resultado);
+        <span class="token-keyword">return</span> resultado;
+    };
+};</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: MÚLTIPLES ARGUMENTOS -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Múltiples Argumentos (...args)">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Generalización</span>
+                    <h2 class="slide-title">4. Memoización con Múltiples Argumentos (`...args`)</h2>
+                    <p class="slide-description">
+                        Serializamos el arreglo de parámetros con <code>JSON.stringify(args)</code> para obtener una clave única por combinación y tipo.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-cyan">Soporte Universal de Parámetros</span>
+                        <span class="code-file-label">multi-args.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">memoize</span> = (fn) =&gt; {
+    <span class="token-keyword">const</span> cache = <span class="token-keyword">new</span> <span class="token-function">Map</span>();
+    <span class="token-keyword">return</span> (...args) =&gt; {
+        <span class="token-keyword">const</span> clave = <span class="token-variable">JSON</span>.<span class="token-function">stringify</span>(args);
+        <span class="token-keyword">if</span> (cache.<span class="token-function">has</span>(clave)) <span class="token-keyword">return</span> cache.<span class="token-function">get</span>(clave);
+        <span class="token-keyword">const</span> res = <span class="token-function">fn</span>(...args);
+        cache.<span class="token-function">set</span>(clave, res);
+        <span class="token-keyword">return</span> res;
+    };
+};</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: FIBONACCI O(2^n) VS O(n) -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Fibonacci O(2ⁿ) vs O(n)">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Impacto en Rendimiento</span>
+                    <h2 class="slide-title">5. El Caso Clásico: Fibonacci Recursivo</h2>
+                    <p class="slide-description">
+                        Evita recalcular el mismo subárbol millones de veces guardando cada término intermedio en la caché.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card card-bad">
+                        <div class="comp-badge badge-danger">🐢 Sin Memoización: O(2ⁿ)</div>
+                        <h3>Crecimiento Exponencial</h3>
+                        <p>Para <code>fibonacci(40)</code> realiza más de 330 millones de llamadas repetidas.</p>
+                        <div class="code-snippet danger-snippet">
+                            <code>const fib = n => n <= 1 ? n : fib(n-1) + fib(n-2);</code>
+                        </div>
+                    </div>
+                    <div class="comp-card card-good">
+                        <div class="comp-badge badge-success">⚡ Con Memoización: O(n)</div>
+                        <h3>Crecimiento Lineal Instantáneo</h3>
+                        <p>Para <code>fibonacci(40)</code> realiza exactamente 41 pasos en &lt; 0.1 ms.</p>
+                        <div class="code-snippet success-snippet">
+                            <code>const fib = memoize(n => n <= 1 ? n : fib(n-1) + fib(n-2));</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: LÍMITE LRU Y WEAKMAP -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Límite de Caché y WeakMap">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Gestión de Memoria</span>
+                    <h2 class="slide-title">6. Límite de Caché (LRU) y `WeakMap`</h2>
+                    <p class="slide-description">
+                        Protege tu aplicación de fugas de memoria limitando el tamaño del <code>Map</code> o usando referencias débiles.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">📏</div>
+                        <h3>Evicción con `maxSize`</h3>
+                        <p><code>Map</code> conserva el orden de inserción; si excede el límite, borramos la clave más antigua:</p>
+                        <div class="code-snippet">
+                            <code>if (cache.size >= maxSize) {<br>
+                            &nbsp;&nbsp;const oldest = cache.keys().next().value;<br>
+                            &nbsp;&nbsp;cache.delete(oldest);<br>
+                            }</code>
+                        </div>
+                    </div>
+                    <div class="col-card">
+                        <div class="card-icon">🗑️</div>
+                        <h3>`WeakMap` para Objetos</h3>
+                        <p>Si la clave es un objeto grande o nodo DOM, <code>WeakMap</code> permite al <em>Garbage Collector</em> liberar su memoria automáticamente.</p>
+                        <div class="code-snippet">
+                            <code>const cache = new WeakMap();<br>
+                            if (cache.has(obj)) return cache.get(obj);</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: ANALOGÍAS Y BUENAS PRÁCTICAS -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías y Buenas Prácticas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Comprensión &amp; Calidad</span>
+                    <h2 class="slide-title">7. Analogías y Buenas Prácticas</h2>
+                    <p class="slide-description">
+                        Aplica la memoización con criterio profesional evitando sobrecargar funciones triviales.
+                    </p>
+                </div>
+
+                <div class="analogy-wrapper">
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">📝</div>
+                        <h3>El Estudiante con Post-its</h3>
+                        <p>
+                            Calculas <code>347 × 892</code> una vez y anotas el resultado en una nota adhesiva (<em>Cache Miss</em>). Si vuelven a preguntarte lo mismo, solo lees la nota (<em>Cache Hit</em>).
+                        </p>
+                    </div>
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">🛡️</div>
+                        <h3>Reglas de Oro</h3>
+                        <p>
+                            Memoiza solo funciones costosas o recursivas. En funciones recursivas, asegúrate de que la llamada interna apunte a la versión memoizada.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO INTERACTIVO EN VIVO -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio Interactivo en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Benchmark &amp; Caché Visual</span>
+                    <h2 class="slide-title">8. Laboratorio Interactivo: Cache Hit vs Cache Miss</h2>
+                    <p class="slide-description">
+                        Calcula Fibonacci con y sin memoización y observa cómo las llamadas repetidas responden en <code>0.00 ms</code> desde el <code>Map</code>.
+                    </p>
+                </div>
+
+                <div class="mm-dashboard-mockup">
+                    <!-- Banner de estado -->
+                    <div class="mm-status-banner" id="mmStatusBanner">
+                        <div>
+                            <strong>Última Operación: </strong>
+                            <code id="mmStatusText">Listo para calcular</code>
+                        </div>
+                        <span class="badge badge-cyan" id="mmBadgeState">En espera</span>
+                    </div>
+
+                    <!-- Métricas en vivo -->
+                    <div class="mm-metrics-grid">
+                        <div class="mm-metric-card">
+                            <span class="mm-metric-label">🧮 Resultado</span>
+                            <span class="mm-metric-value" id="mmResult">-</span>
+                        </div>
+                        <div class="mm-metric-card">
+                            <span class="mm-metric-label">⏱️ Tiempo de Ejecución</span>
+                            <span class="mm-metric-value" id="mmTime">0.00 ms</span>
+                        </div>
+                        <div class="mm-metric-card">
+                            <span class="mm-metric-label">⚡ Cache Hits</span>
+                            <span class="mm-metric-value" id="mmHits">0</span>
+                        </div>
+                        <div class="mm-metric-card">
+                            <span class="mm-metric-label">🐢 Cache Misses</span>
+                            <span class="mm-metric-value" id="mmMisses">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Chips visuales de la caché -->
+                    <div class="mm-cache-pills" id="mmCachePills">
+                        <span style="color: var(--text-dim); font-size: 0.8rem;">Caché vacía (0 entradas)...</span>
+                    </div>
+
+                    <!-- Controles -->
+                    <div class="mm-controls-bar">
+                        <label for="mmInputN" style="font-family: var(--font-mono); font-size: 0.85rem;">n =</label>
+                        <input class="mm-input" id="mmInputN" type="number" min="1" max="42" value="36" />
+                        <button class="nav-btn" id="btnCalcMemo">⚡ Calcular CON Memoize</button>
+                        <button class="nav-btn" id="btnCalcNoMemo">🐢 Calcular SIN Memoize</button>
+                        <button class="nav-btn" id="btnClearCache">🗑️ Limpiar Caché</button>
+                        <button class="nav-btn" id="btnClearMmLogs">🧹 Limpiar Logs</button>
+                    </div>
+
+                    <!-- Terminal -->
+                    <div class="mm-log-terminal" id="mmLogTerminal">
+                        <div class="mm-log-line">
+                            <span class="mm-log-time">[00:00:00]</span>
+                            <span>Laboratorio de Memoization listo. Pulsa "Calcular CON Memoize" dos veces seguidas para ver el Cache Hit.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PROYECTO INTEGRADOR -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Proyecto: crearMemoizer()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Código de Producción</span>
+                    <h2 class="slide-title">9. Proyecto Integrador: `crearMemoizer(fn, options)`</h2>
+                    <p class="slide-description">
+                        Implementación completa con soporte multi-argumento, límite máximo de caché (<code>maxSize</code>) y métricas.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-cyan">Memoizer Profesional</span>
+                        <span class="code-file-label">memoizer.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">crearMemoizer</span> = (fn, { maxSize = 100 } = {}) =&gt; {
+    <span class="token-keyword">const</span> cache = <span class="token-keyword">new</span> <span class="token-function">Map</span>();
+    <span class="token-keyword">const</span> stats = { hits: 0, misses: 0 };
+    <span class="token-keyword">const</span> memoized = (...args) =&gt; {
+        <span class="token-keyword">const</span> key = <span class="token-variable">JSON</span>.<span class="token-function">stringify</span>(args);
+        <span class="token-keyword">if</span> (cache.<span class="token-function">has</span>(key)) { stats.hits++; <span class="token-keyword">return</span> cache.<span class="token-function">get</span>(key); }
+        stats.misses++;
+        <span class="token-keyword">const</span> res = <span class="token-function">fn</span>(...args);
+        <span class="token-keyword">if</span> (cache.size &gt;= maxSize) cache.<span class="token-function">delete</span>(cache.<span class="token-function">keys</span>().<span class="token-function">next</span>().value);
+        cache.<span class="token-function">set</span>(key, res);
+        <span class="token-keyword">return</span> res;
+    };
+    memoized.getStats = () =&gt; ({ ...stats, size: cache.size });
+    <span class="token-keyword">return</span> memoized;
+};</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS Y SOLUCIONARIO -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Ejercicios y Solucionario">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Autoevaluación</span>
+                    <h2 class="slide-title">10. Ejercicios Prácticos y Solucionario</h2>
+                    <p class="slide-description">
+                        Pon a prueba tu dominio de Closures, <code>Map</code> y recursividad memoizada.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <span class="badge badge-cyan">Nivel 1 &amp; Nivel 2</span>
+                        <h3>Cuadrado y Multi-Argumentos</h3>
+                        <div class="code-snippet">
+                            <code>const memo = fn => {<br>
+                            &nbsp;&nbsp;const c = new Map();<br>
+                            &nbsp;&nbsp;return (...a) => {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;const k = JSON.stringify(a);<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;return c.has(k) ? c.get(k) : (c.set(k, fn(...a)), c.get(k));<br>
+                            &nbsp;&nbsp;};<br>
+                            };</code>
+                        </div>
+                    </div>
+                    <div class="col-card">
+                        <span class="badge badge-emerald">Nivel 3: Factorial Memoizado</span>
+                        <h3>Recursividad con Tamaño de Caché</h3>
+                        <div class="code-snippet">
+                            <code>const fact = memo(n => n <= 1 ? 1 : n * fact(n - 1));<br>
+                            console.log(fact(6)); // 720</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: RESUMEN Y CHEATSHEET -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Resumen & Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Síntesis Final</span>
+                    <h2 class="slide-title">11. Resumen Técnico y Hoja de Trucos</h2>
+                    <p class="slide-description">
+                        Referencia rápida para implementar memoización eficiente en aplicaciones JavaScript modernas.
+                    </p>
+                </div>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔒</div>
+                        <h3>Closure + Map</h3>
+                        <p>Encapsula la caché y ofrece lecturas instantáneas O(1) con <code>has/get/set</code>.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Solo Funciones Puras</h3>
+                        <p>Nunca memoices funciones que dependan de <code>Date.now()</code> o <code>Math.random()</code>.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🧹</div>
+                        <h3>Límite maxSize / WeakMap</h3>
+                        <p>Evita fugas de memoria descartando entradas antiguas o usando referencias débiles.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Recursividad Rápida</h3>
+                        <p>Convierte problemas exponenciales O(2ⁿ) en lineales O(n).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+        <div class="slide-dots-container" id="slideDotsContainer"></div>
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Memoization</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="overview-grid" id="overviewGrid"></div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Código Obsoleto JS — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23f59e0b'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%E2%9A%A0%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · BUENAS PRÁCTICAS</span><div class="brand-title"><span>🚫</span><span>Código Obsoleto JS</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Código Obsoleto JS">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">var vs let/const</span><span class="badge badge-purple">document.write</span><span class="badge badge-emerald">ES6+</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Código Obsoleto JS</span></h1>
+                <p class="hero-subtitle">Identifica prácticas antiguas de JavaScript que generan bugs y reemplázalas por estándares ES6+.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Código Obsoleto JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Código Obsoleto JS?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Identifica prácticas antiguas de JavaScript que generan bugs y reemplázalas por estándares ES6+.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Así como HTML5 dejó atrás <code>&lt;font&gt;</code>, JavaScript moderno reemplazó <code>var</code> y <code>document.write()</code> por alternativas seguras.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Reemplazos modernos">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Reemplazos modernos</h2></div>
+            <table class="compare-table"><thead><tr><th>Obsoleto</th><th>Moderno (ES6+)</th></tr></thead><tbody><tr><td><code>var</code></td><td><code>const</code> / <code>let</code></td></tr><tr><td><code>document.write()</code></td><td><code>createElement()</code> / <code>textContent</code></td></tr><tr><td><code>==</code></td><td><code>===</code> (igualdad estricta)</td></tr></tbody></table>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="Analogía del mundo real">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CODIGO OBSOLETO.md</span>
+                <h2 class="slide-title">Analogía del mundo real</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Imagina dos personas.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Persona A:</p>
+<pre class="code-block"><code>Usa un teléfono de hace 20 años.</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Persona B:</p>
+<pre class="code-block"><code>Usa un smartphone moderno.</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Ambos pueden hacer llamadas.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Sin embargo, uno posee:</p>
+<ul class="styled-list">
+<li>* Mayor velocidad.</li>
+<li>* Más herramientas.</li>
+<li>* Más seguridad.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;">Lo mismo ocurre en programación.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 3. ¿Cuándo algo se vuelve obsoleto?</p>
+<p style="margin-bottom:8px;line-height:1.6;">Una tecnología se vuelve obsoleta cuando cumple una o varias de estas condiciones.</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="Existen alternativas mejores">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CODIGO OBSOLETO.md</span>
+                <h2 class="slide-title">Existen alternativas mejores</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Ejemplo:</p>
+<p style="margin-bottom:8px;line-height:1.6;">Antes:</p>
+<pre class="code-block"><code>var nombre = &quot;Fredy&quot;;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Ahora:</p>
+<pre class="code-block"><code>const nombre = &quot;Fredy&quot;;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">o</p>
+<pre class="code-block"><code>let nombre = &quot;Fredy&quot;;</code></pre></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="Consume demasiados recursos">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CODIGO OBSOLETO.md</span>
+                <h2 class="slide-title">Consume demasiados recursos</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Puede consumir:</p>
+<ul class="styled-list">
+<li>* CPU.</li>
+<li>* RAM.</li>
+<li>* Tiempo de procesamiento.</li>
+</ul></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Es difícil de mantener">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · CODIGO OBSOLETO.md</span>
+                <h2 class="slide-title">Es difícil de mantener</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Otros desarrolladores tendrán dificultades para comprenderlo.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Regla:</strong> Usa <code>const</code> por defecto y <code>let</code> solo cuando la variable deba reasignarse.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Código Obsoleto JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="let y const tienen alcance de bloque ({}) mucho más predecible." data-err="var ignora los bloques if/for y puede sobrescribirse accidentalmente."><div class="quiz-q-title">1. ¿Por qué se evita <code>var</code> en JavaScript moderno?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Tiene alcance de función (function scope) y hoisting confuso</button><button class="quiz-option" data-opt="b">No acepta números</button><button class="quiz-option" data-opt="c">Solo funciona en Node</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Código Obsoleto JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const nombre = &#x27;JS Moderno&#x27;;
+  document.getElementById(&#x27;out&#x27;).textContent = `Usando ${nombre} con const y template literals.`;
+&lt;/script&gt;">const y let</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const nombre = &#x27;JS Moderno&#x27;;
+  document.getElementById(&#x27;out&#x27;).textContent = `Usando ${nombre} con const y template literals.`;
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

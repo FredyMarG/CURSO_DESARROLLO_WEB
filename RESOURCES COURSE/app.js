@@ -10,7 +10,7 @@ const modules = [
     title: "APIs y Fetch",
     tag: "11 Slides",
     desc: "Consumo RESTful, fetch(), AbortController y Promise.all.",
-    href: "JAVASCRIPT MASTER LEVEL/Apis/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Apis/index.html",
   },
   // Módulo de Cache API (CacheStorage) para aplicaciones rápidas y soporte offline
   { // Instrucción JavaScript
@@ -18,7 +18,7 @@ const modules = [
     title: "Cache API (caches)",
     tag: "12 Slides",
     desc: "CacheStorage, put/match/delete, estrategias PWA y soporte offline.",
-    href: "JAVASCRIPT MASTER LEVEL/Cache/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cache/index.html",
   },
   // Módulo de Cookies (document.cookie) para persistencia HTTP y seguridad web
   { // Instrucción JavaScript
@@ -26,7 +26,7 @@ const modules = [
     title: "Cookies (document.cookie)",
     tag: "11 Slides",
     desc: "Creación, lectura, modificación, eliminación, encodeURIComponent, SameSite y Lab.",
-    href: "JAVASCRIPT MASTER LEVEL/Cookies/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cookies/index.html",
   },
   // Módulo de API nativa de arrastrar y soltar elementos y archivos
   { // Instrucción JavaScript
@@ -34,7 +34,7 @@ const modules = [
     title: "Drag & Drop",
     tag: "11 Slides",
     desc: "Eventos de arrastre, dataTransfer y archivos del escritorio.",
-    href: "JAVASCRIPT MASTER LEVEL/Drag & Drop/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Drag & Drop/index.html",
   },
   // Módulo de lectura de archivos locales en el navegador con FileReader
   { // Instrucción JavaScript
@@ -42,7 +42,7 @@ const modules = [
     title: "FileReader API",
     tag: "11 Slides",
     desc: "Lectura de texto, DataURL, ArrayBuffer y barras de carga.",
-    href: "JAVASCRIPT MASTER LEVEL/File Reader/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/File Reader/index.html",
   },
   // Módulo sobre sintaxis de funciones flecha, this léxico, closures y recursividad
   { // Instrucción JavaScript
@@ -50,7 +50,7 @@ const modules = [
     title: "Funciones Flecha",
     tag: "12 Slides",
     desc: "Sintaxis, ámbito léxico de this, closures y recursividad.",
-    href: "JAVASCRIPT MASTER LEVEL/Funciones Flecha/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Funciones Flecha/index.html",
   },
   // Módulo de geolocalización con getCurrentPosition y watchPosition
   { // Instrucción JavaScript
@@ -58,7 +58,7 @@ const modules = [
     title: "Geolocalización",
     tag: "11 Slides",
     desc: "getCurrentPosition(), watchPosition() y manejo de errores.",
-    href: "JAVASCRIPT MASTER LEVEL/Geolocalization/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Geolocalization/index.html",
   },
   // Módulo de navegación SPA sin recarga mediante History API
   { // Instrucción JavaScript
@@ -66,7 +66,7 @@ const modules = [
     title: "History API",
     tag: "11 Slides",
     desc: "pushState, replaceState, popstate y scrollRestoration.",
-    href: "JAVASCRIPT MASTER LEVEL/Historial/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Historial/index.html",
   },
   // Módulo de base de datos NoSQL asíncrona en el navegador (IndexedDB)
   { // Instrucción JavaScript
@@ -74,7 +74,7 @@ const modules = [
     title: "IndexedDB",
     tag: "12 Slides",
     desc: "Base NoSQL en el navegador, transacciones, índices y cursores.",
-    href: "JAVASCRIPT MASTER LEVEL/IndexedDB/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/IndexedDB/index.html",
   },
   // Módulo de detección eficiente de visibilidad de elementos con IntersectionObserver
   { // Instrucción JavaScript
@@ -82,7 +82,7 @@ const modules = [
     title: "Intersection Observer",
     tag: "12 Slides",
     desc: "Lazy loading, scroll infinito y laboratorio interactivo real.",
-    href: "JAVASCRIPT MASTER LEVEL/Intersection Observer/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Intersection Observer/index.html",
   },
   // Módulo de almacenamiento persistente clave-valor en el navegador
   { // Instrucción JavaScript
@@ -90,7 +90,7 @@ const modules = [
     title: "Local Storage",
     tag: "11 Slides",
     desc: "Almacenamiento persistente, JSON y sincronización multi-pestaña.",
-    href: "JAVASCRIPT MASTER LEVEL/Local Storage/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Local Storage/index.html",
   },
   // Módulo de evaluación dinámica de Media Queries CSS desde JavaScript
   { // Instrucción JavaScript
@@ -98,7 +98,7 @@ const modules = [
     title: "window.matchMedia()",
     tag: "12 Slides",
     desc: "Media Queries reactivas en JS y laboratorio de breakpoints.",
-    href: "JAVASCRIPT MASTER LEVEL/Matchmedia/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Matchmedia/index.html",
   },
   // Módulo de optimización de funciones puras mediante caché en memoria (Memoization)
   { // Instrucción JavaScript
@@ -106,7 +106,7 @@ const modules = [
     title: "Memoization",
     tag: "12 Slides",
     desc: "Caché de funciones puras, Closures, Map/WeakMap y optimización O(n).",
-    href: "JAVASCRIPT MASTER LEVEL/Memoization/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Memoization/index.html",
   },
   // Módulo sobre la directiva 'use strict', seguridad y módulos ES6
   { // Instrucción JavaScript
@@ -114,7 +114,7 @@ const modules = [
     title: "Modo Estricto",
     tag: "11 Slides",
     desc: "'use strict', ES Modules, seguridad y optimización.",
-    href: "JAVASCRIPT MASTER LEVEL/Modo Estricto/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Modo Estricto/index.html",
   },
   // Módulo sobre las interfaces del objeto BOM window.navigator
   { // Instrucción JavaScript
@@ -122,7 +122,7 @@ const modules = [
     title: "Objeto Navigator",
     tag: "12 Slides",
     desc: "Interfaces BOM, red, hardware, storage y Clipboard API.",
-    href: "JAVASCRIPT MASTER LEVEL/Navigator/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Navigator/index.html",
   },
   // Módulo de alertas nativas del sistema operativo con Notifications API
   { // Instrucción JavaScript
@@ -130,7 +130,7 @@ const modules = [
     title: "Notifications API",
     tag: "12 Slides",
     desc: "Permisos, alertas nativas del SO y Service Workers.",
-    href: "JAVASCRIPT MASTER LEVEL/Notifications/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Notifications/index.html",
   },
   // Módulo sobre fechas, horas y formateo internacional con Date e Intl
   { // Instrucción JavaScript
@@ -138,7 +138,7 @@ const modules = [
     title: "Objeto Date",
     tag: "11 Slides",
     desc: "Fechas, horas y formateo moderno con Intl.DateTimeFormat.",
-    href: "JAVASCRIPT MASTER LEVEL/Objeto Date/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Date/index.html",
   },
   // Módulo sobre el objeto window.screen (dimensiones físicas, colorDepth y orientación)
   { // Instrucción JavaScript
@@ -146,7 +146,7 @@ const modules = [
     title: "Objeto Screen (window.screen)",
     tag: "11 Slides",
     desc: "Resolución total, availWidth/availHeight, colorDepth, orientation y Lab.",
-    href: "JAVASCRIPT MASTER LEVEL/Objeto Screen/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Screen/index.html",
   },
   // Módulo sobre gráficos 2D con HTML5 Canvas API (rectángulos, paths, arcos y animación)
   { // Instrucción JavaScript
@@ -154,7 +154,7 @@ const modules = [
     title: "Canvas (HTML5 Canvas 2D)",
     tag: "11 Slides",
     desc: "Contexto 2D, fillRect/strokeRect, beginPath, arc, requestAnimationFrame y Lab.",
-    href: "JAVASCRIPT MASTER LEVEL/Canvas/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Canvas/index.html",
   },
   // Módulo sobre expresiones condicionales cortas y Nullish Coalescing
   { // Instrucción JavaScript
@@ -162,7 +162,7 @@ const modules = [
     title: "Operador Ternario",
     tag: "11 Slides",
     desc: "Expresiones condicionales, ?? Nullish Coalescing y legibilidad.",
-    href: "JAVASCRIPT MASTER LEVEL/Operador Ternario/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Operador Ternario/index.html",
   },
   // Módulo sobre herencia prototípica, Prototype Chain y clases ES6+
   { // Instrucción JavaScript
@@ -170,7 +170,7 @@ const modules = [
     title: "Prototipos",
     tag: "11 Slides",
     desc: "Prototype Chain, herencia prototípica y equivalencia con class.",
-    href: "JAVASCRIPT MASTER LEVEL/Prototipos/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Prototipos/index.html",
   },
   // Módulo de Service Workers para proxy de red, PWAs y modo offline
   { // Instrucción JavaScript
@@ -178,7 +178,7 @@ const modules = [
     title: "Service Workers",
     tag: "12 Slides",
     desc: "Ciclo de vida, fetch offline, Cache API y postMessage().",
-    href: "JAVASCRIPT MASTER LEVEL/Service Workers/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Service Workers/index.html",
   },
   // Módulo de detección de pestaña activa o en segundo plano (Page Visibility API)
   { // Instrucción JavaScript
@@ -186,7 +186,7 @@ const modules = [
     title: "Visibility Change",
     tag: "12 Slides",
     desc: "Page Visibility API, ahorro de CPU/red y reproductor inteligente.",
-    href: "JAVASCRIPT MASTER LEVEL/Visibility Change/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Visibility Change/index.html",
   },
   // Módulo de ejecución paralela en hilos secundarios con Web Workers
   { // Instrucción JavaScript
@@ -194,7 +194,7 @@ const modules = [
     title: "Web Workers",
     tag: "12 Slides",
     desc: "Hilos en segundo plano, postMessage, Transferables y Blobs.",
-    href: "JAVASCRIPT MASTER LEVEL/Web Workers/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Web Workers/index.html",
   },
   // Acceso directo a las 23 guías Markdown de Master Level
   { // Instrucción JavaScript
@@ -202,7 +202,7 @@ const modules = [
     title: "Documentación Completa Master Level",
     tag: "23 Guías MD",
     desc: "Todas las guías teóricas, ejercicios y cheatsheets de Master Level (incluyendo Cookies y Objeto Screen).",
-    href: "JAVASCRIPT MASTER LEVEL/DOCUMENTACION/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/DOCUMENTACION/index.html",
   },
 
   // --- SECCIÓN: EJERCICIOS PRÁCTICOS (PROGRESIÓN: JUNIOR → MID LEVEL) ---
@@ -212,77 +212,77 @@ const modules = [
     title: "01. Helados y Precios",
     tag: "Junior",
     desc: "Condicionales y selección de productos según dinero disponible.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/1 Helados y Precios/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/1 Helados y Precios/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "02. Fiesta y Entrada",
     tag: "Junior",
     desc: "Control de edad y horario con funciones y condicionales.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/2 Fiesta y Entrada/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/2 Fiesta y Entrada/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "03. Control de Asistencia",
     tag: "Junior",
     desc: "Registro de asistencia con bucles y arreglos.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/3 Asistencia/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/3 Asistencia/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "04. Calculadora Básica",
     tag: "Junior",
     desc: "Operaciones aritméticas básicas mediante funciones.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/4 Calculadora Básica/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/4 Calculadora Básica/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "05. Celular Nuevo (POO)",
     tag: "Junior",
     desc: "Modelado de dispositivos con clases y métodos.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/5 Celular Nuevo/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/5 Celular Nuevo/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "06. Apps Celular Nuevo",
     tag: "Junior",
     desc: "Simulación de descarga e instalación de aplicaciones.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/6 Apps Celular Nuevo/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/6 Apps Celular Nuevo/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "07. Calculadora Avanzada",
     tag: "Junior",
     desc: "Potencias y raíces usando el objeto Math.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/7 Calculadora Avanzada/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/7 Calculadora Avanzada/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "08. Materias y Profesores",
     tag: "Junior",
     desc: "Búsqueda y filtrado sobre arreglos de datos.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/8 Materias y Profesores/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/8 Materias y Profesores/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "09. Inscripción de Materias",
     tag: "Junior",
     desc: "Validación de cupos e inscripción dinámica.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/9 Inscripción de Materias/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/9 Inscripción de Materias/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "10. Nota Final Consola",
     tag: "Junior",
     desc: "Cálculo de resultados y estilos en console.log.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/10 Nota Final Consola/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/10 Nota Final Consola/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "11. Ordenar Tareas",
     tag: "Junior",
     desc: "Planificación y agrupación de actividades diarias.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/11 Ordenar Tareas/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/11 Ordenar Tareas/index.html",
   },
   // 12–15: Ejercicios Mid Level
   { // Instrucción JavaScript
@@ -290,28 +290,28 @@ const modules = [
     title: "12. Comprar Computador",
     tag: "Mid",
     desc: "Práctica de objetos, condiciones y presupuesto en pantalla.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/1 Comprar Computador/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "13. Mostrar Datos Web",
     tag: "Mid",
     desc: "Renderizado dinámico de información en el DOM.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/2 Mostrar Datos Web/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "14. Materia Pendiente",
     tag: "Mid",
     desc: "Validación de formularios y gestión de materias.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/3 Materia Pendiente/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/3 Materia Pendiente/index.html",
   },
   { // Instrucción JavaScript
     cat: "ejercicios",
     title: "15. Promedio de Notas",
     tag: "Mid",
     desc: "Cálculo y validación de promedios con manejo de errores.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/5 Promedio de Notas Corrección/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/5 Promedio de Notas Corrección/index.html",
   },
 
   // --- SECCIÓN: PROYECTOS INTEGRADORES (PROGRESIÓN: HTML/CSS → JUNIOR → MID → MASTER) ---
@@ -321,7 +321,7 @@ const modules = [
     title: "10. La Llave Correcta",
     tag: "Proyecto Junior",
     desc: "Creación dinámica de tarjetas seleccionables en el DOM.",
-    href: "JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/index.html",
   },
   // 11–13: Proyectos Mid Level
   { // Instrucción JavaScript
@@ -329,21 +329,21 @@ const modules = [
     title: "11. Recuperación por Docente",
     tag: "Proyecto Mid",
     desc: "Asignación y control de estado académico.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/4 Recuperacion de Materia por Docente/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/4 Recuperacion de Materia por Docente/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "12. Notas de Cofla",
     tag: "Proyecto Mid",
     desc: "Promesas y asincronía simulando obtención de calificaciones.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "13. Compañeros de Cofla",
     tag: "Proyecto Mid",
     desc: "Consumo asíncrono de datos con Fetch/Axios.",
-    href: "JAVASCRIPT MID LEVEL/EJERCICIOS/7 Compañeros de Cofla Htdocs/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/7 Compañeros de Cofla Htdocs/index.html",
   },
   // 14–20: Proyectos Master Level
   { // Instrucción JavaScript
@@ -351,63 +351,63 @@ const modules = [
     title: "14. Reloj Digital (Date)",
     tag: "Proyecto Master",
     desc: "Reloj digital en tiempo real con setInterval.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Reloj/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Reloj/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "15. Idioma con LocalStorage",
     tag: "Proyecto Master",
     desc: "Selector bilingüe persistente con modal animado.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Local Storage/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Local Storage/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "16. Drag & Drop File Reader",
     tag: "Proyecto Master",
     desc: "Carga de archivos con barra de progreso animada.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Drag & Drop File Reader/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Drag & Drop File Reader/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "17. Texturizador Drag & Drop",
     tag: "Proyecto Master",
     desc: "Aplicación de texturas por arrastre con dataTransfer.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Texturizador/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Texturizador/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "18. Galería Dinámica",
     tag: "Proyecto Master",
     desc: "Bento Grid interactivo con FileReader y Lightbox.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Galeria Dinamica/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Galeria Dinamica/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "19. Lazy Load con IntersectionObserver",
     tag: "Proyecto Master",
     desc: "Carga progresiva de 45 publicaciones con animación al scroll.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Intersection Objects Lazyload/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Intersection Objects Lazyload/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "20. CRUD con IndexedDB",
     tag: "Proyecto Master",
     desc: "Gestor persistente de nombres en IndexedDB.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
   },
   { // Instrucción JavaScript
     cat: "proyectos",
     title: "21. Uso de Cookies (Consentimiento)",
     tag: "Proyecto Master",
     desc: "Modal interactivo de aceptación de cookies con expiración UTC y estado neón.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Uso de Cookies/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Uso de Cookies/index.html",
   },
   { // Ejercicio interactivo de pizarra 2D con HTML5 Canvas API
     cat: "proyectos",
     title: "22. Web Paint (Canvas 2D)",
     tag: "Proyecto Master",
     desc: "Pizarra interactiva con pincel, borrador, grosor, Deshacer (Ctrl+Z) y descarga PNG.",
-    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/index.html",
   },
 
   // --- SECCIÓN: JS MID LEVEL ---
@@ -417,7 +417,7 @@ const modules = [
     title: "Async y Await",
     tag: "Mid Level",
     desc: "Asincronía moderna legible con try/catch.",
-    href: "JAVASCRIPT MID LEVEL/Async y Await/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Async y Await/index.html",
   },
   // Práctica de Promesas y encadenamiento asíncrono
   { // Instrucción JavaScript
@@ -425,7 +425,7 @@ const modules = [
     title: "Promesas",
     tag: "Mid Level",
     desc: "Estados pending, fulfilled, rejected y encadenamiento.",
-    href: "JAVASCRIPT MID LEVEL/Promesas/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Promesas/index.html",
   },
   // Práctica de consumo HTTP con Fetch API
   { // Instrucción JavaScript
@@ -433,7 +433,7 @@ const modules = [
     title: "Fetch API",
     tag: "Mid Level",
     desc: "Peticiones HTTP modernas en JavaScript.",
-    href: "JAVASCRIPT MID LEVEL/Fetch/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Fetch/index.html",
   },
   // Práctica de peticiones HTTP y encabezados
   { // Instrucción JavaScript
@@ -441,7 +441,7 @@ const modules = [
     title: "Peticiones HTTP",
     tag: "Mid Level",
     desc: "Métodos, cabeceras y códigos de estado HTTP.",
-    href: "JAVASCRIPT MID LEVEL/Peticiones HTTP/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Peticiones HTTP/index.html",
   },
   // Práctica de funciones callback y flujo asíncrono base
   { // Instrucción JavaScript
@@ -449,7 +449,7 @@ const modules = [
     title: "Callbacks",
     tag: "Mid Level",
     desc: "Funciones de retorno y flujo asíncrono base.",
-    href: "JAVASCRIPT MID LEVEL/Callbacks/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Callbacks/index.html",
   },
   // Práctica de serialización y parseo con JSON
   { // Instrucción JavaScript
@@ -457,7 +457,7 @@ const modules = [
     title: "Datos Estructurados (JSON)",
     tag: "Mid Level",
     desc: "Serialización y parseo de objetos JSON.",
-    href: "JAVASCRIPT MID LEVEL/Datos Estructurados (JSON)/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Datos Estructurados (JSON)/index.html",
   },
   // Práctica de captura y manejo de excepciones con try/catch
   { // Instrucción JavaScript
@@ -465,7 +465,7 @@ const modules = [
     title: "Try-Catch y Excepciones",
     tag: "Mid Level",
     desc: "Manejo robusto de errores en tiempo de ejecución.",
-    href: "JAVASCRIPT MID LEVEL/Try-Catch/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Try-Catch/index.html",
   },
   // Práctica de estructura de control Switch
   { // Instrucción JavaScript
@@ -473,7 +473,7 @@ const modules = [
     title: "Switch",
     tag: "Mid Level",
     desc: "Evaluación múltiple de casos con switch y break.",
-    href: "JAVASCRIPT MID LEVEL/Switch/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Switch/index.html",
   },
   // Práctica de temporizadores setTimeout y setInterval
   { // Instrucción JavaScript
@@ -481,7 +481,7 @@ const modules = [
     title: "Temporizadores",
     tag: "Mid Level",
     desc: "Control del tiempo con setTimeout, setInterval y clear.",
-    href: "JAVASCRIPT MID LEVEL/Temporizadores/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Temporizadores/index.html",
   },
   // Práctica sobre código obsoleto y reemplazos modernos
   { // Instrucción JavaScript
@@ -489,7 +489,7 @@ const modules = [
     title: "Código Obsoleto",
     tag: "Mid Level",
     desc: "Patrones heredados y sus equivalentes actuales.",
-    href: "JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
   },
   // Sub-prácticas de AJAX
   { // Instrucción JavaScript
@@ -497,14 +497,14 @@ const modules = [
     title: "AJAX (Editor)",
     tag: "Mid Level",
     desc: "Peticiones asíncronas clásicas con XMLHttpRequest.",
-    href: "JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "AJAX (Htdocs)",
     tag: "Mid Level",
     desc: "Práctica de AJAX en entorno de servidor local.",
-    href: "JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html",
   },
   // Sub-prácticas de Librería Axios
   { // Instrucción JavaScript
@@ -512,14 +512,14 @@ const modules = [
     title: "Librería Axios (Editor)",
     tag: "Mid Level",
     desc: "Cliente HTTP basado en Promesas con Axios.",
-    href: "JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Axios vs Fetch (Htdocs)",
     tag: "Mid Level",
     desc: "Comparativa práctica entre Axios y Fetch.",
-    href: "JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html",
   },
   // Sub-prácticas de Eventos
   { // Instrucción JavaScript
@@ -527,35 +527,35 @@ const modules = [
     title: "Eventos: Handlers",
     tag: "Mid Level",
     desc: "Registro y remoción de escuchadores de eventos.",
-    href: "JAVASCRIPT MID LEVEL/Eventos/Handlers/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Handlers/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos: Event Flow",
     tag: "Mid Level",
     desc: "Propagación de eventos (Bubbling y Capturing).",
-    href: "JAVASCRIPT MID LEVEL/Eventos/Event Flow/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Event Flow/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos de Mouse",
     tag: "Mid Level",
     desc: "Interacciones de clic, doble clic y movimiento.",
-    href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Mouse/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Eventos de Mouse/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos de Teclado",
     tag: "Mid Level",
     desc: "Captura de teclas con keydown, keyup y keypress.",
-    href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Teclado/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Eventos de Teclado/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos de Interfaz",
     tag: "Mid Level",
     desc: "Eventos load, resize, scroll y select.",
-    href: "JAVASCRIPT MID LEVEL/Eventos/Eventos de Interfaz/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Eventos de Interfaz/index.html",
   },
   // Sub-práctica de DevTools
   { // Instrucción JavaScript
@@ -563,7 +563,7 @@ const modules = [
     title: "DevTools: Pestaña Application",
     tag: "Mid Level",
     desc: "Inspección de almacenamiento y caché en DevTools.",
-    href: "JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html",
   },
   // Guías interactivas de carpeta para los módulos Mid Level
   { // Instrucción JavaScript
@@ -571,63 +571,63 @@ const modules = [
     title: "AJAX (XMLHttpRequest)",
     tag: "Mid Level",
     desc: "Realiza peticiones asíncronas sin recargar la página mediante XMLHttpRequest y maneja respuestas del servidor.",
-    href: "JAVASCRIPT MID LEVEL/Ajax/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos del DOM",
     tag: "Mid Level",
     desc: "Domina addEventListener(), propagación (Bubbling/Capturing), eventos de mouse, teclado e interfaz.",
-    href: "JAVASCRIPT MID LEVEL/Eventos/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Librería Axios",
     tag: "Mid Level",
     desc: "Realiza peticiones HTTP simplificadas con transformación automática a JSON e interceptores usando Axios.",
-    href: "JAVASCRIPT MID LEVEL/Libreria Axios/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Objeto Location",
     tag: "Mid Level",
     desc: "Lee y manipula la URL actual del navegador mediante window.location (href, pathname, search, reload).",
-    href: "JAVASCRIPT MID LEVEL/Location/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Location/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Objetos Barprop",
     tag: "Mid Level",
     desc: "Inspecciona la visibilidad de barras del navegador (locationbar, menubar, scrollbars, toolbar).",
-    href: "JAVASCRIPT MID LEVEL/Objetos Barprop/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Objetos Barprop/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Pestañas de DevTools",
     tag: "Mid Level",
     desc: "Domina Elements, Console, Sources, Network, Performance (Timeline) y Application para depurar como un profesional.",
-    href: "JAVASCRIPT MID LEVEL/Pestañas DevTools/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Resize y Move",
     tag: "Mid Level",
     desc: "Controla eventos de redimensionamiento (resize) y métodos de tamaño/posición de ventana.",
-    href: "JAVASCRIPT MID LEVEL/Resize y Move/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Resize y Move/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Screen y Scroll",
     tag: "Mid Level",
     desc: "Consulta dimensiones físicas del monitor (window.screen) y controla el desplazamiento (scrollTo, scrollY).",
-    href: "JAVASCRIPT MID LEVEL/Screen y Scroll/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Screen y Scroll/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Objeto Window",
     tag: "Mid Level",
     desc: "Explora el objeto global del navegador: abrir/cerrar ventanas, alertas, dimensiones y propiedades globales.",
-    href: "JAVASCRIPT MID LEVEL/Window/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Window/index.html",
   },
   // Acceso directo a la carpeta de las 25 guías Markdown de Mid Level
   { // Instrucción JavaScript
@@ -635,7 +635,7 @@ const modules = [
     title: "Documentación Completa Mid Level",
     tag: "25 Guías MD",
     desc: "Eventos, Axios, Window, DevTools, HTTP y más.",
-    href: "JAVASCRIPT MID LEVEL/DOCUMENTACION/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/index.html",
   },
 
   // --- SECCIÓN: JS JUNIOR LEVEL ---
@@ -645,7 +645,7 @@ const modules = [
     title: "Variables",
     tag: "Junior Level",
     desc: "Declaración, alcance y tipos de datos básicos.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Variables/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Variables/index.html",
   },
   // Práctica de operadores aritméticos y lógicos
   { // Instrucción JavaScript
@@ -653,7 +653,7 @@ const modules = [
     title: "Operadores",
     tag: "Junior Level",
     desc: "Operadores de asignación, comparación y lógicos.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Operadores/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Operadores/index.html",
   },
   // Práctica de concatenación y template literals
   { // Instrucción JavaScript
@@ -661,7 +661,7 @@ const modules = [
     title: "Concatenación",
     tag: "Junior Level",
     desc: "Unión de textos y uso de Template Strings.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Concatenacion/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Concatenacion/index.html",
   },
   // Práctica de estructuras condicionales if/else
   { // Instrucción JavaScript
@@ -669,7 +669,7 @@ const modules = [
     title: "Condicionales",
     tag: "Junior Level",
     desc: "Toma de decisiones con if, else if y else.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Condicionales/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Condicionales/index.html",
   },
   // Práctica de arreglos y métodos fundamentales
   { // Instrucción JavaScript
@@ -677,7 +677,7 @@ const modules = [
     title: "Arrays y Métodos",
     tag: "Junior Level",
     desc: "Estructuras indexadas y métodos fundamentales.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Arrays/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Arrays/index.html",
   },
   // Práctica de bucles while y do...while
   { // Instrucción JavaScript
@@ -685,7 +685,7 @@ const modules = [
     title: "Bucles (while / do-while)",
     tag: "Junior Level",
     desc: "Repetición controlada de instrucciones.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Bucles/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Bucles/index.html",
   },
   // Práctica de bucle for, for...in y for...of
   { // Instrucción JavaScript
@@ -693,7 +693,7 @@ const modules = [
     title: "Bucle For",
     tag: "Junior Level",
     desc: "Iteración clásica y recorridos sobre colecciones.",
-    href: "JAVASCRIPT JUNIOR LEVEL/For/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/For/index.html",
   },
   // Práctica de funciones declaradas y expresadas
   { // Instrucción JavaScript
@@ -701,7 +701,7 @@ const modules = [
     title: "Funciones",
     tag: "Junior Level",
     desc: "Parámetros, retorno de valores y reutilización.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Funciones/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Funciones/index.html",
   },
   // Práctica de Programación Orientada a Objetos en JS
   { // Instrucción JavaScript
@@ -709,7 +709,7 @@ const modules = [
     title: "POO (Programación Orientada a Objetos)",
     tag: "Junior Level",
     desc: "Clases, constructores, herencia y encapsulación.",
-    href: "JAVASCRIPT JUNIOR LEVEL/POO/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/POO/index.html",
   },
   // Práctica de métodos de cadenas de texto
   { // Instrucción JavaScript
@@ -717,7 +717,7 @@ const modules = [
     title: "Cadenas (Métodos)",
     tag: "Junior Level",
     desc: "Transformación, búsqueda y corte de strings.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Cadenas(Metodos)/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Cadenas(Metodos)/index.html",
   },
   // Práctica de funciones matemáticas con el objeto Math
   { // Instrucción JavaScript
@@ -725,7 +725,7 @@ const modules = [
     title: "Objeto Math",
     tag: "Junior Level",
     desc: "Redondeos, raíces, aleatorios y constantes.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Math/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Math/index.html",
   },
   // Práctica de depuración en consola
   { // Instrucción JavaScript
@@ -733,7 +733,7 @@ const modules = [
     title: "Console.log y Depuración",
     tag: "Junior Level",
     desc: "Métodos de consola para inspeccionar variables y tablas.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Console.log/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Console.log/index.html",
   },
   // Práctica de manipulación del árbol DOM
   { // Instrucción JavaScript
@@ -741,7 +741,7 @@ const modules = [
     title: "DOM (Document Object Model)",
     tag: "Junior Level",
     desc: "Selección, creación y manipulación de nodos HTML.",
-    href: "JAVASCRIPT JUNIOR LEVEL/Dom/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Dom/index.html",
   },
   // Acceso directo a la carpeta de las 14 guías Markdown de Junior Level
   { // Instrucción JavaScript
@@ -749,7 +749,7 @@ const modules = [
     title: "Documentación Completa Junior Level",
     tag: "14 Guías MD",
     desc: "Variables, Operadores, Cadenas, Math, Condicionales.",
-    href: "JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/index.html",
+    href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/index.html",
   },
 
   // --- SECCIÓN: HTML Y CSS (Guías Dinámicas, Prácticas y Proyectos) ---

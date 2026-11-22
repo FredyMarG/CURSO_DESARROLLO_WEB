@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos en JavaScript — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%AF%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · INTERACCIÓN</span><div class="brand-title"><span>⚡</span><span>Eventos en JavaScript</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Eventos en JavaScript">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">addEventListener</span><span class="badge badge-purple">Event Flow (Bubbling)</span><span class="badge badge-emerald">Teclado &amp; Mouse</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Eventos en JavaScript</span></h1>
+                <p class="hero-subtitle">Responde a clics, teclas, formularios y carga de página comprendiendo la propagación de eventos (bubbling y capturing).</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Eventos en JavaScript">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Eventos en JavaScript?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Responde a clics, teclas, formularios y carga de página comprendiendo la propagación de eventos (bubbling y capturing).</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> Un evento sube desde el hijo clicado hacia sus ancestros (bubbling) como una burbuja en el agua.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Event Listener y Delegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Event Listener y Delegación</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>contenedor.addEventListener("click", (e) => {
+  if (e.target.matches("button")) {
+    console.log("Botón clicado:", e.target.textContent);
+  }
+});</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="📚 TEMARIO">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · EVENTOS.md</span>
+                <h2 class="slide-title">📚 TEMARIO</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">1. ¿Qué son los eventos?</p>
+<p style="margin-bottom:8px;line-height:1.6;">2. Definición de eventos</p>
+<p style="margin-bottom:8px;line-height:1.6;">3. Event Handlers</p>
+<p style="margin-bottom:8px;line-height:1.6;">4. Event Listeners</p>
+<p style="margin-bottom:8px;line-height:1.6;">5. El objeto Event</p>
+<p style="margin-bottom:8px;line-height:1.6;">6. Event Flow</p>
+<p style="margin-bottom:8px;line-height:1.6;">7. Event Bubbling vs Event Capturing</p>
+<p style="margin-bottom:8px;line-height:1.6;">8. event.stopPropagation()</p>
+<p style="margin-bottom:8px;line-height:1.6;">9. Tipos de eventos</p>
+<p style="margin-bottom:8px;line-height:1.6;">10. Eventos de teclado</p>
+<p style="margin-bottom:8px;line-height:1.6;">11. Eventos de mouse</p>
+<p style="margin-bottom:8px;line-height:1.6;">12. Eventos de formularios</p>
+<p style="margin-bottom:8px;line-height:1.6;">13. Eventos del navegador</p>
+<p style="margin-bottom:8px;line-height:1.6;">14. Eventos táctiles (Touch Events)</p>
+<p style="margin-bottom:8px;line-height:1.6;">15. Pointer Events</p>
+<p style="margin-bottom:8px;line-height:1.6;">16. Drag &amp; Drop</p>
+<p style="margin-bottom:8px;line-height:1.6;">17. Eventos del portapapeles</p>
+<p style="margin-bottom:8px;line-height:1.6;">18. Eventos multimedia</p>
+<p style="margin-bottom:8px;line-height:1.6;">19. Eventos de imágenes</p>
+<p style="margin-bottom:8px;line-height:1.6;">20. Eventos de animaciones</p>
+<p style="margin-bottom:8px;line-height:1.6;">21. Eventos de transiciones CSS</p>
+<p style="margin-bottom:8px;line-height:1.6;">22. Eventos de Storage</p>
+<p style="margin-bottom:8px;line-height:1.6;">23. Eventos de WebSocket</p>
+<p style="margin-bottom:8px;line-height:1.6;">24. Delegación de eventos</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="🏆 Mini proyecto">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · EVENTOS.md</span>
+                <h2 class="slide-title">🏆 Mini proyecto</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"># 🎯 ¿QUÉ SON LOS EVENTOS?</p>
+<p style="margin-bottom:8px;line-height:1.6;">Los eventos son acciones o sucesos que ocurren dentro de una página web.</p>
+<p style="margin-bottom:8px;line-height:1.6;">JavaScript puede “escuchar” esos sucesos y ejecutar código automáticamente.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🧠 EJEMPLOS DEL MUNDO REAL</p>
+<table class="compare-table"><thead><tr><th>Acción del usuario</th><th>Evento</th></tr></thead><tbody><tr><td>Hacer click</td><td><code>click</code></td></tr><tr><td>Mover el mouse</td><td><code>mousemove</code></td></tr><tr><td>Escribir en teclado</td><td><code>keydown</code></td></tr><tr><td>Enviar formulario</td><td><code>submit</code></td></tr><tr><td>Cargar página</td><td><code>load</code></td></tr><tr><td>Cambiar un input</td><td><code>change</code></td></tr></tbody></table>
+<p style="margin-bottom:8px;line-height:1.6;"># 🧩 DEFINICIÓN DE EVENTOS</p>
+<p style="margin-bottom:8px;line-height:1.6;">Un evento es cualquier interacción detectada por el navegador.</p>
+<p style="margin-bottom:8px;line-height:1.6;">JavaScript trabaja así:</p>
+<pre class="code-block"><code>Usuario hace algo
+       ↓
+El navegador detecta el evento
+       ↓
+JavaScript ejecuta una función</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 📦 ESTRUCTURA BÁSICA</p>
+<pre class="code-block"><code>elemento.addEventListener(&quot;click&quot;, funcion);</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 DESGLOSE</p>
+<table class="compare-table"><thead><tr><th>Parte</th><th>Explicación</th></tr></thead><tbody><tr><td><code>elemento</code></td><td>El objeto HTML</td></tr><tr><td><code>addEventListener</code></td><td>Método para escuchar eventos</td></tr><tr><td><code>click</code></td><td>Tipo de evento</td></tr></tbody></table>
+</div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="1️⃣ Inline HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · EVENTOS.md</span>
+                <h2 class="slide-title">1️⃣ Inline HTML</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>&lt;button onclick=&quot;saludar()&quot;&gt;Click&lt;/button&gt;</code></pre>
+<pre class="code-block"><code>function saludar(){
+    alert(&quot;Hola&quot;);
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="⚠️ PROBLEMAS DEL INLINE">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · EVENTOS.md</span>
+                <h2 class="slide-title">⚠️ PROBLEMAS DEL INLINE</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">❌ Mezcla HTML con JavaScript</p>
+<p style="margin-bottom:8px;line-height:1.6;">❌ Difícil de mantener</p>
+<p style="margin-bottom:8px;line-height:1.6;">❌ Poco escalable</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Usa <code>e.stopPropagation()</code> solo cuando necesites frenar el burbujeo hacia el padre.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Eventos en JavaScript">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Por defecto los listeners escuchan en la fase de bubbling (de adentro hacia afuera)." data-err="Capturing baja de afuera hacia adentro; bubbling sube de adentro hacia afuera."><div class="quiz-q-title">1. ¿En qué fase suben los eventos desde el elemento hijo hasta el document?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Bubbling (burbujeo)</button><button class="quiz-option" data-opt="b">Capturing</button><button class="quiz-option" data-opt="c">Hoisting</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Eventos en JavaScript">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;button id=&quot;btn&quot; style=&quot;padding:10px 18px;font-weight:700;cursor:pointer&quot;&gt;Clics: 0&lt;/button&gt;
+&lt;script&gt;
+  let n = 0; const b = document.getElementById(&#x27;btn&#x27;);
+  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;Clics: &#x27; + (++n); });
+&lt;/script&gt;">Contador de Clics</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;button id=&quot;btn&quot; style=&quot;padding:10px 18px;font-weight:700;cursor:pointer&quot;&gt;Clics: 0&lt;/button&gt;
+&lt;script&gt;
+  let n = 0; const b = document.getElementById(&#x27;btn&#x27;);
+  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;Clics: &#x27; + (++n); });
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="Handlers/index.html"><span class="file-name">📄 Handlers</span><span class="file-path">Handlers/index.html</span></a><a class="file-card" href="Event%20Flow/index.html"><span class="file-name">📄 Event Flow</span><span class="file-path">Event%20Flow/index.html</span></a><a class="file-card" href="Eventos%20de%20Mouse/index.html"><span class="file-name">📄 Mouse</span><span class="file-path">Eventos%20de%20Mouse/index.html</span></a><a class="file-card" href="Eventos%20de%20Teclado/index.html"><span class="file-name">📄 Teclado</span><span class="file-path">Eventos%20de%20Teclado/index.html</span></a><a class="file-card" href="Eventos%20de%20Interfaz/index.html"><span class="file-name">📄 Interfaz</span><span class="file-path">Eventos%20de%20Interfaz/index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

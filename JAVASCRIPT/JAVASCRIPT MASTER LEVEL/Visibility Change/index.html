@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Page Visibility API (visibilitychange) en JavaScript - JavaScript Master Level." />
+    <title>Page Visibility API (visibilitychange) | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%91%80%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">👀</span>
+                <span class="title-text">visibilitychange</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo (Slide 9)">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Page Visibility API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Page Visibility API</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Ahorro de Batería, CPU y Red</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Control de Pestaña Activa:<br />
+                    <span class="gradient-text">visibilitychange</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Domina la API nativa de Visibilidad de Página para detectar con precisión cuándo el usuario cambia de pestaña, minimiza el navegador o bloquea su pantalla, optimizando recursos en tiempo real.
+                </p>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🎬</div>
+                        <h3>Multimedia Inteligente</h3>
+                        <p>Pausa videos y podcasts automáticamente al salir de la pestaña y reanúdalos solo al regresar.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🌐</div>
+                        <h3>Ahorro de Red</h3>
+                        <p>Detén consultas periódicas (<em>polling</em>) a servidores cuando el usuario no está mirando.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🎮</div>
+                        <h3>CPU &amp; Batería</h3>
+                        <p>Pausa animaciones pesadas o bucles de videojuegos en Canvas mientras la pestaña está oculta.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📊</div>
+                        <h3>Analítica Precisa</h3>
+                        <p>Mide el tiempo real de lectura descartando las horas que la pestaña quedó en segundo plano.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: QUÉ ES Y POR QUÉ SUPERA A FOCUS/BLUR
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="visibilitychange vs focus/blur">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Evolución de la Web</span>
+                    <h2 class="slide-title">1. ¿Por qué `visibilitychange` supera a `focus` y `blur`?</h2>
+                    <p class="slide-description">
+                        Compara las limitaciones de los eventos clásicos de ventana frente a la precisión nativa de la Page Visibility API.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <div class="comp-card card-bad">
+                        <div class="comp-badge badge-danger">⚠️ Enfoque Antiguo: window.blur / focus</div>
+                        <h3>Falsos Positivos Constantes</h3>
+                        <p>Solo detecta si la ventana perdió el foco del teclado, no si realmente dejó de ser visible para el usuario.</p>
+                        <ul class="comp-list">
+                            <li>❌ Se dispara al hacer clic en la barra de direcciones o abrir DevTools.</li>
+                            <li>❌ En pantalla dividida (<em>Split Screen</em>) pausa la web aunque siga viéndose.</li>
+                            <li>❌ No distingue entre ocultar una pestaña y cambiar de ventana lateral.</li>
+                        </ul>
+                    </div>
+
+                    <div class="comp-card card-good">
+                        <div class="comp-badge badge-success">✅ Moderno: document + visibilitychange</div>
+                        <h3>Estado Real de Visibilidad</h3>
+                        <p>Consulta directamente al motor del navegador si la pestaña está pintándose en primer plano o en segundo plano.</p>
+                        <ul class="comp-list">
+                            <li>✔️ Cero falsos positivos con DevTools o ventanas divididas.</li>
+                            <li>✔️ Detecta cambio de pestaña, minimización y bloqueo de pantalla móvil.</li>
+                            <li>✔️ Estándar W3C soportado por todos los navegadores modernos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: EL EVENTO VISIBILITYCHANGE EN DOCUMENT
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="El evento visibilitychange">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Sintaxis Fundamental</span>
+                    <h2 class="slide-title">2. Cómo escuchar el evento `visibilitychange`</h2>
+                    <p class="slide-description">
+                        El evento se registra directamente en <code>document</code> y su estado actualizado se consulta dentro del <em>callback</em>.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-emerald">Implementación Estándar</span>
+                        <span class="code-file-label">visibility.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-comment">// Registramos el escuchador siempre sobre el objeto document</span>
+<span class="token-variable">document</span>.<span class="token-function">addEventListener</span>(<span class="token-string">"visibilitychange"</span>, () =&gt; {
+    <span class="token-keyword">if</span> (<span class="token-variable">document</span>.<span class="token-variable">visibilityState</span> === <span class="token-string">"visible"</span>) {
+        <span class="token-variable">console</span>.<span class="token-function">log</span>(<span class="token-string">"👁️ El usuario regresó a la pestaña."</span>);
+    } <span class="token-keyword">else</span> {
+        <span class="token-variable">console</span>.<span class="token-function">log</span>(<span class="token-string">"🙈 El usuario ocultó o abandonó la pestaña."</span>);
+    }
+});</code></pre>
+                </div>
+
+                <div class="note-box alert-note">
+                    <strong>💡 Dato clave del parámetro evento (e):</strong> El objeto <code>e</code> recibido por la función no contiene el nuevo estado; debes leer siempre <code>document.visibilityState</code> o <code>document.hidden</code> dentro del manejador.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: PROPIEDADES CLAVE DEL DOCUMENT
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="visibilityState vs hidden">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Propiedades de Solo Lectura</span>
+                    <h2 class="slide-title">3. `document.visibilityState` vs `document.hidden`</h2>
+                    <p class="slide-description">
+                        La API ofrece dos propiedades en <code>document</code> para consultar el estado exacto en cualquier momento.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">📝</div>
+                        <h3>document.visibilityState (Recomendada)</h3>
+                        <p>Devuelve una cadena de texto descriptiva con el estado actual:</p>
+                        <ul class="feature-list">
+                            <li><code>"visible"</code>: La pestaña está en primer plano y es al menos parcialmente visible.</li>
+                            <li><code>"hidden"</code>: El contenido no es visible (otra pestaña, ventana minimizada o pantalla bloqueada).</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">🔘</div>
+                        <h3>document.hidden (Booleana)</h3>
+                        <p>Devuelve un booleano directo ideal para validaciones cortas:</p>
+                        <div class="code-snippet">
+                            <code>document.addEventListener("visibilitychange", () => {<br>
+                            &nbsp;&nbsp;if (document.hidden) {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.log("Pausando procesos...");<br>
+                            &nbsp;&nbsp;} else {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;console.log("Reanudando...");<br>
+                            &nbsp;&nbsp;}<br>
+                            });</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: PRINCIPALES USOS EN LA WEB
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Principales Usos Modernos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Aplicaciones Reales</span>
+                    <h2 class="slide-title">4. Principales Usos en el Desarrollo Web</h2>
+                    <p class="slide-description">
+                        Escenarios donde <code>visibilitychange</code> marca una diferencia real en eficiencia y experiencia de usuario.
+                    </p>
+                </div>
+
+                <div class="four-col-grid">
+                    <div class="feature-card">
+                        <div class="feat-icon">🎬</div>
+                        <h4>Multimedia</h4>
+                        <p>Pausa videos, streams o música cuando el usuario cambia de pestaña o bloquea el móvil.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🌐</div>
+                        <h4>Polling de APIs</h4>
+                        <p>Detiene intervalos (<code>setInterval</code>) de consulta a servidores mientras nadie está mirando.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🎮</div>
+                        <h4>Canvas y Juegos</h4>
+                        <p>Pausa motores gráficos y carruseles automáticos para no drenar batería ni CPU.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🔒</div>
+                        <h4>Seguridad y Analítica</h4>
+                        <p>Difumina datos bancarios en segundo plano y mide el tiempo real de lectura.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Analogías del Mundo Real">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Comprensión Intuitiva</span>
+                    <h2 class="slide-title">5. Analogías del Mundo Real</h2>
+                    <p class="slide-description">
+                        Dos imágenes cotidianas para recordar el comportamiento exacto de <code>visibilitychange</code>.
+                    </p>
+                </div>
+
+                <div class="analogy-wrapper">
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">💡</div>
+                        <h3>1. La Luz del Refrigerador</h3>
+                        <p>
+                            La página web es el interior de un refrigerador. Mientras la puerta está abierta (<code>"visible"</code>),
+                            la luz se enciende y todo funciona a plena vista. En el instante en que cierras la puerta (<code>"hidden"</code>),
+                            el interruptor apaga la luz para no desperdiciar energía hasta que vuelvas a abrirla.
+                        </p>
+                    </div>
+
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">📖</div>
+                        <h3>2. El Marcador de un Libro</h3>
+                        <p>
+                            Cuando estás leyendo y alguien te interrumpe, colocas un separador en la página (<code>visibilityState === "hidden"</code>)
+                            y detienes tu lectura. Al volver a abrirlo (<code>visibilityState === "visible"</code>),
+                            retomas exactamente desde donde lo dejaste sin perder ningún párrafo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: DIAGRAMA DE FLUJO DEL CICLO
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Ciclo de Visibilidad">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Flujo de Ejecución</span>
+                    <h2 class="slide-title">6. Diagrama del Ciclo de Visibilidad</h2>
+                    <p class="slide-description">
+                        Secuencia exacta de eventos cuando el usuario alterna entre la pestaña activa y el segundo plano.
+                    </p>
+                </div>
+
+                <div class="decision-diagram">
+                    <div class="diagram-step root-step">
+                        <span class="step-num">Usuario en Pestaña Activa (visibilityState === "visible")</span>
+                    </div>
+
+                    <div class="diagram-branches">
+                        <div class="diagram-branch branch-css">
+                            <div class="branch-pill pill-purple">Cambia de Pestaña / Minimiza</div>
+                            <div class="branch-card">
+                                <h4>Estado pasa a "hidden"</h4>
+                                <ul>
+                                    <li>Se dispara <code>visibilitychange</code> en <code>document</code>.</li>
+                                    <li><code>document.hidden</code> se vuelve <code>true</code>.</li>
+                                    <li>Pausamos videos, animaciones e intervalos.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="diagram-branch branch-js">
+                            <div class="branch-pill pill-cyan">Regresa a la Pestaña</div>
+                            <div class="branch-card">
+                                <h4>Estado vuelve a "visible"</h4>
+                                <ul>
+                                    <li>Se dispara nuevamente <code>visibilitychange</code>.</li>
+                                    <li><code>document.hidden</code> regresa a <code>false</code>.</li>
+                                    <li>Reanudamos procesos solo si fueron pausados por el sistema.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Buenas Prácticas y Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Calidad de Software</span>
+                    <h2 class="slide-title">7. Buenas Prácticas y Errores Comunes</h2>
+                    <p class="slide-description">
+                        Evita los errores más habituales al gestionar reproducción automática, intervalos y eventos de foco.
+                    </p>
+                </div>
+
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-emerald">✅ Buena Práctica 1</span>
+                            <h4>Respetar la Intención del Usuario</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ Reanudar siempre video.play() al volver</div>
+                            <div class="diff-line diff-good">✔️ Solo si pausadoAutomaticamente === true</div>
+                        </div>
+                        <p>Si el usuario pausó el video manualmente antes de irse, no lo reproduzcas automáticamente al volver.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-emerald">✅ Buena Práctica 2</span>
+                            <h4>Registrar en document</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ window.onvisibilitychange (Inconsistente)</div>
+                            <div class="diff-line diff-good">✔️ document.addEventListener("visibilitychange", fn)</div>
+                        </div>
+                        <p>Garantiza compatibilidad completa tanto en navegadores de escritorio como en dispositivos móviles.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-danger">❌ Error Común 1</span>
+                            <h4>Confundir con window.onblur</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ window.addEventListener("blur", pausar)</div>
+                            <div class="diff-line diff-good">✔️ document.addEventListener("visibilitychange", ...)</div>
+                        </div>
+                        <p><code>blur</code> se dispara aunque la página siga visible en pantalla dividida o al abrir DevTools.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-danger">❌ Error Común 2</span>
+                            <h4>Audio Automático sin Interacción</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ video.play() en pestaña abierta en segundo plano</div>
+                            <div class="diff-line diff-good">✔️ Usar .catch() o esperar interacción previa</div>
+                        </div>
+                        <p>Los navegadores bloquean el sonido automático si la página cargó en segundo plano sin clic previo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: LABORATORIO INTERACTIVO EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio Interactivo en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Simulador &amp; Sensor Real</span>
+                    <h2 class="slide-title">8. Laboratorio Interactivo: Monitor de Visibilidad en Vivo</h2>
+                    <p class="slide-description">
+                        Cambia de pestaña real en tu navegador (o usa los botones de simulación) para ver cómo reacciona <code>visibilitychange</code> y el reproductor inteligente.
+                    </p>
+                </div>
+
+                <div class="vc-dashboard-mockup">
+                    <!-- Banner superior de estado actual -->
+                    <div class="vc-status-banner is-visible" id="vcStatusBanner">
+                        <div>
+                            <strong>Estado Actual: </strong>
+                            <code id="vcStateText">document.visibilityState === "visible"</code>
+                        </div>
+                        <span class="badge badge-emerald" id="vcHiddenBadge">document.hidden: false</span>
+                    </div>
+
+                    <!-- Rejilla de métricas en vivo -->
+                    <div class="vc-metrics-grid">
+                        <div class="vc-metric-card">
+                            <span class="vc-metric-label">⏱️ Tiempo Activo (visible)</span>
+                            <span class="vc-metric-value" id="vcActiveSeconds">0s</span>
+                        </div>
+                        <div class="vc-metric-card">
+                            <span class="vc-metric-label">🌙 Tiempo en 2do Plano (hidden)</span>
+                            <span class="vc-metric-value" id="vcHiddenSeconds">0s</span>
+                        </div>
+                        <div class="vc-metric-card">
+                            <span class="vc-metric-label">🔄 Cambios de Pestaña Detectados</span>
+                            <span class="vc-metric-value" id="vcSwitchCount">0</span>
+                        </div>
+                    </div>
+
+                    <!-- Simulador de Reproductor Inteligente -->
+                    <div class="vc-player-mockup">
+                        <div>
+                            <strong id="vcPlayerTitle">▶️ Reproductor Inteligente: Reproduciendo</strong>
+                            <div style="font-size: 0.8rem; color: var(--text-dim);" id="vcPlayerSub">
+                                Se pausará automáticamente si ocultas la pestaña.
+                            </div>
+                        </div>
+                        <button class="nav-btn" id="btnTogglePlayer">⏸️ Pausar Manual</button>
+                    </div>
+
+                    <!-- Controles de simulación rápida -->
+                    <div class="vc-controls-bar">
+                        <button class="nav-btn" id="btnSimHide">🙈 Simular Ocultar (hidden)</button>
+                        <button class="nav-btn" id="btnSimShow">👁️ Simular Regresar (visible)</button>
+                        <button class="nav-btn" id="btnClearVcLogs">🧹 Limpiar Logs</button>
+                    </div>
+
+                    <!-- Terminal de eventos -->
+                    <div class="vc-log-terminal" id="vcLogTerminal">
+                        <div class="vc-log-line">
+                            <span class="vc-log-time">[00:00:00]</span>
+                            <span>Escuchando document.addEventListener("visibilitychange")... ¡Cambia de pestaña para probar!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: PROYECTO INTEGRADOR
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Proyecto: Reproductor Inteligente">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Caso de Uso Real</span>
+                    <h2 class="slide-title">9. Proyecto Integrador: Reproductor de Video Inteligente</h2>
+                    <p class="slide-description">
+                        Implementación completa que pausa al ocultar la pestaña y reanuda al volver usando la bandera <code>pausadoAutomaticamente</code>.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-cyan">Reproductor con Control de Estado</span>
+                        <span class="code-file-label">player.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> video = <span class="token-variable">document</span>.<span class="token-function">getElementById</span>(<span class="token-string">"video-principal"</span>);
+<span class="token-keyword">let</span> pausadoAutomaticamente = <span class="token-keyword">false</span>;
+
+<span class="token-variable">document</span>.<span class="token-function">addEventListener</span>(<span class="token-string">"visibilitychange"</span>, () =&gt; {
+    <span class="token-keyword">if</span> (<span class="token-variable">document</span>.<span class="token-variable">visibilityState</span> === <span class="token-string">"hidden"</span> &amp;&amp; !video.<span class="token-variable">paused</span>) {
+        video.<span class="token-function">pause</span>();
+        pausadoAutomaticamente = <span class="token-keyword">true</span>;
+        <span class="token-variable">document</span>.<span class="token-variable">title</span> = <span class="token-string">"⏸️ Video en pausa - Vuelve pronto"</span>;
+    } <span class="token-keyword">else if</span> (<span class="token-variable">document</span>.<span class="token-variable">visibilityState</span> === <span class="token-string">"visible"</span> &amp;&amp; pausadoAutomaticamente) {
+        video.<span class="token-function">play</span>();
+        pausadoAutomaticamente = <span class="token-keyword">false</span>;
+        <span class="token-variable">document</span>.<span class="token-variable">title</span> = <span class="token-string">"▶️ Reproduciendo tutorial"</span>;
+    }
+});</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 11: RESUMEN TÉCNICO & CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Resumen Técnico">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Síntesis Final</span>
+                    <h2 class="slide-title">10. Resumen Técnico del Módulo</h2>
+                    <p class="slide-description">
+                        Puntos clave para dominar la Page Visibility API en aplicaciones web modernas.
+                    </p>
+                </div>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🎯</div>
+                        <h3>Evento en document</h3>
+                        <p>Registra siempre <code>document.addEventListener("visibilitychange", fn)</code> para máxima fiabilidad.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔍</div>
+                        <h3>Dos Propiedades</h3>
+                        <p><code>document.visibilityState</code> retorna <code>"visible"</code> o <code>"hidden"</code>; <code>document.hidden</code> retorna booleano.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>Cero Falsos Positivos</h3>
+                        <p>No se confunde con clics en DevTools o ventanas divididas como ocurría con <code>window.onblur</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔋</div>
+                        <h3>Eficiencia Total</h3>
+                        <p>Ahorra batería, CPU y datos pausando videos, animaciones y consultas periódicas en segundo plano.</p>
+                    </div>
+                </div>
+
+                <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
+                    <strong>🎓 ¡Excelente trabajo!</strong> Has completado el módulo de <strong>Page Visibility API (visibilitychange) en JavaScript Master Level</strong>.
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="pageshow/pagehide, Polling y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. bfcache (pageshow/pagehide), Polling y Cheatsheet</h2>
+                    <p class="slide-description">Distingue entre visibilidad de pestaña y caché de historial, y ahorra red con polling pausable.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🧭</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">pageshow / pagehide (bfcache)</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>window.addEventListener('pageshow', e => {
+  if (e.persisted) console.log('Desde bfcache');
+});</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Detecta navegación Atrás/Adelante mientras visibilitychange vigila la pestaña.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🌐</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Polling Pausable</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>document.addEventListener('visibilitychange', () => {
+  document.hidden ? clearInterval(id) : iniciar();
+});</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Evita peticiones HTTP innecesarias cuando la pestaña está en segundo plano.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>document.addEventListener('visibilitychange')
+document.visibilityState ('visible'|'hidden')
+document.hidden (true | false)</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Registra siempre en document (no window.onblur) para evitar falsos positivos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables de diapositivas -->
+        <div class="slide-dots-container" id="slideDotsContainer"></div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: visibilitychange</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="overview-grid" id="overviewGrid">
+                <!-- Se rellena dinámicamente con tarjetas en miniatura de cada diapositiva -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de la guía práctica y consola -->
+    <script src="main.js"></script>
+</body>
+</html>

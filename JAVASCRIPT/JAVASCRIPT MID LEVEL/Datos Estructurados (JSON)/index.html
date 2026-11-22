@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON (JavaScript Object Notation) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%8B%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · DATOS</span><div class="brand-title"><span>📦</span><span>JSON (JavaScript Object Notation)</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 10</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: JSON (JavaScript Object Notation)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">JSON.stringify()</span><span class="badge badge-purple">JSON.parse()</span><span class="badge badge-emerald">Intercambio API</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">JSON (JavaScript Object Notation)</span></h1>
+                <p class="hero-subtitle">Convierte objetos JavaScript a texto JSON para enviarlos por red o guardarlos en LocalStorage, y reconviértelos al recibirlos.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: JSON (JavaScript Object Notation)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es JSON (JavaScript Object Notation)?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Convierte objetos JavaScript a texto JSON para enviarlos por red o guardarlos en LocalStorage, y reconviértelos al recibirlos.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> JSON es el idioma universal de intercambio de datos entre Frontend y Backend: texto plano con comillas dobles.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Serializar y Parsear">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Serializar y Parsear</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const texto = JSON.stringify({ curso: "JS", nivel: "Mid" });
+const obj = JSON.parse(texto);</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="Nivel 1">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · DATOS ESTRUCTURADOS (JSON).md</span>
+                <h2 class="slide-title">Nivel 1</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Escribe manualmente un archivo de texto plano con extensión <code>.json</code> que guarde la información de tu perfil de desarrollador (nombre, tecnologías que dominas como un arreglo, y un sub-objeto con tus redes sociales). Valida que sea un JSON estrictamente válido.</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="Nivel 2">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · DATOS ESTRUCTURADOS (JSON).md</span>
+                <h2 class="slide-title">Nivel 2</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Crea una función en JavaScript llamada <code>clonarObjeto(obj)</code> que reciba un objeto cualquiera y devuelva una copia exacta y profunda de él, utilizando únicamente los métodos de serialización y deserialización que aprendiste en esta guía.</p></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="Nivel 3">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · DATOS ESTRUCTURADOS (JSON).md</span>
+                <h2 class="slide-title">Nivel 3</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Simula la recepción de una respuesta de API corrupta usando una cadena de texto mal formateada (por ejemplo, omitiendo una comilla doble). Escribe un bloque <code>try/catch</code> capaz de interceptar el <code>SyntaxError</code>, mostrando un mensaje amigable en la consola que diga <code>&quot;Error: Los datos del servidor están dañados&quot;</code>.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Resumen</p>
+<ul class="styled-list">
+<li>*   <strong>JSON</strong> es un formato de texto plano universal para el intercambio de datos, estrictamente basado en comillas dobles y tipos de datos primitivos.</li>
+<li>*   <strong><code>JSON.stringify()</code></strong> realiza la <strong>serialización</strong>: transforma estructuras vivas de memoria en strings planos aptos para viajar por la red.</li>
+<li>*   <strong><code>JSON.parse()</code></strong> realiza la <strong>deserialización</strong>: toma un string con formato JSON válido y lo reconstruye en un objeto de JavaScript utilizable.</li>
+<li>*   Cualquier fallo de formato al usar <code>.parse()</code> disparará un <strong><code>SyntaxError</code></strong> que debe ser controlado.</li>
+<li>*   Históricamente se usaban <strong>JSON Polyfills</strong> para dotar de soporte de parseo nativo a los navegadores que carecían de estas herramientas globales.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
+<table class="compare-table"><thead><tr><th>Método / Concepto</th><th>Descripción</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>JSON.stringify(obj)</code></td><td>Convierte objeto JS a string JSON.</td><td><code>JSON.stringify({ a: 1 })</code> → <code>&#x27;{&quot;a&quot;:1}&#x27;</code></td></tr><tr><td><code>JSON.stringify(obj, null, 2)</code></td><td>Serializa con indentación legible de 2 espacios.</td><td><code>JSON.stringify(user, null, 2)</code></td></tr><tr><td><code>JSON.stringify(obj, replacer)</code></td><td>Filtra o transforma claves al serializar.</td><td><code>JSON.stringify(obj, [&quot;id&quot;, &quot;name&quot;])</code></td></tr><tr><td><code>JSON.parse(str)</code></td><td>Convierte string JSON válido en objeto JS.</td><td><code>JSON.parse(&#x27;{&quot;ok&quot;:true}&#x27;)</code></td></tr><tr><td><code>JSON.parse(str, reviver)</code></td><td>Transforma valores al deserializar (ej. <code>Date</code>).</td><td><code>JSON.parse(str, (k, v) =&gt; ...)</code></td></tr><tr><td><code>structuredClone(obj)</code></td><td>Copia profunda moderna (preserva <code>Date</code>, <code>Map</code>, <code>Set</code>).</td><td><code>const copia = structuredClone(original)</code></td></tr><tr><td><code>[...set]</code> / <code>Object.fromEntries(map)</code></td><td>Prepara <code>Set</code> y <code>Map</code> antes de serializar a JSON.</td><td><code>JSON.stringify([...miSet])</code></td></tr><tr><td><code>try { JSON.parse(...) } catch</code></td><td>Evita que un JSON corrupto detenga la app (<code>SyntaxError</code>).</td><td><code>try { return JSON.parse(raw); } catch { return null; }</code></td></tr></tbody></table>
+</div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-warn"><strong>⚠️ Sintaxis JSON:</strong> En JSON todas las claves y strings van con comillas dobles <code>"clave"</code> y no se permiten comas finales.</div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Quiz: JSON (JavaScript Object Notation)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="JSON.parse() interpreta el texto JSON y devuelve el objeto/array." data-err="stringify convierte objeto → texto; parse convierte texto → objeto."><div class="quiz-q-title">1. ¿Qué método convierte un string JSON válido en un objeto JavaScript?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">JSON.parse()</button><button class="quiz-option" data-opt="b">JSON.stringify()</button><button class="quiz-option" data-opt="c">JSON.toObject()</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: JSON (JavaScript Object Notation)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;pre id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+  const obj = { usuario: &#x27;Ana&#x27;, activo: true };
+  const json = JSON.stringify(obj, null, 2);
+  document.getElementById(&#x27;out&#x27;).textContent = json;
+&lt;/script&gt;">JSON en Vivo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;pre id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+  const obj = { usuario: &#x27;Ana&#x27;, activo: true };
+  const json = JSON.stringify(obj, null, 2);
+  document.getElementById(&#x27;out&#x27;).textContent = json;
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

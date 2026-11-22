@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pestañas DevTools — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2338bdf8'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%9B%A0%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · HERRAMIENTAS</span><div class="brand-title"><span>🛠️</span><span>Pestañas DevTools</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Pestañas DevTools">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Elements &amp; Console</span><span class="badge badge-purple">Network &amp; Application</span><span class="badge badge-emerald">Performance</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Pestañas DevTools</span></h1>
+                <p class="hero-subtitle">Domina las herramientas de desarrollo del navegador (F12) para inspeccionar DOM, red, almacenamiento y rendimiento.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Pestañas DevTools">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Pestañas DevTools?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Domina las herramientas de desarrollo del navegador (F12) para inspeccionar DOM, red, almacenamiento y rendimiento.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> DevTools es tu taller mecánico: te deja ver en vivo qué falla en HTML, CSS, peticiones HTTP o memoria.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Paneles clave de DevTools">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Paneles clave de DevTools</h2></div>
+            <table class="compare-table"><thead><tr><th>Pestaña</th><th>Para qué sirve</th></tr></thead><tbody><tr><td><code>Elements</code></td><td>Inspeccionar y editar HTML/CSS en vivo</td></tr><tr><td><code>Console</code></td><td>Ejecutar JS y ver errores/logs</td></tr><tr><td><code>Network</code></td><td>Auditar peticiones Fetch/XHR y códigos HTTP</td></tr><tr><td><code>Application</code></td><td>Revisar LocalStorage, Cookies e IndexedDB</td></tr></tbody></table>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="Hermano anterior">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · PESTAÑA ELEMENTS.md</span>
+                <h2 class="slide-title">Hermano anterior</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>previousSibling</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># ⚡ ¿POR QUÉ EL DOM ES TAN IMPORTANTE?</p>
+<p style="margin-bottom:8px;line-height:1.6;">Porque JavaScript trabaja sobre él.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Ejemplo:</p>
+<pre class="code-block"><code>document.querySelector(&quot;button&quot;)</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">JavaScript busca dentro del DOM.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔥 TODO EN FRONTEND DEPENDE DEL DOM</p>
+<p style="margin-bottom:8px;line-height:1.6;">Cuando haces:</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Clicks</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Animaciones</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Inputs</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Cambios visuales</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Formularios</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Menús</p>
+<p style="margin-bottom:8px;line-height:1.6;">Todo ocurre manipulando el DOM.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🧠 RELACIÓN ENTRE HTML, DOM Y JAVASCRIPT</p>
+<pre class="code-block"><code>HTML
+ ↓
+El navegador lo interpreta
+ ↓
+DOM
+ ↓
+JavaScript lo manipula
+ ↓
+La página cambia visualmente</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🎯 RELACIÓN ENTRE ELEMENTS Y EL DOM</p>
+<p style="margin-bottom:8px;line-height:1.6;">La pestaña Elements es literalmente un explorador visual del DOM.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Cada línea que ves en Elements representa:</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Un nodo</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Un elemento</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Una relación dentro del árbol</p>
+<p style="margin-bottom:8px;line-height:1.6;">Por eso aprender Elements ayuda muchísimo a entender JavaScript y frontend.</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="Método 3">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · PESTAÑA ELEMENTS.md</span>
+                <h2 class="slide-title">Método 3</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Click derecho:</p>
+<pre class="code-block"><code>Inspeccionar</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔎 ANATOMÍA DE LA PESTAÑA ELEMENTS</p>
+<p style="margin-bottom:8px;line-height:1.6;">La pestaña está dividida normalmente así:</p>
+<pre class="code-block"><code>┌──────────────────────────┬──────────────────────┐
+│ Árbol HTML (DOM)         │ CSS / Styles         │
+│                          │ Event Listeners      │
+│                          │ Properties           │
+│                          │ Computed             │
+└──────────────────────────┴──────────────────────┘</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🌳 NAVEGAR POR EL DOM</p>
+<p style="margin-bottom:8px;line-height:1.6;">Cuando inspeccionas un elemento:</p>
+<pre class="code-block"><code>&lt;div class=&quot;card&quot;&gt;
+    &lt;h2&gt;Título&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">DevTools muestra:</p>
+<pre class="code-block"><code>&lt;div class=&quot;card&quot;&gt;
+    &lt;h2&gt;Título&lt;/h2&gt;
+&lt;/div&gt;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Puedes:</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Expandir nodos.</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Colapsar nodos.</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Explorar hijos.</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Ver relaciones.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 BUSCAR Y FILTRAR ELEMENTOS</p>
+<p style="margin-bottom:8px;line-height:1.6;">Uno de los poderes más grandes de Elements.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔎 BUSCAR POR PALABRAS CLAVE</p>
+<p style="margin-bottom:8px;line-height:1.6;">Atajo:</p>
+<pre class="code-block"><code>CTRL + F</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Abre un buscador dentro del DOM.</p></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="Ejemplo">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · PESTAÑA ELEMENTS.md</span>
+                <h2 class="slide-title">Ejemplo</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Buscar:</p>
+<pre class="code-block"><code>button</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Encontrará:</p>
+<pre class="code-block"><code>&lt;button&gt;Enviar&lt;/button&gt;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 BUSCAR POR CLASES</p>
+<pre class="code-block"><code>.card</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Encuentra:</p>
+<pre class="code-block"><code>&lt;div class=&quot;card&quot;&gt;&lt;/div&gt;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 BUSCAR POR ID</p>
+<pre class="code-block"><code>#menu</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Encuentra:</p>
+<pre class="code-block"><code>&lt;div id=&quot;menu&quot;&gt;&lt;/div&gt;</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 BUSCAR POR SELECTORES CSS</p>
+<p style="margin-bottom:8px;line-height:1.6;">Puedes usar selectores avanzados.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Ejemplo:</p>
+<pre class="code-block"><code>.container .card button</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;">Muy útil para:</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Encontrar estructuras complejas.</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Debugging.</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ Testing.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🔍 BUSCAR TEXTO INTERNO</p>
+<p style="margin-bottom:8px;line-height:1.6;">Puedes buscar texto visible.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Ejemplo:</p>
+<pre class="code-block"><code>Iniciar sesión</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="✅ Explora lentamente">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · PESTAÑA ELEMENTS.md</span>
+                <h2 class="slide-title">✅ Explora lentamente</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">No abras todo el DOM al mismo tiempo.</p></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Tip:</strong> Presiona <code>Ctrl + Shift + I</code> (o <code>F12</code>) para abrir DevTools al instante.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Pestañas DevTools">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Network registra todas las peticiones de red y sus respuestas." data-err="Las peticiones HTTP se inspeccionan en la pestaña Network."><div class="quiz-q-title">1. ¿En qué pestaña de DevTools revisas las peticiones HTTP, su estado (200/404) y el JSON devuelto?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Network</button><button class="quiz-option" data-opt="b">Elements</button><button class="quiz-option" data-opt="c">Sources</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Pestañas DevTools">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;Abre F12 → Console o mira aquí:&lt;/div&gt;
+&lt;script&gt;
+  console.log(&#x27;Hola desde DevTools&#x27;);
+  document.getElementById(&#x27;out&#x27;).innerHTML += &#x27;&lt;br&gt;&lt;b&gt;console.table / console.log ejecutado&lt;/b&gt;&#x27;;
+&lt;/script&gt;">Console Log en Vivo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;Abre F12 → Console o mira aquí:&lt;/div&gt;
+&lt;script&gt;
+  console.log(&#x27;Hola desde DevTools&#x27;);
+  document.getElementById(&#x27;out&#x27;).innerHTML += &#x27;&lt;br&gt;&lt;b&gt;console.table / console.log ejecutado&lt;/b&gt;&#x27;;
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="Elements/elements.html"><span class="file-name">📄 Elements</span><span class="file-path">Elements/elements.html</span></a><a class="file-card" href="Consola/consola.html"><span class="file-name">📄 Consola</span><span class="file-path">Consola/consola.html</span></a><a class="file-card" href="Networks/networks.html"><span class="file-name">📄 Networks</span><span class="file-path">Networks/networks.html</span></a><a class="file-card" href="Application/index.html"><span class="file-name">📄 Application</span><span class="file-path">Application/index.html</span></a><a class="file-card" href="Resources/resources.html"><span class="file-name">📄 Resources</span><span class="file-path">Resources/resources.html</span></a><a class="file-card" href="Timeline-Performance/timeline.html"><span class="file-name">📄 Performance</span><span class="file-path">Timeline-Performance/timeline.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

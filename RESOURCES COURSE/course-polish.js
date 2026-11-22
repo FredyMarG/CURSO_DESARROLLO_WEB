@@ -21,7 +21,9 @@
     const courseFolder = courseIdx !== -1 ? parts[courseIdx] : (parts.length >= 3 ? parts[parts.length - 3] : 'Curso'); // Declara e inicializa "courseFolder"
     const depthInCourse = courseIdx !== -1 ? Math.max(1, parts.length - 2 - courseIdx) : 1; // Declara e inicializa "depthInCourse"
     const toCourseRoot = '../'.repeat(depthInCourse); // Declara e inicializa "toCourseRoot"
-    const toPortalRoot = '../'.repeat(depthInCourse + 1); // Declara e inicializa "toPortalRoot"
+    const portalIdx = parts.findIndex(p => p === 'HTML y CSS' || p === 'JAVASCRIPT'); // Ubica la carpeta raíz del bloque respecto al portal
+    const depthToPortal = portalIdx !== -1 ? Math.max(1, parts.length - 1 - portalIdx) : depthInCourse + 1; // Calcula niveles hasta la raíz del repositorio
+    const toPortalRoot = '../'.repeat(depthToPortal); // Declara e inicializa "toPortalRoot"
 
     const courseMeta = { // Declara e inicializa "courseMeta"
         'HTML y CSS': { badge: '🎨 HTML5 & CSS3', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },

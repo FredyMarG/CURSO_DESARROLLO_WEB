@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Notifications API en JavaScript - JavaScript Master Level." />
+    <title>Notifications API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hoja de estilos vinculada -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23f59e0b'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%94%94%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🔔</span>
+                <span class="title-text">Notification</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo (Slide 9)">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Notifications API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">Notifications API Nativa</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Alertas a Nivel de Sistema Operativo</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Alertas Nativas del SO:<br />
+                    <span class="gradient-text">Notifications API</span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    Aprende a solicitar permisos de forma segura al usuario, verificar el estado de autorización y emitir notificaciones visuales fuera del navegador incluso en segundo plano.
+                </p>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔔</div>
+                        <h3>Alertas del Sistema</h3>
+                        <p>Se muestran directamente en el centro de notificaciones de Windows, macOS, Linux o Android.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔐</div>
+                        <h3>Permiso Explícito</h3>
+                        <p>Control total mediante <code>Notification.permission</code> y <code>requestPermission()</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">📌</div>
+                        <h3>Agrupación con Tag</h3>
+                        <p>Actualiza una misma notificación en lugar de saturar la pantalla con decenas de avisos repetidos.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🖱️</div>
+                        <h3>Eventos Interactivos</h3>
+                        <p>Escucha el <code>click</code> en la alerta para enfocar tu ventana (<code>window.focus()</code>) y actuar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: QUÉ ES Y REQUISITO HTTPS
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Concepto y Seguridad HTTPS">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Fundamentos</span>
+                    <h2 class="slide-title">1. ¿Qué es la Notifications API y qué requisitos tiene?</h2>
+                    <p class="slide-description">
+                        Permite comunicar eventos importantes al usuario fuera de la ventana del navegador, bajo estrictas normas de privacidad.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">💻</div>
+                        <h3>Más allá del `alert()` tradicional</h3>
+                        <p>A diferencia de un cuadro de diálogo bloqueante o un <em>toast</em> interno HTML, las notificaciones nativas:</p>
+                        <ul class="feature-list">
+                            <li>Son visibles aunque el usuario haya minimizado el navegador.</li>
+                            <li>No bloquean el hilo principal de JavaScript.</li>
+                            <li>Integran título, cuerpo, icono, imagen y silencio opcional.</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">🔒</div>
+                        <h3>Contexto Seguro Obligatorio</h3>
+                        <p>Por seguridad y privacidad, la API solo funciona en entornos confiables:</p>
+                        <div class="code-snippet">
+                            <code>// Comprobación previa obligatoria<br>
+                            if (!("Notification" in window)) {<br>
+                            &nbsp;&nbsp;console.log("Navegador sin soporte");<br>
+                            }</code>
+                        </div>
+                        <p style="margin-top: 0.75rem;">Requiere protocolo <strong>HTTPS</strong> en producción o <code>localhost</code> durante desarrollo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: VERIFICACIÓN DE PERMISSION
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Notification.permission">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Control de Acceso</span>
+                    <h2 class="slide-title">2. Verificación de Estado: `Notification.permission`</h2>
+                    <p class="slide-description">
+                        Antes de mostrar o pedir permiso, consulta siempre esta propiedad estática de solo lectura.
+                    </p>
+                </div>
+
+                <div class="four-col-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+                    <div class="feature-card">
+                        <div class="feat-icon">⏳</div>
+                        <h4>"default"</h4>
+                        <div class="feat-code"><code>Notification.permission === "default"</code></div>
+                        <p>El usuario aún no ha tomado una decisión. El navegador bloquea alertas hasta que se solicite permiso explícitamente.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">✅</div>
+                        <h4>"granted"</h4>
+                        <div class="feat-code"><code>Notification.permission === "granted"</code></div>
+                        <p>El usuario autorizó las notificaciones para este dominio. Ya puedes instanciar <code>new Notification()</code>.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feat-icon">🚫</div>
+                        <h4>"denied"</h4>
+                        <div class="feat-code"><code>Notification.permission === "denied"</code></div>
+                        <p>El usuario bloqueó el sitio. No se puede volver a mostrar el cuadro de solicitud por código; debe cambiarlo manualmente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: SOLICITUD DE AUTORIZACIÓN
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="requestPermission() y Clic">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Promesas &amp; UX</span>
+                    <h2 class="slide-title">3. Solicitud de Autorización: `Notification.requestPermission()`</h2>
+                    <p class="slide-description">
+                        Despliega el cuadro de diálogo nativo del navegador y devuelve una <strong>Promesa</strong> con la decisión final del usuario.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-emerald">Uso Moderno con async / await</span>
+                        <span class="code-file-label">permisos.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">pedirPermiso</span> = <span class="token-keyword">async</span> () =&gt; {
+    <span class="token-comment">// La promesa se resuelve con "granted", "denied" o "default"</span>
+    <span class="token-keyword">const</span> resultado = <span class="token-keyword">await</span> <span class="token-variable">Notification</span>.<span class="token-function">requestPermission</span>();
+
+    <span class="token-keyword">if</span> (resultado === <span class="token-string">"granted"</span>) {
+        <span class="token-variable">console</span>.<span class="token-function">log</span>(<span class="token-string">"✅ ¡Permiso concedido por el usuario!"</span>);
+    } <span class="token-keyword">else</span> {
+        <span class="token-variable">console</span>.<span class="token-function">log</span>(<span class="token-string">"❌ El usuario rechazó o cerró la solicitud."</span>);
+    }
+};</code></pre>
+                </div>
+
+                <div class="note-box alert-note">
+                    <strong>⚠️ Regla de oro del gesto del usuario:</strong> Llama siempre a <code>requestPermission()</code> dentro de un evento iniciado por el usuario (como el <code>click</code> de un botón). Si lo ejecutas automáticamente al cargar la página, los navegadores modernos lo bloquearán.
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: CREACIÓN Y OPCIONES
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="new Notification(titulo, options)">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Constructor &amp; Configuración</span>
+                    <h2 class="slide-title">4. Creación y Envío: `new Notification(titulo, options)`</h2>
+                    <p class="slide-description">
+                        Cuando el permiso es <code>"granted"</code>, instancia el constructor pasando el título y un objeto opcional de propiedades.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3>Opciones Principales</h3>
+                        <div class="property-table">
+                            <div class="prop-row">
+                                <span class="prop-name">body</span>
+                                <span class="prop-desc">Texto descriptivo secundario debajo del título.</span>
+                            </div>
+                            <div class="prop-row">
+                                <span class="prop-name">icon</span>
+                                <span class="prop-desc">URL de la imagen o logotipo de la alerta.</span>
+                            </div>
+                            <div class="prop-row">
+                                <span class="prop-name">tag</span>
+                                <span class="prop-desc">Identificador único para reemplazar alertas previas con el mismo tag.</span>
+                            </div>
+                            <div class="prop-row">
+                                <span class="prop-name">silent</span>
+                                <span class="prop-desc">Booleano: <code>true</code> silencia el sonido o vibración del sistema.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">🚀</div>
+                        <h3>Ejemplo de Envío</h3>
+                        <div class="code-snippet">
+                            <code>if (Notification.permission === "granted") {<br>
+                            &nbsp;&nbsp;const noti = new Notification("¡Proceso Listo!", {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;body: "Tu reporte ya está disponible.",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;icon: "icono.png",<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;tag: "reporte-mensual"<br>
+                            &nbsp;&nbsp;});<br>
+                            }</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: EVENTOS DE LA INSTANCIA
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Eventos de la Notificación">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Interacción Directa</span>
+                    <h2 class="slide-title">5. Eventos de la Instancia de Notificación</h2>
+                    <p class="slide-description">
+                        Cada instancia de <code>Notification</code> emite eventos para reaccionar cuando el usuario interactúa con ella.
+                    </p>
+                </div>
+
+                <div class="two-col-layout">
+                    <div class="col-card">
+                        <div class="card-icon">📡</div>
+                        <h3>Eventos Disponibles</h3>
+                        <ul class="feature-list">
+                            <li><code>"click"</code>: El usuario hizo clic sobre la tarjeta de notificación.</li>
+                            <li><code>"close"</code>: El usuario cerró la alerta o expiró automáticamente.</li>
+                            <li><code>"show"</code>: Instante exacto en que la notificación aparece en pantalla.</li>
+                            <li><code>"error"</code>: Ocurrió un fallo al intentar mostrar la notificación.</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-card">
+                        <div class="card-icon">🪟</div>
+                        <h3>Enfocar Ventana al Clic</h3>
+                        <p>Lleva al usuario de regreso a tu pestaña y cierra el aviso:</p>
+                        <div class="code-snippet">
+                            <code>noti.addEventListener("click", () => {<br>
+                            &nbsp;&nbsp;window.focus(); // Trae el navegador al frente<br>
+                            &nbsp;&nbsp;noti.close(); &nbsp;&nbsp;// Cierra la notificación<br>
+                            });</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Analogías del Mundo Real">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Comprensión Intuitiva</span>
+                    <h2 class="slide-title">6. Analogías del Mundo Real</h2>
+                    <p class="slide-description">
+                        Dos metáforas cotidianas para recordar cómo operan los permisos y la agrupación por etiquetas.
+                    </p>
+                </div>
+
+                <div class="analogy-wrapper">
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">🏢</div>
+                        <h3>1. El Portero de un Edificio (`requestPermission`)</h3>
+                        <p>
+                            Antes de dejar subir a un repartidor con tu paquete (<code>new Notification</code>),
+                            el portero llama por el citófono para pedirte permiso (<code>requestPermission()</code>).
+                            Si dices que sí (<code>"granted"</code>), los siguientes paquetes suben directo. Si le dices que no moleste (<code>"denied"</code>), rechazará entregas futuras.
+                        </p>
+                    </div>
+
+                    <div class="analogy-card analogy-good">
+                        <div class="analogy-avatar">📌</div>
+                        <h3>2. El Tablero de Avisos con Etiquetas (`tag`)</h3>
+                        <p>
+                            Usar la propiedad <code>tag</code> es como tener un espacio reservado en la pizarra con el título <em>"Estado de descarga"</em>:
+                            en lugar de pegar 10 notas adhesivas distintas por cada avance, reemplazas la misma nota actualizando su contenido.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: BUENAS PRÁCTICAS Y ERRORES COMUNES
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Buenas Prácticas y Errores">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Calidad de Software</span>
+                    <h2 class="slide-title">7. Buenas Prácticas y Errores Comunes</h2>
+                    <p class="slide-description">
+                        Diseña alertas respetuosas que aporten valor sin molestar al usuario ni provocar bloqueos del navegador.
+                    </p>
+                </div>
+
+                <div class="mistakes-grid">
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-emerald">✅ Buena Práctica 1</span>
+                            <h4>Combinar con visibilitychange</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ Lanzar alerta externa si el usuario ya mira la web</div>
+                            <div class="diff-line diff-good">✔️ Usar new Notification() solo si document.hidden === true</div>
+                        </div>
+                        <p>Si el usuario ya está viendo la pestaña, muéstrale un aviso interno; reserva las alertas del SO para segundo plano.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-emerald">✅ Buena Práctica 2</span>
+                            <h4>Agrupar Alertas con tag</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ Emitir 15 notificaciones sin tag en un chat activo</div>
+                            <div class="diff-line diff-good">✔️ Usar tag: "chat-sala-1" para reemplazar</div>
+                        </div>
+                        <p>Evita saturar el centro de notificaciones del usuario y reduce el riesgo de que revoque el permiso.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-danger">❌ Error Común 1</span>
+                            <h4>Pedir Permiso al Cargar la Página</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ Notification.requestPermission() en DOMContentLoaded</div>
+                            <div class="diff-line diff-good">✔️ Solicitarlo dentro de btn.addEventListener("click")</div>
+                        </div>
+                        <p>Los navegadores bloquean las solicitudes automáticas sin gesto explícito del usuario.</p>
+                    </div>
+
+                    <div class="mistake-card">
+                        <div class="mistake-header">
+                            <span class="badge badge-danger">❌ Error Común 2</span>
+                            <h4>Ignorar el Estado "denied"</h4>
+                        </div>
+                        <div class="code-diff">
+                            <div class="diff-line diff-bad">❌ Intentar abrir el diálogo cuando ya está en "denied"</div>
+                            <div class="diff-line diff-good">✔️ Informar cómo habilitarlo desde el candado de la URL</div>
+                        </div>
+                        <p>Cuando un sitio está denegado, JavaScript no puede volver a mostrar el diálogo nativo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: LABORATORIO INTERACTIVO EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio Interactivo en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Probador Real de la API</span>
+                    <h2 class="slide-title">8. Laboratorio Interactivo: Emisor de Notificaciones</h2>
+                    <p class="slide-description">
+                        Consulta tu permiso actual, solicita autorización con un clic y personaliza los argumentos de <code>new Notification(titulo, options)</code>.
+                    </p>
+                </div>
+
+                <div class="nt-dashboard-mockup">
+                    <!-- Banner de estado de Notification.permission -->
+                    <div class="nt-permission-banner" id="ntPermissionBanner">
+                        <div>
+                            <strong>Permiso Actual: </strong>
+                            <code id="ntPermissionText">Notification.permission === "default"</code>
+                        </div>
+                        <span class="badge badge-cyan" id="ntSupportBadge">Soporte Nativo: Verificando...</span>
+                    </div>
+
+                    <!-- Constructor visual de parámetros de la notificación -->
+                    <div class="nt-builder-grid">
+                        <div class="nt-field-group">
+                            <label class="nt-field-label" for="ntTitleInput">title (1er argumento)</label>
+                            <input class="nt-input" id="ntTitleInput" type="text" value="¡Nuevo Mensaje!" />
+                        </div>
+                        <div class="nt-field-group">
+                            <label class="nt-field-label" for="ntBodyInput">options.body</label>
+                            <input class="nt-input" id="ntBodyInput" type="text" value="Tienes una nueva alerta desde JS Master Level." />
+                        </div>
+                        <div class="nt-field-group">
+                            <label class="nt-field-label" for="ntTagInput">options.tag</label>
+                            <input class="nt-input" id="ntTagInput" type="text" value="demo-master-level" />
+                        </div>
+                    </div>
+
+                    <!-- Barra de acciones reales y simuladas -->
+                    <div class="nt-controls-bar">
+                        <button class="nav-btn" id="btnRequestPerm">🔑 Solicitar Permiso (requestPermission)</button>
+                        <button class="nav-btn" id="btnSendNotif">🔔 Enviar Notificación Real</button>
+                        <button class="nav-btn" id="btnSimNotif">🧪 Simular en Terminal</button>
+                        <button class="nav-btn" id="btnClearNtLogs">🧹 Limpiar Logs</button>
+                    </div>
+
+                    <!-- Terminal de registro de eventos -->
+                    <div class="nt-log-terminal" id="ntLogTerminal">
+                        <div class="nt-log-line">
+                            <span class="nt-log-time">[00:00:00]</span>
+                            <span>Laboratorio de Notifications API listo. Pulsa "Solicitar Permiso" para comenzar.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: PROYECTO INTEGRADOR
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Proyecto: Sistema Inteligente">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Caso de Uso Real</span>
+                    <h2 class="slide-title">9. Proyecto Integrador: Sistema de Alertas Inteligente</h2>
+                    <p class="slide-description">
+                        Patrón completo que gestiona el botón de permisos, actualiza la interfaz y emite alertas interactivas con <code>click</code>.
+                    </p>
+                </div>
+
+                <div class="pattern-box">
+                    <div class="pattern-header">
+                        <span class="badge badge-cyan">Gestión Completa de Permisos y Eventos</span>
+                        <span class="code-file-label">alertas.js</span>
+                    </div>
+                    <pre class="code-block"><code><span class="token-keyword">const</span> <span class="token-function">mostrarNotificacion</span> = (titulo, mensaje) =&gt; {
+    <span class="token-keyword">if</span> (<span class="token-variable">Notification</span>.<span class="token-variable">permission</span> !== <span class="token-string">"granted"</span>) <span class="token-keyword">return</span>;
+
+    <span class="token-keyword">const</span> alerta = <span class="token-keyword">new</span> <span class="token-function">Notification</span>(titulo, {
+        body: mensaje,
+        tag: <span class="token-string">"alerta-sistema"</span>
+    });
+
+    alerta.<span class="token-function">addEventListener</span>(<span class="token-string">"click"</span>, () =&gt; {
+        <span class="token-variable">window</span>.<span class="token-function">focus</span>();
+        alerta.<span class="token-function">close</span>();
+    });
+};</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 11: RESUMEN TÉCNICO & CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Resumen Técnico">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Síntesis Final</span>
+                    <h2 class="slide-title">10. Resumen Técnico del Módulo</h2>
+                    <p class="slide-description">
+                        Conceptos esenciales para implementar notificaciones nativas seguras y efectivas en producción.
+                    </p>
+                </div>
+
+                <div class="hero-grid">
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔍</div>
+                        <h3>Notification.permission</h3>
+                        <p>Consulta en todo momento si el estado es <code>"default"</code>, <code>"granted"</code> o <code>"denied"</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔑</div>
+                        <h3>requestPermission()</h3>
+                        <p>Devuelve una Promesa y debe invocarse siempre desde un evento de clic del usuario.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🔔</div>
+                        <h3>new Notification()</h3>
+                        <p>Crea alertas nativas del SO configurando <code>body</code>, <code>icon</code>, <code>tag</code> y <code>silent</code>.</p>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-icon">🖱️</div>
+                        <h3>Eventos Propios</h3>
+                        <p>Responde a <code>click</code> y <code>close</code> para enfocar la ventana y limpiar avisos.</p>
+                    </div>
+                </div>
+
+                <div class="note-box alert-note" style="margin-top: 1.5rem; text-align: center;">
+                    <strong>🎓 ¡Felicidades!</strong> Has completado el módulo de <strong>Notifications API en JavaScript Master Level</strong>.
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Service Worker Alerts y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">11. Service Worker Notifications y Cheatsheet</h2>
+                    <p class="slide-description">Emite notificaciones persistentes con botones de acción en PWAs y repasa la API.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📲</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">showNotification() en PWA</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const reg = await navigator.serviceWorker.ready;
+reg.showNotification('Pedido #402', {
+  actions: [{ action: 'ver', title: 'Ver' }]
+});</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Permite mostrar botones interactivos y alertas incluso con la pestaña cerrada.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">👀</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Sinergia con visibilitychange</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>if (document.hidden && Notification.permission === 'granted') {
+  new Notification('Nuevo mensaje');
+}</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Muestra alerta externa solo si el usuario no está mirando la pestaña.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>Notification.permission ('default'|'granted'|'denied')
+Notification.requestPermission() // tras clic
+tag -> reemplaza alertas repetidas</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Nunca pidas permisos al cargar la página; espera un clic del usuario.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables de diapositivas -->
+        <div class="slide-dots-container" id="slideDotsContainer"></div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide" title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Notifications API</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="overview-grid" id="overviewGrid">
+                <!-- Se rellena dinámicamente con tarjetas en miniatura de cada diapositiva -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de la guía práctica y consola -->
+    <script src="main.js"></script>
+</body>
+</html>

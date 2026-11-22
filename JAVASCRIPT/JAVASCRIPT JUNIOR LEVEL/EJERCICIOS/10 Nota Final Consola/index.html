@@ -1,0 +1,72 @@
+<!doctype html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/10 Nota Final Consola/index.html
+     Título: Ejercicio 10
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="en">
+
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 10</title>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/ejercicios-neon.css">
+    <script src="../../../../RESOURCES COURSE/ejercicios-neon.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%93%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 10</h1>
+        <p>
+            Terminó el primer semestre y cofla no sabe si aprobará o no las materias, para lograrlo necesitará:
+            <ul>
+                <li>Contar con al menos el 90% de asistencia.</li>
+                <li>Obtener un promedio de al menos 7 / 10 en cada materia.</li>
+                <li>Entregar al menos el 75% de los trabajos prácticos.</li>
+            </ul>
+        </p>
+        <ol type="A">
+            <li>
+                Solicitar los datos y decirle si aprueba o no.
+            </li>
+            <li>
+                Mostrar todo esto con colores representativos en consola (ej: Reprobado en rojo)
+            </li>
+        </ol>
+    </div>
+
+    <div class="ask">
+        <h2>Promedio Materias</h2>
+        <p>
+            Para cada materia, ingresa el porcentaje de asistencias, el promedio y la cantidad de trabajos prácticos entregados siendo un total de 4 por materia.
+        </p>
+        <span style="font-style: italic ; font-size: medium;">Revisa la consola (Ctrl + Shift + I)</span>
+    </div>
+
+    <div class="sol" style="display: block;" id="main-sol">
+        <h2>Resultado</h2>
+        <div class="label">
+            <span>Materia</span>
+            <span>Asistencia (0% - 100%)</span>
+            <span>Promedio (0 - 10)</span>
+            <span>Trabajos Prácticos (0 - 4)</span>
+            <span>Estado</span>
+        </div>
+        <div id="resultado" class="resultado"></div>
+    </div>
+    <script src="main.js"></script>
+
+</body>
+
+<!-- Cierre del documento HTML -->
+</html>

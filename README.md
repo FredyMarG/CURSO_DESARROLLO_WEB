@@ -29,9 +29,9 @@ CURSO_DESARROLLO_WEB/
 │   ├── junior-theme.js           # Selector de 5 temas neón y estilos de tabla para Junior
 │   └── ejercicios-neon.js/.css   # Interfaz neón unificada para ejercicios prácticos
 ├── HTML y CSS/                   # 10 módulos principales + 8 guías .md + sub-módulos y proyectos
-├── JAVASCRIPT JUNIOR LEVEL/      # 13 módulos + 14 guías .md + 12 ejercicios
-├── JAVASCRIPT MID LEVEL/         # 19 módulos + 25 guías .md + 7 ejercicios
-└── JAVASCRIPT MASTER LEVEL/      # 24 módulos + 24 guías .md + 9 ejercicios
+├── JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/      # 13 módulos + 14 guías .md + 12 ejercicios
+├── JAVASCRIPT/JAVASCRIPT MID LEVEL/         # 19 módulos + 25 guías .md + 7 ejercicios
+└── JAVASCRIPT/JAVASCRIPT MASTER LEVEL/      # 24 módulos + 24 guías .md + 9 ejercicios
 ```
 
 ---
@@ -42,16 +42,16 @@ CURSO_DESARROLLO_WEB/
 - **Documentación (`HTML y CSS/Documentacion/`):** 8 guías técnicas actualizadas (HTML Living Standard, CSS moderno, Flexbox, Grid & `subgrid`, Responsive Design & Container Queries, Animaciones, Funciones Avanzadas como `color-mix()`/`clamp()`, y Hosting/Edge).
 - **Módulos y Sub-módulos organizados:** `HTML BASICO` (Enlaces, Formularios, Imágenes, Listas, Títulos y Párrafos), `HTML avanzado` (Accesibilidad, Audio/Video, HTML Semántico, Tablas, Details/Summary, etc.), `CSS BASICO` (incluye ejercicio `Tarjeta de presentacion`), `CSS avanzado` (BEM, Display, Position, Pseudoclases, Pseudoelementos, Transiciones, Ventana Modal), `Flexbox`, `Grid`, `Animaciones`, `Funciones Avanzadas`, `Responsive Design` y `PROYECTOS` (Accordion, Chatbox, Flipper Card 3D, Sidebar Menu, One View Page y Web Pages).
 
-### 2. [JavaScript Junior Level](./JAVASCRIPT%20JUNIOR%20LEVEL)
-- **Documentación (`JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/`):** 14 guías actualizadas a ES2023–ES2025 (`VARIABLES.md`, `OPERADORES.md`, `CONCATENACION.md`, `CONDICIONALES.md`, `ARRAYS.md`, `ARRAYS_METHODS.md`, `BUCLES.md`, `CADENAS.md`, `METODOS DE CADENA.md`, `FUNCIONES.md`, `MATH.md`, `CONSOLE.LOG.md`, `POO.md`, `DOM.md`).
+### 2. [JavaScript Junior Level](./JAVASCRIPT/JAVASCRIPT%20JUNIOR%20LEVEL)
+- **Documentación (`JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/DOCUMENTACION/`):** 14 guías actualizadas a ES2023–ES2025 (`VARIABLES.md`, `OPERADORES.md`, `CONCATENACION.md`, `CONDICIONALES.md`, `ARRAYS.md`, `ARRAYS_METHODS.md`, `BUCLES.md`, `CADENAS.md`, `METODOS DE CADENA.md`, `FUNCIONES.md`, `MATH.md`, `CONSOLE.LOG.md`, `POO.md`, `DOM.md`).
 - **Práctica:** 13 laboratorios interactivos con salida visual en el DOM, selector de tema dinámico y 12 ejercicios resueltos en `EJERCICIOS/`.
 
-### 3. [JavaScript Mid Level](./JAVASCRIPT%20MID%20LEVEL)
-- **Documentación (`JAVASCRIPT MID LEVEL/DOCUMENTACION/`):** 25 guías técnicas (Callbacks, Promesas, Async/Await, Fetch, Axios, AJAX, JSON, HTTP, Eventos, Try-Catch, Temporizadores, Window/Location/Screen/Resize, Código Obsoleto y pestañas de Chrome DevTools).
+### 3. [JavaScript Mid Level](./JAVASCRIPT/JAVASCRIPT%20MID%20LEVEL)
+- **Documentación (`JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/`):** 25 guías técnicas (Callbacks, Promesas, Async/Await, Fetch, Axios, AJAX, JSON, HTTP, Eventos, Try-Catch, Temporizadores, Window/Location/Screen/Resize, Código Obsoleto y pestañas de Chrome DevTools).
 - **Práctica:** 19 módulos interactivos con laboratorio, reto práctico y quiz, más 7 ejercicios en `EJERCICIOS/`.
 
-### 4. [JavaScript Master Level](./JAVASCRIPT%20MASTER%20LEVEL)
-- **Documentación (`JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 24 guías avanzadas sobre Web APIs y fundamentos profundos (`APIs`, `Cache`, `Canvas`, `Cookies`, `Drag & Drop`, `File Reader`, `Funciones Flecha`, `Geolocalización`, `Historial`, `IndexedDB`, `Intersection Observer`, `LocalStorage`, `MatchMedia`, `Memoization`, `Modo Estricto`, `Objeto Date`, `Objeto Navigator`, `Objeto Screen`, `Notifications`, `Operador Ternario`, `Prototipos`, `Service Workers`, `Visibility Change`, `Web Workers`).
+### 4. [JavaScript Master Level](./JAVASCRIPT/JAVASCRIPT%20MASTER%20LEVEL)
+- **Documentación (`JAVASCRIPT/JAVASCRIPT MASTER LEVEL/DOCUMENTACION/`):** 24 guías avanzadas sobre Web APIs y fundamentos profundos (`APIs`, `Cache`, `Canvas`, `Cookies`, `Drag & Drop`, `File Reader`, `Funciones Flecha`, `Geolocalización`, `Historial`, `IndexedDB`, `Intersection Observer`, `LocalStorage`, `MatchMedia`, `Memoization`, `Modo Estricto`, `Objeto Date`, `Objeto Navigator`, `Objeto Screen`, `Notifications`, `Operador Ternario`, `Prototipos`, `Service Workers`, `Visibility Change`, `Web Workers`).
 - **Práctica:** 24 módulos interactivos y 9 ejercicios avanzados en `EJERCICIOS/` (incluyendo `Web Paint`, `Uso de Cookies`, `Drag & Drop File Reader`, `IndexedDB`, `Intersection Objects Lazyload`, `Galería Dinámica`, `Local Storage`, `Reloj` y `Texturizador`).
 
 ---

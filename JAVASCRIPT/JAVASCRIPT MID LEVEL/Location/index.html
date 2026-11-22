@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objeto Location — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23f43f5e'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%8D%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · BOM</span><div class="brand-title"><span>📍</span><span>Objeto Location</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Objeto Location">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">window.location</span><span class="badge badge-purple">href &amp; pathname</span><span class="badge badge-emerald">reload()</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Objeto Location</span></h1>
+                <p class="hero-subtitle">Lee y modifica la URL actual, parámetros de consulta, protocolo y recarga o redirige páginas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Objeto Location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Objeto Location?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Lee y modifica la URL actual, parámetros de consulta, protocolo y recarga o redirige páginas.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> <code>location</code> es la barra de direcciones del navegador convertida en un objeto manipulable por JS.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Propiedades de location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Propiedades de location</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>console.log(location.href);
+console.log(location.pathname);
+// location.assign("https://otro-sitio.com");</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="📚 TEMARIO">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · LOCATION.md</span>
+                <h2 class="slide-title">📚 TEMARIO</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">1. ¿Qué es <code>location</code>?</p>
+<p style="margin-bottom:8px;line-height:1.6;">2. Relación entre <code>window</code> y <code>location</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">3. Anatomía de una URL</p>
+<p style="margin-bottom:8px;line-height:1.6;">4. <code>window.location.href</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">5. <code>window.location.hostname</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">6. <code>window.location.pathname</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">7. <code>window.location.protocol</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">8. <code>window.location.host</code> vs <code>hostname</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">9. <code>window.location.port</code> y <code>origin</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">10. <code>window.location.search</code> (Query Params)</p>
+<p style="margin-bottom:8px;line-height:1.6;">11. <code>window.location.hash</code> (Anclas)</p>
+<p style="margin-bottom:8px;line-height:1.6;">12. <code>window.location.assign()</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">13. <code>window.location.replace()</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">14. <code>window.location.reload()</code></p>
+<p style="margin-bottom:8px;line-height:1.6;">15. Redirecciones</p>
+<p style="margin-bottom:8px;line-height:1.6;">16. Casos reales</p>
+<p style="margin-bottom:8px;line-height:1.6;">17. Buenas prácticas</p>
+<p style="margin-bottom:8px;line-height:1.6;">18. Errores comunes</p>
+<p style="margin-bottom:8px;line-height:1.6;">19. Seguridad</p>
+<p style="margin-bottom:8px;line-height:1.6;">20. Debugging</p>
+<p style="margin-bottom:8px;line-height:1.6;">21. Resumen final</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="🌍 ¿QUÉ ES LOCATION?">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · LOCATION.md</span>
+                <h2 class="slide-title">🌍 ¿QUÉ ES LOCATION?</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>location</code> es un objeto que contiene información sobre la URL actual del navegador.</p>
+<p style="margin-bottom:8px;line-height:1.6;">Permite:</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ leer URLs</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ redireccionar páginas</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ detectar rutas</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ obtener dominio</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ conocer protocolo</p>
+<p style="margin-bottom:8px;line-height:1.6;">✅ navegar entre páginas</p></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="🧠 RELACIÓN CON WINDOW">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · LOCATION.md</span>
+                <h2 class="slide-title">🧠 RELACIÓN CON WINDOW</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"><code>location</code> pertenece al objeto:</p>
+<pre class="code-block"><code>window</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="✅ Ejemplo">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · LOCATION.md</span>
+                <h2 class="slide-title">✅ Ejemplo</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>console.log(window.location)</code></pre></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-warn"><strong>⚠️ Cuidado:</strong> Cambiar <code>location.href</code> recarga la página completa; para SPAs usa <code>history.pushState()</code>.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Objeto Location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="location.pathname devuelve la ruta (ej. /productos/12)." data-err="pathname devuelve la ruta tras el dominio."><div class="quiz-q-title">1. ¿Qué propiedad de <code>location</code> contiene la ruta después del dominio?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">location.pathname</button><button class="quiz-option" data-opt="b">location.protocol</button><button class="quiz-option" data-opt="c">location.host</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Objeto Location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;pre id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Protocol: &#x27; + location.protocol + &#x27;\nOrigin: &#x27; + location.origin;
+&lt;/script&gt;">Inspeccionar Location</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;pre id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px&quot;&gt;&lt;/pre&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Protocol: &#x27; + location.protocol + &#x27;\nOrigin: &#x27; + location.origin;
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="location.html"><span class="file-name">📄 Práctica Location</span><span class="file-path">location.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

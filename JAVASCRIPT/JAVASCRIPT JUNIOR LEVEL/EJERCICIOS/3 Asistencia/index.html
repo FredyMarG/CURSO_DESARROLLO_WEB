@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- CURSO_WEB_DOC_HTML v1
+     Archivo: JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/3 Asistencia/index.html
+     Título: Ejercicio 3
+     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
+     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
+-->
+<!-- CURSO_WEB_HTML_STRUCT v1 -->
+
+
+<html lang="en">
+<head>
+<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Ejercicio 3</title>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/ejercicios-neon.css">
+    <script src="../../../../RESOURCES COURSE/ejercicios-neon.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%8B%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body>
+<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+
+    <div class="enunciado">
+        <h1 class="title">Ejercicio 3</h1>
+        <p>Cofla vuelve de la comisaría exausto y por lo cansado que estaba se fue a dormir...Al otro día comienzan las clases del ciclo básico de la universidad (porque cofla quiere ser programador y se incribió en la facultad de ingeniería para estudiar desarrollo de software).
+        Se rompió el sistema de registro de asistencias y durante los próximos 30 días no se podrán hacer registros de datos de
+        ningun tipo, por ende las clases no podrán comenzar hasta que esto este solucionado.</p>
+        <ol type="A">
+            <li>Crear mini-sistema que nos permita registrar los alumnos que estan presentes (P) y ausentes (A) en clase.</li>
+            <li>Pasados los 30 días mostrar la situación final de todos los alumnos (Nro total de presentes y ausentes).</li>
+            <li>Se puede tener un maximo de 10% de ausencias por semestre, si se tienen mas aclarar que está reprobado.</li>
+        </ol>
+
+        <label id="sol" onclick="result()">Solución</label>
+    </div>
+
+    <div class="sol" id="main_sol">
+        <h2>Resultados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4" id="cantidad" class="titlet">
+                        El total de alumnos es 3
+                    </th>
+                </tr>
+                <tr>
+                    <th>#</th>
+                    <th>Alumno</th>
+                    <th>Presente</th>
+                    <th>Ausencia</th>
+                </tr>
+            </thead>
+            <tbody id="data">
+                
+            </tbody>
+        </table>
+    </div>
+    <script src="main.js"></script>
+</body>
+<!-- Cierre del documento HTML -->
+</html>

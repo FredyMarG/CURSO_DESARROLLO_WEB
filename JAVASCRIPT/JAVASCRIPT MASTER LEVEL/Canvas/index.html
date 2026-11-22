@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre HTML5 Canvas 2D API en JavaScript - JavaScript Master Level." />
+    <title>HTML5 Canvas 2D API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+    <script src="main.js" defer></script>
+
+    <!-- Google Fonts: Fira Code para código y métricas, Outfit para diseño editorial -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <!-- Hojas de estilos y motor unificado -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%A8%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales Glassmorphism -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">🎨</span>
+                <span class="title-text">HTML5 Canvas 2D</span>
+            </div>
+        </div>
+
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
+        </div>
+
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Guía">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Vista general de diapositivas (Tecla O)">▦</button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla F)">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: HTML5 Canvas 2D">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-cyan">CanvasRenderingContext2D</span>
+                    <span class="badge badge-purple">Rutas &amp; Figuras 2D</span>
+                    <span class="badge badge-emerald">Animación 60 FPS</span>
+                </div>
+                <h1 class="hero-title">Gráficos 2D en Tiempo Real:<br /><span class="gradient-text">HTML5 Canvas API</span></h1>
+                <p class="hero-subtitle">Aprende a obtener el contexto <code>2d</code>, dibujar rectángulos, construir rutas personalizadas con <code>beginPath()</code>, animar fotogramas y crear un lienzo interactivo.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📐</div>
+                        <h3>Contexto 2D &amp; Ejes</h3>
+                        <p>Origen en <code>(0, 0)</code> superior izquierdo y píxeles en mapa de bits.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">✏️</div>
+                        <h3>Rutas &amp; Arcos</h3>
+                        <p><code>beginPath()</code>, <code>moveTo()</code>, <code>lineTo()</code> y <code>arc()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="9">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>Laboratorio Canvas</h3>
+                        <p>Dibuja figuras y trazos libres en tiempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES CANVAS Y CONTEXTO 2D -->
+        <section class="slide" data-slide="2" data-title="¿Qué es HTML5 Canvas y Contexto 2D?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span>
+                <h2 class="slide-title">¿Qué es <code>&lt;canvas&gt;</code> y su Contexto 2D?</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-cyan">
+                    <h3>Lienzo de mapa de bits</h3>
+                    <ul class="styled-list">
+                        <li><code>&lt;canvas&gt;</code> es un contenedor gráfico controlado 100% mediante JavaScript.</li>
+                        <li>A diferencia de <strong>SVG</strong> (nodos DOM vectoriales), Canvas pinta <strong>píxeles</strong> directamente: una vez dibujado, el navegador no recuerda objetos individuales.</li>
+                        <li>El origen <code>(0, 0)</code> está en la <strong>esquina superior izquierda</strong>; <code>x</code> crece a la derecha e <code>y</code> hacia abajo.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Inicialización básica</h3>
+                    <pre class="code-block"><code>&lt;canvas id="miLienzo" width="600" height="300"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  const canvas = document.getElementById("miLienzo");
+  const ctx = canvas.getContext("2d");
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: RECTÁNGULOS Y ESTILOS -->
+        <section class="slide" data-slide="3" data-title="Rectángulos y Estilos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · PRIMITIVAS DIRECTAS</span>
+                <h2 class="slide-title">Rectángulos y Propiedades de Estilo</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-purple">
+                    <h3>Métodos de rectángulo</h3>
+                    <ul class="styled-list">
+                        <li><code>fillRect(x, y, w, h)</code>: dibuja un rectángulo relleno al instante.</li>
+                        <li><code>strokeRect(x, y, w, h)</code>: dibuja solo el contorno del rectángulo.</li>
+                        <li><code>clearRect(x, y, w, h)</code>: borra píxeles dejándolos transparentes.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-cyan">
+                    <h3>Configurar estilo antes de dibujar</h3>
+                    <pre class="code-block"><code>ctx.fillStyle = "#00f0ff";
+ctx.fillRect(20, 20, 140, 80);
+
+ctx.strokeStyle = "#a855f7";
+ctx.lineWidth = 4;
+ctx.strokeRect(180, 20, 140, 80);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: RUTAS Y TRAZADOS PERSONALIZADOS -->
+        <section class="slide" data-slide="4" data-title="Rutas y Trazados (Path)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PATHS Y ARCOS</span>
+                <h2 class="slide-title">Rutas Personalizadas: Triángulos, Líneas y Círculos</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-emerald">
+                    <h3>Flujo de un trazado</h3>
+                    <ul class="styled-list">
+                        <li><code>ctx.beginPath()</code>: reinicia la lista de trazos para no mezclar figuras anteriores.</li>
+                        <li><code>ctx.moveTo(x, y)</code>: mueve el lápiz sin pintar.</li>
+                        <li><code>ctx.lineTo(x, y)</code>: traza una línea recta hasta el nuevo punto.</li>
+                        <li><code>ctx.closePath()</code>: conecta el último punto con el inicial.</li>
+                        <li><code>ctx.stroke()</code> o <code>ctx.fill()</code>: renderiza la ruta en pantalla.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-amber">
+                    <h3>Triángulo + Círculo con <code>arc()</code></h3>
+                    <pre class="code-block"><code>// Triángulo
+ctx.beginPath();
+ctx.moveTo(100, 30);
+ctx.lineTo(170, 140);
+ctx.lineTo(30, 140);
+ctx.closePath();
+ctx.fillStyle = "#10b981";
+ctx.fill();
+
+// Círculo completo (2 * Math.PI)
+ctx.beginPath();
+ctx.arc(280, 90, 45, 0, Math.PI * 2);
+ctx.strokeStyle = "#f59e0b";
+ctx.stroke();</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: COMPARATIVA DIRECTOS VS PATHS -->
+        <section class="slide" data-slide="5" data-title="Comparativa: Rectángulos vs Rutas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ARQUITECTURA DE DIBUJO</span>
+                <h2 class="slide-title">Rectángulos Directos vs Trazados por Rutas</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Rectángulos (<code>fillRect</code> / <code>strokeRect</code>)</th>
+                            <th>Rutas (<code>beginPath</code> + <code>stroke</code> / <code>fill</code>)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>¿Requiere <code>beginPath()</code>?</td><td>No, se pinta inmediatamente.</td><td>Sí, obligatorio para aislar cada figura.</td></tr>
+                        <tr><td>Formas posibles</td><td>Solo rectángulos y cuadrados.</td><td>Polígonos, líneas, arcos, círculos y curvas Bézier.</td></tr>
+                        <tr><td>Renderizado final</td><td>Automático al invocar el método.</td><td>Requiere llamar a <code>ctx.fill()</code> o <code>ctx.stroke()</code>.</td></tr>
+                        <tr><td>Uso típico</td><td>Fondos, barras, bloques de UI o limpieza con <code>clearRect()</code>.</td><td>Gráficos, partículas, personajes, firmas y diagramas.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRÁCTICAS Y ERRORES COMUNES -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas y Errores Comunes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD PROFESIONAL</span>
+                <h2 class="slide-title">Errores Comunes y Pantallas Retina (HiDPI)</h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-rose">
+                    <h3>Errores frecuentes</h3>
+                    <ul class="styled-list">
+                        <li><strong>Olvidar <code>beginPath()</code>:</strong> provoca que las rutas anteriores se vuelvan a pintar con el nuevo color.</li>
+                        <li><strong>Escalar con CSS sin atributos HTML:</strong> si cambias <code>width</code> solo en CSS, el lienzo se pixela o estira; usa atributos <code>canvas.width</code> y <code>canvas.height</code>.</li>
+                        <li><strong>Cambiar <code>fillStyle</code> después de dibujar:</strong> el estilo debe asignarse siempre <em>antes</em> del trazo.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-cyan">
+                    <h3>Nitidez en pantallas Retina (<code>devicePixelRatio</code>)</h3>
+                    <pre class="code-block"><code>const dpr = window.devicePixelRatio || 1;
+const rect = canvas.getBoundingClientRect();
+canvas.width = rect.width * dpr;
+canvas.height = rect.height * dpr;
+ctx.scale(dpr, dpr);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ANIMACIONES CON REQUESTANIMATIONFRAME -->
+        <section class="slide" data-slide="7" data-title="Animaciones a 60 FPS">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · BUCLE DE JUEGO</span>
+                <h2 class="slide-title">Animación Fluida con <code>requestAnimationFrame</code></h2>
+            </div>
+            <div class="grid-2">
+                <div class="glass-card border-purple">
+                    <h3>Ciclo de cada fotograma</h3>
+                    <ul class="styled-list">
+                        <li><strong>1. Limpiar:</strong> <code>ctx.clearRect(0, 0, canvas.width, canvas.height)</code>.</li>
+                        <li><strong>2. Actualizar estado:</strong> mover coordenadas <code>x += vx</code>, detectar colisiones.</li>
+                        <li><strong>3. Dibujar:</strong> renderizar las figuras en su nueva posición.</li>
+                        <li><strong>4. Repetir:</strong> programar el siguiente cuadro con <code>requestAnimationFrame(loop)</code>.</li>
+                    </ul>
+                </div>
+                <div class="glass-card border-emerald">
+                    <h3>Bucle clásico</h3>
+                    <pre class="code-block"><code>let x = 30;
+function animar() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.arc(x, 120, 20, 0, Math.PI * 2);
+  ctx.fill();
+  x = (x + 3) % canvas.width;
+  requestAnimationFrame(animar);
+}
+requestAnimationFrame(animar);</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: CHEATSHEET -->
+        <section class="slide" data-slide="8" data-title="Hoja de Trucos Canvas 2D">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · CHEATSHEET</span>
+                <h2 class="slide-title">Métodos Esenciales de <code>ctx</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Método / Propiedad</th><th>Descripción rápida</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>canvas.getContext("2d")</code></td><td>Devuelve la interfaz <code>CanvasRenderingContext2D</code>.</td></tr>
+                        <tr><td><code>fillStyle</code> / <code>strokeStyle</code></td><td>Color CSS, gradiente o patrón de relleno y borde.</td></tr>
+                        <tr><td><code>lineWidth</code> / <code>lineCap</code></td><td>Grosor en píxeles y terminación (<code>"round"</code>, <code>"square"</code>).</td></tr>
+                        <tr><td><code>fillText(txt, x, y)</code></td><td>Dibuja texto relleno respetando <code>ctx.font</code>.</td></tr>
+                        <tr><td><code>save()</code> / <code>restore()</code></td><td>Guarda y restaura el estado de estilos y transformaciones.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO INTERACTIVO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio Interactivo Canvas 2D">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA EN VIVO</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo HTML5 Canvas</h2>
+            </div>
+            <div class="glass-card">
+                <div class="canvas-toolbar">
+                    <label>Color: <input type="color" id="cvColor" value="#00f0ff" /></label>
+                    <label>Grosor: <input type="range" id="cvWidth" min="1" max="16" value="4" /> <span id="cvWidthVal">4px</span></label>
+                    <button type="button" class="nav-btn" id="btnDrawRect">⬛ Rectángulo</button>
+                    <button type="button" class="nav-btn" id="btnDrawCircle">⚪ Círculo</button>
+                    <button type="button" class="nav-btn" id="btnDrawTriangle">🔺 Triángulo</button>
+                    <button type="button" class="nav-btn" id="btnDrawGrid">🕸️ Rejilla</button>
+                    <button type="button" class="nav-btn" id="btnClearCanvas">🧹 Limpiar</button>
+                </div>
+                <div class="canvas-stage-wrap">
+                    <canvas id="canvasLab" width="760" height="280"></canvas>
+                </div>
+                <div class="canvas-status-bar">
+                    <span id="cvCoords">Cursor: (x: 0, y: 0) — Arrastra sobre el lienzo para dibujar libremente</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: QUIZ RÁPIDO -->
+        <section class="slide" data-slide="10" data-title="Quiz de Canvas 2D">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · EVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz: HTML5 Canvas 2D</h2>
+            </div>
+            <div class="quiz-container" id="canvasQuiz">
+                <div class="quiz-question" data-answer="b">
+                    <p><strong>1. ¿Dónde se ubica la coordenada de origen <code>(0, 0)</code> en un Canvas 2D?</strong></p>
+                    <div class="quiz-options">
+                        <button type="button" class="quiz-opt" data-opt="a">En el centro exacto del lienzo</button>
+                        <button type="button" class="quiz-opt" data-opt="b">En la esquina superior izquierda</button>
+                        <button type="button" class="quiz-opt" data-opt="c">En la esquina inferior izquierda</button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-answer="a">
+                    <p><strong>2. ¿Qué método evita que una nueva figura herede o vuelva a trazar rutas anteriores?</strong></p>
+                    <div class="quiz-options">
+                        <button type="button" class="quiz-opt" data-opt="a"><code>ctx.beginPath()</code></button>
+                        <button type="button" class="quiz-opt" data-opt="b"><code>ctx.clearRect()</code></button>
+                        <button type="button" class="quiz-opt" data-opt="c"><code>ctx.strokeStyle</code></button>
+                    </div>
+                </div>
+                <div class="quiz-question" data-answer="c">
+                    <p><strong>3. ¿Qué método limpia un área rectangular del lienzo entre cuadros de animación?</strong></p>
+                    <div class="quiz-options">
+                        <button type="button" class="quiz-opt" data-opt="a"><code>ctx.moveTo()</code></button>
+                        <button type="button" class="quiz-opt" data-opt="b"><code>ctx.closePath()</code></button>
+                        <button type="button" class="quiz-opt" data-opt="c"><code>ctx.clearRect(0, 0, w, h)</code></button>
+                    </div>
+                </div>
+                <div class="quiz-result" id="quizResult">Responde las preguntas para ver tu puntuación.</div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: RESUMEN -->
+        <section class="slide" data-slide="11" data-title="Resumen Final">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · CONCLUSIÓN</span>
+                <h2 class="slide-title">Resumen y Próximos Pasos</h2>
+            </div>
+            <div class="glass-card border-emerald">
+                <ul class="styled-list">
+                    <li>Solicita el contexto con <code>canvas.getContext("2d")</code>.</li>
+                    <li>Usa <code>fillRect</code> / <code>strokeRect</code> / <code>clearRect</code> para rectángulos directos.</li>
+                    <li>Aísla cada figura personalizada con <code>beginPath()</code>, traza con <code>moveTo</code> / <code>lineTo</code> / <code>arc</code> y renderiza con <code>fill()</code> o <code>stroke()</code>.</li>
+                    <li>Anima a 60 FPS limpiando el lienzo en cada cuadro de <code>requestAnimationFrame</code>.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

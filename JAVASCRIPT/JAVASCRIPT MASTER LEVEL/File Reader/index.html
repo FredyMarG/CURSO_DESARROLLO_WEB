@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre la FileReader API en JavaScript - JavaScript Master Level." />
+    <title>FileReader API en JavaScript | Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2338bdf8'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%82%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">📁</span>
+                <span class="title-text">FileReader API</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 11</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo (Slide 7)">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: FileReader API">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">HTML5 File API</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Procesamiento en Cliente</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Procesamiento de Archivos Locales:
+                    <span class="gradient-text">FileReader API</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Aprende a procesar archivos en el cliente sin depender del servidor. Domina la lectura de texto plano con <code>readAsText()</code>,
+                    la codificación Base64 con <code>readAsDataURL()</code>, la creación de galerías dinámicas, zonas <strong>Drag &amp; Drop</strong>
+                    y el monitoreo del ciclo de vida con eventos <code>progress</code> y <code>loadend</code>.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">📄</div>
+                        <h3>readAsText()</h3>
+                        <p>Lee documentos de texto (.txt, .json, .csv, .md) directamente a strings en memoria.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="3">
+                        <div class="mini-card-icon">🖼️</div>
+                        <h3>readAsDataURL()</h3>
+                        <p>Convierte imágenes o binarios en URIs Base64 para previsualización inmediata en <code>&lt;img&gt;</code>.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="5">
+                        <div class="mini-card-icon">🎯</div>
+                        <h3>Drag &amp; Drop</h3>
+                        <p>Extrae y lee archivos arrastrados directamente desde el explorador del sistema operativo.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="7">
+                        <div class="mini-card-icon">📊</div>
+                        <h3>Métricas de Progreso</h3>
+                        <p>Calcula el porcentaje de bytes leídos en tiempo real con los eventos <code>progress</code> y <code>loadend</code>.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="9">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: LECTURA TEXTUAL CON readAsText()
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Lectura Textual: readAsText()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>Lectura de Contenido Textual con <code>readAsText()</code></h2>
+                    <p class="section-desc">
+                        Lee archivos basados en texto plano directamente a una cadena string legible en JavaScript:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Sintaxis &amp; Parámetros</span>
+                            </div>
+                            <p>
+                                <strong><code>reader.readAsText(blob[, encoding])</code></strong>
+                                inicia la lectura asíncrona del archivo especificado. Cuando la operación concluye, el resultado se expone en <code>reader.result</code>.
+                            </p>
+                            <ul>
+                                <li><strong><code>blob</code>:</strong> Un objeto <code>File</code> o <code>Blob</code> obtenido de un <code>&lt;input type="file"&gt;</code> o evento drop.</li>
+                                <li><strong><code>encoding</code>:</strong> Codificación de caracteres (por defecto <code>"UTF-8"</code>).</li>
+                                <li><strong>Formatos ideales:</strong> <code>.txt</code>, <code>.json</code>, <code>.csv</code>, <code>.md</code>, <code>.xml</code>, código fuente.</li>
+                            </ul>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Enfoque Tradicional</h4>
+                                <ul>
+                                    <li>Subir archivo al servidor por POST/FormData.</li>
+                                    <li>Esperar respuesta por red.</li>
+                                    <li>Mayor latencia y consumo de ancho de banda.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>FileReader API</h4>
+                                <ul>
+                                    <li>Lectura 100% en memoria en el cliente.</li>
+                                    <li>Respuesta instantánea y offline.</li>
+                                    <li>Máxima privacidad y seguridad.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demostración Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">lector_texto_interactivo.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-readtext" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-readtext"><span class="c-keyword">const</span> <span class="c-variable">reader</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+<span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; {
+  <span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Contenido:"</span>, <span class="c-variable">reader</span>.<span class="c-prop">result</span>);
+});
+<span class="c-variable">reader</span>.<span class="c-func">readAsText</span>(<span class="c-prop">archivo</span>, <span class="c-string">"UTF-8"</span>);</code></pre>
+
+                            <!-- Zona Interactiva de Prueba -->
+                            <div class="file-drop-zone" id="dropZoneText" style="padding: 1.2rem;">
+                                <span class="drop-icon">📄</span>
+                                <div class="drop-text-primary">Selecciona o arrastra un archivo de texto</div>
+                                <div class="drop-text-secondary">Soporta .txt, .json, .csv o .md</div>
+                                <input type="file" id="inputLocalText" class="file-hidden-input" accept=".txt,.json,.csv,.md,text/*" />
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnLoadDemoText">
+                                    ▶ Cargar Documento de Prueba Demo
+                                </button>
+                                <span class="run-status" id="textReadStatus">Esperando archivo</span>
+                            </div>
+
+                            <div class="file-text-viewer" id="textViewerResult">Haz clic en "Cargar Documento de Prueba Demo" o selecciona tu propio archivo arriba para ver el texto extraído aquí...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: CODIFICACIÓN DATA URL CON readAsDataURL()
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Codificación Base64: readAsDataURL()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Codificación en Data URL con <code>readAsDataURL()</code></h2>
+                    <p class="section-desc">
+                        Convierte archivos binarios (imágenes, audios o documentos) en URIs Base64 autocontenidas:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-cyan">Esquema Data URI</span>
+                            </div>
+                            <p>
+                                <strong><code>reader.readAsDataURL(blob)</code></strong>
+                                lee los bytes crudos del archivo y genera una cadena con el siguiente formato:
+                            </p>
+                            <div class="identity-expr" style="margin: 0.6rem 0;">
+                                <code>data:[&lt;mediatype&gt;][;base64],&lt;datos-codificados&gt;</code>
+                            </div>
+                            <p>
+                                <strong>Ventaja inmediata:</strong> Puede asignarse de forma directa al atributo <code>src</code> de un elemento <code>&lt;img&gt;</code>,
+                                <code>&lt;video&gt;</code> o como fondo CSS sin necesidad de subir la imagen a ningún servidor.
+                            </p>
+                            <div class="visual-box" style="margin-top: 0.8rem;">
+                                <span class="vis-icon">💡</span>
+                                <div class="vis-text">
+                                    <strong>¿Sabías que?</strong>
+                                    <small>Base64 incrementa el peso del archivo aproximadamente un 33% respecto a sus bytes binarios originales.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Demostración Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">previsualizador_imagen.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-dataurl" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-dataurl"><span class="c-keyword">const</span> <span class="c-variable">reader</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+<span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; {
+  <span class="c-variable">imgPreview</span>.<span class="c-prop">src</span> = <span class="c-variable">reader</span>.<span class="c-prop">result</span>; <span class="c-comment">// Base64 Data URL</span>
+});
+<span class="c-variable">reader</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivoImagen</span>);</code></pre>
+
+                            <!-- Zona Interactiva de Imagen -->
+                            <div class="file-drop-zone" id="dropZoneImage" style="padding: 1.2rem;">
+                                <span class="drop-icon">🖼️</span>
+                                <div class="drop-text-primary">Selecciona o arrastra una imagen</div>
+                                <div class="drop-text-secondary">PNG, JPG, SVG, WebP o GIF</div>
+                                <input type="file" id="inputLocalImage" class="file-hidden-input" accept="image/*" />
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnLoadDemoImage">
+                                    ▶ Cargar Imagen Demo
+                                </button>
+                                <span class="run-status" id="imageReadStatus">Sin imagen</span>
+                            </div>
+
+                            <div class="file-image-preview-container" id="imagePreviewContainer">
+                                <span id="imagePreviewPlaceholder" style="color: var(--text-muted); font-size: 0.85rem;">
+                                    Aquí aparecerá la imagen previsualizada con su Data URL...
+                                </span>
+                                <img id="imagePreviewElement" class="file-image-preview" style="display: none;" alt="Vista previa" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: CARGA DE MÚLTIPLES ARCHIVOS & GALERÍA MULTIARCHIVO
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="Carga de Varios Archivos &amp; Galería Multiarquivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Caso Práctico 01</span>
+                    <h2>Carga de Múltiples Archivos (Multi-File Loader) &amp; Galería Dinámica</h2>
+                    <p class="section-desc">
+                        Aprende a procesar colecciones completas de archivos seleccionados mediante <code>&lt;input multiple&gt;</code> o Drag &amp; Drop en paralelo:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">Procesamiento Paralelo de FileList</span>
+                            </div>
+                            <p>
+                                Al añadir el atributo <code>multiple</code> a un <code>&lt;input type="file"&gt;</code> o recibir varios archivos por Drag &amp; Drop, el navegador entrega un <code>FileList</code>.
+                            </p>
+                            <ol style="padding-left: 1.2rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem;">
+                                <li>Convertir la colección con <code>Array.from(e.target.files)</code>.</li>
+                                <li><strong>Detectar el tipo MIME:</strong>
+                                    <ul style="padding-left: 1rem; margin-top: 0.3rem;">
+                                        <li><code>image/*</code> ➔ leer con <code>readAsDataURL()</code> (miniaturas).</li>
+                                        <li><code>text/*</code>, <code>.json</code>, <code>.csv</code> ➔ leer con <code>readAsText()</code>.</li>
+                                        <li>Binarios ➔ leer con <code>readAsArrayBuffer()</code>.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Instanciar un nuevo <code>FileReader</code> para CADA archivo</strong> (evita la excepción <code>InvalidStateError</code>).</li>
+                                <li>Renderizar tarjetas interactivas con tamaño, estado y previsualización.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Sección Interactiva: Carga de Varios Archivos -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">carga_multiples_archivos.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-gallery" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-gallery"><span class="c-comment">// Procesar múltiples archivos de cualquier tipo</span>
+<span class="c-func">Array</span>.<span class="c-func">from</span>(<span class="c-variable">archivos</span>).<span class="c-func">forEach</span>(<span class="c-prop">archivo</span> =&gt; {
+  <span class="c-keyword">const</span> <span class="c-variable">lector</span> = <span class="c-keyword">new</span> <span class="c-func">FileReader</span>();
+  <span class="c-keyword">if</span> (<span class="c-prop">archivo</span>.<span class="c-prop">type</span>.<span class="c-func">startsWith</span>(<span class="c-string">"image/"</span>)) {
+    <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">mostrarMiniatura</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
+    <span class="c-variable">lector</span>.<span class="c-func">readAsDataURL</span>(<span class="c-prop">archivo</span>);
+  } <span class="c-keyword">else</span> {
+    <span class="c-variable">lector</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"load"</span>, () =&gt; <span class="c-func">mostrarTexto</span>(<span class="c-variable">lector</span>.<span class="c-prop">result</span>));
+    <span class="c-variable">lector</span>.<span class="c-func">readAsText</span>(<span class="c-prop">archivo</span>, <span class="c-string">"UTF-8"</span>);
+  }
+});</code></pre>
+
+                            <!-- Zona de Arrastre para Varios Archivos -->
+                            <div class="multifile-drop-zone" id="dropZoneMultiple">
+                                <span class="drop-icon">📂</span>
+                                <div class="drop-text-primary">Arrastra y suelta varios archivos aquí</div>
+                                <div class="drop-text-secondary">Soporta cualquier combinación: imágenes, documentos, JSON, CSV o texto</div>
+                            </div>
+
+                            <!-- Botones de Acción -->
+                            <div class="multifile-actions-bar">
+                                <button class="btn-run-action" id="btnSelectMultipleFiles">
+                                    📁 Cargar Varios Archivos
+                                </button>
+                                <button class="btn-run-action" id="btnLoadDemoMultiFiles" style="background: rgba(255,255,255,0.08);">
+                                    ⚡ Lote Demo Multiarchivo
+                                </button>
+                                <button class="btn-run-action" id="btnSelectMultipleImages" style="background: rgba(255,255,255,0.05);" title="Filtrar solo imágenes">
+                                    🖼️ Solo Fotos
+                                </button>
+                                <button class="btn-run-action" id="btnClearMultiFiles" style="background: rgba(244,63,94,0.12); border-color: rgba(244,63,94,0.25); color: var(--rose);">
+                                    🗑️ Limpiar
+                                </button>
+                                <input type="file" id="inputMultipleFiles" class="file-hidden-input" multiple />
+                                <input type="file" id="inputMultipleGallery" class="file-hidden-input" accept="image/*" multiple />
+                            </div>
+
+                            <!-- Barra de Estadísticas y Conteo -->
+                            <div class="multifile-stats-bar" id="multiFilesStatsBar">
+                                <span>Archivos en memoria: <strong class="multifile-stats-badge" id="multiFilesCount">0</strong></span>
+                                <span>Peso total: <strong class="multifile-stats-badge" id="multiFilesTotalSize">0 KB</strong></span>
+                            </div>
+
+                            <!-- Lista Scrollable de Archivos Procesados -->
+                            <div class="multifile-list-container" id="multiFilesListContainer">
+                                <div style="text-align: center; color: var(--text-dim); padding: 1.2rem; font-size: 0.85rem;">
+                                    Pulsa <strong>"📁 Cargar Varios Archivos"</strong>, <strong>"⚡ Lote Demo Multiarchivo"</strong> o arrastra archivos arriba para procesarlos en paralelo...
+                                </div>
+                            </div>
+
+                            <!-- Panel de Previsualización del Archivo Seleccionado -->
+                            <div class="multifile-preview-panel" id="multiFilePreviewBox">
+                                <div class="multifile-preview-header">
+                                    <span id="multiFilePreviewTitle">📄 Vista Previa de Contenido</span>
+                                    <button class="btn-close-preview" id="btnCloseMultiPreview" title="Cerrar vista previa">✕</button>
+                                </div>
+                                <div class="multifile-preview-body" id="multiFilePreviewBody">
+                                    <!-- Contenido inyectado dinámicamente -->
+                                </div>
+                            </div>
+
+                            <!-- Galería tradicional de imágenes (respaldo compatible) -->
+                            <div class="file-gallery-grid" id="galleryGridContainer" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: COMBINACIÓN CON DRAG & DROP
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="Integración Drag &amp; Drop">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Caso Práctico 02</span>
+                    <h2>Integración de FileReader con la API de Drag &amp; Drop</h2>
+                    <p class="section-desc">
+                        Permite a los usuarios arrastrar archivos directamente desde su escritorio a la aplicación:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">e.dataTransfer.files</span>
+                            </div>
+                            <p>
+                                Al arrastrar archivos desde el explorador del sistema operativo, el navegador expone los archivos en <code>e.dataTransfer.files</code>.
+                            </p>
+                            <div class="highlight-callout">
+                                ⚠️ <strong>Regla de Oro:</strong> Es indispensable llamar a <code>e.preventDefault()</code> en los eventos <code>dragover</code> y <code>drop</code>, de lo contrario el navegador intentará abrir el archivo en la pestaña actual.
+                            </div>
+                            <p style="margin-top: 0.7rem;">
+                                <strong>Feedback visual:</strong> Escucha <code>dragenter</code> y <code>dragleave</code> para añadir o remover clases de resaltado visual en la zona de aterrizaje.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Drop Zone Interactiva -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">zona_arrastre_completa.js</span>
+                            </div>
+
+                            <div class="file-drop-zone" id="interactiveMainDropZone">
+                                <span class="drop-icon">📥</span>
+                                <div class="drop-text-primary">Arrastra y suelta aquí cualquier archivo</div>
+                                <div class="drop-text-secondary">Detecta automáticamente imágenes o texto plano</div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 0.8rem;">
+                                <div class="mutation-result-box" id="dropZoneResultBox">
+                                    Estado: Esperando que sueltes un archivo en la zona de arrastre superior...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: CICLO DE VIDA DE EVENTOS
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Ciclo de Vida de Eventos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Arquitectura &amp; Eventos</span>
+                    <h2>El Ciclo de Vida de Eventos de FileReader</h2>
+                    <p class="section-desc">
+                        Comprende la secuencia cronológica y los estados asíncronos del proceso de lectura:
+                    </p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Evento</th>
+                                <th>Momento de Disparo</th>
+                                <th>Propiedades Clave</th>
+                                <th>Uso Recomendado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>loadstart</code></td>
+                                <td>Comienza la lectura del archivo.</td>
+                                <td><code>e.loaded = 0</code></td>
+                                <td>Mostrar spinners, modales o inicializar barras de progreso.</td>
+                            </tr>
+                            <tr>
+                                <td><code>progress</code></td>
+                                <td>Durante la lectura continua de bytes.</td>
+                                <td><code>e.lengthComputable</code>, <code>e.loaded</code>, <code>e.total</code></td>
+                                <td>Calcular porcentaje: <code>(loaded / total) * 100</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>load</code></td>
+                                <td>Lectura finalizada con éxito.</td>
+                                <td><code>reader.result</code> disponible</td>
+                                <td>Renderizar texto o asignar Base64 a la imagen.</td>
+                            </tr>
+                            <tr>
+                                <td><code>error</code></td>
+                                <td>Ocurre un error de lectura o permisos.</td>
+                                <td><code>reader.error</code></td>
+                                <td>Mostrar mensaje de error al usuario y loguear fallo.</td>
+                            </tr>
+                            <tr>
+                                <td><code>abort</code></td>
+                                <td>Se cancela la operación con <code>reader.abort()</code>.</td>
+                                <td>Lectura interrumpida</td>
+                                <td>Botones de "Cancelar carga" en archivos pesados.</td>
+                            </tr>
+                            <tr>
+                                <td><code>loadend</code></td>
+                                <td>Conclusión definitiva (éxito, error o aborto).</td>
+                                <td>Ciclo cerrado</td>
+                                <td>Ocultar loaders, resetear botones y liberar memoria.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: LABORATORIO DE PROGRESO EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Simulador de Barra de Progreso">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Laboratorio 03</span>
+                    <h2>Monitoreo de Progreso en Tiempo Real con <code>progress</code> y <code>loadend</code></h2>
+                    <p class="section-desc">
+                        Simula o experimenta con la lectura de archivos de gran tamaño calculando el avance de bytes:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna Explicativa -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">Fórmula de Progreso</span>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-progress"><span class="c-variable">reader</span>.<span class="c-func">addEventListener</span>(<span class="c-string">"progress"</span>, (<span class="c-prop">e</span>) =&gt; {
+  <span class="c-keyword">if</span> (<span class="c-prop">e</span>.<span class="c-prop">lengthComputable</span>) {
+    <span class="c-keyword">const</span> <span class="c-variable">porcentaje</span> = <span class="c-func">Math</span>.<span class="c-func">round</span>((<span class="c-prop">e</span>.<span class="c-prop">loaded</span> / <span class="c-prop">e</span>.<span class="c-prop">total</span>) * <span class="c-number">100</span>);
+    <span class="c-variable">barra</span>.<span class="c-prop">style</span>.<span class="c-prop">width</span> = <span class="c-variable">porcentaje</span> + <span class="c-string">"%"</span>;
+  }
+});</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Columna Simulador de Progreso -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <span class="file-name">simulador_progreso_pesado.js</span>
+                            </div>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnStartProgressSim">
+                                    ▶ Iniciar Simulación de Lectura (8 MB)
+                                </button>
+                                <button class="btn-run-action" id="btnAbortProgressSim" style="background: rgba(244, 63, 94, 0.2); border-color: var(--rose);">
+                                    ⏹ Cancelar (abort)
+                                </button>
+                            </div>
+
+                            <div class="file-progress-wrapper">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="font-weight: 600; font-size: 0.88rem;" id="progressFileName">video_render_4k.mp4</span>
+                                    <span style="font-size: 0.82rem; color: var(--cyan);" id="progressPercentLabel">0%</span>
+                                </div>
+                                <div class="file-progress-bar-bg">
+                                    <div class="file-progress-bar-fill" id="fileProgressBarFill"></div>
+                                </div>
+                                <div class="file-progress-stats">
+                                    <span id="progressBytesLoaded">0 KB leídos</span>
+                                    <span id="progressBytesTotal">Total: 8,192 KB</span>
+                                </div>
+                            </div>
+
+                            <div class="char-interactive-card" style="margin-top: 0.8rem;">
+                                <div class="mutation-result-box" id="progressEventLogBox">
+                                    Estado: Listo para iniciar la lectura y registrar eventos en tiempo real...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Analogías del Mundo Real">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🎙️ 🚚</span>
+                    <h2>Analogías del Mundo Real: El Traductor y la Báscula de Granos</h2>
+                    <p class="section-desc">
+                        Interioriza de forma intuitiva los conceptos esenciales de la FileReader API:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Analogía -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Selecciona la analogía del temario que deseas explorar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-analogy="traductor">
+                                <span class="tool-icon">🎙️</span>
+                                <span class="tool-name">1. El Traductor en Cabina (readAsText vs readAsDataURL)</span>
+                            </button>
+                            <button class="tool-btn" data-analogy="bascula">
+                                <span class="tool-icon">🚚</span>
+                                <span class="tool-name">2. La Báscula de Granos (progress y loadend)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A -->
+                        <div class="workshop-card" id="analogyCardLeft">
+                            <div class="ws-avatar" id="analogyAvatarLeft">🎙️</div>
+                            <div class="ws-header">
+                                <h3 id="analogyTitleLeft">readAsText()</h3>
+                                <span class="ws-sub" id="analogySubLeft">Traducción directa a lenguaje humano</span>
+                            </div>
+                            <div class="ws-items" id="analogyItemsLeft">
+                                <div class="ws-item">El traductor lee una carta y te dicta las palabras en español</div>
+                                <div class="ws-item">El resultado es una cadena de texto lista para ser leída y comprendida</div>
+                            </div>
+                            <div class="ws-status" id="analogyStatusLeft">
+                                Ideal para archivos de configuración, notas y código
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span id="analogyArrowLabel">Comparativa</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B -->
+                        <div class="workshop-card" id="analogyCardRight">
+                            <div class="ws-avatar" id="analogyAvatarRight">🖼️</div>
+                            <div class="ws-header">
+                                <h3 id="analogyTitleRight">readAsDataURL()</h3>
+                                <span class="ws-sub" id="analogySubRight">Telegrama en código Morse (Base64)</span>
+                            </div>
+                            <div class="ws-items" id="analogyItemsRight">
+                                <div class="ws-item highlight-item">Codifica cada pixel en una sola línea continua de caracteres</div>
+                                <div class="ws-item highlight-item">No está hecho para personas, sino para que el navegador lo pinte</div>
+                            </div>
+                            <div class="ws-status" id="analogyStatusRight">
+                                Ideal para atributos src en imágenes y miniaturas
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="analogyBanner">
+                        <span class="banner-icon" id="analogyBannerIcon">🎙️</span>
+                        <span class="banner-text" id="analogyBannerText">
+                            <strong>readAsText vs readAsDataURL:</strong> Usa <code>readAsText()</code> cuando necesites procesar texto, editar líneas o parsear JSON; usa <code>readAsDataURL()</code> para renderizar recursos visuales sin tocar el backend.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: PLAYGROUND INTERACTIVO
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Laboratorio de Código">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground &amp; Sandbox</span>
+                    <h2>Laboratorio de Código: Experimenta con la FileReader API</h2>
+                    <p class="section-desc">
+                        Ejecuta los ejemplos del temario en vivo o prueba soluciones a retos con nuestra consola virtual:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-file-1">
+                                        1. Lectura de archivo de texto con readAsText()
+                                    </option>
+                                    <option value="preset-file-2">
+                                        2. Codificación Base64 con readAsDataURL()
+                                    </option>
+                                    <option value="preset-file-3">
+                                        3. Carga y previsualización de galería múltiple
+                                    </option>
+                                    <option value="preset-file-4">
+                                        4. Integración completa con Drag &amp; Drop
+                                    </option>
+                                    <option value="preset-file-5">
+                                        5. Monitoreo de bytes y eventos con progress
+                                    </option>
+                                    <option value="preset-file-6">
+                                        6. Cancelación de lectura asíncrona con abort()
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida (FileReader Activo)</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: RESUMEN, RETOS Y SOLUCIONARIO
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Resumen &amp; Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet &amp; Solucionario</span>
+                    <h2>Resumen Maestro y Retos Prácticos Paso a Paso</h2>
+                    <p class="section-desc">
+                        Asegura tu comprensión resolviendo los 3 retos de aplicación real de la FileReader API:
+                    </p>
+                </div>
+
+                <!-- Acordeón de Retos -->
+                <div class="accordion-container">
+                    <!-- Reto 1 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>Reto 1: Lector y Validador JSON Seguro con try / catch</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Crea una función que reciba un archivo <code>.json</code>, lo lea con <code>readAsText()</code> y parsee el contenido con <code>JSON.parse()</code> dentro de un bloque seguro para alertar al usuario si la sintaxis del archivo está corrompida.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file1">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>Reto 2: Zona Drag &amp; Drop con Discriminación de Tipo MIME</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Construye una zona de arrastre que examine <code>archivo.type</code>: si es una imagen, léela con <code>readAsDataURL()</code> e insértala en una galería; si es texto o código, léela con <code>readAsText()</code> y muéstrala en un bloque <code>&lt;pre&gt;</code>.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file2">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Producción</span>
+                            <h3>Reto 3: Lector Pesado con Barra de Progreso y Cancelación (abort)</h3>
+                            <span class="accordion-icon">▼</span>
+                        </div>
+                        <div class="accordion-body">
+                            <p><strong>Enunciado:</strong> Implementa una clase <code>FileUploaderManager</code> que gestione la lectura de archivos con cálculo porcentual en el evento <code>progress</code> y permita al usuario abortar la operación en cualquier momento llamando a <code>reader.abort()</code>.</p>
+                            <div class="accordion-actions">
+                                <button class="btn-load-challenge" data-load-challenge="preset-ex-file3">
+                                    📂 Cargar Solución en el Playground
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumen en Tarjetas -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>100% en Cliente</h4>
+                        <p>Lee archivos locales en memoria sin requerir transferencias al servidor.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>readAsText()</h4>
+                        <p>Ideal para strings, archivos de configuración, markdown, JSON y código.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>readAsDataURL()</h4>
+                        <p>Genera URIs Base64 listas para asignar a atributos <code>src</code> de imágenes.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Eventos &amp; Progreso</h4>
+                        <p>Monitorea bytes leídos con <code>progress</code> y limpia recursos en <code>loadend</code>.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Instancias Únicas</h4>
+                        <p>Nunca reutilices la misma instancia de <code>FileReader</code> simultáneamente.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 11: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="ArrayBuffer, abort() y Cheatsheet">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Nivel Avanzado & Referencia</span>
+                    <h2 class="slide-title">10. Lectura Binaria, Alternativas Modernas y Cheatsheet</h2>
+                    <p class="slide-description">Domina la lectura binaria, cancelación de lecturas pesadas y métodos modernos de File/Blob.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🧱</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">readAsArrayBuffer() y abort()</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>reader.readAsArrayBuffer(file);
+// Cancelar lectura en curso:
+reader.abort();</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Ideal para procesar bytes crudos o enviar buffers binarios a Web Workers.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">⚡</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Alternativas Modernas</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const txt = await file.text();
+const url = URL.createObjectURL(file);</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">file.text() y createObjectURL() simplifican vistas previas sin Base64.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>readAsText() -> texto plano/JSON
+readAsDataURL() -> imágenes en Base64
+progress -> e.loaded / e.total</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Usa el evento progress con lengthComputable para barras de carga.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: FileReader API</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

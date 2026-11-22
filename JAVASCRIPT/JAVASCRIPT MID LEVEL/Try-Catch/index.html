@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manejo de Errores (Try-Catch) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%9B%A1%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · ERRORES</span><div class="brand-title"><span>🛡️</span><span>Manejo de Errores (Try-Catch)</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Manejo de Errores (Try-Catch)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">try / catch</span><span class="badge badge-purple">finally</span><span class="badge badge-emerald">throw new Error</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Manejo de Errores (Try-Catch)</span></h1>
+                <p class="hero-subtitle">Captura errores en tiempo de ejecución para evitar que tu aplicación se rompa y muestra mensajes útiles al usuario.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Manejo de Errores (Try-Catch)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Manejo de Errores (Try-Catch)?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Captura errores en tiempo de ejecución para evitar que tu aplicación se rompa y muestra mensajes útiles al usuario.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> <code>try</code> es la red de seguridad de un trapecista: si algo falla adentro, <code>catch</code> lo atrapa sin caer al vacío.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Bloque try / catch / finally">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Bloque try / catch / finally</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>try {
+  const data = JSON.parse(textoInvalido);
+} catch (err) {
+  console.error("JSON inválido:", err.message);
+} finally {
+  ocultarLoader();
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="Cerrar archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · TRY-CATCH.md</span>
+                <h2 class="slide-title">Cerrar archivos</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>finally{
+
+    archivo.close();
+
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="Cerrar conexiones">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · TRY-CATCH.md</span>
+                <h2 class="slide-title">Cerrar conexiones</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>finally{
+
+    conexion.close();
+
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="Ocultar loaders">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · TRY-CATCH.md</span>
+                <h2 class="slide-title">Ocultar loaders</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>finally{
+
+    ocultarSpinner();
+
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># TRY CATCH FINALLY COMPLETO</p>
+<pre class="code-block"><code>try{
+
+    conectar();
+
+    obtenerDatos();
+
+}
+catch(error){
+
+    console.log(
+        error.message
+    );
+
+}
+finally{
+
+    desconectar();
+</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># PROPAGACIÓN DE ERRORES</p>
+<p style="margin-bottom:8px;line-height:1.6;"># DEFINICIÓN</p>
+<p style="margin-bottom:8px;line-height:1.6;">Los errores pueden viajar entre funciones.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># EJEMPLO</p>
+<pre class="code-block"><code>function c(){
+
+    throw new Error(
+        &quot;Error&quot;
+    );
+
+}
+
+function b(){
+
+    c();
+
+}
+
+function a(){
+
+    b();
+</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># DIAGRAMA</p>
+<pre class="code-block"><code>a()
+ ↓
+b()
+ ↓
+c()
+ ↓
+ERROR
+ ↑
+b()
+ ↑
+a()</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># RE-THROWING</p>
+<p style="margin-bottom:8px;line-height:1.6;"># ¿QUÉ ES?</p>
+<p style="margin-bottom:8px;line-height:1.6;">Volver a lanzar una excepción.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># EJEMPLO</p>
+<pre class="code-block"><code>try{
+
+    ejecutar();
+
+}
+catch(error){
+
+    console.log(
+        &quot;Registrando...&quot;
+    );
+
+    throw error;
+
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># ¿PARA QUÉ SIRVE?</p>
+<p style="margin-bottom:8px;line-height:1.6;">Permite registrar el error y seguir propagándolo.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># 🚀 CASOS PRÁCTICOS REALES</p>
+<p style="margin-bottom:8px;line-height:1.6;"># LOGIN</p>
+<pre class="code-block"><code>try{
+
+    login();
+
+}
+catch(error){
+
+    mostrarMensaje(
+        &quot;Usuario incorrecto&quot;
+    );
+
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># API</p>
+<pre class="code-block"><code>try{
+
+    obtenerDatos();
+
+}
+catch(error){
+
+    mostrarError();
+
+}</code></pre>
+<p style="margin-bottom:8px;line-height:1.6;"># BANCO</p>
+<pre class="code-block"><code>try{
+
+    retirarDinero();
+
+}
+catch(error){
+
+    console.log(
+        &quot;Operación cancelada&quot;
+    );
+
+}</code></pre></div>
+        </section>
+        <section class="slide" data-slide="7" data-doc-slide="true" data-title="Utilizar mensajes descriptivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · TRY-CATCH.md</span>
+                <h2 class="slide-title">Utilizar mensajes descriptivos</h2>
+            </div>
+            <div class="glass-card"><pre class="code-block"><code>throw new Error(
+    &quot;Saldo insuficiente&quot;
+);</code></pre></div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Tip:</strong> Siempre lanza errores descriptivos con <code>throw new Error("Mensaje")</code>.</div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Manejo de Errores (Try-Catch)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="finally se ejecuta siempre tras try/catch." data-err="catch solo corre si hay error; finally corre siempre."><div class="quiz-q-title">1. ¿Qué bloque se ejecuta SIEMPRE al final, haya habido error o no?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">finally</button><button class="quiz-option" data-opt="b">catch</button><button class="quiz-option" data-opt="c">throw</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Manejo de Errores (Try-Catch)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  try { JSON.parse(&#x27;{mal json}&#x27;); }
+  catch (e) { document.getElementById(&#x27;out&#x27;).textContent = &#x27;Error capturado: &#x27; + e.message; }
+&lt;/script&gt;">Try-Catch en Vivo</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  try { JSON.parse(&#x27;{mal json}&#x27;); }
+  catch (e) { document.getElementById(&#x27;out&#x27;).textContent = &#x27;Error capturado: &#x27; + e.message; }
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch API — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
+    <header class="top-nav">
+        <div class="nav-brand"><span class="brand-badge">JS MID · PETICIONES MODERNAS</span><div class="brand-title"><span>🚀</span><span>Fetch API</span></div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 10</div></div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Fetch API">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">fetch(url)</span><span class="badge badge-purple">response.ok</span><span class="badge badge-emerald">res.json()</span></div>
+                <h1 class="hero-title">JS Mid Level:<br /><span class="gradient-text">Fetch API</span></h1>
+                <p class="hero-subtitle">Consume APIs REST modernas de forma nativa usando Promesas y <code>async/await</code> sin librerías externas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Concepto y Analogía</h3><p>Entiende el propósito real en aplicaciones web.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">💻</div><h3>2. Sintaxis y Ejemplos</h3><p>Código listo para copiar y probar.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🧪</div><h3>3. Laboratorio JS</h3><p>Ejecuta JavaScript en vivo dentro de la guía.</p></div>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="2" data-title="Fundamentos: Fetch API">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span><h2 class="slide-title">¿Qué es Fetch API?</h2></div>
+            <div class="glass-card"><h3>🎯 Propósito en JavaScript moderno</h3><p style="line-height:1.65;">Consume APIs REST modernas de forma nativa usando Promesas y <code>async/await</code> sin librerías externas.</p></div>
+            <div class="callout callout-analogy"><strong>🧠 Modelo mental:</strong> <code>fetch()</code> es la evolución moderna de AJAX: devuelve una Promesa que primero resuelve la respuesta HTTP y luego el cuerpo JSON.</div>
+        </section>
+        <section class="slide" data-slide="3" data-title="Patrón seguro con fetch()">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y USO</span><h2 class="slide-title">Patrón seguro con fetch()</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const res = await fetch("https://api.ejemplo.com/items");
+if (!res.ok) throw new Error(`HTTP ${res.status}`);
+const data = await res.json();</code></pre></div>
+        </section>
+        <section class="slide" data-slide="4" data-doc-slide="true" data-title="Nivel 1">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FETCH.md</span>
+                <h2 class="slide-title">Nivel 1</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Escribe un script utilizando la API Fetch nativa que consuma una lista de tareas simulada, valide mediante <code>response.ok</code> que no existan fallos en la comunicación y procese el resultado usando el lector <code>.text()</code> para imprimirlo tal cual en pantalla.</p></div>
+        </section>
+        <section class="slide" data-slide="5" data-doc-slide="true" data-title="Nivel 2">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FETCH.md</span>
+                <h2 class="slide-title">Nivel 2</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Crea un visualizador de imágenes dinámico. Debes realizar un <code>fetch()</code> hacia la URL de una imagen en internet, capturar su flujo binario puro usando el método de lectura de cuerpo <code>.blob()</code>, transformarlo en una URL válida del sistema de archivos e inyectarlo en el atributo <code>.src</code> de un elemento de imagen del DOM.</p></div>
+        </section>
+        <section class="slide" data-slide="6" data-doc-slide="true" data-title="Nivel 3">
+            <div class="slide-header">
+                <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · FETCH.md</span>
+                <h2 class="slide-title">Nivel 3</h2>
+            </div>
+            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Toma el ejercicio anterior de registro de usuarios mediante <code>POST</code> y realízalo utilizando la sintaxis condensada y moderna de la biblioteca <strong>Axios</strong>. Asegúrate de simular una respuesta de error del servidor de tipo <code>403 Forbidden</code> para demostrar cómo es interceptado directamente por el bloque del <code>catch</code>.</p>
+<p style="margin-bottom:8px;line-height:1.6;"># Resumen</p>
+<ul class="styled-list">
+<li>*   <strong>API Fetch</strong> es el estándar moderno basado en <strong>Promesas</strong> para realizar peticiones asíncronas de manera nativa en el navegador, reemplazando el esquema antiguo de XHR.</li>
+<li>*   Fetch opera en <strong>dos fases</strong>: la verificación inicial de la llegada del mensaje y la descarga/conversión posterior del cuerpo.</li>
+<li>*   El cuerpo de las respuestas de Fetch debe procesarse mediante lectores asíncronos específicos: <strong><code>json()</code></strong>, <strong><code>text()</code></strong>, <strong><code>blob()</code></strong>, <strong><code>formData()</code></strong> o <strong><code>arrayBuffer()</code></strong>.</li>
+<li>*   <strong>Axios</strong> es una potente librería externa que simplifica la experiencia de desarrollo al automatizar el parseo a JSON, rechazar promesas en errores HTTP (4xx/5xx) y empaquetar herramientas como interceptores globales.</li>
+</ul>
+<p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
+<table class="compare-table"><thead><tr><th>Elemento / API</th><th>Propósito</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>fetch(url, options)</code></td><td>Inicia una petición HTTP basada en Promesas.</td><td><code>await fetch(&quot;/api/users&quot;, { method: &quot;GET&quot; })</code></td></tr><tr><td><code>res.ok</code> / <code>res.status</code></td><td>Verifica éxito HTTP (<code>200–299</code>) y código numérico.</td><td><code>if (!res.ok) throw new Error(res.status)</code></td></tr><tr><td><code>res.json()</code> / <code>res.text()</code></td><td>Lee el stream del cuerpo como JSON o texto plano.</td><td><code>const data = await res.json()</code></td></tr><tr><td><code>res.blob()</code> / <code>res.arrayBuffer()</code></td><td>Lee datos binarios (imágenes, PDFs, audio).</td><td><code>const img = await res.blob()</code></td></tr><tr><td><code>res.clone()</code></td><td>Clona una <code>Response</code> para leer el cuerpo dos veces.</td><td><code>const copy = res.clone()</code></td></tr><tr><td><code>new Headers(obj)</code></td><td>Manipula cabeceras HTTP de forma segura.</td><td><code>headers.set(&quot;Authorization&quot;, &quot;Bearer ...&quot;)</code></td></tr><tr><td><code>new Request(url, init)</code></td><td>Encapsula una petición reutilizable.</td><td><code>const req = new Request(url, { method: &quot;POST&quot; })</code></td></tr><tr><td><code>new FormData(form)</code></td><td>Envía formularios y archivos <code>multipart/form-data</code>.</td><td><code>fetch(url, { method: &quot;POST&quot;, body: formData })</code></td></tr><tr><td><code>new AbortController()</code></td><td>Permite cancelar manualmente una o más peticiones.</td><td><code>fetch(url, { signal: controller.signal })</code></td></tr><tr><td><code>AbortSignal.timeout(ms)</code></td><td>Cancela automáticamente si supera <code>ms</code> milisegundos.</td><td><code>fetch(url, { signal: AbortSignal.timeout(4000) })</code></td></tr></tbody></table>
+</div>
+        </section>
+        <section class="slide" data-slide="7" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-warn"><strong>⚠️ Trampa clásica:</strong> <code>fetch()</code> NO rechaza la promesa en un 404 o 500; siempre debes comprobar <code>if (!res.ok)</code>.</div>
+        </section>
+        <section class="slide" data-slide="8" data-title="Quiz: Fetch API">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="res.ok es true solo para respuestas exitosas (200-299)." data-err="Siempre valida res.ok porque fetch no lanza error en códigos 404/500."><div class="quiz-q-title">1. ¿Qué debes verificar antes de llamar a <code>res.json()</code> en <code>fetch()</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">if (!res.ok)</button><button class="quiz-option" data-opt="b">if (res.body)</button><button class="quiz-option" data-opt="c">if (res.url)</button></div><div class="quiz-feedback"></div></div></div>
+        </section>
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Fetch API">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const fakeJson = JSON.stringify({ status: &#x27;ok&#x27;, api: &#x27;Fetch API&#x27; });
+  new Response(fakeJson).json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Parseado: &#x27; + JSON.stringify(d));
+&lt;/script&gt;">Simulador Fetch Local</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const fakeJson = JSON.stringify({ status: &#x27;ok&#x27;, api: &#x27;Fetch API&#x27; });
+  new Response(fakeJson).json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Parseado: &#x27; + JSON.stringify(d));
+&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

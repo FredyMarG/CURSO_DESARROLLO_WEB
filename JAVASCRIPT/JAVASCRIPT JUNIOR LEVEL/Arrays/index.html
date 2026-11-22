@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Junior — Guía Interactiva de Arrays</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css">
+    <script src="../../../RESOURCES COURSE/junior-theme.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%9A%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body>
+    <div class="app-shell">
+                <nav class="jr-top-nav" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px;padding:10px 16px;background:rgba(15,23,42,0.85);border:1px solid rgba(56,189,248,0.28);border-radius:14px;backdrop-filter:blur(12px);">
+            <span style="font-family:monospace;font-size:0.78rem;color:#38bdf8;font-weight:700;">🌱 JS JUNIOR LEVEL</span>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <a href="../DOCUMENTACION/index.html" style="color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);">📘 Apuntes</a>
+                <a href="../../../index.html" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:#38bdf8;">🏠 Portal Principal</a>
+            </div>
+        </nav>
+        <header class="hero">
+            <span class="badge">Módulo 05 · Colecciones ES2023+</span>
+            <h1>Arrays y Métodos Funcionales</h1>
+            <p>Manipula colecciones en vivo: métodos mutables (<code>push</code>, <code>pop</code>, <code>shift</code>), transformación funcional (<code>map</code>, <code>filter</code>, <code>reduce</code>) e inmutabilidad ES2023 (<code>toSorted</code>, <code>toReversed</code>, <code>with</code>).</p>
+        </header>
+
+        
+        <section id="jrDocSlides" class="card" style="margin-bottom:20px;border:1px solid rgba(56,189,248,0.35);background:rgba(15,23,42,0.88);padding:20px;border-radius:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (ARRAYS.md, ARRAYS_METHODS.md)</span>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;">
+                    <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
+                    <button type="button" id="jrNextBtn" style="padding:6px 12px;cursor:pointer;">Siguiente ➡</button>
+                    <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;font-size:0.84rem;font-weight:600;text-decoration:none;margin-left:6px;">Ver Apuntes ↗</a>
+                </div>
+            </div>
+            
+            <div class="jr-slide" data-idx="0" style="display:block;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">1. Creación y Acceso a Elementos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>// Forma estándar (Array Literal)
+const lenguajes = [&quot;HTML&quot;, &quot;CSS&quot;, &quot;JavaScript&quot;, &quot;TypeScript&quot;];
+
+// Acceso tradicional por índice (base 0)
+console.log(lenguajes[0]);                    // &quot;HTML&quot;
+console.log(lenguajes[lenguajes.length - 1]); // &quot;TypeScript&quot;
+
+// Acceso moderno con .at() (ES2022) — soporta índices negativos
+console.log(lenguajes.at(0));   // &quot;HTML&quot;
+console.log(lenguajes.at(-1));  // &quot;TypeScript&quot; (último elemento)
+console.log(lenguajes.at(-2));  // &quot;JavaScript&quot; (penúltimo)</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Creación avanzada con <code>Array.from()</code></h4>
+<p style="margin:6px 0;line-height:1.6;">Útil para convertir iterables (<code>string</code>, <code>Set</code>, <code>NodeList</code>) o generar secuencias:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const letras = Array.from(&quot;Hola&quot;); // [&quot;H&quot;, &quot;o&quot;, &quot;l&quot;, &quot;a&quot;]
+const rango = Array.from({ length: 5 }, (_, i) =&gt; i + 1); // [1, 2, 3, 4, 5]</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="1" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">2. Destructuring y Operador Spread (...)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><h4 style="margin:10px 0 4px;color:#38bdf8;">Destructuring de Arrays (ES6)</h4>
+<p style="margin:6px 0;line-height:1.6;">Extrae elementos por posición en variables limpias:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const coordenadas = [19.4326, -99.1332, 2240];
+const [latitud, longitud, altitud = 0] = coordenadas;
+
+// Saltar elementos o capturar el resto con Rest (...)
+const [primero, , ...resto] = [&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;];
+// primero = &quot;A&quot;, resto = [&quot;C&quot;, &quot;D&quot;]</code></pre>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">Operador Spread (<code>...</code>)</h4>
+<p style="margin:6px 0;line-height:1.6;">Expande los elementos de un array. Es fundamental para <strong>copiar</strong> o <strong>combinar</strong> arrays sin mutar los originales:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const base = [1, 2, 3];
+const copiaSuperficial = [...base];         // [1, 2, 3] (nuevo array)
+const combinado = [0, ...base, 4, 5];       // [0, 1, 2, 3, 4, 5]</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="2" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">3. Mutabilidad vs Inmutabilidad</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Comprender qué métodos modifican el array original y cuáles devuelven uno nuevo evita errores difíciles de rastrear (especialmente en frameworks como React o Vue).</p>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">A. Métodos Mutables (Modifican el array original)</h4>
+<table class="compare-table"><thead><tr><th>Método</th><th>Descripción</th><th>Retorno</th></tr></thead><tbody><tr><td><code>.push(x)</code></td><td>Añade al <strong>final</strong></td><td>Nueva longitud</td></tr><tr><td><code>.pop()</code></td><td>Elimina del <strong>final</strong></td><td>Elemento eliminado</td></tr><tr><td><code>.unshift(x)</code></td><td>Añade al <strong>inicio</strong></td><td>Nueva longitud</td></tr><tr><td><code>.shift()</code></td><td>Elimina del <strong>inicio</strong></td><td>Elemento eliminado</td></tr><tr><td><code>.splice(i, n, ...items)</code></td><td>Elimina/inserta en cualquier posición</td><td>Array con eliminados</td></tr><tr><td><code>.reverse()</code></td><td>Invierte el orden en su lugar</td><td>El mismo array</td></tr><tr><td><code>.sort(fn)</code></td><td>Ordena en su lugar</td><td>El mismo array</td></tr></tbody></table>
+<h4 style="margin:10px 0 4px;color:#38bdf8;">B. Alternativas Inmutables (Devuelven un array nuevo)</h4>
+<p style="margin:6px 0;line-height:1.6;">Desde <strong>ES2023</strong>, JavaScript incluye versiones inmutables de los métodos clásicos de ordenamiento y reemplazo:</p>
+<table class="compare-table"><thead><tr><th>Método Inmutable</th><th>Equivalente Mutable</th><th>¿Qué hace?</th></tr></thead><tbody><tr><td><code>.toSorted(fn)</code></td><td><code>.sort(fn)</code></td><td>Devuelve una copia ordenada sin tocar el original</td></tr><tr><td><code>.toReversed()</code></td><td><code>.reverse()</code></td><td>Devuelve una copia invertida</td></tr><tr><td><code>.toSpliced(i, n, ...items)</code></td><td><code>.splice(...)</code></td><td>Devuelve una copia con elementos eliminados/insertados</td></tr><tr><td><code>.with(indice, valor)</code></td><td><code>arr[i] = valor</code></td><td>Devuelve una copia reemplazando un índice (soporta negativos)</td></tr><tr><td><code>.slice(inicio, fin)</code></td><td>—</td><td>Extrae una porción en un nuevo array</td></tr><tr><td><code>.concat(...otros)</code></td><td>—</td><td>Une arrays en uno nuevo</td></tr></tbody></table>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const originales = [30, 10, 20];
+
+const ordenados = originales.toSorted((a, b) =&gt; a - b);
+console.log(originales); // [30, 10, 20] (intacto)
+console.log(ordenados);  // [10, 20, 30]
+
+const actualizado = originales.with(-1, 99); // [30, 10, 99]</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="3" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">4. Comprobación de Tipos: Array.isArray()</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Como <code>typeof []</code> devuelve <code>&quot;object&quot;</code>, la única forma estándar de verificar si un valor es un array es:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>Array.isArray([1, 2, 3]); // true
+Array.isArray(&quot;hola&quot;);    // false
+Array.isArray(null);      // false</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="4" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="padding-left:20px;margin:6px 0;line-height:1.6;">
+<li>* <strong>Usar <code>.sort()</code> sin función comparadora en números:</strong> <code>[10, 2, 1].sort()</code> devuelve <code>[1, 10, 2]</code> porque convierte los elementos a texto y ordena alfabéticamente. Usa <code>(a, b) =&gt; a - b</code>.</li>
+<li>* <strong>Copiar arrays con <code>=</code>:</strong> <code>const copia = original</code> no copia el array; ambas variables apuntan al mismo espacio en memoria. Usa <code>[...original]</code>.</li>
+<li>* <strong>Comparar arrays con <code>===</code>:</strong> <code>[1, 2] === [1, 2]</code> es <code>false</code> porque compara referencias en memoria, no contenido.</li>
+<li>* **Dejar huecos (*sparse arrays*):** Asignar <code>arr[10] = &quot;x&quot;</code> en un array de 2 elementos crea 8 espacios vacíos (<code>empty</code>).</li>
+</ul></div>
+            </div>
+        </section>
+        <script>
+        (function(){
+            const box = document.getElementById('jrDocSlides');
+            if(!box) return;
+            const slides = Array.from(box.querySelectorAll('.jr-slide'));
+            const ind = document.getElementById('jrSlideInd');
+            const prev = document.getElementById('jrPrevBtn');
+            const next = document.getElementById('jrNextBtn');
+            let cur = 0;
+            function show(n){
+                cur = Math.max(0, Math.min(slides.length - 1, n));
+                slides.forEach((s, i) => s.style.display = i === cur ? 'block' : 'none');
+                ind.textContent = `Diapositiva ${cur + 1} / ${slides.length}`;
+                prev.disabled = cur === 0;
+                next.disabled = cur === slides.length - 1;
+            }
+            prev.addEventListener('click', () => show(cur - 1));
+            next.addEventListener('click', () => show(cur + 1));
+            show(0);
+        })();
+        </script>
+
+        <main class="grid">
+            <!-- Tarjeta 1: Mutación en vivo -->
+            <section class="card" aria-labelledby="ar1">
+                <h2 id="ar1">1. Métodos Mutables (Pila y Cola)</h2>
+                <p class="note">Agrega o quita elementos del array <code>frutas</code> y observa cómo cambia su contenido y longitud.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-fruta">Nueva fruta:</label>
+                        <input id="input-fruta" type="text" placeholder="Ej: Mango" value="Mango">
+                    </div>
+                    <div class="row">
+                        <button type="button" data-arr="push">push()</button>
+                        <button type="button" data-arr="pop" class="secondary">pop()</button>
+                        <button type="button" data-arr="unshift">unshift()</button>
+                        <button type="button" data-arr="shift" class="secondary">shift()</button>
+                        <button type="button" data-arr="reset" class="secondary">Reset</button>
+                    </div>
+                </div>
+                <pre class="code-preview">frutas.push("Mango"); frutas.at(-1); // último</pre>
+                <div id="out-arr-mut" class="output" aria-live="polite"></div>
+            </section>
+
+            <!-- Tarjeta 2: map, filter, reduce -->
+            <section class="card" aria-labelledby="ar2">
+                <h2 id="ar2">2. Pipeline Funcional (<code>filter</code> → <code>map</code> → <code>reduce</code>)</h2>
+                <p class="note">Procesa el array de precios <code>[40, 120, 85, 210, 30]</code> sin mutar el original.</p>
+                <div class="controls">
+                    <div>
+                        <label for="input-min-precio">Filtrar precios mayores o iguales a ($):</label>
+                        <input id="input-min-precio" type="number" value="80" min="0">
+                    </div>
+                    <button id="btn-pipeline" type="button">Ejecutar Pipeline (+10% desc.)</button>
+                </div>
+                <pre class="code-preview">precios.filter(p => p >= min).map(p => p * 0.9)</pre>
+                <div id="out-pipeline" class="output" aria-live="polite">Presiona el botón para ver cada etapa del pipeline.</div>
+            </section>
+
+            <!-- Tarjeta 3: Inmutables ES2023 -->
+            <section class="card" aria-labelledby="ar3">
+                <h2 id="ar3">3. Métodos Inmutables ES2023</h2>
+                <p class="note"><code>.toSorted()</code>, <code>.toReversed()</code> y <code>.with()</code> devuelven una copia nueva dejando el array original <code>[30, 5, 100, 20]</code> intacto.</p>
+                <div class="row">
+                    <button type="button" data-es2023="sort">.toSorted((a,b) => a - b)</button>
+                    <button type="button" data-es2023="rev" class="secondary">.toReversed()</button>
+                    <button type="button" data-es2023="with" class="secondary">.with(-1, 999)</button>
+                </div>
+                <pre class="code-preview">const ordenados = nums.toSorted((a, b) => a - b);</pre>
+                <div id="out-es2023" class="output" aria-live="polite">Original: [30, 5, 100, 20]</div>
+            </section>
+        </main>
+
+        <section class="console-panel" aria-label="Consola en vivo">
+            <div class="console-header">
+                <h2>Registro de Consola en Vivo</h2>
+                <button id="btn-limpiar-log" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="live-console" class="console-log" aria-live="polite"></div>
+        </section>
+    </div>
+
+    <script src="arrays.js"></script>
+</body>
+</html>
+
+

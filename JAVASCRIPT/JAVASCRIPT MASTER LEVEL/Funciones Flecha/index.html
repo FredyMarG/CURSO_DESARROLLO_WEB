@@ -1,0 +1,1162 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Guía y laboratorio interactivo completo sobre Funciones Flecha, Contexto Léxico, Closures, Recursividad y Desestructuración en JavaScript ES6+." />
+    <title>Funciones Flecha & Conceptos Avanzados | JS Master Level</title>
+    <script src="app.js" defer></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8F%B9%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+
+<body class="mode-presentation">
+    <!-- Elementos de Fondo Ambientales -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-glow glow-3"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra Superior de Navegación & Control -->
+    <header class="top-nav" id="topNav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MASTER LEVEL</span>
+            <div class="brand-title">
+                <span class="icon-proto">⚡</span>
+                <span class="title-text">Funciones Flecha & Conceptos Avanzados</span>
+            </div>
+        </div>
+
+        <!-- Progreso de la Presentación -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
+        </div>
+
+        <!-- Controles de la Aplicación -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html" title="Volver al Portal Principal" style="text-decoration:none;">🏠 Portal</a>
+            <button class="nav-btn" id="btnGoLab" title="Ir directo al Laboratorio Interactivo (Slide 10)">🧪 Lab</button>
+            <button class="nav-btn" id="btnToggleMode" title="Alternar entre Modo Diapositivas y Modo Documento">
+                <span class="btn-icon" id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound" title="Activar/Desactivar efectos de audio">
+                <span class="btn-icon" id="soundIcon">🔊</span>
+            </button>
+            <button class="nav-btn" id="btnOverview" title="Ver cuadrícula de diapositivas (Tecla 'O')">
+                <span class="btn-icon">▦</span>
+            </button>
+            <button class="nav-btn" id="btnFullscreen" title="Pantalla completa (Tecla 'F')">
+                <span class="btn-icon">⛶</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenedor Principal de Diapositivas / Secciones -->
+    <main class="presentation-wrapper" id="presentationWrapper">
+        <!-- ==============================================
+             SLIDE 1: PORTADA & BIENVENIDA
+             ============================================== -->
+        <section class="slide active" id="slide-1" data-slide="1" data-title="Inicio: Funciones Flecha">
+            <div class="slide-content hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-purple">ECMAScript 6 (ES6 - 2015)</span>
+                    <span class="badge badge-cyan">Junior → Semi Senior</span>
+                    <span class="badge badge-emerald">Ámbito Léxico & Patrones ES6+</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Funciones Flecha
+                    <span class="gradient-text">&amp; Conceptos Avanzados</span> en JavaScript
+                </h1>
+
+                <p class="hero-subtitle">
+                    Domina el comportamiento integral de las <strong>funciones flecha</strong>, el control inmutable del contexto
+                    <code>this</code> léxico, y asimila patrones clave como la <strong>recursividad</strong>, los <strong>closures</strong>,
+                    los <strong>parámetros Rest</strong> y la <strong>desestructuración moderna</strong> en firmas de funciones.
+                </p>
+
+                <div class="hero-card-grid">
+                    <div class="hero-mini-card" data-jump="2">
+                        <div class="mini-card-icon">⚡</div>
+                        <h3>Retorno Implícito</h3>
+                        <p>Sintaxis compacta y expresiva sin llaves ni return.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="4">
+                        <div class="mini-card-icon">🪞</div>
+                        <h3>'this' Léxico</h3>
+                        <p>Inmutabilidad contextual: hereda el entorno padre.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="7">
+                        <div class="mini-card-icon">🔄</div>
+                        <h3>Recursión &amp; Closures</h3>
+                        <p>Estructuras autorreferenciales y encapsulación privada.</p>
+                    </div>
+                    <div class="hero-mini-card" data-jump="8">
+                        <div class="mini-card-icon">🗂️</div>
+                        <h3>Rest &amp; Desestructuración</h3>
+                        <p>Firmas de parámetros limpias, modernas y tipadas.</p>
+                    </div>
+                </div>
+
+                <div class="hero-cta-group">
+                    <button class="cta-btn primary-btn" id="btnStartPresentation">
+                        <span>Iniciar Presentación Interactiva</span>
+                        <span class="arrow-icon">→</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" data-jump="10">
+                        <span>Ir al Playground en Vivo</span>
+                        <span class="code-tag">&lt;/&gt;</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 2: ORIGEN & SINTAXIS COMPACTA
+             ============================================== -->
+        <section class="slide" id="slide-2" data-slide="2" data-title="Origen y Retorno Implícito">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 01</span>
+                    <h2>¿Por qué aparecieron las Funciones Flecha?</h2>
+                    <p class="section-desc">
+                        Introducidas en <strong>ECMAScript 6 (2015)</strong>, resolvieron dos dolores de cabeza históricos del lenguaje:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Concepto -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">Los 2 Grandes Objetivos de ES6</span>
+                            </div>
+                            <p>
+                                <strong>1. Reducir la verbosidad excesiva:</strong> Eliminar la repetición constante
+                                de las palabras clave <code>function</code> y <code>return</code> en callbacks y operaciones cortas.
+                            </p>
+                            <p>
+                                <strong>2. La pérdida de contexto de <code>this</code>:</strong> Evitar la mutación involuntaria
+                                del contexto dentro de métodos internos, callbacks o temporizadores como <code>setInterval</code>.
+                            </p>
+                            <p class="highlight-callout">
+                                💡 <strong>Retorno Implícito:</strong> Si el cuerpo contiene una sola expresión,
+                                se omiten las llaves <code>{}</code> y la palabra <code>return</code>. JavaScript evalúa y devuelve el resultado inmediatamente.
+                            </p>
+                        </div>
+
+                        <div class="vs-container">
+                            <div class="vs-box class-box">
+                                <h4>Función Tradicional (Pre-ES6)</h4>
+                                <ul>
+                                    <li>Verbosa: requiere <code>function</code> y <code>return</code>.</li>
+                                    <li>Crea su propio <code>this</code> dependiente de la llamada.</li>
+                                    <li>Obligaba a usar trucos como <code>var self = this;</code> o <code>.bind(this)</code>.</li>
+                                </ul>
+                            </div>
+                            <div class="vs-box proto-box">
+                                <h4>Función Flecha (ES6+)</h4>
+                                <ul>
+                                    <li>Sintaxis limpia en una línea: <code>x =&gt; x * 2</code>.</li>
+                                    <li>Retorno implícito automático.</li>
+                                    <li>Conserva el <code>this</code> léxico de su entorno de origen.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Código Interactivo -->
+                    <div class="code-column">
+                        <div class="code-panel">
+                            <div class="code-panel-header">
+                                <div class="terminal-dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <span class="file-name">comparativa_sintaxis.js</span>
+                                <button class="btn-copy-code" data-target="code-sample-1" title="Copiar código">
+                                    Copiar
+                                </button>
+                            </div>
+                            <pre class="code-block"><code id="code-sample-1"><span class="c-comment">// 1. Forma Tradicional (Verbosa):</span>
+<span class="c-keyword">const</span> <span class="c-variable">duplicarTradicional</span> = <span class="c-keyword">function</span>(<span class="c-prop">numero</span>) {
+    <span class="c-keyword">return</span> <span class="c-prop">numero</span> * <span class="c-number">2</span>;
+};
+
+<span class="c-comment">// 2. Forma Moderna (Retorno Implícito en una línea):</span>
+<span class="c-keyword">const</span> <span class="c-variable">duplicarFlecha</span> = <span class="c-prop">numero</span> =&gt; <span class="c-prop">numero</span> * <span class="c-number">2</span>;
+
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Tradicional:"</span>, <span class="c-variable">duplicarTradicional</span>(<span class="c-number">5</span>)); <span class="c-comment">// 10</span>
+<span class="c-keyword">console</span>.<span class="c-func">log</span>(<span class="c-string">"Flecha     :"</span>, <span class="c-variable">duplicarFlecha</span>(<span class="c-number">5</span>));      <span class="c-comment">// 10</span></code></pre>
+
+                            <div class="interactive-test-bar">
+                                <button class="btn-run-action" id="btnTestArrowIntro">
+                                    ▶ Probar Comparativa en Vivo
+                                </button>
+                                <span class="run-status" id="testArrowIntroStatus">Listo para ejecutar</span>
+                            </div>
+
+                            <div class="mini-console" id="console-output-1">
+                                <div class="console-prompt">
+                                    &gt; Haz clic en "Probar Comparativa en Vivo" para evaluar la respuesta del motor JS...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 3: REGLAS DE PARÁMETROS & OBJETOS LITERALES
+             ============================================== -->
+        <section class="slide" id="slide-3" data-slide="3" data-title="Parámetros y Objetos">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 02</span>
+                    <h2>Reglas de Parámetros y Retorno de Objetos Literales</h2>
+                    <p class="section-desc">
+                        Aprende cuándo los paréntesis <code>()</code> son obligatorios u opcionales y cómo resolver
+                        la ambigüedad sintáctica al retornar objetos en una sola línea.
+                    </p>
+                </div>
+
+                <div class="comparison-grid">
+                    <!-- Tarjeta 1: Parámetros -->
+                    <div class="comparison-card card-constructor">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-cyan">Sintaxis de Entrada</span>
+                            <h3>Reglas de Paréntesis</h3>
+                            <span class="comp-subtitle">A la izquierda de la flecha (=&gt;)</span>
+                        </div>
+                        <div class="comp-body">
+                            <ul style="padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li><strong>0 parámetros:</strong> Paréntesis obligatorios <code>() =&gt; ...</code></li>
+                                <li><strong>1 parámetro:</strong> Paréntesis opcionales <code>x =&gt; ...</code></li>
+                                <li><strong>2+ parámetros:</strong> Paréntesis obligatorios <code>(a, b) =&gt; ...</code></li>
+                                <li><strong>Desestructuración / Rest:</strong> Paréntesis obligatorios <code>({id}) =&gt; ...</code></li>
+                            </ul>
+                            <div class="visual-box">
+                                <span class="vis-icon">📝</span>
+                                <div class="vis-text">
+                                    <strong>Regla de oro:</strong>
+                                    <small>Solo un identificador único y solitario puede prescindir de los paréntesis.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Puente -->
+                    <div class="comparison-bridge">
+                        <div class="bridge-arrow">
+                            <span>Ambigüedad</span>
+                            <div class="arrow-flow">➔</div>
+                        </div>
+                        <div class="bridge-caption">Las Llaves {}</div>
+                    </div>
+
+                    <!-- Tarjeta 2: Objeto Literal -->
+                    <div class="comparison-card card-instance">
+                        <div class="comp-header">
+                            <span class="comp-badge badge-emerald">Retorno de Objetos</span>
+                            <h3>El Dilema de las Llaves {}</h3>
+                            <span class="comp-subtitle">Bloque vs. Objeto Literal</span>
+                        </div>
+                        <div class="comp-body">
+                            <p>
+                                Las llaves definen tanto bloques de código como objetos literales.
+                                <code>(id) =&gt; { id: 1 }</code> se interpreta como bloque con etiqueta y retorna <code>undefined</code>.
+                            </p>
+                            <div class="visual-box">
+                                <span class="vis-icon">🎯</span>
+                                <div class="vis-text">
+                                    <strong>Solución: Envolver con paréntesis ({})</strong>
+                                    <small><code>(id, nom) =&gt; ({ id, nom })</code> devuelve el objeto correctamente.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo -->
+                <div class="identity-checker">
+                    <div class="identity-expr">
+                        <code>const crear = (id, nombre) =&gt; ({ id, nombre }); // ¡Retorno de Objeto Literal Exitoso!</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnCheckObjectReturn">
+                        🔍 Probar Retorno de Objeto en Vivo
+                    </button>
+                    <div class="identity-result" id="objectReturnResult">
+                        Haz clic para ejecutar la prueba y verificar si devuelve el objeto real o undefined...
+                    </div>
+                </div>
+
+                <!-- Tabla de Referencia -->
+                <div class="table-responsive">
+                    <table class="proto-table">
+                        <thead>
+                            <tr>
+                                <th>Cantidad / Tipo de Parámetros</th>
+                                <th>¿Paréntesis Requeridos?</th>
+                                <th>Ejemplo de Sintaxis</th>
+                                <th>Comportamiento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Cero parámetros</td>
+                                <td>✅ <strong>Obligatorios</strong></td>
+                                <td><code>() =&gt; Date.now()</code></td>
+                                <td>Ejecuta sin argumentos</td>
+                            </tr>
+                            <tr>
+                                <td>Exactamente uno</td>
+                                <td>⚪ <em>Opcionales</em></td>
+                                <td><code>x =&gt; x * x</code></td>
+                                <td>Sintaxis ultra compacta</td>
+                            </tr>
+                            <tr>
+                                <td>Dos o más</td>
+                                <td>✅ <strong>Obligatorios</strong></td>
+                                <td><code>(a, b) =&gt; a + b</code></td>
+                                <td>Separados por comas</td>
+                            </tr>
+                            <tr>
+                                <td>Retorno de Objeto Literal</td>
+                                <td>✅ <strong>Requiere ({ })</strong></td>
+                                <td><code>() =&gt; ({ ok: true })</code></td>
+                                <td>Retorna objeto intacto</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 4: EL CONTEXTO LÉXICO DE 'this'
+             ============================================== -->
+        <section class="slide" id="slide-4" data-slide="4" data-title="El Contexto Léxico de 'this'">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Fundamento 03</span>
+                    <h2>El Comportamiento de 'this' Contextual (Ámbito Léxico)</h2>
+                    <p class="section-desc">
+                        Las funciones flecha <strong>no tienen su propio <code>this</code></strong>. En su lugar, capturan y fijan
+                        el <code>this</code> del contexto circundante donde fueron declaradas (*lexical scope*).
+                    </p>
+                </div>
+
+                <!-- SIMULADOR INTERACTIVO DE 'this' -->
+                <div class="chain-simulator-container">
+                    <div class="simulator-controls">
+                        <span class="sim-label">Selecciona el Escenario de Ejecución de 'this':</span>
+                        <div class="sim-buttons-group">
+                            <button class="sim-prop-btn active" data-this-case="callback">
+                                1. Callback en setInterval / setTimeout
+                            </button>
+                            <button class="sim-prop-btn" data-this-case="arrayMap">
+                                2. Iteración interna con Array.prototype.map()
+                            </button>
+                            <button class="sim-prop-btn" data-this-case="global">
+                                3. Declarada en Ámbito Global
+                            </button>
+                            <button class="sim-prop-btn" data-this-case="method">
+                                4. Método de Objeto Literal (Antipatrón)
+                            </button>
+                        </div>
+                        <button class="cta-btn primary-btn btn-run-chain" id="btnCompareThisModes">
+                            ⚡ Comparar: Función Tradicional vs. Función Flecha
+                        </button>
+                    </div>
+
+                    <!-- Comparador Visual Paralelo -->
+                    <div class="silent-error-comparison-grid">
+                        <!-- Columna Tradicional -->
+                        <div class="error-mode-card card-sloppy" id="cardTradResult">
+                            <div class="mode-header">
+                                <span class="badge badge-amber">Función Tradicional (this dinámico)</span>
+                                <h4>Comportamiento Variable</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalTrad">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-danger" id="statusTrad">
+                                ⚠️ 'this' muta según cómo se invoque (pierde el objeto padre).
+                            </div>
+                        </div>
+
+                        <!-- Columna Flecha -->
+                        <div class="error-mode-card card-strict" id="cardArrowResult">
+                            <div class="mode-header">
+                                <span class="badge badge-emerald">Función Flecha (this léxico)</span>
+                                <h4>Comportamiento Inmutable</h4>
+                            </div>
+                            <div class="mode-terminal" id="terminalArrow">
+                                <div class="term-line">&gt; Esperando simulación...</div>
+                            </div>
+                            <div class="mode-status status-safe" id="statusArrow">
+                                🛡️ 'this' se conserva intacto del entorno padre donde se creó.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chain-live-feedback" id="thisFeedback">
+                        <span class="feedback-icon">ℹ️</span>
+                        <span class="feedback-text" id="thisFeedbackText">
+                            Selecciona un caso y pulsa <strong>"Comparar: Función Tradicional vs. Función Flecha"</strong>
+                            para inspeccionar el valor exacto de <code>this</code> en tiempo real.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 5: 'this' EN MODO ESTRICTO Y call/apply/bind
+             ============================================== -->
+        <section class="slide" id="slide-5" data-slide="5" data-title="call(), apply() y bind()">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Inmutabilidad Contextual</span>
+                    <h2>Comportamiento con call(), apply(), bind() y Modo Estricto</h2>
+                    <p class="section-desc">
+                        Las funciones flecha son inmunes a los métodos de alteración dinámica de contexto.
+                        El primer parámetro (el objeto contexto) es <strong>completamente ignorado</strong>:
+                    </p>
+                </div>
+
+                <div class="characteristics-container">
+                    <!-- Selector de Pestañas -->
+                    <div class="char-tabs" id="contextTabs">
+                        <button class="char-tab-btn active" data-ctx="1">
+                            <span class="char-num">5.1</span>
+                            <span class="char-title">Invocación con call()</span>
+                        </button>
+                        <button class="char-tab-btn" data-ctx="2">
+                            <span class="char-num">5.2</span>
+                            <span class="char-title">Invocación con apply()</span>
+                        </button>
+                        <button class="char-tab-btn" data-ctx="3">
+                            <span class="char-num">5.3</span>
+                            <span class="char-title">Impacto de 'use strict'</span>
+                        </button>
+                    </div>
+
+                    <!-- Panel de Contenido -->
+                    <div class="char-display-panel" id="contextDisplayPanel">
+                        <!-- Item 1: call() -->
+                        <div class="char-detail-view active" id="ctx-view-1">
+                            <div class="char-view-header">
+                                <span class="badge badge-purple">5.1 Invocación mediante .call()</span>
+                                <h3>El primer argumento de contexto es ignorado por completo</h3>
+                            </div>
+                            <p class="char-text">
+                                En una función tradicional, <code>fn.call({ nombre: "Carlos" })</code> fuerza a que <code>this</code> sea dicho objeto.
+                                En una función flecha, los argumentos de datos se reciben normalmente, pero el <code>this</code> suministrado
+                                se descarta, manteniendo el <code>this</code> original donde nació la flecha.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestCallIgnored">
+                                    ▶ Probar .call() con Función Flecha
+                                </button>
+                                <div class="mutation-result-box" id="callIgnoredResult">
+                                    Haz clic para comprobar cómo call() no puede cambiar el this...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 2: apply() -->
+                        <div class="char-detail-view" id="ctx-view-2">
+                            <div class="char-view-header">
+                                <span class="badge badge-cyan">5.2 Invocación mediante .apply()</span>
+                                <h3>El arreglo de argumentos se procesa, el contexto no</h3>
+                            </div>
+                            <p class="char-text">
+                                Al igual que con <code>.call()</code>, pasar un objeto de contexto en el primer argumento de <code>.apply(objetoContexto, [args])</code>
+                                no tiene ningún efecto sobre el <code>this</code> de la función flecha. Los elementos del array se envían como parámetros sin problema.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestApplyIgnored">
+                                    ▶ Probar .apply() con Función Flecha
+                                </button>
+                                <div class="mutation-result-box" id="applyIgnoredResult">
+                                    Haz clic para comprobar cómo apply() transmite datos pero ignora el contexto...
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Item 3: use strict -->
+                        <div class="char-detail-view" id="ctx-view-3">
+                            <div class="char-view-header">
+                                <span class="badge badge-emerald">5.3 Inmunidad a las Reglas de 'use strict' sobre 'this'</span>
+                                <h3>En el ámbito global, no se convierte en undefined</h3>
+                            </div>
+                            <p class="char-text">
+                                En modo estricto, invocar una función tradicional de forma suelta en el ámbito global establece <code>this = undefined</code>.
+                                Una función flecha declarada en el ámbito global hereda el objeto global (como <code>window</code> en el navegador o <code>module.exports</code> en Node),
+                                ignorando la regla del modo estricto para funciones independientes.
+                            </p>
+                            <div class="char-interactive-card">
+                                <button class="btn-run-action" id="btnTestStrictThis">
+                                    ▶ Probar 'this' Global en Strict Mode
+                                </button>
+                                <div class="mutation-result-box" id="strictThisResult">
+                                    Haz clic para comprobar la diferencia entre función tradicional y flecha...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 6: RESTRICCIONES TÉCNICAS
+             ============================================== -->
+        <section class="slide" id="slide-6" data-slide="6" data-title="Restricciones Técnicas">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Anatomía del Motor V8</span>
+                    <h2>Restricciones Técnicas: Métodos, 'new', 'arguments' y Sintaxis</h2>
+                    <p class="section-desc">
+                        Las funciones flecha son estructuras ultraligeras sin overhead de prototipos. Conoce sus 4 límites técnicos:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Tarjeta 1: Sin new -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ SIN CONSTRUCTOR [[Construct]]</span>
+                            <h4>Prohibido el uso de 'new'</h4>
+                        </div>
+                        <p>
+                            Carecen del método interno <code>[[Construct]]</code>. Ejecutar <code>new MiFlecha()</code>
+                            arroja un <code>TypeError: MiFlecha is not a constructor</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const F = () =&gt; {}; new F(); // ❌ TypeError</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Sin arguments ni prototype -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ SIN ARGUMENTS NI PROTOTYPE</span>
+                            <h4>Memoria Ultraligera</h4>
+                        </div>
+                        <p>
+                            No poseen el objeto <code>arguments</code> (usar <code>...args</code>) y su propiedad
+                            <code>.prototype</code> es estrictamente <code>undefined</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>F.prototype === undefined; // ✅ true</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Métodos de objetos -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ ANTIPATRÓN EN OBJETOS</span>
+                            <h4>No como Métodos de Objeto</h4>
+                        </div>
+                        <p>
+                            Capturan el <code>this</code> exterior (global), provocando que <code>this.propiedad</code> devuelva <code>undefined</code>.
+                            Usar métodos ES6 <code>metodo() {}</code>.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>obj = { v: 1, get: () =&gt; this.v }; // ❌ undefined</code>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Saltos de línea y yield -->
+                    <div class="practice-card bad">
+                        <div class="practice-header">
+                            <span class="status-pill pill-bad">❌ RESTRICCIONES DE PARSER</span>
+                            <h4>Saltos de Línea y 'yield'</h4>
+                        </div>
+                        <p>
+                            Prohibido salto de línea antes de <code>=&gt;</code> (SyntaxError). Prohibido el uso de <code>yield</code>
+                            (no pueden ser funciones generadoras).
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>(a, b) \n =&gt; a + b; // ❌ SyntaxError</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 7: RECURSIVIDAD Y CLOSURES
+             ============================================== -->
+        <section class="slide" id="slide-7" data-slide="7" data-title="Recursividad y Closures">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Patrones Avanzados</span>
+                    <h2>Funciones Recursivas y Cláusulas Léxicas (Closures)</h2>
+                    <p class="section-desc">
+                        Las funciones flecha se integran naturalmente con dos de los patrones más poderosos del lenguaje:
+                    </p>
+                </div>
+
+                <div class="two-columns-layout">
+                    <!-- Columna 1: Recursividad -->
+                    <div class="concept-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-purple">1. Recursividad en Funciones Flecha</span>
+                            </div>
+                            <p>
+                                Toda función recursiva requiere una <strong>condición base de salida</strong> para evitar desbordamientos
+                                (*Stack Overflow*). Al asignarse a una constante, la flecha puede referenciarse a sí misma con total seguridad:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-rec"><span class="c-keyword">const</span> <span class="c-variable">factorial</span> = <span class="c-prop">n</span> =&gt; {
+    <span class="c-keyword">if</span> (<span class="c-prop">n</span> &lt;= <span class="c-number">1</span>) <span class="c-keyword">return</span> <span class="c-number">1</span>; <span class="c-comment">// Condición base</span>
+    <span class="c-keyword">return</span> <span class="c-prop">n</span> * <span class="c-variable">factorial</span>(<span class="c-prop">n</span> - <span class="c-number">1</span>);
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestRecursion">
+                                    ▶ Calcular Factorial(5) en Vivo
+                                </button>
+                                <div class="mutation-result-box" id="recursionResult">
+                                    Haz clic para ejecutar la recursión...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna 2: Closures -->
+                    <div class="code-column">
+                        <div class="info-card">
+                            <div class="card-badge-header">
+                                <span class="badge badge-emerald">2. Cláusulas o Cierres (Closures)</span>
+                            </div>
+                            <p>
+                                Un <strong>closure</strong> le permite a una función flecha interna <strong>recordar y acceder a las variables privadas
+                                de su entorno externo</strong>, incluso después de que la función padre haya retornado:
+                            </p>
+                            <pre class="code-block" style="margin-top: 0.8rem;"><code id="code-sample-closure"><span class="c-keyword">const</span> <span class="c-variable">crearContador</span> = () =&gt; {
+    <span class="c-keyword">let</span> <span class="c-variable">cuentaPrivada</span> = <span class="c-number">0</span>;
+    <span class="c-keyword">return</span> {
+        <span class="c-func">incrementar</span>: () =&gt; ++<span class="c-variable">cuentaPrivada</span>,
+        <span class="c-func">obtener</span>: () =&gt; <span class="c-variable">cuentaPrivada</span>
+    };
+};</code></pre>
+                            <div class="char-interactive-card" style="margin-top: 1rem;">
+                                <button class="btn-run-action" id="btnTestClosure">
+                                    ▶ Probar Estado Privado del Closure
+                                </button>
+                                <div class="mutation-result-box" id="closureResult">
+                                    Haz clic para probar el contador protegido...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 8: PARÁMETROS MODERNOS: DEFAULT, REST & DESTRUCTURING
+             ============================================== -->
+        <section class="slide" id="slide-8" data-slide="8" data-title="Default, Rest y Desestructuración">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Sintaxis Moderna ES6+</span>
+                    <h2>Parámetros por Defecto, Parámetro Rest y Desestructuración</h2>
+                    <p class="section-desc">
+                        Herramientas modernas para firmas de funciones limpias, seguras y altamente legibles:
+                    </p>
+                </div>
+
+                <div class="best-practices-grid">
+                    <!-- Card 1: Default Params -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ PARÁMETROS POR DEFECTO</span>
+                            <h4>Valores de Respaldo Limpios</h4>
+                        </div>
+                        <p>
+                            Supera las antiguas validaciones con <code>||</code> o <code>typeof</code>. Se inicializan directamente en la firma:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const server = (p = 8080, t = 5000) =&gt; ...</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Rest Params -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ PARÁMETRO REST (...args)</span>
+                            <h4>Array Real en Lugar de arguments</h4>
+                        </div>
+                        <p>
+                            Captura argumentos infinitos en un Array legítimo con acceso a <code>.reduce()</code>, <code>.map()</code>, etc.
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const sum = (...n) =&gt; n.reduce((a, b) =&gt; a + b);</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Desestructuración Objetos -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ DESESTRUCTURACIÓN DE OBJETOS</span>
+                            <h4>Extracción por Nombre de Llave</h4>
+                        </div>
+                        <p>
+                            Extrae propiedades individuales con renombramiento y valores por defecto sin importar el orden:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const { tema, idioma = "es" } = config;</code>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Desestructuración en Firma -->
+                    <div class="practice-card good">
+                        <div class="practice-header">
+                            <span class="status-pill pill-good">✅ EN FIRMAS DE FUNCIONES</span>
+                            <h4>Funciones Desestructuradoras</h4>
+                        </div>
+                        <p>
+                            Desempaqueta el objeto entrante directamente en los parámetros de la función flecha:
+                        </p>
+                        <div class="code-snippet-tiny">
+                            <code>const enviar = ({ nombre, precio }) =&gt; ...</code>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Probador Interactivo de Desestructuración en Firma -->
+                <div class="identity-checker" style="margin-top: 1.5rem;">
+                    <div class="identity-expr">
+                        <code>const procesar = ({ id, nombre, precio = 0 }) =&gt; `Item #${id}: ${nombre} ($${precio})`;</code>
+                    </div>
+                    <button class="btn-check-identity" id="btnTestDestructuringParam">
+                        🔍 Probar Función Desestructuradora en Vivo
+                    </button>
+                    <div class="identity-result" id="destructuringParamResult">
+                        Haz clic para ejecutar el desempaquetado de propiedades en vivo...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 9: LAS 2 ANALOGÍAS DEL MUNDO REAL
+             ============================================== -->
+        <section class="slide" id="slide-9" data-slide="9" data-title="Analogías: Espejo y Archivador">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Metáforas Visuales 🪞 🗂️</span>
+                    <h2>Las Dos Grandes Analogías del Mundo Real</h2>
+                    <p class="section-desc">
+                        Dos modelos mentales intuitivos para dominar el contexto <code>this</code> y la desestructuración de parámetros:
+                    </p>
+                </div>
+
+                <div class="toolbox-interactive-wrapper">
+                    <!-- Selector de Metáfora -->
+                    <div class="tool-picker">
+                        <span class="picker-label">Elige la analogía que deseas explorar:</span>
+                        <div class="tools-btn-row">
+                            <button class="tool-btn active" data-analogy="mirror">
+                                <span class="tool-icon">🪞</span>
+                                <span class="tool-name">1. El Espejo Reflectante ('this' Léxico)</span>
+                            </button>
+                            <button class="tool-btn" data-analogy="robot">
+                                <span class="tool-icon">🗂️</span>
+                                <span class="tool-name">2. El Archivador Automatizado (Desestructuración)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dos Entornos Frente a Frente -->
+                    <div class="family-workshops">
+                        <!-- Lado A -->
+                        <div class="workshop-card" id="analogCardLeft">
+                            <div class="ws-avatar" id="analogAvatarLeft">📷</div>
+                            <div class="ws-header">
+                                <h3 id="analogTitleLeft">Cámara con Flash Propio</h3>
+                                <span class="ws-sub" id="analogSubLeft">Función Tradicional (this dinámico)</span>
+                            </div>
+                            <div class="ws-items" id="analogItemsLeft">
+                                <div class="ws-item">Al disparar, genera su propia luz contextual</div>
+                                <div class="ws-item">Altera la iluminación del cuarto según cómo se llame</div>
+                            </div>
+                            <div class="ws-status" id="analogStatusLeft">
+                                'this' cambia dinámicamente según la llamada
+                            </div>
+                        </div>
+
+                        <div class="ws-arrow-flow">
+                            <span>VS</span>
+                            <div class="arrow-beam">➔</div>
+                        </div>
+
+                        <!-- Lado B -->
+                        <div class="workshop-card" id="analogCardRight">
+                            <div class="ws-avatar" id="analogAvatarRight">🪞</div>
+                            <div class="ws-header">
+                                <h3 id="analogTitleRight">Espejo Plano Empotrado</h3>
+                                <span class="ws-sub" id="analogSubRight">Función Flecha (this léxico)</span>
+                            </div>
+                            <div class="ws-items" id="analogItemsRight">
+                                <div class="ws-item highlight-item">No tiene luz propia ni la crea</div>
+                                <div class="ws-item highlight-item">Refleja la iluminación del cuarto donde fue instalado</div>
+                            </div>
+                            <div class="ws-status" id="analogStatusRight">
+                                'this' es inmutable y hereda el del padre
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner de Conclusión -->
+                    <div class="toolbox-result-banner" id="analogyBanner">
+                        <span class="banner-icon" id="analogyBannerIcon">💡</span>
+                        <span class="banner-text" id="analogyBannerText">
+                            La función flecha nunca altera el contexto: refleja fielmente el 'this' que ya existía donde fue creada.
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 10: PLAYGROUND / CONSOLA EN VIVO
+             ============================================== -->
+        <section class="slide" id="slide-10" data-slide="10" data-title="Laboratorio en Vivo">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="section-tag">Playground & Sandbox</span>
+                    <h2>Laboratorio de Código: Prueba las Funciones Flecha</h2>
+                    <p class="section-desc">
+                        Experimenta con fragmentos de código interactivos. Carga ejemplos predefinidos de closures,
+                        recursión, desestructuración y contexto, o escribe tus propias funciones:
+                    </p>
+                </div>
+
+                <div class="playground-layout">
+                    <!-- Editor de Código -->
+                    <div class="editor-pane">
+                        <div class="editor-toolbar">
+                            <div class="preset-dropdown">
+                                <label for="codePresetSelect">Cargar Ejemplo:</label>
+                                <select id="codePresetSelect">
+                                    <option value="preset-arrow-1">
+                                        1. Retorno implícito vs. explícito
+                                    </option>
+                                    <option value="preset-arrow-2">
+                                        2. Retorno de objetos literales ({})
+                                    </option>
+                                    <option value="preset-arrow-3">
+                                        3. Ámbito léxico de 'this' en un temporizador
+                                    </option>
+                                    <option value="preset-arrow-4">
+                                        4. Recursividad con Arrow Functions (Factorial)
+                                    </option>
+                                    <option value="preset-arrow-5">
+                                        5. Closures y Variables Privadas
+                                    </option>
+                                    <option value="preset-arrow-6">
+                                        6. Parámetros Rest (...args) vs arguments
+                                    </option>
+                                    <option value="preset-arrow-7">
+                                        7. Desestructuración en Parámetros de Funciones
+                                    </option>
+                                    <option value="preset-arrow-8">
+                                        8. Fallo con 'new' y ausencia de [[Construct]]
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="btn-toolbar" id="btnResetCode" title="Restaurar código">
+                                    ↺ Restaurar
+                                </button>
+                                <button class="cta-btn primary-btn btn-run-editor" id="btnRunEditorCode">
+                                    ▶ Ejecutar Código (Ctrl + Enter)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="textarea-container">
+                            <textarea id="liveCodeEditor" spellcheck="false"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Consola Virtual de Resultados -->
+                    <div class="console-pane">
+                        <div class="console-toolbar">
+                            <div class="terminal-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">Consola Virtual de Salida</span>
+                            <button class="btn-clear-console" id="btnClearConsole">
+                                Limpiar
+                            </button>
+                        </div>
+
+                        <div class="console-logs-container" id="consoleLogsContainer">
+                            <div class="log-line info-line">
+                                <span class="log-time">[Consola lista]</span> Presiona "Ejecutar Código" para ver la salida...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             SLIDE 11: RESUMEN, RETOS Y CONCLUSIONES
+             ============================================== -->
+        <section class="slide" id="slide-11" data-slide="11" data-title="Resumen & Retos">
+            <div class="slide-content summary-slide">
+                <div class="slide-header">
+                    <span class="section-tag">Cheat Sheet & Retos Integradores</span>
+                    <h2>Resumen Maestro y los 3 Retos Integradores</h2>
+                    <p class="section-desc">
+                        Pon a prueba tus conocimientos con los 3 ejercicios integradores de la guía oficial:
+                    </p>
+                </div>
+
+                <!-- 3 Retos del Temario Actualizado -->
+                <div class="exercises-wrapper" style="margin-bottom: 2.5rem">
+                    <!-- Reto 1 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-cyan">Nivel 1 — Junior</span>
+                            <h3>calcularAreaCirculo en una línea</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Optimiza la función tradicional pasándola a una estructura flecha moderna con retorno implícito en una sola línea,
+                            eliminando paréntesis redundantes.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-arrow1">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-arrow-1">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-arrow-1">
+                            <pre><code>// Retorno implícito y 1 parámetro sin paréntesis:
+const calcularAreaCirculo = radio =&gt; Math.PI * radio * radio;
+
+console.log("Área radio 5:", calcularAreaCirculo(5));</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 2 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-purple">Nivel 2 — Semi Senior</span>
+                            <h3>crearCarrito con Closure & Desestructuración</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Crea <code>crearCarrito</code> que resguarde un array privado <code>const lista = []</code>.
+                            Retorna <code>agregarProducto({ nombre, precio })</code> desestructurando en la firma y <code>obtenerTotal()</code> sumando con reduce.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-arrow2">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-arrow-2">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-arrow-2">
+                            <pre><code>const crearCarrito = () =&gt; {
+    const lista = []; // Array privado por closure
+    return {
+        agregarProducto: ({ nombre, precio }) =&gt; lista.push({ nombre, precio }),
+        obtenerTotal: () =&gt; lista.reduce((tot, p) =&gt; tot + p.precio, 0)
+    };
+};
+const carrito = crearCarrito();
+carrito.agregarProducto({ nombre: "Laptop", precio: 1200 });
+console.log("Total:", carrito.obtenerTotal());</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Reto 3 -->
+                    <div class="exercise-card">
+                        <div class="ex-header">
+                            <span class="ex-level badge badge-emerald">Nivel 3 — Avanzado</span>
+                            <h3>Forzar .call() e Instanciar con 'new'</h3>
+                        </div>
+                        <p class="ex-desc">
+                            Intenta forzar el contexto con <code>.call()</code> e instanciar con <code>new</code> bajo bloques <code>try/catch</code>,
+                            imprimiendo las explicaciones técnicas basadas en la ausencia de <code>[[Construct]]</code>.
+                        </p>
+                        <div class="ex-footer">
+                            <button class="btn-ex-action" data-load-preset="preset-ex-arrow3">
+                                Cargar en Playground
+                            </button>
+                            <button class="btn-ex-solution" data-sol="sol-arrow-3">
+                                Ver Solución
+                            </button>
+                        </div>
+                        <div class="ex-solution-box" id="sol-arrow-3">
+                            <pre><code>const Api = (url) =&gt; { this.url = url; };
+// 1. call() ignora el primer parámetro de contexto:
+Api.call({ forzado: true });
+
+// 2. new arroja TypeError por carecer de [[Construct]]:
+try {
+    new Api();
+} catch (e) {
+    console.error("Excepción:", e.name, "-", e.message);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Mandamientos de Funciones Flecha -->
+                <div class="summary-cards-grid">
+                    <div class="summary-card">
+                        <div class="sum-icon">1️⃣</div>
+                        <h4>Retorno Implícito</h4>
+                        <p>Una sola expresión sin llaves ni return: conciso, limpio y funcional.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">2️⃣</div>
+                        <h4>'this' Léxico</h4>
+                        <p>No tienen 'this' propio; heredan y conservan el del entorno padre.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">3️⃣</div>
+                        <h4>Objetos con ({})</h4>
+                        <p>Para retornar objetos literales en una línea, envuélvelos siempre entre paréntesis.</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">4️⃣</div>
+                        <h4>Sin 'new' ni 'arguments'</h4>
+                        <p>Ultraligeras en RAM; para parámetros variables usa Rest (<code>...args</code>).</p>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="sum-icon">5️⃣</div>
+                        <h4>Closures &amp; Desestructuración</h4>
+                        <p>Ideales para fábricas de funciones y desempacado directo en firmas <code>({ prop })</code>.</p>
+                    </div>
+                </div>
+
+                <div class="summary-actions-bar">
+                    <button class="cta-btn primary-btn" id="btnRestartPresentation">
+                        <span>↺ Volver al Inicio</span>
+                    </button>
+                    <button class="cta-btn secondary-btn" id="btnCopySummaryCheat">
+                        <span>📋 Copiar Chuleta Rápida en Markdown</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    
+        <!-- ==============================================
+             SLIDE 12: CONCEPTOS COMPLEMENTARIOS & CHEATSHEET
+             ============================================== -->
+        <section class="slide" id="slide-12" data-slide="12" data-title="Solucionario & Cheatsheet Flecha">
+            <div class="slide-content">
+                <div class="slide-header">
+                    <span class="slide-badge">Referencia & Solucionario</span>
+                    <h2 class="slide-title">11. Solucionario Integrador y Hoja de Trucos</h2>
+                    <p class="slide-description">Repaso rápido de closures, recursividad, parámetros rest y diferencias clave frente a function tradicional.</p>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🔁</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Closures & Recursividad</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>const crearContador = (n = 0) => () => ++n;
+const fact = n => n <= 1 ? 1 : n * fact(n - 1);</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Las funciones flecha brillan en callbacks, cierres léxicos y expresiones funcionales.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">🎯</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Ámbito Léxico de 'this'</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>// Hereda 'this' del contexto padre
+// No usar como método ni con 'new'</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">No poseen arguments, prototype ni constructor propio.</p>
+                    </div>
+
+                    <div class="col-card" style="background: rgba(14,21,38,0.65); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 1.6rem;">📋</div>
+                        <h3 style="color: #38bdf8; font-size: 1.05rem;">Cheatsheet Rápido</h3>
+                        <pre style="background: rgba(5,8,17,0.85); padding: 0.7rem; border-radius: 8px; overflow-x: auto; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #e2e8f0;"><code>n => n * 2 // retorno implícito
+() => ({ id: 1 }) // objeto entre ()
+(...args) => args.length // rest</code></pre>
+                        <p style="font-size: 0.88rem; color: #94a3b8; line-height: 1.5;">Usa paréntesis obligatorios cuando retornas un objeto literal implícitamente.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra Inferior de Navegación Flotante -->
+    <nav class="bottom-controls" id="bottomControls">
+        <button class="ctrl-btn" id="btnPrevSlide" title="Diapositiva Anterior (Flecha Izquierda / 'A')">
+            <span class="ctrl-arrow">‹</span>
+            <span class="ctrl-text">Anterior</span>
+        </button>
+
+        <!-- Indicadores de bolitas clicables -->
+        <div class="slide-dots-container" id="slideDotsContainer">
+            <!-- Rellenado dinámicamente por JavaScript -->
+        </div>
+
+        <button class="ctrl-btn ctrl-btn-primary" id="btnNextSlide"
+            title="Diapositiva Siguiente (Flecha Derecha / Espacio / 'D')">
+            <span class="ctrl-text">Siguiente</span>
+            <span class="ctrl-arrow">›</span>
+        </button>
+    </nav>
+
+    <!-- Modal de Visión General (Overview Grid) -->
+    <div class="modal-overlay" id="overviewModal">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3>Índice Rápido de Diapositivas: Funciones Flecha &amp; Avanzado</h3>
+                <button class="btn-close-modal" id="btnCloseOverview">✕</button>
+            </div>
+            <div class="modal-grid" id="overviewGrid">
+                <!-- Generado dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificación Flotante (Toast) -->
+    <div class="toast-notification" id="toastNotification">
+        <span class="toast-icon" id="toastIcon">✔</span>
+        <span class="toast-message" id="toastMsg">Mensaje</span>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
