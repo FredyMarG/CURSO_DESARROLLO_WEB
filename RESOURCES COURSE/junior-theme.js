@@ -60,5 +60,41 @@
             dotsWrap.appendChild(btn); // Inserta nodo en el DOM
         });
         navRight.prepend(dotsWrap); // Ejecuta llamada o método
+
+        // Navegación directa entre módulos de JavaScript Junior Level (⬅ Anterior / Siguiente ➡)
+        const JUNIOR_MODULES = ['Variables', 'Operadores', 'Concatenacion', 'Condicionales', 'Arrays', 'Bucles', 'For', 'Funciones', 'POO', 'Cadenas(Metodos)', 'Math', 'Console.log', 'Dom']; // Orden progresivo Junior
+        const jIdx = JUNIOR_MODULES.indexOf(topicFolder); // Busca índice del módulo actual
+        if (jIdx !== -1) { // Si coincide con un módulo de Junior Level
+            const prevJ = jIdx > 0 ? JUNIOR_MODULES[jIdx - 1] : null; // Módulo anterior si existe
+            const nextJ = jIdx < JUNIOR_MODULES.length - 1 ? JUNIOR_MODULES[jIdx + 1] : null; // Módulo siguiente si existe
+            // Estilo común para los botones de navegación entre módulos
+            const btnStyle = 'color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);'; // Cadena CSS
+            if (prevJ) { // Agrega botón anterior en la barra superior
+                const aPrev = document.createElement('a'); // Crea enlace anterior
+                aPrev.href = encodeURI(`../${prevJ}/index.html`); // Ruta relativa
+                aPrev.textContent = `⬅ ${prevJ}`; // Texto visible
+                aPrev.style.cssText = btnStyle; // Aplica estilo
+                navRight.appendChild(aPrev); // Inserta en barra superior
+            }
+            if (nextJ) { // Agrega botón siguiente en la barra superior
+                const aNext = document.createElement('a'); // Crea enlace siguiente
+                aNext.href = encodeURI(`../${nextJ}/index.html`); // Ruta relativa
+                aNext.textContent = `${nextJ} ➡`; // Texto visible
+                aNext.style.cssText = btnStyle; // Aplica estilo
+                navRight.appendChild(aNext); // Inserta en barra superior
+            }
+            // Agrega también barra inferior de navegación al final de .app-shell
+            const appShell = document.querySelector('.app-shell'); // Contenedor principal Junior
+            if (appShell) { // Si existe el contenedor
+                const bottomNav = document.createElement('nav'); // Crea barra inferior
+                bottomNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos
+                bottomNav.innerHTML = `
+                    ${prevJ ? `<a href="${encodeURI(`../${prevJ}/index.html`)}" style="${btnStyle}">⬅ Anterior: ${prevJ}</a>` : '<span></span>'}
+                    <a href="../DOCUMENTACION/index.html" style="${btnStyle}">📘 Ver Apuntes</a>
+                    ${nextJ ? `<a href="${encodeURI(`../${nextJ}/index.html`)}" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);">Siguiente: ${nextJ} ➡</a>` : '<span></span>'}
+                `; // Contenido de la barra inferior
+                appShell.appendChild(bottomNav); // Inserta al final de .app-shell
+            }
+        }
     }
 })(); // Ejecuta llamada o método

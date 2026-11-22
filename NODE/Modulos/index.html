@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 03: Módulos en Node.js — CommonJS, ESM, módulos nativos, resolución de rutas y diseño modular." />
+    <title>Módulos en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · MÓDULO 03</span>
+            <div class="brand-title"><span>🧩</span><span>Módulos en Node.js</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 13</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Módulos en Node.js">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">CommonJS &amp; ESM</span>
+                    <span class="badge badge-cyan">require() / import</span>
+                    <span class="badge badge-purple">node:fs · node:path · node:os</span>
+                </div>
+                <h1 class="hero-title">Node.js:<br /><span class="gradient-text">Arquitectura con Módulos</span></h1>
+                <p class="hero-subtitle">
+                    Divide aplicaciones en archivos reutilizables y mantenibles: domina <strong>CommonJS</strong>, <strong>ECMAScript Modules (ESM)</strong>, módulos nativos, resolución de rutas y separación de responsabilidades.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧩</div>
+                        <h3>1. Qué es un Módulo</h3>
+                        <p>Encapsulación, API pública y tipos (nativo, local, externo).</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">📦</div>
+                        <h3>2. CommonJS y ESM</h3>
+                        <p><code>module.exports</code>/<code>require</code> vs <code>export</code>/<code>import</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="8">
+                        <div class="hero-card-icon">🧭</div>
+                        <h3>3. Rutas y Nativos</h3>
+                        <p>Rutas relativas, prefijo <code>node:</code>, <code>path</code>, <code>os</code> y <code>fs/promises</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>4. Laboratorio</h3>
+                        <p>Simula módulos exportados y prueba <code>saludo.js</code> + <code>app.js</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: DEFINICIÓN Y PRINCIPALES USOS -->
+        <section class="slide" data-slide="2" data-title="¿Qué es un Módulo? Usos Principales">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · CONCEPTO BASE</span>
+                <h2 class="slide-title">¿Qué es un Módulo y Para Qué Sirve?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Un <strong>módulo</strong> es un archivo o unidad de código que encapsula una responsabilidad y expone funciones, constantes, clases u objetos para reutilizarlos desde otros archivos.
+                </p>
+                <ul class="styled-list">
+                    <li><strong>Exportar:</strong> hacer disponible un valor hacia otros módulos.</li>
+                    <li><strong>Importar:</strong> utilizar desde otro archivo un valor exportado.</li>
+                    <li><strong>Encapsular:</strong> mantener detalles internos fuera de la API pública del módulo.</li>
+                    <li><strong>Beneficios:</strong> organizar proyectos grandes, reutilizar lógica, facilitar pruebas (<code>node --test</code>) y mejorar el mantenimiento.</li>
+                </ul>
+            </div>
+            <div class="callout callout-analogy" style="margin-top:16px;">
+                <strong>🧱 Analogía LEGO y departamentos:</strong> Cada módulo es una pieza con conexiones definidas (como ventas o contabilidad en una empresa): puedes reemplazar una pieza sin reconstruir toda la aplicación.
+            </div>
+        </section>
+
+        <!-- SLIDE 3: TIPOS DE MÓDULOS -->
+        <section class="slide" data-slide="3" data-title="Tipos de Módulos en Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · CLASIFICACIÓN POR ORIGEN</span>
+                <h2 class="slide-title">Tipos de Módulos: Nativos, Locales y Externos</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Tipo</th><th>Ejemplo</th><th>Procedencia</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Nativo o integrado</strong></td><td><code>node:fs</code>, <code>node:path</code>, <code>node:os</code></td><td>Viene incluido con Node.js</td></tr>
+                        <tr><td><strong>Local</strong></td><td><code>./saludo.js</code>, <code>./src/progreso.js</code></td><td>Archivos que escribes en tu proyecto</td></tr>
+                        <tr><td><strong>Externo</strong></td><td><code>express</code></td><td>Paquete instalado con <code>npm install</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-warn" style="margin-top:16px;">
+                <strong>⚠️ Distinción clave:</strong> «nativo / local / externo» indica el <em>origen</em>. <strong>CommonJS / ESM</strong> indica el <em>sistema de módulos</em>. Son clasificaciones independientes.
+            </div>
+        </section>
+
+        <!-- SLIDE 4: COMMONJS (SALUDO.JS + APP.JS) -->
+        <section class="slide" data-slide="4" data-title="CommonJS: Exportar e Importar Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · EXPORTAR E IMPORTAR EN COMMONJS</span>
+                <h2 class="slide-title">CommonJS: <code>module.exports</code> y <code>require()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    En CommonJS (por defecto si <code>package.json</code> usa <code>"type": "commonjs"</code> o en archivos <code>.cjs</code>), cada archivo es un módulo privado hasta que expones valores con <code>module.exports</code> y los consumes en otro archivo con <code>require("./ruta.js")</code>.
+                </p>
+                <pre class="code-block"><code>// 1. Exportar múltiples funciones desde saludo.js
+function saludar(nombre) { return `Hola ${nombre}`; }
+function despedir(nombre) { return `Hasta pronto, ${nombre}`; }
+module.exports = { saludar, despedir };
+
+// 2. Exportar una única función directamente
+module.exports = function saludarUno(nombre) { return `Hola, ${nombre}`; };
+
+// 3. Importar en app.js (desestructuración o valor directo)
+const { saludar, despedir } = require("./saludo.js");
+console.log(saludar("Heidy")); // Hola Heidy</code></pre>
+                <ul class="styled-list" style="margin-top:12px;">
+                    <li><code>exports.saludar = ...</code> funciona porque apunta al mismo objeto que <code>module.exports</code>.</li>
+                    <li><strong>¡Cuidado!</strong> Reasignar <code>exports = { ... }</code> rompe esa referencia y <strong>no</strong> exporta el objeto.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: ESM (IMPORT Y EXPORT) -->
+        <section class="slide" data-slide="5" data-title="ESM: Exportar e Importar Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · EXPORTAR E IMPORTAR EN ESM</span>
+                <h2 class="slide-title">ESM: <code>export</code> e <code>import</code> entre Archivos</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Para usar el estándar moderno <strong>ESM</strong> en archivos <code>.js</code>, configura <code>"type": "module"</code> en <code>package.json</code> (o usa extensión <code>.mjs</code>). Al importar archivos locales en Node.js debes incluir siempre la extensión (<code>.js</code>).
+                </p>
+                <pre class="code-block"><code>// archivo: matematicas.js (exportar funciones, constantes o clases)
+export function sumar(a, b) { return a + b; }
+export const PI = 3.14159;
+
+// archivo: app.js (importar desde otro archivo en la misma carpeta)
+import { sumar, PI } from "./matematicas.js";
+console.log(sumar(5, 7), PI); // 12 3.14159</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: EXPORTACIONES NOMBRADAS VS POR DEFECTO -->
+        <section class="slide" data-slide="6" data-title="Exportaciones Nombradas y por Defecto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PATRONES DE EXPORTACIÓN E IMPORTACIÓN</span>
+                <h2 class="slide-title">Exportaciones Nombradas vs Por Defecto</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// Exportación nombrada: puedes exportar muchas y renombrarlas al importar con "as"
+export const rol = "estudiante";
+export function crearUsuario(nombre) { return { nombre, rol }; }
+import { crearUsuario as registrar } from "./usuario.js";
+
+// Exportación por defecto: máximo 1 por archivo; quien importa elige el nombre
+export default function formatear(texto) { return texto.trim().toUpperCase(); }
+import formatearTexto from "./formatear.js";
+
+// Importar todas las exportaciones nombradas bajo un objeto espacio de nombres
+import * as operaciones from "./matematicas.js";
+console.log(operaciones.sumar(2, 3));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: RESUMEN DE FORMAS DE EXPORTAR E IMPORTAR ARCHIVOS -->
+        <section class="slide" data-slide="7" data-title="Resumen: Importar y Exportar Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · GUÍA PRÁCTICA DE ARCHIVOS</span>
+                <h2 class="slide-title">Tabla Maestra: Exportar e Importar Archivos</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Qué quieres hacer</th><th>CommonJS</th><th>ESM</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Exportar varios elementos</td><td><code>module.exports = { a, b }</code></td><td><code>export { a, b }</code> o <code>export function a()</code></td></tr>
+                        <tr><td>Exportar un elemento principal</td><td><code>module.exports = fn</code></td><td><code>export default fn</code></td></tr>
+                        <tr><td>Importar elementos específicos</td><td><code>const { a } = require("./m.js")</code></td><td><code>import { a } from "./m.js"</code></td></tr>
+                        <tr><td>Renombrar al importar</td><td><code>const { a: miA } = require("./m.js")</code></td><td><code>import { a as miA } from "./m.js"</code></td></tr>
+                        <tr><td>Importar desde carpeta padre</td><td><code>require("../utils/m.js")</code></td><td><code>import ... from "../utils/m.js"</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: COMMONJS VS ESM + PACKAGE.JSON -->
+        <section class="slide" data-slide="8" data-title="CommonJS vs ESM y package.json">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · COMPARATIVA Y EXTENSIONES</span>
+                <h2 class="slide-title">CommonJS vs ESM y Extensiones</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Característica</th><th>CommonJS (<code>.cjs</code>)</th><th>ESM (<code>.mjs</code>)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Importar / Exportar</td><td><code>require()</code> / <code>module.exports</code></td><td><code>import</code> / <code>export</code></td></tr>
+                        <tr><td>Top-level <code>await</code></td><td>No</td><td>Sí</td></tr>
+                        <tr><td><code>__dirname</code> / <code>__filename</code></td><td>Disponibles</td><td>Usar <code>import.meta.url</code></td></tr>
+                        <tr><td>Configuración para <code>.js</code></td><td><code>"type": "commonjs"</code></td><td><code>"type": "module"</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: RESOLUCIÓN DE RUTAS Y MÓDULOS NATIVOS -->
+        <section class="slide" data-slide="9" data-title="Resolución de Rutas y Módulos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · RUTAS Y APIS INTEGRADAS</span>
+                <h2 class="slide-title">Rutas Relativas y Módulos Nativos</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// Ruta relativa (carpeta actual ./ o superior ../)
+import { sumar } from "./utils/matematicas.js";
+
+// Módulos nativos con prefijo obligatorio/recomendado node:
+import os from "node:os";
+import path from "node:path";
+import { writeFile, readFile } from "node:fs/promises";
+
+const ruta = path.join("datos", "cursos.json");
+console.log(os.platform(), ruta);</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: IMPORTACIÓN DINÁMICA, CACHÉ Y RUTAS EN ESM -->
+        <section class="slide" data-slide="10" data-title="Importación Dinámica, Caché y Rutas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · COMPORTAMIENTO AVANZADO</span>
+                <h2 class="slide-title"><code>import()</code> Dinámico, Caché y <code>import.meta.url</code></h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>Importación dinámica:</strong> <code>const mod = await import("./reporte.js");</code> carga módulos bajo demanda devolviendo una Promesa.</li>
+                    <li><strong>Caché de módulos:</strong> Node.js reutiliza la misma instancia cargada; evita estado mutable global innecesario.</li>
+                    <li><strong>Ruta del archivo en ESM:</strong> usa <code>fileURLToPath(import.meta.url)</code> y <code>dirname()</code> (distinto a <code>process.cwd()</code>).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: DEPENDENCIAS CIRCULARES, CAPAS Y ERRORES COMUNES -->
+        <section class="slide" data-slide="11" data-title="Arquitectura, Errores Comunes y Buenas Prácticas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · DISEÑO Y DEPURACIÓN</span>
+                <h2 class="slide-title">Dependencias Circulares y Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>Dependencia circular (A ↔ B):</strong> extrae la lógica compartida a un tercer módulo C (<code>A → C ← B</code>).</li>
+                    <li><strong>Separación por capas:</strong> <code>rutas/</code> → <code>controladores/</code> → <code>servicios/</code> → <code>repositorios/</code> + <code>utilidades/</code>.</li>
+                    <li><strong>❌ <code>require is not defined in ES module scope</code>:</strong> estás usando <code>require()</code> dentro de un archivo ESM; usa <code>import</code> o extensión <code>.cjs</code>.</li>
+                    <li><strong>❌ <code>ERR_MODULE_NOT_FOUND</code>:</strong> revisa la ruta relativa o agrega la extensión <code>.js</code> en ESM.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: QUIZ INTERACTIVO -->
+        <section class="slide" data-slide="12" data-title="Quiz: Módulos en Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 12 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Módulos</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 4 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: en CommonJS se exporta asignando a module.exports." data-err="Reasignar exports = {...} rompe la referencia; usa module.exports.">
+                    <div class="quiz-q-title">1. En CommonJS, ¿cuál es la forma correcta de exportar un objeto completo?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">exports = { saludar }</button>
+                        <button class="quiz-option" data-opt="b">module.exports = { saludar }</button>
+                        <button class="quiz-option" data-opt="c">export default { saludar }</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: 'type': 'module' habilita ESM en archivos .js." data-err="El valor correcto en package.json es 'type': 'module'.">
+                    <div class="quiz-q-title">2. ¿Qué propiedad en <code>package.json</code> activa ECMAScript Modules para archivos <code>.js</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">"type": "module"</button>
+                        <button class="quiz-option" data-opt="b">"esm": true</button>
+                        <button class="quiz-option" data-opt="c">"type": "commonjs"</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: el prefijo node: identifica módulos nativos integrados." data-err="./ indica ruta relativa local; node: identifica módulos integrados.">
+                    <div class="quiz-q-title">3. ¿Para qué sirve el prefijo <code>node:</code> en <code>import path from "node:path"</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Para instalar un paquete desde npm</button>
+                        <button class="quiz-option" data-opt="b">Para importar un archivo de la carpeta raíz</button>
+                        <button class="quiz-option" data-opt="c">Para indicar explícitamente que es un módulo nativo de Node.js</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Exacto: un módulo ESM admite varias exportaciones nombradas, pero máximo 1 por defecto." data-err="Solo puede existir una exportación por defecto por archivo ESM.">
+                    <div class="quiz-q-title">4. ¿Cuántas exportaciones <code>export default</code> puede tener un módulo ESM?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Tantas como funciones tenga</button>
+                        <button class="quiz-option" data-opt="b">Como máximo una por archivo</button>
+                        <button class="quiz-option" data-opt="c">Ninguna si usa exportaciones nombradas</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Módulos y Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Simulador de Módulos &amp; Archivos</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulamos el módulo saludo.js exportado y consumido desde app.js
+  const moduloSaludo = (() =&gt; {
+    function saludar(nombre) { return `Hola ${nombre}`; }
+    function despedir(nombre) { return `Hasta pronto, ${nombre}`; }
+    return { saludar, despedir };
+  })();
+  const { saludar, despedir } = moduloSaludo;
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;${saludar(&#x27;Heidy&#x27;)}&lt;/div&gt;&lt;div&gt;${despedir(&#x27;Heidy&#x27;)}&lt;/div&gt;`;
+&lt;/script&gt;">Módulo saludo.js + app.js</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  function validarEnteroNoNegativo(valor, nombre) {
+    if (!Number.isInteger(valor) || valor &lt; 0) throw new TypeError(`${nombre} inválido`);
+  }
+  function calcularPorcentaje(completadas, total) {
+    validarEnteroNoNegativo(completadas, &#x27;completadas&#x27;);
+    validarEnteroNoNegativo(total, &#x27;total&#x27;);
+    if (total === 0) return 0;
+    if (completadas &gt; total) throw new RangeError(&#x27;Supera el total&#x27;);
+    return Number(((completadas / total) * 100).toFixed(2));
+  }
+  document.getElementById(&#x27;out&#x27;).textContent = `Progreso del curso: ${calcularPorcentaje(7, 10)}%`;
+&lt;/script&gt;">Módulo progreso.js</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulamos el módulo saludo.js exportado y consumido desde app.js
+  const moduloSaludo = (() =&gt; {
+    function saludar(nombre) { return `Hola ${nombre}`; }
+    function despedir(nombre) { return `Hasta pronto, ${nombre}`; }
+    return { saludar, despedir };
+  })();
+  const { saludar, despedir } = moduloSaludo;
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;${saludar(&#x27;Heidy&#x27;)}&lt;/div&gt;&lt;div&gt;${despedir(&#x27;Heidy&#x27;)}&lt;/div&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

@@ -12,20 +12,36 @@ const modules = [
     desc: "Entorno de ejecución, V8, libuv, Event Loop, npm, primer servidor HTTP y API de bienvenida.", // Descripción breve
     href: "NODE/Fundamentos/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 02 interactivo de REPL de Node.js
+  // Módulo 02 interactivo de Instalación y Entorno de Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
-    title: "02. REPL de Node.js", // Título visible en la tarjeta
+    title: "02. Instalación y Entorno de Node.js", // Título visible en la tarjeta
+    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Versiones LTS vs Current, instalador .msi, winget, nvm-windows, PATH, PowerShell y VS Code.", // Descripción breve
+    href: "NODE/Instalacion/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 03 interactivo de REPL de Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "03. REPL de Node.js", // Título visible en la tarjeta
     tag: "12 Slides", // Etiqueta de cantidad de diapositivas
     desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
     href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 04 interactivo de Módulos en Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "04. Módulos en Node.js", // Título visible en la tarjeta
+    tag: "13 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "CommonJS (require/module.exports), ESM (import/export), módulos nativos, rutas y separación de capas.", // Descripción breve
+    href: "NODE/Modulos/index.html", // Ruta relativa al módulo interactivo
   },
   // Acceso directo a la documentación técnica de Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
     title: "Documentación Completa Node.js", // Título visible en la tarjeta
-    tag: "2 Guías MD", // Etiqueta de guías Markdown
-    desc: "Guías teóricas de Fundamentos y REPL de Node.js, ejercicios por niveles, solucionario y cheatsheet.", // Descripción breve
+    tag: "4 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de Fundamentos, Instalación, REPL y Módulos en Node.js, ejercicios y cheatsheets.", // Descripción breve
     href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
   },
 

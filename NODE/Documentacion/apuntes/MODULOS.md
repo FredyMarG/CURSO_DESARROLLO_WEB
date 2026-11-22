@@ -252,6 +252,39 @@ console.log(operaciones.sumar(2, 3));
 
 ---
 
+# Resumen práctico: Cómo importar y exportar archivos
+
+| Qué necesitas hacer | En CommonJS (`require`) | En ESM (`import` / `export`) |
+|---|---|---|
+| Exportar varios elementos de un archivo | `module.exports = { saludar, despedir };` | `export { saludar, despedir };` o `export function ...` |
+| Exportar un único valor/función principal | `module.exports = saludar;` | `export default saludar;` |
+| Importar elementos específicos | `const { saludar } = require("./saludo.js");` | `import { saludar } from "./saludo.js";` |
+| Renombrar al importar | `const { saludar: hola } = require("./saludo.js");` | `import { saludar as hola } from "./saludo.js";` |
+| Importar desde carpeta superior | `require("../utils/saludo.js")` | `import { saludar } from "../utils/saludo.js";` |
+| Importar todo un archivo | `const mod = require("./saludo.js");` | `import * as mod from "./saludo.js";` |
+
+**Ejemplo completo aplicado en `NODE/Modulos/` (CommonJS):**
+
+```javascript
+// archivo: saludo.js (exporta funciones reutilizables)
+function saludar(nombre) {
+  return `Hola ${nombre}`;
+}
+function despedir(nombre) {
+  return `Hasta pronto, ${nombre}`;
+}
+module.exports = { saludar, despedir };
+```
+
+```javascript
+// archivo: app.js (importa desde ./saludo.js y ejecuta)
+const { saludar, despedir } = require("./saludo.js");
+console.log(saludar("Heidy"));
+console.log(despedir("Heidy"));
+```
+
+---
+
 # Diferencias entre CommonJS y ESM
 
 | Característica | CommonJS | ESM |

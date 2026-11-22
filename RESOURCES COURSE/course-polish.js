@@ -43,6 +43,24 @@
 
     // Banco de retos prácticos específicos por tema
     const CHALLENGES = { // Declara e inicializa "CHALLENGES"
+        // Reto práctico específico para el módulo Instalación y Entorno de Node.js
+        'Instalacion': { // Instrucción JavaScript
+            title: 'Reto Node.js Instalación: Script de Recarga con --watch', // Título del reto
+            desc: 'Escribe el bloque "scripts" de package.json incluyendo "start" y "dev" usando node --watch.', // Consigna
+            placeholder: '"scripts": {\n  "start": "node index.js",\n  "dev": "node --watch index.js"\n}', // Código guía
+            hint: 'Incluye "scripts", "start" y "node --watch".', // Pista
+            solution: '{\n  "name": "mi-proyecto",\n  "scripts": {\n    "start": "node index.js",\n    "dev": "node --watch index.js"\n  }\n}', // Solución
+            test: v => /"scripts"\s*:/.test(v) && /node\s+--watch/.test(v) // Validación
+        },
+        // Reto práctico específico para el módulo Módulos en Node.js
+        'Modulos': { // Instrucción JavaScript
+            title: 'Reto Node.js Módulos: Exportar e Importar', // Título del reto
+            desc: 'Exporta una función saludar con module.exports (CommonJS) o export (ESM) e impórtala desde otro archivo.', // Consigna
+            placeholder: "// saludo.js\nmodule.exports = { saludar: nombre => `Hola ${nombre}` };\n// app.js\nconst { saludar } = require('./saludo.js');", // Código guía
+            hint: "Usa module.exports + require('./...') o export + import ... from './...'.", // Pista
+            solution: "module.exports = { saludar: nombre => `Hola ${nombre}` };\nconst { saludar } = require('./saludo.js');\nconsole.log(saludar('Heidy'));", // Solución
+            test: v => (/(module\.exports|exports\.)/.test(v) && /require\s*\(/.test(v)) || (/export\s+/.test(v) && /import\s+/.test(v)) // Validación
+        },
         // Reto práctico específico para el módulo REPL de Node.js
         'REPL': { // Instrucción JavaScript
             title: 'Reto Node.js REPL: Función de Avance Segura', // Título del reto
@@ -397,6 +415,45 @@
     consolePanel.querySelector('#jrClearLog').addEventListener('click', () => { // Registra escuchador de eventos
         logBox.innerHTML = ''; // Actualiza contenido en el DOM
     });
+
+    // 6. Navegación directa entre módulos del mismo nivel (⬅ Anterior / Siguiente ➡)
+    const COURSE_MODULES = { // Mapa ordenado de carpetas de módulos por nivel
+        'HTML y CSS': ['HTML BASICO', 'HTML avanzado', 'CSS BASICO', 'CSS avanzado', 'Flexbox', 'Grid', 'Animaciones', 'Funciones Avanzadas', 'Responsive Design'],
+        'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Temporizadores', 'Pestañas DevTools'],
+        'JAVASCRIPT MASTER LEVEL': ['Modo Estricto', 'Operador Ternario', 'Funciones Flecha', 'Prototipos', 'Memoization', 'Objeto Date', 'Objeto Screen', 'Navigator', 'Matchmedia', 'Visibility Change', 'Historial', 'Geolocalization', 'Drag & Drop', 'File Reader', 'Canvas', 'Local Storage', 'Cookies', 'IndexedDB', 'Intersection Observer', 'Apis', 'Cache', 'Notifications', 'Web Workers', 'Service Workers'],
+        'NODE': ['Fundamentos', 'Instalacion', 'REPL', 'Modulos']
+    };
+    const levelList = COURSE_MODULES[courseFolder] || []; // Obtiene la lista ordenada del nivel actual
+    const modIdx = levelList.indexOf(topicFolder); // Ubica el índice del módulo actual
+    if (/^index\.html?$/i.test(fileName) && modIdx !== -1) { // Solo si estamos en el index.html principal del módulo
+        const prevMod = modIdx > 0 ? levelList[modIdx - 1] : null; // Módulo anterior si existe
+        const nextMod = modIdx < levelList.length - 1 ? levelList[modIdx + 1] : null; // Módulo siguiente si existe
+        const navRightEl = topNav.querySelector('.jr-nav-right'); // Contenedor derecho de la barra superior
+        // Agregamos accesos rápidos en la barra superior
+        if (prevMod && navRightEl) { // Si existe módulo anterior
+            const aPrev = document.createElement('a'); // Crea enlace al módulo anterior
+            aPrev.className = 'jr-nav-link'; // Estilo de botón de navegación
+            aPrev.href = encodeURI(`../${prevMod}/index.html`); // Ruta relativa al módulo anterior
+            aPrev.textContent = `⬅ ${prevMod}`; // Texto visible
+            navRightEl.insertBefore(aPrev, navRightEl.querySelector('.jr-nav-link')); // Inserta antes de Apuntes
+        }
+        if (nextMod && navRightEl) { // Si existe módulo siguiente
+            const aNext = document.createElement('a'); // Crea enlace al módulo siguiente
+            aNext.className = 'jr-nav-link'; // Estilo de botón de navegación
+            aNext.href = encodeURI(`../${nextMod}/index.html`); // Ruta relativa al módulo siguiente
+            aNext.textContent = `${nextMod} ➡`; // Texto visible
+            navRightEl.appendChild(aNext); // Inserta al final de la barra superior
+        }
+        // Creamos también una barra inferior cómoda al terminar la lección
+        const bottomModNav = document.createElement('nav'); // Crea barra inferior de módulos
+        bottomModNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos en línea
+        bottomModNav.innerHTML = `
+            ${prevMod ? `<a class="jr-nav-link" href="${encodeURI(`../${prevMod}/index.html`)}">⬅ Anterior: ${prevMod}</a>` : '<span></span>'}
+            <a class="jr-nav-link" href="${meta.docsHref}">📘 Ver Apuntes</a>
+            ${nextMod ? `<a class="jr-nav-link primary" href="${encodeURI(`../${nextMod}/index.html`)}">Siguiente: ${nextMod} ➡</a>` : '<span></span>'}
+        `; // Inserta enlaces inferior anterior, apuntes y siguiente
+        shell.appendChild(bottomModNav); // Añade la barra al final del contenedor principal
+    }
 
     document.body.classList.add('jr-unified'); // Modifica clases CSS del elemento
     document.body.prepend(shell); // Ejecuta llamada o método

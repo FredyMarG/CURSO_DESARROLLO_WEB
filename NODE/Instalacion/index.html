@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 02: Instalación y Entorno de Node.js — LTS vs Current, winget, nvm-windows, PATH, PowerShell y VS Code." />
+    <title>Instalación y Entorno de Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · MÓDULO 02</span>
+            <div class="brand-title"><span>⚙️</span><span>Instalación y Entorno</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Instalación y Entorno">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">LTS vs Current</span>
+                    <span class="badge badge-cyan">winget · nvm-windows</span>
+                    <span class="badge badge-purple">PATH · PowerShell · VS Code</span>
+                </div>
+                <h1 class="hero-title">Node.js:<br /><span class="gradient-text">Instalación y Entorno</span></h1>
+                <p class="hero-subtitle">
+                    Prepara tu entorno profesional en Windows: elige la versión LTS correcta, instala con el instalador oficial o <code>nvm-windows</code>, resuelve errores de <code>PATH</code> y PowerShell, y configura VS Code.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🏷️</div>
+                        <h3>1. LTS vs Current</h3>
+                        <p>Cuál descargar y por qué la versión LTS es la recomendada.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">💿</div>
+                        <h3>2. Instalación</h3>
+                        <p>Instalador <code>.msi</code>, <code>winget</code> y gestor <code>nvm-windows</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🛠️</div>
+                        <h3>3. PATH y PowerShell</h3>
+                        <p>Cómo verificar <code>node -v</code> y solucionar permisos.</p>
+                    </div>
+                    <div class="hero-card" data-jump="10">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>4. Laboratorio</h3>
+                        <p>Genera tu <code>package.json</code> con <code>--watch</code> y prueba scripts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: LTS VS CURRENT -->
+        <section class="slide" data-slide="2" data-title="Versiones LTS vs Current">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ELECCIÓN DE VERSIÓN</span>
+                <h2 class="slide-title">¿LTS o Current? ¿Cuál Instalar?</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Aspecto</th><th>LTS (Long Term Support)</th><th>Current (Actual)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Estabilidad</td><td>Alta, pensada para producción</td><td>Experimental, cambia rápido</td></tr>
+                        <tr><td>Soporte</td><td>Largo plazo (~30 meses)</td><td>Corto plazo</td></tr>
+                        <tr><td>Uso recomendado</td><td><strong>Cursos, empresas y servidores</strong></td><td>Probar funciones muy nuevas</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="callout callout-analogy" style="margin-top:16px;">
+                <strong>✅ Regla de oro:</strong> Instala siempre la versión <strong>LTS</strong> (números pares como <code>20.x</code>, <code>22.x</code> o <code>24.x</code>) para evitar incompatibilidades.
+            </div>
+        </section>
+
+        <!-- SLIDE 3: INSTALACIÓN EN WINDOWS (.MSI Y WINGET) -->
+        <section class="slide" data-slide="3" data-title="Instalación con .msi y winget">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · MÉTODOS DIRECTOS</span>
+                <h2 class="slide-title">Instalar en Windows: <code>.msi</code> o <code>winget</code></h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list">
+                    <li><strong>Opción 1 (Instalador oficial):</strong> descarga el <code>.msi</code> LTS desde <code>nodejs.org</code>, deja marcada la casilla <strong>Add to PATH</strong> y reinicia tu terminal.</li>
+                    <li><strong>Opción 2 (PowerShell con winget):</strong> instala Node.js LTS con un solo comando:</li>
+                </ul>
+                <pre class="code-block" style="margin-top:12px;"><code># Instalar Node.js LTS usando winget
+winget install OpenJS.NodeJS.LTS</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: NVM-WINDOWS -->
+        <section class="slide" data-slide="4" data-title="Múltiples versiones con nvm-windows">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · GESTOR DE VERSIONES</span>
+                <h2 class="slide-title">Cambiar de Versión con <code>nvm-windows</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Si trabajas en varios proyectos que requieren distintas versiones de Node.js, usa <strong>nvm-windows</strong>:
+                </p>
+                <pre class="code-block"><code># Listar versiones disponibles para descargar
+nvm list available
+
+# Instalar la última versión LTS
+nvm install lts
+
+# Activar una versión específica
+nvm use 22.14.0
+
+# Ver versiones instaladas y cuál está activa (*)
+nvm list</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: VERIFICACIÓN Y PATH -->
+        <section class="slide" data-slide="5" data-title="Verificar Instalación y PATH">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · COMPROBACIÓN</span>
+                <h2 class="slide-title">Verificar <code>node</code>, <code>npm</code> y el <code>PATH</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code># Comprobar versiones instaladas y ruta exacta del binario
+node -v
+npm -v
+where.exe node</code></pre>
+                <ul class="styled-list" style="margin-top:12px;">
+                    <li>Si aparece <em>"'node' no se reconoce como un comando..."</em>, cierra y vuelve a abrir VS Code o PowerShell.</li>
+                    <li>Si persiste, revisa en Windows que <code>C:\Program Files\nodejs\</code> esté en las <strong>Variables de entorno → Path</strong>.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: POWERSHELL EXECUTION POLICY -->
+        <section class="slide" data-slide="6" data-title="Permisos en PowerShell (ExecutionPolicy)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ERROR TÍPICO EN WINDOWS</span>
+                <h2 class="slide-title">Solucionar Bloqueo de Scripts en PowerShell</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Si PowerShell muestra <em>"la ejecución de scripts está deshabilitada en este sistema"</em> al ejecutar <code>npm</code>, habilita scripts firmados localmente para tu usuario actual:
+                </p>
+                <pre class="code-block"><code># Consultar la política actual
+Get-ExecutionPolicy -Scope CurrentUser
+
+# Permitir scripts locales y paquetes npm de forma segura
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: VS CODE, --WATCH Y .GITIGNORE -->
+        <section class="slide" data-slide="7" data-title="VS Code, node --watch y .gitignore">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · FLUJO DE TRABAJO</span>
+                <h2 class="slide-title">VS Code, <code>node --watch</code> y <code>.gitignore</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// package.json con recarga automática nativa (--watch)
+{
+  "name": "entorno-node",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  }
+}</code></pre>
+                <ul class="styled-list" style="margin-top:12px;">
+                    <li><code>node --watch</code> reinicia el proceso automáticamente al guardar cambios (sin instalar <code>nodemon</code>).</li>
+                    <li>Crea un archivo <code>.gitignore</code> con <code>node_modules/</code> y <code>.env</code> para proteger dependencias y secretos.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: CHEATSHEET -->
+        <section class="slide" data-slide="8" data-title="Hoja de Trucos de Instalación">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · REFERENCIA RÁPIDA</span>
+                <h2 class="slide-title">Hoja de Trucos del Entorno</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Comando</th><th>Para qué sirve</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>node -v</code> / <code>npm -v</code></td><td>Verifica versiones instaladas</td></tr>
+                        <tr><td><code>where.exe node</code></td><td>Muestra la ruta del ejecutable en Windows</td></tr>
+                        <tr><td><code>winget install OpenJS.NodeJS.LTS</code></td><td>Instala Node.js LTS desde terminal</td></tr>
+                        <tr><td><code>nvm install lts</code> / <code>nvm use</code></td><td>Gestiona múltiples versiones con <code>nvm-windows</code></td></tr>
+                        <tr><td><code>npm init -y</code></td><td>Crea <code>package.json</code> inicial</td></tr>
+                        <tr><td><code>node --watch app.js</code></td><td>Ejecuta con reinicio automático al guardar</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: QUIZ INTERACTIVO -->
+        <section class="slide" data-slide="9" data-title="Quiz: Instalación y Entorno">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Instalación</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 4 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: LTS ofrece estabilidad y soporte a largo plazo." data-err="Current es para probar novedades; para cursos y producción se recomienda LTS.">
+                    <div class="quiz-q-title">1. ¿Qué versión de Node.js es la recomendada para cursos y proyectos reales?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">LTS (Long Term Support)</button>
+                        <button class="quiz-option" data-opt="b">Current (Experimental)</button>
+                        <button class="quiz-option" data-opt="c">Cualquiera sin importar estabilidad</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Exacto: where.exe node muestra la ruta exacta del ejecutable en Windows." data-err="where.exe node ubica el ejecutable activo en el PATH de Windows.">
+                    <div class="quiz-q-title">2. ¿Qué comando en PowerShell muestra la ruta del ejecutable <code>node.exe</code> activo?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">npm init -y</button>
+                        <button class="quiz-option" data-opt="b">where.exe node</button>
+                        <button class="quiz-option" data-opt="c">node --watch</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: --watch reinicia el script automáticamente al guardar cambios." data-err="El flag nativo en Node.js moderno es --watch.">
+                    <div class="quiz-q-title">3. ¿Qué flag nativo de Node.js reinicia el programa automáticamente al guardar cambios?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">--version</button>
+                        <button class="quiz-option" data-opt="b">--init</button>
+                        <button class="quiz-option" data-opt="c">--watch</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: node_modules/ y .env nunca deben subirse al repositorio." data-err="package.json sí debe subirse; node_modules/ y .env van en .gitignore.">
+                    <div class="quiz-q-title">4. ¿Qué debes incluir siempre en <code>.gitignore</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">node_modules/ y .env</button>
+                        <button class="quiz-option" data-opt="b">package.json e index.js</button>
+                        <button class="quiz-option" data-opt="c">README.md</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio de Entorno y Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Generador de <code>package.json</code> &amp; Archivos</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.6&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const pkg = {
+    name: &#x27;entorno-node&#x27;,
+    version: &#x27;1.0.0&#x27;,
+    private: true,
+    type: &#x27;module&#x27;,
+    scripts: {
+      start: &#x27;node index.js&#x27;,
+      dev: &#x27;node --watch index.js&#x27;
+    }
+  };
+  document.getElementById(&#x27;out&#x27;).innerHTML = `&lt;pre&gt;${JSON.stringify(pkg, null, 2)}&lt;/pre&gt;`;
+&lt;/script&gt;">Generar package.json</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.6&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const pkg = {
+    name: &#x27;entorno-node&#x27;,
+    version: &#x27;1.0.0&#x27;,
+    private: true,
+    type: &#x27;module&#x27;,
+    scripts: {
+      start: &#x27;node index.js&#x27;,
+      dev: &#x27;node --watch index.js&#x27;
+    }
+  };
+  document.getElementById(&#x27;out&#x27;).innerHTML = `&lt;pre&gt;${JSON.stringify(pkg, null, 2)}&lt;/pre&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>
