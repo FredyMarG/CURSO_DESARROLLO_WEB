@@ -61,6 +61,13 @@
             <button type="submit">Agregar</button>
         </form>
 
+        <!-- Filtros rápidos para visualizar todos, solo ingresos o solo gastos -->
+        <div class="filtros-lista" id="filtros-lista">
+            <button type="button" class="filtro-btn activo" data-filtro="todos">Todos</button>
+            <button type="button" class="filtro-btn" data-filtro="ingreso">Ingresos</button>
+            <button type="button" class="filtro-btn" data-filtro="gasto">Gastos</button>
+        </div>
+
         <!-- Lista dinámica de movimientos -->
         <ul id="lista"></ul>
     </div>

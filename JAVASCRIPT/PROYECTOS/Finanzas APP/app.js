@@ -9,10 +9,12 @@
 // Recupera las transacciones guardadas en el navegador (localStorage) usando la clave 'transacciones'.
 // JSON.parse() convierte el texto guardado de vuelta en un arreglo de JavaScript; si no existe, inicia [].
 let transacciones = JSON.parse(localStorage.getItem('transacciones')) || [];
+let filtroActual = 'todos'; // Guarda el filtro activo de la lista: 'todos', 'ingreso' o 'gasto'
 
 // 2. REFERENCIAS AL DOM (Document Object Model)
 const formularioTransaccion = document.getElementById('form-transaccion'); // Referencia al formulario principal
 const inputMonto = document.getElementById('monto'); // Referencia al campo de texto donde se escribe el monto
+const contenedorFiltros = document.getElementById('filtros-lista'); // Referencia a la barra de botones de filtro
 const listaMovimientos = document.getElementById('lista'); // Referencia al contenedor <ul> de movimientos
 const lienzoGrafico = document.getElementById('grafico-resumen'); // Referencia al elemento <canvas> del gráfico
 const contextoGrafico = lienzoGrafico.getContext('2d'); // Contexto 2D necesario para dibujar formas y texto en el canvas
@@ -124,11 +126,16 @@ function dibujarGrafico(totalIngresos, totalGastos) {
 }
 
 // 6. RENDERIZADO DE LA LISTA Y GUARDADO EN LOCALSTORAGE
-// Dibuja todas las transacciones en el HTML, recalcula totales y guarda el estado actual.
+// Dibuja las transacciones filtradas en el HTML, recalcula totales globales y guarda el estado actual.
 function renderizarTransacciones() {
   listaMovimientos.innerHTML = ''; // Limpia la lista HTML para evitar duplicar elementos al volver a dibujar
 
-  transacciones.forEach((transaccion) => { // Recorre cada objeto guardado en el arreglo "transacciones"
+  // Filtra qué movimientos mostrar según el botón activo ('todos', 'ingreso' o 'gasto').
+  const transaccionesVisibles = filtroActual === 'todos'
+    ? transacciones // Si el filtro es 'todos', muestra el arreglo completo
+    : transacciones.filter((transaccion) => transaccion.tipo === filtroActual); // Si no, filtra por tipo
+
+  transaccionesVisibles.forEach((transaccion) => { // Recorre únicamente los movimientos visibles según el filtro
     const elementoLista = document.createElement('li'); // Crea un nuevo elemento <li> en memoria
     const esIngreso = transaccion.tipo === 'ingreso'; // Determina si el movimiento es un ingreso o un egreso
     const signo = esIngreso ? '+' : '-'; // Elige el signo "+" para ingresos y "-" para egresos
@@ -164,7 +171,22 @@ formularioTransaccion.addEventListener('submit', (evento) => {
   formularioTransaccion.reset(); // Limpia los campos del formulario para el próximo registro
 });
 
-// 8. ELIMINACIÓN DE TRANSACCIONES
+// 8. FILTRADO Y ELIMINACIÓN DE TRANSACCIONES
+// Escucha los clics en la barra de filtros usando delegación de eventos.
+contenedorFiltros.addEventListener('click', (evento) => {
+  const botonFiltro = evento.target.closest('.filtro-btn'); // Verifica si el clic ocurrió dentro de un botón de filtro
+  if (!botonFiltro) return; // Si se hizo clic fuera de los botones, no hace nada
+
+  filtroActual = botonFiltro.dataset.filtro; // Actualiza el filtro activo ('todos', 'ingreso' o 'gasto')
+
+  // Quita la clase 'activo' de todos los botones y la aplica únicamente al botón presionado.
+  contenedorFiltros.querySelectorAll('.filtro-btn').forEach((boton) => {
+    boton.classList.toggle('activo', boton === botonFiltro);
+  });
+
+  renderizarTransacciones(); // Vuelve a dibujar la lista aplicando el nuevo filtro
+});
+
 // Se ejecuta al pulsar el botón "X" de cualquier movimiento en la lista.
 function borrar(idTransaccion) {
   // Crea un nuevo arreglo excluyendo la transacción cuyo id coincida con el recibido

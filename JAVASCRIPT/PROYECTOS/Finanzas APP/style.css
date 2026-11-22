@@ -233,6 +233,55 @@ h1 {
   transform: translateY(0); /* Devuelve el botón a su posición original */
 }
 
+/* Barra de botones para filtrar la lista entre todos, ingresos o gastos */
+.filtros-lista {
+  display: flex; /* Coloca los 3 botones de filtro en una fila horizontal */
+  gap: 8px; /* Espacio uniforme entre cada botón */
+  margin-bottom: 14px; /* Separación inferior respecto a la lista */
+}
+
+/* Estilo base de cada botón de filtro */
+.filtro-btn {
+  flex: 1; /* Reparte el ancho disponible equitativamente entre los 3 botones */
+  background: rgba(255, 255, 255, 0.04); /* Fondo sutil en estado inactivo */
+  color: var(--texto-secundario); /* Texto grisáceo cuando no está seleccionado */
+  border: 1px solid var(--borde-sutil); /* Borde fino semitransparente */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 8px 10px; /* Relleno interno cómodo */
+  font-family: inherit; /* Hereda la tipografía principal */
+  font-size: 0.85rem; /* Tamaño de texto compacto */
+  font-weight: 600; /* Seminegrita para legibilidad */
+  cursor: pointer; /* Cursor de mano al pasar por encima */
+  transition: all 0.2s ease; /* Transición suave al cambiar de estado */
+}
+
+/* Efecto hover sobre los botones de filtro */
+.filtro-btn:hover {
+  background: rgba(255, 255, 255, 0.09); /* Ilumina levemente el fondo */
+  color: var(--texto-principal); /* Aclara el texto */
+}
+
+/* Estado activo por defecto (Todos) en cian */
+.filtro-btn.activo {
+  background: rgba(56, 189, 248, 0.16); /* Fondo cian translúcido */
+  color: var(--cian); /* Texto en cian brillante */
+  border-color: rgba(56, 189, 248, 0.45); /* Borde cian destacado */
+}
+
+/* Estado activo para el filtro de Ingresos en verde */
+.filtro-btn[data-filtro="ingreso"].activo {
+  background: rgba(16, 185, 129, 0.16); /* Fondo verde translúcido */
+  color: var(--esmeralda); /* Texto en verde esmeralda */
+  border-color: rgba(16, 185, 129, 0.45); /* Borde verde destacado */
+}
+
+/* Estado activo para el filtro de Gastos en rojo/rosa */
+.filtro-btn[data-filtro="gasto"].activo {
+  background: rgba(251, 113, 133, 0.16); /* Fondo rosa translúcido */
+  color: var(--rosa); /* Texto en rosa/rojo */
+  border-color: rgba(251, 113, 133, 0.45); /* Borde rosa destacado */
+}
+
 /* Contenedor de la lista de transacciones */
 #lista {
   list-style: none; /* Quita los puntos (viñetas) por defecto de la etiqueta <ul> */
