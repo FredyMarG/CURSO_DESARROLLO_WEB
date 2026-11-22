@@ -423,6 +423,13 @@ const modules = [
     desc: "Buscador CineSearch con Debounce, fetch a OMDb API y modal nativo HTML5.",
     href: "JAVASCRIPT/PROYECTOS/Buscador de Peliculas/index.html",
   },
+  { // Proyecto práctico de tablero Kanban con Drag & Drop nativo y localStorage
+    cat: "proyectos",
+    title: "25. Tablero Kanban",
+    tag: "Proyecto JS",
+    desc: "Organizador de tareas en 3 columnas con Drag & Drop nativo y persistencia localStorage.",
+    href: "JAVASCRIPT/PROYECTOS/Tablero Kanban/index.html",
+  },
 
   // --- SECCIÓN: JS MID LEVEL ---
   // Práctica de programación asíncrona moderna con async y await

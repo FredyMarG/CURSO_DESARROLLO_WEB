@@ -1,0 +1,214 @@
+/* ==========================================================================
+   ESTILOS DE TABLERO KANBAN — DISEÑO MODERNO ESTILO PORTAL DEL CURSO
+   Comentado línea a línea de forma educativa en español
+   ========================================================================== */
+
+/* Variables CSS globales para mantener la misma paleta oscura y neón del curso */
+:root {
+  --fondo-oscuro: #070a13; /* Color principal de fondo de la página */
+  --fondo-columna: rgba(16, 24, 42, 0.84); /* Fondo translúcido para cada columna */
+  --fondo-tarjeta: rgba(255, 255, 255, 0.05); /* Fondo sutil para las tarjetas arrastrables */
+  --fondo-input: rgba(10, 15, 28, 0.92); /* Fondo oscuro para el campo de nueva tarea */
+  --borde-sutil: rgba(255, 255, 255, 0.1); /* Borde fino semitransparente */
+  --cian: #38bdf8; /* Color de acento cian para foco, botones y estado pendiente */
+  --indigo: #6366f1; /* Color secundario índigo para degradados */
+  --ambar: #f59e0b; /* Color ámbar para resaltar la columna "En Progreso" */
+  --esmeralda: #10b981; /* Color verde esmeralda para la columna "Completado" */
+  --texto-principal: #f8fafc; /* Color claro para títulos y textos principales */
+  --texto-secundario: #94a3b8; /* Color gris azulado para placeholders */
+}
+
+/* Normalización del modelo de caja en todos los elementos */
+* {
+  box-sizing: border-box; /* Incluye padding y border dentro del ancho/alto total */
+  margin: 0; /* Elimina márgenes externos por defecto */
+  padding: 0; /* Elimina rellenos internos por defecto */
+}
+
+/* Configuración general del cuerpo del documento */
+body {
+  min-height: 100vh; /* Ocupa como mínimo toda la altura visible de la pantalla */
+  background-color: var(--fondo-oscuro); /* Fondo oscuro base */
+  background-image: /* Halos luminosos suaves en esquinas opuestas */
+    radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.14), transparent 38%), /* Luz cian superior izquierda */
+    radial-gradient(circle at 85% 85%, rgba(99, 102, 241, 0.16), transparent 40%); /* Luz índigo inferior derecha */
+  color: var(--texto-principal); /* Color de texto por defecto */
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Tipografía moderna del curso */
+  padding: 36px 20px 80px; /* Espacio superior, lateral e inferior (deja sitio al HUD flotante) */
+}
+
+/* Encabezado centrado con la insignia del módulo y el título */
+.encabezado {
+  text-align: center; /* Centra el contenido horizontalmente */
+  margin-bottom: 26px; /* Separación inferior respecto al input de nueva tarea */
+}
+
+/* Título principal con degradado cian-índigo */
+h1 {
+  font-size: clamp(1.9rem, 4vw, 2.7rem); /* Tamaño adaptable según la pantalla */
+  font-weight: 800; /* Grosor extra negrita */
+  margin-top: 10px; /* Separación respecto a la insignia superior */
+  background: linear-gradient(135deg, var(--cian), #818cf8); /* Degradado diagonal */
+  -webkit-background-clip: text; /* Recorta el fondo a la forma del texto */
+  background-clip: text; /* Propiedad estándar equivalente */
+  -webkit-text-fill-color: transparent; /* Transparenta el texto para lucir el degradado */
+}
+
+/* Barra superior para escribir y agregar una nueva tarea */
+.nueva-tarea {
+  max-width: 620px; /* Ancho máximo centrado */
+  margin: 0 auto 30px; /* Centra la barra y la separa del tablero */
+  display: flex; /* Coloca el input y el botón en fila */
+  gap: 12px; /* Espacio entre el input y el botón */
+}
+
+/* Campo de texto para escribir la nueva tarea */
+#texto-tarea {
+  flex: 1; /* Ocupa todo el espacio horizontal disponible */
+  background: var(--fondo-input); /* Fondo oscuro para contraste */
+  color: var(--texto-principal); /* Texto claro al escribir */
+  border: 1px solid var(--borde-sutil); /* Borde fino semitransparente */
+  border-radius: 12px; /* Esquinas redondeadas */
+  padding: 12px 16px; /* Relleno cómodo */
+  font-family: inherit; /* Hereda la fuente 'Outfit' */
+  font-size: 0.98rem; /* Tamaño de letra legible */
+  outline: none; /* Quita el contorno azul predeterminado */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Anima suavemente el enfoque */
+}
+
+/* Color del texto de ayuda (placeholder) */
+#texto-tarea::placeholder {
+  color: var(--texto-secundario); /* Gris azulado suave */
+}
+
+/* Resaltado luminoso al enfocar el input */
+#texto-tarea:focus {
+  border-color: var(--cian); /* Ilumina el borde en cian */
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18); /* Halo cian alrededor del campo */
+}
+
+/* Botón principal para agregar tareas */
+#btn-agregar {
+  background: linear-gradient(135deg, var(--cian), var(--indigo)); /* Degradado cian-índigo */
+  color: #070a13; /* Texto oscuro para lograr alto contraste */
+  border: none; /* Sin borde predeterminado */
+  border-radius: 12px; /* Esquinas redondeadas */
+  padding: 12px 20px; /* Espaciado interno cómodo */
+  font-family: inherit; /* Hereda la tipografía principal */
+  font-size: 0.95rem; /* Tamaño legible */
+  font-weight: 700; /* Negrita para destacar la acción */
+  cursor: pointer; /* Cambia el cursor a mano */
+  white-space: nowrap; /* Evita que el texto del botón se parta en dos líneas */
+  transition: transform 0.15s ease, filter 0.2s ease; /* Transición suave para hover y clic */
+}
+
+/* Efecto hover del botón Agregar Tarea */
+#btn-agregar:hover {
+  filter: brightness(1.08); /* Aumenta levemente el brillo */
+  transform: translateY(-1px); /* Eleva el botón 1 píxel */
+}
+
+/* Contenedor principal del tablero dividido en 3 columnas iguales */
+.kanban-board {
+  max-width: 1120px; /* Ancho máximo del tablero */
+  margin: 0 auto; /* Centra el tablero en la pantalla */
+  display: grid; /* Activa CSS Grid */
+  grid-template-columns: repeat(3, 1fr); /* Crea 3 columnas del mismo ancho */
+  gap: 20px; /* Separación entre columnas */
+  align-items: start; /* Permite que cada columna crezca según sus tarjetas */
+}
+
+/* Estilo base de cada columna del tablero */
+.columna {
+  background: var(--fondo-columna); /* Fondo translúcido estilo cristal */
+  border: 1px solid var(--borde-sutil); /* Borde fino alrededor de la columna */
+  border-top: 3px solid var(--cian); /* Acento superior por defecto */
+  border-radius: 18px; /* Esquinas redondeadas */
+  padding: 18px; /* Espaciado interno */
+  min-height: 340px; /* Altura mínima cómoda para arrastrar y soltar tarjetas */
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.45); /* Sombra profunda para dar elevación */
+  backdrop-filter: blur(10px); /* Desenfoca el fondo detrás de la columna */
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease; /* Suaviza el estado drag-over */
+}
+
+/* Colores de acento superior específicos para cada estado del flujo */
+.columna[data-columna="pendiente"] {
+  border-top-color: var(--cian); /* Cian para tareas por hacer */
+}
+
+.columna[data-columna="progreso"] {
+  border-top-color: var(--ambar); /* Ámbar para tareas en progreso */
+}
+
+.columna[data-columna="completado"] {
+  border-top-color: var(--esmeralda); /* Verde esmeralda para tareas completadas */
+}
+
+/* Encabezado de cada columna */
+.columna h2 {
+  font-size: 1.08rem; /* Tamaño equilibrado */
+  font-weight: 700; /* Negrita */
+  color: var(--texto-principal); /* Texto claro */
+  margin-bottom: 14px; /* Separación respecto a las tarjetas */
+  padding-bottom: 10px; /* Espacio interno antes de la línea divisoria */
+  border-bottom: 1px solid var(--borde-sutil); /* Línea separadora sutil */
+}
+
+/* Zona interna donde se apilan las tarjetas y se detecta el drop */
+.contenedor-tarjetas {
+  min-height: 250px; /* Asegura un área amplia para soltar tarjetas incluso si está vacía */
+  display: flex; /* Usa Flexbox vertical */
+  flex-direction: column; /* Apila las tarjetas una debajo de otra */
+  gap: 10px; /* Espacio vertical entre tarjetas */
+}
+
+/* Resaltado visual cuando una tarjeta arrastrada pasa por encima de la columna */
+.columna.drag-over {
+  border-color: var(--cian); /* Ilumina todo el borde de la columna */
+  background: rgba(56, 189, 248, 0.08); /* Tinte cian suave como zona de aterrizaje */
+  transform: translateY(-2px); /* Pequeño levantamiento visual */
+}
+
+/* Cada tarjeta de tarea arrastrable */
+.tarjeta {
+  background: var(--fondo-tarjeta); /* Fondo sutil semitransparente */
+  border: 1px solid var(--borde-sutil); /* Borde fino */
+  border-left: 3px solid var(--cian); /* Acento lateral cian */
+  border-radius: 12px; /* Esquinas redondeadas */
+  padding: 13px 14px; /* Relleno interno cómodo */
+  font-size: 0.95rem; /* Tamaño de texto legible */
+  color: var(--texto-principal); /* Texto claro */
+  cursor: grab; /* Indica visualmente que la tarjeta se puede arrastrar */
+  user-select: none; /* Evita seleccionar texto por accidente al arrastrar */
+  transition: background-color 0.2s ease, transform 0.15s ease, border-color 0.2s ease; /* Suaviza interacciones */
+}
+
+/* Resaltado al pasar el cursor sobre una tarjeta */
+.tarjeta:hover {
+  background: rgba(255, 255, 255, 0.09); /* Aclara ligeramente el fondo */
+  border-color: rgba(56, 189, 248, 0.45); /* Resalta el borde en cian */
+  transform: translateY(-2px); /* Eleva sutilmente la tarjeta */
+}
+
+/* Cursor de mano cerrada mientras se arrastra la tarjeta */
+.tarjeta:active {
+  cursor: grabbing; /* Cambia el cursor a "agarrando" */
+}
+
+/* Adaptación para tablets y móviles */
+@media (max-width: 820px) {
+  .kanban-board {
+    grid-template-columns: 1fr; /* Apila las 3 columnas en una sola columna vertical */
+  }
+
+  .columna {
+    min-height: 220px; /* Reduce un poco la altura mínima en pantallas pequeñas */
+  }
+}
+
+/* Adaptación para móviles muy estrechos */
+@media (max-width: 500px) {
+  .nueva-tarea {
+    flex-direction: column; /* Coloca el botón debajo del input */
+  }
+}
