@@ -402,6 +402,13 @@ const modules = [
     desc: "Modal interactivo de aceptación de cookies con expiración UTC y estado neón.",
     href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Uso de Cookies/index.html",
   },
+  { // Ejercicio interactivo de pizarra 2D con HTML5 Canvas API
+    cat: "proyectos",
+    title: "22. Web Paint (Canvas 2D)",
+    tag: "Proyecto Master",
+    desc: "Pizarra interactiva con pincel, borrador, grosor, Deshacer (Ctrl+Z) y descarga PNG.",
+    href: "JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/index.html",
+  },
 
   // --- SECCIÓN: JS MID LEVEL ---
   // Práctica de programación asíncrona moderna con async y await

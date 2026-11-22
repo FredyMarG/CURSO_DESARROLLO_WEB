@@ -1,0 +1,155 @@
+/* Archivo: JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/style.css — Hoja de estilos comentada línea a línea */
+* { /* Selector universal para normalizar dimensiones */
+    margin: 0; /* Elimina márgenes por defecto */
+    padding: 0; /* Elimina rellenos por defecto */
+    box-sizing: border-box; /* Incluye borde y relleno en el cálculo del tamaño */
+}
+
+body { /* Estilos generales del cuerpo del documento */
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Tipografía moderna principal */
+    background: #070b14; /* Fondo oscuro base */
+    color: #f8fafc; /* Color de texto principal claro */
+    min-height: 100vh; /* Altura mínima equivalente a la ventana */
+    padding: 2rem 1rem 3rem; /* Espaciado interno general */
+}
+
+.contenedor-app { /* Contenedor central del ejercicio */
+    max-width: 860px; /* Ancho máximo de lectura y trabajo */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    display: flex; /* Activa diseño flexible */
+    flex-direction: column; /* Apila los bloques verticalmente */
+    gap: 1.25rem; /* Separación vertical entre secciones */
+}
+
+.encabezado { /* Tarjeta de cabecera con título y descripción */
+    text-align: center; /* Centra el texto del encabezado */
+    padding: 1.25rem 1.5rem; /* Relleno interior */
+    background: rgba(15, 23, 42, 0.85); /* Fondo semitransparente estilo glassmorphism */
+    border: 1px solid rgba(56, 189, 248, 0.25); /* Borde neón sutil */
+    border-radius: 16px; /* Esquinas redondeadas */
+}
+
+.badge-modulo { /* Etiqueta superior identificadora del nivel */
+    display: inline-block; /* Permite padding y márgenes */
+    font-size: 0.75rem; /* Tamaño de fuente compacto */
+    font-weight: 700; /* Texto en negrita */
+    letter-spacing: 0.08em; /* Espaciado entre letras */
+    color: #38bdf8; /* Color cian brillante */
+    background: rgba(56, 189, 248, 0.14); /* Fondo cian translúcido */
+    padding: 0.25rem 0.75rem; /* Relleno interno de la insignia */
+    border-radius: 999px; /* Forma de píldora completa */
+    margin-bottom: 0.5rem; /* Separación inferior */
+}
+
+.encabezado h1 { /* Título principal del ejercicio */
+    font-size: clamp(1.5rem, 3vw, 2rem); /* Tamaño adaptable según pantalla */
+    margin-bottom: 0.35rem; /* Margen inferior */
+}
+
+.encabezado p { /* Subtítulo explicativo */
+    color: #94a3b8; /* Color gris azulado suave */
+    font-size: 0.95rem; /* Tamaño de fuente legible */
+}
+
+.editor { /* Contenedor principal del editor de pintura */
+    background: rgba(15, 23, 42, 0.88); /* Fondo oscuro translúcido */
+    border: 1px solid rgba(56, 189, 248, 0.3); /* Borde luminoso */
+    border-radius: 16px; /* Esquinas redondeadas */
+    padding: 1rem; /* Relleno interior */
+    display: flex; /* Diseño flexible */
+    flex-direction: column; /* Organiza barra, lienzo y estado en columna */
+    gap: 0.9rem; /* Separación entre bloques del editor */
+}
+
+.paint-toolbar { /* Barra superior con controles y botones */
+    display: flex; /* Disposición horizontal flexible */
+    flex-wrap: wrap; /* Permite saltar de línea en pantallas pequeñas */
+    align-items: center; /* Alinea controles verticalmente al centro */
+    justify-content: space-between; /* Distribuye espacio entre controles */
+    gap: 0.8rem; /* Separación entre elementos */
+    background: rgba(2, 6, 23, 0.65); /* Fondo más oscuro para destacar controles */
+    border: 1px solid rgba(148, 163, 184, 0.16); /* Borde sutil */
+    border-radius: 12px; /* Esquinas redondeadas */
+    padding: 0.75rem 0.9rem; /* Relleno interno */
+}
+
+.control-item { /* Contenedor de cada selector (color y grosor) */
+    display: inline-flex; /* Alineación horizontal en línea */
+    align-items: center; /* Centra verticalmente etiqueta e input */
+    gap: 0.5rem; /* Separación entre texto y control */
+    font-size: 0.88rem; /* Tamaño de texto */
+    color: #cbd5e1; /* Color claro suave */
+}
+
+#color { /* Selector de color HTML5 */
+    width: 44px; /* Ancho del cuadro de color */
+    height: 34px; /* Alto del cuadro de color */
+    border: 1px solid rgba(148, 163, 184, 0.35); /* Borde sutil */
+    border-radius: 8px; /* Esquinas redondeadas */
+    background: transparent; /* Fondo transparente */
+    cursor: pointer; /* Puntero de mano al pasar encima */
+}
+
+#lw { /* Control deslizante de grosor */
+    width: 140px; /* Ancho del slider */
+    accent-color: #00f0ff; /* Color de acento neón */
+    cursor: pointer; /* Puntero interactivo */
+}
+
+.toolbar-actions { /* Grupo de botones de herramientas */
+    display: flex; /* Disposición flexible */
+    flex-wrap: wrap; /* Permite ajuste en móviles */
+    gap: 0.45rem; /* Separación entre botones */
+}
+
+.paint-btn { /* Estilo base de los botones del editor */
+    border: 1px solid rgba(148, 163, 184, 0.25); /* Borde suave */
+    background: #1e293b; /* Fondo gris azulado oscuro */
+    color: #f8fafc; /* Texto claro */
+    padding: 0.45rem 0.8rem; /* Relleno interno */
+    border-radius: 8px; /* Esquinas redondeadas */
+    font-family: inherit; /* Hereda la fuente Outfit */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor seminegrita */
+    cursor: pointer; /* Puntero interactivo */
+    transition: transform 0.12s ease, border-color 0.15s ease, background 0.15s ease; /* Transición suave */
+}
+
+.paint-btn:hover { /* Efecto al pasar el cursor sobre el botón */
+    border-color: #00f0ff; /* Resalta borde en cian */
+    transform: translateY(-1px); /* Elevación sutil */
+}
+
+.paint-btn.active, .paint-btn.primary { /* Estilo para herramienta activa y botón principal */
+    background: #00f0ff; /* Fondo cian neón */
+    color: #020617; /* Texto oscuro para máximo contraste */
+    border-color: #00f0ff; /* Borde a juego */
+}
+
+.canvas-stage { /* Marco contenedor del lienzo */
+    background: #020617; /* Fondo profundo */
+    border: 1px solid rgba(0, 240, 255, 0.28); /* Borde luminoso */
+    border-radius: 12px; /* Esquinas redondeadas */
+    padding: 0.5rem; /* Margen interior del marco */
+}
+
+#canvas { /* Lienzo HTML5 Canvas 2D */
+    width: 100%; /* Se adapta al 100% del ancho disponible */
+    height: auto; /* Mantiene la proporción declarada (760x440) */
+    display: block; /* Evita espacio inferior de elementos en línea */
+    border-radius: 8px; /* Esquinas redondeadas */
+    background: #0b1120; /* Fondo oscuro del área de dibujo */
+    cursor: crosshair; /* Cursor tipo mira para precisión al dibujar */
+    touch-action: none; /* Evita scroll accidental al dibujar en pantallas táctiles */
+}
+
+.paint-status { /* Barra inferior de estado y coordenadas */
+    display: flex; /* Disposición flexible */
+    flex-wrap: wrap; /* Ajuste en pantallas pequeñas */
+    justify-content: space-between; /* Separa coordenadas y modo a los extremos */
+    gap: 0.5rem; /* Separación mínima */
+    font-family: 'Fira Code', monospace; /* Fuente monoespaciada para métricas */
+    font-size: 0.82rem; /* Tamaño compacto */
+    color: #38bdf8; /* Color cian informativo */
+    padding: 0.25rem 0.35rem 0; /* Espaciado sutil */
+}
