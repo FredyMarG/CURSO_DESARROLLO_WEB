@@ -8,32 +8,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición: ¿Qué es REPL?
-2. Principales usos
-3. Cómo iniciar y salir de REPL
-4. El ciclo Read–Eval–Print–Loop
-5. Expresiones, variables y funciones
-6. Objetos, arreglos y métodos de JavaScript
-7. Comandos especiales: `.help`, `.exit`, `.clear`, `.break`, `.save`, `.load`, `.editor`
-8. Historial, autocompletado y expresiones multilínea
-9. Variables y módulos disponibles en REPL
-10. Promesas y `await` interactivo
-11. Diferencias entre REPL, `node archivo.js` y consola del navegador
-12. Analogías del mundo real
-13. Diagrama de flujo
-14. Buenas prácticas y errores comunes
-15. Laboratorio guiado
-16. Proyecto integrador: prototipo interactivo de catálogo de cursos
-17. Ejercicios de tres niveles
-18. Solucionario paso a paso
-19. Evaluación
-20. Hoja de trucos
-21. Resumen técnico
-
----
-
 # Definición
 
 **REPL** significa **Read–Eval–Print–Loop** (Leer–Evaluar–Imprimir–Repetir). Es un entorno interactivo integrado en Node.js. Permite escribir una expresión JavaScript, ejecutarla inmediatamente y ver el resultado sin guardar un archivo `.js`.

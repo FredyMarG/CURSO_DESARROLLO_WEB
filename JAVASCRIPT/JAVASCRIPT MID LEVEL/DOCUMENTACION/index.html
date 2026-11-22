@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -47,6 +47,14 @@
         .md-body pre { background:#050811; border:1px solid var(--border); border-radius:12px; padding:16px; overflow-x:auto; }
         .md-body pre code { background:none; color:#34d399; padding:0; font-size:0.85rem; }
         .md-body blockquote { border-left:4px solid var(--indigo); background:rgba(129,140,248,0.08); padding:10px 16px; border-radius:0 10px 10px 0; margin:12px 0; }
+        /* Separador horizontal dentro del documento Markdown */
+        .md-body hr { border:none; border-top:1px solid var(--border); margin:20px 0; }
+        /* Tabla Markdown con ancho completo y bordes colapsados */
+        .md-body table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.9rem; }
+        /* Celdas de encabezado y cuerpo de tabla */
+        .md-body th, .md-body td { border:1px solid var(--border); padding:9px 12px; text-align:left; }
+        /* Estilo destacado para los encabezados de tabla */
+        .md-body th { background:rgba(56,189,248,0.12); color:#fff; font-weight:700; }
         @media (max-width:1120px) { .layout { grid-template-columns:260px 1fr; } .toc { display:none; } }
         @media (max-width:820px) { .layout { grid-template-columns:1fr; } .sidebar { position:static; max-height:none; } }
     </style>
@@ -55,35 +63,56 @@
 <body>
     <header class="topbar">
         <div class="brand"><span class="badge">JS MID · DOCUMENTACIÓN</span><span class="title">⚡ Apuntes Completos de JavaScript Mid</span></div>
-        <div><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;"><a class="btn" href="../../../index.html?filter=proyectos">🚀 Proyectos</a><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
     </header>
     <div class="layout">
         <aside class="sidebar"><input type="search" id="docSearch" class="search-box" placeholder="Buscar en apuntes..." /><div class="doc-list" id="docList"></div></aside>
-        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="rawLink" class="btn" href="#" target="_blank">📄 Ver .md original</a></div><div id="docContent" class="md-body"></div></main>
+        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="moduleBtn" class="btn" href="../Window/index.html">🎯 Ir al Módulo</a></div><div id="docContent" class="md-body"></div></main>
         <aside class="toc"><div class="toc-title">📑 Índice</div><div class="toc-list" id="tocList"></div></aside>
     </div>
     <script>
-        const DOCS = [{"file": "AJAX.md", "title": "Ajax"}, {"file": "ASYNC Y AWAIT.md", "title": "Async Y Await"}, {"file": "AXIOS.md", "title": "Axios"}, {"file": "CALLBACKS.md", "title": "Callbacks"}, {"file": "CODIGO OBSOLETO.md", "title": "Codigo Obsoleto"}, {"file": "CONTROL DE FLUJO.md", "title": "Control De Flujo"}, {"file": "DATOS ESTRUCTURADOS (JSON).md", "title": "Datos Estructurados (Json)"}, {"file": "EVENTOS.md", "title": "Eventos"}, {"file": "EXCEPCIONES.md", "title": "Excepciones"}, {"file": "FETCH.md", "title": "Fetch"}, {"file": "LOCATION.md", "title": "Location"}, {"file": "OBJETOS BARPROP.md", "title": "Objetos Barprop"}, {"file": "PESTAÑA APPLICATION.md", "title": "Pestaña Application"}, {"file": "PESTAÑA CONSOLA.md", "title": "Pestaña Consola"}, {"file": "PESTAÑA ELEMENTS.md", "title": "Pestaña Elements"}, {"file": "PESTAÑA NETWORK.md", "title": "Pestaña Network"}, {"file": "PESTAÑA SOURCES.md", "title": "Pestaña Sources"}, {"file": "PESTAÑA TIMELINE.md", "title": "Pestaña Timeline"}, {"file": "PETICIONES HTTP.md", "title": "Peticiones Http"}, {"file": "PROMESAS.md", "title": "Promesas"}, {"file": "RESIZE Y MOVE.md", "title": "Resize Y Move"}, {"file": "SCREEN Y SCROLL.md", "title": "Screen Y Scroll"}, {"file": "SWITCH.md", "title": "Switch"}, {"file": "TRY-CATCH.md", "title": "Try-Catch"}, {"file": "WINDOW.md", "title": "Window"}];
-        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), rawLink = document.getElementById('rawLink');
+        const DOCS = [{"file": "WINDOW.md", "title": "01. Objeto Window", "module": "../Window/index.html"}, {"file": "OBJETOS BARPROP.md", "title": "02. Objetos Barprop", "module": "../Objetos Barprop/index.html"}, {"file": "LOCATION.md", "title": "03. Objeto Location", "module": "../Location/index.html"}, {"file": "SCREEN Y SCROLL.md", "title": "04. Screen y Scroll", "module": "../Screen y Scroll/index.html"}, {"file": "RESIZE Y MOVE.md", "title": "05. Resize y Move", "module": "../Resize y Move/index.html"}, {"file": "EVENTOS.md", "title": "06. Eventos del DOM", "module": "../Eventos/index.html"}, {"file": "CONTROL DE FLUJO.md", "title": "07. Control de Flujo", "module": "../Switch/index.html"}, {"file": "SWITCH.md", "title": "08. Sentencia Switch", "module": "../Switch/index.html"}, {"file": "EXCEPCIONES.md", "title": "09. Excepciones", "module": "../Try-Catch/index.html"}, {"file": "TRY-CATCH.md", "title": "10. Try-Catch", "module": "../Try-Catch/index.html"}, {"file": "CALLBACKS.md", "title": "11. Callbacks", "module": "../Callbacks/index.html"}, {"file": "PROMESAS.md", "title": "12. Promesas", "module": "../Promesas/index.html"}, {"file": "ASYNC Y AWAIT.md", "title": "13. Async y Await", "module": "../Async y Await/index.html"}, {"file": "DATOS ESTRUCTURADOS (JSON).md", "title": "14. Datos Estructurados (JSON)", "module": "../Datos Estructurados (JSON)/index.html"}, {"file": "PETICIONES HTTP.md", "title": "15. Peticiones HTTP", "module": "../Peticiones HTTP/index.html"}, {"file": "AJAX.md", "title": "16. AJAX (XMLHttpRequest)", "module": "../Ajax/index.html"}, {"file": "FETCH.md", "title": "17. Fetch API", "module": "../Fetch/index.html"}, {"file": "AXIOS.md", "title": "18. Librería Axios", "module": "../Libreria Axios/index.html"}, {"file": "CODIGO OBSOLETO.md", "title": "19. Código Obsoleto", "module": "../Codigo Obsoleto/index.html"}, {"file": "PESTAÑA ELEMENTS.md", "title": "20. DevTools: Elements", "module": "../Pestañas DevTools/index.html"}, {"file": "PESTAÑA CONSOLA.md", "title": "21. DevTools: Consola", "module": "../Pestañas DevTools/index.html"}, {"file": "PESTAÑA SOURCES.md", "title": "22. DevTools: Sources", "module": "../Pestañas DevTools/index.html"}, {"file": "PESTAÑA NETWORK.md", "title": "23. DevTools: Network", "module": "../Pestañas DevTools/index.html"}, {"file": "PESTAÑA TIMELINE.md", "title": "24. DevTools: Timeline", "module": "../Pestañas DevTools/index.html"}, {"file": "PESTAÑA APPLICATION.md", "title": "25. DevTools: Application", "module": "../Pestañas DevTools/index.html"}];
+        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), moduleBtn = document.getElementById('moduleBtn');
         let activeFile = DOCS[0].file;
         const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         const fmt = t => esc(t).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>');
         function renderMd(md) {
             const lines = md.replace(/\r\n/g,'\n').split('\n');
-            let html='', inCode=false, inList=false, hIdx=0, toc=[];
+            let html='', inCode=false, inList=false, tableRows=[], hIdx=0, toc=[];
+            // Convierte las filas acumuladas de una tabla Markdown en HTML <table>
+            const flushTable = () => {
+                if (!tableRows.length) return; // No hace nada si no hay filas pendientes
+                const parseRow = r => r.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim()); // Extrae celdas
+                const headers = parseRow(tableRows[0]); // Primera fila como encabezados
+                const body = tableRows.slice(2); // Omite la fila separadora (---)
+                html += '<table><thead><tr>' + headers.map(h => `<th>${fmt(h)}</th>`).join('') + '</tr></thead><tbody>'; // Encabezado
+                body.forEach(r => { html += '<tr>' + parseRow(r).map(c => `<td>${fmt(c)}</td>`).join('') + '</tr>'; }); // Filas de datos
+                html += '</tbody></table>'; // Cierre de tabla
+                tableRows = []; // Reinicia el acumulador
+            };
             for (const line of lines) {
                 if (line.trim().startsWith('```')) {
                     if (inList) { html+='</ul>'; inList=false; }
+                    flushTable();
                     html += inCode ? '</code></pre></div>' : '<div class="code-wrap"><button class="copy-btn">Copiar</button><pre><code>';
                     inCode = !inCode; continue;
                 }
                 if (inCode) { html += esc(line) + '\n'; continue; }
                 const tr = line.trim();
+                if (/^\|.*\|$/.test(tr)) {
+                    if (inList) { html+='</ul>'; inList=false; }
+                    tableRows.push(tr); continue;
+                }
+                flushTable();
                 if (!tr) { if (inList) { html+='</ul>'; inList=false; } continue; }
+                if (/^---+$/.test(tr)) {
+                    if (inList) { html+='</ul>'; inList=false; }
+                    html += '<hr>'; continue;
+                }
                 if (/^#{1,3}\s+/.test(tr)) {
                     if (inList) { html+='</ul>'; inList=false; }
                     const lvl = tr.match(/^(#{1,3})/)[1].length, raw = tr.replace(/^#{1,3}\s+/,''), id = 's-'+(++hIdx);
-                    if (lvl >= 2) toc.push({id,lvl,text:raw.replace(/`/g,'')});
+                    if (lvl >= 1 && hIdx > 1) toc.push({id,lvl,text:raw.replace(/`/g,'')});
                     html += `<h${lvl} id="${id}">${fmt(raw)}</h${lvl}>`;
                 } else if (/^[-*]\s+/.test(tr)) {
                     if (!inList) { html+='<ul>'; inList=true; }
@@ -96,17 +125,18 @@
                     html += `<p>${fmt(tr)}</p>`;
                 }
             }
+            flushTable();
             if (inList) html += '</ul>';
             if (inCode) html += '</code></pre></div>';
             return {html, toc};
         }
         function loadDoc(doc) {
-            activeFile = doc.file; docTitle.textContent = doc.title; rawLink.href = 'apuntes/' + encodeURI(doc.file);
+            activeFile = doc.file; docTitle.textContent = doc.title; if (moduleBtn && doc.module) moduleBtn.href = encodeURI(doc.module);
             renderSidebar(docSearch.value);
             const md = (window.DOCS_CONTENT && window.DOCS_CONTENT[doc.file]) || '';
             const {html, toc} = renderMd(md);
             docContent.innerHTML = html;
-            tocList.innerHTML = toc.slice(0,35).map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
+            tocList.innerHTML = toc.map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
             docContent.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', () => {
                 navigator.clipboard?.writeText(b.nextElementSibling?.textContent || '');
                 b.textContent = '¡Copiado!'; setTimeout(() => b.textContent = 'Copiar', 1400);

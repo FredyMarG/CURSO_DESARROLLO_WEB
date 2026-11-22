@@ -1,3 +1,40 @@
+# GUÍA COMPLETA — HTML5
+
+> **Nivel:** Fundamentos del Desarrollo Web Frontend  
+> **Objetivo:** Comprender qué es HTML5, para qué sirve, cómo se estructura un documento web válido y dominar las etiquetas semánticas, de contenido, formularios y multimedia.
+
+---
+
+## ¿Qué es HTML5 y para qué sirve?
+
+**HTML** (*HyperText Markup Language* o Lenguaje de Marcado de Hipertexto) es el **lenguaje estándar** utilizado para estructurar y dar significado al contenido de las páginas web. **No es** un lenguaje de programación: no tiene bucles ni condicionales, sino **etiquetas** que describen qué es cada parte de un documento (un título, un párrafo, una imagen, un enlace, un formulario, una tabla).
+
+- **¿Para qué sirve?** Define el esqueleto y la semántica de cualquier sitio o aplicación web. Los navegadores leen el HTML para construir el **DOM**, los buscadores (SEO) lo usan para entender el contenido y los lectores de pantalla dependen de él para la **accesibilidad**.
+- **Analogía:** Si una página web fuera una casa, **HTML** sería la estructura (cimientos, paredes, puertas y habitaciones), **CSS** sería la pintura y decoración, y **JavaScript** sería la electricidad y los mecanismos interactivos.
+
+### Estructura mínima de un documento HTML5
+
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi primera página HTML5</title>
+</head>
+<body>
+  <header>
+    <h1>Hola, Desarrollo Web</h1>
+  </header>
+  <main>
+    <p>Este es un párrafo estructurado con HTML5 semántico.</p>
+  </main>
+</body>
+</html>
+```
+
+---
+
 # Raíz principal
 
 ## Elemento | Descripción

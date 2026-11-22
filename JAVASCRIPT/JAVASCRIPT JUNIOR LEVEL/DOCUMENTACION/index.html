@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
@@ -55,16 +55,16 @@
 <body>
     <header class="topbar">
         <div class="brand"><span class="badge">JS JUNIOR · DOCUMENTACIÓN</span><span class="title">🌱 Apuntes Completos de JavaScript Junior</span></div>
-        <div><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;"><a class="btn" href="../../../index.html?filter=proyectos">🚀 Proyectos</a><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
     </header>
     <div class="layout">
         <aside class="sidebar"><input type="search" id="docSearch" class="search-box" placeholder="Buscar en apuntes..." /><div class="doc-list" id="docList"></div></aside>
-        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="rawLink" class="btn" href="#" target="_blank">📄 Ver .md original</a></div><div id="docContent" class="md-body"></div></main>
+        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="moduleBtn" class="btn" href="../Variables/index.html">🎯 Ir al Módulo</a></div><div id="docContent" class="md-body"></div></main>
         <aside class="toc"><div class="toc-title">📑 Índice</div><div class="toc-list" id="tocList"></div></aside>
     </div>
     <script>
-        const DOCS = [{"file": "ARRAYS.md", "title": "Arrays"}, {"file": "ARRAYS_METHODS.md", "title": "Arrays Methods"}, {"file": "BUCLES.md", "title": "Bucles"}, {"file": "CADENAS.md", "title": "Cadenas"}, {"file": "CONCATENACION.md", "title": "Concatenacion"}, {"file": "CONDICIONALES.md", "title": "Condicionales"}, {"file": "CONSOLE.LOG.md", "title": "Console.Log"}, {"file": "DOM.md", "title": "Dom"}, {"file": "FUNCIONES.md", "title": "Funciones"}, {"file": "MATH.md", "title": "Math"}, {"file": "METODOS DE CADENA.md", "title": "Metodos De Cadena"}, {"file": "OPERADORES.md", "title": "Operadores"}, {"file": "POO.md", "title": "Poo"}, {"file": "VARIABLES.md", "title": "Variables"}];
-        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), rawLink = document.getElementById('rawLink');
+        const DOCS = [{"file": "VARIABLES.md", "title": "01. Variables y Tipos", "module": "../Variables/index.html"}, {"file": "OPERADORES.md", "title": "02. Operadores", "module": "../Operadores/index.html"}, {"file": "CONCATENACION.md", "title": "03. Concatenación", "module": "../Concatenacion/index.html"}, {"file": "CONDICIONALES.md", "title": "04. Condicionales", "module": "../Condicionales/index.html"}, {"file": "ARRAYS.md", "title": "05. Arrays", "module": "../Arrays/index.html"}, {"file": "ARRAYS_METHODS.md", "title": "06. Métodos de Arrays", "module": "../Arrays/index.html"}, {"file": "BUCLES.md", "title": "07. Bucles (while / for)", "module": "../Bucles/index.html"}, {"file": "FUNCIONES.md", "title": "08. Funciones", "module": "../Funciones/index.html"}, {"file": "POO.md", "title": "09. POO", "module": "../POO/index.html"}, {"file": "CADENAS.md", "title": "10. Cadenas", "module": "../Cadenas(Metodos)/index.html"}, {"file": "METODOS DE CADENA.md", "title": "11. Métodos de Cadena", "module": "../Cadenas(Metodos)/index.html"}, {"file": "MATH.md", "title": "12. Objeto Math", "module": "../Math/index.html"}, {"file": "CONSOLE.LOG.md", "title": "13. Console.log", "module": "../Console.log/index.html"}, {"file": "DOM.md", "title": "14. DOM", "module": "../Dom/index.html"}];
+        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), moduleBtn = document.getElementById('moduleBtn');
         let activeFile = DOCS[0].file;
         const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         const fmt = t => esc(t).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>');
@@ -83,7 +83,7 @@
                 if (/^#{1,3}\s+/.test(tr)) {
                     if (inList) { html+='</ul>'; inList=false; }
                     const lvl = tr.match(/^(#{1,3})/)[1].length, raw = tr.replace(/^#{1,3}\s+/,''), id = 's-'+(++hIdx);
-                    if (lvl >= 2) toc.push({id,lvl,text:raw.replace(/`/g,'')});
+                    if (lvl >= 1 && hIdx > 1) toc.push({id,lvl,text:raw.replace(/`/g,'')});
                     html += `<h${lvl} id="${id}">${fmt(raw)}</h${lvl}>`;
                 } else if (/^[-*]\s+/.test(tr)) {
                     if (!inList) { html+='<ul>'; inList=true; }
@@ -101,12 +101,12 @@
             return {html, toc};
         }
         function loadDoc(doc) {
-            activeFile = doc.file; docTitle.textContent = doc.title; rawLink.href = 'apuntes/' + encodeURI(doc.file);
+            activeFile = doc.file; docTitle.textContent = doc.title; if (moduleBtn && doc.module) moduleBtn.href = encodeURI(doc.module);
             renderSidebar(docSearch.value);
             const md = (window.DOCS_CONTENT && window.DOCS_CONTENT[doc.file]) || '';
             const {html, toc} = renderMd(md);
             docContent.innerHTML = html;
-            tocList.innerHTML = toc.slice(0,35).map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
+            tocList.innerHTML = toc.map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
             docContent.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', () => {
                 navigator.clipboard?.writeText(b.nextElementSibling?.textContent || '');
                 b.textContent = '¡Copiado!'; setTimeout(() => b.textContent = 'Copiar', 1400);

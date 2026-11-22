@@ -5,25 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es HTML5 Canvas y cómo funciona?
-2. Sintaxis básica y anatomía del contexto 2D
-3. Rectángulos y estilos (`fillStyle`, `strokeStyle`, `lineWidth`, `fillRect`, `strokeRect`)
-4. Rutas y trazados personalizados (`beginPath`, `moveTo`, `lineTo`, `closePath`)
-5. Comparativa: Rectángulos directos vs. Trazados por rutas (`Path`)
-6. Analogía del mundo real
-7. Diagrama de flujo de dibujo
-8. Buenas prácticas
-9. Errores comunes
-10. Ejercicios
-11. Solucionario paso a paso
-12. Resumen
-13. Conceptos Complementarios
-14. Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es HTML5 Canvas y cómo funciona?
 
 La etiqueta **`<canvas>`** de HTML5 es un contenedor gráfico que permite dibujar formas, gráficos, animaciones y videojuegos directamente en el navegador utilizando **JavaScript**. A diferencia de los elementos HTML tradicionales o los gráficos vectoriales (SVG), Canvas funciona como un **mapa de bits (píxeles)**: una vez que dibujas algo en el lienzo, el navegador "olvida" el objeto y solo recuerda los píxeles pintados.

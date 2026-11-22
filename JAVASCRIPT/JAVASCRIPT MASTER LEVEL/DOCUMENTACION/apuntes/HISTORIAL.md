@@ -5,23 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Introducción a la API de Historial (`window.history`)
-2. Métodos de navegación básica: `back()` y `forward()`
-3. Inspección de la pila: Tamaño del historial (`length`)
-4. Navegación relativa con `go()`
-5. Adición de entradas con `pushState()`
-6. Reemplazo de entradas con `replaceState()`
-7. Estado de sesión (`history.state`) y el evento `popstate`
-8. Analogías del mundo real
-9. Diagrama de flujo de la pila de navegación
-10. Buenas prácticas y errores comunes
-11. Proyecto Integrador: Enrutador SPA sin recarga
-12. Resumen técnico
-
----
-
 # Introducción a la API de Historial
 
 El objeto global **`window.history`** (accesible simplemente como `history`) forma parte del BOM (*Browser Object Model*) y permite interactuar directamente con la pila de navegación de la pestaña o sesión actual del navegador.

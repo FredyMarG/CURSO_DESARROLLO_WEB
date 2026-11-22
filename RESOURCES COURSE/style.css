@@ -256,6 +256,42 @@ h1 {
     margin-bottom: 42px;
 }
 
+/* Contenedor de icono oficial de tecnología (HTML, CSS, JS, Node.js) */
+.tech-icon {
+    /* Mantiene el icono alineado en línea con el texto */
+    display: inline-flex;
+    /* Centra horizontalmente el SVG */
+    justify-content: center;
+    /* Centra verticalmente el SVG */
+    align-items: center;
+    /* Evita que el icono se encoja en contenedores flex */
+    flex-shrink: 0;
+    /* Alinea suavemente con la línea de texto */
+    vertical-align: middle;
+}
+
+/* Tamaño estándar para títulos de sección y botones de ruta (SVG o imagen Flaticon) */
+.tech-icon svg,
+.tech-icon img {
+    /* Ancho estándar del icono */
+    width: 22px;
+    /* Alto estándar del icono */
+    height: 22px;
+    /* Mantiene la proporción de la imagen sin recortarla */
+    object-fit: contain;
+    /* Sombra sutil para destacar sobre fondo oscuro */
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+}
+
+/* Tamaño compacto para tarjetas de módulos y botones de filtro */
+.tech-icon-sm svg,
+.tech-icon-sm img {
+    /* Ancho compacto */
+    width: 18px;
+    /* Alto compacto */
+    height: 18px;
+}
+
 /* Título de cada sección de curso */
 .course-title {
     /* Tamaño destacado */

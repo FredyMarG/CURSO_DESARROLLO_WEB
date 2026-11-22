@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es el Almacenamiento Web (Web Storage)?
-2. Diferencias clave: LocalStorage vs. SessionStorage
-3. Métodos fundamentales y anatomía de la API
-4. Manejo de tipos de datos: El problema de la conversión implícita
-5. Analogía del mundo real
-6. Diagrama de flujo de decisión
-7. Buenas prácticas y limitaciones
-8. Errores comunes
-9. Ejercicios prácticos
-10. Solucionario paso a paso
-11. Resumen
-
----
-
 # ¿Qué es el Almacenamiento Web?
 
 El **Web Storage** (Almacenamiento Web) es una API nativa de los navegadores modernos que permite a las aplicaciones web guardar datos de manera local en el dispositivo del usuario, bajo un formato de **clave-valor** (key-value).

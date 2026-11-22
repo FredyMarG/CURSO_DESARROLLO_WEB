@@ -1511,22 +1511,90 @@ const modules = [
   },
 ];
 
-// Diccionario que asigna un título legible con emoji a cada categoría del portal
+// Iconos oficiales tomados de Flaticon (HTML5, CSS3, JavaScript y Node.js)
+const TECH_ICONS = { // Declara e inicializa "TECH_ICONS"
+  // Icono oficial de HTML5 en Flaticon
+  html: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/174/174854.png" alt=""></span>',
+  // Icono oficial de CSS3 en Flaticon
+  css: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt=""></span>',
+  // Icono oficial de JavaScript en Flaticon
+  js: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt=""></span>',
+  // Icono oficial de Node.js en Flaticon
+  node: '<span class="tech-icon" aria-hidden="true"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt=""></span>',
+};
+
+// Función auxiliar que determina qué icono de tecnología corresponde a cada tarjeta del portal
+function getCardTechIcon(item) { // Declara función
+  // Si pertenece a Node.js o apunta a la carpeta NODE/, usamos el icono oficial de Node.js
+  if (item.cat === "node" || item.href.startsWith("NODE/")) return TECH_ICONS.node; // Evalúa condición
+  // Si pertenece a cualquier nivel de JavaScript o apunta a JAVASCRIPT/, usamos el icono oficial JS
+  if (item.cat === "master" || item.cat === "mid" || item.cat === "junior" || item.href.startsWith("JAVASCRIPT/")) return TECH_ICONS.js; // Evalúa condición
+  // Si es un proyecto de HTML y CSS, mostramos ambos iconos (HTML5 y CSS3) juntos
+  if (item.cat === "proyectos" && item.href.startsWith("HTML y CSS/")) return TECH_ICONS.html + TECH_ICONS.css; // Evalúa condición
+  // Si el módulo es específicamente de HTML, usamos el icono naranja de HTML5
+  if (/html/i.test(item.title) && !/css/i.test(item.title)) return TECH_ICONS.html; // Evalúa condición
+  // Si es un módulo de CSS, Flexbox, Grid, Animaciones, Responsive o Funciones Avanzadas, usamos el icono azul CSS3
+  if (item.cat === "htmlcss" || item.cat === "proyectos") return TECH_ICONS.css; // Evalúa condición
+  // Respaldo por defecto
+  return ""; // Retorna cadena vacía
+}
+
+// Función auxiliar que asigna un icono temático acorde al contenido de cada ejercicio o proyecto
+function getTopicIcon(item) { // Declara función
+  // Solo aplicamos icono temático adicional en ejercicios y proyectos
+  if (item.cat !== "ejercicios" && item.cat !== "proyectos") return ""; // Evalúa condición
+  // Normalizamos el título a minúsculas para comparar palabras clave
+  const t = item.title.toLowerCase(); // Declara e inicializa "t"
+  if (t.includes("helado")) return "🍦"; // Helados y Precios
+  if (t.includes("fiesta")) return "🎉"; // Fiesta y Entrada
+  if (t.includes("asistencia")) return "📋"; // Control de Asistencia
+  if (t.includes("calculadora")) return "🧮"; // Calculadora Básica / Avanzada
+  if (t.includes("celular")) return "📱"; // Celular Nuevo / Apps Celular
+  if (t.includes("materia") || t.includes("inscripción") || t.includes("recuperación")) return "📚"; // Materias / Inscripción / Recuperación
+  if (t.includes("nota") || t.includes("promedio")) return "🎓"; // Nota Final / Promedio / Notas de Cofla
+  if (t.includes("tareas")) return "✅"; // Ordenar Tareas
+  if (t.includes("computador")) return "💻"; // Comprar Computador
+  if (t.includes("datos web")) return "🌐"; // Mostrar Datos Web
+  if (t.includes("llave")) return "🔑"; // La Llave Correcta
+  if (t.includes("compañeros")) return "👥"; // Compañeros de Cofla
+  if (t.includes("reloj")) return "⏰"; // Reloj Digital
+  if (t.includes("idioma")) return "🌍"; // Idioma con LocalStorage
+  if (t.includes("drag") || t.includes("texturizador")) return "🖱️"; // Drag & Drop / Texturizador
+  if (t.includes("galería") || t.includes("lazy")) return "🖼️"; // Galería Dinámica / Lazy Load
+  if (t.includes("indexeddb")) return "🗄️"; // CRUD con IndexedDB
+  if (t.includes("cookies")) return "🍪"; // Uso de Cookies
+  if (t.includes("paint")) return "🎨"; // Web Paint
+  if (t.includes("finanzas")) return "💰"; // Finanzas APP
+  if (t.includes("películas")) return "🎬"; // Buscador de Películas
+  if (t.includes("kanban")) return "🗂️"; // Tablero Kanban
+  if (t.includes("accordion")) return "📂"; // Accordion Menu
+  if (t.includes("chatbox")) return "💬"; // Chatbox
+  if (t.includes("flipper")) return "🃏"; // Flipper Card 3D
+  if (t.includes("one view")) return "📄"; // One View Page
+  if (t.includes("sidebar")) return "📑"; // Sidebar Menu
+  if (t.includes("animations")) return "✨"; // Web Page Animations
+  if (t.includes("web page")) return "🖥️"; // Web Page
+  if (t.includes("proyectos html")) return "🧩"; // Proyectos HTML y CSS (Guía)
+  // Icono genérico por defecto si no coincide ninguna palabra clave
+  return "⚡"; // Retorna icono por defecto
+}
+
+// Diccionario que asigna un título legible con su icono oficial a cada categoría del portal
 const titles = { // Declara e inicializa "titles"
-  // Encabezado para Node.js
-  node: "🟢 Node.js — Backend y Entorno de Ejecución",
-  // Encabezado para Master Level
-  master: "🚀 JavaScript Master Level — Guías Interactivas",
+  // Encabezado para Node.js con hexágono verde N
+  node: `${TECH_ICONS.node} Node.js — Backend y Entorno de Ejecución`,
+  // Encabezado para Master Level con icono oficial JS
+  master: `${TECH_ICONS.js} JavaScript Master Level — Guías Interactivas`,
   // Encabezado para Ejercicios
   ejercicios: "🧪 Ejercicios Prácticos Interactivos (Todos los Niveles)",
-  // Encabezado para Mid Level
-  mid: "⚡ JavaScript Mid Level",
-  // Encabezado para Junior Level
-  junior: "🌱 JavaScript Junior Level",
-  // Encabezado para HTML y CSS
-  htmlcss: "🎨 HTML5 y CSS3",
+  // Encabezado para Mid Level con icono oficial JS
+  mid: `${TECH_ICONS.js} JavaScript Mid Level`,
+  // Encabezado para Junior Level con icono oficial JS
+  junior: `${TECH_ICONS.js} JavaScript Junior Level`,
+  // Encabezado para HTML y CSS con iconos oficiales H y CSS
+  htmlcss: `${TECH_ICONS.html}${TECH_ICONS.css} HTML5 y CSS3`,
   // Encabezado para Proyectos Integradores
-  proyectos: "💼 Proyectos Integradores — HTML/CSS y JavaScript",
+  proyectos: `${TECH_ICONS.html}${TECH_ICONS.css}${TECH_ICONS.js} Proyectos Integradores — HTML/CSS y JavaScript`,
 };
 
 // Referencia al contenedor principal donde se inyectan las secciones y tarjetas
@@ -1535,8 +1603,14 @@ const portal = document.getElementById("portalContent"); // Obtiene referencia D
 const searchInput = document.getElementById("searchInput"); // Obtiene referencia DOM para "searchInput"
 // Colección de todos los botones de filtro por categoría
 const filterBtns = document.querySelectorAll(".filter-btn"); // Obtiene referencia DOM para "filterBtns"
-// Variable que almacena el filtro de categoría seleccionado actualmente
-let activeFilter = "all"; // Declara e inicializa "activeFilter"
+// Variable que almacena el filtro de categoría seleccionado actualmente (soporta ?filter=proyectos en la URL)
+const urlFilter = new URLSearchParams(window.location.search).get("filter"); // Lee parámetro de filtro desde la URL
+let activeFilter = urlFilter && ["all", "htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"].includes(urlFilter) ? urlFilter : "all"; // Declara e inicializa "activeFilter"
+
+// Si la URL trajo un filtro válido, sincronizamos el botón activo en la barra de herramientas
+if (activeFilter !== "all") { // Evalúa condición
+  filterBtns.forEach((b) => b.classList.toggle("active", b.dataset.filter === activeFilter)); // Actualiza botón activo
+}
 
 // Función principal encargada de filtrar y renderizar dinámicamente el catálogo en el DOM
 function render() { // Declara función
@@ -1545,16 +1619,29 @@ function render() { // Declara función
   // Limpiamos el contenido previo del portal antes de volver a dibujar
   portal.innerHTML = ""; // Actualiza contenido en el DOM
 
-  // Definimos el orden visual en que se mostrarán las categorías
-  const order = ["node", "master", "ejercicios", "proyectos", "mid", "junior", "htmlcss"]; // Declara e inicializa "order"
+  // Función auxiliar que indica si un proyecto pertenece al filtro de nivel activo (JS, Node o HTML/CSS)
+  const projectMatchesFilter = (m, filter) => { // Define función flecha
+    if (m.cat !== "proyectos") return false; // Solo aplica a proyectos
+    if (filter === "node") return m.href.startsWith("NODE/"); // Proyectos de Node.js
+    if (filter === "junior") return m.href.includes("JAVASCRIPT JUNIOR LEVEL"); // Proyectos de JS Junior
+    if (filter === "mid") return m.href.includes("JAVASCRIPT MID LEVEL"); // Proyectos de JS Mid
+    if (filter === "master") return m.href.includes("JAVASCRIPT MASTER LEVEL") || m.href.startsWith("JAVASCRIPT/PROYECTOS/"); // Proyectos de JS Master y JS general
+    if (filter === "htmlcss") return m.href.startsWith("HTML y CSS/"); // Proyectos de HTML y CSS
+    return false; // Por defecto no coincide
+  };
+
+  // Definimos el orden progresivo del curso (HTML/CSS → JS Junior → JS Mid → JS Master → Node.js → Ejercicios → Proyectos)
+  const order = ["htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"]; // Declara e inicializa "order"
   // Recorremos cada categoría en el orden establecido
   order.forEach((cat) => { // Instrucción JavaScript
-    // Si hay un filtro activo distinto de 'all' y no coincide con esta categoría, la omitimos
-    if (activeFilter !== "all" && activeFilter !== cat) return; // Evalúa condición
+    // Permitimos mostrar también la sección de proyectos del nivel cuando el usuario filtra por JS, Node o HTML/CSS
+    const isLevelProjects = activeFilter !== "all" && cat === "proyectos" && ["htmlcss", "junior", "mid", "master", "node"].includes(activeFilter); // Declara e inicializa "isLevelProjects"
+    // Si hay un filtro activo distinto de 'all' y no coincide con esta categoría (ni es proyectos del nivel), la omitimos
+    if (activeFilter !== "all" && activeFilter !== cat && !isLevelProjects) return; // Evalúa condición
     // Filtramos los módulos que pertenecen a esta categoría y coinciden con la búsqueda
     const items = modules.filter(
       (m) =>
-        m.cat === cat &&
+        (isLevelProjects ? projectMatchesFilter(m, activeFilter) : m.cat === cat) &&
         (m.title.toLowerCase().includes(q) ||
           m.desc.toLowerCase().includes(q) ||
           m.tag.toLowerCase().includes(q)),
@@ -1595,10 +1682,13 @@ function render() { // Declara función
       const isDoc = item.tag.includes("MD") || item.tag === "Proyecto"; // Declara e inicializa "isDoc"
       const done = progressMap[item.href]?.completed; // Declara e inicializa "done"
       const doneMark = done ? ' <span title="Completado">✅</span>' : ''; // Declara e inicializa "doneMark"
-      // Construimos el HTML interno de la tarjeta con título, badge y descripción
+      // Obtenemos el icono temático (para ejercicios/proyectos) y el icono oficial del lenguaje en tamaño compacto
+      const topicIcon = getTopicIcon(item); // Declara e inicializa "topicIcon"
+      const techIcon = getCardTechIcon(item).replace(/class="tech-icon"/g, 'class="tech-icon tech-icon-sm"'); // Declara e inicializa "techIcon"
+      // Construimos el HTML interno de la tarjeta con icono temático + icono del lenguaje + título
       a.innerHTML = `
                 <div class="card-top">
-                    <span class="card-title">${item.title}${doneMark}</span>
+                    <span class="card-title">${topicIcon ? topicIcon + " " : ""}${techIcon} ${item.title}${doneMark}</span>
                     <span class="tag ${isDoc ? "tag-doc" : ""}">${item.tag}</span>
                 </div>
                 <p class="card-desc">${item.desc}</p>

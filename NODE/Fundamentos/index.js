@@ -25,7 +25,16 @@ console.log("Nivel:", nivel);
 // Invocamos la función presentarCurso y mostramos su resultado en consola
 console.log(presentarCurso(curso, totalModulos));
 
+// Definimos una función para saludar de forma personalizada usando template strings
+function saludar(nombre) {
+  // Retornamos el saludo interpolando el parámetro nombre
+  return `hola ${nombre}`;
+} // Fin de la función saludar
+
 // Consultamos la versión exacta de Node.js desde el objeto global process
 console.log("Node.js:", process.version);
 // Consultamos el directorio de trabajo actual donde se ejecuta el proceso
 console.log("Directorio actual:", process.cwd());
+
+// Invocamos la función saludar pasando "Fredy" como argumento y lo mostramos en consola
+console.log(saludar("Fredy"));

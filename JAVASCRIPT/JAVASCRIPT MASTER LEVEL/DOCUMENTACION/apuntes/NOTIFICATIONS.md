@@ -5,21 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es la Notifications API?
-2. Verificación de estado: `Notification.permission`
-3. Solicitud de autorización: `Notification.requestPermission()`
-4. Creación y envío: `new Notification(title, options)`
-5. Eventos de la instancia de notificación
-6. Analogías del mundo real
-7. Diagrama de flujo del ciclo de notificaciones
-8. Buenas prácticas y errores comunes
-9. Proyecto Integrador: Sistema de Alertas con Permisos Inteligentes
-10. Resumen técnico
-
----
-
 # ¿Qué es la Notifications API?
 
 La **Notifications API** permite que una página o aplicación web envíe notificaciones nativas que se muestran fuera de la ventana del navegador, directamente en el centro de notificaciones del sistema operativo (Windows, macOS, Linux, Android).

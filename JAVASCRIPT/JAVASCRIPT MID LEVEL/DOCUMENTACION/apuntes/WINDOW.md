@@ -2,34 +2,6 @@
 
 ---
 
-## 📚 TEMARIO
-
-1. ¿Qué es el objeto `window`?
-2. Relación entre Browser → Window → DOM
-3. Métodos de apertura y cierre
-
-   * `open()`
-   * `close()`
-   * `closed`
-   * `stop()`
-
-4. Métodos de interacción con el usuario
-
-   * `alert()`
-   * `prompt()`
-   * `confirm()`
-   * `print()`
-
-5. Diagramas visuales
-6. Ejemplos reales
-7. Casos prácticos
-8. Errores comunes
-9. Buenas prácticas PRO
-10. Debugging
-11. Mini proyecto práctico
-12. Resumen final
-
----
 
 ## 🌎 ¿QUÉ ES EL OBJETO `window`?
 

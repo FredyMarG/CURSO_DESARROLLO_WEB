@@ -5,24 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es la Memoización (*Memoization*)?
-2. Requisitos fundamentales: Funciones Puras e Idempotencia
-3. Anatomía interna: *Closures* + Caché (`Map` vs Objeto `{}`)
-4. Memoización de un argumento vs múltiples argumentos (`...args`)
-5. El ejemplo clásico: Fibonacci Recursivo ($O(2^n)$ vs $O(n)$)
-6. Gestión de memoria: Caché con límite (LRU simple) y `WeakMap`
-7. Analogías del mundo real
-8. Diagrama de flujo (*Cache Hit* vs *Cache Miss*)
-9. Buenas prácticas y errores comunes
-10. Proyecto Integrador: Función `memoize(fn)` genérica con métricas
-11. Ejercicios prácticos (Niveles 1, 2 y 3)
-12. Solucionario paso a paso
-13. Resumen técnico y Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es la Memoización (*Memoization*)?
 
 La **memoización** es una técnica de optimización que consiste en **almacenar en memoria (caché) el resultado de una función costosa** asociado a los argumentos con los que fue invocada.

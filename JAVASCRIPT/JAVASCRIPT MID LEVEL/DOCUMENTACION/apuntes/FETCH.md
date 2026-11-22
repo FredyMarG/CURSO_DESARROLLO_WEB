@@ -5,32 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Introducción a la era moderna de las peticiones
-2. La API Fetch: Arquitectura basada en Promesas
-3. El objeto global `fetch()` y su flujo básico
-4. Lectores del Cuerpo de la Respuesta (The Body Mixin)
-   - `text()`
-   - `json()`
-   - `blob()`
-   - `formData()`
-   - `arrayBuffer()`
-5. Manejo de errores HTTP (`if (!res.ok)`), `Headers`, `Request` y `Response`
-6. Envío de `FormData` con Fetch
-7. Cancelación y Timeouts (`AbortController` y `AbortSignal.timeout()`)
-8. Introducción a Axios: ¿Por qué usar una biblioteca externa?
-9. Comparativa técnica: Fetch vs. Axios
-10. Analogía del mundo real
-11. Diagrama de flujo de datos
-12. Buenas prácticas
-13. Errores comunes
-14. Ejercicios prácticos
-15. Resumen
-16. Hoja de Trucos (Cheatsheet)
-
----
-
 # Introducción a la era moderna de las peticiones
 
 Después de años sufriendo con la compleja sintaxis de eventos y estados de `XMLHttpRequest` (XHR), el comité de estándares de JavaScript decidió modernizar el navegador. 

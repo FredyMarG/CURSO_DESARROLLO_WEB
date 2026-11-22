@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición: ¿Qué es la Cache API?
-2. Principales usos en el desarrollo web moderno
-3. Apertura y gestión de almacenes (`caches.open()`)
-4. Almacenar información (`add()`, `addAll()`, `put()`)
-5. Consultar información almacenada (`match()`, `matchAll()`, `keys()`)
-6. Eliminar información (`cache.delete()`, `caches.delete()`)
-7. Analogías del mundo real
-8. Diagrama de flujo del ciclo de caché
-9. Buenas prácticas y errores comunes
-10. Proyecto Integrador: Gestor de Recursos Offline
-11. Resumen técnico
-
----
-
 # Definición
 
 La **Cache API** (expuesta globalmente a través del objeto **`caches`** o `window.caches`) es un sistema de almacenamiento persistente diseñado específicamente para guardar y recuperar pares de solicitudes de red (**`Request`**) y sus correspondientes respuestas HTTP (**`Response`**).

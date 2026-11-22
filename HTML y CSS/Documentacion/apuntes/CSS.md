@@ -1,7 +1,13 @@
 
 # Introducción a CSS
 
-CSS (*Cascading Style Sheets*) es el lenguaje que describe la presentación (colores, tamaños, posiciones, animaciones, etc.) de documentos HTML o XML.  
+## ¿Qué es CSS y para qué sirve?
+
+**CSS** (*Cascading Style Sheets* u Hojas de Estilo en Cascada) es el lenguaje que describe la **presentación visual** (colores, tipografías, tamaños, espaciados, posiciones, diseños responsivos y animaciones) de documentos HTML o XML.
+
+- **¿Para qué sirve?** Permite separar el contenido y la estructura (**HTML**) del diseño visual (**CSS**). Con una sola hoja de estilos puedes dar identidad visual a todo un sitio web y adaptarlo a móviles, tabletas y escritorios.
+- **Analogía:** Si el HTML son los planos y las paredes de una casa, **CSS** es el diseño interior: colores de pintura, iluminación, distribución de muebles y acabados.
+
 Una hoja de estilo CSS se compone de reglas que aplican declaraciones (`propiedad: valor`) a elementos seleccionados mediante selectores.
 
 ---

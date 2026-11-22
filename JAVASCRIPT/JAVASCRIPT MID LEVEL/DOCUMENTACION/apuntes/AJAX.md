@@ -5,28 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es AJAX?
-2. Introducción e instalación del servidor local
-3. El Objeto clásico `XMLHttpRequest`
-4. Enviar peticiones GET
-5. Trabajar el resultado de las peticiones (La forma antigua)
-6. Objeto `ActiveXObject` (Historial de compatibilidad)
-7. La nueva forma de trabajar el resultado (`onload`)
-8. Enviar peticiones POST
-9. Envío de formularios avanzados con el objeto `FormData`
-10. Analogía del mundo real
-11. Diagrama de ciclo de vida de una petición
-12. Buenas prácticas
-13. Errores comunes
-14. Comparativa: `XMLHttpRequest` vs `fetch()` y código legacy
-15. Ejercicios
-16. Resumen
-17. Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es AJAX?
 
 AJAX significa **Asynchronous JavaScript And XML** (JavaScript Asíncrono y XML). No es un lenguaje de programación ni una tecnología única; es un **conjunto de técnicas de desarrollo web** que permite a las páginas actualizar datos en segundo plano.

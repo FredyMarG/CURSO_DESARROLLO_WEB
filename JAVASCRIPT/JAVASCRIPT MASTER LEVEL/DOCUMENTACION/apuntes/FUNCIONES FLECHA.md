@@ -5,34 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Por qué aparecieron las Funciones Flecha?
-2. Sintaxis compacta y retornos implícitos
-3. Reglas de parámetros (Paréntesis opcionales y obligatorios)
-4. Retorno de objetos literales
-5. El comportamiento de `this` contextual (Ámbito léxico)
-6. Modos estrictos y el impacto en `this`
-7. Comportamiento con los métodos `call`, `apply` y `bind`
-8. Restricciones: ¿Por qué no sirven como métodos de objetos?
-9. Restricciones: La ausencia del constructor (`new`)
-10. La ausencia del objeto `arguments` y la propiedad `prototype`
-11. Restricciones sintácticas (Saltos de línea y el operador `yield`)
-12. Orden de parseo en el motor de JavaScript
-13. Funciones Recursivas (Recursividad)
-14. Cláusulas o Cierres (Closures)
-15. Parámetros por defecto (Validación antigua vs. actual)
-16. Parámetros Rest (`...param`)
-17. Desestructuración de Arrays y Objetos
-18. Desestructuración en Parámetros de Funciones
-19. Analogías del mundo real
-20. Diagramas de flujo y contexto
-21. Buenas prácticas y errores comunes
-22. Ejercicios prácticos integradores
-23. Resumen técnico
-
----
-
 # ¿Por qué aparecieron las Funciones Flecha?
 
 Las funciones flecha (o *arrow functions*) se introdujeron en **ECMAScript 6 (ES6)** en el año 2015. No aparecieron simplemente como una alternativa cosmética para escribir menos código, sino para resolver dos problemas históricos del lenguaje:

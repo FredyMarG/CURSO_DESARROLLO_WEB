@@ -5,27 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Prototipos: Definición
-2. Prototype Chain (Cadena de Prototipos)
-3. Prototype Object (El Objeto Prototipo)
-4. Características de los Prototipos
-   * 4.1. Un prototipo definido en su código fuente es mutable
-   * 4.2. Es en sí mismo un objeto, así como otros
-   * 4.3. Tiene una existencia física en la memoria
-   * 4.4. Puede ser modificado y llamado
-   * 4.5. Puede ser visto como un modelo ejemplar de una familia objeto
-   * 4.6. Un objeto hereda propiedades (valores y métodos) de su prototipo
-5. Analogía del mundo real
-6. Diagrama de la Cadena de Prototipos
-7. Buenas prácticas
-8. Errores comunes
-9. Ejercicios
-10. Resumen
-
----
-
 # Prototipos: Definición
 
 A diferencia de lenguajes orientados a objetos tradicionales (como Java o C++) que utilizan **clases** como planos intangibles, JavaScript es un lenguaje **basado en prototipos**.

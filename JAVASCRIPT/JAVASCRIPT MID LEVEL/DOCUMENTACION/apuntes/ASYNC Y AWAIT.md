@@ -5,27 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es la programación asíncrona?
-2. ¿Qué es una Promise?
-3. ¿Por qué nacieron async y await?
-4. Sintaxis de async
-5. Sintaxis de await
-6. Flujo de ejecución
-7. Ejemplos paso a paso
-8. Manejo de errores con try/catch
-9. Ejecutar tareas en paralelo
-10. Await dentro de ciclos
-11. Buenas prácticas
-12. Errores comunes
-13. Comparación con Promises
-14. Casos reales
-15. Diagrama mental
-16. Ejercicios
-17. Resumen
-
----
 
 # ¿Qué es la programación asíncrona?
 

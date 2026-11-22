@@ -156,7 +156,7 @@
         <main class="reader">
             <div class="reader-head">
                 <h1 id="docTitle">Selecciona un apunte</h1>
-                <a id="rawLink" class="btn" href="apuntes/HTML.md" target="_blank">📄 Ver .md original</a>
+                <a id="moduleBtn" class="btn" href="../HTML BASICO/index.html">🎯 Ir al Módulo</a>
             </div>
             <div id="docContent" class="md-body">Cargando documentación...</div>
         </main>
@@ -169,14 +169,14 @@
 
     <script>
         const DOCS = [
-            { file: 'HTML.md', title: 'HTML5 Completo', desc: 'Etiquetas, semántica, formularios, tablas y accesibilidad' },
-            { file: 'CSS.md', title: 'CSS3 Completo', desc: 'Selectores, cascada, box model, posición y estilos' },
-            { file: 'FLEXBOX.md', title: 'Flexbox', desc: 'Ejes, alineación, flex-grow, shrink y layouts 1D' },
-            { file: 'GRID.md', title: 'CSS Grid', desc: 'Filas, columnas, fr, repeat(), áreas y layouts 2D' },
-            { file: 'ANIMACIONES.md', title: 'Animaciones y Transiciones', desc: 'Keyframes, cubic-bezier, 60 FPS y scroll animations' },
-            { file: 'FUNCIONES_AVANZADAS.md', title: 'Funciones Avanzadas', desc: 'Variables CSS, calc(), clamp(), min(), max() y :has()' },
-            { file: 'RESPONSIVE.md', title: 'Responsive Design', desc: 'Mobile-first, media queries, container queries y srcset' },
-            { file: 'HOSTING.md', title: 'Hosting y Despliegue', desc: 'Dominios, DNS, GitHub Pages, Netlify y buenas prácticas' }
+            { file: 'HTML.md', title: 'HTML5 Completo', desc: 'Qué es HTML5, para qué sirve, etiquetas, semántica y formularios', module: '../HTML BASICO/index.html' },
+            { file: 'CSS.md', title: 'CSS3 Completo', desc: 'Qué es CSS3, para qué sirve, selectores, box model y CSS moderno', module: '../CSS BASICO/index.html' },
+            { file: 'FLEXBOX.md', title: 'Flexbox', desc: 'Ejes, alineación, flex-grow, shrink y layouts 1D', module: '../Flexbox/index.html' },
+            { file: 'GRID.md', title: 'CSS Grid', desc: 'Filas, columnas, fr, repeat(), áreas y layouts 2D', module: '../Grid/index.html' },
+            { file: 'ANIMACIONES.md', title: 'Animaciones y Transiciones', desc: 'Keyframes, cubic-bezier, 60 FPS y scroll animations', module: '../Animaciones/index.html' },
+            { file: 'FUNCIONES_AVANZADAS.md', title: 'Funciones Avanzadas', desc: 'Variables CSS, calc(), clamp(), min(), max() y :has()', module: '../Funciones Avanzadas/index.html' },
+            { file: 'RESPONSIVE.md', title: 'Responsive Design', desc: 'Mobile-first, media queries, container queries y srcset', module: '../Responsive Design/index.html' },
+            { file: 'HOSTING.md', title: 'Hosting y Despliegue', desc: 'Dominios, DNS, GitHub Pages, Netlify y buenas prácticas', module: '../index.html' }
         ];
 
         const docList = document.getElementById('docList');
@@ -184,7 +184,7 @@
         const docTitle = document.getElementById('docTitle');
         const docContent = document.getElementById('docContent');
         const tocList = document.getElementById('tocList');
-        const rawLink = document.getElementById('rawLink');
+        const moduleBtn = document.getElementById('moduleBtn');
         let activeFile = DOCS[0].file;
 
         function escapeHtml(str) {
@@ -236,7 +236,7 @@
                     const level = trimmed.match(/^(#{1,3})/)[1].length;
                     const rawText = trimmed.replace(/^#{1,3}\s+/, '');
                     const id = 'sec-' + (++headingIdx);
-                    if (level >= 2) toc.push({ id, level, text: rawText.replace(/`/g, '') });
+                    if (level >= 1 && headingIdx > 1) toc.push({ id, level, text: rawText.replace(/`/g, '') });
                     html += `<h${level} id="${id}">${formatInline(rawText)}</h${level}>`;
                 } else if (/^[-*]\s+/.test(trimmed)) {
                     if (!inList) { html += '<ul>'; inList = true; }
@@ -257,7 +257,7 @@
         async function loadDoc(doc) {
             activeFile = doc.file;
             docTitle.textContent = doc.title;
-            rawLink.href = 'apuntes/' + doc.file;
+            if (moduleBtn && doc.module) moduleBtn.href = encodeURI(doc.module);
             renderSidebar(docSearch.value);
 
             let mdText = (window.DOCS_CONTENT && window.DOCS_CONTENT[doc.file]) || '';
@@ -278,7 +278,7 @@
             const { html, toc } = renderMarkdown(mdText);
             docContent.innerHTML = html;
 
-            tocList.innerHTML = toc.slice(0, 35).map(t =>
+            tocList.innerHTML = toc.map(t =>
                 `<a class="toc-link lvl-${t.level}" href="#${t.id}">${escapeHtml(t.text)}</a>`
             ).join('');
 

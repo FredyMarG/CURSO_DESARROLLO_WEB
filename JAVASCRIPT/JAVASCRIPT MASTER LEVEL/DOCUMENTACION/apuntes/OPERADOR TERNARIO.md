@@ -5,21 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición del Operador Ternario
-2. Sintaxis básica y anatomía
-3. Evaluación y asignación implícita
-4. Comparativa: `if...else` tradicional vs. Operador Ternario
-5. Analogía del mundo real
-6. Diagrama de flujo de decisión
-7. Buenas prácticas
-8. Errores comunes
-9. Ejercicios
-10. Resumen
-
----
-
 # ¿Qué es el Operador Ternario?
 
 El **operador ternario** es el único operador en JavaScript que toma **tres operandos**. Se utiliza comúnmente como un atajo abreviado y elegante para la instrucción condicional `if...else`.

@@ -2,31 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es `location`?
-2. Relación entre `window` y `location`
-3. Anatomía de una URL
-4. `window.location.href`
-5. `window.location.hostname`
-6. `window.location.pathname`
-7. `window.location.protocol`
-8. `window.location.host` vs `hostname`
-9. `window.location.port` y `origin`
-10. `window.location.search` (Query Params)
-11. `window.location.hash` (Anclas)
-12. `window.location.assign()`
-13. `window.location.replace()`
-14. `window.location.reload()`
-15. Redirecciones
-16. Casos reales
-17. Buenas prácticas
-18. Errores comunes
-19. Seguridad
-20. Debugging
-21. Resumen final
-
----
 
 # 🌍 ¿QUÉ ES `LOCATION`?
 

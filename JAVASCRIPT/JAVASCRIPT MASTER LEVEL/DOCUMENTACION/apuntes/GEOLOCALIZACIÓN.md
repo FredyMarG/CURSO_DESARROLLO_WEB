@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Introducción a la API de Geolocalización
-2. El método `getCurrentPosition()`
-3. Callback de Éxito: Objeto `position` y sus coordenadas
-4. Callback de Error: Manejo de excepciones y códigos de error
-5. Objeto de Configuración (`options`)
-6. Parámetros de precisión: `enableHighAccuracy`, `timeout` y `maximumAge`
-7. Analogías del mundo real
-8. Diagrama de flujo de solicitud de ubicación
-9. Buenas prácticas y errores comunes
-10. Proyecto Integrador: Rastreador de Posición
-11. Resumen técnico
-
----
-
 # Introducción a la API de Geolocalización
 
 La **Geolocation API** de HTML5 permite a las aplicaciones web acceder a la ubicación geográfica física del dispositivo del usuario (latitud, longitud, altitud, etc.). A diferencia de los métodos basados en resolución de direcciones IP en servidores, esta API consulta directamente fuentes de hardware y red del sistema del cliente (GPS, antenas de telefonía celular, redes Wi-Fi y dirección IP).

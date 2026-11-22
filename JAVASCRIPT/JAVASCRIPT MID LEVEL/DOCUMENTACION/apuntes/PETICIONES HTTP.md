@@ -5,26 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es una petición HTTP?
-2. El Modelo Cliente - Servidor
-3. Protocolo sin estado (Stateless)
-4. ¿Cómo se soluciona la falta de estado?
-5. Estructura de una petición y respuesta
-6. Métodos HTTP (Verbos)
-7. Códigos de Estado (Status Codes)
-8. CORS (Cross-Origin Resource Sharing) y Preflight `OPTIONS`
-9. Analogía del mundo real
-10. Diagrama de flujo mental
-11. Buenas prácticas
-12. Errores comunes
-13. Ejercicios
-14. Resumen
-15. Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es una petición HTTP?
 
 HTTP (**Hypertext Transfer Protocol**) es el idioma que utilizan las computadoras en internet para comunicarse y transmitirse datos entre sí (textos, imágenes, videos o archivos JSON).

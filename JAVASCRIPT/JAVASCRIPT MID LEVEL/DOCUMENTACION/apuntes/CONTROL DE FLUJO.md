@@ -2,34 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es el Control de Flujo?
-2. ¿Por qué es importante?
-3. Cómo funciona internamente
-4. Flujo de ejecución secuencial
-5. Sentencias de bloque
-6. Scope de bloque
-7. Alcance de variables
-8. if
-9. if...else
-10. if...else if
-11. Operadores lógicos en decisiones
-12. Anidación de estructuras
-13. switch
-14. for
-15. while
-16. do...while
-17. break
-18. continue
-19. Labels
-20. Diagramas de flujo
-21. Casos prácticos reales
-22. Errores comunes
-23. Buenas prácticas
-24. Resumen parcial
-
----
 
 # 🌐 ¿QUÉ ES EL CONTROL DE FLUJO?
 

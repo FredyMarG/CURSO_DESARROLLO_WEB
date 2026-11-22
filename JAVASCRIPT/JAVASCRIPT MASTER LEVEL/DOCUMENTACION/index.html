@@ -55,16 +55,16 @@
 <body>
     <header class="topbar">
         <div class="brand"><span class="badge">JS MASTER · DOCUMENTACIÓN</span><span class="title">🚀 Apuntes Completos de JavaScript Master</span></div>
-        <div><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;"><a class="btn" href="../../../index.html?filter=proyectos">🚀 Proyectos</a><a class="btn" href="../../../index.html">🏠 Portal Principal</a></div>
     </header>
     <div class="layout">
         <aside class="sidebar"><input type="search" id="docSearch" class="search-box" placeholder="Buscar en apuntes..." /><div class="doc-list" id="docList"></div></aside>
-        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="rawLink" class="btn" href="#" target="_blank">📄 Ver .md original</a></div><div id="docContent" class="md-body"></div></main>
+        <main class="reader"><div class="reader-head"><h1 id="docTitle">Selecciona un apunte</h1><a id="moduleBtn" class="btn" href="../Modo Estricto/index.html">🎯 Ir al Módulo</a></div><div id="docContent" class="md-body"></div></main>
         <aside class="toc"><div class="toc-title">📑 Índice</div><div class="toc-list" id="tocList"></div></aside>
     </div>
     <script>
-        const DOCS = [{"file": "APIs.md", "title": "Apis"}, {"file": "CACHE.md", "title": "Cache"}, {"file": "CANVAS.md", "title": "Canvas"}, {"file": "COOKIES.md", "title": "Cookies"}, {"file": "DRAG & DROP.md", "title": "Drag & Drop"}, {"file": "FILE READER.md", "title": "File Reader"}, {"file": "FUNCIONES FLECHA.md", "title": "Funciones Flecha"}, {"file": "GEOLOCALIZACIÓN.md", "title": "Geolocalización"}, {"file": "HISTORIAL.md", "title": "Historial"}, {"file": "INDEXEDDB.md", "title": "Indexeddb"}, {"file": "INTERSECTION OBSERVER.md", "title": "Intersection Observer"}, {"file": "LOCALSTORAGE.md", "title": "Localstorage"}, {"file": "MATCHMEDIA.md", "title": "Matchmedia"}, {"file": "MEMOIZATION.md", "title": "Memoization"}, {"file": "MODO ESTRICTO.md", "title": "Modo Estricto"}, {"file": "NOTIFICATIONS.md", "title": "Notifications"}, {"file": "OBJETO DATE.md", "title": "Objeto Date"}, {"file": "OBJETO NAVIGATOR.md", "title": "Objeto Navigator"}, {"file": "OBJETO SCREEN.md", "title": "Objeto Screen"}, {"file": "OPERADOR TERNARIO.md", "title": "Operador Ternario"}, {"file": "PROTOTIPOS.md", "title": "Prototipos"}, {"file": "SERVICE WORKERS.md", "title": "Service Workers"}, {"file": "VISIBILITY CHANGE.md", "title": "Visibility Change"}, {"file": "WEB WORKERS.md", "title": "Web Workers"}];
-        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), rawLink = document.getElementById('rawLink');
+        const DOCS = [{"file": "MODO ESTRICTO.md", "title": "01. Modo Estricto", "module": "../Modo Estricto/index.html"}, {"file": "OPERADOR TERNARIO.md", "title": "02. Operador Ternario", "module": "../Operador Ternario/index.html"}, {"file": "FUNCIONES FLECHA.md", "title": "03. Funciones Flecha", "module": "../Funciones Flecha/index.html"}, {"file": "PROTOTIPOS.md", "title": "04. Prototipos", "module": "../Prototipos/index.html"}, {"file": "MEMOIZATION.md", "title": "05. Memoization", "module": "../Memoization/index.html"}, {"file": "OBJETO DATE.md", "title": "06. Objeto Date", "module": "../Objeto Date/index.html"}, {"file": "OBJETO SCREEN.md", "title": "07. Objeto Screen", "module": "../Objeto Screen/index.html"}, {"file": "OBJETO NAVIGATOR.md", "title": "08. Objeto Navigator", "module": "../Navigator/index.html"}, {"file": "MATCHMEDIA.md", "title": "09. window.matchMedia()", "module": "../Matchmedia/index.html"}, {"file": "VISIBILITY CHANGE.md", "title": "10. Visibility Change", "module": "../Visibility Change/index.html"}, {"file": "HISTORIAL.md", "title": "11. History API", "module": "../Historial/index.html"}, {"file": "GEOLOCALIZACIÓN.md", "title": "12. Geolocalización", "module": "../Geolocalization/index.html"}, {"file": "DRAG & DROP.md", "title": "13. Drag & Drop", "module": "../Drag & Drop/index.html"}, {"file": "FILE READER.md", "title": "14. FileReader API", "module": "../File Reader/index.html"}, {"file": "CANVAS.md", "title": "15. Canvas 2D", "module": "../Canvas/index.html"}, {"file": "LOCALSTORAGE.md", "title": "16. LocalStorage", "module": "../Local Storage/index.html"}, {"file": "COOKIES.md", "title": "17. Cookies", "module": "../Cookies/index.html"}, {"file": "INDEXEDDB.md", "title": "18. IndexedDB", "module": "../IndexedDB/index.html"}, {"file": "INTERSECTION OBSERVER.md", "title": "19. Intersection Observer", "module": "../Intersection Observer/index.html"}, {"file": "APIs.md", "title": "20. APIs y Fetch", "module": "../Apis/index.html"}, {"file": "CACHE.md", "title": "21. Cache API", "module": "../Cache/index.html"}, {"file": "NOTIFICATIONS.md", "title": "22. Notifications API", "module": "../Notifications/index.html"}, {"file": "WEB WORKERS.md", "title": "23. Web Workers", "module": "../Web Workers/index.html"}, {"file": "SERVICE WORKERS.md", "title": "24. Service Workers", "module": "../Service Workers/index.html"}];
+        const docList = document.getElementById('docList'), docSearch = document.getElementById('docSearch'), docTitle = document.getElementById('docTitle'), docContent = document.getElementById('docContent'), tocList = document.getElementById('tocList'), moduleBtn = document.getElementById('moduleBtn');
         let activeFile = DOCS[0].file;
         const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
         const fmt = t => esc(t).replace(/`([^`]+)`/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>');
@@ -83,7 +83,7 @@
                 if (/^#{1,3}\s+/.test(tr)) {
                     if (inList) { html+='</ul>'; inList=false; }
                     const lvl = tr.match(/^(#{1,3})/)[1].length, raw = tr.replace(/^#{1,3}\s+/,''), id = 's-'+(++hIdx);
-                    if (lvl >= 2) toc.push({id,lvl,text:raw.replace(/`/g,'')});
+                    if (lvl >= 1 && hIdx > 1) toc.push({id,lvl,text:raw.replace(/`/g,'')});
                     html += `<h${lvl} id="${id}">${fmt(raw)}</h${lvl}>`;
                 } else if (/^[-*]\s+/.test(tr)) {
                     if (!inList) { html+='<ul>'; inList=true; }
@@ -101,12 +101,12 @@
             return {html, toc};
         }
         function loadDoc(doc) {
-            activeFile = doc.file; docTitle.textContent = doc.title; rawLink.href = 'apuntes/' + encodeURI(doc.file);
+            activeFile = doc.file; docTitle.textContent = doc.title; if (moduleBtn && doc.module) moduleBtn.href = encodeURI(doc.module);
             renderSidebar(docSearch.value);
             const md = (window.DOCS_CONTENT && window.DOCS_CONTENT[doc.file]) || '';
             const {html, toc} = renderMd(md);
             docContent.innerHTML = html;
-            tocList.innerHTML = toc.slice(0,35).map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
+            tocList.innerHTML = toc.map(t => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`).join('');
             docContent.querySelectorAll('.copy-btn').forEach(b => b.addEventListener('click', () => {
                 navigator.clipboard?.writeText(b.nextElementSibling?.textContent || '');
                 b.textContent = '¡Copiado!'; setTimeout(() => b.textContent = 'Copiar', 1400);

@@ -5,29 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es Axios?
-2. Introducción e instalación
-3. Arquitectura basada en Promesas
-4. El Objeto global `axios`
-5. Peticiones de lectura con `get()`
-6. Peticiones de creación con `post()`
-7. Formas de enviar datos al servidor
-8. Instancias con `axios.create()` e Interceptores
-9. Cancelación con `AbortController` (reemplazo de `CancelToken`)
-10. Manejo profesional de errores en Axios
-11. Ventajas competitivas frente a Fetch
-12. Analogía del mundo real
-13. Diagrama de flujo de Axios
-14. Buenas prácticas
-15. Errores comunes
-16. Ejercicios
-17. Resumen
-18. Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es Axios?
 
 Axios es un **cliente HTTP basado en promesas** muy popular en el ecosistema de JavaScript. Funciona de manera idéntica tanto en el navegador web como en el entorno de servidor (Node.js), lo que la convierte en una herramienta "isomórfica" o universal.

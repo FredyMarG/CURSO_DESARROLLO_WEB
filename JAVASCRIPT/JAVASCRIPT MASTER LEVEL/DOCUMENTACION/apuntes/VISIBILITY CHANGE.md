@@ -5,20 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es la Page Visibility API?
-2. El evento `visibilitychange`
-3. Propiedades clave (`document.visibilityState` y `document.hidden`)
-4. Principales usos en el desarrollo web moderno
-5. Analogías del mundo real
-6. Diagrama de flujo del ciclo de visibilidad
-7. Buenas prácticas y errores comunes
-8. Proyecto Integrador: Reproductor de Video Inteligente
-9. Resumen técnico
-
----
-
 # ¿Qué es la Page Visibility API?
 
 La **Page Visibility API** proporciona una forma nativa y estandarizada de saber si una página web es visible actualmente para el usuario o si se encuentra oculta en segundo plano.

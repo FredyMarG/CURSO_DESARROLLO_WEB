@@ -2,37 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es una excepción?
-2. ¿Por qué existen las excepciones?
-3. Diferencia entre error y excepción
-4. Cómo funciona internamente una excepción
-5. Flujo de propagación de excepciones
-6. Error en JavaScript
-7. Jerarquía de excepciones ECMAScript
-8. Error
-9. EvalError
-10. RangeError
-11. ReferenceError
-12. SyntaxError
-13. TypeError
-14. URIError
-15. AggregateError
-16. InternalError
-17. Throw
-18. Try
-19. Catch
-20. Finally
-21. Stack Traces
-22. Error Stack
-23. Casos reales
-24. Errores comunes
-25. Debugging profesional
-26. Buenas prácticas
-27. Resumen parcial
-
----
 
 # 🌐 ¿QUÉ ES UNA EXCEPCIÓN?
 

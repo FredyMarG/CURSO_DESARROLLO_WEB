@@ -5,23 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué son los Web Workers y por qué son necesarios?
-2. Tipos de Web Workers (`Dedicated Worker`, `Service Worker` y `Abstract Worker`)
-3. Dedicated Worker: El constructor `Worker()`
-4. El parámetro `options` (`type`, `credentials`, `name`)
-5. Comunicación bidireccional: `postMessage()` y `onmessage`
-6. Finalización del ciclo de vida: `terminate()` y `close()`
-7. Política de Origen Cruzado (*Same-Origin Policy*) y limitaciones del DOM
-8. Analogías del mundo real
-9. Diagrama de flujo del ciclo de comunicación
-10. Buenas prácticas y errores comunes
-11. Proyecto Integrador: Procesamiento Matemático Pesado sin Congelar la UI
-12. Resumen técnico
-
----
-
 # ¿Qué son los Web Workers?
 
 Por naturaleza, JavaScript en el navegador es un lenguaje de **un solo hilo (*Single-Threaded*)**. Esto significa que tanto la lógica de negocio como el renderizado de la interfaz de usuario (UI), las animaciones y los eventos de clic comparten exactamente el mismo hilo principal (*Main Thread*).

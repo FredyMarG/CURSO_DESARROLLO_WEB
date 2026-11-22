@@ -12,7 +12,7 @@
     <script src="../../HTML y CSS/slides-engine.js" defer></script>
     <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
     <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%9F%A2%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
@@ -246,10 +246,16 @@ function presentarCurso(nombre, cantidad) {
   return `Bienvenido a ${nombre}. El programa tiene ${cantidad} módulos.`;
 }
 
+function saludar(nombre) {
+  return `hola ${nombre}`;
+}
+
 console.log(presentarCurso(nombreCurso, totalModulos));
-console.log('Node.js:', process.version);</code></pre>
+console.log('Node.js:', process.version);
+console.log(saludar('Fredy'));</code></pre>
                 <ul class="styled-list" style="margin-top:12px;">
                     <li><code>const</code> declara identificadores que no se reasignarán.</li>
+                    <li><code>saludar(nombre)</code> recibe un argumento y devuelve un saludo personalizado.</li>
                     <li>Las comillas invertidas (<code>`...`</code>) permiten interpolar variables con <code>${...}</code>.</li>
                     <li>Ejecuta en terminal con <code>node index.js</code> dentro de <code>NODE/Fundamentos/</code>.</li>
                 </ul>
@@ -451,7 +457,12 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
   function presentarCurso(nombre, cantidad) {
     return `Bienvenido a ${nombre}. El programa tiene ${cantidad} módulos.`;
   }
-  document.getElementById(&#x27;out&#x27;).textContent = presentarCurso(&#x27;Fundamentos de Node.js&#x27;, 26);
+  function saludar(nombre) {
+    return `hola ${nombre}`;
+  }
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;${presentarCurso(&#x27;Fundamentos de Node.js&#x27;, 26)}&lt;/div&gt;` +
+    `&lt;div&gt;${saludar(&#x27;Fredy&#x27;)}&lt;/div&gt;`;
 &lt;/script&gt;">Primer Programa CLI</button>
                 </div>
                 <div class="lab-split">

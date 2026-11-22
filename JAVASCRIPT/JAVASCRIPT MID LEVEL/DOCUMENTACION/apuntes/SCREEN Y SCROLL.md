@@ -2,41 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es `screen`?
-2. ¿Qué es el scroll?
-3. Diferencia entre Window, Screen y Viewport
-4. Propiedades de `screen`
-
-   * width
-   * height
-   * availWidth
-   * availHeight
-   * colorDepth
-   * pixelDepth
-   * screenLeft
-   * screenTop
-5. Propiedades de scroll
-
-   * scrollX
-   * scrollY
-6. Métodos de scroll
-   * scroll()
-   * scrollTo()
-   * scrollBy()
-7. Scroll suave
-8. Eventos de scroll
- 9. Optimización de rendimiento (PRO)
- 10. Intersection Observer API
- 11. Accesibilidad y Movimiento Reducido
- 12. Errores comunes
- 13. Debugging
- 14. Mini proyecto práctico
- 15. Resumen final
- 16. Conclusión
-
----
 
 # 🖥️ ¿QUÉ ES `screen`?
 

@@ -6,30 +6,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición: ¿Qué es Node.js?
-2. ¿Qué es el backend y cómo se diferencia del frontend?
-3. Principales usos de Node.js
-4. JavaScript en el navegador vs. JavaScript en Node.js
-5. Arquitectura cliente-servidor y ciclo de una petición HTTP
-6. Componentes fundamentales: V8, entorno de ejecución, APIs y Event Loop
-7. Node.js, npm, paquetes y `package.json`
-8. Preparar el entorno de trabajo en Windows
-9. Primer programa con Node.js
-10. Primer servidor HTTP con Node.js
-11. Analogías del mundo real
-12. Diagrama de flujo
-13. Buenas prácticas y errores comunes
-14. Proyecto integrador: API de bienvenida para CURSO_DESARROLLO_WEB
-15. Resumen técnico
-16. Ejercicios por niveles
-17. Solucionario paso a paso
-18. Hoja de trucos (Cheatsheet)
-19. Evaluación y criterios de aprobación
-
----
-
 # Definición
 
 **Node.js** es un **entorno de ejecución de JavaScript** que permite ejecutar código JavaScript **fuera del navegador**. Se utiliza frecuentemente para construir servidores web, APIs, herramientas de consola, procesos automáticos y aplicaciones en tiempo real.

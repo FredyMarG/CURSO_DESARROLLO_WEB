@@ -1,39 +1,5 @@
 # 🌐 GUÍA — EVENTOS JAVASCRIPT
 
-## 📚 TEMARIO
-
-1. ¿Qué son los eventos?
-2. Definición de eventos
-3. Event Handlers
-4. Event Listeners
-5. El objeto Event
-6. Event Flow
-7. Event Bubbling vs Event Capturing
-8. event.stopPropagation()
-9. Tipos de eventos
-10. Eventos de teclado
-11. Eventos de mouse
-12. Eventos de formularios
-13. Eventos del navegador
-14. Eventos táctiles (Touch Events)
-15. Pointer Events
-16. Drag & Drop
-17. Eventos del portapapeles
-18. Eventos multimedia
-19. Eventos de imágenes
-20. Eventos de animaciones
-21. Eventos de transiciones CSS
-22. Eventos de Storage
-23. Eventos de WebSocket
-24. Delegación de eventos
-25. Buenas prácticas
-26. Errores comunes
-27. Debugging
-28. Optimización
-29. Proyectos prácticos
-30. Resumen final
-
----
 
 # ESTRUCTURA DE DOCUMENTACIÓN PARA CADA EVENTO
 

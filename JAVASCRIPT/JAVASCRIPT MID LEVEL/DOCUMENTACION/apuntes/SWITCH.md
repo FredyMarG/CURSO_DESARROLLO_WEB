@@ -2,42 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es Switch?
-2. ¿Para qué sirve realmente?
-3. Problema que resuelve
-4. Cómo funciona internamente
-5. Anatomía completa de Switch
-6. Expresión evaluada
-7. Case
-8. Break
-9. Default
-10. Comparación estricta (===)
-11. Fall Through
-12. Agrupación de Cases
-13. Switch con Strings
-14. Switch con Números
-15. Switch con Booleanos
-16. Switch con Expresiones
-17. Switch(true)
-18. Casos reales
-19. Menús interactivos
-20. Sistemas de Roles
-21. APIs REST
-22. Videojuegos
-23. Máquinas de Estado
-24. Optimización
-25. Switch vs If Else
-26. Errores comunes
-27. Debugging profesional
-28. Buenas prácticas
-29. Flujo profesional de uso
-30. Ejercicios prácticos
-31. Resumen final
-32. Lo más importante que debes dominar
-
----
 
 # 🌐 ¿QUÉ ES SWITCH?
 

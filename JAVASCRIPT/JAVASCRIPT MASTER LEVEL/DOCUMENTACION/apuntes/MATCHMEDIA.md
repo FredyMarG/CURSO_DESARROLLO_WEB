@@ -5,23 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición de `window.matchMedia()`
-2. Sintaxis básica y anatomía de `MediaQueryList`
-3. Evaluación inicial con la propiedad `matches` y escucha dinámica con `change` (`onchange`)
-4. Comparativa: `window.addEventListener("resize")` vs. `window.matchMedia()` moderno
-5. Analogía del mundo real
-6. Diagrama de flujo de decisión
-7. ¿Cuándo debería usar `matchMedia()`?
-8. Buenas prácticas
-9. Errores comunes
-10. Ejercicios
-11. Solucionario paso a paso
-12. Resumen
-
----
-
 # ¿Qué es `window.matchMedia()`?
 
 El método **`window.matchMedia()`** es una API nativa del navegador que permite **evaluar una Media Query de CSS desde JavaScript** y reaccionar dinámicamente cuando el estado de dicha consulta cambia (por ejemplo, al redimensionar la ventana, rotar un dispositivo móvil o alternar entre modo claro y oscuro).

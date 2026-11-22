@@ -5,25 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es JSON?
-2. Definición, Usos y Sintaxis
-3. El viaje de los datos: Red vs. Memoria
-4. Serialización con `JSON.stringify()` (`replacer` y `space`)
-5. Deserialización con `JSON.parse()` (`reviver` y manejo de `Date`/`Map`/`Set`)
-6. Copia profunda moderna: `structuredClone()` vs `JSON`
-7. ¿Qué es un JSON Polyfill?
-8. Analogía del mundo real
-9. Diagrama de flujo conceptual
-10. Buenas prácticas
-11. Errores comunes (SyntaxError)
-12. Ejercicios
-13. Resumen
-14. Hoja de Trucos (Cheatsheet)
-
----
-
 # ¿Qué es JSON?
 
 JSON significa **JavaScript Object Notation** (Notación de Objetos de JavaScript). Aunque nació inspirado en la sintaxis de JavaScript, hoy en día es un formato de texto **completamente independiente del lenguaje**. 

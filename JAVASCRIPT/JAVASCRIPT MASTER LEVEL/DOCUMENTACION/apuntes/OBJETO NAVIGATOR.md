@@ -5,26 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Introducción al objeto `Navigator`
-2. `NavigatorID` (Identificación del navegador y plataforma)
-3. `NavigatorLanguage` (Idiomas y preferencias regionales)
-4. `NavigatorOnLine` (Estado de conexión a la red)
-5. `NavigatorContentUtils` (Registro de protocolos personalizados)
-6. `NavigatorStorageUtils` (Almacenamiento y persistencia)
-7. `NavigatorCookies` (Verificación de cookies habilitadas)
-8. `NavigatorConcurrentHardware` (Concurrencia y núcleos del procesador)
-9. `NavigatorPlugins` (Plugins y tipos MIME soportados)
-10. `NavigatorUserMedia` (Acceso a cámara y micrófono)
-11. Analogías del mundo real
-12. Diagrama de arquitectura del objeto `Navigator`
-13. Buenas prácticas y errores comunes
-14. Proyecto Integrador: Panel de Diagnóstico del Entorno del Cliente
-15. Resumen técnico
-
----
-
 # Introducción al objeto `Navigator`
 
 El objeto **`navigator`** (accesible globalmente mediante `window.navigator` o simplemente `navigator`) forma parte del **BOM (*Browser Object Model*)** y representa el estado y la identidad del agente de usuario (*User Agent*), es decir, del navegador web y del dispositivo donde se está ejecutando la aplicación.

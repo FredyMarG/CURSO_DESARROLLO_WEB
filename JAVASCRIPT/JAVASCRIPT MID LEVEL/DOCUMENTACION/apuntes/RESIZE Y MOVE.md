@@ -1,26 +1,7 @@
-````md
 # 🌐 GUÍA RESIZE, MOVE Y SCROLL EN JAVASCRIPT
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué son los métodos de control de ventana?
-2. Diferencia entre tamaño y posición
-3. `resizeTo()`
-4. `resizeBy()`
-5. `moveTo()`
-6. `moveBy()`
-7. `minimize()`
-8. Scroll avanzado
-9. Casos reales
-10. Restricciones modernas de navegadores
-11. Buenas prácticas
-12. Errores comunes
-13. Debugging
-14. Resumen final
-
----
 
 # 🪟 ¿QUÉ SON LOS MÉTODOS DE CONTROL DE VENTANA?
 

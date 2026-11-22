@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición del Objeto Date
-2. Sintaxis básica y anatomía de métodos
-3. Extracción y formateo práctico
-4. Comparativa: Métodos obsoletos / erróneos vs. Estándar moderno
-5. Analogía del mundo real
-6. Diagrama de flujo de extracción
-7. Buenas prácticas
-8. Errores comunes
-9. Ejercicios
-10. Solucionario paso a paso
-11. Resumen
-
----
-
 # ¿Qué es el Objeto Date?
 
 El objeto **`Date`** es una herramienta nativa en JavaScript que permite trabajar con fechas y horas. Internamente, almacena un número entero que representa los milisegundos transcurridos desde el **1 de enero de 1970 a las 00:00:00 UTC** (conocido como *Unix Epoch*).

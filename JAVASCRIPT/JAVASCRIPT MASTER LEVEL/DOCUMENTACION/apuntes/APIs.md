@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición de una API
-2. Sintaxis básica y anatomía de una petición
-3. Evaluación y conversión implícita (JSON)
-4. Comparativa: `XMLHttpRequest` tradicional vs. `fetch()` moderno
-5. Analogía del mundo real
-6. Diagrama de flujo de decisión
-7. Buenas prácticas
-8. Errores comunes
-9. Ejercicios
-10. Solucionario paso a paso
-11. Resumen
-
----
-
 # ¿Qué es una API?
 
 Una **API** (*Application Programming Interface* o Interfaz de Programación de Aplicaciones) es un conjunto de reglas y protocolos que permite que **dos aplicaciones diferentes se comuniquen entre sí**. En el desarrollo web, se utiliza comúnmente para que el *Frontend* (navegador) solicite o envíe datos al *Backend* (servidor).

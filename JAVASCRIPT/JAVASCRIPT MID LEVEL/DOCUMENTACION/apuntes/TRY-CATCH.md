@@ -2,37 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es Try...Catch?
-2. ¿Por qué existe?
-3. Problema que resuelve
-4. Funcionamiento interno
-5. Flujo de manejo de excepciones
-6. Sintaxis General
-7. Bloque Try
-8. Bloque Catch
-9. Objeto Error
-10. Propiedades del Objeto Error
-11. Error.name
-12. Error.message
-13. Error.stack
-14. Catch Incondicional
-15. Catch Condicional
-16. Sentencia Throw
-17. Finally
-18. Try Catch Finally
-19. Propagación de errores
-20. Re-Throwing
-21. Casos prácticos reales
-22. Errores comunes
-23. Debugging profesional
-24. Buenas prácticas
-25. Ejercicios prácticos
-26. Resumen final
-27. Lo más importante que debes dominar
-
----
 
 # 🌐 ¿QUÉ ES TRY...CATCH?
 

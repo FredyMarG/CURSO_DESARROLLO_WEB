@@ -5,23 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Introducción a la API nativa de Drag & Drop
-2. Configuración inicial: El atributo `draggable`
-3. Eventos del Objeto (El elemento que se arrastra)
-4. Eventos de Zona (El contenedor que recibe el objeto)
-5. Manipulación de datos con la propiedad `dataTransfer`
-6. Extracción de información con `getData()`
-7. Persistencia e inserción con `setData()`
-8. Analogías del mundo real
-9. Diagrama de flujo del ciclo de arrastre
-10. Buenas prácticas y errores comunes
-11. Proyecto Integrador: Ejemplo de uso (Texturizador)
-12. Resumen técnico
-
----
-
 # Introducción a la API nativa de Drag & Drop
 
 La API de **Drag & Drop** (Arrastrar y Soltar) de HTML5 proporciona soporte nativo para interactuar con elementos de la interfaz de usuario mediante gestos del mouse o paneles táctiles. Anteriormente, lograr este comportamiento requería calcular manualmente coordenadas de posición (`clientX`, `clientY`) con eventos redundantes de ratón. 

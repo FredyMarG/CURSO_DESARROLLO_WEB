@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es un Service Worker y la interfaz `ServiceWorker`?
-2. Ciclo de vida (*Service Worker Lifecycle*)
-3. Registro del Service Worker con `navigator.serviceWorker.register()`
-4. Comunicación bidireccional con `postMessage()`
-5. Interceptación de peticiones de red: El evento `fetch`
-6. Registrar caché y mostrar un sitio web *offline*
-7. Analogías del mundo real
-8. Diagrama de flujo del ciclo de vida y estrategia *offline*
-9. Buenas prácticas y errores comunes
-10. Proyecto Integrador: Aplicación Web Completa con Soporte Offline
-11. Resumen técnico
-
----
-
 # ¿Qué es un Service Worker y la interfaz `ServiceWorker`?
 
 Un **Service Worker** es un tipo especializado de *Web Worker* que actúa como un **proxy programable de red** situado entre tu aplicación web, el navegador y la red (internet). Se ejecuta en un hilo independiente al hilo principal de la interfaz de usuario, por lo que no bloquea el DOM ni las interacciones del usuario.

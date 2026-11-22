@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. ¿Qué es y para qué sirve `IntersectionObserver`?
-2. El constructor `IntersectionObserver()`
-3. Parámetros clave: `callback` y `options`
-4. La propiedad `isIntersecting`
-5. Configurar `options` (`root`, `rootMargin`, `threshold`)
-6. Métodos de control (`observe()`, `unobserve()`, `disconnect()`)
-7. Analogías del mundo real
-8. Diagrama de flujo del ciclo de observación
-9. Buenas prácticas y errores comunes
-10. Proyecto Integrador: Ejemplo de uso (Lazy Loading de Imágenes)
-11. Resumen técnico
-
----
-
 # ¿Qué es y para qué sirve?
 
 La API de **Intersection Observer** proporciona una forma asíncrona y altamente eficiente de observar los cambios en la intersección de un elemento objetivo (*target*) con un elemento ancestro o con el área visible principal del documento (*viewport*).

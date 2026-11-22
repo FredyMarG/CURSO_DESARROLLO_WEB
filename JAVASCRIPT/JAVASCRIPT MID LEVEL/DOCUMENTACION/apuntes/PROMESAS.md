@@ -2,32 +2,6 @@
 
 ---
 
-# 📚 TEMARIO
-
-1. ¿Qué es una Promesa?
-2. ¿Por qué existen? (De Callbacks a Promesas)
-3. Los 3 Estados de una Promesa
-4. Anatomía de una Promesa
-5. Creación de una Promesa (`new Promise`)
-6. El callback Ejecutor (`executor`)
-7. El parámetro `resolve`
-8. El parámetro `reject`
-9. Consumo de Promesas
-10. El método `.then()`
-11. El método `.catch()`
-12. El método `.finally()`
-13. Encadenamiento de Promesas (Promise Chaining)
-14. Evitando el Callback Hell
-15. Métodos estáticos útiles (`Promise.all`, `allSettled`, `race`, `any`, `withResolvers`)
-16. Event Loop: Microtasks vs. Macrotasks
-17. Buenas prácticas
-18. Errores comunes
-19. Ejercicios prácticos
-20. Resumen final
-21. Hoja de Trucos (Cheatsheet)
-
----
-
 # 🌐 ¿QUÉ ES UNA PROMESA?
 
 Es un objeto que representa el resultado eventual (éxito o fracaso) de una operación asíncrona.

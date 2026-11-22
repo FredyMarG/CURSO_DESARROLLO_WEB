@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición: ¿Qué es el objeto `screen`?
-2. Dimensiones totales vs disponibles (`width`/`height` vs `availWidth`/`availHeight`)
-3. Profundidad de color y píxeles (`colorDepth` y `pixelDepth`)
-4. Orientación de pantalla (`screen.orientation`)
-5. Comparativa: `screen` vs `window.innerWidth` vs `window.outerWidth`
-6. Densidad de píxeles (`window.devicePixelRatio`)
-7. Analogía del mundo real
-8. Diagrama de flujo de decisión
-9. Buenas prácticas y errores comunes
-10. Ejercicios y Solucionario paso a paso
-11. Hoja de Trucos (Cheatsheet)
-
----
-
 # Definición
 
 El objeto **`screen`** (accesible globalmente como `screen` o `window.screen`) contiene información de **solo lectura** sobre la pantalla física o monitor en el que se encuentra la ventana del navegador.

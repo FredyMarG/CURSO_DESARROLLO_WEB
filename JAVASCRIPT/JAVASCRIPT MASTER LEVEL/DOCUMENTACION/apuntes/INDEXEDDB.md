@@ -5,22 +5,6 @@
 
 ---
 
-# 📚 Temario
-
-1. Definición de IndexedDB
-2. Sintaxis básica y anatomía de una operación
-3. Operaciones CRUD y Transacciones
-4. Comparativa: `localStorage` tradicional vs. `IndexedDB` moderno
-5. Analogía del mundo real
-6. Diagrama de flujo de decisión
-7. Buenas prácticas
-8. Errores comunes
-9. Ejercicios
-10. Solucionario paso a paso
-11. Resumen
-
----
-
 # ¿Qué es IndexedDB?
 
 **IndexedDB** es una base de datos transaccional orientada a objetos (NoSQL) integrada directamente en los navegadores web modernos. Permite almacenar **grandes cantidades de datos estructurados** (incluyendo archivos y objetos complejos como *Blobs*) de forma persistente en el dispositivo del usuario.
