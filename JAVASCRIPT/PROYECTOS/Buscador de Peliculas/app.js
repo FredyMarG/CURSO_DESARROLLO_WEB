@@ -8,6 +8,7 @@
 // 1. CONFIGURACIÓN Y REFERENCIAS AL DOM (Document Object Model)
 const API_KEY = '2ed0427b'; // Llave de acceso pública para consultar la API de OMDb
 const buscadorInput = document.getElementById('buscador'); // Referencia al campo de texto de búsqueda
+const contenedorSugerencias = document.getElementById('sugerencias-peliculas'); // Contenedor de los botones de sugerencia
 const gridPeliculas = document.getElementById('grid-peliculas'); // Referencia al contenedor donde irán las tarjetas
 const modal = document.getElementById('modal-detalle'); // Referencia al elemento nativo <dialog> de HTML5
 const modalContenido = document.getElementById('modal-contenido'); // Contenedor interno donde se inyecta la ficha técnica
@@ -31,6 +32,24 @@ buscadorInput.addEventListener('input', (evento) => {
   debounceTimer = setTimeout(() => {
     buscarPeliculas(busqueda); // Llama a la función asíncrona que consulta la API
   }, 500);
+});
+
+// 2.1. BÚSQUEDA RÁPIDA MEDIANTE BOTONES DE SUGERENCIA
+// Usa delegación de eventos para detectar clics en cualquiera de los botones sugeridos.
+contenedorSugerencias.addEventListener('click', (evento) => {
+  const boton = evento.target.closest('.btn-sugerencia'); // Verifica si el clic ocurrió en un botón de sugerencia
+  if (!boton) return; // Si se hizo clic en el espacio vacío del contenedor, no hace nada
+
+  const peliculaSugerida = boton.dataset.pelicula; // Lee el título guardado en el atributo data-pelicula
+  clearTimeout(debounceTimer); // Cancela cualquier búsqueda pendiente del input para evitar duplicados
+  buscadorInput.value = peliculaSugerida; // Rellena el buscador con el nombre de la película elegida
+
+  // Resalta el botón seleccionado y quita la clase 'activo' de los demás.
+  contenedorSugerencias.querySelectorAll('.btn-sugerencia').forEach((btn) => {
+    btn.classList.toggle('activo', btn === boton);
+  });
+
+  buscarPeliculas(peliculaSugerida); // Ejecuta la búsqueda de inmediato sin esperar los 500ms del debounce
 });
 
 // 3. CONSULTA A LA API DE OMDb (BÚSQUEDA POR TÍTULO)

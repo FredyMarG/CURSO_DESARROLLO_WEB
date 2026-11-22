@@ -77,6 +77,38 @@ header h1 {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.16); /* Halo luminoso alrededor del input */
 }
 
+/* Contenedor de botones de sugerencia rápida debajo del buscador */
+.sugerencias {
+  display: flex; /* Organiza los botones en fila */
+  flex-wrap: wrap; /* Permite que pasen a otra línea en pantallas pequeñas */
+  justify-content: center; /* Centra los botones horizontalmente */
+  gap: 10px; /* Espacio uniforme entre sugerencias */
+  margin-top: 14px; /* Separación superior respecto al input de búsqueda */
+}
+
+/* Estilo individual de cada botón tipo cápsula (pill) de sugerencia */
+.btn-sugerencia {
+  background: rgba(255, 255, 255, 0.05); /* Fondo sutil translúcido */
+  color: var(--texto-secundario); /* Color gris azulado en reposo */
+  border: 1px solid var(--borde-sutil); /* Borde fino semitransparente */
+  border-radius: 999px; /* Bordes completamente redondeados estilo píldora */
+  padding: 7px 14px; /* Relleno compacto y cómodo */
+  font-family: inherit; /* Hereda la tipografía 'Outfit' */
+  font-size: 0.85rem; /* Tamaño de texto discreto */
+  font-weight: 600; /* Seminegrita */
+  cursor: pointer; /* Cursor de mano al pasar por encima */
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease; /* Suaviza interacciones */
+}
+
+/* Efecto hover y estado activo para los botones de sugerencia */
+.btn-sugerencia:hover,
+.btn-sugerencia.activo {
+  background: rgba(56, 189, 248, 0.16); /* Fondo cian translúcido */
+  color: var(--cian); /* Texto en cian brillante */
+  border-color: rgba(56, 189, 248, 0.45); /* Borde cian destacado */
+  transform: translateY(-1px); /* Eleva ligeramente el botón */
+}
+
 /* Contenedor principal de resultados */
 main {
   max-width: 1180px; /* Ancho máximo de la galería de películas */
