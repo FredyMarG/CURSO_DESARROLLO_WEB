@@ -416,6 +416,13 @@ const modules = [
     desc: "Control de ingresos y gastos con separador de miles en vivo, localStorage y gráfico Canvas.",
     href: "JAVASCRIPT/PROYECTOS/Finanzas APP/index.html",
   },
+  { // Proyecto práctico de buscador de películas en vivo con OMDb API, Debounce y <dialog>
+    cat: "proyectos",
+    title: "24. Buscador de Películas",
+    tag: "Proyecto JS",
+    desc: "Buscador CineSearch con Debounce, fetch a OMDb API y modal nativo HTML5.",
+    href: "JAVASCRIPT/PROYECTOS/Buscador de Peliculas/index.html",
+  },
 
   // --- SECCIÓN: JS MID LEVEL ---
   // Práctica de programación asíncrona moderna con async y await

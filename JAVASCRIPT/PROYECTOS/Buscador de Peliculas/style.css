@@ -1,0 +1,234 @@
+/* ==========================================================================
+   ESTILOS DE CINESEARCH — BUSCADOR DE PELÍCULAS ESTILO PORTAL DEL CURSO
+   Comentado línea a línea de forma educativa en español
+   ========================================================================== */
+
+/* Variables CSS globales para mantener la misma paleta oscura y neón del curso */
+:root {
+  --fondo-oscuro: #070a13; /* Color principal de fondo de la página */
+  --fondo-tarjeta: rgba(16, 24, 42, 0.85); /* Fondo translúcido para tarjetas y modal */
+  --fondo-input: rgba(10, 15, 28, 0.92); /* Fondo oscuro para la barra de búsqueda */
+  --borde-sutil: rgba(255, 255, 255, 0.1); /* Borde fino semitransparente */
+  --cian: #38bdf8; /* Color de acento cian para focos y detalles */
+  --indigo: #6366f1; /* Color secundario índigo para degradados */
+  --texto-principal: #f8fafc; /* Color claro para títulos y textos principales */
+  --texto-secundario: #94a3b8; /* Color gris azulado para subtítulos y años */
+}
+
+/* Normalización del modelo de caja en todos los elementos */
+* {
+  box-sizing: border-box; /* Incluye padding y border dentro del ancho/alto total */
+  margin: 0; /* Elimina márgenes externos por defecto */
+  padding: 0; /* Elimina rellenos internos por defecto */
+}
+
+/* Estilos generales del cuerpo del documento */
+body {
+  min-height: 100vh; /* Ocupa como mínimo toda la altura visible de la ventana */
+  background-color: var(--fondo-oscuro); /* Fondo oscuro base */
+  background-image: /* Halos luminosos sutiles en esquinas opuestas */
+    radial-gradient(circle at 12% 12%, rgba(56, 189, 248, 0.14), transparent 36%), /* Luz cian superior izquierda */
+    radial-gradient(circle at 88% 88%, rgba(99, 102, 241, 0.16), transparent 38%); /* Luz índigo inferior derecha */
+  color: var(--texto-principal); /* Color de texto por defecto */
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Tipografía moderna del curso */
+  padding: 36px 20px 80px; /* Espacio superior, lateral e inferior (deja sitio al HUD flotante) */
+}
+
+/* Encabezado centrado con título y barra de búsqueda */
+header {
+  max-width: 720px; /* Limita el ancho del encabezado */
+  margin: 0 auto 36px; /* Centra horizontalmente y separa del contenido principal */
+  text-align: center; /* Centra los textos e inputs dentro del header */
+}
+
+/* Título principal con degradado cian-índigo */
+header h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem); /* Tamaño adaptable según el ancho de pantalla */
+  font-weight: 800; /* Grosor extra negrita */
+  margin: 10px 0 18px; /* Espaciado vertical */
+  background: linear-gradient(135deg, var(--cian), #818cf8); /* Degradado diagonal */
+  -webkit-background-clip: text; /* Recorta el fondo a la forma del texto */
+  background-clip: text; /* Propiedad estándar equivalente */
+  -webkit-text-fill-color: transparent; /* Transparenta el texto para lucir el degradado */
+}
+
+/* Campo de búsqueda principal */
+#buscador {
+  width: 100%; /* Ocupa todo el ancho disponible del header */
+  background: var(--fondo-input); /* Fondo oscuro con ligero contraste */
+  color: var(--texto-principal); /* Texto blanco al escribir */
+  border: 1px solid var(--borde-sutil); /* Borde fino semitransparente */
+  border-radius: 14px; /* Esquinas redondeadas */
+  padding: 14px 18px; /* Relleno amplio para mayor comodidad */
+  font-family: inherit; /* Hereda la fuente 'Outfit' */
+  font-size: 1rem; /* Tamaño de letra legible */
+  outline: none; /* Oculta el contorno azul predeterminado */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Anima suavemente el enfoque */
+}
+
+/* Texto de ayuda (placeholder) dentro del buscador */
+#buscador::placeholder {
+  color: var(--texto-secundario); /* Gris azulado suave */
+}
+
+/* Resaltado luminoso al enfocar el buscador */
+#buscador:focus {
+  border-color: var(--cian); /* Ilumina el borde en cian */
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.16); /* Halo luminoso alrededor del input */
+}
+
+/* Contenedor principal de resultados */
+main {
+  max-width: 1180px; /* Ancho máximo de la galería de películas */
+  margin: 0 auto; /* Centra la galería horizontalmente */
+}
+
+/* Cuadrícula responsiva automática para las tarjetas de películas */
+.grid {
+  display: grid; /* Activa CSS Grid */
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); /* Columnas automáticas de mínimo 210px */
+  gap: 20px; /* Espacio uniforme entre tarjetas */
+}
+
+/* Mensajes de estado (Cargando, Sin resultados, Error) */
+.mensaje {
+  grid-column: 1 / -1; /* Ocupa todo el ancho de la cuadrícula */
+  text-align: center; /* Centra el mensaje */
+  color: var(--texto-secundario); /* Color gris azulado discreto */
+  background: var(--fondo-tarjeta); /* Fondo tipo cristal */
+  border: 1px solid var(--borde-sutil); /* Borde fino */
+  border-radius: 14px; /* Esquinas redondeadas */
+  padding: 28px 18px; /* Espaciado interno amplio */
+  font-size: 1rem; /* Tamaño de texto cómodo */
+}
+
+/* Tarjeta individual de cada película */
+.card-pelicula {
+  background: var(--fondo-tarjeta); /* Fondo oscuro translúcido */
+  border: 1px solid var(--borde-sutil); /* Borde sutil alrededor de la tarjeta */
+  border-radius: 16px; /* Esquinas redondeadas */
+  overflow: hidden; /* Recorta la imagen para que respete el borde redondeado superior */
+  display: flex; /* Usa Flexbox vertical para alinear imagen e info */
+  flex-direction: column; /* Coloca el póster arriba y los datos abajo */
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease; /* Suaviza el efecto hover */
+}
+
+/* Elevación y brillo cian al pasar el cursor sobre una tarjeta */
+.card-pelicula:hover {
+  transform: translateY(-4px); /* Eleva ligeramente la tarjeta */
+  border-color: rgba(56, 189, 248, 0.45); /* Resalta el borde en cian */
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45); /* Sombra profunda debajo de la tarjeta */
+}
+
+/* Imagen del póster dentro de la tarjeta */
+.card-pelicula img {
+  width: 100%; /* Ocupa todo el ancho de la tarjeta */
+  height: 310px; /* Altura fija uniforme para alinear todas las tarjetas */
+  object-fit: cover; /* Recorta la imagen proporcionalmente sin deformarla */
+  background: #0b1120; /* Fondo oscuro mientras carga la imagen */
+}
+
+/* Contenedor de título, año y botón de la película */
+.card-pelicula .info {
+  padding: 14px 16px 16px; /* Espaciado interno */
+  display: flex; /* Usa Flexbox vertical */
+  flex-direction: column; /* Apila título, año y botón */
+  flex: 1; /* Ocupa el alto restante para empujar el botón al fondo */
+  gap: 6px; /* Separación entre elementos */
+}
+
+/* Título de la película */
+.card-pelicula .info h3 {
+  font-size: 1.02rem; /* Tamaño equilibrado */
+  font-weight: 700; /* Negrita para destacar el nombre */
+  color: var(--texto-principal); /* Texto blanco */
+  line-height: 1.3; /* Interlineado compacto */
+}
+
+/* Año de estreno */
+.card-pelicula .info p {
+  font-size: 0.86rem; /* Tamaño secundario */
+  color: var(--texto-secundario); /* Color gris azulado */
+  margin-bottom: 8px; /* Separación antes del botón */
+}
+
+/* Botón "Ver Detalle" fijado al fondo de cada tarjeta */
+.card-pelicula .info button {
+  margin-top: auto; /* Empuja el botón hacia la parte inferior de la tarjeta */
+  background: linear-gradient(135deg, var(--cian), var(--indigo)); /* Degradado cian-índigo */
+  color: #070a13; /* Texto oscuro para alto contraste */
+  border: none; /* Sin borde por defecto */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 9px 12px; /* Relleno cómodo */
+  font-family: inherit; /* Hereda la tipografía principal */
+  font-size: 0.88rem; /* Tamaño legible */
+  font-weight: 700; /* Negrita */
+  cursor: pointer; /* Cursor de mano */
+  transition: filter 0.2s ease, transform 0.15s ease; /* Anima hover y clic */
+}
+
+/* Efecto hover del botón "Ver Detalle" */
+.card-pelicula .info button:hover {
+  filter: brightness(1.08); /* Aumenta levemente el brillo */
+  transform: translateY(-1px); /* Sube 1 píxel */
+}
+
+/* Modal nativo <dialog> centrado en pantalla */
+#modal-detalle {
+  margin: auto; /* Centra el <dialog> tanto horizontal como verticalmente */
+  width: min(92%, 540px); /* Ocupa hasta 540px o el 92% en pantallas pequeñas */
+  background: #0f172a; /* Fondo azul noche sólido para máxima legibilidad */
+  color: var(--texto-principal); /* Texto claro */
+  border: 1px solid rgba(56, 189, 248, 0.35); /* Borde cian sutil */
+  border-radius: 18px; /* Esquinas redondeadas */
+  padding: 26px; /* Espaciado interno amplio */
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7); /* Sombra marcada sobre el fondo */
+}
+
+/* Fondo oscuro desenfocado detrás del modal nativo */
+#modal-detalle::backdrop {
+  background: rgba(2, 6, 23, 0.78); /* Oscurece el resto de la página */
+  backdrop-filter: blur(6px); /* Desenfoca las tarjetas detrás del modal */
+}
+
+/* Título dentro del modal de detalles */
+#modal-contenido h2 {
+  font-size: 1.4rem; /* Tamaño destacado */
+  color: var(--cian); /* Título en cian brillante */
+  margin-bottom: 14px; /* Separación respecto a los datos */
+}
+
+/* Párrafos informativos (Género, Director, Sinopsis, Calificación) */
+#modal-contenido p {
+  color: #cbd5e1; /* Gris claro muy legible */
+  font-size: 0.95rem; /* Tamaño cómodo de lectura */
+  line-height: 1.55; /* Interlineado aireado para la sinopsis */
+  margin-bottom: 10px; /* Separación entre líneas de información */
+}
+
+/* Etiquetas en negrita dentro del modal */
+#modal-contenido strong {
+  color: var(--texto-principal); /* Resalta la etiqueta en blanco puro */
+}
+
+/* Botón para cerrar el modal */
+#btn-cerrar-modal {
+  margin-top: 14px; /* Espacio superior respecto al contenido */
+  width: 100%; /* Ocupa todo el ancho inferior del modal */
+  background: rgba(255, 255, 255, 0.08); /* Fondo sutil translúcido */
+  color: var(--texto-principal); /* Texto blanco */
+  border: 1px solid var(--borde-sutil); /* Borde fino */
+  border-radius: 10px; /* Esquinas redondeadas */
+  padding: 10px 14px; /* Relleno cómodo */
+  font-family: inherit; /* Hereda la tipografía principal */
+  font-size: 0.92rem; /* Tamaño legible */
+  font-weight: 600; /* Seminegrita */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.2s ease, border-color 0.2s ease; /* Suaviza el hover */
+}
+
+/* Efecto hover del botón cerrar */
+#btn-cerrar-modal:hover {
+  background: rgba(56, 189, 248, 0.16); /* Fondo cian suave */
+  border-color: var(--cian); /* Borde cian brillante */
+}
