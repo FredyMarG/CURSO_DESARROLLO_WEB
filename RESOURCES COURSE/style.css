@@ -569,6 +569,39 @@ h1 {
     background: rgba(0, 240, 255, 0.24);
     transform: translateY(-1px);
 }
+/* Contenedor de botones de acción (Continuar / Reiniciar) en la barra de progreso */
+.progress-actions {
+    display: flex; /* Alinea los botones en fila */
+    align-items: center; /* Centra verticalmente */
+    gap: 8px; /* Separación entre botones */
+    flex-wrap: wrap; /* Permite salto de línea en pantallas pequeñas */
+}
+
+/* Botón discreto para reiniciar el progreso almacenado en localStorage */
+.reset-progress-btn {
+    padding: 9px 12px; /* Relleno interno */
+    border-radius: 10px; /* Esquinas redondeadas */
+    background: rgba(255, 255, 255, 0.05); /* Fondo translúcido sutil */
+    border: 1px solid var(--border-light); /* Borde fino claro */
+    color: var(--text-muted); /* Color de texto atenuado */
+    font-family: 'Outfit', sans-serif; /* Tipografía principal */
+    font-size: 0.8rem; /* Tamaño compacto */
+    font-weight: 600; /* Seminegrita */
+    cursor: pointer; /* Cursor de botón */
+    transition: all 0.2s ease; /* Transición suave */
+}
+
+/* Resaltado en tono rosa/alerta al pasar el cursor por Reiniciar */
+.reset-progress-btn:hover {
+    border-color: #fb7185; /* Borde rosado de advertencia */
+    color: #fda4af; /* Texto rosado claro */
+    background: rgba(244, 63, 94, 0.12); /* Fondo rosado translúcido */
+}
+
+/* Borde verde esmeralda para distinguir visualmente tarjetas ya completadas */
+.card.card-done {
+    border-color: rgba(16, 185, 129, 0.45); /* Resalte esmeralda */
+}
 
 /* Flecha conectora entre pasos */
 .path-arrow {

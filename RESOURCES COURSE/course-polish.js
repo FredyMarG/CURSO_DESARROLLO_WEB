@@ -25,11 +25,25 @@
     const depthToPortal = portalIdx !== -1 ? Math.max(1, parts.length - 1 - portalIdx) : depthInCourse + 1; // Calcula niveles hasta la raíz del repositorio
     const toPortalRoot = '../'.repeat(depthToPortal); // Declara e inicializa "toPortalRoot"
 
+    // Mapa que vincula cada carpeta de módulo Node.js con su guía Markdown exacta
+    const nodeDocMap = {
+        'Introduccion': 'INTRODUCCION.md',
+        'Fundamentos': 'FUNDAMENTOS.md',
+        'Instalacion': 'INSTALACION.md',
+        'JavaScriptModerno': 'JAVASCRIPT MODERNO.md',
+        'Asincronia': 'ARQUITECTURA INTERNA ASINCRONIA.md',
+        'ArchivosNativos': 'ARCHIVOS NATIVOS.md',
+        'REPL': 'REPL.md',
+        'Modulos': 'MODULOS.md'
+    };
+    // Si estamos dentro de NODE/, añadimos ?doc= para abrir directamente el apunte del módulo actual
+    const nodeDocQuery = (courseFolder === 'NODE' && nodeDocMap[rawFolder]) ? `?doc=${encodeURIComponent(nodeDocMap[rawFolder])}` : '';
+
     const courseMeta = { // Declara e inicializa "courseMeta"
         'HTML y CSS': { badge: '🎨 HTML5 & CSS3', levelLabel: '🎨 HTML y CSS', filter: 'htmlcss', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
         'JAVASCRIPT MID LEVEL': { badge: '⚡ JS MID LEVEL', levelLabel: '⚡ JS Mid Level', filter: 'mid', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
         'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', levelLabel: '🚀 JS Master Level', filter: 'master', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
-        'NODE': { badge: '🟢 NODE.JS', levelLabel: '🟢 Node.js', filter: 'node', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` }
+        'NODE': { badge: '🟢 NODE.JS', levelLabel: '🟢 Node.js', filter: 'node', docsHref: `${toCourseRoot}Documentacion/index.html${nodeDocQuery}`, portalHref: `${toPortalRoot}index.html` }
     };
     const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', levelLabel: '📘 Curso', filter: 'all', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa "meta"
 

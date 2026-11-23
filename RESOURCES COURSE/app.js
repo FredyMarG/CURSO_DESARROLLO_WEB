@@ -1692,7 +1692,7 @@ function render() { // Declara función
       // Creamos un enlace <a> para que toda la tarjeta sea navegable
       const a = document.createElement("a"); // Crea nuevo elemento DOM "a"
       // Asignamos la clase CSS de tarjeta estilo Glassmorphism
-      a.className = "card"; // Asigna valor
+      a.className = "card" + (progressMap[item.href]?.completed ? " card-done" : "");
       // Codificamos la ruta para manejar espacios y caracteres especiales en la URL
       a.href = encodeURI(item.href); // Asigna valor
       // Detectamos si la etiqueta corresponde a documentación o proyectos para darle color distinto
@@ -1726,6 +1726,7 @@ function render() { // Declara función
 }
 
 
+// Renderiza la barra superior de progreso global y el botón de continuar/reiniciar
 function renderGlobalProgress(progressMap) {
   const bar = document.getElementById("globalProgressBar");
   if (!bar) return;
@@ -1737,14 +1738,37 @@ function renderGlobalProgress(progressMap) {
   const continueHtml = lastMod && lastMod.href
     ? `<a class="continue-btn" href="${encodeURI(lastMod.href)}">▶ Continuar: ${lastMod.title}</a>`
     : `<span class="continue-btn" style="opacity:0.75;cursor:default;">🧭 ${total} recursos disponibles</span>`;
+  const resetHtml = (completed > 0 || lastMod)
+    ? `<button type="button" class="reset-progress-btn" id="resetProgressBtn" title="Reiniciar progreso guardado">↺ Reiniciar</button>`
+    : "";
   bar.innerHTML = `
     <div class="global-progress-info">
       <div class="global-progress-label">Progreso global del curso: ${completed} / ${total} módulos (${pct}%)</div>
       <div class="global-progress-track"><div class="global-progress-fill" style="width:${pct}%"></div></div>
     </div>
-    ${continueHtml}
+    <div class="progress-actions">${continueHtml}${resetHtml}</div>
   `;
+  document.getElementById("resetProgressBtn")?.addEventListener("click", () => {
+    if (!confirm("¿Reiniciar tu progreso guardado en este navegador?")) return;
+    try {
+      localStorage.removeItem("curso_web_progress");
+      localStorage.removeItem("curso_web_last_module");
+    } catch (_) {}
+    render();
+  });
 }
+
+// Atajos de teclado globales: "/" o Ctrl+K enfocan el buscador; Escape limpia el filtro
+document.addEventListener("keydown", (e) => {
+  if ((e.key === "/" || (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) && document.activeElement !== searchInput) {
+    e.preventDefault();
+    searchInput.focus();
+    searchInput.select();
+  } else if (e.key === "Escape" && document.activeElement === searchInput && searchInput.value) {
+    searchInput.value = "";
+    render();
+  }
+});
 
 portal.addEventListener("click", (e) => {
   const card = e.target.closest("a.card");

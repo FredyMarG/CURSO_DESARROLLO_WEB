@@ -1,14 +1,22 @@
 <!doctype html>
+<!-- Visor de documentación técnica para Node.js -->
 <html lang="es">
 <head>
+    <!-- Codificación UTF-8 para tildes, ñ y símbolos -->
     <meta charset="UTF-8" />
+    <!-- Escala inicial responsiva para escritorio y móvil -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción del centro de apuntes de Node.js -->
+    <meta name="description" content="Centro de apuntes y guías Markdown de Node.js: Introducción, Fundamentos, Instalación, JS Moderno, Asincronía, Archivos Nativos, REPL y Módulos." />
     <title>🟢 Apuntes Completos de Node.js | Curso Desarrollo Web</title>
+    <!-- Preconexión a Google Fonts para acelerar carga de fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Tipografías Outfit (interfaz) y Fira Code (código) -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <!-- Cargamos los datos locales de los apuntes para funcionar incluso sin servidor local -->
+    <!-- Cargamos los datos locales de los apuntes y soporte visual para diagramas Mermaid (defer) -->
     <script src="docs-data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js" defer></script>
     <style>
         /* ==================================================================
            ESTILOS DEL LECTOR DE DOCUMENTACIÓN DE NODE.JS (3 COLUMNAS)
@@ -263,12 +271,22 @@
         /* Bloques de cita y notas importantes */
         .md-body blockquote { border-left: 4px solid var(--primary); background: rgba(16, 185, 129, 0.08); padding: 10px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; }
 
-        /* Tablas Markdown y separadores horizontales */
+        /* Tablas Markdown con scroll horizontal en pantallas estrechas */
         .md-body table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; overflow-x: auto; display: block; }
+        /* Celdas y encabezados de tabla con borde sutil */
         .md-body th, .md-body td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
+        /* Cabecera de tabla resaltada en verde Node.js */
         .md-body th { background: rgba(16, 185, 129, 0.14); color: var(--primary); font-weight: 700; }
+        /* Filas alternas para facilitar la lectura */
         .md-body tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+        /* Separador horizontal Markdown (---) */
         .md-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+        /* Contenedor oscuro para diagramas Mermaid */
+        .md-body .mermaid { background: #050811; border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin: 14px 0; overflow-x: auto; text-align: center; }
+        /* Barra inferior de navegación secuencial entre guías */
+        .doc-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+        /* Barra fija superior que indica el porcentaje de lectura del apunte */
+        .read-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--primary), var(--cyan)); z-index: 60; transition: width 0.1s linear; }
 
         /* Reglas responsivas para tabletas (oculta el índice derecho) */
         @media (max-width: 1120px) { .layout { grid-template-columns: 260px 1fr; } .toc { display: none; } }
@@ -279,6 +297,7 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
 <body>
+    <div class="read-progress" id="readProgress"></div>
     <header class="topbar">
         <div class="brand">
             <span class="badge">NODE.JS · DOCUMENTACIÓN</span>
@@ -300,6 +319,7 @@
                 <a id="moduleBtn" class="btn" href="../Fundamentos/index.html">🎯 Ir al Módulo</a>
             </div>
             <div id="docContent" class="md-body"></div>
+            <div class="doc-nav" id="docNav"></div>
         </main>
         <aside class="toc">
             <div class="toc-title">📑 Índice</div>
@@ -343,18 +363,27 @@
                 .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>") // Negritas
                 .replace(/\*([^*]+)\*/g, "<em>$1</em>"); // Cursivas
 
-        // Convierte texto Markdown en HTML estructurado (incluye tablas y separadores) y genera el índice lateral
+        // Convierte texto Markdown en HTML estructurado (incluye listas ordenadas, tablas, Mermaid y separadores) y genera el índice lateral
         function renderMd(md) {
             const lines = md.replace(/\r\n/g, "\n").split("\n");
-            let html = "", inCode = false, inList = false, inTable = false, tableHeader = false, hIdx = 0, toc = [];
-            const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
-            const closeTable = () => { if (inTable) { html += "</tbody></table>"; inTable = false; tableHeader = false; } };
+            let html = "", inCode = false, codeLang = "", listTag = "", inTable = false, hIdx = 0, toc = [];
+            const closeList = () => { if (listTag) { html += `</${listTag}>`; listTag = ""; } };
+            const closeTable = () => { if (inTable) { html += "</tbody></table>"; inTable = false; } };
 
             for (const line of lines) {
                 if (line.trim().startsWith("```")) {
                     closeList(); closeTable();
-                    html += inCode ? "</code></pre></div>" : '<div class="code-wrap"><button class="copy-btn">Copiar</button><pre><code>';
-                    inCode = !inCode;
+                    if (!inCode) {
+                        codeLang = line.trim().slice(3).trim().toLowerCase();
+                        html += codeLang === "mermaid"
+                            ? '<div class="mermaid">'
+                            : '<div class="code-wrap"><button class="copy-btn">Copiar</button><pre><code>';
+                        inCode = true;
+                    } else {
+                        html += codeLang === "mermaid" ? "</div>" : "</code></pre></div>";
+                        inCode = false;
+                        codeLang = "";
+                    }
                     continue;
                 }
                 if (inCode) { html += esc(line) + "\n"; continue; }
@@ -368,7 +397,6 @@
                     if (cells.every(c => /^:?-{2,}:?$/.test(c))) continue;
                     if (!inTable) {
                         inTable = true;
-                        tableHeader = true;
                         html += "<table><thead><tr>" + cells.map(c => `<th>${fmt(c)}</th>`).join("") + "</tr></thead><tbody>";
                     } else {
                         html += "<tr>" + cells.map(c => `<td>${fmt(c)}</td>`).join("") + "</tr>";
@@ -388,8 +416,11 @@
                     if (lvl >= 1 && hIdx > 1) toc.push({ id, lvl, text: raw.replace(/`/g, "") });
                     html += `<h${lvl} id="${id}">${fmt(raw)}</h${lvl}>`;
                 } else if (/^[-*]\s+/.test(tr)) {
-                    if (!inList) { html += "<ul>"; inList = true; }
+                    if (listTag !== "ul") { closeList(); html += "<ul>"; listTag = "ul"; }
                     html += `<li>${fmt(tr.replace(/^[-*]\s+/, ""))}</li>`;
+                } else if (/^\d+\.\s+/.test(tr)) {
+                    if (listTag !== "ol") { closeList(); html += "<ol>"; listTag = "ol"; }
+                    html += `<li>${fmt(tr.replace(/^\d+\.\s+/, ""))}</li>`;
                 } else if (tr.startsWith(">")) {
                     closeList();
                     html += `<blockquote>${fmt(tr.replace(/^>\s*/, ""))}</blockquote>`;
@@ -400,7 +431,7 @@
             }
             closeList();
             closeTable();
-            if (inCode) html += "</code></pre></div>";
+            if (inCode) html += codeLang === "mermaid" ? "</div>" : "</code></pre></div>";
             return { html, toc };
         }
 
@@ -409,6 +440,11 @@
             activeFile = doc.file; // Actualiza archivo activo
             docTitle.textContent = doc.title; // Actualiza título en cabecera
             if (moduleBtn && doc.module) moduleBtn.href = encodeURI(doc.module); // Enlaza al módulo interactivo del apunte
+            try {
+                const u = new URL(window.location.href);
+                u.searchParams.set("doc", doc.file);
+                history.replaceState(null, "", u.toString());
+            } catch (_) {}
             renderSidebar(docSearch.value); // Actualiza estado activo en la barra lateral
 
             // Lee el contenido desde window.DOCS_CONTENT (cargado por docs-data.js)
@@ -416,10 +452,32 @@
             const { html, toc } = renderMd(md); // Convierte Markdown a HTML e índice
             docContent.innerHTML = html; // Inserta el contenido en el DOM
 
+            // Renderiza diagramas Mermaid si la librería cargó correctamente
+            if (window.mermaid && docContent.querySelector(".mermaid")) {
+                try {
+                    window.mermaid.initialize({ startOnLoad: false, theme: "dark" });
+                    window.mermaid.run({ nodes: docContent.querySelectorAll(".mermaid") });
+                } catch (_) {}
+            }
+
             // Renderiza todos los enlaces del documento en la tabla de contenido derecha
             tocList.innerHTML = toc
                 .map((t) => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`)
                 .join("");
+
+            // Navegación inferior entre guías (Anterior / Siguiente)
+            const docNav = document.getElementById("docNav");
+            if (docNav) {
+                const idx = DOCS.findIndex(d => d.file === doc.file);
+                const prev = idx > 0 ? DOCS[idx - 1] : null;
+                const next = idx >= 0 && idx < DOCS.length - 1 ? DOCS[idx + 1] : null;
+                docNav.innerHTML = `
+                    ${prev ? `<button class="btn" id="prevDocBtn">⬅ ${esc(prev.title)}</button>` : "<span></span>"}
+                    ${next ? `<button class="btn" id="nextDocBtn">${esc(next.title)} ➡</button>` : "<span></span>"}
+                `;
+                document.getElementById("prevDocBtn")?.addEventListener("click", () => { loadDoc(prev); window.scrollTo({ top: 0, behavior: "smooth" }); });
+                document.getElementById("nextDocBtn")?.addEventListener("click", () => { loadDoc(next); window.scrollTo({ top: 0, behavior: "smooth" }); });
+            }
 
             // Activa los botones "Copiar" en todos los bloques de código
             docContent.querySelectorAll(".copy-btn").forEach((b) =>
@@ -453,8 +511,18 @@
         // Escucha cambios en el buscador para filtrar en tiempo real
         docSearch.addEventListener("input", () => renderSidebar(docSearch.value));
 
-        // Carga automáticamente el primer apunte al abrir la página
-        loadDoc(DOCS[0]);
+        // Actualiza barra de progreso de lectura superior
+        window.addEventListener("scroll", () => {
+            const bar = document.getElementById("readProgress");
+            if (!bar) return;
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            bar.style.width = max > 0 ? `${Math.min(100, Math.round((window.scrollY / max) * 100))}%` : "0%";
+        }, { passive: true });
+
+        // Carga el apunte indicado por ?doc= o el primero por defecto
+        const requestedDoc = new URLSearchParams(window.location.search).get("doc");
+        const initialDoc = DOCS.find(d => d.file.toLowerCase() === (requestedDoc || "").toLowerCase()) || DOCS[0];
+        loadDoc(initialDoc);
     </script>
 </body>
 </html>
