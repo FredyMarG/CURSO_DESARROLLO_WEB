@@ -24,11 +24,9 @@ CURSO_DESARROLLO_WEB/
 ├── index.html                    # Portal principal con catálogo, iconos y navegación global
 ├── README.md                     # Documentación general del repositorio
 ├── RESOURCES COURSE/             # Motor visual, catálogo, temas neón, retos y navegación
-│   ├── app.js                    # Lógica y catálogo optimizado del portal principal
-│   ├── style.css                 # Estilos del portal principal
-│   ├── course-polish.js/.css     # Transformador unificado (HTML/CSS, Mid, Master, Node) + Retos
-│   ├── junior-theme.js           # Selector de 5 temas neón y navegación para Junior
-│   └── ejercicios-neon.js/.css   # Interfaz neón unificada para ejercicios y proyectos
+│   ├── portal/                   # app.js y style.css del portal principal
+│   ├── modules/                  # course-polish.js/.css y junior-theme.js para módulos
+│   └── exercises/                # ejercicios-neon.js/.css para ejercicios y proyectos
 ├── HTML y CSS/                   # 10 módulos principales + 8 guías .md + exhibición de 8 proyectos
 ├── JAVASCRIPT/
 │   ├── JAVASCRIPT JUNIOR LEVEL/  # 13 módulos + 14 guías .md + 12 ejercicios
