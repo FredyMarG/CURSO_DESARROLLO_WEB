@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · ERRORES</span><div class="brand-title"><span>🛡️</span><span>Manejo de Errores (Try-Catch)</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -85,7 +85,7 @@
     ocultarSpinner();
 
 }</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># TRY CATCH FINALLY COMPLETO</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">TRY CATCH FINALLY COMPLETO</h3>
 <pre class="code-block"><code>try{
 
     conectar();
@@ -104,10 +104,10 @@ finally{
 
     desconectar();
 </code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># PROPAGACIÓN DE ERRORES</p>
-<p style="margin-bottom:8px;line-height:1.6;"># DEFINICIÓN</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">PROPAGACIÓN DE ERRORES</h3>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">DEFINICIÓN</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Los errores pueden viajar entre funciones.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># EJEMPLO</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">EJEMPLO</h3>
 <pre class="code-block"><code>function c(){
 
     throw new Error(
@@ -126,7 +126,7 @@ function a(){
 
     b();
 </code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># DIAGRAMA</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">DIAGRAMA</h3>
 <pre class="code-block"><code>a()
  ↓
 b()
@@ -138,10 +138,10 @@ ERROR
 b()
  ↑
 a()</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># RE-THROWING</p>
-<p style="margin-bottom:8px;line-height:1.6;"># ¿QUÉ ES?</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">RE-THROWING</h3>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">¿QUÉ ES?</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Volver a lanzar una excepción.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># EJEMPLO</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">EJEMPLO</h3>
 <pre class="code-block"><code>try{
 
     ejecutar();
@@ -156,10 +156,10 @@ catch(error){
     throw error;
 
 }</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># ¿PARA QUÉ SIRVE?</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">¿PARA QUÉ SIRVE?</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Permite registrar el error y seguir propagándolo.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 🚀 CASOS PRÁCTICOS REALES</p>
-<p style="margin-bottom:8px;line-height:1.6;"># LOGIN</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🚀 CASOS PRÁCTICOS REALES</h3>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">LOGIN</h3>
 <pre class="code-block"><code>try{
 
     login();
@@ -172,7 +172,7 @@ catch(error){
     );
 
 }</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># API</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">API</h3>
 <pre class="code-block"><code>try{
 
     obtenerDatos();
@@ -183,7 +183,7 @@ catch(error){
     mostrarError();
 
 }</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># BANCO</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">BANCO</h3>
 <pre class="code-block"><code>try{
 
     retirarDinero();
@@ -207,15 +207,27 @@ catch(error){
 );</code></pre></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Tip:</strong> Siempre lanza errores descriptivos con <code>throw new Error("Mensaje")</code>.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Manejo de Errores (Try-Catch)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Try-Catch">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · MANEJO DE ERRORES</span><h2 class="slide-title">🎛️ Simulador de <code>try / catch / finally</code></h2><p class="slide-lead">Selecciona una operación válida o con error para inspeccionar el flujo y las propiedades del objeto <code>Error</code>.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Operación a evaluar</label><select id="tcOp"><option value="ok">JSON.parse('{"ok":true}')</option><option value="syntax">JSON.parse('{mal json}')</option><option value="throw">throw new TypeError("Dato inválido")</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Manejo de Errores (Try-Catch)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="finally se ejecuta siempre tras try/catch." data-err="catch solo corre si hay error; finally corre siempre."><div class="quiz-q-title">1. ¿Qué bloque se ejecuta SIEMPRE al final, haya habido error o no?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">finally</button><button class="quiz-option" data-opt="b">catch</button><button class="quiz-option" data-opt="c">throw</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Manejo de Errores (Try-Catch)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Manejo de Errores (Try-Catch)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   try { JSON.parse(&#x27;{mal json}&#x27;); }
@@ -226,11 +238,10 @@ catch(error){
   catch (e) { document.getElementById(&#x27;out&#x27;).textContent = &#x27;Error capturado: &#x27; + e.message; }
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -238,5 +249,32 @@ catch(error){
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const op = document.getElementById('tcOp'), st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function upd() {
+        const v = op.value, lines = [];
+        try {
+          lines.push('<span style="color:#38bdf8;">▶ Ejecutando bloque try...</span>');
+          if (v === 'ok') { const d = JSON.parse('{"ok":true}'); lines.push('<span style="color:#00ff88;">✅ Parseado: ' + JSON.stringify(d) + '</span>'); }
+          else if (v === 'syntax') { JSON.parse('{mal json}'); }
+          else { throw new TypeError('Dato inválido'); }
+        } catch (e) {
+          lines.push('<span style="color:#ff3358;">❌ catch(e): ' + e.name + ' → ' + e.message + '</span>');
+        } finally {
+          lines.push('<span style="color:#fbbf24;">🏁 finally: limpieza ejecutada siempre.</span>');
+        }
+        st.innerHTML = lines.join('');
+        cd.textContent = `try {
+  ${v === 'ok' ? 'JSON.parse(\'{"ok":true}\');' : v === 'syntax' ? 'JSON.parse(\'{mal json}\');' : 'throw new TypeError("Dato inválido");'}
+} catch (err) {
+  console.error(err.name, err.message);
+} finally {
+  // Siempre se ejecuta
+}`;
+      }
+      op.addEventListener('input', upd); upd();
+        })();
+    </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <!-- Cargamos los datos offline de los apuntes para funcionar incluso sin servidor local -->
+    <!-- Cargamos los datos locales de los apuntes para funcionar incluso sin servidor local -->
     <script src="docs-data.js"></script>
     <style>
         /* ==================================================================
@@ -263,6 +263,13 @@
         /* Bloques de cita y notas importantes */
         .md-body blockquote { border-left: 4px solid var(--primary); background: rgba(16, 185, 129, 0.08); padding: 10px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; }
 
+        /* Tablas Markdown y separadores horizontales */
+        .md-body table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.9rem; overflow-x: auto; display: block; }
+        .md-body th, .md-body td { border: 1px solid var(--border); padding: 9px 12px; text-align: left; }
+        .md-body th { background: rgba(16, 185, 129, 0.14); color: var(--primary); font-weight: 700; }
+        .md-body tr:nth-child(even) td { background: rgba(255, 255, 255, 0.02); }
+        .md-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
         /* Reglas responsivas para tabletas (oculta el índice derecho) */
         @media (max-width: 1120px) { .layout { grid-template-columns: 260px 1fr; } .toc { display: none; } }
 
@@ -303,12 +310,16 @@
         // Activamos el modo estricto de JavaScript
         "use strict";
 
-        // Catálogo de archivos Markdown disponibles dentro de apuntes/
+        // Catálogo completo de las 8 guías Markdown dentro de apuntes/
         const DOCS = [
-            { file: "FUNDAMENTOS.md", title: "01. Fundamentos de Node.js", module: "../Fundamentos/index.html" },
-            { file: "INSTALACION.md", title: "02. Instalación y Entorno", module: "../Instalacion/index.html" },
-            { file: "REPL.md", title: "03. REPL de Node.js", module: "../REPL/index.html" },
-            { file: "MODULOS.md", title: "04. Módulos en Node.js", module: "../Modulos/index.html" }
+            { file: "INTRODUCCION.md", title: "01. Introducción a Node.js", module: "../Introduccion/index.html" },
+            { file: "FUNDAMENTOS.md", title: "02. Fundamentos de Node.js", module: "../Fundamentos/index.html" },
+            { file: "INSTALACION.md", title: "03. Instalación y Entorno", module: "../Instalacion/index.html" },
+            { file: "JAVASCRIPT MODERNO.md", title: "04. JavaScript Moderno", module: "../JavaScriptModerno/index.html" },
+            { file: "ARQUITECTURA INTERNA ASINCRONIA.md", title: "05. Arquitectura y Asincronía", module: "../Asincronia/index.html" },
+            { file: "ARCHIVOS NATIVOS.md", title: "06. Módulos Nativos y Archivos", module: "../ArchivosNativos/index.html" },
+            { file: "REPL.md", title: "07. REPL de Node.js", module: "../REPL/index.html" },
+            { file: "MODULOS.md", title: "08. Módulos en Node.js", module: "../Modulos/index.html" }
         ];
 
         // Referencias a los elementos principales del DOM
@@ -332,56 +343,63 @@
                 .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>") // Negritas
                 .replace(/\*([^*]+)\*/g, "<em>$1</em>"); // Cursivas
 
-        // Convierte texto Markdown en HTML estructurado y genera el índice lateral
+        // Convierte texto Markdown en HTML estructurado (incluye tablas y separadores) y genera el índice lateral
         function renderMd(md) {
-            // Normalizamos saltos de línea y dividimos por renglón
             const lines = md.replace(/\r\n/g, "\n").split("\n");
-            // Variables de estado para bloques de código, listas y encabezados
-            let html = "", inCode = false, inList = false, hIdx = 0, toc = [];
+            let html = "", inCode = false, inList = false, inTable = false, tableHeader = false, hIdx = 0, toc = [];
+            const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
+            const closeTable = () => { if (inTable) { html += "</tbody></table>"; inTable = false; tableHeader = false; } };
 
-            // Recorremos cada línea del documento Markdown
             for (const line of lines) {
-                // Detectamos apertura o cierre de bloques de código ```
                 if (line.trim().startsWith("```")) {
-                    // Cerramos lista abierta antes de entrar a un bloque de código
-                    if (inList) { html += "</ul>"; inList = false; }
-                    // Abrimos o cerramos el bloque <pre><code> con botón Copiar
+                    closeList(); closeTable();
                     html += inCode ? "</code></pre></div>" : '<div class="code-wrap"><button class="copy-btn">Copiar</button><pre><code>';
                     inCode = !inCode;
                     continue;
                 }
-                // Dentro de un bloque de código solo escapamos el texto sin formatear
                 if (inCode) { html += esc(line) + "\n"; continue; }
 
-                // Quitamos espacios sobrantes al inicio y final para evaluar el tipo de línea
                 const tr = line.trim();
-                // Si la línea está vacía, cerramos cualquier lista abierta
-                if (!tr) { if (inList) { html += "</ul>"; inList = false; } continue; }
+                if (!tr) { closeList(); closeTable(); continue; }
 
-                // Encabezados (#, ##, ###)
-                if (/^#{1,3}\s+/.test(tr)) {
-                    if (inList) { html += "</ul>"; inList = false; }
-                    const lvl = tr.match(/^(#{1,3})/)[1].length; // Nivel de encabezado (1 a 3)
-                    const raw = tr.replace(/^#{1,3}\s+/, ""); // Texto limpio del título
-                    const id = "s-" + (++hIdx); // Identificador único para anclas del índice
-                    if (lvl >= 1 && hIdx > 1) toc.push({ id, lvl, text: raw.replace(/`/g, "") }); // Agregamos al índice
+                if (tr.startsWith("|") && tr.endsWith("|")) {
+                    closeList();
+                    const cells = tr.slice(1, -1).split("|").map(c => c.trim());
+                    if (cells.every(c => /^:?-{2,}:?$/.test(c))) continue;
+                    if (!inTable) {
+                        inTable = true;
+                        tableHeader = true;
+                        html += "<table><thead><tr>" + cells.map(c => `<th>${fmt(c)}</th>`).join("") + "</tr></thead><tbody>";
+                    } else {
+                        html += "<tr>" + cells.map(c => `<td>${fmt(c)}</td>`).join("") + "</tr>";
+                    }
+                    continue;
+                }
+                closeTable();
+
+                if (/^---+$/.test(tr)) {
+                    closeList();
+                    html += "<hr>";
+                } else if (/^#{1,3}\s+/.test(tr)) {
+                    closeList();
+                    const lvl = tr.match(/^(#{1,3})/)[1].length;
+                    const raw = tr.replace(/^#{1,3}\s+/, "");
+                    const id = "s-" + (++hIdx);
+                    if (lvl >= 1 && hIdx > 1) toc.push({ id, lvl, text: raw.replace(/`/g, "") });
                     html += `<h${lvl} id="${id}">${fmt(raw)}</h${lvl}>`;
                 } else if (/^[-*]\s+/.test(tr)) {
-                    // Elementos de lista no ordenada
                     if (!inList) { html += "<ul>"; inList = true; }
                     html += `<li>${fmt(tr.replace(/^[-*]\s+/, ""))}</li>`;
                 } else if (tr.startsWith(">")) {
-                    // Bloques de cita o notas destacadas
-                    if (inList) { html += "</ul>"; inList = false; }
+                    closeList();
                     html += `<blockquote>${fmt(tr.replace(/^>\s*/, ""))}</blockquote>`;
                 } else {
-                    // Párrafo normal
-                    if (inList) { html += "</ul>"; inList = false; }
+                    closeList();
                     html += `<p>${fmt(tr)}</p>`;
                 }
             }
-            // Cerramos etiquetas pendientes al finalizar el archivo
-            if (inList) html += "</ul>";
+            closeList();
+            closeTable();
             if (inCode) html += "</code></pre></div>";
             return { html, toc };
         }

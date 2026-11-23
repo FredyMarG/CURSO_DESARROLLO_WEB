@@ -1,24 +1,96 @@
-<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para el navegador web -->
-<html lang="es"> <!-- Apertura del elemento raíz HTML con idioma español configurado -->
-<head> <!-- Sección de cabecera con metadatos técnicos y enlaces a recursos externos -->
-    <meta charset="UTF-8"> <!-- Codificación de caracteres estándar UTF-8 para admitir acentos y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste responsivo de la escala inicial para pantallas móviles y de escritorio -->
-    <title>🌐 Laboratorio de AJAX y XMLHttpRequest en JavaScript | Guía Interactiva</title> <!-- Título descriptivo para la pestaña del navegador -->
-    <meta name="description" content="Aprende y domina AJAX y XMLHttpRequest en JavaScript: ciclo readyState, peticiones GET y POST, FormData, compatibilidad ActiveXObject y servidores locales."> <!-- Metadato SEO descriptivo para motores de búsqueda -->
-    <meta property="og:title" content="Laboratorio de AJAX y XMLHttpRequest en JavaScript"> <!-- Título para compartir en redes sociales mediante el protocolo Open Graph -->
-    <meta property="og:description" content="Simulador interactivo y visual de AJAX, el objeto XMLHttpRequest, estados de readyState y envío con FormData en JS."> <!-- Descripción para redes sociales -->
-    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseño visual moderno y tema oscuro -->
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax Editor (XMLHttpRequest & FormData) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%A1%3C%2Ftext%3E%3C%2Fsvg%3E" />
-</head> <!-- Cierre de la sección de cabecera -->
-<body> <!-- Apertura del cuerpo del documento que contiene todos los componentes visuales e interactivos -->
-    <main class="container"> <!-- Contenedor centralizado con estilos responsivos y efectos de transparencia -->
-        <header class="glass-header"> <!-- Encabezado principal estilizado con efecto cristal y degradados modernos -->
-            <h1>🌐 AJAX y XMLHttpRequest en JavaScript</h1> <!-- Título principal del laboratorio interactivo de AJAX -->
-            <p>Laboratorio interactivo de carga asíncrona de datos en segundo plano sin recargar la página</p> <!-- Subtítulo explicativo del proyecto pedagógico -->
-        </header> <!-- Cierre del encabezado principal -->
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-        <!-- Navegación de Pestañas (Tabs) -->
-        <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">AJAX · SIMULADOR XHR</span>
+            <div class="brand-title"><span>📡</span><span>Ajax Editor (XMLHttpRequest & FormData)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Ajax</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Ajax Editor (XMLHttpRequest & FormData)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">XMLHttpRequest</span><span class="badge badge-cyan">readyState 0-4</span><span class="badge badge-cyan">onload</span><span class="badge badge-cyan">FormData</span></div>
+                <h1 class="hero-title">Ajax:<br /><span class="gradient-text">Ajax Editor (XMLHttpRequest & FormData)</span></h1>
+                <p class="hero-subtitle">Domina el ciclo de vida completo de XMLHttpRequest, escucha de eventos clásica vs moderna y envío de formularios con FormData.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="2" data-title="¿Qué es AJAX y XMLHttpRequest?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Qué es AJAX y XMLHttpRequest?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;"><strong>AJAX</strong> permite intercambiar datos con el servidor en segundo plano sin recargar la página completa usando <code>XMLHttpRequest</code>.</p>
+      <ul class="styled-list">
+        <li><strong>Asincronía real:</strong> la interfaz sigue respondiendo mientras la red procesa la petición.</li>
+        <li><strong>Estados <code>readyState</code>:</strong> avanza de <code>0 (UNSENT)</code> hasta <code>4 (DONE)</code>.</li>
+        <li><strong><code>FormData</code>:</strong> empaqueta campos de formulario automáticamente sin serializar JSON manual.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>📬 Analogía del mensajero:</strong> Creas al mensajero (<code>new XMLHttpRequest()</code>), defines la ruta (<code>open</code>), dejas instrucciones (<code>onload</code>) y lo envías (<code>send</code>).</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Sintaxis Moderna vs Clásica">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis Moderna vs Clásica</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const xhr = new XMLHttpRequest();
+xhr.open(&#x27;GET&#x27;, &#x27;/api/usuarios&#x27;);
+xhr.onload = () =&gt; {
+  if (xhr.status === 200) console.log(JSON.parse(xhr.responseText));
+};
+xhr.send();</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>xhr.open(metodo, url)</code></td><td>Configura el verbo HTTP y endpoint</td></tr><tr><td><code>xhr.onload</code></td><td>Se dispara al completar la transferencia (<code>readyState === 4</code>)</td></tr><tr><td><code>xhr.status</code></td><td>Código HTTP de respuesta (200, 201, 404...)</td></tr><tr><td><code>new FormData(form)</code></td><td>Serializa automáticamente campos y archivos de un formulario</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Regla de oro con FormData:</strong> Nunca configures manualmente el header <code>Content-Type</code> cuando envíes un <code>FormData</code>; el navegador añade el boundary automáticamente.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Servidor local obligatorio:</strong> Las peticiones AJAX fallarán por CORS si abres el HTML con <code>file:///</code>; usa Live Server o XAMPP.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Completo AJAX & FormData">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Completo AJAX & FormData</h2></div>
+            <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
             <button class="tab-btn active" id="tabReadyState" data-target="readystate-tab">Ciclo readyState &amp; Eventos</button> <!-- Botón para activar la pestaña del ciclo de vida y eventos XHR -->
             <button class="tab-btn" id="tabFormData" data-target="formdata-tab">ActiveXObject &amp; FormData</button> <!-- Botón para activar la pestaña de compatibilidad histórica y FormData -->
         </nav> <!-- Cierre de la barra de navegación de pestañas -->
@@ -280,8 +352,69 @@ if (window.XMLHttpRequest) {
                 </div> <!-- Cierre del panel de demostración de FormData -->
             </div> <!-- Cierre de la Pestaña 2 -->
         </section> <!-- Cierre de la sección de tarjeta principal -->
-    </main> <!-- Cierre del contenedor principal -->
+    
+        </section>
 
-    <script src="main.js"></script> <!-- Carga el archivo de script principal main.js al final del body para no retrasar el renderizado visual -->
-</body> <!-- Cierre del cuerpo del documento -->
-</html> <!-- Cierre del documento HTML -->
+        <section class="slide" data-slide="6" data-title="Quiz: Ajax Editor (XMLHttpRequest & FormData)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: readyState === 4 significa DONE." data-err="El estado final completado es 4 (DONE).">
+                    <div class="quiz-q-title">1. ¿Qué valor de <code>readyState</code> indica que la petición AJAX ha finalizado?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">1 (OPENED)</button>
+                        <button class="quiz-option" data-opt="b">2 (HEADERS_RECEIVED)</button>
+                        <button class="quiz-option" data-opt="c">4 (DONE)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: el navegador genera multipart/form-data con su boundary exacto." data-err="El navegador necesita calcular el boundary de multipart/form-data.">
+                    <div class="quiz-q-title">2. ¿Por qué NO debes fijar Content-Type manualmente al enviar FormData?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Porque el navegador calcula el boundary automáticamente</button>
+                        <button class="quiz-option" data-opt="b">Porque FormData solo funciona con GET</button>
+                        <button class="quiz-option" data-opt="c">Porque XMLHttpRequest lo prohíbe en HTTP</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Ajax Editor (XMLHttpRequest & FormData)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const xhr = new XMLHttpRequest();
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Instancia XHR creada. readyState inicial: &#x27; + xhr.readyState;
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const xhr = new XMLHttpRequest();
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Instancia XHR creada. readyState inicial: &#x27; + xhr.readyState;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Ajax</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

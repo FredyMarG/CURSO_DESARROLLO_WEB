@@ -234,23 +234,26 @@ console.log(operaciones.sumar(2, 3));</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 9: RESOLUCIÓN DE RUTAS Y MÓDULOS NATIVOS -->
-        <section class="slide" data-slide="9" data-title="Resolución de Rutas y Módulos Nativos">
+        <!-- SLIDE 9: RESOLUCIÓN DE RUTAS Y ESPECIFICADORES -->
+        <section class="slide" data-slide="9" data-title="Resolución de Especificadores y Rutas">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · RUTAS Y APIS INTEGRADAS</span>
-                <h2 class="slide-title">Rutas Relativas y Módulos Nativos</h2>
+                <span class="slide-kicker">DIAPOSITIVA 9 · RESOLUCIÓN DE MÓDULOS</span>
+                <h2 class="slide-title">Cómo Resuelve Node.js cada Tipo de <code>import</code> / <code>require</code></h2>
             </div>
             <div class="glass-card">
-                <pre class="code-block"><code>// Ruta relativa (carpeta actual ./ o superior ../)
-import { sumar } from "./utils/matematicas.js";
-
-// Módulos nativos con prefijo obligatorio/recomendado node:
-import os from "node:os";
-import path from "node:path";
-import { writeFile, readFile } from "node:fs/promises";
-
-const ruta = path.join("datos", "cursos.json");
-console.log(os.platform(), ruta);</code></pre>
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Especificador</th><th>Qué busca Node.js</th><th>Ejemplo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>./</code> o <code>../</code></td><td>Archivo local relativo al archivo importador (con <code>.js</code> en ESM)</td><td><code>import { fn } from './utils/calc.js'</code></td></tr>
+                        <tr><td><code>node:*</code></td><td>Módulo integrado oficial de Node.js (sin pasar por <code>node_modules</code>)</td><td><code>import http from 'node:http'</code></td></tr>
+                        <tr><td>Nombre de paquete</td><td>Busca en <code>node_modules</code> y lee el campo <code>exports</code> del <code>package.json</code></td><td><code>import express from 'express'</code></td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box">
+                    <strong>💡 Nota:</strong> Las rutas relativas siempre se resuelven respecto al <strong>archivo que importa</strong>, no respecto a la carpeta desde donde ejecutaste <code>node</code>.
+                </div>
             </div>
         </section>
 
@@ -261,27 +264,89 @@ console.log(os.platform(), ruta);</code></pre>
                 <h2 class="slide-title"><code>import()</code> Dinámico, Caché y <code>import.meta.url</code></h2>
             </div>
             <div class="glass-card">
-                <ul class="styled-list">
-                    <li><strong>Importación dinámica:</strong> <code>const mod = await import("./reporte.js");</code> carga módulos bajo demanda devolviendo una Promesa.</li>
-                    <li><strong>Caché de módulos:</strong> Node.js reutiliza la misma instancia cargada; evita estado mutable global innecesario.</li>
-                    <li><strong>Ruta del archivo en ESM:</strong> usa <code>fileURLToPath(import.meta.url)</code> y <code>dirname()</code> (distinto a <code>process.cwd()</code>).</li>
+                <ul class="styled-list" style="margin-bottom:14px;">
+                    <li><strong>Importación dinámica:</strong> <code>await import("./reportes.mjs")</code> carga un módulo bajo demanda devolviendo una Promesa.</li>
+                    <li><strong>Caché de módulos:</strong> Node.js evalúa el módulo una vez y reutiliza su instancia; para estados independientes exporta una <strong>función fábrica</strong>.</li>
+                    <li><strong>Ruta del archivo en ESM:</strong> usa <code>fileURLToPath(import.meta.url)</code> y <code>path.dirname()</code> como alternativa portable a <code>__dirname</code>.</li>
                 </ul>
+                <pre class="code-block"><code>// 1. Importación dinámica bajo demanda
+async function cargarReporte() {
+  const { generarReporte } = await import("./reportes.mjs");
+  return generarReporte();
+}
+
+// 2. Evitar estado compartido usando una función fábrica
+export function crearContador() {
+  let total = 0;
+  return { incrementar: () => ++total, leer: () => total };
+}
+
+// 3. Equivalente a __dirname / __filename en ESM
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 11: DEPENDENCIAS CIRCULARES, CAPAS Y ERRORES COMUNES -->
+        <!-- SLIDE 11: DEPENDENCIAS CIRCULARES, CAPAS Y BUENAS PRÁCTICAS -->
         <section class="slide" data-slide="11" data-title="Arquitectura, Errores Comunes y Buenas Prácticas">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 11 · DISEÑO Y DEPURACIÓN</span>
-                <h2 class="slide-title">Dependencias Circulares y Errores Comunes</h2>
+                <h2 class="slide-title">Arquitectura por Capas, Ciclos y Errores Comunes</h2>
             </div>
             <div class="glass-card">
-                <ul class="styled-list">
-                    <li><strong>Dependencia circular (A ↔ B):</strong> extrae la lógica compartida a un tercer módulo C (<code>A → C ← B</code>).</li>
-                    <li><strong>Separación por capas:</strong> <code>rutas/</code> → <code>controladores/</code> → <code>servicios/</code> → <code>repositorios/</code> + <code>utilidades/</code>.</li>
-                    <li><strong>❌ <code>require is not defined in ES module scope</code>:</strong> estás usando <code>require()</code> dentro de un archivo ESM; usa <code>import</code> o extensión <code>.cjs</code>.</li>
-                    <li><strong>❌ <code>ERR_MODULE_NOT_FOUND</code>:</strong> revisa la ruta relativa o agrega la extensión <code>.js</code> en ESM.</li>
-                </ul>
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    <strong>Separación por capas (Gestor de Cursos):</strong> <code>src/index.js</code> → <code>cli.js</code> (interfaz) → <code>services/</code> (reglas de negocio) → <code>repositories/</code> (<code>node:fs/promises</code> + <code>ENOENT</code>) + <code>utils/</code> (validaciones).
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Error común</th><th>Corrección</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Definir <code>"type"</code> en <code>package.json</code></td><td>Mezclar <code>require</code> e <code>import</code> sin configurar</td><td>Elegir ESM (<code>"module"</code>) o CJS</td></tr>
+                        <tr><td>Incluir <code>.js</code> en rutas ESM</td><td><code>import './utils'</code></td><td><code>import './utils.js'</code></td></tr>
+                        <tr><td>Usar prefijo <code>node:</code></td><td>Confundir paquete npm con nativo</td><td><code>import fs from 'node:fs/promises'</code></td></tr>
+                        <tr><td>Evitar dependencias circulares</td><td><code>A ↔ B</code> (módulos mutuos)</td><td>Extraer lo común: <code>A → C ← B</code></td></tr>
+                        <tr><td>Manejar <code>ENOENT</code> en lectura</td><td>Asumir que <code>cursos.json</code> existe</td><td>Devolver <code>[]</code> si <code>err.code === 'ENOENT'</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE SIMULADOR: COMMONJS VS ESM -->
+        <section class="slide" data-lab="true" data-title="Simulador de Módulos">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · COMMONJS VS ESM</span>
+                <h2 class="slide-title">🎛️ Simulador de Exportación e Importación</h2>
+                <p class="slide-lead">Alterna entre CommonJS y ESM o inspecciona módulos nativos con el prefijo <code>node:</code>.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Sistema de Módulos</label>
+                        <select id="nodeModSys">
+                            <option value="esm">ESM (import / export)</option>
+                            <option value="cjs">CommonJS (require / module.exports)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Origen del Módulo</label>
+                        <select id="nodeModType">
+                            <option value="local">Local (./saludo.js)</option>
+                            <option value="path">Nativo (node:path)</option>
+                            <option value="os">Nativo (node:os)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Argumento de prueba</label>
+                        <input type="text" id="nodeModArg" value="Fredy" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="nodeModStage" style="display:flex;flex-direction:column;gap:12px;justify-content:center;"></div>
+                    <pre class="sim-code" id="nodeModCode"></pre>
+                </div>
             </div>
         </section>
 
@@ -369,6 +434,23 @@ console.log(os.platform(), ruta);</code></pre>
   }
   document.getElementById(&#x27;out&#x27;).textContent = `Progreso del curso: ${calcularPorcentaje(7, 10)}%`;
 &lt;/script&gt;">Módulo progreso.js</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación del laboratorio guiado: operaciones.js + formato.js
+  const operaciones = {
+    sumar: (a, b) =&gt; a + b,
+    restar: (a, b) =&gt; a - b,
+    dividir: (a, b) =&gt; { if (b === 0) throw new Error(&#x27;No se puede dividir por cero&#x27;); return a / b; }
+  };
+  const mostrar = (op, res) =&gt; `${op}: ${res}`;
+  const lineas = [
+    mostrar(&#x27;Suma&#x27;, operaciones.sumar(10, 5)),
+    mostrar(&#x27;Resta&#x27;, operaciones.restar(10, 5)),
+    mostrar(&#x27;División&#x27;, operaciones.dividir(10, 5))
+  ];
+  try { operaciones.dividir(10, 0); } catch (e) { lineas.push(&#x27;Error capturado: &#x27; + e.message); }
+  document.getElementById(&#x27;out&#x27;).innerHTML = lineas.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">Calculadora Modular ESM</button>
                 </div>
                 <div class="lab-split">
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
@@ -395,5 +477,49 @@ console.log(os.platform(), ruta);</code></pre>
         <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
     </div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const sys = document.getElementById('nodeModSys');
+            const modType = document.getElementById('nodeModType');
+            const arg = document.getElementById('nodeModArg');
+            const stage = document.getElementById('nodeModStage');
+            const code = document.getElementById('nodeModCode');
+            if (!stage) return;
+
+            function update() {
+                const name = (arg.value || 'Fredy').trim();
+                const isEsm = sys.value === 'esm';
+                let result = '';
+                let snippet = '';
+                if (modType.value === 'local') {
+                    result = `saludar("${name}") ➔ "Hola, ${name} 👋"`;
+                    snippet = isEsm
+                        ? `// saludo.js\nexport function saludar(n) { return \`Hola, \${n}\`; }\n\n// app.js\nimport { saludar } from './saludo.js';\nconsole.log(saludar('${name}'));`
+                        : `// saludo.js\nmodule.exports = { saludar: n => \`Hola, \${n}\` };\n\n// app.js\nconst { saludar } = require('./saludo.js');\nconsole.log(saludar('${name}'));`;
+                } else if (modType.value === 'path') {
+                    result = `path.join('src', '${name}.js') ➔ "src/${name}.js"`;
+                    snippet = isEsm
+                        ? `import path from 'node:path';\nconsole.log(path.join('src', '${name}.js'));`
+                        : `const path = require('node:path');\nconsole.log(path.join('src', '${name}.js'));`;
+                } else {
+                    result = `os.platform() ➔ "win32" | os.cpus().length ➔ 8`;
+                    snippet = isEsm
+                        ? `import os from 'node:os';\nconsole.log(os.platform(), os.cpus().length);`
+                        : `const os = require('node:os');\nconsole.log(os.platform(), os.cpus().length);`;
+                }
+                stage.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-family:var(--font-mono);font-size:0.84rem;">
+                        <span style="padding:6px 12px;border-radius:8px;background:rgba(168,85,247,0.18);border:1px solid #a855f7;color:#e9d5ff;">${modType.value === 'local' ? 'saludo.js' : 'node:' + modType.value}</span>
+                        <span style="color:#38bdf8;font-weight:700;">—(${isEsm ? 'export/import' : 'exports/require'})➔</span>
+                        <span style="padding:6px 12px;border-radius:8px;background:rgba(0,240,255,0.14);border:1px solid #00f0ff;color:#cffafe;">app.js</span>
+                    </div>
+                    <div style="padding:12px;border-radius:10px;background:#020617;border:1px solid rgba(0,255,136,0.3);color:#00ff88;font-family:var(--font-mono);font-size:0.86rem;">▶ ${result}</div>
+                `;
+                code.textContent = snippet;
+            }
+            [sys, modType, arg].forEach(el => el.addEventListener('input', update));
+            update();
+        })();
+    </script>
 </body>
 </html>

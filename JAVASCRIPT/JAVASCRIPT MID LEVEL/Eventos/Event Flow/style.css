@@ -71,7 +71,20 @@ body { /* Regla de estilo para body */
     cursor: pointer; /* Estilo del puntero al pasar encima */
     align-self: flex-start; /* Alineación individual del ítem */
 }
-.btn.primary { background: var(--accent); color: #082f49; border-color: transparent; }
+.btn.primary {
+    background: linear-gradient(135deg, var(--accent, #38bdf8), #818cf8);
+    color: #050711;
+    border: none;
+    border-radius: 10px;
+    padding: 0.6rem 1.15rem;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(56, 189, 248, 0.32);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.btn.primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 22px rgba(56, 189, 248, 0.45);
+}
 .btn.small { padding: 0.3rem 0.65rem; font-size: 0.8rem; }
 .terminal-header { display: flex; justify-content: space-between; align-items: center; }
 .terminal { /* Regla de estilo para .terminal */

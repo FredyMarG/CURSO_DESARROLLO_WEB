@@ -1,39 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Eventos de Teclado</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos de Teclado y Atajos — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%AF%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Eventos del DOM</span>
-            <h1>Eventos de Teclado: <code>keydown</code>, <code>keyup</code> &amp; Atajos</h1>
-            <p class="subtitle">Inspecciona <code>e.key</code>, <code>e.code</code> y teclas modificadoras (<code>Ctrl</code>, <code>Shift</code>, <code>Alt</code>) sin usar el obsoleto <code>keyCode</code>.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">EVENTOS DEL DOM · TECLADO</span>
+            <div class="brand-title"><span>🎯</span><span>Eventos de Teclado y Atajos</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
 
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. Inspector de Teclas en Vivo</h2>
-            <p class="desc">Escribe en el campo o presiona combinaciones como <kbd>Ctrl</kbd> + <kbd>K</kbd> o <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
-            <input id="keyInput" type="text" placeholder="Haz clic aquí y presiona teclas...">
-            <div class="metrics">
-                <div class="metric"><span>e.key</span><strong id="valKey">—</strong></div>
-                <div class="metric"><span>e.code</span><strong id="valCode">—</strong></div>
-                <div class="metric"><span>Modificadores</span><strong id="valMods">Ninguno</strong></div>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Eventos de Teclado y Atajos">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">keydown</span><span class="badge badge-cyan">keyup</span><span class="badge badge-cyan">e.key</span><span class="badge badge-cyan">e.code</span></div>
+                <h1 class="hero-title">Eventos del DOM:<br /><span class="gradient-text">Eventos de Teclado y Atajos</span></h1>
+                <p class="hero-subtitle">Captura pulsaciones, distingue caracteres de teclas físicas y construye atajos modernos como Ctrl + K.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
             </div>
         </section>
 
-        <section class="card">
-            <h2>2. Historial de Pulsaciones</h2>
-            <div id="keyLog" class="terminal" aria-live="polite"></div>
+        <section class="slide" data-slide="2" data-title="¿Cómo funcionan los Eventos de Teclado?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Cómo funcionan los Eventos de Teclado?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">El estándar moderno utiliza principalmente <code>keydown</code> y <code>keyup</code> (ya que <code>keypress</code> está obsoleto):</p>
+      <ul class="styled-list">
+        <li><strong><code>keydown</code>:</strong> se dispara al presionar la tecla (se repite si la mantienes pulsada).</li>
+        <li><strong><code>keyup</code>:</strong> se dispara al soltar la tecla; útil para validar tras terminar el pulso.</li>
+        <li><strong><code>e.key</code> vs <code>e.code</code>:</strong> <code>e.key</code> devuelve el carácter/significado (ej. <code>"A"</code>, <code>"Enter"</code>); <code>e.code</code> devuelve la tecla física del teclado (ej. <code>"KeyA"</code>).</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>🎹 Analogía del piano:</strong> <code>keydown</code> es bajar la tecla, <code>keyup</code> es soltarla; <code>e.code</code> es la posición física de la tecla y <code>e.key</code> la nota resultante.</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Sintaxis de Atajos con Teclas Modificadoras">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis de Atajos con Teclas Modificadoras</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>document.addEventListener(&#x27;keydown&#x27;, (e) =&gt; {
+  // Atajo moderno: Ctrl + K (o Cmd + K en Mac)
+  if ((e.ctrlKey || e.metaKey) &amp;&amp; e.key.toLowerCase() === &#x27;k&#x27;) {
+    e.preventDefault(); // Evita abrir la barra de búsqueda del navegador
+    console.log(&#x27;Abrir buscador rápido&#x27;);
+  }
+
+  // Ignorar repeticiones continuas al mantener pulsada la tecla
+  if (e.repeat) return;
+});</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>e.key</code></td><td>Valor lógico/carácter de la tecla (ej. <code>"Enter"</code>, <code>"a"</code>)</td></tr><tr><td><code>e.code</code></td><td>Código físico independiente del idioma del teclado (ej. <code>"KeyQ"</code>)</td></tr><tr><td><code>e.ctrlKey / shiftKey / altKey</code></td><td>Booleanos que indican si el modificador está pulsado</td></tr><tr><td><code>e.repeat</code></td><td><code>true</code> si la tecla se mantiene presionada continuamente</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Usa e.key y e.code:</strong> Nunca uses el obsoleto <code>e.keyCode</code> o <code>e.which</code>; <code>e.key</code> es legible y estándar en todos los navegadores.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ No uses keypress:</strong> El evento <code>keypress</code> está deprecado y no detecta teclas especiales como <code>Escape</code>, flechas o modificadores.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Inspector de Teclas en Vivo">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Inspector de Teclas en Vivo</h2></div>
+            <div class="grid-layout" style="padding:0;">
+      <section class="card">
+        <h2>1. Inspector de Teclas en Vivo</h2>
+        <p class="desc">Escribe en el campo o presiona combinaciones como <kbd>Ctrl</kbd> + <kbd>K</kbd> o <kbd>Shift</kbd> + <kbd>Enter</kbd>.</p>
+        <input id="keyInput" type="text" placeholder="Haz clic aquí y presiona teclas...">
+        <div class="metrics">
+          <div class="metric"><span>e.key</span><strong id="valKey">—</strong></div>
+          <div class="metric"><span>e.code</span><strong id="valCode">—</strong></div>
+          <div class="metric"><span>Modificadores</span><strong id="valMods">Ninguno</strong></div>
+        </div>
+      </section>
+      <section class="card">
+        <h2>2. Historial de Pulsaciones</h2>
+        <div id="keyLog" class="terminal" aria-live="polite"></div>
+      </section>
+    </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Teclado y Atajos">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: e.code representa la posición física (ej. KeyW en juegos)." data-err="e.key depende del idioma/mayúsculas; e.code es la tecla física.">
+                    <div class="quiz-q-title">1. ¿Qué propiedad indica la tecla física independientemente de la distribución (ES/EN) del teclado?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">e.key</button>
+                        <button class="quiz-option" data-opt="b">e.code</button>
+                        <button class="quiz-option" data-opt="c">e.keyCode</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: keypress está obsoleto; usa keydown o input." data-err="keypress está obsoleto en el estándar web.">
+                    <div class="quiz-q-title">2. ¿Qué evento de teclado está obsoleto y debe evitarse?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">keydown</button>
+                        <button class="quiz-option" data-opt="b">keyup</button>
+                        <button class="quiz-option" data-opt="c">keypress</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Teclado y Atajos">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;input id=&quot;inp&quot; placeholder=&quot;Pulsa una tecla aquí...&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Esperando tecla...&lt;/div&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;inp&#x27;).addEventListener(&#x27;keydown&#x27;, e =&gt; {
+    document.getElementById(&#x27;out&#x27;).textContent = `key: &quot;${e.key}&quot; | code: &quot;${e.code}&quot; | ctrl: ${e.ctrlKey}`;
+  });
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;input id=&quot;inp&quot; placeholder=&quot;Pulsa una tecla aquí...&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Esperando tecla...&lt;/div&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;inp&#x27;).addEventListener(&#x27;keydown&#x27;, e =&gt; {
+    document.getElementById(&#x27;out&#x27;).textContent = `key: &quot;${e.key}&quot; | code: &quot;${e.code}&quot; | ctrl: ${e.ctrlKey}`;
+  });
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

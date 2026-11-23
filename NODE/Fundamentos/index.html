@@ -43,31 +43,31 @@
         <section class="slide active" data-slide="1" data-title="Inicio: Fundamentos de Node.js">
             <div class="hero-slide">
                 <div class="hero-badges">
-                    <span class="badge badge-emerald">Módulo 01 · Backend</span>
-                    <span class="badge badge-cyan">V8 + libuv + Event Loop</span>
+                    <span class="badge badge-emerald">Módulo 02 · HTTP y npm</span>
+                    <span class="badge badge-cyan">Protocolo HTTP · JSON API</span>
                     <span class="badge badge-purple">node:http &amp; npm</span>
                 </div>
                 <h1 class="hero-title">Curso de Node.js:<br /><span class="gradient-text">Fundamentos del Backend</span></h1>
                 <p class="hero-subtitle">
-                    Comprende qué es Node.js, para qué sirve, cómo se diferencia del frontend en el navegador, cómo funciona el ciclo HTTP cliente-servidor y construye tu primer programa y API de bienvenida.
+                    Domina el ciclo cliente-servidor HTTP en Node.js, la gestión de proyectos con npm y package.json, variables de entorno y construye una API de bienvenida con node:http.
                 </p>
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2">
-                        <div class="hero-card-icon">🧠</div>
-                        <h3>1. ¿Qué es Node.js?</h3>
-                        <p>Entorno de ejecución, usos principales y diferencia frente al navegador.</p>
+                        <div class="hero-card-icon">🌐</div>
+                        <h3>1. Ciclo HTTP</h3>
+                        <p>Peticiones, respuestas, cabeceras y códigos de estado 200/404.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">📦</div>
+                        <h3>2. npm y Entorno</h3>
+                        <p>Manifiesto package.json, scripts y dependencias.</p>
                     </div>
                     <div class="hero-card" data-jump="5">
-                        <div class="hero-card-icon">🌐</div>
-                        <h3>2. HTTP y Arquitectura</h3>
-                        <p>Peticiones, respuestas, códigos de estado, V8, libuv y Event Loop.</p>
-                    </div>
-                    <div class="hero-card" data-jump="8">
                         <div class="hero-card-icon">🚀</div>
                         <h3>3. Primer Servidor</h3>
                         <p>npm, <code>package.json</code>, <code>index.js</code> y API nativa con <code>node:http</code>.</p>
                     </div>
-                    <div class="hero-card" data-jump="14">
+                    <div class="hero-card" data-jump="10">
                         <div class="hero-card-icon">🧪</div>
                         <h3>4. Laboratorio y Retos</h3>
                         <p>Simulador HTTP en vivo, ejercicios por niveles y cheatsheet.</p>
@@ -76,95 +76,8 @@
             </div>
         </section>
 
-        <!-- SLIDE 2: QUÉ ES NODE.JS Y QUÉ NO ES -->
-        <section class="slide" data-slide="2" data-title="Definición: ¿Qué es Node.js?">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 2 · DEFINICIÓN</span>
-                <h2 class="slide-title">¿Qué es Node.js? (y qué NO es)</h2>
-            </div>
-            <div class="glass-card">
-                <h3>🎯 Entorno de ejecución de JavaScript</h3>
-                <p style="line-height:1.65;margin-bottom:12px;">
-                    <strong>Node.js</strong> es un <strong>entorno de ejecución</strong> que permite correr código JavaScript <strong>fuera del navegador</strong>. Se utiliza para construir servidores web, APIs, herramientas de consola (CLI), automatizaciones y apps en tiempo real.
-                </p>
-                <ul class="styled-list">
-                    <li><strong>NO es un lenguaje de programación:</strong> el lenguaje sigue siendo <strong>JavaScript</strong>.</li>
-                    <li><strong>NO es un framework:</strong> Express o Fastify se construyen encima de Node.js.</li>
-                    <li><strong>SÍ aporta capacidades del sistema:</strong> archivos, red, puertos, procesos y variables de entorno.</li>
-                </ul>
-            </div>
-            <div class="glass-card" style="margin-top:16px;">
-                <pre class="code-block"><code>// archivo: saludo.js
-console.log('¡Hola desde Node.js!');
-
-// Ejecutar en PowerShell / terminal:
-// node saludo.js</code></pre>
-            </div>
-        </section>
-
-        <!-- SLIDE 3: FRONTEND VS BACKEND + PRINCIPALES USOS -->
-        <section class="slide" data-slide="3" data-title="Frontend vs Backend y Usos">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 3 · ROLES Y APLICACIONES</span>
-                <h2 class="slide-title">Frontend vs Backend y Usos de Node.js</h2>
-            </div>
-            <div class="glass-card">
-                <table class="compare-table">
-                    <thead>
-                        <tr><th>Aspecto</th><th>Frontend</th><th>Backend (Node.js)</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td>Dónde se ejecuta</td><td>Navegador del usuario</td><td>Servidor / Terminal</td></tr>
-                        <tr><td>Responsabilidad</td><td>Interfaz visual (HTML, CSS, DOM)</td><td>Lógica de negocio, reglas, APIs y datos</td></tr>
-                        <tr><td>Seguridad</td><td>No se confían secretos al navegador</td><td>Protege credenciales y valida permisos</td></tr>
-                        <tr><td>Ejemplo en el curso</td><td>Mostrar el catálogo de módulos</td><td>Guardar el progreso del estudiante</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="glass-card" style="margin-top:16px;">
-                <h3>🌐 5 usos principales de Node.js</h3>
-                <ul class="styled-list">
-                    <li><strong>APIs REST:</strong> rutas como <code>GET /api/cursos</code> o <code>POST /api/progreso</code>.</li>
-                    <li><strong>Aplicaciones web con backend:</strong> sesiones, plantillas y persistencia.</li>
-                    <li><strong>Automatización y CLI:</strong> scripts para procesar archivos o generar documentación.</li>
-                    <li><strong>Tiempo real:</strong> chats y notificaciones en vivo mediante WebSockets.</li>
-                    <li><strong>Integraciones:</strong> consumo de servicios externos, correos o pagos.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SLIDE 4: JS EN EL NAVEGADOR VS NODE.JS -->
-        <section class="slide" data-slide="4" data-title="Navegador vs Node.js">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 4 · APIS DISPONIBLES</span>
-                <h2 class="slide-title">JavaScript en el Navegador vs Node.js</h2>
-            </div>
-            <div class="glass-card">
-                <table class="compare-table">
-                    <thead>
-                        <tr><th>Operación</th><th>Navegador</th><th>Node.js</th></tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><code>console.log()</code></td><td>Sí</td><td>Sí</td></tr>
-                        <tr><td><code>document</code> y <code>window</code></td><td>Sí (DOM y BOM)</td><td>No de forma nativa</td></tr>
-                        <tr><td>Leer/escribir archivos (<code>node:fs</code>)</td><td>No</td><td>Sí</td></tr>
-                        <tr><td>Crear servidor HTTP (<code>node:http</code>)</td><td>No</td><td>Sí</td></tr>
-                        <tr><td><code>fetch()</code></td><td>Sí</td><td>Sí (versiones modernas)</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="glass-card" style="margin-top:16px;">
-                <pre class="code-block"><code>// ❌ Falla en Node.js (document solo existe en el navegador)
-// document.querySelector('h1').textContent = 'Hola';
-
-// ✅ Nativo en Node.js: consultar sistema operativo
-const os = require('node:os');
-console.log('Sistema operativo:', os.platform());</code></pre>
-            </div>
-        </section>
-
         <!-- SLIDE 5: ARQUITECTURA CLIENTE-SERVIDOR Y CICLO HTTP -->
-        <section class="slide" data-slide="5" data-title="Arquitectura Cliente-Servidor y HTTP">
+        <section class="slide" data-slide="2" data-title="Arquitectura Cliente-Servidor y HTTP">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · COMUNICACIÓN WEB</span>
                 <h2 class="slide-title">Ciclo de una Petición HTTP</h2>
@@ -183,57 +96,74 @@ console.log('Sistema operativo:', os.platform());</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 6: COMPONENTES FUNDAMENTALES (V8, LIBUV, EVENT LOOP, PROCESS) -->
-        <section class="slide" data-slide="6" data-title="Componentes Internos: V8, libuv y Event Loop">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 6 · ARQUITECTURA INTERNA</span>
-                <h2 class="slide-title">Motor V8, APIs Nativas, libuv y Event Loop</h2>
-            </div>
-            <div class="glass-card">
-                <ul class="styled-list">
-                    <li><strong>1. Motor V8:</strong> Compila y ejecuta JavaScript a código máquina (el mismo motor de Chromium).</li>
-                    <li><strong>2. APIs nativas:</strong> Módulos integrados como <code>node:http</code>, <code>node:fs</code>, <code>node:path</code> y <code>node:os</code>.</li>
-                    <li><strong>3. Event Loop:</strong> Coordina callbacks para atender múltiples operaciones de entrada/salida sin bloquear el hilo principal.</li>
-                    <li><strong>4. libuv:</strong> Biblioteca en C que gestiona E/S asíncrona y el bucle de eventos entre el sistema operativo y Node.js.</li>
-                    <li><strong>5. Objeto global <code>process</code>:</strong> Expone información del proceso activo (<code>process.version</code>, <code>process.cwd()</code>).</li>
-                </ul>
-            </div>
-            <div class="callout callout-warn" style="margin-top:16px;">
-                <strong>⚠️ Importante:</strong> La espera no bloqueante de E/S no significa que todo tu código JavaScript corra en paralelo en múltiples hilos.
-            </div>
-        </section>
-
         <!-- SLIDE 7: NPM, PACKAGE.JSON Y ENTORNO EN WINDOWS -->
-        <section class="slide" data-slide="7" data-title="npm, package.json y Entorno en Windows">
+        <section class="slide" data-slide="3" data-title="npm, package.json y Entorno en Windows">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 7 · ENTORNO DE TRABAJO</span>
                 <h2 class="slide-title">Node.js, npm, <code>package.json</code> y Windows</h2>
             </div>
             <div class="glass-card">
                 <p style="line-height:1.65;margin-bottom:10px;">
-                    <strong>npm</strong> gestiona paquetes y scripts. El archivo <code>package.json</code> describe el proyecto. En producción se recomienda usar una versión <strong>LTS</strong> de Node.js.
+                    <strong>npm</strong> administra paquetes y scripts, mientras <code>package.json</code> describe el manifiesto del proyecto. En producción se recomienda usar siempre una versión <strong>LTS</strong>.
                 </p>
-                <pre class="code-block"><code># Verificar instalación en PowerShell o terminal integrada de VS Code
-node -v
-npm -v
-
-# Inicializar un proyecto nuevo
-npm init -y</code></pre>
-            </div>
-            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Comando</th><th>Función</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>npm init -y</code></td><td>Crea un <code>package.json</code> básico</td></tr>
+                        <tr><td><code>npm install pkg</code> / <code>-D pkg</code></td><td>Instala dependencia de producción o desarrollo (<code>devDependencies</code>)</td></tr>
+                        <tr><td><code>npm start</code> / <code>npm run dev</code></td><td>Ejecuta scripts configurados en <code>package.json</code></td></tr>
+                        <tr><td><code>npm ci</code></td><td>Instala exactamente según <code>package-lock.json</code></td></tr>
+                    </tbody>
+                </table>
                 <pre class="code-block"><code>{
   "name": "fundamentos-nodejs",
   "version": "1.0.0",
   "private": true,
+  "type": "commonjs",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node servidor.js"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "check": "node --check src/index.js"
   }
 }</code></pre>
             </div>
         </section>
 
+        <!-- SLIDE 7B: TERMINAL POWERSHELL, VS CODE Y PROCESS.ARGV -->
+        <section class="slide" data-title="Terminal, VS Code y process.argv">
+            <div class="slide-header">
+                <span class="slide-kicker">ENTORNO DE TRABAJO · CLI Y DEPURACIÓN</span>
+                <h2 class="slide-title">Terminal PowerShell, VS Code y <code>process.argv</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Comando PowerShell</th><th>Resultado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>pwd</code> / <code>dir</code></td><td>Muestra la carpeta actual y lista archivos</td></tr>
+                        <tr><td><code>mkdir mi-app</code> / <code>cd mi-app</code></td><td>Crea una carpeta y entra en ella</td></tr>
+                        <tr><td><code>node --check archivo.js</code></td><td>Valida la sintaxis JS sin ejecutar el archivo</td></tr>
+                        <tr><td><code>code .</code></td><td>Abre la carpeta actual en VS Code (depuración con breakpoints)</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>// Leer argumentos recibidos por línea de comandos: node suma.js 7 5
+const [aTexto, bTexto] = process.argv.slice(2);
+const a = Number(aTexto), b = Number(bTexto);
+if (!Number.isFinite(a) || !Number.isFinite(b)) {
+  console.error('Uso: node suma.js NUM1 NUM2');
+  process.exitCode = 1;
+} else {
+  console.log(`Resultado: ${a + b}`);
+}</code></pre>
+            </div>
+        </section>
+
         <!-- SLIDE 8: PRIMER PROGRAMA (INDEX.JS) -->
-        <section class="slide" data-slide="8" data-title="Primer Programa con Node.js">
+        <section class="slide" data-slide="4" data-title="Primer Programa con Node.js">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 8 · PRÁCTICA CLI</span>
                 <h2 class="slide-title">Tu Primer Programa (<code>index.js</code>)</h2>
@@ -263,7 +193,7 @@ console.log(saludar('Fredy'));</code></pre>
         </section>
 
         <!-- SLIDE 9: PRIMER SERVIDOR HTTP Y PROYECTO INTEGRADOR -->
-        <section class="slide" data-slide="9" data-title="Proyecto Integrador: API de Bienvenida">
+        <section class="slide" data-slide="5" data-title="Proyecto Integrador: API de Bienvenida">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 9 · SERVIDOR HTTP NATIVO</span>
                 <h2 class="slide-title">API de Bienvenida (<code>servidor.js</code>)</h2>
@@ -293,25 +223,33 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         </section>
 
         <!-- SLIDE 10: BUENAS PRÁCTICAS Y ERRORES COMUNES -->
-        <section class="slide" data-slide="10" data-title="Buenas Prácticas y Errores Comunes">
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas y Errores Comunes">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 10 · CALIDAD DE CÓDIGO</span>
                 <h2 class="slide-title">Buenas Prácticas y Errores Comunes</h2>
             </div>
             <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Error frecuente</th><th>Causa probable</th><th>Solución</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>node</code> no reconocido</td><td>Instalación o <code>PATH</code> incompleto</td><td>Instala LTS y reinicia la terminal</td></tr>
+                        <tr><td><code>Unexpected token</code></td><td>Error de sintaxis JS</td><td>Ejecuta <code>node --check archivo.js</code></td></tr>
+                        <tr><td><code>ENOENT</code> / <code>Cannot find module</code></td><td>Ruta o archivo inexistente</td><td>Verifica la ruta usando <code>node:path</code></td></tr>
+                        <tr><td><code>EADDRINUSE</code> (puerto ocupado)</td><td>Otro servidor activo en <code>3000</code></td><td>Detén el proceso con <code>Ctrl + C</code></td></tr>
+                    </tbody>
+                </table>
                 <ul class="styled-list">
-                    <li><strong>✅ Prefijo <code>node:</code>:</strong> usa <code>require('node:http')</code> para distinguir módulos nativos.</li>
-                    <li><strong>✅ Cabecera JSON:</strong> configura <code>application/json; charset=utf-8</code> antes de responder.</li>
+                    <li><strong>✅ Prefijo <code>node:</code> y cabecera JSON:</strong> usa <code>require('node:http')</code> y <code>application/json; charset=utf-8</code>.</li>
                     <li><strong>✅ Cierra con <code>return res.end(...)</code>:</strong> evita enviar dos respuestas en la misma petición.</li>
-                    <li><strong>✅ Protege secretos:</strong> nunca subas contraseñas, tokens ni archivos <code>.env</code> al navegador o Git.</li>
-                    <li><strong>❌ Error común:</strong> confundir ruta HTTP (<code>/api/bienvenida</code>) con un archivo físico en disco.</li>
-                    <li><strong>❌ Puerto ocupado:</strong> si el puerto <code>3000</code> está en uso, detén el proceso anterior con <code>Ctrl + C</code>.</li>
+                    <li><strong>✅ Protege secretos:</strong> nunca subas <code>node_modules/</code> ni <code>.env</code> al navegador o Git.</li>
                 </ul>
             </div>
         </section>
 
         <!-- SLIDE 11: CHEATSHEET (HOJA DE TRUCOS) -->
-        <section class="slide" data-slide="11" data-title="Hoja de Trucos (Cheatsheet)">
+        <section class="slide" data-slide="7" data-title="Hoja de Trucos (Cheatsheet)">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 11 · REFERENCIA RÁPIDA</span>
                 <h2 class="slide-title">Hoja de Trucos de Fundamentos</h2>
@@ -324,6 +262,8 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
                     <tbody>
                         <tr><td><code>node -v</code> / <code>npm -v</code></td><td>Ver versiones instaladas</td><td><code>node -v</code></td></tr>
                         <tr><td><code>node archivo.js</code></td><td>Ejecutar script en Node.js</td><td><code>node index.js</code></td></tr>
+                        <tr><td><code>node --check archivo.js</code></td><td>Validar sintaxis sin ejecutar</td><td><code>node --check servidor.js</code></td></tr>
+                        <tr><td><code>process.argv.slice(2)</code></td><td>Leer argumentos de terminal</td><td><code>const args = process.argv.slice(2)</code></td></tr>
                         <tr><td><code>npm init -y</code></td><td>Crear <code>package.json</code> rápido</td><td><code>npm init -y</code></td></tr>
                         <tr><td><code>require('node:http')</code></td><td>Importar módulo HTTP nativo</td><td><code>const http = require('node:http')</code></td></tr>
                         <tr><td><code>http.createServer()</code></td><td>Registrar manejador de peticiones</td><td><code>http.createServer((req, res) =&gt; {})</code></td></tr>
@@ -335,7 +275,7 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         </section>
 
         <!-- SLIDE 12: EJERCICIOS POR NIVELES -->
-        <section class="slide" data-slide="12" data-title="Ejercicios por Niveles">
+        <section class="slide" data-slide="8" data-title="Ejercicios por Niveles">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 12 · PRÁCTICA PROGRESIVA</span>
                 <h2 class="slide-title">Ejercicios del Módulo (Niveles 1, 2 y 3)</h2>
@@ -359,8 +299,49 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
             </div>
         </section>
 
+        <!-- SLIDE SIMULADOR: SERVIDOR HTTP NODE:HTTP -->
+        <section class="slide" data-lab="true" data-title="Simulador HTTP Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:HTTP</span>
+                <h2 class="slide-title">🎛️ Simulador de Servidor HTTP &amp; Rutas</h2>
+                <p class="slide-lead">Elige el método, la ruta y los parámetros para ver cómo responde <code>node:http</code> en tiempo real.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Método HTTP</label>
+                        <select id="nodeHttpMethod">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Endpoint (req.url)</label>
+                        <select id="nodeHttpRoute">
+                            <option value="/api/bienvenida">/api/bienvenida</option>
+                            <option value="/api/cursos">/api/cursos</option>
+                            <option value="/api/estado">/api/estado</option>
+                            <option value="/api/ruta-desconocida">/api/ruta-desconocida</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Query (?categoria=)</label>
+                        <select id="nodeHttpQuery">
+                            <option value="">(sin filtro)</option>
+                            <option value="backend">backend</option>
+                            <option value="frontend">frontend</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="nodeHttpStage" style="display:flex;flex-direction:column;gap:12px;justify-content:center;"></div>
+                    <pre class="sim-code" id="nodeHttpCode"></pre>
+                </div>
+            </div>
+        </section>
+
         <!-- SLIDE 13: QUIZ INTERACTIVO (5 PREGUNTAS) -->
-        <section class="slide" data-slide="13" data-title="Quiz: Fundamentos de Node.js">
+        <section class="slide" data-slide="9" data-title="Quiz: Fundamentos de Node.js">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Fundamentos</h2>
@@ -419,7 +400,7 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         </section>
 
         <!-- SLIDE 14: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
-        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio y Archivos del Módulo">
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio y Archivos del Módulo">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Simulador de API Node.js &amp; Archivos</h2>
@@ -464,6 +445,18 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
     `&lt;div&gt;${presentarCurso(&#x27;Fundamentos de Node.js&#x27;, 26)}&lt;/div&gt;` +
     `&lt;div&gt;${saludar(&#x27;Fredy&#x27;)}&lt;/div&gt;`;
 &lt;/script&gt;">Primer Programa CLI</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  function sumarDesdeCLI(argvSimulado) {
+    const [aTxt, bTxt] = argvSimulado.slice(2);
+    const a = Number(aTxt), b = Number(bTxt);
+    if (!Number.isFinite(a) || !Number.isFinite(b)) return &#x27;❌ Uso: node suma.js NUM1 NUM2&#x27;;
+    return `✅ node suma.js ${a} ${b} ➔ Resultado: ${a + b}`;
+  }
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;${sumarDesdeCLI([&#x27;node&#x27;, &#x27;suma.js&#x27;, &#x27;7&#x27;, &#x27;5&#x27;])}&lt;/div&gt;` +
+    `&lt;div&gt;${sumarDesdeCLI([&#x27;node&#x27;, &#x27;suma.js&#x27;, &#x27;hola&#x27;, &#x27;5&#x27;])}&lt;/div&gt;`;
+&lt;/script&gt;">Argumentos CLI (process.argv)</button>
                 </div>
                 <div class="lab-split">
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
@@ -504,5 +497,51 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
     </div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const method = document.getElementById('nodeHttpMethod');
+            const route = document.getElementById('nodeHttpRoute');
+            const query = document.getElementById('nodeHttpQuery');
+            const stage = document.getElementById('nodeHttpStage');
+            const code = document.getElementById('nodeHttpCode');
+            if (!stage) return;
+
+            function update() {
+                const m = method.value;
+                const r = route.value;
+                const q = query.value;
+                const fullUrl = q ? `${r}?categoria=${q}` : r;
+                let status = 200;
+                let body = {};
+                if (m === 'POST' && r === '/api/cursos') {
+                    status = 201;
+                    body = { mensaje: 'Curso registrado', curso: { nombre: 'Express', categoria: q || 'backend' } };
+                } else if (r === '/api/bienvenida') {
+                    body = { mensaje: 'Bienvenido a Node.js', modulo: 'Fundamentos' };
+                } else if (r === '/api/cursos') {
+                    const all = [{ id: 1, nombre: 'HTML y CSS', categoria: 'frontend' }, { id: 2, nombre: 'Node.js', categoria: 'backend' }];
+                    const filtered = q ? all.filter(c => c.categoria === q) : all;
+                    body = { total: filtered.length, cursos: filtered };
+                } else if (r === '/api/estado') {
+                    body = { activo: true, runtime: 'Node.js v22 LTS' };
+                } else {
+                    status = 404;
+                    body = { error: 'Ruta no encontrada', ruta: r };
+                }
+                const color = status >= 400 ? '#ff3358' : '#00ff88';
+                stage.innerHTML = `
+                    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+                        <span style="padding:4px 10px;border-radius:8px;background:rgba(56,189,248,0.18);color:#38bdf8;font-weight:700;font-family:var(--font-mono);">${m} ${fullUrl}</span>
+                        <span style="color:#94a3b8;">➔</span>
+                        <span style="padding:4px 10px;border-radius:8px;background:rgba(255,255,255,0.06);border:1px solid ${color};color:${color};font-weight:700;font-family:var(--font-mono);">HTTP ${status}</span>
+                    </div>
+                    <pre style="margin:0;padding:12px;border-radius:10px;background:#020617;border:1px solid rgba(255,255,255,0.08);color:#e2e8f0;font-family:var(--font-mono);font-size:0.8rem;overflow:auto;">${JSON.stringify(body, null, 2)}</pre>
+                `;
+                code.textContent = `// Manejador en node:http\nif (req.method === '${m}' && url.pathname === '${r}') {\n  res.writeHead(${status}, { 'Content-Type': 'application/json' });\n  res.end(JSON.stringify(${JSON.stringify(body)}));\n}`;
+            }
+            [method, route, query].forEach(el => el.addEventListener('input', update));
+            update();
+        })();
+    </script>
 </body>
 </html>

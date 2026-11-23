@@ -1,51 +1,99 @@
-<!DOCTYPE html> <!-- Define el tipo de documento como HTML5 para los navegadores web modernos -->
-<html lang="es"> <!-- Apertura de la etiqueta raiz HTML con configuracion de idioma en espanol -->
-<head> <!-- Seccion de cabecera que contiene metadatos, fuentes y enlaces a recursos externos -->
-    <meta charset="UTF-8"> <!-- Codificacion estandar UTF-8 para admitir acentos, enes y caracteres especiales -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajuste de escala responsiva para visualizacion perfecta en moviles y escritorio -->
-    <title>Laboratorio de la Libreria Axios en JavaScript | Guia Interactiva</title> <!-- Titulo descriptivo de la pestana del navegador con la tematica de Axios -->
-    <meta name="description" content="Laboratorio didactico e interactivo de la libreria Axios en JavaScript: metodos shorthand get, post, put, delete, parseo automatico de JSON, axios.create() y catch automatico en errores HTTP."> <!-- Metadato SEO descriptivo -->
-    <meta property="og:title" content="Laboratorio de la Libreria Axios en JavaScript"> <!-- Titulo Open Graph para compartir en redes sociales -->
-    <meta property="og:description" content="Aprende y domina el cliente HTTP Axios en JavaScript con simulador visual, consola y comparativa técnica frente a Fetch."> <!-- Descripcion para redes sociales -->
-    <link rel="stylesheet" href="style.css"> <!-- Enlace a la hoja de estilos externa con diseno moderno, glassmorphism y tema oficial de Axios -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Importa la libreria oficial Axios desde el CDN de jsDelivr para permitir peticiones HTTP directas -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%9A%80%3C%2Ftext%3E%3C%2Fsvg%3E" />
-</head> <!-- Cierre de la seccion de cabecera -->
-<body> <!-- Apertura del cuerpo del documento que contiene todos los elementos visuales e interactivos -->
-    <main class="container"> <!-- Contenedor principal centralizado con ancho maximo y estilos responsivos -->
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios Editor (Shorthand & axios.create) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script src="main.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%A1%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-        <!-- Encabezado Principal con Tematica e Identidad Visual de Axios -->
-        <header class="glass-header"> <!-- Encabezado estilizado con efecto cristal y colores oficiales de Axios -->
-            <div class="axios-brand-badge"> <!-- Badge superior con isotipo SVG oficial y descripcion tecnologica -->
-                <svg class="axios-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"> <!-- Grafico vectorial SVG del isotipo estilizado de Axios -->
-                    <circle cx="50" cy="50" r="46" fill="url(#axiosGrad)" stroke="rgba(255,255,255,0.25)" stroke-width="3"/> <!-- Circulo violeta de fondo con degradado y contorno suave -->
-                    <path d="M28 66L44 32H56L72 66H60L56 56H44L40 66H28ZM47 48H53L50 40L47 48Z" fill="#FFFFFF"/> <!-- Letra A central inspirada en la tipografia oficial de Axios -->
-                    <path d="M68 34L76 42L68 50" stroke="#38BDF8" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/> <!-- Flecha superior cian que representa el flujo de envio de la peticion request -->
-                    <path d="M32 66L24 58L32 50" stroke="#34D399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/> <!-- Flecha inferior verde que representa el retorno de la respuesta response -->
-                    <defs> <!-- Definiciones vectoriales de degradados reutilizables -->
-                        <linearGradient id="axiosGrad" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"> <!-- Gradiente lineal caracteristico de Axios -->
-                            <stop offset="0%" stop-color="#5A29E4"/> <!-- Color violeta oficial #5A29E4 en el inicio -->
-                            <stop offset="100%" stop-color="#8B5CF6"/> <!-- Color violeta electrico en el final -->
-                        </linearGradient> <!-- Cierre del degradado -->
-                    </defs> <!-- Cierre de definiciones -->
-                </svg> <!-- Cierre del grafico SVG del isotipo -->
-                <span class="axios-brand-text">AXIOS HTTP CLIENT &bull; BASADO EN PROMESAS</span> <!-- Texto de identificacion dentro del badge -->
-            </div> <!-- Cierre del badge superior de Axios -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">AXIOS · SIMULADOR OFICIAL</span>
+            <div class="brand-title"><span>📡</span><span>Axios Editor (Shorthand & axios.create)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Libreria Axios</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
 
-            <h1>Libreria Axios en JavaScript</h1> <!-- Titulo principal del laboratorio interactivo -->
-            <p>Laboratorio interactivo del cliente HTTP mas utilizado, potente y limpio del ecosistema moderno de JavaScript</p> <!-- Subtitulo descriptivo -->
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Axios Editor (Shorthand & axios.create)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">axios.get/post</span><span class="badge badge-cyan">response.data</span><span class="badge badge-cyan">axios.create()</span><span class="badge badge-cyan">Catch Automático</span></div>
+                <h1 class="hero-title">Libreria Axios:<br /><span class="gradient-text">Axios Editor (Shorthand & axios.create)</span></h1>
+                <p class="hero-subtitle">Prueba métodos shorthand, inspecciona el objeto response de Axios y crea instancias reutilizables con baseURL y timeout.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
+            </div>
+        </section>
 
-            <!-- Pildoras informativas de caracteristicas de Axios -->
-            <div class="features-pill-row"> <!-- Fila contenedora de pildoras con las ventajas cardinales de Axios -->
-                <span class="feature-pill">&#9889; Parseo Automatico de JSON</span> <!-- Pildora destacando la entrega de datos listos en response.data -->
-                <span class="feature-pill">&#128680; Catch Automatico en 4xx/5xx</span> <!-- Pildora destacando el rechazo automatico de codigos de error -->
-                <span class="feature-pill">&#128230; Serializacion Automatica POST</span> <!-- Pildora destacando el envio de objetos sin JSON.stringify -->
-                <span class="feature-pill">&#128295; Instancias con axios.create()</span> <!-- Pildora destacando la configuracion reutilizable con baseURL -->
-            </div> <!-- Cierre de la fila de pildoras -->
-        </header> <!-- Cierre del encabezado principal -->
+        <section class="slide" data-slide="2" data-title="¿Por qué usar Axios?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Por qué usar Axios?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;"><strong>Axios</strong> es un cliente HTTP basado en Promesas que simplifica la comunicación con APIs REST respecto a <code>fetch()</code>:</p>
+      <ul class="styled-list">
+        <li><strong>Parseo automático:</strong> los datos JSON ya vienen listos en <code>response.data</code>.</li>
+        <li><strong>Catch automático:</strong> cualquier estado fuera de <code>2xx</code> (404, 500) rechaza la promesa automáticamente.</li>
+        <li><strong><code>axios.create()</code>:</strong> centraliza <code>baseURL</code>, <code>timeout</code> y cabeceras en una instancia.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>🤵 Analogía del Asistente VIP:</strong> Mientras con Fetch tú empacas el JSON y verificas <code>res.ok</code>, Axios hace todo por ti y te entrega <code>response.data</code> listo.</div>
+        </section>
 
-        <!-- Barra de Navegacion de Pestanas (Tabs) -->
-        <nav class="tabs-nav"> <!-- Barra horizontal para alternar entre las secciones tematicas del laboratorio -->
+        <section class="slide" data-slide="3" data-title="Sintaxis Shorthand y axios.create()">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis Shorthand y axios.create()</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const api = axios.create({ baseURL: &#x27;https://jsonplaceholder.typicode.com&#x27;, timeout: 4000 });
+
+try {
+  const { data } = await api.post(&#x27;/posts&#x27;, { title: &#x27;Hola Axios&#x27; });
+  console.log(data);
+} catch (error) {
+  console.error(&#x27;Status HTTP:&#x27;, error.response?.status);
+}</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>response.data</code></td><td>Cuerpo JSON ya parseado automáticamente</td></tr><tr><td><code>axios.create(cfg)</code></td><td>Crea una instancia reutilizable con <code>baseURL</code> y <code>timeout</code></td></tr><tr><td><code>params: { ... }</code></td><td>Serializa query params en la URL automáticamente</td></tr><tr><td><code>error.response</code></td><td>Contiene código HTTP y mensaje del servidor cuando falla</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Usa destructuring:</strong> <code>const { data } = await api.get("/users")</code> deja tu código limpio y directo.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Verifica error.response:</strong> Si el usuario se quedó sin internet no habrá <code>error.response</code>; usa <code>error.response?.status</code>.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Interactivo de Axios">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Interactivo de Axios</h2></div>
+            <nav class="tabs-nav"> <!-- Barra horizontal para alternar entre las secciones tematicas del laboratorio -->
             <button class="tab-btn active" id="tabShorthand" data-target="shorthand-tab"> <!-- Boton para activar la primera pestana -->
                 <span class="tab-icon">&#9889;</span> Metodos Shorthand (get &amp; post) <!-- Etiqueta de la pestana de metodos shorthand -->
             </button> <!-- Cierre del boton de la primera pestana -->
@@ -427,17 +475,69 @@
 
         </section> <!-- Cierre de la seccion principal de tarjeta de informacion -->
 
-        <!-- Etiqueta Informativa de Referencia a XAMPP y htdocs -->
-        <div class="xampp-label"> <!-- Etiqueta inferior con borde ambar y referencia a la ruta local del servidor -->
-            <span class="xampp-icon">&#128193;</span> <!-- Icono de carpeta de archivos para el contexto del servidor web -->
-            <div class="xampp-text"> <!-- Contenedor del texto informativo de XAMPP -->
-                <strong>Ubicacion en Servidor Local XAMPP &mdash; htdocs/axios-fetch</strong> <!-- Titulo destacado sobre la ubicacion en el servidor -->
-                <span>Los archivos de este modulo se encuentran en la carpeta <code>axios-fetch/</code> dentro de <code>htdocs/</code> de tu servidor XAMPP. Puedes ejecutarlos en <code>http://localhost/axios-fetch/</code> o directamente abriendo <code>index.html</code> en el navegador.</span> <!-- Descripcion pedagogica de la ruta de acceso -->
-            </div> <!-- Cierre del contenedor del texto de XAMPP -->
-        </div> <!-- Cierre de la etiqueta de XAMPP -->
+        
+        </section>
 
-    </main> <!-- Cierre del contenedor principal -->
+        <section class="slide" data-slide="6" data-title="Quiz: Axios Editor (Shorthand & axios.create)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: Axios rechaza automáticamente cualquier código fuera de 2xx." data-err="Axios rechaza la promesa en 4xx/5xx para ir directo al catch().">
+                    <div class="quiz-q-title">1. ¿Qué hace Axios cuando el servidor responde con código 404?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Resuelve la promesa con res.ok = false</button>
+                        <button class="quiz-option" data-opt="b">Rechaza la promesa y entra al catch()</button>
+                        <button class="quiz-option" data-opt="c">Reintenta 3 veces automáticamente</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: axios.create({ baseURL, timeout })." data-err="El método oficial es axios.create().">
+                    <div class="quiz-q-title">2. ¿Qué método crea un cliente Axios con baseURL y timeout preconfigurados?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">axios.create()</button>
+                        <button class="quiz-option" data-opt="b">axios.init()</button>
+                        <button class="quiz-option" data-opt="c">axios.instance()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
 
-    <script src="main.js"></script> <!-- Enlace al archivo JavaScript principal con toda la logica interactiva y comentarios didacticos -->
-</body> <!-- Cierre del cuerpo del documento HTML -->
-</html> <!-- Cierre del documento HTML principal -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Axios Editor (Shorthand & axios.create)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const cfg = { baseURL: &#x27;https://api.ejemplo.com&#x27;, timeout: 4000, params: { page: 2 } };
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Configuración Axios: &#x27; + JSON.stringify(cfg);
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const cfg = { baseURL: &#x27;https://api.ejemplo.com&#x27;, timeout: 4000, params: { page: 2 } };
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Configuración Axios: &#x27; + JSON.stringify(cfg);
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Libreria Axios</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+</body>
+</html>

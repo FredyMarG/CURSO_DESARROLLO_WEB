@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · PETICIONES</span><div class="brand-title"><span>📨</span><span>AJAX (XMLHttpRequest)</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 10</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -70,7 +70,7 @@ xhr.send();</code></pre></div>
                 <h2 class="slide-title">Nivel 3</h2>
             </div>
             <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Escribe un script de JavaScript que capture el envío de un formulario de registro HTML utilizando <code>e.preventDefault()</code>, extraiga todos sus inputs usando un objeto <code>FormData</code>, agregue dinámicamente un token de seguridad adicional con <code>.append()</code> y despacha toda la carga hacia una API simulada mediante un método <code>POST</code> usando <code>XMLHttpRequest</code>.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Resumen</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Resumen</h3>
 <ul class="styled-list">
 <li>*   <strong>AJAX</strong> permite actualizar secciones de una página web pidiendo datos asíncronos en segundo plano sin interrumpir la experiencia del usuario.</li>
 <li>*   <strong><code>XMLHttpRequest</code></strong> es el objeto nativo histórico que orquesta este flujo de comunicación mediante eventos de estado (<code>readyState</code>).</li>
@@ -78,24 +78,37 @@ xhr.send();</code></pre></div>
 <li>*   El evento moderno <strong><code>.onload</code></strong> simplifica la lectura de respuestas al activarse únicamente cuando la operación de red se ha completado.</li>
 <li>*   <strong><code>FormData</code></strong> permite agrupar y serializar colecciones complejas de inputs de formularios y archivos binarios nativos de forma automática y transparente antes de ser despachados mediante una petición <code>POST</code>.</li>
 </ul>
-<p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Hoja de Trucos (Cheatsheet)</h3>
 <table class="compare-table"><thead><tr><th>Elemento / Método</th><th>Descripción rápida</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>new XMLHttpRequest()</code></td><td>Crea una nueva instancia XHR.</td><td><code>const xhr = new XMLHttpRequest();</code></td></tr><tr><td><code>xhr.open(metodo, url)</code></td><td>Configura verbo HTTP y destino.</td><td><code>xhr.open(&quot;GET&quot;, &quot;/api/datos&quot;);</code></td></tr><tr><td><code>xhr.setRequestHeader()</code></td><td>Define cabecera HTTP antes de <code>send()</code>.</td><td><code>xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/json&quot;);</code></td></tr><tr><td><code>xhr.send(body)</code></td><td>Envía la petición por la red.</td><td><code>xhr.send(JSON.stringify(datos));</code></td></tr><tr><td><code>xhr.onload</code></td><td>Se ejecuta al completar la descarga (<code>readyState === 4</code>).</td><td><code>xhr.onload = () =&gt; { ... };</code></td></tr><tr><td><code>xhr.onerror</code></td><td>Se ejecuta ante fallo de red / CORS.</td><td><code>xhr.onerror = () =&gt; console.error(&quot;Sin red&quot;);</code></td></tr><tr><td><code>xhr.timeout</code> / <code>ontimeout</code></td><td>Tiempo máximo en ms y su manejador.</td><td><code>xhr.timeout = 5000;</code></td></tr><tr><td><code>xhr.upload.onprogress</code></td><td>Mide el progreso de subida de archivos.</td><td><code>xhr.upload.onprogress = (e) =&gt; { ... };</code></td></tr><tr><td><code>xhr.abort()</code></td><td>Cancela una petición en curso.</td><td><code>xhr.abort();</code></td></tr><tr><td><code>xhr.status</code> / <code>responseText</code></td><td>Código HTTP y texto devuelto por el servidor.</td><td><code>if (xhr.status === 200) JSON.parse(xhr.responseText);</code></td></tr><tr><td><code>new FormData(form)</code></td><td>Serializa campos y archivos de un <code>&lt;form&gt;</code>.</td><td><code>const fd = new FormData(formEl);</code></td></tr></tbody></table>
 </div>
         </section>
         <section class="slide" data-slide="7" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Nota:</strong> Para probar archivos locales con AJAX/Fetch usa un servidor local como Live Server.</div>
         </section>
-        <section class="slide" data-slide="8" data-title="Quiz: AJAX (XMLHttpRequest)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="8" data-lab="true" data-title="Simulador de XMLHttpRequest">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · CICLO AJAX</span><h2 class="slide-title">🎛️ Simulador de <code>readyState</code> en <code>XMLHttpRequest</code></h2><p class="slide-lead">Recorre los 5 estados del objeto <code>XMLHttpRequest</code> desde 0 (UNSENT) hasta 4 (DONE).</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>readyState <span id="axStateVal">4</span></label><input type="range" id="axState" min="0" max="4" value="4" /></div>
+      <div class="sim-control"><label>HTTP Status simulado</label><select id="axStatus"><option value="200">200 OK</option><option value="404">404 Not Found</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;justify-content:center;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: AJAX (XMLHttpRequest)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="open() configura la petición y send() la dispara." data-err="send() envía la petición configurada."><div class="quiz-q-title">1. ¿Qué método de <code>XMLHttpRequest</code> envía finalmente la petición al servidor?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">xhr.send()</button><button class="quiz-option" data-opt="b">xhr.open()</button><button class="quiz-option" data-opt="c">xhr.fetch()</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: AJAX (XMLHttpRequest)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: AJAX (XMLHttpRequest)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;XMLHttpRequest listo en el navegador: &lt;b&gt;true&lt;/b&gt;&lt;/div&gt;">Ejemplo XHR</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;XMLHttpRequest listo en el navegador: &lt;b&gt;true&lt;/b&gt;&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="10" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="Ajax%20Editor/index.html"><span class="file-name">📄 Ajax Editor</span><span class="file-path">Ajax%20Editor/index.html</span></a><a class="file-card" href="Ajax%20Htdocs/index.html"><span class="file-name">📄 Ajax Htdocs</span><span class="file-path">Ajax%20Htdocs/index.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -105,5 +118,25 @@ xhr.send();</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const s = document.getElementById('axState'), sv = document.getElementById('axStateVal'), stEl = document.getElementById('axStatus');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      const names = ['0: UNSENT (creado)', '1: OPENED (open() llamado)', '2: HEADERS_RECEIVED', '3: LOADING (descargando)', '4: DONE (completado)'];
+      function upd() {
+        const idx = Number(s.value); sv.textContent = idx;
+        const ok = idx === 4 && stEl.value === '200';
+        st.innerHTML = names.map((n, i) => '<div style="padding:6px 10px;border-radius:6px;background:' + (i === idx ? 'rgba(56,189,248,0.2)' : 'rgba(255,255,255,0.03)') + ';color:' + (i === idx ? '#38bdf8' : '#64748b') + ';font-weight:' + (i === idx ? '700' : '400') + ';">' + n + '</div>').join('') +
+          (idx === 4 ? '<div style="margin-top:6px;color:' + (ok ? '#00ff88' : '#ff3358') + ';">status: ' + stEl.value + (ok ? ' → JSON listo' : ' → Recurso no encontrado') + '</div>' : '');
+        cd.textContent = `const xhr = new XMLHttpRequest();
+xhr.open("GET", "/api/datos");
+xhr.onload = () => {
+  if (xhr.status === 200) console.log(xhr.responseText);
+};
+xhr.send();`;
+      }
+      [s, stEl].forEach(e => e.addEventListener('input', upd)); upd();
+        })();
+    </script>
 </body>
 </html>

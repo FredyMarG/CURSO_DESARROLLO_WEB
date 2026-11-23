@@ -1,802 +1,768 @@
-# GUÍA COMPLETA — REPL de Node.js
+# REPL en Node.js — Guía completa
 
-> **Nivel:** Principiante a intermedio (con prácticas avanzadas)  
-> **Módulo:** Nivel 1 — Fundamentos de Node.js  
-> **Objetivo:** Dominar el entorno interactivo REPL de Node.js para ejecutar JavaScript sin crear archivos, inspeccionar objetos, probar expresiones, experimentar con módulos y depurar ideas antes de incorporarlas a `la plataforma`.  
-> **Requisitos:** Node.js instalado, terminal de Windows, PowerShell o terminal integrada de VS Code.  
-> **Modalidad:** Totalmente offline; los ejemplos principales no requieren instalar paquetes.
+**Objetivo:** Utilizar el entorno REPL para experimentar con JavaScript, explorar APIs de Node.js, depurar ideas y construir un prototipo interactivo de catálogo de cursos.
 
----
+> **Convención:** las líneas que empiezan por `>` representan entradas en REPL. No escribas el símbolo `>`: es el indicador que muestra Node. Las salidas se muestran debajo. Cuando un ejemplo diga **terminal**, ejecútalo fuera de REPL.
 
-# Definición
+## 1. Definición: ¿qué es REPL?
 
-**REPL** significa **Read–Eval–Print–Loop** (Leer–Evaluar–Imprimir–Repetir). Es un entorno interactivo integrado en Node.js. Permite escribir una expresión JavaScript, ejecutarla inmediatamente y ver el resultado sin guardar un archivo `.js`.
+**REPL** significa **Read–Eval–Print–Loop** (leer, evaluar, imprimir y repetir). Es un entorno interactivo de Node.js en el que escribes una expresión o instrucción JavaScript, Node la ejecuta y muestra el resultado, sin crear primero un archivo `.js`.
 
-Por ejemplo, en la terminal:
+**Ejemplo:** abre una terminal, ejecuta `node` y prueba:
 
-```powershell
+```text
+> 5 + 7
+12
+> 'Curso'.toUpperCase()
+'CURSO'
+```
+
+**Importante:** REPL es una herramienta para experimentar y explorar; el código de una aplicación permanente suele guardarse en archivos.
+
+## 2. Principales usos
+
+1. **Aprender JavaScript:** comprobar rápidamente operadores, funciones y estructuras de datos.
+2. **Probar algoritmos pequeños:** verificar una fórmula antes de integrarla en un proyecto.
+3. **Inspeccionar datos:** consultar objetos, arreglos y valores devueltos por funciones.
+4. **Explorar Node.js:** experimentar con módulos nativos y utilidades.
+5. **Depurar:** reproducir casos mínimos y comparar resultados.
+6. **Crear prototipos:** modelar datos y operaciones antes de escribir la aplicación definitiva.
+
+**Cuándo no usarlo:** para aplicaciones grandes, pruebas automatizadas, cambios que deban versionarse o código que necesite ejecutarse de forma repetible sin intervención.
+
+## 3. Cómo iniciar y salir de REPL
+
+En una **terminal**:
+
+```bash
+node --version
 node
 ```
 
-Aparece un indicador parecido a este:
+La primera orden comprueba la instalación. La segunda inicia REPL; aparecerá un indicador `>`.
 
-```text
-Welcome to Node.js vXX.X.X.
-Type ".help" for more information.
->
+Para salir, escribe `.exit` y presiona Enter. También puedes pulsar **Ctrl+D**; **Ctrl+C** dos veces suele terminar la sesión. En Windows usa PowerShell o CMD; en macOS y Linux, Terminal.
+
+Si `node` no se reconoce, instala Node.js y abre una terminal nueva. Comprueba que esté en `PATH`.
+
+**Práctica:** entra, calcula `8 * 6`, sal y vuelve a entrar. Observa que las variables de la sesión anterior no persisten automáticamente.
+
+## 4. El ciclo Read–Eval–Print–Loop
+
+- **Read (leer):** recibe el texto que escribes.
+- **Eval (evaluar):** interpreta y ejecuta la instrucción.
+- **Print (imprimir):** muestra el valor resultante o un error.
+- **Loop (repetir):** espera otra entrada.
+
+```mermaid
+flowchart TD
+    A[Iniciar node] --> B[Read: leer entrada]
+    B --> C[Eval: ejecutar JavaScript]
+    C --> D{¿Se produjo un error?}
+    D -- Sí --> E[Mostrar error]
+    D -- No --> F[Print: mostrar resultado]
+    E --> G{¿Salir?}
+    F --> G
+    G -- No --> B
+    G -- Sí --> H[Finalizar sesión]
 ```
 
-Escribe:
+Una expresión como `2 + 3` produce `5`. Una declaración puede producir `undefined` aunque haya funcionado: significa que no devuelve un valor útil para imprimir.
 
-```javascript
-2 + 3
+## 5. Expresiones, variables y funciones
+
+### 5.1 Expresiones
+
+```js
+10 / 2                 // 5
+2 ** 3                 // 8
+'Node' + '.js'         // 'Node.js'
+18 >= 18               // true
 ```
 
-Obtendrás:
+### 5.2 Variables
 
-```text
-5
+Introduce cada línea por separado:
+
+```js
+const precio = 50000
+let cupos = 12
+precio * cupos
+cupos -= 2
+cupos
 ```
 
-**Importante:** `>` representa el indicador del REPL; no necesitas escribirlo. Los mensajes exactos de bienvenida pueden variar según la versión instalada.
+**Advertencia:** no puedes volver a declarar `const precio` o `let cupos` con el mismo nombre en la misma sesión. Reutiliza la variable con `let`, cambia el nombre o reinicia REPL.
 
----
+### 5.3 Funciones
 
-# Principales usos
-
-### 1. Aprender JavaScript rápidamente 📚
-
-Comprueba cómo funcionan operadores, tipos de datos, cadenas, arreglos y funciones.
-
-### 2. Probar ideas antes de escribir archivos 🧪
-
-Experimenta con una función de cálculo o transformación de datos y después trasládala al proyecto.
-
-### 3. Inspeccionar objetos y módulos 🔍
-
-Consulta propiedades, métodos y resultados de módulos integrados en Node.js.
-
-### 4. Depurar cálculos pequeños 🛠️
-
-Reproduce un error de forma aislada, cambia una entrada y observa qué ocurre.
-
-### 5. Trabajar sin conexión 📴
-
-REPL funciona localmente: no necesita navegador, servidor remoto ni Internet.
-
----
-
-# Iniciar y salir del REPL
-
-## Iniciar desde Windows o VS Code
-
-1. Abre VS Code.
-2. Selecciona **Terminal → Nueva terminal**.
-3. Comprueba que Node.js está instalado:
-
-```powershell
-node -v
-```
-
-4. Inicia REPL:
-
-```powershell
-node
-```
-
-5. Escribe:
-
-```javascript
-"Hola desde Node.js"
-```
-
-6. Sal con:
-
-```text
-.exit
-```
-
-También puedes presionar **Ctrl+C dos veces**. En algunos entornos, **Ctrl+D** cierra la sesión.
-
-> Si `node` no se reconoce, revisa la instalación de Node.js y la variable PATH antes de continuar.
-
----
-
-# Cómo funciona Read–Eval–Print–Loop
-
-| Fase | Nombre | Acción |
-|---|---|---|
-| R | Read | Lee lo que escribes. |
-| E | Eval | Evalúa la expresión como JavaScript. |
-| P | Print | Muestra el resultado evaluado. |
-| L | Loop | Espera la siguiente instrucción. |
-
-Ejemplo:
-
-```javascript
-const precio = 12000
-precio * 2
-```
-
-Salida de la segunda instrucción:
-
-```text
-24000
-```
-
-Las declaraciones como `const precio = 12000` pueden mostrar `undefined`, porque la declaración no produce un valor útil para imprimir. **Eso no significa que haya ocurrido un error.**
-
----
-
-# Expresiones, variables y funciones
-
-## 1. Operaciones matemáticas
-
-```javascript
-10 + 5
-20 / 4
-2 ** 3
-17 % 5
-```
-
-Resultados esperados: `15`, `5`, `8` y `2`.
-
-## 2. Variables
-
-```javascript
-let estudiantes = 5
-estudiantes += 2
-estudiantes
-```
-
-Resultado: `7`.
-
-```javascript
-const plataforma = "la plataforma"
-plataforma.toLowerCase()
-```
-
-Resultado: `'curso_desarrollo_web'`.
-
-**Precaución:** una variable declarada con `const` no se puede reasignar. Si vuelves a declarar el mismo identificador con `const` o `let` en la misma sesión, puede aparecer un error de declaración duplicada. Utiliza un nombre nuevo o reinicia el REPL.
-
-## 3. Funciones
-
-```javascript
-function saludar(nombre) {
-  return `Bienvenido, ${nombre}`;
+```js
+function aplicarDescuento(precio, porcentaje) {
+  return precio * (1 - porcentaje / 100);
 }
-
-saludar("Ana")
+aplicarDescuento(80000, 15) // 68000
 ```
 
-Resultado: `'Bienvenido, Ana'`.
+**Reto breve:** crea `calcularIVA(valor, tasa)` y verifica `calcularIVA(100, 19) === 119`.
 
-## 4. Funciones flecha
+## 6. Objetos, arreglos y métodos de JavaScript
 
-```javascript
-const calcularAvance = (completados, total) =>
-  total === 0 ? 0 : (completados / total) * 100;
-
-calcularAvance(3, 5)
-```
-
-Resultado: `60`.
-
-**Explicación:** el operador ternario evita dividir por cero cuando `total` vale `0`.
-
----
-
-# Objetos, arreglos y métodos
-
-## Arreglos
-
-```javascript
-const temas = ["Node.js", "Express", "PostgreSQL"]
-temas.length
-temas.includes("Express")
-temas.map(tema => tema.toUpperCase())
-```
-
-Resultados: `3`, `true` y un arreglo con los nombres en mayúsculas.
-
-## Objetos
-
-```javascript
-const curso = {
-  id: 1,
-  nombre: "Fundamentos de Node.js",
-  nivel: "Principiante",
-  activo: true
-}
-
-curso.nombre
+```js
+const curso = { id: 1, titulo: 'Node.js', precio: 80000, activo: true }
+curso.titulo
 Object.keys(curso)
 ```
 
-Prueba cambiar `curso.activo = false` y vuelve a consultar `curso`.
-
-## Filtrado
-
-```javascript
-const lecciones = [
-  { titulo: "REPL", completada: true },
-  { titulo: "npm", completada: false },
-  { titulo: "Módulos", completada: true }
-];
-
-lecciones.filter(leccion => leccion.completada)
+```js
+const cursos = [
+  { id: 1, titulo: 'Node.js', precio: 80000 },
+  { id: 2, titulo: 'Git', precio: 50000 },
+  { id: 3, titulo: 'SQL', precio: 70000 }
+]
+cursos.map(c => c.titulo)
+cursos.filter(c => c.precio < 75000)
+cursos.find(c => c.id === 2)
+cursos.reduce((total, c) => total + c.precio, 0)
 ```
 
-El resultado contiene solamente las lecciones completadas.
+**Diferencia:** `map` transforma cada elemento; `filter` selecciona varios; `find` obtiene el primero; `reduce` acumula un resultado.
 
----
+## 7. Comandos especiales de REPL
 
-# Comandos especiales del REPL
+Estos comandos empiezan por un punto y se escriben **directamente en REPL**, no dentro de un archivo `.js`.
 
-Los comandos que comienzan con punto **no son funciones JavaScript**: son órdenes especiales del entorno interactivo.
+| Comando | Función | Ejemplo |
+|---|---|---|
+| `.help` | Muestra ayuda de comandos | `.help` |
+| `.exit` | Termina REPL | `.exit` |
+| `.clear` | Reinicia el contexto de REPL predeterminado; también cancela una entrada multilínea | `.clear` |
+| `.break` | Cancela la entrada multilínea actual | `.break` |
+| `.save archivo.js` | Guarda el historial de entradas de la sesión en un archivo | `.save prueba.js` |
+| `.load archivo.js` | Ejecuta el contenido de un archivo en la sesión | `.load prueba.js` |
+| `.editor` | Activa modo de edición multilínea | `.editor` |
 
-| Comando | Función |
-|---|---|
-| `.help` | Muestra ayuda de los comandos REPL. |
-| `.exit` | Cierra la sesión. |
-| `.clear` | Reinicia el contexto de evaluación de la sesión. |
-| `.break` | Cancela una expresión incompleta. |
-| `.save archivo.js` | Guarda la entrada de la sesión en un archivo. |
-| `.load archivo.js` | Carga y evalúa un archivo JavaScript. |
-| `.editor` | Abre el modo de edición multilínea. |
+**Detalles importantes:** `.clear` no es equivalente a limpiar visualmente la pantalla. `.save` guarda entradas, no una fotografía de todos los valores del contexto; revisa el archivo generado antes de ejecutarlo como programa. `.load` ejecuta código, por lo que solo debes cargar archivos confiables. Los comandos disponibles pueden variar entre versiones; consulta `.help` en tu instalación.
 
-## Ejemplo de `.save`
+**Prueba de `.editor`:** escribe `.editor`, pega este bloque y pulsa **Ctrl+D** para ejecutarlo (o **Ctrl+C** para cancelar):
 
-```javascript
-const mensaje = "Aprendiendo REPL"
-mensaje.toUpperCase()
+```js
+const cuadrado = n => n * n;
+console.log([2, 3, 4].map(cuadrado));
 ```
 
-Después escribe:
+## 8. Historial, autocompletado y expresiones multilínea
+
+- **Flecha arriba/abajo:** recorre entradas anteriores en terminales compatibles.
+- **Tab:** completa identificadores y muestra posibilidades cuando están disponibles.
+- **Multilínea:** al abrir `{`, `[` o `(` y no cerrar la expresión, REPL espera más líneas; `.break` cancela.
+- **`.editor`:** facilita pegar varias instrucciones relacionadas.
 
 ```text
-.save practica-repl.js
+> function sumar(a, b) {
+... return a + b;
+... }
+undefined
+> sumar(4, 9)
+13
 ```
 
-El archivo se guarda respecto al directorio de trabajo actual. Revisa su contenido antes de usarlo como programa independiente: el historial puede incluir expresiones de prueba.
+El historial persistente puede depender de la configuración y del entorno. Evita introducir contraseñas o tokens, porque podrían quedar en historial o archivos guardados.
 
-## Ejemplo de `.load`
+## 9. Variables y módulos disponibles en REPL
 
-Primero crea un archivo `saludo.js`:
+Prueba estas variables y objetos globales:
 
-```javascript
-function bienvenida(nombre) {
-  return `Hola, ${nombre}`;
-}
-```
-
-En REPL escribe:
-
-```text
-.load saludo.js
-```
-
-Luego:
-
-```javascript
-bienvenida("Lorena")
-```
-
-## Modo `.editor`
-
-```text
-.editor
-```
-
-Escribe varias líneas de JavaScript. En la interfaz habitual del REPL, **Ctrl+D** ejecuta el bloque y **Ctrl+C** cancela la edición. Consulta `.help` si tu versión muestra instrucciones distintas.
-
----
-
-# Historial, autocompletado y multilínea
-
-- **Flecha arriba/abajo:** recupera entradas anteriores.
-- **Tab:** puede sugerir o completar nombres y propiedades.
-- **Expresiones incompletas:** REPL suele mostrar un indicador de continuación hasta que cierres llaves, paréntesis o cadenas.
-- **`.break`:** permite abandonar una entrada incompleta.
-
-Prueba:
-
-```javascript
-function doble(numero) {
-  return numero * 2;
-}
-```
-
-No necesitas escribir toda la función en una sola línea.
-
----
-
-# Variables y módulos disponibles
-
-Node.js proporciona objetos como `process`, `console` y `Buffer` en su entorno de ejecución.
-
-```javascript
+```js
 process.version
 process.platform
 process.cwd()
-Buffer.from("Hola").toString("hex")
+Math.PI
+JSON.stringify({ curso: 'Node' })
+console.log('Hola desde REPL')
 ```
 
-Para explorar un módulo integrado, puedes usar:
+En el REPL estándar de Node.js suele estar disponible `require`:
 
-```javascript
-const os = require("node:os")
+```js
+const os = require('node:os')
 os.platform()
 os.cpus().length
+const path = require('node:path')
+path.join('cursos', 'node', 'repl.md')
 ```
 
-**Nota importante:** el REPL interactivo tradicional permite `require()` para experimentar con módulos CommonJS. Esto no significa que `require()` funcione automáticamente dentro de cualquier archivo configurado como ES Module (`"type": "module"`). En esos archivos se utiliza habitualmente `import`.
+**Nota:** `require` funciona en el REPL estándar aunque un proyecto use ESM; no asumas que todo el código de un archivo ESM funcionará idénticamente al pegarlo en REPL. Los nombres especiales del REPL, como `_` para el último resultado, pueden comportarse de forma distinta si se les asigna un valor.
 
-Para experimentar con importación dinámica:
+## 10. Promesas y `await` interactivo
 
-```javascript
-const moduloOS = await import("node:os")
-moduloOS.platform()
+En versiones modernas de Node.js, el REPL estándar admite **`await` en el nivel superior**:
+
+```js
+await Promise.resolve('listo')
+await new Promise(resolve => setTimeout(() => resolve(42), 300))
 ```
 
----
+Ejemplo con el módulo nativo de archivos:
 
-# Promesas y `await` interactivo
-
-En versiones modernas de Node.js, el REPL estándar admite **`await` de nivel superior**.
-
-```javascript
-const esperar = ms => new Promise(resolve => setTimeout(resolve, ms))
-await esperar(500)
-"Medio segundo después"
+```js
+const fs = require('node:fs/promises')
+await fs.writeFile('repl-ejemplo.txt', 'Aprendiendo Node.js', 'utf8')
+await fs.readFile('repl-ejemplo.txt', 'utf8')
 ```
 
-Prueba una operación asíncrona real con un módulo nativo:
+El archivo se crea en el directorio de trabajo actual (`process.cwd()`). Evita sobrescribir archivos importantes. Si deshabilitas experimentalmente funciones del REPL o usas una versión antigua, `await` puede comportarse de otra manera.
 
-```javascript
-const fs = await import("node:fs/promises")
-await fs.writeFile("nota-repl.txt", "Aprendí REPL", "utf8")
-await fs.readFile("nota-repl.txt", "utf8")
-```
+**Diferencia:** una promesa representa un resultado futuro; `await` espera ese resultado sin bloquear el hilo de JavaScript como una operación síncrona de archivo.
 
-Resultado de la lectura: `'Aprendí REPL'`.
+## 11. Diferencias entre REPL, `node archivo.js` y consola del navegador
 
-**Advertencia:** este ejemplo crea un archivo en el directorio de trabajo actual. Comprueba `process.cwd()` antes de ejecutarlo. Si estás trabajando en un repositorio importante, hazlo en una carpeta de prácticas.
-
----
-
-# Diferencias entre REPL, archivo `.js` y consola del navegador
-
-| Característica | REPL de Node.js | `node app.js` | Consola del navegador |
+| Aspecto | REPL de Node.js | `node archivo.js` | Consola del navegador |
 |---|---|---|---|
-| Ejecución interactiva | Sí | No, ejecuta un programa | Sí |
-| Requiere guardar archivo | No | Sí | No |
-| Acceso a APIs nativas de Node | Sí | Sí | No |
-| Acceso directo al DOM de una página | No | No | Sí |
-| Ideal para | Experimentos rápidos | Aplicaciones y scripts | Depuración frontend |
+| Ejecución | Interactiva | Archivo completo | Interactiva en una página |
+| Entorno | Node.js | Node.js | Navegador |
+| DOM (`document`) | No | No, salvo librerías/entornos especiales | Sí, según la página |
+| APIs de Node (`node:fs`) | Sí | Sí | No directamente |
+| Persistencia del código | Temporal salvo guardar | Archivo permanente | Temporal salvo herramientas del navegador |
+| Uso habitual | Experimentar | Aplicaciones y scripts | Inspeccionar páginas web |
 
-REPL **no reemplaza** un proyecto organizado con archivos, módulos y pruebas. Úsalo para investigar comportamientos antes de escribir una implementación mantenible.
+**Error típico:** escribir `document.querySelector(...)` en REPL de Node. `document` no está definido porque Node no proporciona el DOM del navegador por defecto.
 
----
+## 12. Analogías del mundo real
 
-# Analogías del mundo real
+- **REPL es una calculadora de laboratorio:** pruebas una operación y ves inmediatamente el resultado.
+- **Un archivo `.js` es una receta escrita:** puede repetirse, compartirse y versionarse.
+- **La consola del navegador es un taller dentro de una página:** puedes inspeccionar su interfaz y sus elementos HTML.
+- **Una promesa es un número de turno:** representa un resultado pendiente; `await` espera a que esté listo.
 
-### 1. La calculadora de bolsillo 🧮
+## 13. Diagrama de flujo de trabajo con REPL
 
-REPL se parece a una calculadora: introduces una operación y ves el resultado inmediatamente. Un archivo `.js`, en cambio, se parece a una hoja de instrucciones preparada para ejecutar muchas operaciones de forma repetible.
-
-### 2. La mesa de pruebas del taller 🔧
-
-Antes de instalar una pieza en una máquina completa, un técnico la prueba de manera aislada. REPL permite probar pequeñas funciones antes de integrarlas en la aplicación.
-
----
-
-# Diagrama de flujo del REPL
-
-```text
-           [Iniciar: node]
-                  |
-                  v
-         [READ: leer entrada]
-                  |
-                  v
-       [EVAL: ejecutar JavaScript]
-                  |
-                  v
-       [PRINT: mostrar resultado]
-                  |
-                  v
-       [LOOP: esperar otra entrada]
-                  |
-             ¿.exit?
-             /    \
-           No      Sí
-           |        |
-           +----> [Salir]
-           |
-           +------> READ
+```mermaid
+flowchart TD
+    A[¿Tienes una idea o duda?] --> B[Inicia node]
+    B --> C[Prueba expresión o función]
+    C --> D{¿Funciona?}
+    D -- No --> E[Lee error y ajusta]
+    E --> C
+    D -- Sí --> F{¿La usarás de nuevo?}
+    F -- No --> G[Continúa experimentando]
+    G --> C
+    F -- Sí --> H[Guarda código en archivo .js]
+    H --> I[Ejecuta node archivo.js]
+    I --> J[Agrega pruebas y documentación]
 ```
 
----
+## 14. Buenas prácticas y errores comunes
 
-# Buenas prácticas y errores comunes
+| Buena práctica | Error que evita |
+|---|---|
+| Usa REPL para pruebas pequeñas y aisladas | Sesiones enormes difíciles de repetir |
+| Comprueba `process.cwd()` antes de escribir archivos | Guardar datos en una carpeta equivocada |
+| Prefiere `const` para valores que no reasignarás | Cambios accidentales de referencias |
+| Guarda el prototipo en `.js` y usa control de versiones | Perder código al salir |
+| Lee los mensajes de error completos | Corregir una causa equivocada |
+| Valida los datos antes de calcular | `NaN`, resultados inesperados |
+| No pegues código desconocido | Ejecutar instrucciones peligrosas |
+| No escribas credenciales en REPL | Exponerlas en el historial |
 
-## ✅ Buenas prácticas
+**Errores frecuentes:**
 
-- Usa REPL para explorar funciones pequeñas, no para mantener una aplicación completa.
-- Comprueba tu versión con `node -v` cuando un ejemplo dependa de características recientes.
-- Anota en un `.md` las expresiones que funcionen y el motivo.
-- Usa carpetas de prueba cuando ejecutes operaciones sobre archivos.
-- Convierte los experimentos útiles en funciones reutilizables y pruebas automatizadas.
-
-## ❌ Errores comunes
-
-### 1. Escribir `node app.js` dentro del REPL
-
-`node app.js` es un comando de terminal, no una expresión JavaScript. Primero sal con `.exit` y ejecútalo en PowerShell.
-
-### 2. Confundir `undefined` con una excepción
-
-`undefined` puede ser el resultado normal de una declaración. Un error real normalmente incluye un tipo como `ReferenceError`, `TypeError` o `SyntaxError`.
-
-### 3. Volver a declarar una variable `const`
-
-```javascript
-const numero = 10
-const numero = 20 // Error: identificador ya declarado
+```js
+// ReferenceError: la variable no existe
+variableQueNoExiste
+// TypeError: el valor no tiene el método pedido
+(123).toUpperCase()
+// NaN: conversión inválida
+Number('no-es-numero')
 ```
 
-Usa otro nombre o reinicia el contexto.
+Si te aparece `Identifier 'x' has already been declared`, cambia el identificador, usa otra sesión o limpia el contexto con `.clear` cuando corresponda.
 
-### 4. Creer que `document` existe en Node.js
+## 15. Laboratorio guiado paso a paso
 
-El objeto `document` pertenece al DOM del navegador; no está disponible automáticamente en el REPL de Node.js.
+**Meta:** construir y probar una lista de cursos en una sesión REPL. **Tiempo sugerido:** 30–45 minutos.
 
-### 5. Guardar datos sensibles en el historial
+### Paso 1. Prepara el entorno
 
-Evita introducir contraseñas, claves de API y tokens reales. Las entradas de REPL pueden conservarse en el historial local.
+En terminal:
 
----
-
-# Laboratorio guiado: explorador de datos de cursos
-
-**Objetivo:** practicar expresiones, arreglos, objetos, filtros y cálculos usando REPL.
-
-## Paso 1. Preparar la terminal
-
-Crea una carpeta de prácticas y ábrela en VS Code:
-
-```powershell
-mkdir practica-repl
-cd practica-repl
+```bash
+mkdir laboratorio-repl
+cd laboratorio-repl
 node
 ```
 
-## Paso 2. Crear datos simulados
+Comprueba la ruta:
 
-```javascript
-const cursos = [
-  { id: 1, nombre: "Node.js", lecciones: 26, completadas: 5 },
-  { id: 2, nombre: "JavaScript", lecciones: 20, completadas: 20 },
-  { id: 3, nombre: "HTML", lecciones: 15, completadas: 10 }
+```js
+process.cwd()
+```
+
+### Paso 2. Crea los datos
+
+```js
+let catalogo = [
+  { id: 1, nombre: 'Node.js', precio: 100000, cupos: 10 },
+  { id: 2, nombre: 'Git', precio: 60000, cupos: 15 }
 ]
 ```
 
-## Paso 3. Contar cursos
+### Paso 3. Consulta el catálogo
 
-```javascript
-cursos.length
+```js
+catalogo.map(({ id, nombre }) => ({ id, nombre }))
+catalogo.find(c => c.id === 1)
 ```
 
-Resultado: `3`.
+### Paso 4. Agrega un curso
 
-## Paso 4. Buscar un curso
-
-```javascript
-cursos.find(curso => curso.id === 1)
+```js
+catalogo.push({ id: 3, nombre: 'SQL', precio: 90000, cupos: 8 })
+catalogo.length // 3
 ```
 
-## Paso 5. Calcular porcentaje
+### Paso 5. Actualiza cupos
 
-```javascript
-const porcentaje = curso =>
-  curso.lecciones === 0 ? 0 : Math.round(curso.completadas / curso.lecciones * 100);
-
-porcentaje(cursos[0])
+```js
+const seleccionado = catalogo.find(c => c.id === 2)
+seleccionado.cupos -= 1
+seleccionado.cupos // 14
 ```
 
-Resultado: `19` (redondeado).
+### Paso 6. Calcula el valor del catálogo
 
-## Paso 6. Filtrar cursos finalizados
-
-```javascript
-cursos.filter(curso => curso.completadas === curso.lecciones)
+```js
+catalogo.reduce((total, c) => total + c.precio, 0) // 250000
 ```
 
-Resultado: el curso de JavaScript.
+### Paso 7. Guarda datos en JSON
 
-## Paso 7. Obtener resumen
-
-```javascript
-cursos.map(curso => ({
-  nombre: curso.nombre,
-  progreso: `${porcentaje(curso)}%`
-}))
+```js
+const fsLab = require('node:fs/promises')
+await fsLab.writeFile('catalogo.json', JSON.stringify(catalogo, null, 2), 'utf8')
+JSON.parse(await fsLab.readFile('catalogo.json', 'utf8'))
 ```
 
-## Paso 8. Guardar tu sesión
+### Paso 8. Verifica y termina
+
+Comprueba que exista `catalogo.json` en `laboratorio-repl`, revisa su contenido y sal con `.exit`.
+
+**Criterios de éxito:** 3 cursos, Git con 14 cupos, suma de precios de 250000 y JSON legible guardado en disco.
+
+## 16. Proyecto integrador: prototipo interactivo de catálogo de cursos
+
+**Contexto CURSO_DESAR:** necesitas validar un catálogo antes de construir su API. Crearás un prototipo **funcional en REPL** con altas, consultas, búsquedas, inscripciones, estadísticas y persistencia JSON.
+
+**Estructura final:**
 
 ```text
-.save practica-catalogo.js
+proyecto-catalogo-repl/
+├── catalogo.js
+└── cursos.json          # se crea al guardar
 ```
 
-Revisa el archivo generado, conserva las expresiones útiles y documenta tus resultados.
+### Paso 1. Crea el directorio y archivo
 
----
+En terminal:
 
-# Proyecto integrador — Prototipo interactivo de catálogo educativo
-
-**Contexto:** antes de desarrollar una API REST, necesitamos comprobar que nuestra lógica para administrar cursos y progreso funciona.
-
-## Requisitos funcionales
-
-1. Mantener una colección de cursos en memoria.
-2. Agregar cursos con `id`, `nombre` y `lecciones`.
-3. Buscar un curso por su identificador.
-4. Actualizar el número de lecciones completadas.
-5. Calcular el porcentaje de avance.
-6. Listar los cursos finalizados.
-7. Evitar valores negativos y avances mayores que el total.
-
-## Implementación de referencia
-
-Copia el siguiente bloque en `.editor` o en un archivo `catalogo.js` para cargarlo con `.load`:
-
-```javascript
-const catalogo = [];
-
-function agregarCurso(id, nombre, lecciones) {
-  if (!Number.isInteger(id) || id <= 0) {
-    throw new Error("El ID debe ser un entero positivo");
-  }
-  if (!nombre || typeof nombre !== "string") {
-    throw new Error("El nombre es obligatorio");
-  }
-  if (!Number.isInteger(lecciones) || lecciones <= 0) {
-    throw new Error("Las lecciones deben ser un entero positivo");
-  }
-  if (catalogo.some(curso => curso.id === id)) {
-    throw new Error("El ID ya existe");
-  }
-
-  const curso = { id, nombre, lecciones, completadas: 0 };
-  catalogo.push(curso);
-  return curso;
-}
-
-function registrarAvance(id, completadas) {
-  const curso = catalogo.find(item => item.id === id);
-  if (!curso) throw new Error("Curso no encontrado");
-  if (!Number.isInteger(completadas) ||
-      completadas < 0 ||
-      completadas > curso.lecciones) {
-    throw new Error("Avance fuera del rango permitido");
-  }
-
-  curso.completadas = completadas;
-  return curso;
-}
-
-function calcularProgreso(curso) {
-  return Math.round(curso.completadas / curso.lecciones * 100);
-}
-
-function cursosFinalizados() {
-  return catalogo.filter(curso =>
-    curso.completadas === curso.lecciones
-  );
-}
+```bash
+mkdir proyecto-catalogo-repl
+cd proyecto-catalogo-repl
 ```
 
-## Prueba del proyecto
+Crea `catalogo.js` con este contenido **completo**:
 
-```javascript
-agregarCurso(1, "Node.js", 26)
-agregarCurso(2, "JavaScript", 20)
-registrarAvance(1, 13)
-registrarAvance(2, 20)
-calcularProgreso(catalogo[0])
-cursosFinalizados()
-```
+```js
+const fs = require('node:fs/promises');
+const path = require('node:path');
 
-**Resultados esperados:**
+const archivo = path.join(process.cwd(), 'cursos.json');
+let cursos = [
+  { id: 1, nombre: 'Fundamentos de Node.js', precio: 80000, cupos: 12 },
+  { id: 2, nombre: 'Git y GitHub', precio: 60000, cupos: 8 }
+];
 
-- El avance de Node.js es `50`.
-- JavaScript aparece en la lista de cursos finalizados.
-- Un ID duplicado genera un error controlado.
-- Un avance mayor al total genera un error controlado.
-
-## ¿Cómo se integra en la plataforma?
-
-Este proyecto es un **prototipo en memoria**, no una base de datos. En módulos posteriores podremos trasladar estas funciones a servicios backend, conectarlas con MySQL o PostgreSQL y exponerlas mediante rutas HTTP. No modifica tu plataforma actual.
-
----
-
-# Ejercicios
-
-## Nivel 1 — Básico
-
-1. Inicia el REPL.
-2. Calcula `15 * 4`.
-3. Declara una variable con el nombre de tu plataforma.
-4. Convierte ese nombre a mayúsculas.
-5. Consulta la versión de Node.js con `process.version`.
-6. Cierra el REPL correctamente.
-
-## Nivel 2 — Intermedio
-
-1. Crea un arreglo de cinco temas de Node.js.
-2. Filtra los temas cuyo nombre tenga más de seis caracteres.
-3. Crea una función que reciba el total de clases y las clases completadas.
-4. Devuelve el porcentaje de avance con dos decimales.
-5. Prueba qué ocurre cuando el total es cero y resuelve ese caso.
-
-## Nivel 3 — Avanzado
-
-1. Amplía el catálogo del proyecto integrador para permitir eliminar cursos.
-2. Impide eliminar un curso que no exista sin mostrar un mensaje descriptivo.
-3. Agrega una función para obtener el promedio de progreso de todos los cursos.
-4. Define el resultado del promedio cuando el catálogo esté vacío.
-5. Documenta las pruebas realizadas y sus resultados.
-
----
-
-# Solucionario paso a paso
-
-## Solución Nivel 1
-
-```javascript
-15 * 4
-const plataforma = "la plataforma"
-plataforma.toUpperCase()
-process.version
-```
-
-Para salir, escribe `.exit`. El resultado de la multiplicación es `60`.
-
-## Solución Nivel 2
-
-```javascript
-const temas = ["REPL", "Express", "Promesas", "HTTP", "Módulos"];
-
-const temasLargos = temas.filter(tema => tema.length > 6);
-
-function avance(completadas, total) {
-  if (!Number.isFinite(completadas) ||
-      !Number.isFinite(total) ||
-      total <= 0 ||
-      completadas < 0 ||
-      completadas > total) {
-    return null;
+function validarTexto(texto) {
+  if (typeof texto !== 'string' || !texto.trim()) {
+    throw new Error('El nombre debe ser un texto no vacío');
   }
-  return Number(((completadas / total) * 100).toFixed(2));
+  return texto.trim();
 }
 
-temasLargos
-avance(7, 12)
-avance(3, 0)
-```
-
-El porcentaje de `7` sobre `12` es aproximadamente `58.33`. Para un total de `0`, la función devuelve `null`, que en este ejercicio significa que no puede calcularse un porcentaje válido.
-
-## Solución Nivel 3
-
-Continúa desde el proyecto integrador:
-
-```javascript
-function eliminarCurso(id) {
-  const indice = catalogo.findIndex(curso => curso.id === id);
-  if (indice === -1) {
-    throw new Error("No existe un curso con ese ID");
+function validarEntero(valor, minimo = 0) {
+  if (!Number.isInteger(valor) || valor < minimo) {
+    throw new Error(`Se requiere un entero mayor o igual a ${minimo}`);
   }
-  return catalogo.splice(indice, 1)[0];
+  return valor;
 }
 
-function promedioProgreso() {
-  if (catalogo.length === 0) return 0;
-  const suma = catalogo.reduce(
-    (total, curso) => total + calcularProgreso(curso), 0
-  );
-  return Number((suma / catalogo.length).toFixed(2));
+function listar() {
+  return cursos.map(curso => ({ ...curso }));
 }
+
+function agregar(nombre, precio, cupos) {
+  nombre = validarTexto(nombre);
+  if (typeof precio !== 'number' || !Number.isFinite(precio) || precio < 0) {
+    throw new Error('El precio debe ser un número válido no negativo');
+  }
+  validarEntero(cupos);
+  const id = cursos.reduce((max, c) => Math.max(max, c.id), 0) + 1;
+  const nuevo = { id, nombre, precio, cupos };
+  cursos.push(nuevo);
+  return { ...nuevo };
+}
+
+function buscar(termino) {
+  const consulta = validarTexto(termino).toLowerCase();
+  return cursos.filter(c => c.nombre.toLowerCase().includes(consulta))
+    .map(c => ({ ...c }));
+}
+
+function inscribir(id) {
+  validarEntero(id, 1);
+  const curso = cursos.find(c => c.id === id);
+  if (!curso) throw new Error('Curso no encontrado');
+  if (curso.cupos === 0) throw new Error('No quedan cupos');
+  curso.cupos -= 1;
+  return { ...curso };
+}
+
+function estadisticas() {
+  return {
+    cantidad: cursos.length,
+    cuposDisponibles: cursos.reduce((suma, c) => suma + c.cupos, 0),
+    precioPromedio: cursos.length
+      ? cursos.reduce((suma, c) => suma + c.precio, 0) / cursos.length
+      : 0
+  };
+}
+
+async function guardar() {
+  await fs.writeFile(archivo, JSON.stringify(cursos, null, 2), 'utf8');
+  return archivo;
+}
+
+async function cargar() {
+  const contenido = await fs.readFile(archivo, 'utf8');
+  const datos = JSON.parse(contenido);
+  if (!Array.isArray(datos) || !datos.every(c =>
+    c && Number.isInteger(c.id) && c.id > 0 &&
+    typeof c.nombre === 'string' && c.nombre.trim() &&
+    typeof c.precio === 'number' && Number.isFinite(c.precio) && c.precio >= 0 &&
+    Number.isInteger(c.cupos) && c.cupos >= 0
+  ) || new Set(datos.map(c => c.id)).size !== datos.length) {
+    throw new Error('Formato de catálogo inválido');
+  }
+  cursos = datos.map(c => ({ ...c }));
+  return listar();
+}
+
+module.exports = {
+  listar, agregar, buscar, inscribir, estadisticas, guardar, cargar
+};
 ```
 
-Pruebas sugeridas:
+### Paso 2. Inicia REPL en esa carpeta
 
-```javascript
-promedioProgreso()
-eliminarCurso(1)
-promedioProgreso()
+En terminal:
+
+```bash
+node
 ```
 
-Prueba también `eliminarCurso(999)` y explica el error. En este diseño, un catálogo vacío tiene promedio `0` por convención; otra aplicación podría representar la ausencia de datos con `null`.
+### Paso 3. Importa el prototipo
 
----
+```js
+const app = require('./catalogo.js')
+app.listar()
+```
 
-# Evaluación de conocimientos
+**Resultado esperado:** dos cursos con identificadores 1 y 2.
 
-Responde sin consultar la guía:
+### Paso 4. Agrega y busca
 
-1. ¿Qué significa cada letra de REPL?
-2. ¿En qué se diferencia REPL de ejecutar `node app.js`?
-3. ¿Qué comando permite ver la ayuda?
-4. ¿Qué hace `.load archivo.js`?
-5. ¿Qué hace `.save archivo.js`?
-6. ¿Por qué `undefined` no implica necesariamente un error?
-7. ¿Cómo consultarías la versión de Node.js dentro de REPL?
-8. ¿Qué sucede al declarar dos veces la misma variable con `const`?
-9. ¿Para qué sirve `await` en una operación asíncrona?
-10. ¿Por qué conviene trasladar un prototipo REPL a archivos y pruebas?
+```js
+app.agregar('Bases de datos SQL', 75000, 20)
+app.buscar('sql')
+```
 
-**Criterio de aprobación:** responde correctamente al menos 8 de 10 preguntas y completa el proyecto con sus casos de error.
+**Resultado esperado:** un curso SQL con `id: 3`.
 
-### Respuestas breves de comprobación
+### Paso 5. Inscribe un estudiante
 
-1. Read, Eval, Print, Loop.
-2. REPL ejecuta entradas interactivas; `node app.js` ejecuta un archivo.
-3. `.help`.
-4. Carga y evalúa el contenido del archivo.
-5. Guarda las entradas de la sesión en un archivo.
-6. Algunas expresiones o declaraciones no producen un valor que mostrar.
-7. `process.version`.
-8. Se produce un error de declaración duplicada en el mismo contexto.
-9. Permite esperar el resultado de una promesa.
-10. Para organizar, reproducir, probar y mantener el código.
+```js
+app.inscribir(3)
+app.buscar('sql')
+```
 
----
+**Resultado esperado:** el curso SQL tiene 19 cupos.
 
-# Hoja de trucos (Cheatsheet)
+### Paso 6. Consulta estadísticas
 
-| Comando o expresión | Propósito |
+```js
+app.estadisticas()
+```
+
+**Resultado esperado:** `{ cantidad: 3, cuposDisponibles: 39, precioPromedio: 71666.66666666667 }` (la representación decimal puede variar mínimamente).
+
+### Paso 7. Guarda en disco
+
+```js
+await app.guardar()
+```
+
+Verifica `cursos.json` en el directorio. El archivo contiene el estado actualizado.
+
+### Paso 8. Comprueba la persistencia
+
+Sal de REPL con `.exit`, inicia `node` de nuevo e introduce:
+
+```js
+const app2 = require('./catalogo.js')
+app2.listar()      // Estado inicial de dos cursos
+await app2.cargar()
+app2.listar()      // Tres cursos recuperados desde JSON
+```
+
+**Por qué:** al reiniciar Node, las variables en memoria se reinician; el archivo JSON conserva lo que guardaste.
+
+### Paso 9. Prueba errores controlados
+
+```js
+try { app2.inscribir(999) } catch (e) { console.log(e.message) }
+try { app2.agregar('', -1, 2) } catch (e) { console.log(e.message) }
+```
+
+**Resultado esperado:** mensajes de error explicativos, sin modificar el catálogo.
+
+### Paso 10. Comprueba los criterios de aceptación
+
+- [ ] Puedo listar cursos sin modificar accidentalmente los objetos internos.
+- [ ] Puedo agregar cursos con identificadores nuevos.
+- [ ] Puedo buscar ignorando mayúsculas/minúsculas.
+- [ ] Inscribir descuenta exactamente un cupo.
+- [ ] No se permiten cupos negativos ni cursos inexistentes.
+- [ ] Las estadísticas coinciden con los datos.
+- [ ] Guardar y cargar preservan el catálogo.
+- [ ] El proyecto usa solo Node.js, sin paquetes externos.
+
+**Extensiones opcionales:** eliminar cursos, registrar estudiantes, impedir inscripciones duplicadas y escribir pruebas con `node:test`.
+
+## 17. Ejercicios de tres niveles
+
+**Instrucciones:** intenta resolverlos antes de consultar el solucionario. Trabaja en una sesión REPL nueva para evitar colisiones de nombres.
+
+### Nivel básico
+
+**B1. Operaciones:** calcula `(15 + 5) * 3` y `2 ** 5`. Explica ambos resultados.
+
+**B2. Texto:** crea una variable `lenguaje` con valor `'node.js'`; conviértela a mayúsculas y calcula su longitud.
+
+**B3. Arreglos:** dado `[10, 20, 30, 40]`, calcula la suma y filtra los valores mayores que 20.
+
+### Nivel intermedio
+
+**I1. Cursos:** crea un arreglo de tres cursos con nombre y precio. Devuelve solo los nombres y el precio promedio.
+
+**I2. Funciones:** crea una función `precioFinal(precio, descuento)` que rechace descuentos fuera de 0–100 y devuelva el precio con descuento.
+
+**I3. Asincronía:** usa `await` para resolver una promesa que entregue `'completado'` tras 200 ms.
+
+### Nivel avanzado
+
+**A1. Inventario:** crea una función para reservar un cupo; debe fallar si el curso no existe o no tiene cupos.
+
+**A2. Persistencia:** guarda un arreglo en un archivo JSON y vuelve a leerlo con `node:fs/promises`.
+
+**A3. Diseño:** explica cómo transformar el prototipo REPL en una aplicación modular con archivos separados para catálogo, validaciones, almacenamiento y entrada de usuario. Incluye un esquema de dependencias.
+
+## 18. Solucionario paso a paso
+
+### B1. Operaciones
+
+```js
+(15 + 5) * 3 // 60
+2 ** 5       // 32
+```
+
+Primero se resuelve el paréntesis (20) y luego la multiplicación. `**` eleva a una potencia.
+
+### B2. Texto
+
+```js
+const lenguaje = 'node.js'
+lenguaje.toUpperCase() // 'NODE.JS'
+lenguaje.length        // 7
+```
+
+Los métodos de cadena permiten transformar texto; `.length` devuelve la cantidad de caracteres.
+
+### B3. Arreglos
+
+```js
+const numeros = [10, 20, 30, 40]
+numeros.reduce((s, n) => s + n, 0) // 100
+numeros.filter(n => n > 20)       // [30, 40]
+```
+
+`reduce` acumula la suma y `filter` devuelve los elementos que cumplen la condición.
+
+### I1. Cursos
+
+```js
+const lista = [
+  { nombre: 'Node', precio: 80 },
+  { nombre: 'Git', precio: 60 },
+  { nombre: 'SQL', precio: 70 }
+]
+lista.map(c => c.nombre) // ['Node', 'Git', 'SQL']
+lista.reduce((s, c) => s + c.precio, 0) / lista.length // 70
+```
+
+Primero se extraen nombres con `map`; después se suma con `reduce` y se divide entre 3.
+
+### I2. Funciones
+
+```js
+function precioFinal(precio, descuento) {
+  if (!Number.isFinite(precio) || precio < 0) throw new Error('Precio inválido');
+  if (!Number.isFinite(descuento) || descuento < 0 || descuento > 100) {
+    throw new Error('Descuento inválido');
+  }
+  return precio * (1 - descuento / 100);
+}
+precioFinal(100, 20) // 80
+```
+
+La validación impide resultados incoherentes antes de realizar el cálculo.
+
+### I3. Asincronía
+
+```js
+await new Promise(resolve => setTimeout(() => resolve('completado'), 200))
+```
+
+`setTimeout` programa la resolución y `await` entrega el resultado al finalizar la promesa.
+
+### A1. Inventario
+
+```js
+const inventario = [{ id: 1, cupos: 1 }]
+function reservar(id) {
+  const item = inventario.find(c => c.id === id);
+  if (!item) throw new Error('No existe');
+  if (item.cupos <= 0) throw new Error('Sin cupos');
+  item.cupos--;
+  return item.cupos;
+}
+reservar(1) // 0
+try { reservar(1) } catch (e) { e.message } // 'Sin cupos'
+```
+
+Primero se comprueba existencia; luego disponibilidad; solo después se descuenta el cupo.
+
+### A2. Persistencia
+
+```js
+const fsEj = require('node:fs/promises')
+const datosEj = [{ id: 1, nombre: 'Node' }]
+await fsEj.writeFile('ejercicio.json', JSON.stringify(datosEj, null, 2), 'utf8')
+const recuperadosEj = JSON.parse(await fsEj.readFile('ejercicio.json', 'utf8'))
+recuperadosEj
+```
+
+`JSON.stringify` convierte objetos a texto; `JSON.parse` reconstruye los datos al leerlos.
+
+### A3. Diseño
+
+```text
+app.js (entrada / interfaz)
+  └── catalogo.js (operaciones del negocio)
+        ├── validaciones.js (reglas de entrada)
+        └── almacenamiento.js (leer y guardar JSON)
+```
+
+La separación reduce acoplamiento: la lógica del catálogo no necesita saber cómo se imprimen los mensajes ni cómo se obtienen los datos del usuario. Cada archivo exporta sus funciones y puede probarse por separado.
+
+## 19. Evaluación
+
+**Puntuación:** 100 puntos. Intenta responder sin consultar las secciones anteriores.
+
+### Parte A: selección y conceptos (40 puntos; 5 cada uno)
+
+1. ¿Qué significa REPL? **A)** Read–Eval–Print–Loop **B)** Run–Export–Push–Load **C)** Read–Edit–Parse–Link.
+2. ¿Qué comando muestra ayuda? **A)** `.load` **B)** `.help` **C)** `.editor`.
+3. ¿Qué comando sale de REPL? **A)** `.exit` **B)** `.clear` **C)** `.save`.
+4. ¿Qué devuelve `[1, 2, 3].map(n => n * 2)`? **A)** `[2, 4, 6]` **B)** `6` **C)** `[1, 2, 3]`.
+5. ¿Cuál es el propósito de `await`? **A)** Declarar una clase **B)** Esperar el resultado de una promesa **C)** Salir de Node.
+6. ¿Dónde existe normalmente `document`? **A)** En el navegador **B)** En cualquier proceso Node **C)** En `node:os`.
+7. ¿Qué comando ejecuta un archivo desde la terminal? **A)** `node app.js` **B)** `.save app.js` **C)** `npm app.js`.
+8. ¿Qué método convierte un objeto en texto JSON? **A)** `JSON.parse` **B)** `JSON.stringify` **C)** `Object.keys`.
+
+### Parte B: práctica (40 puntos; 10 cada una)
+
+9. Escribe una función `doble(n)` y ejecútala con 21.
+10. Filtra precios mayores que 50 de `[20, 55, 80, 40]`.
+11. Escribe un objeto a un archivo JSON usando una API de promesas.
+12. Explica cómo recuperar un prototipo después de cerrar REPL.
+
+### Parte C: proyecto (20 puntos)
+
+13. Ejecuta el proyecto integrador, agrega un curso, inscribe un estudiante, guarda el catálogo y comprueba la recuperación tras reiniciar REPL. Entrega los comandos utilizados y una captura o transcripción de los resultados.
+
+### Clave y criterios de calificación
+
+- **1–8:** A, B, A, A, B, A, A, B (5 puntos cada una).
+- **9:** `const doble = n => n * 2; doble(21)` devuelve `42` (10 puntos).
+- **10:** `[20,55,80,40].filter(n => n > 50)` devuelve `[55,80]` (10 puntos).
+- **11:** usar `require('node:fs/promises')`, `JSON.stringify` y `await fs.writeFile(...)` (10 puntos).
+- **12:** guardar el código en `.js` y/o los datos en JSON; reiniciar, importar el archivo y cargar datos (10 puntos).
+- **13:** agrega (4), inscribe (4), guarda (4), recupera tras reinicio (4) y documenta evidencia (4).
+
+**Interpretación:** 90–100 excelente; 75–89 competente; 60–74 requiere refuerzo; menos de 60 repasar y repetir el laboratorio.
+
+## 20. Hoja de trucos
+
+| Objetivo | Comando o ejemplo |
 |---|---|
-| `node` | Inicia el REPL. |
-| `.help` | Muestra la ayuda. |
-| `.exit` | Cierra el REPL. |
-| `.break` | Cancela una entrada incompleta. |
-| `.clear` | Reinicia el contexto. |
-| `.editor` | Abre edición multilínea. |
-| `.save archivo.js` | Guarda entradas de la sesión. |
-| `.load archivo.js` | Carga y ejecuta un archivo. |
-| `process.version` | Consulta la versión de Node.js. |
-| `process.cwd()` | Muestra el directorio de trabajo. |
-| `require("node:os")` | Carga un módulo nativo desde el REPL CommonJS. |
-| `await import("node:fs/promises")` | Importa dinámicamente un módulo. |
-| `Ctrl+C` dos veces | Sale del REPL en la interfaz habitual. |
+| Iniciar REPL | `node` (terminal) |
+| Salir | `.exit` |
+| Ayuda | `.help` |
+| Cancelar multilínea | `.break` |
+| Reiniciar contexto | `.clear` |
+| Editar bloque | `.editor` |
+| Guardar entradas | `.save prueba.js` |
+| Cargar archivo | `.load prueba.js` |
+| Ver versión | `process.version` |
+| Ver carpeta | `process.cwd()` |
+| Importar módulo nativo | `require('node:os')` |
+| Crear arreglo transformado | `datos.map(x => x * 2)` |
+| Filtrar arreglo | `datos.filter(x => x > 10)` |
+| Buscar elemento | `datos.find(x => x.id === 1)` |
+| Sumar elementos | `datos.reduce((a, b) => a + b, 0)` |
+| Esperar promesa | `await Promise.resolve(10)` |
+| Convertir a JSON | `JSON.stringify(valor, null, 2)` |
+| Leer JSON | `JSON.parse(texto)` |
+| Ejecutar archivo | `node archivo.js` (terminal) |
 
----
+## 21. Resumen técnico
 
-# Resumen técnico
+El **REPL de Node.js** ejecuta JavaScript de forma interactiva y permite inspeccionar resultados sin crear archivos para cada prueba. Su ciclo consiste en leer, evaluar, imprimir y repetir. Resulta especialmente útil para explorar expresiones, objetos, funciones, módulos nativos y operaciones asíncronas con promesas. Los comandos especiales permiten consultar ayuda, cancelar entradas, editar bloques y guardar o cargar instrucciones.
 
-- **REPL** permite experimentar con JavaScript en Node.js sin crear previamente archivos.
-- El ciclo **Read–Eval–Print–Loop** lee, evalúa, muestra y repite.
-- Los comandos con punto administran la sesión interactiva.
-- Puedes probar funciones, objetos, arreglos, módulos nativos y operaciones asíncronas.
-- REPL no tiene el DOM del navegador y no reemplaza una aplicación estructurada.
-- El proyecto integrador muestra cómo validar la lógica de un catálogo educativo antes de convertirlo en un backend real.
+El REPL **no sustituye** la organización en archivos, las pruebas automatizadas ni la persistencia. En un flujo profesional se utiliza para validar una idea y luego trasladarla a código reproducible y versionado. El proyecto de catálogo demuestra esta transición: la lógica se guarda en `catalogo.js`, se explora desde REPL y los datos se conservan en `cursos.json`.
 
----
+### Checklist final
 
-# Checklist de aprendizaje
+- [ ] Puedo explicar qué significa REPL y describir sus cuatro etapas.
+- [ ] Sé iniciar y terminar una sesión.
+- [ ] Distingo comandos de REPL de instrucciones JavaScript.
+- [ ] Manejo expresiones, variables, funciones, objetos y arreglos.
+- [ ] Uso `.help`, `.exit`, `.clear`, `.break`, `.save`, `.load` y `.editor`.
+- [ ] Comprendo el historial, el autocompletado y el modo multilínea.
+- [ ] Puedo explorar `process` y módulos nativos.
+- [ ] Entiendo promesas y `await` interactivo.
+- [ ] Diferencio REPL, archivos Node y consola del navegador.
+- [ ] Terminé el laboratorio guiado y validé sus resultados.
+- [ ] Ejecuté el catálogo, guardé datos y los recuperé.
+- [ ] Resolví los nueve ejercicios y revisé la evaluación.
 
-- [ ] Sé iniciar y cerrar REPL.
-- [ ] Comprendo el ciclo Read–Eval–Print–Loop.
-- [ ] Puedo usar variables, funciones, objetos y arreglos.
-- [ ] Conozco los comandos especiales más importantes.
-- [ ] Sé usar `.load` y `.save`.
-- [ ] Distingo REPL, Node.js ejecutando archivos y la consola del navegador.
-- [ ] Completé los ejercicios de tres niveles.
-- [ ] Ejecuté y comprobé el proyecto integrador.
-- [ ] Documenté los errores y sus soluciones.
-
-**Siguiente tema sugerido:** npm y `package.json`, o el siguiente tema que corresponda en el índice definitivo del Nivel 1.
+**Siguiente tema sugerido:** ejecución de scripts, argumentos de línea de comandos y depuración de aplicaciones Node.js.

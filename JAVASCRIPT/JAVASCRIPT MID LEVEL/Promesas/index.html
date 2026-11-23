@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · ASINCRONÍA</span><div class="brand-title"><span>🤝</span><span>Promesas (Promise)</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -72,11 +72,11 @@ p.then(res => console.log(res)).catch(err => console.error(err));</code></pre></
             <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Significa que la operación asíncrona falló. La promesa ahora tiene una <strong>razón de rechazo</strong> (usualmente un objeto de error).</p>
 <div class="callout callout-tip">[!IMPORTANT]</div>
 <div class="callout callout-tip">Una promesa es <strong>inmutable</strong> una vez que cambia de estado (se resuelve o se rechaza). No puede cambiar de <code>fulfilled</code> a <code>rejected</code> ni viceversa.</div>
-<p style="margin-bottom:8px;line-height:1.6;"># 🔧 ANATOMÍA DE UNA PROMESA</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🔧 ANATOMÍA DE UNA PROMESA</h3>
 <p style="margin-bottom:8px;line-height:1.6;">La estructura básica se compone de dos fases:</p>
 <p style="margin-bottom:8px;line-height:1.6;">1. <strong>La Creación</strong>: Definir la lógica asíncrona.</p>
 <p style="margin-bottom:8px;line-height:1.6;">2. <strong>El Consumo</strong>: Escuchar el resultado de esa lógica.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 🛠️ CREACIÓN DE UNA PROMESA</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🛠️ CREACIÓN DE UNA PROMESA</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Para crear una promesa se utiliza el constructor de la clase <code>Promise</code>.</p>
 <pre class="code-block"><code>const miPromesa = new Promise((resolve, reject) =&gt; {
     // Aquí dentro se realiza la tarea asíncrona...
@@ -121,15 +121,29 @@ p.then(res => console.log(res)).catch(err => console.error(err));</code></pre></
     });</code></pre></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Tip:</strong> Usa <code>Promise.all([p1, p2])</code> para ejecutar varias promesas en paralelo.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Promesas (Promise)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Promesas">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · PROMISE STATES</span><h2 class="slide-title">🎛️ Simulador de Estados de una <code>Promise</code></h2><p class="slide-lead">Simula una promesa que se resuelve o se rechaza y observa qué manejador se activa.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Resultado simulado</label><select id="prRes"><option value="ok">resolve() → Fulfilled</option><option value="err">reject() → Rejected</option></select></div>
+      <div class="sim-control"><label>Latencia (ms) <span id="prMsVal">400ms</span></label><input type="range" id="prMs" min="100" max="1200" step="100" value="400" /></div>
+      <div class="sim-control"><button type="button" id="prRun" class="preset-btn active" style="width:100%;">▶ Lanzar Promesa</button></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;justify-content:center;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Promesas (Promise)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok=".catch() maneja cualquier error o reject() de la cadena." data-err=".catch() captura los errores de la promesa."><div class="quiz-q-title">1. ¿Qué método captura el rechazo (error) de una Promesa?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">.catch()</button><button class="quiz-option" data-opt="b">.then()</button><button class="quiz-option" data-opt="c">.resolve()</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Promesas (Promise)">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Promesas (Promise)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;Cargando promesa...&lt;/div&gt;
 &lt;script&gt;
   new Promise(res =&gt; setTimeout(() =&gt; res(&#x27;✅ Promesa resuelta en 600ms&#x27;), 600))
@@ -140,11 +154,10 @@ p.then(res => console.log(res)).catch(err => console.error(err));</code></pre></
     .then(m =&gt; document.getElementById(&#x27;out&#x27;).textContent = m);
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -152,5 +165,24 @@ p.then(res => console.log(res)).catch(err => console.error(err));</code></pre></
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const res = document.getElementById('prRes'), ms = document.getElementById('prMs'), msVal = document.getElementById('prMsVal'), btn = document.getElementById('prRun');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function run() {
+        const delay = Number(ms.value), ok = res.value === 'ok';
+        msVal.textContent = delay + 'ms';
+        st.innerHTML = '<div style="color:#fbbf24;">⏳ Estado: PENDING (' + delay + 'ms)...</div>';
+        cd.textContent = `new Promise((resolve, reject) => {
+  setTimeout(() => ${ok ? 'resolve("Datos OK")' : 'reject("Error de red")'}, ${delay});
+}).then(...).catch(...).finally(...);`;
+        new Promise((resolve, reject) => setTimeout(() => ok ? resolve('Datos recibidos ✅') : reject('Fallo en servidor ❌'), delay))
+          .then(v => { st.innerHTML = '<div style="color:#00ff88;font-weight:700;">✅ FULFILLED (.then): ' + v + '</div>'; })
+          .catch(e => { st.innerHTML = '<div style="color:#ff3358;font-weight:700;">❌ REJECTED (.catch): ' + e + '</div>'; })
+          .finally(() => { st.innerHTML += '<div style="color:#94a3b8;">🏁 .finally() ejecutado siempre.</div>'; });
+      }
+      btn.addEventListener('click', run); [res, ms].forEach(e => e.addEventListener('input', run)); run();
+        })();
+    </script>
 </body>
 </html>

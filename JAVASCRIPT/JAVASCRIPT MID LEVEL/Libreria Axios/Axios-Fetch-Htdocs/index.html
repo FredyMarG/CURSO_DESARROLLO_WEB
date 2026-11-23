@@ -1,28 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f5f7fb">
-    <meta name="description" content="Compara Fetch y Axios con una petición POST interactiva en JavaScript.">
-    <link rel="stylesheet" href="style.css">
-    <title>Axios + Fetch | Peticiones HTTP</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Axios vs Fetch Htdocs (Comparativa POST) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js" defer></script>
+    <script src="main.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%A1%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <main class="page-shell">
-        <header class="topbar">
-            <a class="brand" href="#" aria-label="Axios y Fetch, inicio">
-                <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
-                <span>Axios <span class="brand-light">+</span> Fetch</span>
-            </a>
-            <span class="topbar-label">
-                <span class="online-dot"></span>
-                Laboratorio HTTP
-            </span>
-        </header>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-        <aside class="hosting-notice" role="note" aria-label="Instrucciones para visualizar la información">
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">AXIOS + FETCH · HTDOCS</span>
+            <div class="brand-title"><span>📡</span><span>Axios vs Fetch Htdocs (Comparativa POST)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Libreria Axios</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Axios vs Fetch Htdocs (Comparativa POST)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Fetch vs Axios</span><span class="badge badge-cyan">POST JSON</span><span class="badge badge-cyan">Error Handling</span><span class="badge badge-cyan">JSONPlaceholder</span></div>
+                <h1 class="hero-title">Libreria Axios:<br /><span class="gradient-text">Axios vs Fetch Htdocs (Comparativa POST)</span></h1>
+                <p class="hero-subtitle">Compara cara a cara una misma petición POST hecha con Fetch nativo y con Axios en un entorno htdocs.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="2" data-title="Comparativa Práctica: Fetch vs Axios">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">Comparativa Práctica: Fetch vs Axios</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">Ambos clientes envían peticiones HTTP asíncronas usando Promesas, pero difieren en ergonomía:</p>
+      <ul class="styled-list">
+        <li><strong>Fetch:</strong> nativo del navegador; requiere <code>JSON.stringify()</code>, validar <code>if (!res.ok)</code> y llamar a <code>res.json()</code>.</li>
+        <li><strong>Axios:</strong> librería externa; serializa el objeto en <code>POST</code>, parsea en <code>res.data</code> y rechaza errores <code>4xx/5xx</code> automáticamente.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>⚖️ Analogía manual vs automático:</strong> Fetch es conducción manual (tú controlas cada paso); Axios es transmisión automática (se encarga del JSON y los errores HTTP).</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Misma petición en Fetch vs Axios">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Misma petición en Fetch vs Axios</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>// Fetch
+const res = await fetch(url, { method: &#x27;POST&#x27;, headers: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; }, body: JSON.stringify(datos) });
+if (!res.ok) throw new Error(res.status);
+const dataFetch = await res.json();
+
+// Axios
+const { data: dataAxios } = await axios.post(url, datos);</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td>Instalación</td><td>Fetch: Nativo (0 KB) | Axios: CDN o <code>npm i axios</code></td></tr><tr><td>Cuerpo JSON</td><td>Fetch: <code>JSON.stringify()</code> | Axios: Automático</td></tr><tr><td>Lectura JSON</td><td>Fetch: <code>await res.json()</code> | Axios: <code>res.data</code></td></tr><tr><td>Errores 404/500</td><td>Fetch: Chequear <code>res.ok</code> | Axios: Va directo a <code>catch</code></td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Elige según el proyecto:</strong> Para scripts pequeños sin dependencias usa <code>fetch()</code>; para apps medianas/grandes con interceptores y timeout usa <code>Axios</code>.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ No olvides validar res.ok en Fetch:</strong> Es el error más común al pasar de Axios a Fetch.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Comparador Interactivo Axios vs Fetch">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Comparador Interactivo Axios vs Fetch</h2></div>
+            <aside class="hosting-notice" role="note" aria-label="Instrucciones para visualizar la información">
             <span class="hosting-notice-icon" aria-hidden="true">i</span>
             <p>
                 <strong>Para visualizar la información:</strong> guarda esta carpeta dentro de
@@ -195,13 +264,69 @@
             </div>
         </section>
 
-        <footer class="footer">
-            <span>Hecho para aprender, una petición a la vez.</span>
-            <span>HTML · CSS · JavaScript · Axios</span>
-        </footer>
+        
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Axios vs Fetch Htdocs (Comparativa POST)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: fetch() es nativo del navegador." data-err="Axios es una librería externa; Fetch viene nativo.">
+                    <div class="quiz-q-title">1. ¿Cuál de los dos viene integrado de forma nativa en el navegador sin librerías externas?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Fetch API</button>
+                        <button class="quiz-option" data-opt="b">Axios</button>
+                        <button class="quiz-option" data-opt="c">Ambos requieren CDN</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: en Fetch el parseo es una segunda promesa con res.json()." data-err="res.data es de Axios; en Fetch se usa await res.json().">
+                    <div class="quiz-q-title">2. En Fetch, ¿qué debes llamar para leer el cuerpo de la respuesta como objeto JS?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">res.data</button>
+                        <button class="quiz-option" data-opt="b">res.body</button>
+                        <button class="quiz-option" data-opt="c">await res.json()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Axios vs Fetch Htdocs (Comparativa POST)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const fake = new Response(JSON.stringify({ cliente: &#x27;Fetch&#x27;, ok: true }));
+  fake.json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Fetch parsed: &#x27; + JSON.stringify(d));
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const fake = new Response(JSON.stringify({ cliente: &#x27;Fetch&#x27;, ok: true }));
+  fake.json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Fetch parsed: &#x27; + JSON.stringify(d));
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Libreria Axios</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/npm/axios@1/dist/axios.min.js"></script>
-    <script src="main.js" defer></script>
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

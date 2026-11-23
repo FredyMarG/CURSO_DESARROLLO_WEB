@@ -266,11 +266,65 @@
     // Inyecta el código HTML/CSS actual del editor dentro del iframe aislado
     function updatePreview() { // Declara función
         if (labEditor && labPreview) { // Evalúa condición
-            labPreview.srcdoc = labEditor.value; // Asigna valor
+            const raw = labEditor.value || ''; // Obtiene el código actual del editor
+            // Detecta si el ejemplo define un fondo claro en body/html para elegir color de texto legible
+            const hasLightBg = /(?:body|html)\s*\{[^}]*background(?:-color)?\s*:\s*(?:#f|#e|#d|#c|#fff|white|rgb\(\s*2)/i.test(raw);
+            const textColor = hasLightBg ? '#0f172a' : '#f8fafc';
+            const baseStyle = `<style>html,body{color:${textColor};font-family:system-ui,-apple-system,sans-serif;margin:0;}code{background:rgba(56,189,248,0.15);color:#38bdf8;padding:2px 6px;border-radius:4px;}</style>`;
+            labPreview.srcdoc = baseStyle + raw; // Asigna valor con estilo base legible
         }
     }
 
     if (labEditor && labPreview) { // Evalúa condición
+        const initialCode = labEditor.value; // Guarda el código inicial para restaurar
+        const labSplit = labEditor.closest('.lab-split'); // Contenedor de editor + vista previa
+        let runStatusEl = null; // Referencia al indicador de estado de ejecución
+
+        // Crea la barra superior de ejecución si aún no existe
+        if (labSplit && labSplit.parentNode && !labSplit.parentNode.querySelector('.lab-actions-bar')) {
+            const bar = document.createElement('div');
+            bar.className = 'lab-actions-bar';
+            bar.innerHTML = `
+                <div class="lab-actions-group">
+                    <button type="button" class="lab-run-btn" title="Ejecutar código (Ctrl + Enter)">▶ Ejecutar Código</button>
+                    <button type="button" class="lab-reset-btn" title="Restaurar ejemplo original">↻ Restaurar</button>
+                </div>
+                <span class="lab-run-status">● Vista en vivo · Ctrl + Enter</span>
+            `;
+            labSplit.parentNode.insertBefore(bar, labSplit);
+            runStatusEl = bar.querySelector('.lab-run-status');
+
+            bar.querySelector('.lab-run-btn').addEventListener('click', () => {
+                updatePreview();
+                SoundFX.beep(520, 680, 0.1);
+                if (runStatusEl) {
+                    runStatusEl.textContent = `✓ Ejecutado (${new Date().toLocaleTimeString()})`;
+                }
+            });
+
+            bar.querySelector('.lab-reset-btn').addEventListener('click', () => {
+                const activePreset = document.querySelector('.preset-btn.active[data-code]');
+                labEditor.value = activePreset ? activePreset.dataset.code : initialCode;
+                updatePreview();
+                SoundFX.beep(420, 520, 0.08);
+                if (runStatusEl) {
+                    runStatusEl.textContent = '↻ Código restaurado y ejecutado';
+                }
+            });
+        }
+
+        // Atajo Ctrl+Enter / Cmd+Enter dentro del editor para ejecutar manualmente
+        labEditor.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                updatePreview();
+                SoundFX.beep(520, 680, 0.1);
+                if (runStatusEl) {
+                    runStatusEl.textContent = `✓ Ejecutado (${new Date().toLocaleTimeString()})`;
+                }
+            }
+        });
+
         // Actualiza la vista previa en cada pulsación de tecla dentro del editor
         labEditor.addEventListener('input', updatePreview); // Registra escuchador de eventos
         // Conecta cada botón de ejemplo para reemplazar el código del editor

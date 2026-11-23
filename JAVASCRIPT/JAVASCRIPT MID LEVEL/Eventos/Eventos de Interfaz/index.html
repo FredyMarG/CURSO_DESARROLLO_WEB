@@ -1,50 +1,194 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Eventos de Interfaz</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos de Interfaz (UI) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%AF%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Eventos del DOM</span>
-            <h1>Eventos de Interfaz: <code>select</code>, <code>resize</code>, <code>scroll</code> &amp; <code>error</code></h1>
-            <p class="subtitle">Prueba selección de texto, redimensionamiento de ventana, scroll pasivo y manejo de error en imágenes.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">EVENTOS DEL DOM · INTERFAZ</span>
+            <div class="brand-title"><span>🎯</span><span>Eventos de Interfaz (UI)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
 
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. Evento <code>select</code> &amp; <code>focus</code>/<code>blur</code></h2>
-            <p class="desc">Selecciona parte del texto dentro del campo para capturar el fragmento exacto.</p>
-            <input id="selectInput" type="text" value="Selecciona cualquier palabra de esta frase con el mouse">
-            <div id="selectOutput" class="output" aria-live="polite">Texto seleccionado: (ninguno)</div>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Eventos de Interfaz (UI)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">select</span><span class="badge badge-cyan">resize</span><span class="badge badge-cyan">scroll</span><span class="badge badge-cyan">error</span></div>
+                <h1 class="hero-title">Eventos del DOM:<br /><span class="gradient-text">Eventos de Interfaz (UI)</span></h1>
+                <p class="hero-subtitle">Reacciona a cambios de ventana, desplazamiento, selección de texto y fallos al cargar recursos multimedia.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
+            </div>
         </section>
 
-        <section class="card">
-            <h2>2. Evento <code>resize</code> &amp; <code>scroll</code> Pasivo</h2>
-            <p class="desc">Redimensiona la ventana o haz scroll en el recuadro inferior.</p>
-            <div class="output" id="resizeOutput">Viewport: —</div>
-            <div id="scrollBox" class="scroll-box">
-                <div class="scroll-inner">Desplázate verticalmente aquí para medir <code>scrollTop</code> en tiempo real.</div>
-            </div>
-            <div class="output" id="scrollOutput">Scroll interno: 0 px</div>
+        <section class="slide" data-slide="2" data-title="¿Qué son los Eventos de Interfaz?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Qué son los Eventos de Interfaz?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">Son eventos disparados por el navegador ante cambios en la ventana, el scroll, el foco o la carga de recursos:</p>
+      <ul class="styled-list">
+        <li><strong><code>resize</code>:</strong> se dispara cuando cambia el tamaño del viewport (<code>window.innerWidth</code>).</li>
+        <li><strong><code>scroll</code>:</strong> ocurre al desplazarse por la página o un contenedor con <code>overflow</code>.</li>
+        <li><strong><code>select</code>:</strong> se activa cuando el usuario selecciona texto dentro de un <code>&lt;input&gt;</code> o <code>&lt;textarea&gt;</code>.</li>
+        <li><strong><code>error</code> / <code>load</code>:</strong> permiten detectar si una imagen o script cargó bien o falló para aplicar un <em>fallback</em>.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>🎛️ Analogía del tablero de un auto:</strong> No los dispara un clic directo, sino el entorno cambiando: la velocidad (<code>scroll</code>), el tamaño de pantalla (<code>resize</code>) o una alerta de falla (<code>error</code>).</div>
         </section>
 
-        <section class="card full-width">
-            <h2>3. Evento <code>error</code> en Carga de Imagen</h2>
-            <p class="desc">Simula una ruta rota para observar cómo el evento <code>error</code> permite aplicar un fallback limpio.</p>
-            <div class="btn-row">
-                <button type="button" id="btnBrokenImg" class="btn primary">Cargar URL Rota</button>
-                <span id="imgStatus" class="status-text">Esperando prueba...</span>
+        <section class="slide" data-slide="3" data-title="Sintaxis y Listeners Pasivos">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis y Listeners Pasivos</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>// Scroll fluido sin bloquear el hilo de renderizado
+scrollBox.addEventListener(&#x27;scroll&#x27;, () =&gt; {
+  console.log(&#x27;scrollTop:&#x27;, scrollBox.scrollTop);
+}, { passive: true });
+
+// Capturar texto seleccionado en un input
+input.addEventListener(&#x27;select&#x27;, (e) =&gt; {
+  const texto = e.target.value.slice(e.target.selectionStart, e.target.selectionEnd);
+  console.log(&#x27;Seleccionado:&#x27;, texto);
+});
+
+// Fallback elegante si falla una imagen
+img.addEventListener(&#x27;error&#x27;, () =&gt; {
+  img.src = &#x27;fallback.png&#x27;;
+});</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>select</code></td><td>Selección de texto en input/textarea (<code>selectionStart/End</code>)</td></tr><tr><td><code>resize</code></td><td>Cambio de dimensiones de <code>window</code></td></tr><tr><td><code>scroll</code></td><td>Desplazamiento vertical u horizontal (usar <code>{ passive: true }</code>)</td></tr><tr><td><code>error</code></td><td>Fallo al cargar imagen, iframe o recurso externo</td></tr></tbody>
+                </table>
             </div>
-            <img id="demoImg" alt="Vista previa de prueba" hidden>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Rendimiento en scroll/touch:</strong> Usa siempre <code>{ passive: true }</code> cuando no vayas a llamar a <code>e.preventDefault()</code>; así el navegador desplaza a 60 FPS sin esperar a tu JavaScript.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Cuidado con resize y scroll:</strong> Pueden dispararse decenas de veces por segundo. Evita operaciones pesadas en el DOM dentro de estos listeners o usa <em>debounce</em>.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador de Eventos de Interfaz">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador de Eventos de Interfaz</h2></div>
+            <div class="grid-layout" style="padding:0;">
+      <section class="card">
+        <h2>1. Evento <code>select</code> &amp; <code>focus</code>/<code>blur</code></h2>
+        <p class="desc">Selecciona parte del texto dentro del campo para capturar el fragmento exacto.</p>
+        <input id="selectInput" type="text" value="Selecciona cualquier palabra de esta frase con el mouse">
+        <div id="selectOutput" class="output" aria-live="polite">Texto seleccionado: (ninguno)</div>
+      </section>
+      <section class="card">
+        <h2>2. Evento <code>resize</code> &amp; <code>scroll</code> Pasivo</h2>
+        <p class="desc">Redimensiona la ventana o haz scroll en el recuadro inferior.</p>
+        <div class="output" id="resizeOutput">Viewport: —</div>
+        <div id="scrollBox" class="scroll-box"><div class="scroll-inner">Desplázate verticalmente aquí para medir <code>scrollTop</code> en tiempo real.</div></div>
+        <div class="output" id="scrollOutput">Scroll interno: 0 px</div>
+      </section>
+      <section class="card full-width">
+        <h2>3. Evento <code>error</code> en Carga de Imagen</h2>
+        <p class="desc">Simula una ruta rota para observar cómo el evento <code>error</code> permite aplicar un fallback limpio.</p>
+        <div class="btn-row"><button type="button" id="btnBrokenImg" class="btn primary">Cargar URL Rota</button><span id="imgStatus" class="status-text">Esperando prueba...</span></div>
+        <img id="demoImg" alt="Vista previa de prueba" hidden>
+      </section>
+    </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Interfaz (UI)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: passive: true avisa al navegador que no cancelarás el scroll." data-err="La opción de rendimiento para scroll es { passive: true }.">
+                    <div class="quiz-q-title">1. ¿Qué opción mejora el rendimiento del navegador al escuchar eventos <code>scroll</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">{ once: true }</button>
+                        <button class="quiz-option" data-opt="b">{ capture: true }</button>
+                        <button class="quiz-option" data-opt="c">{ passive: true }</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: selectionStart y selectionEnd delimitan el texto seleccionado." data-err="selectionStart y selectionEnd marcan los índices de selección en el input.">
+                    <div class="quiz-q-title">2. ¿Qué propiedades de un <code>&lt;input&gt;</code> indican el inicio y fin del texto seleccionado?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">selectionStart y selectionEnd</button>
+                        <button class="quiz-option" data-opt="b">scrollTop y scrollLeft</button>
+                        <button class="quiz-option" data-opt="c">offsetX y offsetY</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Interfaz (UI)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;input id=&quot;txt&quot; value=&quot;Selecciona parte de este texto&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Selecciona texto arriba...&lt;/div&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;txt&#x27;).addEventListener(&#x27;select&#x27;, e =&gt; {
+    const sub = e.target.value.slice(e.target.selectionStart, e.target.selectionEnd);
+    document.getElementById(&#x27;out&#x27;).textContent = &#x27;Seleccionado: &quot;&#x27; + sub + &#x27;&quot;&#x27;;
+  });
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;input id=&quot;txt&quot; value=&quot;Selecciona parte de este texto&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Selecciona texto arriba...&lt;/div&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;txt&#x27;).addEventListener(&#x27;select&#x27;, e =&gt; {
+    const sub = e.target.value.slice(e.target.selectionStart, e.target.selectionEnd);
+    document.getElementById(&#x27;out&#x27;).textContent = &#x27;Seleccionado: &quot;&#x27; + sub + &#x27;&quot;&#x27;;
+  });
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

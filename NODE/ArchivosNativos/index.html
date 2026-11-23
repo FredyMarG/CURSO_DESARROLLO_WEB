@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 06: Módulos Nativos y Archivos en Node.js — node:fs/promises, node:path, node:os, node:events y node:crypto." />
+    <title>Módulos Nativos y Archivos en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · ARCHIVOS NATIVOS</span>
+            <div class="brand-title"><span>📁</span><span>Módulos Nativos y Archivos</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Módulos Nativos y Archivos">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 06 · APIs Nativas</span>
+                    <span class="badge badge-cyan">node:fs · node:path · node:os</span>
+                    <span class="badge badge-purple">node:events · node:crypto</span>
+                </div>
+                <h1 class="hero-title">Módulos Nativos <br /><span class="gradient-text">y Archivos</span></h1>
+                <p class="hero-subtitle">
+                    Aprende a usar las bibliotecas integradas de Node.js sin dependencias externas: manipula archivos y JSON con <code>node:fs/promises</code>, construye rutas portables con <code>node:path</code>, consulta el sistema con <code>node:os</code>, emite eventos con <code>node:events</code> y genera UUID/hashes con <code>node:crypto</code>.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📄</div>
+                        <h3>1. node:fs/promises</h3>
+                        <p>Leer, escribir, crear directorios y manejar errores <code>ENOENT</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🧭</div>
+                        <h3>2. node:path y ESM</h3>
+                        <p><code>join</code>, <code>resolve</code>, <code>extname</code> y <code>import.meta.url</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🔔</div>
+                        <h3>3. events y crypto</h3>
+                        <p><code>EventEmitter</code>, <code>randomUUID()</code> y <code>createHash('sha256')</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba rutas, eventos, hashes y almacenamiento JSON en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: NODE:FS -->
+        <section class="slide" data-slide="2" data-title="node:fs — Sistema de Archivos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · LECTURA Y ESCRITURA</span>
+                <h2 class="slide-title"><code>node:fs/promises</code>: Archivos, Directorios y JSON</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:12px;">
+                    Usa el prefijo <code>node:</code> para importar módulos nativos explícitamente. Para E/S no bloqueante en aplicaciones modernas, prefiere <code>node:fs/promises</code>.
+                </p>
+                <pre class="code-block"><code>import { mkdir, writeFile, readFile } from 'node:fs/promises';
+
+await mkdir('datos', { recursive: true });
+const cursos = [{ id: 1, titulo: 'Node.js' }];
+await writeFile('datos/cursos.json', JSON.stringify(cursos, null, 2), 'utf8');
+
+try {
+  const texto = await readFile('datos/cursos.json', 'utf8');
+  console.log(JSON.parse(texto)[0].titulo);
+} catch (error) {
+  if (error.code === 'ENOENT') console.log('El archivo no existe');
+  else throw error;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: NODE:PATH -->
+        <section class="slide" data-slide="3" data-title="node:path — Rutas Portables">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · RUTAS MULTIPLATAFORMA</span>
+                <h2 class="slide-title"><code>node:path</code> y <code>import.meta.url</code> en ESM</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Método</th><th>Función</th><th>Ejemplo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>path.join()</code></td><td>Une segmentos normalizando separadores (<code>\</code> o <code>/</code>)</td><td><code>path.join('datos', 'cursos.json')</code></td></tr>
+                        <tr><td><code>path.resolve()</code></td><td>Genera ruta absoluta desde el directorio actual</td><td><code>path.resolve('datos', 'cursos.json')</code></td></tr>
+                        <tr><td><code>path.basename() / extname()</code></td><td>Extrae el nombre final o la extensión</td><td><code>.md</code>, <code>leccion.md</code></td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+
+const archivoActual = fileURLToPath(import.meta.url);
+const carpetaActual = path.dirname(archivoActual);
+console.log(path.join(carpetaActual, 'datos', 'cursos.json'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: NODE:OS -->
+        <section class="slide" data-slide="4" data-title="node:os — Información del Sistema">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · DIAGNÓSTICO DEL ENTORNO</span>
+                <h2 class="slide-title"><code>node:os</code>: Plataforma, Memoria y Carpetas Temporales</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>import os from 'node:os';
+
+console.log('Sistema:', os.platform());           // 'win32', 'linux', 'darwin'
+console.log('Arquitectura:', os.arch());          // 'x64', 'arm64'
+console.log('Memoria libre (MB):', Math.round(os.freemem() / 1024 ** 2));
+console.log('Directorio temporal:', os.tmpdir());
+console.log('CPUs lógicas:', os.cpus().length);</code></pre>
+                <div class="tip-box">
+                    <strong>💡 Aplicación práctica:</strong> Útil para diagnósticos del proceso o elegir una carpeta temporal segura (<code>os.tmpdir()</code>). Evita registrar información privada del equipo en logs públicos.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: NODE:EVENTS Y NODE:CRYPTO -->
+        <section class="slide" data-slide="5" data-title="node:events y node:crypto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · EVENTOS E IDENTIDAD</span>
+                <h2 class="slide-title"><code>EventEmitter</code> (<code>node:events</code>) y <code>node:crypto</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>import { EventEmitter } from 'node:events';
+import { randomUUID, createHash } from 'node:crypto';
+
+const bus = new EventEmitter();
+bus.once('inicio', () => console.log('Sistema iniciado'));
+bus.on('apunte:creado', (apunte) => console.log('Nuevo apunte:', apunte.id));
+
+bus.emit('inicio');
+bus.emit('apunte:creado', {
+  id: randomUUID(),
+  huella: createHash('sha256').update('Contenido').digest('hex')
+});</code></pre>
+                <div class="tip-box warn">
+                    <strong>⚠️ Seguridad con crypto:</strong> SHA-256 sirve para verificar integridad, <strong>no</strong> para guardar contraseñas. Para contraseñas usa algoritmos de derivación como <code>scrypt</code> con sal única.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS Y SEGURIDAD -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas y Seguridad">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD Y SEGURIDAD</span>
+                <h2 class="slide-title">Buenas Prácticas con Módulos Nativos</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Riesgo o error que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Usar prefijo <code>node:</code> (ej. <code>node:fs/promises</code>)</td><td>Confundir APIs nativas con paquetes de npm</td></tr>
+                        <tr><td>Validar nombres de archivo del usuario</td><td>Ataques de <em>path traversal</em> (<code>../../</code>)</td></tr>
+                        <tr><td>Registrar listener para evento <code>'error'</code> en <code>EventEmitter</code></td><td>Cierre inesperado del proceso Node.js</td></tr>
+                        <tr><td>Manejar <code>ENOENT</code> y JSON inválido con <code>try/catch</code></td><td>Caídas al leer archivos faltantes o corruptos</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Módulos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · APIS NATIVAS</span>
+                <h2 class="slide-title">🎛️ Simulador de <code>fs</code>, <code>path</code>, <code>events</code> y <code>crypto</code></h2>
+                <p class="slide-lead">Explora qué devuelve cada módulo nativo y cómo se combinan en un gestor de apuntes local.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Módulo Nativo</label>
+                        <select id="nativeSimMode">
+                            <option value="fs">node:fs/promises (mkdir + writeFile + ENOENT)</option>
+                            <option value="path">node:path (join, resolve, extname, import.meta.url)</option>
+                            <option value="events">node:events (on, once, emit)</option>
+                            <option value="crypto">node:crypto (randomUUID + SHA-256)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="nativeSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="nativeSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: Archivos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Módulos Nativos y Archivos</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: ENOENT significa Error NO ENTry (archivo o directorio inexistente)." data-err="EADDRINUSE es puerto ocupado y SyntaxError es fallo de parseo; ENOENT indica que la ruta no existe.">
+                    <div class="quiz-q-title">1. ¿Qué código de error lanza <code>readFile()</code> cuando el archivo solicitado no existe?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">ENOENT</button>
+                        <button class="quiz-option" data-opt="b">EADDRINUSE</button>
+                        <button class="quiz-option" data-opt="c">ERR_MODULE_NOT_FOUND</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Exacto: fileURLToPath(import.meta.url) obtiene la ruta del archivo actual en ESM y path.dirname() su carpeta." data-err="__dirname no existe como global en ESM; se obtiene con fileURLToPath(import.meta.url) y path.dirname()." >
+                    <div class="quiz-q-title">2. En ESM (<code>"type": "module"</code>), ¿qué combinación permite obtener la carpeta del archivo actual?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">os.tmpdir() + path.extname()</button>
+                        <button class="quiz-option" data-opt="b">fileURLToPath(import.meta.url) + path.dirname()</button>
+                        <button class="quiz-option" data-opt="c">crypto.randomUUID() + path.join()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: bus.once() registra un listener que se ejecuta solo la primera vez que se emite el evento." data-err="bus.on() se ejecuta en cada emisión; bus.once() se auto-elimina tras la primera ejecución.">
+                    <div class="quiz-q-title">3. ¿Qué método de <code>EventEmitter</code> ejecuta un listener una única vez?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">bus.emit()</button>
+                        <button class="quiz-option" data-opt="b">bus.on()</button>
+                        <button class="quiz-option" data-opt="c">bus.once()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Módulos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Módulos Nativos</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación del gestor de apuntes con EventEmitter y UUID
+  class MiniBus {
+    constructor() { this.listeners = {}; }
+    on(ev, fn) { (this.listeners[ev] ??= []).push(fn); }
+    emit(ev, data) { (this.listeners[ev] || []).forEach(fn =&gt; fn(data)); }
+  }
+
+  const bus = new MiniBus();
+  const logs = [];
+  bus.on(&#x27;apunte:creado&#x27;, a =&gt; logs.push(`🔔 Evento apunte:creado → [${a.id.slice(0, 8)}] ${a.titulo}`));
+
+  const nuevoApunte = { id: crypto.randomUUID(), titulo: &#x27;Guía de node:fs&#x27; };
+  bus.emit(&#x27;apunte:creado&#x27;, nuevoApunte);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;) +
+    `&lt;div&gt;📦 JSON guardado: ${JSON.stringify(nuevoApunte)}&lt;/div&gt;`;
+&lt;/script&gt;">Gestor de Apuntes + Eventos</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de path.join y sanitización básica de rutas
+  function joinSafe(base, nombreArchivo) {
+    if (nombreArchivo.includes(&#x27;..&#x27;) || nombreArchivo.includes(&#x27;/&#x27;) || nombreArchivo.includes(&#x27;\\\\&#x27;)) {
+      throw new Error(&#x27;Ruta insegura detectada (path traversal)&#x27;);
+    }
+    return `${base}/${nombreArchivo}`;
+  }
+
+  const pruebas = [&#x27;nota-1.json&#x27;, &#x27;../../etc/passwd&#x27;];
+  document.getElementById(&#x27;out&#x27;).innerHTML = pruebas.map(archivo =&gt; {
+    try {
+      return `&lt;div&gt;✅ ${archivo} → ${joinSafe(&#x27;/datos/apuntes&#x27;, archivo)}&lt;/div&gt;`;
+    } catch (err) {
+      return `&lt;div&gt;❌ ${archivo} → ${err.message}&lt;/div&gt;`;
+    }
+  }).join(&#x27;&#x27;);
+&lt;/script&gt;">Validación Segura de Rutas</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación del gestor de apuntes con EventEmitter y UUID
+  class MiniBus {
+    constructor() { this.listeners = {}; }
+    on(ev, fn) { (this.listeners[ev] ??= []).push(fn); }
+    emit(ev, data) { (this.listeners[ev] || []).forEach(fn =&gt; fn(data)); }
+  }
+
+  const bus = new MiniBus();
+  const logs = [];
+  bus.on(&#x27;apunte:creado&#x27;, a =&gt; logs.push(`🔔 Evento apunte:creado → [${a.id.slice(0, 8)}] ${a.titulo}`));
+
+  const nuevoApunte = { id: crypto.randomUUID(), titulo: &#x27;Guía de node:fs&#x27; };
+  bus.emit(&#x27;apunte:creado&#x27;, nuevoApunte);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;) +
+    `&lt;div&gt;📦 JSON guardado: ${JSON.stringify(nuevoApunte)}&lt;/div&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('nativeSimMode');
+            const stage = document.getElementById('nativeSimStage');
+            const code = document.getElementById('nativeSimCode');
+            if (!mode || !stage || !code) return;
+
+            function update() {
+                if (mode.value === 'fs') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">1. mkdir('datos', { recursive: true }) ➔ crea carpeta si no existe</div>
+                        <div style="color:#00ff88;font-weight:700;">2. writeFile('datos/cursos.json', ...) ➔ guarda JSON formateado</div>
+                        <div style="color:#fbbf24;">3. Si falta un archivo: error.code === 'ENOENT'</div>
+                    `;
+                    code.textContent = `await mkdir('datos', { recursive: true });\nawait writeFile('datos/cursos.json', JSON.stringify(cursos, null, 2), 'utf8');`;
+                } else if (mode.value === 'path') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">path.join('datos', 'cursos.json') ➔ 'datos/cursos.json' (o '\\\\' en Windows)</div>
+                        <div style="color:#00ff88;">path.extname('leccion.md') ➔ '.md'</div>
+                        <div style="color:#fbbf24;font-weight:700;">fileURLToPath(import.meta.url) ➔ ruta exacta del módulo ESM actual</div>
+                    `;
+                    code.textContent = `const archivoActual = fileURLToPath(import.meta.url);\nconst carpetaActual = path.dirname(archivoActual);\npath.join(carpetaActual, 'datos', 'cursos.json');`;
+                } else if (mode.value === 'events') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">bus.once('inicio', fn) ➔ se ejecuta solo en el primer emit('inicio')</div>
+                        <div style="color:#00ff88;font-weight:700;">bus.emit('apunte:creado', payload) ➔ dispara listeners síncronamente</div>
+                        <div style="color:#ff3358;">Sin listener en 'error', un emit('error') detiene el proceso</div>
+                    `;
+                    code.textContent = `bus.once('inicio', () => console.log('Listo'));\nbus.on('apunte:creado', (apunte) => console.log(apunte.id));\nbus.emit('apunte:creado', { id: 'uuid-1' });`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">randomUUID() ➔ '550e8400-e29b-41d4-a716-446655440000'</div>
+                        <div style="color:#38bdf8;">createHash('sha256').update('Texto').digest('hex') ➔ 64 caracteres hex</div>
+                        <div style="color:#fbbf24;">Para contraseñas usa scrypt con sal única, nunca SHA-256 simple.</div>
+                    `;
+                    code.textContent = `const id = randomUUID();\nconst huella = createHash('sha256').update('Contenido').digest('hex');`;
+                }
+            }
+
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

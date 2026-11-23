@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · BUENAS PRÁCTICAS</span><div class="brand-title"><span>🚫</span><span>Código Obsoleto JS</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -65,7 +65,7 @@
 <li>* Más seguridad.</li>
 </ul>
 <p style="margin-bottom:8px;line-height:1.6;">Lo mismo ocurre en programación.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 3. ¿Cuándo algo se vuelve obsoleto?</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">3. ¿Cuándo algo se vuelve obsoleto?</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Una tecnología se vuelve obsoleta cuando cumple una o varias de estas condiciones.</p></div>
         </section>
         <section class="slide" data-slide="5" data-doc-slide="true" data-title="Existen alternativas mejores">
@@ -101,15 +101,27 @@
             <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Otros desarrolladores tendrán dificultades para comprenderlo.</p></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Regla:</strong> Usa <code>const</code> por defecto y <code>let</code> solo cuando la variable deba reasignarse.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Código Obsoleto JS">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador Código Obsoleto vs Moderno">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · REFACTORIZACIÓN ES6+</span><h2 class="slide-title">🎛️ Comparador: Obsoleto vs Moderno</h2><p class="slide-lead">Elige un patrón antiguo para ver su reemplazo recomendado en JavaScript moderno.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Patrón a comparar</label><select id="obPat"><option value="var">var ➔ const / let</option><option value="write">document.write() ➔ textContent</option><option value="concat">Concatenación + ➔ Template Literals</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;font-family:var(--font-mono);font-size:0.82rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Código Obsoleto JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="let y const tienen alcance de bloque ({}) mucho más predecible." data-err="var ignora los bloques if/for y puede sobrescribirse accidentalmente."><div class="quiz-q-title">1. ¿Por qué se evita <code>var</code> en JavaScript moderno?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Tiene alcance de función (function scope) y hoisting confuso</button><button class="quiz-option" data-opt="b">No acepta números</button><button class="quiz-option" data-opt="c">Solo funciona en Node</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Código Obsoleto JS">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Código Obsoleto JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   const nombre = &#x27;JS Moderno&#x27;;
@@ -120,11 +132,10 @@
   document.getElementById(&#x27;out&#x27;).textContent = `Usando ${nombre} con const y template literals.`;
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -132,5 +143,21 @@
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const pat = document.getElementById('obPat'), st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      const map = {
+        var: { bad: 'var x = 10; // fuga de ámbito (hoisting)', good: 'const x = 10; // ámbito de bloque seguro' },
+        write: { bad: 'document.write("Hola"); // sobrescribe el DOM', good: 'el.textContent = "Hola"; // seguro y rápido' },
+        concat: { bad: '"Hola " + nombre + "!"', good: '`Hola ${nombre}!`' }
+      };
+      function upd() {
+        const d = map[pat.value];
+        st.innerHTML = `<div style="padding:10px;border-radius:8px;background:rgba(255,51,88,0.12);border:1px solid #ff3358;color:#ff3358;">❌ Obsoleto: ${d.bad}</div><div style="padding:10px;border-radius:8px;background:rgba(0,255,136,0.12);border:1px solid #00ff88;color:#00ff88;">✅ Moderno: ${d.good}</div>`;
+        cd.textContent = d.good;
+      }
+      pat.addEventListener('input', upd); upd();
+        })();
+    </script>
 </body>
 </html>

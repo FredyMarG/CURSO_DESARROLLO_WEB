@@ -38,7 +38,7 @@
     if (!document.getElementById('jrCompareTableStyle')) {
         const st = document.createElement('style'); // Crea nuevo elemento DOM "st"
         st.id = 'jrCompareTableStyle'; // Asigna id único
-        st.textContent = `*{scrollbar-width:thin;scrollbar-color:var(--accent,#00f0ff) #0b1120}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b1120}::-webkit-scrollbar-thumb{background:var(--accent,#00f0ff);border-radius:999px;border:2px solid #0b1120}.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem;background:rgba(2,6,23,.55);border:1px solid var(--border,#334155);border-radius:10px;overflow:hidden}.compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}.compare-table th{color:var(--accent,#00f0ff);background:rgba(15,23,42,.85);font-weight:700}.compare-table tr:last-child td{border-bottom:none}`; // Asigna reglas CSS
+        st.textContent = `*{scrollbar-width:thin;scrollbar-color:var(--accent,#00f0ff) #0b1120}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b1120}::-webkit-scrollbar-thumb{background:var(--accent,#00f0ff);border-radius:999px;border:2px solid #0b1120}.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem;background:rgba(2,6,23,.55);border:1px solid var(--border,#334155);border-radius:10px;overflow:hidden}.compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}.compare-table th{color:var(--accent,#00f0ff);background:rgba(15,23,42,.85);font-weight:700}.compare-table tr:last-child td{border-bottom:none}.grid .card button:not(.secondary){background:linear-gradient(135deg,var(--accent,#00f0ff),#818cf8)!important;color:#050711!important;border:none!important;border-radius:10px!important;padding:8px 16px!important;font-weight:700!important;font-size:.86rem!important;box-shadow:0 4px 16px var(--accent-soft,rgba(0,240,255,.28))!important;transition:transform .18s ease,box-shadow .18s ease!important}.grid .card button:not(.secondary):hover{transform:translateY(-1px)!important;box-shadow:0 6px 22px var(--accent-soft,rgba(0,240,255,.42))!important}.grid .card button.secondary{background:rgba(255,255,255,.06)!important;color:#f1f5f9!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:10px!important;padding:8px 13px!important;font-weight:600!important;font-size:.84rem!important;transition:border-color .2s,color .2s!important}.grid .card button.secondary:hover{border-color:var(--accent,#00f0ff)!important;color:var(--accent,#00f0ff)!important}`; // Asigna reglas CSS
         document.head.appendChild(st); // Inserta estilo en head
     }
 
@@ -67,28 +67,25 @@
         if (jIdx !== -1) { // Si coincide con un módulo de Junior Level
             const prevJ = jIdx > 0 ? JUNIOR_MODULES[jIdx - 1] : null; // Módulo anterior si existe
             const nextJ = jIdx < JUNIOR_MODULES.length - 1 ? JUNIOR_MODULES[jIdx + 1] : null; // Módulo siguiente si existe
-            // Estilo común para los botones de navegación entre módulos
-            const btnStyle = 'color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);'; // Cadena CSS
-            if (prevJ) { // Agrega botón anterior en la barra superior
-                const aPrev = document.createElement('a'); // Crea enlace anterior
-                aPrev.href = encodeURI(`../${prevJ}/index.html`); // Ruta relativa
-                aPrev.textContent = `⬅ ${prevJ}`; // Texto visible
-                aPrev.style.cssText = btnStyle; // Aplica estilo
-                navRight.appendChild(aPrev); // Inserta en barra superior
-            }
-            // Botón directo a la pestaña de Proyectos del portal
-            const aProj = document.createElement('a'); // Crea enlace a Proyectos
-            aProj.href = '../../../index.html?filter=proyectos'; // Ruta hacia la pestaña de Proyectos
-            aProj.textContent = '🚀 Proyectos'; // Texto visible
-            aProj.style.cssText = btnStyle; // Aplica estilo común
-            navRight.appendChild(aProj); // Inserta en la barra superior
-            if (nextJ) { // Agrega botón siguiente en la barra superior
-                const aNext = document.createElement('a'); // Crea enlace siguiente
-                aNext.href = encodeURI(`../${nextJ}/index.html`); // Ruta relativa
-                aNext.textContent = `${nextJ} ➡`; // Texto visible
-                aNext.style.cssText = btnStyle; // Aplica estilo
-                navRight.appendChild(aNext); // Inserta en barra superior
-            }
+            // Estilo común y primario unificados con course-polish.js
+            const btnStyle = 'color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);';
+            const primaryStyle = 'color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);';
+            // Limpia los enlaces estáticos previos conservando solo dotsWrap para garantizar orden idéntico al resto del curso:
+            // [theme-dots] -> [⬅ Anterior] -> [🌱 JS Junior Level] -> [📘 Apuntes] -> [🚀 Proyectos] -> [🏠 Portal Principal] -> [Siguiente ➡]
+            Array.from(navRight.querySelectorAll('a')).forEach(a => a.remove());
+            const makeLink = (href, text, style) => {
+                const a = document.createElement('a');
+                a.href = href;
+                a.textContent = text;
+                a.style.cssText = style;
+                return a;
+            };
+            if (prevJ) navRight.appendChild(makeLink(encodeURI(`../${prevJ}/index.html`), `⬅ ${prevJ}`, btnStyle));
+            navRight.appendChild(makeLink('../../../index.html?filter=junior', '🌱 JS Junior Level', btnStyle));
+            navRight.appendChild(makeLink('../DOCUMENTACION/index.html', '📘 Apuntes', btnStyle));
+            navRight.appendChild(makeLink('../../../index.html?filter=proyectos', '🚀 Proyectos', btnStyle));
+            navRight.appendChild(makeLink('../../../index.html', '🏠 Portal Principal', primaryStyle));
+            if (nextJ) navRight.appendChild(makeLink(encodeURI(`../${nextJ}/index.html`), `${nextJ} ➡`, btnStyle));
             // Agrega también barra inferior de navegación al final de .app-shell
             const appShell = document.querySelector('.app-shell'); // Contenedor principal Junior
             if (appShell) { // Si existe el contenedor
@@ -96,7 +93,10 @@
                 bottomNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos
                 bottomNav.innerHTML = `
                     ${prevJ ? `<a href="${encodeURI(`../${prevJ}/index.html`)}" style="${btnStyle}">⬅ Anterior: ${prevJ}</a>` : '<span></span>'}
-                    <a href="../DOCUMENTACION/index.html" style="${btnStyle}">📘 Ver Apuntes</a>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <a href="../../../index.html?filter=junior" style="${btnStyle}">🌱 JS Junior Level</a>
+                        <a href="../DOCUMENTACION/index.html" style="${btnStyle}">📘 Ver Apuntes</a>
+                    </div>
                     ${nextJ ? `<a href="${encodeURI(`../${nextJ}/index.html`)}" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);">Siguiente: ${nextJ} ➡</a>` : '<span></span>'}
                 `; // Contenido de la barra inferior
                 appShell.appendChild(bottomNav); // Inserta al final de .app-shell

@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · PETICIONES</span><div class="brand-title"><span>⚡</span><span>Librería Axios</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 10</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -68,7 +68,7 @@ console.log(res.data); // Ya viene parseado como objeto</code></pre></div>
                 <h2 class="slide-title">Nivel 3</h2>
             </div>
             <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Desarrolla una función de búsqueda avanzada que reciba dos argumentos de texto: <code>genero</code> y <code>anio</code>. La función debe despachar una petición <code>GET</code> utilizando Axios hacia la ruta <code>/peliculas</code>, inyectando de forma limpia ambos argumentos a través del objeto de configuración <code>params</code>. Envuelve la lógica en un bloque <code>try/catch</code> profesional capaz de desglosar el mensaje de error si la petición falla.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Resumen</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Resumen</h3>
 <ul class="styled-list">
 <li>*   <strong>Axios</strong> es un cliente HTTP isomórfico y moderno basado íntegramente en el ecosistema de <strong>Promesas</strong> de JavaScript.</li>
 <li>*   Automatiza la <strong>serialización y deserialización</strong> de datos, abstrayendo al desarrollador del uso de procesos manuales como <code>JSON.stringify()</code> o <code>.json()</code>.</li>
@@ -76,24 +76,37 @@ console.log(res.data); // Ya viene parseado como objeto</code></pre></div>
 <li>*   El método <strong><code>post()</code></strong> inyecta objetos complejos directamente como segundo parámetro para ser transmitidos en el cuerpo del mensaje.</li>
 <li>*   Posee un <strong>sistema automático de control de errores</strong> que desvía de forma inmediata cualquier respuesta de estado HTTP fuera del rango exitoso (<code>2xx</code>) hacia el bloque <code>catch</code>.</li>
 </ul>
-<p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Hoja de Trucos (Cheatsheet)</h3>
 <table class="compare-table"><thead><tr><th>API / Patrón</th><th>Propósito</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>axios.create(config)</code></td><td>Crea una instancia aislada con <code>baseURL</code>, <code>timeout</code> y <code>headers</code>.</td><td><code>const api = axios.create({ baseURL: &quot;/api&quot; })</code></td></tr><tr><td><code>api.get(url, { params })</code></td><td>Envía <code>GET</code> con query params serializados automáticamente.</td><td><code>await api.get(&quot;/users&quot;, { params: { page: 2 } })</code></td></tr><tr><td><code>api.post(url, data)</code></td><td>Envía <code>POST</code> serializando <code>data</code> a JSON automáticamente.</td><td><code>await api.post(&quot;/users&quot;, { name: &quot;Ana&quot; })</code></td></tr><tr><td><code>api.put</code> / <code>patch</code> / <code>delete</code></td><td>Métodos abreviados para actualizar o eliminar recursos.</td><td><code>await api.delete(&quot;/users/5&quot;)</code></td></tr><tr><td><code>interceptors.request.use</code></td><td>Intercepta peticiones antes de salir (ej. inyectar JWT).</td><td><code>api.interceptors.request.use(cfg =&gt; ...)</code></td></tr><tr><td><code>interceptors.response.use</code></td><td>Intercepta respuestas/errores globales (ej. <code>401</code>).</td><td><code>api.interceptors.response.use(res =&gt; res, err =&gt; ...)</code></td></tr><tr><td><code>signal: controller.signal</code></td><td>Cancela peticiones con <code>AbortController</code> (estándar actual).</td><td><code>api.get(&quot;/search&quot;, { signal: controller.signal })</code></td></tr><tr><td><code>axios.isAxiosError(err)</code></td><td>Verifica de forma segura si el error proviene de Axios.</td><td><code>if (axios.isAxiosError(err)) { ... }</code></td></tr><tr><td><code>axios.isCancel(err)</code></td><td>Comprueba si el error se debe a una cancelación con <code>AbortController</code>.</td><td><code>if (axios.isCancel(err)) return;</code></td></tr><tr><td><code>err.response</code> / <code>err.request</code></td><td>Distingue error HTTP del servidor vs. fallo de red sin respuesta.</td><td><code>err.response?.status</code></td></tr></tbody></table>
 </div>
         </section>
         <section class="slide" data-slide="7" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Ventaja:</strong> Axios rechaza automáticamente la promesa cuando el servidor responde con 404 o 500.</div>
         </section>
-        <section class="slide" data-slide="8" data-title="Quiz: Librería Axios">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="8" data-lab="true" data-title="Simulador de Axios">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · AXIOS VS FETCH</span><h2 class="slide-title">🎛️ Simulador de Petición con <code>axios</code></h2><p class="slide-lead">Observa cómo Axios serializa <code>params</code>, entrega <code>res.data</code> y rechaza automáticamente errores 4xx/5xx.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Método</label><select id="axMeth"><option value="get">axios.get</option><option value="post">axios.post</option></select></div>
+      <div class="sim-control"><label>Estado del servidor</label><select id="axSt"><option value="200">200 OK</option><option value="403">403 Forbidden</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;justify-content:center;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Librería Axios">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Axios entrega el JSON ya convertido dentro de response.data." data-err="fetch usa await res.json(); Axios entrega directamente response.data."><div class="quiz-q-title">1. ¿En qué propiedad devuelve Axios el cuerpo de la respuesta ya parseado?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">response.data</button><button class="quiz-option" data-opt="b">response.json()</button><button class="quiz-option" data-opt="c">response.body</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Librería Axios">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Librería Axios">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;code&gt;axios.get(url)&lt;/code&gt; → devuelve &lt;b&gt;res.data&lt;/b&gt; sin necesitar &lt;code&gt;res.json()&lt;/code&gt;.&lt;/div&gt;">Comparativa Axios vs Fetch</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;code&gt;axios.get(url)&lt;/code&gt; → devuelve &lt;b&gt;res.data&lt;/b&gt; sin necesitar &lt;code&gt;res.json()&lt;/code&gt;.&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="10" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="Axios%20Editor/index.html"><span class="file-name">📄 Axios Editor</span><span class="file-path">Axios%20Editor/index.html</span></a><a class="file-card" href="Axios-Fetch-Htdocs/index.html"><span class="file-name">📄 Axios-Fetch Htdocs</span><span class="file-path">Axios-Fetch-Htdocs/index.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -103,5 +116,21 @@ console.log(res.data); // Ya viene parseado como objeto</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const m = document.getElementById('axMeth'), s = document.getElementById('axSt');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function upd() {
+        const ok = s.value === '200';
+        st.innerHTML = ok
+          ? '<div style="color:#00ff88;font-weight:700;">✅ res.data listo sin res.json(): { "ok": true, "metodo": "' + m.value.toUpperCase() + '" }</div>'
+          : '<div style="color:#ff3358;font-weight:700;">❌ Axios rechazó la promesa automáticamente (err.response.status === 403)</div>';
+        cd.textContent = m.value === 'get'
+          ? `const { data } = await axios.get("/api/users", { params: { page: 1 } });`
+          : `const { data } = await axios.post("/api/users", { nombre: "Ana" });`;
+      }
+      [m, s].forEach(e => e.addEventListener('input', upd)); upd();
+        })();
+    </script>
 </body>
 </html>

@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · BOM</span><div class="brand-title"><span>📍</span><span>Objeto Location</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -106,15 +106,27 @@ console.log(location.pathname);
             <div class="glass-card"><pre class="code-block"><code>console.log(window.location)</code></pre></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-warn"><strong>⚠️ Cuidado:</strong> Cambiar <code>location.href</code> recarga la página completa; para SPAs usa <code>history.pushState()</code>.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Objeto Location">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Location">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · ANATOMÍA DE URL</span><h2 class="slide-title">🎛️ Desglose Interactivo de <code>window.location</code></h2><p class="slide-lead">Edita la URL de prueba para ver cómo JavaScript separa protocolo, host, ruta, query y hash.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>URL de prueba</label><input type="text" id="locUrl" value="https://curso.dev:8080/js/fetch?nivel=mid#lab" /></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:0.82rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Objeto Location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="location.pathname devuelve la ruta (ej. /productos/12)." data-err="pathname devuelve la ruta tras el dominio."><div class="quiz-q-title">1. ¿Qué propiedad de <code>location</code> contiene la ruta después del dominio?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">location.pathname</button><button class="quiz-option" data-opt="b">location.protocol</button><button class="quiz-option" data-opt="c">location.host</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Objeto Location">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Objeto Location">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;pre id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px&quot;&gt;&lt;/pre&gt;
 &lt;script&gt;
   document.getElementById(&#x27;out&#x27;).textContent = &#x27;Protocol: &#x27; + location.protocol + &#x27;\nOrigin: &#x27; + location.origin;
@@ -123,8 +135,8 @@ console.log(location.pathname);
   document.getElementById(&#x27;out&#x27;).textContent = &#x27;Protocol: &#x27; + location.protocol + &#x27;\nOrigin: &#x27; + location.origin;
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="location.html"><span class="file-name">📄 Práctica Location</span><span class="file-path">location.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -134,5 +146,22 @@ console.log(location.pathname);
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const inp = document.getElementById('locUrl'), st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function upd() {
+        try {
+          const u = new URL(inp.value);
+          st.innerHTML = ['protocol', 'hostname', 'port', 'pathname', 'search', 'hash']
+            .map(k => '<div><span style="color:#38bdf8;">' + k + ':</span> <span style="color:#00ff88;">"' + (u[k] || '') + '"</span></div>').join('');
+          cd.textContent = `const url = new URL("${u.href}");
+// url.pathname === "${u.pathname}"`;
+        } catch {
+          st.innerHTML = '<div style="color:#ff3358;">URL inválida (incluye https://)</div>';
+        }
+      }
+      inp.addEventListener('input', upd); upd();
+        })();
+    </script>
 </body>
 </html>

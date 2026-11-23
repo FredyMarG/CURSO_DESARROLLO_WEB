@@ -222,6 +222,43 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
             </div>
         </section>
 
+        <!-- SLIDE SIMULADOR: ENTORNO Y PACKAGE.JSON -->
+        <section class="slide" data-lab="true" data-title="Simulador de Entorno Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · ENTORNO Y NPM</span>
+                <h2 class="slide-title">🎛️ Simulador de Terminal &amp; <code>package.json</code></h2>
+                <p class="slide-lead">Prueba los comandos clave de verificación y configura el modo de módulos y recarga automática.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Comando en Terminal</label>
+                        <select id="nodeInstCmd">
+                            <option value="version">node -v &amp;&amp; npm -v</option>
+                            <option value="where">where.exe node</option>
+                            <option value="watch">node --watch index.js</option>
+                            <option value="nvm">nvm list</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>"type" en package.json</label>
+                        <select id="nodeInstType">
+                            <option value="module">module (ESM moderno)</option>
+                            <option value="commonjs">commonjs (require clásico)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Puerto del script dev <span id="nodeInstPortVal">3000</span></label>
+                        <input type="range" id="nodeInstPort" min="3000" max="8080" step="100" value="3000" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="nodeInstStage" style="font-family:var(--font-mono);font-size:0.84rem;line-height:1.6;"></div>
+                    <pre class="sim-code" id="nodeInstCode"></pre>
+                </div>
+            </div>
+        </section>
+
         <!-- SLIDE 9: QUIZ INTERACTIVO -->
         <section class="slide" data-slide="9" data-title="Quiz: Instalación y Entorno">
             <div class="slide-header">
@@ -322,5 +359,39 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
         <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
     </div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const cmd = document.getElementById('nodeInstCmd');
+            const type = document.getElementById('nodeInstType');
+            const port = document.getElementById('nodeInstPort');
+            const portVal = document.getElementById('nodeInstPortVal');
+            const stage = document.getElementById('nodeInstStage');
+            const code = document.getElementById('nodeInstCode');
+            if (!stage) return;
+
+            function update() {
+                portVal.textContent = port.value;
+                const outputs = {
+                    version: `$ node -v\nv22.14.0\n$ npm -v\n10.9.2`,
+                    where: `PS C:\\Proyecto> where.exe node\nC:\\Program Files\\nodejs\\node.exe`,
+                    watch: `$ node --watch index.js\nServidor escuchando en http://localhost:${port.value}\n[Watcher] Esperando cambios para reiniciar...`,
+                    nvm: `PS C:\\> nvm list\n  * 22.14.0 (Currently using 64-bit executable)\n    20.18.1`
+                };
+                stage.innerHTML = `<pre style="margin:0;color:#00ff88;white-space:pre-wrap;">${outputs[cmd.value]}</pre>`;
+                const pkg = {
+                    name: 'mi-api-node',
+                    version: '1.0.0',
+                    type: type.value,
+                    scripts: {
+                        start: 'node index.js',
+                        dev: `PORT=${port.value} node --watch index.js`
+                    }
+                };
+                code.textContent = JSON.stringify(pkg, null, 2);
+            }
+            [cmd, type, port].forEach(el => el.addEventListener('input', update));
+            update();
+        })();
+    </script>
 </body>
 </html>

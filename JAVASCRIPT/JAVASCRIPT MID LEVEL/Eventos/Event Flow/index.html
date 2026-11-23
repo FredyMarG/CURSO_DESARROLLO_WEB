@@ -1,50 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Event Flow (Capturing &amp; Bubbling)</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Flow (Capturing & Bubbling) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%AF%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Eventos del DOM</span>
-            <h1>Event Flow: Capturing, Target &amp; Bubbling</h1>
-            <p class="subtitle">Visualiza el orden exacto de propagación de eventos entre contenedores anidados.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">EVENTOS DEL DOM · FLUJO</span>
+            <div class="brand-title"><span>🎯</span><span>Event Flow (Capturing & Bubbling)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
 
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. Simulador Visual de Propagación</h2>
-            <div class="controls">
-                <label class="inline-check">
-                    <input id="chkCapture" type="checkbox"> Activar fase <strong>Capturing</strong> (<code>{ capture: true }</code>)
-                </label>
-                <label class="inline-check">
-                    <input id="chkStop" type="checkbox"> Detener en Contenedor Azul (<code>e.stopPropagation()</code>)
-                </label>
-            </div>
-            <div id="abuelo" class="box abuelo">
-                Abuelo (Contenedor Rojo)
-                <div id="padre" class="box padre">
-                    Padre (Contenedor Azul)
-                    <button type="button" id="hijo" class="btn primary">Hijo (Botón)</button>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Event Flow (Capturing & Bubbling)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">Capturing</span><span class="badge badge-cyan">Target</span><span class="badge badge-cyan">Bubbling</span><span class="badge badge-cyan">stopPropagation()</span></div>
+                <h1 class="hero-title">Eventos del DOM:<br /><span class="gradient-text">Event Flow (Capturing & Bubbling)</span></h1>
+                <p class="hero-subtitle">Comprende cómo viajan los eventos por el árbol del DOM desde window hasta el elemento destino y de regreso.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
 
-        <section class="card">
-            <div class="terminal-header">
-                <h2>Orden de Ejecución</h2>
-                <button type="button" id="btnClear" class="btn small">Limpiar</button>
+        <section class="slide" data-slide="2" data-title="¿Qué es el Event Flow?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Qué es el Event Flow?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">Cuando haces clic en un botón dentro de un <code>&lt;div&gt;</code>, el evento no ocurre solo en ese botón: viaja a través de toda la jerarquía de ancestros en <strong>3 fases</strong>.</p>
+      <ul class="styled-list">
+        <li><strong>1. Fase Capturing (Captura):</strong> desciende desde <code>window → document → html → body → padre → hijo</code>.</li>
+        <li><strong>2. Fase Target (Objetivo):</strong> alcanza el elemento exacto donde ocurrió la interacción (<code>e.target</code>).</li>
+        <li><strong>3. Fase Bubbling (Burbujeo):</strong> asciende de regreso desde el hijo hacia sus ancestros (comportamiento por defecto).</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>🌊 Analogía de la piedra en el estanque:</strong> Primero la piedra cae hasta el fondo (<em>Capturing</em>), toca la base (<em>Target</em>) y luego las ondas suben hasta la superficie (<em>Bubbling</em>).</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Sintaxis: { capture } y stopPropagation()">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis: { capture } y stopPropagation()</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>// Por defecto (capture: false) escucha en Bubbling
+padre.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+  console.log(&#x27;Padre en Bubbling. Target real:&#x27;, e.target);
+});
+
+// Con { capture: true } escucha antes, al descender
+abuelo.addEventListener(&#x27;click&#x27;, () =&gt; {
+  console.log(&#x27;Abuelo en Capturing&#x27;);
+}, { capture: true });
+
+// Detener la propagación hacia otros ancestros
+hijo.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+  e.stopPropagation();
+});</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>e.target</code></td><td>Elemento real donde se originó el clic</td></tr><tr><td><code>e.currentTarget</code></td><td>Elemento que tiene adjunto el listener actual</td></tr><tr><td><code>{ capture: true }</code></td><td>Ejecuta el listener en la fase de descenso</td></tr><tr><td><code>e.stopPropagation()</code></td><td>Frena el viaje del evento a los demás niveles</td></tr></tbody>
+                </table>
             </div>
-            <div id="flowLog" class="terminal" aria-live="polite">Haz clic en el botón "Hijo" para observar el flujo.</div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Delegación de eventos:</strong> Gracias al <em>Bubbling</em> puedes poner un único <code>addEventListener</code> en un contenedor padre para manejar clics de decenas de botones hijos.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Cuidado con stopPropagation():</strong> Abusar de <code>e.stopPropagation()</code> puede romper analíticas globales, menús desplegables que cierran al hacer clic fuera o atajos de teclado.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Visual de Propagación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Visual de Propagación</h2></div>
+            <div class="grid-layout" style="padding:0;">
+      <section class="card">
+        <h2>1. Simulador Visual de Propagación</h2>
+        <div class="controls">
+          <label class="inline-check"><input id="chkCapture" type="checkbox"> Activar fase <strong>Capturing</strong> (<code>{ capture: true }</code>)</label>
+          <label class="inline-check"><input id="chkStop" type="checkbox"> Detener en Contenedor Azul (<code>e.stopPropagation()</code>)</label>
+        </div>
+        <div id="abuelo" class="box abuelo">Abuelo (Contenedor Rojo)
+          <div id="padre" class="box padre">Padre (Contenedor Azul)
+            <button type="button" id="hijo" class="btn primary">Hijo (Botón)</button>
+          </div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="terminal-header"><h2>Orden de Ejecución</h2><button type="button" id="btnClear" class="btn small">Limpiar</button></div>
+        <div id="flowLog" class="terminal" aria-live="polite">Haz clic en el botón "Hijo" para observar el flujo.</div>
+      </section>
+    </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Event Flow (Capturing & Bubbling)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: por defecto capture es false, por lo que escuchan en Bubbling (de hijo a padre)." data-err="Por defecto addEventListener escucha en Bubbling.">
+                    <div class="quiz-q-title">1. ¿En qué fase se ejecutan por defecto los listeners de <code>addEventListener</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Capturing</button>
+                        <button class="quiz-option" data-opt="b">Bubbling</button>
+                        <button class="quiz-option" data-opt="c">Target únicamente</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: stopPropagation() detiene la propagación; preventDefault() cancela la acción nativa." data-err="preventDefault() cancela la acción por defecto (ej. enviar un form), no la propagación.">
+                    <div class="quiz-q-title">2. ¿Qué método impide que el evento siga propagándose a los contenedores padres?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">e.stopPropagation()</button>
+                        <button class="quiz-option" data-opt="b">e.preventDefault()</button>
+                        <button class="quiz-option" data-opt="c">e.removeEvent()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Event Flow (Capturing & Bubbling)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;padre&quot; style=&quot;padding:16px;border:1px dashed #38bdf8;border-radius:10px;&quot;&gt;
+  Padre &lt;button id=&quot;hijo&quot; style=&quot;margin-left:10px;padding:6px 12px;cursor:pointer;&quot;&gt;Hijo&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const out = document.getElementById(&#x27;out&#x27;);
+  document.getElementById(&#x27;padre&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; out.innerHTML += &#x27;&lt;div&gt;2. Padre (Bubbling)&lt;/div&gt;&#x27;);
+  document.getElementById(&#x27;hijo&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; { out.innerHTML = &#x27;&lt;div&gt;1. Hijo (Target)&lt;/div&gt;&#x27;; });
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;padre&quot; style=&quot;padding:16px;border:1px dashed #38bdf8;border-radius:10px;&quot;&gt;
+  Padre &lt;button id=&quot;hijo&quot; style=&quot;margin-left:10px;padding:6px 12px;cursor:pointer;&quot;&gt;Hijo&lt;/button&gt;
+&lt;/div&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const out = document.getElementById(&#x27;out&#x27;);
+  document.getElementById(&#x27;padre&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; out.innerHTML += &#x27;&lt;div&gt;2. Padre (Bubbling)&lt;/div&gt;&#x27;);
+  document.getElementById(&#x27;hijo&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; { out.innerHTML = &#x27;&lt;div&gt;1. Hijo (Target)&lt;/div&gt;&#x27;; });
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

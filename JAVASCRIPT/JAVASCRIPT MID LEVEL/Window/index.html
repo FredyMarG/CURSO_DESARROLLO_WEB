@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · BOM</span><div class="brand-title"><span>🪟</span><span>Objeto Window</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -116,25 +116,38 @@ const ok = confirm("¿Continuar?");
 <p style="margin-bottom:8px;line-height:1.6;">El navegador permite omitir <code>window</code>.</p></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> En aplicaciones reales, reemplaza <code>alert()</code> y <code>confirm()</code> por modales HTML/CSS no bloqueantes.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Objeto Window">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Window">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · BROWSER OBJECT MODEL</span><h2 class="slide-title">🎛️ Inspector en Vivo del Objeto <code>window</code></h2><p class="slide-lead">Consulta en tiempo real las dimensiones del viewport y propiedades clave del BOM.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Propiedad a inspeccionar</label><select id="wnProp"><option value="dims">innerWidth / innerHeight</option><option value="outer">outerWidth / outerHeight</option><option value="scroll">scrollX / scrollY</option></select></div>
+      <div class="sim-control"><button type="button" id="wnRef" class="preset-btn active" style="width:100%;">↻ Leer window ahora</button></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:8px;justify-content:center;font-family:var(--font-mono);font-size:0.86rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Objeto Window">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="window es la raíz del BOM (Browser Object Model)." data-err="document pertenece a window (window.document)."><div class="quiz-q-title">1. ¿Qué objeto representa la ventana raíz del navegador en JavaScript?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">window</button><button class="quiz-option" data-opt="b">document</button><button class="quiz-option" data-opt="c">screen</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Objeto Window">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
-            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px;color:#0f172a&quot;&gt;&lt;/div&gt;
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Objeto Window">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   document.getElementById(&#x27;out&#x27;).innerHTML = `Ancho interno: &lt;b&gt;${window.innerWidth}px&lt;/b&gt; | Alto: &lt;b&gt;${window.innerHeight}px&lt;/b&gt;`;
-&lt;/script&gt;">Demo Window</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px;color:#0f172a&quot;&gt;&lt;/div&gt;
+&lt;/script&gt;">Demo Window</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   document.getElementById(&#x27;out&#x27;).innerHTML = `Ancho interno: &lt;b&gt;${window.innerWidth}px&lt;/b&gt; | Alto: &lt;b&gt;${window.innerHeight}px&lt;/b&gt;`;
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="window.html"><span class="file-name">📄 Práctica Window</span><span class="file-path">window.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -144,5 +157,21 @@ const ok = confirm("¿Continuar?");
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const pr = document.getElementById('wnProp'), btn = document.getElementById('wnRef');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function upd() {
+        const map = {
+          dims: `window.innerWidth = ${window.innerWidth}px | window.innerHeight = ${window.innerHeight}px`,
+          outer: `window.outerWidth = ${window.outerWidth}px | window.outerHeight = ${window.outerHeight}px`,
+          scroll: `window.scrollX = ${Math.round(window.scrollX)}px | window.scrollY = ${Math.round(window.scrollY)}px`
+        };
+        st.innerHTML = '<div style="color:#00ff88;font-weight:700;">' + map[pr.value] + '</div>';
+        cd.textContent = `console.log(${pr.value === 'dims' ? 'window.innerWidth, window.innerHeight' : pr.value === 'outer' ? 'window.outerWidth, window.outerHeight' : 'window.scrollX, window.scrollY'});`;
+      }
+      btn.addEventListener('click', upd); pr.addEventListener('input', upd); window.addEventListener('resize', upd); upd();
+        })();
+    </script>
 </body>
 </html>

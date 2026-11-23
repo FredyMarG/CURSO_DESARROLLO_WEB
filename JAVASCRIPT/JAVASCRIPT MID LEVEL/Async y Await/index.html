@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · ASINCRONÍA</span><div class="brand-title"><span>⏳</span><span>Async y Await</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -69,7 +69,7 @@ console.log(hola());</code></pre>
 <p style="margin-bottom:8px;line-height:1.6;">Aunque retornes un string.</p>
 <p style="margin-bottom:8px;line-height:1.6;">Internamente JavaScript hace algo parecido a:</p>
 <pre class="code-block"><code>return Promise.resolve(&quot;Hola&quot;);</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># ¿Qué es await?</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">¿Qué es await?</h3>
 <p style="margin-bottom:8px;line-height:1.6;"><code>await</code> significa literalmente</p>
 <div class="callout callout-tip">Espera aquí.</div>
 <p style="margin-bottom:8px;line-height:1.6;">Solo puede usarse dentro de funciones <code>async</code>.</p>
@@ -85,7 +85,7 @@ async function ejemplo(){
 }</code></pre>
 <p style="margin-bottom:8px;line-height:1.6;">Salida</p>
 <pre class="code-block"><code>Hola</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># ¿Cómo funciona internamente?</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">¿Cómo funciona internamente?</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Supongamos</p>
 <pre class="code-block"><code>async function obtenerDatos(){
 
@@ -108,7 +108,7 @@ Cuando llegue
 
 Continuar ejecutando</code></pre>
 <p style="margin-bottom:8px;line-height:1.6;">Mientras tanto el resto del programa sigue funcionando.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Ejemplo sencillo</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Ejemplo sencillo</h3>
 <pre class="code-block"><code>function esperar(){
 
     return new Promise(resolve=&gt;{
@@ -147,15 +147,28 @@ const datos = await respuesta.json();</code></pre></div>
             <div class="glass-card"><pre class="code-block"><code>await usuario.save();</code></pre></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-warn"><strong>⚠️ Regla:</strong> <code>await</code> solo puede usarse dentro de una función marcada como <code>async</code> (o en módulos ES).</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Async y Await">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Async / Await">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · ASYNC / AWAIT + TRY/CATCH</span><h2 class="slide-title">🎛️ Simulador de Flujo <code>async / await</code></h2><p class="slide-lead">Comprueba cómo <code>await</code> pausa la función asíncrona y cómo <code>try/catch</code> captura rechazos.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Escenario de la Promesa</label><select id="aaRes"><option value="ok">Éxito (resolve)</option><option value="err">Error (reject → catch)</option></select></div>
+      <div class="sim-control"><button type="button" id="aaRun" class="preset-btn active" style="width:100%;">▶ Ejecutar async()</button></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Async y Await">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="try/catch captura tanto errores síncronos como promesas rechazadas con await." data-err="El estándar con async/await es envolverlo en try/catch."><div class="quiz-q-title">1. ¿Cómo se manejan los errores cuando usas <code>await</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Con un bloque try { ... } catch (e) { ... }</button><button class="quiz-option" data-opt="b">Con if/else</button><button class="quiz-option" data-opt="c">No se pueden capturar</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Async y Await">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Async y Await">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;Esperando...&lt;/div&gt;
 &lt;script&gt;
   const esperar = ms =&gt; new Promise(r =&gt; setTimeout(r, ms));
@@ -172,11 +185,10 @@ const datos = await respuesta.json();</code></pre></div>
   })();
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -184,5 +196,30 @@ const datos = await respuesta.json();</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const res = document.getElementById('aaRes'), btn = document.getElementById('aaRun');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      async function run() {
+        const ok = res.value === 'ok';
+        cd.textContent = `async function cargar() {
+  try {
+    const data = await obtener(${ok});
+    return data;
+  } catch (err) {
+    console.error(err.message);
+  }
+}`;
+        st.innerHTML = '<div style="color:#38bdf8;">1. Entrando a try { ... }</div><div style="color:#fbbf24;">2. Pausado en await...</div>';
+        try {
+          const msg = await new Promise((r, j) => setTimeout(() => ok ? r('Usuario #42 cargado') : j(new Error('HTTP 500')), 350));
+          st.innerHTML += '<div style="color:#00ff88;font-weight:700;">3. Resuelto: ' + msg + '</div>';
+        } catch (e) {
+          st.innerHTML += '<div style="color:#ff3358;font-weight:700;">3. Capturado en catch: ' + e.message + '</div>';
+        }
+      }
+      btn.addEventListener('click', run); res.addEventListener('input', run); run();
+        })();
+    </script>
 </body>
 </html>

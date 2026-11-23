@@ -4,26 +4,58 @@
 // Arreglo maestro que contiene todos los módulos, guías interactivas, ejercicios, proyectos y documentación del curso
 const modules = [
   // --- SECCIÓN: NODE.JS (Backend, Entorno de Ejecución y APIs) ---
-  // Módulo 01 interactivo de Fundamentos de Node.js
+  // Módulo 01 interactivo de Introducción a Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
-    title: "01. Fundamentos de Node.js", // Título visible en la tarjeta
-    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Entorno de ejecución, V8, libuv, Event Loop, npm, primer servidor HTTP y API de bienvenida.", // Descripción breve
+    title: "01. Introducción a Node.js", // Título visible en la tarjeta
+    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Qué es Node.js, Frontend vs Backend, Navegador vs Node.js, usos reales, mapa del curso y primer script CLI hola.js.", // Descripción breve
+    href: "NODE/Introduccion/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 02 interactivo de Fundamentos de Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "02. Fundamentos de Node.js", // Título visible en la tarjeta
+    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Ciclo Cliente-Servidor HTTP, npm y package.json, process.argv, primer servidor node:http y API de bienvenida.", // Descripción breve
     href: "NODE/Fundamentos/index.html", // Ruta relativa al módulo interactivo
   },
   // Módulo 02 interactivo de Instalación y Entorno de Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
-    title: "02. Instalación y Entorno de Node.js", // Título visible en la tarjeta
+    title: "03. Instalación y Entorno de Node.js", // Título visible en la tarjeta
     tag: "10 Slides", // Etiqueta de cantidad de diapositivas
     desc: "Versiones LTS vs Current, instalador .msi, winget, nvm-windows, PATH, PowerShell y VS Code.", // Descripción breve
     href: "NODE/Instalacion/index.html", // Ruta relativa al módulo interactivo
   },
+  // Módulo 04 interactivo de JavaScript Moderno para Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "04. JavaScript Moderno para Node.js", // Título visible en la tarjeta
+    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "ES6+ para Node.js: const/let y TDZ, arrow functions, map/filter/reduce, destructuring, spread/rest, ?. y ??, y módulos ESM.", // Descripción breve
+    href: "NODE/JavaScriptModerno/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 05 interactivo de Arquitectura Interna y Asincronía en Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "05. Arquitectura Interna y Asincronía", // Título visible en la tarjeta
+    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "V8, Event Loop, callbacks error-first, promesas, Promise.allSettled, async/await y tareas concurrentes.", // Descripción breve
+    href: "NODE/Asincronia/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 06 interactivo de Módulos Nativos y Archivos en Node.js
+  { // Instrucción JavaScript
+    cat: "node", // Categoría Node.js
+    title: "06. Módulos Nativos y Archivos", // Título visible en la tarjeta
+    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "APIs nativas de Node.js: node:fs/promises, node:path, node:os, node:events (EventEmitter) y node:crypto.", // Descripción breve
+    href: "NODE/ArchivosNativos/index.html", // Ruta relativa al módulo interactivo
+  },
   // Módulo 03 interactivo de REPL de Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
-    title: "03. REPL de Node.js", // Título visible en la tarjeta
+    title: "07. REPL de Node.js", // Título visible en la tarjeta
     tag: "12 Slides", // Etiqueta de cantidad de diapositivas
     desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
     href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
@@ -31,7 +63,7 @@ const modules = [
   // Módulo 04 interactivo de Módulos en Node.js
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
-    title: "04. Módulos en Node.js", // Título visible en la tarjeta
+    title: "08. Módulos en Node.js", // Título visible en la tarjeta
     tag: "13 Slides", // Etiqueta de cantidad de diapositivas
     desc: "CommonJS (require/module.exports), ESM (import/export), módulos nativos, rutas y separación de capas.", // Descripción breve
     href: "NODE/Modulos/index.html", // Ruta relativa al módulo interactivo
@@ -40,117 +72,12 @@ const modules = [
   { // Instrucción JavaScript
     cat: "node", // Categoría Node.js
     title: "Documentación Completa Node.js", // Título visible en la tarjeta
-    tag: "4 Guías MD", // Etiqueta de guías Markdown
-    desc: "Guías teóricas de Fundamentos, Instalación, REPL y Módulos en Node.js, ejercicios y cheatsheets.", // Descripción breve
+    tag: "8 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de Introducción, Fundamentos, Instalación, JavaScript Moderno, Asincronía, Archivos Nativos, REPL y Módulos en Node.js, ejercicios y cheatsheets.", // Descripción breve
     href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
   },
 
   // --- SECCIÓN: JS MASTER LEVEL (19 Guías Interactivas de 11-12 diapositivas + Documentación) ---
-  // Módulo de consumo de APIs REST con Fetch, AbortController y Promise.all
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "APIs y Fetch",
-    tag: "11 Slides",
-    desc: "Consumo RESTful, fetch(), AbortController y Promise.all.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Apis/index.html",
-  },
-  // Módulo de Cache API (CacheStorage) para aplicaciones rápidas y soporte offline
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Cache API (caches)",
-    tag: "12 Slides",
-    desc: "CacheStorage, put/match/delete, estrategias PWA y soporte offline.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cache/index.html",
-  },
-  // Módulo de Cookies (document.cookie) para persistencia HTTP y seguridad web
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Cookies (document.cookie)",
-    tag: "11 Slides",
-    desc: "Creación, lectura, modificación, eliminación, encodeURIComponent, SameSite y Lab.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cookies/index.html",
-  },
-  // Módulo de API nativa de arrastrar y soltar elementos y archivos
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Drag & Drop",
-    tag: "11 Slides",
-    desc: "Eventos de arrastre, dataTransfer y archivos del escritorio.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Drag & Drop/index.html",
-  },
-  // Módulo de lectura de archivos locales en el navegador con FileReader
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "FileReader API",
-    tag: "11 Slides",
-    desc: "Lectura de texto, DataURL, ArrayBuffer y barras de carga.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/File Reader/index.html",
-  },
-  // Módulo sobre sintaxis de funciones flecha, this léxico, closures y recursividad
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Funciones Flecha",
-    tag: "12 Slides",
-    desc: "Sintaxis, ámbito léxico de this, closures y recursividad.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Funciones Flecha/index.html",
-  },
-  // Módulo de geolocalización con getCurrentPosition y watchPosition
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Geolocalización",
-    tag: "11 Slides",
-    desc: "getCurrentPosition(), watchPosition() y manejo de errores.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Geolocalization/index.html",
-  },
-  // Módulo de navegación SPA sin recarga mediante History API
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "History API",
-    tag: "11 Slides",
-    desc: "pushState, replaceState, popstate y scrollRestoration.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Historial/index.html",
-  },
-  // Módulo de base de datos NoSQL asíncrona en el navegador (IndexedDB)
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "IndexedDB",
-    tag: "12 Slides",
-    desc: "Base NoSQL en el navegador, transacciones, índices y cursores.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/IndexedDB/index.html",
-  },
-  // Módulo de detección eficiente de visibilidad de elementos con IntersectionObserver
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Intersection Observer",
-    tag: "12 Slides",
-    desc: "Lazy loading, scroll infinito y laboratorio interactivo real.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Intersection Observer/index.html",
-  },
-  // Módulo de almacenamiento persistente clave-valor en el navegador
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Local Storage",
-    tag: "11 Slides",
-    desc: "Almacenamiento persistente, JSON y sincronización multi-pestaña.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Local Storage/index.html",
-  },
-  // Módulo de evaluación dinámica de Media Queries CSS desde JavaScript
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "window.matchMedia()",
-    tag: "12 Slides",
-    desc: "Media Queries reactivas en JS y laboratorio de breakpoints.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Matchmedia/index.html",
-  },
-  // Módulo de optimización de funciones puras mediante caché en memoria (Memoization)
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Memoization",
-    tag: "12 Slides",
-    desc: "Caché de funciones puras, Closures, Map/WeakMap y optimización O(n).",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Memoization/index.html",
-  },
-  // Módulo sobre la directiva 'use strict', seguridad y módulos ES6
   { // Instrucción JavaScript
     cat: "master",
     title: "Modo Estricto",
@@ -158,47 +85,6 @@ const modules = [
     desc: "'use strict', ES Modules, seguridad y optimización.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Modo Estricto/index.html",
   },
-  // Módulo sobre las interfaces del objeto BOM window.navigator
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Objeto Navigator",
-    tag: "12 Slides",
-    desc: "Interfaces BOM, red, hardware, storage y Clipboard API.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Navigator/index.html",
-  },
-  // Módulo de alertas nativas del sistema operativo con Notifications API
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Notifications API",
-    tag: "12 Slides",
-    desc: "Permisos, alertas nativas del SO y Service Workers.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Notifications/index.html",
-  },
-  // Módulo sobre fechas, horas y formateo internacional con Date e Intl
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Objeto Date",
-    tag: "11 Slides",
-    desc: "Fechas, horas y formateo moderno con Intl.DateTimeFormat.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Date/index.html",
-  },
-  // Módulo sobre el objeto window.screen (dimensiones físicas, colorDepth y orientación)
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Objeto Screen (window.screen)",
-    tag: "11 Slides",
-    desc: "Resolución total, availWidth/availHeight, colorDepth, orientation y Lab.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Screen/index.html",
-  },
-  // Módulo sobre gráficos 2D con HTML5 Canvas API (rectángulos, paths, arcos y animación)
-  { // Instrucción JavaScript
-    cat: "master",
-    title: "Canvas (HTML5 Canvas 2D)",
-    tag: "11 Slides",
-    desc: "Contexto 2D, fillRect/strokeRect, beginPath, arc, requestAnimationFrame y Lab.",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Canvas/index.html",
-  },
-  // Módulo sobre expresiones condicionales cortas y Nullish Coalescing
   { // Instrucción JavaScript
     cat: "master",
     title: "Operador Ternario",
@@ -206,7 +92,13 @@ const modules = [
     desc: "Expresiones condicionales, ?? Nullish Coalescing y legibilidad.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Operador Ternario/index.html",
   },
-  // Módulo sobre herencia prototípica, Prototype Chain y clases ES6+
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Funciones Flecha",
+    tag: "12 Slides",
+    desc: "Sintaxis, ámbito léxico de this, closures y recursividad.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Funciones Flecha/index.html",
+  },
   { // Instrucción JavaScript
     cat: "master",
     title: "Prototipos",
@@ -214,15 +106,41 @@ const modules = [
     desc: "Prototype Chain, herencia prototípica y equivalencia con class.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Prototipos/index.html",
   },
-  // Módulo de Service Workers para proxy de red, PWAs y modo offline
   { // Instrucción JavaScript
     cat: "master",
-    title: "Service Workers",
+    title: "Memoization",
     tag: "12 Slides",
-    desc: "Ciclo de vida, fetch offline, Cache API y postMessage().",
-    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Service Workers/index.html",
+    desc: "Caché de funciones puras, Closures, Map/WeakMap y optimización O(n).",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Memoization/index.html",
   },
-  // Módulo de detección de pestaña activa o en segundo plano (Page Visibility API)
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Objeto Date",
+    tag: "11 Slides",
+    desc: "Fechas, horas y formateo moderno con Intl.DateTimeFormat.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Date/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Objeto Screen (window.screen)",
+    tag: "11 Slides",
+    desc: "Resolución total, availWidth/availHeight, colorDepth, orientation y Lab.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Objeto Screen/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Objeto Navigator",
+    tag: "12 Slides",
+    desc: "Interfaces BOM, red, hardware, storage y Clipboard API.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Navigator/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "window.matchMedia()",
+    tag: "12 Slides",
+    desc: "Media Queries reactivas en JS y laboratorio de breakpoints.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Matchmedia/index.html",
+  },
   { // Instrucción JavaScript
     cat: "master",
     title: "Visibility Change",
@@ -230,7 +148,90 @@ const modules = [
     desc: "Page Visibility API, ahorro de CPU/red y reproductor inteligente.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Visibility Change/index.html",
   },
-  // Módulo de ejecución paralela en hilos secundarios con Web Workers
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "History API",
+    tag: "11 Slides",
+    desc: "pushState, replaceState, popstate y scrollRestoration.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Historial/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Geolocalización",
+    tag: "11 Slides",
+    desc: "getCurrentPosition(), watchPosition() y manejo de errores.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Geolocalization/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Drag & Drop",
+    tag: "11 Slides",
+    desc: "Eventos de arrastre, dataTransfer y archivos del escritorio.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Drag & Drop/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "FileReader API",
+    tag: "11 Slides",
+    desc: "Lectura de texto, DataURL, ArrayBuffer y barras de carga.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/File Reader/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Canvas (HTML5 Canvas 2D)",
+    tag: "11 Slides",
+    desc: "Contexto 2D, fillRect/strokeRect, beginPath, arc, requestAnimationFrame y Lab.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Canvas/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Local Storage",
+    tag: "11 Slides",
+    desc: "Almacenamiento persistente, JSON y sincronización multi-pestaña.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Local Storage/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Cookies (document.cookie)",
+    tag: "11 Slides",
+    desc: "Creación, lectura, modificación, eliminación, encodeURIComponent, SameSite y Lab.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cookies/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "IndexedDB",
+    tag: "12 Slides",
+    desc: "Base NoSQL en el navegador, transacciones, índices y cursores.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/IndexedDB/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Intersection Observer",
+    tag: "12 Slides",
+    desc: "Lazy loading, scroll infinito y laboratorio interactivo real.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Intersection Observer/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "APIs y Fetch",
+    tag: "11 Slides",
+    desc: "Consumo RESTful, fetch(), AbortController y Promise.all.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Apis/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Cache API (caches)",
+    tag: "12 Slides",
+    desc: "CacheStorage, put/match/delete, estrategias PWA y soporte offline.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Cache/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Notifications API",
+    tag: "12 Slides",
+    desc: "Permisos, alertas nativas del SO y Service Workers.",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Notifications/index.html",
+  },
   { // Instrucción JavaScript
     cat: "master",
     title: "Web Workers",
@@ -238,7 +239,13 @@ const modules = [
     desc: "Hilos en segundo plano, postMessage, Transferables y Blobs.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Web Workers/index.html",
   },
-  // Acceso directo a las 23 guías Markdown de Master Level
+  { // Instrucción JavaScript
+    cat: "master",
+    title: "Service Workers",
+    tag: "12 Slides",
+    desc: "Ciclo de vida, fetch offline, Cache API y postMessage().",
+    href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Service Workers/index.html",
+  },
   { // Instrucción JavaScript
     cat: "master",
     title: "Documentación Completa Master Level",
@@ -247,7 +254,7 @@ const modules = [
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/DOCUMENTACION/index.html",
   },
 
-  // --- SECCIÓN: EJERCICIOS PRÁCTICOS (PROGRESIÓN: JUNIOR → MID LEVEL) ---
+// --- SECCIÓN: EJERCICIOS PRÁCTICOS (PROGRESIÓN: JUNIOR → MID LEVEL) ---
   // 01–11: Ejercicios Junior Level
   { // Instrucción JavaScript
     cat: "ejercicios",
@@ -474,117 +481,48 @@ const modules = [
   },
 
   // --- SECCIÓN: JS MID LEVEL ---
-  // Práctica de programación asíncrona moderna con async y await
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Async y Await",
+    title: "Objeto Window",
     tag: "Mid Level",
-    desc: "Asincronía moderna legible con try/catch.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Async y Await/index.html",
-  },
-  // Práctica de Promesas y encadenamiento asíncrono
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Promesas",
-    tag: "Mid Level",
-    desc: "Estados pending, fulfilled, rejected y encadenamiento.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Promesas/index.html",
-  },
-  // Práctica de consumo HTTP con Fetch API
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Fetch API",
-    tag: "Mid Level",
-    desc: "Peticiones HTTP modernas en JavaScript.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Fetch/index.html",
-  },
-  // Práctica de peticiones HTTP y encabezados
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Peticiones HTTP",
-    tag: "Mid Level",
-    desc: "Métodos, cabeceras y códigos de estado HTTP.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Peticiones HTTP/index.html",
-  },
-  // Práctica de funciones callback y flujo asíncrono base
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Callbacks",
-    tag: "Mid Level",
-    desc: "Funciones de retorno y flujo asíncrono base.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Callbacks/index.html",
-  },
-  // Práctica de serialización y parseo con JSON
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Datos Estructurados (JSON)",
-    tag: "Mid Level",
-    desc: "Serialización y parseo de objetos JSON.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Datos Estructurados (JSON)/index.html",
-  },
-  // Práctica de captura y manejo de excepciones con try/catch
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Try-Catch y Excepciones",
-    tag: "Mid Level",
-    desc: "Manejo robusto de errores en tiempo de ejecución.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Try-Catch/index.html",
-  },
-  // Práctica de estructura de control Switch
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Switch",
-    tag: "Mid Level",
-    desc: "Evaluación múltiple de casos con switch y break.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Switch/index.html",
-  },
-  // Práctica de temporizadores setTimeout y setInterval
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Temporizadores",
-    tag: "Mid Level",
-    desc: "Control del tiempo con setTimeout, setInterval y clear.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Temporizadores/index.html",
-  },
-  // Práctica sobre código obsoleto y reemplazos modernos
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Código Obsoleto",
-    tag: "Mid Level",
-    desc: "Patrones heredados y sus equivalentes actuales.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
-  },
-  // Sub-prácticas de AJAX
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "AJAX (Editor)",
-    tag: "Mid Level",
-    desc: "Peticiones asíncronas clásicas con XMLHttpRequest.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html",
+    desc: "Explora el objeto global del navegador: abrir/cerrar ventanas, alertas, dimensiones y propiedades globales.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Window/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "AJAX (Htdocs)",
+    title: "Objetos Barprop",
     tag: "Mid Level",
-    desc: "Práctica de AJAX en entorno de servidor local.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html",
-  },
-  // Sub-prácticas de Librería Axios
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Librería Axios (Editor)",
-    tag: "Mid Level",
-    desc: "Cliente HTTP basado en Promesas con Axios.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html",
+    desc: "Inspecciona la visibilidad de barras del navegador (locationbar, menubar, scrollbars, toolbar).",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Objetos Barprop/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Axios vs Fetch (Htdocs)",
+    title: "Objeto Location",
     tag: "Mid Level",
-    desc: "Comparativa práctica entre Axios y Fetch.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html",
+    desc: "Lee y manipula la URL actual del navegador mediante window.location (href, pathname, search, reload).",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Location/index.html",
   },
-  // Sub-prácticas de Eventos
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Screen y Scroll",
+    tag: "Mid Level",
+    desc: "Consulta dimensiones físicas del monitor (window.screen) y controla el desplazamiento (scrollTo, scrollY).",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Screen y Scroll/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Resize y Move",
+    tag: "Mid Level",
+    desc: "Controla eventos de redimensionamiento (resize) y métodos de tamaño/posición de ventana.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Resize y Move/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Eventos del DOM",
+    tag: "Mid Level",
+    desc: "Domina addEventListener(), propagación (Bubbling/Capturing), eventos de mouse, teclado e interfaz.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/index.html",
+  },
   { // Instrucción JavaScript
     cat: "mid",
     title: "Eventos: Handlers",
@@ -620,15 +558,55 @@ const modules = [
     desc: "Eventos load, resize, scroll y select.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/Eventos de Interfaz/index.html",
   },
-  // Sub-práctica de DevTools
   { // Instrucción JavaScript
     cat: "mid",
-    title: "DevTools: Pestaña Application",
+    title: "Switch",
     tag: "Mid Level",
-    desc: "Inspección de almacenamiento y caché en DevTools.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html",
+    desc: "Evaluación múltiple de casos con switch y break.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Switch/index.html",
   },
-  // Guías interactivas de carpeta para los módulos Mid Level
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Try-Catch y Excepciones",
+    tag: "Mid Level",
+    desc: "Manejo robusto de errores en tiempo de ejecución.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Try-Catch/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Callbacks",
+    tag: "Mid Level",
+    desc: "Funciones de retorno y flujo asíncrono base.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Callbacks/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Promesas",
+    tag: "Mid Level",
+    desc: "Estados pending, fulfilled, rejected y encadenamiento.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Promesas/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Async y Await",
+    tag: "Mid Level",
+    desc: "Asincronía moderna legible con try/catch.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Async y Await/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Datos Estructurados (JSON)",
+    tag: "Mid Level",
+    desc: "Serialización y parseo de objetos JSON.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Datos Estructurados (JSON)/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Peticiones HTTP",
+    tag: "Mid Level",
+    desc: "Métodos, cabeceras y códigos de estado HTTP.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Peticiones HTTP/index.html",
+  },
   { // Instrucción JavaScript
     cat: "mid",
     title: "AJAX (XMLHttpRequest)",
@@ -638,10 +616,24 @@ const modules = [
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Eventos del DOM",
+    title: "AJAX (Editor)",
     tag: "Mid Level",
-    desc: "Domina addEventListener(), propagación (Bubbling/Capturing), eventos de mouse, teclado e interfaz.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Eventos/index.html",
+    desc: "Peticiones asíncronas clásicas con XMLHttpRequest.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "AJAX (Htdocs)",
+    tag: "Mid Level",
+    desc: "Práctica de AJAX en entorno de servidor local.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Fetch API",
+    tag: "Mid Level",
+    desc: "Peticiones HTTP modernas en JavaScript.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Fetch/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
@@ -652,17 +644,31 @@ const modules = [
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Objeto Location",
+    title: "Librería Axios (Editor)",
     tag: "Mid Level",
-    desc: "Lee y manipula la URL actual del navegador mediante window.location (href, pathname, search, reload).",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Location/index.html",
+    desc: "Cliente HTTP basado en Promesas con Axios.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Objetos Barprop",
+    title: "Axios vs Fetch (Htdocs)",
     tag: "Mid Level",
-    desc: "Inspecciona la visibilidad de barras del navegador (locationbar, menubar, scrollbars, toolbar).",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Objetos Barprop/index.html",
+    desc: "Comparativa práctica entre Axios y Fetch.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Código Obsoleto",
+    tag: "Mid Level",
+    desc: "Patrones heredados y sus equivalentes actuales.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
+  },
+  { // Instrucción JavaScript
+    cat: "mid",
+    title: "Temporizadores",
+    tag: "Mid Level",
+    desc: "Control del tiempo con setTimeout, setInterval y clear.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Temporizadores/index.html",
   },
   { // Instrucción JavaScript
     cat: "mid",
@@ -673,26 +679,11 @@ const modules = [
   },
   { // Instrucción JavaScript
     cat: "mid",
-    title: "Resize y Move",
+    title: "DevTools: Pestaña Application",
     tag: "Mid Level",
-    desc: "Controla eventos de redimensionamiento (resize) y métodos de tamaño/posición de ventana.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Resize y Move/index.html",
+    desc: "Inspección de almacenamiento y caché en DevTools.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html",
   },
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Screen y Scroll",
-    tag: "Mid Level",
-    desc: "Consulta dimensiones físicas del monitor (window.screen) y controla el desplazamiento (scrollTo, scrollY).",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Screen y Scroll/index.html",
-  },
-  { // Instrucción JavaScript
-    cat: "mid",
-    title: "Objeto Window",
-    tag: "Mid Level",
-    desc: "Explora el objeto global del navegador: abrir/cerrar ventanas, alertas, dimensiones y propiedades globales.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Window/index.html",
-  },
-  // Acceso directo a la carpeta de las 25 guías Markdown de Mid Level
   { // Instrucción JavaScript
     cat: "mid",
     title: "Documentación Completa Mid Level",
@@ -701,7 +692,7 @@ const modules = [
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/index.html",
   },
 
-  // --- SECCIÓN: JS JUNIOR LEVEL ---
+// --- SECCIÓN: JS JUNIOR LEVEL ---
   // Práctica de variables (var, let, const)
   { // Instrucción JavaScript
     cat: "junior",
@@ -1535,14 +1526,10 @@ const modules = [
 ];
 
 // Iconos oficiales tomados de Flaticon (HTML5, CSS3, JavaScript y Node.js) con carga diferida
-const TECH_ICONS = { // Declara e inicializa "TECH_ICONS"
-  // Icono oficial de HTML5 en Flaticon
+const TECH_ICONS = {
   html: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/174/174854.png" alt=""></span>',
-  // Icono oficial de CSS3 en Flaticon
   css: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt=""></span>',
-  // Icono oficial de JavaScript en Flaticon
   js: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png" alt=""></span>',
-  // Icono oficial de Node.js en Flaticon
   node: '<span class="tech-icon" aria-hidden="true"><img loading="lazy" decoding="async" src="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" alt=""></span>',
 };
 
@@ -1656,6 +1643,7 @@ function render() { // Declara función
   // Leemos una única vez el progreso guardado en localStorage antes de recorrer categorías
   let progressMap = {}; // Declara e inicializa "progressMap"
   try { progressMap = JSON.parse(localStorage.getItem("curso_web_progress") || "{}"); } catch (_) {}
+  renderGlobalProgress(progressMap);
   // Fragmento principal para insertar todas las secciones en una sola operación DOM
   const portalFrag = document.createDocumentFragment(); // Crea DocumentFragment para minimizar reflows
 
@@ -1673,7 +1661,8 @@ function render() { // Declara función
         (isLevelProjects ? projectMatchesFilter(m, activeFilter) : m.cat === cat) &&
         (m.title.toLowerCase().includes(q) ||
           m.desc.toLowerCase().includes(q) ||
-          m.tag.toLowerCase().includes(q)),
+          m.tag.toLowerCase().includes(q) ||
+          m.href.toLowerCase().includes(q)),
     );
     // Si ningún módulo coincide en esta categoría, no creamos sección vacía
     if (items.length === 0) return; // Evalúa condición
@@ -1687,8 +1676,9 @@ function render() { // Declara función
     const sec = document.createElement("section"); // Crea nuevo elemento DOM "sec"
     // Asignamos la clase CSS de sección de curso
     sec.className = "course-section"; // Asigna valor
-    // Insertamos el título correspondiente de la categoría con el conteo de elementos
-    sec.innerHTML = `<h2 class="course-title">${titles[cat]} <span class="tag">${items.length}</span></h2>`; // Actualiza contenido en el DOM
+    const catDone = items.filter((it) => progressMap[it.href]?.completed).length;
+    const catDoneTag = catDone > 0 ? ` <span class="tag">${catDone}/${items.length} ✓</span>` : "";
+    sec.innerHTML = `<h2 class="course-title">${titles[cat]} <span class="tag">${items.length}</span>${catDoneTag}</h2>`; // Actualiza contenido en el DOM
 
     // Creamos el contenedor en cuadrícula para las tarjetas de esta categoría
     const grid = document.createElement("div"); // Crea nuevo elemento DOM "grid"
@@ -1734,6 +1724,42 @@ function render() { // Declara función
   // Insertamos todas las secciones en el portal en una sola operación DOM
   portal.appendChild(portalFrag); // Inserta fragmento completo en el DOM
 }
+
+
+function renderGlobalProgress(progressMap) {
+  const bar = document.getElementById("globalProgressBar");
+  if (!bar) return;
+  const total = modules.length;
+  const completed = modules.filter((m) => progressMap[m.href]?.completed).length;
+  const pct = total ? Math.round((completed / total) * 100) : 0;
+  let lastMod = null;
+  try { lastMod = JSON.parse(localStorage.getItem("curso_web_last_module") || "null"); } catch (_) {}
+  const continueHtml = lastMod && lastMod.href
+    ? `<a class="continue-btn" href="${encodeURI(lastMod.href)}">▶ Continuar: ${lastMod.title}</a>`
+    : `<span class="continue-btn" style="opacity:0.75;cursor:default;">🧭 ${total} recursos disponibles</span>`;
+  bar.innerHTML = `
+    <div class="global-progress-info">
+      <div class="global-progress-label">Progreso global del curso: ${completed} / ${total} módulos (${pct}%)</div>
+      <div class="global-progress-track"><div class="global-progress-fill" style="width:${pct}%"></div></div>
+    </div>
+    ${continueHtml}
+  `;
+}
+
+portal.addEventListener("click", (e) => {
+  const card = e.target.closest("a.card");
+  if (!card) return;
+  const titleEl = card.querySelector(".card-title");
+  const href = card.getAttribute("href");
+  if (href) {
+    try {
+      localStorage.setItem("curso_web_last_module", JSON.stringify({
+        title: (titleEl?.textContent || "Último módulo").trim().slice(0, 48),
+        href: decodeURI(href)
+      }));
+    } catch (_) {}
+  }
+});
 
 // Registramos el evento clic en cada botón de filtro para cambiar la categoría activa
 filterBtns.forEach((btn) => { // Instrucción JavaScript

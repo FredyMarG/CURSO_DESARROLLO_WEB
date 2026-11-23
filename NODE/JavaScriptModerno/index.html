@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 04: JavaScript Moderno para Node.js — const/let y TDZ, arrow functions, map/filter/reduce, destructuring, spread/rest, ?. y ??, y módulos ESM." />
+    <title>JavaScript Moderno para Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · JS MODERNO</span>
+            <div class="brand-title"><span>⚡</span><span>JavaScript Moderno</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: JavaScript Moderno">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 04 · ES6+</span>
+                    <span class="badge badge-cyan">const / let · Arrow · Arrays</span>
+                    <span class="badge badge-purple">Destructuring · ESM</span>
+                </div>
+                <h1 class="hero-title">JavaScript Moderno <br /><span class="gradient-text">para Node.js</span></h1>
+                <p class="hero-subtitle">
+                    Domina la sintaxis ES6+ que impulsa proyectos reales en Node.js: variables con alcance de bloque, arrow functions, métodos funcionales de arrays, destructuring, spread/rest, optional chaining y módulos ESM.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧱</div>
+                        <h3>1. const, let y TDZ</h3>
+                        <p>Alcance de bloque, por qué evitar <code>var</code> y referencias constantes.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🏹</div>
+                        <h3>2. Arrow y Puras</h3>
+                        <p>Funciones flecha, retorno implícito de objetos y lógica predecible.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🔍</div>
+                        <h3>3. Arrays y Operadores</h3>
+                        <p><code>map</code>, <code>filter</code>, <code>reduce</code>, destructuring, <code>?.</code> y <code>??</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba pipelines funcionales y código ES6+ en tiempo real.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: VARIABLES Y ALCANCE (const, let, TDZ) -->
+        <section class="slide" data-slide="2" data-title="Variables: const, let y TDZ">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ALCANCE DE BLOQUE</span>
+                <h2 class="slide-title"><code>const</code> por defecto, <code>let</code> para reasignar, nunca <code>var</code></h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list" style="margin-bottom:12px;">
+                    <li><strong><code>var</code> (obsoleto):</strong> tiene alcance de función (ignora bloques <code>if</code> o <code>for</code>), permite redeclaración silenciosa y sufre de <em>hoisting</em> en <code>undefined</code>.</li>
+                    <li><strong><code>const</code> y <code>let</code>:</strong> tienen <strong>alcance de bloque</strong> y viven en la <strong>Temporal Dead Zone (TDZ)</strong> hasta ejecutarse su declaración.</li>
+                    <li><strong>Regla de <code>const</code>:</strong> impide reasignar el identificador, pero <em>no congela</em> el contenido de objetos o arrays.</li>
+                </ul>
+                <pre class="code-block"><code>const PUERTO = 3000;
+let intentos = 0;
+intentos += 1;
+
+const usuario = { nombre: 'Ana', rol: 'dev' };
+usuario.rol = 'tech-lead'; // ✅ Válido (muta propiedad interna)
+// usuario = {};           // ❌ TypeError: Assignment to constant variable</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: FUNCIONES MODERNAS Y ARROW FUNCTIONS -->
+        <section class="slide" data-slide="3" data-title="Funciones y Arrow Functions">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · FUNCIONES ES6+</span>
+                <h2 class="slide-title">Declaraciones, Arrow Functions y Funciones Puras</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Tipo</th><th><code>this</code></th><th>Uso ideal en Node.js</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>function fn()</code></td><td>Dinámico</td><td>Utilidades top-level o métodos con <code>this</code> propio</td></tr>
+                        <tr><td><code>() =&gt; {}</code></td><td>Léxico (heredado)</td><td>Callbacks en <code>map</code>, <code>filter</code>, rutas y promesas</td></tr>
+                        <tr><td><strong>Función pura</strong></td><td>N/A</td><td>Lógica de negocio sin efectos secundarios, fácil de testear</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>// ⚠️ Para retornar un objeto literal implícito, envuelve entre paréntesis ()
+const crearItem = (nombre, precio) => ({ nombre, precio });
+
+// Parámetro por defecto (solo aplica si el argumento es undefined)
+const calcularIVA = (subtotal, tasa = 0.19) => Number((subtotal * (1 + tasa)).toFixed(2));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: METODOS DE ARRAYS -->
+        <section class="slide" data-slide="4" data-title="Métodos Funcionales de Arrays">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · TRANSFORMACIÓN DE DATOS</span>
+                <h2 class="slide-title"><code>map</code>, <code>filter</code>, <code>find</code>, <code>some</code>, <code>every</code> y <code>reduce</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Método</th><th>Retorna</th><th>¿Muta el original?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>filter()</code></td><td>Nuevo array con elementos que cumplen condición</td><td>No</td></tr>
+                        <tr><td><code>map()</code></td><td>Nuevo array transformado (misma longitud)</td><td>No</td></tr>
+                        <tr><td><code>find()</code></td><td>Primer elemento encontrado o <code>undefined</code></td><td>No</td></tr>
+                        <tr><td><code>some() / every()</code></td><td>Booleano (<code>true</code> / <code>false</code>)</td><td>No</td></tr>
+                        <tr><td><code>reduce()</code></td><td>Un único valor acumulado (número, objeto, etc.)</td><td>No</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>const disponibles = productos.filter(p => p.stock > 0);
+const etiquetas = disponibles.map(p => `${p.nombre} ($${p.precio})`);
+const total = productos.reduce((acc, p) => acc + p.precio * p.stock, 0);</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: DESTRUCTURING, SPREAD/REST, ?. Y ?? -->
+        <section class="slide" data-slide="5" data-title="Destructuring, Spread, ?. y ??">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · OPERADORES MODERNOS</span>
+                <h2 class="slide-title">Destructuring, <code>...rest</code> / <code>...spread</code>, <code>?.</code> y <code>??</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>const config = { host: 'localhost', puerto: 0, db: { motor: 'postgres' } };
+
+// Destructuring con alias, default y ...rest
+const { host: servidor, timeout = 5000, ...resto } = config;
+
+// Spread: copia superficial (shallow copy) + sobrescritura inmutable
+const configProd = { ...config, host: 'api.miapp.com', ssl: true };
+
+// Optional chaining (?.) + Nullish coalescing (??)
+const motor = config.db?.motor ?? 'sqlite';
+const puerto = config.puerto ?? 3000; // ✅ 0 (|| daría 3000 porque 0 es falsy)</code></pre>
+                <div class="tip-box warn">
+                    <strong>⚠️ Shallow Copy:</strong> <code>{ ...config }</code> solo clona el primer nivel. Si modificas <code>configProd.db.motor</code>, también cambia <code>config.db.motor</code>. Para copia profunda usa <code>structuredClone()</code>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: INMUTABILIDAD Y BUENAS PRACTICAS -->
+        <section class="slide" data-slide="6" data-title="Inmutabilidad y Buenas Prácticas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD ES6+</span>
+                <h2 class="slide-title">Inmutabilidad, <code>structuredClone</code> y Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>const base = { app: 'API', db: { host: 'localhost' } };
+
+// Copia profunda (Node.js 17+): no comparte referencias anidadas
+const copiaSegura = structuredClone(base);
+copiaSegura.db.host = '10.0.0.5'; // base.db.host sigue siendo 'localhost'
+
+// Ordenar sin mutar el array original
+const ordenados = [...productos].sort((a, b) => a.precio - b.precio);</code></pre>
+                <ul class="styled-list">
+                    <li><strong>Error con arrow:</strong> escribir <code>x =&gt; { a: x }</code> sin paréntesis devuelve <code>undefined</code>. Usa <code>x =&gt; ({ a: x })</code>.</li>
+                    <li><strong>Mutación accidental:</strong> <code>sort()</code> y <code>reverse()</code> mutan el array original; clona con <code>[...arr]</code> o usa <code>toSorted()</code>.</li>
+                    <li><strong>Valores 0 o "":</strong> usa <code>??</code> en lugar de <code>||</code> cuando <code>0</code>, <code>false</code> o <code>""</code> sean válidos.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador ES6+">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · JAVASCRIPT MODERNO</span>
+                <h2 class="slide-title">🎛️ Simulador de Pipelines y Operadores ES6+</h2>
+                <p class="slide-lead">Selecciona un escenario para observar paso a paso cómo Node.js evalúa arrays, destructuring, operadores seguros y copias superficiales.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario ES6+</label>
+                        <select id="jsSimMode">
+                            <option value="pipeline">filter + map + reduce</option>
+                            <option value="destructuring">Destructuring + ...rest + ...spread</option>
+                            <option value="nullish">Optional Chaining (?.) y ?? vs ||</option>
+                            <option value="shallow">Shallow Copy vs structuredClone</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="jsSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="jsSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: JavaScript Moderno">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de JavaScript Moderno</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: ?? solo activa el respaldo cuando el valor es null o undefined, respetando 0 y ''." data-err="|| descarta todos los valores falsy (como 0 o ''), mientras ?? solo evalúa null y undefined.">
+                    <div class="quiz-q-title">1. ¿Cuál es la ventaja de usar <code>config.puerto ?? 3000</code> frente a <code>config.puerto || 3000</code> cuando <code>puerto</code> vale <code>0</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">?? convierte automáticamente el número a string</button>
+                        <button class="quiz-option" data-opt="b">?? respeta el valor 0 porque solo actúa ante null o undefined</button>
+                        <button class="quiz-option" data-opt="c">|| lanza ReferenceError si el número es 0</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: los paréntesis evitan que JavaScript interprete las llaves {} como el cuerpo de la función." data-err="Sin paréntesis, x => { valor: x } se interpreta como un bloque de código con etiqueta, devolviendo undefined.">
+                    <div class="quiz-q-title">2. ¿Cómo devuelves un objeto literal de forma implícita desde una arrow function?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">x =&gt; ({ valor: x })</button>
+                        <button class="quiz-option" data-opt="b">x =&gt; { valor: x }</button>
+                        <button class="quiz-option" data-opt="c">x =&gt; return { valor: x }</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: reduce() recorre el array sin mutarlo y acumula un único resultado." data-err="sort() muta el array original; forEach() retorna undefined. reduce() acumula sin mutar.">
+                    <div class="quiz-q-title">3. ¿Qué método de array NO muta el original y devuelve un único valor acumulado?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">sort()</button>
+                        <button class="quiz-option" data-opt="b">forEach()</button>
+                        <button class="quiz-option" data-opt="c">reduce()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: JavaScript Moderno">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de JavaScript Moderno</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const productos = [
+    { id: 1, nombre: &#x27;Teclado Mecánico&#x27;, precio: 90, stock: 4 },
+    { id: 2, nombre: &#x27;Monitor 27&#x27;, precio: 310, stock: 0 },
+    { id: 3, nombre: &#x27;Mouse Pro&#x27;, precio: 45, stock: 8 }
+  ];
+
+  const disponibles = productos
+    .filter(p =&gt; p.stock &gt; 0)
+    .map(({ nombre, precio }) =&gt; `${nombre}: $${precio}`);
+
+  const totalStock = productos.reduce((acc, p) =&gt; acc + p.precio * p.stock, 0);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;Disponibles:&lt;/strong&gt; ${disponibles.join(&#x27; | &#x27;)}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Valor total inventario:&lt;/strong&gt; $${totalStock}&lt;/div&gt;`;
+&lt;/script&gt;">Catálogo (filter / map / reduce)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const config = { servicio: &#x27;auth-api&#x27;, puerto: 0, limites: { reintentos: 3 } };
+  const { servicio, ...extra } = config;
+  const puerto = config.puerto ?? 8080;
+  const timeout = config.red?.timeout ?? 5000;
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;Servicio:&lt;/strong&gt; ${servicio}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Puerto (??):&lt;/strong&gt; ${puerto}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Timeout (?. ??):&lt;/strong&gt; ${timeout}ms&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Rest:&lt;/strong&gt; ${JSON.stringify(extra)}&lt;/div&gt;`;
+&lt;/script&gt;">Destructuring + ?. + ??</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const productos = [
+    { id: 1, nombre: &#x27;Teclado Mecánico&#x27;, precio: 90, stock: 4 },
+    { id: 2, nombre: &#x27;Monitor 27&#x27;, precio: 310, stock: 0 },
+    { id: 3, nombre: &#x27;Mouse Pro&#x27;, precio: 45, stock: 8 }
+  ];
+
+  const disponibles = productos
+    .filter(p =&gt; p.stock &gt; 0)
+    .map(({ nombre, precio }) =&gt; `${nombre}: $${precio}`);
+
+  const totalStock = productos.reduce((acc, p) =&gt; acc + p.precio * p.stock, 0);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;Disponibles:&lt;/strong&gt; ${disponibles.join(&#x27; | &#x27;)}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Valor total inventario:&lt;/strong&gt; $${totalStock}&lt;/div&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('jsSimMode');
+            const stage = document.getElementById('jsSimStage');
+            const code = document.getElementById('jsSimCode');
+            if (!mode || !stage || !code) return;
+
+            function update() {
+                if (mode.value === 'pipeline') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">1. Entrada: [Mouse ($25, x10), Monitor ($320, x0), Teclado ($85, x5)]</div>
+                        <div style="color:#fbbf24;">2. filter(p =&gt; p.stock &gt; 0) ➔ excluye Monitor (stock 0)</div>
+                        <div style="color:#38bdf8;">3. map(p =&gt; p.nombre) ➔ ["Mouse", "Teclado"]</div>
+                        <div style="color:#00ff88;font-weight:700;">4. reduce((acc, p) =&gt; acc + p.precio * p.stock, 0) ➔ 675</div>
+                    `;
+                    code.textContent = `const disponibles = productos.filter(p => p.stock > 0).map(p => p.nombre);\nconst total = productos.reduce((acc, p) => acc + p.precio * p.stock, 0);`;
+                } else if (mode.value === 'destructuring') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">pedido = { id: "ORD-9", cliente: "Luis", total: 140, cupon: "DEV10" }</div>
+                        <div style="color:#00ff88;">id =&gt; "ORD-9" | comprador (alias) =&gt; "Luis"</div>
+                        <div style="color:#fbbf24;">...detalles =&gt; { total: 140, cupon: "DEV10" }</div>
+                        <div style="color:#00ff88;font-weight:700;">{ ...pedido, estado: "enviado" } ➔ nuevo objeto sin mutar pedido</div>
+                    `;
+                    code.textContent = `const { id, cliente: comprador, ...detalles } = pedido;\nconst copia = { ...pedido, estado: 'enviado' };`;
+                } else if (mode.value === 'nullish') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">srv = { puerto: 0, ssl: null }</div>
+                        <div style="color:#ff3358;">srv.puerto || 3000 ➔ 3000 (⚠️ Bug: 0 es falsy)</div>
+                        <div style="color:#00ff88;font-weight:700;">srv.puerto ?? 3000 ➔ 0 (✅ respeta 0)</div>
+                        <div style="color:#00ff88;">srv.ssl?.certificado ?? "auto-firmado" ➔ "auto-firmado"</div>
+                    `;
+                    code.textContent = `const puerto = srv.puerto ?? 3000;\nconst cert = srv.ssl?.certificado ?? 'auto-firmado';`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">base = { app: "API", db: { host: "localhost" } }</div>
+                        <div style="color:#00ff88;">clon = { ...base }; clon.app = "Worker" ➔ base.app sigue "API"</div>
+                        <div style="color:#ff3358;">clon.db.host = "10.0.0.5" ➔ ⚠️ base.db.host también muta!</div>
+                        <div style="color:#fbbf24;font-weight:700;">Solución: structuredClone(base) para copia profunda</div>
+                    `;
+                    code.textContent = `const clonSuperficial = { ...base }; // comparte objetos anidados\nconst clonProfundo = structuredClone(base); // Node 17+`;
+                }
+            }
+
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

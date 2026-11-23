@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · BOM</span><div class="brand-title"><span>🖥️</span><span>Screen y Scroll</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -111,15 +111,28 @@ window.scrollTo({ top: 0, behavior: "smooth" });</code></pre></div>
 <pre class="code-block"><code>scrollX cambia</code></pre></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Usa <code>{ behavior: "smooth" }</code> para botones de "Volver arriba".</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Screen y Scroll">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Screen y Scroll">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · SCREEN Y SCROLLTO</span><h2 class="slide-title">🎛️ Simulador de <code>scrollTo()</code> y Métricas <code>screen</code></h2><p class="slide-lead">Desplaza el contenedor con botones programáticos y observa la lectura de <code>scrollTop</code>.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Posición destino (top)</label><input type="range" id="scPos" min="0" max="240" step="20" value="0" /></div>
+      <div class="sim-control"><button type="button" id="scGo" class="preset-btn active" style="width:100%;">scrollTo({ behavior: 'smooth' })</button></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Screen y Scroll">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="window.scrollY devuelve el desplazamiento vertical actual en píxeles." data-err="scrollY mide el desplazamiento vertical actual."><div class="quiz-q-title">1. ¿Qué propiedad indica cuántos píxeles se ha desplazado verticalmente la página?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">window.scrollY</button><button class="quiz-option" data-opt="b">screen.height</button><button class="quiz-option" data-opt="c">window.top</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Screen y Scroll">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Screen y Scroll">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   document.getElementById(&#x27;out&#x27;).textContent = `Pantalla: ${screen.width}x${screen.height}`;
@@ -128,8 +141,8 @@ window.scrollTo({ top: 0, behavior: "smooth" });</code></pre></div>
   document.getElementById(&#x27;out&#x27;).textContent = `Pantalla: ${screen.width}x${screen.height}`;
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="scroll.html"><span class="file-name">📄 Práctica Screen y Scroll</span><span class="file-path">scroll.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -139,5 +152,16 @@ window.scrollTo({ top: 0, behavior: "smooth" });</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const pos = document.getElementById('scPos'), go = document.getElementById('scGo'), st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      st.innerHTML = `<div style="font-family:var(--font-mono);font-size:0.8rem;color:#38bdf8;">screen: ${screen.width}x${screen.height} | avail: ${screen.availWidth}x${screen.availHeight}</div><div id="scBox" style="height:120px;overflow-y:auto;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px;"><div style="height:360px;background:linear-gradient(180deg,rgba(56,189,248,0.25),rgba(168,85,247,0.25));border-radius:6px;padding:10px;">Contenido desplazable (360px)</div></div><div id="scRead" style="font-family:var(--font-mono);font-size:0.82rem;color:#00ff88;">scrollTop: 0px</div>`;
+      const box = document.getElementById('scBox'), rd = document.getElementById('scRead');
+      function upd() { cd.textContent = `elemento.scrollTo({ top: ${pos.value}, behavior: "smooth" });`; }
+      go.addEventListener('click', () => { box.scrollTo({ top: Number(pos.value), behavior: 'smooth' }); upd(); });
+      box.addEventListener('scroll', () => { rd.textContent = 'scrollTop: ' + Math.round(box.scrollTop) + 'px'; });
+      pos.addEventListener('input', upd); upd();
+        })();
+    </script>
 </body>
 </html>

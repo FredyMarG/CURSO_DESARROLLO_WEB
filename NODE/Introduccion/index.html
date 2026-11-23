@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 01: Introducción a Node.js — Qué es Node.js, Frontend vs Backend, Navegador vs Node.js, usos reales y primer contacto CLI." />
+    <title>Introducción a Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · INTRODUCCIÓN</span>
+            <div class="brand-title"><span>🟢</span><span>Introducción a Node.js</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Introducción a Node.js">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 01 · Inicio Backend</span>
+                    <span class="badge badge-cyan">Frontend vs Backend</span>
+                    <span class="badge badge-purple">Primer Script CLI</span>
+                </div>
+                <h1 class="hero-title">Introducción a<br /><span class="gradient-text">Node.js</span></h1>
+                <p class="hero-subtitle">
+                    Da tus primeros pasos en el desarrollo backend: comprende qué es Node.js (y qué no es), en qué se diferencia del navegador, sus casos de uso reales y cómo ejecutar tu primer programa por consola.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧠</div>
+                        <h3>1. ¿Qué es Node.js?</h3>
+                        <p>Entorno de ejecución fuera del navegador y rol Frontend vs Backend.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🧭</div>
+                        <h3>2. Navegador vs Node.js</h3>
+                        <p>Qué APIs cambian: <code>window/document</code> frente a <code>process</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🗺️</div>
+                        <h3>3. Usos y Mapa</h3>
+                        <p>Dónde brilla Node.js y el recorrido completo de los 8 módulos.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Inspecciona entornos y practica argumentos CLI con <code>process.argv</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES NODE.JS Y BACKEND VS FRONTEND -->
+        <section class="slide" data-slide="2" data-title="¿Qué es Node.js? Frontend vs Backend">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · CONCEPTO BASE</span>
+                <h2 class="slide-title">¿Qué es Node.js? y Frontend vs Backend</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <strong>Node.js</strong> es un <strong>entorno de ejecución de JavaScript fuera del navegador</strong>. No es un lenguaje de programación (el lenguaje es JavaScript) ni un framework (como Express o Fastify).
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Característica</th><th>Frontend</th><th>Backend (Node.js)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Dónde se ejecuta</td><td>Navegador del usuario</td><td>Servidor / Terminal</td></tr>
+                        <tr><td>Responsabilidad</td><td>Interfaz visual (HTML, CSS, DOM)</td><td>Reglas de negocio, seguridad y datos</td></tr>
+                        <tr><td>Ejemplo</td><td>Formulario de registro</td><td>Validar, guardar y responder JSON</td></tr>
+                        <tr><td>Acceso a secretos</td><td>Nunca</td><td>Mediante configuración segura</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: NAVEGADOR VS NODE.JS -->
+        <section class="slide" data-slide="3" data-title="Navegador vs Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · CAMBIO DE ENTORNO</span>
+                <h2 class="slide-title">JavaScript en el Navegador vs Node.js</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Capacidad</th><th>Navegador</th><th>Node.js</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>document</code> / <code>window</code></td><td>Sí (DOM y BOM)</td><td>No existen</td></tr>
+                        <tr><td><code>process</code> / variables de entorno</td><td>No</td><td>Sí (<code>process.version</code>, <code>process.argv</code>)</td></tr>
+                        <tr><td>Sistema de archivos y puertos</td><td>Restringido por seguridad</td><td>Acceso completo mediante APIs nativas</td></tr>
+                        <tr><td><code>console.log()</code> y <code>fetch()</code></td><td>Sí</td><td>Sí (versiones LTS modernas)</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>// ❌ En Node.js falla porque no hay DOM:
+// document.querySelector('h1'); // ReferenceError: document is not defined
+
+// ✅ En Node.js consultas el proceso activo:
+console.log('Versión de Node:', process.version);
+console.log('Carpeta actual:', process.cwd());</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: USOS PRINCIPALES Y RUTA DEL CURSO -->
+        <section class="slide" data-slide="4" data-title="Usos Reales y Mapa del Curso">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PANORAMA GENERAL</span>
+                <h2 class="slide-title">5 Usos Reales y Mapa de Aprendizaje</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list" style="margin-bottom:12px;">
+                    <li><strong>APIs REST y Backends:</strong> servir JSON, autenticar usuarios y conectar bases de datos.</li>
+                    <li><strong>Herramientas CLI y Automatización:</strong> scripts para procesar archivos, builds o tareas.</li>
+                    <li><strong>Aplicaciones en Tiempo Real:</strong> chats y notificaciones con WebSockets.</li>
+                </ul>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Módulo</th><th>Qué dominarás</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>02. Fundamentos</strong></td><td>Protocolo HTTP, <code>npm</code> y primer servidor <code>node:http</code></td></tr>
+                        <tr><td><strong>03. Instalación · 04. JS Moderno</strong></td><td>LTS, <code>nvm</code>, PowerShell, ES6+ (<code>map/filter/reduce</code>, <code>?.</code>, <code>??</code>)</td></tr>
+                        <tr><td><strong>05. Asincronía · 06. Archivos Nativos</strong></td><td>V8, Event Loop, Promesas, <code>node:fs</code>, <code>node:path</code>, <code>events</code> y <code>crypto</code></td></tr>
+                        <tr><td><strong>07. REPL · 08. Módulos</strong></td><td>Consola interactiva y arquitectura modular CommonJS / ESM</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: PRIMER PROGRAMA CLI -->
+        <section class="slide" data-slide="5" data-title="Primer Programa CLI (hola.js)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · TU PRIMER SCRIPT</span>
+                <h2 class="slide-title">Primer Programa por Consola: <code>hola.js</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Todo archivo JavaScript puede ejecutarse directamente con <code>node archivo.js</code>. Los argumentos que pasas por terminal llegan en el arreglo <code>process.argv</code>.
+                </p>
+                <pre class="code-block"><code>// archivo: hola.js
+// process.argv[0] = ruta de node.exe
+// process.argv[1] = ruta de hola.js
+// process.argv[2] = primer argumento escrito por el usuario
+
+const nombre = process.argv[2] ?? 'Estudiante';
+console.log(`¡Hola, ${nombre}! Ejecutando Node ${process.version}`);
+
+// En terminal:
+// node hola.js Ana  -> ¡Hola, Ana!
+// node hola.js      -> ¡Hola, Estudiante!</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS Y ERRORES INICIALES -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas Iniciales">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PRIMEROS PASOS SEGUROS</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes al Empezar</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Error que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Separar lógica frontend de lógica backend</td><td>Exponer credenciales o validaciones críticas en el navegador</td></tr>
+                        <tr><td>Usar valores por defecto (<code>??</code>) en <code>process.argv</code></td><td>Imprimir <code>undefined</code> cuando falta un argumento</td></tr>
+                        <tr><td>Comprobar la carpeta actual (<code>pwd</code> / <code>cwd</code>)</td><td>Error <code>MODULE_NOT_FOUND</code> al ejecutar <code>node archivo.js</code></td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box warn">
+                    <strong>⚠️ Error frecuente:</strong> Intentar usar <code>document</code>, <code>alert()</code> o <code>localStorage</code> dentro de Node.js. Esas APIs pertenecen únicamente al navegador.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Entorno y CLI">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · ENTORNO Y CLI</span>
+                <h2 class="slide-title">🎛️ Comparador de Entornos y <code>process.argv</code></h2>
+                <p class="slide-lead">Comprueba qué APIs existen en el Navegador vs Node.js e inspecciona cómo se llena <code>process.argv</code> al ejecutar un comando.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Modo de Simulación</label>
+                        <select id="introMode">
+                            <option value="env">Navegador vs Node.js (APIs disponibles)</option>
+                            <option value="argv">Inspección de process.argv (node hola.js Ana)</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Argumento CLI (usuario)</label>
+                        <select id="introArg">
+                            <option value="Ana">Ana</option>
+                            <option value="Carlos">Carlos</option>
+                            <option value="">(sin argumento)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="introStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="introCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: Introducción a Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Introducción</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: Node.js es un entorno de ejecución para JavaScript fuera del navegador." data-err="Node.js no es un lenguaje ni un framework; ejecuta JavaScript en servidor o terminal.">
+                    <div class="quiz-q-title">1. ¿Qué es exactamente Node.js?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Un lenguaje de programación distinto a JavaScript</button>
+                        <button class="quiz-option" data-opt="b">Un entorno de ejecución de JavaScript fuera del navegador</button>
+                        <button class="quiz-option" data-opt="c">Un framework exclusivo para estilos CSS</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: document y window son APIs del navegador (DOM/BOM), no de Node.js." data-err="console.log y process sí funcionan en Node.js; document.querySelector pertenece al navegador.">
+                    <div class="quiz-q-title">2. ¿Cuál de estas expresiones falla en Node.js por pertenecer solo al navegador?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">document.querySelector('h1')</button>
+                        <button class="quiz-option" data-opt="b">process.version</button>
+                        <button class="quiz-option" data-opt="c">console.log('Hola')</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: process.argv[0] es node, [1] es el script y [2] es el primer argumento del usuario." data-err="Los índices 0 y 1 contienen las rutas de node y del archivo; los argumentos del usuario empiezan en el índice 2.">
+                    <div class="quiz-q-title">3. Al ejecutar <code>node hola.js Ana</code>, ¿en qué índice de <code>process.argv</code> llega <code>"Ana"</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">process.argv[0]</button>
+                        <button class="quiz-option" data-opt="b">process.argv[1]</button>
+                        <button class="quiz-option" data-opt="c">process.argv[2]</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Introducción a Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Introducción</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de process.argv[2] al ejecutar: node hola.js &lt;nombre&gt;
+  function saludarCLI(argv) {
+    const nombre = argv[2] ?? &#x27;Estudiante&#x27;;
+    return `¡Hola, ${nombre}! Bienvenido a Node.js.`;
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;&gt; node hola.js Ana&lt;/strong&gt; → ${saludarCLI([&#x27;node&#x27;, &#x27;hola.js&#x27;, &#x27;Ana&#x27;])}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;&gt; node hola.js&lt;/strong&gt;     → ${saludarCLI([&#x27;node&#x27;, &#x27;hola.js&#x27;])}&lt;/div&gt;`;
+&lt;/script&gt;">Saludo CLI (process.argv)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Comparador didáctico de APIs disponibles según el entorno
+  const capacidades = [
+    { api: &#x27;document / window&#x27;, navegador: true, node: false },
+    { api: &#x27;process.argv / process.cwd()&#x27;, navegador: false, node: true },
+    { api: &#x27;console.log() / fetch()&#x27;, navegador: true, node: true }
+  ];
+
+  document.getElementById(&#x27;out&#x27;).innerHTML = capacidades.map(c =&gt;
+    `&lt;div&gt;${c.api} → Navegador: ${c.navegador ? &#x27;✅&#x27; : &#x27;❌&#x27;} | Node.js: ${c.node ? &#x27;✅&#x27; : &#x27;❌&#x27;}&lt;/div&gt;`
+  ).join(&#x27;&#x27;);
+&lt;/script&gt;">Detector Navegador vs Node.js</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de process.argv[2] al ejecutar: node hola.js &lt;nombre&gt;
+  function saludarCLI(argv) {
+    const nombre = argv[2] ?? &#x27;Estudiante&#x27;;
+    return `¡Hola, ${nombre}! Bienvenido a Node.js.`;
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;&gt; node hola.js Ana&lt;/strong&gt; → ${saludarCLI([&#x27;node&#x27;, &#x27;hola.js&#x27;, &#x27;Ana&#x27;])}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;&gt; node hola.js&lt;/strong&gt;     → ${saludarCLI([&#x27;node&#x27;, &#x27;hola.js&#x27;])}&lt;/div&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('introMode');
+            const arg = document.getElementById('introArg');
+            const stage = document.getElementById('introStage');
+            const code = document.getElementById('introCode');
+            if (!stage) return;
+
+            function update() {
+                if (mode.value === 'env') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">Navegador: tiene document, window y DOM; NO accede al disco libremente.</div>
+                        <div style="color:#00ff88;font-weight:700;">Node.js: tiene process, APIs nativas (node:*) y puertos; NO tiene document.</div>
+                        <div style="color:#fbbf24;">Ambos comparten el lenguaje JavaScript (ECMAScript), console y fetch().</div>
+                    `;
+                    code.textContent = `// Solo Navegador:\n// document.title = 'Mi Web';\n\n// Solo Node.js:\nconsole.log(process.version, process.cwd());`;
+                } else {
+                    const userVal = arg.value;
+                    const argv = userVal ? ['C:\\Program Files\\nodejs\\node.exe', 'hola.js', userVal] : ['C:\\Program Files\\nodejs\\node.exe', 'hola.js'];
+                    const saludo = `¡Hola, ${userVal || 'Estudiante'}!`;
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">process.argv[0] (ejecutable): ${argv[0]}</div>
+                        <div style="color:#38bdf8;">process.argv[1] (script): ${argv[1]}</div>
+                        <div style="color:#fbbf24;">process.argv[2] (tu dato): ${argv[2] ?? 'undefined -> usa respaldo "Estudiante"'}</div>
+                        <div style="color:#00ff88;font-weight:700;">Salida: ${saludo}</div>
+                    `;
+                    code.textContent = `const nombre = process.argv[2] ?? 'Estudiante';\nconsole.log(\`¡Hola, \${nombre}!\`);`;
+                }
+            }
+            [mode, arg].forEach(el => el.addEventListener('input', update));
+            update();
+        })();
+    </script>
+</body>
+</html>

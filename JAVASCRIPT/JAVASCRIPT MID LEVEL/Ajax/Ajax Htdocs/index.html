@@ -1,31 +1,94 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f5f7fb">
-    <meta name="description" content="Aprende cómo funciona una petición AJAX con XMLHttpRequest y JSON.">
-    <link rel="stylesheet" href="style.css">
-    <title>AJAX explicado | Laboratorio web</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajax Htdocs (POST con XHR y Servidor Local) — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%A1%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <main class="page-shell">
-        <header class="topbar">
-            <a class="brand" href="#" aria-label="Laboratorio web, inicio">
-                <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
-                <span>Laboratorio<span class="brand-light"> web</span></span>
-            </a>
-            <span class="topbar-label"><span class="online-dot"></span> Guía interactiva</span>
-        </header>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
 
-        <section class="hero" aria-labelledby="page-title">
-            <p class="eyebrow">JAVASCRIPT · PETICIONES HTTP</p>
-            <h1 id="page-title">AJAX, paso a <span>paso.</span></h1>
-            <p class="hero-copy">
-                Envía datos sin recargar la página y observa cómo el servidor responde.
-                Una demostración práctica con <code>XMLHttpRequest</code> y JSON.
-            </p>
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">AJAX · HTDOCS / XAMPP</span>
+            <div class="brand-title"><span>📡</span><span>Ajax Htdocs (POST con XHR y Servidor Local)</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Ajax</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Ajax Htdocs (POST con XHR y Servidor Local)">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">POST JSON</span><span class="badge badge-cyan">XAMPP / htdocs</span><span class="badge badge-cyan">JSON.stringify</span><span class="badge badge-cyan">XMLHttpRequest</span></div>
+                <h1 class="hero-title">Ajax:<br /><span class="gradient-text">Ajax Htdocs (POST con XHR y Servidor Local)</span></h1>
+                <p class="hero-subtitle">Envía datos de un formulario por HTTP POST usando XMLHttpRequest y analiza la respuesta JSON del servidor.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="2" data-title="Peticiones POST con XMLHttpRequest en htdocs">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">Peticiones POST con XMLHttpRequest en htdocs</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">Cuando trabajas con archivos locales o backend PHP/Apache en XAMPP (<code>htdocs</code>), servir el proyecto por <code>http://localhost/...</code> evita bloqueos CORS.</p>
+      <ul class="styled-list">
+        <li><strong>Paso 1:</strong> Captura el evento <code>submit</code> del formulario y llama a <code>e.preventDefault()</code>.</li>
+        <li><strong>Paso 2:</strong> Configura <code>xhr.setRequestHeader('Content-Type', 'application/json')</code>.</li>
+        <li><strong>Paso 3:</strong> Envía el objeto serializado con <code>xhr.send(JSON.stringify(datos))</code>.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>📦 Analogía del paquete etiquetado:</strong> <code>setRequestHeader</code> pega la etiqueta "esto es JSON" y <code>JSON.stringify</code> empaca el objeto en texto plano para viajar por la red.</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Sintaxis POST JSON con XHR">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis POST JSON con XHR</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>const xhr = new XMLHttpRequest();
+xhr.open(&#x27;POST&#x27;, &#x27;https://reqres.in/api/users&#x27;);
+xhr.setRequestHeader(&#x27;Content-Type&#x27;, &#x27;application/json&#x27;);
+xhr.onload = () =&gt; console.log(xhr.status, JSON.parse(xhr.responseText));
+xhr.send(JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Programadora&#x27; }));</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>e.preventDefault()</code></td><td>Evita que el formulario recargue la página</td></tr><tr><td><code>setRequestHeader()</code></td><td>Declara el tipo MIME enviado antes de <code>send()</code></td></tr><tr><td><code>JSON.stringify(obj)</code></td><td>Convierte el objeto JS en cadena JSON válida</td></tr><tr><td><code>http://localhost/...</code></td><td>Origen HTTP válido para evitar errores CORS de <code>file://</code></td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Verifica el rango 2xx:</strong> Comprueba <code>xhr.status >= 200 && xhr.status < 300</code> porque un <code>POST</code> exitoso suele devolver <code>201 Created</code>.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Orden obligatorio:</strong> <code>xhr.setRequestHeader()</code> debe llamarse SIEMPRE después de <code>xhr.open()</code> y antes de <code>xhr.send()</code>.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador POST con XMLHttpRequest">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador POST con XMLHttpRequest</h2></div>
             <aside class="setup-note" aria-label="Instrucciones para visualizar la página">
                 <p class="section-kicker">CÓMO VISUALIZAR ESTA INFORMACIÓN</p>
                 <p>
@@ -114,11 +177,69 @@
             </div>
         </section>
 
-        <footer class="footer">
-            <span>Hecho para aprender, una petición a la vez.</span>
-            <span>HTML · CSS · JavaScript</span>
-        </footer>
+        
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Ajax Htdocs (POST con XHR y Servidor Local)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: JSON.stringify() serializa el objeto a texto JSON." data-err="JSON.parse() hace lo inverso (texto a objeto).">
+                    <div class="quiz-q-title">1. ¿Qué método convierte el objeto JS a texto antes de enviarlo en <code>xhr.send()</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">JSON.parse()</button>
+                        <button class="quiz-option" data-opt="b">JSON.stringify()</button>
+                        <button class="quiz-option" data-opt="c">Object.keys()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: siempre entre open() y send()." data-err="Debe llamarse entre open() y send().">
+                    <div class="quiz-q-title">2. ¿En qué momento se debe llamar a <code>xhr.setRequestHeader()</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Después de open() y antes de send()</button>
+                        <button class="quiz-option" data-opt="b">Antes de open()</button>
+                        <button class="quiz-option" data-opt="c">Dentro de onload</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Ajax Htdocs (POST con XHR y Servidor Local)">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const payload = JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Dev&#x27; });
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Payload listo para POST: &#x27; + payload;
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const payload = JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Dev&#x27; });
+  document.getElementById(&#x27;out&#x27;).textContent = &#x27;Payload listo para POST: &#x27; + payload;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Ajax</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
+        </section>
     </main>
-    <script src="main.js" defer></script>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

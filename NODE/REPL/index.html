@@ -252,13 +252,22 @@ await fs.readFile("nota-repl.txt", "utf8") // 'Aprendí REPL'</code></pre>
                 <h2 class="slide-title">Buenas Prácticas y Errores Comunes</h2>
             </div>
             <div class="glass-card">
-                <ul class="styled-list">
-                    <li><strong>❌ Escribir <code>node app.js</code> dentro del REPL:</strong> es un comando de terminal, no JS; sal primero con <code>.exit</code>.</li>
-                    <li><strong>❌ Redeclarar <code>const</code>:</strong> volver a usar el mismo nombre con <code>const</code> lanza error de identificador duplicado; usa <code>.clear</code> o un nombre nuevo.</li>
-                    <li><strong>❌ Creer que <code>document</code> existe:</strong> pertenece al navegador, no al REPL de Node.js.</li>
-                    <li><strong>❌ Introducir contraseñas o tokens reales:</strong> el historial del REPL puede guardarse localmente.</li>
-                    <li><strong>✅ Traslada lo útil a archivos:</strong> usa <code>.save</code> o crea módulos con pruebas automatizadas.</li>
-                </ul>
+                <table class="compare-table" style="margin-bottom:14px;">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Error que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Usar REPL para pruebas pequeñas y aisladas</td><td>Sesiones enormes difíciles de repetir</td></tr>
+                        <tr><td>Comprobar <code>process.cwd()</code> antes de escribir</td><td>Guardar archivos en una carpeta equivocada</td></tr>
+                        <tr><td>Trasladar prototipos útiles a archivos <code>.js</code></td><td>Perder el código al salir con <code>.exit</code></td></tr>
+                        <tr><td>No escribir contraseñas ni tokens reales</td><td>Exponer credenciales en el historial del REPL</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>// Errores frecuentes en el REPL:
+variableQueNoExiste          // ReferenceError: la variable no existe
+(123).toUpperCase()          // TypeError: 123 no tiene toUpperCase()
+Number('no-es-numero')       // NaN: conversión numérica inválida
+// Si ves "Identifier 'x' has already been declared", usa .clear o cambia el nombre</code></pre>
             </div>
         </section>
 
@@ -270,15 +279,48 @@ await fs.readFile("nota-repl.txt", "utf8") // 'Aprendí REPL'</code></pre>
             </div>
             <div class="glass-card">
                 <p style="line-height:1.6;margin-bottom:10px;">
-                    Antes de crear una API REST, probamos la lógica de negocio en REPL cargando <code>.load catalogo.js</code>:
+                    Antes de crear una API REST, probamos la lógica completa (<code>listar</code>, <code>agregar</code>, <code>buscar</code>, <code>inscribir</code>, <code>estadisticas</code> y persistencia JSON) cargando el módulo en el REPL:
                 </p>
-                <pre class="code-block"><code>agregarCurso(1, "Node.js", 26);
-agregarCurso(2, "JavaScript", 20);
-registrarAvance(1, 13);
-registrarAvance(2, 20);
+                <pre class="code-block"><code>// En sesión REPL dentro de la carpeta del proyecto:
+const app = require('./catalogo.js')
+app.listar()                               // Lista los cursos iniciales
+app.agregar('Bases de datos SQL', 75000, 20)
+app.buscar('sql')                          // Búsqueda sin distinguir mayúsculas
+app.inscribir(3)                           // Descuenta 1 cupo (19 disponibles)
+app.estadisticas()                         // { cantidad, cuposDisponibles, precioPromedio }
+await app.guardar()                        // Persiste en cursos.json con node:fs/promises</code></pre>
+            </div>
+        </section>
 
-calcularProgreso(catalogo[0]); // 50 (%)
-cursosFinalizados();           // [{ id: 2, nombre: "JavaScript", ... }]</code></pre>
+        <!-- SLIDE SIMULADOR: REPL INTERACTIVO -->
+        <section class="slide" data-lab="true" data-title="Simulador REPL Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · READ-EVAL-PRINT-LOOP</span>
+                <h2 class="slide-title">🎛️ Simulador de Sesión REPL</h2>
+                <p class="slide-lead">Selecciona una expresión o comando especial para observar el ciclo Read → Eval → Print → Loop y la variable <code>_</code>.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Entrada en el REPL (&gt;)</label>
+                        <select id="nodeReplCmd">
+                            <option value="math">15 + 27</option>
+                            <option value="prev">_ * 2 (usar último resultado)</option>
+                            <option value="const">const curso = "Node.js"</option>
+                            <option value="await">await Promise.resolve({ ok: true })</option>
+                            <option value="help">.help</option>
+                            <option value="save">.save catalogo.js</option>
+                        </select>
+                    </div>
+                    <div class="sim-control">
+                        <label>Multiplicador para _ <span id="nodeReplMultVal">2</span></label>
+                        <input type="range" id="nodeReplMult" min="1" max="10" value="2" />
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="nodeReplStage" style="font-family:var(--font-mono);font-size:0.85rem;line-height:1.7;"></div>
+                    <pre class="sim-code" id="nodeReplCode"></pre>
+                </div>
             </div>
         </section>
 
@@ -373,6 +415,20 @@ cursosFinalizados();           // [{ id: 2, nombre: "JavaScript", ... }]</code><
   const completadas = lecciones.filter(l =&gt; l.completada).map(l =&gt; l.titulo);
   document.getElementById(&#x27;out&#x27;).textContent = &#x27;Completadas: &#x27; + JSON.stringify(completadas);
 &lt;/script&gt;">Filtrado en Sesión</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.65&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const catalogo = [
+    { id: 1, nombre: &#x27;Node.js&#x27;, precio: 100000, cupos: 10 },
+    { id: 2, nombre: &#x27;Git&#x27;, precio: 60000, cupos: 15 }
+  ];
+  catalogo.push({ id: 3, nombre: &#x27;SQL&#x27;, precio: 90000, cupos: 8 });
+  const git = catalogo.find(c =&gt; c.id === 2);
+  git.cupos -= 1;
+  const total = catalogo.reduce((sum, c) =&gt; sum + c.precio, 0);
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;Cursos: ${catalogo.length} | Cupos Git: ${git.cupos}&lt;/div&gt;` +
+    `&lt;div&gt;Valor total del catálogo: $${total.toLocaleString()}&lt;/div&gt;`;
+&lt;/script&gt;">Laboratorio Guiado REPL</button>
                 </div>
                 <div class="lab-split">
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.65&quot;&gt;&lt;/div&gt;
@@ -410,5 +466,38 @@ cursosFinalizados();           // [{ id: 2, nombre: "JavaScript", ... }]</code><
         <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
     </div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const cmd = document.getElementById('nodeReplCmd');
+            const mult = document.getElementById('nodeReplMult');
+            const multVal = document.getElementById('nodeReplMultVal');
+            const stage = document.getElementById('nodeReplStage');
+            const code = document.getElementById('nodeReplCode');
+            if (!stage) return;
+
+            function update() {
+                const m = Number(mult.value);
+                multVal.textContent = m;
+                const cases = {
+                    math: { in: '15 + 27', out: '42', note: '_ ahora vale 42' },
+                    prev: { in: `15 + 27\n42\n> _ * ${m}`, out: String(42 * m), note: `Usa _ (42) multiplicado por ${m}` },
+                    const: { in: 'const curso = "Node.js"', out: 'undefined', note: 'Las declaraciones devuelven undefined en el REPL' },
+                    await: { in: 'await Promise.resolve({ ok: true })', out: '{ ok: true }', note: 'Top-level await soportado en el REPL' },
+                    help: { in: '.help', out: '.break  .clear  .editor  .exit  .help  .load  .save', note: 'Lista de comandos especiales del REPL' },
+                    save: { in: '.save catalogo.js', out: 'Session saved to: catalogo.js', note: 'Guarda el historial en un archivo' }
+                };
+                const c = cases[cmd.value];
+                stage.innerHTML = `
+                    <div style="color:#94a3b8;">Welcome to Node.js v22.14.0.</div>
+                    <div style="color:#38bdf8;margin-top:6px;">&gt; ${c.in.replace(/\n/g, '<br>')}</div>
+                    <div style="color:#00ff88;font-weight:700;">${c.out}</div>
+                    <div style="color:#fbbf24;font-size:0.78rem;margin-top:8px;">// ${c.note}</div>
+                `;
+                code.textContent = `// Ciclo REPL:\n// 1. Read: "${c.in.split('\n').pop()}"\n// 2. Eval: evalúa la expresión\n// 3. Print: ${c.out}\n// 4. Loop: vuelve a mostrar ">"`;
+            }
+            [cmd, mult].forEach(el => el.addEventListener('input', update));
+            update();
+        })();
+    </script>
 </body>
 </html>

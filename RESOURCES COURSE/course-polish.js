@@ -26,12 +26,12 @@
     const toPortalRoot = '../'.repeat(depthToPortal); // Declara e inicializa "toPortalRoot"
 
     const courseMeta = { // Declara e inicializa "courseMeta"
-        'HTML y CSS': { badge: '🎨 HTML5 & CSS3', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
-        'JAVASCRIPT MID LEVEL': { badge: '⚡ JS MID LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
-        'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
-        'NODE': { badge: '🟢 NODE.JS', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` }
+        'HTML y CSS': { badge: '🎨 HTML5 & CSS3', levelLabel: '🎨 HTML y CSS', filter: 'htmlcss', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'JAVASCRIPT MID LEVEL': { badge: '⚡ JS MID LEVEL', levelLabel: '⚡ JS Mid Level', filter: 'mid', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', levelLabel: '🚀 JS Master Level', filter: 'master', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
+        'NODE': { badge: '🟢 NODE.JS', levelLabel: '🟢 Node.js', filter: 'node', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` }
     };
-    const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa "meta"
+    const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', levelLabel: '📘 Curso', filter: 'all', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa "meta"
 
     // Asigna un tema de color distinto por módulo (como en Junior Level)
     const THEMES = ['cyan', 'purple', 'emerald', 'amber', 'rose']; // Declara e inicializa "THEMES"
@@ -242,6 +242,7 @@
         <span class="jr-nav-badge">${meta.badge} · ${topicFolder}</span>
         <div class="jr-nav-right">
             <div class="theme-dots" title="Cambiar color del módulo"></div>
+            <a class="jr-nav-link" href="${meta.portalHref}?filter=${meta.filter}" title="Volver a ${meta.levelLabel}">${meta.levelLabel}</a>
             <a class="jr-nav-link" href="${meta.docsHref}">📘 Apuntes</a>
             <a class="jr-nav-link" href="${meta.portalHref}?filter=proyectos">🚀 Proyectos</a>
             <a class="jr-nav-link primary" href="${meta.portalHref}">🏠 Portal Principal</a>
@@ -422,37 +423,55 @@
         'HTML y CSS': ['HTML BASICO', 'HTML avanzado', 'CSS BASICO', 'CSS avanzado', 'Flexbox', 'Grid', 'Animaciones', 'Funciones Avanzadas', 'Responsive Design'],
         'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Temporizadores', 'Pestañas DevTools'],
         'JAVASCRIPT MASTER LEVEL': ['Modo Estricto', 'Operador Ternario', 'Funciones Flecha', 'Prototipos', 'Memoization', 'Objeto Date', 'Objeto Screen', 'Navigator', 'Matchmedia', 'Visibility Change', 'Historial', 'Geolocalization', 'Drag & Drop', 'File Reader', 'Canvas', 'Local Storage', 'Cookies', 'IndexedDB', 'Intersection Observer', 'Apis', 'Cache', 'Notifications', 'Web Workers', 'Service Workers'],
-        'NODE': ['Fundamentos', 'Instalacion', 'REPL', 'Modulos']
+        'NODE': ['Introduccion', 'Fundamentos', 'Instalacion', 'JavaScriptModerno', 'Asincronia', 'ArchivosNativos', 'REPL', 'Modulos']
     };
-    const levelList = COURSE_MODULES[courseFolder] || []; // Obtiene la lista ordenada del nivel actual
+    const SUBMODULE_GROUPS = { // Listas de submódulos con navegación Anterior/Siguiente propia
+        'Eventos': ['Handlers', 'Event Flow', 'Eventos de Mouse', 'Eventos de Teclado', 'Eventos de Interfaz'],
+        'Ajax': ['Ajax Editor', 'Ajax Htdocs'],
+        'Libreria Axios': ['Axios Editor', 'Axios-Fetch-Htdocs']
+    };
+    const subGroupKey = Object.keys(SUBMODULE_GROUPS).find(k => parts.includes(k) && SUBMODULE_GROUPS[k].includes(topicFolder));
+    const levelList = subGroupKey ? SUBMODULE_GROUPS[subGroupKey] : (COURSE_MODULES[courseFolder] || []); // Obtiene la lista ordenada del nivel o submódulo actual
     const modIdx = levelList.indexOf(topicFolder); // Ubica el índice del módulo actual
     if (/^index\.html?$/i.test(fileName) && modIdx !== -1) { // Solo si estamos en el index.html principal del módulo
         const prevMod = modIdx > 0 ? levelList[modIdx - 1] : null; // Módulo anterior si existe
         const nextMod = modIdx < levelList.length - 1 ? levelList[modIdx + 1] : null; // Módulo siguiente si existe
         const navRightEl = topNav.querySelector('.jr-nav-right'); // Contenedor derecho de la barra superior
-        // Agregamos accesos rápidos en la barra superior
+        // Agregamos accesos rápidos en la barra superior en orden unificado:
+        // [theme-dots] -> [⬅ Anterior] -> [↩ Padre] -> [Nivel] -> [📘 Apuntes] -> [🚀 Proyectos] -> [🏠 Portal] -> [Siguiente ➡]
+        if (subGroupKey && navRightEl) {
+            const aParent = document.createElement('a');
+            aParent.className = 'jr-nav-link';
+            aParent.href = '../index.html';
+            aParent.textContent = `↩ ${subGroupKey}`;
+            navRightEl.insertBefore(aParent, navRightEl.querySelector('.jr-nav-link'));
+        }
         if (prevMod && navRightEl) { // Si existe módulo anterior
             const aPrev = document.createElement('a'); // Crea enlace al módulo anterior
             aPrev.className = 'jr-nav-link'; // Estilo de botón de navegación
             aPrev.href = encodeURI(`../${prevMod}/index.html`); // Ruta relativa al módulo anterior
             aPrev.textContent = `⬅ ${prevMod}`; // Texto visible
-            navRightEl.insertBefore(aPrev, navRightEl.querySelector('.jr-nav-link')); // Inserta antes de Apuntes
+            navRightEl.insertBefore(aPrev, navRightEl.querySelector('.jr-nav-link')); // Siempre primero después de theme-dots
         }
         if (nextMod && navRightEl) { // Si existe módulo siguiente
             const aNext = document.createElement('a'); // Crea enlace al módulo siguiente
             aNext.className = 'jr-nav-link'; // Estilo de botón de navegación
             aNext.href = encodeURI(`../${nextMod}/index.html`); // Ruta relativa al módulo siguiente
             aNext.textContent = `${nextMod} ➡`; // Texto visible
-            navRightEl.appendChild(aNext); // Inserta al final de la barra superior
+            navRightEl.appendChild(aNext); // Siempre al final de la barra superior
         }
         // Creamos también una barra inferior cómoda al terminar la lección
         const bottomModNav = document.createElement('nav'); // Crea barra inferior de módulos
         bottomModNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos en línea
         bottomModNav.innerHTML = `
             ${prevMod ? `<a class="jr-nav-link" href="${encodeURI(`../${prevMod}/index.html`)}">⬅ Anterior: ${prevMod}</a>` : '<span></span>'}
-            <a class="jr-nav-link" href="${meta.docsHref}">📘 Ver Apuntes</a>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                ${subGroupKey ? `<a class="jr-nav-link" href="../index.html">↩ ${subGroupKey}</a>` : ''}
+                <a class="jr-nav-link" href="${meta.portalHref}?filter=${meta.filter}">${meta.levelLabel}</a>
+                <a class="jr-nav-link" href="${meta.docsHref}">📘 Ver Apuntes</a>
+            </div>
             ${nextMod ? `<a class="jr-nav-link primary" href="${encodeURI(`../${nextMod}/index.html`)}">Siguiente: ${nextMod} ➡</a>` : '<span></span>'}
-        `; // Inserta enlaces inferior anterior, apuntes y siguiente
+        `; // Inserta enlaces inferior anterior, nivel, apuntes y siguiente
         shell.appendChild(bottomModNav); // Añade la barra al final del contenedor principal
     }
 

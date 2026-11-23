@@ -1,1313 +1,891 @@
-# GUÍA COMPLETA — Módulos en Node.js
+# Módulos en Node.js — Guía completa
 
-> **Nivel:** Principiante a avanzado (Junior → Semi Senior)  
-> **Módulo:** Nivel 1 — Fundamentos de Node.js  
-> **Objetivo:** Comprender cómo dividir aplicaciones Node.js en módulos reutilizables, dominar CommonJS y ECMAScript Modules (ESM), importar módulos nativos y externos, resolver rutas, identificar errores frecuentes y organizar el código de `la plataforma`.  
-> **Requisitos:** JavaScript básico, terminal, Node.js instalado y VS Code.  
-> **Modalidad:** Offline. Todos los laboratorios y el proyecto principal utilizan únicamente Node.js nativo.
 
----
+## 1. Definición: ¿qué es un módulo?
 
-# Definición
+Un **módulo** es un archivo o unidad de código con una responsabilidad concreta que puede ofrecer funcionalidades a otros archivos mediante exportaciones. En Node.js, cada módulo tiene su propio ámbito: sus variables internas no pasan automáticamente a ser globales.
 
-Un **módulo** es un archivo o unidad de código que encapsula una responsabilidad y permite exponer funciones, constantes, clases u objetos para utilizarlos desde otros archivos. En Node.js, los módulos facilitan dividir una aplicación en piezas pequeñas, reutilizables y comprobables.
+Ejemplo: `saludos.cjs`:
 
-Ejemplo de organización:
-
-```text
-mi-app/
-├── package.json
-├── app.js
-├── matematicas.js
-└── usuarios.js
-```
-
-Sin módulos, una aplicación puede terminar con cientos o miles de líneas en un único archivo. Con módulos, cada archivo puede tener un propósito definido.
-
-**Conceptos importantes:**
-- **Exportar:** hacer disponible un valor para otros módulos.
-- **Importar:** utilizar desde otro archivo un valor exportado.
-- **Encapsular:** mantener los detalles internos fuera de la interfaz pública.
-- **Dependencia:** módulo o paquete que otro módulo necesita.
-- **API pública del módulo:** conjunto de funciones, objetos o clases que exporta.
-
----
-
-# Principales usos
-
-### 1. Organizar proyectos grandes 🗂️
-
-Separar rutas HTTP, lógica de negocio, validaciones y acceso a datos.
-
-### 2. Reutilizar código ♻️
-
-Utilizar la misma función de validación en varios servicios sin copiarla.
-
-### 3. Facilitar las pruebas 🧪
-
-Probar `calcularProgreso()` sin iniciar un servidor o conectarse a una base de datos.
-
-### 4. Mejorar el mantenimiento 🔧
-
-Modificar una regla en un archivo sin editar todas las pantallas o rutas.
-
-### 5. Incorporar herramientas externas 📦
-
-Importar paquetes npm como Express o controladores de bases de datos una vez instalados.
-
----
-
-# Tipos de módulos en Node.js
-
-| Tipo | Ejemplo | Procedencia |
-|---|---|---|
-| Nativo o integrado | `node:fs`, `node:path` | Viene con Node.js |
-| Local | `./servicios/cursos.js` | Lo escribes tú |
-| Externo | `express` | Paquete instalado, habitualmente con npm |
-
-**Importante:** «nativo/local/externo» describe el origen. **CommonJS/ESM** describe el sistema de módulos. Son clasificaciones distintas.
-
----
-
-# CommonJS (`require` y `module.exports`)
-
-CommonJS es un sistema histórico de módulos ampliamente utilizado en Node.js.
-
-## 1. Exportar una función
-
-Archivo `operaciones.cjs`:
-
-```javascript
-function sumar(a, b) {
-  return a + b;
+```js
+function saludar(nombre) {
+  return `Hola, ${nombre}`;
 }
-
-module.exports = { sumar };
+module.exports = { saludar };
 ```
 
 Archivo `app.cjs`:
 
-```javascript
-const { sumar } = require("./operaciones.cjs");
-
-console.log(sumar(4, 6)); // 10
+```js
+const { saludar } = require('./saludos.cjs');
+console.log(saludar('Ana'));
 ```
 
-Ejecuta:
+Ejecuta `node app.cjs`. Salida: `Hola, Ana`.
 
-```powershell
-node app.cjs
+## 2. ¿Por qué modularizar una aplicación?
+
+- **Mantenibilidad:** cada archivo tiene un propósito.
+- **Reutilización:** la misma función puede utilizarse en varios programas.
+- **Pruebas:** es más fácil verificar unidades pequeñas.
+- **Colaboración:** diferentes personas trabajan en módulos distintos.
+- **Escalabilidad:** el crecimiento no obliga a concentrar todo en `app.js`.
+
+Evita tanto un archivo gigante como dividir funciones triviales en decenas de archivos sin necesidad.
+
+## 3. Tipos de módulos en Node.js
+
+1. **Nativos o integrados:** vienen con Node.js (`node:fs`, `node:path`, `node:os`).
+2. **Locales:** archivos creados dentro del proyecto (`./servicios/cursos.js`).
+3. **Externos:** paquetes instalados desde npm u otra fuente (`express`, `chalk`).
+
+Además, hay **dos sistemas principales de módulos**: CommonJS (CJS) y ECMAScript Modules (ESM). No confundas origen del módulo con su sistema de carga.
+
+## 4. CommonJS: `require()`, `module.exports` y `exports`
+
+CommonJS es el sistema tradicional de módulos de Node.js. La carga con `require()` es normalmente síncrona.
+
+`operaciones.cjs`:
+
+```js
+function sumar(a, b) { return a + b; }
+function restar(a, b) { return a - b; }
+module.exports = { sumar, restar };
 ```
 
-### Explicación
+`main.cjs`:
 
-1. `sumar` se define dentro del módulo.
-2. `module.exports` determina el valor que otro archivo recibirá.
-3. `require("./operaciones.cjs")` carga el módulo local.
-4. La desestructuración `{ sumar }` obtiene la propiedad exportada.
-5. `console.log()` imprime el resultado.
-
-## 2. Exportar directamente una función
-
-```javascript
-// saludar.cjs
-module.exports = function saludar(nombre) {
-  return `Hola, ${nombre}`;
-};
+```js
+const operaciones = require('./operaciones.cjs');
+console.log(operaciones.sumar(8, 5)); // 13
 ```
 
-```javascript
-// app.cjs
-const saludar = require("./saludar.cjs");
-console.log(saludar("Ana"));
+También puedes escribir `exports.sumar = sumar`, porque inicialmente `exports` referencia el mismo objeto que `module.exports`. **Error frecuente:** `exports = { sumar }` solo reasigna la variable local y no cambia lo exportado. Para reemplazar el objeto completo, utiliza `module.exports = ...`.
+
+```js
+// Válido
+exports.multiplicar = (a, b) => a * b;
+// Válido
+module.exports = { multiplicar: (a, b) => a * b };
+// Incorrecto si quieres reemplazar lo exportado
+exports = { multiplicar: (a, b) => a * b };
 ```
 
-## 3. `exports` frente a `module.exports`
+## 5. ECMAScript Modules: `import` y `export`
 
-En un módulo CommonJS, `exports` comienza como una referencia al mismo objeto que `module.exports`.
+ESM es el sistema estándar de JavaScript, compatible con Node.js y navegadores modernos. Sus importaciones estáticas se analizan antes de ejecutar el módulo.
 
-Esto funciona:
+`matematicas.mjs`:
 
-```javascript
-exports.saludar = nombre => `Hola ${nombre}`;
-```
-
-Esto **no** cambia el valor exportado:
-
-```javascript
-exports = { saludar: nombre => `Hola ${nombre}` };
-```
-
-Para reemplazar completamente el valor exportado, utiliza:
-
-```javascript
-module.exports = { saludar: nombre => `Hola ${nombre}` };
-```
-
----
-
-# ECMAScript Modules (ESM): `import` y `export`
-
-ESM es el sistema estándar de módulos de JavaScript y una opción recomendable para proyectos nuevos.
-
-## Paso 1. Configurar el proyecto
-
-Archivo `package.json`:
-
-```json
-{
-  "name": "practica-modulos",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module"
-}
-```
-
-La propiedad `"type": "module"` hace que los archivos `.js` de ese ámbito se interpreten como ESM.
-
-## Paso 2. Crear un módulo
-
-Archivo `matematicas.js`:
-
-```javascript
-export function sumar(a, b) {
-  return a + b;
-}
-
+```js
+export function sumar(a, b) { return a + b; }
 export const PI = 3.14159;
 ```
 
-## Paso 3. Importarlo
+`main.mjs`:
 
-Archivo `app.js`:
-
-```javascript
-import { sumar, PI } from "./matematicas.js";
-
-console.log(sumar(5, 7)); // 12
-console.log(PI);
+```js
+import { sumar, PI } from './matematicas.mjs';
+console.log(sumar(2, 3), PI);
 ```
 
-Ejecuta:
+Ejecuta `node main.mjs`. Para ESM local usa la extensión completa en la ruta relativa.
 
-```powershell
-node app.js
+## 6. Exportaciones nombradas y por defecto
+
+**Nombradas:** permiten exportar múltiples valores y se importan entre llaves.
+
+```js
+// usuarios.mjs
+export const rol = 'estudiante';
+export function crearUsuario(nombre) { return { nombre, rol }; }
+// app.mjs
+import { rol, crearUsuario as nuevoUsuario } from './usuarios.mjs';
+console.log(nuevoUsuario('Luis'), rol);
 ```
 
-**Atención:** en importaciones ESM locales de Node.js normalmente debes escribir la extensión del archivo (`.js`, `.mjs`, etc.).
+**Por defecto:** hay una sola exportación predeterminada por módulo; el importador elige el nombre local.
 
----
-
-# Exportaciones nombradas y por defecto
-
-## Exportaciones nombradas
-
-```javascript
-// usuario.js
-export const rol = "estudiante";
-
-export function crearUsuario(nombre) {
-  return { nombre, rol };
-}
+```js
+// mensaje.mjs
+export default function mensaje(nombre) { return `Bienvenido, ${nombre}`; }
+// inicio.mjs
+import bienvenida from './mensaje.mjs';
+console.log(bienvenida('Laura'));
 ```
 
-```javascript
-// app.js
-import { rol, crearUsuario } from "./usuario.js";
-console.log(crearUsuario("Laura"));
-```
+Se pueden combinar ambas modalidades, pero para APIs con varias funciones suelen ser claras las exportaciones nombradas.
 
-Puedes renombrar al importar:
-
-```javascript
-import { crearUsuario as registrar } from "./usuario.js";
-```
-
-## Exportación por defecto
-
-```javascript
-// formatear.js
-export default function formatear(texto) {
-  return texto.trim().toUpperCase();
-}
-```
-
-```javascript
-// app.js
-import formatearTexto from "./formatear.js";
-console.log(formatearTexto("  node js  "));
-```
-
-El nombre de una importación por defecto lo elige quien importa.
-
-## Importar todo como un espacio de nombres
-
-```javascript
-import * as operaciones from "./matematicas.js";
-
-console.log(operaciones.sumar(2, 3));
-```
-
-**Regla:** un módulo ESM puede tener múltiples exportaciones nombradas, pero como máximo una exportación por defecto.
-
----
-
-# Resumen práctico: Cómo importar y exportar archivos
-
-| Qué necesitas hacer | En CommonJS (`require`) | En ESM (`import` / `export`) |
-|---|---|---|
-| Exportar varios elementos de un archivo | `module.exports = { saludar, despedir };` | `export { saludar, despedir };` o `export function ...` |
-| Exportar un único valor/función principal | `module.exports = saludar;` | `export default saludar;` |
-| Importar elementos específicos | `const { saludar } = require("./saludo.js");` | `import { saludar } from "./saludo.js";` |
-| Renombrar al importar | `const { saludar: hola } = require("./saludo.js");` | `import { saludar as hola } from "./saludo.js";` |
-| Importar desde carpeta superior | `require("../utils/saludo.js")` | `import { saludar } from "../utils/saludo.js";` |
-| Importar todo un archivo | `const mod = require("./saludo.js");` | `import * as mod from "./saludo.js";` |
-
-**Ejemplo completo aplicado en `NODE/Modulos/` (CommonJS):**
-
-```javascript
-// archivo: saludo.js (exporta funciones reutilizables)
-function saludar(nombre) {
-  return `Hola ${nombre}`;
-}
-function despedir(nombre) {
-  return `Hasta pronto, ${nombre}`;
-}
-module.exports = { saludar, despedir };
-```
-
-```javascript
-// archivo: app.js (importa desde ./saludo.js y ejecuta)
-const { saludar, despedir } = require("./saludo.js");
-console.log(saludar("Heidy"));
-console.log(despedir("Heidy"));
-```
-
----
-
-# Diferencias entre CommonJS y ESM
+## 7. Diferencias entre CommonJS y ESM
 
 | Característica | CommonJS | ESM |
 |---|---|---|
-| Importación habitual | `require()` | `import` |
-| Exportación habitual | `module.exports` | `export` |
+| Sintaxis | `require`, `module.exports` | `import`, `export` |
 | Extensión inequívoca | `.cjs` | `.mjs` |
-| `.js` | Depende de la configuración del paquete | Depende de la configuración del paquete |
-| Carga | Tradicionalmente síncrona con `require` | Enlace y evaluación bajo semántica ESM |
-| Importación dinámica | `import()` disponible | `import()` disponible |
-| Top-level `await` | No en CommonJS | Sí en ESM |
-| `__dirname` | Disponible | Usar alternativas ESM |
-| `require` global del módulo | Disponible | No disponible directamente |
+| Archivo `.js` | Depende de configuración y detección | Depende de configuración y detección |
+| Carga típica | `require()` síncrono | Importaciones estáticas; `import()` asíncrono |
+| `__dirname` | Disponible | No disponible como global |
+| `await` de nivel superior | No en CJS | Sí |
+| Caché | `require.cache` | Caché ESM independiente |
 
-**¿Cuál elegir?** Para nuestros ejemplos nuevos utilizaremos **ESM** con `"type": "module"`. También aprenderemos CommonJS porque aparece en proyectos existentes, bibliotecas y documentación.
+**Interoperabilidad:** desde CommonJS puedes usar `await import('./archivo.mjs')` dentro de una función asíncrona. Algunas versiones modernas de Node permiten `require()` de determinados ESM síncronos, pero para compatibilidad y claridad no dependas de ello en ejercicios introductorios.
 
----
+## 8. Configuración de `package.json` y extensiones
 
-# `package.json` y extensiones
+```json
+{
+  "name": "ejemplo-modulos",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node src/index.js" }
+}
+```
 
-Node.js interpreta módulos según la extensión y la configuración del paquete:
+Con `"type": "module"`, los `.js` de ese ámbito se interpretan como ESM; con `"type": "commonjs"`, como CJS. `.mjs` siempre indica ESM y `.cjs` siempre indica CommonJS. En Node.js modernos, un `.js` ambiguo puede clasificarse por detección de sintaxis; **define `type` explícitamente** para evitar confusiones.
 
-- `.mjs`: ESM.
-- `.cjs`: CommonJS.
-- `.js`: depende del contexto de paquete y de las reglas de detección aplicables a la versión de Node.js.
+Práctica:
 
-Para evitar ambigüedades, define explícitamente `"type": "module"` o `"type": "commonjs"` en `package.json`.
+1. Crea `package.json` con el contenido anterior.
+2. Crea `src/index.js` con `console.log('Proyecto ESM listo')`.
+3. Ejecuta `npm start`.
+4. Crea `prueba.cjs` con `console.log(typeof require)` y ejecútalo: verás `function`.
 
-Ejemplo de proyecto:
+## 9. Resolución de módulos y rutas relativas
+
+- `./archivo.js`: mismo directorio.
+- `../archivo.js`: directorio superior.
+- `./carpeta/archivo.js`: ruta explícita.
+- `node:fs`: módulo integrado.
+- `nombre-paquete`: dependencia resuelta según reglas de paquetes y `node_modules`.
 
 ```text
 proyecto/
-├── package.json        # "type": "module"
-├── app.js              # ESM
-├── utilidad.mjs        # ESM
-└── legado.cjs          # CommonJS
+├── package.json
+└── src/
+    ├── index.js
+    └── utils/
+        └── formato.js
 ```
 
-**No confundas:** `npm init -y` crea un archivo `package.json`, pero no garantiza por sí mismo que tu proyecto quede configurado como ESM. Verifica o agrega la propiedad `"type"`.
+Desde `src/index.js`: `import { formatear } from './utils/formato.js'`. Las rutas relativas se interpretan desde el archivo importador, **no** desde la carpeta en que ejecutas el comando.
 
----
+Los ESM no añaden automáticamente `.js` a imports relativos. Los paquetes pueden usar campos `exports` e `imports` en `package.json`, que controlan las rutas públicas y alias internos.
 
-# Resolución de módulos y rutas
+## 10. Módulos nativos: `node:fs`, `node:path`, `node:os`
 
-## 1. Ruta relativa
+`fs` trabaja con archivos; `path` construye rutas; `os` consulta datos del sistema operativo.
 
-```javascript
-import { sumar } from "./utils/matematicas.js";
+```js
+// sistema.mjs
+import { writeFile, readFile } from 'node:fs/promises';
+import path from 'node:path';
+import os from 'node:os';
+
+const archivo = path.join(os.tmpdir(), 'ejemplo-modulos-node.txt');
+await writeFile(archivo, 'Hola desde Node.js', 'utf8');
+const contenido = await readFile(archivo, 'utf8');
+console.log({ archivo, contenido, plataforma: os.platform() });
 ```
 
-`./` indica que la ruta comienza en la carpeta del archivo que importa.
+Ejecuta `node sistema.mjs`. `node:fs/promises` ofrece métodos asíncronos basados en promesas; para aplicaciones con múltiples solicitudes suele ser preferible a bloquear el hilo con operaciones síncronas.
 
-```javascript
-import { validar } from "../validaciones/usuario.js";
-```
+## 11. Módulos externos y npm
 
-`../` sube una carpeta.
-
-## 2. Paquete externo
-
-```javascript
-import express from "express";
-```
-
-Este ejemplo requiere que el paquete `express` esté instalado en el proyecto.
-
-## 3. Módulo nativo
-
-```javascript
-import { readFile } from "node:fs/promises";
-```
-
-El prefijo `node:` indica que se trata de un módulo integrado de Node.js.
-
-## 4. Errores de resolución
-
-- Ruta relativa incorrecta.
-- Extensión omitida en una importación ESM local.
-- Paquete npm no instalado.
-- Nombre de archivo escrito con distinta capitalización.
-- Importación de un valor que no fue exportado.
-
----
-
-# Módulos nativos útiles
-
-## `node:os`
-
-```javascript
-import os from "node:os";
-
-console.log(os.platform());
-console.log(os.arch());
-```
-
-## `node:path`
-
-```javascript
-import path from "node:path";
-
-const ruta = path.join("datos", "cursos.json");
-console.log(ruta);
-```
-
-`path.join()` construye rutas según las reglas de la plataforma. En Windows suele utilizar `\` como separador.
-
-## `node:fs/promises`
-
-```javascript
-import { writeFile, readFile } from "node:fs/promises";
-
-await writeFile("saludo.txt", "Hola Node.js", "utf8");
-const texto = await readFile("saludo.txt", "utf8");
-console.log(texto);
-```
-
-Este ejemplo crea un archivo local; ejecútalo en una carpeta de práctica.
-
----
-
-# Módulos externos y npm
-
-Los módulos externos se distribuyen como paquetes. Por ejemplo, Express no viene incluido con Node.js.
-
-Con Internet disponible:
-
-```powershell
+```bash
+mkdir demo-npm
+cd demo-npm
 npm init -y
-npm install express
+npm install chalk
 ```
 
-Después:
+Configura `"type": "module"` en `package.json` y crea `index.js`:
 
-```javascript
-import express from "express";
+```js
+import chalk from 'chalk';
+console.log(chalk.green('Dependencia instalada correctamente'));
 ```
 
-Para estudiar sin conexión, debes instalar los paquetes con anticipación y conservar las dependencias necesarias. **Los laboratorios principales de esta guía no requieren npm install.**
+Ejecuta `node index.js`. **Esta práctica requiere conexión al instalar**; una vez descargado el paquete, podrás usarlo localmente. `package.json` declara dependencias y `package-lock.json` fija su resolución. No edites manualmente `node_modules` ni lo subas al repositorio; usa `.gitignore`.
 
-Un paquete puede publicar interfaces CommonJS, ESM o ambas; revisa su documentación para importarlo correctamente.
+## 12. Importaciones dinámicas y asincronía
 
----
+`import()` devuelve una promesa y permite cargar un módulo cuando realmente se necesita.
 
-# Importación dinámica (`import()`)
-
-La importación estática se declara normalmente al inicio del módulo:
-
-```javascript
-import { sumar } from "./matematicas.js";
+```js
+// reportes.mjs
+export function generarReporte() { return 'Reporte generado'; }
+// ejecutar.mjs
+const { generarReporte } = await import('./reportes.mjs');
+console.log(generarReporte());
 ```
 
-La importación dinámica se evalúa en tiempo de ejecución y devuelve una promesa:
+También puedes usarlo dentro de una función:
 
-```javascript
-const modulo = await import("./matematicas.js");
-console.log(modulo.sumar(3, 4));
-```
-
-## ¿Cuándo usarla?
-
-- Cuando una funcionalidad es opcional.
-- Cuando necesitas cargar un módulo bajo una condición.
-- Cuando quieres diferir el trabajo de cargar código.
-
-```javascript
-const usarReporte = true;
-
-if (usarReporte) {
-  const { generarReporte } = await import("./reporte.js");
-  generarReporte();
+```js
+async function cargarReporte() {
+  const modulo = await import('./reportes.mjs');
+  return modulo.generarReporte();
 }
 ```
 
-**Nota:** para ejecutar este ejemplo debes crear `reporte.js` con una exportación `generarReporte`. La importación dinámica no elimina la necesidad de que el archivo exista.
+No confundas carga dinámica con paralelismo: `import()` es asíncrono, pero el código JavaScript que ejecuta el módulo no se convierte automáticamente en trabajo paralelo.
 
----
+## 13. Caché de módulos y estado compartido
 
-# Caché de módulos y estado compartido
+Node normalmente evalúa un módulo una vez por identidad de módulo resuelta y reutiliza su instancia. Por ello, un estado mutable exportado puede ser compartido.
 
-Node.js normalmente reutiliza instancias de módulos cargados, aunque los detalles difieren entre CommonJS y ESM.
+`contador.cjs`:
 
-Archivo `contador.js`:
+```js
+let total = 0;
+module.exports = { incrementar: () => ++total, leer: () => total };
+```
 
-```javascript
-let valor = 0;
+`demo.cjs`:
 
-export function incrementar() {
-  valor += 1;
-  return valor;
-}
+```js
+const a = require('./contador.cjs');
+const b = require('./contador.cjs');
+console.log(a.incrementar()); // 1
+console.log(b.leer());        // 1
+console.log(a === b);         // true
+```
 
-export function consultar() {
-  return valor;
+La caché de CJS se puede inspeccionar con `require.cache`. La caché de ESM funciona de otra manera y no está expuesta mediante `require.cache`. Evita depender de estado global implícito: para estados independientes, exporta una **función fábrica**.
+
+```js
+export function crearContador() {
+  let total = 0;
+  return { incrementar: () => ++total, leer: () => total };
 }
 ```
 
-Archivo `app.js`:
+## 14. `__dirname`, `__filename` e `import.meta.url`
 
-```javascript
-import { incrementar } from "./contador.js";
-import { consultar } from "./contador.js";
+En CommonJS:
 
-console.log(incrementar()); // 1
-console.log(incrementar()); // 2
-console.log(consultar());   // 2
+```js
+console.log(__dirname);  // Directorio del módulo
+console.log(__filename); // Ruta completa del módulo
 ```
 
-Ambas importaciones comparten el estado de la misma instancia del módulo.
+En ESM, la alternativa portable es:
 
-**Precaución:** compartir estado mutable globalmente puede complicar las pruebas y producir comportamientos inesperados. En aplicaciones reales, conviene definir claramente quién administra ese estado.
-
----
-
-# Rutas del archivo actual: CommonJS y ESM
-
-## CommonJS
-
-```javascript
-// rutas.cjs
-console.log(__filename);
+```js
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 console.log(__dirname);
 ```
 
-## ESM
+En versiones recientes de Node existen además `import.meta.dirname` e `import.meta.filename` para módulos locales, pero el patrón anterior resulta útil para entender y mantener compatibilidad con distintas versiones.
 
-En ESM puedes utilizar `import.meta.url`:
+## 15. Dependencias circulares
 
-```javascript
-import { fileURLToPath } from "node:url";
-import { dirname } from "node:path";
-
-const archivoActual = fileURLToPath(import.meta.url);
-const carpetaActual = dirname(archivoActual);
-
-console.log(archivoActual);
-console.log(carpetaActual);
-```
-
-En versiones modernas de Node.js también existen propiedades como `import.meta.dirname` e `import.meta.filename`, pero el ejemplo con `fileURLToPath()` resulta útil para entender el mecanismo y mantener compatibilidad con más versiones.
-
-**Diferencia clave:** `process.cwd()` devuelve el directorio de trabajo desde el cual se inició el proceso, que no necesariamente coincide con la carpeta del módulo.
-
----
-
-# Dependencias circulares
-
-Una dependencia circular ocurre cuando:
+Ocurren cuando A importa B y B importa A, directa o indirectamente.
 
 ```text
-A importa B
-B importa A
+A → B → A
 ```
 
-En ciertos casos pueden observarse valores aún no inicializados o resultados inesperados, especialmente si ambos módulos ejecutan lógica inmediatamente durante su carga.
-
-**Ejemplo conceptual:**
+En CJS puede observarse un objeto de exportaciones todavía incompleto. En ESM, acceder demasiado pronto a una vinculación puede producir errores de inicialización. Soluciones: extraer lo compartido a un tercer módulo, invertir dependencias o pasar funciones y datos como argumentos.
 
 ```text
-cursos.js  ──importa──> estudiantes.js
-    ^                         |
-    |                         |
-    └────────importa──────────┘
+ANTES: A ↔ B
+DESPUÉS: A → compartido ← B
 ```
 
-**Cómo reducir el problema:**
-1. Identifica la responsabilidad compartida.
-2. Extrae esa responsabilidad a un tercer módulo.
-3. Haz que ambos módulos dependan del tercero, no uno del otro.
+## 16. Diseño modular y separación de responsabilidades
 
-```text
-cursos.js ──> reglas.js <── estudiantes.js
+Para el gestor de cursos usaremos capas:
+
+- **Modelo y validación:** define la forma y las reglas de los datos.
+- **Repositorio:** lee y escribe información.
+- **Servicio:** implementa las reglas del negocio.
+- **Interfaz CLI:** recibe órdenes y muestra resultados.
+
+Un módulo no debería mezclar innecesariamente interacción con el usuario, lógica de negocio y persistencia.
+
+## 17. Analogías del mundo real
+
+Una aplicación modular se parece a un restaurante: cocina (servicio), almacén (repositorio) y mesero (interfaz) colaboran mediante pedidos claros. También se parece a un conjunto de piezas LEGO: cada pieza tiene una función y una forma de conexión. La analogía tiene límites: los módulos pueden compartir referencias y estado, por lo que no siempre están completamente aislados.
+
+## 18. Diagrama de flujo de importaciones
+
+```mermaid
+flowchart TD
+    A[Usuario ejecuta src/index.js] --> B[Importa CLI]
+    B --> C[Importa servicioCursos]
+    C --> D[Importa repositorioCursos]
+    D --> E[Importa node:fs/promises]
+    D --> F[Importa node:path]
+    C --> G[Importa validacion]
+    E --> H[Acceso a cursos.json]
 ```
 
----
+Orden conceptual: el punto de entrada importa la interfaz, la interfaz usa servicios, los servicios consultan el repositorio y las reglas de validación. **Nota:** este diagrama representa dependencias, no garantiza un orden temporal único de evaluación en todos los casos.
 
-# Diseño modular y separación de responsabilidades
+## 19. Buenas prácticas y errores comunes
 
-Una estructura sencilla para una API educativa:
+| Buena práctica | Error común | Corrección |
+|---|---|---|
+| Definir `"type"` | Mezclar sintaxis sin configuración | Elegir ESM o CJS deliberadamente |
+| Incluir `.js` en rutas ESM | `import './utils'` | `import './utils.js'` |
+| Usar `node:` para integrados | Confundir paquete con integrado | `import fs from 'node:fs'` |
+| Exportar API mínima | Exportar todo | Exponer solo funciones necesarias |
+| Separar lógica y E/S | Leer archivos dentro de validadores | Crear repositorio independiente |
+| Manejar errores de lectura | Suponer que todo archivo existe | Tratar `ENOENT` explícitamente |
+| Evitar ciclos | Módulos que se importan mutuamente | Extraer dependencias compartidas |
+| Validar entradas | Confiar en datos de CLI o JSON | Comprobar tipos y restricciones |
 
-```text
-src/
-├── app.js
-├── rutas/
-│   └── cursos.routes.js
-├── controladores/
-│   └── cursos.controller.js
-├── servicios/
-│   └── cursos.service.js
-├── repositorios/
-│   └── cursos.repository.js
-└── utilidades/
-    └── validaciones.js
-```
+## 20. Laboratorio guiado paso a paso
 
-- **Rutas:** asocian solicitudes con operaciones.
-- **Controladores:** interpretan entradas y preparan respuestas.
-- **Servicios:** contienen reglas de negocio.
-- **Repositorios:** encapsulan el acceso a datos.
-- **Utilidades:** funciones reutilizables que no dependen de la lógica principal.
+**Objetivo:** crear una calculadora modular ESM sin paquetes externos.
 
-No necesitas aplicar todas estas capas a un script pequeño. La arquitectura debe responder a la complejidad real.
+**Paso 1.** Crea una carpeta `laboratorio-modulos` y entra en ella.
 
----
-
-# Analogías del mundo real
-
-### 1. Piezas de LEGO 🧱
-
-Cada módulo es una pieza con conexiones definidas. Puedes sustituir una pieza sin reconstruir todo el modelo, siempre que mantengas las conexiones esperadas.
-
-### 2. Departamentos de una empresa 🏢
-
-Cada departamento tiene una responsabilidad: ventas, inventario, contabilidad. Un módulo bien diseñado funciona de forma parecida y ofrece servicios claros a otros módulos.
-
-### 3. Biblioteca de herramientas 🧰
-
-No necesitas fabricar un destornillador cada vez que montas algo. Un módulo reusable proporciona una herramienta que puedes utilizar desde varios lugares.
-
----
-
-# Diagrama de flujo de importación
-
-```text
-            [app.js]
-                |
-                v
-   [import { listarCursos } ...]
-                |
-                v
-     [Resolver ruta del módulo]
-                |
-          ¿Existe y carga?
-           /           \
-         No             Sí
-         |              |
- [Error de módulo]      v
-                  [Evaluar módulo]
-                         |
-                         v
-                 [Obtener exportación]
-                         |
-                         v
-                 [Ejecutar función]
-                         |
-                         v
-                   [Resultado]
-```
-
-**Nota:** este diagrama es conceptual; la resolución, el enlace y la evaluación real de ESM tienen reglas más específicas.
-
----
-
-# Buenas prácticas y errores comunes
-
-## ✅ Buenas prácticas
-
-- Prefiere nombres de archivos descriptivos: `cursos.service.js`, `validaciones.js`.
-- Mantén una responsabilidad principal por módulo.
-- Exporta solo lo que otros archivos realmente necesitan.
-- Evita efectos secundarios innecesarios al importar.
-- Usa `node:` para identificar claramente los módulos integrados.
-- En ESM local, escribe las extensiones de archivo.
-- Utiliza rutas relativas correctas y prueba el proyecto en Windows y, cuando sea posible, Linux.
-- Configura explícitamente `"type": "module"` para los proyectos ESM.
-- Mantén las credenciales fuera del código y del repositorio.
-- Escribe pruebas para las funciones de negocio.
-
-## ❌ Errores comunes
-
-### 1. `require is not defined in ES module scope`
-
-Causa: ejecutar `require()` directamente dentro de un archivo ESM.
-
-Solución habitual:
-
-```javascript
-import os from "node:os";
-```
-
-O conserva código CommonJS en un archivo `.cjs`.
-
-### 2. `Cannot find module` o `ERR_MODULE_NOT_FOUND`
-
-Causas: ruta incorrecta, archivo inexistente, extensión omitida o dependencia no instalada.
-
-### 3. `does not provide an export named ...`
-
-Causa: importar una exportación nombrada que no existe.
-
-### 4. Confundir `exports` con `module.exports`
-
-Reasignar `exports = ...` no sustituye la exportación de CommonJS.
-
-### 5. Ejecutar un módulo que no hace nada visible
-
-Un archivo que solo exporta funciones puede terminar sin imprimir nada. Eso es normal: debes importarlo y llamar a sus funciones.
-
----
-
-# Laboratorio guiado paso a paso — Crear módulos ESM
-
-**Objetivo:** separar cálculos de progreso y validaciones de la aplicación principal.
-
-## Paso 1. Crear el proyecto
-
-En PowerShell:
-
-```powershell
+```bash
 mkdir laboratorio-modulos
 cd laboratorio-modulos
 npm init -y
 ```
 
-Edita `package.json` y agrega `"type": "module"`:
+**Paso 2.** Modifica `package.json` para incluir `"type": "module"`.
+
+**Paso 3.** Crea `operaciones.js`:
+
+```js
+export const sumar = (a, b) => a + b;
+export const restar = (a, b) => a - b;
+export const dividir = (a, b) => {
+  if (b === 0) throw new Error('No se puede dividir por cero');
+  return a / b;
+};
+```
+
+**Paso 4.** Crea `formato.js`:
+
+```js
+export default function mostrarOperacion(nombre, resultado) {
+  return `${nombre}: ${resultado}`;
+}
+```
+
+**Paso 5.** Crea `index.js`:
+
+```js
+import { sumar, restar, dividir } from './operaciones.js';
+import mostrarOperacion from './formato.js';
+console.log(mostrarOperacion('Suma', sumar(10, 5)));
+console.log(mostrarOperacion('Resta', restar(10, 5)));
+console.log(mostrarOperacion('División', dividir(10, 5)));
+```
+
+**Paso 6.** Ejecuta `node index.js`.
+
+**Salida esperada:**
+
+```text
+Suma: 15
+Resta: 5
+División: 2
+```
+
+**Paso 7.** Prueba `dividir(10, 0)` dentro de `try/catch` y registra el mensaje de error.
+
+**Paso 8.** Repite el ejercicio con `.cjs`, `require()` y `module.exports` para comparar.
+
+## 21. Proyecto integrador: gestor modular de cursos
+
+Construiremos una aplicación de terminal que permite **listar, crear, buscar y eliminar cursos** y guarda los datos en JSON. Funciona sin conexión y sin dependencias externas.
+
+### 21.1 Estructura final
+
+```text
+gestor-cursos/
+├── package.json
+├── data/
+│   └── cursos.json           (se crea automáticamente)
+└── src/
+    ├── index.js
+    ├── cli.js
+    ├── services/
+    │   └── cursosService.js
+    ├── repositories/
+    │   └── cursosRepository.js
+    └── utils/
+        └── validarCurso.js
+```
+
+### 21.2 Crear el proyecto
+
+```bash
+mkdir gestor-cursos
+cd gestor-cursos
+npm init -y
+```
+
+Crea las carpetas `src`, `src/services`, `src/repositories`, `src/utils` y `data` desde tu editor o explorador. Sustituye `package.json` por:
 
 ```json
 {
-  "name": "laboratorio-modulos",
+  "name": "gestor-cursos",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node app.js",
+    "start": "node src/index.js",
     "test": "node --test"
   }
 }
 ```
 
-**Nota:** `npm init -y` funciona localmente si npm ya está instalado; no descarga dependencias.
+### 21.3 Validación — `src/utils/validarCurso.js`
 
-## Paso 2. Crear la estructura
-
-```text
-laboratorio-modulos/
-├── package.json
-├── app.js
-└── src/
-    ├── progreso.js
-    └── validaciones.js
-```
-
-## Paso 3. Crear `src/validaciones.js`
-
-```javascript
-export function validarEnteroNoNegativo(valor, nombre) {
-  if (!Number.isInteger(valor) || valor < 0) {
-    throw new TypeError(`${nombre} debe ser un entero no negativo`);
+```js
+export function validarTitulo(titulo) {
+  if (typeof titulo !== 'string' || titulo.trim().length < 3) {
+    throw new Error('El título debe tener al menos 3 caracteres');
   }
+  return titulo.trim();
+}
+
+export function validarDuracion(duracion) {
+  const numero = Number(duracion);
+  if (!Number.isInteger(numero) || numero <= 0) {
+    throw new Error('La duración debe ser un entero positivo');
+  }
+  return numero;
 }
 ```
 
-## Paso 4. Crear `src/progreso.js`
+### 21.4 Persistencia — `src/repositories/cursosRepository.js`
 
-```javascript
-import { validarEnteroNoNegativo } from "./validaciones.js";
+```js
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-export function calcularPorcentaje(completadas, total) {
-  validarEnteroNoNegativo(completadas, "completadas");
-  validarEnteroNoNegativo(total, "total");
-
-  if (total === 0) return 0;
-  if (completadas > total) {
-    throw new RangeError("El avance no puede superar el total");
-  }
-
-  return Number(((completadas / total) * 100).toFixed(2));
-}
-```
-
-## Paso 5. Crear `app.js`
-
-```javascript
-import { calcularPorcentaje } from "./src/progreso.js";
-
-console.log("Progreso del curso:", calcularPorcentaje(7, 10), "%");
-```
-
-## Paso 6. Ejecutar
-
-```powershell
-npm start
-```
-
-Salida esperada:
-
-```text
-Progreso del curso: 70 %
-```
-
-## Paso 7. Probar un error
-
-Modifica temporalmente:
-
-```javascript
-console.log(calcularPorcentaje(11, 10));
-```
-
-Se producirá un `RangeError`. Después restaura la llamada válida.
-
-## Paso 8. Escribir una prueba
-
-Archivo `src/progreso.test.js`:
-
-```javascript
-import test from "node:test";
-import assert from "node:assert/strict";
-import { calcularPorcentaje } from "./progreso.js";
-
-test("calcula el progreso", () => {
-  assert.equal(calcularPorcentaje(7, 10), 70);
-});
-
-test("evita avances superiores al total", () => {
-  assert.throws(
-    () => calcularPorcentaje(11, 10),
-    RangeError
-  );
-});
-
-test("devuelve cero cuando no hay lecciones", () => {
-  assert.equal(calcularPorcentaje(0, 0), 0);
-});
-```
-
-Ejecuta:
-
-```powershell
-npm test
-```
-
-**Criterio de aceptación:** las tres pruebas deben pasar y `npm start` debe mostrar el porcentaje correcto.
-
----
-
-# Proyecto integrador — Gestor modular de cursos del curso
-
-Vamos a construir una aplicación de consola que permita registrar cursos, listarlos, actualizar el progreso y obtener estadísticas. Se organiza por módulos y guarda datos en un archivo JSON.
-
-## Estructura
-
-```text
-gestor-modular-cursos/
-├── package.json
-├── app.js
-├── datos/
-│   └── cursos.json       # Se crea al guardar
-└── src/
-    ├── almacenamiento.js
-    ├── cursos.js
-    └── estadisticas.js
-```
-
-## 1. `package.json`
-
-```json
-{
-  "name": "gestor-modular-cursos",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "start": "node app.js"
-  }
-}
-```
-
-## 2. `src/almacenamiento.js`
-
-```javascript
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
-
-const carpetaActual = dirname(fileURLToPath(import.meta.url));
-const archivo = join(carpetaActual, "..", "datos", "cursos.json");
+const carpetaActual = path.dirname(fileURLToPath(import.meta.url));
+const rutaDatos = path.resolve(carpetaActual, '../../data/cursos.json');
 
 export async function leerCursos() {
   try {
-    const contenido = await readFile(archivo, "utf8");
-    return JSON.parse(contenido);
+    const texto = await readFile(rutaDatos, 'utf8');
+    const cursos = JSON.parse(texto);
+    if (!Array.isArray(cursos)) throw new Error('El archivo no contiene una lista');
+    return cursos;
   } catch (error) {
-    if (error.code === "ENOENT") return [];
+    if (error.code === 'ENOENT') return [];
     throw error;
   }
 }
 
 export async function guardarCursos(cursos) {
-  await mkdir(dirname(archivo), { recursive: true });
-  await writeFile(archivo, JSON.stringify(cursos, null, 2), "utf8");
+  await mkdir(path.dirname(rutaDatos), { recursive: true });
+  await writeFile(rutaDatos, JSON.stringify(cursos, null, 2), 'utf8');
 }
 ```
 
-## 3. `src/cursos.js`
+**Importante:** este repositorio es apropiado para una CLI local con una operación a la vez. No implementa bloqueos ni escrituras atómicas para múltiples procesos simultáneos.
 
-```javascript
-import { leerCursos, guardarCursos } from "./almacenamiento.js";
+### 21.5 Lógica de negocio — `src/services/cursosService.js`
 
-export async function agregarCurso(id, nombre, total) {
-  const cursos = await leerCursos();
-
-  if (!Number.isInteger(id) || id <= 0) {
-    throw new Error("ID inválido");
-  }
-  if (typeof nombre !== "string" || !nombre.trim()) {
-    throw new Error("Nombre obligatorio");
-  }
-  if (!Number.isInteger(total) || total <= 0) {
-    throw new Error("El total debe ser positivo");
-  }
-  if (cursos.some(curso => curso.id === id)) {
-    throw new Error("Ya existe un curso con ese ID");
-  }
-
-  const curso = { id, nombre: nombre.trim(), total, completadas: 0 };
-  cursos.push(curso);
-  await guardarCursos(cursos);
-  return curso;
-}
+```js
+import { leerCursos, guardarCursos } from '../repositories/cursosRepository.js';
+import { validarTitulo, validarDuracion } from '../utils/validarCurso.js';
 
 export async function listarCursos() {
   return leerCursos();
 }
 
-export async function actualizarProgreso(id, completadas) {
+export async function crearCurso(titulo, duracion) {
+  const tituloLimpio = validarTitulo(titulo);
+  const horas = validarDuracion(duracion);
   const cursos = await leerCursos();
-  const curso = cursos.find(item => item.id === id);
-
-  if (!curso) throw new Error("Curso no encontrado");
-  if (!Number.isInteger(completadas) ||
-      completadas < 0 ||
-      completadas > curso.total) {
-    throw new Error("Progreso inválido");
-  }
-
-  curso.completadas = completadas;
+  const id = cursos.reduce((max, curso) => Math.max(max, curso.id), 0) + 1;
+  const nuevo = { id, titulo: tituloLimpio, duracionHoras: horas };
+  cursos.push(nuevo);
   await guardarCursos(cursos);
-  return curso;
-}
-```
-
-## 4. `src/estadisticas.js`
-
-```javascript
-export function resumenCursos(cursos) {
-  const totalCursos = cursos.length;
-  const finalizados = cursos.filter(
-    curso => curso.completadas === curso.total
-  ).length;
-
-  const progresoPromedio = totalCursos === 0
-    ? 0
-    : Number((
-        cursos.reduce(
-          (suma, curso) => suma + (curso.completadas / curso.total) * 100,
-          0
-        ) / totalCursos
-      ).toFixed(2));
-
-  return { totalCursos, finalizados, progresoPromedio };
-}
-```
-
-## 5. `app.js`
-
-```javascript
-import {
-  agregarCurso,
-  listarCursos,
-  actualizarProgreso
-} from "./src/cursos.js";
-
-import { resumenCursos } from "./src/estadisticas.js";
-
-async function iniciar() {
-  const [comando, ...argumentos] = process.argv.slice(2);
-
-  switch (comando) {
-    case "agregar": {
-      const [id, nombre, total] = argumentos;
-      console.log(await agregarCurso(Number(id), nombre, Number(total)));
-      break;
-    }
-
-    case "listar":
-      console.table(await listarCursos());
-      break;
-
-    case "avance": {
-      const [id, completadas] = argumentos;
-      console.log(await actualizarProgreso(Number(id), Number(completadas)));
-      break;
-    }
-
-    case "resumen":
-      console.log(resumenCursos(await listarCursos()));
-      break;
-
-    default:
-      console.log(
-        'Comandos:\n' +
-        '  node app.js agregar 1 "Node.js" 26\n' +
-        '  node app.js listar\n' +
-        '  node app.js avance 1 5\n' +
-        '  node app.js resumen'
-      );
-  }
-}
-
-iniciar().catch(error => {
-  console.error("Error:", error.message);
-  process.exitCode = 1;
-});
-```
-
-## 6. Ejecutar el proyecto
-
-Desde la carpeta `gestor-modular-cursos`:
-
-```powershell
-node app.js agregar 1 "Node.js" 26
-node app.js agregar 2 "JavaScript" 20
-node app.js listar
-node app.js avance 1 13
-node app.js resumen
-```
-
-**Resultado esperado del resumen:**
-
-```text
-{
-  totalCursos: 2,
-  finalizados: 0,
-  progresoPromedio: 25
-}
-```
-
-El proyecto funciona sin conexión y no necesita dependencias externas.
-
-## 7. Pruebas manuales
-
-1. Intenta agregar un ID duplicado.
-2. Intenta registrar un total de lecciones negativo.
-3. Intenta actualizar un curso inexistente.
-4. Intenta registrar más lecciones completadas que el total.
-5. Cierra la terminal, vuelve a ejecutar `listar` y verifica que los datos persisten.
-
-**Limitación consciente:** este es un proyecto educativo con almacenamiento JSON. No implementa bloqueo de escrituras concurrentes, autenticación ni transacciones; esas necesidades se abordarán con bases de datos y arquitectura de servicios.
-
----
-
-# Ejercicios
-
-## Nivel 1 — Básico
-
-1. Crea un archivo `saludos.js` con dos funciones exportadas.
-2. Importa ambas funciones desde `app.js`.
-3. Ejecuta el programa con Node.js.
-4. Repite el ejemplo usando CommonJS con archivos `.cjs`.
-5. Explica por qué el módulo no necesita imprimir nada al ser importado.
-
-## Nivel 2 — Intermedio
-
-1. Crea un módulo `precios.js` que exporte `calcularSubtotal`, `calcularIVA` y `calcularTotal`.
-2. Valida que los precios sean números finitos y no negativos.
-3. Importa las funciones con alias.
-4. Crea pruebas con `node:test`.
-5. Explica qué ocurre si omites la extensión `.js` en una importación local ESM.
-
-## Nivel 3 — Avanzado
-
-1. Añade al gestor modular de cursos el comando `eliminar ID`.
-2. Crea un módulo `validaciones.js` para reutilizar reglas.
-3. Agrega el comando `buscar ID`.
-4. Implementa al menos cuatro pruebas automatizadas de funciones puras.
-5. Separa lógica de negocio y lectura/escritura de archivos cuando sea posible.
-6. Documenta la estructura de dependencias entre módulos.
-
----
-
-# Solucionario paso a paso
-
-## Solución Nivel 1
-
-Archivo `saludos.js`:
-
-```javascript
-export function saludar(nombre) {
-  return `Hola, ${nombre}`;
-}
-
-export function despedir(nombre) {
-  return `Hasta pronto, ${nombre}`;
-}
-```
-
-Archivo `app.js`:
-
-```javascript
-import { saludar, despedir } from "./saludos.js";
-
-console.log(saludar("Ana"));
-console.log(despedir("Ana"));
-```
-
-Versión CommonJS, `saludos.cjs`:
-
-```javascript
-function saludar(nombre) {
-  return `Hola, ${nombre}`;
-}
-
-function despedir(nombre) {
-  return `Hasta pronto, ${nombre}`;
-}
-
-module.exports = { saludar, despedir };
-```
-
-Archivo `app.cjs`:
-
-```javascript
-const { saludar, despedir } = require("./saludos.cjs");
-console.log(saludar("Ana"));
-console.log(despedir("Ana"));
-```
-
-Un módulo puede definir y exportar funciones sin invocarlas; la aplicación decide cuándo utilizarlas.
-
-## Solución Nivel 2
-
-Archivo `precios.js`:
-
-```javascript
-function validarPrecio(valor) {
-  if (!Number.isFinite(valor) || valor < 0) {
-    throw new TypeError("El precio debe ser un número válido no negativo");
-  }
-}
-
-export function calcularSubtotal(precio, cantidad) {
-  validarPrecio(precio);
-  if (!Number.isInteger(cantidad) || cantidad < 0) {
-    throw new TypeError("Cantidad inválida");
-  }
-  return precio * cantidad;
-}
-
-export function calcularIVA(subtotal, tasa = 0.19) {
-  validarPrecio(subtotal);
-  validarPrecio(tasa);
-  return subtotal * tasa;
-}
-
-export function calcularTotal(subtotal, tasa = 0.19) {
-  return subtotal + calcularIVA(subtotal, tasa);
-}
-```
-
-Archivo `app.js`:
-
-```javascript
-import {
-  calcularSubtotal as subtotal,
-  calcularIVA as iva,
-  calcularTotal as total
-} from "./precios.js";
-
-const base = subtotal(10000, 2);
-console.log({ base, impuesto: iva(base), total: total(base) });
-```
-
-Archivo `precios.test.js`:
-
-```javascript
-import test from "node:test";
-import assert from "node:assert/strict";
-import { calcularSubtotal, calcularTotal } from "./precios.js";
-
-test("calcula subtotal", () => {
-  assert.equal(calcularSubtotal(10000, 2), 20000);
-});
-
-test("calcula total", () => {
-  assert.equal(calcularTotal(20000), 23800);
-});
-
-test("rechaza precio negativo", () => {
-  assert.throws(() => calcularSubtotal(-1, 2), TypeError);
-});
-```
-
-Ejecuta `node --test`. La tasa `0.19` es solo un ejemplo matemático y no constituye asesoría tributaria.
-
-## Solución Nivel 3
-
-Agrega a `src/cursos.js`:
-
-```javascript
-export async function eliminarCurso(id) {
-  const cursos = await leerCursos();
-  const indice = cursos.findIndex(curso => curso.id === id);
-  if (indice === -1) throw new Error("Curso no encontrado");
-
-  const [eliminado] = cursos.splice(indice, 1);
-  await guardarCursos(cursos);
-  return eliminado;
+  return nuevo;
 }
 
 export async function buscarCurso(id) {
   const cursos = await leerCursos();
-  return cursos.find(curso => curso.id === id) ?? null;
+  return cursos.find(curso => curso.id === Number(id)) ?? null;
+}
+
+export async function eliminarCurso(id) {
+  const cursos = await leerCursos();
+  const restantes = cursos.filter(curso => curso.id !== Number(id));
+  if (restantes.length === cursos.length) return false;
+  await guardarCursos(restantes);
+  return true;
 }
 ```
 
-Después importa estas funciones en `app.js` y agrega dos casos al `switch`:
+### 21.6 Interfaz de comandos — `src/cli.js`
 
-```javascript
-case "buscar":
-  console.log(await buscarCurso(Number(argumentos[0])));
-  break;
+```js
+import { listarCursos, crearCurso, buscarCurso, eliminarCurso } from './services/cursosService.js';
 
-case "eliminar":
-  console.log(await eliminarCurso(Number(argumentos[0])));
-  break;
+export async function ejecutarCLI(argumentos) {
+  const [comando, ...params] = argumentos;
+
+  switch (comando) {
+    case 'listar': {
+      const cursos = await listarCursos();
+      console.table(cursos);
+      break;
+    }
+    case 'crear': {
+      const [titulo, duracion] = params;
+      const nuevo = await crearCurso(titulo, duracion);
+      console.log('Curso creado:', nuevo);
+      break;
+    }
+    case 'buscar': {
+      const curso = await buscarCurso(params[0]);
+      console.log(curso ?? 'Curso no encontrado');
+      break;
+    }
+    case 'eliminar': {
+      const eliminado = await eliminarCurso(params[0]);
+      console.log(eliminado ? 'Curso eliminado' : 'Curso no encontrado');
+      break;
+    }
+    default:
+      console.log('Uso: node src/index.js <listar|crear|buscar|eliminar> [argumentos]');
+      console.log('Ejemplo: node src/index.js crear "Node.js básico" 12');
+  }
+}
 ```
 
-**Refactorización sugerida:** crea `src/validaciones.js` y mueve allí las comprobaciones de identificadores, nombres, totales y avances. Para las pruebas, extrae las transformaciones de arreglos a funciones puras que no dependan de `fs`.
+### 21.7 Punto de entrada — `src/index.js`
 
-**Criterio de solución:** cada comando debe mostrar el resultado esperado y fallar con mensajes claros ante entradas inválidas.
+```js
+import { ejecutarCLI } from './cli.js';
 
----
+try {
+  await ejecutarCLI(process.argv.slice(2));
+} catch (error) {
+  console.error('Error:', error.message);
+  process.exitCode = 1;
+}
+```
 
-# Evaluación de conocimientos
+### 21.8 Ejecutar y comprobar
 
-Responde sin consultar la guía:
+Desde la raíz `gestor-cursos`:
 
-1. ¿Qué es un módulo en Node.js?
-2. ¿Cuál es la diferencia entre módulos locales, nativos y externos?
-3. ¿Qué hace `module.exports`?
-4. ¿En qué se diferencian `require()` e `import`?
-5. ¿Para qué sirve `"type": "module"`?
-6. ¿Qué extensión identifica inequívocamente un archivo CommonJS?
-7. ¿Qué extensión identifica inequívocamente un archivo ESM?
-8. ¿Por qué suele escribirse `.js` al importar archivos ESM locales?
-9. ¿Qué diferencia existe entre exportación nombrada y por defecto?
-10. ¿Qué devuelve `import()` dinámico?
-11. ¿Qué representa `process.cwd()`?
-12. ¿Qué es una dependencia circular?
-13. ¿Por qué es importante separar validación, negocio y persistencia?
-14. ¿Qué riesgos presenta un módulo con estado mutable compartido?
-15. ¿Cómo comprobarías que un módulo funciona sin iniciar toda la aplicación?
+```bash
+node src/index.js listar
+node src/index.js crear "Fundamentos de Node.js" 12
+node src/index.js crear "JavaScript moderno" 20
+node src/index.js listar
+node src/index.js buscar 1
+node src/index.js eliminar 1
+node src/index.js listar
+```
 
-**Criterio de aprobación:** 12 respuestas correctas de 15, laboratorio funcional y proyecto con pruebas manuales.
+**Resultado esperado:** tras crear dos cursos, `listar` muestra dos filas; `buscar 1` devuelve el primer curso; `eliminar 1` confirma la eliminación; el último `listar` muestra únicamente el segundo curso. Revisa `data/cursos.json` para verificar persistencia. Si vuelves a iniciar la aplicación, los cursos permanecen guardados.
 
-## Respuestas de comprobación
+**Pruebas de errores:** intenta `crear "AB" 5`, `crear "Curso" 0` y `buscar 999`. Los dos primeros deben producir errores controlados; el último debe mostrar que no existe el curso.
 
-1. Unidad de código que encapsula y expone funcionalidades.
-2. Origen del módulo: propio, integrado o instalado.
-3. Define el valor exportado por CommonJS.
-4. Pertenecen a sistemas de módulos distintos, con reglas de carga diferentes.
-5. Configura archivos `.js` del paquete como ESM.
-6. `.cjs`.
-7. `.mjs`.
-8. Por las reglas de resolución de Node.js.
-9. La nombrada se importa por su nombre exportado; la predeterminada admite un nombre local elegido.
-10. Una promesa que resuelve al espacio de nombres del módulo.
-11. Directorio de trabajo del proceso.
-12. Dos o más módulos dependen circularmente entre sí.
-13. Reduce acoplamiento y facilita mantenimiento y pruebas.
-14. Cambios inesperados entre consumidores y pruebas difíciles de aislar.
-15. Con pruebas unitarias y entradas/salidas controladas.
+### 21.9 Pruebas automatizadas (sin paquetes)
 
----
+Crea `src/utils/validarCurso.test.js`:
 
-# Hoja de trucos (Cheatsheet)
+```js
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { validarTitulo, validarDuracion } from './validarCurso.js';
 
-| Sintaxis | Uso |
+test('acepta títulos válidos y elimina espacios', () => {
+  assert.equal(validarTitulo('  Node.js  '), 'Node.js');
+});
+
+test('rechaza títulos cortos', () => {
+  assert.throws(() => validarTitulo('AB'), /al menos 3/);
+});
+
+test('valida duración positiva', () => {
+  assert.equal(validarDuracion('12'), 12);
+  assert.throws(() => validarDuracion(0), /entero positivo/);
+});
+```
+
+Ejecuta `npm test`. Deben pasar las tres pruebas.
+
+### 21.10 Retos de ampliación
+
+1. Agrega el comando `actualizar` para cambiar título o duración.
+2. Implementa `estadisticas` con número de cursos y suma de horas.
+3. Evita títulos duplicados ignorando mayúsculas y espacios exteriores.
+4. Crea exportación de cursos a CSV en un módulo separado.
+5. Introduce pruebas de servicio con un repositorio temporal o inyectado, evitando modificar los datos reales.
+
+## 22. Ejercicios de tres niveles
+
+### Nivel básico
+
+**B1.** Crea `saludos.mjs` con dos exportaciones nombradas: `hola(nombre)` y `adios(nombre)`. Impórtalas en `main.mjs` y muestra sus resultados.
+
+**B2.** Convierte un archivo CommonJS que exporta `sumar` y `multiplicar` a ESM. Explica dos cambios necesarios.
+
+**B3.** Importa `node:os` y muestra la plataforma y la arquitectura del equipo.
+
+### Nivel intermedio
+
+**I1.** Crea `precios.js` que exporte `calcularIVA(precio, tasa)` y una función por defecto que dé formato al precio. Valida que precio y tasa sean números no negativos.
+
+**I2.** Implementa un módulo `contador.js` con una fábrica de contadores independientes. Demuestra que incrementar uno no modifica otro.
+
+**I3.** Crea `reporte.js` y cárgalo mediante `import()` solo si una variable `generar` es verdadera.
+
+### Nivel avanzado
+
+**A1.** Refactoriza dos módulos con importaciones circulares: extrae utilidades comunes a `compartido.js` y elimina el ciclo.
+
+**A2.** Añade al gestor de cursos un comando `estadisticas` que muestre total de cursos y horas acumuladas.
+
+**A3.** Escribe una prueba automatizada para comprobar que un título de dos caracteres se rechaza y una duración decimal se rechaza.
+
+**Criterios de entrega:** código ejecutable, nombres descriptivos, imports correctos, captura de pantalla o salida de terminal, y breve explicación de las decisiones.
+
+## 23. Solucionario paso a paso
+
+### B1. Saludos
+
+`saludos.mjs`:
+
+```js
+export const hola = nombre => `Hola, ${nombre}`;
+export const adios = nombre => `Adiós, ${nombre}`;
+```
+
+`main.mjs`:
+
+```js
+import { hola, adios } from './saludos.mjs';
+console.log(hola('Sofía'));
+console.log(adios('Sofía'));
+```
+
+Ejecuta `node main.mjs`. La primera línea saluda y la segunda se despide.
+
+### B2. Conversión de CJS a ESM
+
+Antes: `module.exports = { sumar, multiplicar }` y `require('./operaciones.cjs')`. Después:
+
+```js
+// operaciones.mjs
+export const sumar = (a, b) => a + b;
+export const multiplicar = (a, b) => a * b;
+// main.mjs
+import { sumar, multiplicar } from './operaciones.mjs';
+console.log(sumar(3, 4), multiplicar(3, 4));
+```
+
+Cambios: usar `export`/`import` y emplear `.mjs` (o `.js` con `type: module`).
+
+### B3. Sistema operativo
+
+```js
+import os from 'node:os';
+console.log('Plataforma:', os.platform());
+console.log('Arquitectura:', os.arch());
+```
+
+### I1. Precios
+
+```js
+// precios.mjs
+export function calcularIVA(precio, tasa) {
+  if (!Number.isFinite(precio) || precio < 0 || !Number.isFinite(tasa) || tasa < 0) {
+    throw new Error('Precio y tasa deben ser números no negativos');
+  }
+  return precio * tasa;
+}
+export default function formatearPrecio(valor) {
+  if (!Number.isFinite(valor)) throw new Error('Valor inválido');
+  return `$${valor.toFixed(2)}`;
+}
+// main.mjs (archivo separado)
+// import formatearPrecio, { calcularIVA } from './precios.mjs';
+// console.log(formatearPrecio(100 + calcularIVA(100, 0.19)));
+```
+
+Guarda el import y `console.log` comentados en un `main.mjs` aparte, quitando `//` para ejecutarlos. Resultado: `$119.00`.
+
+### I2. Contadores independientes
+
+```js
+// contador.mjs
+export function crearContador() {
+  let valor = 0;
+  return { incrementar: () => ++valor, leer: () => valor };
+}
+// main.mjs
+import { crearContador } from './contador.mjs';
+const uno = crearContador();
+const dos = crearContador();
+uno.incrementar();
+console.log(uno.leer(), dos.leer()); // 1 0
+```
+
+Cada llamada crea un cierre con su propia variable `valor`.
+
+### I3. Importación condicional
+
+```js
+// reporte.mjs
+export const generarReporte = () => 'Informe listo';
+// main.mjs
+const generar = true;
+if (generar) {
+  const { generarReporte } = await import('./reporte.mjs');
+  console.log(generarReporte());
+}
+```
+
+### A1. Eliminar dependencia circular
+
+```js
+// compartido.mjs
+export const normalizar = texto => texto.trim().toLowerCase();
+// usuarios.mjs
+import { normalizar } from './compartido.mjs';
+export const nombreUsuario = nombre => normalizar(nombre);
+// cursos.mjs
+import { normalizar } from './compartido.mjs';
+export const nombreCurso = titulo => normalizar(titulo);
+```
+
+Ambos módulos dependen del tercero, pero no uno del otro.
+
+### A2. Estadísticas del gestor
+
+Agrega a `src/services/cursosService.js`:
+
+```js
+export async function obtenerEstadisticas() {
+  const cursos = await leerCursos();
+  return {
+    totalCursos: cursos.length,
+    totalHoras: cursos.reduce((total, curso) => total + curso.duracionHoras, 0)
+  };
+}
+```
+
+En `src/cli.js`, añade `obtenerEstadisticas` al import del servicio y, antes de `default`, agrega:
+
+```js
+case 'estadisticas': {
+  console.log(await obtenerEstadisticas());
+  break;
+}
+```
+
+Prueba `node src/index.js estadisticas`. Actualiza también el texto de ayuda para incluir el nuevo comando.
+
+### A3. Pruebas de validación
+
+Agrega a `src/utils/validarCurso.test.js`:
+
+```js
+test('rechaza un título de dos caracteres', () => {
+  assert.throws(() => validarTitulo('JS'), /al menos 3/);
+});
+
+test('rechaza duración decimal', () => {
+  assert.throws(() => validarDuracion(2.5), /entero positivo/);
+});
+```
+
+Ejecuta `npm test` y comprueba que pasan cinco pruebas.
+
+## 24. Evaluación
+
+**Tiempo sugerido:** 35 minutos. **Puntaje:** 100 puntos.
+
+### Parte A: selección múltiple (5 × 8 = 40 puntos)
+
+1. ¿Qué permite exportar un objeto completo en CJS? A) `module.exports` B) `import` C) `await` D) `package-lock`.
+2. ¿Qué extensión indica inequívocamente ESM? A) `.json` B) `.mjs` C) `.cjs` D) `.txt`.
+3. ¿Qué devuelve `import('./modulo.mjs')`? A) Un número B) Una promesa C) Un booleano D) Una ruta.
+4. ¿Qué módulo nativo permite trabajar con rutas? A) `node:path` B) `node:os` C) `node:http` D) `node:events`.
+5. ¿Qué problema puede causar una dependencia circular? A) Una exportación parcialmente inicializada B) Desinstalar npm C) Borrar automáticamente archivos D) Cambiar la versión de Node.
+
+### Parte B: respuestas cortas (3 × 10 = 30 puntos)
+
+6. Explica la diferencia entre exportación nombrada y por defecto con un ejemplo.
+7. ¿Por qué las rutas relativas de ESM deben escribirse de forma explícita?
+8. Explica cómo puede compartirse estado entre dos importadores y cómo evitarlo.
+
+### Parte C: práctica (30 puntos)
+
+9. Crea dos módulos ESM: `validacion.mjs`, que exporte `esPositivo(numero)`, y `main.mjs`, que importe la función, compruebe 5 y -3 y muestre los resultados. Asigna 10 puntos a estructura, 10 a imports/exports y 10 a resultados correctos.
+
+**Clave de la parte A:** 1-A, 2-B, 3-B, 4-A, 5-A.
+
+**Guía de la parte B:** 6: nombrada usa llaves y admite varias; por defecto se importa sin llaves. 7: la resolución ESM de rutas relativas exige especificadores completos, incluida la extensión. 8: la instancia del módulo se reutiliza y conserva estado mutable; una fábrica crea instancias separadas.
+
+**Solución de la parte C:**
+
+```js
+// validacion.mjs
+export const esPositivo = numero => typeof numero === 'number' && numero > 0;
+// main.mjs
+import { esPositivo } from './validacion.mjs';
+console.log(esPositivo(5));  // true
+console.log(esPositivo(-3)); // false
+```
+
+**Escala orientativa:** 90–100 dominio sólido; 70–89 competente; 50–69 requiere práctica; menos de 50 conviene repasar y repetir el laboratorio.
+
+## 25. Hoja de trucos
+
+| Necesidad | Código |
 |---|---|
-| `module.exports = valor` | Exportar desde CommonJS |
-| `require("./archivo.cjs")` | Importar desde CommonJS |
-| `export const x = 1` | Exportación nombrada ESM |
-| `export function f() {}` | Exportar función ESM |
-| `export default f` | Exportación por defecto ESM |
-| `import { x } from "./x.js"` | Importación nombrada ESM |
-| `import f from "./f.js"` | Importación por defecto ESM |
-| `import * as mod from "./x.js"` | Importar espacio de nombres |
-| `await import("./x.js")` | Importación dinámica |
-| `import { readFile } from "node:fs/promises"` | Importar módulo nativo |
-| `"type": "module"` | Tratar `.js` como ESM en el paquete |
-| `.mjs` | Extensión ESM explícita |
-| `.cjs` | Extensión CommonJS explícita |
-| `import.meta.url` | URL del módulo ESM actual |
-| `process.cwd()` | Directorio de trabajo |
-| `node --test` | Ejecutar pruebas con el test runner nativo |
+| Exportar en CJS | `module.exports = { funcion }` |
+| Importar en CJS | `const { funcion } = require('./mod.cjs')` |
+| Exportación nombrada ESM | `export const x = 1` |
+| Importación nombrada ESM | `import { x } from './mod.js'` |
+| Exportación por defecto | `export default funcion` |
+| Importación por defecto | `import funcion from './mod.js'` |
+| Importación dinámica | `await import('./mod.js')` |
+| Importar módulo integrado | `import path from 'node:path'` |
+| Directorio actual del módulo ESM | `path.dirname(fileURLToPath(import.meta.url))` |
+| Ejecutar archivo | `node src/index.js` |
+| Ejecutar scripts npm | `npm start` / `npm test` |
+| Inspeccionar caché CJS | `require.cache` |
 
----
+## 26. Resumen técnico y checklist
 
-# Resumen técnico
+**Resumen:** Node.js permite construir aplicaciones con módulos locales, nativos y externos. CommonJS usa `require` y `module.exports`; ESM usa `import` y `export`. La configuración del paquete y las extensiones determinan el sistema de módulos. Las importaciones tienen reglas de resolución, caché e inicialización que afectan al comportamiento. Una arquitectura por responsabilidades facilita pruebas y evolución.
 
-- **Los módulos** permiten dividir aplicaciones en componentes con responsabilidades claras.
-- **CommonJS** usa principalmente `require()` y `module.exports`.
-- **ESM** usa `import` y `export`; lo utilizaremos en nuestros proyectos nuevos.
-- Los módulos pueden ser **nativos**, **locales** o **externos**.
-- La configuración de `package.json` y las extensiones determinan cómo se interpretan los archivos.
-- Las importaciones deben respetar las rutas y los nombres exportados.
-- La modularidad facilita las pruebas, la reutilización y la evolución del proyecto.
-- El gestor modular de cursos demuestra cómo combinar almacenamiento, reglas de negocio y estadísticas sin dependencias externas.
+### Checklist de dominio
 
----
+- [ ] Defino qué es un módulo y por qué conviene modularizar.
+- [ ] Distingo módulos nativos, locales y externos.
+- [ ] Creo y consumo módulos CommonJS.
+- [ ] Creo y consumo módulos ESM.
+- [ ] Diferencio exportaciones nombradas y por defecto.
+- [ ] Configuro correctamente `package.json`.
+- [ ] Resuelvo rutas relativas y extensiones.
+- [ ] Uso `node:fs/promises`, `node:path` y `node:os`.
+- [ ] Instalo y utilizo una dependencia npm.
+- [ ] Comprendo `import()` y la asincronía.
+- [ ] Reconozco efectos de caché y estado compartido.
+- [ ] Obtengo rutas del módulo en CJS y ESM.
+- [ ] Detecto y corrijo dependencias circulares.
+- [ ] Separo interfaz, negocio, validación y persistencia.
+- [ ] Ejecuto el laboratorio sin errores.
+- [ ] Construyo el gestor modular de cursos.
+- [ ] Resuelvo ejercicios básicos, intermedios y avanzados.
+- [ ] Ejecuto las pruebas y apruebo la evaluación.
 
-# Checklist de aprendizaje
-
-- [ ] Comprendo qué es un módulo.
-- [ ] Distingo CommonJS de ESM.
-- [ ] Sé exportar e importar funciones.
-- [ ] Conozco las exportaciones nombradas y por defecto.
-- [ ] Entiendo el papel de `package.json`.
-- [ ] Puedo importar módulos nativos.
-- [ ] Puedo resolver rutas relativas.
-- [ ] Sé identificar errores de importación.
-- [ ] Completé el laboratorio guiado.
-- [ ] Ejecuté el gestor modular de cursos.
-- [ ] Resolví los ejercicios de los tres niveles.
-- [ ] Superé la evaluación.
-
-**Siguiente tema sugerido:** módulos nativos de Node.js (`fs`, `path`, `os`, `events`, `crypto`) y gestión de archivos.
+**Próximo paso sugerido:** profundizar en npm, manejo de errores, eventos, streams y pruebas automatizadas para convertir el gestor en una API HTTP.

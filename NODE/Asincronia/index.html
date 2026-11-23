@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 05: Arquitectura Interna y Asincronía en Node.js — V8, Event Loop, callbacks, promesas, Promise.allSettled y async/await." />
+    <title>Arquitectura Interna y Asincronía en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · ASINCRONÍA</span>
+            <div class="brand-title"><span>⏱️</span><span>Arquitectura y Asincronía</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Arquitectura y Asincronía">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 05 · Runtime Node.js</span>
+                    <span class="badge badge-cyan">V8 + Event Loop + libuv</span>
+                    <span class="badge badge-purple">Callbacks · Promises · async/await</span>
+                </div>
+                <h1 class="hero-title">Arquitectura Interna <br /><span class="gradient-text">y Asincronía</span></h1>
+                <p class="hero-subtitle">
+                    Comprende cómo Node.js ejecuta JavaScript con V8, coordina tareas mediante el Event Loop y maneja operaciones concurrentes sin bloquear el hilo principal usando callbacks, promesas y <code>async/await</code>.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">⚙️</div>
+                        <h3>1. V8 y Event Loop</h3>
+                        <p>Microtareas, macrotareas y por qué no bloquear el hilo principal.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">📞</div>
+                        <h3>2. Callbacks</h3>
+                        <p>Síncronos vs asíncronos y patrón error-first <code>(err, data)</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🤝</div>
+                        <h3>3. Promesas y async/await</h3>
+                        <p><code>Promise.all</code>, <code>allSettled</code>, <code>try/catch</code> y concurrencia.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Observa el orden de colas y ejecuta lotes concurrentes en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: V8 Y EVENT LOOP -->
+        <section class="slide" data-slide="2" data-title="V8 y Event Loop">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · MOTOR Y COORDINACIÓN</span>
+                <h2 class="slide-title">V8, Event Loop y Prioridad de Colas</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list" style="margin-bottom:12px;">
+                    <li><strong>V8:</strong> compila y ejecuta JavaScript y gestiona la memoria, pero no incluye APIs del sistema como <code>node:fs</code>.</li>
+                    <li><strong>Event Loop:</strong> ejecuta JavaScript en un hilo principal y delega E/S al sistema operativo o a <strong>libuv</strong>.</li>
+                    <li><strong>Orden estricto:</strong> primero código síncrono, luego microtareas (<code>Promise.then</code>) y después temporizadores (<code>setTimeout</code>).</li>
+                </ul>
+                <pre class="code-block"><code>console.log('A: inicio');
+setTimeout(() => console.log('D: temporizador'), 0);
+Promise.resolve().then(() => console.log('C: promesa'));
+console.log('B: fin síncrono');
+// Salida: A: inicio -> B: fin síncrono -> C: promesa -> D: temporizador</code></pre>
+                <div class="tip-box warn" style="margin-top:12px;">
+                    <strong>⚠️ Bloqueo del hilo:</strong> Un bucle pesado como <code>while (Date.now() - inicio &lt; 300) {}</code> congela todo el Event Loop e impide atender otras peticiones.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: CALLBACKS -->
+        <section class="slide" data-slide="3" data-title="Callbacks y Error-First">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · PATRÓN CLÁSICO</span>
+                <h2 class="slide-title">Callbacks Síncronos, Asíncronos y Error-First</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:12px;">
+                    Un <strong>callback</strong> es una función pasada a otra para ejecutarse después o al ocurrir un evento. No todo callback es asíncrono (por ejemplo, <code>array.map(cb)</code> es síncrono).
+                </p>
+                <pre class="code-block"><code>import fs from 'node:fs';
+
+// Patrón habitual de Node.js: (error, resultado)
+fs.readFile('curso.json', 'utf8', (error, contenido) => {
+  if (error) {
+    console.error('No se pudo leer:', error.code); // Ej: ENOENT
+    return;
+  }
+  console.log(contenido);
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: PROMESAS Y COMBINADORES -->
+        <section class="slide" data-slide="4" data-title="Promesas y Combinadores">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · ESTADOS Y COMBINADORES</span>
+                <h2 class="slide-title">Promesas: <code>all</code>, <code>allSettled</code> y <code>race</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Combinador</th><th>Comportamiento</th><th>Cuándo usarlo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>Promise.all()</code></td><td>Espera todas; rechaza inmediatamente si una falla</td><td>Todas las tareas son obligatorias para continuar</td></tr>
+                        <tr><td><code>Promise.allSettled()</code></td><td>Espera todas y reporta éxitos (<code>fulfilled</code>) y fallos (<code>rejected</code>)</td><td>Cuando se admiten fallos parciales (ej. lotes o reportes)</td></tr>
+                        <tr><td><code>Promise.race()</code></td><td>Adopta la primera promesa que se resuelva o rechace</td><td>Timeouts o competir entre réplicas</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>const resultados = await Promise.allSettled([
+  ejecutarTarea('Cargar cursos', 300),
+  ejecutarTarea('Generar reporte', 200, true)
+]);
+// Ningún fallo oculta el resultado de las demás tareas</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: ASYNC / AWAIT -->
+        <section class="slide" data-slide="5" data-title="async / await y Concurrencia">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · SINTAXIS MODERNA</span>
+                <h2 class="slide-title"><code>async/await</code>, <code>try/catch</code> y Secuencial vs Concurrente</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>const esperar = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function comparar() {
+  // ❌ Secuencial innecesario (~200 ms)
+  await esperar(100);
+  await esperar(100);
+
+  // ✅ Concurrente (~100 ms): esperas independientes se superponen
+  await Promise.all([esperar(100), esperar(100)]);
+}</code></pre>
+                <div class="tip-box good">
+                    <strong>✅ Manejo de errores:</strong> Envuelve tus llamadas <code>await</code> en bloques <code>try / catch</code> para capturar rechazos de forma clara y evitar promesas sin manejar.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS Y ERRORES COMUNES -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas y Errores Comunes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD Y DEPURACIÓN</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Frecuentes</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Error que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Usar <code>try/catch</code> con <code>await</code></td><td>Rechazos de promesas sin manejar</td></tr>
+                        <tr><td>Elegir <code>Promise.allSettled</code> en lotes</td><td>Perder el reporte de tareas exitosas si una falla</td></tr>
+                        <tr><td>Validar entradas antes de iniciar tareas</td><td>Errores difíciles de diagnosticar</td></tr>
+                        <tr><td>Evitar bucles CPU-intensivos en el hilo principal</td><td>Bloquear el Event Loop del servidor</td></tr>
+                    </tbody>
+                </table>
+                <ul class="styled-list">
+                    <li><strong><code>forEach(async ...)</code>:</strong> <code>forEach</code> no espera promesas; usa <code>for...of</code> (secuencial) o <code>Promise.all(arr.map(...))</code> (concurrente).</li>
+                    <li><strong>Olvidar <code>await</code>:</strong> asigna una <code>Promise { &lt;pending&gt; }</code> en lugar del valor resuelto.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Asincronía">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · EVENT LOOP Y CONCURRENCIA</span>
+                <h2 class="slide-title">🎛️ Simulador de Colas y Tareas Concurrentes</h2>
+                <p class="slide-lead">Explora el orden de ejecución del Event Loop y compara estrategias de espera asíncrona.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario Asíncrono</label>
+                        <select id="asyncSimMode">
+                            <option value="eventloop">Orden Event Loop (Síncrono → Microtarea → Timer)</option>
+                            <option value="concurrency">Secuencial (await + await) vs Concurrente (Promise.all)</option>
+                            <option value="settled">Promise.all vs Promise.allSettled con fallo parcial</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="asyncSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="asyncSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: Asincronía">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Asincronía en Node.js</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: primero corre lo síncrono (A, B), luego la microtarea Promise (C) y al final el temporizador (D)." data-err="Las microtareas de Promise tienen prioridad sobre la cola de temporizadores (setTimeout).">
+                    <div class="quiz-q-title">1. ¿En qué orden se imprimen <code>A</code> (sync), <code>D</code> (setTimeout 0), <code>C</code> (Promise.then) y <code>B</code> (sync)?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">A → B → D → C</button>
+                        <button class="quiz-option" data-opt="b">A → B → C → D</button>
+                        <button class="quiz-option" data-opt="c">A → C → B → D</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: Promise.allSettled espera todas las promesas e informa cuáles tuvieron éxito y cuáles fallaron." data-err="Promise.all rechaza todo el lote en cuanto falla una sola promesa.">
+                    <div class="quiz-q-title">2. ¿Qué combinador conviene usar si una tarea puede fallar pero necesitas el reporte de todas las demás?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Promise.all()</button>
+                        <button class="quiz-option" data-opt="b">Promise.race()</button>
+                        <button class="quiz-option" data-opt="c">Promise.allSettled()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: forEach ignora promesas y no espera los await internos; usa for...of o Promise.all(arr.map(...))." data-err="forEach ejecuta los callbacks sin esperar las promesas que devuelven.">
+                    <div class="quiz-q-title">3. ¿Por qué es un error común usar <code>items.forEach(async item =&gt; { await ... })</code> esperando ejecución secuencial?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Porque forEach no espera las promesas retornadas por el callback</button>
+                        <button class="quiz-option" data-opt="b">Porque async no funciona dentro de funciones flecha</button>
+                        <button class="quiz-option" data-opt="c">Porque forEach bloquea el motor V8</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Asincronía">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Asincronía</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const log = [];
+  const print = msg =&gt; {
+    log.push(msg);
+    document.getElementById(&#x27;out&#x27;).innerHTML = log.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;);
+  };
+  print(&#x27;1. A: inicio (síncrono)&#x27;);
+  setTimeout(() =&gt; print(&#x27;4. D: setTimeout(0) (macrotarea)&#x27;), 0);
+  Promise.resolve().then(() =&gt; print(&#x27;3. C: Promise.then (microtarea)&#x27;));
+  print(&#x27;2. B: fin síncrono&#x27;);
+&lt;/script&gt;">Orden del Event Loop</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Ejecutando lote concurrente...&lt;/div&gt;
+&lt;script&gt;
+  function ejecutarTarea(nombre, demora, fallar = false) {
+    return new Promise((resolve, reject) =&gt; {
+      setTimeout(() =&gt; {
+        if (fallar) reject(new Error(`${nombre}: error simulado`));
+        else resolve(`${nombre}: completada (${demora}ms)`);
+      }, demora);
+    });
+  }
+
+  (async () =&gt; {
+    const inicio = Date.now();
+    const resultados = await Promise.allSettled([
+      ejecutarTarea(&#x27;Cargar cursos&#x27;, 250),
+      ejecutarTarea(&#x27;Consultar progreso&#x27;, 120),
+      ejecutarTarea(&#x27;Generar reporte&#x27;, 180, true)
+    ]);
+    const html = resultados.map((r, i) =&gt;
+      `&lt;div&gt;Tarea ${i + 1}: ${r.status === &#x27;fulfilled&#x27; ? r.value : &#x27;❌ &#x27; + r.reason.message}&lt;/div&gt;`
+    ).join(&#x27;&#x27;);
+    document.getElementById(&#x27;out&#x27;).innerHTML =
+      html + `&lt;div style=&quot;margin-top:8px;font-weight:700&quot;&gt;Tiempo total aprox: ${Date.now() - inicio} ms&lt;/div&gt;`;
+  })();
+&lt;/script&gt;">Lote con Promise.allSettled</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  const log = [];
+  const print = msg =&gt; {
+    log.push(msg);
+    document.getElementById(&#x27;out&#x27;).innerHTML = log.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;);
+  };
+  print(&#x27;1. A: inicio (síncrono)&#x27;);
+  setTimeout(() =&gt; print(&#x27;4. D: setTimeout(0) (macrotarea)&#x27;), 0);
+  Promise.resolve().then(() =&gt; print(&#x27;3. C: Promise.then (microtarea)&#x27;));
+  print(&#x27;2. B: fin síncrono&#x27;);
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('asyncSimMode');
+            const stage = document.getElementById('asyncSimStage');
+            const code = document.getElementById('asyncSimCode');
+            if (!mode || !stage || !code) return;
+
+            function update() {
+                if (mode.value === 'eventloop') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">1. Call Stack (Síncrono): "A: inicio" y "B: fin síncrono"</div>
+                        <div style="color:#00ff88;font-weight:700;">2. Cola Microtareas (Promise.then): "C: promesa"</div>
+                        <div style="color:#fbbf24;">3. Cola Macrotareas (setTimeout 0): "D: temporizador"</div>
+                    `;
+                    code.textContent = `console.log('A: inicio');\nsetTimeout(() => console.log('D: temporizador'), 0);\nPromise.resolve().then(() => console.log('C: promesa'));\nconsole.log('B: fin síncrono');`;
+                } else if (mode.value === 'concurrency') {
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">Secuencial: await esperar(100); await esperar(100); ➔ ~200 ms</div>
+                        <div style="color:#00ff88;font-weight:700;">Concurrente: await Promise.all([esperar(100), esperar(100)]) ➔ ~100 ms</div>
+                        <div style="color:#38bdf8;">Las esperas independientes se superponen sin bloquear el hilo.</div>
+                    `;
+                    code.textContent = `await Promise.all([esperar(100), esperar(100)]); // ~100 ms`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#ff3358;">Promise.all([...]): si la tarea 3 falla, rechaza todo el lote</div>
+                        <div style="color:#00ff88;font-weight:700;">Promise.allSettled([...]): devuelve 2 fulfilled + 1 rejected</div>
+                        <div style="color:#38bdf8;">Duración total ≈ tarea más lenta (300 ms), no la suma (650 ms).</div>
+                    `;
+                    code.textContent = `const resultados = await Promise.allSettled([\n  ejecutarTarea('Cargar cursos', 300),\n  ejecutarTarea('Consultar progreso', 150),\n  ejecutarTarea('Generar reporte', 200, true)\n]);`;
+                }
+            }
+
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · ASINCRONÍA</span><div class="brand-title"><span>⏱️</span><span>Temporizadores JS</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -115,15 +115,28 @@ setTimeout(() => clearInterval(id), 5000);</code></pre></div>
 <p style="margin-bottom:8px;line-height:1.6;">El navegador permite omitir <code>window</code>.</p></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-warn"><strong>⚠️ Memoria:</strong> Siempre limpia tus intervalos con <code>clearInterval(id)</code> cuando ya no se necesiten.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Temporizadores JS">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Temporizadores">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · SETTIMEOUT VS SETINTERVAL</span><h2 class="slide-title">🎛️ Simulador de <code>setInterval</code> y <code>clearInterval</code></h2><p class="slide-lead">Ajusta el intervalo en milisegundos, inicia el contador y detenlo limpiando el identificador.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Intervalo <span id="tmMsVal">500ms</span></label><input type="range" id="tmMs" min="200" max="1500" step="100" value="500" /></div>
+      <div class="sim-control" style="flex-direction:row;gap:8px;"><button type="button" id="tmStart" class="preset-btn active" style="flex:1;">▶ Iniciar</button><button type="button" id="tmStop" class="preset-btn" style="flex:1;">⏹ Detener</button></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:1.5rem;font-weight:800;color:#00ff88;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Temporizadores JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="clearInterval recibe el ID devuelto por setInterval." data-err="Se detiene con clearInterval(id)."><div class="quiz-q-title">1. ¿Qué función detiene un <code>setInterval</code> activo?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">clearInterval(id)</button><button class="quiz-option" data-opt="b">stopTimer(id)</button><button class="quiz-option" data-opt="c">breakInterval()</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Temporizadores JS">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Temporizadores JS">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;t&quot; style=&quot;font-family:system-ui;font-size:20px;font-weight:700;padding:14px&quot;&gt;0s&lt;/div&gt;
 &lt;script&gt;
   let s = 0; setInterval(() =&gt; { document.getElementById(&#x27;t&#x27;).textContent = (++s) + &#x27;s&#x27;; }, 1000);
@@ -132,11 +145,10 @@ setTimeout(() => clearInterval(id), 5000);</code></pre></div>
   let s = 0; setInterval(() =&gt; { document.getElementById(&#x27;t&#x27;).textContent = (++s) + &#x27;s&#x27;; }, 1000);
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -144,5 +156,22 @@ setTimeout(() => clearInterval(id), 5000);</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const ms = document.getElementById('tmMs'), mv = document.getElementById('tmMsVal'), bStart = document.getElementById('tmStart'), bStop = document.getElementById('tmStop');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      let id = null, ticks = 0;
+      function render() {
+        mv.textContent = ms.value + 'ms';
+        st.textContent = 'Ticks: ' + ticks;
+        cd.textContent = `const id = setInterval(() => ticks++, ${ms.value});
+// Para detener:
+clearInterval(id);`;
+      }
+      bStart.addEventListener('click', () => { clearInterval(id); id = setInterval(() => { ticks++; render(); }, Number(ms.value)); });
+      bStop.addEventListener('click', () => { clearInterval(id); id = null; });
+      ms.addEventListener('input', render); render();
+        })();
+    </script>
 </body>
 </html>

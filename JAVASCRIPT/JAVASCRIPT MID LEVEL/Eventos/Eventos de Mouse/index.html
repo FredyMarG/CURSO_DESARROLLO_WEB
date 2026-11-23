@@ -1,39 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guía Interactiva — Eventos de Mouse</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eventos de Mouse y Coordenadas — Guía Interactiva | JS Mid Level</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../../HTML y CSS/slides-engine.css" />
+    <script src="../../../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../../RESOURCES COURSE/course-polish.css" />
+    <script src="../../../../RESOURCES COURSE/course-polish.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="main.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23ec4899'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8E%AF%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body>
-    <header class="hero">
-        <div class="container">
-            <span class="badge">Eventos del DOM</span>
-            <h1>Eventos de Mouse &amp; Coordenadas</h1>
-            <p class="subtitle">Prueba <code>click</code>, <code>dblclick</code>, <code>contextmenu</code>, <code>mouseenter</code>/<code>mouseleave</code> y <code>mousemove</code> en vivo.</p>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">EVENTOS DEL DOM · RATÓN</span>
+            <div class="brand-title"><span>🎯</span><span>Eventos de Mouse y Coordenadas</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 8</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
+            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
     </header>
 
-    <main class="container grid-layout">
-        <section class="card">
-            <h2>1. Área Interactiva de Mouse</h2>
-            <p class="desc">Haz clic, doble clic, clic derecho o mueve el cursor dentro de este panel.</p>
-            <div id="mousePad" class="mouse-pad" tabindex="0">
-                <span id="coordsText">Mueve el cursor aquí (X: 0, Y: 0)</span>
-            </div>
-            <div class="btn-row">
-                <button type="button" id="btnClearLog" class="btn">Limpiar Registro</button>
+    <main class="presentation-wrapper">
+        <section class="slide active" data-slide="1" data-title="Inicio: Eventos de Mouse y Coordenadas">
+            <div class="hero-slide">
+                <div class="hero-badges"><span class="badge badge-cyan">click</span><span class="badge badge-cyan">dblclick</span><span class="badge badge-cyan">contextmenu</span><span class="badge badge-cyan">mousemove</span></div>
+                <h1 class="hero-title">Eventos del DOM:<br /><span class="gradient-text">Eventos de Mouse y Coordenadas</span></h1>
+                <p class="hero-subtitle">Domina las interacciones con el puntero, botones del ratón, menú contextual y lectura de coordenadas.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
+                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                </div>
             </div>
         </section>
 
-        <section class="card">
-            <h2>2. Registro de Eventos</h2>
-            <div id="mouseLog" class="terminal" aria-live="polite"></div>
+        <section class="slide" data-slide="2" data-title="¿Qué son los Eventos de Mouse?">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span><h2 class="slide-title">¿Qué son los Eventos de Mouse?</h2></div>
+            <div class="glass-card"><p style="line-height:1.65;margin-bottom:12px;">Permiten detectar cualquier acción física del puntero sobre un elemento HTML:</p>
+      <ul class="styled-list">
+        <li><strong><code>click</code> y <code>dblclick</code>:</strong> clic simple y doble clic izquierdo.</li>
+        <li><strong><code>contextmenu</code>:</strong> clic derecho; con <code>e.preventDefault()</code> puedes reemplazar el menú del navegador por uno propio.</li>
+        <li><strong><code>mouseenter</code> / <code>mouseleave</code>:</strong> entrada y salida del cursor sin burbujear en hijos (más predecible que <code>mouseover</code>/<code>mouseout</code>).</li>
+        <li><strong><code>mousemove</code>:</strong> movimiento continuo del cursor, útil para lienzos, tooltips o arrastre.</li>
+      </ul></div>
+            <div class="callout callout-analogy" style="margin-top:16px;"><strong>🖱️ Analogía del puntero láser:</strong> <code>mouseenter</code> avisa cuando el láser entra al lienzo, <code>mousemove</code> reporta su posición X/Y exacta y <code>click</code> confirma la acción.</div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Sintaxis y Coordenadas del MouseEvent">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · SINTAXIS Y PROPIEDADES</span><h2 class="slide-title">Sintaxis y Coordenadas del MouseEvent</h2></div>
+            <div class="glass-card"><pre class="code-block"><code>pad.addEventListener(&#x27;mousemove&#x27;, (e) =&gt; {
+  // Coordenadas relativas al viewport vs al elemento
+  console.log(&#x27;Viewport:&#x27;, e.clientX, e.clientY);
+  console.log(&#x27;Elemento:&#x27;, e.offsetX, e.offsetY);
+});
+
+pad.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
+  e.preventDefault(); // Evita el menú contextual por defecto
+  console.log(&#x27;Clic derecho interceptado&#x27;);
+});</code></pre></div>
+            <div class="glass-card" style="margin-top:16px;">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento / API</th><th>Descripción</th></tr></thead>
+                    <tbody><tr><td><code>e.clientX / clientY</code></td><td>Posición del cursor respecto al viewport visible</td></tr><tr><td><code>e.offsetX / offsetY</code></td><td>Posición relativa al borde interno del elemento</td></tr><tr><td><code>e.button</code></td><td>Botón pulsado (<code>0</code>=izq, <code>1</code>=rueda, <code>2</code>=der)</td></tr><tr><td><code>mouseenter / mouseleave</code></td><td>Entrar/salir sin dispararse falsamente en elementos hijos</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Buenas Prácticas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="callout callout-tip"><strong>✅ Prefiere mouseenter/mouseleave:</strong> A diferencia de <code>mouseover</code>, no se disparan de nuevo cada vez que el puntero pasa sobre un hijo interno.</div>
+            <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Accesibilidad:</strong> No dependas únicamente de <code>hover</code> o <code>mouseenter</code> para acciones críticas; en pantallas táctiles y navegación con teclado no hay cursor flotante.</div>
+        </section>
+
+        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador de Área Interactiva de Mouse">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador de Área Interactiva de Mouse</h2></div>
+            <div class="grid-layout" style="padding:0;">
+      <section class="card">
+        <h2>1. Área Interactiva de Mouse</h2>
+        <p class="desc">Haz clic, doble clic, clic derecho o mueve el cursor dentro de este panel.</p>
+        <div id="mousePad" class="mouse-pad" tabindex="0"><span id="coordsText">Mueve el cursor aquí (X: 0, Y: 0)</span></div>
+        <div class="btn-row"><button type="button" id="btnClearLog" class="btn">Limpiar Registro</button></div>
+      </section>
+      <section class="card">
+        <h2>2. Registro de Eventos</h2>
+        <div id="mouseLog" class="terminal" aria-live="polite"></div>
+      </section>
+    </div>
+        </section>
+
+        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Mouse y Coordenadas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+            <div class="quiz-container">
+                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
+                
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: contextmenu es el evento estándar para el menú de clic derecho." data-err="El evento estándar es contextmenu.">
+                    <div class="quiz-q-title">1. ¿Qué evento se dispara al hacer clic derecho y permite ocultar el menú nativo con <code>preventDefault()</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">rightclick</button>
+                        <button class="quiz-option" data-opt="b">contextmenu</button>
+                        <button class="quiz-option" data-opt="c">auxclick</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: mouseenter y mouseleave son ideales para tarjetas con hijos." data-err="mouseover y mouseout sí se disparan al entrar/salir de hijos.">
+                    <div class="quiz-q-title">2. ¿Qué par de eventos NO burbujea ni se dispara al pasar por hijos internos?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">mouseenter / mouseleave</button>
+                        <button class="quiz-option" data-opt="b">mouseover / mouseout</button>
+                        <button class="quiz-option" data-opt="c">mousedown / mouseup</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Mouse y Coordenadas">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel">
+                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;zona&quot; style=&quot;padding:24px;border:1px solid #38bdf8;border-radius:10px;text-align:center;user-select:none;&quot;&gt;Mueve o haz clic aquí&lt;/div&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Esperando interacción...&lt;/div&gt;
+&lt;script&gt;
+  const z = document.getElementById(&#x27;zona&#x27;), o = document.getElementById(&#x27;out&#x27;);
+  z.addEventListener(&#x27;mousemove&#x27;, e =&gt; o.textContent = `X:${e.offsetX} Y:${e.offsetY}`);
+  z.addEventListener(&#x27;contextmenu&#x27;, e =&gt; { e.preventDefault(); o.textContent = &#x27;Clic derecho bloqueado&#x27;; });
+&lt;/script&gt;">Ejemplo en Vivo</button></div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;zona&quot; style=&quot;padding:24px;border:1px solid #38bdf8;border-radius:10px;text-align:center;user-select:none;&quot;&gt;Mueve o haz clic aquí&lt;/div&gt;
+&lt;div id=&quot;out&quot; style=&quot;margin-top:10px;font-family:monospace;&quot;&gt;Esperando interacción...&lt;/div&gt;
+&lt;script&gt;
+  const z = document.getElementById(&#x27;zona&#x27;), o = document.getElementById(&#x27;out&#x27;);
+  z.addEventListener(&#x27;mousemove&#x27;, e =&gt; o.textContent = `X:${e.offsetX} Y:${e.offsetY}`);
+  z.addEventListener(&#x27;contextmenu&#x27;, e =&gt; { e.preventDefault(); o.textContent = &#x27;Clic derecho bloqueado&#x27;; });
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
+            <div class="glass-card"><div class="files-grid">
+                <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>
+                <a class="file-card" href="../../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
+                <a class="file-card" href="../../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
+            </div></div>
         </section>
     </main>
 
-    <script src="main.js"></script>
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
 </body>
 </html>

@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · PETICIONES MODERNAS</span><div class="brand-title"><span>🚀</span><span>Fetch API</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 10</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -69,27 +69,40 @@ const data = await res.json();</code></pre></div>
                 <h2 class="slide-title">Nivel 3</h2>
             </div>
             <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;">Toma el ejercicio anterior de registro de usuarios mediante <code>POST</code> y realízalo utilizando la sintaxis condensada y moderna de la biblioteca <strong>Axios</strong>. Asegúrate de simular una respuesta de error del servidor de tipo <code>403 Forbidden</code> para demostrar cómo es interceptado directamente por el bloque del <code>catch</code>.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># Resumen</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Resumen</h3>
 <ul class="styled-list">
 <li>*   <strong>API Fetch</strong> es el estándar moderno basado en <strong>Promesas</strong> para realizar peticiones asíncronas de manera nativa en el navegador, reemplazando el esquema antiguo de XHR.</li>
 <li>*   Fetch opera en <strong>dos fases</strong>: la verificación inicial de la llegada del mensaje y la descarga/conversión posterior del cuerpo.</li>
 <li>*   El cuerpo de las respuestas de Fetch debe procesarse mediante lectores asíncronos específicos: <strong><code>json()</code></strong>, <strong><code>text()</code></strong>, <strong><code>blob()</code></strong>, <strong><code>formData()</code></strong> o <strong><code>arrayBuffer()</code></strong>.</li>
 <li>*   <strong>Axios</strong> es una potente librería externa que simplifica la experiencia de desarrollo al automatizar el parseo a JSON, rechazar promesas en errores HTTP (4xx/5xx) y empaquetar herramientas como interceptores globales.</li>
 </ul>
-<p style="margin-bottom:8px;line-height:1.6;"># Hoja de Trucos (Cheatsheet)</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">Hoja de Trucos (Cheatsheet)</h3>
 <table class="compare-table"><thead><tr><th>Elemento / API</th><th>Propósito</th><th>Ejemplo</th></tr></thead><tbody><tr><td><code>fetch(url, options)</code></td><td>Inicia una petición HTTP basada en Promesas.</td><td><code>await fetch(&quot;/api/users&quot;, { method: &quot;GET&quot; })</code></td></tr><tr><td><code>res.ok</code> / <code>res.status</code></td><td>Verifica éxito HTTP (<code>200–299</code>) y código numérico.</td><td><code>if (!res.ok) throw new Error(res.status)</code></td></tr><tr><td><code>res.json()</code> / <code>res.text()</code></td><td>Lee el stream del cuerpo como JSON o texto plano.</td><td><code>const data = await res.json()</code></td></tr><tr><td><code>res.blob()</code> / <code>res.arrayBuffer()</code></td><td>Lee datos binarios (imágenes, PDFs, audio).</td><td><code>const img = await res.blob()</code></td></tr><tr><td><code>res.clone()</code></td><td>Clona una <code>Response</code> para leer el cuerpo dos veces.</td><td><code>const copy = res.clone()</code></td></tr><tr><td><code>new Headers(obj)</code></td><td>Manipula cabeceras HTTP de forma segura.</td><td><code>headers.set(&quot;Authorization&quot;, &quot;Bearer ...&quot;)</code></td></tr><tr><td><code>new Request(url, init)</code></td><td>Encapsula una petición reutilizable.</td><td><code>const req = new Request(url, { method: &quot;POST&quot; })</code></td></tr><tr><td><code>new FormData(form)</code></td><td>Envía formularios y archivos <code>multipart/form-data</code>.</td><td><code>fetch(url, { method: &quot;POST&quot;, body: formData })</code></td></tr><tr><td><code>new AbortController()</code></td><td>Permite cancelar manualmente una o más peticiones.</td><td><code>fetch(url, { signal: controller.signal })</code></td></tr><tr><td><code>AbortSignal.timeout(ms)</code></td><td>Cancela automáticamente si supera <code>ms</code> milisegundos.</td><td><code>fetch(url, { signal: AbortSignal.timeout(4000) })</code></td></tr></tbody></table>
 </div>
         </section>
         <section class="slide" data-slide="7" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-warn"><strong>⚠️ Trampa clásica:</strong> <code>fetch()</code> NO rechaza la promesa en un 404 o 500; siempre debes comprobar <code>if (!res.ok)</code>.</div>
         </section>
-        <section class="slide" data-slide="8" data-title="Quiz: Fetch API">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="8" data-lab="true" data-title="Simulador de Fetch API">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · FETCH Y RESPONSE.OK</span><h2 class="slide-title">🎛️ Simulador de <code>fetch()</code> y Validación <code>res.ok</code></h2><p class="slide-lead">Prueba qué ocurre con un 404 cuando validas <code>if (!res.ok)</code> frente a cuando no lo validas.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Endpoint</label><select id="ftUrl"><option value="/api/usuarios">/api/usuarios (200 OK)</option><option value="/api/404">/api/404 (404 Not Found)</option></select></div>
+      <div class="sim-control"><label>Validar if (!res.ok)</label><select id="ftCheck"><option value="yes">Sí (buena práctica)</option><option value="no">No (trampa clásica)</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;justify-content:center;font-family:var(--font-mono);font-size:0.84rem;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="9" data-title="Quiz: Fetch API">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="res.ok es true solo para respuestas exitosas (200-299)." data-err="Siempre valida res.ok porque fetch no lanza error en códigos 404/500."><div class="quiz-q-title">1. ¿Qué debes verificar antes de llamar a <code>res.json()</code> en <code>fetch()</code>?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">if (!res.ok)</button><button class="quiz-option" data-opt="b">if (res.body)</button><button class="quiz-option" data-opt="c">if (res.url)</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Fetch API">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Fetch API">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   const fakeJson = JSON.stringify({ status: &#x27;ok&#x27;, api: &#x27;Fetch API&#x27; });
@@ -100,11 +113,10 @@ const data = await res.json();</code></pre></div>
   new Response(fakeJson).json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Parseado: &#x27; + JSON.stringify(d));
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="10" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
-                <a class="file-card" href="../../../index.html"><span class="file-name">📄 Ver Portal</span><span class="file-path">../../index.html</span></a>
+                
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
                 <a class="file-card" href="../../../index.html"><span class="file-name">🏠 Portal Principal del Curso</span><span class="file-path">index.html</span></a>
             </div></div>
@@ -112,5 +124,24 @@ const data = await res.json();</code></pre></div>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const url = document.getElementById('ftUrl'), chk = document.getElementById('ftCheck');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      function upd() {
+        const is404 = url.value.includes('404'), validate = chk.value === 'yes';
+        if (is404 && validate) {
+          st.innerHTML = '<div style="color:#ff3358;font-weight:700;">🛡️ Error interceptado: HTTP 404 (throw new Error)</div><div style="color:#94a3b8;">Evitaste parsear HTML de error como JSON.</div>';
+        } else if (is404 && !validate) {
+          st.innerHTML = '<div style="color:#fbbf24;font-weight:700;">⚠️ ¡fetch NO entró al catch()! Intentó res.json() en un 404.</div>';
+        } else {
+          st.innerHTML = '<div style="color:#00ff88;font-weight:700;">✅ 200 OK → {"id":1,"nombre":"Ana"}</div>';
+        }
+        const guard = validate ? 'if (!res.ok) throw new Error(res.status);\n' : '';
+        cd.textContent = `const res = await fetch("${url.value}");\n${guard}const data = await res.json();`;
+      }
+      [url, chk].forEach(e => e.addEventListener('input', upd)); upd();
+        })();
+    </script>
 </body>
 </html>

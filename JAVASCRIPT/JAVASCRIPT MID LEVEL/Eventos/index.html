@@ -16,7 +16,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">JS MID · INTERACCIÓN</span><div class="brand-title"><span>⚡</span><span>Eventos en JavaScript</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 11</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 12</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
             <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
@@ -86,12 +86,12 @@
                 <span class="slide-kicker">DOCUMENTACIÓN OFICIAL · EVENTOS.md</span>
                 <h2 class="slide-title">🏆 Mini proyecto</h2>
             </div>
-            <div class="glass-card"><p style="margin-bottom:8px;line-height:1.6;"># 🎯 ¿QUÉ SON LOS EVENTOS?</p>
+            <div class="glass-card"><h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🎯 ¿QUÉ SON LOS EVENTOS?</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Los eventos son acciones o sucesos que ocurren dentro de una página web.</p>
 <p style="margin-bottom:8px;line-height:1.6;">JavaScript puede “escuchar” esos sucesos y ejecutar código automáticamente.</p>
-<p style="margin-bottom:8px;line-height:1.6;"># 🧠 EJEMPLOS DEL MUNDO REAL</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🧠 EJEMPLOS DEL MUNDO REAL</h3>
 <table class="compare-table"><thead><tr><th>Acción del usuario</th><th>Evento</th></tr></thead><tbody><tr><td>Hacer click</td><td><code>click</code></td></tr><tr><td>Mover el mouse</td><td><code>mousemove</code></td></tr><tr><td>Escribir en teclado</td><td><code>keydown</code></td></tr><tr><td>Enviar formulario</td><td><code>submit</code></td></tr><tr><td>Cargar página</td><td><code>load</code></td></tr><tr><td>Cambiar un input</td><td><code>change</code></td></tr></tbody></table>
-<p style="margin-bottom:8px;line-height:1.6;"># 🧩 DEFINICIÓN DE EVENTOS</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🧩 DEFINICIÓN DE EVENTOS</h3>
 <p style="margin-bottom:8px;line-height:1.6;">Un evento es cualquier interacción detectada por el navegador.</p>
 <p style="margin-bottom:8px;line-height:1.6;">JavaScript trabaja así:</p>
 <pre class="code-block"><code>Usuario hace algo
@@ -99,9 +99,9 @@
 El navegador detecta el evento
        ↓
 JavaScript ejecuta una función</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 📦 ESTRUCTURA BÁSICA</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">📦 ESTRUCTURA BÁSICA</h3>
 <pre class="code-block"><code>elemento.addEventListener(&quot;click&quot;, funcion);</code></pre>
-<p style="margin-bottom:8px;line-height:1.6;"># 🔍 DESGLOSE</p>
+<h3 style="margin:14px 0 8px;color:#38bdf8;font-size:1.05rem;">🔍 DESGLOSE</h3>
 <table class="compare-table"><thead><tr><th>Parte</th><th>Explicación</th></tr></thead><tbody><tr><td><code>elemento</code></td><td>El objeto HTML</td></tr><tr><td><code>addEventListener</code></td><td>Método para escuchar eventos</td></tr><tr><td><code>click</code></td><td>Tipo de evento</td></tr></tbody></table>
 </div>
         </section>
@@ -125,27 +125,44 @@ JavaScript ejecuta una función</code></pre>
 <p style="margin-bottom:8px;line-height:1.6;">❌ Poco escalable</p></div>
         </section>
         <section class="slide" data-slide="8" data-title="Buenas Prácticas">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Consejos y Errores Comunes</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Usa <code>e.stopPropagation()</code> solo cuando necesites frenar el burbujeo hacia el padre.</div>
         </section>
-        <section class="slide" data-slide="9" data-title="Quiz: Eventos en JavaScript">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
+                <section class="slide" data-slide="9" data-lab="true" data-title="Simulador de Event Flow">
+            <div class="slide-header"><span class="slide-kicker">SIMULADOR INTERACTIVO · BUBBLING VS CAPTURING</span><h2 class="slide-title">🎛️ Simulador de Flujo de Eventos (<code>stopPropagation</code>)</h2><p class="slide-lead">Haz clic en el botón hijo para ver el orden en que se disparan los listeners.</p></div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+      <div class="sim-control"><label>Fase de escucha</label><select id="evPhase"><option value="bubble">Bubbling (Hijo ➔ Padre)</option><option value="capture">Capturing (Padre ➔ Hijo)</option></select></div>
+      <div class="sim-control"><label>e.stopPropagation()</label><select id="evStop"><option value="no">No detener</option><option value="yes">Detener en el hijo</option></select></div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="simStage" style="display:flex;flex-direction:column;gap:10px;"></div>
+                    <pre class="sim-code" id="simCode"></pre>
+                </div>
+            </div>
+        </section>
+        <section class="slide" data-slide="10" data-title="Quiz: Eventos en JavaScript">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 10 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Por defecto los listeners escuchan en la fase de bubbling (de adentro hacia afuera)." data-err="Capturing baja de afuera hacia adentro; bubbling sube de adentro hacia afuera."><div class="quiz-q-title">1. ¿En qué fase suben los eventos desde el elemento hijo hasta el document?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Bubbling (burbujeo)</button><button class="quiz-option" data-opt="b">Capturing</button><button class="quiz-option" data-opt="c">Hoisting</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: Eventos en JavaScript">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
-            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;button id=&quot;btn&quot; style=&quot;padding:10px 18px;font-weight:700;cursor:pointer&quot;&gt;Clics: 0&lt;/button&gt;
+        <section class="slide" data-slide="11" data-lab="true" data-title="Laboratorio: Eventos en JavaScript">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
+            <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;div style=&quot;display:grid;place-items:center;min-height:220px;font-family:system-ui,sans-serif&quot;&gt;
+  &lt;button id=&quot;btn&quot; style=&quot;padding:12px 24px;font-size:15px;font-weight:700;cursor:pointer;border:none;border-radius:12px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#050711;box-shadow:0 6px 20px rgba(56,189,248,0.35);transition:transform .15s&quot;&gt;🖱️ Clics: 0&lt;/button&gt;
+&lt;/div&gt;
 &lt;script&gt;
   let n = 0; const b = document.getElementById(&#x27;btn&#x27;);
-  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;Clics: &#x27; + (++n); });
-&lt;/script&gt;">Contador de Clics</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;button id=&quot;btn&quot; style=&quot;padding:10px 18px;font-weight:700;cursor:pointer&quot;&gt;Clics: 0&lt;/button&gt;
+  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;🖱️ Clics: &#x27; + (++n); });
+&lt;/script&gt;">Contador de Clics</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div style=&quot;display:grid;place-items:center;min-height:220px;font-family:system-ui,sans-serif&quot;&gt;
+  &lt;button id=&quot;btn&quot; style=&quot;padding:12px 24px;font-size:15px;font-weight:700;cursor:pointer;border:none;border-radius:12px;background:linear-gradient(135deg,#38bdf8,#818cf8);color:#050711;box-shadow:0 6px 20px rgba(56,189,248,0.35);transition:transform .15s&quot;&gt;🖱️ Clics: 0&lt;/button&gt;
+&lt;/div&gt;
 &lt;script&gt;
   let n = 0; const b = document.getElementById(&#x27;btn&#x27;);
-  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;Clics: &#x27; + (++n); });
+  b.addEventListener(&#x27;click&#x27;, () =&gt; { b.textContent = &#x27;🖱️ Clics: &#x27; + (++n); });
 &lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
+        <section class="slide" data-slide="12" data-title="Prácticas de la Carpeta">
+            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 12 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="Handlers/index.html"><span class="file-name">📄 Handlers</span><span class="file-path">Handlers/index.html</span></a><a class="file-card" href="Event%20Flow/index.html"><span class="file-name">📄 Event Flow</span><span class="file-path">Event%20Flow/index.html</span></a><a class="file-card" href="Eventos%20de%20Mouse/index.html"><span class="file-name">📄 Mouse</span><span class="file-path">Eventos%20de%20Mouse/index.html</span></a><a class="file-card" href="Eventos%20de%20Teclado/index.html"><span class="file-name">📄 Teclado</span><span class="file-path">Eventos%20de%20Teclado/index.html</span></a><a class="file-card" href="Eventos%20de%20Interfaz/index.html"><span class="file-name">📄 Interfaz</span><span class="file-path">Eventos%20de%20Interfaz/index.html</span></a>
                 <a class="file-card" href="../DOCUMENTACION/index.html"><span class="file-name">📘 Documentación Completa JS Mid</span><span class="file-path">DOCUMENTACION/index.html</span></a>
@@ -155,5 +172,33 @@ JavaScript ejecuta una función</code></pre>
     </main>
     <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
     <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+      const ph = document.getElementById('evPhase'), stop = document.getElementById('evStop');
+      const st = document.getElementById('simStage'), cd = document.getElementById('simCode');
+      st.innerHTML = '<div id="evParent" style="padding:18px;border:1px dashed #38bdf8;border-radius:12px;background:rgba(56,189,248,0.08);cursor:pointer;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;"><span>Contenedor Padre (haz clic aquí o en el hijo)</span><button id="evChild" type="button" class="lab-run-btn">🖱️ Clic aquí (Hijo · 0)</button></div><div id="evLog" style="font-family:var(--font-mono);font-size:0.84rem;color:#00ff88;padding:8px 12px;border-radius:8px;background:rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.08);">Haz clic en el botón hijo o en el contenedor padre...</div>';
+      function updCode() {
+        const stopLine = stop.value === 'yes' ? 'e.stopPropagation();\n  ' : '';
+        cd.textContent = `padre.addEventListener("click", fn, ${ph.value === 'capture'});\nhijo.addEventListener("click", e => {\n  ${stopLine}// ...\n}, ${ph.value === 'capture'});`;
+      }
+      let clickCount = 0;
+      const childBtn = document.getElementById('evChild');
+      const logEl = document.getElementById('evLog');
+      document.getElementById('evParent').addEventListener('click', (e) => {
+        if (e.target === childBtn) return;
+        logEl.textContent = '▶ 1. Contenedor Padre (target directo, no se presionó el hijo)';
+      });
+      childBtn.addEventListener('click', (e) => {
+        if (stop.value === 'yes') e.stopPropagation();
+        clickCount++;
+        childBtn.textContent = `🖱️ Clic aquí (Hijo · ${clickCount})`;
+        const order = ph.value === 'capture'
+          ? (stop.value === 'yes' ? ['1. Padre (capture)', '2. Hijo (detenido)'] : ['1. Padre (capture)', '2. Hijo'])
+          : (stop.value === 'yes' ? ['1. Hijo (detenido, no sube al Padre)'] : ['1. Hijo', '2. Padre (bubble)']);
+        logEl.textContent = `▶ [Clic #${clickCount}] ` + order.join('  ➔  ');
+      });
+      [ph, stop].forEach(e => e.addEventListener('input', updCode)); updCode();
+        })();
+    </script>
 </body>
 </html>
