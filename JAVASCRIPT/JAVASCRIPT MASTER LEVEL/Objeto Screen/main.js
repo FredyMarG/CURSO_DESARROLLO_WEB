@@ -11,12 +11,12 @@
 /* ==========================================================================
    0. ADAPTADOR UNIVERSAL PARA EJECUCIÓN EN NAVEGADOR Y NODE.JS
    ========================================================================== */
-const esNavegador = typeof window !== "undefined" && typeof window.screen !== "undefined"; // Declara e inicializa "esNavegador"
+const esNavegador = typeof window !== "undefined" && typeof window.screen !== "undefined";
 
 // Objeto simulado para poder ejecutar esta guía directamente con Node.js sin errores
 const screenAPI = esNavegador
     ? window.screen
-    : { // Instrucción JavaScript
+    : {
           width: 1920,
           height: 1080,
           availWidth: 1920,
@@ -26,17 +26,17 @@ const screenAPI = esNavegador
           orientation: { type: "landscape-primary", angle: 0 }
       };
 
-const dpr = esNavegador ? window.devicePixelRatio || 1 : 1; // Declara e inicializa "dpr"
+const dpr = esNavegador ? window.devicePixelRatio || 1 : 1;
 
 /* ==========================================================================
    1. MEDICIÓN DE PANTALLA TOTAL VS DISPONIBLE
    ========================================================================== */
-const anchoTotal = screenAPI.width; // Declara e inicializa "anchoTotal"
-const altoTotal = screenAPI.height; // Declara e inicializa "altoTotal"
-const anchoDisponible = screenAPI.availWidth; // Declara e inicializa "anchoDisponible"
-const altoDisponible = screenAPI.availHeight; // Declara e inicializa "altoDisponible"
-const profundidadDeColor = screenAPI.colorDepth; // Declara e inicializa "profundidadDeColor"
-const profundidadDePixel = screenAPI.pixelDepth; // Declara e inicializa "profundidadDePixel"
+const anchoTotal = screenAPI.width;
+const altoTotal = screenAPI.height;
+const anchoDisponible = screenAPI.availWidth;
+const altoDisponible = screenAPI.availHeight;
+const profundidadDeColor = screenAPI.colorDepth;
+const profundidadDePixel = screenAPI.pixelDepth;
 
 console.log("=== 🖥️ GUÍA PRÁCTICA DEL OBJETO SCREEN ==="); // Imprime salida en consola
 console.log("Resolución total (width x height):", anchoTotal, "x", altoTotal); // Imprime salida en consola

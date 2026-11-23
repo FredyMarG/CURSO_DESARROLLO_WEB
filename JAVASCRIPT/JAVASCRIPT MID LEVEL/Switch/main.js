@@ -1,71 +1,71 @@
 // Guía Interactiva — Switch y Tablas Lookup
 
-const httpCodeSelect = document.getElementById("httpCodeSelect"); // Obtiene referencia DOM para "httpCodeSelect"
-const simularSinBreak = document.getElementById("simularSinBreak"); // Obtiene referencia DOM para "simularSinBreak"
-const httpOutput = document.getElementById("httpOutput"); // Obtiene referencia DOM para "httpOutput"
-const notaRange = document.getElementById("notaRange"); // Obtiene referencia DOM para "notaRange"
-const notaValor = document.getElementById("notaValor"); // Obtiene referencia DOM para "notaValor"
-const notaOutput = document.getElementById("notaOutput"); // Obtiene referencia DOM para "notaOutput"
+const httpCodeSelect = document.getElementById("httpCodeSelect");
+const simularSinBreak = document.getElementById("simularSinBreak");
+const httpOutput = document.getElementById("httpOutput");
+const notaRange = document.getElementById("notaRange");
+const notaValor = document.getElementById("notaValor");
+const notaOutput = document.getElementById("notaOutput");
 
-function evaluarHttp() { // Declara función
-    const codigo = Number(httpCodeSelect.value); // Declara e inicializa "codigo"
-    const fallThrough = simularSinBreak.checked; // Declara e inicializa "fallThrough"
-    const pasos = []; // Declara e inicializa "pasos"
-    let clase = "ok"; // Declara e inicializa "clase"
+function evaluarHttp() {
+    const codigo = Number(httpCodeSelect.value);
+    const fallThrough = simularSinBreak.checked;
+    const pasos = [];
+    let clase = "ok";
 
     switch (codigo) { // Evalúa múltiples casos
         case 200:
         case 201:
         case 204:
-            pasos.push(`Familia 2xx (${codigo}): Operación exitosa.`); // Ejecuta llamada o método
-            if (!fallThrough) break; // Evalúa condición
+            pasos.push(`Familia 2xx (${codigo}): Operación exitosa.`);
+            if (!fallThrough) break;
         case 401:
         case 404:
-            pasos.push(`Familia 4xx (${codigo}): Error del cliente.`); // Ejecuta llamada o método
-            clase = fallThrough ? "warn" : "warn"; // Asigna valor
-            if (!fallThrough) break; // Evalúa condición
+            pasos.push(`Familia 4xx (${codigo}): Error del cliente.`);
+            clase = fallThrough ? "warn" : "warn";
+            if (!fallThrough) break;
         case 500:
-            pasos.push(`Familia 5xx (${codigo}): Error interno del servidor.`); // Ejecuta llamada o método
-            clase = fallThrough ? "warn" : "err"; // Asigna valor
-            if (!fallThrough) break; // Evalúa condición
+            pasos.push(`Familia 5xx (${codigo}): Error interno del servidor.`);
+            clase = fallThrough ? "warn" : "err";
+            if (!fallThrough) break;
         default:
-            pasos.push("Rama default: Código no contemplado."); // Ejecuta llamada o método
-            if (!fallThrough) clase = "err"; // Evalúa condición
+            pasos.push("Rama default: Código no contemplado.");
+            if (!fallThrough) clase = "err";
     }
 
-    httpOutput.className = `output ${clase}`; // Asigna valor
+    httpOutput.className = `output ${clase}`;
     httpOutput.textContent = pasos.join(" → "); // Actualiza contenido en el DOM
 }
 
-function evaluarNota() { // Declara función
-    const nota = Number(notaRange.value); // Declara e inicializa "nota"
+function evaluarNota() {
+    const nota = Number(notaRange.value);
     notaValor.textContent = nota; // Actualiza contenido en el DOM
-    let letra; // Declara e inicializa "letra"
-    let clase = "ok"; // Declara e inicializa "clase"
+    let letra;
+    let clase = "ok";
 
     switch (true) { // Evalúa múltiples casos
         case nota >= 90:
-            letra = "A (Sobresaliente)"; // Asigna valor
-            break; // Instrucción JavaScript
+            letra = "A (Sobresaliente)";
+            break;
         case nota >= 80:
-            letra = "B (Muy bien)"; // Asigna valor
-            break; // Instrucción JavaScript
+            letra = "B (Muy bien)";
+            break;
         case nota >= 70:
-            letra = "C (Aprobado)"; // Asigna valor
-            clase = "warn"; // Asigna valor
-            break; // Instrucción JavaScript
+            letra = "C (Aprobado)";
+            clase = "warn";
+            break;
         default:
-            letra = "F (Reprobado)"; // Asigna valor
-            clase = "err"; // Asigna valor
+            letra = "F (Reprobado)";
+            clase = "err";
     }
 
-    notaOutput.className = `output ${clase}`; // Asigna valor
+    notaOutput.className = `output ${clase}`;
     notaOutput.textContent = `Resultado con switch(true): ${letra}`; // Actualiza contenido en el DOM
 }
 
-httpCodeSelect.addEventListener("change", evaluarHttp); // Registra escuchador de eventos
-simularSinBreak.addEventListener("change", evaluarHttp); // Registra escuchador de eventos
-notaRange.addEventListener("input", evaluarNota); // Registra escuchador de eventos
+httpCodeSelect.addEventListener("change", evaluarHttp);
+simularSinBreak.addEventListener("change", evaluarHttp);
+notaRange.addEventListener("input", evaluarNota);
 
-evaluarHttp(); // Ejecuta llamada o método
-evaluarNota(); // Ejecuta llamada o método
+evaluarHttp();
+evaluarNota();

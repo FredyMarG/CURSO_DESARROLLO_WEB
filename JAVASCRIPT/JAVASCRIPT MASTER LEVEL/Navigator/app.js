@@ -7,14 +7,14 @@
  * ============================================================================
  */
 
-(function () { // Instrucción JavaScript
+(function () {
     // Activamos el modo estricto para garantizar rigor en la ejecución de JavaScript
     'use strict'; // Activa el modo estricto de JavaScript
 
     /* ==========================================================================
        1. ESTADO GLOBAL DE LA APLICACIÓN (AppState)
        ========================================================================== */
-    const AppState = { // Declara e inicializa "AppState"
+    const AppState = {
         currentSlide: 1,
         totalSlides: 12,
         viewMode: 'slides',
@@ -25,157 +25,157 @@
     /* ==========================================================================
        2. MÓDULO DE AUDIO: SINTETIZADOR PROCEDURAL (Web Audio API)
        ========================================================================== */
-    const SoundFX = { // Declara e inicializa "SoundFX"
+    const SoundFX = {
         ctx: null,
 
-        init() { // Instrucción JavaScript
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa "AudioConstructor"
-                this.ctx = new AudioConstructor(); // Asigna valor
+        init() {
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+                this.ctx = new AudioConstructor();
             }
         },
 
-        slide() { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            this.init(); // Ejecuta llamada o método
-            if (!this.ctx) return; // Evalúa condición
-            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
+        slide() {
+            if (!AppState.soundEnabled) return;
+            this.init();
+            if (!this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
 
-            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
-            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
-            osc.type = 'sine'; // Asigna valor
-            const now = this.ctx.currentTime; // Declara e inicializa "now"
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            const now = this.ctx.currentTime;
 
-            osc.frequency.setValueAtTime(320, now); // Ejecuta llamada o método
-            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12); // Ejecuta llamada o método
+            osc.frequency.setValueAtTime(320, now);
+            osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
 
-            gain.gain.setValueAtTime(0.001, now); // Ejecuta llamada o método
-            gain.gain.linearRampToValueAtTime(0.08, now + 0.02); // Ejecuta llamada o método
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18); // Ejecuta llamada o método
+            gain.gain.setValueAtTime(0.001, now);
+            gain.gain.linearRampToValueAtTime(0.08, now + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
 
-            osc.connect(gain); // Ejecuta llamada o método
-            gain.connect(this.ctx.destination); // Ejecuta llamada o método
-            osc.start(now); // Ejecuta llamada o método
-            osc.stop(now + 0.18); // Ejecuta llamada o método
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.18);
         },
 
-        click() { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            this.init(); // Ejecuta llamada o método
-            if (!this.ctx) return; // Evalúa condición
-            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
+        click() {
+            if (!AppState.soundEnabled) return;
+            this.init();
+            if (!this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
 
-            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
-            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
-            osc.type = 'triangle'; // Asigna valor
-            const now = this.ctx.currentTime; // Declara e inicializa "now"
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'triangle';
+            const now = this.ctx.currentTime;
 
-            osc.frequency.setValueAtTime(600, now); // Ejecuta llamada o método
-            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
-            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04); // Ejecuta llamada o método
+            osc.frequency.setValueAtTime(600, now);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
 
-            osc.connect(gain); // Ejecuta llamada o método
-            gain.connect(this.ctx.destination); // Ejecuta llamada o método
-            osc.start(now); // Ejecuta llamada o método
-            osc.stop(now + 0.04); // Ejecuta llamada o método
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.04);
         },
 
-        success() { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            this.init(); // Ejecuta llamada o método
-            if (!this.ctx) return; // Evalúa condición
-            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
+        success() {
+            if (!AppState.soundEnabled) return;
+            this.init();
+            if (!this.ctx) return;
+            if (this.ctx.state === 'suspended') this.ctx.resume();
 
-            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
-            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
-            osc.type = 'sine'; // Asigna valor
-            const now = this.ctx.currentTime; // Declara e inicializa "now"
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            const now = this.ctx.currentTime;
 
-            osc.frequency.setValueAtTime(520, now); // Ejecuta llamada o método
-            osc.frequency.exponentialRampToValueAtTime(840, now + 0.14); // Ejecuta llamada o método
-            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16); // Ejecuta llamada o método
+            osc.frequency.setValueAtTime(520, now);
+            osc.frequency.exponentialRampToValueAtTime(840, now + 0.14);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.16);
 
-            osc.connect(gain); // Ejecuta llamada o método
-            gain.connect(this.ctx.destination); // Ejecuta llamada o método
-            osc.start(now); // Ejecuta llamada o método
-            osc.stop(now + 0.16); // Ejecuta llamada o método
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.16);
         }
     };
 
     /* ==========================================================================
        3. CONTROLADOR DE NAVEGACIÓN DE DIAPOSITIVAS (SlideNavigation)
        ========================================================================== */
-    const SlideNavigation = { // Declara e inicializa "SlideNavigation"
-        init() { // Instrucción JavaScript
-            this.wrapper = document.getElementById('presentationWrapper'); // Asigna valor
-            this.slides = document.querySelectorAll('.slide'); // Asigna valor
-            this.progressBar = document.getElementById('progressBar'); // Asigna valor
-            this.slideIndicator = document.getElementById('slideIndicator'); // Asigna valor
+    const SlideNavigation = {
+        init() {
+            this.wrapper = document.getElementById('presentationWrapper');
+            this.slides = document.querySelectorAll('.slide');
+            this.progressBar = document.getElementById('progressBar');
+            this.slideIndicator = document.getElementById('slideIndicator');
 
-            this.btnPrev = document.getElementById('btnPrevSlide'); // Asigna valor
-            this.btnNext = document.getElementById('btnNextSlide'); // Asigna valor
-            this.dotsContainer = document.getElementById('slideDotsContainer'); // Asigna valor
+            this.btnPrev = document.getElementById('btnPrevSlide');
+            this.btnNext = document.getElementById('btnNextSlide');
+            this.dotsContainer = document.getElementById('slideDotsContainer');
 
-            this.btnGoLab = document.getElementById('btnGoLab'); // Asigna valor
-            this.btnToggleMode = document.getElementById('btnToggleMode'); // Asigna valor
-            this.modeText = document.getElementById('modeText'); // Asigna valor
-            this.modeIcon = document.getElementById('modeIcon'); // Asigna valor
+            this.btnGoLab = document.getElementById('btnGoLab');
+            this.btnToggleMode = document.getElementById('btnToggleMode');
+            this.modeText = document.getElementById('modeText');
+            this.modeIcon = document.getElementById('modeIcon');
 
-            this.btnToggleSound = document.getElementById('btnToggleSound'); // Asigna valor
-            this.soundIcon = document.getElementById('soundIcon'); // Asigna valor
+            this.btnToggleSound = document.getElementById('btnToggleSound');
+            this.soundIcon = document.getElementById('soundIcon');
 
-            this.btnOverview = document.getElementById('btnOverview'); // Asigna valor
-            this.overviewModal = document.getElementById('overviewModal'); // Asigna valor
-            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Asigna valor
-            this.overviewGrid = document.getElementById('overviewGrid'); // Asigna valor
+            this.btnOverview = document.getElementById('btnOverview');
+            this.overviewModal = document.getElementById('overviewModal');
+            this.btnCloseOverview = document.getElementById('btnCloseOverview');
+            this.overviewGrid = document.getElementById('overviewGrid');
 
-            this.btnFullscreen = document.getElementById('btnFullscreen'); // Asigna valor
+            this.btnFullscreen = document.getElementById('btnFullscreen');
 
-            this.buildSlideDots(); // Ejecuta llamada o método
-            this.buildOverviewGrid(); // Ejecuta llamada o método
-            this.bindEvents(); // Ejecuta llamada o método
-            this.updateUI(); // Ejecuta llamada o método
+            this.buildSlideDots();
+            this.buildOverviewGrid();
+            this.bindEvents();
+            this.updateUI();
         },
 
-        buildSlideDots() { // Instrucción JavaScript
-            if (!this.dotsContainer) return; // Evalúa condición
+        buildSlideDots() {
+            if (!this.dotsContainer) return;
             this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
-            this.slides.forEach((slide, index) => { // Instrucción JavaScript
-                const slideNum = index + 1; // Declara e inicializa "slideNum"
-                const dot = document.createElement('button'); // Crea nuevo elemento DOM "dot"
-                dot.className = 'slide-dot'; // Asigna valor
-                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`); // Ejecuta llamada o método
-                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Asigna valor
+            this.slides.forEach((slide, index) => {
+                const slideNum = index + 1;
+                const dot = document.createElement('button');
+                dot.className = 'slide-dot';
+                dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
+                dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
 
-                if (slideNum === AppState.currentSlide) { // Evalúa condición
-                    dot.classList.add('active'); // Modifica clases CSS del elemento
+                if (slideNum === AppState.currentSlide) {
+                    dot.classList.add('active');
                 }
 
-                dot.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.goToSlide(slideNum); // Ejecuta llamada o método
+                dot.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.goToSlide(slideNum);
                 });
 
-                this.dotsContainer.appendChild(dot); // Inserta nodo en el DOM
+                this.dotsContainer.appendChild(dot);
             });
         },
 
-        buildOverviewGrid() { // Instrucción JavaScript
-            if (!this.overviewGrid) return; // Evalúa condición
+        buildOverviewGrid() {
+            if (!this.overviewGrid) return;
             this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
-            this.slides.forEach((slide, index) => { // Instrucción JavaScript
-                const slideNum = index + 1; // Declara e inicializa "slideNum"
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa "title"
+            this.slides.forEach((slide, index) => {
+                const slideNum = index + 1;
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
 
-                const card = document.createElement('div'); // Crea nuevo elemento DOM "card"
-                card.className = 'overview-card'; // Asigna valor
-                card.dataset.slideIndex = slideNum; // Asigna valor
+                const card = document.createElement('div');
+                card.className = 'overview-card';
+                card.dataset.slideIndex = slideNum;
 
-                if (slideNum === AppState.currentSlide) { // Evalúa condición
-                    card.classList.add('active'); // Modifica clases CSS del elemento
+                if (slideNum === AppState.currentSlide) {
+                    card.classList.add('active');
                 }
 
                 card.innerHTML = `
@@ -183,240 +183,240 @@
                     <div class="ov-title">${title}</div>
                 `;
 
-                card.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.goToSlide(slideNum); // Ejecuta llamada o método
-                    this.closeOverview(); // Ejecuta llamada o método
+                card.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.goToSlide(slideNum);
+                    this.closeOverview();
                 });
 
-                this.overviewGrid.appendChild(card); // Inserta nodo en el DOM
+                this.overviewGrid.appendChild(card);
             });
         },
 
-        bindEvents() { // Instrucción JavaScript
-            if (this.btnPrev) { // Evalúa condición
-                this.btnPrev.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.prevSlide(); // Ejecuta llamada o método
+        bindEvents() {
+            if (this.btnPrev) {
+                this.btnPrev.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.prevSlide();
                 });
             }
 
-            if (this.btnNext) { // Evalúa condición
-                this.btnNext.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.nextSlide(); // Ejecuta llamada o método
+            if (this.btnNext) {
+                this.btnNext.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.nextSlide();
                 });
             }
 
-            if (this.btnGoLab) { // Evalúa condición
-                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.goToSlide(9); // Ejecuta llamada o método
+            if (this.btnGoLab) {
+                this.btnGoLab.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.goToSlide(9);
                 });
             }
 
-            if (this.btnToggleMode) { // Evalúa condición
-                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.toggleViewMode(); // Ejecuta llamada o método
+            if (this.btnToggleMode) {
+                this.btnToggleMode.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.toggleViewMode();
                 });
             }
 
-            if (this.btnToggleSound) { // Evalúa condición
-                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de eventos
-                    this.toggleSound(); // Ejecuta llamada o método
+            if (this.btnToggleSound) {
+                this.btnToggleSound.addEventListener('click', () => {
+                    this.toggleSound();
                 });
             }
 
-            if (this.btnOverview) { // Evalúa condición
-                this.btnOverview.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.toggleOverview(); // Ejecuta llamada o método
+            if (this.btnOverview) {
+                this.btnOverview.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.toggleOverview();
                 });
             }
 
-            if (this.btnCloseOverview) { // Evalúa condición
-                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.closeOverview(); // Ejecuta llamada o método
+            if (this.btnCloseOverview) {
+                this.btnCloseOverview.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.closeOverview();
                 });
             }
 
-            if (this.overviewModal) { // Evalúa condición
-                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    if (e.target === this.overviewModal) { // Evalúa condición
-                        this.closeOverview(); // Ejecuta llamada o método
+            if (this.overviewModal) {
+                this.overviewModal.addEventListener('click', (e) => {
+                    if (e.target === this.overviewModal) {
+                        this.closeOverview();
                     }
                 });
             }
 
-            if (this.btnFullscreen) { // Evalúa condición
-                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.toggleFullscreen(); // Ejecuta llamada o método
+            if (this.btnFullscreen) {
+                this.btnFullscreen.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.toggleFullscreen();
                 });
             }
 
-            document.addEventListener('keydown', (e) => this.handleKeyDown(e)); // Registra escuchador de eventos
+            document.addEventListener('keydown', (e) => this.handleKeyDown(e));
         },
 
-        handleKeyDown(e) { // Instrucción JavaScript
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición
+        handleKeyDown(e) {
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
             switch (e.key) { // Evalúa múltiples casos
                 case 'ArrowRight':
                 case 'd':
                 case 'D':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.nextSlide(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.nextSlide();
+                    break;
                 case 'ArrowLeft':
                 case 'a':
                 case 'A':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.prevSlide(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.prevSlide();
+                    break;
                 case ' ':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.nextSlide(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.nextSlide();
+                    break;
                 case 'o':
                 case 'O':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.toggleOverview(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.toggleOverview();
+                    break;
                 case 'f':
                 case 'F':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.toggleFullscreen(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.toggleFullscreen();
+                    break;
                 case 'Escape':
-                    if (AppState.overviewOpen) this.closeOverview(); // Evalúa condición
-                    break; // Instrucción JavaScript
+                    if (AppState.overviewOpen) this.closeOverview();
+                    break;
                 case 'Home':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.goToSlide(1); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.goToSlide(1);
+                    break;
                 case 'End':
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.goToSlide(AppState.totalSlides); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.goToSlide(AppState.totalSlides);
+                    break;
                 default:
-                    break; // Instrucción JavaScript
+                    break;
             }
         },
 
-        goToSlide(index) { // Instrucción JavaScript
-            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición
-            if (index === AppState.currentSlide) return; // Evalúa condición
-            AppState.currentSlide = index; // Asigna valor
-            SoundFX.slide(); // Ejecuta llamada o método
-            this.updateUI(); // Ejecuta llamada o método
+        goToSlide(index) {
+            if (index < 1 || index > AppState.totalSlides) return;
+            if (index === AppState.currentSlide) return;
+            AppState.currentSlide = index;
+            SoundFX.slide();
+            this.updateUI();
         },
 
-        nextSlide() { // Instrucción JavaScript
-            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
-                this.goToSlide(AppState.currentSlide + 1); // Ejecuta llamada o método
+        nextSlide() {
+            if (AppState.currentSlide < AppState.totalSlides) {
+                this.goToSlide(AppState.currentSlide + 1);
             }
         },
 
-        prevSlide() { // Instrucción JavaScript
-            if (AppState.currentSlide > 1) { // Evalúa condición
-                this.goToSlide(AppState.currentSlide - 1); // Ejecuta llamada o método
+        prevSlide() {
+            if (AppState.currentSlide > 1) {
+                this.goToSlide(AppState.currentSlide - 1);
             }
         },
 
-        toggleViewMode() { // Instrucción JavaScript
-            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides'; // Asigna valor
+        toggleViewMode() {
+            AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
 
-            if (AppState.viewMode === 'guide') { // Evalúa condición
-                document.body.classList.remove('mode-presentation'); // Modifica clases CSS del elemento
-                document.body.classList.add('mode-document'); // Modifica clases CSS del elemento
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición
-            } else { // Instrucción JavaScript
-                document.body.classList.remove('mode-document'); // Modifica clases CSS del elemento
-                document.body.classList.add('mode-presentation'); // Modifica clases CSS del elemento
-                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición
-                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición
+            if (AppState.viewMode === 'guide') {
+                document.body.classList.remove('mode-presentation');
+                document.body.classList.add('mode-document');
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
+            } else {
+                document.body.classList.remove('mode-document');
+                document.body.classList.add('mode-presentation');
+                if (this.modeText) this.modeText.textContent = 'Modo Guía';
+                if (this.modeIcon) this.modeIcon.textContent = '📑';
             }
 
-            this.updateUI(); // Ejecuta llamada o método
+            this.updateUI();
         },
 
-        toggleSound() { // Instrucción JavaScript
-            AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
-            if (this.soundIcon) { // Evalúa condición
+        toggleSound() {
+            AppState.soundEnabled = !AppState.soundEnabled;
+            if (this.soundIcon) {
                 this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición
+            if (AppState.soundEnabled) SoundFX.click();
         },
 
-        toggleOverview() { // Instrucción JavaScript
-            if (AppState.overviewOpen) { // Evalúa condición
-                this.closeOverview(); // Ejecuta llamada o método
-            } else { // Instrucción JavaScript
-                this.openOverview(); // Ejecuta llamada o método
+        toggleOverview() {
+            if (AppState.overviewOpen) {
+                this.closeOverview();
+            } else {
+                this.openOverview();
             }
         },
 
-        openOverview() { // Instrucción JavaScript
-            AppState.overviewOpen = true; // Asigna valor
-            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición
-            const cards = document.querySelectorAll('.overview-card'); // Obtiene referencia DOM para "cards"
-            cards.forEach(card => { // Instrucción JavaScript
-                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa "idx"
-                card.classList.toggle('active', idx === AppState.currentSlide); // Modifica clases CSS del elemento
+        openOverview() {
+            AppState.overviewOpen = true;
+            if (this.overviewModal) this.overviewModal.classList.add('active');
+            const cards = document.querySelectorAll('.overview-card');
+            cards.forEach(card => {
+                const idx = parseInt(card.dataset.slideIndex, 10);
+                card.classList.toggle('active', idx === AppState.currentSlide);
             });
         },
 
-        closeOverview() { // Instrucción JavaScript
-            AppState.overviewOpen = false; // Asigna valor
-            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición
+        closeOverview() {
+            AppState.overviewOpen = false;
+            if (this.overviewModal) this.overviewModal.classList.remove('active');
         },
 
-        toggleFullscreen() { // Instrucción JavaScript
-            if (!document.fullscreenElement) { // Evalúa condición
-                document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
-            } else if (document.exitFullscreen) { // Instrucción JavaScript
-                document.exitFullscreen().catch(() => {}); // Ejecuta llamada o método
+        toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
             }
         },
 
-        updateUI() { // Instrucción JavaScript
-            if (AppState.viewMode === 'slides') { // Evalúa condición
-                this.slides.forEach((slide, index) => { // Instrucción JavaScript
-                    const slideNum = index + 1; // Declara e inicializa "slideNum"
-                    if (slideNum === AppState.currentSlide) { // Evalúa condición
-                        slide.classList.add('active'); // Modifica clases CSS del elemento
-                        window.scrollTo({ top: 0, behavior: 'smooth' }); // Ejecuta llamada o método
-                    } else { // Instrucción JavaScript
-                        slide.classList.remove('active'); // Modifica clases CSS del elemento
+        updateUI() {
+            if (AppState.viewMode === 'slides') {
+                this.slides.forEach((slide, index) => {
+                    const slideNum = index + 1;
+                    if (slideNum === AppState.currentSlide) {
+                        slide.classList.add('active');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        slide.classList.remove('active');
                     }
                 });
-            } else { // Instrucción JavaScript
-                this.slides.forEach(slide => slide.classList.add('active')); // Modifica clases CSS del elemento
+            } else {
+                this.slides.forEach(slide => slide.classList.add('active'));
             }
 
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa "percent"
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
 
-            if (this.slideIndicator) { // Evalúa condición
+            if (this.slideIndicator) {
                 this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            const dots = document.querySelectorAll('.slide-dot'); // Obtiene referencia DOM para "dots"
-            dots.forEach((dot, index) => { // Instrucción JavaScript
-                dot.classList.toggle('active', (index + 1) === AppState.currentSlide); // Modifica clases CSS del elemento
+            const dots = document.querySelectorAll('.slide-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
             });
 
-            if (this.btnPrev) { // Evalúa condición
-                this.btnPrev.disabled = AppState.currentSlide === 1; // Asigna valor
-                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1'; // Asigna valor
+            if (this.btnPrev) {
+                this.btnPrev.disabled = AppState.currentSlide === 1;
+                this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
             }
-            if (this.btnNext) { // Evalúa condición
-                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides; // Asigna valor
-                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1'; // Asigna valor
+            if (this.btnNext) {
+                this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
+                this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
             }
         }
     };
@@ -425,111 +425,111 @@
        4. CONTROLADOR DEL LABORATORIO INTERACTIVO DE NAVIGATOR (NVLabController)
        ========================================================================== */
     // Lee propiedades reales de window.navigator y escucha eventos de red en tiempo real
-    const NVLabController = { // Declara e inicializa "NVLabController"
+    const NVLabController = {
         // Inicializa referencias del DOM, carga diagnóstico inicial y escucha eventos de red
-        init() { // Instrucción JavaScript
-            this.onlineBanner = document.getElementById('nvOnlineBanner'); // Asigna valor
-            this.onlineText = document.getElementById('nvOnlineText'); // Asigna valor
-            this.onlineBadge = document.getElementById('nvOnlineBadge'); // Asigna valor
+        init() {
+            this.onlineBanner = document.getElementById('nvOnlineBanner');
+            this.onlineText = document.getElementById('nvOnlineText');
+            this.onlineBadge = document.getElementById('nvOnlineBadge');
 
-            this.langEl = document.getElementById('nvLanguage'); // Asigna valor
-            this.cpuEl = document.getElementById('nvCpu'); // Asigna valor
-            this.cookiesEl = document.getElementById('nvCookies'); // Asigna valor
-            this.pdfEl = document.getElementById('nvPdf'); // Asigna valor
-            this.storageEl = document.getElementById('nvStorage'); // Asigna valor
-            this.platformEl = document.getElementById('nvPlatform'); // Asigna valor
+            this.langEl = document.getElementById('nvLanguage');
+            this.cpuEl = document.getElementById('nvCpu');
+            this.cookiesEl = document.getElementById('nvCookies');
+            this.pdfEl = document.getElementById('nvPdf');
+            this.storageEl = document.getElementById('nvStorage');
+            this.platformEl = document.getElementById('nvPlatform');
 
-            this.btnRefresh = document.getElementById('btnRefreshNav'); // Asigna valor
-            this.btnEstimate = document.getElementById('btnEstimateStorage'); // Asigna valor
-            this.btnCopy = document.getElementById('btnCopyNavReport'); // Asigna valor
-            this.btnClear = document.getElementById('btnClearNvLogs'); // Asigna valor
-            this.terminal = document.getElementById('nvLogTerminal'); // Asigna valor
+            this.btnRefresh = document.getElementById('btnRefreshNav');
+            this.btnEstimate = document.getElementById('btnEstimateStorage');
+            this.btnCopy = document.getElementById('btnCopyNavReport');
+            this.btnClear = document.getElementById('btnClearNvLogs');
+            this.terminal = document.getElementById('nvLogTerminal');
 
-            this.bindNetworkEvents(); // Ejecuta llamada o método
-            this.bindControls(); // Ejecuta llamada o método
-            this.refreshDiagnostics(); // Ejecuta llamada o método
+            this.bindNetworkEvents();
+            this.bindControls();
+            this.refreshDiagnostics();
         },
 
         // Actualiza todas las tarjetas con la información en vivo de window.navigator
-        refreshDiagnostics() { // Instrucción JavaScript
-            const isOnline = navigator.onLine; // Declara e inicializa "isOnline"
-            if (this.onlineBanner) { // Evalúa condición
-                this.onlineBanner.className = isOnline ? 'nv-status-banner is-online' : 'nv-status-banner is-offline'; // Asigna valor
+        refreshDiagnostics() {
+            const isOnline = navigator.onLine;
+            if (this.onlineBanner) {
+                this.onlineBanner.className = isOnline ? 'nv-status-banner is-online' : 'nv-status-banner is-offline';
             }
-            if (this.onlineText) this.onlineText.textContent = String(isOnline); // Evalúa condición
-            if (this.onlineBadge) { // Evalúa condición
+            if (this.onlineText) this.onlineText.textContent = String(isOnline);
+            if (this.onlineBadge) {
                 this.onlineBadge.textContent = isOnline ? '🟢 En línea' : '🔴 Sin conexión'; // Actualiza contenido en el DOM
-                this.onlineBadge.className = isOnline ? 'badge badge-emerald' : 'badge badge-purple'; // Asigna valor
+                this.onlineBadge.className = isOnline ? 'badge badge-emerald' : 'badge badge-purple';
             }
 
-            if (this.langEl) { // Evalúa condición
-                const langs = Array.isArray(navigator.languages) ? navigator.languages.join(', ') : navigator.language; // Declara e inicializa "langs"
+            if (this.langEl) {
+                const langs = Array.isArray(navigator.languages) ? navigator.languages.join(', ') : navigator.language;
                 this.langEl.textContent = `${navigator.language} (${langs})`; // Actualiza contenido en el DOM
             }
-            if (this.cpuEl) { // Evalúa condición
+            if (this.cpuEl) {
                 this.cpuEl.textContent = `${navigator.hardwareConcurrency || 'N/D'} hilos lógicos`; // Actualiza contenido en el DOM
             }
-            if (this.cookiesEl) { // Evalúa condición
+            if (this.cookiesEl) {
                 this.cookiesEl.textContent = navigator.cookieEnabled ? 'Habilitadas (true)' : 'Bloqueadas (false)'; // Actualiza contenido en el DOM
             }
-            if (this.pdfEl) { // Evalúa condición
+            if (this.pdfEl) {
                 this.pdfEl.textContent = navigator.pdfViewerEnabled ? 'Soportado (true)' : 'No soportado (false)'; // Actualiza contenido en el DOM
             }
-            if (this.platformEl) { // Evalúa condición
+            if (this.platformEl) {
                 this.platformEl.textContent = navigator.platform || 'No reportada'; // Actualiza contenido en el DOM
             }
         },
 
         // Escucha los eventos nativos de red 'online' y 'offline' sobre window
-        bindNetworkEvents() { // Instrucción JavaScript
-            window.addEventListener('online', () => { // Registra escuchador de eventos
-                this.refreshDiagnostics(); // Ejecuta llamada o método
-                SoundFX.success(); // Ejecuta llamada o método
-                this.log('🟢 [Evento online] Conexión de red restablecida.'); // Ejecuta llamada o método
+        bindNetworkEvents() {
+            window.addEventListener('online', () => {
+                this.refreshDiagnostics();
+                SoundFX.success();
+                this.log('🟢 [Evento online] Conexión de red restablecida.');
             });
 
-            window.addEventListener('offline', () => { // Registra escuchador de eventos
-                this.refreshDiagnostics(); // Ejecuta llamada o método
-                this.log('🔴 [Evento offline] Se perdió la conexión de red.'); // Ejecuta llamada o método
+            window.addEventListener('offline', () => {
+                this.refreshDiagnostics();
+                this.log('🔴 [Evento offline] Se perdió la conexión de red.');
             });
         },
 
         // Vincula los botones interactivos del panel de diagnóstico
-        bindControls() { // Instrucción JavaScript
-            if (this.btnRefresh) { // Evalúa condición
-                this.btnRefresh.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    this.refreshDiagnostics(); // Ejecuta llamada o método
-                    this.log('🔄 Diagnóstico de window.navigator actualizado.'); // Ejecuta llamada o método
+        bindControls() {
+            if (this.btnRefresh) {
+                this.btnRefresh.addEventListener('click', () => {
+                    SoundFX.click();
+                    this.refreshDiagnostics();
+                    this.log('🔄 Diagnóstico de window.navigator actualizado.');
                 });
             }
 
-            if (this.btnEstimate) { // Evalúa condición
-                this.btnEstimate.addEventListener('click', async () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    if (!('storage' in navigator) || !('estimate' in navigator.storage)) { // Evalúa condición
-                        if (this.storageEl) this.storageEl.textContent = 'No soportado'; // Evalúa condición
-                        this.log('⚠️ navigator.storage.estimate() no está disponible en este contexto.'); // Ejecuta llamada o método
-                        return; // Retorna resultado
+            if (this.btnEstimate) {
+                this.btnEstimate.addEventListener('click', async () => {
+                    SoundFX.click();
+                    if (!('storage' in navigator) || !('estimate' in navigator.storage)) {
+                        if (this.storageEl) this.storageEl.textContent = 'No soportado';
+                        this.log('⚠️ navigator.storage.estimate() no está disponible en este contexto.');
+                        return;
                     }
 
                     try { // Inicia bloque protegido contra errores
-                        const { usage, quota } = await navigator.storage.estimate(); // Declara e inicializa "variable"
-                        const usedMB = (usage / (1024 * 1024)).toFixed(2); // Declara e inicializa "usedMB"
-                        const quotaGB = (quota / (1024 * 1024 * 1024)).toFixed(2); // Declara e inicializa "quotaGB"
-                        const text = `${usedMB} MB / ${quotaGB} GB`; // Declara e inicializa "text"
-                        if (this.storageEl) this.storageEl.textContent = text; // Evalúa condición
-                        SoundFX.success(); // Ejecuta llamada o método
-                        this.log(`💾 [storage.estimate] Uso actual: ${usedMB} MB de ${quotaGB} GB asignados.`); // Ejecuta llamada o método
-                    } catch (err) { // Instrucción JavaScript
-                        this.log(`❌ Error al estimar almacenamiento: ${err.message}`); // Ejecuta llamada o método
+                        const { usage, quota } = await navigator.storage.estimate();
+                        const usedMB = (usage / (1024 * 1024)).toFixed(2);
+                        const quotaGB = (quota / (1024 * 1024 * 1024)).toFixed(2);
+                        const text = `${usedMB} MB / ${quotaGB} GB`;
+                        if (this.storageEl) this.storageEl.textContent = text;
+                        SoundFX.success();
+                        this.log(`💾 [storage.estimate] Uso actual: ${usedMB} MB de ${quotaGB} GB asignados.`);
+                    } catch (err) {
+                        this.log(`❌ Error al estimar almacenamiento: ${err.message}`);
                     }
                 });
             }
 
-            if (this.btnCopy) { // Evalúa condición
-                this.btnCopy.addEventListener('click', async () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
+            if (this.btnCopy) {
+                this.btnCopy.addEventListener('click', async () => {
+                    SoundFX.click();
                     const report = [
                         `Idioma: ${navigator.language}`,
                         `En línea: ${navigator.onLine}`,
@@ -537,49 +537,49 @@
                         `Cookies: ${navigator.cookieEnabled}`,
                         `PDF Nativo: ${navigator.pdfViewerEnabled}`,
                         `Plataforma: ${navigator.platform}`
-                    ].join(' | '); // Ejecuta llamada o método
+                    ].join(' | ');
 
-                    if (navigator.clipboard && navigator.clipboard.writeText) { // Evalúa condición
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
                         try { // Inicia bloque protegido contra errores
-                            await navigator.clipboard.writeText(report); // Ejecuta llamada o método
-                            SoundFX.success(); // Ejecuta llamada o método
-                            this.log('📋 Reporte copiado al portapapeles con navigator.clipboard.writeText().'); // Ejecuta llamada o método
-                        } catch (err) { // Instrucción JavaScript
-                            this.log(`⚠️ No se pudo copiar al portapapeles: ${err.message}`); // Ejecuta llamada o método
+                            await navigator.clipboard.writeText(report);
+                            SoundFX.success();
+                            this.log('📋 Reporte copiado al portapapeles con navigator.clipboard.writeText().');
+                        } catch (err) {
+                            this.log(`⚠️ No se pudo copiar al portapapeles: ${err.message}`);
                         }
-                    } else { // Instrucción JavaScript
-                        this.log(`ℹ️ Reporte generado: ${report}`); // Ejecuta llamada o método
+                    } else {
+                        this.log(`ℹ️ Reporte generado: ${report}`);
                     }
                 });
             }
 
-            if (this.btnClear) { // Evalúa condición
-                this.btnClear.addEventListener('click', () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
-                    if (this.terminal) { // Evalúa condición
+            if (this.btnClear) {
+                this.btnClear.addEventListener('click', () => {
+                    SoundFX.click();
+                    if (this.terminal) {
                         this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
-                        this.log('🧹 Terminal de diagnóstico limpiado.'); // Ejecuta llamada o método
+                        this.log('🧹 Terminal de diagnóstico limpiado.');
                     }
                 });
             }
 
             // Inspector de APIs Modernas en Slide 12
-            const btnModern = document.getElementById('btnTestModernNavigator'); // Obtiene referencia DOM para "btnModern"
-            const modernOut = document.getElementById('nv-modern-output'); // Obtiene referencia DOM para "modernOut"
-            if (btnModern && modernOut) { // Evalúa condición
-                btnModern.addEventListener('click', async () => { // Registra escuchador de eventos
-                    SoundFX.click(); // Ejecuta llamada o método
+            const btnModern = document.getElementById('btnTestModernNavigator');
+            const modernOut = document.getElementById('nv-modern-output');
+            if (btnModern && modernOut) {
+                btnModern.addEventListener('click', async () => {
+                    SoundFX.click();
                     const uaData = navigator.userAgentData
                         ? `platform=${navigator.userAgentData.platform || 'N/D'}, mobile=${navigator.userAgentData.mobile}`
-                        : 'No soportado (fallback userAgent)'; // Instrucción JavaScript
+                        : 'No soportado (fallback userAgent)';
                     const conn = navigator.connection
                         ? `${navigator.connection.effectiveType || 'N/D'} (~${navigator.connection.downlink ?? '?'} Mbps)`
-                        : 'No soportado'; // Instrucción JavaScript
-                    let perm = 'N/D'; // Declara e inicializa "perm"
-                    if (navigator.permissions?.query) { // Evalúa condición
+                        : 'No soportado';
+                    let perm = 'N/D';
+                    if (navigator.permissions?.query) {
                         try { // Inicia bloque protegido contra errores
-                            const status = await navigator.permissions.query({ name: 'notifications' }); // Declara e inicializa "status"
-                            perm = status.state; // Asigna valor
+                            const status = await navigator.permissions.query({ name: 'notifications' });
+                            perm = status.state;
                         } catch { perm = 'No consultable'; }
                     }
                     modernOut.textContent = [
@@ -587,46 +587,46 @@
                         `connection: ${conn}`,
                         `permissions(notifications): ${perm}`,
                         `clipboard: ${'clipboard' in navigator} | share: ${'share' in navigator} | sendBeacon: ${'sendBeacon' in navigator}`
-                    ].join('\n'); // Ejecuta llamada o método
-                    SoundFX.success(); // Ejecuta llamada o método
+                    ].join('\n');
+                    SoundFX.success();
                 });
             }
         },
 
         // Registra una línea con marca temporal en el terminal
-        log(message) { // Instrucción JavaScript
-            if (!this.terminal) return; // Evalúa condición
+        log(message) {
+            if (!this.terminal) return;
 
-            const now = new Date(); // Declara e inicializa "now"
+            const now = new Date();
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
-            ].join(':'); // Ejecuta llamada o método
+            ].join(':');
 
-            const line = document.createElement('div'); // Crea nuevo elemento DOM "line"
-            line.className = 'nv-log-line'; // Asigna valor
+            const line = document.createElement('div');
+            line.className = 'nv-log-line';
             line.innerHTML = `
                 <span class="nv-log-time">[${timeStr}]</span>
                 <span>${message}</span>
             `;
 
-            this.terminal.appendChild(line); // Inserta nodo en el DOM
-            this.terminal.scrollTop = this.terminal.scrollHeight; // Asigna valor
+            this.terminal.appendChild(line);
+            this.terminal.scrollTop = this.terminal.scrollHeight;
         }
     };
 
     /* ==========================================================================
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
-    function startApplication() { // Declara función
-        SlideNavigation.init(); // Ejecuta llamada o método
-        NVLabController.init(); // Ejecuta llamada o método
+    function startApplication() {
+        SlideNavigation.init();
+        NVLabController.init();
     }
 
-    if (document.readyState === 'loading') { // Evalúa condición
-        document.addEventListener('DOMContentLoaded', startApplication); // Registra escuchador de eventos
-    } else { // Instrucción JavaScript
-        startApplication(); // Ejecuta llamada o método
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startApplication);
+    } else {
+        startApplication();
     }
-})(); // Ejecuta llamada o método
+})();

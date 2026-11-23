@@ -13,7 +13,7 @@
 
 // --- ESTADO GLOBAL DE LA APLICACIÓN ---
 // Objeto que almacena el estado reactivo de la presentación y configuraciones del usuario
-const AppState = { // Declara e inicializa "AppState"
+const AppState = {
     // Índice de la diapositiva actualmente visible (inicia en 1: Portada)
     currentSlide: 1,
     // Cantidad total de diapositivas en la presentación (10 diapositivas)
@@ -34,87 +34,87 @@ const AppState = { // Declara e inicializa "AppState"
 // Clase estática que genera efectos de sonido procedimentales sin requerir archivos mp3 externos
 class SoundEffects { // Define clase
     // Inicializa el contexto de audio únicamente cuando el usuario interactúa (requerido por políticas de navegadores)
-    static init() { // Instrucción JavaScript
+    static init() {
         // Verifica si el contexto aún no ha sido creado y si el navegador soporta AudioContext
-        if (!AppState.audioCtx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
+        if (!AppState.audioCtx && (window.AudioContext || window.webkitAudioContext)) {
             // Instancia un nuevo contexto de audio nativo
-            AppState.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); // Asigna valor
+            AppState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
     }
 
     // Reproduce un tono acústico con una frecuencia, tipo de onda, duración y ganancia determinadas
-    static playTone(freq = 440, type = 'sine', duration = 0.08, gainVal = 0.05) { // Instrucción JavaScript
+    static playTone(freq = 440, type = 'sine', duration = 0.08, gainVal = 0.05) {
         // Si el sonido está silenciado por el usuario, salimos de inmediato
-        if (!AppState.soundEnabled) return; // Evalúa condición
+        if (!AppState.soundEnabled) return;
 
         try { // Inicia bloque protegido contra errores
             // Aseguramos que el AudioContext esté inicializado
-            this.init(); // Ejecuta llamada o método
+            this.init();
             // Si el navegador no permite audio o falló, cancelamos
-            if (!AppState.audioCtx) return; // Evalúa condición
+            if (!AppState.audioCtx) return;
 
             // Si el contexto fue suspendido por inactividad, lo reanudamos
-            if (AppState.audioCtx.state === 'suspended') { // Evalúa condición
-                AppState.audioCtx.resume(); // Ejecuta llamada o método
+            if (AppState.audioCtx.state === 'suspended') {
+                AppState.audioCtx.resume();
             }
 
             // Creamos un nodo oscilador para emitir la onda de sonido
-            const osc = AppState.audioCtx.createOscillator(); // Declara e inicializa "osc"
+            const osc = AppState.audioCtx.createOscillator();
             // Creamos un nodo de ganancia para controlar el volumen del sonido
-            const gain = AppState.audioCtx.createGain(); // Declara e inicializa "gain"
+            const gain = AppState.audioCtx.createGain();
 
             // Asignamos el tipo de onda ('sine', 'triangle', 'sawtooth', 'square')
-            osc.type = type; // Asigna valor
+            osc.type = type;
             // Fijamos la frecuencia en hercios en el tiempo actual del contexto
-            osc.frequency.setValueAtTime(freq, AppState.audioCtx.currentTime); // Ejecuta llamada o método
+            osc.frequency.setValueAtTime(freq, AppState.audioCtx.currentTime);
 
             // Fijamos el volumen inicial en el tiempo actual
-            gain.gain.setValueAtTime(gainVal, AppState.audioCtx.currentTime); // Ejecuta llamada o método
+            gain.gain.setValueAtTime(gainVal, AppState.audioCtx.currentTime);
             // Realizamos un desvanecimiento exponencial (fade out) hacia cero para evitar chasquidos de audio
-            gain.gain.exponentialRampToValueAtTime(0.0001, AppState.audioCtx.currentTime + duration); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.0001, AppState.audioCtx.currentTime + duration);
 
             // Conectamos el oscilador a la ganancia de volumen
-            osc.connect(gain); // Ejecuta llamada o método
+            osc.connect(gain);
             // Conectamos la ganancia a la salida de audio (altavoces del usuario)
-            gain.connect(AppState.audioCtx.destination); // Ejecuta llamada o método
+            gain.connect(AppState.audioCtx.destination);
 
             // Iniciamos la oscilación sonora inmediatamente
-            osc.start(); // Ejecuta llamada o método
+            osc.start();
             // Detenemos la oscilación al completarse la duración especificada
-            osc.stop(AppState.audioCtx.currentTime + duration); // Ejecuta llamada o método
-        } catch (e) { // Instrucción JavaScript
+            osc.stop(AppState.audioCtx.currentTime + duration);
+        } catch (e) {
             // Manejo silencioso en caso de bloqueo de políticas de autoplay
         }
     }
 
     // Sonido sutil de clic de interfaz (onda triangular de 600Hz y 40ms)
-    static click() { // Instrucción JavaScript
-        this.playTone(600, 'triangle', 0.04, 0.03); // Ejecuta llamada o método
+    static click() {
+        this.playTone(600, 'triangle', 0.04, 0.03);
     }
 
     // Acorde arpegiado ascendente de éxito (Do5 -> Mi5 -> Sol5)
-    static success() { // Instrucción JavaScript
+    static success() {
         this.playTone(523.25, 'sine', 0.1, 0.05); // C5
         setTimeout(() => this.playTone(659.25, 'sine', 0.12, 0.05), 80); // E5
         setTimeout(() => this.playTone(783.99, 'sine', 0.18, 0.06), 160); // G5
     }
 
     // Sonido suave de cambio de diapositiva o transición
-    static transition() { // Instrucción JavaScript
-        this.playTone(320, 'sine', 0.06, 0.03); // Ejecuta llamada o método
-        setTimeout(() => this.playTone(480, 'sine', 0.08, 0.03), 40); // Ejecuta llamada o método
+    static transition() {
+        this.playTone(320, 'sine', 0.06, 0.03);
+        setTimeout(() => this.playTone(480, 'sine', 0.08, 0.03), 40);
     }
 
     // Tono grave de alerta o advertencia (onda diente de sierra de 280 Hz)
-    static error() { // Instrucción JavaScript
-        this.playTone(280, 'sawtooth', 0.15, 0.04); // Ejecuta llamada o método
+    static error() {
+        this.playTone(280, 'sawtooth', 0.15, 0.04);
     }
 }
 
 
 // --- PRESETS DE CÓDIGO PARA EL PLAYGROUND (SLIDE 9 & RETOS) ---
 // Diccionario que contiene los códigos interactivos listos para ejecutar en el editor virtual
-const CodePresets = { // Declara e inicializa "CodePresets"
+const CodePresets = {
     // Preset 1: Asignación directa inmutable con const
     "preset-ternary-1": `// ==========================================
 // 1. ASIGNACIÓN DIRECTA INMUTABLE CON 'const'
@@ -244,295 +244,295 @@ console.log("Compra $20 con membresía premium  :", obtenerMensajeEnvio(20, true
 
 // --- CONTROLADOR PRINCIPAL DE LA APLICACIÓN (AppController) ---
 class AppController { // Define clase
-    static init() { // Instrucción JavaScript
+    static init() {
         // Inicializamos los componentes visuales y escuchadores de eventos
-        this.renderDots(); // Ejecuta llamada o método
-        this.renderOverviewGrid(); // Ejecuta llamada o método
-        this.bindEvents(); // Ejecuta llamada o método
-        this.updatePresentationState(); // Ejecuta llamada o método
-        this.loadPlaygroundPreset("preset-ternary-1"); // Ejecuta llamada o método
+        this.renderDots();
+        this.renderOverviewGrid();
+        this.bindEvents();
+        this.updatePresentationState();
+        this.loadPlaygroundPreset("preset-ternary-1");
     }
 
     // Genera las bolitas (dots) de la barra inferior de navegación
-    static renderDots() { // Instrucción JavaScript
-        const dotsContainer = document.getElementById("slideDotsContainer"); // Obtiene referencia DOM para "dotsContainer"
-        if (!dotsContainer) return; // Evalúa condición
+    static renderDots() {
+        const dotsContainer = document.getElementById("slideDotsContainer");
+        if (!dotsContainer) return;
         dotsContainer.innerHTML = ""; // Actualiza contenido en el DOM
 
-        for (let i = 1; i <= AppState.totalSlides; i++) { // Inicia bucle de iteración
-            const dot = document.createElement("button"); // Crea nuevo elemento DOM "dot"
-            dot.className = `slide-dot ${i === AppState.currentSlide ? "active" : ""}`; // Asigna valor
-            dot.title = `Ir a la diapositiva ${i}`; // Asigna valor
-            dot.setAttribute("data-slide-target", i); // Ejecuta llamada o método
-            dot.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.goToSlide(i); // Ejecuta llamada o método
+        for (let i = 1; i <= AppState.totalSlides; i++) {
+            const dot = document.createElement("button");
+            dot.className = `slide-dot ${i === AppState.currentSlide ? "active" : ""}`;
+            dot.title = `Ir a la diapositiva ${i}`;
+            dot.setAttribute("data-slide-target", i);
+            dot.addEventListener("click", () => {
+                SoundEffects.click();
+                this.goToSlide(i);
             });
-            dotsContainer.appendChild(dot); // Inserta nodo en el DOM
+            dotsContainer.appendChild(dot);
         }
     }
 
     // Genera las tarjetas clicables dentro del modal de Visión General (Overview Grid)
-    static renderOverviewGrid() { // Instrucción JavaScript
-        const overviewGrid = document.getElementById("overviewGrid"); // Obtiene referencia DOM para "overviewGrid"
-        if (!overviewGrid) return; // Evalúa condición
+    static renderOverviewGrid() {
+        const overviewGrid = document.getElementById("overviewGrid");
+        if (!overviewGrid) return;
         overviewGrid.innerHTML = ""; // Actualiza contenido en el DOM
 
-        const slideElements = document.querySelectorAll(".slide"); // Obtiene referencia DOM para "slideElements"
-        slideElements.forEach((slide, idx) => { // Instrucción JavaScript
-            const slideNum = idx + 1; // Declara e inicializa "slideNum"
-            const title = slide.getAttribute("data-title") || `Diapositiva ${slideNum}`; // Declara e inicializa "title"
-            const card = document.createElement("div"); // Crea nuevo elemento DOM "card"
-            card.className = `overview-card ${slideNum === AppState.currentSlide ? "active" : ""}`; // Asigna valor
+        const slideElements = document.querySelectorAll(".slide");
+        slideElements.forEach((slide, idx) => {
+            const slideNum = idx + 1;
+            const title = slide.getAttribute("data-title") || `Diapositiva ${slideNum}`;
+            const card = document.createElement("div");
+            card.className = `overview-card ${slideNum === AppState.currentSlide ? "active" : ""}`;
             card.innerHTML = `
                 <div class="ov-num">${slideNum}</div>
                 <div class="ov-title">${title}</div>
             `;
-            card.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.transition(); // Ejecuta llamada o método
-                this.goToSlide(slideNum); // Ejecuta llamada o método
-                this.closeOverview(); // Ejecuta llamada o método
+            card.addEventListener("click", () => {
+                SoundEffects.transition();
+                this.goToSlide(slideNum);
+                this.closeOverview();
             });
-            overviewGrid.appendChild(card); // Inserta nodo en el DOM
+            overviewGrid.appendChild(card);
         });
     }
 
     // Actualiza el estado visual: diapositivas activas, barra de progreso e indicadores
-    static updatePresentationState() { // Instrucción JavaScript
-        const slides = document.querySelectorAll(".slide"); // Obtiene referencia DOM para "slides"
-        slides.forEach((slide) => { // Instrucción JavaScript
-            const num = parseInt(slide.getAttribute("data-slide"), 10); // Declara e inicializa "num"
-            if (num === AppState.currentSlide) { // Evalúa condición
-                slide.classList.add("active"); // Modifica clases CSS del elemento
-            } else { // Instrucción JavaScript
-                slide.classList.remove("active"); // Modifica clases CSS del elemento
+    static updatePresentationState() {
+        const slides = document.querySelectorAll(".slide");
+        slides.forEach((slide) => {
+            const num = parseInt(slide.getAttribute("data-slide"), 10);
+            if (num === AppState.currentSlide) {
+                slide.classList.add("active");
+            } else {
+                slide.classList.remove("active");
             }
         });
 
         // Actualiza el indicador de texto: "X / 10"
-        const slideIndicator = document.getElementById("slideIndicator"); // Obtiene referencia DOM para "slideIndicator"
-        if (slideIndicator) { // Evalúa condición
+        const slideIndicator = document.getElementById("slideIndicator");
+        if (slideIndicator) {
             slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
         }
 
         // Actualiza el ancho de la barra de progreso
-        const progressBar = document.getElementById("progressBar"); // Obtiene referencia DOM para "progressBar"
-        if (progressBar) { // Evalúa condición
-            const pct = (AppState.currentSlide / AppState.totalSlides) * 100; // Declara e inicializa "pct"
-            progressBar.style.width = `${pct}%`; // Asigna valor
+        const progressBar = document.getElementById("progressBar");
+        if (progressBar) {
+            const pct = (AppState.currentSlide / AppState.totalSlides) * 100;
+            progressBar.style.width = `${pct}%`;
         }
 
         // Actualiza las bolitas inferiores
-        const dots = document.querySelectorAll(".slide-dot"); // Obtiene referencia DOM para "dots"
-        dots.forEach((dot, idx) => { // Instrucción JavaScript
-            if (idx + 1 === AppState.currentSlide) { // Evalúa condición
-                dot.classList.add("active"); // Modifica clases CSS del elemento
-            } else { // Instrucción JavaScript
-                dot.classList.remove("active"); // Modifica clases CSS del elemento
+        const dots = document.querySelectorAll(".slide-dot");
+        dots.forEach((dot, idx) => {
+            if (idx + 1 === AppState.currentSlide) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
             }
         });
 
         // Actualiza el estado de las tarjetas en el modal overview
-        const ovCards = document.querySelectorAll(".overview-card"); // Obtiene referencia DOM para "ovCards"
-        ovCards.forEach((card, idx) => { // Instrucción JavaScript
-            if (idx + 1 === AppState.currentSlide) { // Evalúa condición
-                card.classList.add("active"); // Modifica clases CSS del elemento
-            } else { // Instrucción JavaScript
-                card.classList.remove("active"); // Modifica clases CSS del elemento
+        const ovCards = document.querySelectorAll(".overview-card");
+        ovCards.forEach((card, idx) => {
+            if (idx + 1 === AppState.currentSlide) {
+                card.classList.add("active");
+            } else {
+                card.classList.remove("active");
             }
         });
 
         // Desplaza suavemente hacia arriba
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Ejecuta llamada o método
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     // Salta a una diapositiva específica
-    static goToSlide(slideNum) { // Instrucción JavaScript
-        if (slideNum < 1 || slideNum > AppState.totalSlides) return; // Evalúa condición
-        AppState.currentSlide = slideNum; // Asigna valor
-        SoundEffects.transition(); // Ejecuta llamada o método
-        this.updatePresentationState(); // Ejecuta llamada o método
+    static goToSlide(slideNum) {
+        if (slideNum < 1 || slideNum > AppState.totalSlides) return;
+        AppState.currentSlide = slideNum;
+        SoundEffects.transition();
+        this.updatePresentationState();
     }
 
-    static nextSlide() { // Instrucción JavaScript
-        if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
-            this.goToSlide(AppState.currentSlide + 1); // Ejecuta llamada o método
+    static nextSlide() {
+        if (AppState.currentSlide < AppState.totalSlides) {
+            this.goToSlide(AppState.currentSlide + 1);
         }
     }
 
-    static prevSlide() { // Instrucción JavaScript
-        if (AppState.currentSlide > 1) { // Evalúa condición
-            this.goToSlide(AppState.currentSlide - 1); // Ejecuta llamada o método
+    static prevSlide() {
+        if (AppState.currentSlide > 1) {
+            this.goToSlide(AppState.currentSlide - 1);
         }
     }
 
     // Alterna entre modo presentación (diapositivas) y modo documento corrido
-    static toggleMode() { // Instrucción JavaScript
-        AppState.isPresentationMode = !AppState.isPresentationMode; // Asigna valor
-        const body = document.body; // Declara e inicializa "body"
-        const modeText = document.getElementById("modeText"); // Obtiene referencia DOM para "modeText"
-        const modeIcon = document.getElementById("modeIcon"); // Obtiene referencia DOM para "modeIcon"
+    static toggleMode() {
+        AppState.isPresentationMode = !AppState.isPresentationMode;
+        const body = document.body;
+        const modeText = document.getElementById("modeText");
+        const modeIcon = document.getElementById("modeIcon");
 
-        if (AppState.isPresentationMode) { // Evalúa condición
-            body.classList.remove("mode-document"); // Modifica clases CSS del elemento
-            body.classList.add("mode-presentation"); // Modifica clases CSS del elemento
-            if (modeText) modeText.textContent = "Modo Guía"; // Evalúa condición
-            if (modeIcon) modeIcon.textContent = "📑"; // Evalúa condición
-            this.showToast("Modo Presentación activado"); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
-            body.classList.remove("mode-presentation"); // Modifica clases CSS del elemento
-            body.classList.add("mode-document"); // Modifica clases CSS del elemento
-            if (modeText) modeText.textContent = "Modo Diapo"; // Evalúa condición
-            if (modeIcon) modeIcon.textContent = "🖼️"; // Evalúa condición
-            this.showToast("Modo Documento Continuo activado"); // Ejecuta llamada o método
+        if (AppState.isPresentationMode) {
+            body.classList.remove("mode-document");
+            body.classList.add("mode-presentation");
+            if (modeText) modeText.textContent = "Modo Guía";
+            if (modeIcon) modeIcon.textContent = "📑";
+            this.showToast("Modo Presentación activado");
+        } else {
+            body.classList.remove("mode-presentation");
+            body.classList.add("mode-document");
+            if (modeText) modeText.textContent = "Modo Diapo";
+            if (modeIcon) modeIcon.textContent = "🖼️";
+            this.showToast("Modo Documento Continuo activado");
         }
     }
 
     // Alterna sonido On/Off
-    static toggleSound() { // Instrucción JavaScript
-        AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
-        const soundIcon = document.getElementById("soundIcon"); // Obtiene referencia DOM para "soundIcon"
-        if (soundIcon) { // Evalúa condición
+    static toggleSound() {
+        AppState.soundEnabled = !AppState.soundEnabled;
+        const soundIcon = document.getElementById("soundIcon");
+        if (soundIcon) {
             soundIcon.textContent = AppState.soundEnabled ? "🔊" : "🔇"; // Actualiza contenido en el DOM
         }
-        if (AppState.soundEnabled) { // Evalúa condición
-            SoundEffects.success(); // Ejecuta llamada o método
-            this.showToast("Efectos de audio activados"); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
-            this.showToast("Audio silenciado"); // Ejecuta llamada o método
+        if (AppState.soundEnabled) {
+            SoundEffects.success();
+            this.showToast("Efectos de audio activados");
+        } else {
+            this.showToast("Audio silenciado");
         }
     }
 
     // Abre el modal Overview
-    static openOverview() { // Instrucción JavaScript
-        const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-        if (modal) { // Evalúa condición
-            modal.classList.add("active"); // Modifica clases CSS del elemento
-            SoundEffects.click(); // Ejecuta llamada o método
+    static openOverview() {
+        const modal = document.getElementById("overviewModal");
+        if (modal) {
+            modal.classList.add("active");
+            SoundEffects.click();
         }
     }
 
     // Cierra el modal Overview
-    static closeOverview() { // Instrucción JavaScript
-        const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-        if (modal) { // Evalúa condición
-            modal.classList.remove("active"); // Modifica clases CSS del elemento
+    static closeOverview() {
+        const modal = document.getElementById("overviewModal");
+        if (modal) {
+            modal.classList.remove("active");
         }
     }
 
     // Alterna pantalla completa
-    static toggleFullscreen() { // Instrucción JavaScript
-        if (!document.fullscreenElement) { // Evalúa condición
-            document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
-            if (document.exitFullscreen) { // Evalúa condición
-                document.exitFullscreen(); // Ejecuta llamada o método
+    static toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(() => {});
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
             }
         }
     }
 
     // Muestra una notificación flotante (Toast)
-    static showToast(message, isError = false) { // Instrucción JavaScript
-        const toast = document.getElementById("toastNotification"); // Obtiene referencia DOM para "toast"
-        const toastMsg = document.getElementById("toastMsg"); // Obtiene referencia DOM para "toastMsg"
-        const toastIcon = document.getElementById("toastIcon"); // Obtiene referencia DOM para "toastIcon"
-        if (!toast || !toastMsg) return; // Evalúa condición
+    static showToast(message, isError = false) {
+        const toast = document.getElementById("toastNotification");
+        const toastMsg = document.getElementById("toastMsg");
+        const toastIcon = document.getElementById("toastIcon");
+        if (!toast || !toastMsg) return;
 
         toastMsg.textContent = message; // Actualiza contenido en el DOM
-        if (toastIcon) { // Evalúa condición
+        if (toastIcon) {
             toastIcon.textContent = isError ? "⚠️" : "✔"; // Actualiza contenido en el DOM
         }
 
-        toast.classList.add("active"); // Modifica clases CSS del elemento
-        setTimeout(() => { // Instrucción JavaScript
-            toast.classList.remove("active"); // Modifica clases CSS del elemento
-        }, 3000); // Ejecuta llamada o método
+        toast.classList.add("active");
+        setTimeout(() => {
+            toast.classList.remove("active");
+        }, 3000);
     }
 
     // Carga un preset de código en el textarea del Playground
-    static loadPlaygroundPreset(presetKey) { // Instrucción JavaScript
-        const textarea = document.getElementById("liveCodeEditor"); // Obtiene referencia DOM para "textarea"
-        if (!textarea) return; // Evalúa condición
+    static loadPlaygroundPreset(presetKey) {
+        const textarea = document.getElementById("liveCodeEditor");
+        if (!textarea) return;
         const code = CodePresets[presetKey] || "// Código no disponible";
-        textarea.value = code; // Asigna valor
+        textarea.value = code;
 
-        const select = document.getElementById("codePresetSelect"); // Obtiene referencia DOM para "select"
-        if (select && CodePresets[presetKey]) { // Evalúa condición
-            select.value = presetKey; // Asigna valor
+        const select = document.getElementById("codePresetSelect");
+        if (select && CodePresets[presetKey]) {
+            select.value = presetKey;
         }
     }
 
     // Ejecuta el código del Playground capturando la consola virtual
-    static runPlaygroundCode() { // Instrucción JavaScript
-        const textarea = document.getElementById("liveCodeEditor"); // Obtiene referencia DOM para "textarea"
-        const logsContainer = document.getElementById("consoleLogsContainer"); // Obtiene referencia DOM para "logsContainer"
-        if (!textarea || !logsContainer) return; // Evalúa condición
+    static runPlaygroundCode() {
+        const textarea = document.getElementById("liveCodeEditor");
+        const logsContainer = document.getElementById("consoleLogsContainer");
+        if (!textarea || !logsContainer) return;
 
-        const codeToRun = textarea.value; // Declara e inicializa "codeToRun"
+        const codeToRun = textarea.value;
         logsContainer.innerHTML = ""; // Actualiza contenido en el DOM
 
         // Función auxiliar para agregar líneas al panel de consola virtual
-        const appendVirtualLog = (type, args) => { // Define función flecha "appendVirtualLog"
-            const line = document.createElement("div"); // Crea nuevo elemento DOM "line"
-            line.className = `log-line ${type}-line`; // Asigna valor
-            const timeSpan = document.createElement("span"); // Crea nuevo elemento DOM "timeSpan"
-            timeSpan.className = "log-time"; // Asigna valor
+        const appendVirtualLog = (type, args) => {
+            const line = document.createElement("div");
+            line.className = `log-line ${type}-line`;
+            const timeSpan = document.createElement("span");
+            timeSpan.className = "log-time";
             timeSpan.textContent = `[${new Date().toLocaleTimeString()}]`; // Actualiza contenido en el DOM
-            line.appendChild(timeSpan); // Inserta nodo en el DOM
+            line.appendChild(timeSpan);
 
-            const contentText = args.map(arg => { // Define función flecha "contentText"
-                if (typeof arg === "object" && arg !== null) { // Evalúa condición
+            const contentText = args.map(arg => {
+                if (typeof arg === "object" && arg !== null) {
                     try { // Inicia bloque protegido contra errores
-                        return JSON.stringify(arg, null, 2); // Retorna resultado
-                    } catch (e) { // Instrucción JavaScript
-                        return String(arg); // Retorna resultado
+                        return JSON.stringify(arg, null, 2);
+                    } catch (e) {
+                        return String(arg);
                     }
                 }
-                return String(arg); // Retorna resultado
-            }).join(" "); // Ejecuta llamada o método
+                return String(arg);
+            }).join(" ");
 
-            const textNode = document.createTextNode(" " + contentText); // Declara e inicializa "textNode"
-            line.appendChild(textNode); // Inserta nodo en el DOM
-            logsContainer.appendChild(line); // Inserta nodo en el DOM
-            logsContainer.scrollTop = logsContainer.scrollHeight; // Asigna valor
+            const textNode = document.createTextNode(" " + contentText);
+            line.appendChild(textNode);
+            logsContainer.appendChild(line);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
         };
 
         // Guardamos los métodos originales de console
-        const originalLog = console.log; // Declara e inicializa "originalLog"
-        const originalError = console.error; // Declara e inicializa "originalError"
-        const originalWarn = console.warn; // Declara e inicializa "originalWarn"
-        const originalInfo = console.info; // Declara e inicializa "originalInfo"
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        const originalInfo = console.info;
 
         try { // Inicia bloque protegido contra errores
             // Sobrescribimos console para interceptar la salida
             console.log = (...args) => { // Imprime salida en consola
-                originalLog(...args); // Ejecuta llamada o método
-                appendVirtualLog("info", args); // Ejecuta llamada o método
+                originalLog(...args);
+                appendVirtualLog("info", args);
             };
             console.error = (...args) => { // Imprime salida en consola
-                originalError(...args); // Ejecuta llamada o método
-                appendVirtualLog("error", args); // Ejecuta llamada o método
+                originalError(...args);
+                appendVirtualLog("error", args);
             };
             console.warn = (...args) => { // Imprime salida en consola
-                originalWarn(...args); // Ejecuta llamada o método
-                appendVirtualLog("warn", args); // Ejecuta llamada o método
+                originalWarn(...args);
+                appendVirtualLog("warn", args);
             };
             console.info = (...args) => { // Imprime salida en consola
-                originalInfo(...args); // Ejecuta llamada o método
-                appendVirtualLog("info", args); // Ejecuta llamada o método
+                originalInfo(...args);
+                appendVirtualLog("info", args);
             };
 
             // Ejecutamos el código con Function para aislar ámbito
-            const runFn = new Function(codeToRun); // Declara e inicializa "runFn"
-            runFn(); // Ejecuta llamada o método
+            const runFn = new Function(codeToRun);
+            runFn();
 
-            SoundEffects.success(); // Ejecuta llamada o método
-            AppController.showToast("Código ejecutado con éxito"); // Ejecuta llamada o método
-        } catch (err) { // Instrucción JavaScript
+            SoundEffects.success();
+            AppController.showToast("Código ejecutado con éxito");
+        } catch (err) {
             console.error("Excepción:", err.name, "-", err.message); // Imprime salida en consola
-            SoundEffects.error(); // Ejecuta llamada o método
-            AppController.showToast("Error al ejecutar código", true); // Ejecuta llamada o método
-        } finally { // Instrucción JavaScript
+            SoundEffects.error();
+            AppController.showToast("Error al ejecutar código", true);
+        } finally {
             // Restauramos los métodos originales de console
             console.log = originalLog; // Imprime salida en consola
             console.error = originalError; // Imprime salida en consola
@@ -542,95 +542,95 @@ class AppController { // Define clase
     }
 
     // Vincula todos los escuchadores de eventos
-    static bindEvents() { // Instrucción JavaScript
+    static bindEvents() {
         // Navegación con botones
-        const btnNext = document.getElementById("btnNextSlide"); // Obtiene referencia DOM para "btnNext"
-        const btnPrev = document.getElementById("btnPrevSlide"); // Obtiene referencia DOM para "btnPrev"
-        if (btnNext) btnNext.addEventListener("click", () => this.nextSlide()); // Evalúa condición
-        if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide()); // Evalúa condición
+        const btnNext = document.getElementById("btnNextSlide");
+        const btnPrev = document.getElementById("btnPrevSlide");
+        if (btnNext) btnNext.addEventListener("click", () => this.nextSlide());
+        if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide());
 
         // Botones de inicio en slide 1
-        const btnStart = document.getElementById("btnStartPresentation"); // Obtiene referencia DOM para "btnStart"
-        if (btnStart) btnStart.addEventListener("click", () => this.goToSlide(2)); // Evalúa condición
+        const btnStart = document.getElementById("btnStartPresentation");
+        if (btnStart) btnStart.addEventListener("click", () => this.goToSlide(2));
 
         // Botones de salto [data-jump]
-        document.querySelectorAll("[data-jump]").forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                const target = parseInt(btn.getAttribute("data-jump"), 10); // Declara e inicializa "target"
-                this.goToSlide(target); // Ejecuta llamada o método
+        document.querySelectorAll("[data-jump]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const target = parseInt(btn.getAttribute("data-jump"), 10);
+                this.goToSlide(target);
             });
         });
 
         // Controles de barra superior
-        const btnGoLab = document.getElementById("btnGoLab"); // Obtiene referencia DOM para "btnGoLab"
-        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(6)); // Evalúa condición
+        const btnGoLab = document.getElementById("btnGoLab");
+        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(6));
 
-        const btnToggleMode = document.getElementById("btnToggleMode"); // Obtiene referencia DOM para "btnToggleMode"
-        if (btnToggleMode) btnToggleMode.addEventListener("click", () => this.toggleMode()); // Evalúa condición
+        const btnToggleMode = document.getElementById("btnToggleMode");
+        if (btnToggleMode) btnToggleMode.addEventListener("click", () => this.toggleMode());
 
-        const btnToggleSound = document.getElementById("btnToggleSound"); // Obtiene referencia DOM para "btnToggleSound"
-        if (btnToggleSound) btnToggleSound.addEventListener("click", () => this.toggleSound()); // Evalúa condición
+        const btnToggleSound = document.getElementById("btnToggleSound");
+        if (btnToggleSound) btnToggleSound.addEventListener("click", () => this.toggleSound());
 
-        const btnOverview = document.getElementById("btnOverview"); // Obtiene referencia DOM para "btnOverview"
-        if (btnOverview) btnOverview.addEventListener("click", () => this.openOverview()); // Evalúa condición
+        const btnOverview = document.getElementById("btnOverview");
+        if (btnOverview) btnOverview.addEventListener("click", () => this.openOverview());
 
-        const btnCloseOverview = document.getElementById("btnCloseOverview"); // Obtiene referencia DOM para "btnCloseOverview"
-        if (btnCloseOverview) btnCloseOverview.addEventListener("click", () => this.closeOverview()); // Evalúa condición
+        const btnCloseOverview = document.getElementById("btnCloseOverview");
+        if (btnCloseOverview) btnCloseOverview.addEventListener("click", () => this.closeOverview());
 
-        const btnFullscreen = document.getElementById("btnFullscreen"); // Obtiene referencia DOM para "btnFullscreen"
-        if (btnFullscreen) btnFullscreen.addEventListener("click", () => this.toggleFullscreen()); // Evalúa condición
+        const btnFullscreen = document.getElementById("btnFullscreen");
+        if (btnFullscreen) btnFullscreen.addEventListener("click", () => this.toggleFullscreen());
 
         // Cerrar modal al hacer clic en el backdrop
-        const overviewModal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "overviewModal"
-        if (overviewModal) { // Evalúa condición
-            overviewModal.addEventListener("click", (e) => { // Registra escuchador de eventos
-                if (e.target === overviewModal) this.closeOverview(); // Evalúa condición
+        const overviewModal = document.getElementById("overviewModal");
+        if (overviewModal) {
+            overviewModal.addEventListener("click", (e) => {
+                if (e.target === overviewModal) this.closeOverview();
             });
         }
 
         // Atajos de teclado
-        window.addEventListener("keydown", (e) => { // Registra escuchador de eventos
+        window.addEventListener("keydown", (e) => {
             // Si está escribiendo dentro del textarea o input, no intervenir
-            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") { // Evalúa condición
+            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") {
                 // Ctrl + Enter para ejecutar código en playground
-                if (e.ctrlKey && e.key === "Enter") { // Evalúa condición
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.runPlaygroundCode(); // Ejecuta llamada o método
+                if (e.ctrlKey && e.key === "Enter") {
+                    e.preventDefault();
+                    this.runPlaygroundCode();
                 }
-                return; // Retorna resultado
+                return;
             }
 
-            if (e.key === "ArrowRight" || e.key === " " || e.key === "d" || e.key === "D") { // Evalúa condición
-                e.preventDefault(); // Ejecuta llamada o método
-                this.nextSlide(); // Ejecuta llamada o método
-            } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") { // Instrucción JavaScript
-                e.preventDefault(); // Ejecuta llamada o método
-                this.prevSlide(); // Ejecuta llamada o método
-            } else if (e.key === "o" || e.key === "O") { // Instrucción JavaScript
-                e.preventDefault(); // Ejecuta llamada o método
-                const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-                if (modal && modal.classList.contains("active")) { // Evalúa condición
-                    this.closeOverview(); // Ejecuta llamada o método
-                } else { // Instrucción JavaScript
-                    this.openOverview(); // Ejecuta llamada o método
+            if (e.key === "ArrowRight" || e.key === " " || e.key === "d" || e.key === "D") {
+                e.preventDefault();
+                this.nextSlide();
+            } else if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") {
+                e.preventDefault();
+                this.prevSlide();
+            } else if (e.key === "o" || e.key === "O") {
+                e.preventDefault();
+                const modal = document.getElementById("overviewModal");
+                if (modal && modal.classList.contains("active")) {
+                    this.closeOverview();
+                } else {
+                    this.openOverview();
                 }
-            } else if (e.key === "f" || e.key === "F") { // Instrucción JavaScript
-                e.preventDefault(); // Ejecuta llamada o método
-                this.toggleFullscreen(); // Ejecuta llamada o método
-            } else if (e.key === "Escape") { // Instrucción JavaScript
-                this.closeOverview(); // Ejecuta llamada o método
+            } else if (e.key === "f" || e.key === "F") {
+                e.preventDefault();
+                this.toggleFullscreen();
+            } else if (e.key === "Escape") {
+                this.closeOverview();
             }
         });
 
         // Botones de copiar código
-        document.querySelectorAll(".btn-copy-code").forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                const targetId = btn.getAttribute("data-target"); // Declara e inicializa "targetId"
-                const codeEl = document.getElementById(targetId); // Obtiene referencia DOM para "codeEl"
-                if (codeEl) { // Evalúa condición
+        document.querySelectorAll(".btn-copy-code").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const targetId = btn.getAttribute("data-target");
+                const codeEl = document.getElementById(targetId);
+                if (codeEl) {
                     navigator.clipboard.writeText(codeEl.textContent.trim()).then(() => { // Actualiza contenido en el DOM
-                        SoundEffects.click(); // Ejecuta llamada o método
-                        this.showToast("Código copiado al portapapeles"); // Ejecuta llamada o método
+                        SoundEffects.click();
+                        this.showToast("Código copiado al portapapeles");
                     });
                 }
             });
@@ -641,29 +641,29 @@ class AppController { // Define clase
         // ----------------------------------------------------------------------
 
         // Slide 2: Probar Expresión en Vivo
-        const btnTestTernaryIntro = document.getElementById("btnTestTernaryIntro"); // Obtiene referencia DOM para "btnTestTernaryIntro"
-        const statusTernaryIntro = document.getElementById("testTernaryIntroStatus"); // Obtiene referencia DOM para "statusTernaryIntro"
-        const consoleOutput1 = document.getElementById("console-output-1"); // Obtiene referencia DOM para "consoleOutput1"
-        if (btnTestTernaryIntro && consoleOutput1) { // Evalúa condición
-            btnTestTernaryIntro.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                if (statusTernaryIntro) statusTernaryIntro.textContent = "Evaluado con éxito"; // Evalúa condición
+        const btnTestTernaryIntro = document.getElementById("btnTestTernaryIntro");
+        const statusTernaryIntro = document.getElementById("testTernaryIntroStatus");
+        const consoleOutput1 = document.getElementById("console-output-1");
+        if (btnTestTernaryIntro && consoleOutput1) {
+            btnTestTernaryIntro.addEventListener("click", () => {
+                SoundEffects.success();
+                if (statusTernaryIntro) statusTernaryIntro.textContent = "Evaluado con éxito";
                 consoleOutput1.innerHTML = `
                     <div class="term-line" style="color: var(--cyan);">&gt; const edad = 20;</div>
                     <div class="term-line" style="color: var(--cyan);">&gt; const estado = edad &gt;= 18 ? "Adulto" : "Menor de edad";</div>
                     <div class="term-line" style="color: var(--emerald);">&gt; estado ➔ "Adulto" (Asignación inmutable limpia)</div>
                 `;
-                this.showToast("Expresión ternaria evaluada"); // Ejecuta llamada o método
+                this.showToast("Expresión ternaria evaluada");
             });
         }
 
         // Slide 3: Probar valores Truthy / Falsy
-        const btnCheckTruthy = document.getElementById("btnCheckTruthy"); // Obtiene referencia DOM para "btnCheckTruthy"
-        const truthyResult = document.getElementById("truthyResult"); // Obtiene referencia DOM para "truthyResult"
-        if (btnCheckTruthy && truthyResult) { // Evalúa condición
-            btnCheckTruthy.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                const evalua = v => v ? "Truthy ✅" : "Falsy ❌"; // Define función flecha "evalua"
+        const btnCheckTruthy = document.getElementById("btnCheckTruthy");
+        const truthyResult = document.getElementById("truthyResult");
+        if (btnCheckTruthy && truthyResult) {
+            btnCheckTruthy.addEventListener("click", () => {
+                SoundEffects.success();
+                const evalua = v => v ? "Truthy ✅" : "Falsy ❌";
                 truthyResult.innerHTML = `
                     <code>0 ➔ ${evalua(0)}</code> | 
                     <code>"" ➔ ${evalua("")}</code> | 
@@ -677,46 +677,46 @@ class AppController { // Define clase
         }
 
         // Slide 4: Comparador de Escenarios if/else vs Ternario
-        const scenarioBtns = document.querySelectorAll("[data-scenario]"); // Obtiene referencia DOM para "scenarioBtns"
-        scenarioBtns.forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                scenarioBtns.forEach(b => b.classList.remove("active")); // Modifica clases CSS del elemento
-                btn.classList.add("active"); // Modifica clases CSS del elemento
-                AppState.activeScenario = btn.getAttribute("data-scenario"); // Asigna valor
-                SoundEffects.click(); // Ejecuta llamada o método
+        const scenarioBtns = document.querySelectorAll("[data-scenario]");
+        scenarioBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                scenarioBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                AppState.activeScenario = btn.getAttribute("data-scenario");
+                SoundEffects.click();
             });
         });
 
-        const btnCompareTernaryModes = document.getElementById("btnCompareTernaryModes"); // Obtiene referencia DOM para "btnCompareTernaryModes"
-        if (btnCompareTernaryModes) { // Evalúa condición
-            btnCompareTernaryModes.addEventListener("click", () => { // Registra escuchador de eventos
-                this.runScenarioSimulation(AppState.activeScenario); // Ejecuta llamada o método
+        const btnCompareTernaryModes = document.getElementById("btnCompareTernaryModes");
+        if (btnCompareTernaryModes) {
+            btnCompareTernaryModes.addEventListener("click", () => {
+                this.runScenarioSimulation(AppState.activeScenario);
             });
         }
 
         // Slide 5: Pestañas de Precedencia y Flujo
-        const precedenceTabs = document.querySelectorAll("[data-flow]"); // Obtiene referencia DOM para "precedenceTabs"
-        precedenceTabs.forEach(tab => { // Instrucción JavaScript
-            tab.addEventListener("click", () => { // Registra escuchador de eventos
-                precedenceTabs.forEach(t => t.classList.remove("active")); // Modifica clases CSS del elemento
-                tab.classList.add("active"); // Modifica clases CSS del elemento
-                const viewId = `flow-view-${tab.getAttribute("data-flow")}`; // Declara e inicializa "viewId"
-                document.querySelectorAll(".char-detail-view").forEach(v => v.classList.remove("active")); // Modifica clases CSS del elemento
-                const targetView = document.getElementById(viewId); // Obtiene referencia DOM para "targetView"
-                if (targetView) targetView.classList.add("active"); // Evalúa condición
-                SoundEffects.click(); // Ejecuta llamada o método
+        const precedenceTabs = document.querySelectorAll("[data-flow]");
+        precedenceTabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                precedenceTabs.forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                const viewId = `flow-view-${tab.getAttribute("data-flow")}`;
+                document.querySelectorAll(".char-detail-view").forEach(v => v.classList.remove("active"));
+                const targetView = document.getElementById(viewId);
+                if (targetView) targetView.classList.add("active");
+                SoundEffects.click();
             });
         });
 
         // Slide 5: Botón Cortocircuito
-        const btnTestShortCircuit = document.getElementById("btnTestShortCircuit"); // Obtiene referencia DOM para "btnTestShortCircuit"
-        const shortCircuitResult = document.getElementById("shortCircuitResult"); // Obtiene referencia DOM para "shortCircuitResult"
-        if (btnTestShortCircuit && shortCircuitResult) { // Evalúa condición
-            btnTestShortCircuit.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                let funcionFalsaEjecutada = false; // Declara e inicializa "funcionFalsaEjecutada"
-                const fnFalsa = () => { funcionFalsaEjecutada = true; return "Falso"; }; // Define función flecha "fnFalsa"
-                const valor = true ? "Respuesta Verdadera" : fnFalsa(); // Declara e inicializa "valor"
+        const btnTestShortCircuit = document.getElementById("btnTestShortCircuit");
+        const shortCircuitResult = document.getElementById("shortCircuitResult");
+        if (btnTestShortCircuit && shortCircuitResult) {
+            btnTestShortCircuit.addEventListener("click", () => {
+                SoundEffects.success();
+                let funcionFalsaEjecutada = false;
+                const fnFalsa = () => { funcionFalsaEjecutada = true; return "Falso"; };
+                const valor = true ? "Respuesta Verdadera" : fnFalsa();
                 shortCircuitResult.innerHTML = `
                     <code>true ? "Respuesta Verdadera" : fnFalsa(); ➔ "${valor}"</code><br>
                     <span style="color: var(--emerald);">¿Se ejecutó fnFalsa()?: <strong>${funcionFalsaEjecutada}</strong> (Descartada por cortocircuito).</span>
@@ -725,12 +725,12 @@ class AppController { // Define clase
         }
 
         // Slide 5: Botón Precedencia
-        const btnTestPrecedence = document.getElementById("btnTestPrecedence"); // Obtiene referencia DOM para "btnTestPrecedence"
-        const precedenceResult = document.getElementById("precedenceResult"); // Obtiene referencia DOM para "precedenceResult"
-        if (btnTestPrecedence && precedenceResult) { // Evalúa condición
-            btnTestPrecedence.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                const calc = 100 - 20 > 50 ? "Mayor a 50" : "Menor a 50"; // Declara e inicializa "calc"
+        const btnTestPrecedence = document.getElementById("btnTestPrecedence");
+        const precedenceResult = document.getElementById("precedenceResult");
+        if (btnTestPrecedence && precedenceResult) {
+            btnTestPrecedence.addEventListener("click", () => {
+                SoundEffects.success();
+                const calc = 100 - 20 > 50 ? "Mayor a 50" : "Menor a 50";
                 precedenceResult.innerHTML = `
                     <code>100 - 20 &gt; 50 ? "Mayor a 50" : "Menor a 50" ➔ "${calc}"</code><br>
                     <small>1. Se calculó 100 - 20 = 80.<br>2. Se comparó 80 &gt; 50 = true.<br>3. El ternario eligió la primera opción.</small>
@@ -739,12 +739,12 @@ class AppController { // Define clase
         }
 
         // Slide 5: Botón Paréntesis
-        const btnTestParentheses = document.getElementById("btnTestParentheses"); // Obtiene referencia DOM para "btnTestParentheses"
-        const parenthesesResult = document.getElementById("parenthesesResult"); // Obtiene referencia DOM para "parenthesesResult"
-        if (btnTestParentheses && parenthesesResult) { // Evalúa condición
-            btnTestParentheses.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                const credito = (750 > 700 && 4000 > 3000) ? "Aprobado 🏦" : "Rechazado ⚠️"; // Declara e inicializa "credito"
+        const btnTestParentheses = document.getElementById("btnTestParentheses");
+        const parenthesesResult = document.getElementById("parenthesesResult");
+        if (btnTestParentheses && parenthesesResult) {
+            btnTestParentheses.addEventListener("click", () => {
+                SoundEffects.success();
+                const credito = (750 > 700 && 4000 > 3000) ? "Aprobado 🏦" : "Rechazado ⚠️";
                 parenthesesResult.innerHTML = `
                     <code>(750 &gt; 700 &amp;&amp; 4000 &gt; 3000) ? "Aprobado" : "Rechazado" ➔ "${credito}"</code><br>
                     <small style="color: var(--cyan);">Los paréntesis dejan claro dónde termina la condición y empieza el retorno.</small>
@@ -753,12 +753,12 @@ class AppController { // Define clase
         }
 
         // Slide 7: Prueba Flecha con Ternario
-        const btnTestArrowTernary = document.getElementById("btnTestArrowTernary"); // Obtiene referencia DOM para "btnTestArrowTernary"
-        const arrowTernaryResult = document.getElementById("arrowTernaryResult"); // Obtiene referencia DOM para "arrowTernaryResult"
-        if (btnTestArrowTernary && arrowTernaryResult) { // Evalúa condición
-            btnTestArrowTernary.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                const evaluarNota = nota => nota >= 90 ? "Sobresaliente 🌟" : "Estándar 👍"; // Define función flecha "evaluarNota"
+        const btnTestArrowTernary = document.getElementById("btnTestArrowTernary");
+        const arrowTernaryResult = document.getElementById("arrowTernaryResult");
+        if (btnTestArrowTernary && arrowTernaryResult) {
+            btnTestArrowTernary.addEventListener("click", () => {
+                SoundEffects.success();
+                const evaluarNota = nota => nota >= 90 ? "Sobresaliente 🌟" : "Estándar 👍";
                 arrowTernaryResult.innerHTML = `
                     <code>evaluarNota(95) ➔ "${evaluarNota(95)}"</code><br>
                     <code>evaluarNota(75) ➔ "${evaluarNota(75)}"</code><br>
@@ -768,12 +768,12 @@ class AppController { // Define clase
         }
 
         // Slide 7: Prueba Template con Ternario
-        const btnTestTemplateTernary = document.getElementById("btnTestTemplateTernary"); // Obtiene referencia DOM para "btnTestTemplateTernary"
-        const templateTernaryResult = document.getElementById("templateTernaryResult"); // Obtiene referencia DOM para "templateTernaryResult"
-        if (btnTestTemplateTernary && templateTernaryResult) { // Evalúa condición
-            btnTestTemplateTernary.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.success(); // Ejecuta llamada o método
-                const formatear = n => `Tienes ${n} artículo${n === 1 ? "" : "s"} en el pedido`; // Define función flecha "formatear"
+        const btnTestTemplateTernary = document.getElementById("btnTestTemplateTernary");
+        const templateTernaryResult = document.getElementById("templateTernaryResult");
+        if (btnTestTemplateTernary && templateTernaryResult) {
+            btnTestTemplateTernary.addEventListener("click", () => {
+                SoundEffects.success();
+                const formatear = n => `Tienes ${n} artículo${n === 1 ? "" : "s"} en el pedido`;
                 templateTernaryResult.innerHTML = `
                     <code>formatear(1) ➔ "${formatear(1)}"</code><br>
                     <code>formatear(4) ➔ "${formatear(4)}"</code><br>
@@ -783,92 +783,92 @@ class AppController { // Define clase
         }
 
         // Slide 8: Metáfora del Interruptor
-        const switchBtns = document.querySelectorAll("[data-switch]"); // Obtiene referencia DOM para "switchBtns"
-        switchBtns.forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                switchBtns.forEach(b => b.classList.remove("active")); // Modifica clases CSS del elemento
-                btn.classList.add("active"); // Modifica clases CSS del elemento
-                AppState.activeSwitchState = btn.getAttribute("data-switch"); // Asigna valor
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.updateSwitchView(AppState.activeSwitchState); // Ejecuta llamada o método
+        const switchBtns = document.querySelectorAll("[data-switch]");
+        switchBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                switchBtns.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                AppState.activeSwitchState = btn.getAttribute("data-switch");
+                SoundEffects.click();
+                this.updateSwitchView(AppState.activeSwitchState);
             });
         });
 
         // Slide 9: Playground select preset
-        const codePresetSelect = document.getElementById("codePresetSelect"); // Obtiene referencia DOM para "codePresetSelect"
-        if (codePresetSelect) { // Evalúa condición
-            codePresetSelect.addEventListener("change", (e) => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.loadPlaygroundPreset(e.target.value); // Ejecuta llamada o método
+        const codePresetSelect = document.getElementById("codePresetSelect");
+        if (codePresetSelect) {
+            codePresetSelect.addEventListener("change", (e) => {
+                SoundEffects.click();
+                this.loadPlaygroundPreset(e.target.value);
             });
         }
 
         // Slide 9: Botón restaurar preset
-        const btnResetCode = document.getElementById("btnResetCode"); // Obtiene referencia DOM para "btnResetCode"
-        if (btnResetCode) { // Evalúa condición
-            btnResetCode.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                const currentPreset = codePresetSelect ? codePresetSelect.value : "preset-ternary-1"; // Declara e inicializa "currentPreset"
-                this.loadPlaygroundPreset(currentPreset); // Ejecuta llamada o método
-                this.showToast("Código restaurado"); // Ejecuta llamada o método
+        const btnResetCode = document.getElementById("btnResetCode");
+        if (btnResetCode) {
+            btnResetCode.addEventListener("click", () => {
+                SoundEffects.click();
+                const currentPreset = codePresetSelect ? codePresetSelect.value : "preset-ternary-1";
+                this.loadPlaygroundPreset(currentPreset);
+                this.showToast("Código restaurado");
             });
         }
 
         // Slide 9: Botón ejecutar código
-        const btnRunEditorCode = document.getElementById("btnRunEditorCode"); // Obtiene referencia DOM para "btnRunEditorCode"
-        if (btnRunEditorCode) { // Evalúa condición
-            btnRunEditorCode.addEventListener("click", () => { // Registra escuchador de eventos
-                this.runPlaygroundCode(); // Ejecuta llamada o método
+        const btnRunEditorCode = document.getElementById("btnRunEditorCode");
+        if (btnRunEditorCode) {
+            btnRunEditorCode.addEventListener("click", () => {
+                this.runPlaygroundCode();
             });
         }
 
         // Slide 9: Botón limpiar consola
-        const btnClearConsole = document.getElementById("btnClearConsole"); // Obtiene referencia DOM para "btnClearConsole"
-        const logsContainer = document.getElementById("consoleLogsContainer"); // Obtiene referencia DOM para "logsContainer"
-        if (btnClearConsole && logsContainer) { // Evalúa condición
-            btnClearConsole.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
+        const btnClearConsole = document.getElementById("btnClearConsole");
+        const logsContainer = document.getElementById("consoleLogsContainer");
+        if (btnClearConsole && logsContainer) {
+            btnClearConsole.addEventListener("click", () => {
+                SoundEffects.click();
                 logsContainer.innerHTML = '<div class="log-line info-line"><span class="log-time">[Consola lista]</span> Consola limpiada.</div>'; // Actualiza contenido en el DOM
             });
         }
 
         // Slide 10: Botones "Cargar en Playground" de los retos
-        document.querySelectorAll("[data-load-preset]").forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                const presetKey = btn.getAttribute("data-load-preset"); // Declara e inicializa "presetKey"
-                SoundEffects.transition(); // Ejecuta llamada o método
-                this.loadPlaygroundPreset(presetKey); // Ejecuta llamada o método
+        document.querySelectorAll("[data-load-preset]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const presetKey = btn.getAttribute("data-load-preset");
+                SoundEffects.transition();
+                this.loadPlaygroundPreset(presetKey);
                 this.goToSlide(9); // Salta al playground
-                this.showToast("Reto cargado en el Playground"); // Ejecuta llamada o método
+                this.showToast("Reto cargado en el Playground");
             });
         });
 
         // Slide 10: Botones "Ver Solución"
-        document.querySelectorAll("[data-sol]").forEach(btn => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                const solId = btn.getAttribute("data-sol"); // Declara e inicializa "solId"
-                const solBox = document.getElementById(solId); // Obtiene referencia DOM para "solBox"
-                if (solBox) { // Evalúa condición
-                    SoundEffects.click(); // Ejecuta llamada o método
-                    solBox.classList.toggle("active"); // Modifica clases CSS del elemento
+        document.querySelectorAll("[data-sol]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const solId = btn.getAttribute("data-sol");
+                const solBox = document.getElementById(solId);
+                if (solBox) {
+                    SoundEffects.click();
+                    solBox.classList.toggle("active");
                     btn.textContent = solBox.classList.contains("active") ? "Ocultar Solución" : "Ver Solución"; // Actualiza contenido en el DOM
                 }
             });
         });
 
         // Slide 10: Reiniciar presentación
-        const btnRestart = document.getElementById("btnRestartPresentation"); // Obtiene referencia DOM para "btnRestart"
-        if (btnRestart) { // Evalúa condición
-            btnRestart.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.transition(); // Ejecuta llamada o método
-                this.goToSlide(1); // Ejecuta llamada o método
+        const btnRestart = document.getElementById("btnRestartPresentation");
+        if (btnRestart) {
+            btnRestart.addEventListener("click", () => {
+                SoundEffects.transition();
+                this.goToSlide(1);
             });
         }
 
         // Slide 10: Copiar chuleta rápida en markdown
-        const btnCopySummaryCheat = document.getElementById("btnCopySummaryCheat"); // Obtiene referencia DOM para "btnCopySummaryCheat"
-        if (btnCopySummaryCheat) { // Evalúa condición
-            btnCopySummaryCheat.addEventListener("click", () => { // Registra escuchador de eventos
+        const btnCopySummaryCheat = document.getElementById("btnCopySummaryCheat");
+        if (btnCopySummaryCheat) {
+            btnCopySummaryCheat.addEventListener("click", () => {
                 const cheatText = `# GUÍA MAESTRA: EL OPERADOR TERNARIO (? :) EN JAVASCRIPT
 
 1. **Sintaxis y Anatomía:**
@@ -888,24 +888,24 @@ class AppController { // Define clase
    - Envolver condiciones compuestas entre paréntesis (a && b) ? c : d.
    - Evitar 'condicion ? true : false' redundante (usar directamente la condición).
 `;
-                navigator.clipboard.writeText(cheatText).then(() => { // Instrucción JavaScript
-                    SoundEffects.success(); // Ejecuta llamada o método
-                    this.showToast("Chuleta Markdown copiada al portapapeles"); // Ejecuta llamada o método
+                navigator.clipboard.writeText(cheatText).then(() => {
+                    SoundEffects.success();
+                    this.showToast("Chuleta Markdown copiada al portapapeles");
                 });
             });
         }
     }
 
     // Ejecuta la simulación comparativa de escenarios para Slide 4
-    static runScenarioSimulation(scenarioKey) { // Instrucción JavaScript
-        const terminalIfElse = document.getElementById("terminalIfElse"); // Obtiene referencia DOM para "terminalIfElse"
-        const terminalTernary = document.getElementById("terminalTernary"); // Obtiene referencia DOM para "terminalTernary"
-        const feedbackText = document.getElementById("ternaryFeedbackText"); // Obtiene referencia DOM para "feedbackText"
-        if (!terminalIfElse || !terminalTernary) return; // Evalúa condición
+    static runScenarioSimulation(scenarioKey) {
+        const terminalIfElse = document.getElementById("terminalIfElse");
+        const terminalTernary = document.getElementById("terminalTernary");
+        const feedbackText = document.getElementById("ternaryFeedbackText");
+        if (!terminalIfElse || !terminalTernary) return;
 
-        SoundEffects.transition(); // Ejecuta llamada o método
+        SoundEffects.transition();
 
-        if (scenarioKey === "tarifa") { // Evalúa condición
+        if (scenarioKey === "tarifa") {
             terminalIfElse.innerHTML = `
                 <div class="term-line" style="color: var(--amber);">&gt; let tarifa;</div>
                 <div class="term-line" style="color: var(--amber);">&gt; if (esSocio) {</div>
@@ -918,8 +918,8 @@ class AppController { // Define clase
                 <div class="term-line" style="color: var(--emerald);">&gt; const tarifa = esSocio ? "$2.00" : "$10.00";</div>
                 <div class="term-line" style="color: var(--cyan);">&gt; // 1 sola línea + inmutable con const ✅</div>
             `;
-            if (feedbackText) feedbackText.innerHTML = "<strong>Tarifa:</strong> El operador ternario condensa la evaluación y garantiza inmutabilidad con <code>const</code>."; // Evalúa condición
-        } else if (scenarioKey === "descuento") { // Instrucción JavaScript
+            if (feedbackText) feedbackText.innerHTML = "<strong>Tarifa:</strong> El operador ternario condensa la evaluación y garantiza inmutabilidad con <code>const</code>.";
+        } else if (scenarioKey === "descuento") {
             terminalIfElse.innerHTML = `
                 <div class="term-line" style="color: var(--amber);">&gt; let desc;</div>
                 <div class="term-line" style="color: var(--amber);">&gt; if (total &gt; 100) { desc = 0.20; } else { desc = 0.05; }</div>
@@ -928,8 +928,8 @@ class AppController { // Define clase
                 <div class="term-line" style="color: var(--emerald);">&gt; const descuento = total &gt; 100 ? 0.20 : 0.05;</div>
                 <div class="term-line" style="color: var(--cyan);">&gt; totalConDesc = total * (1 - descuento);</div>
             `;
-            if (feedbackText) feedbackText.innerHTML = "<strong>Descuento por Volumen:</strong> Cálculo directo sin estados intermedios mutables."; // Evalúa condición
-        } else if (scenarioKey === "autenticacion") { // Instrucción JavaScript
+            if (feedbackText) feedbackText.innerHTML = "<strong>Descuento por Volumen:</strong> Cálculo directo sin estados intermedios mutables.";
+        } else if (scenarioKey === "autenticacion") {
             terminalIfElse.innerHTML = `
                 <div class="term-line" style="color: var(--amber);">&gt; let ruta;</div>
                 <div class="term-line" style="color: var(--amber);">&gt; if (autenticado) { ruta = "/dashboard"; } else { ruta = "/login"; }</div>
@@ -937,8 +937,8 @@ class AppController { // Define clase
             terminalTernary.innerHTML = `
                 <div class="term-line" style="color: var(--emerald);">&gt; const destino = autenticado ? "/dashboard" : "/login";</div>
             `;
-            if (feedbackText) feedbackText.innerHTML = "<strong>Autenticación:</strong> Muy común en routers modernos de React y Next.js."; // Evalúa condición
-        } else if (scenarioKey === "tema") { // Instrucción JavaScript
+            if (feedbackText) feedbackText.innerHTML = "<strong>Autenticación:</strong> Muy común en routers modernos de React y Next.js.";
+        } else if (scenarioKey === "tema") {
             terminalIfElse.innerHTML = `
                 <div class="term-line" style="color: var(--amber);">&gt; let claseTema;</div>
                 <div class="term-line" style="color: var(--amber);">&gt; if (esModoNoche) { claseTema = "dark"; } else { claseTema = "light"; }</div>
@@ -946,61 +946,61 @@ class AppController { // Define clase
             terminalTernary.innerHTML = `
                 <div class="term-line" style="color: var(--emerald);">&gt; const claseTema = esModoNoche ? "dark" : "light";</div>
             `;
-            if (feedbackText) feedbackText.innerHTML = "<strong>Tema Visual:</strong> Asignación directa e inmediata para atributos HTML o clases CSS."; // Evalúa condición
+            if (feedbackText) feedbackText.innerHTML = "<strong>Tema Visual:</strong> Asignación directa e inmediata para atributos HTML o clases CSS.";
         }
     }
 
     // Actualiza la visualización de la analogía del interruptor en el Slide 8
-    static updateSwitchView(switchState) { // Instrucción JavaScript
-        const titleRight = document.getElementById("switchTitleRight"); // Obtiene referencia DOM para "titleRight"
-        const subRight = document.getElementById("switchSubRight"); // Obtiene referencia DOM para "subRight"
-        const avatarRight = document.getElementById("switchAvatarRight"); // Obtiene referencia DOM para "avatarRight"
-        const itemsRight = document.getElementById("switchItemsRight"); // Obtiene referencia DOM para "itemsRight"
-        const statusRight = document.getElementById("switchStatusRight"); // Obtiene referencia DOM para "statusRight"
-        const bannerText = document.getElementById("switchBannerText"); // Obtiene referencia DOM para "bannerText"
-        const bannerIcon = document.getElementById("switchBannerIcon"); // Obtiene referencia DOM para "bannerIcon"
+    static updateSwitchView(switchState) {
+        const titleRight = document.getElementById("switchTitleRight");
+        const subRight = document.getElementById("switchSubRight");
+        const avatarRight = document.getElementById("switchAvatarRight");
+        const itemsRight = document.getElementById("switchItemsRight");
+        const statusRight = document.getElementById("switchStatusRight");
+        const bannerText = document.getElementById("switchBannerText");
+        const bannerIcon = document.getElementById("switchBannerIcon");
 
-        const itemsLeft = document.getElementById("switchItemsLeft"); // Obtiene referencia DOM para "itemsLeft"
-        const statusLeft = document.getElementById("switchStatusLeft"); // Obtiene referencia DOM para "statusLeft"
+        const itemsLeft = document.getElementById("switchItemsLeft");
+        const statusLeft = document.getElementById("switchStatusLeft");
 
-        if (switchState === "on") { // Evalúa condición
+        if (switchState === "on") {
             if (itemsLeft) itemsLeft.innerHTML = `
                 <div class="ws-item">El interruptor se presiona hacia arriba</div>
                 <div class="ws-item">condicion = true</div>
             `;
-            if (statusLeft) statusLeft.textContent = "El circuito eléctrico queda cerrado"; // Evalúa condición
+            if (statusLeft) statusLeft.textContent = "El circuito eléctrico queda cerrado";
 
-            if (avatarRight) avatarRight.textContent = "💡"; // Evalúa condición
-            if (titleRight) titleRight.textContent = "Bombilla Encendida"; // Evalúa condición
-            if (subRight) subRight.textContent = "Expresión 1 Retornada"; // Evalúa condición
+            if (avatarRight) avatarRight.textContent = "💡";
+            if (titleRight) titleRight.textContent = "Bombilla Encendida";
+            if (subRight) subRight.textContent = "Expresión 1 Retornada";
             if (itemsRight) itemsRight.innerHTML = `
                 <div class="ws-item highlight-item">La bombilla ilumina la habitación al 100%</div>
                 <div class="ws-item highlight-item">Retorno inmediato: "Luz Encendida"</div>
             `;
-            if (statusRight) statusRight.textContent = "Bifurcación resuelta: la rama falsa se descarta"; // Evalúa condición
+            if (statusRight) statusRight.textContent = "Bifurcación resuelta: la rama falsa se descarta";
 
-            if (bannerIcon) bannerIcon.textContent = "💡"; // Evalúa condición
-            if (bannerText) { // Evalúa condición
+            if (bannerIcon) bannerIcon.textContent = "💡";
+            if (bannerText) {
                 bannerText.innerHTML = "<strong>Interruptor ARRIBA (true):</strong> Se evalúa y devuelve únicamente la primera expresión ('Luz Encendida')."; // Actualiza contenido en el DOM
             }
-        } else { // Instrucción JavaScript
+        } else {
             if (itemsLeft) itemsLeft.innerHTML = `
                 <div class="ws-item">El interruptor se presiona hacia abajo</div>
                 <div class="ws-item">condicion = false</div>
             `;
-            if (statusLeft) statusLeft.textContent = "El circuito eléctrico queda abierto"; // Evalúa condición
+            if (statusLeft) statusLeft.textContent = "El circuito eléctrico queda abierto";
 
-            if (avatarRight) avatarRight.textContent = "🌑"; // Evalúa condición
-            if (titleRight) titleRight.textContent = "Habitación a Oscuras"; // Evalúa condición
-            if (subRight) subRight.textContent = "Expresión 2 Retornada"; // Evalúa condición
+            if (avatarRight) avatarRight.textContent = "🌑";
+            if (titleRight) titleRight.textContent = "Habitación a Oscuras";
+            if (subRight) subRight.textContent = "Expresión 2 Retornada";
             if (itemsRight) itemsRight.innerHTML = `
                 <div class="ws-item highlight-item">No hay corriente, bombilla apagada</div>
                 <div class="ws-item highlight-item">Retorno inmediato: "Luz Apagada"</div>
             `;
-            if (statusRight) statusRight.textContent = "Bifurcación resuelta: la rama verdadera se descarta"; // Evalúa condición
+            if (statusRight) statusRight.textContent = "Bifurcación resuelta: la rama verdadera se descarta";
 
-            if (bannerIcon) bannerIcon.textContent = "🌑"; // Evalúa condición
-            if (bannerText) { // Evalúa condición
+            if (bannerIcon) bannerIcon.textContent = "🌑";
+            if (bannerText) {
                 bannerText.innerHTML = "<strong>Interruptor ABAJO (false):</strong> Se evalúa y devuelve únicamente la segunda expresión ('Luz Apagada')."; // Actualiza contenido en el DOM
             }
         }
@@ -1008,6 +1008,6 @@ class AppController { // Define clase
 }
 
 // Inicializamos la aplicación interactiva cuando el DOM esté completamente cargado
-document.addEventListener("DOMContentLoaded", () => { // Registra escuchador de eventos
-    AppController.init(); // Ejecuta llamada o método
+document.addEventListener("DOMContentLoaded", () => {
+    AppController.init();
 });

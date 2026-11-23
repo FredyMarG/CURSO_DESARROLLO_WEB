@@ -5,19 +5,19 @@
 
 "use strict"; // Activa el modo estricto de JavaScript
 
-const liveConsole = document.getElementById("live-console"); // Obtiene referencia DOM para "liveConsole"
+const liveConsole = document.getElementById("live-console");
 
 /**
  * Registra un mensaje tanto en el panel visual del DOM como en la consola real del navegador.
  */
-function registrar(mensaje, tipo = "normal") { // Declara función
-    const linea = document.createElement("div"); // Crea nuevo elemento DOM "linea"
-    linea.className = `log-line ${tipo}`; // Asigna valor
+function registrar(mensaje, tipo = "normal") {
+    const linea = document.createElement("div");
+    linea.className = `log-line ${tipo}`;
     linea.textContent = `> ${mensaje}`; // Actualiza contenido en el DOM
-    liveConsole.append(linea); // Inserta nodo en el DOM
-    liveConsole.scrollTop = liveConsole.scrollHeight; // Asigna valor
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
 
-    if (tipo === "err") console.error(mensaje); // Evalúa condición
+    if (tipo === "err") console.error(mensaje);
     else if (tipo === "warn") console.warn(mensaje); // Evalúa condición alternativa
     else console.log(mensaje); // Rama alternativa
 }
@@ -25,7 +25,7 @@ function registrar(mensaje, tipo = "normal") { // Declara función
 console.log("%c--- LABORATORIO INTERACTIVO: VARIABLES ---", "color: #3b82f6; font-weight: bold;"); // Imprime salida en consola
 
 // 1. Inspector de typeof y comprobaciones seguras
-const muestras = { // Declara e inicializa "muestras"
+const muestras = {
     string: { valor: "Hola JS", etiqueta: '"Hola JS"' },
     number: { valor: 42, etiqueta: "42" },
     bigint: { valor: 9007199254740995n, etiqueta: "9007199254740995n" },
@@ -37,96 +37,96 @@ const muestras = { // Declara e inicializa "muestras"
     symbol: { valor: Symbol("id"), etiqueta: 'Symbol("id")' }
 };
 
-document.getElementById("btn-inspeccionar").addEventListener("click", () => { // Registra escuchador de eventos
-    const clave = document.getElementById("preset-tipo").value; // Obtiene referencia DOM para "clave"
-    const { valor, etiqueta } = muestras[clave]; // Declara e inicializa "variable"
-    const tipo = typeof valor; // Declara e inicializa "tipo"
+document.getElementById("btn-inspeccionar").addEventListener("click", () => {
+    const clave = document.getElementById("preset-tipo").value;
+    const { valor, etiqueta } = muestras[clave];
+    const tipo = typeof valor;
 
-    let notaExtra = "Comportamiento estándar."; // Declara e inicializa "notaExtra"
-    if (valor === null) notaExtra = "⚠️ typeof null devuelve 'object' por un bug histórico de 1995. Valida con valor === null."; // Evalúa condición
+    let notaExtra = "Comportamiento estándar.";
+    if (valor === null) notaExtra = "⚠️ typeof null devuelve 'object' por un bug histórico de 1995. Valida con valor === null.";
     else if (Array.isArray(valor)) notaExtra = "⚠️ typeof [] devuelve 'object'. Valida siempre con Array.isArray(valor)."; // Evalúa condición alternativa
     else if (Number.isNaN(valor)) notaExtra = "⚠️ typeof NaN devuelve 'number'. Valida con Number.isNaN(valor)."; // Evalúa condición alternativa
 
-    const salida = `Valor: ${etiqueta}\ntypeof: "${tipo}"\nArray.isArray: ${Array.isArray(valor)}\nNumber.isNaN: ${Number.isNaN(valor)}\n\n${notaExtra}`; // Declara e inicializa "salida"
+    const salida = `Valor: ${etiqueta}\ntypeof: "${tipo}"\nArray.isArray: ${Array.isArray(valor)}\nNumber.isNaN: ${Number.isNaN(valor)}\n\n${notaExtra}`;
     document.getElementById("out-tipo").textContent = salida; // Actualiza contenido en el DOM
-    registrar(`typeof ${etiqueta} -> "${tipo}"`, tipo === "object" ? "warn" : "ok"); // Ejecuta llamada o método
+    registrar(`typeof ${etiqueta} -> "${tipo}"`, tipo === "object" ? "warn" : "ok");
 });
 
 // 2. Conversión segura de inputs del DOM
-document.getElementById("btn-calcular").addEventListener("click", () => { // Registra escuchador de eventos
-    const nombre = document.getElementById("input-nombre").value.trim() || "Estudiante"; // Obtiene referencia DOM para "nombre"
-    const entrada = document.getElementById("input-numero").value.trim(); // Obtiene referencia DOM para "entrada"
-    const out = document.getElementById("out-calculo"); // Obtiene referencia DOM para "out"
+document.getElementById("btn-calcular").addEventListener("click", () => {
+    const nombre = document.getElementById("input-nombre").value.trim() || "Estudiante";
+    const entrada = document.getElementById("input-numero").value.trim();
+    const out = document.getElementById("out-calculo");
 
-    if (entrada === "") { // Evalúa condición
+    if (entrada === "") {
         out.textContent = "❌ Por favor ingresa un número."; // Actualiza contenido en el DOM
-        registrar("Entrada vacía al calcular cuadrado.", "err"); // Ejecuta llamada o método
-        return; // Retorna resultado
+        registrar("Entrada vacía al calcular cuadrado.", "err");
+        return;
     }
 
-    const numero = Number(entrada); // Declara e inicializa "numero"
-    if (Number.isNaN(numero) || !Number.isFinite(numero)) { // Evalúa condición
+    const numero = Number(entrada);
+    if (Number.isNaN(numero) || !Number.isFinite(numero)) {
         out.textContent = `❌ "${entrada}" es de tipo string y no se pudo convertir a un número válido.`; // Actualiza contenido en el DOM
-        registrar(`Conversión fallida para "${entrada}"`, "err"); // Ejecuta llamada o método
-        return; // Retorna resultado
+        registrar(`Conversión fallida para "${entrada}"`, "err");
+        return;
     }
 
-    const resultado = numero ** 2; // Declara e inicializa "resultado"
+    const resultado = numero ** 2;
     out.textContent = `Hola ${nombre} 👋\nEntrada original: "${entrada}" (string)\nConvertido: ${numero} (number)\nResultado (${numero}²): ${resultado}`; // Actualiza contenido en el DOM
-    registrar(`Hola ${nombre}: ${numero}² = ${resultado}`, "ok"); // Ejecuta llamada o método
+    registrar(`Hola ${nombre}: ${numero}² = ${resultado}`, "ok");
 });
 
 // 3. Scope de Bloque y TDZ
-document.getElementById("btn-scope-block").addEventListener("click", () => { // Registra escuchador de eventos
-    let mensaje = ""; // Declara e inicializa "mensaje"
-    if (true) { // Evalúa condición
-        var filtrada = "Soy var (me escapo del bloque if)"; // Declara e inicializa "filtrada"
-        let privada = "Soy let (solo vivo dentro del if)"; // Declara e inicializa "privada"
-        mensaje += `Dentro del bloque:\n  var filtrada = "${filtrada}"\n  let privada = "${privada}"\n\n`; // Instrucción JavaScript
+document.getElementById("btn-scope-block").addEventListener("click", () => {
+    let mensaje = "";
+    if (true) {
+        var filtrada = "Soy var (me escapo del bloque if)";
+        let privada = "Soy let (solo vivo dentro del if)";
+        mensaje += `Dentro del bloque:\n  var filtrada = "${filtrada}"\n  let privada = "${privada}"\n\n`;
     }
-    mensaje += `Fuera del bloque:\n  filtrada -> "${filtrada}" (✅ accesible)\n  privada -> ReferenceError (❌ protegida por scope de bloque)`; // Instrucción JavaScript
+    mensaje += `Fuera del bloque:\n  filtrada -> "${filtrada}" (✅ accesible)\n  privada -> ReferenceError (❌ protegida por scope de bloque)`;
     document.getElementById("out-scope").textContent = mensaje; // Actualiza contenido en el DOM
-    registrar("Scope comprobado: 'var' se filtró fuera del bloque if; 'let' quedó encapsulada.", "warn"); // Ejecuta llamada o método
+    registrar("Scope comprobado: 'var' se filtró fuera del bloque if; 'let' quedó encapsulada.", "warn");
 });
 
-document.getElementById("btn-tdz").addEventListener("click", () => { // Registra escuchador de eventos
+document.getElementById("btn-tdz").addEventListener("click", () => {
     try { // Inicia bloque protegido contra errores
         // Simulamos la lectura antes de inicializar dentro de un bloque aislado
-        (() => { // Instrucción JavaScript
+        (() => {
             // @ts-ignore - demostración intencional de TDZ
             console.log(temporal); // Imprime salida en consola
-            let temporal = 100; // Declara e inicializa "temporal"
-        })(); // Ejecuta llamada o método
-    } catch (error) { // Instrucción JavaScript
+            let temporal = 100;
+        })();
+    } catch (error) {
         document.getElementById("out-scope").textContent =
-            `TDZ activada al leer 'let temporal' antes de su declaración:\n${error.name}: ${error.message}`; // Instrucción JavaScript
-        registrar(`TDZ capturada: ${error.name} - ${error.message}`, "err"); // Ejecuta llamada o método
+            `TDZ activada al leer 'let temporal' antes de su declaración:\n${error.name}: ${error.message}`;
+        registrar(`TDZ capturada: ${error.name} - ${error.message}`, "err");
     }
 });
 
 // 4. Valor vs Referencia
-document.getElementById("btn-ref-compartida").addEventListener("click", () => { // Registra escuchador de eventos
-    const original = { nombre: "Ana", rol: "Junior" }; // Declara e inicializa "original"
+document.getElementById("btn-ref-compartida").addEventListener("click", () => {
+    const original = { nombre: "Ana", rol: "Junior" };
     const copiaPorReferencia = original; // Apuntan al mismo objeto
-    copiaPorReferencia.rol = "Senior"; // Asigna valor
+    copiaPorReferencia.rol = "Senior";
 
     document.getElementById("out-ref").textContent =
-        `Al usar '=' ambos apuntan al mismo objeto:\noriginal.rol = "${original.rol}" ⚠️ (cambió también)\ncopia.rol = "${copiaPorReferencia.rol}"`; // Instrucción JavaScript
-    registrar("Referencia compartida: mutar la copia afectó al objeto original.", "warn"); // Ejecuta llamada o método
+        `Al usar '=' ambos apuntan al mismo objeto:\noriginal.rol = "${original.rol}" ⚠️ (cambió también)\ncopia.rol = "${copiaPorReferencia.rol}"`;
+    registrar("Referencia compartida: mutar la copia afectó al objeto original.", "warn");
 });
 
-document.getElementById("btn-ref-clon").addEventListener("click", () => { // Registra escuchador de eventos
-    const original = { nombre: "Ana", rol: "Junior" }; // Declara e inicializa "original"
-    const clonReal = structuredClone(original); // Declara e inicializa "clonReal"
-    clonReal.rol = "Senior"; // Asigna valor
+document.getElementById("btn-ref-clon").addEventListener("click", () => {
+    const original = { nombre: "Ana", rol: "Junior" };
+    const clonReal = structuredClone(original);
+    clonReal.rol = "Senior";
 
     document.getElementById("out-ref").textContent =
-        `Al usar structuredClone():\noriginal.rol = "${original.rol}" ✅ (intacto)\nclonReal.rol = "${clonReal.rol}"`; // Instrucción JavaScript
-    registrar("structuredClone(): copia independiente sin mutar el original.", "ok"); // Ejecuta llamada o método
+        `Al usar structuredClone():\noriginal.rol = "${original.rol}" ✅ (intacto)\nclonReal.rol = "${clonReal.rol}"`;
+    registrar("structuredClone(): copia independiente sin mutar el original.", "ok");
 });
 
-document.getElementById("btn-limpiar-log").addEventListener("click", () => { // Registra escuchador de eventos
-    liveConsole.replaceChildren(); // Ejecuta llamada o método
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
 });
 
-registrar("Laboratorio de Variables listo. Interactúa con las tarjetas.", "ok"); // Ejecuta llamada o método
+registrar("Laboratorio de Variables listo. Interactúa con las tarjetas.", "ok");

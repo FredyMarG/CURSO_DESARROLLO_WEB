@@ -6,12 +6,12 @@
  * Documentación pedagógica LÍNEA POR LÍNEA en español
  * ============================================================================
  */
-(function () { // Instrucción JavaScript
+(function () {
     // Activamos el modo estricto para evitar errores silenciosos y variables globales accidentales
     'use strict'; // Activa el modo estricto de JavaScript
 
     // Estado centralizado de la presentación
-    const AppState = { // Declara e inicializa "AppState"
+    const AppState = {
         currentSlide: 1,
         totalSlides: document.querySelectorAll('.slide').length,
         viewMode: 'slides',
@@ -20,146 +20,146 @@
     };
 
     // Referencias principales de navegación
-    const slides = Array.from(document.querySelectorAll('.slide')); // Obtiene referencia DOM para "slides"
-    const progressBar = document.getElementById('progressBar'); // Obtiene referencia DOM para "progressBar"
-    const slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia DOM para "slideIndicator"
-    const btnPrev = document.getElementById('btnPrev'); // Obtiene referencia DOM para "btnPrev"
-    const btnNext = document.getElementById('btnNext'); // Obtiene referencia DOM para "btnNext"
-    const btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia DOM para "btnToggleMode"
-    const modeIcon = document.getElementById('modeIcon'); // Obtiene referencia DOM para "modeIcon"
-    const modeText = document.getElementById('modeText'); // Obtiene referencia DOM para "modeText"
-    const btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia DOM para "btnToggleSound"
-    const soundIcon = document.getElementById('soundIcon'); // Obtiene referencia DOM para "soundIcon"
-    const btnOverview = document.getElementById('btnOverview'); // Obtiene referencia DOM para "btnOverview"
-    const btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia DOM para "btnCloseOverview"
-    const overviewModal = document.getElementById('overviewModal'); // Obtiene referencia DOM para "overviewModal"
-    const overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia DOM para "overviewGrid"
-    const btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia DOM para "btnFullscreen"
-    const btnGoLab = document.getElementById('btnGoLab'); // Obtiene referencia DOM para "btnGoLab"
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const progressBar = document.getElementById('progressBar');
+    const slideIndicator = document.getElementById('slideIndicator');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnToggleMode = document.getElementById('btnToggleMode');
+    const modeIcon = document.getElementById('modeIcon');
+    const modeText = document.getElementById('modeText');
+    const btnToggleSound = document.getElementById('btnToggleSound');
+    const soundIcon = document.getElementById('soundIcon');
+    const btnOverview = document.getElementById('btnOverview');
+    const btnCloseOverview = document.getElementById('btnCloseOverview');
+    const overviewModal = document.getElementById('overviewModal');
+    const overviewGrid = document.getElementById('overviewGrid');
+    const btnFullscreen = document.getElementById('btnFullscreen');
+    const btnGoLab = document.getElementById('btnGoLab');
 
     // Sintetizador procedural ligero con Web Audio API
-    const SoundFX = { // Declara e inicializa "SoundFX"
+    const SoundFX = {
         ctx: null,
-        beep(f1, f2, dur) { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            const AudioCtx = window.AudioContext || window.webkitAudioContext; // Declara e inicializa "AudioCtx"
-            if (!AudioCtx) return; // Evalúa condición
-            if (!this.ctx) this.ctx = new AudioCtx(); // Evalúa condición
-            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición
+        beep(f1, f2, dur) {
+            if (!AppState.soundEnabled) return;
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!AudioCtx) return;
+            if (!this.ctx) this.ctx = new AudioCtx();
+            if (this.ctx.state === 'suspended') this.ctx.resume();
 
-            const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
-            const gain = this.ctx.createGain(); // Declara e inicializa "gain"
-            const now = this.ctx.currentTime; // Declara e inicializa "now"
-            osc.type = 'sine'; // Asigna valor
-            osc.frequency.setValueAtTime(f1, now); // Ejecuta llamada o método
-            osc.frequency.exponentialRampToValueAtTime(f2, now + dur); // Ejecuta llamada o método
-            gain.gain.setValueAtTime(0.05, now); // Ejecuta llamada o método
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur); // Ejecuta llamada o método
-            osc.connect(gain); // Ejecuta llamada o método
-            gain.connect(this.ctx.destination); // Ejecuta llamada o método
-            osc.start(now); // Ejecuta llamada o método
-            osc.stop(now + dur); // Ejecuta llamada o método
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            const now = this.ctx.currentTime;
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(f1, now);
+            osc.frequency.exponentialRampToValueAtTime(f2, now + dur);
+            gain.gain.setValueAtTime(0.05, now);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + dur);
         }
     };
 
     // Navega a la diapositiva n y actualiza la interfaz
-    function goToSlide(n) { // Declara función
-        if (n < 1) n = 1; // Evalúa condición
-        if (n > AppState.totalSlides) n = AppState.totalSlides; // Evalúa condición
-        AppState.currentSlide = n; // Asigna valor
+    function goToSlide(n) {
+        if (n < 1) n = 1;
+        if (n > AppState.totalSlides) n = AppState.totalSlides;
+        AppState.currentSlide = n;
 
-        slides.forEach((s, idx) => s.classList.toggle('active', idx + 1 === n)); // Modifica clases CSS del elemento
-        if (progressBar) progressBar.style.width = `${(n / AppState.totalSlides) * 100}%`; // Evalúa condición
-        if (slideIndicator) slideIndicator.textContent = `${n} / ${AppState.totalSlides}`; // Evalúa condición
-        if (btnPrev) btnPrev.disabled = n === 1; // Evalúa condición
-        if (btnNext) btnNext.disabled = n === AppState.totalSlides; // Evalúa condición
+        slides.forEach((s, idx) => s.classList.toggle('active', idx + 1 === n));
+        if (progressBar) progressBar.style.width = `${(n / AppState.totalSlides) * 100}%`;
+        if (slideIndicator) slideIndicator.textContent = `${n} / ${AppState.totalSlides}`;
+        if (btnPrev) btnPrev.disabled = n === 1;
+        if (btnNext) btnNext.disabled = n === AppState.totalSlides;
 
-        if (overviewGrid) { // Evalúa condición
-            overviewGrid.querySelectorAll('.overview-card').forEach((card, idx) => { // Instrucción JavaScript
-                card.classList.toggle('active', idx + 1 === n); // Modifica clases CSS del elemento
+        if (overviewGrid) {
+            overviewGrid.querySelectorAll('.overview-card').forEach((card, idx) => {
+                card.classList.toggle('active', idx + 1 === n);
             });
         }
 
-        SoundFX.beep(320, 480, 0.12); // Ejecuta llamada o método
-        if (AppState.viewMode === 'slides') window.scrollTo({ top: 0, behavior: 'smooth' }); // Evalúa condición
+        SoundFX.beep(320, 480, 0.12);
+        if (AppState.viewMode === 'slides') window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Construye dinámicamente la cuadrícula de índice rápido
-    if (overviewGrid) { // Evalúa condición
-        slides.forEach((s, idx) => { // Instrucción JavaScript
-            const card = document.createElement('button'); // Crea nuevo elemento DOM "card"
-            card.type = 'button'; // Asigna valor
-            card.className = 'overview-card'; // Asigna valor
-            const title = s.dataset.title || `Diapositiva ${idx + 1}`; // Declara e inicializa "title"
+    if (overviewGrid) {
+        slides.forEach((s, idx) => {
+            const card = document.createElement('button');
+            card.type = 'button';
+            card.className = 'overview-card';
+            const title = s.dataset.title || `Diapositiva ${idx + 1}`;
             card.innerHTML = `<span class="overview-num">SLIDE ${idx + 1}</span><strong>${title}</strong>`; // Actualiza contenido en el DOM
-            card.addEventListener('click', () => { // Registra escuchador de eventos
-                if (AppState.viewMode === 'guide') toggleMode(); // Evalúa condición
-                goToSlide(idx + 1); // Ejecuta llamada o método
-                overviewModal.classList.remove('open'); // Modifica clases CSS del elemento
+            card.addEventListener('click', () => {
+                if (AppState.viewMode === 'guide') toggleMode();
+                goToSlide(idx + 1);
+                overviewModal.classList.remove('open');
             });
-            overviewGrid.appendChild(card); // Inserta nodo en el DOM
+            overviewGrid.appendChild(card);
         });
     }
 
     // Alterna entre modo diapositivas y modo guía continua
-    function toggleMode() { // Declara función
-        AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides'; // Asigna valor
-        document.body.classList.toggle('mode-presentation', AppState.viewMode === 'slides'); // Modifica clases CSS del elemento
-        document.body.classList.toggle('mode-guide', AppState.viewMode === 'guide'); // Modifica clases CSS del elemento
-        if (modeIcon) modeIcon.textContent = AppState.viewMode === 'slides' ? '📑' : '🎞️'; // Evalúa condición
-        if (modeText) modeText.textContent = AppState.viewMode === 'slides' ? 'Modo Guía' : 'Modo Slides'; // Evalúa condición
-        SoundFX.beep(480, 360, 0.1); // Ejecuta llamada o método
+    function toggleMode() {
+        AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
+        document.body.classList.toggle('mode-presentation', AppState.viewMode === 'slides');
+        document.body.classList.toggle('mode-guide', AppState.viewMode === 'guide');
+        if (modeIcon) modeIcon.textContent = AppState.viewMode === 'slides' ? '📑' : '🎞️';
+        if (modeText) modeText.textContent = AppState.viewMode === 'slides' ? 'Modo Guía' : 'Modo Slides';
+        SoundFX.beep(480, 360, 0.1);
     }
 
-    if (btnPrev) btnPrev.addEventListener('click', () => goToSlide(AppState.currentSlide - 1)); // Evalúa condición
-    if (btnNext) btnNext.addEventListener('click', () => goToSlide(AppState.currentSlide + 1)); // Evalúa condición
-    if (btnToggleMode) btnToggleMode.addEventListener('click', toggleMode); // Evalúa condición
-    if (btnToggleSound && soundIcon) { // Evalúa condición
-        btnToggleSound.addEventListener('click', () => { // Registra escuchador de eventos
-            AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
+    if (btnPrev) btnPrev.addEventListener('click', () => goToSlide(AppState.currentSlide - 1));
+    if (btnNext) btnNext.addEventListener('click', () => goToSlide(AppState.currentSlide + 1));
+    if (btnToggleMode) btnToggleMode.addEventListener('click', toggleMode);
+    if (btnToggleSound && soundIcon) {
+        btnToggleSound.addEventListener('click', () => {
+            AppState.soundEnabled = !AppState.soundEnabled;
             soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
         });
     }
-    if (btnOverview && overviewModal) { // Evalúa condición
-        btnOverview.addEventListener('click', () => overviewModal.classList.toggle('open')); // Registra escuchador de eventos
-        overviewModal.addEventListener('click', (e) => { // Registra escuchador de eventos
-            if (e.target === overviewModal) overviewModal.classList.remove('open'); // Evalúa condición
+    if (btnOverview && overviewModal) {
+        btnOverview.addEventListener('click', () => overviewModal.classList.toggle('open'));
+        overviewModal.addEventListener('click', (e) => {
+            if (e.target === overviewModal) overviewModal.classList.remove('open');
         });
     }
-    if (btnCloseOverview && overviewModal) { // Evalúa condición
-        btnCloseOverview.addEventListener('click', () => overviewModal.classList.remove('open')); // Registra escuchador de eventos
+    if (btnCloseOverview && overviewModal) {
+        btnCloseOverview.addEventListener('click', () => overviewModal.classList.remove('open'));
     }
-    if (btnFullscreen) { // Evalúa condición
-        btnFullscreen.addEventListener('click', () => { // Registra escuchador de eventos
-            if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); // Evalúa condición
+    if (btnFullscreen) {
+        btnFullscreen.addEventListener('click', () => {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
             else document.exitFullscreen?.(); // Rama alternativa
         });
     }
-    if (btnGoLab) { // Evalúa condición
-        btnGoLab.addEventListener('click', () => { // Registra escuchador de eventos
-            const labIdx = slides.findIndex(s => s.dataset.lab === 'true'); // Define función flecha "labIdx"
-            if (labIdx !== -1) { // Evalúa condición
-                if (AppState.viewMode === 'guide') slides[labIdx].scrollIntoView({ behavior: 'smooth' }); // Evalúa condición
+    if (btnGoLab) {
+        btnGoLab.addEventListener('click', () => {
+            const labIdx = slides.findIndex(s => s.dataset.lab === 'true');
+            if (labIdx !== -1) {
+                if (AppState.viewMode === 'guide') slides[labIdx].scrollIntoView({ behavior: 'smooth' });
                 else goToSlide(labIdx + 1); // Rama alternativa
             }
         });
     }
 
     // Atajos de teclado
-    document.addEventListener('keydown', (e) => { // Registra escuchador de eventos
-        const tag = document.activeElement?.tagName; // Declara e inicializa "tag"
-        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return; // Evalúa condición
+    document.addEventListener('keydown', (e) => {
+        const tag = document.activeElement?.tagName;
+        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
 
-        if (e.key === 'ArrowRight' || e.key === ' ') { // Evalúa condición
+        if (e.key === 'ArrowRight' || e.key === ' ') {
             if (AppState.viewMode === 'slides') { e.preventDefault(); goToSlide(AppState.currentSlide + 1); }
-        } else if (e.key === 'ArrowLeft') { // Instrucción JavaScript
+        } else if (e.key === 'ArrowLeft') {
             if (AppState.viewMode === 'slides') { e.preventDefault(); goToSlide(AppState.currentSlide - 1); }
-        } else if (e.key.toLowerCase() === 'o' && overviewModal) { // Instrucción JavaScript
-            overviewModal.classList.toggle('open'); // Modifica clases CSS del elemento
-        } else if (e.key === 'Escape' && overviewModal) { // Instrucción JavaScript
-            overviewModal.classList.remove('open'); // Modifica clases CSS del elemento
-        } else if (e.key.toLowerCase() === 'f') { // Instrucción JavaScript
-            if (!document.fullscreenElement) document.documentElement.requestFullscreen?.(); // Evalúa condición
+        } else if (e.key.toLowerCase() === 'o' && overviewModal) {
+            overviewModal.classList.toggle('open');
+        } else if (e.key === 'Escape' && overviewModal) {
+            overviewModal.classList.remove('open');
+        } else if (e.key.toLowerCase() === 'f') {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
             else document.exitFullscreen?.(); // Rama alternativa
         }
     });
@@ -167,135 +167,135 @@
     // =========================================================================
     // LABORATORIO INTERACTIVO DE COOKIES (document.cookie + respaldo file://)
     // =========================================================================
-    const ckName = document.getElementById('ckName'); // Obtiene referencia DOM para "ckName"
-    const ckValue = document.getElementById('ckValue'); // Obtiene referencia DOM para "ckValue"
-    const ckMaxAge = document.getElementById('ckMaxAge'); // Obtiene referencia DOM para "ckMaxAge"
-    const ckSameSite = document.getElementById('ckSameSite'); // Obtiene referencia DOM para "ckSameSite"
-    const ckEncode = document.getElementById('ckEncode'); // Obtiene referencia DOM para "ckEncode"
-    const ckConsole = document.getElementById('ckConsole'); // Obtiene referencia DOM para "ckConsole"
+    const ckName = document.getElementById('ckName');
+    const ckValue = document.getElementById('ckValue');
+    const ckMaxAge = document.getElementById('ckMaxAge');
+    const ckSameSite = document.getElementById('ckSameSite');
+    const ckEncode = document.getElementById('ckEncode');
+    const ckConsole = document.getElementById('ckConsole');
 
     // Almacén espejo en memoria por si el navegador bloquea document.cookie en protocolo file://
-    const memoryCookies = new Map(); // Declara e inicializa "memoryCookies"
+    const memoryCookies = new Map();
 
-    function escribirCookie(nombre, valor, maxAge, sameSite, usarEncode) { // Declara función
-        const k = usarEncode ? encodeURIComponent(nombre) : nombre; // Declara e inicializa "k"
-        const v = usarEncode ? encodeURIComponent(valor) : valor; // Declara e inicializa "v"
-        const cadena = `${k}=${v}; max-age=${maxAge}; path=/; SameSite=${sameSite}`; // Declara e inicializa "cadena"
-        document.cookie = cadena; // Asigna valor
+    function escribirCookie(nombre, valor, maxAge, sameSite, usarEncode) {
+        const k = usarEncode ? encodeURIComponent(nombre) : nombre;
+        const v = usarEncode ? encodeURIComponent(valor) : valor;
+        const cadena = `${k}=${v}; max-age=${maxAge}; path=/; SameSite=${sameSite}`;
+        document.cookie = cadena;
 
-        if (Number(maxAge) <= 0) memoryCookies.delete(k); // Evalúa condición
+        if (Number(maxAge) <= 0) memoryCookies.delete(k);
         else memoryCookies.set(k, v); // Rama alternativa
-        return cadena; // Retorna resultado
+        return cadena;
     }
 
-    function leerCookiesActuales() { // Declara función
-        const nativas = document.cookie ? document.cookie.split('; ').filter(Boolean) : []; // Declara e inicializa "nativas"
-        if (nativas.length > 0) return nativas.join('; '); // Evalúa condición
+    function leerCookiesActuales() {
+        const nativas = document.cookie ? document.cookie.split('; ').filter(Boolean) : [];
+        if (nativas.length > 0) return nativas.join('; ');
         // Si file:// bloquea document.cookie, muestra las del almacén espejo
-        return Array.from(memoryCookies.entries()).map(([k, v]) => `${k}=${v}`).join('; '); // Retorna resultado
+        return Array.from(memoryCookies.entries()).map(([k, v]) => `${k}=${v}`).join('; ');
     }
 
-    function obtenerPorNombre(nombre) { // Declara función
-        const clave = encodeURIComponent(nombre) + '='; // Declara e inicializa "clave"
-        const raw = leerCookiesActuales(); // Declara e inicializa "raw"
-        for (const item of raw.split('; ')) { // Inicia bucle de iteración
-            if (item.startsWith(clave)) return decodeURIComponent(item.slice(clave.length)); // Evalúa condición
-            if (item.startsWith(nombre + '=')) return item.slice(nombre.length + 1); // Evalúa condición
+    function obtenerPorNombre(nombre) {
+        const clave = encodeURIComponent(nombre) + '=';
+        const raw = leerCookiesActuales();
+        for (const item of raw.split('; ')) {
+            if (item.startsWith(clave)) return decodeURIComponent(item.slice(clave.length));
+            if (item.startsWith(nombre + '=')) return item.slice(nombre.length + 1);
         }
-        return null; // Retorna resultado
+        return null;
     }
 
-    function logLab(accion) { // Declara función
-        if (!ckConsole) return; // Evalúa condición
-        const actuales = leerCookiesActuales() || '(sin cookies activas)'; // Declara e inicializa "actuales"
+    function logLab(accion) {
+        if (!ckConsole) return;
+        const actuales = leerCookiesActuales() || '(sin cookies activas)';
         ckConsole.textContent = `${accion}\n\n📌 document.cookie actual:\n${actuales}`; // Actualiza contenido en el DOM
     }
 
-    document.getElementById('btnSetCookie')?.addEventListener('click', () => { // Registra escuchador de eventos
-        const n = (ckName.value || '').trim(); // Declara e inicializa "n"
-        if (!n) return logLab('⚠️ Ingresa un nombre de cookie.'); // Evalúa condición
-        const cadena = escribirCookie(n, ckValue.value, ckMaxAge.value || 3600, ckSameSite.value, ckEncode.checked); // Declara e inicializa "cadena"
-        SoundFX.beep(520, 680, 0.1); // Ejecuta llamada o método
-        logLab(`✅ Cookie guardada:\ndocument.cookie = "${cadena}"`); // Ejecuta llamada o método
+    document.getElementById('btnSetCookie')?.addEventListener('click', () => {
+        const n = (ckName.value || '').trim();
+        if (!n) return logLab('⚠️ Ingresa un nombre de cookie.');
+        const cadena = escribirCookie(n, ckValue.value, ckMaxAge.value || 3600, ckSameSite.value, ckEncode.checked);
+        SoundFX.beep(520, 680, 0.1);
+        logLab(`✅ Cookie guardada:\ndocument.cookie = "${cadena}"`);
     });
 
-    document.getElementById('btnGetCookie')?.addEventListener('click', () => { // Registra escuchador de eventos
-        const n = (ckName.value || '').trim(); // Declara e inicializa "n"
-        const val = obtenerPorNombre(n); // Declara e inicializa "val"
-        SoundFX.beep(440, 560, 0.08); // Ejecuta llamada o método
-        logLab(val !== null ? `🔍 obtenerCookie("${n}") => "${val}"` : `❌ La cookie "${n}" no existe.`); // Ejecuta llamada o método
+    document.getElementById('btnGetCookie')?.addEventListener('click', () => {
+        const n = (ckName.value || '').trim();
+        const val = obtenerPorNombre(n);
+        SoundFX.beep(440, 560, 0.08);
+        logLab(val !== null ? `🔍 obtenerCookie("${n}") => "${val}"` : `❌ La cookie "${n}" no existe.`);
     });
 
-    document.getElementById('btnDelCookie')?.addEventListener('click', () => { // Registra escuchador de eventos
-        const n = (ckName.value || '').trim(); // Declara e inicializa "n"
-        if (!n) return; // Evalúa condición
-        const cadena = escribirCookie(n, '', 0, ckSameSite.value, true); // Declara e inicializa "cadena"
-        SoundFX.beep(260, 180, 0.12); // Ejecuta llamada o método
-        logLab(`🗑️ Cookie eliminada:\ndocument.cookie = "${cadena}"`); // Ejecuta llamada o método
+    document.getElementById('btnDelCookie')?.addEventListener('click', () => {
+        const n = (ckName.value || '').trim();
+        if (!n) return;
+        const cadena = escribirCookie(n, '', 0, ckSameSite.value, true);
+        SoundFX.beep(260, 180, 0.12);
+        logLab(`🗑️ Cookie eliminada:\ndocument.cookie = "${cadena}"`);
     });
 
-    document.getElementById('presetTema')?.addEventListener('click', () => { // Registra escuchador de eventos
-        ckName.value = 'tema'; // Asigna valor
-        ckValue.value = 'oscuro-neon'; // Asigna valor
-        ckMaxAge.value = '86400'; // Asigna valor
-        ckEncode.checked = true; // Asigna valor
-        document.getElementById('btnSetCookie').click(); // Ejecuta llamada o método
+    document.getElementById('presetTema')?.addEventListener('click', () => {
+        ckName.value = 'tema';
+        ckValue.value = 'oscuro-neon';
+        ckMaxAge.value = '86400';
+        ckEncode.checked = true;
+        document.getElementById('btnSetCookie').click();
     });
 
-    document.getElementById('presetEspecial')?.addEventListener('click', () => { // Registra escuchador de eventos
-        ckName.value = 'perfil'; // Asigna valor
-        ckValue.value = 'María José; rol=admin'; // Asigna valor
-        ckMaxAge.value = '3600'; // Asigna valor
-        ckEncode.checked = true; // Asigna valor
-        document.getElementById('btnSetCookie').click(); // Ejecuta llamada o método
+    document.getElementById('presetEspecial')?.addEventListener('click', () => {
+        ckName.value = 'perfil';
+        ckValue.value = 'María José; rol=admin';
+        ckMaxAge.value = '3600';
+        ckEncode.checked = true;
+        document.getElementById('btnSetCookie').click();
     });
 
-    document.getElementById('presetBorrar')?.addEventListener('click', () => { // Registra escuchador de eventos
-        ['tema', 'perfil'].forEach(n => escribirCookie(n, '', 0, 'Lax', true)); // Ejecuta llamada o método
-        logLab('🧹 Cookies de demostración eliminadas.'); // Ejecuta llamada o método
+    document.getElementById('presetBorrar')?.addEventListener('click', () => {
+        ['tema', 'perfil'].forEach(n => escribirCookie(n, '', 0, 'Lax', true));
+        logLab('🧹 Cookies de demostración eliminadas.');
     });
 
-    logLab('💡 Listo para probar document.cookie en tiempo real.'); // Ejecuta llamada o método
+    logLab('💡 Listo para probar document.cookie en tiempo real.');
 
     // =========================================================================
     // QUIZ INTERACTIVO
     // =========================================================================
-    const quizBox = document.getElementById('quizBox'); // Obtiene referencia DOM para "quizBox"
-    if (quizBox) { // Evalúa condición
-        const scoreEl = document.getElementById('quizScore'); // Obtiene referencia DOM para "scoreEl"
-        const cards = Array.from(quizBox.querySelectorAll('[data-answer]')); // Obtiene referencia DOM para "cards"
-        let okCount = 0; // Declara e inicializa "okCount"
+    const quizBox = document.getElementById('quizBox');
+    if (quizBox) {
+        const scoreEl = document.getElementById('quizScore');
+        const cards = Array.from(quizBox.querySelectorAll('[data-answer]'));
+        let okCount = 0;
 
-        cards.forEach(card => { // Instrucción JavaScript
-            const ans = card.dataset.answer; // Declara e inicializa "ans"
-            const msg = card.querySelector('.quiz-msg'); // Obtiene referencia DOM para "msg"
-            const opts = Array.from(card.querySelectorAll('.quiz-opt')); // Obtiene referencia DOM para "opts"
-            opts.forEach(btn => { // Instrucción JavaScript
-                btn.addEventListener('click', () => { // Registra escuchador de eventos
-                    if (card.dataset.done === 'true') return; // Evalúa condición
-                    card.dataset.done = 'true'; // Asigna valor
-                    const right = btn.dataset.opt === ans; // Declara e inicializa "right"
-                    opts.forEach(b => { b.disabled = true; }); // Ejecuta llamada o método
-                    if (right) { // Evalúa condición
-                        okCount++; // Instrucción JavaScript
-                        btn.style.borderColor = '#00ff88'; // Asigna valor
-                        btn.style.color = '#00ff88'; // Asigna valor
+        cards.forEach(card => {
+            const ans = card.dataset.answer;
+            const msg = card.querySelector('.quiz-msg');
+            const opts = Array.from(card.querySelectorAll('.quiz-opt'));
+            opts.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if (card.dataset.done === 'true') return;
+                    card.dataset.done = 'true';
+                    const right = btn.dataset.opt === ans;
+                    opts.forEach(b => { b.disabled = true; });
+                    if (right) {
+                        okCount++;
+                        btn.style.borderColor = '#00ff88';
+                        btn.style.color = '#00ff88';
                         msg.textContent = '✅ ¡Correcto!'; // Actualiza contenido en el DOM
-                        msg.style.color = '#00ff88'; // Asigna valor
-                        SoundFX.beep(520, 740, 0.12); // Ejecuta llamada o método
-                    } else { // Instrucción JavaScript
-                        btn.style.borderColor = '#ff3358'; // Asigna valor
-                        btn.style.color = '#ff3358'; // Asigna valor
+                        msg.style.color = '#00ff88';
+                        SoundFX.beep(520, 740, 0.12);
+                    } else {
+                        btn.style.borderColor = '#ff3358';
+                        btn.style.color = '#ff3358';
                         msg.textContent = '❌ Revisa la teoría de las diapositivas anteriores.'; // Actualiza contenido en el DOM
-                        msg.style.color = '#ff3358'; // Asigna valor
-                        SoundFX.beep(240, 170, 0.14); // Ejecuta llamada o método
+                        msg.style.color = '#ff3358';
+                        SoundFX.beep(240, 170, 0.14);
                     }
-                    if (scoreEl) scoreEl.textContent = `Puntaje: ${okCount} / ${cards.length}`; // Evalúa condición
+                    if (scoreEl) scoreEl.textContent = `Puntaje: ${okCount} / ${cards.length}`;
                 });
             });
         });
     }
 
     // Inicia en la diapositiva 1
-    goToSlide(1); // Ejecuta llamada o método
-})(); // Ejecuta llamada o método
+    goToSlide(1);
+})();

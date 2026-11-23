@@ -11,56 +11,56 @@
 /* ==========================================================================
    0. ADAPTADOR UNIVERSAL PARA EJECUCIÓN EN NAVEGADOR Y NODE.JS
    ========================================================================== */
-const esNavegador = typeof document !== "undefined"; // Declara e inicializa "esNavegador"
+const esNavegador = typeof document !== "undefined";
 
 // Simulador en memoria de document.cookie para ejecutar esta guía en Node.js
-const CookieStore = (() => { // Define función flecha "CookieStore"
-    const mapa = new Map(); // Declara e inicializa "mapa"
-    return { // Retorna resultado
-        set(raw) { // Instrucción JavaScript
-            const [par, ...attrs] = raw.split(";").map(s => s.trim()); // Define función flecha "variable"
-            const eq = par.indexOf("="); // Declara e inicializa "eq"
-            if (eq === -1) return; // Evalúa condición
-            const clave = par.slice(0, eq); // Declara e inicializa "clave"
-            const valor = par.slice(eq + 1); // Declara e inicializa "valor"
-            const maxAge = attrs.find(a => a.toLowerCase().startsWith("max-age=")); // Define función flecha "maxAge"
-            if (maxAge && Number(maxAge.split("=")[1]) <= 0) { // Evalúa condición
-                mapa.delete(clave); // Ejecuta llamada o método
-            } else { // Instrucción JavaScript
-                mapa.set(clave, valor); // Ejecuta llamada o método
+const CookieStore = (() => {
+    const mapa = new Map();
+    return {
+        set(raw) {
+            const [par, ...attrs] = raw.split(";").map(s => s.trim());
+            const eq = par.indexOf("=");
+            if (eq === -1) return;
+            const clave = par.slice(0, eq);
+            const valor = par.slice(eq + 1);
+            const maxAge = attrs.find(a => a.toLowerCase().startsWith("max-age="));
+            if (maxAge && Number(maxAge.split("=")[1]) <= 0) {
+                mapa.delete(clave);
+            } else {
+                mapa.set(clave, valor);
             }
         },
-        getAll() { // Instrucción JavaScript
-            return Array.from(mapa.entries()).map(([k, v]) => `${k}=${v}`).join("; "); // Retorna resultado
+        getAll() {
+            return Array.from(mapa.entries()).map(([k, v]) => `${k}=${v}`).join("; ");
         }
     };
-})(); // Ejecuta llamada o método
+})();
 
-function setCookie(nombre, valor, opciones = {}) { // Declara función
-    const { maxAge, expires, path = "/", secure = false, sameSite = "Lax" } = opciones; // Declara e inicializa "variable"
-    let cadena = `${encodeURIComponent(nombre)}=${encodeURIComponent(valor)}; path=${path}; SameSite=${sameSite}`; // Declara e inicializa "cadena"
-    if (typeof maxAge === "number") cadena += `; max-age=${maxAge}`; // Evalúa condición
-    if (expires) cadena += `; expires=${expires}`; // Evalúa condición
-    if (secure) cadena += `; Secure`; // Evalúa condición
+function setCookie(nombre, valor, opciones = {}) {
+    const { maxAge, expires, path = "/", secure = false, sameSite = "Lax" } = opciones;
+    let cadena = `${encodeURIComponent(nombre)}=${encodeURIComponent(valor)}; path=${path}; SameSite=${sameSite}`;
+    if (typeof maxAge === "number") cadena += `; max-age=${maxAge}`;
+    if (expires) cadena += `; expires=${expires}`;
+    if (secure) cadena += `; Secure`;
 
-    if (esNavegador) document.cookie = cadena; // Evalúa condición
+    if (esNavegador) document.cookie = cadena;
     else CookieStore.set(cadena); // Rama alternativa
-    return cadena; // Retorna resultado
+    return cadena;
 }
 
-function getCookie(nombre) { // Declara función
-    const raw = esNavegador ? document.cookie : CookieStore.getAll(); // Declara e inicializa "raw"
-    const clave = encodeURIComponent(nombre) + "="; // Declara e inicializa "clave"
-    for (const item of raw.split("; ")) { // Inicia bucle de iteración
-        if (item.startsWith(clave)) { // Evalúa condición
-            return decodeURIComponent(item.slice(clave.length)); // Retorna resultado
+function getCookie(nombre) {
+    const raw = esNavegador ? document.cookie : CookieStore.getAll();
+    const clave = encodeURIComponent(nombre) + "=";
+    for (const item of raw.split("; ")) {
+        if (item.startsWith(clave)) {
+            return decodeURIComponent(item.slice(clave.length));
         }
     }
-    return null; // Retorna resultado
+    return null;
 }
 
-function deleteCookie(nombre, path = "/") { // Declara función
-    return setCookie(nombre, "", { maxAge: 0, path }); // Retorna resultado
+function deleteCookie(nombre, path = "/") {
+    return setCookie(nombre, "", { maxAge: 0, path });
 }
 
 /* ==========================================================================
@@ -80,10 +80,10 @@ console.log("   perfil  =>", getCookie("perfil")); // Imprime salida en consola
 
 // 3. Modificar cookie existente (mismo nombre y path)
 console.log("\n3) Modificar cookie 'usuario':"); // Imprime salida en consola
-setCookie("usuario", "JuanPerez_Pro", { maxAge: 86400 }); // Ejecuta llamada o método
+setCookie("usuario", "JuanPerez_Pro", { maxAge: 86400 });
 console.log("   usuario actualizado =>", getCookie("usuario")); // Imprime salida en consola
 
 // 4. Eliminar cookie (max-age=0)
 console.log("\n4) Eliminar cookie 'perfil':"); // Imprime salida en consola
-deleteCookie("perfil"); // Ejecuta llamada o método
+deleteCookie("perfil");
 console.log("   perfil tras borrar =>", getCookie("perfil")); // Imprime salida en consola

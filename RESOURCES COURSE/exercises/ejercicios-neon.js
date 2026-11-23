@@ -9,6 +9,19 @@
     // Activa modo estricto
     'use strict';
 
+    // Asigna el favicon oficial de Flaticon acorde al bloque del ejercicio/proyecto
+    (function setExerciseTabIcon() {
+        const pathStr = decodeURIComponent(window.location.pathname);
+        const iconUrl = pathStr.includes('/NODE/')
+            ? 'https://cdn-icons-png.flaticon.com/512/5968/5968322.png'
+            : pathStr.includes('/JAVASCRIPT/')
+                ? 'https://cdn-icons-png.flaticon.com/512/5968/5968292.png'
+                : 'https://cdn-icons-png.flaticon.com/512/732/732190.png';
+        const link = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' });
+        link.type = 'image/png';
+        link.href = iconUrl;
+    })();
+
     // Si la página ya tiene barra superior o HUD de proyectos, no duplica navegación
     if (document.querySelector('.top-nav, .ej-hud, .neon-nav-group')) return;
 

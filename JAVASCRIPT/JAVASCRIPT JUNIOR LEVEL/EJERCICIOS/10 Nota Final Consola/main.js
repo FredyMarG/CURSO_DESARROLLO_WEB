@@ -4,10 +4,10 @@
  */
 
 /** Contenedor principal donde se inyectarán las filas de materias */
-const result = document.getElementById("resultado"); // Obtiene referencia DOM para "result"
+const result = document.getElementById("resultado");
 
 /** @type {Object.<string, {asistencias: number, promedio: number, trabajos: number}>} Estado global de calificaciones */
-const materias = { // Declara e inicializa "materias"
+const materias = {
     fisica: {asistencias: 0, promedio: 0, trabajos: 0},
     matematica: {asistencias: 0, promedio: 0, trabajos: 0},
     logica: {asistencias: 0, promedio: 0, trabajos: 0},
@@ -23,10 +23,10 @@ const materias = { // Declara e inicializa "materias"
  * Renderiza el estado actual de las materias en la consola del desarrollador.
  * Utiliza grupos y estilos CSS para facilitar la lectura.
  */
-function renderConsola() { // Declara función
+function renderConsola() {
     console.clear(); // Imprime salida en consola
 
-    Object.entries(materias).forEach(([nombre, data]) => { // Instrucción JavaScript
+    Object.entries(materias).forEach(([nombre, data]) => {
 
         console.group(`📘 ${nombre}`); // Imprime salida en consola
 
@@ -59,11 +59,11 @@ function renderConsola() { // Declara función
  * Inicialización de la interfaz dinámica.
  * Crea elementos de entrada para cada materia definida en el objeto global.
  */
-Object.entries(materias).forEach(([nombre, data]) => { // Instrucción JavaScript
+Object.entries(materias).forEach(([nombre, data]) => {
 
     // Se crea un elemento div para representar la fila de cada materia, y se le asigna la clase "fila" para aplicar estilos específicos a esta sección de la interfaz.
-    const fila = document.createElement("div"); // Crea nuevo elemento DOM "fila"
-    fila.classList.add("fila"); // Modifica clases CSS del elemento
+    const fila = document.createElement("div");
+    fila.classList.add("fila");
 
     fila.innerHTML = `
         <span class="main-span">📘<span class="nombre">${nombre}</span></span>
@@ -73,8 +73,8 @@ Object.entries(materias).forEach(([nombre, data]) => { // Instrucción JavaScrip
         <span class="estado"></span>
     `;
 
-    const inputs = fila.querySelectorAll("input"); // Obtiene referencia DOM para "inputs"
-    const estado = fila.querySelector(".estado"); // Obtiene referencia DOM para "estado"
+    const inputs = fila.querySelectorAll("input");
+    const estado = fila.querySelector(".estado");
 
     /**
      * Limita la cantidad de decimales de un valor
@@ -82,8 +82,8 @@ Object.entries(materias).forEach(([nombre, data]) => { // Instrucción JavaScrip
      * @param {number} maxDecimales 
      * @returns {number}
      */
-    function limitarDecimales(valor, maxDecimales = 2) { // Declara función
-        return Number(parseFloat(valor || 0).toFixed(maxDecimales)); // Retorna resultado
+    function limitarDecimales(valor, maxDecimales = 2) {
+        return Number(parseFloat(valor || 0).toFixed(maxDecimales));
     }
 
     /**
@@ -91,48 +91,48 @@ Object.entries(materias).forEach(([nombre, data]) => { // Instrucción JavaScrip
      * @param {string|number} valor 
      * @returns {number}
      */
-    function soloEnteros(valor) { // Declara función
-        return Math.floor(Number(valor || 0)); // Retorna resultado
+    function soloEnteros(valor) {
+        return Math.floor(Number(valor || 0));
     }
 
     /**
      * Lee los inputs, valida datos y actualiza el estado global y la UI
      */
-    function actualizar() { // Declara función
-        let asistencias = limitarDecimales(inputs[0].value, 2); // Declara e inicializa "asistencias"
-        let promedio = limitarDecimales(inputs[1].value, 2); // Declara e inicializa "promedio"
-        let trabajos = soloEnteros(inputs[2].value); // Declara e inicializa "trabajos"
+    function actualizar() {
+        let asistencias = limitarDecimales(inputs[0].value, 2);
+        let promedio = limitarDecimales(inputs[1].value, 2);
+        let trabajos = soloEnteros(inputs[2].value);
 
         // Reflejar cambios de validación en la UI
-        inputs[0].value = asistencias; // Asigna valor
-        inputs[1].value = promedio; // Asigna valor
-        inputs[2].value = trabajos; // Asigna valor
+        inputs[0].value = asistencias;
+        inputs[1].value = promedio;
+        inputs[2].value = trabajos;
 
         // Actualizar base de datos local
-        data.asistencias = asistencias; // Asigna valor
-        data.promedio = promedio; // Asigna valor
-        data.trabajos = trabajos; // Asigna valor
+        data.asistencias = asistencias;
+        data.promedio = promedio;
+        data.trabajos = trabajos;
 
         // Evaluación de reglas de negocio para aprobación
-        if (asistencias >= 90 && promedio >= 7 && trabajos >= 3) { // Evalúa condición
+        if (asistencias >= 90 && promedio >= 7 && trabajos >= 3) {
             estado.textContent = "✅ Aprobado"; // Actualiza contenido en el DOM
-            estado.className = "estado aprobado"; // Asigna valor
-            fila.className = "fila aprobado"; // Asigna valor
-        } else { // Instrucción JavaScript
+            estado.className = "estado aprobado";
+            fila.className = "fila aprobado";
+        } else {
             estado.textContent = "❌ Reprobado"; // Actualiza contenido en el DOM
-            estado.className = "estado reprobado"; // Asigna valor
-            fila.className = "fila reprobado"; // Asigna valor
+            estado.className = "estado reprobado";
+            fila.className = "fila reprobado";
         }
 
-        renderConsola(); // Ejecuta llamada o método
+        renderConsola();
     }
 
-    inputs.forEach(inp => { // Instrucción JavaScript
-        inp.addEventListener("input", actualizar); // Registra escuchador de eventos
+    inputs.forEach(inp => {
+        inp.addEventListener("input", actualizar);
     });
 
     // Sincronización inicial
-    actualizar(); // Ejecuta llamada o método
+    actualizar();
 
-    result.appendChild(fila); // Inserta nodo en el DOM
+    result.appendChild(fila);
 });

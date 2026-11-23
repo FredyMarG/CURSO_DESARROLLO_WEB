@@ -4,10 +4,47 @@
  * Agrega los 5 botones de tema neón en .jr-top-nav y actualiza --accent y el fondo.
  * ============================================================================
  */
-(function () { // Instrucción JavaScript
+(function () {
     'use strict'; // Activa el modo estricto de JavaScript
 
-    const THEMES = { // Declara e inicializa "THEMES"
+    // Extrae los segmentos de la ruta URL para identificar la carpeta del módulo actual
+    const parts = decodeURIComponent(window.location.pathname).split('/').filter(Boolean);
+    const topicFolder = parts.length >= 2 ? parts[parts.length - 2] : 'Junior';
+
+    /**
+     * Genera un favicon SVG transparente acorde al tema específico del módulo Junior
+     * y lo inyecta o actualiza en el <head> del documento.
+     */
+    (function setJuniorTopicTabIcon() {
+        const key = `${parts.join('/')} ${document.title}`.toLowerCase(); // Texto normalizado para coincidencia temática
+        // Tabla ordenada de coincidencias: [expresión regular, símbolo/emoji, color acento para texto]
+        const JUNIOR_ICONS = [
+            [/variable/, '📦', '#38bdf8'],
+            [/operador/, '⚖️', '#a855f7'],
+            [/condicional/, '🔀', '#f59e0b'],
+            [/m[eé]todo.*array|array.*m[eé]todo/, '🧰', '#10b981'],
+            [/array/, '🧺', '#38bdf8'],
+            [/bucle|for|while/, '🔄', '#10b981'],
+            [/funci/, 'ƒx', '#38bdf8'],
+            [/poo|objeto/, '🏗️', '#f59e0b'],
+            [/cadena|string/, '🔤', '#a855f7'],
+            [/math|matem/, '🧮', '#f43f5e'],
+            [/consola/, '>_', '#10b981'],
+            [/dom/, '🌳', '#10b981']
+        ];
+        const match = JUNIOR_ICONS.find(([re]) => re.test(key));
+        const symbol = match ? match[1] : 'JS'; // Símbolo temático o respaldo JS
+        const accent = match ? match[2] : '#f7df1e'; // Color del símbolo cuando es texto (ej. ƒx, >_)
+        const fontSize = symbol.length > 1 ? 40 : 52; // Ajusta tamaño para símbolos de 2 caracteres
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Fira Code,Arial,sans-serif" font-weight="800" font-size="${fontSize}" fill="${accent}">${symbol}</text></svg>`;
+
+        const link = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' });
+        link.type = 'image/svg+xml';
+        link.href = 'data:image/svg+xml,' + encodeURIComponent(svg);
+    })();
+
+    // Paleta de 5 temas neón intercambiables en módulos Junior
+    const THEMES = {
         cyan:    { accent: '#00f0ff', glow: '#083344', soft: 'rgba(0, 240, 255, 0.16)' },
         purple:  { accent: '#a855f7', glow: '#3b0764', soft: 'rgba(168, 85, 247, 0.16)' },
         emerald: { accent: '#10b981', glow: '#064e3b', soft: 'rgba(16, 185, 129, 0.16)' },
@@ -15,51 +52,50 @@
         rose:    { accent: '#f43f5e', glow: '#4c0519', soft: 'rgba(244, 63, 94, 0.16)' }
     };
 
-    const keys = Object.keys(THEMES); // Declara e inicializa "keys"
-    const parts = decodeURIComponent(window.location.pathname).split('/').filter(Boolean); // Declara e inicializa "parts"
-    const topicFolder = parts.length >= 2 ? parts[parts.length - 2] : 'Junior'; // Declara e inicializa "topicFolder"
+    const keys = Object.keys(THEMES);
 
-    function aplicarTema(nombre) { // Declara función
-        const t = THEMES[nombre] || THEMES.cyan; // Declara e inicializa "t"
-        document.body.dataset.theme = nombre; // Asigna valor
-        document.documentElement.style.setProperty('--accent', t.accent); // Ejecuta llamada o método
-        document.documentElement.style.setProperty('--accent-soft', t.soft); // Ejecuta llamada o método
+    // Aplica el tema elegido actualizando variables CSS globales y fondo radial
+    function aplicarTema(nombre) {
+        const t = THEMES[nombre] || THEMES.cyan;
+        document.body.dataset.theme = nombre;
+        document.documentElement.style.setProperty('--accent', t.accent);
+        document.documentElement.style.setProperty('--accent-soft', t.soft);
         document.body.style.background =
-            `radial-gradient(circle at top, ${t.glow} 0%, #0b1120 55%), radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px)`; // Instrucción JavaScript
-        document.body.style.backgroundSize = '100% 100%, 24px 24px'; // Asigna valor
+            `radial-gradient(circle at top, ${t.glow} 0%, #0b1120 55%), radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px)`;
+        document.body.style.backgroundSize = '100% 100%, 24px 24px';
     }
 
-    let hash = 0; // Declara e inicializa "hash"
-    for (let i = 0; i < topicFolder.length; i++) hash += topicFolder.charCodeAt(i); // Inicia bucle de iteración
-    const initial = keys[hash % keys.length]; // Declara e inicializa "initial"
-    aplicarTema(initial); // Ejecuta llamada o método
+    let hash = 0;
+    for (let i = 0; i < topicFolder.length; i++) hash += topicFolder.charCodeAt(i);
+    const initial = keys[hash % keys.length];
+    aplicarTema(initial);
 
     // Inyecta estilos para tablas comparativas (.compare-table) y scrollbars neón en módulos Junior
     if (!document.getElementById('jrCompareTableStyle')) {
-        const st = document.createElement('style'); // Crea nuevo elemento DOM "st"
+        const st = document.createElement('style');
         st.id = 'jrCompareTableStyle'; // Asigna id único
         st.textContent = `*{scrollbar-width:thin;scrollbar-color:var(--accent,#00f0ff) #0b1120}::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:#0b1120}::-webkit-scrollbar-thumb{background:var(--accent,#00f0ff);border-radius:999px;border:2px solid #0b1120}.compare-table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.9rem;background:rgba(2,6,23,.55);border:1px solid var(--border,#334155);border-radius:10px;overflow:hidden}.compare-table th,.compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,.08)}.compare-table th{color:var(--accent,#00f0ff);background:rgba(15,23,42,.85);font-weight:700}.compare-table tr:last-child td{border-bottom:none}.grid .card button:not(.secondary){background:linear-gradient(135deg,var(--accent,#00f0ff),#818cf8)!important;color:#050711!important;border:none!important;border-radius:10px!important;padding:8px 16px!important;font-weight:700!important;font-size:.86rem!important;box-shadow:0 4px 16px var(--accent-soft,rgba(0,240,255,.28))!important;transition:transform .18s ease,box-shadow .18s ease!important}.grid .card button:not(.secondary):hover{transform:translateY(-1px)!important;box-shadow:0 6px 22px var(--accent-soft,rgba(0,240,255,.42))!important}.grid .card button.secondary{background:rgba(255,255,255,.06)!important;color:#f1f5f9!important;border:1px solid rgba(255,255,255,.16)!important;border-radius:10px!important;padding:8px 13px!important;font-weight:600!important;font-size:.84rem!important;transition:border-color .2s,color .2s!important}.grid .card button.secondary:hover{border-color:var(--accent,#00f0ff)!important;color:var(--accent,#00f0ff)!important}`; // Asigna reglas CSS
         document.head.appendChild(st); // Inserta estilo en head
     }
 
-    const navRight = document.querySelector('.jr-top-nav > div'); // Obtiene referencia DOM para "navRight"
-    if (navRight && !navRight.querySelector('.theme-dots')) { // Evalúa condición
-        const dotsWrap = document.createElement('div'); // Crea nuevo elemento DOM "dotsWrap"
-        dotsWrap.className = 'theme-dots'; // Asigna valor
-        dotsWrap.title = 'Cambiar color del módulo'; // Asigna valor
-        keys.forEach(t => { // Instrucción JavaScript
-            const btn = document.createElement('button'); // Crea nuevo elemento DOM "btn"
-            btn.type = 'button'; // Asigna valor
-            btn.className = 'theme-dot' + (t === initial ? ' active' : ''); // Asigna valor
-            btn.dataset.setTheme = t; // Asigna valor
-            btn.addEventListener('click', () => { // Registra escuchador de eventos
-                aplicarTema(t); // Ejecuta llamada o método
-                dotsWrap.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active')); // Modifica clases CSS del elemento
-                btn.classList.add('active'); // Modifica clases CSS del elemento
+    const navRight = document.querySelector('.jr-top-nav > div');
+    if (navRight && !navRight.querySelector('.theme-dots')) {
+        const dotsWrap = document.createElement('div');
+        dotsWrap.className = 'theme-dots';
+        dotsWrap.title = 'Cambiar color del módulo';
+        keys.forEach(t => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'theme-dot' + (t === initial ? ' active' : '');
+            btn.dataset.setTheme = t;
+            btn.addEventListener('click', () => {
+                aplicarTema(t);
+                dotsWrap.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+                btn.classList.add('active');
             });
-            dotsWrap.appendChild(btn); // Inserta nodo en el DOM
+            dotsWrap.appendChild(btn);
         });
-        navRight.prepend(dotsWrap); // Ejecuta llamada o método
+        navRight.prepend(dotsWrap);
 
         // Navegación directa entre módulos de JavaScript Junior Level (⬅ Anterior / Siguiente ➡)
         const JUNIOR_MODULES = ['Variables', 'Operadores', 'Concatenacion', 'Condicionales', 'Arrays', 'Bucles', 'For', 'Funciones', 'POO', 'Cadenas(Metodos)', 'Math', 'Console.log', 'Dom']; // Orden progresivo Junior
@@ -103,4 +139,4 @@
             }
         }
     }
-})(); // Ejecuta llamada o método
+})();

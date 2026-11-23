@@ -15,45 +15,45 @@
 // En el navegador usamos window.caches; si ejecutamos con Node.js usamos el simulador de abajo
 const cachesRef = (typeof window !== "undefined" && "caches" in window)
     ? window.caches
-    : crearSimuladorCache(); // Ejecuta llamada o método
+    : crearSimuladorCache();
 
 // Código inicial preservado: abre o crea el almacén llamado "archivos.estaticos"
-cachesRef.open("archivos.estaticos"); // Ejecuta llamada o método
+cachesRef.open("archivos.estaticos");
 
 // ----------------------------------------------------------------------------
 // 2. LECCIÓN PASO A PASO (FÁCIL DE LEER Y SEGUIR)
 // ----------------------------------------------------------------------------
-async function aprenderCachePasoAPaso() { // Declara función
+async function aprenderCachePasoAPaso() {
     console.log("🚀 INICIANDO GUÍA PRÁCTICA DE CACHE API\n"); // Imprime salida en consola
 
     // PASO 1: Abrir nuestra "despensa" de archivos
-    const cache = await cachesRef.open("archivos.estaticos"); // Declara e inicializa "cache"
+    const cache = await cachesRef.open("archivos.estaticos");
     console.log("1️⃣ [open] Almacén 'archivos.estaticos' abierto y listo."); // Imprime salida en consola
 
     // En Node.js demostramos el ciclo completo de guardar, buscar y borrar sin depender de internet
-    if (typeof window === "undefined") { // Evalúa condición
+    if (typeof window === "undefined") {
         // PASO 2: Guardar archivos (add, addAll, put)
-        await cache.add("/estilos.css"); // Ejecuta llamada o método
-        await cache.addAll(["/index.html", "/app.js"]); // Ejecuta llamada o método
-        await cache.put("/api/saludo", { status: 200, text: async () => "¡Hola desde Caché!" }); // Ejecuta llamada o método
+        await cache.add("/estilos.css");
+        await cache.addAll(["/index.html", "/app.js"]);
+        await cache.put("/api/saludo", { status: 200, text: async () => "¡Hola desde Caché!" });
         console.log("2️⃣ [add / addAll / put] Archivos guardados en el almacén."); // Imprime salida en consola
 
         // PASO 3: Consultar lo que guardamos (keys, match, matchAll)
-        const llaves = await cache.keys(); // Declara e inicializa "llaves"
+        const llaves = await cache.keys();
         console.log("3️⃣ [keys] Archivos en caché:", llaves.map((req) => req.url)); // Imprime salida en consola
 
-        const encontrado = await cachesRef.match("/api/saludo"); // Declara e inicializa "encontrado"
-        if (encontrado) { // Evalúa condición
+        const encontrado = await cachesRef.match("/api/saludo");
+        if (encontrado) {
             console.log("4️⃣ [match] ¡Encontrado al instante! ->", await encontrado.text()); // Imprime salida en consola
         }
 
-        const todas = await cache.matchAll(); // Declara e inicializa "todas"
+        const todas = await cache.matchAll();
         console.log("5️⃣ [matchAll] Total de respuestas almacenadas:", todas.length); // Imprime salida en consola
 
         // PASO 4: Limpiar un archivo puntual o borrar una versión vieja
-        await cache.delete("/estilos.css"); // Ejecuta llamada o método
+        await cache.delete("/estilos.css");
         console.log("6️⃣ [delete] '/estilos.css' eliminado correctamente."); // Imprime salida en consola
-    } else { // Instrucción JavaScript
+    } else {
         console.log("💡 Estás en el navegador: abre la Diapositiva 9 para probar todo con botones."); // Imprime salida en consola
     }
 
@@ -61,51 +61,51 @@ async function aprenderCachePasoAPaso() { // Declara función
 }
 
 // Ejecutamos la lección
-aprenderCachePasoAPaso(); // Ejecuta llamada o método
+aprenderCachePasoAPaso();
 
 /* ============================================================================
    SIMULADOR PARA NODE.JS (Permite ejecutar 'node main.js' sin navegador)
    ============================================================================ */
-function crearSimuladorCache() { // Declara función
-    const almacenes = new Map(); // Declara e inicializa "almacenes"
+function crearSimuladorCache() {
+    const almacenes = new Map();
     class CacheSimulada { // Define clase
-        constructor(nombre) { // Instrucción JavaScript
-            this.nombre = nombre; // Asigna valor
-            this.entradas = new Map(); // Asigna valor
+        constructor(nombre) {
+            this.nombre = nombre;
+            this.entradas = new Map();
         }
-        async add(url) { // Instrucción JavaScript
-            this.entradas.set(url, { url, status: 200, text: async () => `Archivo ${url}` }); // Ejecuta llamada o método
+        async add(url) {
+            this.entradas.set(url, { url, status: 200, text: async () => `Archivo ${url}` });
         }
-        async addAll(urls) { // Instrucción JavaScript
-            for (const u of urls) await this.add(u); // Inicia bucle de iteración
+        async addAll(urls) {
+            for (const u of urls) await this.add(u);
         }
-        async put(req, res) { // Instrucción JavaScript
-            this.entradas.set(typeof req === "string" ? req : req.url, res); // Ejecuta llamada o método
+        async put(req, res) {
+            this.entradas.set(typeof req === "string" ? req : req.url, res);
         }
-        async match(req) { // Instrucción JavaScript
-            return this.entradas.get(typeof req === "string" ? req : req.url); // Retorna resultado
+        async match(req) {
+            return this.entradas.get(typeof req === "string" ? req : req.url);
         }
-        async matchAll() { // Instrucción JavaScript
-            return Array.from(this.entradas.values()); // Retorna resultado
+        async matchAll() {
+            return Array.from(this.entradas.values());
         }
-        async keys() { // Instrucción JavaScript
-            return Array.from(this.entradas.keys()).map((u) => ({ url: u })); // Retorna resultado
+        async keys() {
+            return Array.from(this.entradas.keys()).map((u) => ({ url: u }));
         }
-        async delete(req) { // Instrucción JavaScript
-            return this.entradas.delete(typeof req === "string" ? req : req.url); // Retorna resultado
+        async delete(req) {
+            return this.entradas.delete(typeof req === "string" ? req : req.url);
         }
     }
-    return { // Retorna resultado
-        async open(nombre) { // Instrucción JavaScript
-            if (!almacenes.has(nombre)) almacenes.set(nombre, new CacheSimulada(nombre)); // Evalúa condición
-            return almacenes.get(nombre); // Retorna resultado
+    return {
+        async open(nombre) {
+            if (!almacenes.has(nombre)) almacenes.set(nombre, new CacheSimulada(nombre));
+            return almacenes.get(nombre);
         },
-        async match(req) { // Instrucción JavaScript
-            for (const c of almacenes.values()) { // Inicia bucle de iteración
-                const hit = await c.match(req); // Declara e inicializa "hit"
-                if (hit) return hit; // Evalúa condición
+        async match(req) {
+            for (const c of almacenes.values()) {
+                const hit = await c.match(req);
+                if (hit) return hit;
             }
-            return undefined; // Retorna resultado
+            return undefined;
         },
         async keys() { return Array.from(almacenes.keys()); },
         async delete(nombre) { return almacenes.delete(nombre); }

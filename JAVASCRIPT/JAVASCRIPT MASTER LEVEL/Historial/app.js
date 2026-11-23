@@ -6,20 +6,20 @@
  * ============================================================================
  */
 
-(function () { // Instrucción JavaScript
+(function () {
     'use strict'; // Activa el modo estricto de JavaScript
 
     /* ==========================================================================
        1. ESTADO GLOBAL DE LA APLICACIÓN (AppState)
        ========================================================================== */
-    const AppState = { // Declara e inicializa "AppState"
+    const AppState = {
         currentSlide: 1,
         totalSlides: 11,
         viewMode: 'slides', // 'slides' | 'guide'
         soundEnabled: true,
 
         // 1.1 Simulador del Navegador Básico (Slide 2)
-        mockHistory: { // Instrucción JavaScript
+        mockHistory: {
             stack: [
                 { url: 'curso.dev/inicio', state: { page: 'inicio' }, title: 'Página Inicial' },
                 { url: 'curso.dev/catalogo', state: { page: 'catalogo', categoria: 'todos' }, title: 'Catálogo de Cursos' },
@@ -32,24 +32,24 @@
         activeScenario: 'push',
 
         // 1.3 Simulador SPA Completo (Slide 7)
-        spa: { // Instrucción JavaScript
+        spa: {
             currentRoute: '/inicio',
             history: [
                 { route: '/inicio', sec: 'inicio', state: { seccion: 'inicio' } }
             ],
             pointer: 0,
-            views: { // Instrucción JavaScript
-                '/inicio': { // Instrucción JavaScript
+            views: {
+                '/inicio': {
                     title: '🏠 Vista de Inicio',
                     desc: 'Bienvenido a nuestra aplicación SPA con navegación instantánea. El DOM se actualiza dinámicamente sin peticiones de recarga al servidor.',
                     state: { seccion: 'inicio' }
                 },
-                '/catalogo': { // Instrucción JavaScript
+                '/catalogo': {
                     title: '📦 Catálogo de Productos',
                     desc: 'Explora la lista completa de artículos tecnológicos. Al pulsar Atrás en el navegador virtual, volverás a Inicio sin perder datos en memoria.',
                     state: { seccion: 'catalogo', categoria: 'tecnologia' }
                 },
-                '/perfil': { // Instrucción JavaScript
+                '/perfil': {
                     title: '👤 Perfil de Usuario',
                     desc: 'Configuración de cuenta y preferencias. La URL visible en la barra cambia limpiamente mediante history.pushState().',
                     state: { seccion: 'perfil', usuarioId: 9942 }
@@ -65,72 +65,72 @@
        2. MOTOR DE SONIDO SINTETIZADO (Web Audio API)
        ========================================================================== */
     class SoundEngine { // Define clase
-        constructor() { // Instrucción JavaScript
-            this.ctx = null; // Asigna valor
+        constructor() {
+            this.ctx = null;
         }
 
-        init() { // Instrucción JavaScript
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
-                const AudioCtx = window.AudioContext || window.webkitAudioContext; // Declara e inicializa "AudioCtx"
-                this.ctx = new AudioCtx(); // Asigna valor
+        init() {
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                this.ctx = new AudioCtx();
             }
-            if (this.ctx && this.ctx.state === 'suspended') { // Evalúa condición
-                this.ctx.resume(); // Ejecuta llamada o método
+            if (this.ctx && this.ctx.state === 'suspended') {
+                this.ctx.resume();
             }
         }
 
-        playTone(freq, type = 'sine', duration = 0.1, volume = 0.05) { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
+        playTone(freq, type = 'sine', duration = 0.1, volume = 0.05) {
+            if (!AppState.soundEnabled) return;
             try { // Inicia bloque protegido contra errores
-                this.init(); // Ejecuta llamada o método
-                if (!this.ctx) return; // Evalúa condición
+                this.init();
+                if (!this.ctx) return;
 
-                const osc = this.ctx.createOscillator(); // Declara e inicializa "osc"
-                const gain = this.ctx.createGain(); // Declara e inicializa "gain"
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
 
-                osc.type = type; // Asigna valor
-                osc.frequency.setValueAtTime(freq, this.ctx.currentTime); // Ejecuta llamada o método
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
 
-                gain.gain.setValueAtTime(volume, this.ctx.currentTime); // Ejecuta llamada o método
-                gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration); // Ejecuta llamada o método
+                gain.gain.setValueAtTime(volume, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
 
-                osc.connect(gain); // Ejecuta llamada o método
-                gain.connect(this.ctx.destination); // Ejecuta llamada o método
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
 
-                osc.start(); // Ejecuta llamada o método
-                osc.stop(this.ctx.currentTime + duration); // Ejecuta llamada o método
-            } catch (e) { // Instrucción JavaScript
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            } catch (e) {
                 // Silencioso si el navegador bloquea audio sin interacción
             }
         }
 
-        nav() { // Instrucción JavaScript
-            this.playTone(480, 'sine', 0.08, 0.04); // Ejecuta llamada o método
+        nav() {
+            this.playTone(480, 'sine', 0.08, 0.04);
         }
 
-        click() { // Instrucción JavaScript
-            this.playTone(600, 'triangle', 0.06, 0.05); // Ejecuta llamada o método
+        click() {
+            this.playTone(600, 'triangle', 0.06, 0.05);
         }
 
-        success() { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            this.playTone(523.25, 'sine', 0.09, 0.05); // Ejecuta llamada o método
-            setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 80); // Ejecuta llamada o método
+        success() {
+            if (!AppState.soundEnabled) return;
+            this.playTone(523.25, 'sine', 0.09, 0.05);
+            setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 80);
         }
 
-        warning() { // Instrucción JavaScript
-            if (!AppState.soundEnabled) return; // Evalúa condición
-            this.playTone(340, 'sawtooth', 0.12, 0.06); // Ejecuta llamada o método
-            setTimeout(() => this.playTone(260, 'sawtooth', 0.15, 0.06), 100); // Ejecuta llamada o método
+        warning() {
+            if (!AppState.soundEnabled) return;
+            this.playTone(340, 'sawtooth', 0.12, 0.06);
+            setTimeout(() => this.playTone(260, 'sawtooth', 0.15, 0.06), 100);
         }
     }
 
-    const sound = new SoundEngine(); // Declara e inicializa "sound"
+    const sound = new SoundEngine();
 
     /* ==========================================================================
        3. PRESETS DE CÓDIGO EDITABLE PARA EL PLAYGROUND (Slide 9 & Retos)
        ========================================================================== */
-    const CodePresets = { // Declara e inicializa "CodePresets"
+    const CodePresets = {
         'preset-hist-1': `// 1. Navegación Básica: back(), forward() y length
 console.log("=== INSPECCIÓN DEL HISTORIAL ===");
 console.log("Total de entradas en la sesión (history.length):", window.history.length);
@@ -356,300 +356,300 @@ checkout.avanzar(3); // Método de pago`
        4. CONTROLADOR PRINCIPAL DE LA INTERFAZ (AppController)
        ========================================================================== */
     class AppController { // Define clase
-        constructor() { // Instrucción JavaScript
-            this.dom = {}; // Asigna valor
-            this.init(); // Ejecuta llamada o método
+        constructor() {
+            this.dom = {};
+            this.init();
         }
 
-        init() { // Instrucción JavaScript
-            this.cacheDom(); // Ejecuta llamada o método
-            this.bindEvents(); // Ejecuta llamada o método
-            this.buildSlideDots(); // Ejecuta llamada o método
-            this.updateSlideDisplay(); // Ejecuta llamada o método
+        init() {
+            this.cacheDom();
+            this.bindEvents();
+            this.buildSlideDots();
+            this.updateSlideDisplay();
             
             // Inicializar simuladores específicos
-            this.initMockBrowser(); // Ejecuta llamada o método
-            this.initScenarioSimulator(); // Ejecuta llamada o método
-            this.initFlowTabs(); // Ejecuta llamada o método
-            this.initSpaSimulator(); // Ejecuta llamada o método
-            this.initAnalogies(); // Ejecuta llamada o método
-            this.loadCodePreset('preset-hist-1'); // Ejecuta llamada o método
+            this.initMockBrowser();
+            this.initScenarioSimulator();
+            this.initFlowTabs();
+            this.initSpaSimulator();
+            this.initAnalogies();
+            this.loadCodePreset('preset-hist-1');
         }
 
-        cacheDom() { // Instrucción JavaScript
+        cacheDom() {
             // Contenedores generales
-            this.dom.body = document.body; // Asigna valor
-            this.dom.slides = document.querySelectorAll('.slide'); // Asigna valor
-            this.dom.presentationWrapper = document.getElementById('presentationWrapper'); // Asigna valor
+            this.dom.body = document.body;
+            this.dom.slides = document.querySelectorAll('.slide');
+            this.dom.presentationWrapper = document.getElementById('presentationWrapper');
 
             // Navegación superior
-            this.dom.progressBar = document.getElementById('progressBar'); // Asigna valor
-            this.dom.slideIndicator = document.getElementById('slideIndicator'); // Asigna valor
-            this.dom.btnToggleMode = document.getElementById('btnToggleMode'); // Asigna valor
-            this.dom.modeIcon = document.getElementById('modeIcon'); // Asigna valor
-            this.dom.modeText = document.getElementById('modeText'); // Asigna valor
-            this.dom.btnToggleSound = document.getElementById('btnToggleSound'); // Asigna valor
-            this.dom.soundIcon = document.getElementById('soundIcon'); // Asigna valor
-            this.dom.btnOverview = document.getElementById('btnOverview'); // Asigna valor
-            this.dom.btnFullscreen = document.getElementById('btnFullscreen'); // Asigna valor
+            this.dom.progressBar = document.getElementById('progressBar');
+            this.dom.slideIndicator = document.getElementById('slideIndicator');
+            this.dom.btnToggleMode = document.getElementById('btnToggleMode');
+            this.dom.modeIcon = document.getElementById('modeIcon');
+            this.dom.modeText = document.getElementById('modeText');
+            this.dom.btnToggleSound = document.getElementById('btnToggleSound');
+            this.dom.soundIcon = document.getElementById('soundIcon');
+            this.dom.btnOverview = document.getElementById('btnOverview');
+            this.dom.btnFullscreen = document.getElementById('btnFullscreen');
 
             // Navegación inferior
-            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide'); // Asigna valor
-            this.dom.btnNextSlide = document.getElementById('btnNextSlide'); // Asigna valor
-            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer'); // Asigna valor
+            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide');
+            this.dom.btnNextSlide = document.getElementById('btnNextSlide');
+            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer');
 
             // Hero Slide
-            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation'); // Asigna valor
-            this.dom.jumpLinks = document.querySelectorAll('[data-jump]'); // Asigna valor
+            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation');
+            this.dom.jumpLinks = document.querySelectorAll('[data-jump]');
 
             // Slide 2: Mockup Navegador
-            this.dom.btnMockBack = document.getElementById('btnMockBack'); // Asigna valor
-            this.dom.btnMockForward = document.getElementById('btnMockForward'); // Asigna valor
-            this.dom.btnMockReload = document.getElementById('btnMockReload'); // Asigna valor
-            this.dom.mockUrlText = document.getElementById('mockUrlText'); // Asigna valor
-            this.dom.mockStackPointer = document.getElementById('mockStackPointer'); // Asigna valor
-            this.dom.mockStackLength = document.getElementById('mockStackLength'); // Asigna valor
-            this.dom.btnTestHistoryIntro = document.getElementById('btnTestHistoryIntro'); // Asigna valor
-            this.dom.testHistoryIntroStatus = document.getElementById('testHistoryIntroStatus'); // Asigna valor
-            this.dom.consoleOutput1 = document.getElementById('console-output-1'); // Asigna valor
+            this.dom.btnMockBack = document.getElementById('btnMockBack');
+            this.dom.btnMockForward = document.getElementById('btnMockForward');
+            this.dom.btnMockReload = document.getElementById('btnMockReload');
+            this.dom.mockUrlText = document.getElementById('mockUrlText');
+            this.dom.mockStackPointer = document.getElementById('mockStackPointer');
+            this.dom.mockStackLength = document.getElementById('mockStackLength');
+            this.dom.btnTestHistoryIntro = document.getElementById('btnTestHistoryIntro');
+            this.dom.testHistoryIntroStatus = document.getElementById('testHistoryIntroStatus');
+            this.dom.consoleOutput1 = document.getElementById('console-output-1');
 
             // Slide 3: Pruebas de go()
-            this.dom.btnCheckGoExamples = document.getElementById('btnCheckGoExamples'); // Asigna valor
-            this.dom.goExamplesResult = document.getElementById('goExamplesResult'); // Asigna valor
+            this.dom.btnCheckGoExamples = document.getElementById('btnCheckGoExamples');
+            this.dom.goExamplesResult = document.getElementById('goExamplesResult');
 
             // Slide 4: Simulador de Escenarios
-            this.dom.simPropButtons = document.querySelectorAll('.sim-prop-btn'); // Asigna valor
-            this.dom.btnCompareHistoryModes = document.getElementById('btnCompareHistoryModes'); // Asigna valor
-            this.dom.terminalImplicit = document.getElementById('terminalImplicit'); // Asigna valor
-            this.dom.terminalSerialized = document.getElementById('terminalSerialized'); // Asigna valor
-            this.dom.statusImplicit = document.getElementById('statusImplicit'); // Asigna valor
-            this.dom.statusSerialized = document.getElementById('statusSerialized'); // Asigna valor
-            this.dom.storageFeedbackText = document.getElementById('storageFeedbackText'); // Asigna valor
+            this.dom.simPropButtons = document.querySelectorAll('.sim-prop-btn');
+            this.dom.btnCompareHistoryModes = document.getElementById('btnCompareHistoryModes');
+            this.dom.terminalImplicit = document.getElementById('terminalImplicit');
+            this.dom.terminalSerialized = document.getElementById('terminalSerialized');
+            this.dom.statusImplicit = document.getElementById('statusImplicit');
+            this.dom.statusSerialized = document.getElementById('statusSerialized');
+            this.dom.storageFeedbackText = document.getElementById('storageFeedbackText');
 
             // Slide 5: Pestañas de Características y Test en Vivo
-            this.dom.charTabButtons = document.querySelectorAll('.char-tab-btn'); // Asigna valor
-            this.dom.charDetailViews = document.querySelectorAll('.char-detail-view'); // Asigna valor
-            this.dom.btnTestHistoryState = document.getElementById('btnTestHistoryState'); // Asigna valor
-            this.dom.historyStateResult = document.getElementById('historyStateResult'); // Asigna valor
-            this.dom.btnTestPopstate = document.getElementById('btnTestPopstate'); // Asigna valor
-            this.dom.popstateResult = document.getElementById('popstateResult'); // Asigna valor
-            this.dom.btnTestNoTrigger = document.getElementById('btnTestNoTrigger'); // Asigna valor
-            this.dom.noTriggerResult = document.getElementById('noTriggerResult'); // Asigna valor
+            this.dom.charTabButtons = document.querySelectorAll('.char-tab-btn');
+            this.dom.charDetailViews = document.querySelectorAll('.char-detail-view');
+            this.dom.btnTestHistoryState = document.getElementById('btnTestHistoryState');
+            this.dom.historyStateResult = document.getElementById('historyStateResult');
+            this.dom.btnTestPopstate = document.getElementById('btnTestPopstate');
+            this.dom.popstateResult = document.getElementById('popstateResult');
+            this.dom.btnTestNoTrigger = document.getElementById('btnTestNoTrigger');
+            this.dom.noTriggerResult = document.getElementById('noTriggerResult');
 
             // Slide 7: Simulador SPA
-            this.dom.btnSpaBack = document.getElementById('btnSpaBack'); // Asigna valor
-            this.dom.btnSpaForward = document.getElementById('btnSpaForward'); // Asigna valor
-            this.dom.spaCurrentUrl = document.getElementById('spaCurrentUrl'); // Asigna valor
-            this.dom.spaTabs = document.querySelectorAll('.spa-tab-btn'); // Asigna valor
-            this.dom.spaCanvasTitle = document.getElementById('spaCanvasTitle'); // Asigna valor
-            this.dom.spaCanvasDesc = document.getElementById('spaCanvasDesc'); // Asigna valor
-            this.dom.spaStatusResult = document.getElementById('spaStatusResult'); // Asigna valor
+            this.dom.btnSpaBack = document.getElementById('btnSpaBack');
+            this.dom.btnSpaForward = document.getElementById('btnSpaForward');
+            this.dom.spaCurrentUrl = document.getElementById('spaCurrentUrl');
+            this.dom.spaTabs = document.querySelectorAll('.spa-tab-btn');
+            this.dom.spaCanvasTitle = document.getElementById('spaCanvasTitle');
+            this.dom.spaCanvasDesc = document.getElementById('spaCanvasDesc');
+            this.dom.spaStatusResult = document.getElementById('spaStatusResult');
 
             // Slide 8: Analogías
-            this.dom.toolButtons = document.querySelectorAll('.tool-btn'); // Asigna valor
-            this.dom.officeCardLeft = document.getElementById('officeCardLeft'); // Asigna valor
-            this.dom.officeAvatarLeft = document.getElementById('officeAvatarLeft'); // Asigna valor
-            this.dom.officeTitleLeft = document.getElementById('officeTitleLeft'); // Asigna valor
-            this.dom.officeSubLeft = document.getElementById('officeSubLeft'); // Asigna valor
-            this.dom.officeItemsLeft = document.getElementById('officeItemsLeft'); // Asigna valor
-            this.dom.officeStatusLeft = document.getElementById('officeStatusLeft'); // Asigna valor
+            this.dom.toolButtons = document.querySelectorAll('.tool-btn');
+            this.dom.officeCardLeft = document.getElementById('officeCardLeft');
+            this.dom.officeAvatarLeft = document.getElementById('officeAvatarLeft');
+            this.dom.officeTitleLeft = document.getElementById('officeTitleLeft');
+            this.dom.officeSubLeft = document.getElementById('officeSubLeft');
+            this.dom.officeItemsLeft = document.getElementById('officeItemsLeft');
+            this.dom.officeStatusLeft = document.getElementById('officeStatusLeft');
 
-            this.dom.officeCardRight = document.getElementById('officeCardRight'); // Asigna valor
-            this.dom.officeAvatarRight = document.getElementById('officeAvatarRight'); // Asigna valor
-            this.dom.officeTitleRight = document.getElementById('officeTitleRight'); // Asigna valor
-            this.dom.officeSubRight = document.getElementById('officeSubRight'); // Asigna valor
-            this.dom.officeItemsRight = document.getElementById('officeItemsRight'); // Asigna valor
-            this.dom.officeStatusRight = document.getElementById('officeStatusRight'); // Asigna valor
+            this.dom.officeCardRight = document.getElementById('officeCardRight');
+            this.dom.officeAvatarRight = document.getElementById('officeAvatarRight');
+            this.dom.officeTitleRight = document.getElementById('officeTitleRight');
+            this.dom.officeSubRight = document.getElementById('officeSubRight');
+            this.dom.officeItemsRight = document.getElementById('officeItemsRight');
+            this.dom.officeStatusRight = document.getElementById('officeStatusRight');
 
-            this.dom.officeArrowLabel = document.getElementById('officeArrowLabel'); // Asigna valor
-            this.dom.officeBannerIcon = document.getElementById('officeBannerIcon'); // Asigna valor
-            this.dom.officeBannerText = document.getElementById('officeBannerText'); // Asigna valor
+            this.dom.officeArrowLabel = document.getElementById('officeArrowLabel');
+            this.dom.officeBannerIcon = document.getElementById('officeBannerIcon');
+            this.dom.officeBannerText = document.getElementById('officeBannerText');
 
             // Slide 9: Playground
-            this.dom.codePresetSelect = document.getElementById('codePresetSelect'); // Asigna valor
-            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor'); // Asigna valor
-            this.dom.btnResetCode = document.getElementById('btnResetCode'); // Asigna valor
-            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode'); // Asigna valor
-            this.dom.btnClearConsole = document.getElementById('btnClearConsole'); // Asigna valor
-            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer'); // Asigna valor
+            this.dom.codePresetSelect = document.getElementById('codePresetSelect');
+            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor');
+            this.dom.btnResetCode = document.getElementById('btnResetCode');
+            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode');
+            this.dom.btnClearConsole = document.getElementById('btnClearConsole');
+            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer');
 
             // Slide 10: Cheat Sheet & Retos
-            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header'); // Asigna valor
-            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]'); // Asigna valor
-            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation'); // Asigna valor
-            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat'); // Asigna valor
+            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header');
+            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]');
+            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation');
+            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat');
 
             // Modales & Toast
-            this.dom.overviewModal = document.getElementById('overviewModal'); // Asigna valor
-            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview'); // Asigna valor
-            this.dom.overviewGrid = document.getElementById('overviewGrid'); // Asigna valor
-            this.dom.toastNotification = document.getElementById('toastNotification'); // Asigna valor
-            this.dom.toastIcon = document.getElementById('toastIcon'); // Asigna valor
-            this.dom.toastMsg = document.getElementById('toastMsg'); // Asigna valor
+            this.dom.overviewModal = document.getElementById('overviewModal');
+            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview');
+            this.dom.overviewGrid = document.getElementById('overviewGrid');
+            this.dom.toastNotification = document.getElementById('toastNotification');
+            this.dom.toastIcon = document.getElementById('toastIcon');
+            this.dom.toastMsg = document.getElementById('toastMsg');
 
             // Botones de copia de código en tarjetas
-            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code'); // Asigna valor
+            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code');
         }
 
-        bindEvents() { // Instrucción JavaScript
+        bindEvents() {
             // Navegación por diapositivas
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide()); // Evalúa condición
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide()); // Evalúa condición
-            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2)); // Evalúa condición
-            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1)); // Evalúa condición
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide());
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide());
+            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2));
+            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1));
 
             // Enlaces de salto directo en hero card
-            this.dom.jumpLinks.forEach(link => { // Instrucción JavaScript
-                link.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10); // Declara e inicializa "slideTarget"
-                    if (slideTarget) this.goToSlide(slideTarget); // Evalúa condición
+            this.dom.jumpLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10);
+                    if (slideTarget) this.goToSlide(slideTarget);
                 });
             });
 
             // Controles de barra superior
-            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode()); // Evalúa condición
-            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound()); // Evalúa condición
-            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview()); // Evalúa condición
-            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview()); // Evalúa condición
-            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen()); // Evalúa condición
+            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode());
+            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound());
+            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview());
+            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview());
+            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
 
             // Navegación por Teclado
-            window.addEventListener('keydown', (e) => { // Registra escuchador de eventos
-                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') { // Evalúa condición
+            window.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
                     // Permitir Ctrl + Enter en el playground para ejecutar
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { // Evalúa condición
-                        e.preventDefault(); // Ejecuta llamada o método
-                        this.runPlaygroundCode(); // Ejecuta llamada o método
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                        e.preventDefault();
+                        this.runPlaygroundCode();
                     }
-                    return; // Retorna resultado
+                    return;
                 }
 
-                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') { // Evalúa condición
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.nextSlide(); // Ejecuta llamada o método
-                } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') { // Instrucción JavaScript
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.prevSlide(); // Ejecuta llamada o método
-                } else if (e.key === 'o' || e.key === 'O') { // Instrucción JavaScript
-                    this.openOverview(); // Ejecuta llamada o método
-                } else if (e.key === 'Escape') { // Instrucción JavaScript
-                    this.closeOverview(); // Ejecuta llamada o método
-                } else if (e.key === 'f' || e.key === 'F') { // Instrucción JavaScript
-                    this.toggleFullscreen(); // Ejecuta llamada o método
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') {
+                    e.preventDefault();
+                    this.nextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+                    e.preventDefault();
+                    this.prevSlide();
+                } else if (e.key === 'o' || e.key === 'O') {
+                    this.openOverview();
+                } else if (e.key === 'Escape') {
+                    this.closeOverview();
+                } else if (e.key === 'f' || e.key === 'F') {
+                    this.toggleFullscreen();
                 }
             });
 
             // Slide 2: Mockup Navegador
-            if (this.dom.btnMockBack) this.dom.btnMockBack.addEventListener('click', () => this.mockNavBack()); // Evalúa condición
-            if (this.dom.btnMockForward) this.dom.btnMockForward.addEventListener('click', () => this.mockNavForward()); // Evalúa condición
-            if (this.dom.btnMockReload) this.dom.btnMockReload.addEventListener('click', () => this.mockNavReload()); // Evalúa condición
-            if (this.dom.btnTestHistoryIntro) this.dom.btnTestHistoryIntro.addEventListener('click', () => this.runHistoryIntroTest()); // Evalúa condición
+            if (this.dom.btnMockBack) this.dom.btnMockBack.addEventListener('click', () => this.mockNavBack());
+            if (this.dom.btnMockForward) this.dom.btnMockForward.addEventListener('click', () => this.mockNavForward());
+            if (this.dom.btnMockReload) this.dom.btnMockReload.addEventListener('click', () => this.mockNavReload());
+            if (this.dom.btnTestHistoryIntro) this.dom.btnTestHistoryIntro.addEventListener('click', () => this.runHistoryIntroTest());
 
             // Slide 3: go()
-            if (this.dom.btnCheckGoExamples) this.dom.btnCheckGoExamples.addEventListener('click', () => this.runGoExamplesTest()); // Evalúa condición
+            if (this.dom.btnCheckGoExamples) this.dom.btnCheckGoExamples.addEventListener('click', () => this.runGoExamplesTest());
 
             // Slide 4: Escenarios
-            this.dom.simPropButtons.forEach(btn => { // Instrucción JavaScript
-                btn.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    this.dom.simPropButtons.forEach(b => b.classList.remove('active')); // Modifica clases CSS del elemento
-                    e.currentTarget.classList.add('active'); // Modifica clases CSS del elemento
-                    AppState.activeScenario = e.currentTarget.getAttribute('data-scenario'); // Asigna valor
-                    this.renderScenarioPreview(); // Ejecuta llamada o método
-                    sound.click(); // Ejecuta llamada o método
+            this.dom.simPropButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    this.dom.simPropButtons.forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    AppState.activeScenario = e.currentTarget.getAttribute('data-scenario');
+                    this.renderScenarioPreview();
+                    sound.click();
                 });
             });
-            if (this.dom.btnCompareHistoryModes) this.dom.btnCompareHistoryModes.addEventListener('click', () => this.runCompareHistoryModes()); // Evalúa condición
+            if (this.dom.btnCompareHistoryModes) this.dom.btnCompareHistoryModes.addEventListener('click', () => this.runCompareHistoryModes());
 
             // Slide 5: Pestañas de Características
-            this.dom.charTabButtons.forEach(tab => { // Instrucción JavaScript
-                tab.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    const flowId = e.currentTarget.getAttribute('data-flow'); // Declara e inicializa "flowId"
-                    this.switchFlowTab(flowId); // Ejecuta llamada o método
+            this.dom.charTabButtons.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const flowId = e.currentTarget.getAttribute('data-flow');
+                    this.switchFlowTab(flowId);
                 });
             });
-            if (this.dom.btnTestHistoryState) this.dom.btnTestHistoryState.addEventListener('click', () => this.testHistoryState()); // Evalúa condición
-            if (this.dom.btnTestPopstate) this.dom.btnTestPopstate.addEventListener('click', () => this.testPopstate()); // Evalúa condición
-            if (this.dom.btnTestNoTrigger) this.dom.btnTestNoTrigger.addEventListener('click', () => this.testNoTriggerRule()); // Evalúa condición
+            if (this.dom.btnTestHistoryState) this.dom.btnTestHistoryState.addEventListener('click', () => this.testHistoryState());
+            if (this.dom.btnTestPopstate) this.dom.btnTestPopstate.addEventListener('click', () => this.testPopstate());
+            if (this.dom.btnTestNoTrigger) this.dom.btnTestNoTrigger.addEventListener('click', () => this.testNoTriggerRule());
 
             // Slide 7: Simulador SPA
-            this.dom.spaTabs.forEach(tab => { // Instrucción JavaScript
-                tab.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    const route = e.currentTarget.getAttribute('data-sparoute'); // Declara e inicializa "route"
-                    this.spaNavigate(route); // Ejecuta llamada o método
+            this.dom.spaTabs.forEach(tab => {
+                tab.addEventListener('click', (e) => {
+                    const route = e.currentTarget.getAttribute('data-sparoute');
+                    this.spaNavigate(route);
                 });
             });
-            if (this.dom.btnSpaBack) this.dom.btnSpaBack.addEventListener('click', () => this.spaBack()); // Evalúa condición
-            if (this.dom.btnSpaForward) this.dom.btnSpaForward.addEventListener('click', () => this.spaForward()); // Evalúa condición
+            if (this.dom.btnSpaBack) this.dom.btnSpaBack.addEventListener('click', () => this.spaBack());
+            if (this.dom.btnSpaForward) this.dom.btnSpaForward.addEventListener('click', () => this.spaForward());
 
             // Slide 8: Analogías
-            this.dom.toolButtons.forEach(btn => { // Instrucción JavaScript
-                btn.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    this.dom.toolButtons.forEach(b => b.classList.remove('active')); // Modifica clases CSS del elemento
-                    e.currentTarget.classList.add('active'); // Modifica clases CSS del elemento
-                    AppState.activeOffice = e.currentTarget.getAttribute('data-office'); // Asigna valor
-                    this.renderAnalogies(); // Ejecuta llamada o método
-                    sound.click(); // Ejecuta llamada o método
+            this.dom.toolButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    this.dom.toolButtons.forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    AppState.activeOffice = e.currentTarget.getAttribute('data-office');
+                    this.renderAnalogies();
+                    sound.click();
                 });
             });
 
             // Slide 9: Playground
-            if (this.dom.codePresetSelect) { // Evalúa condición
-                this.dom.codePresetSelect.addEventListener('change', (e) => { // Registra escuchador de eventos
-                    this.loadCodePreset(e.target.value); // Ejecuta llamada o método
+            if (this.dom.codePresetSelect) {
+                this.dom.codePresetSelect.addEventListener('change', (e) => {
+                    this.loadCodePreset(e.target.value);
                 });
             }
-            if (this.dom.btnResetCode) { // Evalúa condición
-                this.dom.btnResetCode.addEventListener('click', () => { // Registra escuchador de eventos
-                    this.loadCodePreset(this.dom.codePresetSelect.value); // Ejecuta llamada o método
-                    this.showToast('Código restaurado al estado original'); // Ejecuta llamada o método
+            if (this.dom.btnResetCode) {
+                this.dom.btnResetCode.addEventListener('click', () => {
+                    this.loadCodePreset(this.dom.codePresetSelect.value);
+                    this.showToast('Código restaurado al estado original');
                 });
             }
-            if (this.dom.btnRunEditorCode) this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode()); // Evalúa condición
-            if (this.dom.btnClearConsole) this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole()); // Evalúa condición
+            if (this.dom.btnRunEditorCode) this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode());
+            if (this.dom.btnClearConsole) this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole());
 
             // Slide 10: Acordeones
-            this.dom.accordionHeaders.forEach(header => { // Instrucción JavaScript
-                header.addEventListener('click', () => { // Registra escuchador de eventos
-                    const item = header.parentElement; // Declara e inicializa "item"
-                    const isOpen = item.classList.contains('active'); // Declara e inicializa "isOpen"
-                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active')); // Modifica clases CSS del elemento
-                    if (!isOpen) { // Evalúa condición
-                        item.classList.add('active'); // Modifica clases CSS del elemento
-                        sound.click(); // Ejecuta llamada o método
+            this.dom.accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    const isOpen = item.classList.contains('active');
+                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                    if (!isOpen) {
+                        item.classList.add('active');
+                        sound.click();
                     }
                 });
             });
 
             // Cargar retos al Playground
-            this.dom.btnLoadChallenges.forEach(btn => { // Instrucción JavaScript
-                btn.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge'); // Declara e inicializa "challengeKey"
-                    this.goToSlide(9); // Ejecuta llamada o método
-                    if (this.dom.codePresetSelect) { // Evalúa condición
-                        this.dom.codePresetSelect.value = challengeKey; // Asigna valor
+            this.dom.btnLoadChallenges.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge');
+                    this.goToSlide(9);
+                    if (this.dom.codePresetSelect) {
+                        this.dom.codePresetSelect.value = challengeKey;
                     }
-                    this.loadCodePreset(challengeKey); // Ejecuta llamada o método
-                    this.showToast('Reto cargado en el Playground', '✔'); // Ejecuta llamada o método
-                    sound.success(); // Ejecuta llamada o método
+                    this.loadCodePreset(challengeKey);
+                    this.showToast('Reto cargado en el Playground', '✔');
+                    sound.success();
                 });
             });
 
             // Copiar Markdown de Chuleta
-            if (this.dom.btnCopySummaryCheat) { // Evalúa condición
-                this.dom.btnCopySummaryCheat.addEventListener('click', () => this.copyCheatSheet()); // Registra escuchador de eventos
+            if (this.dom.btnCopySummaryCheat) {
+                this.dom.btnCopySummaryCheat.addEventListener('click', () => this.copyCheatSheet());
             }
 
             // Copiar Snippets
-            this.dom.btnCopyCodes.forEach(btn => { // Instrucción JavaScript
-                btn.addEventListener('click', (e) => { // Registra escuchador de eventos
-                    const targetId = e.currentTarget.getAttribute('data-target'); // Declara e inicializa "targetId"
-                    const targetEl = document.getElementById(targetId); // Obtiene referencia DOM para "targetEl"
-                    if (targetEl) { // Evalúa condición
-                        navigator.clipboard.writeText(targetEl.innerText).then(() => { // Instrucción JavaScript
+            this.dom.btnCopyCodes.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const targetId = e.currentTarget.getAttribute('data-target');
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        navigator.clipboard.writeText(targetEl.innerText).then(() => {
                             btn.textContent = '¡Copiado!'; // Actualiza contenido en el DOM
                             setTimeout(() => { btn.textContent = 'Copiar'; }, 2000); // Actualiza contenido en el DOM
-                            this.showToast('Código copiado al portapapeles'); // Ejecuta llamada o método
-                            sound.success(); // Ejecuta llamada o método
+                            this.showToast('Código copiado al portapapeles');
+                            sound.success();
                         });
                     }
                 });
@@ -659,114 +659,114 @@ checkout.avanzar(3); // Método de pago`
         /* --------------------------------------------------------------------------
            Navegación entre Diapositivas
            -------------------------------------------------------------------------- */
-        buildSlideDots() { // Instrucción JavaScript
-            if (!this.dom.slideDotsContainer) return; // Evalúa condición
+        buildSlideDots() {
+            if (!this.dom.slideDotsContainer) return;
             this.dom.slideDotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
-            for (let i = 1; i <= AppState.totalSlides; i++) { // Inicia bucle de iteración
-                const dot = document.createElement('button'); // Crea nuevo elemento DOM "dot"
-                dot.className = `slide-dot ${i === AppState.currentSlide ? 'active' : ''}`; // Asigna valor
-                dot.setAttribute('title', `Ir a diapositiva ${i}`); // Ejecuta llamada o método
-                dot.addEventListener('click', () => this.goToSlide(i)); // Registra escuchador de eventos
-                this.dom.slideDotsContainer.appendChild(dot); // Inserta nodo en el DOM
+            for (let i = 1; i <= AppState.totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.className = `slide-dot ${i === AppState.currentSlide ? 'active' : ''}`;
+                dot.setAttribute('title', `Ir a diapositiva ${i}`);
+                dot.addEventListener('click', () => this.goToSlide(i));
+                this.dom.slideDotsContainer.appendChild(dot);
             }
         }
 
-        goToSlide(index) { // Instrucción JavaScript
-            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición
-            AppState.currentSlide = index; // Asigna valor
-            this.updateSlideDisplay(); // Ejecuta llamada o método
-            sound.nav(); // Ejecuta llamada o método
+        goToSlide(index) {
+            if (index < 1 || index > AppState.totalSlides) return;
+            AppState.currentSlide = index;
+            this.updateSlideDisplay();
+            sound.nav();
         }
 
-        nextSlide() { // Instrucción JavaScript
-            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
-                AppState.currentSlide++; // Instrucción JavaScript
-                this.updateSlideDisplay(); // Ejecuta llamada o método
-                sound.nav(); // Ejecuta llamada o método
+        nextSlide() {
+            if (AppState.currentSlide < AppState.totalSlides) {
+                AppState.currentSlide++;
+                this.updateSlideDisplay();
+                sound.nav();
             }
         }
 
-        prevSlide() { // Instrucción JavaScript
-            if (AppState.currentSlide > 1) { // Evalúa condición
-                AppState.currentSlide--; // Instrucción JavaScript
-                this.updateSlideDisplay(); // Ejecuta llamada o método
-                sound.nav(); // Ejecuta llamada o método
+        prevSlide() {
+            if (AppState.currentSlide > 1) {
+                AppState.currentSlide--;
+                this.updateSlideDisplay();
+                sound.nav();
             }
         }
 
-        updateSlideDisplay() { // Instrucción JavaScript
-            if (this.dom.slideIndicator) { // Evalúa condición
+        updateSlideDisplay() {
+            if (this.dom.slideIndicator) {
                 this.dom.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            if (this.dom.progressBar) { // Evalúa condición
-                const percent = (AppState.currentSlide / AppState.totalSlides) * 100; // Declara e inicializa "percent"
-                this.dom.progressBar.style.width = `${percent}%`; // Asigna valor
+            if (this.dom.progressBar) {
+                const percent = (AppState.currentSlide / AppState.totalSlides) * 100;
+                this.dom.progressBar.style.width = `${percent}%`;
             }
 
-            this.dom.slides.forEach((slide, idx) => { // Instrucción JavaScript
-                const num = idx + 1; // Declara e inicializa "num"
-                if (AppState.viewMode === 'slides') { // Evalúa condición
-                    slide.classList.toggle('active', num === AppState.currentSlide); // Modifica clases CSS del elemento
-                } else { // Instrucción JavaScript
+            this.dom.slides.forEach((slide, idx) => {
+                const num = idx + 1;
+                if (AppState.viewMode === 'slides') {
+                    slide.classList.toggle('active', num === AppState.currentSlide);
+                } else {
                     slide.classList.add('active'); // Modo guía: todas visibles
                 }
             });
 
             // Actualizar bolitas
-            const dots = document.querySelectorAll('.slide-dot'); // Obtiene referencia DOM para "dots"
-            dots.forEach((dot, idx) => { // Instrucción JavaScript
-                dot.classList.toggle('active', idx + 1 === AppState.currentSlide); // Modifica clases CSS del elemento
+            const dots = document.querySelectorAll('.slide-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx + 1 === AppState.currentSlide);
             });
 
             // Deshabilitar botones en extremos
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1; // Evalúa condición
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides; // Evalúa condición
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1;
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides;
 
             // Scroll al inicio si cambiamos de diapositiva
-            window.scrollTo({ top: 0, behavior: 'smooth' }); // Ejecuta llamada o método
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        toggleViewMode() { // Instrucción JavaScript
-            if (AppState.viewMode === 'slides') { // Evalúa condición
-                AppState.viewMode = 'guide'; // Asigna valor
-                this.dom.body.classList.remove('mode-presentation'); // Modifica clases CSS del elemento
-                this.dom.body.classList.add('mode-document'); // Modifica clases CSS del elemento
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑'; // Evalúa condición
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides'; // Evalúa condición
-                this.showToast('Activado Modo Documento Continuo'); // Ejecuta llamada o método
-            } else { // Instrucción JavaScript
-                AppState.viewMode = 'slides'; // Asigna valor
-                this.dom.body.classList.remove('mode-document'); // Modifica clases CSS del elemento
-                this.dom.body.classList.add('mode-presentation'); // Modifica clases CSS del elemento
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑'; // Evalúa condición
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía'; // Evalúa condición
-                this.showToast('Activado Modo Diapositivas'); // Ejecuta llamada o método
+        toggleViewMode() {
+            if (AppState.viewMode === 'slides') {
+                AppState.viewMode = 'guide';
+                this.dom.body.classList.remove('mode-presentation');
+                this.dom.body.classList.add('mode-document');
+                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides';
+                this.showToast('Activado Modo Documento Continuo');
+            } else {
+                AppState.viewMode = 'slides';
+                this.dom.body.classList.remove('mode-document');
+                this.dom.body.classList.add('mode-presentation');
+                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía';
+                this.showToast('Activado Modo Diapositivas');
             }
-            this.updateSlideDisplay(); // Ejecuta llamada o método
-            sound.click(); // Ejecuta llamada o método
+            this.updateSlideDisplay();
+            sound.click();
         }
 
-        toggleSound() { // Instrucción JavaScript
-            AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
-            if (this.dom.soundIcon) { // Evalúa condición
+        toggleSound() {
+            AppState.soundEnabled = !AppState.soundEnabled;
+            if (this.dom.soundIcon) {
                 this.dom.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            this.showToast(AppState.soundEnabled ? 'Sonido activado' : 'Sonido silenciado'); // Ejecuta llamada o método
-            if (AppState.soundEnabled) sound.click(); // Evalúa condición
+            this.showToast(AppState.soundEnabled ? 'Sonido activado' : 'Sonido silenciado');
+            if (AppState.soundEnabled) sound.click();
         }
 
-        toggleFullscreen() { // Instrucción JavaScript
-            if (!document.fullscreenElement) { // Evalúa condición
-                document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
-                this.showToast('Pantalla Completa'); // Ejecuta llamada o método
-            } else { // Instrucción JavaScript
-                if (document.exitFullscreen) document.exitFullscreen(); // Evalúa condición
+        toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+                this.showToast('Pantalla Completa');
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         }
 
-        openOverview() { // Instrucción JavaScript
-            if (!this.dom.overviewModal || !this.dom.overviewGrid) return; // Evalúa condición
+        openOverview() {
+            if (!this.dom.overviewModal || !this.dom.overviewGrid) return;
             this.dom.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             const slideTitles = [
@@ -782,152 +782,152 @@ checkout.avanzar(3); // Método de pago`
                 '10. Chuleta Rápida & Retos Resueltos'
             ];
 
-            slideTitles.forEach((title, i) => { // Instrucción JavaScript
-                const card = document.createElement('div'); // Crea nuevo elemento DOM "card"
-                card.className = `modal-card ${i + 1 === AppState.currentSlide ? 'active' : ''}`; // Asigna valor
+            slideTitles.forEach((title, i) => {
+                const card = document.createElement('div');
+                card.className = `modal-card ${i + 1 === AppState.currentSlide ? 'active' : ''}`;
                 card.innerHTML = `
                     <div class="modal-card-num">#${i + 1}</div>
                     <div class="modal-card-title">${title}</div>
                 `;
-                card.addEventListener('click', () => { // Registra escuchador de eventos
-                    this.goToSlide(i + 1); // Ejecuta llamada o método
-                    this.closeOverview(); // Ejecuta llamada o método
+                card.addEventListener('click', () => {
+                    this.goToSlide(i + 1);
+                    this.closeOverview();
                 });
-                this.dom.overviewGrid.appendChild(card); // Inserta nodo en el DOM
+                this.dom.overviewGrid.appendChild(card);
             });
 
-            this.dom.overviewModal.classList.add('active'); // Modifica clases CSS del elemento
-            sound.click(); // Ejecuta llamada o método
+            this.dom.overviewModal.classList.add('active');
+            sound.click();
         }
 
-        closeOverview() { // Instrucción JavaScript
-            if (this.dom.overviewModal) { // Evalúa condición
-                this.dom.overviewModal.classList.remove('active'); // Modifica clases CSS del elemento
+        closeOverview() {
+            if (this.dom.overviewModal) {
+                this.dom.overviewModal.classList.remove('active');
             }
         }
 
-        showToast(msg, icon = '✔') { // Instrucción JavaScript
-            if (!this.dom.toastNotification) return; // Evalúa condición
-            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon; // Evalúa condición
-            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg; // Evalúa condición
+        showToast(msg, icon = '✔') {
+            if (!this.dom.toastNotification) return;
+            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon;
+            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg;
 
-            this.dom.toastNotification.classList.add('active'); // Modifica clases CSS del elemento
-            clearTimeout(this.toastTimer); // Ejecuta llamada o método
-            this.toastTimer = setTimeout(() => { // Asigna valor
-                this.dom.toastNotification.classList.remove('active'); // Modifica clases CSS del elemento
-            }, 2600); // Ejecuta llamada o método
+            this.dom.toastNotification.classList.add('active');
+            clearTimeout(this.toastTimer);
+            this.toastTimer = setTimeout(() => {
+                this.dom.toastNotification.classList.remove('active');
+            }, 2600);
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 2: SIMULADOR DEL NAVEGADOR WEB (MOCKUP INTERACTIVO)
            -------------------------------------------------------------------------- */
-        initMockBrowser() { // Instrucción JavaScript
-            this.renderMockBrowser(); // Ejecuta llamada o método
+        initMockBrowser() {
+            this.renderMockBrowser();
         }
 
-        renderMockBrowser() { // Instrucción JavaScript
-            const h = AppState.mockHistory; // Declara e inicializa "h"
-            const current = h.stack[h.pointer] || { url: 'curso.dev/inicio', title: 'Página Inicial' }; // Declara e inicializa "current"
+        renderMockBrowser() {
+            const h = AppState.mockHistory;
+            const current = h.stack[h.pointer] || { url: 'curso.dev/inicio', title: 'Página Inicial' };
 
             // 1. Actualizar URL visible
-            if (this.dom.mockUrlText) { // Evalúa condición
+            if (this.dom.mockUrlText) {
                 this.dom.mockUrlText.textContent = current.url; // Actualiza contenido en el DOM
             }
 
             // 2. Actualizar Puntero y Tamaño
-            if (this.dom.mockStackPointer) { // Evalúa condición
+            if (this.dom.mockStackPointer) {
                 this.dom.mockStackPointer.textContent = `Posición ${h.pointer + 1} / ${h.stack.length}`; // Actualiza contenido en el DOM
             }
 
-            if (this.dom.mockStackLength) { // Evalúa condición
+            if (this.dom.mockStackLength) {
                 this.dom.mockStackLength.textContent = `${h.stack.length}`; // Actualiza contenido en el DOM
             }
 
             // 3. Habilitar/Deshabilitar botones de navegación
-            if (this.dom.btnMockBack) { // Evalúa condición
-                this.dom.btnMockBack.disabled = (h.pointer <= 0); // Asigna valor
+            if (this.dom.btnMockBack) {
+                this.dom.btnMockBack.disabled = (h.pointer <= 0);
             }
-            if (this.dom.btnMockForward) { // Evalúa condición
-                this.dom.btnMockForward.disabled = (h.pointer >= h.stack.length - 1); // Asigna valor
+            if (this.dom.btnMockForward) {
+                this.dom.btnMockForward.disabled = (h.pointer >= h.stack.length - 1);
             }
         }
 
-        logMockConsole(text) { // Instrucción JavaScript
-            if (!this.dom.consoleOutput1) return; // Evalúa condición
-            const prompt = this.dom.consoleOutput1.querySelector('.console-prompt'); // Obtiene referencia DOM para "prompt"
-            if (prompt) { // Evalúa condición
+        logMockConsole(text) {
+            if (!this.dom.consoleOutput1) return;
+            const prompt = this.dom.consoleOutput1.querySelector('.console-prompt');
+            if (prompt) {
                 prompt.textContent = text; // Actualiza contenido en el DOM
-            } else { // Instrucción JavaScript
+            } else {
                 this.dom.consoleOutput1.innerHTML = `<div class="console-prompt">${text}</div>`; // Actualiza contenido en el DOM
             }
         }
 
-        mockNavBack() { // Instrucción JavaScript
-            if (AppState.mockHistory.pointer > 0) { // Evalúa condición
-                AppState.mockHistory.pointer--; // Instrucción JavaScript
-                this.renderMockBrowser(); // Ejecuta llamada o método
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa "item"
-                this.logMockConsole(`> [history.back()] Retrocediste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`); // Ejecuta llamada o método
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Retrocedido a ${item.url}`; // Evalúa condición
-                sound.nav(); // Ejecuta llamada o método
+        mockNavBack() {
+            if (AppState.mockHistory.pointer > 0) {
+                AppState.mockHistory.pointer--;
+                this.renderMockBrowser();
+                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+                this.logMockConsole(`> [history.back()] Retrocediste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
+                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Retrocedido a ${item.url}`;
+                sound.nav();
             }
         }
 
-        mockNavForward() { // Instrucción JavaScript
-            if (AppState.mockHistory.pointer < AppState.mockHistory.stack.length - 1) { // Evalúa condición
-                AppState.mockHistory.pointer++; // Instrucción JavaScript
-                this.renderMockBrowser(); // Ejecuta llamada o método
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa "item"
-                this.logMockConsole(`> [history.forward()] Avanzaste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`); // Ejecuta llamada o método
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Avanzado a ${item.url}`; // Evalúa condición
-                sound.nav(); // Ejecuta llamada o método
+        mockNavForward() {
+            if (AppState.mockHistory.pointer < AppState.mockHistory.stack.length - 1) {
+                AppState.mockHistory.pointer++;
+                this.renderMockBrowser();
+                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+                this.logMockConsole(`> [history.forward()] Avanzaste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
+                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Avanzado a ${item.url}`;
+                sound.nav();
             }
         }
 
-        mockNavReload() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            if (this.dom.mockUrlText) { // Evalúa condición
-                this.dom.mockUrlText.style.opacity = '0.3'; // Asigna valor
-                setTimeout(() => { // Instrucción JavaScript
-                    this.dom.mockUrlText.style.opacity = '1'; // Asigna valor
-                }, 200); // Ejecuta llamada o método
+        mockNavReload() {
+            sound.click();
+            if (this.dom.mockUrlText) {
+                this.dom.mockUrlText.style.opacity = '0.3';
+                setTimeout(() => {
+                    this.dom.mockUrlText.style.opacity = '1';
+                }, 200);
             }
-            const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa "item"
-            this.logMockConsole(`> [history.go(0)] Recargando página actual: ${item.url} (equivale a location.reload())`); // Ejecuta llamada o método
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Página recargada'; // Evalúa condición
+            const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+            this.logMockConsole(`> [history.go(0)] Recargando página actual: ${item.url} (equivale a location.reload())`);
+            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Página recargada';
         }
 
-        runHistoryIntroTest() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Ejecutando secuencia...'; // Evalúa condición
+        runHistoryIntroTest() {
+            sound.click();
+            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Ejecutando secuencia...';
             
             // Si estamos al final, retroceder y luego avanzar automáticamente
-            if (AppState.mockHistory.pointer > 0) { // Evalúa condición
-                this.mockNavBack(); // Ejecuta llamada o método
-                setTimeout(() => { // Instrucción JavaScript
-                    this.mockNavBack(); // Ejecuta llamada o método
-                    setTimeout(() => { // Instrucción JavaScript
-                        this.mockNavForward(); // Ejecuta llamada o método
-                        if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito'; // Evalúa condición
-                        sound.success(); // Ejecuta llamada o método
-                    }, 800); // Ejecuta llamada o método
-                }, 800); // Ejecuta llamada o método
-            } else { // Instrucción JavaScript
-                this.mockNavForward(); // Ejecuta llamada o método
-                setTimeout(() => { // Instrucción JavaScript
-                    this.mockNavForward(); // Ejecuta llamada o método
-                    if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito'; // Evalúa condición
-                    sound.success(); // Ejecuta llamada o método
-                }, 800); // Ejecuta llamada o método
+            if (AppState.mockHistory.pointer > 0) {
+                this.mockNavBack();
+                setTimeout(() => {
+                    this.mockNavBack();
+                    setTimeout(() => {
+                        this.mockNavForward();
+                        if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
+                        sound.success();
+                    }, 800);
+                }, 800);
+            } else {
+                this.mockNavForward();
+                setTimeout(() => {
+                    this.mockNavForward();
+                    if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
+                    sound.success();
+                }, 800);
             }
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 3: PRUEBAS DE SALTOS CON GO(DELTA)
            -------------------------------------------------------------------------- */
-        runGoExamplesTest() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            if (!this.dom.goExamplesResult) return; // Evalúa condición
+        runGoExamplesTest() {
+            sound.click();
+            if (!this.dom.goExamplesResult) return;
             this.dom.goExamplesResult.innerHTML = `
                 <div style="font-family: var(--font-code); line-height: 1.6; font-size: 0.9rem;">
                     <div>⚡ <strong>history.go(-2):</strong> Retrocede 2 posiciones completas de una sola vez en la pila.</div>
@@ -936,21 +936,21 @@ checkout.avanzar(3); // Método de pago`
                     <div>⚡ <strong>history.go(-99):</strong> Si el delta excede el rango del historial, <em>se descarta sin error</em>.</div>
                 </div>
             `;
-            sound.success(); // Ejecuta llamada o método
+            sound.success();
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 4: SIMULADOR DE ESCENARIOS PUSH VS REPLACE
            -------------------------------------------------------------------------- */
-        initScenarioSimulator() { // Instrucción JavaScript
-            this.renderScenarioPreview(); // Ejecuta llamada o método
+        initScenarioSimulator() {
+            this.renderScenarioPreview();
         }
 
-        renderScenarioPreview() { // Instrucción JavaScript
-            const sc = AppState.activeScenario; // Declara e inicializa "sc"
-            if (!this.dom.terminalImplicit || !this.dom.terminalSerialized) return; // Evalúa condición
+        renderScenarioPreview() {
+            const sc = AppState.activeScenario;
+            if (!this.dom.terminalImplicit || !this.dom.terminalSerialized) return;
 
-            if (sc === 'push') { // Evalúa condición
+            if (sc === 'push') {
                 this.dom.terminalImplicit.innerHTML = `
                     <div class="term-line">&gt; window.history.pushState({ id: 1 }, "", "/perfil");</div>
                     <div class="term-line" style="color: var(--emerald);">&gt; URL cambia a: https://curso.dev/perfil</div>
@@ -960,10 +960,10 @@ checkout.avanzar(3); // Método de pago`
                 this.dom.terminalSerialized.innerHTML = `
                     <div class="term-line" style="opacity: 0.6;">(Selecciona 'replace' para comparar la sobrescritura)</div>
                 `;
-                if (this.dom.storageFeedbackText) { // Evalúa condición
+                if (this.dom.storageFeedbackText) {
                     this.dom.storageFeedbackText.innerHTML = '<strong>pushState:</strong> Agrega un nuevo registro a la pila. Si el usuario pulsa "Atrás", volverá a la página previa.'; // Actualiza contenido en el DOM
                 }
-            } else if (sc === 'replace') { // Instrucción JavaScript
+            } else if (sc === 'replace') {
                 this.dom.terminalImplicit.innerHTML = `
                     <div class="term-line" style="opacity: 0.6;">(Comparando con replaceState...)</div>
                 `;
@@ -973,10 +973,10 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; history.length: 3 ➔ 3 (IDÉNTICO, no suma)</div>
                     <div class="term-line" style="color: var(--amber);">&gt; popstate disparado: NO (false)</div>
                 `;
-                if (this.dom.storageFeedbackText) { // Evalúa condición
+                if (this.dom.storageFeedbackText) {
                     this.dom.storageFeedbackText.innerHTML = '<strong>replaceState:</strong> Sobrescribe la entrada actual en memoria. Ideal para filtros de búsqueda y scroll.'; // Actualiza contenido en el DOM
                 }
-            } else if (sc === 'cross') { // Instrucción JavaScript
+            } else if (sc === 'cross') {
                 this.dom.terminalImplicit.innerHTML = `
                     <div class="term-line">&gt; window.history.pushState({}, "", "https://google.com");</div>
                     <div class="term-line" style="color: var(--rose); font-weight: bold;">
@@ -988,10 +988,10 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; Violación de la Same-Origin Policy (Mismo Origen).</div>
                     <div class="term-line">&gt; Previene suplantación de identidad (Phishing).</div>
                 `;
-                if (this.dom.storageFeedbackText) { // Evalúa condición
+                if (this.dom.storageFeedbackText) {
                     this.dom.storageFeedbackText.innerHTML = '🛑 <strong>SecurityError:</strong> La History API solo permite URLs que compartan exactamente el mismo origen.'; // Actualiza contenido en el DOM
                 }
-            } else if (sc === 'popstate') { // Instrucción JavaScript
+            } else if (sc === 'popstate') {
                 this.dom.terminalImplicit.innerHTML = `
                     <div class="term-line">&gt; Llamada a pushState() o replaceState()...</div>
                     <div class="term-line" style="color: var(--rose);">&gt; ¿Dispara evento 'popstate'?: NUNCA.</div>
@@ -1000,56 +1000,56 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; Clic en "Atrás" / "Adelante" del navegador...</div>
                     <div class="term-line" style="color: var(--emerald);">&gt; ¿Dispara evento 'popstate'?: SÍ (true).</div>
                 `;
-                if (this.dom.storageFeedbackText) { // Evalúa condición
+                if (this.dom.storageFeedbackText) {
                     this.dom.storageFeedbackText.innerHTML = '🔔 <strong>Regla de Oro:</strong> popstate es un evento de <em>navegación del usuario</em>. Las llamadas programáticas a pushState/replaceState nunca lo activan.'; // Actualiza contenido en el DOM
                 }
             }
         }
 
-        runCompareHistoryModes() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            this.renderScenarioPreview(); // Ejecuta llamada o método
-            this.showToast('Escenario evaluado en tiempo real', '⚡'); // Ejecuta llamada o método
+        runCompareHistoryModes() {
+            sound.click();
+            this.renderScenarioPreview();
+            this.showToast('Escenario evaluado en tiempo real', '⚡');
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 5: PESTAÑAS DE CARACTERÍSTICAS Y PRUEBAS EN VIVO
            -------------------------------------------------------------------------- */
-        initFlowTabs() { // Instrucción JavaScript
-            this.switchFlowTab('1'); // Ejecuta llamada o método
+        initFlowTabs() {
+            this.switchFlowTab('1');
         }
 
-        switchFlowTab(flowId) { // Instrucción JavaScript
-            this.dom.charTabButtons.forEach(btn => { // Instrucción JavaScript
-                btn.classList.toggle('active', btn.getAttribute('data-flow') === flowId); // Modifica clases CSS del elemento
+        switchFlowTab(flowId) {
+            this.dom.charTabButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.getAttribute('data-flow') === flowId);
             });
-            this.dom.charDetailViews.forEach(view => { // Instrucción JavaScript
-                view.classList.toggle('active', view.id === `flow-view-${flowId}`); // Modifica clases CSS del elemento
+            this.dom.charDetailViews.forEach(view => {
+                view.classList.toggle('active', view.id === `flow-view-${flowId}`);
             });
-            sound.click(); // Ejecuta llamada o método
+            sound.click();
         }
 
-        testHistoryState() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            const state = window.history.state; // Declara e inicializa "state"
-            const res = { // Declara e inicializa "res"
+        testHistoryState() {
+            sound.click();
+            const state = window.history.state;
+            const res = {
                 valorActual: state,
                 esNull: state === null,
                 longitudHistorial: window.history.length,
                 urlActual: window.location.href
             };
-            if (this.dom.historyStateResult) { // Evalúa condición
+            if (this.dom.historyStateResult) {
                 this.dom.historyStateResult.innerHTML = `
                     <strong>Lectura inmediata de window.history.state:</strong><br/>
                     <code>${JSON.stringify(res, null, 2)}</code>
                 `;
             }
-            sound.success(); // Ejecuta llamada o método
+            sound.success();
         }
 
-        testPopstate() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            if (this.dom.popstateResult) { // Evalúa condición
+        testPopstate() {
+            sound.click();
+            if (this.dom.popstateResult) {
                 this.dom.popstateResult.innerHTML = `
                     <span style="color: var(--cyan); font-weight: bold;">🔔 [Simulación de popstate]</span><br/>
                     1. Usuario presionó "Atrás".<br/>
@@ -1057,12 +1057,12 @@ checkout.avanzar(3); // Método de pago`
                     3. La función escuchadora lee <code>event.state</code> y monta los componentes en el DOM.
                 `;
             }
-            sound.success(); // Ejecuta llamada o método
+            sound.success();
         }
 
-        testNoTriggerRule() { // Instrucción JavaScript
-            sound.click(); // Ejecuta llamada o método
-            if (this.dom.noTriggerResult) { // Evalúa condición
+        testNoTriggerRule() {
+            sound.click();
+            if (this.dom.noTriggerResult) {
                 this.dom.noTriggerResult.innerHTML = `
                     <span style="color: var(--amber); font-weight: bold;">⚠️ Verificación de Regla de Oro:</span><br/>
                     Se ejecutó <code>history.pushState({ demo: true }, '', '?demo=ok')</code>.<br/>
@@ -1070,58 +1070,58 @@ checkout.avanzar(3); // Método de pago`
                     <em>Conclusión: Si usas pushState, debes renderizar tú mismo la vista en tu código.</em>
                 `;
             }
-            sound.warning(); // Ejecuta llamada o método
+            sound.warning();
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 7: SIMULADOR DE ENRUTADOR SPA COMPLETO
            -------------------------------------------------------------------------- */
-        initSpaSimulator() { // Instrucción JavaScript
-            this.renderSpaView('/inicio'); // Ejecuta llamada o método
+        initSpaSimulator() {
+            this.renderSpaView('/inicio');
         }
 
-        spaNavigate(route) { // Instrucción JavaScript
-            const view = AppState.spa.views[route]; // Declara e inicializa "view"
-            if (!view) return; // Evalúa condición
+        spaNavigate(route) {
+            const view = AppState.spa.views[route];
+            if (!view) return;
 
             // Truncar historial si estábamos navegando atrás
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) { // Evalúa condición
-                AppState.spa.history.splice(AppState.spa.pointer + 1); // Ejecuta llamada o método
+            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
+                AppState.spa.history.splice(AppState.spa.pointer + 1);
             }
 
             // Añadir nueva entrada a la pila del SPA
-            AppState.spa.history.push({ // Instrucción JavaScript
+            AppState.spa.history.push({
                 route: route,
                 sec: view.state.seccion,
                 state: view.state
             });
-            AppState.spa.pointer = AppState.spa.history.length - 1; // Asigna valor
+            AppState.spa.pointer = AppState.spa.history.length - 1;
 
-            this.renderSpaView(route); // Ejecuta llamada o método
-            sound.click(); // Ejecuta llamada o método
+            this.renderSpaView(route);
+            sound.click();
         }
 
-        renderSpaView(route) { // Instrucción JavaScript
-            AppState.spa.currentRoute = route; // Asigna valor
-            const view = AppState.spa.views[route] || AppState.spa.views['/inicio']; // Declara e inicializa "view"
+        renderSpaView(route) {
+            AppState.spa.currentRoute = route;
+            const view = AppState.spa.views[route] || AppState.spa.views['/inicio'];
 
             // 1. Actualizar URL visible
-            if (this.dom.spaCurrentUrl) { // Evalúa condición
+            if (this.dom.spaCurrentUrl) {
                 this.dom.spaCurrentUrl.textContent = route; // Actualiza contenido en el DOM
             }
 
             // 2. Actualizar Pestaña Activa
-            this.dom.spaTabs.forEach(tab => { // Instrucción JavaScript
-                const tabRoute = tab.getAttribute('data-sparoute'); // Declara e inicializa "tabRoute"
-                tab.classList.toggle('active', tabRoute === route); // Modifica clases CSS del elemento
+            this.dom.spaTabs.forEach(tab => {
+                const tabRoute = tab.getAttribute('data-sparoute');
+                tab.classList.toggle('active', tabRoute === route);
             });
 
             // 3. Actualizar Canvas Visual
-            if (this.dom.spaCanvasTitle) this.dom.spaCanvasTitle.textContent = view.title; // Evalúa condición
-            if (this.dom.spaCanvasDesc) this.dom.spaCanvasDesc.textContent = view.desc; // Evalúa condición
+            if (this.dom.spaCanvasTitle) this.dom.spaCanvasTitle.textContent = view.title;
+            if (this.dom.spaCanvasDesc) this.dom.spaCanvasDesc.textContent = view.desc;
 
             // 4. Actualizar Estado de Retroalimentación
-            if (this.dom.spaStatusResult) { // Evalúa condición
+            if (this.dom.spaStatusResult) {
                 this.dom.spaStatusResult.innerHTML = `
                     Pestaña activa: "<strong>${view.state.seccion}</strong>" | 
                     history.state: <code>${JSON.stringify(view.state)}</code> | 
@@ -1130,96 +1130,96 @@ checkout.avanzar(3); // Método de pago`
             }
 
             // 5. Botones Atrás / Adelante del SPA
-            if (this.dom.btnSpaBack) { // Evalúa condición
-                this.dom.btnSpaBack.disabled = (AppState.spa.pointer <= 0); // Asigna valor
+            if (this.dom.btnSpaBack) {
+                this.dom.btnSpaBack.disabled = (AppState.spa.pointer <= 0);
             }
-            if (this.dom.btnSpaForward) { // Evalúa condición
-                this.dom.btnSpaForward.disabled = (AppState.spa.pointer >= AppState.spa.history.length - 1); // Asigna valor
-            }
-        }
-
-        spaBack() { // Instrucción JavaScript
-            if (AppState.spa.pointer > 0) { // Evalúa condición
-                AppState.spa.pointer--; // Instrucción JavaScript
-                const item = AppState.spa.history[AppState.spa.pointer]; // Declara e inicializa "item"
-                this.renderSpaView(item.route); // Ejecuta llamada o método
-                sound.nav(); // Ejecuta llamada o método
+            if (this.dom.btnSpaForward) {
+                this.dom.btnSpaForward.disabled = (AppState.spa.pointer >= AppState.spa.history.length - 1);
             }
         }
 
-        spaForward() { // Instrucción JavaScript
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) { // Evalúa condición
-                AppState.spa.pointer++; // Instrucción JavaScript
-                const item = AppState.spa.history[AppState.spa.pointer]; // Declara e inicializa "item"
-                this.renderSpaView(item.route); // Ejecuta llamada o método
-                sound.nav(); // Ejecuta llamada o método
+        spaBack() {
+            if (AppState.spa.pointer > 0) {
+                AppState.spa.pointer--;
+                const item = AppState.spa.history[AppState.spa.pointer];
+                this.renderSpaView(item.route);
+                sound.nav();
+            }
+        }
+
+        spaForward() {
+            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
+                AppState.spa.pointer++;
+                const item = AppState.spa.history[AppState.spa.pointer];
+                this.renderSpaView(item.route);
+                sound.nav();
             }
         }
 
         /* --------------------------------------------------------------------------
            SLIDE 8: ANALOGÍAS VISUALES (PLATOS & ÁLBUM)
            -------------------------------------------------------------------------- */
-        initAnalogies() { // Instrucción JavaScript
-            this.renderAnalogies(); // Ejecuta llamada o método
+        initAnalogies() {
+            this.renderAnalogies();
         }
 
-        renderAnalogies() { // Instrucción JavaScript
-            const mode = AppState.activeOffice; // Declara e inicializa "mode"
-            if (mode === 'platos') { // Evalúa condición
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '🍽️'; // Evalúa condición
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. Colocar un Plato Nuevo (pushState)'; // Evalúa condición
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'La torre crece en altura'; // Evalúa condición
-                if (this.dom.officeItemsLeft) { // Evalúa condición
+        renderAnalogies() {
+            const mode = AppState.activeOffice;
+            if (mode === 'platos') {
+                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '🍽️';
+                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. Colocar un Plato Nuevo (pushState)';
+                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'La torre crece en altura';
+                if (this.dom.officeItemsLeft) {
                     this.dom.officeItemsLeft.innerHTML = `
                         <div class="ws-item">Lavas un plato nuevo y lo colocas en la cima de la torre</div>
                         <div class="ws-item">El tamaño total de la pila (history.length) se incrementa en +1</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'El usuario podrá volver al plato anterior pulsando "Atrás"'; // Evalúa condición
+                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'El usuario podrá volver al plato anterior pulsando "Atrás"';
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '🔄'; // Evalúa condición
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Cambiar el Plato de Arriba (replaceState)'; // Evalúa condición
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'La altura total no cambia'; // Evalúa condición
-                if (this.dom.officeItemsRight) { // Evalúa condición
+                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '🔄';
+                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Cambiar el Plato de Arriba (replaceState)';
+                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'La altura total no cambia';
+                if (this.dom.officeItemsRight) {
                     this.dom.officeItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Sustituyes el plato de la cima por otro de diferente color</div>
                         <div class="ws-item highlight-item">La cantidad de platos (history.length) se mantiene intacta</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'Evita inflar la pila al filtrar búsquedas o cambiar de pestaña'; // Evalúa condición
+                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'Evita inflar la pila al filtrar búsquedas o cambiar de pestaña';
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Pila LIFO'; // Evalúa condición
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '🍽️'; // Evalúa condición
-                if (this.dom.officeBannerText) { // Evalúa condición
+                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Pila LIFO';
+                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '🍽️';
+                if (this.dom.officeBannerText) {
                     this.dom.officeBannerText.innerHTML = '<strong>pushState vs replaceState:</strong> Usa <code>pushState()</code> cuando el cambio represente una página nueva a la que el usuario querrá volver; usa <code>replaceState()</code> para filtros, paginación o formularios multipaso.'; // Actualiza contenido en el DOM
                 }
-            } else { // Instrucción JavaScript
+            } else {
                 // Álbum de fotos
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '📸'; // Evalúa condición
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. La Foto y la Nota Adhesiva (state)'; // Evalúa condición
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'Memoria asociada a cada página'; // Evalúa condición
-                if (this.dom.officeItemsLeft) { // Evalúa condición
+                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '📸';
+                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. La Foto y la Nota Adhesiva (state)';
+                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'Memoria asociada a cada página';
+                if (this.dom.officeItemsLeft) {
                     this.dom.officeItemsLeft.innerHTML = `
                         <div class="ws-item">Cada foto tiene su imagen visible (la URL en la barra)</div>
                         <div class="ws-item">Pegas un Post-It detrás con metadatos: { scroll: 400, filtro: 'viajes' }</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'history.state almacena una copia estructurada de tus datos'; // Evalúa condición
+                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'history.state almacena una copia estructurada de tus datos';
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '📖'; // Evalúa condición
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Hojear el Álbum (popstate)'; // Evalúa condición
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'Navegación del usuario'; // Evalúa condición
-                if (this.dom.officeItemsRight) { // Evalúa condición
+                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '📖';
+                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Hojear el Álbum (popstate)';
+                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'Navegación del usuario';
+                if (this.dom.officeItemsRight) {
                     this.dom.officeItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Cuando pasas la página hacia atrás, despegas la nota</div>
                         <div class="ws-item highlight-item">event.state te entrega los datos para reconstruir la vista</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'popstate sólo se dispara cuando el usuario hojea hacia adelante o atrás'; // Evalúa condición
+                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'popstate sólo se dispara cuando el usuario hojea hacia adelante o atrás';
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Inspección'; // Evalúa condición
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '📸'; // Evalúa condición
-                if (this.dom.officeBannerText) { // Evalúa condición
+                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Inspección';
+                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '📸';
+                if (this.dom.officeBannerText) {
                     this.dom.officeBannerText.innerHTML = '<strong>state y popstate:</strong> El estado viaja silenciosamente con la entrada del historial. Cuando el usuario navega, <code>event.state</code> te dice con precisión qué estaba viendo.'; // Actualiza contenido en el DOM
                 }
             }
@@ -1228,97 +1228,97 @@ checkout.avanzar(3); // Método de pago`
         /* --------------------------------------------------------------------------
            SLIDE 9: PLAYGROUND INTERACTIVO DE CÓDIGO
            -------------------------------------------------------------------------- */
-        loadCodePreset(presetKey) { // Instrucción JavaScript
-            const code = CodePresets[presetKey]; // Declara e inicializa "code"
-            if (code && this.dom.liveCodeEditor) { // Evalúa condición
-                this.dom.liveCodeEditor.value = code; // Asigna valor
-                this.clearConsole(); // Ejecuta llamada o método
-                this.printToConsole(`/* Preset cargado: [${presetKey}]. Pulsa "Ejecutar Código" (Ctrl + Enter) */`, 'info-line'); // Ejecuta llamada o método
+        loadCodePreset(presetKey) {
+            const code = CodePresets[presetKey];
+            if (code && this.dom.liveCodeEditor) {
+                this.dom.liveCodeEditor.value = code;
+                this.clearConsole();
+                this.printToConsole(`/* Preset cargado: [${presetKey}]. Pulsa "Ejecutar Código" (Ctrl + Enter) */`, 'info-line');
             }
         }
 
-        clearConsole() { // Instrucción JavaScript
-            if (this.dom.consoleLogsContainer) { // Evalúa condición
+        clearConsole() {
+            if (this.dom.consoleLogsContainer) {
                 this.dom.consoleLogsContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
         }
 
-        printToConsole(msg, lineClass = 'log-line') { // Instrucción JavaScript
-            if (!this.dom.consoleLogsContainer) return; // Evalúa condición
-            const line = document.createElement('div'); // Crea nuevo elemento DOM "line"
-            line.className = `log-line ${lineClass}`; // Asigna valor
+        printToConsole(msg, lineClass = 'log-line') {
+            if (!this.dom.consoleLogsContainer) return;
+            const line = document.createElement('div');
+            line.className = `log-line ${lineClass}`;
 
-            const time = new Date().toLocaleTimeString(); // Declara e inicializa "time"
-            const timeSpan = `<span class="log-time">[${time}]</span> `; // Declara e inicializa "timeSpan"
+            const time = new Date().toLocaleTimeString();
+            const timeSpan = `<span class="log-time">[${time}]</span> `;
 
-            if (typeof msg === 'object') { // Evalúa condición
+            if (typeof msg === 'object') {
                 try { // Inicia bloque protegido contra errores
                     line.innerHTML = timeSpan + `<pre style="margin:0; display:inline;">${JSON.stringify(msg, null, 2)}</pre>`; // Actualiza contenido en el DOM
-                } catch (e) { // Instrucción JavaScript
+                } catch (e) {
                     line.innerHTML = timeSpan + String(msg); // Actualiza contenido en el DOM
                 }
-            } else { // Instrucción JavaScript
+            } else {
                 line.innerHTML = timeSpan + String(msg); // Actualiza contenido en el DOM
             }
 
-            this.dom.consoleLogsContainer.appendChild(line); // Inserta nodo en el DOM
-            this.dom.consoleLogsContainer.scrollTop = this.dom.consoleLogsContainer.scrollHeight; // Asigna valor
+            this.dom.consoleLogsContainer.appendChild(line);
+            this.dom.consoleLogsContainer.scrollTop = this.dom.consoleLogsContainer.scrollHeight;
         }
 
-        runPlaygroundCode() { // Instrucción JavaScript
-            if (!this.dom.liveCodeEditor) return; // Evalúa condición
-            const code = this.dom.liveCodeEditor.value; // Declara e inicializa "code"
+        runPlaygroundCode() {
+            if (!this.dom.liveCodeEditor) return;
+            const code = this.dom.liveCodeEditor.value;
 
-            this.clearConsole(); // Ejecuta llamada o método
-            sound.click(); // Ejecuta llamada o método
+            this.clearConsole();
+            sound.click();
 
             // Interceptar console de manera segura
-            const oldLog = console.log; // Declara e inicializa "oldLog"
-            const oldInfo = console.info; // Declara e inicializa "oldInfo"
-            const oldWarn = console.warn; // Declara e inicializa "oldWarn"
-            const oldError = console.error; // Declara e inicializa "oldError"
+            const oldLog = console.log;
+            const oldInfo = console.info;
+            const oldWarn = console.warn;
+            const oldError = console.error;
 
-            const formatArgs = (args) => { // Define función flecha "formatArgs"
-                return args.map(arg => { // Retorna resultado
-                    if (arg === null) return 'null'; // Evalúa condición
-                    if (arg === undefined) return 'undefined'; // Evalúa condición
-                    if (typeof arg === 'object') { // Evalúa condición
+            const formatArgs = (args) => {
+                return args.map(arg => {
+                    if (arg === null) return 'null';
+                    if (arg === undefined) return 'undefined';
+                    if (typeof arg === 'object') {
                         try { // Inicia bloque protegido contra errores
-                            return JSON.stringify(arg); // Retorna resultado
-                        } catch (e) { // Instrucción JavaScript
-                            return String(arg); // Retorna resultado
+                            return JSON.stringify(arg);
+                        } catch (e) {
+                            return String(arg);
                         }
                     }
-                    return String(arg); // Retorna resultado
-                }).join(' '); // Ejecuta llamada o método
+                    return String(arg);
+                }).join(' ');
             };
 
             console.log = (...args) => { // Imprime salida en consola
-                oldLog(...args); // Ejecuta llamada o método
-                this.printToConsole(formatArgs(args), 'log-line'); // Ejecuta llamada o método
+                oldLog(...args);
+                this.printToConsole(formatArgs(args), 'log-line');
             };
             console.info = (...args) => { // Imprime salida en consola
-                oldInfo(...args); // Ejecuta llamada o método
-                this.printToConsole(formatArgs(args), 'info-line'); // Ejecuta llamada o método
+                oldInfo(...args);
+                this.printToConsole(formatArgs(args), 'info-line');
             };
             console.warn = (...args) => { // Imprime salida en consola
-                oldWarn(...args); // Ejecuta llamada o método
-                this.printToConsole(formatArgs(args), 'warn-line'); // Ejecuta llamada o método
+                oldWarn(...args);
+                this.printToConsole(formatArgs(args), 'warn-line');
             };
             console.error = (...args) => { // Imprime salida en consola
-                oldError(...args); // Ejecuta llamada o método
-                this.printToConsole(formatArgs(args), 'error-line'); // Ejecuta llamada o método
+                oldError(...args);
+                this.printToConsole(formatArgs(args), 'error-line');
             };
 
             try { // Inicia bloque protegido contra errores
-                const runFn = new Function(code); // Declara e inicializa "runFn"
-                runFn(); // Ejecuta llamada o método
-                this.printToConsole('--- Ejecución completada sin errores ---', 'info-line'); // Ejecuta llamada o método
-                sound.success(); // Ejecuta llamada o método
-            } catch (err) { // Instrucción JavaScript
-                this.printToConsole(`Error de ejecución: ${err.name} - ${err.message}`, 'error-line'); // Ejecuta llamada o método
-                sound.warning(); // Ejecuta llamada o método
-            } finally { // Instrucción JavaScript
+                const runFn = new Function(code);
+                runFn();
+                this.printToConsole('--- Ejecución completada sin errores ---', 'info-line');
+                sound.success();
+            } catch (err) {
+                this.printToConsole(`Error de ejecución: ${err.name} - ${err.message}`, 'error-line');
+                sound.warning();
+            } finally {
                 console.log = oldLog; // Imprime salida en consola
                 console.info = oldInfo; // Imprime salida en consola
                 console.warn = oldWarn; // Imprime salida en consola
@@ -1329,7 +1329,7 @@ checkout.avanzar(3); // Método de pago`
         /* --------------------------------------------------------------------------
            SLIDE 10: COPIAR CHULETA EN MARKDOWN
            -------------------------------------------------------------------------- */
-        copyCheatSheet() { // Instrucción JavaScript
+        copyCheatSheet() {
             const markdown = `# 📜 CHULETA RÁPIDA: HISTORY API EN JAVASCRIPT
 
 ## 1. Métodos Básicos de Navegación
@@ -1362,18 +1362,18 @@ checkout.avanzar(3); // Método de pago`
 2. **Server Fallback (SPAs)**: Toda URL simulada por pushState debe devolver \`index.html\` en el servidor para evitar error 404 al presionar F5.
 `;
 
-            navigator.clipboard.writeText(markdown).then(() => { // Instrucción JavaScript
-                this.showToast('¡Chuleta copiada al portapapeles!'); // Ejecuta llamada o método
-                sound.success(); // Ejecuta llamada o método
-            }).catch(() => { // Instrucción JavaScript
-                this.showToast('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.'); // Ejecuta llamada o método
+            navigator.clipboard.writeText(markdown).then(() => {
+                this.showToast('¡Chuleta copiada al portapapeles!');
+                sound.success();
+            }).catch(() => {
+                this.showToast('No se pudo copiar automáticamente. Puedes seleccionar el texto de la pantalla.');
             });
         }
     }
 
     // Inicialización al cargar el DOM
-    document.addEventListener('DOMContentLoaded', () => { // Registra escuchador de eventos
-        window.appController = new AppController(); // Asigna valor
+    document.addEventListener('DOMContentLoaded', () => {
+        window.appController = new AppController();
     });
 
-})(); // Ejecuta llamada o método
+})();

@@ -1,37 +1,37 @@
 // Guía Interactiva — Eventos de Mouse
 
-const mousePad = document.getElementById("mousePad"); // Obtiene referencia DOM para "mousePad"
-const coordsText = document.getElementById("coordsText"); // Obtiene referencia DOM para "coordsText"
-const mouseLog = document.getElementById("mouseLog"); // Obtiene referencia DOM para "mouseLog"
+const mousePad = document.getElementById("mousePad");
+const coordsText = document.getElementById("coordsText");
+const mouseLog = document.getElementById("mouseLog");
 
-function logMouse(evento, detalle = "") { // Declara función
-    const line = document.createElement("div"); // Crea nuevo elemento DOM "line"
+function logMouse(evento, detalle = "") {
+    const line = document.createElement("div");
     line.textContent = `[${new Date().toLocaleTimeString()}] ${evento} ${detalle}`; // Actualiza contenido en el DOM
-    mouseLog.appendChild(line); // Inserta nodo en el DOM
-    mouseLog.scrollTop = mouseLog.scrollHeight; // Asigna valor
+    mouseLog.appendChild(line);
+    mouseLog.scrollTop = mouseLog.scrollHeight;
 }
 
-mousePad.addEventListener("click", (e) => logMouse("click", `(botón ${e.button})`)); // Registra escuchador de eventos
-mousePad.addEventListener("dblclick", () => logMouse("dblclick", "Doble clic detectado")); // Registra escuchador de eventos
-mousePad.addEventListener("contextmenu", (e) => { // Registra escuchador de eventos
-    e.preventDefault(); // Ejecuta llamada o método
-    logMouse("contextmenu", "Menú contextual bloqueado con preventDefault()"); // Ejecuta llamada o método
+mousePad.addEventListener("click", (e) => logMouse("click", `(botón ${e.button})`));
+mousePad.addEventListener("dblclick", () => logMouse("dblclick", "Doble clic detectado"));
+mousePad.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    logMouse("contextmenu", "Menú contextual bloqueado con preventDefault()");
 });
-mousePad.addEventListener("mouseenter", () => { // Registra escuchador de eventos
-    mousePad.classList.add("active"); // Modifica clases CSS del elemento
-    logMouse("mouseenter", "Cursor entró al área"); // Ejecuta llamada o método
+mousePad.addEventListener("mouseenter", () => {
+    mousePad.classList.add("active");
+    logMouse("mouseenter", "Cursor entró al área");
 });
-mousePad.addEventListener("mouseleave", () => { // Registra escuchador de eventos
-    mousePad.classList.remove("active"); // Modifica clases CSS del elemento
-    logMouse("mouseleave", "Cursor salió del área"); // Ejecuta llamada o método
+mousePad.addEventListener("mouseleave", () => {
+    mousePad.classList.remove("active");
+    logMouse("mouseleave", "Cursor salió del área");
 });
-mousePad.addEventListener("mousemove", (e) => { // Registra escuchador de eventos
-    const rect = mousePad.getBoundingClientRect(); // Declara e inicializa "rect"
-    const x = Math.round(e.clientX - rect.left); // Declara e inicializa "x"
-    const y = Math.round(e.clientY - rect.top); // Declara e inicializa "y"
+mousePad.addEventListener("mousemove", (e) => {
+    const rect = mousePad.getBoundingClientRect();
+    const x = Math.round(e.clientX - rect.left);
+    const y = Math.round(e.clientY - rect.top);
     coordsText.textContent = `X: ${x}px | Y: ${y}px`; // Actualiza contenido en el DOM
 });
 
-document.getElementById("btnClearLog").addEventListener("click", () => { // Registra escuchador de eventos
+document.getElementById("btnClearLog").addEventListener("click", () => {
     mouseLog.innerHTML = ""; // Actualiza contenido en el DOM
 });

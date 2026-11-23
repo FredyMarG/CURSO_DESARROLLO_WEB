@@ -10,7 +10,7 @@ let mobiles = document.getElementById("mobile"),
     
     class Celular{ // Define clase
         /** Guarda las características físicas y de hardware del teléfono */
-        constructor(color,peso, tamaño, rdc,ram){ // Instrucción JavaScript
+        constructor(color,peso, tamaño, rdc,ram){
             this.color = color,
             this.peso = peso,
             this.tamaño  = tamaño,
@@ -20,38 +20,38 @@ let mobiles = document.getElementById("mobile"),
         }
 
     /** Alterna encendido/apagado y devuelve un mensaje descriptivo */
-        presionarBotonEncendido(){ // Instrucción JavaScript
-            let estado; // Declara e inicializa "estado"
-            if (this.encendido === false) { // Evalúa condición
-                estado = "Celular Encendido";              // Asigna valor
-                this.encendido = true; // Asigna valor
-            } else { // Instrucción JavaScript
-                estado = "Celular Apagado"; // Asigna valor
-                this.encendido = false; // Asigna valor
+        presionarBotonEncendido(){
+            let estado;
+            if (this.encendido === false) {
+                estado = "Celular Encendido";
+                this.encendido = true;
+            } else {
+                estado = "Celular Apagado";
+                this.encendido = false;
             }
-            return estado; // Retorna resultado
+            return estado;
         }
 
         /** Solicita reinicio si el equipo está encendido (ojo: usa asignación = en la condición) */
-        reiniciar(){ // Instrucción JavaScript
-            if (this.encendido = true) {                 // Evalúa condición
+        reiniciar(){
+            if (this.encendido = true) {
                 return "Reiniciando el Celular"
-            }else{ // Instrucción JavaScript
-                return "El celular esta apagado"; // Retorna resultado
+            }else{
+                return "El celular esta apagado";
             }
         }
         
         /** Mensaje simulado de captura de foto con la resolución configurada */
-        tomarFoto(){ // Instrucción JavaScript
-            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`; // Retorna resultado
+        tomarFoto(){
+            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`;
         }
 
         /** Mensaje simulado de grabación de video */
-        grabarVideo(){ // Instrucción JavaScript
-            return `Grabando video en ${this.resolucionDeCamara}`; // Retorna resultado
+        grabarVideo(){
+            return `Grabando video en ${this.resolucionDeCamara}`;
         }
         /** Resumen HTML con color, peso, tamaño, cámara y RAM */
-        mobileInfo(){ // Instrucción JavaScript
+        mobileInfo(){
             return `
             Color: <b>${this.color}</b><br>
             Peso: <b>${this.peso}</b><br>
@@ -64,17 +64,17 @@ let mobiles = document.getElementById("mobile"),
 
     /** Extiende Celular con cámara extra y funciones premium */
     class CelularAltaGama extends Celular{ // Define clase
-        constructor(color,peso,tamaño,rdc,ram,rdce){ // Instrucción JavaScript
-            super(color,peso,tamaño,rdc,ram); // Ejecuta llamada o método
-            this.resolucionDeCamaraExtra = rdce; // Asigna valor
+        constructor(color,peso,tamaño,rdc,ram,rdce){
+            super(color,peso,tamaño,rdc,ram);
+            this.resolucionDeCamaraExtra = rdce;
         }
-        grabarVideoLento(){ // Instrucción JavaScript
-            return `Tiene Video en Cámara Lenta`; // Retorna resultado
+        grabarVideoLento(){
+            return `Tiene Video en Cámara Lenta`;
         }
-        reconocimientoFacial(){ // Instrucción JavaScript
+        reconocimientoFacial(){
             return "Tiene Reconocimiento Facial"
         }
-        infoAltaGama(){ // Instrucción JavaScript
+        infoAltaGama(){
             return this.mobileInfo() + `Resolución de cámara extra: <b>${this.resolucionDeCamaraExtra}</b>`
         }
     }
@@ -94,8 +94,8 @@ celag = [
 /**
  * Rellena las tablas del DOM con datos de celulares básicos y de gama alta.
  */
-function mostrar(){ // Declara función
-    for (let i = 0; i < celular.length; i++) { // Inicia bucle de iteración
+function mostrar(){
+    for (let i = 0; i < celular.length; i++) {
         mobiles.innerHTML += `<tr>
                         <td>${i+1}</td>
                         <td>${celular[i].color}</td>
@@ -114,7 +114,7 @@ function mostrar(){ // Declara función
                     </tr>`
     }
 
-    for (let i = 0; i < celag.length; i++) { // Inicia bucle de iteración
+    for (let i = 0; i < celag.length; i++) {
         altag.innerHTML += ` <tr>
                             <td>${i+1}</td>
                             <td>${celag[i].color}</td>

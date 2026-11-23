@@ -1,61 +1,61 @@
 // Guía Interactiva — Objeto Window y <dialog> Moderno
 
-let ventanaHija = null; // Declara e inicializa "ventanaHija"
-const winStatus = document.getElementById("winStatus"); // Obtiene referencia DOM para "winStatus"
-const modernDialog = document.getElementById("modernDialog"); // Obtiene referencia DOM para "modernDialog"
-const dialogNameInput = document.getElementById("dialogNameInput"); // Obtiene referencia DOM para "dialogNameInput"
-const modalResult = document.getElementById("modalResult"); // Obtiene referencia DOM para "modalResult"
+let ventanaHija = null;
+const winStatus = document.getElementById("winStatus");
+const modernDialog = document.getElementById("modernDialog");
+const dialogNameInput = document.getElementById("dialogNameInput");
+const modalResult = document.getElementById("modalResult");
 
-document.getElementById("btnOpenWin").addEventListener("click", () => { // Registra escuchador de eventos
-    ventanaHija = window.open("", "ventanaDemo", "width=400,height=300"); // Asigna valor
-    if (!ventanaHija) { // Evalúa condición
+document.getElementById("btnOpenWin").addEventListener("click", () => {
+    ventanaHija = window.open("", "ventanaDemo", "width=400,height=300");
+    if (!ventanaHija) {
         winStatus.textContent = "El navegador bloqueó la ventana emergente."; // Actualiza contenido en el DOM
-        return; // Retorna resultado
+        return;
     }
     ventanaHija.document.body.innerHTML =
-        "<h2 style='font-family:sans-serif;padding:20px'>Ventana controlada por JS</h2>"; // Instrucción JavaScript
-    winStatus.className = "output ok"; // Asigna valor
+        "<h2 style='font-family:sans-serif;padding:20px'>Ventana controlada por JS</h2>";
+    winStatus.className = "output ok";
     winStatus.textContent = "Ventana abierta (ventana.closed === false)."; // Actualiza contenido en el DOM
 });
 
-document.getElementById("btnCheckWin").addEventListener("click", () => { // Registra escuchador de eventos
-    if (!ventanaHija) { // Evalúa condición
+document.getElementById("btnCheckWin").addEventListener("click", () => {
+    if (!ventanaHija) {
         winStatus.textContent = "No has abierto ninguna ventana todavía."; // Actualiza contenido en el DOM
-        return; // Retorna resultado
+        return;
     }
-    winStatus.className = "output"; // Asigna valor
+    winStatus.className = "output";
     winStatus.textContent = `Estado actual: ventana.closed === ${ventanaHija.closed}`; // Actualiza contenido en el DOM
 });
 
-document.getElementById("btnCloseWin").addEventListener("click", () => { // Registra escuchador de eventos
-    if (ventanaHija && !ventanaHija.closed) { // Evalúa condición
-        ventanaHija.close(); // Ejecuta llamada o método
-        winStatus.className = "output"; // Asigna valor
+document.getElementById("btnCloseWin").addEventListener("click", () => {
+    if (ventanaHija && !ventanaHija.closed) {
+        ventanaHija.close();
+        winStatus.className = "output";
         winStatus.textContent = `Ventana cerrada (ventana.closed === ${ventanaHija.closed}).`; // Actualiza contenido en el DOM
-    } else { // Instrucción JavaScript
+    } else {
         winStatus.textContent = "La ventana ya estaba cerrada."; // Actualiza contenido en el DOM
     }
 });
 
-document.getElementById("btnShowModal").addEventListener("click", () => { // Registra escuchador de eventos
-    dialogNameInput.value = ""; // Asigna valor
-    modernDialog.showModal(); // Ejecuta llamada o método
+document.getElementById("btnShowModal").addEventListener("click", () => {
+    dialogNameInput.value = "";
+    modernDialog.showModal();
 });
 
-document.getElementById("btnCancelDialog").addEventListener("click", () => { // Registra escuchador de eventos
-    modernDialog.close("cancelado"); // Ejecuta llamada o método
+document.getElementById("btnCancelDialog").addEventListener("click", () => {
+    modernDialog.close("cancelado");
 });
 
-modernDialog.addEventListener("close", () => { // Registra escuchador de eventos
-    if (modernDialog.returnValue === "confirmado") { // Evalúa condición
-        modalResult.className = "output ok"; // Asigna valor
+modernDialog.addEventListener("close", () => {
+    if (modernDialog.returnValue === "confirmado") {
+        modalResult.className = "output ok";
         modalResult.textContent = `Modal confirmado por: ${dialogNameInput.value.trim()}`; // Actualiza contenido en el DOM
-    } else { // Instrucción JavaScript
-        modalResult.className = "output"; // Asigna valor
+    } else {
+        modalResult.className = "output";
         modalResult.textContent = "Modal cerrado/cancelado sin bloquear el hilo."; // Actualiza contenido en el DOM
     }
 });
 
-document.getElementById("btnPrint").addEventListener("click", () => { // Registra escuchador de eventos
-    window.print(); // Ejecuta llamada o método
+document.getElementById("btnPrint").addEventListener("click", () => {
+    window.print();
 });

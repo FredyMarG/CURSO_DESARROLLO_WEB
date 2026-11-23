@@ -1,24 +1,24 @@
 // Guía Interactiva — ResizeObserver, matchMedia y Resize/Move
 
-const resizableBox = document.getElementById("resizableBox"); // Obtiene referencia DOM para "resizableBox"
-const boxSizeLabel = document.getElementById("boxSizeLabel"); // Obtiene referencia DOM para "boxSizeLabel"
-const windowMetrics = document.getElementById("windowMetrics"); // Obtiene referencia DOM para "windowMetrics"
-const popupStatus = document.getElementById("popupStatus"); // Obtiene referencia DOM para "popupStatus"
+const resizableBox = document.getElementById("resizableBox");
+const boxSizeLabel = document.getElementById("boxSizeLabel");
+const windowMetrics = document.getElementById("windowMetrics");
+const popupStatus = document.getElementById("popupStatus");
 
 // 1. ResizeObserver moderno sobre un elemento específico
-const observer = new ResizeObserver((entries) => { // Define función flecha "observer"
-    for (const entry of entries) { // Inicia bucle de iteración
-        const w = Math.round(entry.contentRect.width); // Declara e inicializa "w"
-        const h = Math.round(entry.contentRect.height); // Declara e inicializa "h"
+const observer = new ResizeObserver((entries) => {
+    for (const entry of entries) {
+        const w = Math.round(entry.contentRect.width);
+        const h = Math.round(entry.contentRect.height);
         boxSizeLabel.textContent = `${w}px × ${h}px`; // Actualiza contenido en el DOM
     }
 });
-observer.observe(resizableBox); // Ejecuta llamada o método
+observer.observe(resizableBox);
 
 // 2. Métricas de ventana + matchMedia
-const mqMobile = window.matchMedia("(max-width: 768px)"); // Declara e inicializa "mqMobile"
+const mqMobile = window.matchMedia("(max-width: 768px)");
 
-function renderWindowMetrics() { // Declara función
+function renderWindowMetrics() {
     const items = [
         ["innerWidth × innerHeight", `${window.innerWidth} × ${window.innerHeight}`],
         ["outerWidth × outerHeight", `${window.outerWidth} × ${window.outerHeight}`],
@@ -27,30 +27,30 @@ function renderWindowMetrics() { // Declara función
     ];
 
     windowMetrics.innerHTML = ""; // Actualiza contenido en el DOM
-    items.forEach(([k, v]) => { // Instrucción JavaScript
-        const div = document.createElement("div"); // Crea nuevo elemento DOM "div"
-        div.className = "kv-item"; // Asigna valor
-        const span = document.createElement("span"); // Crea nuevo elemento DOM "span"
+    items.forEach(([k, v]) => {
+        const div = document.createElement("div");
+        div.className = "kv-item";
+        const span = document.createElement("span");
         span.textContent = k; // Actualiza contenido en el DOM
-        const strong = document.createElement("strong"); // Crea nuevo elemento DOM "strong"
+        const strong = document.createElement("strong");
         strong.textContent = v; // Actualiza contenido en el DOM
-        div.append(span, strong); // Inserta nodo en el DOM
-        windowMetrics.appendChild(div); // Inserta nodo en el DOM
+        div.append(span, strong);
+        windowMetrics.appendChild(div);
     });
 }
 
-window.addEventListener("resize", renderWindowMetrics); // Registra escuchador de eventos
-mqMobile.addEventListener("change", renderWindowMetrics); // Registra escuchador de eventos
-renderWindowMetrics(); // Ejecuta llamada o método
+window.addEventListener("resize", renderWindowMetrics);
+mqMobile.addEventListener("change", renderWindowMetrics);
+renderWindowMetrics();
 
-document.getElementById("btnTryPopup").addEventListener("click", () => { // Registra escuchador de eventos
-    const win = window.open("", "demoPopup", "width=360,height=260"); // Declara e inicializa "win"
-    if (!win) { // Evalúa condición
+document.getElementById("btnTryPopup").addEventListener("click", () => {
+    const win = window.open("", "demoPopup", "width=360,height=260");
+    if (!win) {
         popupStatus.textContent = "El navegador bloqueó el popup emergente."; // Actualiza contenido en el DOM
-        return; // Retorna resultado
+        return;
     }
     win.document.body.innerHTML = "<p style='font-family:sans-serif;padding:16px'>Popup de prueba</p>"; // Actualiza contenido en el DOM
-    win.resizeTo(420, 300); // Ejecuta llamada o método
-    win.moveTo(120, 120); // Ejecuta llamada o método
+    win.resizeTo(420, 300);
+    win.moveTo(120, 120);
     popupStatus.textContent = "Popup abierto y redimensionado con resizeTo(420, 300) y moveTo(120, 120)."; // Actualiza contenido en el DOM
 });

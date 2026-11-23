@@ -7,44 +7,44 @@ let mobile = document.getElementById("mobile"),
     sol = document.getElementById("main-sol")
 /** Representa una aplicación móvil con estado de instalación y ejecución */
 class App { // Define clase
-    constructor(descargas, puntuacion, peso) { // Instrucción JavaScript
+    constructor(descargas, puntuacion, peso) {
         /** Número de descargas, estrellas y peso; banderas de estado de la app */
-        this.descargas = descargas; // Asigna valor
-        this.puntuacion = puntuacion; // Asigna valor
-        this.peso = peso; // Asigna valor
-        this.iniciada = false; // Asigna valor
-        this.instalada = false; // Asigna valor
+        this.descargas = descargas;
+        this.puntuacion = puntuacion;
+        this.peso = peso;
+        this.iniciada = false;
+        this.instalada = false;
     }
     /** Marca la app como instalada si aún no lo estaba */
-    instalar(){ // Instrucción JavaScript
-        if (this.instalada === false) { // Evalúa condición
-            this.instalada = true; // Asigna valor
-            return "App Instalada Correctamente"; // Retorna resultado
+    instalar(){
+        if (this.instalada === false) {
+            this.instalada = true;
+            return "App Instalada Correctamente";
         }
     }
     /** Quita la instalación si la app estaba instalada */
-    desinstalar(){ // Instrucción JavaScript
-        if (this.instalada === true) { // Evalúa condición
-            this.instalada = false; // Asigna valor
-            return "App Desinstalada Correctamente"; // Retorna resultado
+    desinstalar(){
+        if (this.instalada === true) {
+            this.instalada = false;
+            return "App Desinstalada Correctamente";
         }
     }
     /** Inicia la app solo si está instalada y no estaba en ejecución */
-    abrir(){ // Instrucción JavaScript
-        if (this.iniciada === false && this.instalada === true) { // Evalúa condición
-            this.iniciada = true; // Asigna valor
-            return "App Iniciada"; // Retorna resultado
+    abrir(){
+        if (this.iniciada === false && this.instalada === true) {
+            this.iniciada = true;
+            return "App Iniciada";
         }   
     }
     /** Cierra la app si estaba abierta e instalada */
-    cerrar(){ // Instrucción JavaScript
-        if (this.iniciada === true && this.instalada === true) { // Evalúa condición
-            this.iniciada = false; // Asigna valor
-            return "App Cerrada"; // Retorna resultado
+    cerrar(){
+        if (this.iniciada === true && this.instalada === true) {
+            this.iniciada = false;
+            return "App Cerrada";
         }
     }
     /** Devuelve un resumen HTML con descargas, puntuación y peso */
-    appInfo(){ // Instrucción JavaScript
+    appInfo(){
         return `
         Descargas: <b>${this.descargas}</b><br>
         Puntuación: <b>${this.puntuacion}</b><br>
@@ -56,7 +56,7 @@ class App { // Define clase
 /**
  * Crea varias instancias de App, las recorre y escribe filas en la tabla del DOM.
  */
-function mostrar(){ // Declara función
+function mostrar(){
     let app = [
         new App("1.000", "5 estrellas", "900mb"),
         new App("5.000", "4 estrellas", "400mb"),
@@ -66,7 +66,7 @@ function mostrar(){ // Declara función
         new App("17", "4.8 estrellas", "522mb"),
         new App("42.856", "3.7 estrellas", "723mb")]
 
-        for (let i = 0; i < app.length; i++) { // Inicia bucle de iteración
+        for (let i = 0; i < app.length; i++) {
             mobile.innerHTML += `<tr>
                             <td>${app[i].descargas}</td>
                             <td>${app[i].puntuacion}</td>
@@ -78,5 +78,5 @@ function mostrar(){ // Declara función
                         </tr>`;
         }
 
-    sol.style.display = "block"; // Asigna valor
+    sol.style.display = "block";
 }

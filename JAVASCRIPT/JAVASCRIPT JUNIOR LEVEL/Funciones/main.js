@@ -4,22 +4,22 @@
 
 "use strict"; // Activa el modo estricto de JavaScript
 
-const button = document.querySelector(".button"); // Obtiene referencia DOM para "button"
-const outListener = document.getElementById("out-listener"); // Obtiene referencia DOM para "outListener"
+const button = document.querySelector(".button");
+const outListener = document.getElementById("out-listener");
 
-function saludarUnaVez() { // Declara función
-    if (outListener) { // Evalúa condición
+function saludarUnaVez() {
+    if (outListener) {
         outListener.textContent = "✅ ¡Hola! Este listener se ejecutó 1 vez y ahora se ha auto-eliminado."; // Actualiza contenido en el DOM
     }
-    if (typeof window.registrarFuncionLog === "function") { // Evalúa condición
-        window.registrarFuncionLog("saludarUnaVez() ejecutado y eliminado con removeEventListener."); // Ejecuta llamada o método
+    if (typeof window.registrarFuncionLog === "function") {
+        window.registrarFuncionLog("saludarUnaVez() ejecutado y eliminado con removeEventListener.");
     }
-    button.removeEventListener("click", saludarUnaVez); // Ejecuta llamada o método
+    button.removeEventListener("click", saludarUnaVez);
 }
 
-if (button) { // Evalúa condición
-    button.addEventListener("click", saludarUnaVez); // Registra escuchador de eventos
-    button.addEventListener("click", (e) => { // Registra escuchador de eventos
+if (button) {
+    button.addEventListener("click", saludarUnaVez);
+    button.addEventListener("click", (e) => {
         console.log("Listener persistente (target):", e.currentTarget); // Imprime salida en consola
     });
 }

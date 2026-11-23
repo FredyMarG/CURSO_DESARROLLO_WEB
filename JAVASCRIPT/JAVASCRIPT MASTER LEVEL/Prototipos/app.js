@@ -1,6 +1,6 @@
 // --- ESTADO GLOBAL DE LA APLICACIÓN ---
 // Objeto que almacena el estado reactivo de la presentación y configuraciones del usuario
-const AppState = { // Declara e inicializa "AppState"
+const AppState = {
     // Índice de la diapositiva actualmente visible (inicia en 1: Portada)
     currentSlide: 1,
     // Cantidad total de diapositivas en la presentación
@@ -17,423 +17,423 @@ const AppState = { // Declara e inicializa "AppState"
 // Clase estática que genera efectos de sonido procedimentales sin requerir archivos mp3 externos
 class SoundEffects { // Define clase
     // Inicializa el contexto de audio únicamente cuando el usuario interactúa (requerido por políticas de navegadores)
-    static init() { // Instrucción JavaScript
+    static init() {
         // Verifica si el contexto aún no ha sido creado y si el navegador soporta AudioContext
-        if (!AppState.audioCtx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición
+        if (!AppState.audioCtx && (window.AudioContext || window.webkitAudioContext)) {
             // Instancia un nuevo contexto de audio
-            AppState.audioCtx = new (window.AudioContext || window.webkitAudioContext)(); // Asigna valor
+            AppState.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
     }
 
     // Reproduce un tono acústico con una frecuencia, tipo de onda, duración y ganancia determinadas
-    static playTone(freq = 440, type = 'sine', duration = 0.08, gainVal = 0.05) { // Instrucción JavaScript
+    static playTone(freq = 440, type = 'sine', duration = 0.08, gainVal = 0.05) {
         // Si el sonido está silenciado por el usuario, salimos de inmediato
-        if (!AppState.soundEnabled) return; // Evalúa condición
+        if (!AppState.soundEnabled) return;
 
         try { // Inicia bloque protegido contra errores
             // Aseguramos que el AudioContext esté inicializado
-            this.init(); // Ejecuta llamada o método
+            this.init();
             // Si el navegador no permite audio o falló, cancelamos
-            if (!AppState.audioCtx) return; // Evalúa condición
+            if (!AppState.audioCtx) return;
 
             // Si el contexto fue suspendido por inactividad, lo reanudamos
-            if (AppState.audioCtx.state === 'suspended') { // Evalúa condición
-                AppState.audioCtx.resume(); // Ejecuta llamada o método
+            if (AppState.audioCtx.state === 'suspended') {
+                AppState.audioCtx.resume();
             }
 
             // Creamos un nodo oscilador para emitir la onda de sonido
-            const osc = AppState.audioCtx.createOscillator(); // Declara e inicializa "osc"
+            const osc = AppState.audioCtx.createOscillator();
             // Creamos un nodo de ganancia para controlar el volumen del sonido
-            const gain = AppState.audioCtx.createGain(); // Declara e inicializa "gain"
+            const gain = AppState.audioCtx.createGain();
 
             // Asignamos el tipo de onda ('sine', 'triangle', 'sawtooth', 'square')
-            osc.type = type; // Asigna valor
+            osc.type = type;
             // Fijamos la frecuencia en hercios en el tiempo actual del contexto
-            osc.frequency.setValueAtTime(freq, AppState.audioCtx.currentTime); // Ejecuta llamada o método
+            osc.frequency.setValueAtTime(freq, AppState.audioCtx.currentTime);
 
             // Fijamos el volumen inicial en el tiempo actual
-            gain.gain.setValueAtTime(gainVal, AppState.audioCtx.currentTime); // Ejecuta llamada o método
+            gain.gain.setValueAtTime(gainVal, AppState.audioCtx.currentTime);
             // Realizamos un desvanecimiento exponencial (fade out) hacia cero para evitar chasquidos de audio
-            gain.gain.exponentialRampToValueAtTime(0.0001, AppState.audioCtx.currentTime + duration); // Ejecuta llamada o método
+            gain.gain.exponentialRampToValueAtTime(0.0001, AppState.audioCtx.currentTime + duration);
 
             // Conectamos el oscilador a la ganancia de volumen
-            osc.connect(gain); // Ejecuta llamada o método
+            osc.connect(gain);
             // Conectamos la ganancia a la salida de audio (altavoces del usuario)
-            gain.connect(AppState.audioCtx.destination); // Ejecuta llamada o método
+            gain.connect(AppState.audioCtx.destination);
 
             // Iniciamos la oscilación sonora inmediatamente
-            osc.start(); // Ejecuta llamada o método
+            osc.start();
             // Detenemos la oscilación al completarse la duración especificada
-            osc.stop(AppState.audioCtx.currentTime + duration); // Ejecuta llamada o método
-        } catch (e) { // Instrucción JavaScript
+            osc.stop(AppState.audioCtx.currentTime + duration);
+        } catch (e) {
             // Manejo silencioso en caso de bloqueo de políticas de autoplay
         }
     }
 
     // Sonido sutil de clic de interfaz (onda triangular de 600Hz y 40ms)
-    static click() { // Instrucción JavaScript
-        this.playTone(600, 'triangle', 0.04, 0.03); // Ejecuta llamada o método
+    static click() {
+        this.playTone(600, 'triangle', 0.04, 0.03);
     }
 
     // Acorde arpegiado ascendente de éxito (Do5 -> Mi5 -> Sol5)
-    static success() { // Instrucción JavaScript
+    static success() {
         // Nota C5 (523.25 Hz)
-        this.playTone(523.25, 'sine', 0.1, 0.05); // Ejecuta llamada o método
+        this.playTone(523.25, 'sine', 0.1, 0.05);
         // Nota E5 (659.25 Hz) con retardo de 80ms
-        setTimeout(() => this.playTone(659.25, 'sine', 0.12, 0.05), 80); // Ejecuta llamada o método
+        setTimeout(() => this.playTone(659.25, 'sine', 0.12, 0.05), 80);
         // Nota G5 (783.99 Hz) con retardo de 160ms
-        setTimeout(() => this.playTone(783.99, 'sine', 0.18, 0.06), 160); // Ejecuta llamada o método
+        setTimeout(() => this.playTone(783.99, 'sine', 0.18, 0.06), 160);
     }
 
     // Sonido suave de cambio de diapositiva o transición
-    static transition() { // Instrucción JavaScript
+    static transition() {
         // Tono bajo de 320 Hz
-        this.playTone(320, 'sine', 0.06, 0.03); // Ejecuta llamada o método
+        this.playTone(320, 'sine', 0.06, 0.03);
         // Tono medio de 480 Hz con ligero desfase
-        setTimeout(() => this.playTone(480, 'sine', 0.08, 0.03), 40); // Ejecuta llamada o método
+        setTimeout(() => this.playTone(480, 'sine', 0.08, 0.03), 40);
     }
 
     // Tono grave de alerta o advertencia (onda diente de sierra de 280 Hz)
-    static alert() { // Instrucción JavaScript
-        this.playTone(280, 'sawtooth', 0.15, 0.04); // Ejecuta llamada o método
+    static alert() {
+        this.playTone(280, 'sawtooth', 0.15, 0.04);
     }
 }
 
 // --- MÓDULO DE TOAST NOTIFICATIONS (Alertas flotantes) ---
 // Muestra una notificación temporal en la esquina inferior con un mensaje y un icono
-function showToast(message, icon = "✔") { // Declara función
+function showToast(message, icon = "✔") {
     // Obtenemos el elemento contenedor de la notificación
-    const toast = document.getElementById("toastNotification"); // Obtiene referencia DOM para "toast"
+    const toast = document.getElementById("toastNotification");
     // Obtenemos el contenedor de texto de la notificación
-    const toastMsg = document.getElementById("toastMsg"); // Obtiene referencia DOM para "toastMsg"
+    const toastMsg = document.getElementById("toastMsg");
     // Obtenemos el contenedor del icono de la notificación
-    const toastIcon = document.getElementById("toastIcon"); // Obtiene referencia DOM para "toastIcon"
+    const toastIcon = document.getElementById("toastIcon");
 
     // Si los elementos no existen en el DOM, cancelamos
-    if (!toast || !toastMsg) return; // Evalúa condición
+    if (!toast || !toastMsg) return;
 
     // Asignamos el mensaje recibido
     toastMsg.textContent = message; // Actualiza contenido en el DOM
     // Si existe el icono, asignamos el emoji o símbolo correspondiente
-    if (toastIcon) toastIcon.textContent = icon; // Evalúa condición
+    if (toastIcon) toastIcon.textContent = icon;
 
     // Agregamos la clase .active para activar la animación de entrada
-    toast.classList.add("active"); // Modifica clases CSS del elemento
+    toast.classList.add("active");
     // Cancelamos cualquier temporizador previo si se disparan varios toasts seguidos
-    clearTimeout(toast._timeout); // Ejecuta llamada o método
+    clearTimeout(toast._timeout);
     // Programamos la desaparición automática tras 2.8 segundos (2800 ms)
-    toast._timeout = setTimeout(() => { // Asigna valor
-        toast.classList.remove("active"); // Modifica clases CSS del elemento
-    }, 2800); // Ejecuta llamada o método
+    toast._timeout = setTimeout(() => {
+        toast.classList.remove("active");
+    }, 2800);
 }
 
 // --- MÓDULO DE CONTROLADOR DE PRESENTACIÓN ---
 // Gestiona el ciclo de vida de las diapositivas, transiciones, teclado y controles
 class PresentationController { // Define clase
     // Inicialización del controlador de presentación
-    static init() { // Instrucción JavaScript
+    static init() {
         // Seleccionamos todas las etiquetas con clase .slide
-        this.slides = document.querySelectorAll(".slide"); // Asigna valor
+        this.slides = document.querySelectorAll(".slide");
         // Actualizamos la cantidad total de diapositivas detectadas
-        AppState.totalSlides = this.slides.length; // Asigna valor
+        AppState.totalSlides = this.slides.length;
 
         // Generamos dinámicamente las bolitas indicadoras inferiores
-        this.renderDots(); // Ejecuta llamada o método
+        this.renderDots();
         // Generamos la cuadrícula del modal de visión general
-        this.renderOverview(); // Ejecuta llamada o método
+        this.renderOverview();
         // Posicionamos la presentación en la diapositiva 1 sin reproducir audio al inicio
-        this.goToSlide(1, false); // Ejecuta llamada o método
+        this.goToSlide(1, false);
         // Asociamos los escuchadores de eventos (botones, clics y teclado)
-        this.bindEvents(); // Ejecuta llamada o método
+        this.bindEvents();
     }
 
     // Renderiza dinámicamente los puntos de navegación en el dock inferior
-    static renderDots() { // Instrucción JavaScript
+    static renderDots() {
         // Obtenemos el contenedor de puntos del DOM
-        const container = document.getElementById("slideDotsContainer"); // Obtiene referencia DOM para "container"
+        const container = document.getElementById("slideDotsContainer");
         // Verificamos existencia
-        if (!container) return; // Evalúa condición
+        if (!container) return;
         // Limpiamos el contenido previo
         container.innerHTML = ""; // Actualiza contenido en el DOM
 
         // Iteramos desde la diapositiva 1 hasta la última
-        for (let i = 1; i <= AppState.totalSlides; i++) { // Inicia bucle de iteración
+        for (let i = 1; i <= AppState.totalSlides; i++) {
             // Creamos un nuevo elemento div
-            const dot = document.createElement("div"); // Crea nuevo elemento DOM "dot"
+            const dot = document.createElement("div");
             // Le asignamos la clase base y la clase active al primer punto
-            dot.className = `slide-dot ${i === 1 ? "active" : ""}`; // Asigna valor
+            dot.className = `slide-dot ${i === 1 ? "active" : ""}`;
             // Texto descriptivo accesible para hover
-            dot.title = `Diapositiva ${i}`; // Asigna valor
+            dot.title = `Diapositiva ${i}`;
             // Agregamos evento de clic para saltar a la diapositiva correspondiente
-            dot.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.goToSlide(i); // Ejecuta llamada o método
+            dot.addEventListener("click", () => {
+                SoundEffects.click();
+                this.goToSlide(i);
             });
             // Añadimos el punto al contenedor en el DOM
-            container.appendChild(dot); // Inserta nodo en el DOM
+            container.appendChild(dot);
         }
     }
 
     // Renderiza la lista de miniaturas en el modal de vista panorámica (Overview)
-    static renderOverview() { // Instrucción JavaScript
+    static renderOverview() {
         // Obtenemos la rejilla del modal
-        const grid = document.getElementById("overviewGrid"); // Obtiene referencia DOM para "grid"
+        const grid = document.getElementById("overviewGrid");
         // Validamos existencia
-        if (!grid) return; // Evalúa condición
+        if (!grid) return;
         // Vaciamos contenido
         grid.innerHTML = ""; // Actualiza contenido en el DOM
 
         // Recorremos cada diapositiva
-        this.slides.forEach((slide, index) => { // Instrucción JavaScript
+        this.slides.forEach((slide, index) => {
             // Calculamos el número de diapositiva (base 1)
-            const num = index + 1; // Declara e inicializa "num"
+            const num = index + 1;
             // Leemos el título del atributo data-title o ponemos uno por defecto
-            const title = slide.getAttribute("data-title") || `Diapositiva ${num}`; // Declara e inicializa "title"
+            const title = slide.getAttribute("data-title") || `Diapositiva ${num}`;
             // Creamos el div contenedor de la miniatura
-            const thumb = document.createElement("div"); // Crea nuevo elemento DOM "thumb"
+            const thumb = document.createElement("div");
             // Marcamos con clase .current si es la diapositiva actual
-            thumb.className = `overview-thumb ${num === AppState.currentSlide ? "current" : ""}`; // Asigna valor
+            thumb.className = `overview-thumb ${num === AppState.currentSlide ? "current" : ""}`;
             // Inyectamos el HTML con el número formateado a dos dígitos y su título
             thumb.innerHTML = `
                 <span class="thumb-num">0${num}</span>
                 <span class="thumb-title">${title}</span>
             `;
             // Al hacer clic en una miniatura, viajamos a esa diapositiva y cerramos el modal
-            thumb.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.goToSlide(num); // Ejecuta llamada o método
-                this.closeOverview(); // Ejecuta llamada o método
+            thumb.addEventListener("click", () => {
+                SoundEffects.click();
+                this.goToSlide(num);
+                this.closeOverview();
             });
             // Insertamos la miniatura en la cuadrícula
-            grid.appendChild(thumb); // Inserta nodo en el DOM
+            grid.appendChild(thumb);
         });
     }
 
     // Navega a un número específico de diapositiva
-    static goToSlide(slideNum, playSound = true) { // Instrucción JavaScript
+    static goToSlide(slideNum, playSound = true) {
         // Validamos que el número esté dentro del rango permitido
-        if (slideNum < 1 || slideNum > AppState.totalSlides) return; // Evalúa condición
+        if (slideNum < 1 || slideNum > AppState.totalSlides) return;
 
         // Actualizamos el número actual en el estado global
-        AppState.currentSlide = slideNum; // Asigna valor
+        AppState.currentSlide = slideNum;
 
         // Recorremos las diapositivas para encender solo la activa
-        this.slides.forEach((slide) => { // Instrucción JavaScript
+        this.slides.forEach((slide) => {
             // Obtenemos el número asignado a esta diapositiva
-            const currentNum = parseInt(slide.getAttribute("data-slide"), 10); // Declara e inicializa "currentNum"
+            const currentNum = parseInt(slide.getAttribute("data-slide"), 10);
             // Si coincide con la seleccionada, añadimos .active
-            if (currentNum === slideNum) { // Evalúa condición
-                slide.classList.add("active"); // Modifica clases CSS del elemento
-            } else { // Instrucción JavaScript
+            if (currentNum === slideNum) {
+                slide.classList.add("active");
+            } else {
                 // De lo contrario, removemos .active para ocultarla
-                slide.classList.remove("active"); // Modifica clases CSS del elemento
+                slide.classList.remove("active");
             }
         });
 
         // Obtenemos los elementos de la barra de progreso superior
-        const progressBar = document.getElementById("progressBar"); // Obtiene referencia DOM para "progressBar"
-        const slideIndicator = document.getElementById("slideIndicator"); // Obtiene referencia DOM para "slideIndicator"
+        const progressBar = document.getElementById("progressBar");
+        const slideIndicator = document.getElementById("slideIndicator");
         // Calculamos el porcentaje completado
-        const percentage = (slideNum / AppState.totalSlides) * 100; // Declara e inicializa "percentage"
+        const percentage = (slideNum / AppState.totalSlides) * 100;
 
         // Actualizamos el ancho visual de la barra de progreso
-        if (progressBar) progressBar.style.width = `${percentage}%`; // Evalúa condición
+        if (progressBar) progressBar.style.width = `${percentage}%`;
         // Actualizamos el texto del contador de diapositivas
-        if (slideIndicator) slideIndicator.textContent = `${slideNum} / ${AppState.totalSlides}`; // Evalúa condición
+        if (slideIndicator) slideIndicator.textContent = `${slideNum} / ${AppState.totalSlides}`;
 
         // Sincronizamos las bolitas del dock inferior
-        const dots = document.querySelectorAll(".slide-dot"); // Obtiene referencia DOM para "dots"
-        dots.forEach((dot, idx) => { // Instrucción JavaScript
+        const dots = document.querySelectorAll(".slide-dot");
+        dots.forEach((dot, idx) => {
             // Si el índice coincide, activamos el punto
-            if (idx + 1 === slideNum) { // Evalúa condición
-                dot.classList.add("active"); // Modifica clases CSS del elemento
-            } else { // Instrucción JavaScript
-                dot.classList.remove("active"); // Modifica clases CSS del elemento
+            if (idx + 1 === slideNum) {
+                dot.classList.add("active");
+            } else {
+                dot.classList.remove("active");
             }
         });
 
         // Hacemos scroll suave al inicio de la página para buena lectura
-        window.scrollTo({ top: 0, behavior: "smooth" }); // Ejecuta llamada o método
+        window.scrollTo({ top: 0, behavior: "smooth" });
 
         // Si se solicitó sonido, reproducimos la transición
-        if (playSound) SoundEffects.transition(); // Evalúa condición
+        if (playSound) SoundEffects.transition();
 
         // Si el usuario está en Modo Documento (todas visibles), desplazamos la pantalla hasta la sección correspondiente
-        if (!AppState.isPresentationMode) { // Evalúa condición
-            const targetSlide = document.getElementById(`slide-${slideNum}`); // Obtiene referencia DOM para "targetSlide"
-            if (targetSlide) { // Evalúa condición
-                targetSlide.scrollIntoView({ behavior: "smooth" }); // Ejecuta llamada o método
+        if (!AppState.isPresentationMode) {
+            const targetSlide = document.getElementById(`slide-${slideNum}`);
+            if (targetSlide) {
+                targetSlide.scrollIntoView({ behavior: "smooth" });
             }
         }
     }
 
     // Avanza a la siguiente diapositiva
-    static nextSlide() { // Instrucción JavaScript
+    static nextSlide() {
         // Comprobamos si no estamos en la última
-        if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición
-            this.goToSlide(AppState.currentSlide + 1); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
+        if (AppState.currentSlide < AppState.totalSlides) {
+            this.goToSlide(AppState.currentSlide + 1);
+        } else {
             // Si ya estamos en la última, emitimos alerta y mensaje
-            SoundEffects.alert(); // Ejecuta llamada o método
-            showToast("Estás en la última diapositiva", "ℹ️"); // Ejecuta llamada o método
+            SoundEffects.alert();
+            showToast("Estás en la última diapositiva", "ℹ️");
         }
     }
 
     // Retrocede a la diapositiva anterior
-    static prevSlide() { // Instrucción JavaScript
+    static prevSlide() {
         // Comprobamos si no estamos en la primera
-        if (AppState.currentSlide > 1) { // Evalúa condición
-            this.goToSlide(AppState.currentSlide - 1); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
+        if (AppState.currentSlide > 1) {
+            this.goToSlide(AppState.currentSlide - 1);
+        } else {
             // Si ya estamos en la primera, alertamos
-            SoundEffects.alert(); // Ejecuta llamada o método
-            showToast("Estás en el inicio de la presentación", "ℹ️"); // Ejecuta llamada o método
+            SoundEffects.alert();
+            showToast("Estás en el inicio de la presentación", "ℹ️");
         }
     }
 
     // Alterna entre el modo Presentación (Diapositivas) y el modo Guía (Documento corrido)
-    static toggleMode() { // Instrucción JavaScript
+    static toggleMode() {
         // Invertimos el valor booleano
-        AppState.isPresentationMode = !AppState.isPresentationMode; // Asigna valor
+        AppState.isPresentationMode = !AppState.isPresentationMode;
         // Obtenemos los elementos de texto e icono del botón de cambio
-        const modeText = document.getElementById("modeText"); // Obtiene referencia DOM para "modeText"
-        const modeIcon = document.getElementById("modeIcon"); // Obtiene referencia DOM para "modeIcon"
+        const modeText = document.getElementById("modeText");
+        const modeIcon = document.getElementById("modeIcon");
 
         // Si regresamos al modo presentación
-        if (AppState.isPresentationMode) { // Evalúa condición
-            document.body.classList.remove("mode-document"); // Modifica clases CSS del elemento
-            document.body.classList.add("mode-presentation"); // Modifica clases CSS del elemento
-            if (modeText) modeText.textContent = "Modo Guía"; // Evalúa condición
-            if (modeIcon) modeIcon.textContent = "📑"; // Evalúa condición
-            this.goToSlide(AppState.currentSlide, false); // Ejecuta llamada o método
-            showToast("Cambiado a Modo Presentación Interactiva (Diapositivas)", "🖥️"); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
+        if (AppState.isPresentationMode) {
+            document.body.classList.remove("mode-document");
+            document.body.classList.add("mode-presentation");
+            if (modeText) modeText.textContent = "Modo Guía";
+            if (modeIcon) modeIcon.textContent = "📑";
+            this.goToSlide(AppState.currentSlide, false);
+            showToast("Cambiado a Modo Presentación Interactiva (Diapositivas)", "🖥️");
+        } else {
             // Si pasamos al modo documento corrido
-            document.body.classList.remove("mode-presentation"); // Modifica clases CSS del elemento
-            document.body.classList.add("mode-document"); // Modifica clases CSS del elemento
-            if (modeText) modeText.textContent = "Modo Slides"; // Evalúa condición
-            if (modeIcon) modeIcon.textContent = "📽️"; // Evalúa condición
-            showToast("Cambiado a Modo Guía Completa de Estudio", "📖"); // Ejecuta llamada o método
+            document.body.classList.remove("mode-presentation");
+            document.body.classList.add("mode-document");
+            if (modeText) modeText.textContent = "Modo Slides";
+            if (modeIcon) modeIcon.textContent = "📽️";
+            showToast("Cambiado a Modo Guía Completa de Estudio", "📖");
         }
         // Reproducimos clic
-        SoundEffects.click(); // Ejecuta llamada o método
+        SoundEffects.click();
     }
 
     // Abre el modal panorámico de diapositivas
-    static openOverview() { // Instrucción JavaScript
-        const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-        if (modal) { // Evalúa condición
+    static openOverview() {
+        const modal = document.getElementById("overviewModal");
+        if (modal) {
             // Volvemos a sincronizar la miniatura activa
-            this.renderOverview(); // Ejecuta llamada o método
+            this.renderOverview();
             // Mostramos el modal añadiendo .active
-            modal.classList.add("active"); // Modifica clases CSS del elemento
-            SoundEffects.click(); // Ejecuta llamada o método
+            modal.classList.add("active");
+            SoundEffects.click();
         }
     }
 
     // Cierra el modal panorámico
-    static closeOverview() { // Instrucción JavaScript
-        const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-        if (modal) { // Evalúa condición
-            modal.classList.remove("active"); // Modifica clases CSS del elemento
+    static closeOverview() {
+        const modal = document.getElementById("overviewModal");
+        if (modal) {
+            modal.classList.remove("active");
         }
     }
 
     // Alterna pantalla completa (Fullscreen)
-    static toggleFullscreen() { // Instrucción JavaScript
-        SoundEffects.click(); // Ejecuta llamada o método
+    static toggleFullscreen() {
+        SoundEffects.click();
         // Si no hay elemento en fullscreen actualmente
-        if (!document.fullscreenElement) { // Evalúa condición
+        if (!document.fullscreenElement) {
             // Solicitamos pantalla completa para todo el documento
-            document.documentElement.requestFullscreen().catch(() => {}); // Ejecuta llamada o método
-            showToast("Pantalla Completa Activada", "⛶"); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
+            document.documentElement.requestFullscreen().catch(() => {});
+            showToast("Pantalla Completa Activada", "⛶");
+        } else {
             // Si ya estaba en pantalla completa, salimos
-            if (document.exitFullscreen) { // Evalúa condición
-                document.exitFullscreen().catch(() => {}); // Ejecuta llamada o método
+            if (document.exitFullscreen) {
+                document.exitFullscreen().catch(() => {});
             }
-            showToast("Pantalla Completa Desactivada", "⛶"); // Ejecuta llamada o método
+            showToast("Pantalla Completa Desactivada", "⛶");
         }
     }
 
     // Asocia los eventos de la interfaz
-    static bindEvents() { // Instrucción JavaScript
+    static bindEvents() {
         // Botón Siguiente del dock
-        const btnNext = document.getElementById("btnNextSlide"); // Obtiene referencia DOM para "btnNext"
+        const btnNext = document.getElementById("btnNextSlide");
         // Botón Anterior del dock
-        const btnPrev = document.getElementById("btnPrevSlide"); // Obtiene referencia DOM para "btnPrev"
-        if (btnNext) btnNext.addEventListener("click", () => this.nextSlide()); // Evalúa condición
-        if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide()); // Evalúa condición
+        const btnPrev = document.getElementById("btnPrevSlide");
+        if (btnNext) btnNext.addEventListener("click", () => this.nextSlide());
+        if (btnPrev) btnPrev.addEventListener("click", () => this.prevSlide());
 
         // Botones de acción de la barra superior
-        const btnGoLab = document.getElementById("btnGoLab"); // Obtiene referencia DOM para "btnGoLab"
-        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(7)); // Evalúa condición
+        const btnGoLab = document.getElementById("btnGoLab");
+        if (btnGoLab) btnGoLab.addEventListener("click", () => this.goToSlide(7));
 
-        const btnToggleMode = document.getElementById("btnToggleMode"); // Obtiene referencia DOM para "btnToggleMode"
-        const btnToggleSound = document.getElementById("btnToggleSound"); // Obtiene referencia DOM para "btnToggleSound"
-        const btnOverview = document.getElementById("btnOverview"); // Obtiene referencia DOM para "btnOverview"
-        const btnFullscreen = document.getElementById("btnFullscreen"); // Obtiene referencia DOM para "btnFullscreen"
-        const btnCloseOverview = document.getElementById("btnCloseOverview"); // Obtiene referencia DOM para "btnCloseOverview"
+        const btnToggleMode = document.getElementById("btnToggleMode");
+        const btnToggleSound = document.getElementById("btnToggleSound");
+        const btnOverview = document.getElementById("btnOverview");
+        const btnFullscreen = document.getElementById("btnFullscreen");
+        const btnCloseOverview = document.getElementById("btnCloseOverview");
 
-        if (btnToggleMode) btnToggleMode.addEventListener("click", () => this.toggleMode()); // Evalúa condición
+        if (btnToggleMode) btnToggleMode.addEventListener("click", () => this.toggleMode());
 
         // Manejo del botón de sonido
-        if (btnToggleSound) { // Evalúa condición
-            btnToggleSound.addEventListener("click", () => { // Registra escuchador de eventos
+        if (btnToggleSound) {
+            btnToggleSound.addEventListener("click", () => {
                 // Invertimos el estado de sonido
-                AppState.soundEnabled = !AppState.soundEnabled; // Asigna valor
-                const icon = document.getElementById("soundIcon"); // Obtiene referencia DOM para "icon"
+                AppState.soundEnabled = !AppState.soundEnabled;
+                const icon = document.getElementById("soundIcon");
                 // Actualizamos el icono a parlante encendido o silenciado
-                if (icon) icon.textContent = AppState.soundEnabled ? "🔊" : "🔇"; // Evalúa condición
-                showToast(AppState.soundEnabled ? "Audio Activado" : "Audio Silenciado", AppState.soundEnabled ? "🔊" : "🔇"); // Ejecuta llamada o método
-                if (AppState.soundEnabled) SoundEffects.click(); // Evalúa condición
+                if (icon) icon.textContent = AppState.soundEnabled ? "🔊" : "🔇";
+                showToast(AppState.soundEnabled ? "Audio Activado" : "Audio Silenciado", AppState.soundEnabled ? "🔊" : "🔇");
+                if (AppState.soundEnabled) SoundEffects.click();
             });
         }
 
-        if (btnOverview) btnOverview.addEventListener("click", () => this.openOverview()); // Evalúa condición
-        if (btnCloseOverview) btnCloseOverview.addEventListener("click", () => this.closeOverview()); // Evalúa condición
-        if (btnFullscreen) btnFullscreen.addEventListener("click", () => this.toggleFullscreen()); // Evalúa condición
+        if (btnOverview) btnOverview.addEventListener("click", () => this.openOverview());
+        if (btnCloseOverview) btnCloseOverview.addEventListener("click", () => this.closeOverview());
+        if (btnFullscreen) btnFullscreen.addEventListener("click", () => this.toggleFullscreen());
 
         // Botón principal de la portada "Iniciar Presentación Interactiva"
-        const btnStart = document.getElementById("btnStartPresentation"); // Obtiene referencia DOM para "btnStart"
-        if (btnStart) { // Evalúa condición
-            btnStart.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
+        const btnStart = document.getElementById("btnStartPresentation");
+        if (btnStart) {
+            btnStart.addEventListener("click", () => {
+                SoundEffects.click();
                 // Salta a la diapositiva 2 (¿Qué es un Prototipo?)
-                this.goToSlide(2); // Ejecuta llamada o método
+                this.goToSlide(2);
             });
         }
 
         // Mini tarjetas de la portada con atributo data-jump
-        document.querySelectorAll("[data-jump]").forEach((item) => { // Instrucción JavaScript
-            item.addEventListener("click", () => { // Registra escuchador de eventos
-                const target = parseInt(item.getAttribute("data-jump"), 10); // Declara e inicializa "target"
-                if (target) { // Evalúa condición
-                    SoundEffects.click(); // Ejecuta llamada o método
-                    this.goToSlide(target); // Ejecuta llamada o método
+        document.querySelectorAll("[data-jump]").forEach((item) => {
+            item.addEventListener("click", () => {
+                const target = parseInt(item.getAttribute("data-jump"), 10);
+                if (target) {
+                    SoundEffects.click();
+                    this.goToSlide(target);
                 }
             });
         });
 
         // Botón "Volver al Inicio" en la diapositiva de resumen
-        const btnRestart = document.getElementById("btnRestartPresentation"); // Obtiene referencia DOM para "btnRestart"
-        if (btnRestart) { // Evalúa condición
-            btnRestart.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.goToSlide(1); // Ejecuta llamada o método
+        const btnRestart = document.getElementById("btnRestartPresentation");
+        if (btnRestart) {
+            btnRestart.addEventListener("click", () => {
+                SoundEffects.click();
+                this.goToSlide(1);
             });
         }
 
         // Escuchador global de teclado para atajos y navegación
-        window.addEventListener("keydown", (e) => { // Registra escuchador de eventos
+        window.addEventListener("keydown", (e) => {
             // Si el usuario está escribiendo código en el textarea, no cambiamos de diapositiva
-            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") { // Evalúa condición
+            if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") {
                 // Atajo especial en el editor: Ctrl + Enter ejecuta el código
-                if ((e.ctrlKey || e.metaKey) && e.key === "Enter") { // Evalúa condición
-                    e.preventDefault(); // Ejecuta llamada o método
-                    PlaygroundManager.runCode(); // Ejecuta llamada o método
+                if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+                    e.preventDefault();
+                    PlaygroundManager.runCode();
                 }
-                return; // Retorna resultado
+                return;
             }
 
             // Atajos de navegación general
@@ -443,78 +443,78 @@ class PresentationController { // Define clase
                 case "d":
                 case "D":
                 case " ":
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.nextSlide(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.nextSlide();
+                    break;
                 // Flecha izquierda o A retroceden
                 case "ArrowLeft":
                 case "a":
                 case "A":
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.prevSlide(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.prevSlide();
+                    break;
                 // Tecla 'O' abre o cierra la vista general de miniaturas
                 case "o":
                 case "O":
-                    e.preventDefault(); // Ejecuta llamada o método
-                    const modal = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modal"
-                    if (modal && modal.classList.contains("active")) { // Evalúa condición
-                        this.closeOverview(); // Ejecuta llamada o método
-                    } else { // Instrucción JavaScript
-                        this.openOverview(); // Ejecuta llamada o método
+                    e.preventDefault();
+                    const modal = document.getElementById("overviewModal");
+                    if (modal && modal.classList.contains("active")) {
+                        this.closeOverview();
+                    } else {
+                        this.openOverview();
                     }
-                    break; // Instrucción JavaScript
+                    break;
                 // Tecla 'F' alterna pantalla completa
                 case "f":
                 case "F":
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.toggleFullscreen(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.toggleFullscreen();
+                    break;
                 // Tecla 'M' alterna el modo de vista (Slides vs Guía)
                 case "m":
                 case "M":
-                    e.preventDefault(); // Ejecuta llamada o método
-                    this.toggleMode(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    e.preventDefault();
+                    this.toggleMode();
+                    break;
                 // Tecla Escape cierra el modal si está abierto
                 case "Escape":
-                    this.closeOverview(); // Ejecuta llamada o método
-                    break; // Instrucción JavaScript
+                    this.closeOverview();
+                    break;
             }
         });
 
         // Si el usuario hace clic fuera de la ventana del modal, se cierra
-        const modalOverlay = document.getElementById("overviewModal"); // Obtiene referencia DOM para "modalOverlay"
-        if (modalOverlay) { // Evalúa condición
-            modalOverlay.addEventListener("click", (e) => { // Registra escuchador de eventos
-                if (e.target === modalOverlay) this.closeOverview(); // Evalúa condición
+        const modalOverlay = document.getElementById("overviewModal");
+        if (modalOverlay) {
+            modalOverlay.addEventListener("click", (e) => {
+                if (e.target === modalOverlay) this.closeOverview();
             });
         }
     }
 }
 
 // --- MÓDULO 1: DEMOSTRACIÓN DE PROTOTIPO BÁSICO (SLIDE 2) ---
-function initSlide2Demo() { // Declara función
+function initSlide2Demo() {
     // Obtenemos el botón para probar el prototipo básico
-    const btnTest = document.getElementById("btnTestProtoBasic"); // Obtiene referencia DOM para "btnTest"
+    const btnTest = document.getElementById("btnTestProtoBasic");
     // Obtenemos la mini consola de salida
-    const consoleOut = document.getElementById("console-output-1"); // Obtiene referencia DOM para "consoleOut"
+    const consoleOut = document.getElementById("console-output-1");
     // Obtenemos la etiqueta de estado de ejecución
-    const status = document.getElementById("testProtoBasicStatus"); // Obtiene referencia DOM para "status"
+    const status = document.getElementById("testProtoBasicStatus");
 
     // Validamos existencia en el DOM
-    if (!btnTest || !consoleOut) return; // Evalúa condición
+    if (!btnTest || !consoleOut) return;
 
     // Al hacer clic en el botón de prueba
-    btnTest.addEventListener("click", () => { // Registra escuchador de eventos
-        SoundEffects.click(); // Ejecuta llamada o método
+    btnTest.addEventListener("click", () => {
+        SoundEffects.click();
 
         // 1. Creamos un objeto literal simple
-        const usuario = { nombre: "Carlos" }; // Declara e inicializa "usuario"
+        const usuario = { nombre: "Carlos" };
         // 2. Leemos su prototipo oculto mediante el estándar Object.getPrototypeOf()
-        const proto = Object.getPrototypeOf(usuario); // Declara e inicializa "proto"
+        const proto = Object.getPrototypeOf(usuario);
         // 3. Comprobamos si su prototipo coincide con el prototipo base universal de JS
-        const esObjectPrototype = proto === Object.prototype; // Declara e inicializa "esObjectPrototype"
+        const esObjectPrototype = proto === Object.prototype;
 
         // Mostramos el resultado paso a paso con colores en la mini consola
         consoleOut.innerHTML = `
@@ -524,25 +524,25 @@ function initSlide2Demo() { // Declara función
         `;
 
         // Actualizamos el estado con color verde de éxito
-        if (status) { // Evalúa condición
+        if (status) {
             status.textContent = "✔ Ejecutado con éxito"; // Actualiza contenido en el DOM
-            status.style.color = "#34d399"; // Asigna valor
+            status.style.color = "#34d399";
         }
         // Reproducimos acorde de éxito
-        SoundEffects.success(); // Ejecuta llamada o método
+        SoundEffects.success();
     });
 
     // Añadimos la funcionalidad de copiar código al portapapeles en los botones correspondientes
-    document.querySelectorAll(".btn-copy-code").forEach((btn) => { // Instrucción JavaScript
-        btn.addEventListener("click", () => { // Registra escuchador de eventos
-            const targetId = btn.getAttribute("data-target"); // Declara e inicializa "targetId"
-            const codeEl = document.getElementById(targetId); // Obtiene referencia DOM para "codeEl"
-            if (codeEl) { // Evalúa condición
+    document.querySelectorAll(".btn-copy-code").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const targetId = btn.getAttribute("data-target");
+            const codeEl = document.getElementById(targetId);
+            if (codeEl) {
                 // Copiamos el texto al portapapeles del sistema
-                navigator.clipboard.writeText(codeEl.innerText).then(() => { // Instrucción JavaScript
+                navigator.clipboard.writeText(codeEl.innerText).then(() => {
                     btn.textContent = "¡Copiado!"; // Actualiza contenido en el DOM
-                    SoundEffects.success(); // Ejecuta llamada o método
-                    showToast("Código copiado al portapapeles", "📋"); // Ejecuta llamada o método
+                    SoundEffects.success();
+                    showToast("Código copiado al portapapeles", "📋");
                     // Restauramos el texto original tras 2 segundos
                     setTimeout(() => { btn.textContent = "Copiar"; }, 2000); // Actualiza contenido en el DOM
                 });
@@ -552,32 +552,32 @@ function initSlide2Demo() { // Declara función
 }
 
 // --- MÓDULO 2: COMPARADOR DE IDENTIDAD EN MEMORIA (SLIDE 3) ---
-function initSlide3Demo() { // Declara función
+function initSlide3Demo() {
     // Obtenemos el botón para verificar la igualdad referencial de prototipos
-    const btnCheck = document.getElementById("btnCheckIdentity"); // Obtiene referencia DOM para "btnCheck"
+    const btnCheck = document.getElementById("btnCheckIdentity");
     // Obtenemos la caja de resultado
-    const resultBox = document.getElementById("identityResult"); // Obtiene referencia DOM para "resultBox"
+    const resultBox = document.getElementById("identityResult");
 
-    if (!btnCheck || !resultBox) return; // Evalúa condición
+    if (!btnCheck || !resultBox) return;
 
-    btnCheck.addEventListener("click", () => { // Registra escuchador de eventos
+    btnCheck.addEventListener("click", () => {
         // Función constructora Automovil
-        function Automovil(marca) { // Declara función
-            this.marca = marca; // Asigna valor
+        function Automovil(marca) {
+            this.marca = marca;
         }
         // Asignamos el método en Automovil.prototype
-        Automovil.prototype.encender = function() { // Asigna valor
-            return `Auto ${this.marca} listo`; // Retorna resultado
+        Automovil.prototype.encender = function() {
+            return `Auto ${this.marca} listo`;
         };
 
         // Creamos una nueva instancia miAuto
-        const miAuto = new Automovil("Toyota"); // Declara e inicializa "miAuto"
+        const miAuto = new Automovil("Toyota");
         // Obtenemos el prototipo real de la instancia creada
-        const protoInstancia = Object.getPrototypeOf(miAuto); // Declara e inicializa "protoInstancia"
+        const protoInstancia = Object.getPrototypeOf(miAuto);
         // Tomamos el Prototype Object del molde constructor
-        const protoConstructor = Automovil.prototype; // Declara e inicializa "protoConstructor"
+        const protoConstructor = Automovil.prototype;
         // Comprobamos con igualdad estricta (===) si ambas variables apuntan al mismo espacio físico de RAM
-        const sonIdenticos = protoInstancia === protoConstructor; // Declara e inicializa "sonIdenticos"
+        const sonIdenticos = protoInstancia === protoConstructor;
 
         // Pintamos el resultado explicativo
         resultBox.innerHTML = `
@@ -585,27 +585,27 @@ function initSlide3Demo() { // Declara función
             Ambos apuntan exactamente a la misma posición física de memoria en RAM.<br>
             <code>miAuto.__proto__ === Automovil.prototype</code> es <strong>${sonIdenticos}</strong>.
         `;
-        SoundEffects.success(); // Ejecuta llamada o método
+        SoundEffects.success();
     });
 }
 
 // --- MÓDULO 3: SIMULADOR DE PROTOTYPE CHAIN (SLIDE 4) ---
 class PrototypeChainSimulator { // Define clase
-    static init() { // Instrucción JavaScript
+    static init() {
         // Propiedad que se buscará por defecto
-        this.currentProp = "nombre"; // Asigna valor
+        this.currentProp = "nombre";
         // Bandera para evitar ejecuciones concurrentes mientras corre la animación
-        this.isAnimating = false; // Asigna valor
+        this.isAnimating = false;
 
         // Botones de propiedades seleccionables
-        this.propButtons = document.querySelectorAll(".sim-prop-btn"); // Asigna valor
+        this.propButtons = document.querySelectorAll(".sim-prop-btn");
         // Botón de ejecución de la simulación
-        this.btnRun = document.getElementById("btnRunChainSimulation"); // Asigna valor
+        this.btnRun = document.getElementById("btnRunChainSimulation");
         // Contenedor de texto de explicación en vivo
-        this.feedback = document.getElementById("chainStepExplanation"); // Asigna valor
+        this.feedback = document.getElementById("chainStepExplanation");
 
         // Diccionario con las referencias a los 5 nodos eslabones de la cadena
-        this.nodes = { // Asigna valor
+        this.nodes = {
             1: document.getElementById("node-hijo"),
             2: document.getElementById("node-padre"),
             3: document.getElementById("node-abuelo"),
@@ -614,231 +614,231 @@ class PrototypeChainSimulator { // Define clase
         };
 
         // Diccionario con los 4 conectores entre nodos
-        this.links = { // Asigna valor
+        this.links = {
             "1-2": document.getElementById("link-1-2"),
             "2-3": document.getElementById("link-2-3"),
             "3-4": document.getElementById("link-3-4"),
             "4-5": document.getElementById("link-4-5")
         };
 
-        this.bindEvents(); // Ejecuta llamada o método
+        this.bindEvents();
     }
 
-    static bindEvents() { // Instrucción JavaScript
+    static bindEvents() {
         // Escuchador de clics para cada botón de propiedad a buscar
-        this.propButtons.forEach((btn) => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
+        this.propButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
                 // Si la animación está en marcha, bloqueamos la interacción
-                if (this.isAnimating) return; // Evalúa condición
-                SoundEffects.click(); // Ejecuta llamada o método
+                if (this.isAnimating) return;
+                SoundEffects.click();
                 // Desactivamos los otros botones y activamos el seleccionado
-                this.propButtons.forEach((b) => b.classList.remove("active")); // Modifica clases CSS del elemento
-                btn.classList.add("active"); // Modifica clases CSS del elemento
+                this.propButtons.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
                 // Guardamos el nombre de la propiedad elegida
-                this.currentProp = btn.getAttribute("data-prop"); // Asigna valor
+                this.currentProp = btn.getAttribute("data-prop");
                 // Reiniciamos los colores de los nodos
-                this.resetVisuals(); // Ejecuta llamada o método
+                this.resetVisuals();
                 // Actualizamos el mensaje de instrucciones
-                if (this.feedback) { // Evalúa condición
+                if (this.feedback) {
                     this.feedback.innerHTML = `Propiedad seleccionada: <code>hijo.${this.currentProp}</code>. Haz clic en <strong>"Rastrear Búsqueda en la Cadena"</strong> para iniciar.`; // Actualiza contenido en el DOM
                 }
             });
         });
 
         // Botón que arranca la búsqueda animada
-        if (this.btnRun) { // Evalúa condición
-            this.btnRun.addEventListener("click", () => { // Registra escuchador de eventos
-                if (this.isAnimating) return; // Evalúa condición
-                this.runSimulation(); // Ejecuta llamada o método
+        if (this.btnRun) {
+            this.btnRun.addEventListener("click", () => {
+                if (this.isAnimating) return;
+                this.runSimulation();
             });
         }
     }
 
     // Limpia los estilos visuales de pasos anteriores
-    static resetVisuals() { // Instrucción JavaScript
-        Object.values(this.nodes).forEach((n) => { // Instrucción JavaScript
-            if (n) { // Evalúa condición
-                n.classList.remove("current-step", "found-here", "not-found-here"); // Modifica clases CSS del elemento
+    static resetVisuals() {
+        Object.values(this.nodes).forEach((n) => {
+            if (n) {
+                n.classList.remove("current-step", "found-here", "not-found-here");
             }
         });
-        Object.values(this.links).forEach((l) => { // Instrucción JavaScript
-            if (l) l.classList.remove("link-active"); // Evalúa condición
+        Object.values(this.links).forEach((l) => {
+            if (l) l.classList.remove("link-active");
         });
-        document.querySelectorAll(".prop-item").forEach((p) => p.classList.remove("prop-highlight")); // Modifica clases CSS del elemento
+        document.querySelectorAll(".prop-item").forEach((p) => p.classList.remove("prop-highlight"));
     }
 
     // Ejecuta la animación asíncrona de búsqueda escalón por escalón
-    static async runSimulation() { // Instrucción JavaScript
-        this.isAnimating = true; // Asigna valor
-        this.btnRun.disabled = true; // Asigna valor
-        this.resetVisuals(); // Ejecuta llamada o método
-        SoundEffects.click(); // Ejecuta llamada o método
+    static async runSimulation() {
+        this.isAnimating = true;
+        this.btnRun.disabled = true;
+        this.resetVisuals();
+        SoundEffects.click();
 
-        const prop = this.currentProp; // Declara e inicializa "prop"
+        const prop = this.currentProp;
 
         // PASO 1: Inspeccionar Nodo Hijo (Instancia directa)
-        await this.stepNode(1, "Buscando en la instancia propia <code>hijo</code>..."); // Ejecuta llamada o método
-        if (prop === "nombre") { // Evalúa condición
+        await this.stepNode(1, "Buscando en la instancia propia <code>hijo</code>...");
+        if (prop === "nombre") {
             // Si la propiedad es 'nombre', está directamente en hijo
-            this.highlightFound(1, prop, `¡Encontrado en el Eslabón 1 (Instancia)! Valor propio: <strong>"Lucas"</strong>. No fue necesario subir en la cadena.`); // Ejecuta llamada o método
-            this.finishSimulation(true); // Ejecuta llamada o método
-            return; // Retorna resultado
+            this.highlightFound(1, prop, `¡Encontrado en el Eslabón 1 (Instancia)! Valor propio: <strong>"Lucas"</strong>. No fue necesario subir en la cadena.`);
+            this.finishSimulation(true);
+            return;
         }
         // Si no está, lo marcamos en rojo tenue y animamos el cable al nodo padre
-        this.markNotFound(1); // Ejecuta llamada o método
-        await this.stepLink("1-2"); // Ejecuta llamada o método
+        this.markNotFound(1);
+        await this.stepLink("1-2");
 
         // PASO 2: Inspeccionar Nodo Padre (Primer prototipo)
-        await this.stepNode(2, `No está en <code>hijo</code>. Saltando a través de <code>[[Prototype]]</code> al taller de <code>padre</code>...`); // Ejecuta llamada o método
-        if (prop === "profesion") { // Evalúa condición
+        await this.stepNode(2, `No está en <code>hijo</code>. Saltando a través de <code>[[Prototype]]</code> al taller de <code>padre</code>...`);
+        if (prop === "profesion") {
             // Si la propiedad es 'profesion', se encuentra aquí
-            this.highlightFound(2, prop, `¡Encontrado en el Eslabón 2 (padre)! Valor heredado: <strong>"Ingeniero"</strong>.`); // Ejecuta llamada o método
-            this.finishSimulation(true); // Ejecuta llamada o método
-            return; // Retorna resultado
+            this.highlightFound(2, prop, `¡Encontrado en el Eslabón 2 (padre)! Valor heredado: <strong>"Ingeniero"</strong>.`);
+            this.finishSimulation(true);
+            return;
         }
-        this.markNotFound(2); // Ejecuta llamada o método
-        await this.stepLink("2-3"); // Ejecuta llamada o método
+        this.markNotFound(2);
+        await this.stepLink("2-3");
 
         // PASO 3: Inspeccionar Nodo Abuelo (Segundo prototipo en la cadena)
-        await this.stepNode(3, `No está en <code>padre</code>. Subiendo otro eslabón al prototipo <code>abuelo</code>...`); // Ejecuta llamada o método
-        if (prop === "apellido") { // Evalúa condición
+        await this.stepNode(3, `No está en <code>padre</code>. Subiendo otro eslabón al prototipo <code>abuelo</code>...`);
+        if (prop === "apellido") {
             // Si es 'apellido', está en el abuelo
-            this.highlightFound(3, prop, `¡Encontrado en el Eslabón 3 (abuelo)! Valor heredado: <strong>"Pérez"</strong>.`); // Ejecuta llamada o método
-            this.finishSimulation(true); // Ejecuta llamada o método
-            return; // Retorna resultado
+            this.highlightFound(3, prop, `¡Encontrado en el Eslabón 3 (abuelo)! Valor heredado: <strong>"Pérez"</strong>.`);
+            this.finishSimulation(true);
+            return;
         }
-        this.markNotFound(3); // Ejecuta llamada o método
-        await this.stepLink("3-4"); // Ejecuta llamada o método
+        this.markNotFound(3);
+        await this.stepLink("3-4");
 
         // PASO 4: Inspeccionar Object.prototype (Raíz universal de todos los objetos)
-        await this.stepNode(4, `No está en <code>abuelo</code>. Subiendo a la raíz universal de JavaScript: <code>Object.prototype</code>...`); // Ejecuta llamada o método
-        if (prop === "toString") { // Evalúa condición
+        await this.stepNode(4, `No está en <code>abuelo</code>. Subiendo a la raíz universal de JavaScript: <code>Object.prototype</code>...`);
+        if (prop === "toString") {
             // Si es 'toString', se encuentra en Object.prototype
-            this.highlightFound(4, prop, `¡Encontrado en el Eslabón 4 (Object.prototype)! Método nativo heredado: <strong>f toString()</strong>.`); // Ejecuta llamada o método
-            this.finishSimulation(true); // Ejecuta llamada o método
-            return; // Retorna resultado
+            this.highlightFound(4, prop, `¡Encontrado en el Eslabón 4 (Object.prototype)! Método nativo heredado: <strong>f toString()</strong>.`);
+            this.finishSimulation(true);
+            return;
         }
-        this.markNotFound(4); // Ejecuta llamada o método
-        await this.stepLink("4-5"); // Ejecuta llamada o método
+        this.markNotFound(4);
+        await this.stepLink("4-5");
 
         // PASO 5: Fin de la Cadena -> null
-        await this.stepNode(5, `No existe en ningún prototipo. Llegamos al final de la cadena: <code>null</code>.`); // Ejecuta llamada o método
-        this.highlightNull(`La propiedad <code>hijo.${prop}</code> no existe en la cadena de prototipos. El motor JS devuelve <strong>undefined</strong>.`); // Ejecuta llamada o método
-        this.finishSimulation(false); // Ejecuta llamada o método
+        await this.stepNode(5, `No existe en ningún prototipo. Llegamos al final de la cadena: <code>null</code>.`);
+        this.highlightNull(`La propiedad <code>hijo.${prop}</code> no existe en la cadena de prototipos. El motor JS devuelve <strong>undefined</strong>.`);
+        this.finishSimulation(false);
     }
 
     // Resalta un nodo como paso activo durante la búsqueda
-    static stepNode(nodeNum, message) { // Instrucción JavaScript
-        return new Promise((resolve) => { // Retorna resultado
-            const node = this.nodes[nodeNum]; // Declara e inicializa "node"
-            if (node) { // Evalúa condición
-                node.classList.add("current-step"); // Modifica clases CSS del elemento
+    static stepNode(nodeNum, message) {
+        return new Promise((resolve) => {
+            const node = this.nodes[nodeNum];
+            if (node) {
+                node.classList.add("current-step");
             }
-            if (this.feedback) { // Evalúa condición
+            if (this.feedback) {
                 this.feedback.innerHTML = message; // Actualiza contenido en el DOM
             }
-            SoundEffects.transition(); // Ejecuta llamada o método
+            SoundEffects.transition();
             // Pausa de 850ms para que el usuario aprecie el paso
-            setTimeout(resolve, 850); // Ejecuta llamada o método
+            setTimeout(resolve, 850);
         });
     }
 
     // Activa la animación del pulso de luz en el cable conector
-    static stepLink(linkKey) { // Instrucción JavaScript
-        return new Promise((resolve) => { // Retorna resultado
-            const link = this.links[linkKey]; // Declara e inicializa "link"
-            if (link) { // Evalúa condición
-                link.classList.add("link-active"); // Modifica clases CSS del elemento
+    static stepLink(linkKey) {
+        return new Promise((resolve) => {
+            const link = this.links[linkKey];
+            if (link) {
+                link.classList.add("link-active");
             }
             // Duración del viaje de la luz por el cable
-            setTimeout(resolve, 550); // Ejecuta llamada o método
+            setTimeout(resolve, 550);
         });
     }
 
     // Marca un nodo como no poseedor de la propiedad buscada
-    static markNotFound(nodeNum) { // Instrucción JavaScript
-        const node = this.nodes[nodeNum]; // Declara e inicializa "node"
-        if (node) { // Evalúa condición
-            node.classList.remove("current-step"); // Modifica clases CSS del elemento
-            node.classList.add("not-found-here"); // Modifica clases CSS del elemento
+    static markNotFound(nodeNum) {
+        const node = this.nodes[nodeNum];
+        if (node) {
+            node.classList.remove("current-step");
+            node.classList.add("not-found-here");
         }
     }
 
     // Resalta el nodo ganador con borde verde y resplandor
-    static highlightFound(nodeNum, prop, message) { // Instrucción JavaScript
-        const node = this.nodes[nodeNum]; // Declara e inicializa "node"
-        if (node) { // Evalúa condición
-            node.classList.remove("current-step"); // Modifica clases CSS del elemento
-            node.classList.add("found-here"); // Modifica clases CSS del elemento
+    static highlightFound(nodeNum, prop, message) {
+        const node = this.nodes[nodeNum];
+        if (node) {
+            node.classList.remove("current-step");
+            node.classList.add("found-here");
             // Ilumina la propiedad exacta dentro del nodo
-            const propItem = node.querySelector(`[data-has="${prop}"]`); // Obtiene referencia DOM para "propItem"
-            if (propItem) propItem.classList.add("prop-highlight"); // Evalúa condición
+            const propItem = node.querySelector(`[data-has="${prop}"]`);
+            if (propItem) propItem.classList.add("prop-highlight");
         }
-        if (this.feedback) { // Evalúa condición
+        if (this.feedback) {
             this.feedback.innerHTML = `🎉 ${message}`; // Actualiza contenido en el DOM
         }
-        SoundEffects.success(); // Ejecuta llamada o método
+        SoundEffects.success();
     }
 
     // Resalta el estado null cuando no se encontró en ninguna parte
-    static highlightNull(message) { // Instrucción JavaScript
-        const node = this.nodes[5]; // Declara e inicializa "node"
-        if (node) { // Evalúa condición
-            node.classList.remove("current-step"); // Modifica clases CSS del elemento
-            node.classList.add("found-here"); // Modifica clases CSS del elemento
+    static highlightNull(message) {
+        const node = this.nodes[5];
+        if (node) {
+            node.classList.remove("current-step");
+            node.classList.add("found-here");
         }
-        if (this.feedback) { // Evalúa condición
+        if (this.feedback) {
             this.feedback.innerHTML = `⚠️ ${message}`; // Actualiza contenido en el DOM
         }
-        SoundEffects.alert(); // Ejecuta llamada o método
+        SoundEffects.alert();
     }
 
     // Restablece los controles al concluir la simulación
-    static finishSimulation() { // Instrucción JavaScript
-        this.isAnimating = false; // Asigna valor
-        if (this.btnRun) this.btnRun.disabled = false; // Evalúa condición
+    static finishSimulation() {
+        this.isAnimating = false;
+        if (this.btnRun) this.btnRun.disabled = false;
     }
 }
 
 // --- MÓDULO 4: LAS 6 CARACTERÍSTICAS DINÁMICAS (SLIDE 5) ---
-function initSlide5Characteristics() { // Declara función
+function initSlide5Characteristics() {
     // Selector de pestañas y paneles de las 6 características
-    const tabs = document.querySelectorAll(".char-tab-btn"); // Obtiene referencia DOM para "tabs"
-    const views = document.querySelectorAll(".char-detail-view"); // Obtiene referencia DOM para "views"
+    const tabs = document.querySelectorAll(".char-tab-btn");
+    const views = document.querySelectorAll(".char-detail-view");
 
-    tabs.forEach((tab) => { // Instrucción JavaScript
-        tab.addEventListener("click", () => { // Registra escuchador de eventos
-            SoundEffects.click(); // Ejecuta llamada o método
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            SoundEffects.click();
             // Obtenemos el número de característica (1 al 6)
-            const charId = tab.getAttribute("data-char"); // Declara e inicializa "charId"
+            const charId = tab.getAttribute("data-char");
 
             // Ocultamos las demás pestañas y vistas
-            tabs.forEach((t) => t.classList.remove("active")); // Modifica clases CSS del elemento
-            views.forEach((v) => v.classList.remove("active")); // Modifica clases CSS del elemento
+            tabs.forEach((t) => t.classList.remove("active"));
+            views.forEach((v) => v.classList.remove("active"));
 
             // Activamos la pestaña clicada
-            tab.classList.add("active"); // Modifica clases CSS del elemento
+            tab.classList.add("active");
             // Mostramos el panel de detalle correspondiente
-            const targetView = document.getElementById(`char-view-${charId}`); // Obtiene referencia DOM para "targetView"
-            if (targetView) targetView.classList.add("active"); // Evalúa condición
+            const targetView = document.getElementById(`char-view-${charId}`);
+            if (targetView) targetView.classList.add("active");
         });
     });
 
     // 4.1 Mutabilidad en caliente del prototipo
-    const btnMutate = document.getElementById("btnMutateProto"); // Obtiene referencia DOM para "btnMutate"
-    const mutResult = document.getElementById("mutationResult"); // Obtiene referencia DOM para "mutResult"
-    if (btnMutate && mutResult) { // Evalúa condición
+    const btnMutate = document.getElementById("btnMutateProto");
+    const mutResult = document.getElementById("mutationResult");
+    if (btnMutate && mutResult) {
         // Constructor Robot
-        function Robot(nombre) { // Declara función
-            this.nombre = nombre; // Asigna valor
+        function Robot(nombre) {
+            this.nombre = nombre;
         }
         // Creamos la instancia ANTES de agregar el método
-        const bot1 = new Robot("R2-D2"); // Declara e inicializa "bot1"
+        const bot1 = new Robot("R2-D2");
 
-        btnMutate.addEventListener("click", () => { // Registra escuchador de eventos
+        btnMutate.addEventListener("click", () => {
             // Modificamos el prototipo en tiempo de ejecución (en caliente)
-            Robot.prototype.saludar = function() { // Asigna valor
-                return `Beep boop! Soy ${this.nombre} y ahora hablo gracias a la mutabilidad del prototipo.`; // Retorna resultado
+            Robot.prototype.saludar = function() {
+                return `Beep boop! Soy ${this.nombre} y ahora hablo gracias a la mutabilidad del prototipo.`;
             };
             // bot1 puede invocar inmediatamente el nuevo método sin haber sido reiniciado
             mutResult.innerHTML = `
@@ -846,23 +846,23 @@ function initSlide5Characteristics() { // Declara función
                 Llamando a bot1.saludar():<br>
                 <em>"${bot1.saludar()}"</em>
             `;
-            SoundEffects.success(); // Ejecuta llamada o método
-            showToast("Robot.prototype.saludar() inyectado", "⚡"); // Ejecuta llamada o método
+            SoundEffects.success();
+            showToast("Robot.prototype.saludar() inyectado", "⚡");
         });
     }
 
     // 4.2 Es en sí mismo un objeto
-    const btnInspect = document.getElementById("btnInspectProtoObject"); // Obtiene referencia DOM para "btnInspect"
-    const inspectOutput = document.getElementById("inspectProtoObjectOutput"); // Obtiene referencia DOM para "inspectOutput"
-    if (btnInspect && inspectOutput) { // Evalúa condición
-        btnInspect.addEventListener("click", () => { // Registra escuchador de eventos
+    const btnInspect = document.getElementById("btnInspectProtoObject");
+    const inspectOutput = document.getElementById("inspectProtoObjectOutput");
+    if (btnInspect && inspectOutput) {
+        btnInspect.addEventListener("click", () => {
             function Persona() {}
             // Agregamos propiedades al prototipo
-            Persona.prototype.especie = "Humano"; // Asigna valor
-            Persona.prototype.planeta = "Tierra"; // Asigna valor
+            Persona.prototype.especie = "Humano";
+            Persona.prototype.planeta = "Tierra";
 
             // Inspeccionamos como objeto convencional
-            const info = { // Declara e inicializa "info"
+            const info = {
                 "typeof Persona.prototype": typeof Persona.prototype,
                 "Object.keys(Persona.prototype)": Object.keys(Persona.prototype),
                 "Prototipo de Persona.prototype": Object.getPrototypeOf(Persona.prototype) === Object.prototype ? "Object.prototype (Raíz)" : "Otro"
@@ -870,212 +870,212 @@ function initSlide5Characteristics() { // Declara función
 
             // Formateamos como JSON indentado
             inspectOutput.textContent = JSON.stringify(info, null, 2); // Actualiza contenido en el DOM
-            SoundEffects.success(); // Ejecuta llamada o método
+            SoundEffects.success();
         });
     }
 
     // 4.3 Existencia en memoria RAM y calculadora de ahorro
-    const slider = document.getElementById("instanceCountSlider"); // Obtiene referencia DOM para "slider"
-    const sliderVal = document.getElementById("instanceCountVal"); // Obtiene referencia DOM para "sliderVal"
-    const badFill = document.getElementById("badMemFill"); // Obtiene referencia DOM para "badFill"
-    const badText = document.getElementById("badMemText"); // Obtiene referencia DOM para "badText"
+    const slider = document.getElementById("instanceCountSlider");
+    const sliderVal = document.getElementById("instanceCountVal");
+    const badFill = document.getElementById("badMemFill");
+    const badText = document.getElementById("badMemText");
 
-    if (slider && sliderVal && badFill && badText) { // Evalúa condición
-        slider.addEventListener("input", (e) => { // Registra escuchador de eventos
+    if (slider && sliderVal && badFill && badText) {
+        slider.addEventListener("input", (e) => {
             // Leemos el valor del control deslizante (100 a 10,000)
-            const count = parseInt(e.target.value, 10); // Declara e inicializa "count"
+            const count = parseInt(e.target.value, 10);
             sliderVal.textContent = `${count.toLocaleString()} instancias`; // Actualiza contenido en el DOM
 
             // Calculamos el porcentaje relativo para la barra de mala práctica
-            const pct = Math.min(100, Math.max(10, (count / 10000) * 100)); // Declara e inicializa "pct"
-            badFill.style.width = `${pct}%`; // Asigna valor
+            const pct = Math.min(100, Math.max(10, (count / 10000) * 100));
+            badFill.style.width = `${pct}%`;
 
             // Estimación pedagógica: cada función de objeto duplicada toma ~280 bytes en el Heap
-            const memoryKbs = ((count * 280) / 1024).toFixed(1); // Declara e inicializa "memoryKbs"
+            const memoryKbs = ((count * 280) / 1024).toFixed(1);
             badText.textContent = `~${count.toLocaleString()} funciones duplicadas (desperdicia ~${memoryKbs} KB de RAM)`; // Actualiza contenido en el DOM
         });
     }
 
     // 4.4 Modificado y llamado directamente sin instanciar
-    const btnCallDirect = document.getElementById("btnTestDirectCall"); // Obtiene referencia DOM para "btnCallDirect"
-    const directResult = document.getElementById("directCallResult"); // Obtiene referencia DOM para "directResult"
-    if (btnCallDirect && directResult) { // Evalúa condición
+    const btnCallDirect = document.getElementById("btnTestDirectCall");
+    const directResult = document.getElementById("directCallResult");
+    if (btnCallDirect && directResult) {
         // Objeto prototipo con método sumar
-        const PrototipoCalculadora = { // Declara e inicializa "PrototipoCalculadora"
-            sumar: function(a, b) { // Instrucción JavaScript
-                return a + b; // Retorna resultado
+        const PrototipoCalculadora = {
+            sumar: function(a, b) {
+                return a + b;
             }
         };
 
-        btnCallDirect.addEventListener("click", () => { // Registra escuchador de eventos
+        btnCallDirect.addEventListener("click", () => {
             // Invocación directa del método en el prototipo
-            const res = PrototipoCalculadora.sumar(12, 8); // Declara e inicializa "res"
+            const res = PrototipoCalculadora.sumar(12, 8);
             directResult.innerHTML = `
                 Resultado de PrototipoCalculadora.sumar(12, 8): <strong style="color:#34d399">${res}</strong><br>
                 <small style="color:#94a3b8">¡Invocado directamente como cualquier objeto, sin crear instancias 'new'!</small>
             `;
-            SoundEffects.success(); // Ejecuta llamada o método
+            SoundEffects.success();
         });
     }
 
     // 4.6 Hereda valores y métodos con contexto 'this' dinámico
-    const btnThis = document.getElementById("btnTestThisContext"); // Obtiene referencia DOM para "btnThis"
-    const thisResult = document.getElementById("thisContextResult"); // Obtiene referencia DOM para "thisResult"
-    if (btnThis && thisResult) { // Evalúa condición
+    const btnThis = document.getElementById("btnTestThisContext");
+    const thisResult = document.getElementById("thisContextResult");
+    if (btnThis && thisResult) {
         // Prototipo con propiedad moneda y método que usa 'this'
-        const PrototipoCuenta = { // Declara e inicializa "PrototipoCuenta"
+        const PrototipoCuenta = {
             moneda: "USD",
-            mostrarSaldo: function() { // Instrucción JavaScript
-                return `Saldo actual de ${this.titular}: $${this.saldo} ${this.moneda}`; // Retorna resultado
+            mostrarSaldo: function() {
+                return `Saldo actual de ${this.titular}: $${this.saldo} ${this.moneda}`;
             }
         };
         // Creamos una cuenta individual que delega en PrototipoCuenta
-        const cuentaAhorros = Object.create(PrototipoCuenta); // Declara e inicializa "cuentaAhorros"
-        cuentaAhorros.titular = "Ana Gómez"; // Asigna valor
-        cuentaAhorros.saldo = 3450; // Asigna valor
+        const cuentaAhorros = Object.create(PrototipoCuenta);
+        cuentaAhorros.titular = "Ana Gómez";
+        cuentaAhorros.saldo = 3450;
 
-        btnThis.addEventListener("click", () => { // Registra escuchador de eventos
+        btnThis.addEventListener("click", () => {
             // El método se ejecuta en el prototipo pero 'this' apunta a cuentaAhorros
-            const res = cuentaAhorros.mostrarSaldo(); // Declara e inicializa "res"
+            const res = cuentaAhorros.mostrarSaldo();
             thisResult.innerHTML = `
                 <strong>${res}</strong><br>
                 <span style="color:#94a3b8">El código de la función vive en el prototipo, pero <code>this</code> resolvió a <code>cuentaAhorros</code>.</span>
             `;
-            SoundEffects.success(); // Ejecuta llamada o método
+            SoundEffects.success();
         });
     }
 }
 
 // --- MÓDULO 5: METÁFORA DE LA CAJA DE HERRAMIENTAS (SLIDE 6) ---
 class ToolboxSimulator { // Define clase
-    static init() { // Instrucción JavaScript
-        this.toolButtons = document.querySelectorAll(".tool-btn"); // Asigna valor
-        this.banner = document.getElementById("toolboxBanner"); // Asigna valor
-        this.bannerText = document.getElementById("bannerText"); // Asigna valor
-        this.bannerIcon = document.getElementById("bannerIcon"); // Asigna valor
+    static init() {
+        this.toolButtons = document.querySelectorAll(".tool-btn");
+        this.banner = document.getElementById("toolboxBanner");
+        this.bannerText = document.getElementById("bannerText");
+        this.bannerIcon = document.getElementById("bannerIcon");
 
         // Los 3 talleres familiares
-        this.workshops = { // Asigna valor
+        this.workshops = {
             you: document.getElementById("ws-you"),
             father: document.getElementById("ws-father"),
             grandpa: document.getElementById("ws-grandpa")
         };
 
         // Estados de texto en cada taller
-        this.statuses = { // Asigna valor
+        this.statuses = {
             you: document.getElementById("status-you"),
             father: document.getElementById("status-father"),
             grandpa: document.getElementById("status-grandpa")
         };
 
-        this.bindEvents(); // Ejecuta llamada o método
+        this.bindEvents();
         // Seleccionamos martillo por defecto
-        this.selectTool("martillo"); // Ejecuta llamada o método
+        this.selectTool("martillo");
     }
 
-    static bindEvents() { // Instrucción JavaScript
-        this.toolButtons.forEach((btn) => { // Instrucción JavaScript
-            btn.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.toolButtons.forEach((b) => b.classList.remove("active")); // Modifica clases CSS del elemento
-                btn.classList.add("active"); // Modifica clases CSS del elemento
-                const tool = btn.getAttribute("data-tool"); // Declara e inicializa "tool"
-                this.selectTool(tool); // Ejecuta llamada o método
+    static bindEvents() {
+        this.toolButtons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                SoundEffects.click();
+                this.toolButtons.forEach((b) => b.classList.remove("active"));
+                btn.classList.add("active");
+                const tool = btn.getAttribute("data-tool");
+                this.selectTool(tool);
             });
         });
     }
 
     // Resuelve visualmente la búsqueda de herramientas según la cadena de delegación
-    static selectTool(toolName) { // Instrucción JavaScript
+    static selectTool(toolName) {
         // Reiniciamos clases de búsqueda
-        Object.values(this.workshops).forEach((ws) => { // Instrucción JavaScript
-            if (ws) ws.classList.remove("ws-active-search", "ws-found"); // Evalúa condición
+        Object.values(this.workshops).forEach((ws) => {
+            if (ws) ws.classList.remove("ws-active-search", "ws-found");
         });
-        document.querySelectorAll(".ws-item").forEach((it) => it.classList.remove("highlight-item")); // Modifica clases CSS del elemento
+        document.querySelectorAll(".ws-item").forEach((it) => it.classList.remove("highlight-item"));
 
         // Caso 1: Destornillador (Vive en tu propio bolsillo / Propiedad Propia)
-        if (toolName === "destornillador") { // Evalúa condición
-            this.workshops.you.classList.add("ws-found"); // Modifica clases CSS del elemento
-            this.highlightToolItem("destornillador"); // Ejecuta llamada o método
+        if (toolName === "destornillador") {
+            this.workshops.you.classList.add("ws-found");
+            this.highlightToolItem("destornillador");
             this.statuses.you.textContent = "✔ ¡La tienes en tu propio bolsillo!"; // Actualiza contenido en el DOM
             this.statuses.father.textContent = "No necesitó molestar al padre"; // Actualiza contenido en el DOM
             this.statuses.grandpa.textContent = "Sin consultas"; // Actualiza contenido en el DOM
 
-            this.setBanner("🎉 Destornillador encontrado en tu propio bolsillo (Propiedad Propia). No fue necesario pedir prestado a la familia.", "👦"); // Ejecuta llamada o método
-            SoundEffects.success(); // Ejecuta llamada o método
-        } else if (toolName === "martillo") { // Instrucción JavaScript
+            this.setBanner("🎉 Destornillador encontrado en tu propio bolsillo (Propiedad Propia). No fue necesario pedir prestado a la familia.", "👦");
+            SoundEffects.success();
+        } else if (toolName === "martillo") {
             // Caso 2: Martillo (No lo tienes tú, lo tiene tu Padre en su taller / Prototipo 1)
-            this.workshops.you.classList.add("ws-active-search"); // Modifica clases CSS del elemento
-            this.workshops.father.classList.add("ws-found"); // Modifica clases CSS del elemento
-            this.highlightToolItem("martillo"); // Ejecuta llamada o método
+            this.workshops.you.classList.add("ws-active-search");
+            this.workshops.father.classList.add("ws-found");
+            this.highlightToolItem("martillo");
 
             this.statuses.you.textContent = "❌ No la tienes tú"; // Actualiza contenido en el DOM
             this.statuses.father.textContent = "✔ ¡Tu padre la tiene en su taller!"; // Actualiza contenido en el DOM
             this.statuses.grandpa.textContent = "Sin consultas"; // Actualiza contenido en el DOM
 
-            this.setBanner("🔨 No tenías martillo, así que fuiste al taller de tu Padre (Prototipo directo) y te lo prestó.", "👨"); // Ejecuta llamada o método
-            SoundEffects.success(); // Ejecuta llamada o método
-        } else if (toolName === "sierra") { // Instrucción JavaScript
+            this.setBanner("🔨 No tenías martillo, así que fuiste al taller de tu Padre (Prototipo directo) y te lo prestó.", "👨");
+            SoundEffects.success();
+        } else if (toolName === "sierra") {
             // Caso 3: Sierra eléctrica (Ni tú ni tu padre la tienen; tu Abuelo la tiene / Prototipo 2)
-            this.workshops.you.classList.add("ws-active-search"); // Modifica clases CSS del elemento
-            this.workshops.father.classList.add("ws-active-search"); // Modifica clases CSS del elemento
-            this.workshops.grandpa.classList.add("ws-found"); // Modifica clases CSS del elemento
-            this.highlightToolItem("sierra"); // Ejecuta llamada o método
+            this.workshops.you.classList.add("ws-active-search");
+            this.workshops.father.classList.add("ws-active-search");
+            this.workshops.grandpa.classList.add("ws-found");
+            this.highlightToolItem("sierra");
 
             this.statuses.you.textContent = "❌ No la tienes tú"; // Actualiza contenido en el DOM
             this.statuses.father.textContent = "❌ Tu padre tampoco la tiene"; // Actualiza contenido en el DOM
             this.statuses.grandpa.textContent = "✔ ¡Tu abuelo la tiene en el desván!"; // Actualiza contenido en el DOM
 
-            this.setBanner("🪚 Ni tú ni tu padre tenían sierra eléctrica, así que tu padre fue al taller del Abuelo (Prototype Chain completa).", "👴"); // Ejecuta llamada o método
-            SoundEffects.success(); // Ejecuta llamada o método
-        } else { // Instrucción JavaScript
+            this.setBanner("🪚 Ni tú ni tu padre tenían sierra eléctrica, así que tu padre fue al taller del Abuelo (Prototype Chain completa).", "👴");
+            SoundEffects.success();
+        } else {
             // Caso 4: Herramienta inexistente (Cúter Láser) -> Recorre toda la familia y llega a null
-            this.workshops.you.classList.add("ws-active-search"); // Modifica clases CSS del elemento
-            this.workshops.father.classList.add("ws-active-search"); // Modifica clases CSS del elemento
-            this.workshops.grandpa.classList.add("ws-active-search"); // Modifica clases CSS del elemento
+            this.workshops.you.classList.add("ws-active-search");
+            this.workshops.father.classList.add("ws-active-search");
+            this.workshops.grandpa.classList.add("ws-active-search");
 
             this.statuses.you.textContent = "❌ No existe"; // Actualiza contenido en el DOM
             this.statuses.father.textContent = "❌ No existe"; // Actualiza contenido en el DOM
             this.statuses.grandpa.textContent = "❌ Nadie la tiene (null)"; // Actualiza contenido en el DOM
 
-            this.setBanner("⚠️ Nadie en toda la familia carpintera tiene un cúter láser. Búsqueda llegó a null → undefined.", "❓"); // Ejecuta llamada o método
-            SoundEffects.alert(); // Ejecuta llamada o método
+            this.setBanner("⚠️ Nadie en toda la familia carpintera tiene un cúter láser. Búsqueda llegó a null → undefined.", "❓");
+            SoundEffects.alert();
         }
     }
 
     // Resalta el elemento de herramienta visual en el taller
-    static highlightToolItem(tool) { // Instrucción JavaScript
-        const item = document.querySelector(`[data-has-item="${tool}"]`); // Obtiene referencia DOM para "item"
-        if (item) item.classList.add("highlight-item"); // Evalúa condición
+    static highlightToolItem(tool) {
+        const item = document.querySelector(`[data-has-item="${tool}"]`);
+        if (item) item.classList.add("highlight-item");
     }
 
     // Actualiza el texto del banner informativo
-    static setBanner(text, icon) { // Instrucción JavaScript
-        if (this.bannerText) this.bannerText.textContent = text; // Evalúa condición
-        if (this.bannerIcon) this.bannerIcon.textContent = icon; // Evalúa condición
+    static setBanner(text, icon) {
+        if (this.bannerText) this.bannerText.textContent = text;
+        if (this.bannerIcon) this.bannerIcon.textContent = icon;
     }
 }
 
 // --- MÓDULO 6: SIMULADOR DE ERROR CON ARRAYS COMPARTIDOS (SLIDE 7) ---
-function initSlide7Bugs() { // Declara función
-    const btnBug = document.getElementById("btnTriggerBugDemo"); // Obtiene referencia DOM para "btnBug"
-    const output = document.getElementById("bugSimOutput"); // Obtiene referencia DOM para "output"
+function initSlide7Bugs() {
+    const btnBug = document.getElementById("btnTriggerBugDemo");
+    const output = document.getElementById("bugSimOutput");
 
-    if (!btnBug || !output) return; // Evalúa condición
+    if (!btnBug || !output) return;
 
-    btnBug.addEventListener("click", () => { // Registra escuchador de eventos
-        SoundEffects.alert(); // Ejecuta llamada o método
+    btnBug.addEventListener("click", () => {
+        SoundEffects.alert();
         // Error clásico: colocar un array mutable directamente en el objeto prototipo
-        const PrototipoUsuario = { // Declara e inicializa "PrototipoUsuario"
+        const PrototipoUsuario = {
             amigos: [] // ⚠️ Compartido por referencia física en memoria
         };
 
         // Creamos dos instancias
-        const user1 = Object.create(PrototipoUsuario); // Declara e inicializa "user1"
-        const user2 = Object.create(PrototipoUsuario); // Declara e inicializa "user2"
+        const user1 = Object.create(PrototipoUsuario);
+        const user2 = Object.create(PrototipoUsuario);
 
         // user1 añade a su amigo 'Ana' al array
-        user1.amigos.push("Ana"); // Ejecuta llamada o método
+        user1.amigos.push("Ana");
 
         // Al inspeccionar user2, ¡también tiene a Ana aunque nunca la agregó!
         output.innerHTML = `
@@ -1084,22 +1084,22 @@ function initSlide7Bugs() { // Declara función
             <code>user2.amigos: ["${user2.amigos.join('", "')}"]</code><br>
             <small>¡user2 ahora tiene los amigos de user1 porque ambos apuntan al mismo Array en RAM!</small>
         `;
-        showToast("Bug de Array compartido reproducido", "💥"); // Ejecuta llamada o método
+        showToast("Bug de Array compartido reproducido", "💥");
     });
 }
 
 // --- MÓDULO 7: PLAYGROUND & CONSOLA VIRTUAL EN VIVO (SLIDE 8) ---
 class PlaygroundManager { // Define clase
-    static init() { // Instrucción JavaScript
-        this.editor = document.getElementById("liveCodeEditor"); // Asigna valor
-        this.consoleContainer = document.getElementById("consoleLogsContainer"); // Asigna valor
-        this.presetSelect = document.getElementById("codePresetSelect"); // Asigna valor
-        this.btnRun = document.getElementById("btnRunEditorCode"); // Asigna valor
-        this.btnClear = document.getElementById("btnClearConsole"); // Asigna valor
-        this.btnReset = document.getElementById("btnResetCode"); // Asigna valor
+    static init() {
+        this.editor = document.getElementById("liveCodeEditor");
+        this.consoleContainer = document.getElementById("consoleLogsContainer");
+        this.presetSelect = document.getElementById("codePresetSelect");
+        this.btnRun = document.getElementById("btnRunEditorCode");
+        this.btnClear = document.getElementById("btnClearConsole");
+        this.btnReset = document.getElementById("btnResetCode");
 
         // Plantillas de código listas para ejecutar
-        this.presets = { // Asigna valor
+        this.presets = {
             "preset-1": `// 1. Objeto simple y lectura de su prototipo (Tu snippet inicial)
 let objeto = {
     "propiedad": "datos"
@@ -1217,151 +1217,151 @@ console.log("¿'nombre' es propia?:", Object.hasOwn(dev, "nombre"));
 console.log("¿'empresa' es propia?:", Object.hasOwn(dev, "empresa"));`
         };
 
-        this.bindEvents(); // Ejecuta llamada o método
+        this.bindEvents();
         // Cargamos el primer ejemplo por defecto
-        this.loadPreset("preset-1"); // Ejecuta llamada o método
+        this.loadPreset("preset-1");
     }
 
-    static bindEvents() { // Instrucción JavaScript
-        if (this.btnRun) { // Evalúa condición
-            this.btnRun.addEventListener("click", () => this.runCode()); // Registra escuchador de eventos
+    static bindEvents() {
+        if (this.btnRun) {
+            this.btnRun.addEventListener("click", () => this.runCode());
         }
-        if (this.btnClear) { // Evalúa condición
-            this.btnClear.addEventListener("click", () => this.clearConsole()); // Registra escuchador de eventos
+        if (this.btnClear) {
+            this.btnClear.addEventListener("click", () => this.clearConsole());
         }
-        if (this.btnReset) { // Evalúa condición
-            this.btnReset.addEventListener("click", () => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.loadPreset(this.presetSelect.value); // Ejecuta llamada o método
-                showToast("Código restaurado", "↺"); // Ejecuta llamada o método
+        if (this.btnReset) {
+            this.btnReset.addEventListener("click", () => {
+                SoundEffects.click();
+                this.loadPreset(this.presetSelect.value);
+                showToast("Código restaurado", "↺");
             });
         }
-        if (this.presetSelect) { // Evalúa condición
-            this.presetSelect.addEventListener("change", (e) => { // Registra escuchador de eventos
-                SoundEffects.click(); // Ejecuta llamada o método
-                this.loadPreset(e.target.value); // Ejecuta llamada o método
+        if (this.presetSelect) {
+            this.presetSelect.addEventListener("change", (e) => {
+                SoundEffects.click();
+                this.loadPreset(e.target.value);
             });
         }
     }
 
     // Carga un snippet de código en el textarea del editor
-    static loadPreset(key) { // Instrucción JavaScript
-        if (this.editor && this.presets[key]) { // Evalúa condición
-            this.editor.value = this.presets[key]; // Asigna valor
-            if (this.presetSelect && this.presets[key] && !key.startsWith("preset-ex")) { // Evalúa condición
-                this.presetSelect.value = key; // Asigna valor
+    static loadPreset(key) {
+        if (this.editor && this.presets[key]) {
+            this.editor.value = this.presets[key];
+            if (this.presetSelect && this.presets[key] && !key.startsWith("preset-ex")) {
+                this.presetSelect.value = key;
             }
         }
     }
 
     // Limpia las líneas impresas en la consola virtual
-    static clearConsole() { // Instrucción JavaScript
-        if (this.consoleContainer) { // Evalúa condición
+    static clearConsole() {
+        if (this.consoleContainer) {
             this.consoleContainer.innerHTML = `
                 <div class="log-line info-line">
                     <span class="log-time">[Consola limpia]</span> Lista para nuevas ejecuciones...
                 </div>
             `;
-            SoundEffects.click(); // Ejecuta llamada o método
+            SoundEffects.click();
         }
     }
 
     // Inserta una línea de mensaje con timestamp y clase de color en la consola
-    static appendLog(message, type = "normal") { // Instrucción JavaScript
-        if (!this.consoleContainer) return; // Evalúa condición
-        const now = new Date(); // Declara e inicializa "now"
-        const timeStr = now.toTimeString().split(" ")[0]; // Declara e inicializa "timeStr"
+    static appendLog(message, type = "normal") {
+        if (!this.consoleContainer) return;
+        const now = new Date();
+        const timeStr = now.toTimeString().split(" ")[0];
 
-        const line = document.createElement("div"); // Crea nuevo elemento DOM "line"
-        line.className = `log-line log-${type}`; // Asigna valor
+        const line = document.createElement("div");
+        line.className = `log-line log-${type}`;
         line.innerHTML = `<span class="log-time">[${timeStr}]</span> ${message}`; // Actualiza contenido en el DOM
-        this.consoleContainer.appendChild(line); // Inserta nodo en el DOM
+        this.consoleContainer.appendChild(line);
         // Desplaza el scroll automáticamente al final
-        this.consoleContainer.scrollTop = this.consoleContainer.scrollHeight; // Asigna valor
+        this.consoleContainer.scrollTop = this.consoleContainer.scrollHeight;
     }
 
     // Ejecuta el código JavaScript escrito por el usuario de forma segura en un sandbox
-    static runCode() { // Instrucción JavaScript
-        if (!this.editor) return; // Evalúa condición
-        const userCode = this.editor.value; // Declara e inicializa "userCode"
-        SoundEffects.click(); // Ejecuta llamada o método
+    static runCode() {
+        if (!this.editor) return;
+        const userCode = this.editor.value;
+        SoundEffects.click();
 
-        this.appendLog("--- Ejecutando snippet ---", "info"); // Inserta nodo en el DOM
+        this.appendLog("--- Ejecutando snippet ---", "info");
 
         // Almacén de registros capturados
-        const logsCaptured = []; // Declara e inicializa "logsCaptured"
+        const logsCaptured = [];
 
         try { // Inicia bloque protegido contra errores
             // Emulador de salida de consola que redirige a la consola visual
-            const customConsole = { // Declara e inicializa "customConsole"
-                log: (...args) => { // Instrucción JavaScript
-                    const formatted = args.map((arg) => { // Define función flecha "formatted"
-                        if (typeof arg === "object" && arg !== null) { // Evalúa condición
+            const customConsole = {
+                log: (...args) => {
+                    const formatted = args.map((arg) => {
+                        if (typeof arg === "object" && arg !== null) {
                             try { // Inicia bloque protegido contra errores
-                                return JSON.stringify(arg, (k, v) => typeof v === "function" ? "[Function]" : v); // Retorna resultado
-                            } catch (e) { // Instrucción JavaScript
-                                return String(arg); // Retorna resultado
+                                return JSON.stringify(arg, (k, v) => typeof v === "function" ? "[Function]" : v);
+                            } catch (e) {
+                                return String(arg);
                             }
                         }
-                        return String(arg); // Retorna resultado
-                    }).join(" "); // Ejecuta llamada o método
-                    logsCaptured.push(formatted); // Ejecuta llamada o método
-                    this.appendLog(formatted, "normal"); // Inserta nodo en el DOM
+                        return String(arg);
+                    }).join(" ");
+                    logsCaptured.push(formatted);
+                    this.appendLog(formatted, "normal");
                 },
-                error: (...args) => { // Instrucción JavaScript
-                    const formatted = args.join(" "); // Declara e inicializa "formatted"
-                    this.appendLog(formatted, "error"); // Inserta nodo en el DOM
+                error: (...args) => {
+                    const formatted = args.join(" ");
+                    this.appendLog(formatted, "error");
                 }
             };
 
             // Ejecutamos en función con alcance aislado pasando nuestro customConsole
-            const runner = new Function("console", userCode); // Declara e inicializa "runner"
-            runner(customConsole); // Ejecuta llamada o método
+            const runner = new Function("console", userCode);
+            runner(customConsole);
 
-            SoundEffects.success(); // Ejecuta llamada o método
-            this.appendLog("✔ Ejecución finalizada sin errores.", "success"); // Inserta nodo en el DOM
-        } catch (err) { // Instrucción JavaScript
+            SoundEffects.success();
+            this.appendLog("✔ Ejecución finalizada sin errores.", "success");
+        } catch (err) {
             // Captura de errores en tiempo de ejecución (ej. sintaxis o referencias inválidas)
-            SoundEffects.alert(); // Ejecuta llamada o método
-            this.appendLog(`❌ Error en tiempo de ejecución: ${err.message}`, "error"); // Inserta nodo en el DOM
+            SoundEffects.alert();
+            this.appendLog(`❌ Error en tiempo de ejecución: ${err.message}`, "error");
         }
     }
 }
 
 // --- MÓDULO 8: RETOS Y SOLUCIONES (SLIDE 9) ---
-function initSlide9Exercises() { // Declara función
+function initSlide9Exercises() {
     // Botones para alternar visibilidad de las soluciones
-    document.querySelectorAll(".btn-ex-solution").forEach((btn) => { // Instrucción JavaScript
-        btn.addEventListener("click", () => { // Registra escuchador de eventos
-            SoundEffects.click(); // Ejecuta llamada o método
-            const targetId = btn.getAttribute("data-sol"); // Declara e inicializa "targetId"
-            const solBox = document.getElementById(targetId); // Obtiene referencia DOM para "solBox"
-            if (solBox) { // Evalúa condición
-                const isVisible = solBox.classList.contains("visible"); // Declara e inicializa "isVisible"
-                solBox.classList.toggle("visible"); // Modifica clases CSS del elemento
+    document.querySelectorAll(".btn-ex-solution").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            SoundEffects.click();
+            const targetId = btn.getAttribute("data-sol");
+            const solBox = document.getElementById(targetId);
+            if (solBox) {
+                const isVisible = solBox.classList.contains("visible");
+                solBox.classList.toggle("visible");
                 btn.textContent = isVisible ? "Ver Solución Paso a Paso" : "Ocultar Solución"; // Actualiza contenido en el DOM
             }
         });
     });
 
     // Botones para cargar el reto directamente en el playground interactivo
-    document.querySelectorAll("[data-load-preset]").forEach((btn) => { // Instrucción JavaScript
-        btn.addEventListener("click", () => { // Registra escuchador de eventos
-            const presetKey = btn.getAttribute("data-load-preset"); // Declara e inicializa "presetKey"
-            SoundEffects.click(); // Ejecuta llamada o método
+    document.querySelectorAll("[data-load-preset]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const presetKey = btn.getAttribute("data-load-preset");
+            SoundEffects.click();
             // Cargamos el código del reto
-            PlaygroundManager.loadPreset(presetKey); // Ejecuta llamada o método
+            PlaygroundManager.loadPreset(presetKey);
             // Saltamos a la diapositiva 8 (Playground)
-            PresentationController.goToSlide(8); // Ejecuta llamada o método
-            showToast("Reto cargado en el Playground. ¡Presiona Ejecutar!", "🚀"); // Ejecuta llamada o método
+            PresentationController.goToSlide(8);
+            showToast("Reto cargado en el Playground. ¡Presiona Ejecutar!", "🚀");
         });
     });
 }
 
 // --- MÓDULO 9: CHULETA RÁPIDA (SLIDE 10) ---
-function initSlide10Summary() { // Declara función
-    const btnCopyCheat = document.getElementById("btnCopySummaryCheat"); // Obtiene referencia DOM para "btnCopyCheat"
-    if (!btnCopyCheat) return; // Evalúa condición
+function initSlide10Summary() {
+    const btnCopyCheat = document.getElementById("btnCopySummaryCheat");
+    if (!btnCopyCheat) return;
 
     // Resumen estructurado en formato Markdown para estudio del alumno
     const cheatSheetMarkdown = `# CHULETA MAESTRA — Prototipos en JavaScript
@@ -1381,38 +1381,38 @@ Si busca una propiedad y no existe, devuelve \`undefined\`.
 ## 4. Regla de Oro de Memoria
 Define los atributos únicos en el constructor y **todos los métodos en el prototipo** (\`Clase.prototype.metodo = ...\`) para que solo existan una sola vez en la memoria RAM.`;
 
-    btnCopyCheat.addEventListener("click", () => { // Registra escuchador de eventos
+    btnCopyCheat.addEventListener("click", () => {
         // Copiamos el texto al portapapeles
-        navigator.clipboard.writeText(cheatSheetMarkdown).then(() => { // Instrucción JavaScript
-            SoundEffects.success(); // Ejecuta llamada o método
-            showToast("¡Chuleta en Markdown copiada al portapapeles!", "📋"); // Ejecuta llamada o método
+        navigator.clipboard.writeText(cheatSheetMarkdown).then(() => {
+            SoundEffects.success();
+            showToast("¡Chuleta en Markdown copiada al portapapeles!", "📋");
         });
     });
 }
 
 // --- INICIALIZACIÓN GLOBAL AL CARGAR EL DOM ---
 // Esperamos a que la estructura HTML esté totalmente parseada para arrancar todos los módulos
-document.addEventListener("DOMContentLoaded", () => { // Registra escuchador de eventos
+document.addEventListener("DOMContentLoaded", () => {
     // 1. Iniciamos el controlador de diapositivas y navegación
-    PresentationController.init(); // Ejecuta llamada o método
+    PresentationController.init();
     // 2. Iniciamos la demostración básica de prototipos
-    initSlide2Demo(); // Ejecuta llamada o método
+    initSlide2Demo();
     // 3. Iniciamos el comprobador de identidad en memoria
-    initSlide3Demo(); // Ejecuta llamada o método
+    initSlide3Demo();
     // 4. Iniciamos el simulador interactivo de Prototype Chain
-    PrototypeChainSimulator.init(); // Ejecuta llamada o método
+    PrototypeChainSimulator.init();
     // 5. Iniciamos las 6 características y la calculadora de RAM
-    initSlide5Characteristics(); // Ejecuta llamada o método
+    initSlide5Characteristics();
     // 6. Iniciamos la metáfora visual de la caja de herramientas familiar
-    ToolboxSimulator.init(); // Ejecuta llamada o método
+    ToolboxSimulator.init();
     // 7. Iniciamos el simulador de errores de arrays mutables
-    initSlide7Bugs(); // Ejecuta llamada o método
+    initSlide7Bugs();
     // 8. Iniciamos el playground con consola virtual
-    PlaygroundManager.init(); // Ejecuta llamada o método
+    PlaygroundManager.init();
     // 9. Iniciamos los retos prácticos de 3 niveles
-    initSlide9Exercises(); // Ejecuta llamada o método
+    initSlide9Exercises();
     // 10. Iniciamos el módulo de resumen y chuleta
-    initSlide10Summary(); // Ejecuta llamada o método
+    initSlide10Summary();
 
     console.log("✨ Presentación de Prototipos cargada con éxito en JavaScript Master Level."); // Imprime salida en consola
 });

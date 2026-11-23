@@ -37,41 +37,41 @@
 // ==============================================================================
 // Si el entorno no posee 'indexedDB' de forma nativa (por ejemplo, al ejecutar con 'node main.js'),
 // inicializamos un simulador en memoria para que el código del alumno funcione sin excepciones:
-if (typeof indexedDB === "undefined") { // Evalúa condición
+if (typeof indexedDB === "undefined") {
     // Definimos el objeto global indexedDB en el entorno de Node.js
-    globalThis.indexedDB = (() => { // Asigna valor
+    globalThis.indexedDB = (() => {
         // Objeto interno que almacenará las bases de datos en memoria
-        const baseDeDatos = {}; // Declara e inicializa "baseDeDatos"
+        const baseDeDatos = {};
         // Retornamos el objeto simulador con el método estándar open()
-        return { // Retorna resultado
+        return {
             // Método open para abrir o crear bases de datos por nombre y versión
-            open(nombre, version = 1) { // Instrucción JavaScript
+            open(nombre, version = 1) {
                 // Creamos el objeto de solicitud IDBOpenDBRequest
-                const request = { // Declara e inicializa "request"
+                const request = {
                     result: null,
                     error: null,
                     _listeners: {},
-                    addEventListener(evento, callback) { // Registra escuchador de eventos
-                        if (!this._listeners[evento]) this._listeners[evento] = []; // Evalúa condición
-                        this._listeners[evento].push(callback); // Ejecuta llamada o método
+                    addEventListener(evento, callback) {
+                        if (!this._listeners[evento]) this._listeners[evento] = [];
+                        this._listeners[evento].push(callback);
                     },
-                    _emit(evento, arg) { // Instrucción JavaScript
-                        if (this._listeners[evento]) { // Evalúa condición
-                            this._listeners[evento].forEach(cb => cb(arg)); // Ejecuta llamada o método
+                    _emit(evento, arg) {
+                        if (this._listeners[evento]) {
+                            this._listeners[evento].forEach(cb => cb(arg));
                         }
                     }
                 };
 
                 // Procesamos la apertura de forma asíncrona simulando el comportamiento real
-                setTimeout(() => { // Instrucción JavaScript
+                setTimeout(() => {
                     // Verificamos si la base de datos ya existía
-                    const yaExiste = Object.prototype.hasOwnProperty.call(baseDeDatos, nombre); // Declara e inicializa "yaExiste"
+                    const yaExiste = Object.prototype.hasOwnProperty.call(baseDeDatos, nombre);
                     // Obtenemos la versión previa o 0 si es nueva
-                    const versionPrevia = yaExiste ? baseDeDatos[nombre].version : 0; // Declara e inicializa "versionPrevia"
+                    const versionPrevia = yaExiste ? baseDeDatos[nombre].version : 0;
 
                     // Si no existe, inicializamos la estructura en memoria
-                    if (!yaExiste) { // Evalúa condición
-                        baseDeDatos[nombre] = { // Asigna valor
+                    if (!yaExiste) {
+                        baseDeDatos[nombre] = {
                             nombre: nombre,
                             version: version,
                             almacenes: {}
@@ -79,179 +79,179 @@ if (typeof indexedDB === "undefined") { // Evalúa condición
                     }
 
                     // Referencia interna a la base de datos
-                    const dbData = baseDeDatos[nombre]; // Declara e inicializa "dbData"
+                    const dbData = baseDeDatos[nombre];
 
                     // Objeto IDBDatabase expuesto como resultado de la solicitud
-                    const db = { // Declara e inicializa "db"
+                    const db = {
                         name: nombre,
                         version: version,
-                        objectStoreNames: { // Instrucción JavaScript
-                            contains(storeName) { // Instrucción JavaScript
-                                return Object.prototype.hasOwnProperty.call(dbData.almacenes, storeName); // Retorna resultado
+                        objectStoreNames: {
+                            contains(storeName) {
+                                return Object.prototype.hasOwnProperty.call(dbData.almacenes, storeName);
                             }
                         },
-                        createObjectStore(storeName, opciones = {}) { // Instrucción JavaScript
-                            if (!dbData.almacenes[storeName]) { // Evalúa condición
-                                dbData.almacenes[storeName] = { // Asigna valor
+                        createObjectStore(storeName, opciones = {}) {
+                            if (!dbData.almacenes[storeName]) {
+                                dbData.almacenes[storeName] = {
                                     opciones: opciones,
                                     datos: new Map(),
                                     autoIncrementCounter: 1
                                 };
                             }
-                            return { // Retorna resultado
-                                createIndex(indexName, keyPath, indexOptions = {}) { // Instrucción JavaScript
+                            return {
+                                createIndex(indexName, keyPath, indexOptions = {}) {
                                     // Simulación de creación de índices
                                 }
                             };
                         },
-                        transaction(storeNames, modo = "readonly") { // Instrucción JavaScript
-                            const tx = { // Declara e inicializa "tx"
+                        transaction(storeNames, modo = "readonly") {
+                            const tx = {
                                 mode: modo,
                                 _listeners: {},
-                                addEventListener(evento, callback) { // Registra escuchador de eventos
-                                    if (!this._listeners[evento]) this._listeners[evento] = []; // Evalúa condición
-                                    this._listeners[evento].push(callback); // Ejecuta llamada o método
+                                addEventListener(evento, callback) {
+                                    if (!this._listeners[evento]) this._listeners[evento] = [];
+                                    this._listeners[evento].push(callback);
                                 },
-                                _emit(evento) { // Instrucción JavaScript
-                                    if (this._listeners[evento]) { // Evalúa condición
-                                        this._listeners[evento].forEach(cb => cb()); // Ejecuta llamada o método
+                                _emit(evento) {
+                                    if (this._listeners[evento]) {
+                                        this._listeners[evento].forEach(cb => cb());
                                     }
                                 },
-                                objectStore(sName) { // Instrucción JavaScript
-                                    const s = dbData.almacenes[sName]; // Declara e inicializa "s"
-                                    if (!s) throw new Error(`Almacén '${sName}' no existe.`); // Evalúa condición
-                                    return { // Retorna resultado
-                                        add(valor, clave) { // Instrucción JavaScript
-                                            const req = { result: null, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                let pk = clave; // Declara e inicializa "pk"
-                                                if (s.opciones.keyPath && valor && typeof valor === "object") { // Evalúa condición
-                                                    pk = valor[s.opciones.keyPath]; // Asigna valor
+                                objectStore(sName) {
+                                    const s = dbData.almacenes[sName];
+                                    if (!s) throw new Error(`Almacén '${sName}' no existe.`);
+                                    return {
+                                        add(valor, clave) {
+                                            const req = { result: null, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                let pk = clave;
+                                                if (s.opciones.keyPath && valor && typeof valor === "object") {
+                                                    pk = valor[s.opciones.keyPath];
                                                 }
-                                                if (pk === undefined && s.opciones.autoIncrement) { // Evalúa condición
-                                                    pk = s.autoIncrementCounter++; // Asigna valor
+                                                if (pk === undefined && s.opciones.autoIncrement) {
+                                                    pk = s.autoIncrementCounter++;
                                                 }
-                                                s.datos.set(pk, JSON.parse(JSON.stringify(valor))); // Ejecuta llamada o método
-                                                req.result = pk; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                                s.datos.set(pk, JSON.parse(JSON.stringify(valor)));
+                                                req.result = pk;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        put(valor, clave) { // Instrucción JavaScript
-                                            const req = { result: null, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                let pk = clave; // Declara e inicializa "pk"
-                                                if (s.opciones.keyPath && valor && typeof valor === "object") { // Evalúa condición
-                                                    pk = valor[s.opciones.keyPath]; // Asigna valor
+                                        put(valor, clave) {
+                                            const req = { result: null, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                let pk = clave;
+                                                if (s.opciones.keyPath && valor && typeof valor === "object") {
+                                                    pk = valor[s.opciones.keyPath];
                                                 }
-                                                if (pk === undefined && s.opciones.autoIncrement) { // Evalúa condición
-                                                    pk = s.autoIncrementCounter++; // Asigna valor
+                                                if (pk === undefined && s.opciones.autoIncrement) {
+                                                    pk = s.autoIncrementCounter++;
                                                 }
-                                                s.datos.set(pk, JSON.parse(JSON.stringify(valor))); // Ejecuta llamada o método
-                                                req.result = pk; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                                s.datos.set(pk, JSON.parse(JSON.stringify(valor)));
+                                                req.result = pk;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        get(pk) { // Instrucción JavaScript
-                                            const req = { result: null, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                const val = s.datos.get(pk); // Declara e inicializa "val"
-                                                req.result = val !== undefined ? JSON.parse(JSON.stringify(val)) : undefined; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                        get(pk) {
+                                            const req = { result: null, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                const val = s.datos.get(pk);
+                                                req.result = val !== undefined ? JSON.parse(JSON.stringify(val)) : undefined;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        getAll() { // Instrucción JavaScript
-                                            const req = { result: [], error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                const lista = Array.from(s.datos.values()).map(v => JSON.parse(JSON.stringify(v))); // Define función flecha "lista"
-                                                req.result = lista; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                        getAll() {
+                                            const req = { result: [], error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                const lista = Array.from(s.datos.values()).map(v => JSON.parse(JSON.stringify(v)));
+                                                req.result = lista;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        delete(pk) { // Instrucción JavaScript
-                                            const req = { result: null, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                s.datos.delete(pk); // Ejecuta llamada o método
-                                                req.result = undefined; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                        delete(pk) {
+                                            const req = { result: null, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                s.datos.delete(pk);
+                                                req.result = undefined;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        clear() { // Instrucción JavaScript
-                                            const req = { result: null, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                s.datos.clear(); // Ejecuta llamada o método
-                                                req.result = undefined; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                        clear() {
+                                            const req = { result: null, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                s.datos.clear();
+                                                req.result = undefined;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        count() { // Instrucción JavaScript
-                                            const req = { result: 0, error: null, onsuccess: null, onerror: null }; // Declara e inicializa "req"
-                                            setTimeout(() => { // Instrucción JavaScript
-                                                req.result = s.datos.size; // Asigna valor
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
-                                                tx._emit("complete"); // Ejecuta llamada o método
-                                            }, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                        count() {
+                                            const req = { result: 0, error: null, onsuccess: null, onerror: null };
+                                            setTimeout(() => {
+                                                req.result = s.datos.size;
+                                                if (req.onsuccess) req.onsuccess({ target: req });
+                                                tx._emit("complete");
+                                            }, 2);
+                                            return req;
                                         },
-                                        openCursor() { // Instrucción JavaScript
-                                            const req = { result: null, error: null, _listeners: {}, addEventListener(e, cb) { this._listeners[e] = cb; } }; // Declara e inicializa "req"
-                                            const entries = Array.from(s.datos.entries()); // Declara e inicializa "entries"
-                                            let index = 0; // Declara e inicializa "index"
-                                            const avanzar = () => { // Define función flecha "avanzar"
-                                                if (index < entries.length) { // Evalúa condición
-                                                    const [k, v] = entries[index]; // Declara e inicializa "variable"
-                                                    index++; // Instrucción JavaScript
-                                                    req.result = { // Asigna valor
+                                        openCursor() {
+                                            const req = { result: null, error: null, _listeners: {}, addEventListener(e, cb) { this._listeners[e] = cb; } };
+                                            const entries = Array.from(s.datos.entries());
+                                            let index = 0;
+                                            const avanzar = () => {
+                                                if (index < entries.length) {
+                                                    const [k, v] = entries[index];
+                                                    index++;
+                                                    req.result = {
                                                         key: k,
                                                         value: JSON.parse(JSON.stringify(v)),
                                                         continue: () => { setTimeout(avanzar, 1); }
                                                     };
-                                                } else { // Instrucción JavaScript
-                                                    req.result = null; // Asigna valor
+                                                } else {
+                                                    req.result = null;
                                                 }
-                                                if (req._listeners["success"]) req._listeners["success"]({ target: req }); // Evalúa condición
-                                                if (req.onsuccess) req.onsuccess({ target: req }); // Evalúa condición
+                                                if (req._listeners["success"]) req._listeners["success"]({ target: req });
+                                                if (req.onsuccess) req.onsuccess({ target: req });
                                             };
-                                            setTimeout(avanzar, 2); // Ejecuta llamada o método
-                                            return req; // Retorna resultado
+                                            setTimeout(avanzar, 2);
+                                            return req;
                                         }
                                     };
                                 }
                             };
-                            return tx; // Retorna resultado
+                            return tx;
                         }
                     };
 
                     // Asignamos la base de datos resultante a la solicitud
-                    request.result = db; // Asigna valor
+                    request.result = db;
 
                     // Si es nueva o subió la versión, disparamos upgradeneeded
-                    if (version > versionPrevia) { // Evalúa condición
-                        dbData.version = version; // Asigna valor
-                        request._emit("upgradeneeded", { target: request }); // Ejecuta llamada o método
-                        if (request.onupgradeneeded) request.onupgradeneeded({ target: request }); // Evalúa condición
+                    if (version > versionPrevia) {
+                        dbData.version = version;
+                        request._emit("upgradeneeded", { target: request });
+                        if (request.onupgradeneeded) request.onupgradeneeded({ target: request });
                     }
 
                     // Disparamos success para confirmar la conexión
-                    request._emit("success", { target: request }); // Ejecuta llamada o método
-                    if (request.onsuccess) request.onsuccess({ target: request }); // Evalúa condición
-                }, 10); // Ejecuta llamada o método
+                    request._emit("success", { target: request });
+                    if (request.onsuccess) request.onsuccess({ target: request });
+                }, 10);
 
-                return request; // Retorna resultado
+                return request;
             }
         };
-    })(); // Ejecuta llamada o método
+    })();
 }
 
 // ==============================================================================
@@ -259,62 +259,62 @@ if (typeof indexedDB === "undefined") { // Evalúa condición
 // ==============================================================================
 
 // Solicitamos al motor de IndexedDB abrir o crear la base de datos denominada "BD" en su versión 1
-const IDBRequest = indexedDB.open("BD", 1); // Declara e inicializa "IDBRequest"
+const IDBRequest = indexedDB.open("BD", 1);
 
 // Escuchamos el evento 'upgradeneeded', que se dispara únicamente si la base es nueva o la versión se incrementa
-IDBRequest.addEventListener("upgradeneeded", () => { // Registra escuchador de eventos
+IDBRequest.addEventListener("upgradeneeded", () => {
     // Obtenemos la instancia de la base de datos desde la propiedad result de la solicitud
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Creamos el almacén de objetos (Object Store) llamado "nombres" con clave primaria autoincremental
-    db.createObjectStore("nombres", { // Instrucción JavaScript
+    db.createObjectStore("nombres", {
         // Habilitamos autoIncrement en true para que cada objeto reciba una clave numérica automática (1, 2, 3...)
         autoIncrement: true
     });
 });
 
 // Escuchamos el evento 'success', que se ejecuta cuando la base de datos se abre y conecta satisfactoriamente
-IDBRequest.addEventListener("success", () => console.log("Todo ok")); // Registra escuchador de eventos
+IDBRequest.addEventListener("success", () => console.log("Todo ok"));
 
 // Escuchamos el evento 'error', que se dispara en caso de presentarse algún fallo de acceso o cuota en la base
-IDBRequest.addEventListener("error", (err) => console.log("Error", err)); // Registra escuchador de eventos
+IDBRequest.addEventListener("error", (err) => console.log("Error", err));
 
 // Función para agregar un objeto a la base de datos mediante una transacción de lectura y escritura
-const addObjeto = objeto => { // Define función flecha "addObjeto"
+const addObjeto = objeto => {
     // Obtenemos la referencia activa de la base de datos abierta
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Iniciamos una transacción sobre el almacén "nombres" en modo de lectura y escritura ("readwrite")
-    const transaction = db.transaction("nombres", "readwrite"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readwrite");
     // Obtenemos el almacén de objetos "nombres" a través de la transacción iniciada
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Insertamos el objeto recibido dentro del almacén
-    objectStore.add(objeto); // Ejecuta llamada o método
+    objectStore.add(objeto);
     // Escuchamos el evento 'complete' de la transacción para saber cuándo los datos se guardaron efectivamente
-    transaction.addEventListener("complete", () => { // Registra escuchador de eventos
+    transaction.addEventListener("complete", () => {
         // Imprimimos en consola el mensaje de confirmación de inserción
         console.log("Objeto agregado correctamente"); // Imprime salida en consola
     });
 };
 
 // Función para leer todos los registros almacenados utilizando un cursor iterativo
-const leerObjetos = () => { // Define función flecha "leerObjetos"
+const leerObjetos = () => {
     // Obtenemos la referencia activa de la base de datos abierta
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Iniciamos una transacción sobre el almacén "nombres" en modo de solo lectura ("readonly")
-    const transaction = db.transaction("nombres", "readonly"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readonly");
     // Obtenemos el almacén de objetos "nombres" mediante la transacción
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Abrimos un cursor para iterar de manera secuencial sobre cada registro del almacén
-    const cursor = objectStore.openCursor(); // Declara e inicializa "cursor"
+    const cursor = objectStore.openCursor();
     // Escuchamos el evento 'success' del cursor, que se dispara por cada registro encontrado
-    cursor.addEventListener("success", () => { // Registra escuchador de eventos
+    cursor.addEventListener("success", () => {
         // Evaluamos si el cursor apunta a un registro existente en la posición actual
-        if (cursor.result) { // Evalúa condición
+        if (cursor.result) {
             // Imprimimos en consola el valor del objeto apuntado por el cursor
             console.log(cursor.result.value); // Imprime salida en consola
             // Avanzamos el cursor hacia el siguiente registro del almacén
-            cursor.result.continue(); // Ejecuta llamada o método
+            cursor.result.continue();
             // Si cursor.result es nulo, significa que ya no existen más registros por recorrer
-        } else { // Instrucción JavaScript
+        } else {
             // Imprimimos mensaje informando que se concluyó la lectura total de registros
             console.log("Todos los datos fueron leidos"); // Imprime salida en consola
         }
@@ -322,34 +322,34 @@ const leerObjetos = () => { // Define función flecha "leerObjetos"
 };
 
 // Función para modificar o actualizar un objeto existente identificado por su clave primaria
-const modObjeto = (key, objeto) => { // Define función flecha "modObjeto"
+const modObjeto = (key, objeto) => {
     // Obtenemos la referencia activa de la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Iniciamos una transacción sobre el almacén "nombres" en modo "readwrite"
-    const transaction = db.transaction("nombres", "readwrite"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readwrite");
     // Obtenemos el almacén de objetos a través de la transacción
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Usamos el método .put() pasando el nuevo valor y la clave primaria a sobrescribir
-    objectStore.put(objeto, key); // Ejecuta llamada o método
+    objectStore.put(objeto, key);
     // Escuchamos el evento 'complete' que confirma que la modificación se aplicó en disco
-    transaction.addEventListener("complete", () => { // Registra escuchador de eventos
+    transaction.addEventListener("complete", () => {
         // Imprimimos el mensaje de confirmación de modificación
         console.log("Objeto modificado correctamente"); // Imprime salida en consola
     });
 };
 
 // Función para eliminar un objeto de la base de datos a partir de su clave primaria
-const deleteObjeto = key => { // Define función flecha "deleteObjeto"
+const deleteObjeto = key => {
     // Obtenemos la referencia activa de la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Iniciamos una transacción de escritura sobre el almacén "nombres"
-    const transaction = db.transaction("nombres", "readwrite"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readwrite");
     // Obtenemos el almacén de objetos
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Ejecutamos el método .delete() indicando la clave del registro a borrar
-    objectStore.delete(key); // Ejecuta llamada o método
+    objectStore.delete(key);
     // Escuchamos el evento 'complete' que valida la eliminación exitosa
-    transaction.addEventListener("complete", () => { // Registra escuchador de eventos
+    transaction.addEventListener("complete", () => {
         // Imprimimos mensaje confirmando la eliminación del objeto
         console.log("Objeto eliminado correctamente"); // Imprime salida en consola
     });
@@ -360,68 +360,68 @@ const deleteObjeto = key => { // Define función flecha "deleteObjeto"
 // ==============================================================================
 
 // Función complementaria para consultar un único registro por su clave exacta sin usar cursor
-const leerObjetoPorClave = (key) => { // Define función flecha "leerObjetoPorClave"
+const leerObjetoPorClave = (key) => {
     // Obtenemos la referencia de la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Transacción de solo lectura
-    const transaction = db.transaction("nombres", "readonly"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readonly");
     // Obtenemos el almacén de objetos
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Solicitamos el registro puntual mediante .get(key)
-    const request = objectStore.get(key); // Declara e inicializa "request"
+    const request = objectStore.get(key);
     // Escuchamos el evento de éxito de la consulta
-    request.onsuccess = () => { // Asigna valor
+    request.onsuccess = () => {
         // Imprimimos el registro recuperado
         console.log(`Registro con clave [${key}]:`, request.result); // Imprime salida en consola
     };
 };
 
 // Función complementaria para recuperar todos los registros en un solo arreglo mediante .getAll()
-const leerTodosEnArreglo = () => { // Define función flecha "leerTodosEnArreglo"
+const leerTodosEnArreglo = () => {
     // Obtenemos la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Abrimos transacción readonly
-    const transaction = db.transaction("nombres", "readonly"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readonly");
     // Obtenemos el almacén
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Solicitamos todos los registros con .getAll()
-    const request = objectStore.getAll(); // Declara e inicializa "request"
+    const request = objectStore.getAll();
     // Escuchamos el éxito de la petición
-    request.onsuccess = () => { // Asigna valor
+    request.onsuccess = () => {
         // Imprimimos el arreglo completo con todos los objetos
         console.log("Todos los registros recuperados con .getAll():", request.result); // Imprime salida en consola
     };
 };
 
 // Función complementaria para contar el número total de registros en el almacén mediante .count()
-const contarRegistros = () => { // Define función flecha "contarRegistros"
+const contarRegistros = () => {
     // Obtenemos la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Abrimos transacción readonly
-    const transaction = db.transaction("nombres", "readonly"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readonly");
     // Obtenemos el almacén
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Ejecutamos la solicitud de conteo
-    const request = objectStore.count(); // Declara e inicializa "request"
+    const request = objectStore.count();
     // Escuchamos el resultado
-    request.onsuccess = () => { // Asigna valor
+    request.onsuccess = () => {
         // Imprimimos el número total de elementos
         console.log(`Total de registros en 'nombres': ${request.result}`); // Imprime salida en consola
     };
 };
 
 // Función complementaria para vaciar todos los registros del almacén mediante .clear()
-const vaciarAlmacen = () => { // Define función flecha "vaciarAlmacen"
+const vaciarAlmacen = () => {
     // Obtenemos la base de datos
-    const db = IDBRequest.result; // Declara e inicializa "db"
+    const db = IDBRequest.result;
     // Abrimos transacción de escritura
-    const transaction = db.transaction("nombres", "readwrite"); // Declara e inicializa "transaction"
+    const transaction = db.transaction("nombres", "readwrite");
     // Obtenemos el almacén
-    const objectStore = transaction.objectStore("nombres"); // Declara e inicializa "objectStore"
+    const objectStore = transaction.objectStore("nombres");
     // Borramos todos los elementos
-    objectStore.clear(); // Ejecuta llamada o método
+    objectStore.clear();
     // Escuchamos la confirmación de la transacción
-    transaction.addEventListener("complete", () => { // Registra escuchador de eventos
+    transaction.addEventListener("complete", () => {
         // Imprimimos confirmación de vaciado
         console.log("Almacén 'nombres' vaciado completamente (.clear)."); // Imprime salida en consola
     });
@@ -432,40 +432,40 @@ const vaciarAlmacen = () => { // Define función flecha "vaciarAlmacen"
 // ==============================================================================
 
 // Función que encapsula la inserción de un objeto en una Promesa nativa
-const addObjetoPromesa = (objeto) => { // Define función flecha "addObjetoPromesa"
+const addObjetoPromesa = (objeto) => {
     // Retornamos una nueva instancia de Promise
-    return new Promise((resolve, reject) => { // Retorna resultado
+    return new Promise((resolve, reject) => {
         // Obtenemos la base de datos
-        const db = IDBRequest.result; // Declara e inicializa "db"
+        const db = IDBRequest.result;
         // Transacción readwrite
-        const tx = db.transaction("nombres", "readwrite"); // Declara e inicializa "tx"
+        const tx = db.transaction("nombres", "readwrite");
         // Almacén
-        const store = tx.objectStore("nombres"); // Declara e inicializa "store"
+        const store = tx.objectStore("nombres");
         // Operación add
-        const req = store.add(objeto); // Declara e inicializa "req"
+        const req = store.add(objeto);
         // Si tiene éxito resolvemos entregando la clave asignada
-        req.onsuccess = () => resolve(req.result); // Asigna valor
+        req.onsuccess = () => resolve(req.result);
         // Si falla rechazamos con el error
-        req.onerror = () => reject(req.error); // Asigna valor
+        req.onerror = () => reject(req.error);
     });
 };
 
 // Función que encapsula la lectura de todos los registros en una Promesa
-const leerTodosPromesa = () => { // Define función flecha "leerTodosPromesa"
+const leerTodosPromesa = () => {
     // Retornamos una Promesa
-    return new Promise((resolve, reject) => { // Retorna resultado
+    return new Promise((resolve, reject) => {
         // Obtenemos la base de datos
-        const db = IDBRequest.result; // Declara e inicializa "db"
+        const db = IDBRequest.result;
         // Transacción readonly
-        const tx = db.transaction("nombres", "readonly"); // Declara e inicializa "tx"
+        const tx = db.transaction("nombres", "readonly");
         // Almacén
-        const store = tx.objectStore("nombres"); // Declara e inicializa "store"
+        const store = tx.objectStore("nombres");
         // Operación getAll
-        const req = store.getAll(); // Declara e inicializa "req"
+        const req = store.getAll();
         // Resolvemos con la lista obtenida
-        req.onsuccess = () => resolve(req.result); // Asigna valor
+        req.onsuccess = () => resolve(req.result);
         // Rechazamos en caso de fallo
-        req.onerror = () => reject(req.error); // Asigna valor
+        req.onerror = () => reject(req.error);
     });
 };
 
@@ -474,146 +474,146 @@ const leerTodosPromesa = () => { // Define función flecha "leerTodosPromesa"
 // ==============================================================================
 
 // Función que ejecuta el ejercicio de Nivel 1: Crear 'BibliotecaDB' con almacén 'libros' y keyPath 'isbn'
-const resolverEjercicioNivel1 = () => { // Define función flecha "resolverEjercicioNivel1"
+const resolverEjercicioNivel1 = () => {
     // Solicitamos abrir BibliotecaDB en versión 1
-    const reqBiblio = indexedDB.open("BibliotecaDB", 1); // Declara e inicializa "reqBiblio"
+    const reqBiblio = indexedDB.open("BibliotecaDB", 1);
     // Manejamos el evento upgradeneeded para configurar el esquema
-    reqBiblio.addEventListener("upgradeneeded", (e) => { // Registra escuchador de eventos
+    reqBiblio.addEventListener("upgradeneeded", (e) => {
         // Obtenemos la base de datos
-        const dbBiblio = e.target.result; // Declara e inicializa "dbBiblio"
+        const dbBiblio = e.target.result;
         // Validamos que el almacén libros no exista antes de crearlo
-        if (!dbBiblio.objectStoreNames.contains("libros")) { // Evalúa condición
+        if (!dbBiblio.objectStoreNames.contains("libros")) {
             // Creamos el almacén 'libros' con clave primaria explícita 'isbn'
-            dbBiblio.createObjectStore("libros", { keyPath: "isbn" }); // Ejecuta llamada o método
+            dbBiblio.createObjectStore("libros", { keyPath: "isbn" });
             // Confirmamos en consola
             console.log("✅ [Nivel 1 Resuelto] Almacén 'libros' creado con keyPath: 'isbn'."); // Imprime salida en consola
         }
     });
     // Manejamos el éxito de apertura
-    reqBiblio.addEventListener("success", (e) => { // Registra escuchador de eventos
+    reqBiblio.addEventListener("success", (e) => {
         // Obtenemos la base de datos abierta
-        const dbBiblio = e.target.result; // Declara e inicializa "dbBiblio"
+        const dbBiblio = e.target.result;
         // Confirmamos apertura
         console.log("📚 [Nivel 1 Resuelto] Base de datos 'BibliotecaDB' lista para operar."); // Imprime salida en consola
 
         // Ejecutamos el ejercicio Nivel 2 sobre la base recién abierta
-        resolverEjercicioNivel2(dbBiblio); // Ejecuta llamada o método
+        resolverEjercicioNivel2(dbBiblio);
     });
 };
 
 // Función que ejecuta el ejercicio de Nivel 2: Guardar libro con transacción 'readwrite' y .put()
-const resolverEjercicioNivel2 = (dbBiblio) => { // Define función flecha "resolverEjercicioNivel2"
+const resolverEjercicioNivel2 = (dbBiblio) => {
     // Definimos la función guardarLibro solicitada en el temario
-    const guardarLibro = (db, libro) => { // Define función flecha "guardarLibro"
+    const guardarLibro = (db, libro) => {
         // Abrimos transacción en modo "readwrite"
-        const tx = db.transaction(["libros"], "readwrite"); // Declara e inicializa "tx"
+        const tx = db.transaction(["libros"], "readwrite");
         // Obtenemos el almacén "libros"
-        const store = tx.objectStore("libros"); // Declara e inicializa "store"
+        const store = tx.objectStore("libros");
         // Usamos .put() para insertar o actualizar si el isbn ya existe
-        const peticion = store.put(libro); // Declara e inicializa "peticion"
+        const peticion = store.put(libro);
         // Escuchamos el éxito de la inserción
-        peticion.onsuccess = () => { // Asigna valor
+        peticion.onsuccess = () => {
             // Confirmamos en consola
             console.log(`✅ [Nivel 2 Resuelto] Libro "${libro.titulo}" guardado correctamente.`); // Imprime salida en consola
         };
         // Escuchamos la culminación de la transacción para dar paso al Nivel 3
-        tx.addEventListener("complete", () => { // Registra escuchador de eventos
+        tx.addEventListener("complete", () => {
             // Ejecutamos el ejercicio Nivel 3
-            resolverEjercicioNivel3(dbBiblio); // Ejecuta llamada o método
+            resolverEjercicioNivel3(dbBiblio);
         });
     };
 
     // Guardamos libros de prueba
-    guardarLibro(dbBiblio, { isbn: "978-0132350884", titulo: "Clean Code", autor: "Robert C. Martin" }); // Ejecuta llamada o método
-    guardarLibro(dbBiblio, { isbn: "978-0201633610", titulo: "Design Patterns", autor: "Erich Gamma" }); // Ejecuta llamada o método
+    guardarLibro(dbBiblio, { isbn: "978-0132350884", titulo: "Clean Code", autor: "Robert C. Martin" });
+    guardarLibro(dbBiblio, { isbn: "978-0201633610", titulo: "Design Patterns", autor: "Erich Gamma" });
 };
 
 // Función que ejecuta el ejercicio de Nivel 3: Función asíncrona obtenerTodosLosLibros() con Promesa
-const resolverEjercicioNivel3 = (dbBiblio) => { // Define función flecha "resolverEjercicioNivel3"
+const resolverEjercicioNivel3 = (dbBiblio) => {
     // Definición de la función solicitada que retorna una Promise
-    const obtenerTodosLosLibros = (db) => { // Define función flecha "obtenerTodosLosLibros"
+    const obtenerTodosLosLibros = (db) => {
         // Retornamos la promesa
-        return new Promise((resolve, reject) => { // Retorna resultado
+        return new Promise((resolve, reject) => {
             // Abrimos transacción readonly
-            const tx = db.transaction(["libros"], "readonly"); // Declara e inicializa "tx"
+            const tx = db.transaction(["libros"], "readonly");
             // Obtenemos el almacén
-            const store = tx.objectStore("libros"); // Declara e inicializa "store"
+            const store = tx.objectStore("libros");
             // Solicitamos todos los registros con .getAll()
-            const req = store.getAll(); // Declara e inicializa "req"
+            const req = store.getAll();
             // Resolvemos la promesa entregando los libros leídos
-            req.onsuccess = () => resolve(req.result); // Asigna valor
+            req.onsuccess = () => resolve(req.result);
             // Rechazamos en caso de error
-            req.onerror = () => reject(req.error); // Asigna valor
+            req.onerror = () => reject(req.error);
         });
     };
 
     // Consumimos la promesa con async/await
-    (async () => { // Instrucción JavaScript
+    (async () => {
         try { // Inicia bloque protegido contra errores
             // Esperamos la resolución de todos los libros
-            const libros = await obtenerTodosLosLibros(dbBiblio); // Declara e inicializa "libros"
+            const libros = await obtenerTodosLosLibros(dbBiblio);
             // Mostramos los libros en consola
             console.log(`✅ [Nivel 3 Resuelto] Libros obtenidos con Promise y async/await (${libros.length} libros):`, libros); // Imprime salida en consola
-        } catch (error) { // Instrucción JavaScript
+        } catch (error) {
             // Capturamos cualquier error
             console.error("Error en Nivel 3:", error); // Imprime salida en consola
         }
-    })(); // Ejecuta llamada o método
+    })();
 };
 
 // ==============================================================================
 // 5. DEMOSTRACIÓN PRÁCTICA AUTOMÁTICA EN CONSOLA AL CONECTAR LA BASE DE DATOS
 // ==============================================================================
 // Una vez que IDBRequest emita 'success', realizamos llamadas de prueba para demostrar el funcionamiento:
-IDBRequest.addEventListener("success", () => { // Registra escuchador de eventos
+IDBRequest.addEventListener("success", () => {
     // Encabezado visual inicial
     console.log("\n======================================================="); // Imprime salida en consola
     console.log("🚀 EJECUTANDO DEMOSTRACIÓN DE OPERACIONES CRUD..."); // Imprime salida en consola
     console.log("======================================================="); // Imprime salida en consola
 
     // 1. Agregamos varios objetos de prueba llamando a la función original del alumno
-    addObjeto({ nombre: "Fredy", rol: "Desarrollador Web", nivel: "Master" }); // Ejecuta llamada o método
-    addObjeto({ nombre: "Carlos", rol: "Arquitecto de Software", nivel: "Senior" }); // Ejecuta llamada o método
-    addObjeto({ nombre: "Laura", rol: "Diseñadora UI/UX", nivel: "Semi Senior" }); // Ejecuta llamada o método
+    addObjeto({ nombre: "Fredy", rol: "Desarrollador Web", nivel: "Master" });
+    addObjeto({ nombre: "Carlos", rol: "Arquitecto de Software", nivel: "Senior" });
+    addObjeto({ nombre: "Laura", rol: "Diseñadora UI/UX", nivel: "Semi Senior" });
 
     // 2. Programamos la lectura de objetos tras completarse las inserciones
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n--- LECTURA DE REGISTROS CON CURSOR (leerObjetos) ---"); // Imprime salida en consola
         // Invocamos la función original del alumno para recorrer con cursor
-        leerObjetos(); // Ejecuta llamada o método
-    }, 40); // Ejecuta llamada o método
+        leerObjetos();
+    }, 40);
 
     // 3. Programamos la modificación de un objeto existente
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n--- MODIFICACIÓN DE REGISTRO (modObjeto) ---"); // Imprime salida en consola
         // Modificamos el registro con clave primaria 1
-        modObjeto(1, { nombre: "Fredy (Actualizado)", rol: "Tech Lead", nivel: "Master" }); // Ejecuta llamada o método
-    }, 80); // Ejecuta llamada o método
+        modObjeto(1, { nombre: "Fredy (Actualizado)", rol: "Tech Lead", nivel: "Master" });
+    }, 80);
 
     // 4. Consultamos el registro modificado directamente por clave
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n--- LECTURA PUNTUAL POR CLAVE (leerObjetoPorClave) ---"); // Imprime salida en consola
-        leerObjetoPorClave(1); // Ejecuta llamada o método
-    }, 120); // Ejecuta llamada o método
+        leerObjetoPorClave(1);
+    }, 120);
 
     // 5. Demostramos la lectura masiva con .getAll()
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n--- LECTURA COMPLETA (.getAll) ---"); // Imprime salida en consola
-        leerTodosEnArreglo(); // Ejecuta llamada o método
-        contarRegistros(); // Ejecuta llamada o método
-    }, 160); // Ejecuta llamada o método
+        leerTodosEnArreglo();
+        contarRegistros();
+    }, 160);
 
     // 6. Demostramos la eliminación de un registro
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n--- ELIMINACIÓN DE REGISTRO (deleteObjeto) ---"); // Imprime salida en consola
-        deleteObjeto(2); // Ejecuta llamada o método
-    }, 200); // Ejecuta llamada o método
+        deleteObjeto(2);
+    }, 200);
 
     // 7. Ejecutamos el solucionario oficial de los 3 ejercicios de la documentación
-    setTimeout(() => { // Instrucción JavaScript
+    setTimeout(() => {
         console.log("\n======================================================="); // Imprime salida en consola
         console.log("📘 SOLUCIONARIO DE EJERCICIOS DEL TEMARIO (Nivel 1, 2, 3)"); // Imprime salida en consola
         console.log("======================================================="); // Imprime salida en consola
-        resolverEjercicioNivel1(); // Ejecuta llamada o método
-    }, 250); // Ejecuta llamada o método
+        resolverEjercicioNivel1();
+    }, 250);
 });

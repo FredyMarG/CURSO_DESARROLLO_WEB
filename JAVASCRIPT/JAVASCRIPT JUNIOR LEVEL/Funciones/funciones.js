@@ -4,80 +4,80 @@
 
 "use strict"; // Activa el modo estricto de JavaScript
 
-const liveConsole = document.getElementById("live-console"); // Obtiene referencia DOM para "liveConsole"
+const liveConsole = document.getElementById("live-console");
 
-window.registrarFuncionLog = function registrar(mensaje) { // Asigna valor
-    const linea = document.createElement("div"); // Crea nuevo elemento DOM "linea"
-    linea.className = "log-line ok"; // Asigna valor
+window.registrarFuncionLog = function registrar(mensaje) {
+    const linea = document.createElement("div");
+    linea.className = "log-line ok";
     linea.textContent = `> ${mensaje}`; // Actualiza contenido en el DOM
-    liveConsole.append(linea); // Inserta nodo en el DOM
-    liveConsole.scrollTop = liveConsole.scrollHeight; // Asigna valor
+    liveConsole.append(linea);
+    liveConsole.scrollTop = liveConsole.scrollHeight;
     console.log(mensaje); // Imprime salida en consola
 };
 
 // 1. Parámetros por defecto + Arrow Function
-const saludarUsuario = (nombre = "Invitado") => `¡Hola, ${nombre}! Bienvenido a JS moderno.`; // Define función flecha "saludarUsuario"
+const saludarUsuario = (nombre = "Invitado") => `¡Hola, ${nombre}! Bienvenido a JS moderno.`;
 
-document.getElementById("btn-saludar").addEventListener("click", () => { // Registra escuchador de eventos
-    const raw = document.getElementById("fn-nombre").value.trim(); // Obtiene referencia DOM para "raw"
-    const mensaje = raw ? saludarUsuario(raw) : saludarUsuario(undefined); // Declara e inicializa "mensaje"
+document.getElementById("btn-saludar").addEventListener("click", () => {
+    const raw = document.getElementById("fn-nombre").value.trim();
+    const mensaje = raw ? saludarUsuario(raw) : saludarUsuario(undefined);
     document.getElementById("out-saludar").textContent = mensaje; // Actualiza contenido en el DOM
-    window.registrarFuncionLog(`saludarUsuario(${raw ? `"${raw}"` : "undefined"}) -> "${mensaje}"`); // Ejecuta llamada o método
+    window.registrarFuncionLog(`saludarUsuario(${raw ? `"${raw}"` : "undefined"}) -> "${mensaje}"`);
 });
 
 // 2. Parámetros Rest + Callbacks
-function procesarLista(callback, ...numeros) { // Declara función
-    return callback(numeros); // Retorna resultado
+function procesarLista(callback, ...numeros) {
+    return callback(numeros);
 }
 
-const cbSumar = (arr) => arr.reduce((a, b) => a + b, 0); // Define función flecha "cbSumar"
-const cbPromedio = (arr) => (arr.length ? cbSumar(arr) / arr.length : 0); // Define función flecha "cbPromedio"
+const cbSumar = (arr) => arr.reduce((a, b) => a + b, 0);
+const cbPromedio = (arr) => (arr.length ? cbSumar(arr) / arr.length : 0);
 
-document.querySelectorAll("[data-cb]").forEach((btn) => { // Instrucción JavaScript
-    btn.addEventListener("click", () => { // Registra escuchador de eventos
+document.querySelectorAll("[data-cb]").forEach((btn) => {
+    btn.addEventListener("click", () => {
         const lista = document
             .getElementById("fn-nums")
             .value.split(",")
             .map((v) => Number(v.trim()))
-            .filter((n) => !Number.isNaN(n)); // Ejecuta llamada o método
+            .filter((n) => !Number.isNaN(n));
 
-        const tipo = btn.dataset.cb; // Declara e inicializa "tipo"
-        const resultado = tipo === "sumar" ? procesarLista(cbSumar, ...lista) : procesarLista(cbPromedio, ...lista); // Declara e inicializa "resultado"
+        const tipo = btn.dataset.cb;
+        const resultado = tipo === "sumar" ? procesarLista(cbSumar, ...lista) : procesarLista(cbPromedio, ...lista);
 
         document.getElementById("out-rest").textContent =
-            `Números válidos: ${JSON.stringify(lista)}\nCallback (${tipo}): ${resultado}`; // Instrucción JavaScript
-        window.registrarFuncionLog(`Callback ${tipo} sobre ${JSON.stringify(lista)} -> ${resultado}`); // Ejecuta llamada o método
+            `Números válidos: ${JSON.stringify(lista)}\nCallback (${tipo}): ${resultado}`;
+        window.registrarFuncionLog(`Callback ${tipo} sobre ${JSON.stringify(lista)} -> ${resultado}`);
     });
 });
 
 // 3. Closures
-function crearContador(inicial = 0) { // Declara función
-    let cuenta = inicial; // Declara e inicializa "cuenta"
-    return { // Retorna resultado
+function crearContador(inicial = 0) {
+    let cuenta = inicial;
+    return {
         incrementar: () => ++cuenta,
-        reiniciar: () => { // Instrucción JavaScript
-            cuenta = 0; // Asigna valor
-            return cuenta; // Retorna resultado
+        reiniciar: () => {
+            cuenta = 0;
+            return cuenta;
         }
     };
 }
 
-const contador = crearContador(0); // Declara e inicializa "contador"
+const contador = crearContador(0);
 
-document.getElementById("btn-closure-inc").addEventListener("click", () => { // Registra escuchador de eventos
-    const actual = contador.incrementar(); // Declara e inicializa "actual"
+document.getElementById("btn-closure-inc").addEventListener("click", () => {
+    const actual = contador.incrementar();
     document.getElementById("out-closure").textContent = `Cuenta actual (closure privado): ${actual}`; // Actualiza contenido en el DOM
-    window.registrarFuncionLog(`Closure incrementar() -> ${actual}`); // Ejecuta llamada o método
+    window.registrarFuncionLog(`Closure incrementar() -> ${actual}`);
 });
 
-document.getElementById("btn-closure-reset").addEventListener("click", () => { // Registra escuchador de eventos
-    const actual = contador.reiniciar(); // Declara e inicializa "actual"
+document.getElementById("btn-closure-reset").addEventListener("click", () => {
+    const actual = contador.reiniciar();
     document.getElementById("out-closure").textContent = `Cuenta reiniciada: ${actual}`; // Actualiza contenido en el DOM
-    window.registrarFuncionLog(`Closure reiniciar() -> ${actual}`); // Ejecuta llamada o método
+    window.registrarFuncionLog(`Closure reiniciar() -> ${actual}`);
 });
 
-document.getElementById("btn-limpiar-log").addEventListener("click", () => { // Registra escuchador de eventos
-    liveConsole.replaceChildren(); // Ejecuta llamada o método
+document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+    liveConsole.replaceChildren();
 });
 
-window.registrarFuncionLog("Laboratorio de Funciones listo."); // Ejecuta llamada o método
+window.registrarFuncionLog("Laboratorio de Funciones listo.");
