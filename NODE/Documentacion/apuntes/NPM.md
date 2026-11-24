@@ -55,7 +55,35 @@ Cada paquete publicado en npm sigue el formato **`MAJOR.MINOR.PATCH`** (ejemplo:
 
 ---
 
-## 3. `dependencies` vs `devDependencies`
+## 3. Cómo instalar dependencias (`dependencies` vs `devDependencies`)
+
+Antes de instalar paquetes en una carpeta nueva, inicializa el manifiesto con `npm init -y` para generar `package.json`.
+
+### Comandos esenciales de instalación
+
+```bash
+# 1) Dependencia de producción (atajo: npm i)
+npm install express
+npm i zod cors                  # varios paquetes a la vez
+
+# 2) Versión específica o exacta (sin ^ ni ~)
+npm i express@4.21.0
+npm i express@4.21.0 --save-exact   # o -E
+
+# 3) Dependencia solo de desarrollo (linters, tests, formateadores)
+npm i -D eslint prettier        # -D equivale a --save-dev
+
+# 4) Herramienta global en tu sistema (evítalo si puedes usar npx)
+npm i -g nodemon
+
+# 5) Reconstruir node_modules/ tras clonar un proyecto de Git
+npm install
+```
+
+Al ejecutar `npm install <paquete>`, npm realiza tres acciones:
+1. Descarga el paquete y sus subdependencias dentro de `node_modules/`.
+2. Registra la dependencia en `package.json` (`dependencies` o `devDependencies`).
+3. Crea o actualiza `package-lock.json` con las versiones exactas y hashes de integridad.
 
 | Sección | Para qué sirve | Comando |
 |---|---|---|

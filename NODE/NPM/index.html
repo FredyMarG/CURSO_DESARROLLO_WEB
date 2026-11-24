@@ -137,22 +137,37 @@
             </div>
         </section>
 
-        <!-- SLIDE 4: DEPENDENCIES, LOCKFILE Y NPM CI -->
-        <section class="slide" data-slide="4" data-title="dependencies, lockfile y npm ci">
+        <!-- SLIDE 4: CÓMO INSTALAR DEPENDENCIAS, LOCKFILE Y NPM CI -->
+        <section class="slide" data-slide="4" data-title="Cómo instalar dependencias">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 4 · INSTALACIONES REPRODUCIBLES</span>
-                <h2 class="slide-title"><code>dependencies</code>, <code>devDependencies</code> y <code>npm ci</code></h2>
+                <span class="slide-kicker">DIAPOSITIVA 4 · INSTALACIÓN DE PAQUETES</span>
+                <h2 class="slide-title">Cómo Instalar Dependencias (<code>npm install</code>, <code>-D</code>, <code>@versión</code> y <code>npm ci</code>)</h2>
             </div>
             <div class="glass-card">
-                <table class="compare-table" style="margin-bottom:12px;">
+                <pre class="code-block" style="margin-bottom:12px;"><code># 0) Iniciar proyecto (crea package.json si aún no existe)
+npm init -y
+
+# 1) Instalar dependencia de producción (se guarda en "dependencies")
+npm install express          # atajo: npm i express
+npm i zod cors               # instalar varios paquetes en un solo comando
+
+# 2) Instalar una versión específica o exacta
+npm i express@4.21.0         # versión concreta (con ^ por defecto)
+npm i express@4.21.0 -E      # --save-exact: fija "4.21.0" sin ^ ni ~
+
+# 3) Instalar dependencia solo de desarrollo ("devDependencies")
+npm i -D eslint prettier     # -D equivale a --save-dev
+
+# 4) Restaurar todas las dependencias al clonar un repositorio
+npm install                  # lee package.json / package-lock.json y crea node_modules/</code></pre>
+                <table class="compare-table">
                     <thead>
-                        <tr><th>Concepto / Comando</th><th>Función</th></tr>
+                        <tr><th>Archivo / Comando</th><th>Qué hace al instalar</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>npm install express</code></td><td>Agrega a <code>dependencies</code> (necesario en producción)</td></tr>
-                        <tr><td><code>npm install -D eslint</code></td><td>Agrega a <code>devDependencies</code> (solo desarrollo/pruebas)</td></tr>
+                        <tr><td><code>node_modules/</code></td><td>Carpeta donde se descargan los paquetes (se ignora en <code>.gitignore</code>)</td></tr>
                         <tr><td><code>package-lock.json</code></td><td>Congela el árbol exacto de versiones; <strong>sí se sube a Git</strong></td></tr>
-                        <tr><td><code>npm ci</code></td><td>Limpia <code>node_modules</code> e instala exactamente lo del lockfile</td></tr>
+                        <tr><td><code>npm ci</code></td><td>Borra <code>node_modules</code> e instala exactamente lo del lockfile (CI/producción)</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -219,6 +234,7 @@
                         <label>Escenario npm</label>
                         <!-- Selector conectado al script inferior (#npmSimMode) -->
                         <select id="npmSimMode">
+                            <option value="install">Instalar dependencias (paso a paso)</option>
                             <option value="caret">SemVer: ^1.4.2 (caret)</option>
                             <option value="tilde">SemVer: ~1.4.2 (tilde)</option>
                             <option value="ci">npm install vs npm ci</option>
@@ -376,7 +392,14 @@
 
             // Actualiza el panel visual y el snippet según la opción seleccionada
             function update() {
-                if (mode.value === 'caret') {
+                if (mode.value === 'install') {
+                    // Caso 0: flujo completo de instalación de dependencias
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">npm i &lt;pkg&gt; guarda en dependencies | npm i -D &lt;pkg&gt; en devDependencies</div>
+                        <div style="color:#38bdf8;">Usa @versión para fijar versión, -E para exacta y npm i sin argumentos tras clonar</div>
+                    `;
+                    code.textContent = `npm init -y\nnpm i express zod\nnpm i -D eslint\nnpm i express@4.21.0 -E`;
+                } else if (mode.value === 'caret') {
                     // Caso 1: rango caret (^) — permite MINOR y PATCH manteniendo MAJOR
                     stage.innerHTML = `
                         <div style="color:#00ff88;font-weight:700;">^1.4.2 acepta 1.4.5 (PATCH) y 1.9.0 (MINOR)</div>
