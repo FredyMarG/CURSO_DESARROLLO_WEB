@@ -1555,6 +1555,13 @@ const modules = [
     desc: "Transiciones y @keyframes aplicados a una landing page.",
     href: "HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html",
   },
+  {
+    cat: "proyectos",
+    title: "26. Gestor de Tareas (Node.js)",
+    tag: "Proyecto Node.js",
+    desc: "Interfaz web + API HTTP nativa (node:http), persistencia JSON, auditoría NDJSON y EventEmitter.",
+    href: "NODE/Proyectos/Tareas/public/index.html",
+  },
 ];
 
 // Iconos oficiales tomados de Flaticon (HTML5, CSS3, JavaScript y Node.js) con carga diferida
@@ -1636,7 +1643,7 @@ const titles = {
   // Encabezado para HTML y CSS con iconos oficiales H y CSS
   htmlcss: `${TECH_ICONS.html}${TECH_ICONS.css} HTML5 y CSS3`,
   // Encabezado para Proyectos Integradores
-  proyectos: `${TECH_ICONS.html}${TECH_ICONS.css}${TECH_ICONS.js} Proyectos Integradores — HTML/CSS y JavaScript`,
+  proyectos: `${TECH_ICONS.html}${TECH_ICONS.css}${TECH_ICONS.js} Proyectos Integradores — HTML/CSS, JavaScript y Node.js`,
 };
 
 // Referencia al contenedor principal donde se inyectan las secciones y tarjetas
@@ -1648,6 +1655,7 @@ const filterBtns = document.querySelectorAll(".filter-btn");
 // Variable que almacena el filtro de categoría seleccionado actualmente (soporta ?filter=proyectos en la URL)
 const urlFilter = new URLSearchParams(window.location.search).get("filter"); // Lee parámetro de filtro desde la URL
 let activeFilter = urlFilter && ["all", "htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"].includes(urlFilter) ? urlFilter : "all";
+let projectSubFilter = "all"; // Subfiltro interno de la sección Proyectos (all, htmlcss, js, node)
 
 // Si la URL trajo un filtro válido, sincronizamos el botón activo en la barra de herramientas
 if (activeFilter !== "all") {
@@ -1669,6 +1677,7 @@ function render() {
     if (filter === "mid") return m.href.includes("JAVASCRIPT MID LEVEL"); // Proyectos de JS Mid
     if (filter === "master") return m.href.includes("JAVASCRIPT MASTER LEVEL") || m.href.startsWith("JAVASCRIPT/PROYECTOS/"); // Proyectos de JS Master y JS general
     if (filter === "htmlcss") return m.href.startsWith("HTML y CSS/"); // Proyectos de HTML y CSS
+    if (filter === "js") return m.href.startsWith("JAVASCRIPT/"); // Proyectos de JavaScript (todos los niveles)
     return false; // Por defecto no coincide
   };
 
@@ -1690,7 +1699,7 @@ function render() {
     // Filtramos los módulos que pertenecen a esta categoría y coinciden con la búsqueda
     const items = modules.filter(
       (m) =>
-        (isLevelProjects ? projectMatchesFilter(m, activeFilter) : m.cat === cat) &&
+        (isLevelProjects ? projectMatchesFilter(m, activeFilter) : (m.cat === cat && (cat !== "proyectos" || projectSubFilter === "all" || projectMatchesFilter(m, projectSubFilter)))) &&
         (m.title.toLowerCase().includes(q) ||
           m.desc.toLowerCase().includes(q) ||
           m.tag.toLowerCase().includes(q) ||
@@ -1711,6 +1720,56 @@ function render() {
     const catDone = items.filter((it) => progressMap[it.href]?.completed).length;
     const catDoneTag = catDone > 0 ? ` <span class="tag">${catDone}/${items.length} ✓</span>` : "";
     sec.innerHTML = `<h2 class="course-title">${titles[cat]} <span class="tag">${items.length}</span>${catDoneTag}</h2>`; // Actualiza contenido en el DOM
+
+    // Barra de subfiltros exclusiva para la sección de Proyectos (Todos, HTML y CSS, JavaScript, Node.js)
+    if (cat === "proyectos" && !isLevelProjects) {
+      const subBar = document.createElement("div");
+      subBar.className = "filters proj-subfilters";
+      subBar.style.marginBottom = "16px";
+      const subOpts = [
+        { id: "all", label: "Todos" },
+        { id: "htmlcss", label: "HTML y CSS" },
+        { id: "js", label: "JavaScript" },
+        { id: "node", label: "Node.js" },
+      ];
+      subOpts.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-btn" + (projectSubFilter === opt.id ? " active" : "");
+        btn.textContent = opt.label;
+        btn.addEventListener("click", () => {
+          projectSubFilter = opt.id;
+          render();
+        });
+        subBar.appendChild(btn);
+      });
+      sec.appendChild(subBar);
+    }
+
+    // Barra de subfiltros para las secciones de JavaScript (Todos, Junior, Mid, Master)
+    if (["junior", "mid", "master"].includes(cat)) {
+      const jsBar = document.createElement("div");
+      jsBar.className = "proj-subfilters js-subfilters";
+      const jsOpts = [
+        { id: "all", label: "Todos" },
+        { id: "junior", label: "JS Junior" },
+        { id: "mid", label: "JS Mid" },
+        { id: "master", label: "JS Master" },
+      ];
+      jsOpts.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "filter-btn" + (activeFilter === opt.id ? " active" : "");
+        btn.textContent = opt.label;
+        btn.addEventListener("click", () => {
+          activeFilter = opt.id;
+          filterBtns.forEach((b) => b.classList.toggle("active", b.dataset.filter === opt.id));
+          render();
+        });
+        jsBar.appendChild(btn);
+      });
+      sec.appendChild(jsBar);
+    }
 
     // Creamos el contenedor en cuadrícula para las tarjetas de esta categoría
     const grid = document.createElement("div");

@@ -1,0 +1,73 @@
+<!doctype html>
+<!-- Documento HTML5 de la interfaz gráfica del Gestor de Tareas (Node.js + JSON + NDJSON) -->
+<html lang="es">
+<head>
+  <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
+  <meta charset="UTF-8" />
+  <!-- Ajuste responsivo al ancho real de la pantalla en móvil y escritorio -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Título mostrado en la pestaña del navegador -->
+  <title>Gestor de Tareas — Proyecto Node.js</title>
+  <!-- Preconexión a Google Fonts para acelerar la descarga de tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fuentes Fira Code (código/JSON) y Outfit (interfaz) -->
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Hoja de estilos externa con el tema oscuro neón y scrollbars personalizados -->
+  <link rel="stylesheet" href="./styles.css" />
+  <!-- Lógica externa del frontend; defer ejecuta el script cuando el DOM ya está construido -->
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <!-- Contenedor principal centrado con ancho máximo de 1040px -->
+  <div class="container">
+    <!-- Barra superior: título del proyecto, badge de modo activo y botones de navegación -->
+    <header class="topbar">
+      <div class="title-wrap">
+        <h1>✅ Gestor de Tareas (Node.js + JSON + NDJSON)</h1>
+        <p>Proyecto práctico: <code>node:http</code>, <code>fs/promises</code>, <code>crypto.randomUUID()</code> y <code>EventEmitter</code>.</p>
+      </div>
+      <!-- Zona derecha de acciones e indicadores -->
+      <div class="actions">
+        <!-- Indicador dinámico: cambia entre Modo Node.js (real) y Modo Demo (localStorage) -->
+        <span class="pill" id="modeBadge">Detectando entorno...</span>
+        <!-- Botón directo a la sección filtrada de Proyectos en el portal del curso -->
+        <a class="btn-link btn-projects" id="btnProjects" href="../../../../index.html?filter=proyectos">🚀 Proyectos</a>
+        <!-- Botón para regresar a la vista general del portal del curso -->
+        <a class="btn-link" id="btnPortal" href="../../../../index.html">🏠 Portal</a>
+      </div>
+    </header>
+
+    <!-- Rejilla de 2 columnas: izquierda gestión de tareas, derecha visores JSON/NDJSON -->
+    <div class="grid">
+      <!-- Columna izquierda: formulario de alta, mensajes de error y lista interactiva -->
+      <section class="panel">
+        <h2>📋 Tareas</h2>
+        <!-- Formulario conectado al listener 'submit' en public/app.js -->
+        <form class="task-form" id="taskForm">
+          <!-- Campo de texto para escribir la descripción de la nueva tarea -->
+          <input id="taskInput" type="text" placeholder="Escribe una tarea (ej. Practicar Node.js)..." autocomplete="off" />
+          <!-- Botón de envío del formulario -->
+          <button class="btn-add" type="submit">+ Agregar</button>
+        </form>
+        <!-- Contenedor reservado para mostrar errores de validación o red -->
+        <div class="error-msg" id="errorBox"></div>
+        <!-- Lista dinámica donde JS inserta cada tarea como <li> -->
+        <ul class="task-list" id="taskList"></ul>
+        <!-- Texto informativo que indica dónde se están guardando los datos -->
+        <p class="hint" id="serverHint"></p>
+      </section>
+
+      <!-- Columna derecha: inspección en tiempo real de ambos archivos de datos -->
+      <section class="panel">
+        <h2>📄 Vista en vivo: <code>data/tareas.json</code></h2>
+        <!-- Bloque preformateado que muestra el arreglo JSON indentado -->
+        <pre class="code-view" id="jsonPreview">[]</pre>
+        <h2>🌊 Vista en vivo: <code>data/eventos.ndjson</code></h2>
+        <!-- Bloque preformateado que muestra una línea JSON por cada evento registrado -->
+        <pre class="code-view" id="ndjsonPreview">(sin eventos)</pre>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

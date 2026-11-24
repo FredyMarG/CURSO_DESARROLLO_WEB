@@ -273,6 +273,14 @@ h1 {
     color: var(--cyan);
 }
 
+/* Barra de subfiltros dentro de las secciones (Proyectos y JavaScript) */
+.proj-subfilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 12px 0 22px;
+}
+
 /* Contenedor de cada sección de curso */
 .course-section {
     /* Separación inferior entre bloques de cursos */

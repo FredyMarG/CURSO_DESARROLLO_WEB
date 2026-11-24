@@ -1,0 +1,16 @@
+{
+  "name": "tareas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "web": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
