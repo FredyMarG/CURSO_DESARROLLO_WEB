@@ -1,0 +1,370 @@
+<!doctype html>
+<!-- Módulo 08 de Node.js: Criptografía y Seguridad con node:crypto -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Metadato descriptivo del módulo -->
+    <meta name="description" content="Módulo 08: Criptografía y Seguridad en Node.js con node:crypto — randomUUID, randomBytes, SHA-256, HMAC, scrypt y timingSafeEqual." />
+    <title>Criptografía y Seguridad en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido de diapositivas y laboratorio -->
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <!-- Temas neón, navegación secuencial y acceso directo a apuntes -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/modules/course-polish.css" />
+    <script src="../../RESOURCES COURSE/modules/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · CRYPTO Y SEGURIDAD</span>
+            <div class="brand-title"><span>🔐</span><span>Criptografía y Seguridad</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Criptografía y Seguridad">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 08 · Seguridad Backend</span>
+                    <span class="badge badge-cyan">node:crypto · UUID · Tokens</span>
+                    <span class="badge badge-purple">SHA-256 · HMAC · scrypt</span>
+                </div>
+                <h1 class="hero-title">Criptografía y Seguridad<br /><span class="gradient-text">con node:crypto</span></h1>
+                <p class="hero-subtitle">
+                    Aprende a proteger tus aplicaciones Node.js sin librerías externas: genera identificadores y tokens seguros, verifica integridad con <code>SHA-256</code>, firma mensajes con <code>HMAC</code> y guarda contraseñas con <code>scrypt</code> + <code>timingSafeEqual()</code>.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🎲</div>
+                        <h3>1. UUID y Tokens</h3>
+                        <p><code>randomUUID()</code> y <code>randomBytes()</code> frente a <code>Math.random()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🔏</div>
+                        <h3>2. SHA-256 y HMAC</h3>
+                        <p>Integridad de datos y firmas autenticadas con clave secreta.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🔑</div>
+                        <h3>3. scrypt y timingSafeEqual</h3>
+                        <p>Derivación de contraseñas con sal única y comparación segura.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Genera hashes SHA-256, firmas HMAC y UUIDs reales en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: RANDOMUUID Y RANDOMBYTES -->
+        <section class="slide" data-slide="2" data-title="randomUUID() y randomBytes()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ALEATORIEDAD CRIPTOGRÁFICA</span>
+                <h2 class="slide-title"><code>randomUUID()</code> y <code>randomBytes()</code></h2>
+            </div>
+            <div class="glass-card">
+                <ul class="styled-list" style="margin-bottom:12px;">
+                    <li><strong><code>randomUUID()</code>:</strong> genera un UUID v4 único para identificar registros, pedidos o trazas (no es un secreto).</li>
+                    <li><strong><code>randomBytes(32)</code>:</strong> genera 32 bytes aleatorios criptográficamente seguros ideales para tokens de sesión, sales o API keys.</li>
+                </ul>
+                <pre class="code-block"><code>import { randomUUID, randomBytes } from 'node:crypto';
+
+const idPedido = randomUUID();
+const tokenSesion = randomBytes(32).toString('hex'); // 64 caracteres hex
+console.log({ idPedido, tokenSesion });</code></pre>
+                <div class="tip-box warn" style="margin-top:12px;">
+                    <strong>⚠️ Nunca uses <code>Math.random()</code> para seguridad:</strong> Es predecible y no sirve para tokens, códigos de recuperación ni claves.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: CREATEHASH Y CREATEHMAC -->
+        <section class="slide" data-slide="3" data-title="SHA-256 y HMAC">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · INTEGRIDAD Y AUTENTICIDAD</span>
+                <h2 class="slide-title"><code>createHash('sha256')</code> vs <code>createHmac()</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Herramienta</th><th>Qué garantiza</th><th>Uso típico</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>createHash('sha256')</code></td><td><strong>Integridad:</strong> detecta si el dato cambió</td><td>Huellas de archivos o documentos</td></tr>
+                        <tr><td><code>createHmac('sha256', secreto)</code></td><td><strong>Integridad + Autenticidad</strong> con clave secreta</td><td>Validar webhooks y mensajes firmados</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>import { createHash, createHmac } from 'node:crypto';
+
+const huella = createHash('sha256').update('Archivo oficial').digest('hex');
+const firma = createHmac('sha256', 'mi-secreto').update('evento=pago').digest('hex');</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: SCRYPT PARA CONTRASENAS -->
+        <section class="slide" data-slide="4" data-title="Contraseñas con scrypt y Sal">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · ALMACENAMIENTO SEGURO</span>
+                <h2 class="slide-title">Derivación de Contraseñas con <code>scrypt</code> y Sal Única</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>import { scryptSync, randomBytes } from 'node:crypto';
+
+function hashPassword(password) {
+  const sal = randomBytes(16).toString('hex'); // Sal única por usuario
+  const derivado = scryptSync(password, sal, 64).toString('hex');
+  return `${sal}:${derivado}`;
+}</code></pre>
+                <div class="tip-box warn">
+                    <strong>⚠️ Regla de oro:</strong> Nunca guardes contraseñas con <code>SHA-256</code> ni <code>MD5</code>. Son demasiado rápidos; usa <code>scrypt</code> con una sal aleatoria diferente para cada usuario.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: TIMINGSAFEEQUAL -->
+        <section class="slide" data-slide="5" data-title="timingSafeEqual()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PREVENCIÓN DE TIMING ATTACKS</span>
+                <h2 class="slide-title">Comparación en Tiempo Constante: <code>timingSafeEqual()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    El operador <code>===</code> se detiene en el primer byte distinto, lo que permite filtrar secretos midiendo tiempos. Usa <code>timingSafeEqual()</code> con dos <code>Buffer</code> de igual longitud:
+                </p>
+                <pre class="code-block"><code>import { scryptSync, timingSafeEqual } from 'node:crypto';
+
+function verificarPassword(password, guardado) {
+  const [sal, hashHex] = guardado.split(':');
+  const hashOriginal = Buffer.from(hashHex, 'hex');
+  const hashIntento = scryptSync(password, sal, 64);
+
+  if (hashOriginal.length !== hashIntento.length) return false;
+  return timingSafeEqual(hashOriginal, hashIntento);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas de Seguridad">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · SEGURIDAD EN BACKEND</span>
+                <h2 class="slide-title">Buenas Prácticas con <code>node:crypto</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Riesgo que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Usar <code>scrypt</code> + sal aleatoria por usuario</td><td>Descifrado masivo con tablas arcoíris o fuerza bruta</td></tr>
+                        <tr><td>Comparar secretos con <code>timingSafeEqual()</code></td><td><em>Timing attacks</em> sobre firmas HMAC o contraseñas</td></tr>
+                        <tr><td>Usar <code>randomBytes()</code> en lugar de <code>Math.random()</code></td><td>Predicción de tokens de sesión o recuperación</td></tr>
+                        <tr><td>Guardar secretos en variables de entorno (<code>.env</code>)</td><td>Exposición de claves privadas en el repositorio Git</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Criptografía">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:CRYPTO</span>
+                <h2 class="slide-title">🎛️ Simulador de Hashes, HMAC, <code>scrypt</code> y Tokens</h2>
+                <p class="slide-lead">Compara qué algoritmo elegir según tu caso de uso: IDs, tokens, integridad, firmas o contraseñas.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Caso de Uso</label>
+                        <select id="cryptoSimMode">
+                            <option value="tokens">randomUUID() vs randomBytes(32)</option>
+                            <option value="hash">SHA-256 (Integridad) vs HMAC (Autenticidad)</option>
+                            <option value="scrypt">scrypt + sal + timingSafeEqual() (Contraseñas)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="cryptoSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="cryptoSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: Criptografía y Seguridad">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Seguridad con <code>node:crypto</code></h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: scrypt está diseñado para derivación lenta de contraseñas y siempre debe acompañarse de una sal única." data-err="SHA-256 simple y Math.random() no son seguros para contraseñas; usa scrypt con sal única.">
+                    <div class="quiz-q-title">1. ¿Qué función de <code>node:crypto</code> es adecuada para almacenar contraseñas de usuarios?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">createHash('sha256') sin sal</button>
+                        <button class="quiz-option" data-opt="b">scrypt / scryptSync con sal aleatoria única</button>
+                        <button class="quiz-option" data-opt="c">randomUUID()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: timingSafeEqual compara dos Buffers en tiempo constante evitando filtrar bytes por tiempo." data-err="=== se detiene en el primer carácter diferente; timingSafeEqual tarda siempre lo mismo.">
+                    <div class="quiz-q-title">2. ¿Qué método evita ataques de tiempo (<em>timing attacks</em>) al comparar firmas HMAC o hashes?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">===</button>
+                        <button class="quiz-option" data-opt="b">JSON.stringify()</button>
+                        <button class="quiz-option" data-opt="c">timingSafeEqual(bufA, bufB)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: HMAC combina un hash con una clave secreta para verificar integridad y autenticidad." data-err="createHash no usa clave secreta; createHmac sí incorpora el secreto compartido.">
+                    <div class="quiz-q-title">3. ¿Qué diferencia a <code>createHmac('sha256', secreto)</code> de <code>createHash('sha256')</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">HMAC usa una clave secreta para autenticar quién firmó el mensaje</button>
+                        <button class="quiz-option" data-opt="b">HMAC siempre devuelve un UUID de 36 caracteres</button>
+                        <button class="quiz-option" data-opt="c">HMAC reemplaza la necesidad de HTTPS</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Criptografía y Seguridad">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Criptografía</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Calculando SHA-256 y HMAC...&lt;/div&gt;
+&lt;script&gt;
+  // Cálculo real de SHA-256 y firma HMAC-SHA256 usando Web Crypto
+  (async () =&gt; {
+    const enc = new TextEncoder();
+    const mensaje = &#x27;evento=pago.aprobado&amp;id=42&#x27;;
+
+    const shaBuf = await crypto.subtle.digest(&#x27;SHA-256&#x27;, enc.encode(mensaje));
+    const shaHex = [...new Uint8Array(shaBuf)].map(b =&gt; b.toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;);
+
+    const key = await crypto.subtle.importKey(&#x27;raw&#x27;, enc.encode(&#x27;secreto-api&#x27;), { name: &#x27;HMAC&#x27;, hash: &#x27;SHA-256&#x27; }, false, [&#x27;sign&#x27;]);
+    const hmacBuf = await crypto.subtle.sign(&#x27;HMAC&#x27;, key, enc.encode(mensaje));
+    const hmacHex = [...new Uint8Array(hmacBuf)].map(b =&gt; b.toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;);
+
+    document.getElementById(&#x27;out&#x27;).innerHTML =
+      `&lt;div&gt;&lt;strong&gt;Mensaje:&lt;/strong&gt; ${mensaje}&lt;/div&gt;` +
+      `&lt;div style=&quot;word-break:break-all;&quot;&gt;&lt;strong&gt;SHA-256:&lt;/strong&gt; ${shaHex}&lt;/div&gt;` +
+      `&lt;div style=&quot;word-break:break-all;&quot;&gt;&lt;strong&gt;HMAC:&lt;/strong&gt; ${hmacHex}&lt;/div&gt;`;
+  })();
+&lt;/script&gt;">SHA-256 + Firma HMAC</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Generación segura de UUID v4 y token hexadecimal (equivalente a randomBytes)
+  const uuid = crypto.randomUUID();
+  const bytes = new Uint8Array(16);
+  crypto.getRandomValues(bytes);
+  const token = [...bytes].map(b =&gt; b.toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;strong&gt;randomUUID():&lt;/strong&gt; ${uuid}&lt;/div&gt;` +
+    `&lt;div&gt;&lt;strong&gt;Token seguro (16 bytes hex):&lt;/strong&gt; ${token}&lt;/div&gt;`;
+&lt;/script&gt;">UUID v4 + Token Seguro</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Calculando SHA-256 y HMAC...&lt;/div&gt;
+&lt;script&gt;
+  // Cálculo real de SHA-256 y firma HMAC-SHA256 usando Web Crypto
+  (async () =&gt; {
+    const enc = new TextEncoder();
+    const mensaje = &#x27;evento=pago.aprobado&amp;id=42&#x27;;
+
+    const shaBuf = await crypto.subtle.digest(&#x27;SHA-256&#x27;, enc.encode(mensaje));
+    const shaHex = [...new Uint8Array(shaBuf)].map(b =&gt; b.toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;);
+
+    const key = await crypto.subtle.importKey(&#x27;raw&#x27;, enc.encode(&#x27;secreto-api&#x27;), { name: &#x27;HMAC&#x27;, hash: &#x27;SHA-256&#x27; }, false, [&#x27;sign&#x27;]);
+    const hmacBuf = await crypto.subtle.sign(&#x27;HMAC&#x27;, key, enc.encode(mensaje));
+    const hmacHex = [...new Uint8Array(hmacBuf)].map(b =&gt; b.toString(16).padStart(2, &#x27;0&#x27;)).join(&#x27;&#x27;);
+
+    document.getElementById(&#x27;out&#x27;).innerHTML =
+      `&lt;div&gt;&lt;strong&gt;Mensaje:&lt;/strong&gt; ${mensaje}&lt;/div&gt;` +
+      `&lt;div style=&quot;word-break:break-all;&quot;&gt;&lt;strong&gt;SHA-256:&lt;/strong&gt; ${shaHex}&lt;/div&gt;` +
+      `&lt;div style=&quot;word-break:break-all;&quot;&gt;&lt;strong&gt;HMAC:&lt;/strong&gt; ${hmacHex}&lt;/div&gt;`;
+  })();
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('cryptoSimMode');
+            const stage = document.getElementById('cryptoSimStage');
+            const code = document.getElementById('cryptoSimCode');
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el escenario y el código según la selección
+            function update() {
+                if (mode.value === 'tokens') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">randomUUID() ➔ ID único v4 (no secreto) para registros</div>
+                        <div style="color:#00ff88;font-weight:700;">randomBytes(32).toString('hex') ➔ 64 chars seguros para sesiones/API keys</div>
+                        <div style="color:#ff3358;">Math.random() ➔ ❌ predecible, nunca usar en seguridad</div>
+                    `;
+                    code.textContent = `const id = randomUUID();\nconst token = randomBytes(32).toString('hex');`;
+                } else if (mode.value === 'hash') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">createHash('sha256') ➔ comprueba integridad (si el dato cambió)</div>
+                        <div style="color:#00ff88;font-weight:700;">createHmac('sha256', secreto) ➔ comprueba integridad + autoría con clave</div>
+                    `;
+                    code.textContent = `const firma = createHmac('sha256', process.env.WEBHOOK_SECRET)\n  .update(payload)\n  .digest('hex');`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">1. sal = randomBytes(16) + scryptSync(password, sal, 64)</div>
+                        <div style="color:#38bdf8;">2. timingSafeEqual(hashOriginal, hashIntento) ➔ comparación en tiempo constante</div>
+                        <div style="color:#fbbf24;">Protege contra fuerza bruta, tablas arcoíris y timing attacks.</div>
+                    `;
+                    code.textContent = `const ok = hashOriginal.length === hashIntento.length &&\n  timingSafeEqual(hashOriginal, hashIntento);`;
+                }
+            }
+
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

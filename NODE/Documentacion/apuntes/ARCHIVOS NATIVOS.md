@@ -136,38 +136,32 @@ console.log('CPUs lógicas:', os.cpus().length);
 
 **Aplicación:** registrar diagnósticos de un proceso o elegir una ubicación temporal. La memoria libre cambia constantemente; no es una medida permanente del rendimiento. Evita registrar información privada del equipo innecesariamente.
 
-## 5. `node:events`: comunicación por eventos
+## 5. `node:events` y `node:crypto` (Módulos dedicados)
 
-Un evento anuncia que ocurrió algo. `EventEmitter` permite registrar escuchas (`on`), emitir eventos (`emit`) y ejecutar escuchas una sola vez (`once`).
+Por su importancia en arquitecturas reales y seguridad backend, **`node:events` (junto con `node:stream`)** y **`node:crypto`** cuentan ahora con sus propias guías completas e independientes:
+- **Módulo 07:** [EVENTOS Y STREAMS.md](./EVENTOS%20Y%20STREAMS.md) (`EventEmitter`, manejo de `'error'`, `Readable`/`Writable` y `pipeline()`).
+- **Módulo 08:** [CRYPTO Y SEGURIDAD.md](./CRYPTO%20Y%20SEGURIDAD.md) (`randomUUID`, `randomBytes`, `SHA-256`, `HMAC`, `scrypt` y `timingSafeEqual`).
 
-```js
-import { EventEmitter } from 'node:events';
-const bus = new EventEmitter();
-bus.on('curso:creado', (curso) => console.log('Nuevo curso:', curso.titulo));
-bus.once('inicio', () => console.log('Sistema iniciado'));
-bus.emit('inicio');
-bus.emit('inicio'); // No vuelve a activar once
-bus.emit('curso:creado', { titulo: 'Node.js' });
-```
+## 6B. `node:process`, `node:console` y `node:timers/promises`
 
-Los listeners normales se invocan **sincrónicamente** cuando se llama a `emit`. `EventEmitter` no espera automáticamente las promesas devueltas por listeners asíncronos. Un evento `'error'` sin listener puede terminar el proceso: trata errores de forma explícita.
+Además de archivos y sistema, Node.js expone módulos nativos esenciales para controlar el proceso, depurar salidas y programar esperas asíncronas:
 
-**Caso CURSO_DESARROLLO_WEB:** después de guardar un apunte, emitir `apunte:creado` para actualizar una bitácora o informar a otros componentes.
-
-## 6. `node:crypto`: identificadores y huellas
-
-`crypto` ofrece funciones criptográficas nativas. En el proyecto usaremos `randomUUID()` para crear identificadores y `createHash()` para calcular una huella SHA-256 de contenido.
+- **`node:process`:** permite leer variables de entorno (`process.env`), el directorio de trabajo (`process.cwd()`), el ID del proceso (`process.pid`), el uso de memoria (`process.memoryUsage()`) y definir el código de salida (`process.exitCode = 1`).
+- **`node:console`:** ofrece utilidades de depuración más allá de `console.log()`, como `console.table()` para arreglos/objetos, `console.time()` / `console.timeEnd()` para medir tiempos, `console.warn()` y `console.error()`.
+- **`node:timers` / `node:timers/promises`:** permite usar `setTimeout`, `setInterval` y `setImmediate`; con `node:timers/promises` puedes esperar con `await setTimeout(500)` directamente en ESM sin envolver callbacks.
 
 ```js
-import { randomUUID, createHash } from 'node:crypto';
-const id = randomUUID();
-const huella = createHash('sha256').update('Contenido de la lección').digest('hex');
-console.log({ id, huella });
-```
+import process from 'node:process';
+import console from 'node:console';
+import { setTimeout as esperar } from 'node:timers/promises';
 
-- **UUID:** identificador con probabilidad de colisión extremadamente baja; no es un secreto.
-- **Hash SHA-256:** resumen determinista del contenido; no permite recuperar directamente el texto original.
-- **Importante:** un hash SHA-256 simple **no** es adecuado para almacenar contraseñas. Para contraseñas se requieren algoritmos de derivación apropiados (por ejemplo, `scrypt`) con sal única y parámetros revisados.
+console.time('tarea');
+console.log('PID:', process.pid, '| Carpeta:', process.cwd());
+console.table([{ modulo: 'fs', estado: 'listo' }, { modulo: 'timers', estado: 'listo' }]);
+
+await esperar(200);
+console.timeEnd('tarea');
+```
 
 ## 7. Analogía y diagramas
 

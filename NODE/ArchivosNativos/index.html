@@ -50,11 +50,11 @@
                 <div class="hero-badges">
                     <span class="badge badge-emerald">Módulo 06 · APIs Nativas</span>
                     <span class="badge badge-cyan">node:fs · node:path · node:os</span>
-                    <span class="badge badge-purple">node:events · node:crypto</span>
+                    <span class="badge badge-purple">node:process · node:console · node:timers</span>
                 </div>
                 <h1 class="hero-title">Módulos Nativos <br /><span class="gradient-text">y Archivos</span></h1>
                 <p class="hero-subtitle">
-                    Aprende a usar las bibliotecas integradas de Node.js sin dependencias externas: manipula archivos y JSON con <code>node:fs/promises</code>, construye rutas portables con <code>node:path</code>, consulta el sistema con <code>node:os</code>, emite eventos con <code>node:events</code> y genera UUID/hashes con <code>node:crypto</code>.
+                    Aprende a usar las bibliotecas integradas de Node.js sin dependencias externas: manipula archivos y JSON con <code>node:fs/promises</code>, construye rutas portables con <code>node:path</code>, consulta el sistema con <code>node:os</code>, controla el proceso con <code>node:process</code>, depura con <code>node:console</code> y usa <code>node:timers/promises</code>.
                 </p>
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2">
@@ -69,13 +69,13 @@
                     </div>
                     <div class="hero-card" data-jump="5">
                         <div class="hero-card-icon">🔔</div>
-                        <h3>3. events y crypto</h3>
-                        <p><code>EventEmitter</code>, <code>randomUUID()</code> y <code>createHash('sha256')</code>.</p>
+                        <h3>3. process, console y timers</h3>
+                        <p><code>process.env</code>, <code>console.table()</code> y <code>timers/promises</code>.</p>
                     </div>
                     <div class="hero-card" data-jump="7">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
-                        <p>Prueba rutas, eventos, hashes y almacenamiento JSON en vivo.</p>
+                        <p>Prueba rutas seguras, sistema operativo, process y timers en vivo.</p>
                     </div>
                 </div>
             </div>
@@ -153,28 +153,32 @@ console.log('CPUs lógicas:', os.cpus().length);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 5: NODE:EVENTS Y NODE:CRYPTO -->
-        <section class="slide" data-slide="5" data-title="node:events y node:crypto">
+        <!-- SLIDE 6: NODE:PROCESS, NODE:CONSOLE Y NODE:TIMERS -->
+        <section class="slide" data-slide="5" data-title="node:process, console y timers">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 5 · EVENTOS E IDENTIDAD</span>
-                <h2 class="slide-title"><code>EventEmitter</code> (<code>node:events</code>) y <code>node:crypto</code></h2>
+                <span class="slide-kicker">DIAPOSITIVA 6 · PROCESO, DEPURACIÓN Y TEMPORIZADORES</span>
+                <h2 class="slide-title"><code>node:process</code>, <code>node:console</code> y <code>node:timers/promises</code></h2>
             </div>
             <div class="glass-card">
-                <pre class="code-block" style="margin-bottom:12px;"><code>import { EventEmitter } from 'node:events';
-import { randomUUID, createHash } from 'node:crypto';
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Módulo</th><th>Utilidades clave</th><th>Uso habitual</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>node:process</code></td><td><code>env</code>, <code>cwd()</code>, <code>pid</code>, <code>exitCode</code>, <code>memoryUsage()</code></td><td>Leer configuración, rutas y controlar el cierre del proceso</td></tr>
+                        <tr><td><code>node:console</code></td><td><code>table()</code>, <code>time()</code> / <code>timeEnd()</code>, <code>warn()</code>, <code>error()</code></td><td>Medir rendimiento y visualizar arreglos en tablas limpias</td></tr>
+                        <tr><td><code>node:timers/promises</code></td><td><code>await setTimeout(ms)</code>, <code>setInterval(ms)</code></td><td>Pausas asíncronas limpias sin envolver callbacks manualmente</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>import process from 'node:process';
+import console from 'node:console';
+import { setTimeout as esperar } from 'node:timers/promises';
 
-const bus = new EventEmitter();
-bus.once('inicio', () => console.log('Sistema iniciado'));
-bus.on('apunte:creado', (apunte) => console.log('Nuevo apunte:', apunte.id));
-
-bus.emit('inicio');
-bus.emit('apunte:creado', {
-  id: randomUUID(),
-  huella: createHash('sha256').update('Contenido').digest('hex')
-});</code></pre>
-                <div class="tip-box warn">
-                    <strong>⚠️ Seguridad con crypto:</strong> SHA-256 sirve para verificar integridad, <strong>no</strong> para guardar contraseñas. Para contraseñas usa algoritmos de derivación como <code>scrypt</code> con sal única.
-                </div>
+console.time('lote');
+console.log('PID:', process.pid, '| Carpeta:', process.cwd());
+console.table([{ modulo: 'process', ok: true }, { modulo: 'timers', ok: true }]);
+await esperar(150);
+console.timeEnd('lote');</code></pre>
             </div>
         </section>
 
@@ -203,8 +207,8 @@ bus.emit('apunte:creado', {
         <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Módulos Nativos">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · APIS NATIVAS</span>
-                <h2 class="slide-title">🎛️ Simulador de <code>fs</code>, <code>path</code>, <code>events</code> y <code>crypto</code></h2>
-                <p class="slide-lead">Explora qué devuelve cada módulo nativo y cómo se combinan en un gestor de apuntes local.</p>
+                <h2 class="slide-title">🎛️ Simulador de Módulos Nativos</h2>
+                <p class="slide-lead">Explora qué devuelve cada módulo nativo (<code>fs</code>, <code>path</code>, <code>os</code>, <code>process</code>, <code>console</code> y <code>timers</code>) en Node.js.</p>
             </div>
             <div class="sim-panel">
                 <div class="sim-controls">
@@ -213,8 +217,8 @@ bus.emit('apunte:creado', {
                         <select id="nativeSimMode">
                             <option value="fs">node:fs/promises (mkdir + writeFile + ENOENT)</option>
                             <option value="path">node:path (join, resolve, extname, import.meta.url)</option>
-                            <option value="events">node:events (on, once, emit)</option>
-                            <option value="crypto">node:crypto (randomUUID + SHA-256)</option>
+                            <option value="os">node:os (platform, arch, freemem, tmpdir, cpus)</option>
+                            <option value="process">node:process + console + timers/promises</option>
                         </select>
                     </div>
                 </div>
@@ -293,7 +297,7 @@ bus.emit('apunte:creado', {
   document.getElementById(&#x27;out&#x27;).innerHTML =
     logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;) +
     `&lt;div&gt;📦 JSON guardado: ${JSON.stringify(nuevoApunte)}&lt;/div&gt;`;
-&lt;/script&gt;">Gestor de Apuntes + Eventos</button>
+&lt;/script&gt;">Almacenamiento JSON (node:fs)</button>
                     <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   // Simulación de path.join y sanitización básica de rutas
@@ -313,6 +317,24 @@ bus.emit('apunte:creado', {
     }
   }).join(&#x27;&#x27;);
 &lt;/script&gt;">Validación Segura de Rutas</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Midiendo temporizador...&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de node:process + console.table + node:timers/promises
+  const esperar = ms =&gt; new Promise(r =&gt; setTimeout(r, ms));
+  (async () =&gt; {
+    const t0 = performance.now();
+    await esperar(180);
+    const duracion = (performance.now() - t0).toFixed(1);
+    const filas = [
+      { modulo: &#x27;node:process&#x27;, ejemplo: &#x27;pid / cwd() / env&#x27;, estado: &#x27;activo&#x27; },
+      { modulo: &#x27;node:console&#x27;, ejemplo: &#x27;table() / timeEnd()&#x27;, estado: &#x27;activo&#x27; },
+      { modulo: &#x27;node:timers/promises&#x27;, ejemplo: `await setTimeout(180) → ${duracion}ms`, estado: &#x27;ok&#x27; }
+    ];
+    document.getElementById(&#x27;out&#x27;).innerHTML =
+      &#x27;&lt;strong&gt;📊 Tabla estilo console.table():&lt;/strong&gt;&#x27; +
+      filas.map(f =&gt; `&lt;div&gt;• ${f.modulo} | ${f.ejemplo} | [${f.estado}]&lt;/div&gt;`).join(&#x27;&#x27;);
+  })();
+&lt;/script&gt;">process + console + timers</button>
                 </div>
                 <div class="lab-split">
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
@@ -369,20 +391,20 @@ bus.emit('apunte:creado', {
                         <div style="color:#fbbf24;font-weight:700;">fileURLToPath(import.meta.url) ➔ ruta exacta del módulo ESM actual</div>
                     `;
                     code.textContent = `const archivoActual = fileURLToPath(import.meta.url);\nconst carpetaActual = path.dirname(archivoActual);\npath.join(carpetaActual, 'datos', 'cursos.json');`;
-                } else if (mode.value === 'events') {
+                } else if (mode.value === 'os') {
                     stage.innerHTML = `
-                        <div style="color:#38bdf8;">bus.once('inicio', fn) ➔ se ejecuta solo en el primer emit('inicio')</div>
-                        <div style="color:#00ff88;font-weight:700;">bus.emit('apunte:creado', payload) ➔ dispara listeners síncronamente</div>
-                        <div style="color:#ff3358;">Sin listener en 'error', un emit('error') detiene el proceso</div>
+                        <div style="color:#38bdf8;">os.platform() / os.arch() ➔ 'win32' / 'x64'</div>
+                        <div style="color:#00ff88;font-weight:700;">os.cpus().length ➔ 8 núcleos lógicos | os.freemem() en MB</div>
+                        <div style="color:#fbbf24;">os.tmpdir() ➔ ruta de carpeta temporal del sistema operativo</div>
                     `;
-                    code.textContent = `bus.once('inicio', () => console.log('Listo'));\nbus.on('apunte:creado', (apunte) => console.log(apunte.id));\nbus.emit('apunte:creado', { id: 'uuid-1' });`;
+                    code.textContent = `import os from 'node:os';\nconsole.log(os.platform(), os.arch(), os.tmpdir());\nconsole.log('CPUs:', os.cpus().length);`;
                 } else {
                     stage.innerHTML = `
-                        <div style="color:#00ff88;font-weight:700;">randomUUID() ➔ '550e8400-e29b-41d4-a716-446655440000'</div>
-                        <div style="color:#38bdf8;">createHash('sha256').update('Texto').digest('hex') ➔ 64 caracteres hex</div>
-                        <div style="color:#fbbf24;">Para contraseñas usa scrypt con sal única, nunca SHA-256 simple.</div>
+                        <div style="color:#38bdf8;">process.pid: 14820 | process.cwd(): C:\\curso-node | exitCode: 0</div>
+                        <div style="color:#00ff88;font-weight:700;">console.table(...) + console.time('lote') ➔ lote: 151.4ms</div>
+                        <div style="color:#fbbf24;">await setTimeout(150) desde 'node:timers/promises' sin callbacks</div>
                     `;
-                    code.textContent = `const id = randomUUID();\nconst huella = createHash('sha256').update('Contenido').digest('hex');`;
+                    code.textContent = `import { setTimeout as esperar } from 'node:timers/promises';\nconsole.time('lote');\nawait esperar(150);\nconsole.timeEnd('lote');`;
                 }
             }
 

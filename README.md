@@ -62,16 +62,18 @@ CURSO_DESARROLLO_WEB/
 - **Práctica:** 24 módulos interactivos, 9 ejercicios avanzados en `EJERCICIOS/` y exhibición unificada en [JAVASCRIPT/PROYECTOS/index.html](./JAVASCRIPT/PROYECTOS/index.html).
 
 ### 5. [Node.js](./NODE)
-- **Documentación (`NODE/Documentacion/`):** 8 guías completas (`INTRODUCCION.md`, `FUNDAMENTOS.md`, `INSTALACION.md`, `JAVASCRIPT MODERNO.md`, `ARQUITECTURA INTERNA ASINCRONIA.md`, `ARCHIVOS NATIVOS.md`, `REPL.md`, `MODULOS.md`).
+- **Documentación (`NODE/Documentacion/`):** 10 guías completas (`INTRODUCCION.md` → `MODULOS.md`).
 - **Módulos y Práctica (cada uno con enfoque único, simulador, quiz y laboratorio):**
   - `01. Introducción a Node.js`: qué es Node.js, Frontend vs Backend, Navegador vs Node.js, usos reales y primer script CLI (`hola.js`).
   - `02. Fundamentos de Node.js`: ciclo Cliente-Servidor HTTP, `npm`, `package.json`, `process.argv`, servidor `node:http` y API de bienvenida.
   - `03. Instalación y Entorno`: LTS vs Current, `.msi`, `winget`, `nvm-windows`, `PATH`, PowerShell y `node --watch`.
-  - `04. JavaScript Moderno`: `const`/`let` y TDZ, arrow functions, `map`/`filter`/`reduce`, destructuring, `?.`, `??` e inmutabilidad (`structuredClone`).
-  - `05. Arquitectura Interna y Asincronía`: V8, `libuv`, Event Loop, callbacks, promesas (`all`, `allSettled`, `race`) y `async/await`.
-  - `06. Módulos Nativos y Archivos`: `node:fs/promises`, `node:path`, `node:os`, `node:events` (`EventEmitter`) y `node:crypto`.
-  - `07. REPL`: ciclo Read–Eval–Print–Loop, comandos `.help`/`.save`/`.load`/`.editor` y prototipo `catalogo.js`.
-  - `08. Módulos en Node.js`: CommonJS (`require`/`module.exports`), ESM (`import`/`export`), resolución de rutas, `import()` dinámico y arquitectura por capas.
+  - `04. REPL`: ciclo Read–Eval–Print–Loop, comandos `.help`/`.save`/`.load`/`.editor` y prototipo `catalogo.js`.
+  - `05. JavaScript Moderno`: `const`/`let` y TDZ, arrow functions, `map`/`filter`/`reduce`, destructuring, `?.`, `??` e inmutabilidad (`structuredClone`).
+  - `06. Arquitectura Interna y Asincronía`: V8, `libuv`, Event Loop, callbacks, promesas (`all`, `allSettled`, `race`) y `async/await`.
+  - `07. Módulos Nativos y Archivos`: `node:fs/promises`, `node:path`, `node:os`, `node:process`, `node:console` y `node:timers/promises`.
+  - `08. Eventos y Streams`: `EventEmitter` (`on`, `once`, `off`, `'error'`), `Readable`/`Writable` por *chunks* y `pipeline()`.
+  - `09. Criptografía y Seguridad`: `randomUUID`, `randomBytes`, `SHA-256`, `HMAC`, `scrypt` con sal y `timingSafeEqual()`.
+  - `10. Módulos en Node.js`: CommonJS (`require`/`module.exports`), ESM (`import`/`export`), resolución de rutas, `import()` dinámico y arquitectura por capas.
 
 ---
 

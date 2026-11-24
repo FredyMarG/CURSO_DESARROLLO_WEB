@@ -3,23 +3,6 @@
 
 > Esta guía es educativa. El prototipo no implementa autenticación ni base de datos productiva.
 
-## Índice
-1. Preparación
-2. `const` y `let`
-3. Funciones
-4. Objetos y arrays
-5. Desestructuración
-6. Módulos
-7. Analogía y diagrama
-8. Buenas prácticas y errores comunes
-9. Laboratorio paso a paso
-10. Proyecto integrador
-11. Ejercicios por niveles
-12. Solucionario paso a paso
-13. Evaluación
-14. Hoja de trucos
-15. Resumen técnico y checklist
-
 ## 1. Preparación
 
 Requisitos: Node.js LTS y un editor como VS Code. En PowerShell:

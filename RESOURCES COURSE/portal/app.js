@@ -28,10 +28,19 @@ const modules = [
     desc: "Versiones LTS vs Current, instalador .msi, winget, nvm-windows, PATH, PowerShell y VS Code.", // Descripción breve
     href: "NODE/Instalacion/index.html", // Ruta relativa al módulo interactivo
   },
+
+  // Módulo 03 interactivo de REPL de Node.js
+  {
+    cat: "node", // Categoría Node.js
+    title: "04. REPL de Node.js", // Título visible en la tarjeta
+    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
+    href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
+  },
   // Módulo 04 interactivo de JavaScript Moderno para Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "04. JavaScript Moderno para Node.js", // Título visible en la tarjeta
+    title: "05. JavaScript Moderno para Node.js", // Título visible en la tarjeta
     tag: "9 Slides", // Etiqueta de cantidad de diapositivas
     desc: "ES6+ para Node.js: const/let y TDZ, arrow functions, map/filter/reduce, destructuring, spread/rest, ?. y ??, y módulos ESM.", // Descripción breve
     href: "NODE/JavaScriptModerno/index.html", // Ruta relativa al módulo interactivo
@@ -39,7 +48,7 @@ const modules = [
   // Módulo 05 interactivo de Arquitectura Interna y Asincronía en Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "05. Arquitectura Interna y Asincronía", // Título visible en la tarjeta
+    title: "06. Arquitectura Interna y Asincronía", // Título visible en la tarjeta
     tag: "9 Slides", // Etiqueta de cantidad de diapositivas
     desc: "V8, Event Loop, callbacks error-first, promesas, Promise.allSettled, async/await y tareas concurrentes.", // Descripción breve
     href: "NODE/Asincronia/index.html", // Ruta relativa al módulo interactivo
@@ -47,23 +56,30 @@ const modules = [
   // Módulo 06 interactivo de Módulos Nativos y Archivos en Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "06. Módulos Nativos y Archivos", // Título visible en la tarjeta
+    title: "07. Módulos Nativos y Archivos", // Título visible en la tarjeta
     tag: "9 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "APIs nativas de Node.js: node:fs/promises, node:path, node:os, node:events (EventEmitter) y node:crypto.", // Descripción breve
+    desc: "APIs nativas: node:fs/promises, node:path, node:os, node:process, node:console y node:timers/promises.", // Descripción breve
     href: "NODE/ArchivosNativos/index.html", // Ruta relativa al módulo interactivo
-  },
-  // Módulo 03 interactivo de REPL de Node.js
+  },  // Módulo 07 interactivo de Eventos y Streams en Node.js
   {
-    cat: "node", // Categoría Node.js
-    title: "07. REPL de Node.js", // Título visible en la tarjeta
-    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
-    href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
+    cat: "node",
+    title: "08. Eventos y Streams en Node.js",
+    tag: "9 Slides",
+    desc: "EventEmitter (on, once, off, 'error'), Readable/Writable Streams por chunks, backpressure y pipeline().",
+    href: "NODE/EventosStreams/index.html",
+  },
+  // Módulo 08 interactivo de Criptografía y Seguridad con node:crypto
+  {
+    cat: "node",
+    title: "09. Criptografía y Seguridad",
+    tag: "9 Slides",
+    desc: "node:crypto en backend: randomUUID, randomBytes, SHA-256, HMAC, scrypt con sal y timingSafeEqual().",
+    href: "NODE/CryptoSeguridad/index.html",
   },
   // Módulo 04 interactivo de Módulos en Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "08. Módulos en Node.js", // Título visible en la tarjeta
+    title: "10. Módulos en Node.js", // Título visible en la tarjeta
     tag: "13 Slides", // Etiqueta de cantidad de diapositivas
     desc: "CommonJS (require/module.exports), ESM (import/export), módulos nativos, rutas y separación de capas.", // Descripción breve
     href: "NODE/Modulos/index.html", // Ruta relativa al módulo interactivo
@@ -72,8 +88,8 @@ const modules = [
   {
     cat: "node", // Categoría Node.js
     title: "Documentación Completa Node.js", // Título visible en la tarjeta
-    tag: "8 Guías MD", // Etiqueta de guías Markdown
-    desc: "Guías teóricas de Introducción, Fundamentos, Instalación, JavaScript Moderno, Asincronía, Archivos Nativos, REPL y Módulos en Node.js, ejercicios y cheatsheets.", // Descripción breve
+    tag: "10 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de los 10 módulos de Node.js, ejercicios y cheatsheets., ejercicios y cheatsheets.", // Descripción breve
     href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
   },
 
@@ -574,6 +590,13 @@ const modules = [
   },
   {
     cat: "mid",
+    title: "Temporizadores",
+    tag: "Mid Level",
+    desc: "Control del tiempo con setTimeout, setInterval y clear.",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Temporizadores/index.html",
+  },
+  {
+    cat: "mid",
     title: "Callbacks",
     tag: "Mid Level",
     desc: "Funciones de retorno y flujo asíncrono base.",
@@ -662,13 +685,6 @@ const modules = [
     tag: "Mid Level",
     desc: "Patrones heredados y sus equivalentes actuales.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
-  },
-  {
-    cat: "mid",
-    title: "Temporizadores",
-    tag: "Mid Level",
-    desc: "Control del tiempo con setTimeout, setInterval y clear.",
-    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Temporizadores/index.html",
   },
   {
     cat: "mid",

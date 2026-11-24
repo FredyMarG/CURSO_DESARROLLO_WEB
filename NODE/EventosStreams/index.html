@@ -1,0 +1,398 @@
+<!doctype html>
+<!-- Módulo 07 de Node.js: Eventos y Streams -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Metadato descriptivo del módulo -->
+    <meta name="description" content="Módulo 07: Eventos y Streams en Node.js — EventEmitter (on, once, off, emit, error), Readable/Writable Streams, chunks y pipeline()." />
+    <title>Eventos y Streams en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido de diapositivas y laboratorio -->
+    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
+    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <!-- Temas neón, navegación secuencial y acceso directo a apuntes -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/modules/course-polish.css" />
+    <script src="../../RESOURCES COURSE/modules/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · EVENTOS Y STREAMS</span>
+            <div class="brand-title"><span>🌊</span><span>Eventos y Streams</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Eventos y Streams">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 07 · Arquitectura Dirigida por Eventos</span>
+                    <span class="badge badge-cyan">node:events · EventEmitter</span>
+                    <span class="badge badge-purple">node:stream · pipeline()</span>
+                </div>
+                <h1 class="hero-title">Eventos y Streams<br /><span class="gradient-text">en Node.js</span></h1>
+                <p class="hero-subtitle">
+                    Domina el corazón reactivo de Node.js: desacopla componentes con <code>EventEmitter</code>, protege tus procesos manejando el evento <code>'error'</code> y procesa archivos grandes por fragmentos (<em>chunks</em>) con <code>pipeline()</code> sin saturar la memoria.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🔔</div>
+                        <h3>1. EventEmitter</h3>
+                        <p>Patrón emisor-oyente: <code>on</code>, <code>once</code>, <code>off</code> y <code>emit</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🛡️</div>
+                        <h3>2. Clases y 'error'</h3>
+                        <p>Extiende <code>EventEmitter</code> y evita caídas por errores sin listener.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🌊</div>
+                        <h3>3. Streams y pipeline()</h3>
+                        <p>Lectura por <em>chunks</em>, compresión y control de <em>backpressure</em>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Simula flujos de eventos, chunks y backpressure en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: EVENTEMITTER -->
+        <section class="slide" data-slide="2" data-title="node:events — EventEmitter">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · PATRÓN PUB/SUB NATIVO</span>
+                <h2 class="slide-title"><code>EventEmitter</code>: <code>on</code>, <code>once</code>, <code>off</code> y <code>emit</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:12px;">
+                    APIs centrales como <code>http.Server</code>, <code>process</code> y <code>fs.ReadStream</code> heredan de <code>EventEmitter</code>. Permite emitir avisos sin acoplar el emisor a quienes reaccionan.
+                </p>
+                <pre class="code-block"><code>import { EventEmitter } from 'node:events';
+
+const bus = new EventEmitter();
+bus.once('sistema:listo', () => console.log('Inicializado una sola vez'));
+
+const onPedido = (p) => console.log('Pedido recibido:', p.id);
+bus.on('pedido:creado', onPedido);
+
+bus.emit('sistema:listo');
+bus.emit('pedido:creado', { id: 'ORD-101' });
+bus.off('pedido:creado', onPedido); // Desuscribir listener</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: CLASES CON EVENTEMITTER Y MANEJO DE ERROR -->
+        <section class="slide" data-slide="3" data-title="Clases y Evento 'error'">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · DOMINIO Y ESTABILIDAD</span>
+                <h2 class="slide-title">Extender <code>EventEmitter</code> y Manejar <code>'error'</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>import { EventEmitter } from 'node:events';
+
+class GestorTareas extends EventEmitter {
+  completar(nombre) {
+    if (!nombre) return this.emit('error', new Error('Nombre requerido'));
+    this.emit('tarea:completada', { nombre });
+  }
+}
+
+const gestor = new GestorTareas();
+gestor.on('error', (err) => console.error('Error controlado:', err.message));
+gestor.on('tarea:completada', (t) => console.log('OK:', t.nombre));</code></pre>
+                <div class="tip-box warn">
+                    <strong>⚠️ Regla crítica de Node.js:</strong> Si llamas a <code>emit('error', err)</code> y no hay ningún listener registrado para <code>'error'</code>, Node.js lanza la excepción y <strong>cierra el proceso</strong>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: STREAMS Y CHUNKS -->
+        <section class="slide" data-slide="4" data-title="node:stream — Procesamiento por Chunks">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · MEMORIA EFICIENTE</span>
+                <h2 class="slide-title">Streams: Procesar Archivos Grandes por <em>Chunks</em></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Tipo</th><th>Propósito</th><th>Ejemplo nativo</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Readable</strong></td><td>Produce fragmentos (<em>chunks</em>) bajo demanda</td><td><code>fs.createReadStream('grande.log')</code></td></tr>
+                        <tr><td><strong>Writable</strong></td><td>Consume y escribe fragmentos</td><td><code>fs.createWriteStream('copia.log')</code></td></tr>
+                        <tr><td><strong>Transform</strong></td><td>Transforma datos al paso</td><td><code>zlib.createGzip()</code></td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>const lectura = fs.createReadStream('entrada.txt', { encoding: 'utf8', highWaterMark: 1024 });
+lectura.on('data', (chunk) => console.log('Chunk:', chunk.length));
+lectura.on('end', () => console.log('Lectura completada'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: PIPELINE Y BACKPRESSURE -->
+        <section class="slide" data-slide="5" data-title="pipeline() y Backpressure">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRODUCCIÓN SEGURA</span>
+                <h2 class="slide-title"><code>pipeline()</code> de <code>node:stream/promises</code> y Backpressure</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>import fs from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+import { createGzip } from 'node:zlib';
+
+try {
+  await pipeline(
+    fs.createReadStream('registros.log'),
+    createGzip(),
+    fs.createWriteStream('registros.log.gz')
+  );
+  console.log('Archivo comprimido con éxito');
+} catch (error) {
+  console.error('Fallo en pipeline:', error.message);
+}</code></pre>
+                <div class="tip-box good">
+                    <strong>✅ Por qué usar <code>pipeline()</code> en lugar de <code>.pipe()</code>:</strong> Controla el <em>backpressure</em> (pausa la lectura si el disco escribe lento), cierra todos los streams si alguno falla y permite usar <code>try/catch</code>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS Y ERRORES COMUNES -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD Y RENDIMIENTO</span>
+                <h2 class="slide-title">Buenas Prácticas con Eventos y Streams</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Problema que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Registrar <code>.on('error', ...)</code> en todo emisor</td><td>Caídas inesperadas del servidor Node.js</td></tr>
+                        <tr><td>Usar <code>pipeline()</code> en lugar de <code>.pipe()</code></td><td>Fugas de memoria y descriptores abiertos</td></tr>
+                        <tr><td>Limpiar listeners con <code>.off()</code> o <code>.once()</code></td><td>Advertencias <code>MaxListenersExceededWarning</code></td></tr>
+                        <tr><td>Usar Streams para archivos grandes</td><td>Saturar la RAM con <code>fs.readFile()</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Eventos y Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:EVENTS &amp; NODE:STREAM</span>
+                <h2 class="slide-title">🎛️ Simulador de <code>EventEmitter</code> y <code>pipeline()</code></h2>
+                <p class="slide-lead">Observa paso a paso cómo se ejecutan los listeners, cómo viajan los <em>chunks</em> y cómo actúa el control de <em>backpressure</em>.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario</label>
+                        <select id="esSimMode">
+                            <option value="emitter">EventEmitter (on, once, off, emit)</option>
+                            <option value="error">Manejo obligatorio del evento 'error'</option>
+                            <option value="chunks">Stream Readable por chunks vs readFile()</option>
+                            <option value="pipeline">pipeline() + Gzip + Backpressure</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="esSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="esSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: Eventos y Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Eventos y Streams</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: un evento 'error' sin listener registrado provoca una excepción no capturada y detiene Node.js." data-err="Si nadie escucha 'error', Node.js lanza el error y termina el proceso.">
+                    <div class="quiz-q-title">1. ¿Qué ocurre si llamas a <code>bus.emit('error', new Error('Fallo'))</code> sin haber registrado <code>bus.on('error', ...)</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Se ignora silenciosamente</button>
+                        <button class="quiz-option" data-opt="b">Lanza la excepción y detiene el proceso Node.js</button>
+                        <button class="quiz-option" data-opt="c">Se convierte en una promesa pendiente</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: pipeline() de node:stream/promises maneja backpressure, cierra recursos y propaga errores a try/catch." data-err=".pipe() no limpia recursos ni propaga errores automáticamente; pipeline() sí.">
+                    <div class="quiz-q-title">2. ¿Por qué se recomienda <code>pipeline()</code> en lugar de <code>.pipe()</code> al encadenar streams?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Porque carga todo el archivo en RAM</button>
+                        <button class="quiz-option" data-opt="b">Porque solo funciona en el navegador</button>
+                        <button class="quiz-option" data-opt="c">Porque gestiona errores, cierre de streams y backpressure</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: highWaterMark controla el tamaño de cada chunk leído/escrito." data-err="highWaterMark define el tamaño máximo del buffer/chunk por iteración del stream.">
+                    <div class="quiz-q-title">3. ¿Qué ventaja ofrece leer un archivo de 2 GB con <code>createReadStream</code> frente a <code>readFile</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">Procesa el archivo por fragmentos (chunks) sin agotar la RAM</button>
+                        <button class="quiz-option" data-opt="b">Comprime el archivo automáticamente en ZIP</button>
+                        <button class="quiz-option" data-opt="c">Convierte el archivo a JSON síncronamente</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Eventos y Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de Eventos y Streams</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de EventEmitter con on, once, off y manejo de 'error'
+  class MiniEmitter {
+    constructor() { this.map = {}; }
+    on(ev, fn) { (this.map[ev] ??= []).push(fn); }
+    once(ev, fn) {
+      const wrap = (d) =&gt; { this.off(ev, wrap); fn(d); };
+      this.on(ev, wrap);
+    }
+    off(ev, fn) { this.map[ev] = (this.map[ev] || []).filter(f =&gt; f !== fn); }
+    emit(ev, data) { (this.map[ev] || []).forEach(fn =&gt; fn(data)); }
+  }
+
+  const bus = new MiniEmitter();
+  const logs = [];
+  bus.once(&#x27;inicio&#x27;, () =&gt; logs.push(&#x27;🟢 once(inicio): ejecutado 1 vez&#x27;));
+  bus.on(&#x27;error&#x27;, (e) =&gt; logs.push(`🛡️ error controlado: ${e.message}`));
+  bus.emit(&#x27;inicio&#x27;);
+  bus.emit(&#x27;inicio&#x27;); // Ya no se dispara
+  bus.emit(&#x27;error&#x27;, new Error(&#x27;Archivo vacío&#x27;));
+
+  document.getElementById(&#x27;out&#x27;).innerHTML = logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">EventEmitter (once + error)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de lectura por chunks (highWaterMark = 12 bytes)
+  const texto = &#x27;Node.js Streams procesan archivos grandes por fragmentos.&#x27;;
+  const highWaterMark = 14;
+  const chunks = [];
+  for (let i = 0; i &lt; texto.length; i += highWaterMark) {
+    chunks.push(texto.slice(i, i + highWaterMark));
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    chunks.map((c, idx) =&gt; `&lt;div&gt;📦 Chunk #${idx + 1} (${c.length} chars): &quot;${c}&quot;&lt;/div&gt;`).join(&#x27;&#x27;) +
+    `&lt;div style=&quot;margin-top:8px;font-weight:700&quot;&gt;✅ Total fragmentos: ${chunks.length}&lt;/div&gt;`;
+&lt;/script&gt;">Lectura por Chunks (Stream)</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de EventEmitter con on, once, off y manejo de 'error'
+  class MiniEmitter {
+    constructor() { this.map = {}; }
+    on(ev, fn) { (this.map[ev] ??= []).push(fn); }
+    once(ev, fn) {
+      const wrap = (d) =&gt; { this.off(ev, wrap); fn(d); };
+      this.on(ev, wrap);
+    }
+    off(ev, fn) { this.map[ev] = (this.map[ev] || []).filter(f =&gt; f !== fn); }
+    emit(ev, data) { (this.map[ev] || []).forEach(fn =&gt; fn(data)); }
+  }
+
+  const bus = new MiniEmitter();
+  const logs = [];
+  bus.once(&#x27;inicio&#x27;, () =&gt; logs.push(&#x27;🟢 once(inicio): ejecutado 1 vez&#x27;));
+  bus.on(&#x27;error&#x27;, (e) =&gt; logs.push(`🛡️ error controlado: ${e.message}`));
+  bus.emit(&#x27;inicio&#x27;);
+  bus.emit(&#x27;inicio&#x27;); // Ya no se dispara
+  bus.emit(&#x27;error&#x27;, new Error(&#x27;Archivo vacío&#x27;));
+
+  document.getElementById(&#x27;out&#x27;).innerHTML = logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('esSimMode');
+            const stage = document.getElementById('esSimStage');
+            const code = document.getElementById('esSimCode');
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el escenario y el fragmento de código según la opción elegida
+            function update() {
+                if (mode.value === 'emitter') {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">bus.once('sistema:listo', fn) ➔ se ejecuta solo 1 vez y se auto-elimina</div>
+                        <div style="color:#00ff88;font-weight:700;">bus.emit('pedido:creado', { id: 'ORD-101' }) ➔ dispara listeners síncronos</div>
+                        <div style="color:#fbbf24;">bus.off('pedido:creado', fn) ➔ evita fugas de memoria</div>
+                    `;
+                    code.textContent = `bus.once('sistema:listo', () => console.log('Listo'));\nbus.on('pedido:creado', onPedido);\nbus.emit('pedido:creado', { id: 'ORD-101' });`;
+                } else if (mode.value === 'error') {
+                    stage.innerHTML = `
+                        <div style="color:#ff3358;">Sin gestor.on('error', ...): emit('error') detiene toda la app</div>
+                        <div style="color:#00ff88;font-weight:700;">Con gestor.on('error', err => ...): error capturado sin caída</div>
+                    `;
+                    code.textContent = `gestor.on('error', (err) => console.error('Controlado:', err.message));\ngestor.emit('error', new Error('Nombre requerido'));`;
+                } else if (mode.value === 'chunks') {
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">readFile('2GB.log') ➔ intenta cargar 2 GB completos en RAM</div>
+                        <div style="color:#00ff88;font-weight:700;">createReadStream('2GB.log') ➔ lee en pequeños chunks (ej. 64 KB)</div>
+                        <div style="color:#38bdf8;">Eventos del stream: 'data' (cada chunk) ➔ 'end' (al finalizar)</div>
+                    `;
+                    code.textContent = `const s = fs.createReadStream('2GB.log', { highWaterMark: 65536 });\ns.on('data', chunk => procesar(chunk));\ns.on('end', () => console.log('Fin'));`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">Readable ➔ Transform (createGzip) ➔ Writable</div>
+                        <div style="color:#00ff88;font-weight:700;">pipeline() regula el ritmo (backpressure) y cierra streams si hay fallo</div>
+                    `;
+                    code.textContent = `await pipeline(\n  fs.createReadStream('registros.log'),\n  createGzip(),\n  fs.createWriteStream('registros.log.gz')\n);`;
+                }
+            }
+
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

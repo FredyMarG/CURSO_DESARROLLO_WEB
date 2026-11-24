@@ -33,6 +33,8 @@
         'JavaScriptModerno': 'JAVASCRIPT MODERNO.md',
         'Asincronia': 'ARQUITECTURA INTERNA ASINCRONIA.md',
         'ArchivosNativos': 'ARCHIVOS NATIVOS.md',
+        'EventosStreams': 'EVENTOS Y STREAMS.md',
+        'CryptoSeguridad': 'CRYPTO Y SEGURIDAD.md',
         'REPL': 'REPL.md',
         'Modulos': 'MODULOS.md'
     };
@@ -58,6 +60,8 @@
             [/javascript moderno|es6\+/, '⚡', '#f59e0b'],
             [/asincron/, '⏱️', '#a855f7'],
             [/archivos nativos|archivosnativos/, '📁', '#10b981'],
+            [/eventos.*stream|eventosstreams/, '🌊', '#38bdf8'],
+            [/crypto|criptograf/, '🔐', '#f59e0b'],
             [/\brepl\b/, '>_', '#10b981'],
             [/m[oó]dulos/, '🧩', '#10b981'],
             // JS Master Level (24 módulos únicos)
@@ -529,9 +533,9 @@
     // 6. Navegación directa entre módulos del mismo nivel (⬅ Anterior / Siguiente ➡)
     const COURSE_MODULES = { // Mapa ordenado de carpetas de módulos por nivel
         'HTML y CSS': ['HTML BASICO', 'HTML avanzado', 'CSS BASICO', 'CSS avanzado', 'Flexbox', 'Grid', 'Animaciones', 'Funciones Avanzadas', 'Responsive Design'],
-        'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Temporizadores', 'Pestañas DevTools'],
+        'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Temporizadores', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Pestañas DevTools'],
         'JAVASCRIPT MASTER LEVEL': ['Modo Estricto', 'Operador Ternario', 'Funciones Flecha', 'Prototipos', 'Memoization', 'Objeto Date', 'Objeto Screen', 'Navigator', 'Matchmedia', 'Visibility Change', 'Historial', 'Geolocalization', 'Drag & Drop', 'File Reader', 'Canvas', 'Local Storage', 'Cookies', 'IndexedDB', 'Intersection Observer', 'Apis', 'Cache', 'Notifications', 'Web Workers', 'Service Workers'],
-        'NODE': ['Introduccion', 'Fundamentos', 'Instalacion', 'JavaScriptModerno', 'Asincronia', 'ArchivosNativos', 'REPL', 'Modulos']
+        'NODE': ['Introduccion', 'Fundamentos', 'Instalacion', 'REPL', 'JavaScriptModerno', 'Asincronia', 'ArchivosNativos', 'EventosStreams', 'CryptoSeguridad', 'Modulos']
     };
     const SUBMODULE_GROUPS = { // Listas de submódulos con navegación Anterior/Siguiente propia
         'Eventos': ['Handlers', 'Event Flow', 'Eventos de Mouse', 'Eventos de Teclado', 'Eventos de Interfaz'],
