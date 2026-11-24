@@ -166,12 +166,20 @@
                         </tr>
                     </tbody>
                 </table>
-                <pre class="code-block" style="margin-bottom: 12px"><code>import { writeFile, appendFile, readFile, rename, unlink } from 'node:fs/promises';
+                <pre class="code-block" style="margin-bottom: 12px"><code>// 1. Asíncrono recomendado (node:fs/promises) — no bloquea el hilo
+import { writeFile, appendFile, readFile, rename, unlink } from 'node:fs/promises';
 await writeFile('nota.txt', 'Línea 1\n', 'utf8');
 await appendFile('nota.txt', 'Línea 2\n', 'utf8'); // Añade sin sobrescribir
 await rename('nota.txt', 'nota-final.txt');
 console.log(await readFile('nota-final.txt', 'utf8'));
-await unlink('nota-final.txt'); // Elimina el archivo</code></pre>
+await unlink('nota-final.txt');
+
+// 2. Síncrono (*Sync) — bloquea hasta terminar (solo scripts CLI o arranque)
+const fs = require('node:fs');
+fs.writeFileSync('sync.txt', 'Hola\n', 'utf8');
+fs.appendFileSync('sync.txt', 'Mundo\n', 'utf8');
+console.log(fs.readFileSync('sync.txt', 'utf8'));
+fs.unlinkSync('sync.txt');</code></pre>
                 <div class="tip-box good">
                     <strong>✅ Asíncrono (<code>/promises</code>) vs Síncrono (<code>*Sync</code>):</strong>
                     <code>node:fs/promises</code> devuelve Promesas para usar <code>async/await</code> sin bloquear Node.js.
