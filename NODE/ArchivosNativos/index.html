@@ -1,16 +1,23 @@
 <!doctype html>
 <html lang="es">
+
 <head>
     <!-- Codificación UTF-8 para tildes, ñ y emojis -->
     <meta charset="UTF-8" />
     <!-- Ajuste responsivo al ancho del dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Metadato descriptivo del módulo para buscadores y accesibilidad -->
-    <meta name="description" content="Módulo 06: Módulos Nativos y Archivos en Node.js — node:fs/promises, node:path, node:os, node:events y node:crypto." />
-    <title>Módulos Nativos y Archivos en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <meta name="description"
+        content="Módulo 06: Módulos Nativos y Archivos en Node.js — node:fs/promises, node:path, node:os, node:events y node:crypto." />
+    <title>
+        Módulos Nativos y Archivos en Node.js — Presentación Completa | Curso
+        Desarrollo Web
+    </title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
     <!-- Motor CSS y JS compartido de diapositivas y laboratorio -->
     <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
     <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
@@ -19,6 +26,7 @@
     <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
 </head>
 <!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
+
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -27,17 +35,28 @@
     <header class="top-nav">
         <div class="nav-brand">
             <span class="brand-badge">NODE.JS · ARCHIVOS NATIVOS</span>
-            <div class="brand-title"><span>📁</span><span>Módulos Nativos y Archivos</span></div>
+            <div class="brand-title">
+                <span>📁</span><span>Módulos Nativos y Archivos</span>
+            </div>
         </div>
         <div class="nav-progress-container">
-            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
             <div class="progress-label" id="slideIndicator">1 / 9</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
-            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
-            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
-            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnGoLab">
+                🧪 <span class="btn-text">Lab</span>
+            </button>
+            <button class="nav-btn" id="btnToggleMode">
+                <span id="modeIcon">📑</span>
+                <span class="btn-text" id="modeText">Modo Guía</span>
+            </button>
+            <button class="nav-btn" id="btnToggleSound">
+                <span id="soundIcon">🔊</span>
+            </button>
             <button class="nav-btn" id="btnOverview">▦</button>
             <button class="nav-btn" id="btnFullscreen">⛶</button>
         </div>
@@ -52,30 +71,50 @@
                     <span class="badge badge-cyan">node:fs · node:path · node:os</span>
                     <span class="badge badge-purple">node:process · node:console · node:timers</span>
                 </div>
-                <h1 class="hero-title">Módulos Nativos <br /><span class="gradient-text">y Archivos</span></h1>
+                <h1 class="hero-title">
+                    Módulos Nativos <br /><span class="gradient-text">y Archivos</span>
+                </h1>
                 <p class="hero-subtitle">
-                    Aprende a usar las bibliotecas integradas de Node.js sin dependencias externas: manipula archivos y JSON con <code>node:fs/promises</code>, construye rutas portables con <code>node:path</code>, consulta el sistema con <code>node:os</code>, controla el proceso con <code>node:process</code>, depura con <code>node:console</code> y usa <code>node:timers/promises</code>.
+                    Aprende a usar las bibliotecas integradas de Node.js sin
+                    dependencias externas: manipula archivos y JSON con
+                    <code>node:fs/promises</code>, construye rutas portables con
+                    <code>node:path</code>, consulta el sistema con
+                    <code>node:os</code>, controla el proceso con
+                    <code>node:process</code>, depura con <code>node:console</code> y
+                    usa <code>node:timers/promises</code>.
                 </p>
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2">
                         <div class="hero-card-icon">📄</div>
                         <h3>1. node:fs/promises</h3>
-                        <p>Leer, escribir, crear directorios y manejar errores <code>ENOENT</code>.</p>
+                        <p>
+                            Leer, escribir, crear directorios y manejar errores
+                            <code>ENOENT</code>.
+                        </p>
                     </div>
                     <div class="hero-card" data-jump="3">
                         <div class="hero-card-icon">🧭</div>
                         <h3>2. node:path y ESM</h3>
-                        <p><code>join</code>, <code>resolve</code>, <code>extname</code> y <code>import.meta.url</code>.</p>
+                        <p>
+                            <code>join</code>, <code>resolve</code>, <code>extname</code> y
+                            <code>import.meta.url</code>.
+                        </p>
                     </div>
                     <div class="hero-card" data-jump="5">
                         <div class="hero-card-icon">🔔</div>
                         <h3>3. process, console y timers</h3>
-                        <p><code>process.env</code>, <code>console.table()</code> y <code>timers/promises</code>.</p>
+                        <p>
+                            <code>process.env</code>, <code>console.table()</code> y
+                            <code>timers/promises</code>.
+                        </p>
                     </div>
                     <div class="hero-card" data-jump="7">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
-                        <p>Prueba rutas seguras, sistema operativo, process y timers en vivo.</p>
+                        <p>
+                            Prueba rutas seguras, sistema operativo, process y timers en
+                            vivo.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -85,30 +124,58 @@
         <section class="slide" data-slide="2" data-title="node:fs — Sistema de Archivos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 2 · LECTURA, ESCRITURA Y GESTIÓN</span>
-                <h2 class="slide-title"><code>node:fs/promises</code>: CRUD Completo de Archivos</h2>
+                <h2 class="slide-title">
+                    <code>node:fs/promises</code>: CRUD Completo de Archivos
+                </h2>
             </div>
             <div class="glass-card">
-                <table class="compare-table" style="margin-bottom:12px;">
+                <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
-                        <tr><th>Método</th><th>Acción</th></tr>
+                        <tr>
+                            <th>Método</th>
+                            <th>Acción</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>readFile()</code> / <code>writeFile()</code></td><td>Leer o crear/sobrescribir un archivo completo</td></tr>
-                        <tr><td><code>appendFile()</code></td><td>Agregar contenido al final sin borrar lo existente</td></tr>
-                        <tr><td><code>rename()</code> / <code>unlink()</code></td><td>Renombrar o mover un archivo / eliminarlo</td></tr>
-                        <tr><td><code>copyFile()</code> / <code>rm()</code></td><td>Copiar un archivo / borrar archivos o carpetas (<code>{ recursive: true }</code>)</td></tr>
-                        <tr><td><code>mkdir()</code> / <code>readdir()</code> / <code>stat()</code></td><td>Crear carpetas, listar contenido y consultar tamaño/tipo</td></tr>
+                        <tr>
+                            <td><code>readFile()</code> / <code>writeFile()</code></td>
+                            <td>Leer o crear/sobrescribir un archivo completo</td>
+                        </tr>
+                        <tr>
+                            <td><code>appendFile()</code></td>
+                            <td>Agregar contenido al final sin borrar lo existente</td>
+                        </tr>
+                        <tr>
+                            <td><code>rename()</code> / <code>unlink()</code></td>
+                            <td>Renombrar o mover un archivo / eliminarlo</td>
+                        </tr>
+                        <tr>
+                            <td><code>copyFile()</code> / <code>rm()</code></td>
+                            <td>
+                                Copiar un archivo / borrar archivos o carpetas (<code>{ recursive: true }</code>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>mkdir()</code> / <code>readdir()</code> /
+                                <code>stat()</code>
+                            </td>
+                            <td>
+                                Crear carpetas, listar contenido y consultar tamaño/tipo
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <pre class="code-block" style="margin-bottom:12px;"><code>import { writeFile, appendFile, readFile, rename, unlink } from 'node:fs/promises';
-
+                <pre class="code-block" style="margin-bottom: 12px"><code>import { writeFile, appendFile, readFile, rename, unlink } from 'node:fs/promises';
 await writeFile('nota.txt', 'Línea 1\n', 'utf8');
 await appendFile('nota.txt', 'Línea 2\n', 'utf8'); // Añade sin sobrescribir
 await rename('nota.txt', 'nota-final.txt');
 console.log(await readFile('nota-final.txt', 'utf8'));
 await unlink('nota-final.txt'); // Elimina el archivo</code></pre>
                 <div class="tip-box good">
-                    <strong>✅ ¿Qué hace <code>/promises</code>?</strong> Hace que los métodos devuelvan una <code>Promise</code> en lugar de pedir callbacks, permitiéndote usar <code>async/await</code> y <code>try/catch</code> sin bloquear el hilo principal.
+                    <strong>✅ Asíncrono (<code>/promises</code>) vs Síncrono (<code>*Sync</code>):</strong>
+                    <code>node:fs/promises</code> devuelve Promesas para usar <code>async/await</code> sin bloquear Node.js.
+                    Los métodos <code>*Sync</code> (<code>readFileSync</code>, <code>writeFileSync</code>) bloquean el hilo hasta terminar y solo convienen en scripts CLI cortos o al iniciar la app.
                 </div>
             </div>
         </section>
@@ -117,18 +184,48 @@ await unlink('nota-final.txt'); // Elimina el archivo</code></pre>
         <section class="slide" data-slide="3" data-title="node:path — Rutas Portables">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 3 · RUTAS MULTIPLATAFORMA</span>
-                <h2 class="slide-title"><code>node:path</code>, <code>__dirname</code> y <code>import.meta.url</code></h2>
+                <h2 class="slide-title">
+                    <code>node:path</code>, <code>__dirname</code> y
+                    <code>import.meta.url</code>
+                </h2>
             </div>
             <div class="glass-card">
-                <table class="compare-table" style="margin-bottom:12px;">
+                <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
-                        <tr><th>Método / Variable</th><th>Función</th><th>Ejemplo</th></tr>
+                        <tr>
+                            <th>Método / Variable</th>
+                            <th>Función</th>
+                            <th>Ejemplo</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>path.join()</code></td><td>Une segmentos normalizando separadores (<code>\</code> o <code>/</code>)</td><td><code>path.join('datos', 'cursos.json')</code></td></tr>
-                        <tr><td><code>path.resolve()</code></td><td>Genera ruta absoluta desde el directorio actual</td><td><code>path.resolve('datos', 'cursos.json')</code></td></tr>
-                        <tr><td><code>__dirname</code> (CommonJS)</td><td>Ruta absoluta de la carpeta del archivo actual</td><td><code>path.join(__dirname, 'fs.html')</code></td></tr>
-                        <tr><td><code>import.meta.url</code> (ESM)</td><td>Equivalente moderno en ESM con <code>fileURLToPath()</code></td><td><code>path.dirname(fileURLToPath(import.meta.url))</code></td></tr>
+                        <tr>
+                            <td><code>path.join()</code></td>
+                            <td>
+                                Une segmentos normalizando separadores (<code>\</code> o
+                                <code>/</code>)
+                            </td>
+                            <td><code>path.join('datos', 'cursos.json')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>path.resolve()</code></td>
+                            <td>Genera ruta absoluta desde el directorio actual</td>
+                            <td><code>path.resolve('datos', 'cursos.json')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>__dirname</code> (CommonJS)</td>
+                            <td>Ruta absoluta de la carpeta del archivo actual</td>
+                            <td><code>path.join(__dirname, 'fs.html')</code></td>
+                        </tr>
+                        <tr>
+                            <td><code>import.meta.url</code> (ESM)</td>
+                            <td>
+                                Equivalente moderno en ESM con <code>fileURLToPath()</code>
+                            </td>
+                            <td>
+                                <code>path.dirname(fileURLToPath(import.meta.url))</code>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <pre class="code-block"><code>// En CommonJS: path.join(__dirname, 'fs.html')
@@ -145,10 +242,12 @@ console.log(path.join(carpetaActual, 'datos', 'cursos.json'));</code></pre>
         <section class="slide" data-slide="4" data-title="node:os — Información del Sistema">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · DIAGNÓSTICO DEL ENTORNO</span>
-                <h2 class="slide-title"><code>node:os</code>: Plataforma, Memoria y Carpetas Temporales</h2>
+                <h2 class="slide-title">
+                    <code>node:os</code>: Plataforma, Memoria y Carpetas Temporales
+                </h2>
             </div>
             <div class="glass-card">
-                <pre class="code-block" style="margin-bottom:12px;"><code>const os = require('node:os'); // También válido con import os from 'node:os'
+                <pre class="code-block" style="margin-bottom: 12px"><code>const os = require('node:os'); // También válido con import os from 'node:os'
 
 console.log('SO y versión:', os.type(), os.release(), os.version());
 console.log('Plataforma / Equipo:', os.platform(), os.hostname());
@@ -156,7 +255,10 @@ console.log('Usuario / Temporal:', os.homedir(), os.tmpdir());
 console.log('RAM libre / total (MB):', Math.round(os.freemem() / 1024 ** 2), '/', Math.round(os.totalmem() / 1024 ** 2));
 console.log('CPUs lógicas:', os.cpus().length);</code></pre>
                 <div class="tip-box">
-                    <strong>💡 Aplicación práctica:</strong> Útil para diagnósticos del proceso o elegir una carpeta temporal segura (<code>os.tmpdir()</code>). Evita registrar información privada del equipo en logs públicos.
+                    <strong>💡 Aplicación práctica:</strong> Útil para diagnósticos del
+                    proceso o elegir una carpeta temporal segura
+                    (<code>os.tmpdir()</code>). Evita registrar información privada del
+                    equipo en logs públicos.
                 </div>
             </div>
         </section>
@@ -165,17 +267,53 @@ console.log('CPUs lógicas:', os.cpus().length);</code></pre>
         <section class="slide" data-slide="5" data-title="node:process, console y timers">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PROCESO, DEPURACIÓN Y TEMPORIZADORES</span>
-                <h2 class="slide-title"><code>node:process</code>, <code>node:console</code> y <code>node:timers</code></h2>
+                <h2 class="slide-title">
+                    <code>node:process</code>, <code>node:console</code> y
+                    <code>node:timers</code>
+                </h2>
             </div>
             <div class="glass-card">
-                <table class="compare-table" style="margin-bottom:12px;">
+                <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
-                        <tr><th>Módulo</th><th>Utilidades clave</th><th>Uso habitual</th></tr>
+                        <tr>
+                            <th>Módulo</th>
+                            <th>Utilidades clave</th>
+                            <th>Uso habitual</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>node:process</code></td><td><code>argv</code>, <code>env</code>, <code>cwd()</code>, <code>pid</code>, <code>ppid</code>, <code>title</code>, <code>version</code></td><td>Leer configuración, rutas, PIDs y controlar el proceso</td></tr>
-                        <tr><td><code>node:console</code></td><td><code>table()</code>, <code>time()</code> / <code>timeEnd()</code>, <code>warn()</code>, <code>error()</code></td><td>Medir rendimiento y visualizar arreglos en tablas limpias</td></tr>
-                        <tr><td><code>node:timers</code></td><td><code>setTimeout(fn, ms, ...args)</code>, <code>setImmediate()</code>, <code>setInterval()</code>, <code>timers/promises</code></td><td>Programar tareas diferidas, inmediatas o con <code>await</code></td></tr>
+                        <tr>
+                            <td><code>node:process</code></td>
+                            <td>
+                                <code>argv</code>, <code>env</code>, <code>cwd()</code>,
+                                <code>pid</code>, <code>ppid</code>, <code>title</code>,
+                                <code>version</code>
+                            </td>
+                            <td>Leer configuración, rutas, PIDs y controlar el proceso</td>
+                        </tr>
+                        <tr>
+                            <td><code>node:console</code></td>
+                            <td>
+                                <code>table()</code>, <code>time()</code> /
+                                <code>timeEnd()</code>, <code>warn()</code>,
+                                <code>error()</code>
+                            </td>
+                            <td>
+                                Medir rendimiento y visualizar arreglos en tablas limpias
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>node:timers</code></td>
+                            <td>
+                                <code>setTimeout(fn, ms, ...args)</code>,
+                                <code>setImmediate()</code>, <code>setInterval()</code>,
+                                <code>timers/promises</code>
+                            </td>
+                            <td>
+                                Programar tareas diferidas, inmediatas o con
+                                <code>await</code>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <pre class="code-block"><code>const process = require('node:process');
@@ -198,15 +336,41 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
                 <h2 class="slide-title">Buenas Prácticas con Módulos Nativos</h2>
             </div>
             <div class="glass-card">
-                <table class="compare-table" style="margin-bottom:12px;">
+                <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
-                        <tr><th>Buena práctica</th><th>Riesgo o error que evita</th></tr>
+                        <tr>
+                            <th>Buena práctica</th>
+                            <th>Riesgo o error que evita</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Usar prefijo <code>node:</code> (ej. <code>node:fs/promises</code>)</td><td>Confundir APIs nativas con paquetes de npm</td></tr>
-                        <tr><td>Validar nombres de archivo del usuario</td><td>Ataques de <em>path traversal</em> (<code>../../</code>)</td></tr>
-                        <tr><td>Registrar listener para evento <code>'error'</code> en <code>EventEmitter</code></td><td>Cierre inesperado del proceso Node.js</td></tr>
-                        <tr><td>Manejar <code>ENOENT</code> y JSON inválido con <code>try/catch</code></td><td>Caídas al leer archivos faltantes o corruptos</td></tr>
+                        <tr>
+                            <td>
+                                Usar prefijo <code>node:</code> (ej.
+                                <code>node:fs/promises</code>)
+                            </td>
+                            <td>Confundir APIs nativas con paquetes de npm</td>
+                        </tr>
+                        <tr>
+                            <td>Validar nombres de archivo del usuario</td>
+                            <td>
+                                Ataques de <em>path traversal</em> (<code>../../</code>)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Registrar listener para evento <code>'error'</code> en
+                                <code>EventEmitter</code>
+                            </td>
+                            <td>Cierre inesperado del proceso Node.js</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Manejar <code>ENOENT</code> y JSON inválido con
+                                <code>try/catch</code>
+                            </td>
+                            <td>Caídas al leer archivos faltantes o corruptos</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -217,22 +381,41 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · APIS NATIVAS</span>
                 <h2 class="slide-title">🎛️ Simulador de Módulos Nativos</h2>
-                <p class="slide-lead">Explora qué devuelve cada módulo nativo (<code>fs</code>, <code>path</code>, <code>os</code>, <code>process</code>, <code>console</code> y <code>timers</code>) en Node.js.</p>
+                <p class="slide-lead">
+                    Explora qué devuelve cada módulo nativo (<code>fs</code>,
+                    <code>path</code>, <code>os</code>, <code>process</code>,
+                    <code>console</code> y <code>timers</code>) en Node.js.
+                </p>
             </div>
             <div class="sim-panel">
                 <div class="sim-controls">
                     <div class="sim-control">
                         <label>Módulo Nativo</label>
                         <select id="nativeSimMode">
-                            <option value="fs">node:fs/promises (mkdir + writeFile + ENOENT)</option>
-                            <option value="path">node:path (join, resolve, extname, import.meta.url)</option>
-                            <option value="os">node:os (platform, arch, freemem, tmpdir, cpus)</option>
-                            <option value="process">node:process + console + timers/promises</option>
+                            <option value="fs">
+                                node:fs/promises (mkdir + writeFile + ENOENT)
+                            </option>
+                            <option value="path">
+                                node:path (join, resolve, extname, import.meta.url)
+                            </option>
+                            <option value="os">
+                                node:os (platform, arch, freemem, tmpdir, cpus)
+                            </option>
+                            <option value="process">
+                                node:process + console + timers/promises
+                            </option>
                         </select>
                     </div>
                 </div>
                 <div class="sim-stage-wrap">
-                    <div class="sim-stage" id="nativeSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <div class="sim-stage" id="nativeSimStage" style="
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                font-family: var(--font-mono);
+                font-size: 0.84rem;
+                justify-content: center;
+              "></div>
                     <pre class="sim-code" id="nativeSimCode"></pre>
                 </div>
             </div>
@@ -242,33 +425,58 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
         <section class="slide" data-slide="8" data-title="Quiz: Archivos Nativos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
-                <h2 class="slide-title">🧠 Quiz Rápido de Módulos Nativos y Archivos</h2>
+                <h2 class="slide-title">
+                    🧠 Quiz Rápido de Módulos Nativos y Archivos
+                </h2>
             </div>
             <div class="quiz-container">
                 <div class="quiz-header">
                     <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
                     <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
                 </div>
-                <div class="quiz-question" data-answer="a" data-ok="Correcto: ENOENT significa Error NO ENTry (archivo o directorio inexistente)." data-err="EADDRINUSE es puerto ocupado y SyntaxError es fallo de parseo; ENOENT indica que la ruta no existe.">
-                    <div class="quiz-q-title">1. ¿Qué código de error lanza <code>readFile()</code> cuando el archivo solicitado no existe?</div>
+                <div class="quiz-question" data-answer="a"
+                    data-ok="Correcto: ENOENT significa Error NO ENTry (archivo o directorio inexistente)."
+                    data-err="EADDRINUSE es puerto ocupado y SyntaxError es fallo de parseo; ENOENT indica que la ruta no existe.">
+                    <div class="quiz-q-title">
+                        1. ¿Qué código de error lanza <code>readFile()</code> cuando el
+                        archivo solicitado no existe?
+                    </div>
                     <div class="quiz-options">
                         <button class="quiz-option" data-opt="a">ENOENT</button>
                         <button class="quiz-option" data-opt="b">EADDRINUSE</button>
-                        <button class="quiz-option" data-opt="c">ERR_MODULE_NOT_FOUND</button>
+                        <button class="quiz-option" data-opt="c">
+                            ERR_MODULE_NOT_FOUND
+                        </button>
                     </div>
                     <div class="quiz-feedback"></div>
                 </div>
-                <div class="quiz-question" data-answer="b" data-ok="Exacto: fileURLToPath(import.meta.url) obtiene la ruta del archivo actual en ESM y path.dirname() su carpeta." data-err="__dirname no existe como global en ESM; se obtiene con fileURLToPath(import.meta.url) y path.dirname()." >
-                    <div class="quiz-q-title">2. En ESM (<code>"type": "module"</code>), ¿qué combinación permite obtener la carpeta del archivo actual?</div>
+                <div class="quiz-question" data-answer="b"
+                    data-ok="Exacto: fileURLToPath(import.meta.url) obtiene la ruta del archivo actual en ESM y path.dirname() su carpeta."
+                    data-err="__dirname no existe como global en ESM; se obtiene con fileURLToPath(import.meta.url) y path.dirname().">
+                    <div class="quiz-q-title">
+                        2. En ESM (<code>"type": "module"</code>), ¿qué combinación
+                        permite obtener la carpeta del archivo actual?
+                    </div>
                     <div class="quiz-options">
-                        <button class="quiz-option" data-opt="a">os.tmpdir() + path.extname()</button>
-                        <button class="quiz-option" data-opt="b">fileURLToPath(import.meta.url) + path.dirname()</button>
-                        <button class="quiz-option" data-opt="c">crypto.randomUUID() + path.join()</button>
+                        <button class="quiz-option" data-opt="a">
+                            os.tmpdir() + path.extname()
+                        </button>
+                        <button class="quiz-option" data-opt="b">
+                            fileURLToPath(import.meta.url) + path.dirname()
+                        </button>
+                        <button class="quiz-option" data-opt="c">
+                            crypto.randomUUID() + path.join()
+                        </button>
                     </div>
                     <div class="quiz-feedback"></div>
                 </div>
-                <div class="quiz-question" data-answer="c" data-ok="Correcto: bus.once() registra un listener que se ejecuta solo la primera vez que se emite el evento." data-err="bus.on() se ejecuta en cada emisión; bus.once() se auto-elimina tras la primera ejecución.">
-                    <div class="quiz-q-title">3. ¿Qué método de <code>EventEmitter</code> ejecuta un listener una única vez?</div>
+                <div class="quiz-question" data-answer="c"
+                    data-ok="Correcto: bus.once() registra un listener que se ejecuta solo la primera vez que se emite el evento."
+                    data-err="bus.on() se ejecuta en cada emisión; bus.once() se auto-elimina tras la primera ejecución.">
+                    <div class="quiz-q-title">
+                        3. ¿Qué método de <code>EventEmitter</code> ejecuta un listener
+                        una única vez?
+                    </div>
                     <div class="quiz-options">
                         <button class="quiz-option" data-opt="a">bus.emit()</button>
                         <button class="quiz-option" data-opt="b">bus.on()</button>
@@ -283,11 +491,13 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
         <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Módulos Nativos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
-                <h2 class="slide-title">🧪 Laboratorio Interactivo de Módulos Nativos</h2>
+                <h2 class="slide-title">
+                    🧪 Laboratorio Interactivo de Módulos Nativos
+                </h2>
             </div>
             <div class="lab-panel">
                 <div class="lab-presets">
-                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+                    <button class="preset-btn active" data-code='&lt;div id="out" style="font-family:monospace;padding:14px;line-height:1.7"&gt;&lt;/div&gt;
 &lt;script&gt;
   // Simulación del gestor de apuntes con EventEmitter y UUID
   class MiniBus {
@@ -306,8 +516,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
   document.getElementById(&#x27;out&#x27;).innerHTML =
     logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;) +
     `&lt;div&gt;📦 JSON guardado: ${JSON.stringify(nuevoApunte)}&lt;/div&gt;`;
-&lt;/script&gt;">Almacenamiento JSON (node:fs)</button>
-                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;/script&gt;'>
+                        Almacenamiento JSON (node:fs)
+                    </button>
+                    <button class="preset-btn" data-code='&lt;div id="out" style="font-family:monospace;padding:14px;line-height:1.7"&gt;&lt;/div&gt;
 &lt;script&gt;
   // Simulación de path.join y sanitización básica de rutas
   function joinSafe(base, nombreArchivo) {
@@ -325,8 +537,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
       return `&lt;div&gt;❌ ${archivo} → ${err.message}&lt;/div&gt;`;
     }
   }).join(&#x27;&#x27;);
-&lt;/script&gt;">Validación Segura de Rutas</button>
-                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Ejecutando temporizadores...&lt;/div&gt;
+&lt;/script&gt;'>
+                        Validación Segura de Rutas
+                    </button>
+                    <button class="preset-btn" data-code='&lt;div id="out" style="font-family:monospace;padding:14px;line-height:1.7"&gt;Ejecutando temporizadores...&lt;/div&gt;
 &lt;script&gt;
   // Práctica equivalente a timers.js: setTimeout con args y setInterval
   const out = document.getElementById(&#x27;out&#x27;);
@@ -342,8 +556,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
     log(`⏱️ [Repetición ${rep}/3] Practicando setInterval`);
     if (rep &gt;= 3) clearInterval(iv);
   }, 250);
-&lt;/script&gt;">⏱️ Práctica: timers.js</button>
-                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;/script&gt;'>
+                        ⏱️ Práctica: timers.js
+                    </button>
+                    <button class="preset-btn" data-code='&lt;div id="out" style="font-family:monospace;padding:14px;line-height:1.7"&gt;&lt;/div&gt;
 &lt;script&gt;
   // Práctica equivalente a process.js y os.js
   const infoProceso = {
@@ -356,11 +572,14 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
   document.getElementById(&#x27;out&#x27;).innerHTML =
     &#x27;&lt;strong&gt;⚙️ Resumen process.js &amp; os.js:&lt;/strong&gt;&#x27; +
     Object.entries(infoProceso).map(([k, v]) =&gt; `&lt;div&gt;• &lt;b&gt;${k}:&lt;/b&gt; ${JSON.stringify(v)}&lt;/div&gt;`).join(&#x27;&#x27;);
-&lt;/script&gt;">⚙️ Práctica: process.js &amp; os.js</button>
+&lt;/script&gt;'>
+                        ⚙️ Práctica: process.js &amp; os.js
+                    </button>
                 </div>
                 <div class="lab-split">
                     <!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
-                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">
+&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   const cursos = [{ id: 1, titulo: &#x27;Node.js&#x27; }, { id: 2, titulo: &#x27;Archivos Nativos&#x27; }];
   const json = JSON.stringify(cursos, null, 2);
@@ -379,30 +598,32 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
         <span class="ctrl-hint">Flechas ← → · Tecla O</span>
         <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
     </div>
-    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <div class="overview-modal" id="overviewModal">
+        <div class="overview-grid" id="overviewGrid"></div>
+    </div>
     <script>
         (function () {
-            const mode = document.getElementById('nativeSimMode');
-            const stage = document.getElementById('nativeSimStage');
-            const code = document.getElementById('nativeSimCode');
+            const mode = document.getElementById("nativeSimMode");
+            const stage = document.getElementById("nativeSimStage");
+            const code = document.getElementById("nativeSimCode");
             if (!mode || !stage || !code) return;
 
             function update() {
-                if (mode.value === 'fs') {
+                if (mode.value === "fs") {
                     stage.innerHTML = `
                         <div style="color:#38bdf8;">1. mkdir('datos', { recursive: true }) ➔ crea carpeta si no existe</div>
                         <div style="color:#00ff88;font-weight:700;">2. writeFile('datos/cursos.json', ...) ➔ guarda JSON formateado</div>
                         <div style="color:#fbbf24;">3. Si falta un archivo: error.code === 'ENOENT'</div>
                     `;
                     code.textContent = `await mkdir('datos', { recursive: true });\nawait writeFile('datos/cursos.json', JSON.stringify(cursos, null, 2), 'utf8');`;
-                } else if (mode.value === 'path') {
+                } else if (mode.value === "path") {
                     stage.innerHTML = `
                         <div style="color:#38bdf8;">path.join('datos', 'cursos.json') ➔ 'datos/cursos.json' (o '\\\\' en Windows)</div>
                         <div style="color:#00ff88;">path.extname('leccion.md') ➔ '.md'</div>
                         <div style="color:#fbbf24;font-weight:700;">fileURLToPath(import.meta.url) ➔ ruta exacta del módulo ESM actual</div>
                     `;
                     code.textContent = `const archivoActual = fileURLToPath(import.meta.url);\nconst carpetaActual = path.dirname(archivoActual);\npath.join(carpetaActual, 'datos', 'cursos.json');`;
-                } else if (mode.value === 'os') {
+                } else if (mode.value === "os") {
                     stage.innerHTML = `
                         <div style="color:#38bdf8;">os.platform() / os.arch() ➔ 'win32' / 'x64'</div>
                         <div style="color:#00ff88;font-weight:700;">os.cpus().length ➔ 8 núcleos lógicos | os.freemem() en MB</div>
@@ -419,9 +640,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
                 }
             }
 
-            mode.addEventListener('input', update);
+            mode.addEventListener("input", update);
             update();
         })();
     </script>
 </body>
+
 </html>

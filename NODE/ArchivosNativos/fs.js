@@ -88,5 +88,30 @@ async function leerConPromesas() {
   }
 }
 
-// Invoca la función asíncrona principal
+// ----------------------------------------------------------------------------
+// 4. FORMA SÍNCRONA (*Sync): bloquea el hilo hasta terminar cada operación
+// Útil solo en scripts rápidos de terminal o al arrancar la app (NO en servidores).
+// ----------------------------------------------------------------------------
+function ejemploSincrono() {
+  const syncOrigen = path.join(__dirname, 'sync-temp.txt');
+  const syncDestino = path.join(__dirname, 'sync-final.txt');
+
+  try {
+    // Cada llamada *Sync espera a que termine antes de pasar a la siguiente línea
+    fs.writeFileSync(syncOrigen, 'Línea 1 (síncrona)\n', 'utf-8');
+    fs.appendFileSync(syncOrigen, 'Línea 2 (appendFileSync)\n', 'utf-8');
+    fs.renameSync(syncOrigen, syncDestino);
+
+    const textoSync = fs.readFileSync(syncDestino, 'utf-8');
+    console.log('--- Lectura síncrona (readFileSync) ---');
+    console.log(textoSync.trim());
+
+    fs.unlinkSync(syncDestino); // Limpia el archivo temporal síncrono
+  } catch (err) {
+    console.error('Error en operación síncrona:', err.code || err.message);
+  }
+}
+
+// Ejecuta primero el ejemplo síncrono y luego la función asíncrona con promesas
+ejemploSincrono();
 leerConPromesas();
