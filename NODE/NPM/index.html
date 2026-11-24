@@ -35,7 +35,7 @@
         <!-- Indicador de progreso y número de diapositiva actual -->
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
         </div>
         <!-- Botones de acción globales (controlados por slides-engine.js) -->
         <div class="nav-actions">
@@ -79,7 +79,7 @@
                         <h3>3. Lockfile, npm ci y npx</h3>
                         <p>Instalaciones limpias, <code>devDependencies</code> y auditoría.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="8">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Prueba rangos SemVer y genera <code>package.json</code> en vivo.</p>
@@ -173,10 +173,37 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 5: NPX, SCRIPTS Y AUDITORÍA -->
-        <section class="slide" data-slide="5" data-title="npx, Scripts y Auditoría">
+        <!-- SLIDE 5: PACKAGE-LOCK.JSON AL DETALLE -->
+        <section class="slide" data-slide="5" data-title="package-lock.json al Detalle">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 5 · PRODUCTIVIDAD Y SEGURIDAD</span>
+                <span class="slide-kicker">DIAPOSITIVA 5 · REPRODUCIBILIDAD E INTEGRIDAD</span>
+                <h2 class="slide-title">¿Qué es <code>package-lock.json</code> y Qué Guarda?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    Mientras <code>package.json</code> usa rangos (<code>^4.21.0</code>), <strong><code>package-lock.json</code></strong> lo genera automáticamente <code>npm</code> para congelar la versión exacta de cada paquete <strong>y sus subdependencias</strong>:
+                </p>
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Campo interno</th><th>Para qué sirve</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>version</code></td><td>Versión exacta instalada (ej. <code>"4.21.2"</code>, sin <code>^</code> ni <code>~</code>)</td></tr>
+                        <tr><td><code>resolved</code></td><td>URL exacta del paquete descargado desde el registro</td></tr>
+                        <tr><td><code>integrity</code></td><td>Hash criptográfico (<code>sha512-...</code>) que verifica que no fue alterado</td></tr>
+                        <tr><td><code>lockfileVersion</code></td><td>Versión del formato del lockfile (<code>3</code> en npm moderno)</td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box">
+                    <strong>🔒 Regla de oro:</strong> <strong>sí se sube a Git</strong> y <strong>no se edita a mano</strong>. En servidores/CI usa <code>npm ci</code>; si hay conflicto en Git, resuelve <code>package.json</code> y ejecuta <code>npm install</code>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: NPX, SCRIPTS Y AUDITORÍA -->
+        <section class="slide" data-slide="6" data-title="npx, Scripts y Auditoría">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PRODUCTIVIDAD Y SEGURIDAD</span>
                 <h2 class="slide-title"><code>npx</code>, Hooks <code>pre/post</code> y <code>npm audit</code></h2>
             </div>
             <div class="glass-card">
@@ -199,10 +226,10 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 6: BUENAS PRACTICAS -->
-        <section class="slide" data-slide="6" data-title="Buenas Prácticas con npm">
+        <!-- SLIDE 7: BUENAS PRACTICAS -->
+        <section class="slide" data-slide="7" data-title="Buenas Prácticas con npm">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD EN EQUIPO</span>
+                <span class="slide-kicker">DIAPOSITIVA 7 · CALIDAD EN EQUIPO</span>
                 <h2 class="slide-title">Buenas Prácticas y Errores Comunes con <code>npm</code></h2>
             </div>
             <div class="glass-card">
@@ -220,8 +247,8 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador SemVer y npm">
+        <!-- SLIDE 8: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="8" data-lab="true" data-title="Simulador SemVer y npm">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · SEMVER Y COMANDOS</span>
                 <h2 class="slide-title">🎛️ Simulador de <code>SemVer</code> y Comandos <code>npm</code></h2>
@@ -251,10 +278,10 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: NPM y Paquetes">
+        <!-- SLIDE 9: QUIZ -->
+        <section class="slide" data-slide="9" data-title="Quiz: NPM y Paquetes">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de <code>npm</code> y SemVer</h2>
             </div>
             <!-- Contenedor del Quiz: slides-engine.js gestiona el puntaje y feedback automáticamente -->
@@ -293,10 +320,10 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: NPM y SemVer">
+        <!-- SLIDE 10: LABORATORIO -->
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: NPM y SemVer">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de <code>npm</code> y SemVer</h2>
             </div>
             <!-- Panel de Laboratorio: presets precargados + editor + vista previa en iframe aislado -->

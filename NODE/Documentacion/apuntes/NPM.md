@@ -94,10 +94,29 @@ Al ejecutar `npm install <paquete>`, npm realiza tres acciones:
 
 ## 4. `package-lock.json`, `npm ci` y scripts
 
-- **`package-lock.json`:** registra el árbol exacto de versiones instaladas (incluyendo subdependencias) para que todo el equipo y los servidores instalen **exactamente lo mismo**. Siempre debe subirse a Git.
-- **`npm install` vs `npm ci`:**
-  - `npm install`: instala y puede actualizar `package-lock.json`.
-  - `npm ci` (*Clean Install*): borra `node_modules` e instala **estrictamente** lo que dice `package-lock.json` (ideal para servidores y CI/CD).
+### ¿Qué es y qué guarda `package-lock.json`?
+
+Mientras `package.json` declara rangos flexibles (ej. `"express": "^4.21.0"`), **`package-lock.json`** es generado y actualizado automáticamente por `npm` para congelar el **árbol exacto de dependencias y subdependencias** instaladas en `node_modules/`.
+
+Cada entrada dentro de `"packages"` registra:
+- **`version`:** versión exacta instalada (ej. `"4.21.2"`, sin `^` ni `~`).
+- **`resolved`:** URL exacta del tarball descargado desde el registro.
+- **`integrity`:** hash criptográfico (`sha512-...`) para validar que el paquete no fue manipulado ni se corrompió.
+- **`dev: true`:** marca las dependencias exclusivas de desarrollo.
+- **`lockfileVersion`:** versión del formato del lockfile (`3` en npm moderno).
+
+| Aspecto | `package.json` | `package-lock.json` |
+|---|---|---|
+| **Quién lo edita** | Tú y `npm` | Solo `npm` automáticamente (no editar a mano) |
+| **Qué declara** | Dependencias directas, rangos (`^`, `~`) y scripts | Árbol completo y exacto (directas + subdependencias) |
+| **Se sube a Git** | **Sí** | **Sí** (siempre, mientras `node_modules/` va en `.gitignore`) |
+
+### `npm install` vs `npm ci` y conflictos en Git
+
+- **`npm install`:** lee `package.json`, instala paquetes y **puede actualizar** `package-lock.json`.
+- **`npm ci` (*Clean Install*):** borra `node_modules` e instala **estrictamente** lo que dice `package-lock.json` sin modificarlo (ideal para servidores, Docker y CI/CD).
+- **`npm install --package-lock-only`:** actualiza `package-lock.json` sin descargar `node_modules/`.
+- **Si hay conflicto de Git en `package-lock.json`:** resuelve primero `package.json` y luego ejecuta `npm install` para regenerar el lockfile limpio.
 - **Hooks `pre` y `post`:** si defines `"pretest"` o `"postbuild"`, npm los ejecuta automáticamente antes o después de `"test"` o `"build"`.
 
 ---

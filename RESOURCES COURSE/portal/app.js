@@ -88,7 +88,7 @@ const modules = [
   {
     cat: "node", // Categoría Node.js
     title: "11. NPM y Gestión de Paquetes", // Título visible en la tarjeta
-    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
     desc: "package.json, SemVer (^ vs ~), dependencies vs devDependencies, package-lock.json, npm ci, npx y npm audit.", // Descripción breve
     href: "NODE/NPM/index.html", // Ruta relativa al módulo interactivo
   },
