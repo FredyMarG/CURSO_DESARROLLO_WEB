@@ -1,32 +1,33 @@
 /**
  * SERVIDOR HTTP Y API REST NATIVA (src/server.js)
  * - Usa node:http (sin Express) reutilizando exactamente las mismas funciones de src/tareas.js.
- * - Lee cuerpos POST por chunks con límite de 1 MB (1e6 bytes) para evitar saturar RAM.
- * - Sirve GET / (public/index.html), API REST (/api/tareas, /api/eventos) y estáticos:
- *   busca primero en public/ (styles.css, app.js) y luego en COURSE_ROOT (portal del curso)
- *   validando con startsWith() para impedir path traversal (../).
+ * - Lee cuerpos POST por chunks con límite estricto de 1 MB (1e6 bytes) destruyendo el stream si excede.
+ * - Unifica envío de archivos estáticos en intentarEnviarArchivo() buscando primero en public/
+ *   y luego en COURSE_ROOT, validando con startsWith() contra path traversal (../).
  * - Solo llama a server.listen() si se ejecuta directamente (no al importarlo desde tests).
  */
-// Importamos el servidor HTTP nativo de Node.js (sin Express ni dependencias externas)
 import http from 'node:http';
-// Importamos lectura de archivos para servir public/index.html, el portal del curso y eventos.ndjson
 import { readFile } from 'node:fs/promises';
-// Importamos utilidades de rutas y URL para resolver archivos en ES Modules
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-// Reutilizamos exactamente la misma lógica de negocio que usa el CLI
 import { crear, listar, completar, eliminar } from './tareas.js';
 
-// Calculamos rutas absolutas hacia public/index.html, data/eventos.ndjson y la raíz del curso
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = resolve(__dirname, '..', 'public');
 const PUBLIC_HTML = join(PUBLIC_DIR, 'index.html');
 const EVENTOS_PATH = join(__dirname, '..', 'data', 'eventos.ndjson');
-// Subimos 4 niveles desde NODE/Proyectos/Tareas/src hasta CURSO_DESARROLLO_WEB/
 const COURSE_ROOT = resolve(__dirname, '..', '..', '..', '..');
 const PORT = Number(process.env.PORT) || 3000;
+const MAX_BODY_BYTES = 1e6;
 
-// Mapa de tipos MIME para servir el portal del curso (index.html, CSS, JS, imágenes, etc.)
+// Cabeceras CORS compartidas por preflight OPTIONS y respuestas JSON
+const CORS_HEADERS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+// Tipos MIME para servir el proyecto y el portal del curso
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
   '.js': 'application/javascript; charset=utf-8',
@@ -39,16 +40,22 @@ const MIME_TYPES = {
   '.md': 'text/markdown; charset=utf-8',
 };
 
-// Lee y parsea el cuerpo JSON de una petición entrante (POST / PATCH) usando streams por chunks
+// Lee y parsea el cuerpo JSON de una petición entrante protegiendo la memoria del servidor
 function leerBodyJson(req) {
   return new Promise((resolvePromise, reject) => {
     let raw = '';
+    let excedido = false;
     req.on('data', (chunk) => {
+      if (excedido) return;
       raw += chunk;
-      // Límite básico de seguridad (1 MB) para evitar payloads gigantes
-      if (raw.length > 1e6) reject(new Error('Payload demasiado grande'));
+      if (raw.length > MAX_BODY_BYTES) {
+        excedido = true;
+        req.destroy();
+        reject(new Error('Payload demasiado grande'));
+      }
     });
     req.on('end', () => {
+      if (excedido) return;
       try {
         resolvePromise(raw ? JSON.parse(raw) : {});
       } catch {
@@ -59,15 +66,31 @@ function leerBodyJson(req) {
   });
 }
 
-// Envía una respuesta JSON estándar con código de estado HTTP y cabeceras CORS
+// Envía una respuesta JSON estándar con código HTTP y cabeceras CORS
 function enviarJson(res, status, data) {
   res.writeHead(status, {
     'Content-Type': 'application/json; charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    ...CORS_HEADERS,
   });
   res.end(JSON.stringify(data));
+}
+
+// Intenta leer y enviar un archivo estático dentro de baseDir; devuelve false si no existe
+async function intentarEnviarArchivo(baseDir, relPath, res) {
+  const fullPath = resolve(baseDir, relPath);
+  if (!fullPath.startsWith(baseDir)) {
+    enviarJson(res, 403, { error: 'Acceso denegado' });
+    return true;
+  }
+  try {
+    const data = await readFile(fullPath);
+    const mime = MIME_TYPES[extname(fullPath).toLowerCase()] || 'application/octet-stream';
+    res.writeHead(200, { 'Content-Type': mime });
+    res.end(data);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 // Lee data/eventos.ndjson línea por línea y lo devuelve como arreglo de objetos
@@ -85,91 +108,51 @@ async function leerEventosNdjson() {
   }
 }
 
-// Sirve un archivo estático buscando primero en public/ (styles.css, app.js) y luego en COURSE_ROOT
-async function servirArchivoCurso(pathname, res) {
-  const relPath = decodeURIComponent(pathname).replace(/^\/+/, '');
-  const publicPath = resolve(PUBLIC_DIR, relPath);
-  if (publicPath.startsWith(PUBLIC_DIR)) {
-    try {
-      const data = await readFile(publicPath);
-      const mime = MIME_TYPES[extname(publicPath).toLowerCase()] || 'application/octet-stream';
-      res.writeHead(200, { 'Content-Type': mime });
-      return res.end(data);
-    } catch {
-      // Si no está en public/, seguimos buscando en COURSE_ROOT
-    }
-  }
-
-  const fullPath = resolve(COURSE_ROOT, relPath);
-  if (!fullPath.startsWith(COURSE_ROOT)) {
-    return enviarJson(res, 403, { error: 'Acceso denegado' });
-  }
-  try {
-    const data = await readFile(fullPath);
-    const mime = MIME_TYPES[extname(fullPath).toLowerCase()] || 'application/octet-stream';
-    res.writeHead(200, { 'Content-Type': mime });
-    return res.end(data);
-  } catch {
-    return enviarJson(res, 404, { error: 'Ruta no encontrada' });
-  }
-}
-
 // Creamos el servidor HTTP que atiende la interfaz HTML, la API REST /api/* y el portal del curso
 export const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
   const { pathname } = url;
 
   if (req.method === 'OPTIONS') {
-    res.writeHead(204, {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
-    });
+    res.writeHead(204, CORS_HEADERS);
     return res.end();
   }
 
   try {
-    // 1) Ruta principal: sirve la interfaz gráfica web del Gestor de Tareas
     if (req.method === 'GET' && pathname === '/') {
       const html = await readFile(PUBLIC_HTML, 'utf8');
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       return res.end(html);
     }
 
-    // 2) GET /api/tareas -> devuelve todas las tareas desde data/tareas.json
     if (req.method === 'GET' && pathname === '/api/tareas') {
       return enviarJson(res, 200, await listar());
     }
 
-    // 3) POST /api/tareas -> crea una nueva tarea y registra evento en eventos.ndjson
     if (req.method === 'POST' && pathname === '/api/tareas') {
       const body = await leerBodyJson(req);
-      const nueva = await crear(body.descripcion);
-      return enviarJson(res, 201, nueva);
+      return enviarJson(res, 201, await crear(body.descripcion));
     }
 
-    // 4) PATCH /api/tareas/:id -> marca la tarea como completada
     if (req.method === 'PATCH' && pathname.startsWith('/api/tareas/')) {
       const id = decodeURIComponent(pathname.slice('/api/tareas/'.length));
-      const actualizada = await completar(id);
-      return enviarJson(res, 200, actualizada);
+      return enviarJson(res, 200, await completar(id));
     }
 
-    // 5) DELETE /api/tareas/:id -> elimina la tarea
     if (req.method === 'DELETE' && pathname.startsWith('/api/tareas/')) {
       const id = decodeURIComponent(pathname.slice('/api/tareas/'.length));
-      const eliminada = await eliminar(id);
-      return enviarJson(res, 200, eliminada);
+      return enviarJson(res, 200, await eliminar(id));
     }
 
-    // 6) GET /api/eventos -> devuelve el historial de eventos desde data/eventos.ndjson
     if (req.method === 'GET' && pathname === '/api/eventos') {
       return enviarJson(res, 200, await leerEventosNdjson());
     }
 
-    // 7) Cualquier otra petición GET sirve archivos del curso (ej. /index.html?filter=proyectos)
+    // Estáticos: busca primero en public/ (styles.css, app.js) y luego en COURSE_ROOT (portal)
     if (req.method === 'GET' && !pathname.startsWith('/api/')) {
-      return await servirArchivoCurso(pathname, res);
+      const relPath = decodeURIComponent(pathname).replace(/^\/+/, '');
+      if (await intentarEnviarArchivo(PUBLIC_DIR, relPath, res)) return;
+      if (await intentarEnviarArchivo(COURSE_ROOT, relPath, res)) return;
     }
 
     return enviarJson(res, 404, { error: 'Ruta no encontrada' });

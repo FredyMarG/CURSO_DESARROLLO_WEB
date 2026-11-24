@@ -28,3 +28,9 @@
 {"ts":"2026-11-24T04:59:07.790Z","tipo":"tarea:completada","id":"acec91eb-099d-4708-bbd8-1efcb4149edb"}
 {"ts":"2026-11-24T04:59:08.709Z","tipo":"tarea:eliminada","id":"acec91eb-099d-4708-bbd8-1efcb4149edb"}
 {"ts":"2026-11-24T04:59:09.418Z","tipo":"tarea:eliminada","id":"34a4a415-14ab-4bb9-b784-302c7a3bf3b3"}
+{"ts":"2026-11-24T05:14:57.126Z","tipo":"tarea:creada","id":"b5f8773b-7736-4c0a-a9ed-d49f2a2c333f","descripcion":"Tarea de prueba automatizada"}
+{"ts":"2026-11-24T05:14:57.132Z","tipo":"tarea:completada","id":"b5f8773b-7736-4c0a-a9ed-d49f2a2c333f"}
+{"ts":"2026-11-24T05:14:57.134Z","tipo":"tarea:eliminada","id":"b5f8773b-7736-4c0a-a9ed-d49f2a2c333f"}
+{"ts":"2026-11-24T05:15:14.420Z","tipo":"tarea:creada","id":"cdc8fdc5-339d-4277-9ab2-83dd47b96868","descripcion":"Tarea de prueba automatizada"}
+{"ts":"2026-11-24T05:15:14.423Z","tipo":"tarea:completada","id":"cdc8fdc5-339d-4277-9ab2-83dd47b96868"}
+{"ts":"2026-11-24T05:15:14.425Z","tipo":"tarea:eliminada","id":"cdc8fdc5-339d-4277-9ab2-83dd47b96868"}
