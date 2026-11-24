@@ -1,0 +1,416 @@
+<!doctype html>
+<!-- Módulo 11 de Node.js: NPM y Gestión de Paquetes -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción SEO del módulo -->
+    <meta name="description" content="Módulo 11: NPM y Gestión de Paquetes en Node.js — package.json, SemVer (^ y ~), dependencies vs devDependencies, package-lock.json, npm ci y npx." />
+    <title>NPM y Gestión de Paquetes — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido: rel="stylesheet" carga CSS; defer ejecuta JS al finalizar el HTML -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <!-- Temas neón, navegación secuencial, favicon temático y enlace directo a apuntes -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<!-- class="mode-presentation" inicia en vista de diapositivas (alternable a Modo Guía) -->
+<body class="mode-presentation">
+    <!-- Capas visuales de fondo (resplandores y cuadrícula decorativa) -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra de navegación superior fija -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · NPM Y PAQUETES</span>
+            <div class="brand-title"><span>📦</span><span>NPM y Gestión de Paquetes</span></div>
+        </div>
+        <!-- Indicador de progreso y número de diapositiva actual -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <!-- Botones de acción globales (controlados por slides-engine.js) -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <!-- Contenedor principal de las 9 diapositivas -->
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: NPM y Gestión de Paquetes">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 11 · Ecosistema npm</span>
+                    <span class="badge badge-cyan">SemVer (^ / ~) · lockfile</span>
+                    <span class="badge badge-purple">npm ci · npx · audit</span>
+                </div>
+                <h1 class="hero-title">NPM y Gestión<br /><span class="gradient-text">de Paquetes</span></h1>
+                <p class="hero-subtitle">
+                    Domina el gestor de paquetes de Node.js: comprende el versionado semántico (<code>SemVer</code>), organiza <code>dependencies</code> y <code>devDependencies</code>, garantiza instalaciones reproducibles con <code>package-lock.json</code> + <code>npm ci</code> y automatiza tareas con <code>npx</code> y scripts.
+                </p>
+                <!-- Tarjetas de acceso rápido: data-jump indica la diapositiva destino al hacer clic -->
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📄</div>
+                        <h3>1. package.json</h3>
+                        <p>Anatomía completa del manifiesto y scripts de proyecto.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🏷️</div>
+                        <h3>2. SemVer (^ y ~)</h3>
+                        <p>Qué significan <code>MAJOR.MINOR.PATCH</code> y los rangos de versión.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🔒</div>
+                        <h3>3. Lockfile, npm ci y npx</h3>
+                        <p>Instalaciones limpias, <code>devDependencies</code> y auditoría.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba rangos SemVer y genera <code>package.json</code> en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: ANATOMÍA DE PACKAGE.JSON -->
+        <section class="slide" data-slide="2" data-title="Anatomía de package.json">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · MANIFIESTO DEL PROYECTO</span>
+                <h2 class="slide-title">¿Qué es <code>npm</code> y Cómo se Estructura <code>package.json</code>?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    <strong>npm</strong> administra dependencias externas, versiones y scripts de automatización. Su corazón es <code>package.json</code>:
+                </p>
+                <pre class="code-block"><code>{
+  "name": "mi-api-node",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": { "express": "^4.21.0" },
+  "devDependencies": { "eslint": "^9.0.0" }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: SEMVER -->
+        <section class="slide" data-slide="3" data-title="Versionado Semántico (SemVer)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · VERSIONADO SEMÁNTICO</span>
+                <h2 class="slide-title">SemVer: <code>MAJOR.MINOR.PATCH</code>, <code>^</code> y <code>~</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Notación</th><th>Qué permite actualizar</th><th>Ejemplo desde <code>1.4.2</code></th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>^1.4.2</code> (<em>caret</em>)</td><td>Sube <strong>MINOR</strong> y <strong>PATCH</strong> (mantiene <code>MAJOR</code>)</td><td><code>&gt;=1.4.2 &lt;2.0.0</code></td></tr>
+                        <tr><td><code>~1.4.2</code> (<em>tilde</em>)</td><td>Sube solo <strong>PATCH</strong> (mantiene <code>MAJOR.MINOR</code>)</td><td><code>&gt;=1.4.2 &lt;1.5.0</code></td></tr>
+                        <tr><td><code>1.4.2</code> (exacta)</td><td>Ninguna actualización automática</td><td>Solo <code>1.4.2</code></td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box">
+                    <strong>💡 Regla SemVer:</strong> <strong>MAJOR</strong> rompe compatibilidad, <strong>MINOR</strong> añade funciones compatibles y <strong>PATCH</strong> corrige errores.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: DEPENDENCIES, LOCKFILE Y NPM CI -->
+        <section class="slide" data-slide="4" data-title="dependencies, lockfile y npm ci">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · INSTALACIONES REPRODUCIBLES</span>
+                <h2 class="slide-title"><code>dependencies</code>, <code>devDependencies</code> y <code>npm ci</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Concepto / Comando</th><th>Función</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>npm install express</code></td><td>Agrega a <code>dependencies</code> (necesario en producción)</td></tr>
+                        <tr><td><code>npm install -D eslint</code></td><td>Agrega a <code>devDependencies</code> (solo desarrollo/pruebas)</td></tr>
+                        <tr><td><code>package-lock.json</code></td><td>Congela el árbol exacto de versiones; <strong>sí se sube a Git</strong></td></tr>
+                        <tr><td><code>npm ci</code></td><td>Limpia <code>node_modules</code> e instala exactamente lo del lockfile</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: NPX, SCRIPTS Y AUDITORÍA -->
+        <section class="slide" data-slide="5" data-title="npx, Scripts y Auditoría">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PRODUCTIVIDAD Y SEGURIDAD</span>
+                <h2 class="slide-title"><code>npx</code>, Hooks <code>pre/post</code> y <code>npm audit</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Comando</th><th>Para qué sirve</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>npx &lt;cli&gt;</code></td><td>Ejecuta una CLI sin instalarla globalmente</td></tr>
+                        <tr><td><code>npm outdated</code></td><td>Lista paquetes con nuevas versiones disponibles</td></tr>
+                        <tr><td><code>npm audit</code> / <code>audit fix</code></td><td>Detecta y corrige vulnerabilidades conocidas</td></tr>
+                        <tr><td><code>npm uninstall &lt;pkg&gt;</code></td><td>Elimina el paquete de <code>node_modules</code> y <code>package.json</code></td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block"><code>// Hooks automáticos: "pretest" corre antes de "npm test"
+"scripts": {
+  "pretest": "node --check src/index.js",
+  "test": "node --test"
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRACTICAS -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas con npm">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD EN EQUIPO</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes con <code>npm</code></h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Buena práctica</th><th>Error que evita</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ignorar <code>node_modules/</code> en <code>.gitignore</code></td><td>Subir miles de archivos innecesarios a GitHub</td></tr>
+                        <tr><td>Subir <code>package-lock.json</code> al repositorio</td><td>Que el código falle en otro PC por versiones distintas</td></tr>
+                        <tr><td>Usar <code>npm ci</code> en producción y CI/CD</td><td>Actualizaciones inesperadas durante un despliegue</td></tr>
+                        <tr><td>Usar <code>npm.cmd</code> si PowerShell bloquea <code>npm.ps1</code></td><td>Modificar políticas globales del sistema sin necesidad</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador SemVer y npm">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · SEMVER Y COMANDOS</span>
+                <h2 class="slide-title">🎛️ Simulador de <code>SemVer</code> y Comandos <code>npm</code></h2>
+                <p class="slide-lead">Comprueba qué versiones acepta <code>^</code> frente a <code>~</code> y cuándo usar <code>npm install</code>, <code>npm ci</code> o <code>npx</code>.</p>
+            </div>
+            <!-- Panel interactivo: selector de escenario + vista visual + snippet resultante -->
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario npm</label>
+                        <!-- Selector conectado al script inferior (#npmSimMode) -->
+                        <select id="npmSimMode">
+                            <option value="caret">SemVer: ^1.4.2 (caret)</option>
+                            <option value="tilde">SemVer: ~1.4.2 (tilde)</option>
+                            <option value="ci">npm install vs npm ci</option>
+                            <option value="npx">npx vs instalación global</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <!-- Salida explicativa dinámica -->
+                    <div class="sim-stage" id="npmSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <!-- Bloque de código/comando dinámico -->
+                    <pre class="sim-code" id="npmSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz: NPM y Paquetes">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de <code>npm</code> y SemVer</h2>
+            </div>
+            <!-- Contenedor del Quiz: slides-engine.js gestiona el puntaje y feedback automáticamente -->
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: ~1.4.2 solo permite subir el PATCH (1.4.x), mientras ^1.4.2 permite MINOR y PATCH (1.x.x)." data-err="La tilde (~) bloquea tanto MAJOR como MINOR, dejando actualizar únicamente PATCH.">
+                    <div class="quiz-q-title">1. Con la regla <code>"express": "~1.4.2"</code>, ¿cuál es la máxima actualización permitida?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">2.0.0</button>
+                        <button class="quiz-option" data-opt="b">1.4.9 (solo PATCH)</button>
+                        <button class="quiz-option" data-opt="c">1.9.0 (MINOR y PATCH)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: npm ci instala estrictamente lo registrado en package-lock.json sin modificarlo." data-err="npm ci (Clean Install) garantiza instalaciones idénticas leyendo solo package-lock.json.">
+                    <div class="quiz-q-title">2. ¿Qué comando instala exactamente las versiones de <code>package-lock.json</code> en servidores o CI/CD?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">npm ci</button>
+                        <button class="quiz-option" data-opt="b">npm init -y</button>
+                        <button class="quiz-option" data-opt="c">npm outdated</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: -D (--save-dev) registra el paquete en devDependencies porque solo se usa en desarrollo." data-err="npm install -D guarda herramientas de desarrollo en devDependencies.">
+                    <div class="quiz-q-title">3. ¿Qué flag guarda una herramienta de pruebas o linter en <code>devDependencies</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">-g</button>
+                        <button class="quiz-option" data-opt="b">-y</button>
+                        <button class="quiz-option" data-opt="c">-D (--save-dev)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: NPM y SemVer">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de <code>npm</code> y SemVer</h2>
+            </div>
+            <!-- Panel de Laboratorio: presets precargados + editor + vista previa en iframe aislado -->
+            <div class="lab-panel">
+                <!-- Botones de ejemplos precargados (data-code se inyecta en #labEditor) -->
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Evaluador didáctico de rangos SemVer (^ y ~) desde 1.4.2
+  function cumpleRango(version, rango) {
+    const modo = rango[0];
+    const [majM, minM, patM] = rango.replace(/^[~^]/, &#x27;&#x27;).split(&#x27;.&#x27;).map(Number);
+    const [majA, minA, patA] = version.split(&#x27;.&#x27;).map(Number);
+    if (modo === &#x27;^&#x27;) return majA === majM &amp;&amp; (minA &gt; minM || (minA === minM &amp;&amp; patA &gt;= patM));
+    if (modo === &#x27;~&#x27;) return majA === majM &amp;&amp; minA === minM &amp;&amp; patA &gt;= patM;
+    return version === rango;
+  }
+
+  const candidatas = [&#x27;1.4.5&#x27;, &#x27;1.8.0&#x27;, &#x27;2.0.0&#x27;];
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    &#x27;&lt;strong&gt;🏷️ Pruebas SemVer (^1.4.2 vs ~1.4.2):&lt;/strong&gt;&#x27; +
+    candidatas.map(v =&gt;
+      `&lt;div&gt;• ${v} → ^1.4.2: ${cumpleRango(v, &#x27;^1.4.2&#x27;) ? &#x27;✅&#x27; : &#x27;❌&#x27;} | ~1.4.2: ${cumpleRango(v, &#x27;~1.4.2&#x27;) ? &#x27;✅&#x27; : &#x27;❌&#x27;}&lt;/div&gt;`
+    ).join(&#x27;&#x27;);
+&lt;/script&gt;">Validador de SemVer (^ vs ~)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Generador de package.json profesional con scripts y dependencias separadas
+  const pkg = {
+    name: &#x27;api-curso-node&#x27;,
+    version: &#x27;1.0.0&#x27;,
+    private: true,
+    type: &#x27;module&#x27;,
+    scripts: {
+      start: &#x27;node src/index.js&#x27;,
+      dev: &#x27;node --watch src/index.js&#x27;,
+      pretest: &#x27;node --check src/index.js&#x27;,
+      test: &#x27;node --test&#x27;
+    },
+    dependencies: { express: &#x27;^4.21.0&#x27; },
+    devDependencies: { eslint: &#x27;^9.0.0&#x27; }
+  };
+  document.getElementById(&#x27;out&#x27;).innerHTML = `&lt;pre&gt;${JSON.stringify(pkg, null, 2)}&lt;/pre&gt;`;
+&lt;/script&gt;">Generador de package.json</button>
+                </div>
+                <div class="lab-split">
+                    <!-- spellcheck="false" desactiva corrección ortográfica sobre el código -->
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Evaluador didáctico de rangos SemVer (^ y ~) desde 1.4.2
+  function cumpleRango(version, rango) {
+    const modo = rango[0];
+    const [majM, minM, patM] = rango.replace(/^[~^]/, &#x27;&#x27;).split(&#x27;.&#x27;).map(Number);
+    const [majA, minA, patA] = version.split(&#x27;.&#x27;).map(Number);
+    if (modo === &#x27;^&#x27;) return majA === majM &amp;&amp; (minA &gt; minM || (minA === minM &amp;&amp; patA &gt;= patM));
+    if (modo === &#x27;~&#x27;) return majA === majM &amp;&amp; minA === minM &amp;&amp; patA &gt;= patM;
+    return version === rango;
+  }
+
+  const candidatas = [&#x27;1.4.5&#x27;, &#x27;1.8.0&#x27;, &#x27;2.0.0&#x27;];
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    &#x27;&lt;strong&gt;🏷️ Pruebas SemVer (^1.4.2 vs ~1.4.2):&lt;/strong&gt;&#x27; +
+    candidatas.map(v =&gt;
+      `&lt;div&gt;• ${v} → ^1.4.2: ${cumpleRango(v, &#x27;^1.4.2&#x27;) ? &#x27;✅&#x27; : &#x27;❌&#x27;} | ~1.4.2: ${cumpleRango(v, &#x27;~1.4.2&#x27;) ? &#x27;✅&#x27; : &#x27;❌&#x27;}&lt;/div&gt;`
+    ).join(&#x27;&#x27;);
+&lt;/script&gt;</textarea>
+                    <!-- title describe el iframe para accesibilidad -->
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Controles inferiores de navegación entre diapositivas -->
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <!-- Modal de vista general (Overview) al pulsar tecla O o botón ▦ -->
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de la diapositiva 7 -->
+    <script>
+        // IIFE para encapsular variables y evitar colisiones en el ámbito global
+        (function () {
+            // Referencias al selector, escenario visual y bloque de código
+            const mode = document.getElementById('npmSimMode');
+            const stage = document.getElementById('npmSimStage');
+            const code = document.getElementById('npmSimCode');
+            // Guarda defensiva por si faltara algún nodo en el DOM
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el panel visual y el snippet según la opción seleccionada
+            function update() {
+                if (mode.value === 'caret') {
+                    // Caso 1: rango caret (^) — permite MINOR y PATCH manteniendo MAJOR
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">^1.4.2 acepta 1.4.5 (PATCH) y 1.9.0 (MINOR)</div>
+                        <div style="color:#ff3358;">^1.4.2 rechaza 2.0.0 (cambia MAJOR = breaking change)</div>
+                    `;
+                    code.textContent = `"dependencies": {\n  "express": "^1.4.2"\n}`;
+                } else if (mode.value === 'tilde') {
+                    // Caso 2: rango tilde (~) — restringe actualizaciones solo a PATCH
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">~1.4.2 acepta 1.4.3 y 1.4.9 (solo PATCH)</div>
+                        <div style="color:#ff3358;">~1.4.2 rechaza 1.5.0 (cambia MINOR) y 2.0.0</div>
+                    `;
+                    code.textContent = `"dependencies": {\n  "express": "~1.4.2"\n}`;
+                } else if (mode.value === 'ci') {
+                    // Caso 3: diferencia entre npm install y npm ci (Clean Install)
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">npm install: puede actualizar package-lock.json según ^ / ~</div>
+                        <div style="color:#00ff88;font-weight:700;">npm ci: instala exactamente package-lock.json (sin modificarlo)</div>
+                    `;
+                    code.textContent = `npm ci   # Recomendado en servidores, Docker y CI/CD`;
+                } else {
+                    // Caso 4: ejecución puntual de CLIs con npx frente a instalación global (-g)
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">npx ejecuta herramientas puntuales sin ensuciar tu PC globalmente</div>
+                        <div style="color:#38bdf8;">Si la CLI ya está en node_modules/.bin, la usa al instante.</div>
+                    `;
+                    code.textContent = `npx eslint .\nnpx prettier --write src/`;
+                }
+            }
+
+            // Escucha cambios del selector y renderiza el estado inicial al cargar
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

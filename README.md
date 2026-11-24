@@ -62,7 +62,7 @@ CURSO_DESARROLLO_WEB/
 - **Práctica:** 24 módulos interactivos, 9 ejercicios avanzados en `EJERCICIOS/` y exhibición unificada en [JAVASCRIPT/PROYECTOS/index.html](./JAVASCRIPT/PROYECTOS/index.html).
 
 ### 5. [Node.js](./NODE)
-- **Documentación (`NODE/Documentacion/`):** 10 guías completas (`INTRODUCCION.md` → `MODULOS.md`).
+- **Documentación (`NODE/Documentacion/`):** 12 guías completas (`INTRODUCCION.md` → `JSON.md`).
 - **Módulos y Práctica (cada uno con enfoque único, simulador, quiz y laboratorio):**
   - `01. Introducción a Node.js`: qué es Node.js, Frontend vs Backend, Navegador vs Node.js, usos reales y primer script CLI (`hola.js`).
   - `02. Fundamentos de Node.js`: ciclo Cliente-Servidor HTTP, `npm`, `package.json`, `process.argv`, servidor `node:http` y API de bienvenida.
@@ -74,6 +74,8 @@ CURSO_DESARROLLO_WEB/
   - `08. Eventos y Streams`: `EventEmitter` (`on`, `once`, `off`, `'error'`), `Readable`/`Writable` por *chunks* y `pipeline()`.
   - `09. Criptografía y Seguridad`: `randomUUID`, `randomBytes`, `SHA-256`, `HMAC`, `scrypt` con sal y `timingSafeEqual()`.
   - `10. Módulos en Node.js`: CommonJS (`require`/`module.exports`), ESM (`import`/`export`), resolución de rutas, `import()` dinámico y arquitectura por capas.
+  - `11. NPM y Gestión de Paquetes`: `package.json`, SemVer (`^` / `~`), `dependencies` vs `devDependencies`, `package-lock.json`, `npm ci`, `npx` y `npm audit`.
+  - `12. JSON en Node.js`: características (RFC 8259), los 6 tipos válidos, `JSON.parse()` + `reviver`, `JSON.stringify()` + `replacer`/`.toJSON()`, trampas comunes, archivos con `fs/promises`, imports ESM y `NDJSON`.
 
 ---
 

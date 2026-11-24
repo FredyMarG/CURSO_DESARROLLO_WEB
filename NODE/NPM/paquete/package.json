@@ -1,7 +1,7 @@
 {
-  "name": "node",
+  "name": "paquete",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mi primer paquete de node.js7",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -84,12 +84,28 @@ const modules = [
     desc: "CommonJS (require/module.exports), ESM (import/export), módulos nativos, rutas y separación de capas.", // Descripción breve
     href: "NODE/Modulos/index.html", // Ruta relativa al módulo interactivo
   },
+  // Módulo 11 interactivo de NPM y Gestión de Paquetes
+  {
+    cat: "node", // Categoría Node.js
+    title: "11. NPM y Gestión de Paquetes", // Título visible en la tarjeta
+    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "package.json, SemVer (^ vs ~), dependencies vs devDependencies, package-lock.json, npm ci, npx y npm audit.", // Descripción breve
+    href: "NODE/NPM/index.html", // Ruta relativa al módulo interactivo
+  },
+  // Módulo 12 interactivo de JSON en Node.js
+  {
+    cat: "node", // Categoría Node.js
+    title: "12. JSON en Node.js", // Título visible en la tarjeta
+    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Características (RFC 8259), los 6 tipos válidos, JSON.parse/reviver, JSON.stringify/replacer/toJSON, trampas comunes y NDJSON.", // Descripción breve
+    href: "NODE/JSON/index.html", // Ruta relativa al módulo interactivo
+  },
   // Acceso directo a la documentación técnica de Node.js
   {
     cat: "node", // Categoría Node.js
     title: "Documentación Completa Node.js", // Título visible en la tarjeta
-    tag: "10 Guías MD", // Etiqueta de guías Markdown
-    desc: "Guías teóricas de los 10 módulos de Node.js, ejercicios y cheatsheets., ejercicios y cheatsheets.", // Descripción breve
+    tag: "12 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de los 12 módulos de Node.js, ejercicios y cheatsheets.", // Descripción breve
     href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
   },
 

@@ -1,0 +1,515 @@
+<!doctype html>
+<!-- Módulo 12 de Node.js: JSON y sus Características -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción SEO del módulo -->
+    <meta name="description" content="Módulo 12: JSON en Node.js — características (RFC 8259), tipos válidos, JSON.parse y reviver, JSON.stringify con replacer/space/toJSON, trampas comunes y NDJSON." />
+    <title>JSON en Node.js — Presentación Completa | Curso Desarrollo Web</title>
+    <!-- Precarga de fuentes de Google para tipografía UI y código -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido de diapositivas: CSS visual y JS de navegación/quiz/lab -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <!-- Capa visual neón, favicon temático y enlace directo a apuntes Markdown -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<!-- class="mode-presentation" inicia en vista de diapositivas (alternable a Modo Guía) -->
+<body class="mode-presentation">
+    <!-- Capas decorativas de fondo (resplandores y cuadrícula) -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra de navegación superior fija -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · JSON Y SERIALIZACIÓN</span>
+            <div class="brand-title"><span>{}</span><span>JSON en Node.js</span></div>
+        </div>
+        <!-- Indicador de progreso y contador de diapositiva actual -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 10</div>
+        </div>
+        <!-- Botones globales controlados por slides-engine.js -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <!-- Contenedor principal de las 10 diapositivas -->
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: JSON en Node.js">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 12 · RFC 8259</span>
+                    <span class="badge badge-cyan">JSON.parse &amp; JSON.stringify</span>
+                    <span class="badge badge-purple">replacer · reviver · NDJSON</span>
+                </div>
+                <h1 class="hero-title">JSON y sus<br /><span class="gradient-text">Características en Node.js</span></h1>
+                <p class="hero-subtitle">
+                    Domina el estándar universal de intercambio de datos: comprende sus características, los 6 tipos válidos, <code>JSON.parse()</code> con <code>reviver</code>, <code>JSON.stringify()</code> con <code>replacer</code>/<code>toJSON()</code>, trampas comunes y lectura de archivos/NDJSON en Node.js.
+                </p>
+                <!-- Tarjetas de salto rápido: data-jump indica la diapositiva destino -->
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧬</div>
+                        <h3>1. Características</h3>
+                        <p>Texto plano UTF-8, agnóstico de lenguaje, ligero y estricto.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">🏷️</div>
+                        <h3>2. Tipos y Reglas</h3>
+                        <p>Los 6 tipos permitidos frente a objetos literales de JS.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">⚙️</div>
+                        <h3>3. parse &amp; stringify</h3>
+                        <p>Control fino con <code>reviver</code>, <code>replacer</code>, <code>space</code> y <code>toJSON()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="8">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba validaciones, trampas y transformaciones en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES JSON Y SUS CARACTERÍSTICAS -->
+        <section class="slide" data-slide="2" data-title="Características de JSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS DEL FORMATO</span>
+                <h2 class="slide-title">¿Qué es JSON y Cuáles son sus Características?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:12px;">
+                    <strong>JSON</strong> (<em>JavaScript Object Notation</em>, estándar <strong>RFC 8259</strong>) es un formato de texto plano para representar datos estructurados. Aunque deriva de JavaScript, es totalmente independiente del lenguaje.
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Característica</th><th>Qué significa en la práctica</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Texto plano UTF-8</strong></td><td>Viaja fácilmente por HTTP, archivos <code>.json</code> y bases NoSQL</td></tr>
+                        <tr><td><strong>Agnóstico del lenguaje</strong></td><td>Node.js, Python, Go, Java o Rust lo leen de forma nativa</td></tr>
+                        <tr><td><strong>Ligero y legible</strong></td><td>Menor tamaño que XML y fácil de inspeccionar por humanos</td></tr>
+                        <tr><td><strong>Solo datos (sin lógica)</strong></td><td>No guarda funciones, métodos, clases ni prototipos</td></tr>
+                        <tr><td><strong>Sintaxis estricta</strong></td><td>Reglas fijas que evitan ambigüedades entre distintos <em>parsers</em></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: TIPOS DE DATOS VÁLIDOS Y REGLAS ESTRICTAS -->
+        <section class="slide" data-slide="3" data-title="Tipos Válidos y Sintaxis">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · REGLAS DEL ESTÁNDAR</span>
+                <h2 class="slide-title">Los 6 Tipos Válidos vs. Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Tipo válido</th><th>Ejemplo</th><th>Regla obligatoria</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>string</code></td><td><code>"Node.js"</code></td><td>Siempre entre <strong>comillas dobles</strong> (nunca simples)</td></tr>
+                        <tr><td><code>number</code></td><td><code>42</code>, <code>3.14</code>, <code>1e3</code></td><td>Sin <code>NaN</code>, <code>Infinity</code> ni ceros a la izquierda (<code>05</code>)</td></tr>
+                        <tr><td><code>boolean</code> / <code>null</code></td><td><code>true</code>, <code>false</code>, <code>null</code></td><td>Siempre en minúsculas (<code>undefined</code> no existe)</td></tr>
+                        <tr><td><code>object</code> / <code>array</code></td><td><code>{"ok":true}</code>, <code>[1,2]</code></td><td>Claves con comillas dobles y <strong>sin coma final</strong> ni comentarios</td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box">
+                    <strong>⚠️ Regla clave:</strong> todo JSON válido es texto interpretable por JavaScript, pero <strong>no todo objeto JS es JSON válido</strong> (los comentarios <code>//</code>, las comillas simples <code>'a'</code> y las comas finales rompen <code>JSON.parse()</code>).
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: JSON.PARSE Y REVIVER -->
+        <section class="slide" data-slide="4" data-title="JSON.parse() y reviver">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · DESERIALIZACIÓN SEGURA</span>
+                <h2 class="slide-title"><code>JSON.parse()</code>, <code>try/catch</code> y Función <code>reviver</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.6;margin-bottom:10px;">
+                    <code>JSON.parse(texto, reviver?)</code> transforma texto JSON en valores JS. Como lanza <code>SyntaxError</code> ante texto corrupto, siempre debe ir dentro de <code>try/catch</code>:
+                </p>
+                <pre class="code-block"><code>const raw = '{"servicio":"api","creado":"2026-11-23T22:00:00.000Z"}';
+const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
+
+try {
+  // reviver transforma fechas ISO en instancias Date reales y bloquea __proto__
+  const data = JSON.parse(raw, (clave, valor) =&gt; {
+    if (clave === '__proto__') return undefined;
+    return typeof valor === 'string' &amp;&amp; isoRegex.test(valor) ? new Date(valor) : valor;
+  });
+  console.log(data.creado instanceof Date); // true
+} catch (err) {
+  console.error('JSON inválido:', err.message);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: JSON.STRINGIFY, REPLACER, SPACE Y TOJSON -->
+        <section class="slide" data-slide="5" data-title="JSON.stringify(), replacer y toJSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · SERIALIZACIÓN A MEDIDA</span>
+                <h2 class="slide-title"><code>JSON.stringify()</code>, <code>replacer</code>, <code>space</code> y <code>.toJSON()</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:12px;"><code>const usuario = { id: 1, nombre: 'Ana', passwordHash: 'secreto' };
+
+// 1) Lista blanca (arreglo) + indentación de 2 espacios
+JSON.stringify(usuario, ['id', 'nombre'], 2);
+
+// 2) Filtro con función replacer (omitir retornando undefined)
+JSON.stringify(usuario, (k, v) =&gt; (k === 'passwordHash' ? undefined : v), 2);
+
+// 3) Método .toJSON() propio en objetos o clases
+const cuenta = {
+  titular: 'Ana',
+  tokenPrivado: 'xyz',
+  toJSON() { return { titular: this.titular }; }
+};
+JSON.stringify(cuenta); // '{"titular":"Ana"}'</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: TRAMPAS COMUNES EN JAVASCRIPT -->
+        <section class="slide" data-slide="6" data-title="Trampas y Casos Límite">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CASOS LÍMITE</span>
+                <h2 class="slide-title">Trampas de <code>JSON.stringify()</code> que Debes Conocer</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Dato en JS</th><th>Qué hace <code>JSON.stringify()</code></th><th>Cómo evitar problemas</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>undefined</code>, función, <code>Symbol</code></td><td>Se <strong>omite</strong> en objetos; pasa a <code>null</code> en arrays</td><td>Usar <code>null</code> explícito si la clave debe existir</td></tr>
+                        <tr><td><code>NaN</code>, <code>Infinity</code></td><td>Se convierte silenciosamente en <code>null</code></td><td>Validar antes con <code>Number.isFinite()</code></td></tr>
+                        <tr><td><code>Map</code> / <code>Set</code></td><td>Se serializa como objeto vacío <code>{}</code></td><td>Convertir con <code>Object.fromEntries()</code> / <code>[...set]</code></td></tr>
+                        <tr><td><code>BigInt</code> (<code>10n</code>)</td><td>Lanza <code>TypeError</code></td><td>Transformarlo a <code>String</code> en el <code>replacer</code></td></tr>
+                        <tr><td>Referencia circular</td><td>Lanza <code>TypeError: cyclic object value</code></td><td>Evitar ciclos o filtrar con <code>WeakSet</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: JSON EN NODE.JS (FS, IMPORTS Y NDJSON) -->
+        <section class="slide" data-slide="7" data-title="JSON en Node.js: fs, Imports y NDJSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · USO REAL EN NODE.JS</span>
+                <h2 class="slide-title">Archivos con <code>fs/promises</code>, Imports ESM y <code>NDJSON</code></h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block" style="margin-bottom:10px;"><code>// 1) CommonJS: importar JSON directamente y convertir ida/vuelta (curso.json)
+const curso = require('./curso.json'); // Node.js lo parsea automáticamente
+const textoJSON = JSON.stringify(curso); // Objeto JS -&gt; string JSON
+const objetoJS = JSON.parse(textoJSON);  // string JSON -&gt; Objeto JS (usar try/catch)
+
+// 2) ESM + fs/promises (Node 20.10+ / 22+)
+import { readFile, writeFile } from 'node:fs/promises';
+import pkg from './package.json' with { type: 'json' };
+const cfg = JSON.parse(await readFile('./config.json', 'utf8'));
+await writeFile('./config.json', JSON.stringify(cfg, null, 2) + '\n', 'utf8');</code></pre>
+                <div class="tip-box">
+                    <strong>🌊 Logs y archivos masivos (NDJSON):</strong> si guardas miles de registros en un único array JSON, debes leer todo el archivo en RAM. Con <strong>NDJSON</strong> (<em>Newline Delimited JSON</em>), cada línea es un objeto JSON independiente procesable con <em>streams</em>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="8" data-lab="true" data-title="Simulador de JSON">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · COMPORTAMIENTO EN VIVO</span>
+                <h2 class="slide-title">🎛️ Simulador de Características y Trampas JSON</h2>
+                <p class="slide-lead">Explora cómo responde <code>JSON.stringify()</code> y <code>JSON.parse()</code> ante cada caso clave.</p>
+            </div>
+            <!-- Panel interactivo: selector de escenario + resultado visual + snippet -->
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario JSON</label>
+                        <!-- Selector conectado al script inferior (#jsonSimMode) -->
+                        <select id="jsonSimMode">
+                            <option value="strict">Reglas estrictas vs JS literal</option>
+                            <option value="replacer">stringify + replacer (ocultar secretos)</option>
+                            <option value="reviver">parse + reviver (restaurar Date)</option>
+                            <option value="traps">Trampas: undefined, NaN, Set y BigInt</option>
+                            <option value="ndjson">JSON normal vs NDJSON (streams)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <!-- Salida explicativa dinámica -->
+                    <div class="sim-stage" id="jsonSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <!-- Snippet de código dinámico -->
+                    <pre class="sim-code" id="jsonSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: QUIZ -->
+        <section class="slide" data-slide="9" data-title="Quiz: JSON en Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de JSON y Características</h2>
+            </div>
+            <!-- Contenedor del Quiz gestionado automáticamente por slides-engine.js -->
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 4 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: JSON exige comillas dobles en claves y strings, y no permite comas finales ni comentarios." data-err="En JSON las claves van siempre entre comillas dobles y no se admiten comas finales ni comentarios.">
+                    <div class="quiz-q-title">1. ¿Cuál de estos fragmentos es JSON 100% válido según RFC 8259?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">{ nombre: 'Ana', }</button>
+                        <button class="quiz-option" data-opt="b">{ "nombre": "Ana", /* ok */ }</button>
+                        <button class="quiz-option" data-opt="c">{ "nombre": "Ana", "activo": true }</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Exacto: en objetos omite la clave, pero en arreglos convierte undefined en null para conservar los índices." data-err="En objetos omite la propiedad; dentro de un arreglo la reemplaza por null.">
+                    <div class="quiz-q-title">2. ¿Qué produce <code>JSON.stringify({ a: undefined, b: [1, undefined] })</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">{"a":null,"b":[1]}</button>
+                        <button class="quiz-option" data-opt="b">{"b":[1,null]}</button>
+                        <button class="quiz-option" data-opt="c">Lanza SyntaxError</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: el segundo argumento de JSON.parse() es reviver, ideal para convertir strings ISO en Date." data-err="El segundo parámetro de JSON.parse() se llama reviver.">
+                    <div class="quiz-q-title">3. ¿Qué parámetro de <code>JSON.parse()</code> permite reconstruir fechas ISO a instancias <code>Date</code> al vuelo?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">reviver</button>
+                        <button class="quiz-option" data-opt="b">space</button>
+                        <button class="quiz-option" data-opt="c">toJSON</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: BigInt lanza TypeError en JSON.stringify() si no lo conviertes antes (por ejemplo a String)." data-err="BigInt no tiene representación nativa en JSON y lanza TypeError al serializarse.">
+                    <div class="quiz-q-title">4. ¿Qué valor provoca un <code>TypeError</code> directo al llamar a <code>JSON.stringify()</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">NaN</button>
+                        <button class="quiz-option" data-opt="b">100n (BigInt)</button>
+                        <button class="quiz-option" data-opt="c">new Date()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: LABORATORIO -->
+        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: JSON en Vivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de JSON</h2>
+            </div>
+            <!-- Panel de Laboratorio: presets precargados + editor + vista previa en iframe aislado -->
+            <div class="lab-panel">
+                <!-- Botones con código precargado en data-code -->
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Prueba JSON.stringify con replacer (oculta secretos) y JSON.parse con reviver (restaura Date)
+  const payload = {
+    id: 42,
+    usuario: &#x27;Lucía&#x27;,
+    passwordHash: &#x27;scrypt$9988&#x27;,
+    creado: new Date(&#x27;2026-11-23T22:00:00.000Z&#x27;)
+  };
+
+  const jsonText = JSON.stringify(
+    payload,
+    (clave, valor) =&gt; (clave === &#x27;passwordHash&#x27; ? undefined : valor),
+    2
+  );
+
+  const isoRe = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
+  const restaurado = JSON.parse(jsonText, (k, v) =&gt;
+    typeof v === &#x27;string&#x27; &amp;&amp; isoRe.test(v) ? new Date(v) : v
+  );
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;strong&gt;📄 JSON serializado (sin passwordHash):&lt;/strong&gt;&lt;pre&gt;${jsonText}&lt;/pre&gt;` +
+    `&lt;div&gt;✅ restaurado.creado instanceof Date: &lt;strong&gt;${restaurado.creado instanceof Date}&lt;/strong&gt;&lt;/div&gt;`;
+&lt;/script&gt;">replacer + reviver (Date)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Comprueba las trampas más comunes de JSON.stringify en JavaScript
+  const casos = {
+    omitidoEnObjeto: JSON.stringify({ a: 1, b: undefined, fn: () =&gt; {} }),
+    nullEnArray: JSON.stringify([1, undefined, () =&gt; {}]),
+    nanYInfinito: JSON.stringify({ n: NaN, inf: Infinity }),
+    setVacio: JSON.stringify({ tags: new Set([&#x27;node&#x27;, &#x27;json&#x27;]) }),
+    setConvertido: JSON.stringify({ tags: [...new Set([&#x27;node&#x27;, &#x27;json&#x27;])] })
+  };
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    &#x27;&lt;strong&gt;⚠️ Trampas de JSON.stringify():&lt;/strong&gt;&#x27; +
+    Object.entries(casos).map(([k, v]) =&gt; `&lt;div&gt;• &lt;b&gt;${k}:&lt;/b&gt; ${v}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">Trampas de JSON.stringify</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Parseo de NDJSON (Newline Delimited JSON) línea por línea
+  const ndjson = [
+    &#x27;{&quot;ts&quot;:&quot;2026-11-23T22:00:00Z&quot;,&quot;level&quot;:&quot;info&quot;,&quot;msg&quot;:&quot;API lista&quot;}&#x27;,
+    &#x27;{&quot;ts&quot;:&quot;2026-11-23T22:00:05Z&quot;,&quot;level&quot;:&quot;warn&quot;,&quot;msg&quot;:&quot;Cache miss&quot;}&#x27;,
+    &#x27;{&quot;ts&quot;:&quot;2026-11-23T22:00:10Z&quot;,&quot;level&quot;:&quot;error&quot;,&quot;msg&quot;:&quot;Timeout DB&quot;}&#x27;
+  ].join(&#x27;\n&#x27;);
+
+  const registros = ndjson
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .map(linea =&gt; JSON.parse(linea));
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;strong&gt;🌊 ${registros.length} registros NDJSON parseados:&lt;/strong&gt;` +
+    registros.map(r =&gt; `&lt;div&gt;[${r.level.toUpperCase()}] ${r.msg} (${r.ts})&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">Parser NDJSON (Logs)</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Ejemplo práctico curso.json: ciclo completo Objeto JS -&gt; JSON -&gt; Objeto JS
+  const infoCurso = {
+    titulo: &#x27;Aprende Node.js&#x27;,
+    numVistas: 45642,
+    numLikes: 21123,
+    temas: [&#x27;Javascript&#x27;, &#x27;Node.js&#x27;],
+    esPublico: true
+  };
+
+  // 1) Serializar a cadena JSON
+  const infoCursoJSON = JSON.stringify(infoCurso);
+
+  // 2) Deserializar de vuelta a objeto JS con try/catch
+  let infoCursoObjeto = null;
+  try {
+    infoCursoObjeto = JSON.parse(infoCursoJSON);
+  } catch (err) {
+    document.getElementById(&#x27;out&#x27;).textContent = &#x27;Error: &#x27; + err.message;
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;div&gt;&lt;b&gt;typeof infoCursoJSON:&lt;/b&gt; ${typeof infoCursoJSON}&lt;/div&gt;` +
+    `&lt;pre&gt;${infoCursoJSON}&lt;/pre&gt;` +
+    `&lt;div&gt;&lt;b&gt;typeof infoCursoObjeto:&lt;/b&gt; ${typeof infoCursoObjeto} → ${infoCursoObjeto.titulo} (${infoCursoObjeto.temas.join(&#x27;, &#x27;)})&lt;/div&gt;`;
+&lt;/script&gt;">Demo curso.json (stringify/parse)</button>
+                </div>
+                <div class="lab-split">
+                    <!-- spellcheck="false" desactiva corrección ortográfica sobre el código -->
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Prueba JSON.stringify con replacer (oculta secretos) y JSON.parse con reviver (restaura Date)
+  const payload = {
+    id: 42,
+    usuario: &#x27;Lucía&#x27;,
+    passwordHash: &#x27;scrypt$9988&#x27;,
+    creado: new Date(&#x27;2026-11-23T22:00:00.000Z&#x27;)
+  };
+
+  const jsonText = JSON.stringify(
+    payload,
+    (clave, valor) =&gt; (clave === &#x27;passwordHash&#x27; ? undefined : valor),
+    2
+  );
+
+  const isoRe = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/;
+  const restaurado = JSON.parse(jsonText, (k, v) =&gt;
+    typeof v === &#x27;string&#x27; &amp;&amp; isoRe.test(v) ? new Date(v) : v
+  );
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;strong&gt;📄 JSON serializado (sin passwordHash):&lt;/strong&gt;&lt;pre&gt;${jsonText}&lt;/pre&gt;` +
+    `&lt;div&gt;✅ restaurado.creado instanceof Date: &lt;strong&gt;${restaurado.creado instanceof Date}&lt;/strong&gt;&lt;/div&gt;`;
+&lt;/script&gt;</textarea>
+                    <!-- title describe el iframe para accesibilidad -->
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Controles inferiores de navegación entre diapositivas -->
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <!-- Modal de vista general (Overview) al pulsar tecla O o botón ▦ -->
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de la diapositiva 8 -->
+    <script>
+        // IIFE para encapsular el estado del simulador sin contaminar window
+        (function () {
+            // Referencias al selector, escenario visual y bloque de código
+            const mode = document.getElementById('jsonSimMode');
+            const stage = document.getElementById('jsonSimStage');
+            const code = document.getElementById('jsonSimCode');
+            // Guarda defensiva por si algún elemento no existiera en el DOM
+            if (!mode || !stage || !code) return;
+
+            // Renderiza el escenario elegido por el estudiante
+            function update() {
+                if (mode.value === 'strict') {
+                    // Caso 1: sintaxis estricta de JSON frente a objetos literales JS
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">✅ Válido: comillas dobles, sin coma final, sin comentarios</div>
+                        <div style="color:#ff3358;">❌ Inválido: { nombre: 'Ana', } o comentarios // dentro del JSON</div>
+                    `;
+                    code.textContent = `{\n  "nombre": "Ana",\n  "activo": true,\n  "tags": ["node", "json"]\n}`;
+                } else if (mode.value === 'replacer') {
+                    // Caso 2: filtrado de propiedades sensibles mediante replacer
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">replacer retorna undefined → la propiedad se excluye del JSON</div>
+                        <div style="color:#00ff88;font-weight:700;">space = 2 → formatea el resultado con sangría legible</div>
+                    `;
+                    code.textContent = `JSON.stringify(user, (k, v) => k === 'password' ? undefined : v, 2);`;
+                } else if (mode.value === 'reviver') {
+                    // Caso 3: reconstrucción de fechas ISO a Date con reviver
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">JSON.parse(txt, reviver) reconstruye strings ISO a Date</div>
+                        <div style="color:#fbbf24;">Tip: aprovecha reviver para ignorar claves como "__proto__"</div>
+                    `;
+                    code.textContent = `JSON.parse(raw, (k, v) => k === 'fecha' ? new Date(v) : v);`;
+                } else if (mode.value === 'traps') {
+                    // Caso 4: valores especiales (undefined, NaN, Set, BigInt)
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">{ a: undefined } → {}  |  [undefined] → [null]  |  NaN → null</div>
+                        <div style="color:#ff3358;">new Set([1]) → {}  |  BigInt (10n) → TypeError</div>
+                    `;
+                    code.textContent = `JSON.stringify({ tags: [...set], total: String(10n) });`;
+                } else {
+                    // Caso 5: comparación entre array JSON único y NDJSON por líneas
+                    stage.innerHTML = `
+                        <div style="color:#38bdf8;">JSON clásico: [ {...}, {...} ] obliga a parsear todo el archivo a la vez</div>
+                        <div style="color:#00ff88;font-weight:700;">NDJSON: una línea = un JSON válido (ideal para streams y logs)</div>
+                    `;
+                    code.textContent = `{"id":1,"ok":true}\n{"id":2,"ok":false}`;
+                }
+            }
+
+            // Escucha cambios en el selector e inicializa la vista al cargar
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
