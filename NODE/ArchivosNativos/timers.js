@@ -17,11 +17,13 @@ function mostrarTema(tema) {
   console.log(`Estoy aprendiendo ${tema}`);
 }
 
-function sumar(a,b){
-  console.log(a + b);
+// Función que recibe múltiples argumentos (a y b) desde setTimeout
+function sumar(a, b) {
+  console.log('Resultado de sumar(2, 5):', a + b);
 }
 
-setTimeout(sumar,5000,2,5)
+// 2b. setTimeout() con varios argumentos: espera 5000 ms (5 s) y pasa 2 y 5 a sumar(a, b)
+setTimeout(sumar, 5000, 2, 5);
 
 // 1. setImmediate(): se ejecuta al finalizar la fase actual del ciclo síncrono
 setImmediate(mostrarTema, 'setImmediate (inmediato)');

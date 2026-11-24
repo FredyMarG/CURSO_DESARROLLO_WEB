@@ -140,12 +140,12 @@ console.log(path.join(carpetaActual, 'datos', 'cursos.json'));</code></pre>
                 <h2 class="slide-title"><code>node:os</code>: Plataforma, Memoria y Carpetas Temporales</h2>
             </div>
             <div class="glass-card">
-                <pre class="code-block" style="margin-bottom:12px;"><code>import os from 'node:os';
+                <pre class="code-block" style="margin-bottom:12px;"><code>const os = require('node:os'); // También válido con import os from 'node:os'
 
-console.log('Sistema:', os.platform());           // 'win32', 'linux', 'darwin'
-console.log('Arquitectura:', os.arch());          // 'x64', 'arm64'
-console.log('Memoria libre (MB):', Math.round(os.freemem() / 1024 ** 2));
-console.log('Directorio temporal:', os.tmpdir());
+console.log('SO y versión:', os.type(), os.release(), os.version());
+console.log('Plataforma / Equipo:', os.platform(), os.hostname());
+console.log('Usuario / Temporal:', os.homedir(), os.tmpdir());
+console.log('RAM libre / total (MB):', Math.round(os.freemem() / 1024 ** 2), '/', Math.round(os.totalmem() / 1024 ** 2));
 console.log('CPUs lógicas:', os.cpus().length);</code></pre>
                 <div class="tip-box">
                     <strong>💡 Aplicación práctica:</strong> Útil para diagnósticos del proceso o elegir una carpeta temporal segura (<code>os.tmpdir()</code>). Evita registrar información privada del equipo en logs públicos.
@@ -153,11 +153,11 @@ console.log('CPUs lógicas:', os.cpus().length);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 6: NODE:PROCESS, NODE:CONSOLE Y NODE:TIMERS -->
+        <!-- SLIDE 5: NODE:PROCESS, NODE:CONSOLE Y NODE:TIMERS -->
         <section class="slide" data-slide="5" data-title="node:process, console y timers">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 6 · PROCESO, DEPURACIÓN Y TEMPORIZADORES</span>
-                <h2 class="slide-title"><code>node:process</code>, <code>node:console</code> y <code>node:timers/promises</code></h2>
+                <span class="slide-kicker">DIAPOSITIVA 5 · PROCESO, DEPURACIÓN Y TEMPORIZADORES</span>
+                <h2 class="slide-title"><code>node:process</code>, <code>node:console</code> y <code>node:timers</code></h2>
             </div>
             <div class="glass-card">
                 <table class="compare-table" style="margin-bottom:12px;">
@@ -165,20 +165,21 @@ console.log('CPUs lógicas:', os.cpus().length);</code></pre>
                         <tr><th>Módulo</th><th>Utilidades clave</th><th>Uso habitual</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><code>node:process</code></td><td><code>env</code>, <code>cwd()</code>, <code>pid</code>, <code>exitCode</code>, <code>memoryUsage()</code></td><td>Leer configuración, rutas y controlar el cierre del proceso</td></tr>
+                        <tr><td><code>node:process</code></td><td><code>argv</code>, <code>env</code>, <code>cwd()</code>, <code>pid</code>, <code>ppid</code>, <code>title</code>, <code>version</code></td><td>Leer configuración, rutas, PIDs y controlar el proceso</td></tr>
                         <tr><td><code>node:console</code></td><td><code>table()</code>, <code>time()</code> / <code>timeEnd()</code>, <code>warn()</code>, <code>error()</code></td><td>Medir rendimiento y visualizar arreglos en tablas limpias</td></tr>
-                        <tr><td><code>node:timers/promises</code></td><td><code>await setTimeout(ms)</code>, <code>setInterval(ms)</code></td><td>Pausas asíncronas limpias sin envolver callbacks manualmente</td></tr>
+                        <tr><td><code>node:timers</code></td><td><code>setTimeout(fn, ms, ...args)</code>, <code>setImmediate()</code>, <code>setInterval()</code>, <code>timers/promises</code></td><td>Programar tareas diferidas, inmediatas o con <code>await</code></td></tr>
                     </tbody>
                 </table>
-                <pre class="code-block"><code>import process from 'node:process';
-import console from 'node:console';
-import { setTimeout as esperar } from 'node:timers/promises';
+                <pre class="code-block"><code>const process = require('node:process');
+const { setTimeout, setImmediate } = require('node:timers');
 
-console.time('lote');
-console.log('PID:', process.pid, '| Carpeta:', process.cwd());
+console.log('PID / PPID:', process.pid, process.ppid, '| Título:', process.title);
 console.table([{ modulo: 'process', ok: true }, { modulo: 'timers', ok: true }]);
-await esperar(150);
-console.timeEnd('lote');</code></pre>
+
+// Pasar múltiples argumentos (2, 5) tras el retardo en milisegundos
+const sumar = (a, b) => console.log('Suma diferida:', a + b);
+setImmediate(() => console.log('Se ejecuta antes que el temporizador'));
+setTimeout(sumar, 5000, 2, 5);</code></pre>
             </div>
         </section>
 
@@ -317,63 +318,49 @@ console.timeEnd('lote');</code></pre>
     }
   }).join(&#x27;&#x27;);
 &lt;/script&gt;">Validación Segura de Rutas</button>
-                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Midiendo temporizador...&lt;/div&gt;
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Ejecutando temporizadores...&lt;/div&gt;
 &lt;script&gt;
-  // Simulación de node:process + console.table + node:timers/promises
-  const esperar = ms =&gt; new Promise(r =&gt; setTimeout(r, ms));
-  (async () =&gt; {
-    const t0 = performance.now();
-    await esperar(180);
-    const duracion = (performance.now() - t0).toFixed(1);
-    const filas = [
-      { modulo: &#x27;node:process&#x27;, ejemplo: &#x27;pid / cwd() / env&#x27;, estado: &#x27;activo&#x27; },
-      { modulo: &#x27;node:console&#x27;, ejemplo: &#x27;table() / timeEnd()&#x27;, estado: &#x27;activo&#x27; },
-      { modulo: &#x27;node:timers/promises&#x27;, ejemplo: `await setTimeout(180) → ${duracion}ms`, estado: &#x27;ok&#x27; }
-    ];
-    document.getElementById(&#x27;out&#x27;).innerHTML =
-      &#x27;&lt;strong&gt;📊 Tabla estilo console.table():&lt;/strong&gt;&#x27; +
-      filas.map(f =&gt; `&lt;div&gt;• ${f.modulo} | ${f.ejemplo} | [${f.estado}]&lt;/div&gt;`).join(&#x27;&#x27;);
-  })();
-&lt;/script&gt;">process + console + timers</button>
+  // Práctica equivalente a timers.js: setTimeout con args y setInterval
+  const out = document.getElementById(&#x27;out&#x27;);
+  const logs = [];
+  const log = (msg) =&gt; { logs.push(msg); out.innerHTML = logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;); };
+
+  const sumar = (a, b) =&gt; log(`➕ setTimeout(sumar, 900, 2, 5) → ${a + b}`);
+  setTimeout(sumar, 900, 2, 5);
+
+  let rep = 0;
+  const iv = setInterval(() =&gt; {
+    rep += 1;
+    log(`⏱️ [Repetición ${rep}/3] Practicando setInterval`);
+    if (rep &gt;= 3) clearInterval(iv);
+  }, 250);
+&lt;/script&gt;">⏱️ Práctica: timers.js</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Práctica equivalente a process.js y os.js
+  const infoProceso = {
+    argv: [&#x27;node.exe&#x27;, &#x27;process.js&#x27;, &#x27;Ana&#x27;],
+    pid: 18492,
+    ppid: 20428,
+    platform: navigator.platform,
+    cpus: navigator.hardwareConcurrency || 8
+  };
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    &#x27;&lt;strong&gt;⚙️ Resumen process.js &amp; os.js:&lt;/strong&gt;&#x27; +
+    Object.entries(infoProceso).map(([k, v]) =&gt; `&lt;div&gt;• &lt;b&gt;${k}:&lt;/b&gt; ${JSON.stringify(v)}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">⚙️ Práctica: process.js &amp; os.js</button>
                 </div>
                 <div class="lab-split">
                     <!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
-  // Simulación del gestor de apuntes con EventEmitter y UUID
-  class MiniBus {
-    constructor() { this.listeners = {}; }
-    on(ev, fn) { (this.listeners[ev] ??= []).push(fn); }
-    emit(ev, data) { (this.listeners[ev] || []).forEach(fn =&gt; fn(data)); }
-  }
-
-  const bus = new MiniBus();
-  const logs = [];
-  bus.on(&#x27;apunte:creado&#x27;, a =&gt; logs.push(`🔔 Evento apunte:creado → [${a.id.slice(0, 8)}] ${a.titulo}`));
-
-  const nuevoApunte = { id: crypto.randomUUID(), titulo: &#x27;Guía de node:fs&#x27; };
-  bus.emit(&#x27;apunte:creado&#x27;, nuevoApunte);
-
+  const cursos = [{ id: 1, titulo: &#x27;Node.js&#x27; }, { id: 2, titulo: &#x27;Archivos Nativos&#x27; }];
+  const json = JSON.stringify(cursos, null, 2);
   document.getElementById(&#x27;out&#x27;).innerHTML =
-    logs.map(l =&gt; `&lt;div&gt;${l}&lt;/div&gt;`).join(&#x27;&#x27;) +
-    `&lt;div&gt;📦 JSON guardado: ${JSON.stringify(nuevoApunte)}&lt;/div&gt;`;
+    `&lt;div&gt;&lt;strong&gt;📦 JSON serializado (writeFile):&lt;/strong&gt;&lt;/div&gt;&lt;pre&gt;${json}&lt;/pre&gt;`;
 &lt;/script&gt;</textarea>
                     <!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
-                </div>
-                <div class="files-grid" style="margin-top:16px;">
-                    <a class="file-card" href="process.js" target="_blank">
-                        <div class="file-name">⚙️ process.js</div>
-                        <div class="file-path">node NODE/ArchivosNativos/process.js</div>
-                    </a>
-                    <a class="file-card" href="os.js" target="_blank">
-                        <div class="file-name">💻 os.js</div>
-                        <div class="file-path">node NODE/ArchivosNativos/os.js</div>
-                    </a>
-                    <a class="file-card" href="timers.js" target="_blank">
-                        <div class="file-name">⏱️ timers.js</div>
-                        <div class="file-path">node NODE/ArchivosNativos/timers.js</div>
-                    </a>
                 </div>
             </div>
         </section>
