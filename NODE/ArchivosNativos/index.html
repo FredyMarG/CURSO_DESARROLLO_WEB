@@ -84,26 +84,32 @@
         <!-- SLIDE 2: NODE:FS -->
         <section class="slide" data-slide="2" data-title="node:fs — Sistema de Archivos">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 2 · LECTURA Y ESCRITURA</span>
-                <h2 class="slide-title"><code>node:fs/promises</code>: Archivos, Directorios y JSON</h2>
+                <span class="slide-kicker">DIAPOSITIVA 2 · LECTURA, ESCRITURA Y GESTIÓN</span>
+                <h2 class="slide-title"><code>node:fs/promises</code>: CRUD Completo de Archivos</h2>
             </div>
             <div class="glass-card">
-                <p style="line-height:1.6;margin-bottom:12px;">
-                    Usa el prefijo <code>node:</code> para importar módulos nativos explícitamente. Para E/S no bloqueante en aplicaciones modernas, prefiere <code>node:fs/promises</code>.
-                </p>
-                <pre class="code-block"><code>import { mkdir, writeFile, readFile } from 'node:fs/promises';
+                <table class="compare-table" style="margin-bottom:12px;">
+                    <thead>
+                        <tr><th>Método</th><th>Acción</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>readFile()</code> / <code>writeFile()</code></td><td>Leer o crear/sobrescribir un archivo completo</td></tr>
+                        <tr><td><code>appendFile()</code></td><td>Agregar contenido al final sin borrar lo existente</td></tr>
+                        <tr><td><code>rename()</code> / <code>unlink()</code></td><td>Renombrar o mover un archivo / eliminarlo</td></tr>
+                        <tr><td><code>copyFile()</code> / <code>rm()</code></td><td>Copiar un archivo / borrar archivos o carpetas (<code>{ recursive: true }</code>)</td></tr>
+                        <tr><td><code>mkdir()</code> / <code>readdir()</code> / <code>stat()</code></td><td>Crear carpetas, listar contenido y consultar tamaño/tipo</td></tr>
+                    </tbody>
+                </table>
+                <pre class="code-block" style="margin-bottom:12px;"><code>import { writeFile, appendFile, readFile, rename, unlink } from 'node:fs/promises';
 
-await mkdir('datos', { recursive: true });
-const cursos = [{ id: 1, titulo: 'Node.js' }];
-await writeFile('datos/cursos.json', JSON.stringify(cursos, null, 2), 'utf8');
-
-try {
-  const texto = await readFile('datos/cursos.json', 'utf8');
-  console.log(JSON.parse(texto)[0].titulo);
-} catch (error) {
-  if (error.code === 'ENOENT') console.log('El archivo no existe');
-  else throw error;
-}</code></pre>
+await writeFile('nota.txt', 'Línea 1\n', 'utf8');
+await appendFile('nota.txt', 'Línea 2\n', 'utf8'); // Añade sin sobrescribir
+await rename('nota.txt', 'nota-final.txt');
+console.log(await readFile('nota-final.txt', 'utf8'));
+await unlink('nota-final.txt'); // Elimina el archivo</code></pre>
+                <div class="tip-box good">
+                    <strong>✅ ¿Qué hace <code>/promises</code>?</strong> Hace que los métodos devuelvan una <code>Promise</code> en lugar de pedir callbacks, permitiéndote usar <code>async/await</code> y <code>try/catch</code> sin bloquear el hilo principal.
+                </div>
             </div>
         </section>
 
@@ -111,24 +117,26 @@ try {
         <section class="slide" data-slide="3" data-title="node:path — Rutas Portables">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 3 · RUTAS MULTIPLATAFORMA</span>
-                <h2 class="slide-title"><code>node:path</code> y <code>import.meta.url</code> en ESM</h2>
+                <h2 class="slide-title"><code>node:path</code>, <code>__dirname</code> y <code>import.meta.url</code></h2>
             </div>
             <div class="glass-card">
                 <table class="compare-table" style="margin-bottom:12px;">
                     <thead>
-                        <tr><th>Método</th><th>Función</th><th>Ejemplo</th></tr>
+                        <tr><th>Método / Variable</th><th>Función</th><th>Ejemplo</th></tr>
                     </thead>
                     <tbody>
                         <tr><td><code>path.join()</code></td><td>Une segmentos normalizando separadores (<code>\</code> o <code>/</code>)</td><td><code>path.join('datos', 'cursos.json')</code></td></tr>
                         <tr><td><code>path.resolve()</code></td><td>Genera ruta absoluta desde el directorio actual</td><td><code>path.resolve('datos', 'cursos.json')</code></td></tr>
-                        <tr><td><code>path.basename() / extname()</code></td><td>Extrae el nombre final o la extensión</td><td><code>.md</code>, <code>leccion.md</code></td></tr>
+                        <tr><td><code>__dirname</code> (CommonJS)</td><td>Ruta absoluta de la carpeta del archivo actual</td><td><code>path.join(__dirname, 'fs.html')</code></td></tr>
+                        <tr><td><code>import.meta.url</code> (ESM)</td><td>Equivalente moderno en ESM con <code>fileURLToPath()</code></td><td><code>path.dirname(fileURLToPath(import.meta.url))</code></td></tr>
                     </tbody>
                 </table>
-                <pre class="code-block"><code>import { fileURLToPath } from 'node:url';
+                <pre class="code-block"><code>// En CommonJS: path.join(__dirname, 'fs.html')
+// En ESM ("type": "module"):
+import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 
-const archivoActual = fileURLToPath(import.meta.url);
-const carpetaActual = path.dirname(archivoActual);
+const carpetaActual = path.dirname(fileURLToPath(import.meta.url));
 console.log(path.join(carpetaActual, 'datos', 'cursos.json'));</code></pre>
             </div>
         </section>
