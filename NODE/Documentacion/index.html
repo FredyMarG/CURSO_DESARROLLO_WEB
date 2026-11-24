@@ -283,10 +283,6 @@
         .md-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
         /* Contenedor oscuro para diagramas Mermaid */
         .md-body .mermaid { background: #050811; border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin: 14px 0; overflow-x: auto; text-align: center; }
-        /* Barra inferior de navegación secuencial entre guías */
-        .doc-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--border); flex-wrap: wrap; }
-        /* Barra fija superior que indica el porcentaje de lectura del apunte */
-        .read-progress { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--primary), var(--cyan)); z-index: 60; transition: width 0.1s linear; }
 
         /* Reglas responsivas para tabletas (oculta el índice derecho) */
         @media (max-width: 1120px) { .layout { grid-template-columns: 260px 1fr; } .toc { display: none; } }
@@ -296,15 +292,17 @@
     </style>
     <!-- Favicon oficial de Node.js en Flaticon para la pestaña del navegador -->
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/5968/5968322.png" />
+    <!-- Selector rápido entre los 5 centros de documentación del curso -->
+    <script src="../../RESOURCES COURSE/plantilla/docs-switcher.js" defer></script>
 </head>
 <body>
-    <div class="read-progress" id="readProgress"></div>
     <header class="topbar">
         <div class="brand">
             <span class="badge">NODE.JS · DOCUMENTACIÓN</span>
             <span class="title">🟢 Apuntes Completos de Node.js</span>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn" href="../../index.html?filter=node">🟢 Módulos Node.js</a>
             <a class="btn" href="../../index.html?filter=proyectos">🚀 Proyectos</a>
             <a class="btn" href="../../index.html">🏠 Portal Principal</a>
         </div>
@@ -320,7 +318,6 @@
                 <a id="moduleBtn" class="btn" href="../Fundamentos/index.html">🎯 Ir al Módulo</a>
             </div>
             <div id="docContent" class="md-body"></div>
-            <div class="doc-nav" id="docNav"></div>
         </main>
         <aside class="toc">
             <div class="toc-title">📑 Índice</div>
@@ -468,20 +465,6 @@
                 .map((t) => `<a class="toc-link lvl-${t.lvl}" href="#${t.id}">${esc(t.text)}</a>`)
                 .join("");
 
-            // Navegación inferior entre guías (Anterior / Siguiente)
-            const docNav = document.getElementById("docNav");
-            if (docNav) {
-                const idx = DOCS.findIndex(d => d.file === doc.file);
-                const prev = idx > 0 ? DOCS[idx - 1] : null;
-                const next = idx >= 0 && idx < DOCS.length - 1 ? DOCS[idx + 1] : null;
-                docNav.innerHTML = `
-                    ${prev ? `<button class="btn" id="prevDocBtn">⬅ ${esc(prev.title)}</button>` : "<span></span>"}
-                    ${next ? `<button class="btn" id="nextDocBtn">${esc(next.title)} ➡</button>` : "<span></span>"}
-                `;
-                document.getElementById("prevDocBtn")?.addEventListener("click", () => { loadDoc(prev); window.scrollTo({ top: 0, behavior: "smooth" }); });
-                document.getElementById("nextDocBtn")?.addEventListener("click", () => { loadDoc(next); window.scrollTo({ top: 0, behavior: "smooth" }); });
-            }
-
             // Activa los botones "Copiar" en todos los bloques de código
             docContent.querySelectorAll(".copy-btn").forEach((b) =>
                 b.addEventListener("click", () => {
@@ -513,14 +496,6 @@
 
         // Escucha cambios en el buscador para filtrar en tiempo real
         docSearch.addEventListener("input", () => renderSidebar(docSearch.value));
-
-        // Actualiza barra de progreso de lectura superior
-        window.addEventListener("scroll", () => {
-            const bar = document.getElementById("readProgress");
-            if (!bar) return;
-            const max = document.documentElement.scrollHeight - window.innerHeight;
-            bar.style.width = max > 0 ? `${Math.min(100, Math.round((window.scrollY / max) * 100))}%` : "0%";
-        }, { passive: true });
 
         // Carga el apunte indicado por ?doc= o el primero por defecto
         const requestedDoc = new URLSearchParams(window.location.search).get("doc");

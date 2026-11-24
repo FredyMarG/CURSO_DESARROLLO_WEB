@@ -7,22 +7,6 @@
 
 > Esta guía amplía el temario y las actividades del PDF proporcionado con explicaciones, código ejecutable y soluciones. Es material didáctico, no una implementación productiva.
 
-## Índice
-1. Preparación
-2. V8
-3. Event Loop
-4. Callbacks
-5. Promesas
-6. Async/await
-7. Analogía y diagrama
-8. Buenas prácticas y errores comunes
-9. Laboratorio guiado
-10. Proyecto integrador
-11. Ejercicios por niveles
-12. Solucionario paso a paso
-13. Evaluación y rúbrica
-14. Hoja de trucos
-15. Resumen técnico y checklist
 
 ## 1. Preparación
 

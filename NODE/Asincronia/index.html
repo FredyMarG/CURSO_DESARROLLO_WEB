@@ -12,13 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <!-- Motor CSS y JS compartido de diapositivas y laboratorio -->
-    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
-    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
     <!-- Estilos y lógica unificada de temas, retos y navegación entre módulos -->
-    <link rel="stylesheet" href="../../RESOURCES COURSE/modules/course-polish.css" />
-    <script src="../../RESOURCES COURSE/modules/course-polish.js" defer></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Cpolygon%20points%3D'32%2C4%2058%2C18%2058%2C46%2032%2C60%206%2C46%206%2C18'%20fill%3D'%23339933'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'55%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-family%3D'Arial%2Csans-serif'%20font-weight%3D'800'%20font-size%3D'32'%20fill%3D'%23ffffff'%3EN%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
 </head>
+<!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -313,6 +313,7 @@ async function comparar() {
 &lt;/script&gt;">Lote con Promise.allSettled</button>
                 </div>
                 <div class="lab-split">
+                    <!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   const log = [];
@@ -325,6 +326,7 @@ async function comparar() {
   Promise.resolve().then(() =&gt; print(&#x27;3. C: Promise.then (microtarea)&#x27;));
   print(&#x27;2. B: fin síncrono&#x27;);
 &lt;/script&gt;</textarea>
+                    <!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
                 </div>
             </div>

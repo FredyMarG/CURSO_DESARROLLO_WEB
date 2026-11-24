@@ -7,18 +7,6 @@
 
 ---
 
-## Índice
-
-1. `node:events` y `EventEmitter`
-2. Clases con eventos y manejo obligatorio de `'error'`
-3. `node:stream`: por qué procesar datos por fragmentos (*chunks*)
-4. `pipeline()` de `node:stream/promises` y *backpressure*
-5. Buenas prácticas y errores comunes
-6. Laboratorio guiado
-7. Hoja de trucos (Cheatsheet)
-8. Resumen técnico
-
----
 
 ## 1. `node:events` y `EventEmitter`
 

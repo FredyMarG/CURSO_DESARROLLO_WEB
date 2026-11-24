@@ -8,25 +8,6 @@
 
 > **Alcance:** Guía didáctica con un proyecto local ejecutable. El almacenamiento JSON sirve para practicar; no sustituye una base de datos transaccional ni un sistema de autenticación de producción.
 
-## Índice
-
-1. Preparación y definición
-2. `fs`: sistema de archivos
-3. `path`: rutas portables
-4. `os`: información del sistema
-5. `events`: eventos
-6. `crypto`: identificadores y hashes
-7. Analogía y diagramas
-8. Buenas prácticas y errores comunes
-9. Laboratorio guiado
-10. Proyecto integrador: gestor de apuntes local
-11. Ejercicios por niveles
-12. Solucionario paso a paso
-13. Evaluación y rúbrica
-14. Hoja de trucos
-15. Resumen técnico y checklist
-
----
 
 ## 1. Preparación y definición
 

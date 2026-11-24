@@ -7,18 +7,6 @@
 
 ---
 
-## Índice
-
-1. `randomUUID()` y `randomBytes()`: identificadores y tokens
-2. `createHash('sha256')`: huellas digitales e integridad
-3. `createHmac()`: verificación con clave secreta
-4. Contraseñas seguras con `scrypt` y sal única
-5. Comparación segura con `timingSafeEqual()`
-6. Buenas prácticas y errores comunes
-7. Hoja de trucos (Cheatsheet)
-8. Resumen técnico
-
----
 
 ## 1. `randomUUID()` y `randomBytes()`
 

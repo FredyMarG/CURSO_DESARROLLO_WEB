@@ -13,12 +13,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <!-- Motor compartido de diapositivas y laboratorio -->
-    <link rel="stylesheet" href="../../HTML y CSS/slides-engine.css" />
-    <script src="../../HTML y CSS/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
     <!-- Temas neón, navegación secuencial y acceso directo a apuntes -->
-    <link rel="stylesheet" href="../../RESOURCES COURSE/modules/course-polish.css" />
-    <script src="../../RESOURCES COURSE/modules/course-polish.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
 </head>
+<!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div>
     <div class="bg-glow glow-2"></div>
@@ -298,6 +299,7 @@ function verificarPassword(password, guardado) {
 &lt;/script&gt;">UUID v4 + Token Seguro</button>
                 </div>
                 <div class="lab-split">
+                    <!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
                     <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;Calculando SHA-256 y HMAC...&lt;/div&gt;
 &lt;script&gt;
   // Cálculo real de SHA-256 y firma HMAC-SHA256 usando Web Crypto
@@ -318,6 +320,7 @@ function verificarPassword(password, guardado) {
       `&lt;div style=&quot;word-break:break-all;&quot;&gt;&lt;strong&gt;HMAC:&lt;/strong&gt; ${hmacHex}&lt;/div&gt;`;
   })();
 &lt;/script&gt;</textarea>
+                    <!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
                 </div>
             </div>
