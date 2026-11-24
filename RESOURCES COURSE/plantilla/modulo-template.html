@@ -1,0 +1,219 @@
+<!doctype html>
+<!-- Plantilla Maestra para Nuevos Módulos del Curso -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción SEO del módulo -->
+    <meta name="description" content="Descripción breve del módulo y objetivos de aprendizaje." />
+    <title>Nombre del Módulo — Presentación Completa | Curso Desarrollo Web</title>
+    <!-- Preconexión y tipografías estándar del curso -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido: rel="stylesheet" carga CSS; defer ejecuta el JS tras analizar el HTML -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <!-- Temas neón, navegación secuencial, favicon temático y enlace a apuntes -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<!-- class="mode-presentation" inicia en vista de diapositivas (alternable a Modo Guía) -->
+<body class="mode-presentation">
+    <!-- Fondo animado estándar -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra superior: course-polish.js inyecta aquí los temas y navegación entre módulos -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NIVEL · TEMA</span>
+            <div class="brand-title"><span>🚀</span><span>Nombre del Módulo</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 9</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA (data-jump navega directamente a la diapositiva indicada) -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Nombre del Módulo">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo XX · Nivel</span>
+                    <span class="badge badge-cyan">Concepto 1 · Concepto 2</span>
+                    <span class="badge badge-purple">Práctica en Vivo</span>
+                </div>
+                <h1 class="hero-title">Título del<br /><span class="gradient-text">Nuevo Módulo</span></h1>
+                <p class="hero-subtitle">Resumen claro de lo que el estudiante aprenderá en esta unidad.</p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">📘</div><h3>1. Concepto Base</h3><p>Definición y fundamentos.</p></div>
+                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">⚙️</div><h3>2. Sintaxis y Uso</h3><p>Ejemplos prácticos y tablas.</p></div>
+                    <div class="hero-card" data-jump="6"><div class="hero-card-icon">🛡️</div><h3>3. Buenas Prácticas</h3><p>Errores comunes a evitar.</p></div>
+                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🎛️</div><h3>4. Simulador y Lab</h3><p>Práctica interactiva guiada.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDES 2–5: TEORÍA -->
+        <section class="slide" data-slide="2" data-title="Concepto Base">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS</span>
+                <h2 class="slide-title">Concepto Principal</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">Explicación clara y directa sin redundar con otros módulos.</p>
+                <pre class="code-block"><code>// Ejemplo de código limpio</code></pre>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="3" data-title="Comparativa">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · COMPARATIVA</span>
+                <h2 class="slide-title">Tabla Comparativa</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead><tr><th>Elemento</th><th>Uso</th><th>Nota</th></tr></thead>
+                    <tbody><tr><td><code>ejemplo()</code></td><td>Descripción</td><td>Observación</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="4" data-title="Ejemplo Práctico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA</span>
+                <h2 class="slide-title">Aplicación Real</h2>
+            </div>
+            <div class="glass-card">
+                <pre class="code-block"><code>// Caso de uso aplicado</code></pre>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="5" data-title="Patrones Avanzados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · PATRONES</span>
+                <h2 class="slide-title">Patrones Recomendados</h2>
+            </div>
+            <div class="glass-card">
+                <div class="tip-box good"><strong>✅ Consejo:</strong> Destaca una recomendación clave aquí.</div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: BUENAS PRÁCTICAS -->
+        <section class="slide" data-slide="6" data-title="Buenas Prácticas y Errores">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CALIDAD</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <table class="compare-table">
+                    <thead><tr><th>Buena práctica</th><th>Error que evita</th></tr></thead>
+                    <tbody><tr><td>Validar entradas</td><td>Fallos silenciosos en ejecución</td></tr></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: SIMULADOR (data-lab="true" enlaza el botón superior 🧪 Lab a esta vista) -->
+        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador Interactivo">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO</span>
+                <h2 class="slide-title">🎛️ Simulador del Módulo</h2>
+                <p class="slide-lead">Selecciona un escenario para observar su comportamiento paso a paso.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario</label>
+                        <select id="tplSimMode">
+                            <option value="a">Escenario A</option>
+                            <option value="b">Escenario B</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="tplSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="tplSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: QUIZ -->
+        <section class="slide" data-slide="8" data-title="Quiz">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <!-- data-answer: opción correcta | data-ok / data-err: mensajes de retroalimentación -->
+                <div class="quiz-question" data-answer="a" data-ok="¡Correcto!" data-err="Revisa la diapositiva de fundamentos.">
+                    <div class="quiz-q-title">1. Pregunta de comprobación</div>
+                    <div class="quiz-options">
+                        <!-- data-opt identifica cada alternativa (a, b, c) -->
+                        <button class="quiz-option" data-opt="a">Opción correcta</button>
+                        <button class="quiz-option" data-opt="b">Opción incorrecta</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: LABORATORIO EN VIVO -->
+        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <!-- data-code contiene el HTML/JS precargado al pulsar el botón -->
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px&quot;&gt;Listo para practicar&lt;/div&gt;">Preset 1</button>
+                </div>
+                <div class="lab-split">
+                    <!-- spellcheck="false" evita subrayados ortográficos rojos sobre el código -->
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px&quot;&gt;Listo para practicar&lt;/div&gt;</textarea>
+                    <!-- title describe el iframe para lectores de pantalla y accesibilidad -->
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+    <script>
+        (function () {
+            const mode = document.getElementById('tplSimMode');
+            const stage = document.getElementById('tplSimStage');
+            const code = document.getElementById('tplSimCode');
+            if (!mode || !stage || !code) return;
+            const update = () => {
+                stage.innerHTML = `<div style="color:#00ff88;font-weight:700;">Escenario activo: ${mode.value.toUpperCase()}</div>`;
+                code.textContent = `// Código para escenario ${mode.value}`;
+            };
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

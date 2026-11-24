@@ -6,33 +6,6 @@
 
 ---
 
-# Índice
-
-1. Introducción
-2. ¿Qué significa trabajar de manera obsoleta?
-3. ¿Cuándo algo se vuelve obsoleto?
-4. ¿Qué significa `Deprecated`?
-5. Código inútil
-6. Código no recomendado
-7. Código con Bugs o Fallos
-8. Está por ser reemplazado
-9. ¿Por qué existen mejores formas de hacerlo?
-10. Efectos negativos del código obsoleto
-11. Uso excesivo de recursos
-12. Código innecesariamente largo
-13. Impacto en el SEO
-14. ¿Cómo verificar si algo está obsoleto?
-15. Verificar mediante estándares oficiales
-16. Métodos transformadores de cadenas obsoletos o no recomendados
-17. Alternativas modernas
-18. Comparaciones
-19. Errores comunes
-20. Casos prácticos
-21. Debugging
-22. Optimización
-23. Buenas prácticas
-24. Ejercicios
-25. Resumen final
 
 ---
 

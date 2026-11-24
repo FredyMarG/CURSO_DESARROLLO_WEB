@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="es">
 <head>
+    <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
     <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Transformaciones 2D/3D — Guía Interactiva | Funciones Avanzadas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../slides-engine.css" /><script src="../../slides-engine.js" defer></script>
-    <link rel="stylesheet" href="../../../RESOURCES COURSE/modules/course-polish.css" />
-    <script src="../../../RESOURCES COURSE/modules/course-polish.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/slides-engine.css" /><script src="../../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%94%84%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
+<!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
@@ -63,12 +66,14 @@
   .box { padding: 18px 26px; background: #818cf8; color: #fff; font-weight: 800; border-radius: 12px; transition: transform 0.25s; }
   .box:hover { transform: scale(1.1) rotate(-3deg); }
 &lt;/style&gt;
-&lt;div class=&quot;box&quot;&gt;Pasa el cursor (scale + rotate)&lt;/div&gt;">Transform en Hover</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+&lt;div class=&quot;box&quot;&gt;Pasa el cursor (scale + rotate)&lt;/div&gt;">Transform en Hover</button></div><div class="lab-split"><!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
   body { font-family: system-ui; display: grid; place-items: center; min-height: 200px; background: #0f172a; }
   .box { padding: 18px 26px; background: #818cf8; color: #fff; font-weight: 800; border-radius: 12px; transition: transform 0.25s; }
   .box:hover { transform: scale(1.1) rotate(-3deg); }
 &lt;/style&gt;
-&lt;div class=&quot;box&quot;&gt;Pasa el cursor (scale + rotate)&lt;/div&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+&lt;div class=&quot;box&quot;&gt;Pasa el cursor (scale + rotate)&lt;/div&gt;</textarea><!-- title describe el iframe para accesibilidad -->
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
         <section class="slide" data-slide="7" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Funciones Avanzadas</h2></div>

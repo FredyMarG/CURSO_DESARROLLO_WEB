@@ -6,8 +6,8 @@ Flexbox es un modo de diseño de CSS para alinear y distribuir elementos en una 
 
 ## 1. Idea central de Flexbox
 
-- Flexbox se activa poniendo `display: flex` (o `inline-flex`) en un contenedor; sus hijos se convierten en “flex items”.
-- Está pensado para controlar una sola dimensión a la vez: fila (horizontal) o columna (vertical), con alineación muy precisa y fácil.
+- Flexbox se activa poniendo `display: flex` (o `inline-flex`) en un contenedor; sus hijos directos se convierten en **flex items**.
+- Está pensado para controlar una sola dimensión a la vez: fila (horizontal) o columna (vertical), con alineación precisa.
 - Los ítems pueden encogerse, crecer y reordenarse sin cambiar el HTML, solo con CSS.
 
 ### Ejemplo mínimo
@@ -18,223 +18,208 @@ Flexbox es un modo de diseño de CSS para alinear y distribuir elementos en una 
   <div>2</div>
   <div>3</div>
 </div>
-css
+```
+
+```css
 .container {
   display: flex;
 }
-Esto ya coloca los items 1, 2 y 3 en fila.
+```
 
-2. Ejes: main axis y cross axis
-flex-direction define el eje principal:
+Esto ya coloca los ítems `1`, `2` y `3` en fila.
 
-row (por defecto): eje principal horizontal, eje cruzado vertical.
+---
 
-column: eje principal vertical, eje cruzado horizontal.
+## 2. Ejes: `main axis` y `cross axis`
 
-row-reverse, column-reverse: invierten el orden visual de los ítems.
+`flex-direction` define el eje principal:
+- `row` (por defecto): eje principal horizontal, eje cruzado vertical.
+- `column`: eje principal vertical, eje cruzado horizontal.
+- `row-reverse`, `column-reverse`: invierten el orden visual de los ítems.
 
 Las propiedades de alineación se entienden respecto a estos ejes:
+- `justify-content`: alinea sobre el **eje principal**.
+- `align-items` y `align-content`: alinean sobre el **eje cruzado**.
 
-justify-content: alinea sobre el eje principal.
+---
 
-align-items y align-content: alinean sobre el eje cruzado.
+## 3. Propiedades del contenedor (padre)
 
-3. Propiedades del contenedor (padre)
-Se aplican al elemento que tiene display: flex o inline-flex.
+Se aplican al elemento que tiene `display: flex` o `inline-flex`.
 
-3.1. display
-css
+### 3.1. `display`
+
+```css
 .container {
-  display: flex;       /* bloque flex */
+  display: flex;        /* bloque flex */
   /* o */
   display: inline-flex; /* inline flex */
 }
-Convierte al elemento en contenedor flex.
+```
 
-3.2. flex-direction
-css
+### 3.2. `flex-direction`
+
+```css
 .container {
   flex-direction: row | row-reverse | column | column-reverse;
 }
-Define la dirección de los ítems sobre el eje principal.
+```
 
-row: ítems de izquierda a derecha.
+- `row`: ítems de izquierda a derecha.
+- `row-reverse`: de derecha a izquierda.
+- `column`: de arriba hacia abajo.
+- `column-reverse`: de abajo hacia arriba.
 
-row-reverse: de derecha a izquierda.
+### 3.3. `flex-wrap`
 
-column: de arriba hacia abajo.
-
-column-reverse: de abajo hacia arriba.
-
-3.3. flex-wrap
-css
+```css
 .container {
   flex-wrap: nowrap | wrap | wrap-reverse;
 }
-nowrap (por defecto): todo en una sola línea.
+```
 
-wrap: permite que los ítems bajen/suban a nuevas filas/columnas cuando no caben.
+- `nowrap` (por defecto): todo en una sola línea.
+- `wrap`: permite que los ítems salten a nuevas filas/columnas cuando no caben.
+- `wrap-reverse`: igual que `wrap`, pero invierte la dirección del salto.
 
-wrap-reverse: igual que wrap, pero invierte la dirección del salto.
+### 3.4. `flex-flow` (atajo)
 
-3.4. flex-flow (atajo)
-css
+```css
 .container {
-  flex-flow: row wrap; /* direction + wrap */
+  flex-flow: row wrap; /* flex-direction + flex-wrap */
 }
-Atajo de flex-direction y flex-wrap.
+```
 
-3.5. justify-content (eje principal)
-css
+### 3.5. `justify-content` (eje principal)
+
+```css
 .container {
   justify-content: flex-start | flex-end | center
                    | space-between | space-around | space-evenly;
 }
-Controla la distribución sobre el eje principal.
+```
 
-flex-start: todos al inicio.
+- `flex-start`: todos al inicio.
+- `flex-end`: todos al final.
+- `center`: centrados como bloque.
+- `space-between`: primero al inicio, último al final y el resto repartidos.
+- `space-around`: espacios iguales alrededor de cada ítem.
+- `space-evenly`: todos los espacios exactamente iguales (inicio, entre ítems y final).
 
-flex-end: todos al final.
+### 3.6. `align-items` (eje cruzado, una línea)
 
-center: centrados como bloque.
-
-space-between: primero al inicio, último al final, el resto repartidos.
-
-space-around: espacios iguales alrededor de cada ítem.
-
-space-evenly: todos los espacios exactamente iguales (inicio, entre ítems y final).
-
-3.6. align-items (eje cruzado, una línea)
-css
+```css
 .container {
   align-items: stretch | flex-start | flex-end | center | baseline;
 }
-Alinea los ítems sobre el eje cruzado (cuando hay una sola línea).
+```
 
-stretch (por defecto): estira los ítems para ocupar todo el eje cruzado.
+- `stretch` (por defecto): estira los ítems para ocupar todo el eje cruzado.
+- `flex-start` / `flex-end` / `center`: al inicio, final o centro del eje cruzado.
+- `baseline`: alinea según la línea de base del texto.
 
-flex-start: al inicio del eje cruzado.
+### 3.7. `align-content` (eje cruzado, múltiples líneas)
 
-flex-end: al final.
-
-center: centrados.
-
-baseline: alinea según la línea de base del texto.
-
-3.7. align-content (eje cruzado, múltiples líneas)
-css
+```css
 .container {
   align-content: flex-start | flex-end | center
                  | space-between | space-around | stretch;
 }
-Solo aplica cuando hay múltiples líneas de ítems (con flex-wrap).
+```
 
-Controla cómo se distribuyen las líneas en el eje cruzado.
+Solo aplica cuando hay **múltiples líneas** de ítems (con `flex-wrap: wrap`).
 
-Por ejemplo, puedes compactar las líneas arriba (flex-start), abajo (flex-end) o distribuirlas (space-between, space-around, stretch).
+### 3.8. `gap`, `row-gap`, `column-gap`
 
-3.8. gap, row-gap, column-gap
-css
+```css
 .container {
-  gap: 16px;            /* fila y columna */
-  row-gap: 8px;         /* solo filas */
-  column-gap: 24px;     /* solo columnas */
+  gap: 16px;        /* fila y columna */
+  row-gap: 8px;     /* solo filas */
+  column-gap: 24px; /* solo columnas */
 }
+```
+
 Controlan el espacio entre ítems sin márgenes manuales.
 
-4. Propiedades de los ítems (hijos)
+---
+
+## 4. Propiedades de los ítems (hijos)
+
 Se aplican a cada elemento hijo directo del contenedor flex.
 
-4.1. order
-css
+### 4.1. `order`
+
+```css
 .item {
   order: 0; /* por defecto */
 }
-Cambia el orden visual del ítem sin tocar el HTML.
+```
 
-Menor valor → aparece antes.
+Cambia el orden visual del ítem sin tocar el HTML (menor valor aparece antes).
 
-4.2. flex-grow
-css
-.item {
-  flex-grow: 0; /* por defecto */
-}
-Indica cuánto puede crecer el ítem si sobra espacio.
+### 4.2. `flex-grow`
 
-0: no crece.
-
-1 o más: crece proporcionalmente respecto a otros ítems.
-
-Ejemplo:
-
-css
+```css
 .item1 { flex-grow: 1; }
 .item2 { flex-grow: 2; }
 .item3 { flex-grow: 1; }
-El espacio extra se reparte 1:2:1 entre los tres ítems.
+```
 
-4.3. flex-shrink
-css
+Indica cuánto puede crecer el ítem si sobra espacio (`0` no crece; aquí se reparte `1:2:1`).
+
+### 4.3. `flex-shrink`
+
+```css
 .item {
-  flex-shrink: 1; /* por defecto */
+  flex-shrink: 1; /* por defecto; 0 evita que se encoja */
 }
-Indica cuánto puede encogerse el ítem si no hay suficiente espacio.
+```
 
-0: no se encoge (intenta mantener su tamaño base).
+### 4.4. `flex-basis`
 
-Valores mayores: se encoge más que otros ítems con valores menores.
-
-4.4. flex-basis
-css
+```css
 .item {
-  flex-basis: auto | 200px | 50% | etc;
+  flex-basis: auto | 200px | 50%;
 }
-Es el tamaño “base” del ítem en el eje principal antes de crecer/encogerse.
+```
 
-auto: suele basarse en el ancho/alto contenido o width/height.
+Tamaño base del ítem en el eje principal antes de crecer o encogerse.
 
-Puedes fijar un tamaño inicial (por ejemplo flex-basis: 200px;).
+### 4.5. `flex` (atajo)
 
-4.5. flex (atajo)
-css
-.item {
-  flex: flex-grow flex-shrink flex-basis;
-}
-Ejemplos típicos:
+```css
+.item  { flex: 1; }         /* crece y se encoge */
+.card  { flex: 1 1 250px; } /* crece, se encoge, base 250px */
+.fixed { flex: 0 0 200px; } /* ancho fijo de 200px */
+```
 
-css
-.item {
-  flex: 1;          /* crece y se encoge, base 0 o auto según navegador */
-}
+### 4.6. `align-self`
 
-.card {
-  flex: 1 1 250px;  /* crece, se encoge, base 250px */
-}
-
-.fixed {
-  flex: 0 0 200px;  /* no crece, no se encoge, 200px fijos */
-}
-4.6. align-self
-css
+```css
 .item {
   align-self: auto | flex-start | flex-end | center | baseline | stretch;
 }
-Sobrescribe align-items solo para ese ítem.
+```
 
-Útil cuando quieres que un ítem concreto se alinee diferente a los demás.
+Sobrescribe `align-items` únicamente para ese ítem.
 
-5. Patrones típicos de uso
-5.1. Centrar totalmente un elemento
-css
+---
+
+## 5. Patrones típicos de uso
+
+### 5.1. Centrar totalmente un elemento
+
+```css
 .container {
   display: flex;
-  justify-content: center; /* eje principal */
-  align-items: center;     /* eje cruzado */
+  justify-content: center;
+  align-items: center;
 }
-Coloca el elemento hijo en el centro exacto del contenedor.
+```
 
-5.2. Barra de navegación
-xml
+### 5.2. Barra de navegación
+
+```html
 <nav class="nav">
   <div class="logo">Logo</div>
   <ul class="menu">
@@ -243,7 +228,9 @@ xml
     <li>Contacto</li>
   </ul>
 </nav>
-css
+```
+
+```css
 .nav {
   display: flex;
   justify-content: space-between;
@@ -254,19 +241,20 @@ css
   display: flex;
   gap: 16px;
 }
-Logo a la izquierda, menú a la derecha, todo centrado verticalmente.
+```
 
-Las opciones de menú se reparten horizontalmente con espacio entre ellas.
+### 5.3. Cards responsivos
 
-5.3. Cards responsivos
-xml
+```html
 <div class="cards">
   <article class="card">Card 1</article>
   <article class="card">Card 2</article>
   <article class="card">Card 3</article>
   <article class="card">Card 4</article>
 </div>
-css
+```
+
+```css
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -274,20 +262,21 @@ css
 }
 
 .card {
-  flex: 1 1 250px; /* crece, se encoge, base 250px */
+  flex: 1 1 250px;
 }
-Se muestran varias cards por fila según el ancho disponible.
+```
 
-En pantallas pequeñas se reducen las columnas; en grandes caben más.
+### 5.4. Formularios fluidos
 
-5.4. Formularios fluidos
-xml
+```html
 <form class="form">
   <input class="name" placeholder="Nombre">
   <input class="email" placeholder="Email">
   <button class="submit">Enviar</button>
 </form>
-css
+```
+
+```css
 .form {
   display: flex;
   flex-wrap: wrap;
@@ -297,17 +286,11 @@ css
 .name   { flex: 1 1 160px; }
 .email  { flex: 3 1 200px; }
 .submit { flex: 1 1 80px;  }
-Los campos se redimensionan de forma proporcional sin necesidad de muchas media queries.
+```
 
-5.5. Galerías de imágenes simples
-xml
-<div class="gallery">
-  <img src="1.jpg">
-  <img src="2.jpg">
-  <img src="3.jpg">
-  <img src="4.jpg">
-</div>
-css
+### 5.5. Galerías de imágenes simples
+
+```css
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -318,100 +301,45 @@ css
   flex: 1 1 150px;
   object-fit: cover;
 }
-Las imágenes se ordenan en filas que se adaptan.
+```
 
-Cada imagen tiene un tamaño mínimo, pero puede crecer para rellenar el espacio.
+---
 
-6. Cómo pensar como “experto” en Flexbox
-Piensa en ejes, no en posiciones fijas
+## 6. Cómo pensar como experto en Flexbox
 
-Primero define flex-direction.
+- **Piensa en ejes, no en posiciones fijas:** define `flex-direction`, luego `justify-content` y `align-items`.
+- **Usa `flex` estratégicamente:** `flex: 1` para ítems fluidos y `flex: 0 0 200px` para columnas fijas.
+- **Usa `gap` para separación interna** en lugar de márgenes residuales.
+- **Combina Flexbox con CSS Grid:** Flexbox para una dimensión (navbars, toolbars, botones) y Grid para layouts 2D.
 
-Después usa justify-content (eje principal) y align-items/align-content (eje cruzado).
+---
 
-Usa flex (shorthand) estratégicamente
+## 7. Ejercicios para practicar
 
-Ítems que se adaptan: flex: 1; o flex: 1 1 0;.
+1. **Centrado perfecto:** crea un contenedor de `400x400px` y centra un hijo de `100x100px`.
+2. **Menú horizontal:** logo a la izquierda, 4 enlaces a la derecha y todo centrado verticalmente.
+3. **3 columnas responsivas:** 3 cards en fila que se apilen con `flex-wrap` y `flex-basis` en pantallas pequeñas.
+4. **Layout sidebar + contenido:**
 
-Ítems fijos: flex: 0 0 200px; o el rango que necesites.
+```css
+.layout  { display: flex; }
+.sidebar { flex: 0 0 250px; }
+.content { flex: 1 1 auto; }
+```
 
-Usa gap para separación interna
+---
 
-Evita depender solo de margin entre ítems.
-
-gap hace que el layout sea más predecible.
-
-No abuses de order
-
-Es útil, pero cambiar demasiado el orden visual vs. el orden en el DOM puede afectar la accesibilidad.
-
-Combina Flexbox con otros sistemas
-
-Flexbox: ideal para alineación en una dimensión (menus, barras, cards).
-
-CSS Grid: mejor para layouts en dos dimensiones complejas.
-
-7. Ejercicios para practicar
-Centrado perfecto
-
-Crea un div de 400x400px.
-
-Añade un hijo de 100x100px.
-
-Centra el hijo con Flexbox (horizontal y vertical).
-
-Menu horizontal
-
-Crea una barra de navegación con logo y 4 enlaces.
-
-Usa Flexbox para: logo a la izquierda, enlaces a la derecha, centrado vertical.
-
-3 columnas responsivas
-
-3 cards en fila en pantallas grandes.
-
-En pantallas pequeñas, se deben apilar (1 por fila) usando flex-wrap y flex-basis.
-
-Layout “sidebar + contenido”
-
-Sidebar fija (por ejemplo 250px).
-
-Área de contenido flexible que ocupa el resto.
-
-Pista:
-
-css
-.layout {
-  display: flex;
-}
-
-.sidebar {
-  flex: 0 0 250px;
-}
-
-.content {
-  flex: 1 1 auto;
-}
-8. Recursos visuales recomendados
-Para ver diagramas, animaciones e imágenes que ayuden a interiorizar Flexbox, puedes buscar:
-
-“Interactive guide to Flexbox” (guías interactivas con visualizaciones).
-
-“CSS Flexbox complete guide” (artículos con diagramas de ejes, ejemplos y capturas).
-
-“Flexbox photo gallery examples” (galerías de imágenes usando Flexbox).
-
-## 9. Resumen mental rápido
+## 8. Resumen mental rápido
 
 - Activar: `display: flex`.
-- Eje: `flex-direction`.
+- Eje principal: `flex-direction`.
 - Distribuir en el eje principal: `justify-content`.
 - Alinear en el eje cruzado: `align-items` (una línea) y `align-content` (múltiples líneas).
 - Espacios entre ítems: `gap`.
 
 ---
 
-## 10. Profundización: `flex` Shorthand, `align-content` vs `align-items`, y Accesibilidad
+## 9. Profundización: `flex` Shorthand, `align-content` vs `align-items` y Accesibilidad
 
 ### `flex` Shorthand (Valores Clave)
 
@@ -423,34 +351,32 @@ Para ver diagramas, animaciones e imágenes que ayuden a interiorizar Flexbox, p
 | `flex: 0 0 240px` | `0 0 240px` | Columna/sidebar fija de exactamente `240px` |
 
 ### `align-items` vs `align-content`
-- **`align-items`**: alinea los ítems **dentro de cada fila/línea** en el eje cruzado. Funciona siempre (con 1 o más líneas).
-- **`align-content`**: distribuye **el bloque completo de líneas** en el eje cruzado. **No tiene efecto si `flex-wrap: nowrap`** o si solo hay una línea.
+- **`align-items`**: alinea los ítems **dentro de cada fila/línea** en el eje cruzado.
+- **`align-content`**: distribuye **el bloque completo de líneas** en el eje cruzado (no tiene efecto si `flex-wrap: nowrap`).
 
 ### `order` y Accesibilidad (a11y)
-Cambiar `order` (o usar `row-reverse` / `column-reverse`) **solo altera el orden visual**, pero el orden de tabulación con `Tab` y el orden de lectura de los lectores de pantalla siguen siendo el orden del DOM HTML.
-- **Regla:** Si el orden lógico importa para formularios, navegación o lectura, **reordena el HTML** en lugar de depender de `order` para cambios estructurales importantes.
+Cambiar `order` (o usar `row-reverse` / `column-reverse`) **solo altera el orden visual**, pero la navegación con `Tab` y los lectores de pantalla siguen el orden del DOM HTML. Si el orden lógico importa, reordena el HTML.
 
 ---
 
-## 11. Errores Comunes en Flexbox
+## 10. Errores Comunes en Flexbox
 
-1. **Usar `align-content` sin `flex-wrap: wrap`:** No hace absolutamente nada porque solo existe una línea.
-2. **Olvidar `min-width: 0` en un flex item con texto largo o `overflow: ellipsis`:** Por defecto los flex items tienen `min-width: auto` y se niegan a encogerse por debajo de su contenido.
-3. **Confundir `flex: 1` con `width: 100%`:** En una fila con varios ítems, `flex: 1` reparte el espacio equitativamente; `width: 100%` intenta ocupar todo el contenedor.
-4. **Seguir usando márgenes con `:last-child { margin-right: 0 }`:** Usa `gap` directamente; funciona en `row`, `column` y `wrap` sin márgenes residuales.
-
----
-
-## 12. Buenas Prácticas
-
-- Usa `gap` (y `row-gap`/`column-gap`) para toda separación entre flex items.
-- Usa `margin-inline-start: auto` (o `margin-left: auto`) en un ítem específico para empujarlo al extremo opuesto de una barra de navegación.
-- Aplica `min-width: 0` en contenedores flex que incluyan textos truncados o bloques `<pre>`.
-- Reserva Flexbox para componentes unidimensionales (navbars, botones, toolbars, cards internas) y CSS Grid para layouts bidimensionales.
+1. **Usar `align-content` sin `flex-wrap: wrap`:** no tiene efecto porque solo existe una línea.
+2. **Olvidar `min-width: 0` en un flex item con texto largo:** por defecto `min-width: auto` impide encoger por debajo del contenido.
+3. **Confundir `flex: 1` con `width: 100%`:** `flex: 1` reparte espacio entre hermanos; `width: 100%` ocupa todo el ancho.
+4. **Seguir usando márgenes con `:last-child { margin-right: 0 }`:** usa `gap` directamente.
 
 ---
 
-# Hoja de Trucos (Cheatsheet) — Flexbox
+## 11. Buenas Prácticas
+
+- Usa `gap` (`row-gap` / `column-gap`) para toda separación entre flex items.
+- Usa `margin-inline-start: auto` en un ítem específico para empujarlo al extremo opuesto de una barra.
+- Aplica `min-width: 0` en contenedores flex con textos truncados o bloques `<pre>`.
+
+---
+
+## 12. Hoja de Trucos (Cheatsheet) — Flexbox
 
 | Propiedad | Valor / Ejemplo | Propósito |
 | :--- | :--- | :--- |
@@ -463,4 +389,3 @@ Cambiar `order` (o usar `row-reverse` / `column-reverse`) **solo altera el orden
 | `gap` | `1rem` / `8px 16px` | Espacio uniforme entre ítems sin márgenes extra |
 | `flex` | `1` / `0 0 250px` / `1 1 260px` | Atajo de `flex-grow`, `flex-shrink` y `flex-basis` |
 | `align-self` | `flex-end` / `center` | Sobrescribe `align-items` para un único hijo |
-

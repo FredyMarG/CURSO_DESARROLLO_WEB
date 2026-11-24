@@ -1,17 +1,20 @@
 <!doctype html>
 <html lang="es">
 <head>
+    <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
     <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fetch API — Guía Interactiva | JS Mid Level</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../HTML y CSS/slides-engine.css" />
-    <script src="../../../HTML y CSS/slides-engine.js" defer></script>
-    <link rel="stylesheet" href="../../../RESOURCES COURSE/modules/course-polish.css" />
-    <script src="../../../RESOURCES COURSE/modules/course-polish.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
+<!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
 <body class="mode-presentation">
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
@@ -107,11 +110,13 @@ const data = await res.json();</code></pre></div>
 &lt;script&gt;
   const fakeJson = JSON.stringify({ status: &#x27;ok&#x27;, api: &#x27;Fetch API&#x27; });
   new Response(fakeJson).json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Parseado: &#x27; + JSON.stringify(d));
-&lt;/script&gt;">Simulador Fetch Local</button></div><div class="lab-split"><textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
+&lt;/script&gt;">Simulador Fetch Local</button></div><div class="lab-split"><!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:system-ui;padding:14px&quot;&gt;&lt;/div&gt;
 &lt;script&gt;
   const fakeJson = JSON.stringify({ status: &#x27;ok&#x27;, api: &#x27;Fetch API&#x27; });
   new Response(fakeJson).json().then(d =&gt; document.getElementById(&#x27;out&#x27;).textContent = &#x27;Parseado: &#x27; + JSON.stringify(d));
-&lt;/script&gt;</textarea><iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
+&lt;/script&gt;</textarea><!-- title describe el iframe para accesibilidad -->
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
         <section class="slide" data-slide="11" data-title="Prácticas de la Carpeta">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 11 · ARCHIVOS DEL MÓDULO</span><h2 class="slide-title">📂 Prácticas de la Carpeta</h2></div>

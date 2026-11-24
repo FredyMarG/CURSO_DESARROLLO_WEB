@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="es">
 <head>
+    <!-- Codificación UTF-8 para soportar acentos, ñ y emojis -->
     <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real de la pantalla -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Documentación Completa HTML5 y CSS3 | Curso Desarrollo Web</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -128,6 +130,7 @@
         .md-body table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
         .md-body th, .md-body td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
         .md-body th { background: rgba(56, 189, 248, 0.1); color: var(--primary); }
+        .md-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
         @media (max-width: 1120px) {
             .layout { grid-template-columns: 260px 1fr; }
             .toc { display: none; }
@@ -139,11 +142,13 @@
         }
     </style>
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%233b82f6'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%93%98%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <!-- Selector rápido entre los 5 centros de documentación del curso -->
+    <script src="../../RESOURCES COURSE/plantilla/docs-switcher.js" defer></script>
 </head>
 <body>
     <header class="topbar">
         <div class="brand">
-            <span class="badge">DOCUMENTACIÓN OFICIAL · OFFLINE READY</span>
+            <span class="badge">DOCUMENTACIÓN · HTML5 Y CSS3</span>
             <span class="title">📘 Apuntes Completos de HTML5 y CSS3</span>
         </div>
         <div class="actions">
@@ -168,21 +173,21 @@
         </main>
 
         <aside class="toc">
-            <div class="toc-title">📑 Índice del Documento</div>
+            <div class="toc-title">📑 Índice</div>
             <div class="toc-list" id="tocList"></div>
         </aside>
     </div>
 
     <script>
         const DOCS = [
-            { file: 'HTML.md', title: 'HTML5 Completo', desc: 'Qué es HTML5, para qué sirve, etiquetas, semántica y formularios', module: '../HTML BASICO/index.html' },
-            { file: 'CSS.md', title: 'CSS3 Completo', desc: 'Qué es CSS3, para qué sirve, selectores, box model y CSS moderno', module: '../CSS BASICO/index.html' },
-            { file: 'FLEXBOX.md', title: 'Flexbox', desc: 'Ejes, alineación, flex-grow, shrink y layouts 1D', module: '../Flexbox/index.html' },
-            { file: 'GRID.md', title: 'CSS Grid', desc: 'Filas, columnas, fr, repeat(), áreas y layouts 2D', module: '../Grid/index.html' },
-            { file: 'ANIMACIONES.md', title: 'Animaciones y Transiciones', desc: 'Keyframes, cubic-bezier, 60 FPS y scroll animations', module: '../Animaciones/index.html' },
-            { file: 'FUNCIONES_AVANZADAS.md', title: 'Funciones Avanzadas', desc: 'Variables CSS, calc(), clamp(), min(), max() y :has()', module: '../Funciones Avanzadas/index.html' },
-            { file: 'RESPONSIVE.md', title: 'Responsive Design', desc: 'Mobile-first, media queries, container queries y srcset', module: '../Responsive Design/index.html' },
-            { file: 'HOSTING.md', title: 'Hosting y Despliegue', desc: 'Dominios, DNS, GitHub Pages, Netlify y buenas prácticas', module: '../index.html' }
+            { file: 'HTML.md', title: '01. HTML5 Completo', desc: 'Qué es HTML5, para qué sirve, etiquetas, semántica y formularios', module: '../HTML BASICO/index.html' },
+            { file: 'CSS.md', title: '02. CSS3 Completo', desc: 'Qué es CSS3, para qué sirve, selectores, box model y CSS moderno', module: '../CSS BASICO/index.html' },
+            { file: 'FLEXBOX.md', title: '03. Flexbox', desc: 'Ejes, alineación, flex-grow, shrink y layouts 1D', module: '../Flexbox/index.html' },
+            { file: 'GRID.md', title: '04. CSS Grid', desc: 'Filas, columnas, fr, repeat(), áreas y layouts 2D', module: '../Grid/index.html' },
+            { file: 'ANIMACIONES.md', title: '05. Animaciones y Transiciones', desc: 'Keyframes, cubic-bezier, 60 FPS y scroll animations', module: '../Animaciones/index.html' },
+            { file: 'FUNCIONES_AVANZADAS.md', title: '06. Funciones Avanzadas', desc: 'Variables CSS, calc(), clamp(), min(), max() y :has()', module: '../Funciones Avanzadas/index.html' },
+            { file: 'RESPONSIVE.md', title: '07. Responsive Design', desc: 'Mobile-first, media queries, container queries y srcset', module: '../Responsive Design/index.html' },
+            { file: 'HOSTING.md', title: '08. Hosting y Despliegue', desc: 'Dominios, DNS, GitHub Pages, Netlify y buenas prácticas', module: '../index.html' }
         ];
 
         const docList = document.getElementById('docList');
@@ -209,14 +214,17 @@
             const lines = md.replace(/\r\n/g, '\n').split('\n');
             let html = '';
             let inCode = false;
-            let inList = false;
+            let listTag = '';
+            let inTable = false;
             let headingIdx = 0;
             const toc = [];
+            const closeList = () => { if (listTag) { html += `</${listTag}>`; listTag = ''; } };
+            const closeTable = () => { if (inTable) { html += '</tbody></table>'; inTable = false; } };
 
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i];
                 if (line.trim().startsWith('```')) {
-                    if (inList) { html += '</ul>'; inList = false; }
+                    closeList(); closeTable();
                     if (!inCode) {
                         inCode = true;
                         html += '<div class="code-wrap"><button class="copy-btn">Copiar</button><pre><code>';
@@ -233,29 +241,49 @@
 
                 const trimmed = line.trim();
                 if (!trimmed) {
-                    if (inList) { html += '</ul>'; inList = false; }
+                    closeList(); closeTable();
                     continue;
                 }
 
-                if (/^#{1,3}\s+/.test(trimmed)) {
-                    if (inList) { html += '</ul>'; inList = false; }
+                if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+                    closeList();
+                    const cells = trimmed.slice(1, -1).split('|').map(c => c.trim());
+                    if (cells.every(c => /^:?-{2,}:?$/.test(c))) continue;
+                    if (!inTable) {
+                        inTable = true;
+                        html += '<table><thead><tr>' + cells.map(c => `<th>${formatInline(c)}</th>`).join('') + '</tr></thead><tbody>';
+                    } else {
+                        html += '<tr>' + cells.map(c => `<td>${formatInline(c)}</td>`).join('') + '</tr>';
+                    }
+                    continue;
+                }
+                closeTable();
+
+                if (/^---+$/.test(trimmed)) {
+                    closeList();
+                    html += '<hr>';
+                } else if (/^#{1,3}\s+/.test(trimmed)) {
+                    closeList();
                     const level = trimmed.match(/^(#{1,3})/)[1].length;
                     const rawText = trimmed.replace(/^#{1,3}\s+/, '');
                     const id = 'sec-' + (++headingIdx);
                     if (level >= 1 && headingIdx > 1) toc.push({ id, level, text: rawText.replace(/`/g, '') });
                     html += `<h${level} id="${id}">${formatInline(rawText)}</h${level}>`;
                 } else if (/^[-*]\s+/.test(trimmed)) {
-                    if (!inList) { html += '<ul>'; inList = true; }
+                    if (listTag !== 'ul') { closeList(); html += '<ul>'; listTag = 'ul'; }
                     html += `<li>${formatInline(trimmed.replace(/^[-*]\s+/, ''))}</li>`;
+                } else if (/^\d+\.\s+/.test(trimmed)) {
+                    if (listTag !== 'ol') { closeList(); html += '<ol>'; listTag = 'ol'; }
+                    html += `<li>${formatInline(trimmed.replace(/^\d+\.\s+/, ''))}</li>`;
                 } else if (trimmed.startsWith('>')) {
-                    if (inList) { html += '</ul>'; inList = false; }
+                    closeList();
                     html += `<blockquote>${formatInline(trimmed.replace(/^>\s*/, ''))}</blockquote>`;
                 } else {
-                    if (inList) { html += '</ul>'; inList = false; }
+                    closeList();
                     html += `<p>${formatInline(trimmed)}</p>`;
                 }
             }
-            if (inList) html += '</ul>';
+            closeList(); closeTable();
             if (inCode) html += '</code></pre></div>';
             return { html, toc };
         }
