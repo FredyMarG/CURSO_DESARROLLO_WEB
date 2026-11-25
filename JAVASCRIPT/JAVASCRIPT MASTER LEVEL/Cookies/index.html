@@ -348,6 +348,14 @@ function eliminarCookie(nombre, path = "/") {
                     </div>
                 </div>
             </div>
+        
+            <div class="glass-card" style="margin-top:14px;">
+                <h3>⚡ API Moderna Asíncrona: <code>cookieStore</code></h3>
+                <pre class="code-box">if ('cookieStore' in window) {
+  await cookieStore.set({ name: 'tema', value: 'oscuro', path: '/' });
+  const c = await cookieStore.get('tema');
+}</pre>
+            </div>
         </section>
 
         <!-- SLIDE 9: LABORATORIO INTERACTIVO -->

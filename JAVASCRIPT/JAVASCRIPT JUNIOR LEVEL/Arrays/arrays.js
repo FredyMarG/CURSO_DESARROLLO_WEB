@@ -4,10 +4,10 @@
 
 "use strict"; // Activa el modo estricto de JavaScript
 
-const liveConsole = document.getElementById("live-console");
+const liveConsole = document.getElementById("live-console"); // Declara e inicializa variable local
 
-function registrar(mensaje, tipo = "ok") {
-    const linea = document.createElement("div");
+function registrar(mensaje, tipo = "ok") { // Define función reutilizable
+    const linea = document.createElement("div"); // Declara e inicializa variable local
     linea.className = `log-line ${tipo}`;
     linea.textContent = `> ${mensaje}`; // Actualiza contenido en el DOM
     liveConsole.append(linea);
@@ -16,31 +16,31 @@ function registrar(mensaje, tipo = "ok") {
 }
 
 // 1. Métodos Mutables
-let frutas = ["Manzana", "Pera", "Naranja"];
-const outMut = document.getElementById("out-arr-mut");
+let frutas = ["Manzana", "Pera", "Naranja"]; // Declara e inicializa variable local
+const outMut = document.getElementById("out-arr-mut"); // Declara e inicializa variable local
 
-function renderFrutas(accion = "Estado inicial") {
+function renderFrutas(accion = "Estado inicial") { // Define función reutilizable
     outMut.textContent =
         `Acción: ${accion}\nArray: ${JSON.stringify(frutas)}\nLongitud: ${frutas.length} | Último (.at(-1)): ${frutas.at(-1) ?? "vacío"}`;
 }
 
 document.querySelectorAll("[data-arr]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const op = btn.dataset.arr;
-        const nueva = document.getElementById("input-fruta").value.trim() || "Uva";
-        let detalle = "";
+    btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+        const op = btn.dataset.arr; // Declara e inicializa variable local
+        const nueva = document.getElementById("input-fruta").value.trim() || "Uva"; // Declara e inicializa variable local
+        let detalle = ""; // Declara e inicializa variable local
 
-        if (op === "push") {
+        if (op === "push") { // Evalúa condición lógica
             frutas.push(nueva);
             detalle = `push("${nueva}")`;
         } else if (op === "pop") {
-            const eliminado = frutas.pop();
+            const eliminado = frutas.pop(); // Declara e inicializa variable local
             detalle = `pop() -> eliminó ${JSON.stringify(eliminado)}`;
         } else if (op === "unshift") {
             frutas.unshift(nueva);
             detalle = `unshift("${nueva}")`;
         } else if (op === "shift") {
-            const eliminado = frutas.shift();
+            const eliminado = frutas.shift(); // Declara e inicializa variable local
             detalle = `shift() -> eliminó ${JSON.stringify(eliminado)}`;
         } else {
             frutas = ["Manzana", "Pera", "Naranja"];
@@ -53,13 +53,13 @@ document.querySelectorAll("[data-arr]").forEach((btn) => {
 });
 
 // 2. Pipeline funcional
-const preciosBase = [40, 120, 85, 210, 30];
+const preciosBase = [40, 120, 85, 210, 30]; // Declara e inicializa variable local
 
-document.getElementById("btn-pipeline").addEventListener("click", () => {
-    const min = Number(document.getElementById("input-min-precio").value) || 0;
-    const filtrados = preciosBase.filter((p) => p >= min);
-    const conDescuento = filtrados.map((p) => Number((p * 0.9).toFixed(2)));
-    const total = conDescuento.reduce((acc, n) => acc + n, 0);
+document.getElementById("btn-pipeline").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const min = Number(document.getElementById("input-min-precio").value) || 0; // Declara e inicializa variable local
+    const filtrados = preciosBase.filter((p) => p >= min); // Declara e inicializa variable local
+    const conDescuento = filtrados.map((p) => Number((p * 0.9).toFixed(2))); // Declara e inicializa variable local
+    const total = conDescuento.reduce((acc, n) => acc + n, 0); // Declara e inicializa variable local
 
     document.getElementById("out-pipeline").textContent =
         `Original (intacto): ${JSON.stringify(preciosBase)}\n1) filter(>= ${min}): ${JSON.stringify(filtrados)}\n2) map(-10%): ${JSON.stringify(conDescuento)}\n3) reduce(suma): $${total.toFixed(2)}`;
@@ -67,15 +67,15 @@ document.getElementById("btn-pipeline").addEventListener("click", () => {
 });
 
 // 3. Inmutables ES2023
-const numerosES2023 = [30, 5, 100, 20];
+const numerosES2023 = [30, 5, 100, 20]; // Declara e inicializa variable local
 
 document.querySelectorAll("[data-es2023]").forEach((btn) => {
-    btn.addEventListener("click", () => {
-        const tipo = btn.dataset.es2023;
-        let copia;
-        let etiqueta = "";
+    btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+        const tipo = btn.dataset.es2023; // Declara e inicializa variable local
+        let copia; // Declara e inicializa variable local
+        let etiqueta = ""; // Declara e inicializa variable local
 
-        if (tipo === "sort") {
+        if (tipo === "sort") { // Evalúa condición lógica
             copia = numerosES2023.toSorted((a, b) => a - b);
             etiqueta = ".toSorted((a, b) => a - b)";
         } else if (tipo === "rev") {
@@ -92,9 +92,10 @@ document.querySelectorAll("[data-es2023]").forEach((btn) => {
     });
 });
 
-document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+document.getElementById("btn-limpiar-log").addEventListener("click", () => { // Registra escuchador de evento en el DOM
     liveConsole.replaceChildren();
 });
 
 renderFrutas();
 registrar("Laboratorio de Arrays listo.");
+

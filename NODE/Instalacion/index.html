@@ -29,7 +29,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -70,7 +70,7 @@
                         <h3>3. PATH y PowerShell</h3>
                         <p>Cómo verificar <code>node -v</code> y solucionar permisos.</p>
                     </div>
-                    <div class="hero-card" data-jump="10">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🧪</div>
                         <h3>4. Laboratorio</h3>
                         <p>Genera tu <code>package.json</code> con <code>--watch</code> y prueba scripts.</p>
@@ -263,7 +263,53 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
         </section>
 
         <!-- SLIDE 9: QUIZ INTERACTIVO -->
-        <section class="slide" data-slide="9" data-title="Quiz: Instalación y Entorno">
+
+        <!-- SLIDE 9: CONFIGURACIÓN DE VS CODE -->
+        <section class="slide" data-slide="9" data-title="Entorno Profesional en VS Code">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · FLUJO DE TRABAJO EN VS CODE</span>
+                <h2 class="slide-title">Terminal Integrada, <code>node --watch</code> y Extensiones</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Trabajar desde la terminal integrada de VS Code (<code>Ctrl + ñ</code>) dentro de la carpeta exacta de tu proyecto evita errores de rutas. Además, desde Node.js 18.11+ puedes usar <code>--watch</code> para reiniciar automáticamente al guardar:
+                </p>
+                <pre class="code-block"><code># Reinicia tu servidor o script cada vez que guardas cambios
+node --watch src/index.js
+
+# Carga variables de entorno desde .env de forma nativa (Node 20.6+ / 22+)
+node --env-file=.env src/index.js
+
+# Verificar sintaxis rápida sin ejecutar el programa
+node --check src/index.js</code></pre>
+                <div class="tip-box" style="margin-top:12px;">
+                    <strong>🔐 <code>.env</code> nativo en Node.js:</strong> también puedes cargar un archivo <code>.env</code> desde código con <code>process.loadEnvFile()</code> sin instalar <code>dotenv</code>, y recuerda incluir <code>.env</code> en tu <code>.gitignore</code>.
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: DIAGNÓSTICO DE ERRORES EN WINDOWS -->
+        <section class="slide" data-slide="10" data-title="Diagnóstico de Errores en Windows">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · SOLUCIÓN DE PROBLEMAS</span>
+                <h2 class="slide-title">Errores Frecuentes en Windows y Cómo Resolverlos</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    La mayoría de bloqueos al empezar en Windows no son fallos de tu código JavaScript, sino de PATH o políticas de PowerShell. Identifícalos en segundos:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Error en consola</th><th>Causa y solución rápida</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>node no se reconoce como comando</code></td><td>Cierra y reabre la terminal tras instalar o revisa el <code>PATH</code></td></tr>
+                        <tr><td><code>No se puede cargar npm.ps1</code></td><td>Ejecuta <code>npm.cmd</code> o cambia el perfil de terminal a Git Bash</td></tr>
+                        <tr><td>Versiones distintas entre proyectos</td><td>Cambia de versión al instante con <code>nvm use 20</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="11" data-title="Quiz: Instalación y Entorno">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Instalación</h2>
@@ -313,7 +359,7 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></pre>
         </section>
 
         <!-- SLIDE 10: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio de Entorno y Archivos">
+        <section class="slide" data-slide="12" data-lab="true" data-title="Laboratorio de Entorno y Archivos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Generador de <code>package.json</code> &amp; Archivos</h2>

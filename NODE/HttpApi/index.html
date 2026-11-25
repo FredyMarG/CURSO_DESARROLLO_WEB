@@ -1,0 +1,444 @@
+<!doctype html>
+<!-- Módulo 15 de Node.js: Servidores HTTP y APIs REST con node:http -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 15: Servidores HTTP y APIs REST en Node.js — node:http, URL/URLSearchParams, lectura de body por chunks, códigos HTTP, CORS y pruebas con fetch()." />
+    <title>Servidores HTTP y APIs REST — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · HTTP Y APIS REST</span>
+            <div class="brand-title"><span>🌐</span><span>Servidores HTTP y APIs</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: HTTP y APIs REST">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 15 · node:http</span>
+                    <span class="badge badge-cyan">REST · URL · Body Stream</span>
+                    <span class="badge badge-purple">CORS · Status Codes · fetch()</span>
+                </div>
+                <h1 class="hero-title">Servidores HTTP<br /><span class="gradient-text">y APIs REST Nativas</span></h1>
+                <p class="hero-subtitle">
+                    Aprende cómo funcionan por dentro los servidores backend en Node.js antes de pasar a frameworks: diseña rutas REST, lee <em>query params</em> con <code>URL</code>, procesa cuerpos JSON por <em>chunks</em>, configura CORS y prueba endpoints con <code>fetch()</code>.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🌐</div>
+                        <h3>1. node:http y URL</h3>
+                        <p><code>req</code>, <code>res</code>, <code>pathname</code> y <code>searchParams</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">📦</div>
+                        <h3>2. Body JSON por Chunks</h3>
+                        <p>Leer <code>POST/PATCH</code> de forma segura con límite de 1 MB.</p>
+                    </div>
+                    <div class="hero-card" data-jump="6">
+                        <div class="hero-card-icon">🛡️</div>
+                        <h3>3. CORS y Códigos HTTP</h3>
+                        <p>Preflight <code>OPTIONS</code>, <code>201</code>, <code>400</code>, <code>404</code> y <code>500</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Simula rutas REST y prueba <code>URLSearchParams</code> en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: NODE:HTTP BASE -->
+        <section class="slide" data-slide="2" data-title="Anatomía de node:http">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · SERVIDOR NATIVO</span>
+                <h2 class="slide-title">Anatomía de <code>http.createServer(req, res)</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Todo framework como Express o Fastify se apoya sobre <code>node:http</code>. En cada petición recibes <code>req</code> (un <em>Readable Stream</em> con método, URL y cabeceras) y <code>res</code> (un <em>Writable Stream</em> para responder):
+                </p>
+                <pre class="code-block"><code>import http from 'node:http';
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ metodo: req.method, url: req.url }));
+});
+
+server.listen(3000, () => console.log('API lista en :3000'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: PARSEAR RUTAS Y QUERY PARAMS -->
+        <section class="slide" data-slide="3" data-title="URL y URLSearchParams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · ENRUTAMIENTO MODERNO</span>
+                <h2 class="slide-title">Rutas y <em>Query Params</em> con <code>new URL()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Evita cortar <code>req.url</code> a mano con <code>split('?')</code>. La clase global <code>URL</code> separa limpiamente la ruta base (<code>pathname</code>) de los parámetros de consulta (<code>searchParams</code>):
+                </p>
+                <pre class="code-block"><code>const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+const { pathname, searchParams } = url;
+
+// Ej: GET /api/cursos?nivel=node&amp;limite=5
+const nivel = searchParams.get('nivel');         // "node"
+const limite = Number(searchParams.get('limite')) || 10;</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: LEER BODY JSON POR CHUNKS -->
+        <section class="slide" data-slide="4" data-title="Lectura Segura del Body JSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · STREAMS DE ENTRADA</span>
+                <h2 class="slide-title">Leer el Cuerpo <code>POST/PATCH</code> por <em>Chunks</em></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En <code>node:http</code> el cuerpo JSON no llega en una sola variable: llega en fragmentos por el stream <code>req</code>. Debes juntarlos imponiendo un límite máximo (ej. 1 MB) para proteger la memoria del servidor:
+                </p>
+                <pre class="code-block"><code>function leerBodyJson(req, maxBytes = 1e6) {
+  return new Promise((resolve, reject) => {
+    let raw = '';
+    req.on('data', (chunk) => {
+      raw += chunk;
+      if (raw.length > maxBytes) { req.destroy(); reject(new Error('Payload > 1MB')); }
+    });
+    req.on('end', () => {
+      try { resolve(raw ? JSON.parse(raw) : {}); }
+      catch { reject(new Error('JSON inválido')); }
+    });
+  });
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: DISEÑO REST Y CÓDIGOS HTTP -->
+        <section class="slide" data-slide="5" data-title="Diseño REST y Códigos de Estado">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · SEMÁNTICA HTTP</span>
+                <h2 class="slide-title">Métodos REST y Códigos de Estado Semánticos</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Una API REST usa el mismo recurso (<code>/api/tareas</code>) y distingue la acción mediante el método HTTP y el código numérico de respuesta:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Operación</th><th>Método + Ruta</th><th>Código</th></tr></thead>
+                    <tbody>
+                        <tr><td>Listar / Consultar</td><td><code>GET /api/tareas</code></td><td><code>200 OK</code> (o <code>404</code> si no existe)</td></tr>
+                        <tr><td>Crear recurso</td><td><code>POST /api/tareas</code></td><td><code>201 Created</code> (o <code>400</code> si inválido)</td></tr>
+                        <tr><td>Actualizar parcial</td><td><code>PATCH /api/tareas/:id</code></td><td><code>200 OK</code> (o <code>404</code>)</td></tr>
+                        <tr><td>Eliminar</td><td><code>DELETE /api/tareas/:id</code></td><td><code>200 OK</code> / <code>204 No Content</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: CORS Y OPTIONS -->
+        <section class="slide" data-slide="6" data-title="CORS y Peticiones OPTIONS">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CONEXIÓN DESDE EL NAVEGADOR</span>
+                <h2 class="slide-title">CORS (<em>Cross-Origin</em>) y Preflight <code>OPTIONS</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si tu frontend corre en otro puerto (ej. <code>:5500</code>) y llama a tu API Node.js (<code>:3000</code>), el navegador exige cabeceras <code>Access-Control-Allow-*</code> y envía antes una petición de permiso <code>OPTIONS</code>:
+                </p>
+                <pre class="code-block"><code>const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET,POST,PATCH,DELETE,OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
+if (req.method === 'OPTIONS') { res.writeHead(204, CORS); return res.end(); }</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ARCHIVOS ESTÁTICOS Y SEGURIDAD -->
+        <section class="slide" data-slide="7" data-title="Estáticos y Path Traversal">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · SEGURIDAD EN SERVIDORES</span>
+                <h2 class="slide-title">Servir Estáticos y Proteger contra <em>Path Traversal</em></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si tu servidor entrega archivos HTML/CSS/JS desde una carpeta <code>public/</code>, valida siempre que la ruta resuelta empiece por <code>PUBLIC_DIR</code> para impedir que un cliente lea archivos del sistema con <code>../../</code>:
+                </p>
+                <pre class="code-block"><code>const ruta = path.resolve(PUBLIC_DIR, relPath);
+if (!ruta.startsWith(PUBLIC_DIR)) {
+  res.writeHead(403);
+  return res.end('Acceso denegado');
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: PROBAR ENDPOINTS CON FETCH Y NODE:TEST -->
+        <section class="slide" data-slide="8" data-title="Probar APIs con fetch() y node:test">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · TESTING DE ENDPOINTS</span>
+                <h2 class="slide-title">Probar tu API en Puerto Efímero (<code>listen(0)</code>) + <code>fetch()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En tus tests automáticos usa <code>server.listen(0)</code> para que el sistema asigne un puerto libre automáticamente, consulta con <code>fetch()</code> y cierra con <code>t.after(() => server.close())</code>:
+                </p>
+                <pre class="code-block"><code>await new Promise((r) => server.listen(0, '127.0.0.1', r));
+t.after(() => server.close());
+const { port } = server.address();
+const res = await fetch(`http://127.0.0.1:${port}/api/tareas`);
+assert.equal(res.status, 200);</code></pre>
+            </div>
+        
+            <div class="callout callout-tip" style="margin-top:14px;">
+                <strong>⏱️ Timeout seguro en backend:</strong> usa <code>fetch(url, { signal: AbortSignal.timeout(5000) })</code> para evitar que una API externa lenta bloquee tu servidor.
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS HTTP Y REST -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos de APIs HTTP">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">Buenas Prácticas en APIs Node.js</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica estas reglas en cualquier API HTTP (con <code>node:http</code> o Express):
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Práctica</th><th>Beneficio</th></tr></thead>
+                    <tbody>
+                        <tr><td>Separar rutas HTTP de la lógica de negocio</td><td>Puedes reutilizar la lógica en CLI, Web y Tests</td></tr>
+                        <tr><td>Limitar tamaño del body (<code>maxBytes</code>)</td><td>Protege la RAM contra payloads maliciosos</td></tr>
+                        <tr><td>Devolver JSON coherente en errores (<code>{ error }</code>)</td><td>El frontend siempre puede leer el fallo con <code>res.json()</code></td></tr>
+                        <tr><td>Escuchar <code>SIGINT</code>/<code>SIGTERM</code> con <code>server.close()</code></td><td>Cierre limpio sin cortar respuestas activas</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: MANEJO CENTRALIZADO DE ERRORES -->
+        <section class="slide" data-slide="10" data-title="Manejo Centralizado de Errores HTTP">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · ROBUSTEZ EN PRODUCCIÓN</span>
+                <h2 class="slide-title">Mapear Errores de Negocio a Códigos HTTP (<code>400</code>, <code>404</code>, <code>500</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si tu capa de negocio etiqueta errores con <code>error.code</code> (<code>'validation'</code>, <code>'not_found'</code>), el servidor HTTP los traduce en un único <code>catch</code> central sin repetir bloques de respuesta en cada ruta:
+                </p>
+                <pre class="code-block"><code>const STATUS_POR_CODIGO = { validation: 400, not_found: 404, unauthorized: 401 };
+// Dentro del catch principal de createServer:
+const status = STATUS_POR_CODIGO[error.code] || 500;
+enviarJson(res, status, { error: error.message });</code></pre>
+            </div>
+        
+            <div class="callout callout-warn" style="margin-top:14px;">
+                <strong>⚠️ Error clásico <code>ERR_HTTP_HEADERS_SENT</code>:</strong> ocurre al intentar enviar cabeceras o llamar <code>res.end()</code> dos veces. Usa siempre <code>return res.end(...)</code> tras responder.
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE HTTP Y REST -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de HTTP y REST">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave de APIs REST con <code>node:http</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Consolida tu dominio del servidor HTTP nativo antes de pasar a frameworks:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes implementar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Endpoint <code>GET /api/salud</code></td><td>Responder <code>200</code> con <code>{ ok: true, uptime: process.uptime() }</code></td></tr>
+                        <tr><td>2. Endpoint <code>POST /api/notas</code></td><td>Leer JSON por <em>chunks</em>, validar campo y devolver <code>201</code></td></tr>
+                        <tr><td>3. Probar la API desde consola Bash</td><td><code>curl -X POST http://localhost:3000/api/notas -d '...'</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de API REST">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · REST &amp; HTTP</span>
+                <h2 class="slide-title">🎛️ Simulador de Peticiones y Códigos HTTP</h2>
+                <p class="slide-lead">Inspecciona qué espera recibir y responder una API REST bien diseñada en cada método.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Endpoint REST</label>
+                        <select id="httpSimMode">
+                            <option value="get">GET /api/tareas?estado=pendiente</option>
+                            <option value="post">POST /api/tareas (201 vs 400)</option>
+                            <option value="options">OPTIONS Preflight (CORS)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="httpSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="httpSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: HTTP y APIs REST">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de <code>node:http</code> y REST</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: 201 Created indica que la petición POST creó un recurso nuevo." data-err="201 Created es el código semántico estándar cuando POST crea un recurso.">
+                    <div class="quiz-q-title">1. ¿Qué código HTTP debe devolver un <code>POST /api/tareas</code> exitoso al crear una nueva tarea?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">404 Not Found</button>
+                        <button class="quiz-option" data-opt="b">201 Created</button>
+                        <button class="quiz-option" data-opt="c">500 Internal Server Error</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: URL y searchParams extraen pathname y parámetros de consulta sin errores." data-err="new URL(req.url, base) separa pathname y searchParams de forma estándar.">
+                    <div class="quiz-q-title">2. ¿Cuál es la forma estándar en Node.js de leer <code>?cat=node</code> desde <code>req.url</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">new URL(req.url, ...).searchParams.get('cat')</button>
+                        <button class="quiz-option" data-opt="b">JSON.parse(req.url)</button>
+                        <button class="quiz-option" data-opt="c">fs.readFile(req.url)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: preflight CORS usa el método OPTIONS y se responde normalmente con 204." data-err="El navegador envía OPTIONS antes de peticiones cross-origin con cabeceras JSON.">
+                    <div class="quiz-q-title">3. ¿Qué método HTTP envía el navegador automáticamente para verificar permisos CORS antes de un <code>POST</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">PATCH</button>
+                        <button class="quiz-option" data-opt="b">TRACE</button>
+                        <button class="quiz-option" data-opt="c">OPTIONS</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Router y URL">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio: Parser de URL y Router REST</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Prueba new URL() y URLSearchParams igual que en src/server.js
+  const reqUrl = &#x27;/api/tareas?estado=pendiente&amp;limite=5&#x27;;
+  const parsed = new URL(reqUrl, &#x27;http://localhost:3000&#x27;);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;b&gt;pathname:&lt;/b&gt; ${parsed.pathname}&lt;br&gt;` +
+    `&lt;b&gt;estado:&lt;/b&gt; ${parsed.searchParams.get(&#x27;estado&#x27;)}&lt;br&gt;` +
+    `&lt;b&gt;limite:&lt;/b&gt; ${Number(parsed.searchParams.get(&#x27;limite&#x27;))}`;
+&lt;/script&gt;">Parser URL y Query Params</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Prueba new URL() y URLSearchParams igual que en src/server.js
+  const reqUrl = &#x27;/api/tareas?estado=pendiente&amp;limite=5&#x27;;
+  const parsed = new URL(reqUrl, &#x27;http://localhost:3000&#x27;);
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;b&gt;pathname:&lt;/b&gt; ${parsed.pathname}&lt;br&gt;` +
+    `&lt;b&gt;estado:&lt;/b&gt; ${parsed.searchParams.get(&#x27;estado&#x27;)}&lt;br&gt;` +
+    `&lt;b&gt;limite:&lt;/b&gt; ${Number(parsed.searchParams.get(&#x27;limite&#x27;))}`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de endpoints REST -->
+    <script>
+        // IIFE para encapsular el estado del simulador HTTP
+        (function () {
+            // Referencias al selector, escenario visual y bloque de código
+            const mode = document.getElementById('httpSimMode');
+            const stage = document.getElementById('httpSimStage');
+            const code = document.getElementById('httpSimCode');
+            // Guarda defensiva por si faltara algún nodo en el DOM
+            if (!mode || !stage || !code) return;
+
+            // Renderiza la explicación y código según el método HTTP seleccionado
+            function update() {
+                if (mode.value === 'get') {
+                    // Caso 1: consulta GET con query params leídos mediante URLSearchParams
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">200 OK · Content-Type: application/json</div>
+                        <div style="color:#38bdf8;">searchParams.get('estado') -> "pendiente"</div>
+                    `;
+                    code.textContent = `const estado = url.searchParams.get('estado');\nres.writeHead(200, { 'Content-Type': 'application/json' });`;
+                } else if (mode.value === 'post') {
+                    // Caso 2: creación POST devolviendo 201 o 400 ante validación fallida
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">Si pasa validación -> 201 Created con el recurso creado</div>
+                        <div style="color:#ff3358;">Si falta un campo o JSON inválido -> 400 Bad Request</div>
+                    `;
+                    code.textContent = `const body = await leerBodyJson(req);\nconst creada = await crear(body.descripcion);\nenviarJson(res, 201, creada);`;
+                } else {
+                    // Caso 3: petición preflight OPTIONS para habilitar CORS desde otro puerto
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">Preflight OPTIONS -> 204 No Content + Access-Control-Allow-*</div>
+                        <div style="color:#00ff88;">Permite que otro origen/puerto consuma tu API desde fetch().</div>
+                    `;
+                    code.textContent = `if (req.method === 'OPTIONS') {\n  res.writeHead(204, CORS_HEADERS);\n  return res.end();\n}`;
+                }
+            }
+
+            // Escucha cambios del selector e inicializa el simulador
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

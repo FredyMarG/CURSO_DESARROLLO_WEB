@@ -8,13 +8,13 @@
 (function () {
     'use strict';
 
-    const topbar = document.querySelector('.topbar');
-    if (!topbar || topbar.querySelector('.docs-switcher')) return;
+    const topbar = document.querySelector('.topbar'); // Declara e inicializa variable local
+    if (!topbar || topbar.querySelector('.docs-switcher')) return; // Evalúa condición lógica
 
     // Detecta el nivel de profundidad relativo hacia la raíz del repositorio
-    const pathNorm = decodeURIComponent(window.location.pathname).replace(/\\/g, '/');
+    const pathNorm = decodeURIComponent(window.location.pathname).replace(/\\/g, '/'); // Declara e inicializa variable local
     const isJsNested = /\/JAVASCRIPT\/JAVASCRIPT (?:JUNIOR|MID|MASTER) LEVEL\//i.test(pathNorm);
-    const toRoot = isJsNested ? '../../../' : '../../';
+    const toRoot = isJsNested ? '../../../' : '../../'; // Declara e inicializa variable local
 
     // Catálogo ordenado de los 5 centros de documentación del curso con su favicon oficial (Flaticon)
     const DOC_CENTERS = [
@@ -26,9 +26,9 @@
     ];
 
     // Reemplaza el favicon de la pestaña por el logo oficial de la documentación activa
-    const activeCenter = DOC_CENTERS.find((c) => c.match.test(pathNorm));
-    if (activeCenter && activeCenter.icon) {
-        const iconLink = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' });
+    const activeCenter = DOC_CENTERS.find((c) => c.match.test(pathNorm)); // Declara e inicializa variable local
+    if (activeCenter && activeCenter.icon) { // Evalúa condición lógica
+        const iconLink = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' }); // Declara e inicializa variable local
         iconLink.type = 'image/png';
         iconLink.href = activeCenter.icon;
     }
@@ -41,17 +41,17 @@
         master:  { primary: '#facc15', secondary: '#fde047', onPrimary: '#070a13' },
         node:    { primary: '#10b981', secondary: '#34d399', onPrimary: '#070a13' }  // Verde Node.js
     };
-    const palette = THEME_BY_ID[activeCenter?.id] || THEME_BY_ID.node;
+    const palette = THEME_BY_ID[activeCenter?.id] || THEME_BY_ID.node; // Declara e inicializa variable local
 
     // Aplica variables CSS de color y fuerza la misma tipografía ('Fira Code') en los números de índice
-    const rootStyle = document.documentElement.style;
+    const rootStyle = document.documentElement.style; // Declara e inicializa variable local
     rootStyle.setProperty('--primary', palette.primary);
     rootStyle.setProperty('--cyan', palette.secondary);
     rootStyle.setProperty('--mono', "'Fira Code', monospace");
 
     // Inyecta estilos encapsulados del selector, números uniformes y contraste por tema
-    if (!document.getElementById('docsSwitcherStyle')) {
-        const st = document.createElement('style');
+    if (!document.getElementById('docsSwitcherStyle')) { // Evalúa condición lógica
+        const st = document.createElement('style'); // Declara e inicializa variable local
         st.id = 'docsSwitcherStyle';
         st.textContent = `
             .docs-switcher { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
@@ -197,65 +197,65 @@
     }
 
     // Construye el contenedor de navegación entre documentaciones
-    const nav = document.createElement('nav');
+    const nav = document.createElement('nav'); // Declara e inicializa variable local
     nav.className = 'docs-switcher';
     nav.setAttribute('aria-label', 'Cambiar de documentación');
 
     DOC_CENTERS.forEach((center) => {
-        const a = document.createElement('a');
-        const isCurrent = center.match.test(pathNorm);
+        const a = document.createElement('a'); // Declara e inicializa variable local
+        const isCurrent = center.match.test(pathNorm); // Declara e inicializa variable local
         a.className = 'docs-switch-pill' + (isCurrent ? ' active' : '');
         a.href = encodeURI(center.href);
-        a.textContent = center.label;
-        if (isCurrent) a.setAttribute('aria-current', 'page');
+        a.textContent = center.label; // Actualiza texto plano en el DOM
+        if (isCurrent) a.setAttribute('aria-current', 'page'); // Evalúa condición lógica
         nav.appendChild(a);
     });
 
     // Inserta el selector justo después de .brand dentro de .topbar
-    const brand = topbar.querySelector('.brand');
-    if (brand && brand.nextSibling) topbar.insertBefore(nav, brand.nextSibling);
+    const brand = topbar.querySelector('.brand'); // Declara e inicializa variable local
+    if (brand && brand.nextSibling) topbar.insertBefore(nav, brand.nextSibling); // Evalúa condición lógica
     else topbar.appendChild(nav);
 
     // Barra universal de progreso de lectura superior (si el visor no define una propia)
-    if (!document.getElementById('readProgress')) {
-        const rp = document.createElement('div');
+    if (!document.getElementById('readProgress')) { // Evalúa condición lógica
+        const rp = document.createElement('div'); // Declara e inicializa variable local
         rp.id = 'readProgress';
         rp.style.cssText = 'position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--primary,#38bdf8),var(--cyan,#10b981));z-index:60;transition:width 0.1s linear;';
         document.body.prepend(rp);
-        window.addEventListener('scroll', () => {
-            const max = document.documentElement.scrollHeight - window.innerHeight;
+        window.addEventListener('scroll', () => { // Registra escuchador de evento en el DOM
+            const max = document.documentElement.scrollHeight - window.innerHeight; // Declara e inicializa variable local
             rp.style.width = max > 0 ? `${Math.min(100, Math.round((window.scrollY / max) * 100))}%` : '0%';
         }, { passive: true });
     }
 
     // Navegación inferior universal entre guías (⬅ Anterior / Siguiente ➡) y sincronización ?doc=
-    const reader = document.querySelector('main.reader');
-    const docList = document.getElementById('docList');
-    const docContent = document.getElementById('docContent');
-    if (reader && docList && docContent && !document.getElementById('docNav')) {
-        const docNav = document.createElement('div');
+    const reader = document.querySelector('main.reader'); // Declara e inicializa variable local
+    const docList = document.getElementById('docList'); // Declara e inicializa variable local
+    const docContent = document.getElementById('docContent'); // Declara e inicializa variable local
+    if (reader && docList && docContent && !document.getElementById('docNav')) { // Evalúa condición lógica
+        const docNav = document.createElement('div'); // Declara e inicializa variable local
         docNav.id = 'docNav';
         docNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:28px;padding-top:18px;border-top:1px solid var(--border,rgba(255,255,255,0.1));flex-wrap:wrap;';
         reader.appendChild(docNav);
 
         const syncBottomNav = () => {
-            const items = Array.from(docList.querySelectorAll('.doc-item'));
-            const activeIdx = items.findIndex(b => b.classList.contains('active'));
-            const prevBtn = activeIdx > 0 ? items[activeIdx - 1] : null;
-            const nextBtn = activeIdx >= 0 && activeIdx < items.length - 1 ? items[activeIdx + 1] : null;
-            const label = (b) => b.querySelector('strong')?.textContent || b.textContent.trim();
+            const items = Array.from(docList.querySelectorAll('.doc-item')); // Declara e inicializa variable local
+            const activeIdx = items.findIndex(b => b.classList.contains('active')); // Declara e inicializa variable local
+            const prevBtn = activeIdx > 0 ? items[activeIdx - 1] : null; // Declara e inicializa variable local
+            const nextBtn = activeIdx >= 0 && activeIdx < items.length - 1 ? items[activeIdx + 1] : null; // Declara e inicializa variable local
+            const label = (b) => b.querySelector('strong')?.textContent || b.textContent.trim(); // Declara e inicializa variable local
 
-            docNav.innerHTML = '';
-            const left = prevBtn ? document.createElement('button') : document.createElement('span');
-            if (prevBtn) {
+            docNav.innerHTML = ''; // Actualiza estructura HTML interna
+            const left = prevBtn ? document.createElement('button') : document.createElement('span'); // Declara e inicializa variable local
+            if (prevBtn) { // Evalúa condición lógica
                 left.className = 'btn';
-                left.textContent = `⬅ ${label(prevBtn)}`;
+                left.textContent = `⬅ ${label(prevBtn)}`; // Actualiza texto plano en el DOM
                 left.addEventListener('click', () => { prevBtn.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
-            const right = nextBtn ? document.createElement('button') : document.createElement('span');
-            if (nextBtn) {
+            const right = nextBtn ? document.createElement('button') : document.createElement('span'); // Declara e inicializa variable local
+            if (nextBtn) { // Evalúa condición lógica
                 right.className = 'btn';
-                right.textContent = `${label(nextBtn)} ➡`;
+                right.textContent = `${label(nextBtn)} ➡`; // Actualiza texto plano en el DOM
                 right.addEventListener('click', () => { nextBtn.click(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
             }
             docNav.append(left, right);
@@ -266,12 +266,12 @@
     }
 
     // Da formato estético uniforme al prefijo numérico (ej. "01.") en la barra lateral de los 5 visores (incluyendo Node)
-    if (docList) {
+    if (docList) { // Evalúa condición lógica
         const decorateSidebarNumbers = () => {
             docList.querySelectorAll('.doc-item strong').forEach((el) => {
-                if (el.querySelector('.doc-item-num')) return;
-                const m = el.textContent.trim().match(/^(\d{2}\.)\s+([\s\S]+)$/);
-                if (m) el.innerHTML = `<span class="doc-item-num">${m[1]}</span>${m[2]}`;
+                if (el.querySelector('.doc-item-num')) return; // Evalúa condición lógica
+                const m = el.textContent.trim().match(/^(\d{2}\.)\s+([\s\S]+)$/); // Declara e inicializa variable local
+                if (m) el.innerHTML = `<span class="doc-item-num">${m[1]}</span>${m[2]}`; // Evalúa condición lógica
             });
         };
         new MutationObserver(decorateSidebarNumbers).observe(docList, { childList: true });
@@ -280,16 +280,16 @@
 
     // Normaliza el panel derecho (#tocList) en los 5 visores:
     // quita emojis y numera de forma uniforme secciones (01.) y subsecciones (01.1., 01.2.)
-    const tocList = document.getElementById('tocList');
-    if (tocList) {
+    const tocList = document.getElementById('tocList'); // Declara e inicializa variable local
+    if (tocList) { // Evalúa condición lógica
         const decorateTocNumbers = () => {
-            const links = Array.from(tocList.querySelectorAll('.toc-link'));
-            if (!links.length) return;
+            const links = Array.from(tocList.querySelectorAll('.toc-link')); // Declara e inicializa variable local
+            if (!links.length) return; // Evalúa condición lógica
             // Si hay encabezados lvl-1 (#) en el índice, esos son las secciones principales; si no, lvl-2 (##)
-            const hasLvl1 = links.some(a => a.classList.contains('lvl-1'));
-            const mainClass = hasLvl1 ? 'lvl-1' : 'lvl-2';
-            let secNum = 0;
-            let subNum = 0;
+            const hasLvl1 = links.some(a => a.classList.contains('lvl-1')); // Declara e inicializa variable local
+            const mainClass = hasLvl1 ? 'lvl-1' : 'lvl-2'; // Declara e inicializa variable local
+            let secNum = 0; // Declara e inicializa variable local
+            let subNum = 0; // Declara e inicializa variable local
 
             links.forEach((a) => {
                 // Elimina cualquier emoji, keycap (1️⃣, 🔟) y prefijo manual previo (1., 3.1., A.)
@@ -299,12 +299,12 @@
                     .trim();
                 text = text.replace(/^(?:\d+(?:\.\d+)*|[A-Z])[.)]\s+/, '').trim();
 
-                const isMain = a.classList.contains(mainClass);
-                if (isMain) {
+                const isMain = a.classList.contains(mainClass); // Declara e inicializa variable local
+                if (isMain) { // Evalúa condición lógica
                     secNum += 1;
                     subNum = 0;
                 } else {
-                    if (secNum === 0) secNum = 1;
+                    if (secNum === 0) secNum = 1; // Evalúa condición lógica
                     subNum += 1;
                 }
 
@@ -312,10 +312,10 @@
                     ? `${String(secNum).padStart(2, '0')}.`
                     : `${String(secNum).padStart(2, '0')}.${subNum}`;
 
-                a.textContent = '';
-                const badge = document.createElement('span');
+                a.textContent = ''; // Actualiza texto plano en el DOM
+                const badge = document.createElement('span'); // Declara e inicializa variable local
                 badge.className = 'toc-num';
-                badge.textContent = numLabel;
+                badge.textContent = numLabel; // Actualiza texto plano en el DOM
                 a.append(badge, document.createTextNode(text));
             });
         };
@@ -324,15 +324,15 @@
     }
 
     // 1. ScrollSpy automático en #tocList
-    if (tocList && docContent && 'IntersectionObserver' in window) {
-        let spyObserver = null;
+    if (tocList && docContent && 'IntersectionObserver' in window) { // Evalúa condición lógica
+        let spyObserver = null; // Declara e inicializa variable local
         const bindScrollSpy = () => {
-            if (spyObserver) spyObserver.disconnect();
-            const headings = Array.from(docContent.querySelectorAll('h1[id], h2[id], h3[id]'));
-            if (!headings.length) return;
+            if (spyObserver) spyObserver.disconnect(); // Evalúa condición lógica
+            const headings = Array.from(docContent.querySelectorAll('h1[id], h2[id], h3[id]')); // Declara e inicializa variable local
+            if (!headings.length) return; // Evalúa condición lógica
             spyObserver = new IntersectionObserver((entries) => {
-                const visible = entries.find(e => e.isIntersecting);
-                if (!visible) return;
+                const visible = entries.find(e => e.isIntersecting); // Declara e inicializa variable local
+                if (!visible) return; // Evalúa condición lógica
                 tocList.querySelectorAll('.toc-link').forEach(a =>
                     a.classList.toggle('active', a.getAttribute('href') === `#${visible.target.id}`)
                 );
@@ -344,58 +344,58 @@
     }
 
     // 2. Tiempo estimado de lectura + Botón Modo Enfoque en .reader-head
-    const readerHead = document.querySelector('.reader-head');
-    const layoutEl = document.querySelector('.layout');
-    if (readerHead && docContent && !readerHead.querySelector('.reader-tools')) {
-        const tools = document.createElement('div');
+    const readerHead = document.querySelector('.reader-head'); // Declara e inicializa variable local
+    const layoutEl = document.querySelector('.layout'); // Declara e inicializa variable local
+    if (readerHead && docContent && !readerHead.querySelector('.reader-tools')) { // Evalúa condición lógica
+        const tools = document.createElement('div'); // Declara e inicializa variable local
         tools.className = 'reader-tools';
 
-        const readTime = document.createElement('span');
+        const readTime = document.createElement('span'); // Declara e inicializa variable local
         readTime.className = 'read-time-badge';
         const updateReadTime = () => {
-            const words = (docContent.textContent || '').trim().split(/\s+/).filter(Boolean).length;
-            const mins = Math.max(1, Math.round(words / 200));
-            readTime.textContent = `⏱️ ~${mins} min`;
+            const words = (docContent.textContent || '').trim().split(/\s+/).filter(Boolean).length; // Declara e inicializa variable local
+            const mins = Math.max(1, Math.round(words / 200)); // Declara e inicializa variable local
+            readTime.textContent = `⏱️ ~${mins} min`; // Actualiza texto plano en el DOM
         };
         new MutationObserver(updateReadTime).observe(docContent, { childList: true });
         updateReadTime();
         tools.appendChild(readTime);
 
-        if (layoutEl) {
-            const focusBtn = document.createElement('button');
+        if (layoutEl) { // Evalúa condición lógica
+            const focusBtn = document.createElement('button'); // Declara e inicializa variable local
             focusBtn.type = 'button';
             focusBtn.className = 'btn';
-            focusBtn.textContent = '📖 Modo Enfoque';
-            focusBtn.addEventListener('click', () => {
-                const on = layoutEl.classList.toggle('focus-mode');
-                focusBtn.textContent = on ? '📑 Mostrar Paneles' : '📖 Modo Enfoque';
+            focusBtn.textContent = '📖 Modo Enfoque'; // Actualiza texto plano en el DOM
+            focusBtn.addEventListener('click', () => { // Registra escuchador de evento en el DOM
+                const on = layoutEl.classList.toggle('focus-mode'); // Declara e inicializa variable local
+                focusBtn.textContent = on ? '📑 Mostrar Paneles' : '📖 Modo Enfoque'; // Actualiza texto plano en el DOM
             });
             tools.appendChild(focusBtn);
         }
 
-        const modBtn = document.getElementById('moduleBtn');
-        if (modBtn) tools.appendChild(modBtn);
+        const modBtn = document.getElementById('moduleBtn'); // Declara e inicializa variable local
+        if (modBtn) tools.appendChild(modBtn); // Evalúa condición lógica
         readerHead.appendChild(tools);
     }
 
     // 3. Botón flotante ↑ Subir
-    if (!document.getElementById('backToTopDocs')) {
-        const topBtn = document.createElement('button');
+    if (!document.getElementById('backToTopDocs')) { // Evalúa condición lógica
+        const topBtn = document.createElement('button'); // Declara e inicializa variable local
         topBtn.id = 'backToTopDocs';
         topBtn.type = 'button';
-        topBtn.textContent = '↑ Subir';
+        topBtn.textContent = '↑ Subir'; // Actualiza texto plano en el DOM
         topBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         document.body.appendChild(topBtn);
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', () => { // Registra escuchador de evento en el DOM
             topBtn.classList.toggle('visible', window.scrollY > 400);
         }, { passive: true });
     }
 
     // 4. Atajo de teclado ("/" o Ctrl+K) para enfocar #docSearch y Escape para limpiar
-    const docSearchInput = document.getElementById('docSearch');
-    if (docSearchInput) {
-        document.addEventListener('keydown', (e) => {
-            if ((e.key === '/' || (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey))) && document.activeElement !== docSearchInput) {
+    const docSearchInput = document.getElementById('docSearch'); // Declara e inicializa variable local
+    if (docSearchInput) { // Evalúa condición lógica
+        document.addEventListener('keydown', (e) => { // Registra escuchador de evento en el DOM
+            if ((e.key === '/' || (e.key.toLowerCase() === 'k' && (e.ctrlKey || e.metaKey))) && document.activeElement !== docSearchInput) { // Evalúa condición lógica
                 e.preventDefault();
                 docSearchInput.focus();
                 docSearchInput.select();
@@ -407,11 +407,12 @@
     }
 
     // Soporte universal de enlace directo ?doc=<archivo> en cualquiera de los 5 visores
-    const reqDoc = new URLSearchParams(window.location.search).get('doc');
-    if (reqDoc && docList) {
+    const reqDoc = new URLSearchParams(window.location.search).get('doc'); // Declara e inicializa variable local
+    if (reqDoc && docList) { // Evalúa condición lógica
         const target = Array.from(docList.querySelectorAll('.doc-item')).find(b =>
             b.textContent.toLowerCase().includes(reqDoc.toLowerCase())
         );
-        if (target && !target.classList.contains('active')) target.click();
+        if (target && !target.classList.contains('active')) target.click(); // Evalúa condición lógica
     }
 })();
+

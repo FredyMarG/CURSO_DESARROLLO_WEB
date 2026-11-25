@@ -18,7 +18,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">CSS3 · FLEXBOX</span><div class="brand-title"><span>⚖️</span><span>Grow, Shrink y Basis</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 14</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Flexbox</span></a>
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -53,11 +53,90 @@
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Grow, Shrink y Basis</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
         </section>
-        <section class="slide" data-slide="5" data-title="Quiz: Grow, Shrink y Basis">
+        
+        <!-- Diapositiva 5: Eje Principal (Main Axis) vs Eje Cruzado (Cross Axis) -->
+        <section class="slide" data-slide="5" data-title="Eje Principal (Main Axis) vs Eje Cruzado (Cross Axis)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · EJES EN FLEXBOX</span>
+                <h2 class="slide-title">Eje Principal (Main Axis) vs Eje Cruzado (Cross Axis)</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>justify-content</code> siempre alinea sobre el eje principal y <code>align-items</code> sobre el eje cruzado. Si cambias <code>flex-direction: column</code>, ambos ejes rotan 90°.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: gap en Flexbox en lugar de márgenes manuales -->
+        <section class="slide" data-slide="6" data-title="gap en Flexbox en lugar de márgenes manuales">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ESPACIADO LIMPIO</span>
+                <h2 class="slide-title">gap en Flexbox en lugar de márgenes manuales</h2>
+            </div>
+            <div class="glass-card">
+                <p>La propiedad <code>gap: 16px</code> separa únicamente entre ítems hijos sin agregar espacio sobrante en los bordes del contenedor.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: flex: 1 vs flex: 0 0 auto -->
+        <section class="slide" data-slide="7" data-title="flex: 1 vs flex: 0 0 auto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · FLEX SHORTHAND</span>
+                <h2 class="slide-title">flex: 1 vs flex: 0 0 auto</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>flex: 1</code> equivale a <code>flex-grow: 1; flex-shrink: 1; flex-basis: 0%</code>, repartiendo el espacio disponible de forma equitativa entre columnas.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: Cuidado con order y el orden del DOM -->
+        <section class="slide" data-slide="8" data-title="Cuidado con order y el orden del DOM">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ACCESIBILIDAD VISUAL</span>
+                <h2 class="slide-title">Cuidado con order y el orden del DOM</h2>
+            </div>
+            <div class="glass-card">
+                <p>La propiedad <code>order</code> cambia el orden visual pero no el orden de tabulación (<code>Tab</code>). Úsala con moderación para no desorientar usuarios de teclado.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Cómo decide CSS qué regla gana -->
+        <section class="slide" data-slide="9" data-title="Cómo decide CSS qué regla gana">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ESPECIFICIDAD Y CASCADA</span>
+                <h2 class="slide-title">Cómo decide CSS qué regla gana</h2>
+            </div>
+            <div class="glass-card">
+                <p>Al aplicar <strong>Grow, Shrink y Basis</strong>, recuerda el orden de prioridad: estilos en línea &gt; ID (<code>#id</code>) &gt; clase/atributo/pseudoclase (<code>.clase</code>) &gt; etiqueta (<code>div</code>). Mantén la especificidad baja usando clases reutilizables.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Grow, Shrink y Basis -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Grow, Shrink y Basis">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Grow, Shrink y Basis</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Grow, Shrink y Basis</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Grow, Shrink y Basis -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Grow, Shrink y Basis">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Grow, Shrink y Basis</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz: Grow, Shrink y Basis">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="b" data-ok="flex: 1 equivale a flex: 1 1 0%, repartiendo el espacio libre por igual." data-err="flex: 1 activa flex-grow: 1 para ocupar el espacio disponible."><div class="quiz-q-title">1. ¿Qué significa <code>flex: 1</code> en un hijo flex?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Que mide 1px</button><button class="quiz-option" data-opt="b">Que crece y se encoge para repartir el espacio equitativamente</button><button class="quiz-option" data-opt="c">Que se oculta</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Grow, Shrink y Basis">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Grow, Shrink y Basis">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
   body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
@@ -75,7 +154,7 @@
 &lt;div class=&quot;row&quot;&gt;&lt;div class=&quot;fijo&quot;&gt;90px&lt;/div&gt;&lt;div class=&quot;fluido&quot;&gt;flex: 1 (crece)&lt;/div&gt;&lt;div class=&quot;fluido&quot;&gt;flex: 1&lt;/div&gt;&lt;/div&gt;</textarea><!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+        <section class="slide" data-slide="14" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Flexbox</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⚖️ Guía Completa Flexbox</span><span class="file-path">index.html</span></a>

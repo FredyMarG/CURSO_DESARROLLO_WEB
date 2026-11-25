@@ -70,23 +70,23 @@
         }
 
         init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición lógica
+                const AudioCtx = window.AudioContext || window.webkitAudioContext; // Declara e inicializa variable local
                 this.ctx = new AudioCtx();
             }
-            if (this.ctx && this.ctx.state === 'suspended') {
+            if (this.ctx && this.ctx.state === 'suspended') { // Evalúa condición lógica
                 this.ctx.resume();
             }
         }
 
         playTone(freq, type = 'sine', duration = 0.1, volume = 0.05) {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             try { // Inicia bloque protegido contra errores
                 this.init();
-                if (!this.ctx) return;
+                if (!this.ctx) return; // Evalúa condición lógica
 
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
+                const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+                const gain = this.ctx.createGain(); // Declara e inicializa variable local
 
                 osc.type = type;
                 osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
@@ -113,19 +113,19 @@
         }
 
         success() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.playTone(523.25, 'sine', 0.09, 0.05);
             setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 80);
         }
 
         warning() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.playTone(340, 'sawtooth', 0.12, 0.06);
             setTimeout(() => this.playTone(260, 'sawtooth', 0.15, 0.06), 100);
         }
     }
 
-    const sound = new SoundEngine();
+    const sound = new SoundEngine(); // Declara e inicializa variable local
 
     /* ==========================================================================
        3. PRESETS DE CÓDIGO EDITABLE PARA EL PLAYGROUND (Slide 9 & Retos)
@@ -379,152 +379,152 @@ checkout.avanzar(3); // Método de pago`
         cacheDom() {
             // Contenedores generales
             this.dom.body = document.body;
-            this.dom.slides = document.querySelectorAll('.slide');
-            this.dom.presentationWrapper = document.getElementById('presentationWrapper');
+            this.dom.slides = document.querySelectorAll('.slide'); // Obtiene referencia al elemento del DOM
+            this.dom.presentationWrapper = document.getElementById('presentationWrapper'); // Obtiene referencia al elemento del DOM
 
             // Navegación superior
-            this.dom.progressBar = document.getElementById('progressBar');
-            this.dom.slideIndicator = document.getElementById('slideIndicator');
-            this.dom.btnToggleMode = document.getElementById('btnToggleMode');
-            this.dom.modeIcon = document.getElementById('modeIcon');
-            this.dom.modeText = document.getElementById('modeText');
-            this.dom.btnToggleSound = document.getElementById('btnToggleSound');
-            this.dom.soundIcon = document.getElementById('soundIcon');
-            this.dom.btnOverview = document.getElementById('btnOverview');
-            this.dom.btnFullscreen = document.getElementById('btnFullscreen');
+            this.dom.progressBar = document.getElementById('progressBar'); // Obtiene referencia al elemento del DOM
+            this.dom.slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia al elemento del DOM
+            this.dom.btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia al elemento del DOM
+            this.dom.modeIcon = document.getElementById('modeIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.modeText = document.getElementById('modeText'); // Obtiene referencia al elemento del DOM
+            this.dom.btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia al elemento del DOM
+            this.dom.soundIcon = document.getElementById('soundIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.btnOverview = document.getElementById('btnOverview'); // Obtiene referencia al elemento del DOM
+            this.dom.btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia al elemento del DOM
 
             // Navegación inferior
-            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide');
-            this.dom.btnNextSlide = document.getElementById('btnNextSlide');
-            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer');
+            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide'); // Obtiene referencia al elemento del DOM
+            this.dom.btnNextSlide = document.getElementById('btnNextSlide'); // Obtiene referencia al elemento del DOM
+            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer'); // Obtiene referencia al elemento del DOM
 
             // Hero Slide
-            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation');
-            this.dom.jumpLinks = document.querySelectorAll('[data-jump]');
+            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation'); // Obtiene referencia al elemento del DOM
+            this.dom.jumpLinks = document.querySelectorAll('[data-jump]'); // Obtiene referencia al elemento del DOM
 
             // Slide 2: Mockup Navegador
-            this.dom.btnMockBack = document.getElementById('btnMockBack');
-            this.dom.btnMockForward = document.getElementById('btnMockForward');
-            this.dom.btnMockReload = document.getElementById('btnMockReload');
-            this.dom.mockUrlText = document.getElementById('mockUrlText');
-            this.dom.mockStackPointer = document.getElementById('mockStackPointer');
-            this.dom.mockStackLength = document.getElementById('mockStackLength');
-            this.dom.btnTestHistoryIntro = document.getElementById('btnTestHistoryIntro');
-            this.dom.testHistoryIntroStatus = document.getElementById('testHistoryIntroStatus');
-            this.dom.consoleOutput1 = document.getElementById('console-output-1');
+            this.dom.btnMockBack = document.getElementById('btnMockBack'); // Obtiene referencia al elemento del DOM
+            this.dom.btnMockForward = document.getElementById('btnMockForward'); // Obtiene referencia al elemento del DOM
+            this.dom.btnMockReload = document.getElementById('btnMockReload'); // Obtiene referencia al elemento del DOM
+            this.dom.mockUrlText = document.getElementById('mockUrlText'); // Obtiene referencia al elemento del DOM
+            this.dom.mockStackPointer = document.getElementById('mockStackPointer'); // Obtiene referencia al elemento del DOM
+            this.dom.mockStackLength = document.getElementById('mockStackLength'); // Obtiene referencia al elemento del DOM
+            this.dom.btnTestHistoryIntro = document.getElementById('btnTestHistoryIntro'); // Obtiene referencia al elemento del DOM
+            this.dom.testHistoryIntroStatus = document.getElementById('testHistoryIntroStatus'); // Obtiene referencia al elemento del DOM
+            this.dom.consoleOutput1 = document.getElementById('console-output-1'); // Obtiene referencia al elemento del DOM
 
             // Slide 3: Pruebas de go()
-            this.dom.btnCheckGoExamples = document.getElementById('btnCheckGoExamples');
-            this.dom.goExamplesResult = document.getElementById('goExamplesResult');
+            this.dom.btnCheckGoExamples = document.getElementById('btnCheckGoExamples'); // Obtiene referencia al elemento del DOM
+            this.dom.goExamplesResult = document.getElementById('goExamplesResult'); // Obtiene referencia al elemento del DOM
 
             // Slide 4: Simulador de Escenarios
-            this.dom.simPropButtons = document.querySelectorAll('.sim-prop-btn');
-            this.dom.btnCompareHistoryModes = document.getElementById('btnCompareHistoryModes');
-            this.dom.terminalImplicit = document.getElementById('terminalImplicit');
-            this.dom.terminalSerialized = document.getElementById('terminalSerialized');
-            this.dom.statusImplicit = document.getElementById('statusImplicit');
-            this.dom.statusSerialized = document.getElementById('statusSerialized');
-            this.dom.storageFeedbackText = document.getElementById('storageFeedbackText');
+            this.dom.simPropButtons = document.querySelectorAll('.sim-prop-btn'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCompareHistoryModes = document.getElementById('btnCompareHistoryModes'); // Obtiene referencia al elemento del DOM
+            this.dom.terminalImplicit = document.getElementById('terminalImplicit'); // Obtiene referencia al elemento del DOM
+            this.dom.terminalSerialized = document.getElementById('terminalSerialized'); // Obtiene referencia al elemento del DOM
+            this.dom.statusImplicit = document.getElementById('statusImplicit'); // Obtiene referencia al elemento del DOM
+            this.dom.statusSerialized = document.getElementById('statusSerialized'); // Obtiene referencia al elemento del DOM
+            this.dom.storageFeedbackText = document.getElementById('storageFeedbackText'); // Obtiene referencia al elemento del DOM
 
             // Slide 5: Pestañas de Características y Test en Vivo
-            this.dom.charTabButtons = document.querySelectorAll('.char-tab-btn');
-            this.dom.charDetailViews = document.querySelectorAll('.char-detail-view');
-            this.dom.btnTestHistoryState = document.getElementById('btnTestHistoryState');
-            this.dom.historyStateResult = document.getElementById('historyStateResult');
-            this.dom.btnTestPopstate = document.getElementById('btnTestPopstate');
-            this.dom.popstateResult = document.getElementById('popstateResult');
-            this.dom.btnTestNoTrigger = document.getElementById('btnTestNoTrigger');
-            this.dom.noTriggerResult = document.getElementById('noTriggerResult');
+            this.dom.charTabButtons = document.querySelectorAll('.char-tab-btn'); // Obtiene referencia al elemento del DOM
+            this.dom.charDetailViews = document.querySelectorAll('.char-detail-view'); // Obtiene referencia al elemento del DOM
+            this.dom.btnTestHistoryState = document.getElementById('btnTestHistoryState'); // Obtiene referencia al elemento del DOM
+            this.dom.historyStateResult = document.getElementById('historyStateResult'); // Obtiene referencia al elemento del DOM
+            this.dom.btnTestPopstate = document.getElementById('btnTestPopstate'); // Obtiene referencia al elemento del DOM
+            this.dom.popstateResult = document.getElementById('popstateResult'); // Obtiene referencia al elemento del DOM
+            this.dom.btnTestNoTrigger = document.getElementById('btnTestNoTrigger'); // Obtiene referencia al elemento del DOM
+            this.dom.noTriggerResult = document.getElementById('noTriggerResult'); // Obtiene referencia al elemento del DOM
 
             // Slide 7: Simulador SPA
-            this.dom.btnSpaBack = document.getElementById('btnSpaBack');
-            this.dom.btnSpaForward = document.getElementById('btnSpaForward');
-            this.dom.spaCurrentUrl = document.getElementById('spaCurrentUrl');
-            this.dom.spaTabs = document.querySelectorAll('.spa-tab-btn');
-            this.dom.spaCanvasTitle = document.getElementById('spaCanvasTitle');
-            this.dom.spaCanvasDesc = document.getElementById('spaCanvasDesc');
-            this.dom.spaStatusResult = document.getElementById('spaStatusResult');
+            this.dom.btnSpaBack = document.getElementById('btnSpaBack'); // Obtiene referencia al elemento del DOM
+            this.dom.btnSpaForward = document.getElementById('btnSpaForward'); // Obtiene referencia al elemento del DOM
+            this.dom.spaCurrentUrl = document.getElementById('spaCurrentUrl'); // Obtiene referencia al elemento del DOM
+            this.dom.spaTabs = document.querySelectorAll('.spa-tab-btn'); // Obtiene referencia al elemento del DOM
+            this.dom.spaCanvasTitle = document.getElementById('spaCanvasTitle'); // Obtiene referencia al elemento del DOM
+            this.dom.spaCanvasDesc = document.getElementById('spaCanvasDesc'); // Obtiene referencia al elemento del DOM
+            this.dom.spaStatusResult = document.getElementById('spaStatusResult'); // Obtiene referencia al elemento del DOM
 
             // Slide 8: Analogías
-            this.dom.toolButtons = document.querySelectorAll('.tool-btn');
-            this.dom.officeCardLeft = document.getElementById('officeCardLeft');
-            this.dom.officeAvatarLeft = document.getElementById('officeAvatarLeft');
-            this.dom.officeTitleLeft = document.getElementById('officeTitleLeft');
-            this.dom.officeSubLeft = document.getElementById('officeSubLeft');
-            this.dom.officeItemsLeft = document.getElementById('officeItemsLeft');
-            this.dom.officeStatusLeft = document.getElementById('officeStatusLeft');
+            this.dom.toolButtons = document.querySelectorAll('.tool-btn'); // Obtiene referencia al elemento del DOM
+            this.dom.officeCardLeft = document.getElementById('officeCardLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.officeAvatarLeft = document.getElementById('officeAvatarLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.officeTitleLeft = document.getElementById('officeTitleLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.officeSubLeft = document.getElementById('officeSubLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.officeItemsLeft = document.getElementById('officeItemsLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.officeStatusLeft = document.getElementById('officeStatusLeft'); // Obtiene referencia al elemento del DOM
 
-            this.dom.officeCardRight = document.getElementById('officeCardRight');
-            this.dom.officeAvatarRight = document.getElementById('officeAvatarRight');
-            this.dom.officeTitleRight = document.getElementById('officeTitleRight');
-            this.dom.officeSubRight = document.getElementById('officeSubRight');
-            this.dom.officeItemsRight = document.getElementById('officeItemsRight');
-            this.dom.officeStatusRight = document.getElementById('officeStatusRight');
+            this.dom.officeCardRight = document.getElementById('officeCardRight'); // Obtiene referencia al elemento del DOM
+            this.dom.officeAvatarRight = document.getElementById('officeAvatarRight'); // Obtiene referencia al elemento del DOM
+            this.dom.officeTitleRight = document.getElementById('officeTitleRight'); // Obtiene referencia al elemento del DOM
+            this.dom.officeSubRight = document.getElementById('officeSubRight'); // Obtiene referencia al elemento del DOM
+            this.dom.officeItemsRight = document.getElementById('officeItemsRight'); // Obtiene referencia al elemento del DOM
+            this.dom.officeStatusRight = document.getElementById('officeStatusRight'); // Obtiene referencia al elemento del DOM
 
-            this.dom.officeArrowLabel = document.getElementById('officeArrowLabel');
-            this.dom.officeBannerIcon = document.getElementById('officeBannerIcon');
-            this.dom.officeBannerText = document.getElementById('officeBannerText');
+            this.dom.officeArrowLabel = document.getElementById('officeArrowLabel'); // Obtiene referencia al elemento del DOM
+            this.dom.officeBannerIcon = document.getElementById('officeBannerIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.officeBannerText = document.getElementById('officeBannerText'); // Obtiene referencia al elemento del DOM
 
             // Slide 9: Playground
-            this.dom.codePresetSelect = document.getElementById('codePresetSelect');
-            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor');
-            this.dom.btnResetCode = document.getElementById('btnResetCode');
-            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode');
-            this.dom.btnClearConsole = document.getElementById('btnClearConsole');
-            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer');
+            this.dom.codePresetSelect = document.getElementById('codePresetSelect'); // Obtiene referencia al elemento del DOM
+            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor'); // Obtiene referencia al elemento del DOM
+            this.dom.btnResetCode = document.getElementById('btnResetCode'); // Obtiene referencia al elemento del DOM
+            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode'); // Obtiene referencia al elemento del DOM
+            this.dom.btnClearConsole = document.getElementById('btnClearConsole'); // Obtiene referencia al elemento del DOM
+            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer'); // Obtiene referencia al elemento del DOM
 
             // Slide 10: Cheat Sheet & Retos
-            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header');
-            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]');
-            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation');
-            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat');
+            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]'); // Obtiene referencia al elemento del DOM
+            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat'); // Obtiene referencia al elemento del DOM
 
             // Modales & Toast
-            this.dom.overviewModal = document.getElementById('overviewModal');
-            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.dom.overviewGrid = document.getElementById('overviewGrid');
-            this.dom.toastNotification = document.getElementById('toastNotification');
-            this.dom.toastIcon = document.getElementById('toastIcon');
-            this.dom.toastMsg = document.getElementById('toastMsg');
+            this.dom.overviewModal = document.getElementById('overviewModal'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia al elemento del DOM
+            this.dom.overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia al elemento del DOM
+            this.dom.toastNotification = document.getElementById('toastNotification'); // Obtiene referencia al elemento del DOM
+            this.dom.toastIcon = document.getElementById('toastIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.toastMsg = document.getElementById('toastMsg'); // Obtiene referencia al elemento del DOM
 
             // Botones de copia de código en tarjetas
-            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code');
+            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code'); // Obtiene referencia al elemento del DOM
         }
 
         bindEvents() {
             // Navegación por diapositivas
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide());
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide());
-            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2));
-            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1));
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide()); // Evalúa condición lógica
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide()); // Evalúa condición lógica
+            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2)); // Evalúa condición lógica
+            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1)); // Evalúa condición lógica
 
             // Enlaces de salto directo en hero card
             this.dom.jumpLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10);
-                    if (slideTarget) this.goToSlide(slideTarget);
+                link.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10); // Declara e inicializa variable local
+                    if (slideTarget) this.goToSlide(slideTarget); // Evalúa condición lógica
                 });
             });
 
             // Controles de barra superior
-            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode());
-            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound());
-            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview());
-            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview());
-            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
+            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode()); // Evalúa condición lógica
+            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound()); // Evalúa condición lógica
+            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview()); // Evalúa condición lógica
+            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview()); // Evalúa condición lógica
+            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen()); // Evalúa condición lógica
 
             // Navegación por Teclado
-            window.addEventListener('keydown', (e) => {
-                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
+            window.addEventListener('keydown', (e) => { // Registra escuchador de evento en el DOM
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') { // Evalúa condición lógica
                     // Permitir Ctrl + Enter en el playground para ejecutar
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { // Evalúa condición lógica
                         e.preventDefault();
                         this.runPlaygroundCode();
                     }
-                    return;
+                    return; // Retorna el resultado de la función
                 }
 
-                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') {
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') { // Evalúa condición lógica
                     e.preventDefault();
                     this.nextSlide();
                 } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
@@ -540,17 +540,17 @@ checkout.avanzar(3); // Método de pago`
             });
 
             // Slide 2: Mockup Navegador
-            if (this.dom.btnMockBack) this.dom.btnMockBack.addEventListener('click', () => this.mockNavBack());
-            if (this.dom.btnMockForward) this.dom.btnMockForward.addEventListener('click', () => this.mockNavForward());
-            if (this.dom.btnMockReload) this.dom.btnMockReload.addEventListener('click', () => this.mockNavReload());
-            if (this.dom.btnTestHistoryIntro) this.dom.btnTestHistoryIntro.addEventListener('click', () => this.runHistoryIntroTest());
+            if (this.dom.btnMockBack) this.dom.btnMockBack.addEventListener('click', () => this.mockNavBack()); // Evalúa condición lógica
+            if (this.dom.btnMockForward) this.dom.btnMockForward.addEventListener('click', () => this.mockNavForward()); // Evalúa condición lógica
+            if (this.dom.btnMockReload) this.dom.btnMockReload.addEventListener('click', () => this.mockNavReload()); // Evalúa condición lógica
+            if (this.dom.btnTestHistoryIntro) this.dom.btnTestHistoryIntro.addEventListener('click', () => this.runHistoryIntroTest()); // Evalúa condición lógica
 
             // Slide 3: go()
-            if (this.dom.btnCheckGoExamples) this.dom.btnCheckGoExamples.addEventListener('click', () => this.runGoExamplesTest());
+            if (this.dom.btnCheckGoExamples) this.dom.btnCheckGoExamples.addEventListener('click', () => this.runGoExamplesTest()); // Evalúa condición lógica
 
             // Slide 4: Escenarios
             this.dom.simPropButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
                     this.dom.simPropButtons.forEach(b => b.classList.remove('active'));
                     e.currentTarget.classList.add('active');
                     AppState.activeScenario = e.currentTarget.getAttribute('data-scenario');
@@ -558,32 +558,32 @@ checkout.avanzar(3); // Método de pago`
                     sound.click();
                 });
             });
-            if (this.dom.btnCompareHistoryModes) this.dom.btnCompareHistoryModes.addEventListener('click', () => this.runCompareHistoryModes());
+            if (this.dom.btnCompareHistoryModes) this.dom.btnCompareHistoryModes.addEventListener('click', () => this.runCompareHistoryModes()); // Evalúa condición lógica
 
             // Slide 5: Pestañas de Características
             this.dom.charTabButtons.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const flowId = e.currentTarget.getAttribute('data-flow');
+                tab.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const flowId = e.currentTarget.getAttribute('data-flow'); // Declara e inicializa variable local
                     this.switchFlowTab(flowId);
                 });
             });
-            if (this.dom.btnTestHistoryState) this.dom.btnTestHistoryState.addEventListener('click', () => this.testHistoryState());
-            if (this.dom.btnTestPopstate) this.dom.btnTestPopstate.addEventListener('click', () => this.testPopstate());
-            if (this.dom.btnTestNoTrigger) this.dom.btnTestNoTrigger.addEventListener('click', () => this.testNoTriggerRule());
+            if (this.dom.btnTestHistoryState) this.dom.btnTestHistoryState.addEventListener('click', () => this.testHistoryState()); // Evalúa condición lógica
+            if (this.dom.btnTestPopstate) this.dom.btnTestPopstate.addEventListener('click', () => this.testPopstate()); // Evalúa condición lógica
+            if (this.dom.btnTestNoTrigger) this.dom.btnTestNoTrigger.addEventListener('click', () => this.testNoTriggerRule()); // Evalúa condición lógica
 
             // Slide 7: Simulador SPA
             this.dom.spaTabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    const route = e.currentTarget.getAttribute('data-sparoute');
+                tab.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const route = e.currentTarget.getAttribute('data-sparoute'); // Declara e inicializa variable local
                     this.spaNavigate(route);
                 });
             });
-            if (this.dom.btnSpaBack) this.dom.btnSpaBack.addEventListener('click', () => this.spaBack());
-            if (this.dom.btnSpaForward) this.dom.btnSpaForward.addEventListener('click', () => this.spaForward());
+            if (this.dom.btnSpaBack) this.dom.btnSpaBack.addEventListener('click', () => this.spaBack()); // Evalúa condición lógica
+            if (this.dom.btnSpaForward) this.dom.btnSpaForward.addEventListener('click', () => this.spaForward()); // Evalúa condición lógica
 
             // Slide 8: Analogías
             this.dom.toolButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
                     this.dom.toolButtons.forEach(b => b.classList.remove('active'));
                     e.currentTarget.classList.add('active');
                     AppState.activeOffice = e.currentTarget.getAttribute('data-office');
@@ -593,27 +593,27 @@ checkout.avanzar(3); // Método de pago`
             });
 
             // Slide 9: Playground
-            if (this.dom.codePresetSelect) {
-                this.dom.codePresetSelect.addEventListener('change', (e) => {
+            if (this.dom.codePresetSelect) { // Evalúa condición lógica
+                this.dom.codePresetSelect.addEventListener('change', (e) => { // Registra escuchador de evento en el DOM
                     this.loadCodePreset(e.target.value);
                 });
             }
-            if (this.dom.btnResetCode) {
-                this.dom.btnResetCode.addEventListener('click', () => {
+            if (this.dom.btnResetCode) { // Evalúa condición lógica
+                this.dom.btnResetCode.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.loadCodePreset(this.dom.codePresetSelect.value);
                     this.showToast('Código restaurado al estado original');
                 });
             }
-            if (this.dom.btnRunEditorCode) this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode());
-            if (this.dom.btnClearConsole) this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole());
+            if (this.dom.btnRunEditorCode) this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode()); // Evalúa condición lógica
+            if (this.dom.btnClearConsole) this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole()); // Evalúa condición lógica
 
             // Slide 10: Acordeones
             this.dom.accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const isOpen = item.classList.contains('active');
-                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-                    if (!isOpen) {
+                header.addEventListener('click', () => { // Registra escuchador de evento en el DOM
+                    const item = header.parentElement; // Declara e inicializa variable local
+                    const isOpen = item.classList.contains('active'); // Declara e inicializa variable local
+                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active')); // Obtiene referencia al elemento del DOM
+                    if (!isOpen) { // Evalúa condición lógica
                         item.classList.add('active');
                         sound.click();
                     }
@@ -622,10 +622,10 @@ checkout.avanzar(3); // Método de pago`
 
             // Cargar retos al Playground
             this.dom.btnLoadChallenges.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge');
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge'); // Declara e inicializa variable local
                     this.goToSlide(9);
-                    if (this.dom.codePresetSelect) {
+                    if (this.dom.codePresetSelect) { // Evalúa condición lógica
                         this.dom.codePresetSelect.value = challengeKey;
                     }
                     this.loadCodePreset(challengeKey);
@@ -635,16 +635,16 @@ checkout.avanzar(3); // Método de pago`
             });
 
             // Copiar Markdown de Chuleta
-            if (this.dom.btnCopySummaryCheat) {
+            if (this.dom.btnCopySummaryCheat) { // Evalúa condición lógica
                 this.dom.btnCopySummaryCheat.addEventListener('click', () => this.copyCheatSheet());
             }
 
             // Copiar Snippets
             this.dom.btnCopyCodes.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const targetId = e.currentTarget.getAttribute('data-target');
-                    const targetEl = document.getElementById(targetId);
-                    if (targetEl) {
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const targetId = e.currentTarget.getAttribute('data-target'); // Declara e inicializa variable local
+                    const targetEl = document.getElementById(targetId); // Declara e inicializa variable local
+                    if (targetEl) { // Evalúa condición lógica
                         navigator.clipboard.writeText(targetEl.innerText).then(() => {
                             btn.textContent = '¡Copiado!'; // Actualiza contenido en el DOM
                             setTimeout(() => { btn.textContent = 'Copiar'; }, 2000); // Actualiza contenido en el DOM
@@ -660,10 +660,10 @@ checkout.avanzar(3); // Método de pago`
            Navegación entre Diapositivas
            -------------------------------------------------------------------------- */
         buildSlideDots() {
-            if (!this.dom.slideDotsContainer) return;
+            if (!this.dom.slideDotsContainer) return; // Evalúa condición lógica
             this.dom.slideDotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
-            for (let i = 1; i <= AppState.totalSlides; i++) {
-                const dot = document.createElement('button');
+            for (let i = 1; i <= AppState.totalSlides; i++) { // Itera sobre elementos o rango
+                const dot = document.createElement('button'); // Declara e inicializa variable local
                 dot.className = `slide-dot ${i === AppState.currentSlide ? 'active' : ''}`;
                 dot.setAttribute('title', `Ir a diapositiva ${i}`);
                 dot.addEventListener('click', () => this.goToSlide(i));
@@ -672,14 +672,14 @@ checkout.avanzar(3); // Método de pago`
         }
 
         goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición lógica
             AppState.currentSlide = index;
             this.updateSlideDisplay();
             sound.nav();
         }
 
         nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición lógica
                 AppState.currentSlide++;
                 this.updateSlideDisplay();
                 sound.nav();
@@ -687,7 +687,7 @@ checkout.avanzar(3); // Método de pago`
         }
 
         prevSlide() {
-            if (AppState.currentSlide > 1) {
+            if (AppState.currentSlide > 1) { // Evalúa condición lógica
                 AppState.currentSlide--;
                 this.updateSlideDisplay();
                 sound.nav();
@@ -695,18 +695,18 @@ checkout.avanzar(3); // Método de pago`
         }
 
         updateSlideDisplay() {
-            if (this.dom.slideIndicator) {
+            if (this.dom.slideIndicator) { // Evalúa condición lógica
                 this.dom.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            if (this.dom.progressBar) {
-                const percent = (AppState.currentSlide / AppState.totalSlides) * 100;
+            if (this.dom.progressBar) { // Evalúa condición lógica
+                const percent = (AppState.currentSlide / AppState.totalSlides) * 100; // Declara e inicializa variable local
                 this.dom.progressBar.style.width = `${percent}%`;
             }
 
             this.dom.slides.forEach((slide, idx) => {
-                const num = idx + 1;
-                if (AppState.viewMode === 'slides') {
+                const num = idx + 1; // Declara e inicializa variable local
+                if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                     slide.classList.toggle('active', num === AppState.currentSlide);
                 } else {
                     slide.classList.add('active'); // Modo guía: todas visibles
@@ -714,33 +714,33 @@ checkout.avanzar(3); // Método de pago`
             });
 
             // Actualizar bolitas
-            const dots = document.querySelectorAll('.slide-dot');
+            const dots = document.querySelectorAll('.slide-dot'); // Declara e inicializa variable local
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx + 1 === AppState.currentSlide);
             });
 
             // Deshabilitar botones en extremos
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1;
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides;
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1; // Evalúa condición lógica
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides; // Evalúa condición lógica
 
             // Scroll al inicio si cambiamos de diapositiva
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         toggleViewMode() {
-            if (AppState.viewMode === 'slides') {
+            if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                 AppState.viewMode = 'guide';
                 this.dom.body.classList.remove('mode-presentation');
                 this.dom.body.classList.add('mode-document');
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides';
+                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑'; // Evalúa condición lógica
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides'; // Evalúa condición lógica
                 this.showToast('Activado Modo Documento Continuo');
             } else {
                 AppState.viewMode = 'slides';
                 this.dom.body.classList.remove('mode-document');
                 this.dom.body.classList.add('mode-presentation');
-                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑';
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía';
+                if (this.dom.modeIcon) this.dom.modeIcon.textContent = '📑'; // Evalúa condición lógica
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía'; // Evalúa condición lógica
                 this.showToast('Activado Modo Diapositivas');
             }
             this.updateSlideDisplay();
@@ -749,24 +749,24 @@ checkout.avanzar(3); // Método de pago`
 
         toggleSound() {
             AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.dom.soundIcon) {
+            if (this.dom.soundIcon) { // Evalúa condición lógica
                 this.dom.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
             this.showToast(AppState.soundEnabled ? 'Sonido activado' : 'Sonido silenciado');
-            if (AppState.soundEnabled) sound.click();
+            if (AppState.soundEnabled) sound.click(); // Evalúa condición lógica
         }
 
         toggleFullscreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Evalúa condición lógica
                 document.documentElement.requestFullscreen().catch(() => {});
                 this.showToast('Pantalla Completa');
             } else {
-                if (document.exitFullscreen) document.exitFullscreen();
+                if (document.exitFullscreen) document.exitFullscreen(); // Evalúa condición lógica
             }
         }
 
         openOverview() {
-            if (!this.dom.overviewModal || !this.dom.overviewGrid) return;
+            if (!this.dom.overviewModal || !this.dom.overviewGrid) return; // Evalúa condición lógica
             this.dom.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             const slideTitles = [
@@ -783,13 +783,13 @@ checkout.avanzar(3); // Método de pago`
             ];
 
             slideTitles.forEach((title, i) => {
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Declara e inicializa variable local
                 card.className = `modal-card ${i + 1 === AppState.currentSlide ? 'active' : ''}`;
                 card.innerHTML = `
                     <div class="modal-card-num">#${i + 1}</div>
                     <div class="modal-card-title">${title}</div>
                 `;
-                card.addEventListener('click', () => {
+                card.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.goToSlide(i + 1);
                     this.closeOverview();
                 });
@@ -801,15 +801,15 @@ checkout.avanzar(3); // Método de pago`
         }
 
         closeOverview() {
-            if (this.dom.overviewModal) {
+            if (this.dom.overviewModal) { // Evalúa condición lógica
                 this.dom.overviewModal.classList.remove('active');
             }
         }
 
         showToast(msg, icon = '✔') {
-            if (!this.dom.toastNotification) return;
-            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon;
-            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg;
+            if (!this.dom.toastNotification) return; // Evalúa condición lógica
+            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon; // Evalúa condición lógica
+            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg; // Evalúa condición lógica
 
             this.dom.toastNotification.classList.add('active');
             clearTimeout(this.toastTimer);
@@ -826,36 +826,36 @@ checkout.avanzar(3); // Método de pago`
         }
 
         renderMockBrowser() {
-            const h = AppState.mockHistory;
-            const current = h.stack[h.pointer] || { url: 'curso.dev/inicio', title: 'Página Inicial' };
+            const h = AppState.mockHistory; // Declara e inicializa variable local
+            const current = h.stack[h.pointer] || { url: 'curso.dev/inicio', title: 'Página Inicial' }; // Declara e inicializa variable local
 
             // 1. Actualizar URL visible
-            if (this.dom.mockUrlText) {
+            if (this.dom.mockUrlText) { // Evalúa condición lógica
                 this.dom.mockUrlText.textContent = current.url; // Actualiza contenido en el DOM
             }
 
             // 2. Actualizar Puntero y Tamaño
-            if (this.dom.mockStackPointer) {
+            if (this.dom.mockStackPointer) { // Evalúa condición lógica
                 this.dom.mockStackPointer.textContent = `Posición ${h.pointer + 1} / ${h.stack.length}`; // Actualiza contenido en el DOM
             }
 
-            if (this.dom.mockStackLength) {
+            if (this.dom.mockStackLength) { // Evalúa condición lógica
                 this.dom.mockStackLength.textContent = `${h.stack.length}`; // Actualiza contenido en el DOM
             }
 
             // 3. Habilitar/Deshabilitar botones de navegación
-            if (this.dom.btnMockBack) {
+            if (this.dom.btnMockBack) { // Evalúa condición lógica
                 this.dom.btnMockBack.disabled = (h.pointer <= 0);
             }
-            if (this.dom.btnMockForward) {
+            if (this.dom.btnMockForward) { // Evalúa condición lógica
                 this.dom.btnMockForward.disabled = (h.pointer >= h.stack.length - 1);
             }
         }
 
         logMockConsole(text) {
-            if (!this.dom.consoleOutput1) return;
-            const prompt = this.dom.consoleOutput1.querySelector('.console-prompt');
-            if (prompt) {
+            if (!this.dom.consoleOutput1) return; // Evalúa condición lógica
+            const prompt = this.dom.consoleOutput1.querySelector('.console-prompt'); // Declara e inicializa variable local
+            if (prompt) { // Evalúa condición lógica
                 prompt.textContent = text; // Actualiza contenido en el DOM
             } else {
                 this.dom.consoleOutput1.innerHTML = `<div class="console-prompt">${text}</div>`; // Actualiza contenido en el DOM
@@ -863,52 +863,52 @@ checkout.avanzar(3); // Método de pago`
         }
 
         mockNavBack() {
-            if (AppState.mockHistory.pointer > 0) {
+            if (AppState.mockHistory.pointer > 0) { // Evalúa condición lógica
                 AppState.mockHistory.pointer--;
                 this.renderMockBrowser();
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa variable local
                 this.logMockConsole(`> [history.back()] Retrocediste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Retrocedido a ${item.url}`;
+                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Retrocedido a ${item.url}`; // Evalúa condición lógica
                 sound.nav();
             }
         }
 
         mockNavForward() {
-            if (AppState.mockHistory.pointer < AppState.mockHistory.stack.length - 1) {
+            if (AppState.mockHistory.pointer < AppState.mockHistory.stack.length - 1) { // Evalúa condición lógica
                 AppState.mockHistory.pointer++;
                 this.renderMockBrowser();
-                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+                const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa variable local
                 this.logMockConsole(`> [history.forward()] Avanzaste a: ${item.url} | Puntero: Posición ${AppState.mockHistory.pointer + 1} / ${AppState.mockHistory.stack.length}`);
-                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Avanzado a ${item.url}`;
+                if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = `Avanzado a ${item.url}`; // Evalúa condición lógica
                 sound.nav();
             }
         }
 
         mockNavReload() {
             sound.click();
-            if (this.dom.mockUrlText) {
+            if (this.dom.mockUrlText) { // Evalúa condición lógica
                 this.dom.mockUrlText.style.opacity = '0.3';
                 setTimeout(() => {
                     this.dom.mockUrlText.style.opacity = '1';
                 }, 200);
             }
-            const item = AppState.mockHistory.stack[AppState.mockHistory.pointer];
+            const item = AppState.mockHistory.stack[AppState.mockHistory.pointer]; // Declara e inicializa variable local
             this.logMockConsole(`> [history.go(0)] Recargando página actual: ${item.url} (equivale a location.reload())`);
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Página recargada';
+            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Página recargada'; // Evalúa condición lógica
         }
 
         runHistoryIntroTest() {
             sound.click();
-            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Ejecutando secuencia...';
+            if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Ejecutando secuencia...'; // Evalúa condición lógica
             
             // Si estamos al final, retroceder y luego avanzar automáticamente
-            if (AppState.mockHistory.pointer > 0) {
+            if (AppState.mockHistory.pointer > 0) { // Evalúa condición lógica
                 this.mockNavBack();
                 setTimeout(() => {
                     this.mockNavBack();
                     setTimeout(() => {
                         this.mockNavForward();
-                        if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
+                        if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito'; // Evalúa condición lógica
                         sound.success();
                     }, 800);
                 }, 800);
@@ -916,7 +916,7 @@ checkout.avanzar(3); // Método de pago`
                 this.mockNavForward();
                 setTimeout(() => {
                     this.mockNavForward();
-                    if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito';
+                    if (this.dom.testHistoryIntroStatus) this.dom.testHistoryIntroStatus.textContent = 'Secuencia completada con éxito'; // Evalúa condición lógica
                     sound.success();
                 }, 800);
             }
@@ -927,7 +927,7 @@ checkout.avanzar(3); // Método de pago`
            -------------------------------------------------------------------------- */
         runGoExamplesTest() {
             sound.click();
-            if (!this.dom.goExamplesResult) return;
+            if (!this.dom.goExamplesResult) return; // Evalúa condición lógica
             this.dom.goExamplesResult.innerHTML = `
                 <div style="font-family: var(--font-code); line-height: 1.6; font-size: 0.9rem;">
                     <div>⚡ <strong>history.go(-2):</strong> Retrocede 2 posiciones completas de una sola vez en la pila.</div>
@@ -947,10 +947,10 @@ checkout.avanzar(3); // Método de pago`
         }
 
         renderScenarioPreview() {
-            const sc = AppState.activeScenario;
-            if (!this.dom.terminalImplicit || !this.dom.terminalSerialized) return;
+            const sc = AppState.activeScenario; // Declara e inicializa variable local
+            if (!this.dom.terminalImplicit || !this.dom.terminalSerialized) return; // Evalúa condición lógica
 
-            if (sc === 'push') {
+            if (sc === 'push') { // Evalúa condición lógica
                 this.dom.terminalImplicit.innerHTML = `
                     <div class="term-line">&gt; window.history.pushState({ id: 1 }, "", "/perfil");</div>
                     <div class="term-line" style="color: var(--emerald);">&gt; URL cambia a: https://curso.dev/perfil</div>
@@ -960,7 +960,7 @@ checkout.avanzar(3); // Método de pago`
                 this.dom.terminalSerialized.innerHTML = `
                     <div class="term-line" style="opacity: 0.6;">(Selecciona 'replace' para comparar la sobrescritura)</div>
                 `;
-                if (this.dom.storageFeedbackText) {
+                if (this.dom.storageFeedbackText) { // Evalúa condición lógica
                     this.dom.storageFeedbackText.innerHTML = '<strong>pushState:</strong> Agrega un nuevo registro a la pila. Si el usuario pulsa "Atrás", volverá a la página previa.'; // Actualiza contenido en el DOM
                 }
             } else if (sc === 'replace') {
@@ -973,7 +973,7 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; history.length: 3 ➔ 3 (IDÉNTICO, no suma)</div>
                     <div class="term-line" style="color: var(--amber);">&gt; popstate disparado: NO (false)</div>
                 `;
-                if (this.dom.storageFeedbackText) {
+                if (this.dom.storageFeedbackText) { // Evalúa condición lógica
                     this.dom.storageFeedbackText.innerHTML = '<strong>replaceState:</strong> Sobrescribe la entrada actual en memoria. Ideal para filtros de búsqueda y scroll.'; // Actualiza contenido en el DOM
                 }
             } else if (sc === 'cross') {
@@ -988,7 +988,7 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; Violación de la Same-Origin Policy (Mismo Origen).</div>
                     <div class="term-line">&gt; Previene suplantación de identidad (Phishing).</div>
                 `;
-                if (this.dom.storageFeedbackText) {
+                if (this.dom.storageFeedbackText) { // Evalúa condición lógica
                     this.dom.storageFeedbackText.innerHTML = '🛑 <strong>SecurityError:</strong> La History API solo permite URLs que compartan exactamente el mismo origen.'; // Actualiza contenido en el DOM
                 }
             } else if (sc === 'popstate') {
@@ -1000,7 +1000,7 @@ checkout.avanzar(3); // Método de pago`
                     <div class="term-line">&gt; Clic en "Atrás" / "Adelante" del navegador...</div>
                     <div class="term-line" style="color: var(--emerald);">&gt; ¿Dispara evento 'popstate'?: SÍ (true).</div>
                 `;
-                if (this.dom.storageFeedbackText) {
+                if (this.dom.storageFeedbackText) { // Evalúa condición lógica
                     this.dom.storageFeedbackText.innerHTML = '🔔 <strong>Regla de Oro:</strong> popstate es un evento de <em>navegación del usuario</em>. Las llamadas programáticas a pushState/replaceState nunca lo activan.'; // Actualiza contenido en el DOM
                 }
             }
@@ -1031,14 +1031,14 @@ checkout.avanzar(3); // Método de pago`
 
         testHistoryState() {
             sound.click();
-            const state = window.history.state;
+            const state = window.history.state; // Declara e inicializa variable local
             const res = {
                 valorActual: state,
                 esNull: state === null,
                 longitudHistorial: window.history.length,
                 urlActual: window.location.href
             };
-            if (this.dom.historyStateResult) {
+            if (this.dom.historyStateResult) { // Evalúa condición lógica
                 this.dom.historyStateResult.innerHTML = `
                     <strong>Lectura inmediata de window.history.state:</strong><br/>
                     <code>${JSON.stringify(res, null, 2)}</code>
@@ -1049,7 +1049,7 @@ checkout.avanzar(3); // Método de pago`
 
         testPopstate() {
             sound.click();
-            if (this.dom.popstateResult) {
+            if (this.dom.popstateResult) { // Evalúa condición lógica
                 this.dom.popstateResult.innerHTML = `
                     <span style="color: var(--cyan); font-weight: bold;">🔔 [Simulación de popstate]</span><br/>
                     1. Usuario presionó "Atrás".<br/>
@@ -1062,7 +1062,7 @@ checkout.avanzar(3); // Método de pago`
 
         testNoTriggerRule() {
             sound.click();
-            if (this.dom.noTriggerResult) {
+            if (this.dom.noTriggerResult) { // Evalúa condición lógica
                 this.dom.noTriggerResult.innerHTML = `
                     <span style="color: var(--amber); font-weight: bold;">⚠️ Verificación de Regla de Oro:</span><br/>
                     Se ejecutó <code>history.pushState({ demo: true }, '', '?demo=ok')</code>.<br/>
@@ -1081,11 +1081,11 @@ checkout.avanzar(3); // Método de pago`
         }
 
         spaNavigate(route) {
-            const view = AppState.spa.views[route];
-            if (!view) return;
+            const view = AppState.spa.views[route]; // Declara e inicializa variable local
+            if (!view) return; // Evalúa condición lógica
 
             // Truncar historial si estábamos navegando atrás
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
+            if (AppState.spa.pointer < AppState.spa.history.length - 1) { // Evalúa condición lógica
                 AppState.spa.history.splice(AppState.spa.pointer + 1);
             }
 
@@ -1103,25 +1103,25 @@ checkout.avanzar(3); // Método de pago`
 
         renderSpaView(route) {
             AppState.spa.currentRoute = route;
-            const view = AppState.spa.views[route] || AppState.spa.views['/inicio'];
+            const view = AppState.spa.views[route] || AppState.spa.views['/inicio']; // Declara e inicializa variable local
 
             // 1. Actualizar URL visible
-            if (this.dom.spaCurrentUrl) {
+            if (this.dom.spaCurrentUrl) { // Evalúa condición lógica
                 this.dom.spaCurrentUrl.textContent = route; // Actualiza contenido en el DOM
             }
 
             // 2. Actualizar Pestaña Activa
             this.dom.spaTabs.forEach(tab => {
-                const tabRoute = tab.getAttribute('data-sparoute');
+                const tabRoute = tab.getAttribute('data-sparoute'); // Declara e inicializa variable local
                 tab.classList.toggle('active', tabRoute === route);
             });
 
             // 3. Actualizar Canvas Visual
-            if (this.dom.spaCanvasTitle) this.dom.spaCanvasTitle.textContent = view.title;
-            if (this.dom.spaCanvasDesc) this.dom.spaCanvasDesc.textContent = view.desc;
+            if (this.dom.spaCanvasTitle) this.dom.spaCanvasTitle.textContent = view.title; // Evalúa condición lógica
+            if (this.dom.spaCanvasDesc) this.dom.spaCanvasDesc.textContent = view.desc; // Evalúa condición lógica
 
             // 4. Actualizar Estado de Retroalimentación
-            if (this.dom.spaStatusResult) {
+            if (this.dom.spaStatusResult) { // Evalúa condición lógica
                 this.dom.spaStatusResult.innerHTML = `
                     Pestaña activa: "<strong>${view.state.seccion}</strong>" | 
                     history.state: <code>${JSON.stringify(view.state)}</code> | 
@@ -1130,27 +1130,27 @@ checkout.avanzar(3); // Método de pago`
             }
 
             // 5. Botones Atrás / Adelante del SPA
-            if (this.dom.btnSpaBack) {
+            if (this.dom.btnSpaBack) { // Evalúa condición lógica
                 this.dom.btnSpaBack.disabled = (AppState.spa.pointer <= 0);
             }
-            if (this.dom.btnSpaForward) {
+            if (this.dom.btnSpaForward) { // Evalúa condición lógica
                 this.dom.btnSpaForward.disabled = (AppState.spa.pointer >= AppState.spa.history.length - 1);
             }
         }
 
         spaBack() {
-            if (AppState.spa.pointer > 0) {
+            if (AppState.spa.pointer > 0) { // Evalúa condición lógica
                 AppState.spa.pointer--;
-                const item = AppState.spa.history[AppState.spa.pointer];
+                const item = AppState.spa.history[AppState.spa.pointer]; // Declara e inicializa variable local
                 this.renderSpaView(item.route);
                 sound.nav();
             }
         }
 
         spaForward() {
-            if (AppState.spa.pointer < AppState.spa.history.length - 1) {
+            if (AppState.spa.pointer < AppState.spa.history.length - 1) { // Evalúa condición lógica
                 AppState.spa.pointer++;
-                const item = AppState.spa.history[AppState.spa.pointer];
+                const item = AppState.spa.history[AppState.spa.pointer]; // Declara e inicializa variable local
                 this.renderSpaView(item.route);
                 sound.nav();
             }
@@ -1164,62 +1164,62 @@ checkout.avanzar(3); // Método de pago`
         }
 
         renderAnalogies() {
-            const mode = AppState.activeOffice;
-            if (mode === 'platos') {
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '🍽️';
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. Colocar un Plato Nuevo (pushState)';
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'La torre crece en altura';
-                if (this.dom.officeItemsLeft) {
+            const mode = AppState.activeOffice; // Declara e inicializa variable local
+            if (mode === 'platos') { // Evalúa condición lógica
+                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '🍽️'; // Evalúa condición lógica
+                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. Colocar un Plato Nuevo (pushState)'; // Evalúa condición lógica
+                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'La torre crece en altura'; // Evalúa condición lógica
+                if (this.dom.officeItemsLeft) { // Evalúa condición lógica
                     this.dom.officeItemsLeft.innerHTML = `
                         <div class="ws-item">Lavas un plato nuevo y lo colocas en la cima de la torre</div>
                         <div class="ws-item">El tamaño total de la pila (history.length) se incrementa en +1</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'El usuario podrá volver al plato anterior pulsando "Atrás"';
+                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'El usuario podrá volver al plato anterior pulsando "Atrás"'; // Evalúa condición lógica
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '🔄';
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Cambiar el Plato de Arriba (replaceState)';
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'La altura total no cambia';
-                if (this.dom.officeItemsRight) {
+                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '🔄'; // Evalúa condición lógica
+                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Cambiar el Plato de Arriba (replaceState)'; // Evalúa condición lógica
+                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'La altura total no cambia'; // Evalúa condición lógica
+                if (this.dom.officeItemsRight) { // Evalúa condición lógica
                     this.dom.officeItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Sustituyes el plato de la cima por otro de diferente color</div>
                         <div class="ws-item highlight-item">La cantidad de platos (history.length) se mantiene intacta</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'Evita inflar la pila al filtrar búsquedas o cambiar de pestaña';
+                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'Evita inflar la pila al filtrar búsquedas o cambiar de pestaña'; // Evalúa condición lógica
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Pila LIFO';
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '🍽️';
-                if (this.dom.officeBannerText) {
+                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Pila LIFO'; // Evalúa condición lógica
+                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '🍽️'; // Evalúa condición lógica
+                if (this.dom.officeBannerText) { // Evalúa condición lógica
                     this.dom.officeBannerText.innerHTML = '<strong>pushState vs replaceState:</strong> Usa <code>pushState()</code> cuando el cambio represente una página nueva a la que el usuario querrá volver; usa <code>replaceState()</code> para filtros, paginación o formularios multipaso.'; // Actualiza contenido en el DOM
                 }
             } else {
                 // Álbum de fotos
-                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '📸';
-                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. La Foto y la Nota Adhesiva (state)';
-                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'Memoria asociada a cada página';
-                if (this.dom.officeItemsLeft) {
+                if (this.dom.officeAvatarLeft) this.dom.officeAvatarLeft.textContent = '📸'; // Evalúa condición lógica
+                if (this.dom.officeTitleLeft) this.dom.officeTitleLeft.textContent = '1. La Foto y la Nota Adhesiva (state)'; // Evalúa condición lógica
+                if (this.dom.officeSubLeft) this.dom.officeSubLeft.textContent = 'Memoria asociada a cada página'; // Evalúa condición lógica
+                if (this.dom.officeItemsLeft) { // Evalúa condición lógica
                     this.dom.officeItemsLeft.innerHTML = `
                         <div class="ws-item">Cada foto tiene su imagen visible (la URL en la barra)</div>
                         <div class="ws-item">Pegas un Post-It detrás con metadatos: { scroll: 400, filtro: 'viajes' }</div>
                     `;
                 }
-                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'history.state almacena una copia estructurada de tus datos';
+                if (this.dom.officeStatusLeft) this.dom.officeStatusLeft.textContent = 'history.state almacena una copia estructurada de tus datos'; // Evalúa condición lógica
 
-                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '📖';
-                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Hojear el Álbum (popstate)';
-                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'Navegación del usuario';
-                if (this.dom.officeItemsRight) {
+                if (this.dom.officeAvatarRight) this.dom.officeAvatarRight.textContent = '📖'; // Evalúa condición lógica
+                if (this.dom.officeTitleRight) this.dom.officeTitleRight.textContent = '2. Hojear el Álbum (popstate)'; // Evalúa condición lógica
+                if (this.dom.officeSubRight) this.dom.officeSubRight.textContent = 'Navegación del usuario'; // Evalúa condición lógica
+                if (this.dom.officeItemsRight) { // Evalúa condición lógica
                     this.dom.officeItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Cuando pasas la página hacia atrás, despegas la nota</div>
                         <div class="ws-item highlight-item">event.state te entrega los datos para reconstruir la vista</div>
                     `;
                 }
-                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'popstate sólo se dispara cuando el usuario hojea hacia adelante o atrás';
+                if (this.dom.officeStatusRight) this.dom.officeStatusRight.textContent = 'popstate sólo se dispara cuando el usuario hojea hacia adelante o atrás'; // Evalúa condición lógica
 
-                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Inspección';
-                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '📸';
-                if (this.dom.officeBannerText) {
+                if (this.dom.officeArrowLabel) this.dom.officeArrowLabel.textContent = 'Inspección'; // Evalúa condición lógica
+                if (this.dom.officeBannerIcon) this.dom.officeBannerIcon.textContent = '📸'; // Evalúa condición lógica
+                if (this.dom.officeBannerText) { // Evalúa condición lógica
                     this.dom.officeBannerText.innerHTML = '<strong>state y popstate:</strong> El estado viaja silenciosamente con la entrada del historial. Cuando el usuario navega, <code>event.state</code> te dice con precisión qué estaba viendo.'; // Actualiza contenido en el DOM
                 }
             }
@@ -1229,8 +1229,8 @@ checkout.avanzar(3); // Método de pago`
            SLIDE 9: PLAYGROUND INTERACTIVO DE CÓDIGO
            -------------------------------------------------------------------------- */
         loadCodePreset(presetKey) {
-            const code = CodePresets[presetKey];
-            if (code && this.dom.liveCodeEditor) {
+            const code = CodePresets[presetKey]; // Declara e inicializa variable local
+            if (code && this.dom.liveCodeEditor) { // Evalúa condición lógica
                 this.dom.liveCodeEditor.value = code;
                 this.clearConsole();
                 this.printToConsole(`/* Preset cargado: [${presetKey}]. Pulsa "Ejecutar Código" (Ctrl + Enter) */`, 'info-line');
@@ -1238,20 +1238,20 @@ checkout.avanzar(3); // Método de pago`
         }
 
         clearConsole() {
-            if (this.dom.consoleLogsContainer) {
+            if (this.dom.consoleLogsContainer) { // Evalúa condición lógica
                 this.dom.consoleLogsContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
         }
 
         printToConsole(msg, lineClass = 'log-line') {
-            if (!this.dom.consoleLogsContainer) return;
-            const line = document.createElement('div');
+            if (!this.dom.consoleLogsContainer) return; // Evalúa condición lógica
+            const line = document.createElement('div'); // Declara e inicializa variable local
             line.className = `log-line ${lineClass}`;
 
-            const time = new Date().toLocaleTimeString();
-            const timeSpan = `<span class="log-time">[${time}]</span> `;
+            const time = new Date().toLocaleTimeString(); // Declara e inicializa variable local
+            const timeSpan = `<span class="log-time">[${time}]</span> `; // Declara e inicializa variable local
 
-            if (typeof msg === 'object') {
+            if (typeof msg === 'object') { // Evalúa condición lógica
                 try { // Inicia bloque protegido contra errores
                     line.innerHTML = timeSpan + `<pre style="margin:0; display:inline;">${JSON.stringify(msg, null, 2)}</pre>`; // Actualiza contenido en el DOM
                 } catch (e) {
@@ -1266,30 +1266,30 @@ checkout.avanzar(3); // Método de pago`
         }
 
         runPlaygroundCode() {
-            if (!this.dom.liveCodeEditor) return;
-            const code = this.dom.liveCodeEditor.value;
+            if (!this.dom.liveCodeEditor) return; // Evalúa condición lógica
+            const code = this.dom.liveCodeEditor.value; // Declara e inicializa variable local
 
             this.clearConsole();
             sound.click();
 
             // Interceptar console de manera segura
-            const oldLog = console.log;
-            const oldInfo = console.info;
-            const oldWarn = console.warn;
-            const oldError = console.error;
+            const oldLog = console.log; // Declara e inicializa variable local
+            const oldInfo = console.info; // Declara e inicializa variable local
+            const oldWarn = console.warn; // Declara e inicializa variable local
+            const oldError = console.error; // Declara e inicializa variable local
 
             const formatArgs = (args) => {
                 return args.map(arg => {
-                    if (arg === null) return 'null';
-                    if (arg === undefined) return 'undefined';
-                    if (typeof arg === 'object') {
+                    if (arg === null) return 'null'; // Evalúa condición lógica
+                    if (arg === undefined) return 'undefined'; // Evalúa condición lógica
+                    if (typeof arg === 'object') { // Evalúa condición lógica
                         try { // Inicia bloque protegido contra errores
-                            return JSON.stringify(arg);
+                            return JSON.stringify(arg); // Retorna el resultado de la función
                         } catch (e) {
-                            return String(arg);
+                            return String(arg); // Retorna el resultado de la función
                         }
                     }
-                    return String(arg);
+                    return String(arg); // Retorna el resultado de la función
                 }).join(' ');
             };
 
@@ -1311,7 +1311,7 @@ checkout.avanzar(3); // Método de pago`
             };
 
             try { // Inicia bloque protegido contra errores
-                const runFn = new Function(code);
+                const runFn = new Function(code); // Declara e inicializa variable local
                 runFn();
                 this.printToConsole('--- Ejecución completada sin errores ---', 'info-line');
                 sound.success();
@@ -1372,8 +1372,9 @@ checkout.avanzar(3); // Método de pago`
     }
 
     // Inicialización al cargar el DOM
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => { // Registra escuchador de evento en el DOM
         window.appController = new AppController();
     });
 
 })();
+

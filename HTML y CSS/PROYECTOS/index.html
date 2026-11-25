@@ -243,7 +243,7 @@
         </nav>
 
         <header>
-            <span class="hero-badge">8 PROYECTOS REALES · CSS PURO Y MAQUETACIÓN</span>
+            <span class="hero-badge">11 PROYECTOS REALES · CSS PURO Y MAQUETACIÓN</span>
             <h1>Exhibición de Proyectos HTML y CSS</h1>
             <p class="subtitle">
                 Explora cada componente interactivo y página completa construida con HTML semántico, Flexbox, Grid, transiciones y animaciones CSS.
@@ -251,7 +251,7 @@
         </header>
 
         <section class="section">
-            <h2 class="section-title">🧩 Componentes UI <span class="count">5</span></h2>
+            <h2 class="section-title">🧩 Componentes UI <span class="count">7</span></h2>
             <div class="grid">
                 <a class="card" href="ACCORDION%20MENU/SUMMARY-DETAILS/index.html">
                     <div>
@@ -292,11 +292,27 @@
                     </div>
                     <span class="card-cta">Abrir proyecto →</span>
                 </a>
+
+                <a class="card" href="../CSS%20BASICO/Ejercicios/Tarjeta%20de%20presentacion/index.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🪪 Tarjeta de Presentación</span><span class="card-tag">Box Model</span></div>
+                        <p class="card-desc">Tarjeta de perfil con sombras, <code>border-radius: 50%</code> y variantes de color.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
+
+                <a class="card" href="../CSS%20avanzado/Ejercicios/Ventana%20Modal/modal.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🪟 Ventana Modal</span><span class="card-tag">BEM + Dialog</span></div>
+                        <p class="card-desc">Modal accesible con <code>&lt;dialog&gt;</code>, <code>position</code> y metodología BEM.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
             </div>
         </section>
 
         <section class="section">
-            <h2 class="section-title">🌐 Páginas Completas <span class="count">3</span></h2>
+            <h2 class="section-title">🌐 Páginas Completas <span class="count">4</span></h2>
             <div class="grid">
                 <a class="card" href="ONE%20VIEW%20PAGE/index.html">
                     <div>
@@ -321,8 +337,21 @@
                     </div>
                     <span class="card-cta">Abrir proyecto →</span>
                 </a>
+
+                <a class="card" href="../Responsive%20Design/Holi%20Grail/holigrail.html">
+                    <div>
+                        <div class="card-top"><span class="card-title">🏛️ Holy Grail Layout</span><span class="card-tag">CSS Grid</span></div>
+                        <p class="card-desc">Estructura clásica de cabecera, 3 columnas fluidas y pie de página con CSS Grid.</p>
+                    </div>
+                    <span class="card-cta">Abrir proyecto →</span>
+                </a>
             </div>
         </section>
+        <footer style="display:none;"></footer>
     </div>
+    <script>
+        // Marca el ámbito HTML/CSS para que el botón Siguiente de Holy Grail no salte a JS desde esta exhibición
+        try { sessionStorage.setItem('cursoProjectScope', 'htmlcss'); } catch (_) {}
+    </script>
 </body>
 </html>

@@ -31,7 +31,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Libreria Axios</span></a>
@@ -53,8 +53,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -94,7 +94,90 @@ try {
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Verifica error.response:</strong> Si el usuario se quedó sin internet no habrá <code>error.response</code>; usa <code>error.response?.status</code>.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Interactivo de Axios">
+        
+    <!-- Diapositiva 5: Por qué usar Axios sobre fetch nativo -->
+    <section class="slide" data-slide="5" data-title="Por qué usar Axios sobre fetch nativo">
+      <div class="slide-header">
+        <span class="eyebrow">Ergonomía HTTP</span>
+        <h2>Por qué usar Axios sobre fetch nativo</h2>
+      </div>
+      <p>Axios simplifica tareas repetitivas que en <code>fetch()</code> requieren código manual en cada llamada:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li>Serializa y parsea JSON automáticamente en <code>res.data</code>.</li>
+        <li>Rechaza la promesa automáticamente en códigos HTTP <code>4xx</code> y <code>5xx</code>.</li>
+        <li>Soporta interceptores globales, <code>timeout</code> nativo y cancelación sencilla.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 6: Métodos abreviados: get, post, put, patch, delete -->
+    <section class="slide" data-slide="6" data-title="Métodos abreviados: get, post, put, patch, delete">
+      <div class="slide-header">
+        <span class="eyebrow">API CRUD</span>
+        <h2>Métodos abreviados: get, post, put, patch, delete</h2>
+      </div>
+      <pre class="code-box">// GET con query params automáticos (?page=2&limit=10)
+const { data } = await axios.get('/users', { params: { page: 2, limit: 10 } });
+
+// POST enviando objeto JS directo
+await axios.post('/users', { name: 'Lucía', role: 'admin' });</pre>
+    </section>
+
+    <!-- Diapositiva 7: Instancias personalizadas (axios.create) -->
+    <section class="slide" data-slide="7" data-title="Instancias personalizadas (axios.create)">
+      <div class="slide-header">
+        <span class="eyebrow">Arquitectura limpia</span>
+        <h2>Instancias personalizadas (axios.create)</h2>
+      </div>
+      <p>En proyectos reales creas una instancia preconfigurada con tu <code>baseURL</code>, tiempo máximo de espera y cabeceras comunes:</p>
+      <pre class="code-box">const api = axios.create({
+  baseURL: 'https://api.miapp.com/v1',
+  timeout: 8000,
+  headers: { 'Accept': 'application/json' }
+});</pre>
+    </section>
+
+    <!-- Diapositiva 8: Interceptores de Request y Response -->
+    <section class="slide" data-slide="8" data-title="Interceptores de Request y Response">
+      <div class="slide-header">
+        <span class="eyebrow">Middleware en el cliente</span>
+        <h2>Interceptores de Request y Response</h2>
+      </div>
+      <p>Los interceptores permiten inyectar el token JWT antes de cada petición y centralizar el manejo de errores <code>401</code> al recibir respuestas:</p>
+      <pre class="code-box">api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});</pre>
+    </section>
+
+    <!-- Diapositiva 9: Anatomía de un error en Axios -->
+    <section class="slide" data-slide="9" data-title="Anatomía de un error en Axios">
+      <div class="slide-header">
+        <span class="eyebrow">Manejo robusto de fallos</span>
+        <h2>Anatomía de un error en Axios</h2>
+      </div>
+      <p>Dentro del bloque <code>catch (err)</code> puedes distinguir tres escenarios distintos:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><strong><code>err.response</code>:</strong> El servidor respondió con error (400, 404, 500) y trae <code>status</code> y <code>data</code>.</li>
+        <li><strong><code>err.request</code>:</strong> Se envió la petición pero no hubo respuesta (timeout o servidor caído).</li>
+        <li><strong><code>err.message</code>:</strong> Fallo al construir la petición en el cliente.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 10: Cancelación de peticiones con AbortController -->
+    <section class="slide" data-slide="10" data-title="Cancelación de peticiones con AbortController">
+      <div class="slide-header">
+        <span class="eyebrow">Evitar race conditions</span>
+        <h2>Cancelación de peticiones con AbortController</h2>
+      </div>
+      <p>En buscadores en vivo, cancela la petición anterior antes de lanzar la nueva usando <code>AbortController</code>:</p>
+      <pre class="code-box">const controller = new AbortController();
+axios.get('/buscar?q=js', { signal: controller.signal });
+// Si el usuario sigue escribiendo:
+controller.abort();</pre>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador Interactivo de Axios">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Interactivo de Axios</h2></div>
             <nav class="tabs-nav"> <!-- Barra horizontal para alternar entre las secciones tematicas del laboratorio -->
             <button class="tab-btn active" id="tabShorthand" data-target="shorthand-tab"> <!-- Boton para activar la primera pestana -->
@@ -481,7 +564,7 @@ try {
         
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Axios Editor (Shorthand & axios.create)">
+        <section class="slide" data-slide="12" data-title="Quiz: Axios Editor (Shorthand & axios.create)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -507,7 +590,7 @@ try {
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Axios Editor (Shorthand & axios.create)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Axios Editor (Shorthand & axios.create)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
@@ -528,7 +611,7 @@ try {
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Libreria Axios</span><span class="file-path">../index.html</span></a>

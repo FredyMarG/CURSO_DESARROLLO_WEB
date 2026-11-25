@@ -17,30 +17,30 @@ class App { // Define clase
     }
     /** Marca la app como instalada si aún no lo estaba */
     instalar(){
-        if (this.instalada === false) {
+        if (this.instalada === false) { // Evalúa condición lógica
             this.instalada = true;
-            return "App Instalada Correctamente";
+            return "App Instalada Correctamente"; // Retorna el resultado de la función
         }
     }
     /** Quita la instalación si la app estaba instalada */
     desinstalar(){
-        if (this.instalada === true) {
+        if (this.instalada === true) { // Evalúa condición lógica
             this.instalada = false;
-            return "App Desinstalada Correctamente";
+            return "App Desinstalada Correctamente"; // Retorna el resultado de la función
         }
     }
     /** Inicia la app solo si está instalada y no estaba en ejecución */
     abrir(){
-        if (this.iniciada === false && this.instalada === true) {
+        if (this.iniciada === false && this.instalada === true) { // Evalúa condición lógica
             this.iniciada = true;
-            return "App Iniciada";
+            return "App Iniciada"; // Retorna el resultado de la función
         }   
     }
     /** Cierra la app si estaba abierta e instalada */
     cerrar(){
-        if (this.iniciada === true && this.instalada === true) {
+        if (this.iniciada === true && this.instalada === true) { // Evalúa condición lógica
             this.iniciada = false;
-            return "App Cerrada";
+            return "App Cerrada"; // Retorna el resultado de la función
         }
     }
     /** Devuelve un resumen HTML con descargas, puntuación y peso */
@@ -56,7 +56,7 @@ class App { // Define clase
 /**
  * Crea varias instancias de App, las recorre y escribe filas en la tabla del DOM.
  */
-function mostrar(){
+function mostrar(){ // Define función reutilizable
     let app = [
         new App("1.000", "5 estrellas", "900mb"),
         new App("5.000", "4 estrellas", "400mb"),
@@ -66,7 +66,7 @@ function mostrar(){
         new App("17", "4.8 estrellas", "522mb"),
         new App("42.856", "3.7 estrellas", "723mb")]
 
-        for (let i = 0; i < app.length; i++) {
+        for (let i = 0; i < app.length; i++) { // Itera sobre elementos o rango
             mobile.innerHTML += `<tr>
                             <td>${app[i].descargas}</td>
                             <td>${app[i].puntuacion}</td>

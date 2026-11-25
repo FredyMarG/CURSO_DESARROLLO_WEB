@@ -1,202 +1,189 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html
-     Título: Portfolio
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fonts.css">
+    <meta charset="UTF-8" />
     <!-- Ajuste responsivo al ancho real del dispositivo -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="../ejercicios-hud.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Neon — Web Page Animations</title>
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../ejercicios-hud.css" />
     <script src="../ejercicios-hud.js" defer></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%E2%9C%A8%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body data-hud-title="Web Page + Animaciones" data-hud-desc="Landing page enriquecida con transiciones, @keyframes y efectos de entrada suaves en CSS." data-hud-back="../index.html" data-hud-portal="../../index.html">
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body data-hud-title="Web Page + Animaciones" data-hud-desc="Portfolio oscuro futurista con múltiples animaciones CSS: barra de scroll, órbitas rotatorias, gradiente cinético, marquee infinito, tarjetas con brillo 3D y prefers-reduced-motion." data-hud-back="../index.html" data-hud-portal="../../index.html">
+    <!-- Barra de progreso superior ligada al scroll -->
+    <div class="scroll-progress" aria-hidden="true"></div>
 
-    <!-- Encabezado de página o sección con título e invitación. -->
+    <!-- Orbes ambientales flotantes en el fondo -->
+    <div class="ambient-orb orb-1" aria-hidden="true"></div>
+    <div class="ambient-orb orb-2" aria-hidden="true"></div>
+    <div class="ambient-orb orb-3" aria-hidden="true"></div>
+
+    <!-- Barra de navegación principal con menú responsive sin JS -->
     <header class="header">
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
-
-        <input type="checkbox" class="header__checkbox" id="open-menu">
-        <label for="open-menu" class="header__open-nav-button" role="button">=</label>
-    <!-- Contenedor con clase(s) header__logo-container para estilo o disposición. -->
+        <input type="checkbox" class="header__checkbox" id="open-menu" />
+        <label for="open-menu" class="header__open-nav-button" role="button" aria-label="Abrir menú">☰</label>
         <div class="header__logo-container">
-            <img class="header__logo" src="img/logo.png" alt="">
+            <img class="header__logo" src="img/logo.png" alt="Logo del portfolio" />
+            <span class="header__brand">FREDY.DEV</span>
         </div>
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-        <nav class="header__nav">
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Lista de elementos relacionados. -->
-        <ul class="header__nav-list">
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#profile">About</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#portfolio">Portfolio</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+        <nav class="header__nav" aria-label="Navegación principal">
+            <ul class="header__nav-list">
+                <li class="header__nav-item"><a href="#profile">Sobre mí</a></li>
+                <li class="header__nav-item"><a href="#skills">Skills</a></li>
+                <li class="header__nav-item"><a href="#portfolio">Proyectos</a></li>
+                <li class="header__nav-item"><a href="#contact">Contacto</a></li>
+            </ul>
+        </nav>
     </header>
-    <!-- Bloque principal con el contenido más importante. -->
-    <main class="profile" id="profile">
-<!-- Contenido principal del documento (main) -->
 
-    <!-- Contenedor wrapper para agrupar elementos y centrar contenido. -->
-        <div class="profile__wrapper">
-    <!-- Contenedor con clase(s) profile__img-container para estilo o disposición. -->
-            <div class="profile__img-container">
-                <img src="img/profile.jpg" class="profile__img" alt="">
+    <!-- Sección Hero / Perfil con avatar orbital y gradiente animado -->
+    <main class="hero" id="profile">
+        <div class="hero__grid">
+            <div class="hero__avatar-wrap">
+                <div class="hero__orbit" aria-hidden="true"></div>
+                <img src="img/profile.jpg" class="hero__img" alt="Foto de perfil de Fredy" />
             </div>
-    <!-- Contenedor con clase(s) profile__data-container para estilo o disposición. -->
-            <div class="profile__data-container">
-    <!-- Contenedor con clase(s) profile__data para estilo o disposición. -->
-                <div class="profile__data">
-    <!-- Contenedor con clase(s) profile__description para estilo o disposición. -->
-                    <div class="profile__description">
-                        <h1>¿Quien es Fredy?</h1>
-    <!-- Párrafo de texto. -->
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quam, atque ipsum porro nam nulla excepturi, dolore ullam inventore corporis cupiditate, magni vero voluptatum exercitationem unde vitae molestiae consequatur cumque.</p>
-                    </div>
-    <!-- Contenedor con clase(s) profile__skills-container para estilo o disposición. -->
-                    <div class="profile__skills-container">
-                        <h2>SKILLS</h2>
-    <!-- Lista de elementos relacionados. -->
-                        <ul>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--80 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--80">80%</div>
-                                </div>
-                                <span class="profile__skill-name">HTML</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--60 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--60">60%</div>
-                                </div>
-                                <span class="profile__skill-name">CSS</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--70 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--70">70%</div>
-                                </div>
-                                <span class="profile__skill-name">JS</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--70 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--70">70%</div>
-                                </div>
-                                <span class="profile__skill-name">PYTHON</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--90 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--90">90%</div>
-                                </div>
-                                <span class="profile__skill-name">SQL</span>
-                            </li>
-                        </ul>
-                    </div>
+
+            <div class="hero__content">
+                <span class="status-pill">
+                    <span class="status-pill__dot"></span>
+                    Disponible para proyectos UI &amp; Motion
+                </span>
+                <h1 class="hero__title">
+                    Diseño Web con <span class="kinetic-text">Animaciones CSS</span> a 60 FPS
+                </h1>
+                <p class="hero__desc">
+                    Construyo interfaces modernas combinando <code>@keyframes</code>, transformaciones 3D aceleradas por GPU, transiciones fluidas y <code>scroll-driven animations</code> sin depender de librerías pesadas.
+                </p>
+                <div class="hero__actions">
+                    <a href="#portfolio" class="btn-neon btn-neon--primary">Explorar Proyectos ↓</a>
+                    <a href="#contact" class="btn-neon btn-neon--ghost">Contactar</a>
                 </div>
             </div>
         </div>
     </main>
-    <!-- Sección temática que agrupa contenido relacionado. -->
-    <section class="portfolio" id="portfolio">
-<!-- Sección temática de contenido (section) -->
 
-        <h2 class="portfolio_title">PORTFOLIO SECTION</h2>
-    <!-- Contenedor con clase(s) portfolio__project-container para estilo o disposición. -->
-        <div class="portfolio__project-container">
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 1</h2>
+    <!-- Cinta infinita (Marquee) con tecnologías -->
+    <div class="marquee" aria-label="Tecnologías dominadas">
+        <div class="marquee__track">
+            <span>HTML5 Semántico</span>
+            <span>CSS3 @keyframes</span>
+            <span>GPU Transform &amp; Opacity</span>
+            <span>Flexbox &amp; Grid</span>
+            <span>Scroll-Driven Animations</span>
+            <span>JavaScript ES6+</span>
+            <span>HTML5 Semántico</span>
+            <span>CSS3 @keyframes</span>
+            <span>GPU Transform &amp; Opacity</span>
+            <span>Flexbox &amp; Grid</span>
+            <span>Scroll-Driven Animations</span>
+            <span>JavaScript ES6+</span>
+        </div>
+    </div>
+
+    <!-- Sección de habilidades con barras animadas escalonadas -->
+    <section class="skills" id="skills">
+        <div class="section-head">
+            <span class="section-tag">STACK &amp; RENDIMIENTO</span>
+            <h2>Habilidades Técnicas</h2>
+        </div>
+        <div class="skills__grid">
+            <div class="skill-card">
+                <div class="skill-card__top"><span>HTML5 &amp; Accesibilidad</span><strong>92%</strong></div>
+                <div class="skill-bar"><div class="skill-bar__fill" style="--w: 92%; --d: 0.1s;"></div></div>
             </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 2</h2>
+            <div class="skill-card">
+                <div class="skill-card__top"><span>CSS3 &amp; Animaciones</span><strong>88%</strong></div>
+                <div class="skill-bar"><div class="skill-bar__fill" style="--w: 88%; --d: 0.25s;"></div></div>
             </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 3</h2>
+            <div class="skill-card">
+                <div class="skill-card__top"><span>JavaScript Moderno</span><strong>82%</strong></div>
+                <div class="skill-bar"><div class="skill-bar__fill" style="--w: 82%; --d: 0.4s;"></div></div>
             </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 4</h2>
+            <div class="skill-card">
+                <div class="skill-card__top"><span>Node.js &amp; APIs</span><strong>78%</strong></div>
+                <div class="skill-bar"><div class="skill-bar__fill" style="--w: 78%; --d: 0.55s;"></div></div>
             </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 5</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 6</h2>
+            <div class="skill-card">
+                <div class="skill-card__top"><span>SQL &amp; Datos</span><strong>85%</strong></div>
+                <div class="skill-bar"><div class="skill-bar__fill" style="--w: 85%; --d: 0.7s;"></div></div>
             </div>
         </div>
     </section>
-    <!-- Sección temática que agrupa contenido relacionado. -->
-    <section class="form" id="contact">
-        <h2 class="form__title">CONTACT</h2>
-    <!-- Formulario para recoger datos del usuario. -->
-        <form class="form__form">
-<!-- Formulario de envío de datos (form) -->
 
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Nombre<input type="text" placeholder="Jhon"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Apellido<input type="text" placeholder="Doe"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>E-mail<input type="email" placeholder="yourmail@example.com"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Mensaje<textarea type="text" placeholder="Mensaje"></textarea></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <input type="submit">
-            </div>
-        </form>
+    <!-- Galería de proyectos con distintos efectos de animación en cada tarjeta -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-head">
+            <span class="section-tag">GALERÍA ANIMADA</span>
+            <h2>Proyectos con Motion Design</h2>
+        </div>
+        <div class="portfolio__grid">
+            <article class="p-card p-card--shine">
+                <span class="p-card__badge">Shine Sweep</span>
+                <h3>Landing Futurista</h3>
+                <p>Efecto de haz luminoso diagonal al pasar el cursor usando pseudoelementos <code>::after</code>.</p>
+            </article>
+            <article class="p-card p-card--float">
+                <span class="p-card__badge">Levitation</span>
+                <h3>Dashboard 3D</h3>
+                <p>Flotación continua suave con <code>@keyframes</code> y sombra dinámica sincronizada.</p>
+            </article>
+            <article class="p-card p-card--tilt">
+                <span class="p-card__badge">3D Perspective</span>
+                <h3>Galería Interactiva</h3>
+                <p>Inclinación espacial con <code>perspective(900px)</code> y rotación en dos ejes.</p>
+            </article>
+            <article class="p-card p-card--pulse">
+                <span class="p-card__badge">Neon Pulse</span>
+                <h3>Monitor en Tiempo Real</h3>
+                <p>Resplandor pulsante por capas con <code>box-shadow</code> animado.</p>
+            </article>
+            <article class="p-card p-card--morph">
+                <span class="p-card__badge">Border Morph</span>
+                <h3>Estudio Creativo</h3>
+                <p>Contorno orgánico cambiante animando radios asimétricos de borde.</p>
+            </article>
+            <article class="p-card p-card--kinetic">
+                <span class="p-card__badge">Kinetic Glow</span>
+                <h3>E-Commerce Motion</h3>
+                <p>Borde degradado en movimiento continuo mediante <code>background-position</code>.</p>
+            </article>
+        </div>
     </section>
-    <!-- Pie de página con créditos o enlaces secundarios. -->
-    <footer>
-<!-- Pie de página o de sección (footer) -->
 
-        <strong>Fredy Martinez</strong> - Copyright
+    <!-- Formulario de contacto con enfoque animado -->
+    <section class="contact" id="contact">
+        <div class="contact__box">
+            <div class="section-head">
+                <span class="section-tag">HABLEMOS</span>
+                <h2>Contacto Directo</h2>
+            </div>
+            <form class="contact__form" onsubmit="event.preventDefault(); this.querySelector('.submit-msg').textContent = '✨ ¡Mensaje enviado con estilo!';">
+                <div class="field">
+                    <label for="c-name">Nombre</label>
+                    <input id="c-name" type="text" placeholder="Tu nombre" required />
+                </div>
+                <div class="field">
+                    <label for="c-email">Correo</label>
+                    <input id="c-email" type="email" placeholder="tu@correo.com" required />
+                </div>
+                <div class="field field--full">
+                    <label for="c-msg">Mensaje</label>
+                    <textarea id="c-msg" rows="4" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+                </div>
+                <div class="field field--full">
+                    <button type="submit" class="btn-neon btn-neon--primary">Enviar Mensaje ✨</button>
+                    <p class="submit-msg" aria-live="polite"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <strong>Fredy Martínez</strong> · Portfolio Animado CSS3 (60 FPS &amp; Accesible)
     </footer>
-
 </body>
-<!-- Cierre del documento HTML -->
 </html>

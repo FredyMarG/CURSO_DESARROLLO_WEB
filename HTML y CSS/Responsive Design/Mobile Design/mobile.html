@@ -18,7 +18,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">CSS3 · RESPONSIVE</span><div class="brand-title"><span>📱</span><span>Mobile-First Design</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 14</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Responsive Design</span></a>
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -57,11 +57,90 @@
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Mobile-First Design</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
         </section>
-        <section class="slide" data-slide="5" data-title="Quiz: Mobile-First Design">
+        
+        <!-- Diapositiva 5: La etiqueta obligatoria en <head> -->
+        <section class="slide" data-slide="5" data-title="La etiqueta obligatoria en <head>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · META VIEWPORT</span>
+                <h2 class="slide-title">La etiqueta obligatoria en <head></h2>
+            </div>
+            <div class="glass-card">
+                <p>Sin <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>, los navegadores móviles escalan la página simulando un escritorio de 980px.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: dvh, svh, lvh y clamp() para fluidez total -->
+        <section class="slide" data-slide="6" data-title="dvh, svh, lvh y clamp() para fluidez total">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · UNIDADES MODERNAS</span>
+                <h2 class="slide-title">dvh, svh, lvh y clamp() para fluidez total</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>min-height: 100dvh</code> en lugar de <code>100vh</code> para evitar que la barra de direcciones móvil corte el contenido inferior.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: Cómo probar breakpoints y throttling en F12 -->
+        <section class="slide" data-slide="7" data-title="Cómo probar breakpoints y throttling en F12">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · DEVTOOLS RESPONSIVE</span>
+                <h2 class="slide-title">Cómo probar breakpoints y throttling en F12</h2>
+            </div>
+            <div class="glass-card">
+                <p>Con el modo dispositivo (<code>Ctrl+Shift+M</code>) en DevTools puedes simular pantallas táctiles, DPR (Retina) y redes lentas 3G.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: Media Queries (viewport) vs Container Queries (@container) -->
+        <section class="slide" data-slide="8" data-title="Media Queries (viewport) vs Container Queries (@container)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ESTRATEGIA DE COMPONENTES</span>
+                <h2 class="slide-title">Media Queries (viewport) vs Container Queries (@container)</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>@media</code> para la estructura global de la página y <code>@container</code> para que tarjetas reutilizables se adapten a la columna donde se inserten.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Cómo decide CSS qué regla gana -->
+        <section class="slide" data-slide="9" data-title="Cómo decide CSS qué regla gana">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ESPECIFICIDAD Y CASCADA</span>
+                <h2 class="slide-title">Cómo decide CSS qué regla gana</h2>
+            </div>
+            <div class="glass-card">
+                <p>Al aplicar <strong>Mobile-First Design</strong>, recuerda el orden de prioridad: estilos en línea &gt; ID (<code>#id</code>) &gt; clase/atributo/pseudoclase (<code>.clase</code>) &gt; etiqueta (<code>div</code>). Mantén la especificidad baja usando clases reutilizables.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Mobile-First Design -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Mobile-First Design">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Mobile-First Design</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Mobile-First Design</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Mobile-First Design -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Mobile-First Design">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Mobile-First Design</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz: Mobile-First Design">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="min-width aplica estilos a partir de cierto ancho hacia arriba." data-err="Mobile-First parte de móvil y escala hacia arriba con min-width."><div class="quiz-q-title">1. ¿Qué condición usa Mobile-First en sus Media Queries?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">min-width</button><button class="quiz-option" data-opt="b">max-width</button><button class="quiz-option" data-opt="c">max-height</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Mobile-First Design">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Mobile-First Design">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
   body { font-family: system-ui; padding: 12px; background: #0f172a; color: #fff; }
@@ -79,7 +158,7 @@
 &lt;div class=&quot;grid&quot;&gt;&lt;div class=&quot;c&quot;&gt;Bloque 1&lt;/div&gt;&lt;div class=&quot;c&quot;&gt;Bloque 2&lt;/div&gt;&lt;/div&gt;</textarea><!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+        <section class="slide" data-slide="14" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Responsive Design</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">📱 Guía Completa Responsive Design</span><span class="file-path">index.html</span></a>

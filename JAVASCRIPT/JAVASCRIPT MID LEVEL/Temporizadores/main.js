@@ -1,17 +1,17 @@
 // Guía Interactiva — Temporizadores JS
 
-let timeoutId = null;
-let intervalId = null;
-let decimas = 0;
+let timeoutId = null; // Declara e inicializa variable local
+let intervalId = null; // Declara e inicializa variable local
+let decimas = 0; // Declara e inicializa variable local
 
-const delayInput = document.getElementById("delayInput");
-const btnStartTimeout = document.getElementById("btnStartTimeout");
-const btnCancelTimeout = document.getElementById("btnCancelTimeout");
-const timeoutOutput = document.getElementById("timeoutOutput");
+const delayInput = document.getElementById("delayInput"); // Declara e inicializa variable local
+const btnStartTimeout = document.getElementById("btnStartTimeout"); // Declara e inicializa variable local
+const btnCancelTimeout = document.getElementById("btnCancelTimeout"); // Declara e inicializa variable local
+const timeoutOutput = document.getElementById("timeoutOutput"); // Declara e inicializa variable local
 
-btnStartTimeout.addEventListener("click", () => {
-    const ms = Math.max(200, Number(delayInput.value) || 2000);
-    if (timeoutId) clearTimeout(timeoutId);
+btnStartTimeout.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const ms = Math.max(200, Number(delayInput.value) || 2000); // Declara e inicializa variable local
+    if (timeoutId) clearTimeout(timeoutId); // Evalúa condición lógica
 
     timeoutOutput.className = "output warn";
     timeoutOutput.textContent = `Esperando ${ms} ms...`; // Actualiza contenido en el DOM
@@ -25,8 +25,8 @@ btnStartTimeout.addEventListener("click", () => {
     }, ms);
 });
 
-btnCancelTimeout.addEventListener("click", () => {
-    if (!timeoutId) return;
+btnCancelTimeout.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    if (!timeoutId) return; // Evalúa condición lógica
     clearTimeout(timeoutId);
     timeoutId = null;
     btnCancelTimeout.disabled = true;
@@ -35,17 +35,17 @@ btnCancelTimeout.addEventListener("click", () => {
 });
 
 // Cronómetro con setInterval
-const cronoDisplay = document.getElementById("cronoDisplay");
-const btnStartInterval = document.getElementById("btnStartInterval");
-const btnPauseInterval = document.getElementById("btnPauseInterval");
-const btnResetInterval = document.getElementById("btnResetInterval");
+const cronoDisplay = document.getElementById("cronoDisplay"); // Declara e inicializa variable local
+const btnStartInterval = document.getElementById("btnStartInterval"); // Declara e inicializa variable local
+const btnPauseInterval = document.getElementById("btnPauseInterval"); // Declara e inicializa variable local
+const btnResetInterval = document.getElementById("btnResetInterval"); // Declara e inicializa variable local
 
-function renderCrono() {
+function renderCrono() { // Define función reutilizable
     cronoDisplay.textContent = `${(decimas / 10).toFixed(1).padStart(4, "0")} s`; // Actualiza contenido en el DOM
 }
 
-btnStartInterval.addEventListener("click", () => {
-    if (intervalId) return;
+btnStartInterval.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    if (intervalId) return; // Evalúa condición lógica
     intervalId = setInterval(() => {
         decimas += 1;
         renderCrono();
@@ -54,14 +54,14 @@ btnStartInterval.addEventListener("click", () => {
     btnPauseInterval.disabled = false;
 });
 
-btnPauseInterval.addEventListener("click", () => {
+btnPauseInterval.addEventListener("click", () => { // Registra escuchador de evento en el DOM
     clearInterval(intervalId);
     intervalId = null;
     btnStartInterval.disabled = false;
     btnPauseInterval.disabled = true;
 });
 
-btnResetInterval.addEventListener("click", () => {
+btnResetInterval.addEventListener("click", () => { // Registra escuchador de evento en el DOM
     clearInterval(intervalId);
     intervalId = null;
     decimas = 0;
@@ -71,12 +71,12 @@ btnResetInterval.addEventListener("click", () => {
 });
 
 // Event Loop Demo: Microtasks vs Macrotasks
-const loopOutput = document.getElementById("loopOutput");
+const loopOutput = document.getElementById("loopOutput"); // Declara e inicializa variable local
 
-document.getElementById("btnEventLoop").addEventListener("click", () => {
+document.getElementById("btnEventLoop").addEventListener("click", () => { // Registra escuchador de evento en el DOM
     loopOutput.innerHTML = ""; // Actualiza contenido en el DOM
     const pushLine = (txt) => {
-        const div = document.createElement("div");
+        const div = document.createElement("div"); // Declara e inicializa variable local
         div.textContent = txt; // Actualiza contenido en el DOM
         loopOutput.appendChild(div);
     };
@@ -86,3 +86,4 @@ document.getElementById("btnEventLoop").addEventListener("click", () => {
     Promise.resolve().then(() => pushLine("3. Microtask: Promise.resolve().then(...)"));
     pushLine("2. Código síncrono (fin)");
 });
+

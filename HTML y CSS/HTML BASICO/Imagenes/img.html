@@ -28,7 +28,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
@@ -148,7 +148,75 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz de Imágenes">
+        
+        <!-- Diapositiva 6: Atributos width, height y loading="lazy" -->
+        <section class="slide" data-slide="6" data-title="Atributos width, height y loading=&quot;lazy&quot;">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · RENDIMIENTO Y CLS</span>
+                <h2 class="slide-title">Atributos width, height y loading="lazy"</h2>
+            </div>
+            <div class="glass-card">
+                <p>Definir <code>width</code> y <code>height</code> en HTML permite al navegador reservar el espacio exacto antes de descargar la imagen, evitando saltos de diseño (CLS).</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: <figure> y <figcaption> -->
+        <section class="slide" data-slide="7" data-title="<figure> y <figcaption>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · SEMÁNTICA VISUAL</span>
+                <h2 class="slide-title"><figure> y <figcaption></h2>
+            </div>
+            <div class="glass-card">
+                <p>Cuando una imagen requiere pie de foto o contexto editorial, envuélvela en <code>&lt;figure&gt;</code> junto con <code>&lt;figcaption&gt;</code>.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: WebP, AVIF y SVG: cuándo usar cada uno -->
+        <section class="slide" data-slide="8" data-title="WebP, AVIF y SVG: cuándo usar cada uno">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · FORMATOS MODERNOS</span>
+                <h2 class="slide-title">WebP, AVIF y SVG: cuándo usar cada uno</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <strong>SVG</strong> para iconos y logos vectoriales nítidos a cualquier escala; <strong>WebP</strong> o <strong>AVIF</strong> para fotografías con hasta 50% menos peso que JPEG/PNG.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Cómo escribir un buen atributo alt -->
+        <section class="slide" data-slide="9" data-title="Cómo escribir un buen atributo alt">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ACCESIBILIDAD</span>
+                <h2 class="slide-title">Cómo escribir un buen atributo alt</h2>
+            </div>
+            <div class="glass-card">
+                <p>Describe la información que aporta la imagen. Si es puramente decorativa, deja el atributo vacío (<code>alt=""</code>) para que los lectores de pantalla la omitan.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Imágenes (&lt;img&gt;) -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Imágenes (&lt;img&gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Imágenes (&lt;img&gt;)</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Imágenes (&lt;img&gt;)</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Imágenes (&lt;img&gt;) -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Imágenes (&lt;img&gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Imágenes (&lt;img&gt;)</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz de Imágenes">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Imágenes HTML</h2>
@@ -184,7 +252,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Imágenes">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Imágenes">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Imágenes</h2>
@@ -218,7 +286,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+        <section class="slide" data-slide="14" data-title="Otros Temas de HTML Básico">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
                 <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>

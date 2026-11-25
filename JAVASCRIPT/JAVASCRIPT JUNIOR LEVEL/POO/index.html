@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (POO.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -131,6 +131,50 @@ class Desarrollador extends Empleado {
 
 console.log(Validador.esNombreValido(&quot;Sofía&quot;)); // true
 console.log(Validador.esNombreValido(&quot;Ana&quot;));   // false</code></pre></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong>Olvidar <code>new</code> al instanciar:</strong> <code>const p = Producto("TV", 500)</code> lanza <code>TypeError: Class constructor Producto cannot be invoked without 'new'</code>.</li>
+<li><strong>Usar <code>this</code> antes de <code>super()</code> en una subclase:</strong> Lanza <code>ReferenceError</code>.</li>
+<li><strong>Perder el contexto de <code>this</code> al pasar métodos como callbacks:</strong> <code>btn.addEventListener("click", obj.metodo)</code> hace que <code>this</code> sea el botón. Solución: <code>() =&gt; obj.metodo()</code> o <code>obj.metodo.bind(obj)</code>.</li>
+<li><strong>Llamar a un método <code>static</code> desde una instancia:</strong> <code>new Validador().esNombreValido(...)</code> lanza <code>TypeError</code>.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">✅ Buenas Prácticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li>Nombra las clases en <code>PascalCase</code> (<code>CuentaBancaria</code>, <code>CarritoCompras</code>).</li>
+<li>Protege el estado interno crítico con campos privados <code>#</code> y valida en los <code>setters</code> o métodos públicos.</li>
+<li>Prefiere la <strong>composición</strong> sobre jerarquías de herencia demasiado profundas (evita heredar más de 2 o 3 niveles).</li>
+<li>Usa <code>instanceof</code> cuando necesites verificar si un objeto pertenece a una clase o subclase específica.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">Hoja de Trucos (Cheatsheet) — POO en JavaScript</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Elemento</th><th>Sintaxis</th><th>Propósito</th></tr></thead><tbody>
+<tr><td><strong>Clase</strong></td><td><code>class Nombre { ... }</code></td><td>Plantilla para crear objetos</td></tr>
+<tr><td><strong>Constructor</strong></td><td><code>constructor(a, b) { this.a = a; }</code></td><td>Se ejecuta automáticamente con <code>new</code></td></tr>
+<tr><td><strong>Campo privado</strong></td><td><code>#secreto = 0;</code></td><td>Propiedad encapsulada accesible solo dentro de la clase</td></tr>
+<tr><td><strong>Getter / Setter</strong></td><td><code>get prop() {}</code> / <code>set prop(v) {}</code></td><td>Lectura calculada y escritura validada</td></tr>
+<tr><td><strong>Herencia</strong></td><td><code>class Hija extends Padre {}</code></td><td>Reutiliza y extiende otra clase</td></tr>
+<tr><td><strong><code>super()</code></strong></td><td><code>super(arg)</code> / <code>super.metodo()</code></td><td>Invoca constructor o método de la clase padre</td></tr>
+<tr><td><strong>Estático</strong></td><td><code>static utilidad() {}</code></td><td>Se llama directo en la clase (<code>Clase.utilidad()</code>)</td></tr>
+<tr><td><strong>Verificar tipo</strong></td><td><code>obj instanceof Clase</code></td><td>Devuelve <code>true</code> si <code>obj</code> deriva de <code>Clase</code></td></tr>
+</tbody></table></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">9. Buenas Prácticas y Errores Comunes (POO)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+          <li>Usa <code>"use strict"</code> o ES Modules para detectar errores silenciosos al instante.</li>
+          <li>Prefiere <code>const</code> por defecto y nombres descriptivos antes de optimizar.</li>
+          <li>Prueba tus casos límite (<code>null</code>, <code>undefined</code>, strings vacíos y arreglos vacíos) en el laboratorio inferior.</li>
+        </ul></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">10. Guía Completa y Autoevaluación (POO)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Usa el botón <strong>📖 Guía</strong> de esta misma barra para revisar la documentación completa (<code>POO.md</code>) sin salir de la lección, y valida lo aprendido en la consola interactiva de abajo.</p></div>
             </div>
         </section>
         <script>

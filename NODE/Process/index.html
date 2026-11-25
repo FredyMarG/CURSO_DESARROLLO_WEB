@@ -1,0 +1,504 @@
+<!doctype html>
+<!-- Módulo 13 de Node.js: Control del Proceso con node:process -->
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Descripción SEO del módulo -->
+    <meta name="description" content="Módulo 13: node:process en Node.js — process.env y .env nativo, process.argv y parseArgs, stdin/stdout/stderr, exitCode vs exit, SIGINT/SIGTERM (graceful shutdown) y memoryUsage." />
+    <title>Control del Proceso (node:process) — Presentación Completa | Curso Desarrollo Web</title>
+    <!-- Precarga de fuentes de Google para UI y código -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!-- Motor compartido de diapositivas -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <!-- Capa visual neón, lector integrado de guía y navegación secuencial -->
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<!-- class="mode-presentation" inicia en vista de diapositivas (alternable a Modo Guía) -->
+<body class="mode-presentation">
+    <!-- Capas decorativas de fondo -->
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <!-- Barra de navegación superior fija -->
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · NODE:PROCESS</span>
+            <div class="brand-title"><span>⚙️</span><span>Control del Proceso</span></div>
+        </div>
+        <!-- Indicador de progreso y número de diapositiva actual -->
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <!-- Botones globales controlados por slides-engine.js -->
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <!-- Contenedor principal de las 12 diapositivas -->
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Control del Proceso">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 13 · node:process</span>
+                    <span class="badge badge-cyan">env · argv · stdio</span>
+                    <span class="badge badge-purple">SIGINT · SIGTERM · exitCode</span>
+                </div>
+                <h1 class="hero-title">Control del Proceso<br /><span class="gradient-text">con node:process</span></h1>
+                <p class="hero-subtitle">
+                    Domina el puente entre Node.js y el sistema operativo: lee variables de entorno con <code>.env</code> nativo, parsea flags CLI con <code>util.parseArgs</code>, usa <code>stdin/stdout/stderr</code>, mide memoria y aplica cierres limpios (<em>graceful shutdown</em>).
+                </p>
+                <!-- Tarjetas de acceso rápido -->
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🔐</div>
+                        <h3>1. env y .env nativo</h3>
+                        <p><code>process.env</code>, <code>--env-file</code> y <code>loadEnvFile()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="3">
+                        <div class="hero-card-icon">⌨️</div>
+                        <h3>2. argv y stdio</h3>
+                        <p><code>parseArgs()</code>, <code>stdin</code>, <code>stdout</code> y <code>stderr</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🛑</div>
+                        <h3>3. Señales y Cierre</h3>
+                        <p><code>exitCode</code> vs <code>exit()</code>, <code>SIGINT</code> y <code>SIGTERM</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba flags CLI, señales y memoria en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES NODE:PROCESS Y PROCESS.ENV -->
+        <section class="slide" data-slide="2" data-title="process.env y .env nativo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · ENTORNO Y CONFIGURACIÓN</span>
+                <h2 class="slide-title"><code>node:process</code>, <code>process.env</code> y <code>.env</code> Nativo</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <strong><code>process</code></strong> es una instancia de <code>EventEmitter</code> que conecta tu código JavaScript con el sistema operativo. Con <code>process.env</code> lees puertos, modos y secretos (siempre llegan como <code>string</code>), y desde Node 20.6+ cargas <code>.env</code> sin instalar <code>dotenv</code>:
+                </p>
+                <pre class="code-block"><code>// Opción 1 (CLI): node --env-file=.env src/server.js
+// Opción 2 (código, Node 21.7+ / 22+):
+import process from 'node:process';
+process.loadEnvFile();
+
+const PORT = Number(process.env.PORT) || 3000;
+const MODO = process.env.NODE_ENV ?? 'development';</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: PROCESS.ARGV Y UTIL.PARSEARGS -->
+        <section class="slide" data-slide="3" data-title="process.argv y util.parseArgs">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · ARGUMENTOS CLI PROFESIONALES</span>
+                <h2 class="slide-title"><code>process.argv</code> y <code>parseArgs()</code> de <code>node:util</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <code>process.argv</code> entrega los argumentos crudos de consola (los del usuario empiezan en el índice <code>2</code>). En lugar de analizar flags a mano con <code>if</code>, Node.js incluye <code>parseArgs()</code> en <code>node:util</code>:
+                </p>
+                <pre class="code-block"><code>import process from 'node:process';
+import { parseArgs } from 'node:util';
+
+// Ej: node cli.js --port 4000 --watch tareas.json
+const { values, positionals } = parseArgs({
+  args: process.argv.slice(2),
+  options: {
+    port: { type: 'string', short: 'p', default: '3000' },
+    watch: { type: 'boolean', short: 'w', default: false }
+  },
+  allowPositionals: true
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: STDIN, STDOUT Y STDERR -->
+        <section class="slide" data-slide="4" data-title="stdin, stdout y stderr">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · CANALES ESTÁNDAR DEL SO</span>
+                <h2 class="slide-title">Streams Estándar: <code>stdin</code>, <code>stdout</code> y <code>stderr</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Todo proceso se comunica mediante tres streams estándar. De hecho, <code>console.log()</code> escribe en <code>process.stdout</code> y <code>console.error()</code> escribe en <code>process.stderr</code>:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Stream</th><th>Tipo</th><th>Para qué sirve</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>process.stdin</code></td><td>Readable</td><td>Leer texto del teclado o datos encadenados con <code>|</code></td></tr>
+                        <tr><td><code>process.stdout</code></td><td>Writable</td><td>Salida normal del programa (datos y resultados)</td></tr>
+                        <tr><td><code>process.stderr</code></td><td>Writable</td><td>Mensajes de error o diagnóstico separados del flujo normal</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: EXITCODE VS EXIT() -->
+        <section class="slide" data-slide="5" data-title="process.exitCode vs process.exit()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · FINALIZACIÓN SEGURA</span>
+                <h2 class="slide-title">Por qué Usar <code>process.exitCode = 1</code> en vez de <code>process.exit(1)</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Llamar a <code>process.exit(1)</code> detiene Node.js de forma abrupta e inmediata: puede cortar mensajes en <code>stdout</code> o dejar archivos a medio escribir. Asignar <code>process.exitCode = 1</code> deja que el Event Loop termine lo pendiente antes de salir:
+                </p>
+                <pre class="code-block"><code>try {
+  await ejecutarMigracion();
+} catch (err) {
+  console.error('Error:', err.message);
+  process.exitCode = 1; // ✅ Sale con código 1 cuando acabe la E/S pendiente
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: SEÑALES SIGINT, SIGTERM Y GRACEFUL SHUTDOWN -->
+        <section class="slide" data-slide="6" data-title="SIGINT, SIGTERM y Graceful Shutdown">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · PRODUCCIÓN Y CONTENEDORES</span>
+                <h2 class="slide-title">Señales <code>SIGINT</code>, <code>SIGTERM</code> y Cierre Limpio</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Al pulsar <code>Ctrl + C</code> llega <code>SIGINT</code>; cuando Docker o la nube detienen tu servidor llega <code>SIGTERM</code>. Escuchar ambas permite cerrar el servidor HTTP sin cortar peticiones activas:
+                </p>
+                <pre class="code-block"><code>function cerrarLimpiamente(senal) {
+  console.log(`Señal ${senal}: cerrando servidor...`);
+  server.close(() => {
+    console.log('Peticiones activas finalizadas.');
+    process.exitCode = 0;
+  });
+}
+process.on('SIGINT', () => cerrarLimpiamente('SIGINT'));
+process.on('SIGTERM', () => cerrarLimpiamente('SIGTERM'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ERRORES GLOBALES -->
+        <section class="slide" data-slide="7" data-title="uncaughtException y unhandledRejection">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ÚLTIMA LÍNEA DE DEFENSA</span>
+                <h2 class="slide-title">Eventos Globales: <code>uncaughtException</code> y <code>unhandledRejection</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si un error escapa a todos los <code>try/catch</code>, estos eventos permiten registrarlo antes de morir. <strong>Regla crítica:</strong> tras un <code>uncaughtException</code> no sigas operando normalmente porque la memoria puede estar inconsistente; registra el fallo y cierra el proceso.
+                </p>
+                <pre class="code-block"><code>process.on('unhandledRejection', (razon) => {
+  console.error('Promesa sin catch:', razon);
+  process.exitCode = 1;
+});
+process.on('uncaughtException', (err) => {
+  console.error('Fallo crítico no capturado:', err);
+  process.exit(1); // Aquí sí conviene reiniciar mediante PM2/Docker
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: DIAGNÓSTICO Y MÉTRICAS -->
+        <section class="slide" data-slide="8" data-title="Diagnóstico, Memoria y Benchmarks">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · OBSERVABILIDAD NATIVA</span>
+                <h2 class="slide-title">Memoria, Uptime y Tiempos de Alta Precisión</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <code>node:process</code> expone métricas clave para vigilar fugas de memoria o medir el rendimiento exacto de una función en nanosegundos:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>API</th><th>Qué mide</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>process.memoryUsage()</code></td><td><code>rss</code> (RAM total del proceso), <code>heapTotal</code> y <code>heapUsed</code></td></tr>
+                        <tr><td><code>process.uptime()</code></td><td>Segundos que lleva ejecutándose el proceso Node.js</td></tr>
+                        <tr><td><code>process.cwd()</code> / <code>process.pid</code></td><td>Directorio actual de trabajo / ID numérico en el SO</td></tr>
+                        <tr><td><code>process.hrtime.bigint()</code></td><td>Marca temporal en nanosegundos para medir micro-benchmarks</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS NODE:PROCESS -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos de node:process">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">Buenas Prácticas y Hoja de Trucos con <code>node:process</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica estas reglas en tus aplicaciones CLI y servidores para evitar bloqueos y pérdida de datos:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Práctica recomendada</th><th>Qué problema evita</th></tr></thead>
+                    <tbody>
+                        <tr><td>Usar <code>process.exitCode = 1</code> en lugar de <code>process.exit(1)</code></td><td>Cortar escrituras pendientes en disco o consola</td></tr>
+                        <tr><td>Cargar secretos con <code>--env-file=.env</code> y ocultarlo en <code>.gitignore</code></td><td>Subir credenciales privadas al repositorio Git</td></tr>
+                        <tr><td>Escuchar <code>SIGINT</code> y <code>SIGTERM</code> en servidores</td><td>Dejar peticiones HTTP o conexiones DB a medias</td></tr>
+                        <tr><td>Validar flags CLI con <code>util.parseArgs()</code></td><td>Errores frágiles al leer posiciones fijas de <code>argv</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: FLUJOS STDIN EN CONSOLA -->
+        <section class="slide" data-slide="10" data-title="Leer Entrada con process.stdin">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · INTERACCIÓN POR TUBERÍAS (PIPES)</span>
+                <h2 class="slide-title">Leer Datos desde <code>process.stdin</code> con <code>for await</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Como <code>process.stdin</code> es un <em>Readable Stream</em>, puedes iterarlo con <code>for await...of</code> tanto para preguntar datos en terminal como para recibir datos encadenados desde Bash (<code>cat datos.txt | node app.js</code>):
+                </p>
+                <pre class="code-block"><code>import process from 'node:process';
+
+process.stdout.write('Escribe tu nombre: ');
+for await (const chunk of process.stdin) {
+  process.stdout.write('Hola, ' + chunk.toString().trim() + '\n');
+  break;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE NODE:PROCESS -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de node:process">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave con <code>node:process</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica el control del proceso en scripts CLI y servidores HTTP:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes implementar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Leer <code>--port</code> y <code>--env</code> de consola</td><td><code>parseArgs({ args: process.argv.slice(2), ... })</code></td></tr>
+                        <tr><td>2. Mostrar memoria <code>heapUsed</code> en MB</td><td><code>(process.memoryUsage().heapUsed / 1024 ** 2).toFixed(2)</code></td></tr>
+                        <tr><td>3. Apagar un servidor HTTP al pulsar <code>Ctrl+C</code></td><td><code>process.on('SIGINT', () => server.close())</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de node:process">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:PROCESS</span>
+                <h2 class="slide-title">🎛️ Simulador de Ciclo de Vida y Señales</h2>
+                <p class="slide-lead">Explora cómo responde Node.js ante variables <code>.env</code>, flags CLI, <code>exitCode</code> y señales del sistema.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Escenario de proceso</label>
+                        <select id="procSimMode">
+                            <option value="env">.env nativo (--env-file / loadEnvFile)</option>
+                            <option value="argv">Argumentos CLI con util.parseArgs()</option>
+                            <option value="shutdown">Graceful Shutdown (SIGINT / SIGTERM)</option>
+                            <option value="exit">process.exitCode vs process.exit()</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="procSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="procSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: node:process">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de <code>node:process</code></h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: process.exitCode = 1 permite que el Event Loop termine las escrituras pendientes antes de salir." data-err="process.exit(1) corta el proceso de golpe y puede truncar logs o archivos pendientes.">
+                    <div class="quiz-q-title">1. ¿Cuál es la forma recomendada de indicar un error sin cortar escrituras pendientes en <code>stdout</code> o disco?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">process.exit(1)</button>
+                        <button class="quiz-option" data-opt="b">process.exitCode = 1</button>
+                        <button class="quiz-option" data-opt="c">process.kill(process.pid)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: SIGINT llega al pulsar Ctrl+C y SIGTERM cuando Docker o la nube solicitan apagar el proceso." data-err="Las señales estándar para cierre limpio son SIGINT y SIGTERM.">
+                    <div class="quiz-q-title">2. ¿Qué señales del SO debes escuchar para implementar un <em>graceful shutdown</em> en un servidor Node.js?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">SIGINT y SIGTERM</button>
+                        <button class="quiz-option" data-opt="b">ENOENT y EACCES</button>
+                        <button class="quiz-option" data-opt="c">stdin y stdout</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: desde Node 20.6+ puedes usar --env-file=.env o process.loadEnvFile() de forma nativa." data-err="--env-file=.env carga variables desde .env sin instalar paquetes externos.">
+                    <div class="quiz-q-title">3. ¿Qué flag nativo de Node.js carga un archivo <code>.env</code> sin instalar <code>dotenv</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">--watch</button>
+                        <button class="quiz-option" data-opt="b">--check</button>
+                        <button class="quiz-option" data-opt="c">--env-file=.env</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: node:process">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de <code>node:process</code></h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulador didáctico de process.argv.slice(2) + parseo de flags --clave valor
+  const argv = [&#x27;/usr/bin/node&#x27;, &#x27;src/server.js&#x27;, &#x27;--port&#x27;, &#x27;4000&#x27;, &#x27;--watch&#x27;, &#x27;tareas.json&#x27;];
+  const args = argv.slice(2);
+  const flags = {};
+  const posicionales = [];
+
+  for (let i = 0; i &lt; args.length; i++) {
+    if (args[i].startsWith(&#x27;--&#x27;)) {
+      const clave = args[i].slice(2);
+      const sig = args[i + 1];
+      if (sig &amp;&amp; !sig.startsWith(&#x27;--&#x27;) &amp;&amp; clave !== &#x27;watch&#x27;) { flags[clave] = sig; i++; }
+      else flags[clave] = true;
+    } else posicionales.push(args[i]);
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;b&gt;argv.slice(2):&lt;/b&gt; ${JSON.stringify(args)}&lt;br&gt;` +
+    `&lt;b&gt;Flags:&lt;/b&gt; ${JSON.stringify(flags)}&lt;br&gt;` +
+    `&lt;b&gt;Posicionales:&lt;/b&gt; ${JSON.stringify(posicionales)}`;
+&lt;/script&gt;">Parser de process.argv</button>
+                    <button class="preset-btn" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulación de lectura segura de variables de entorno (.env) con valores por defecto
+  const env = { PORT: &#x27;8080&#x27;, NODE_ENV: &#x27;production&#x27;, DEBUG: &#x27;false&#x27; };
+  const config = {
+    port: Number(env.PORT) || 3000,
+    esProd: env.NODE_ENV === &#x27;production&#x27;,
+    debug: env.DEBUG === &#x27;true&#x27;
+  };
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    &#x27;&lt;strong&gt;🔐 Configuración tipada desde process.env:&lt;/strong&gt;&lt;pre&gt;&#x27; +
+    JSON.stringify(config, null, 2) + &#x27;&lt;/pre&gt;&#x27;;
+&lt;/script&gt;">Configuración desde process.env</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Simulador didáctico de process.argv.slice(2) + parseo de flags --clave valor
+  const argv = [&#x27;/usr/bin/node&#x27;, &#x27;src/server.js&#x27;, &#x27;--port&#x27;, &#x27;4000&#x27;, &#x27;--watch&#x27;, &#x27;tareas.json&#x27;];
+  const args = argv.slice(2);
+  const flags = {};
+  const posicionales = [];
+
+  for (let i = 0; i &lt; args.length; i++) {
+    if (args[i].startsWith(&#x27;--&#x27;)) {
+      const clave = args[i].slice(2);
+      const sig = args[i + 1];
+      if (sig &amp;&amp; !sig.startsWith(&#x27;--&#x27;) &amp;&amp; clave !== &#x27;watch&#x27;) { flags[clave] = sig; i++; }
+      else flags[clave] = true;
+    } else posicionales.push(args[i]);
+  }
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    `&lt;b&gt;argv.slice(2):&lt;/b&gt; ${JSON.stringify(args)}&lt;br&gt;` +
+    `&lt;b&gt;Flags:&lt;/b&gt; ${JSON.stringify(flags)}&lt;br&gt;` +
+    `&lt;b&gt;Posicionales:&lt;/b&gt; ${JSON.stringify(posicionales)}`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Controles inferiores de navegación -->
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <!-- Modal Overview -->
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de la diapositiva 12 -->
+    <script>
+        // IIFE para encapsular las variables del simulador sin contaminar window
+        (function () {
+            // Referencias al selector, escenario visual y bloque de código
+            const mode = document.getElementById('procSimMode');
+            const stage = document.getElementById('procSimStage');
+            const code = document.getElementById('procSimCode');
+            // Guarda defensiva por si algún nodo no existiera en el DOM
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el escenario explicativo y el snippet según la opción elegida
+            function update() {
+                if (mode.value === 'env') {
+                    // Caso 1: carga nativa de variables desde .env
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">node --env-file=.env carga variables sin instalar dotenv</div>
+                        <div style="color:#38bdf8;">Todos los valores en process.env llegan como string (conviértelos con Number()).</div>
+                    `;
+                    code.textContent = `process.loadEnvFile();\nconst port = Number(process.env.PORT) || 3000;`;
+                } else if (mode.value === 'argv') {
+                    // Caso 2: parseo nativo de argumentos CLI con util.parseArgs()
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">process.argv.slice(2) extrae solo los argumentos del usuario</div>
+                        <div style="color:#38bdf8;">util.parseArgs() valida --flags y posicionales sin dependencias.</div>
+                    `;
+                    code.textContent = `const { values } = parseArgs({\n  args: process.argv.slice(2),\n  options: { port: { type: 'string', default: '3000' } }\n});`;
+                } else if (mode.value === 'shutdown') {
+                    // Caso 3: cierre limpio ante señales SIGINT / SIGTERM
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">Ctrl+C -> SIGINT  |  Docker/Nube -> SIGTERM</div>
+                        <div style="color:#00ff88;font-weight:700;">server.close() termina peticiones activas antes de salir.</div>
+                    `;
+                    code.textContent = `process.on('SIGTERM', () => {\n  server.close(() => { process.exitCode = 0; });\n});`;
+                } else {
+                    // Caso 4: diferencia entre salida abrupta exit() y salida segura exitCode
+                    stage.innerHTML = `
+                        <div style="color:#ff3358;">process.exit(1): corta el proceso de golpe (riesgo de truncar logs)</div>
+                        <div style="color:#00ff88;font-weight:700;">process.exitCode = 1: espera al Event Loop y sale limpiamente</div>
+                    `;
+                    code.textContent = `console.error('Fallo de validación');\nprocess.exitCode = 1;`;
+                }
+            }
+
+            // Escucha cambios en el selector y renderiza el estado inicial
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

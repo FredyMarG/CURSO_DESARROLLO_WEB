@@ -31,7 +31,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Libreria Axios</span></a>
@@ -53,8 +53,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -92,7 +92,82 @@ const { data: dataAxios } = await axios.post(url, datos);</code></pre></div>
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ No olvides validar res.ok en Fetch:</strong> Es el error más común al pasar de Axios a Fetch.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Comparador Interactivo Axios vs Fetch">
+        
+    <!-- Diapositiva 5: Fetch vs Axios: comparativa técnica directa -->
+    <section class="slide" data-slide="5" data-title="Fetch vs Axios: comparativa técnica directa">
+      <div class="slide-header">
+        <span class="eyebrow">Toma de decisiones</span>
+        <h2>Fetch vs Axios: comparativa técnica directa</h2>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h4>Fetch API (Nativa)</h4>
+          <p>0 KB extra, estándar en navegadores y Node 18+. Requiere comprobar <code>if (!res.ok)</code> y llamar <code>await res.json()</code>.</p>
+        </div>
+        <div class="card">
+          <h4>Axios (Librería)</h4>
+          <p>Incluye interceptores, instancias, rechazo automático en 4xx/5xx, progreso de subida y serialización automática de params.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 6: El error clásico de fetch con 404 y 500 -->
+    <section class="slide" data-slide="6" data-title="El error clásico de fetch con 404 y 500">
+      <div class="slide-header">
+        <span class="eyebrow">Trampa frecuente</span>
+        <h2>El error clásico de fetch con 404 y 500</h2>
+      </div>
+      <p><code>fetch()</code> <strong>no</strong> rechaza su promesa ante un 404 o 500; solo falla si no hay red. Debes validar <code>res.ok</code> manualmente:</p>
+      <pre class="code-box">const res = await fetch('/api/perfil');
+if (!res.ok) throw new Error(`HTTP ${res.status}`);
+const data = await res.json();</pre>
+    </section>
+
+    <!-- Diapositiva 7: Transformando respuestas en Axios vs Fetch -->
+    <section class="slide" data-slide="7" data-title="Transformando respuestas en Axios vs Fetch">
+      <div class="slide-header">
+        <span class="eyebrow">Async / Await limpio</span>
+        <h2>Transformando respuestas en Axios vs Fetch</h2>
+      </div>
+      <p>Con Axios obtienes directamente el cuerpo parseado mediante desestructuración <code>const { data, status } = await axios.get(...)</code>.</p>
+      <p style="margin-top:10px">Si la API responde texto plano o un Blob (PDF/imagen), configura <code>responseType: 'blob'</code> en Axios o usa <code>await res.blob()</code> en Fetch.</p>
+    </section>
+
+    <!-- Diapositiva 8: Peticiones concurrentes con Promise.all -->
+    <section class="slide" data-slide="8" data-title="Peticiones concurrentes con Promise.all">
+      <div class="slide-header">
+        <span class="eyebrow">Paralelismo</span>
+        <h2>Peticiones concurrentes con Promise.all</h2>
+      </div>
+      <p>Cuando dos endpoints no dependen entre sí, lánzalos en paralelo para reducir el tiempo total a la mitad:</p>
+      <pre class="code-box">const [perfil, notificaciones] = await Promise.all([
+  axios.get('/api/perfil'),
+  axios.get('/api/notificaciones')
+]);</pre>
+    </section>
+
+    <!-- Diapositiva 9: Servir endpoints locales con htdocs / JSON -->
+    <section class="slide" data-slide="9" data-title="Servir endpoints locales con htdocs / JSON">
+      <div class="slide-header">
+        <span class="eyebrow">Entorno de laboratorio</span>
+        <h2>Servir endpoints locales con htdocs / JSON</h2>
+      </div>
+      <p>Al probar Axios y Fetch contra archivos locales en <code>htdocs</code>, recuerda usar rutas relativas (<code>./data.json</code>) y verificar en la pestaña <strong>Network</strong> que el MIME type sea <code>application/json</code>.</p>
+    </section>
+
+    <!-- Diapositiva 10: Cuándo elegir Fetch y cuándo Axios -->
+    <section class="slide" data-slide="10" data-title="Cuándo elegir Fetch y cuándo Axios">
+      <div class="slide-header">
+        <span class="eyebrow">Criterio profesional</span>
+        <h2>Cuándo elegir Fetch y cuándo Axios</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>Elige <strong>Fetch</strong> en widgets ligeros, Edge Functions o proyectos donde quieras cero dependencias externas.</li>
+        <li>Elige <strong>Axios</strong> en SPAs grandes que necesiten interceptores de autenticación, refresh tokens automáticos y progreso de subida.</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Comparador Interactivo Axios vs Fetch">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Comparador Interactivo Axios vs Fetch</h2></div>
             <aside class="hosting-notice" role="note" aria-label="Instrucciones para visualizar la información">
             <span class="hosting-notice-icon" aria-hidden="true">i</span>
@@ -270,7 +345,7 @@ const { data: dataAxios } = await axios.post(url, datos);</code></pre></div>
         
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Axios vs Fetch Htdocs (Comparativa POST)">
+        <section class="slide" data-slide="12" data-title="Quiz: Axios vs Fetch Htdocs (Comparativa POST)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -296,7 +371,7 @@ const { data: dataAxios } = await axios.post(url, datos);</code></pre></div>
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Axios vs Fetch Htdocs (Comparativa POST)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Axios vs Fetch Htdocs (Comparativa POST)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
@@ -317,7 +392,7 @@ const { data: dataAxios } = await axios.post(url, datos);</code></pre></div>
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Libreria Axios</span><span class="file-path">../index.html</span></a>

@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Ajax</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -90,7 +90,79 @@ xhr.send(JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Programadora&#x27; }
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Orden obligatorio:</strong> <code>xhr.setRequestHeader()</code> debe llamarse SIEMPRE después de <code>xhr.open()</code> y antes de <code>xhr.send()</code>.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador POST con XMLHttpRequest">
+        
+    <!-- Diapositiva 5: Por qué AJAX requiere servidor HTTP (htdocs) -->
+    <section class="slide" data-slide="5" data-title="Por qué AJAX requiere servidor HTTP (htdocs)">
+      <div class="slide-header">
+        <span class="eyebrow">Seguridad del navegador</span>
+        <h2>Por qué AJAX requiere servidor HTTP (htdocs)</h2>
+      </div>
+      <p>Abrir un archivo con doble clic usa el protocolo <code>file://</code>. Por política de seguridad (Same-Origin Policy), los navegadores bloquean peticiones AJAX/Fetch locales sobre <code>file://</code>.</p>
+      <p style="margin-top:10px">Colocar el proyecto en <code>htdocs</code> (XAMPP/Apache) o usar Live Server sirve los archivos bajo <code>http://localhost</code>.</p>
+    </section>
+
+    <!-- Diapositiva 6: Same-Origin Policy (SOP) explicada -->
+    <section class="slide" data-slide="6" data-title="Same-Origin Policy (SOP) explicada">
+      <div class="slide-header">
+        <span class="eyebrow">Origen = Protocolo + Dominio + Puerto</span>
+        <h2>Same-Origin Policy (SOP) explicada</h2>
+      </div>
+      <p>Dos URLs comparten el mismo origen únicamente si coinciden los tres componentes:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><code>http://localhost:80/api.json</code> vs <code>http://localhost:80/index.html</code> → <strong>Mismo origen</strong>.</li>
+        <li><code>http://localhost:3000</code> vs <code>http://localhost:80</code> → <strong>Origen distinto</strong> (cambia el puerto).</li>
+        <li><code>https://</code> vs <code>http://</code> → <strong>Origen distinto</strong> (cambia el protocolo).</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 7: Entendiendo CORS en el servidor -->
+    <section class="slide" data-slide="7" data-title="Entendiendo CORS en el servidor">
+      <div class="slide-header">
+        <span class="eyebrow">Intercambio entre orígenes</span>
+        <h2>Entendiendo CORS en el servidor</h2>
+      </div>
+      <p>Cuando tu frontend en <code>localhost:5500</code> pide datos a <code>localhost:80</code>, el servidor debe autorizarlo mediante cabeceras HTTP:</p>
+      <pre class="code-box">Access-Control-Allow-Origin: http://localhost:5500
+Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type, Authorization</pre>
+    </section>
+
+    <!-- Diapositiva 8: JSON válido vs objetos JavaScript -->
+    <section class="slide" data-slide="8" data-title="JSON válido vs objetos JavaScript">
+      <div class="slide-header">
+        <span class="eyebrow">Formato de intercambio</span>
+        <h2>JSON válido vs objetos JavaScript</h2>
+      </div>
+      <p>Un archivo <code>.json</code> en tu carpeta <code>htdocs</code> debe cumplir reglas estrictas para que <code>JSON.parse()</code> no lance <code>SyntaxError</code>:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li>Todas las claves y strings deben usar <strong>comillas dobles</strong> (<code>"clave"</code>).</li>
+        <li>No se permiten comas finales (trailing commas) ni comentarios <code>//</code>.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 9: Caché del navegador durante pruebas locales -->
+    <section class="slide" data-slide="9" data-title="Caché del navegador durante pruebas locales">
+      <div class="slide-header">
+        <span class="eyebrow">Tip de depuración</span>
+        <h2>Caché del navegador durante pruebas locales</h2>
+      </div>
+      <p>Al editar un archivo <code>datos.json</code> en <code>htdocs</code>, el navegador puede devolver la versión en caché.</p>
+      <p style="margin-top:10px">En DevTools → pestaña <strong>Network</strong>, marca <strong>Disable cache</strong> mientras tengas las herramientas de desarrollo abiertas para ver cambios al instante.</p>
+    </section>
+
+    <!-- Diapositiva 10: FormData y envío hacia PHP/Backend local -->
+    <section class="slide" data-slide="10" data-title="FormData y envío hacia PHP/Backend local">
+      <div class="slide-header">
+        <span class="eyebrow">Integración htdocs</span>
+        <h2>FormData y envío hacia PHP/Backend local</h2>
+      </div>
+      <p>Con <code>FormData</code> puedes enviar campos y archivos a un script en Apache/PHP sin construir cabeceras <code>multipart/form-data</code> a mano:</p>
+      <pre class="code-box">const form = new FormData(document.querySelector('#miForm'));
+xhr.open('POST', 'procesar.php');
+xhr.send(form);</pre>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador POST con XMLHttpRequest">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador POST con XMLHttpRequest</h2></div>
             <aside class="setup-note" aria-label="Instrucciones para visualizar la página">
                 <p class="section-kicker">CÓMO VISUALIZAR ESTA INFORMACIÓN</p>
@@ -183,7 +255,7 @@ xhr.send(JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Programadora&#x27; }
         
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Ajax Htdocs (POST con XHR y Servidor Local)">
+        <section class="slide" data-slide="12" data-title="Quiz: Ajax Htdocs (POST con XHR y Servidor Local)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -209,7 +281,7 @@ xhr.send(JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Programadora&#x27; }
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Ajax Htdocs (POST con XHR y Servidor Local)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Ajax Htdocs (POST con XHR y Servidor Local)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
@@ -230,7 +302,7 @@ xhr.send(JSON.stringify({ name: &#x27;Ada&#x27;, job: &#x27;Programadora&#x27; }
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Ajax</span><span class="file-path">../index.html</span></a>

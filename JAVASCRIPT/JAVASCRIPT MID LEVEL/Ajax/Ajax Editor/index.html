@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Ajax</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, flujo y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Métodos clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Práctica interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -91,7 +91,85 @@ xhr.send();</code></pre></div>
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Servidor local obligatorio:</strong> Las peticiones AJAX fallarán por CORS si abres el HTML con <code>file:///</code>; usa Live Server o XAMPP.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Completo AJAX & FormData">
+        
+    <!-- Diapositiva 5: XMLHttpRequest vs Fetch: evolución histórica -->
+    <section class="slide" data-slide="5" data-title="XMLHttpRequest vs Fetch: evolución histórica">
+      <div class="slide-header">
+        <span class="eyebrow">Contexto</span>
+        <h2>XMLHttpRequest vs Fetch: evolución histórica</h2>
+      </div>
+      <p><code>XMLHttpRequest</code> (XHR) introdujo las peticiones asíncronas sin recargar la página (AJAX) usando callbacks basados en eventos.</p>
+      <p style="margin-top:10px">Aunque hoy preferimos <code>fetch()</code> basado en Promesas, XHR sigue siendo relevante para monitorear <strong>progreso de subida</strong> (<code>xhr.upload.onprogress</code>) y mantener código legado.</p>
+    </section>
+
+    <!-- Diapositiva 6: Los 5 estados de readyState -->
+    <section class="slide" data-slide="6" data-title="Los 5 estados de readyState">
+      <div class="slide-header">
+        <span class="eyebrow">Ciclo de vida XHR</span>
+        <h2>Los 5 estados de readyState</h2>
+      </div>
+      <p>Cada cambio de fase dispara <code>readystatechange</code> con un valor numérico del 0 al 4:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><code>0 (UNSENT)</code>: Objeto creado, aún sin <code>open()</code>.</li>
+        <li><code>1 (OPENED)</code>: Se llamó a <code>open()</code>.</li>
+        <li><code>2 (HEADERS_RECEIVED)</code>: Llegaron cabeceras y código HTTP.</li>
+        <li><code>3 (LOADING)</code>: Descargando cuerpo de la respuesta.</li>
+        <li><code>4 (DONE)</code>: Operación completada (éxito o error HTTP).</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 7: Códigos HTTP y responseType -->
+    <section class="slide" data-slide="7" data-title="Códigos HTTP y responseType">
+      <div class="slide-header">
+        <span class="eyebrow">Lectura segura</span>
+        <h2>Códigos HTTP y responseType</h2>
+      </div>
+      <p>Que <code>readyState === 4</code> sea verdadero no significa éxito: siempre valida <code>xhr.status >= 200 && xhr.status < 300</code>.</p>
+      <pre class="code-box">const xhr = new XMLHttpRequest();
+xhr.responseType = 'json'; // Parsea automáticamente si es JSON válido
+xhr.onload = () => {
+  if (xhr.status === 200) render(xhr.response);
+};</pre>
+    </section>
+
+    <!-- Diapositiva 8: Envío de datos POST y Cabeceras -->
+    <section class="slide" data-slide="8" data-title="Envío de datos POST y Cabeceras">
+      <div class="slide-header">
+        <span class="eyebrow">Peticiones de escritura</span>
+        <h2>Envío de datos POST y Cabeceras</h2>
+      </div>
+      <p>Al enviar JSON con XHR debes configurar la cabecera <code>Content-Type</code> después de <code>open()</code> y antes de <code>send()</code>:</p>
+      <pre class="code-box">xhr.open('POST', '/api/usuarios');
+xhr.setRequestHeader('Content-Type', 'application/json');
+xhr.send(JSON.stringify({ nombre: 'Ana', rol: 'dev' }));</pre>
+    </section>
+
+    <!-- Diapositiva 9: Progreso de subida, timeout y abort() -->
+    <section class="slide" data-slide="9" data-title="Progreso de subida, timeout y abort()">
+      <div class="slide-header">
+        <span class="eyebrow">Control de red</span>
+        <h2>Progreso de subida, timeout y abort()</h2>
+      </div>
+      <ul class="bullet-list">
+        <li><code>xhr.timeout = 5000</code> corta la petición si supera 5 segundos y dispara <code>ontimeout</code>.</li>
+        <li><code>xhr.abort()</code> cancela una descarga en curso si el usuario cambia de vista.</li>
+        <li><code>xhr.upload.onprogress</code> entrega <code>e.loaded</code> y <code>e.total</code> para barras de carga reales.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 10: CORS y errores de red -->
+    <section class="slide" data-slide="10" data-title="CORS y errores de red">
+      <div class="slide-header">
+        <span class="eyebrow">Diagnóstico</span>
+        <h2>CORS y errores de red</h2>
+      </div>
+      <p>El evento <code>xhr.onerror</code> solo se dispara ante fallos de red (sin internet, DNS caído o bloqueo <strong>CORS</strong>), nunca ante un <code>404</code> o <code>500</code> del servidor.</p>
+      <div class="callout-info" style="margin-top:12px">
+        Si ves status <code>0</code> en consola junto a un error de origen cruzado, el servidor destino no envió la cabecera <code>Access-Control-Allow-Origin</code>.
+      </div>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador Completo AJAX & FormData">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Completo AJAX & FormData</h2></div>
             <nav class="tabs-nav"> <!-- Barra de navegación para alternar entre las pestañas del simulador -->
             <button class="tab-btn active" id="tabReadyState" data-target="readystate-tab">Ciclo readyState &amp; Eventos</button> <!-- Botón para activar la pestaña del ciclo de vida y eventos XHR -->
@@ -358,7 +436,7 @@ if (window.XMLHttpRequest) {
     
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Ajax Editor (XMLHttpRequest & FormData)">
+        <section class="slide" data-slide="12" data-title="Quiz: Ajax Editor (XMLHttpRequest & FormData)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -384,7 +462,7 @@ if (window.XMLHttpRequest) {
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Ajax Editor (XMLHttpRequest & FormData)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Ajax Editor (XMLHttpRequest & FormData)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:12px;&quot;&gt;&lt;/div&gt;
@@ -405,7 +483,7 @@ if (window.XMLHttpRequest) {
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Ajax</span><span class="file-path">../index.html</span></a>

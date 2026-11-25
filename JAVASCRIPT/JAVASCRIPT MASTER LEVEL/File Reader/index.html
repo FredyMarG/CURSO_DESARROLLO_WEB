@@ -926,6 +926,14 @@ progress -> e.loaded / e.total</code></pre>
                     </div>
                 </div>
             </div>
+        
+            <div class="glass-card" style="margin-top:14px;">
+                <h3>⚡ Alternativa moderna con Promesas y ObjectURL</h3>
+                <pre class="code-box">const texto = await file.text();
+const buffer = await file.arrayBuffer();
+const url = URL.createObjectURL(file);
+img.onload = () => URL.revokeObjectURL(url);</pre>
+            </div>
         </section>
     </main>
 

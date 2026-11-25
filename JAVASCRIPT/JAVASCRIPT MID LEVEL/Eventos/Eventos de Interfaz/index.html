@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -101,7 +101,87 @@ img.addEventListener(&#x27;error&#x27;, () =&gt; {
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Cuidado con resize y scroll:</strong> Pueden dispararse decenas de veces por segundo. Evita operaciones pesadas en el DOM dentro de estos listeners o usa <em>debounce</em>.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador de Eventos de Interfaz">
+        
+    <!-- Diapositiva 5: DOMContentLoaded vs load -->
+    <section class="slide" data-slide="5" data-title="DOMContentLoaded vs load">
+      <div class="slide-header">
+        <span class="eyebrow">Ciclo de carga</span>
+        <h2>DOMContentLoaded vs load</h2>
+      </div>
+      <p>Saber cuándo el DOM está listo evita errores de <code>Cannot read properties of null</code>:</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4><code>DOMContentLoaded</code></h4>
+          <p>Se dispara en <code>document</code> apenas se parsea el HTML y los scripts diferidos, sin esperar imágenes ni CSS externo.</p>
+        </div>
+        <div class="card">
+          <h4><code>window.load</code></h4>
+          <p>Espera a que TODAS las imágenes, fuentes, iframes y hojas de estilo terminen de descargarse.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 6: Eventos de formulario: input vs change vs submit -->
+    <section class="slide" data-slide="6" data-title="Eventos de formulario: input vs change vs submit">
+      <div class="slide-header">
+        <span class="eyebrow">Entrada de datos</span>
+        <h2>Eventos de formulario: input vs change vs submit</h2>
+      </div>
+      <ul class="bullet-list">
+        <li><strong><code>input</code>:</strong> Se dispara instantáneamente en cada tecla, pegado o borrado.</li>
+        <li><strong><code>change</code>:</strong> En textos se dispara solo al perder el foco tras cambiar; en <code>&lt;select&gt;</code> y checkboxes es inmediato.</li>
+        <li><strong><code>submit</code>:</strong> Se escucha en el <code>&lt;form&gt;</code> (no en el botón) y se intercepta con <code>e.preventDefault()</code>.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 7: Eventos de foco: focus, blur, focusin, focusout -->
+    <section class="slide" data-slide="7" data-title="Eventos de foco: focus, blur, focusin, focusout">
+      <div class="slide-header">
+        <span class="eyebrow">Validación en UI</span>
+        <h2>Eventos de foco: focus, blur, focusin, focusout</h2>
+      </div>
+      <p><code>focus</code> y <code>blur</code> no burbujean, mientras que <code>focusin</code> y <code>focusout</code> sí lo hacen, permitiendo validar formularios completos desde un solo listener padre.</p>
+      <pre class="code-box">form.addEventListener('focusout', (e) => {
+  if (e.target.matches('input')) validarCampo(e.target);
+});</pre>
+    </section>
+
+    <!-- Diapositiva 8: scroll, resize y Observers modernos -->
+    <section class="slide" data-slide="8" data-title="scroll, resize y Observers modernos">
+      <div class="slide-header">
+        <span class="eyebrow">Layout y viewport</span>
+        <h2>scroll, resize y Observers modernos</h2>
+      </div>
+      <p>Aunque <code>window.addEventListener('scroll')</code> y <code>resize</code> siguen siendo útiles, hoy existen APIs dedicadas mucho más eficientes:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><strong><code>IntersectionObserver</code>:</strong> Detecta si un elemento entra en pantalla (lazy-load, scroll infinito) sin calcular offsets en cada frame.</li>
+        <li><strong><code>ResizeObserver</code>:</strong> Reacciona cuando un contenedor específico cambia de tamaño.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 9: visibilitychange y beforeunload -->
+    <section class="slide" data-slide="9" data-title="visibilitychange y beforeunload">
+      <div class="slide-header">
+        <span class="eyebrow">Estado de la pestaña</span>
+        <h2>visibilitychange y beforeunload</h2>
+      </div>
+      <p><code>document.visibilitychange</code> avisa cuando el usuario cambia de pestaña (<code>document.hidden</code>), ideal para pausar videos o intervalos.</p>
+      <p style="margin-top:10px"><code>beforeunload</code> permite advertir antes de cerrar si hay cambios sin guardar en un editor.</p>
+    </section>
+
+    <!-- Diapositiva 10: Eventos de error en recursos y multimedia -->
+    <section class="slide" data-slide="10" data-title="Eventos de error en recursos y multimedia">
+      <div class="slide-header">
+        <span class="eyebrow">Resiliencia</span>
+        <h2>Eventos de error en recursos y multimedia</h2>
+      </div>
+      <p>Las etiquetas <code>&lt;img&gt;</code>, <code>&lt;video&gt;</code> y <code>&lt;script&gt;</code> disparan <code>error</code> si falla la red. Puedes mostrar una imagen de respaldo automáticamente:</p>
+      <pre class="code-box">img.addEventListener('error', () => {
+  img.src = '/assets/avatar-fallback.png';
+}, { once: true });</pre>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador de Eventos de Interfaz">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador de Eventos de Interfaz</h2></div>
             <div class="grid-layout" style="padding:0;">
       <section class="card">
@@ -126,7 +206,7 @@ img.addEventListener(&#x27;error&#x27;, () =&gt; {
     </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Interfaz (UI)">
+        <section class="slide" data-slide="12" data-title="Quiz: Eventos de Interfaz (UI)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -152,7 +232,7 @@ img.addEventListener(&#x27;error&#x27;, () =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Interfaz (UI)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Eventos de Interfaz (UI)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;input id=&quot;txt&quot; value=&quot;Selecciona parte de este texto&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
@@ -179,7 +259,7 @@ img.addEventListener(&#x27;error&#x27;, () =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>

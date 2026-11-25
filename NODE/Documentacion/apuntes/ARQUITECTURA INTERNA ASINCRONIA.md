@@ -158,6 +158,22 @@ ejemplo();
 
 Los tiempos son orientativos y dependen del sistema. Usa `Promise.all` cuando las tareas sean independientes y quieras esperar a todas.
 
+### `fetch()` nativo y `AbortSignal.timeout()` en Node.js
+
+Desde Node.js 18+/20+ puedes consumir APIs HTTP externas directamente con `fetch()` sin instalar paquetes como `node-fetch`. Para evitar que una API lenta deje colgado tu servidor, combina `fetch()` con `AbortSignal.timeout(ms)`:
+
+```js
+try {
+  const res = await fetch('https://api.github.com/zen', {
+    signal: AbortSignal.timeout(3000) // Cancela automáticamente tras 3 segundos
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  console.log(await res.text());
+} catch (error) {
+  console.error('Fallo o timeout:', error.name, error.message);
+}
+```
+
 ## 7. Analogía y diagrama
 
 Imagina una **biblioteca**: V8 es quien procesa las instrucciones del bibliotecario; el Event Loop es el coordinador que atiende tareas listas; un callback es el aviso de que un libro está disponible; una promesa es el comprobante de una solicitud pendiente; `await` permite continuar la atención cuando llega el libro, sin mantener inmóvil toda la biblioteca.

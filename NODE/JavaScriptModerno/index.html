@@ -31,7 +31,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -72,7 +72,7 @@
                         <h3>3. Arrays y Operadores</h3>
                         <p><code>map</code>, <code>filter</code>, <code>reduce</code>, destructuring, <code>?.</code> y <code>??</code>.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Prueba pipelines funcionales y código ES6+ en tiempo real.</p>
@@ -200,8 +200,109 @@ const ordenados = [...productos].sort((a, b) => a.precio - b.precio);</code></pr
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador ES6+">
+<!-- SLIDE 7: PROMESAS Y ASYNC/AWAIT -->
+        <section class="slide" data-slide="7" data-title="Promesas y async/await en ES2023+">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ASINCRONÍA MODERNA</span>
+                <h2 class="slide-title"><code>async/await</code>, <code>try/catch</code> y <em>Top-Level Await</em></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En Node.js casi todo (leer archivos, consultar bases de datos o llamar APIs) es asíncrono. Con <code>async/await</code> escribes código secuencial fácil de leer, y en ES Modules puedes usar <code>await</code> directo en la raíz del archivo:
+                </p>
+                <pre class="code-block"><code>import { readFile } from 'node:fs/promises';
+
+async function cargarConfig(ruta) {
+  try {
+    const raw = await readFile(ruta, 'utf8');
+    return JSON.parse(raw);
+  } catch (err) {
+    return { puerto: 3000, error: err.code };
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: MAP, SET Y OBJECT.FROMENTRIES -->
+        <section class="slide" data-slide="8" data-title="Map, Set y Transformación de Objetos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · COLECCIONES MODERNAS</span>
+                <h2 class="slide-title"><code>Set</code>, <code>Map</code>, <code>Object.entries()</code> y <code>Object.fromEntries()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <code>Set</code> elimina duplicados al instante en <code>O(1)</code> promedio, <code>Map</code> admite cualquier tipo de clave, y <code>Object.entries()</code> junto a <code>Object.fromEntries()</code> permiten transformar objetos con <code>map</code> y <code>filter</code> sin mutarlos:
+                </p>
+                <pre class="code-block"><code>const etiquetasUnicas = [...new Set(['node', 'js', 'node'])]; // ['node', 'js']
+
+const precios = { cursoA: 20, cursoB: 50 };
+const conDescuento = Object.fromEntries(
+  Object.entries(precios).map(([k, v]) => [k, v * 0.8])
+); // { cursoA: 16, cursoB: 40 }</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: CHEATSHEET Y ERRORES COMUNES ES6+ -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos ES6+">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS Y TRAMPAS</span>
+                <h2 class="slide-title">Errores Frecuentes en JavaScript Moderno</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Incluso con sintaxis moderna, existen tres descuidos clásicos que rompen aplicaciones en producción:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Error frecuente</th><th>Por qué falla y cómo corregirlo</th></tr></thead>
+                    <tbody>
+                        <tr><td>Usar <code>||</code> en vez de <code>??</code> con <code>0</code> o <code>""</code></td><td><code>0 || 10</code> da <code>10</code>; usa <code>0 ?? 10</code> (da <code>0</code>)</td></tr>
+                        <tr><td>Mutación con <code>sort()</code> o <code>push()</code></td><td>Modifican el arreglo original; usa <code>toSorted()</code> o <code>[...arr]</code></td></tr>
+                        <tr><td><code>forEach(async fn)</code></td><td>No espera los <code>await</code>; usa <code>for...of</code> o <code>Promise.all()</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: OPTIONAL CHAINING, NULLISH Y METODOS NUEVOS -->
+        <section class="slide" data-slide="10" data-title="ES2023+: toSorted, toReversed y at()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · MÉTODOS INMUTABLES ES2023</span>
+                <h2 class="slide-title">Arreglos Sin Mutación: <code>toSorted()</code>, <code>toReversed()</code> y <code>.at(-1)</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En Node.js 20+, ya no necesitas copiar un arreglo antes de ordenarlo o invertirlo: <code>toSorted()</code>, <code>toReversed()</code> y <code>with()</code> devuelven un arreglo nuevo sin alterar el original, y <code>.at(-1)</code> lee el último elemento limpiamente:
+                </p>
+                <pre class="code-block"><code>const notas = [75, 98, 84];
+const ordenadas = notas.toSorted((a, b) => b - a); // [98, 84, 75]
+console.log(notas);          // [75, 98, 84] (intacto)
+console.log(ordenadas.at(-1)); // 75 (último elemento)</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS ES2023+ -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos ES6+">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave de JavaScript Moderno</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica los operadores y métodos modernos en estos tres escenarios reales de backend:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes usar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Filtrar alumnos aprobados y sacar promedio</td><td><code>filter()</code> + <code>reduce()</code> en cadena</td></tr>
+                        <tr><td>2. Clonar y actualizar una configuración sin mutar</td><td><code>structuredClone()</code> o <em>spread</em> <code>{ ...cfg }</code></td></tr>
+                        <tr><td>3. Leer <code>cfg?.db?.port ?? 5432</code></td><td><em>Optional chaining</em> (<code>?.</code>) + <em>Nullish</em> (<code>??</code>)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador ES6+">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · JAVASCRIPT MODERNO</span>
                 <h2 class="slide-title">🎛️ Simulador de Pipelines y Operadores ES6+</h2>
@@ -226,10 +327,10 @@ const ordenados = [...productos].sort((a, b) => a.precio - b.precio);</code></pr
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: JavaScript Moderno">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: JavaScript Moderno">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de JavaScript Moderno</h2>
             </div>
             <div class="quiz-container">
@@ -267,10 +368,10 @@ const ordenados = [...productos].sort((a, b) => a.precio - b.precio);</code></pr
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: JavaScript Moderno">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: JavaScript Moderno">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de JavaScript Moderno</h2>
             </div>
             <div class="lab-panel">

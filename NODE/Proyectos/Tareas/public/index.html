@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="./styles.css" />
   <!-- Lógica externa del frontend; defer ejecuta el script cuando el DOM ya está construido -->
   <script src="./app.js" defer></script>
+  <!-- Navegación unificada entre proyectos de Node.js y el resto del curso -->
+  <script src="../../node-projects-nav.js" defer></script>
 </head>
 <body>
   <!-- Contenedor principal centrado con ancho máximo de 1040px -->
@@ -25,7 +27,7 @@
     <header class="topbar">
       <div class="title-wrap">
         <h1>✅ Gestor de Tareas (Node.js + JSON + NDJSON)</h1>
-        <p>Proyecto práctico: <code>node:http</code>, <code>fs/promises</code>, <code>crypto.randomUUID()</code> y <code>EventEmitter</code>.</p>
+        <p>Gestor CRUD full-stack sin dependencias externas: API REST nativa con <code>node:http</code>, persistencia en <code>tareas.json</code>, bitácora de auditoría en <code>eventos.ndjson</code> y eventos con <code>EventEmitter</code>.</p>
       </div>
       <!-- Zona derecha de acciones e indicadores -->
       <div class="actions">

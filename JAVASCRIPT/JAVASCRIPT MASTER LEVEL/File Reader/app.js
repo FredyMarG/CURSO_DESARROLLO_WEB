@@ -105,23 +105,23 @@
         }
 
         init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición lógica
+                const AudioCtx = window.AudioContext || window.webkitAudioContext; // Declara e inicializa variable local
                 this.ctx = new AudioCtx();
             }
-            if (this.ctx && this.ctx.state === 'suspended') {
+            if (this.ctx && this.ctx.state === 'suspended') { // Evalúa condición lógica
                 this.ctx.resume();
             }
         }
 
         playTone(freq, type = 'sine', duration = 0.09, volume = 0.05) {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             try { // Inicia bloque protegido contra errores
                 this.init();
-                if (!this.ctx) return;
+                if (!this.ctx) return; // Evalúa condición lógica
 
-                const osc = this.ctx.createOscillator();
-                const gain = this.ctx.createGain();
+                const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+                const gain = this.ctx.createGain(); // Declara e inicializa variable local
 
                 osc.type = type;
                 osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
@@ -146,20 +146,20 @@
         }
 
         fileLoaded() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.playTone(523.25, 'sine', 0.08, 0.05);
             setTimeout(() => this.playTone(659.25, 'sine', 0.08, 0.05), 70);
             setTimeout(() => this.playTone(783.99, 'sine', 0.12, 0.05), 140);
         }
 
         error() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.playTone(320, 'sawtooth', 0.12, 0.06);
             setTimeout(() => this.playTone(240, 'sawtooth', 0.15, 0.06), 90);
         }
     }
 
-    const sound = new SoundEngine();
+    const sound = new SoundEngine(); // Declara e inicializa variable local
 
     /* ==========================================================================
        3. PRESETS DE CÓDIGO EDITABLE PARA EL PLAYGROUND (Slide 9 & Retos)
@@ -446,150 +446,150 @@ gestor.iniciar();`
 
         cacheDom() {
             this.dom.body = document.body;
-            this.dom.slides = document.querySelectorAll('.slide');
+            this.dom.slides = document.querySelectorAll('.slide'); // Obtiene referencia al elemento del DOM
 
             // Navegación
-            this.dom.progressBar = document.getElementById('progressBar');
-            this.dom.slideIndicator = document.getElementById('slideIndicator');
-            this.dom.btnToggleMode = document.getElementById('btnToggleMode');
-            this.dom.modeIcon = document.getElementById('modeIcon');
-            this.dom.modeText = document.getElementById('modeText');
-            this.dom.btnToggleSound = document.getElementById('btnToggleSound');
-            this.dom.soundIcon = document.getElementById('soundIcon');
-            this.dom.btnOverview = document.getElementById('btnOverview');
-            this.dom.btnFullscreen = document.getElementById('btnFullscreen');
-            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide');
-            this.dom.btnNextSlide = document.getElementById('btnNextSlide');
-            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer');
-            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation');
-            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation');
-            this.dom.jumpLinks = document.querySelectorAll('[data-jump]');
+            this.dom.progressBar = document.getElementById('progressBar'); // Obtiene referencia al elemento del DOM
+            this.dom.slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia al elemento del DOM
+            this.dom.btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia al elemento del DOM
+            this.dom.modeIcon = document.getElementById('modeIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.modeText = document.getElementById('modeText'); // Obtiene referencia al elemento del DOM
+            this.dom.btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia al elemento del DOM
+            this.dom.soundIcon = document.getElementById('soundIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.btnOverview = document.getElementById('btnOverview'); // Obtiene referencia al elemento del DOM
+            this.dom.btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia al elemento del DOM
+            this.dom.btnPrevSlide = document.getElementById('btnPrevSlide'); // Obtiene referencia al elemento del DOM
+            this.dom.btnNextSlide = document.getElementById('btnNextSlide'); // Obtiene referencia al elemento del DOM
+            this.dom.slideDotsContainer = document.getElementById('slideDotsContainer'); // Obtiene referencia al elemento del DOM
+            this.dom.btnStartPresentation = document.getElementById('btnStartPresentation'); // Obtiene referencia al elemento del DOM
+            this.dom.btnRestartPresentation = document.getElementById('btnRestartPresentation'); // Obtiene referencia al elemento del DOM
+            this.dom.jumpLinks = document.querySelectorAll('[data-jump]'); // Obtiene referencia al elemento del DOM
 
             // Slide 2: Lector Texto
-            this.dom.dropZoneText = document.getElementById('dropZoneText');
-            this.dom.inputLocalText = document.getElementById('inputLocalText');
-            this.dom.btnLoadDemoText = document.getElementById('btnLoadDemoText');
-            this.dom.textReadStatus = document.getElementById('textReadStatus');
-            this.dom.textViewerResult = document.getElementById('textViewerResult');
+            this.dom.dropZoneText = document.getElementById('dropZoneText'); // Obtiene referencia al elemento del DOM
+            this.dom.inputLocalText = document.getElementById('inputLocalText'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadDemoText = document.getElementById('btnLoadDemoText'); // Obtiene referencia al elemento del DOM
+            this.dom.textReadStatus = document.getElementById('textReadStatus'); // Obtiene referencia al elemento del DOM
+            this.dom.textViewerResult = document.getElementById('textViewerResult'); // Obtiene referencia al elemento del DOM
 
             // Slide 3: Lector Imagen DataURL
-            this.dom.dropZoneImage = document.getElementById('dropZoneImage');
-            this.dom.inputLocalImage = document.getElementById('inputLocalImage');
-            this.dom.btnLoadDemoImage = document.getElementById('btnLoadDemoImage');
-            this.dom.imageReadStatus = document.getElementById('imageReadStatus');
-            this.dom.imagePreviewContainer = document.getElementById('imagePreviewContainer');
-            this.dom.imagePreviewPlaceholder = document.getElementById('imagePreviewPlaceholder');
-            this.dom.imagePreviewElement = document.getElementById('imagePreviewElement');
+            this.dom.dropZoneImage = document.getElementById('dropZoneImage'); // Obtiene referencia al elemento del DOM
+            this.dom.inputLocalImage = document.getElementById('inputLocalImage'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadDemoImage = document.getElementById('btnLoadDemoImage'); // Obtiene referencia al elemento del DOM
+            this.dom.imageReadStatus = document.getElementById('imageReadStatus'); // Obtiene referencia al elemento del DOM
+            this.dom.imagePreviewContainer = document.getElementById('imagePreviewContainer'); // Obtiene referencia al elemento del DOM
+            this.dom.imagePreviewPlaceholder = document.getElementById('imagePreviewPlaceholder'); // Obtiene referencia al elemento del DOM
+            this.dom.imagePreviewElement = document.getElementById('imagePreviewElement'); // Obtiene referencia al elemento del DOM
 
             // Slide 4: Carga de Múltiples Archivos & Galería
-            this.dom.btnSelectMultipleFiles = document.getElementById('btnSelectMultipleFiles');
-            this.dom.btnLoadDemoMultiFiles = document.getElementById('btnLoadDemoMultiFiles');
-            this.dom.btnClearMultiFiles = document.getElementById('btnClearMultiFiles');
-            this.dom.inputMultipleFiles = document.getElementById('inputMultipleFiles');
-            this.dom.dropZoneMultiple = document.getElementById('dropZoneMultiple');
-            this.dom.multiFilesStatsBar = document.getElementById('multiFilesStatsBar');
-            this.dom.multiFilesCount = document.getElementById('multiFilesCount');
-            this.dom.multiFilesTotalSize = document.getElementById('multiFilesTotalSize');
-            this.dom.multiFilesListContainer = document.getElementById('multiFilesListContainer');
-            this.dom.multiFilePreviewBox = document.getElementById('multiFilePreviewBox');
-            this.dom.multiFilePreviewTitle = document.getElementById('multiFilePreviewTitle');
-            this.dom.multiFilePreviewBody = document.getElementById('multiFilePreviewBody');
-            this.dom.btnCloseMultiPreview = document.getElementById('btnCloseMultiPreview');
+            this.dom.btnSelectMultipleFiles = document.getElementById('btnSelectMultipleFiles'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadDemoMultiFiles = document.getElementById('btnLoadDemoMultiFiles'); // Obtiene referencia al elemento del DOM
+            this.dom.btnClearMultiFiles = document.getElementById('btnClearMultiFiles'); // Obtiene referencia al elemento del DOM
+            this.dom.inputMultipleFiles = document.getElementById('inputMultipleFiles'); // Obtiene referencia al elemento del DOM
+            this.dom.dropZoneMultiple = document.getElementById('dropZoneMultiple'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilesStatsBar = document.getElementById('multiFilesStatsBar'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilesCount = document.getElementById('multiFilesCount'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilesTotalSize = document.getElementById('multiFilesTotalSize'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilesListContainer = document.getElementById('multiFilesListContainer'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilePreviewBox = document.getElementById('multiFilePreviewBox'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilePreviewTitle = document.getElementById('multiFilePreviewTitle'); // Obtiene referencia al elemento del DOM
+            this.dom.multiFilePreviewBody = document.getElementById('multiFilePreviewBody'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCloseMultiPreview = document.getElementById('btnCloseMultiPreview'); // Obtiene referencia al elemento del DOM
 
-            this.dom.btnSelectMultipleImages = document.getElementById('btnSelectMultipleImages');
-            this.dom.btnLoadDemoGallery = document.getElementById('btnLoadDemoGallery');
-            this.dom.inputMultipleGallery = document.getElementById('inputMultipleGallery');
-            this.dom.galleryCountStatus = document.getElementById('galleryCountStatus');
-            this.dom.galleryGridContainer = document.getElementById('galleryGridContainer');
+            this.dom.btnSelectMultipleImages = document.getElementById('btnSelectMultipleImages'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadDemoGallery = document.getElementById('btnLoadDemoGallery'); // Obtiene referencia al elemento del DOM
+            this.dom.inputMultipleGallery = document.getElementById('inputMultipleGallery'); // Obtiene referencia al elemento del DOM
+            this.dom.galleryCountStatus = document.getElementById('galleryCountStatus'); // Obtiene referencia al elemento del DOM
+            this.dom.galleryGridContainer = document.getElementById('galleryGridContainer'); // Obtiene referencia al elemento del DOM
 
             // Slide 5: Zona Drag & Drop
-            this.dom.interactiveMainDropZone = document.getElementById('interactiveMainDropZone');
-            this.dom.dropZoneResultBox = document.getElementById('dropZoneResultBox');
+            this.dom.interactiveMainDropZone = document.getElementById('interactiveMainDropZone'); // Obtiene referencia al elemento del DOM
+            this.dom.dropZoneResultBox = document.getElementById('dropZoneResultBox'); // Obtiene referencia al elemento del DOM
 
             // Slide 7: Progreso
-            this.dom.btnStartProgressSim = document.getElementById('btnStartProgressSim');
-            this.dom.btnAbortProgressSim = document.getElementById('btnAbortProgressSim');
-            this.dom.fileProgressBarFill = document.getElementById('fileProgressBarFill');
-            this.dom.progressPercentLabel = document.getElementById('progressPercentLabel');
-            this.dom.progressBytesLoaded = document.getElementById('progressBytesLoaded');
-            this.dom.progressBytesTotal = document.getElementById('progressBytesTotal');
-            this.dom.progressEventLogBox = document.getElementById('progressEventLogBox');
+            this.dom.btnStartProgressSim = document.getElementById('btnStartProgressSim'); // Obtiene referencia al elemento del DOM
+            this.dom.btnAbortProgressSim = document.getElementById('btnAbortProgressSim'); // Obtiene referencia al elemento del DOM
+            this.dom.fileProgressBarFill = document.getElementById('fileProgressBarFill'); // Obtiene referencia al elemento del DOM
+            this.dom.progressPercentLabel = document.getElementById('progressPercentLabel'); // Obtiene referencia al elemento del DOM
+            this.dom.progressBytesLoaded = document.getElementById('progressBytesLoaded'); // Obtiene referencia al elemento del DOM
+            this.dom.progressBytesTotal = document.getElementById('progressBytesTotal'); // Obtiene referencia al elemento del DOM
+            this.dom.progressEventLogBox = document.getElementById('progressEventLogBox'); // Obtiene referencia al elemento del DOM
 
             // Slide 8: Analogías
-            this.dom.toolButtons = document.querySelectorAll('.tool-btn');
-            this.dom.analogyAvatarLeft = document.getElementById('analogyAvatarLeft');
-            this.dom.analogyTitleLeft = document.getElementById('analogyTitleLeft');
-            this.dom.analogySubLeft = document.getElementById('analogySubLeft');
-            this.dom.analogyItemsLeft = document.getElementById('analogyItemsLeft');
-            this.dom.analogyStatusLeft = document.getElementById('analogyStatusLeft');
+            this.dom.toolButtons = document.querySelectorAll('.tool-btn'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyAvatarLeft = document.getElementById('analogyAvatarLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyTitleLeft = document.getElementById('analogyTitleLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.analogySubLeft = document.getElementById('analogySubLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyItemsLeft = document.getElementById('analogyItemsLeft'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyStatusLeft = document.getElementById('analogyStatusLeft'); // Obtiene referencia al elemento del DOM
 
-            this.dom.analogyAvatarRight = document.getElementById('analogyAvatarRight');
-            this.dom.analogyTitleRight = document.getElementById('analogyTitleRight');
-            this.dom.analogySubRight = document.getElementById('analogySubRight');
-            this.dom.analogyItemsRight = document.getElementById('analogyItemsRight');
-            this.dom.analogyStatusRight = document.getElementById('analogyStatusRight');
+            this.dom.analogyAvatarRight = document.getElementById('analogyAvatarRight'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyTitleRight = document.getElementById('analogyTitleRight'); // Obtiene referencia al elemento del DOM
+            this.dom.analogySubRight = document.getElementById('analogySubRight'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyItemsRight = document.getElementById('analogyItemsRight'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyStatusRight = document.getElementById('analogyStatusRight'); // Obtiene referencia al elemento del DOM
 
-            this.dom.analogyArrowLabel = document.getElementById('analogyArrowLabel');
-            this.dom.analogyBannerIcon = document.getElementById('analogyBannerIcon');
-            this.dom.analogyBannerText = document.getElementById('analogyBannerText');
+            this.dom.analogyArrowLabel = document.getElementById('analogyArrowLabel'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyBannerIcon = document.getElementById('analogyBannerIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.analogyBannerText = document.getElementById('analogyBannerText'); // Obtiene referencia al elemento del DOM
 
             // Slide 9: Playground
-            this.dom.codePresetSelect = document.getElementById('codePresetSelect');
-            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor');
-            this.dom.btnResetCode = document.getElementById('btnResetCode');
-            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode');
-            this.dom.btnClearConsole = document.getElementById('btnClearConsole');
-            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer');
+            this.dom.codePresetSelect = document.getElementById('codePresetSelect'); // Obtiene referencia al elemento del DOM
+            this.dom.liveCodeEditor = document.getElementById('liveCodeEditor'); // Obtiene referencia al elemento del DOM
+            this.dom.btnResetCode = document.getElementById('btnResetCode'); // Obtiene referencia al elemento del DOM
+            this.dom.btnRunEditorCode = document.getElementById('btnRunEditorCode'); // Obtiene referencia al elemento del DOM
+            this.dom.btnClearConsole = document.getElementById('btnClearConsole'); // Obtiene referencia al elemento del DOM
+            this.dom.consoleLogsContainer = document.getElementById('consoleLogsContainer'); // Obtiene referencia al elemento del DOM
 
             // Slide 10: Retos & Cheat Sheet
-            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header');
-            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]');
-            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat');
+            this.dom.accordionHeaders = document.querySelectorAll('.accordion-header'); // Obtiene referencia al elemento del DOM
+            this.dom.btnLoadChallenges = document.querySelectorAll('[data-load-challenge]'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCopySummaryCheat = document.getElementById('btnCopySummaryCheat'); // Obtiene referencia al elemento del DOM
 
             // Modales & Toast
-            this.dom.overviewModal = document.getElementById('overviewModal');
-            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.dom.overviewGrid = document.getElementById('overviewGrid');
-            this.dom.toastNotification = document.getElementById('toastNotification');
-            this.dom.toastIcon = document.getElementById('toastIcon');
-            this.dom.toastMsg = document.getElementById('toastMsg');
+            this.dom.overviewModal = document.getElementById('overviewModal'); // Obtiene referencia al elemento del DOM
+            this.dom.btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia al elemento del DOM
+            this.dom.overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia al elemento del DOM
+            this.dom.toastNotification = document.getElementById('toastNotification'); // Obtiene referencia al elemento del DOM
+            this.dom.toastIcon = document.getElementById('toastIcon'); // Obtiene referencia al elemento del DOM
+            this.dom.toastMsg = document.getElementById('toastMsg'); // Obtiene referencia al elemento del DOM
 
             // Copiar snippets
-            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code');
+            this.dom.btnCopyCodes = document.querySelectorAll('.btn-copy-code'); // Obtiene referencia al elemento del DOM
         }
 
         bindEvents() {
             // Navegación
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide());
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide());
-            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2));
-            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1));
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.addEventListener('click', () => this.prevSlide()); // Evalúa condición lógica
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.addEventListener('click', () => this.nextSlide()); // Evalúa condición lógica
+            if (this.dom.btnStartPresentation) this.dom.btnStartPresentation.addEventListener('click', () => this.goToSlide(2)); // Evalúa condición lógica
+            if (this.dom.btnRestartPresentation) this.dom.btnRestartPresentation.addEventListener('click', () => this.goToSlide(1)); // Evalúa condición lógica
 
             this.dom.jumpLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10);
-                    if (slideTarget) this.goToSlide(slideTarget);
+                link.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const slideTarget = parseInt(e.currentTarget.getAttribute('data-jump'), 10); // Declara e inicializa variable local
+                    if (slideTarget) this.goToSlide(slideTarget); // Evalúa condición lógica
                 });
             });
 
             // Barra superior
-            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode());
-            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound());
-            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview());
-            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview());
-            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen());
+            if (this.dom.btnToggleMode) this.dom.btnToggleMode.addEventListener('click', () => this.toggleViewMode()); // Evalúa condición lógica
+            if (this.dom.btnToggleSound) this.dom.btnToggleSound.addEventListener('click', () => this.toggleSound()); // Evalúa condición lógica
+            if (this.dom.btnOverview) this.dom.btnOverview.addEventListener('click', () => this.openOverview()); // Evalúa condición lógica
+            if (this.dom.btnCloseOverview) this.dom.btnCloseOverview.addEventListener('click', () => this.closeOverview()); // Evalúa condición lógica
+            if (this.dom.btnFullscreen) this.dom.btnFullscreen.addEventListener('click', () => this.toggleFullscreen()); // Evalúa condición lógica
 
             // Teclado
-            window.addEventListener('keydown', (e) => {
-                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') {
-                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            window.addEventListener('keydown', (e) => { // Registra escuchador de evento en el DOM
+                if (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT') { // Evalúa condición lógica
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { // Evalúa condición lógica
                         e.preventDefault();
                         this.runPlaygroundCode();
                     }
-                    return;
+                    return; // Retorna el resultado de la función
                 }
 
-                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') {
+                if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'd' || e.key === 'D') { // Evalúa condición lógica
                     e.preventDefault();
                     this.nextSlide();
                 } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
@@ -605,72 +605,72 @@ gestor.iniciar();`
             });
 
             // Slide 2: Lector Texto
-            if (this.dom.dropZoneText && this.dom.inputLocalText) {
+            if (this.dom.dropZoneText && this.dom.inputLocalText) { // Evalúa condición lógica
                 this.dom.dropZoneText.addEventListener('click', () => this.dom.inputLocalText.click());
                 this.dom.inputLocalText.addEventListener('change', (e) => this.handleLocalTextInput(e));
                 this.setupDropZone(this.dom.dropZoneText, (file) => this.readTextFile(file));
             }
-            if (this.dom.btnLoadDemoText) {
+            if (this.dom.btnLoadDemoText) { // Evalúa condición lógica
                 this.dom.btnLoadDemoText.addEventListener('click', () => this.loadDemoText());
             }
 
             // Slide 3: Lector Imagen DataURL
-            if (this.dom.dropZoneImage && this.dom.inputLocalImage) {
+            if (this.dom.dropZoneImage && this.dom.inputLocalImage) { // Evalúa condición lógica
                 this.dom.dropZoneImage.addEventListener('click', () => this.dom.inputLocalImage.click());
                 this.dom.inputLocalImage.addEventListener('change', (e) => this.handleLocalImageInput(e));
                 this.setupDropZone(this.dom.dropZoneImage, (file) => this.readImageFile(file));
             }
-            if (this.dom.btnLoadDemoImage) {
+            if (this.dom.btnLoadDemoImage) { // Evalúa condición lógica
                 this.dom.btnLoadDemoImage.addEventListener('click', () => this.loadDemoImage());
             }
 
             // Slide 4: Carga de Múltiples Archivos & Galería
-            if (this.dom.btnSelectMultipleFiles && this.dom.inputMultipleFiles) {
+            if (this.dom.btnSelectMultipleFiles && this.dom.inputMultipleFiles) { // Evalúa condición lógica
                 this.dom.btnSelectMultipleFiles.addEventListener('click', () => this.dom.inputMultipleFiles.click());
                 this.dom.inputMultipleFiles.addEventListener('change', (e) => this.handleMultipleFilesInput(e.target.files));
             }
-            if (this.dom.btnLoadDemoMultiFiles) {
+            if (this.dom.btnLoadDemoMultiFiles) { // Evalúa condición lógica
                 this.dom.btnLoadDemoMultiFiles.addEventListener('click', () => this.loadDemoMultiFiles());
             }
-            if (this.dom.btnClearMultiFiles) {
+            if (this.dom.btnClearMultiFiles) { // Evalúa condición lógica
                 this.dom.btnClearMultiFiles.addEventListener('click', () => this.clearMultiFiles());
             }
-            if (this.dom.dropZoneMultiple) {
-                this.dom.dropZoneMultiple.addEventListener('click', () => {
-                    if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.click();
+            if (this.dom.dropZoneMultiple) { // Evalúa condición lógica
+                this.dom.dropZoneMultiple.addEventListener('click', () => { // Registra escuchador de evento en el DOM
+                    if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.click(); // Evalúa condición lógica
                 });
                 this.setupDropZone(this.dom.dropZoneMultiple, (singleFile, allFiles) => {
-                    const files = allFiles && allFiles.length > 0 ? allFiles : [singleFile];
+                    const files = allFiles && allFiles.length > 0 ? allFiles : [singleFile]; // Declara e inicializa variable local
                     this.handleMultipleFilesInput(files);
                 });
             }
-            if (this.dom.btnCloseMultiPreview) {
+            if (this.dom.btnCloseMultiPreview) { // Evalúa condición lógica
                 this.dom.btnCloseMultiPreview.addEventListener('click', () => this.closeMultiPreview());
             }
-            if (this.dom.btnSelectMultipleImages && this.dom.inputMultipleGallery) {
+            if (this.dom.btnSelectMultipleImages && this.dom.inputMultipleGallery) { // Evalúa condición lógica
                 this.dom.btnSelectMultipleImages.addEventListener('click', () => this.dom.inputMultipleGallery.click());
                 this.dom.inputMultipleGallery.addEventListener('change', (e) => this.handleMultipleGalleryInput(e));
             }
-            if (this.dom.btnLoadDemoGallery) {
+            if (this.dom.btnLoadDemoGallery) { // Evalúa condición lógica
                 this.dom.btnLoadDemoGallery.addEventListener('click', () => this.loadDemoGallery());
             }
 
             // Slide 5: Zona Drag & Drop Interactiva
-            if (this.dom.interactiveMainDropZone) {
+            if (this.dom.interactiveMainDropZone) { // Evalúa condición lógica
                 this.setupDropZone(this.dom.interactiveMainDropZone, (file) => this.handleMainDropFile(file));
             }
 
             // Slide 7: Progreso
-            if (this.dom.btnStartProgressSim) {
+            if (this.dom.btnStartProgressSim) { // Evalúa condición lógica
                 this.dom.btnStartProgressSim.addEventListener('click', () => this.startProgressSimulation());
             }
-            if (this.dom.btnAbortProgressSim) {
+            if (this.dom.btnAbortProgressSim) { // Evalúa condición lógica
                 this.dom.btnAbortProgressSim.addEventListener('click', () => this.abortProgressSimulation());
             }
 
             // Slide 8: Analogías
             this.dom.toolButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
                     this.dom.toolButtons.forEach(b => b.classList.remove('active'));
                     e.currentTarget.classList.add('active');
                     AppState.activeAnalogy = e.currentTarget.getAttribute('data-analogy');
@@ -680,29 +680,29 @@ gestor.iniciar();`
             });
 
             // Slide 9: Playground
-            if (this.dom.codePresetSelect) {
+            if (this.dom.codePresetSelect) { // Evalúa condición lógica
                 this.dom.codePresetSelect.addEventListener('change', (e) => this.loadCodePreset(e.target.value));
             }
-            if (this.dom.btnResetCode) {
-                this.dom.btnResetCode.addEventListener('click', () => {
+            if (this.dom.btnResetCode) { // Evalúa condición lógica
+                this.dom.btnResetCode.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.loadCodePreset(this.dom.codePresetSelect.value);
                     this.showToast('Código restaurado');
                 });
             }
-            if (this.dom.btnRunEditorCode) {
+            if (this.dom.btnRunEditorCode) { // Evalúa condición lógica
                 this.dom.btnRunEditorCode.addEventListener('click', () => this.runPlaygroundCode());
             }
-            if (this.dom.btnClearConsole) {
+            if (this.dom.btnClearConsole) { // Evalúa condición lógica
                 this.dom.btnClearConsole.addEventListener('click', () => this.clearConsole());
             }
 
             // Slide 10: Retos
             this.dom.accordionHeaders.forEach(header => {
-                header.addEventListener('click', () => {
-                    const item = header.parentElement;
-                    const isOpen = item.classList.contains('active');
-                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-                    if (!isOpen) {
+                header.addEventListener('click', () => { // Registra escuchador de evento en el DOM
+                    const item = header.parentElement; // Declara e inicializa variable local
+                    const isOpen = item.classList.contains('active'); // Declara e inicializa variable local
+                    document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active')); // Obtiene referencia al elemento del DOM
+                    if (!isOpen) { // Evalúa condición lógica
                         item.classList.add('active');
                         sound.click();
                     }
@@ -710,10 +710,10 @@ gestor.iniciar();`
             });
 
             this.dom.btnLoadChallenges.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge');
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const challengeKey = e.currentTarget.getAttribute('data-load-challenge'); // Declara e inicializa variable local
                     this.goToSlide(9);
-                    if (this.dom.codePresetSelect) {
+                    if (this.dom.codePresetSelect) { // Evalúa condición lógica
                         this.dom.codePresetSelect.value = challengeKey;
                     }
                     this.loadCodePreset(challengeKey);
@@ -722,16 +722,16 @@ gestor.iniciar();`
                 });
             });
 
-            if (this.dom.btnCopySummaryCheat) {
+            if (this.dom.btnCopySummaryCheat) { // Evalúa condición lógica
                 this.dom.btnCopySummaryCheat.addEventListener('click', () => this.copyCheatSheet());
             }
 
             // Botones de copia de snippets
             this.dom.btnCopyCodes.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const targetId = e.currentTarget.getAttribute('data-target');
-                    const targetEl = document.getElementById(targetId);
-                    if (targetEl) {
+                btn.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    const targetId = e.currentTarget.getAttribute('data-target'); // Declara e inicializa variable local
+                    const targetEl = document.getElementById(targetId); // Declara e inicializa variable local
+                    if (targetEl) { // Evalúa condición lógica
                         navigator.clipboard.writeText(targetEl.innerText).then(() => {
                             btn.textContent = '¡Copiado!'; // Actualiza contenido en el DOM
                             setTimeout(() => { btn.textContent = 'Copiar'; }, 2000); // Actualiza contenido en el DOM
@@ -747,10 +747,10 @@ gestor.iniciar();`
            Navegación de Diapositivas
            -------------------------------------------------------------------------- */
         buildSlideDots() {
-            if (!this.dom.slideDotsContainer) return;
+            if (!this.dom.slideDotsContainer) return; // Evalúa condición lógica
             this.dom.slideDotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
-            for (let i = 1; i <= AppState.totalSlides; i++) {
-                const dot = document.createElement('button');
+            for (let i = 1; i <= AppState.totalSlides; i++) { // Itera sobre elementos o rango
+                const dot = document.createElement('button'); // Declara e inicializa variable local
                 dot.className = `slide-dot ${i === AppState.currentSlide ? 'active' : ''}`;
                 dot.setAttribute('title', `Ir a diapositiva ${i}`);
                 dot.addEventListener('click', () => this.goToSlide(i));
@@ -759,14 +759,14 @@ gestor.iniciar();`
         }
 
         goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición lógica
             AppState.currentSlide = index;
             this.updateSlideDisplay();
             sound.nav();
         }
 
         nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición lógica
                 AppState.currentSlide++;
                 this.updateSlideDisplay();
                 sound.nav();
@@ -774,7 +774,7 @@ gestor.iniciar();`
         }
 
         prevSlide() {
-            if (AppState.currentSlide > 1) {
+            if (AppState.currentSlide > 1) { // Evalúa condición lógica
                 AppState.currentSlide--;
                 this.updateSlideDisplay();
                 sound.nav();
@@ -782,47 +782,47 @@ gestor.iniciar();`
         }
 
         updateSlideDisplay() {
-            if (this.dom.slideIndicator) {
+            if (this.dom.slideIndicator) { // Evalúa condición lógica
                 this.dom.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            if (this.dom.progressBar) {
-                const percent = (AppState.currentSlide / AppState.totalSlides) * 100;
+            if (this.dom.progressBar) { // Evalúa condición lógica
+                const percent = (AppState.currentSlide / AppState.totalSlides) * 100; // Declara e inicializa variable local
                 this.dom.progressBar.style.width = `${percent}%`;
             }
 
             this.dom.slides.forEach((slide, idx) => {
-                const num = idx + 1;
-                if (AppState.viewMode === 'slides') {
+                const num = idx + 1; // Declara e inicializa variable local
+                if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                     slide.classList.toggle('active', num === AppState.currentSlide);
                 } else {
                     slide.classList.add('active');
                 }
             });
 
-            const dots = document.querySelectorAll('.slide-dot');
+            const dots = document.querySelectorAll('.slide-dot'); // Declara e inicializa variable local
             dots.forEach((dot, idx) => {
                 dot.classList.toggle('active', idx + 1 === AppState.currentSlide);
             });
 
-            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1;
-            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides;
+            if (this.dom.btnPrevSlide) this.dom.btnPrevSlide.disabled = AppState.currentSlide === 1; // Evalúa condición lógica
+            if (this.dom.btnNextSlide) this.dom.btnNextSlide.disabled = AppState.currentSlide === AppState.totalSlides; // Evalúa condición lógica
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         toggleViewMode() {
-            if (AppState.viewMode === 'slides') {
+            if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                 AppState.viewMode = 'guide';
                 this.dom.body.classList.remove('mode-presentation');
                 this.dom.body.classList.add('mode-document');
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides';
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Slides'; // Evalúa condición lógica
                 this.showToast('Activado Modo Documento Continuo');
             } else {
                 AppState.viewMode = 'slides';
                 this.dom.body.classList.remove('mode-document');
                 this.dom.body.classList.add('mode-presentation');
-                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía';
+                if (this.dom.modeText) this.dom.modeText.textContent = 'Modo Guía'; // Evalúa condición lógica
                 this.showToast('Activado Modo Diapositivas');
             }
             this.updateSlideDisplay();
@@ -831,24 +831,24 @@ gestor.iniciar();`
 
         toggleSound() {
             AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.dom.soundIcon) {
+            if (this.dom.soundIcon) { // Evalúa condición lógica
                 this.dom.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
             this.showToast(AppState.soundEnabled ? 'Sonido activado' : 'Sonido silenciado');
-            if (AppState.soundEnabled) sound.click();
+            if (AppState.soundEnabled) sound.click(); // Evalúa condición lógica
         }
 
         toggleFullscreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Evalúa condición lógica
                 document.documentElement.requestFullscreen().catch(() => {});
                 this.showToast('Pantalla Completa');
             } else {
-                if (document.exitFullscreen) document.exitFullscreen();
+                if (document.exitFullscreen) document.exitFullscreen(); // Evalúa condición lógica
             }
         }
 
         openOverview() {
-            if (!this.dom.overviewModal || !this.dom.overviewGrid) return;
+            if (!this.dom.overviewModal || !this.dom.overviewGrid) return; // Evalúa condición lógica
             this.dom.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             const slideTitles = [
@@ -865,13 +865,13 @@ gestor.iniciar();`
             ];
 
             slideTitles.forEach((title, i) => {
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Declara e inicializa variable local
                 card.className = `modal-card ${i + 1 === AppState.currentSlide ? 'active' : ''}`;
                 card.innerHTML = `
                     <div class="modal-card-num">#${i + 1}</div>
                     <div class="modal-card-title">${title}</div>
                 `;
-                card.addEventListener('click', () => {
+                card.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.goToSlide(i + 1);
                     this.closeOverview();
                 });
@@ -883,15 +883,15 @@ gestor.iniciar();`
         }
 
         closeOverview() {
-            if (this.dom.overviewModal) {
+            if (this.dom.overviewModal) { // Evalúa condición lógica
                 this.dom.overviewModal.classList.remove('active');
             }
         }
 
         showToast(msg, icon = '✔') {
-            if (!this.dom.toastNotification) return;
-            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon;
-            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg;
+            if (!this.dom.toastNotification) return; // Evalúa condición lógica
+            if (this.dom.toastIcon) this.dom.toastIcon.textContent = icon; // Evalúa condición lógica
+            if (this.dom.toastMsg) this.dom.toastMsg.textContent = msg; // Evalúa condición lógica
 
             this.dom.toastNotification.classList.add('active');
             clearTimeout(this.toastTimer);
@@ -909,10 +909,10 @@ gestor.iniciar();`
             element.addEventListener('dragover', () => element.classList.add('dragover'));
             element.addEventListener('dragleave', () => element.classList.remove('dragover'));
 
-            element.addEventListener('drop', (e) => {
+            element.addEventListener('drop', (e) => { // Registra escuchador de evento en el DOM
                 element.classList.remove('dragover');
-                const file = e.dataTransfer.files[0];
-                if (file && onFileDropCallback) {
+                const file = e.dataTransfer.files[0]; // Declara e inicializa variable local
+                if (file && onFileDropCallback) { // Evalúa condición lógica
                     onFileDropCallback(file, e.dataTransfer.files);
                 }
             });
@@ -924,28 +924,28 @@ gestor.iniciar();`
         initSlideText() {}
 
         handleLocalTextInput(e) {
-            const file = e.target.files[0];
-            if (file) this.readTextFile(file);
+            const file = e.target.files[0]; // Declara e inicializa variable local
+            if (file) this.readTextFile(file); // Evalúa condición lógica
         }
 
         readTextFile(file) {
             sound.click();
-            if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = `Leyendo "${file.name}"...`;
+            if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = `Leyendo "${file.name}"...`; // Evalúa condición lógica
 
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                if (this.dom.textViewerResult) {
+            const reader = new FileReader(); // Declara e inicializa variable local
+            reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
+                if (this.dom.textViewerResult) { // Evalúa condición lógica
                     this.dom.textViewerResult.textContent = reader.result; // Actualiza contenido en el DOM
                 }
-                if (this.dom.textReadStatus) {
+                if (this.dom.textReadStatus) { // Evalúa condición lógica
                     this.dom.textReadStatus.textContent = `✅ "${file.name}" (${(file.size / 1024).toFixed(1)} KB) cargado`; // Actualiza contenido en el DOM
                 }
                 sound.fileLoaded();
                 this.showToast(`Archivo "${file.name}" leído como texto`);
             });
 
-            reader.addEventListener('error', () => {
-                if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = '❌ Error al leer archivo';
+            reader.addEventListener('error', () => { // Registra escuchador de evento en el DOM
+                if (this.dom.textReadStatus) this.dom.textReadStatus.textContent = '❌ Error al leer archivo'; // Evalúa condición lógica
                 sound.error();
             });
 
@@ -954,10 +954,10 @@ gestor.iniciar();`
 
         loadDemoText() {
             sound.click();
-            if (this.dom.textViewerResult) {
+            if (this.dom.textViewerResult) { // Evalúa condición lógica
                 this.dom.textViewerResult.textContent = AppState.demos.text; // Actualiza contenido en el DOM
             }
-            if (this.dom.textReadStatus) {
+            if (this.dom.textReadStatus) { // Evalúa condición lógica
                 this.dom.textReadStatus.textContent = '✅ Documento demo (config.json) cargado'; // Actualiza contenido en el DOM
             }
             sound.fileLoaded();
@@ -970,28 +970,28 @@ gestor.iniciar();`
         initSlideImage() {}
 
         handleLocalImageInput(e) {
-            const file = e.target.files[0];
-            if (file) this.readImageFile(file);
+            const file = e.target.files[0]; // Declara e inicializa variable local
+            if (file) this.readImageFile(file); // Evalúa condición lógica
         }
 
         readImageFile(file) {
-            if (!file.type.startsWith('image/')) {
+            if (!file.type.startsWith('image/')) { // Evalúa condición lógica
                 this.showToast('El archivo debe ser una imagen válida', '⚠️');
                 sound.error();
-                return;
+                return; // Retorna el resultado de la función
             }
 
             sound.click();
-            if (this.dom.imageReadStatus) this.dom.imageReadStatus.textContent = `Procesando "${file.name}"...`;
+            if (this.dom.imageReadStatus) this.dom.imageReadStatus.textContent = `Procesando "${file.name}"...`; // Evalúa condición lógica
 
-            const reader = new FileReader();
-            reader.addEventListener('load', () => {
-                if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none';
-                if (this.dom.imagePreviewElement) {
+            const reader = new FileReader(); // Declara e inicializa variable local
+            reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
+                if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none'; // Evalúa condición lógica
+                if (this.dom.imagePreviewElement) { // Evalúa condición lógica
                     this.dom.imagePreviewElement.style.display = 'block';
                     this.dom.imagePreviewElement.src = reader.result;
                 }
-                if (this.dom.imageReadStatus) {
+                if (this.dom.imageReadStatus) { // Evalúa condición lógica
                     this.dom.imageReadStatus.textContent = `✅ "${file.name}" (${(file.size / 1024).toFixed(1)} KB)`; // Actualiza contenido en el DOM
                 }
                 sound.fileLoaded();
@@ -1003,12 +1003,12 @@ gestor.iniciar();`
 
         loadDemoImage() {
             sound.click();
-            if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none';
-            if (this.dom.imagePreviewElement) {
+            if (this.dom.imagePreviewPlaceholder) this.dom.imagePreviewPlaceholder.style.display = 'none'; // Evalúa condición lógica
+            if (this.dom.imagePreviewElement) { // Evalúa condición lógica
                 this.dom.imagePreviewElement.style.display = 'block';
                 this.dom.imagePreviewElement.src = AppState.demos.imageSvg;
             }
-            if (this.dom.imageReadStatus) {
+            if (this.dom.imageReadStatus) { // Evalúa condición lógica
                 this.dom.imageReadStatus.textContent = '✅ Imagen vectorial Demo (DataURL) cargada'; // Actualiza contenido en el DOM
             }
             sound.fileLoaded();
@@ -1021,50 +1021,50 @@ gestor.iniciar();`
         initSlideGallery() {}
 
         handleMultipleFilesInput(fileList) {
-            const files = Array.from(fileList || []);
-            if (!files.length) return;
+            const files = Array.from(fileList || []); // Declara e inicializa variable local
+            if (!files.length) return; // Evalúa condición lógica
 
             sound.click();
-            if (this.dom.multiFilesListContainer) {
+            if (this.dom.multiFilesListContainer) { // Evalúa condición lógica
                 this.dom.multiFilesListContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
 
-            let totalBytes = 0;
-            let loadedCount = 0;
+            let totalBytes = 0; // Declara e inicializa variable local
+            let loadedCount = 0; // Declara e inicializa variable local
 
             files.forEach(file => {
                 totalBytes += file.size;
 
                 // Detección inteligente de tipo para seleccionar el método FileReader óptimo
-                const isImage = file.type.startsWith('image/');
+                const isImage = file.type.startsWith('image/'); // Declara e inicializa variable local
                 const isText = file.type.startsWith('text/') ||
                                file.type.includes('json') ||
                                file.type.includes('csv') ||
                                file.type.includes('xml') ||
                                /\.(txt|json|csv|md|js|ts|html|css|py|sql)$/i.test(file.name);
 
-                let method = 'readAsArrayBuffer';
-                let methodClass = 'badge-method-buffer';
-                let icon = '📦';
+                let method = 'readAsArrayBuffer'; // Declara e inicializa variable local
+                let methodClass = 'badge-method-buffer'; // Declara e inicializa variable local
+                let icon = '📦'; // Declara e inicializa variable local
 
-                if (isImage) {
+                if (isImage) { // Evalúa condición lógica
                     method = 'readAsDataURL';
                     methodClass = 'badge-method-dataurl';
                     icon = '🖼️';
                 } else if (isText) {
                     method = 'readAsText';
                     methodClass = 'badge-method-text';
-                    if (file.name.endsWith('.json')) icon = '📊';
+                    if (file.name.endsWith('.json')) icon = '📊'; // Evalúa condición lógica
                     else if (file.name.endsWith('.csv')) icon = '📈'; // Evalúa condición alternativa
                     else icon = '📄'; // Rama alternativa
                 }
 
                 // REGLA CLAVE: Instanciamos un FileReader único e independiente por cada archivo
-                const reader = new FileReader();
+                const reader = new FileReader(); // Declara e inicializa variable local
 
-                reader.addEventListener('load', () => {
+                reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
                     loadedCount++;
-                    const sizeStr = (file.size / 1024).toFixed(1) + ' KB';
+                    const sizeStr = (file.size / 1024).toFixed(1) + ' KB'; // Declara e inicializa variable local
                     this.renderMultiFileCard({
                         name: file.name,
                         sizeStr: sizeStr,
@@ -1075,18 +1075,18 @@ gestor.iniciar();`
                         content: reader.result
                     });
 
-                    if (loadedCount === files.length) {
+                    if (loadedCount === files.length) { // Evalúa condición lógica
                         sound.fileLoaded();
                         this.showToast(`¡Lote de ${files.length} archivos procesado con éxito!`);
                     }
                 });
 
-                reader.addEventListener('error', () => {
+                reader.addEventListener('error', () => { // Registra escuchador de evento en el DOM
                     console.error(`Error leyendo ${file.name}`); // Imprime salida en consola
                 });
 
                 // Ejecutamos el método según corresponda
-                if (isImage) {
+                if (isImage) { // Evalúa condición lógica
                     reader.readAsDataURL(file);
                 } else if (isText) {
                     reader.readAsText(file, 'UTF-8');
@@ -1100,15 +1100,15 @@ gestor.iniciar();`
 
         loadDemoMultiFiles() {
             sound.click();
-            if (this.dom.multiFilesListContainer) {
+            if (this.dom.multiFilesListContainer) { // Evalúa condición lógica
                 this.dom.multiFilesListContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
 
-            let totalBytes = 0;
+            let totalBytes = 0; // Declara e inicializa variable local
             AppState.demos.multiFiles.forEach(item => {
                 totalBytes += item.size;
-                const sizeStr = (item.size / 1024).toFixed(1) + ' KB';
-                const methodClass = item.method === 'readAsDataURL' ? 'badge-method-dataurl' : 'badge-method-text';
+                const sizeStr = (item.size / 1024).toFixed(1) + ' KB'; // Declara e inicializa variable local
+                const methodClass = item.method === 'readAsDataURL' ? 'badge-method-dataurl' : 'badge-method-text'; // Declara e inicializa variable local
                 this.renderMultiFileCard({
                     name: item.name,
                     sizeStr: sizeStr,
@@ -1127,27 +1127,27 @@ gestor.iniciar();`
 
         clearMultiFiles() {
             sound.click();
-            if (this.dom.multiFilesListContainer) {
+            if (this.dom.multiFilesListContainer) { // Evalúa condición lógica
                 this.dom.multiFilesListContainer.innerHTML = `
                     <div style="text-align: center; color: var(--text-dim); padding: 1.2rem; font-size: 0.85rem;">
                         Pulsa <strong>"📁 Cargar Varios Archivos"</strong>, <strong>"⚡ Lote Demo Multiarchivo"</strong> o arrastra archivos arriba para procesarlos en paralelo...
                     </div>
                 `;
             }
-            if (this.dom.galleryGridContainer) {
+            if (this.dom.galleryGridContainer) { // Evalúa condición lógica
                 this.dom.galleryGridContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
-            if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.value = '';
-            if (this.dom.inputMultipleGallery) this.dom.inputMultipleGallery.value = '';
+            if (this.dom.inputMultipleFiles) this.dom.inputMultipleFiles.value = ''; // Evalúa condición lógica
+            if (this.dom.inputMultipleGallery) this.dom.inputMultipleGallery.value = ''; // Evalúa condición lógica
             this.updateMultiFilesStats(0, 0);
             this.closeMultiPreview();
             this.showToast('Lista de archivos limpiada');
         }
 
         renderMultiFileCard(info) {
-            if (!this.dom.multiFilesListContainer) return;
+            if (!this.dom.multiFilesListContainer) return; // Evalúa condición lógica
 
-            const card = document.createElement('div');
+            const card = document.createElement('div'); // Declara e inicializa variable local
             card.className = 'multifile-card-item';
             card.innerHTML = `
                 <div class="multifile-item-left">
@@ -1163,8 +1163,8 @@ gestor.iniciar();`
                 </div>
             `;
 
-            const btnInspect = card.querySelector('.btn-inspect-file');
-            btnInspect.addEventListener('click', (e) => {
+            const btnInspect = card.querySelector('.btn-inspect-file'); // Declara e inicializa variable local
+            btnInspect.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
                 e.stopPropagation();
                 this.previewMultiFile(info.name, info.type, info.content, info.method);
             });
@@ -1174,21 +1174,21 @@ gestor.iniciar();`
 
         previewMultiFile(name, type, content, method) {
             sound.click();
-            if (!this.dom.multiFilePreviewBox || !this.dom.multiFilePreviewBody) return;
+            if (!this.dom.multiFilePreviewBox || !this.dom.multiFilePreviewBody) return; // Evalúa condición lógica
 
-            if (this.dom.multiFilePreviewTitle) {
+            if (this.dom.multiFilePreviewTitle) { // Evalúa condición lógica
                 this.dom.multiFilePreviewTitle.textContent = `👁️ Inspeccionando: ${name} (${method})`; // Actualiza contenido en el DOM
             }
 
             this.dom.multiFilePreviewBody.innerHTML = ''; // Actualiza contenido en el DOM
 
-            if (method === 'readAsDataURL') {
-                const img = document.createElement('img');
+            if (method === 'readAsDataURL') { // Evalúa condición lógica
+                const img = document.createElement('img'); // Declara e inicializa variable local
                 img.src = content;
                 img.alt = name;
                 this.dom.multiFilePreviewBody.appendChild(img);
             } else if (method === 'readAsText') {
-                const pre = document.createElement('pre');
+                const pre = document.createElement('pre'); // Declara e inicializa variable local
                 pre.style.margin = '0';
                 pre.textContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2); // Actualiza contenido en el DOM
                 this.dom.multiFilePreviewBody.appendChild(pre);
@@ -1201,16 +1201,16 @@ gestor.iniciar();`
         }
 
         closeMultiPreview() {
-            if (this.dom.multiFilePreviewBox) {
+            if (this.dom.multiFilePreviewBox) { // Evalúa condición lógica
                 this.dom.multiFilePreviewBox.classList.remove('active');
             }
         }
 
         updateMultiFilesStats(count, totalBytes) {
-            if (this.dom.multiFilesCount) {
+            if (this.dom.multiFilesCount) { // Evalúa condición lógica
                 this.dom.multiFilesCount.textContent = count; // Actualiza contenido en el DOM
             }
-            if (this.dom.multiFilesTotalSize) {
+            if (this.dom.multiFilesTotalSize) { // Evalúa condición lógica
                 const formatted = totalBytes >= 1048576
                     ? (totalBytes / 1048576).toFixed(2) + ' MB'
                     : (totalBytes / 1024).toFixed(1) + ' KB';
@@ -1219,16 +1219,16 @@ gestor.iniciar();`
         }
 
         handleMultipleGalleryInput(e) {
-            const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/'));
-            if (!files.length) return;
+            const files = Array.from(e.target.files).filter(f => f.type.startsWith('image/')); // Declara e inicializa variable local
+            if (!files.length) return; // Evalúa condición lógica
 
             sound.click();
-            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = '';
-            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = `${files.length} imágenes`;
+            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = ''; // Evalúa condición lógica
+            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = `${files.length} imágenes`; // Evalúa condición lógica
 
             files.forEach(file => {
-                const reader = new FileReader();
-                reader.addEventListener('load', () => {
+                const reader = new FileReader(); // Declara e inicializa variable local
+                reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
                     this.renderGalleryCard(reader.result, file.name, (file.size / 1024).toFixed(1) + ' KB');
                 });
                 reader.readAsDataURL(file);
@@ -1240,8 +1240,8 @@ gestor.iniciar();`
 
         loadDemoGallery() {
             sound.click();
-            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = '';
-            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = '4 imágenes demo';
+            if (this.dom.galleryGridContainer) this.dom.galleryGridContainer.innerHTML = ''; // Evalúa condición lógica
+            if (this.dom.galleryCountStatus) this.dom.galleryCountStatus.textContent = '4 imágenes demo'; // Evalúa condición lógica
 
             AppState.demos.gallery.forEach(item => {
                 const svgCard = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150"><rect width="200" height="150" fill="%230f172a"/><circle cx="100" cy="75" r="40" fill="${encodeURIComponent(item.color)}"/><text x="100" y="85" text-anchor="middle" font-size="32">${item.icon}</text></svg>`;
@@ -1253,8 +1253,8 @@ gestor.iniciar();`
         }
 
         renderGalleryCard(dataUrl, name, sizeStr) {
-            if (!this.dom.galleryGridContainer) return;
-            const fig = document.createElement('figure');
+            if (!this.dom.galleryGridContainer) return; // Evalúa condición lógica
+            const fig = document.createElement('figure'); // Declara e inicializa variable local
             fig.className = 'tarjeta-miniatura';
             fig.innerHTML = `
                 <img src="${dataUrl}" alt="${name}">
@@ -1270,11 +1270,11 @@ gestor.iniciar();`
 
         handleMainDropFile(file) {
             sound.click();
-            const out = this.dom.dropZoneResultBox;
-            if (!out) return;
+            const out = this.dom.dropZoneResultBox; // Declara e inicializa variable local
+            if (!out) return; // Evalúa condición lógica
 
-            const isImg = file.type.startsWith('image/');
-            const reader = new FileReader();
+            const isImg = file.type.startsWith('image/'); // Declara e inicializa variable local
+            const reader = new FileReader(); // Declara e inicializa variable local
 
             out.innerHTML = `
                 <div style="font-family: var(--font-mono); font-size: 0.84rem; line-height: 1.6;">
@@ -1285,8 +1285,8 @@ gestor.iniciar();`
                 </div>
             `;
 
-            if (isImg) {
-                reader.addEventListener('load', () => {
+            if (isImg) { // Evalúa condición lógica
+                reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
                     out.innerHTML += `
                         <div style="margin-top: 0.75rem;">
                             <span class="badge badge-emerald">Previsualización de Imagen</span><br/>
@@ -1297,8 +1297,8 @@ gestor.iniciar();`
                 });
                 reader.readAsDataURL(file);
             } else {
-                reader.addEventListener('load', () => {
-                    const firstLines = reader.result.split('\n').slice(0, 4).join('\n');
+                reader.addEventListener('load', () => { // Registra escuchador de evento en el DOM
+                    const firstLines = reader.result.split('\n').slice(0, 4).join('\n'); // Declara e inicializa variable local
                     out.innerHTML += `
                         <div style="margin-top: 0.75rem;">
                             <span class="badge badge-purple">Primeras Líneas de Texto</span>
@@ -1317,14 +1317,14 @@ gestor.iniciar();`
         initSlideProgress() {}
 
         startProgressSimulation() {
-            const p = AppState.progressSim;
-            if (p.isRunning) return;
+            const p = AppState.progressSim; // Declara e inicializa variable local
+            if (p.isRunning) return; // Evalúa condición lógica
 
             sound.click();
             p.isRunning = true;
             p.loaded = 0;
 
-            if (this.dom.progressEventLogBox) {
+            if (this.dom.progressEventLogBox) { // Evalúa condición lógica
                 this.dom.progressEventLogBox.innerHTML = `
                     <div style="color: var(--cyan); font-family: var(--font-mono); font-size: 0.85rem;">
                         🔔 [Evento loadstart] La lectura de 8,192 KB ha comenzado...
@@ -1337,13 +1337,13 @@ gestor.iniciar();`
 
             p.timer = setInterval(() => {
                 p.loaded += stepBytes;
-                if (p.loaded >= p.total) {
+                if (p.loaded >= p.total) { // Evalúa condición lógica
                     p.loaded = p.total;
                     clearInterval(p.timer);
                     p.isRunning = false;
                     this.updateProgressUI(100, p.loaded, p.total);
 
-                    if (this.dom.progressEventLogBox) {
+                    if (this.dom.progressEventLogBox) { // Evalúa condición lógica
                         this.dom.progressEventLogBox.innerHTML += `
                             <div style="color: var(--emerald); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.35rem;">
                                 ✅ [Evento load] ¡Lectura completada al 100%!
@@ -1356,7 +1356,7 @@ gestor.iniciar();`
                     sound.fileLoaded();
                     this.showToast('Simulación de lectura completada con éxito');
                 } else {
-                    const pct = Math.round((p.loaded / p.total) * 100);
+                    const pct = Math.round((p.loaded / p.total) * 100); // Declara e inicializa variable local
                     this.updateProgressUI(pct, p.loaded, p.total);
                     sound.playTone(300 + pct * 5, 'sine', 0.03, 0.02);
                 }
@@ -1364,13 +1364,13 @@ gestor.iniciar();`
         }
 
         abortProgressSimulation() {
-            const p = AppState.progressSim;
-            if (!p.isRunning) return;
+            const p = AppState.progressSim; // Declara e inicializa variable local
+            if (!p.isRunning) return; // Evalúa condición lógica
 
             clearInterval(p.timer);
             p.isRunning = false;
 
-            if (this.dom.progressEventLogBox) {
+            if (this.dom.progressEventLogBox) { // Evalúa condición lógica
                 this.dom.progressEventLogBox.innerHTML += `
                     <div style="color: var(--rose); font-family: var(--font-mono); font-size: 0.85rem; margin-top: 0.35rem;">
                         🛑 [Evento abort] Operación cancelada por el usuario con reader.abort().
@@ -1386,9 +1386,9 @@ gestor.iniciar();`
         }
 
         updateProgressUI(pct, loaded, total) {
-            if (this.dom.fileProgressBarFill) this.dom.fileProgressBarFill.style.width = `${pct}%`;
-            if (this.dom.progressPercentLabel) this.dom.progressPercentLabel.textContent = `${pct}%`;
-            if (this.dom.progressBytesLoaded) {
+            if (this.dom.fileProgressBarFill) this.dom.fileProgressBarFill.style.width = `${pct}%`; // Evalúa condición lógica
+            if (this.dom.progressPercentLabel) this.dom.progressPercentLabel.textContent = `${pct}%`; // Evalúa condición lógica
+            if (this.dom.progressBytesLoaded) { // Evalúa condición lógica
                 this.dom.progressBytesLoaded.textContent = `${(loaded / 1024).toFixed(0)} KB leídos`; // Actualiza contenido en el DOM
             }
         }
@@ -1401,62 +1401,62 @@ gestor.iniciar();`
         }
 
         renderAnalogies() {
-            const mode = AppState.activeAnalogy;
-            if (mode === 'traductor') {
-                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '🎙️';
-                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'readAsText()';
-                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'Traducción directa a lenguaje humano';
-                if (this.dom.analogyItemsLeft) {
+            const mode = AppState.activeAnalogy; // Declara e inicializa variable local
+            if (mode === 'traductor') { // Evalúa condición lógica
+                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '🎙️'; // Evalúa condición lógica
+                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'readAsText()'; // Evalúa condición lógica
+                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'Traducción directa a lenguaje humano'; // Evalúa condición lógica
+                if (this.dom.analogyItemsLeft) { // Evalúa condición lógica
                     this.dom.analogyItemsLeft.innerHTML = `
                         <div class="ws-item">El traductor lee una carta y te dicta las palabras en español</div>
                         <div class="ws-item">El resultado es una cadena de texto lista para ser leída y comprendida</div>
                     `;
                 }
-                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Ideal para archivos de configuración, notas y código';
+                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Ideal para archivos de configuración, notas y código'; // Evalúa condición lógica
 
-                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🖼️';
-                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'readAsDataURL()';
-                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'Telegrama en código Morse (Base64)';
-                if (this.dom.analogyItemsRight) {
+                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🖼️'; // Evalúa condición lógica
+                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'readAsDataURL()'; // Evalúa condición lógica
+                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'Telegrama en código Morse (Base64)'; // Evalúa condición lógica
+                if (this.dom.analogyItemsRight) { // Evalúa condición lógica
                     this.dom.analogyItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Codifica cada pixel en una sola línea continua de caracteres</div>
                         <div class="ws-item highlight-item">No está hecho para personas, sino para que el navegador lo pinte</div>
                     `;
                 }
-                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Ideal para atributos src en imágenes y miniaturas';
+                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Ideal para atributos src en imágenes y miniaturas'; // Evalúa condición lógica
 
-                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Comparativa';
-                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🎙️';
-                if (this.dom.analogyBannerText) {
+                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Comparativa'; // Evalúa condición lógica
+                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🎙️'; // Evalúa condición lógica
+                if (this.dom.analogyBannerText) { // Evalúa condición lógica
                     this.dom.analogyBannerText.innerHTML = '<strong>readAsText vs readAsDataURL:</strong> Usa <code>readAsText()</code> cuando necesites procesar texto, editar líneas o parsear JSON; usa <code>readAsDataURL()</code> para renderizar recursos visuales sin tocar el backend.'; // Actualiza contenido en el DOM
                 }
             } else {
                 // Báscula de Granos
-                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '⚖️';
-                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'Evento progress';
-                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'La báscula de pesaje en tiempo real';
-                if (this.dom.analogyItemsLeft) {
+                if (this.dom.analogyAvatarLeft) this.dom.analogyAvatarLeft.textContent = '⚖️'; // Evalúa condición lógica
+                if (this.dom.analogyTitleLeft) this.dom.analogyTitleLeft.textContent = 'Evento progress'; // Evalúa condición lógica
+                if (this.dom.analogySubLeft) this.dom.analogySubLeft.textContent = 'La báscula de pesaje en tiempo real'; // Evalúa condición lógica
+                if (this.dom.analogyItemsLeft) { // Evalúa condición lógica
                     this.dom.analogyItemsLeft.innerHTML = `
                         <div class="ws-item">Mide tonelada por tonelada mientras el grano cae al silo</div>
                         <div class="ws-item">Calcula con precisión milimétrica el porcentaje de avance</div>
                     `;
                 }
-                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Permite actualizar barras de carga para feedback fluido';
+                if (this.dom.analogyStatusLeft) this.dom.analogyStatusLeft.textContent = 'Permite actualizar barras de carga para feedback fluido'; // Evalúa condición lógica
 
-                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🏁';
-                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'Evento loadend';
-                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'El pitido final de cierre de compuerta';
-                if (this.dom.analogyItemsRight) {
+                if (this.dom.analogyAvatarRight) this.dom.analogyAvatarRight.textContent = '🏁'; // Evalúa condición lógica
+                if (this.dom.analogyTitleRight) this.dom.analogyTitleRight.textContent = 'Evento loadend'; // Evalúa condición lógica
+                if (this.dom.analogySubRight) this.dom.analogySubRight.textContent = 'El pitido final de cierre de compuerta'; // Evalúa condición lógica
+                if (this.dom.analogyItemsRight) { // Evalúa condición lógica
                     this.dom.analogyItemsRight.innerHTML = `
                         <div class="ws-item highlight-item">Se dispara siempre: con éxito, error o cancelación</div>
                         <div class="ws-item highlight-item">Garantiza que la tolva quede desocupada para el siguiente ciclo</div>
                     `;
                 }
-                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Lugar obligatorio para ocultar spinners y habilitar botones';
+                if (this.dom.analogyStatusRight) this.dom.analogyStatusRight.textContent = 'Lugar obligatorio para ocultar spinners y habilitar botones'; // Evalúa condición lógica
 
-                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Ciclo de Vida';
-                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🚚';
-                if (this.dom.analogyBannerText) {
+                if (this.dom.analogyArrowLabel) this.dom.analogyArrowLabel.textContent = 'Ciclo de Vida'; // Evalúa condición lógica
+                if (this.dom.analogyBannerIcon) this.dom.analogyBannerIcon.textContent = '🚚'; // Evalúa condición lógica
+                if (this.dom.analogyBannerText) { // Evalúa condición lógica
                     this.dom.analogyBannerText.innerHTML = '<strong>progress & loadend:</strong> Mantén informados a tus usuarios en archivos pesados calculando <code>(loaded / total) * 100</code> y aprovecha <code>loadend</code> para cerrar modales pase lo que pase.'; // Actualiza contenido en el DOM
                 }
             }
@@ -1466,8 +1466,8 @@ gestor.iniciar();`
            SLIDE 9: PLAYGROUND INTERACTIVO
            -------------------------------------------------------------------------- */
         loadCodePreset(presetKey) {
-            const code = CodePresets[presetKey];
-            if (code && this.dom.liveCodeEditor) {
+            const code = CodePresets[presetKey]; // Declara e inicializa variable local
+            if (code && this.dom.liveCodeEditor) { // Evalúa condición lógica
                 this.dom.liveCodeEditor.value = code;
                 this.clearConsole();
                 this.printToConsole(`/* Preset cargado: [${presetKey}]. Haz clic en "Ejecutar Código" (Ctrl + Enter) */`, 'info-line');
@@ -1475,20 +1475,20 @@ gestor.iniciar();`
         }
 
         clearConsole() {
-            if (this.dom.consoleLogsContainer) {
+            if (this.dom.consoleLogsContainer) { // Evalúa condición lógica
                 this.dom.consoleLogsContainer.innerHTML = ''; // Actualiza contenido en el DOM
             }
         }
 
         printToConsole(msg, lineClass = 'log-line') {
-            if (!this.dom.consoleLogsContainer) return;
-            const line = document.createElement('div');
+            if (!this.dom.consoleLogsContainer) return; // Evalúa condición lógica
+            const line = document.createElement('div'); // Declara e inicializa variable local
             line.className = `log-line ${lineClass}`;
 
-            const time = new Date().toLocaleTimeString();
-            const timeSpan = `<span class="log-time">[${time}]</span> `;
+            const time = new Date().toLocaleTimeString(); // Declara e inicializa variable local
+            const timeSpan = `<span class="log-time">[${time}]</span> `; // Declara e inicializa variable local
 
-            if (typeof msg === 'object') {
+            if (typeof msg === 'object') { // Evalúa condición lógica
                 try { // Inicia bloque protegido contra errores
                     line.innerHTML = timeSpan + `<pre style="margin:0; display:inline;">${JSON.stringify(msg, null, 2)}</pre>`; // Actualiza contenido en el DOM
                 } catch (e) {
@@ -1503,29 +1503,29 @@ gestor.iniciar();`
         }
 
         runPlaygroundCode() {
-            if (!this.dom.liveCodeEditor) return;
-            const code = this.dom.liveCodeEditor.value;
+            if (!this.dom.liveCodeEditor) return; // Evalúa condición lógica
+            const code = this.dom.liveCodeEditor.value; // Declara e inicializa variable local
 
             this.clearConsole();
             sound.click();
 
-            const oldLog = console.log;
-            const oldInfo = console.info;
-            const oldWarn = console.warn;
-            const oldError = console.error;
+            const oldLog = console.log; // Declara e inicializa variable local
+            const oldInfo = console.info; // Declara e inicializa variable local
+            const oldWarn = console.warn; // Declara e inicializa variable local
+            const oldError = console.error; // Declara e inicializa variable local
 
             const formatArgs = (args) => {
                 return args.map(arg => {
-                    if (arg === null) return 'null';
-                    if (arg === undefined) return 'undefined';
-                    if (typeof arg === 'object') {
+                    if (arg === null) return 'null'; // Evalúa condición lógica
+                    if (arg === undefined) return 'undefined'; // Evalúa condición lógica
+                    if (typeof arg === 'object') { // Evalúa condición lógica
                         try { // Inicia bloque protegido contra errores
-                            return JSON.stringify(arg);
+                            return JSON.stringify(arg); // Retorna el resultado de la función
                         } catch (e) {
-                            return String(arg);
+                            return String(arg); // Retorna el resultado de la función
                         }
                     }
-                    return String(arg);
+                    return String(arg); // Retorna el resultado de la función
                 }).join(' ');
             };
 
@@ -1547,7 +1547,7 @@ gestor.iniciar();`
             };
 
             try { // Inicia bloque protegido contra errores
-                const runFn = new Function(code);
+                const runFn = new Function(code); // Declara e inicializa variable local
                 runFn();
                 this.printToConsole('--- Ejecución asíncrona despachada sin errores sintácticos ---', 'info-line');
                 sound.fileLoaded();
@@ -1600,8 +1600,9 @@ gestor.iniciar();`
     }
 
     // Inicialización al cargar el DOM
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => { // Registra escuchador de evento en el DOM
         window.appController = new AppController();
     });
 
 })();
+

@@ -28,7 +28,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
@@ -155,7 +155,78 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz de Listas HTML">
+        
+        <!-- Diapositiva 6: <dl>, <dt> y <dd> para glosarios y fichas -->
+        <section class="slide" data-slide="6" data-title="<dl>, <dt> y <dd> para glosarios y fichas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · LISTAS DE DEFINICIÓN</span>
+                <h2 class="slide-title"><dl>, <dt> y <dd> para glosarios y fichas</h2>
+            </div>
+            <div class="glass-card">
+                <p>Más allá de <code>&lt;ul&gt;</code> y <code>&lt;ol&gt;</code>, HTML ofrece listas de descripción ideales para glosarios, metadatos o preguntas frecuentes.</p><pre class="code-box">&lt;dl&gt;
+  &lt;dt&gt;API&lt;/dt&gt;
+  &lt;dd&gt;Interfaz de programación de aplicaciones.&lt;/dd&gt;
+&lt;/dl&gt;</pre>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: Cómo anidar sublistas sin romper el HTML -->
+        <section class="slide" data-slide="7" data-title="Cómo anidar sublistas sin romper el HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ANIDACIÓN CORRECTA</span>
+                <h2 class="slide-title">Cómo anidar sublistas sin romper el HTML</h2>
+            </div>
+            <div class="glass-card">
+                <p>Una sublista <code>&lt;ul&gt;</code> o <code>&lt;ol&gt;</code> siempre debe colocarse <strong>dentro</strong> de un <code>&lt;li&gt;</code>, nunca como hijo directo de otra lista.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: start, reversed y type en listas ordenadas -->
+        <section class="slide" data-slide="8" data-title="start, reversed y type en listas ordenadas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ATRIBUTOS DE <ol></span>
+                <h2 class="slide-title">start, reversed y type en listas ordenadas</h2>
+            </div>
+            <div class="glass-card">
+                <p>Puedes iniciar una lista en otro número con <code>start="5"</code>, invertir el conteo con <code>reversed</code> (ideal para rankings Top 10) o cambiar el marcador con <code>type="A"</code>.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Por qué los menús usan <ul> dentro de <nav> -->
+        <section class="slide" data-slide="9" data-title="Por qué los menús usan <ul> dentro de <nav>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · NAVEGACIÓN Y ACCESIBILIDAD</span>
+                <h2 class="slide-title">Por qué los menús usan <ul> dentro de <nav></h2>
+            </div>
+            <div class="glass-card">
+                <p>Agrupar enlaces de navegación en <code>&lt;nav&gt;&lt;ul&gt;&lt;li&gt;...</code> permite a los lectores de pantalla anunciar cuántos elementos tiene el menú.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Listas en HTML -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Listas en HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Listas en HTML</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Listas en HTML</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Listas en HTML -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Listas en HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Listas en HTML</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz de Listas HTML">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Listas HTML</h2>
@@ -191,7 +262,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Listas">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Listas">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Listas</h2>
@@ -239,7 +310,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Siguientes Pasos">
+        <section class="slide" data-slide="14" data-title="Siguientes Pasos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
                 <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>

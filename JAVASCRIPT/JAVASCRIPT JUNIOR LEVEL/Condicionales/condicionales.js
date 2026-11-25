@@ -4,10 +4,10 @@
 
 "use strict"; // Activa el modo estricto de JavaScript
 
-const liveConsole = document.getElementById("live-console");
+const liveConsole = document.getElementById("live-console"); // Declara e inicializa variable local
 
-function registrar(mensaje, tipo = "ok") {
-    const linea = document.createElement("div");
+function registrar(mensaje, tipo = "ok") { // Define función reutilizable
+    const linea = document.createElement("div"); // Declara e inicializa variable local
     linea.className = `log-line ${tipo}`;
     linea.textContent = `> ${mensaje}`; // Actualiza contenido en el DOM
     liveConsole.append(linea);
@@ -16,30 +16,30 @@ function registrar(mensaje, tipo = "ok") {
 }
 
 // 1. if / else if / else + Ternario
-document.getElementById("btn-eval-hora").addEventListener("click", () => {
-    const hora = Number(document.getElementById("input-hora").value);
-    const out = document.getElementById("out-hora");
+document.getElementById("btn-eval-hora").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const hora = Number(document.getElementById("input-hora").value); // Declara e inicializa variable local
+    const out = document.getElementById("out-hora"); // Declara e inicializa variable local
 
-    if (Number.isNaN(hora) || hora < 0 || hora > 23) {
+    if (Number.isNaN(hora) || hora < 0 || hora > 23) { // Evalúa condición lógica
         out.textContent = "❌ Ingresa una hora válida entre 0 y 23."; // Actualiza contenido en el DOM
         registrar("Hora fuera de rango (0-23).", "err");
-        return;
+        return; // Retorna el resultado de la función
     }
 
-    let saludo = "";
-    if (hora < 12) saludo = "Buenos días ☀️";
+    let saludo = ""; // Declara e inicializa variable local
+    if (hora < 12) saludo = "Buenos días ☀️"; // Evalúa condición lógica
     else if (hora <= 18) saludo = "Buenas tardes 🌤️"; // Evalúa condición alternativa
     else saludo = "Buenas noches 🌙"; // Rama alternativa
 
-    const jornada = hora >= 6 && hora < 19 ? "Horario diurno" : "Horario nocturno";
+    const jornada = hora >= 6 && hora < 19 ? "Horario diurno" : "Horario nocturno"; // Declara e inicializa variable local
     out.textContent = `Hora: ${hora}:00\nSaludo (if/else): ${saludo}\nTernario: ${jornada}`; // Actualiza contenido en el DOM
     registrar(`Hora ${hora} -> ${saludo} (${jornada})`);
 });
 
 // 2. Switch vs Diccionario
-document.getElementById("btn-eval-rol").addEventListener("click", () => {
-    const rol = document.getElementById("select-rol").value;
-    let permisoSwitch = "";
+document.getElementById("btn-eval-rol").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const rol = document.getElementById("select-rol").value; // Declara e inicializa variable local
+    let permisoSwitch = ""; // Declara e inicializa variable local
 
     switch (rol) { // Evalúa múltiples casos
         case "admin":
@@ -62,7 +62,7 @@ document.getElementById("btn-eval-rol").addEventListener("click", () => {
         moderador: "Edición y moderación de contenido",
         invitado: "Solo lectura"
     };
-    const permisoMapa = mapa[rol] ?? "Sin permisos asignados";
+    const permisoMapa = mapa[rol] ?? "Sin permisos asignados"; // Declara e inicializa variable local
 
     document.getElementById("out-rol").textContent =
         `Rol: "${rol}"\nResultado switch: ${permisoSwitch}\nResultado diccionario: ${permisoMapa}`;
@@ -80,9 +80,9 @@ const muestrasTruthy = {
     nan: { val: NaN, label: "NaN" }
 };
 
-document.getElementById("btn-eval-truthy").addEventListener("click", () => {
-    const item = muestrasTruthy[document.getElementById("select-truthy").value];
-    const esTruthy = Boolean(item.val);
+document.getElementById("btn-eval-truthy").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const item = muestrasTruthy[document.getElementById("select-truthy").value]; // Declara e inicializa variable local
+    const esTruthy = Boolean(item.val); // Declara e inicializa variable local
 
     document.getElementById("out-truthy").textContent =
         `Valor: ${item.label}\nBoolean(valor): ${esTruthy}\nClasificación: ${esTruthy ? "✅ TRUTHY (entra al if)" : "❌ FALSY (entra al else)"}`;
@@ -90,24 +90,25 @@ document.getElementById("btn-eval-truthy").addEventListener("click", () => {
 });
 
 // 4. Cláusulas de guarda (Early Return)
-function verificarAcceso(edad, tieneEntrada) {
-    if (Number.isNaN(edad) || edad < 0) return { ok: false, msg: "❌ Edad inválida." };
-    if (edad < 18) return { ok: false, msg: "⛔ Denegado: debes ser mayor de 18 años." };
-    if (!tieneEntrada) return { ok: false, msg: "⛔ Denegado: necesitas una entrada válida." };
-    return { ok: true, msg: "✅ Acceso concedido. ¡Bienvenido al evento!" };
+function verificarAcceso(edad, tieneEntrada) { // Define función reutilizable
+    if (Number.isNaN(edad) || edad < 0) return { ok: false, msg: "❌ Edad inválida." }; // Evalúa condición lógica
+    if (edad < 18) return { ok: false, msg: "⛔ Denegado: debes ser mayor de 18 años." }; // Evalúa condición lógica
+    if (!tieneEntrada) return { ok: false, msg: "⛔ Denegado: necesitas una entrada válida." }; // Evalúa condición lógica
+    return { ok: true, msg: "✅ Acceso concedido. ¡Bienvenido al evento!" }; // Retorna el resultado de la función
 }
 
-document.getElementById("btn-eval-acceso").addEventListener("click", () => {
-    const edad = Number(document.getElementById("input-edad-acceso").value);
-    const tieneEntrada = document.getElementById("chk-entrada").checked;
-    const res = verificarAcceso(edad, tieneEntrada);
+document.getElementById("btn-eval-acceso").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const edad = Number(document.getElementById("input-edad-acceso").value); // Declara e inicializa variable local
+    const tieneEntrada = document.getElementById("chk-entrada").checked; // Declara e inicializa variable local
+    const res = verificarAcceso(edad, tieneEntrada); // Declara e inicializa variable local
 
     document.getElementById("out-acceso").textContent = res.msg; // Actualiza contenido en el DOM
     registrar(`Validar acceso (edad=${edad}, entrada=${tieneEntrada}) -> ${res.msg}`, res.ok ? "ok" : "warn");
 });
 
-document.getElementById("btn-limpiar-log").addEventListener("click", () => {
+document.getElementById("btn-limpiar-log").addEventListener("click", () => { // Registra escuchador de evento en el DOM
     liveConsole.replaceChildren();
 });
 
 registrar("Laboratorio de Condicionales listo.");
+

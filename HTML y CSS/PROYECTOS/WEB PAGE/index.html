@@ -1,202 +1,165 @@
 <!DOCTYPE html>
-<!-- CURSO_WEB_DOC_HTML v1
-     Archivo: HTML y CSS/PROYECTOS/WEB PAGE/index.html
-     Título: Portfolio
-     Propósito: estructura semántica y contenido; el navegador interpreta estas etiquetas para mostrar la página.
-     Relación: clases e IDs enlazan con archivos .css y .js de esta misma carpeta o rutas indicadas.
--->
-<!-- CURSO_WEB_HTML_STRUCT v1 -->
-
-
-<html lang="en">
+<html lang="es">
 <head>
-<!-- Cabecera (head): metadatos, título y enlaces a CSS, JS o fuentes -->
-
     <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="fonts.css">
+    <meta charset="UTF-8" />
     <!-- Ajuste responsivo al ancho real del dispositivo -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="../ejercicios-hud.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Editorial — Web Page</title>
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../ejercicios-hud.css" />
     <script src="../ejercicios-hud.js" defer></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2300f0ff'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%8C%90%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2338bdf8'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%96%A5%EF%B8%8F%3C%2Ftext%3E%3C%2Fsvg%3E" />
 </head>
-<body data-hud-title="Web Page Completa" data-hud-desc="Maquetación completa de sitio web combinando Flexbox, CSS Grid, secciones semánticas y diseño responsivo." data-hud-back="../index.html" data-hud-portal="../../index.html">
-    <!-- Aquí comienza el contenido visible de la página. -->
-<!-- Cuerpo (body): contenido visible en la ventana del navegador -->
+<body data-hud-title="Web Page" data-hud-desc="Sitio web completo de estilo editorial limpio estructurado con CSS Grid, Flexbox, diseño responsivo y jerarquía tipográfica." data-hud-back="../index.html" data-hud-portal="../../index.html">
+    <!-- Cabecera fija con navegación adaptativa sin JavaScript -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="#profile">
+                <img class="brand__logo" src="img/logo.png" alt="Logo del sitio" />
+                <span class="brand__name">Fredy Studio</span>
+            </a>
 
-    <!-- Encabezado de página o sección con título e invitación. -->
-    <header class="header">
-<!-- Cabecera de página o bloque (header): logo, título o accesos -->
+            <input type="checkbox" class="nav-toggle" id="open-menu" />
+            <label for="open-menu" class="nav-btn" aria-label="Abrir menú de navegación">☰</label>
 
-        <input type="checkbox" class="header__checkbox" id="open-menu">
-        <label for="open-menu" class="header__open-nav-button" role="button">=</label>
-    <!-- Contenedor con clase(s) header__logo-container para estilo o disposición. -->
-        <div class="header__logo-container">
-            <img class="header__logo" src="img/logo.png" alt="">
+            <nav class="site-nav" aria-label="Menú principal">
+                <ul class="nav-list">
+                    <li><a href="#profile">Sobre mí</a></li>
+                    <li><a href="#skills">Competencias</a></li>
+                    <li><a href="#portfolio">Portafolio</a></li>
+                    <li><a href="#contact" class="nav-cta">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
-    <!-- Elemento de navegación con enlaces a otras secciones. -->
-        <nav class="header__nav">
-<!-- Menú o enlaces de navegación (nav) -->
-
-    <!-- Lista de elementos relacionados. -->
-        <ul class="header__nav-list">
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#profile">About</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#portfolio">Portfolio</a></li>
-        <!-- Elemento individual dentro de la lista. -->
-            <li class="header__nav-item"><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
     </header>
-    <!-- Bloque principal con el contenido más importante. -->
-    <main class="profile" id="profile">
-<!-- Contenido principal del documento (main) -->
 
-    <!-- Contenedor wrapper para agrupar elementos y centrar contenido. -->
-        <div class="profile__wrapper">
-    <!-- Contenedor con clase(s) profile__img-container para estilo o disposición. -->
-            <div class="profile__img-container">
-                <img src="img/profile.jpg" class="profile__img" alt="">
+    <!-- Bloque principal de presentación personal -->
+    <main class="container hero-section" id="profile">
+        <div class="hero-card">
+            <div class="hero-media">
+                <img src="img/profile.jpg" class="hero-photo" alt="Retrato profesional de Fredy" />
             </div>
-    <!-- Contenedor con clase(s) profile__data-container para estilo o disposición. -->
-            <div class="profile__data-container">
-    <!-- Contenedor con clase(s) profile__data para estilo o disposición. -->
-                <div class="profile__data">
-    <!-- Contenedor con clase(s) profile__description para estilo o disposición. -->
-                    <div class="profile__description">
-                        <h1>¿Quien es Fredy?</h1>
-    <!-- Párrafo de texto. -->
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quam, atque ipsum porro nam nulla excepturi, dolore ullam inventore corporis cupiditate, magni vero voluptatum exercitationem unde vitae molestiae consequatur cumque.</p>
-                    </div>
-    <!-- Contenedor con clase(s) profile__skills-container para estilo o disposición. -->
-                    <div class="profile__skills-container">
-                        <h2>SKILLS</h2>
-    <!-- Lista de elementos relacionados. -->
-                        <ul>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--80 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--80">80%</div>
-                                </div>
-                                <span class="profile__skill-name">HTML</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--60 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--60">60%</div>
-                                </div>
-                                <span class="profile__skill-name">CSS</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--70 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--70">70%</div>
-                                </div>
-                                <span class="profile__skill-name">JS</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--70 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--70">70%</div>
-                                </div>
-                                <span class="profile__skill-name">PYTHON</span>
-                            </li>
-        <!-- Elemento individual dentro de la lista. -->
-                            <li class="profile__skill">
-    <!-- Contenedor con clase(s) load-bar para estilo o disposición. -->
-                                <div class="load-bar">
-    <!-- Contenedor con clase(s) load-bar__bar bar--90 para estilo o disposición. -->
-                                    <div class="load-bar__bar bar--90">90%</div>
-                                </div>
-                                <span class="profile__skill-name">SQL</span>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="hero-body">
+                <span class="eyebrow">DESARROLLO FRONTEND &amp; ARQUITECTURA WEB</span>
+                <h1>¿Quién es Fredy?</h1>
+                <p class="hero-lead">
+                    Desarrollador web enfocado en construir interfaces claras, accesibles y rápidas usando HTML5 semántico, CSS Grid, Flexbox y JavaScript moderno.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-pill"><strong>+25</strong><span>Proyectos UI</span></div>
+                    <div class="stat-pill"><strong>100%</strong><span>Responsive</span></div>
+                    <div class="stat-pill"><strong>A11y</strong><span>Semántica Web</span></div>
                 </div>
             </div>
         </div>
     </main>
-    <!-- Sección temática que agrupa contenido relacionado. -->
-    <section class="portfolio" id="portfolio">
-<!-- Sección temática de contenido (section) -->
 
-        <h2 class="portfolio_title">PORTFOLIO SECTION</h2>
-    <!-- Contenedor con clase(s) portfolio__project-container para estilo o disposición. -->
-        <div class="portfolio__project-container">
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 1</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 2</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 3</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 4</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 5</h2>
-            </div>
-    <!-- Contenedor con clase(s) portfolio__project para estilo o disposición. -->
-            <div class="portfolio__project">
-                <h2 class="portfolio__project-name">PROJECT 6</h2>
-            </div>
+    <!-- Sección de competencias técnicas con barras limpias -->
+    <section class="container skills-section" id="skills">
+        <div class="section-header">
+            <span class="eyebrow">STACK TÉCNICO</span>
+            <h2>Habilidades Principales</h2>
+        </div>
+        <div class="skills-grid">
+            <article class="skill-item">
+                <div class="skill-head"><span>HTML5 Semántico</span><span>90%</span></div>
+                <div class="progress"><div class="progress-fill w-90"></div></div>
+            </article>
+            <article class="skill-item">
+                <div class="skill-head"><span>CSS3 · Grid &amp; Flexbox</span><span>85%</span></div>
+                <div class="progress"><div class="progress-fill w-85"></div></div>
+            </article>
+            <article class="skill-item">
+                <div class="skill-head"><span>JavaScript ES6+</span><span>80%</span></div>
+                <div class="progress"><div class="progress-fill w-80"></div></div>
+            </article>
+            <article class="skill-item">
+                <div class="skill-head"><span>Python &amp; Automatización</span><span>75%</span></div>
+                <div class="progress"><div class="progress-fill w-75"></div></div>
+            </article>
+            <article class="skill-item">
+                <div class="skill-head"><span>SQL &amp; Modelado</span><span>88%</span></div>
+                <div class="progress"><div class="progress-fill w-88"></div></div>
+            </article>
         </div>
     </section>
-    <!-- Sección temática que agrupa contenido relacionado. -->
-    <section class="form" id="contact">
-        <h2 class="form__title">CONTACT</h2>
-    <!-- Formulario para recoger datos del usuario. -->
-        <form class="form__form">
-<!-- Formulario de envío de datos (form) -->
 
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Nombre<input type="text" placeholder="Jhon"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Apellido<input type="text" placeholder="Doe"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>E-mail<input type="email" placeholder="yourmail@example.com"></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <label>Mensaje<textarea type="text" placeholder="Mensaje"></textarea></label>
-            </div>
-    <!-- Contenedor con clase(s) form__input-container para estilo o disposición. -->
-            <div class="form__input-container">
-                <input type="submit">
-            </div>
-        </form>
+    <!-- Galería de proyectos destacados en CSS Grid -->
+    <section class="container portfolio-section" id="portfolio">
+        <div class="section-header">
+            <span class="eyebrow">TRABAJOS SELECCIONADOS</span>
+            <h2>Portafolio de Proyectos</h2>
+        </div>
+        <div class="portfolio-grid">
+            <article class="work-card">
+                <span class="work-tag">Landing Page</span>
+                <h3>Sitio Corporativo SaaS</h3>
+                <p>Maquetación modular con CSS Grid, tipografía escalable y secciones de conversión limpias.</p>
+            </article>
+            <article class="work-card">
+                <span class="work-tag">Dashboard</span>
+                <h3>Panel Analítico</h3>
+                <p>Distribución de tarjetas métricas y tablas responsivas sin desbordamientos horizontales.</p>
+            </article>
+            <article class="work-card">
+                <span class="work-tag">E-Commerce</span>
+                <h3>Catálogo Editorial</h3>
+                <p>Grilla adaptable con <code>auto-fit</code> y fichas de producto centradas en legibilidad.</p>
+            </article>
+            <article class="work-card">
+                <span class="work-tag">Sistema UI</span>
+                <h3>Biblioteca de Componentes</h3>
+                <p>Botones, tarjetas, modales y formularios estandarizados mediante metodología BEM.</p>
+            </article>
+            <article class="work-card">
+                <span class="work-tag">Documentación</span>
+                <h3>Portal de Guías Técnicas</h3>
+                <p>Lectura cómoda en escritorio y móvil con navegación lateral clara y contraste AA/AAA.</p>
+            </article>
+            <article class="work-card">
+                <span class="work-tag">Portfolio</span>
+                <h3>Web Personal Minimalista</h3>
+                <p>Estructura clásica y elegante centrada en contenido, velocidad de carga y claridad visual.</p>
+            </article>
+        </div>
     </section>
-    <!-- Pie de página con créditos o enlaces secundarios. -->
-    <footer>
-<!-- Pie de página o de sección (footer) -->
 
-        <strong>Fredy Martinez</strong> - Copyright
+    <!-- Sección de contacto -->
+    <section class="container contact-section" id="contact">
+        <div class="contact-card">
+            <div class="section-header">
+                <span class="eyebrow">CONTACTO</span>
+                <h2>Trabajemos Juntos</h2>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.form-status').textContent = '✅ Mensaje recibido. ¡Gracias por escribir!';">
+                <div class="form-group">
+                    <label for="wp-name">Nombre</label>
+                    <input id="wp-name" type="text" placeholder="Ej. Laura Gómez" required />
+                </div>
+                <div class="form-group">
+                    <label for="wp-lastname">Apellido</label>
+                    <input id="wp-lastname" type="text" placeholder="Ej. Pérez" required />
+                </div>
+                <div class="form-group form-group--full">
+                    <label for="wp-email">Correo electrónico</label>
+                    <input id="wp-email" type="email" placeholder="tu@correo.com" required />
+                </div>
+                <div class="form-group form-group--full">
+                    <label for="wp-msg">Mensaje</label>
+                    <textarea id="wp-msg" rows="4" placeholder="Describe brevemente tu proyecto..." required></textarea>
+                </div>
+                <div class="form-group form-group--full">
+                    <button type="submit" class="submit-btn">Enviar Consulta</button>
+                    <p class="form-status" aria-live="polite"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <strong>Fredy Martínez</strong> · Sitio Web Editorial HTML5 &amp; CSS3
     </footer>
-
 </body>
-<!-- Cierre del documento HTML -->
 </html>

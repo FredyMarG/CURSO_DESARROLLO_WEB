@@ -20,7 +20,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · SELECTORES</span><div class="brand-title"><span>🎯</span><span>Selectores Avanzados</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 14</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -81,7 +81,86 @@
                 <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
             </div>
         </section>
-        <section class="slide" data-slide="5" data-title="Quiz Selectores">
+        
+        <!-- Diapositiva 5: Cómo decide CSS qué regla gana -->
+        <section class="slide" data-slide="5" data-title="Cómo decide CSS qué regla gana">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ESPECIFICIDAD Y CASCADA</span>
+                <h2 class="slide-title">Cómo decide CSS qué regla gana</h2>
+            </div>
+            <div class="glass-card">
+                <p>Al aplicar <strong>Selectores Avanzados</strong>, recuerda el orden de prioridad: estilos en línea &gt; ID (<code>#id</code>) &gt; clase/atributo/pseudoclase (<code>.clase</code>) &gt; etiqueta (<code>div</code>). Mantén la especificidad baja usando clases reutilizables.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: Depurando estilos en vivo con el panel Computed -->
+        <section class="slide" data-slide="6" data-title="Depurando estilos en vivo con el panel Computed">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · INSPECCIÓN EN DEVTOOLS</span>
+                <h2 class="slide-title">Depurando estilos en vivo con el panel Computed</h2>
+            </div>
+            <div class="glass-card">
+                <p>Si una propiedad de <strong>Selectores Avanzados</strong> no surte efecto, abre DevTools (<code>F12</code>) → pestaña <em>Styles</em> y revisa si aparece tachada o con un ícono de advertencia por valor inválido o conflicto de display.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: Uso progresivo y @supports en navegadores -->
+        <section class="slide" data-slide="7" data-title="Uso progresivo y @supports en navegadores">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · SOPORTE Y COMPATIBILIDAD</span>
+                <h2 class="slide-title">Uso progresivo y @supports en navegadores</h2>
+            </div>
+            <div class="glass-card">
+                <p>Antes de usar propiedades modernas en producción, verifica su soporte en <em>Can I Use</em> o envuelve mejoras opcionales dentro de <code>@supports (...)</code> para ofrecer un fallback sólido.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: Variables CSS y tokens de diseño reutilizables -->
+        <section class="slide" data-slide="8" data-title="Variables CSS y tokens de diseño reutilizables">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ARQUITECTURA MANTENIBLE</span>
+                <h2 class="slide-title">Variables CSS y tokens de diseño reutilizables</h2>
+            </div>
+            <div class="glass-card">
+                <p>Combina <strong>Selectores Avanzados</strong> con variables CSS (<code>var(--espacio-md)</code>) para mantener consistencia visual entre componentes y facilitar temas claro/oscuro.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Contraste, foco visible y zoom al 200% -->
+        <section class="slide" data-slide="9" data-title="Contraste, foco visible y zoom al 200%">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ACCESIBILIDAD VISUAL</span>
+                <h2 class="slide-title">Contraste, foco visible y zoom al 200%</h2>
+            </div>
+            <div class="glass-card">
+                <p>Asegúrate de que tus estilos no recorten texto al ampliar el zoom del navegador al 200% y nunca elimines <code>outline</code> sin ofrecer un indicador de <code>:focus-visible</code> claro.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Selectores Avanzados -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Selectores Avanzados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Selectores Avanzados</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Selectores Avanzados</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Selectores Avanzados -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Selectores Avanzados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Selectores Avanzados</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz Selectores">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -97,7 +176,7 @@
                 </div>
             </div>
         </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Selectores">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio Selectores">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Combinadores y Atributos en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
@@ -124,7 +203,7 @@
                 </div>
             </div>
         </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+        <section class="slide" data-slide="14" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Avanzado</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>

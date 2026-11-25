@@ -101,8 +101,8 @@
         const JUNIOR_MODULES = ['Variables', 'Operadores', 'Concatenacion', 'Condicionales', 'Arrays', 'Bucles', 'For', 'Funciones', 'POO', 'Cadenas(Metodos)', 'Math', 'Console.log', 'Dom']; // Orden progresivo Junior
         const jIdx = JUNIOR_MODULES.indexOf(topicFolder); // Busca índice del módulo actual
         if (jIdx !== -1) { // Si coincide con un módulo de Junior Level
-            const prevJ = jIdx > 0 ? JUNIOR_MODULES[jIdx - 1] : null; // Módulo anterior si existe
-            const nextJ = jIdx < JUNIOR_MODULES.length - 1 ? JUNIOR_MODULES[jIdx + 1] : null; // Módulo siguiente si existe
+            const prevJ = jIdx > 0 ? { href: encodeURI(`../${JUNIOR_MODULES[jIdx - 1]}/index.html`), label: JUNIOR_MODULES[jIdx - 1] } : { href: encodeURI('../../../HTML y CSS/Responsive Design/index.html'), label: 'HTML/CSS: Responsive' };
+            const nextJ = jIdx < JUNIOR_MODULES.length - 1 ? { href: encodeURI(`../${JUNIOR_MODULES[jIdx + 1]}/index.html`), label: JUNIOR_MODULES[jIdx + 1] } : { href: encodeURI('../../JAVASCRIPT MID LEVEL/Window/index.html'), label: 'JS Mid: Window' };
             // Estilo común y primario unificados con course-polish.js
             const btnStyle = 'color:#cbd5e1;text-decoration:none;font-size:0.84rem;font-weight:600;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.05);';
             const primaryStyle = 'color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);';
@@ -116,27 +116,134 @@
                 a.style.cssText = style;
                 return a;
             };
-            if (prevJ) navRight.appendChild(makeLink(encodeURI(`../${prevJ}/index.html`), `⬅ ${prevJ}`, btnStyle));
+            if (prevJ) navRight.appendChild(makeLink(prevJ.href, `⬅ ${prevJ.label}`, btnStyle));
             navRight.appendChild(makeLink('../../../index.html?filter=junior', '🌱 JS Junior Level', btnStyle));
             navRight.appendChild(makeLink('../DOCUMENTACION/index.html', '📘 Apuntes', btnStyle));
             navRight.appendChild(makeLink('../../../index.html?filter=proyectos', '🚀 Proyectos', btnStyle));
             navRight.appendChild(makeLink('../../../index.html', '🏠 Portal Principal', primaryStyle));
-            if (nextJ) navRight.appendChild(makeLink(encodeURI(`../${nextJ}/index.html`), `${nextJ} ➡`, btnStyle));
+            if (nextJ) navRight.appendChild(makeLink(nextJ.href, `${nextJ.label} ➡`, btnStyle));
             // Agrega también barra inferior de navegación al final de .app-shell
             const appShell = document.querySelector('.app-shell'); // Contenedor principal Junior
             if (appShell) { // Si existe el contenedor
                 const bottomNav = document.createElement('nav'); // Crea barra inferior
                 bottomNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos
                 bottomNav.innerHTML = `
-                    ${prevJ ? `<a href="${encodeURI(`../${prevJ}/index.html`)}" style="${btnStyle}">⬅ Anterior: ${prevJ}</a>` : '<span></span>'}
+                    ${prevJ ? `<a href="${prevJ.href}" style="${btnStyle}">⬅ Anterior: ${prevJ.label}</a>` : '<span></span>'}
                     <div style="display:flex;gap:8px;flex-wrap:wrap;">
                         <a href="../../../index.html?filter=junior" style="${btnStyle}">🌱 JS Junior Level</a>
                         <a href="../DOCUMENTACION/index.html" style="${btnStyle}">📘 Ver Apuntes</a>
                     </div>
-                    ${nextJ ? `<a href="${encodeURI(`../${nextJ}/index.html`)}" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);">Siguiente: ${nextJ} ➡</a>` : '<span></span>'}
+                    ${nextJ ? `<a href="${nextJ.href}" style="color:#070a13;text-decoration:none;font-size:0.84rem;font-weight:700;padding:6px 14px;border-radius:999px;background:var(--accent,#38bdf8);">Siguiente: ${nextJ.label} ➡</a>` : '<span></span>'}
                 `; // Contenido de la barra inferior
                 appShell.appendChild(bottomNav); // Inserta al final de .app-shell
             }
         }
+    }
+
+    // Visor integrado de la guía teórica (.md) dentro de #jrDocSlides en JS Junior Level
+    const docSlidesEl = document.getElementById('jrDocSlides'); // Contenedor de teoría en módulos Junior
+    const nextBtnEl = document.getElementById('jrNextBtn');     // Botón "Siguiente" junto al cual insertamos "📖 Guía"
+    if (docSlidesEl && nextBtnEl && !document.getElementById('jrMdToggleBtn')) {
+        // Creamos el botón "📖 Guía" con estilo secundario coherente
+        const mdBtn = document.createElement('button');
+        mdBtn.type = 'button';
+        mdBtn.id = 'jrMdToggleBtn';
+        mdBtn.className = 'secondary';
+        mdBtn.textContent = '📖 Guía';
+        mdBtn.title = 'Leer la guía teórica completa sin salir de las diapositivas';
+        mdBtn.style.cssText = 'padding:6px 12px;cursor:pointer;';
+        nextBtnEl.parentElement.insertBefore(mdBtn, nextBtnEl.nextSibling);
+
+        // Creamos el panel colapsable que mostrará la guía .md y su índice rápido
+        const mdPanel = document.createElement('div');
+        mdPanel.id = 'jrMdPanel';
+        mdPanel.className = 'jr-md-panel';
+        mdPanel.innerHTML = '<div class="jr-md-toc" id="jrMdToc"></div><div class="jr-md-body" id="jrMdBody"><p>Cargando guía teórica...</p></div>';
+        docSlidesEl.appendChild(mdPanel);
+
+        const mdToc = mdPanel.querySelector('#jrMdToc');
+        const mdBody = mdPanel.querySelector('#jrMdBody');
+        let mdLoaded = false; // Evita recargar docs-data.js si ya se renderizó
+
+        // Helpers de normalización, escape HTML y conversión Markdown -> HTML
+        const norm = (s) => String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\.md$/i, '').replace(/[^a-z0-9]+/g, ' ').trim();
+        const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        const inlineMd = (s) => esc(s).replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+        function renderMd(md) {
+            const lines = md.replace(/\r\n/g, '\n').split('\n');
+            const out = [];
+            let inCode = false, codeBuf = [], inList = false, inTable = false;
+            const closeList = () => { if (inList) { out.push('</ul>'); inList = false; } };
+            const closeTable = () => { if (inTable) { out.push('</tbody></table>'); inTable = false; } };
+            for (const line of lines) {
+                if (line.trim().startsWith('```')) {
+                    closeList(); closeTable();
+                    if (!inCode) { inCode = true; codeBuf = []; }
+                    else { out.push(`<pre><code>${esc(codeBuf.join('\n'))}</code></pre>`); inCode = false; }
+                    continue;
+                }
+                if (inCode) { codeBuf.push(line); continue; }
+                const t = line.trim();
+                if (!t) { closeList(); closeTable(); continue; }
+                if (/^---+$/.test(t)) { closeList(); closeTable(); out.push('<hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:12px 0;">'); continue; }
+                if (t.startsWith('|') && t.endsWith('|')) {
+                    closeList();
+                    const cells = t.slice(1, -1).split('|').map(c => c.trim());
+                    if (cells.every(c => /^:?-{2,}:?$/.test(c))) continue;
+                    if (!inTable) { inTable = true; out.push('<table><thead><tr>' + cells.map(c => `<th>${inlineMd(c)}</th>`).join('') + '</tr></thead><tbody>'); continue; }
+                    out.push('<tr>' + cells.map(c => `<td>${inlineMd(c)}</td>`).join('') + '</tr>');
+                    continue;
+                } else closeTable();
+                const hm = t.match(/^(#{1,3})\s+(.+)$/);
+                if (hm) { closeList(); out.push(`<h${hm[1].length}>${inlineMd(hm[2])}</h${hm[1].length}>`); continue; }
+                if (t.startsWith('> ')) { closeList(); out.push(`<blockquote>${inlineMd(t.slice(2))}</blockquote>`); continue; }
+                if (/^[-*]\s+/.test(t) || /^\d+\.\s+/.test(t)) {
+                    if (!inList) { out.push('<ul>'); inList = true; }
+                    out.push(`<li>${inlineMd(t.replace(/^([-*]|\d+\.)\s+/, ''))}</li>`);
+                    continue;
+                }
+                closeList();
+                out.push(`<p>${inlineMd(t)}</p>`);
+            }
+            closeList(); closeTable();
+            return out.join('\n');
+        }
+
+        mdBtn.addEventListener('click', async () => {
+            const willOpen = !mdPanel.classList.contains('open');
+            mdPanel.classList.toggle('open', willOpen);
+            mdBtn.classList.toggle('active', willOpen);
+            if (!willOpen || mdLoaded) return;
+            try {
+                const docsMap = await new Promise((resolve, reject) => {
+                    if (window.DOCS_CONTENT) return resolve(window.DOCS_CONTENT);
+                    const s = document.createElement('script');
+                    s.src = '../DOCUMENTACION/docs-data.js';
+                    s.onload = () => resolve(window.DOCS_CONTENT || {});
+                    s.onerror = () => reject(new Error('No se pudo cargar docs-data.js'));
+                    document.head.appendChild(s);
+                });
+                const keys = Object.keys(docsMap);
+                const target = norm(topicFolder);
+                const key = keys.find(k => norm(k) === target) || keys.find(k => norm(k).includes(target) || target.includes(norm(k))) || keys[0];
+                if (!key || !docsMap[key]) {
+                    mdBody.innerHTML = '<p>No se encontró la guía de este módulo. Puedes abrir <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;">Apuntes ↗</a>.</p>';
+                    return;
+                }
+                mdBody.innerHTML = renderMd(docsMap[key]);
+                mdToc.innerHTML = '';
+                mdBody.querySelectorAll('h2').forEach(h2 => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.textContent = h2.textContent.slice(0, 34);
+                    b.addEventListener('click', () => h2.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                    mdToc.appendChild(b);
+                });
+                mdLoaded = true;
+            } catch (err) {
+                mdBody.innerHTML = `<p>No se pudo cargar la guía (${err.message}). Abre <a href="../DOCUMENTACION/index.html" style="color:#38bdf8;">Apuntes ↗</a>.</p>`;
+            }
+        });
     }
 })();

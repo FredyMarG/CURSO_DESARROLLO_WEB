@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -96,7 +96,100 @@ document.dispatchEvent(new CustomEvent(&#x27;pedido:creado&#x27;, { detail: { id
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Trampa de removeEventListener:</strong> Si pasas una función flecha anónima a <code>addEventListener</code>, luego NO podrás eliminarla con <code>removeEventListener</code>; para eso usa <code>{ signal }</code>.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador de Handlers Modernos">
+        
+    <!-- Diapositiva 5: addEventListener y opciones avanzadas -->
+    <section class="slide" data-slide="5" data-title="addEventListener y opciones avanzadas">
+      <div class="slide-header">
+        <span class="eyebrow">Concepto clave · Opciones</span>
+        <h2>addEventListener y opciones avanzadas</h2>
+      </div>
+      <p>El tercer parámetro de <code>addEventListener(tipo, fn, opciones)</code> controla el ciclo de vida y el rendimiento del listener.</p>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="card">
+          <h4><code>once: true</code></h4>
+          <p>Ejecuta el handler una única vez y se auto-elimina automáticamente. Ideal para intros, modales de bienvenida o pagos.</p>
+        </div>
+        <div class="card">
+          <h4><code>passive: true</code></h4>
+          <p>Promete al navegador que no llamarás <code>preventDefault()</code>, eliminando bloqueos en eventos de <code>scroll</code> y <code>touchmove</code>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 6: removeEventListener y referencias -->
+    <section class="slide" data-slide="6" data-title="removeEventListener y referencias">
+      <div class="slide-header">
+        <span class="eyebrow">Limpieza de memoria</span>
+        <h2>removeEventListener y referencias</h2>
+      </div>
+      <p>Para desconectar un listener con <code>removeEventListener</code> debes pasar exactamente la misma referencia de función; una función anónima nueva nunca coincidirá.</p>
+      <pre class="code-box">function onClick(e) { console.log(e.target); }
+btn.addEventListener('click', onClick);
+// Limpieza efectiva:
+btn.removeEventListener('click', onClick);</pre>
+      <p style="margin-top:12px">En aplicaciones SPA también puedes pasar <code>{ signal: controller.signal }</code> con <code>AbortController</code> para cancelar varios listeners a la vez.</p>
+    </section>
+
+    <!-- Diapositiva 7: El objeto Event (e) en profundidad -->
+    <section class="slide" data-slide="7" data-title="El objeto Event (e) en profundidad">
+      <div class="slide-header">
+        <span class="eyebrow">Anatomía del evento</span>
+        <h2>El objeto Event (e) en profundidad</h2>
+      </div>
+      <p>Cada disparo entrega un objeto <code>Event</code> con metadatos esenciales sobre el origen y el estado de la interacción.</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><strong><code>e.target</code> vs <code>e.currentTarget</code>:</strong> <code>target</code> es el elemento exacto que originó el clic; <code>currentTarget</code> es el elemento que tiene el listener.</li>
+        <li><strong><code>e.timeStamp</code> y <code>e.isTrusted</code>:</strong> <code>isTrusted</code> es <code>true</code> solo si lo disparó el usuario real, no <code>dispatchEvent()</code>.</li>
+        <li><strong><code>e.preventDefault()</code>:</strong> Cancela la acción nativa (enviar form, seguir enlace) sin detener la propagación.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 8: Eventos personalizados (CustomEvent) -->
+    <section class="slide" data-slide="8" data-title="Eventos personalizados (CustomEvent)">
+      <div class="slide-header">
+        <span class="eyebrow">Comunicación desacoplada</span>
+        <h2>Eventos personalizados (CustomEvent)</h2>
+      </div>
+      <p><code>CustomEvent</code> permite emitir eventos propios con datos en la propiedad <code>detail</code> para comunicar módulos sin acoplarlos.</p>
+      <pre class="code-box">const ev = new CustomEvent('carrito:actualizado', {
+  detail: { totalItems: 3, subtotal: 49.90 },
+  bubbles: true
+});
+document.dispatchEvent(ev);</pre>
+    </section>
+
+    <!-- Diapositiva 9: Contexto this y funciones flecha -->
+    <section class="slide" data-slide="9" data-title="Contexto this y funciones flecha">
+      <div class="slide-header">
+        <span class="eyebrow">Trampas comunes</span>
+        <h2>Contexto this y funciones flecha</h2>
+      </div>
+      <p>Dentro de una función tradicional usada como handler, <code>this</code> apunta a <code>e.currentTarget</code>. En una arrow function, <code>this</code> se hereda del ámbito léxico.</p>
+      <div class="callout-info" style="margin-top:14px">
+        <strong>Recomendación práctica:</strong> usa siempre <code>e.currentTarget</code> en lugar de <code>this</code> para que tu código funcione igual con arrow functions o funciones nombradas.
+      </div>
+    </section>
+
+    <!-- Diapositiva 10: Patrones de rendimiento: Debounce y Throttle -->
+    <section class="slide" data-slide="10" data-title="Patrones de rendimiento: Debounce y Throttle">
+      <div class="slide-header">
+        <span class="eyebrow">Optimización</span>
+        <h2>Patrones de rendimiento: Debounce y Throttle</h2>
+      </div>
+      <p>Eventos frecuentes como <code>scroll</code>, <code>resize</code> o <code>input</code> pueden dispararse decenas de veces por segundo.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4>Debounce</h4>
+          <p>Espera a que el usuario deje de interactuar durante N ms antes de ejecutar (ideal para búsquedas en vivo).</p>
+        </div>
+        <div class="card">
+          <h4>Throttle</h4>
+          <p>Garantiza una ejecución máxima cada N ms mientras dura el evento (ideal para barra de progreso de scroll).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador de Handlers Modernos">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador de Handlers Modernos</h2></div>
             <div class="grid-layout" style="padding:0;">
       <section class="card">
@@ -127,7 +220,7 @@ document.dispatchEvent(new CustomEvent(&#x27;pedido:creado&#x27;, { detail: { id
     </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Event Handlers y Opciones Modernas">
+        <section class="slide" data-slide="12" data-title="Quiz: Event Handlers y Opciones Modernas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -153,7 +246,7 @@ document.dispatchEvent(new CustomEvent(&#x27;pedido:creado&#x27;, { detail: { id
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Event Handlers y Opciones Modernas">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Event Handlers y Opciones Modernas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;button id=&quot;b&quot; style=&quot;padding:8px 14px;cursor:pointer;&quot;&gt;Solo 1 vez ({ once: true })&lt;/button&gt;
@@ -178,7 +271,7 @@ document.dispatchEvent(new CustomEvent(&#x27;pedido:creado&#x27;, { detail: { id
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>

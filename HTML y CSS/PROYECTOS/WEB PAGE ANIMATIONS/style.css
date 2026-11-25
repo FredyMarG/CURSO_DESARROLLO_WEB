@@ -1,682 +1,595 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/style.css
- * Carpeta del tema: «WEB PAGE ANIMATIONS». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
- */
+/* ============================================================================
+   WEB PAGE ANIMATIONS — ESTILO FUTURISTA NEÓN CON MÚLTIPLES ANIMACIONES CSS
+   ============================================================================ */
 
-
-
-/* Reset general: normaliza márgenes y box-sizing. */
-*{ /* Regla de estilo para * */
-    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
-    margin: 0; /* Margen exterior */
-    font-family: "montserrat"; /* Familia tipográfica */
+* {
+    box-sizing: border-box; /* Define cómo se calculan ancho y alto (border-box incluye padding y borde) */
+    margin: 0; /* Espaciado exterior del elemento */
+    padding: 0; /* Relleno interior del elemento */
 }
 
-
-
-/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{ /* Regla de estilo para body */
-    background-color: #e2eaff; /* Color de fondo */
-    color: #101632dd; /* Color del texto */
-    scroll-behavior: smooth; /* Propiedad CSS: scroll-behavior */
+:root { /* Regla para :root */
+    --bg: #050816; /* Variable CSS personalizada */
+    --surface: rgba(15, 23, 42, 0.72); /* Variable CSS personalizada */
+    --border: rgba(255, 255, 255, 0.12); /* Variable CSS personalizada */
+    --cyan: #38bdf8; /* Variable CSS personalizada */
+    --violet: #a855f7; /* Variable CSS personalizada */
+    --emerald: #10b981; /* Variable CSS personalizada */
+    --text: #f8fafc; /* Variable CSS personalizada */
+    --muted: #94a3b8; /* Variable CSS personalizada */
 }
 
-
-
-/* Estilos del selector body, div, ul , li, nav, header, footer, a, li, label. */
-body, div, ul , li, nav, header, footer, a, li, label{ /* Regla de estilo para body, div, ul , li, nav, header, footer, a, li, label */
-    margin: 0; /* Margen exterior */
-    padding: 0; /* Relleno interior */
+html { /* Regla para html */
+    scroll-behavior: smooth; /* Habilita desplazamiento suave al navegar por anclas */
 }
 
+body { /* Regla para body */
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif; /* Familia tipográfica aplicada al texto */
+    background: var(--bg); /* Fondo (color, degradado o imagen) */
+    color: var(--text); /* Color del texto */
+    min-height: 100vh; /* Altura mínima garantizada */
+    overflow-x: hidden; /* Control de desbordamiento horizontal */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+}
 
+/* Barra superior ligada al scroll (Scroll-Driven Animation) */
+.scroll-progress { /* Regla para .scroll-progress */
+    position: fixed; /* Esquema de posicionamiento en el flujo */
+    top: 0; /* Desplazamiento desde el borde superior */
+    left: 0; /* Desplazamiento desde el borde izquierdo */
+    width: 100%; /* Ancho del elemento */
+    height: 4px; /* Alto del elemento */
+    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--emerald)); /* Fondo (color, degradado o imagen) */
+    transform-origin: left; /* Punto pivote de la transformación */
+    transform: scaleX(0); /* Transformación geométrica acelerada por GPU */
+    z-index: 1000; /* Orden de apilamiento en el eje Z */
+    animation: growScrollBar linear both; /* Animación CSS declarada mediante @keyframes */
+    animation-timeline: scroll(root block); /* Vincula el progreso de la animación al scroll o vista */
+}
 
+@keyframes growScrollBar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
 
+/* Orbes ambientales flotando con @keyframes */
+.ambient-orb { /* Regla para .ambient-orb */
+    position: fixed; /* Esquema de posicionamiento en el flujo */
+    border-radius: 50%; /* Redondeo de esquinas */
+    filter: blur(110px); /* Filtro gráfico aplicado al elemento */
+    opacity: 0.28; /* Nivel de transparencia (0 a 1) */
+    pointer-events: none; /* Controla si el elemento intercepta eventos del puntero */
+    z-index: 0; /* Orden de apilamiento en el eje Z */
+    animation: floatOrb 11s ease-in-out infinite alternate; /* Animación CSS declarada mediante @keyframes */
+}
 
-/* Estilo de estructura para navegación o encabezado/pie. */
-.header{ /* Regla de estilo para .header */
-    background-color: #fff; /* Color de fondo */
-    display: flex; /* Define el tipo de caja/layout */
+.orb-1 { width: 380px; height: 380px; background: var(--cyan); top: -100px; left: -100px; }
+.orb-2 { width: 420px; height: 420px; background: var(--violet); bottom: -120px; right: -100px; animation-delay: -4s; }
+.orb-3 { width: 260px; height: 260px; background: var(--emerald); top: 45%; left: 55%; opacity: 0.16; animation-delay: -7s; }
+
+@keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(45px, -35px) scale(1.14); }
+}
+
+/* Cabecera con efecto vidrio */
+.header { /* Regla para .header */
+    position: sticky; /* Esquema de posicionamiento en el flujo */
+    top: 0; /* Desplazamiento desde el borde superior */
+    z-index: 40; /* Orden de apilamiento en el eje Z */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
     justify-content: space-between; /* Alineación en el eje principal */
     align-items: center; /* Alineación en el eje cruzado */
-    position: relative; /* Define el esquema de posicionamiento */
-    z-index: 10; /* Orden de apilamiento en el eje Z */
-    text-align: center; /* Alineación horizontal del texto */
-    font-size: 20px; /* Tamaño de fuente */
-    color: #48e; /* Color del texto */
+    padding: 14px 28px; /* Relleno interior del elemento */
+    margin-top: 52px; /* Margen superior */
+    background: rgba(5, 8, 22, 0.78); /* Fondo (color, degradado o imagen) */
+    backdrop-filter: blur(14px); /* Efecto visual (desenfoque) sobre el fondo trasero */
+    border-top: 1px solid var(--border); /* Borde superior */
+    border-bottom: 1px solid var(--border); /* Borde inferior */
 }
 
-
-
-/* Estilos del selector .header__open-nav-button. */
-.header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
-    color: #48e; /* Color del texto */
-    font-size: 3rem; /* Tamaño de fuente */
-    font-weight: 700; /* Grosor de la fuente */
-    position: absolute; /* Define el esquema de posicionamiento */
-    right: 10px; /* Desplazamiento derecho */
+.header__logo-container { /* Regla para .header__logo-container */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 10px; /* Separación uniforme entre filas y columnas */
 }
 
-
-
-/* Estilos del selector .header__checkbox. */
-.header__checkbox{ /* Regla de estilo para .header__checkbox */
-    display: none; /* Define el tipo de caja/layout */
+.header__logo { /* Regla para .header__logo */
+    width: 38px; /* Ancho del elemento */
+    height: 38px; /* Alto del elemento */
+    border-radius: 10px; /* Redondeo de esquinas */
+    object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
+    transition: transform 0.4s ease; /* Interpolación suave al cambiar propiedades */
 }
 
-
-
-/* Estilos del selector .header__nav. */
-.header__nav{ /* Regla de estilo para .header__nav */
-    display: none; /* Define el tipo de caja/layout */
-    background-color: #fff; /* Color de fondo */
-    position: absolute; /* Define el esquema de posicionamiento */
-    height: 100vh; /* Alto del elemento */
-    width: 100vw; /* Ancho del elemento */
-    top:0; /* Desplazamiento superior */
-    z-index: -1; /* Orden de apilamiento en el eje Z */
+.header__logo:hover { /* Regla para .header__logo:hover */
+    transform: rotate(360deg) scale(1.08); /* Transformación geométrica acelerada por GPU */
 }
 
-
-
-/* Estilos del selector .header__nav-list. */
-.header__nav-list{ /* Regla de estilo para .header__nav-list */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    height: 40vh; /* Alto del elemento */
-    margin: auto; /* Margen exterior */
-    justify-content: space-evenly; /* Alineación en el eje principal */
+.header__brand { /* Regla para .header__brand */
+    font-weight: 800; /* Grosor tipográfico */
+    letter-spacing: 0.08em; /* Espaciado entre caracteres */
+    color: var(--cyan); /* Color del texto */
 }
 
-
-
-/* Estado o pseudo-clase .header__checkbox:checked ~ .header__nav: estilo cuando el usuario interactúa. */
-.header__checkbox:checked ~ .header__nav{ /* Regla de estilo para .header__checkbox:checked ~ .header__nav */
-    display: flex; /* Define el tipo de caja/layout */
+.header__checkbox { display: none; }
+.header__open-nav-button { /* Regla para .header__open-nav-button */
+    display: none; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    font-size: 1.5rem; /* Tamaño de fuente */
+    cursor: pointer; /* Forma del cursor al pasar por encima */
+    color: var(--text); /* Color del texto */
 }
 
-
-
-/* Estilos del selector .header__logo. */
-.header__logo{ /* Regla de estilo para .header__logo */
-    max-width: 100%; /* Ancho máximo permitido */
-    width: 64px; /* Ancho del elemento */
-    margin: 10px 20px; /* Margen exterior */
+.header__nav-list { /* Regla para .header__nav-list */
+    list-style: none; /* Estilo de viñetas en listas */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    gap: 22px; /* Separación uniforme entre filas y columnas */
 }
 
-
-
-/* Estilos del selector .header__nav-item. */
-.header__nav-item{ /* Regla de estilo para .header__nav-item */
-    list-style: none; /* Propiedad CSS: list-style */
+.header__nav-item a { /* Regla para .header__nav-item a */
+    color: var(--muted); /* Color del texto */
+    text-decoration: none; /* Decoración del texto (subrayado o ninguna) */
+    font-weight: 600; /* Grosor tipográfico */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    padding: 6px 2px; /* Relleno interior del elemento */
+    transition: color 0.25s ease; /* Interpolación suave al cambiar propiedades */
 }
 
-
-
-/* Estilos del selector .header__nav-item a. */
-.header__nav-item a{ /* Regla de estilo para .header__nav-item a */
-    color: inherit; /* Color del texto */
-    text-decoration: none; /* Decoración del texto */
+.header__nav-item a::after { /* Regla para .header__nav-item a::after */
+    content: ""; /* Contenido generado para pseudoelementos ::before/::after */
+    position: absolute; /* Esquema de posicionamiento en el flujo */
+    left: 0; /* Desplazamiento desde el borde izquierdo */
+    bottom: 0; /* Desplazamiento desde el borde inferior */
+    width: 100%; /* Ancho del elemento */
+    height: 2px; /* Alto del elemento */
+    background: linear-gradient(90deg, var(--cyan), var(--violet)); /* Fondo (color, degradado o imagen) */
+    transform: scaleX(0); /* Transformación geométrica acelerada por GPU */
+    transform-origin: right; /* Punto pivote de la transformación */
+    transition: transform 0.3s ease; /* Interpolación suave al cambiar propiedades */
 }
 
-
-
-/* Estado o pseudo-clase .header__nav-item :is(:hover, :active): estilo cuando el usuario interactúa. */
-.header__nav-item :is(:hover, :active){ /* Regla de estilo para .header__nav-item :is(:hover, :active) */
-    text-decoration: underline; /* Decoración del texto */
+.header__nav-item a:hover { /* Regla para .header__nav-item a:hover */
+    color: var(--text); /* Color del texto */
 }
 
-
-
-
-
-
-/* Media query: adapta el diseño a pantallas o condiciones específicas. */
-@media screen and (min-width: 600px){ /* Regla responsiva según tamaño de pantalla */
-
-
-
-/* Estilo de estructura para navegación o encabezado/pie. */
-    .header{ /* Regla de estilo para .header */
-        padding: 0; /* Relleno interior */
-        animation: header-movement both; /* Animación con keyframes */
-        animation-timeline: scroll(); /* Propiedad CSS: animation-timeline */
-        position: sticky; /* Define el esquema de posicionamiento */
-        top:0; /* Desplazamiento superior */
-        animation-range: 10px 100px; /* Propiedad CSS: animation-range */
-    }
-
-
-
-/* Estilos del selector .header__nav. */
-    .header__nav{ /* Regla de estilo para .header__nav */
-        display: block; /* Define el tipo de caja/layout */
-        position: static; /* Define el esquema de posicionamiento */
-        background-color: initial; /* Color de fondo */
-        height: auto; /* Alto del elemento */
-        z-index: 1; /* Orden de apilamiento en el eje Z */
-        width: auto; /* Ancho del elemento */
-        justify-content: space-between; /* Alineación en el eje principal */
-    }
-
-
-
-/* Estilos del selector .header__nav-list. */
-    .header__nav-list{ /* Regla de estilo para .header__nav-list */
-        flex-direction: row; /* Dirección del eje principal flex */
-        height: auto; /* Alto del elemento */
-        gap: 20px; /* Separación entre filas y columnas */
-        margin-right: 40px; /* Margen exterior derecho */
-    }
-
-
-
-/* Estilos del selector .header__open-nav-button. */
-    .header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
-        display: none; /* Define el tipo de caja/layout */
-    }
-
+.header__nav-item a:hover::after { /* Regla para .header__nav-item a:hover::after */
+    transform: scaleX(1); /* Transformación geométrica acelerada por GPU */
+    transform-origin: left; /* Punto pivote de la transformación */
 }
 
-
-
-
-
-/* Estilos del selector .profile. */
-.profile{ /* Regla de estilo para .profile */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name:profile ; /* Propiedad CSS: container-name */
-    animation: aparecer 2.4s -.6s both; /* Animación con keyframes */
+/* Hero con entrada animada y anillo orbital */
+.hero { /* Regla para .hero */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    z-index: 1; /* Orden de apilamiento en el eje Z */
+    max-width: 1120px; /* Ancho máximo permitido */
+    margin: 48px auto 32px; /* Espaciado exterior del elemento */
+    padding: 40px 28px; /* Relleno interior del elemento */
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.84), rgba(15, 23, 42, 0.56)), url("img/fondo.jpg") center/cover; /* Fondo (color, degradado o imagen) */
+    background-blend-mode: overlay; /* Modo de fusión entre capas de fondo */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+    border-radius: 24px; /* Redondeo de esquinas */
+    backdrop-filter: blur(16px); /* Efecto visual (desenfoque) sobre el fondo trasero */
+    animation: heroFadeUp 0.85s cubic-bezier(0.22, 1, 0.36, 1) both; /* Animación CSS declarada mediante @keyframes */
 }
 
-
-
-/* Estilos del selector .profile__wrapper. */
-.profile__wrapper{ /* Regla de estilo para .profile__wrapper */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    justify-content: center; /* Alineación en el eje principal */
-    margin: auto; /* Margen exterior */
-    background-color: #fff; /* Color de fondo */
-    max-width: 1400px; /* Ancho máximo permitido */
+@keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-
-
-/* Estilos del selector .profile__data-container. */
-.profile__data-container{ /* Regla de estilo para .profile__data-container */
-    max-width: 600px; /* Ancho máximo permitido */
-    padding: 12px; /* Relleno interior */
-}
-
-
-
-/* Estilos del selector .profile__img-container. */
-.profile__img-container{ /* Regla de estilo para .profile__img-container */
-    max-height: 500px; /* Alto máximo permitido */
-    overflow: hidden; /* Control de contenido desbordado */
-}
-
-
-
-/* Estilos del selector .profile__img. */
-.profile__img{ /* Regla de estilo para .profile__img */
-    max-width: 100%; /* Ancho máximo permitido */
-    width: 720px; /* Ancho del elemento */
-}
-
-
-
-/* Estilos del selector h1. */
-h1{ /* Regla de estilo para h1 */
-    color: #26a; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .profile__skills-container h2. */
-.profile__skills-container h2{ /* Regla de estilo para .profile__skills-container h2 */
-    color: #26a; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .profile__skill. */
-.profile__skill{ /* Regla de estilo para .profile__skill */
-    list-style: none; /* Propiedad CSS: list-style */
-    display: flex; /* Define el tipo de caja/layout */
-    margin: 10px; /* Margen exterior */
-    max-width: 600px; /* Ancho máximo permitido */
-    margin-left: 0; /* Margen exterior izquierdo */
+.hero__grid { /* Regla para .hero__grid */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: 240px 1fr; /* Definición de columnas en CSS Grid */
+    gap: 36px; /* Separación uniforme entre filas y columnas */
     align-items: center; /* Alineación en el eje cruzado */
 }
 
+.hero__avatar-wrap { /* Regla para .hero__avatar-wrap */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    width: 220px; /* Ancho del elemento */
+    height: 220px; /* Alto del elemento */
+    margin: 0 auto; /* Espaciado exterior del elemento */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    place-items: center; /* Centrado rápido en filas y columnas */
+}
 
+.hero__orbit { /* Regla para .hero__orbit */
+    position: absolute; /* Esquema de posicionamiento en el flujo */
+    inset: 0; /* Atajo para los cuatro lados de posicionamiento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    background: conic-gradient(from 0deg, var(--cyan), var(--violet), var(--emerald), var(--cyan)); /* Fondo (color, degradado o imagen) */
+    animation: spinOrbit 6s linear infinite; /* Animación CSS declarada mediante @keyframes */
+    padding: 4px; /* Relleno interior del elemento */
+}
 
-/* Estilos del selector .load-bar. */
-.load-bar{ /* Regla de estilo para .load-bar */
-    border: 2px solid #48e; /* Borde del contenedor */
-    border-radius: 6px; /* Redondeo de esquinas */
+@keyframes spinOrbit {
+    to { transform: rotate(360deg); }
+}
+
+.hero__img { /* Regla para .hero__img */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    width: 204px; /* Ancho del elemento */
+    height: 204px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
+    border: 4px solid var(--bg); /* Borde completo (grosor, estilo y color) */
+    transition: transform 0.4s ease; /* Interpolación suave al cambiar propiedades */
+}
+
+.hero__avatar-wrap:hover .hero__img { /* Regla para .hero__avatar-wrap:hover .hero__img */
+    transform: scale(1.04); /* Transformación geométrica acelerada por GPU */
+}
+
+.status-pill { /* Regla para .status-pill */
+    display: inline-flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 8px; /* Separación uniforme entre filas y columnas */
+    padding: 6px 14px; /* Relleno interior del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(16, 185, 129, 0.14); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(16, 185, 129, 0.35); /* Borde completo (grosor, estilo y color) */
+    color: #6ee7b7; /* Color del texto */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor tipográfico */
+    margin-bottom: 16px; /* Margen inferior */
+}
+
+.status-pill__dot { /* Regla para .status-pill__dot */
+    width: 9px; /* Ancho del elemento */
+    height: 9px; /* Alto del elemento */
+    border-radius: 50%; /* Redondeo de esquinas */
+    background: var(--emerald); /* Fondo (color, degradado o imagen) */
+    animation: pulseDot 1.6s ease-in-out infinite; /* Animación CSS declarada mediante @keyframes */
+}
+
+@keyframes pulseDot {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    50% { transform: scale(1.25); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+}
+
+.hero__title { /* Regla para .hero__title */
+    font-size: clamp(2rem, 4vw, 3rem); /* Tamaño de fuente */
+    line-height: 1.15; /* Altura de línea para legibilidad */
+    margin-bottom: 14px; /* Margen inferior */
+}
+
+.kinetic-text { /* Regla para .kinetic-text */
+    background: linear-gradient(90deg, var(--cyan), var(--violet), var(--emerald), var(--cyan)); /* Fondo (color, degradado o imagen) */
+    background-size: 250% auto; /* Escalado del fondo */
+    -webkit-background-clip: text; /* Prefijo WebKit para recorte de fondo sobre texto */
+    background-clip: text; /* Recorte del fondo (ej. sobre texto) */
+    color: transparent; /* Color del texto */
+    animation: shimmerText 4s linear infinite; /* Animación CSS declarada mediante @keyframes */
+}
+
+@keyframes shimmerText {
+    to { background-position: 250% center; }
+}
+
+.hero__desc { /* Regla para .hero__desc */
+    color: #cbd5e1; /* Color del texto */
+    line-height: 1.65; /* Altura de línea para legibilidad */
+    margin-bottom: 24px; /* Margen inferior */
+    max-width: 620px; /* Ancho máximo permitido */
+}
+
+.hero__actions { /* Regla para .hero__actions */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    gap: 14px; /* Separación uniforme entre filas y columnas */
+    flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
+}
+
+.btn-neon { /* Regla para .btn-neon */
+    display: inline-flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    padding: 12px 24px; /* Relleno interior del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    font-weight: 700; /* Grosor tipográfico */
+    font-size: 0.95rem; /* Tamaño de fuente */
+    text-decoration: none; /* Decoración del texto (subrayado o ninguna) */
+    cursor: pointer; /* Forma del cursor al pasar por encima */
+    border: 0; /* Borde completo (grosor, estilo y color) */
+    transition: transform 0.25s ease, box-shadow 0.25s ease; /* Interpolación suave al cambiar propiedades */
+}
+
+.btn-neon--primary { /* Regla para .btn-neon--primary */
+    background: linear-gradient(90deg, var(--cyan), var(--violet)); /* Fondo (color, degradado o imagen) */
     color: #fff; /* Color del texto */
-    padding: 2px; /* Relleno interior */
-    font-size: 12px; /* Tamaño de fuente */
-    width: 80%; /* Ancho del elemento */
-    margin: 4px; /* Margen exterior */
-    margin-left: 0; /* Margen exterior izquierdo */
+    box-shadow: 0 10px 26px rgba(56, 189, 248, 0.28); /* Sombra proyectada alrededor de la caja */
 }
 
-
-
-/* Estilos del selector .load-bar__bar. */
-.load-bar__bar{ /* Regla de estilo para .load-bar__bar */
-    background-color: #48e; /* Color de fondo */
-    border-radius:  3px ; /* Redondeo de esquinas */
-    padding: 4px 6px; /* Relleno interior */
+.btn-neon--primary:hover { /* Regla para .btn-neon--primary:hover */
+    transform: translateY(-3px) scale(1.03); /* Transformación geométrica acelerada por GPU */
+    box-shadow: 0 16px 34px rgba(168, 85, 247, 0.42); /* Sombra proyectada alrededor de la caja */
 }
 
-
-
-/* Estilos del selector .bar--80. */
-.bar--80{ /* Regla de estilo para .bar--80 */
-    width: 80%; /* Ancho del elemento */
-
-
-/* Estilos del selector }.bar--90. */
-}.bar--90{ /* Regla de estilo para }.bar--90 */
-    width: 90%; /* Ancho del elemento */
+.btn-neon--ghost { /* Regla para .btn-neon--ghost */
+    background: rgba(255, 255, 255, 0.06); /* Fondo (color, degradado o imagen) */
+    color: var(--text); /* Color del texto */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
 }
 
-
-/* Estilos del selector .bar--70. */
-.bar--70{ /* Regla de estilo para .bar--70 */
-    width: 70%; /* Ancho del elemento */
+.btn-neon--ghost:hover { /* Regla para .btn-neon--ghost:hover */
+    border-color: var(--cyan); /* Color del borde */
+    transform: translateY(-3px); /* Transformación geométrica acelerada por GPU */
 }
 
-
-/* Estilos del selector .bar--60. */
-.bar--60{ /* Regla de estilo para .bar--60 */
-    width: 60%; /* Ancho del elemento */
+/* Marquee infinito */
+.marquee { /* Regla para .marquee */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    z-index: 1; /* Orden de apilamiento en el eje Z */
+    overflow: hidden; /* Comportamiento del contenido que sobresale */
+    padding: 14px 0; /* Relleno interior del elemento */
+    margin: 20px 0 40px; /* Espaciado exterior del elemento */
+    border-top: 1px solid var(--border); /* Borde superior */
+    border-bottom: 1px solid var(--border); /* Borde inferior */
+    background: rgba(15, 23, 42, 0.55); /* Fondo (color, degradado o imagen) */
 }
 
-
-
-/* Estado o pseudo-clase @container profile (min-width:720px): estilo cuando el usuario interactúa. */
-@container profile (min-width:720px){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .profile__wrapper. */
-    .profile__wrapper{ /* Regla de estilo para .profile__wrapper */
-        flex-direction: row; /* Dirección del eje principal flex */
-        padding: 20px; /* Relleno interior */
-        background-color: transparent; /* Color de fondo */
-        height: 90vh; /* Alto del elemento */
-        margin: auto; /* Margen exterior */
-    }
-
-
-
-/* Estilos del selector .profile__data-container{. */
-    .profile__data-container{         /* Regla de estilo para .profile__data-container */
-        background-color: #fff; /* Color de fondo */
-        display: flex; /* Define el tipo de caja/layout */
-        align-items: center; /* Alineación en el eje cruzado */
-        border-radius: 0px 25px 25px 0; /* Redondeo de esquinas */
-        box-shadow: 0 0 9px #0002; /* Sombra proyectada */
-    }
-
-
-
-/* Estilos del selector h1. */
-    h1{ /* Regla de estilo para h1 */
-        margin-top: 0; /* Margen exterior superior */
-        font-size: 4rem; /* Tamaño de fuente */
-        text-wrap: balance; /* Propiedad CSS: text-wrap */
-    }
-
-
-
-/* Estilos del selector .profile__skills-container > h2. */
-    .profile__skills-container > h2{ /* Regla de estilo para .profile__skills-container > h2 */
-        margin-top: 0; /* Margen exterior superior */
-    }
-
-
-
-/* Estilos del selector .profile__data. */
-    .profile__data{ /* Regla de estilo para .profile__data */
-        max-width: 620px; /* Ancho máximo permitido */
-    }
-
-
-
-/* Estilos del selector .profile__img-container. */
-    .profile__img-container{ /* Regla de estilo para .profile__img-container */
-        max-height: initial; /* Alto máximo permitido */
-        border-radius: 25px 0 0 25px; /* Redondeo de esquinas */
-    }
-
-
-
-/* Estilos del selector .profile__img. */
-    .profile__img{ /* Regla de estilo para .profile__img */
-        height: 100%; /* Alto del elemento */
-        object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
-        width: 400px; /* Ancho del elemento */
-    }
+.marquee__track { /* Regla para .marquee__track */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    gap: 44px; /* Separación uniforme entre filas y columnas */
+    width: max-content; /* Ancho del elemento */
+    animation: marqueeLoop 22s linear infinite; /* Animación CSS declarada mediante @keyframes */
 }
 
-
-
-
-
-/* Estilos del selector .portfolio. */
-.portfolio{ /* Regla de estilo para .portfolio */
-    background-color: #18233f; /* Color de fondo */
-    color: #fff; /* Color del texto */
-    min-height: 100vh; /* Alto mínimo permitido */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    text-align: center; /* Alineación horizontal del texto */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name: portfolio; /* Propiedad CSS: container-name */
-    justify-content: space-evenly; /* Alineación en el eje principal */
+.marquee:hover .marquee__track { /* Regla para .marquee:hover .marquee__track */
+    animation-play-state: paused; /* Controla si la animación corre o está en pausa */
 }
 
-
-
-/* Estilos del selector .portfolio_title. */
-.portfolio_title{ /* Regla de estilo para .portfolio_title */
-    font-size: 3rem; /* Tamaño de fuente */
-    margin-bottom: 0; /* Margen exterior inferior */
+.marquee__track span { /* Regla para .marquee__track span */
+    font-weight: 700; /* Grosor tipográfico */
+    letter-spacing: 0.05em; /* Espaciado entre caracteres */
+    color: var(--cyan); /* Color del texto */
+    white-space: nowrap; /* Controla saltos de línea y espacios en blanco */
 }
 
+@keyframes marqueeLoop {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
 
+/* Secciones comunes */
+.skills, .portfolio, .contact { /* Regla para .skills, .portfolio, .contact */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    z-index: 1; /* Orden de apilamiento en el eje Z */
+    max-width: 1120px; /* Ancho máximo permitido */
+    margin: 0 auto 56px; /* Espaciado exterior del elemento */
+    padding: 0 20px; /* Relleno interior del elemento */
+}
 
-/* Estilos del selector .portfolio__project-container. */
-.portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-    display: grid; /* Define el tipo de caja/layout */
-    grid-template-columns: 1fr; /* Definición de columnas de la grilla */
-    max-width: 1300px; /* Ancho máximo permitido */
-    margin: auto; /* Margen exterior */
+.section-head { /* Regla para .section-head */
+    margin-bottom: 24px; /* Margen inferior */
+}
+
+.section-tag { /* Regla para .section-tag */
+    display: inline-block; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    letter-spacing: 0.12em; /* Espaciado entre caracteres */
+    color: var(--violet); /* Color del texto */
+    margin-bottom: 6px; /* Margen inferior */
+}
+
+.section-head h2 { /* Regla para .section-head h2 */
+    font-size: 1.8rem; /* Tamaño de fuente */
+}
+
+/* Barras de habilidades animadas */
+.skills__grid { /* Regla para .skills__grid */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Definición de columnas en CSS Grid */
+    gap: 16px; /* Separación uniforme entre filas y columnas */
+}
+
+.skill-card { /* Regla para .skill-card */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+    border-radius: 16px; /* Redondeo de esquinas */
+    padding: 18px; /* Relleno interior del elemento */
+    transition: transform 0.25s ease, border-color 0.25s ease; /* Interpolación suave al cambiar propiedades */
+}
+
+.skill-card:hover { /* Regla para .skill-card:hover */
+    transform: translateY(-4px); /* Transformación geométrica acelerada por GPU */
+    border-color: var(--cyan); /* Color del borde */
+}
+
+.skill-card__top { /* Regla para .skill-card__top */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    justify-content: space-between; /* Alineación en el eje principal */
+    margin-bottom: 10px; /* Margen inferior */
+    font-weight: 600; /* Grosor tipográfico */
+}
+
+.skill-bar { /* Regla para .skill-bar */
+    height: 10px; /* Alto del elemento */
+    background: rgba(255, 255, 255, 0.08); /* Fondo (color, degradado o imagen) */
+    border-radius: 999px; /* Redondeo de esquinas */
+    overflow: hidden; /* Comportamiento del contenido que sobresale */
+}
+
+.skill-bar__fill { /* Regla para .skill-bar__fill */
+    height: 100%; /* Alto del elemento */
+    width: var(--w, 80%); /* Ancho del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: linear-gradient(90deg, var(--cyan), var(--violet)); /* Fondo (color, degradado o imagen) */
+    transform-origin: left; /* Punto pivote de la transformación */
+    animation: fillSkill 1.2s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both; /* Animación CSS declarada mediante @keyframes */
+}
+
+@keyframes fillSkill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* Galería de 6 tarjetas con animaciones distintas */
+.portfolio__grid { /* Regla para .portfolio__grid */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Definición de columnas en CSS Grid */
+    gap: 20px; /* Separación uniforme entre filas y columnas */
+}
+
+.p-card { /* Regla para .p-card */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    overflow: hidden; /* Comportamiento del contenido que sobresale */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+    border-radius: 18px; /* Redondeo de esquinas */
+    padding: 24px; /* Relleno interior del elemento */
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease; /* Interpolación suave al cambiar propiedades */
+}
+
+.p-card__badge { /* Regla para .p-card__badge */
+    display: inline-block; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    font-size: 0.72rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    padding: 4px 10px; /* Relleno interior del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(56, 189, 248, 0.14); /* Fondo (color, degradado o imagen) */
+    color: var(--cyan); /* Color del texto */
+    margin-bottom: 12px; /* Margen inferior */
+}
+
+.p-card h3 { margin-bottom: 8px; font-size: 1.2rem; }
+.p-card p { color: var(--muted); line-height: 1.55; font-size: 0.94rem; }
+
+/* 1. Shine Sweep */
+.p-card--shine::after { /* Regla para .p-card--shine::after */
+    content: ""; /* Contenido generado para pseudoelementos ::before/::after */
+    position: absolute; /* Esquema de posicionamiento en el flujo */
+    inset: 0; /* Atajo para los cuatro lados de posicionamiento */
+    background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%); /* Fondo (color, degradado o imagen) */
+    transform: translateX(-120%); /* Transformación geométrica acelerada por GPU */
+    transition: transform 0.7s ease; /* Interpolación suave al cambiar propiedades */
+}
+.p-card--shine:hover::after { transform: translateX(120%); }
+.p-card--shine:hover { transform: translateY(-6px); border-color: var(--cyan); }
+
+/* 2. Levitation */
+.p-card--float { animation: cardFloat 4s ease-in-out infinite alternate; }
+@keyframes cardFloat {
+    from { transform: translateY(0); }
+    to { transform: translateY(-8px); }
+}
+
+/* 3. 3D Tilt */
+.p-card--tilt:hover { /* Regla para .p-card--tilt:hover */
+    transform: perspective(900px) rotateX(6deg) rotateY(-8deg) scale(1.02); /* Transformación geométrica acelerada por GPU */
+    border-color: var(--violet); /* Color del borde */
+    box-shadow: 0 18px 36px rgba(168, 85, 247, 0.25); /* Sombra proyectada alrededor de la caja */
+}
+
+/* 4. Neon Pulse */
+.p-card--pulse { animation: neonPulse 3s ease-in-out infinite; }
+@keyframes neonPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(56, 189, 248, 0); }
+    50% { box-shadow: 0 0 24px rgba(56, 189, 248, 0.35); border-color: rgba(56, 189, 248, 0.6); }
+}
+
+/* 5. Border Morph */
+.p-card--morph { /* Regla para .p-card--morph */
+    animation: morphRadius 6s ease-in-out infinite alternate; /* Animación CSS declarada mediante @keyframes */
+}
+@keyframes morphRadius {
+    0% { border-radius: 18px 34px 18px 34px; }
+    100% { border-radius: 34px 18px 34px 18px; }
+}
+
+/* 6. Kinetic Glow */
+.p-card--kinetic { /* Regla para .p-card--kinetic */
+    background: linear-gradient(var(--bg), var(--bg)) padding-box,
+                linear-gradient(120deg, var(--cyan), var(--violet), var(--emerald), var(--cyan)) border-box;
+    border: 2px solid transparent; /* Borde completo (grosor, estilo y color) */
+    background-size: 100% 100%, 250% 250%; /* Escalado del fondo */
+    animation: borderFlow 4s linear infinite; /* Animación CSS declarada mediante @keyframes */
+}
+@keyframes borderFlow {
+    to { background-position: 0 0, 250% center; }
+}
+
+/* Formulario de contacto */
+.contact__box { /* Regla para .contact__box */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+    border-radius: 22px; /* Redondeo de esquinas */
+    padding: 32px; /* Relleno interior del elemento */
+}
+
+.contact__form { /* Regla para .contact__form */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: repeat(2, 1fr); /* Definición de columnas en CSS Grid */
+    gap: 16px; /* Separación uniforme entre filas y columnas */
+}
+
+.field--full { grid-column: 1 / -1; }
+
+.field label { /* Regla para .field label */
+    display: block; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    font-size: 0.85rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor tipográfico */
+    color: var(--muted); /* Color del texto */
+    margin-bottom: 6px; /* Margen inferior */
+}
+
+.field input, .field textarea { /* Regla para .field input, .field textarea */
     width: 100%; /* Ancho del elemento */
-    gap: 12px; /* Separación entre filas y columnas */
-    padding: 12px; /* Relleno interior */
-    min-height: 90vh; /* Alto mínimo permitido */
-}
-
-
-
-/* Estilos del selector .portfolio__project. */
-.portfolio__project{ /* Regla de estilo para .portfolio__project */
-    background-image:linear-gradient(#0006, #0006), url("img/fondo.jpg"); /* Imagen o degradado de fondo */
-    background-position: center; /* Posición del fondo */
-    background-size: cover; /* Escalado del fondo */
-    display: grid; /* Define el tipo de caja/layout */
-    place-content: center; /* Propiedad CSS: place-content */
+    padding: 12px 14px; /* Relleno interior del elemento */
     border-radius: 12px; /* Redondeo de esquinas */
-    animation: aparecer both; /* Animación con keyframes */
-    animation-timeline: view(); /* Propiedad CSS: animation-timeline */
-    animation-range: cover 5% cover 50%; /* Propiedad CSS: animation-range */
+    border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+    background: rgba(5, 8, 22, 0.75); /* Fondo (color, degradado o imagen) */
+    color: var(--text); /* Color del texto */
+    font: inherit; /* Atajo tipográfico heredado */
+    transition: border-color 0.25s ease, box-shadow 0.25s ease; /* Interpolación suave al cambiar propiedades */
 }
 
-
-
-/* Estado o pseudo-clase .portfolio__project:hover: estilo cuando el usuario interactúa. */
-.portfolio__project:hover{ /* Regla de estilo para .portfolio__project:hover */
-    opacity: 0.74; /* Nivel de transparencia */
-    outline: 2px solid #fff6; /* Contorno de enfoque accesible */
+.field input:focus, .field textarea:focus { /* Regla para .field input:focus, .field textarea:focus */
+    outline: none; /* Contorno externo de foco */
+    border-color: var(--cyan); /* Color del borde */
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2); /* Sombra proyectada alrededor de la caja */
 }
 
-
-
-/* Estilos del selector .portfolio__project-name. */
-.portfolio__project-name{ /* Regla de estilo para .portfolio__project-name */
-    font-size: 1rem; /* Tamaño de fuente */
+.submit-msg { /* Regla para .submit-msg */
+    margin-top: 10px; /* Margen superior */
+    color: #6ee7b7; /* Color del texto */
+    font-weight: 600; /* Grosor tipográfico */
 }
 
-
-
-/* Estado o pseudo-clase @container portfolio (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 56.25rem){ /* Regla at-rule de CSS */
-
-
-
-/* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-        grid-template-columns: repeat(auto-fill, minmax(420px,1fr)); /* Definición de columnas de la grilla */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-        grid-row: span 2; /* Propiedad CSS: grid-row */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-    }
-}
-
-
-/* Estado o pseudo-clase @container portfolio (min-width: 81.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 81.25rem){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-        grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); /* Definición de columnas de la grilla */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-        grid-row: span 2; /* Propiedad CSS: grid-row */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
-        grid-column: span 4; /* Ubicación/expansión en columnas */
-    }
-}
-
-
-
-
-/* Estilos del selector .form. */
-.form{ /* Regla de estilo para .form */
-    min-height: 60vh; /* Alto mínimo permitido */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    justify-content: center; /* Alineación en el eje principal */
-    align-items: center; /* Alineación en el eje cruzado */
-    padding: 30px 0; /* Relleno interior */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name: form; /* Propiedad CSS: container-name */
-    animation: aparecer both; /* Animación con keyframes */
-    animation-timeline: view(); /* Propiedad CSS: animation-timeline */
-    animation-range: cover 20% contain 40%; /* Propiedad CSS: animation-range */
-}
-
-
-
-/* Estilos del selector .form__form. */
-.form__form{ /* Regla de estilo para .form__form */
-    padding: 12px; /* Relleno interior */
-    max-width: 600px; /* Ancho máximo permitido */
-    width: 100%; /* Ancho del elemento */
-    display: grid; /* Define el tipo de caja/layout */
-    margin-bottom: 30px; /* Margen exterior inferior */
-}
-
-
-
-/* Estado o pseudo-clase .form__input-container :is(input, textarea ): estilo cuando el usuario interactúa. */
-.form__input-container :is(input, textarea ){ /* Regla de estilo para .form__input-container :is(input, textarea ) */
-    width: 100%; /* Ancho del elemento */
-    padding: 9px; /* Relleno interior */
-    font-size: 16px; /* Tamaño de fuente */
-    margin: 4px; /* Margen exterior */
-    border: none; /* Borde del contenedor */
-    box-shadow: 2px 2px 4px #0003; /* Sombra proyectada */
-    background-color: #fffd; /* Color de fondo */
-}
-
-
-
-/* Estilos del selector .form__input-container textarea. */
-.form__input-container textarea{ /* Regla de estilo para .form__input-container textarea */
-    resize: none; /* Propiedad CSS: resize */
-    min-height: 120px; /* Alto mínimo permitido */
-    font-family: inherit; /* Familia tipográfica */
-}
-
-
-
-/* Estilos del selector .form__input-container input[type="submit"]. */
-.form__input-container input[type="submit"]{ /* Regla de estilo para .form__input-container input[type="submit"] */
-    padding: 12px; /* Relleno interior */
-    background-color: #48e; /* Color de fondo */
-    color: #fff; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .form__title. */
-.form__title{ /* Regla de estilo para .form__title */
-    font-size: 2.4rem; /* Tamaño de fuente */
-}
-
-
-
-/* Estado o pseudo-clase @container form (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container form (min-width: 56.25rem){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .form__form. */
-    .form__form{ /* Regla de estilo para .form__form */
-        grid-template-columns: 1fr 1fr; /* Definición de columnas de la grilla */
-        grid-template-areas:
-        "name lastname"
-        "email email"
-        "message message"
-        "button button"
-        ; /* Regla CSS */
-        gap: 12px; /* Separación entre filas y columnas */
-        background-image: radial-gradient(#18233f06,#18233f33); /* Imagen o degradado de fondo */
-        padding: 30px; /* Relleno interior */
-        border-radius: 12px; /* Redondeo de esquinas */
-        box-shadow: 0 0 40px #0006; /* Sombra proyectada */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:first-child: estilo cuando el usuario interactúa. */
-    .form__input-container:first-child{ /* Regla de estilo para .form__input-container:first-child */
-        grid-area: name; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(2): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(2){ /* Regla de estilo para .form__input-container:nth-child(2) */
-        grid-area: lastname; /* Propiedad CSS: grid-area */
-    }
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(3): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(3){ /* Regla de estilo para .form__input-container:nth-child(3) */
-        grid-area: email; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(4): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(4) { /* Regla de estilo para .form__input-container:nth-child(4) */
-        grid-area: message; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(5): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(5){ /* Regla de estilo para .form__input-container:nth-child(5) */
-        grid-area: button; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container :is(input, textarea): estilo cuando el usuario interactúa. */
-    .form__input-container :is(input, textarea){ /* Regla de estilo para .form__input-container :is(input, textarea) */
-        box-shadow: none; /* Sombra proyectada */
-        border-radius: 4px; /* Redondeo de esquinas */
-    }
-}
-
-
-
-
-
-/* Estilos del selector footer. */
-footer{ /* Regla de estilo para footer */
-    padding: 60px; /* Relleno interior */
+.footer { /* Regla para .footer */
+    position: relative; /* Esquema de posicionamiento en el flujo */
+    z-index: 1; /* Orden de apilamiento en el eje Z */
     text-align: center; /* Alineación horizontal del texto */
-    background-color: #18233f; /* Color de fondo */
-    color: #fffd; /* Color del texto */
-    font-size: 22px; /* Tamaño de fuente */
+    padding: 24px 16px 36px; /* Relleno interior del elemento */
+    color: var(--muted); /* Color del texto */
+    border-top: 1px solid var(--border); /* Borde superior */
 }
 
-
-
-
-
-
-
-
-/* Animación header-movement: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes header-movement { /* Definición de animación por fotogramas clave */
-
-
-/* Estilos del selector from. */
-    from{ /* Regla de estilo para from */
-        padding: 20px 0; /* Relleno interior */
-        background-color: #fff; /* Color de fondo */
+@media (max-width: 780px) {
+    .hero__grid { grid-template-columns: 1fr; text-align: center; }
+    .hero__actions { justify-content: center; }
+    .contact__form { grid-template-columns: 1fr; }
+    .header__open-nav-button { display: block; }
+    .header__nav { /* Regla para .header__nav */
+        display: none; /* Tipo de caja o modelo de layout (flex, grid, block) */
+        position: absolute; /* Esquema de posicionamiento en el flujo */
+        top: 100%; /* Desplazamiento desde el borde superior */
+        left: 0; /* Desplazamiento desde el borde izquierdo */
+        right: 0; /* Desplazamiento desde el borde derecho */
+        background: rgba(5, 8, 22, 0.96); /* Fondo (color, degradado o imagen) */
+        padding: 16px 28px; /* Relleno interior del elemento */
+        border-bottom: 1px solid var(--border); /* Borde inferior */
     }
+    .header__checkbox:checked ~ .header__nav { display: block; }
+    .header__nav-list { flex-direction: column; gap: 12px; }
+}
 
-
-/* Estilos del selector to. */
-    to{ /* Regla de estilo para to */
-        padding:0; /* Relleno interior */
-        background-color: #10161266; /* Color de fondo */
-        color: #fff; /* Color del texto */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important; /* Duración del ciclo de animación */
+        animation-iteration-count: 1 !important; /* Número de repeticiones de la animación */
+        transition-duration: 0.01ms !important; /* Duración de la transición */
+        scroll-behavior: auto !important; /* Habilita desplazamiento suave al navegar por anclas */
     }
 }
 
-
-
-
-/* Animación aparecer: define los cambios de estilo que ocurren con el tiempo. */
-@keyframes aparecer { /* Definición de animación por fotogramas clave */
-
-
-/* Estilos del selector from. */
-    from{ /* Regla de estilo para from */
-        opacity: 0; /* Nivel de transparencia */
-    }
-
-
-/* Estilos del selector to. */
-    to{ /* Regla de estilo para to */
-        opacity: 1; /* Nivel de transparencia */
-    }
-}

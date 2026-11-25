@@ -4,108 +4,117 @@
 // Arreglo maestro que contiene todos los módulos, guías interactivas, ejercicios, proyectos y documentación del curso
 const modules = [
   // --- SECCIÓN: NODE.JS (Backend, Entorno de Ejecución y APIs) ---
-  // Módulo 01 interactivo de Introducción a Node.js
   {
     cat: "node", // Categoría Node.js
     title: "01. Introducción a Node.js", // Título visible en la tarjeta
-    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Qué es Node.js, Frontend vs Backend, Navegador vs Node.js, usos reales, mapa del curso y primer script CLI hola.js.", // Descripción breve
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Qué es Node.js, Frontend vs Backend, diferencias con el navegador, usos reales y primer script CLI.", // Descripción breve
     href: "NODE/Introduccion/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 02 interactivo de Fundamentos de Node.js
   {
     cat: "node", // Categoría Node.js
     title: "02. Fundamentos de Node.js", // Título visible en la tarjeta
-    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Ciclo Cliente-Servidor HTTP, npm y package.json, process.argv, primer servidor node:http y API de bienvenida.", // Descripción breve
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Ciclo Cliente-Servidor HTTP, npm, package.json, process.argv, node:http y API de bienvenida.", // Descripción breve
     href: "NODE/Fundamentos/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 02 interactivo de Instalación y Entorno de Node.js
   {
     cat: "node", // Categoría Node.js
     title: "03. Instalación y Entorno de Node.js", // Título visible en la tarjeta
-    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Versiones LTS vs Current, instalador .msi, winget, nvm-windows, PATH, PowerShell y VS Code.", // Descripción breve
+    tag: "13 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "LTS vs Current, .msi vs winget, nvm-windows, PATH, PowerShell, node --watch y --env-file=.env.", // Descripción breve
     href: "NODE/Instalacion/index.html", // Ruta relativa al módulo interactivo
   },
-
-  // Módulo 03 interactivo de REPL de Node.js
   {
     cat: "node", // Categoría Node.js
     title: "04. REPL de Node.js", // Título visible en la tarjeta
-    tag: "12 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Ciclo Read-Eval-Print-Loop, comandos especiales (.help, .save, .load, .editor), await y prototipo de catálogo.", // Descripción breve
+    tag: "13 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Ciclo Read-Eval-Print-Loop, comandos .help/.save/.load/.editor, await directo y prototipo catálogo.", // Descripción breve
     href: "NODE/REPL/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 04 interactivo de JavaScript Moderno para Node.js
   {
     cat: "node", // Categoría Node.js
     title: "05. JavaScript Moderno para Node.js", // Título visible en la tarjeta
-    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "ES6+ para Node.js: const/let y TDZ, arrow functions, map/filter/reduce, destructuring, spread/rest, ?. y ??, y módulos ESM.", // Descripción breve
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "ES6+: const/let y TDZ, arrow functions, map/filter/reduce, destructuring, ?. y ??, Set/Map y async/await.", // Descripción breve
     href: "NODE/JavaScriptModerno/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 05 interactivo de Arquitectura Interna y Asincronía en Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "06. Arquitectura Interna y Asincronía", // Título visible en la tarjeta
-    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "V8, Event Loop, callbacks error-first, promesas, Promise.allSettled, async/await y tareas concurrentes.", // Descripción breve
-    href: "NODE/Asincronia/index.html", // Ruta relativa al módulo interactivo
-  },
-  // Módulo 06 interactivo de Módulos Nativos y Archivos en Node.js
-  {
-    cat: "node", // Categoría Node.js
-    title: "07. Módulos Nativos y Archivos", // Título visible en la tarjeta
-    tag: "9 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "APIs nativas: node:fs/promises, node:path, node:os, node:process, node:console y node:timers/promises.", // Descripción breve
-    href: "NODE/ArchivosNativos/index.html", // Ruta relativa al módulo interactivo
-  },  // Módulo 07 interactivo de Eventos y Streams en Node.js
-  {
-    cat: "node",
-    title: "08. Eventos y Streams en Node.js",
-    tag: "9 Slides",
-    desc: "EventEmitter (on, once, off, 'error'), Readable/Writable Streams por chunks, backpressure y pipeline().",
-    href: "NODE/EventosStreams/index.html",
-  },
-  // Módulo 08 interactivo de Criptografía y Seguridad con node:crypto
-  {
-    cat: "node",
-    title: "09. Criptografía y Seguridad",
-    tag: "9 Slides",
-    desc: "node:crypto en backend: randomUUID, randomBytes, SHA-256, HMAC, scrypt con sal y timingSafeEqual().",
-    href: "NODE/CryptoSeguridad/index.html",
-  },
-  // Módulo 04 interactivo de Módulos en Node.js
-  {
-    cat: "node", // Categoría Node.js
-    title: "10. Módulos en Node.js", // Título visible en la tarjeta
-    tag: "13 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "CommonJS (require/module.exports), ESM (import/export), módulos nativos, rutas y separación de capas.", // Descripción breve
+    title: "06. Módulos en Node.js", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "CommonJS (require/module.exports), ESM (import/export), resolución de rutas y separación por capas.", // Descripción breve
     href: "NODE/Modulos/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 11 interactivo de NPM y Gestión de Paquetes
   {
     cat: "node", // Categoría Node.js
-    title: "11. NPM y Gestión de Paquetes", // Título visible en la tarjeta
-    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "package.json, SemVer (^ vs ~), dependencies vs devDependencies, package-lock.json, npm ci, npx y npm audit.", // Descripción breve
+    title: "07. NPM y Gestión de Paquetes", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "package.json, SemVer (^ vs ~), dependencies vs devDependencies, package-lock.json, npm ci, npx y audit.", // Descripción breve
     href: "NODE/NPM/index.html", // Ruta relativa al módulo interactivo
   },
-  // Módulo 12 interactivo de JSON en Node.js
   {
     cat: "node", // Categoría Node.js
-    title: "12. JSON en Node.js", // Título visible en la tarjeta
-    tag: "10 Slides", // Etiqueta de cantidad de diapositivas
-    desc: "Características (RFC 8259), los 6 tipos válidos, JSON.parse/reviver, JSON.stringify/replacer/toJSON, trampas comunes y NDJSON.", // Descripción breve
+    title: "08. JSON en Node.js", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "Características (RFC 8259), los 6 tipos válidos, JSON.parse/reviver, stringify/replacer/toJSON y NDJSON.", // Descripción breve
     href: "NODE/JSON/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "09. Arquitectura Interna y Asincronía", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "V8, Event Loop, Microtasks vs Macrotasks, callbacks, Promesas, async/await y fetch() con timeout.", // Descripción breve
+    href: "NODE/Asincronia/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "10. Módulos Nativos y Archivos", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "APIs nativas: node:fs/promises, node:path, node:os, node:console, node:timers/promises y seguridad.", // Descripción breve
+    href: "NODE/ArchivosNativos/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "11. Control del Proceso (node:process)", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "process.env y .env nativo, process.argv + util.parseArgs(), stdin/stdout/stderr, exitCode y SIGINT/SIGTERM.", // Descripción breve
+    href: "NODE/Process/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "12. Eventos y Streams en Node.js", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "EventEmitter (on, once, off, 'error'), Readable/Writable/Transform por chunks, backpressure y pipeline().", // Descripción breve
+    href: "NODE/EventosStreams/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "13. Criptografía y Seguridad", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "node:crypto: randomUUID, randomBytes, SHA-256, HMAC, scrypt con sal, AES-256-GCM y timingSafeEqual().", // Descripción breve
+    href: "NODE/CryptoSeguridad/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "14. Servidores HTTP y APIs REST", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "node:http, new URL() + URLSearchParams, lectura de body JSON por chunks, códigos HTTP, CORS y fetch().", // Descripción breve
+    href: "NODE/HttpApi/index.html", // Ruta relativa al módulo interactivo
+  },
+  {
+    cat: "node", // Categoría Node.js
+    title: "15. Testing Nativo (node:test)", // Título visible en la tarjeta
+    tag: "14 Slides", // Etiqueta de cantidad de diapositivas
+    desc: "node:test, node:assert/strict (equal, deepEqual, throws, rejects), describe/it, mkdtemp() y t.mock.fn().", // Descripción breve
+    href: "NODE/Testing/index.html", // Ruta relativa al módulo interactivo
   },
   // Acceso directo a la documentación técnica de Node.js
   {
     cat: "node", // Categoría Node.js
     title: "Documentación Completa Node.js", // Título visible en la tarjeta
-    tag: "12 Guías MD", // Etiqueta de guías Markdown
-    desc: "Guías teóricas de los 12 módulos de Node.js, ejercicios y cheatsheets.", // Descripción breve
+    tag: "15 Guías MD", // Etiqueta de guías Markdown
+    desc: "Guías teóricas de los 15 módulos de Node.js, ejercicios y cheatsheets.", // Descripción breve
     href: "NODE/Documentacion/index.html", // Ruta relativa al lector de documentación
   },
 
@@ -399,7 +408,7 @@ const modules = [
   // 10: Proyecto Junior Level
   {
     cat: "proyectos",
-    title: "10. La Llave Correcta",
+    title: "14. La Llave Correcta",
     tag: "Proyecto Junior",
     desc: "Creación dinámica de tarjetas seleccionables en el DOM.",
     href: "JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/EJERCICIOS/12 La LLave Correcta/index.html",
@@ -407,21 +416,21 @@ const modules = [
   // 11–13: Proyectos Mid Level
   {
     cat: "proyectos",
-    title: "11. Recuperación por Docente",
+    title: "15. Recuperación por Docente",
     tag: "Proyecto Mid",
     desc: "Asignación y control de estado académico.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/4 Recuperacion de Materia por Docente/index.html",
   },
   {
     cat: "proyectos",
-    title: "12. Notas de Cofla",
+    title: "16. Notas de Cofla",
     tag: "Proyecto Mid",
     desc: "Promesas y asincronía simulando obtención de calificaciones.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/6 Notas de Cofla/index.html",
   },
   {
     cat: "proyectos",
-    title: "13. Compañeros de Cofla",
+    title: "17. Compañeros de Cofla",
     tag: "Proyecto Mid",
     desc: "Consumo asíncrono de datos con Fetch/Axios.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/EJERCICIOS/7 Compañeros de Cofla Htdocs/index.html",
@@ -429,84 +438,84 @@ const modules = [
   // 14–20: Proyectos Master Level
   {
     cat: "proyectos",
-    title: "14. Reloj Digital (Date)",
+    title: "18. Reloj Digital (Date)",
     tag: "Proyecto Master",
     desc: "Reloj digital en tiempo real con setInterval.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Reloj/index.html",
   },
   {
     cat: "proyectos",
-    title: "15. Idioma con LocalStorage",
+    title: "19. Idioma con LocalStorage",
     tag: "Proyecto Master",
     desc: "Selector bilingüe persistente con modal animado.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Local Storage/index.html",
   },
   {
     cat: "proyectos",
-    title: "16. Drag & Drop File Reader",
+    title: "20. Drag & Drop File Reader",
     tag: "Proyecto Master",
     desc: "Carga de archivos con barra de progreso animada.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Drag & Drop File Reader/index.html",
   },
   {
     cat: "proyectos",
-    title: "17. Texturizador Drag & Drop",
+    title: "21. Texturizador Drag & Drop",
     tag: "Proyecto Master",
     desc: "Aplicación de texturas por arrastre con dataTransfer.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Texturizador/index.html",
   },
   {
     cat: "proyectos",
-    title: "18. Galería Dinámica",
+    title: "22. Galería Dinámica",
     tag: "Proyecto Master",
     desc: "Bento Grid interactivo con FileReader y Lightbox.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Galeria Dinamica/index.html",
   },
   {
     cat: "proyectos",
-    title: "19. Lazy Load con IntersectionObserver",
+    title: "23. Lazy Load con IntersectionObserver",
     tag: "Proyecto Master",
     desc: "Carga progresiva de 45 publicaciones con animación al scroll.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Intersection Objects Lazyload/index.html",
   },
   {
     cat: "proyectos",
-    title: "20. CRUD con IndexedDB",
+    title: "24. CRUD con IndexedDB",
     tag: "Proyecto Master",
     desc: "Gestor persistente de nombres en IndexedDB.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/IndexedDB/index.html",
   },
   {
     cat: "proyectos",
-    title: "21. Uso de Cookies (Consentimiento)",
+    title: "25. Uso de Cookies (Consentimiento)",
     tag: "Proyecto Master",
     desc: "Modal interactivo de aceptación de cookies con expiración UTC y estado neón.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Uso de Cookies/index.html",
   },
   { // Ejercicio interactivo de pizarra 2D con HTML5 Canvas API
     cat: "proyectos",
-    title: "22. Web Paint (Canvas 2D)",
+    title: "26. Web Paint (Canvas 2D)",
     tag: "Proyecto Master",
     desc: "Pizarra interactiva con pincel, borrador, grosor, Deshacer (Ctrl+Z) y descarga PNG.",
     href: "JAVASCRIPT/JAVASCRIPT MASTER LEVEL/EJERCICIOS/Web Paint/index.html",
   },
   { // Proyecto práctico de gestor de finanzas personales con Canvas y localStorage
     cat: "proyectos",
-    title: "23. Finanzas APP",
+    title: "27. Finanzas APP",
     tag: "Proyecto JS",
     desc: "Control de ingresos y gastos con separador de miles en vivo, localStorage y gráfico Canvas.",
     href: "JAVASCRIPT/PROYECTOS/Finanzas APP/index.html",
   },
   { // Proyecto práctico de buscador de películas en vivo con OMDb API, Debounce y <dialog>
     cat: "proyectos",
-    title: "24. Buscador de Películas",
+    title: "28. Buscador de Películas",
     tag: "Proyecto JS",
     desc: "Buscador CineSearch con Debounce, fetch a OMDb API y modal nativo HTML5.",
     href: "JAVASCRIPT/PROYECTOS/Buscador de Peliculas/index.html",
   },
   { // Proyecto práctico de tablero Kanban con Drag & Drop nativo y localStorage
     cat: "proyectos",
-    title: "25. Tablero Kanban",
+    title: "29. Tablero Kanban",
     tag: "Proyecto JS",
     desc: "Organizador de tareas en 3 columnas con Drag & Drop nativo y persistencia localStorage.",
     href: "JAVASCRIPT/PROYECTOS/Tablero Kanban/index.html",
@@ -641,77 +650,84 @@ const modules = [
   },
   {
     cat: "mid",
-    title: "19. Peticiones HTTP",
+    title: "19. Expresiones Regulares (RegExp)",
+    tag: "14 Slides",
+    desc: "Patrones RegExp, flags g/i/m/u, anclas ^/$, clases \\d/\\w/\\s, grupos nombrados y test()/match()/replace().",
+    href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Expresiones Regulares/index.html",
+  },
+  {
+    cat: "mid",
+    title: "20. Peticiones HTTP",
     tag: "Mid Level",
     desc: "Métodos, cabeceras y códigos de estado HTTP.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Peticiones HTTP/index.html",
   },
   {
     cat: "mid",
-    title: "20. AJAX (XMLHttpRequest)",
+    title: "21. AJAX (XMLHttpRequest)",
     tag: "Mid Level",
     desc: "Realiza peticiones asíncronas sin recargar la página mediante XMLHttpRequest y maneja respuestas del servidor.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/index.html",
   },
   {
     cat: "mid",
-    title: "21. AJAX (Editor)",
+    title: "22. AJAX (Editor)",
     tag: "Mid Level",
     desc: "Peticiones asíncronas clásicas con XMLHttpRequest.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Editor/index.html",
   },
   {
     cat: "mid",
-    title: "22. AJAX (Htdocs)",
+    title: "23. AJAX (Htdocs)",
     tag: "Mid Level",
     desc: "Práctica de AJAX en entorno de servidor local.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Ajax/Ajax Htdocs/index.html",
   },
   {
     cat: "mid",
-    title: "23. Fetch API",
+    title: "24. Fetch API",
     tag: "Mid Level",
     desc: "Peticiones HTTP modernas en JavaScript.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Fetch/index.html",
   },
   {
     cat: "mid",
-    title: "24. Librería Axios",
+    title: "25. Librería Axios",
     tag: "Mid Level",
     desc: "Realiza peticiones HTTP simplificadas con transformación automática a JSON e interceptores usando Axios.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/index.html",
   },
   {
     cat: "mid",
-    title: "25. Librería Axios (Editor)",
+    title: "26. Librería Axios (Editor)",
     tag: "Mid Level",
     desc: "Cliente HTTP basado en Promesas con Axios.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios Editor/index.html",
   },
   {
     cat: "mid",
-    title: "26. Axios vs Fetch (Htdocs)",
+    title: "27. Axios vs Fetch (Htdocs)",
     tag: "Mid Level",
     desc: "Comparativa práctica entre Axios y Fetch.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Libreria Axios/Axios-Fetch-Htdocs/index.html",
   },
   {
     cat: "mid",
-    title: "27. Código Obsoleto",
+    title: "28. Código Obsoleto",
     tag: "Mid Level",
     desc: "Patrones heredados y sus equivalentes actuales.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Codigo Obsoleto/index.html",
   },
   {
     cat: "mid",
-    title: "28. Pestañas de DevTools",
+    title: "29. Pestañas de DevTools",
     tag: "Mid Level",
     desc: "Domina Elements, Console, Sources, Network, Performance (Timeline) y Application para depurar como un profesional.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/index.html",
   },
   {
     cat: "mid",
-    title: "29. DevTools: Pestaña Application",
+    title: "30. DevTools: Pestaña Application",
     tag: "Mid Level",
     desc: "Inspección de almacenamiento y caché en DevTools.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/Application/index.html",
@@ -719,7 +735,7 @@ const modules = [
   {
     cat: "mid",
     title: "Documentación Completa Mid Level",
-    tag: "25 Guías MD",
+    tag: "26 Guías MD",
     desc: "Eventos, Axios, Window, DevTools, HTTP y más.",
     href: "JAVASCRIPT/JAVASCRIPT MID LEVEL/DOCUMENTACION/index.html",
   },
@@ -878,79 +894,79 @@ const modules = [
   },
   {
     cat: "htmlcss",
-    title: "06. Flexbox (Guía Interactiva)",
+    title: "06. Formularios y Validación (Guía Interactiva)",
+    tag: "14 Slides",
+    desc: "Etiquetas <form>, <label>, inputs HTML5, validación nativa, :valid/:invalid y FormData.",
+    href: "HTML y CSS/Formularios/index.html",
+  },
+  {
+    cat: "htmlcss",
+    title: "07. Flexbox (Guía Interactiva)",
     tag: "14 Slides",
     desc: "Eje principal y cruzado, simulador Flexbox en vivo, grow/shrink/basis, patrones reales, quiz y lab.",
     href: "HTML y CSS/Flexbox/index.html",
   },
   {
     cat: "htmlcss",
-    title: "07. CSS Grid (Guía Interactiva)",
+    title: "08. CSS Grid (Guía Interactiva)",
     tag: "14 Slides",
     desc: "Unidades fr, repeat(), minmax(), simulador Grid en vivo, áreas, Subgrid, quiz y laboratorio.",
     href: "HTML y CSS/Grid/index.html",
   },
   {
     cat: "htmlcss",
-    title: "08. Animaciones CSS (Guía Interactiva)",
+    title: "09. Animaciones CSS (Guía Interactiva)",
     tag: "14 Slides",
     desc: "Transiciones vs @keyframes, simulador de curvas cubic-bezier, rendimiento GPU 60 FPS, scroll, quiz y lab.",
     href: "HTML y CSS/Animaciones/index.html",
   },
   {
     cat: "htmlcss",
-    title: "09. Funciones CSS Avanzadas (Guía Interactiva)",
+    title: "10. Funciones CSS Avanzadas (Guía Interactiva)",
     tag: "14 Slides",
     desc: "Variables CSS, simulador clamp() y color-mix(), calc(), dvh, clip-path, backdrop-filter, quiz y lab.",
     href: "HTML y CSS/Funciones Avanzadas/index.html",
   },
   {
     cat: "htmlcss",
-    title: "10. Responsive Design (Guía Interactiva)",
+    title: "11. Responsive Design (Guía Interactiva)",
     tag: "14 Slides",
     desc: "Mobile First, simulador de breakpoints, Media Queries, Container Queries, srcset/<picture>, quiz y lab.",
     href: "HTML y CSS/Responsive Design/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "Documentación Completa HTML y CSS",
-    tag: "8 Guías MD",
-    desc: "Lector interactivo de apuntes: HTML, CSS, Flexbox, Grid, Animaciones, Responsive, Funciones y Hosting.",
-    href: "HTML y CSS/Documentacion/index.html",
   },
 
   // 2. Prácticas por Temática — HTML Básico
   {
     cat: "htmlcss",
-    title: "11. HTML Básico: Títulos y Párrafos",
+    title: "12. HTML Básico: Títulos y Párrafos",
     tag: "HTML Básico",
     desc: "Jerarquía de encabezados h1–h6 y formato de párrafos.",
     href: "HTML y CSS/HTML BASICO/Titulos y Parrafos/Titulos y parrafos.html",
   },
   {
     cat: "htmlcss",
-    title: "12. HTML Básico: Listas",
+    title: "13. HTML Básico: Listas",
     tag: "HTML Básico",
     desc: "Listas ordenadas <ol>, desordenadas <ul> y elementos <li>.",
     href: "HTML y CSS/HTML BASICO/Listas/listas.html",
   },
   {
     cat: "htmlcss",
-    title: "13. HTML Básico: Enlaces",
+    title: "14. HTML Básico: Enlaces",
     tag: "HTML Básico",
     desc: "Navegación con etiquetas <a>, rutas relativas y target.",
     href: "HTML y CSS/HTML BASICO/Enlaces/enlaces.html",
   },
   {
     cat: "htmlcss",
-    title: "14. HTML Básico: Imágenes",
+    title: "15. HTML Básico: Imágenes",
     tag: "HTML Básico",
     desc: "Inserción de imágenes con <img>, src y texto alternativo alt.",
     href: "HTML y CSS/HTML BASICO/Imagenes/img.html",
   },
   {
     cat: "htmlcss",
-    title: "15. HTML Básico: Formularios",
+    title: "16. HTML Básico: Formularios",
     tag: "HTML Básico",
     desc: "Campos de entrada <input>, botones y envío básico.",
     href: "HTML y CSS/HTML BASICO/Formularios/formularios.html",
@@ -959,91 +975,91 @@ const modules = [
   // 4. Prácticas de HTML Avanzado
   {
     cat: "htmlcss",
-    title: "16. HTML Avanzado: HTML Semántico",
+    title: "17. HTML Avanzado: HTML Semántico",
     tag: "HTML Avanzado",
     desc: "Uso de <header>, <nav>, <main>, <article>, <aside> y <footer>.",
     href: "HTML y CSS/HTML avanzado/HTML Semantico/HTML semantico.html",
   },
   {
     cat: "htmlcss",
-    title: "17. HTML Avanzado: Accesibilidad (ARIA)",
+    title: "18. HTML Avanzado: Accesibilidad (ARIA)",
     tag: "HTML Avanzado",
     desc: "Buenas prácticas de accesibilidad web y atributos ARIA.",
     href: "HTML y CSS/HTML avanzado/Accesibilidad/accesibilidad.html",
   },
   {
     cat: "htmlcss",
-    title: "18. HTML Avanzado: Tablas",
+    title: "19. HTML Avanzado: Tablas",
     tag: "HTML Avanzado",
     desc: "Tablas semánticas con <thead>, <tbody>, <th> y colspan.",
     href: "HTML y CSS/HTML avanzado/Tablas/tablas.html",
   },
   {
     cat: "htmlcss",
-    title: "19. HTML Avanzado: Audio y Video",
+    title: "20. HTML Avanzado: Audio y Video",
     tag: "HTML Avanzado",
     desc: "Reproducción multimedia nativa con <audio> y <video>.",
     href: "HTML y CSS/HTML avanzado/audio y video/audio y video.html",
   },
   {
     cat: "htmlcss",
-    title: "20. HTML Avanzado: Lazy Loading",
+    title: "21. HTML Avanzado: Lazy Loading",
     tag: "HTML Avanzado",
     desc: "Carga diferida de recursos con loading='lazy'.",
     href: "HTML y CSS/HTML avanzado/Lazy load/lazy.html",
   },
   {
     cat: "htmlcss",
-    title: "21. HTML Avanzado: Select, Datalist y Option",
+    title: "22. HTML Avanzado: Select, Datalist y Option",
     tag: "HTML Avanzado",
     desc: "Listas desplegables y autocompletado nativo en formularios.",
     href: "HTML y CSS/HTML avanzado/Select Datalist y Option/selec,datalist y option.html",
   },
   {
     cat: "htmlcss",
-    title: "22. HTML Avanzado: Fieldset y Legend",
+    title: "23. HTML Avanzado: Fieldset y Legend",
     tag: "HTML Avanzado",
     desc: "Agrupación semántica de controles de formulario.",
     href: "HTML y CSS/HTML avanzado/Fieldset y Legend/fieldset y legend.html",
   },
   {
     cat: "htmlcss",
-    title: "23. HTML Avanzado: Textarea y Labels",
+    title: "24. HTML Avanzado: Textarea y Labels",
     tag: "HTML Avanzado",
     desc: "Áreas de texto multilínea y vinculación accesible con <label>.",
     href: "HTML y CSS/HTML avanzado/Textarea y Labels/text-area y labels.html",
   },
   {
     cat: "htmlcss",
-    title: "24. HTML Avanzado: Details y Summary",
+    title: "25. HTML Avanzado: Details y Summary",
     tag: "HTML Avanzado",
     desc: "Componentes desplegables nativos sin JavaScript.",
     href: "HTML y CSS/HTML avanzado/Details y Summary/details y summary.html",
   },
   {
     cat: "htmlcss",
-    title: "25. HTML Avanzado: Enlaces Avanzados",
+    title: "26. HTML Avanzado: Enlaces Avanzados",
     tag: "HTML Avanzado",
     desc: "Descargas, anclas internas, tel:, mailto: y seguridad.",
     href: "HTML y CSS/HTML avanzado/Enlaces avanzados/enlaces avanzado.html",
   },
   {
     cat: "htmlcss",
-    title: "26. HTML Avanzado: Metatags e Iconos",
+    title: "27. HTML Avanzado: Metatags e Iconos",
     tag: "HTML Avanzado",
     desc: "Comentarios, favicons y meta etiquetas SEO/OpenGraph.",
     href: "HTML y CSS/HTML avanzado/Comentarios Metatags Iconos/comentarios-metatags-iconos.html",
   },
   {
     cat: "htmlcss",
-    title: "27. HTML Avanzado: Emmet",
+    title: "28. HTML Avanzado: Emmet",
     tag: "HTML Avanzado",
     desc: "Abreviaturas rápidas para generar estructura HTML.",
     href: "HTML y CSS/HTML avanzado/Emmet/emmet.html",
   },
   {
     cat: "htmlcss",
-    title: "28. HTML Avanzado: HTML Obsoleto",
+    title: "29. HTML Avanzado: HTML Obsoleto",
     tag: "HTML Avanzado",
     desc: "Etiquetas deprecadas en HTML5 y sus reemplazos modernos.",
     href: "HTML y CSS/HTML avanzado/HTML Obsoleto/HTML obsoleto.html",
@@ -1053,105 +1069,105 @@ const modules = [
   // 6. Prácticas de CSS Avanzado
   {
     cat: "htmlcss",
-    title: "29. CSS Avanzado: Selectores",
+    title: "30. CSS Avanzado: Selectores",
     tag: "CSS Avanzado",
     desc: "Selectores de atributo, combinadores y jerarquía.",
     href: "HTML y CSS/CSS avanzado/selectores/selectores.html",
   },
   {
     cat: "htmlcss",
-    title: "30. CSS Avanzado: Herencia",
+    title: "31. CSS Avanzado: Herencia",
     tag: "CSS Avanzado",
     desc: "Propiedades heredables, inherit, initial y unset.",
     href: "HTML y CSS/CSS avanzado/Herencia/herencia.html",
   },
   {
     cat: "htmlcss",
-    title: "31. CSS Avanzado: Display",
+    title: "32. CSS Avanzado: Display",
     tag: "CSS Avanzado",
     desc: "Comportamiento de cajas block, inline, inline-block y none.",
     href: "HTML y CSS/CSS avanzado/Display/display.html",
   },
   {
     cat: "htmlcss",
-    title: "32. CSS Avanzado: Position Relative",
+    title: "33. CSS Avanzado: Position Relative",
     tag: "CSS Avanzado",
     desc: "Desplazamiento relativo y contexto de referencia.",
     href: "HTML y CSS/CSS avanzado/Position/position_html/position-relative.html",
   },
   {
     cat: "htmlcss",
-    title: "33. CSS Avanzado: Position Absolute",
+    title: "34. CSS Avanzado: Position Absolute",
     tag: "CSS Avanzado",
     desc: "Posicionamiento absoluto respecto al ancestro posicionado.",
     href: "HTML y CSS/CSS avanzado/Position/position_html/position-absolute.html",
   },
   {
     cat: "htmlcss",
-    title: "34. CSS Avanzado: Position Fixed",
+    title: "35. CSS Avanzado: Position Fixed",
     tag: "CSS Avanzado",
     desc: "Elementos fijos respecto a la ventana del navegador.",
     href: "HTML y CSS/CSS avanzado/Position/position_html/position-fixed.html",
   },
   {
     cat: "htmlcss",
-    title: "35. CSS Avanzado: Position Sticky",
+    title: "36. CSS Avanzado: Position Sticky",
     tag: "CSS Avanzado",
     desc: "Encabezados pegajosos al hacer scroll.",
     href: "HTML y CSS/CSS avanzado/Position/position_html/position-sticky.html",
   },
   {
     cat: "htmlcss",
-    title: "36. CSS Avanzado: Pseudoclases",
+    title: "37. CSS Avanzado: Pseudoclases",
     tag: "CSS Avanzado",
     desc: "Estados :hover, :focus, :nth-child() y :not().",
     href: "HTML y CSS/CSS avanzado/Pseudoclases/pseudoclases.html",
   },
   {
     cat: "htmlcss",
-    title: "37. CSS Avanzado: Pseudoelementos",
+    title: "38. CSS Avanzado: Pseudoelementos",
     tag: "CSS Avanzado",
     desc: "Elementos virtuales ::before, ::after y ::first-letter.",
     href: "HTML y CSS/CSS avanzado/Pseudoelementos/pseudoelementos.html",
   },
   {
     cat: "htmlcss",
-    title: "38. CSS Avanzado: Metodología BEM",
+    title: "39. CSS Avanzado: Metodología BEM",
     tag: "CSS Avanzado",
     desc: "Nomenclatura Block__Element--Modifier para CSS escalable.",
     href: "HTML y CSS/CSS avanzado/BEM/bem.html",
   },
   {
     cat: "htmlcss",
-    title: "39. CSS Avanzado: Object Fit & Position",
+    title: "40. CSS Avanzado: Object Fit & Position",
     tag: "CSS Avanzado",
     desc: "Recorte y encuadre de imágenes con cover y contain.",
     href: "HTML y CSS/CSS avanzado/Object Fit_Position/fit_position.html",
   },
   {
     cat: "htmlcss",
-    title: "40. CSS Avanzado: Overflow",
+    title: "41. CSS Avanzado: Overflow",
     tag: "CSS Avanzado",
     desc: "Control de desbordamiento con hidden, scroll y auto.",
     href: "HTML y CSS/CSS avanzado/Overflow/overflow.html",
   },
   {
     cat: "htmlcss",
-    title: "41. CSS Avanzado: Outline",
+    title: "42. CSS Avanzado: Outline",
     tag: "CSS Avanzado",
     desc: "Contornos externos y foco accesible sin mover el layout.",
     href: "HTML y CSS/CSS avanzado/Outline/outline.html",
   },
   {
     cat: "htmlcss",
-    title: "42. CSS Avanzado: Control de Flujo de Texto",
+    title: "43. CSS Avanzado: Control de Flujo de Texto",
     tag: "CSS Avanzado",
     desc: "Ajuste de palabras largas, white-space y text-overflow.",
     href: "HTML y CSS/CSS avanzado/Control_flujo_texto/control_texto.html",
   },
   {
     cat: "htmlcss",
-    title: "43. CSS Avanzado: Transition",
+    title: "44. CSS Avanzado: Transition",
     tag: "CSS Avanzado",
     desc: "Transiciones suaves entre cambios de estado.",
     href: "HTML y CSS/CSS avanzado/Transition/transition.html",
@@ -1160,49 +1176,49 @@ const modules = [
   // 7. Prácticas de Flexbox
   {
     cat: "htmlcss",
-    title: "44. Flexbox: Flex Direction",
+    title: "45. Flexbox: Flex Direction",
     tag: "Flexbox",
     desc: "Dirección del eje principal: row, row-reverse, column.",
     href: "HTML y CSS/Flexbox/Flex_Direction/direction.html",
   },
   {
     cat: "htmlcss",
-    title: "45. Flexbox: Alineación",
+    title: "46. Flexbox: Alineación",
     tag: "Flexbox",
     desc: "Distribución con justify-content y align-items.",
     href: "HTML y CSS/Flexbox/Alineacion/alineacion.html",
   },
   {
     cat: "htmlcss",
-    title: "46. Flexbox: Wrap y Flow",
+    title: "47. Flexbox: Wrap y Flow",
     tag: "Flexbox",
     desc: "Saltos de línea automáticos con flex-wrap y flex-flow.",
     href: "HTML y CSS/Flexbox/Wrap y Flow/wrap_flow.html",
   },
   {
     cat: "htmlcss",
-    title: "47. Flexbox: Grow, Shrink y Basis",
+    title: "48. Flexbox: Grow, Shrink y Basis",
     tag: "Flexbox",
     desc: "Crecimiento, encogimiento y tamaño base de ítems flex.",
     href: "HTML y CSS/Flexbox/Grow,Shrink y Basis/grow.html",
   },
   {
     cat: "htmlcss",
-    title: "48. Flexbox: Order",
+    title: "49. Flexbox: Order",
     tag: "Flexbox",
     desc: "Reordenamiento visual de elementos flex sin tocar HTML.",
     href: "HTML y CSS/Flexbox/Order/order.html",
   },
   {
     cat: "htmlcss",
-    title: "49. Flexbox: Align Self",
+    title: "50. Flexbox: Align Self",
     tag: "Flexbox",
     desc: "Alineación individual de un hijo en el eje transversal.",
     href: "HTML y CSS/Flexbox/Align Self/align.html",
   },
   {
     cat: "htmlcss",
-    title: "50. Flexbox: Layout Completo",
+    title: "51. Flexbox: Layout Completo",
     tag: "Flexbox",
     desc: "Maquetación práctica de interfaz usando Flexbox.",
     href: "HTML y CSS/Flexbox/Layout/layout.html",
@@ -1211,77 +1227,77 @@ const modules = [
   // 8. Prácticas de CSS Grid
   {
     cat: "htmlcss",
-    title: "51. Grid: Principios",
+    title: "52. Grid: Principios",
     tag: "CSS Grid",
     desc: "Creación de cuadrículas con display: grid, filas y columnas.",
     href: "HTML y CSS/Grid/Principios/grid.html",
   },
   {
     cat: "htmlcss",
-    title: "52. Grid: Auto y FR",
+    title: "53. Grid: Auto y FR",
     tag: "CSS Grid",
     desc: "Reparto proporcional del espacio libre con la unidad fr.",
     href: "HTML y CSS/Grid/Auto y FR/auto.html",
   },
   {
     cat: "htmlcss",
-    title: "53. Grid: Repeat",
+    title: "54. Grid: Repeat",
     tag: "CSS Grid",
     desc: "Definición compacta de pistas repetitivas con repeat().",
     href: "HTML y CSS/Grid/Repeat/repeat.html",
   },
   {
     cat: "htmlcss",
-    title: "54. Grid: Gap",
+    title: "55. Grid: Gap",
     tag: "CSS Grid",
     desc: "Separación entre filas y columnas sin márgenes extras.",
     href: "HTML y CSS/Grid/Gap/gap.html",
   },
   {
     cat: "htmlcss",
-    title: "55. Grid: Row y Column",
+    title: "56. Grid: Row y Column",
     tag: "CSS Grid",
     desc: "Expansión de celdas con grid-column, grid-row y span.",
     href: "HTML y CSS/Grid/Row-Column/row-column.html",
   },
   {
     cat: "htmlcss",
-    title: "56. Grid: Áreas (Template Areas)",
+    title: "57. Grid: Áreas (Template Areas)",
     tag: "CSS Grid",
     desc: "Maquetación visual nombrando áreas con grid-template-areas.",
     href: "HTML y CSS/Grid/Area/area.html",
   },
   {
     cat: "htmlcss",
-    title: "57. Grid: Alineación",
+    title: "58. Grid: Alineación",
     tag: "CSS Grid",
     desc: "Alineación de ítems y pistas con place-items y place-content.",
     href: "HTML y CSS/Grid/Alineacion/alineacion.html",
   },
   {
     cat: "htmlcss",
-    title: "58. Grid: Explícito e Implícito",
+    title: "59. Grid: Explícito e Implícito",
     tag: "CSS Grid",
     desc: "Control de pistas automáticas con grid-auto-rows y flow.",
     href: "HTML y CSS/Grid/Grid Explicito e Implicito/exp-imp.html",
   },
   {
     cat: "htmlcss",
-    title: "59. Grid: Dense",
+    title: "60. Grid: Dense",
     tag: "CSS Grid",
     desc: "Relleno automático de huecos con grid-auto-flow: dense.",
     href: "HTML y CSS/Grid/Dense/dense.html",
   },
   {
     cat: "htmlcss",
-    title: "60. Grid: Dinámico (Responsive)",
+    title: "61. Grid: Dinámico (Responsive)",
     tag: "CSS Grid",
     desc: "Grillas adaptables con auto-fit, auto-fill y minmax().",
     href: "HTML y CSS/Grid/Dinamico(Responsive)/dinamico.html",
   },
   {
     cat: "htmlcss",
-    title: "61. Grid: Subgrid",
+    title: "62. Grid: Subgrid",
     tag: "CSS Grid",
     desc: "Alineación de hijos anidados con la cuadrícula del padre.",
     href: "HTML y CSS/Grid/Subgrid/subgrid.html",
@@ -1290,42 +1306,42 @@ const modules = [
   // 9. Prácticas de Animaciones
   {
     cat: "htmlcss",
-    title: "62. Animaciones: Keyframes Base",
+    title: "63. Animaciones: Keyframes Base",
     tag: "Animaciones",
     desc: "Creación de animaciones declarativas con @keyframes.",
     href: "HTML y CSS/Animaciones/Animaciones/animaciones.html",
   },
   {
     cat: "htmlcss",
-    title: "63. Animaciones: Botones Animados",
+    title: "64. Animaciones: Botones Animados",
     tag: "Animaciones",
     desc: "Microinteracciones y efectos hover en botones.",
     href: "HTML y CSS/Animaciones/Botones Animados/botones.html",
   },
   {
     cat: "htmlcss",
-    title: "64. Animaciones: Texto Animado",
+    title: "65. Animaciones: Texto Animado",
     tag: "Animaciones",
     desc: "Efectos de entrada, escritura y degradados en texto.",
     href: "HTML y CSS/Animaciones/Texto/texto.html",
   },
   {
     cat: "htmlcss",
-    title: "65. Animaciones: Transiciones (Repaso)",
+    title: "66. Animaciones: Transiciones (Repaso)",
     tag: "Animaciones",
     desc: "Repaso práctico de timing-functions y transiciones.",
     href: "HTML y CSS/Animaciones/Transiciones (Repaso)/transiciones.html",
   },
   {
     cat: "htmlcss",
-    title: "66. Animaciones: Scroll Container",
+    title: "67. Animaciones: Scroll Container",
     tag: "Animaciones",
     desc: "Animaciones vinculadas al progreso de scroll del contenedor.",
     href: "HTML y CSS/Animaciones/Scroll/Scroll Container/scroll.html",
   },
   {
     cat: "htmlcss",
-    title: "67. Animaciones: Scroll View",
+    title: "68. Animaciones: Scroll View",
     tag: "Animaciones",
     desc: "Animaciones activadas al entrar en el viewport con view().",
     href: "HTML y CSS/Animaciones/Scroll/View/view.html",
@@ -1334,70 +1350,70 @@ const modules = [
   // 10. Prácticas de Funciones Avanzadas
   {
     cat: "htmlcss",
-    title: "68. Funciones Avanzadas: Variables CSS",
+    title: "69. Funciones Avanzadas: Variables CSS",
     tag: "CSS Moderno",
     desc: "Custom properties (--var) y temas dinámicos.",
     href: "HTML y CSS/Funciones Avanzadas/Variables/variables.html",
   },
   {
     cat: "htmlcss",
-    title: "69. Funciones Avanzadas: Calc()",
+    title: "70. Funciones Avanzadas: Calc()",
     tag: "CSS Moderno",
     desc: "Operaciones matemáticas mezclando unidades en CSS.",
     href: "HTML y CSS/Funciones Avanzadas/Calc/calc.html",
   },
   {
     cat: "htmlcss",
-    title: "70. Funciones Avanzadas: Min, Max y Clamp",
+    title: "71. Funciones Avanzadas: Min, Max y Clamp",
     tag: "CSS Moderno",
     desc: "Dimensiones y tipografías fluidas con límites seguros.",
     href: "HTML y CSS/Funciones Avanzadas/Max Min Clamp/max-min.html",
   },
   {
     cat: "htmlcss",
-    title: "71. Funciones Avanzadas: Unidades del Viewport",
+    title: "72. Funciones Avanzadas: Unidades del Viewport",
     tag: "CSS Moderno",
     desc: "Uso de vw, vh, dvh, svh y lvh en pantallas modernas.",
     href: "HTML y CSS/Funciones Avanzadas/Unidades del Viewport/unidades.html",
   },
   {
     cat: "htmlcss",
-    title: "72. Funciones Avanzadas: Color Mix",
+    title: "73. Funciones Avanzadas: Color Mix",
     tag: "CSS Moderno",
     desc: "Mezcla nativa de colores en CSS con color-mix().",
     href: "HTML y CSS/Funciones Avanzadas/Color MIx/color.html",
   },
   {
     cat: "htmlcss",
-    title: "73. Funciones Avanzadas: Filter y Backdrop",
+    title: "74. Funciones Avanzadas: Filter y Backdrop",
     tag: "CSS Moderno",
     desc: "Efectos blur, desenfoque de fondo y glassmorphism.",
     href: "HTML y CSS/Funciones Avanzadas/Filter y Backdrop/filter.html",
   },
   {
     cat: "htmlcss",
-    title: "74. Funciones Avanzadas: Clip Path",
+    title: "75. Funciones Avanzadas: Clip Path",
     tag: "CSS Moderno",
     desc: "Recortes poligonales, círculos y máscaras geométricas.",
     href: "HTML y CSS/Funciones Avanzadas/Clip Path/clip.html",
   },
   {
     cat: "htmlcss",
-    title: "75. Funciones Avanzadas: Transform",
+    title: "76. Funciones Avanzadas: Transform",
     tag: "CSS Moderno",
     desc: "Traslación, rotación, escala e inclinación 2D/3D.",
     href: "HTML y CSS/Funciones Avanzadas/Transform/transform.html",
   },
   {
     cat: "htmlcss",
-    title: "76. Funciones Avanzadas: Initial Letter",
+    title: "77. Funciones Avanzadas: Initial Letter",
     tag: "CSS Moderno",
     desc: "Letras capitales estilo editorial con initial-letter.",
     href: "HTML y CSS/Funciones Avanzadas/Initial Letter/initial.html",
   },
   {
     cat: "htmlcss",
-    title: "77. Funciones Avanzadas: Scroll",
+    title: "78. Funciones Avanzadas: Scroll",
     tag: "CSS Moderno",
     desc: "Comportamiento de scroll suave y scroll-snap.",
     href: "HTML y CSS/Funciones Avanzadas/Scroll/scroll.html",
@@ -1406,82 +1422,66 @@ const modules = [
   // 11. Prácticas de Responsive Design
   {
     cat: "htmlcss",
-    title: "78. Responsive: Mobile Design",
+    title: "79. Responsive: Mobile Design",
     tag: "Responsive",
     desc: "Principios de diseño enfocado en dispositivos móviles.",
     href: "HTML y CSS/Responsive Design/Mobile Design/mobile.html",
   },
   {
     cat: "htmlcss",
-    title: "79. Responsive: Media Queries",
+    title: "80. Responsive: Media Queries",
     tag: "Responsive",
     desc: "Puntos de quiebre con @media (min-width / max-width).",
     href: "HTML y CSS/Responsive Design/Media Queries/mediaq.html",
   },
   {
     cat: "htmlcss",
-    title: "80. Responsive: Container Queries",
+    title: "81. Responsive: Container Queries",
     tag: "Responsive",
     desc: "Componentes adaptables al tamaño de su contenedor padre.",
     href: "HTML y CSS/Responsive Design/Container Queries/container.html",
   },
   {
     cat: "htmlcss",
-    title: "81. Responsive: Feature Queries",
+    title: "82. Responsive: Feature Queries",
     tag: "Responsive",
     desc: "Detección de soporte CSS moderno con @supports.",
     href: "HTML y CSS/Responsive Design/Feature Queries/features.html",
   },
   {
     cat: "htmlcss",
-    title: "82. Responsive: Bloques Flexibles",
+    title: "83. Responsive: Bloques Flexibles",
     tag: "Responsive",
     desc: "Contenedores fluidos que se adaptan al ancho disponible.",
     href: "HTML y CSS/Responsive Design/Bloques Flexibles/bloques_flexibles.html",
   },
   {
     cat: "htmlcss",
-    title: "83. Responsive: Holy Grail Layout",
-    tag: "Responsive",
-    desc: "Maquetación clásica de cabecera, 3 columnas y pie adaptable.",
-    href: "HTML y CSS/Responsive Design/Holi Grail/holigrail.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "84. Responsive: Multimedia Flexible",
+    title: "85. Responsive: Multimedia Flexible",
     tag: "Responsive",
     desc: "Imágenes y videos fluidos sin desbordar la pantalla.",
     href: "HTML y CSS/Responsive Design/Multimedia Flexible/multimedia.html",
   },
   {
     cat: "htmlcss",
-    title: "85. Responsive: Picture, Source y Media",
+    title: "86. Responsive: Picture, Source y Media",
     tag: "Responsive",
     desc: "Dirección de arte y formatos WebP con <picture>.",
     href: "HTML y CSS/Responsive Design/Picture,Source,Media/picture.html",
   },
   {
     cat: "htmlcss",
-    title: "86. Responsive: Srcset y Sizes",
+    title: "87. Responsive: Srcset y Sizes",
     tag: "Responsive",
     desc: "Entrega de imágenes óptimas según resolución y tamaño.",
     href: "HTML y CSS/Responsive Design/Srcset y Sizes/src-szs.html",
   },
-
-  // 12. Ejercicios Prácticos
   {
     cat: "htmlcss",
-    title: "87. Ejercicio: Tarjeta de Presentación",
-    tag: "Ejercicio",
-    desc: "Maquetación de tarjeta de perfil con Box Model, sombras, border-radius: 50% y variantes de color.",
-    href: "HTML y CSS/CSS BASICO/Ejercicios/Tarjeta de presentacion/index.html",
-  },
-  {
-    cat: "htmlcss",
-    title: "88. Ejercicio: Ventana Modal",
-    tag: "Ejercicio",
-    desc: "Construcción de una ventana modal con <dialog>, position y metodología BEM.",
-    href: "HTML y CSS/CSS avanzado/Ejercicios/Ventana Modal/modal.html",
+    title: "88. Documentación Completa HTML y CSS",
+    tag: "9 Guías MD",
+    desc: "Lector interactivo de apuntes: HTML, CSS, Flexbox, Grid, Animaciones, Responsive, Funciones y Hosting.",
+    href: "HTML y CSS/Documentacion/index.html",
   },
 
   // 01–09: Proyectos HTML y CSS (al inicio de Proyectos)
@@ -1489,7 +1489,7 @@ const modules = [
     cat: "proyectos",
     title: "00. Proyectos HTML y CSS (Exhibición)",
     tag: "Proyecto",
-    desc: "Exhibición visual de los 8 proyectos reales de HTML5 y CSS3.",
+    desc: "Exhibición visual de los 11 proyectos prácticos de HTML5 y CSS3.",
     href: "HTML y CSS/PROYECTOS/index.html",
   },
   {
@@ -1501,63 +1501,91 @@ const modules = [
   },
   {
     cat: "proyectos",
-    title: "02. Accordion (Summary)",
+    title: "02. Exhibición de Proyectos Node.js",
+    tag: "Proyecto Node.js",
+    desc: "Exhibición del proyecto integrador de Node.js nativo: API HTTP, persistencia JSON, NDJSON y testing.",
+    href: "NODE/Proyectos/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "03. Accordion (Summary)",
     tag: "Proyecto",
     desc: "Acordeón semántico nativo usando <details> y <summary>.",
     href: "HTML y CSS/PROYECTOS/ACCORDION MENU/SUMMARY-DETAILS/index.html",
   },
   {
     cat: "proyectos",
-    title: "03. Accordion Menu (Divs)",
+    title: "04. Accordion Menu (Divs)",
     tag: "Proyecto",
     desc: "Acordeón interactivo construido con contenedores div.",
     href: "HTML y CSS/PROYECTOS/ACCORDION MENU/DIVS/index.html",
   },
   {
     cat: "proyectos",
-    title: "04. Chatbox",
+    title: "05. Chatbox",
     tag: "Proyecto",
     desc: "Interfaz de mensajería moderna con Flexbox y burbujas.",
     href: "HTML y CSS/PROYECTOS/CHATBOX/index.html",
   },
   {
     cat: "proyectos",
-    title: "05. Flipper Card 3D",
+    title: "06. Flipper Card 3D",
     tag: "Proyecto",
     desc: "Efecto de rotación 3D con perspectiva CSS.",
     href: "HTML y CSS/PROYECTOS/FLIPPER CARD/index.html",
   },
   {
     cat: "proyectos",
-    title: "06. One View Page",
+    title: "07. Tarjeta de Presentación",
+    tag: "Proyecto",
+    desc: "Maquetación de tarjeta de perfil con Box Model, sombras, border-radius: 50% y variantes de color.",
+    href: "HTML y CSS/CSS BASICO/Ejercicios/Tarjeta de presentacion/index.html",
+  },
+  {
+    cat: "proyectos",
+    title: "08. One View Page",
     tag: "Proyecto",
     desc: "Maquetación de pantalla completa con diseño limpio.",
     href: "HTML y CSS/PROYECTOS/ONE VIEW PAGE/index.html",
   },
   {
     cat: "proyectos",
-    title: "07. Sidebar Menu",
+    title: "09. Sidebar Menu",
     tag: "Proyecto",
     desc: "Barra de navegación lateral adaptable con transiciones.",
     href: "HTML y CSS/PROYECTOS/SIDEBAR MENU/index.html",
   },
   {
     cat: "proyectos",
-    title: "08. Web Page",
+    title: "10. Web Page",
     tag: "Proyecto",
     desc: "Sitio web completo estructurado con Grid y Flexbox.",
     href: "HTML y CSS/PROYECTOS/WEB PAGE/index.html",
   },
   {
     cat: "proyectos",
-    title: "09. Web Page Animations",
+    title: "11. Web Page Animations",
     tag: "Proyecto",
     desc: "Transiciones y @keyframes aplicados a una landing page.",
     href: "HTML y CSS/PROYECTOS/WEB PAGE ANIMATIONS/index.html",
   },
   {
     cat: "proyectos",
-    title: "26. Gestor de Tareas (Node.js)",
+    title: "12. Ventana Modal (<dialog> + BEM)",
+    tag: "Proyecto",
+    desc: "Construcción de una ventana modal accesible con <dialog>, position y metodología BEM.",
+    href: "HTML y CSS/CSS avanzado/Ejercicios/Ventana Modal/modal.html",
+  },
+  {
+    cat: "proyectos",
+    title: "13. Holy Grail Layout",
+    tag: "Proyecto",
+    desc: "Estructura clásica de cabecera, 3 columnas fluidas y pie de página con CSS Grid.",
+    href: "HTML y CSS/Responsive Design/Holi Grail/holigrail.html",
+  },
+  {
+    cat: "proyectos",
+    title: "30. Gestor de Tareas (Node.js)",
     tag: "Proyecto Node.js",
     desc: "Interfaz web + API HTTP nativa (node:http), persistencia JSON, auditoría NDJSON y EventEmitter.",
     href: "NODE/Proyectos/Tareas/public/index.html",
@@ -1573,27 +1601,27 @@ const TECH_ICONS = {
 };
 
 // Función auxiliar que determina qué icono de tecnología corresponde a cada tarjeta del portal
-function getCardTechIcon(item) {
+function getCardTechIcon(item) { // Define función reutilizable
   // Si pertenece a Node.js o apunta a la carpeta NODE/, usamos el icono oficial de Node.js
-  if (item.cat === "node" || item.href.startsWith("NODE/")) return TECH_ICONS.node;
+  if (item.cat === "node" || item.href.startsWith("NODE/")) return TECH_ICONS.node; // Evalúa condición lógica
   // Si pertenece a cualquier nivel de JavaScript o apunta a JAVASCRIPT/, usamos el icono oficial JS
-  if (item.cat === "master" || item.cat === "mid" || item.cat === "junior" || item.href.startsWith("JAVASCRIPT/")) return TECH_ICONS.js;
+  if (item.cat === "master" || item.cat === "mid" || item.cat === "junior" || item.href.startsWith("JAVASCRIPT/")) return TECH_ICONS.js; // Evalúa condición lógica
   // Si es un proyecto de HTML y CSS, mostramos ambos iconos (HTML5 y CSS3) juntos
-  if (item.cat === "proyectos" && item.href.startsWith("HTML y CSS/")) return TECH_ICONS.html + TECH_ICONS.css;
+  if (item.cat === "proyectos" && item.href.startsWith("HTML y CSS/")) return TECH_ICONS.html + TECH_ICONS.css; // Evalúa condición lógica
   // Si el módulo es específicamente de HTML, usamos el icono naranja de HTML5
-  if (/html/i.test(item.title) && !/css/i.test(item.title)) return TECH_ICONS.html;
+  if (/html/i.test(item.title) && !/css/i.test(item.title)) return TECH_ICONS.html; // Evalúa condición lógica
   // Si es un módulo de CSS, Flexbox, Grid, Animaciones, Responsive o Funciones Avanzadas, usamos el icono azul CSS3
-  if (item.cat === "htmlcss" || item.cat === "proyectos") return TECH_ICONS.css;
+  if (item.cat === "htmlcss" || item.cat === "proyectos") return TECH_ICONS.css; // Evalúa condición lógica
   // Respaldo por defecto
-  return "";
+  return ""; // Retorna el resultado de la función
 }
 
 // Función auxiliar que asigna un icono temático acorde al contenido de cada ejercicio o proyecto
-function getTopicIcon(item) {
+function getTopicIcon(item) { // Define función reutilizable
   // Solo aplicamos icono temático adicional en ejercicios y proyectos
-  if (item.cat !== "ejercicios" && item.cat !== "proyectos") return "";
+  if (item.cat !== "ejercicios" && item.cat !== "proyectos") return ""; // Evalúa condición lógica
   // Normalizamos el título a minúsculas para comparar palabras clave
-  const t = item.title.toLowerCase();
+  const t = item.title.toLowerCase(); // Declara e inicializa variable local
   if (t.includes("helado")) return "🍦"; // Helados y Precios
   if (t.includes("fiesta")) return "🎉"; // Fiesta y Entrada
   if (t.includes("asistencia")) return "📋"; // Control de Asistencia
@@ -1647,25 +1675,25 @@ const titles = {
 };
 
 // Referencia al contenedor principal donde se inyectan las secciones y tarjetas
-const portal = document.getElementById("portalContent");
+const portal = document.getElementById("portalContent"); // Declara e inicializa variable local
 // Referencia al campo de búsqueda en tiempo real
-const searchInput = document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput"); // Declara e inicializa variable local
 // Colección de todos los botones de filtro por categoría
-const filterBtns = document.querySelectorAll(".filter-btn");
+const filterBtns = document.querySelectorAll(".filter-btn"); // Declara e inicializa variable local
 // Variable que almacena el filtro de categoría seleccionado actualmente (soporta ?filter=proyectos en la URL)
 const urlFilter = new URLSearchParams(window.location.search).get("filter"); // Lee parámetro de filtro desde la URL
-let activeFilter = urlFilter && ["all", "htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"].includes(urlFilter) ? urlFilter : "all";
+let activeFilter = urlFilter && ["all", "htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"].includes(urlFilter) ? urlFilter : "all"; // Declara e inicializa variable local
 let projectSubFilter = "all"; // Subfiltro interno de la sección Proyectos (all, htmlcss, js, node)
 
 // Si la URL trajo un filtro válido, sincronizamos el botón activo en la barra de herramientas
-if (activeFilter !== "all") {
+if (activeFilter !== "all") { // Evalúa condición lógica
   filterBtns.forEach((b) => b.classList.toggle("active", b.dataset.filter === activeFilter)); // Actualiza botón activo
 }
 
 // Función principal encargada de filtrar y renderizar dinámicamente el catálogo en el DOM
-function render() {
+function render() { // Define función reutilizable
   // Obtenemos el texto buscado sin espacios sobrantes y en minúsculas para comparación insensible a mayúsculas
-  const q = searchInput.value.trim().toLowerCase();
+  const q = searchInput.value.trim().toLowerCase(); // Declara e inicializa variable local
   // Limpiamos el contenido previo del portal antes de volver a dibujar
   portal.innerHTML = ""; // Actualiza contenido en el DOM
 
@@ -1682,20 +1710,26 @@ function render() {
   };
 
   // Leemos una única vez el progreso guardado en localStorage antes de recorrer categorías
-  let progressMap = {};
+  let progressMap = {}; // Declara e inicializa variable local
   try { progressMap = JSON.parse(localStorage.getItem("curso_web_progress") || "{}"); } catch (_) {}
   renderGlobalProgress(progressMap);
   // Fragmento principal para insertar todas las secciones en una sola operación DOM
   const portalFrag = document.createDocumentFragment(); // Crea DocumentFragment para minimizar reflows
+  // Guarda el ámbito activo ('htmlcss', 'js', 'node' o 'all') para respetar filtros al navegar entre proyectos
+  let projectScope = "all";
+  if (activeFilter === "htmlcss" || (activeFilter === "proyectos" && projectSubFilter === "htmlcss")) projectScope = "htmlcss";
+  else if (["junior", "mid", "master"].includes(activeFilter) || (activeFilter === "proyectos" && projectSubFilter === "js")) projectScope = "js";
+  else if (activeFilter === "node" || (activeFilter === "proyectos" && projectSubFilter === "node")) projectScope = "node";
+  try { sessionStorage.setItem("cursoProjectScope", projectScope); } catch (_) {}
 
   // Definimos el orden progresivo del curso (HTML/CSS → JS Junior → JS Mid → JS Master → Node.js → Ejercicios → Proyectos)
-  const order = ["htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"];
+  const order = ["htmlcss", "junior", "mid", "master", "node", "ejercicios", "proyectos"]; // Declara e inicializa variable local
   // Recorremos cada categoría en el orden establecido
   order.forEach((cat) => {
     // Permitimos mostrar también la sección de proyectos del nivel cuando el usuario filtra por JS, Node o HTML/CSS
-    const isLevelProjects = activeFilter !== "all" && cat === "proyectos" && ["htmlcss", "junior", "mid", "master", "node"].includes(activeFilter);
+    const isLevelProjects = activeFilter !== "all" && cat === "proyectos" && ["htmlcss", "junior", "mid", "master", "node"].includes(activeFilter); // Declara e inicializa variable local
     // Si hay un filtro activo distinto de 'all' y no coincide con esta categoría (ni es proyectos del nivel), la omitimos
-    if (activeFilter !== "all" && activeFilter !== cat && !isLevelProjects) return;
+    if (activeFilter !== "all" && activeFilter !== cat && !isLevelProjects) return; // Evalúa condición lógica
     // Filtramos los módulos que pertenecen a esta categoría y coinciden con la búsqueda
     const items = modules.filter(
       (m) =>
@@ -1706,24 +1740,24 @@ function render() {
           m.href.toLowerCase().includes(q)),
     );
     // Si ningún módulo coincide en esta categoría, no creamos sección vacía
-    if (items.length === 0) return;
+    if (items.length === 0) return; // Evalúa condición lógica
 
     // Ordena numéricamente Ejercicios (01–15) y Proyectos (01–20) según el avance del curso
-    if (cat === "ejercicios" || cat === "proyectos") {
+    if (cat === "ejercicios" || cat === "proyectos") { // Evalúa condición lógica
       items.sort((a, b) => parseInt(a.title, 10) - parseInt(b.title, 10));
     }
 
     // Creamos el elemento <section> contenedor de la categoría
-    const sec = document.createElement("section");
+    const sec = document.createElement("section"); // Declara e inicializa variable local
     // Asignamos la clase CSS de sección de curso
     sec.className = "course-section";
-    const catDone = items.filter((it) => progressMap[it.href]?.completed).length;
-    const catDoneTag = catDone > 0 ? ` <span class="tag">${catDone}/${items.length} ✓</span>` : "";
+    const catDone = items.filter((it) => progressMap[it.href]?.completed).length; // Declara e inicializa variable local
+    const catDoneTag = catDone > 0 ? ` <span class="tag">${catDone}/${items.length} ✓</span>` : ""; // Declara e inicializa variable local
     sec.innerHTML = `<h2 class="course-title">${titles[cat]} <span class="tag">${items.length}</span>${catDoneTag}</h2>`; // Actualiza contenido en el DOM
 
     // Barra de subfiltros exclusiva para la sección de Proyectos (Todos, HTML y CSS, JavaScript, Node.js)
-    if (cat === "proyectos" && !isLevelProjects) {
-      const subBar = document.createElement("div");
+    if (cat === "proyectos" && !isLevelProjects) { // Evalúa condición lógica
+      const subBar = document.createElement("div"); // Declara e inicializa variable local
       subBar.className = "filters proj-subfilters";
       subBar.style.marginBottom = "16px";
       const subOpts = [
@@ -1733,11 +1767,11 @@ function render() {
         { id: "node", label: "Node.js" },
       ];
       subOpts.forEach((opt) => {
-        const btn = document.createElement("button");
+        const btn = document.createElement("button"); // Declara e inicializa variable local
         btn.type = "button";
         btn.className = "filter-btn" + (projectSubFilter === opt.id ? " active" : "");
-        btn.textContent = opt.label;
-        btn.addEventListener("click", () => {
+        btn.textContent = opt.label; // Actualiza texto plano en el DOM
+        btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
           projectSubFilter = opt.id;
           render();
         });
@@ -1747,8 +1781,8 @@ function render() {
     }
 
     // Barra de subfiltros para las secciones de JavaScript (Todos, Junior, Mid, Master)
-    if (["junior", "mid", "master"].includes(cat)) {
-      const jsBar = document.createElement("div");
+    if (["junior", "mid", "master"].includes(cat)) { // Evalúa condición lógica
+      const jsBar = document.createElement("div"); // Declara e inicializa variable local
       jsBar.className = "proj-subfilters js-subfilters";
       const jsOpts = [
         { id: "all", label: "Todos" },
@@ -1757,11 +1791,11 @@ function render() {
         { id: "master", label: "JS Master" },
       ];
       jsOpts.forEach((opt) => {
-        const btn = document.createElement("button");
+        const btn = document.createElement("button"); // Declara e inicializa variable local
         btn.type = "button";
         btn.className = "filter-btn" + (activeFilter === opt.id ? " active" : "");
-        btn.textContent = opt.label;
-        btn.addEventListener("click", () => {
+        btn.textContent = opt.label; // Actualiza texto plano en el DOM
+        btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
           activeFilter = opt.id;
           filterBtns.forEach((b) => b.classList.toggle("active", b.dataset.filter === opt.id));
           render();
@@ -1772,7 +1806,7 @@ function render() {
     }
 
     // Creamos el contenedor en cuadrícula para las tarjetas de esta categoría
-    const grid = document.createElement("div");
+    const grid = document.createElement("div"); // Declara e inicializa variable local
     // Asignamos la clase CSS de rejilla responsiva
     grid.className = "grid";
     // Fragmento local para insertar todas las tarjetas de la sección juntas
@@ -1781,18 +1815,18 @@ function render() {
     // Recorremos cada módulo filtrado para construir su tarjeta clicable
     items.forEach((item) => {
       // Creamos un enlace <a> para que toda la tarjeta sea navegable
-      const a = document.createElement("a");
+      const a = document.createElement("a"); // Declara e inicializa variable local
       // Asignamos la clase CSS de tarjeta estilo Glassmorphism
       a.className = "card" + (progressMap[item.href]?.completed ? " card-done" : "");
       // Codificamos la ruta para manejar espacios y caracteres especiales en la URL
       a.href = encodeURI(item.href);
       // Detectamos si la etiqueta corresponde a documentación o proyectos para darle color distinto
-      const isDoc = item.tag.includes("MD") || item.tag === "Proyecto";
-      const done = progressMap[item.href]?.completed;
-      const doneMark = done ? ' <span title="Completado">✅</span>' : '';
+      const isDoc = item.tag.includes("MD") || item.tag === "Proyecto"; // Declara e inicializa variable local
+      const done = progressMap[item.href]?.completed; // Declara e inicializa variable local
+      const doneMark = done ? ' <span title="Completado">✅</span>' : ''; // Declara e inicializa variable local
       // Obtenemos el icono temático (para ejercicios/proyectos) y el icono oficial del lenguaje en tamaño compacto
-      const topicIcon = getTopicIcon(item);
-      const techIcon = getCardTechIcon(item).replace(/class="tech-icon"/g, 'class="tech-icon tech-icon-sm"');
+      const topicIcon = getTopicIcon(item); // Declara e inicializa variable local
+      const techIcon = getCardTechIcon(item).replace(/class="tech-icon"/g, 'class="tech-icon tech-icon-sm"'); // Declara e inicializa variable local
       // Construimos el HTML interno de la tarjeta con icono temático + icono del lenguaje + título
       a.innerHTML = `
                 <div class="card-top">
@@ -1818,13 +1852,13 @@ function render() {
 
 
 // Renderiza la barra superior de progreso global y el botón de continuar/reiniciar
-function renderGlobalProgress(progressMap) {
-  const bar = document.getElementById("globalProgressBar");
-  if (!bar) return;
-  const total = modules.length;
-  const completed = modules.filter((m) => progressMap[m.href]?.completed).length;
-  const pct = total ? Math.round((completed / total) * 100) : 0;
-  let lastMod = null;
+function renderGlobalProgress(progressMap) { // Define función reutilizable
+  const bar = document.getElementById("globalProgressBar"); // Declara e inicializa variable local
+  if (!bar) return; // Evalúa condición lógica
+  const total = modules.length; // Declara e inicializa variable local
+  const completed = modules.filter((m) => progressMap[m.href]?.completed).length; // Declara e inicializa variable local
+  const pct = total ? Math.round((completed / total) * 100) : 0; // Declara e inicializa variable local
+  let lastMod = null; // Declara e inicializa variable local
   try { lastMod = JSON.parse(localStorage.getItem("curso_web_last_module") || "null"); } catch (_) {}
   const continueHtml = lastMod && lastMod.href
     ? `<a class="continue-btn" href="${encodeURI(lastMod.href)}">▶ Continuar: ${lastMod.title}</a>`
@@ -1839,8 +1873,8 @@ function renderGlobalProgress(progressMap) {
     </div>
     <div class="progress-actions">${continueHtml}${resetHtml}</div>
   `;
-  document.getElementById("resetProgressBtn")?.addEventListener("click", () => {
-    if (!confirm("¿Reiniciar tu progreso guardado en este navegador?")) return;
+  document.getElementById("resetProgressBtn")?.addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    if (!confirm("¿Reiniciar tu progreso guardado en este navegador?")) return; // Evalúa condición lógica
     try {
       localStorage.removeItem("curso_web_progress");
       localStorage.removeItem("curso_web_last_module");
@@ -1850,8 +1884,8 @@ function renderGlobalProgress(progressMap) {
 }
 
 // Atajos de teclado globales: "/" o Ctrl+K enfocan el buscador; Escape limpia el filtro
-document.addEventListener("keydown", (e) => {
-  if ((e.key === "/" || (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) && document.activeElement !== searchInput) {
+document.addEventListener("keydown", (e) => { // Registra escuchador de evento en el DOM
+  if ((e.key === "/" || (e.key.toLowerCase() === "k" && (e.ctrlKey || e.metaKey))) && document.activeElement !== searchInput) { // Evalúa condición lógica
     e.preventDefault();
     searchInput.focus();
     searchInput.select();
@@ -1861,12 +1895,12 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-portal.addEventListener("click", (e) => {
-  const card = e.target.closest("a.card");
-  if (!card) return;
-  const titleEl = card.querySelector(".card-title");
-  const href = card.getAttribute("href");
-  if (href) {
+portal.addEventListener("click", (e) => { // Registra escuchador de evento en el DOM
+  const card = e.target.closest("a.card"); // Declara e inicializa variable local
+  if (!card) return; // Evalúa condición lógica
+  const titleEl = card.querySelector(".card-title"); // Declara e inicializa variable local
+  const href = card.getAttribute("href"); // Declara e inicializa variable local
+  if (href) { // Evalúa condición lógica
     try {
       localStorage.setItem("curso_web_last_module", JSON.stringify({
         title: (titleEl?.textContent || "Último módulo").trim().slice(0, 48),
@@ -1879,7 +1913,7 @@ portal.addEventListener("click", (e) => {
 // Registramos el evento clic en cada botón de filtro para cambiar la categoría activa
 filterBtns.forEach((btn) => {
   // Escuchamos el clic del botón actual
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
     // Quitamos la clase 'active' de todos los botones
     filterBtns.forEach((b) => b.classList.remove("active"));
     // Marcamos como activo el botón presionado
@@ -1893,7 +1927,7 @@ filterBtns.forEach((btn) => {
 
 // Escuchamos el evento 'input' en la barra de búsqueda con un breve retardo (debounce) para evitar renders innecesarios al teclear rápido
 let searchTimer; // Temporizador de debounce para búsqueda
-searchInput.addEventListener("input", () => {
+searchInput.addEventListener("input", () => { // Registra escuchador de evento en el DOM
   clearTimeout(searchTimer); // Cancela el render pendiente si sigue escribiendo
   searchTimer = setTimeout(render, 80); // Ejecuta render 80ms después de pausar la escritura
 });
@@ -1901,9 +1935,9 @@ searchInput.addEventListener("input", () => {
 // Conectamos los botones de la Ruta Visual Paso a Paso para activar el filtro correspondiente con un clic
 document.querySelectorAll(".path-step").forEach((stepBtn) => {
   // Escuchamos el clic en cada paso de la ruta
-  stepBtn.addEventListener("click", () => {
+  stepBtn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
     // Obtenemos la categoría destino desde data-jump
-    const targetCat = stepBtn.dataset.jump;
+    const targetCat = stepBtn.dataset.jump; // Declara e inicializa variable local
     // Buscamos el botón de filtro equivalente y simulamos su selección visual
     filterBtns.forEach((b) =>
       b.classList.toggle("active", b.dataset.filter === targetCat),
@@ -1919,3 +1953,5 @@ document.querySelectorAll(".path-step").forEach((stepBtn) => {
 
 // Ejecutamos el renderizado inicial al cargar la página
 render();
+
+

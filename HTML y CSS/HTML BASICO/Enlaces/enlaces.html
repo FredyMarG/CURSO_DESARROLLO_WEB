@@ -28,7 +28,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
@@ -143,7 +143,75 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz de Enlaces">
+        
+        <!-- Diapositiva 6: Navegación dentro de la misma página (#id) -->
+        <section class="slide" data-slide="6" data-title="Navegación dentro de la misma página (#id)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ANCLAS INTERNAS</span>
+                <h2 class="slide-title">Navegación dentro de la misma página (#id)</h2>
+            </div>
+            <div class="glass-card">
+                <p>Enlazar a <code>href="#contacto"</code> desplaza el scroll suavemente al elemento con <code>id="contacto"</code>. Combínalo con <code>scroll-behavior: smooth</code> en CSS.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: mailto:, tel: y atributo download -->
+        <section class="slide" data-slide="7" data-title="mailto:, tel: y atributo download">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · PROTOCOLOS ESPECIALES</span>
+                <h2 class="slide-title">mailto:, tel: y atributo download</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>mailto:hola@dominio.com</code> abre el cliente de correo, <code>tel:+573001234567</code> inicia llamada en móviles y <code>download="guia.pdf"</code> fuerza la descarga del recurso.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: Navegación entre carpetas con ./ y ../ -->
+        <section class="slide" data-slide="8" data-title="Navegación entre carpetas con ./ y ../">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · RUTAS RELATIVAS VS ABSOLUTAS</span>
+                <h2 class="slide-title">Navegación entre carpetas con ./ y ../</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>./archivo.html</code> apunta a la carpeta actual; <code>../index.html</code> sube un nivel. Evita rutas locales absolutas como <code>C:\Users\...</code> que fallan en producción.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: rel="noopener noreferrer" y texto descriptivo -->
+        <section class="slide" data-slide="9" data-title="rel=&quot;noopener noreferrer&quot; y texto descriptivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · SEGURIDAD Y SEO</span>
+                <h2 class="slide-title">rel="noopener noreferrer" y texto descriptivo</h2>
+            </div>
+            <div class="glass-card">
+                <p>Evita textos genéricos como <em>"haz clic aquí"</em>. Usa descripciones claras para accesibilidad y añade <code>rel="noopener noreferrer"</code> cuando abras pestañas externas con <code>target="_blank"</code>.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Enlaces (&lt;a&gt;) -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Enlaces (&lt;a&gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Enlaces (&lt;a&gt;)</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Enlaces (&lt;a&gt;)</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Enlaces (&lt;a&gt;) -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Enlaces (&lt;a&gt;)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Enlaces (&lt;a&gt;)</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz de Enlaces">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Enlaces HTML</h2>
@@ -179,7 +247,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Enlaces">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Enlaces">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Enlaces</h2>
@@ -210,7 +278,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+        <section class="slide" data-slide="14" data-title="Otros Temas de HTML Básico">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
                 <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>

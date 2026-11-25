@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (CADENAS.md, METODOS DE CADENA.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -94,6 +94,58 @@ const tarjeta = &quot;4242&quot;.padStart(16, &quot;*&quot;); // &quot;*********
 
 console.log(normalizarEmail(&quot;  Usuario.Dev@Correo.COM  &quot;));
 // &quot;usuario.dev@correo.com&quot;</code></pre></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">6. Caso Real: Generador de <em>Slug</em> para URLs</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>function crearSlug(titulo) {
+    return titulo
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")                   // Separa letras de sus tildes
+        .replace(/[\u0300-\u036f]/g, "")    // Elimina las tildes
+        .replace(/[^a-z0-9\s-]/g, "")       // Elimina caracteres especiales
+        .replace(/\s+/g, "-");              // Espacios a guiones
+}
+
+console.log(crearSlug("  Guía de JavaScript: ¡Nivel Pro!  "));
+// "guia-de-javascript-nivel-pro"</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong>Olvidar que los strings son inmutables:</strong> Llamar a <code>str.toUpperCase()</code> sin guardar el resultado en una variable no cambia <code>str</code>.</li>
+<li><strong>Usar <code>.substr()</code>:</strong> Está obsoleto (<em>deprecated</em>). Usa <code>.slice(inicio, fin)</code>.</li>
+<li><strong>Usar <code>.replace(" ", "-")</code> esperando reemplazar todos los espacios:</strong> <code>.replace()</code> con string solo reemplaza la <strong>primera</strong> coincidencia. Usa <code>.replaceAll(" ", "-")</code>.</li>
+<li><strong>Llamar métodos sobre <code>null</code> o <code>undefined</code>:</strong> Usa <code>texto?.trim() ?? ""</code> si el dato puede venir vacío desde una API.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">✅ Buenas Prácticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li>Encadena <code>.trim().toLowerCase()</code> antes de validar emails o comparar búsquedas de usuario.</li>
+<li>Usa <code>.localeCompare()</code> con el código de idioma (<code>"es"</code>) al ordenar listas visibles para el usuario.</li>
+<li>Usa <code>.slice()</code> en lugar de <code>.substring()</code> para aprovechar índices negativos de forma consistente con <code>Array.prototype.slice()</code>.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">Hoja de Trucos (Cheatsheet) — Métodos de Cadena</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Método</th><th>Uso Principal</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><code>.at(-1)</code></td><td>Último carácter</td><td><code>"JS".at(-1)</code> → <code>"S"</code></td></tr>
+<tr><td><code>.includes(sub)</code></td><td>¿Contiene el texto?</td><td><code>"Hola".includes("la")</code> → <code>true</code></td></tr>
+<tr><td><code>.startsWith()</code> / <code>.endsWith()</code></td><td>Validar prefijo o sufijo</td><td><code>"app.js".endsWith(".js")</code> → <code>true</code></td></tr>
+<tr><td><code>.trim()</code> / <code>.trimStart()</code> / <code>.trimEnd()</code></td><td>Quitar espacios sobrantes</td><td><code>"  a ".trim()</code> → <code>"a"</code></td></tr>
+<tr><td><code>.slice(ini, fin)</code></td><td>Extraer subcadena (acepta negativos)</td><td><code>"Hola".slice(0, -1)</code> → <code>"Hol"</code></td></tr>
+<tr><td><code>.replaceAll(a, b)</code></td><td>Reemplazar todas las apariciones</td><td><code>"a-b-c".replaceAll("-", "/")</code> → <code>"a/b/c"</code></td></tr>
+<tr><td><code>.split(sep)</code></td><td>Dividir string en Array</td><td><code>"1,2,3".split(",")</code> → <code>["1","2","3"]</code></td></tr>
+<tr><td><code>.padStart(n, ch)</code></td><td>Rellenar al inicio</td><td><code>"7".padStart(2, "0")</code> → <code>"07"</code></td></tr>
+<tr><td><code>.match(regex)</code></td><td>Extraer coincidencias con RegExp</td><td><code>"a1b2".match(/\d/g)</code> → <code>["1", "2"]</code></td></tr>
+<tr><td><code>.localeCompare(otro, "es")</code></td><td>Ordenar respetando tildes y ñ</td><td><code>"árbol".localeCompare("casa", "es")</code></td></tr>
+</tbody></table></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">10. Guía Completa y Autoevaluación (Cadenas(Metodos))</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Usa el botón <strong>📖 Guía</strong> de esta misma barra para revisar la documentación completa (<code>METODOS DE CADENA.md</code>) sin salir de la lección, y valida lo aprendido en la consola interactiva de abajo.</p></div>
             </div>
         </section>
         <script>

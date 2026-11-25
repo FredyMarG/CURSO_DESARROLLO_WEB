@@ -85,3 +85,51 @@ const leerConProgreso = (file, barraEl) => {
 | `readAsDataURL(file)` | Codifica imágenes/medios en Base64 | Data URL lista para `src` |
 | `readAsArrayBuffer(file)` | Lee bytes binarios crudos | `ArrayBuffer` |
 | `progress` / `load` / `error` | Eventos del ciclo de lectura | Porcentaje, éxito o fallo |
+
+
+---
+
+## Alternativa Moderna con Promesas (`File` / `Blob` API)
+
+Además de los eventos clásicos de `FileReader`, los navegadores modernos permiten leer archivos directamente con `async/await`:
+
+```js
+inputFile.addEventListener('change', async (e) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  // Validación previa de tipo y tamaño (máx 2 MB)
+  if (!file.type.startsWith('image/') || file.size > 2 * 1024 * 1024) {
+    alert('Solo imágenes menores a 2 MB');
+    return;
+  }
+
+  // Para previsualizar imágenes es más rápido createObjectURL que DataURL
+  const previewUrl = URL.createObjectURL(file);
+  imgPreview.src = previewUrl;
+  imgPreview.onload = () => URL.revokeObjectURL(previewUrl);
+});
+```
+
+### Lectura directa de texto o binarios
+```js
+const texto = await file.text();            // Reemplaza readAsText
+const buffer = await file.arrayBuffer();    // Reemplaza readAsArrayBuffer
+```
+
+---
+
+## ❌ Errores Comunes con FileReader
+
+1. **Leer archivos enormes con `readAsDataURL()`:** Convierte a Base64 (aumenta ~33% el tamaño en RAM) y puede bloquear la pestaña; usa `URL.createObjectURL(file)` para previsualizaciones de imagen/video.
+2. **No liberar `ObjectURL` con `URL.revokeObjectURL()`:** Provoca fugas de memoria en SPAs si el usuario carga muchos archivos.
+3. **No validar `file.type` ni `file.size`:** Confiar solo en `accept="image/*"` del HTML no impide que el usuario seleccione cualquier archivo.
+4. **Intentar leer `reader.result` de forma síncrona:** La lectura es asíncrona; solo existe dentro del evento `load` (o tras `await`).
+
+---
+
+## ✅ Buenas Prácticas
+
+- Usa `URL.createObjectURL(file)` para vistas previas multimedia y `await file.text()` para JSON/CSV/TXT.
+- Muestra barras de progreso usando `reader.onprogress` (`e.loaded / e.total`) para archivos pesados.
+- Maneja siempre `reader.onerror` y `reader.onabort` para notificar fallos de permisos o cancelaciones.

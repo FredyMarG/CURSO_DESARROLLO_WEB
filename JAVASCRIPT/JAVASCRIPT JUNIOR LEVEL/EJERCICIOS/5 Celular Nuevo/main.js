@@ -21,34 +21,34 @@ let mobiles = document.getElementById("mobile"),
 
     /** Alterna encendido/apagado y devuelve un mensaje descriptivo */
         presionarBotonEncendido(){
-            let estado;
-            if (this.encendido === false) {
+            let estado; // Declara e inicializa variable local
+            if (this.encendido === false) { // Evalúa condición lógica
                 estado = "Celular Encendido";
                 this.encendido = true;
             } else {
                 estado = "Celular Apagado";
                 this.encendido = false;
             }
-            return estado;
+            return estado; // Retorna el resultado de la función
         }
 
         /** Solicita reinicio si el equipo está encendido (ojo: usa asignación = en la condición) */
         reiniciar(){
-            if (this.encendido = true) {
+            if (this.encendido = true) { // Evalúa condición lógica
                 return "Reiniciando el Celular"
             }else{
-                return "El celular esta apagado";
+                return "El celular esta apagado"; // Retorna el resultado de la función
             }
         }
         
         /** Mensaje simulado de captura de foto con la resolución configurada */
         tomarFoto(){
-            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`;
+            return `Foto tomada en una resolución de ${this.resolucionDeCamara}`; // Retorna el resultado de la función
         }
 
         /** Mensaje simulado de grabación de video */
         grabarVideo(){
-            return `Grabando video en ${this.resolucionDeCamara}`;
+            return `Grabando video en ${this.resolucionDeCamara}`; // Retorna el resultado de la función
         }
         /** Resumen HTML con color, peso, tamaño, cámara y RAM */
         mobileInfo(){
@@ -69,7 +69,7 @@ let mobiles = document.getElementById("mobile"),
             this.resolucionDeCamaraExtra = rdce;
         }
         grabarVideoLento(){
-            return `Tiene Video en Cámara Lenta`;
+            return `Tiene Video en Cámara Lenta`; // Retorna el resultado de la función
         }
         reconocimientoFacial(){
             return "Tiene Reconocimiento Facial"
@@ -94,8 +94,8 @@ celag = [
 /**
  * Rellena las tablas del DOM con datos de celulares básicos y de gama alta.
  */
-function mostrar(){
-    for (let i = 0; i < celular.length; i++) {
+function mostrar(){ // Define función reutilizable
+    for (let i = 0; i < celular.length; i++) { // Itera sobre elementos o rango
         mobiles.innerHTML += `<tr>
                         <td>${i+1}</td>
                         <td>${celular[i].color}</td>
@@ -114,7 +114,7 @@ function mostrar(){
                     </tr>`
     }
 
-    for (let i = 0; i < celag.length; i++) {
+    for (let i = 0; i < celag.length; i++) { // Itera sobre elementos o rango
         altag.innerHTML += ` <tr>
                             <td>${i+1}</td>
                             <td>${celag[i].color}</td>

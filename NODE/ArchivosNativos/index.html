@@ -43,7 +43,7 @@
             <div class="progress-bar-bg">
                 <div class="progress-bar-fill" id="progressBar"></div>
             </div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -108,7 +108,7 @@
                             <code>timers/promises</code>.
                         </p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>
@@ -129,6 +129,9 @@
                 </h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    El módulo nativo <code>node:fs</code> permite crear, leer, modificar, renombrar y eliminar archivos y carpetas. En servidores y aplicaciones Node.js usa la variante basada en promesas (<code>node:fs/promises</code>) para no bloquear el Event Loop mientras el disco responde.
+                </p>
                 <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
                         <tr>
@@ -198,6 +201,9 @@ fs.unlinkSync('sync.txt');</code></pre>
                 </h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Windows usa <code>\</code> y Linux/macOS usan <code>/</code>. Concatenar rutas a mano rompe tu app entre sistemas; <code>node:path</code> construye rutas portables automáticamente, y en ES Modules <code>import.meta.url</code> te da la ubicación exacta del archivo actual.
+                </p>
                 <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
                         <tr>
@@ -281,6 +287,9 @@ console.log('CPUs lógicas:', os.cpus().length);</code></pre>
                 </h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Para leer variables de entorno (<code>process.env</code>), medir tiempos con precisión (<code>console.time</code>), inspeccionar tablas (<code>console.table</code>) o hacer pausas con <code>async/await</code> (<code>timers/promises</code>), Node.js incluye estas tres APIs globales y nativas.
+                </p>
                 <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
                         <tr>
@@ -344,6 +353,9 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
                 <h2 class="slide-title">Buenas Prácticas con Módulos Nativos</h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Al trabajar directamente con archivos del sistema operativo y rutas de usuario, un pequeño descuido puede abrir brechas de seguridad (como leer archivos fuera de la carpeta permitida) o tumbar el servidor. Aplica siempre estas medidas:
+                </p>
                 <table class="compare-table" style="margin-bottom: 12px">
                     <thead>
                         <tr>
@@ -384,8 +396,119 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Módulos Nativos">
+<!-- SLIDE 7: MANEJO SEGURO DE JSON EN DISCO -->
+        <section class="slide" data-slide="7" data-title="Persistencia JSON Segura (ENOENT)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · PATRÓN REAL EN BACKEND</span>
+                <h2 class="slide-title">Lectura Segura de JSON y Manejo de <code>ENOENT</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Al leer un archivo de configuración o datos por primera vez, puede no existir todavía (<code>error.code === 'ENOENT'</code>) o estar corrupto (<code>SyntaxError</code>). Nunca devuelvas <code>[]</code> si el archivo está corrupto, o sobrescribirás datos valiosos:
+                </p>
+                <pre class="code-block"><code>import { readFile } from 'node:fs/promises';
+
+export async function leerListaSegura(ruta) {
+  try {
+    return JSON.parse(await readFile(ruta, 'utf8'));
+  } catch (err) {
+    if (err.code === 'ENOENT') return []; // Solo si aún no existe
+    throw err; // Si es SyntaxError o EACCES, propaga el error
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: SEGURIDAD CONTRA PATH TRAVERSAL -->
+        <section class="slide" data-slide="8" data-title="Seguridad: Path Traversal">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · SEGURIDAD EN RUTAS</span>
+                <h2 class="slide-title">Prevenir <em>Path Traversal</em> (<code>../../</code>) con <code>path.resolve</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si un servidor lee archivos usando un nombre que viene del usuario sin validarlo, alguien podría enviar <code>../../etc/passwd</code> o <code>../../.env</code>. Resuelve la ruta base y verifica con <code>startsWith()</code>:
+                </p>
+                <pre class="code-block"><code>import path from 'node:path';
+
+const BASE = path.resolve('public');
+function rutaSegura(archivoUsuario) {
+  const destino = path.resolve(BASE, archivoUsuario);
+  if (!destino.startsWith(BASE + path.sep)) {
+    throw new Error('Acceso denegado fuera de public/');
+  }
+  return destino;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS DE MÓDULOS NATIVOS -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos: Módulos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">Mapa Rápido de APIs Nativas de Node.js</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Antes de instalar un paquete de terceros, comprueba si Node.js ya resuelve tu necesidad de forma nativa y sin dependencias:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Módulo</th><th>Para qué usarlo</th><th>Método estrella</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>node:fs/promises</code></td><td>Leer, escribir, añadir y borrar archivos</td><td><code>readFile</code>, <code>writeFile</code>, <code>appendFile</code></td></tr>
+                        <tr><td><code>node:path</code></td><td>Unir y validar rutas entre Windows/Linux</td><td><code>path.join</code>, <code>path.resolve</code></td></tr>
+                        <tr><td><code>node:os</code></td><td>Diagnóstico de CPU, RAM y carpetas temp</td><td><code>os.freemem()</code>, <code>os.tmpdir()</code></td></tr>
+                        <tr><td><code>node:process</code> / <code>timers/promises</code></td><td>Variables <code>env</code>, exit codes y pausas <code>await</code></td><td><code>process.env</code>, <code>setTimeout(ms)</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: DIRECTORIOS Y METADATOS CON READDIR Y STAT -->
+        <section class="slide" data-slide="10" data-title="Explorar Carpetas con readdir y stat">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · EXPLORACIÓN DEL DISCO</span>
+                <h2 class="slide-title">Listar Carpetas (<code>readdir</code>) y Medir Archivos (<code>stat</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Con <code>readdir(ruta, { withFileTypes: true })</code> sabes al instante qué elementos son archivos o subcarpetas sin hacer llamadas extra, y con <code>stat()</code> consultas su tamaño en bytes y fecha de modificación:
+                </p>
+                <pre class="code-block"><code>import { readdir, stat } from 'node:fs/promises';
+
+const entradas = await readdir('./data', { withFileTypes: true });
+for (const e of entradas) {
+  if (e.isFile()) {
+    const info = await stat('./data/' + e.name);
+    console.log(e.name, info.size, 'bytes');
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE ARCHIVOS NATIVOS -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de Archivos Nativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave con <code>fs</code>, <code>path</code> y <code>os</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Practica la manipulación segura de archivos y rutas multiplataforma:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>APIs nativas requeridas</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Crear carpeta <code>logs/</code> y añadir línea con fecha</td><td><code>mkdir({ recursive: true })</code> + <code>appendFile()</code></td></tr>
+                        <tr><td>2. Resolver ruta relativa al archivo actual en ESM</td><td><code>dirname(fileURLToPath(import.meta.url))</code></td></tr>
+                        <tr><td>3. Mostrar plataforma, CPUs y RAM libre en MB</td><td><code>os.platform()</code>, <code>os.cpus().length</code>, <code>os.freemem()</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Módulos Nativos">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · APIS NATIVAS</span>
                 <h2 class="slide-title">🎛️ Simulador de Módulos Nativos</h2>
@@ -429,10 +552,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: Archivos Nativos">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Archivos Nativos">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">
                     🧠 Quiz Rápido de Módulos Nativos y Archivos
                 </h2>
@@ -495,10 +618,10 @@ setTimeout(sumar, 5000, 2, 5);</code></pre>
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Módulos Nativos">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Módulos Nativos">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">
                     🧪 Laboratorio Interactivo de Módulos Nativos
                 </h2>

@@ -28,7 +28,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
@@ -141,7 +141,77 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz de Títulos y Párrafos">
+        
+        <!-- Diapositiva 6: Un solo <h1> por página y orden lógico -->
+        <section class="slide" data-slide="6" data-title="Un solo <h1> por página y orden lógico">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · SEMÁNTICA Y SEO</span>
+                <h2 class="slide-title">Un solo <h1> por página y orden lógico</h2>
+            </div>
+            <div class="glass-card">
+                <p>Los motores de búsqueda y lectores de pantalla construyen un esquema del documento usando los encabezados. Nunca saltes de <code>&lt;h1&gt;</code> a <code>&lt;h4&gt;</code> solo para achicar la fuente; usa CSS para el tamaño.</p><pre class="code-box">&lt;h1&gt;Guía de Café de Especialidad&lt;/h1&gt;
+  &lt;h2&gt;Métodos de extracción&lt;/h2&gt;
+    &lt;h3&gt;Prensa francesa&lt;/h3&gt;</pre>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: <strong> y <em> vs <b> y <i> -->
+        <section class="slide" data-slide="7" data-title="<strong> y <em> vs <b> y <i>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ÉNFASIS SEMÁNTICO</span>
+                <h2 class="slide-title"><strong> y <em> vs <b> y <i></h2>
+            </div>
+            <div class="glass-card">
+                <p><code>&lt;strong&gt;</code> indica importancia crítica (los lectores de pantalla cambian la entonación) y <code>&lt;em&gt;</code> indica énfasis contextual. En cambio, <code>&lt;b&gt;</code> e <code>&lt;i&gt;</code> son puramente visuales o para términos técnicos.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: <p>, <br> y <hr> en su contexto correcto -->
+        <section class="slide" data-slide="8" data-title="<p>, <br> y <hr> en su contexto correcto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ESPACIADO Y SALTOS</span>
+                <h2 class="slide-title"><p>, <br> y <hr> en su contexto correcto</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>&lt;p&gt;</code> para cada bloque de texto independiente. Reserva <code>&lt;br&gt;</code> únicamente para saltos dentro de poemas o direcciones postales (nunca para separar párrafos), y <code>&lt;hr&gt;</code> para cambios temáticos de sección.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Citas (<blockquote >, <q>) y código (<code >, <pre>) -->
+        <section class="slide" data-slide="9" data-title="Citas (<blockquote >, <q>) y código (<code >, <pre>)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · TIPOGRAFÍA EN HTML</span>
+                <h2 class="slide-title">Citas (<blockquote >, <q>) y código (<code >, <pre>)</h2>
+            </div>
+            <div class="glass-card">
+                <p>HTML incluye etiquetas específicas para enriquecer documentos técnicos: <code>&lt;blockquote cite="..."&gt;</code> para citas largas, <code>&lt;code&gt;</code> para fragmentos en línea y <code>&lt;pre&gt;</code> para conservar espacios y saltos de línea.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Títulos y Párrafos -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Títulos y Párrafos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Títulos y Párrafos</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Títulos y Párrafos</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Títulos y Párrafos -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Títulos y Párrafos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Títulos y Párrafos</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz de Títulos y Párrafos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Títulos y Párrafos</h2>
@@ -177,7 +247,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Títulos y Párrafos">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Títulos y Párrafos">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Texto</h2>
@@ -207,7 +277,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+        <section class="slide" data-slide="14" data-title="Otros Temas de HTML Básico">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
                 <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>

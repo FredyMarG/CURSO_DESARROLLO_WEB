@@ -18,7 +18,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">CSS3 · CSS GRID</span><div class="brand-title"><span>🗺️</span><span>Grid Template Areas</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 14</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">CSS Grid</span></a>
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -60,11 +60,90 @@
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Grid Template Areas</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
         </section>
-        <section class="slide" data-slide="5" data-title="Quiz: Grid Template Areas">
+        
+        <!-- Diapositiva 5: Diferencia entre fr, % y auto en Grid -->
+        <section class="slide" data-slide="5" data-title="Diferencia entre fr, % y auto en Grid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · UNIDAD FRACCIONAL</span>
+                <h2 class="slide-title">Diferencia entre fr, % y auto en Grid</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>1fr</code> reparte el espacio <em>libre</em> restante después de descontar tracks fijos y <code>gap</code>, evitando desbordamientos horizontales que sí ocurren con <code>%</code>.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: repeat(auto-fit, minmax(240px, 1fr)) -->
+        <section class="slide" data-slide="6" data-title="repeat(auto-fit, minmax(240px, 1fr))">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · GRIDS SIN MEDIA QUERIES</span>
+                <h2 class="slide-title">repeat(auto-fit, minmax(240px, 1fr))</h2>
+            </div>
+            <div class="glass-card">
+                <p>Esta fórmula crea grillas responsivas automáticas que ajustan el número de columnas según el ancho disponible del contenedor.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: Líneas numéricas y span en grid-column / grid-row -->
+        <section class="slide" data-slide="7" data-title="Líneas numéricas y span en grid-column / grid-row">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · POSICIONAMIENTO EXPLÍCITO</span>
+                <h2 class="slide-title">Líneas numéricas y span en grid-column / grid-row</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>grid-column: span 2</code> para que una tarjeta destacada ocupe dos columnas sin depender de números absolutos de línea.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: place-items vs place-content -->
+        <section class="slide" data-slide="8" data-title="place-items vs place-content">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ALINEACIÓN EN 2D</span>
+                <h2 class="slide-title">place-items vs place-content</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>place-items</code> centra el contenido dentro de cada celda; <code>place-content</code> alinea toda la grilla completa dentro del contenedor padre.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Cómo decide CSS qué regla gana -->
+        <section class="slide" data-slide="9" data-title="Cómo decide CSS qué regla gana">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ESPECIFICIDAD Y CASCADA</span>
+                <h2 class="slide-title">Cómo decide CSS qué regla gana</h2>
+            </div>
+            <div class="glass-card">
+                <p>Al aplicar <strong>Grid Template Areas</strong>, recuerda el orden de prioridad: estilos en línea &gt; ID (<code>#id</code>) &gt; clase/atributo/pseudoclase (<code>.clase</code>) &gt; etiqueta (<code>div</code>). Mantén la especificidad baja usando clases reutilizables.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Grid Template Areas -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Grid Template Areas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Grid Template Areas</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Grid Template Areas</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Grid Template Areas -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Grid Template Areas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Grid Template Areas</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz: Grid Template Areas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="Un punto (.) o varios puntos (...) representan una celda vacía." data-err="En CSS Grid, el punto (.) indica celda vacía."><div class="quiz-q-title">1. ¿Qué símbolo se usa en <code>grid-template-areas</code> para dejar una celda vacía?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">Un punto (.)</button><button class="quiz-option" data-opt="b">Un guion (-)</button><button class="quiz-option" data-opt="c">Un cero (0)</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Grid Template Areas">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Grid Template Areas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
   body { font-family: system-ui; padding: 12px; background: #0f172a; color: #fff; }
@@ -82,7 +161,7 @@
 &lt;div class=&quot;app&quot;&gt;&lt;div class=&quot;h&quot;&gt;Header&lt;/div&gt;&lt;div class=&quot;s&quot;&gt;Side&lt;/div&gt;&lt;div class=&quot;m&quot;&gt;Main&lt;/div&gt;&lt;div class=&quot;f&quot;&gt;Footer&lt;/div&gt;&lt;/div&gt;</textarea><!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+        <section class="slide" data-slide="14" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Grid</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">🗺️ Guía Completa CSS Grid</span><span class="file-path">index.html</span></a>

@@ -10,20 +10,20 @@
     'use strict'; // Activa el modo estricto de JavaScript
 
     // Detecta curso y tema actual desde la URL (soporta subcarpetas y archivos .html directos)
-    const parts = decodeURIComponent(window.location.pathname).split('/').filter(Boolean);
-    const fileName = parts[parts.length - 1] || 'index.html';
-    const rawFolder = parts.length >= 2 ? parts[parts.length - 2] : 'Módulo';
-    const fileBase = fileName.replace(/\.html?$/i, '');
-    const brandTitleText = document.querySelector('.brand-title')?.textContent.trim();
-    const topicFolder = /^index\.html?$/i.test(fileName) ? rawFolder : (brandTitleText || fileBase);
-    const knownCourses = ['HTML y CSS', 'JAVASCRIPT MID LEVEL', 'JAVASCRIPT MASTER LEVEL', 'NODE'];
-    const courseIdx = parts.findIndex(p => knownCourses.includes(p));
-    const courseFolder = courseIdx !== -1 ? parts[courseIdx] : (parts.length >= 3 ? parts[parts.length - 3] : 'Curso');
-    const depthInCourse = courseIdx !== -1 ? Math.max(1, parts.length - 2 - courseIdx) : 1;
-    const toCourseRoot = '../'.repeat(depthInCourse);
+    const parts = decodeURIComponent(window.location.pathname).split('/').filter(Boolean); // Declara e inicializa variable local
+    const fileName = parts[parts.length - 1] || 'index.html'; // Declara e inicializa variable local
+    const rawFolder = parts.length >= 2 ? parts[parts.length - 2] : 'Módulo'; // Declara e inicializa variable local
+    const fileBase = fileName.replace(/\.html?$/i, ''); // Declara e inicializa variable local
+    const brandTitleText = document.querySelector('.brand-title')?.textContent.trim(); // Declara e inicializa variable local
+    const topicFolder = /^index\.html?$/i.test(fileName) ? rawFolder : (brandTitleText || fileBase); // Declara e inicializa variable local
+    const knownCourses = ['HTML y CSS', 'JAVASCRIPT MID LEVEL', 'JAVASCRIPT MASTER LEVEL', 'NODE']; // Declara e inicializa variable local
+    const courseIdx = parts.findIndex(p => knownCourses.includes(p)); // Declara e inicializa variable local
+    const courseFolder = courseIdx !== -1 ? parts[courseIdx] : (parts.length >= 3 ? parts[parts.length - 3] : 'Curso'); // Declara e inicializa variable local
+    const depthInCourse = courseIdx !== -1 ? Math.max(1, parts.length - 2 - courseIdx) : 1; // Declara e inicializa variable local
+    const toCourseRoot = '../'.repeat(depthInCourse); // Declara e inicializa variable local
     const portalIdx = parts.findIndex(p => p === 'HTML y CSS' || p === 'JAVASCRIPT' || p === 'NODE'); // Ubica la carpeta raíz del bloque respecto al portal
     const depthToPortal = portalIdx !== -1 ? Math.max(1, parts.length - 1 - portalIdx) : depthInCourse + 1; // Calcula niveles hasta la raíz del repositorio
-    const toPortalRoot = '../'.repeat(depthToPortal);
+    const toPortalRoot = '../'.repeat(depthToPortal); // Declara e inicializa variable local
 
     // Mapa que vincula cada carpeta de módulo Node.js con su guía Markdown exacta
     const nodeDocMap = {
@@ -38,10 +38,13 @@
         'REPL': 'REPL.md',
         'Modulos': 'MODULOS.md',
         'NPM': 'NPM.md',
-        'JSON': 'JSON.md'
+        'JSON': 'JSON.md',
+        'Process': 'PROCESS.md',
+        'Testing': 'TESTING.md',
+        'HttpApi': 'HTTP Y APIS.md'
     };
     // Si estamos dentro de NODE/, añadimos ?doc= para abrir directamente el apunte del módulo actual
-    const nodeDocQuery = (courseFolder === 'NODE' && nodeDocMap[rawFolder]) ? `?doc=${encodeURIComponent(nodeDocMap[rawFolder])}` : '';
+    const nodeDocQuery = (courseFolder === 'NODE' && nodeDocMap[rawFolder]) ? `?doc=${encodeURIComponent(nodeDocMap[rawFolder])}` : ''; // Declara e inicializa variable local
 
     const courseMeta = {
         'HTML y CSS': { badge: '🎨 HTML5 & CSS3', levelLabel: '🎨 HTML y CSS', filter: 'htmlcss', docsHref: `${toCourseRoot}Documentacion/index.html`, portalHref: `${toPortalRoot}index.html` },
@@ -49,11 +52,11 @@
         'JAVASCRIPT MASTER LEVEL': { badge: '🚀 JS MASTER LEVEL', levelLabel: '🚀 JS Master Level', filter: 'master', docsHref: `${toCourseRoot}DOCUMENTACION/index.html`, portalHref: `${toPortalRoot}index.html` },
         'NODE': { badge: '🟢 NODE.JS', levelLabel: '🟢 Node.js', filter: 'node', docsHref: `${toCourseRoot}Documentacion/index.html${nodeDocQuery}`, portalHref: `${toPortalRoot}index.html` }
     };
-    const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', levelLabel: '📘 Curso', filter: 'all', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` };
+    const meta = courseMeta[courseFolder] || { badge: '📘 CURSO WEB', levelLabel: '📘 Curso', filter: 'all', docsHref: `${toPortalRoot}index.html`, portalHref: `${toPortalRoot}index.html` }; // Declara e inicializa variable local
 
     // Asigna un favicon único y transparente acorde al tema específico de cada módulo
     (function setTopicTabIcon() {
-        const key = `${topicFolder} ${fileBase} ${document.title}`.toLowerCase();
+        const key = `${topicFolder} ${fileBase} ${document.title}`.toLowerCase(); // Declara e inicializa variable local
         const TOPIC_ICONS = [
             // Node.js (8 módulos únicos)
             [/introducci[oó]n.*node|node.*introducci[oó]n/, '🟢', '#10b981'],
@@ -68,6 +71,11 @@
             [/m[oó]dulos/, '🧩', '#10b981'],
             [/\bnpm\b|paquete/, '📦', '#ef4444'],
             [/\bjson\b/, '{}', '#f59e0b'],
+            [/\bprocess\b|proceso/, '⚙️', '#38bdf8'],
+            [/\btesting\b|node:test/, '🧪', '#10b981'],
+            [/\bhttpapi\b|apis rest|servidores http/, '🌐', '#38bdf8'],
+            [/formulario/, '📝', '#10b981'],
+            [/expresiones regulares|regexp/, '🔎', '#a855f7'],
             // JS Master Level (24 módulos únicos)
             [/estricto|strict/, '🔒', '#f43f5e'],
             [/ternario/, '❓', '#a855f7'],
@@ -138,21 +146,21 @@
             [/html/, '📄', '#e34f26'],
             [/css/, '🎨', '#38bdf8']
         ];
-        const match = TOPIC_ICONS.find(([re]) => re.test(key));
+        const match = TOPIC_ICONS.find(([re]) => re.test(key)); // Declara e inicializa variable local
         const symbol = match ? match[1] : (courseFolder === 'NODE' ? 'N' : courseFolder === 'HTML y CSS' ? '🎨' : 'JS'); // Símbolo único o respaldo por bloque
         const accent = match ? match[2] : (courseFolder === 'NODE' ? '#10b981' : '#00f0ff'); // Color del símbolo si es texto
         const fontSize = symbol.length > 1 ? 40 : 52; // Escala tipográfica según cantidad de caracteres
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-family="Fira Code,Arial,sans-serif" font-weight="800" font-size="${fontSize}" fill="${accent}">${symbol}</text></svg>`;
         // Reutiliza el <link rel="icon"> existente o crea uno nuevo de forma compacta
-        const link = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' });
+        const link = document.querySelector('link[rel~="icon"]') || Object.assign(document.head.appendChild(document.createElement('link')), { rel: 'icon' }); // Declara e inicializa variable local
         link.type = 'image/svg+xml';
         link.href = 'data:image/svg+xml,' + encodeURIComponent(svg);
     })();
 
     // Asigna un tema de color distinto por módulo (como en Junior Level)
-    const THEMES = ['cyan', 'purple', 'emerald', 'amber', 'rose'];
-    if (!document.body.dataset.theme) {
-        let hash = 0;
+    const THEMES = ['cyan', 'purple', 'emerald', 'amber', 'rose']; // Declara e inicializa variable local
+    if (!document.body.dataset.theme) { // Evalúa condición lógica
+        let hash = 0; // Declara e inicializa variable local
         for (let i = 0; i < topicFolder.length; i++) hash += topicFolder.charCodeAt(i);
         document.body.dataset.theme = THEMES[hash % THEMES.length];
     }
@@ -325,34 +333,34 @@
         }
     };
 
-    const slides = Array.from(document.querySelectorAll('.presentation-wrapper .slide'));
-    if (slides.length === 0) return;
+    const slides = Array.from(document.querySelectorAll('.presentation-wrapper .slide')); // Declara e inicializa variable local
+    if (slides.length === 0) return; // Evalúa condición lógica
 
     // Extrae datos de la portada (Slide 1)
-    const heroSlide = slides[0];
-    const heroTitle = heroSlide.querySelector('h1')?.textContent.trim() || topicFolder;
-    const heroDesc = heroSlide.querySelector('.hero-subtitle, .lead-text, p')?.textContent.trim() || '';
-    const heroBadgeText = document.querySelector('.brand-badge')?.textContent.trim() || meta.badge;
+    const heroSlide = slides[0]; // Declara e inicializa variable local
+    const heroTitle = heroSlide.querySelector('h1')?.textContent.trim() || topicFolder; // Declara e inicializa variable local
+    const heroDesc = heroSlide.querySelector('.hero-subtitle, .lead-text, p')?.textContent.trim() || ''; // Declara e inicializa variable local
+    const heroBadgeText = document.querySelector('.brand-badge')?.textContent.trim() || meta.badge; // Declara e inicializa variable local
 
     // Separa diapositivas de teoría vs Lab y Quiz
-    const labSlides = [];
-    const quizSlides = [];
-    const theorySlides = [];
+    const labSlides = []; // Declara e inicializa variable local
+    const quizSlides = []; // Declara e inicializa variable local
+    const theorySlides = []; // Declara e inicializa variable local
 
     slides.slice(1).forEach(s => {
-        const isLab = s.dataset.lab === 'true' || Boolean(s.querySelector('#labEditor, .lab-panel, #ckConsole, #screenConsole'));
-        const isQuiz = Boolean(s.querySelector('.quiz-container, .quiz-box'));
-        if (isLab) labSlides.push(s);
+        const isLab = s.dataset.lab === 'true' || Boolean(s.querySelector('#labEditor, .lab-panel, #ckConsole, #screenConsole')); // Declara e inicializa variable local
+        const isQuiz = Boolean(s.querySelector('.quiz-container, .quiz-box')); // Declara e inicializa variable local
+        if (isLab) labSlides.push(s); // Evalúa condición lógica
         else if (isQuiz) quizSlides.push(s); // Evalúa condición alternativa
         else theorySlides.push(s); // Rama alternativa
     });
 
     // Construye el contenedor principal .jr-app-shell
-    const shell = document.createElement('div');
+    const shell = document.createElement('div'); // Declara e inicializa variable local
     shell.className = 'jr-app-shell';
 
     // 1. Barra superior
-    const topNav = document.createElement('nav');
+    const topNav = document.createElement('nav'); // Declara e inicializa variable local
     topNav.className = 'jr-top-nav';
     topNav.innerHTML = `
         <span class="jr-nav-badge">${meta.badge} · ${topicFolder}</span>
@@ -364,13 +372,13 @@
             <a class="jr-nav-link primary" href="${meta.portalHref}">🏠 Portal Principal</a>
         </div>
     `;
-    const dotsWrap = topNav.querySelector('.theme-dots');
+    const dotsWrap = topNav.querySelector('.theme-dots'); // Declara e inicializa variable local
     THEMES.forEach(t => {
-        const b = document.createElement('button');
+        const b = document.createElement('button'); // Declara e inicializa variable local
         b.type = 'button';
         b.className = 'theme-dot' + (document.body.dataset.theme === t ? ' active' : '');
         b.dataset.setTheme = t;
-        b.addEventListener('click', () => {
+        b.addEventListener('click', () => { // Registra escuchador de evento en el DOM
             document.body.dataset.theme = t;
             dotsWrap.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
             b.classList.add('active');
@@ -380,19 +388,22 @@
     });
     shell.appendChild(topNav);
 
-    // 2. Cabecera .jr-hero
-    const hero = document.createElement('header');
+    // 2. Cabecera .jr-hero (usa textContent para no interpretar etiquetas literales como <iframe> o <form>)
+    const hero = document.createElement('header'); // Declara e inicializa variable local
     hero.className = 'jr-hero';
-    hero.innerHTML = `
-        <span class="jr-hero-badge">${heroBadgeText}</span>
-        <h1>${heroTitle}</h1>
-        <p>${heroDesc}</p>
-    `;
+    const badgeEl = document.createElement('span'); // Declara e inicializa variable local
+    badgeEl.className = 'jr-hero-badge';
+    badgeEl.textContent = heroBadgeText; // Actualiza texto plano en el DOM
+    const h1El = document.createElement('h1'); // Declara e inicializa variable local
+    h1El.textContent = heroTitle; // Actualiza texto plano en el DOM
+    const pEl = document.createElement('p'); // Declara e inicializa variable local
+    pEl.textContent = heroDesc; // Actualiza texto plano en el DOM
+    hero.append(badgeEl, h1El, pEl);
     shell.appendChild(hero);
 
     // 3. Carrusel de teoría (#jrDocSlides)
-    if (theorySlides.length > 0) {
-        const docBox = document.createElement('section');
+    if (theorySlides.length > 0) { // Evalúa condición lógica
+        const docBox = document.createElement('section'); // Declara e inicializa variable local
         docBox.className = 'jr-doc-slides';
         docBox.innerHTML = `
             <div class="jr-slides-bar">
@@ -403,28 +414,33 @@
                 <div class="jr-slides-btns">
                     <button type="button" class="jr-slide-btn" id="jrPrevBtn">⬅ Anterior</button>
                     <button type="button" class="jr-slide-btn" id="jrNextBtn">Siguiente ➡</button>
-                    <a class="jr-slides-apuntes" href="${meta.docsHref}">Ver Apuntes ↗</a>
+                    <button type="button" class="jr-slide-btn" id="jrMdToggleBtn" title="Leer la guía teórica completa sin salir de las diapositivas">📖 Guía</button>
+                    <a class="jr-slides-apuntes" href="${meta.docsHref}">Apuntes ↗</a>
                 </div>
             </div>
             <div id="jrSlidesBody"></div>
+            <div class="jr-md-panel" id="jrMdPanel" aria-live="polite">
+                <div class="jr-md-toc" id="jrMdToc"></div>
+                <div class="jr-md-body" id="jrMdBody"><p>Cargando guía teórica...</p></div>
+            </div>
         `;
 
-        const slidesBody = docBox.querySelector('#jrSlidesBody');
+        const slidesBody = docBox.querySelector('#jrSlidesBody'); // Declara e inicializa variable local
         theorySlides.forEach((s, idx) => {
-            const pane = document.createElement('div');
+            const pane = document.createElement('div'); // Declara e inicializa variable local
             pane.className = 'jr-doc-slide' + (idx === 0 ? ' active' : '');
-            const content = s.querySelector('.slide-content') || s;
+            const content = s.querySelector('.slide-content') || s; // Declara e inicializa variable local
             while (content.firstChild) pane.appendChild(content.firstChild);
             slidesBody.appendChild(pane);
         });
 
-        const panes = Array.from(slidesBody.querySelectorAll('.jr-doc-slide'));
-        const ind = docBox.querySelector('#jrSlideInd');
-        const prevBtn = docBox.querySelector('#jrPrevBtn');
-        const nextBtn = docBox.querySelector('#jrNextBtn');
-        let cur = 0;
+        const panes = Array.from(slidesBody.querySelectorAll('.jr-doc-slide')); // Declara e inicializa variable local
+        const ind = docBox.querySelector('#jrSlideInd'); // Declara e inicializa variable local
+        const prevBtn = docBox.querySelector('#jrPrevBtn'); // Declara e inicializa variable local
+        const nextBtn = docBox.querySelector('#jrNextBtn'); // Declara e inicializa variable local
+        let cur = 0; // Declara e inicializa variable local
 
-        function showSlide(idx) {
+        function showSlide(idx) { // Define función reutilizable
             cur = Math.max(0, Math.min(panes.length - 1, idx));
             panes.forEach((p, i) => p.classList.toggle('active', i === cur));
             ind.textContent = `Diapositiva ${cur + 1} / ${panes.length}`; // Actualiza contenido en el DOM
@@ -434,17 +450,170 @@
         prevBtn.addEventListener('click', () => { showSlide(cur - 1); logConsole(`⬅ Diapositiva ${cur + 1}/${panes.length}`); });
         nextBtn.addEventListener('click', () => { showSlide(cur + 1); logConsole(`➡ Diapositiva ${cur + 1}/${panes.length}`); });
         showSlide(0);
+
+        // Visor integrado de la guía Markdown (.md) del módulo dentro de las diapositivas
+        const mdToggleBtn = docBox.querySelector('#jrMdToggleBtn'); // Botón "📖 Guía"
+        const mdPanel = docBox.querySelector('#jrMdPanel');         // Panel colapsable del lector
+        const mdToc = docBox.querySelector('#jrMdToc');             // Barra superior de saltos a secciones ##
+        const mdBody = docBox.querySelector('#jrMdBody');           // Contenedor HTML renderizado del .md
+        let mdLoaded = false;                                       // Evita recargar docs-data.js si ya se abrió antes
+
+        // Normaliza textos (sin tildes, minúsculas, sin extensión .md) para emparejar carpeta -> archivo .md
+        const normText = (s) => String(s || '')
+            .toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/\.md$/i, '')
+            .replace(/[^a-z0-9]+/g, ' ')
+            .trim();
+
+        // Escapa caracteres HTML peligrosos antes de convertir sintaxis Markdown
+        const escHtml = (s) => String(s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        // Convierte formato Markdown en línea (`código`, **negrita**, *cursiva*)
+        const inlineMd = (s) => escHtml(s)
+            .replace(/`([^`]+)`/g, '<code>$1</code>')
+            .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*([^*]+)\*/g, '<em>$1</em>');
+
+        // Convierte texto Markdown completo (encabezados, tablas, bloques de código, listas y citas) a HTML seguro
+        function renderMarkdownSimple(md) {
+            const lines = md.replace(/\r\n/g, '\n').split('\n');
+            const out = [];
+            let inCode = false;
+            let codeBuf = [];
+            let inList = false;
+            let inTable = false;
+            let tableHeaderDone = false;
+
+            const closeList = () => { if (inList) { out.push('</ul>'); inList = false; } };
+            const closeTable = () => { if (inTable) { out.push('</tbody></table>'); inTable = false; tableHeaderDone = false; } };
+
+            for (const line of lines) {
+                if (line.trim().startsWith('```')) {
+                    closeList(); closeTable();
+                    if (!inCode) { inCode = true; codeBuf = []; }
+                    else { out.push(`<pre><code>${escHtml(codeBuf.join('\n'))}</code></pre>`); inCode = false; }
+                    continue;
+                }
+                if (inCode) { codeBuf.push(line); continue; }
+
+                const t = line.trim(); // Declara e inicializa variable local
+                if (!t) { closeList(); closeTable(); continue; }
+                if (/^---+$/.test(t)) { closeList(); closeTable(); out.push('<hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:12px 0;">'); continue; }
+
+                if (t.startsWith('|') && t.endsWith('|')) { // Evalúa condición lógica
+                    closeList();
+                    const cells = t.slice(1, -1).split('|').map(c => c.trim()); // Declara e inicializa variable local
+                    if (cells.every(c => /^:?-{2,}:?$/.test(c))) { tableHeaderDone = true; continue; }
+                    if (!inTable) { // Evalúa condición lógica
+                        inTable = true;
+                        out.push('<table><thead><tr>' + cells.map(c => `<th>${inlineMd(c)}</th>`).join('') + '</tr></thead><tbody>');
+                        continue;
+                    }
+                    out.push('<tr>' + cells.map(c => `<td>${inlineMd(c)}</td>`).join('') + '</tr>');
+                    continue;
+                } else {
+                    closeTable();
+                }
+
+                const hMatch = t.match(/^(#{1,3})\s+(.+)$/); // Declara e inicializa variable local
+                if (hMatch) { // Evalúa condición lógica
+                    closeList();
+                    const lvl = hMatch[1].length; // Declara e inicializa variable local
+                    const idAttr = lvl === 2 ? ` data-md-sec="${out.length}"` : ''; // Declara e inicializa variable local
+                    out.push(`<h${lvl}${idAttr}>${inlineMd(hMatch[2])}</h${lvl}>`);
+                    continue;
+                }
+                if (t.startsWith('> ')) { closeList(); out.push(`<blockquote>${inlineMd(t.slice(2))}</blockquote>`); continue; }
+                if (/^[-*]\s+/.test(t) || /^\d+\.\s+/.test(t)) { // Evalúa condición lógica
+                    if (!inList) { out.push('<ul>'); inList = true; }
+                    out.push(`<li>${inlineMd(t.replace(/^([-*]|\d+\.)\s+/, ''))}</li>`);
+                    continue;
+                }
+                closeList();
+                out.push(`<p>${inlineMd(t)}</p>`);
+            }
+            closeList(); closeTable();
+            return out.join('\n'); // Retorna el resultado de la función
+        }
+
+        function resolveDocKey(docsMap) { // Define función reutilizable
+            const keys = Object.keys(docsMap || {}); // Declara e inicializa variable local
+            if (keys.length === 0) return null; // Evalúa condición lógica
+            if (courseFolder === 'NODE' && nodeDocMap[rawFolder] && docsMap[nodeDocMap[rawFolder]]) { // Evalúa condición lógica
+                return nodeDocMap[rawFolder]; // Retorna el resultado de la función
+            }
+            const targets = [normText(topicFolder), normText(rawFolder), normText(fileBase)].filter(Boolean); // Declara e inicializa variable local
+            for (const target of targets) { // Itera sobre elementos o rango
+                const exact = keys.find(k => normText(k) === target); // Declara e inicializa variable local
+                if (exact) return exact; // Evalúa condición lógica
+            }
+            for (const target of targets) { // Itera sobre elementos o rango
+                const partial = keys.find(k => {
+                    const nk = normText(k); // Declara e inicializa variable local
+                    return nk.includes(target) || target.includes(nk); // Retorna el resultado de la función
+                });
+                if (partial) return partial; // Evalúa condición lógica
+            }
+            return keys[0]; // Retorna el resultado de la función
+        }
+
+        function loadDocsScript(src) { // Define función reutilizable
+            return new Promise((resolve, reject) => {
+                if (window.DOCS_CONTENT) return resolve(window.DOCS_CONTENT); // Evalúa condición lógica
+                const s = document.createElement('script'); // Declara e inicializa variable local
+                s.src = src;
+                s.onload = () => resolve(window.DOCS_CONTENT || {});
+                s.onerror = () => reject(new Error('No se pudo cargar docs-data.js'));
+                document.head.appendChild(s);
+            });
+        }
+
+        mdToggleBtn?.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
+            const willOpen = !mdPanel.classList.contains('open'); // Declara e inicializa variable local
+            mdPanel.classList.toggle('open', willOpen);
+            mdToggleBtn.classList.toggle('active', willOpen);
+            if (!willOpen || mdLoaded) return; // Evalúa condición lógica
+
+            const docsDataSrc = meta.docsHref.split('#')[0].split('?')[0].replace(/index\.html$/i, 'docs-data.js'); // Declara e inicializa variable local
+            try {
+                const docsMap = await loadDocsScript(docsDataSrc); // Declara e inicializa variable local
+                const key = resolveDocKey(docsMap); // Declara e inicializa variable local
+                if (!key || !docsMap[key]) { // Evalúa condición lógica
+                    mdBody.innerHTML = `<p>No se encontró una guía .md asociada. Puedes abrir <a href="${meta.docsHref}" style="color:#38bdf8;">Apuntes ↗</a>.</p>`; // Actualiza estructura HTML interna
+                    return; // Retorna el resultado de la función
+                }
+                mdBody.innerHTML = renderMarkdownSimple(docsMap[key]); // Actualiza estructura HTML interna
+                const h2s = Array.from(mdBody.querySelectorAll('h2')); // Declara e inicializa variable local
+                mdToc.innerHTML = ''; // Actualiza estructura HTML interna
+                h2s.forEach(h2 => {
+                    const btn = document.createElement('button'); // Declara e inicializa variable local
+                    btn.type = 'button';
+                    btn.textContent = h2.textContent.slice(0, 34); // Actualiza texto plano en el DOM
+                    btn.addEventListener('click', () => h2.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                    mdToc.appendChild(btn);
+                });
+                mdLoaded = true;
+                logConsole(`📖 Guía teórica "${key}" cargada dentro de las diapositivas`, 'ok');
+            } catch (err) {
+                mdBody.innerHTML = `<p>No se pudo cargar la guía en línea (${err.message}). Abre <a href="${meta.docsHref}" style="color:#38bdf8;">Apuntes ↗</a>.</p>`; // Actualiza estructura HTML interna
+            }
+        });
+
         shell.appendChild(docBox);
     }
 
     // 4. Rejilla principal (.jr-main-grid): Lab + Reto Práctico + Quiz
-    const mainGrid = document.createElement('main');
+    const mainGrid = document.createElement('main'); // Declara e inicializa variable local
     mainGrid.className = 'jr-main-grid';
 
     labSlides.forEach(s => {
-        const card = document.createElement('section');
+        const card = document.createElement('section'); // Declara e inicializa variable local
         card.className = 'jr-card full-span';
-        const content = s.querySelector('.slide-content') || s;
+        const content = s.querySelector('.slide-content') || s; // Declara e inicializa variable local
         while (content.firstChild) card.appendChild(content.firstChild);
         mainGrid.appendChild(card);
     });
@@ -459,7 +628,7 @@
         test: v => v.trim().length >= 15
     };
 
-    const challengeCard = document.createElement('section');
+    const challengeCard = document.createElement('section'); // Declara e inicializa variable local
     challengeCard.className = 'challenge-panel';
     challengeCard.innerHTML = `
         <span class="challenge-badge">🏆 RETO PRÁCTICO DEL MÓDULO</span>
@@ -473,10 +642,10 @@
         </div>
         <div class="challenge-feedback" aria-live="polite"></div>
     `;
-    const chEditor = challengeCard.querySelector('.challenge-editor');
-    const chFeedback = challengeCard.querySelector('.challenge-feedback');
-    challengeCard.querySelector('[data-act="check"]').addEventListener('click', () => {
-        if (ch.test(chEditor.value || '')) {
+    const chEditor = challengeCard.querySelector('.challenge-editor'); // Declara e inicializa variable local
+    const chFeedback = challengeCard.querySelector('.challenge-feedback'); // Declara e inicializa variable local
+    challengeCard.querySelector('[data-act="check"]').addEventListener('click', () => { // Registra escuchador de evento en el DOM
+        if (ch.test(chEditor.value || '')) { // Evalúa condición lógica
             chFeedback.textContent = '✅ ¡Correcto! Dominaste el reto práctico del módulo.'; // Actualiza contenido en el DOM
             chFeedback.className = 'challenge-feedback show ok';
             logConsole(`✅ Reto "${topicFolder}" superado`, 'ok');
@@ -486,11 +655,11 @@
             logConsole(`❌ Reto "${topicFolder}" incompleto`, 'err');
         }
     });
-    challengeCard.querySelector('[data-act="hint"]').addEventListener('click', () => {
+    challengeCard.querySelector('[data-act="hint"]').addEventListener('click', () => { // Registra escuchador de evento en el DOM
         chFeedback.textContent = `💡 Pista: ${ch.hint}`; // Actualiza contenido en el DOM
         chFeedback.className = 'challenge-feedback show ok';
     });
-    challengeCard.querySelector('[data-act="solve"]').addEventListener('click', () => {
+    challengeCard.querySelector('[data-act="solve"]').addEventListener('click', () => { // Registra escuchador de evento en el DOM
         chEditor.value = ch.solution;
         chFeedback.textContent = '✨ Solución cargada. Pulsa "Verificar Solución" o personalízala.'; // Actualiza contenido en el DOM
         chFeedback.className = 'challenge-feedback show ok';
@@ -499,9 +668,9 @@
     mainGrid.appendChild(challengeCard);
 
     quizSlides.forEach(s => {
-        const card = document.createElement('section');
+        const card = document.createElement('section'); // Declara e inicializa variable local
         card.className = 'jr-card';
-        const content = s.querySelector('.slide-content') || s;
+        const content = s.querySelector('.slide-content') || s; // Declara e inicializa variable local
         while (content.firstChild) card.appendChild(content.firstChild);
         mainGrid.appendChild(card);
     });
@@ -509,7 +678,7 @@
     shell.appendChild(mainGrid);
 
     // 5. Consola en Vivo (.jr-console-panel)
-    const consolePanel = document.createElement('section');
+    const consolePanel = document.createElement('section'); // Declara e inicializa variable local
     consolePanel.className = 'jr-console-panel';
     consolePanel.innerHTML = `
         <div class="jr-console-header">
@@ -520,73 +689,202 @@
     `;
     shell.appendChild(consolePanel);
 
-    const logBox = consolePanel.querySelector('#jrConsoleLog');
-    function logConsole(msg, type = '') {
-        if (!logBox) return;
-        const line = document.createElement('div');
+    const logBox = consolePanel.querySelector('#jrConsoleLog'); // Declara e inicializa variable local
+    function logConsole(msg, type = '') { // Define función reutilizable
+        if (!logBox) return; // Evalúa condición lógica
+        const line = document.createElement('div'); // Declara e inicializa variable local
         line.className = `jr-log-line ${type}`.trim();
-        const hora = new Date().toLocaleTimeString();
+        const hora = new Date().toLocaleTimeString(); // Declara e inicializa variable local
         line.textContent = `[${hora}] ${msg}`; // Actualiza contenido en el DOM
         logBox.appendChild(line);
         logBox.scrollTop = logBox.scrollHeight;
     }
-    consolePanel.querySelector('#jrClearLog').addEventListener('click', () => {
+    consolePanel.querySelector('#jrClearLog').addEventListener('click', () => { // Registra escuchador de evento en el DOM
         logBox.innerHTML = ''; // Actualiza contenido en el DOM
     });
 
     // 6. Navegación directa entre módulos del mismo nivel (⬅ Anterior / Siguiente ➡)
     const COURSE_MODULES = { // Mapa ordenado de carpetas de módulos por nivel
-        'HTML y CSS': ['HTML BASICO', 'HTML avanzado', 'CSS BASICO', 'CSS avanzado', 'Flexbox', 'Grid', 'Animaciones', 'Funciones Avanzadas', 'Responsive Design'],
-        'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Temporizadores', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Pestañas DevTools'],
+        'HTML y CSS': ['HTML BASICO', 'HTML avanzado', 'CSS BASICO', 'CSS avanzado', 'Formularios', 'Flexbox', 'Grid', 'Animaciones', 'Funciones Avanzadas', 'Responsive Design'],
+        'JAVASCRIPT MID LEVEL': ['Window', 'Objetos Barprop', 'Location', 'Screen y Scroll', 'Resize y Move', 'Eventos', 'Switch', 'Try-Catch', 'Temporizadores', 'Callbacks', 'Promesas', 'Async y Await', 'Datos Estructurados (JSON)', 'Expresiones Regulares', 'Peticiones HTTP', 'Ajax', 'Fetch', 'Libreria Axios', 'Codigo Obsoleto', 'Pestañas DevTools'],
         'JAVASCRIPT MASTER LEVEL': ['Modo Estricto', 'Operador Ternario', 'Funciones Flecha', 'Prototipos', 'Memoization', 'Objeto Date', 'Objeto Screen', 'Navigator', 'Matchmedia', 'Visibility Change', 'Historial', 'Geolocalization', 'Drag & Drop', 'File Reader', 'Canvas', 'Local Storage', 'Cookies', 'IndexedDB', 'Intersection Observer', 'Apis', 'Cache', 'Notifications', 'Web Workers', 'Service Workers'],
-        'NODE': ['Introduccion', 'Fundamentos', 'Instalacion', 'REPL', 'JavaScriptModerno', 'Asincronia', 'ArchivosNativos', 'EventosStreams', 'CryptoSeguridad', 'Modulos', 'NPM', 'JSON']
+        'NODE': ['Introduccion', 'Fundamentos', 'Instalacion', 'REPL', 'JavaScriptModerno', 'Modulos', 'NPM', 'JSON', 'Asincronia', 'ArchivosNativos', 'Process', 'EventosStreams', 'CryptoSeguridad', 'HttpApi', 'Testing']
     };
     const SUBMODULE_GROUPS = { // Listas de submódulos con navegación Anterior/Siguiente propia
         'Eventos': ['Handlers', 'Event Flow', 'Eventos de Mouse', 'Eventos de Teclado', 'Eventos de Interfaz'],
         'Ajax': ['Ajax Editor', 'Ajax Htdocs'],
         'Libreria Axios': ['Axios Editor', 'Axios-Fetch-Htdocs']
     };
-    const subGroupKey = Object.keys(SUBMODULE_GROUPS).find(k => parts.includes(k) && SUBMODULE_GROUPS[k].includes(topicFolder));
+    // Mapa agrupado de submódulos HTML y CSS: evita repetir el nombre del módulo padre en cada entrada
+    const HTML_CSS_GROUPS = {
+        'HTML BASICO': [
+            ['Titulos y Parrafos/Titulos y parrafos.html', 'Títulos y Párrafos'],
+            ['Listas/listas.html', 'Listas'],
+            ['Enlaces/enlaces.html', 'Enlaces'],
+            ['Imagenes/img.html', 'Imágenes'],
+            ['Formularios/formularios.html', 'Formularios Básicos']
+        ],
+        'HTML avanzado': [
+            ['HTML Semantico/HTML semantico.html', 'HTML Semántico'],
+            ['Accesibilidad/accesibilidad.html', 'Accesibilidad'],
+            ['Tablas/tablas.html', 'Tablas'],
+            ['audio y video/audio y video.html', 'Audio y Video'],
+            ['Lazy load/lazy.html', 'Lazy Load'],
+            ['Select Datalist y Option/selec,datalist y option.html', 'Select y Datalist'],
+            ['Fieldset y Legend/fieldset y legend.html', 'Fieldset y Legend'],
+            ['Textarea y Labels/text-area y labels.html', 'Textarea y Labels'],
+            ['Details y Summary/details y summary.html', 'Details y Summary'],
+            ['Enlaces avanzados/enlaces avanzado.html', 'Enlaces Avanzados'],
+            ['Comentarios Metatags Iconos/comentarios-metatags-iconos.html', 'Metatags e Iconos'],
+            ['Emmet/emmet.html', 'Emmet'],
+            ['HTML Obsoleto/HTML obsoleto.html', 'HTML Obsoleto']
+        ],
+        'CSS avanzado': [
+            ['selectores/selectores.html', 'Selectores'],
+            ['Herencia/herencia.html', 'Herencia'],
+            ['Display/display.html', 'Display'],
+            ['Position/position_html/position-relative.html', 'Position Relative'],
+            ['Position/position_html/position-absolute.html', 'Position Absolute'],
+            ['Position/position_html/position-fixed.html', 'Position Fixed'],
+            ['Position/position_html/position-sticky.html', 'Position Sticky'],
+            ['Pseudoclases/pseudoclases.html', 'Pseudoclases'],
+            ['Pseudoelementos/pseudoelementos.html', 'Pseudoelementos'],
+            ['BEM/bem.html', 'Metodología BEM'],
+            ['Object Fit_Position/fit_position.html', 'Object Fit y Position'],
+            ['Overflow/overflow.html', 'Overflow'],
+            ['Outline/outline.html', 'Outline'],
+            ['Control_flujo_texto/control_texto.html', 'Control de Texto'],
+            ['Transition/transition.html', 'Transition']
+        ],
+        'Flexbox': [
+            ['Flex_Direction/direction.html', 'Flex Direction'],
+            ['Alineacion/alineacion.html', 'Alineación Flex'],
+            ['Wrap y Flow/wrap_flow.html', 'Wrap y Flow'],
+            ['Grow,Shrink y Basis/grow.html', 'Grow, Shrink y Basis'],
+            ['Order/order.html', 'Order'],
+            ['Align Self/align.html', 'Align Self'],
+            ['Layout/layout.html', 'Layout Flexbox']
+        ],
+        'Grid': [
+            ['Principios/grid.html', 'Principios de Grid'],
+            ['Auto y FR/auto.html', 'Auto y FR'],
+            ['Repeat/repeat.html', 'Repeat'],
+            ['Gap/gap.html', 'Gap'],
+            ['Row-Column/row-column.html', 'Row y Column'],
+            ['Area/area.html', 'Grid Area'],
+            ['Alineacion/alineacion.html', 'Alineación Grid'],
+            ['Grid Explicito e Implicito/exp-imp.html', 'Explícito e Implícito'],
+            ['Dense/dense.html', 'Grid Dense'],
+            ['Dinamico(Responsive)/dinamico.html', 'Grid Dinámico'],
+            ['Subgrid/subgrid.html', 'Subgrid']
+        ],
+        'Animaciones': [
+            ['Animaciones/animaciones.html', 'Keyframes Base'],
+            ['Botones Animados/botones.html', 'Botones Animados'],
+            ['Texto/texto.html', 'Texto Animado'],
+            ['Transiciones (Repaso)/transiciones.html', 'Transiciones'],
+            ['Scroll/Scroll Container/scroll.html', 'Scroll Container'],
+            ['Scroll/View/view.html', 'Scroll View']
+        ],
+        'Funciones Avanzadas': [
+            ['Variables/variables.html', 'Variables CSS'],
+            ['Calc/calc.html', 'Calc()'],
+            ['Max Min Clamp/max-min.html', 'Max, Min y Clamp'],
+            ['Unidades del Viewport/unidades.html', 'Unidades Viewport'],
+            ['Color MIx/color.html', 'Color-Mix()'],
+            ['Filter y Backdrop/filter.html', 'Filter y Backdrop'],
+            ['Clip Path/clip.html', 'Clip-Path'],
+            ['Transform/transform.html', 'Transform'],
+            ['Initial Letter/initial.html', 'Initial Letter'],
+            ['Scroll/scroll.html', 'Scroll Snap']
+        ],
+        'Responsive Design': [
+            ['Mobile Design/mobile.html', 'Mobile-First'],
+            ['Media Queries/mediaq.html', 'Media Queries'],
+            ['Container Queries/container.html', 'Container Queries'],
+            ['Feature Queries/features.html', 'Feature Queries'],
+            ['Bloques Flexibles/bloques_flexibles.html', 'Bloques Flexibles'],
+            ['Multimedia Flexible/multimedia.html', 'Multimedia Flexible'],
+            ['Picture,Source,Media/picture.html', 'Picture y Source'],
+            ['Srcset y Sizes/src-szs.html', 'Srcset y Sizes']
+        ]
+    };
+    // Aplana los grupos anteriores a la secuencia ordenada de submódulos de HTML y CSS
+    const HTML_CSS_SUBMODULES = Object.entries(HTML_CSS_GROUPS).flatMap(([parent, items]) =>
+        items.map(([subPath, label]) => ({ path: `${parent}/${subPath}`, label, parent }))
+    );
+    const relFromCourse = courseIdx !== -1 ? parts.slice(courseIdx + 1).join('/') : ''; // Declara e inicializa variable local
+    const htmlSubIdx = courseFolder === 'HTML y CSS' ? HTML_CSS_SUBMODULES.findIndex(s => s.path.toLowerCase() === relFromCourse.toLowerCase()) : -1; // Declara e inicializa variable local
+    const subGroupKey = Object.keys(SUBMODULE_GROUPS).find(k => parts.includes(k) && SUBMODULE_GROUPS[k].includes(topicFolder)); // Declara e inicializa variable local
     const levelList = subGroupKey ? SUBMODULE_GROUPS[subGroupKey] : (COURSE_MODULES[courseFolder] || []); // Obtiene la lista ordenada del nivel o submódulo actual
     const modIdx = levelList.indexOf(topicFolder); // Ubica el índice del módulo actual
-    if (/^index\.html?$/i.test(fileName) && modIdx !== -1) { // Solo si estamos en el index.html principal del módulo
-        const prevMod = modIdx > 0 ? levelList[modIdx - 1] : null; // Módulo anterior si existe
-        const nextMod = modIdx < levelList.length - 1 ? levelList[modIdx + 1] : null; // Módulo siguiente si existe
+    if (htmlSubIdx !== -1 || (/^index\.html?$/i.test(fileName) && modIdx !== -1)) { // Aplica a módulos principales y submódulos de HTML y CSS
+        let prevTarget = null; // Declara e inicializa variable local
+        let nextTarget = null; // Declara e inicializa variable local
+        let parentLink = subGroupKey ? { href: '../index.html', label: subGroupKey } : null; // Declara e inicializa variable local
+
+        if (htmlSubIdx !== -1) { // Evalúa condición lógica
+            const curSub = HTML_CSS_SUBMODULES[htmlSubIdx]; // Declara e inicializa variable local
+            parentLink = { href: encodeURI(`${toCourseRoot}${curSub.parent}/index.html`), label: curSub.parent };
+            if (htmlSubIdx > 0) { // Evalúa condición lógica
+                const p = HTML_CSS_SUBMODULES[htmlSubIdx - 1]; // Declara e inicializa variable local
+                prevTarget = { href: encodeURI(`${toCourseRoot}${p.path}`), label: p.label };
+            } else {
+                prevTarget = { href: encodeURI(`${toCourseRoot}Responsive Design/index.html`), label: 'Responsive Design' };
+            }
+            if (htmlSubIdx < HTML_CSS_SUBMODULES.length - 1) { // Evalúa condición lógica
+                const n = HTML_CSS_SUBMODULES[htmlSubIdx + 1]; // Declara e inicializa variable local
+                nextTarget = { href: encodeURI(`${toCourseRoot}${n.path}`), label: n.label };
+            } else {
+                nextTarget = { href: encodeURI(`${toPortalRoot}JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Variables/index.html`), label: 'JS Junior: Variables' };
+            }
+        } else {
+            const prevMod = modIdx > 0 ? levelList[modIdx - 1] : null; // Módulo anterior si existe
+            const nextMod = modIdx < levelList.length - 1 ? levelList[modIdx + 1] : null; // Módulo siguiente si existe
+
+            // Conexión entre cursos cuando estamos en el primer o último módulo de un nivel
+            const CROSS_COURSE = !subGroupKey ? {
+                'HTML y CSS': { next: { href: `${toCourseRoot}${HTML_CSS_SUBMODULES[0].path}`, label: HTML_CSS_SUBMODULES[0].label } },
+                'JAVASCRIPT MID LEVEL': {
+                    prev: { href: `${toPortalRoot}JAVASCRIPT/JAVASCRIPT JUNIOR LEVEL/Dom/index.html`, label: 'JS Junior: Dom' },
+                    next: { href: `${toPortalRoot}JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Modo Estricto/index.html`, label: 'JS Master: Modo Estricto' }
+                },
+                'JAVASCRIPT MASTER LEVEL': {
+                    prev: { href: `${toPortalRoot}JAVASCRIPT/JAVASCRIPT MID LEVEL/Pestañas DevTools/index.html`, label: 'JS Mid: DevTools' },
+                    next: { href: `${toPortalRoot}NODE/Introduccion/index.html`, label: 'Node.js: Introduccion' }
+                },
+                'NODE': { prev: { href: `${toPortalRoot}JAVASCRIPT/JAVASCRIPT MASTER LEVEL/Service Workers/index.html`, label: 'JS Master: Service Workers' } }
+            }[courseFolder] : null;
+
+            prevTarget = prevMod ? { href: encodeURI(`../${prevMod}/index.html`), label: prevMod } : (CROSS_COURSE?.prev ? { href: encodeURI(CROSS_COURSE.prev.href), label: CROSS_COURSE.prev.label } : null);
+            nextTarget = nextMod ? { href: encodeURI(`../${nextMod}/index.html`), label: nextMod } : (CROSS_COURSE?.next ? { href: encodeURI(CROSS_COURSE.next.href), label: CROSS_COURSE.next.label } : null);
+        }
+
+        // Helper reutilizable para crear enlaces de navegación uniformes en barra superior e inferior
+        const makeNavLink = (href, text) => {
+            const a = document.createElement('a'); // Crea elemento <a>
+            a.className = 'jr-nav-link'; // Aplica clase unificada de navegación
+            a.href = href; // Asigna URL de destino
+            a.textContent = text; // Inserta texto seguro sin interpretar HTML
+            return a; // Retorna el enlace construido
+        };
+
         const navRightEl = topNav.querySelector('.jr-nav-right'); // Contenedor derecho de la barra superior
-        // Agregamos accesos rápidos en la barra superior en orden unificado:
-        // [theme-dots] -> [⬅ Anterior] -> [↩ Padre] -> [Nivel] -> [📘 Apuntes] -> [🚀 Proyectos] -> [🏠 Portal] -> [Siguiente ➡]
-        if (subGroupKey && navRightEl) {
-            const aParent = document.createElement('a');
-            aParent.className = 'jr-nav-link';
-            aParent.href = '../index.html';
-            aParent.textContent = `↩ ${subGroupKey}`;
-            navRightEl.insertBefore(aParent, navRightEl.querySelector('.jr-nav-link'));
-        }
-        if (prevMod && navRightEl) { // Si existe módulo anterior
-            const aPrev = document.createElement('a'); // Crea enlace al módulo anterior
-            aPrev.className = 'jr-nav-link'; // Estilo de botón de navegación
-            aPrev.href = encodeURI(`../${prevMod}/index.html`); // Ruta relativa al módulo anterior
-            aPrev.textContent = `⬅ ${prevMod}`; // Texto visible
-            navRightEl.insertBefore(aPrev, navRightEl.querySelector('.jr-nav-link')); // Siempre primero después de theme-dots
-        }
-        if (nextMod && navRightEl) { // Si existe módulo siguiente
-            const aNext = document.createElement('a'); // Crea enlace al módulo siguiente
-            aNext.className = 'jr-nav-link'; // Estilo de botón de navegación
-            aNext.href = encodeURI(`../${nextMod}/index.html`); // Ruta relativa al módulo siguiente
-            aNext.textContent = `${nextMod} ➡`; // Texto visible
-            navRightEl.appendChild(aNext); // Siempre al final de la barra superior
-        }
+        const firstNavLink = navRightEl?.querySelector('.jr-nav-link') || null; // Punto de inserción antes de los botones globales
+        if (parentLink && navRightEl) navRightEl.insertBefore(makeNavLink(parentLink.href, `↩ ${parentLink.label}`), firstNavLink); // Acceso al módulo padre
+        if (prevTarget && navRightEl) navRightEl.insertBefore(makeNavLink(prevTarget.href, `⬅ ${prevTarget.label}`), navRightEl.querySelector('.jr-nav-link')); // Acceso al módulo anterior
+        if (nextTarget && navRightEl) navRightEl.appendChild(makeNavLink(nextTarget.href, `${nextTarget.label} ➡`)); // Acceso al módulo siguiente
         // Creamos también una barra inferior cómoda al terminar la lección
         const bottomModNav = document.createElement('nav'); // Crea barra inferior de módulos
         bottomModNav.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:20px;padding:14px 18px;background:rgba(15,23,42,0.75);border:1px solid rgba(255,255,255,0.1);border-radius:14px;'; // Estilos en línea
         bottomModNav.innerHTML = `
-            ${prevMod ? `<a class="jr-nav-link" href="${encodeURI(`../${prevMod}/index.html`)}">⬅ Anterior: ${prevMod}</a>` : '<span></span>'}
+            ${prevTarget ? `<a class="jr-nav-link" href="${prevTarget.href}">⬅ Anterior: ${prevTarget.label}</a>` : '<span></span>'}
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-                ${subGroupKey ? `<a class="jr-nav-link" href="../index.html">↩ ${subGroupKey}</a>` : ''}
+                ${parentLink ? `<a class="jr-nav-link" href="${parentLink.href}">↩ ${parentLink.label}</a>` : ''}
                 <a class="jr-nav-link" href="${meta.portalHref}?filter=${meta.filter}">${meta.levelLabel}</a>
                 <a class="jr-nav-link" href="${meta.docsHref}">📘 Ver Apuntes</a>
             </div>
-            ${nextMod ? `<a class="jr-nav-link primary" href="${encodeURI(`../${nextMod}/index.html`)}">Siguiente: ${nextMod} ➡</a>` : '<span></span>'}
+            ${nextTarget ? `<a class="jr-nav-link primary" href="${nextTarget.href}">Siguiente: ${nextTarget.label} ➡</a>` : '<span></span>'}
         `; // Inserta enlaces inferior anterior, nivel, apuntes y siguiente
         shell.appendChild(bottomModNav); // Añade la barra al final del contenedor principal
     }
@@ -595,3 +893,4 @@
     document.body.prepend(shell);
     logConsole(`🚀 Módulo "${topicFolder}" cargado con estructura unificada Junior Level.`, 'ok');
 })();
+

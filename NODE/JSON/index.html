@@ -36,7 +36,7 @@
         <!-- Indicador de progreso y contador de diapositiva actual -->
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <!-- Botones globales controlados por slides-engine.js -->
         <div class="nav-actions">
@@ -80,7 +80,7 @@
                         <h3>3. parse &amp; stringify</h3>
                         <p>Control fino con <code>reviver</code>, <code>replacer</code>, <code>space</code> y <code>toJSON()</code>.</p>
                     </div>
-                    <div class="hero-card" data-jump="8">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Prueba validaciones, trampas y transformaciones en vivo.</p>
@@ -234,8 +234,92 @@ await writeFile('./config.json', JSON.stringify(cfg, null, 2) + '\n', 'utf8');</
             </div>
         </section>
 
-        <!-- SLIDE 8: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="8" data-lab="true" data-title="Simulador de JSON">
+        <!-- SLIDE 8: STRUCTUREDCLONE VS JSON -->
+        <section class="slide" data-slide="8" data-title="structuredClone() vs JSON para Clonar">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · CLONADO PROFUNDO EN NODE.JS</span>
+                <h2 class="slide-title"><code>structuredClone()</code> vs <code>JSON.parse(JSON.stringify())</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Durante años se usó <code>JSON.parse(JSON.stringify(obj))</code> como truco para clonar objetos, pero destruye <code>Date</code> (pasa a string), <code>Map</code>/<code>Set</code> (pasan a <code>{}</code>) y falla con referencias circulares. En Node.js moderno usa siempre <code>structuredClone()</code>:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Característica</th><th><code>JSON.parse(JSON.stringify())</code></th><th><code>structuredClone()</code></th></tr></thead>
+                    <tbody>
+                        <tr><td><code>Date</code>, <code>Map</code>, <code>Set</code>, <code>RegExp</code></td><td>Se pierden o deforman</td><td>✅ Se conservan intactos</td></tr>
+                        <tr><td>Referencias circulares</td><td>❌ Lanza <code>TypeError</code></td><td>✅ Las clona correctamente</td></tr>
+                        <tr><td>Uso correcto</td><td>Intercambio en red / disco</td><td>✅ Clonar objetos en memoria</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: SEGURIDAD Y HOJA DE TRUCOS JSON -->
+        <section class="slide" data-slide="9" data-title="Seguridad y Hoja de Trucos JSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · SEGURIDAD Y CHEATSHEET</span>
+                <h2 class="slide-title">Seguridad en APIs y Hoja de Trucos JSON</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En servidores HTTP (<code>node:http</code>), un atacante puede enviar un JSON gigante o malformado para saturar memoria o bloquear el Event Loop. Protege siempre tu backend con estas reglas:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Regla</th><th>Por qué es obligatoria</th></tr></thead>
+                    <tbody>
+                        <tr><td>Limitar tamaño del <em>body</em> (ej. 1 MB)</td><td>Evita agotar la RAM o congelar el hilo en <code>JSON.parse()</code></td></tr>
+                        <tr><td>Usar <code>try/catch</code> y nunca <code>eval()</code></td><td>Evita caídas por <code>SyntaxError</code> y ejecución remota de código</td></tr>
+                        <tr><td>Validar campos tras parsear</td><td>Que sea JSON válido no garantiza que tenga los tipos esperados</td></tr>
+                        <tr><td>Filtrar secretos con <code>replacer</code> o <code>.toJSON()</code></td><td>Impide filtrar contraseñas o tokens en respuestas HTTP</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: IMPORTAR JSON EN COMMONJS VS ESM -->
+        <section class="slide" data-slide="10" data-title="Importar JSON en CommonJS vs ESM">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · COMPATIBILIDAD EN NODE.JS</span>
+                <h2 class="slide-title">Importar <code>.json</code>: CommonJS vs ESM (<code>with { type: 'json' }</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En CommonJS basta con <code>require('./datos.json')</code>. En ES Modules (<code>"type": "module"</code>), necesitas atributos de importación (Node 20.10+) o usar <code>createRequire</code> / <code>fs/promises</code> para máxima compatibilidad:
+                </p>
+                <pre class="code-block"><code>// Opción 1: Import Attributes (ESM moderno)
+import pkg from './package.json' with { type: 'json' };
+
+// Opción 2: createRequire (funciona en cualquier versión LTS)
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const datos = require('./datos.json');</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE JSON -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de JSON">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave con JSON y NDJSON</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Refuerza el manejo de serialización, limpieza de campos y logs estructurados:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes aplicar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Ocultar <code>passwordHash</code> al serializar</td><td><code>replacer</code> o método <code>.toJSON()</code></td></tr>
+                        <tr><td>2. Reconstruir fechas ISO al parsear</td><td>Segundo parámetro <code>reviver</code> en <code>JSON.parse()</code></td></tr>
+                        <tr><td>3. Leer un archivo <code>.ndjson</code> de logs</td><td><code>texto.split(/\r?\n/).filter(Boolean).map(JSON.parse)</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de JSON">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · COMPORTAMIENTO EN VIVO</span>
                 <h2 class="slide-title">🎛️ Simulador de Características y Trampas JSON</h2>
@@ -265,10 +349,10 @@ await writeFile('./config.json', JSON.stringify(cfg, null, 2) + '\n', 'utf8');</
             </div>
         </section>
 
-        <!-- SLIDE 9: QUIZ -->
-        <section class="slide" data-slide="9" data-title="Quiz: JSON en Node.js">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: JSON en Node.js">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de JSON y Características</h2>
             </div>
             <!-- Contenedor del Quiz gestionado automáticamente por slides-engine.js -->
@@ -316,10 +400,10 @@ await writeFile('./config.json', JSON.stringify(cfg, null, 2) + '\n', 'utf8');</
             </div>
         </section>
 
-        <!-- SLIDE 10: LABORATORIO -->
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: JSON en Vivo">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: JSON en Vivo">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de JSON</h2>
             </div>
             <!-- Panel de Laboratorio: presets precargados + editor + vista previa en iframe aislado -->

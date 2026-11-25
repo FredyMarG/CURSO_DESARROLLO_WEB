@@ -1,10 +1,10 @@
 // Guía Interactiva — Location, URL y URLSearchParams
 
-const locationTable = document.getElementById("locationTable");
-const urlInput = document.getElementById("urlInput");
-const urlOutput = document.getElementById("urlOutput");
+const locationTable = document.getElementById("locationTable"); // Declara e inicializa variable local
+const urlInput = document.getElementById("urlInput"); // Declara e inicializa variable local
+const urlOutput = document.getElementById("urlOutput"); // Declara e inicializa variable local
 
-function renderLocation() {
+function renderLocation() { // Define función reutilizable
     const props = [
         ["location.href", window.location.href],
         ["location.protocol", window.location.protocol],
@@ -16,21 +16,21 @@ function renderLocation() {
 
     locationTable.innerHTML = ""; // Actualiza contenido en el DOM
     props.forEach(([clave, valor]) => {
-        const row = document.createElement("div");
+        const row = document.createElement("div"); // Declara e inicializa variable local
         row.className = "kv-item";
-        const span = document.createElement("span");
+        const span = document.createElement("span"); // Declara e inicializa variable local
         span.textContent = clave; // Actualiza contenido en el DOM
-        const strong = document.createElement("strong");
+        const strong = document.createElement("strong"); // Declara e inicializa variable local
         strong.textContent = valor; // Actualiza contenido en el DOM
         row.append(span, strong);
         locationTable.appendChild(row);
     });
 }
 
-function analizarUrl() {
+function analizarUrl() { // Define función reutilizable
     try { // Inicia bloque protegido contra errores
-        const parsed = new URL(urlInput.value.trim());
-        const paramsObj = Object.fromEntries(parsed.searchParams.entries());
+        const parsed = new URL(urlInput.value.trim()); // Declara e inicializa variable local
+        const paramsObj = Object.fromEntries(parsed.searchParams.entries()); // Declara e inicializa variable local
         urlOutput.textContent = [
             `origin:   ${parsed.origin}`,
             `hostname: ${parsed.hostname}`,
@@ -43,10 +43,10 @@ function analizarUrl() {
     }
 }
 
-document.getElementById("btnParseUrl").addEventListener("click", analizarUrl);
-document.getElementById("btnAddParam").addEventListener("click", () => {
+document.getElementById("btnParseUrl").addEventListener("click", analizarUrl); // Obtiene referencia al elemento del DOM
+document.getElementById("btnAddParam").addEventListener("click", () => { // Registra escuchador de evento en el DOM
     try { // Inicia bloque protegido contra errores
-        const parsed = new URL(urlInput.value.trim());
+        const parsed = new URL(urlInput.value.trim()); // Declara e inicializa variable local
         parsed.searchParams.set("promo", "2026");
         urlInput.value = parsed.toString();
         analizarUrl();
@@ -57,3 +57,4 @@ document.getElementById("btnAddParam").addEventListener("click", () => {
 
 renderLocation();
 analizarUrl();
+

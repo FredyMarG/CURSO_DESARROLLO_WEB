@@ -119,7 +119,7 @@ npm init -y
 }
 ```
 
-> **Tip moderno:** Desde Node.js 18.11+, el flag `--watch` reinicia automáticamente tu archivo cada vez que guardas cambios, sin necesidad de instalar herramientas externas como `nodemon`.
+> **Tip moderno:** Desde Node.js 18.11+, el flag `--watch` reinicia automáticamente tu archivo cada vez que guardas cambios, sin necesidad de instalar herramientas externas como `nodemon`. Y desde Node.js 20.6+ puedes cargar variables de entorno de forma nativa con `node --env-file=.env index.js` o `process.loadEnvFile()` dentro de tu código (sin instalar `dotenv`).
 
 5. Crea un archivo `.gitignore` para no subir carpetas pesadas ni credenciales a Git:
 

@@ -1,313 +1,313 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;600;700;800&display=swap');
 
-:root {
-    --ink: #f8fafc;
-    --muted: #94a3b8;
-    --blue: #38bdf8;
-    --indigo: #a855f7;
-    --pink: #f472b6;
-    --emerald: #00ff88;
-    --amber: #fbbf24;
-    --rose: #ff3358;
-    --line: rgba(255, 255, 255, 0.09);
-    --surface: rgba(22, 30, 49, 0.72);
-    --page: #0b0f19;
-    --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
-    color: var(--ink);
-    background: var(--page);
+:root { /* Regla para :root */
+    --ink: #f8fafc; /* Variable CSS personalizada */
+    --muted: #94a3b8; /* Variable CSS personalizada */
+    --blue: #38bdf8; /* Variable CSS personalizada */
+    --indigo: #a855f7; /* Variable CSS personalizada */
+    --pink: #f472b6; /* Variable CSS personalizada */
+    --emerald: #00ff88; /* Variable CSS personalizada */
+    --amber: #fbbf24; /* Variable CSS personalizada */
+    --rose: #ff3358; /* Variable CSS personalizada */
+    --line: rgba(255, 255, 255, 0.09); /* Variable CSS personalizada */
+    --surface: rgba(22, 30, 49, 0.72); /* Variable CSS personalizada */
+    --page: #0b0f19; /* Variable CSS personalizada */
+    --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6); /* Variable CSS personalizada */
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif; /* Familia tipográfica aplicada al texto */
+    color: var(--ink); /* Color del texto */
+    background: var(--page); /* Fondo (color, degradado o imagen) */
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-body {
-    min-width: 320px;
-    min-height: 100vh;
-    background: #0b0f19;
+body { /* Regla para body */
+    min-width: 320px; /* Configura la propiedad min-width */
+    min-height: 100vh; /* Altura mínima garantizada */
+    background: #0b0f19; /* Fondo (color, degradado o imagen) */
     background-image:
         radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.18) 0, transparent 50%),
         radial-gradient(at 50% 0%, rgba(168, 85, 247, 0.14) 0, transparent 50%),
         radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.18) 0, transparent 50%);
-    color: var(--ink);
-    padding: 1.5rem 0 3rem;
+    color: var(--ink); /* Color del texto */
+    padding: 1.5rem 0 3rem; /* Relleno interior del elemento */
 }
 
-.page-shell {
-    width: min(100% - 32px, 1080px);
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+.page-shell { /* Regla para .page-shell */
+    width: min(100% - 32px, 1080px); /* Ancho del elemento */
+    margin: 0 auto; /* Espaciado exterior del elemento */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    flex-direction: column; /* Dirección del eje principal en Flexbox */
+    gap: 1.5rem; /* Separación uniforme entre filas y columnas */
 }
 
-.topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    padding: 10px 16px;
-    background: rgba(15, 23, 42, 0.88);
-    border: 1px solid rgba(168, 85, 247, 0.35);
-    border-radius: 14px;
-    backdrop-filter: blur(12px);
+.topbar { /* Regla para .topbar */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: space-between; /* Alineación en el eje principal */
+    flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
+    gap: 12px; /* Separación uniforme entre filas y columnas */
+    padding: 10px 16px; /* Relleno interior del elemento */
+    background: rgba(15, 23, 42, 0.88); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(168, 85, 247, 0.35); /* Borde completo (grosor, estilo y color) */
+    border-radius: 14px; /* Redondeo de esquinas */
+    backdrop-filter: blur(12px); /* Efecto visual (desenfoque) sobre el fondo trasero */
 }
 
-.brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #c084fc;
-    font-size: 0.84rem;
-    font-weight: 700;
-    font-family: 'Fira Code', monospace;
-    text-decoration: none;
+.brand { /* Regla para .brand */
+    display: inline-flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 10px; /* Separación uniforme entre filas y columnas */
+    color: #c084fc; /* Color del texto */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica aplicada al texto */
+    text-decoration: none; /* Decoración del texto (subrayado o ninguna) */
 }
 
-.brand-mark {
-    display: grid;
-    width: 32px;
-    height: 32px;
-    place-items: center;
-    border-radius: 9px;
-    background: linear-gradient(135deg, var(--indigo), var(--blue));
-    color: #070a13;
-    font-size: 0.82rem;
-    font-weight: 800;
+.brand-mark { /* Regla para .brand-mark */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    width: 32px; /* Ancho del elemento */
+    height: 32px; /* Alto del elemento */
+    place-items: center; /* Centrado rápido en filas y columnas */
+    border-radius: 9px; /* Redondeo de esquinas */
+    background: linear-gradient(135deg, var(--indigo), var(--blue)); /* Fondo (color, degradado o imagen) */
+    color: #070a13; /* Color del texto */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    font-weight: 800; /* Grosor tipográfico */
 }
 
 .brand-light { color: #e2e8f0; font-weight: 600; }
 
-.topbar-nav {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
+.topbar-nav { /* Regla para .topbar-nav */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    gap: 8px; /* Separación uniforme entre filas y columnas */
+    align-items: center; /* Alineación en el eje cruzado */
+    flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
 }
 
-.nav-pill {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-size: 0.84rem;
-    font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(255, 255, 255, 0.05);
-    transition: all 0.2s ease;
+.nav-pill { /* Regla para .nav-pill */
+    color: #cbd5e1; /* Color del texto */
+    text-decoration: none; /* Decoración del texto (subrayado o ninguna) */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor tipográfico */
+    padding: 6px 12px; /* Relleno interior del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    border: 1px solid rgba(255, 255, 255, 0.14); /* Borde completo (grosor, estilo y color) */
+    background: rgba(255, 255, 255, 0.05); /* Fondo (color, degradado o imagen) */
+    transition: all 0.2s ease; /* Interpolación suave al cambiar propiedades */
 }
 
 .nav-pill:hover { border-color: #c084fc; color: #fff; }
 .nav-pill.primary { background: #c084fc; color: #070a13; border-color: #c084fc; font-weight: 700; }
 
-.hosting-notice {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(99, 102, 241, 0.1);
-    border: 1px solid rgba(129, 140, 248, 0.3);
-    border-radius: 14px;
-    padding: 0.9rem 1.2rem;
-    color: #cbd5e1;
-    font-size: 0.92rem;
-    line-height: 1.55;
+.hosting-notice { /* Regla para .hosting-notice */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 12px; /* Separación uniforme entre filas y columnas */
+    background: rgba(99, 102, 241, 0.1); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(129, 140, 248, 0.3); /* Borde completo (grosor, estilo y color) */
+    border-radius: 14px; /* Redondeo de esquinas */
+    padding: 0.9rem 1.2rem; /* Relleno interior del elemento */
+    color: #cbd5e1; /* Color del texto */
+    font-size: 0.92rem; /* Tamaño de fuente */
+    line-height: 1.55; /* Altura de línea para legibilidad */
 }
 
-.hosting-notice-icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 999px;
-    background: rgba(56, 189, 248, 0.2);
-    border: 1px solid rgba(56, 189, 248, 0.4);
-    color: var(--blue);
-    display: grid;
-    place-items: center;
-    font-weight: 800;
-    font-size: 0.82rem;
-    flex-shrink: 0;
+.hosting-notice-icon { /* Regla para .hosting-notice-icon */
+    width: 26px; /* Ancho del elemento */
+    height: 26px; /* Alto del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(56, 189, 248, 0.2); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(56, 189, 248, 0.4); /* Borde completo (grosor, estilo y color) */
+    color: var(--blue); /* Color del texto */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    place-items: center; /* Centrado rápido en filas y columnas */
+    font-weight: 800; /* Grosor tipográfico */
+    font-size: 0.82rem; /* Tamaño de fuente */
+    flex-shrink: 0; /* Configura la propiedad flex-shrink */
 }
 
-.hero {
-    background: var(--surface);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
+.hero { /* Regla para .hero */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    backdrop-filter: blur(16px); /* Efecto visual (desenfoque) sobre el fondo trasero */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
+    border-radius: 24px; /* Redondeo de esquinas */
+    padding: 2rem; /* Relleno interior del elemento */
+    box-shadow: var(--shadow); /* Sombra proyectada alrededor de la caja */
 }
 
-.eyebrow, .section-kicker {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #c084fc;
-    margin-bottom: 0.45rem;
+.eyebrow, .section-kicker { /* Regla para .eyebrow, .section-kicker */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica aplicada al texto */
+    font-size: 0.75rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    letter-spacing: 0.08em; /* Espaciado entre caracteres */
+    color: #c084fc; /* Color del texto */
+    margin-bottom: 0.45rem; /* Margen inferior */
 }
 
-.hero h1 {
-    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-    font-weight: 700;
-    background: linear-gradient(135deg, #c084fc, #38bdf8);
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.6rem;
+.hero h1 { /* Regla para .hero h1 */
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem); /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    background: linear-gradient(135deg, #c084fc, #38bdf8); /* Fondo (color, degradado o imagen) */
+    background-clip: text; /* Recorte del fondo (ej. sobre texto) */
+    -webkit-text-fill-color: transparent; /* Configura la propiedad -webkit-text-fill-color */
+    margin-bottom: 0.6rem; /* Margen inferior */
 }
 
-.hero-copy {
-    color: #cbd5e1;
-    line-height: 1.65;
-    max-width: 68ch;
+.hero-copy { /* Regla para .hero-copy */
+    color: #cbd5e1; /* Color del texto */
+    line-height: 1.65; /* Altura de línea para legibilidad */
+    max-width: 68ch; /* Ancho máximo permitido */
 }
 
-code {
-    font-family: 'Fira Code', monospace;
-    background: rgba(56, 189, 248, 0.14);
-    color: #38bdf8;
-    padding: 2px 6px;
-    border-radius: 6px;
-    font-size: 0.88em;
+code { /* Regla para code */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica aplicada al texto */
+    background: rgba(56, 189, 248, 0.14); /* Fondo (color, degradado o imagen) */
+    color: #38bdf8; /* Color del texto */
+    padding: 2px 6px; /* Relleno interior del elemento */
+    border-radius: 6px; /* Redondeo de esquinas */
+    font-size: 0.88em; /* Tamaño de fuente */
 }
 
-.workspace {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 1.5rem;
+.workspace { /* Regla para .workspace */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Definición de columnas en CSS Grid */
+    gap: 1.5rem; /* Separación uniforme entre filas y columnas */
 }
 
-.panel {
-    background: var(--surface);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 1.75rem;
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+.panel { /* Regla para .panel */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    backdrop-filter: blur(16px); /* Efecto visual (desenfoque) sobre el fondo trasero */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
+    border-radius: 24px; /* Redondeo de esquinas */
+    padding: 1.75rem; /* Relleno interior del elemento */
+    box-shadow: var(--shadow); /* Sombra proyectada alrededor de la caja */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    flex-direction: column; /* Dirección del eje principal en Flexbox */
+    gap: 1rem; /* Separación uniforme entre filas y columnas */
 }
 
-.panel-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
+.panel-heading { /* Regla para .panel-heading */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    justify-content: space-between; /* Alineación en el eje principal */
+    align-items: flex-start; /* Alineación en el eje cruzado */
+    gap: 12px; /* Separación uniforme entre filas y columnas */
 }
 
 .panel-heading h2 { font-size: 1.35rem; color: #f8fafc; }
 .panel-copy { color: var(--muted); font-size: 0.94rem; line-height: 1.55; }
 
-.method-badge, .response-icon {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.78rem;
-    font-weight: 700;
-    padding: 5px 11px;
-    border-radius: 999px;
-    background: rgba(168, 85, 247, 0.16);
-    border: 1px solid rgba(168, 85, 247, 0.4);
-    color: #e9d5ff;
+.method-badge, .response-icon { /* Regla para .method-badge, .response-icon */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica aplicada al texto */
+    font-size: 0.78rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    padding: 5px 11px; /* Relleno interior del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(168, 85, 247, 0.16); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(168, 85, 247, 0.4); /* Borde completo (grosor, estilo y color) */
+    color: #e9d5ff; /* Color del texto */
 }
 
-.client-picker {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    background: #070b15;
-    padding: 5px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
+.client-picker { /* Regla para .client-picker */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: 1fr 1fr; /* Definición de columnas en CSS Grid */
+    gap: 8px; /* Separación uniforme entre filas y columnas */
+    background: #070b15; /* Fondo (color, degradado o imagen) */
+    padding: 5px; /* Relleno interior del elemento */
+    border-radius: 12px; /* Redondeo de esquinas */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
 }
 
-.client-option {
-    padding: 0.6rem 0.9rem;
-    border-radius: 9px;
-    border: 1px solid transparent;
-    background: transparent;
-    color: var(--muted);
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 0.92rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+.client-option { /* Regla para .client-option */
+    padding: 0.6rem 0.9rem; /* Relleno interior del elemento */
+    border-radius: 9px; /* Redondeo de esquinas */
+    border: 1px solid transparent; /* Borde completo (grosor, estilo y color) */
+    background: transparent; /* Fondo (color, degradado o imagen) */
+    color: var(--muted); /* Color del texto */
+    font-family: inherit; /* Familia tipográfica aplicada al texto */
+    font-weight: 700; /* Grosor tipográfico */
+    font-size: 0.92rem; /* Tamaño de fuente */
+    cursor: pointer; /* Forma del cursor al pasar por encima */
+    transition: all 0.2s ease; /* Interpolación suave al cambiar propiedades */
 }
 
 .client-option:hover { color: #fff; }
 
-.client-option.is-selected {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(56, 189, 248, 0.22));
-    border-color: rgba(192, 132, 252, 0.55);
-    color: #fff;
-    box-shadow: 0 0 14px rgba(168, 85, 247, 0.25);
+.client-option.is-selected { /* Regla para .client-option.is-selected */
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.25), rgba(56, 189, 248, 0.22)); /* Fondo (color, degradado o imagen) */
+    border-color: rgba(192, 132, 252, 0.55); /* Color del borde */
+    color: #fff; /* Color del texto */
+    box-shadow: 0 0 14px rgba(168, 85, 247, 0.25); /* Sombra proyectada alrededor de la caja */
 }
 
-.client-description {
-    font-size: 0.88rem;
-    color: #cbd5e1;
-    background: rgba(15, 23, 42, 0.7);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.7rem 0.9rem;
-    line-height: 1.5;
+.client-description { /* Regla para .client-description */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    color: #cbd5e1; /* Color del texto */
+    background: rgba(15, 23, 42, 0.7); /* Fondo (color, degradado o imagen) */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
+    border-radius: 10px; /* Redondeo de esquinas */
+    padding: 0.7rem 0.9rem; /* Relleno interior del elemento */
+    line-height: 1.5; /* Altura de línea para legibilidad */
 }
 
-#user-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
+#user-form { /* Regla para #user-form */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    flex-direction: column; /* Dirección del eje principal en Flexbox */
+    gap: 0.75rem; /* Separación uniforme entre filas y columnas */
 }
 
-#user-form label {
-    font-size: 0.86rem;
-    font-weight: 600;
-    color: #cbd5e1;
+#user-form label { /* Regla para #user-form label */
+    font-size: 0.86rem; /* Tamaño de fuente */
+    font-weight: 600; /* Grosor tipográfico */
+    color: #cbd5e1; /* Color del texto */
 }
 
-#user-form input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: #070b15;
-    color: #f8fafc;
-    font-family: inherit;
-    font-size: 0.95rem;
+#user-form input { /* Regla para #user-form input */
+    width: 100%; /* Ancho del elemento */
+    padding: 0.75rem 1rem; /* Relleno interior del elemento */
+    border-radius: 12px; /* Redondeo de esquinas */
+    border: 1px solid rgba(255, 255, 255, 0.14); /* Borde completo (grosor, estilo y color) */
+    background: #070b15; /* Fondo (color, degradado o imagen) */
+    color: #f8fafc; /* Color del texto */
+    font-family: inherit; /* Familia tipográfica aplicada al texto */
+    font-size: 0.95rem; /* Tamaño de fuente */
 }
 
 #user-form input:focus { outline: 2px solid #c084fc; border-color: transparent; }
 
-#submit-button {
-    margin-top: 0.4rem;
-    padding: 0.85rem 1.25rem;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #a855f7, #38bdf8);
-    color: #070a13;
-    font-family: inherit;
-    font-size: 0.96rem;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+#submit-button { /* Regla para #submit-button */
+    margin-top: 0.4rem; /* Margen superior */
+    padding: 0.85rem 1.25rem; /* Relleno interior del elemento */
+    border: none; /* Borde completo (grosor, estilo y color) */
+    border-radius: 12px; /* Redondeo de esquinas */
+    background: linear-gradient(135deg, #a855f7, #38bdf8); /* Fondo (color, degradado o imagen) */
+    color: #070a13; /* Color del texto */
+    font-family: inherit; /* Familia tipográfica aplicada al texto */
+    font-size: 0.96rem; /* Tamaño de fuente */
+    font-weight: 700; /* Grosor tipográfico */
+    cursor: pointer; /* Forma del cursor al pasar por encima */
+    display: inline-flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    justify-content: center; /* Alineación en el eje principal */
+    gap: 8px; /* Separación uniforme entre filas y columnas */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Interpolación suave al cambiar propiedades */
 }
 
-#submit-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35);
+#submit-button:hover { /* Regla para #submit-button:hover */
+    transform: translateY(-1px); /* Transformación geométrica acelerada por GPU */
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.35); /* Sombra proyectada alrededor de la caja */
 }
 
-.status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 0.8rem 1rem;
-    border-radius: 12px;
-    font-size: 0.88rem;
-    border: 1px solid var(--line);
-    background: rgba(15, 23, 42, 0.7);
-    color: var(--muted);
+.status { /* Regla para .status */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    align-items: center; /* Alineación en el eje cruzado */
+    gap: 10px; /* Separación uniforme entre filas y columnas */
+    padding: 0.8rem 1rem; /* Relleno interior del elemento */
+    border-radius: 12px; /* Redondeo de esquinas */
+    font-size: 0.88rem; /* Tamaño de fuente */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
+    background: rgba(15, 23, 42, 0.7); /* Fondo (color, degradado o imagen) */
+    color: var(--muted); /* Color del texto */
 }
 
 .status-indicator { width: 10px; height: 10px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
@@ -318,73 +318,74 @@ code {
 .status-error { border-color: rgba(255, 51, 88, 0.4); color: var(--rose); }
 .status-error .status-indicator { background: var(--rose); box-shadow: 0 0 10px var(--rose); }
 
-.response-output {
-    background: #020617;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    padding: 1rem 1.2rem;
-    min-height: 210px;
-    overflow: auto;
-    font-family: 'Fira Code', monospace;
-    font-size: 0.84rem;
-    line-height: 1.6;
-    color: var(--emerald);
+.response-output { /* Regla para .response-output */
+    background: #020617; /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borde completo (grosor, estilo y color) */
+    border-radius: 14px; /* Redondeo de esquinas */
+    padding: 1rem 1.2rem; /* Relleno interior del elemento */
+    min-height: 210px; /* Altura mínima garantizada */
+    overflow: auto; /* Comportamiento del contenido que sobresale */
+    font-family: 'Fira Code', monospace; /* Familia tipográfica aplicada al texto */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    line-height: 1.6; /* Altura de línea para legibilidad */
+    color: var(--emerald); /* Color del texto */
 }
 
 .response-output code { background: none; color: inherit; padding: 0; }
 .response-note { font-size: 0.84rem; color: var(--muted); }
 
-.explanation, .comparison {
-    background: var(--surface);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 1.75rem;
-    box-shadow: var(--shadow);
+.explanation, .comparison { /* Regla para .explanation, .comparison */
+    background: var(--surface); /* Fondo (color, degradado o imagen) */
+    backdrop-filter: blur(16px); /* Efecto visual (desenfoque) sobre el fondo trasero */
+    border: 1px solid var(--line); /* Borde completo (grosor, estilo y color) */
+    border-radius: 24px; /* Redondeo de esquinas */
+    padding: 1.75rem; /* Relleno interior del elemento */
+    box-shadow: var(--shadow); /* Sombra proyectada alrededor de la caja */
 }
 
 .explanation-heading h2, .comparison h2 { font-size: 1.4rem; color: #f8fafc; margin-bottom: 1.1rem; }
 
-.steps, .comparison-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1rem;
+.steps, .comparison-grid { /* Regla para .steps, .comparison-grid */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Definición de columnas en CSS Grid */
+    gap: 1rem; /* Separación uniforme entre filas y columnas */
 }
 
-.step, .comparison-card {
-    background: rgba(15, 23, 42, 0.72);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 1.15rem;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+.step, .comparison-card { /* Regla para .step, .comparison-card */
+    background: rgba(15, 23, 42, 0.72); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(255, 255, 255, 0.08); /* Borde completo (grosor, estilo y color) */
+    border-radius: 16px; /* Redondeo de esquinas */
+    padding: 1.15rem; /* Relleno interior del elemento */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    gap: 12px; /* Separación uniforme entre filas y columnas */
+    align-items: flex-start; /* Alineación en el eje cruzado */
 }
 
 .comparison-card { flex-direction: column; gap: 0.5rem; }
 
-.step-number {
-    width: 30px;
-    height: 30px;
-    border-radius: 999px;
-    background: rgba(168, 85, 247, 0.2);
-    border: 1px solid rgba(168, 85, 247, 0.45);
-    color: #c084fc;
-    font-weight: 700;
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
+.step-number { /* Regla para .step-number */
+    width: 30px; /* Ancho del elemento */
+    height: 30px; /* Alto del elemento */
+    border-radius: 999px; /* Redondeo de esquinas */
+    background: rgba(168, 85, 247, 0.2); /* Fondo (color, degradado o imagen) */
+    border: 1px solid rgba(168, 85, 247, 0.45); /* Borde completo (grosor, estilo y color) */
+    color: #c084fc; /* Color del texto */
+    font-weight: 700; /* Grosor tipográfico */
+    display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    place-items: center; /* Centrado rápido en filas y columnas */
+    flex-shrink: 0; /* Configura la propiedad flex-shrink */
 }
 
 .step h3, .comparison-card h3 { font-size: 1rem; color: #f8fafc; margin-bottom: 0.3rem; }
 .step p, .comparison-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
 
-.footer {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px;
-    font-size: 0.84rem;
-    color: var(--muted);
-    padding: 0 4px;
+.footer { /* Regla para .footer */
+    display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+    justify-content: space-between; /* Alineación en el eje principal */
+    flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
+    gap: 8px; /* Separación uniforme entre filas y columnas */
+    font-size: 0.84rem; /* Tamaño de fuente */
+    color: var(--muted); /* Color del texto */
+    padding: 0 4px; /* Relleno interior del elemento */
 }
+

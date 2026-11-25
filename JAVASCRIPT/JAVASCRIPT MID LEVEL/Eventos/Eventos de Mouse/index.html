@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -96,7 +96,90 @@ pad.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Accesibilidad:</strong> No dependas únicamente de <code>hover</code> o <code>mouseenter</code> para acciones críticas; en pantallas táctiles y navegación con teclado no hay cursor flotante.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador de Área Interactiva de Mouse">
+        
+    <!-- Diapositiva 5: mouseover/mouseout vs mouseenter/mouseleave -->
+    <section class="slide" data-slide="5" data-title="mouseover/mouseout vs mouseenter/mouseleave">
+      <div class="slide-header">
+        <span class="eyebrow">Comparativa clave</span>
+        <h2>mouseover/mouseout vs mouseenter/mouseleave</h2>
+      </div>
+      <p>Elegir mal el par de eventos provoca parpadeos continuos al pasar el cursor sobre hijos internos.</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4><code>mouseover / mouseout</code></h4>
+          <p>Burbujean y se re-disparan cada vez que el puntero entra o sale de un elemento hijo.</p>
+        </div>
+        <div class="card">
+          <h4><code>mouseenter / mouseleave</code></h4>
+          <p>No burbujean y solo se disparan al cruzar el borde exterior del elemento observado.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 6: Coordenadas del puntero en pantalla -->
+    <section class="slide" data-slide="6" data-title="Coordenadas del puntero en pantalla">
+      <div class="slide-header">
+        <span class="eyebrow">Geometría del evento</span>
+        <h2>Coordenadas del puntero en pantalla</h2>
+      </div>
+      <p>El objeto <code>MouseEvent</code> expone cuatro sistemas de coordenadas según tu necesidad:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><code>e.clientX / clientY</code>: relativas al viewport visible (ignora el scroll).</li>
+        <li><code>e.pageX / pageY</code>: relativas al documento completo (incluye scroll).</li>
+        <li><code>e.offsetX / offsetY</code>: relativas al borde interno del <code>e.target</code>.</li>
+        <li><code>e.screenX / screenY</code>: relativas al monitor físico.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 7: Botones del ratón y dblclick -->
+    <section class="slide" data-slide="7" data-title="Botones del ratón y dblclick">
+      <div class="slide-header">
+        <span class="eyebrow">Detección de clics</span>
+        <h2>Botones del ratón y dblclick</h2>
+      </div>
+      <p>La propiedad <code>e.button</code> identifica qué botón físico se presionó durante <code>mousedown</code> o <code>mouseup</code>:</p>
+      <pre class="code-box">// 0: Principal (izquierdo) | 1: Rueda | 2: Secundario (derecho)
+zona.addEventListener('mousedown', (e) => {
+  if (e.button === 1) e.preventDefault(); // Evita autoscroll
+});</pre>
+    </section>
+
+    <!-- Diapositiva 8: contextmenu y menús contextuales propios -->
+    <section class="slide" data-slide="8" data-title="contextmenu y menús contextuales propios">
+      <div class="slide-header">
+        <span class="eyebrow">Interacción avanzada</span>
+        <h2>contextmenu y menús contextuales propios</h2>
+      </div>
+      <p>El evento <code>contextmenu</code> se dispara al hacer clic derecho (o tecla de menú). Llamar a <code>e.preventDefault()</code> bloquea el menú nativo para mostrar uno personalizado.</p>
+      <div class="callout-info" style="margin-top:12px">
+        Recuerda mantener opciones accesibles por teclado si reemplazas el menú contextual en un área crítica.
+      </div>
+    </section>
+
+    <!-- Diapositiva 9: Modificadores simultáneos (Ctrl, Shift, Alt) -->
+    <section class="slide" data-slide="9" data-title="Modificadores simultáneos (Ctrl, Shift, Alt)">
+      <div class="slide-header">
+        <span class="eyebrow">Atajos combinados</span>
+        <h2>Modificadores simultáneos (Ctrl, Shift, Alt)</h2>
+      </div>
+      <p>Todo <code>MouseEvent</code> incluye booleanos para saber si el usuario mantenía pulsadas teclas modificadoras al hacer clic:</p>
+      <pre class="code-box">item.addEventListener('click', (e) => {
+  if (e.ctrlKey || e.metaKey) alternarSeleccionMultiple(item);
+  else if (e.shiftKey) seleccionarRangoHasta(item);
+});</pre>
+    </section>
+
+    <!-- Diapositiva 10: Pointer Events: el estándar moderno unificado -->
+    <section class="slide" data-slide="10" data-title="Pointer Events: el estándar moderno unificado">
+      <div class="slide-header">
+        <span class="eyebrow">Mouse + Touch + Stylus</span>
+        <h2>Pointer Events: el estándar moderno unificado</h2>
+      </div>
+      <p>Los eventos <code>pointerdown</code>, <code>pointermove</code> y <code>pointerup</code> unifican ratón, pantallas táctiles y lápiz óptico bajo una sola API.</p>
+      <p style="margin-top:10px">Además incorporan <code>e.pointerType</code> (<code>"mouse"</code>, <code>"touch"</code>, <code>"pen"</code>) y <code>setPointerCapture()</code> para arrastrar sin perder el puntero.</p>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador de Área Interactiva de Mouse">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador de Área Interactiva de Mouse</h2></div>
             <div class="grid-layout" style="padding:0;">
       <section class="card">
@@ -112,7 +195,7 @@ pad.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
     </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Mouse y Coordenadas">
+        <section class="slide" data-slide="12" data-title="Quiz: Eventos de Mouse y Coordenadas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -138,7 +221,7 @@ pad.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Mouse y Coordenadas">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Eventos de Mouse y Coordenadas">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;zona&quot; style=&quot;padding:24px;border:1px solid #38bdf8;border-radius:10px;text-align:center;user-select:none;&quot;&gt;Mueve o haz clic aquí&lt;/div&gt;
@@ -163,7 +246,7 @@ pad.addEventListener(&#x27;contextmenu&#x27;, (e) =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>

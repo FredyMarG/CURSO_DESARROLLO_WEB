@@ -1,0 +1,444 @@
+<!doctype html>
+<!-- Módulo de HTML y CSS: Formularios HTML5 y Validación CSS -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Formularios HTML5 y Validación CSS — etiquetas semánticas, inputs modernos, validación nativa, :valid/:invalid, :focus-within y FormData." />
+    <title>Formularios y Validación — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">HTML5 &amp; CSS3 · FORMULARIOS</span>
+            <div class="brand-title"><span>📝</span><span>Formularios y Validación</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Formularios y Validación">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">HTML5 Semántico</span>
+                    <span class="badge badge-cyan">Validación Nativa · a11y</span>
+                    <span class="badge badge-purple">:valid · :invalid · FormData</span>
+                </div>
+                <h1 class="hero-title">Formularios Web<br /><span class="gradient-text">y Validación Nativa</span></h1>
+                <p class="hero-subtitle">
+                    Diseña formularios accesibles y profesionales sin depender de librerías: domina <code>&lt;form&gt;</code>, <code>&lt;label&gt;</code>, tipos modernos de <code>&lt;input&gt;</code>, validación HTML5, pseudoclases CSS y captura con <code>FormData</code>.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">📝</div>
+                        <h3>1. Estructura y Labels</h3>
+                        <p><code>&lt;form&gt;</code>, <code>name</code>, <code>&lt;label&gt;</code> y accesibilidad.</p>
+                    </div>
+                    <div class="hero-card" data-jump="5">
+                        <div class="hero-card-icon">🛡️</div>
+                        <h3>2. Validación HTML5</h3>
+                        <p><code>required</code>, <code>minlength</code>, <code>pattern</code> y rangos.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🎨</div>
+                        <h3>3. Pseudoclases CSS</h3>
+                        <p><code>:valid</code>, <code>:invalid</code> y <code>:focus-within</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba validaciones en vivo sin JS y con <code>FormData</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: ANATOMÍA DEL FORMULARIO -->
+        <section class="slide" data-slide="2" data-title="Anatomía de <form>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · BASE ESTRUCTURAL</span>
+                <h2 class="slide-title">Anatomía de <code>&lt;form&gt;</code>, <code>method</code> y <code>name</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    La etiqueta <code>&lt;form&gt;</code> agrupa controles de usuario para enviarlos a un servidor o procesarlos con JavaScript. El atributo <code>name</code> de cada campo es obligatorio para que los datos tengan clave al enviarse:
+                </p>
+                <pre class="code-block"><code>&lt;form action="/registro" method="POST"&gt;
+  &lt;label for="usuario"&gt;Usuario&lt;/label&gt;
+  &lt;input id="usuario" name="usuario" type="text" required /&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: ACCESIBILIDAD CON LABEL, FIELDSET Y LEGEND -->
+        <section class="slide" data-slide="3" data-title="Accesibilidad: label, fieldset y legend">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · ACCESIBILIDAD (A11Y)</span>
+                <h2 class="slide-title"><code>&lt;label&gt;</code>, <code>&lt;fieldset&gt;</code> y <code>&lt;legend&gt;</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Nunca reemplaces un <code>&lt;label&gt;</code> por un <code>placeholder</code>: el placeholder desaparece al escribir y los lectores de pantalla necesitan <code>for="id"</code> para anunciar qué pide el campo:
+                </p>
+                <pre class="code-block"><code>&lt;fieldset&gt;
+  &lt;legend&gt;Método de contacto&lt;/legend&gt;
+  &lt;label&gt;&lt;input type="radio" name="contacto" value="email" checked /&gt; Correo&lt;/label&gt;
+  &lt;label&gt;&lt;input type="radio" name="contacto" value="tel" /&gt; Teléfono&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: TIPOS MODERNOS DE INPUT -->
+        <section class="slide" data-slide="4" data-title="Tipos de Input HTML5">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · CONTROLES SEMÁNTICOS</span>
+                <h2 class="slide-title">Tipos Modernos de <code>&lt;input&gt;</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Elegir el <code>type</code> correcto mejora la experiencia móvil (muestra el teclado adecuado) y activa validaciones automáticas del navegador:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Tipo</th><th>Uso</th><th>Beneficio</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>email</code> / <code>url</code></td><td>Correos y enlaces web</td><td>Verifica formato <code>@</code> o protocolo <code>https://</code></td></tr>
+                        <tr><td><code>number</code> / <code>range</code></td><td>Cantidades y controles deslizantes</td><td>Soporta <code>min</code>, <code>max</code> y <code>step</code></td></tr>
+                        <tr><td><code>date</code> / <code>time</code></td><td>Fechas y horas</td><td>Despliega calendario/reloj nativo</td></tr>
+                        <tr><td><code>password</code> / <code>search</code></td><td>Claves y buscadores</td><td>Oculta caracteres / muestra botón limpiar</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: SELECT, DATALIST Y TEXTAREA -->
+        <section class="slide" data-slide="5" data-title="select, datalist y textarea">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · LISTAS Y TEXTOS LARGOS</span>
+                <h2 class="slide-title"><code>&lt;select&gt;</code>, <code>&lt;datalist&gt;</code> y <code>&lt;textarea&gt;</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Usa <code>&lt;select&gt;</code> para listas cerradas, <code>&lt;datalist&gt;</code> para autocompletar sugerencias manteniendo escritura libre y <code>&lt;textarea&gt;</code> para textos multilínea:
+                </p>
+                <pre class="code-block"><code>&lt;input list="lenguajes" name="lenguaje" placeholder="Elige o escribe..." /&gt;
+&lt;datalist id="lenguajes"&gt;
+  &lt;option value="JavaScript"&gt;&lt;/option&gt;
+  &lt;option value="Node.js"&gt;&lt;/option&gt;
+&lt;/datalist&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: VALIDACIÓN NATIVA HTML5 -->
+        <section class="slide" data-slide="6" data-title="Atributos de Validación Nativa">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · VALIDACIÓN SIN JAVASCRIPT</span>
+                <h2 class="slide-title"><code>required</code>, <code>minlength</code>, <code>min/max</code> y <code>pattern</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Antes de escribir JavaScript, HTML5 ya bloquea el envío si un campo no cumple las reglas declaradas en sus atributos:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Atributo</th><th>Regla que aplica</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>required</code></td><td>Impide enviar el formulario si el campo está vacío</td></tr>
+                        <tr><td><code>minlength</code> / <code>maxlength</code></td><td>Exige un mínimo o máximo de caracteres</td></tr>
+                        <tr><td><code>min</code> / <code>max</code></td><td>Limita valores numéricos o fechas válidas</td></tr>
+                        <tr><td><code>pattern="[A-Za-z0-9]{4,}"</code></td><td>Valida contra una expresión regular exacta</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: ESTILOS CSS CON :VALID E :INVALID -->
+        <section class="slide" data-slide="7" data-title="Pseudoclases :valid e :invalid">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · FEEDBACK VISUAL EN CSS</span>
+                <h2 class="slide-title">Estilos en Tiempo Real con <code>:valid</code> y <code>:invalid</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Un error clásico es pintar rojo apenas carga la página. Combina <code>:not(:placeholder-shown)</code> con <code>:invalid</code> para mostrar errores solo cuando el usuario ya escribió algo:
+                </p>
+                <pre class="code-block"><code>input:not(:placeholder-shown):invalid {
+  border-color: #f43f5e;
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.25);
+}
+input:not(:placeholder-shown):valid {
+  border-color: #10b981;
+}</code></pre>
+            </div>
+        
+            <div class="callout callout-tip" style="margin-top:14px;">
+                <strong>✨ Estándar moderno (<code>:user-valid</code> / <code>:user-invalid</code>):</strong> A diferencia de <code>:invalid</code>, estas pseudoclases solo se activan <em>después</em> de que el usuario interactuó con el campo, evitando mostrar bordes rojos antes de empezar a escribir.
+            </div>
+        </section>
+
+        <!-- SLIDE 8: :FOCUS-WITHIN Y DISEÑO MODERNO -->
+        <section class="slide" data-slide="8" data-title=":focus-within y Estilos de Botones">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · EXPERIENCIA DE USUARIO</span>
+                <h2 class="slide-title"><code>:focus-within</code>, <code>accent-color</code> y <code>:focus-visible</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Con <code>accent-color</code> personalizas checkboxes y radios en una sola línea CSS, y con <code>:focus-within</code> iluminas la tarjeta o etiqueta padre cuando el usuario entra al input:
+                </p>
+                <pre class="code-block"><code>input[type="checkbox"], input[type="radio"] { accent-color: #38bdf8; }
+.campo:focus-within label { color: #38bdf8; }
+button:focus-visible { outline: 2px solid #38bdf8; outline-offset: 2px; }</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: CAPTURAR DATOS CON FORMDATA -->
+        <section class="slide" data-slide="9" data-title="Integración con FormData">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · PUENTE CON JAVASCRIPT Y NODE.JS</span>
+                <h2 class="slide-title">Leer Todo el Formulario con <code>new FormData(form)</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Al conectar el formulario con JavaScript y una API Fetch/Node.js, no hace falta leer cada input uno por uno: <code>FormData</code> recoge todos los campos que tengan atributo <code>name</code>:
+                </p>
+                <pre class="code-block"><code>form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = Object.fromEntries(new FormData(form));
+  await fetch('/api/registro', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: BUENAS PRÁCTICAS Y SEGURIDAD -->
+        <section class="slide" data-slide="10" data-title="Buenas Prácticas en Formularios">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CALIDAD Y SEGURIDAD</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Recuerda siempre que la validación en HTML/CSS mejora la experiencia de usuario, pero **nunca reemplaza la validación en el servidor**:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Buena práctica</th><th>Error que evita</th></tr></thead>
+                    <tbody>
+                        <tr><td>Validar también en el backend (Node.js)</td><td>Que un atacante salte los atributos HTML desde DevTools</td></tr>
+                        <tr><td>Usar <code>autocomplete="email"</code> / <code>"current-password"</code></td><td>Fricción al llenar formularios en móvil y escritorio</td></tr>
+                        <tr><td>Incluir <code>type="button"</code> en botones que no envían</td><td>Envíos accidentales de formularios</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: RETOS PRÁCTICOS -->
+        <section class="slide" data-slide="11" data-title="Ejercicios de Formularios">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Retos para Dominar Formularios</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica lo aprendido construyendo estos formularios en el laboratorio:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes incluir</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Formulario de Login accesible</td><td><code>&lt;label&gt;</code>, <code>type="email"</code>, <code>minlength="8"</code></td></tr>
+                        <tr><td>2. Borde verde/rojo inteligente</td><td><code>:not(:placeholder-shown):valid</code> e <code>:invalid</code></td></tr>
+                        <tr><td>3. Captura JSON con JS</td><td><code>Object.fromEntries(new FormData(form))</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Validación HTML5">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · VALIDACIÓN Y CSS</span>
+                <h2 class="slide-title">🎛️ Simulador de Atributos y Pseudoclases</h2>
+                <p class="slide-lead">Elige un caso para ver qué atributo HTML5 o pseudoclase CSS aplicar.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Regla a inspeccionar</label>
+                        <select id="formSimMode">
+                            <option value="required">required + minlength</option>
+                            <option value="pattern">pattern (Regex HTML5)</option>
+                            <option value="css">:not(:placeholder-shown):invalid</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="formSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="formSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Formularios">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de Formularios y Validación</h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: name es la clave que usan tanto los envíos nativos como FormData." data-err="Sin atributo name, FormData ignora el campo.">
+                    <div class="quiz-q-title">1. ¿Qué atributo es obligatorio en un <code>&lt;input&gt;</code> para que <code>FormData</code> incluya su valor?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">placeholder</button>
+                        <button class="quiz-option" data-opt="b">name</button>
+                        <button class="quiz-option" data-opt="c">class</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Exacto: :not(:placeholder-shown):invalid evita mostrar borde rojo cuando el campo está intacto." data-err=":not(:placeholder-shown) detecta si el usuario ya escribió texto en el campo.">
+                    <div class="quiz-q-title">2. ¿Cómo evitas que CSS pinte de rojo un campo <code>required</code> antes de que el usuario escriba?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">input:not(:placeholder-shown):invalid</button>
+                        <button class="quiz-option" data-opt="b">input:hover:invalid</button>
+                        <button class="quiz-option" data-opt="c">input:empty</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: siempre debes validar también en el servidor porque el HTML del cliente puede modificarse." data-err="La validación HTML5 puede desactivarse desde DevTools; el backend siempre debe revalidar.">
+                    <div class="quiz-q-title">3. Si tu formulario ya tiene <code>required</code> y <code>pattern</code> en HTML, ¿debes validar también en Node.js?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">No, HTML5 es imposible de saltar</button>
+                        <button class="quiz-option" data-opt="b">Solo si no usas CSS :valid</button>
+                        <button class="quiz-option" data-opt="c">Sí, siempre</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Formulario en Vivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio: Validación CSS + <code>FormData</code></h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;style&gt;
+  form { font-family: sans-serif; display: grid; gap: 10px; max-width: 320px; padding: 12px; }
+  input { padding: 8px 10px; border: 2px solid #94a3b8; border-radius: 8px; outline: none; }
+  input:not(:placeholder-shown):invalid { border-color: #f43f5e; }
+  input:not(:placeholder-shown):valid { border-color: #10b981; }
+  button { padding: 9px; border: none; border-radius: 8px; background: #38bdf8; font-weight: 700; cursor: pointer; }
+&lt;/style&gt;
+&lt;form id=&quot;f&quot;&gt;
+  &lt;label&gt;Correo: &lt;input name=&quot;email&quot; type=&quot;email&quot; placeholder=&quot;tu@correo.com&quot; required /&gt;&lt;/label&gt;
+  &lt;label&gt;Clave (min 6): &lt;input name=&quot;pass&quot; type=&quot;password&quot; placeholder=&quot;••••••&quot; minlength=&quot;6&quot; required /&gt;&lt;/label&gt;
+  &lt;button type=&quot;submit&quot;&gt;Probar envío&lt;/button&gt;
+  &lt;pre id=&quot;out&quot;&gt;&lt;/pre&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;f&#x27;).addEventListener(&#x27;submit&#x27;, (e) =&gt; {
+    e.preventDefault();
+    document.getElementById(&#x27;out&#x27;).textContent = JSON.stringify(Object.fromEntries(new FormData(e.target)), null, 2);
+  });
+&lt;/script&gt;">Formulario con Validación + FormData</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
+  form { font-family: sans-serif; display: grid; gap: 10px; max-width: 320px; padding: 12px; }
+  input { padding: 8px 10px; border: 2px solid #94a3b8; border-radius: 8px; outline: none; }
+  input:not(:placeholder-shown):invalid { border-color: #f43f5e; }
+  input:not(:placeholder-shown):valid { border-color: #10b981; }
+  button { padding: 9px; border: none; border-radius: 8px; background: #38bdf8; font-weight: 700; cursor: pointer; }
+&lt;/style&gt;
+&lt;form id=&quot;f&quot;&gt;
+  &lt;label&gt;Correo: &lt;input name=&quot;email&quot; type=&quot;email&quot; placeholder=&quot;tu@correo.com&quot; required /&gt;&lt;/label&gt;
+  &lt;label&gt;Clave (min 6): &lt;input name=&quot;pass&quot; type=&quot;password&quot; placeholder=&quot;••••••&quot; minlength=&quot;6&quot; required /&gt;&lt;/label&gt;
+  &lt;button type=&quot;submit&quot;&gt;Probar envío&lt;/button&gt;
+  &lt;pre id=&quot;out&quot;&gt;&lt;/pre&gt;
+&lt;/form&gt;
+&lt;script&gt;
+  document.getElementById(&#x27;f&#x27;).addEventListener(&#x27;submit&#x27;, (e) =&gt; {
+    e.preventDefault();
+    document.getElementById(&#x27;out&#x27;).textContent = JSON.stringify(Object.fromEntries(new FormData(e.target)), null, 2);
+  });
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de formularios -->
+    <script>
+        // IIFE para encapsular el estado del simulador sin contaminar window
+        (function () {
+            const mode = document.getElementById('formSimMode');
+            const stage = document.getElementById('formSimStage');
+            const code = document.getElementById('formSimCode');
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el escenario y snippet según la regla elegida
+            function update() {
+                if (mode.value === 'required') {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">required + minlength bloquean el envío antes de ejecutar JS</div>
+                        <div style="color:#38bdf8;">El navegador muestra un mensaje nativo accesible al usuario.</div>
+                    `;
+                    code.textContent = `<input name="clave" type="password" minlength="8" required />`;
+                } else if (mode.value === 'pattern') {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">pattern valida el texto completo contra una RegExp</div>
+                        <div style="color:#fbbf24;">Añade title="..." para explicar el formato esperado.</div>
+                    `;
+                    code.textContent = `<input name="codigo" pattern="[A-Z]{3}-\\d{3}" title="Ej: ABC-123" />`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">:not(:placeholder-shown) evita marcar rojo campos aún vacíos</div>
+                        <div style="color:#38bdf8;">Solo se pinta rojo/verde cuando el usuario empieza a escribir.</div>
+                    `;
+                    code.textContent = `input:not(:placeholder-shown):invalid { border-color: #f43f5e; }`;
+                }
+            }
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

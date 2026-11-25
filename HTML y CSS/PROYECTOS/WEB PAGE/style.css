@@ -1,615 +1,438 @@
-/*
- * CURSO_WEB_DOC_CSS v1
- * Archivo: HTML y CSS/PROYECTOS/WEB PAGE/style.css
- * Carpeta del tema: «WEB PAGE». Hoja: «style».
- * Propósito: define la apariencia (colores, tipografía, cajas, disposición) de la página enlazada.
- * Cómo leerlo: cada bloque `selector { ... }` aplica estilos a los elementos del HTML que cumplan el selector.
- */
+/* ============================================================================
+   WEB PAGE — ESTILO EDITORIAL CLARO Y MODERNO (GRID + FLEXBOX)
+   Comentado línea por línea en español.
+   ============================================================================ */
 
-
-
-/* Reset general: normaliza márgenes y box-sizing. */
-*{ /* Regla de estilo para * */
-    box-sizing: border-box; /* Cálculo del tamaño total de la caja */
-    margin: 0; /* Margen exterior */
-    font-family: "montserrat"; /* Familia tipográfica */
+/* Normalización de modelo de caja, márgenes y rellenos */
+* {
+    box-sizing: border-box; /* Incluye padding y border dentro del ancho declarado */
+    margin: 0; /* Elimina márgenes por defecto del navegador */
+    padding: 0; /* Elimina rellenos por defecto del navegador */
 }
 
-
-
-/* Estilos globales del documento: tipografía, color de fondo y espaciado base. */
-body{ /* Regla de estilo para body */
-    background-color: #e2eaff; /* Color de fondo */
-    color: #101632dd; /* Color del texto */
-    scroll-behavior: smooth; /* Propiedad CSS: scroll-behavior */
+/* Paleta de variables globales de diseño editorial */
+:root {
+    --bg: #f4f6fb; /* Fondo gris azulado claro y limpio */
+    --surface: #ffffff; /* Fondo blanco puro para tarjetas */
+    --ink: #0f172a; /* Color principal de texto con alto contraste */
+    --muted: #475569; /* Color secundario para descripciones */
+    --accent: #2563eb; /* Azul cobalto institucional para acentos */
+    --accent-soft: #dbeafe; /* Azul muy suave para etiquetas */
+    --border: #e2e8f0; /* Borde sutil para delimitar tarjetas */
+    --shadow: 0 12px 30px rgba(15, 23, 42, 0.08); /* Sombra suave editorial */
 }
 
-
-
-/* Estilos del selector body, div, ul , li, nav, header, footer, a, li, label. */
-body, div, ul , li, nav, header, footer, a, li, label{ /* Regla de estilo para body, div, ul , li, nav, header, footer, a, li, label */
-    margin: 0; /* Margen exterior */
-    padding: 0; /* Relleno interior */
+/* Desplazamiento suave al navegar por anclas internas */
+html {
+    scroll-behavior: smooth; /* Suaviza el scroll hacia #profile, #skills, #portfolio, #contact */
 }
 
-
-
-
-
-/* Estilo de estructura para navegación o encabezado/pie. */
-.header{ /* Regla de estilo para .header */
-    background-color: #fff; /* Color de fondo */
-    display: flex; /* Define el tipo de caja/layout */
-    justify-content: space-between; /* Alineación en el eje principal */
-    align-items: center; /* Alineación en el eje cruzado */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name: header; /* Propiedad CSS: container-name */
-    position: relative; /* Define el esquema de posicionamiento */
-    z-index: 10; /* Orden de apilamiento en el eje Z */
-    text-align: center; /* Alineación horizontal del texto */
-    font-size: 20px; /* Tamaño de fuente */
+/* Configuración tipográfica y fondo base del documento */
+body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif; /* Tipografía principal limpia */
+    background: var(--bg); /* Aplica el fondo editorial claro */
+    color: var(--ink); /* Aplica texto oscuro de alta legibilidad */
+    line-height: 1.6; /* Altura de línea cómoda para lectura */
 }
 
-
-
-/* Estilos del selector .header__open-nav-button. */
-.header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
-    color: #48e; /* Color del texto */
-    font-size: 3rem; /* Tamaño de fuente */
-    font-weight: 700; /* Grosor de la fuente */
-    position: absolute; /* Define el esquema de posicionamiento */
-    right: 10px; /* Desplazamiento derecho */
+/* Contenedor centrado reutilizable */
+.container {
+    max-width: 1120px; /* Limita el ancho máximo en pantallas grandes */
+    margin: 0 auto; /* Centra horizontalmente el bloque */
+    padding: 0 20px; /* Espaciado lateral seguro en móviles */
 }
 
-
-
-/* Estilos del selector .header__checkbox. */
-.header__checkbox{ /* Regla de estilo para .header__checkbox */
-    display: none; /* Define el tipo de caja/layout */
+/* Cabecera fija superior */
+.site-header {
+    position: sticky; /* Mantiene la barra visible al hacer scroll */
+    top: 0; /* Se fija en la parte superior */
+    z-index: 30; /* Permanece sobre el contenido de la página */
+    background: rgba(255, 255, 255, 0.92); /* Fondo blanco ligeramente translúcido */
+    backdrop-filter: blur(10px); /* Difumina sutilmente el contenido detrás */
+    border-bottom: 1px solid var(--border); /* Línea divisoria inferior */
 }
 
-
-
-/* Estilos del selector .header__nav. */
-.header__nav{ /* Regla de estilo para .header__nav */
-    display: none; /* Define el tipo de caja/layout */
-    background-color: #fff; /* Color de fondo */
-    position: absolute; /* Define el esquema de posicionamiento */
-    height: 100vh; /* Alto del elemento */
-    width: 100vw; /* Ancho del elemento */
-    top:0; /* Desplazamiento superior */
-    z-index: -1; /* Orden de apilamiento en el eje Z */
+/* Distribución interna de la barra de navegación */
+.header-inner {
+    display: flex; /* Organiza logo y enlaces en fila */
+    justify-content: space-between; /* Separa el logo a la izquierda y el menú a la derecha */
+    align-items: center; /* Alinea verticalmente al centro */
+    height: 68px; /* Altura fija de la cabecera */
+    position: relative; /* Referencia para menú móvil desplegable */
 }
 
-
-
-/* Estilos del selector .header__nav-list. */
-.header__nav-list{ /* Regla de estilo para .header__nav-list */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    height: 40vh; /* Alto del elemento */
-    margin: auto; /* Margen exterior */
-    justify-content: space-evenly; /* Alineación en el eje principal */
+/* Marca y logotipo */
+.brand {
+    display: flex; /* Alinea imagen y nombre en línea */
+    align-items: center; /* Centra verticalmente ambos elementos */
+    gap: 10px; /* Separación entre logo y texto */
+    text-decoration: none; /* Quita subrayado del enlace */
+    color: var(--ink); /* Color oscuro para el nombre de marca */
+    font-weight: 800; /* Negrita fuerte para identidad visual */
 }
 
-
-
-/* Estado o pseudo-clase .header__checkbox:checked ~ .header__nav: estilo cuando el usuario interactúa. */
-.header__checkbox:checked ~ .header__nav{ /* Regla de estilo para .header__checkbox:checked ~ .header__nav */
-    display: flex; /* Define el tipo de caja/layout */
+/* Imagen cuadrada redondeada del logo */
+.brand__logo {
+    width: 36px; /* Ancho fijo del logotipo */
+    height: 36px; /* Alto fijo del logotipo */
+    border-radius: 8px; /* Esquinas suavemente redondeadas */
+    object-fit: cover; /* Evita deformación de la imagen */
 }
 
-
-
-/* Estilos del selector .header__logo. */
-.header__logo{ /* Regla de estilo para .header__logo */
-    max-width: 100%; /* Ancho máximo permitido */
-    width: 64px; /* Ancho del elemento */
-    margin: 10px 20px; /* Margen exterior */
+/* Checkbox oculto para controlar el menú móvil sin JavaScript */
+.nav-toggle {
+    display: none; /* Oculta el checkbox nativo */
 }
 
-
-
-/* Estilos del selector .header__nav-item. */
-.header__nav-item{ /* Regla de estilo para .header__nav-item */
-    list-style: none; /* Propiedad CSS: list-style */
+/* Botón hamburguesa visible solo en pantallas pequeñas */
+.nav-btn {
+    display: none; /* Oculto en escritorio */
+    font-size: 1.5rem; /* Tamaño cómodo para tocar en móvil */
+    cursor: pointer; /* Cursor de mano interactivo */
+    color: var(--ink); /* Color oscuro del ícono */
 }
 
-
-
-/* Estilos del selector .header__nav-item a. */
-.header__nav-item a{ /* Regla de estilo para .header__nav-item a */
-    color: #48e; /* Color del texto */
-    text-decoration: none; /* Decoración del texto */
+/* Lista horizontal de enlaces */
+.nav-list {
+    list-style: none; /* Quita viñetas de la lista */
+    display: flex; /* Coloca enlaces en fila */
+    align-items: center; /* Centra verticalmente los enlaces */
+    gap: 24px; /* Separación uniforme entre enlaces */
 }
 
-
-
-/* Estado o pseudo-clase .header__nav-item :is(:hover, :active): estilo cuando el usuario interactúa. */
-.header__nav-item :is(:hover, :active){ /* Regla de estilo para .header__nav-item :is(:hover, :active) */
-    text-decoration: underline; /* Decoración del texto */
+/* Estilo base de los enlaces del menú */
+.nav-list a {
+    text-decoration: none; /* Sin subrayado */
+    color: var(--muted); /* Color gris pizarra */
+    font-weight: 600; /* Seminegrita legible */
+    font-size: 0.95rem; /* Tamaño compacto */
+    transition: color 0.2s ease; /* Cambio suave de color al pasar el ratón */
 }
 
+/* Estado hover de enlaces */
+.nav-list a:hover {
+    color: var(--accent); /* Resalta en azul institucional */
+}
 
+/* Botón destacado de contacto en el menú */
+.nav-cta {
+    background: var(--accent); /* Fondo azul institucional */
+    color: #ffffff !important; /* Texto blanco con alto contraste */
+    padding: 8px 18px; /* Relleno tipo píldora */
+    border-radius: 999px; /* Bordes completamente redondeados */
+}
 
+/* Sección Hero de presentación */
+.hero-section {
+    margin-top: 32px; /* Separación respecto a la cabecera */
+    margin-bottom: 44px; /* Separación hacia la sección de habilidades */
+}
 
-/* Estado o pseudo-clase @container header (min-width: 600px): estilo cuando el usuario interactúa. */
-@container header (min-width: 600px){ /* Regla at-rule de CSS */
+/* Tarjeta principal del Hero con dos columnas */
+.hero-card {
+    background: var(--surface); /* Fondo blanco limpio */
+    border: 1px solid var(--border); /* Borde sutil */
+    border-radius: 22px; /* Esquinas amplias */
+    box-shadow: var(--shadow); /* Sombra suave */
+    padding: 36px; /* Relleno interno generoso */
+    display: grid; /* Activa CSS Grid para imagen + texto */
+    grid-template-columns: 280px 1fr; /* Columna fija para foto y columna elástica para texto */
+    gap: 36px; /* Espacio entre fotografía y contenido */
+    align-items: center; /* Centra verticalmente ambas columnas */
+}
 
+/* Marco de la fotografía de perfil */
+.hero-photo {
+    width: 100%; /* Ocupa todo el ancho de su columna */
+    aspect-ratio: 1 / 1; /* Mantiene proporción cuadrada exacta */
+    object-fit: cover; /* Recorta manteniendo proporciones reales */
+    border-radius: 18px; /* Esquinas redondeadas acordes a la tarjeta */
+    border: 4px solid var(--accent-soft); /* Marco azul claro alrededor */
+}
 
-/* Estilos del selector .header__nav. */
-    .header__nav{ /* Regla de estilo para .header__nav */
-        display: block; /* Define el tipo de caja/layout */
-        position: static; /* Define el esquema de posicionamiento */
-        height: auto; /* Alto del elemento */
-        z-index: 1; /* Orden de apilamiento en el eje Z */
-        width: auto; /* Ancho del elemento */
-        justify-content: space-between; /* Alineación en el eje principal */
+/* Etiqueta superior de sección */
+.eyebrow {
+    display: inline-block; /* Permite aplicar márgenes y padding */
+    font-size: 0.75rem; /* Tamaño compacto */
+    font-weight: 700; /* Negrita para jerarquía */
+    letter-spacing: 0.1em; /* Espaciado entre letras editorial */
+    color: var(--accent); /* Azul institucional */
+    margin-bottom: 8px; /* Separación inferior */
+}
+
+/* Título principal del perfil */
+.hero-body h1 {
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem); /* Tamaño fluido entre móvil y escritorio */
+    margin-bottom: 12px; /* Espacio antes del párrafo */
+    color: var(--ink); /* Color oscuro principal */
+}
+
+/* Texto introductorio del perfil */
+.hero-lead {
+    color: var(--muted); /* Gris legible */
+    font-size: 1.03rem; /* Tamaño ligeramente mayor al cuerpo normal */
+    margin-bottom: 22px; /* Separación respecto a las estadísticas */
+}
+
+/* Fila de métricas rápidas */
+.hero-stats {
+    display: flex; /* Disposición en fila */
+    gap: 14px; /* Espacio entre píldoras */
+    flex-wrap: wrap; /* Permite saltar de línea en pantallas estrechas */
+}
+
+/* Píldora individual de estadística */
+.stat-pill {
+    background: var(--bg); /* Fondo gris claro */
+    border: 1px solid var(--border); /* Borde fino */
+    border-radius: 12px; /* Esquinas suaves */
+    padding: 10px 16px; /* Relleno interno */
+    display: flex; /* Alinea valor y etiqueta */
+    flex-direction: column; /* Apila número arriba y texto abajo */
+}
+
+/* Valor numérico destacado */
+.stat-pill strong {
+    font-size: 1.15rem; /* Tamaño destacado */
+    color: var(--accent); /* Azul institucional */
+}
+
+/* Etiqueta descriptiva de la métrica */
+.stat-pill span {
+    font-size: 0.8rem; /* Tamaño compacto */
+    color: var(--muted); /* Gris secundario */
+}
+
+/* Márgenes comunes de secciones */
+.skills-section,
+.portfolio-section,
+.contact-section {
+    margin-bottom: 52px; /* Separación uniforme entre bloques */
+}
+
+/* Encabezado de sección */
+.section-header {
+    margin-bottom: 22px; /* Espacio antes del contenido */
+}
+
+/* Título de sección */
+.section-header h2 {
+    font-size: 1.7rem; /* Tamaño de subtítulo principal */
+    color: var(--ink); /* Color oscuro */
+}
+
+/* Rejilla de habilidades */
+.skills-grid {
+    display: grid; /* Activa CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Columnas adaptables */
+    gap: 16px; /* Separación entre tarjetas */
+}
+
+/* Tarjeta individual de habilidad */
+.skill-item {
+    background: var(--surface); /* Fondo blanco */
+    border: 1px solid var(--border); /* Borde fino */
+    border-radius: 14px; /* Esquinas redondeadas */
+    padding: 18px; /* Relleno interno */
+}
+
+/* Fila superior con nombre y porcentaje */
+.skill-head {
+    display: flex; /* Separa nombre a la izquierda y porcentaje a la derecha */
+    justify-content: space-between; /* Distribuye en extremos */
+    font-weight: 700; /* Negrita */
+    font-size: 0.92rem; /* Tamaño compacto */
+    margin-bottom: 10px; /* Separación antes de la barra */
+}
+
+/* Carril base de la barra de progreso */
+.progress {
+    height: 10px; /* Grosor de la barra */
+    background: var(--border); /* Fondo gris suave */
+    border-radius: 999px; /* Extremos redondeados */
+    overflow: hidden; /* Recorta el relleno interno */
+}
+
+/* Relleno azul de progreso */
+.progress-fill {
+    height: 100%; /* Ocupa toda la altura del carril */
+    background: linear-gradient(90deg, #2563eb, #38bdf8); /* Degradado azul limpio */
+    border-radius: 999px; /* Extremos redondeados */
+}
+
+/* Porcentajes individuales de cada habilidad */
+.w-90 { width: 90%; } /* 90% de dominio */
+.w-88 { width: 88%; } /* 88% de dominio */
+.w-85 { width: 85%; } /* 85% de dominio */
+.w-80 { width: 80%; } /* 80% de dominio */
+.w-75 { width: 75%; } /* 75% de dominio */
+
+/* Rejilla de tarjetas de portafolio */
+.portfolio-grid {
+    display: grid; /* Activa CSS Grid */
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); /* Grilla responsiva automática */
+    gap: 20px; /* Separación entre tarjetas */
+}
+
+/* Tarjeta individual de proyecto */
+.work-card {
+    background: var(--surface); /* Fondo blanco */
+    border: 1px solid var(--border); /* Borde sutil */
+    border-radius: 16px; /* Esquinas redondeadas */
+    padding: 24px; /* Relleno interno */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; /* Elevación suave al hover */
+}
+
+/* Efecto hover en tarjetas de portafolio */
+.work-card:hover {
+    transform: translateY(-4px); /* Eleva ligeramente la tarjeta */
+    border-color: var(--accent); /* Resalta el borde en azul */
+    box-shadow: var(--shadow); /* Aplica sombra editorial */
+}
+
+/* Etiqueta de categoría del proyecto */
+.work-tag {
+    display: inline-block; /* Permite relleno en línea */
+    background: var(--accent-soft); /* Fondo azul muy suave */
+    color: var(--accent); /* Texto azul institucional */
+    font-size: 0.74rem; /* Tamaño compacto */
+    font-weight: 700; /* Negrita */
+    padding: 4px 10px; /* Relleno tipo píldora */
+    border-radius: 999px; /* Bordes redondeados */
+    margin-bottom: 12px; /* Separación antes del título */
+}
+
+/* Título del proyecto */
+.work-card h3 {
+    font-size: 1.15rem; /* Tamaño destacado */
+    margin-bottom: 8px; /* Separación antes de la descripción */
+}
+
+/* Descripción del proyecto */
+.work-card p {
+    color: var(--muted); /* Color gris legible */
+    font-size: 0.93rem; /* Tamaño de lectura cómodo */
+}
+
+/* Contenedor de formulario de contacto */
+.contact-card {
+    background: var(--surface); /* Fondo blanco */
+    border: 1px solid var(--border); /* Borde sutil */
+    border-radius: 20px; /* Esquinas redondeadas */
+    box-shadow: var(--shadow); /* Sombra suave */
+    padding: 34px; /* Relleno interno */
+}
+
+/* Rejilla de dos columnas para campos del formulario */
+.contact-form {
+    display: grid; /* Activa CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas iguales */
+    gap: 16px; /* Separación entre campos */
+}
+
+/* Campos que ocupan todo el ancho */
+.form-group--full {
+    grid-column: 1 / -1; /* Abarca ambas columnas */
+}
+
+/* Etiqueta de cada campo */
+.form-group label {
+    display: block; /* Ocupa su propia línea */
+    font-size: 0.85rem; /* Tamaño compacto */
+    font-weight: 700; /* Negrita */
+    margin-bottom: 6px; /* Espacio antes del input */
+    color: var(--ink); /* Color oscuro */
+}
+
+/* Inputs y área de texto */
+.form-group input,
+.form-group textarea {
+    width: 100%; /* Ocupa el ancho completo de su celda */
+    padding: 11px 14px; /* Relleno cómodo para escribir */
+    border-radius: 10px; /* Esquinas suaves */
+    border: 1px solid var(--border); /* Borde fino */
+    background: var(--bg); /* Fondo gris suave */
+    font: inherit; /* Hereda la tipografía Montserrat */
+    color: var(--ink); /* Texto oscuro */
+}
+
+/* Estado de foco accesible */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: 2px solid rgba(37, 99, 235, 0.25); /* Anillo visible de foco */
+    border-color: var(--accent); /* Borde azul institucional */
+}
+
+/* Botón de envío del formulario */
+.submit-btn {
+    background: var(--accent); /* Fondo azul institucional */
+    color: #ffffff; /* Texto blanco */
+    border: 0; /* Sin borde predeterminado */
+    border-radius: 10px; /* Esquinas redondeadas */
+    padding: 12px 24px; /* Relleno amplio */
+    font: inherit; /* Hereda fuente */
+    font-weight: 700; /* Negrita */
+    cursor: pointer; /* Cursor de mano */
+    transition: background 0.2s ease; /* Transición suave de color */
+}
+
+/* Hover del botón de envío */
+.submit-btn:hover {
+    background: #1d4ed8; /* Azul ligeramente más profundo */
+}
+
+/* Mensaje de confirmación tras enviar */
+.form-status {
+    margin-top: 10px; /* Separación superior */
+    color: #059669; /* Verde esmeralda accesible */
+    font-weight: 600; /* Seminegrita */
+}
+
+/* Pie de página */
+.site-footer {
+    text-align: center; /* Centra el texto */
+    padding: 24px 16px 36px; /* Espaciado vertical */
+    color: var(--muted); /* Gris secundario */
+    border-top: 1px solid var(--border); /* Línea superior sutil */
+    background: var(--surface); /* Fondo blanco limpio */
+}
+
+/* Adaptación responsiva para tabletas y móviles */
+@media (max-width: 780px) {
+    .hero-card {
+        grid-template-columns: 1fr; /* Apila la foto sobre el texto */
+        text-align: center; /* Centra los textos en móvil */
+        padding: 24px; /* Reduce relleno interno */
     }
-
-
-
-/* Estilos del selector .header__nav-list. */
-    .header__nav-list{ /* Regla de estilo para .header__nav-list */
-        flex-direction: row; /* Dirección del eje principal flex */
-        height: auto; /* Alto del elemento */
-        gap: 20px; /* Separación entre filas y columnas */
-        margin-right: 40px; /* Margen exterior derecho */
+    .hero-photo {
+        max-width: 220px; /* Limita el tamaño de la foto en móvil */
+        margin: 0 auto; /* Centra la foto horizontalmente */
     }
-
-
-
-/* Estilos del selector .header__open-nav-button. */
-    .header__open-nav-button{ /* Regla de estilo para .header__open-nav-button */
-        display: none; /* Define el tipo de caja/layout */
+    .hero-stats {
+        justify-content: center; /* Centra las métricas */
     }
-
-}
-
-
-
-
-
-/* Estilos del selector .profile. */
-.profile{ /* Regla de estilo para .profile */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name:profile ; /* Propiedad CSS: container-name */
-}
-
-
-
-/* Estilos del selector .profile__wrapper. */
-.profile__wrapper{ /* Regla de estilo para .profile__wrapper */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    justify-content: center; /* Alineación en el eje principal */
-    margin: auto; /* Margen exterior */
-    background-color: #fff; /* Color de fondo */
-    max-width: 1400px; /* Ancho máximo permitido */
-}
-
-
-
-/* Estilos del selector .profile__data-container. */
-.profile__data-container{ /* Regla de estilo para .profile__data-container */
-    max-width: 600px; /* Ancho máximo permitido */
-    padding: 12px; /* Relleno interior */
-}
-
-
-
-/* Estilos del selector .profile__img-container. */
-.profile__img-container{ /* Regla de estilo para .profile__img-container */
-    max-height: 500px; /* Alto máximo permitido */
-    overflow: hidden; /* Control de contenido desbordado */
-}
-
-
-
-/* Estilos del selector .profile__img. */
-.profile__img{ /* Regla de estilo para .profile__img */
-    max-width: 100%; /* Ancho máximo permitido */
-    width: 720px; /* Ancho del elemento */
-}
-
-
-
-/* Estilos del selector h1. */
-h1{ /* Regla de estilo para h1 */
-    color: #26a; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .profile__skills-container h2. */
-.profile__skills-container h2{ /* Regla de estilo para .profile__skills-container h2 */
-    color: #26a; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .profile__skill. */
-.profile__skill{ /* Regla de estilo para .profile__skill */
-    list-style: none; /* Propiedad CSS: list-style */
-    display: flex; /* Define el tipo de caja/layout */
-    margin: 10px; /* Margen exterior */
-    max-width: 600px; /* Ancho máximo permitido */
-    margin-left: 0; /* Margen exterior izquierdo */
-    align-items: center; /* Alineación en el eje cruzado */
-}
-
-
-
-/* Estilos del selector .load-bar. */
-.load-bar{ /* Regla de estilo para .load-bar */
-    border: 2px solid #48e; /* Borde del contenedor */
-    border-radius: 6px; /* Redondeo de esquinas */
-    color: #fff; /* Color del texto */
-    padding: 2px; /* Relleno interior */
-    font-size: 12px; /* Tamaño de fuente */
-    width: 80%; /* Ancho del elemento */
-    margin: 4px; /* Margen exterior */
-    margin-left: 0; /* Margen exterior izquierdo */
-}
-
-
-
-/* Estilos del selector .load-bar__bar. */
-.load-bar__bar{ /* Regla de estilo para .load-bar__bar */
-    background-color: #48e; /* Color de fondo */
-    border-radius:  3px ; /* Redondeo de esquinas */
-    padding: 4px 6px; /* Relleno interior */
-}
-
-
-
-/* Estilos del selector .bar--80. */
-.bar--80{ /* Regla de estilo para .bar--80 */
-    width: 80%; /* Ancho del elemento */
-
-
-/* Estilos del selector }.bar--90. */
-}.bar--90{ /* Regla de estilo para }.bar--90 */
-    width: 90%; /* Ancho del elemento */
-}
-
-
-/* Estilos del selector .bar--70. */
-.bar--70{ /* Regla de estilo para .bar--70 */
-    width: 70%; /* Ancho del elemento */
-}
-
-
-/* Estilos del selector .bar--60. */
-.bar--60{ /* Regla de estilo para .bar--60 */
-    width: 60%; /* Ancho del elemento */
-}
-
-
-
-/* Estado o pseudo-clase @container profile (min-width:720px): estilo cuando el usuario interactúa. */
-@container profile (min-width:720px){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .profile__wrapper. */
-    .profile__wrapper{ /* Regla de estilo para .profile__wrapper */
-        flex-direction: row; /* Dirección del eje principal flex */
-        padding: 20px; /* Relleno interior */
-        background-color: transparent; /* Color de fondo */
-        height: 90vh; /* Alto del elemento */
-        margin: auto; /* Margen exterior */
+    .contact-form {
+        grid-template-columns: 1fr; /* Apila los campos en una columna */
     }
-
-
-
-/* Estilos del selector .profile__data-container{. */
-    .profile__data-container{         /* Regla de estilo para .profile__data-container */
-        background-color: #fff; /* Color de fondo */
-        display: flex; /* Define el tipo de caja/layout */
-        align-items: center; /* Alineación en el eje cruzado */
-        border-radius: 0px 25px 25px 0; /* Redondeo de esquinas */
-        box-shadow: 0 0 9px #0002; /* Sombra proyectada */
+    .nav-btn {
+        display: block; /* Muestra el botón hamburguesa */
     }
-
-
-
-/* Estilos del selector h1. */
-    h1{ /* Regla de estilo para h1 */
-        margin-top: 0; /* Margen exterior superior */
-        font-size: 4rem; /* Tamaño de fuente */
-        text-wrap: balance; /* Propiedad CSS: text-wrap */
+    .site-nav {
+        display: none; /* Oculta el menú hasta marcar el checkbox */
+        position: absolute; /* Despliega debajo de la cabecera */
+        top: 68px; /* Debajo de la barra fija */
+        left: 0; /* Alineado al borde izquierdo */
+        right: 0; /* Alineado al borde derecho */
+        background: var(--surface); /* Fondo blanco */
+        padding: 16px 20px; /* Relleno del menú móvil */
+        border-bottom: 1px solid var(--border); /* Borde inferior */
     }
-
-
-
-/* Estilos del selector .profile__skills-container > h2. */
-    .profile__skills-container > h2{ /* Regla de estilo para .profile__skills-container > h2 */
-        margin-top: 0; /* Margen exterior superior */
+    .nav-toggle:checked ~ .site-nav {
+        display: block; /* Muestra el menú al pulsar ☰ */
     }
-
-
-
-/* Estilos del selector .profile__data. */
-    .profile__data{ /* Regla de estilo para .profile__data */
-        max-width: 620px; /* Ancho máximo permitido */
+    .nav-list {
+        flex-direction: column; /* Enlaces apilados verticalmente */
+        align-items: flex-start; /* Alineados a la izquierda */
+        gap: 14px; /* Separación entre enlaces */
     }
-
-
-
-/* Estilos del selector .profile__img-container. */
-    .profile__img-container{ /* Regla de estilo para .profile__img-container */
-        max-height: initial; /* Alto máximo permitido */
-        border-radius: 25px 0 0 25px; /* Redondeo de esquinas */
-    }
-
-
-
-/* Estilos del selector .profile__img. */
-    .profile__img{ /* Regla de estilo para .profile__img */
-        height: 100%; /* Alto del elemento */
-        object-fit: cover; /* Ajuste de imagen o video dentro de su caja */
-        width: 400px; /* Ancho del elemento */
-    }
-}
-
-
-
-
-
-/* Estilos del selector .portfolio. */
-.portfolio{ /* Regla de estilo para .portfolio */
-    background-color: #18233f; /* Color de fondo */
-    color: #fff; /* Color del texto */
-    min-height: 100vh; /* Alto mínimo permitido */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    text-align: center; /* Alineación horizontal del texto */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name: portfolio; /* Propiedad CSS: container-name */
-    justify-content: space-evenly; /* Alineación en el eje principal */
-}
-
-
-
-/* Estilos del selector .portfolio_title. */
-.portfolio_title{ /* Regla de estilo para .portfolio_title */
-    font-size: 3rem; /* Tamaño de fuente */
-    margin-bottom: 0; /* Margen exterior inferior */
-}
-
-
-
-/* Estilos del selector .portfolio__project-container. */
-.portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-    display: grid; /* Define el tipo de caja/layout */
-    grid-template-columns: 1fr; /* Definición de columnas de la grilla */
-    max-width: 1300px; /* Ancho máximo permitido */
-    margin: auto; /* Margen exterior */
-    width: 100%; /* Ancho del elemento */
-    gap: 12px; /* Separación entre filas y columnas */
-    padding: 12px; /* Relleno interior */
-    min-height: 90vh; /* Alto mínimo permitido */
-}
-
-
-
-/* Estilos del selector .portfolio__project. */
-.portfolio__project{ /* Regla de estilo para .portfolio__project */
-    background-image:linear-gradient(#0006, #0006), url("img/fondo.jpg"); /* Imagen o degradado de fondo */
-    background-position: center; /* Posición del fondo */
-    background-size: cover; /* Escalado del fondo */
-    display: grid; /* Define el tipo de caja/layout */
-    place-content: center; /* Propiedad CSS: place-content */
-    border-radius: 12px; /* Redondeo de esquinas */
-}
-
-
-
-/* Estado o pseudo-clase .portfolio__project:hover: estilo cuando el usuario interactúa. */
-.portfolio__project:hover{ /* Regla de estilo para .portfolio__project:hover */
-    opacity: 0.74; /* Nivel de transparencia */
-    outline: 2px solid #fff6; /* Contorno de enfoque accesible */
-}
-
-
-
-/* Estilos del selector .portfolio__project-name. */
-.portfolio__project-name{ /* Regla de estilo para .portfolio__project-name */
-    font-size: 1rem; /* Tamaño de fuente */
-}
-
-
-
-/* Estado o pseudo-clase @container portfolio (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 56.25rem){ /* Regla at-rule de CSS */
-
-
-
-/* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-        grid-template-columns: repeat(auto-fill, minmax(420px,1fr)); /* Definición de columnas de la grilla */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-        grid-row: span 2; /* Propiedad CSS: grid-row */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-    }
-}
-
-
-/* Estado o pseudo-clase @container portfolio (min-width: 81.25rem): estilo cuando el usuario interactúa. */
-@container portfolio (min-width: 81.25rem){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .portfolio__project-container. */
-    .portfolio__project-container{ /* Regla de estilo para .portfolio__project-container */
-        grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); /* Definición de columnas de la grilla */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:first-child: estilo cuando el usuario interactúa. */
-    .portfolio__project:first-child{ /* Regla de estilo para .portfolio__project:first-child */
-        grid-column: span 2; /* Ubicación/expansión en columnas */
-        grid-row: span 2; /* Propiedad CSS: grid-row */
-    }
-
-
-
-/* Estado o pseudo-clase .portfolio__project:nth-child(6): estilo cuando el usuario interactúa. */
-    .portfolio__project:nth-child(6){ /* Regla de estilo para .portfolio__project:nth-child(6) */
-        grid-column: span 4; /* Ubicación/expansión en columnas */
-    }
-}
-
-
-
-
-/* Estilos del selector .form. */
-.form{ /* Regla de estilo para .form */
-    min-height: 60vh; /* Alto mínimo permitido */
-    display: flex; /* Define el tipo de caja/layout */
-    flex-direction: column; /* Dirección del eje principal flex */
-    justify-content: center; /* Alineación en el eje principal */
-    align-items: center; /* Alineación en el eje cruzado */
-    padding: 30px 0; /* Relleno interior */
-    container-type: inline-size; /* Propiedad CSS: container-type */
-    container-name: form; /* Propiedad CSS: container-name */
-}
-
-
-
-/* Estilos del selector .form__form. */
-.form__form{ /* Regla de estilo para .form__form */
-    padding: 12px; /* Relleno interior */
-    max-width: 600px; /* Ancho máximo permitido */
-    width: 100%; /* Ancho del elemento */
-    display: grid; /* Define el tipo de caja/layout */
-    margin-bottom: 30px; /* Margen exterior inferior */
-}
-
-
-
-/* Estado o pseudo-clase .form__input-container :is(input, textarea ): estilo cuando el usuario interactúa. */
-.form__input-container :is(input, textarea ){ /* Regla de estilo para .form__input-container :is(input, textarea ) */
-    width: 100%; /* Ancho del elemento */
-    padding: 9px; /* Relleno interior */
-    font-size: 16px; /* Tamaño de fuente */
-    margin: 4px; /* Margen exterior */
-    border: none; /* Borde del contenedor */
-    box-shadow: 2px 2px 4px #0003; /* Sombra proyectada */
-    background-color: #fffd; /* Color de fondo */
-}
-
-
-
-/* Estilos del selector .form__input-container textarea. */
-.form__input-container textarea{ /* Regla de estilo para .form__input-container textarea */
-    resize: none; /* Propiedad CSS: resize */
-    min-height: 120px; /* Alto mínimo permitido */
-    font-family: inherit; /* Familia tipográfica */
-}
-
-
-
-/* Estilos del selector .form__input-container input[type="submit"]. */
-.form__input-container input[type="submit"]{ /* Regla de estilo para .form__input-container input[type="submit"] */
-    padding: 12px; /* Relleno interior */
-    background-color: #48e; /* Color de fondo */
-    color: #fff; /* Color del texto */
-}
-
-
-
-/* Estilos del selector .form__title. */
-.form__title{ /* Regla de estilo para .form__title */
-    font-size: 2.4rem; /* Tamaño de fuente */
-}
-
-
-
-/* Estado o pseudo-clase @container form (min-width: 56.25rem): estilo cuando el usuario interactúa. */
-@container form (min-width: 56.25rem){ /* Regla at-rule de CSS */
-
-
-/* Estilos del selector .form__form. */
-    .form__form{ /* Regla de estilo para .form__form */
-        grid-template-columns: 1fr 1fr; /* Definición de columnas de la grilla */
-        grid-template-areas:
-        "name lastname"
-        "email email"
-        "message message"
-        "button button"
-        ; /* Regla CSS */
-        gap: 12px; /* Separación entre filas y columnas */
-        background-image: radial-gradient(#18233f06,#18233f33); /* Imagen o degradado de fondo */
-        padding: 30px; /* Relleno interior */
-        border-radius: 12px; /* Redondeo de esquinas */
-        box-shadow: 0 0 40px #0006; /* Sombra proyectada */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:first-child: estilo cuando el usuario interactúa. */
-    .form__input-container:first-child{ /* Regla de estilo para .form__input-container:first-child */
-        grid-area: name; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(2): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(2){ /* Regla de estilo para .form__input-container:nth-child(2) */
-        grid-area: lastname; /* Propiedad CSS: grid-area */
-    }
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(3): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(3){ /* Regla de estilo para .form__input-container:nth-child(3) */
-        grid-area: email; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(4): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(4) { /* Regla de estilo para .form__input-container:nth-child(4) */
-        grid-area: message; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container:nth-child(5): estilo cuando el usuario interactúa. */
-    .form__input-container:nth-child(5){ /* Regla de estilo para .form__input-container:nth-child(5) */
-        grid-area: button; /* Propiedad CSS: grid-area */
-    }
-
-
-
-/* Estado o pseudo-clase .form__input-container :is(input, textarea): estilo cuando el usuario interactúa. */
-    .form__input-container :is(input, textarea){ /* Regla de estilo para .form__input-container :is(input, textarea) */
-        box-shadow: none; /* Sombra proyectada */
-        border-radius: 4px; /* Redondeo de esquinas */
-    }
-}
-
-
-
-
-
-/* Estilos del selector footer. */
-footer{ /* Regla de estilo para footer */
-    padding: 60px; /* Relleno interior */
-    text-align: center; /* Alineación horizontal del texto */
-    background-color: #18233f; /* Color de fondo */
-    color: #fffd; /* Color del texto */
-    font-size: 22px; /* Tamaño de fuente */
 }

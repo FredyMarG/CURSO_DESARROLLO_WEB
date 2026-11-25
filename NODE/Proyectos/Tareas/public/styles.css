@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* Variables CSS globales para mantener una paleta oscuro-neón coherente */
-:root {
+:root { /* Regla para :root */
   --bg: #0b1120;                       /* Fondo base azul noche profundo */
   --card: rgba(15, 23, 42, 0.85);      /* Fondo translúcido para paneles */
   --border: rgba(56, 189, 248, 0.22);  /* Borde sutil en tono cian */
@@ -18,293 +18,294 @@
 
 /* Reset básico: incluye padding y borde dentro del ancho/alto total de cada caja */
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* Define cómo se calculan ancho y alto (border-box incluye padding y borde) */
+  margin: 0; /* Espaciado exterior del elemento */
+  padding: 0; /* Relleno interior del elemento */
 }
 
 /* Scrollbars delgados en Firefox para la página, visores JSON y lista de tareas */
 html,
 .code-view,
-.task-list {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(56, 189, 248, 0.55) rgba(15, 23, 42, 0.8);
+.task-list { /* Regla para .task-list */
+  scrollbar-width: thin; /* Configura la propiedad scrollbar-width */
+  scrollbar-color: rgba(56, 189, 248, 0.55) rgba(15, 23, 42, 0.8); /* Configura la propiedad scrollbar-color */
 }
 
 /* Ancho de las barras de desplazamiento en navegadores Chromium / WebKit */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+::-webkit-scrollbar { /* Regla para ::-webkit-scrollbar */
+  width: 8px; /* Ancho del elemento */
+  height: 8px; /* Alto del elemento */
 }
 
 /* Carril de fondo del scrollbar */
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.85);
-  border-radius: 999px;
+::-webkit-scrollbar-track { /* Regla para ::-webkit-scrollbar-track */
+  background: rgba(15, 23, 42, 0.85); /* Fondo (color, degradado o imagen) */
+  border-radius: 999px; /* Redondeo de esquinas */
 }
 
 /* Pulgar deslizable con degradado cian-esmeralda */
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(56, 189, 248, 0.65), rgba(16, 185, 129, 0.65));
-  border-radius: 999px;
-  border: 2px solid rgba(15, 23, 42, 0.85);
+::-webkit-scrollbar-thumb { /* Regla para ::-webkit-scrollbar-thumb */
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.65), rgba(16, 185, 129, 0.65)); /* Fondo (color, degradado o imagen) */
+  border-radius: 999px; /* Redondeo de esquinas */
+  border: 2px solid rgba(15, 23, 42, 0.85); /* Borde completo (grosor, estilo y color) */
 }
 
 /* Resalta el pulgar del scrollbar al pasar el ratón */
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #38bdf8, #10b981);
+::-webkit-scrollbar-thumb:hover { /* Regla para ::-webkit-scrollbar-thumb:hover */
+  background: linear-gradient(180deg, #38bdf8, #10b981); /* Fondo (color, degradado o imagen) */
 }
 
 /* Fondo general con degradado radial y espaciado exterior */
-body {
-  font-family: var(--font);
-  background: radial-gradient(circle at top right, #0f2942, var(--bg) 55%);
-  color: var(--text);
-  min-height: 100vh;
-  padding: 24px;
+body { /* Regla para body */
+  font-family: var(--font); /* Familia tipográfica aplicada al texto */
+  background: radial-gradient(circle at top right, #0f2942, var(--bg) 55%); /* Fondo (color, degradado o imagen) */
+  color: var(--text); /* Color del texto */
+  min-height: 100vh; /* Altura mínima garantizada */
+  padding: 24px; /* Relleno interior del elemento */
 }
 
 /* Contenedor centrado de la aplicación */
-.container {
-  max-width: 1040px;
-  margin: 0 auto;
-  display: grid;
-  gap: 20px;
+.container { /* Regla para .container */
+  max-width: 1040px; /* Ancho máximo permitido */
+  margin: 0 auto; /* Espaciado exterior del elemento */
+  display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  gap: 20px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Barra superior flexible: se adapta si la pantalla es estrecha */
-.topbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px 20px;
+.topbar { /* Regla para .topbar */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
+  gap: 12px; /* Separación uniforme entre filas y columnas */
+  align-items: center; /* Alineación en el eje cruzado */
+  justify-content: space-between; /* Alineación en el eje principal */
+  background: var(--card); /* Fondo (color, degradado o imagen) */
+  border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+  border-radius: 14px; /* Redondeo de esquinas */
+  padding: 16px 20px; /* Relleno interior del elemento */
 }
 
 /* Título principal de la barra superior */
-.title-wrap h1 {
-  font-size: 1.45rem;
+.title-wrap h1 { /* Regla para .title-wrap h1 */
+  font-size: 1.45rem; /* Tamaño de fuente */
 }
 
 /* Subtítulo descriptivo debajo del título */
-.title-wrap p {
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin-top: 2px;
+.title-wrap p { /* Regla para .title-wrap p */
+  color: var(--muted); /* Color del texto */
+  font-size: 0.9rem; /* Tamaño de fuente */
+  margin-top: 2px; /* Margen superior */
 }
 
 /* Contenedor de botones y badge de estado */
-.actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
+.actions { /* Regla para .actions */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  gap: 10px; /* Separación uniforme entre filas y columnas */
+  align-items: center; /* Alineación en el eje cruzado */
+  flex-wrap: wrap; /* Permite salto de línea en contenedores flex */
 }
 
 /* Etiqueta redondeada que muestra si está conectado a Node.js o en Demo */
-.pill {
-  font-size: 0.82rem;
-  padding: 6px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(15, 23, 42, 0.9);
+.pill { /* Regla para .pill */
+  font-size: 0.82rem; /* Tamaño de fuente */
+  padding: 6px 12px; /* Relleno interior del elemento */
+  border-radius: 999px; /* Redondeo de esquinas */
+  border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+  background: rgba(15, 23, 42, 0.9); /* Fondo (color, degradado o imagen) */
 }
 
 /* Botones de navegación tipo enlace (Portal / Proyectos) */
-.btn-link {
-  text-decoration: none;
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 7px 14px;
-  border-radius: 10px;
-  font-size: 0.88rem;
-  transition: 0.2s;
+.btn-link { /* Regla para .btn-link */
+  text-decoration: none; /* Decoración del texto (subrayado o ninguna) */
+  color: var(--text); /* Color del texto */
+  border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+  padding: 7px 14px; /* Relleno interior del elemento */
+  border-radius: 10px; /* Redondeo de esquinas */
+  font-size: 0.88rem; /* Tamaño de fuente */
+  transition: 0.2s; /* Interpolación suave al cambiar propiedades */
 }
 
 /* Efecto hover estándar en botones de navegación */
-.btn-link:hover {
-  border-color: var(--cyan);
-  color: var(--cyan);
+.btn-link:hover { /* Regla para .btn-link:hover */
+  border-color: var(--cyan); /* Color del borde */
+  color: var(--cyan); /* Color del texto */
 }
 
 /* Estilo destacado cian para el botón que lleva a la sección Proyectos */
-.btn-projects {
-  background: rgba(56, 189, 248, 0.14);
-  border-color: rgba(56, 189, 248, 0.45);
-  color: var(--cyan);
+.btn-projects { /* Regla para .btn-projects */
+  background: rgba(56, 189, 248, 0.14); /* Fondo (color, degradado o imagen) */
+  border-color: rgba(56, 189, 248, 0.45); /* Color del borde */
+  color: var(--cyan); /* Color del texto */
 }
 
 /* Hover más intenso en el botón de Proyectos */
-.btn-projects:hover {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: var(--cyan);
-  color: #fff;
+.btn-projects:hover { /* Regla para .btn-projects:hover */
+  background: rgba(56, 189, 248, 0.25); /* Fondo (color, degradado o imagen) */
+  border-color: var(--cyan); /* Color del borde */
+  color: #fff; /* Color del texto */
 }
 
 /* Rejilla principal de 2 columnas (57% tareas / 43% visores JSON) */
-.grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 20px;
+.grid { /* Regla para .grid */
+  display: grid; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  grid-template-columns: 1.15fr 0.85fr; /* Definición de columnas en CSS Grid */
+  gap: 20px; /* Separación uniforme entre filas y columnas */
 }
 
 /* En pantallas pequeñas (< 820px) apila las columnas verticalmente */
 @media (max-width: 820px) {
-  .grid {
-    grid-template-columns: 1fr;
+  .grid { /* Regla para .grid */
+    grid-template-columns: 1fr; /* Definición de columnas en CSS Grid */
   }
 }
 
 /* Tarjeta contenedora para cada sección */
-.panel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+.panel { /* Regla para .panel */
+  background: var(--card); /* Fondo (color, degradado o imagen) */
+  border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+  border-radius: 14px; /* Redondeo de esquinas */
+  padding: 18px; /* Relleno interior del elemento */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  flex-direction: column; /* Dirección del eje principal en Flexbox */
+  gap: 14px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Encabezado de cada panel */
-.panel h2 {
-  font-size: 1.05rem;
-  color: var(--cyan);
+.panel h2 { /* Regla para .panel h2 */
+  font-size: 1.05rem; /* Tamaño de fuente */
+  color: var(--cyan); /* Color del texto */
 }
 
 /* Fila del formulario de nueva tarea */
-.task-form {
-  display: flex;
-  gap: 10px;
+.task-form { /* Regla para .task-form */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  gap: 10px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Caja de texto para escribir la tarea */
-.task-form input {
-  flex: 1;
-  padding: 11px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: #020617;
-  color: var(--text);
-  font-family: var(--font);
-  font-size: 0.95rem;
+.task-form input { /* Regla para .task-form input */
+  flex: 1; /* Factor de crecimiento, encogimiento y base flex */
+  padding: 11px 14px; /* Relleno interior del elemento */
+  border-radius: 10px; /* Redondeo de esquinas */
+  border: 1px solid var(--border); /* Borde completo (grosor, estilo y color) */
+  background: #020617; /* Fondo (color, degradado o imagen) */
+  color: var(--text); /* Color del texto */
+  font-family: var(--font); /* Familia tipográfica aplicada al texto */
+  font-size: 0.95rem; /* Tamaño de fuente */
 }
 
 /* Base común para el botón de agregar y botones de cada fila */
 .task-form button,
-.mini-btn {
-  border: none;
-  border-radius: 10px;
-  padding: 10px 16px;
-  cursor: pointer;
-  font-family: var(--font);
-  font-weight: 600;
-  transition: 0.2s;
+.mini-btn { /* Regla para .mini-btn */
+  border: none; /* Borde completo (grosor, estilo y color) */
+  border-radius: 10px; /* Redondeo de esquinas */
+  padding: 10px 16px; /* Relleno interior del elemento */
+  cursor: pointer; /* Forma del cursor al pasar por encima */
+  font-family: var(--font); /* Familia tipográfica aplicada al texto */
+  font-weight: 600; /* Grosor tipográfico */
+  transition: 0.2s; /* Interpolación suave al cambiar propiedades */
 }
 
 /* Botón principal de creación (+ Agregar) */
-.btn-add {
-  background: var(--accent);
-  color: #052e16;
+.btn-add { /* Regla para .btn-add */
+  background: var(--accent); /* Fondo (color, degradado o imagen) */
+  color: #052e16; /* Color del texto */
 }
 
-.btn-add:hover {
-  filter: brightness(1.1);
+.btn-add:hover { /* Regla para .btn-add:hover */
+  filter: brightness(1.1); /* Filtro gráfico aplicado al elemento */
 }
 
 /* Lista vertical de tarjetas de tareas */
-.task-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.task-list { /* Regla para .task-list */
+  list-style: none; /* Estilo de viñetas en listas */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  flex-direction: column; /* Dirección del eje principal en Flexbox */
+  gap: 10px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Cada fila de tarea individual */
-.task-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  background: rgba(2, 6, 23, 0.65);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-  border-radius: 10px;
-  padding: 10px 12px;
+.task-item { /* Regla para .task-item */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  justify-content: space-between; /* Alineación en el eje principal */
+  align-items: center; /* Alineación en el eje cruzado */
+  gap: 10px; /* Separación uniforme entre filas y columnas */
+  background: rgba(2, 6, 23, 0.65); /* Fondo (color, degradado o imagen) */
+  border: 1px solid rgba(148, 163, 184, 0.16); /* Borde completo (grosor, estilo y color) */
+  border-radius: 10px; /* Redondeo de esquinas */
+  padding: 10px 12px; /* Relleno interior del elemento */
 }
 
 /* Contenedor izquierdo de descripción + metadatos */
-.task-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.task-info { /* Regla para .task-info */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  flex-direction: column; /* Dirección del eje principal en Flexbox */
+  gap: 2px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Tacha y atenúa el texto cuando la tarea ya fue completada */
-.task-desc.done {
-  text-decoration: line-through;
-  color: var(--muted);
+.task-desc.done { /* Regla para .task-desc.done */
+  text-decoration: line-through; /* Decoración del texto (subrayado o ninguna) */
+  color: var(--muted); /* Color del texto */
 }
 
 /* ID corto y fecha de creación en fuente monoespaciada */
-.task-meta {
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  color: var(--muted);
+.task-meta { /* Regla para .task-meta */
+  font-family: var(--mono); /* Familia tipográfica aplicada al texto */
+  font-size: 0.74rem; /* Tamaño de fuente */
+  color: var(--muted); /* Color del texto */
 }
 
 /* Grupo de botones Completar / Eliminar por tarea */
-.task-btns {
-  display: flex;
-  gap: 6px;
+.task-btns { /* Regla para .task-btns */
+  display: flex; /* Tipo de caja o modelo de layout (flex, grid, block) */
+  gap: 6px; /* Separación uniforme entre filas y columnas */
 }
 
 /* Botón suave verde para completar una tarea */
-.btn-done {
-  background: rgba(16, 185, 129, 0.18);
-  color: #34d399;
+.btn-done { /* Regla para .btn-done */
+  background: rgba(16, 185, 129, 0.18); /* Fondo (color, degradado o imagen) */
+  color: #34d399; /* Color del texto */
 }
 
 /* Botón suave rojo para eliminar una tarea */
-.btn-del {
-  background: rgba(244, 63, 94, 0.18);
-  color: #fb7185;
+.btn-del { /* Regla para .btn-del */
+  background: rgba(244, 63, 94, 0.18); /* Fondo (color, degradado o imagen) */
+  color: #fb7185; /* Color del texto */
 }
 
 /* Mensaje de error bajo el formulario (conserva altura mínima para evitar saltos) */
-.error-msg {
-  color: #fb7185;
-  font-size: 0.88rem;
-  min-height: 1.2em;
+.error-msg { /* Regla para .error-msg */
+  color: #fb7185; /* Color del texto */
+  font-size: 0.88rem; /* Tamaño de fuente */
+  min-height: 1.2em; /* Altura mínima garantizada */
 }
 
 /* Visor de código con scroll interno para tareas.json y eventos.ndjson */
-pre.code-view {
-  background: #020617;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 10px;
-  padding: 12px;
-  font-family: var(--mono);
-  font-size: 0.76rem;
-  color: #a5f3fc;
-  max-height: 210px;
-  overflow: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
+pre.code-view { /* Regla para pre.code-view */
+  background: #020617; /* Fondo (color, degradado o imagen) */
+  border: 1px solid rgba(148, 163, 184, 0.18); /* Borde completo (grosor, estilo y color) */
+  border-radius: 10px; /* Redondeo de esquinas */
+  padding: 12px; /* Relleno interior del elemento */
+  font-family: var(--mono); /* Familia tipográfica aplicada al texto */
+  font-size: 0.76rem; /* Tamaño de fuente */
+  color: #a5f3fc; /* Color del texto */
+  max-height: 210px; /* Configura la propiedad max-height */
+  overflow: auto; /* Comportamiento del contenido que sobresale */
+  white-space: pre-wrap; /* Controla saltos de línea y espacios en blanco */
+  word-break: break-word; /* Configura la propiedad word-break */
 }
 
 /* Nota inferior informativa */
-.hint {
-  font-size: 0.82rem;
-  color: var(--muted);
-  line-height: 1.45;
+.hint { /* Regla para .hint */
+  font-size: 0.82rem; /* Tamaño de fuente */
+  color: var(--muted); /* Color del texto */
+  line-height: 1.45; /* Altura de línea para legibilidad */
 }
 
 /* Resaltado de fragmentos de código en línea */
-code {
-  font-family: var(--mono);
-  color: #fde68a;
+code { /* Regla para code */
+  font-family: var(--mono); /* Familia tipográfica aplicada al texto */
+  color: #fde68a; /* Color del texto */
 }
+

@@ -2,143 +2,137 @@
 <html lang="es">
 <head>
     <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
-    <meta charset="UTF-8" /><!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ejercicio: Ventana Modal (&lt;dialog&gt; + BEM) — Guía Interactiva</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../../RESOURCES COURSE/plantilla/slides-engine.css" /><script src="../../../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
-    <link rel="stylesheet" href="../../../../RESOURCES COURSE/plantilla/course-polish.css" />
-    <script src="../../../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%23a855f7'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%AA%9F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <title>Ventana Modal (&lt;dialog&gt; + BEM) — Proyecto HTML &amp; CSS</title>
+    <link rel="stylesheet" href="../../../PROYECTOS/ejercicios-hud.css" />
+    <script src="../../../PROYECTOS/ejercicios-hud.js" defer></script>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2338bdf8'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%AA%9F%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+            background: radial-gradient(circle at top, #1e293b, #0b1120);
+            color: #e2e8f0;
+            display: grid;
+            place-items: center;
+            padding: 88px 20px 40px;
+        }
+        .demo-stage {
+            text-align: center;
+            max-width: 520px;
+            background: rgba(15, 23, 42, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 18px;
+            padding: 32px 26px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+        }
+        .demo-stage h1 {
+            margin: 0 0 10px;
+            font-size: 1.6rem;
+            color: #f8fafc;
+        }
+        .demo-stage p {
+            margin: 0 0 20px;
+            color: #94a3b8;
+            line-height: 1.55;
+        }
+        .open-modal-btn {
+            background: #38bdf8;
+            color: #0b1120;
+            border: 0;
+            border-radius: 999px;
+            padding: 11px 22px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
+        }
+        .open-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.35);
+        }
+        .modal {
+            border: 1px solid rgba(56, 189, 248, 0.45);
+            border-radius: 16px;
+            background: #111827;
+            color: #f8fafc;
+            padding: 0;
+            max-width: 420px;
+            width: calc(100% - 32px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+        }
+        .modal::backdrop {
+            background: rgba(2, 6, 23, 0.72);
+            backdrop-filter: blur(5px);
+        }
+        .modal__content {
+            position: relative;
+            padding: 28px 24px 24px;
+        }
+        .modal__title {
+            margin: 0 32px 10px 0;
+            color: #38bdf8;
+            font-size: 1.25rem;
+        }
+        .modal__text {
+            margin: 0 0 18px;
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .modal__close-button {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: #f43f5e;
+            color: #fff;
+            border: 0;
+            border-radius: 8px;
+            padding: 5px 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .modal__close-button:hover {
+            background: #e11d48;
+        }
+        .modal__confirm {
+            background: rgba(56, 189, 248, 0.16);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<!-- mode-presentation inicia en vista de diapositivas (alternable a Modo Guía) -->
-<body class="mode-presentation">
-    <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
-    <header class="top-nav">
-        <div class="nav-brand"><span class="brand-badge">CSS3 AVANZADO · EJERCICIO</span><div class="brand-title"><span>🪟</span><span>Ventana Modal</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
-        <div class="nav-actions">
-            <a class="nav-btn" href="../../index.html">⬅ <span class="btn-text">CSS Avanzado</span></a>
-            <a class="nav-btn" href="../../../../index.html">🏠 <span class="btn-text">Portal</span></a>
-            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
-            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
-            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
-            <button class="nav-btn" id="btnOverview">▦</button><button class="nav-btn" id="btnFullscreen">⛶</button>
-        </div>
-    </header>
-    <main class="presentation-wrapper">
-        <section class="slide active" data-slide="1" data-title="Inicio: Ejercicio Ventana Modal">
-            <div class="hero-slide">
-                <div class="hero-badges"><span class="badge badge-cyan">&lt;dialog&gt;</span><span class="badge badge-purple">position: absolute</span><span class="badge badge-emerald">Metodología BEM</span></div>
-                <h1 class="hero-title">Ejercicio Práctico:<br /><span class="gradient-text">Ventana Modal</span></h1>
-                <p class="hero-subtitle">Construye una ventana modal moderna combinando la etiqueta nativa <code>&lt;dialog&gt;</code>, <code>&lt;form method="dialog"&gt;</code> para cerrarla sin JS, posicionamiento absoluto y clases BEM.</p>
-                <div class="hero-grid">
-                    <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧩</div><h3>Arquitectura</h3><p>Cómo se cierra el modal con <code>method="dialog"</code>.</p></div>
-                    <div class="hero-card" data-jump="3"><div class="hero-card-icon">🧠</div><h3>Quiz Rápido</h3><p>Valida los conceptos del ejercicio.</p></div>
-                    <div class="hero-card" data-jump="4"><div class="hero-card-icon">🧪</div><h3>Laboratorio en Vivo</h3><p>Prueba el modal interactivo real.</p></div>
-                </div>
-            </div>
-        </section>
-        <section class="slide" data-slide="2" data-title="¿Qué es Ventana Modal?">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 2 · FUNDAMENTOS Y ANALOGÍA</span>
-                <h2 class="slide-title">¿Qué es Ventana Modal y para qué sirve?</h2>
-            </div>
-            <div class="glass-card">
-                <h3>🎯 Propósito en proyectos reales</h3>
-                <p style="line-height:1.65;">Construye una ventana modal moderna combinando la etiqueta nativa <code>&lt;dialog&gt;</code>, <code>&lt;form method="dialog"&gt;</code> para cerrarla sin JS, posicionamiento absoluto y clases BEM. Entender la intención de cada etiqueta o propiedad te ayuda a escribir código más limpio, accesible y fácil de mantener.</p>
-            </div>
-            <div class="callout callout-analogy">
-                <strong>🧠 Modelo mental:</strong> Piensa siempre primero en la <strong>estructura y el significado</strong> (qué rol cumple este elemento para el usuario y los lectores de pantalla) y luego en su apariencia visual con CSS.
-            </div>
-        </section>
-        <section class="slide" data-slide="3" data-title="Estructura del Modal">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 2 · ANATOMÍA</span><h2 class="slide-title">&lt;dialog&gt; + &lt;form method="dialog"&gt;</h2></div>
-            <div class="grid-2">
-                <div class="glass-card"><pre class="code-block"><code>&lt;dialog open&gt;
-  &lt;div class="modal__content"&gt;
-    &lt;h2 class="modal__title"&gt;VENTANA MODAL&lt;/h2&gt;
-    &lt;form method="dialog"&gt;
-      &lt;button class="modal__close-button"&gt;X&lt;/button&gt;
-    &lt;/form&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;</code></pre></div>
-                <div class="glass-card"><h3>✨ Cierre nativo</h3><p>Un <code>&lt;form method="dialog"&gt;</code> dentro de un <code>&lt;dialog&gt;</code> cierra automáticamente la ventana modal al presionar el botón, sin necesidad de JavaScript.</p></div>
-            </div>
-        </section>
-        <section class="slide" data-slide="4" data-title="Buenas Prácticas: Ventana Modal">
-            <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span>
-                <h2 class="slide-title">Buenas prácticas y errores comunes en Ventana Modal</h2>
-            </div>
-            <div class="callout callout-tip">
-                <strong>✅ Buena práctica:</strong> Verifica siempre tu código en el navegador con DevTools (<code>F12</code>), prueba la navegación con teclado (<code>Tab</code>) y mantén una estructura semántica clara.
-            </div>
-            <div class="callout callout-warn">
-                <strong>⚠️ Error frecuente:</strong> Usar etiquetas o propiedades únicamente por su aspecto visual por defecto, olvidando atributos clave de accesibilidad, contraste o validación.
-            </div>
-        </section>
-        <section class="slide" data-slide="5" data-title="Quiz Ventana Modal">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 3 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
-            <div class="quiz-container">
-                <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
-                <div class="quiz-question" data-answer="b" data-ok="method='dialog' en un formulario dentro de &lt;dialog&gt; cierra el modal al hacer submit." data-err="POST envía datos a un servidor; method='dialog' cierra el &lt;dialog&gt; nativamente.">
-                    <div class="quiz-q-title">1. ¿Qué atributo en <code>&lt;form&gt;</code> permite cerrar un <code>&lt;dialog&gt;</code> sin JavaScript al pulsar el botón?</div>
-                    <div class="quiz-options"><button class="quiz-option" data-opt="a">method="close"</button><button class="quiz-option" data-opt="b">method="dialog"</button><button class="quiz-option" data-opt="c">action="close"</button></div>
-                    <div class="quiz-feedback"></div>
-                </div>
-                <div class="quiz-question" data-answer="a" data-ok="La posición absoluta del botón X se ancla respecto al contenedor padre .modal__content con position: relative." data-err="Para colocar el botón X en la esquina superior derecha del modal, el botón usa position: absolute.">
-                    <div class="quiz-q-title">2. ¿Qué posicionamiento se usa en <code>.modal__close-button</code> para fijar la "X" en la esquina superior derecha del modal?</div>
-                    <div class="quiz-options"><button class="quiz-option" data-opt="a">position: absolute; top: 10px; right: 12px;</button><button class="quiz-option" data-opt="b">position: static;</button><button class="quiz-option" data-opt="c">display: inline;</button></div>
-                    <div class="quiz-feedback"></div>
-                </div>
-            </div>
-        </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio Ventana Modal">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · EJERCICIO EN VIVO</span><h2 class="slide-title">🧪 Ventana Modal Interactiva</h2></div>
-            <div class="lab-panel">
-                <div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
-  body { font-family: system-ui; background: #0f172a; color: #cbd5e1; padding: 20px; min-height: 200px; }
-  dialog { border: 1px solid #38bdf8; border-radius: 14px; background: #1e293b; color: #f8fafc; padding: 22px; max-width: 320px; margin: 12px auto; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-  .modal__title { margin: 0 0 8px; color: #38bdf8; }
-  .modal__close-button { position: absolute; top: 10px; right: 12px; background: #f43f5e; color: #fff; border: 0; border-radius: 6px; padding: 4px 9px; font-weight: 700; cursor: pointer; }
-&lt;/style&gt;
-&lt;dialog open&gt;
-  &lt;div class=&quot;modal__content&quot;&gt;
-    &lt;h2 class=&quot;modal__title&quot;&gt;VENTANA MODAL&lt;/h2&gt;
-    &lt;p&gt;Pulsa la X para cerrar este modal nativamente con &lt;code&gt;method=&quot;dialog&quot;&lt;/code&gt;.&lt;/p&gt;
-    &lt;form method=&quot;dialog&quot;&gt;&lt;button class=&quot;modal__close-button&quot;&gt;X&lt;/button&gt;&lt;/form&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;">Ventana Modal</button></div>
-                <div class="lab-split">
-                    <!-- spellcheck="false" desactiva la corrección ortográfica sobre el código -->
-                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;style&gt;
-  body { font-family: system-ui; background: #0f172a; color: #cbd5e1; padding: 20px; min-height: 200px; }
-  dialog { border: 1px solid #38bdf8; border-radius: 14px; background: #1e293b; color: #f8fafc; padding: 22px; max-width: 320px; margin: 12px auto; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-  .modal__title { margin: 0 0 8px; color: #38bdf8; }
-  .modal__close-button { position: absolute; top: 10px; right: 12px; background: #f43f5e; color: #fff; border: 0; border-radius: 6px; padding: 4px 9px; font-weight: 700; cursor: pointer; }
-&lt;/style&gt;
-&lt;dialog open&gt;
-  &lt;div class="modal__content"&gt;
-    &lt;h2 class="modal__title"&gt;VENTANA MODAL&lt;/h2&gt;
-    &lt;p&gt;Pulsa la X para cerrar este modal nativamente con &lt;code&gt;method="dialog"&lt;/code&gt;.&lt;/p&gt;
-    &lt;form method="dialog"&gt;&lt;button class="modal__close-button"&gt;X&lt;/button&gt;&lt;/form&gt;
-  &lt;/div&gt;
-&lt;/dialog&gt;</textarea>
-                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
-                </div>
-            </div>
-        </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
-            <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · RECURSOS</span><h2 class="slide-title">📂 Continúa con CSS Avanzado</h2></div>
-            <div class="glass-card"><div class="files-grid">
-                <a class="file-card" href="../../index.html"><span class="file-name">⚡ Guía Completa CSS Avanzado</span><span class="file-path">index.html</span></a>
-                <a class="file-card" href="../../../Documentacion/index.html"><span class="file-name">📘 Documentación Completa</span><span class="file-path">Documentacion/index.html</span></a>
-            </div></div>
-        </section>
+<body data-hud-title="Ventana Modal (<dialog> + BEM)" data-hud-desc="Proyecto de ventana modal accesible usando etiqueta nativa <dialog>, ::backdrop, position: absolute en el cierre y metodología BEM." data-hud-back="../../../PROYECTOS/index.html" data-hud-portal="../../../../index.html">
+    <main class="demo-stage">
+        <h1>🪟 Proyecto: Ventana Modal</h1>
+        <p>Presiona el botón para abrir el <code>&lt;dialog&gt;</code> nativo usando <code>showModal()</code> y ciérralo con la <strong>X</strong> (<code>method="dialog"</code>) o con la tecla <code>Escape</code>.</p>
+        <button type="button" class="open-modal-btn" id="btnOpenModal">Abrir Ventana Modal</button>
     </main>
-    <div class="bottom-controls"><button class="ctrl-btn" id="btnPrev">⬅ Anterior</button><span class="ctrl-hint">Flechas ← → · Tecla O</span><button class="ctrl-btn" id="btnNext">Siguiente ➡</button></div>
-    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <dialog class="modal" id="demoModal">
+        <div class="modal__content">
+            <h2 class="modal__title">VENTANA MODAL</h2>
+            <p class="modal__text">Este modal utiliza la etiqueta semántica <code>&lt;dialog&gt;</code>, pseudoelemento <code>::backdrop</code>, clases BEM y cierre nativo mediante <code>&lt;form method="dialog"&gt;</code>.</p>
+            <form method="dialog">
+                <button class="modal__close-button" aria-label="Cerrar modal">X</button>
+                <button class="modal__confirm">Entendido</button>
+            </form>
+        </div>
+    </dialog>
+
+    <script>
+        const modal = document.getElementById('demoModal');
+        const btnOpen = document.getElementById('btnOpenModal');
+        btnOpen.addEventListener('click', () => modal.showModal());
+        modal.showModal();
+    </script>
 </body>
 </html>

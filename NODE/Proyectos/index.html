@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <!-- Codificación UTF-8 para soportar tildes, ñ y emojis -->
+    <meta charset="UTF-8" />
+    <!-- Ajuste responsivo al ancho real del dispositivo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exhibición de Proyectos — Node.js | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2064%2064'%3E%3Crect%20width%3D'64'%20height%3D'64'%20rx%3D'14'%20fill%3D'%230b1120'%20stroke%3D'%2310b981'%20stroke-width%3D'4'%2F%3E%3Ctext%20x%3D'50%25'%20y%3D'54%25'%20dominant-baseline%3D'middle'%20text-anchor%3D'middle'%20font-size%3D'36'%3E%F0%9F%9F%A2%3C%2Ftext%3E%3C%2Fsvg%3E" />
+    <style>
+        /* Variables globales de diseño oscuro Node.js */
+        :root {
+            --bg: #070a13;
+            --card: rgba(16, 24, 42, 0.85);
+            --border: rgba(255, 255, 255, 0.1);
+            --emerald: #10b981;
+            --cyan: #38bdf8;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Outfit', system-ui, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .bg-glow {
+            position: fixed;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.22;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-1 { background: var(--emerald); top: -140px; left: -140px; }
+        .glow-2 { background: var(--cyan); bottom: -140px; right: -140px; }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 28px 20px 64px;
+            position: relative;
+            z-index: 1;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 34px;
+            padding: 12px 18px;
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            backdrop-filter: blur(12px);
+        }
+        .nav-badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--emerald);
+        }
+        .nav-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn {
+            text-decoration: none;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border);
+            padding: 7px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn:hover { border-color: var(--emerald); color: var(--emerald); }
+        .btn-primary { background: var(--emerald); color: #04130d; border-color: var(--emerald); }
+        .btn-primary:hover { color: #04130d; filter: brightness(1.08); }
+        header { text-align: center; margin-bottom: 40px; }
+        .hero-badge {
+            display: inline-block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--emerald);
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+        header h1 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 12px;
+        }
+        .subtitle {
+            color: var(--muted);
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .count {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--emerald);
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 2px 10px;
+            border-radius: 999px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            backdrop-filter: blur(14px);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        .card:hover { transform: translateY(-4px); border-color: var(--emerald); }
+        .card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        .card-title { font-size: 1.15rem; font-weight: 700; }
+        .card-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: var(--emerald);
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+        .card-desc { color: var(--muted); font-size: 0.94rem; line-height: 1.6; }
+        .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .chip {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.72rem;
+            color: var(--cyan);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+        .cmd-box {
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.82rem;
+            color: #6ee7b7;
+            line-height: 1.55;
+        }
+        .card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+
+    <div class="container">
+        <nav class="topbar">
+            <span class="nav-badge">🟢 NODE.JS · EXHIBICIÓN DE PROYECTOS</span>
+            <div class="nav-actions">
+                <a class="btn" href="../Documentacion/index.html">📘 Documentación Node</a>
+                <a class="btn" href="../../index.html?filter=node">🟢 Nivel Node.js</a>
+                <a class="btn" href="../../index.html?filter=proyectos">🚀 Todos los Proyectos</a>
+                <a class="btn btn-primary" href="../../index.html">🏠 Portal Principal</a>
+            </div>
+        </nav>
+
+        <header>
+            <span class="hero-badge">BACKEND NATIVO · NODE:HTTP + FS + EVENTEMITTER + TESTING</span>
+            <h1>Exhibición de Proyectos Node.js</h1>
+            <p class="subtitle">
+                Proyecto integrador de backend construido sin frameworks externos: servidor HTTP nativo, persistencia JSON, bitácora de auditoría NDJSON, bus de eventos y pruebas automatizadas con <code>node:test</code>.
+            </p>
+        </header>
+
+        <section>
+            <h2 class="section-title">⚙️ Aplicaciones Backend &amp; Full Stack <span class="count">1</span></h2>
+            <div class="grid">
+                <article class="card">
+                    <div>
+                        <div class="card-top">
+                            <span class="card-title">📋 Gestor de Tareas (API + UI)</span>
+                            <span class="card-tag">Node.js Nativo</span>
+                        </div>
+                        <p class="card-desc" style="margin-top:10px;">
+                            Aplicación completa con arquitectura modular (<code>server.js</code>, <code>tareas.js</code>, <code>storage.js</code>, <code>bus.js</code>), API REST nativa con <code>node:http</code>, persistencia en <code>tareas.json</code>, registro de auditoría en <code>eventos.ndjson</code> y suite de pruebas unitarias.
+                        </p>
+                        <div class="chips">
+                            <span class="chip">node:http</span>
+                            <span class="chip">fs/promises</span>
+                            <span class="chip">EventEmitter</span>
+                            <span class="chip">NDJSON</span>
+                            <span class="chip">node:test</span>
+                        </div>
+                    </div>
+
+                    <pre class="cmd-box">cd "NODE/Proyectos/Tareas"
+npm start
+npm test</pre>
+
+                    <div class="card-actions">
+                        <a class="btn btn-primary" href="Tareas/public/index.html">Abrir Interfaz →</a>
+                        <a class="btn" href="Tareas/Guia_Completa_Tareas_new.pdf">📄 Guía Completa PDF</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Marca el ámbito Node.js para respetar el filtro al navegar desde esta exhibición
+        try { sessionStorage.setItem('cursoProjectScope', 'node'); } catch (_) {}
+    </script>
+</body>
+</html>

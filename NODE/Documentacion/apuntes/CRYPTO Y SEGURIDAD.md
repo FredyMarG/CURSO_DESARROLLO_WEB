@@ -97,6 +97,26 @@ function verificarPassword(password, guardado) {
 
 ---
 
+## 5B. Cifrado simétrico autenticado (`AES-256-GCM`)
+
+Cuando sí necesitas **descifrar** un dato en el futuro (por ejemplo, guardar un token OAuth en base de datos), usa `createCipheriv('aes-256-gcm', clave, iv)` con una clave secreta de 32 bytes, un `iv` aleatorio único de 12 bytes y verifica siempre el `authTag` al descifrar:
+
+```js
+import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto';
+
+const clave = randomBytes(32);
+const iv = randomBytes(12);
+const cipher = createCipheriv('aes-256-gcm', clave, iv);
+const cifrado = Buffer.concat([cipher.update('secreto-oauth', 'utf8'), cipher.final()]);
+const tag = cipher.getAuthTag();
+
+const decipher = createDecipheriv('aes-256-gcm', clave, iv);
+decipher.setAuthTag(tag);
+const plano = Buffer.concat([decipher.update(cifrado), decipher.final()]).toString('utf8');
+```
+
+---
+
 ## 6. Buenas prácticas y errores comunes
 
 | Buena práctica | Error que evita |

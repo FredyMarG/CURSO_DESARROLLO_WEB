@@ -48,23 +48,23 @@
 
         // Inicializa el contexto de audio tras la primera acción del usuario
         init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición lógica
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa variable local
                 this.ctx = new AudioConstructor();
             }
         },
 
         // Sonido suave de transición entre diapositivas
         slide() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(320, now);
             osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
@@ -81,15 +81,15 @@
 
         // Sonido breve de clic para botones
         click() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'triangle';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(600, now);
             gain.gain.setValueAtTime(0.05, now);
@@ -103,15 +103,15 @@
 
         // Tono de confirmación cuando el Worker devuelve el resultado
         complete() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(520, now);
             osc.frequency.exponentialRampToValueAtTime(880, now + 0.16);
@@ -132,29 +132,29 @@
     const SlideNavigation = {
         // Inicializa referencias del DOM y eventos
         init() {
-            this.wrapper = document.getElementById('presentationWrapper');
-            this.slides = document.querySelectorAll('.slide');
-            this.progressBar = document.getElementById('progressBar');
-            this.slideIndicator = document.getElementById('slideIndicator');
+            this.wrapper = document.getElementById('presentationWrapper'); // Obtiene referencia al elemento del DOM
+            this.slides = document.querySelectorAll('.slide'); // Obtiene referencia al elemento del DOM
+            this.progressBar = document.getElementById('progressBar'); // Obtiene referencia al elemento del DOM
+            this.slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia al elemento del DOM
 
-            this.btnPrev = document.getElementById('btnPrevSlide');
-            this.btnNext = document.getElementById('btnNextSlide');
-            this.dotsContainer = document.getElementById('slideDotsContainer');
+            this.btnPrev = document.getElementById('btnPrevSlide'); // Obtiene referencia al elemento del DOM
+            this.btnNext = document.getElementById('btnNextSlide'); // Obtiene referencia al elemento del DOM
+            this.dotsContainer = document.getElementById('slideDotsContainer'); // Obtiene referencia al elemento del DOM
 
-            this.btnGoLab = document.getElementById('btnGoLab');
-            this.btnToggleMode = document.getElementById('btnToggleMode');
-            this.modeText = document.getElementById('modeText');
-            this.modeIcon = document.getElementById('modeIcon');
+            this.btnGoLab = document.getElementById('btnGoLab'); // Obtiene referencia al elemento del DOM
+            this.btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia al elemento del DOM
+            this.modeText = document.getElementById('modeText'); // Obtiene referencia al elemento del DOM
+            this.modeIcon = document.getElementById('modeIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnToggleSound = document.getElementById('btnToggleSound');
-            this.soundIcon = document.getElementById('soundIcon');
+            this.btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia al elemento del DOM
+            this.soundIcon = document.getElementById('soundIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnOverview = document.getElementById('btnOverview');
-            this.overviewModal = document.getElementById('overviewModal');
-            this.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.overviewGrid = document.getElementById('overviewGrid');
+            this.btnOverview = document.getElementById('btnOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewModal = document.getElementById('overviewModal'); // Obtiene referencia al elemento del DOM
+            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia al elemento del DOM
 
-            this.btnFullscreen = document.getElementById('btnFullscreen');
+            this.btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia al elemento del DOM
 
             this.buildSlideDots();
             this.buildOverviewGrid();
@@ -164,21 +164,21 @@
 
         // Construye los puntos de paginación inferiores
         buildSlideDots() {
-            if (!this.dotsContainer) return;
+            if (!this.dotsContainer) return; // Evalúa condición lógica
             this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const dot = document.createElement('button');
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const dot = document.createElement('button'); // Declara e inicializa variable local
                 dot.className = 'slide-dot';
                 dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
                 dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     dot.classList.add('active');
                 }
 
-                dot.addEventListener('click', () => {
+                dot.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                 });
@@ -189,18 +189,18 @@
 
         // Construye las miniaturas del modal de índice general
         buildOverviewGrid() {
-            if (!this.overviewGrid) return;
+            if (!this.overviewGrid) return; // Evalúa condición lógica
             this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa variable local
 
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Declara e inicializa variable local
                 card.className = 'overview-card';
                 card.dataset.slideIndex = slideNum;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     card.classList.add('active');
                 }
 
@@ -209,7 +209,7 @@
                     <div class="ov-title">${title}</div>
                 `;
 
-                card.addEventListener('click', () => {
+                card.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                     this.closeOverview();
@@ -221,64 +221,64 @@
 
         // Registra eventos de botones y teclado
         bindEvents() {
-            if (this.btnPrev) {
-                this.btnPrev.addEventListener('click', () => {
+            if (this.btnPrev) { // Evalúa condición lógica
+                this.btnPrev.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.prevSlide();
                 });
             }
 
-            if (this.btnNext) {
-                this.btnNext.addEventListener('click', () => {
+            if (this.btnNext) { // Evalúa condición lógica
+                this.btnNext.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.nextSlide();
                 });
             }
 
-            if (this.btnGoLab) {
-                this.btnGoLab.addEventListener('click', () => {
+            if (this.btnGoLab) { // Evalúa condición lógica
+                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(9);
                 });
             }
 
-            if (this.btnToggleMode) {
-                this.btnToggleMode.addEventListener('click', () => {
+            if (this.btnToggleMode) { // Evalúa condición lógica
+                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleViewMode();
                 });
             }
 
-            if (this.btnToggleSound) {
-                this.btnToggleSound.addEventListener('click', () => {
+            if (this.btnToggleSound) { // Evalúa condición lógica
+                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.toggleSound();
                 });
             }
 
-            if (this.btnOverview) {
-                this.btnOverview.addEventListener('click', () => {
+            if (this.btnOverview) { // Evalúa condición lógica
+                this.btnOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleOverview();
                 });
             }
 
-            if (this.btnCloseOverview) {
-                this.btnCloseOverview.addEventListener('click', () => {
+            if (this.btnCloseOverview) { // Evalúa condición lógica
+                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.closeOverview();
                 });
             }
 
-            if (this.overviewModal) {
-                this.overviewModal.addEventListener('click', (e) => {
-                    if (e.target === this.overviewModal) {
+            if (this.overviewModal) { // Evalúa condición lógica
+                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    if (e.target === this.overviewModal) { // Evalúa condición lógica
                         this.closeOverview();
                     }
                 });
             }
 
-            if (this.btnFullscreen) {
-                this.btnFullscreen.addEventListener('click', () => {
+            if (this.btnFullscreen) { // Evalúa condición lógica
+                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleFullscreen();
                 });
@@ -289,7 +289,7 @@
 
         // Procesa atajos de teclado ignorando campos de texto
         handleKeyDown(e) {
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición lógica
 
             switch (e.key) { // Evalúa múltiples casos
                 case 'ArrowRight':
@@ -319,7 +319,7 @@
                     this.toggleFullscreen();
                     break;
                 case 'Escape':
-                    if (AppState.overviewOpen) this.closeOverview();
+                    if (AppState.overviewOpen) this.closeOverview(); // Evalúa condición lógica
                     break;
                 case 'Home':
                     e.preventDefault();
@@ -335,21 +335,21 @@
         },
 
         goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
-            if (index === AppState.currentSlide) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición lógica
+            if (index === AppState.currentSlide) return; // Evalúa condición lógica
             AppState.currentSlide = index;
             SoundFX.slide();
             this.updateUI();
         },
 
         nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide + 1);
             }
         },
 
         prevSlide() {
-            if (AppState.currentSlide > 1) {
+            if (AppState.currentSlide > 1) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide - 1);
             }
         },
@@ -357,16 +357,16 @@
         toggleViewMode() {
             AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
 
-            if (AppState.viewMode === 'guide') {
+            if (AppState.viewMode === 'guide') { // Evalúa condición lógica
                 document.body.classList.remove('mode-presentation');
                 document.body.classList.add('mode-document');
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición lógica
             } else {
                 document.body.classList.remove('mode-document');
                 document.body.classList.add('mode-presentation');
-                if (this.modeText) this.modeText.textContent = 'Modo Guía';
-                if (this.modeIcon) this.modeIcon.textContent = '📑';
+                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición lógica
             }
 
             this.updateUI();
@@ -374,14 +374,14 @@
 
         toggleSound() {
             AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.soundIcon) {
+            if (this.soundIcon) { // Evalúa condición lógica
                 this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click();
+            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición lógica
         },
 
         toggleOverview() {
-            if (AppState.overviewOpen) {
+            if (AppState.overviewOpen) { // Evalúa condición lógica
                 this.closeOverview();
             } else {
                 this.openOverview();
@@ -390,21 +390,21 @@
 
         openOverview() {
             AppState.overviewOpen = true;
-            if (this.overviewModal) this.overviewModal.classList.add('active');
-            const cards = document.querySelectorAll('.overview-card');
+            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición lógica
+            const cards = document.querySelectorAll('.overview-card'); // Declara e inicializa variable local
             cards.forEach(card => {
-                const idx = parseInt(card.dataset.slideIndex, 10);
+                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa variable local
                 card.classList.toggle('active', idx === AppState.currentSlide);
             });
         },
 
         closeOverview() {
             AppState.overviewOpen = false;
-            if (this.overviewModal) this.overviewModal.classList.remove('active');
+            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición lógica
         },
 
         toggleFullscreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Evalúa condición lógica
                 document.documentElement.requestFullscreen().catch(() => {});
             } else if (document.exitFullscreen) {
                 document.exitFullscreen().catch(() => {});
@@ -412,10 +412,10 @@
         },
 
         updateUI() {
-            if (AppState.viewMode === 'slides') {
+            if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                 this.slides.forEach((slide, index) => {
-                    const slideNum = index + 1;
-                    if (slideNum === AppState.currentSlide) {
+                    const slideNum = index + 1; // Declara e inicializa variable local
+                    if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                         slide.classList.add('active');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
@@ -426,23 +426,23 @@
                 this.slides.forEach(slide => slide.classList.add('active'));
             }
 
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa variable local
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición lógica
 
-            if (this.slideIndicator) {
+            if (this.slideIndicator) { // Evalúa condición lógica
                 this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            const dots = document.querySelectorAll('.slide-dot');
+            const dots = document.querySelectorAll('.slide-dot'); // Declara e inicializa variable local
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
             });
 
-            if (this.btnPrev) {
+            if (this.btnPrev) { // Evalúa condición lógica
                 this.btnPrev.disabled = AppState.currentSlide === 1;
                 this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
             }
-            if (this.btnNext) {
+            if (this.btnNext) { // Evalúa condición lógica
                 this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
                 this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
             }
@@ -456,19 +456,19 @@
     const WWLabController = {
         // Inicializa referencias del DOM y vincula controles
         init() {
-            this.banner = document.getElementById('wwStatusBanner');
-            this.statusText = document.getElementById('wwStatusText');
-            this.badgeState = document.getElementById('wwBadgeState');
+            this.banner = document.getElementById('wwStatusBanner'); // Obtiene referencia al elemento del DOM
+            this.statusText = document.getElementById('wwStatusText'); // Obtiene referencia al elemento del DOM
+            this.badgeState = document.getElementById('wwBadgeState'); // Obtiene referencia al elemento del DOM
 
-            this.uiClicksEl = document.getElementById('wwUiClicks');
-            this.workerResultEl = document.getElementById('wwWorkerResult');
-            this.elapsedTimeEl = document.getElementById('wwElapsedTime');
+            this.uiClicksEl = document.getElementById('wwUiClicks'); // Obtiene referencia al elemento del DOM
+            this.workerResultEl = document.getElementById('wwWorkerResult'); // Obtiene referencia al elemento del DOM
+            this.elapsedTimeEl = document.getElementById('wwElapsedTime'); // Obtiene referencia al elemento del DOM
 
-            this.btnStart = document.getElementById('btnStartWorker');
-            this.btnTestUi = document.getElementById('btnTestUiFluency');
-            this.btnTerminate = document.getElementById('btnTerminateWorker');
-            this.btnClearLogs = document.getElementById('btnClearWwLogs');
-            this.terminal = document.getElementById('wwLogTerminal');
+            this.btnStart = document.getElementById('btnStartWorker'); // Obtiene referencia al elemento del DOM
+            this.btnTestUi = document.getElementById('btnTestUiFluency'); // Obtiene referencia al elemento del DOM
+            this.btnTerminate = document.getElementById('btnTerminateWorker'); // Obtiene referencia al elemento del DOM
+            this.btnClearLogs = document.getElementById('btnClearWwLogs'); // Obtiene referencia al elemento del DOM
+            this.terminal = document.getElementById('wwLogTerminal'); // Obtiene referencia al elemento del DOM
 
             this.bindControls();
         },
@@ -477,8 +477,8 @@
         createWorkerInstance() {
             try { // Inicia bloque protegido contra errores
                 // Si estamos bajo protocolo http/https usamos el archivo externo worker.js directamente
-                if (window.location.protocol !== 'file:') {
-                    return new Worker('worker.js', { name: 'worker-calculo-intensivo' });
+                if (window.location.protocol !== 'file:') { // Evalúa condición lógica
+                    return new Worker('worker.js', { name: 'worker-calculo-intensivo' }); // Retorna el resultado de la función
                 }
             } catch (_) {
                 // Si falla por seguridad local, continuamos hacia el respaldo con Blob
@@ -495,51 +495,51 @@
                     self.postMessage(suma);
                 };
             `;
-            const blob = new Blob([workerCode], { type: 'application/javascript' });
-            const blobUrl = URL.createObjectURL(blob);
-            return new Worker(blobUrl, { name: 'worker-calculo-blob' });
+            const blob = new Blob([workerCode], { type: 'application/javascript' }); // Declara e inicializa variable local
+            const blobUrl = URL.createObjectURL(blob); // Declara e inicializa variable local
+            return new Worker(blobUrl, { name: 'worker-calculo-blob' }); // Retorna el resultado de la función
         },
 
         // Vincula los eventos de los botones del laboratorio
         bindControls() {
             // Botón para probar que la interfaz nunca se congela durante el cálculo
-            if (this.btnTestUi) {
-                this.btnTestUi.addEventListener('click', () => {
+            if (this.btnTestUi) { // Evalúa condición lógica
+                this.btnTestUi.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     AppState.wwLab.uiClicks++;
-                    if (this.uiClicksEl) this.uiClicksEl.textContent = AppState.wwLab.uiClicks;
+                    if (this.uiClicksEl) this.uiClicksEl.textContent = AppState.wwLab.uiClicks; // Evalúa condición lógica
                 });
             }
 
             // Botón para iniciar el cálculo pesado en el Web Worker
-            if (this.btnStart) {
-                this.btnStart.addEventListener('click', () => {
+            if (this.btnStart) { // Evalúa condición lógica
+                this.btnStart.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
 
-                    if (typeof window.Worker === 'undefined') {
+                    if (typeof window.Worker === 'undefined') { // Evalúa condición lógica
                         this.log('❌ Tu navegador no soporta Web Workers.');
-                        return;
+                        return; // Retorna el resultado de la función
                     }
 
                     // Si existía un worker previo, lo limpiamos antes de crear uno nuevo
                     this.cleanupWorker();
 
                     // Actualizamos interfaz al estado de ejecución
-                    if (this.banner) this.banner.className = 'ww-status-banner is-running';
-                    if (this.statusText) this.statusText.textContent = 'Calculando 500,000,000 iteraciones en hilo secundario...';
-                    if (this.badgeState) {
+                    if (this.banner) this.banner.className = 'ww-status-banner is-running'; // Evalúa condición lógica
+                    if (this.statusText) this.statusText.textContent = 'Calculando 500,000,000 iteraciones en hilo secundario...'; // Evalúa condición lógica
+                    if (this.badgeState) { // Evalúa condición lógica
                         this.badgeState.textContent = 'Ejecutando ⚙️'; // Actualiza contenido en el DOM
                         this.badgeState.className = 'badge badge-cyan';
                     }
-                    if (this.workerResultEl) this.workerResultEl.textContent = 'Calculando...';
-                    if (this.elapsedTimeEl) this.elapsedTimeEl.textContent = '...';
+                    if (this.workerResultEl) this.workerResultEl.textContent = 'Calculando...'; // Evalúa condición lógica
+                    if (this.elapsedTimeEl) this.elapsedTimeEl.textContent = '...'; // Evalúa condición lógica
 
                     this.btnStart.disabled = true;
-                    if (this.btnTerminate) this.btnTerminate.disabled = false;
+                    if (this.btnTerminate) this.btnTerminate.disabled = false; // Evalúa condición lógica
 
                     // Creamos el worker y guardamos el tiempo de inicio
                     AppState.wwLab.startTime = performance.now();
-                    const worker = this.createWorkerInstance();
+                    const worker = this.createWorkerInstance(); // Declara e inicializa variable local
                     AppState.wwLab.worker = worker;
 
                     this.log('🚀 [main.js -> worker] postMessage({ iteraciones: 500000000 }) enviado.');
@@ -547,15 +547,15 @@
 
                     // Escuchamos la respuesta final del hilo secundario
                     worker.onmessage = (e) => {
-                        const elapsed = Math.round(performance.now() - AppState.wwLab.startTime);
-                        if (this.banner) this.banner.className = 'ww-status-banner is-done';
-                        if (this.statusText) this.statusText.textContent = 'Cálculo completado sin congelar el Main Thread.';
-                        if (this.badgeState) {
+                        const elapsed = Math.round(performance.now() - AppState.wwLab.startTime); // Declara e inicializa variable local
+                        if (this.banner) this.banner.className = 'ww-status-banner is-done'; // Evalúa condición lógica
+                        if (this.statusText) this.statusText.textContent = 'Cálculo completado sin congelar el Main Thread.'; // Evalúa condición lógica
+                        if (this.badgeState) { // Evalúa condición lógica
                             this.badgeState.textContent = 'Completado ✅'; // Actualiza contenido en el DOM
                             this.badgeState.className = 'badge badge-emerald';
                         }
-                        if (this.workerResultEl) this.workerResultEl.textContent = e.data.toLocaleString('es-ES');
-                        if (this.elapsedTimeEl) this.elapsedTimeEl.textContent = `${elapsed} ms`;
+                        if (this.workerResultEl) this.workerResultEl.textContent = e.data.toLocaleString('es-ES'); // Evalúa condición lógica
+                        if (this.elapsedTimeEl) this.elapsedTimeEl.textContent = `${elapsed} ms`; // Evalúa condición lógica
 
                         SoundFX.complete();
                         this.log(`📥 [onmessage] Resultado recibido en ${elapsed} ms: ${e.data.toLocaleString('es-ES')}`);
@@ -564,8 +564,8 @@
 
                     // Capturamos posibles errores del worker
                     worker.onerror = (err) => {
-                        if (this.banner) this.banner.className = 'ww-status-banner';
-                        if (this.statusText) this.statusText.textContent = `Error en worker: ${err.message}`;
+                        if (this.banner) this.banner.className = 'ww-status-banner'; // Evalúa condición lógica
+                        if (this.statusText) this.statusText.textContent = `Error en worker: ${err.message}`; // Evalúa condición lógica
                         this.log(`❌ [onerror] Fallo en el hilo secundario: ${err.message}`);
                         this.cleanupWorker();
                     };
@@ -573,28 +573,28 @@
             }
 
             // Botón para abortar manualmente el worker con terminate()
-            if (this.btnTerminate) {
-                this.btnTerminate.addEventListener('click', () => {
+            if (this.btnTerminate) { // Evalúa condición lógica
+                this.btnTerminate.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (AppState.wwLab.worker) {
+                    if (AppState.wwLab.worker) { // Evalúa condición lógica
                         this.cleanupWorker();
-                        if (this.banner) this.banner.className = 'ww-status-banner';
-                        if (this.statusText) this.statusText.textContent = 'Worker destruido manualmente con terminate().';
-                        if (this.badgeState) {
+                        if (this.banner) this.banner.className = 'ww-status-banner'; // Evalúa condición lógica
+                        if (this.statusText) this.statusText.textContent = 'Worker destruido manualmente con terminate().'; // Evalúa condición lógica
+                        if (this.badgeState) { // Evalúa condición lógica
                             this.badgeState.textContent = 'Terminado 🛑'; // Actualiza contenido en el DOM
                             this.badgeState.className = 'badge badge-purple';
                         }
-                        if (this.workerResultEl) this.workerResultEl.textContent = 'Abortado';
+                        if (this.workerResultEl) this.workerResultEl.textContent = 'Abortado'; // Evalúa condición lógica
                         this.log('🛑 [worker.terminate()] Hilo secundario destruido inmediatamente.');
                     }
                 });
             }
 
             // Botón para limpiar el terminal del laboratorio
-            if (this.btnClearLogs) {
-                this.btnClearLogs.addEventListener('click', () => {
+            if (this.btnClearLogs) { // Evalúa condición lógica
+                this.btnClearLogs.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (this.terminal) {
+                    if (this.terminal) { // Evalúa condición lógica
                         this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
                         this.log('🧹 Terminal de eventos limpiado.');
                     }
@@ -604,26 +604,26 @@
 
         // Termina la instancia activa del worker y restablece los botones
         cleanupWorker() {
-            if (AppState.wwLab.worker) {
+            if (AppState.wwLab.worker) { // Evalúa condición lógica
                 AppState.wwLab.worker.terminate();
                 AppState.wwLab.worker = null;
             }
-            if (this.btnStart) this.btnStart.disabled = false;
-            if (this.btnTerminate) this.btnTerminate.disabled = true;
+            if (this.btnStart) this.btnStart.disabled = false; // Evalúa condición lógica
+            if (this.btnTerminate) this.btnTerminate.disabled = true; // Evalúa condición lógica
         },
 
         // Registra una línea con marca temporal en el terminal
         log(message) {
-            if (!this.terminal) return;
+            if (!this.terminal) return; // Evalúa condición lógica
 
-            const now = new Date();
+            const now = new Date(); // Declara e inicializa variable local
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
             ].join(':');
 
-            const line = document.createElement('div');
+            const line = document.createElement('div'); // Declara e inicializa variable local
             line.className = 'ww-log-line';
             line.innerHTML = `
                 <span class="ww-log-time">[${timeStr}]</span>
@@ -638,14 +638,15 @@
     /* ==========================================================================
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
-    function startApplication() {
+    function startApplication() { // Define función reutilizable
         SlideNavigation.init();
         WWLabController.init();
     }
 
-    if (document.readyState === 'loading') {
+    if (document.readyState === 'loading') { // Evalúa condición lógica
         document.addEventListener('DOMContentLoaded', startApplication);
     } else {
         startApplication();
     }
 })();
+

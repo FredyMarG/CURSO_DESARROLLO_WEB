@@ -31,7 +31,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -72,7 +72,7 @@
                         <h3>3. Promesas y async/await</h3>
                         <p><code>Promise.all</code>, <code>allSettled</code>, <code>try/catch</code> y concurrencia.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Observa el orden de colas y ejecuta lotes concurrentes en vivo.</p>
@@ -200,8 +200,115 @@ async function comparar() {
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Asincronía">
+<!-- SLIDE 7: MICROTASKS VS MACROTASKS -->
+        <section class="slide" data-slide="7" data-title="Microtasks vs Macrotasks en Event Loop">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · PRIORIDADES DEL EVENT LOOP</span>
+                <h2 class="slide-title"><em>Microtasks</em> (<code>Promise</code>) vs <em>Macrotasks</em> (<code>setTimeout</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    El Event Loop no vacía todas las colas por igual: primero termina el código síncrono, luego vacía <strong>toda</strong> la cola de <em>microtasks</em> (promesas y <code>queueMicrotask</code>), y recién después pasa al siguiente temporizador o E/S:
+                </p>
+                <pre class="code-block"><code>console.log('1: Síncrono inicio');
+setTimeout(() => console.log('4: Macrotask (setTimeout 0)'), 0);
+Promise.resolve().then(() => console.log('3: Microtask (Promise)'));
+console.log('2: Síncrono fin');
+// Orden garantizado: 1 -> 2 -> 3 -> 4</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: ERRORES COMUNES EN ASINCRONÍA -->
+        <section class="slide" data-slide="8" data-title="Errores Comunes en Código Asíncrono">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · DIAGNÓSTICO Y SEGURIDAD</span>
+                <h2 class="slide-title">3 Errores Clásicos con Promesas y <code>async/await</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Detectar estos antipatrones te ahorra fugas silenciosas y cuellos de botella en servidores Node.js:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Antipatrón</th><th>Solución correcta</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>forEach(async x => await ...)</code></td><td><code>for (const x of lista)</code> (secuencial) o <code>Promise.all(lista.map(...))</code> (concurrente)</td></tr>
+                        <tr><td><code>await</code> en bucle cuando son independientes</td><td>Lanzar en paralelo con <code>Promise.all()</code> / <code>Promise.allSettled()</code></td></tr>
+                        <tr><td>Promesa rechazada sin <code>catch</code></td><td>Envolver <code>await</code> en <code>try/catch</code> para evitar <code>UnhandledPromiseRejection</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: TABLA MAESTRA DE COMBINADORES -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos: Combinadores de Promesas">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title"><code>Promise.all</code> vs <code>allSettled</code> vs <code>race</code> vs <code>any</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Elegir el combinador adecuado define cómo reacciona tu servidor cuando una de varias tareas externas tarda o falla:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Método</th><th>Cuándo se resuelve</th><th>Cuándo falla</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>Promise.all([...])</code></td><td>Cuando <strong>todas</strong> cumplen</td><td>Apenas <strong>una</strong> rechaza</td></tr>
+                        <tr><td><code>Promise.allSettled([...])</code></td><td>Siempre, cuando todas terminan</td><td>Nunca (devuelve <code>fulfilled</code> / <code>rejected</code>)</td></tr>
+                        <tr><td><code>Promise.race([...])</code></td><td>Con la primera en terminar (éxito o fallo)</td><td>Si la más rápida rechaza</td></tr>
+                        <tr><td><code>Promise.any([...])</code></td><td>Con la primera que <strong>cumpla</strong> con éxito</td><td>Solo si <strong>todas</strong> fallan (<code>AggregateError</code>)</td></tr>
+                    </tbody>
+                </table>
+                <div class="tip-box" style="margin-top:12px;">
+                    <strong>🌐 <code>fetch()</code> nativo + timeout en Node.js 20+:</strong> Node ya incluye <code>fetch()</code> en el backend. Para evitar peticiones colgadas usa <code>AbortSignal.timeout(3000)</code>:
+                    <code>await fetch(url, { signal: AbortSignal.timeout(3000) })</code>.
+                </div>
+            </div>
+        </section>
+
+<!-- SLIDE 10: ABORTCONTROLLER Y TIMEOUTS -->
+        <section class="slide" data-slide="10" data-title="Cancelación con AbortController">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CONTROL DE PETICIONES LENTAS</span>
+                <h2 class="slide-title">Cancelar Tareas y <code>fetch()</code> con <code>AbortController</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En producción nunca debes dejar una petición externa esperando indefinidamente. Con <code>AbortController</code> o <code>AbortSignal.timeout(ms)</code> cancelas la operación automáticamente si tarda demasiado:
+                </p>
+                <pre class="code-block"><code>try {
+  const res = await fetch('https://api.ejemplo.dev/datos', {
+    signal: AbortSignal.timeout(2500) // Aborta tras 2.5 segundos
+  });
+  console.log(await res.json());
+} catch (err) {
+  console.error('Cancelado o fallido:', err.name);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE ASINCRONÍA -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de Asincronía">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave de Asincronía</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Pon a prueba tu comprensión del Event Loop, promesas y concurrencia:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes aplicar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Convertir un callback <code>(err, data)</code> a Promesa</td><td><code>new Promise((res, rej) => ...)</code></td></tr>
+                        <tr><td>2. Ejecutar 3 tareas de 200ms en ~200ms totales</td><td><code>await Promise.all([...])</code></td></tr>
+                        <tr><td>3. Obtener éxitos aunque una promesa falle</td><td><code>await Promise.allSettled([...])</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Asincronía">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · EVENT LOOP Y CONCURRENCIA</span>
                 <h2 class="slide-title">🎛️ Simulador de Colas y Tareas Concurrentes</h2>
@@ -225,10 +332,10 @@ async function comparar() {
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: Asincronía">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Asincronía">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Asincronía en Node.js</h2>
             </div>
             <div class="quiz-container">
@@ -266,10 +373,10 @@ async function comparar() {
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Asincronía">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Asincronía">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Asincronía</h2>
             </div>
             <div class="lab-panel">

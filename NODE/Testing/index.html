@@ -1,0 +1,450 @@
+<!doctype html>
+<!-- Módulo 14 de Node.js: Testing Nativo con node:test y node:assert/strict -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Módulo 14: Testing Nativo en Node.js — node:test, node:assert/strict, describe/it, mkdtemp, t.mock y cobertura sin librerías externas." />
+    <title>Testing Nativo (node:test) — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">NODE.JS · TESTING NATIVO</span>
+            <div class="brand-title"><span>🧪</span><span>Testing con node:test</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Testing Nativo">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">Módulo 14 · node:test</span>
+                    <span class="badge badge-cyan">node:assert/strict · AAA</span>
+                    <span class="badge badge-purple">t.mock · mkdtemp · coverage</span>
+                </div>
+                <h1 class="hero-title">Testing Nativo<br /><span class="gradient-text">con node:test</span></h1>
+                <p class="hero-subtitle">
+                    Asegura la calidad de tu backend sin instalar frameworks pesados: domina <code>node:test</code>, aserciones estrictas con <code>node:assert/strict</code>, pruebas asíncronas, aislamiento en carpetas temporales y <em>mocks</em> nativos.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🧪</div>
+                        <h3>1. node:test y assert</h3>
+                        <p>Pruebas nativas y aserciones estrictas (<code>===</code>).</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">⚡</div>
+                        <h3>2. Async y Errores</h3>
+                        <p><code>assert.throws</code>, <code>assert.rejects</code> y patrón AAA.</p>
+                    </div>
+                    <div class="hero-card" data-jump="6">
+                        <div class="hero-card-icon">🎭</div>
+                        <h3>3. Aislamiento y Mocks</h3>
+                        <p><code>mkdtemp</code>, <code>t.after()</code> y espías <code>t.mock.fn()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Practica aserciones y ciclo AAA en vivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: POR QUÉ NODE:TEST -->
+        <section class="slide" data-slide="2" data-title="¿Por qué usar node:test?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · TESTING SIN DEPENDENCIAS</span>
+                <h2 class="slide-title">¿Por qué Usar <code>node:test</code> y <code>node:assert/strict</code>?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Node.js incluye su propio corredor de pruebas nativo. Ejecuta archivos <code>*.test.js</code> en paralelo, soporta ES Modules y <code>async/await</code> sin configurar Babel ni instalar cientos de paquetes:
+                </p>
+                <pre class="code-block"><code>import test from 'node:test';
+import assert from 'node:assert/strict';
+
+test('calcula el total con IVA incluido', () => {
+  const total = 100 * 1.19;
+  assert.equal(total, 119);
+});
+// En consola: node --test  |  Modo continuo: node --test --watch</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: ASERCIONES ESTRICTAS -->
+        <section class="slide" data-slide="3" data-title="Aserciones con assert/strict">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · COMPARACIONES SEGURAS</span>
+                <h2 class="slide-title"><code>equal</code> vs <code>deepEqual</code> vs <code>ok</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Importa siempre <code>node:assert/strict</code> (nunca el modo antiguo no estricto) para evitar que <code>1 == '1'</code> pase por válido. Usa cada aserción según el tipo de dato:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Aserción</th><th>Cuándo usarla</th><th>Ejemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>assert.equal(a, b)</code></td><td>Números, strings y booleanos</td><td><code>assert.equal(res.status, 200)</code></td></tr>
+                        <tr><td><code>assert.deepEqual(a, b)</code></td><td>Objetos y arreglos por contenido</td><td><code>assert.deepEqual(lista, [1, 2])</code></td></tr>
+                        <tr><td><code>assert.ok(val)</code></td><td>Comprobar que existe o es verdadero</td><td><code>assert.ok(tarea.id)</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: PROBAR ERRORES SÍNCRONOS Y ASÍNCRONOS -->
+        <section class="slide" data-slide="4" data-title="Probar Errores: throws y rejects">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · VALIDACIÓN DE FALLOS</span>
+                <h2 class="slide-title"><code>assert.throws()</code> vs <code>assert.rejects()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Probar solo el "camino feliz" no basta: debes verificar que tus validaciones rechacen entradas inválidas. Usa <code>throws</code> para funciones síncronas y <code>await assert.rejects()</code> para funciones <code>async</code>:
+                </p>
+                <pre class="code-block"><code>// 1) Síncrono: pasa una función envolvente () => ...
+assert.throws(() => validarEdad(-5), RangeError);
+
+// 2) Asíncrono: espera la promesa con await
+await assert.rejects(
+  () => crearTarea('   '),
+  (err) => err.code === 'validation'
+);</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: SUITES Y HOOKS -->
+        <section class="slide" data-slide="5" data-title="describe, it y Hooks">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · ORGANIZACIÓN DE PRUEBAS</span>
+                <h2 class="slide-title">Suites (<code>describe</code>/<code>it</code>) y Hooks (<code>beforeEach</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Cuando un archivo prueba muchas funciones de un mismo módulo, agrúpalas con <code>describe()</code> e <code>it()</code> y reinicia datos compartidos antes de cada prueba con <code>beforeEach()</code>:
+                </p>
+                <pre class="code-block"><code>import { describe, it, beforeEach } from 'node:test';
+import assert from 'node:assert/strict';
+
+describe('Repositorio en memoria', () => {
+  let db;
+  beforeEach(() => { db = []; });
+
+  it('inicia vacío y agrega 1 elemento', () => {
+    db.push({ id: 1 });
+    assert.equal(db.length, 1);
+  });
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: AISLAMIENTO CON MKDTEMP -->
+        <section class="slide" data-slide="6" data-title="Pruebas Aisladas con mkdtemp">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ARCHIVOS TEMPORALES</span>
+                <h2 class="slide-title">Aislar Pruebas de Disco con <code>mkdtemp()</code> y <code>t.after()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Nunca ensucies tus archivos reales en <code>data/</code> al correr tests. Crea una carpeta temporal única en <code>os.tmpdir()</code> y bórrala automáticamente al terminar la prueba con <code>t.after()</code>:
+                </p>
+                <pre class="code-block"><code>test('escribe sin tocar data/ real', async (t) => {
+  const dir = await mkdtemp(path.join(os.tmpdir(), 'app-test-'));
+  t.after(() => rm(dir, { recursive: true, force: true }));
+
+  const ruta = path.join(dir, 'tareas.json');
+  await writeFile(ruta, '[]', 'utf8');
+  assert.equal(await readFile(ruta, 'utf8'), '[]');
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: MOCKS NATIVOS -->
+        <section class="slide" data-slide="7" data-title="Mocks Nativos con t.mock">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · SIMULACIÓN DE DEPENDENCIAS</span>
+                <h2 class="slide-title">Espías y <em>Mocks</em> Nativos con <code>t.mock.fn()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si quieres verificar que una función llamó a un servicio externo (ej. enviar un email) sin enviarlo de verdad durante el test, usa <code>t.mock.fn()</code> e inspecciona <code>mock.callCount()</code> y <code>mock.calls</code>:
+                </p>
+                <pre class="code-block"><code>test('envía bienvenida 1 vez', (t) => {
+  const enviarEmail = t.mock.fn((to) => `OK:${to}`);
+  registrarUsuario('ana@dev.io', enviarEmail);
+
+  assert.equal(enviarEmail.mock.callCount(), 1);
+  assert.deepEqual(enviarEmail.mock.calls[0].arguments, ['ana@dev.io']);
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: PATRÓN AAA Y COBERTURA -->
+        <section class="slide" data-slide="8" data-title="Patrón AAA y Cobertura">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · ESTRUCTURA Y MÉTRICAS</span>
+                <h2 class="slide-title">Patrón <strong>AAA</strong> y Cobertura Nativa de Código</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Toda prueba clara sigue tres pasos: <strong>Arrange</strong> (preparar datos), <strong>Act</strong> (ejecutar) y <strong>Assert</strong> (comprobar). Además, Node.js mide qué porcentaje de tu código cubren los tests:
+                </p>
+                <pre class="code-block"><code># Ejecutar todas las pruebas con reporte de cobertura nativo
+node --test --experimental-test-coverage</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos de Testing">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">Buenas Prácticas y Errores Comunes al Testear</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Evita pruebas frágiles siguiendo estas 4 reglas de oro:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Buena práctica</th><th>Error que evita</th></tr></thead>
+                    <tbody>
+                        <tr><td>Usar <code>node:assert/strict</code> siempre</td><td>Falsos positivos por coerción <code>==</code></td></tr>
+                        <tr><td>Hacer <code>await assert.rejects(...)</code></td><td>Que la prueba termine antes de que la promesa falle</td></tr>
+                        <tr><td>Aislar archivos con <code>mkdtemp()</code></td><td>Corromper datos reales o fallar por estado previo</td></tr>
+                        <tr><td>No compartir estado mutable entre tests</td><td>Pruebas que pasan solas pero fallan juntas</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: MOCK DE TEMPORIZADORES Y FECHAS -->
+        <section class="slide" data-slide="10" data-title="Simular Tiempo con t.mock.timers">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · TESTS INSTANTÁNEOS</span>
+                <h2 class="slide-title">Simular Relojes y <code>setTimeout</code> con <code>t.mock.timers</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si una función expira un token tras 60 segundos, no quieres que tu test tarde 60 segundos reales. Con <code>t.mock.timers</code> adelantas el reloj virtual al instante:
+                </p>
+                <pre class="code-block"><code>test('expira el token tras 60s al instante', (t) => {
+  t.mock.timers.enable({ apis: ['setTimeout'] });
+  let expirado = false;
+  setTimeout(() => { expirado = true; }, 60_000);
+  t.mock.timers.tick(60_000); // Avanza 60s virtuales en 0 ms
+  assert.equal(expirado, true);
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE TESTING -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de node:test">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave con <code>node:test</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Practica pruebas unitarias y de integración sin dependencias externas:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes verificar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Probar una función pura y un error</td><td><code>assert.equal()</code> + <code>assert.throws()</code></td></tr>
+                        <tr><td>2. Probar lectura/escritura JSON aislada</td><td><code>mkdtemp()</code> + <code>t.after(() => rm(...))</code></td></tr>
+                        <tr><td>3. Probar un endpoint <code>GET</code> de <code>node:http</code></td><td><code>server.listen(0)</code> + <code>await fetch(...)</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Testing">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:TEST &amp; ASSERT</span>
+                <h2 class="slide-title">🎛️ Simulador de Aserciones y Ciclo AAA</h2>
+                <p class="slide-lead">Compara qué aserción elegir para valores simples, objetos, errores síncronos, promesas y mocks.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Caso de prueba</label>
+                        <select id="testSimMode">
+                            <option value="equal">assert.equal vs assert.deepEqual</option>
+                            <option value="rejects">assert.throws vs assert.rejects</option>
+                            <option value="mock">Espías con t.mock.fn()</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="testSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="testSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Testing Nativo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de <code>node:test</code></h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Correcto: assert.deepEqual compara propiedades y elementos internos de objetos y arreglos." data-err="assert.equal compara referencias (===); para objetos/arreglos debes usar assert.deepEqual.">
+                    <div class="quiz-q-title">1. ¿Qué método de <code>node:assert/strict</code> compara dos objetos distintos con las mismas propiedades?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">assert.equal(a, b)</button>
+                        <button class="quiz-option" data-opt="b">assert.deepEqual(a, b)</button>
+                        <button class="quiz-option" data-opt="c">assert.ok(a, b)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Exacto: await assert.rejects() espera y verifica el rechazo de una función asíncrona." data-err="Para promesas o funciones async se usa await assert.rejects().">
+                    <div class="quiz-q-title">2. ¿Cómo verificas que una función <code>async</code> rechace con un error esperado?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">assert.throws(fn)</button>
+                        <button class="quiz-option" data-opt="b">assert.equal(fn(), Error)</button>
+                        <button class="quiz-option" data-opt="c">await assert.rejects(fn, Error)</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: t.after() garantiza la limpieza de la carpeta temporal incluso si la prueba falla." data-err="t.after() registra una limpieza que corre al finalizar la prueba.">
+                    <div class="quiz-q-title">3. ¿Qué hook de contexto asegura borrar una carpeta temporal <code>mkdtemp</code> aunque falle la aserción?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">t.after()</button>
+                        <button class="quiz-option" data-opt="b">process.exit(0)</button>
+                        <button class="quiz-option" data-opt="c">assert.ok()</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Mini Test Runner">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio: Mini Corredor AAA en Vivo</h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Mini corredor estilo node:test + assert/strict en el navegador
+  const results = [];
+  function test(nombre, fn) {
+    try { fn(); results.push(`✔ ${nombre}`); }
+    catch (e) { results.push(`✖ ${nombre} -> ${e.message}`); }
+  }
+  const equal = (a, b) =&gt; { if (!Object.is(a, b)) throw new Error(`${a} !== ${b}`); };
+
+  const sumar = (a, b) =&gt; a + b;
+  test(&#x27;sumar(2, 3) === 5&#x27;, () =&gt; equal(sumar(2, 3), 5));
+  test(&#x27;detecta fallo intencional&#x27;, () =&gt; equal(sumar(2, 2), 5));
+
+  document.getElementById(&#x27;out&#x27;).innerHTML = results.map(r =&gt; `&lt;div&gt;${r}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;">Mini Test Runner (AAA)</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Mini corredor estilo node:test + assert/strict en el navegador
+  const results = [];
+  function test(nombre, fn) {
+    try { fn(); results.push(`✔ ${nombre}`); }
+    catch (e) { results.push(`✖ ${nombre} -> ${e.message}`); }
+  }
+  const equal = (a, b) =&gt; { if (!Object.is(a, b)) throw new Error(`${a} !== ${b}`); };
+
+  const sumar = (a, b) =&gt; a + b;
+  test(&#x27;sumar(2, 3) === 5&#x27;, () =&gt; equal(sumar(2, 3), 5));
+  test(&#x27;detecta fallo intencional&#x27;, () =&gt; equal(sumar(2, 2), 5));
+
+  document.getElementById(&#x27;out&#x27;).innerHTML = results.map(r =&gt; `&lt;div&gt;${r}&lt;/div&gt;`).join(&#x27;&#x27;);
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de aserciones -->
+    <script>
+        // IIFE para aislar el estado del simulador en el ámbito local
+        (function () {
+            // Referencias al selector, escenario visual y bloque de código
+            const mode = document.getElementById('testSimMode');
+            const stage = document.getElementById('testSimStage');
+            const code = document.getElementById('testSimCode');
+            // Guarda defensiva por si faltara algún elemento
+            if (!mode || !stage || !code) return;
+
+            // Actualiza el ejemplo y la explicación según la aserción seleccionada
+            function update() {
+                if (mode.value === 'equal') {
+                    // Caso 1: comparación estricta de primitivos vs comparación profunda de objetos
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">assert.equal(a, b) usa === para primitivos</div>
+                        <div style="color:#38bdf8;">assert.deepEqual(obj1, obj2) compara objetos y arreglos por valor.</div>
+                    `;
+                    code.textContent = `assert.equal(2 + 2, 4);\nassert.deepEqual({ ok: true }, { ok: true });`;
+                } else if (mode.value === 'rejects') {
+                    // Caso 2: verificación de errores síncronos y promesas rechazadas
+                    stage.innerHTML = `
+                        <div style="color:#fbbf24;">assert.throws(() => fn()) -> funciones síncronas</div>
+                        <div style="color:#00ff88;font-weight:700;">await assert.rejects(() => asyncFn()) -> promesas y async/await</div>
+                    `;
+                    code.textContent = `await assert.rejects(() => crear(''), { code: 'validation' });`;
+                } else {
+                    // Caso 3: espías y mocks nativos sin librerías externas
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">t.mock.fn() registra llamadas y argumentos sin efectos reales</div>
+                        <div style="color:#38bdf8;">Útil para simular emails, relojes o llamadas HTTP.</div>
+                    `;
+                    code.textContent = `const spy = t.mock.fn();\nspy('hola');\nassert.equal(spy.mock.callCount(), 1);`;
+                }
+            }
+
+            // Escucha cambios en el selector y muestra la vista inicial
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

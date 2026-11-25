@@ -207,6 +207,7 @@ Un archivo JSON gigante (`[ {...}, {...} ]`) obliga a cargarlo entero en memoria
 3. **Valida la estructura tras parsear:** Que sea JSON válido no significa que tenga los campos esperados; valida tipos o usa un validador (como Zod o AJV).
 4. **Limita el tamaño del payload en APIs:** Un JSON de decenas de megabytes bloquea el hilo principal durante `JSON.parse()`.
 5. **No serialices secretos:** Usa `replacer` o `.toJSON()` para excluir contraseñas, tokens o claves privadas.
+6. **Usa `structuredClone()` para clonar objetos en memoria:** No uses `JSON.parse(JSON.stringify(obj))` como clonador porque convierte `Date` en string, vacía `Map`/`Set` y falla con referencias circulares. `structuredClone()` conserva todos esos tipos nativos.
 
 ---
 
@@ -291,3 +292,16 @@ function parseNdjson(texto) {
 - [ ] Usar `JSON.stringify()` con `replacer`, `space` y `.toJSON()` para formatear y filtrar datos sensibles.
 - [ ] Prevenir trampas con `undefined`, `NaN`, `Map`/`Set`, `BigInt` y referencias circulares.
 - [ ] Leer, escribir e importar archivos `.json` y `.ndjson` en Node.js.
+
+
+---
+
+## Hoja de Trucos (Cheatsheet) — JSON en Node.js
+
+| Operación | Ejemplo |
+| :--- | :--- |
+| Parsear texto a objeto | `JSON.parse(str)` (siempre dentro de `try/catch`) |
+| Serializar con formato | `JSON.stringify(obj, null, 2)` |
+| Leer JSON síncrono/asíncrono | `JSON.parse(await fs.readFile('data.json', 'utf8'))` |
+| Importar JSON en ESM | `import pkg from './package.json' with { type: 'json' };` |
+| Clonar objeto seguro (Node 17+) | `structuredClone(obj)` (mejor que `JSON.parse(JSON.stringify(...))`) |

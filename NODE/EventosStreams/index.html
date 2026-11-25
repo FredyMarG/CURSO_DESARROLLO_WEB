@@ -32,7 +32,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -73,7 +73,7 @@
                         <h3>3. Streams y pipeline()</h3>
                         <p>Lectura por <em>chunks</em>, compresión y control de <em>backpressure</em>.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Simula flujos de eventos, chunks y backpressure en vivo.</p>
@@ -113,6 +113,9 @@ bus.off('pedido:creado', onPedido); // Desuscribir listener</code></pre>
                 <h2 class="slide-title">Extender <code>EventEmitter</code> y Manejar <code>'error'</code></h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Cuando quieres que una clase propia (como un gestor de pedidos o tareas) notifique cambios al resto de tu app sin acoplarse a ella, hereda de <code>EventEmitter</code> con <code>extends</code>. Además, Node.js trata el nombre de evento <code>'error'</code> de forma especial.
+                </p>
                 <pre class="code-block" style="margin-bottom:12px;"><code>import { EventEmitter } from 'node:events';
 
 class GestorTareas extends EventEmitter {
@@ -138,6 +141,9 @@ gestor.on('tarea:completada', (t) => console.log('OK:', t.nombre));</code></pre>
                 <h2 class="slide-title">Streams: Procesar Archivos Grandes por <em>Chunks</em></h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Leer un archivo de 2 GB con <code>fs.readFile()</code> intentaría cargarlo entero en RAM y bloquearía o saturaría el proceso. Los <strong>Streams</strong> procesan la información por trozos pequeños (<em>chunks</em>, controlados por <code>highWaterMark</code>) manteniendo un consumo de memoria constante.
+                </p>
                 <table class="compare-table" style="margin-bottom:12px;">
                     <thead>
                         <tr><th>Tipo</th><th>Propósito</th><th>Ejemplo nativo</th></tr>
@@ -161,6 +167,9 @@ lectura.on('end', () => console.log('Lectura completada'));</code></pre>
                 <h2 class="slide-title"><code>pipeline()</code> de <code>node:stream/promises</code> y Backpressure</h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Si un origen lee muy rápido (ej. disco SSD o red) y el destino escribe lento, la memoria se llena: a eso se le llama <strong><em>backpressure</em></strong>. En lugar del antiguo <code>.pipe()</code>, usa siempre <code>pipeline()</code> de <code>node:stream/promises</code> para encadenar streams de forma segura.
+                </p>
                 <pre class="code-block" style="margin-bottom:12px;"><code>import fs from 'node:fs';
 import { pipeline } from 'node:stream/promises';
 import { createGzip } from 'node:zlib';
@@ -188,6 +197,9 @@ try {
                 <h2 class="slide-title">Buenas Prácticas con Eventos y Streams</h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    La mayoría de caídas y fugas de memoria en producción ocurren por olvidar limpiar listeners o no cerrar streams tras un error. Aplica estas cuatro reglas en todos tus proyectos:
+                </p>
                 <table class="compare-table" style="margin-bottom:12px;">
                     <thead>
                         <tr><th>Buena práctica</th><th>Problema que evita</th></tr>
@@ -202,8 +214,124 @@ try {
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Eventos y Streams">
+        <!-- SLIDE 7: FOR AWAIT OF Y TRANSFORM -->
+        <section class="slide" data-slide="7" data-title="for await...of y Transform Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ITERACIÓN ASÍNCRONA</span>
+                <h2 class="slide-title"><code>for await...of</code> y <code>Transform</code> Streams</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Todo <code>Readable</code> en Node.js es un iterable asíncrono, por lo que puedes recorrer sus <em>chunks</em> con <code>for await...of</code> y <code>try/catch</code> sin callbacks. Si necesitas modificar los datos al vuelo (ej. pasar a mayúsculas o filtrar logs), crea un <code>Transform</code>:
+                </p>
+                <pre class="code-block"><code>import fs from 'node:fs';
+import { Transform } from 'node:stream';
+
+// 1) Consumir un stream con async/await limpio
+for await (const chunk of fs.createReadStream('eventos.ndjson', { encoding: 'utf8' })) {
+  console.log('Bloque recibido:', chunk.length, 'caracteres');
+}
+
+// 2) Transformar datos al paso antes de escribirlos
+const aMayusculas = new Transform({
+  transform(chunk, _enc, cb) {
+    cb(null, chunk.toString().toUpperCase());
+  }
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: CICLO DE VIDA DE UN STREAM -->
+        <section class="slide" data-slide="8" data-title="Eventos y Ciclo de Vida de Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · EVENTOS INTERNOS</span>
+                <h2 class="slide-title">Ciclo de Vida de un Stream: <code>data</code>, <code>end</code>, <code>close</code> y <code>drain</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Por debajo, todos los Streams heredan de <code>EventEmitter</code>. Conocer sus eventos clave te permite entender cuándo llegan datos, cuándo se vacía el búfer y cuándo se libera el descriptor de archivo:
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Evento</th><th>En qué stream ocurre</th><th>Significado</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><code>'data'</code></td><td>Readable</td><td>Llega un nuevo <em>chunk</em> listo para procesar</td></tr>
+                        <tr><td><code>'end'</code></td><td>Readable</td><td>No quedan más datos por leer</td></tr>
+                        <tr><td><code>'drain'</code></td><td>Writable</td><td>El búfer interno se vació; ya puedes seguir escribiendo</td></tr>
+                        <tr><td><code>'finish'</code> / <code>'close'</code></td><td>Writable / Ambos</td><td>Se terminó de escribir y se cerró el recurso del SO</td></tr>
+                        <tr><td><code>'error'</code></td><td>Ambos</td><td>Falló la lectura o escritura (siempre debe manejarse)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: CHEATSHEET Y CUÁNDO USAR CADA UNO -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos: Eventos y Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">¿Cuándo Usar <code>readFile</code> vs <code>Streams</code> vs <code>EventEmitter</code>?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    No todo archivo requiere un Stream, ni toda función necesita eventos. Usa esta guía rápida para elegir la herramienta correcta en tus proyectos:
+                </p>
+                <table class="compare-table">
+                    <thead>
+                        <tr><th>Necesidad en tu app</th><th>Herramienta ideal</th><th>Por qué</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Leer un <code>config.json</code> pequeño (&lt; 1 MB)</td><td><code>fs/promises.readFile()</code></td><td>Más simple y rápido de escribir</td></tr>
+                        <tr><td>Procesar logs, CSV, videos o copias grandes</td><td><code>createReadStream</code> + <code>pipeline()</code></td><td>Consume poca RAM sin importar el tamaño</td></tr>
+                        <tr><td>Desacoplar auditoría, emails o alertas</td><td><code>EventEmitter</code> (<code>on</code>, <code>once</code>, <code>emit</code>)</td><td>El emisor no depende de los consumidores</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: LEER NDJSON EN STREAMING -->
+        <section class="slide" data-slide="10" data-title="Streaming de Logs NDJSON con readline">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO REAL DE PRODUCCIÓN</span>
+                <h2 class="slide-title">Procesar Archivos <code>.ndjson</code> Gigantes Línea a Línea</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Un archivo de logs de 5 GB no cabe en <code>readFile()</code>. Combinando <code>fs.createReadStream()</code> con <code>node:readline</code> lees millones de líneas NDJSON usando unos pocos kilobytes de RAM:
+                </p>
+                <pre class="code-block"><code>import fs from 'node:fs';
+import readline from 'node:readline';
+
+const rl = readline.createInterface({ input: fs.createReadStream('eventos.ndjson') });
+for await (const linea of rl) {
+  if (linea.trim()) console.log(JSON.parse(linea).tipo);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE EVENTOS Y STREAMS -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de Eventos y Streams">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave de Eventos y Streams</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Refuerza el patrón emisor-oyente y el procesamiento por fragmentos:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Herramienta a usar</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Crear un bus que audite altas y bajas</td><td><code>class Bus extends EventEmitter</code> + listener <code>'error'</code></td></tr>
+                        <tr><td>2. Comprimir un archivo de texto a <code>.gz</code></td><td><code>await pipeline(createReadStream, createGzip, createWriteStream)</code></td></tr>
+                        <tr><td>3. Contar cuántos <em>chunks</em> emite un archivo</td><td><code>for await (const c of createReadStream(...))</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Eventos y Streams">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:EVENTS &amp; NODE:STREAM</span>
                 <h2 class="slide-title">🎛️ Simulador de <code>EventEmitter</code> y <code>pipeline()</code></h2>
@@ -228,10 +356,10 @@ try {
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: Eventos y Streams">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Eventos y Streams">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Eventos y Streams</h2>
             </div>
             <div class="quiz-container">
@@ -269,10 +397,10 @@ try {
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Eventos y Streams">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Eventos y Streams">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Eventos y Streams</h2>
             </div>
             <div class="lab-panel">

@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -95,7 +95,91 @@
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ No uses keypress:</strong> El evento <code>keypress</code> está deprecado y no detecta teclas especiales como <code>Escape</code>, flechas o modificadores.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Inspector de Teclas en Vivo">
+        
+    <!-- Diapositiva 5: Ciclo keydown → keypress (obsoleto) → keyup -->
+    <section class="slide" data-slide="5" data-title="Ciclo keydown → keypress (obsoleto) → keyup">
+      <div class="slide-header">
+        <span class="eyebrow">Orden de disparo</span>
+        <h2>Ciclo keydown → keypress (obsoleto) → keyup</h2>
+      </div>
+      <p>Cuando presionas una tecla física ocurren dos eventos vigentes:</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li><strong><code>keydown</code>:</strong> Se dispara al presionar la tecla y se repite mientras la mantengas pulsada (<code>e.repeat === true</code>).</li>
+        <li><strong><code>keyup</code>:</strong> Se dispara una sola vez al soltar la tecla.</li>
+        <li><strong><code>keypress</code>:</strong> Está obsoleto (deprecated); no detecta teclas como <code>Escape</code>, flechas ni <code>Backspace</code>.</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 6: e.key vs e.code: significado vs tecla física -->
+    <section class="slide" data-slide="6" data-title="e.key vs e.code: significado vs tecla física">
+      <div class="slide-header">
+        <span class="eyebrow">Distribución de teclado</span>
+        <h2>e.key vs e.code: significado vs tecla física</h2>
+      </div>
+      <p>Elegir entre <code>e.key</code> y <code>e.code</code> depende de si haces un atajo de texto o un control de videojuego:</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4><code>e.key</code></h4>
+          <p>Devuelve el carácter producido (ej. <code>"a"</code>, <code>"A"</code>, <code>"Enter"</code>, <code>"Escape"</code>). Respeta idioma y Shift.</p>
+        </div>
+        <div class="card">
+          <h4><code>e.code</code></h4>
+          <p>Devuelve la posición física en el teclado (ej. <code>"KeyW"</code>, <code>"Space"</code>). Ideal para controles WASD.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 7: Atajos de teclado globales (Ctrl/Cmd + K) -->
+    <section class="slide" data-slide="7" data-title="Atajos de teclado globales (Ctrl/Cmd + K)">
+      <div class="slide-header">
+        <span class="eyebrow">Productividad</span>
+        <h2>Atajos de teclado globales (Ctrl/Cmd + K)</h2>
+      </div>
+      <p>Combina <code>e.ctrlKey || e.metaKey</code> para soportar tanto Windows/Linux como macOS en paletas de comandos o guardado rápido.</p>
+      <pre class="code-box">document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    abrirBuscador();
+  }
+});</pre>
+    </section>
+
+    <!-- Diapositiva 8: e.repeat y control de pulsación continua -->
+    <section class="slide" data-slide="8" data-title="e.repeat y control de pulsación continua">
+      <div class="slide-header">
+        <span class="eyebrow">Evitar disparos duplicados</span>
+        <h2>e.repeat y control de pulsación continua</h2>
+      </div>
+      <p>Si mantienes pulsada una tecla, <code>keydown</code> dispara múltiples veces con <code>e.repeat === true</code>.</p>
+      <p style="margin-top:10px">Para acciones únicas (como saltar o enviar un mensaje), añade <code>if (e.repeat) return;</code> al inicio del handler.</p>
+    </section>
+
+    <!-- Diapositiva 9: Composición IME y e.isComposing -->
+    <section class="slide" data-slide="9" data-title="Composición IME y e.isComposing">
+      <div class="slide-header">
+        <span class="eyebrow">Internacionalización</span>
+        <h2>Composición IME y e.isComposing</h2>
+      </div>
+      <p>Al escribir acentos muertos o caracteres CJK (japonés, chino, coreano), el usuario confirma la palabra pulsando <code>Enter</code> dentro de una sesión IME.</p>
+      <pre class="code-box">input.addEventListener('keydown', (e) => {
+  if (e.isComposing || e.keyCode === 229) return;
+  if (e.key === 'Enter') enviarMensaje();
+});</pre>
+    </section>
+
+    <!-- Diapositiva 10: Accesibilidad por teclado (Tab, Enter, Escape) -->
+    <section class="slide" data-slide="10" data-title="Accesibilidad por teclado (Tab, Enter, Escape)">
+      <div class="slide-header">
+        <span class="eyebrow">Inclusión</span>
+        <h2>Accesibilidad por teclado (Tab, Enter, Escape)</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>Nunca pongas listeners solo en <code>&lt;div&gt;</code> con <code>click</code>; usa <code>&lt;button&gt;</code> nativo para heredar <code>Enter</code> y <code>Space</code> gratis.</li>
+        <li>Cierra siempre modales y menús al pulsar <code>Escape</code> y devuelve el foco al elemento disparador.</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador Inspector de Teclas en Vivo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Inspector de Teclas en Vivo</h2></div>
             <div class="grid-layout" style="padding:0;">
       <section class="card">
@@ -115,7 +199,7 @@
     </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Eventos de Teclado y Atajos">
+        <section class="slide" data-slide="12" data-title="Quiz: Eventos de Teclado y Atajos">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -141,7 +225,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Eventos de Teclado y Atajos">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Eventos de Teclado y Atajos">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;input id=&quot;inp&quot; placeholder=&quot;Pulsa una tecla aquí...&quot; style=&quot;width:100%;padding:8px;&quot;&gt;
@@ -166,7 +250,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>

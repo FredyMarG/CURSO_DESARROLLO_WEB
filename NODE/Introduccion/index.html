@@ -31,7 +31,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -72,7 +72,7 @@
                         <h3>3. Usos y Mapa</h3>
                         <p>Dónde brilla Node.js y el recorrido completo de los 8 módulos.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Inspecciona entornos y practica argumentos CLI con <code>process.argv</code>.</p>
@@ -205,8 +205,115 @@ console.log(`¡Hola, ${nombre}! Ejecutando Node ${process.version}`);
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Entorno y CLI">
+<!-- SLIDE 7: ARQUITECTURA INTERNA DE NODE.JS -->
+        <section class="slide" data-slide="7" data-title="Motor V8, libuv y Event Loop">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · CÓMO FUNCIONA POR DENTRO</span>
+                <h2 class="slide-title">Anatomía de Node.js: Motor <code>V8</code>, <code>libuv</code> y Event Loop</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Node.js no es un lenguaje nuevo ni un framework: es un <strong>entorno de ejecución</strong> que combina JavaScript con librerías del sistema operativo para atender miles de peticiones sin crear un hilo pesado por usuario.
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Componente</th><th>Responsabilidad</th><th>Ejemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Motor V8</strong></td><td>Compila y ejecuta tu código JavaScript a código máquina</td><td><code>map()</code>, funciones, clases</td></tr>
+                        <tr><td><strong>libuv (C/C++)</strong></td><td>Gestiona el <strong>Event Loop</strong> y operaciones de E/S asíncronas</td><td>Lectura de archivos, sockets, DNS</td></tr>
+                        <tr><td><strong>APIs Nativas</strong></td><td>Exponen funciones del sistema operativo a JavaScript</td><td><code>node:fs</code>, <code>node:http</code>, <code>node:crypto</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: PRIMER SERVIDOR HTTP NATIVO -->
+        <section class="slide" data-slide="8" data-title="Primer Servidor HTTP con node:http">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · DE LA CONSOLA A LA WEB</span>
+                <h2 class="slide-title">Tu Primer Servidor HTTP Nativo (<code>node:http</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Sin instalar Express ni paquetes externos, Node.js puede levantar un servidor web escuchando en un puerto TCP, inspeccionar <code>req.url</code> y responder texto o JSON con códigos de estado HTTP (<code>200</code>, <code>404</code>):
+                </p>
+                <pre class="code-block"><code>import http from 'node:http';
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+  res.end(JSON.stringify({ ok: true, ruta: req.url }));
+});
+
+server.listen(3000, () => console.log('Servidor en http://localhost:3000'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS Y ERRORES TÍPICOS -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos de Introducción">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">Comandos Esenciales y Errores Típicos al Empezar</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Memoriza estos comandos básicos de terminal y aprende a diagnosticar los 3 errores más frecuentes de tus primeros scripts:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Comando / Error</th><th>Significado y solución</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>node -v</code> / <code>node app.js</code></td><td>Verifica la versión instalada / ejecuta un archivo JavaScript</td></tr>
+                        <tr><td><code>Cannot find module</code></td><td>Ruta mal escrita o no estás dentro de la carpeta del proyecto (<code>cd</code>)</td></tr>
+                        <tr><td><code>ReferenceError: window is not defined</code></td><td>Intentaste usar una API del navegador dentro de Node.js</td></tr>
+                        <tr><td><code>EADDRINUSE :3000</code></td><td>Ya tienes otro servidor ocupando el puerto <code>3000</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: NODE.JS, NPM Y PACKAGE.JSON -->
+        <section class="slide" data-slide="10" data-title="Ecosistema npm y package.json">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · PRIMER CONTACTO CON PROYECTOS</span>
+                <h2 class="slide-title">¿Cómo Se Organiza un Proyecto Real con <code>package.json</code>?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Todo proyecto profesional en Node.js comienza con un archivo <code>package.json</code> en su raíz (creado con <code>npm init -y</code>). Allí se guardan el nombre del proyecto, los scripts de arranque y la lista de paquetes externos que usa:
+                </p>
+                <pre class="code-block"><code>{
+  "name": "mi-proyecto-node",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  }
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS PRÁCTICOS INICIALES -->
+        <section class="slide" data-slide="11" data-title="Ejercicios Guiados de Introducción">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · RETOS PARA PRACTICAR</span>
+                <h2 class="slide-title">3 Retos Rápidos para Dominar el Módulo 01</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Antes de pasar al siguiente módulo, pon a prueba lo aprendido ejecutando estos tres ejercicios en tu terminal:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Nivel</th><th>Reto</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Básico</strong></td><td>Crea <code>saludo.js</code> que lea tu nombre desde <code>process.argv[2]</code> e imprima un saludo.</td></tr>
+                        <tr><td><strong>Intermedio</strong></td><td>Muestra la versión de Node (<code>process.version</code>), plataforma (<code>process.platform</code>) y carpeta actual.</td></tr>
+                        <tr><td><strong>Avanzado</strong></td><td>Levanta un servidor <code>node:http</code> con rutas <code>/</code>, <code>/curso</code> y <code>404</code> devolviendo JSON.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Entorno y CLI">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · ENTORNO Y CLI</span>
                 <h2 class="slide-title">🎛️ Comparador de Entornos y <code>process.argv</code></h2>
@@ -237,10 +344,10 @@ console.log(`¡Hola, ${nombre}! Ejecutando Node ${process.version}`);
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: Introducción a Node.js">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Introducción a Node.js">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Introducción</h2>
             </div>
             <div class="quiz-container">
@@ -278,10 +385,10 @@ console.log(`¡Hola, ${nombre}! Ejecutando Node ${process.version}`);
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Introducción a Node.js">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Introducción a Node.js">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Introducción</h2>
             </div>
             <div class="lab-panel">

@@ -38,23 +38,23 @@
 
         // Inicializa el contexto de audio tras la primera acción del usuario
         init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición lógica
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa variable local
                 this.ctx = new AudioConstructor();
             }
         },
 
         // Sonido suave de transición entre diapositivas
         slide() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(320, now);
             osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
@@ -71,15 +71,15 @@
 
         // Sonido breve de clic para botones
         click() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'triangle';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(600, now);
             gain.gain.setValueAtTime(0.05, now);
@@ -93,15 +93,15 @@
 
         // Tono agradable al emitir una notificación
         notify() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(660, now);
             osc.frequency.exponentialRampToValueAtTime(880, now + 0.14);
@@ -123,29 +123,29 @@
     const SlideNavigation = {
         // Inicializa referencias del DOM y eventos
         init() {
-            this.wrapper = document.getElementById('presentationWrapper');
-            this.slides = document.querySelectorAll('.slide');
-            this.progressBar = document.getElementById('progressBar');
-            this.slideIndicator = document.getElementById('slideIndicator');
+            this.wrapper = document.getElementById('presentationWrapper'); // Obtiene referencia al elemento del DOM
+            this.slides = document.querySelectorAll('.slide'); // Obtiene referencia al elemento del DOM
+            this.progressBar = document.getElementById('progressBar'); // Obtiene referencia al elemento del DOM
+            this.slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia al elemento del DOM
 
-            this.btnPrev = document.getElementById('btnPrevSlide');
-            this.btnNext = document.getElementById('btnNextSlide');
-            this.dotsContainer = document.getElementById('slideDotsContainer');
+            this.btnPrev = document.getElementById('btnPrevSlide'); // Obtiene referencia al elemento del DOM
+            this.btnNext = document.getElementById('btnNextSlide'); // Obtiene referencia al elemento del DOM
+            this.dotsContainer = document.getElementById('slideDotsContainer'); // Obtiene referencia al elemento del DOM
 
-            this.btnGoLab = document.getElementById('btnGoLab');
-            this.btnToggleMode = document.getElementById('btnToggleMode');
-            this.modeText = document.getElementById('modeText');
-            this.modeIcon = document.getElementById('modeIcon');
+            this.btnGoLab = document.getElementById('btnGoLab'); // Obtiene referencia al elemento del DOM
+            this.btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia al elemento del DOM
+            this.modeText = document.getElementById('modeText'); // Obtiene referencia al elemento del DOM
+            this.modeIcon = document.getElementById('modeIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnToggleSound = document.getElementById('btnToggleSound');
-            this.soundIcon = document.getElementById('soundIcon');
+            this.btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia al elemento del DOM
+            this.soundIcon = document.getElementById('soundIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnOverview = document.getElementById('btnOverview');
-            this.overviewModal = document.getElementById('overviewModal');
-            this.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.overviewGrid = document.getElementById('overviewGrid');
+            this.btnOverview = document.getElementById('btnOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewModal = document.getElementById('overviewModal'); // Obtiene referencia al elemento del DOM
+            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia al elemento del DOM
 
-            this.btnFullscreen = document.getElementById('btnFullscreen');
+            this.btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia al elemento del DOM
 
             this.buildSlideDots();
             this.buildOverviewGrid();
@@ -155,21 +155,21 @@
 
         // Construye los puntos de paginación inferiores
         buildSlideDots() {
-            if (!this.dotsContainer) return;
+            if (!this.dotsContainer) return; // Evalúa condición lógica
             this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const dot = document.createElement('button');
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const dot = document.createElement('button'); // Declara e inicializa variable local
                 dot.className = 'slide-dot';
                 dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
                 dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     dot.classList.add('active');
                 }
 
-                dot.addEventListener('click', () => {
+                dot.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                 });
@@ -180,18 +180,18 @@
 
         // Construye las miniaturas del modal de índice general
         buildOverviewGrid() {
-            if (!this.overviewGrid) return;
+            if (!this.overviewGrid) return; // Evalúa condición lógica
             this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa variable local
 
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Declara e inicializa variable local
                 card.className = 'overview-card';
                 card.dataset.slideIndex = slideNum;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     card.classList.add('active');
                 }
 
@@ -200,7 +200,7 @@
                     <div class="ov-title">${title}</div>
                 `;
 
-                card.addEventListener('click', () => {
+                card.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                     this.closeOverview();
@@ -212,64 +212,64 @@
 
         // Registra eventos de botones y teclado
         bindEvents() {
-            if (this.btnPrev) {
-                this.btnPrev.addEventListener('click', () => {
+            if (this.btnPrev) { // Evalúa condición lógica
+                this.btnPrev.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.prevSlide();
                 });
             }
 
-            if (this.btnNext) {
-                this.btnNext.addEventListener('click', () => {
+            if (this.btnNext) { // Evalúa condición lógica
+                this.btnNext.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.nextSlide();
                 });
             }
 
-            if (this.btnGoLab) {
-                this.btnGoLab.addEventListener('click', () => {
+            if (this.btnGoLab) { // Evalúa condición lógica
+                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(9);
                 });
             }
 
-            if (this.btnToggleMode) {
-                this.btnToggleMode.addEventListener('click', () => {
+            if (this.btnToggleMode) { // Evalúa condición lógica
+                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleViewMode();
                 });
             }
 
-            if (this.btnToggleSound) {
-                this.btnToggleSound.addEventListener('click', () => {
+            if (this.btnToggleSound) { // Evalúa condición lógica
+                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.toggleSound();
                 });
             }
 
-            if (this.btnOverview) {
-                this.btnOverview.addEventListener('click', () => {
+            if (this.btnOverview) { // Evalúa condición lógica
+                this.btnOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleOverview();
                 });
             }
 
-            if (this.btnCloseOverview) {
-                this.btnCloseOverview.addEventListener('click', () => {
+            if (this.btnCloseOverview) { // Evalúa condición lógica
+                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.closeOverview();
                 });
             }
 
-            if (this.overviewModal) {
-                this.overviewModal.addEventListener('click', (e) => {
-                    if (e.target === this.overviewModal) {
+            if (this.overviewModal) { // Evalúa condición lógica
+                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    if (e.target === this.overviewModal) { // Evalúa condición lógica
                         this.closeOverview();
                     }
                 });
             }
 
-            if (this.btnFullscreen) {
-                this.btnFullscreen.addEventListener('click', () => {
+            if (this.btnFullscreen) { // Evalúa condición lógica
+                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleFullscreen();
                 });
@@ -280,7 +280,7 @@
 
         // Procesa atajos de teclado ignorando campos de formulario
         handleKeyDown(e) {
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición lógica
 
             switch (e.key) { // Evalúa múltiples casos
                 case 'ArrowRight':
@@ -310,7 +310,7 @@
                     this.toggleFullscreen();
                     break;
                 case 'Escape':
-                    if (AppState.overviewOpen) this.closeOverview();
+                    if (AppState.overviewOpen) this.closeOverview(); // Evalúa condición lógica
                     break;
                 case 'Home':
                     e.preventDefault();
@@ -326,21 +326,21 @@
         },
 
         goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
-            if (index === AppState.currentSlide) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición lógica
+            if (index === AppState.currentSlide) return; // Evalúa condición lógica
             AppState.currentSlide = index;
             SoundFX.slide();
             this.updateUI();
         },
 
         nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide + 1);
             }
         },
 
         prevSlide() {
-            if (AppState.currentSlide > 1) {
+            if (AppState.currentSlide > 1) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide - 1);
             }
         },
@@ -348,16 +348,16 @@
         toggleViewMode() {
             AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
 
-            if (AppState.viewMode === 'guide') {
+            if (AppState.viewMode === 'guide') { // Evalúa condición lógica
                 document.body.classList.remove('mode-presentation');
                 document.body.classList.add('mode-document');
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición lógica
             } else {
                 document.body.classList.remove('mode-document');
                 document.body.classList.add('mode-presentation');
-                if (this.modeText) this.modeText.textContent = 'Modo Guía';
-                if (this.modeIcon) this.modeIcon.textContent = '📑';
+                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición lógica
             }
 
             this.updateUI();
@@ -365,14 +365,14 @@
 
         toggleSound() {
             AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.soundIcon) {
+            if (this.soundIcon) { // Evalúa condición lógica
                 this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click();
+            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición lógica
         },
 
         toggleOverview() {
-            if (AppState.overviewOpen) {
+            if (AppState.overviewOpen) { // Evalúa condición lógica
                 this.closeOverview();
             } else {
                 this.openOverview();
@@ -381,21 +381,21 @@
 
         openOverview() {
             AppState.overviewOpen = true;
-            if (this.overviewModal) this.overviewModal.classList.add('active');
-            const cards = document.querySelectorAll('.overview-card');
+            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición lógica
+            const cards = document.querySelectorAll('.overview-card'); // Declara e inicializa variable local
             cards.forEach(card => {
-                const idx = parseInt(card.dataset.slideIndex, 10);
+                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa variable local
                 card.classList.toggle('active', idx === AppState.currentSlide);
             });
         },
 
         closeOverview() {
             AppState.overviewOpen = false;
-            if (this.overviewModal) this.overviewModal.classList.remove('active');
+            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición lógica
         },
 
         toggleFullscreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Evalúa condición lógica
                 document.documentElement.requestFullscreen().catch(() => {});
             } else if (document.exitFullscreen) {
                 document.exitFullscreen().catch(() => {});
@@ -403,10 +403,10 @@
         },
 
         updateUI() {
-            if (AppState.viewMode === 'slides') {
+            if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                 this.slides.forEach((slide, index) => {
-                    const slideNum = index + 1;
-                    if (slideNum === AppState.currentSlide) {
+                    const slideNum = index + 1; // Declara e inicializa variable local
+                    if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                         slide.classList.add('active');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
@@ -417,23 +417,23 @@
                 this.slides.forEach(slide => slide.classList.add('active'));
             }
 
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa variable local
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición lógica
 
-            if (this.slideIndicator) {
+            if (this.slideIndicator) { // Evalúa condición lógica
                 this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            const dots = document.querySelectorAll('.slide-dot');
+            const dots = document.querySelectorAll('.slide-dot'); // Declara e inicializa variable local
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
             });
 
-            if (this.btnPrev) {
+            if (this.btnPrev) { // Evalúa condición lógica
                 this.btnPrev.disabled = AppState.currentSlide === 1;
                 this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
             }
-            if (this.btnNext) {
+            if (this.btnNext) { // Evalúa condición lógica
                 this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
                 this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
             }
@@ -447,19 +447,19 @@
     const NTLabController = {
         // Inicializa referencias del DOM y actualiza el estado inicial
         init() {
-            this.banner = document.getElementById('ntPermissionBanner');
-            this.permText = document.getElementById('ntPermissionText');
-            this.supportBadge = document.getElementById('ntSupportBadge');
+            this.banner = document.getElementById('ntPermissionBanner'); // Obtiene referencia al elemento del DOM
+            this.permText = document.getElementById('ntPermissionText'); // Obtiene referencia al elemento del DOM
+            this.supportBadge = document.getElementById('ntSupportBadge'); // Obtiene referencia al elemento del DOM
 
-            this.titleInput = document.getElementById('ntTitleInput');
-            this.bodyInput = document.getElementById('ntBodyInput');
-            this.tagInput = document.getElementById('ntTagInput');
+            this.titleInput = document.getElementById('ntTitleInput'); // Obtiene referencia al elemento del DOM
+            this.bodyInput = document.getElementById('ntBodyInput'); // Obtiene referencia al elemento del DOM
+            this.tagInput = document.getElementById('ntTagInput'); // Obtiene referencia al elemento del DOM
 
-            this.btnRequestPerm = document.getElementById('btnRequestPerm');
-            this.btnSendNotif = document.getElementById('btnSendNotif');
-            this.btnSimNotif = document.getElementById('btnSimNotif');
-            this.btnClearLogs = document.getElementById('btnClearNtLogs');
-            this.terminal = document.getElementById('ntLogTerminal');
+            this.btnRequestPerm = document.getElementById('btnRequestPerm'); // Obtiene referencia al elemento del DOM
+            this.btnSendNotif = document.getElementById('btnSendNotif'); // Obtiene referencia al elemento del DOM
+            this.btnSimNotif = document.getElementById('btnSimNotif'); // Obtiene referencia al elemento del DOM
+            this.btnClearLogs = document.getElementById('btnClearNtLogs'); // Obtiene referencia al elemento del DOM
+            this.terminal = document.getElementById('ntLogTerminal'); // Obtiene referencia al elemento del DOM
 
             this.bindControls();
             this.updatePermissionUI();
@@ -467,50 +467,50 @@
 
         // Actualiza las insignias y colores según Notification.permission
         updatePermissionUI() {
-            const supported = 'Notification' in window;
+            const supported = 'Notification' in window; // Declara e inicializa variable local
 
-            if (this.supportBadge) {
+            if (this.supportBadge) { // Evalúa condición lógica
                 this.supportBadge.textContent = supported
                     ? 'Soporte Nativo: Disponible ✔️'
                     : 'Soporte Nativo: No disponible ❌';
                 this.supportBadge.className = supported ? 'badge badge-emerald' : 'badge badge-purple';
             }
 
-            if (!supported) {
-                if (this.permText) this.permText.textContent = 'Notification no soportada en este entorno';
-                return;
+            if (!supported) { // Evalúa condición lógica
+                if (this.permText) this.permText.textContent = 'Notification no soportada en este entorno'; // Evalúa condición lógica
+                return; // Retorna el resultado de la función
             }
 
-            const perm = Notification.permission;
-            if (this.permText) {
+            const perm = Notification.permission; // Declara e inicializa variable local
+            if (this.permText) { // Evalúa condición lógica
                 this.permText.textContent = `Notification.permission === "${perm}"`; // Actualiza contenido en el DOM
             }
 
-            if (this.banner) {
+            if (this.banner) { // Evalúa condición lógica
                 this.banner.className = 'nt-permission-banner';
-                if (perm === 'granted') this.banner.classList.add('is-granted');
-                if (perm === 'denied') this.banner.classList.add('is-denied');
+                if (perm === 'granted') this.banner.classList.add('is-granted'); // Evalúa condición lógica
+                if (perm === 'denied') this.banner.classList.add('is-denied'); // Evalúa condición lógica
             }
         },
 
         // Vincula los botones del laboratorio
         bindControls() {
             // Botón para solicitar permiso nativo mediante Notification.requestPermission()
-            if (this.btnRequestPerm) {
-                this.btnRequestPerm.addEventListener('click', async () => {
+            if (this.btnRequestPerm) { // Evalúa condición lógica
+                this.btnRequestPerm.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
 
-                    if (!('Notification' in window)) {
+                    if (!('Notification' in window)) { // Evalúa condición lógica
                         this.log('❌ Tu navegador no soporta la API Notification.');
-                        return;
+                        return; // Retorna el resultado de la función
                     }
 
                     try { // Inicia bloque protegido contra errores
                         this.log('🔑 Solicitando permiso mediante Notification.requestPermission()...');
-                        const result = await Notification.requestPermission();
+                        const result = await Notification.requestPermission(); // Declara e inicializa variable local
                         this.updatePermissionUI();
                         this.log(`📋 Decisión del usuario: "${result}"`);
-                        if (result === 'granted') SoundFX.notify();
+                        if (result === 'granted') SoundFX.notify(); // Evalúa condición lógica
                     } catch (err) {
                         this.log(`⚠️ Error al solicitar permiso: ${err.message}`);
                     }
@@ -518,32 +518,32 @@
             }
 
             // Botón para emitir una notificación real en el sistema operativo
-            if (this.btnSendNotif) {
-                this.btnSendNotif.addEventListener('click', () => {
+            if (this.btnSendNotif) { // Evalúa condición lógica
+                this.btnSendNotif.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
 
-                    if (!('Notification' in window)) {
+                    if (!('Notification' in window)) { // Evalúa condición lógica
                         this.log('❌ Notification API no disponible en este navegador.');
-                        return;
+                        return; // Retorna el resultado de la función
                     }
 
-                    if (Notification.permission !== 'granted') {
+                    if (Notification.permission !== 'granted') { // Evalúa condición lógica
                         this.log(`⚠️ No se puede emitir alerta real: permiso actual es "${Notification.permission}". Pulsa "Solicitar Permiso" primero.`);
-                        return;
+                        return; // Retorna el resultado de la función
                     }
 
-                    const title = (this.titleInput && this.titleInput.value.trim()) || 'Notificación Master Level';
-                    const body = (this.bodyInput && this.bodyInput.value.trim()) || 'Contenido de prueba';
-                    const tag = (this.tagInput && this.tagInput.value.trim()) || 'master-level-tag';
+                    const title = (this.titleInput && this.titleInput.value.trim()) || 'Notificación Master Level'; // Declara e inicializa variable local
+                    const body = (this.bodyInput && this.bodyInput.value.trim()) || 'Contenido de prueba'; // Declara e inicializa variable local
+                    const tag = (this.tagInput && this.tagInput.value.trim()) || 'master-level-tag'; // Declara e inicializa variable local
 
                     // Instanciamos la notificación nativa real
-                    const noti = new Notification(title, { body, tag });
+                    const noti = new Notification(title, { body, tag }); // Declara e inicializa variable local
                     SoundFX.notify();
                     this.log(`🔔 Notificación real enviada -> "${title}" (tag: "${tag}")`);
 
                     // Registramos eventos sobre la instancia creada
                     noti.addEventListener('show', () => this.log('👁️ [Evento show] La alerta apareció en pantalla.'));
-                    noti.addEventListener('click', () => {
+                    noti.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                         window.focus();
                         noti.close();
                         this.log('🖱️ [Evento click] Usuario pulsó la notificación -> window.focus() + close().');
@@ -554,21 +554,21 @@
             }
 
             // Botón para simular la notificación en el terminal sin requerir permiso del SO
-            if (this.btnSimNotif) {
-                this.btnSimNotif.addEventListener('click', () => {
+            if (this.btnSimNotif) { // Evalúa condición lógica
+                this.btnSimNotif.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.notify();
-                    const title = (this.titleInput && this.titleInput.value.trim()) || '¡Nuevo Mensaje!';
-                    const body = (this.bodyInput && this.bodyInput.value.trim()) || 'Alerta simulada';
-                    const tag = (this.tagInput && this.tagInput.value.trim()) || 'demo-tag';
+                    const title = (this.titleInput && this.titleInput.value.trim()) || '¡Nuevo Mensaje!'; // Declara e inicializa variable local
+                    const body = (this.bodyInput && this.bodyInput.value.trim()) || 'Alerta simulada'; // Declara e inicializa variable local
+                    const tag = (this.tagInput && this.tagInput.value.trim()) || 'demo-tag'; // Declara e inicializa variable local
                     this.log(`🧪 [Simulación] new Notification("${title}", { body: "${body}", tag: "${tag}" })`);
                 });
             }
 
             // Botón para limpiar la consola del laboratorio
-            if (this.btnClearLogs) {
-                this.btnClearLogs.addEventListener('click', () => {
+            if (this.btnClearLogs) { // Evalúa condición lógica
+                this.btnClearLogs.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (this.terminal) {
+                    if (this.terminal) { // Evalúa condición lógica
                         this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
                         this.log('🧹 Terminal de eventos limpiado.');
                     }
@@ -578,16 +578,16 @@
 
         // Registra una línea con marca temporal en el terminal
         log(message) {
-            if (!this.terminal) return;
+            if (!this.terminal) return; // Evalúa condición lógica
 
-            const now = new Date();
+            const now = new Date(); // Declara e inicializa variable local
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
             ].join(':');
 
-            const line = document.createElement('div');
+            const line = document.createElement('div'); // Declara e inicializa variable local
             line.className = 'nt-log-line';
             line.innerHTML = `
                 <span class="nt-log-time">[${timeStr}]</span>
@@ -602,14 +602,15 @@
     /* ==========================================================================
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
-    function startApplication() {
+    function startApplication() { // Define función reutilizable
         SlideNavigation.init();
         NTLabController.init();
     }
 
-    if (document.readyState === 'loading') {
+    if (document.readyState === 'loading') { // Evalúa condición lógica
         document.addEventListener('DOMContentLoaded', startApplication);
     } else {
         startApplication();
     }
 })();
+

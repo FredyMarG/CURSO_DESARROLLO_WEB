@@ -133,3 +133,59 @@ document.cookie = "tema=; max-age=0; path=/";
 // Opción 2: Usando una fecha pasada en expires
 document.cookie = "usuario=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
 ```
+
+
+---
+
+## Atributos de Seguridad Críticos
+
+| Atributo | Función | Recomendación |
+| :--- | :--- | :--- |
+| `Secure` | Solo se envía por HTTPS | Obligatorio en producción |
+| `HttpOnly` | Inaccesible desde `document.cookie` (JS) | Obligatorio para tokens de sesión (previene XSS) |
+| `SameSite=Lax` | Se envía en navegación normal, bloquea CSRF en POST externos | Valor recomendado por defecto |
+| `SameSite=Strict` | Nunca se envía desde enlaces externos | Ideal para banca / acciones sensibles |
+| `Path=/` | Rutas donde aplica la cookie | Usar `/` si aplica a toda la app |
+| `Max-Age=3600` | Vida en segundos (preferible a `Expires`) | Define expiración explícita |
+
+---
+
+## API Moderna Asíncrona (`cookieStore`)
+
+Los navegadores basados en Chromium ofrecen `cookieStore` como alternativa limpia con Promesas (evita parsear strings manualmente):
+
+```js
+if ('cookieStore' in window) {
+  await cookieStore.set({ name: 'tema', value: 'oscuro', path: '/' });
+  const cookie = await cookieStore.get('tema');
+  console.log(cookie?.value);
+}
+```
+
+---
+
+## ❌ Errores Comunes con Cookies
+
+1. **Guardar JWT o sesiones sensibles sin `HttpOnly`:** Cualquier script inyectado (XSS) podría leer `document.cookie` y robar la sesión.
+2. **Olvidar `encodeURIComponent()` / `decodeURIComponent()`:** Caracteres como `;`, `=` o espacios corrompen el formato de `document.cookie`.
+3. **Almacenar datos grandes en cookies:** El límite es ~4 KB por cookie y se envían automáticamente en **cada petición HTTP**, ralentizando la red. Para estado local grande usa `localStorage` o `IndexedDB`.
+4. **Usar `SameSite=None` sin `Secure`:** Los navegadores modernos rechazan cookies `SameSite=None` si no llevan `Secure` sobre HTTPS.
+
+---
+
+## ✅ Buenas Prácticas
+
+- Reserva las cookies para **sesión/autenticación** (`HttpOnly; Secure; SameSite=Lax`) emitidas desde el servidor (`Set-Cookie`).
+- Para preferencias de interfaz (tema, idioma, carrito local), prefiere `localStorage`.
+- Incluye siempre `path=/` al escribir o borrar una cookie desde JS para evitar duplicados por subruta.
+
+---
+
+## Hoja de Trucos (Cheatsheet) — Cookies
+
+| Operación | Ejemplo |
+| :--- | :--- |
+| Crear / Actualizar | `document.cookie = "tema=dark; max-age=86400; path=/; SameSite=Lax"` |
+| Borrar cookie | `document.cookie = "tema=; max-age=0; path=/"` |
+| Leer cookie por nombre | `document.cookie.split('; ').find(c => c.startsWith('tema='))?.split('=')[1]` |
+| Límite aproximado | ~4 KB por cookie (se envía en cada request HTTP al mismo dominio) |

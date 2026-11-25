@@ -28,7 +28,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html" title="Volver a HTML Básico">⬅ <span class="btn-text">HTML Básico</span></a>
@@ -141,7 +141,75 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz de Formularios">
+        
+        <!-- Diapositiva 6: Conectar <label for="..."> con <input id="..."> -->
+        <section class="slide" data-slide="6" data-title="Conectar <label for=&quot;...&quot;> con <input id=&quot;...&quot;>">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · ASOCIACIÓN ACCESIBLE</span>
+                <h2 class="slide-title">Conectar <label for="..."> con <input id="..."></h2>
+            </div>
+            <div class="glass-card">
+                <p>Un <code>&lt;label&gt;</code> correctamente vinculado amplía el área clicable (especialmente en checkboxes) y es obligatorio para lectores de pantalla.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: required, minlength, pattern y type específicos -->
+        <section class="slide" data-slide="7" data-title="required, minlength, pattern y type específicos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · VALIDACIÓN NATIVA</span>
+                <h2 class="slide-title">required, minlength, pattern y type específicos</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usar <code>type="email"</code>, <code>type="number"</code> o <code>pattern="[0-9]{4}"</code> activa teclados adaptados en móviles y validación instantánea sin JavaScript.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: GET vs POST y atributo autocomplete -->
+        <section class="slide" data-slide="8" data-title="GET vs POST y atributo autocomplete">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · MÉTODOS DE ENVÍO</span>
+                <h2 class="slide-title">GET vs POST y atributo autocomplete</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>method="GET"</code> para buscadores y filtros (los parámetros viajan en la URL) y <code>method="POST"</code> para contraseñas, registros o envíos sensibles.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Por qué name es indispensable al enviar datos -->
+        <section class="slide" data-slide="9" data-title="Por qué name es indispensable al enviar datos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ATRIBUTO NAME</span>
+                <h2 class="slide-title">Por qué name es indispensable al enviar datos</h2>
+            </div>
+            <div class="glass-card">
+                <p>Sin el atributo <code>name</code>, el navegador omite el campo al enviar el formulario. Es la clave con la que el servidor o <code>FormData</code> identifica el valor.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Formularios HTML -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Formularios HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Formularios HTML</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Formularios HTML</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Formularios HTML -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Formularios HTML">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Formularios HTML</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz de Formularios">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 4 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Formularios HTML</h2>
@@ -177,7 +245,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio de Formularios">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio de Formularios">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 5 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Formularios</h2>
@@ -219,7 +287,7 @@
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Otros Temas de HTML Básico">
+        <section class="slide" data-slide="14" data-title="Otros Temas de HTML Básico">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 6 · CONTINÚA APRENDIENDO</span>
                 <h2 class="slide-title">📂 Otros Temas de HTML Básico</h2>

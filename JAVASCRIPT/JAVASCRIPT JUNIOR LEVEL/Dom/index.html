@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (DOM.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -91,6 +91,281 @@
 <li>* hidden</li>
 <li>* contenteditable</li>
 </ul></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">innerHTML</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>caja.innerHTML = "&lt;b&gt;Hola&lt;/b&gt;"</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Resultado:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>Hola (en negrita)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🧱 CREACIÓN DE ELEMENTOS</p>
+<p style="margin:6px 0;line-height:1.6;">Crear elementos significa:</p>
+<p style="margin:6px 0;line-height:1.6;">&gt; ✨ Construir HTML usando JavaScript.</p>
+<p style="margin:6px 0;line-height:1.6;">Es como usar LEGO 🧱.</p>
+<p style="margin:6px 0;line-height:1.6;">JavaScript puede crear:</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Botones</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Divs</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Inputs</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Tarjetas</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Listas</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Imágenes</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Tablas</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Dashboards</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 ¿POR QUÉ ES IMPORTANTE?</p>
+<p style="margin:6px 0;line-height:1.6;">Porque las páginas modernas NO tienen todo escrito en HTML.</p>
+<p style="margin:6px 0;line-height:1.6;">Muchas cosas se crean dinámicamente.</p>
+<p style="margin:6px 0;line-height:1.6;">Ejemplos reales:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>📱 Instagram crea publicaciones
+🛒 Amazon crea productos
+💬 WhatsApp crea mensajes
+🎮 Juegos crean enemigos
+📊 Dashboards crean tarjetas</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Todo eso usa DOM.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🌳 ESTRUCTURA MENTAL</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>JavaScript
+    ↓
+Crea elementos
+    ↓
+Modifica elementos
+    ↓
+Los agrega al DOM
+    ↓
+Aparecen en pantalla</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 1️⃣ createElement()</p>
+<p style="margin:6px 0;line-height:1.6;">⚠️ IMPORTANTE:</p>
+<p style="margin:6px 0;line-height:1.6;">El método correcto es:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>document.createElement()</code></pre>
+<p style="margin:6px 0;line-height:1.6;">❌ Mucha gente escribe:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>createElements()</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Pero:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>❌ NO EXISTE</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Porque JavaScript crea:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>1 elemento a la vez</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">📖 ¿Qué hace?</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Crea elementos HTML desde JavaScript.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 SINTAXIS</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const elemento = document.createElement("etiqueta")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📦 EJEMPLO SIMPLE</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const caja = document.createElement("div")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 ¿QUÉ PASÓ?</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>ANTES:
+❌ No existe div
+
+DESPUÉS:
+✅ JavaScript creó un div</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># ⚠️ IMPORTANTE</p>
+<p style="margin:6px 0;line-height:1.6;">El elemento existe:</p>
+<p style="margin:6px 0;line-height:1.6;">✅ En memoria</p>
+<p style="margin:6px 0;line-height:1.6;">Pero todavía:</p>
+<p style="margin:6px 0;line-height:1.6;">❌ NO aparece en pantalla</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 ANALOGÍA PARA NIÑOS</p>
+<p style="margin:6px 0;line-height:1.6;">Es como construir un juguete:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>🧱 createElement()
+= construir la pieza
+
+📺 appendChild()
+= ponerla en pantalla</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 CREAR UN BOTÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const boton = document.createElement("button")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 CREAR UN PÁRRAFO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const parrafo = document.createElement("p")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 CREAR UNA IMAGEN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const imagen = document.createElement("img")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 CREAR INPUT</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const input = document.createElement("input")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🎨 MODIFICAR EL ELEMENTO CREADO</p>
+<p style="margin:6px 0;line-height:1.6;">Una vez creado podemos:</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Cambiar texto</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Cambiar color</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Agregar clases</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Agregar atributos</p>
+<p style="margin:6px 0;line-height:1.6;"># ✏️ AGREGAR TEXTO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const titulo = document.createElement("h1")
+
+titulo.textContent = "Hola Mundo"</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🎨 CAMBIAR ESTILOS</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>titulo.style.color = "blue"</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🏷️ AGREGAR CLASES</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>titulo.classList.add("grande")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📌 AGREGAR ATRIBUTOS</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>imagen.setAttribute("src", "foto.png")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN VISUAL</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>🧱 createElement("button")
+        ↓
+🔘 Botón vacío
+        ↓
+textContent
+        ↓
+🔘 Guardar
+        ↓
+appendChild
+        ↓
+📺 Aparece en pantalla</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 2️⃣ createTextNode()</p></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">📖 ¿Qué hace?</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Crea nodos de texto.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 ¿Qué es un nodo de texto?</p>
+<p style="margin:6px 0;line-height:1.6;">Es texto puro.</p>
+<p style="margin:6px 0;line-height:1.6;">Ejemplo:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>&lt;p&gt;Hola&lt;/p&gt;</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Aquí:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>📄 p → nodo elemento
+📝 Hola → nodo texto</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const texto = document.createTextNode("Hola Fredy")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 ¿POR QUÉ EXISTE?</p>
+<p style="margin:6px 0;line-height:1.6;">Porque en el DOM:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>TODO ES UN NODO</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Incluso el texto.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧩 UNIR TEXTO CON ELEMENTOS</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const boton = document.createElement("button")
+
+const texto = document.createTextNode("Enviar")
+
+boton.appendChild(texto)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>🔘 button vacío
+        ↓
+📝 "Enviar"
+        ↓
+🔘 Enviar</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># ⚠️ HOY EN DÍA</p>
+<p style="margin:6px 0;line-height:1.6;">Normalmente usamos:</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>textContent</code></pre>
+<p style="margin:6px 0;line-height:1.6;">Porque es más simple.</p>
+<p style="margin:6px 0;line-height:1.6;"># 3️⃣ appendChild()</p></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">📖 ¿Qué hace?</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Agrega un hijo dentro de otro elemento.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 EJEMPLO VISUAL</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>📦 div
+└── 🔘 button</code></pre>
+<p style="margin:6px 0;line-height:1.6;">El botón es hijo del div.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const div = document.createElement("div")
+
+const boton = document.createElement("button")
+
+boton.textContent = "Click"
+
+div.appendChild(boton)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 RESULTADO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>&lt;div&gt;
+  &lt;button&gt;Click&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># ⚠️ IMPORTANTE</p>
+<p style="margin:6px 0;line-height:1.6;">appendChild():</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Agrega</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Mueve</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Reorganiza elementos</p>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 DATO IMPORTANTE</p>
+<p style="margin:6px 0;line-height:1.6;">Un elemento NO puede existir en dos lugares.</p>
+<p style="margin:6px 0;line-height:1.6;"># ❌ Esto NO duplica</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>padre1.appendChild(hijo)
+padre2.appendChild(hijo)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 RESULTADO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>❌ Sale de padre1
+✅ Va a padre2</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 4️⃣ append()</p>
+<p style="margin:6px 0;line-height:1.6;">Parecido a appendChild().</p>
+<p style="margin:6px 0;line-height:1.6;">Pero:</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Puede agregar texto</p>
+<p style="margin:6px 0;line-height:1.6;">✅ Puede agregar varios elementos</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>div.append("Hola")</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 VARIOS ELEMENTOS</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>div.append(boton, parrafo)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># ⚠️ DIFERENCIA</p>
+<table class="compare-table"><thead><tr><th>appendChild</th><th>append</th></tr></thead><tbody>
+<tr><td>Solo 1 nodo</td><td>Varios</td></tr>
+<tr><td>Solo nodos</td><td>Texto y nodos</td></tr>
+<tr><td>Más antiguo</td><td>Más moderno</td></tr>
+</tbody></table>
+<p style="margin:6px 0;line-height:1.6;"># 5️⃣ prepend()</p>
+<p style="margin:6px 0;line-height:1.6;">Agrega elementos AL INICIO.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>lista.prepend(nuevoElemento)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>ANTES:
+1️⃣
+2️⃣
+3️⃣
+
+DESPUÉS:
+🆕
+1️⃣
+2️⃣
+3️⃣</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 6️⃣ insertBefore()</p>
+<p style="margin:6px 0;line-height:1.6;">Inserta antes de otro elemento.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>padre.insertBefore(nuevo, referencia)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>ANTES:
+A
+B
+
+DESPUÉS:
+A
+🆕
+B</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 7️⃣ cloneNode()</p>
+<p style="margin:6px 0;line-height:1.6;">Clona elementos.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const copia = elemento.cloneNode(true)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🧠 ¿Qué significa true?</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>true = copiar hijos también
+false = copiar solo el elemento</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>📄 Original
+        ↓
+📄 Copia exacta</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 8️⃣ remove()</p>
+<p style="margin:6px 0;line-height:1.6;">Elimina elementos.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>boton.remove()</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 RESULTADO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>❌ El botón desaparece</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 9️⃣ replaceWith()</p>
+<p style="margin:6px 0;line-height:1.6;">Reemplaza elementos.</p>
+<p style="margin:6px 0;line-height:1.6;"># 🟢 EJEMPLO</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>viejo.replaceWith(nuevo)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 REPRESENTACIÓN</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>ANTES:
+🔴 Viejo
+
+DESPUÉS:
+🟢 Nuevo</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🔥 CREACIÓN DINÁMICA COMPLETA</p></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">🎯 Crear tarjeta de usuario</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;"># 🟢 JavaScript</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>const tarjeta = document.createElement("div")
+
+const nombre = document.createElement("h2")
+
+const descripcion = document.createElement("p")
+
+nombre.textContent = "Fredy"
+
+descripcion.textContent = "Desarrollador"
+
+tarjeta.classList.add("card")
+
+tarjeta.append(nombre, descripcion)
+
+document.body.appendChild(tarjeta)</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 📊 RESULTADO VISUAL</p>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>📦 TARJETA
+├── 👤 Fredy
+└── 💻 Desarrollador</code></pre>
+<p style="margin:6px 0;line-height:1.6;"># 🚀 createDocumentFragment()</p></div>
             </div>
         </section>
         <script>

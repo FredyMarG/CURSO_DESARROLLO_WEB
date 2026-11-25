@@ -1,10 +1,10 @@
 // Guía Interactiva — Callbacks en JavaScript
 
-const numerosInput = document.getElementById("numerosInput");
-const syncOutput = document.getElementById("syncOutput");
-const userIdInput = document.getElementById("userIdInput");
-const asyncOutput = document.getElementById("asyncOutput");
-const logTerminal = document.getElementById("logTerminal");
+const numerosInput = document.getElementById("numerosInput"); // Declara e inicializa variable local
+const syncOutput = document.getElementById("syncOutput"); // Declara e inicializa variable local
+const userIdInput = document.getElementById("userIdInput"); // Declara e inicializa variable local
+const asyncOutput = document.getElementById("asyncOutput"); // Declara e inicializa variable local
+const logTerminal = document.getElementById("logTerminal"); // Declara e inicializa variable local
 
 const usuariosDB = {
     1: { id: 1, nombre: "Ana García", rol: "Frontend Lead" },
@@ -12,35 +12,35 @@ const usuariosDB = {
     3: { id: 3, nombre: "Elena Torres", rol: "UI/UX Designer" }
 };
 
-function log(mensaje, tipo = "info") {
-    const linea = document.createElement("div");
+function log(mensaje, tipo = "info") { // Define función reutilizable
+    const linea = document.createElement("div"); // Declara e inicializa variable local
     linea.className = `log-line ${tipo}`;
-    const hora = new Date().toLocaleTimeString();
+    const hora = new Date().toLocaleTimeString(); // Declara e inicializa variable local
     linea.textContent = `[${hora}] ${mensaje}`; // Actualiza contenido en el DOM
     logTerminal.appendChild(linea);
     logTerminal.scrollTop = logTerminal.scrollHeight;
 }
 
 // 1. Función de orden superior que acepta un callback síncrono
-function procesarLista(arr, callback) {
-    const resultado = [];
-    for (const item of arr) {
+function procesarLista(arr, callback) { // Define función reutilizable
+    const resultado = []; // Declara e inicializa variable local
+    for (const item of arr) { // Itera sobre elementos o rango
         resultado.push(callback(item));
     }
-    return resultado;
+    return resultado; // Retorna el resultado de la función
 }
 
 document.querySelectorAll("[data-op]").forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", () => { // Registra escuchador de evento en el DOM
         const numeros = numerosInput.value
             .split(",")
             .map((n) => Number(n.trim()))
             .filter((n) => !Number.isNaN(n));
 
-        const op = btn.dataset.op;
-        let salida;
+        const op = btn.dataset.op; // Declara e inicializa variable local
+        let salida; // Declara e inicializa variable local
 
-        if (op === "doble") {
+        if (op === "doble") { // Evalúa condición lógica
             salida = procesarLista(numeros, (n) => n * 2);
             log(`Callback síncrono (x2): [${salida.join(", ")}]`, "ok");
         } else if (op === "cuadrado") {
@@ -57,29 +57,29 @@ document.querySelectorAll("[data-op]").forEach((btn) => {
 });
 
 // 2. Patrón Error-First Callback (err, data)
-function buscarUsuario(id, callback) {
+function buscarUsuario(id, callback) { // Define función reutilizable
     log(`Iniciando consulta asíncrona para ID=${id}...`, "info");
     setTimeout(() => {
-        const usuario = usuariosDB[id];
-        if (!usuario) {
+        const usuario = usuariosDB[id]; // Declara e inicializa variable local
+        if (!usuario) { // Evalúa condición lógica
             callback(new Error(`Usuario con ID ${id} no encontrado.`), null);
-            return;
+            return; // Retorna el resultado de la función
         }
         callback(null, usuario);
     }, 600);
 }
 
-document.getElementById("btnFetchUser").addEventListener("click", () => {
-    const id = Number(userIdInput.value);
+document.getElementById("btnFetchUser").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const id = Number(userIdInput.value); // Declara e inicializa variable local
     asyncOutput.className = "output";
     asyncOutput.textContent = "Consultando servidor simulado..."; // Actualiza contenido en el DOM
 
     buscarUsuario(id, (err, user) => {
-        if (err) {
+        if (err) { // Evalúa condición lógica
             asyncOutput.className = "output err";
             asyncOutput.textContent = `Error: ${err.message}`; // Actualiza contenido en el DOM
             log(`Error-First Callback: ${err.message}`, "err");
-            return;
+            return; // Retorna el resultado de la función
         }
         asyncOutput.className = "output ok";
         asyncOutput.textContent = `Encontrado: ${user.nombre} (${user.rol})`; // Actualiza contenido en el DOM
@@ -88,23 +88,23 @@ document.getElementById("btnFetchUser").addEventListener("click", () => {
 });
 
 // 3. Simulación visual de Callback Hell (3 pasos anidados)
-document.getElementById("btnCallbackHell").addEventListener("click", () => {
-    const id = Number(userIdInput.value) || 1;
+document.getElementById("btnCallbackHell").addEventListener("click", () => { // Registra escuchador de evento en el DOM
+    const id = Number(userIdInput.value) || 1; // Declara e inicializa variable local
     asyncOutput.className = "output";
     asyncOutput.textContent = "Ejecutando cadena de 3 callbacks anidados..."; // Actualiza contenido en el DOM
 
     buscarUsuario(id, (err, user) => {
-        if (err) {
+        if (err) { // Evalúa condición lógica
             asyncOutput.className = "output err";
             asyncOutput.textContent = err.message; // Actualiza contenido en el DOM
             log(err.message, "err");
-            return;
+            return; // Retorna el resultado de la función
         }
         log(`Paso 1 OK: ${user.nombre}`, "info");
         setTimeout(() => {
             log(`Paso 2 OK: Permisos cargados para ${user.rol}`, "info");
             setTimeout(() => {
-                const msg = `Paso 3 OK: Sesión lista para ${user.nombre}`;
+                const msg = `Paso 3 OK: Sesión lista para ${user.nombre}`; // Declara e inicializa variable local
                 asyncOutput.className = "output ok";
                 asyncOutput.textContent = msg; // Actualiza contenido en el DOM
                 log(msg, "ok");
@@ -113,6 +113,7 @@ document.getElementById("btnCallbackHell").addEventListener("click", () => {
     });
 });
 
-document.getElementById("btnClearLog").addEventListener("click", () => {
+document.getElementById("btnClearLog").addEventListener("click", () => { // Registra escuchador de evento en el DOM
     logTerminal.innerHTML = ""; // Actualiza contenido en el DOM
 });
+

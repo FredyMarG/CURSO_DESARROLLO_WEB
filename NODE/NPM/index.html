@@ -35,7 +35,7 @@
         <!-- Indicador de progreso y número de diapositiva actual -->
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 10</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <!-- Botones de acción globales (controlados por slides-engine.js) -->
         <div class="nav-actions">
@@ -79,7 +79,7 @@
                         <h3>3. Lockfile, npm ci y npx</h3>
                         <p>Instalaciones limpias, <code>devDependencies</code> y auditoría.</p>
                     </div>
-                    <div class="hero-card" data-jump="8">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Prueba rangos SemVer y genera <code>package.json</code> en vivo.</p>
@@ -247,8 +247,83 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 8: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="8" data-lab="true" data-title="Simulador SemVer y npm">
+        <!-- SLIDE 8: MANTENIMIENTO DE DEPENDENCIAS -->
+        <section class="slide" data-slide="8" data-title="Inspección, Actualización y Caché">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · CICLO DE VIDA DEL PROYECTO</span>
+                <h2 class="slide-title">Inspeccionar, Actualizar y Limpiar Dependencias</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Con el tiempo los paquetes reciben parches de seguridad o nuevas versiones. Estos comandos te ayudan a revisar qué tienes instalado en primer nivel, actualizar respetando <code>^</code>/<code>~</code> y diagnosticar caché:
+                </p>
+                <pre class="code-block"><code>npm list --depth=0          # Lista solo tus dependencias directas
+npm outdated                # Muestra actual vs deseada vs última
+npm update                  # Actualiza dentro de los rangos de package.json
+npm cache verify            # Verifica la integridad de la caché local de npm</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: ENGINES, .NPMRC Y HOJA DE TRUCOS -->
+        <section class="slide" data-slide="9" data-title="engines, .npmrc y Hoja de Trucos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · CONFIGURACIÓN PROFESIONAL</span>
+                <h2 class="slide-title"><code>"engines"</code>, <code>.npmrc</code> y Hoja de Trucos de <code>npm</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En equipos de trabajo puedes exigir una versión mínima de Node.js con <code>"engines"</code> en <code>package.json</code> y fijar opciones en <code>.npmrc</code> (como <code>save-exact=true</code> para evitar sorpresas con rangos):
+                </p>
+                <pre class="code-block" style="margin-bottom:12px;"><code>// package.json
+"engines": { "node": ">=20.0.0" }</code></pre>
+                <div class="tip-box good">
+                    <strong>✅ Regla rápida:</strong> usa <code>npm i</code> al desarrollar, <code>npm ci</code> en servidores/CI, <code>npx</code> para CLIs puntuales y nunca subas <code>node_modules/</code> a Git.
+                </div>
+            </div>
+        </section>
+
+<!-- SLIDE 10: MONOREPO, WORKSPACES Y ALTERNATIVAS -->
+        <section class="slide" data-slide="10" data-title="Workspaces y Gestores Alternativos">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · ESCALA PROFESIONAL</span>
+                <h2 class="slide-title"><code>npm workspaces</code>, <code>pnpm</code> y Corepack</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Cuando un proyecto crece (por ejemplo, un frontend React y un backend Node.js en el mismo repositorio), <strong>npm workspaces</strong> permite compartir dependencias desde un único <code>package.json</code> raíz. También existen gestores más rápidos como <code>pnpm</code> (enlaces duros en disco):
+                </p>
+                <pre class="code-block"><code>// package.json raíz de un monorepo
+{
+  "name": "mi-monorepo",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"]
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE NPM -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de NPM">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave con <code>npm</code> y SemVer</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Comprueba tu dominio de dependencias, rangos y scripts resolviendo estos tres retos en consola:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Comando o regla esperada</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Instalar un linter solo para desarrollo</td><td><code>npm i -D eslint</code> (va a <code>devDependencies</code>)</td></tr>
+                        <tr><td>2. Instalar exactamente lo congelado en CI/CD</td><td><code>npm ci</code> (respeta <code>package-lock.json</code>)</td></tr>
+                        <tr><td>3. Comparar <code>^2.3.1</code> vs <code>~2.3.1</code></td><td><code>^</code> llega hasta <code>&lt;3.0.0</code>; <code>~</code> solo hasta <code>&lt;2.4.0</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador SemVer y npm">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · SEMVER Y COMANDOS</span>
                 <h2 class="slide-title">🎛️ Simulador de <code>SemVer</code> y Comandos <code>npm</code></h2>
@@ -278,10 +353,10 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 9: QUIZ -->
-        <section class="slide" data-slide="9" data-title="Quiz: NPM y Paquetes">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: NPM y Paquetes">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de <code>npm</code> y SemVer</h2>
             </div>
             <!-- Contenedor del Quiz: slides-engine.js gestiona el puntaje y feedback automáticamente -->
@@ -320,10 +395,10 @@ npm install                  # lee package.json / package-lock.json y crea node_
             </div>
         </section>
 
-        <!-- SLIDE 10: LABORATORIO -->
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio: NPM y SemVer">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: NPM y SemVer">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 10 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de <code>npm</code> y SemVer</h2>
             </div>
             <!-- Panel de Laboratorio: presets precargados + editor + vista previa en iframe aislado -->

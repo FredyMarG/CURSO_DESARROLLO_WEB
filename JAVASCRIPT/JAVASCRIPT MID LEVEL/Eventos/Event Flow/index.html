@@ -30,7 +30,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 8</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Eventos</span></a>
@@ -52,8 +52,8 @@
                 <div class="hero-grid">
                     <div class="hero-card" data-jump="2"><div class="hero-card-icon">🧠</div><h3>1. Fundamentos</h3><p>Concepto, fases y analogía clara.</p></div>
                     <div class="hero-card" data-jump="3"><div class="hero-card-icon">📐</div><h3>2. Sintaxis y API</h3><p>Propiedades clave y ejemplos reales.</p></div>
-                    <div class="hero-card" data-jump="5"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
-                    <div class="hero-card" data-jump="7"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
+                    <div class="hero-card" data-jump="11"><div class="hero-card-icon">🎛️</div><h3>3. Simulador</h3><p>Prueba interactiva en tiempo real.</p></div>
+                    <div class="hero-card" data-jump="13"><div class="hero-card-icon">🧪</div><h3>4. Laboratorio</h3><p>Edita y ejecuta código en vivo.</p></div>
                 </div>
             </div>
         </section>
@@ -99,7 +99,91 @@ hijo.addEventListener(&#x27;click&#x27;, (e) =&gt; {
             <div class="callout callout-warn" style="margin-top:14px;"><strong>⚠️ Cuidado con stopPropagation():</strong> Abusar de <code>e.stopPropagation()</code> puede romper analíticas globales, menús desplegables que cierran al hacer clic fuera o atajos de teclado.</div>
         </section>
 
-        <section class="slide" data-slide="5" data-lab="true" data-title="Simulador Visual de Propagación">
+        
+    <!-- Diapositiva 5: Fase de Captura (Capturing Phase) -->
+    <section class="slide" data-slide="5" data-title="Fase de Captura (Capturing Phase)">
+      <div class="slide-header">
+        <span class="eyebrow">Flujo descendente</span>
+        <h2>Fase de Captura (Capturing Phase)</h2>
+      </div>
+      <p>Antes de llegar al elemento objetivo, el evento viaja desde <code>window</code> → <code>document</code> → <code>html</code> → <code>body</code> hasta el padre directo.</p>
+      <pre class="code-box">// Activar captura pasando true o { capture: true }
+contenedor.addEventListener('click', (e) => {
+  console.log('Interceptado antes de llegar al hijo');
+}, { capture: true });</pre>
+    </section>
+
+    <!-- Diapositiva 6: Fase Target y Fase de Burbujeo -->
+    <section class="slide" data-slide="6" data-title="Fase Target y Fase de Burbujeo">
+      <div class="slide-header">
+        <span class="eyebrow">Flujo ascendente</span>
+        <h2>Fase Target y Fase de Burbujeo</h2>
+      </div>
+      <p>Al alcanzar <code>e.target</code> comienza el <strong>Bubbling</strong>: el evento sube por todos los ancestros hasta <code>window</code>.</p>
+      <ul class="bullet-list" style="margin-top:12px">
+        <li>La mayoría de eventos de UI (<code>click</code>, <code>input</code>, <code>keydown</code>) burbujean por defecto.</li>
+        <li>Eventos como <code>focus</code>, <code>blur</code>, <code>mouseenter</code> y <code>mouseleave</code> <strong>no</strong> burbujean (usa <code>focusin</code>/<code>focusout</code> si necesitas burbujeo).</li>
+      </ul>
+    </section>
+
+    <!-- Diapositiva 7: stopPropagation vs stopImmediatePropagation -->
+    <section class="slide" data-slide="7" data-title="stopPropagation vs stopImmediatePropagation">
+      <div class="slide-header">
+        <span class="eyebrow">Control del flujo</span>
+        <h2>stopPropagation vs stopImmediatePropagation</h2>
+      </div>
+      <p>Ambas detienen el viaje hacia los ancestros, pero con una diferencia crucial cuando hay varios listeners en el mismo nodo:</p>
+      <div class="grid-2" style="margin-top:14px">
+        <div class="card">
+          <h4><code>e.stopPropagation()</code></h4>
+          <p>Evita que el evento suba a los padres, pero los demás listeners del mismo elemento siguen ejecutándose.</p>
+        </div>
+        <div class="card">
+          <h4><code>e.stopImmediatePropagation()</code></h4>
+          <p>Corta el burbujeo Y cancela cualquier otro listener registrado después en el mismo elemento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 8: Delegación de Eventos (Event Delegation) -->
+    <section class="slide" data-slide="8" data-title="Delegación de Eventos (Event Delegation)">
+      <div class="slide-header">
+        <span class="eyebrow">Patrón arquitectónico</span>
+        <h2>Delegación de Eventos (Event Delegation)</h2>
+      </div>
+      <p>En lugar de adjuntar 500 listeners a 500 botones, adjunta <strong>uno solo</strong> al contenedor padre y filtra con <code>e.target.closest()</code>.</p>
+      <pre class="code-box">lista.addEventListener('click', (e) => {
+  const btn = e.target.closest('[data-action="delete"]');
+  if (!btn) return;
+  btn.closest('li').remove();
+});</pre>
+      <p style="margin-top:10px">Funciona incluso para elementos agregados dinámicamente después de cargar la página.</p>
+    </section>
+
+    <!-- Diapositiva 9: e.composedPath() y Shadow DOM -->
+    <section class="slide" data-slide="9" data-title="e.composedPath() y Shadow DOM">
+      <div class="slide-header">
+        <span class="eyebrow">Inspección de ruta</span>
+        <h2>e.composedPath() y Shadow DOM</h2>
+      </div>
+      <p><code>e.composedPath()</code> devuelve el array exacto de nodos que recorrerá el evento desde el target hasta <code>window</code>.</p>
+      <p style="margin-top:10px">Es muy útil para detectar clics fuera de un menú desplegable (<em>click outside</em>) sin depender de comprobaciones frágiles.</p>
+    </section>
+
+    <!-- Diapositiva 10: Buenas prácticas en el flujo de eventos -->
+    <section class="slide" data-slide="10" data-title="Buenas prácticas en el flujo de eventos">
+      <div class="slide-header">
+        <span class="eyebrow">Resumen</span>
+        <h2>Buenas prácticas en el flujo de eventos</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>Evita abusar de <code>stopPropagation()</code> porque puede romper analíticas o cierres globales de modales.</li>
+        <li>Usa <code>closest(selector)</code> en delegación para soportar íconos o <code>&lt;span&gt;</code> dentro de botones.</li>
+        <li>Prefiere <code>focusin</code>/<code>focusout</code> cuando delegues validaciones de formularios en el padre.</li>
+      </ul>
+    </section>
+
+    <section class="slide" data-slide="11" data-lab="true" data-title="Simulador Visual de Propagación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · SIMULADOR INTERACTIVO</span><h2 class="slide-title">🎛️ Simulador Visual de Propagación</h2></div>
             <div class="grid-layout" style="padding:0;">
       <section class="card">
@@ -121,7 +205,7 @@ hijo.addEventListener(&#x27;click&#x27;, (e) =&gt; {
     </div>
         </section>
 
-        <section class="slide" data-slide="6" data-title="Quiz: Event Flow (Capturing & Bubbling)">
+        <section class="slide" data-slide="12" data-title="Quiz: Event Flow (Capturing & Bubbling)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container">
                 <div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 2 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div>
@@ -147,7 +231,7 @@ hijo.addEventListener(&#x27;click&#x27;, (e) =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="7" data-lab="true" data-title="Laboratorio: Event Flow (Capturing & Bubbling)">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Event Flow (Capturing & Bubbling)">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio JS en Vivo</h2></div>
             <div class="lab-panel">
                 <div class="lab-presets"><button class="preset-btn active" data-code="&lt;div id=&quot;padre&quot; style=&quot;padding:16px;border:1px dashed #38bdf8;border-radius:10px;&quot;&gt;
@@ -176,7 +260,7 @@ hijo.addEventListener(&#x27;click&#x27;, (e) =&gt; {
             </div>
         </section>
 
-        <section class="slide" data-slide="8" data-title="Recursos y Navegación">
+        <section class="slide" data-slide="14" data-title="Recursos y Navegación">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 8 · RECURSOS DEL MÓDULO</span><h2 class="slide-title">📂 Continúa Aprendiendo</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">⬅ Volver al Módulo Eventos</span><span class="file-path">../index.html</span></a>

@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (CONSOLE.LOG.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -94,6 +94,45 @@ console.timeEnd(&quot;bucle-millon&quot;); // &quot;bucle-millon: 2.45 ms&quot;<
 <li>* <strong>Imprimir objetos mutables y confiar en la vista previa colapsada:</strong> En DevTools, al expandir un objeto con la flecha <code>▶</code>, el navegador lee su estado <strong>actual</strong>, no el que tenía en el instante del <code>console.log</code>. Usa <code>console.log(structuredClone(obj))</code> si necesitas una foto exacta de ese momento.</li>
 <li>* <strong>Olvidar cerrar <code>console.group()</code> con <code>console.groupEnd()</code>:</strong> Todos los logs posteriores quedarán anidados dentro del grupo.</li>
 </ul></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">✅ Buenas Prácticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li>Usa <code>{ variable }</code> al imprimir: <code>console.log({ precio, descuento })</code> muestra automáticamente el nombre y el valor de cada variable.</li>
+<li>Prefiere <code>console.table()</code> para arrays de objetos y <code>console.time()</code> para comparar el rendimiento de dos algoritmos.</li>
+<li>Usa <code>console.warn</code> y <code>console.error</code> para poder filtrar mensajes por nivel en la barra de DevTools.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">Hoja de Trucos (Cheatsheet) — <code>console</code></h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Método</th><th>Propósito</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><code>console.log({ a, b })</code></td><td>Inspeccionar variables con su nombre</td><td><code>console.log({ usuario, total })</code></td></tr>
+<tr><td><code>console.table(arr)</code></td><td>Ver arrays/objetos como tabla</td><td><code>console.table(productos)</code></td></tr>
+<tr><td><code>console.warn()</code> / <code>error()</code></td><td>Advertencias (amarillo) / Errores (rojo)</td><td><code>console.error("Fallo de red")</code></td></tr>
+<tr><td><code>console.assert(cond, msg)</code></td><td>Loguea error solo si <code>cond</code> es falsa</td><td><code>console.assert(id &gt; 0, "ID inválido")</code></td></tr>
+<tr><td><code>console.group()</code> / <code>groupEnd()</code></td><td>Agrupar logs relacionados</td><td><code>console.group("API"); ... console.groupEnd()</code></td></tr>
+<tr><td><code>console.time()</code> / <code>timeEnd()</code></td><td>Medir tiempo de ejecución</td><td><code>console.time("t"); ... console.timeEnd("t")</code></td></tr>
+<tr><td><code>console.count(label)</code></td><td>Contar cuántas veces pasa por ahí</td><td><code>console.count("render")</code></td></tr>
+<tr><td><code>console.trace()</code></td><td>Mostrar pila de llamadas (<em>stack trace</em>)</td><td><code>console.trace("Origen")</code></td></tr>
+<tr><td><code>%c</code></td><td>Aplicar CSS en consola del navegador</td><td><code>console.log("%cHola", "color: cyan")</code></td></tr>
+</tbody></table></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">8. Guía Completa y Autoevaluación (Console.log)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Usa el botón <strong>📖 Guía</strong> de esta misma barra para revisar la documentación completa (<code>CONSOLE.LOG.md</code>) sin salir de la lección, y valida lo aprendido en la consola interactiva de abajo.</p></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">9. Buenas Prácticas y Errores Comunes (Console.log)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+          <li>Usa <code>"use strict"</code> o ES Modules para detectar errores silenciosos al instante.</li>
+          <li>Prefiere <code>const</code> por defecto y nombres descriptivos antes de optimizar.</li>
+          <li>Prueba tus casos límite (<code>null</code>, <code>undefined</code>, strings vacíos y arreglos vacíos) en el laboratorio inferior.</li>
+        </ul></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">10. Guía Completa y Autoevaluación (Console.log)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Usa el botón <strong>📖 Guía</strong> de esta misma barra para revisar la documentación completa (<code>CONSOLE.LOG.md</code>) sin salir de la lección, y valida lo aprendido en la consola interactiva de abajo.</p></div>
             </div>
         </section>
         <script>

@@ -1,0 +1,424 @@
+<!doctype html>
+<!-- Módulo de JavaScript Mid Level: Expresiones Regulares (RegExp) -->
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Expresiones Regulares (RegExp) en JavaScript — literales, flags g/i/m/u, anclas ^/$, clases \d/\w/\s, cuantificadores, grupos nombrados y test()/match()/replace()." />
+    <title>Expresiones Regulares (RegExp) — Presentación Completa | Curso Desarrollo Web</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/slides-engine.css" />
+    <script src="../../../RESOURCES COURSE/plantilla/slides-engine.js" defer></script>
+    <link rel="stylesheet" href="../../../RESOURCES COURSE/plantilla/course-polish.css" />
+    <script src="../../../RESOURCES COURSE/plantilla/course-polish.js" defer></script>
+</head>
+<body class="mode-presentation">
+    <div class="bg-glow glow-1"></div>
+    <div class="bg-glow glow-2"></div>
+    <div class="bg-grid-pattern"></div>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            <span class="brand-badge">JS MID LEVEL · REGEXP</span>
+            <div class="brand-title"><span>🔎</span><span>Expresiones Regulares</span></div>
+        </div>
+        <div class="nav-progress-container">
+            <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
+        </div>
+        <div class="nav-actions">
+            <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
+            <button class="nav-btn" id="btnGoLab">🧪 <span class="btn-text">Lab</span></button>
+            <button class="nav-btn" id="btnToggleMode"><span id="modeIcon">📑</span> <span class="btn-text" id="modeText">Modo Guía</span></button>
+            <button class="nav-btn" id="btnToggleSound"><span id="soundIcon">🔊</span></button>
+            <button class="nav-btn" id="btnOverview">▦</button>
+            <button class="nav-btn" id="btnFullscreen">⛶</button>
+        </div>
+    </header>
+
+    <main class="presentation-wrapper">
+        <!-- SLIDE 1: PORTADA -->
+        <section class="slide active" data-slide="1" data-title="Inicio: Expresiones Regulares">
+            <div class="hero-slide">
+                <div class="hero-badges">
+                    <span class="badge badge-emerald">JS Mid Level · RegExp</span>
+                    <span class="badge badge-cyan">^ $ · \d \w \s · {n,m}</span>
+                    <span class="badge badge-purple">test · matchAll · replace</span>
+                </div>
+                <h1 class="hero-title">Expresiones Regulares<br /><span class="gradient-text">(RegExp) en JavaScript</span></h1>
+                <p class="hero-subtitle">
+                    Aprende a validar emails, fechas y contraseñas, extraer datos estructurados con grupos nombrados y limpiar textos en una línea usando patrones <code>RegExp</code> profesionales.
+                </p>
+                <div class="hero-grid">
+                    <div class="hero-card" data-jump="2">
+                        <div class="hero-card-icon">🔎</div>
+                        <h3>1. Sintaxis y Flags</h3>
+                        <p>Literal <code>/patrón/gi</code> vs <code>new RegExp()</code>.</p>
+                    </div>
+                    <div class="hero-card" data-jump="4">
+                        <div class="hero-card-icon">🧱</div>
+                        <h3>2. Anclas y Tokens</h3>
+                        <p><code>^</code>, <code>$</code>, <code>\d</code>, <code>\w</code>, <code>\s</code> y cuantificadores.</p>
+                    </div>
+                    <div class="hero-card" data-jump="7">
+                        <div class="hero-card-icon">🧩</div>
+                        <h3>3. Grupos y Métodos</h3>
+                        <p><code>test()</code>, <code>match()</code>, <code>replace()</code> y trampas.</p>
+                    </div>
+                    <div class="hero-card" data-jump="12">
+                        <div class="hero-card-icon">🎛️</div>
+                        <h3>4. Simulador y Lab</h3>
+                        <p>Prueba patrones en vivo contra cadenas reales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: QUÉ ES REGEXP -->
+        <section class="slide" data-slide="2" data-title="¿Qué es RegExp y cómo se crea?">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 2 · DEFINICIÓN Y CREACIÓN</span>
+                <h2 class="slide-title">¿Qué es <code>RegExp</code>? Literal vs Constructor</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Una expresión regular describe un patrón de texto. Usa la forma <strong>literal</strong> cuando el patrón es fijo (se compila una vez al cargar) y <code>new RegExp()</code> solo cuando necesitas armar el patrón desde una variable:
+                </p>
+                <pre class="code-block"><code>const fijo = /^[a-z0-9]+$/i; // Recomendado si no cambia
+const palabra = 'node';
+const dinamico = new RegExp(`\\b${palabra}\\b`, 'gi'); // Nota: escapa "\\" en strings</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: BANDERAS (FLAGS) -->
+        <section class="slide" data-slide="3" data-title="Flags g, i, m y u">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 3 · MODIFICADORES DE BÚSQUEDA</span>
+                <h2 class="slide-title">Banderas Esenciales: <code>g</code>, <code>i</code>, <code>m</code> y <code>u</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Las banderas se colocan al final del patrón y cambian cómo el motor busca coincidencias:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Flag</th><th>Efecto</th><th>Ejemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>g</code></td><td>Global: encuentra <strong>todas</strong> las coincidencias, no solo la 1.ª</td><td><code>'a1b2'.match(/\d/g)</code> → <code>['1','2']</code></td></tr>
+                        <tr><td><code>i</code></td><td>Ignora mayúsculas y minúsculas</td><td><code>/node/i.test('NODE')</code> → <code>true</code></td></tr>
+                        <tr><td><code>m</code></td><td>Multilínea: <code>^</code> y <code>$</code> aplican a cada línea</td><td><code>/^error/gm</code></td></tr>
+                        <tr><td><code>u</code></td><td>Soporte Unicode completo (acentos y emojis)</td><td><code>/\p{L}+/gu</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: CLASES DE CARACTERES -->
+        <section class="slide" data-slide="4" data-title="Clases de Caracteres (\d, \w, \s)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 4 · COMODINES Y RANGOS</span>
+                <h2 class="slide-title">Clases de Caracteres: <code>\d</code>, <code>\w</code>, <code>\s</code> y Corchetes</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    En minúscula buscan el carácter; en MAYÚSCULA (<code>\D</code>, <code>\W</code>, <code>\S</code>) buscan exactamente lo contrario:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Patrón</th><th>Coincide con</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>\d</code> / <code>\D</code></td><td>Dígito (<code>0–9</code>) / Cualquier carácter que NO sea dígito</td></tr>
+                        <tr><td><code>\w</code> / <code>\W</code></td><td>Letra ASCII, número o <code>_</code> / Símbolos y espacios</td></tr>
+                        <tr><td><code>\s</code> / <code>\S</code></td><td>Espacio, tabulador o salto / Carácter visible</td></tr>
+                        <tr><td><code>[a-z]</code> / <code>[^0-9]</code></td><td>Rango de letras / Todo excepto números</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: ANCLAS (^, $, \b) -->
+        <section class="slide" data-slide="5" data-title="Anclas: ^, $ y \b">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · LÍMITES EXACTOS</span>
+                <h2 class="slide-title">Anclas: Por Qué <code>^</code> y <code>$</code> Son Obligatorios al Validar</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Sin <code>^</code> (inicio) y <code>$</code> (fin), <code>/\d{4}/</code> devolvería <code>true</code> para <code>"hola1234mundo"</code> porque encontró 4 dígitos en el medio. Para validar todo el texto usa siempre anclas:
+                </p>
+                <pre class="code-block"><code>/\d{4}/.test('hola1234mundo');   // true (¡peligro en validaciones!)
+/^\d{4}$/.test('hola1234mundo'); // false (exige exactamente 4 dígitos)
+/^\d{4}$/.test('2026');          // true</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: CUANTIFICADORES -->
+        <section class="slide" data-slide="6" data-title="Cuantificadores: +, *, ? y {n,m}">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · REPETICIONES</span>
+                <h2 class="slide-title">Cuantificadores: <code>+</code>, <code>*</code>, <code>?</code> y <code>{n,m}</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Los cuantificadores indican cuántas veces puede repetirse el token inmediatamente anterior:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Cuantificador</th><th>Significado</th><th>Ejemplo</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>+</code></td><td>1 o más veces</td><td><code>\d+</code> coincide con <code>"4"</code> y <code>"420"</code></td></tr>
+                        <tr><td><code>*</code></td><td>0 o más veces</td><td><code>a*</code> coincide con <code>""</code> y <code>"aaa"</code></td></tr>
+                        <tr><td><code>?</code></td><td>Opcional (0 o 1 vez)</td><td><code>https?</code> coincide con <code>http</code> y <code>https</code></td></tr>
+                        <tr><td><code>{n,m}</code></td><td>Entre <code>n</code> y <code>m</code> veces</td><td><code>\d{2,4}</code> exige 2, 3 o 4 dígitos</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: GRUPOS DE CAPTURA Y GRUPOS NOMBRADOS -->
+        <section class="slide" data-slide="7" data-title="Grupos de Captura y Nombrados">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · EXTRAER PARTES DE UN TEXTO</span>
+                <h2 class="slide-title">Grupos <code>(...)</code> y Grupos Nombrados <code>(?&lt;nombre&gt;...)</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Los paréntesis capturan subcadenas para extraerlas con <code>match()</code>. Con grupos nombrados obtienes directamente un objeto <code>groups</code> muy legible:
+                </p>
+                <pre class="code-block"><code>const re = /^(?&lt;anio&gt;\d{4})-(?&lt;mes&gt;\d{2})-(?&lt;dia&gt;\d{2})$/;
+const res = '2026-11-25'.match(re);
+console.log(res.groups); // { anio: '2026', mes: '11', dia: '25' }</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: MÉTODOS DE REGEXP Y STRING -->
+        <section class="slide" data-slide="8" data-title="test(), match(), matchAll() y replace()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · APLICACIÓN EN JAVASCRIPT</span>
+                <h2 class="slide-title"><code>test()</code>, <code>match()</code>, <code>matchAll()</code> y <code>replace()</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Elige el método según si quieres validar, extraer o transformar texto:
+                </p>
+                <pre class="code-block"><code>// 1) Validar (booleano)
+/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test('ana@dev.io'); // true
+
+// 2) Limpiar espacios múltiples con replace()
+'Hola    mundo   JS'.replace(/\s+/g, ' '); // "Hola mundo JS"
+
+// 3) Extraer todas las ocurrencias con grupos usando matchAll()
+const tags = [...'#node #js #css'.matchAll(/#(\w+)/g)].map(m => m[1]); // ['node','js','css']</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: TRAMPA CLÁSICA DE LASTINDEX -->
+        <section class="slide" data-slide="9" data-title="La Trampa de lastIndex con el Flag g">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · BUG MUY FRECUENTE</span>
+                <h2 class="slide-title">Cuidado con <code>.test()</code> + Bandera <code>g</code> (<code>lastIndex</code>)</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Cuando una expresión regular tiene el flag <code>g</code>, guarda el índice donde quedó (<code>regex.lastIndex</code>). Si la reutilizas con <code>.test()</code>, puede alternar <code>true</code> y <code>false</code> sobre el mismo texto:
+                </p>
+                <pre class="code-block"><code>const re = /\d+/g;
+console.log(re.test('123')); // true  (lastIndex queda en 3)
+console.log(re.test('123')); // false (busca desde índice 3!)
+// ✅ Solución: NO uses el flag "g" cuando valides con .test()</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: PATRONES ÚTILES Y SEGURIDAD -->
+        <section class="slide" data-slide="10" data-title="Patrones Comunes y ReDoS">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · USO REAL Y SEGURIDAD</span>
+                <h2 class="slide-title">Patrones Útiles y Prevención de <em>ReDoS</em></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Evita cuantificadores anidados como <code>(a+)+</code> (pueden congelar el hilo principal de JS/Node ante entradas maliciosas, ataque llamado <strong>ReDoS</strong>). Usa patrones simples y acotados:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Validación</th><th>Patrón seguro</th></tr></thead>
+                    <tbody>
+                        <tr><td>Slug de URL</td><td><code>/^[a-z0-9]+(?:-[a-z0-9]+)*$/</code></td></tr>
+                        <tr><td>Fecha ISO <code>YYYY-MM-DD</code></td><td><code>/^\d{4}-\d{2}-\d{2}$/</code></td></tr>
+                        <tr><td>Solo dígitos (PIN 4–6)</td><td><code>/^\d{4,6}$/</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: RETOS PRÁCTICOS -->
+        <section class="slide" data-slide="11" data-title="Ejercicios de RegExp">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Retos Clave de Expresiones Regulares</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Pon a prueba tus patrones en el laboratorio de la diapositiva 14:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Qué debes lograr</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Validar código postal de 5 dígitos</td><td><code>/^\d{5}$/</code></td></tr>
+                        <tr><td>2. Extraer usuario y dominio de un email</td><td><code>/^(?&lt;user&gt;[^@]+)@(?&lt;dom&gt;.+)$/</code></td></tr>
+                        <tr><td>3. Convertir frase en <em>slug</em> URL</td><td><code>.toLowerCase().trim().replace(/\s+/g, '-')</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de RegExp">
+            <div class="slide-header">
+                <span class="slide-kicker">SIMULADOR INTERACTIVO · REGEXP</span>
+                <h2 class="slide-title">🎛️ Simulador de Patrones y Banderas</h2>
+                <p class="slide-lead">Compara anclas, grupos nombrados y la trampa de <code>lastIndex</code>.</p>
+            </div>
+            <div class="sim-panel">
+                <div class="sim-controls">
+                    <div class="sim-control">
+                        <label>Caso RegExp</label>
+                        <select id="rxSimMode">
+                            <option value="anchors">Sin anclas vs con ^ y $</option>
+                            <option value="groups">Grupos nombrados (?&lt;clave&gt;...)</option>
+                            <option value="lastindex">Trampa de .test() con flag g</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="sim-stage-wrap">
+                    <div class="sim-stage" id="rxSimStage" style="display:flex;flex-direction:column;gap:8px;font-family:var(--font-mono);font-size:0.84rem;justify-content:center;"></div>
+                    <pre class="sim-code" id="rxSimCode"></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Expresiones Regulares">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
+                <h2 class="slide-title">🧠 Quiz Rápido de <code>RegExp</code></h2>
+            </div>
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <span class="quiz-score">Puntaje: 0 / 3 (0 respondidas)</span>
+                    <button class="quiz-reset-btn">↻ Reiniciar Quiz</button>
+                </div>
+                <div class="quiz-question" data-answer="c" data-ok="Correcto: ^ marca el inicio exacto y $ el fin exacto de la cadena." data-err="Sin ^ y $, el patrón busca en cualquier subcadena interna.">
+                    <div class="quiz-q-title">1. ¿Qué símbolos garantizan que el patrón coincida con toda la cadena de principio a fin?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">* y +</button>
+                        <button class="quiz-option" data-opt="b">\d y \w</button>
+                        <button class="quiz-option" data-opt="c">^ y $</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="b" data-ok="Exacto: el flag g actualiza lastIndex en .test() causando falsos negativos en llamadas repetidas." data-err="El flag g hace que .test() avance lastIndex en cada llamada.">
+                    <div class="quiz-q-title">2. ¿Qué flag debes evitar en <code>.test()</code> cuando validas entradas para no sufrir errores por <code>lastIndex</code>?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">i</button>
+                        <button class="quiz-option" data-opt="b">g</button>
+                        <button class="quiz-option" data-opt="c">u</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+                <div class="quiz-question" data-answer="a" data-ok="Correcto: \d{3} exige exactamente 3 dígitos." data-err="\d representa dígito y {3} indica 3 repeticiones exactas.">
+                    <div class="quiz-q-title">3. ¿Qué patrón exige exactamente 3 dígitos consecutivos?</div>
+                    <div class="quiz-options">
+                        <button class="quiz-option" data-opt="a">\d{3}</button>
+                        <button class="quiz-option" data-opt="b">\w+</button>
+                        <button class="quiz-option" data-opt="c">\s?</button>
+                    </div>
+                    <div class="quiz-feedback"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: RegExp en Vivo">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
+                <h2 class="slide-title">🧪 Laboratorio Interactivo de <code>RegExp</code></h2>
+            </div>
+            <div class="lab-panel">
+                <div class="lab-presets">
+                    <button class="preset-btn active" data-code="&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Pruebas de validación de emails, fechas con grupos nombrados y creación de slugs
+  const reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const emails = [&#x27;ana@curso.dev&#x27;, &#x27;malo@&#x27;, &#x27;sin-arroba.com&#x27;];
+
+  const reFecha = /^(?&lt;anio&gt;\d{4})-(?&lt;mes&gt;\d{2})-(?&lt;dia&gt;\d{2})$/;
+  const fecha = &#x27;2026-11-25&#x27;.match(reFecha)?.groups;
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    emails.map(e =&gt; `&lt;div&gt;${e}: ${reEmail.test(e) ? &#x27;✅ válido&#x27; : &#x27;❌ inválido&#x27;}&lt;/div&gt;`).join(&#x27;&#x27;) +
+    `&lt;pre&gt;Fecha extraída: ${JSON.stringify(fecha)}&lt;/pre&gt;`;
+&lt;/script&gt;">Validador + Grupos Nombrados</button>
+                </div>
+                <div class="lab-split">
+                    <textarea id="labEditor" class="lab-editor" spellcheck="false">&lt;div id=&quot;out&quot; style=&quot;font-family:monospace;padding:14px;line-height:1.7&quot;&gt;&lt;/div&gt;
+&lt;script&gt;
+  // Pruebas de validación de emails, fechas con grupos nombrados y creación de slugs
+  const reEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const emails = [&#x27;ana@curso.dev&#x27;, &#x27;malo@&#x27;, &#x27;sin-arroba.com&#x27;];
+
+  const reFecha = /^(?&lt;anio&gt;\d{4})-(?&lt;mes&gt;\d{2})-(?&lt;dia&gt;\d{2})$/;
+  const fecha = &#x27;2026-11-25&#x27;.match(reFecha)?.groups;
+
+  document.getElementById(&#x27;out&#x27;).innerHTML =
+    emails.map(e =&gt; `&lt;div&gt;${e}: ${reEmail.test(e) ? &#x27;✅ válido&#x27; : &#x27;❌ inválido&#x27;}&lt;/div&gt;`).join(&#x27;&#x27;) +
+    `&lt;pre&gt;Fecha extraída: ${JSON.stringify(fecha)}&lt;/pre&gt;`;
+&lt;/script&gt;</textarea>
+                    <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bottom-controls">
+        <button class="ctrl-btn" id="btnPrev">⬅ Anterior</button>
+        <span class="ctrl-hint">Flechas ← → · Tecla O</span>
+        <button class="ctrl-btn" id="btnNext">Siguiente ➡</button>
+    </div>
+    <div class="overview-modal" id="overviewModal"><div class="overview-grid" id="overviewGrid"></div></div>
+
+    <!-- Lógica del simulador interactivo de expresiones regulares -->
+    <script>
+        // IIFE para aislar variables del simulador
+        (function () {
+            const mode = document.getElementById('rxSimMode');
+            const stage = document.getElementById('rxSimStage');
+            const code = document.getElementById('rxSimCode');
+            if (!mode || !stage || !code) return;
+
+            // Actualiza la explicación visual y el ejemplo según la opción seleccionada
+            function update() {
+                if (mode.value === 'anchors') {
+                    stage.innerHTML = `
+                        <div style="color:#ff3358;">/\\d{4}/.test('hola1234') -> true (encuentra en el medio)</div>
+                        <div style="color:#00ff88;font-weight:700;">/^\\d{4}$/.test('hola1234') -> false (exige exactitud)</div>
+                    `;
+                    code.textContent = `/^\\d{4}$/.test('2026'); // true`;
+                } else if (mode.value === 'groups') {
+                    stage.innerHTML = `
+                        <div style="color:#00ff88;font-weight:700;">(?&lt;nombre&gt;...) crea propiedades limpias en match().groups</div>
+                        <div style="color:#38bdf8;">Ideal para fechas, versiones SemVer o rutas.</div>
+                    `;
+                    code.textContent = `const { groups } = '2026-11-25'.match(/^(?<anio>\\d{4})-(?<mes>\\d{2})-(?<dia>\\d{2})$/);`;
+                } else {
+                    stage.innerHTML = `
+                        <div style="color:#ff3358;">const r = /\\d+/g; r.test('123') -> true; r.test('123') -> false!</div>
+                        <div style="color:#00ff88;font-weight:700;">Usa /\\d+/ sin flag "g" cuando valides con .test()</div>
+                    `;
+                    code.textContent = `const soloDigitos = /^\\d+$/;\nsoloDigitos.test('123'); // siempre true`;
+                }
+            }
+            mode.addEventListener('input', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

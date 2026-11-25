@@ -29,7 +29,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 14</div>
+            <div class="progress-label" id="slideIndicator">1 / 12</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -70,7 +70,7 @@
                         <h3>3. Primer Servidor</h3>
                         <p>npm, <code>package.json</code>, <code>index.js</code> y API nativa con <code>node:http</code>.</p>
                     </div>
-                    <div class="hero-card" data-jump="10">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🧪</div>
                         <h3>4. Laboratorio y Retos</h3>
                         <p>Simulador HTTP en vivo, ejercicios por niveles y cheatsheet.</p>
@@ -344,7 +344,51 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         </section>
 
         <!-- SLIDE 13: QUIZ INTERACTIVO (5 PREGUNTAS) -->
-        <section class="slide" data-slide="9" data-title="Quiz: Fundamentos de Node.js">
+
+        <!-- SLIDE 9: BACKEND VS FRONTEND Y USOS REALES -->
+        <section class="slide" data-slide="9" data-title="Frontend vs Backend y Usos de Node.js">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · CONTEXTO ARQUITECTÓNICO</span>
+                <h2 class="slide-title">Frontend vs Backend y Casos de Uso de Node.js</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Mientras el <strong>Frontend</strong> corre en el navegador del usuario (DOM, CSS, eventos visuales), el <strong>Backend</strong> corre en tu servidor: valida reglas de negocio, consulta bases de datos, protege secretos y responde JSON por HTTP.
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Uso real de Node.js</th><th>Por qué destaca</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>APIs REST / GraphQL</strong></td><td>Maneja miles de conexiones simultáneas de E/S sin bloquear</td></tr>
+                        <tr><td><strong>Tiempo real (WebSockets)</strong></td><td>Ideal para chats, notificaciones y paneles en vivo</td></tr>
+                        <tr><td><strong>Herramientas CLI y automatización</strong></td><td>Scripts de compilación, servidores de desarrollo y tareas locales</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: ANATOMÍA DE UNA RESPUESTA HTTP -->
+        <section class="slide" data-slide="10" data-title="Códigos de Estado y Cabeceras HTTP">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · PROTOCOLO HTTP EN NODE.JS</span>
+                <h2 class="slide-title">Códigos de Estado HTTP y Cabecera <code>Content-Type</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Toda respuesta de <code>node:http</code> debe indicar qué tipo de contenido envía (<code>Content-Type</code>) y qué resultado obtuvo la petición mediante su código de estado HTTP:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Código</th><th>Significado</th><th>Cuándo devolverlo</th></tr></thead>
+                    <tbody>
+                        <tr><td><code>200 OK</code> / <code>201 Created</code></td><td>Éxito / Recurso creado</td><td>Al consultar datos o crear un registro con <code>POST</code></td></tr>
+                        <tr><td><code>400 Bad Request</code></td><td>Error del cliente</td><td>Cuando falta un campo obligatorio o el JSON es inválido</td></tr>
+                        <tr><td><code>404 Not Found</code></td><td>Ruta no encontrada</td><td>Cuando <code>req.url</code> no coincide con ningún endpoint</td></tr>
+                        <tr><td><code>500 Internal Server Error</code></td><td>Fallo inesperado del servidor</td><td>Error no controlado en disco o base de datos</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="11" data-title="Quiz: Fundamentos de Node.js">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Fundamentos</h2>
@@ -403,7 +447,7 @@ servidor.listen(PUERTO, () => console.log(`API en http://localhost:${PUERTO}`));
         </section>
 
         <!-- SLIDE 14: LABORATORIO Y ARCHIVOS DEL MÓDULO -->
-        <section class="slide" data-slide="10" data-lab="true" data-title="Laboratorio y Archivos del Módulo">
+        <section class="slide" data-slide="12" data-lab="true" data-title="Laboratorio y Archivos del Módulo">
             <div class="slide-header">
                 <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Simulador de API Node.js &amp; Archivos</h2>

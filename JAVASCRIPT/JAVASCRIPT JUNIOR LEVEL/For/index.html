@@ -31,7 +31,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (BUCLES.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -102,6 +102,63 @@ for (const clave in configuracion) {
 <p style="margin:6px 0;line-height:1.6;">&gt;     console.log(<code>${clave} =&gt; ${valor}</code>);</p>
 <p style="margin:6px 0;line-height:1.6;">&gt; }</p>
 <p style="margin:6px 0;line-height:1.6;">&gt; ```</p></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">6. Control de Flujo: <code>break</code>, <code>continue</code> y Etiquetas (<code>label</code>)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong><code>break</code>:</strong> Detiene inmediatamente el bucle completo y continúa con el código que sigue después.</li>
+<li><strong><code>continue</code>:</strong> Salta el resto de la iteración actual y pasa directamente a la siguiente vuelta.</li>
+<li><strong>Etiquetas (<code>label</code>):</strong> Permiten que <code>break</code> o <code>continue</code> actúen sobre un bucle externo cuando hay bucles anidados. Úsalas con moderación (a menudo es más limpio extraer una función y usar <code>return</code>).</li>
+</ul>
+<pre class="code-preview" style="margin:10px 0;overflow-x:auto;"><code>busqueda:
+for (let fila = 0; fila &lt; 3; fila++) {
+    for (let col = 0; col &lt; 3; col++) {
+        if (fila === 1 &amp;&amp; col === 1) {
+            break busqueda; // Sale de ambos bucles
+        }
+        console.log(`Celda [${fila}, ${col}]`);
+    }
+}</code></pre></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">7. ¿Cuándo usar cada bucle? y Rendimiento</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong>¿Necesitas transformar o filtrar un array?</strong> → Usa <code>.map()</code> o <code>.filter()</code> (código declarativo).</li>
+<li><strong>¿Necesitas recorrer un array y poder detenerte con <code>break</code> o usar <code>await</code> en secuencia?</strong> → Usa <code>for...of</code>.</li>
+<li><strong>¿Necesitas recorrer propiedades de un objeto?</strong> → Usa <code>for (const [k, v] of Object.entries(obj))</code> o <code>for...in</code>.</li>
+<li><strong>¿El rendimiento importa en millones de elementos?</strong> → El <code>for</code> clásico con índice y <code>for...of</code> son los más rápidos en motores V8 modernos porque no invocan un callback por cada iteración.</li>
+<li><strong>Cuidado con colecciones vivas del DOM (<code>HTMLCollection</code>):</strong> Si agregas elementos al DOM dentro de un bucle sobre <code>document.getElementsByClassName(...)</code>, su <code>.length</code> crece en cada vuelta y puede crear un bucle infinito. Usa <code>document.querySelectorAll()</code> (devuelve <code>NodeList</code> estática).</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong>Bucles infinitos:</strong> Olvidar actualizar la variable de control en un <code>while</code> o escribir una condición que nunca se vuelve falsa (<code>for (let i = 0; i &gt;= 0; i++)</code>).</li>
+<li><strong>Usar <code>for...in</code> con Arrays:</strong> Recorre los índices como strings (<code>"0"</code>, <code>"1"</code>) y también puede incluir propiedades extra añadidas al array. Usa <code>for...of</code>.</li>
+<li><strong>Error "Off-by-one" (<code>&lt;=</code> vs <code>&lt;</code>):</strong> Escribir <code>for (let i = 0; i &lt;= arr.length; i++)</code> intenta acceder a <code>arr[arr.length]</code>, que siempre es <code>undefined</code>.</li>
+<li><strong>Usar <code>var</code> en bucles con callbacks asíncronos:</strong> <code>for (var i = 0; i &lt; 3; i++) { setTimeout(() =&gt; console.log(i), 0); }</code> imprime <code>3, 3, 3</code>. Con <code>let i</code> imprime <code>0, 1, 2</code>.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">✅ Buenas Prácticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li>Usa <code>const</code> en <code>for (const item of lista)</code> cuando no vayas a reasignar <code>item</code> dentro del bloque.</li>
+<li>Evita anidar más de 2 niveles de bucles; si ocurre, extrae el bucle interno a una función con nombre descriptivo.</li>
+<li>Prefiere <code>break</code> en búsquedas manuales para no iterar innecesariamente tras encontrar el resultado.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">Hoja de Trucos (Cheatsheet) — Bucles</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Bucle / Sentencia</th><th>Uso Ideal</th><th>Ejemplo</th></tr></thead><tbody>
+<tr><td><strong><code>for</code></strong></td><td>Número conocido de vueltas o control de índice</td><td><code>for (let i = 0; i &lt; n; i++)</code></td></tr>
+<tr><td><strong><code>for...of</code></strong></td><td>Recorrer valores de Arrays, Strings, Set, Map</td><td><code>for (const x of lista)</code></td></tr>
+<tr><td><strong><code>for...of</code> + <code>.entries()</code></strong></td><td>Valores + índice sin bucle clásico</td><td><code>for (const [i, x] of lista.entries())</code></td></tr>
+<tr><td><strong><code>while</code></strong></td><td>Repetir mientras una condición sea verdadera</td><td><code>while (cola.length &gt; 0)</code></td></tr>
+<tr><td><strong><code>do...while</code></strong></td><td>Ejecutar al menos 1 vez antes de validar</td><td><code>do { ... } while (cond);</code></td></tr>
+<tr><td><strong><code>Object.entries</code> + <code>for...of</code></strong></td><td>Recorrer clave y valor de objetos de forma segura</td><td><code>for (const [k, v] of Object.entries(obj))</code></td></tr>
+<tr><td><strong><code>break</code> / <code>continue</code></strong></td><td>Terminar el bucle / saltar a la siguiente vuelta</td><td><code>if (encontrado) break;</code></td></tr>
+</tbody></table></div>
             </div>
         </section>
         <script>

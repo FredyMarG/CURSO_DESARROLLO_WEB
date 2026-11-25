@@ -18,7 +18,7 @@
     <div class="bg-glow glow-1"></div><div class="bg-glow glow-2"></div><div class="bg-grid-pattern"></div>
     <header class="top-nav">
         <div class="nav-brand"><span class="brand-badge">CSS3 · FUNCIONES</span><div class="brand-title"><span>🧲</span><span>Scroll Snap y Smooth</span></div></div>
-        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 7</div></div>
+        <div class="nav-progress-container"><div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div><div class="progress-label" id="slideIndicator">1 / 14</div></div>
         <div class="nav-actions">
             <a class="nav-btn" href="../index.html">⬅ <span class="btn-text">Funciones Avanzadas</span></a>
             <a class="nav-btn" href="../../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -54,11 +54,90 @@
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 4 · BUENAS PRÁCTICAS</span><h2 class="slide-title">Buenas prácticas y errores comunes en Scroll Snap y Smooth</h2></div>
             <div class="callout callout-tip"><strong>✅ Buena práctica:</strong> Combina estas propiedades con unidades relativas (<code>rem</code>, <code>fr</code>, <code>%</code>) y verifica siempre el resultado redimensionando la ventana o usando DevTools (<code>F12</code>).</div><div class="callout callout-warn"><strong>⚠️ Error frecuente:</strong> Copiar valores fijos en píxeles sin considerar pantallas pequeñas o olvidar que algunas propiedades van en el <em>contenedor padre</em> y otras en los <em>elementos hijos</em>.</div>
         </section>
-        <section class="slide" data-slide="5" data-title="Quiz: Scroll Snap y Smooth">
+        
+        <!-- Diapositiva 5: Anima solo transform y opacity (GPU Compositor) -->
+        <section class="slide" data-slide="5" data-title="Anima solo transform y opacity (GPU Compositor)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 5 · RENDIMIENTO A 60/120 FPS</span>
+                <h2 class="slide-title">Anima solo transform y opacity (GPU Compositor)</h2>
+            </div>
+            <div class="glass-card">
+                <p>Animar <code>width</code>, <code>top</code> o <code>margin</code> fuerza recálculos de layout en cada frame. Usa <code>transform</code> y <code>opacity</code> para animaciones fluidas aceleradas por GPU.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: cubic-bezier, ease-out y steps() -->
+        <section class="slide" data-slide="6" data-title="cubic-bezier, ease-out y steps()">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 6 · CURVAS DE TIEMPO</span>
+                <h2 class="slide-title">cubic-bezier, ease-out y steps()</h2>
+            </div>
+            <div class="glass-card">
+                <p>Usa <code>ease-out</code> para elementos que entran (rápido al inicio, suave al frenar) y <code>ease-in</code> para elementos que salen de pantalla.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: @media (prefers-reduced-motion: reduce) -->
+        <section class="slide" data-slide="7" data-title="@media (prefers-reduced-motion: reduce)">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · ACCESIBILIDAD MOTION</span>
+                <h2 class="slide-title">@media (prefers-reduced-motion: reduce)</h2>
+            </div>
+            <div class="glass-card">
+                <p>Respeta siempre las preferencias de usuarios con sensibilidad al movimiento reduciendo o desactivando animaciones intensas dentro de esta media query.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 8: animation-fill-mode: forwards y alternate -->
+        <section class="slide" data-slide="8" data-title="animation-fill-mode: forwards y alternate">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · FILL MODE Y DIRECCIÓN</span>
+                <h2 class="slide-title">animation-fill-mode: forwards y alternate</h2>
+            </div>
+            <div class="glass-card">
+                <p><code>forwards</code> mantiene los estilos del último keyframe al terminar la animación; <code>alternate</code> invierte el sentido en cada ciclo para bucles suaves.</p>
+            </div>
+        </section>
+
+        <!-- Diapositiva 9: Cómo decide CSS qué regla gana -->
+        <section class="slide" data-slide="9" data-title="Cómo decide CSS qué regla gana">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · ESPECIFICIDAD Y CASCADA</span>
+                <h2 class="slide-title">Cómo decide CSS qué regla gana</h2>
+            </div>
+            <div class="glass-card">
+                <p>Al aplicar <strong>Scroll Snap y Smooth</strong>, recuerda el orden de prioridad: estilos en línea &gt; ID (<code>#id</code>) &gt; clase/atributo/pseudoclase (<code>.clase</code>) &gt; etiqueta (<code>div</code>). Mantén la especificidad baja usando clases reutilizables.</p>
+            </div>
+        </section>
+
+        
+        <!-- Diapositiva 10: Patrones de producción con Scroll Snap y Smooth -->
+        <section class="slide" data-slide="10" data-title="Patrones de producción con Scroll Snap y Smooth">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · CASO DE USO REAL</span>
+                <h2 class="slide-title">Patrones de producción con Scroll Snap y Smooth</h2>
+            </div>
+            <div class="glass-card">
+                <p>En proyectos reales, combina <strong>Scroll Snap y Smooth</strong> con tokens de diseño (<code>--space-*</code>, <code>--radius-*</code>) y clases utilitarias claras para evitar duplicar reglas entre componentes.</p><div class="callout callout-tip" style="margin-top:12px;"><strong>💡 Consejo:</strong> Mantén tus componentes desacoplados del layout padre para reutilizarlos en cualquier sección.</div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 11: Validación visual y checklist de Scroll Snap y Smooth -->
+        <section class="slide" data-slide="11" data-title="Validación visual y checklist de Scroll Snap y Smooth">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRUEBAS Y MANTENIMIENTO</span>
+                <h2 class="slide-title">Validación visual y checklist de Scroll Snap y Smooth</h2>
+            </div>
+            <div class="glass-card">
+                <ul class="bullet-list"><li>Prueba en anchos de <code>360px</code>, <code>768px</code> y <code>1280px</code> desde DevTools.</li><li>Verifica contraste y estados interactivos (<code>:hover</code>, <code>:focus-visible</code>).</li><li>Revisa en el panel <em>Computed</em> que no existan sobrescrituras accidentales.</li></ul>
+            </div>
+        </section>
+
+        <section class="slide" data-slide="12" data-title="Quiz: Scroll Snap y Smooth">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 5 · AUTOEVALUACIÓN</span><h2 class="slide-title">🧠 Quiz Rápido</h2></div>
             <div class="quiz-container"><div class="quiz-header"><span class="quiz-score">Puntaje: 0 / 1 (0 respondidas)</span><button class="quiz-reset-btn">↻ Reiniciar Quiz</button></div><div class="quiz-question" data-answer="a" data-ok="scroll-snap-align: center encaja la tarjeta automáticamente." data-err="scroll-snap-type va en el padre y scroll-snap-align en los hijos."><div class="quiz-q-title">1. ¿Qué propiedad alinea cada tarjeta al centro o inicio al soltar el scroll en un carrusel?</div><div class="quiz-options"><button class="quiz-option" data-opt="a">scroll-snap-align</button><button class="quiz-option" data-opt="b">scroll-behavior</button><button class="quiz-option" data-opt="c">overflow-wrap</button></div><div class="quiz-feedback"></div></div></div>
         </section>
-        <section class="slide" data-slide="6" data-lab="true" data-title="Laboratorio: Scroll Snap y Smooth">
+        <section class="slide" data-slide="13" data-lab="true" data-title="Laboratorio: Scroll Snap y Smooth">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 6 · PRÁCTICA INMEDIATA</span><h2 class="slide-title">🧪 Laboratorio en Vivo</h2></div>
             <div class="lab-panel"><div class="lab-presets"><button class="preset-btn active" data-code="&lt;style&gt;
   body { font-family: system-ui; padding: 14px; background: #0f172a; color: #fff; }
@@ -74,7 +153,7 @@
 &lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;card&quot;&gt;Slide 1 (desliza →)&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 2&lt;/div&gt;&lt;div class=&quot;card&quot;&gt;Slide 3&lt;/div&gt;&lt;/div&gt;</textarea><!-- title describe el iframe para accesibilidad -->
                     <iframe id="labPreview" class="lab-preview" title="Vista previa"></iframe></div></div>
         </section>
-        <section class="slide" data-slide="7" data-title="Volver al Módulo">
+        <section class="slide" data-slide="14" data-title="Volver al Módulo">
             <div class="slide-header"><span class="slide-kicker">DIAPOSITIVA 7 · RECURSOS</span><h2 class="slide-title">📂 Continúa con Funciones Avanzadas</h2></div>
             <div class="glass-card"><div class="files-grid">
                 <a class="file-card" href="../index.html"><span class="file-name">🧲 Guía Completa Funciones Avanzadas</span><span class="file-path">index.html</span></a>

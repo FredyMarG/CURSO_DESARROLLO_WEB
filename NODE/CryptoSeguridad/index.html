@@ -32,7 +32,7 @@
         </div>
         <div class="nav-progress-container">
             <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressBar"></div></div>
-            <div class="progress-label" id="slideIndicator">1 / 9</div>
+            <div class="progress-label" id="slideIndicator">1 / 14</div>
         </div>
         <div class="nav-actions">
             <a class="nav-btn" href="../../index.html">🏠 <span class="btn-text">Portal</span></a>
@@ -73,7 +73,7 @@
                         <h3>3. scrypt y timingSafeEqual</h3>
                         <p>Derivación de contraseñas con sal única y comparación segura.</p>
                     </div>
-                    <div class="hero-card" data-jump="7">
+                    <div class="hero-card" data-jump="12">
                         <div class="hero-card-icon">🎛️</div>
                         <h3>4. Simulador y Lab</h3>
                         <p>Genera hashes SHA-256, firmas HMAC y UUIDs reales en vivo.</p>
@@ -111,6 +111,9 @@ console.log({ idPedido, tokenSesion });</code></pre>
                 <h2 class="slide-title"><code>createHash('sha256')</code> vs <code>createHmac()</code></h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Un <strong>hash</strong> como <code>SHA-256</code> siempre produce la misma huella para un texto y solo sirve para verificar que un archivo no cambió. Para autenticar mensajes o <em>webhooks</em> necesitas <code>HMAC</code> (hash + clave secreta compartida).
+                </p>
                 <table class="compare-table" style="margin-bottom:12px;">
                     <thead>
                         <tr><th>Herramienta</th><th>Qué garantiza</th><th>Uso típico</th></tr>
@@ -134,6 +137,9 @@ const firma = createHmac('sha256', 'mi-secreto').update('evento=pago').digest('h
                 <h2 class="slide-title">Derivación de Contraseñas con <code>scrypt</code> y Sal Única</h2>
             </div>
             <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    A diferencia de <code>SHA-256</code> (diseñado para ser rapidísimo), las contraseñas requieren funciones lentas y costosas en memoria/CPU como <code>scrypt</code> combinadas con una <strong>sal aleatoria única</strong> por usuario, evitando ataques de fuerza bruta y tablas arcoíris.
+                </p>
                 <pre class="code-block" style="margin-bottom:12px;"><code>import { scryptSync, randomBytes } from 'node:crypto';
 
 function hashPassword(password) {
@@ -191,8 +197,112 @@ function verificarPassword(password, guardado) {
             </div>
         </section>
 
-        <!-- SLIDE 7: SIMULADOR INTERACTIVO -->
-        <section class="slide" data-slide="7" data-lab="true" data-title="Simulador de Criptografía">
+        <!-- SLIDE 7: CIFRADO SIMÉTRICO AES-256-GCM -->
+        <section class="slide" data-slide="7" data-title="Cifrado Simétrico AES-256-GCM">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 7 · CONFIDENCIALIDAD REAL</span>
+                <h2 class="slide-title">Cifrado Autenticado con <code>AES-256-GCM</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Un <strong>hash</strong> es irreversible (no se puede descifrar). Cuando sí necesitas recuperar el dato original (ej. cifrar un token OAuth en base de datos), usa cifrado simétrico autenticado <code>aes-256-gcm</code> con una clave de 32 bytes, un <code>iv</code> único de 12 bytes y su <code>authTag</code>:
+                </p>
+                <pre class="code-block"><code>import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto';
+
+const clave = randomBytes(32); // 256 bits
+const iv = randomBytes(12);    // IV único por cada cifrado
+const cipher = createCipheriv('aes-256-gcm', clave, iv);
+const cifrado = Buffer.concat([cipher.update('secreto', 'utf8'), cipher.final()]);
+const tag = cipher.getAuthTag();</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: VERIFICAR WEBHOOKS CON HMAC -->
+        <section class="slide" data-slide="8" data-title="Verificación de Webhooks con HMAC">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 8 · INTEGRACIÓN DE APIS</span>
+                <h2 class="slide-title">Validar Webhooks Externos con <code>HMAC</code> + <code>timingSafeEqual</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Servicios como Stripe o GitHub firman sus peticiones con <code>HMAC-SHA256</code>. Tu servidor recalcula la firma sobre el cuerpo crudo (<em>raw body</em>) usando el secreto compartido y la compara en tiempo constante:
+                </p>
+                <pre class="code-block"><code>import { createHmac, timingSafeEqual } from 'node:crypto';
+
+function firmaValida(rawBody, firmaRecibidaHex, secreto) {
+  const esperada = createHmac('sha256', secreto).update(rawBody).digest();
+  const recibida = Buffer.from(firmaRecibidaHex, 'hex');
+  return esperada.length === recibida.length && timingSafeEqual(esperada, recibida);
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: HOJA DE TRUCOS NODE:CRYPTO -->
+        <section class="slide" data-slide="9" data-title="Hoja de Trucos de node:crypto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 9 · HOJA DE TRUCOS (CHEATSHEET)</span>
+                <h2 class="slide-title">¿Qué Herramienta de <code>node:crypto</code> Elegir?</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Elegir mal una primitiva criptográfica (como usar <code>SHA-256</code> para contraseñas o <code>Math.random()</code> para tokens) es una vulnerabilidad crítica. Usa esta tabla como referencia rápida:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Necesidad</th><th>Herramienta correcta</th><th>Evita</th></tr></thead>
+                    <tbody>
+                        <tr><td>ID único público</td><td><code>randomUUID()</code></td><td>Contadores predecibles</td></tr>
+                        <tr><td>Token secreto / API Key</td><td><code>randomBytes(32).toString('hex')</code></td><td><code>Math.random()</code></td></tr>
+                        <tr><td>Guardar contraseñas</td><td><code>scrypt</code> + sal aleatoria por usuario</td><td><code>MD5</code>, <code>SHA-256</code> sin sal</td></tr>
+                        <tr><td>Cifrar y descifrar datos</td><td><code>aes-256-gcm</code> + <code>iv</code> único + <code>authTag</code></td><td>Base64 o modos sin autenticación</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+<!-- SLIDE 10: VERIFICACIÓN DE INTEGRIDAD DE ARCHIVOS -->
+        <section class="slide" data-slide="10" data-title="Hash SHA-256 de Archivos por Stream">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 10 · INTEGRIDAD EN STREAMING</span>
+                <h2 class="slide-title">Calcular <code>SHA-256</code> de Archivos Grandes con Streams</h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    <code>createHash('sha256')</code> también funciona como un stream o recibiendo fragmentos: puedes calcular la huella digital de un instalador o respaldo de gigabytes sin cargarlo entero en RAM:
+                </p>
+                <pre class="code-block"><code>import { createHash } from 'node:crypto';
+import fs from 'node:fs';
+
+const hash = createHash('sha256');
+for await (const chunk of fs.createReadStream('archivo.zip')) {
+  hash.update(chunk);
+}
+console.log('SHA-256:', hash.digest('hex'));</code></pre>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: EJERCICIOS DE CRIPTOGRAFÍA -->
+        <section class="slide" data-slide="11" data-title="Retos Prácticos de node:crypto">
+            <div class="slide-header">
+                <span class="slide-kicker">DIAPOSITIVA 11 · PRÁCTICA DEL MÓDULO</span>
+                <h2 class="slide-title">3 Ejercicios Clave de Seguridad con <code>node:crypto</code></h2>
+            </div>
+            <div class="glass-card">
+                <p style="line-height:1.65;margin-bottom:12px;">
+                    Aplica cada primitiva criptográfica en su caso de uso correcto:
+                </p>
+                <table class="compare-table">
+                    <thead><tr><th>Reto</th><th>Solución segura</th></tr></thead>
+                    <tbody>
+                        <tr><td>1. Generar un token de recuperación de 32 bytes</td><td><code>randomBytes(32).toString('hex')</code></td></tr>
+                        <tr><td>2. Guardar contraseña y verificarla</td><td><code>scryptSync(pass, sal, 64)</code> + <code>timingSafeEqual()</code></td></tr>
+                        <tr><td>3. Firmar un payload para webhook</td><td><code>createHmac('sha256', secreto).update(body).digest('hex')</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: SIMULADOR INTERACTIVO -->
+        <section class="slide" data-slide="12" data-lab="true" data-title="Simulador de Criptografía">
             <div class="slide-header">
                 <span class="slide-kicker">SIMULADOR INTERACTIVO · NODE:CRYPTO</span>
                 <h2 class="slide-title">🎛️ Simulador de Hashes, HMAC, <code>scrypt</code> y Tokens</h2>
@@ -216,10 +326,10 @@ function verificarPassword(password, guardado) {
             </div>
         </section>
 
-        <!-- SLIDE 8: QUIZ -->
-        <section class="slide" data-slide="8" data-title="Quiz: Criptografía y Seguridad">
+        <!-- SLIDE 13: QUIZ -->
+        <section class="slide" data-slide="13" data-title="Quiz: Criptografía y Seguridad">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 8 · AUTOEVALUACIÓN</span>
+                <span class="slide-kicker">DIAPOSITIVA 13 · AUTOEVALUACIÓN</span>
                 <h2 class="slide-title">🧠 Quiz Rápido de Seguridad con <code>node:crypto</code></h2>
             </div>
             <div class="quiz-container">
@@ -257,10 +367,10 @@ function verificarPassword(password, guardado) {
             </div>
         </section>
 
-        <!-- SLIDE 9: LABORATORIO -->
-        <section class="slide" data-slide="9" data-lab="true" data-title="Laboratorio: Criptografía y Seguridad">
+        <!-- SLIDE 14: LABORATORIO -->
+        <section class="slide" data-slide="14" data-lab="true" data-title="Laboratorio: Criptografía y Seguridad">
             <div class="slide-header">
-                <span class="slide-kicker">DIAPOSITIVA 9 · PRÁCTICA INMEDIATA</span>
+                <span class="slide-kicker">DIAPOSITIVA 14 · PRÁCTICA INMEDIATA</span>
                 <h2 class="slide-title">🧪 Laboratorio Interactivo de Criptografía</h2>
             </div>
             <div class="lab-panel">

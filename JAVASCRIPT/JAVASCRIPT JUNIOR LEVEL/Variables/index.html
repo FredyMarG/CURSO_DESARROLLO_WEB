@@ -33,7 +33,7 @@
             <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.1);">
                 <div>
                     <span style="font-family:monospace;font-size:0.75rem;color:#38bdf8;">📘 TEORÍA DESDE DOCUMENTACIÓN (VARIABLES.md)</span>
-                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 5</div>
+                    <div id="jrSlideInd" style="font-size:0.82rem;color:#94a3b8;margin-top:2px;">Diapositiva 1 / 10</div>
                 </div>
                 <div style="display:flex;gap:8px;align-items:center;">
                     <button type="button" id="jrPrevBtn" class="secondary" style="padding:6px 12px;cursor:pointer;">⬅ Anterior</button>
@@ -153,6 +153,50 @@ function calcularCuadrado(entradaTexto) {
     return { ok: true, resultado: numero ** 2 };
 }
 </code></pre></div>
+            </div>
+
+            <div class="jr-slide" data-idx="5" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">⚠️ Errores Comunes</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li><strong>Usar <code>var</code> por costumbre:</strong> Provoca fugas de variables fuera de bloques <code>if</code>/<code>for</code> y colisiones silenciosas al redeclarar.</li>
+<li><strong>Confiar en <code>typeof x === "object"</code> para detectar objetos planos:</strong> Fallará si <code>x</code> es <code>null</code> o un <code>Array</code> (<code>[]</code>). Combina con <code>x !== null &amp;&amp; !Array.isArray(x)</code>.</li>
+<li><strong>Clonar objetos con <code>=</code>:</strong> Asignar <code>const b = a</code> no clona el objeto; si modificas <code>b</code>, modificas <code>a</code>. Usa <code>{ ...a }</code> (copia superficial) o <code>structuredClone(a)</code> (copia profunda).</li>
+<li><strong>Usar <code>isNaN("hola")</code> esperando <code>false</code>:</strong> El <code>isNaN()</code> global devuelve <code>true</code> para <code>"hola"</code>. Usa <code>Number.isNaN()</code>.</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="6" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">✅ Buenas Prácticas</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+<li>Declara siempre con <code>const</code> y cambia a <code>let</code> únicamente cuando necesites reasignar la variable (contadores, acumuladores, estados).</li>
+<li>Usa <code>"use strict";</code> o módulos ES (<code>type="module"</code>), que activan el modo estricto automáticamente y evitan crear variables globales por accidente.</li>
+<li>Nombra las variables en <code>camelCase</code> descriptivo (<code>precioTotal</code>, <code>esAdmin</code>) y las constantes globales inmutables en <code>UPPER_SNAKE_CASE</code> (<code>MAX_INTENTOS</code>).</li>
+<li>Prefiere <code>undefined</code> para "no asignado aún" y <code>null</code> para "vacío explícito".</li>
+</ul></div>
+            </div>
+            <div class="jr-slide" data-idx="7" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">Hoja de Trucos (Cheatsheet) — Variables y Tipos</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><table class="compare-table"><thead><tr><th>Concepto / Herramienta</th><th>Sintaxis / Ejemplo</th><th>Uso / Comportamiento</th></tr></thead><tbody>
+<tr><td><strong>Constante</strong></td><td><code>const PI = 3.1416;</code></td><td>Scope de bloque; no reasignable (usar por defecto)</td></tr>
+<tr><td><strong>Variable mutable</strong></td><td><code>let contador = 0;</code></td><td>Scope de bloque; permite reasignación</td></tr>
+<tr><td><strong>BigInt</strong></td><td><code>const id = 9007199254740995n;</code></td><td>Enteros arbitrariamente grandes</td></tr>
+<tr><td><strong>Symbol</strong></td><td><code>const clave = Symbol("meta");</code></td><td>Identificador único para propiedades</td></tr>
+<tr><td><strong>Comprobar Array</strong></td><td><code>Array.isArray(lista)</code></td><td>Devuelve <code>true</code> solo si es un Array</td></tr>
+<tr><td><strong>Comprobar NaN</strong></td><td><code>Number.isNaN(valor)</code></td><td>Verifica estrictamente si el valor es <code>NaN</code></td></tr>
+<tr><td><strong>Clonado profundo</strong></td><td><code>structuredClone(objeto)</code></td><td>Copia independiente de objetos y arrays anidados</td></tr>
+<tr><td><strong>Conversión numérica</strong></td><td><code>Number("42")</code> / <code>Number.parseInt("42px", 10)</code></td><td>Convierte texto a número de forma explícita</td></tr>
+</tbody></table></div>
+            </div>
+            <div class="jr-slide" data-idx="8" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">9. Buenas Prácticas y Errores Comunes (Variables)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><ul style="margin:6px 0 8px 18px;line-height:1.6;">
+          <li>Usa <code>"use strict"</code> o ES Modules para detectar errores silenciosos al instante.</li>
+          <li>Prefiere <code>const</code> por defecto y nombres descriptivos antes de optimizar.</li>
+          <li>Prueba tus casos límite (<code>null</code>, <code>undefined</code>, strings vacíos y arreglos vacíos) en el laboratorio inferior.</li>
+        </ul></div>
+            </div>
+            <div class="jr-slide" data-idx="9" style="display:none;">
+                <h3 style="margin:0 0 8px;color:#38bdf8;font-size:1.15rem;">10. Guía Completa y Autoevaluación (Variables)</h3>
+                <div style="font-size:0.94rem;color:#cbd5e1;"><p style="margin:6px 0;line-height:1.6;">Usa el botón <strong>📖 Guía</strong> de esta misma barra para revisar la documentación completa (<code>VARIABLES.md</code>) sin salir de la lección, y valida lo aprendido en la consola interactiva de abajo.</p></div>
             </div>
         </section>
         <script>

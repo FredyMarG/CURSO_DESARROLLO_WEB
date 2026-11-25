@@ -35,22 +35,22 @@
         ctx: null,
 
         init() {
-            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) {
-                const AudioConstructor = window.AudioContext || window.webkitAudioContext;
+            if (!this.ctx && (window.AudioContext || window.webkitAudioContext)) { // Evalúa condición lógica
+                const AudioConstructor = window.AudioContext || window.webkitAudioContext; // Declara e inicializa variable local
                 this.ctx = new AudioConstructor();
             }
         },
 
         slide() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(320, now);
             osc.frequency.exponentialRampToValueAtTime(480, now + 0.12);
@@ -66,15 +66,15 @@
         },
 
         click() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'triangle';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(600, now);
             gain.gain.setValueAtTime(0.05, now);
@@ -87,15 +87,15 @@
         },
 
         success() {
-            if (!AppState.soundEnabled) return;
+            if (!AppState.soundEnabled) return; // Evalúa condición lógica
             this.init();
-            if (!this.ctx) return;
-            if (this.ctx.state === 'suspended') this.ctx.resume();
+            if (!this.ctx) return; // Evalúa condición lógica
+            if (this.ctx.state === 'suspended') this.ctx.resume(); // Evalúa condición lógica
 
-            const osc = this.ctx.createOscillator();
-            const gain = this.ctx.createGain();
+            const osc = this.ctx.createOscillator(); // Declara e inicializa variable local
+            const gain = this.ctx.createGain(); // Declara e inicializa variable local
             osc.type = 'sine';
-            const now = this.ctx.currentTime;
+            const now = this.ctx.currentTime; // Declara e inicializa variable local
 
             osc.frequency.setValueAtTime(560, now);
             osc.frequency.exponentialRampToValueAtTime(860, now + 0.14);
@@ -114,29 +114,29 @@
        ========================================================================== */
     const SlideNavigation = {
         init() {
-            this.wrapper = document.getElementById('presentationWrapper');
-            this.slides = document.querySelectorAll('.slide');
-            this.progressBar = document.getElementById('progressBar');
-            this.slideIndicator = document.getElementById('slideIndicator');
+            this.wrapper = document.getElementById('presentationWrapper'); // Obtiene referencia al elemento del DOM
+            this.slides = document.querySelectorAll('.slide'); // Obtiene referencia al elemento del DOM
+            this.progressBar = document.getElementById('progressBar'); // Obtiene referencia al elemento del DOM
+            this.slideIndicator = document.getElementById('slideIndicator'); // Obtiene referencia al elemento del DOM
 
-            this.btnPrev = document.getElementById('btnPrevSlide');
-            this.btnNext = document.getElementById('btnNextSlide');
-            this.dotsContainer = document.getElementById('slideDotsContainer');
+            this.btnPrev = document.getElementById('btnPrevSlide'); // Obtiene referencia al elemento del DOM
+            this.btnNext = document.getElementById('btnNextSlide'); // Obtiene referencia al elemento del DOM
+            this.dotsContainer = document.getElementById('slideDotsContainer'); // Obtiene referencia al elemento del DOM
 
-            this.btnGoLab = document.getElementById('btnGoLab');
-            this.btnToggleMode = document.getElementById('btnToggleMode');
-            this.modeText = document.getElementById('modeText');
-            this.modeIcon = document.getElementById('modeIcon');
+            this.btnGoLab = document.getElementById('btnGoLab'); // Obtiene referencia al elemento del DOM
+            this.btnToggleMode = document.getElementById('btnToggleMode'); // Obtiene referencia al elemento del DOM
+            this.modeText = document.getElementById('modeText'); // Obtiene referencia al elemento del DOM
+            this.modeIcon = document.getElementById('modeIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnToggleSound = document.getElementById('btnToggleSound');
-            this.soundIcon = document.getElementById('soundIcon');
+            this.btnToggleSound = document.getElementById('btnToggleSound'); // Obtiene referencia al elemento del DOM
+            this.soundIcon = document.getElementById('soundIcon'); // Obtiene referencia al elemento del DOM
 
-            this.btnOverview = document.getElementById('btnOverview');
-            this.overviewModal = document.getElementById('overviewModal');
-            this.btnCloseOverview = document.getElementById('btnCloseOverview');
-            this.overviewGrid = document.getElementById('overviewGrid');
+            this.btnOverview = document.getElementById('btnOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewModal = document.getElementById('overviewModal'); // Obtiene referencia al elemento del DOM
+            this.btnCloseOverview = document.getElementById('btnCloseOverview'); // Obtiene referencia al elemento del DOM
+            this.overviewGrid = document.getElementById('overviewGrid'); // Obtiene referencia al elemento del DOM
 
-            this.btnFullscreen = document.getElementById('btnFullscreen');
+            this.btnFullscreen = document.getElementById('btnFullscreen'); // Obtiene referencia al elemento del DOM
 
             this.buildSlideDots();
             this.buildOverviewGrid();
@@ -145,21 +145,21 @@
         },
 
         buildSlideDots() {
-            if (!this.dotsContainer) return;
+            if (!this.dotsContainer) return; // Evalúa condición lógica
             this.dotsContainer.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const dot = document.createElement('button');
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const dot = document.createElement('button'); // Declara e inicializa variable local
                 dot.className = 'slide-dot';
                 dot.setAttribute('aria-label', `Ir a diapositiva ${slideNum}`);
                 dot.title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     dot.classList.add('active');
                 }
 
-                dot.addEventListener('click', () => {
+                dot.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                 });
@@ -169,18 +169,18 @@
         },
 
         buildOverviewGrid() {
-            if (!this.overviewGrid) return;
+            if (!this.overviewGrid) return; // Evalúa condición lógica
             this.overviewGrid.innerHTML = ''; // Actualiza contenido en el DOM
 
             this.slides.forEach((slide, index) => {
-                const slideNum = index + 1;
-                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`;
+                const slideNum = index + 1; // Declara e inicializa variable local
+                const title = slide.getAttribute('data-title') || `Diapositiva ${slideNum}`; // Declara e inicializa variable local
 
-                const card = document.createElement('div');
+                const card = document.createElement('div'); // Declara e inicializa variable local
                 card.className = 'overview-card';
                 card.dataset.slideIndex = slideNum;
 
-                if (slideNum === AppState.currentSlide) {
+                if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                     card.classList.add('active');
                 }
 
@@ -189,7 +189,7 @@
                     <div class="ov-title">${title}</div>
                 `;
 
-                card.addEventListener('click', () => {
+                card.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(slideNum);
                     this.closeOverview();
@@ -200,64 +200,64 @@
         },
 
         bindEvents() {
-            if (this.btnPrev) {
-                this.btnPrev.addEventListener('click', () => {
+            if (this.btnPrev) { // Evalúa condición lógica
+                this.btnPrev.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.prevSlide();
                 });
             }
 
-            if (this.btnNext) {
-                this.btnNext.addEventListener('click', () => {
+            if (this.btnNext) { // Evalúa condición lógica
+                this.btnNext.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.nextSlide();
                 });
             }
 
-            if (this.btnGoLab) {
-                this.btnGoLab.addEventListener('click', () => {
+            if (this.btnGoLab) { // Evalúa condición lógica
+                this.btnGoLab.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.goToSlide(9);
                 });
             }
 
-            if (this.btnToggleMode) {
-                this.btnToggleMode.addEventListener('click', () => {
+            if (this.btnToggleMode) { // Evalúa condición lógica
+                this.btnToggleMode.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleViewMode();
                 });
             }
 
-            if (this.btnToggleSound) {
-                this.btnToggleSound.addEventListener('click', () => {
+            if (this.btnToggleSound) { // Evalúa condición lógica
+                this.btnToggleSound.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     this.toggleSound();
                 });
             }
 
-            if (this.btnOverview) {
-                this.btnOverview.addEventListener('click', () => {
+            if (this.btnOverview) { // Evalúa condición lógica
+                this.btnOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleOverview();
                 });
             }
 
-            if (this.btnCloseOverview) {
-                this.btnCloseOverview.addEventListener('click', () => {
+            if (this.btnCloseOverview) { // Evalúa condición lógica
+                this.btnCloseOverview.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.closeOverview();
                 });
             }
 
-            if (this.overviewModal) {
-                this.overviewModal.addEventListener('click', (e) => {
-                    if (e.target === this.overviewModal) {
+            if (this.overviewModal) { // Evalúa condición lógica
+                this.overviewModal.addEventListener('click', (e) => { // Registra escuchador de evento en el DOM
+                    if (e.target === this.overviewModal) { // Evalúa condición lógica
                         this.closeOverview();
                     }
                 });
             }
 
-            if (this.btnFullscreen) {
-                this.btnFullscreen.addEventListener('click', () => {
+            if (this.btnFullscreen) { // Evalúa condición lógica
+                this.btnFullscreen.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
                     this.toggleFullscreen();
                 });
@@ -267,7 +267,7 @@
         },
 
         handleKeyDown(e) {
-            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
+            if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return; // Evalúa condición lógica
 
             switch (e.key) { // Evalúa múltiples casos
                 case 'ArrowRight':
@@ -297,7 +297,7 @@
                     this.toggleFullscreen();
                     break;
                 case 'Escape':
-                    if (AppState.overviewOpen) this.closeOverview();
+                    if (AppState.overviewOpen) this.closeOverview(); // Evalúa condición lógica
                     break;
                 case 'Home':
                     e.preventDefault();
@@ -313,21 +313,21 @@
         },
 
         goToSlide(index) {
-            if (index < 1 || index > AppState.totalSlides) return;
-            if (index === AppState.currentSlide) return;
+            if (index < 1 || index > AppState.totalSlides) return; // Evalúa condición lógica
+            if (index === AppState.currentSlide) return; // Evalúa condición lógica
             AppState.currentSlide = index;
             SoundFX.slide();
             this.updateUI();
         },
 
         nextSlide() {
-            if (AppState.currentSlide < AppState.totalSlides) {
+            if (AppState.currentSlide < AppState.totalSlides) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide + 1);
             }
         },
 
         prevSlide() {
-            if (AppState.currentSlide > 1) {
+            if (AppState.currentSlide > 1) { // Evalúa condición lógica
                 this.goToSlide(AppState.currentSlide - 1);
             }
         },
@@ -335,16 +335,16 @@
         toggleViewMode() {
             AppState.viewMode = AppState.viewMode === 'slides' ? 'guide' : 'slides';
 
-            if (AppState.viewMode === 'guide') {
+            if (AppState.viewMode === 'guide') { // Evalúa condición lógica
                 document.body.classList.remove('mode-presentation');
                 document.body.classList.add('mode-document');
-                if (this.modeText) this.modeText.textContent = 'Modo Diapos';
-                if (this.modeIcon) this.modeIcon.textContent = '🖥️';
+                if (this.modeText) this.modeText.textContent = 'Modo Diapos'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '🖥️'; // Evalúa condición lógica
             } else {
                 document.body.classList.remove('mode-document');
                 document.body.classList.add('mode-presentation');
-                if (this.modeText) this.modeText.textContent = 'Modo Guía';
-                if (this.modeIcon) this.modeIcon.textContent = '📑';
+                if (this.modeText) this.modeText.textContent = 'Modo Guía'; // Evalúa condición lógica
+                if (this.modeIcon) this.modeIcon.textContent = '📑'; // Evalúa condición lógica
             }
 
             this.updateUI();
@@ -352,14 +352,14 @@
 
         toggleSound() {
             AppState.soundEnabled = !AppState.soundEnabled;
-            if (this.soundIcon) {
+            if (this.soundIcon) { // Evalúa condición lógica
                 this.soundIcon.textContent = AppState.soundEnabled ? '🔊' : '🔇'; // Actualiza contenido en el DOM
             }
-            if (AppState.soundEnabled) SoundFX.click();
+            if (AppState.soundEnabled) SoundFX.click(); // Evalúa condición lógica
         },
 
         toggleOverview() {
-            if (AppState.overviewOpen) {
+            if (AppState.overviewOpen) { // Evalúa condición lógica
                 this.closeOverview();
             } else {
                 this.openOverview();
@@ -368,21 +368,21 @@
 
         openOverview() {
             AppState.overviewOpen = true;
-            if (this.overviewModal) this.overviewModal.classList.add('active');
-            const cards = document.querySelectorAll('.overview-card');
+            if (this.overviewModal) this.overviewModal.classList.add('active'); // Evalúa condición lógica
+            const cards = document.querySelectorAll('.overview-card'); // Declara e inicializa variable local
             cards.forEach(card => {
-                const idx = parseInt(card.dataset.slideIndex, 10);
+                const idx = parseInt(card.dataset.slideIndex, 10); // Declara e inicializa variable local
                 card.classList.toggle('active', idx === AppState.currentSlide);
             });
         },
 
         closeOverview() {
             AppState.overviewOpen = false;
-            if (this.overviewModal) this.overviewModal.classList.remove('active');
+            if (this.overviewModal) this.overviewModal.classList.remove('active'); // Evalúa condición lógica
         },
 
         toggleFullscreen() {
-            if (!document.fullscreenElement) {
+            if (!document.fullscreenElement) { // Evalúa condición lógica
                 document.documentElement.requestFullscreen().catch(() => {});
             } else if (document.exitFullscreen) {
                 document.exitFullscreen().catch(() => {});
@@ -390,10 +390,10 @@
         },
 
         updateUI() {
-            if (AppState.viewMode === 'slides') {
+            if (AppState.viewMode === 'slides') { // Evalúa condición lógica
                 this.slides.forEach((slide, index) => {
-                    const slideNum = index + 1;
-                    if (slideNum === AppState.currentSlide) {
+                    const slideNum = index + 1; // Declara e inicializa variable local
+                    if (slideNum === AppState.currentSlide) { // Evalúa condición lógica
                         slide.classList.add('active');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
@@ -404,23 +404,23 @@
                 this.slides.forEach(slide => slide.classList.add('active'));
             }
 
-            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100;
-            if (this.progressBar) this.progressBar.style.width = `${percent}%`;
+            const percent = ((AppState.currentSlide - 1) / (AppState.totalSlides - 1)) * 100; // Declara e inicializa variable local
+            if (this.progressBar) this.progressBar.style.width = `${percent}%`; // Evalúa condición lógica
 
-            if (this.slideIndicator) {
+            if (this.slideIndicator) { // Evalúa condición lógica
                 this.slideIndicator.textContent = `${AppState.currentSlide} / ${AppState.totalSlides}`; // Actualiza contenido en el DOM
             }
 
-            const dots = document.querySelectorAll('.slide-dot');
+            const dots = document.querySelectorAll('.slide-dot'); // Declara e inicializa variable local
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', (index + 1) === AppState.currentSlide);
             });
 
-            if (this.btnPrev) {
+            if (this.btnPrev) { // Evalúa condición lógica
                 this.btnPrev.disabled = AppState.currentSlide === 1;
                 this.btnPrev.style.opacity = AppState.currentSlide === 1 ? '0.35' : '1';
             }
-            if (this.btnNext) {
+            if (this.btnNext) { // Evalúa condición lógica
                 this.btnNext.disabled = AppState.currentSlide === AppState.totalSlides;
                 this.btnNext.style.opacity = AppState.currentSlide === AppState.totalSlides ? '0.35' : '1';
             }
@@ -441,22 +441,22 @@
             this.memStore = new Map();
             this.useNative = 'caches' in window && window.location.protocol !== 'file:';
 
-            this.banner = document.getElementById('caStatusBanner');
-            this.modeBadge = document.getElementById('caModeBadge');
-            this.countEl = document.getElementById('caCount');
-            this.hitsEl = document.getElementById('caHits');
-            this.missesEl = document.getElementById('caMisses');
-            this.entriesListEl = document.getElementById('caEntriesList');
+            this.banner = document.getElementById('caStatusBanner'); // Obtiene referencia al elemento del DOM
+            this.modeBadge = document.getElementById('caModeBadge'); // Obtiene referencia al elemento del DOM
+            this.countEl = document.getElementById('caCount'); // Obtiene referencia al elemento del DOM
+            this.hitsEl = document.getElementById('caHits'); // Obtiene referencia al elemento del DOM
+            this.missesEl = document.getElementById('caMisses'); // Obtiene referencia al elemento del DOM
+            this.entriesListEl = document.getElementById('caEntriesList'); // Obtiene referencia al elemento del DOM
 
-            this.btnPut = document.getElementById('btnCaPut');
-            this.btnMatch = document.getElementById('btnCaMatch');
-            this.btnKeys = document.getElementById('btnCaKeys');
-            this.btnDeleteOne = document.getElementById('btnCaDeleteOne');
-            this.btnDeleteAll = document.getElementById('btnCaDeleteAll');
-            this.btnClearLogs = document.getElementById('btnClearCaLogs');
-            this.terminal = document.getElementById('caLogTerminal');
+            this.btnPut = document.getElementById('btnCaPut'); // Obtiene referencia al elemento del DOM
+            this.btnMatch = document.getElementById('btnCaMatch'); // Obtiene referencia al elemento del DOM
+            this.btnKeys = document.getElementById('btnCaKeys'); // Obtiene referencia al elemento del DOM
+            this.btnDeleteOne = document.getElementById('btnCaDeleteOne'); // Obtiene referencia al elemento del DOM
+            this.btnDeleteAll = document.getElementById('btnCaDeleteAll'); // Obtiene referencia al elemento del DOM
+            this.btnClearLogs = document.getElementById('btnClearCaLogs'); // Obtiene referencia al elemento del DOM
+            this.terminal = document.getElementById('caLogTerminal'); // Obtiene referencia al elemento del DOM
 
-            if (this.modeBadge) {
+            if (this.modeBadge) { // Evalúa condición lógica
                 this.modeBadge.textContent = this.useNative
                     ? 'CacheStorage Real (HTTPS/localhost) ✅'
                     : 'Simulador Local (Protocolo file://)';
@@ -468,34 +468,34 @@
 
         // Obtiene las rutas actualmente almacenadas en la caché
         async getStoredPaths() {
-            if (this.useNative) {
-                const cache = await caches.open(this.CACHE_NAME);
-                const requests = await cache.keys();
-                return requests.map(req => new URL(req.url).pathname);
+            if (this.useNative) { // Evalúa condición lógica
+                const cache = await caches.open(this.CACHE_NAME); // Declara e inicializa variable local
+                const requests = await cache.keys(); // Declara e inicializa variable local
+                return requests.map(req => new URL(req.url).pathname); // Retorna el resultado de la función
             }
-            return Array.from(this.memStore.keys());
+            return Array.from(this.memStore.keys()); // Retorna el resultado de la función
         },
 
         // Actualiza las tarjetas de conteo y los chips visuales
         async refreshEntries() {
-            const paths = await this.getStoredPaths();
-            if (this.countEl) this.countEl.textContent = paths.length;
-            if (this.hitsEl) this.hitsEl.textContent = this.hits;
-            if (this.missesEl) this.missesEl.textContent = this.misses;
+            const paths = await this.getStoredPaths(); // Declara e inicializa variable local
+            if (this.countEl) this.countEl.textContent = paths.length; // Evalúa condición lógica
+            if (this.hitsEl) this.hitsEl.textContent = this.hits; // Evalúa condición lógica
+            if (this.missesEl) this.missesEl.textContent = this.misses; // Evalúa condición lógica
 
-            if (this.banner) {
+            if (this.banner) { // Evalúa condición lógica
                 this.banner.className = paths.length > 0 ? 'ca-status-banner is-ready' : 'ca-status-banner';
             }
 
-            if (!this.entriesListEl) return;
-            if (paths.length === 0) {
+            if (!this.entriesListEl) return; // Evalúa condición lógica
+            if (paths.length === 0) { // Evalúa condición lógica
                 this.entriesListEl.innerHTML = '<span style="color: var(--text-dim); font-size: 0.8rem;">Caché vacía (0 recursos)...</span>'; // Actualiza contenido en el DOM
-                return;
+                return; // Retorna el resultado de la función
             }
 
             this.entriesListEl.innerHTML = ''; // Actualiza contenido en el DOM
             paths.forEach(p => {
-                const chip = document.createElement('span');
+                const chip = document.createElement('span'); // Declara e inicializa variable local
                 chip.className = 'ca-entry-chip';
                 chip.textContent = p; // Actualiza contenido en el DOM
                 this.entriesListEl.appendChild(chip);
@@ -505,11 +505,11 @@
         // Vincula los botones interactivos del laboratorio
         bindControls() {
             // 1. Guardar recursos con cache.put()
-            if (this.btnPut) {
-                this.btnPut.addEventListener('click', async () => {
+            if (this.btnPut) { // Evalúa condición lógica
+                this.btnPut.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (this.useNative) {
-                        const cache = await caches.open(this.CACHE_NAME);
+                    if (this.useNative) { // Evalúa condición lógica
+                        const cache = await caches.open(this.CACHE_NAME); // Declara e inicializa variable local
                         await cache.put('/api/config', new Response(JSON.stringify({ tema: 'oscuro' }), { headers: { 'Content-Type': 'application/json' } }));
                         await cache.put('/api/saludo', new Response('Hola desde CacheStorage real', { headers: { 'Content-Type': 'text/plain' } }));
                     } else {
@@ -523,22 +523,22 @@
             }
 
             // 2. Consultar /api/saludo con caches.match()
-            if (this.btnMatch) {
-                this.btnMatch.addEventListener('click', async () => {
+            if (this.btnMatch) { // Evalúa condición lógica
+                this.btnMatch.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    let foundText = null;
+                    let foundText = null; // Declara e inicializa variable local
 
-                    if (this.useNative) {
-                        const cache = await caches.open(this.CACHE_NAME);
-                        const match = await cache.match('/api/saludo');
-                        if (match) foundText = await match.text();
+                    if (this.useNative) { // Evalúa condición lógica
+                        const cache = await caches.open(this.CACHE_NAME); // Declara e inicializa variable local
+                        const match = await cache.match('/api/saludo'); // Declara e inicializa variable local
+                        if (match) foundText = await match.text(); // Evalúa condición lógica
                     } else {
-                        if (this.memStore.has('/api/saludo')) {
+                        if (this.memStore.has('/api/saludo')) { // Evalúa condición lógica
                             foundText = this.memStore.get('/api/saludo');
                         }
                     }
 
-                    if (foundText !== null) {
+                    if (foundText !== null) { // Evalúa condición lógica
                         this.hits++;
                         SoundFX.success();
                         this.log(`⚡ [CACHE HIT] caches.match('/api/saludo') -> "${foundText}"`);
@@ -551,21 +551,21 @@
             }
 
             // 3. Listar llaves actuales con cache.keys()
-            if (this.btnKeys) {
-                this.btnKeys.addEventListener('click', async () => {
+            if (this.btnKeys) { // Evalúa condición lógica
+                this.btnKeys.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    const paths = await this.getStoredPaths();
+                    const paths = await this.getStoredPaths(); // Declara e inicializa variable local
                     this.log(paths.length > 0 ? `📋 [cache.keys()] ${paths.join(', ')}` : '📭 [cache.keys()] El almacén está vacío.');
                 });
             }
 
             // 4. Eliminar /api/saludo con cache.delete()
-            if (this.btnDeleteOne) {
-                this.btnDeleteOne.addEventListener('click', async () => {
+            if (this.btnDeleteOne) { // Evalúa condición lógica
+                this.btnDeleteOne.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    let deleted = false;
-                    if (this.useNative) {
-                        const cache = await caches.open(this.CACHE_NAME);
+                    let deleted = false; // Declara e inicializa variable local
+                    if (this.useNative) { // Evalúa condición lógica
+                        const cache = await caches.open(this.CACHE_NAME); // Declara e inicializa variable local
                         deleted = await cache.delete('/api/saludo');
                     } else {
                         deleted = this.memStore.delete('/api/saludo');
@@ -576,10 +576,10 @@
             }
 
             // 5. Vaciar todo el almacén con caches.delete()
-            if (this.btnDeleteAll) {
-                this.btnDeleteAll.addEventListener('click', async () => {
+            if (this.btnDeleteAll) { // Evalúa condición lógica
+                this.btnDeleteAll.addEventListener('click', async () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (this.useNative) {
+                    if (this.useNative) { // Evalúa condición lógica
                         await caches.delete(this.CACHE_NAME);
                     } else {
                         this.memStore.clear();
@@ -590,10 +590,10 @@
             }
 
             // 6. Limpiar logs
-            if (this.btnClearLogs) {
-                this.btnClearLogs.addEventListener('click', () => {
+            if (this.btnClearLogs) { // Evalúa condición lógica
+                this.btnClearLogs.addEventListener('click', () => { // Registra escuchador de evento en el DOM
                     SoundFX.click();
-                    if (this.terminal) {
+                    if (this.terminal) { // Evalúa condición lógica
                         this.terminal.innerHTML = ''; // Actualiza contenido en el DOM
                         this.log('🧹 Terminal limpiado.');
                     }
@@ -602,16 +602,16 @@
         },
 
         log(message) {
-            if (!this.terminal) return;
+            if (!this.terminal) return; // Evalúa condición lógica
 
-            const now = new Date();
+            const now = new Date(); // Declara e inicializa variable local
             const timeStr = [
                 String(now.getHours()).padStart(2, '0'),
                 String(now.getMinutes()).padStart(2, '0'),
                 String(now.getSeconds()).padStart(2, '0')
             ].join(':');
 
-            const line = document.createElement('div');
+            const line = document.createElement('div'); // Declara e inicializa variable local
             line.className = 'ca-log-line';
             line.innerHTML = `
                 <span class="ca-log-time">[${timeStr}]</span>
@@ -626,14 +626,15 @@
     /* ==========================================================================
        5. ARRANQUE DE LA APLICACIÓN (DOM READY)
        ========================================================================== */
-    function startApplication() {
+    function startApplication() { // Define función reutilizable
         SlideNavigation.init();
         CALabController.init();
     }
 
-    if (document.readyState === 'loading') {
+    if (document.readyState === 'loading') { // Evalúa condición lógica
         document.addEventListener('DOMContentLoaded', startApplication);
     } else {
         startApplication();
     }
 })();
+

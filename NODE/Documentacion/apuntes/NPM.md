@@ -129,7 +129,11 @@ Cada entrada dentro de `"packages"` registra:
 | `npm outdated` | Muestra qué paquetes tienen versiones más recientes disponibles |
 | `npm audit` | Analiza vulnerabilidades conocidas en tus dependencias |
 | `npm audit fix` | Aplica actualizaciones seguras compatibles para corregir vulnerabilidades |
+| `npm list --depth=0` | Muestra solo las dependencias directas instaladas en tu proyecto |
+| `npm update` | Actualiza paquetes respetando los rangos (`^` / `~`) de `package.json` |
 | `npm uninstall <pkg>` | Desinstala un paquete y lo elimina de `package.json` |
+
+> **Tip profesional:** en `package.json` puedes declarar `"engines": { "node": ">=20.0.0" }` para documentar la versión mínima de Node.js requerida y usar un archivo `.npmrc` con `save-exact=true` si prefieres fijar versiones exactas.
 
 ---
 
@@ -205,3 +209,17 @@ npm run saludar
 - [ ] Entiendo `MAJOR.MINOR.PATCH` y la diferencia entre `^` y `~`.
 - [ ] Sé por qué `package-lock.json` sí va en Git y `node_modules/` no.
 - [ ] Sé cuándo usar `npm ci`, `npx` y `npm audit`.
+
+
+---
+
+## Hoja de Trucos (Cheatsheet) — NPM y `package.json`
+
+| Comando / Campo | Uso Principal |
+| :--- | :--- |
+| `npm init -y` | Crea `package.json` con valores por defecto |
+| `npm install pkg` / `-D pkg` | Instala dependencia de producción o desarrollo (`devDependencies`) |
+| `npm ci` | Instalación limpia y reproducible usando `package-lock.json` (CI/CD) |
+| `npm run <script>` | Ejecuta scripts definidos en `"scripts"` |
+| `npm audit` / `npm outdated` | Revisa vulnerabilidades y versiones desactualizadas |
+| `^1.2.3` vs `~1.2.3` | `^` permite minor+patch (`1.x.x`); `~` solo patch (`1.2.x`) |
